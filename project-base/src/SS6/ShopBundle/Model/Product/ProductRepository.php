@@ -590,4 +590,18 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllSellableUsingStockInStockQueryBuilder($domainId, $pricingGroup) {
+		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder
+			->andWhere('p.usingStock = TRUE')
+			->andWhere('p.stockQuantity > 0');
+
+		return $queryBuilder;
+	}
+
 }

@@ -37,9 +37,15 @@ class FeedFacade {
 	 */
 	private $feedGenerator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface
+	 */
+	private $heurekaDeliveryFeedDataSource;
+
 	public function __construct(
 		$feedsPath,
 		FeedDataSourceInterface $heurekaFeedDataSource,
+		FeedDataSourceInterface $heurekaDeliveryFeedDataSource,
 		FeedGenerator $feedGenerator,
 		Domain $domain,
 		Filesystem $filesystem
@@ -49,6 +55,7 @@ class FeedFacade {
 		$this->feedGenerator = $feedGenerator;
 		$this->domain = $domain;
 		$this->filesystem = $filesystem;
+		$this->heurekaDeliveryFeedDataSource = $heurekaDeliveryFeedDataSource;
 	}
 
 	public function generateAllFeeds() {
@@ -59,6 +66,18 @@ class FeedFacade {
 				$domainConfig,
 				$this->heurekaFeedDataSource,
 				'@SS6Shop/Feed/heureka.xml.twig'
+			);
+		}
+	}
+
+	public function generateAllDeliveryFeeds() {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$feedFilename = 'heureka_delivery_' . $domainConfig->getId() . '.xml';
+			$this->generateFeed(
+				$feedFilename,
+				$domainConfig,
+				$this->heurekaDeliveryFeedDataSource,
+				'@SS6Shop/Feed/heurekaDelivery.xml.twig'
 			);
 		}
 	}
