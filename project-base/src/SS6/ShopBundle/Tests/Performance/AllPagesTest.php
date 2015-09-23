@@ -225,12 +225,12 @@ class AllPagesTest extends FunctionalTestCase {
 			$consoleOutput->writeln(
 				'Route name: ' . $pagePerformanceResult->getRouteName() . ' (' . $pagePerformanceResult->getUrl() . ')'
 			);
-			$tag = $thresholdService->getDurationFormatterTag($pagePerformanceResult->getAvgDuration());
+			$tag = $thresholdService->getFormatterTagForDuration($pagePerformanceResult->getAvgDuration());
 			$consoleOutput->writeln('<' . $tag . '>Avg duration: ' . $pagePerformanceResult->getAvgDuration() . 'ms</' . $tag . '>');
-			$tag = $thresholdService->getQueryCountFormatterTag($pagePerformanceResult->getMaxQueryCount());
+			$tag = $thresholdService->getFormatterTagForQueryCount($pagePerformanceResult->getMaxQueryCount());
 			$consoleOutput->writeln('<' . $tag . '>Max query count: ' . $pagePerformanceResult->getMaxQueryCount() . '</' . $tag . '>');
-			if ($thresholdService->getErrorsCountStatus($pagePerformanceResult->getErrorsCount()) !== ThresholdService::STATUS_OK) {
-				$tag = $thresholdService->getErrorsCountFormatterTag($pagePerformanceResult->getErrorsCount());
+			if ($thresholdService->getStatusForErrorsCount($pagePerformanceResult->getErrorsCount()) !== ThresholdService::STATUS_OK) {
+				$tag = $thresholdService->getFormatterTagForErrorsCount($pagePerformanceResult->getErrorsCount());
 				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
 			}
 		}
