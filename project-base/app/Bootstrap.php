@@ -31,6 +31,8 @@ class Bootstrap {
 	}
 
 	public function run() {
+		$this->configurePhp();
+
 		if ($this->isDebug()) {
 			Debug::enable();
 		} else {
@@ -54,6 +56,11 @@ class Bootstrap {
 			$response->send();
 			$kernel->terminate($request, $response);
 		}
+	}
+
+	private function configurePhp() {
+		error_reporting(E_ALL);
+		ini_set('display_errors', 0);
 	}
 
 	private function isDebug() {
