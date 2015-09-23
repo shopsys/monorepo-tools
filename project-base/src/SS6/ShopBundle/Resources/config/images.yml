@@ -44,3 +44,4 @@
     - { name: footer, width: 1160, height: ~, crop: false }
     - { name: productList, width: 920, height: ~, crop: false }
     - { name: leftSidebar, width: 220, height: ~, crop: false }
+

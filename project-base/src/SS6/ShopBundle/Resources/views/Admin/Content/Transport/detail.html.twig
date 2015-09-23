@@ -12,20 +12,45 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-border">
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Základní nastavení'|trans }}
+			</div>
 			{{ form_id(transportDetail.transport|default(null)) }}
 
 			{{ form_row(form.transportData.name, { label: 'Název'|trans }) }}
 			{{ form_row(form.transportData.domains, { label: 'Doména'|trans }) }}
 			{{ form_row(form.transportData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
+		</div>
+
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Ceny'|trans }}
+			</div>
 			{{ form_row(form.transportData.vat, { label: 'DPH'|trans }) }}
 			{% block transport_base_prices %}{% endblock %}
+		</div>
+
+		<div class="form-group wrap-border">
+
+			<div class="form-group__title">
+				{{ 'Popis'|trans }}
+			</div>
 			{{ form_row(form.transportData.description, { label: 'Popis'|trans }) }}
 			{{ form_row(form.transportData.instructions, { label: 'Pokyny'|trans }) }}
 		</div>
 
-		{% block image %}{% endblock %}
-		{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans }) }}
+
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Obrázek'|trans }}
+			</div>
+
+			{% block image %}{% endblock %}
+			{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans }) }}
+		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
