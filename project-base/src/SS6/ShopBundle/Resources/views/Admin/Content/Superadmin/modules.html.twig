@@ -13,15 +13,15 @@
 					<th class="table-col-10 text-center">Neaktivní</th>
 				</tr>
 			</thead>
-			{% for moduleName, moduleForm in form.modules %}
-				<tbody>
+			<tbody>
+				{% for moduleName, moduleForm in form.modules %}
 					<tr>
 						<td class="table-col-80">{{ moduleForm.vars.label }}</td>
 						<td class="table-col-10 text-center">{{ form_widget(moduleForm['yes']) }}</td>
 						<td class="table-col-10 text-center">{{ form_widget(moduleForm['no']) }}</td>
 					</tr>
-				</tbody>
-			{% endfor %}
+				{% endfor %}
+			</tbody>
 		</table>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

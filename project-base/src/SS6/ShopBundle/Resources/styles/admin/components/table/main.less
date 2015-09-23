@@ -23,6 +23,24 @@ Simple main table style
 		border-bottom: 1px solid @color-border;
 	}
 
+	tbody {
+		tr {
+			background: @color-f;
+
+			&:hover {
+				background: darken(@color-f, 2%);
+			}
+
+			&:nth-child(2n) {
+				background: @bg-stripe;
+
+				&:hover {
+					background: darken(@bg-stripe, 2%);
+				}
+			}
+		}
+	}
+
 	td, th {
 		padding: 6px 17px;
 	}
