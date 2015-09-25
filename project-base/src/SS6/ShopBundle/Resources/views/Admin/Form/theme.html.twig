@@ -175,20 +175,33 @@
 {% endblock %}
 
 {% block textarea_row -%}
-	<div class="form-line">
-		{% if localized is defined %}
-			{{ form_label(form, 'Překlad '|trans ~ localeFlag(locale), { raw: true }) }}
-		{% elseif multidomain is defined %}
-			{{ form_label(form, getDomainName(domainId)) }}
-			{{ domainIcon(domainId) }}
-		{% else %}
-			{{ form_label(form, label) }}
-		{% endif %}
-		{{- form_errors(form) -}}
-		<div class="form-line__line">
-			{{- form_widget(form) -}}
+	{% if localized is defined %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+				<div class="input__wrap">
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
+					{{ form_widget(form, { attr: inputAttr }) }}
+					<span class="input__flag">
+						{{ localeFlag(locale) }}
+					</span>
+				</div>
+			</div>
+			{{ form_errors(form) }}
 		</div>
-	</div>
+	{% else %}
+		<div class="form-line">
+			{% if multidomain is defined %}
+				{{ form_label(form, getDomainName(domainId)) }}
+				{{ domainIcon(domainId) }}
+			{% else %}
+				{{ form_label(form, label) }}
+			{% endif %}
+			{{- form_errors(form) -}}
+			<div class="form-line__line">
+				{{- form_widget(form) -}}
+			</div>
+		</div>
+	{% endif %}
 {%- endblock textarea_row %}
 
 {% block url_list_row -%}
