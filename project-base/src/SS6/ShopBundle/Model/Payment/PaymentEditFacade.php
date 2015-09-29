@@ -9,8 +9,10 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
+use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -52,6 +54,11 @@ class PaymentEditFacade {
 	 */
 	private $currencyFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 */
+	private $paymentPriceCalculation;
+
 	public function __construct(
 		EntityManager $em,
 		PaymentRepository $paymentRepository,
@@ -59,7 +66,8 @@ class PaymentEditFacade {
 		PaymentVisibilityCalculation $paymentVisibilityCalculation,
 		Domain $domain,
 		ImageFacade	$imageFacade,
-		CurrencyFacade $currencyFacade
+		CurrencyFacade $currencyFacade,
+		PaymentPriceCalculation $paymentPriceCalculation
 	) {
 		$this->em = $em;
 		$this->paymentRepository = $paymentRepository;
@@ -68,6 +76,7 @@ class PaymentEditFacade {
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
 		$this->currencyFacade = $currencyFacade;
+		$this->paymentPriceCalculation = $paymentPriceCalculation;
 	}
 
 	/**
@@ -152,9 +161,17 @@ class PaymentEditFacade {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisibleOnCurrentDomain() {
+		return $this->getVisibleByDomainId($this->domain->getId());
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getVisibleByDomainId($domainId) {
 		$allPayments = $this->paymentRepository->findAllWithTransports();
 
-		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $this->domain->getId());
+		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
 	}
 
 	/**
@@ -201,6 +218,41 @@ class PaymentEditFacade {
 			$price = $prices[$currency->getId()];
 			$payment->setPrice($currency, $price);
 		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->paymentRepository->findAllIncludingDeleted();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string [paymentId]
+	 */
+	public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency) {
+		$paymentPricesWithVatByPaymentId = [];
+		$payments = $this->getAllIncludingDeleted();
+		foreach ($payments as $payment) {
+			$paymentPrice = $this->paymentPriceCalculation->calculateIndependentPrice($payment, $currency);
+			$paymentPricesWithVatByPaymentId[$payment->getId()] = $paymentPrice->getPriceWithVat();
+		}
+
+		return $paymentPricesWithVatByPaymentId;
+	}
+
+	/**
+	 * @return string[paymentId]
+	 */
+	public function getPaymentVatPercentsIndexedByPaymentId() {
+		$paymentVatPercentsByPaymentId = [];
+		$payments = $this->getAllIncludingDeleted();
+		foreach ($payments as $payment) {
+			$paymentVatPercentsByPaymentId[$payment->getId()] = $payment->getVat()->getPercent();
+		}
+
+		return $paymentVatPercentsByPaymentId;
 	}
 
 }

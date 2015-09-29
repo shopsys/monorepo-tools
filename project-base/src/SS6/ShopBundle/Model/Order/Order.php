@@ -341,6 +341,27 @@ class Order {
 		);
 		$this->setDeliveryAddress($orderData);
 		$this->status = $orderStatus;
+
+		$this->editOrderTransport($orderData);
+		$this->editOrderPayment($orderData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function editOrderTransport(OrderData $orderData) {
+		$orderTransportData = $orderData->orderTransport;
+		$this->transport = $orderTransportData->transport;
+		$this->getOrderTransport()->edit($orderTransportData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 */
+	private function editOrderPayment(OrderData $orderData) {
+		$orderPaymentData = $orderData->orderPayment;
+		$this->payment = $orderPaymentData->payment;
+		$this->getOrderPayment()->edit($orderPaymentData);
 	}
 
 	/**
@@ -423,13 +444,18 @@ class Order {
 	 * @return string
 	 */
 	public function getPaymentName() {
+		return $this->getOrderPayment()->getName();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderPayment
+	 */
+	public function getOrderPayment() {
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderPayment) {
-				return $item->getName();
+				return $item;
 			}
 		}
-
-		return null;
 	}
 
 	/**
@@ -443,13 +469,18 @@ class Order {
 	 * @return string
 	 */
 	public function getTransportName() {
+		return $this->getTransport()->getName();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderTransport
+	 */
+	public function getOrderTransport() {
 		foreach ($this->items as $item) {
 			if ($item instanceof OrderTransport) {
-				return $item->getName();
+				return $item;
 			}
 		}
-
-		return null;
 	}
 
 	/**
@@ -543,6 +574,20 @@ class Order {
 	 */
 	public function getItems() {
 		return $this->items;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 */
+	public function getItemsWithoutTransportAndPayment() {
+		$itemsWithoutTransportAndPayment = [];
+		foreach ($this->getItems() as $orderItem) {
+			if (!($orderItem instanceof OrderTransport || $orderItem instanceof OrderPayment)) {
+				$itemsWithoutTransportAndPayment[] = $orderItem;
+			}
+		}
+
+		return $itemsWithoutTransportAndPayment;
 	}
 
 	/**

@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
+use SS6\ShopBundle\Model\Order\Item\OrderItemData;
+use SS6\ShopBundle\Model\Order\Item\OrderPaymentData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Payment\Payment;
 
@@ -55,6 +57,20 @@ class OrderPayment extends OrderItem {
 	 */
 	public function getPayment() {
 		return $this->payment;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderPaymentData
+	 */
+	public function edit(OrderItemData $orderPaymentData) {
+		if ($orderPaymentData instanceof OrderPaymentData) {
+			$this->payment = $orderPaymentData->payment;
+			parent::edit($orderPaymentData);
+		} else {
+			throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+				'Instance of ' . OrderPaymentData::class . ' is required as argument.'
+			);
+		}
 	}
 
 }

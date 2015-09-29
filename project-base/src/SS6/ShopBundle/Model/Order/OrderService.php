@@ -48,18 +48,23 @@ class OrderService {
 	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
 	 */
 	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus) {
+		$orderTransportData = $orderData->orderTransport;
+		$orderTransportData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
+		$orderPaymentData = $orderData->orderPayment;
+		$orderPaymentData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
+
 		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
 		$order->edit(
 			$orderData,
 			$orderStatus
 		);
 
-		$orderItemsData = $orderData->items;
+		$orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
 
 		$orderItemsToDelete = [];
-		foreach ($order->getItems() as $orderItem) {
-			if (array_key_exists($orderItem->getId(), $orderItemsData)) {
-				$orderItemData = $orderItemsData[$orderItem->getId()];
+		foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
+			if (array_key_exists($orderItem->getId(), $orderItemsWithoutTransportAndPaymentData)) {
+				$orderItemData = $orderItemsWithoutTransportAndPaymentData[$orderItem->getId()];
 				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 				$orderItem->edit($orderItemData);
 			} else {
@@ -69,7 +74,7 @@ class OrderService {
 		}
 
 		$orderItemsToCreate = [];
-		foreach ($orderItemsData as $index => $orderItemData) {
+		foreach ($orderItemsWithoutTransportAndPaymentData as $index => $orderItemData) {
 			if (strpos($index, 'new_') === 0) {
 				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
 				$orderItem = new OrderProduct(

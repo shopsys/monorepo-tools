@@ -6,9 +6,11 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
+use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
@@ -49,6 +51,11 @@ class TransportEditFacade {
 	 */
 	private $currencyFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 */
+	private $transportPriceCalculation;
+
 	public function __construct(
 		EntityManager $em,
 		TransportRepository $transportRepository,
@@ -56,7 +63,8 @@ class TransportEditFacade {
 		TransportVisibilityCalculation $transportVisibilityCalculation,
 		Domain $domain,
 		ImageFacade $imageFacade,
-		CurrencyFacade $currencyFacade
+		CurrencyFacade $currencyFacade,
+		TransportPriceCalculation $transportPriceCalculation
 	) {
 		$this->em = $em;
 		$this->transportRepository = $transportRepository;
@@ -65,6 +73,7 @@ class TransportEditFacade {
 		$this->domain = $domain;
 		$this->imageFacade = $imageFacade;
 		$this->currencyFacade = $currencyFacade;
+		$this->transportPriceCalculation = $transportPriceCalculation;
 	}
 
 	/**
@@ -154,9 +163,18 @@ class TransportEditFacade {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getVisibleOnCurrentDomain(array $visiblePayments) {
-		$transports = $this->transportRepository->getAllByDomainId($this->domain->getId());
+		return $this->getVisibleByDomainId($this->domain->getId(), $visiblePayments);
+	}
 
-		return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePayments, $this->domain->getId());
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getVisibleByDomainId($domainId, $visiblePaymentsOnDomain) {
+		$transports = $this->transportRepository->getAllByDomainId($domainId);
+
+		return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePaymentsOnDomain, $domainId);
 	}
 
 	/**
@@ -188,6 +206,41 @@ class TransportEditFacade {
 			$price = $prices[$currency->getId()];
 			$transport->setPrice($currency, $price);
 		}
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 */
+	public function getAllIncludingDeleted() {
+		return $this->transportRepository->findAllIncludingDeleted();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return string [transportId]
+	 */
+	public function getTransportPricesWithVatIndexedByTransportId(Currency $currency) {
+		$transportPricesWithVatByTransportId = [];
+		$transports = $this->getAllIncludingDeleted();
+		foreach ($transports as $transport) {
+			$transportPrice = $this->transportPriceCalculation->calculateIndependentPrice($transport, $currency);
+			$transportPricesWithVatByTransportId[$transport->getId()] = $transportPrice->getPriceWithVat();
+		}
+
+		return $transportPricesWithVatByTransportId;
+	}
+
+	/**
+	 * @return string[transportId]
+	 */
+	public function getTransportVatPercentsIndexedByTransportId() {
+		$transportVatPercentsByTransportId = [];
+		$transports = $this->getAllIncludingDeleted();
+		foreach ($transports as $transport) {
+			$transportVatPercentsByTransportId[$transport->getId()] = $transport->getVat()->getPercent();
+		}
+
+		return $transportVatPercentsByTransportId;
 	}
 
 }

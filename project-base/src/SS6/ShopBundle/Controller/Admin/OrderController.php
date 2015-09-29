@@ -21,6 +21,8 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
+use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
+use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController {
@@ -75,6 +77,16 @@ class OrderController extends AdminBaseController {
 	 */
 	private $orderItemFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 */
+	private $transportEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 */
+	private $paymentEditFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
@@ -85,7 +97,9 @@ class OrderController extends AdminBaseController {
 		OrderFormTypeFactory $orderFormTypeFactory,
 		Breadcrumb $breadcrumb,
 		EntityManager $em,
-		OrderItemFacade $orderItemFacade
+		OrderItemFacade $orderItemFacade,
+		TransportEditFacade $transportEditFacade,
+		PaymentEditFacade $paymentEditFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
@@ -97,6 +111,8 @@ class OrderController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->em = $em;
 		$this->orderItemFacade = $orderItemFacade;
+		$this->transportEditFacade = $transportEditFacade;
+		$this->paymentEditFacade = $paymentEditFacade;
 	}
 
 	/**
@@ -107,7 +123,7 @@ class OrderController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$order = $this->orderFacade->getById($id);
-		$form = $this->createForm($this->orderFormTypeFactory->create());
+		$form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 
 		try {
 			$orderData = new OrderData();
@@ -150,6 +166,14 @@ class OrderController extends AdminBaseController {
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
+			'transportPricesWithVatByTransportId' => $this->transportEditFacade->getTransportPricesWithVatIndexedByTransportId(
+				$order->getCurrency()
+			),
+			'transportVatPercentsByTransportId' => $this->transportEditFacade->getTransportVatPercentsIndexedByTransportId(),
+			'paymentPricesWithVatByPaymentId' => $this->paymentEditFacade->getPaymentPricesWithVatIndexedByPaymentId(
+				$order->getCurrency()
+			),
+			'paymentVatPercentsByPaymentId' => $this->paymentEditFacade->getPaymentVatPercentsIndexedByPaymentId(),
 		]);
 	}
 
@@ -172,7 +196,7 @@ class OrderController extends AdminBaseController {
 		$orderData = new OrderData();
 		$orderData->setFromEntity($order);
 
-		$form = $this->createForm($this->orderFormTypeFactory->create());
+		$form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 		$form->setData($orderData);
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());

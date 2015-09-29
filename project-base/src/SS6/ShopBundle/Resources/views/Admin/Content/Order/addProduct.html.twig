@@ -2,7 +2,7 @@
 
 {% form_theme form '@SS6Shop/Admin/Form/theme.html.twig' %}
 {{ orderItemMacro.orderItem(
-	form.items[orderItem.id],
+	form.itemsWithoutTransportAndPayment[orderItem.id],
 	orderItem.id,
 	orderItemTotalPricesById,
 	order.currency,

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Order;
 
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
+use SS6\ShopBundle\Form\Admin\Order\OrderTransportFormType;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -22,10 +23,24 @@ class OrderFormType extends AbstractType {
 	private $allOrderStatuses;
 
 	/**
-	 * @param array $allOrderStatuses
+	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function __construct(array $allOrderStatuses) {
+	private $transports;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Payment\Payment[]
+	 */
+	private $payments;
+
+	/**
+	 * @param array $allOrderStatuses
+	 * @param array $transports
+	 * @param array $payments
+	 */
+	public function __construct(array $allOrderStatuses, array $transports, array $payments) {
 		$this->allOrderStatuses = $allOrderStatuses;
+		$this->transports = $transports;
+		$this->payments = $payments;
 	}
 
 	/**
@@ -134,12 +149,14 @@ class OrderFormType extends AbstractType {
 				],
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
-			->add('items', FormType::COLLECTION, [
+			->add('itemsWithoutTransportAndPayment', FormType::COLLECTION, [
 				'type' => new OrderItemFormType(),
 				'error_bubbling' => false,
 				'allow_add' => true,
 				'allow_delete' => true,
 			])
+			->add('orderPayment', new OrderPaymentFormType($this->payments))
+			->add('orderTransport', new OrderTransportFormType($this->transports))
 			->add('save', FormType::SUBMIT);
 	}
 

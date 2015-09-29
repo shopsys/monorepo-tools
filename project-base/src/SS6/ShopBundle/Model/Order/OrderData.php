@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
+use SS6\ShopBundle\Model\Order\Item\OrderPaymentData;
+use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
 use SS6\ShopBundle\Model\Order\Order;
 
 /**
@@ -123,7 +125,7 @@ class OrderData {
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemData[]
 	 */
-	public $items;
+	public $itemsWithoutTransportAndPayment;
 
 	/**
 	 * @var int
@@ -144,6 +146,16 @@ class OrderData {
 	 * @var string|null
 	 */
 	public $createdAsAdministratorName;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderPaymentData
+	 */
+	public $orderPayment;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Item\OrderTransportData
+	 */
+	public $orderTransport;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
@@ -171,17 +183,21 @@ class OrderData {
 			$this->deliveryPostcode = $order->getDeliveryPostcode();
 		}
 		$this->note = $order->getNote();
-		$orderItemsData = [];
-		foreach ($order->getItems() as $orderItem) {
+		$orderItemsWithoutTransportAndPaymentData = [];
+		foreach ($order->getItemsWithoutTransportAndPayment() as $orderItem) {
 			$orderItemData = new OrderItemData();
 			$orderItemData->setFromEntity($orderItem);
-			$orderItemsData[$orderItem->getId()] = $orderItemData;
+			$orderItemsWithoutTransportAndPaymentData[$orderItem->getId()] = $orderItemData;
 		}
-		$this->items = $orderItemsData;
+		$this->itemsWithoutTransportAndPayment = $orderItemsWithoutTransportAndPaymentData;
 		$this->domainId = $order->getDomainId();
 		$this->currency = $order->getCurrency();
 		$this->createdAsAdministrator = $order->getCreatedAsAdministrator();
 		$this->createdAsAdministratorName = $order->getCreatedAsAdministratorName();
+		$this->orderTransport = new OrderTransportData();
+		$this->orderTransport->setFromEntity($order->getOrderTransport());
+		$this->orderPayment = new OrderPaymentData();
+		$this->orderPayment->setFromEntity($order->getOrderPayment());
 	}
 
 }

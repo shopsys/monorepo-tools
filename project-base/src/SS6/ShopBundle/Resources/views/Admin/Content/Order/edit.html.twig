@@ -148,67 +148,63 @@
 
 		<h2>{{ 'Položky objednávky'|trans }}</h2>
 		<fieldset>
-			{% if form.items is not empty %}
-				<div class="table-touch-always">
-					{{ form_errors(form.items) }}
-					<div class="table-touch-always__in">
-						<table id="order_form_items" class="table-main">
-							<thead>
-								<tr>
-									<th class="table-col-30">{{ 'Název'|trans }}</th>
-									<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
-									<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
-									<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
-									<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
-									<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
-									<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
-									<th ></th>
-								</tr>
-							</thead>
-							<tbody
-								id="js-order-items"
-								data-prototype="{{ orderItemMacro.orderItem(form.items.vars.prototype)|escape }}"
-								data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
-							>
-								{% for productItem in order.productItems %}
-									{{ orderItemMacro.orderItem(form.items[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
-								{% endfor %}
+			<div class="table-touch-always">
+				{{ form_errors(form.itemsWithoutTransportAndPayment) }}
+				<div class="table-touch-always__in">
+					<table id="order_form_items" class="table-main">
+						<thead>
+							<tr>
+								<th class="table-col-30">{{ 'Název'|trans }}</th>
+								<th class="table-col-5">{{ 'Kat. číslo'|trans }}</th>
+								<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
+								<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
+								<th class="table-col-10 text-right">{{ 'Sazba DPH (%)'|trans }}</th>
+								<th class="table-col-15 text-right text-nowrap">{{ 'Celkem s DPH'|trans }}</th>
+								<th class="table-col-15 text-right text-nowrap">{{ 'Celkem bez DPH'|trans }}</th>
+								<th ></th>
+							</tr>
+						</thead>
+						<tbody
+							id="js-order-items"
+							data-prototype="{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment.vars.prototype)|escape }}"
+							data-order-product-add-url="{{ url('admin_order_addproduct', { orderId: order.id }) }}"
+						>
+							{% for productItem in order.productItems %}
+								{{ orderItemMacro.orderItem(form.itemsWithoutTransportAndPayment[productItem.id], productItem.id, orderItemTotalPricesById, order.currency, productItem) }}
+							{% endfor %}
 
-								{% for orderItemId, orderItemForm in form.items %}
-									{% if not orderItemForm.rendered %}
-										{{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
-									{% endif %}
-								{% endfor %}
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="8">
-										<a id="js-order-item-add" href="#" class="btn">
-											<i class="sprite sprite-plus"></i>
-											{{ 'Přidat položku'|trans }}
-										</a>
-										<a id="js-order-item-add-product" href="#" class="btn" data-product-picker-url="{{ url('admin_productpicker_picksingle') }}">
-											<i class="sprite sprite-plus"></i>
-											{{ 'Přidat zboží'|trans }}
-										</a>
-									</td>
-								</tr>
-								<tr>
-									<th colspan="5">{{ 'Celkem'|trans }}:</th>
-									<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
-									<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
-									<th></th>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
+							{% for orderItemId, orderItemForm in form.itemsWithoutTransportAndPayment %}
+								{% if not orderItemForm.rendered %}
+									{{ orderItemMacro.orderItem(orderItemForm, orderItemId, orderItemTotalPricesById, order.currency, null) }}
+								{% endif %}
+							{% endfor %}
+
+							{{ orderItemMacro.orderTransport(form.orderTransport, order, transportPricesWithVatByTransportId, transportVatPercentsByTransportId) }}
+							{{ orderItemMacro.orderPayment(form.orderPayment, order, paymentPricesWithVatByPaymentId, paymentVatPercentsByPaymentId) }}
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="8">
+									<a id="js-order-item-add" href="#" class="btn">
+										<i class="sprite sprite-plus"></i>
+										{{ 'Přidat položku'|trans }}
+									</a>
+									<a id="js-order-item-add-product" href="#" class="btn" data-product-picker-url="{{ url('admin_productpicker_picksingle') }}">
+										<i class="sprite sprite-plus"></i>
+										{{ 'Přidat zboží'|trans }}
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<th colspan="5">{{ 'Celkem'|trans }}:</th>
+								<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
+								<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
 				</div>
-			{% else %}
-				{{ form_widget(form.items, { type: 'hidden' }) }}
-				<div class="in-message in-message--info in-message--static">
-					{{ 'Objednávka neobsahuje žádné položky.'|trans }}
-				</div>
-			{% endif %}
+			</div>
 		</fieldset>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

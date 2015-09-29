@@ -115,7 +115,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData = new OrderData();
 		$orderData->setFromEntity($order);
 
-		$orderItemsData = $orderData->items;
+		$orderItemsData = $orderData->itemsWithoutTransportAndPayment;
 		array_pop($orderItemsData);
 
 		$orderItemData1 = new OrderItemData();
@@ -135,7 +135,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderItemsData['new_1'] = $orderItemData1;
 		$orderItemsData['new_2'] = $orderItemData2;
 
-		$orderData->items = $orderItemsData;
+		$orderData->itemsWithoutTransportAndPayment = $orderItemsData;
 		$orderFacade->edit($order->getId(), $orderData);
 
 		$orderFromDb = $orderRepository->getById($order->getId());
