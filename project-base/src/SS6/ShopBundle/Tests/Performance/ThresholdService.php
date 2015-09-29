@@ -20,16 +20,24 @@ class ThresholdService {
 	 * @param float $duration
 	 * @return string
 	 */
-	public function getDurationFormatterTag($duration) {
-		return 'fg=' . $this->getStatusConsoleTextColor($this->getDurationStatus($duration));
+	public function getFormatterTagForDuration($duration) {
+		return 'fg=' . $this->getStatusConsoleTextColor($this->getStatusForDuration($duration));
 	}
 
 	/**
 	 * @param int $queryCount
 	 * @return string
 	 */
-	public function getQueryCountFormatterTag($queryCount) {
-		return 'fg=' . $this->getStatusConsoleTextColor($this->getQueryCountStatus($queryCount));
+	public function getFormatterTagForQueryCount($queryCount) {
+		return 'fg=' . $this->getStatusConsoleTextColor($this->getStatusForQueryCount($queryCount));
+	}
+
+	/**
+	 * @param int $errorsCount
+	 * @return string
+	 */
+	public function getFormatterTagForErrorsCount($errorsCount) {
+		return 'fg=' . $this->getStatusConsoleTextColor($this->getStatusForErrorsCount($errorsCount));
 	}
 
 	/**
@@ -40,8 +48,9 @@ class ThresholdService {
 		$allStatuses = [self::STATUS_OK];
 
 		foreach ($collection->getAll() as $pagePerformanceResult) {
-			$allStatuses[] = $this->getDurationStatus($pagePerformanceResult->getAvgDuration());
-			$allStatuses[] = $this->getQueryCountStatus($pagePerformanceResult->getMaxQueryCount());
+			$allStatuses[] = $this->getStatusForDuration($pagePerformanceResult->getAvgDuration());
+			$allStatuses[] = $this->getStatusForQueryCount($pagePerformanceResult->getMaxQueryCount());
+			$allStatuses[] = $this->getStatusForErrorsCount($pagePerformanceResult->getErrorsCount());
 		}
 
 		return max($allStatuses);
@@ -66,7 +75,7 @@ class ThresholdService {
 	 * @param float $duration
 	 * @return int
 	 */
-	private function getDurationStatus($duration) {
+	private function getStatusForDuration($duration) {
 		if ($duration >= self::DURATION_CRITICAL) {
 			return self::STATUS_CRITICAL;
 		} elseif ($duration >= self::DURATION_WARNING) {
@@ -80,7 +89,7 @@ class ThresholdService {
 	 * @param int $queryCount
 	 * @return int
 	 */
-	private function getQueryCountStatus($queryCount) {
+	private function getStatusForQueryCount($queryCount) {
 		if ($queryCount >= self::QUERY_COUNT_CRITICAL) {
 			return self::STATUS_CRITICAL;
 		} elseif ($queryCount >= self::QUERY_COUNT_WARNING) {
@@ -88,6 +97,14 @@ class ThresholdService {
 		}
 
 		return self::STATUS_OK;
+	}
+
+	/**
+	 * @param int $errorsCount
+	 * @return int
+	 */
+	public function getStatusForErrorsCount($errorsCount) {
+		return $errorsCount > 0 ? self::STATUS_CRITICAL : self::STATUS_OK;
 	}
 
 }
