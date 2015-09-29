@@ -28,6 +28,7 @@ class VariantFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add(self::MAIN_VARIANT, FormType::PRODUCT, [
+				'allow_main_variants' => false,
 				'allow_variants' => false,
 				'constraints' => [
 					new Constraints\NotBlank(),
@@ -36,6 +37,7 @@ class VariantFormType extends AbstractType {
 			->add(
 				$builder
 					->create(self::VARIANTS, FormType::PRODUCTS, [
+						'allow_main_variants' => false,
 						'allow_variants' => false,
 						'constraints' => [
 							new Constraints\NotBlank(),

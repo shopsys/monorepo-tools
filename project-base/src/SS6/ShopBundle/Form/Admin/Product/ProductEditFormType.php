@@ -241,6 +241,7 @@ class ProductEditFormType extends AbstractType {
 			$builder->add('variants', FormType::PRODUCTS, [
 				'required' => false,
 				'main_product' => $this->product,
+				'allow_main_variants' => false,
 				'allow_variants' => false,
 			]);
 		}
