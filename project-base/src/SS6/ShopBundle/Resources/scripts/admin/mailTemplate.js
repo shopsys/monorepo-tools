@@ -4,7 +4,7 @@
 	SS6.mailTemplate = SS6.mailTemplate || {};
 
 	SS6.mailTemplate.init = function () {
-		$('.js-toggle-container').each(function () {
+		$('.js-mail-template-toggle-container.js-toggle-container').each(function () {
 			var $toggleContainer = $(this);
 			var $toggleButton = $toggleContainer.find('.js-toggle-button');
 
@@ -17,7 +17,7 @@
 			});
 		});
 
-		$('#js-mail-templates .js-toggle-container:has(.js-validation-errors-list:not(.display-none))').each(function () {
+		$('.js-mail-template-toggle-container.js-toggle-container:has(.js-validation-errors-list:not(.display-none))').each(function () {
 			SS6.toggleElement.show($(this));
 		});
 	};
