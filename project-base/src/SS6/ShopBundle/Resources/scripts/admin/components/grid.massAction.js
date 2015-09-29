@@ -12,7 +12,7 @@
 		};
 
 		var onSelectAll = function () {
-			$grid.find('.js-grid-mass-action-select-row').attr('checked', $selectAllCheckbox.is(':checked'));
+			$grid.find('.js-grid-mass-action-select-row').prop('checked', $selectAllCheckbox.is(':checked'));
 		};
 
 	};
