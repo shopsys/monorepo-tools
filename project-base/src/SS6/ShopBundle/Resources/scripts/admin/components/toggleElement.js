@@ -4,7 +4,7 @@
 	SS6.toggleElement = SS6.toggleElement || {};
 
 	SS6.toggleElement.init = function () {
-		$('.js-toggle-container .js-toggle-headline').bind('click', SS6.toggleElement.toggle);
+		$('.js-toggle-container .js-toggle-button').bind('click', SS6.toggleElement.toggle);
 	};
 
 	SS6.toggleElement.show = function ($container) {
