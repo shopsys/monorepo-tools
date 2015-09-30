@@ -23,6 +23,10 @@
 		},
 		{
 			"type": "vcs",
+			"url": "https://github.com/sustmi/Routing.git"
+		},
+		{
+			"type": "vcs",
 			"url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git"
 		}
 	],
@@ -61,6 +65,7 @@
 		"symfony/monolog-bundle": "2.7.1",
 		"symfony/swiftmailer-bundle": "2.3.8",
 		"symfony/symfony": "2.6.4",
+		"symfony-cmf/routing": "dev-master#bb25b51744",
 		"symfony-cmf/routing-bundle": "1.3.3",
 		"timwhitlock/jparser": "dev-fix-imports#e996c9c",
 		"tracy/tracy": "2.2.6",
