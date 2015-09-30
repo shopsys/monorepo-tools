@@ -232,14 +232,28 @@ services:
     arguments:
       - %ss6.heureka_category_feed_url%
 
+  ss6.shop.feed.feed_config_facade:
+    class: SS6\ShopBundle\Model\Feed\FeedConfigFacade
+    arguments:
+      - %ss6.feed_url_prefix%
+      - %ss6.feed_dir%
+
+  ss6.shop.feed.feed_config_repository:
+    class: SS6\ShopBundle\Model\Feed\FeedConfigRepository
+    arguments:
+      - @ss6.shop.feed.heureka.heureka_feed_data_source
+      - @ss6.shop.feed.heureka.heureka_delivery_feed_data_source
+
   ss6.shop.feed.feed_facade:
     class: SS6\ShopBundle\Model\Feed\FeedFacade
     arguments:
       - %ss6.feed_dir%
-      - @ss6.shop.feed.heureka.heureka_feed_data_source
 
   ss6.shop.feed.heureka.heureka_feed_data_source:
     class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaFeedDataSource
+
+  ss6.shop.feed.heureka.heureka_delivery_feed_data_source:
+    class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource
 
   ss6.shop.file_upload:
     class: SS6\ShopBundle\Model\FileUpload\FileUpload

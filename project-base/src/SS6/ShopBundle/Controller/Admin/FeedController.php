@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
@@ -29,17 +30,24 @@ class FeedController extends AdminBaseController {
 	private $feedFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigFacade
+	 */
+	private $feedConfigFacade;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	public function __construct(
 		FeedFacade $feedFacade,
+		FeedConfigFacade $feedConfigFacade,
 		GridFactory $gridFactory,
 		Domain $domain,
 		EntityManager $em
 	) {
 		$this->feedFacade = $feedFacade;
+		$this->feedConfigFacade = $feedConfigFacade;
 		$this->gridFactory = $gridFactory;
 		$this->domain = $domain;
 		$this->em = $em;
@@ -61,14 +69,17 @@ class FeedController extends AdminBaseController {
 	 */
 	public function listAction() {
 		$feeds = [];
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$filename = 'heureka_' . $domainConfig->getId() . '.xml';
-			$heurekaFilepath = $this->container->getParameter('ss6.feed_dir') . '/' . $filename;
-			$feeds[] = [
-				'name' => $domainConfig->getName() . ' - Heureka',
-				'url' => $domainConfig->getUrl() . $this->container->getParameter('ss6.feed_url_prefix') . $filename,
-				'created' => file_exists($heurekaFilepath) ? new DateTime('@' . filemtime($heurekaFilepath)) : null,
-			];
+
+		foreach ($this->feedConfigFacade->getAllFeedConfigs() as $feedConfig) {
+			foreach ($this->domain->getAll() as $domainConfig) {
+				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
+				$feeds[] = [
+					'feedName' => $feedConfig->getName(),
+					'domainName' => $domainConfig->getName(),
+					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
+					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
+				];
+			}
 		}
 
 		$dataSource = new ArrayDataSource($feeds, 'name');
@@ -79,7 +90,7 @@ class FeedController extends AdminBaseController {
 			}
 		);
 
-		$grid->addColumn('name', 'name', 'Feed');
+		$grid->addColumn('name', 'feedName', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');

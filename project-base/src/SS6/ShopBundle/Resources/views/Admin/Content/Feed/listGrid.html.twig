@@ -1,9 +1,13 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
+{% macro getName(row) %}
+	{{ row.feedName }} - {{ row.domainName }}
+{% endmacro %}
+
 {% block grid_value_cell_id_name %}
 	{% if row.created %}
-		<a href="{{ row.url }}" target="_blank">{{ row.name }}</a>
+		<a href="{{ row.url }}" target="_blank">{{ _self.getName(row) }}</a>
 	{% else %}
-		{{ row.name }}
+		{{ _self.getName(row) }}
 	{% endif %}
 {% endblock %}
