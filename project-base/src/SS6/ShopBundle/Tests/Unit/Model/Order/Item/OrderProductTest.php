@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductData;
 
 class OrderProductTest extends PHPUnit_Framework_TestCase {
 
@@ -49,6 +50,19 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(30, $orderProduct->getPriceWithoutVat());
 		$this->assertSame(2, $orderProduct->getQuantity());
 		$this->assertSame(10, $orderProduct->getvatPercent());
+	}
+
+	public function testConstructWithMainVariantThrowsException() {
+		$mainVariant = new Product(new ProductData());
+		$variant = new Product(new ProductData());
+
+		$mainVariant->addVariant($variant);
+
+		$orderMock = $this->getMock(Order::class, [], [], '', false);
+
+		$this->setExpectedException(\SS6\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException::class);
+
+		new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, 'catnum', $mainVariant);
 	}
 
 }

@@ -366,7 +366,7 @@
 		<span class="form-line__item">
 			<button
 				type="button"
-				data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowVariants: allow_variants}) }}"
+				data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
 				class="js-product-picker-create-picker-button btn btn--default"
 				title="{{ 'Kliknutím přejdete k výběru produktu'|trans }}"
 				type="button"
@@ -425,7 +425,7 @@
 	<div
 		{{ block('widget_attributes') }}
 		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype, form.vars.sortable)|e }}"
-		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowVariants: allow_variants}) }}"
+		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
 		<table class="table-form mb20">

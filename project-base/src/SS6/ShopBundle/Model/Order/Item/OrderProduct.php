@@ -49,6 +49,11 @@ class OrderProduct extends OrderItem {
 			$quantity,
 			$catnum
 		);
+
+		if ($product !== null && $product->isMainVariant()) {
+			throw new \SS6\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException();
+		}
+
 		$this->product = $product;
 	}
 

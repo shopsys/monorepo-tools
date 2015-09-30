@@ -48,6 +48,7 @@ class ProductType extends AbstractType {
 
 		$view->vars['placeholder'] = $options['placeholder'];
 		$view->vars['enableRemove'] = $options['enableRemove'];
+		$view->vars['allow_main_variants'] = $options['allow_main_variants'];
 		$view->vars['allow_variants'] = $options['allow_variants'];
 
 		$product = $form->getData();
@@ -79,6 +80,7 @@ class ProductType extends AbstractType {
 			'placeholder' => $this->translator->trans('Vyberte produkt'),
 			'enableRemove' => false,
 			'required' => true,
+			'allow_main_variants' => true,
 			'allow_variants' => true,
 		]);
 	}
