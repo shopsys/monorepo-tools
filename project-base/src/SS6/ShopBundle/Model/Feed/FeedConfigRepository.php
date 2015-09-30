@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
+use SS6\ShopBundle\Component\Translation\Translator;
+
 class FeedConfigRepository {
 
 	/**
@@ -14,12 +16,19 @@ class FeedConfigRepository {
 	 */
 	private $heurekaDeliveryFeedDataSource;
 
+	/**
+	 * @var \Symfony\Component\Translation\TranslatorInterface
+	 */
+	private $translator;
+
 	public function __construct(
 		FeedDataSourceInterface $heurekaFeedDataSource,
-		FeedDataSourceInterface $heurekaDeliveryFeedDataSource
+		FeedDataSourceInterface $heurekaDeliveryFeedDataSource,
+		Translator $translator
 	) {
 		$this->heurekaFeedDataSource = $heurekaFeedDataSource;
 		$this->heurekaDeliveryFeedDataSource = $heurekaDeliveryFeedDataSource;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -35,17 +44,8 @@ class FeedConfigRepository {
 			$this->heurekaFeedDataSource
 		);
 
-		return $feedConfigs;
-	}
-
-	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
-	 */
-	public function getAllDeliveryFeedConfigs() {
-		$feedConfigs = [];
-
 		$feedConfigs[] = new FeedConfig(
-			'Heureka',
+			$this->translator->trans('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),
 			'heureka_delivery',
 			'@SS6Shop/Feed/heurekaDelivery.xml.twig',
 			$this->heurekaDeliveryFeedDataSource

@@ -100,40 +100,4 @@ class FeedController extends AdminBaseController {
 		]);
 	}
 
-	/**
-	 * @Route("/feed/list-delivery/")
-	 */
-	public function listDeliveryAction() {
-		$feeds = [];
-
-		foreach ($this->feedConfigFacade->getAllDeliveryFeedConfigs() as $feedConfig) {
-			foreach ($this->domain->getAll() as $domainConfig) {
-				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-				$feeds[] = [
-					'feedName' => $feedConfig->getName(),
-					'domainName' => $domainConfig->getName(),
-					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
-					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
-				];
-			}
-		}
-
-		$dataSource = new ArrayDataSource($feeds, 'name');
-
-		$grid = $this->em->transactional(
-			function () use ($dataSource) {
-				return $this->gridFactory->create('deliveryFeedsList', $dataSource);
-			}
-		);
-
-		$grid->addColumn('name', 'feedName', 'Feed');
-		$grid->addColumn('created', 'created', 'Vygenerováno');
-
-		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
-
-		return $this->render('@SS6Shop/Admin/Content/Feed/listDelivery.html.twig', [
-			'gridView' => $grid->createView(),
-		]);
-	}
-
 }
