@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\FlashMessage;
+namespace SS6\ShopBundle\Component\FlashMessage;
 
 use JMS\TranslationBundle\Annotation\Ignore;
 use SS6\ShopBundle\Component\Translation\Translator;
@@ -9,7 +9,7 @@ use Twig_Environment;
 class FlashMessageSender {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
+	 * @var \SS6\ShopBundle\Component\FlashMessage\Bag
 	 */
 	private $flashMessageBag;
 

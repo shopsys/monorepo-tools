@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Watcher;
 
-use SS6\ShopBundle\Model\FlashMessage\Bag;
+use SS6\ShopBundle\Component\FlashMessage\Bag;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -19,7 +19,7 @@ class TransportAndPaymentWatcherService {
 	const SESSION_PAYMENT_PRICES = 'payment_prices';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\Bag
+	 * @var \SS6\ShopBundle\Component\FlashMessage\Bag
 	 */
 	private $flashMessageBag;
 
@@ -39,7 +39,7 @@ class TransportAndPaymentWatcherService {
 	private $transportPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FlashMessage\Bag $flashMessageBag
+	 * @param \SS6\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
 	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
 	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation

@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 
 class CartWatcherFacadeTest extends PHPUnit_Framework_TestCase {

@@ -150,7 +150,7 @@ class DomainController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');
+			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.admin');
 			return new JsonResponse([
 				'result' => 'invalid',
 				'errors' => $this->errorService->getAllErrorsAsArray($form, $flashMessageBag),
