@@ -34,7 +34,7 @@ class FeedConfigRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
 	 */
-	public function getAllFeedConfigs() {
+	public function getFeedConfigs() {
 		$feedConfigs = [];
 
 		$feedConfigs[] = new FeedConfig(
@@ -43,6 +43,15 @@ class FeedConfigRepository {
 			'@SS6Shop/Feed/heureka.xml.twig',
 			$this->heurekaFeedDataSource
 		);
+
+		return $feedConfigs;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 */
+	public function getDeliveryFeedConfigs() {
+		$feedConfigs = [];
 
 		$feedConfigs[] = new FeedConfig(
 			$this->translator->trans('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),

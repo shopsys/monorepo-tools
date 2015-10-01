@@ -21,7 +21,7 @@ class FeedCronModule implements CronModuleInterface {
 	 * @inheritdoc
 	 */
 	public function run(Logger $logger) {
-		$this->feedFacade->generateAllFeeds();
+		$this->feedFacade->generateFeeds();
 	}
 
 }

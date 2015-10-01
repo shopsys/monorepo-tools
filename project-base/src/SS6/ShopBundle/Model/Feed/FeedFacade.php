@@ -52,16 +52,16 @@ class FeedFacade {
 		$this->feedConfigFacade = $feedConfigFacade;
 	}
 
-	public function generateAllFeeds() {
-		foreach ($this->feedConfigFacade->getAllFeedConfigs() as $feedConfig) {
+	public function generateFeeds() {
+		foreach ($this->feedConfigFacade->getFeedConfigs() as $feedConfig) {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$this->generateFeed($feedConfig, $domainConfig);
 			}
 		}
 	}
 
-	public function generateAllDeliveryFeeds() {
-		foreach ($this->feedConfigFacade->getAllDeliveryFeedConfigs() as $feedConfig) {
+	public function generateDeliveryFeeds() {
+		foreach ($this->feedConfigFacade->getDeliveryFeedConfigs() as $feedConfig) {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$this->generateFeed($feedConfig, $domainConfig);
 			}

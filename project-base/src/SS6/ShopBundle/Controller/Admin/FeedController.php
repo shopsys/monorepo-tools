@@ -58,7 +58,8 @@ class FeedController extends AdminBaseController {
 	 */
 	public function generateAction() {
 
-		$this->feedFacade->generateAllFeeds();
+		$this->feedFacade->generateFeeds();
+		$this->feedFacade->generateDeliveryFeeds();
 		$this->getFlashMessageSender()->addSuccessFlash('XML Feedy byly vygenerovány');
 
 		return $this->redirectToRoute('admin_feed_list');
@@ -70,7 +71,11 @@ class FeedController extends AdminBaseController {
 	public function listAction() {
 		$feeds = [];
 
-		foreach ($this->feedConfigFacade->getAllFeedConfigs() as $feedConfig) {
+		$feedConfigs = array_merge(
+			$this->feedConfigFacade->getFeedConfigs(),
+			$this->feedConfigFacade->getDeliveryFeedConfigs()
+		);
+		foreach ($feedConfigs as $feedConfig) {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 				$feeds[] = [
