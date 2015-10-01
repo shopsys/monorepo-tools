@@ -290,8 +290,8 @@ services:
     arguments:
       - @ss6.shop.component.flash_message.bag.front
 
-  ss6.shop.form.multiple_form_setting:
-    class: SS6\ShopBundle\Model\Form\MultipleFormSetting
+  ss6.shop.component.form.multiple_form_setting:
+    class: SS6\ShopBundle\Component\Form\MultipleFormSetting
 
   ss6.shop.image.directory_structure_creator:
     class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator

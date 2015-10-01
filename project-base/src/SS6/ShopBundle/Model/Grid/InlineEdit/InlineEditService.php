@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Grid\InlineEdit;
 
-use SS6\ShopBundle\Model\Form\MultipleFormSetting;
+use SS6\ShopBundle\Component\Form\MultipleFormSetting;
 use SS6\ShopBundle\Model\Grid\Grid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
@@ -22,14 +22,14 @@ class InlineEditService {
 	private $twigEnvironment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Form\MultipleFormSetting
+	 * @var \SS6\ShopBundle\Component\Form\MultipleFormSetting
 	 */
 	private $multipleFormSettings;
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Twig_Environment $twigEnvironment
-	 * @param \SS6\ShopBundle\Model\Form\MultipleFormSetting $multipleFormSetting
+	 * @param \SS6\ShopBundle\Component\Form\MultipleFormSetting $multipleFormSetting
 	 */
 	public function __construct(
 		ContainerInterface $container,

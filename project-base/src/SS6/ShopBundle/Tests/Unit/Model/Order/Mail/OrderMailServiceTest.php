@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Form;
+namespace SS6\ShopBundle\Tests\Unit\Component\Form;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
