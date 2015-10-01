@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Setting;
+namespace SS6\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Setting\SettingValueRepository;
+use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 
 class Setting {
 
@@ -17,23 +17,23 @@ class Setting {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\SettingValueRepository
+	 * @var \SS6\ShopBundle\Component\Setting\SettingValueRepository
 	 */
 	private $settingValueRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\SettingValue[]
+	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	private $values = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\SettingValue[]
+	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	private $valuesDefault;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Setting\SettingValueRepository $settingValueRepository
+	 * @param \SS6\ShopBundle\Component\Setting\SettingValueRepository $settingValueRepository
 	 */
 	public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository) {
 		$this->em = $em;
@@ -56,7 +56,7 @@ class Setting {
 	 */
 	public function set($key, $value, $domainId) {
 		if ($domainId === SettingValue::DOMAIN_ID_DEFAULT) {
-			throw new \SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException('Cannot set default setting value');
+			throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException('Cannot set default setting value');
 		}
 
 		$settingValue = $this->getSettingValue($key, $domainId);
@@ -74,7 +74,7 @@ class Setting {
 	/**
 	 * @param string $key
 	 * @param int|null $domainId
-	 * @return \SS6\ShopBundle\Model\Setting\SettingValue
+	 * @return \SS6\ShopBundle\Component\Setting\SettingValue
 	 */
 	private function getSettingValue($key, $domainId) {
 		$this->loadValues($domainId);
@@ -94,7 +94,7 @@ class Setting {
 		}
 
 		$message = 'Setting value with name "' . $key . '" not found.';
-		throw new \SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException($message);
+		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
 	/**

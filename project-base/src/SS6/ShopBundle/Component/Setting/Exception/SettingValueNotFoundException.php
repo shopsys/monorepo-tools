@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Setting\Exception;
+namespace SS6\ShopBundle\Component\Setting\Exception;
 
 use Exception;
 

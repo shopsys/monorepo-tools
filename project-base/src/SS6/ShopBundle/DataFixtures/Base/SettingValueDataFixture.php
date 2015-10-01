@@ -5,6 +5,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
@@ -12,8 +14,6 @@ use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 

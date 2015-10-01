@@ -4,13 +4,13 @@ namespace SS6\ShopBundle\Model\Order\Mail;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
 use SS6\ShopBundle\Twig\PriceExtension;
 use Twig_Environment;
@@ -33,7 +33,7 @@ class OrderMailService {
 	const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

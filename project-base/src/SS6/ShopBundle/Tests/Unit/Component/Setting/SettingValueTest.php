@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Setting;
+namespace SS6\ShopBundle\Tests\Unit\Component\Setting;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use stdClass;
 
 class SettingValueTest extends PHPUnit_Framework_TestCase {

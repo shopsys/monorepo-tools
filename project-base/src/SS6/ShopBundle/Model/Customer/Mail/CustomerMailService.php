@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class CustomerMailService {
 
@@ -18,7 +18,7 @@ class CustomerMailService {
 	const VARIABLE_LOGIN_PAGE = '{login_page}';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

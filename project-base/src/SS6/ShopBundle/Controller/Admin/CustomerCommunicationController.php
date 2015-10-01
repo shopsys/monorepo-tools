@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
-use SS6\ShopBundle\Model\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends AdminBaseController {
@@ -17,7 +17,7 @@ class CustomerCommunicationController extends AdminBaseController {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

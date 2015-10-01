@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
 
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
@@ -16,8 +18,6 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -28,7 +28,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 	public function testOnKernelResponseNoAction() {
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 
 		$inputPriceRecalculatorMock = $this->getMockBuilder(InputPriceRecalculator::class)
 			->setMethods(['__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'])
@@ -67,7 +67,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
 		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
@@ -147,7 +147,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Model\Setting\Setting */
+		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
 		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Setting;
+namespace SS6\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 
 class SettingValueRepository {
 
@@ -28,14 +28,14 @@ class SettingValueRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Setting\SettingValue[]
+	 * @return \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	public function findAllByDomainId($domainId) {
 		return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Setting\SettingValue[]
+	 * @return \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	public function findAllDefault() {
 		return $this->getSettingValueRepository()->findBy(['domainId' => SettingValue::DOMAIN_ID_DEFAULT]);

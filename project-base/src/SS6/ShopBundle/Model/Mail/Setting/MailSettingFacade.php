@@ -2,18 +2,18 @@
 
 namespace SS6\ShopBundle\Model\Mail\Setting;
 
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class MailSettingFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		Setting $setting

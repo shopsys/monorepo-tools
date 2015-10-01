@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Setting;
+namespace SS6\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -142,7 +142,7 @@ class SettingValue {
 
 		$message = 'Setting value type of "' . gettype($value) . '" is unsupported.'
 			. ' Supported is string, integer, float, boolean or null.';
-		throw new \SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException($message);
+		throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
 	}
 
 }

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Setting;
+namespace SS6\ShopBundle\Tests\Unit\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Setting\Exception\InvalidArgumentException;
-use SS6\ShopBundle\Model\Setting\Exception\SettingValueNotFoundException;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
-use SS6\ShopBundle\Model\Setting\SettingValueRepository;
+use SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
+use SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
+use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 
 class SettingTest extends PHPUnit_Framework_TestCase {
 

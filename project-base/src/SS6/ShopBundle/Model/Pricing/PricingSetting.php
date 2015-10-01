@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 
 class PricingSetting {
 
@@ -23,7 +23,7 @@ class PricingSetting {
 	const ROUNDING_TYPE_INTEGER = 3;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
