@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
-use SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory;

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Availability;
 
-use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;

@@ -26,7 +26,7 @@ class ProductEditFormType extends AbstractType {
 	const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Image[]
+	 * @var \SS6\ShopBundle\Component\Image\Image[]
 	 */
 	private $images;
 
@@ -71,7 +71,7 @@ class ProductEditFormType extends AbstractType {
 	private $imagesIdsToImagesTransformer;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $images
+	 * @param \SS6\ShopBundle\Component\Image\Image[] $images
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups

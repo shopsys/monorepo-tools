@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Model\Product\Collection;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Image\Config\ImageConfig;
+use SS6\ShopBundle\Component\Image\ImageFacade;
+use SS6\ShopBundle\Component\Image\ImageRepository;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\ImageFacade;
-use SS6\ShopBundle\Model\Image\ImageRepository;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionService;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Product;
@@ -26,17 +26,17 @@ class ProductCollectionFacade {
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
+	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageRepository
+	 * @var \SS6\ShopBundle\Component\Image\ImageRepository
 	 */
 	private $imageRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
@@ -89,7 +89,7 @@ class ProductCollectionFacade {
 			} else {
 				try {
 					$imagesUrlsByProductId[$productId] = $this->imageFacade->getImageUrl($domainConfig, $image, $sizeName);
-				} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+				} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 					$imagesUrlsByProductId[$productId] = null;
 				}
 			}
@@ -100,7 +100,7 @@ class ProductCollectionFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 * @return \SS6\ShopBundle\Component\Image\Image[productId]
 	 */
 	private function findMainImagesIndexedByProductId(array $products) {
 		$productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
@@ -112,7 +112,7 @@ class ProductCollectionFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
+	 * @return \SS6\ShopBundle\Component\Image\Image[productId]
 	 */
 	public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
 		$mainFriendlyUrlsByProductId = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(

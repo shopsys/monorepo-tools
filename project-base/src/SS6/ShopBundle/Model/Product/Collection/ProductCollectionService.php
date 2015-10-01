@@ -6,7 +6,7 @@ class ProductCollectionService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $products
-	 * @param \SS6\ShopBundle\Model\Image\Image $imagesByProductId
+	 * @param \SS6\ShopBundle\Component\Image\Image $imagesByProductId
 	 * @return array
 	 */
 	public function getImagesIndexedByProductId(array $products, array $imagesByProductId) {

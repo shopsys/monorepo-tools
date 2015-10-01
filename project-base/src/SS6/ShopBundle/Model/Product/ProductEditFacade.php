@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
@@ -57,7 +57,7 @@ class ProductEditFacade {
 	private $productService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 

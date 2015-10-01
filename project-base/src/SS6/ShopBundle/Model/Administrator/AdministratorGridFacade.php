@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Grid\Grid;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridService;
-use SS6\ShopBundle\Component\Grid\Grid;
 
 class AdministratorGridFacade {
 

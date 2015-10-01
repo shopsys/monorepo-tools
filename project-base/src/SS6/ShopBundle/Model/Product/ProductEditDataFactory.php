@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Form\UrlListType;
-use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
@@ -45,7 +45,7 @@ class ProductEditDataFactory {
 	private $productAccessoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 

@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Component\Grid;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\Grid\DataSourceInterface;
+use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 
 class QueryBuilderDataSource implements DataSourceInterface {
 

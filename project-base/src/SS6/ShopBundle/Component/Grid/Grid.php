@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\Component\Grid;
 
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\Column;
 use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Grid\GridView;
 use SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;

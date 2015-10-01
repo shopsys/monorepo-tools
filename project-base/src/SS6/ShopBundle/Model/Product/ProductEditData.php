@@ -23,12 +23,12 @@ class ProductEditData {
 	public $imagesToUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Image[]
+	 * @var \SS6\ShopBundle\Component\Image\Image[]
 	 */
 	public $imagesToDelete;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Image[imageId]
+	 * @var \SS6\ShopBundle\Component\Image\Image[imageId]
 	 */
 	public $imagePositions;
 
@@ -76,8 +76,8 @@ class ProductEditData {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagesToDelete
-	 * @param \SS6\ShopBundle\Model\Image\Image[] $imagePositions
+	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagesToDelete
+	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagePositions
 	 * @param string[] $manualInputPrices
 	 * @param string[] $seoTitles
 	 * @param string[] $seoMetaDescriptions

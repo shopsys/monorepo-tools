@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Order\PromoCode\Grid;
 
-use SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormTypeFactory;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormTypeFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeGridFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;

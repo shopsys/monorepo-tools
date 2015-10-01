@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Currency\Grid;
 
-use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencyFormType;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\FormFactory;

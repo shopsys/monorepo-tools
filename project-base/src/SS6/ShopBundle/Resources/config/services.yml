@@ -267,8 +267,8 @@ services:
       - { name: doctrine.event_listener, event: prePersist }
       - { name: doctrine.event_listener, event: preUpdate }
 
-  ss6.shop.image.image_delete_doctrine_listener:
-    class: SS6\ShopBundle\Model\Image\ImageDeleteDoctrineListener
+  ss6.shop.component.image.image_delete_doctrine_listener:
+    class: SS6\ShopBundle\Component\Image\ImageDeleteDoctrineListener
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
@@ -294,27 +294,27 @@ services:
     class: SS6\ShopBundle\Component\Form\MultipleFormSetting
 
   ss6.shop.image.directory_structure_creator:
-    class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
+    class: SS6\ShopBundle\Component\Image\DirectoryStructureCreator
     arguments:
       - %ss6.image_dir%
       - %ss6.domain_images_dir%
 
   ss6.shop.image.image_config:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfig
+    class: SS6\ShopBundle\Component\Image\Config\ImageConfig
     factory_service: ss6.shop.image.image_config_loader
     factory_method: loadFromYaml
     arguments:
       - %ss6.image_config_filepath%
 
   ss6.shop.image.image_config_loader:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
+    class: SS6\ShopBundle\Component\Image\Config\ImageConfigLoader
 
   ss6.shop.image.image_facade:
-    class: SS6\ShopBundle\Model\Image\ImageFacade
+    class: SS6\ShopBundle\Component\Image\ImageFacade
     arguments: [%ss6.image_url_prefix%]
 
   ss6.shop.image.image_locator:
-    class: SS6\ShopBundle\Model\Image\ImageLocator
+    class: SS6\ShopBundle\Component\Image\ImageLocator
     arguments: [%ss6.image_dir%]
 
   ss6.shop.image.processing.image_manager:

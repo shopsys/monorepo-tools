@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 

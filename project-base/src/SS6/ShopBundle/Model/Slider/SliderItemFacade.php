@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Slider;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade {
@@ -26,7 +26,7 @@ class SliderItemFacade {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 

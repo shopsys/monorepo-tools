@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Detail;
 
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
@@ -33,7 +33,7 @@ class ProductDetailFactory {
 	private $parameterRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
@@ -128,7 +128,7 @@ class ProductDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Image\Image[imageId]
+	 * @return \SS6\ShopBundle\Component\Image\Image[imageId]
 	 */
 	private function getImagesIndexedById(Product $product) {
 		return $this->imageFacade->getImagesByEntityIndexedById($product, null);

@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\Tests\Unit\Component\Grid;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Paginator\PaginationResult;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Grid\Grid;
 use SS6\ShopBundle\Component\Grid\GridView;
 use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;

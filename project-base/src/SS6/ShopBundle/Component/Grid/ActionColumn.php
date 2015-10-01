@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Grid;
 
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Component\Grid\Grid;
+use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Router;
 
 class ActionColumn {

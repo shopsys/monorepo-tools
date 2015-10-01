@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
 
-use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
 use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
 use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use Symfony\Component\Form\FormFactory;

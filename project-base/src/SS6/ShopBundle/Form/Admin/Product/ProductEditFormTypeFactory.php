@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
-use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
@@ -20,7 +20,7 @@ class ProductEditFormTypeFactory {
 	private $productParameterValueFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 

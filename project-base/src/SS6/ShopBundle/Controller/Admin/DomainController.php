@@ -8,10 +8,10 @@ use SS6\ShopBundle\Component\Controller\ErrorService;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -141,7 +141,7 @@ class DomainController extends AdminBaseController {
 					'Byla upravena doména <strong>{{ name }}</strong>', ['name' => $domain->getName()]);
 
 				return new JsonResponse(['result' => 'valid']);
-			} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+			} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
 			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Nahrání souboru selhalo, zkuste to, prosím, znovu.');

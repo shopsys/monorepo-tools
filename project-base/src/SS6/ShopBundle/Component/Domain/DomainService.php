@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
+use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DomainService {
@@ -11,7 +11,7 @@ class DomainService {
 	const DOMAIN_ICON_HEIGHT = 11;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageProcessingService
+	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService
 	 */
 	private $imageProcessingService;
 

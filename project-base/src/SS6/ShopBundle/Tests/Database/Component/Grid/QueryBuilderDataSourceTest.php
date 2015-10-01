@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Database\Component\Grid;
 
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 

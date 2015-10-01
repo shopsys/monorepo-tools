@@ -6,10 +6,10 @@ use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
-use SS6\ShopBundle\Model\Feed\FeedFacade;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
+use SS6\ShopBundle\Model\Feed\FeedFacade;
 
 class FeedController extends AdminBaseController {
 

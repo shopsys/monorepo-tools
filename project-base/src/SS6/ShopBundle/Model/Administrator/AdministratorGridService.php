@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Administrator;
 
+use SS6\ShopBundle\Component\Grid\Grid;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
-use SS6\ShopBundle\Component\Grid\Grid;
 
 class AdministratorGridService {
 
