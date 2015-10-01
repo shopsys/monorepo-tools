@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Administrator;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridService;
-use SS6\ShopBundle\Model\Grid\Grid;
+use SS6\ShopBundle\Component\Grid\Grid;
 
 class AdministratorGridFacade {
 
@@ -29,7 +29,7 @@ class AdministratorGridFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
+	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
 	 */
 	public function restoreAndRememberGridLimit(Administrator $administrator, Grid $grid) {
 		$this->administratorGridService->restoreGridLimit($administrator, $grid);

@@ -8,8 +8,8 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
-use SS6\ShopBundle\Model\Grid\ArrayDataSource;
-use SS6\ShopBundle\Model\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\ArrayDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
 
 class FeedController extends AdminBaseController {
 
@@ -29,7 +29,7 @@ class FeedController extends AdminBaseController {
 	private $feedConfigFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 

@@ -4,20 +4,20 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService;
-use SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade;
+use SS6\ShopBundle\Component\Grid\InlineEdit\InlineEditService;
+use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class GridController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\InlineEdit\InlineEditService
+	 * @var \SS6\ShopBundle\Component\Grid\InlineEdit\InlineEditService
 	 */
 	private $inlineEditService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\Ordering\GridOrderingFacade
+	 * @var \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingFacade
 	 */
 	private $gridOrderingFacade;
 
@@ -58,7 +58,7 @@ class GridController extends AdminBaseController {
 			);
 			$responseData['success'] = true;
 			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
-		} catch (\SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
+		} catch (\SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
 			$responseData['errors'] = array_unique($e->getFormErrors());
 		}

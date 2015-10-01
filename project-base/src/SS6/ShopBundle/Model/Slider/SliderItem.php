@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
+use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 
 /**

@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
+use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;

@@ -5,10 +5,10 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Grid\ActionColumn;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
 
 class AvailabilityGridFactory implements GridFactoryInterface {
@@ -19,7 +19,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -46,7 +46,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 * @return \SS6\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

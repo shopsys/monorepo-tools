@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType;
-use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductGridFactory;
@@ -58,7 +58,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 		try {
 			$topProduct = $this->topProductFacade->create($topProductData, $this->selectedDomain->getId());
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
-			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
+			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException(
 				[
 					$this->translator->trans('Tento produkt již v seznamu existuje.'),
 				]
@@ -75,7 +75,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 		try {
 			$this->topProductFacade->edit($id, $topProductData);
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
-			throw new \SS6\ShopBundle\Model\Grid\InlineEdit\Exception\InvalidFormDataException(
+			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException(
 				[
 					$this->translator->trans('Tento produkt již v seznamu existuje.'),
 				]

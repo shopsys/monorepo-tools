@@ -4,13 +4,13 @@ namespace SS6\ShopBundle\Model\Administrator;
 
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
-use SS6\ShopBundle\Model\Grid\Grid;
+use SS6\ShopBundle\Component\Grid\Grid;
 
 class AdministratorGridService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
+	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
 	 * @return \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit|null
 	 */
 	public function rememberGridLimit(Administrator $administrator, Grid $grid) {
@@ -33,7 +33,7 @@ class AdministratorGridService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Model\Grid\Grid $grid
+	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
 	 */
 	public function restoreGridLimit(Administrator $administrator, Grid $grid) {
 		$customLimit = $administrator->getLimitByGridId($grid->getId());

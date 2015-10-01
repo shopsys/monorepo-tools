@@ -17,8 +17,8 @@ use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
@@ -47,7 +47,7 @@ class ProductController extends AdminBaseController {
 	private $productMassActionFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -360,7 +360,7 @@ class ProductController extends AdminBaseController {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 * @return \SS6\ShopBundle\Component\Grid\Grid
 	 */
 	private function getGrid(QueryBuilder $queryBuilder) {
 		$dataSource = new QueryBuilderWithRowManipulatorDataSource(

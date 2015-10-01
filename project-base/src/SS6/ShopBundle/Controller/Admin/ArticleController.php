@@ -15,8 +15,8 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\ArticleDataFactory;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Article\ArticlePlacementList;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -63,7 +63,7 @@ class ArticleController extends AdminBaseController {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -226,7 +226,7 @@ class ArticleController extends AdminBaseController {
 
 	/**
 	 * @param string $articlePlacement
-	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 * @return \SS6\ShopBundle\Component\Grid\Grid
 	 */
 	private function getGrid($articlePlacement) {
 		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(

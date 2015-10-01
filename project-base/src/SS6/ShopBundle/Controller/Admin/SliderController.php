@@ -10,8 +10,8 @@ use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Slider\SliderItem;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
 use SS6\ShopBundle\Model\Slider\SliderItemFacade;
@@ -35,7 +35,7 @@ class SliderController extends AdminBaseController {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 

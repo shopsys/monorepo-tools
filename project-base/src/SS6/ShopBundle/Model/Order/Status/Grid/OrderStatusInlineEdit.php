@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Status\Grid;
 
 use SS6\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType;
-use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusGridFactory;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing\Group\Grid;
 
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
-use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
+use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\FormFactory;

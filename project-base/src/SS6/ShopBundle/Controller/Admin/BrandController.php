@@ -10,8 +10,8 @@ use SS6\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
 use SS6\ShopBundle\Model\Product\Brand\BrandData;
 use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
@@ -40,7 +40,7 @@ class BrandController extends AdminBaseController {
 	private $brandFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 

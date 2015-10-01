@@ -15,8 +15,8 @@ use SS6\ShopBundle\Model\Advert\Advert;
 use SS6\ShopBundle\Model\Advert\AdvertData;
 use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
 use SS6\ShopBundle\Model\Advert\AdvertPositionList;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController {
@@ -57,7 +57,7 @@ class AdvertController extends AdminBaseController {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 

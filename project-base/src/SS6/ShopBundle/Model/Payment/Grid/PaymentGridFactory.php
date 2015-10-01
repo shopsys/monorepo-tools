@@ -5,10 +5,10 @@ namespace SS6\ShopBundle\Model\Payment\Grid;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
+use SS6\ShopBundle\Component\Grid\ActionColumn;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -24,7 +24,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -65,7 +65,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 * @return \SS6\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->paymentRepository->getQueryBuilderForAll()
