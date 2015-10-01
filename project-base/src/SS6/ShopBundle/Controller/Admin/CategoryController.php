@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
@@ -11,7 +12,6 @@ use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryDataFactory;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -34,7 +34,7 @@ class CategoryController extends AdminBaseController {
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -168,7 +168,7 @@ class CategoryController extends AdminBaseController {
 		if ($domainId !== 0) {
 			try {
 				$this->domain->getDomainConfigById($domainId);
-			} catch (\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException $ex) {
+			} catch (\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
 				$domainId = 0;
 			}
 		}

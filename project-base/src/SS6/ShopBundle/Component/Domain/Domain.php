@@ -1,23 +1,23 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain;
+namespace SS6\ShopBundle\Component\Domain;
 
 use Symfony\Component\HttpFoundation\Request;
 
 class Domain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig|null
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig|null
 	 */
 	private $currentDomainConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domainConfigs;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 */
 	public function __construct(array $domainConfigs) {
 		$this->domainConfigs = $domainConfigs;
@@ -59,7 +59,7 @@ class Domain {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAll() {
 		return $this->domainConfigs;
@@ -67,7 +67,7 @@ class Domain {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getDomainConfigById($domainId) {
 		foreach ($this->domainConfigs as $domainConfig) {
@@ -76,7 +76,7 @@ class Domain {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException();
+		throw new \SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException();
 	}
 
 	/**
@@ -99,15 +99,15 @@ class Domain {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Model\Domain\Exception\UnableToResolveDomainException();
+		throw new \SS6\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getCurrentDomainConfig() {
 		if ($this->currentDomainConfig === null) {
-			throw new \SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException();
+			throw new \SS6\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
 		}
 
 		return $this->currentDomainConfig;

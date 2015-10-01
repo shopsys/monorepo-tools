@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;

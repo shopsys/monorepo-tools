@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Crawler\Localization;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -26,7 +26,7 @@ class LocalizationListenerTest extends DatabaseTestCase {
 
 	public function testProductDetailLocaleEn() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$domain->switchDomainById(2);
 

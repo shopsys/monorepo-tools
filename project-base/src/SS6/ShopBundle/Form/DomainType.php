@@ -2,19 +2,19 @@
 
 namespace SS6\ShopBundle\Form;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DomainType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(Domain $domain) {
 		$this->domain = $domain;

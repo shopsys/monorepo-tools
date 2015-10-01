@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain;
+namespace SS6\ShopBundle\Component\Domain;
 
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;

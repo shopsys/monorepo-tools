@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageLocator;
@@ -26,7 +26,7 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

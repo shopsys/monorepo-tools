@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -42,7 +42,7 @@ class SeoExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Domain\Domain
+	 * @return \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private function getDomain() {
 		// Twig extensions are loaded during assetic:dump command,

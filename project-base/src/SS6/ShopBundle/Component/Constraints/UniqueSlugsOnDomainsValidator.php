@@ -3,17 +3,17 @@
 namespace SS6\ShopBundle\Component\Constraints;
 
 use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -51,7 +51,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string[] $slugs
 	 */
 	private function validateDuplication(DomainConfig $domainConfig, $slugs) {
@@ -68,7 +68,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string[] $slugs
 	 */
 	private function validateExists(DomainConfig $domainConfig, $slugs) {

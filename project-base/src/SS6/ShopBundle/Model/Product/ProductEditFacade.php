@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
@@ -47,7 +47,7 @@ class ProductEditFacade {
 	private $parameterRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -270,7 +270,7 @@ class ProductEditFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 */
 	private function createProductDomains(Product $product, array $domains) {
 		$toFlush = [];

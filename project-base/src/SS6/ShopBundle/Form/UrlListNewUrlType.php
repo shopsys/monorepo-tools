@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints;
 class UrlListNewUrlType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

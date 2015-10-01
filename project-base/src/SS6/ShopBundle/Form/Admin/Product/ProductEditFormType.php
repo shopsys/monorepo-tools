@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Constraints\UniqueProductParameters;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
 use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
@@ -10,7 +11,6 @@ use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFac
 use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
@@ -46,7 +46,7 @@ class ProductEditFormType extends AbstractType {
 	private $pricingGroups;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domains;
 
@@ -75,7 +75,7 @@ class ProductEditFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
 	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domains
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 * @param string[] $metaDescriptionsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
@@ -271,7 +271,7 @@ class ProductEditFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	private function getTitlePlaceholder(DomainConfig $domainConfig) {
@@ -283,7 +283,7 @@ class ProductEditFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {

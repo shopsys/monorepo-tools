@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Form;
 
 use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -40,7 +40,7 @@ class UrlListType extends AbstractType {
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

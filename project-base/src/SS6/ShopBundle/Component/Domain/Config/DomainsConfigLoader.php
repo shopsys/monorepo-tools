@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain\Config;
+namespace SS6\ShopBundle\Component\Domain\Config;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
@@ -21,7 +21,7 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function loadDomainConfigsFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -45,7 +45,7 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param array $processedConfig
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private function loadDomainConfigsFromArray($processedConfig) {
 		$domainConfigs = [];
@@ -59,7 +59,7 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param array $domainConfig
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private function processDomainConfigArray(array $domainConfig) {
 		return new DomainConfig(

@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Order\Mail;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
@@ -53,7 +53,7 @@ class OrderMailService {
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

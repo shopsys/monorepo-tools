@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Form\UrlListType;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class FriendlyUrlFacade {
 
@@ -33,7 +33,7 @@ class FriendlyUrlFacade {
 	private $friendlyUrlRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

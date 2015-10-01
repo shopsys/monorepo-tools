@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 
 /**
@@ -115,7 +115,7 @@ class ProductDomain {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 * @return string
 	 */
 	public function getSeoTitleForHtml(Domain $domain) {

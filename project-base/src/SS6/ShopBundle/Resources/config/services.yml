@@ -207,23 +207,23 @@ services:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  ss6.shop.domain:
-    class: SS6\ShopBundle\Model\Domain\Domain
-    factory_service: ss6.shop.domain.domain_factory
+  ss6.shop.component.domain:
+    class: SS6\ShopBundle\Component\Domain\Domain
+    factory_service: ss6.shop.component.domain.domain_factory
     factory_method: create
     arguments:
       - %ss6.domain_config_filepath%
 
-  ss6.shop.domain.domain_facade:
-    class: SS6\ShopBundle\Model\Domain\DomainFacade
+  ss6.shop.component.domain.domain_facade:
+    class: SS6\ShopBundle\Component\Domain\DomainFacade
     arguments:
       - %ss6.domain_images_dir%
 
-  ss6.shop.domain.domain_factory:
-    class: SS6\ShopBundle\Model\Domain\DomainFactory
+  ss6.shop.component.domain.domain_factory:
+    class: SS6\ShopBundle\Component\Domain\DomainFactory
 
-  ss6.shop.domain.domain_listener:
-    class: SS6\ShopBundle\Model\Domain\DomainListener
+  ss6.shop.component.domain.domain_listener:
+    class: SS6\ShopBundle\Component\Domain\DomainListener
     tags:
       - { name: kernel.event_subscriber }
 

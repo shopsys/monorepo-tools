@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
@@ -218,7 +218,7 @@ class ImageFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
 	 * @param string|null $sizeName
 	 * @param string|null $type

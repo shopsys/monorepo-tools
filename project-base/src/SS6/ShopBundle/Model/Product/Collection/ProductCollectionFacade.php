@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Product\Collection;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\ImageFacade;
 use SS6\ShopBundle\Model\Image\ImageRepository;
@@ -77,7 +77,7 @@ class ProductCollectionFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string|null $sizeName
 	 * @return string[productId]
 	 */
@@ -111,7 +111,7 @@ class ProductCollectionFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Image\Image[productId]
 	 */
 	public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
@@ -131,7 +131,7 @@ class ProductCollectionFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[productId]
 	 */
 	public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig) {
@@ -143,7 +143,7 @@ class ProductCollectionFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string[productId][paramName]
 	 */
 	public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig) {

@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -33,7 +33,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	private $friendlyUrlMatcher;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private $domainConfig;
 
@@ -52,7 +52,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	 * @param \Symfony\Component\Config\Loader\DelegatingLoader $delegatingLoader
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $friendlyUrlRouterResourceFilepath
 	 */
 	public function __construct(

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
@@ -14,7 +15,6 @@ use SS6\ShopBundle\Model\Advert\Advert;
 use SS6\ShopBundle\Model\Advert\AdvertData;
 use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
 use SS6\ShopBundle\Model\Advert\AdvertPositionList;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,7 +52,7 @@ class AdvertController extends AdminBaseController {
 	private $advertPositionList;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 

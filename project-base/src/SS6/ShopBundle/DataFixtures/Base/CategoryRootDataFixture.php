@@ -4,11 +4,11 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryDomain;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture {
 
@@ -19,7 +19,7 @@ class CategoryRootDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$domain = $this->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$categoryVisibilityRepository = $this->get(CategoryVisibilityRepository::class);
 		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
 

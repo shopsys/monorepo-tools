@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use Symfony\Component\Routing\RouteCollection;
 
 class FriendlyUrlMatcher {
@@ -20,7 +20,7 @@ class FriendlyUrlMatcher {
 	/**
 	 * @param string $pathinfo
 	 * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return array
 	 */
 	public function match($pathinfo, RouteCollection $routeCollection, DomainConfig $domainConfig) {

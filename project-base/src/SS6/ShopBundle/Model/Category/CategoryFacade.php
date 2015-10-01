@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Product;
 
 class CategoryFacade {
@@ -30,7 +30,7 @@ class CategoryFacade {
 	private $categoryService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -132,7 +132,7 @@ class CategoryFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 */
 	private function createCategoryDomains(Category $category, array $domainConfigs) {
 		foreach ($domainConfigs as $domainConfig) {

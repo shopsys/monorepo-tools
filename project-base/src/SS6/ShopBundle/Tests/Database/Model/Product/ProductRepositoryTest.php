@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -29,7 +29,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
 		$productId = $product->getId();
@@ -65,7 +65,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
 		$productId = $product->getId();

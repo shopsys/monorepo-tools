@@ -18,7 +18,7 @@ class UserFormType extends AbstractType {
 	private $scenario;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -29,7 +29,7 @@ class UserFormType extends AbstractType {
 
 	/**
 	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Model\Domain\SelectedDomain $selectedDomain
+	 * @param \SS6\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
 	public function __construct($scenario, $selectedDomain = null, $pricingGroups = null) {

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain\Config;
+namespace SS6\ShopBundle\Component\Domain\Config;
 
 use SS6\ShopBundle\Command\ConfigVersionsCheckCommand;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 

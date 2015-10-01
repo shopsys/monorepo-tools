@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Order\Preview;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -21,7 +21,7 @@ class OrderPreviewFactory {
 	private $orderPreviewCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

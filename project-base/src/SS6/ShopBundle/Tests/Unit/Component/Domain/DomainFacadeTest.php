@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Domain;
+namespace SS6\ShopBundle\Tests\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainFacade;
-use SS6\ShopBundle\Model\Domain\DomainService;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\DomainFacade;
+use SS6\ShopBundle\Component\Domain\DomainService;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;

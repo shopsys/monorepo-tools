@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
@@ -30,7 +30,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 

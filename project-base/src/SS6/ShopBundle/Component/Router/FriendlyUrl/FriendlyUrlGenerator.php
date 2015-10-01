@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use Symfony\Component\Routing\Generator\UrlGenerator as BaseUrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
@@ -36,7 +36,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 
 	/**
 	 * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $routeName
 	 * @param array $parameters
 	 * @param string $referenceType

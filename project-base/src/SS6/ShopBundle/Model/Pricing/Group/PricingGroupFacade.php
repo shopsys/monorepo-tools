@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
@@ -25,12 +25,12 @@ class PricingGroupFacade {
 	private $pricingGroupRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 

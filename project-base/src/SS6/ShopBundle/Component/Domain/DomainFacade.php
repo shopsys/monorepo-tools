@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain;
+namespace SS6\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainService;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\DomainService;
 use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class DomainFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -22,7 +22,7 @@ class DomainFacade {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\DomainService
+	 * @var \SS6\ShopBundle\Component\Domain\DomainService
 	 */
 	private $domainService;
 
@@ -59,7 +59,7 @@ class DomainFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getDomainConfigsByCurrency(Currency $currency) {
 		$domainConfigs = [];

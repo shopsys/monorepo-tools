@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Article\ArticleRepository;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class ArticleEditFacade {
 
@@ -20,7 +20,7 @@ class ArticleEditFacade {
 	private $articleRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -32,7 +32,7 @@ class ArticleEditFacade {
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Article\ArticleRepository $articleRepository
-	 * @param \SS6\ShopBundle\Model\Domain\Domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain
 	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	public function __construct(

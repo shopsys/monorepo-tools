@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -495,7 +495,7 @@ class ProductRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[productId]
 	 */
 	public function getProductDomainsByProductsAndDomainConfigIndexedByProductId(array $products, DomainConfig $domainConfig) {

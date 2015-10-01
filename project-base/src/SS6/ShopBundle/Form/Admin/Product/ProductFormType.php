@@ -59,7 +59,7 @@ class ProductFormType extends AbstractType {
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domainConfigs;
 
@@ -70,7 +70,7 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(

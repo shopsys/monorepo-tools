@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Feed;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 use Twig_Environment;
 use Twig_Template;
@@ -28,12 +28,12 @@ class FeedGenerator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $targetFilepath
 	 */
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface $heurekaDataSource
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */

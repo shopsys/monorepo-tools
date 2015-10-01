@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
@@ -24,7 +24,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 

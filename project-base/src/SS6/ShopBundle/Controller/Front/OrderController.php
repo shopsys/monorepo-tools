@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -39,7 +39,7 @@ class OrderController extends FrontBaseController {
 	private $cart;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

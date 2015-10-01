@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Domain;
+namespace SS6\ShopBundle\Tests\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainTest extends PHPUnit_Framework_TestCase {
@@ -16,7 +16,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		];
 
 		$domain = new Domain($domainConfigs);
-		$this->setExpectedException(\SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Component\Domain\Exception\NoDomainSelectedException::class);
 		$domain->getId();
 	}
 
@@ -65,7 +65,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($domainConfigs[0], $domain->getDomainConfigById(1));
 		$this->assertSame($domainConfigs[1], $domain->getDomainConfigById(2));
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Domain\Exception\InvalidDomainIdException::class);
+		$this->setExpectedException(\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException::class);
 		$domain->getDomainConfigById(3);
 	}
 

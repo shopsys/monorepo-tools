@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Currency;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -38,7 +38,7 @@ class CurrencyService {
 	 * @param int $defaultCurrencyId
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
 	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 * @return int[]
 	 */
 	public function getNotAllowedToDeleteCurrencyIds(

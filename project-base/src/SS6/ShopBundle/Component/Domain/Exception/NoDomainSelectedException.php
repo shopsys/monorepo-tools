@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Domain\Exception;
+namespace SS6\ShopBundle\Component\Domain\Exception;
 
 use Exception;
 
-class DomainQueueEmptyException extends Exception implements DomainException {
+class NoDomainSelectedException extends Exception implements DomainException {
 
 	/**
 	 * @param string $message

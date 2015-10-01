@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 
 class IndependentPaymentVisibilityCalculation {
@@ -13,7 +13,7 @@ class IndependentPaymentVisibilityCalculation {
 	private $paymentRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

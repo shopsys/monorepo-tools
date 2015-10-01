@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
@@ -44,7 +44,7 @@ class ProductFormTypeFactory {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

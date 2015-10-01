@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class IndependentTransportVisibilityCalculation {
@@ -13,7 +13,7 @@ class IndependentTransportVisibilityCalculation {
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

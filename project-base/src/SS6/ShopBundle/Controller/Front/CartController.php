@@ -4,13 +4,13 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\ErrorService;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
@@ -36,7 +36,7 @@ class CartController extends FrontBaseController {
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

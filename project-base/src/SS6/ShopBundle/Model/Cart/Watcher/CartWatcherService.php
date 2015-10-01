@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
@@ -21,14 +21,14 @@ class CartWatcherService {
 	private $productVisibilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
-	 * @param \SS6\ShopBundle\Model\Domain\Domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Payment\PaymentPrice;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
@@ -43,7 +43,7 @@ class CurrencyFacade {
 	private $orderRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

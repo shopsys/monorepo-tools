@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade {
@@ -36,7 +36,7 @@ class CartFacade {
 	private $customerIdentifier;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -51,7 +51,7 @@ class CartFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 */
 	public function __construct(

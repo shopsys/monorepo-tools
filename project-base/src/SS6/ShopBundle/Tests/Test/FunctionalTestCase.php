@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Test;
 
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase {
@@ -15,7 +15,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 
 	protected function setUpDomain() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$domain->switchDomainById(1);
 	}
 

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
@@ -14,7 +14,7 @@ use SS6\ShopBundle\Model\Grid\GridFactory;
 class FeedController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

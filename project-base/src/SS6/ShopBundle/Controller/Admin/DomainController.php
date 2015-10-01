@@ -5,11 +5,11 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Controller\ErrorService;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\DomainFacade;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainFacade;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Grid\ArrayDataSource;
 use SS6\ShopBundle\Model\Grid\GridFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -18,12 +18,12 @@ use Symfony\Component\HttpFoundation\Request;
 class DomainController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -38,7 +38,7 @@ class DomainController extends AdminBaseController {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\DomainFacade
+	 * @var \SS6\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private $domainFacade;
 

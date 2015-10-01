@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use DateTime;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,13 +18,13 @@ class FrontendUserProvider implements UserProviderInterface {
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(UserRepository $userRepository, Domain $domain) {
 		$this->userRepository = $userRepository;

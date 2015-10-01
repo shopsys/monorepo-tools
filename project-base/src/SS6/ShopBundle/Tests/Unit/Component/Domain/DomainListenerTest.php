@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Domain;
+namespace SS6\ShopBundle\Tests\Unit\Component\Domain;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainListener;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\DomainListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -49,7 +49,7 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase {
 		$eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(true));
 		$eventMock->expects($this->once())->method('getRequest')->will($this->returnValue($getRequestResult));
 
-		$exception = new \SS6\ShopBundle\Model\Domain\Exception\NoDomainSelectedException();
+		$exception = new \SS6\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
 		$domainMock = $this->getMockBuilder(Domain::class)
 			->setMethods(['__construct', 'getId', 'switchDomainByRequest'])
 			->disableOriginalConstructor()

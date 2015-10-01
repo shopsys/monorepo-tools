@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 
 class FeedConfig {
@@ -53,7 +53,7 @@ class FeedConfig {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	public function getFeedFilename(DomainConfig $domainConfig) {
