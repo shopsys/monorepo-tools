@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Image;
 
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\Processing\ImageProcessingService;
@@ -15,7 +15,7 @@ class ImageService {
 	private $imageProcessingService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 

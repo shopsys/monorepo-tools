@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Twig\FileThumbnail;
 
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
@@ -19,7 +19,7 @@ class FileThumbnailExtension extends Twig_Extension {
 	private $iconsByExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 

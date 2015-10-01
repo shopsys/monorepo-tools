@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\FileUpload;
+namespace SS6\ShopBundle\Component\FileUpload;
 
 interface EntityFileUploadInterface {
 
 	/**
-	 * @return \SS6\ShopBundle\Model\FileUpload\FileForUpload[]
+	 * @return \SS6\ShopBundle\Component\FileUpload\FileForUpload[]
 	 */
 	public function getTemporaryFilesForUpload();
 

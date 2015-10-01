@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Component\Domain\DomainService;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;

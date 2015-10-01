@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Image;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageFacade;
@@ -30,7 +30,7 @@ class ImageDeleteDoctrineListener {
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 

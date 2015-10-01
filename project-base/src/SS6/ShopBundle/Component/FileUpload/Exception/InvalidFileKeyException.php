@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\FileUpload\Exception;
+namespace SS6\ShopBundle\Component\FileUpload\Exception;
 
 use Exception;
 use SS6\ShopBundle\Component\Debug;

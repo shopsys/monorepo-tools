@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Image;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\FileUpload\FileNamingConvention;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileNamingConvention;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Model\Image\Image;
 use SS6\ShopBundle\Model\Image\ImageService;
@@ -71,7 +71,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @return \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private function getFileUpload() {
 		$fileNamingConvention = new FileNamingConvention();

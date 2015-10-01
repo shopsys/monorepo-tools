@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Model\FileUpload;
+namespace SS6\ShopBundle\Component\FileUpload;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 
 class DoctrineListener {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param \SS6\ShopBundle\Component\FileUpload\FileUpload $fileUpload
 	 */
 	public function __construct(FileUpload $fileUpload) {
 		$this->fileUpload = $fileUpload;

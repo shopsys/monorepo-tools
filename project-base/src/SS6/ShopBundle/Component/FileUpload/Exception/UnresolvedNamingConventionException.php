@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\FileUpload\Exception;
+namespace SS6\ShopBundle\Component\FileUpload\Exception;
 
 use Exception;
 
-class MoveToFolderFailedException extends Exception implements FileUploadException {
+class UnresolvedNamingConventionException extends Exception implements FileUploadException {
 
 	/**
 	 * @param string $message

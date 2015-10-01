@@ -56,7 +56,7 @@ class DomainService {
 			$this->filesystem->remove($filepath);
 		} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
 			$message = 'Move file from temporary directory to domain directory failed';
-			throw new \SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException($message, $ex);
+			throw new \SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException($message, $ex);
 		}
 	}
 }

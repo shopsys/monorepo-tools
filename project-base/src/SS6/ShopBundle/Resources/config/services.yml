@@ -255,12 +255,12 @@ services:
   ss6.shop.feed.heureka.heureka_delivery_feed_data_source:
     class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource
 
-  ss6.shop.file_upload:
-    class: SS6\ShopBundle\Model\FileUpload\FileUpload
+  ss6.shop.component.file_upload:
+    class: SS6\ShopBundle\Component\FileUpload\FileUpload
     arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
 
-  ss6.shop.file_upload.doctrine_listener:
-    class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
+  ss6.shop.component.file_upload.doctrine_listener:
+    class: SS6\ShopBundle\Component\FileUpload\DoctrineListener
     tags:
       - { name: doctrine.event_listener, event: postPersist }
       - { name: doctrine.event_listener, event: postUpdate }

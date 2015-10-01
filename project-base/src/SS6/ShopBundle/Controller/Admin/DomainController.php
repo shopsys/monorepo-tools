@@ -143,7 +143,7 @@ class DomainController extends AdminBaseController {
 				return new JsonResponse(['result' => 'valid']);
 			} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
-			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException $ex) {
+			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Nahrání souboru selhalo, zkuste to, prosím, znovu.');
 			}
 

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Twig;
 
 use Intervention\Image\Image;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
