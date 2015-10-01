@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\ConfirmDelete;
+namespace SS6\ShopBundle\Component\ConfirmDelete;
 
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Bundle\TwigBundle\TwigEngine;

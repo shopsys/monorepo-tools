@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
-use SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
@@ -37,7 +37,7 @@ class PricingGroupController extends AdminBaseController {
 	private $pricingGroupInlineEdit;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
