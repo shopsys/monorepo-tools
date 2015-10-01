@@ -10,12 +10,12 @@
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 		{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
-			<div class="toggle-container form-group wrap-border">
+			<div class="js-mail-template-toggle-container js-toggle-container form-group wrap-border">
 				<h2 class ="form-group__title">
 						{{ name }}
-					<span class="form-group__title__click toggle-headline">+</span>
+					<span class="form-group__title__click js-toggle-button">+</span>
 				</h2>
-				<div id="{{ template.vars.id }}" class="js-mail-template toggle-content display-none box-expand__hidden">
+				<div id="{{ template.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
 					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
 					{{ form_row(template.bccEmail, { label: 'Skrytá kopie'|trans}) }}
 					{{ form_row(template.body, { label: 'Text'|trans}) }}
