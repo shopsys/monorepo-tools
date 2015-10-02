@@ -187,6 +187,9 @@ class ProductDataFixtureLoader {
 			case 'low':
 				$productEditData->productData->vat = $this->vats['low'];
 				break;
+			case 'second_low':
+				$productEditData->productData->vat = $this->vats['second_low'];
+				break;
 			case 'zero':
 				$productEditData->productData->vat = $this->vats['zero'];
 				break;

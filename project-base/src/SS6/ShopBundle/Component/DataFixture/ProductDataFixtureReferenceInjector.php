@@ -49,6 +49,7 @@ class ProductDataFixtureReferenceInjector {
 		$vats = [
 			'high' => $referenceRepository->getReference(VatDataFixture::VAT_HIGH),
 			'low' => $referenceRepository->getReference(VatDataFixture::VAT_LOW),
+			'second_low' => $referenceRepository->getReference(VatDataFixture::VAT_SECOND_LOW),
 			'zero' => $referenceRepository->getReference(VatDataFixture::VAT_ZERO),
 		];
 
