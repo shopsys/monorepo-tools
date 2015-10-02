@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -18,11 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CategoryController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -61,7 +55,6 @@ class CategoryController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		CategoryFacade $categoryFacade,
 		CategoryFormTypeFactory $categoryFormTypeFactory,
 		CategoryDataFactory $categoryDataFactory,
@@ -70,7 +63,6 @@ class CategoryController extends AdminBaseController {
 		Breadcrumb $breadcrumb
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->categoryFacade = $categoryFacade;
 		$this->categoryFormTypeFactory = $categoryFormTypeFactory;
 		$this->categoryDataFactory = $categoryDataFactory;
@@ -93,7 +85,7 @@ class CategoryController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $categoryData) {
 					$this->categoryFacade->edit($id, $categoryData);
 				}
@@ -136,7 +128,7 @@ class CategoryController extends AdminBaseController {
 		if ($form->isValid()) {
 			$categoryData = $form->getData();
 
-			$category = $this->em->transactional(
+			$category = $this->transactional(
 				function () use ($categoryData) {
 					return $this->categoryFacade->create($categoryData);
 				}
@@ -207,7 +199,11 @@ class CategoryController extends AdminBaseController {
 			$parentIdByCategoryId[$categoryId] = $parentId;
 		}
 
-		$this->categoryFacade->editOrdering($parentIdByCategoryId);
+		$this->transactional(
+			function () use ($parentIdByCategoryId) {
+				$this->categoryFacade->editOrdering($parentIdByCategoryId);
+			}
+		);
 
 		return new Response('OK - dummy');
 	}
@@ -221,7 +217,7 @@ class CategoryController extends AdminBaseController {
 		try {
 			$fullName = $this->categoryFacade->getById($id)->getName();
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->categoryFacade->deleteById($id);
 				}

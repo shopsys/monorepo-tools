@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -10,11 +9,6 @@ use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
 use SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit;
 
 class FlagController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
@@ -27,11 +21,9 @@ class FlagController extends AdminBaseController {
 	private $flagInlineEdit;
 
 	public function __construct(
-		EntityManager $em,
 		FlagFacade $flagFacade,
 		FlagInlineEdit $flagInlineEdit
 	) {
-		$this->em = $em;
 		$this->flagFacade = $flagFacade;
 		$this->flagInlineEdit = $flagInlineEdit;
 	}
@@ -57,7 +49,7 @@ class FlagController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->flagFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->flagFacade->deleteById($id);
 				}

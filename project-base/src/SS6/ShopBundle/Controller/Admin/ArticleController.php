@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
@@ -22,11 +21,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
@@ -82,8 +76,7 @@ class ArticleController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		Translator $translator,
-		EntityManager $em
+		Translator $translator
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
@@ -94,7 +87,6 @@ class ArticleController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->translator = $translator;
-		$this->em = $em;
 	}
 
 	/**
@@ -115,7 +107,7 @@ class ArticleController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $articleData) {
 					$this->articleEditFacade->edit($id, $articleData);
 				}
@@ -169,7 +161,7 @@ class ArticleController extends AdminBaseController {
 		if ($form->isValid()) {
 			$articleData = $form->getData();
 
-			$article = $this->em->transactional(
+			$article = $this->transactional(
 				function () use ($articleData) {
 					return $this->articleEditFacade->create($articleData);
 				}
@@ -200,7 +192,7 @@ class ArticleController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->articleEditFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->articleEditFacade->delete($id);
 				}
@@ -222,7 +214,7 @@ class ArticleController extends AdminBaseController {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function saveOrderingAction(Request $request) {
-		$this->em->transactional(
+		$this->transactional(
 			function () use ($request) {
 				$this->articleEditFacade->saveOrdering($request->get('rowIdsByGridId'));
 			}

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -14,11 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
@@ -42,13 +36,11 @@ class OrderStatusController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		OrderStatusFacade $orderStatusFacade,
 		OrderStatusInlineEdit $orderStatusInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->orderStatusFacade = $orderStatusFacade;
 		$this->orderStatusInlineEdit = $orderStatusInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -76,7 +68,7 @@ class OrderStatusController extends AdminBaseController {
 
 		try {
 			$orderStatus = $this->orderStatusFacade->getById($id);
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $newId) {
 					$this->orderStatusFacade->deleteById($id, $newId);
 				}

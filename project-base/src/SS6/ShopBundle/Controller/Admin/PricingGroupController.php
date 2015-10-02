@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -16,11 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class PricingGroupController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \Symfony\Component\Translation\Translator
@@ -50,14 +44,12 @@ class PricingGroupController extends AdminBaseController {
 	public function __construct(
 		Translator $translator,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		EntityManager $em,
 		PricingGroupFacade $pricingGroupFacade,
 		PricingGroupInlineEdit $pricingGroupInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
 		$this->translator = $translator;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->em = $em;
 		$this->pricingGroupFacade = $pricingGroupFacade;
 		$this->pricingGroupInlineEdit = $pricingGroupInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -87,7 +79,7 @@ class PricingGroupController extends AdminBaseController {
 
 		try {
 			$name = $this->pricingGroupFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $newId) {
 					$this->pricingGroupFacade->delete($id, $newId);
 				}
@@ -179,7 +171,11 @@ class PricingGroupController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
-			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+			$this->transactional(
+				function () use ($pricingGroupSettingsFormData) {
+					$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+				}
+			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));

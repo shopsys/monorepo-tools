@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -18,11 +17,6 @@ use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
@@ -71,7 +65,6 @@ class PaymentController extends AdminBaseController {
 		CurrencyFacade $currencyFacade,
 		PaymentEditFacade $paymentEditFacade,
 		PaymentDetailFactory $paymentDetailFactory,
-		EntityManager $em,
 		PaymentGridFactory $paymentGridFactory,
 		Breadcrumb $breadcrumb
 	) {
@@ -81,7 +74,6 @@ class PaymentController extends AdminBaseController {
 		$this->currencyFacade = $currencyFacade;
 		$this->paymentEditFacade = $paymentEditFacade;
 		$this->paymentDetailFactory = $paymentDetailFactory;
-		$this->em = $em;
 		$this->paymentGridFactory = $paymentGridFactory;
 		$this->breadcrumb = $breadcrumb;
 	}
@@ -97,7 +89,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$payment = $this->em->transactional(
+			$payment = $this->transactional(
 				function () use ($paymentEditData) {
 					return $this->paymentEditFacade->create($paymentEditData);
 				}
@@ -135,7 +127,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($payment, $paymentEditData) {
 					$this->paymentEditFacade->edit($payment, $paymentEditData);
 				}
@@ -170,7 +162,7 @@ class PaymentController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$paymentName = $this->paymentEditFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->paymentEditFacade->deleteById($id);
 				}

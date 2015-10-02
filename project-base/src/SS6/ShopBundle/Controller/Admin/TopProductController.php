@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -10,11 +9,6 @@ use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductInlineEdit;
 
 class TopProductController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade
@@ -27,11 +21,9 @@ class TopProductController extends AdminBaseController {
 	private $topProductInlineEdit;
 
 	public function __construct(
-		EntityManager $em,
 		TopProductFacade $topProductFacade,
 		TopProductInlineEdit $topProductInlineEdit
 	) {
-		$this->em = $em;
 		$this->topProductFacade = $topProductFacade;
 		$this->topProductInlineEdit = $topProductInlineEdit;
 	}
@@ -55,7 +47,7 @@ class TopProductController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$this->topProductFacade->getById($id);
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->topProductFacade->deleteById($id);
 				}

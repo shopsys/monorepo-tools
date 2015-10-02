@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -45,25 +44,18 @@ class BrandController extends AdminBaseController {
 	 */
 	private $gridFactory;
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
 	public function __construct(
 		BrandFacade $brandFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Translator $translator,
-		EntityManager $em
+		Translator $translator
 	) {
 		$this->brandFacade = $brandFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->translator = $translator;
-		$this->em = $em;
 	}
 
 	/**
@@ -82,7 +74,7 @@ class BrandController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $brandData) {
 					$this->brandFacade->edit($id, $brandData);
 				}
@@ -154,7 +146,7 @@ class BrandController extends AdminBaseController {
 		if ($form->isValid()) {
 			$brandData = $form->getData();
 
-			$brand = $this->em->transactional(
+			$brand = $this->transactional(
 				function () use ($brandData) {
 					return $this->brandFacade->create($brandData);
 				}
@@ -185,7 +177,7 @@ class BrandController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->brandFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->brandFacade->deleteById($id);
 				}

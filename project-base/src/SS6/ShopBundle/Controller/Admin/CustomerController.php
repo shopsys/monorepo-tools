@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -46,11 +45,6 @@ class CustomerController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerListAdminFacade
 	 */
 	private $customerListAdminFacade;
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
@@ -101,7 +95,6 @@ class CustomerController extends AdminBaseController {
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		Translator $translator,
 		CustomerListAdminFacade $customerListAdminFacade,
-		EntityManager $em,
 		CustomerEditFacade $customerEditFacade,
 		CustomerFormTypeFactory $customerFormTypeFactory,
 		Breadcrumb $breadcrumb,
@@ -115,7 +108,6 @@ class CustomerController extends AdminBaseController {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
 		$this->customerListAdminFacade = $customerListAdminFacade;
-		$this->em = $em;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->customerFormTypeFactory = $customerFormTypeFactory;
 		$this->breadcrumb = $breadcrumb;
@@ -147,7 +139,7 @@ class CustomerController extends AdminBaseController {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$this->em->transactional(
+				$this->transactional(
 					function () use ($id, $customerData) {
 						$this->customerEditFacade->editByAdmin($id, $customerData);
 					}
@@ -257,7 +249,7 @@ class CustomerController extends AdminBaseController {
 			if ($form->isValid()) {
 				$customerData = $form->getData();
 
-				$user = $this->em->transactional(
+				$user = $this->transactional(
 					function () use ($customerData) {
 						return $this->customerEditFacade->create($customerData);
 					}
@@ -293,7 +285,7 @@ class CustomerController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->customerEditFacade->getUserById($id)->getFullName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->customerEditFacade->delete($id);
 				}

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -26,11 +25,6 @@ use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -96,7 +90,6 @@ class OrderController extends AdminBaseController {
 		GridFactory $gridFactory,
 		OrderFormTypeFactory $orderFormTypeFactory,
 		Breadcrumb $breadcrumb,
-		EntityManager $em,
 		OrderItemFacade $orderItemFacade,
 		TransportEditFacade $transportEditFacade,
 		PaymentEditFacade $paymentEditFacade
@@ -109,7 +102,6 @@ class OrderController extends AdminBaseController {
 		$this->gridFactory = $gridFactory;
 		$this->orderFormTypeFactory = $orderFormTypeFactory;
 		$this->breadcrumb = $breadcrumb;
-		$this->em = $em;
 		$this->orderItemFacade = $orderItemFacade;
 		$this->transportEditFacade = $transportEditFacade;
 		$this->paymentEditFacade = $paymentEditFacade;
@@ -133,7 +125,7 @@ class OrderController extends AdminBaseController {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$order = $this->em->transactional(
+				$order = $this->transactional(
 					function () use ($id, $orderData) {
 						return $this->orderFacade->edit($id, $orderData);
 					}
@@ -185,7 +177,7 @@ class OrderController extends AdminBaseController {
 	public function addProductAction(Request $request, $orderId) {
 		$productId = $request->get('productId');
 
-		$orderItem = $this->em->transactional(
+		$orderItem = $this->transactional(
 			function () use ($orderId, $productId) {
 				return $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
 			}
@@ -286,7 +278,7 @@ class OrderController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$orderNumber = $this->orderFacade->getById($id)->getNumber();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->orderFacade->deleteById($id);
 				}

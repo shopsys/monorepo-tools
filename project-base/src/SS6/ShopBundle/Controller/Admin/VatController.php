@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -17,11 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class VatController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
@@ -55,7 +49,6 @@ class VatController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		VatFacade $vatFacade,
 		PricingSetting $pricingSetting,
 		VatInlineEdit $vatInlineEdit,
@@ -63,7 +56,6 @@ class VatController extends AdminBaseController {
 		PricingSettingFacade $pricingSettingFacade
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->vatFacade = $vatFacade;
 		$this->pricingSetting = $pricingSetting;
 		$this->vatInlineEdit = $vatInlineEdit;
@@ -139,7 +131,7 @@ class VatController extends AdminBaseController {
 		try {
 			$fullName = $this->vatFacade->getById($id)->getName();
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $newId) {
 					$this->vatFacade->deleteById($id, $newId);
 				}
@@ -187,8 +179,12 @@ class VatController extends AdminBaseController {
 
 			if ($form->isValid()) {
 				$vatSettingsFormData = $form->getData();
-				$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
-				$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+				$this->transactional(
+					function () use ($vatSettingsFormData) {
+						$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
+						$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+					}
+				);
 				$this->getFlashMessageSender()->addSuccessFlash('Nastavení DPH bylo upraveno');
 
 				return $this->redirect($this->generateUrl('admin_vat_list'));

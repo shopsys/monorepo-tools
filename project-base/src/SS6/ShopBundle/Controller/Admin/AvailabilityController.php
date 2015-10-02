@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -15,11 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AvailabilityController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
@@ -43,13 +37,11 @@ class AvailabilityController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		AvailabilityFacade $availabilityFacade,
 		AvailabilityInlineEdit $availabilityInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->availabilityFacade = $availabilityFacade;
 		$this->availabilityInlineEdit = $availabilityInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -77,7 +69,7 @@ class AvailabilityController extends AdminBaseController {
 
 		try {
 			$fullName = $this->availabilityFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $newId) {
 					$this->availabilityFacade->deleteById($id, $newId);
 				}
@@ -168,7 +160,11 @@ class AvailabilityController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$availabilitySettingsFormData = $form->getData();
-			$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+			$this->transactional(
+				function () use ($availabilitySettingsFormData) {
+					$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+				}
+			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
 
 			return $this->redirect($this->generateUrl('admin_availability_list'));

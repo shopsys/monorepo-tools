@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -10,11 +9,6 @@ use SS6\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class PromoCodeController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
@@ -27,11 +21,9 @@ class PromoCodeController extends AdminBaseController {
 	private $promoCodeInlineEdit;
 
 	public function __construct(
-		EntityManager $em,
 		PromoCodeFacade $promoCodeFacade,
 		PromoCodeInlineEdit $promoCodeInlineEdit
 	) {
-		$this->em = $em;
 		$this->promoCodeFacade = $promoCodeFacade;
 		$this->promoCodeInlineEdit = $promoCodeInlineEdit;
 	}
@@ -55,7 +47,7 @@ class PromoCodeController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$code = $this->promoCodeFacade->getById($id)->getCode();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->promoCodeFacade->deleteById($id);
 				}

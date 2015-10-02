@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -10,11 +9,6 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
 
 class ParameterController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
@@ -27,11 +21,9 @@ class ParameterController extends AdminBaseController {
 	private $parameterInlineEdit;
 
 	public function __construct(
-		EntityManager $em,
 		ParameterFacade $parameterFacade,
 		ParameterInlineEdit $parameterInlineEdit
 	) {
-		$this->em = $em;
 		$this->parameterFacade = $parameterFacade;
 		$this->parameterInlineEdit = $parameterInlineEdit;
 	}
@@ -55,7 +47,7 @@ class ParameterController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->parameterFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->parameterFacade->deleteById($id);
 				}

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -16,11 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
@@ -49,14 +43,12 @@ class CurrencyController extends AdminBaseController {
 
 	public function __construct(
 		Translator $translator,
-		EntityManager $em,
 		CurrencyFacade $currencyFacade,
 		CurrencyInlineEdit $currencyInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		Domain $domain
 	) {
 		$this->translator = $translator;
-		$this->em = $em;
 		$this->currencyFacade = $currencyFacade;
 		$this->currencyInlineEdit = $currencyInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -102,7 +94,7 @@ class CurrencyController extends AdminBaseController {
 		try {
 			$fullName = $this->currencyFacade->getById($id)->getName();
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->currencyFacade->deleteById($id);
 				}
@@ -148,24 +140,19 @@ class CurrencyController extends AdminBaseController {
 		if ($form->isValid()) {
 			$currencySettingsFormData = $form->getData();
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($currencySettingsFormData) {
 					$this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
-				}
-			);
 
-			foreach ($this->domain->getAll() as $domainConfig) {
-				$domainId = $domainConfig->getId();
-
-				$this->em->transactional(
-					function () use ($currencySettingsFormData, $domainId) {
+					foreach ($this->domain->getAll() as $domainConfig) {
+						$domainId = $domainConfig->getId();
 						$this->currencyFacade->setDomainDefaultCurrency(
 							$currencySettingsFormData['domainDefaultCurrencies'][$domainId],
 							$domainId
 						);
 					}
-				);
-			}
+				}
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení měn bylo upraveno');
 

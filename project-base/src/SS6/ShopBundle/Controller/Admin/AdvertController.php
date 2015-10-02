@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -21,11 +20,6 @@ use SS6\ShopBundle\Model\Grid\QueryBuilderWithRowManipulatorDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Translation\Translator
@@ -75,8 +69,7 @@ class AdvertController extends AdminBaseController {
 		Breadcrumb $breadcrumb,
 		AdvertFormTypeFactory $advertFormTypeFactory,
 		Translator $translator,
-		AdvertPositionList $advertPositionList,
-		EntityManager $em
+		AdvertPositionList $advertPositionList
 	) {
 		$this->advertEditFacade = $advertEditFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -86,7 +79,6 @@ class AdvertController extends AdminBaseController {
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
 		$this->translator = $translator;
 		$this->advertPositionList = $advertPositionList;
-		$this->em = $em;
 	}
 
 	/**
@@ -108,7 +100,7 @@ class AdvertController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id, $advertData) {
 					$this->advertEditFacade->edit($id, $advertData);
 				}
@@ -197,7 +189,7 @@ class AdvertController extends AdminBaseController {
 		if ($form->isValid()) {
 			$advertData = $form->getData();
 
-			$advert = $this->em->transactional(
+			$advert = $this->transactional(
 				function () use ($advertData) {
 					return $this->advertEditFacade->create($advertData);
 				}
@@ -227,7 +219,7 @@ class AdvertController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->advertEditFacade->getById($id)->getName();
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->advertEditFacade->delete($id);
 				}

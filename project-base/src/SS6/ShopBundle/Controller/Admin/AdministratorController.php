@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Admin;
 
-use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -17,11 +16,6 @@ use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends AdminBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -47,14 +41,12 @@ class AdministratorController extends AdminBaseController {
 		AdministratorFacade $administratorFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Translator $translator,
-		EntityManager $em
+		Translator $translator
 	) {
 		$this->administratorFacade = $administratorFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->translator = $translator;
-		$this->em = $em;
 	}
 
 	/**
@@ -104,7 +96,7 @@ class AdministratorController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			try {
-				$this->em->transactional(
+				$this->transactional(
 					function () use ($id, $administratorData) {
 						$this->administratorFacade->edit($id, $administratorData);
 					}
@@ -168,7 +160,7 @@ class AdministratorController extends AdminBaseController {
 			$administratorData = $form->getData();
 
 			try {
-				$administrator = $this->em->transactional(
+				$administrator = $this->transactional(
 					function () use ($administratorData) {
 						return $this->administratorFacade->create($administratorData);
 					}
@@ -216,7 +208,7 @@ class AdministratorController extends AdminBaseController {
 		try {
 			$realName = $this->administratorFacade->getById($id)->getRealName();
 
-			$this->em->transactional(
+			$this->transactional(
 				function () use ($id) {
 					$this->administratorFacade->delete($id);
 				}
