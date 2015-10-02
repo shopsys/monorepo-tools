@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Test;
 
+use SS6\Environment;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -31,11 +32,16 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
 	protected function getClient($createNew = false, $username = null, $password = null) {
+		$kernelOptions = [
+			'environment' => Environment::ENVIRONMENT_TEST,
+			'debug' => Environment::isEnvironmentDebug(Environment::ENVIRONMENT_TEST),
+		];
+
 		if ($createNew) {
-			$this->client = $this->createClient();
+			$this->client = $this->createClient($kernelOptions);
 			$this->setUpDomain();
 		} elseif (!isset($this->client)) {
-			$this->client = $this->createClient();
+			$this->client = $this->createClient($kernelOptions);
 		}
 
 		if ($username !== null) {

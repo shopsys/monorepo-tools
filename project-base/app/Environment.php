@@ -39,6 +39,13 @@ class Environment {
 	}
 
 	/**
+	 * @param string $environment
+	 */
+	public static function isEnvironmentDebug($environment) {
+		return $environment === self::ENVIRONMENT_DEVELOPMENT;
+	}
+
+	/**
 	 * @param \Composer\IO\IOInterface $io
 	 */
 	public static function printEnvironmentInfo(IOInterface $io) {
