@@ -29,13 +29,21 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @param bool $createNew
 	 * @param string $username
 	 * @param string $password
+	 * @param array $kernelOptions
 	 * @return \Symfony\Component\HttpKernel\Client
 	 */
-	protected function getClient($createNew = false, $username = null, $password = null) {
-		$kernelOptions = [
+	protected function getClient(
+		$createNew = false,
+		$username = null,
+		$password = null,
+		$kernelOptions = []
+	) {
+		$defaultKernelOptions = [
 			'environment' => Environment::ENVIRONMENT_TEST,
 			'debug' => Environment::isEnvironmentDebug(Environment::ENVIRONMENT_TEST),
 		];
+
+		$kernelOptions = array_replace($defaultKernelOptions, $kernelOptions);
 
 		if ($createNew) {
 			$this->client = $this->createClient($kernelOptions);
