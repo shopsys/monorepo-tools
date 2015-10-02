@@ -51,9 +51,9 @@ class GridController extends AdminBaseController {
 		$rowId = json_decode($request->get('rowId'));
 
 		try {
-			$this->transactional(
+			$rowId = $this->transactional(
 				function () use ($request, $rowId) {
-					$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+					return $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
 				}
 			);
 			$responseData['success'] = true;
