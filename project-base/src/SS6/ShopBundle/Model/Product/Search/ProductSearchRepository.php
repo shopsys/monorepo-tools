@@ -42,14 +42,14 @@ class ProductSearchRepository {
 		$productQueryBuilder->addSelect('
 			CASE
 				WHEN (
-					pt.name LIKE :searchTextLikeWithWildcardOnLeftAndSpaceAndWildcardOnRight
+					NORMALIZE(pt.name) LIKE NORMALIZE(:searchTextLikeWithWildcardOnLeftAndSpaceAndWildcardOnRight)
 					OR
-					pt.name LIKE :searchTextLikeWithWildcardOnLeft
+					NORMALIZE(pt.name) LIKE NORMALIZE(:searchTextLikeWithWildcardOnLeft)
 				) THEN 1
 				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryAnd) = TRUE THEN 2
 				WHEN TSQUERY(p.catnumTsvector, :searchTextTsqueryOr) = TRUE THEN 3
 				WHEN TSQUERY(p.partnoTsvector, :searchTextTsqueryOr) = TRUE THEN 4
-				WHEN pt.name LIKE :searchTextLikeWithWildcardsOnBothSides THEN 5
+				WHEN NORMALIZE(pt.name) LIKE NORMALIZE(:searchTextLikeWithWildcardsOnBothSides) THEN 5
 				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryAndWithPrefixMatchForLastWord) = TRUE THEN 6
 				WHEN TSQUERY(pd.descriptionTsvector, :searchTextTsqueryAnd) = TRUE THEN 7
 				WHEN TSQUERY(pt.nameTsvector, :searchTextTsqueryOr) = TRUE THEN 8
