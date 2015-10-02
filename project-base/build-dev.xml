@@ -593,7 +593,7 @@
 	<target name="twig-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="twig:lint" />
+			<arg value="lint:twig" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>
@@ -601,7 +601,7 @@
 	<target name="yaml-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="yaml:lint" />
+			<arg value="lint:yaml" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>
