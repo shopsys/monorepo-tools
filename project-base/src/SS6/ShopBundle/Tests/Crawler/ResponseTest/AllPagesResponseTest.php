@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -10,7 +10,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 
 	public function adminTestableUrlsProvider() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 
@@ -49,7 +49,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 
 	public function frontTestableUrlsProvider() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 

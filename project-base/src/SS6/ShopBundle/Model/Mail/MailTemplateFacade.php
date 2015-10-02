@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
@@ -33,7 +33,7 @@ class MailTemplateFacade {
 	private $orderStatusMailTemplateService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain;
+	 * @var \SS6\ShopBundle\Component\Domain\Domain;
 	 */
 	private $domain;
 
@@ -42,7 +42,7 @@ class MailTemplateFacade {
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
-	 * @param \SS6\ShopBundle\Model\Domain\Domain;
+	 * @param \SS6\ShopBundle\Component\Domain\Domain;
 	 */
 	public function __construct(
 		EntityManager $em,

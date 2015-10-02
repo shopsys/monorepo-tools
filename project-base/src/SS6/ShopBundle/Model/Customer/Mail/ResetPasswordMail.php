@@ -3,13 +3,13 @@
 namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTypeInterface;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\MessageFactoryInterface;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface {
 
@@ -17,7 +17,7 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface {
 	const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

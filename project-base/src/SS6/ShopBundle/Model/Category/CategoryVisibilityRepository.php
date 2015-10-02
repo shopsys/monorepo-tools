@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class CategoryVisibilityRepository {
@@ -16,7 +16,7 @@ class CategoryVisibilityRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -52,7 +52,7 @@ class CategoryVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
 	private function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig) {
 		$this->setRootCategoryVisibleOnDomain($domainConfig);
@@ -65,7 +65,7 @@ class CategoryVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
 	private function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig) {
 		$this->em->getConnection()->executeUpdate('UPDATE category_domains AS cd
@@ -83,7 +83,7 @@ class CategoryVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return int
 	 */
 	private function getMaxLevelOnDomain(DomainConfig $domainConfig) {
@@ -98,7 +98,7 @@ class CategoryVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param int $level
 	 */
 	private function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level) {

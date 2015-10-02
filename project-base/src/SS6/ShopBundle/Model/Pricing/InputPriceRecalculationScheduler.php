@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationScheduler {
@@ -14,7 +14,7 @@ class InputPriceRecalculationScheduler {
 	private $inputPriceRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

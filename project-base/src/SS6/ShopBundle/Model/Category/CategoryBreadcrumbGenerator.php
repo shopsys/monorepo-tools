@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Model\Category;
 
 use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
@@ -15,7 +15,7 @@ class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

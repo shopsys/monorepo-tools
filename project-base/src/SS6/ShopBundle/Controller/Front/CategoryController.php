@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
 
 class CategoryController extends FrontBaseController {
 
@@ -14,7 +14,7 @@ class CategoryController extends FrontBaseController {
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

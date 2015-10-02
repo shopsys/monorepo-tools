@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Model\Pricing\Currency\Grid;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Grid\ActionColumn;
-use SS6\ShopBundle\Model\Grid\GridFactory;
-use SS6\ShopBundle\Model\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Model\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Grid\ActionColumn;
+use SS6\ShopBundle\Component\Grid\GridFactory;
+use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
+use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
@@ -18,7 +18,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -29,7 +29,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Grid\GridFactory $gridFactory
+	 * @param \SS6\ShopBundle\Component\Grid\GridFactory $gridFactory
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -42,7 +42,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Grid\Grid
+	 * @return \SS6\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

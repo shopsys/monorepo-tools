@@ -5,11 +5,11 @@ namespace SS6\ShopBundle\Component\Sitemap;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Sitemap\SitemapItem;
 use SS6\ShopBundle\Model\Article\ArticleRepository;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -41,7 +41,7 @@ class SitemapRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
@@ -62,7 +62,7 @@ class SitemapRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
@@ -82,7 +82,7 @@ class SitemapRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {

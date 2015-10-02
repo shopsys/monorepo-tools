@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Flag;
 
+use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Form\Admin\Product\Flag\FlagFormType;
-use SS6\ShopBundle\Model\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Model\Product\Flag\FlagData;
 use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
 use SS6\ShopBundle\Model\Product\Flag\FlagGridFactory;

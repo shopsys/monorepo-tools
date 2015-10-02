@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
@@ -48,7 +48,7 @@ class OrderCreationService {
 	private $transportPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

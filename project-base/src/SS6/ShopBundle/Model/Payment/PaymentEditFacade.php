@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Payment\PaymentDomain;
@@ -40,12 +40,12 @@ class PaymentEditFacade {
 	private $paymentVisibilityCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 

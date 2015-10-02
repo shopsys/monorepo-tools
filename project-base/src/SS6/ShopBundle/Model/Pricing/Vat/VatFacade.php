@@ -3,14 +3,14 @@
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
-use SS6\ShopBundle\Model\Setting\Setting;
-use SS6\ShopBundle\Model\Setting\SettingValue;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class VatFacade {
@@ -31,7 +31,7 @@ class VatFacade {
 	private $vatService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
@@ -59,7 +59,7 @@ class VatFacade {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatService $vatService
-	 * @param \SS6\ShopBundle\Model\Setting\Setting $setting
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditFacade $productEditFacade
 	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $trasnportEditFacade

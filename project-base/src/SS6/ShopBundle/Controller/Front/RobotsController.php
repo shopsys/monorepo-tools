@@ -3,14 +3,14 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Sitemap\SitemapService;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\HttpFoundation\Response;
 
 class RobotsController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

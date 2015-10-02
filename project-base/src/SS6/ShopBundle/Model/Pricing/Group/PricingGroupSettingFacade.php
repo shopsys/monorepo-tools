@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Group;
 
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Setting\Setting;
 
 class PricingGroupSettingFacade {
 

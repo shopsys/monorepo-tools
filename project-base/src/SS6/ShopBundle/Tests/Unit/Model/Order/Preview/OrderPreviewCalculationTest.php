@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
@@ -27,7 +27,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 	 */
 	public function testCalculatePreviewWithTransportAndPayment() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
 		$paymentPrice = new Price(100, 120, 20);
@@ -108,7 +108,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 	 */
 	public function testCalculatePreviewWithoutTransportAndPayment() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
 		$quantifiedItemPrice = new QuantifiedItemPrice(1000, 1200, 200, 2000, 2400, 400, $vat);

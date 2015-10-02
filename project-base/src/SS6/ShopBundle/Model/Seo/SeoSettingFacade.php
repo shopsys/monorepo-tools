@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Seo;
 
-use SS6\ShopBundle\Model\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\Setting;
 
 class SeoSettingFacade {
 
@@ -11,7 +11,7 @@ class SeoSettingFacade {
 	const SEO_META_DESCRIPTION_MAIN_PAGE = 'seoMetaDescriptionMainPage';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

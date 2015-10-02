@@ -84,12 +84,13 @@ services:
   ss6.shop.cart.cart_watcher_facade:
     class: SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:
-      - @ss6.shop.flash_message.sender.front
+      - @ss6.shop.component.flash_message.sender.front
 
-  ss6.shop.component.error.exception_listener:
-    class: SS6\ShopBundle\Component\Error\ExceptionListener
+  ss6.shop.category.category_visibility_repository:
+    class: SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
     tags:
-      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+      # must be ran before ProductVisibilityFacade
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
   ss6.shop.component.controller.controller_resolver:
     class: SS6\ShopBundle\Component\Controller\ControllerResolver
@@ -108,6 +109,98 @@ services:
     class: SS6\ShopBundle\Component\Cron\CronFacade
     arguments:
       - @monolog.logger.cron
+
+  ss6.shop.component.domain:
+    class: SS6\ShopBundle\Component\Domain\Domain
+    factory_service: ss6.shop.component.domain.domain_factory
+    factory_method: create
+    arguments:
+      - %ss6.domain_config_filepath%
+
+  ss6.shop.component.domain.domain_facade:
+    class: SS6\ShopBundle\Component\Domain\DomainFacade
+    arguments:
+      - %ss6.domain_images_dir%
+
+  ss6.shop.component.domain.domain_factory:
+    class: SS6\ShopBundle\Component\Domain\DomainFactory
+
+  ss6.shop.component.domain.domain_listener:
+    class: SS6\ShopBundle\Component\Domain\DomainListener
+    tags:
+      - { name: kernel.event_subscriber }
+
+  ss6.shop.component.error.exception_listener:
+    class: SS6\ShopBundle\Component\Error\ExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+  ss6.shop.component.file_upload:
+    class: SS6\ShopBundle\Component\FileUpload\FileUpload
+    arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
+
+  ss6.shop.component.file_upload.doctrine_listener:
+    class: SS6\ShopBundle\Component\FileUpload\DoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: postPersist }
+      - { name: doctrine.event_listener, event: postUpdate }
+      - { name: doctrine.event_listener, event: prePersist }
+      - { name: doctrine.event_listener, event: preUpdate }
+
+  ss6.shop.component.flash_message.bag.admin:
+    class: SS6\ShopBundle\Component\FlashMessage\Bag
+    arguments: ['admin']
+
+  ss6.shop.component.flash_message.bag.front:
+    class: SS6\ShopBundle\Component\FlashMessage\Bag
+    arguments: ['front']
+
+  ss6.shop.component.flash_message.sender.admin:
+    class: SS6\ShopBundle\Component\FlashMessage\FlashMessageSender
+    arguments:
+      - @ss6.shop.component.flash_message.bag.admin
+
+  ss6.shop.component.flash_message.sender.front:
+    class: SS6\ShopBundle\Component\FlashMessage\FlashMessageSender
+    arguments:
+      - @ss6.shop.component.flash_message.bag.front
+
+  ss6.shop.component.form.multiple_form_setting:
+    class: SS6\ShopBundle\Component\Form\MultipleFormSetting
+
+  ss6.shop.component.image.directory_structure_creator:
+    class: SS6\ShopBundle\Component\Image\DirectoryStructureCreator
+    arguments:
+      - %ss6.image_dir%
+      - %ss6.domain_images_dir%
+
+  ss6.shop.component.image.image_config:
+    class: SS6\ShopBundle\Component\Image\Config\ImageConfig
+    factory_service: ss6.shop.component.image.image_config_loader
+    factory_method: loadFromYaml
+    arguments:
+      - %ss6.image_config_filepath%
+
+  ss6.shop.component.image.image_config_loader:
+    class: SS6\ShopBundle\Component\Image\Config\ImageConfigLoader
+
+  ss6.shop.component.image.image_delete_doctrine_listener:
+    class: SS6\ShopBundle\Component\Image\ImageDeleteDoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: preRemove }
+
+  ss6.shop.component.image.image_facade:
+    class: SS6\ShopBundle\Component\Image\ImageFacade
+    arguments: [%ss6.image_url_prefix%]
+
+  ss6.shop.component.image.image_locator:
+    class: SS6\ShopBundle\Component\Image\ImageLocator
+    arguments: [%ss6.image_dir%]
+
+  ss6.shop.component.image.processing.image_manager:
+    class: Intervention\Image\ImageManager
+    arguments:
+      - [driver: 'gd']
 
   ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
@@ -146,6 +239,11 @@ services:
     tags:
       - { name: presta.sitemap.listener }
 
+  ss6.shop.component.translation.js_file_extractor:
+    class: SS6\ShopBundle\Component\Translation\JsFileExtractor
+    tags:
+      - { name: jms_translation.file_visitor }
+
   ss6.shop.component.translation.php_file_extractor:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractor
     factory_service: ss6.shop.component.translation.php_file_extractor_factory
@@ -155,11 +253,6 @@ services:
 
   ss6.shop.component.translation.php_file_extractor_factory:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory
-
-  ss6.shop.component.translation.js_file_extractor:
-    class: SS6\ShopBundle\Component\Translation\JsFileExtractor
-    tags:
-      - { name: jms_translation.file_visitor }
 
   ss6.shop.component.translation.po_dumper:
     class: SS6\ShopBundle\Component\Translation\PoDumper
@@ -201,32 +294,6 @@ services:
     arguments:
       - %ss6.data_fixtures.resource_customers_filepath%
 
-  ss6.shop.category.category_visibility_repository:
-    class: SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
-    tags:
-      # must be ran before ProductVisibilityFacade
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
-
-  ss6.shop.domain:
-    class: SS6\ShopBundle\Model\Domain\Domain
-    factory_service: ss6.shop.domain.domain_factory
-    factory_method: create
-    arguments:
-      - %ss6.domain_config_filepath%
-
-  ss6.shop.domain.domain_facade:
-    class: SS6\ShopBundle\Model\Domain\DomainFacade
-    arguments:
-      - %ss6.domain_images_dir%
-
-  ss6.shop.domain.domain_factory:
-    class: SS6\ShopBundle\Model\Domain\DomainFactory
-
-  ss6.shop.domain.domain_listener:
-    class: SS6\ShopBundle\Model\Domain\DomainListener
-    tags:
-      - { name: kernel.event_subscriber }
-
   ss6.shop.feed.category.feed_category_download_facade:
     class: SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade
     arguments:
@@ -255,77 +322,16 @@ services:
   ss6.shop.feed.heureka.heureka_delivery_feed_data_source:
     class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource
 
-  ss6.shop.file_upload:
-    class: SS6\ShopBundle\Model\FileUpload\FileUpload
-    arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
-
-  ss6.shop.file_upload.doctrine_listener:
-    class: SS6\ShopBundle\Model\FileUpload\DoctrineListener
+  ss6.shop.http_foundation.response_listener:
+    class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener
     tags:
-      - { name: doctrine.event_listener, event: postPersist }
-      - { name: doctrine.event_listener, event: postUpdate }
-      - { name: doctrine.event_listener, event: prePersist }
-      - { name: doctrine.event_listener, event: preUpdate }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.image.image_delete_doctrine_listener:
-    class: SS6\ShopBundle\Model\Image\ImageDeleteDoctrineListener
+  ss6.shop.http_foundation.sub_request_listener:
+    class: SS6\ShopBundle\Component\HttpFoundation\SubRequestListener
     tags:
-      - { name: doctrine.event_listener, event: preRemove }
-
-  ss6.shop.flash_message.bag.admin:
-    class: SS6\ShopBundle\Model\FlashMessage\Bag
-    arguments: ['admin']
-
-  ss6.shop.flash_message.bag.front:
-    class: SS6\ShopBundle\Model\FlashMessage\Bag
-    arguments: ['front']
-
-  ss6.shop.flash_message.sender.admin:
-    class: SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
-    arguments:
-      - @ss6.shop.flash_message.bag.admin
-
-  ss6.shop.flash_message.sender.front:
-    class: SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
-    arguments:
-      - @ss6.shop.flash_message.bag.front
-
-  ss6.shop.form.multiple_form_setting:
-    class: SS6\ShopBundle\Model\Form\MultipleFormSetting
-
-  ss6.shop.image.directory_structure_creator:
-    class: SS6\ShopBundle\Model\Image\DirectoryStructureCreator
-    arguments:
-      - %ss6.image_dir%
-      - %ss6.domain_images_dir%
-
-  ss6.shop.image.image_config:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfig
-    factory_service: ss6.shop.image.image_config_loader
-    factory_method: loadFromYaml
-    arguments:
-      - %ss6.image_config_filepath%
-
-  ss6.shop.image.image_config_loader:
-    class: SS6\ShopBundle\Model\Image\Config\ImageConfigLoader
-
-  ss6.shop.image.image_facade:
-    class: SS6\ShopBundle\Model\Image\ImageFacade
-    arguments: [%ss6.image_url_prefix%]
-
-  ss6.shop.image.image_locator:
-    class: SS6\ShopBundle\Model\Image\ImageLocator
-    arguments: [%ss6.image_dir%]
-
-  ss6.shop.image.processing.image_manager:
-    class: Intervention\Image\ImageManager
-    arguments:
-      - [driver: 'gd']
-
-  ss6.shop.localization.locale_listener:
-    class: SS6\ShopBundle\Model\Localization\LocalizationListener
-    tags:
-      - { name: kernel.event_subscriber }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
   ss6.shop.localization.custom_date_time_formatter:
     class: SS6\ShopBundle\Component\Localization\DateTimeFormatter
@@ -335,17 +341,17 @@ services:
   ss6.shop.localization.custom_date_time_formatter_factory:
     class: SS6\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
 
+  ss6.shop.localization.locale_listener:
+    class: SS6\ShopBundle\Model\Localization\LocalizationListener
+    tags:
+      - { name: kernel.event_subscriber }
+
+  ss6.shop.localization.number_format_repository:
+    class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
+
   ss6.shop.localization.translation.translation_edit_facade:
     class: SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
-
-  ss6.shop.twig.javascript.javascript_compiler_service:
-    class: SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService
-    arguments:
-      - %ss6.root_dir%
-      - %ss6.web_dir%
-      - %ss6.javascript_sources_dir%
-      - %ss6.javascript_url_prefix%
 
   ss6.shop.mail.mailer_service:
     class: SS6\ShopBundle\Model\Mail\MailerService
@@ -359,7 +365,7 @@ services:
   ss6.shop.order.order_transport_and_payment_watcher_service:
     class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
-      - @ss6.shop.flash_message.bag.front
+      - @ss6.shop.component.flash_message.bag.front
 
   ss6.shop.pricing.input_price_recalculation_scheduler:
     class: SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
@@ -407,20 +413,6 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
-  ss6.shop.http_foundation.response_listener:
-    class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-
-  ss6.shop.http_foundation.sub_request_listener:
-    class: SS6\ShopBundle\Component\HttpFoundation\SubRequestListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-      - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
-
-  ss6.shop.localization.number_format_repository:
-    class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
-
   ss6.shop.security.admin_logout_handler:
     class: SS6\ShopBundle\Model\Security\AdminLogoutHandler
 
@@ -445,6 +437,14 @@ services:
     class: SS6\ShopBundle\Model\Security\LoginListener
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+  ss6.shop.twig.javascript.javascript_compiler_service:
+    class: SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService
+    arguments:
+      - %ss6.root_dir%
+      - %ss6.web_dir%
+      - %ss6.javascript_sources_dir%
+      - %ss6.javascript_url_prefix%
 
   twig.stringloader:
     class: Twig_Loader_String

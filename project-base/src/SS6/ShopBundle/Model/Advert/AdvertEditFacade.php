@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Advert;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Advert\AdvertRepository;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Image\ImageFacade;
 
 class AdvertEditFacade {
 
@@ -20,20 +20,20 @@ class AdvertEditFacade {
 	private $advertRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Advert\AdvertRepository $advertRepository
-	 * @param \SS6\ShopBundle\Model\Image\ImageFacade $imageFacade
-	 * @param \SS6\ShopBundle\Model\Domain\Domain
+	 * @param \SS6\ShopBundle\Component\Image\ImageFacade $imageFacade
+	 * @param \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	public function __construct(
 		EntityManager $em,

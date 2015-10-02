@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Closure;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\DomainFacade;
+use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -44,7 +44,7 @@ class ProductInputPriceFacade {
 	private $productManualInputPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\DomainFacade
+	 * @var \SS6\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private $domainFacade;
 

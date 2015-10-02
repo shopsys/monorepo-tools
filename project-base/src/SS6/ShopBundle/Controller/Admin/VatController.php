@@ -3,11 +3,11 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
-use SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSettingFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 class VatController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 

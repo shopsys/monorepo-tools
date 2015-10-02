@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Article;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use SS6\ShopBundle\Component\Gedmo\SortablePosition;
-use SS6\ShopBundle\Model\Grid\Ordering\OrderableEntityInterface;
+use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * @ORM\Table(name="articles")

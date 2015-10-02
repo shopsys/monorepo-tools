@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 
 class CartWatcherFacade {
@@ -22,7 +22,7 @@ class CartWatcherFacade {
 	private $cartWatcherService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender
+	 * @var \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender
 	 */
 	private $flashMessageSender;
 

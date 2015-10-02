@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Twig\Javascript;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -42,7 +42,7 @@ class JavascriptCompilerService {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

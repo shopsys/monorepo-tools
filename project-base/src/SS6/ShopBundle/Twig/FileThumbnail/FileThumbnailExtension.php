@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Twig\FileThumbnail;
 
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory;
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -19,12 +19,12 @@ class FileThumbnailExtension extends Twig_Extension {
 	private $iconsByExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Processing\ImageThumbnailFactory
+	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageThumbnailFactory
 	 */
 	private $imageThumbnailFactory;
 
@@ -69,7 +69,7 @@ class FileThumbnailExtension extends Twig_Extension {
 	public function getFileThumbnailInfoByTemporaryFilename($temporaryFilename) {
 		try {
 			return $this->getImageThumbnailInfo($temporaryFilename);
-		} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+		} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 			return new FileThumbnailInfo($this->getIconTypeByFilename($temporaryFilename));
 		}
 	}

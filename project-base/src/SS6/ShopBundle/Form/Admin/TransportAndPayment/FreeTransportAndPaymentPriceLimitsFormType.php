@@ -18,7 +18,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 	const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig[]
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domains;
 

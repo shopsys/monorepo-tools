@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\FileUpload\FileUpload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 class FileUploadType extends AbstractType implements DataTransformerInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\FileUpload\FileUpload
+	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
@@ -33,7 +33,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	private $required;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\FileUpload\FileUpload $fileUpload
+	 * @param \SS6\ShopBundle\Component\FileUpload\FileUpload $fileUpload
 	 */
 	public function __construct(FileUpload $fileUpload) {
 		$this->fileUpload = $fileUpload;
@@ -127,7 +127,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 				if ($file instanceof UploadedFile) {
 					try {
 						$data['uploadedFiles'][] = $this->fileUpload->upload($file);
-					} catch (\SS6\ShopBundle\Model\FileUpload\Exception\FileUploadException $ex) {
+					} catch (\SS6\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
 						$event->getForm()->addError('Nahrání souboru se nezdařilo.');
 					}
 				}

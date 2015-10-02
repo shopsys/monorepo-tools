@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 class Controller extends BaseController {
 
 	public function indexAction() {
-		$flashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-		/* @var $flashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+		$flashMessageSender = $this->get('ss6.shop.component.flash_message.sender.admin');
+		/* @var $flashMessageSender \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender */
 		$translator = $this->get('translator');
 		/* @var $translator \Symfony\Component\Translation\TranslatorInterface */
 

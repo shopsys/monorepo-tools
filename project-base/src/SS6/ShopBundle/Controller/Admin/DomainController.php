@@ -5,30 +5,30 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Controller\ErrorService;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\DomainFacade;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
+use SS6\ShopBundle\Component\Grid\ArrayDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\DomainFacade;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\Grid\ArrayDataSource;
-use SS6\ShopBundle\Model\Grid\GridFactory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -38,7 +38,7 @@ class DomainController extends AdminBaseController {
 	private $translator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\DomainFacade
+	 * @var \SS6\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private $domainFacade;
 
@@ -141,16 +141,16 @@ class DomainController extends AdminBaseController {
 					'Byla upravena doména <strong>{{ name }}</strong>', ['name' => $domain->getName()]);
 
 				return new JsonResponse(['result' => 'valid']);
-			} catch (\SS6\ShopBundle\Model\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+			} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
-			} catch (\SS6\ShopBundle\Model\FileUpload\Exception\MoveToFolderFailedException $ex) {
+			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Nahrání souboru selhalo, zkuste to, prosím, znovu.');
 			}
 
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$flashMessageBag = $this->get('ss6.shop.flash_message.bag.admin');
+			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.admin');
 			return new JsonResponse([
 				'result' => 'invalid',
 				'errors' => $this->errorService->getAllErrorsAsArray($form, $flashMessageBag),

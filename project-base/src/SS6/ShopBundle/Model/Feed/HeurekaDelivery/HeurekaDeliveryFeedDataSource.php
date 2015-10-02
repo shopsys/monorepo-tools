@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
 use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryDataIterator;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;

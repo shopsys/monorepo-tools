@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Image\Config\ImageConfig;
-use SS6\ShopBundle\Model\Image\ImageFacade;
-use SS6\ShopBundle\Model\Image\ImageLocator;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\Config\ImageConfig;
+use SS6\ShopBundle\Component\Image\ImageFacade;
+use SS6\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -26,22 +26,22 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageLocator
+	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\Config\ImageConfig
+	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
@@ -83,14 +83,14 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $type
 	 * @return bool
 	 */
 	public function imageExists($imageOrEntity, $type = null) {
 		try {
 			$image = $this->imageFacade->getImageByObject($imageOrEntity, $type);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
 
@@ -98,7 +98,7 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $sizeName
 	 * @param string|null $type
 	 * @return string
@@ -106,7 +106,7 @@ class ImageExtension extends Twig_Extension {
 	public function getImageUrl($imageOrEntity, $sizeName = null, $type = null) {
 		try {
 			return $this->imageFacade->getImageUrl($this->domain->getCurrentDomainConfig(), $imageOrEntity, $sizeName, $type);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			return $this->getEmptyImageUrl();
 		}
 	}
@@ -114,14 +114,14 @@ class ImageExtension extends Twig_Extension {
 	/**
 	 * @param Object $entity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Model\Image\Image[]
+	 * @return \SS6\ShopBundle\Component\Image\Image[]
 	 */
 	public function getImages($entity, $type = null) {
 		return $this->imageFacade->getImagesByEntityIndexedById($entity, $type);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image|Object $imageOrEntity
+	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param array $attributtes
 	 * @return string
 	 */
@@ -135,7 +135,7 @@ class ImageExtension extends Twig_Extension {
 			$image = $this->imageFacade->getImageByObject($imageOrEntity, $attributtes['type']);
 			$entityName = $image->getEntityName();
 			$attributtes['src'] = $this->getImageUrl($image, $attributtes['size'], $attributtes['type']);
-		} catch (\SS6\ShopBundle\Model\Image\Exception\ImageNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			$entityName = 'noimage';
 			$attributtes['src'] = $this->getEmptyImageUrl();
 		}
@@ -157,7 +157,7 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Image\Image $image
+	 * @param \SS6\ShopBundle\Component\Image\Image $image
 	 * @param string|null $sizeName
 	 * @return string
 	 */

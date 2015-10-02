@@ -19,8 +19,8 @@ class DomainHelper extends Module {
 		/* @var $webDriver \Codeception\Module\WebDriver */
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
 		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
-		$domain = $symfonyHelper->grabServiceFromContainer('ss6.shop.domain');
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		$domain = $symfonyHelper->grabServiceFromContainer('ss6.shop.component.domain');
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$domainConfig = $domain->getDomainConfigById(1);
 

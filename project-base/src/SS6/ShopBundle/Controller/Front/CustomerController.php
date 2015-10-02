@@ -3,10 +3,10 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
@@ -21,7 +21,7 @@ class CustomerController extends FrontBaseController {
 	private $customerEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -163,8 +163,8 @@ class CustomerController extends FrontBaseController {
 		try {
 			$this->loginAsUserFacade->loginAsRememberedUser($request);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$adminFlashMessageSender = $this->get('ss6.shop.flash_message.sender.admin');
-			/* @var $adminFlashMessageSender \SS6\ShopBundle\Model\FlashMessage\FlashMessageSender */
+			$adminFlashMessageSender = $this->get('ss6.shop.component.flash_message.sender.admin');
+			/* @var $adminFlashMessageSender \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender */
 			$adminFlashMessageSender->addErrorFlash('Uživatel nebyl nalezen.');
 
 			return $this->redirectToRoute('admin_customer_list');

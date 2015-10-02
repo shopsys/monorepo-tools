@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Sitemap;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory;
 use SS6\ShopBundle\Component\Sitemap\SitemapRepository;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class SitemapFacade {
@@ -21,7 +21,7 @@ class SitemapFacade {
 	private $sitemapsUrlPrefix;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -70,7 +70,7 @@ class SitemapFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig) {
@@ -80,7 +80,7 @@ class SitemapFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
@@ -88,7 +88,7 @@ class SitemapFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {

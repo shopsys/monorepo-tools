@@ -32,8 +32,8 @@ class NewProductTest extends FunctionalTestCase {
 		$client2->submit($form);
 		$em2->rollback();
 
-		$flashMessageBag = $client2->getContainer()->get('ss6.shop.flash_message.bag.admin');
-		/* @var $flashMessageBag \SS6\ShopBundle\Model\FlashMessage\Bag */
+		$flashMessageBag = $client2->getContainer()->get('ss6.shop.component.flash_message.bag.admin');
+		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
 
 		$this->assertNotEmpty($flashMessageBag->getSuccessMessages());
 		$this->assertEmpty($flashMessageBag->getErrorMessages());

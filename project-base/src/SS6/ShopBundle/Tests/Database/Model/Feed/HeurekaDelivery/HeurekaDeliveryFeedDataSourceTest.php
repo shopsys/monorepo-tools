@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Feed\HeurekaDelivery;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -17,7 +17,7 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditFacade = $container->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$domain = $container->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
@@ -48,7 +48,7 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditFacade = $container->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$domain = $container->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
@@ -77,7 +77,7 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditFacade = $container->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$domain = $container->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */

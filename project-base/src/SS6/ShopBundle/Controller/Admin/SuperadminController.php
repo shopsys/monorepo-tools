@@ -4,12 +4,12 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Grid\ArrayDataSource;
+use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Module\ModulesFormType;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
-use SS6\ShopBundle\Model\Grid\ArrayDataSource;
-use SS6\ShopBundle\Model\Grid\GridFactory;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
@@ -36,7 +36,7 @@ class SuperadminController extends AdminBaseController {
 	private $localizedRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Grid\GridFactory
+	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 

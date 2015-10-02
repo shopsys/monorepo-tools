@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Model\ContactForm;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\ContactForm\ContactFormData;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Mail\MailerService;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
@@ -17,7 +17,7 @@ class ContactFormFacade {
 	private $mailSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -33,7 +33,7 @@ class ContactFormFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
-	 * @param \SS6\ShopBundle\Model\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailerService
 	 * @param \Twig_Environment $twig
 	 */

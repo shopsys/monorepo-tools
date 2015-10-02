@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigRepository;
 
@@ -54,7 +54,7 @@ class FeedConfigFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig) {
@@ -63,7 +63,7 @@ class FeedConfigFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {

@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Form;
+namespace SS6\ShopBundle\Tests\Unit\Component\Form;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Setting\Setting;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
 use SS6\ShopBundle\Twig\PriceExtension;

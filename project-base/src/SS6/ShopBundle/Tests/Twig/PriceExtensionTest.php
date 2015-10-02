@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -46,11 +46,11 @@ class PriceExtensionTest extends FunctionalTestCase {
 	 */
 	public function testPriceFilter($input, $domainId, $result) {
 		$translator = $this->getContainer()->get(Translator::class);
-		/* @var $translator \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $translator \SS6\ShopBundle\Component\Domain\Domain */
 		$currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
 		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Model\Domain\Domain */
+		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$localization = $this->getContainer()->get(Localization::class);
 		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
 		$intlCurrencyRepository = $this->getContainer()->get(IntlCurrencyRepository::class);

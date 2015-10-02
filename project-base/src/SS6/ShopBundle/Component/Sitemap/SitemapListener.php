@@ -6,11 +6,11 @@ use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\AbstractGenerator;
 use Presta\SitemapBundle\Service\SitemapListenerInterface;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use SS6\ShopBundle\Component\Sitemap\SitemapFacade;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Domain\Domain;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements SitemapListenerInterface {
@@ -21,7 +21,7 @@ class SitemapListener implements SitemapListenerInterface {
 	private $sitemapFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -72,7 +72,7 @@ class SitemapListener implements SitemapListenerInterface {
 	/**
 	 * @param \SS6\ShopBundle\Component\Sitemap\SitemapItem[] $sitemapItems
 	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $section
 	 */
 	private function addUrlsBySitemapItems(
@@ -90,7 +90,7 @@ class SitemapListener implements SitemapListenerInterface {
 
 	/**
 	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $section
 	 */
 	private function addHomepageUrl(

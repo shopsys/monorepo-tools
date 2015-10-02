@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Domain\Domain;
-use SS6\ShopBundle\Model\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\Image\ImageFacade;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade {
@@ -21,17 +21,17 @@ class SliderItemFacade {
 	private $sliderItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\SelectedDomain
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Image\ImageFacade
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

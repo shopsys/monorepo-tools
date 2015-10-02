@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
 use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
@@ -14,7 +14,7 @@ use SS6\ShopBundle\Model\Product\Product;
 class HeurekaDataIterator extends AbstractDataIterator {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Config\DomainConfig
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private $domainConfig;
 
@@ -35,7 +35,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
 	 */
@@ -108,7 +108,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string|null
 	 */
 	private function getProductCategorytext(Product $product, DomainConfig $domainConfig) {

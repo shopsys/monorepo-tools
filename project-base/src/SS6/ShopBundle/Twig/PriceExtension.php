@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\Twig;
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Domain\Domain;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -30,7 +30,7 @@ class PriceExtension extends Twig_Extension {
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Domain\Domain
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
