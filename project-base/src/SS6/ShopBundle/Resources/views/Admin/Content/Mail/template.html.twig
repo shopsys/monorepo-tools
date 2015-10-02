@@ -22,7 +22,7 @@
 					{% if sendMailText is not null %}
 						{{ form_row(template.sendMail, { label: sendMailText }) }}
 					{% else %}
-						{{ form_widget(template.sendMail, { 'attr': {'class': 'hidden'} }) }}
+						{{ form_widget(template.sendMail, { 'attr': {'class': 'display-none'} }) }}
 					{% endif %}
 
 					<table class="table-main">
