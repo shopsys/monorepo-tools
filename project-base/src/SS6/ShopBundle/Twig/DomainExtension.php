@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Templating\Helper\CoreAssetsHelper;
 use Twig_SimpleFunction;
 
 class DomainExtension extends \Twig_Extension {
@@ -21,12 +21,14 @@ class DomainExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @param string $domainImagesUrlPrefix
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @var \Symfony\Component\Asset\Packages
 	 */
-	public function __construct($domainImagesUrlPrefix, ContainerInterface $container) {
+	private $assetPackages;
+
+	public function __construct($domainImagesUrlPrefix, ContainerInterface $container, Packages $assetPackages) {
 		$this->domainImagesUrlPrefix = $domainImagesUrlPrefix;
 		$this->container = $container;
+		$this->assetPackages = $assetPackages;
 	}
 
 	/**
@@ -59,15 +61,6 @@ class DomainExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * Service "templating.helper.assets" cannot be created in CLI, because service "request" is inactive in CLI
-	 *
-	 * @return \Symfony\Component\Templating\Helper\CoreAssetsHelper
-	 */
-	private function getAssetsHelper() {
-		return $this->container->get(CoreAssetsHelper::class);
-	}
-
-	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -89,7 +82,7 @@ class DomainExtension extends \Twig_Extension {
 	public function getDomainIconHtml($domainId, $size = 'normal') {
 		$domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
 		if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
-			$src = $this->getAssetsHelper()->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
+			$src = $this->assetPackages->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
 
 			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
 				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'

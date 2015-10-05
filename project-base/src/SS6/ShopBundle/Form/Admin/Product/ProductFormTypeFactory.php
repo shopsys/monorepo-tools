@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
@@ -29,11 +28,6 @@ class ProductFormTypeFactory {
 	private $brandRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
-	 */
-	private $inverseArrayValuesTransformer;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
 	 */
 	private $flagFacade;
@@ -52,7 +46,6 @@ class ProductFormTypeFactory {
 		VatRepository $vatRepository,
 		AvailabilityRepository $availabilityRepository,
 		BrandRepository $brandRepository,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		FlagFacade $flagFacade,
 		Translator $translator,
 		Domain $domain
@@ -60,7 +53,6 @@ class ProductFormTypeFactory {
 		$this->vatRepository = $vatRepository;
 		$this->availabilityRepository = $availabilityRepository;
 		$this->brandRepository = $brandRepository;
-		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flagFacade = $flagFacade;
 		$this->translator = $translator;
 		$this->domain = $domain;
@@ -80,7 +72,6 @@ class ProductFormTypeFactory {
 			$vats,
 			$availabilities,
 			$brands,
-			$this->inverseArrayValuesTransformer,
 			$flags,
 			$this->translator,
 			$this->domain->getAll(),

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer;
 use SS6\ShopBundle\Form\CategoriesType;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
@@ -39,11 +38,6 @@ class ProductFormType extends AbstractType {
 	private $brands;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer
-	 */
-	private $inverseArrayValuesTransformer;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flags;
@@ -67,7 +61,6 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
-	 * @param \SS6\ShopBundle\Component\Transformers\InverseArrayValuesTransformer $inverseArrayValuesTransformer
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
@@ -77,7 +70,6 @@ class ProductFormType extends AbstractType {
 		array $vats,
 		array $availabilities,
 		array $brands,
-		InverseArrayValuesTransformer $inverseArrayValuesTransformer,
 		array $flags,
 		TranslatorInterface $translator,
 		array $domainConfigs,
@@ -86,7 +78,6 @@ class ProductFormType extends AbstractType {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->brands = $brands;
-		$this->inverseArrayValuesTransformer = $inverseArrayValuesTransformer;
 		$this->flags = $flags;
 		$this->translator = $translator;
 		$this->domainConfigs = $domainConfigs;

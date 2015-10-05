@@ -4,11 +4,13 @@ namespace SS6\ShopBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
+use Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler;
 
-class RedirectFragmentHandler extends FragmentHandler {
+class RedirectFragmentHandler extends LazyLoadingFragmentHandler {
 
 	/**
+	 * Copy-pasted from Symfony\Component\HttpKernel\Fragment\FragmentHandler::deliver().
+	 *
 	 * {@inheritdoc}
 	 */
 	protected function deliver(Response $response) {

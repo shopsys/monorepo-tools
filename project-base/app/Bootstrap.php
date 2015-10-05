@@ -33,13 +33,13 @@ class Bootstrap {
 	public function run() {
 		$this->configurePhp();
 
-		if ($this->isDebug()) {
+		if (Environment::isEnvironmentDebug($this->environment)) {
 			Debug::enable();
 		} else {
 			ErrorHandler::register();
 		}
 
-		$kernel = new \AppKernel($this->environment, $this->isDebug());
+		$kernel = new \AppKernel($this->environment, Environment::isEnvironmentDebug($this->environment));
 		$kernel->loadClassCache();
 		if ($this->console) {
 			$input = new ArgvInput();
@@ -61,10 +61,6 @@ class Bootstrap {
 	private function configurePhp() {
 		error_reporting(E_ALL);
 		ini_set('display_errors', 0);
-	}
-
-	private function isDebug() {
-		return in_array($this->environment, array(Environment::ENVIRONMENT_DEVELOPMENT));
 	}
 
 	private function initDoctrine() {

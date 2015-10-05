@@ -178,10 +178,14 @@ class AllPagesTest extends FunctionalTestCase {
 		$username,
 		$password
 	) {
+		$kernelOptions = [
+			'debug' => true,
+		];
+
 		if ($asLogged) {
-			$client = $this->getClient(true, $username, $password);
+			$client = $this->getClient(true, $username, $password, $kernelOptions);
 		} else {
-			$client = $this->getClient(true);
+			$client = $this->getClient(true, null, null, $kernelOptions);
 		}
 		$em = $client->getContainer()->get(EntityManager::class);
 		/* @var $em \Doctrine\ORM\EntityManager */

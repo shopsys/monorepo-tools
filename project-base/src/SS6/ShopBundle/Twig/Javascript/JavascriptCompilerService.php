@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Twig\Javascript;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -56,6 +57,11 @@ class JavascriptCompilerService {
 	 */
 	private $javascriptLinks = [];
 
+	/**
+	 * @var \Symfony\Component\Asset\Packages
+	 */
+	private $assetPackages;
+
 	public function __construct(
 		$rootPath,
 		$webPath,
@@ -64,7 +70,8 @@ class JavascriptCompilerService {
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		Domain $domain,
-		JsCompiler $jsCompiler
+		JsCompiler $jsCompiler,
+		Packages $assetPackages
 	) {
 		$this->rootPath = $rootPath;
 		$this->webPath = $webPath;
@@ -74,6 +81,7 @@ class JavascriptCompilerService {
 		$this->filesystem = $filesystem;
 		$this->domain = $domain;
 		$this->jsCompiler = $jsCompiler;
+		$this->assetPackages = $assetPackages;
 	}
 
 	/**
@@ -92,15 +100,6 @@ class JavascriptCompilerService {
 	 */
 	public function getGeneratedLinks() {
 		return $this->javascriptLinks;
-	}
-
-	/**
-	 * Service "templating.helper.assets" cannot be created in CLI, because service "request" is inactive in CLI
-	 *
-	 * @return \Symfony\Component\Templating\Helper\CoreAssetsHelper
-	 */
-	private function getAssetsHelper() {
-		return $this->container->get('templating.helper.assets');
 	}
 
 	/**
@@ -134,7 +133,7 @@ class JavascriptCompilerService {
 			$lastModified = filemtime($sourcePath);
 			$relativeTargetPathWithTimestamp = $this->getPathWithTimestamp($relativeTargetPath, $lastModified);
 			$this->compileJavascriptFile($sourcePath, $relativeTargetPathWithTimestamp);
-			$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($relativeTargetPathWithTimestamp);
+			$this->javascriptLinks[] = $this->assetPackages->getUrl($relativeTargetPathWithTimestamp);
 			return true;
 		}
 
@@ -254,7 +253,7 @@ class JavascriptCompilerService {
 	 * @param string $javascriptUrl
 	 */
 	private function processExternalJavascript($javascriptUrl) {
-		$this->javascriptLinks[] = $this->getAssetsHelper()->getUrl($javascriptUrl);
+		$this->javascriptLinks[] = $this->assetPackages->getUrl($javascriptUrl);
 	}
 
 }

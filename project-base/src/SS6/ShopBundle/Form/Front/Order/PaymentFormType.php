@@ -2,7 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Front\Order;
 
-use SS6\ShopBundle\Form\SingleCheckboxChoiceType;
+use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Model\Payment\Payment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -21,10 +22,10 @@ class PaymentFormType extends AbstractType {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\SingleCheckboxChoiceType
+	 * {@inheritDoc}
 	 */
 	public function getParent() {
-		return new SingleCheckboxChoiceType();
+		return FormType::SINGLE_CHECKBOX_CHOICE;
 	}
 
 	/**
@@ -40,6 +41,7 @@ class PaymentFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
+			'data_class' => Payment::class,
 		]);
 	}
 

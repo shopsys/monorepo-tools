@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Form\Admin\Customer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -97,7 +96,11 @@ class UserFormType extends AbstractType {
 		$builder
 			->add('pricingGroup', FormType::CHOICE, [
 				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], 'domainId', 'id'),
+				'choices' => $this->pricingGroups,
+				'choices_as_values' => true,
+				'choice_label' => 'name',
+				'choice_value' => 'id',
+				'group_by' => 'domainId',
 			]);
 	}
 

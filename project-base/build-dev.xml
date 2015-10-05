@@ -12,7 +12,7 @@
 	<target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" />
 
 	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" />
-	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint,yaml-lint" />
+	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" />
 	<target name="standards-ci" depends="standards,phpstorm-inspect" />
 	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" />
 
@@ -85,6 +85,15 @@
 				<!-- ignore Codeception generated class for running acceptance tests -->
 				<linecontainsregexp>
 					<regexp pattern="^(?!src/SS6/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+				</linecontainsregexp>
+			</filterchain>
+		</property>
+
+		<property name="diff.files.twig" value="${diff.files.all}">
+			<filterchain>
+				<linecontainsregexp>
+					<!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
+					<regexp pattern="\.twig\s*$" />
 				</linecontainsregexp>
 			</filterchain>
 		</property>
@@ -593,15 +602,30 @@
 	<target name="twig-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="twig:lint" />
+			<arg value="lint:twig" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
+	</target>
+
+	<target name="twig-lint-diff" depends="diff-files">
+		<if>
+			<not>
+				<equals arg1="${diff.files.twig}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="lint:twig" />
+					<arg path="${diff.files.twig}"/>
+				</exec>
+			</then>
+		</if>
 	</target>
 
 	<target name="yaml-lint">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="yaml:lint" />
+			<arg value="lint:yaml" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
 	</target>

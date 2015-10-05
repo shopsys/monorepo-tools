@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Model\Localization\Localization;
+use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
@@ -19,23 +20,17 @@ class LocalizationExtension extends \Twig_Extension {
 	private $localization;
 
 	/**
-	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @var \Symfony\Component\Asset\Packages
 	 */
-	public function __construct(ContainerInterface $container) {
+	private $assetPackages;
+
+	public function __construct(ContainerInterface $container, Packages $assetPackages) {
 		$this->container = $container;
+		$this->assetPackages = $assetPackages;
 
 		// Twig extensions are loaded during assetic:dump command,
 		// so they cannot be dependent on Domain service (dependency of Localization)
 		$this->localization = $container->get(Localization::class);
-	}
-
-	/**
-	 * Service "templating.helper.assets" cannot be created in CLI, because service "request" is inactive in CLI
-	 *
-	 * @return \Symfony\Component\Templating\Helper\CoreAssetsHelper
-	 */
-	private function getAssetsHelper() {
-		return $this->container->get('templating.helper.assets');
 	}
 
 	/**
@@ -52,7 +47,7 @@ class LocalizationExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getLocaleFlagHtml($locale, $showTitle = true) {
-		$src = $this->getAssetsHelper()->getUrl('assets/admin/images/flags/' . $locale . '.png');
+		$src = $this->assetPackages->getUrl('assets/admin/images/flags/' . $locale . '.png');
 
 		if ($showTitle) {
 			$title = $this->getTitle($locale);
