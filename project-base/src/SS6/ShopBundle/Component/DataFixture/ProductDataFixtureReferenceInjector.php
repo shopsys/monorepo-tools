@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
@@ -16,6 +17,7 @@ class ProductDataFixtureReferenceInjector {
 	/**
 	 * @param \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
 	 * @param \Doctrine\Common\DataFixtures\ReferenceRepository $referenceRepository
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function loadReferences(
 		ProductDataFixtureLoader $productDataFixtureLoader,
@@ -73,7 +75,18 @@ class ProductDataFixtureReferenceInjector {
 			'philips' => $referenceRepository->getReference(BrandDataFixture::PHILIPS),
 		];
 
-		$productDataFixtureLoader->injectReferences($vats, $availabilities, $categories, $flags, $brands);
+		$units = [
+			'pcs' => $referenceRepository->getReference(UnitDataFixture::PCS),
+		];
+
+		$productDataFixtureLoader->injectReferences(
+			$vats,
+			$availabilities,
+			$categories,
+			$flags,
+			$brands,
+			$units
+		);
 	}
 
 	/**

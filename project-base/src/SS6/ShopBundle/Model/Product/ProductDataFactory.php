@@ -65,6 +65,7 @@ class ProductDataFactory {
 		$productData->flags = $product->getFlags()->toArray();
 		$productData->usingStock = $product->isUsingStock();
 		$productData->stockQuantity = $product->getStockQuantity();
+		$productData->unit = $product->getUnit();
 		$productData->availability = $product->getAvailability();
 		$productData->outOfStockAvailability = $product->getOutOfStockAvailability();
 		$productData->outOfStockAction = $product->getOutOfStockAction();

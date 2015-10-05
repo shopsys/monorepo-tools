@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
+use SS6\ShopBundle\Model\Product\Unit\Unit;
 
 /**
  * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")
@@ -77,6 +78,11 @@ class ProductData {
 	public $stockQuantity;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit|null
+	 */
+	public $unit;
+
+	/**
 	 * @var string
 	 */
 	public $outOfStockAction;
@@ -130,6 +136,7 @@ class ProductData {
 	 * @param array $flags
 	 * @param bool $usingStock
 	 * @param string|null $stockQuantity
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit|null $unit
 	 * @param string $outOfStockAction
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $availability
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
@@ -152,6 +159,7 @@ class ProductData {
 		array $flags = [],
 		$usingStock = false,
 		$stockQuantity = null,
+		Unit $unit = null,
 		$outOfStockAction = null,
 		Availability $availability = null,
 		Availability $outOfStockAvailability = null,
@@ -173,6 +181,7 @@ class ProductData {
 		$this->flags = $flags;
 		$this->usingStock = $usingStock;
 		$this->stockQuantity = $stockQuantity;
+		$this->unit = $unit;
 		$this->outOfStockAction = $outOfStockAction;
 		$this->availability = $availability;
 		$this->outOfStockAvailability = $outOfStockAvailability;

@@ -28,14 +28,15 @@ class ProductDataFixtureLoader {
 	const COLUMN_SELLING_FROM = 9;
 	const COLUMN_SELLING_TO = 10;
 	const COLUMN_STOCK_QUANTITY = 11;
-	const COLUMN_AVAILABILITY = 12;
-	const COLUMN_PARAMETERS = 13;
-	const COLUMN_CATEGORIES_1 = 14;
-	const COLUMN_CATEGORIES_2 = 15;
-	const COLUMN_FLAGS = 16;
-	const COLUMN_SELLING_DENIED = 17;
-	const COLUMN_BRAND = 18;
-	const COLUMN_MAIN_VARIANT_CATNUM = 19;
+	const COLUMN_UNIT = 12;
+	const COLUMN_AVAILABILITY = 13;
+	const COLUMN_PARAMETERS = 14;
+	const COLUMN_CATEGORIES_1 = 15;
+	const COLUMN_CATEGORIES_2 = 16;
+	const COLUMN_FLAGS = 17;
+	const COLUMN_SELLING_DENIED = 18;
+	const COLUMN_BRAND = 19;
+	const COLUMN_MAIN_VARIANT_CATNUM = 20;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
@@ -83,6 +84,11 @@ class ProductDataFixtureLoader {
 	private $brands;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 */
+	private $units;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
@@ -99,14 +105,23 @@ class ProductDataFixtureLoader {
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
 	 */
-	public function injectReferences(array $vats, array $availabilities, array $categories, array $flags, array $brands) {
+	public function injectReferences(
+		array $vats,
+		array $availabilities,
+		array $categories,
+		array $flags,
+		array $brands,
+		array $units
+	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
 		$this->categories = $categories;
 		$this->flags = $flags;
 		$this->brands = $brands;
 		$this->parameters = [];
+		$this->units = $units;
 	}
 
 	/**
@@ -186,6 +201,7 @@ class ProductDataFixtureLoader {
 		}
 		$productEditData->productData->usingStock = $row[self::COLUMN_STOCK_QUANTITY] !== null;
 		$productEditData->productData->stockQuantity = $row[self::COLUMN_STOCK_QUANTITY];
+		$productEditData->productData->unit = $this->units[$row[self::COLUMN_UNIT]];
 		$productEditData->productData->outOfStockAction = Product::OUT_OF_STOCK_ACTION_HIDE;
 		switch ($row[self::COLUMN_AVAILABILITY]) {
 			case 'in-stock':

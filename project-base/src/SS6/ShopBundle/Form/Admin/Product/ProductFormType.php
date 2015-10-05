@@ -43,6 +43,11 @@ class ProductFormType extends AbstractType {
 	private $flags;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 */
+	private $units;
+
+	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $translator;
@@ -62,6 +67,7 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
 	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
@@ -71,6 +77,7 @@ class ProductFormType extends AbstractType {
 		array $availabilities,
 		array $brands,
 		array $flags,
+		array $units,
 		TranslatorInterface $translator,
 		array $domainConfigs,
 		Product $product = null
@@ -79,6 +86,7 @@ class ProductFormType extends AbstractType {
 		$this->availabilities = $availabilities;
 		$this->brands = $brands;
 		$this->flags = $flags;
+		$this->units = $units;
 		$this->translator = $translator;
 		$this->domainConfigs = $domainConfigs;
 		$this->product = $product;
@@ -141,6 +149,16 @@ class ProductFormType extends AbstractType {
 					new Constraints\NotBlank([
 						'message' => 'Prosím zadejte počet kusů skladem',
 						'groups' => self::VALIDATION_GROUP_USING_STOCK,
+					]),
+				],
+			])
+			->add('unit', FormType::CHOICE, [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
+				'placeholder' => $this->translator->trans('-- Vyberte jednotku --'),
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte jednotku',
 					]),
 				],
 			])

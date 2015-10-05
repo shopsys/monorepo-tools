@@ -158,6 +158,14 @@ class Product extends AbstractTranslatableEntity {
 	private $stockQuantity;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit
+	 *
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Unit\Unit")
+	 * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=false)
+	 */
+	private $unit;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", nullable=true)
@@ -291,6 +299,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->hidden = $productData->hidden;
 		$this->usingStock = $productData->usingStock;
 		$this->stockQuantity = $productData->stockQuantity;
+		$this->unit = $productData->unit;
 		$this->outOfStockAction = $productData->outOfStockAction;
 		$this->availability = $productData->availability;
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
@@ -327,6 +336,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->hidden = $productData->hidden;
 		$this->flags = $productData->flags;
 		$this->brand = $productData->brand;
+		$this->unit = $productData->unit;
 		$this->setTranslations($productData);
 
 		if (!$this->isVariant()) {
@@ -489,6 +499,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getStockQuantity() {
 		return $this->stockQuantity;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 */
+	public function getUnit() {
+		return $this->unit;
 	}
 
 	/**
