@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Crawler;
 
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
@@ -55,6 +56,7 @@ class NewProductTest extends FunctionalTestCase {
 		$form['product_edit_form[productData][sellingFrom]'] = '1.1.1990';
 		$form['product_edit_form[productData][sellingTo]'] = '1.1.2000';
 		$form['product_edit_form[productData][stockQuantity]'] = '10';
+		$form['product_edit_form[productData][unit]']->select($this->getReference(UnitDataFixture::M3)->getId());
 		$form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::IN_STOCK)->getId());
 		$form['product_edit_form[_token]'] = $csrfToken;
 	}

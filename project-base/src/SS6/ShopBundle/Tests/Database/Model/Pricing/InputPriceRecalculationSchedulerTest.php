@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
@@ -89,6 +90,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$productEditData->productData->price = $inputPriceWithVat;
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->availability = $availability;
+		$productEditData->productData->unit = $this->getReference(UnitDataFixture::PCS);
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 
@@ -163,6 +165,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$productEditData->productData->price = $inputPriceWithoutVat;
 		$productEditData->productData->vat = $vat;
 		$productEditData->productData->availability = $availability;
+		$productEditData->productData->unit = $this->getReference(UnitDataFixture::PCS);
 		$product = $productEditFacade->create($productEditData);
 		/* @var $product \SS6\ShopBundle\Model\Product\Product */
 

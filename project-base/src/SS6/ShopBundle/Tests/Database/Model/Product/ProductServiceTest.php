@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Database\Model\Product;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -32,6 +33,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$productData = new ProductData();
 		$productData->price = 1000;
 		$productData->vat = $vat;
+		$productData->unit = $this->getReference(UnitDataFixture::PCS);
 		$product = new Product($productData);
 
 		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
@@ -58,6 +60,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$productData = new ProductData();
 		$productData->price = 1000;
 		$productData->vat = $vat;
+		$productData->unit = $this->getReference(UnitDataFixture::PCS);
 		$product = new Product($productData);
 
 		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
