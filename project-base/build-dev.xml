@@ -95,6 +95,10 @@
 					<!-- linecontainsregexp splits lines using \n, so string can end with whitespace -->
 					<regexp pattern="\.twig\s*$" />
 				</linecontainsregexp>
+
+				<replaceregexp>
+					<regexp pattern="[\r\n]+" replace=" " />
+				</replaceregexp>
 			</filterchain>
 		</property>
 	</target>
@@ -616,7 +620,7 @@
 				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
 					<arg value="lint:twig" />
-					<arg path="${diff.files.twig}"/>
+					<arg line="${diff.files.twig}"/>
 				</exec>
 			</then>
 		</if>
