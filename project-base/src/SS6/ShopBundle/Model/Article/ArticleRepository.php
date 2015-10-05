@@ -56,6 +56,16 @@ class ArticleRepository {
 	}
 
 	/**
+	 * @param $domainId
+	 * @return int
+	 */
+	public function getAllArticlesCountByDomainId($domainId) {
+		return (int)($this->getArticlesByDomainIdQueryBuilder($domainId)
+			->select('COUNT(a)')
+			->getQuery()->getSingleScalarResult());
+	}
+
+	/**
 	 * @param int $domainId
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]

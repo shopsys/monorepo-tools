@@ -56,6 +56,14 @@ class ArticleEditFacade {
 	}
 
 	/**
+	 * @param $domainId
+	 * @return int
+	 */
+	public function getAllArticlesCountByDomainId($domainId) {
+		return $this->articleRepository->getAllArticlesCountByDomainId($domainId);
+	}
+
+	/**
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
