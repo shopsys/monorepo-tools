@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Pricing\InputPriceRecalculator;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -17,10 +16,8 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
-use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -72,16 +69,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$paymentRepository = $this->getContainer()->get(PaymentRepository::class);
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$transportRepository = $this->getContainer()->get(TransportRepository::class);
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);
 
@@ -127,13 +118,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithoutVat();
 		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
 
-		$product2 = $productRepository->getById($product->getId());
-		$payment2 = $paymentRepository->getById($payment->getId());
-		$transport2 = $transportRepository->getById($transport->getId());
+		$em->refresh($product);
+		$em->refresh($payment);
+		$em->refresh($transport);
 
-		$this->assertSame(round($inputPriceWithoutVat, 6), round($product2->getPrice(), 6));
-		$this->assertSame(round($inputPriceWithoutVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
-		$this->assertSame(round($inputPriceWithoutVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($product->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($payment->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithoutVat, 6), round($transport->getPrice($currency1)->getPrice(), 6));
 	}
 
 	/**
@@ -152,16 +143,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
-		$paymentRepository = $this->getContainer()->get(PaymentRepository::class);
-		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
-		$transportRepository = $this->getContainer()->get(TransportRepository::class);
-		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
 
@@ -207,13 +192,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$inputPriceRecalculationScheduler->scheduleSetInputPricesWithVat();
 		$inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
 
-		$product2 = $productRepository->getById($product->getId());
-		$payment2 = $paymentRepository->getById($payment->getId());
-		$transport2 = $transportRepository->getById($transport->getId());
+		$em->refresh($product);
+		$em->refresh($payment);
+		$em->refresh($transport);
 
-		$this->assertSame(round($inputPriceWithVat, 6), round($product2->getPrice(), 6));
-		$this->assertSame(round($inputPriceWithVat, 6), round($payment2->getPrice($currency1)->getPrice(), 6));
-		$this->assertSame(round($inputPriceWithVat, 6), round($transport2->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($product->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($payment->getPrice($currency1)->getPrice(), 6));
+		$this->assertSame(round($inputPriceWithVat, 6), round($transport->getPrice($currency1)->getPrice(), 6));
 	}
 
 }
