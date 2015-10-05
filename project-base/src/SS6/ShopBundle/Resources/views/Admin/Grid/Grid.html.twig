@@ -17,7 +17,7 @@
 		{{ gridView.renderBlock('grid_inline_edit_add_button') }}
 	{% endif %}
 
-	{% if grid.rows is not empty or grid.inlineEdit %}
+	{% if grid.rows is not empty or grid.inlineEdit or grid.multipleDragAndDrop %}
 		<div class="js-inline-edit-data-container{% if grid.rows is empty and grid.inlineEdit %} hidden{% endif %}">
 			<div class="">
 			{% if grid.enabledPaging %}
@@ -39,9 +39,7 @@
 				{% endif %}
 			</div>
 		</div>
-	{% endif %}
-
-	{% if grid.rows is empty %}
+	{% else %}
 		<div class="in-message in-message--info js-inline-edit-no-data">
 			{{ gridView.renderBlock('grid_no_data') }}
 		</div>
@@ -109,6 +107,13 @@
 
 {% block grid_rows %}
 	<tbody class="js-inline-edit-rows {% if grid.dragAndDrop %}js-drag-and-drop-grid-rows{% endif %}">
+		{% if grid.multipleDragAndDrop %}
+			<tr class="table-grid__row js-grid-row-holder display-none">
+				<td colspan="100" class="table-grid__cell">
+					{{ gridView.renderBlock('grid_multiple_drag_and_drop_row_holder') }}
+				</td>
+			</tr>
+		{% endif %}
 		{% for row in grid.rows %}
 			{{ gridView.renderBlock(
 				'grid_row',
@@ -120,6 +125,10 @@
 			) }}
 		{% endfor %}
 	</tbody>
+{% endblock %}
+
+{% block grid_multiple_drag_and_drop_row_holder %}
+	{{ 'Zde můžete přetáhnout další obsah.'|trans }}
 {% endblock %}
 
 {% block grid_row %}

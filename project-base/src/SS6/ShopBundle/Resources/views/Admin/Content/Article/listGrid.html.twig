@@ -4,8 +4,8 @@
 	<a href="{{ url('admin_article_edit', { id: row.a.id }) }}">{{ value }}</a>
 {% endblock %}
 
-{% block grid_no_data %}
-	{{ 'V tomto umístění nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit.'|trans }}
+{% block grid_multiple_drag_and_drop_row_holder %}
+	{{ 'Zde můžete přetáhnout články'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
