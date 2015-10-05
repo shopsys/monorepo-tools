@@ -1,14 +1,14 @@
 <table>
 	<tr>
 		<th>{% trans into orderLocale %}Název{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Počet kusů{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Cena za kus s DPH{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Množství{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Cena za jednotku s DPH{% endtrans %}</th>
 		<th>{% trans into orderLocale %}Celková cena za položku s DPH{% endtrans %}</th>
 	</tr>
 	{% for item in order.items %}
 		<tr>
 			<td style="font-weight: bold;">{{ item.name }}</td>
-			<td style="text-align: right;">{{ item.quantity|formatNumber }}</td>
+			<td style="text-align: right;">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
 			<td style="text-align: right;">{{ item.priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
 			<td style="text-align: right;">{{ orderItemTotalPricesById[item.id].priceWithVat|priceTextWithCurrencyByCurrencyIdAndLocale(order.currency.id, orderLocale) }}</td>
 		</tr>

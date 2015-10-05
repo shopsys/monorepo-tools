@@ -22,7 +22,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->subtractOrderProductsFromStock([$orderProduct]);
@@ -41,7 +41,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->subtractOrderProductsFromStock([$orderProduct]);
@@ -60,7 +60,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->returnOrderProductsToStock([$orderProduct]);
@@ -79,7 +79,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->returnOrderProductsToStock([$orderProduct]);

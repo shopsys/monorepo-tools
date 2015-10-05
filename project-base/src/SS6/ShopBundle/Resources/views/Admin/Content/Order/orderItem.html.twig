@@ -16,6 +16,7 @@
 		<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
 		<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 		<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right'}}) }}</td>
 		<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 		<td class="text-right text-middle">
 			{% if orderItemTotalPricesById[orderItemId] is defined %}
@@ -43,6 +44,7 @@
 		<td class="text-right">-</td>
 		<td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 		<td class="text-right">1</td>
+		<td class="text-right"></td>
 		<td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 		<td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
 		<td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
@@ -60,6 +62,7 @@
 		<td class="text-right">-</td>
 		<td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
 		<td class="text-right">1</td>
+		<td class="text-right"></td>
 		<td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
 		<td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
 		<td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>

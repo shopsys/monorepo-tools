@@ -22,7 +22,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->quantity = 2;
 		$orderItemData->vatPercent = 10;
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, $productMock);
+		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, null, $productMock);
 		$orderProduct->edit($orderItemData);
 
 		$this->assertSame('newName', $orderProduct->getName());
@@ -62,7 +62,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException::class);
 
-		new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, 'catnum', $mainVariant);
+		new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, 'catnum', $mainVariant);
 	}
 
 }

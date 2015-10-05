@@ -1,7 +1,7 @@
 <span class="box-cart-adding">
 	{{ form_start(form, {attr: {class: 'js-add-product', 'data-ajax-url': url('front_cart_add_product_ajax'), 'multipleForm': true}}) }}
 		<span class="box-cart-adding__input">
-			{{ form_widget(form.quantity, {attr: {class: 'text-center'}}) }} Ks
+			{{ form_widget(form.quantity, {attr: {class: 'text-center'}}) }} {{ product.unit.name }}
 		</span>
 		{{ form_widget(form.add, {label: 'Vložit do košíku'|trans, attr: {class: 'button--cart'}}) }}
 	{{ form_end(form) }}

@@ -22,9 +22,9 @@
 					<tr>
 						<th class="table-col-10">{{ 'Obrázek'|trans }}</th>
 						<th class="table-col-35">{{ 'Název'|trans }}</th>
-						<th class="table-col-15">{{ 'Cena za kus s DPH'|trans }}</th>
+						<th class="table-col-15">{{ 'Cena za jednotku s DPH'|trans }}</th>
 						<th class="table-col-10">{{ 'Sazba DPH'|trans }}</th>
-						<th class="table-col-15 text-center">{{ 'Počet kusů'|trans }}</th>
+						<th class="table-col-15 text-center">{{ 'Množství'|trans }}</th>
 						<th class="table-col-10 text-center">{{ 'Cena s DPH'|trans }}</th>
 						<th class="table-col-5 text-right">&nbsp;</th>
 					</tr>
@@ -64,6 +64,7 @@
 									<input type="button" class="button form-input-spinbox__button js-spinbox-minus" value="-" />
 									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
 									<input type="button" class="button form-input-spinbox__button js-spinbox-plus" value="+" />
+									{{ cartItem.product.unit.name }}
 								</span>
 							</td>
 

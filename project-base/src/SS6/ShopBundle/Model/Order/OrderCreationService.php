@@ -208,6 +208,7 @@ class OrderCreationService {
 				$quantifiedItemPrice->getUnitPriceWithVat(),
 				$product->getVat()->getPercent(),
 				$quantifiedProduct->getQuantity(),
+				$product->getUnit()->getName($locale),
 				$product->getCatnum(),
 				$product
 			);
@@ -233,6 +234,7 @@ class OrderCreationService {
 				0,
 				1,
 				null,
+				null,
 				null
 			);
 		}
@@ -251,6 +253,7 @@ class OrderCreationService {
 			-$discount->getPriceWithVat(),
 			$orderItem->getVatPercent(),
 			1,
+			null,
 			null,
 			null
 		);

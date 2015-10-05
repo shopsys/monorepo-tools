@@ -84,6 +84,7 @@ class OrderService {
 					$orderItemData->priceWithVat,
 					$orderItemData->vatPercent,
 					$orderItemData->quantity,
+					$orderItemData->unitName,
 					$orderItemData->catnum
 				);
 				$orderItemsToCreate[] = $orderItem;
@@ -111,6 +112,7 @@ class OrderService {
 			$productPrice->getPriceWithVat(),
 			$product->getVat()->getPercent(),
 			self::DEFAULT_QUANTITY,
+			$product->getUnit()->getName($orderDomainConfig->getLocale()),
 			$product->getCatnum(),
 			$product
 		);

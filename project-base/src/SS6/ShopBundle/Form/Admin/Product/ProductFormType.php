@@ -147,7 +147,7 @@ class ProductFormType extends AbstractType {
 				'invalid_message' => 'Prosím zadejte číslo',
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím zadejte počet kusů skladem',
+						'message' => 'Prosím zadejte množství skladem',
 						'groups' => self::VALIDATION_GROUP_USING_STOCK,
 					]),
 				],

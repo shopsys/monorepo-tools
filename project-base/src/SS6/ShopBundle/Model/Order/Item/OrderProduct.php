@@ -27,6 +27,7 @@ class OrderProduct extends OrderItem {
 	 * @param string $priceWithVat
 	 * @param string $vatPercent
 	 * @param int $quantity
+	 * @param string $unitName
 	 * @param string|null $catnum
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
@@ -37,6 +38,7 @@ class OrderProduct extends OrderItem {
 		$priceWithVat,
 		$vatPercent,
 		$quantity,
+		$unitName,
 		$catnum,
 		Product $product = null
 	) {
@@ -47,6 +49,7 @@ class OrderProduct extends OrderItem {
 			$priceWithVat,
 			$vatPercent,
 			$quantity,
+			$unitName,
 			$catnum
 		);
 
