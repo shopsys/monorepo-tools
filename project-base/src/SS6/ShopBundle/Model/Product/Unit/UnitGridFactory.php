@@ -65,10 +65,10 @@ class UnitGridFactory implements GridFactoryInterface {
 		$grid->addActionColumn(
 				'delete',
 				$this->translator->trans('Smazat'),
-				'admin_unit_delete',
+				'admin_unit_deleteconfirm',
 				['id' => 'u.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto jednotku?'));
+			->setAjaxConfirm();
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Unit/listGrid.html.twig');
 

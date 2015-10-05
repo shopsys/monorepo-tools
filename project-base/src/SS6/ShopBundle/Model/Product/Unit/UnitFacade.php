@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\Unit\Unit;
 use SS6\ShopBundle\Model\Product\Unit\UnitData;
 use SS6\ShopBundle\Model\Product\Unit\UnitRepository;
 use SS6\ShopBundle\Model\Product\Unit\UnitService;
@@ -25,18 +27,26 @@ class UnitFacade {
 	private $unitService;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitService $unitService
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditFacade $productEditFacade
 	 */
 	public function __construct(
 		EntityManager $em,
 		UnitRepository $unitRepository,
-		UnitService $unitService
+		UnitService $unitService,
+		ProductEditFacade $productEditFacade
 	) {
 		$this->em = $em;
 		$this->unitRepository = $unitRepository;
 		$this->unitService = $unitService;
+		$this->productEditFacade = $productEditFacade;
 	}
 
 	/**
@@ -74,11 +84,17 @@ class UnitFacade {
 
 	/**
 	 * @param int $unitId
+	 * @param int|null $newUnitId
 	 */
-	public function deleteById($unitId) {
-		$unit = $this->unitRepository->getById($unitId);
+	public function deleteById($unitId, $newUnitId = null) {
+		$oldUnit = $this->unitRepository->getById($unitId);
 
-		$this->em->remove($unit);
+		if ($newUnitId !== null) {
+			$newUnit = $this->unitRepository->getById($newUnitId);
+			$this->productEditFacade->replaceOldUnitWithNewUnit($oldUnit, $newUnit);
+		}
+
+		$this->em->remove($oldUnit);
 		$this->em->flush();
 	}
 
@@ -87,6 +103,28 @@ class UnitFacade {
 	 */
 	public function getAll() {
 		return $this->unitRepository->getAll();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 */
+	public function isUnitUsed(Unit $unit) {
+		return $this->unitRepository->existsProductWithUnit($unit);
+	}
+
+	/**
+	 * @param int $unitId
+	 * @return string[unitId]
+	 */
+	public function getUnitNamesByIdExceptId($unitId) {
+		$namesById = [];
+
+		$unitsExceptId = $this->unitRepository->getAllExceptId($unitId);
+		foreach ($unitsExceptId as $unit) {
+			$namesById[$unit->getId()] = $unit->getName();
+		}
+
+		return $namesById;
 	}
 
 }

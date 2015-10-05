@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\ProductCategoryDomain;
+use SS6\ShopBundle\Model\Product\Unit\Unit;
 
 /**
  * Product
@@ -759,6 +760,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function subtractStockQuantity($quantity) {
 		$this->stockQuantity -= $quantity;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 */
+	public function setUnit(Unit $unit) {
+		$this->unit = $unit;
 	}
 
 	/**
