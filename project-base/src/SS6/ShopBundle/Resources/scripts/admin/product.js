@@ -17,6 +17,8 @@
 
 		SS6.product.toggleIsUsingStock(usingStockSelection.filter(':checked').val() === '1');
 		SS6.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
+
+		SS6.product.initializeSideNavigation();
 	};
 
 	SS6.product.toggleIsUsingStock = function (isUsingStock) {
@@ -26,6 +28,16 @@
 
 	SS6.product.toggleIsUsingAlternateAvailability = function (isUsingStockAndAlternateAvailability) {
 		$('.js-product-using-stock-and-alternate-availability').toggle(isUsingStockAndAlternateAvailability);
+	};
+
+	SS6.product.initializeSideNavigation = function () {
+		var $productDetailNavigation = $('.js-product-detail-navigation');
+		$('.form-group__title, .form-full__title').each(function () {
+			var $titleClone = $(this).clone();
+			$titleClone.find('.js-validation-errors-list').remove();
+			var $navigationItemLi = '<li class="side-menu__item">' + $titleClone.text() + '</li>';
+			$productDetailNavigation.append($navigationItemLi);
+		});
 	};
 
 	$(document).ready(function () {
