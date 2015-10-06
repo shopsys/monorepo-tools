@@ -14,7 +14,9 @@
 	</header>
 {% endblock %}
 
-{% block menu_panel %}{% endblock %}
+{% block menu_panel %}
+	{% block menu_panel_visibilities %}{% endblock %}
+{% endblock %}
 
 {% block breadcrumb %}{% endblock %}
 
@@ -65,7 +67,6 @@
 			{% endblock %}
 
 			{{ form_id(product|default(null)) }}
-			{% block product_url %}{% endblock %}
 
 			{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
 

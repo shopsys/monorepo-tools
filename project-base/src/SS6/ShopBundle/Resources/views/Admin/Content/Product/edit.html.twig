@@ -8,6 +8,35 @@
 	{{ 'Editace zboží: '|trans ~ product.name }}
 {% endblock %}
 
+{% block menu_panel_visibilities %}
+	<div class="form-full__title__in">
+		{{ 'Viditelnost'|trans }}
+	</div>
+	{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
+		<div class="form-line">
+			{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
+			{% set isVisibile = isVisibileForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
+
+			{{ domainIcon(productDomain.domainId) }}
+
+			{% if isVisibile %}
+				<a href="{{ url }}" target="_blank">
+					{{ getDomainName(productDomain.domainId) }}
+					<i class="svg svg-forward-page"></i>
+				</a>
+			{% else %}
+				{{ getDomainName(productDomain.domainId) }}
+			{% endif %}
+
+			<span class="in-icon svg svg-{{ isVisibile ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisibile ? 'Ano'|trans : 'Ne'|trans }}"></span>
+
+			{% if productDetail.product.calculatedSellingDenied %}
+				<span class="in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
+			{% endif %}
+		</div>
+	{% endfor %}
+{% endblock %}
+
 {% block product_variants %}
 	{% if product.isVariant %}
 		<div class="wrap-border">
@@ -85,40 +114,6 @@
 	{% else %}
 		{{ parent() }}
 	{% endif %}
-{% endblock %}
-
-{% block product_url %}
-	<div class="form-line">
-		<label class="form-line__label">
-			{{ 'URL adresy na doménách :' |trans }}
-			<i class="svg svg-info c-help js-tooltip"
-				data-toggle="tooltip" data-placement="right"
-				title="{{ 'Pokud je produkt viditelný pro výchozí cenovou skupinu na dané doméně, je URL adresa odkazem, v opačném případě se zobrazuje pouze jako text'|trans }}"
-			 ></i>
-		</label>
-		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
-			<div class="form-line__line form-line__line--no-space">
-				<div class="form-line__label">
-					{{ domainIcon(productDomain.domainId) }}
-					{{ getDomainName(productDomain.domainId) ~ ' :' }}
-				</div>
-				<div class="form-line__side">
-					<div class="form-line__item form-line__item--text">
-						{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
-						{% if url %}
-							{% if isVisibileForDefaultPricingGroup(product, productDomain.domainId) %}
-								<a href="{{ url }}" target="_blank">{{ url }}</a>
-							{% else %}
-								{{ url }}
-							{% endif %}
-						{% else %}
-							-
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
 {% endblock %}
 
 {% block product_calculated_hidden_info %}
