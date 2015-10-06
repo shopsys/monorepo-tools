@@ -19,6 +19,12 @@
 		SS6.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
 
 		SS6.product.initializeSideNavigation();
+
+		$('#js-close-without-saving').on('click', function () {
+			window.close();
+			return false;
+		});
+
 	};
 
 	SS6.product.toggleIsUsingStock = function (isUsingStock) {

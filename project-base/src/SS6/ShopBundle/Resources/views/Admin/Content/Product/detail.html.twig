@@ -326,7 +326,7 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Zavřít bez uložení'|trans }}</button>
 				{{ form_save(product|default(null), form) }}
 			{% endblock %}
 		{% endembed %}
