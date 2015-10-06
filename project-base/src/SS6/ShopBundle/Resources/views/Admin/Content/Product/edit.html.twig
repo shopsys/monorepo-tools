@@ -3,7 +3,10 @@
 {% block title -%}
 	- {{ 'Editace zboží'|trans }} - {{ product|productDisplayName }}
 {% endblock %}
-{% block h1 %}{% endblock %}
+
+{% block product_header_heading %}
+	{{ 'Editace zboží: '|trans ~ product.name }}
+{% endblock %}
 
 {% block product_variants %}
 	{% if product.isVariant %}
