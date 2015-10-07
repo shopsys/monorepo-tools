@@ -13,10 +13,13 @@
 		var requestDelay = 1000;
 
 		this.init = function () {
+			$(window).on('popstate', function () {
+				location.reload();
+			});
 			$productFilterForm.change(function () {
 				clearTimeout(requestTimer);
 				requestTimer = setTimeout(submitFormWithAjax, requestDelay);
-				history.replaceState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
+				history.pushState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 			});
 
 			$showResultsButton.click(function () {
@@ -30,7 +33,7 @@
 					.find(':radio, :checkbox').removeAttr('checked').end()
 					.find('textarea, :text, select').val('');
 				var resetUrl = $(this).attr('href');
-				history.replaceState({}, '', resetUrl);
+				history.pushState({}, '', resetUrl);
 				submitFormWithAjax();
 				return false;
 			});
