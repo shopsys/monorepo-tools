@@ -147,6 +147,8 @@ class ProductDataFixtureReferenceInjector {
 			'sony' => $referenceRepository->getReference(BrandDataFixture::SONY),
 			'orava' => $referenceRepository->getReference(BrandDataFixture::ORAVA),
 			'olympus' => $referenceRepository->getReference(BrandDataFixture::OLYMPUS),
+			'hyundai' => $referenceRepository->getReference(BrandDataFixture::HYUNDAI),
+			'nikon' => $referenceRepository->getReference(BrandDataFixture::NIKON),
 		];
 
 		return $brands;

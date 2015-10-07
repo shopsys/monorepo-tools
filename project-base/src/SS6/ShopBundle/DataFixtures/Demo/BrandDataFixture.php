@@ -31,90 +31,55 @@ class BrandDataFixture extends AbstractReferenceFixture {
 	const SONY = 'brand_sony';
 	const ORAVA = 'brand_orava';
 	const OLYMPUS = 'brand_olympus';
+	const HYUNDAI = 'brand_hyundai';
+	const NIKON = 'brand_nikon';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$brandData = new BrandData();
-
-		$brandData->name = 'Apple';
-		$this->createBrand(self::APPLE, $brandData);
-
-		$brandData->name = 'Canon';
-		$this->createBrand(self::CANON, $brandData);
-
-		$brandData->name = 'LG';
-		$this->createBrand(self::LG, $brandData);
-
-		$brandData->name = 'Philips';
-		$this->createBrand(self::PHILIPS, $brandData);
-
-		$brandData->name = 'Sencor';
-		$this->createBrand(self::SENCOR, $brandData);
-
-		$brandData->name = 'A4tech';
-		$this->createBrand(self::A4TECH, $brandData);
-
-		$brandData->name = 'Brother';
-		$this->createBrand(self::BROTHER, $brandData);
-
-		$brandData->name = 'Verbatim';
-		$this->createBrand(self::VERBATIM, $brandData);
-
-		$brandData->name = 'Dlink';
-		$this->createBrand(self::DLINK, $brandData);
-
-		$brandData->name = 'Defender';
-		$this->createBrand(self::DEFENDER, $brandData);
-
-		$brandData->name = 'DeLonghi';
-		$this->createBrand(self::DELONGHI, $brandData);
-
-		$brandData->name = 'Genius';
-		$this->createBrand(self::GENIUS, $brandData);
-
-		$brandData->name = 'Gigabyte';
-		$this->createBrand(self::GIGABYTE, $brandData);
-
-		$brandData->name = 'HP';
-		$this->createBrand(self::HP, $brandData);
-
-		$brandData->name = 'HTC';
-		$this->createBrand(self::HTC, $brandData);
-
-		$brandData->name = 'JURA';
-		$this->createBrand(self::JURA, $brandData);
-
-		$brandData->name = 'Logitech';
-		$this->createBrand(self::LOGITECH, $brandData);
-
-		$brandData->name = 'Microsoft';
-		$this->createBrand(self::MICROSOFT, $brandData);
-
-		$brandData->name = 'Samsung';
-		$this->createBrand(self::SAMSUNG, $brandData);
-
-		$brandData->name = 'SONY';
-		$this->createBrand(self::SONY, $brandData);
-
-		$brandData->name = 'Orava';
-		$this->createBrand(self::ORAVA, $brandData);
-
-		$brandData->name = 'Olympus';
-		$this->createBrand(self::OLYMPUS, $brandData);
-	}
-
-	/**
-	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
-	 */
-	private function createBrand($referenceName, BrandData $brandData) {
 		$brandFacade = $this->get(BrandFacade::class);
 		/* @var $brandFacade \SS6\ShopBundle\Model\Product\Brand\BrandFacade */
 
-		$brand = $brandFacade->create($brandData);
-		$this->addReference($referenceName, $brand);
+		$brandData = new BrandData();
+
+		foreach ($this->getBrandNamesIndexedByBrandConstants() as $brandConstant => $brandName) {
+			$brandData->name = $brandName;
+			$brand = $brandFacade->create($brandData);
+			$this->addReference($brandConstant, $brand);
+		}
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function getBrandNamesIndexedByBrandConstants() {
+		return [
+			self::APPLE => 'Apple',
+			self::CANON => 'Canon',
+			self::LG => 'LG',
+			self::PHILIPS => 'Philips',
+			self::SENCOR => 'Sencor',
+			self::A4TECH => 'A4tech',
+			self::BROTHER => 'Brother',
+			self::VERBATIM => 'Verbatim',
+			self::DLINK => 'Dlink',
+			self::DEFENDER => 'Defender',
+			self::DELONGHI => 'DeLonghi',
+			self::GENIUS => 'Genius',
+			self::GIGABYTE => 'Gigabyte',
+			self::HP => 'HP',
+			self::HTC => 'HTC',
+			self::JURA => 'JURA',
+			self::LOGITECH => 'Logitech',
+			self::MICROSOFT => 'Microsoft',
+			self::SAMSUNG => 'Samsung',
+			self::SONY => 'SONY',
+			self::ORAVA => 'Orava',
+			self::OLYMPUS => 'Olympus',
+			self::HYUNDAI => 'Hyundai',
+			self::NIKON => 'Nikon',
+		];
 	}
 
 }
