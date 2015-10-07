@@ -7,12 +7,14 @@ use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
@@ -364,6 +366,103 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$this->assertTrue($productFromDb->isVisible());
 		$this->assertFalse($productVisibility1->isVisible());
 		$this->assertFalse($productVisibility2->isVisible());
+	}
+
+	public function testRefreshProductsVisibilityVisibleVariants() {
+		$em = $this->getEntityManager();
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+
+		$variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
+		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
+		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+
+		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
+		$variant1ProductEditData->productData->hidden = true;
+		$productEditFacade->edit($variant1->getId(), $variant1ProductEditData);
+
+		$productVisibilityRepository->refreshProductsVisibility(true);
+
+		$em->refresh($variant1);
+		$em->refresh($variant2);
+		$em->refresh($mainVariant);
+
+		$this->assertFalse($variant1->isVisible());
+		$this->assertTrue($variant2->isVisible());
+		$this->assertTrue($mainVariant->isVisible());
+	}
+
+	public function testRefreshProductsVisibilityNotVisibleVariants() {
+		$em = $this->getEntityManager();
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+
+		$variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
+		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
+		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+
+		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
+		$variant1ProductEditData->productData->hidden = true;
+		$productEditFacade->edit($variant1->getId(), $variant1ProductEditData);
+
+		$variant2ProductEditData = $productEditDataFactory->createFromProduct($variant2);
+		$variant2ProductEditData->productData->hidden = true;
+		$productEditFacade->edit($variant2->getId(), $variant2ProductEditData);
+
+		$productVisibilityRepository->refreshProductsVisibility(true);
+
+		$em->refresh($variant1);
+		$em->refresh($variant2);
+		$em->refresh($mainVariant);
+
+		$this->assertFalse($variant1->isVisible());
+		$this->assertFalse($variant2->isVisible());
+		$this->assertFalse($mainVariant->isVisible());
+	}
+
+	public function testRefreshProductsVisibilityNotVisibleMainVariant() {
+		$em = $this->getEntityManager();
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+
+		$variant1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '53');
+		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
+		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
+
+		$mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
+		$mainVariantProductEditData->productData->hidden = true;
+		$productEditFacade->edit($mainVariant->getId(), $mainVariantProductEditData);
+
+		$productVisibilityRepository->refreshProductsVisibility(true);
+
+		$em->refresh($variant1);
+		$em->refresh($variant2);
+		$em->refresh($mainVariant);
+
+		$this->assertFalse($variant1->isVisible());
+		$this->assertFalse($variant2->isVisible());
+		$this->assertFalse($mainVariant->isVisible());
 	}
 
 }
