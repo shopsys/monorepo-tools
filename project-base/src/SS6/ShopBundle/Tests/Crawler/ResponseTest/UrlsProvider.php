@@ -121,7 +121,10 @@ class UrlsProvider {
 				];
 
 			case 'admin_vat_delete':
-				return ['id' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW)->getId()];
+				return [
+					'id' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW)->getId(),
+					'newId' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_LOW)->getId(),
+				];
 
 			case 'front_article_detail':
 				return ['id' => 1];
