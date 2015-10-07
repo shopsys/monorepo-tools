@@ -96,6 +96,7 @@ class ProductService {
 	public function edit(Product $product, ProductData $productData) {
 		$product->edit($productData);
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->markProductForVisibilityRecalculation($product);
 	}
 
 	/**
@@ -148,6 +149,20 @@ class ProductService {
 		}
 
 		return new ProductDeleteResult();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 */
+	public function markProductForVisibilityRecalculation(Product $product) {
+		$product->markForVisibilityRecalculation();
+		if ($product->isMainVariant()) {
+			foreach ($product->getVariants() as $variant) {
+				$variant->markForVisibilityRecalculation();
+			}
+		} elseif ($product->isVariant()) {
+			$product->getMainVariant()->markForVisibilityRecalculation();
+		}
 	}
 
 }

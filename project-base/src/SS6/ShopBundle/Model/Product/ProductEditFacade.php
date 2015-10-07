@@ -230,7 +230,7 @@ class ProductEditFacade {
 		$productForRecalculations = $productDeleteResult->getProductForRecalculations();
 		if ($productForRecalculations !== null) {
 			$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productForRecalculations);
-			$productForRecalculations->markForVisibilityRecalculation();
+			$this->productService->markProductForVisibilityRecalculation($productForRecalculations);
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productForRecalculations);
 		}
 		$this->em->remove($product);

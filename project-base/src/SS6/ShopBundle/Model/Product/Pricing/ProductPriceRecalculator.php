@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductService;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator {
@@ -43,19 +44,25 @@ class ProductPriceRecalculator {
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null
 	 */
 	private $allPricingGroups;
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 */
+	private $productService;
 
 	public function __construct(
 		EntityManager $em,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-		PricingGroupFacade $pricingGroupFacade
+		PricingGroupFacade $pricingGroupFacade,
+		ProductService $productService
 	) {
 		$this->em = $em;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupFacade = $pricingGroupFacade;
+		$this->productService = $productService;
 	}
 
 	/**
@@ -130,7 +137,7 @@ class ProductPriceRecalculator {
 			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);
 		}
 		$product->markPriceAsRecalculated();
-		$product->markForVisibilityRecalculation();
+		$this->productService->markProductForVisibilityRecalculation($product);
 		$this->em->flush($product);
 	}
 
