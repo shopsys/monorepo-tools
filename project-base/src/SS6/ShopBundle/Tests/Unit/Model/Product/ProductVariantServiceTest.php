@@ -35,7 +35,7 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 		$currentVariants = [$variant2, $variant3];
 		$productVariantService->refreshProductVariants($mainVariant, $currentVariants);
 
-		$variantsArray = $mainVariant->getVariants()->toArray();
+		$variantsArray = $mainVariant->getVariants();
 
 		$this->assertNotContains($variant1, $variantsArray);
 		$this->assertContains($variant2, $variantsArray);
