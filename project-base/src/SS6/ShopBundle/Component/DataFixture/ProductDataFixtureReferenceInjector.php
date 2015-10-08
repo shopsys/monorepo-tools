@@ -100,6 +100,9 @@ class ProductDataFixtureReferenceInjector {
 			CategoryDataFixture::TOYS => $referenceRepository->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS
 			),
+			CategoryDataFixture::GARDEN_TOOLS => $referenceRepository->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::GARDEN_TOOLS
+			),
 		];
 
 		return $categories;

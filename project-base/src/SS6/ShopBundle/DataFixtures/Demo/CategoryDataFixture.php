@@ -23,6 +23,7 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	const COFFEE = 'coffee';
 	const BOOKS = 'books';
 	const TOYS = 'toys';
+	const GARDEN_TOOLS = 'garden_tools';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -62,6 +63,9 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 
 		$categoryData->name = ['cs' => 'Hračky a další', 'en' => null];
 		$this->createCategory(self::TOYS, $categoryData);
+
+		$categoryData->name = ['cs' => 'Zahradní náčiní', 'en' => 'Garden tools'];
+		$this->createCategory(self::GARDEN_TOOLS, $categoryData);
 
 		$manager->flush();
 
