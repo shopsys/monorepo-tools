@@ -5,13 +5,15 @@
 	SS6.grid.multipleDragAndDrop = SS6.grid.multipleDragAndDrop || {};
 
 	SS6.grid.multipleDragAndDrop.init = function () {
+		SS6.grid.multipleDragAndDrop.toggleRowHolders();
 		$('.js-multiple-grids-save-all-button').click(SS6.grid.multipleDragAndDrop.saveOrdering);
 		$('.js-multiple-grids-rows-unified').sortable({
 			cursor: 'move',
 			handle: '.c-move',
-			items: '.js-grid-row',
+			items: '.js-grid-row, .js-grid-row-holder',
 			placeholder: 'table-drop',
 			revert: 200,
+			change: SS6.grid.multipleDragAndDrop.onUpdate,
 			update: SS6.grid.multipleDragAndDrop.onUpdate
 		});
 
@@ -58,6 +60,15 @@
 
 	SS6.grid.multipleDragAndDrop.onUpdate = function (event, ui) {
 		$('.js-multiple-grids-save-all-button').removeClass('btn--disabled');
+		SS6.grid.multipleDragAndDrop.toggleRowHolders();
+	};
+
+	SS6.grid.multipleDragAndDrop.toggleRowHolders = function () {
+		 $('.js-multiple-grids-rows-unified .js-grid').each(function() {
+			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .table-drop').size();
+			var $rowHolder = $(this).find('.js-grid-row-holder');
+			$rowHolder.toggle(gridRowsCount === 0);
+		});
 	};
 
 	$(document).ready(function () {
