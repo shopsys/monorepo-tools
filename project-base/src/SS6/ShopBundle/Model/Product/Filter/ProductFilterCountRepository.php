@@ -101,6 +101,7 @@ class ProductFilterCountRepository {
 	 * @param string|null $searchText
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
@@ -110,6 +111,7 @@ class ProductFilterCountRepository {
 		$searchText,
 		$domainId,
 		$locale,
+		array $brandFilterChoices,
 		array $flagFilterChoices,
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
@@ -124,6 +126,12 @@ class ProductFilterCountRepository {
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
+			$productFilterData,
+			$pricingGroup
+		);
+		$productFilterCountData->countByBrandId = $this->getCountByBrandId(
+			$productsQueryBuilder,
+			$brandFilterChoices,
 			$productFilterData,
 			$pricingGroup
 		);

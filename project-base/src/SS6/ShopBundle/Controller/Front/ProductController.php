@@ -203,6 +203,7 @@ class ProductController extends FrontBaseController {
 		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_FILTER_COUNTS)) {
 			$productFilterCountData = $this->productOnCurrentDomainFacade->getProductFilterCountDataForSearch(
 				$searchText,
+				$productFilterFormType->getBrandFilterChoices(),
 				$productFilterFormType->getFlagFilterChoices(),
 				$productFilterData
 			);

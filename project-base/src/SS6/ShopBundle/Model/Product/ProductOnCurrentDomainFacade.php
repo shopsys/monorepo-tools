@@ -243,12 +243,14 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param string|null $searchText
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountDataForSearch(
 		$searchText,
+		array $brandFilterChoices,
 		array $flagFilterChoices,
 		ProductFilterData $productFilterData
 	) {
@@ -256,6 +258,7 @@ class ProductOnCurrentDomainFacade {
 			$searchText,
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$brandFilterChoices,
 			$flagFilterChoices,
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
