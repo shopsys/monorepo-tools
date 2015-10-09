@@ -9,6 +9,11 @@ class ProductFilterCountData {
 	 */
 	public $countInStock;
 
+	/*
+	 * @var int[brandId]
+	 */
+	public $countByBrandId;
+
 	/**
 	 * @var int[flagId]
 	 */

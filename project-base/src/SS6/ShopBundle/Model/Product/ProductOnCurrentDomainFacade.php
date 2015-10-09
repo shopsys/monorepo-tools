@@ -216,6 +216,7 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
@@ -223,6 +224,7 @@ class ProductOnCurrentDomainFacade {
 	 */
 	public function getProductFilterCountDataInCategory(
 		$categoryId,
+		array $brandFilterChoices,
 		array $flagFilterChoices,
 		array $parameterFilterChoices,
 		ProductFilterData $productFilterData
@@ -231,6 +233,7 @@ class ProductOnCurrentDomainFacade {
 			$this->categoryRepository->getById($categoryId),
 			$this->domain->getId(),
 			$this->domain->getLocale(),
+			$brandFilterChoices,
 			$flagFilterChoices,
 			$parameterFilterChoices,
 			$productFilterData,

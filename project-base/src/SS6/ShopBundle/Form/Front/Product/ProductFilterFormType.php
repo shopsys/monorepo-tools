@@ -114,6 +114,13 @@ class ProductFilterFormType extends AbstractType {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 */
+	public function getBrandFilterChoices() {
+		return $this->brandFilterChoices;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoices() {

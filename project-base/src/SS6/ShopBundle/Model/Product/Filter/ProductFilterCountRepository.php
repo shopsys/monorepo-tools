@@ -45,6 +45,7 @@ class ProductFilterCountRepository {
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param string $locale
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
@@ -55,6 +56,7 @@ class ProductFilterCountRepository {
 		Category $category,
 		$domainId,
 		$locale,
+		array $brandFilterChoices,
 		array $flagFilterChoices,
 		array $parameterFilterChoices,
 		ProductFilterData $productFilterData,
@@ -69,6 +71,12 @@ class ProductFilterCountRepository {
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
+			$productFilterData,
+			$pricingGroup
+		);
+		$productFilterCountData->countByBrandId = $this->getCountByBrandId(
+			$productsQueryBuilder,
+			$brandFilterChoices,
 			$productFilterData,
 			$pricingGroup
 		);
@@ -156,6 +164,59 @@ class ProductFilterCountRepository {
 			->resetDQLPart('orderBy');
 
 		return $productsInStockQueryBuilder->getQuery()->getSingleScalarResult();
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return array
+	 */
+	private function getCountByBrandId(
+		QueryBuilder $productsQueryBuilder,
+		array $brandFilterChoices,
+		ProductFilterData $productFilterData,
+		PricingGroup $pricingGroup
+		) {
+		if (count($brandFilterChoices) === 0) {
+			return [];
+		}
+
+		$productFilterDataExceptBrands = clone $productFilterData;
+		$productFilterDataExceptBrands->brands = [];
+
+		$productsFilteredExceptBrandsQueryBuilder = clone $productsQueryBuilder;
+
+		$this->productFilterRepository->applyFiltering(
+			$productsFilteredExceptBrandsQueryBuilder,
+			$productFilterDataExceptBrands,
+			$pricingGroup
+		);
+
+		$productsFilteredExceptBrandsQueryBuilder
+			->select('b.id, COUNT(p) AS cnt')
+			->join('p.brand', 'b')
+			->andWhere('b IN (:filterBrands)')->setParameter('filterBrands', $brandFilterChoices);
+
+		if (count($productFilterData->brands) > 0) {
+			$productsFilteredExceptBrandsQueryBuilder
+				->andWhere('p.brand NOT IN (:activeBrands)')
+				->setParameter('activeBrands', $productFilterData->brands);
+		}
+
+		$productsFilteredExceptBrandsQueryBuilder
+			->resetDQLPart('orderBy')
+			->groupBy('b.id');
+
+		$rows = $productsFilteredExceptBrandsQueryBuilder->getQuery()->execute();
+
+		$countByBrandId = [];
+		foreach ($rows as $row) {
+			$countByBrandId[$row['id']] = $row['cnt'];
+		}
+
+		return $countByBrandId;
 	}
 
 	/**
