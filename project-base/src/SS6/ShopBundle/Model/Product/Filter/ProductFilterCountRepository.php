@@ -171,7 +171,7 @@ class ProductFilterCountRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return array
+	 * @return int[brandId]
 	 */
 	private function getCountByBrandId(
 		QueryBuilder $productsQueryBuilder,
@@ -224,7 +224,7 @@ class ProductFilterCountRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return int
+	 * @return int[flagId]
 	 */
 	private function getCountByFlagId(
 		QueryBuilder $productsQueryBuilder,
@@ -288,7 +288,7 @@ class ProductFilterCountRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
-	 * @return int
+	 * @return int[parameterId][valueId]
 	 */
 	private function getCountByParameterIdAndValueId(
 		QueryBuilder $productsQueryBuilder,
