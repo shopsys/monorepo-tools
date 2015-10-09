@@ -125,6 +125,15 @@ class PersonalInfoFormType extends AbstractType {
 				],
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
+			->add('termsAndConditionsAgreement', FormType::CHECKBOX, [
+				'required' => true,
+				'mapped' => false,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Musíte souhlasit s obchodními podmínkami.',
+					]),
+				],
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

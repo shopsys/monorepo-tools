@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
+use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
@@ -98,6 +99,11 @@ class OrderController extends FrontBaseController {
 	 */
 	private $session;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 */
+	private $articleEditFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		Cart $cart,
@@ -112,7 +118,8 @@ class OrderController extends FrontBaseController {
 		OrderFlow $flow,
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
-		OrderMailFacade $orderMailFacade
+		OrderMailFacade $orderMailFacade,
+		ArticleEditFacade $articleEditFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cart = $cart;
@@ -128,6 +135,7 @@ class OrderController extends FrontBaseController {
 		$this->session = $session;
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
+		$this->articleEditFacade = $articleEditFacade;
 	}
 
 	/**
@@ -281,6 +289,12 @@ class OrderController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $this->orderFacade->getOrderConfirmText($orderId),
+		]);
+	}
+
+	public function termsAndConditionsAction() {
+		return $this->render('@SS6Shop/Front/Content/Order/termsAndConditions.html.twig', [
+			'termsAndConditionsArticle' => $this->articleEditFacade->getById(1),
 		]);
 	}
 
