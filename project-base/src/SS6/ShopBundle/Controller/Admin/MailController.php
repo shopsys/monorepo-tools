@@ -94,7 +94,7 @@ class MailController extends AdminBaseController {
 			OrderMailService::VARIABLE_DELIVERY_ADDRESS => $this->translator->trans('Dodací adresa'),
 			OrderMailService::VARIABLE_NOTE => $this->translator->trans('Poznámka'),
 			OrderMailService::VARIABLE_PRODUCTS => $this->translator->trans(
-				'Seznam zboží v objednávce (název, počet kusů, cena za kus s DPH, celková cena za položku s DPH)'
+				'Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)'
 			),
 			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $this->translator->trans('URL adresa detailu objednávky'),
 			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $this->translator->trans('Pokyny k dopravě'),

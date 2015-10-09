@@ -47,6 +47,7 @@ class OrderTransport extends OrderItem {
 			$priceWithVat,
 			$vatPercent,
 			$quantity,
+			null,
 			null
 		);
 		$this->transport = $transport;

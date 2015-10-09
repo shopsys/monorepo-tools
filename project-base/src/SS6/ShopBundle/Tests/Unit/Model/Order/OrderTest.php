@@ -20,7 +20,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
 
 		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
-		$orderProduct = new OrderProduct($order, 'productName', 0, 0, 0, 1, null, null);
+		$orderProduct = new OrderProduct($order, 'productName', 0, 0, 0, 1, null, null, null);
 		$orderPayment = new OrderPayment($order, 'paymentName', 0, 0, 0, 1, $payment);
 		$order->addItem($orderProduct);
 		$order->addItem($orderPayment);

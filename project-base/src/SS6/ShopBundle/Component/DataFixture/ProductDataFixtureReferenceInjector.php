@@ -6,16 +6,19 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 
 class ProductDataFixtureReferenceInjector {
 
 	/**
 	 * @param \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
 	 * @param \Doctrine\Common\DataFixtures\ReferenceRepository $referenceRepository
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function loadReferences(
 		ProductDataFixtureLoader $productDataFixtureLoader,
@@ -73,7 +76,19 @@ class ProductDataFixtureReferenceInjector {
 			'philips' => $referenceRepository->getReference(BrandDataFixture::PHILIPS),
 		];
 
-		$productDataFixtureLoader->injectReferences($vats, $availabilities, $categories, $flags, $brands);
+		$units = [
+			'pcs' => $referenceRepository->getReference(BaseUnitDataFixture::PCS),
+			'm3' => $referenceRepository->getReference(DemoUnitDataFixture::M3),
+		];
+
+		$productDataFixtureLoader->injectReferences(
+			$vats,
+			$availabilities,
+			$categories,
+			$flags,
+			$brands,
+			$units
+		);
 	}
 
 	/**
@@ -86,6 +101,8 @@ class ProductDataFixtureReferenceInjector {
 			AvailabilityDataFixture::class,
 			CategoryDataFixture::class,
 			BrandDataFixture::class,
+			BaseUnitDataFixture::class,
+			DemoUnitDataFixture::class,
 		];
 	}
 

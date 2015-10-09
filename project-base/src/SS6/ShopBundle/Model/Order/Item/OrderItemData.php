@@ -32,6 +32,11 @@ class OrderItemData {
 	/**
 	 * @var string|null
 	 */
+	public $unitName;
+
+	/**
+	 * @var string|null
+	 */
 	public $catnum;
 
 	/**
@@ -43,6 +48,7 @@ class OrderItemData {
 		$this->priceWithoutVat = $orderItem->getPriceWithoutVat();
 		$this->vatPercent = $orderItem->getVatPercent();
 		$this->quantity = $orderItem->getQuantity();
+		$this->unitName = $orderItem->getUnitName();
 		$this->catnum = $orderItem->getCatnum();
 	}
 

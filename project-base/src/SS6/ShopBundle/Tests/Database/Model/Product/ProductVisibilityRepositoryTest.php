@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Database\Model\Product;
 use DateTime;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -38,6 +39,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->sellingDenied = false;
 		$productEditData->productData->categoriesByDomainId = [1 => [$category]];
 		$productEditData->productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+		$productEditData->productData->unit = $this->getReference(UnitDataFixture::PCS);
 
 		return $productEditData;
 	}

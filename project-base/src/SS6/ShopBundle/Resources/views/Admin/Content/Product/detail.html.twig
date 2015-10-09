@@ -105,6 +105,8 @@
 				</div>
 			{% endblock %}
 
+			{{ form_row(form.productData.unit, { label: 'Jednotka'|trans }) }}
+
 			{% block product_stock_and_availability %}
 				{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
 				<div class="js-product-using-stock form-line__js">

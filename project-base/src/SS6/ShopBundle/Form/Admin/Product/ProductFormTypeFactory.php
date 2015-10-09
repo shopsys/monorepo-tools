@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
 use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductFormTypeFactory {
 
@@ -33,6 +34,11 @@ class ProductFormTypeFactory {
 	private $flagFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitFacade
+	 */
+	private $unitFacade;
+
+	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $translator;
@@ -47,6 +53,7 @@ class ProductFormTypeFactory {
 		AvailabilityRepository $availabilityRepository,
 		BrandRepository $brandRepository,
 		FlagFacade $flagFacade,
+		UnitFacade $unitFacade,
 		Translator $translator,
 		Domain $domain
 	) {
@@ -54,6 +61,7 @@ class ProductFormTypeFactory {
 		$this->availabilityRepository = $availabilityRepository;
 		$this->brandRepository = $brandRepository;
 		$this->flagFacade = $flagFacade;
+		$this->unitFacade = $unitFacade;
 		$this->translator = $translator;
 		$this->domain = $domain;
 	}
@@ -67,12 +75,14 @@ class ProductFormTypeFactory {
 		$availabilities = $this->availabilityRepository->getAll();
 		$brands = $this->brandRepository->getAll();
 		$flags = $this->flagFacade->getAll();
+		$units = $this->unitFacade->getAll();
 
 		return new ProductFormType(
 			$vats,
 			$availabilities,
 			$brands,
 			$flags,
+			$units,
 			$this->translator,
 			$this->domain->getAll(),
 			$product

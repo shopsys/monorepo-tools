@@ -196,6 +196,9 @@
               route: admin_brand_new
               visible: false
 
+        - label: 'Jednotky'
+          route: admin_unit_list
+
     - label: 'Překlady'
       route: admin_translation_list
       items:

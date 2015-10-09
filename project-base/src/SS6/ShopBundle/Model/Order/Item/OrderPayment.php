@@ -47,6 +47,7 @@ class OrderPayment extends OrderItem {
 			$priceWithVat,
 			$vatPercent,
 			$quantity,
+			null,
 			null
 		);
 		$this->payment = $payment;

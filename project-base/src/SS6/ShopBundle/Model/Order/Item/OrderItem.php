@@ -67,6 +67,13 @@ abstract class OrderItem {
 	protected $quantity;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=10, nullable=true)
+	 */
+	protected $unitName;
+
+	/**
 	 * @var string|null
 	 *
 	 * @ORM\Column(type="string", length=255, nullable=true)
@@ -80,6 +87,7 @@ abstract class OrderItem {
 	 * @param string $priceWithVat
 	 * @param string $vatPercent
 	 * @param int $quantity
+	 * @param string|null $unitName
 	 * @param string|null $catnum
 	 */
 	public function __construct(
@@ -89,6 +97,7 @@ abstract class OrderItem {
 		$priceWithVat,
 		$vatPercent,
 		$quantity,
+		$unitName,
 		$catnum
 	) {
 		$this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
@@ -97,6 +106,7 @@ abstract class OrderItem {
 		$this->priceWithVat = $priceWithVat;
 		$this->vatPercent = $vatPercent;
 		$this->quantity = $quantity;
+		$this->unitName = $unitName;
 		$this->catnum = $catnum;
 		$this->order->addItem($this); // call after setting attrs for recalc total price
 	}
@@ -153,6 +163,13 @@ abstract class OrderItem {
 	/**
 	 * @return string|null
 	 */
+	public function getUnitName() {
+		return $this->unitName;
+	}
+
+	/**
+	 * @return string|null
+	 */
 	public function getCatnum() {
 		return $this->catnum;
 	}
@@ -173,6 +190,7 @@ abstract class OrderItem {
 		$this->priceWithVat = $orderItemData->priceWithVat;
 		$this->vatPercent = $orderItemData->vatPercent;
 		$this->quantity = $orderItemData->quantity;
+		$this->unitName = $orderItemData->unitName;
 		$this->catnum = $orderItemData->catnum;
 	}
 

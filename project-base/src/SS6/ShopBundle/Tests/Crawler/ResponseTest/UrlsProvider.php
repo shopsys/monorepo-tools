@@ -6,8 +6,10 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -112,6 +114,12 @@ class UrlsProvider {
 
 			case 'admin_pricinggroup_delete':
 				return ['id' => $this->persistentReferenceService->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1)->getId()];
+
+			case 'admin_unit_delete':
+				return [
+					'id' => $this->persistentReferenceService->getReference(BaseUnitDataFixture::PCS)->getId(),
+					'newId' => $this->persistentReferenceService->getReference(DemoUnitDataFixture::M3)->getId(),
+				];
 
 			case 'admin_vat_delete':
 				return ['id' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW)->getId()];

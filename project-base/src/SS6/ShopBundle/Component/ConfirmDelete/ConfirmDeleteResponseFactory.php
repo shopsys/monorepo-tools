@@ -46,7 +46,7 @@ class ConfirmDeleteResponseFactory {
 	 * @param string $message
 	 * @param string $route
 	 * @param mixed $entityId
-	 * @param array $listOfNewEntities
+	 * @param string[entityId] $listOfNewEntities
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function createSetNewAndDeleteResponse($message, $route, $entityId, array $listOfNewEntities) {

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Cart;
 
+use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
@@ -27,6 +28,7 @@ class CartTest extends DatabaseTestCase {
 		$productData->price = 100;
 		$productData->vat = $vat;
 		$productData->availability = $availability;
+		$productData->unit = $this->getReference(UnitDataFixture::PCS);
 		$product1 = new Product($productData);
 		$product2 = new Product($productData);
 

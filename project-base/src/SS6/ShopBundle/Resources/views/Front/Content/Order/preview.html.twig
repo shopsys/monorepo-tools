@@ -9,7 +9,8 @@
 					{% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
-							<strong>{{ quantifiedProduct.quantity|formatNumber }} x</strong> {{ quantifiedProduct.product.name }}
+							<strong>{{ quantifiedProduct.quantity|formatNumber }} {{ quantifiedProduct.product.unit.name }}</strong>
+							{{ quantifiedProduct.product.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
 							{{ quantifiedProductPrice.totalPriceWithVat|price }}

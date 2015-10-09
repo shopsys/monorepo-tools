@@ -5,7 +5,7 @@
 		<thead>
 			<tr>
 				<th class="table-col-60">{{ 'Název položky'|trans }}</th>
-				<th class="table-col-20 text-center">{{ 'Počet kusů'|trans }}</th>
+				<th class="table-col-20 text-center">{{ 'Množství'|trans }}</th>
 				<th class="table-col-20 text-right">{{ 'Cena s DPH'|trans }}</th>
 			</tr>
 		</thead>
@@ -20,7 +20,7 @@
 						{% endif %}
 						{{ item.name }}
 					</td>
-					<td class="text-center">{{ item.quantity }}</td>
+					<td class="text-center">{{ item.quantity }} {{ item.unitName }}</td>
 					<td class="text-right">{{ item.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
 				</tr>
 			{% endfor %}

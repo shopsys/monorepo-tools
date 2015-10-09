@@ -115,7 +115,7 @@ class CartController extends FrontBaseController {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirect($this->generateUrl('front_order_index'));
 				} else {
-					$this->getFlashMessageSender()->addSuccessFlash('Počet kusů položek v košíku byl úspěšně přepočítán.');
+					$this->getFlashMessageSender()->addSuccessFlash('Množství položek v košíku bylo úspěšně přepočítáno.');
 					return $this->redirect($this->generateUrl('front_cart'));
 				}
 			}
@@ -125,7 +125,7 @@ class CartController extends FrontBaseController {
 
 		if ($invalidCartRecalc) {
 			$this->getFlashMessageSender()->addErrorFlash(
-				'Prosím zkontrolujte, zda jste správně zadali množství kusů veškerých položek v košíku.'
+				'Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.'
 			);
 		}
 
@@ -173,6 +173,7 @@ class CartController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', [
 			'form' => $form->createView(),
+			'product' => $product,
 		]);
 	}
 
@@ -194,7 +195,7 @@ class CartController extends FrontBaseController {
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství, které chcete vložit do košíku.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
@@ -204,7 +205,7 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				'Zadejte prosím platné množství kusů, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+				'Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
 					'errors' => implode('<br/>', $formErrors),
 				]
 			);
@@ -248,7 +249,7 @@ class CartController extends FrontBaseController {
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství kusů, které chcete vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství, které chcete vložit do košíku.');
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
 			}
@@ -258,7 +259,7 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				'Zadejte prosím platné množství kusů, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+				'Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
 					'errors' => implode('<br/>', $formErrors),
 				]
 			);
@@ -275,18 +276,20 @@ class CartController extends FrontBaseController {
 	) {
 		if ($addProductResult->getIsNew()) {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} ks)',
+				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getAddedQuantity(),
+					'unitName' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
 				]
 			);
 		} else {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} ks)',
+				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})',
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getCartItem()->getQuantity(),
+					'unitName' => $addProductResult->getCartItem()->getProduct()->getUnit()->getName(),
 				]
 			);
 		}

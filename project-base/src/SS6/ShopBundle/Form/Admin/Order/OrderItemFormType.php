@@ -56,6 +56,12 @@ class OrderItemFormType extends AbstractType {
 					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než 0']),
 				],
 				'error_bubbling' => true,
+			])
+			->add('unitName', FormType::TEXT, [
+				'constraints' => [
+					new Constraints\Length(['max' => 10]),
+				],
+				'error_bubbling' => true,
 			]);
 	}
 
