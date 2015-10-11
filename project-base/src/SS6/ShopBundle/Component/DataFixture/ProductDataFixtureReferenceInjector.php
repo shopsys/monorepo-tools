@@ -169,7 +169,7 @@ class ProductDataFixtureReferenceInjector {
 			'pcs' => $referenceRepository->getReference(BaseUnitDataFixture::PCS),
 			'm3' => $referenceRepository->getReference(DemoUnitDataFixture::M3),
 		];
-		
+
 		return $units;
 	}
 
@@ -187,5 +187,5 @@ class ProductDataFixtureReferenceInjector {
 			DemoUnitDataFixture::class,
 		];
 	}
-	
+
 }
