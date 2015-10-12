@@ -1,5 +1,9 @@
 {% extends '@SS6Shop/Front/Layout/blank.html.twig' %}
 
+{% block title %}
+	{{ termsAndConditionsArticle.name }}
+{% endblock %}
+
 {% block html_body %}
 	<div>
 		{{ termsAndConditionsArticle.text }}
