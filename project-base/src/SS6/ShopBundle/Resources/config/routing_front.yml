@@ -60,6 +60,10 @@ front_order_terms_and_conditions:
   pattern: /order/terms-and-conditions/
   defaults: { _controller: SS6ShopBundle:Front\Order:termsAndConditions }
 
+front_order_terms_and_conditions_download:
+  pattern: /order/terms-and-conditions-download/
+  defaults: { _controller: SS6ShopBundle:Front\Order:TermsAndConditionsDownload }
+
 front_promo_code_apply:
   pattern: /promo-code/apply/
   defaults: { _controller: SS6ShopBundle:Front\PromoCode:apply }

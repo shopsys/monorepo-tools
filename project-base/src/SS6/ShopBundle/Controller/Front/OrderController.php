@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
@@ -296,6 +297,22 @@ class OrderController extends FrontBaseController {
 	}
 
 	public function termsAndConditionsAction() {
+		return $this->getTermsAndConditionsResponse();
+	}
+
+	public function termsAndConditionsDownloadAction() {
+		$response = $this->getTermsAndConditionsResponse();
+
+		return new DownloadFileResponse(
+			$this->termsAndConditionsFacade->getDownloadFilename(),
+			$response->getContent()
+		);
+	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function getTermsAndConditionsResponse() {
 		return $this->render('@SS6Shop/Front/Content/Order/termsAndConditions.html.twig', [
 			'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
 				$this->domain->getId()

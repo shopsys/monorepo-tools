@@ -77,6 +77,9 @@
 				{% if termsAndConditionsArticle is not null %}
 					<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
 					<iframe width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
+					<div class="text-right">
+						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="button button--simple" type="button">{{ 'Stáhnout'|trans }}</a>
+					</div>
 				{% endif %}
 				{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
 			</div>
