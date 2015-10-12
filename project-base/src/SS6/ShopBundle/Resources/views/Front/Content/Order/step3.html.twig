@@ -74,8 +74,10 @@
 			</div>
 
 			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
-				<iframe width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
+				{% if termsAndConditionsArticle is not null %}
+					<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
+					<iframe width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
+				{% endif %}
 				{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
 			</div>
 

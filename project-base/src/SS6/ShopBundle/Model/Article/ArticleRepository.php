@@ -92,4 +92,14 @@ class ArticleRepository {
 		return $user;
 	}
 
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 */
+	public function getAllByDomainId($domainId) {
+		return $this->getArticleRepository()->findBy([
+			'domainId' => $domainId,
+		]);
+	}
+
 }

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ArticleDataFixture;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
@@ -33,6 +34,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
 		$defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
 		/* @var $defaultInStockAvailability \SS6\ShopBundle\Model\Product\Availability\Availability */
+		$termsAndConditions = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_1);
+		/* @var $termsAndConditions \SS6\ShopBundle\Model\Article\Article */
+		$termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
+		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
 
 		$orderSentText = '
 			<p>
@@ -65,6 +70,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys 6 - Title page', 2));
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo obchod', 1));
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo eshop', 2));
+		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), 1));
+		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
@@ -75,6 +82,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	 */
 	public function getDependencies() {
 		return [
+			ArticleDataFixture::class,
 			AvailabilityDataFixture::class,
 			VatDataFixture::class,
 		];
