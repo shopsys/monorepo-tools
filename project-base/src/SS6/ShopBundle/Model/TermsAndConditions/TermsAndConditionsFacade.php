@@ -2,8 +2,10 @@
 
 namespace SS6\ShopBundle\Model\TermsAndConditions;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 
 class TermsAndConditionsFacade {
@@ -23,14 +25,21 @@ class TermsAndConditionsFacade {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		Setting $setting,
-		Translator $translator
+		Translator $translator,
+		Domain $domain
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->setting = $setting;
 		$this->translator = $translator;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -70,6 +79,20 @@ class TermsAndConditionsFacade {
 	 */
 	public function getDownloadFilename() {
 		return $this->translator->trans('Obchodní-podmínky.html');
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Article\Article $article
+	 * @return bool
+	 */
+	public function isArticleUsedAsTermsAndConditions(Article $article) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			if ($this->findTermsAndConditionsArticleByDomainId($domainConfig->getId()) === $article) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 }

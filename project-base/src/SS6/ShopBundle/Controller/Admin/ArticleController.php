@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
@@ -17,6 +18,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\ArticleDataFactory;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Article\ArticlePlacementList;
+use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -67,6 +69,16 @@ class ArticleController extends AdminBaseController {
 	 */
 	private $gridFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 */
+	private $confirmDeleteResponseFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+	 */
+	private $termsAndConditionsFacade;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		ArticleDataFactory $articleDataFactory,
@@ -76,7 +88,9 @@ class ArticleController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		Translator $translator
+		Translator $translator,
+		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
+		TermsAndConditionsFacade $termsAndConditionsFacade
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
@@ -87,6 +101,8 @@ class ArticleController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->translator = $translator;
+		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
+		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
 	}
 
 	/**
@@ -211,6 +227,25 @@ class ArticleController extends AdminBaseController {
 	}
 
 	/**
+	 * @Route("/article/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @param int $id
+	 */
+	public function deleteConfirmAction($id) {
+		$article = $this->articleEditFacade->getById($id);
+		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
+			$message = $this->translator->trans(
+				'Článek "%name%" je nastaven pro zobrazení obchodních podmínek.
+				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
+				['%name%' => $article->getName()]
+			);
+		} else {
+			$message = 'Opravdu chcete odstranit tento článek?';
+		}
+
+		return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_article_delete', $id);
+	}
+
+	/**
 	 * @Route("/article/save_ordering/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
@@ -246,8 +281,8 @@ class ArticleController extends AdminBaseController {
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_article_delete', ['id' => 'a.id'])
-			->setConfirmMessage('Opravdu chcete odstranit tento článek?');
+		$grid->addActionColumn('delete', 'Smazat', 'admin_article_deleteconfirm', ['id' => 'a.id'])
+			->setAjaxConfirm();
 
 		$grid->enableMultipleDragAndDrop();
 		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
