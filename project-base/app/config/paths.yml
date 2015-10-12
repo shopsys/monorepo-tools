@@ -9,6 +9,7 @@ parameters:
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.domain_images_url_prefix: /assets/admin/images/domain
   ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
+  ss6.file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/files.yml
   ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
   ss6.feed_url_prefix: /assets/content/feeds/
   ss6.file_dir: %ss6.web_dir%/assets/content/files
