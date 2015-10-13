@@ -68,6 +68,16 @@ class MailTemplateFacade {
 		return $this->mailTemplateRepository->getByNameAndDomainId($templateName, $domainId);
 	}
 
+	public function getOrderStatusMailTemplatesIndexedByOrderStatusId($domainId) {
+		$orderStatuses = $this->orderStatusRepository->getAll();
+		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
+
+		return $this->orderStatusMailTemplateService->getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(
+			$orderStatuses,
+			$mailTemplates
+		);
+	}
+
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData[] $mailTemplatesData
 	 * @param int $domainId
