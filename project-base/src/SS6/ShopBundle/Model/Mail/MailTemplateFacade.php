@@ -64,7 +64,7 @@ class MailTemplateFacade {
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */
 	public function get($templateName, $domainId) {
-		return $this->mailTemplateRepository->findByNameAndDomainId($templateName, $domainId);
+		return $this->mailTemplateRepository->getByNameAndDomainId($templateName, $domainId);
 	}
 
 	/**

@@ -144,6 +144,10 @@ services:
   ss6.shop.component.entity_file.config.file_config_loader:
     class: SS6\ShopBundle\Component\EntityFile\Config\FileConfigLoader
 
+  ss6.shop.component.entity_file.file_facade:
+    class: SS6\ShopBundle\Component\EntityFile\FileFacade
+    arguments: [%ss6.file_url_prefix%]
+
   ss6.shop.component.entity_file.file_locator:
     class: SS6\ShopBundle\Component\EntityFile\FileLocator
     arguments: [%ss6.file_dir%]
