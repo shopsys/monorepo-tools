@@ -9,32 +9,43 @@
 {% endblock %}
 
 {% block menu_panel_visibilities %}
-	<div class="form-full__title__in">
-		{{ 'Viditelnost'|trans }}
-	</div>
-	{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
-		<div class="form-line">
-			{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
-			{% set isVisibile = isVisibileForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
+	<div class="panel">
+		<div class="panel__in">
+			<div class="panel__in__title">
+				{{ 'Viditelnost'|trans }}
+			</div>
+			<ul class="list-domain">
+				{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
+					<li class="list-domain__item">
+						{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
+						{% set isVisibile = isVisibileForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
 
-			{{ domainIcon(productDomain.domainId) }}
+						<div class="list-domain__item__image">
+							{{ domainIcon(productDomain.domainId) }}
+						</div>
 
-			{% if isVisibile %}
-				<a href="{{ url }}" target="_blank">
-					{{ getDomainName(productDomain.domainId) }}
-					<i class="svg svg-forward-page"></i>
-				</a>
-			{% else %}
-				{{ getDomainName(productDomain.domainId) }}
-			{% endif %}
+						<div class="list-domain__item__info">
+							{% if productDetail.product.calculatedSellingDenied %}
+								<span class="list-domain__item__info__denied in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
+							{% endif %}
+							<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisibile ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisibile ? 'Ano'|trans : 'Ne'|trans }}"></span>
+						</div>
 
-			<span class="in-icon svg svg-{{ isVisibile ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisibile ? 'Ano'|trans : 'Ne'|trans }}"></span>
-
-			{% if productDetail.product.calculatedSellingDenied %}
-				<span class="in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
-			{% endif %}
+						{% if isVisibile %}
+							<a href="{{ url }}" class="list-domain__item__name" target="_blank">
+								{{ getDomainName(productDomain.domainId) }}
+								<i class="svg svg-forward-page"></i>
+							</a>
+						{% else %}
+							<span class="list-domain__item__name">
+								{{ getDomainName(productDomain.domainId) }}
+							</span>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
 		</div>
-	{% endfor %}
+	</div>
 {% endblock %}
 
 {% block product_variants %}

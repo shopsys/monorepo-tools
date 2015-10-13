@@ -41,7 +41,7 @@
 		$('.form-group__title, .form-full__title').each(function () {
 			var $titleClone = $(this).clone();
 			$titleClone.find('.js-validation-errors-list').remove();
-			var $navigationItemLi = '<li class="side-menu__item">' + $titleClone.text() + '</li>';
+			var $navigationItemLi = '<li class="anchor-menu__item"><a class="anchor-menu__item__anchor" href="#">' + $titleClone.text() + '</a></li>';
 			$productDetailNavigation.append($navigationItemLi);
 		});
 	};
