@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Front\Order;
 use SS6\ShopBundle\Component\Transformers\InverseTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
+use SS6\ShopBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -149,6 +150,7 @@ class PersonalInfoFormType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
+			'data_class' => FrontOrderData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
