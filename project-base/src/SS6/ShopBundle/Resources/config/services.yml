@@ -144,6 +144,10 @@ services:
   ss6.shop.component.entity_file.config.file_config_loader:
     class: SS6\ShopBundle\Component\EntityFile\Config\FileConfigLoader
 
+  ss6.shop.component.entity_file.file_locator:
+    class: SS6\ShopBundle\Component\EntityFile\FileLocator
+    arguments: [%ss6.file_dir%]
+
   ss6.shop.component.error.exception_listener:
     class: SS6\ShopBundle\Component\Error\ExceptionListener
     tags:

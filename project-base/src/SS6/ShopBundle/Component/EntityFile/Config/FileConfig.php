@@ -79,4 +79,11 @@ class FileConfig {
 		throw new \SS6\ShopBundle\Component\EntityFile\Config\Exception\FileConfigDataNotFoundException($class);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig[]
+	 */
+	public function getAllFileEntityConfigs() {
+		return $this->fileEntityConfigsByClass;
+	}
+
 }
