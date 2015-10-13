@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Component\EntityFile;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
 use SS6\ShopBundle\Component\EntityFile\File;
 use SS6\ShopBundle\Component\EntityFile\FileLocator;
@@ -49,13 +48,7 @@ class FileFacade {
 	 */
 	private $fileLocator;
 
-	/**
-	 * @var string
-	 */
-	private $fileUrlPrefix;
-
 	public function __construct(
-		$fileUrlPrefix,
 		EntityManager $em,
 		FileConfig $fileConfig,
 		FileRepository $fileRepository,
@@ -64,7 +57,6 @@ class FileFacade {
 		FileUpload $fileUpload,
 		FileLocator $fileLocator
 	) {
-		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->em = $em;
 		$this->fileConfig = $fileConfig;
 		$this->fileRepository = $fileRepository;
@@ -126,22 +118,6 @@ class FileFacade {
 
 		$message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
 		throw new \SS6\ShopBundle\Component\EntityFile\Exception\EntityIdentifierException($message);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\EntityFile\File|Object $fileOrEntity
-	 * @return string
-	 */
-	public function getFileUrl(DomainConfig $domainConfig, $fileOrEntity) {
-		$file = $this->getFileByObject($fileOrEntity);
-		if ($this->fileLocator->fileExists($file)) {
-			return $domainConfig->getUrl()
-				. $this->fileUrlPrefix
-				. str_replace(DIRECTORY_SEPARATOR, '/', $this->fileLocator->getRelativeFileFilepath($file));
-		}
-
-		throw new \SS6\ShopBundle\Component\EntityFile\Exception\FileNotFoundException();
 	}
 
 	/**

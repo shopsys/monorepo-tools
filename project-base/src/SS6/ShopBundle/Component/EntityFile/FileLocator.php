@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\EntityFile;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
 use SS6\ShopBundle\Component\EntityFile\File;
 
@@ -13,12 +14,23 @@ class FileLocator {
 	private $fileDir;
 
 	/**
+	 * @var string
+	 */
+	private $fileUrlPrefix;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
 	 */
 	private $fileConfig;
 
-	public function __construct($fileDir, FileConfig $fileConfig) {
+	/**
+	 * @param string $fileDir
+	 * @param string $fileUrlPrefix
+	 * @param \SS6\ShopBundle\Component\EntityFile\Config\FileConfig $fileConfig
+	 */
+	public function __construct($fileDir, $fileUrlPrefix, FileConfig $fileConfig) {
 		$this->fileDir = $fileDir;
+		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->fileConfig = $fileConfig;
 	}
 
@@ -36,6 +48,21 @@ class FileLocator {
 	 */
 	public function getAbsoluteFileFilepath(File $file) {
 		return $this->getAbsoluteFilePath($file->getEntityName()) . DIRECTORY_SEPARATOR . $file->getFilename();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @return string
+	 */
+	public function getFileUrl(DomainConfig $domainConfig, File $file) {
+		if ($this->fileExists($file)) {
+			return $domainConfig->getUrl()
+			. $this->fileUrlPrefix
+			. str_replace(DIRECTORY_SEPARATOR, '/', $this->getRelativeFileFilepath($file));
+		}
+
+		throw new \SS6\ShopBundle\Component\EntityFile\Exception\FileNotFoundException();
 	}
 
 	/**
