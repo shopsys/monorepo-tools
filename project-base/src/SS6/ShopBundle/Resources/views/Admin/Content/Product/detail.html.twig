@@ -324,7 +324,7 @@
 
 			{% block images %}{% endblock %}
 
-			{{ form_widget(form.imagesToUpload) }}
+			{{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' } }) }}
 			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 		</div>
 

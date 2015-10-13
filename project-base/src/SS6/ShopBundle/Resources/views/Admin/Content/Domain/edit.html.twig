@@ -2,13 +2,17 @@
 	<div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
 		<ul class="in-message__list"></ul>
 	</div>
-	<label>
-		{{ 'Současná ikona'|trans }}:
-	</label>
-	{{ domainIcon(domain.id) }}
 
 	{{ form_start(form) }}
+		{{ form_errors(form) }}
 		<div class="wrap-group">
+			<div class="form-line">
+				<label class="form-line__label">
+					{{ 'Současná ikona'|trans }}:
+				</label>
+				{{ domainIcon(domain.id) }}
+			</div>
+
 			{{ form_row(form.icon, { label: 'Nahrát ikonu'|trans}) }}
 		</div>
 
