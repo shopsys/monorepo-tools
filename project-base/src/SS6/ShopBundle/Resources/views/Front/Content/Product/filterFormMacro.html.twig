@@ -81,6 +81,17 @@
 									{{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
 									<span class="form-choice__text">
 										{{ brandForm.vars.label }}
+										{% if productFilterCountData is not null %}
+											<span
+												class="js-product-filter-count"
+												data-form-id="{{ brandForm.vars.id }}"
+											>
+												{% set brandCount = productFilterCountData.countByBrandId[brandForm.vars.value]|default(0) %}
+												{% if not brandForm.vars.checked %}
+													({% if filterForm.brands.vars.data is not empty and brandCount > 0 %}+{% endif %}{{ brandCount }})
+												{% endif %}
+											</span>
+										{% endif %}
 									</span>
 								</label>
 							</div>
