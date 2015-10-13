@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\EntityFile\FileFacade;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
@@ -38,24 +39,24 @@ class MailTemplateFacade {
 	private $domain;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
-	 * @param \SS6\ShopBundle\Component\Domain\Domain;
+	 * @var \SS6\ShopBundle\Component\EntityFile\FileFacade
 	 */
+	private $fileFacade;
+
 	public function __construct(
 		EntityManager $em,
 		MailTemplateRepository $mailTemplateRepository,
 		OrderStatusRepository $orderStatusRepository,
 		OrderStatusMailTemplateService $orderStatusMailTemplateService,
-		Domain $domain
+		Domain $domain,
+		FileFacade $fileFacade
 	) {
 		$this->em = $em;
 		$this->mailTemplateRepository = $mailTemplateRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
 		$this->domain = $domain;
+		$this->fileFacade = $fileFacade;
 	}
 
 	/**
@@ -83,6 +84,7 @@ class MailTemplateFacade {
 		foreach ($mailTemplatesData as $mailTemplateData) {
 			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->name, $domainId);
 			$mailTemplate->edit($mailTemplateData);
+			$this->fileFacade->uploadFile($mailTemplate, $mailTemplateData->attachment);
 		}
 
 		$this->em->flush();

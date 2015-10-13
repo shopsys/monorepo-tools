@@ -19,6 +19,7 @@
 					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
 					{{ form_row(template.bccEmail, { label: 'Skrytá kopie'|trans}) }}
 					{{ form_row(template.body, { label: 'Text'|trans}) }}
+					{{ form_row(template.attachment, { label: 'Příloha'|trans}) }}
 					{% if sendMailText is not null %}
 						{{ form_row(template.sendMail, { label: sendMailText }) }}
 					{% else %}

@@ -36,18 +36,32 @@ class MailTemplateData {
 	public $sendMail;
 
 	/**
+	 * @var string[]
+	 */
+	public $attachment;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $subject
 	 * @param string|null $body
 	 * @param bool $sendMail
 	 * @param string|null $bccEmail
+	 * @param string|null $attachment
 	 */
-	public function __construct($name = null, $subject = null, $body = null, $sendMail = false, $bccEmail = null) {
+	public function __construct(
+		$name = null,
+		$subject = null,
+		$body = null,
+		$sendMail = false,
+		$bccEmail = null,
+		array $attachment = []
+	) {
 		$this->name = $name;
 		$this->subject = $subject;
 		$this->body = $body;
 		$this->sendMail = $sendMail;
 		$this->bccEmail = $bccEmail;
+		$this->attachment = $attachment;
 	}
 
 	/**
@@ -59,6 +73,7 @@ class MailTemplateData {
 		$this->subject = $mailTemplate->getSubject();
 		$this->body = $mailTemplate->getBody();
 		$this->sendMail = $mailTemplate->isSendMail();
+		$this->attachment = [];
 	}
 
 }
