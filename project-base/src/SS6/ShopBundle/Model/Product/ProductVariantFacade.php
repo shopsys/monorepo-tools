@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantFacade {
@@ -48,6 +49,11 @@ class ProductVariantFacade {
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 */
+	private $productService;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
@@ -55,7 +61,8 @@ class ProductVariantFacade {
 		ImageFacade $imageFacade,
 		ProductVariantService $productVariantService,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
-		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+		ProductService $productService
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
@@ -64,6 +71,7 @@ class ProductVariantFacade {
 		$this->productVariantService = $productVariantService;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+		$this->productService = $productService;
 	}
 
 	/**
@@ -80,6 +88,7 @@ class ProductVariantFacade {
 			$newMainVariant = $this->productEditFacade->create($mainProductEditData);
 			$newMainVariant->setVariants($variants);
 			$this->imageFacade->copyImages($mainProduct, $newMainVariant);
+			$this->productService->markProductForVisibilityRecalculation($newMainVariant);
 
 			$this->em->flush();
 		} catch (\Exception $exception) {

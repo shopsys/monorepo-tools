@@ -13,12 +13,14 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductService;
 
 class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunImmediatelyRecalculations() {
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$pricingGroupMock = $this->getMock(PricingGroup::class, null, [], '', false);
+		$productServiceMock = $this->getMock(ProductService::class, null, [], '', false);
 
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
@@ -41,14 +43,19 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 			$productPriceCalculationMock,
 			$productCalculatedPriceRepositoryMock,
 			$productPriceRecalculationSchedulerMock,
-			$pricingGroupFacadeMock
+			$pricingGroupFacadeMock,
+			$productServiceMock
 		);
 
 		$productPriceRecalculator->runImmediateRecalculations();
 	}
 
+	/**
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
 	public function testRunScheduledRecalculations() {
 		$calculationLimit = 3;
+		$productServiceMock = $this->getMock(ProductService::class, null, [], '', false);
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productIterator = [
 			[$productMock],
@@ -91,7 +98,8 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 			$productPriceCalculationMock,
 			$productCalculatedPriceRepositoryMock,
 			$productPriceRecalculationSchedulerMock,
-			$pricingGroupFacadeMock
+			$pricingGroupFacadeMock,
+			$productServiceMock
 		);
 
 		$calculationCallbackLimit = $calculationLimit;

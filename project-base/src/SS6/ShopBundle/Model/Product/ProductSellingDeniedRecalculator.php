@@ -21,17 +21,42 @@ class ProductSellingDeniedRecalculator {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	public function calculateSellingDeniedForProduct(Product $product) {
-		$this->executeQuery($product);
+		$products = $this->getProductsForCalculations($product);
+		$this->calculate($products);
 	}
 
 	public function calculateSellingDeniedForAll() {
-		$this->executeQuery();
+		$this->calculate();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 */
-	private function executeQuery(Product $product = null) {
+	private function calculate(array $products = []) {
+		$this->calculateIndependent($products);
+		$this->propagateMainVariantSellingDeniedToVariants($products);
+		$this->propagateVariantsSellingDeniedToMainVariant($products);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	private function getProductsForCalculations(Product $product) {
+		$products = [$product];
+		if ($product->isMainVariant()) {
+			$products = array_merge($products, $product->getVariants());
+		} elseif ($product->isVariant()) {
+			$products[] = $product->getMainVariant();
+		}
+
+		return $products;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 */
+	private function calculateIndependent(array $products) {
 		$qb = $this->em->createQueryBuilder()
 			->update(Product::class, 'p')
 			->set('p.calculatedSellingDenied', '
@@ -42,13 +67,62 @@ class ProductSellingDeniedRecalculator {
 					THEN TRUE
 					ELSE p.sellingDenied
 				END
-				')
+			')
 			->setParameter('outOfStockActionExcludeFromSale', Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE);
 
-		if ($product !== null) {
-			$qb->where('p = :product')->setParameter('product', $product);
+		if (count($products) > 0) {
+			$qb->andWhere('p IN (:products)')->setParameter('products', $products);
 		}
+		$qb->getQuery()->execute();
+	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 */
+	private function propagateMainVariantSellingDeniedToVariants(array $products) {
+		$qb = $this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.calculatedSellingDenied', 'TRUE')
+			->andWhere('p.variantType = :variantTypeVariant')
+			->andWhere('p.calculatedSellingDenied = FALSE')
+			->andWhere(
+				'EXISTS (
+					SELECT 1
+					FROM ' . Product::class . ' m
+					WHERE m = p.mainVariant
+						AND m.calculatedSellingDenied = TRUE
+				)'
+			)
+			->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT);
+
+		if (count($products) > 0) {
+			$qb->andWhere('p IN (:products)')->setParameter('products', $products);
+		}
+		$qb->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 */
+	private function propagateVariantsSellingDeniedToMainVariant(array $products) {
+		$qb = $this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.calculatedSellingDenied', 'TRUE')
+			->andWhere('p.variantType = :variantTypeMain')
+			->andWhere('p.calculatedSellingDenied = FALSE')
+			->andWhere(
+				'NOT EXISTS (
+					SELECT 1
+					FROM ' . Product::class . ' v
+					WHERE v.mainVariant = p
+						AND v.calculatedSellingDenied = FALSE
+				)'
+			)
+			->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN);
+
+		if (count($products) > 0) {
+			$qb->andWhere('p IN (:products)')->setParameter('products', $products);
+		}
 		$qb->getQuery()->execute();
 	}
 

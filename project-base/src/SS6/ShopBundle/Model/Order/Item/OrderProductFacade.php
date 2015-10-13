@@ -9,6 +9,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderProductService;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
+use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class OrderProductFacade {
@@ -48,6 +49,11 @@ class OrderProductFacade {
 	 */
 	private $moduleFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 */
+	private $productService;
+
 	public function __construct(
 		EntityManager $em,
 		ProductHiddenRecalculator $productHiddenRecalculator,
@@ -55,7 +61,8 @@ class OrderProductFacade {
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
 		ProductVisibilityFacade $productVisibilityFacade,
 		OrderProductService $orderProductService,
-		ModuleFacade $moduleFacade
+		ModuleFacade $moduleFacade,
+		ProductService $productService
 	) {
 		$this->em = $em;
 		$this->productHiddenRecalculator = $productHiddenRecalculator;
@@ -64,6 +71,7 @@ class OrderProductFacade {
 		$this->productVisibilityFacade = $productVisibilityFacade;
 		$this->orderProductService = $orderProductService;
 		$this->moduleFacade = $moduleFacade;
+		$this->productService = $productService;
 	}
 
 	/**
@@ -97,7 +105,7 @@ class OrderProductFacade {
 			$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($relevantProduct);
 			$this->productHiddenRecalculator->calculateHiddenForProduct($relevantProduct);
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($relevantProduct);
-			$relevantProduct->markForVisibilityRecalculation();
+			$this->productService->markProductForVisibilityRecalculation($relevantProduct);
 			$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 		}
 	}

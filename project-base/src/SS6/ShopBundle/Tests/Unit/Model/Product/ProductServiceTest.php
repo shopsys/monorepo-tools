@@ -183,4 +183,99 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($variant->isVariant());
 	}
 
+	public function testMarkProductForVisibilityRecalculation() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$productMock = $this->getMock(
+			Product::class,
+			['markForVisibilityRecalculation', 'isMainVariant', 'isVariant'],
+			[],
+			'',
+			false
+		);
+		$productMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
+		$productMock->expects($this->any())->method('isMainVariant')->willReturn(false);
+		$productMock->expects($this->atLeastOnce())->method('isVariant')->willReturn(false);
+
+		$productService->markProductForVisibilityRecalculation($productMock);
+	}
+
+	public function testMarkProductForVisibilityRecalculationMainVariant() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$variantMock = $this->getMock(Product::class, ['markForVisibilityRecalculation'], [], '', false);
+		$variantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
+
+		$mainVariantMock = $this->getMock(
+			Product::class,
+			['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getVariants'],
+			[],
+			'',
+			false
+		);
+		$mainVariantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
+		$mainVariantMock->expects($this->atLeastOnce())->method('isMainVariant')->willReturn(true);
+		$mainVariantMock->expects($this->any())->method('isVariant')->willReturn(false);
+		$mainVariantMock->expects($this->atLeastOnce())->method('getVariants')->willReturn([$variantMock]);
+
+		$productService->markProductForVisibilityRecalculation($mainVariantMock);
+	}
+
+	public function testMarkProductForVisibilityRecalculationVariant() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$mainVariantMock = $this->getMock(Product::class, ['markForVisibilityRecalculation'], [], '', false);
+		$mainVariantMock->expects($this->once())->method('markForVisibilityRecalculation');
+
+		$variantMock = $this->getMock(
+			Product::class,
+			['markForVisibilityRecalculation', 'isMainVariant', 'isVariant', 'getMainVariant'],
+			[],
+			'',
+			false
+		);
+		$variantMock->expects($this->atLeastOnce())->method('markForVisibilityRecalculation');
+		$variantMock->expects($this->any())->method('isMainVariant')->willReturn(false);
+		$variantMock->expects($this->atLeastOnce())->method('isVariant')->willReturn(true);
+		$variantMock->expects($this->atLeastOnce())->method('getMainVariant')->willReturn($mainVariantMock);
+
+		$productService->markProductForVisibilityRecalculation($variantMock);
+	}
+
 }

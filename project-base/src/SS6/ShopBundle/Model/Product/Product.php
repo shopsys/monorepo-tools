@@ -260,7 +260,7 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant")
+	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", cascade={"persist"})
 	 */
 	private $variants;
 
@@ -724,10 +724,10 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
 	public function getVariants() {
-		return $this->variants;
+		return $this->variants->toArray();
 	}
 
 	public function unsetMainVariant() {

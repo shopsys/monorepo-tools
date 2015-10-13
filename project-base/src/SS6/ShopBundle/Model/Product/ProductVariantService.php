@@ -42,7 +42,7 @@ class ProductVariantService {
 	 */
 	private function addNewVariants(Product $mainProduct, array $currentVariants) {
 		foreach ($currentVariants as $currentVariant) {
-			if (!$mainProduct->getVariants()->contains($currentVariant)) {
+			if (!in_array($currentVariant, $mainProduct->getVariants(), true)) {
 				$mainProduct->addVariant($currentVariant);
 			}
 		}

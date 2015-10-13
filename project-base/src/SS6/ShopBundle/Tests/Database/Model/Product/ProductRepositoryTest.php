@@ -39,11 +39,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		if ($isExpectedInResult) {
-			$this->assertContains($product, $result, $failMessage);
-		} else {
-			$this->assertNotContains($product, $result, $failMessage);
-		}
+		$this->assertSame(in_array($product, $result, true), $isExpectedInResult, $failMessage);
 	}
 
 	public function getAllSellableQueryBuilderProvider() {
@@ -75,11 +71,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		if ($isExpectedInResult) {
-			$this->assertContains($product, $result, $failMessage);
-		} else {
-			$this->assertNotContains($product, $result, $failMessage);
-		}
+		$this->assertSame(in_array($product, $result, true), $isExpectedInResult, $failMessage);
 	}
 
 }
