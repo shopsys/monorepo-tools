@@ -210,11 +210,10 @@ class ProductController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
-					. ' <strong><a href="{{ url }}">{{ product|productDisplayName }}</a></strong>', [
+					. ' <strong>{{ product|productDisplayName }}</strong>', [
 				'product' => $product,
-				'url' => $this->generateUrl('admin_product_edit', ['id' => $product->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_product_list'));
+			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {

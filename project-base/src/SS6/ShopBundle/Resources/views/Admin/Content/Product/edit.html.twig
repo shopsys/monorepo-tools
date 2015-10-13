@@ -3,7 +3,50 @@
 {% block title -%}
 	- {{ 'Editace zboží'|trans }} - {{ product|productDisplayName }}
 {% endblock %}
-{% block h1 %}{% endblock %}
+
+{% block product_header_heading %}
+	<span>{{ 'Editace zboží: '|trans }}</span> {{ product.name }}
+{% endblock %}
+
+{% block menu_panel_visibilities %}
+	<div class="panel">
+		<div class="panel__in">
+			<div class="panel__in__title">
+				{{ 'Viditelnost'|trans }}
+			</div>
+			<ul class="list-domain">
+				{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
+					<li class="list-domain__item">
+						{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
+						{% set isVisibile = isVisibileForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
+
+						<div class="list-domain__item__image">
+							{{ domainIcon(productDomain.domainId) }}
+						</div>
+
+						<div class="list-domain__item__info">
+							{% if productDetail.product.calculatedSellingDenied %}
+								<span class="list-domain__item__info__denied in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
+							{% endif %}
+							<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisibile ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisibile ? 'Ano'|trans : 'Ne'|trans }}"></span>
+						</div>
+
+						{% if isVisibile %}
+							<a href="{{ url }}" class="list-domain__item__name" target="_blank">
+								{{ getDomainName(productDomain.domainId) }}
+								<i class="svg svg-forward-page"></i>
+							</a>
+						{% else %}
+							<span class="list-domain__item__name">
+								{{ getDomainName(productDomain.domainId) }}
+							</span>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+{% endblock %}
 
 {% block product_variants %}
 	{% if product.isVariant %}
@@ -82,40 +125,6 @@
 	{% else %}
 		{{ parent() }}
 	{% endif %}
-{% endblock %}
-
-{% block product_url %}
-	<div class="form-line">
-		<label class="form-line__label">
-			{{ 'URL adresy na doménách :' |trans }}
-			<i class="svg svg-info c-help js-tooltip"
-				data-toggle="tooltip" data-placement="right"
-				title="{{ 'Pokud je produkt viditelný pro výchozí cenovou skupinu na dané doméně, je URL adresa odkazem, v opačném případě se zobrazuje pouze jako text'|trans }}"
-			 ></i>
-		</label>
-		{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
-			<div class="form-line__line form-line__line--no-space">
-				<div class="form-line__label">
-					{{ domainIcon(productDomain.domainId) }}
-					{{ getDomainName(productDomain.domainId) ~ ' :' }}
-				</div>
-				<div class="form-line__side">
-					<div class="form-line__item form-line__item--text">
-						{% set url = findUrlByDomainId('front_product_detail', { id: product.id }, productDomain.domainId) %}
-						{% if url %}
-							{% if isVisibileForDefaultPricingGroup(product, productDomain.domainId) %}
-								<a href="{{ url }}" target="_blank">{{ url }}</a>
-							{% else %}
-								{{ url }}
-							{% endif %}
-						{% else %}
-							-
-						{% endif %}
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
 {% endblock %}
 
 {% block product_calculated_hidden_info %}

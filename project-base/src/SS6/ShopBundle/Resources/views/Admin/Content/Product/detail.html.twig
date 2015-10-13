@@ -1,7 +1,31 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Karta zboží'|trans }}{% endblock %}
-{% block h1 %}{{ 'Karta zboží'|trans }}{% endblock %}
+{% block h1 %}{% endblock %}
+
+{% block header %}
+	<header class="web__header">
+		<div class="web__header__in web__header__in--small">
+			<div class="top-info">
+				<div class="top-info__logo">
+					<span class="sprite sprite-logo"></span>
+				</div>
+				<div class="top-info__text">
+					<h1 class="top-info__text__title">{% block product_header_heading %}{% endblock %}</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+{% endblock %}
+
+{% block menu_panel %}
+	<div class="panel">
+		<ul class="anchor-menu js-product-detail-navigation"></ul>
+	</div>
+	{% block menu_panel_visibilities %}{% endblock %}
+{% endblock %}
+
+{% block breadcrumb %}{% endblock %}
 
 {% block main_content %}
 
@@ -50,7 +74,6 @@
 			{% endblock %}
 
 			{{ form_id(product|default(null)) }}
-			{% block product_url %}{% endblock %}
 
 			{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
 
@@ -309,7 +332,7 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_product_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Zavřít bez uložení'|trans }}</button>
 				{{ form_save(product|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

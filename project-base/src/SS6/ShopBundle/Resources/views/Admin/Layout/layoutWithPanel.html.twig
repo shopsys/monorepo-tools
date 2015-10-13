@@ -4,15 +4,19 @@
 	<div class="web__container">
 		<div class="web__panel">
 			<div class="web__panel__in">
-				{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
-					route: app.request.get('_route'),
-					parameters: app.request.attributes.get('_route_params')
-				}	)) }}
+				{% block menu_panel %}
+					{{ render(controller('SS6ShopBundle:Admin/Menu:panel', {
+						route: app.request.get('_route'),
+						parameters: app.request.attributes.get('_route_params')
+					}	)) }}
+				{% endblock %}
 			</div>
 		</div>
 
 		<div class="web__content">
-			{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
+			{% block breadcrumb %}
+				{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
+			{% endblock %}
 
 			{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
 
