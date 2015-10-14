@@ -90,16 +90,16 @@ class CronConfigLoader {
 	 */
 	private function processCronModuleConfigArray(array $cronModuleConfigArray) {
 		$moduleId = $cronModuleConfigArray[CronConfigDefinition::CONFIG_SERVICE];
-		$timeMinutes = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];
 		$timeHours = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_HOURS];
+		$timeMinutes = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];
 
 		if (!$this->container->has($moduleId)) {
 			throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronModuleNotFoundException($moduleId);
 		}
-		$this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
 		$this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
+		$this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);
 
-		return new CronModuleConfig($this->container->get($moduleId), $moduleId, $timeMinutes, $timeHours);
+		return new CronModuleConfig($this->container->get($moduleId), $moduleId, $timeHours, $timeMinutes);
 	}
 
 }

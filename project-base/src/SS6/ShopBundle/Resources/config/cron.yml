@@ -1,44 +1,44 @@
 - service: SS6\ShopBundle\Model\Pricing\Vat\VatDeletionCronModule
   time:
-    minutes: '*'
     hours: '*'
+    minutes: '*'
 
 - service: SS6\ShopBundle\Model\Product\Pricing\ProductPriceCronModule
   time:
-    minutes: '*'
     hours: '*'
+    minutes: '*'
 
 - service: SS6\ShopBundle\Model\Product\ProductVisibilityImmediateCronModule
   time:
-    minutes: '*'
     hours: '*'
+    minutes: '*'
 
 - service: SS6\ShopBundle\Model\Product\ProductVisibilityMidnightCronModule
   time:
-    minutes: '0'
     hours: '0'
+    minutes: '0'
 
 - service: SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCronModule
   time:
-    minutes: '*'
     hours: '*'
+    minutes: '*'
 
 - service: SS6\ShopBundle\Model\Feed\FeedCronModule
   time:
-    minutes: '0'
     hours: '*/6'
+    minutes: '0'
 
 - service: SS6\ShopBundle\Model\Feed\DeliveryFeedCronModule
   time:
-    minutes: '10'
     hours: '*'
+    minutes: '10'
 
 - service: SS6\ShopBundle\Component\Sitemap\SitemapCronModule
   time:
-    minutes: '0'
     hours: '4'
+    minutes: '0'
 
 - service: SS6\ShopBundle\Model\Feed\Category\FeedCategoryCronModule
   time:
-    minutes: '0'
     hours: '3'
+    minutes: '0'

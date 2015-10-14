@@ -10,8 +10,8 @@ class CronConfigDefinition implements ConfigurationInterface {
 
 	const CONFIG_SERVICE = 'service';
 	const CONFIG_TIME = 'time';
-	const CONFIG_TIME_MINUTES = 'minutes';
 	const CONFIG_TIME_HOURS = 'hours';
+	const CONFIG_TIME_MINUTES = 'minutes';
 
 	/**
 	 * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
@@ -36,8 +36,8 @@ class CronConfigDefinition implements ConfigurationInterface {
 				->scalarNode(self::CONFIG_SERVICE)->isRequired()->cannotBeEmpty()->end()
 				->arrayNode(self::CONFIG_TIME)
 					->children()
-						->scalarNode(self::CONFIG_TIME_MINUTES)->defaultValue('*')->end()
 						->scalarNode(self::CONFIG_TIME_HOURS)->defaultValue('*')->end()
+						->scalarNode(self::CONFIG_TIME_MINUTES)->defaultValue('*')->end()
 					->end()
 				->end()
 			->end();

@@ -30,14 +30,14 @@ class CronModuleConfig implements CronTimeInterface {
 	/**
 	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface $cronModule
 	 * @param string $moduleId
-	 * @param string $timeMinutes
 	 * @param string $timeHours
+	 * @param string $timeMinutes
 	 */
-	public function __construct(CronModuleInterface $cronModule, $moduleId, $timeMinutes, $timeHours) {
+	public function __construct(CronModuleInterface $cronModule, $moduleId, $timeHours, $timeMinutes) {
 		$this->cronModule = $cronModule;
 		$this->moduleId = $moduleId;
-		$this->timeMinutes = $timeMinutes;
 		$this->timeHours = $timeHours;
+		$this->timeMinutes = $timeMinutes;
 	}
 
 	/**
