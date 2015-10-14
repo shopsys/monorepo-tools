@@ -43,10 +43,12 @@
 {% endblock form_row %}
 
 {% block checkbox_row %}
-	<div class="checkbox">
-		{{ form_label(form) }}
-		{{ form_errors(form) }}
-		{{ form_widget(form) }}
+	<div class="form-line">
+		<div class="checkbox">
+			{{ form_label(form) }}
+			{{ form_errors(form) }}
+			{{ form_widget(form) }}
+		</div>
 	</div>
 {% endblock checkbox_row %}
 

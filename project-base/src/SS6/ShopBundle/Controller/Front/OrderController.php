@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Customer\User;
@@ -18,6 +19,7 @@ use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
@@ -98,6 +100,11 @@ class OrderController extends FrontBaseController {
 	 */
 	private $session;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+	 */
+	private $termsAndConditionsFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		Cart $cart,
@@ -112,7 +119,8 @@ class OrderController extends FrontBaseController {
 		OrderFlow $flow,
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
-		OrderMailFacade $orderMailFacade
+		OrderMailFacade $orderMailFacade,
+		TermsAndConditionsFacade $termsAndConditionsFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cart = $cart;
@@ -128,6 +136,7 @@ class OrderController extends FrontBaseController {
 		$this->session = $session;
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
+		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
 	}
 
 	/**
@@ -219,6 +228,9 @@ class OrderController extends FrontBaseController {
 				$orderPreview->getProductsPrice(),
 				$domainId
 			),
+			'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
+				$this->domain->getId()
+			),
 		]);
 	}
 
@@ -281,6 +293,30 @@ class OrderController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $this->orderFacade->getOrderConfirmText($orderId),
+		]);
+	}
+
+	public function termsAndConditionsAction() {
+		return $this->getTermsAndConditionsResponse();
+	}
+
+	public function termsAndConditionsDownloadAction() {
+		$response = $this->getTermsAndConditionsResponse();
+
+		return new DownloadFileResponse(
+			$this->termsAndConditionsFacade->getDownloadFilename(),
+			$response->getContent()
+		);
+	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function getTermsAndConditionsResponse() {
+		return $this->render('@SS6Shop/Front/Content/Order/termsAndConditions.html.twig', [
+			'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
+				$this->domain->getId()
+			),
 		]);
 	}
 

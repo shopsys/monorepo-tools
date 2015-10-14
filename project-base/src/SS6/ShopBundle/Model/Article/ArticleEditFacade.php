@@ -49,6 +49,14 @@ class ArticleEditFacade {
 
 	/**
 	 * @param int $articleId
+	 * @return \SS6\ShopBundle\Model\Article\Article|null
+	 */
+	public function findById($articleId) {
+		return $this->articleRepository->findById($articleId);
+	}
+
+	/**
+	 * @param int $articleId
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function getById($articleId) {
@@ -150,6 +158,14 @@ class ArticleEditFacade {
 			}
 		}
 		$this->em->flush();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 */
+	public function getAllByDomainId($domainId) {
+		return $this->articleRepository->getAllByDomainId($domainId);
 	}
 
 }

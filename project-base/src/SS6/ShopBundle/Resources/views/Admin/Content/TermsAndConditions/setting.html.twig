@@ -1,0 +1,20 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Nastavení obchodních podmínek'|trans }}{% endblock %}
+{% block h1 %}{{ 'Nastavení obchodních podmínek'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
+	{{ form_start(form) }}
+		{{ form_row(form.termsAndConditionsArticle, { label: 'Obchodní podmínky'|trans, icon: { title: 'Vyberte článek, který bude sloužit jako obchodní podmínky, se kterými musí zákazník souhlasit při vytváření objednávky.' } }) }}
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
+
+{% endblock %}

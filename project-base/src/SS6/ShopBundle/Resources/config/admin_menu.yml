@@ -136,6 +136,9 @@
           route: admin_domain_edit
           visible: false
 
+    - label: 'Obchodní podmínky'
+      route: admin_termsandconditions_setting
+
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
       items:

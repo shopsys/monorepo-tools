@@ -73,6 +73,20 @@
 
 			</div>
 
+			<div class="wrap-box">
+				{% if termsAndConditionsArticle is not null %}
+					<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
+					<div class="box-condition">
+						<iframe name="js-terms-and-conditions-frame" width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
+					</div>
+					<div class="text-right">
+						<button id="js-terms-and-conditions-print" class="button button--simple" type="button">{{ 'Vytisknout'|trans }}</button>
+						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="button button--simple" type="button">{{ 'Stáhnout'|trans }}</a>
+					</div>
+				{% endif %}
+				{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
+			</div>
+
 		</div>
 
 		{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
