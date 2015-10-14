@@ -3,12 +3,11 @@
 namespace SS6\ShopBundle\Component\Grid;
 
 use Doctrine\ORM\QueryBuilder;
+use SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
 use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 
 class QueryBuilderDataSource implements DataSourceInterface {
-
-	const HYDRATION_MODE = 'GroupedScalarHydrator';
 
 	/**
 	 * @var \Doctrine\ORM\QueryBuilder
@@ -47,7 +46,7 @@ class QueryBuilderDataSource implements DataSourceInterface {
 			$this->addQueryOrder($queryBuilder, $orderSourceColumnName, $orderDirection);
 		}
 
-		$queryPaginator = new QueryPaginator($queryBuilder, self::HYDRATION_MODE);
+		$queryPaginator = new QueryPaginator($queryBuilder, GroupedScalarHydrator::HYDRATION_MODE);
 
 		$paginationResult = $queryPaginator->getResult($page, $limit);
 		/* @var $paginationResult \SS6\ShopBundle\Component\Paginator\PaginationResult */
@@ -63,14 +62,14 @@ class QueryBuilderDataSource implements DataSourceInterface {
 		$queryBuilder = clone $this->queryBuilder;
 		$this->prepareQueryWithOneRow($queryBuilder, $rowId);
 
-		return $queryBuilder->getQuery()->getSingleResult(self::HYDRATION_MODE);
+		return $queryBuilder->getQuery()->getSingleResult(GroupedScalarHydrator::HYDRATION_MODE);
 	}
 
 	/**
 	 * @return int
 	 */
 	public function getTotalRowsCount() {
-		$queryPaginator = new QueryPaginator($this->queryBuilder, self::HYDRATION_MODE);
+		$queryPaginator = new QueryPaginator($this->queryBuilder, GroupedScalarHydrator::HYDRATION_MODE);
 		return $queryPaginator->getTotalCount();
 	}
 

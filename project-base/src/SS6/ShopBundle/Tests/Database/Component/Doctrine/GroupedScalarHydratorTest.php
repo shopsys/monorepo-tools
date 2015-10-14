@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Database\Component\Doctrine;
 
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -16,7 +17,7 @@ class GroupedScalarHydratorTest extends DatabaseTestCase {
 			->join(OrderItem::class, 'oi', Join::WITH, 'oi.order = o')
 			->setMaxResults(1);
 
-		$rows = $qb->getQuery()->execute(null, 'GroupedScalarHydrator');
+		$rows = $qb->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
 		$row = $rows[0];
 
 		$this->assertInternalType('array', $row);

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
+use SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice;
@@ -60,7 +61,7 @@ class ParameterFilterChoiceRepository {
 			->resetDQLPart('orderBy')
 			->setParameter('locale', $locale);
 
-		$rows = $productsQueryBuilder->getQuery()->execute(null, 'GroupedScalarHydrator');
+		$rows = $productsQueryBuilder->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
 
 		$parametersIndexedById = $this->getParametersIndexedById($rows);
 		$parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterId($rows);
