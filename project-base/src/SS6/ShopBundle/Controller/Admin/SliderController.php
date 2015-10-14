@@ -117,7 +117,7 @@ class SliderController extends AdminBaseController {
 				'name' => $sliderItem->getName(),
 				'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_slider_list'));
+			return $this->redirectToRoute('admin_slider_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -160,7 +160,7 @@ class SliderController extends AdminBaseController {
 				]
 			);
 
-			return $this->redirect($this->generateUrl('admin_slider_list'));
+			return $this->redirectToRoute('admin_slider_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -198,7 +198,7 @@ class SliderController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená stránka neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_slider_list'));
+		return $this->redirectToRoute('admin_slider_list');
 
 	}
 }

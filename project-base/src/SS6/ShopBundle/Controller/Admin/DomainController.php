@@ -81,7 +81,7 @@ class DomainController extends AdminBaseController {
 
 		$referer = $request->server->get('HTTP_REFERER');
 		if ($referer === null) {
-			return $this->redirect($this->generateUrl('admin_dashboard'));
+			return $this->redirectToRoute('admin_dashboard');
 		} else {
 			return $this->redirect($referer);
 		}

@@ -60,7 +60,7 @@ class ParameterController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený parametr neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_parameter_list'));
+		return $this->redirectToRoute('admin_parameter_list');
 	}
 
 }

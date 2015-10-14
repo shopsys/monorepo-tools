@@ -152,7 +152,7 @@ class CustomerController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
 					]
 				);
-				return $this->redirect($this->generateUrl('admin_customer_list'));
+				return $this->redirectToRoute('admin_customer_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
@@ -262,7 +262,7 @@ class CustomerController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
 					]
 				);
-				return $this->redirect($this->generateUrl('admin_customer_list'));
+				return $this->redirectToRoute('admin_customer_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('userData')->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
@@ -297,7 +297,7 @@ class CustomerController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený zákazník neexistuje');
 		}
 
-		return $this->redirect($this->generateUrl('admin_customer_list'));
+		return $this->redirectToRoute('admin_customer_list');
 	}
 
 	/**

@@ -57,7 +57,7 @@ class CustomerController extends FrontBaseController {
 	public function editAction(Request $request) {
 		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 			$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
-			return $this->redirect($this->generateUrl('front_login'));
+			return $this->redirectToRoute('front_login');
 		}
 
 		$user = $this->getUser();
@@ -81,7 +81,7 @@ class CustomerController extends FrontBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlash('Vaše údaje byly úspěšně zaktualizovány');
-			return $this->redirect($this->generateUrl('front_customer_edit'));
+			return $this->redirectToRoute('front_customer_edit');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -96,7 +96,7 @@ class CustomerController extends FrontBaseController {
 	public function ordersAction() {
 		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 			$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
-			return $this->redirect($this->generateUrl('front_login'));
+			return $this->redirectToRoute('front_login');
 		}
 
 		$user = $this->getUser();
@@ -130,7 +130,7 @@ class CustomerController extends FrontBaseController {
 		if ($orderNumber !== null) {
 			if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
 				$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
-				return $this->redirect($this->generateUrl('front_login'));
+				return $this->redirectToRoute('front_login');
 			}
 
 			$user = $this->getUser();
@@ -139,7 +139,7 @@ class CustomerController extends FrontBaseController {
 				/* @var $order \SS6\ShopBundle\Model\Order\Order */
 			} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash('Objednávka nebyla nalezena');
-				return $this->redirect($this->generateUrl('front_customer_orders'));
+				return $this->redirectToRoute('front_customer_orders');
 			}
 		} else {
 			$order = $this->orderFacade->getByUrlHashAndDomain($urlHash, $this->domain->getId());

@@ -155,7 +155,7 @@ class VatController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolené DPH neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_vat_list'));
+		return $this->redirectToRoute('admin_vat_list');
 	}
 
 	/**
@@ -187,7 +187,7 @@ class VatController extends AdminBaseController {
 				);
 				$this->getFlashMessageSender()->addSuccessFlash('Nastavení DPH bylo upraveno');
 
-				return $this->redirect($this->generateUrl('admin_vat_list'));
+				return $this->redirectToRoute('admin_vat_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash('Neplatné nastavení zaokrouhlování');

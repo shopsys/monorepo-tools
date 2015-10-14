@@ -81,7 +81,7 @@ class TransportAndPaymentController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení dopravy a platby zdarma bylo uloženo');
 
-			return $this->redirect($this->generateUrl('admin_transportandpayment_freetransportandpaymentlimit'));
+			return $this->redirectToRoute('admin_transportandpayment_freetransportandpaymentlimit');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [

@@ -111,7 +111,7 @@ class CurrencyController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená měna neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_currency_list'));
+		return $this->redirectToRoute('admin_currency_list');
 	}
 
 	/**
@@ -156,7 +156,7 @@ class CurrencyController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení měn bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_currency_list'));
+			return $this->redirectToRoute('admin_currency_list');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Currency/currencySettings.html.twig', [

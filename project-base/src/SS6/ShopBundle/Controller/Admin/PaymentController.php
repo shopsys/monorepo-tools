@@ -100,7 +100,7 @@ class PaymentController extends AdminBaseController {
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -138,7 +138,7 @@ class PaymentController extends AdminBaseController {
 				'name' => $payment->getName(),
 				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -175,7 +175,7 @@ class PaymentController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená platba neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+		return $this->redirectToRoute('admin_transportandpayment_list');
 	}
 
 	public function listAction() {

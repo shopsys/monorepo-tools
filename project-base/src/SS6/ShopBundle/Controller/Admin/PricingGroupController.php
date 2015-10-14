@@ -103,7 +103,7 @@ class PricingGroupController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená cenová skupina neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
+		return $this->redirectToRoute('admin_pricinggroup_list');
 	}
 
 	/**
@@ -178,7 +178,7 @@ class PricingGroupController extends AdminBaseController {
 			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí cenové skupiny bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_pricinggroup_list'));
+			return $this->redirectToRoute('admin_pricinggroup_list');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', [

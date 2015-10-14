@@ -66,7 +66,7 @@ class SeoController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlash('Natavení SEO atributů bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_seo_index'));
+			return $this->redirectToRoute('admin_seo_index');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {

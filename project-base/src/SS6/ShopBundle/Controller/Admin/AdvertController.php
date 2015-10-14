@@ -110,7 +110,7 @@ class AdvertController extends AdminBaseController {
 				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla upravena', [
 					'name' => $advert->getName(),
 				]);
-			return $this->redirect($this->generateUrl('admin_advert_list'));
+			return $this->redirectToRoute('admin_advert_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -199,7 +199,7 @@ class AdvertController extends AdminBaseController {
 				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla vytvořena', [
 					'name' => $advert->getName(),
 				]);
-			return $this->redirect($this->generateUrl('admin_advert_list'));
+			return $this->redirectToRoute('admin_advert_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -232,7 +232,7 @@ class AdvertController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená reklama neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_advert_list'));
+		return $this->redirectToRoute('admin_advert_list');
 	}
 
 }

@@ -52,7 +52,7 @@ class CustomerCommunicationController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení textu po potvrzení objednávky bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_customercommunication_ordersubmitted'));
+			return $this->redirectToRoute('admin_customercommunication_ordersubmitted');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [

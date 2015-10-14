@@ -124,7 +124,7 @@ class UnitController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená jednotka neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_unit_list'));
+		return $this->redirectToRoute('admin_unit_list');
 	}
 
 }

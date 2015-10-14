@@ -98,7 +98,7 @@ class CategoryController extends AdminBaseController {
 					'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
 				]
 			);
-			return $this->redirect($this->generateUrl('admin_category_list'));
+			return $this->redirectToRoute('admin_category_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -142,7 +142,7 @@ class CategoryController extends AdminBaseController {
 				]
 			);
 
-			return $this->redirect($this->generateUrl('admin_category_list'));
+			return $this->redirectToRoute('admin_category_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -230,7 +230,7 @@ class CategoryController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená kategorie neexistuje');
 		}
 
-		return $this->redirect($this->generateUrl('admin_category_list'));
+		return $this->redirectToRoute('admin_category_list');
 	}
 
 	public function listDomainTabsAction() {

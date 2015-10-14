@@ -85,7 +85,7 @@ class BrandController extends AdminBaseController {
 					'name' => $brand->getName(),
 					'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
 				]);
-			return $this->redirect($this->generateUrl('admin_brand_list'));
+			return $this->redirectToRoute('admin_brand_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -157,7 +157,7 @@ class BrandController extends AdminBaseController {
 					'name' => $brand->getName(),
 					'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
 				]);
-			return $this->redirect($this->generateUrl('admin_brand_list'));
+			return $this->redirectToRoute('admin_brand_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -190,7 +190,7 @@ class BrandController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená značka neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_brand_list'));
+		return $this->redirectToRoute('admin_brand_list');
 	}
 
 }

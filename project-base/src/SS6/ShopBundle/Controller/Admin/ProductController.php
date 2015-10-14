@@ -163,7 +163,7 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>', [
 				'product' => $product,
 			]);
-			return $this->redirect($this->generateUrl('admin_product_edit', ['id' => $product->getId()]));
+			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -302,7 +302,7 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_product_list'));
+		return $this->redirectToRoute('admin_product_list');
 	}
 
 	/**

@@ -19,7 +19,7 @@ class LoginController extends AdminBaseController {
 	 */
 	public function loginAction(Request $request) {
 		if ($this->isGranted(Roles::ROLE_ADMIN)) {
-			return $this->redirect($this->generateUrl('admin_default_dashboard'));
+			return $this->redirectToRoute('admin_default_dashboard');
 		}
 
 		$error = null;

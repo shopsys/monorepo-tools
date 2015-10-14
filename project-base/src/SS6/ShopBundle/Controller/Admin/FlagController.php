@@ -62,7 +62,7 @@ class FlagController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený příznak neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_flag_list'));
+		return $this->redirectToRoute('admin_flag_list');
 	}
 
 }

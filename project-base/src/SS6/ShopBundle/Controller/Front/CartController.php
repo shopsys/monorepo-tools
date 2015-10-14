@@ -113,10 +113,10 @@ class CartController extends FrontBaseController {
 
 			if (!$invalidCartRecalc) {
 				if ($form->get('recalcToOrder')->isClicked()) {
-					return $this->redirect($this->generateUrl('front_order_index'));
+					return $this->redirectToRoute('front_order_index');
 				} else {
 					$this->getFlashMessageSender()->addSuccessFlash('Množství položek v košíku bylo úspěšně přepočítáno.');
-					return $this->redirect($this->generateUrl('front_cart'));
+					return $this->redirectToRoute('front_cart');
 				}
 			}
 		} elseif ($form->isSubmitted()) {
@@ -319,7 +319,7 @@ class CartController extends FrontBaseController {
 					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.');
 		}
 
-		return $this->redirect($this->generateUrl('front_cart'));
+		return $this->redirectToRoute('front_cart');
 	}
 
 }

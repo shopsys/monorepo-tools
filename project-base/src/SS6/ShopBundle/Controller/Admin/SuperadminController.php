@@ -115,7 +115,7 @@ class SuperadminController extends AdminBaseController {
 					'url' => $this->generateUrl('admin_superadmin_pricing'),
 				]
 			);
-			return $this->redirect($this->generateUrl('admin_superadmin_pricing'));
+			return $this->redirectToRoute('admin_superadmin_pricing');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', [
@@ -189,7 +189,7 @@ class SuperadminController extends AdminBaseController {
 			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
 				'url' => $this->generateUrl('admin_superadmin_pricing'),
 			]);
-			return $this->redirect($this->generateUrl('admin_superadmin_modules'));
+			return $this->redirectToRoute('admin_superadmin_modules');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Superadmin/modules.html.twig', [

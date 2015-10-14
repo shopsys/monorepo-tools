@@ -105,7 +105,7 @@ class BestsellingProductController extends AdminBaseController {
 						),
 					]
 				);
-			return $this->redirect($this->generateUrl('admin_bestsellingproduct_list'));
+			return $this->redirectToRoute('admin_bestsellingproduct_list');
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem($category->getName()));

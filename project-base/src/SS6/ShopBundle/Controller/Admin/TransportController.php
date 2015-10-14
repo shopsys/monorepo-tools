@@ -100,7 +100,7 @@ class TransportController extends AdminBaseController {
 				'name' => $transport->getName(),
 				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -139,7 +139,7 @@ class TransportController extends AdminBaseController {
 				'name' => $transport->getName(),
 				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
 			]);
-			return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -176,7 +176,7 @@ class TransportController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená doprava neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_transportandpayment_list'));
+		return $this->redirectToRoute('admin_transportandpayment_list');
 	}
 
 	public function listAction() {

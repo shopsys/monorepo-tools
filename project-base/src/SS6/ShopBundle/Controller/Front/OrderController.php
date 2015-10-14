@@ -147,7 +147,7 @@ class OrderController extends FrontBaseController {
 		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
 
 		if ($this->cart->isEmpty()) {
-			return $this->redirect($this->generateUrl('front_cart'));
+			return $this->redirectToRoute('front_cart');
 		}
 
 		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
@@ -165,7 +165,7 @@ class OrderController extends FrontBaseController {
 		$frontOrderFormData->currency = $currency;
 
 		if ($this->flow->isBackToCartTransition()) {
-			return $this->redirect($this->generateUrl('front_cart'));
+			return $this->redirectToRoute('front_cart');
 		}
 
 		$this->flow->setFormTypesData($transports, $payments);
@@ -203,7 +203,7 @@ class OrderController extends FrontBaseController {
 
 				$this->session->set(self::SESSION_CREATED_ORDER, $order->getId());
 
-				return $this->redirect($this->generateUrl('front_order_sent'));
+				return $this->redirectToRoute('front_order_sent');
 			}
 		}
 
@@ -288,7 +288,7 @@ class OrderController extends FrontBaseController {
 		$this->session->remove(self::SESSION_CREATED_ORDER);
 
 		if ($orderId === null) {
-			return $this->redirect($this->generateUrl('front_cart'));
+			return $this->redirectToRoute('front_cart');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [

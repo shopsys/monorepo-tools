@@ -136,7 +136,7 @@ class OrderController extends AdminBaseController {
 					'number' => $order->getNumber(),
 					'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
 				]);
-				return $this->redirect($this->generateUrl('admin_order_list'));
+				return $this->redirectToRoute('admin_order_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
 			$this->getFlashMessageSender()->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
@@ -291,7 +291,7 @@ class OrderController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená objednávka neexistuje');
 		}
 
-		return $this->redirect($this->generateUrl('admin_order_list'));
+		return $this->redirectToRoute('admin_order_list');
 	}
 
 	/**

@@ -101,7 +101,7 @@ class OrderStatusController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený stav objednávek neexistuje');
 		}
 
-		return $this->redirect($this->generateUrl('admin_orderstatus_list'));
+		return $this->redirectToRoute('admin_orderstatus_list');
 	}
 
 	/**

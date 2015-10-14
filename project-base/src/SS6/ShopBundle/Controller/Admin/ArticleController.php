@@ -134,7 +134,7 @@ class ArticleController extends AdminBaseController {
 					'name' => $article->getName(),
 					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
 				]);
-			return $this->redirect($this->generateUrl('admin_article_list'));
+			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -190,7 +190,7 @@ class ArticleController extends AdminBaseController {
 					'name' => $article->getName(),
 					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
 				]);
-			return $this->redirect($this->generateUrl('admin_article_list'));
+			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -223,7 +223,7 @@ class ArticleController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený článek neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_article_list'));
+		return $this->redirectToRoute('admin_article_list');
 	}
 
 	/**

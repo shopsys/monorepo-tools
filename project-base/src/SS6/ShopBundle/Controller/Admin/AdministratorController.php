@@ -108,7 +108,7 @@ class AdministratorController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
 					]
 				);
-				return $this->redirect($this->generateUrl('admin_administrator_list'));
+				return $this->redirectToRoute('admin_administrator_list');
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
@@ -172,7 +172,7 @@ class AdministratorController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_administrator_list', ['id' => $administrator->getId()]),
 					]
 				);
-				return $this->redirect($this->generateUrl('admin_administrator_list'));
+				return $this->redirectToRoute('admin_administrator_list');
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
@@ -226,6 +226,6 @@ class AdministratorController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolený administrátor neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_administrator_list'));
+		return $this->redirectToRoute('admin_administrator_list');
 	}
 }

@@ -155,7 +155,7 @@ class MailController extends AdminBaseController {
 
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení šablony e-mailu bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_mail_template'));
+			return $this->redirectToRoute('admin_mail_template');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {

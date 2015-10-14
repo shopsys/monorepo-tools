@@ -93,7 +93,7 @@ class AvailabilityController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Zvolená dostupnost neexistuje.');
 		}
 
-		return $this->redirect($this->generateUrl('admin_availability_list'));
+		return $this->redirectToRoute('admin_availability_list');
 	}
 
 	/**
@@ -167,7 +167,7 @@ class AvailabilityController extends AdminBaseController {
 			);
 			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
 
-			return $this->redirect($this->generateUrl('admin_availability_list'));
+			return $this->redirectToRoute('admin_availability_list');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Availability/setting.html.twig', [

@@ -75,7 +75,7 @@ class RegistrationController extends FrontBaseController {
 				$this->login($user);
 
 				$this->getFlashMessageSender()->addSuccessFlash('Byli jste úspěšně zaregistrováni');
-				return $this->redirect($this->generateUrl('front_homepage'));
+				return $this->redirectToRoute('front_homepage');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
@@ -123,7 +123,7 @@ class RegistrationController extends FrontBaseController {
 						'email' => $email,
 					]
 				);
-				return $this->redirect($this->generateUrl('front_registration_reset_password'));
+				return $this->redirectToRoute('front_registration_reset_password');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					'Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
@@ -148,7 +148,7 @@ class RegistrationController extends FrontBaseController {
 
 		if (!$this->registrationFacade->isResetPasswordHashValid($email, $this->domain->getId(), $hash)) {
 			$this->getFlashMessageSender()->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
-			return $this->redirect($this->generateUrl('front_homepage'));
+			return $this->redirectToRoute('front_homepage');
 		}
 
 		$form = $this->createForm(new NewPasswordFormType());
@@ -181,7 +181,7 @@ class RegistrationController extends FrontBaseController {
 			}
 
 			$this->getFlashMessageSender()->addSuccessFlash('Heslo bylo úspěšně změněno');
-			return $this->redirect($this->generateUrl('front_homepage'));
+			return $this->redirectToRoute('front_homepage');
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/setNewPassword.html.twig', [
