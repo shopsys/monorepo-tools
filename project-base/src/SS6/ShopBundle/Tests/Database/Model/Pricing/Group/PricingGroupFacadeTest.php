@@ -56,7 +56,12 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
 		$productPriceRecalculator->runAllScheduledRecalculations();
 
-		$productPriceAfterEdit = $reflectionProperty->getValue($productCalculatedPrice);
+		$newProductCalculatedPrice = $em->getRepository(ProductCalculatedPrice::class)->findOneBy([
+			'product' => $product,
+			'pricingGroup' => $pricingGroup,
+		]);
+
+		$productPriceAfterEdit = $reflectionProperty->getValue($newProductCalculatedPrice);
 
 		$this->assertSame(round($productPriceBeforeEdit * 2, 6), round($productPriceAfterEdit, 6));
 	}
