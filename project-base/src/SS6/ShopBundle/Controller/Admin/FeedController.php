@@ -85,6 +85,7 @@ class FeedController extends AdminBaseController {
 
 		$grid->addColumn('name', 'feedName', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
+		$grid->addColumn('url', 'url', 'Url adresa');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
 
