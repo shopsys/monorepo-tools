@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Twig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
 use SS6\ShopBundle\Component\EntityFile\FileFacade;
-use SS6\ShopBundle\Component\EntityFile\FileLocator;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -16,11 +15,6 @@ class FileExtension extends Twig_Extension {
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileLocator
-	 */
-	private $fileLocator;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
@@ -40,14 +34,12 @@ class FileExtension extends Twig_Extension {
 	public function __construct(
 		$fileUrlPrefix,
 		Domain $domain,
-		FileLocator $fileLocator,
 		FileConfig $fileConfig,
 		FileFacade $fileFacade,
 		FileThumbnailExtension $fileThumbnailExtension
 	) {
 		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->domain = $domain;
-		$this->fileLocator = $fileLocator;
 		$this->fileConfig = $fileConfig;
 		$this->fileFacade = $fileFacade;
 		$this->fileThumbnailExtension = $fileThumbnailExtension;
@@ -70,13 +62,7 @@ class FileExtension extends Twig_Extension {
 	 * @return bool
 	 */
 	public function hasFile($entity) {
-		try {
-			$file = $this->getFileByEntity($entity);
-		} catch (\SS6\ShopBundle\Component\EntityFile\Exception\FileNotFoundException $e) {
-			return false;
-		}
-
-		return $this->fileLocator->fileExists($file);
+		return $this->fileFacade->hasFile($entity);
 	}
 
 	/**
@@ -86,7 +72,7 @@ class FileExtension extends Twig_Extension {
 	public function getFileUrl($entity) {
 		$file = $this->getFileByEntity($entity);
 
-		return $this->fileLocator->getFileUrl($this->domain->getCurrentDomainConfig(), $file);
+		return $this->fileFacade->getFileUrl($this->domain->getCurrentDomainConfig(), $file);
 	}
 
 	/**
@@ -95,7 +81,7 @@ class FileExtension extends Twig_Extension {
 	 */
 	public function getFilePreviewHtml($entity) {
 		$file = $this->getFileByEntity($entity);
-		$filepath = $this->fileLocator->getAbsoluteFileFilepath($file);
+		$filepath = $this->fileFacade->getAbsoluteFileFilepath($file);
 		$fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfo($filepath);
 
 		if ($fileThumbnailInfo->getIconType() !== null) {

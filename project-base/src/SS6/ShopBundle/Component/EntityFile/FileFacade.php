@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\EntityFile;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
 use SS6\ShopBundle\Component\EntityFile\File;
 use SS6\ShopBundle\Component\EntityFile\FileLocator;
@@ -138,6 +139,37 @@ class FileFacade {
 	 */
 	public function getById($fileId) {
 		return $this->fileRepository->getById($fileId);
+	}
+
+	/**
+	 * @param Object $entity
+	 * @return bool
+	 */
+	public function hasFile($entity) {
+		try {
+			$file = $this->getFileByEntity($entity);
+		} catch (\SS6\ShopBundle\Component\EntityFile\Exception\FileNotFoundException $e) {
+			return false;
+		}
+
+		return $this->fileLocator->fileExists($file);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @return string
+	 */
+	public function getAbsoluteFileFilepath(File $file) {
+		return $this->fileLocator->getAbsoluteFileFilepath($file);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @return string
+	 */
+	public function getFileUrl(DomainConfig $domainConfig, File $file) {
+		return $this->fileLocator->getFileUrl($domainConfig, $file);
 	}
 
 }
