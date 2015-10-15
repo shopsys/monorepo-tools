@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController {
@@ -57,6 +58,11 @@ class MailController extends AdminBaseController {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
+	 */
+	private $orderStatusFacade;
+
 	public function __construct(
 		Translator $translator,
 		AllMailTemplatesFormTypeFactory $allMailTemplatesFormTypeFactory,
@@ -65,7 +71,8 @@ class MailController extends AdminBaseController {
 		CustomerMailService $customerMailService,
 		SelectedDomain $selectedDomain,
 		MailTemplateFacade $mailTemplateFacade,
-		MailSettingFacade $mailSettingFacade
+		MailSettingFacade $mailSettingFacade,
+		OrderStatusFacade $orderStatusFacade
 	) {
 		$this->translator = $translator;
 		$this->allMailTemplatesFormTypeFactory = $allMailTemplatesFormTypeFactory;
@@ -75,6 +82,7 @@ class MailController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->mailTemplateFacade = $mailTemplateFacade;
 		$this->mailSettingFacade = $mailSettingFacade;
+		$this->orderStatusFacade = $orderStatusFacade;
 	}
 
 	/**
@@ -167,7 +175,7 @@ class MailController extends AdminBaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', [
 			'form' => $form->createView(),
-			'orderStatusesIndexedById' => $this->mailTemplateFacade->getAllIndexedById(),
+			'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
 			'orderStatusVariables' => $orderStatusesTemplateVariables,
 			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
 			'registrationVariables' => $registrationTemplateVariables,
