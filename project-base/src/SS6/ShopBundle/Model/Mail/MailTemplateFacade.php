@@ -68,6 +68,10 @@ class MailTemplateFacade {
 		return $this->mailTemplateRepository->getByNameAndDomainId($templateName, $domainId);
 	}
 
+	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
+	 */
 	public function getOrderStatusMailTemplatesIndexedByOrderStatusId($domainId) {
 		$orderStatuses = $this->orderStatusRepository->getAll();
 		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
@@ -137,6 +141,20 @@ class MailTemplateFacade {
 		}
 
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @return string[]
+	 */
+	public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate) {
+		$filepaths = [];
+		if ($this->fileFacade->hasFile($mailTemplate)) {
+			$file = $this->fileFacade->getFileByEntity($mailTemplate);
+			$filepaths[] = $this->fileFacade->getAbsoluteFileFilepath($file);
+		}
+
+		return $filepaths;
 	}
 
 }

@@ -46,6 +46,7 @@ class CustomerMailFacade {
 	public function sendRegistrationMail(User $user) {
 		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());
 		$messageData = $this->customerMailService->getMessageDataByUser($user, $mailTemplate);
+		$messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
 		$this->mailer->send($messageData);
 	}
 }

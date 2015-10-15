@@ -55,6 +55,7 @@ class OrderMailFacade {
 	public function sendEmail(Order $order) {
 		$mailTemplate = $this->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
 		$messageData = $this->orderMailService->getMessageDataByOrder($order, $mailTemplate);
+		$messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
 		$this->mailer->send($messageData);
 	}
 	/**
