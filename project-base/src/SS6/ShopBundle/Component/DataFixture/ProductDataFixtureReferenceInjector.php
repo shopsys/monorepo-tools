@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\ReferenceRepository;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
@@ -30,6 +31,7 @@ class ProductDataFixtureReferenceInjector {
 		$flags = $this->getFlagReferences($referenceRepository);
 		$brands = $this->getBrandReferences($referenceRepository);
 		$units = $this->getUnitReferences($referenceRepository);
+		$pricingGroups = $this->getPricingGroupReferences($referenceRepository);
 
 		$productDataFixtureLoader->injectReferences(
 			$vats,
@@ -37,7 +39,8 @@ class ProductDataFixtureReferenceInjector {
 			$categories,
 			$flags,
 			$brands,
-			$units
+			$units,
+			$pricingGroups
 		);
 	}
 
@@ -174,6 +177,22 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
+	 * @param \Doctrine\Common\DataFixtures\ReferenceRepository $referenceRepository
+	 * @return string[]
+	 */
+	private function getPricingGroupReferences(ReferenceRepository $referenceRepository) {
+		$pricingGroups = [
+			'ordinary_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1),
+			'ordinary_domain_2' => $referenceRepository->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2),
+			'partner_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1),
+			'vip_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::VIP_DOMAIN_1),
+			'vip_domain_2' => $referenceRepository->getReference(PricingGroupDataFixture::VIP_DOMAIN_2),
+		];
+
+		return $pricingGroups;
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public static function getDependencies() {
@@ -185,6 +204,7 @@ class ProductDataFixtureReferenceInjector {
 			BrandDataFixture::class,
 			BaseUnitDataFixture::class,
 			DemoUnitDataFixture::class,
+			PricingGroupDataFixture::class,
 		];
 	}
 
