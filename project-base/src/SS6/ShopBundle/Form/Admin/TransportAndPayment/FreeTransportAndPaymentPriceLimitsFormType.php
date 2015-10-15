@@ -23,7 +23,7 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 	private $domains;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $domains
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 */
 	public function __construct(array $domains) {
 		$this->domains = $domains;
