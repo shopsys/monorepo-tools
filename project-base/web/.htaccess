@@ -1,7 +1,0 @@
-RewriteEngine On
-RewriteBase /shopsys6/web/
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -l [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^.* - [L]
-RewriteRule .* index.php$1 [QSA,L]
