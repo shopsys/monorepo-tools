@@ -42,6 +42,14 @@
 								</dd>
 							</dl>
 						{% endif %}
+						<dl class="list-params-side">
+							<dt class="list-params-side__title">
+								{{ 'Dostupnost'|trans }}:
+							</dt>
+							<dd class="list-params-side__definition">
+								{{ productDetail.product.calculatedAvailability.getName }}
+							</dd>
+						</dl>
 					</div>
 				</a>
 				<div class="list-items__actions">
