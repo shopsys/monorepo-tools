@@ -10,6 +10,7 @@ use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Order\OrderService;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
 use SS6\ShopBundle\Twig\PriceExtension;
@@ -67,6 +68,11 @@ class OrderMailService {
 	 */
 	private $dateTimeFormatterExtension;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 */
+	private $orderService;
+
 	public function __construct(
 		Setting $setting,
 		DomainRouterFactory $domainRouterFactory,
@@ -74,7 +80,8 @@ class OrderMailService {
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		Domain $domain,
 		PriceExtension $priceExtension,
-		DateTimeFormatterExtension $dateTimeFormatterExtension
+		DateTimeFormatterExtension $dateTimeFormatterExtension,
+		OrderService $orderService
 	) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
@@ -83,6 +90,7 @@ class OrderMailService {
 		$this->domain = $domain;
 		$this->priceExtension = $priceExtension;
 		$this->dateTimeFormatterExtension = $dateTimeFormatterExtension;
+		$this->orderService = $orderService;
 	}
 
 	/**
@@ -136,7 +144,7 @@ class OrderMailService {
 			self::VARIABLE_DELIVERY_ADDRESS => $this->getDeliveryAddressHtmlTable($order),
 			self::VARIABLE_NOTE => $order->getNote(),
 			self::VARIABLE_PRODUCTS => $this->getProductsHtmlTable($order),
-			self::VARIABLE_ORDER_DETAIL_URL => $this->getOrderDetailUrl($order),
+			self::VARIABLE_ORDER_DETAIL_URL => $this->orderService->getOrderDetailUrl($order),
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
 			self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
 		];
@@ -234,16 +242,6 @@ class OrderMailService {
 			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
 
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @return string
-	 */
-	private function getOrderDetailUrl(Order $order) {
-		return $this->domainRouterFactory->getRouter($order->getDomainId())->generate(
-			'front_customer_order_detail_unregistered', ['urlHash' => $order->getUrlHash()], true
-		);
 	}
 
 	/**

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
@@ -119,6 +120,11 @@ class OrderFacade {
 	 */
 	private $orderProductFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 */
+	private $domainRouterFactory;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -137,7 +143,8 @@ class OrderFacade {
 		CustomerEditFacade $customerEditFacade,
 		CurrentCustomer $currentCustomer,
 		OrderPreviewFactory $orderPreviewFactory,
-		OrderProductFacade $orderProductFacade
+		OrderProductFacade $orderProductFacade,
+		DomainRouterFactory $domainRouterFactory
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -157,6 +164,7 @@ class OrderFacade {
 		$this->currentCustomer = $currentCustomer;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->orderProductFacade = $orderProductFacade;
+		$this->domainRouterFactory = $domainRouterFactory;
 	}
 
 	/**
@@ -256,11 +264,14 @@ class OrderFacade {
 	 */
 	public function getOrderConfirmText($orderId) {
 		$order = $this->getById($orderId);
+		$orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
 		$confirmTextTemplate = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
 
 		$variables = [
 			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
 			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $order->getPayment()->getInstructions(),
+			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $orderDetailUrl,
+			OrderMailService::VARIABLE_NUMBER => $order->getNumber(),
 		];
 
 		return strtr($confirmTextTemplate, $variables);

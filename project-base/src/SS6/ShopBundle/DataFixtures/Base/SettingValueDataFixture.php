@@ -41,9 +41,11 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
 		$orderSentText = '
 			<p>
-				Objednávka byla odeslána, děkujeme za Váš nákup. Budeme Vás kontaktovat o dalším průběhu vyřizování. <br />
+				Objednávka číslo {number} byla odeslána, děkujeme za Váš nákup.
+				Budeme Vás kontaktovat o dalším průběhu vyřizování. <br /><br />
+				Uschovejte si permanentní <a href="{order_detail_url}">odkaz na detail objednávky</a>. <br />
 				{transport_instructions} <br />
-				{payment_instructions}
+				{payment_instructions} <br />
 			</p>
 		';
 

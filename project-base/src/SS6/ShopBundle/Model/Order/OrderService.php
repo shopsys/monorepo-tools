@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
@@ -11,6 +12,7 @@ use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderService {
 
@@ -31,14 +33,21 @@ class OrderService {
 	 */
 	private $orderPriceCalculation;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 */
+	private $domainRouterFactory;
+
 	public function __construct(
 		Domain $domain,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
-		OrderPriceCalculation $orderPriceCalculation
+		OrderPriceCalculation $orderPriceCalculation,
+		DomainRouterFactory $domainRouterFactory
 	) {
 		$this->domain = $domain;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
+		$this->domainRouterFactory = $domainRouterFactory;
 	}
 
 	/**
@@ -129,6 +138,18 @@ class OrderService {
 	public function calculateTotalPrice(Order $order) {
 		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
 		$order->setTotalPrice($orderTotalPrice);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	public function getOrderDetailUrl(Order $order) {
+		return $this->domainRouterFactory->getRouter($order->getDomainId())->generate(
+			'front_customer_order_detail_unregistered',
+			['urlHash' => $order->getUrlHash()],
+			UrlGeneratorInterface::ABSOLUTE_URL
+		);
 	}
 
 }
