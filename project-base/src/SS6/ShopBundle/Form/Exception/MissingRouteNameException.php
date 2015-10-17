@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Form\Exception;
 
 use Exception;
-use SS6\ShopBundle\Form\FormException;
+use SS6\ShopBundle\Form\Exception\FormException;
 
 class MissingRouteNameException extends Exception implements FormException {
 

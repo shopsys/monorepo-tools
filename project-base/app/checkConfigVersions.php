@@ -1,5 +1,6 @@
 <?php
-include_once('vendor/autoload.php');
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $output = new Symfony\Component\Console\Output\ConsoleOutput();
 $command = new SS6\ShopBundle\Command\ConfigVersionsCheckCommand($output);

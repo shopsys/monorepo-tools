@@ -4,12 +4,12 @@
 	"description": "Copyright by netdevelo s.r.o.",
 	"version": "6.0.0-dev",
 	"autoload": {
-		"classmap": [
-			"app/Environment.php",
-			"src/"
-		],
-		"psr-0": {"SS6\\": "src/"},
-		"psr-4": {"SS6\\": "app/"}
+		"psr-4": {
+			"SS6\\": [
+				"app/",
+				"src/SS6/"
+			]
+		}
 	},
 	"repositories": [
 		{
