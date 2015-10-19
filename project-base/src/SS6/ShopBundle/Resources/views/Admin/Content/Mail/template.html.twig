@@ -20,17 +20,35 @@
 					{{ form_row(templateForm.bccEmail, { label: 'Skrytá kopie'|trans}) }}
 					{{ form_row(templateForm.body, { label: 'Text'|trans}) }}
 					{% if hasFile(mailTemplate) %}
-						<div class="form-line">
+						<div class="form-line js-mail-template-attachment">
 							<label class="form-line__label">
 								{{ 'Příloha'|trans }}:
 							</label>
 							<div class="form-line__line">
-								<a href="{{ fileUrl(mailTemplate) }}" target="_blank">
-									{{ filePreview(mailTemplate) }}
-									<div>{{ getFile(mailTemplate).filename }}</div>
-								</a>
+								<div class="list-images__item">
+									<div class="list-images__item__in">
+										<a href="{{ fileUrl(mailTemplate) }}" target="_blank" class="list-images__item__image">
+											{{ filePreview(mailTemplate) }}
+											<div>{{ getFile(mailTemplate).filename }}</div>
+										</a>
+										<button class="js-mail-template-attachment-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
+											<i class="svg svg-circle-cross"></i>
+										</button>
+										<button
+											class="btn-no-style js-mail-template-attachment-delete-revert-button list-images__item__revert js-mail-template-attachment-delete-revert"
+											type="button"
+											title="{{ 'Vrátit zpět'|trans }}"
+										>
+											<i class="svg svg-forward-page"></i>
+										</button>
+										<span class="list-images__item__overlay js-mail-template-attachment-delete-revert">{{ 'Po uložení bude soubor smazán'|trans }}</span>
+										{{ form_widget(templateForm.deleteAttachment, {attr: {class: 'display-none js-mail-template-attachment-delete-checkbox'}}) }}
+									</div>
+								</div>
 							</div>
 						</div>
+					{% else %}
+						{% do templateForm.deleteAttachment.setRendered %}
 					{% endif %}
 					{{ form_row(templateForm.attachment, { label: 'Nahrát přílohu'|trans}) }}
 					{% if sendMailText is not null %}

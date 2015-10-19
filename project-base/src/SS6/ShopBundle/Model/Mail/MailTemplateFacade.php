@@ -90,6 +90,9 @@ class MailTemplateFacade {
 		foreach ($mailTemplatesData as $mailTemplateData) {
 			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->name, $domainId);
 			$mailTemplate->edit($mailTemplateData);
+			if ($mailTemplateData->deleteAttachment === true) {
+				$this->fileFacade->deleteFileByEntity($mailTemplate);
+			}
 			$this->fileFacade->uploadFile($mailTemplate, $mailTemplateData->attachment);
 		}
 

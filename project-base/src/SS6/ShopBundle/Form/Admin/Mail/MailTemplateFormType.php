@@ -65,6 +65,7 @@ class MailTemplateFormType extends AbstractType {
 					]),
 				],
 			])
+			->add('deleteAttachment', FormType::CHECKBOX)
 			->add('sendMail', FormType::CHECKBOX, ['required' => false]);
 	}
 

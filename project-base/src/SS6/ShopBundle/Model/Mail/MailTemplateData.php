@@ -41,6 +41,11 @@ class MailTemplateData {
 	public $attachment;
 
 	/**
+	 * @var bool
+	 */
+	public $deleteAttachment;
+
+	/**
 	 * @param string|null $name
 	 * @param string|null $subject
 	 * @param string|null $body
