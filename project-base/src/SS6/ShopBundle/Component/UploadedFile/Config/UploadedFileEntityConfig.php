@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\UploadedFile\Config;
 
-class FileEntityConfig {
+class UploadedFileEntityConfig {
 
 	/**
 	 * @var string

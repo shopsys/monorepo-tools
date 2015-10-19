@@ -5,15 +5,15 @@ namespace SS6\ShopBundle\Component\UploadedFile\Config;
 class FileConfig {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig[]
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
 	 */
-	private $fileEntityConfigsByClass;
+	private $uploadedFileEntityConfigsByClass;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig[] $fileEntityConfigsByClass
+	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $fileEntityConfigsByClass
 	 */
 	public function __construct(array $fileEntityConfigsByClass) {
-		$this->fileEntityConfigsByClass = $fileEntityConfigsByClass;
+		$this->uploadedFileEntityConfigsByClass = $fileEntityConfigsByClass;
 	}
 
 	/**
@@ -21,15 +21,15 @@ class FileConfig {
 	 * @return string
 	 */
 	public function getEntityName($entity) {
-		return $this->getFileEntityConfig($entity)->getEntityName();
+		return $this->getUploadedFileEntityConfig($entity)->getEntityName();
 	}
 
 	/**
 	 * @param Object $entity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
 	 */
-	public function getFileEntityConfig($entity) {
-		foreach ($this->fileEntityConfigsByClass as $className => $entityConfig) {
+	public function getUploadedFileEntityConfig($entity) {
+		foreach ($this->uploadedFileEntityConfigsByClass as $className => $entityConfig) {
 			if ($entity instanceof $className) {
 				return $entityConfig;
 			}
@@ -45,7 +45,7 @@ class FileConfig {
 	 * @return bool
 	 */
 	public function hasFileConfig($entity) {
-		foreach ($this->fileEntityConfigsByClass as $className => $entityConfig) {
+		foreach ($this->uploadedFileEntityConfigsByClass as $className => $entityConfig) {
 			if ($entity instanceof $className) {
 				return true;
 			}
@@ -55,10 +55,10 @@ class FileConfig {
 
 	/**
 	 * @param string $entityName
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig;
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 	 */
-	public function getEntityFileConfigByEntityName($entityName) {
-		foreach ($this->fileEntityConfigsByClass as $entityConfig) {
+	public function getUploadedFileEntityConfigByEntityName($entityName) {
+		foreach ($this->uploadedFileEntityConfigsByClass as $entityConfig) {
 			if ($entityConfig->getEntityName() === $entityName) {
 				return $entityConfig;
 			}
@@ -69,21 +69,21 @@ class FileConfig {
 
 	/**
 	 * @param string $class
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
 	 */
-	public function getFileConfigDataByClass($class) {
-		if (array_key_exists($class, $this->fileEntityConfigsByClass)) {
-			return $this->fileEntityConfigsByClass[$class];
+	public function getUploadedFileEntityConfigDataByClass($class) {
+		if (array_key_exists($class, $this->uploadedFileEntityConfigsByClass)) {
+			return $this->uploadedFileEntityConfigsByClass[$class];
 		}
 
 		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigDataNotFoundException($class);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig[]
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
 	 */
-	public function getAllFileEntityConfigs() {
-		return $this->fileEntityConfigsByClass;
+	public function getAllUploadedFileEntityConfigs() {
+		return $this->uploadedFileEntityConfigsByClass;
 	}
 
 }

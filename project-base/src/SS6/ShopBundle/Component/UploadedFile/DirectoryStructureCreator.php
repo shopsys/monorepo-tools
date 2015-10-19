@@ -34,7 +34,7 @@ class DirectoryStructureCreator {
 	}
 
 	public function makeFileDirectories() {
-		$fileEntityConfigs = $this->fileConfig->getAllFileEntityConfigs();
+		$fileEntityConfigs = $this->fileConfig->getAllUploadedFileEntityConfigs();
 		$directories = [];
 		foreach ($fileEntityConfigs as $fileEntityConfig) {
 			$directories[] = $this->fileLocator->getAbsoluteFilePath($fileEntityConfig->getEntityName());

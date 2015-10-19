@@ -74,7 +74,7 @@ class FileFacade {
 	public function uploadFile($entity, $temporaryFilenames) {
 		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
 			$entitiesForFlush = [];
-			$fileEntityConfig = $this->fileConfig->getFileEntityConfig($entity);
+			$fileEntityConfig = $this->fileConfig->getUploadedFileEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
 			$oldFile = $this->fileRepository->findFileByEntity($fileEntityConfig->getEntityName(), $entityId);
 
