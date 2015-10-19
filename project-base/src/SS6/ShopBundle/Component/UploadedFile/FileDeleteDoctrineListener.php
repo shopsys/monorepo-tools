@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\FileFacade;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -33,23 +32,16 @@ class FileDeleteDoctrineListener {
 	 */
 	private $fileUpload;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
-	 */
-	private $uploadedFileLocator;
-
 	public function __construct(
 		ContainerInterface $container,
 		Filesystem $filesystem,
 		UploadedFileConfig $uploadedFileConfig,
-		FileUpload $fileUpload,
-		UploadedFileLocator $uploadedFileLocator
+		FileUpload $fileUpload
 	) {
 		$this->container = $container;
 		$this->filesystem = $filesystem;
 		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileUpload = $fileUpload;
-		$this->uploadedFileLocator = $uploadedFileLocator;
 	}
 
 	/**
