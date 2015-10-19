@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Customer\Mail;
 
-use SS6\ShopBundle\Component\EntityFile\FileLocator;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
@@ -29,7 +29,7 @@ class CustomerMailService {
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
 	 */
 	private $fileLocator;
 

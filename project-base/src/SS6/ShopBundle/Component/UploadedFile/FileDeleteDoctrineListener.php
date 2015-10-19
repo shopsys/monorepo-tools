@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile;
+namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
-use SS6\ShopBundle\Component\EntityFile\File;
-use SS6\ShopBundle\Component\EntityFile\FileFacade;
-use SS6\ShopBundle\Component\EntityFile\FileLocator;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -24,7 +24,7 @@ class FileDeleteDoctrineListener {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
 	 */
 	private $fileConfig;
 
@@ -34,7 +34,7 @@ class FileDeleteDoctrineListener {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
 	 */
 	private $fileLocator;
 
@@ -55,7 +55,7 @@ class FileDeleteDoctrineListener {
 	/**
 	 * Prevent ServiceCircularReferenceException
 	 *
-	 * @return \SS6\ShopBundle\Component\EntityFile\FileFacade
+	 * @return \SS6\ShopBundle\Component\UploadedFile\FileFacade
 	 */
 	private function getFileFacade() {
 		return $this->container->get(FileFacade::class);

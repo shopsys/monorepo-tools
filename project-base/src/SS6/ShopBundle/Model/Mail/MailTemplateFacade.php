@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\EntityFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\FileFacade;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
@@ -39,7 +39,7 @@ class MailTemplateFacade {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileFacade
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileFacade
 	 */
 	private $fileFacade;
 

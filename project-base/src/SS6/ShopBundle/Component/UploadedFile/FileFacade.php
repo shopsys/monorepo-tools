@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile;
+namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
-use SS6\ShopBundle\Component\EntityFile\File;
-use SS6\ShopBundle\Component\EntityFile\FileLocator;
-use SS6\ShopBundle\Component\EntityFile\FileRepository;
-use SS6\ShopBundle\Component\EntityFile\FileService;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\FileLocator;
+use SS6\ShopBundle\Component\UploadedFile\FileRepository;
+use SS6\ShopBundle\Component\UploadedFile\FileService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class FileFacade {
@@ -20,17 +20,17 @@ class FileFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
 	 */
 	private $fileConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileRepository
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileRepository
 	 */
 	private $fileRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileService
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileService
 	 */
 	private $fileService;
 
@@ -45,7 +45,7 @@ class FileFacade {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
 	 */
 	private $fileLocator;
 
@@ -105,7 +105,7 @@ class FileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
 	 */
 	public function deleteFile(File $file) {
 		$entityName = $file->getEntityName();
@@ -115,7 +115,7 @@ class FileFacade {
 
 	/**
 	 * @param object $entity
-	 * @return \SS6\ShopBundle\Component\EntityFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getFileByEntity($entity) {
 		return $this->fileRepository->getFileByEntity(
@@ -136,12 +136,12 @@ class FileFacade {
 		}
 
 		$message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
-		throw new \SS6\ShopBundle\Component\EntityFile\Exception\EntityIdentifierException($message);
+		throw new \SS6\ShopBundle\Component\UploadedFile\Exception\EntityIdentifierException($message);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\EntityFile\File|Object $fileOrEntity
-	 * @return \SS6\ShopBundle\Component\EntityFile\File
+	 * @param \SS6\ShopBundle\Component\UploadedFile\File|Object $fileOrEntity
+	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getFileByObject($fileOrEntity) {
 		if ($fileOrEntity instanceof File) {
@@ -153,7 +153,7 @@ class FileFacade {
 
 	/**
 	 * @param int $fileId
-	 * @return \SS6\ShopBundle\Component\EntityFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getById($fileId) {
 		return $this->fileRepository->getById($fileId);
@@ -166,7 +166,7 @@ class FileFacade {
 	public function hasFile($entity) {
 		try {
 			$file = $this->getFileByEntity($entity);
-		} catch (\SS6\ShopBundle\Component\EntityFile\Exception\FileNotFoundException $e) {
+		} catch (\SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
 			return false;
 		}
 
@@ -174,7 +174,7 @@ class FileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
 	 * @return string
 	 */
 	public function getAbsoluteFileFilepath(File $file) {
@@ -183,7 +183,7 @@ class FileFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
 	 * @return string
 	 */
 	public function getFileUrl(DomainConfig $domainConfig, File $file) {

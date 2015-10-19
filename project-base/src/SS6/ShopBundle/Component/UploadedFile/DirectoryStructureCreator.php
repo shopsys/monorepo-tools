@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile;
+namespace SS6\ShopBundle\Component\UploadedFile;
 
-use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
-use SS6\ShopBundle\Component\EntityFile\FileLocator;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
 	 */
 	private $fileConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
 	 */
 	private $fileLocator;
 

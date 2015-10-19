@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile;
+namespace SS6\ShopBundle\Component\UploadedFile;
 
-use SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig;
-use SS6\ShopBundle\Component\EntityFile\File;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig;
+use SS6\ShopBundle\Component\UploadedFile\File;
 
 class FileService {
 
@@ -18,11 +18,11 @@ class FileService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig $fileEntityConfig
+	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig $fileEntityConfig
 	 * @param int $entityId
 	 * @param string $temporaryFilename
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\EntityFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function createFile(
 		FileEntityConfig $fileEntityConfig,

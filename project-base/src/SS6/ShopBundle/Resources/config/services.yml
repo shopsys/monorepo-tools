@@ -134,27 +134,6 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
-  ss6.shop.component.entity_file.config.file_config:
-    class: SS6\ShopBundle\Component\EntityFile\Config\FileConfig
-    factory_service: ss6.shop.component.entity_file.config.file_config_loader
-    factory_method: loadFromYaml
-    arguments:
-      - %ss6.file_config_filepath%
-
-  ss6.shop.component.entity_file.config.file_config_loader:
-    class: SS6\ShopBundle\Component\EntityFile\Config\FileConfigLoader
-
-  ss6.shop.component.entity_file.file_delete_doctrine_listener:
-      class: SS6\ShopBundle\Component\EntityFile\FileDeleteDoctrineListener
-      tags:
-        - { name: doctrine.event_listener, event: preRemove }
-
-  ss6.shop.component.entity_file.file_locator:
-    class: SS6\ShopBundle\Component\EntityFile\FileLocator
-    arguments:
-      - %ss6.file_dir%
-      - %ss6.file_url_prefix%
-
   ss6.shop.component.error.exception_listener:
     class: SS6\ShopBundle\Component\Error\ExceptionListener
     tags:
@@ -294,6 +273,27 @@ services:
 
   ss6.shop.component.translation.identity_translator:
     class: Symfony\Component\Translation\IdentityTranslator
+
+  ss6.shop.component.uploaded_file.config.file_config:
+    class: SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+    factory_service: ss6.shop.component.uploaded_file.config.file_config_loader
+    factory_method: loadFromYaml
+    arguments:
+      - %ss6.file_config_filepath%
+
+  ss6.shop.component.uploaded_file.config.file_config_loader:
+    class: SS6\ShopBundle\Component\UploadedFile\Config\FileConfigLoader
+
+  ss6.shop.component.uploaded_file.file_delete_doctrine_listener:
+    class: SS6\ShopBundle\Component\UploadedFile\FileDeleteDoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: preRemove }
+
+  ss6.shop.component.uploaded_file.file_locator:
+    class: SS6\ShopBundle\Component\UploadedFile\FileLocator
+    arguments:
+      - %ss6.file_dir%
+      - %ss6.file_url_prefix%
 
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader

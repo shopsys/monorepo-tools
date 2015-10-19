@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile\Config\Exception;
+namespace SS6\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
 

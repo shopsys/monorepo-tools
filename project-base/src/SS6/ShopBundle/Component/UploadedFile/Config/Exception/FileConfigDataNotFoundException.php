@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile\Config\Exception;
+namespace SS6\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\EntityFile\Config\Exception\FileConfigException;
+use SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigException;
 
 class FileConfigDataNotFoundException extends Exception implements FileConfigException {
 

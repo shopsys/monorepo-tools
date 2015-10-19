@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
-use SS6\ShopBundle\Component\EntityFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\FileFacade;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -17,12 +17,12 @@ class FileExtension extends Twig_Extension {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
 	 */
 	private $fileConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\FileFacade
+	 * @var \SS6\ShopBundle\Component\UploadedFile\FileFacade
 	 */
 	private $fileFacade;
 
@@ -93,7 +93,7 @@ class FileExtension extends Twig_Extension {
 
 	/**
 	 * @param Object $entity
-	 * @return \SS6\ShopBundle\Component\EntityFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getFileByEntity($entity) {
 		return $this->fileFacade->getFileByEntity($entity);

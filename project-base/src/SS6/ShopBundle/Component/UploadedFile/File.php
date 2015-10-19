@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile;
+namespace SS6\ShopBundle\Component\UploadedFile;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use SS6\ShopBundle\Component\FileUpload\FileForUpload;
 use SS6\ShopBundle\Component\FileUpload\FileNamingConvention;
 
 /**
- * @ORM\Table(name="files", indexes={@ORM\Index(columns={"entity_name", "entity_id"})})
+ * @ORM\Table(name="uploaded_files", indexes={@ORM\Index(columns={"entity_name", "entity_id"})})
  * @ORM\Entity
  */
 class File implements EntityFileUploadInterface {

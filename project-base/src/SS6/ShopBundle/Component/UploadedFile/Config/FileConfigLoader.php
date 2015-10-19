@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\EntityFile\Config;
+namespace SS6\ShopBundle\Component\UploadedFile\Config;
 
-use SS6\ShopBundle\Component\EntityFile\Config\FileConfig;
-use SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -16,7 +16,7 @@ class FileConfigLoader {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig[class]
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig[class]
 	 */
 	private $fileEntityConfigsByClass;
 
@@ -34,7 +34,7 @@ class FileConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Component\EntityFile\Config\FileConfig
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -57,7 +57,7 @@ class FileConfigLoader {
 
 	/**
 	 * @param array $outputConfig
-	 * @return \SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig[]
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig[]
 	 */
 	private function loadFileEntityConfigsFromArray($outputConfig) {
 		$this->fileEntityConfigsByClass = [];
@@ -68,8 +68,8 @@ class FileConfigLoader {
 				$imageEntityConfig = $this->processEntityConfig($entityConfig);
 				$this->entityNamesByEntityNames[$imageEntityConfig->getEntityName()] = $imageEntityConfig->getEntityName();
 				$this->fileEntityConfigsByClass[$imageEntityConfig->getEntityClass()] = $imageEntityConfig;
-			} catch (\SS6\ShopBundle\Component\EntityFile\Config\Exception\FileConfigException $e) {
-				throw new \SS6\ShopBundle\Component\EntityFile\Config\Exception\FilesConfigurationParseException(
+			} catch (\SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigException $e) {
+				throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FilesConfigurationParseException(
 					$entityConfig[FileConfigDefinition::CONFIG_CLASS],
 					$e
 				);
@@ -79,7 +79,7 @@ class FileConfigLoader {
 
 	/**
 	 * @param array $entityConfig
-	 * @return \SS6\ShopBundle\Component\EntityFile\Config\FileEntityConfig
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileEntityConfig
 	 */
 	private function processEntityConfig($entityConfig) {
 		$entityClass = $entityConfig[FileConfigDefinition::CONFIG_CLASS];
@@ -88,7 +88,7 @@ class FileConfigLoader {
 		if (array_key_exists($entityClass, $this->fileEntityConfigsByClass)
 			|| array_key_exists($entityName, $this->entityNamesByEntityNames)
 		) {
-			throw new \SS6\ShopBundle\Component\EntityFile\Config\Exception\DuplicateEntityNameException($entityName);
+			throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\DuplicateEntityNameException($entityName);
 		}
 
 		return new FileEntityConfig($entityName, $entityClass);

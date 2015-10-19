@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\EntityFile\DirectoryStructureCreator;
+use SS6\ShopBundle\Component\UploadedFile\DirectoryStructureCreator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,7 +23,7 @@ class EntityFileDirectoriesCommand extends ContainerAwareCommand {
 		$output->writeln('Start of creating directories for entity files.');
 
 		$entityFileDirectoryStructureCreator = $this->getContainer()->get(DirectoryStructureCreator::class);
-		/* @var $entityFileDirectoryStructureCreator \SS6\ShopBundle\Component\EntityFile\DirectoryStructureCreator */
+		/* @var $entityFileDirectoryStructureCreator \SS6\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
 		$entityFileDirectoryStructureCreator->makeFileDirectories();
 
 		$output->writeln('<fg=green>Directories of entity files was successfully created.</fg=green>');
