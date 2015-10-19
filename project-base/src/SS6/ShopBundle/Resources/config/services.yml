@@ -267,8 +267,12 @@ services:
     class: SS6\ShopBundle\Component\Translation\Translator
     decorates: translator
     arguments:
-      - "@ss6.shop.component.translation.translator.inner"
-      - "@ss6.shop.component.translation.translator.inner"
+      - @ss6.shop.component.translation.translator.inner
+      - @ss6.shop.component.translation.translator.inner
+      - @ss6.shop.component.translation.identity_translator
+
+  ss6.shop.component.translation.identity_translator:
+    class: Symfony\Component\Translation\IdentityTranslator
 
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader

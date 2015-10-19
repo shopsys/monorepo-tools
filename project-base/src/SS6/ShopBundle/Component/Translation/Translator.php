@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Component\Translation;
 
-use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -23,65 +22,76 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	private $originalTranslatorBag;
 
 	/**
-	 * @var \Symfony\Component\Translation\MessageSelector
+	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
-	private $messageSelector;
+	private $identityTranslator;
 
 	public function __construct(
 		TranslatorInterface $originalTranslator,
 		TranslatorBagInterface $originalTranslatorBag,
-		MessageSelector $messageSelector
+		TranslatorInterface $identityTranslator
 	) {
 		$this->originalTranslator = $originalTranslator;
 		$this->originalTranslatorBag = $originalTranslatorBag;
-		$this->messageSelector = $messageSelector;
+		$this->identityTranslator = $identityTranslator;
 	}
 
 	/**
-	 * When translation for given locale is not defined and locale is not self::SOURCE_LOCALE,
-	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
+	 * Adds self::NOT_TRANSLATED_PREFIX to messages that are not translated and $locale
+	 * is not self::SOURCE_LOCALE. Passes trans() call to original translator
+	 * for logging purposes.
 	 * {@inheritdoc}
 	 */
 	public function trans($id, array $parameters = [], $domain = null, $locale = null) {
 		$resolvedLocale = $this->resolveLocale($locale);
 		$resolvedDomain = $this->resolveDomain($domain);
 
-		if ($resolvedLocale === self::SOURCE_LOCALE) {
-			return strtr($id, $parameters);
-		}
-
-		$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
-		if ($catalogue->defines($id, $resolvedDomain)) {
-			return $message;
+		if ($resolvedLocale === self::SOURCE_LOCALE) {
+			if ($catalogue->defines($id, $resolvedDomain)) {
+				$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+			} else {
+				$message = $this->identityTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+			}
 		} else {
-			return self::NOT_TRANSLATED_PREFIX . $message;
+			$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+
+			if (!$catalogue->has($id, $resolvedDomain)) {
+				$message = self::NOT_TRANSLATED_PREFIX . $message;
+			}
 		}
+
+		return $message;
 	}
 
 	/**
-	 * When translation for given locale is not defined and locale is not self::SOURCE_LOCALE,
-	 * function returns translation ID string with self::NOT_TRANSLATED_PREFIX prefix.
+	 * Adds self::NOT_TRANSLATED_PREFIX to messages that are not translated and $locale
+	 * is not self::SOURCE_LOCALE. Passes transChoice() call to original translator
+	 * for logging purposes.
 	 * {@inheritdoc}
 	 */
 	public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
 		$resolvedLocale = $this->resolveLocale($locale);
 		$resolvedDomain = $this->resolveDomain($domain);
 
-		if ($resolvedLocale === self::SOURCE_LOCALE) {
-			$message = $this->messageSelector->choose($id, (int)$number, $resolvedLocale);
-			return strtr($message, $parameters);
-		}
-
-		$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
-		if ($catalogue->defines($id, $resolvedDomain)) {
-			return $message;
+		if ($resolvedLocale === self::SOURCE_LOCALE) {
+			if ($catalogue->defines($id, $resolvedDomain)) {
+				$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+			} else {
+				$message = $this->identityTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+			}
 		} else {
-			return self::NOT_TRANSLATED_PREFIX . $message;
+			$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+
+			if (!$catalogue->has($id, $resolvedDomain)) {
+				$message = self::NOT_TRANSLATED_PREFIX . $message;
+			}
 		}
+
+		return $message;
 	}
 
 	/**
@@ -120,6 +130,7 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 */
 	public function setLocale($locale) {
 		$this->originalTranslator->setLocale($locale);
+		$this->identityTranslator->setLocale($locale);
 	}
 
 	/**
