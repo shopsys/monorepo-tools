@@ -6,7 +6,11 @@ umask(0002);
 
 use SS6\Bootstrap;
 
-require_once __DIR__ . '/../app/Bootstrap.php';
+if (file_exists(__DIR__ . '/../MAINTENANCE')) {
+	require __DIR__ . '/../app/maintenance.php';
+} else {
+	require_once __DIR__ . '/../app/Bootstrap.php';
 
-$bootstrap = new Bootstrap();
-$bootstrap->run();
+	$bootstrap = new Bootstrap();
+	$bootstrap->run();
+}
