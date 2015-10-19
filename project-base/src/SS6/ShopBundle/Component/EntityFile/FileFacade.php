@@ -97,6 +97,24 @@ class FileFacade {
 
 	/**
 	 * @param object $entity
+	 */
+	public function deleteFileByEntity($entity) {
+		$file = $this->getFileByEntity($entity);
+		$this->em->remove($file);
+		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\EntityFile\File $file
+	 */
+	public function deleteFile(File $file) {
+		$entityName = $file->getEntityName();
+		$filepath = $this->fileLocator->getAbsoluteFileFilepath($file);
+		$this->filesystem->remove($filepath);
+	}
+
+	/**
+	 * @param object $entity
 	 * @return \SS6\ShopBundle\Component\EntityFile\File
 	 */
 	public function getFileByEntity($entity) {
