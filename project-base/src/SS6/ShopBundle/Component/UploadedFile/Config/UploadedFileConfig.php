@@ -35,7 +35,7 @@ class UploadedFileConfig {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigDataNotFoundException(
+		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException(
 			$entity ? get_class($entity) : null
 		);
 	}

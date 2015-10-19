@@ -68,8 +68,8 @@ class UploadedFileConfigLoader {
 				$uploadedFileEntityConfig = $this->processEntityConfig($entityConfig);
 				$this->entityNamesByEntityNames[$uploadedFileEntityConfig->getEntityName()] = $uploadedFileEntityConfig->getEntityName();
 				$this->uploadedFileEntityConfigsByClass[$uploadedFileEntityConfig->getEntityClass()] = $uploadedFileEntityConfig;
-			} catch (\SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigException $e) {
-				throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FilesConfigurationParseException(
+			} catch (\SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException $e) {
+				throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigurationParseException(
 					$entityConfig[UploadedFileConfigDefinition::CONFIG_CLASS],
 					$e
 				);

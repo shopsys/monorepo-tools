@@ -3,8 +3,9 @@
 namespace SS6\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
 
-class FilesConfigurationParseException extends Exception implements FileConfigException {
+class UploadedFileConfigurationParseException extends Exception implements UploadedFileConfigException {
 
 	/**
 	 * @var string

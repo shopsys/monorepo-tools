@@ -3,8 +3,9 @@
 namespace SS6\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
+use SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
 
-class DuplicateEntityNameException extends Exception implements FileConfigException {
+class DuplicateEntityNameException extends Exception implements UploadedFileConfigException {
 
 	/**
 	 * @var string
