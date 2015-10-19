@@ -45,11 +45,11 @@ class UploadedFileConfigLoader {
 			);
 		}
 
-		$fileConfigDefinition = new FileConfigDefinition();
+		$uploadedFileConfigDefinition = new UploadedFileConfigDefinition();
 		$processor = new Processor();
 
 		$inputConfig = $yamlParser->parse(file_get_contents($filename));
-		$outputConfig = $processor->processConfiguration($fileConfigDefinition, [$inputConfig]);
+		$outputConfig = $processor->processConfiguration($uploadedFileConfigDefinition, [$inputConfig]);
 		$this->loadFileEntityConfigsFromArray($outputConfig);
 
 		return new FileConfig($this->uploadedFileEntityConfigsByClass);
@@ -70,7 +70,7 @@ class UploadedFileConfigLoader {
 				$this->uploadedFileEntityConfigsByClass[$uploadedFileEntityConfig->getEntityClass()] = $uploadedFileEntityConfig;
 			} catch (\SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigException $e) {
 				throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FilesConfigurationParseException(
-					$entityConfig[FileConfigDefinition::CONFIG_CLASS],
+					$entityConfig[UploadedFileConfigDefinition::CONFIG_CLASS],
 					$e
 				);
 			}
@@ -82,8 +82,8 @@ class UploadedFileConfigLoader {
 	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
 	 */
 	private function processEntityConfig($entityConfig) {
-		$entityClass = $entityConfig[FileConfigDefinition::CONFIG_CLASS];
-		$entityName = $entityConfig[FileConfigDefinition::CONFIG_ENTITY_NAME];
+		$entityClass = $entityConfig[UploadedFileConfigDefinition::CONFIG_CLASS];
+		$entityName = $entityConfig[UploadedFileConfigDefinition::CONFIG_ENTITY_NAME];
 
 		if (array_key_exists($entityClass, $this->uploadedFileEntityConfigsByClass)
 			|| array_key_exists($entityName, $this->entityNamesByEntityNames)
