@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
+use SS6\ShopBundle\Model\Feed\FeedItemIterator;
 use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem;
 
-class HeurekaDeliveryDataIterator extends AbstractDataIterator {
+class HeurekaDeliveryDataIterator extends FeedItemIterator {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products

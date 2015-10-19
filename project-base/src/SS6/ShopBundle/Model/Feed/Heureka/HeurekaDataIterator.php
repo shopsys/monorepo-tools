@@ -5,13 +5,13 @@ namespace SS6\ShopBundle\Model\Feed\Heureka;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
+use SS6\ShopBundle\Model\Feed\FeedItemIterator;
 use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
-class HeurekaDataIterator extends AbstractDataIterator {
+class HeurekaDataIterator extends FeedItemIterator {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Feed;
 use Doctrine\ORM\QueryBuilder;
 use Iterator;
 
-abstract class AbstractDataIterator implements Iterator {
+abstract class FeedItemIterator implements Iterator {
 
 	const BUFFER_SIZE = 500;
 
