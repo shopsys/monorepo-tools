@@ -42,10 +42,10 @@ class FileExtension extends Twig_Extension {
 	 */
 	public function getFunctions() {
 		return [
-			new Twig_SimpleFunction('hasFile', [$this, 'hasFile']),
-			new Twig_SimpleFunction('fileUrl', [$this, 'getFileUrl']),
+			new Twig_SimpleFunction('hasUploadedFile', [$this, 'hasUploadedFile']),
+			new Twig_SimpleFunction('fileUrl', [$this, 'getUploadedFileUrl']),
 			new Twig_SimpleFunction('filePreview', [$this, 'getFilePreviewHtml'], ['is_safe' => ['html']]),
-			new Twig_SimpleFunction('getFile', [$this, 'getFileByEntity']),
+			new Twig_SimpleFunction('getFile', [$this, 'getUploadedFileByEntity']),
 		];
 	}
 
@@ -53,18 +53,18 @@ class FileExtension extends Twig_Extension {
 	 * @param Object $entity
 	 * @return bool
 	 */
-	public function hasFile($entity) {
-		return $this->uploadedFileFacade->hasFile($entity);
+	public function hasUploadedFile($entity) {
+		return $this->uploadedFileFacade->hasUploadedFile($entity);
 	}
 
 	/**
 	 * @param Object $entity
 	 * @return string
 	 */
-	public function getFileUrl($entity) {
-		$file = $this->getFileByEntity($entity);
+	public function getUploadedFileUrl($entity) {
+		$uploadedFile = $this->getUploadedFileByEntity($entity);
 
-		return $this->uploadedFileFacade->getFileUrl($this->domain->getCurrentDomainConfig(), $file);
+		return $this->uploadedFileFacade->getUploadedFileUrl($this->domain->getCurrentDomainConfig(), $uploadedFile);
 	}
 
 	/**
@@ -72,8 +72,8 @@ class FileExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getFilePreviewHtml($entity) {
-		$file = $this->getFileByEntity($entity);
-		$filepath = $this->uploadedFileFacade->getAbsoluteFileFilepath($file);
+		$uploadedFile = $this->getUploadedFileByEntity($entity);
+		$filepath = $this->uploadedFileFacade->getAbsoluteUploadedFileFilepath($uploadedFile);
 		$fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfo($filepath);
 
 		if ($fileThumbnailInfo->getIconType() !== null) {
@@ -85,10 +85,10 @@ class FileExtension extends Twig_Extension {
 
 	/**
 	 * @param Object $entity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function getFileByEntity($entity) {
-		return $this->uploadedFileFacade->getFileByEntity($entity);
+	public function getUploadedFileByEntity($entity) {
+		return $this->uploadedFileFacade->getUploadedFileByEntity($entity);
 	}
 
 	/**

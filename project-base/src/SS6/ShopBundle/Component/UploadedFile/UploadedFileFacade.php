@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
@@ -66,22 +66,25 @@ class UploadedFileFacade {
 	public function uploadFile($entity, $temporaryFilenames) {
 		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
 			$entitiesForFlush = [];
-			$fileEntityConfig = $this->uploadedFileConfig->getUploadedFileEntityConfig($entity);
+			$uploadedFileEntityConfig = $this->uploadedFileConfig->getUploadedFileEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
-			$oldFile = $this->uploadedFileRepository->findFileByEntity($fileEntityConfig->getEntityName(), $entityId);
+			$oldUploadedFile = $this->uploadedFileRepository->findUploadedFileByEntity(
+				$uploadedFileEntityConfig->getEntityName(),
+				$entityId
+			);
 
-			if ($oldFile !== null) {
-				$this->em->remove($oldFile);
-				$entitiesForFlush[] = $oldFile;
+			if ($oldUploadedFile !== null) {
+				$this->em->remove($oldUploadedFile);
+				$entitiesForFlush[] = $oldUploadedFile;
 			}
 
-			$newFile = $this->uploadedFileService->createFile(
-				$fileEntityConfig,
+			$newUploadedFile = $this->uploadedFileService->createUploadedFile(
+				$uploadedFileEntityConfig,
 				$entityId,
 				array_pop($temporaryFilenames)
 			);
-			$this->em->persist($newFile);
-			$entitiesForFlush[] = $newFile;
+			$this->em->persist($newUploadedFile);
+			$entitiesForFlush[] = $newUploadedFile;
 
 			$this->em->flush($entitiesForFlush);
 		}
@@ -90,27 +93,26 @@ class UploadedFileFacade {
 	/**
 	 * @param object $entity
 	 */
-	public function deleteFileByEntity($entity) {
-		$file = $this->getFileByEntity($entity);
-		$this->em->remove($file);
+	public function deleteUploadedFileByEntity($entity) {
+		$uploadedFile = $this->getUploadedFileByEntity($entity);
+		$this->em->remove($uploadedFile);
 		$this->em->flush();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 */
-	public function deleteFile(File $file) {
-		$entityName = $file->getEntityName();
-		$filepath = $this->uploadedFileLocator->getAbsoluteFileFilepath($file);
+	public function deleteFile(UploadedFile $uploadedFile) {
+		$filepath = $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
 		$this->filesystem->remove($filepath);
 	}
 
 	/**
 	 * @param object $entity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function getFileByEntity($entity) {
-		return $this->uploadedFileRepository->getFileByEntity(
+	public function getUploadedFileByEntity($entity) {
+		return $this->uploadedFileRepository->getUploadedFileByEntity(
 			$this->uploadedFileConfig->getEntityName($entity),
 			$this->getEntityId($entity)
 		);
@@ -132,54 +134,42 @@ class UploadedFileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File|Object $fileOrEntity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @param int $uploadedFileId
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function getFileByObject($fileOrEntity) {
-		if ($fileOrEntity instanceof File) {
-			return $fileOrEntity;
-		} else {
-			return $this->getFileByEntity($fileOrEntity);
-		}
-	}
-
-	/**
-	 * @param int $fileId
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
-	 */
-	public function getById($fileId) {
-		return $this->uploadedFileRepository->getById($fileId);
+	public function getById($uploadedFileId) {
+		return $this->uploadedFileRepository->getById($uploadedFileId);
 	}
 
 	/**
 	 * @param Object $entity
 	 * @return bool
 	 */
-	public function hasFile($entity) {
+	public function hasUploadedFile($entity) {
 		try {
-			$file = $this->getFileByEntity($entity);
+			$uploadedFile = $this->getUploadedFileByEntity($entity);
 		} catch (\SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
 			return false;
 		}
 
-		return $this->uploadedFileLocator->fileExists($file);
+		return $this->uploadedFileLocator->fileExists($uploadedFile);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
-	public function getAbsoluteFileFilepath(File $file) {
-		return $this->uploadedFileLocator->getAbsoluteFileFilepath($file);
+	public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
+		return $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
-	public function getFileUrl(DomainConfig $domainConfig, File $file) {
-		return $this->uploadedFileLocator->getFileUrl($domainConfig, $file);
+	public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
+		return $this->uploadedFileLocator->getUploadedFileUrl($domainConfig, $uploadedFile);
 	}
 
 }

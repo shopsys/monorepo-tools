@@ -12,9 +12,9 @@ use SS6\ShopBundle\Component\FileUpload\FileNamingConvention;
  * @ORM\Table(name="uploaded_files", indexes={@ORM\Index(columns={"entity_name", "entity_id"})})
  * @ORM\Entity
  */
-class File implements EntityFileUploadInterface {
+class UploadedFile implements EntityFileUploadInterface {
 
-	const UPLOAD_KEY = 'file';
+	const UPLOAD_KEY = 'uploadedFile';
 
 	/**
 	 * @var int

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileService {
 
@@ -21,16 +21,16 @@ class UploadedFileService {
 	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig $uploadedFileEntityConfig
 	 * @param int $entityId
 	 * @param string $temporaryFilename
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function createFile(
+	public function createUploadedFile(
 		UploadedFileEntityConfig $uploadedFileEntityConfig,
 		$entityId,
 		$temporaryFilename
 	) {
 		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
 
-		return new File(
+		return new UploadedFile(
 			$uploadedFileEntityConfig->getEntityName(),
 			$entityId,
 			pathinfo($temporaryFilepath, PATHINFO_BASENAME)

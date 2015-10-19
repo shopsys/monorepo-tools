@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileRepository {
 
@@ -19,52 +19,50 @@ class UploadedFileRepository {
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
-	private function getFileRepository() {
-		return $this->em->getRepository(File::class);
+	private function getUploadedFileRepository() {
+		return $this->em->getRepository(UploadedFile::class);
 	}
 
 	/**
 	 * @param string $entityName
 	 * @param int $entityId
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File|null
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile|null
 	 */
-	public function findFileByEntity($entityName, $entityId) {
-		$file = $this->getFileRepository()->findOneBy([
+	public function findUploadedFileByEntity($entityName, $entityId) {
+		return $this->getUploadedFileRepository()->findOneBy([
 			'entityName' => $entityName,
 			'entityId' => $entityId,
 		]);
-
-		return $file;
 	}
 
 	/**
 	 * @param string $entityName
 	 * @param int $entityId
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function getFileByEntity($entityName, $entityId) {
-		$file = $this->findFileByEntity($entityName, $entityId);
-		if ($file === null) {
-			$message = 'File not found for entity "' . $entityName . '" with ID ' . $entityId;
+	public function getUploadedFileByEntity($entityName, $entityId) {
+		$uploadedFile = $this->findUploadedFileByEntity($entityName, $entityId);
+		if ($uploadedFile === null) {
+			$message = 'UploadedFile not found for entity "' . $entityName . '" with ID ' . $entityId;
 			throw new \SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
 		}
 
-		return $file;
+		return $uploadedFile;
 	}
 
 	/**
-	 * @param int $fileId
-	 * @return \SS6\ShopBundle\Component\UploadedFile\File
+	 * @param int $uploadedFileId
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
-	public function getById($fileId) {
-		$file = $this->getFileRepository()->find($fileId);
+	public function getById($uploadedFileId) {
+		$uploadedFile = $this->getUploadedFileRepository()->find($uploadedFileId);
 
-		if ($file === null) {
-			$message = 'File with ID ' . $fileId . ' does not exist.';
+		if ($uploadedFile === null) {
+			$message = 'UploadedFile with ID ' . $uploadedFileId . ' does not exist.';
 			throw new \SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException($message);
 		}
 
-		return $file;
+		return $uploadedFile;
 	}
 
 }

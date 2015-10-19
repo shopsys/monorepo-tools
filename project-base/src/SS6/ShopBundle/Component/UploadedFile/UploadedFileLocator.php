@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Component\UploadedFile;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\UploadedFile\File;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileLocator {
 
@@ -27,42 +27,42 @@ class UploadedFileLocator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
-	public function getRelativeFileFilepath(File $file) {
-		return $this->getRelativeFilePath($file->getEntityName()) . DIRECTORY_SEPARATOR . $file->getFilename();
+	public function getRelativeUploadedFileFilepath(UploadedFile $uploadedFile) {
+		return $this->getRelativeFilePath($uploadedFile->getEntityName()) . DIRECTORY_SEPARATOR . $uploadedFile->getFilename();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
-	public function getAbsoluteFileFilepath(File $file) {
-		return $this->getAbsoluteFilePath($file->getEntityName()) . DIRECTORY_SEPARATOR . $file->getFilename();
+	public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
+		return $this->getAbsoluteFilePath($uploadedFile->getEntityName()) . DIRECTORY_SEPARATOR . $uploadedFile->getFilename();
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
-	public function getFileUrl(DomainConfig $domainConfig, File $file) {
-		if ($this->fileExists($file)) {
+	public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
+		if ($this->fileExists($uploadedFile)) {
 			return $domainConfig->getUrl()
 			. $this->fileUrlPrefix
-			. str_replace(DIRECTORY_SEPARATOR, '/', $this->getRelativeFileFilepath($file));
+			. str_replace(DIRECTORY_SEPARATOR, '/', $this->getRelativeUploadedFileFilepath($uploadedFile));
 		}
 
 		throw new \SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\File $file
+	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return bool
 	 */
-	public function fileExists(File $file) {
-		$fileFilepath = $this->getAbsoluteFileFilepath($file);
+	public function fileExists(UploadedFile $uploadedFile) {
+		$fileFilepath = $this->getAbsoluteUploadedFileFilepath($uploadedFile);
 
 		return is_file($fileFilepath) && is_readable($fileFilepath);
 	}
