@@ -284,8 +284,8 @@ services:
   ss6.shop.component.uploaded_file.config.uploaded_file_config_loader:
     class: SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
 
-  ss6.shop.component.uploaded_file.file_delete_doctrine_listener:
-    class: SS6\ShopBundle\Component\UploadedFile\FileDeleteDoctrineListener
+  ss6.shop.component.uploaded_file.uploaded_file_delete_doctrine_listener:
+    class: SS6\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 

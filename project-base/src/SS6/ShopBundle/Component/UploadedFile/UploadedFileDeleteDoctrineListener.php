@@ -3,14 +3,12 @@
 namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Filesystem\Filesystem;
 
-class FileDeleteDoctrineListener {
+class UploadedFileDeleteDoctrineListener {
 
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -18,30 +16,16 @@ class FileDeleteDoctrineListener {
 	private $container;
 
 	/**
-	 * @var \Symfony\Component\Filesystem\Filesystem
-	 */
-	private $filesystem;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
 	private $uploadedFileConfig;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
-	 */
-	private $fileUpload;
-
 	public function __construct(
 		ContainerInterface $container,
-		Filesystem $filesystem,
-		UploadedFileConfig $uploadedFileConfig,
-		FileUpload $fileUpload
+		UploadedFileConfig $uploadedFileConfig
 	) {
 		$this->container = $container;
-		$this->filesystem = $filesystem;
 		$this->uploadedFileConfig = $uploadedFileConfig;
-		$this->fileUpload = $fileUpload;
 	}
 
 	/**
@@ -60,7 +44,8 @@ class FileDeleteDoctrineListener {
 		$entity = $args->getEntity();
 
 		if ($this->uploadedFileConfig->hasUploadedFileEntityConfig($entity)) {
-			$this->getUploadedFileFacade()->getFileByEntity($entity);
+			$uploadedFile = $this->getUploadedFileFacade()->getUploadedFileByEntity($entity);
+			$args->getEntityManager()->remove($uploadedFile);
 		} elseif ($entity instanceof File) {
 			$this->getUploadedFileFacade()->deleteFile($entity);
 		}
