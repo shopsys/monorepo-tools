@@ -54,32 +54,6 @@ class FileConfig {
 	}
 
 	/**
-	 * @param string $entityName
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-	 */
-	public function getUploadedFileEntityConfigByEntityName($entityName) {
-		foreach ($this->uploadedFileEntityConfigsByClass as $entityConfig) {
-			if ($entityConfig->getEntityName() === $entityName) {
-				return $entityConfig;
-			}
-		}
-
-		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigDataNotFoundException($entityName);
-	}
-
-	/**
-	 * @param string $class
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
-	 */
-	public function getUploadedFileEntityConfigDataByClass($class) {
-		if (array_key_exists($class, $this->uploadedFileEntityConfigsByClass)) {
-			return $this->uploadedFileEntityConfigsByClass[$class];
-		}
-
-		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\FileConfigDataNotFoundException($class);
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
 	 */
 	public function getAllUploadedFileEntityConfigs() {
