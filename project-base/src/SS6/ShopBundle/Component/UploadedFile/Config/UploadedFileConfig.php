@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\UploadedFile\Config;
 
-class FileConfig {
+class UploadedFileConfig {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
@@ -10,10 +10,10 @@ class FileConfig {
 	private $uploadedFileEntityConfigsByClass;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $fileEntityConfigsByClass
+	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $uploadedFileEntityConfigsByClass
 	 */
-	public function __construct(array $fileEntityConfigsByClass) {
-		$this->uploadedFileEntityConfigsByClass = $fileEntityConfigsByClass;
+	public function __construct(array $uploadedFileEntityConfigsByClass) {
+		$this->uploadedFileEntityConfigsByClass = $uploadedFileEntityConfigsByClass;
 	}
 
 	/**
@@ -44,7 +44,7 @@ class FileConfig {
 	 * @param object $entity
 	 * @return bool
 	 */
-	public function hasFileConfig($entity) {
+	public function hasUploadedFileEntityConfig($entity) {
 		foreach ($this->uploadedFileEntityConfigsByClass as $className => $entityConfig) {
 			if ($entity instanceof $className) {
 				return true;

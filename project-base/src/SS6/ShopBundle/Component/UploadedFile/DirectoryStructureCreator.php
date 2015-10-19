@@ -2,16 +2,16 @@
 
 namespace SS6\ShopBundle\Component\UploadedFile;
 
-use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
-	private $fileConfig;
+	private $uploadedFileConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
@@ -24,20 +24,20 @@ class DirectoryStructureCreator {
 	private $filesysytem;
 
 	public function __construct(
-		FileConfig $fileConfig,
+		UploadedFileConfig $uploadedFileConfig,
 		FileLocator $fileLocator,
 		Filesystem $filesystem
 	) {
-		$this->fileConfig = $fileConfig;
+		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileLocator = $fileLocator;
 		$this->filesysytem = $filesystem;
 	}
 
 	public function makeFileDirectories() {
-		$fileEntityConfigs = $this->fileConfig->getAllUploadedFileEntityConfigs();
+		$uploadedFileEntityConfigs = $this->uploadedFileConfig->getAllUploadedFileEntityConfigs();
 		$directories = [];
-		foreach ($fileEntityConfigs as $fileEntityConfig) {
-			$directories[] = $this->fileLocator->getAbsoluteFilePath($fileEntityConfig->getEntityName());
+		foreach ($uploadedFileEntityConfigs as $uploadedFileEntityConfig) {
+			$directories[] = $this->fileLocator->getAbsoluteFilePath($uploadedFileEntityConfig->getEntityName());
 		}
 
 		$this->filesysytem->mkdir($directories);

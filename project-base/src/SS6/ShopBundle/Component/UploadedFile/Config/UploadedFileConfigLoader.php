@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\UploadedFile\Config;
 
-use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
@@ -34,7 +34,7 @@ class UploadedFileConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -52,7 +52,7 @@ class UploadedFileConfigLoader {
 		$outputConfig = $processor->processConfiguration($uploadedFileConfigDefinition, [$inputConfig]);
 		$this->loadFileEntityConfigsFromArray($outputConfig);
 
-		return new FileConfig($this->uploadedFileEntityConfigsByClass);
+		return new UploadedFileConfig($this->uploadedFileEntityConfigsByClass);
 	}
 
 	/**

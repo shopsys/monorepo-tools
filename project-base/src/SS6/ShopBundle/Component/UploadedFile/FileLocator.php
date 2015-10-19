@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Component\UploadedFile;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 
 class FileLocator {
@@ -19,19 +19,19 @@ class FileLocator {
 	private $fileUrlPrefix;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
-	private $fileConfig;
+	private $uploadedFileConfig;
 
 	/**
 	 * @param string $fileDir
 	 * @param string $fileUrlPrefix
-	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig $fileConfig
+	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig $uploadedFileConfig
 	 */
-	public function __construct($fileDir, $fileUrlPrefix, FileConfig $fileConfig) {
+	public function __construct($fileDir, $fileUrlPrefix, UploadedFileConfig $uploadedFileConfig) {
 		$this->fileDir = $fileDir;
 		$this->fileUrlPrefix = $fileUrlPrefix;
-		$this->fileConfig = $fileConfig;
+		$this->uploadedFileConfig = $uploadedFileConfig;
 	}
 
 	/**

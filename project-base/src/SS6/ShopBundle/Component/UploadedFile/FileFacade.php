@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use SS6\ShopBundle\Component\UploadedFile\FileRepository;
@@ -20,9 +20,9 @@ class FileFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
-	private $fileConfig;
+	private $uploadedFileConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\FileRepository
@@ -51,7 +51,7 @@ class FileFacade {
 
 	public function __construct(
 		EntityManager $em,
-		FileConfig $fileConfig,
+		UploadedFileConfig $uploadedFileConfig,
 		FileRepository $fileRepository,
 		FileService $fileService,
 		Filesystem $filesystem,
@@ -59,7 +59,7 @@ class FileFacade {
 		FileLocator $fileLocator
 	) {
 		$this->em = $em;
-		$this->fileConfig = $fileConfig;
+		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileRepository = $fileRepository;
 		$this->fileService = $fileService;
 		$this->filesystem = $filesystem;
@@ -74,7 +74,7 @@ class FileFacade {
 	public function uploadFile($entity, $temporaryFilenames) {
 		if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
 			$entitiesForFlush = [];
-			$fileEntityConfig = $this->fileConfig->getUploadedFileEntityConfig($entity);
+			$fileEntityConfig = $this->uploadedFileConfig->getUploadedFileEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
 			$oldFile = $this->fileRepository->findFileByEntity($fileEntityConfig->getEntityName(), $entityId);
 
@@ -119,7 +119,7 @@ class FileFacade {
 	 */
 	public function getFileByEntity($entity) {
 		return $this->fileRepository->getFileByEntity(
-			$this->fileConfig->getEntityName($entity),
+			$this->uploadedFileConfig->getEntityName($entity),
 			$this->getEntityId($entity)
 		);
 	}

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\UploadedFile\Config\FileConfig;
+use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\FileFacade;
 use SS6\ShopBundle\Component\UploadedFile\FileLocator;
@@ -24,9 +24,9 @@ class FileDeleteDoctrineListener {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
+	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
-	private $fileConfig;
+	private $uploadedFileConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
@@ -41,13 +41,13 @@ class FileDeleteDoctrineListener {
 	public function __construct(
 		ContainerInterface $container,
 		Filesystem $filesystem,
-		FileConfig $fileConfig,
+		UploadedFileConfig $uploadedFileConfig,
 		FileUpload $fileUpload,
 		FileLocator $fileLocator
 	) {
 		$this->container = $container;
 		$this->filesystem = $filesystem;
-		$this->fileConfig = $fileConfig;
+		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileUpload = $fileUpload;
 		$this->fileLocator = $fileLocator;
 	}
@@ -67,7 +67,7 @@ class FileDeleteDoctrineListener {
 	public function preRemove(LifecycleEventArgs $args) {
 		$entity = $args->getEntity();
 
-		if ($this->fileConfig->hasFileConfig($entity)) {
+		if ($this->uploadedFileConfig->hasUploadedFileEntityConfig($entity)) {
 			$this->getFileFacade()->getFileByEntity($entity);
 		} elseif ($entity instanceof File) {
 			$this->getFileFacade()->deleteFile($entity);
