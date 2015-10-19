@@ -12,6 +12,15 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends AdminBaseController {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private $loginService;
+
+	public function __construct(LoginService $loginService) {
+		$this->loginService = $loginService;
+	}
+
+	/**
 	 * @Route("/", name="admin_login")
 	 * @Route("/login_check/", name="admin_login_check")
 	 * @Route("/logout/", name="admin_logout")
@@ -29,10 +38,8 @@ class LoginController extends AdminBaseController {
 			'method' => 'POST',
 		]);
 
-		$loginService = $this->container->get(LoginService::class);
-		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
 		try {
-			$loginService->checkLoginProcess($request);
+			$this->loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
 			$error = 'Přihlášení se nepodařilo.';
 		}

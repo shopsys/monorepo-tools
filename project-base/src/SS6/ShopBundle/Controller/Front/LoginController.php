@@ -11,18 +11,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends FrontBaseController {
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private $loginService;
+
+	public function __construct(LoginService $loginService) {
+		$this->loginService = $loginService;
+	}
+
 	public function loginAction(Request $request) {
 		if ($this->isGranted(Roles::ROLE_CUSTOMER)) {
 			return $this->redirectToRoute('front_homepage');
 		}
 
-		$loginService = $this->container->get(LoginService::class);
-		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
-
 		$form = $this->getLoginForm();
 
 		try {
-			$loginService->checkLoginProcess($request);
+			$this->loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
 			$form->addError(new FormError('Byly zadány neplatné přihlašovací údaje'));
 		}
