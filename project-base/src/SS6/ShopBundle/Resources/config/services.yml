@@ -276,13 +276,13 @@ services:
 
   ss6.shop.component.uploaded_file.config.file_config:
     class: SS6\ShopBundle\Component\UploadedFile\Config\FileConfig
-    factory_service: ss6.shop.component.uploaded_file.config.file_config_loader
+    factory_service: ss6.shop.component.uploaded_file.config.uploaded_file_config_loader
     factory_method: loadFromYaml
     arguments:
       - %ss6.file_config_filepath%
 
-  ss6.shop.component.uploaded_file.config.file_config_loader:
-    class: SS6\ShopBundle\Component\UploadedFile\Config\FileConfigLoader
+  ss6.shop.component.uploaded_file.config.uploaded_file_config_loader:
+    class: SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
 
   ss6.shop.component.uploaded_file.file_delete_doctrine_listener:
     class: SS6\ShopBundle\Component\UploadedFile\FileDeleteDoctrineListener
