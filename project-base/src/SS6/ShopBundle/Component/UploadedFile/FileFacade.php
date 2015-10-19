@@ -9,7 +9,7 @@ use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\FileLocator;
 use SS6\ShopBundle\Component\UploadedFile\FileRepository;
-use SS6\ShopBundle\Component\UploadedFile\FileService;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class FileFacade {
@@ -30,9 +30,9 @@ class FileFacade {
 	private $fileRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileService
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileService
 	 */
-	private $fileService;
+	private $uploadedFileService;
 
 	/**
 	 * @var \Symfony\Component\Filesystem\Filesystem
@@ -53,7 +53,7 @@ class FileFacade {
 		EntityManager $em,
 		UploadedFileConfig $uploadedFileConfig,
 		FileRepository $fileRepository,
-		FileService $fileService,
+		UploadedFileService $uploadedFileService,
 		Filesystem $filesystem,
 		FileUpload $fileUpload,
 		FileLocator $fileLocator
@@ -61,7 +61,7 @@ class FileFacade {
 		$this->em = $em;
 		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileRepository = $fileRepository;
-		$this->fileService = $fileService;
+		$this->uploadedFileService = $uploadedFileService;
 		$this->filesystem = $filesystem;
 		$this->fileUpload = $fileUpload;
 		$this->fileLocator = $fileLocator;
@@ -83,7 +83,7 @@ class FileFacade {
 				$entitiesForFlush[] = $oldFile;
 			}
 
-			$newFile = $this->fileService->createFile(
+			$newFile = $this->uploadedFileService->createFile(
 				$fileEntityConfig,
 				$entityId,
 				array_pop($temporaryFilenames)

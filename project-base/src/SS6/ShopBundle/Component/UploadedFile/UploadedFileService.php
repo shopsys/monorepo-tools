@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 
-class FileService {
+class UploadedFileService {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
@@ -21,7 +21,6 @@ class FileService {
 	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig $uploadedFileEntityConfig
 	 * @param int $entityId
 	 * @param string $temporaryFilename
-	 * @param string|null $type
 	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function createFile(
