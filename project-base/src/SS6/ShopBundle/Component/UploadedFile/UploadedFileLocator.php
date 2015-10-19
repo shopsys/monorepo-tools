@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 
-class FileLocator {
+class UploadedFileLocator {
 
 	/**
 	 * @var string

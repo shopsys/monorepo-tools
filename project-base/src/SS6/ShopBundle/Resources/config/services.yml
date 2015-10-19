@@ -289,8 +289,8 @@ services:
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
-  ss6.shop.component.uploaded_file.file_locator:
-    class: SS6\ShopBundle\Component\UploadedFile\FileLocator
+  ss6.shop.component.uploaded_file.uploaded_file_locator:
+    class: SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
     arguments:
       - %ss6.file_dir%
       - %ss6.file_url_prefix%

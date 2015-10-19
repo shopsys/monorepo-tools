@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
-use SS6\ShopBundle\Component\UploadedFile\FileLocator;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
@@ -45,9 +45,9 @@ class FileFacade {
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
 	 */
-	private $fileLocator;
+	private $uploadedFileLocator;
 
 	public function __construct(
 		EntityManager $em,
@@ -56,7 +56,7 @@ class FileFacade {
 		UploadedFileService $uploadedFileService,
 		Filesystem $filesystem,
 		FileUpload $fileUpload,
-		FileLocator $fileLocator
+		UploadedFileLocator $uploadedFileLocator
 	) {
 		$this->em = $em;
 		$this->uploadedFileConfig = $uploadedFileConfig;
@@ -64,7 +64,7 @@ class FileFacade {
 		$this->uploadedFileService = $uploadedFileService;
 		$this->filesystem = $filesystem;
 		$this->fileUpload = $fileUpload;
-		$this->fileLocator = $fileLocator;
+		$this->uploadedFileLocator = $uploadedFileLocator;
 	}
 
 	/**
@@ -109,7 +109,7 @@ class FileFacade {
 	 */
 	public function deleteFile(File $file) {
 		$entityName = $file->getEntityName();
-		$filepath = $this->fileLocator->getAbsoluteFileFilepath($file);
+		$filepath = $this->uploadedFileLocator->getAbsoluteFileFilepath($file);
 		$this->filesystem->remove($filepath);
 	}
 
@@ -170,7 +170,7 @@ class FileFacade {
 			return false;
 		}
 
-		return $this->fileLocator->fileExists($file);
+		return $this->uploadedFileLocator->fileExists($file);
 	}
 
 	/**
@@ -178,7 +178,7 @@ class FileFacade {
 	 * @return string
 	 */
 	public function getAbsoluteFileFilepath(File $file) {
-		return $this->fileLocator->getAbsoluteFileFilepath($file);
+		return $this->uploadedFileLocator->getAbsoluteFileFilepath($file);
 	}
 
 	/**
@@ -187,7 +187,7 @@ class FileFacade {
 	 * @return string
 	 */
 	public function getFileUrl(DomainConfig $domainConfig, File $file) {
-		return $this->fileLocator->getFileUrl($domainConfig, $file);
+		return $this->uploadedFileLocator->getFileUrl($domainConfig, $file);
 	}
 
 }

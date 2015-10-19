@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Customer\Mail;
 
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\UploadedFile\FileLocator;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
@@ -29,14 +29,14 @@ class CustomerMailService {
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileLocator
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
 	 */
-	private $fileLocator;
+	private $uploadedFileLocator;
 
-	public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory, FileLocator $fileLocator) {
+	public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory, UploadedFileLocator $uploadedFileLocator) {
 		$this->setting = $setting;
 		$this->domainRouterFactory = $domainRouterFactory;
-		$this->fileLocator = $fileLocator;
+		$this->uploadedFileLocator = $uploadedFileLocator;
 	}
 
 	/**
