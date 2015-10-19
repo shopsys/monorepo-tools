@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
@@ -40,11 +39,6 @@ class FileFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
-	 */
-	private $fileUpload;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
 	 */
 	private $uploadedFileLocator;
@@ -55,7 +49,6 @@ class FileFacade {
 		UploadedFileRepository $uploadedFileRepository,
 		UploadedFileService $uploadedFileService,
 		Filesystem $filesystem,
-		FileUpload $fileUpload,
 		UploadedFileLocator $uploadedFileLocator
 	) {
 		$this->em = $em;
@@ -63,7 +56,6 @@ class FileFacade {
 		$this->uploadedFileRepository = $uploadedFileRepository;
 		$this->uploadedFileService = $uploadedFileService;
 		$this->filesystem = $filesystem;
-		$this->fileUpload = $fileUpload;
 		$this->uploadedFileLocator = $uploadedFileLocator;
 	}
 
