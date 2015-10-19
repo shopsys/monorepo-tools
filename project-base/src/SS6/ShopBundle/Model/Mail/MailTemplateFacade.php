@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\UploadedFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
@@ -39,9 +39,9 @@ class MailTemplateFacade {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileFacade
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade
 	 */
-	private $fileFacade;
+	private $uploadedFileFacade;
 
 	public function __construct(
 		EntityManager $em,
@@ -49,14 +49,14 @@ class MailTemplateFacade {
 		OrderStatusRepository $orderStatusRepository,
 		OrderStatusMailTemplateService $orderStatusMailTemplateService,
 		Domain $domain,
-		FileFacade $fileFacade
+		UploadedFileFacade $uploadedFileFacade
 	) {
 		$this->em = $em;
 		$this->mailTemplateRepository = $mailTemplateRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
 		$this->domain = $domain;
-		$this->fileFacade = $fileFacade;
+		$this->uploadedFileFacade = $uploadedFileFacade;
 	}
 
 	/**
@@ -91,9 +91,9 @@ class MailTemplateFacade {
 			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->name, $domainId);
 			$mailTemplate->edit($mailTemplateData);
 			if ($mailTemplateData->deleteAttachment === true) {
-				$this->fileFacade->deleteFileByEntity($mailTemplate);
+				$this->uploadedFileFacade->deleteFileByEntity($mailTemplate);
 			}
-			$this->fileFacade->uploadFile($mailTemplate, $mailTemplateData->attachment);
+			$this->uploadedFileFacade->uploadFile($mailTemplate, $mailTemplateData->attachment);
 		}
 
 		$this->em->flush();
@@ -152,9 +152,9 @@ class MailTemplateFacade {
 	 */
 	public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate) {
 		$filepaths = [];
-		if ($this->fileFacade->hasFile($mailTemplate)) {
-			$file = $this->fileFacade->getFileByEntity($mailTemplate);
-			$filepaths[] = $this->fileFacade->getAbsoluteFileFilepath($file);
+		if ($this->uploadedFileFacade->hasFile($mailTemplate)) {
+			$file = $this->uploadedFileFacade->getFileByEntity($mailTemplate);
+			$filepaths[] = $this->uploadedFileFacade->getAbsoluteFileFilepath($file);
 		}
 
 		return $filepaths;

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\UploadedFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -16,9 +16,9 @@ class FileExtension extends Twig_Extension {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileFacade
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade
 	 */
-	private $fileFacade;
+	private $uploadedFileFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
@@ -28,12 +28,12 @@ class FileExtension extends Twig_Extension {
 	public function __construct(
 		$fileUrlPrefix,
 		Domain $domain,
-		FileFacade $fileFacade,
+		UploadedFileFacade $uploadedFileFacade,
 		FileThumbnailExtension $fileThumbnailExtension
 	) {
 		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->domain = $domain;
-		$this->fileFacade = $fileFacade;
+		$this->uploadedFileFacade = $uploadedFileFacade;
 		$this->fileThumbnailExtension = $fileThumbnailExtension;
 	}
 
@@ -54,7 +54,7 @@ class FileExtension extends Twig_Extension {
 	 * @return bool
 	 */
 	public function hasFile($entity) {
-		return $this->fileFacade->hasFile($entity);
+		return $this->uploadedFileFacade->hasFile($entity);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class FileExtension extends Twig_Extension {
 	public function getFileUrl($entity) {
 		$file = $this->getFileByEntity($entity);
 
-		return $this->fileFacade->getFileUrl($this->domain->getCurrentDomainConfig(), $file);
+		return $this->uploadedFileFacade->getFileUrl($this->domain->getCurrentDomainConfig(), $file);
 	}
 
 	/**
@@ -73,7 +73,7 @@ class FileExtension extends Twig_Extension {
 	 */
 	public function getFilePreviewHtml($entity) {
 		$file = $this->getFileByEntity($entity);
-		$filepath = $this->fileFacade->getAbsoluteFileFilepath($file);
+		$filepath = $this->uploadedFileFacade->getAbsoluteFileFilepath($file);
 		$fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfo($filepath);
 
 		if ($fileThumbnailInfo->getIconType() !== null) {
@@ -88,7 +88,7 @@ class FileExtension extends Twig_Extension {
 	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getFileByEntity($entity) {
-		return $this->fileFacade->getFileByEntity($entity);
+		return $this->uploadedFileFacade->getFileByEntity($entity);
 	}
 
 	/**

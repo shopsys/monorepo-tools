@@ -6,7 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
-use SS6\ShopBundle\Component\UploadedFile\FileFacade;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -47,10 +47,10 @@ class FileDeleteDoctrineListener {
 	/**
 	 * Prevent ServiceCircularReferenceException
 	 *
-	 * @return \SS6\ShopBundle\Component\UploadedFile\FileFacade
+	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade
 	 */
-	private function getFileFacade() {
-		return $this->container->get(FileFacade::class);
+	private function getUploadedFileFacade() {
+		return $this->container->get(UploadedFileFacade::class);
 	}
 
 	/**
@@ -60,9 +60,9 @@ class FileDeleteDoctrineListener {
 		$entity = $args->getEntity();
 
 		if ($this->uploadedFileConfig->hasUploadedFileEntityConfig($entity)) {
-			$this->getFileFacade()->getFileByEntity($entity);
+			$this->getUploadedFileFacade()->getFileByEntity($entity);
 		} elseif ($entity instanceof File) {
-			$this->getFileFacade()->deleteFile($entity);
+			$this->getUploadedFileFacade()->deleteFile($entity);
 		}
 	}
 
