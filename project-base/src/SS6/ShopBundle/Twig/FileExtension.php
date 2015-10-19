@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Twig;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\FileFacade;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
@@ -15,11 +14,6 @@ class FileExtension extends Twig_Extension {
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
-	 */
-	private $uploadedFileConfig;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\FileFacade
@@ -34,13 +28,11 @@ class FileExtension extends Twig_Extension {
 	public function __construct(
 		$fileUrlPrefix,
 		Domain $domain,
-		UploadedFileConfig $uploadedFileConfig,
 		FileFacade $fileFacade,
 		FileThumbnailExtension $fileThumbnailExtension
 	) {
 		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->domain = $domain;
-		$this->uploadedFileConfig = $uploadedFileConfig;
 		$this->fileFacade = $fileFacade;
 		$this->fileThumbnailExtension = $fileThumbnailExtension;
 	}
