@@ -8,7 +8,7 @@ use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\File;
 use SS6\ShopBundle\Component\UploadedFile\FileLocator;
-use SS6\ShopBundle\Component\UploadedFile\FileRepository;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -25,9 +25,9 @@ class FileFacade {
 	private $uploadedFileConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\FileRepository
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository
 	 */
-	private $fileRepository;
+	private $uploadedFileRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileService
@@ -52,7 +52,7 @@ class FileFacade {
 	public function __construct(
 		EntityManager $em,
 		UploadedFileConfig $uploadedFileConfig,
-		FileRepository $fileRepository,
+		UploadedFileRepository $uploadedFileRepository,
 		UploadedFileService $uploadedFileService,
 		Filesystem $filesystem,
 		FileUpload $fileUpload,
@@ -60,7 +60,7 @@ class FileFacade {
 	) {
 		$this->em = $em;
 		$this->uploadedFileConfig = $uploadedFileConfig;
-		$this->fileRepository = $fileRepository;
+		$this->uploadedFileRepository = $uploadedFileRepository;
 		$this->uploadedFileService = $uploadedFileService;
 		$this->filesystem = $filesystem;
 		$this->fileUpload = $fileUpload;
@@ -76,7 +76,7 @@ class FileFacade {
 			$entitiesForFlush = [];
 			$fileEntityConfig = $this->uploadedFileConfig->getUploadedFileEntityConfig($entity);
 			$entityId = $this->getEntityId($entity);
-			$oldFile = $this->fileRepository->findFileByEntity($fileEntityConfig->getEntityName(), $entityId);
+			$oldFile = $this->uploadedFileRepository->findFileByEntity($fileEntityConfig->getEntityName(), $entityId);
 
 			if ($oldFile !== null) {
 				$this->em->remove($oldFile);
@@ -118,7 +118,7 @@ class FileFacade {
 	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getFileByEntity($entity) {
-		return $this->fileRepository->getFileByEntity(
+		return $this->uploadedFileRepository->getFileByEntity(
 			$this->uploadedFileConfig->getEntityName($entity),
 			$this->getEntityId($entity)
 		);
@@ -156,7 +156,7 @@ class FileFacade {
 	 * @return \SS6\ShopBundle\Component\UploadedFile\File
 	 */
 	public function getById($fileId) {
-		return $this->fileRepository->getById($fileId);
+		return $this->uploadedFileRepository->getById($fileId);
 	}
 
 	/**

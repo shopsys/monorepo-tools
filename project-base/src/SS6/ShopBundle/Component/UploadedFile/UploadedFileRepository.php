@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\UploadedFile\File;
 
-class FileRepository {
+class UploadedFileRepository {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
