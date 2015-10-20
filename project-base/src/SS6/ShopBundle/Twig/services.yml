@@ -17,8 +17,8 @@ services:
     tags:
       - { name: twig.extension }
 
-  ss6.twig.file_extension:
-    class: SS6\ShopBundle\Twig\FileExtension
+  ss6.twig.uploaded_file_extension:
+    class: SS6\ShopBundle\Twig\UploadedFileExtension
     arguments:
      - %ss6.file_url_prefix%
     tags:

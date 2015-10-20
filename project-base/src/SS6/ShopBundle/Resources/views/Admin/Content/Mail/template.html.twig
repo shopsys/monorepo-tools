@@ -27,9 +27,9 @@
 							<div class="form-line__line">
 								<div class="list-images__item">
 									<div class="list-images__item__in">
-										<a href="{{ fileUrl(mailTemplate) }}" target="_blank" class="list-images__item__image">
-											{{ filePreview(mailTemplate) }}
-											<div>{{ getFile(mailTemplate).filename }}</div>
+										<a href="{{ uploadedFileUrl(mailTemplate) }}" target="_blank" class="list-images__item__image">
+											{{ uploadedFilePreview(mailTemplate) }}
+											<div>{{ getUploadedFile(mailTemplate).filename }}</div>
 										</a>
 										<button class="js-mail-template-attachment-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
 											<i class="svg svg-circle-cross"></i>
