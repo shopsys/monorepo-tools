@@ -55,7 +55,7 @@ class LoginListener {
 			$this->orderFlowFacade->resetOrderForm();
 		}
 
-		if ($user instanceof UniqueLoginInterface) {
+		if ($user instanceof UniqueLoginInterface && !$user->isMultidomainLogin()) {
 			$user->setLoginToken(uniqid());
 		}
 

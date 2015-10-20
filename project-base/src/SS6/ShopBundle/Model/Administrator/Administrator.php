@@ -80,6 +80,11 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $superadmin;
 
 	/**
+	 * @var bool
+	 */
+	private $multidomainLogin;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
@@ -90,6 +95,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 		$this->gridLimits = new ArrayCollection();
 		$this->loginToken = '';
 		$this->superadmin = $administratorData->superadmin;
+		$this->multidomainLogin = false;
 	}
 
 	/**
@@ -299,6 +305,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 */
 	public function getSalt() {
 		return null; // bcrypt include salt in password hash
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function isMultidomainLogin() {
+		return $this->multidomainLogin;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setMultidomainLogin($multidomainLogin) {
+		$this->multidomainLogin = $multidomainLogin;
 	}
 
 }
