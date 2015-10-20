@@ -10,20 +10,20 @@ class UploadedFileLocator {
 	/**
 	 * @var string
 	 */
-	private $fileDir;
+	private $uploadedFileDir;
 
 	/**
 	 * @var string
 	 */
-	private $fileUrlPrefix;
+	private $uploadedFileUrlPrefix;
 
 	/**
-	 * @param string $fileDir
-	 * @param string $fileUrlPrefix
+	 * @param string $uploadedFileDir
+	 * @param string $uploadedFileUrlPrefix
 	 */
-	public function __construct($fileDir, $fileUrlPrefix) {
-		$this->fileDir = $fileDir;
-		$this->fileUrlPrefix = $fileUrlPrefix;
+	public function __construct($uploadedFileDir, $uploadedFileUrlPrefix) {
+		$this->uploadedFileDir = $uploadedFileDir;
+		$this->uploadedFileUrlPrefix = $uploadedFileUrlPrefix;
 	}
 
 	/**
@@ -50,7 +50,7 @@ class UploadedFileLocator {
 	public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
 		if ($this->fileExists($uploadedFile)) {
 			return $domainConfig->getUrl()
-			. $this->fileUrlPrefix
+			. $this->uploadedFileUrlPrefix
 			. str_replace(DIRECTORY_SEPARATOR, '/', $this->getRelativeUploadedFileFilepath($uploadedFile));
 		}
 
@@ -80,7 +80,7 @@ class UploadedFileLocator {
 	 * @return string
 	 */
 	public function getAbsoluteFilePath($entityName) {
-		return $this->fileDir . DIRECTORY_SEPARATOR . $this->getRelativeFilePath($entityName);
+		return $this->uploadedFileDir . DIRECTORY_SEPARATOR . $this->getRelativeFilePath($entityName);
 	}
 
 }

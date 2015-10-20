@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileUpload {
 
 	const TEMPORARY_DIRECTORY = 'fileUploads';
-	const UPLOAD_FILE_DIRECTORY = 'files';
-	const UPLOAD_IMAGE_DIRECTORY = 'images';
 
 	/**
 	 * @var string
@@ -20,7 +18,7 @@ class FileUpload {
 	/**
 	 * @var string
 	 */
-	private $fileDir;
+	private $uploadedFileDir;
 
 	/**
 	 * @var string
@@ -39,15 +37,20 @@ class FileUpload {
 
 	/**
 	 * @param string $temporaryDir
-	 * @param string $fileDir
+	 * @param string $uploadedFileDir
 	 * @param string $imageDir
 	 * @param \SS6\ShopBundle\Component\FileUpload\FileNamingConvention $fileNamingConvention
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
-	public function __construct($temporaryDir, $fileDir, $imageDir, FileNamingConvention $fileNamingConvention,
-			Filesystem $filesystem) {
+	public function __construct(
+		$temporaryDir,
+		$uploadedFileDir,
+		$imageDir,
+		FileNamingConvention $fileNamingConvention,
+		Filesystem $filesystem
+	) {
 		$this->temporaryDir = $temporaryDir;
-		$this->fileDir = $fileDir;
+		$this->uploadedFileDir = $uploadedFileDir;
 		$this->imageDir = $imageDir;
 		$this->fileNamingConvention = $fileNamingConvention;
 		$this->filesystem = $filesystem;
@@ -113,7 +116,7 @@ class FileUpload {
 	 * @return string
 	 */
 	public function getUploadDirectory($isImage, $category, $targetDirectory) {
-		return ($isImage ? $this->imageDir : $this->fileDir)
+		return ($isImage ? $this->imageDir : $this->uploadedFileDir)
 			. DIRECTORY_SEPARATOR . $category
 			. ($targetDirectory !== null ? DIRECTORY_SEPARATOR . $targetDirectory : '');
 	}

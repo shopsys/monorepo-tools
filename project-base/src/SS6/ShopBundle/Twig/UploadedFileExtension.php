@@ -26,12 +26,10 @@ class UploadedFileExtension extends Twig_Extension {
 	private $fileThumbnailExtension;
 
 	public function __construct(
-		$fileUrlPrefix,
 		Domain $domain,
 		UploadedFileFacade $uploadedFileFacade,
 		FileThumbnailExtension $fileThumbnailExtension
 	) {
-		$this->fileUrlPrefix = $fileUrlPrefix;
 		$this->domain = $domain;
 		$this->uploadedFileFacade = $uploadedFileFacade;
 		$this->fileThumbnailExtension = $fileThumbnailExtension;

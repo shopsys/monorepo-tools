@@ -211,7 +211,7 @@
 
 	<target name="entity-file-dirs">
 		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/assets/content/files">
+			<fileset dir="${path.root}/web/assets/content/uploadedFiles">
 			</fileset>
 		</delete>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
