@@ -78,6 +78,7 @@ class UrlsProvider {
 	 */
 	private $expectedStatusCodesByRouteName = [
 		'admin_login' => 302,
+		'admin_login_sso' => 302,
 		'admin_logout' => 302,
 		'front_customer_login_as_remembered_user' => 302,
 		'front_logout' => 302,

@@ -4,20 +4,50 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
+use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
 use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LoginController extends AdminBaseController {
+
+	const MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME = 'multidomainLoginToken';
+	const ORIGINAL_DOMAIN_ID_PARAMETER_NAME = 'originalDomainId';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Security\LoginService
 	 */
 	private $loginService;
 
-	public function __construct(LoginService $loginService) {
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 */
+	private $domainRouterFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
+	 */
+	private $administratorLoginFacade;
+
+	public function __construct(
+		LoginService $loginService,
+		Domain $domain,
+		DomainRouterFactory $domainRouterFactory,
+		AdministratorLoginFacade $administratorLoginFacade
+	) {
 		$this->loginService = $loginService;
+		$this->domain = $domain;
+		$this->domainRouterFactory = $domainRouterFactory;
+		$this->administratorLoginFacade = $administratorLoginFacade;
 	}
 
 	/**
@@ -27,6 +57,17 @@ class LoginController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {
+		$currentDomainId = $this->domain->getId();
+		if ($currentDomainId !== 1 && !$this->isGranted(Roles::ROLE_ADMIN)) {
+			$firstDomainRouter = $this->domainRouterFactory->getRouter(1);
+			$redirectTo = $firstDomainRouter->generate(
+				'admin_login_sso',
+				[self::ORIGINAL_DOMAIN_ID_PARAMETER_NAME => $currentDomainId],
+				UrlGeneratorInterface::ABSOLUTE_URL
+			);
+
+			return $this->redirect($redirectTo);
+		}
 		if ($this->isGranted(Roles::ROLE_ADMIN)) {
 			return $this->redirectToRoute('admin_default_dashboard');
 		}
@@ -48,6 +89,31 @@ class LoginController extends AdminBaseController {
 				'form' => $form->createView(),
 				'error' => $error,
 		]);
+	}
+
+	/**
+	 * @Route("/sso/{originalDomainId}", requirements={"originalDomainId" = "\d+"})
+	 */
+	public function ssoAction($originalDomainId) {
+		$multidomainLoginToken = $this->getUser()->getId();
+		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
+		$redirectTo = $originalDomainRouter->generate(
+			'admin_login_authorization',
+			[self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainLoginToken],
+			UrlGeneratorInterface::ABSOLUTE_URL
+		);
+
+		return $this->redirect($redirectTo);
+	}
+
+	/**
+	 * @Route("/authorization/")
+	 */
+	public function authorizationAction(Request $request) {
+		$multidomainLoginToken = (int)$request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
+		$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
+
+		return $this->redirectToRoute('admin_default_dashboard');
 	}
 
 }

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
+use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
@@ -43,18 +44,25 @@ class AdministratorLoginFacade {
 	 */
 	private $administratorSecurityFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorRepository
+	 */
+	private $administratorRepository;
+
 	public function __construct(
 		TokenStorageInterface $tokenStorage,
 		EventDispatcherInterface $eventDispatcher,
 		SessionInterface $session,
 		UserRepository $userRepository,
-		AdministratorSecurityFacade $administratorSecurityFacade
+		AdministratorSecurityFacade $administratorSecurityFacade,
+		AdministratorRepository $administratorRepository
 	) {
 		$this->tokenStorage = $tokenStorage;
 		$this->eventDispatcher = $eventDispatcher;
 		$this->session = $session;
 		$this->userRepository = $userRepository;
 		$this->administratorSecurityFacade = $administratorSecurityFacade;
+		$this->administratorRepository = $administratorRepository;
 	}
 
 	/**
@@ -89,6 +97,22 @@ class AdministratorLoginFacade {
 		$firewallName = 'frontend';
 		$freshUserRoles = array_merge($freshUser->getRoles(), [Roles::ROLE_ADMIN_AS_CUSTOMER]);
 		$token = new UsernamePasswordToken($freshUser, $password, $firewallName, $freshUserRoles);
+		$this->tokenStorage->setToken($token);
+
+		$event = new InteractiveLoginEvent($request, $token);
+		$this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $multidomainLoginToken
+	 */
+	public function loginByMultidomainToken(Request $request, $multidomainLoginToken) {
+		$freshAdministrator = $this->administratorRepository->getById($multidomainLoginToken);
+		$freshAdministrator->setMultidomainLogin(true);
+		$password = '';
+		$firewallName = 'administration';
+		$token = new UsernamePasswordToken($freshAdministrator, $password, $firewallName, $freshAdministrator->getRoles());
 		$this->tokenStorage->setToken($token);
 
 		$event = new InteractiveLoginEvent($request, $token);
