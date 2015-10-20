@@ -168,7 +168,7 @@
 		</exec>
 	</target>
 
-	<target name="dirs-structure" depends="img-dirs,entity-file-dirs">
+	<target name="dirs-structure" depends="img-dirs,uploaded-file-dirs">
 		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/assets/content/feeds" mode="${mkdir.mode}"/>
@@ -209,14 +209,14 @@
 		</exec>
 	</target>
 
-	<target name="entity-file-dirs">
+	<target name="uploaded-file-dirs">
 		<delete includeemptydirs="true">
 			<fileset dir="${path.root}/web/assets/content/uploadedFiles">
 			</fileset>
 		</delete>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:entity-file:directories" />
+			<arg value="ss6:uploaded-file:directories" />
 		</exec>
 	</target>
 

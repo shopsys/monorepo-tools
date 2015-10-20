@@ -33,7 +33,7 @@ class DirectoryStructureCreator {
 		$this->filesysytem = $filesystem;
 	}
 
-	public function makeFileDirectories() {
+	public function makeUploadedFileDirectories() {
 		$uploadedFileEntityConfigs = $this->uploadedFileConfig->getAllUploadedFileEntityConfigs();
 		$directories = [];
 		foreach ($uploadedFileEntityConfigs as $uploadedFileEntityConfig) {
