@@ -22,7 +22,7 @@ use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
+use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -87,9 +87,9 @@ class CustomerController extends AdminBaseController {
 	private $csrfTokenManager;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
+	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
 	 */
-	private $loginAsUserFacade;
+	private $administratorLoginFacade;
 
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
@@ -103,7 +103,7 @@ class CustomerController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		OrderFacade $orderFacade,
 		CsrfTokenManagerInterface $csrfTokenManager,
-		LoginAsUserFacade $loginAsUserFacade
+		AdministratorLoginFacade $administratorLoginFacade
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
@@ -116,7 +116,7 @@ class CustomerController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->orderFacade = $orderFacade;
 		$this->csrfTokenManager = $csrfTokenManager;
-		$this->loginAsUserFacade = $loginAsUserFacade;
+		$this->administratorLoginFacade = $administratorLoginFacade;
 	}
 
 	/**
@@ -315,7 +315,7 @@ class CustomerController extends AdminBaseController {
 
 		$user = $this->customerEditFacade->getUserById($userId);
 		$this->csrfTokenManager->removeToken($csrfTokenId);
-		$this->loginAsUserFacade->rememberLoginAsUser($user);
+		$this->administratorLoginFacade->rememberLoginAsUser($user);
 
 		return $this->redirectToRoute('front_customer_login_as_remembered_user');
 	}
