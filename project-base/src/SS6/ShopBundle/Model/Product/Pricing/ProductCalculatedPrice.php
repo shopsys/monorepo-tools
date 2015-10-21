@@ -31,16 +31,16 @@ class ProductCalculatedPrice {
 	private $pricingGroup;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
-	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=false)
+	 * @ORM\Column(type="decimal", precision=20, scale=6, nullable=true)
 	 */
 	private $priceWithVat;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param string $priceWithVat
+	 * @param string|null $priceWithVat
 	 */
 	public function __construct(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
 		$this->product = $product;
@@ -63,14 +63,14 @@ class ProductCalculatedPrice {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getPriceWithVat() {
 		return $this->priceWithVat;
 	}
 
 	/**
-	 * @param string $priceWithVat
+	 * @param string|null $priceWithVat
 	 */
 	public function setPriceWithVat($priceWithVat) {
 		$this->priceWithVat = $priceWithVat;

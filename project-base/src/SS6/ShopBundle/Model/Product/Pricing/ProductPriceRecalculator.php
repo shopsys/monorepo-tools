@@ -132,7 +132,7 @@ class ProductPriceRecalculator {
 				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 				$priceWithVat = $price->getPriceWithVat();
 			} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
-				$priceWithVat = 0;
+				$priceWithVat = null;
 			}
 			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);
 		}
