@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing\Group;
 
+use ReflectionClass;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -44,14 +45,18 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 			'product' => $product,
 			'pricingGroup' => $pricingGroup,
 		]);
-		/* @var $productCalculatedPrice \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice */
-		$productPriceBeforeEdit = $productCalculatedPrice->getPriceWithVat();
+
+		$reflectionClass = new ReflectionClass(ProductCalculatedPrice::class);
+		$reflectionProperty = $reflectionClass->getProperty('priceWithVat');
+		$reflectionProperty->setAccessible(true);
+
+		$productPriceBeforeEdit = $reflectionProperty->getValue($productCalculatedPrice);
 
 		$pricingGroupData = new PricingGroupData($pricingGroup->getName(), $pricingGroup->getCoefficient() * 2);
 		$pricingGroupFacade->edit($pricingGroup->getId(), $pricingGroupData);
 		$productPriceRecalculator->runAllScheduledRecalculations();
 
-		$productPriceAfterEdit = $productCalculatedPrice->getPriceWithVat();
+		$productPriceAfterEdit = $reflectionProperty->getValue($productCalculatedPrice);
 
 		$this->assertSame(round($productPriceBeforeEdit * 2, 6), round($productPriceAfterEdit, 6));
 	}

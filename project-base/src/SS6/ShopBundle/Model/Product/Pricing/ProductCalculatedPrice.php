@@ -63,13 +63,6 @@ class ProductCalculatedPrice {
 	}
 
 	/**
-	 * @return string|null
-	 */
-	public function getPriceWithVat() {
-		return $this->priceWithVat;
-	}
-
-	/**
 	 * @param string|null $priceWithVat
 	 */
 	public function setPriceWithVat($priceWithVat) {
