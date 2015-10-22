@@ -52,7 +52,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $loginToken;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	private $lastActivity;
 
@@ -247,7 +247,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param DateTime $lastActivity
+	 * @param \DateTime $lastActivity
 	 */
 	public function setLastActivity($lastActivity) {
 		$this->lastActivity = $lastActivity;
