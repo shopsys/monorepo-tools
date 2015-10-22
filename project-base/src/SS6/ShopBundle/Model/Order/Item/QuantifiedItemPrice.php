@@ -2,39 +2,20 @@
 
 namespace SS6\ShopBundle\Model\Order\Item;
 
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 
 class QuantifiedItemPrice {
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private $unitPriceWithoutVat;
+	private $unitPrice;
 
 	/**
-	 * @var string
+	 * @var \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private $unitPriceWithVat;
-
-	/**
-	 * @var string
-	 */
-	private $unitPriceVatAmount;
-
-	/**
-	 * @var string
-	 */
-	private $totalPriceWithoutVat;
-
-	/**
-	 * @var string
-	 */
-	private $totalPriceWithVat;
-
-	/**
-	 * @var string
-	 */
-	private $totalPriceVatAmount;
+	private $totalPrice;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
@@ -42,29 +23,17 @@ class QuantifiedItemPrice {
 	private $vat;
 
 	/**
-	 * @param string $unitPriceWithoutVat
-	 * @param string $unitPriceWithVat
-	 * @param string $unitPriceVatAmount
-	 * @param string $totalPriceWithoutVat
-	 * @param string $totalPriceWithVat
-	 * @param string $totalPriceVatAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $unitPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function __construct(
-		$unitPriceWithoutVat,
-		$unitPriceWithVat,
-		$unitPriceVatAmount,
-		$totalPriceWithoutVat,
-		$totalPriceWithVat,
-		$totalPriceVatAmount,
+		Price $unitPrice,
+		Price $totalPrice,
 		Vat $vat
 	) {
-		$this->unitPriceWithoutVat = $unitPriceWithoutVat;
-		$this->unitPriceWithVat = $unitPriceWithVat;
-		$this->unitPriceVatAmount = $unitPriceVatAmount;
-		$this->totalPriceWithoutVat = $totalPriceWithoutVat;
-		$this->totalPriceWithVat = $totalPriceWithVat;
-		$this->totalPriceVatAmount = $totalPriceVatAmount;
+		$this->unitPrice = $unitPrice;
+		$this->totalPrice = $totalPrice;
 		$this->vat = $vat;
 	}
 
@@ -72,42 +41,42 @@ class QuantifiedItemPrice {
 	 * @return string
 	 */
 	public function getUnitPriceWithoutVat() {
-		return $this->unitPriceWithoutVat;
+		return $this->unitPrice->getPriceWithoutVat();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getUnitPriceWithVat() {
-		return $this->unitPriceWithVat;
+		return $this->unitPrice->getPriceWithVat();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getUnitPriceVatAmount() {
-		return $this->unitPriceVatAmount;
+		return $this->unitPrice->getVatAmount();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTotalPriceWithoutVat() {
-		return $this->totalPriceWithoutVat;
+		return $this->totalPrice->getPriceWithoutVat();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTotalPriceWithVat() {
-		return $this->totalPriceWithVat;
+		return $this->totalPrice->getPriceWithVat();
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTotalPriceVatAmount() {
-		return $this->totalPriceVatAmount;
+		return $this->totalPrice->getVatAmount();
 	}
 
 	/**

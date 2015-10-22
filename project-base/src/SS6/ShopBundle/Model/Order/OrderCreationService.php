@@ -229,8 +229,8 @@ class OrderCreationService {
 			new OrderProduct(
 				$order,
 				$this->translator->trans('Zaokrouhlení', [], 'messages', $locale),
-				$orderPreview->getRoundingAmount(),
-				$orderPreview->getRoundingAmount(),
+				$orderPreview->getRoundingAmount()->getPriceWithoutVat(),
+				$orderPreview->getRoundingAmount()->getPriceWithVat(),
 				0,
 				1,
 				null,
