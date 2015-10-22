@@ -2,6 +2,10 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
+use DateTime;
+use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\String\HashGenerator;
+use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
@@ -16,6 +20,9 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
 class AdministratorLoginFacade {
+
+	const MULTIDOMAIN_LOGIN_TOKEN_LENGTH = 50;
+	const MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS = 10;
 
 	const SESSION_LOGIN_AS = 'loginAsUser';
 
@@ -49,13 +56,25 @@ class AdministratorLoginFacade {
 	 */
 	private $administratorRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\String\HashGenerator
+	 */
+	private $hashGenerator;
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
 	public function __construct(
 		TokenStorageInterface $tokenStorage,
 		EventDispatcherInterface $eventDispatcher,
 		SessionInterface $session,
 		UserRepository $userRepository,
 		AdministratorSecurityFacade $administratorSecurityFacade,
-		AdministratorRepository $administratorRepository
+		AdministratorRepository $administratorRepository,
+		HashGenerator $hashGenerator,
+		EntityManager $em
 	) {
 		$this->tokenStorage = $tokenStorage;
 		$this->eventDispatcher = $eventDispatcher;
@@ -63,6 +82,8 @@ class AdministratorLoginFacade {
 		$this->userRepository = $userRepository;
 		$this->administratorSecurityFacade = $administratorSecurityFacade;
 		$this->administratorRepository = $administratorRepository;
+		$this->hashGenerator = $hashGenerator;
+		$this->em = $em;
 	}
 
 	/**
@@ -104,11 +125,26 @@ class AdministratorLoginFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 */
+	public function setMultidomainLoginTokenWithExpiration(Administrator $administrator) {
+		$multidomainLoginToken = $this->hashGenerator->generateHash(self::MULTIDOMAIN_LOGIN_TOKEN_LENGTH);
+		$multidomainLoginTokenExpirationDateTime = new DateTime('+' . self::MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS . 'seconds');
+		$administrator->setMultidomainLoginToken($multidomainLoginToken);
+		$administrator->setMultidomainLoginTokenExpiration($multidomainLoginTokenExpirationDateTime);
+		$this->em->flush();
+	}
+
+	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $multidomainLoginToken
 	 */
 	public function loginByMultidomainToken(Request $request, $multidomainLoginToken) {
-		$freshAdministrator = $this->administratorRepository->getById($multidomainLoginToken);
+		$freshAdministrator = $this->administratorRepository->getByMultidomainLoginToken($multidomainLoginToken);
+		if (!$this->isMultidomainLoginTokenValid($freshAdministrator)) {
+			$message = 'Token is not valid.';
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+		}
 		$freshAdministrator->setMultidomainLogin(true);
 		$password = '';
 		$firewallName = 'administration';
@@ -117,6 +153,14 @@ class AdministratorLoginFacade {
 
 		$event = new InteractiveLoginEvent($request, $token);
 		$this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @return bool
+	 */
+	private function isMultidomainLoginTokenValid(Administrator $administrator) {
+		return $administrator->getMultidomainLoginTokenExpiration() > new DateTime();
 	}
 
 }

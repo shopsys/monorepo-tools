@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(columns={"username"})
  *   }
  * )
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
@@ -85,6 +86,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $multidomainLogin;
 
 	/**
+	 * @ORM\Column(type="string", length=50, nullable=true)
+	 *
+	 * @var string
+	 */
+	private $multidomainLoginToken;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $multidomainLoginTokenExpiration;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
@@ -96,6 +111,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 		$this->loginToken = '';
 		$this->superadmin = $administratorData->superadmin;
 		$this->multidomainLogin = false;
+		$this->multidomainLoginToken = '';
+		$this->multidomainLoginTokenExpiration = new DateTime();
 	}
 
 	/**
@@ -205,6 +222,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getMultidomainLoginToken() {
+		return $this->multidomainLoginToken;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getMultidomainLoginTokenExpiration() {
+		return $this->multidomainLoginTokenExpiration;
+	}
+
+	/**
 	 * @param bool $superadmin
 	 */
 	public function setSuperadmin($superadmin) {
@@ -251,6 +282,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 */
 	public function setLastActivity($lastActivity) {
 		$this->lastActivity = $lastActivity;
+	}
+
+	/**
+	 * @param string $multidomainLoginToken
+	 */
+	public function setMultidomainLoginToken($multidomainLoginToken) {
+		$this->multidomainLoginToken = $multidomainLoginToken;
+	}
+
+	/**
+	 * @param \DateTime $multidomainLoginTokenExpiration
+	 */
+	public function setMultidomainLoginTokenExpiration($multidomainLoginTokenExpiration) {
+		$this->multidomainLoginTokenExpiration = $multidomainLoginTokenExpiration;
 	}
 
 	/**

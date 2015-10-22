@@ -95,11 +95,15 @@ class LoginController extends AdminBaseController {
 	 * @Route("/sso/{originalDomainId}", requirements={"originalDomainId" = "\d+"})
 	 */
 	public function ssoAction($originalDomainId) {
-		$multidomainLoginToken = $this->getUser()->getId();
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$this->transactional(function () use ($administrator) {
+			$this->administratorLoginFacade->setMultidomainLoginTokenWithExpiration($administrator);
+		});
 		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
 		$redirectTo = $originalDomainRouter->generate(
 			'admin_login_authorization',
-			[self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainLoginToken],
+			[self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $administrator->getMultidomainLoginToken()],
 			UrlGeneratorInterface::ABSOLUTE_URL
 		);
 
@@ -110,8 +114,12 @@ class LoginController extends AdminBaseController {
 	 * @Route("/authorization/")
 	 */
 	public function authorizationAction(Request $request) {
-		$multidomainLoginToken = (int)$request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
-		$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
+		$multidomainLoginToken = $request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
+		try {
+			$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
+		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorException $ex) {
+			return $this->render('@SS6Shop/Admin/Content/Login/loginFailed.html.twig');
+		}
 
 		return $this->redirectToRoute('admin_default_dashboard');
 	}

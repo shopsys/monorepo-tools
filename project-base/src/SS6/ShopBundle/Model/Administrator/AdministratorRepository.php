@@ -49,6 +49,20 @@ class AdministratorRepository {
 	}
 
 	/**
+	 * @param string $multidomainLoginToken
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 */
+	public function getByMultidomainLoginToken($multidomainLoginToken) {
+		$administrator = $this->getAdministratorRepository()->findOneBy(['multidomainLoginToken' => $multidomainLoginToken]);
+		if ($administrator === null) {
+			$message = 'Administrator with multidomain login token ' . $multidomainLoginToken . ' not found.';
+			throw new \SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException($message);
+		}
+
+		return $administrator;
+	}
+
+	/**
 	 * @param string $administratorUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */
