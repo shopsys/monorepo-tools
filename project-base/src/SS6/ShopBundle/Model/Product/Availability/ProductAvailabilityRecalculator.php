@@ -74,6 +74,9 @@ class ProductAvailabilityRecalculator {
 	private function recalculateAvailabilityForProduct(Product $product) {
 		$calculatedAvailability = $this->productAvailabilityCalculation->getCalculatedAvailability($product);
 		$product->setCalculatedAvailability($calculatedAvailability);
+		if ($product->isVariant()) {
+			$this->recalculateAvailabilityForProduct($product->getMainVariant());
+		}
 		$this->em->flush($product);
 	}
 
