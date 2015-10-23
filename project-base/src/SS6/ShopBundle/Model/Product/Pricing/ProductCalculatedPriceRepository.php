@@ -32,7 +32,7 @@ class ProductCalculatedPriceRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param string $priceWithVat
+	 * @param string|null $priceWithVat
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
 	 */
 	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
@@ -59,7 +59,7 @@ class ProductCalculatedPriceRepository {
 			SELECT id, :pricingGroupId, :priceWithVat FROM products', new ResultSetMapping());
 		$query->execute([
 			'pricingGroupId' => $pricingGroup->getId(),
-			'priceWithVat' => 0,
+			'priceWithVat' => null,
 		]);
 	}
 
