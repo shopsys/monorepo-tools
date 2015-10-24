@@ -6,6 +6,8 @@ use SS6\ShopBundle\Component\Condition;
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class MultidomainType extends AbstractType {
@@ -61,6 +63,19 @@ class MultidomainType extends AbstractType {
 	 */
 	public function getName() {
 		return 'multidomain';
+	}
+
+	/**
+	 * @param \Symfony\Component\Form\FormView $view
+	 * @param \Symfony\Component\Form\FormInterface $form
+	 * @param array $options
+	 */
+	public function finishView(FormView $view, FormInterface $form, array $options) {
+		parent::finishView($view, $form, $options);
+
+		foreach ($view->children as $domainId => $child) {
+			$child->vars['domainConfig'] = $this->domain->getDomainConfigById($domainId);
+		}
 	}
 
 }
