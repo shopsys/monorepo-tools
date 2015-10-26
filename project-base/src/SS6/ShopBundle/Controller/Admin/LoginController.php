@@ -59,8 +59,8 @@ class LoginController extends AdminBaseController {
 	 */
 	public function loginAction(Request $request) {
 		$currentDomainId = $this->domain->getId();
-		if ($currentDomainId !== 1 && !$this->isGranted(Roles::ROLE_ADMIN)) {
-			$firstDomainRouter = $this->domainRouterFactory->getRouter(1);
+		if ($currentDomainId !== Domain::MAIN_ADMIN_DOMAIN_ID && !$this->isGranted(Roles::ROLE_ADMIN)) {
+			$firstDomainRouter = $this->domainRouterFactory->getRouter(Domain::MAIN_ADMIN_DOMAIN_ID);
 			$redirectTo = $firstDomainRouter->generate(
 				'admin_login_sso',
 				[
@@ -97,18 +97,20 @@ class LoginController extends AdminBaseController {
 
 	/**
 	 * @Route("/sso/{originalDomainId}", requirements={"originalDomainId" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $originalDomainId
 	 */
 	public function ssoAction(Request $request, $originalDomainId) {
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$this->transactional(function () use ($administrator) {
-			$this->administratorLoginFacade->setMultidomainLoginTokenWithExpiration($administrator);
+		$multidomainToken = $this->transactional(function () use ($administrator) {
+			return $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
 		});
 		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
 		$redirectTo = $originalDomainRouter->generate(
 			'admin_login_authorization',
 			[
-				self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $administrator->getMultidomainLoginToken(),
+				self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainToken,
 				self::ORIGINAL_REFERER_PARAMETER_NAME => $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME),
 			],
 			UrlGeneratorInterface::ABSOLUTE_URL
@@ -119,13 +121,14 @@ class LoginController extends AdminBaseController {
 
 	/**
 	 * @Route("/authorization/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function authorizationAction(Request $request) {
 		$multidomainLoginToken = $request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
 		$originalReferer = $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME);
 		try {
 			$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
-		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorException $ex) {
+		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
 			return $this->render('@SS6Shop/Admin/Content/Login/loginFailed.html.twig');
 		}
 		$redirectTo = ($originalReferer !== null) ? $originalReferer : $this->generateUrl('admin_default_dashboard');

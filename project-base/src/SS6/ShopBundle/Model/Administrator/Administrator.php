@@ -222,20 +222,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getMultidomainLoginToken() {
-		return $this->multidomainLoginToken;
-	}
-
-	/**
-	 * @return \DateTime
-	 */
-	public function getMultidomainLoginTokenExpiration() {
-		return $this->multidomainLoginTokenExpiration;
-	}
-
-	/**
 	 * @param bool $superadmin
 	 */
 	public function setSuperadmin($superadmin) {
@@ -286,15 +272,13 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
 	/**
 	 * @param string $multidomainLoginToken
-	 */
-	public function setMultidomainLoginToken($multidomainLoginToken) {
-		$this->multidomainLoginToken = $multidomainLoginToken;
-	}
-
-	/**
 	 * @param \DateTime $multidomainLoginTokenExpiration
 	 */
-	public function setMultidomainLoginTokenExpiration($multidomainLoginTokenExpiration) {
+	public function setMultidomainLoginTokenWithExpiration(
+		$multidomainLoginToken,
+		DateTime $multidomainLoginTokenExpiration
+	) {
+		$this->multidomainLoginToken = $multidomainLoginToken;
 		$this->multidomainLoginTokenExpiration = $multidomainLoginTokenExpiration;
 	}
 

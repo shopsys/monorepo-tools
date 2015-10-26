@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Domain {
 
+	const MAIN_ADMIN_DOMAIN_ID = 1;
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig|null
 	 */

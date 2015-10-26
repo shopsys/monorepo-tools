@@ -126,41 +126,31 @@ class AdministratorLoginFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @return string
 	 */
-	public function setMultidomainLoginTokenWithExpiration(Administrator $administrator) {
+	public function generateMultidomainLoginTokenWithExpiration(Administrator $administrator) {
 		$multidomainLoginToken = $this->hashGenerator->generateHash(self::MULTIDOMAIN_LOGIN_TOKEN_LENGTH);
 		$multidomainLoginTokenExpirationDateTime = new DateTime('+' . self::MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS . 'seconds');
-		$administrator->setMultidomainLoginToken($multidomainLoginToken);
-		$administrator->setMultidomainLoginTokenExpiration($multidomainLoginTokenExpirationDateTime);
+		$administrator->setMultidomainLoginTokenWithExpiration($multidomainLoginToken, $multidomainLoginTokenExpirationDateTime);
 		$this->em->flush();
+
+		return $multidomainLoginToken;
 	}
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $multidomainLoginToken
+	 * @param string $multidomainLoginToken
 	 */
 	public function loginByMultidomainToken(Request $request, $multidomainLoginToken) {
-		$freshAdministrator = $this->administratorRepository->getByMultidomainLoginToken($multidomainLoginToken);
-		if (!$this->isMultidomainLoginTokenValid($freshAdministrator)) {
-			$message = 'Token is not valid.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
-		}
-		$freshAdministrator->setMultidomainLogin(true);
+		$administrator = $this->administratorRepository->getByValidMultidomainLoginToken($multidomainLoginToken);
+		$administrator->setMultidomainLogin(true);
 		$password = '';
 		$firewallName = 'administration';
-		$token = new UsernamePasswordToken($freshAdministrator, $password, $firewallName, $freshAdministrator->getRoles());
+		$token = new UsernamePasswordToken($administrator, $password, $firewallName, $administrator->getRoles());
 		$this->tokenStorage->setToken($token);
 
 		$event = new InteractiveLoginEvent($request, $token);
 		$this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @return bool
-	 */
-	private function isMultidomainLoginTokenValid(Administrator $administrator) {
-		return $administrator->getMultidomainLoginTokenExpiration() > new DateTime();
 	}
 
 }
