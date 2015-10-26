@@ -102,7 +102,7 @@ class UploadedFileFacade {
 	/**
 	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 */
-	public function deleteFile(UploadedFile $uploadedFile) {
+	public function deleteFileFromFilesystem(UploadedFile $uploadedFile) {
 		$filepath = $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
 		$this->filesystem->remove($filepath);
 	}

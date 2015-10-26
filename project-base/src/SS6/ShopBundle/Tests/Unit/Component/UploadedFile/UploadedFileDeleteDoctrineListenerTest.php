@@ -20,8 +20,8 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase 
 
 		$uploadedFileConfig = new UploadedFileConfig([]);
 
-		$uploadedFileFacadeMock = $this->getMock(UploadedFileFacade::class, ['deleteFile'], [], '', false);
-		$uploadedFileFacadeMock->expects($this->once())->method('deleteFile')->with($this->equalTo($uploadedFile));
+		$uploadedFileFacadeMock = $this->getMock(UploadedFileFacade::class, ['deleteFileFromFilesystem'], [], '', false);
+		$uploadedFileFacadeMock->expects($this->once())->method('deleteFileFromFilesystem')->with($this->equalTo($uploadedFile));
 
 		$conatinerMock = $this->getMockBuilder(ContainerInterface::class)
 			->disableOriginalConstructor()
