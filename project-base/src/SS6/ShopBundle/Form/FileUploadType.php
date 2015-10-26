@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form;
 
+use SS6\ShopBundle\Component\Constraints\FileExtensionMaxLength;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
@@ -83,7 +84,12 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$this->required = $options['required'];
-		$this->constraints = $options['file_constraints'];
+		$this->constraints = array_merge(
+			[
+				new FileExtensionMaxLength(['limit' => 5]),
+			],
+			$options['file_constraints']
+		);
 
 		$builder->addModelTransformer($this);
 		$builder
