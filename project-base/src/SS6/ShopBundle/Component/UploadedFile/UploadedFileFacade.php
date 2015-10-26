@@ -81,7 +81,7 @@ class UploadedFileFacade {
 			$newUploadedFile = $this->uploadedFileService->createUploadedFile(
 				$uploadedFileEntityConfig,
 				$entityId,
-				array_pop($temporaryFilenames)
+				$temporaryFilenames
 			);
 			$this->em->persist($newUploadedFile);
 			$entitiesForFlush[] = $newUploadedFile;

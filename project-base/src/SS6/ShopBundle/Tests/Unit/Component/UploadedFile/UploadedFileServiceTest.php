@@ -12,6 +12,7 @@ class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateUploadedFile() {
 		$temporaryFilename = 'temporaryFilename.tmp';
+		$temporaryFilenames = [$temporaryFilename];
 		$temporaryFilepath = 'path/' . $temporaryFilename;
 		$entityId = 1;
 		$entityName = 'entityName';
@@ -27,7 +28,7 @@ class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
 		$uploadedFileEntityConfig = new UploadedFileEntityConfig($entityName, $entityClass);
 
 		$uploadedFileService = new UploadedFileService($fileUploadMock);
-		$uploadedFile = $uploadedFileService->createUploadedFile($uploadedFileEntityConfig, $entityId, $temporaryFilename);
+		$uploadedFile = $uploadedFileService->createUploadedFile($uploadedFileEntityConfig, $entityId, $temporaryFilenames);
 		$filesForUpload = $uploadedFile->getTemporaryFilesForUpload();
 		$fileForUpload = array_pop($filesForUpload);
 		/* @var $fileForUpload \SS6\ShopBundle\Component\FileUpload\FileForUpload */

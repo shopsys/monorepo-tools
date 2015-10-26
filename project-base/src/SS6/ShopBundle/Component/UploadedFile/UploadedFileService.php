@@ -20,15 +20,15 @@ class UploadedFileService {
 	/**
 	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig $uploadedFileEntityConfig
 	 * @param int $entityId
-	 * @param string $temporaryFilename
+	 * @param string[] $temporaryFilenames
 	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
 	public function createUploadedFile(
 		UploadedFileEntityConfig $uploadedFileEntityConfig,
 		$entityId,
-		$temporaryFilename
+		array $temporaryFilenames
 	) {
-		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath($temporaryFilename);
+		$temporaryFilepath = $this->fileUpload->getTemporaryFilePath(array_pop($temporaryFilenames));
 
 		return new UploadedFile(
 			$uploadedFileEntityConfig->getEntityName(),
