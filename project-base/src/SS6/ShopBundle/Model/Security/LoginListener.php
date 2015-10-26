@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Security;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\OrderFlowFacade;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
@@ -23,12 +25,18 @@ class LoginListener {
 	private $orderFlowFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
+	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
 	 */
-	public function __construct(EntityManager $em, OrderFlowFacade $orderFlowFacade) {
+	private $administratorActivityFacade;
+
+	public function __construct(
+		EntityManager $em,
+		OrderFlowFacade $orderFlowFacade,
+		AdministratorActivityFacade $administratorActivityFacade
+	) {
 		$this->em = $em;
 		$this->orderFlowFacade = $orderFlowFacade;
+		$this->administratorActivityFacade = $administratorActivityFacade;
 	}
 
 	/**
@@ -49,6 +57,13 @@ class LoginListener {
 
 		if ($user instanceof UniqueLoginInterface) {
 			$user->setLoginToken(uniqid());
+		}
+
+		if ($user instanceof Administrator) {
+			$this->administratorActivityFacade->create(
+				$user,
+				$event->getRequest()->getClientIp()
+			);
 		}
 
 		$this->em->flush();

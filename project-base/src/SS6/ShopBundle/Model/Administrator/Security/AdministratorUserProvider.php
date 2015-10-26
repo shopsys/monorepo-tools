@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Administrator\Security;
 
 use DateTime;
+use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
@@ -17,8 +18,17 @@ class AdministratorUserProvider implements UserProviderInterface {
 	 */
 	private $administratorRepository;
 
-	public function __construct(AdministratorRepository $administratorRepository) {
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
+	 */
+	private $administratorActivityFacade;
+
+	public function __construct(
+		AdministratorRepository $administratorRepository,
+		AdministratorActivityFacade $administratorActivityFacade
+	) {
 		$this->administratorRepository = $administratorRepository;
+		$this->administratorActivityFacade = $administratorActivityFacade;
 	}
 
 	/**
@@ -67,6 +77,10 @@ class AdministratorUserProvider implements UserProviderInterface {
 
 		if ($freshAdministrator === null) {
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Unable to find an active admin');
+		}
+
+		if ($freshAdministrator instanceof Administrator) {
+			$this->administratorActivityFacade->updateCurrentActivityLastActionTime($freshAdministrator);
 		}
 
 		return $freshAdministrator;
