@@ -68,4 +68,25 @@ class AdministratorActivity {
 		$this->lastActionTime = new DateTime();
 	}
 
+	/**
+	 * @return string
+	 */
+	public function getIpAddress() {
+		return $this->ipAddress;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getLoginTime() {
+		return $this->loginTime;
+	}
+
+	/**
+	 * @return \DateTime
+	 */
+	public function getLastActionTime() {
+		return $this->lastActionTime;
+	}
+
 }

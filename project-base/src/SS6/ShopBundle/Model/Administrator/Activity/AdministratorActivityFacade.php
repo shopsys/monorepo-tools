@@ -55,4 +55,13 @@ class AdministratorActivityFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param int $maxResults
+	 * @return \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
+	 */
+	public function getLastAdministratorActivities(Administrator $administrator, $maxResults) {
+		return $this->administratorActivityRepository->getLastAdministratorActivities($administrator, $maxResults);
+	}
+
 }

@@ -56,4 +56,15 @@ class AdministratorActivityRepository {
 		return $currentAdministratorActvity;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param int $maxResults
+	 * @return \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
+	 */
+	public function getLastAdministratorActivities(Administrator $administrator, $maxResults) {
+		$lastActivitiesQueryBuilder = $this->getLastActivitiesQueryBuilder($administrator, $maxResults);
+
+		return $lastActivitiesQueryBuilder->getQuery()->getResult();
+	}
+
 }

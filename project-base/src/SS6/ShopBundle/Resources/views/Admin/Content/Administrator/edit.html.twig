@@ -2,3 +2,39 @@
 
 {% block title %}- {{ 'Editace administrátora'|trans }} - {{ administrator.realName }}{% endblock %}
 {% block h1 %}{{ 'Editace administrátora'|trans }} - {{ administrator.realName }}{% endblock %}
+
+{% block admin_log %}
+	{% if lastAdminActivities|length > 0 %}
+		<h2>{{ 'Historie aktivit administrátora'|trans }}</h2>
+		<table class="table-main">
+			<thead>
+				<tr>
+					<th>
+						{{ 'Čas přihlášení'|trans }}
+					</th>
+					<th>
+						{{ 'Čas poslední akce'|trans }}
+					</th>
+					<th>
+						{{ 'IP adresa'|trans }}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for adminActivity in lastAdminActivities %}
+					<tr>
+						<td>
+							{{ adminActivity.loginTime|formatDateTime }}
+						</td>
+						<td>
+							{{ adminActivity.lastActionTime|formatDateTime }}
+						</td>
+						<td>
+							{{ adminActivity.ipAddress }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% endif %}
+{% endblock %}
