@@ -38,24 +38,17 @@ class QuantifiedItemPrice {
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getUnitPriceWithoutVat() {
-		return $this->unitPrice->getPriceWithoutVat();
+	public function getUnitPrice() {
+		return $this->unitPrice;
 	}
 
 	/**
-	 * @return string
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getUnitPriceWithVat() {
-		return $this->unitPrice->getPriceWithVat();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getUnitPriceVatAmount() {
-		return $this->unitPrice->getVatAmount();
+	public function getTotalPrice() {
+		return $this->totalPrice;
 	}
 
 	/**
@@ -65,10 +58,4 @@ class QuantifiedItemPrice {
 		return $this->vat;
 	}
 
-	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
-	 */
-	public function getTotalPrice() {
-		return $this->totalPrice;
-	}
 }

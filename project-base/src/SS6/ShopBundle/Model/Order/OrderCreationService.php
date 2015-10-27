@@ -204,8 +204,8 @@ class OrderCreationService {
 			$orderItem = new OrderProduct(
 				$order,
 				$product->getName($locale),
-				$quantifiedItemPrice->getUnitPriceWithoutVat(),
-				$quantifiedItemPrice->getUnitPriceWithVat(),
+				$quantifiedItemPrice->getUnitPrice()->getPriceWithoutVat(),
+				$quantifiedItemPrice->getUnitPrice()->getPriceWithVat(),
 				$product->getVat()->getPercent(),
 				$quantifiedProduct->getQuantity(),
 				$product->getUnit()->getName($locale),
