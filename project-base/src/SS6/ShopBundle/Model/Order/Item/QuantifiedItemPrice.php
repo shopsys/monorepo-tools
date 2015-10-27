@@ -59,27 +59,6 @@ class QuantifiedItemPrice {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getTotalPriceWithoutVat() {
-		return $this->totalPrice->getPriceWithoutVat();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPriceWithVat() {
-		return $this->totalPrice->getPriceWithVat();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTotalPriceVatAmount() {
-		return $this->totalPrice->getVatAmount();
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getVat() {
