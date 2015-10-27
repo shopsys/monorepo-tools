@@ -153,4 +153,14 @@ class AdministratorLoginFacade {
 		$this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
 	}
 
+	public function invalidateCurrentAdministratorLoginToken() {
+		$token = $this->tokenStorage->getToken();
+		if ($token !== null) {
+			$currentAdministrator = $token->getUser();
+			$currentAdministrator->setLoginToken('');
+
+			$this->em->flush($currentAdministrator);
+		}
+	}
+
 }
