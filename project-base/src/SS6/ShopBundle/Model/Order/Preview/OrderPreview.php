@@ -54,7 +54,7 @@ class OrderPreview {
 	private $productsPrice;
 
 	/**
-	 * @var string|null
+	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $roundingAmount;
 
@@ -68,7 +68,7 @@ class OrderPreview {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param string|null $roundingAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingAmount
 	 */
 	public function __construct(
 		array $quantifiedProducts,
@@ -80,7 +80,7 @@ class OrderPreview {
 		Price $transportPrice = null,
 		Payment $payment = null,
 		Price $paymentPrice = null,
-		$roundingAmount = null
+		Price $roundingAmount = null
 	) {
 		$this->quantifiedProducts = $quantifiedProducts;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
@@ -158,7 +158,7 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return string|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getRoundingAmount() {
 		return $this->roundingAmount;

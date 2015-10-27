@@ -106,7 +106,7 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice);
+		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
 		$this->assertSame('-0.3', (string)$roundingAmount);
 	}
@@ -127,7 +127,7 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice);
+		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
 		$this->assertSame('0.1', (string)$roundingAmount);
 	}

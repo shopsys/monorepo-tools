@@ -143,7 +143,7 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @return string|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private function calculateRoundingAmount(
 		Payment $payment,
@@ -166,14 +166,14 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param string|null $roundingAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingAmount
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
 		Price $productsPrice,
 		Price $transportPrice = null,
 		Price $paymentPrice = null,
-		$roundingAmount = null
+		Price $roundingAmount = null
 	) {
 		$totalPriceWithoutVat = 0;
 		$totalPriceWithVat = 0;

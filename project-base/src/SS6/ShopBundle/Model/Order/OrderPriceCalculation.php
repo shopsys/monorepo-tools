@@ -58,7 +58,7 @@ class OrderPriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $orderTotalPrice
-	 * @return string|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function calculateOrderRoundingAmount(
 		Payment $payment,
@@ -76,7 +76,7 @@ class OrderPriceCalculation {
 			return null;
 		}
 
-		return $roundingAmount;
+		return new Price($roundingAmount, $roundingAmount, 0);
 	}
 
 }
