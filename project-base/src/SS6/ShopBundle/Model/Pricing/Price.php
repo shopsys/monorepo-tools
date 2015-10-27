@@ -51,4 +51,27 @@ class Price {
 		return $this->vatAmount;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $priceToAdd
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function add(Price $priceToAdd) {
+		return new self(
+			$this->priceWithoutVat + $priceToAdd->getPriceWithoutVat(),
+			$this->priceWithVat + $priceToAdd->getPriceWithVat(),
+			$this->vatAmount + $priceToAdd->getVatAmount()
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $priceToSubtract
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function subtract(Price $priceToSubtract) {
+		return new self(
+			$this->priceWithoutVat - $priceToSubtract->getPriceWithoutVat(),
+			$this->priceWithVat - $priceToSubtract->getPriceWithVat(),
+			$this->vatAmount - $priceToSubtract->getVatAmount()
+		);
+	}
 }
