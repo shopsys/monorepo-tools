@@ -54,7 +54,7 @@ class ImageDeleteDoctrineListener {
 	}
 
 	/**
-	 * Prevent ServiceCircularReferenceException
+	 * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
 	 *
 	 * @return \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
