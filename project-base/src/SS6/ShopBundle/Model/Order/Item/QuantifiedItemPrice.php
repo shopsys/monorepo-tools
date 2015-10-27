@@ -86,4 +86,10 @@ class QuantifiedItemPrice {
 		return $this->vat;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function getTotalPrice() {
+		return $this->totalPrice;
+	}
 }
