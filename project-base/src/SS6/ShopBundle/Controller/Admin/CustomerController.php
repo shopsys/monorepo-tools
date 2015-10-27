@@ -4,11 +4,14 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
+use SS6\ShopBundle\Controller\Admin\LoginController;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -19,13 +22,14 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CustomerController extends AdminBaseController {
 
@@ -82,14 +86,19 @@ class CustomerController extends AdminBaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
-	 */
-	private $csrfTokenManager;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
 	 */
 	private $administratorLoginFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 */
+	private $domainRouterFactory;
 
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
@@ -102,8 +111,9 @@ class CustomerController extends AdminBaseController {
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		OrderFacade $orderFacade,
-		CsrfTokenManagerInterface $csrfTokenManager,
-		AdministratorLoginFacade $administratorLoginFacade
+		AdministratorLoginFacade $administratorLoginFacade,
+		Domain $domain,
+		DomainRouterFactory $domainRouterFactory
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->translator = $translator;
@@ -115,8 +125,9 @@ class CustomerController extends AdminBaseController {
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->orderFacade = $orderFacade;
-		$this->csrfTokenManager = $csrfTokenManager;
 		$this->administratorLoginFacade = $administratorLoginFacade;
+		$this->domain = $domain;
+		$this->domainRouterFactory = $domainRouterFactory;
 	}
 
 	/**
@@ -170,7 +181,7 @@ class CustomerController extends AdminBaseController {
 			'form' => $form->createView(),
 			'user' => $user,
 			'orders' => $orders,
-			'loginAsUserCsrfToken' => $this->csrfTokenManager->getToken($this->getLoginAsUserCsrfTokenId($id)),
+			'ssoLoginAsUserUrl' => $this->getSsoLoginAsUserUrl($user),
 		]);
 	}
 
@@ -301,31 +312,41 @@ class CustomerController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/customer/login-as-user/{userId}/{csrfToken}/", requirements={"id" = "\d+"})
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @Route("/customer/login-as-user/{userId}/", requirements={"id" = "\d+"})
 	 * @param int $userId
-	 * @param string $csrfToken
 	 */
-	public function loginAsUserAction(Request $request, $userId, $csrfToken) {
-		$csrfTokenId = $this->getLoginAsUserCsrfTokenId($userId);
-		if (!$this->isCsrfTokenValid($csrfTokenId, $csrfToken)) {
-			$this->getFlashMessageSender()->addErrorFlash('Chyba CSRF, prosím zkuste se přihlásit za uživatele ještě jednou.');
-			return $this->redirect($request->server->get('HTTP_REFERER'));
-		}
-
+	public function loginAsUserAction($userId) {
 		$user = $this->customerEditFacade->getUserById($userId);
-		$this->csrfTokenManager->removeToken($csrfTokenId);
 		$this->administratorLoginFacade->rememberLoginAsUser($user);
 
 		return $this->redirectToRoute('front_customer_login_as_remembered_user');
 	}
 
 	/**
-	 * @param int $userId
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @return string
 	 */
-	private function getLoginAsUserCsrfTokenId($userId) {
-		return self::LOGIN_AS_TOKEN_ID_PREFIX . $userId;
+	private function getSsoLoginAsUserUrl(User $user) {
+		$customerDomainRouter = $this->domainRouterFactory->getRouter($user->getDomainId());
+		$loginAsUserUrl = $customerDomainRouter->generate(
+			'admin_customer_loginasuser',
+			[
+				'userId' => $user->getId(),
+			],
+			UrlGeneratorInterface::ABSOLUTE_URL
+		);
+
+		$mainAdminDomainRouter = $this->domainRouterFactory->getRouter(Domain::MAIN_ADMIN_DOMAIN_ID);
+		$ssoLoginAsUserUrl = $mainAdminDomainRouter->generate(
+			'admin_login_sso',
+			[
+				LoginController::ORIGINAL_DOMAIN_ID_PARAMETER_NAME => $user->getDomainId(),
+				LoginController::ORIGINAL_REFERER_PARAMETER_NAME => $loginAsUserUrl,
+			],
+			UrlGeneratorInterface::ABSOLUTE_URL
+		);
+
+		return $ssoLoginAsUserUrl;
 	}
 
 }

@@ -3,7 +3,7 @@
 {% block title %}- {{ 'Editace zákazníka'|trans }} - {{ user.fullName }}{% endblock %}
 {% block h1 %}
 	{{ 'Editace zákazníka'|trans }} - {{ user.fullName }}
-	<a href="{{ url('admin_customer_loginasuser', { userId: user.id, csrfToken: loginAsUserCsrfToken }) }}" target="_blank" class="btn-link-style btn-link-style--iconic-l">
+	<a href="{{ ssoLoginAsUserUrl }}" target="_blank" class="btn-link-style btn-link-style--iconic-l">
 		<i class="svg svg-forward-page"></i>
 		<span>
 			{{ 'Přihlásit za uživatele' }}
