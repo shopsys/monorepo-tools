@@ -23,20 +23,22 @@ class ProductDataFixtureLoader {
 	const COLUMN_EAN = 4;
 	const COLUMN_DESCRIPTION_CS = 5;
 	const COLUMN_DESCRIPTION_EN = 6;
-	const COLUMN_PRICE = 7;
-	const COLUMN_VAT = 8;
-	const COLUMN_SELLING_FROM = 9;
-	const COLUMN_SELLING_TO = 10;
-	const COLUMN_STOCK_QUANTITY = 11;
-	const COLUMN_UNIT = 12;
-	const COLUMN_AVAILABILITY = 13;
-	const COLUMN_PARAMETERS = 14;
-	const COLUMN_CATEGORIES_1 = 15;
-	const COLUMN_CATEGORIES_2 = 16;
-	const COLUMN_FLAGS = 17;
-	const COLUMN_SELLING_DENIED = 18;
-	const COLUMN_BRAND = 19;
-	const COLUMN_MAIN_VARIANT_CATNUM = 20;
+	const COLUMN_PRICE_CALCULATION_TYPE = 7;
+	const COLUMN_MAIN_PRICE = 8;
+	const COLUMN_MANUAL_PRICES = 9;
+	const COLUMN_VAT = 10;
+	const COLUMN_SELLING_FROM = 11;
+	const COLUMN_SELLING_TO = 12;
+	const COLUMN_STOCK_QUANTITY = 13;
+	const COLUMN_UNIT = 14;
+	const COLUMN_AVAILABILITY = 15;
+	const COLUMN_PARAMETERS = 16;
+	const COLUMN_CATEGORIES_1 = 17;
+	const COLUMN_CATEGORIES_2 = 18;
+	const COLUMN_FLAGS = 19;
+	const COLUMN_SELLING_DENIED = 20;
+	const COLUMN_BRAND = 21;
+	const COLUMN_MAIN_VARIANT_CATNUM = 22;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
@@ -89,6 +91,11 @@ class ProductDataFixtureLoader {
 	private $units;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	private $pricingGroups;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
@@ -106,6 +113,7 @@ class ProductDataFixtureLoader {
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function injectReferences(
 		array $vats,
@@ -113,7 +121,8 @@ class ProductDataFixtureLoader {
 		array $categories,
 		array $flags,
 		array $brands,
-		array $units
+		array $units,
+		array $pricingGroups
 	) {
 		$this->vats = $vats;
 		$this->availabilities = $availabilities;
@@ -122,6 +131,7 @@ class ProductDataFixtureLoader {
 		$this->brands = $brands;
 		$this->parameters = [];
 		$this->units = $units;
+		$this->pricingGroups = $pricingGroups;
 	}
 
 	/**
@@ -179,13 +189,17 @@ class ProductDataFixtureLoader {
 		$productEditData->productData->partno = $row[self::COLUMN_PARTNO];
 		$productEditData->productData->ean = $row[self::COLUMN_EAN];
 		$productEditData->descriptions = [1 => $row[self::COLUMN_DESCRIPTION_CS], 2 => $row[self::COLUMN_DESCRIPTION_EN]];
-		$productEditData->productData->price = $row[self::COLUMN_PRICE];
+		$productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
+		$this->setProductDataPricesFromCsv($row, $productEditData);
 		switch ($row[self::COLUMN_VAT]) {
 			case 'high':
 				$productEditData->productData->vat = $this->vats['high'];
 				break;
 			case 'low':
 				$productEditData->productData->vat = $this->vats['low'];
+				break;
+			case 'second_low':
+				$productEditData->productData->vat = $this->vats['second_low'];
 				break;
 			case 'zero':
 				$productEditData->productData->vat = $this->vats['zero'];
@@ -270,7 +284,22 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param string $string
-	 * @return array
+	 * @return string[pricingGroup]
+	 */
+	private function getProductManualPricesIndexedByPricingGroupFromString($string) {
+		$productManualPrices = [];
+		$rowData = explode(';', $string);
+		foreach ($rowData as $pricingGroupAndPrice) {
+			list($pricingGroup, $price) = explode('=', $pricingGroupAndPrice);
+			$productManualPrices[$pricingGroup] = $price;
+		}
+
+		return $productManualPrices;
+	}
+
+	/**
+	 * @param string $string
+	 * @return string[locale]
 	 */
 	private function unserializeLocalizedValues($string) {
 		$array = [];
@@ -285,7 +314,7 @@ class ProductDataFixtureLoader {
 	/**
 	 * @param string $keyString
 	 * @param array $valuesByKey
-	 * @return array $values
+	 * @return string[]
 	 */
 	private function getValuesByKeyString($keyString, array $valuesByKey) {
 		$values = [];
@@ -298,4 +327,27 @@ class ProductDataFixtureLoader {
 
 		return $values;
 	}
+
+	/**
+	 * @param array $row
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData) {
+		switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
+			case 'auto':
+				$productEditData->productData->price = $row[self::COLUMN_MAIN_PRICE];
+				break;
+			case 'manual':
+				$manualPrices = $this->getProductManualPricesIndexedByPricingGroupFromString($row[self::COLUMN_MANUAL_PRICES]);
+				foreach ($manualPrices as $pricingGroup => $manualPrice) {
+					$pricingGroup = $this->pricingGroups[$pricingGroup];
+					$productEditData->manualInputPrices[$pricingGroup->getId()] = $manualPrice;
+				}
+				break;
+			default:
+				$message = 'Price calculation type "' . $row[self::COLUMN_PRICE_CALCULATION_TYPE] . '" is not valid.';
+				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
+		}
+	}
+
 }
