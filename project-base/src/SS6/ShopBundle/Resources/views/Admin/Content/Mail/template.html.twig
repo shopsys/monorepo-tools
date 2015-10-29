@@ -9,20 +9,52 @@
 
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-		{% macro mailTemplate(name, template, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
+		{% macro mailTemplate(name, templateForm, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText, mailTemplate) %}
 			<div class="js-mail-template-toggle-container js-toggle-container form-group wrap-border">
 				<h2 class ="form-group__title">
 						{{ name }}
 					<span class="form-group__title__click js-toggle-button">+</span>
 				</h2>
-				<div id="{{ template.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
-					{{ form_row(template.subject, { label: 'Předmět'|trans}) }}
-					{{ form_row(template.bccEmail, { label: 'Skrytá kopie'|trans}) }}
-					{{ form_row(template.body, { label: 'Text'|trans}) }}
-					{% if sendMailText is not null %}
-						{{ form_row(template.sendMail, { label: sendMailText }) }}
+				<div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
+					{{ form_row(templateForm.subject, { label: 'Předmět'|trans}) }}
+					{{ form_row(templateForm.bccEmail, { label: 'Skrytá kopie'|trans}) }}
+					{{ form_row(templateForm.body, { label: 'Text'|trans}) }}
+					{% if hasUploadedFile(mailTemplate) %}
+						<div class="form-line js-mail-template-attachment">
+							<label class="form-line__label">
+								{{ 'Příloha'|trans }}:
+							</label>
+							<div class="form-line__line">
+								<div class="list-images__item">
+									<div class="list-images__item__in">
+										<a href="{{ uploadedFileUrl(mailTemplate) }}" target="_blank" class="list-images__item__image">
+											{{ uploadedFilePreview(mailTemplate) }}
+											<div>{{ getUploadedFile(mailTemplate).filename }}</div>
+										</a>
+										<button class="js-mail-template-attachment-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
+											<i class="svg svg-circle-cross"></i>
+										</button>
+										<button
+											class="btn-no-style js-mail-template-attachment-delete-revert-button list-images__item__revert js-mail-template-attachment-delete-revert"
+											type="button"
+											title="{{ 'Vrátit zpět'|trans }}"
+										>
+											<i class="svg svg-forward-page"></i>
+										</button>
+										<span class="list-images__item__overlay js-mail-template-attachment-delete-revert">{{ 'Po uložení bude soubor smazán'|trans }}</span>
+										{{ form_widget(templateForm.deleteAttachment, {attr: {class: 'display-none js-mail-template-attachment-delete-checkbox'}}) }}
+									</div>
+								</div>
+							</div>
+						</div>
 					{% else %}
-						{{ form_widget(template.sendMail, { 'attr': {'class': 'display-none'} }) }}
+						{% do templateForm.deleteAttachment.setRendered %}
+					{% endif %}
+					{{ form_row(templateForm.attachment, { label: 'Nahrát přílohu'|trans}) }}
+					{% if sendMailText is not null %}
+						{{ form_row(templateForm.sendMail, { label: sendMailText }) }}
+					{% else %}
+						{{ form_widget(templateForm.sendMail, { 'attr': {'class': 'display-none'} }) }}
 					{% endif %}
 
 					<table class="table-main">
@@ -67,7 +99,8 @@
 							[],
 							orderStatusVariablesLabels,
 							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-							'Zasílat potvrzení o přijetí objednávky'|trans
+							'Zasílat potvrzení o přijetí objednávky'|trans,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId]
 					) }}
 				{% else %}
 					{{ _self.mailTemplate(
@@ -77,7 +110,8 @@
 							[],
 							orderStatusVariablesLabels,
 							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-							'Zasílat e-mail o změně na tento stav'|trans
+							'Zasílat e-mail o změně na tento stav'|trans,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId]
 					) }}
 				{% endif %}
 			{% endfor %}
@@ -87,7 +121,10 @@
 				form.registrationTemplate,
 				registrationVariables,
 				[],
-				registrationVariablesLabels
+				registrationVariablesLabels,
+				null,
+				null,
+				registrationMailTemplate
 			) }}
 
 			{{ _self.mailTemplate(
@@ -95,7 +132,10 @@
 				form.resetPasswordTemplate,
 				resetPasswordVariables,
 				resetPasswordRequiredVariables,
-				resetPasswordVariablesLabels
+				resetPasswordVariablesLabels,
+				null,
+				null,
+				resetPasswordMailTemplate
 			) }}
 
 			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

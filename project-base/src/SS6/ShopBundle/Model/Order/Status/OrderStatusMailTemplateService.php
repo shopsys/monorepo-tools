@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order\Status;
 
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 
@@ -54,6 +55,20 @@ class OrderStatusMailTemplateService {
 		}
 
 		return $orderStatusMailTemplatesData;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus[] $orderStatuses
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate[] $mailTemplates
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
+	 */
+	public function getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(array $orderStatuses, array $mailTemplates) {
+		$orderStatusMailTemplates = [];
+		foreach ($orderStatuses as $orderStatus) {
+			$orderStatusMailTemplates[$orderStatus->getId()] = $this->getMailTemplateByOrderStatus($mailTemplates, $orderStatus);
+		}
+
+		return $orderStatusMailTemplates;
 	}
 
 }

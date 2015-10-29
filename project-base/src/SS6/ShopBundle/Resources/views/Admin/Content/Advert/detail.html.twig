@@ -20,7 +20,7 @@
 		<div class="wrap-border js-advert-type-content" data-type="image">
 			{{ form_row(form.link, { label: 'Odkaz'|trans}) }}
 			{% block image %}{% endblock %}
-			{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans}) }}
+			{{ form_row(form.image, { label: 'Nahrát nový obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans}) }}
 		</div>
 		{{ form_row(form.hidden, { label: 'Skrýt reklamu'|trans}) }}
 

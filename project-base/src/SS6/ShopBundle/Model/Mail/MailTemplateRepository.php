@@ -27,23 +27,6 @@ class MailTemplateRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
-	 */
-	public function getAll() {
-		return $this->getMailTemplateRepository()->findAll();
-	}
-
-	/**
-	 * @param string $templateName
-	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate|null
-	 */
-	public function findByName($templateName) {
-		$criteria = ['name' => $templateName];
-
-		return $this->getMailTemplateRepository()->findOneBy($criteria);
-	}
-
-	/**
 	 * @param string $templateName
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate|null

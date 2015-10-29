@@ -77,7 +77,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 		$fileNamingConvention = new FileNamingConvention();
 		$filesystem = new Filesystem();
 
-		return new FileUpload('temporaryDir', 'fileDir', 'imageDir', $fileNamingConvention, $filesystem);
+		return new FileUpload('temporaryDir', 'uploadedFileDir', 'imageDir', $fileNamingConvention, $filesystem);
 	}
 
 }

@@ -10,6 +10,7 @@ use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
@@ -135,6 +136,7 @@ class MailController extends AdminBaseController {
 
 	/**
 	 * @Route("/mail/template/")
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function templateAction(Request $request) {
 		$allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
@@ -173,15 +175,31 @@ class MailController extends AdminBaseController {
 			$this->resetPasswordMail->getRequiredSubjectVariables()
 		));
 
+		$selectedDomainId = $this->selectedDomain->getId();
+		$orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
+			$selectedDomainId
+		);
+		$registrationMailTemplate = $this->mailTemplateFacade->get(
+			MailTemplate::REGISTRATION_CONFIRM_NAME,
+			$selectedDomainId
+		);
+		$resetPasswordMailTemplate = $this->mailTemplateFacade->get(
+			MailTemplate::RESET_PASSWORD_NAME,
+			$selectedDomainId
+		);
+
 		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', [
 			'form' => $form->createView(),
 			'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
+			'orderStatusMailTemplatesByOrderStatusId' => $orderStatusMailTemplatesByOrderStatusId,
 			'orderStatusVariables' => $orderStatusesTemplateVariables,
 			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
+			'registrationMailTemplate' => $registrationMailTemplate,
 			'registrationVariables' => $registrationTemplateVariables,
 			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
-			'resetPasswordVariables' => $resetPasswordTemplateVariables,
+			'resetPasswordMailTemplate' => $resetPasswordMailTemplate,
 			'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
+			'resetPasswordVariables' => $resetPasswordTemplateVariables,
 			'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
 		]);
 	}

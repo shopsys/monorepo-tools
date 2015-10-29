@@ -35,14 +35,19 @@ class MessageData {
 	public $fromName;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
 	public $variablesReplacementsForSubject;
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
 	public $variablesReplacementsForBody;
+
+	/**
+	 * @var string[]
+	 */
+	public $attachmentsFilepaths;
 
 	/**
 	 * @param string $toEmail
@@ -53,6 +58,7 @@ class MessageData {
 	 * @param string $fromName
 	 * @param string[] $variablesReplacementsForBody
 	 * @param string[] $variablesReplacementsForSubject
+	 * @param string[] $attachmentsFilepaths
 	 */
 	public function __construct(
 		$toEmail,
@@ -62,7 +68,8 @@ class MessageData {
 		$fromEmail,
 		$fromName,
 		array $variablesReplacementsForBody = [],
-		array $variablesReplacementsForSubject = []
+		array $variablesReplacementsForSubject = [],
+		array $attachmentsFilepaths = []
 	) {
 		$this->toEmail = $toEmail;
 		$this->bccEmail = $bccEmail;
@@ -76,6 +83,7 @@ class MessageData {
 		} else {
 			$this->variablesReplacementsForSubject = $variablesReplacementsForBody;
 		}
+		$this->attachmentsFilepaths = $attachmentsFilepaths;
 	}
 
 }

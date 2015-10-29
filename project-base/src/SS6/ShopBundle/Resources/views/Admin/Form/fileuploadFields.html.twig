@@ -1,75 +1,73 @@
 {% block file_upload_widget %}
 	{% spaceless %}
-		{%  set attr = attr|merge({'class': ' js-file-upload'}) %}
+		{%  set attr = attr|merge({'class': attr.class|default('') ~ ' js-file-upload box-upload'}) %}
 		{%  set attr = attr|merge({'data-fileupload-url': url('admin_fileupload_upload')}) %}
 		{%  set attr = attr|merge({'data-fileupload-delete-url': url('admin_fileupload_deletetemporaryfile')}) %}
-		<div class="box-upload">
-			<div {{ block('widget_attributes') }}>
-				<div class="js-file-upload-item box-upload__result">
-					<div class="info">
-						{% macro uploadedFile(uploadedFile, label, iconType, thumbnailUri, class) %}
-							<li class="js-file-upload-uploaded-file list-images__item {{ class|default('') }}">
-								<div class="list-images__item__in">
-									<div class="list-images__item__image">
-										{% if iconType is not null %}
-											<i class="fa fa-{{ iconType }} fa-5x js-file-upload-icon-type"></i>
-										{% endif %}
+		<div {{ block('widget_attributes') }}>
+			<div class="js-file-upload-item box-upload__result">
+				<div class="info">
+					{% macro uploadedFile(uploadedFile, label, iconType, thumbnailUri, class) %}
+						<li class="js-file-upload-uploaded-file list-images__item {{ class|default('') }}">
+							<div class="list-images__item__in">
+								<div class="list-images__item__image">
+									{% if iconType is not null %}
+										<i class="fa fa-{{ iconType }} fa-5x js-file-upload-icon-type"></i>
+									{% endif %}
 
-										{% if thumbnailUri is same as(false) %}
-											{# Tag cannot contain empty "src" attribute because browser loads it when parsing in JavaScript. #}
-											<img class="js-file-upload-image-thumbnail" />
-										{% elseif thumbnailUri is not null %}
-											<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
-										{% endif %}
-										<i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Smazat'|trans }}"></i>
+									{% if thumbnailUri is same as(false) %}
+										{# Tag cannot contain empty "src" attribute because browser loads it when parsing in JavaScript. #}
+										<img class="js-file-upload-image-thumbnail" />
+									{% elseif thumbnailUri is not null %}
+										<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
+									{% endif %}
+									<i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Smazat'|trans }}"></i>
 
-										<div class="js-file-upload-progress list-images__item__pipe">
-											<div class="js-file-upload-progress-bar list-images__item__pipe__line">0%</div>
-										</div>
+									<div class="js-file-upload-progress list-images__item__pipe">
+										<div class="js-file-upload-progress-bar list-images__item__pipe__line">0%</div>
 									</div>
-									<div class="list-images__item__info">
-										<span class="js-file-upload-label">{{ label }}</span>
-									</div>
-
-									{{ form_widget(uploadedFile, { attr: { class: 'js-file-upload-input' }}) }}
 								</div>
-							</li>
-						{% endmacro %}
+								<div class="list-images__item__info">
+									<span class="js-file-upload-label">{{ label }}</span>
+								</div>
 
-						<ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
-							{% for uploadedFile in form.uploadedFiles %}
-								{% set fileThumbnailInfo = getFileThumbnailInfoByTemporaryFilename(uploadedFile.vars.value) %}
-								{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
-							{% else %}
-								<li>
-									{% do form.children.uploadedFiles.setRendered %}
-								</li>
-							{% endfor %}
-						</ul>
-						<div class="display-none">
-							 <span class="js-file-upload-status in-message in-message--info">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
-						</div>
+								{{ form_widget(uploadedFile, { attr: { class: 'js-file-upload-input' }}) }}
+							</div>
+						</li>
+					{% endmacro %}
+
+					<ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
+						{% for uploadedFile in form.uploadedFiles %}
+							{% set fileThumbnailInfo = getFileThumbnailInfoByTemporaryFilename(uploadedFile.vars.value) %}
+							{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
+						{% else %}
+							<li>
+								{% do form.children.uploadedFiles.setRendered %}
+							</li>
+						{% endfor %}
+					</ul>
+					<div class="display-none">
+						 <span class="js-file-upload-status in-message in-message--info">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
 					</div>
 				</div>
+			</div>
 
-				<div class="js-file-upload-input box-upload__place">
-					<div class="js-file-upload-fallback-hide box-upload__place__drop">
-						<div class="box-upload__place__drop__icon">
-							<i class="svg svg-download"></i>
-						</div>
-						<div class="box-upload__place__drop__title">
-							{{ 'Zde přetáhněte soubor'|trans }}
-						</div>
-						<div class="box-upload__place__drop__info">
-							{{ 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }}
-						</div>
+			<div class="js-file-upload-input box-upload__place">
+				<div class="js-file-upload-fallback-hide box-upload__place__drop">
+					<div class="box-upload__place__drop__icon">
+						<i class="svg svg-download"></i>
 					</div>
-					<div class="box-upload__place__button">
-						{{ form_widget(form.children.file) }}
+					<div class="box-upload__place__drop__title">
+						{{ 'Zde přetáhněte soubor'|trans }}
 					</div>
-					<div class="js-file-upload-fallback-hide box-upload__place__between">
-						{{ 'nebo'|trans }}
+					<div class="box-upload__place__drop__info">
+						{{ infoText|default('') }}
 					</div>
+				</div>
+				<div class="box-upload__place__button">
+					{{ form_widget(form.children.file) }}
+				</div>
+				<div class="js-file-upload-fallback-hide box-upload__place__between">
+					{{ 'nebo'|trans }}
 				</div>
 			</div>
 		</div>

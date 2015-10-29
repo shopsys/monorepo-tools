@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateRepository;
@@ -38,24 +39,24 @@ class MailTemplateFacade {
 	private $domain;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateRepository $mailTemplateRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository $orderStatusRepository
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService $orderStatusMailTemplateService
-	 * @param \SS6\ShopBundle\Component\Domain\Domain;
+	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade
 	 */
+	private $uploadedFileFacade;
+
 	public function __construct(
 		EntityManager $em,
 		MailTemplateRepository $mailTemplateRepository,
 		OrderStatusRepository $orderStatusRepository,
 		OrderStatusMailTemplateService $orderStatusMailTemplateService,
-		Domain $domain
+		Domain $domain,
+		UploadedFileFacade $uploadedFileFacade
 	) {
 		$this->em = $em;
 		$this->mailTemplateRepository = $mailTemplateRepository;
 		$this->orderStatusRepository = $orderStatusRepository;
 		$this->orderStatusMailTemplateService = $orderStatusMailTemplateService;
 		$this->domain = $domain;
+		$this->uploadedFileFacade = $uploadedFileFacade;
 	}
 
 	/**
@@ -64,15 +65,21 @@ class MailTemplateFacade {
 	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
 	 */
 	public function get($templateName, $domainId) {
-		return $this->mailTemplateRepository->findByNameAndDomainId($templateName, $domainId);
+		return $this->mailTemplateRepository->getByNameAndDomainId($templateName, $domainId);
 	}
 
 	/**
-	 * @param string $templateName
-	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
 	 */
-	public function find($templateName) {
-		return $this->mailTemplateRepository->findByName($templateName);
+	public function getOrderStatusMailTemplatesIndexedByOrderStatusId($domainId) {
+		$orderStatuses = $this->orderStatusRepository->getAll();
+		$mailTemplates = $this->mailTemplateRepository->getAllByDomainId($domainId);
+
+		return $this->orderStatusMailTemplateService->getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(
+			$orderStatuses,
+			$mailTemplates
+		);
 	}
 
 	/**
@@ -83,6 +90,10 @@ class MailTemplateFacade {
 		foreach ($mailTemplatesData as $mailTemplateData) {
 			$mailTemplate = $this->mailTemplateRepository->getByNameAndDomainId($mailTemplateData->name, $domainId);
 			$mailTemplate->edit($mailTemplateData);
+			if ($mailTemplateData->deleteAttachment === true) {
+				$this->uploadedFileFacade->deleteUploadedFileByEntity($mailTemplate);
+			}
+			$this->uploadedFileFacade->uploadFile($mailTemplate, $mailTemplateData->attachment);
 		}
 
 		$this->em->flush();
@@ -133,6 +144,20 @@ class MailTemplateFacade {
 		}
 
 		$this->em->flush();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @return string[]
+	 */
+	public function getMailTemplateAttachmentsFilepaths(MailTemplate $mailTemplate) {
+		$filepaths = [];
+		if ($this->uploadedFileFacade->hasUploadedFile($mailTemplate)) {
+			$uploadedFile = $this->uploadedFileFacade->getUploadedFileByEntity($mailTemplate);
+			$filepaths[] = $this->uploadedFileFacade->getAbsoluteUploadedFileFilepath($uploadedFile);
+		}
+
+		return $filepaths;
 	}
 
 }

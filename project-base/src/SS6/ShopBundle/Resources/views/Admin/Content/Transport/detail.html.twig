@@ -49,7 +49,7 @@
 			</div>
 
 			{% block image %}{% endblock %}
-			{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans }) }}
+			{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
 		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

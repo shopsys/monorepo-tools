@@ -141,7 +141,7 @@ services:
 
   ss6.shop.component.file_upload:
     class: SS6\ShopBundle\Component\FileUpload\FileUpload
-    arguments: [%kernel.cache_dir%, %ss6.file_dir%, %ss6.image_dir%]
+    arguments: [%kernel.cache_dir%, %ss6.uploaded_file_dir%, %ss6.image_dir%]
 
   ss6.shop.component.file_upload.doctrine_listener:
     class: SS6\ShopBundle\Component\FileUpload\DoctrineListener
@@ -273,6 +273,27 @@ services:
 
   ss6.shop.component.translation.identity_translator:
     class: Symfony\Component\Translation\IdentityTranslator
+
+  ss6.shop.component.uploaded_file.config.uploaded_file_config:
+    class: SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+    factory_service: ss6.shop.component.uploaded_file.config.uploaded_file_config_loader
+    factory_method: loadFromYaml
+    arguments:
+      - %ss6.uploaded_file_config_filepath%
+
+  ss6.shop.component.uploaded_file.config.uploaded_file_config_loader:
+    class: SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
+
+  ss6.shop.component.uploaded_file.uploaded_file_delete_doctrine_listener:
+    class: SS6\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener
+    tags:
+      - { name: doctrine.event_listener, event: preRemove }
+
+  ss6.shop.component.uploaded_file.uploaded_file_locator:
+    class: SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
+    arguments:
+      - %ss6.uploaded_file_dir%
+      - %ss6.uploaded_file_url_prefix%
 
   ss6.shop.component.validator.auto_validator_annotation_loader:
     class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader

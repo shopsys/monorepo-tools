@@ -11,8 +11,6 @@ parameters:
   ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
   ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
   ss6.feed_url_prefix: /assets/content/feeds/
-  ss6.file_dir: %ss6.web_dir%/assets/content/files
-  ss6.file_url_prefix: /assets/content/files/
   ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%
   ss6.filemanager_upload_web_dir: assets/uploads
   ss6.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
@@ -26,4 +24,7 @@ parameters:
   ss6.sitemaps_dir: %ss6.web_dir%/assets/content/sitemaps
   ss6.sitemaps_url_prefix: /assets/content/sitemaps/
   ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
+  ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/uploaded_files.yml
+  ss6.uploaded_file_dir: %ss6.web_dir%/assets/content/uploadedFiles
+  ss6.uploaded_file_url_prefix: /assets/content/uploadedFiles/
   ss6.web_dir: %kernel.root_dir%/../web

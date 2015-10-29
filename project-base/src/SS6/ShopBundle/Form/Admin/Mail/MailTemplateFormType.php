@@ -55,6 +55,17 @@ class MailTemplateFormType extends AbstractType {
 					])
 					->addModelTransformer(new EmptyWysiwygTransformer())
 			)
+			->add('attachment', FormType::FILE_UPLOAD, [
+				'required' => false,
+				'multiple' => false,
+				'file_constraints' => [
+					new Constraints\File([
+						'maxSize' => '2M',
+						'maxSizeMessage' => 'Nahraný soubor ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+					]),
+				],
+			])
+			->add('deleteAttachment', FormType::CHECKBOX)
 			->add('sendMail', FormType::CHECKBOX, ['required' => false]);
 	}
 

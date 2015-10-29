@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Mail;
 
+use SS6\ShopBundle\Model\Mail\MessageData;
+use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
 
@@ -56,6 +58,9 @@ class MailerService {
 		$message->setContentType('text/plain; charset=UTF-8');
 		$message->setBody(strip_tags($body), 'text/plain');
 		$message->addPart($body, 'text/html');
+		foreach ($messageData->attachmentsFilepaths as $attachmenFilepath) {
+			$message->attach(Swift_Attachment::fromPath($attachmenFilepath));
+		}
 
 		return $message;
 	}
