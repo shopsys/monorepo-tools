@@ -4,12 +4,52 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
+use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
 use SS6\ShopBundle\Model\Security\LoginService;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LoginController extends AdminBaseController {
+
+	const MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME = 'multidomainLoginToken';
+	const ORIGINAL_DOMAIN_ID_PARAMETER_NAME = 'originalDomainId';
+	const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private $loginService;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 */
+	private $domainRouterFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
+	 */
+	private $administratorLoginFacade;
+
+	public function __construct(
+		LoginService $loginService,
+		Domain $domain,
+		DomainRouterFactory $domainRouterFactory,
+		AdministratorLoginFacade $administratorLoginFacade
+	) {
+		$this->loginService = $loginService;
+		$this->domain = $domain;
+		$this->domainRouterFactory = $domainRouterFactory;
+		$this->administratorLoginFacade = $administratorLoginFacade;
+	}
 
 	/**
 	 * @Route("/", name="admin_login")
@@ -18,6 +58,20 @@ class LoginController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAction(Request $request) {
+		$currentDomainId = $this->domain->getId();
+		if ($currentDomainId !== Domain::MAIN_ADMIN_DOMAIN_ID && !$this->isGranted(Roles::ROLE_ADMIN)) {
+			$firstDomainRouter = $this->domainRouterFactory->getRouter(Domain::MAIN_ADMIN_DOMAIN_ID);
+			$redirectTo = $firstDomainRouter->generate(
+				'admin_login_sso',
+				[
+					self::ORIGINAL_DOMAIN_ID_PARAMETER_NAME => $currentDomainId,
+					self::ORIGINAL_REFERER_PARAMETER_NAME => $request->server->get('HTTP_REFERER'),
+				],
+				UrlGeneratorInterface::ABSOLUTE_URL
+			);
+
+			return $this->redirect($redirectTo);
+		}
 		if ($this->isGranted(Roles::ROLE_ADMIN)) {
 			return $this->redirectToRoute('admin_default_dashboard');
 		}
@@ -29,10 +83,8 @@ class LoginController extends AdminBaseController {
 			'method' => 'POST',
 		]);
 
-		$loginService = $this->container->get(LoginService::class);
-		/* @var $loginService \SS6\ShopBundle\Model\Security\LoginService */
 		try {
-			$loginService->checkLoginProcess($request);
+			$this->loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
 			$error = 'Přihlášení se nepodařilo.';
 		}
@@ -41,6 +93,47 @@ class LoginController extends AdminBaseController {
 				'form' => $form->createView(),
 				'error' => $error,
 		]);
+	}
+
+	/**
+	 * @Route("/sso/{originalDomainId}", requirements={"originalDomainId" = "\d+"})
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $originalDomainId
+	 */
+	public function ssoAction(Request $request, $originalDomainId) {
+		$administrator = $this->getUser();
+		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		$multidomainToken = $this->transactional(function () use ($administrator) {
+			return $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
+		});
+		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
+		$redirectTo = $originalDomainRouter->generate(
+			'admin_login_authorization',
+			[
+				self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME => $multidomainToken,
+				self::ORIGINAL_REFERER_PARAMETER_NAME => $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME),
+			],
+			UrlGeneratorInterface::ABSOLUTE_URL
+		);
+
+		return $this->redirect($redirectTo);
+	}
+
+	/**
+	 * @Route("/authorization/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function authorizationAction(Request $request) {
+		$multidomainLoginToken = $request->get(self::MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME);
+		$originalReferer = $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME);
+		try {
+			$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
+		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
+			return $this->render('@SS6Shop/Admin/Content/Login/loginFailed.html.twig');
+		}
+		$redirectTo = ($originalReferer !== null) ? $originalReferer : $this->generateUrl('admin_default_dashboard');
+
+		return $this->redirect($redirectTo);
 	}
 
 }

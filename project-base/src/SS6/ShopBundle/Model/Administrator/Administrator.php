@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     @ORM\Index(columns={"username"})
  *   }
  * )
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
@@ -52,7 +53,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $loginToken;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	private $lastActivity;
 
@@ -80,6 +81,25 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $superadmin;
 
 	/**
+	 * @var bool
+	 */
+	private $multidomainLogin;
+
+	/**
+	 * @ORM\Column(type="string", length=50, nullable=true)
+	 *
+	 * @var string
+	 */
+	private $multidomainLoginToken;
+
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $multidomainLoginTokenExpiration;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
@@ -90,6 +110,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 		$this->gridLimits = new ArrayCollection();
 		$this->loginToken = '';
 		$this->superadmin = $administratorData->superadmin;
+		$this->multidomainLogin = false;
+		$this->multidomainLoginToken = '';
+		$this->multidomainLoginTokenExpiration = new DateTime();
 	}
 
 	/**
@@ -241,10 +264,22 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param DateTime $lastActivity
+	 * @param \DateTime $lastActivity
 	 */
 	public function setLastActivity($lastActivity) {
 		$this->lastActivity = $lastActivity;
+	}
+
+	/**
+	 * @param string $multidomainLoginToken
+	 * @param \DateTime $multidomainLoginTokenExpiration
+	 */
+	public function setMultidomainLoginTokenWithExpiration(
+		$multidomainLoginToken,
+		DateTime $multidomainLoginTokenExpiration
+	) {
+		$this->multidomainLoginToken = $multidomainLoginToken;
+		$this->multidomainLoginTokenExpiration = $multidomainLoginTokenExpiration;
 	}
 
 	/**
@@ -299,6 +334,20 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	 */
 	public function getSalt() {
 		return null; // bcrypt include salt in password hash
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function isMultidomainLogin() {
+		return $this->multidomainLogin;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setMultidomainLogin($multidomainLogin) {
+		$this->multidomainLogin = $multidomainLogin;
 	}
 
 }

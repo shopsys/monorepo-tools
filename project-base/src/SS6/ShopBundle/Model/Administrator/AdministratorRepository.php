@@ -49,6 +49,25 @@ class AdministratorRepository {
 	}
 
 	/**
+	 * @param string $multidomainLoginToken
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 */
+	public function getByValidMultidomainLoginToken($multidomainLoginToken) {
+		$queryBuilder = $this->getAdministratorRepository()
+			->createQueryBuilder('a')
+			->where('a.multidomainLoginToken = :multidomainLoginToken')
+			->setParameter('multidomainLoginToken', $multidomainLoginToken)
+			->andWhere('a.multidomainLoginTokenExpiration > CURRENT_TIMESTAMP()');
+		$administrator = $queryBuilder->getQuery()->getOneOrNullResult();
+		if ($administrator === null) {
+			$message = 'Administrator with valid multidomain login token ' . $multidomainLoginToken . ' not found.';
+			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+		}
+
+		return $administrator;
+	}
+
+	/**
 	 * @param string $administratorUserName
 	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
 	 */

@@ -62,6 +62,8 @@ class UrlsProvider {
 		'admin_domain_edit',
 		// currently, we cannot test AJAX requests
 		'admin_article_saveordering',
+		// in TEST environment is different security configuration
+		'admin_logout',
 	];
 
 	/**
@@ -78,7 +80,7 @@ class UrlsProvider {
 	 */
 	private $expectedStatusCodesByRouteName = [
 		'admin_login' => 302,
-		'admin_logout' => 302,
+		'admin_login_sso' => 302,
 		'front_customer_login_as_remembered_user' => 302,
 		'front_logout' => 302,
 		'front_order_index' => 302,
@@ -102,9 +104,6 @@ class UrlsProvider {
 			case 'admin_bestsellingproduct_detail':
 				// category ID 1 is special root category, therefore we use ID 2
 				return ['categoryId' => 2, 'domainId' => 1];
-
-			case 'admin_logout':
-				return ['_csrf_token' => '{admin_logout}'];
 
 			case 'front_logout':
 				return ['_csrf_token' => '{frontend_logout}'];
