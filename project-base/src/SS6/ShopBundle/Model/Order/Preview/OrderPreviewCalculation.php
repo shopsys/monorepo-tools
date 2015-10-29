@@ -104,7 +104,7 @@ class OrderPreviewCalculation {
 				$productsPrice,
 				$domainId
 			);
-			$roundingAmount = $this->calculateRoundingAmount(
+			$roundingPrice = $this->calculateRoundingPrice(
 				$payment,
 				$currency,
 				$productsPrice,
@@ -113,14 +113,14 @@ class OrderPreviewCalculation {
 			);
 		} else {
 			$paymentPrice = null;
-			$roundingAmount = null;
+			$roundingPrice = null;
 		}
 
 		$totalPrice = $this->calculateTotalPrice(
 			$productsPrice,
 			$transportPrice,
 			$paymentPrice,
-			$roundingAmount
+			$roundingPrice
 		);
 
 		return new OrderPreview(
@@ -133,7 +133,7 @@ class OrderPreviewCalculation {
 			$transportPrice,
 			$payment,
 			$paymentPrice,
-			$roundingAmount
+			$roundingPrice
 		);
 	}
 
@@ -145,7 +145,7 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
-	private function calculateRoundingAmount(
+	private function calculateRoundingPrice(
 		Payment $payment,
 		Currency $currency,
 		Price $productsPrice,
@@ -159,21 +159,21 @@ class OrderPreviewCalculation {
 			null
 		);
 
-		return $this->orderPriceCalculation->calculateOrderRoundingAmount($payment, $currency, $totalPrice);
+		return $this->orderPriceCalculation->calculateOrderRoundingPrice($payment, $currency, $totalPrice);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
 		Price $productsPrice,
 		Price $transportPrice = null,
 		Price $paymentPrice = null,
-		Price $roundingAmount = null
+		Price $roundingPrice = null
 	) {
 		$totalPrice = new Price(0, 0, 0);
 
@@ -187,8 +187,8 @@ class OrderPreviewCalculation {
 			$totalPrice = $totalPrice->add($paymentPrice);
 		}
 
-		if ($roundingAmount !== null) {
-			$totalPrice = $totalPrice->add($roundingAmount);
+		if ($roundingPrice !== null) {
+			$totalPrice = $totalPrice->add($roundingPrice);
 		}
 
 		return $totalPrice;

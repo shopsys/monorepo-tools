@@ -56,7 +56,7 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(3200, $orderTotalPrice->getProductPriceWithVat());
 	}
 
-	public function testCalculateOrderRoundingAmountForOtherCurrency() {
+	public function testCalculateOrderRoundingPriceForOtherCurrency() {
 		$paymentData = new PaymentData();
 		$paymentData->czkRounding = true;
 		$payment = new Payment($paymentData);
@@ -68,12 +68,12 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice);
+		$roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice);
 
-		$this->assertNull($roundingAmount);
+		$this->assertNull($roundingPrice);
 	}
 
-	public function testCalculateOrderRoundingAmountForCzkWithoutRounding() {
+	public function testCalculateOrderRoundingPriceForCzkWithoutRounding() {
 		$paymentData = new PaymentData();
 		$paymentData->czkRounding = false;
 		$payment = new Payment($paymentData);
@@ -85,12 +85,12 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice);
+		$roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice);
 
-		$this->assertNull($roundingAmount);
+		$this->assertNull($roundingPrice);
 	}
 
-	public function testCalculateOrderRoundingAmountDown() {
+	public function testCalculateOrderRoundingPriceDown() {
 		$paymentData = new PaymentData();
 		$paymentData->czkRounding = true;
 		$payment = new Payment($paymentData);
@@ -106,12 +106,12 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice)->getPriceWithVat();
+		$roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-		$this->assertSame('-0.3', (string)$roundingAmount);
+		$this->assertSame('-0.3', (string)$roundingPrice);
 	}
 
-	public function testCalculateOrderRoundingAmountUp() {
+	public function testCalculateOrderRoundingPriceUp() {
 		$paymentData = new PaymentData();
 		$paymentData->czkRounding = true;
 		$payment = new Payment($paymentData);
@@ -127,8 +127,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$orderItemPriceCalculationMock = $this->getMock(OrderItemPriceCalculation::class, [], [], '', false);
 
 		$priceCalculation = new OrderPriceCalculation($orderItemPriceCalculationMock, $roundingMock);
-		$roundingAmount = $priceCalculation->calculateOrderRoundingAmount($payment, $currency, $orderTotalPrice)->getPriceWithVat();
+		$roundingPrice = $priceCalculation->calculateOrderRoundingPrice($payment, $currency, $orderTotalPrice)->getPriceWithVat();
 
-		$this->assertSame('0.1', (string)$roundingAmount);
+		$this->assertSame('0.1', (string)$roundingPrice);
 	}
 }

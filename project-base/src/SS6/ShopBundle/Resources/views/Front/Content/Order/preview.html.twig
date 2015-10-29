@@ -50,13 +50,13 @@
 					</tr>
 				{% endif %}
 
-				{% if orderPreview.roundingAmount is not empty %}
+				{% if orderPreview.roundingPrice is not empty %}
 					<tr class="list-cart-preview__row">
 						<td class="list-cart-preview__cell">
 							{{ 'Zaokrouhlení'|trans }}:
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.roundingAmount|price }}
+							{{ orderPreview.roundingPrice|price }}
 						</td>
 					</tr>
 				{% endif %}

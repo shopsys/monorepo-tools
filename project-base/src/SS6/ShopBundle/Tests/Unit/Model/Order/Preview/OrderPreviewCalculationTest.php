@@ -65,8 +65,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 			->getMock();
 		$transportPriceCalculationMock->expects($this->once())->method('calculatePrice')->will($this->returnValue($transportPrice));
 
-		$orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, ['calculateOrderRoundingAmount'], [], '', false);
-		$orderPriceCalculationMock->expects($this->any())->method('calculateOrderRoundingAmount')->willReturn(null);
+		$orderPriceCalculationMock = $this->getMock(OrderPriceCalculation::class, ['calculateOrderRoundingPrice'], [], '', false);
+		$orderPriceCalculationMock->expects($this->any())->method('calculateOrderRoundingPrice')->willReturn(null);
 
 		$previewCalculation = new OrderPreviewCalculation(
 			$quantifiedProductPriceCalculationMock,

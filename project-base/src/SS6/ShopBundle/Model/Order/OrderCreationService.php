@@ -222,11 +222,11 @@ class OrderCreationService {
 	 * @param string $locale
 	 */
 	private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale) {
-		if ($orderPreview->getRoundingAmount() !== null) {
+		if ($orderPreview->getRoundingPrice() !== null) {
 			new OrderProduct(
 				$order,
 				$this->translator->trans('Zaokrouhlení', [], 'messages', $locale),
-				$orderPreview->getRoundingAmount(),
+				$orderPreview->getRoundingPrice(),
 				0,
 				1,
 				null,

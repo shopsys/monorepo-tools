@@ -60,7 +60,7 @@ class OrderPriceCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $orderTotalPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
-	public function calculateOrderRoundingAmount(
+	public function calculateOrderRoundingPrice(
 		Payment $payment,
 		Currency $currency,
 		Price $orderTotalPrice
@@ -69,14 +69,14 @@ class OrderPriceCalculation {
 			return null;
 		}
 
-		$roundingAmount = $this->rounding->roundPriceWithVat(
+		$roundingPrice = $this->rounding->roundPriceWithVat(
 			round($orderTotalPrice->getPriceWithVat()) - $orderTotalPrice->getPriceWithVat()
 		);
-		if ($roundingAmount === 0.0) {
+		if ($roundingPrice === 0.0) {
 			return null;
 		}
 
-		return new Price($roundingAmount, $roundingAmount, 0);
+		return new Price($roundingPrice, $roundingPrice, 0);
 	}
 
 }
