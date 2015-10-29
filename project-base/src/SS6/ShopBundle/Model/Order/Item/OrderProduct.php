@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Order\Item;
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 
 /**
@@ -23,8 +24,7 @@ class OrderProduct extends OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $priceWithoutVat
-	 * @param string $priceWithVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param string $unitName
@@ -34,8 +34,7 @@ class OrderProduct extends OrderItem {
 	public function __construct(
 		Order $order,
 		$name,
-		$priceWithoutVat,
-		$priceWithVat,
+		Price $price,
 		$vatPercent,
 		$quantity,
 		$unitName,
@@ -45,8 +44,7 @@ class OrderProduct extends OrderItem {
 		parent::__construct(
 			$order,
 			$name,
-			$priceWithoutVat,
-			$priceWithVat,
+			$price,
 			$vatPercent,
 			$quantity,
 			$unitName,

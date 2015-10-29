@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderProductService;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -21,8 +22,9 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->usingStock = true;
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
+		$productPrice = new Price(0, 0, 0);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->subtractOrderProductsFromStock([$orderProduct]);
@@ -40,8 +42,9 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->usingStock = false;
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
+		$productPrice = new Price(0, 0, 0);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->subtractOrderProductsFromStock([$orderProduct]);
@@ -59,8 +62,9 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->usingStock = true;
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
+		$productPrice = new Price(0, 0, 0);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->returnOrderProductsToStock([$orderProduct]);
@@ -78,8 +82,9 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->usingStock = false;
 		$productData->stockQuantity = $productStockQuantity;
 		$product = new Product($productData);
+		$productPrice = new Price(0, 0, 0);
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, $orderProductQuantity, null, null, $product);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
 
 		$orderProductService = new OrderProductService();
 		$orderProductService->returnOrderProductsToStock([$orderProduct]);

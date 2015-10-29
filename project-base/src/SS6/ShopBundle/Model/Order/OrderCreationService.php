@@ -153,8 +153,7 @@ class OrderCreationService {
 		$orderPayment = new OrderPayment(
 			$order,
 			$payment->getName($locale),
-			$paymentPrice->getPriceWithoutVat(),
-			$paymentPrice->getPriceWithVat(),
+			$paymentPrice,
 			$payment->getVat()->getPercent(),
 			1,
 			$payment
@@ -171,8 +170,7 @@ class OrderCreationService {
 		$orderTransport = new OrderTransport(
 			$order,
 			$transport->getName($locale),
-			$transportPrice->getPriceWithoutVat(),
-			$transportPrice->getPriceWithVat(),
+			$transportPrice,
 			$transport->getVat()->getPercent(),
 			1,
 			$transport
@@ -204,8 +202,7 @@ class OrderCreationService {
 			$orderItem = new OrderProduct(
 				$order,
 				$product->getName($locale),
-				$quantifiedItemPrice->getUnitPrice()->getPriceWithoutVat(),
-				$quantifiedItemPrice->getUnitPrice()->getPriceWithVat(),
+				$quantifiedItemPrice->getUnitPrice(),
 				$product->getVat()->getPercent(),
 				$quantifiedProduct->getQuantity(),
 				$product->getUnit()->getName($locale),
@@ -229,8 +226,7 @@ class OrderCreationService {
 			new OrderProduct(
 				$order,
 				$this->translator->trans('Zaokrouhlení', [], 'messages', $locale),
-				$orderPreview->getRoundingAmount()->getPriceWithoutVat(),
-				$orderPreview->getRoundingAmount()->getPriceWithVat(),
+				$orderPreview->getRoundingAmount(),
 				0,
 				1,
 				null,
@@ -249,8 +245,11 @@ class OrderCreationService {
 		new OrderProduct(
 			$orderItem->getOrder(),
 			$this->translator->trans('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
-			-$discount->getPriceWithoutVat(),
-			-$discount->getPriceWithVat(),
+			new Price(
+				-$discount->getPriceWithoutVat(),
+				-$discount->getPriceWithVat(),
+				$discount->getPriceWithoutVat() - $discount->getPriceWithVat()
+			),
 			$orderItem->getVatPercent(),
 			1,
 			null,

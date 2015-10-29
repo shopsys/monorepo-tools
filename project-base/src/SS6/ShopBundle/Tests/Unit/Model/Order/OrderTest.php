@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
+use SS6\ShopBundle\Model\Pricing\Price;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
 
@@ -18,10 +19,11 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$payment = new Payment(new PaymentData());
 		$orderData = new OrderData();
 		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
+		$paymentPrice = new Price(0, 0, 0);
 
 		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
-		$orderProduct = new OrderProduct($order, 'productName', 0, 0, 0, 1, null, null, null);
-		$orderPayment = new OrderPayment($order, 'paymentName', 0, 0, 0, 1, $payment);
+		$orderProduct = new OrderProduct($order, 'productName', $paymentPrice, 0, 1, null, null, null);
+		$orderPayment = new OrderPayment($order, 'paymentName', $paymentPrice, 0, 1, $payment);
 		$order->addItem($orderProduct);
 		$order->addItem($orderPayment);
 
@@ -33,12 +35,13 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetProductItemsCount() {
 		$payment = new Payment(new PaymentData());
+		$paymentItemPrice = new Price(0, 0, 0);
 		$orderData = new OrderData();
 		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
 
 		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
-		$productItem = new OrderProduct($order, 'productName', 0, 0, 0, 1, null, null);
-		$paymentItem = new OrderPayment($order, 'paymentName', 0, 0, 0, 1, $payment);
+		$productItem = new OrderProduct($order, 'productName', $paymentItemPrice, 0, 1, null, null);
+		$paymentItem = new OrderPayment($order, 'paymentName', $paymentItemPrice, 0, 1, $payment);
 		$order->addItem($productItem);
 		$order->addItem($paymentItem);
 

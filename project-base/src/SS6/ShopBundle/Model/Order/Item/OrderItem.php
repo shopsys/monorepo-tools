@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Table(name="order_items")
@@ -83,8 +84,7 @@ abstract class OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $priceWithoutVat
-	 * @param string $priceWithVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param string|null $unitName
@@ -93,8 +93,7 @@ abstract class OrderItem {
 	public function __construct(
 		Order $order,
 		$name,
-		$priceWithoutVat,
-		$priceWithVat,
+		Price $price,
 		$vatPercent,
 		$quantity,
 		$unitName,
@@ -102,8 +101,8 @@ abstract class OrderItem {
 	) {
 		$this->order = $order; // Must be One-To-Many Bidirectional because of unnecessary join table
 		$this->name = $name;
-		$this->priceWithoutVat = $priceWithoutVat;
-		$this->priceWithVat = $priceWithVat;
+		$this->priceWithoutVat = $price->getPriceWithoutVat();
+		$this->priceWithVat = $price->getPriceWithVat();
 		$this->vatPercent = $vatPercent;
 		$this->quantity = $quantity;
 		$this->unitName = $unitName;
