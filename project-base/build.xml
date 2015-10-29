@@ -241,6 +241,14 @@
 		</exec>
 	</target>
 
+	<target name="maintenance-off">
+		<delete file="${path.root}/MAINTENANCE" />
+	</target>
+
+	<target name="maintenance-on">
+		<touch file="${path.root}/MAINTENANCE" />
+	</target>
+
 	<target name="npm">
 		<exec
 			executable="${path.npm.executable}"
