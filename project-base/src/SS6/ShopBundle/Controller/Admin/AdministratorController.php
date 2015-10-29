@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
+use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
 use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -16,6 +17,8 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends AdminBaseController {
+
+	const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -37,16 +40,23 @@ class AdministratorController extends AdminBaseController {
 	 */
 	private $translator;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
+	 */
+	private $administratorActivityFacade;
+
 	public function __construct(
 		AdministratorFacade $administratorFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Translator $translator
+		Translator $translator,
+		AdministratorActivityFacade $administratorActivityFacade
 	) {
 		$this->administratorFacade = $administratorFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->translator = $translator;
+		$this->administratorActivityFacade = $administratorActivityFacade;
 	}
 
 	/**
@@ -79,6 +89,7 @@ class AdministratorController extends AdminBaseController {
 	 * @Route("/administrator/edit/{id}", requirements={"id" = "\d+"})
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function editAction(Request $request, $id) {
 		$administrator = $this->administratorFacade->getById($id);
@@ -134,9 +145,15 @@ class AdministratorController extends AdminBaseController {
 			new MenuItem($this->translator->trans('Editace administrátora - ') . $administrator->getRealName())
 		);
 
+		$lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(
+			$administrator,
+			self::MAX_ADMINISTRATOR_ACTIVITIES_COUNT
+		);
+
 		return $this->render('@SS6Shop/Admin/Content/Administrator/edit.html.twig', [
 			'form' => $form->createView(),
 			'administrator' => $administrator,
+			'lastAdminActivities' => $lastAdminActivities,
 		]);
 	}
 

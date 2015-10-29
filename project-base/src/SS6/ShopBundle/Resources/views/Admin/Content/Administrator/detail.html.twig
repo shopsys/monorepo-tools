@@ -18,6 +18,8 @@
 			<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno"></i>
 		</div>
 
+		{% block admin_log %}{% endblock %}
+
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>

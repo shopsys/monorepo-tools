@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Administrator\Security;
 
 use SS6\ShopBundle\DataFixtures\Base\AdministratorDataFixture;
+use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -32,6 +33,10 @@ class AdministratorSecurityFacadeTest extends DatabaseTestCase {
 		$token = new UsernamePasswordToken($administrator, $password, AdministratorSecurityFacade::ADMINISTRATION_CONTEXT, $roles);
 
 		$session->set('_security_' . AdministratorSecurityFacade::ADMINISTRATION_CONTEXT, serialize($token));
+
+		$administratorActivityFacade = $container->get(AdministratorActivityFacade::class);
+		/* @var $administratorActivityFacade \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade */
+		$administratorActivityFacade->create($administrator, '127.0.0.1');
 
 		$this->assertTrue($administratorSecurityFacade->isAdministratorLogged());
 	}
