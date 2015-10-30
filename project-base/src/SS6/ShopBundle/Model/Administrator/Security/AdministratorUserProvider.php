@@ -59,13 +59,6 @@ class AdministratorUserProvider implements UserProviderInterface {
 			throw new \Symfony\Component\Security\Core\Exception\UnsupportedUserException($message);
 		}
 
-		if ($administrator instanceof TimelimitLoginInterface) {
-			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
-				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
-			}
-			$administrator->setLastActivity(new DateTime());
-		}
-
 		if ($administrator instanceof UniqueLoginInterface) {
 			$freshAdministrator = $this->administratorRepository->findByIdAndLoginToken(
 				$administrator->getId(),
@@ -73,6 +66,13 @@ class AdministratorUserProvider implements UserProviderInterface {
 			);
 		} else {
 			$freshAdministrator = $this->administratorRepository->findById($administrator->getId());
+		}
+
+		if ($administrator instanceof TimelimitLoginInterface) {
+			if (time() - $administrator->getLastActivity()->getTimestamp() > 3600 * 5) {
+				throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException('Admin was too long unactive.');
+			}
+			$freshAdministrator->setLastActivity(new DateTime());
 		}
 
 		if ($freshAdministrator === null) {
