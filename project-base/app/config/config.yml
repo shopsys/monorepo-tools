@@ -45,6 +45,12 @@ doctrine:
     hydrators:
       GroupedScalarHydrator: \SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/../src/SS6/ShopBundle/Migrations"
+    namespace: SS6\ShopBundle\Migrations
+    table_name: migrations
+    name: Migrations
+
 framework:
   secret: "%secret%"
   router:
