@@ -3,12 +3,12 @@
 namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
+use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryDataIterator;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaDeliveryFeedDataSource implements FeedDataSourceInterface {
+class HeurekaDeliveryItemIteratorFactory implements FeedItemIteratorFactoryInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
