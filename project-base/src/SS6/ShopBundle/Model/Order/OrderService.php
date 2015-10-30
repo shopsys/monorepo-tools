@@ -89,8 +89,11 @@ class OrderService {
 				$orderItem = new OrderProduct(
 					$order,
 					$orderItemData->name,
-					$orderItemData->priceWithoutVat,
-					$orderItemData->priceWithVat,
+					new Price(
+						$orderItemData->priceWithoutVat,
+						$orderItemData->priceWithVat,
+						$orderItemData->priceWithVat - $orderItemData->priceWithoutVat
+					),
 					$orderItemData->vatPercent,
 					$orderItemData->quantity,
 					$orderItemData->unitName,
@@ -117,8 +120,7 @@ class OrderService {
 		$orderProduct = new OrderProduct(
 			$order,
 			$product->getName($orderDomainConfig->getLocale()),
-			$productPrice->getPriceWithoutVat(),
-			$productPrice->getPriceWithVat(),
+			$productPrice,
 			$product->getVat()->getPercent(),
 			self::DEFAULT_QUANTITY,
 			$product->getUnit()->getName($orderDomainConfig->getLocale()),

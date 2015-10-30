@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Pricing;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
@@ -74,12 +75,12 @@ class QuantifiedProductPriceCalculation {
 		);
 
 		$quantifiedItemPrice = new QuantifiedItemPrice(
-			$this->productPrice->getPriceWithoutVat(),
-			$this->productPrice->getPriceWithVat(),
-			$this->productPrice->getVatAmount(),
-			$this->getTotalPriceWithoutVat(),
-			$this->getTotalPriceWithVat(),
-			$this->getTotalPriceVatAmount(),
+			$this->productPrice,
+			new Price(
+				$this->getTotalPriceWithoutVat(),
+				$this->getTotalPriceWithVat(),
+				$this->getTotalPriceVatAmount()
+			),
 			$product->getVat()
 		);
 

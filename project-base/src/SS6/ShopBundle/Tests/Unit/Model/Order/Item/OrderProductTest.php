@@ -6,6 +6,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
@@ -14,6 +15,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 	public function testEditWithProduct() {
 		$orderMock = $this->getMock(Order::class, [], [], '', false);
 		$productMock = $this->getMock(Product::class, [], [], '', false);
+		$productPrice = new Price(0, 0, 0);
 
 		$orderItemData = new OrderItemData();
 		$orderItemData->name = 'newName';
@@ -22,7 +24,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->quantity = 2;
 		$orderItemData->vatPercent = 10;
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, null, $productMock);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, 1, null, null, $productMock);
 		$orderProduct->edit($orderItemData);
 
 		$this->assertSame('newName', $orderProduct->getName());
@@ -34,6 +36,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testEditWithoutProduct() {
 		$orderMock = $this->getMock(Order::class, [], [], '', false);
+		$productPrice = new Price(0, 0, 0);
 
 		$orderItemData = new OrderItemData();
 		$orderItemData->name = 'newName';
@@ -42,7 +45,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 		$orderItemData->quantity = 2;
 		$orderItemData->vatPercent = 10;
 
-		$orderProduct = new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, null);
+		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, 1, null, null);
 		$orderProduct->edit($orderItemData);
 
 		$this->assertSame('newName', $orderProduct->getName());
@@ -55,6 +58,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 	public function testConstructWithMainVariantThrowsException() {
 		$mainVariant = new Product(new ProductData());
 		$variant = new Product(new ProductData());
+		$productPrice = new Price(0, 0, 0);
 
 		$mainVariant->addVariant($variant);
 
@@ -62,7 +66,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException::class);
 
-		new OrderProduct($orderMock, 'productName', 0, 0, 0, 1, null, 'catnum', $mainVariant);
+		new OrderProduct($orderMock, 'productName', $productPrice, 0, 1, null, 'catnum', $mainVariant);
 	}
 
 }

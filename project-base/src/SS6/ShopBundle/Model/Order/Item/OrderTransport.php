@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
 use SS6\ShopBundle\Model\Order\Order;
+use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 /**
@@ -25,8 +26,7 @@ class OrderTransport extends OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $priceWithoutVat
-	 * @param string $priceWithVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
@@ -34,8 +34,7 @@ class OrderTransport extends OrderItem {
 	public function __construct(
 		Order $order,
 		$name,
-		$priceWithoutVat,
-		$priceWithVat,
+		Price $price,
 		$vatPercent,
 		$quantity,
 		Transport $transport
@@ -43,8 +42,7 @@ class OrderTransport extends OrderItem {
 		parent::__construct(
 			$order,
 			$name,
-			$priceWithoutVat,
-			$priceWithVat,
+			$price,
 			$vatPercent,
 			$quantity,
 			null,

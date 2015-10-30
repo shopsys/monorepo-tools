@@ -8,6 +8,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderPaymentData;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Payment\Payment;
+use SS6\ShopBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Entity
@@ -25,8 +26,7 @@ class OrderPayment extends OrderItem {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param string $priceWithoutVat
-	 * @param string $priceWithVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
@@ -34,8 +34,7 @@ class OrderPayment extends OrderItem {
 	public function __construct(
 		Order $order,
 		$name,
-		$priceWithoutVat,
-		$priceWithVat,
+		Price $price,
 		$vatPercent,
 		$quantity,
 		Payment $payment
@@ -43,8 +42,7 @@ class OrderPayment extends OrderItem {
 		parent::__construct(
 			$order,
 			$name,
-			$priceWithoutVat,
-			$priceWithVat,
+			$price,
 			$vatPercent,
 			$quantity,
 			null,

@@ -104,7 +104,7 @@ class OrderPreviewCalculation {
 				$productsPrice,
 				$domainId
 			);
-			$roundingAmount = $this->calculateRoundingAmount(
+			$roundingPrice = $this->calculateRoundingPrice(
 				$payment,
 				$currency,
 				$productsPrice,
@@ -113,14 +113,14 @@ class OrderPreviewCalculation {
 			);
 		} else {
 			$paymentPrice = null;
-			$roundingAmount = null;
+			$roundingPrice = null;
 		}
 
 		$totalPrice = $this->calculateTotalPrice(
 			$productsPrice,
 			$transportPrice,
 			$paymentPrice,
-			$roundingAmount
+			$roundingPrice
 		);
 
 		return new OrderPreview(
@@ -133,7 +133,7 @@ class OrderPreviewCalculation {
 			$transportPrice,
 			$payment,
 			$paymentPrice,
-			$roundingAmount
+			$roundingPrice
 		);
 	}
 
@@ -143,9 +143,9 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @return string|null
+	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
-	private function calculateRoundingAmount(
+	private function calculateRoundingPrice(
 		Payment $payment,
 		Currency $currency,
 		Price $productsPrice,
@@ -159,52 +159,39 @@ class OrderPreviewCalculation {
 			null
 		);
 
-		return $this->orderPriceCalculation->calculateOrderRoundingAmount($payment, $currency, $totalPrice);
+		return $this->orderPriceCalculation->calculateOrderRoundingPrice($payment, $currency, $totalPrice);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param string|null $roundingAmount
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
 		Price $productsPrice,
 		Price $transportPrice = null,
 		Price $paymentPrice = null,
-		$roundingAmount = null
+		Price $roundingPrice = null
 	) {
-		$totalPriceWithoutVat = 0;
-		$totalPriceWithVat = 0;
-		$totalPriceVatAmount = 0;
+		$totalPrice = new Price(0, 0, 0);
 
-		$totalPriceWithoutVat += $productsPrice->getPriceWithoutVat();
-		$totalPriceWithVat += $productsPrice->getPriceWithVat();
-		$totalPriceVatAmount += $productsPrice->getVatAmount();
+		$totalPrice = $totalPrice->add($productsPrice);
 
 		if ($transportPrice !== null) {
-			$totalPriceWithoutVat += $transportPrice->getPriceWithoutVat();
-			$totalPriceWithVat += $transportPrice->getPriceWithVat();
-			$totalPriceVatAmount += $transportPrice->getVatAmount();
+			$totalPrice = $totalPrice->add($transportPrice);
 		}
 
 		if ($paymentPrice !== null) {
-			$totalPriceWithoutVat += $paymentPrice->getPriceWithoutVat();
-			$totalPriceWithVat += $paymentPrice->getPriceWithVat();
-			$totalPriceVatAmount += $paymentPrice->getVatAmount();
+			$totalPrice = $totalPrice->add($paymentPrice);
 		}
 
-		if ($roundingAmount !== null) {
-			$totalPriceWithoutVat += $roundingAmount;
-			$totalPriceWithVat += $roundingAmount;
+		if ($roundingPrice !== null) {
+			$totalPrice = $totalPrice->add($roundingPrice);
 		}
 
-		return new Price(
-			$totalPriceWithoutVat,
-			$totalPriceWithVat,
-			$totalPriceVatAmount
-		);
+		return $totalPrice;
 	}
 
 	/**
@@ -213,31 +200,21 @@ class OrderPreviewCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts) {
-		$productsPriceWithoutVat = 0;
-		$productsPriceWithVat = 0;
-		$productsPriceVatAmount = 0;
+		$finalPrice = new Price(0, 0, 0);
 
 		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
 			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
-			$productsPriceWithoutVat += $quantifiedItemPrice->getTotalPriceWithoutVat();
-			$productsPriceWithVat += $quantifiedItemPrice->getTotalPriceWithVat();
-			$productsPriceVatAmount += $quantifiedItemPrice->getTotalPriceVatAmount();
+			$finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
 		}
 
 		foreach ($quantifiedItemsDiscounts as $discount) {
 			if ($discount !== null) {
 				/* @var $discount \SS6\ShopBundle\Model\Pricing\Price */
-				$productsPriceWithoutVat -= $discount->getPriceWithoutVat();
-				$productsPriceWithVat -= $discount->getPriceWithVat();
-				$productsPriceVatAmount -= $discount->getVatAmount();
+				$finalPrice = $finalPrice->subtract($discount);
 			}
 		}
 
-		return new Price(
-			$productsPriceWithoutVat,
-			$productsPriceWithVat,
-			$productsPriceVatAmount
-		);
+		return $finalPrice;
 	}
 
 }
