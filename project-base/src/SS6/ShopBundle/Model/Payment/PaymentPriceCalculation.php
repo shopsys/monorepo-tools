@@ -45,7 +45,7 @@ class PaymentPriceCalculation {
 		$domainId
 	) {
 		if ($this->isFree($productsPrice, $domainId)) {
-			return new Price(0, 0, 0);
+			return new Price(0, 0);
 		}
 
 		return $this->calculateIndependentPrice($payment, $currency);

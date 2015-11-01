@@ -30,10 +30,10 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
-		$paymentPrice = new Price(100, 120, 20);
-		$transportPrice = new Price(10, 12, 2);
-		$unitPrice = new Price(1000, 1200, 200);
-		$totalPrice = new Price(2000, 2400, 400);
+		$paymentPrice = new Price(100, 120);
+		$transportPrice = new Price(10, 12);
+		$unitPrice = new Price(1000, 1200);
+		$totalPrice = new Price(2000, 2400);
 		$quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
 		$quantifiedProductsDiscounts = [null, null];
@@ -113,8 +113,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
-		$unitPrice = new Price(1000, 1200, 200);
-		$totalPrice = new Price(2000, 2400, 400);
+		$unitPrice = new Price(1000, 1200);
+		$totalPrice = new Price(2000, 2400);
 		$quantifiedItemPrice = new QuantifiedItemPrice($unitPrice, $totalPrice, $vat);
 		$quantifiedItemsPrices = [$quantifiedItemPrice, $quantifiedItemPrice];
 		$quantifiedProductsDiscounts = [null, null];

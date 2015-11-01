@@ -247,8 +247,7 @@ class OrderCreationService {
 			$this->translator->trans('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
 			new Price(
 				-$discount->getPriceWithoutVat(),
-				-$discount->getPriceWithVat(),
-				$discount->getPriceWithoutVat() - $discount->getPriceWithVat()
+				-$discount->getPriceWithVat()
 			),
 			$orderItem->getVatPercent(),
 			1,

@@ -22,12 +22,11 @@ class Price {
 	/**
 	 * @param string $priceWithoutVat
 	 * @param string $priceWithVat
-	 * @param string $vatAmount
 	 */
-	public function __construct($priceWithoutVat, $priceWithVat, $vatAmount) {
+	public function __construct($priceWithoutVat, $priceWithVat) {
 		$this->priceWithoutVat = $priceWithoutVat;
 		$this->priceWithVat = $priceWithVat;
-		$this->vatAmount = $vatAmount;
+		$this->vatAmount = $priceWithVat - $priceWithoutVat;
 	}
 
 	/**

@@ -91,8 +91,7 @@ class OrderService {
 					$orderItemData->name,
 					new Price(
 						$orderItemData->priceWithoutVat,
-						$orderItemData->priceWithVat,
-						$orderItemData->priceWithVat - $orderItemData->priceWithoutVat
+						$orderItemData->priceWithVat
 					),
 					$orderItemData->vatPercent,
 					$orderItemData->quantity,

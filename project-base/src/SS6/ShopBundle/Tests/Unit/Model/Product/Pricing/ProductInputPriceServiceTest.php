@@ -74,8 +74,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 			->expects($this->any())
 			->method('calculatePrice')
 			->willReturnMap([
-				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100', '100'), false)],
-				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200', '200'), false)],
+				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100'), false)],
+				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200'), false)],
 			]);
 
 		$inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;
@@ -118,8 +118,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 			->expects($this->any())
 			->method('calculatePrice')
 			->willReturnMap([
-				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100', '100'), false)],
-				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200', '200'), false)],
+				[$product, 1, $pricingGroups[0], new ProductPrice(new Price('1000', '1100'), false)],
+				[$product, 1, $pricingGroups[1], new ProductPrice(new Price('2000', '2200'), false)],
 			]);
 
 		$inputPriceType = PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT;

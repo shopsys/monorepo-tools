@@ -38,11 +38,7 @@ class BasePriceCalculation {
 		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
 		$basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
 
-		return new Price(
-			$basePriceWithoutVat,
-			$basePriceWithVat,
-			$vatAmount
-		);
+		return new Price($basePriceWithoutVat, $basePriceWithVat);
 	}
 
 	/**
@@ -60,11 +56,7 @@ class BasePriceCalculation {
 		$vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 		$priceWithoutVat = $this->rounding->roundPriceWithoutVat($priceWithVat - $vatAmount);
 
-		return new Price(
-			$priceWithoutVat,
-			$priceWithVat,
-			$vatAmount
-		);
+		return new Price($priceWithoutVat, $priceWithVat);
 	}
 
 	/**

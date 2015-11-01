@@ -26,7 +26,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$userData = new UserData();
 		$userData->pricingGroup = $pricingGroup;
 		$user = new User($userData, $billingAddress, null);
-		$expectedProductPrice = new ProductPrice(new Price(1, 1, 1), false);
+		$expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 		$pricingGroupSettingFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
@@ -51,7 +51,7 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 		$domainId = 1;
 		$product = $this->getMock(Product::class, [], [], '', false);
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), $domainId);
-		$expectedProductPrice = new ProductPrice(new Price(1, 1, 1), false);
+		$expectedProductPrice = new ProductPrice(new Price(1, 1), false);
 
 		$currentCustomerMock = $this->getMock(CurrentCustomer::class, [], [], '', false);
 

@@ -24,7 +24,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
-		$productPrice = new ProductPrice(new Price(0, 0, 0), false);
+		$productPrice = new ProductPrice(new Price(0, 0), false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
 		$productCalculatedPriceRepositoryMock = $this->getMock(
 			ProductCalculatedPriceRepository::class,
@@ -71,7 +71,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productPriceCalculationMock
 			->expects($this->exactly($calculationLimit))
 			->method('calculatePrice')
-			->willReturn(new ProductPrice(new Price(0, 0, 0), false));
+			->willReturn(new ProductPrice(new Price(0, 0), false));
 		$productCalculatedPriceRepositoryMock = $this->getMock(
 			ProductCalculatedPriceRepository::class,
 			['saveCalculatedPrice'],

@@ -21,24 +21,24 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 		return [
 			[
 				'prices' => [
-					new Price(20, 30, 10),
-					new Price(10, 15, 5),
-					new Price(100, 120, 20),
+					new Price(20, 30),
+					new Price(10, 15),
+					new Price(100, 120),
 				],
-				'minimumPrice' => new Price(10, 15, 5),
+				'minimumPrice' => new Price(10, 15),
 			],
 			[
 				'prices' => [
-					new Price(10, 15, 5),
+					new Price(10, 15),
 				],
-				'minimumPrice' => new Price(10, 15, 5),
+				'minimumPrice' => new Price(10, 15),
 			],
 			[
 				'prices' => [
-					new Price(10, 15, 5),
-					new Price(10, 15, 5),
+					new Price(10, 15),
+					new Price(10, 15),
 				],
-				'minimumPrice' => new Price(10, 15, 5),
+				'minimumPrice' => new Price(10, 15),
 			],
 		];
 	}
@@ -63,28 +63,28 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 		return [
 			[
 				'prices' => [
-					new Price(100, 120, 20),
-					new Price(100, 120, 20),
+					new Price(100, 120),
+					new Price(100, 120),
 				],
 				'arePricesDifferent' => false,
 			],
 			[
 				'prices' => [
-					new Price(100, 120, 20),
+					new Price(100, 120),
 				],
 				'arePricesDifferent' => false,
 			],
 			[
 				'prices' => [
-					new Price(100, 120, 20),
-					new Price('100', '120', '20'),
+					new Price(100, 120),
+					new Price('100', '120'),
 				],
 				'arePricesDifferent' => true,
 			],
 			[
 				'prices' => [
-					new Price(200, 240, 40),
-					new Price(100, 120, 20),
+					new Price(200, 240),
+					new Price(100, 120),
 				],
 				'arePricesDifferent' => true,
 			],

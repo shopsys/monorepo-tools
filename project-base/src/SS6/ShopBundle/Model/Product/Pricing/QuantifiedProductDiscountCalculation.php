@@ -40,7 +40,7 @@ class QuantifiedProductDiscountCalculation {
 		$priceVatAmount = $this->priceCalulation->getVatAmountByPriceWithVat($priceWithVat, $vat);
 		$priceWithoutVat = $priceWithVat - $priceVatAmount;
 
-		return new Price($priceWithoutVat, $priceWithVat, $priceVatAmount);
+		return new Price($priceWithoutVat, $priceWithVat);
 	}
 
 	/**

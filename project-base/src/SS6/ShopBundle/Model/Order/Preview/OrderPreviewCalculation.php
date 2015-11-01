@@ -175,7 +175,7 @@ class OrderPreviewCalculation {
 		Price $paymentPrice = null,
 		Price $roundingPrice = null
 	) {
-		$totalPrice = new Price(0, 0, 0);
+		$totalPrice = new Price(0, 0);
 
 		$totalPrice = $totalPrice->add($productsPrice);
 
@@ -200,7 +200,7 @@ class OrderPreviewCalculation {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts) {
-		$finalPrice = new Price(0, 0, 0);
+		$finalPrice = new Price(0, 0);
 
 		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
 			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */

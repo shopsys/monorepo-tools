@@ -76,7 +76,7 @@ class OrderPriceCalculation {
 			return null;
 		}
 
-		return new Price($roundingPrice, $roundingPrice, 0);
+		return new Price($roundingPrice, $roundingPrice);
 	}
 
 }

@@ -17,7 +17,7 @@ class ProductPrice extends Price {
 	 */
 	public function __construct(Price $price, $priceFrom) {
 		$this->priceFrom = $priceFrom;
-		parent::__construct($price->getPriceWithoutVat(), $price->getPriceWithVat(), $price->getVatAmount());
+		parent::__construct($price->getPriceWithoutVat(), $price->getPriceWithVat());
 	}
 
 	/**

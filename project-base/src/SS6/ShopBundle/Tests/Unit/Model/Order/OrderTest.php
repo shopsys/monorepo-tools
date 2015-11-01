@@ -19,7 +19,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$payment = new Payment(new PaymentData());
 		$orderData = new OrderData();
 		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
-		$paymentPrice = new Price(0, 0, 0);
+		$paymentPrice = new Price(0, 0);
 
 		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', null);
 		$orderProduct = new OrderProduct($order, 'productName', $paymentPrice, 0, 1, null, null, null);
@@ -35,7 +35,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetProductItemsCount() {
 		$payment = new Payment(new PaymentData());
-		$paymentItemPrice = new Price(0, 0, 0);
+		$paymentItemPrice = new Price(0, 0);
 		$orderData = new OrderData();
 		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
 

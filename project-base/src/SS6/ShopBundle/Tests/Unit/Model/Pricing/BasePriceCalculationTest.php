@@ -125,7 +125,7 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-		$price = new Price(0, $priceWithVat, 0);
+		$price = new Price(0, $priceWithVat);
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$resultPrice = $basePriceCalculation->applyCoefficients($price, $vat, $coefficients);
 

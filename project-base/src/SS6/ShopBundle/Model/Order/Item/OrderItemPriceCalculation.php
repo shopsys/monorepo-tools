@@ -44,11 +44,7 @@ class OrderItemPriceCalculation {
 		$totalVatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($totalPriceWithVat, $vat);
 		$totalPriceWithoutVat = $totalPriceWithVat - $totalVatAmount;
 
-		return new Price(
-			$totalPriceWithoutVat,
-			$totalPriceWithVat,
-			$totalVatAmount
-		);
+		return new Price($totalPriceWithoutVat, $totalPriceWithVat);
 	}
 
 	/**

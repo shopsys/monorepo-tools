@@ -15,7 +15,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 	public function testEditWithProduct() {
 		$orderMock = $this->getMock(Order::class, [], [], '', false);
 		$productMock = $this->getMock(Product::class, [], [], '', false);
-		$productPrice = new Price(0, 0, 0);
+		$productPrice = new Price(0, 0);
 
 		$orderItemData = new OrderItemData();
 		$orderItemData->name = 'newName';
@@ -36,7 +36,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testEditWithoutProduct() {
 		$orderMock = $this->getMock(Order::class, [], [], '', false);
-		$productPrice = new Price(0, 0, 0);
+		$productPrice = new Price(0, 0);
 
 		$orderItemData = new OrderItemData();
 		$orderItemData->name = 'newName';
@@ -58,7 +58,7 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 	public function testConstructWithMainVariantThrowsException() {
 		$mainVariant = new Product(new ProductData());
 		$variant = new Product(new ProductData());
-		$productPrice = new Price(0, 0, 0);
+		$productPrice = new Price(0, 0);
 
 		$mainVariant->addVariant($variant);
 

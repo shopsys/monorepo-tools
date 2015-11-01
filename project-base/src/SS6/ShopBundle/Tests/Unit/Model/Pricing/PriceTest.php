@@ -8,8 +8,8 @@ use SS6\ShopBundle\Model\Pricing\Price;
 class PriceTest extends PHPUnit_Framework_TestCase {
 
 	public function testAdd() {
-		$price = new Price(2, 3, 1);
-		$priceToAdd = new Price(10, 15, 5);
+		$price = new Price(2, 3);
+		$priceToAdd = new Price(10, 15);
 		$actualAddingResult = $price->add($priceToAdd);
 
 		$this->assertSame(12, $actualAddingResult->getPriceWithoutVat());
@@ -18,8 +18,8 @@ class PriceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testAddIsImmutable() {
-		$price = new Price(2, 3, 1);
-		$priceToAdd = new Price(10, 15, 5);
+		$price = new Price(2, 3);
+		$priceToAdd = new Price(10, 15);
 		$price->add($priceToAdd);
 
 		$this->assertSame(2, $price->getPriceWithoutVat());
@@ -28,8 +28,8 @@ class PriceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSubtract() {
-		$price = new Price(2, 3, 1);
-		$priceToSubtract = new Price(10, 15, 5);
+		$price = new Price(2, 3);
+		$priceToSubtract = new Price(10, 15);
 		$actualAddingResult = $price->subtract($priceToSubtract);
 
 		$this->assertSame(-8, $actualAddingResult->getPriceWithoutVat());
@@ -38,8 +38,8 @@ class PriceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSubtractIsImmutable() {
-		$price = new Price(2, 3, 1);
-		$priceToSubtract = new Price(10, 15, 5);
+		$price = new Price(2, 3);
+		$priceToSubtract = new Price(10, 15);
 		$price->subtract($priceToSubtract);
 
 		$this->assertSame(2, $price->getPriceWithoutVat());
