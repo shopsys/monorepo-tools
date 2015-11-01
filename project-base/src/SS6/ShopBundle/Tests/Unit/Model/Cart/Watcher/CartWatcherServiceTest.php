@@ -24,9 +24,13 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$vat = new Vat(new VatData('vat', 21));
+		$productData1 = new ProductData();
+		$productData1->name = ['cs' => 'Product 1'];
+		$productData1->price = 100;
+		$productData1->vat = $vat;
 		$productMock = $this->getMockBuilder(Product::class)
 			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, 100, $vat)])
+			->setConstructorArgs([$productData1])
 			->getMock();
 		$productMock->expects($this->any())->method('getCurrentLocale')->willReturn('cs');
 
@@ -43,7 +47,12 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 		$this->assertEmpty($modifiedItems1);
 
-		$productMock->edit(new ProductData(['cs' => 'Product 1'], null, null, null, 200, $vat));
+		$productData2 = new ProductData();
+		$productData2->name = ['cs' => 'Product 2'];
+		$productData2->price = 200;
+		$productData2->vat = $vat;
+
+		$productMock->edit($productData2);
 		$modifiedItems2 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 		$this->assertNotEmpty($modifiedItems2);
 
@@ -78,10 +87,13 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 	}
 
 	public function testGetNotListableItemsWithVisibleButNotSellableProduct() {
-		$vat = new Vat(new VatData('vat', 21));
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Product 1'];
+		$productData->price = 100;
+		$productData->vat = new Vat(new VatData('vat', 21));
 		$productMock = $this->getMockBuilder(Product::class)
 			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([new ProductData(['cs' => 'Product 1'], null, null, null, 100, $vat, null, null, false)])
+			->setConstructorArgs([$productData])
 			->getMock();
 
 		$cartItemMock = $this->getMockBuilder(CartItem::class)

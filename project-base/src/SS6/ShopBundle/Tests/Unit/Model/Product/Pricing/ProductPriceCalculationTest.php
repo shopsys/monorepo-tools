@@ -115,7 +115,11 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
 
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $inputPrice, $vat));
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Product 1'];
+		$productData->price = $inputPrice;
+		$productData->vat = $vat;
+		$product = new Product($productData);
 
 		$productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 
@@ -125,20 +129,29 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function calculatePriceMainVariantProvider() {
 		$vat = new Vat(new VatData('vat', 10));
+		$productData1 = new ProductData();
+		$productData1->name = ['cs' => 'Product 1'];
+		$productData1->price = '100';
+		$productData1->vat = $vat;
+
+		$productData2 = new ProductData();
+		$productData2->name = ['cs' => 'Product 2'];
+		$productData2->price = '200';
+		$productData2->vat = $vat;
 
 		return [
 			[
 				'variants' => [
-					new Product(new ProductData(['cs' => 'Product 1'], null, null, null, '100', $vat)),
-					new Product(new ProductData(['cs' => 'Product 1'], null, null, null, '200', $vat)),
+					new Product($productData1),
+					new Product($productData2),
 				],
 				'expectedPriceWithVat' => 100,
 				'expectedFrom' => true,
 			],
 			[
 				'variants' => [
-					new Product(new ProductData(['cs' => 'Product 1'], null, null, null, '200', $vat)),
-					new Product(new ProductData(['cs' => 'Product 1'], null, null, null, '200', $vat)),
+					new Product($productData2),
+					new Product($productData2),
 				],
 				'expectedPriceWithVat' => 200,
 				'expectedFrom' => false,

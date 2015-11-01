@@ -23,10 +23,17 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$price1 = 100;
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price1, $vat));
-		$price2 = 200;
-		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, $price2, $vat));
+		$productData1 = new ProductData();
+		$productData1->name = ['cs' => 'Product 1'];
+		$productData1->price = 100;
+		$productData1->vat = $vat;
+		$product1 = new Product($productData1);
+
+		$productData2 = new ProductData();
+		$productData2->name = ['cs' => 'Product 2'];
+		$productData2->price = 200;
+		$productData2->vat = $vat;
+		$product2 = new Product($productData2);
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
@@ -49,7 +56,11 @@ class CartTest extends PHPUnit_Framework_TestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Product 1'];
+		$productData->price = $price;
+		$productData->vat = $vat;
+		$product = new Product($productData);
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -62,10 +73,17 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
 		$vat = new Vat(new VatData('vat', 21));
-		$price1 = 100;
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price1, $vat));
-		$price2 = 200;
-		$product2 = new Product(new ProductData(['cs' => 'Product 2'], null, null, null, $price2, $vat));
+		$productData1 = new ProductData();
+		$productData1->name = ['cs' => 'Product 1'];
+		$productData1->price = 100;
+		$productData1->vat = $vat;
+		$product1 = new Product($productData1);
+
+		$productData2 = new ProductData();
+		$productData2->name = ['cs' => 'Product 2'];
+		$productData2->price = 200;
+		$productData2->vat = $vat;
+		$product2 = new Product($productData2);
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');

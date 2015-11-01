@@ -18,11 +18,15 @@ class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 
 		$price = 100;
 		$vat = new Vat(new VatData('vat', 21));
-		$product1 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
-		$product2 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
-		$product3 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
-		$product4 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
-		$product5 = new Product(new ProductData(['cs' => 'Product 1'], null, null, null, $price, $vat));
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Product 1'];
+		$productData->price = $price;
+		$productData->vat = $vat;
+		$product1 = new Product($productData);
+		$product2 = new Product($productData);
+		$product3 = new Product($productData);
+		$product4 = new Product($productData);
+		$product5 = new Product($productData);
 
 		$manualBestsellingProductsIndexedByPosition = [
 			0 => $product1,
