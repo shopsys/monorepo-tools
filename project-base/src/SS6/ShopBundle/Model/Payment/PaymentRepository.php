@@ -47,16 +47,16 @@ class PaymentRepository {
 	}
 
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getQueryBuilderForAll()->getQuery()->getResult();
 	}
 
 	/**
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
-	public function findAllIncludingDeleted() {
+	public function getAllIncludingDeleted() {
 		return $this->getPaymentRepository()->findAll();
 	}
 
@@ -98,7 +98,7 @@ class PaymentRepository {
 	/**
 	 * @return \Doctrine\Common\Collections\Collection
 	 */
-	public function findAllWithTransports() {
+	public function getAllWithTransports() {
 		return $this->getQueryBuilderForAll()
 			->leftJoin(Transport::class, 't')
 			->getQuery()
@@ -107,9 +107,9 @@ class PaymentRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
-	public function findAllByTransport(Transport $transport) {
+	public function getAllByTransport(Transport $transport) {
 		return $this->getQueryBuilderForAll()
 			->join(Transport::class, 't')
 			->andWhere('t.id = :transportId')

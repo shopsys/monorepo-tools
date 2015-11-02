@@ -54,7 +54,7 @@ class TopProductRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct|null
+	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
 	 */
 	public function getByProductAndDomainId(Product $product, $domainId) {
 		$topProduct = $this->getTopProductRepository()->findOneBy([

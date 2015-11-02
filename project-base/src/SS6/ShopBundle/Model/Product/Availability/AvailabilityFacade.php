@@ -69,7 +69,7 @@ class AvailabilityFacade {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\
+	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getById($availabilityId) {
 		return $this->availabilityRepository->getById($availabilityId);

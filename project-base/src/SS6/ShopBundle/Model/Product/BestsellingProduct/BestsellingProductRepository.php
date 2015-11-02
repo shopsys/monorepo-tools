@@ -34,7 +34,7 @@ class BestsellingProductRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct|null
+	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
 	 */
 	public function getManualBestsellingProductsByCategoryAndDomainId(Category $category, $domainId) {
 		$queryBuilder = $this->em->createQueryBuilder()

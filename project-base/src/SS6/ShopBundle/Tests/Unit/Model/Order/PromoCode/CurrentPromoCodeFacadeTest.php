@@ -24,7 +24,7 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
 
-		$this->assertSame($validPromoCode, $currentPromoCodeFacade->getValidEnteredPromoCode());
+		$this->assertSame($validPromoCode, $currentPromoCodeFacade->getValidEnteredPromoCodeOrNull());
 	}
 
 	public function testGetEnteredPromoCodeInvalid() {
@@ -38,7 +38,7 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 		$promoCodeFacade = new PromoCodeFacade($emMock, $promoCodeRepositoryMock);
 		$currentPromoCodeFacade = new CurrentPromoCodeFacade($promoCodeFacade, $sessionMock);
 
-		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCode());
+		$this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCodeOrNull());
 	}
 
 	public function testSetEnteredPromoCode() {

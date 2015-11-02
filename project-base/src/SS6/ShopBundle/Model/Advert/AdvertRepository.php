@@ -27,7 +27,7 @@ class AdvertRepository {
 
 	/**
 	 * @param string $advertId
-	 * @return \SS6\ShopBundle\Model\Advert\Advert
+	 * @return \SS6\ShopBundle\Model\Advert\Advert|null
 	 */
 	public function findById($advertId) {
 		return $this->getAdvertRepository()->find($advertId);
@@ -50,9 +50,9 @@ class AdvertRepository {
 	/**
 	 * @param string $positionName
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Advert\Advert[]
+	 * @return \SS6\ShopBundle\Model\Advert\Advert|null
 	 */
-	public function getRandomAdvertByPosition($positionName, $domainId) {
+	public function findRandomAdvertByPosition($positionName, $domainId) {
 		$countQb = $this->getAdvertByPositionQueryBuider($positionName, $domainId);
 
 		$count = $countQb

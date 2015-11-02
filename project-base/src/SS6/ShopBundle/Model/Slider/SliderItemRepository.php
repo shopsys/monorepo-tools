@@ -50,7 +50,7 @@ class SliderItemRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getSliderItemRepository()->findAll();
 	}
 

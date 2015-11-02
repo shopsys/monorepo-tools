@@ -25,6 +25,7 @@ class FeedCategoryRepository {
 
 	/**
 	 * @param int $extId
+	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
 	 */
 	public function findByExtId($extId) {
 		return $this->getFeedCategoryRepository()->findOneBy([

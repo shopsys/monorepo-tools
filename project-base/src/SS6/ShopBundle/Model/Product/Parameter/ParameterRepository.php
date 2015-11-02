@@ -67,7 +67,7 @@ class ParameterRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getParameterRepository()->findBy([], ['id' => 'asc']);
 	}
 

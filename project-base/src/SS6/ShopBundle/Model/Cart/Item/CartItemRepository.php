@@ -29,9 +29,9 @@ class CartItemRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
-	public function findAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
+	public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
 		$criteria = [];
 		if ($customerIdentifier->getUser() !== null) {
 			$criteria['user'] = $customerIdentifier->getUser()->getId();

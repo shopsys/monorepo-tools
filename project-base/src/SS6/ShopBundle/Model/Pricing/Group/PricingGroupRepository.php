@@ -64,11 +64,16 @@ class PricingGroupRepository {
 		return $this->getPricingGroupRepository()->find($pricingGroupId);
 	}
 
-	public function getAllExceptIdByDomainId($id, $domainId) {
+	/**
+	 * @param int $pricingGroupId
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 */
+	public function getAllExceptIdByDomainId($pricingGroupId, $domainId) {
 		$qb = $this->getPricingGroupRepository()->createQueryBuilder('pg')
 			->where('pg.domainId = :domainId')
 			->andWhere('pg.id != :id')
-			->setParameters(['domainId' => $domainId, 'id' => $id]);
+			->setParameters(['domainId' => $domainId, 'id' => $pricingGroupId]);
 
 		return $qb->getQuery()->getResult();
 	}

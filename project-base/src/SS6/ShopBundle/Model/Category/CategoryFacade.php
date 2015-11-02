@@ -178,10 +178,10 @@ class CategoryFacade {
 	public function editOrdering($parentIdByCategoryId) {
 		// eager-load all categories into identity map
 		$this->categoryRepository->getAll();
-		$rootCategory = $this->categoryRepository->getRootCategory();
 
 		try {
 			$this->em->beginTransaction();
+			$rootCategory = $this->categoryRepository->getRootCategory();
 			foreach ($parentIdByCategoryId as $categoryId => $parentId) {
 				if ($parentId === null) {
 					$parent = $rootCategory;

@@ -30,14 +30,14 @@ class SettingValueRepository {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
-	public function findAllByDomainId($domainId) {
+	public function getAllByDomainId($domainId) {
 		return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
-	public function findAllDefault() {
+	public function getAllDefault() {
 		return $this->getSettingValueRepository()->findBy(['domainId' => SettingValue::DOMAIN_ID_DEFAULT]);
 	}
 }

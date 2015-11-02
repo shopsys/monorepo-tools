@@ -41,7 +41,7 @@ class ParameterFacade {
 
 	/**
 	 * @param int $parameterId
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	public function getById($parameterId) {
 		return $this->parameterRepository->getById($parameterId);

@@ -27,7 +27,7 @@ class CurrentPromoCodeFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
 	 */
-	public function getValidEnteredPromoCode() {
+	public function getValidEnteredPromoCodeOrNull() {
 		$enteredCode = $this->session->get(self::PROMO_CODE_SESSION_KEY);
 
 		return $this->promoCodeFacade->findPromoCodeByCode($enteredCode);

@@ -218,12 +218,12 @@ class CurrencyFacade {
 	 */
 	private function createTransportAndPaymentPrices(Currency $currency) {
 		$toFlush = [];
-		foreach ($this->paymentRepository->findAll() as $payment) {
+		foreach ($this->paymentRepository->getAll() as $payment) {
 			$paymentPrice = new PaymentPrice($payment, $currency, 0);
 			$this->em->persist($paymentPrice);
 			$toFlush[] = $paymentPrice;
 		}
-		foreach ($this->transportRepository->findAll() as $transport) {
+		foreach ($this->transportRepository->getAll() as $transport) {
 			$transportPrice = new TransportPrice($transport, $currency, 0);
 			$this->em->persist($transportPrice);
 			$toFlush[] = $transportPrice;

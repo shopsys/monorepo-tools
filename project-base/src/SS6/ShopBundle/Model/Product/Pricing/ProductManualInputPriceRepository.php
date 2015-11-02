@@ -40,7 +40,7 @@ class ProductManualInputPriceRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
 	 */
 	public function getByProductAndDomainConfigs(Product $product, array $domainConfigs) {
 		if (count($domainConfigs) === 0) {

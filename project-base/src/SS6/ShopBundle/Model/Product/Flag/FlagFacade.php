@@ -41,7 +41,7 @@ class FlagFacade {
 
 	/**
 	 * @param int $flagId
-	 * @return \SS6\ShopBundle\Model\Product\Flag\
+	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag
 	 */
 	public function getById($flagId) {
 		return $this->flagRepository->getById($flagId);

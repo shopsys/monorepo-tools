@@ -151,7 +151,7 @@ class PaymentEditFacade {
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
-		$transports = $this->transportRepository->findAllByIds($paymentData->transports);
+		$transports = $this->transportRepository->getAllByIds($paymentData->transports);
 		$payment->setTransports($transports);
 		$this->imageFacade->uploadImage($payment, $paymentData->image, null);
 		$this->em->flush();
@@ -169,7 +169,7 @@ class PaymentEditFacade {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisibleByDomainId($domainId) {
-		$allPayments = $this->paymentRepository->findAllWithTransports();
+		$allPayments = $this->paymentRepository->getAllWithTransports();
 
 		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
 	}
@@ -224,7 +224,7 @@ class PaymentEditFacade {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAllIncludingDeleted() {
-		return $this->paymentRepository->findAllIncludingDeleted();
+		return $this->paymentRepository->getAllIncludingDeleted();
 	}
 
 	/**

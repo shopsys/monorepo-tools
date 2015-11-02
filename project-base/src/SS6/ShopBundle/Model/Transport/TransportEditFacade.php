@@ -124,7 +124,7 @@ class TransportEditFacade {
 	public function deleteById($id) {
 		$transport = $this->getById($id);
 		$transport->markAsDeleted();
-		$paymentsByTransport = $this->paymentRepository->findAllByTransport($transport);
+		$paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
 		foreach ($paymentsByTransport as $payment) {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
@@ -212,7 +212,7 @@ class TransportEditFacade {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllIncludingDeleted() {
-		return $this->transportRepository->findAllIncludingDeleted();
+		return $this->transportRepository->getAllIncludingDeleted();
 	}
 
 	/**

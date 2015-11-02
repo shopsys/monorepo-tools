@@ -54,6 +54,7 @@ class MailTemplateRepository {
 
 	/**
 	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Mail\MailTemplate[]
 	 */
 	public function getAllByDomainId($domainId) {
 		$criteria = ['domainId' => $domainId];

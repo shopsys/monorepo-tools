@@ -116,7 +116,7 @@ class Setting {
 	private function loadDomainValues($domainId) {
 		if (!array_key_exists($domainId, $this->values)) {
 			$this->values[$domainId] = [];
-			foreach ($this->settingValueRepository->findAllByDomainId($domainId) as $settingValue) {
+			foreach ($this->settingValueRepository->getAllByDomainId($domainId) as $settingValue) {
 				/* @var $settingValue SettingValue */
 				$this->values[$domainId][$settingValue->getName()] = $settingValue;
 			}
@@ -126,7 +126,7 @@ class Setting {
 	private function loadDefaultValues() {
 		if ($this->valuesDefault === null) {
 			$this->valuesDefault = [];
-			foreach ($this->settingValueRepository->findAllDefault() as $settingValue) {
+			foreach ($this->settingValueRepository->getAllDefault() as $settingValue) {
 				/* @var $settingValue SettingValue */
 				$this->valuesDefault[$settingValue->getName()] = $settingValue;
 			}

@@ -59,7 +59,7 @@ class DomainFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getDomainConfigsByCurrency(Currency $currency) {
 		$domainConfigs = [];

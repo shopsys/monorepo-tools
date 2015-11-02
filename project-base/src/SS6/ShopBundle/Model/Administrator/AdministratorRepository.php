@@ -69,7 +69,7 @@ class AdministratorRepository {
 
 	/**
 	 * @param string $administratorUserName
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
 	 */
 	public function findByUserName($administratorUserName) {
 		return $this->getAdministratorRepository()->findOneBy(['username' => $administratorUserName]);

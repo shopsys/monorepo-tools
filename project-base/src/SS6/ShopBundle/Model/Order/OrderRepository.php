@@ -37,7 +37,7 @@ class OrderRepository {
 	 * @param int $userId
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
-	public function findByUserId($userId) {
+	public function getOrdersByUserId($userId) {
 		return $this->getOrderRepository()->findBy([
 			'customer' => $userId,
 		]);
@@ -169,7 +169,7 @@ class OrderRepository {
 	 * @param int $orderStatusId
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
-	public function findByStatusId($orderStatusId) {
+	public function getOrdersByStatusId($orderStatusId) {
 		return $this->getOrderRepository()->findBy([
 			'status' => $orderStatusId,
 		]);

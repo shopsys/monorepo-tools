@@ -64,10 +64,17 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function getRootCategory() {
-		return $this->getCategoryRepository()->findOneBy(['parent' => null]);
+		$rootCategory = $this->getCategoryRepository()->findOneBy(['parent' => null]);
+
+		if ($rootCategory === null) {
+			$message = 'Root category not found';
+			throw new \SS6\ShopBundle\Model\Category\Exception\RootCategoryNotFoundException($message);
+		}
+
+		return $rootCategory;
 	}
 
 	/**

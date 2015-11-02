@@ -39,7 +39,7 @@ class ProductAccessoryRepository {
 	/**
 	 * @return \Doctrine\ORM\EntityRepository
 	 */
-	public function getProductAccesoryRepository() {
+	public function getProductAccessoryRepository() {
 		return $this->em->getRepository(ProductAccessory::class);
 	}
 
@@ -58,10 +58,10 @@ class ProductAccessoryRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory
+	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory[]
 	 */
 	public function getAllByProduct(Product $product) {
-		return $this->getProductAccesoryRepository()->findBy(['product' => $product], ['position' => 'asc']);
+		return $this->getProductAccessoryRepository()->findBy(['product' => $product], ['position' => 'asc']);
 	}
 
 	/**
@@ -103,7 +103,7 @@ class ProductAccessoryRepository {
 	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory|null
 	 */
 	public function findByProductAndAccessory(Product $product, Product $accessory) {
-		return $this->getProductAccesoryRepository()->findOneBy([
+		return $this->getProductAccessoryRepository()->findOneBy([
 			'product' => $product,
 			'accessory' => $accessory,
 		]);

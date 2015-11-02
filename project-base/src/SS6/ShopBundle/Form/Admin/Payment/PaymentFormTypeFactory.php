@@ -33,7 +33,7 @@ class PaymentFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Admin\Payment\PaymentFormType
 	 */
 	public function create() {
-		$allTransports = $this->transportRepository->findAll();
+		$allTransports = $this->transportRepository->getAll();
 		$vats = $this->vatRepository->getAll();
 
 		return new PaymentFormType($allTransports, $vats);

@@ -29,7 +29,7 @@ class BrandFacade {
 
 	/**
 	 * @param int $brandId
-	 * @return \SS6\ShopBundle\Model\Product\Brand\
+	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function getById($brandId) {
 		return $this->brandRepository->getById($brandId);

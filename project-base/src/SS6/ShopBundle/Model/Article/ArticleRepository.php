@@ -27,7 +27,7 @@ class ArticleRepository {
 
 	/**
 	 * @param string $articleId
-	 * @return \SS6\ShopBundle\Model\Article\Article
+	 * @return \SS6\ShopBundle\Model\Article\Article|null
 	 */
 	public function findById($articleId) {
 		return $this->getArticleRepository()->find($articleId);

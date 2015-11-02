@@ -57,10 +57,10 @@ class AdvertEditFacade {
 
 	/**
 	 * @param string $positionName
-	 * @return \SS6\ShopBundle\Model\Advert\Advert[]
+	 * @return \SS6\ShopBundle\Model\Advert\Advert|null
 	 */
-	public function getRandomAdvertByPositionOnCurrenctDomain($positionName) {
-		return $this->advertRepository->getRandomAdvertByPosition($positionName, $this->domain->getId());
+	public function findRandomAdvertByPositionOnCurrentDomain($positionName) {
+		return $this->advertRepository->findRandomAdvertByPosition($positionName, $this->domain->getId());
 	}
 
 	/**

@@ -81,9 +81,9 @@ class ProductCollectionFacade {
 	 * @param string|null $sizeName
 	 * @return string[productId]
 	 */
-	public function findImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null) {
+	public function getImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null) {
 		$imagesUrlsByProductId = [];
-		foreach ($this->findMainImagesIndexedByProductId($products) as $productId => $image) {
+		foreach ($this->getMainImagesIndexedByProductId($products) as $productId => $image) {
 			if ($image === null) {
 				$imagesUrlsByProductId[$productId] = null;
 			} else {
@@ -102,7 +102,7 @@ class ProductCollectionFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 * @return \SS6\ShopBundle\Component\Image\Image[productId]
 	 */
-	private function findMainImagesIndexedByProductId(array $products) {
+	private function getMainImagesIndexedByProductId(array $products) {
 		$productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
 		$imagesByProductId = $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($products, $productEntityName);
 

@@ -52,7 +52,7 @@ class HeurekaItemFactory implements FeedItemFactoryInterface {
 			$products,
 			$domainConfig
 		);
-		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $domainConfig);
+		$imagesByProductId = $this->productCollectionFacade->getImagesUrlsIndexedByProductId($products, $domainConfig);
 		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $domainConfig);
 		$paramsByProductId = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
 			$products,

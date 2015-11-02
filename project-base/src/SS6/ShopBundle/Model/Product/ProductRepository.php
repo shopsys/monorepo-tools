@@ -530,7 +530,7 @@ class ProductRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductDomain|null
+	 * @return \SS6\ShopBundle\Model\Product\ProductDomain
 	 */
 	public function getProductDomainByProductAndDomainId(Product $product, $domainId) {
 		$productDomain = $this->findProductDomainByProductAndDomainId($product, $domainId);

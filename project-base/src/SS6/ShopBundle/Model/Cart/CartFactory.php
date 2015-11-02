@@ -53,7 +53,7 @@ class CartFactory {
 	 * @return \SS6\ShopBundle\Model\Cart\Cart
 	 */
 	private function createNewCart(CustomerIdentifier $customerIdentifier) {
-		$cartItems = $this->cartItemRepository->findAllByCustomerIdentifier($customerIdentifier);
+		$cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);
 
 		return new Cart($cartItems);
 	}

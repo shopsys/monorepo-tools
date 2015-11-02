@@ -21,7 +21,7 @@ class ProductParameterValueFormTypeFactory {
 	 * @return \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
 	 */
 	public function create() {
-		$parameters = $this->parameterRepository->findAll();
+		$parameters = $this->parameterRepository->getAll();
 
 		return new ProductParameterValueFormType($parameters);
 	}

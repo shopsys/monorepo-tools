@@ -300,7 +300,7 @@ class OrderFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return array
+	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function getCustomerOrderList(User $user) {
 		return $this->orderRepository->getCustomerOrderList($user);

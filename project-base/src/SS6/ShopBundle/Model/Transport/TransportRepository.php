@@ -38,7 +38,7 @@ class TransportRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function findAll() {
+	public function getAll() {
 		return $this->getQueryBuilderForAll()->getQuery()->getResult();
 	}
 
@@ -46,7 +46,7 @@ class TransportRepository {
 	 * @param array $transportIds
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function findAllByIds(array $transportIds) {
+	public function getAllByIds(array $transportIds) {
 		$dql = sprintf('SELECT t FROM %s t WHERE t.deleted = :deleted AND t.id IN (:trasportIds)', Transport::class);
 		return $this->em->createQuery($dql)
 			->setParameter('deleted', false)
@@ -80,7 +80,7 @@ class TransportRepository {
 	/**
 	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
 	 */
-	public function findAllIncludingDeleted() {
+	public function getAllIncludingDeleted() {
 		return $this->getTransportRepository()->findAll();
 	}
 
