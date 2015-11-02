@@ -2,16 +2,18 @@
 
 namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem;
 
-class HeurekaDeliveryDataIterator extends AbstractDataIterator {
+class HeurekaDeliveryItemFactory implements FeedItemFactoryInterface {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem[]
 	 */
-	protected function createItems(array $products) {
+	public function createItems(array $products, DomainConfig $domainConfig) {
 		$items = [];
 		foreach ($products as $product) {
 			$items[] = new HeurekaDeliveryItem(

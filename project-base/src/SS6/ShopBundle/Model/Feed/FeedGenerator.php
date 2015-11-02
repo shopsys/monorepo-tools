@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Feed;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
+use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use Twig_Environment;
 use Twig_Template;
 
@@ -28,17 +28,13 @@ class FeedGenerator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param string $targetFilepath
-	 */
-	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface $heurekaDataSource
+	 * @param \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface $heurekaItemIteratorFactory
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */
 	public function generate(
-		FeedDataSourceInterface $heurekaDataSource,
+		FeedItemIteratorFactoryInterface $heurekaItemIteratorFactory,
 		DomainConfig $domainConfig,
 		$feedTemplatePath,
 		$targetFilepath
@@ -49,7 +45,7 @@ class FeedGenerator {
 
 		$buffer = '';
 		$counter = 0;
-		foreach ($heurekaDataSource->getIterator($domainConfig) as $feedItem) {
+		foreach ($heurekaItemIteratorFactory->getIterator($domainConfig) as $feedItem) {
 			$counter++;
 			$buffer .= $this->getRenderedBlock($twigTemplate, 'item', ['item' => $feedItem]);
 			if ($counter >= self::BATCH_SIZE) {

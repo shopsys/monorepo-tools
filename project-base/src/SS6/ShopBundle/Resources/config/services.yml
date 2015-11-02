@@ -344,19 +344,19 @@ services:
   ss6.shop.feed.feed_config_repository:
     class: SS6\ShopBundle\Model\Feed\FeedConfigRepository
     arguments:
-      - @ss6.shop.feed.heureka.heureka_feed_data_source
-      - @ss6.shop.feed.heureka.heureka_delivery_feed_data_source
+      - @ss6.shop.feed.heureka.heureka_item_iterator_factory
+      - @ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory
 
   ss6.shop.feed.feed_facade:
     class: SS6\ShopBundle\Model\Feed\FeedFacade
     arguments:
       - %ss6.feed_dir%
 
-  ss6.shop.feed.heureka.heureka_feed_data_source:
-    class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaFeedDataSource
+  ss6.shop.feed.heureka.heureka_item_iterator_factory:
+    class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaItemIteratorFactory
 
-  ss6.shop.feed.heureka.heureka_delivery_feed_data_source:
-    class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource
+  ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory:
+    class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory
 
   ss6.shop.http_foundation.response_listener:
     class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener

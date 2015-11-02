@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Feed;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedDataSourceInterface;
+use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 
 class FeedConfig {
 
@@ -23,26 +23,26 @@ class FeedConfig {
 	private $templateFilepath;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
 	 */
-	private $feedDataSource;
+	private $feedItemIteratorFactory;
 
 	/**
 	 * @param string $name
 	 * @param string $filenamePrefix
 	 * @param string $templateFilepath
-	 * @param \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface $feedDataSource
+	 * @param \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	 */
 	public function __construct(
 		$name,
 		$filenamePrefix,
 		$templateFilepath,
-		FeedDataSourceInterface $feedDataSource
+		FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	) {
 		$this->name = $name;
 		$this->filenamePrefix = $filenamePrefix;
 		$this->templateFilepath = $templateFilepath;
-		$this->feedDataSource = $feedDataSource;
+		$this->feedItemIteratorFactory = $feedItemIteratorFactory;
 	}
 
 	/**
@@ -68,10 +68,10 @@ class FeedConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedDataSourceInterface
+	 * @return \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
 	 */
-	public function getFeedDataSource() {
-		return $this->feedDataSource;
+	public function getFeedItemIteratorFactory() {
+		return $this->feedItemIteratorFactory;
 	}
 
 }

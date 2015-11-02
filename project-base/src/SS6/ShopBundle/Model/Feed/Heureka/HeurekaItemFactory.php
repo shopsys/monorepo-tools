@@ -2,21 +2,15 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Feed\AbstractDataIterator;
+use SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
 use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
-class HeurekaDataIterator extends AbstractDataIterator {
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
-	 */
-	private $domainConfig;
+class HeurekaItemFactory implements FeedItemFactoryInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
@@ -34,47 +28,42 @@ class HeurekaDataIterator extends AbstractDataIterator {
 	private $categoryFacade;
 
 	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
 	 * @param \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
+	 * @param \SS6\ShopBundle\Model\Category\CategoryFacade $categoryFacade
 	 */
 	public function __construct(
-		QueryBuilder $queryBuilder,
-		DomainConfig $domainConfig,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		ProductCollectionFacade $productCollectionFacade,
 		CategoryFacade $categoryFacade
 	) {
-		$this->domainConfig = $domainConfig;
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
 		$this->productCollectionFacade = $productCollectionFacade;
 		$this->categoryFacade = $categoryFacade;
-
-		parent::__construct($queryBuilder);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
 	 */
-	protected function createItems(array $products) {
+	public function createItems(array $products, DomainConfig $domainConfig) {
 		$productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
 			$products,
-			$this->domainConfig
+			$domainConfig
 		);
-		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $this->domainConfig);
-		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $this->domainConfig);
+		$imagesByProductId = $this->productCollectionFacade->findImagesUrlsIndexedByProductId($products, $domainConfig);
+		$urlsByProductId = $this->productCollectionFacade->getAbsoluteUrlsIndexedByProductId($products, $domainConfig);
 		$paramsByProductId = $this->productCollectionFacade->getProductParameterValuesIndexedByProductIdAndParameterName(
 			$products,
-			$this->domainConfig
+			$domainConfig
 		);
 
 		$items = [];
 		foreach ($products as $product) {
 			$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
 				$product,
-				$this->domainConfig->getId(),
+				$domainConfig->getId(),
 				null
 			);
 			$manufacturer = null;
@@ -89,7 +78,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 
 			$items[] = new HeurekaItem(
 				$product->getId(),
-				$product->getName($this->domainConfig->getLocale()),
+				$product->getName($domainConfig->getLocale()),
 				$productDomainsByProductId[$product->getId()]->getDescription(),
 				$urlsByProductId[$product->getId()],
 				$imagesByProductId[$product->getId()],
@@ -97,7 +86,7 @@ class HeurekaDataIterator extends AbstractDataIterator {
 				$product->getEan(),
 				$product->getCalculatedAvailability()->getDispatchTime(),
 				$manufacturer,
-				$this->getProductCategorytext($product, $this->domainConfig),
+				$this->getProductCategorytext($product, $domainConfig),
 				$params,
 				$productDomainsByProductId[$product->getId()]->getHeurekaCpc()
 			);

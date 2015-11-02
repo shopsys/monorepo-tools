@@ -4,8 +4,10 @@ namespace SS6\ShopBundle\Model\Feed;
 
 use Doctrine\ORM\QueryBuilder;
 use Iterator;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 
-abstract class AbstractDataIterator implements Iterator {
+class FeedItemIterator implements Iterator {
 
 	const BUFFER_SIZE = 500;
 
@@ -25,15 +27,33 @@ abstract class AbstractDataIterator implements Iterator {
 	private $queryBuilder;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface
+	 */
+	private $feedItemFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 */
+	private $domainConfig;
+
+	/**
 	 * @var array
 	 */
 	private $itemsByPosition;
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface $feedItemFactory
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
-	public function __construct(QueryBuilder $queryBuilder) {
+	public function __construct(
+		QueryBuilder $queryBuilder,
+		FeedItemFactoryInterface $feedItemFactory,
+		DomainConfig $domainConfig
+	) {
 		$this->queryBuilder = $queryBuilder;
+		$this->feedItemFactory = $feedItemFactory;
+		$this->domainConfig = $domainConfig;
 		$this->rewind();
 	}
 
@@ -58,7 +78,7 @@ abstract class AbstractDataIterator implements Iterator {
 			$queryBuilder->setFirstResult($offset);
 			$queryBuilder->setMaxResults(self::BUFFER_SIZE);
 
-			$items = $this->createItems($queryBuilder->getQuery()->execute());
+			$items = $this->feedItemFactory->createItems($queryBuilder->getQuery()->execute(), $this->domainConfig);
 
 			$this->itemsByPosition = [];
 			foreach ($items as $item) {
@@ -88,11 +108,5 @@ abstract class AbstractDataIterator implements Iterator {
 	public function valid() {
 		return $this->current() !== false;
 	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @return array
-	 */
-	abstract protected function createItems(array $products);
 
 }

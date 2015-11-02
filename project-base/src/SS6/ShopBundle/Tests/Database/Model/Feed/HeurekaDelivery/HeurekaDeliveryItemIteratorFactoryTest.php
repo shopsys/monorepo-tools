@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
+class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 
 	public function testGetIteratorWithProductInStock() {
 		$container = $this->getContainer();
@@ -27,9 +27,9 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 1;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$dataSource = $container->get('ss6.shop.feed.heureka.heureka_delivery_feed_data_source');
-		/* @var $dataSource \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource */
-		$iterator = $dataSource->getIterator($domain->getCurrentDomainConfig());
+		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
+		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
+		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
 
 		foreach ($iterator as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
@@ -58,9 +58,9 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 0;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$dataSource = $container->get('ss6.shop.feed.heureka.heureka_delivery_feed_data_source');
-		/* @var $dataSource \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource */
-		$iterator = $dataSource->getIterator($domain->getCurrentDomainConfig());
+		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
+		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
+		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
 
 		foreach ($iterator as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
@@ -87,9 +87,9 @@ class HeurekaDeliveryFeedDataSourceTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = null;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$dataSource = $container->get('ss6.shop.feed.heureka.heureka_delivery_feed_data_source');
-		/* @var $dataSource \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryFeedDataSource */
-		$iterator = $dataSource->getIterator($domain->getCurrentDomainConfig());
+		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
+		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
+		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
 
 		foreach ($iterator as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/

@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Model\Feed;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 
-interface FeedDataSourceInterface {
+interface FeedItemIteratorFactoryInterface {
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig

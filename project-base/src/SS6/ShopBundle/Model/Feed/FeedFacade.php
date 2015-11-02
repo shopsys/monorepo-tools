@@ -80,7 +80,7 @@ class FeedFacade {
 		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SULFIX;
 
 		$this->feedGenerator->generate(
-			$feedConfig->getFeedDataSource(),
+			$feedConfig->getFeedItemIteratorFactory(),
 			$domainConfig,
 			$feedConfig->getTemplateFilepath(),
 			$temporaryFeedFilepath
