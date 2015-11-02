@@ -45,7 +45,7 @@ class ProductVisibilityFacade {
 		}
 
 		if ($this->recalcVisibility) {
-			$this->refreshProductsVisibility();
+			$this->refreshProductsVisibilityForMarked();
 		}
 	}
 }

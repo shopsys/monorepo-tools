@@ -3,12 +3,15 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 
 use Doctrine\ORM\EntityManager;
+use ReflectionClass;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -107,5 +110,23 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 				'calculatedSellingDenied' => false,
 			],
 		];
+	}
+
+	public function testEditMarkProductForVisibilityRecalculation() {
+		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+		/* @var $product \SS6\ShopBundle\Model\Product\Product */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
+		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+
+		$reflectionClass = new ReflectionClass(Product::class);
+		$reflectionPropertyRecalculateVisibility = $reflectionClass->getProperty('recalculateVisibility');
+		$reflectionPropertyRecalculateVisibility->setAccessible(true);
+		$reflectionPropertyRecalculateVisibility->setValue($product, false);
+
+		$productEditFacade->edit($product->getId(), $productEditDataFactory->createFromProduct($product));
+
+		$this->assertSame(true, $reflectionPropertyRecalculateVisibility->getValue($product));
 	}
 }

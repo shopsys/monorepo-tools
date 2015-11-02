@@ -11,7 +11,10 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnKernelResponseRecalc() {
 		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
-		$productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
+		$productVisibilityRepositoryMock
+			->expects($this->once())
+			->method('refreshProductsVisibility')
+			->with($this->equalTo(true));
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 		$productVisibilityFacade->refreshProductsVisibilityDelayed();
@@ -48,5 +51,16 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
 		$productVisibilityFacade->refreshProductsVisibility();
+	}
+
+	public function testRefreshProductsVisibilityForMarked() {
+		$productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
+		$productVisibilityRepositoryMock
+			->expects($this->once())
+			->method('refreshProductsVisibility')
+			->with($this->equalTo(true));
+
+		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
+		$productVisibilityFacade->refreshProductsVisibilityForMarked();
 	}
 }
