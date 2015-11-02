@@ -4,7 +4,9 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use SS6\ShopBundle\Component\Gedmo\SortablePosition;
 use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
@@ -65,7 +67,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	/**
 	 * @var int|null
 	 *
-	 * @ORM\Column(type="integer", nullable=true)
+	 * @Gedmo\SortablePosition
+	 * @ORM\Column(type="integer", nullable=false)
 	 */
 	private $position;
 
@@ -79,6 +82,7 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 		$this->deleted = false;
 		$this->setTranslations($transportData);
 		$this->prices = new ArrayCollection();
+		$this->position = SortablePosition::LAST_POSITION;
 	}
 
 	/**

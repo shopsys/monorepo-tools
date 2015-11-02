@@ -5,7 +5,9 @@ namespace SS6\ShopBundle\Model\Payment;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
+use SS6\ShopBundle\Component\Gedmo\SortablePosition;
 use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use SS6\ShopBundle\Model\Payment\PaymentData;
@@ -75,7 +77,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	/**
 	 * @var int|null
 	 *
-	 * @ORM\Column(type="integer", nullable=true)
+	 * @Gedmo\SortablePosition
+	 * @ORM\Column(type="integer", nullable=false)
 	 */
 	private $position;
 
@@ -98,6 +101,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		$this->setTranslations($paymentData);
 		$this->prices = new ArrayCollection();
 		$this->czkRounding = $paymentData->czkRounding;
+		$this->position = SortablePosition::LAST_POSITION;
 	}
 
 	/**
