@@ -11,6 +11,7 @@ class OrderCest {
 
 		$me->amOnPage('/televize-audio/');
 		$me->click('Vložit do košíku');
+		$me->waitForAjax();
 		$me->click('Přejít do košíku');
 		$me->click('Objednat');
 
@@ -30,6 +31,7 @@ class OrderCest {
 
 		$me->amOnPage('/televize-audio/');
 		$me->click('Vložit do košíku');
+		$me->waitForAjax();
 		$me->click('Přejít do košíku');
 		$me->click('Objednat');
 		$me->checkOption('input[name="transportAndPayment_form[transport]"][value="1"]');

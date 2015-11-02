@@ -22,6 +22,8 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
  */
 class AcceptanceTester extends \Codeception\Actor {
 
+	const DEFAULT_AJAX_TIMEOUT_SEC = 10;
+
 	use _generated\AcceptanceTesterActions;
 
 	public function switchToLastOpenedWindow() {
@@ -31,4 +33,12 @@ class AcceptanceTester extends \Codeception\Actor {
 			$this->switchToWindow($lastWindow);
 		});
 	}
+
+	/**
+	 * @param int $timeout
+	 */
+	public function waitForAjax($timeout = self::DEFAULT_AJAX_TIMEOUT_SEC) {
+		$this->waitForJS('return $.active == 0;', $timeout);
+	}
+
 }
