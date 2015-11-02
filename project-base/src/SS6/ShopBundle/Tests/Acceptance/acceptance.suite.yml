@@ -33,3 +33,4 @@ modules:
       port: 4444
       url: ~
       browser: firefox
+      window_size: 1024x786
