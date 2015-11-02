@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use SS6\ShopBundle\DataFixtures\Base\DomainFunctionsDataFixture;
 
-class FulltextTriggersDataFixture extends AbstractNativeFixture {
+class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -114,7 +116,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture {
 							)
 					FROM product_translations pt
 					WHERE pt.translatable_id = NEW.id
-						AND pt.locale = \'cs\'
+						AND pt.locale = get_domain_locale(pd.domain_id)
 						AND pd.product_id = NEW.id;
 					RETURN NEW;
 				END;
@@ -148,7 +150,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture {
 					FROM products p
 					WHERE p.id = NEW.translatable_id
 						AND pd.product_id = NEW.translatable_id
-						AND pd.domain_id IN (1);
+						AND pd.domain_id IN (SELECT * FROM get_domain_ids_by_locale(NEW.locale));
 					RETURN NEW;
 				END;
 			$$ LANGUAGE plpgsql;
@@ -179,7 +181,7 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture {
 								to_tsvector(COALESCE(NEW.description, \'\'))
 							FROM products p
 							LEFT JOIN product_translations pt ON pt.translatable_id = p.id
-								AND pt.locale = \'cs\'
+								AND pt.locale = get_domain_locale(NEW.domain_id)
 							WHERE p.id = NEW.product_id
 						);
 
@@ -195,6 +197,15 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture {
 			FOR EACH ROW
 			EXECUTE PROCEDURE set_product_domain_fulltext_tsvector();
 		');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return [
+			DomainFunctionsDataFixture::class,
+		];
 	}
 
 }
