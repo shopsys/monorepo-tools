@@ -10,7 +10,9 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use PHPParser_Node;
 use PHPParser_Node_Expr_Concat;
+use PHPParser_Node_Expr_FuncCall;
 use PHPParser_Node_Expr_MethodCall;
+use PHPParser_Node_Name;
 use PHPParser_Node_Scalar_String;
 use PHPParser_NodeTraverser;
 use PHPParser_NodeVisitor;
@@ -83,9 +85,9 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	 * @param \PHPParser_Node $node
 	 */
 	public function enterNode(PHPParser_Node $node) {
-		if ($this->isTransMethodCall($node)) {
+		if ($this->isTransMethodOrFuncCall($node)) {
 			if (!$this->isIgnored($node)) {
-				/* @var $node \PHPParser_Node_Expr_MethodCall */
+				/* @var $node \PHPParser_Node_Expr */
 				$messageId = $this->getMessageId($node);
 				$domain = $this->getDomain($node);
 
@@ -100,11 +102,11 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	}
 
 	/**
-	 * @param \PHPParser_Node_Expr_MethodCall $node
+	 * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
 	 * @return string
 	 */
-	private function getMessageId(PHPParser_Node_Expr_MethodCall $node) {
-		$methodName = $this->getNormalizedMethodName($node->name);
+	private function getMessageId($node) {
+		$methodName = $this->getNormalizedMethodName($this->getNodeName($node));
 		$messageIdArgumentIndex = $this->transMethodSpecifications[$methodName]->getMessageIdArgumentIndex();
 
 		if (!isset($node->args[$messageIdArgumentIndex])) {
@@ -115,11 +117,11 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	}
 
 	/**
-	 * @param \PHPParser_Node_Expr_MethodCall $node
+	 * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
 	 * @return string
 	 */
-	private function getDomain(PHPParser_Node_Expr_MethodCall $node) {
-		$methodName = $this->getNormalizedMethodName($node->name);
+	private function getDomain($node) {
+		$methodName = $this->getNormalizedMethodName($this->getNodeName($node));
 		$domainArgumentIndex = $this->transMethodSpecifications[$methodName]->getDomainArgumentIndex();
 
 		if ($domainArgumentIndex !== null && isset($node->args[$domainArgumentIndex])) {
@@ -153,9 +155,13 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	 * @param \PHPParser_Node $node
 	 * @return bool
 	 */
-	private function isTransMethodCall(PHPParser_Node $node) {
-		if ($node instanceof PHPParser_Node_Expr_MethodCall && is_string($node->name)) {
-			$methodName = $this->getNormalizedMethodName($node->name);
+	private function isTransMethodOrFuncCall(PHPParser_Node $node) {
+		if ($node instanceof PHPParser_Node_Expr_MethodCall || $node instanceof PHPParser_Node_Expr_FuncCall) {
+			try {
+				$methodName = $this->getNormalizedMethodName($this->getNodeName($node));
+			} catch (\SS6\ShopBundle\Component\Translation\Exception\ExtractionException $ex) {
+				return false;
+			}
 
 			if (array_key_exists($methodName, $this->transMethodSpecifications)) {
 				return true;
@@ -215,6 +221,20 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	 */
 	private function getNormalizedMethodName($methodName) {
 		return mb_strtolower($methodName);
+	}
+
+	/**
+	 * @param \PHPParser_Node $node
+	 * @return string
+	 */
+	private function getNodeName(PHPParser_Node $node) {
+		if ($node instanceof PHPParser_Node_Expr_MethodCall) {
+			return $node->name;
+		} elseif ($node instanceof PHPParser_Node_Expr_FuncCall && $node->name instanceof PHPParser_Node_Name) {
+			return (string)$node->name;
+		} else {
+			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
+		}
 	}
 
 	/**
