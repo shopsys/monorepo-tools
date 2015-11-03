@@ -9,7 +9,8 @@
 				"app/",
 				"src/SS6/"
 			]
-		}
+		},
+		"files": [ "src/SS6/ShopBundle/Component/Translation/functions.php" ]
 	},
 	"repositories": [
 		{

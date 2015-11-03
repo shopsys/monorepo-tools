@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle;
 
+use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
 use SS6\ShopBundle\DependencyInjection\Compiler\ValidatorBuilderCompilerPass;
 use SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
@@ -27,6 +28,9 @@ class SS6ShopBundle extends Bundle {
 		/* @var $autoContainer \SS6\AutoServicesBundle\Compiler\AutoContainer */
 		$filemanagerAccess = $autoContainer->get(FilemanagerAccess::class);
 		FilemanagerAccess::injectSelf($filemanagerAccess);
+
+		$translator = $autoContainer->get(Translator::class);
+		Translator::injectSelf($translator);
 	}
 
 }

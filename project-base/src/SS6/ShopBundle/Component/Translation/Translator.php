@@ -12,6 +12,11 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	const SOURCE_LOCALE = 'cs';
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Translation\Translator|null
+	 */
+	private static $self;
+
+	/**
 	 * @var \Symfony\Component\Translation\TranslatorInterface
 	 */
 	private $originalTranslator;
@@ -138,6 +143,44 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 */
 	public function getCatalogue($locale = null) {
 		return $this->originalTranslatorBag->getCatalogue($locale);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
+	 */
+	public static function injectSelf(Translator $translator) {
+		self::$self = $translator;
+	}
+
+	/**
+	 * @param string $id
+	 * @param array $parameters
+	 * @param string|null $domain
+	 * @param string|null $locale
+	 * @return string
+	 */
+	public static function staticTrans($id, array $parameters = [], $domain = null, $locale = null) {
+		if (self::$self === null) {
+			throw new \SS6\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
+		}
+
+		return self::$self->trans($id, $parameters, $domain, $locale);
+	}
+
+	/**
+	 * @param string $id
+	 * @param int $number
+	 * @param array $parameters
+	 * @param string|null $domain
+	 * @param string|null $locale
+	 * @return string
+	 */
+	public static function staticTransChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
+		if (self::$self === null) {
+			throw new \SS6\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
+		}
+
+		return self::$self->transChoice($id, $number, $parameters, $domain, $locale);
 	}
 
 }
