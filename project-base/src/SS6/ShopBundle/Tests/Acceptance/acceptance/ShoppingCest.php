@@ -11,7 +11,7 @@ class ShoppingCest {
 		$me->amOnPage('/televize-audio/');
 		$me->see('Vložit do košíku');
 		$me->click('Vložit do košíku');
-		$me->waitForJS('return $.active == 0;', 15);
+		$me->waitForAjax();
 		$me->see('Do košíku bylo vloženo zboží');
 		$me->click('Přejít do košíku');
 		$me->seeInCurrentUrl('/kosik/');
