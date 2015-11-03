@@ -39,6 +39,7 @@ class OrderCest {
 		$me->checkOption('input[name="transportAndPayment_form[transport]"][value="1"]');
 		$me->dontSeeCheckboxIsChecked('input[name="transportAndPayment_form[payment]"][value="2"]');
 		$me->checkOption('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->click('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
 		$me->seeCheckboxIsChecked('input[name="transportAndPayment_form[transport]"][value="1"]');
