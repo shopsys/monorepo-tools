@@ -49,14 +49,12 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getVatReferences(ReferenceRepository $referenceRepository) {
-		$vats = [
+		return [
 			'high' => $referenceRepository->getReference(VatDataFixture::VAT_HIGH),
 			'low' => $referenceRepository->getReference(VatDataFixture::VAT_LOW),
 			'second_low' => $referenceRepository->getReference(VatDataFixture::VAT_SECOND_LOW),
 			'zero' => $referenceRepository->getReference(VatDataFixture::VAT_ZERO),
 		];
-
-		return $vats;
 	}
 
 	/**
@@ -64,13 +62,11 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getAvailabilityReferences(ReferenceRepository $referenceRepository) {
-		$availabilities = [
+		return [
 			'in-stock' => $referenceRepository->getReference(AvailabilityDataFixture::IN_STOCK),
 			'out-of-stock' => $referenceRepository->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
 			'on-request' => $referenceRepository->getReference(AvailabilityDataFixture::ON_REQUEST),
 		];
-
-		return $availabilities;
 	}
 
 	/**
@@ -78,7 +74,7 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getCategoryReferences(ReferenceRepository $referenceRepository) {
-		$categories = [
+		return [
 			CategoryDataFixture::TV => $referenceRepository->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::TV
 			),
@@ -110,8 +106,6 @@ class ProductDataFixtureReferenceInjector {
 				CategoryDataFixture::PREFIX . CategoryDataFixture::FOOD
 			),
 		];
-
-		return $categories;
 	}
 
 	/**
@@ -119,13 +113,11 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getFlagReferences(ReferenceRepository $referenceRepository) {
-		$flags = [
+		return [
 			'action' => $referenceRepository->getReference(FlagDataFixture::ACTION_PRODUCT),
 			'new' => $referenceRepository->getReference(FlagDataFixture::NEW_PRODUCT),
 			'top' => $referenceRepository->getReference(FlagDataFixture::TOP_PRODUCT),
 		];
-
-		return $flags;
 	}
 
 	/**
@@ -133,7 +125,7 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getBrandReferences(ReferenceRepository $referenceRepository) {
-		$brands = [
+		return [
 			'apple' => $referenceRepository->getReference(BrandDataFixture::APPLE),
 			'canon' => $referenceRepository->getReference(BrandDataFixture::CANON),
 			'lg' => $referenceRepository->getReference(BrandDataFixture::LG),
@@ -159,8 +151,6 @@ class ProductDataFixtureReferenceInjector {
 			'hyundai' => $referenceRepository->getReference(BrandDataFixture::HYUNDAI),
 			'nikon' => $referenceRepository->getReference(BrandDataFixture::NIKON),
 		];
-
-		return $brands;
 	}
 
 	/**
@@ -168,12 +158,10 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getUnitReferences(ReferenceRepository $referenceRepository) {
-		$units = [
+		return [
 			'pcs' => $referenceRepository->getReference(BaseUnitDataFixture::PCS),
 			'm3' => $referenceRepository->getReference(DemoUnitDataFixture::M3),
 		];
-
-		return $units;
 	}
 
 	/**
@@ -181,15 +169,13 @@ class ProductDataFixtureReferenceInjector {
 	 * @return string[]
 	 */
 	private function getPricingGroupReferences(ReferenceRepository $referenceRepository) {
-		$pricingGroups = [
+		return [
 			'ordinary_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1),
 			'ordinary_domain_2' => $referenceRepository->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2),
 			'partner_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1),
 			'vip_domain_1' => $referenceRepository->getReference(PricingGroupDataFixture::VIP_DOMAIN_1),
 			'vip_domain_2' => $referenceRepository->getReference(PricingGroupDataFixture::VIP_DOMAIN_2),
 		];
-
-		return $pricingGroups;
 	}
 
 	/**
