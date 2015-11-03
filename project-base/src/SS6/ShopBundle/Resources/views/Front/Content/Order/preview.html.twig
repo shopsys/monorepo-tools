@@ -13,7 +13,7 @@
 							{{ quantifiedProduct.product.name }}
 						</td>
 						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ quantifiedProductPrice.totalPriceWithVat|price }}
+							{{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
 						</td>
 					</tr>
 					{% if quantifiedProductDiscount is not null %}

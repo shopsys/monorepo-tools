@@ -52,7 +52,7 @@
 							</td>
 
 							<td class="table-cart__price-piece">
-								{{ cartItemPrice.unitPriceWithVat|price }}
+								{{ cartItemPrice.unitPrice.priceWithVat|price }}
 							</td>
 
 							<td>
@@ -69,7 +69,7 @@
 							</td>
 
 							<td class="table-cart__price-final">
-								{{ cartItemPrice.totalPriceWithVat|price }}
+								{{ cartItemPrice.totalPrice.priceWithVat|price }}
 								{% if cartItemDiscount is not null %}
 									<div>
 										{{ 'Sleva' }}:
