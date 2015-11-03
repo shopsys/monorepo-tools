@@ -1,13 +1,17 @@
-SS6 = SS6 || {};
-SS6.number = SS6.number || {};
+(function ($) {
 
-SS6.number.parseNumber = function (value) {
+	SS6 = SS6 || {};
+	SS6.number = SS6.number || {};
 
-	var compareValue = value.toString().replace(',', '.');
-	var regexpNumber = /^[-+]?[0-9]+((\.|,)?[0-9]+)?$/;
-	if (regexpNumber.test(compareValue)) {
-		return parseFloat(compareValue);
-	} else {
-		return null;
+	SS6.number.parseNumber = function (value) {
+
+		var compareValue = value.toString().replace(',', '.');
+		var regexpNumber = /^[-+]?[0-9]+((\.|,)?[0-9]+)?$/;
+		if (regexpNumber.test(compareValue)) {
+			return parseFloat(compareValue);
+		} else {
+			return null;
+		}
 	}
-}
+
+})(jQuery);

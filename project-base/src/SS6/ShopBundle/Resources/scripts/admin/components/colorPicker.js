@@ -1,7 +1,11 @@
-SS6 = window.SS6 || {};
+(function ($) {
 
-SS6.register.registerCallback(function ($container) {
-	$container.find('.js-color-picker').minicolors({
-			theme: 'bootstrap'
-		});
-});
+	SS6 = window.SS6 || {};
+
+	SS6.register.registerCallback(function ($container) {
+		$container.find('.js-color-picker').minicolors({
+				theme: 'bootstrap'
+			});
+	});
+
+})(jQuery);

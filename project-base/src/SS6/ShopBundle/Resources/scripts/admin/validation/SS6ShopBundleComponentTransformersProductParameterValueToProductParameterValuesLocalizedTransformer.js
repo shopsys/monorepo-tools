@@ -1,32 +1,36 @@
-function SS6ShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer() {
+(function ($) {
 
-	this.transform = function(normData) {
-		console.log('transform', normData);
+	function SS6ShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer() {
 
-		return normData;
-	};
+		this.transform = function(normData) {
+			console.log('transform', normData);
 
-	this.reverseTransform = function(viewData) {
-		var normData = [];
+			return normData;
+		};
 
-		for (var i in viewData) {
-			var productParameterValuesLocalized = viewData[i];
+		this.reverseTransform = function(viewData) {
+			var normData = [];
 
-			for (var locale in productParameterValuesLocalized.valueText) {
-				var valueText = productParameterValuesLocalized.valueText[locale];
+			for (var i in viewData) {
+				var productParameterValuesLocalized = viewData[i];
 
-				if (valueText !== '') {
-					var productParameterValue = {
-						parameter: productParameterValuesLocalized.parameter,
-						locale: locale,
-						valueText: valueText
-					};
+				for (var locale in productParameterValuesLocalized.valueText) {
+					var valueText = productParameterValuesLocalized.valueText[locale];
 
-					normData.push(productParameterValue);
+					if (valueText !== '') {
+						var productParameterValue = {
+							parameter: productParameterValuesLocalized.parameter,
+							locale: locale,
+							valueText: valueText
+						};
+
+						normData.push(productParameterValue);
+					}
 				}
 			}
-		}
 
-		return normData;
-	};
-}
+			return normData;
+		};
+	}
+
+})(jQuery);
