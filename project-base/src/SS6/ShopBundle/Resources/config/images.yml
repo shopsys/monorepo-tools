@@ -37,7 +37,7 @@
   sizes:
     - { name: ~, width: ~, height: 20, crop: false }
 
-- name: advert
+- name: noticer
   class: SS6\ShopBundle\Model\Advert\Advert
   sizes:
     - { name: header, width: 1160, height: ~, crop: false }
