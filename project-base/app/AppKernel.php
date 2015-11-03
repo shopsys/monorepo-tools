@@ -13,6 +13,7 @@ class AppKernel extends Kernel {
 			new Craue\FormFlowBundle\CraueFormFlowBundle(),
 			new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
 			new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+			new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
 			new FM\ElfinderBundle\FMElfinderBundle(),
 			new Fp\JsFormValidatorBundle\FpJsFormValidatorBundle(),
 			new Intaro\PostgresSearchBundle\IntaroPostgresSearchBundle(),

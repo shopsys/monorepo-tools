@@ -43,6 +43,7 @@
 		"doctrine/common": "2.5.0",
 		"doctrine/doctrine-bundle": "1.5.0",
 		"doctrine/doctrine-fixtures-bundle": "2.2.0",
+		"doctrine/doctrine-migrations-bundle": "v1.1.0",
 		"doctrine/orm": "2.5.0",
 		"egeloen/ckeditor-bundle": "2.5.0",
 		"fabpot/php-cs-fixer": "1.8.1",
