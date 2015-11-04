@@ -105,7 +105,7 @@ class ProductVisibilityRepository {
 			'domainId' => $domainId,
 		]);
 		if ($productVisibility === null) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProducVisibilitytNotFoundException();
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductVisibilityNotFoundException();
 		}
 
 		return $productVisibility;
