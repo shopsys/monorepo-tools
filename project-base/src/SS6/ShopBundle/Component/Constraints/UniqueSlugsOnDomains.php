@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueSlugsOnDomains extends Constraint {
 
-	public $message = 'Tato adresa již existuje.';
+	public $message = 'Adresa {{ url }} již existuje.';
+	public $messageDuplicate = 'Adresa {{ url }} může být zadána pouze jednou.';
 
 }
