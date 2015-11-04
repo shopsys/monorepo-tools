@@ -3,7 +3,7 @@
 	SS6 = window.SS6 || {};
 	SS6.entityUrls = SS6.entityUrls || {};
 
-	SS6.entityUrls.Widget = function ($entityUrls) {
+	SS6.entityUrls.NewUrl = function ($entityUrls) {
 		var $buttonAdd = $entityUrls.find('.js-entity-url-list-button-add-url');
 		var $newUrlsContainer = $entityUrls.find('.js-entity-url-list-new-urls');
 		var newUrlsId = $newUrlsContainer.attr('id');
@@ -14,7 +14,7 @@
 		};
 
 		var addNewUrl = function () {
-			var prototype = $newUrlsContainer.data('new-url-prototype')
+			var prototype = $newUrlsContainer.data('new-url-prototype');
 			var index = getNextNewUrlIndex();
 			var newUrl = prototype.replace(/__name__/g, index);
 			var $newUrl = $($.parseHTML(newUrl));
@@ -32,7 +32,7 @@
 			}
 
 			return index;
-		}
+		};
 
 		var onClickRemoveNewUrl = function () {
 			var $row = $(this).closest('.js-entity-url-list-new-row');
@@ -45,8 +45,8 @@
 
 	$(document).ready(function () {
 		$('.js-entity-url-list').each(function () {
-			var entityUrlsWidget = new SS6.entityUrls.Widget($(this));
-			entityUrlsWidget.init();
+			var entityUrlsNewUrl = new SS6.entityUrls.NewUrl($(this));
+			entityUrlsNewUrl.init();
 		});
 	});
 
