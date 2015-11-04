@@ -86,7 +86,7 @@ class ProductEditDataFactory {
 
 		$productEditData->urls[UrlListType::TO_DELETE] = [];
 		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
-		$productEditData->urls[UrlListType::NEW_SLUGS_ON_DOMAINS] = [];
+		$productEditData->urls[UrlListType::NEW_URLS] = [];
 
 		return $productEditData;
 	}

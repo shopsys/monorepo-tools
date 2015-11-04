@@ -15,15 +15,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Validator\Constraints;
 
 class UrlListType extends AbstractType {
 
-	const SLUG_REGEX = '/^[\w_\-\/]+$/';
-
 	const TO_DELETE = 'toDelete';
 	const MAIN_ON_DOMAINS = 'mainOnDomains';
-	const NEW_SLUGS_ON_DOMAINS = 'newSlugsOnDomains';
+	const NEW_URLS = 'newUrls';
 
 	/**
 	 * @var \Symfony\Component\Form\FormFactoryInterface
@@ -68,16 +65,15 @@ class UrlListType extends AbstractType {
 
 		$builder->add(self::TO_DELETE, FormType::FORM);
 		$builder->add(self::MAIN_ON_DOMAINS, FormType::FORM);
-		$builder->add(
-			self::NEW_SLUGS_ON_DOMAINS,
-			FormType::FORM,
-			[
-				'constraints' => [
-					new UniqueSlugsOnDomains(),
-				],
-				'error_bubbling' => false,
-			]
-		);
+		$builder->add(self::NEW_URLS, FormType::COLLECTION, [
+			'type' => FormType::FRIENDLY_URL,
+			'required' => false,
+			'allow_add' => true,
+			'error_bubbling' => false,
+			'constraints' => [
+				new UniqueSlugsOnDomains(),
+			],
+		]);
 
 		$friendlyUrlsByDomain = $this->getFriendlyUrlsIndexedByDomain($options['route_name'], $options['entity_id']);
 
@@ -95,23 +91,6 @@ class UrlListType extends AbstractType {
 				'choice_list' => new ObjectChoiceList($friendlyUrls, 'slug', [], null, 'slug'),
 				'data_class' => FriendlyUrl::class,
 				'invalid_message' => 'Původně vybraná hlavní URL již neexistuje',
-			]);
-			$builder->get(self::NEW_SLUGS_ON_DOMAINS)->add($domainId, FormType::COLLECTION, [
-				'type' => FormType::HIDDEN,
-				'required' => false,
-				'allow_add' => true,
-				'constraints' => [
-
-				],
-				'options' => [
-					'constraints' => [
-						new Constraints\NotBlank(),
-						new Constraints\Regex([
-							'pattern' => self::SLUG_REGEX,
-							'message' => 'Url {{ value }} obsahuje nepovolené znaky.',
-						]),
-					],
-				],
 			]);
 		}
 	}

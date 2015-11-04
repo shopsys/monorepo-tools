@@ -157,7 +157,7 @@ class FriendlyUrlFacade {
 			}
 		}
 
-		foreach ($urlListFormData[UrlListType::NEW_SLUGS_ON_DOMAINS] as $domainId => $newSlugs) {
+		foreach ($urlListFormData[UrlListType::NEW_URLS] as $domainId => $newSlugs) {
 			foreach ($newSlugs as $newSlug) {
 				$newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);
 				$this->em->persist($newFriendlyUrl);
