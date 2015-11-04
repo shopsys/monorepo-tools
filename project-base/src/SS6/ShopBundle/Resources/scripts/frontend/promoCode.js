@@ -1,4 +1,5 @@
 (function($) {
+
 	SS6 = SS6 || {};
 	SS6.promoCode = SS6.promoCode || {};
 

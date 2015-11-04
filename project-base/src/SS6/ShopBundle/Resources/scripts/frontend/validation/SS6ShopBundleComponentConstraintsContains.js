@@ -1,22 +1,26 @@
-var SS6ShopBundleComponentConstraintsContains = function() {
-	var self = this;
-	this.message = '';
-	this.needle = null;
+(function ($) {
 
-	this.validate = function (value) {
-		var result = [];
+	var SS6ShopBundleComponentConstraintsContains = function() {
+		var self = this;
+		this.message = '';
+		this.needle = null;
 
-		if (value.indexOf(self.needle) === -1) {
-			result.push(FpJsBaseConstraint.prepareMessage(
-				self.message,
-				{
-					'{{ value }}': '"' + value + '"',
-					'{{ needle }}': '"' + self.needle + '"'
-				}
-			));
-		}
+		this.validate = function (value) {
+			var result = [];
 
-		return result;
+			if (value.indexOf(self.needle) === -1) {
+				result.push(FpJsBaseConstraint.prepareMessage(
+					self.message,
+					{
+						'{{ value }}': '"' + value + '"',
+						'{{ needle }}': '"' + self.needle + '"'
+					}
+				));
+			}
+
+			return result;
+		};
+
 	};
 
-};
+})(jQuery);

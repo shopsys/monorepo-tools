@@ -1,18 +1,22 @@
-var SS6ShopBundleComponentConstraintsUniqueProductParameters = function() {
-	var self = this;
-	this.message = '';
+(function ($) {
 
-	/**
-	 * This method is required
-	 * Should return an error message or an array of messages
-	 */
-	this.validate = function (value) {
-		var uniqueCollectionValidator = new SS6ShopBundleComponentConstraintsUniqueCollection();
-		uniqueCollectionValidator.message = this.message;
-		uniqueCollectionValidator.fields = new Array('parameter', 'locale');
-		uniqueCollectionValidator.allowEmpty = false;
+	var SS6ShopBundleComponentConstraintsUniqueProductParameters = function() {
+		var self = this;
+		this.message = '';
 
-		return uniqueCollectionValidator.validate(value);
+		/**
+		 * This method is required
+		 * Should return an error message or an array of messages
+		 */
+		this.validate = function (value) {
+			var uniqueCollectionValidator = new SS6ShopBundleComponentConstraintsUniqueCollection();
+			uniqueCollectionValidator.message = this.message;
+			uniqueCollectionValidator.fields = new Array('parameter', 'locale');
+			uniqueCollectionValidator.allowEmpty = false;
+
+			return uniqueCollectionValidator.validate(value);
+		};
+
 	};
 
-};
+})(jQuery);

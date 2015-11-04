@@ -1,29 +1,33 @@
-function SymfonyComponentValidatorConstraintsAll() {
-	this.constraints = null;
-	this.groups = null;
+(function ($) {
 
-	this.validate = function (value, element) {
-		var constraints = FpJsFormValidator.parseConstraints(this.constraints);
-		var sourceId = 'form-input-error-' + String(element.id).replace(/_/g, '-');
+	function SymfonyComponentValidatorConstraintsAll() {
+		this.constraints = null;
+		this.groups = null;
 
-		for (var childName in element.children) {
-			var childElement = element.children[childName];
-			var childValue = FpJsFormValidator.getElementValue(childElement);
-			var errorPath = FpJsFormValidator.getErrorPathElement(childElement);
+		this.validate = function (value, element) {
+			var constraints = FpJsFormValidator.parseConstraints(this.constraints);
+			var sourceId = 'form-input-error-' + String(element.id).replace(/_/g, '-');
 
-			var errors = FpJsFormValidator.validateConstraints(
-				childValue,
-				constraints,
-				this.groups,
-				childElement
-			);
+			for (var childName in element.children) {
+				var childElement = element.children[childName];
+				var childValue = FpJsFormValidator.getElementValue(childElement);
+				var errorPath = FpJsFormValidator.getErrorPathElement(childElement);
 
-			FpJsFormValidator.customize(errorPath.domNode, 'showErrors', {
-				errors: errors,
-				sourceId: sourceId
-			});
-		}
+				var errors = FpJsFormValidator.validateConstraints(
+					childValue,
+					constraints,
+					this.groups,
+					childElement
+				);
 
-		return [];
-	};
-}
+				FpJsFormValidator.customize(errorPath.domNode, 'showErrors', {
+					errors: errors,
+					sourceId: sourceId
+				});
+			}
+
+			return [];
+		};
+	}
+
+})(jQuery);

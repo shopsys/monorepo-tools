@@ -1,20 +1,24 @@
-var SS6ShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
-	this.message = '';
+(function ($) {
 
-	this.validate = function(value, ele) {
-		var anyDomainSelected = false;
+	var SS6ShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
+		this.message = '';
 
-		for (var i in value) {
-			if (value[i] === true) {
-				anyDomainSelected = true;
-				break;
+		this.validate = function(value, ele) {
+			var anyDomainSelected = false;
+
+			for (var i in value) {
+				if (value[i] === true) {
+					anyDomainSelected = true;
+					break;
+				}
 			}
-		}
 
-		if (!anyDomainSelected) {
-			return this.message;
-		} else {
-			return [];
-		}
+			if (!anyDomainSelected) {
+				return this.message;
+			} else {
+				return [];
+			}
+		};
 	};
-};
+
+})(jQuery);
