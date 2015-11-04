@@ -604,6 +604,17 @@
 	</div>
 {% endblock yes_no_widget %}
 
+{% block domain_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
+	<select {{ block('widget_attributes') }}>
+		{% for domainConfig in domainConfigs %}
+			<option value="{{ domainConfig.id }}"{{ domainConfig.id == form.vars.value ? ' selected=""' : '' }}>
+				{{ domainConfig.name }}
+			</option>
+		{% endfor %}
+	</select>
+{% endblock domain_widget %}
+
 {% block domains_widget %}
 	{% spaceless %}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
