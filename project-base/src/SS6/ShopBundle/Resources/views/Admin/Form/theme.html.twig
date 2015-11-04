@@ -609,7 +609,11 @@
 	<select {{ block('widget_attributes') }}>
 		{% for domainConfig in domainConfigs %}
 			<option value="{{ domainConfig.id }}"{{ domainConfig.id == form.vars.value ? ' selected=""' : '' }}>
-				{{ domainConfig.name }}
+				{% if displayUrl %}
+					{{ domainConfig.url }}
+				{% else %}
+					{{ domainConfig.name }}
+				{% endif %}
 			</option>
 		{% endfor %}
 	</select>

@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DomainType extends AbstractType {
 
@@ -26,6 +27,16 @@ class DomainType extends AbstractType {
 	 */
 	public function buildView(FormView $view, FormInterface $form, array $options) {
 		$view->vars['domainConfigs'] = $this->domain->getAll();
+		$view->vars['displayUrl'] = $options['displayUrl'];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$resolver->setDefaults([
+			'displayUrl' => false,
+		]);
 	}
 
 	/**
