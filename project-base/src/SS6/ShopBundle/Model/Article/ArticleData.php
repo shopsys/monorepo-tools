@@ -37,7 +37,7 @@ class ArticleData {
 	public $domainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
+	 * @var array
 	 */
 	public $urls;
 
@@ -47,7 +47,11 @@ class ArticleData {
 	public $placement;
 
 	public function __construct() {
-		$this->urls[UrlListType::TO_DELETE] = [];
+		$this->urls = [
+			UrlListType::TO_DELETE => [],
+			UrlListType::MAIN_ON_DOMAINS => [],
+			UrlListType::NEW_URLS => [],
+		];
 	}
 
 	/**
