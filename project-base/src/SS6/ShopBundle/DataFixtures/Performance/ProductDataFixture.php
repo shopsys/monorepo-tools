@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
@@ -80,6 +81,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
+			$this->setRandomProductEditDataCategories($productEditData);
 			$product = $productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -235,6 +237,28 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function getDependencies() {
 		return ProductDataFixtureReferenceInjector::getDependencies();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	private function setRandomProductEditDataCategories(ProductEditData $productEditData) {
+		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 1);
+		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 2);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param int $domainId
+	 */
+	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
+		$categoryRepository = $this->get(CategoryRepository::class);
+		/* @var $categoryRepository \SS6\ShopBundle\Model\Category\CategoryRepository */
+		$allCategoryIds = $categoryRepository->getAllIds();
+
+		$randomCategoryIds = (array)array_rand($allCategoryIds, rand(1, 4));
+		$randomCategories = $categoryRepository->getCategoriesByIds($randomCategoryIds);
+		$productEditData->productData->categoriesByDomainId[$domainId] = $randomCategories;
 	}
 
 }

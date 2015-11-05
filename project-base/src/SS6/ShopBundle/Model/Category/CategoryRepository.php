@@ -65,6 +65,18 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @return int[]
+	 */
+	public function getAllIds() {
+		$result = $this->getAllQueryBuilder()
+			->select('c.id')
+			->getQuery()
+			->getScalarResult();
+
+		return array_map('current', $result);
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function getRootCategory() {
@@ -334,5 +346,18 @@ class CategoryRepository extends NestedTreeRepository {
 		$result = $queryBuilder->getQuery()->getScalarResult();
 
 		return array_map('current', $result);
+	}
+
+	/**
+	 * @param int[] $categoryIds
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getCategoriesByIds(array $categoryIds) {
+		$queryBuilder = $this->getAllQueryBuilder();
+		$queryBuilder
+			->andWhere('c.id IN (:categoryIds)')
+			->setParameter('categoryIds', $categoryIds);
+
+		return $queryBuilder->getQuery()->getResult();
 	}
 }
