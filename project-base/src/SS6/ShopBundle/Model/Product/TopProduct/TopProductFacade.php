@@ -47,8 +47,8 @@ class TopProductFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricigGroup
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
-	public function getAllVisibleProductDetails($domainId, $pricigGroup) {
-		$products = $this->topProductRepository->getVisibleProductsForTopProductsOnDomain($domainId, $pricigGroup);
+	public function getAllOfferedProductDetails($domainId, $pricigGroup) {
+		$products = $this->topProductRepository->getOfferedProductsForTopProductsOnDomain($domainId, $pricigGroup);
 		return $this->productDetailFactory->getDetailsForProducts($products);
 	}
 

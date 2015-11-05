@@ -21,6 +21,9 @@ use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\Search\ProductSearchRepository;
 use SS6\ShopBundle\Model\Product\Unit\Unit;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ */
 class ProductRepository {
 
 	/**
