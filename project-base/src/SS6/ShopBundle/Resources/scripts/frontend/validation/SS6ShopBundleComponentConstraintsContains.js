@@ -1,6 +1,6 @@
 (function ($) {
 
-	var SS6ShopBundleComponentConstraintsContains = function() {
+	SS6ShopBundleComponentConstraintsContains = function() {
 		var self = this;
 		this.message = '';
 		this.needle = null;

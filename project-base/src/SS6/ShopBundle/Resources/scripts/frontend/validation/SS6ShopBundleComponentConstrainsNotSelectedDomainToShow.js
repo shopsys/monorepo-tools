@@ -1,6 +1,6 @@
 (function ($) {
 
-	var SS6ShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
+	SS6ShopBundleComponentConstraintsNotSelectedDomainToShow = function() {
 		this.message = '';
 
 		this.validate = function(value, ele) {

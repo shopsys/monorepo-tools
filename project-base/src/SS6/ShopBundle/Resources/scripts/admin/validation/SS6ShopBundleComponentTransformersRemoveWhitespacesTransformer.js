@@ -1,6 +1,6 @@
 (function ($) {
 
-	function SS6ShopBundleComponentTransformersRemoveWhitespacesTransformer() {
+	SS6ShopBundleComponentTransformersRemoveWhitespacesTransformer = function() {
 		this.reverseTransform = function(value, ele) {
 			return value.replace(/\s/g, '');
 		};

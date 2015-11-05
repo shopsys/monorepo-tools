@@ -1,6 +1,6 @@
 (function ($) {
 
-	function SS6ShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer() {
+	SS6ShopBundleComponentTransformersProductParameterValueToProductParameterValuesLocalizedTransformer = function() {
 
 		this.transform = function(normData) {
 			console.log('transform', normData);

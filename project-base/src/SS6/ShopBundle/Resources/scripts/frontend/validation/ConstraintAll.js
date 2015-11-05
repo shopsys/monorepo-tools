@@ -1,6 +1,6 @@
 (function ($) {
 
-	function SymfonyComponentValidatorConstraintsAll() {
+	SymfonyComponentValidatorConstraintsAll = function() {
 		this.constraints = null;
 		this.groups = null;
 

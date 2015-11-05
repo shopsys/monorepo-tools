@@ -1,6 +1,6 @@
 (function ($) {
 
-	var SS6ShopBundleComponentConstraintsUniqueProductParameters = function() {
+	SS6ShopBundleComponentConstraintsUniqueProductParameters = function() {
 		var self = this;
 		this.message = '';
 
