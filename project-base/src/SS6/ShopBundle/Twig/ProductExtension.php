@@ -2,20 +2,10 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Product\Product;
 use Twig_SimpleFilter;
 
 class ProductExtension extends \Twig_Extension {
-
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
-	public function __construct(Translator $translator) {
-		$this->translator = $translator;
-	}
 
 	/**
 	 * @return array
@@ -40,7 +30,7 @@ class ProductExtension extends \Twig_Extension {
 	 */
 	public function getProductDisplayName(Product $product) {
 		if ($product->getName() === null) {
-			return $this->translator->trans('ID %productId%', [
+			return t('ID %productId%', [
 				'%productId%' => $product->getId(),
 			]);
 		}
@@ -54,7 +44,7 @@ class ProductExtension extends \Twig_Extension {
 	 */
 	public function getProductListDisplayName(Product $product) {
 		if ($product->getName() === null) {
-			return $this->translator->trans('Český název zboží není vyplněn');
+			return t('Český název zboží není vyplněn');
 		}
 
 		return $product->getName();

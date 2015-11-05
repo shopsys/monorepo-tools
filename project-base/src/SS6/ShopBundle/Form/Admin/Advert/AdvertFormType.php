@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Advert;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Advert\Advert;
@@ -30,12 +29,10 @@ class AdvertFormType extends AbstractType {
 
 	/**
 	 * @param bool $imageUploaded
-	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 * @param array $advertPositionsLocalizedNamesByName
 	 */
-	public function __construct($imageUploaded, Translator $translator, array $advertPositionsLocalizedNamesByName) {
+	public function __construct($imageUploaded, array $advertPositionsLocalizedNamesByName) {
 		$this->imageUploaded = $imageUploaded;
-		$this->translator = $translator;
 		$this->advertPositionsLocalizedNamesByName = $advertPositionsLocalizedNamesByName;
 	}
 
@@ -78,7 +75,7 @@ class AdvertFormType extends AbstractType {
 			->add('positionName', FormType::CHOICE, [
 				'required' => true,
 				'choices' => $this->advertPositionsLocalizedNamesByName,
-				'placeholder' => $this->translator->trans('-- Vyberte plochu --'),
+				'placeholder' => t('-- Vyberte plochu --'),
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyberte reklamní plochu']),
 				],
@@ -139,8 +136,8 @@ class AdvertFormType extends AbstractType {
 	 */
 	private function getTypeChoices() {
 		return [
-			Advert::TYPE_CODE => $this->translator->trans('HTML kód'),
-			Advert::TYPE_IMAGE => $this->translator->trans('Obrázek s odkazem'),
+			Advert::TYPE_CODE => t('HTML kód'),
+			Advert::TYPE_IMAGE => t('Obrázek s odkazem'),
 		];
 	}
 

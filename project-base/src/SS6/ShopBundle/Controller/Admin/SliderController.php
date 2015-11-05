@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -44,20 +43,13 @@ class SliderController extends AdminBaseController {
 	 */
 	private $sliderItemFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		SliderItemFacade $sliderItemFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		SliderItemFormTypeFactory $sliderItemFormTypeFactory,
 		Breadcrumb $breadcrumb
 	) {
-		$this->translator = $translator;
 		$this->sliderItemFacade = $sliderItemFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -168,7 +160,7 @@ class SliderController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace stránky slideru - ') . $sliderItem->getName())
+			new MenuItem(t('Editace stránky slideru - ') . $sliderItem->getName())
 		);
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', [

@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -48,13 +47,7 @@ class CategoryController extends AdminBaseController {
 	 */
 	private $session;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		CategoryFacade $categoryFacade,
 		CategoryFormTypeFactory $categoryFormTypeFactory,
 		CategoryDataFactory $categoryDataFactory,
@@ -62,7 +55,6 @@ class CategoryController extends AdminBaseController {
 		Domain $domain,
 		Breadcrumb $breadcrumb
 	) {
-		$this->translator = $translator;
 		$this->categoryFacade = $categoryFacade;
 		$this->categoryFormTypeFactory = $categoryFormTypeFactory;
 		$this->categoryDataFactory = $categoryDataFactory;
@@ -105,7 +97,7 @@ class CategoryController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace kategorie - ') . $category->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace kategorie - ') . $category->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', [
 			'form' => $form->createView(),

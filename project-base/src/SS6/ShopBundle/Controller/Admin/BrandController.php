@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -18,11 +17,6 @@ use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BrandController extends AdminBaseController {
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -48,14 +42,12 @@ class BrandController extends AdminBaseController {
 		BrandFacade $brandFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
-		Breadcrumb $breadcrumb,
-		Translator $translator
+		Breadcrumb $breadcrumb
 	) {
 		$this->brandFacade = $brandFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -92,7 +84,7 @@ class BrandController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace značky - ') . $brand->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace značky - ') . $brand->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Brand/edit.html.twig', [
 			'form' => $form->createView(),

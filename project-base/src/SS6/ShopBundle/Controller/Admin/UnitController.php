@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 use SS6\ShopBundle\Model\Product\Unit\UnitInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,21 +28,14 @@ class UnitController extends AdminBaseController {
 	 */
 	private $confirmDeleteResponseFactory;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		UnitFacade $unitFacade,
 		UnitInlineEdit $unitInlineEdit,
-		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-		Translator $translator
+		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
 		$this->unitFacade = $unitFacade;
 		$this->unitInlineEdit = $unitInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -68,7 +60,7 @@ class UnitController extends AdminBaseController {
 			$unit = $this->unitFacade->getById($id);
 
 			if ($this->unitFacade->isUnitUsed($unit)) {
-				$message = $this->translator->trans(
+				$message = t(
 					'Pro odstranění jednotky "%name% musíte zvolit, která se má všude, '
 					. 'kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?',
 					['%name%' => $unit->getName()]
@@ -77,7 +69,7 @@ class UnitController extends AdminBaseController {
 
 				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_unit_delete', $id, $unitNamesById);
 			} else {
-				$message = $this->translator->trans(
+				$message = t(
 					'Opravdu si přejete trvale odstranit jednotku "%name%"? Nikde není použita.',
 					['%name%' => $unit->getName()]
 				);
@@ -85,7 +77,7 @@ class UnitController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_unit_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolená jednotka neexistuje'));
+			return new Response(t('Zvolená jednotka neexistuje'));
 		}
 	}
 

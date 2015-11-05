@@ -2,8 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-
 class FeedConfigRepository {
 
 	/**
@@ -16,19 +14,12 @@ class FeedConfigRepository {
 	 */
 	private $heurekaDeliveryItemIteratorFactory;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		FeedItemIteratorFactoryInterface $heurekaItemIteratorFactory,
-		FeedItemIteratorFactoryInterface $heurekaDeliveryItemIteratorFactory,
-		Translator $translator
+		FeedItemIteratorFactoryInterface $heurekaDeliveryItemIteratorFactory
 	) {
 		$this->heurekaItemIteratorFactory = $heurekaItemIteratorFactory;
 		$this->heurekaDeliveryItemIteratorFactory = $heurekaDeliveryItemIteratorFactory;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -54,7 +45,7 @@ class FeedConfigRepository {
 		$feedConfigs = [];
 
 		$feedConfigs[] = new FeedConfig(
-			$this->translator->trans('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),
+			t('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),
 			'heureka_delivery',
 			'@SS6Shop/Feed/heurekaDelivery.xml.twig',
 			$this->heurekaDeliveryItemIteratorFactory

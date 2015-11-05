@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Item\OrderItem;
@@ -52,19 +51,13 @@ class OrderCreationService {
 	 */
 	private $domain;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		OrderPriceCalculation $orderPriceCalculation,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		Domain $domain,
-		Translator $translator
+		Domain $domain
 	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
@@ -72,7 +65,6 @@ class OrderCreationService {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->domain = $domain;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -225,7 +217,7 @@ class OrderCreationService {
 		if ($orderPreview->getRoundingPrice() !== null) {
 			new OrderProduct(
 				$order,
-				$this->translator->trans('Zaokrouhlení', [], 'messages', $locale),
+				t('Zaokrouhlení', [], 'messages', $locale),
 				$orderPreview->getRoundingPrice(),
 				0,
 				1,
@@ -244,7 +236,7 @@ class OrderCreationService {
 	private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale) {
 		new OrderProduct(
 			$orderItem->getOrder(),
-			$this->translator->trans('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
+			t('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
 			new Price(
 				-$discount->getPriceWithoutVat(),
 				-$discount->getPriceWithVat()

@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
@@ -62,11 +61,6 @@ class OrderController extends AdminBaseController {
 	private $orderFormTypeFactory;
 
 	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
 	 */
 	private $orderItemFacade;
@@ -84,7 +78,6 @@ class OrderController extends AdminBaseController {
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
-		Translator $translator,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
@@ -96,7 +89,6 @@ class OrderController extends AdminBaseController {
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
-		$this->translator = $translator;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
@@ -150,7 +142,7 @@ class OrderController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace objednávky - č. ') . $order->getNumber()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace objednávky - č. ') . $order->getNumber()));
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 

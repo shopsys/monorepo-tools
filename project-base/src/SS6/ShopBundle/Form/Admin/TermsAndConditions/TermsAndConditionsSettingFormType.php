@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\TermsAndConditions;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -17,16 +16,10 @@ class TermsAndConditionsSettingFormType extends AbstractType {
 	private $articles;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Article\Article[] $articles
 	 */
-	public function __construct(array $articles, Translator $translator) {
+	public function __construct(array $articles) {
 		$this->articles = $articles;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -45,7 +38,7 @@ class TermsAndConditionsSettingFormType extends AbstractType {
 				->add('termsAndConditionsArticle', FormType::CHOICE, [
 					'required' => false,
 					'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
-					'placeholder' => $this->translator->trans('-- Vyberte článek --'),
+					'placeholder' => t('-- Vyberte článek --'),
 				])
 				->add('save', FormType::SUBMIT);
 	}

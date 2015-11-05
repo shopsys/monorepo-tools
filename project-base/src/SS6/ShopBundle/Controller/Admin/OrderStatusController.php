@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,18 +28,11 @@ class OrderStatusController extends AdminBaseController {
 	 */
 	private $orderStatusFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		OrderStatusFacade $orderStatusFacade,
 		OrderStatusInlineEdit $orderStatusInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
-		$this->translator = $translator;
 		$this->orderStatusFacade = $orderStatusFacade;
 		$this->orderStatusInlineEdit = $orderStatusInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -112,7 +104,7 @@ class OrderStatusController extends AdminBaseController {
 		try {
 			$orderStatus = $this->orderStatusFacade->getById($id);
 			if ($this->orderStatusFacade->isOrderStatusUsed($orderStatus)) {
-				$message = $this->translator->trans(
+				$message = t(
 					'Jelikož stav "%name%" je používán ještě u některých objednávek, '
 					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
 					. 'Při této změně stavu nebude odeslán email zákazníkům.',
@@ -130,7 +122,7 @@ class OrderStatusController extends AdminBaseController {
 					$ordersStatusNamesById
 				);
 			} else {
-				$message = $this->translator->trans(
+				$message = t(
 					'Opravdu si přejete trvale odstranit stav objednávek "%name%"? Nikde není použitý.',
 					['%name%' => $orderStatus->getName()]
 				);
@@ -138,7 +130,7 @@ class OrderStatusController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolený stav objednávek neexistuje'));
+			return new Response(t('Zvolený stav objednávek neexistuje'));
 		}
 	}
 

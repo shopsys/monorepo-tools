@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
@@ -30,18 +29,11 @@ class AvailabilityController extends AdminBaseController {
 	 */
 	private $availabilityInlineEdit;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		AvailabilityFacade $availabilityFacade,
 		AvailabilityInlineEdit $availabilityInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
-		$this->translator = $translator;
 		$this->availabilityFacade = $availabilityFacade;
 		$this->availabilityInlineEdit = $availabilityInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -106,14 +98,14 @@ class AvailabilityController extends AdminBaseController {
 			$isAvailabilityDefault = $this->availabilityFacade->isAvailabilityDefault($availability);
 			if ($this->availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
 				if ($isAvailabilityDefault) {
-					$message = $this->translator->trans(
+					$message = t(
 						'Dostupnost "%name%" je nastavena jako výchozí. '
 						. 'Pro její odstranění musíte zvolit, která se má všude, '
 						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou dostupnost místo ní chcete nastavit?',
 						['%name%' => $availability->getName()]
 					);
 				} else {
-					$message = $this->translator->trans(
+					$message = t(
 						'Jelikož dostupnost "%name%" je používána ještě u některých produktů, '
 						. 'musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?',
 						['%name%' => $availability->getName()]
@@ -131,7 +123,7 @@ class AvailabilityController extends AdminBaseController {
 					$availabilityNamesById
 				);
 			} else {
-				$message = $this->translator->trans(
+				$message = t(
 					'Opravdu si přejete trvale odstranit dostupnost "%name%"? Nikde není použitá.',
 					['%name%' => $availability->getName()]
 				);
@@ -139,7 +131,7 @@ class AvailabilityController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolená dostupnost neexistuje'));
+			return new Response(t('Zvolená dostupnost neexistuje'));
 		}
 	}
 

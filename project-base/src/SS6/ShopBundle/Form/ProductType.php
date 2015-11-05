@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form;
 
 use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
-use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -17,17 +16,10 @@ class ProductType extends AbstractType {
 	 */
 	private $productIdToProductTransformer;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		ProductIdToProductTransformer $productIdToProductTransformer,
-		Translator $translator
+		ProductIdToProductTransformer $productIdToProductTransformer
 	) {
 		$this->productIdToProductTransformer = $productIdToProductTransformer;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -77,7 +69,7 @@ class ProductType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
-			'placeholder' => $this->translator->trans('Vyberte produkt'),
+			'placeholder' => t('Vyberte produkt'),
 			'enableRemove' => false,
 			'required' => true,
 			'allow_main_variants' => true,

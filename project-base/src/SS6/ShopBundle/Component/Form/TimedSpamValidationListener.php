@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Component\Form;
 
 use SS6\ShopBundle\Component\Form\FormTimeProvider;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;
@@ -11,11 +10,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 class TimedSpamValidationListener implements EventSubscriberInterface {
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Form\FormTimeProvider
@@ -28,12 +22,10 @@ class TimedSpamValidationListener implements EventSubscriberInterface {
 	private $options;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 * @param \SS6\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
 	 * @param array $options
 	 */
-	public function __construct(Translator $translator, FormTimeProvider $formTimeProvider, array $options) {
-		$this->translator = $translator;
+	public function __construct(FormTimeProvider $formTimeProvider, array $options) {
 		$this->formTimeProvider = $formTimeProvider;
 		$this->options = $options;
 	}
@@ -47,7 +39,7 @@ class TimedSpamValidationListener implements EventSubscriberInterface {
 			$form->getConfig()->getOption('compound') &&
 			!$this->formTimeProvider->isFormTimeValid($form->getName(), $this->options)
 		) {
-			$message = $this->translator->transChoice(
+			$message = tc(
 				'{1} Před odesláním formuláře musíte počkat %seconds% vteřinu.
 				|[2,4] Před odesláním formuláře musíte počkat %seconds% vteřiny.
 				|[5,Inf] Před odesláním formuláře musíte počkat %seconds% vteřin.',

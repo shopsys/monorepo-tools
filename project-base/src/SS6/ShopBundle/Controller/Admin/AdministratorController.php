@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
@@ -36,11 +35,6 @@ class AdministratorController extends AdminBaseController {
 	private $gridFactory;
 
 	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
 	 */
 	private $administratorActivityFacade;
@@ -49,13 +43,11 @@ class AdministratorController extends AdminBaseController {
 		AdministratorFacade $administratorFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Translator $translator,
 		AdministratorActivityFacade $administratorActivityFacade
 	) {
 		$this->administratorFacade = $administratorFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
-		$this->translator = $translator;
 		$this->administratorActivityFacade = $administratorActivityFacade;
 	}
 
@@ -142,7 +134,7 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace administrátora - ') . $administrator->getRealName())
+			new MenuItem(t('Editace administrátora - ') . $administrator->getRealName())
 		);
 
 		$lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(

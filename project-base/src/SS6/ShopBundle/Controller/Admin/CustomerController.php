@@ -10,7 +10,6 @@ use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\LoginController;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
@@ -39,11 +38,6 @@ class CustomerController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
-
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerListAdminFacade
@@ -102,7 +96,6 @@ class CustomerController extends AdminBaseController {
 
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		Translator $translator,
 		CustomerListAdminFacade $customerListAdminFacade,
 		CustomerEditFacade $customerEditFacade,
 		CustomerFormTypeFactory $customerFormTypeFactory,
@@ -116,7 +109,6 @@ class CustomerController extends AdminBaseController {
 		DomainRouterFactory $domainRouterFactory
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->translator = $translator;
 		$this->customerListAdminFacade = $customerListAdminFacade;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->customerFormTypeFactory = $customerFormTypeFactory;
@@ -173,7 +165,7 @@ class CustomerController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace zákazníka - ') . $user->getFullName()));
 
 		$orders = $this->orderFacade->getCustomerOrderList($user);
 

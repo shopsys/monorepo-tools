@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -20,11 +19,6 @@ use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController {
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -68,7 +62,6 @@ class AdvertController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		AdvertFormTypeFactory $advertFormTypeFactory,
-		Translator $translator,
 		AdvertPositionList $advertPositionList
 	) {
 		$this->advertEditFacade = $advertEditFacade;
@@ -77,7 +70,6 @@ class AdvertController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->advertFormTypeFactory = $advertFormTypeFactory;
-		$this->translator = $translator;
 		$this->advertPositionList = $advertPositionList;
 	}
 
@@ -117,7 +109,7 @@ class AdvertController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace reklamy - ') . $advert->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace reklamy - ') . $advert->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/edit.html.twig', [
 			'form' => $form->createView(),

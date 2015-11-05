@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -53,13 +52,7 @@ class TransportController extends AdminBaseController {
 	 */
 	private $transportEditFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		TransportEditFacade $transportEditFacade,
 		TransportGridFactory $transportGridFactory,
 		TransportEditFormTypeFactory $transportEditFormTypeFactory,
@@ -68,7 +61,6 @@ class TransportController extends AdminBaseController {
 		TransportDetailFactory $transportDetailFactory,
 		Breadcrumb $breadcrumb
 	) {
-		$this->translator = $translator;
 		$this->transportEditFacade = $transportEditFacade;
 		$this->transportGridFactory = $transportGridFactory;
 		$this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
@@ -146,7 +138,7 @@ class TransportController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace dopravy - ') . $transport->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace dopravy - ') . $transport->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),

@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 
 class AvailabilityGridFactory implements GridFactoryInterface {
@@ -28,21 +27,14 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -60,13 +52,13 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('dispatchTime');
 
-		$grid->addColumn('name', 'at.name', $this->translator->trans('Název'), true);
-		$grid->addColumn('dispatchTime', 'a.dispatchTime', $this->translator->trans('Počet dní k expedici'), true);
+		$grid->addColumn('name', 'at.name', t('Název'), true);
+		$grid->addColumn('dispatchTime', 'a.dispatchTime', t('Počet dní k expedici'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_availability_deleteconfirm',
 				['id' => 'a.id']
 			)

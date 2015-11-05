@@ -3,18 +3,8 @@
 namespace SS6\ShopBundle\Component\ConstantList;
 
 use SS6\ShopBundle\Component\ConstantList\TranslatedConstantListInterface;
-use SS6\ShopBundle\Component\Translation\Translator;
 
 abstract class AbstractTranslatedConstantList implements TranslatedConstantListInterface {
-
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	protected $translator;
-
-	public function __construct(Translator $translator) {
-		$this->translator = $translator;
-	}
 
 	/**
 	 * @return string

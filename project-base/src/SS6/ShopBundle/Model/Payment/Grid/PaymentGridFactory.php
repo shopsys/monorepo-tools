@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use SS6\ShopBundle\Model\Payment\Payment;
@@ -43,25 +42,18 @@ class PaymentGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		PaymentRepository $paymentRepository,
 		PaymentDetailFactory $paymentDetailFactory,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->paymentRepository = $paymentRepository;
 		$this->paymentDetailFactory = $paymentDetailFactory;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -84,23 +76,23 @@ class PaymentGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('paymentList', $dataSource);
 		$grid->enableDragAndDrop(Payment::class);
 
-		$grid->addColumn('name', 'pt.name', $this->translator->trans('Název'));
-		$grid->addColumn('price', 'paymentDetail', $this->translator->trans('Cena'));
+		$grid->addColumn('name', 'pt.name', t('Název'));
+		$grid->addColumn('price', 'paymentDetail', t('Cena'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 			ActionColumn::TYPE_EDIT,
-			$this->translator->trans('Upravit'),
+			t('Upravit'),
 			'admin_payment_edit',
 			['id' => 'p.id']
 		);
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_payment_delete',
 				['id' => 'p.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tuto platbu?'));
+			->setConfirmMessage(t('Opravdu chcete odstranit tuto platbu?'));
 
 		$grid->setTheme(
 			'@SS6Shop/Admin/Content/Payment/listGrid.html.twig',

@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Advert;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Advert\Advert;
 use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Twig\ImageExtension;
@@ -15,23 +14,16 @@ class AdvertFormTypeFactory {
 	private $advertPositionList;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Twig\ImageExtension
 	 */
 	private $imageExtension;
 
 	public function __construct(
 		ImageExtension $imageExtension,
-		AdvertPositionList $advertPositionList,
-		Translator $translator
+		AdvertPositionList $advertPositionList
 	) {
 		$this->imageExtension = $imageExtension;
 		$this->advertPositionList = $advertPositionList;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -46,7 +38,6 @@ class AdvertFormTypeFactory {
 
 		return new AdvertFormType(
 			$imageExists,
-			$this->translator,
 			$this->advertPositionList->getTranslationsIndexedByValue()
 		);
 	}

@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
@@ -55,17 +54,11 @@ class MailController extends AdminBaseController {
 	private $orderMailService;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
 	 */
 	private $orderStatusFacade;
 
 	public function __construct(
-		Translator $translator,
 		AllMailTemplatesFormTypeFactory $allMailTemplatesFormTypeFactory,
 		ResetPasswordMail $resetPasswordMail,
 		OrderMailService $orderMailService,
@@ -75,7 +68,6 @@ class MailController extends AdminBaseController {
 		MailSettingFacade $mailSettingFacade,
 		OrderStatusFacade $orderStatusFacade
 	) {
-		$this->translator = $translator;
 		$this->allMailTemplatesFormTypeFactory = $allMailTemplatesFormTypeFactory;
 		$this->resetPasswordMail = $resetPasswordMail;
 		$this->orderMailService = $orderMailService;
@@ -91,23 +83,23 @@ class MailController extends AdminBaseController {
 	 */
 	private function getOrderStatusVariablesLabels() {
 		return [
-			OrderMailService::VARIABLE_NUMBER => $this->translator->trans('Číslo objednávky'),
-			OrderMailService::VARIABLE_DATE => $this->translator->trans('Datum a čas vytvoření objednávky'),
-			OrderMailService::VARIABLE_URL => $this->translator->trans('URL adresa e-shopu'),
-			OrderMailService::VARIABLE_TRANSPORT => $this->translator->trans('Název zvolené dopravy'),
-			OrderMailService::VARIABLE_PAYMENT => $this->translator->trans('Název zvolené platby'),
-			OrderMailService::VARIABLE_TOTAL_PRICE => $this->translator->trans('Celková cena za objednávku (s DPH)'),
-			OrderMailService::VARIABLE_BILLING_ADDRESS => $this->translator->trans(
+			OrderMailService::VARIABLE_NUMBER => t('Číslo objednávky'),
+			OrderMailService::VARIABLE_DATE => t('Datum a čas vytvoření objednávky'),
+			OrderMailService::VARIABLE_URL => t('URL adresa e-shopu'),
+			OrderMailService::VARIABLE_TRANSPORT => t('Název zvolené dopravy'),
+			OrderMailService::VARIABLE_PAYMENT => t('Název zvolené platby'),
+			OrderMailService::VARIABLE_TOTAL_PRICE => t('Celková cena za objednávku (s DPH)'),
+			OrderMailService::VARIABLE_BILLING_ADDRESS => t(
 				'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa'
 			),
-			OrderMailService::VARIABLE_DELIVERY_ADDRESS => $this->translator->trans('Dodací adresa'),
-			OrderMailService::VARIABLE_NOTE => $this->translator->trans('Poznámka'),
-			OrderMailService::VARIABLE_PRODUCTS => $this->translator->trans(
+			OrderMailService::VARIABLE_DELIVERY_ADDRESS => t('Dodací adresa'),
+			OrderMailService::VARIABLE_NOTE => t('Poznámka'),
+			OrderMailService::VARIABLE_PRODUCTS => t(
 				'Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)'
 			),
-			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $this->translator->trans('URL adresa detailu objednávky'),
-			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $this->translator->trans('Pokyny k dopravě'),
-			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $this->translator->trans('Pokyny k platbě'),
+			OrderMailService::VARIABLE_ORDER_DETAIL_URL => t('URL adresa detailu objednávky'),
+			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => t('Pokyny k dopravě'),
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => t('Pokyny k platbě'),
 		];
 	}
 
@@ -116,11 +108,11 @@ class MailController extends AdminBaseController {
 	 */
 	private function getRegistrationVariablesLabels() {
 		return [
-			CustomerMailService::VARIABLE_FIRST_NAME => $this->translator->trans('Jméno'),
-			CustomerMailService::VARIABLE_LAST_NAME => $this->translator->trans('Příjmení'),
-			CustomerMailService::VARIABLE_EMAIL => $this->translator->trans('Email'),
-			CustomerMailService::VARIABLE_URL => $this->translator->trans('URL adresa e-shopu'),
-			CustomerMailService::VARIABLE_LOGIN_PAGE => $this->translator->trans('Odkaz na stránku s přihlášením'),
+			CustomerMailService::VARIABLE_FIRST_NAME => t('Jméno'),
+			CustomerMailService::VARIABLE_LAST_NAME => t('Příjmení'),
+			CustomerMailService::VARIABLE_EMAIL => t('Email'),
+			CustomerMailService::VARIABLE_URL => t('URL adresa e-shopu'),
+			CustomerMailService::VARIABLE_LOGIN_PAGE => t('Odkaz na stránku s přihlášením'),
 		];
 	}
 
@@ -129,8 +121,8 @@ class MailController extends AdminBaseController {
 	 */
 	private function getResetPasswordVariablesLabels() {
 		return [
-			ResetPasswordMail::VARIABLE_EMAIL => $this->translator->trans('Email'),
-			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => $this->translator->trans('URL adresa pro nastavení nového hesla'),
+			ResetPasswordMail::VARIABLE_EMAIL => t('Email'),
+			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => t('URL adresa pro nastavení nového hesla'),
 		];
 	}
 

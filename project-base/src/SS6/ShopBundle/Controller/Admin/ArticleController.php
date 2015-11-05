@@ -10,7 +10,6 @@ use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -28,11 +27,6 @@ class ArticleController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -88,7 +82,6 @@ class ArticleController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		Translator $translator,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		TermsAndConditionsFacade $termsAndConditionsFacade
 	) {
@@ -100,7 +93,6 @@ class ArticleController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
-		$this->translator = $translator;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
 	}
@@ -141,7 +133,7 @@ class ArticleController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace článku - ') . $article->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace článku - ') . $article->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
@@ -233,7 +225,7 @@ class ArticleController extends AdminBaseController {
 	public function deleteConfirmAction($id) {
 		$article = $this->articleEditFacade->getById($id);
 		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
-			$message = $this->translator->trans(
+			$message = t(
 				'Článek "%name%" je nastaven pro zobrazení obchodních podmínek.
 				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
 				['%name%' => $article->getName()]

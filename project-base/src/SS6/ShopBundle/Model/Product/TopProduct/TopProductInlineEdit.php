@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\TopProduct;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
 use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductFormType;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
@@ -25,11 +24,6 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 	private $productIdToProductTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
@@ -39,12 +33,10 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 		TopProductGridFactory $topProductGridFactory,
 		TopProductFacade $topProductFacade,
 		ProductIdToProductTransformer $productIdToProductTransformer,
-		Translator $translator,
 		SelectedDomain $selectedDomain
 	) {
 		$this->topProductFacade = $topProductFacade;
 		$this->productIdToProductTransformer = $productIdToProductTransformer;
-		$this->translator = $translator;
 		$this->selectedDomain = $selectedDomain;
 
 		parent::__construct($formFactory, $topProductGridFactory);
@@ -60,7 +52,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException(
 				[
-					$this->translator->trans('Tento produkt již v seznamu existuje.'),
+					t('Tento produkt již v seznamu existuje.'),
 				]
 			);
 		}
@@ -77,7 +69,7 @@ class TopProductInlineEdit extends AbstractGridInlineEdit {
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductAlreadyExistsException $e) {
 			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException(
 				[
-					$this->translator->trans('Tento produkt již v seznamu existuje.'),
+					t('Tento produkt již v seznamu existuje.'),
 				]
 			);
 		}

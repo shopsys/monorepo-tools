@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 
 class ParameterGridFactory implements GridFactoryInterface {
@@ -28,21 +27,14 @@ class ParameterGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -57,7 +49,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid->addColumn(
 			'name',
 			'pt.name',
-			$this->translator->trans('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
+			t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
 			true
 		);
 		foreach ($locales as $locale) {
@@ -65,7 +57,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 				$grid->addColumn(
 					'name_' . $locale,
 					'pt_' . $locale . '.name',
-					$this->translator->trans('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
+					t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
 					true
 				);
 			}
@@ -74,11 +66,11 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_parameter_delete',
 				['id' => 'p.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tento parametr? '
+			->setConfirmMessage(t('Opravdu chcete odstranit tento parametr? '
 				. 'Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. '
 				. 'Tento krok je nevratný!'));
 

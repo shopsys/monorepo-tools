@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
@@ -29,21 +28,14 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -61,12 +53,12 @@ class OrderStatusGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('orderStatusList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'ost.name', $this->translator->trans('Název'), true);
+		$grid->addColumn('name', 'ost.name', t('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				ActionColumn::TYPE_DELETE,
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_orderstatus_deleteconfirm',
 				['id' => 'os.id']
 			)

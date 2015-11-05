@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,17 +14,8 @@ class ProductListOrderingModeForListFacade {
 	 */
 	private $productListOrderingModeService;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	public function __construct(
-		ProductListOrderingModeService $productListOrderingModeService,
-		Translator $translator
-	) {
+	public function __construct(ProductListOrderingModeService $productListOrderingModeService) {
 		$this->productListOrderingModeService = $productListOrderingModeService;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -34,10 +24,10 @@ class ProductListOrderingModeForListFacade {
 	public function getProductListOrderingConfig() {
 		return new ProductListOrderingConfig(
 			[
-				ProductListOrderingModeService::ORDER_BY_NAME_ASC => $this->translator->trans('abecedně A -> Z'),
-				ProductListOrderingModeService::ORDER_BY_NAME_DESC => $this->translator->trans('abecedně Z -> A'),
-				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => $this->translator->trans('od nejlevnějšího'),
-				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => $this->translator->trans('od nejdražšího'),
+				ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('abecedně A -> Z'),
+				ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('abecedně Z -> A'),
+				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('od nejlevnějšího'),
+				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => t('od nejdražšího'),
 			],
 			ProductListOrderingModeService::ORDER_BY_NAME_ASC,
 			self::COOKIE_NAME

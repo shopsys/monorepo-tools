@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
 use SS6\ShopBundle\Form\Admin\Product\VariantFormType;
@@ -35,11 +34,6 @@ class ProductController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
-
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade
@@ -108,7 +102,6 @@ class ProductController extends AdminBaseController {
 
 	public function __construct(
 		CategoryFacade $categoryFacade,
-		Translator $translator,
 		ProductMassActionFacade $productMassActionFacade,
 		GridFactory $gridFactory,
 		ProductEditFacade $productEditFacade,
@@ -124,7 +117,6 @@ class ProductController extends AdminBaseController {
 		ProductExtension $productExtension
 	) {
 		$this->categoryFacade = $categoryFacade;
-		$this->translator = $translator;
 		$this->productMassActionFacade = $productMassActionFacade;
 		$this->gridFactory = $gridFactory;
 		$this->productEditFacade = $productEditFacade;
@@ -171,7 +163,7 @@ class ProductController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
+			new MenuItem(t('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
 		);
 
 		$viewParameters = [
@@ -245,7 +237,7 @@ class ProductController extends AdminBaseController {
 		// See: https://github.com/symfony/symfony/issues/12244
 		$quickSearchForm->submit($request->query->get($quickSearchForm->getName()));
 
-		$massActionForm = $this->createForm(new ProductMassActionFormType($this->translator));
+		$massActionForm = $this->createForm(new ProductMassActionFormType());
 		$massActionForm->handleRequest($request);
 
 		$isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);

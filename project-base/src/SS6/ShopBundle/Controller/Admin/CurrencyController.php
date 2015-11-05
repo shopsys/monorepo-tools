@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
@@ -36,19 +35,12 @@ class CurrencyController extends AdminBaseController {
 	 */
 	private $currencyInlineEdit;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		CurrencyFacade $currencyFacade,
 		CurrencyInlineEdit $currencyInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		Domain $domain
 	) {
-		$this->translator = $translator;
 		$this->currencyFacade = $currencyFacade;
 		$this->currencyInlineEdit = $currencyInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -73,14 +65,14 @@ class CurrencyController extends AdminBaseController {
 	public function deleteConfirmAction($id) {
 		try {
 			$currency = $this->currencyFacade->getById($id);
-			$message = $this->translator->trans(
+			$message = t(
 				'Opravdu si přejete trvale odstranit měnu "%name%"?',
 				['%name%' => $currency->getName()]
 			);
 
 			return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolená měna neexistuje.'));
+			return new Response(t('Zvolená měna neexistuje.'));
 		}
 
 	}

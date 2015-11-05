@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeGridFactory implements GridFactoryInterface {
@@ -21,19 +20,12 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 	 */
 	private $gridFactory;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
-		GridFactory $gridFactory,
-		Translator $translator
+		GridFactory $gridFactory
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -48,16 +40,16 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('promoCodeList', $dataSource);
 		$grid->setDefaultOrder('code');
-		$grid->addColumn('code', 'pc.code', $this->translator->trans('Kód'), true);
-		$grid->addColumn('percent', 'pc.percent', $this->translator->trans('Sleva'), true);
+		$grid->addColumn('code', 'pc.code', t('Kód'), true);
+		$grid->addColumn('percent', 'pc.percent', t('Sleva'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				'delete',
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_promocode_delete',
 				['id' => 'pc.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tento slevový kupón?'));
+			->setConfirmMessage(t('Opravdu chcete odstranit tento slevový kupón?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/PromoCode/listGrid.html.twig');
 

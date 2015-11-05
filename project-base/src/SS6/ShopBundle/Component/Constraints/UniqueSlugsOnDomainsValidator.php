@@ -6,7 +6,6 @@ use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -22,15 +21,9 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 	 */
 	private $domainRouterFactory;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory, Translator $translator) {
+	public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory) {
 		$this->domain = $domain;
 		$this->domainRouterFactory = $domainRouterFactory;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -57,7 +50,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 	private function validateDuplication(DomainConfig $domainConfig, $slugs) {
 		foreach (array_count_values($slugs) as $slug => $count) {
 			if ($count > 1) {
-				$this->context->addViolation($this->translator->trans(
+				$this->context->addViolation(t(
 					'Adresa %%url%% může být zadána pouze jednou.',
 					[
 						'%%url%%' => $domainConfig->getUrl() . '/' . $slug,
@@ -79,7 +72,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 			} catch (\Symfony\Component\Routing\Exception\ResourceNotFoundException $e) {
 				continue;
 			}
-			$this->context->addViolation($this->translator->trans(
+			$this->context->addViolation(t(
 				'Adresa %%url%% již existuje.',
 				[
 					'%%url%%' => $domainConfig->getUrl() . '/' . $slug,

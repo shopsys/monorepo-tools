@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormView;
 use Twig_Environment;
@@ -16,17 +15,8 @@ class FormDetailExtension extends Twig_Extension {
 	 */
 	private $container;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	public function __construct(
-		ContainerInterface $container,
-		Translator $translator
-	) {
+	public function __construct(ContainerInterface $container) {
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
-		$this->translator = $translator;
 	}
 
 	/**
@@ -83,9 +73,9 @@ class FormDetailExtension extends Twig_Extension {
 
 		if (!array_keys($vars, 'label', true)) {
 			if ($object === null) {
-				$vars['label'] = $this->translator->trans('Vytvořit');
+				$vars['label'] = t('Vytvořit');
 			} else {
-				$vars['label'] = $this->translator->trans('Uložit změny');
+				$vars['label'] = t('Uložit změny');
 			}
 		}
 
