@@ -201,6 +201,23 @@ class ProductRepository {
 	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOfferedInCategoryQueryBuilder(
+		$domainId,
+		PricingGroup $pricingGroup,
+		Category $category
+	) {
+		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
+		$this->filterByCategory($queryBuilder, $category, $domainId);
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @param string|null $searchText
 	 * @return \Doctrine\ORM\QueryBuilder
