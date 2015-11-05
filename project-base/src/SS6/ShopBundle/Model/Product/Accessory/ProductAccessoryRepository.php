@@ -47,11 +47,12 @@ class ProductAccessoryRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $limit
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getTop3OfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
+	public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
 		$queryBuilder = $this->getAllOfferedAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup);
-		$queryBuilder->setMaxResults(3);
+		$queryBuilder->setMaxResults($limit);
 
 		return $queryBuilder->getQuery()->getResult();
 	}

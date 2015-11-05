@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends FrontBaseController {
 
+	const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
@@ -237,10 +239,11 @@ class CartController extends FrontBaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 
-				$accessories = $this->productAccessoryFacade->getTop3OfferedAccessories(
+				$accessories = $this->productAccessoryFacade->getTopOfferedAccessories(
 					$addProductResult->getCartItem()->getProduct(),
 					$this->domain->getId(),
-					$this->currentCustomer->getPricingGroup()
+					$this->currentCustomer->getPricingGroup(),
+					self::AFTER_ADD_WINDOW_ACCESORIES_LIMIT
 				);
 				$accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
 
