@@ -22,8 +22,8 @@ class ProductAccessoryFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getTop3ListableAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
-		return $this->productAccessoryRepository->getTop3ListableAccessories($product, $domainId, $pricingGroup);
+	public function getTop3OfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
+		return $this->productAccessoryRepository->getTop3OfferedAccessories($product, $domainId, $pricingGroup);
 	}
 
 }

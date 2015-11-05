@@ -237,7 +237,7 @@ class CartController extends FrontBaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 
-				$accessories = $this->productAccessoryFacade->getTop3ListableAccessories(
+				$accessories = $this->productAccessoryFacade->getTop3OfferedAccessories(
 					$addProductResult->getCartItem()->getProduct(),
 					$this->domain->getId(),
 					$this->currentCustomer->getPricingGroup()

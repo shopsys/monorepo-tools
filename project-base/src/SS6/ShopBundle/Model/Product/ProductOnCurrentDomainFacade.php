@@ -95,7 +95,7 @@ class ProductOnCurrentDomainFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAccessoriesProductDetailsForProduct(Product $product) {
-		$accessories = $this->productAccessoryRepository->getAllListableAccessoriesByProduct(
+		$accessories = $this->productAccessoryRepository->getAllOfferedAccessoriesByProduct(
 			$product,
 			$this->domain->getId(),
 			$this->currentCustomer->getPricingGroup()
