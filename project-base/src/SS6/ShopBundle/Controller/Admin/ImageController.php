@@ -15,7 +15,7 @@ class ImageController extends AdminBaseController {
 	const ENTITY_NAME_PRODUCT = 'product';
 	const ENTITY_NAME_SLIDER_ITEM = 'sliderItem';
 	const ENTITY_NAME_TRANSPORT = 'transport';
-	const ENTITY_NAME_ADVERT = 'advert';
+	const ENTITY_NAME_ADVERT = 'noticer';
 	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThumbnail';
 	const SIZE_NAME_LIST = 'list';
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
