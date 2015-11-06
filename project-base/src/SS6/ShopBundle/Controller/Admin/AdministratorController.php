@@ -186,13 +186,15 @@ class AdministratorController extends AdminBaseController {
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+					t('Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné'),
+					[
 						'name' => $administratorData->username,
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
+					t('Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje'),
+					[
 						'name' => $administratorData->username,
 					]
 				);
