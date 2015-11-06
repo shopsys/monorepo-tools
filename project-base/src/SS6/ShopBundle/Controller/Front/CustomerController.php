@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
+use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
 use SS6\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,22 +36,22 @@ class CustomerController extends FrontBaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
+	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
 	 */
-	private $administratorLoginFacade;
+	private $loginAsUserFacade;
 
 	public function __construct(
 		CustomerEditFacade $customerEditFacade,
 		OrderFacade $orderFacade,
 		Domain $domain,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
-		AdministratorLoginFacade $administratorLoginFacade
+		LoginAsUserFacade $loginAsUserFacade
 	) {
 		$this->customerEditFacade = $customerEditFacade;
 		$this->orderFacade = $orderFacade;
 		$this->domain = $domain;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
-		$this->administratorLoginFacade = $administratorLoginFacade;
+		$this->loginAsUserFacade = $loginAsUserFacade;
 	}
 
 	public function editAction(Request $request) {
@@ -161,7 +161,7 @@ class CustomerController extends FrontBaseController {
 	 */
 	public function loginAsRememberedUserAction(Request $request) {
 		try {
-			$this->administratorLoginFacade->loginAsRememberedUser($request);
+			$this->loginAsUserFacade->loginAsRememberedUser($request);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$adminFlashMessageSender = $this->get('ss6.shop.component.flash_message.sender.admin');
 			/* @var $adminFlashMessageSender \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender */

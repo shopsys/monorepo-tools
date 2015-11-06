@@ -26,7 +26,7 @@ use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
+use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -86,9 +86,9 @@ class CustomerController extends AdminBaseController {
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
+	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
 	 */
-	private $administratorLoginFacade;
+	private $loginAsUserFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -111,7 +111,7 @@ class CustomerController extends AdminBaseController {
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		OrderFacade $orderFacade,
-		AdministratorLoginFacade $administratorLoginFacade,
+		LoginAsUserFacade $loginAsUserFacade,
 		Domain $domain,
 		DomainRouterFactory $domainRouterFactory
 	) {
@@ -125,7 +125,7 @@ class CustomerController extends AdminBaseController {
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->orderFacade = $orderFacade;
-		$this->administratorLoginFacade = $administratorLoginFacade;
+		$this->loginAsUserFacade = $loginAsUserFacade;
 		$this->domain = $domain;
 		$this->domainRouterFactory = $domainRouterFactory;
 	}
@@ -317,7 +317,7 @@ class CustomerController extends AdminBaseController {
 	 */
 	public function loginAsUserAction($userId) {
 		$user = $this->customerEditFacade->getUserById($userId);
-		$this->administratorLoginFacade->rememberLoginAsUser($user);
+		$this->loginAsUserFacade->rememberLoginAsUser($user);
 
 		return $this->redirectToRoute('front_customer_login_as_remembered_user');
 	}
