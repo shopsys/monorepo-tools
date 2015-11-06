@@ -7,7 +7,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 
 class FlagGridFactory implements GridFactoryInterface {
@@ -27,21 +26,14 @@ class FlagGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -59,17 +51,17 @@ class FlagGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('flagList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'at.name', $this->translator->trans('Název'), true);
-		$grid->addColumn('rgbColor', 'a.rgbColor', $this->translator->trans('Barva'), true);
+		$grid->addColumn('name', 'at.name', t('Název'), true);
+		$grid->addColumn('rgbColor', 'a.rgbColor', t('Barva'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				'delete',
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_flag_delete',
 				['id' => 'a.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odstranit tento příznak?'));
+			->setConfirmMessage(t('Opravdu chcete odstranit tento příznak?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Flag/listGrid.html.twig');
 

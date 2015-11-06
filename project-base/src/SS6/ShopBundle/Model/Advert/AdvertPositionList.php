@@ -16,10 +16,10 @@ class AdvertPositionList extends AbstractTranslatedConstantList {
 	 */
 	public function getTranslationsIndexedByValue() {
 		return [
-			self::POSITION_HEADER => $this->translator->trans('pod hlavičkou'),
-			self::POSITION_FOOTER => $this->translator->trans('nad patičkou'),
-			self::POSITION_PRODUCT_LIST => $this->translator->trans('v kategorii (nad názvem kategorie)'),
-			self::POSITION_LEFT_SIDEBAR => $this->translator->trans('v levém panelu (pod stromem kategorií)'),
+			self::POSITION_HEADER => t('pod hlavičkou'),
+			self::POSITION_FOOTER => t('nad patičkou'),
+			self::POSITION_PRODUCT_LIST => t('v kategorii (nad názvem kategorie)'),
+			self::POSITION_LEFT_SIDEBAR => t('v levém panelu (pod stromem kategorií)'),
 		];
 	}
 

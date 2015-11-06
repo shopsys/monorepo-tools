@@ -53,11 +53,14 @@ class PromoCodeController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Slevový kupón <strong>{{ code }}</strong> byl smazán', [
-				'code' => $code,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Slevový kupón <strong>{{ code }}</strong> byl smazán'),
+				[
+					'code' => $code,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený slevový kupón neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený slevový kupón neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_promocode_list');

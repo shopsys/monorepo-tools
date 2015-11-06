@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Article;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleData;
@@ -12,11 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ArticleFormType extends AbstractType {
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var string[]
@@ -34,18 +28,15 @@ class ArticleFormType extends AbstractType {
 	private $defaultSeoMetaDescription;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\Translator
 	 * @param string[]
 	 * @param \SS6\ShopBundle\Model\Article\Article|null $article
 	 * @param string|null $defaultSeoMetaDescription
 	 */
 	public function __construct(
-		Translator $translator,
 		$articlePlacementLocalizedNamesByName,
 		Article $article = null,
 		$defaultSeoMetaDescription = null
 	) {
-		$this->translator = $translator;
 		$this->articlePlacementLocalizedNamesByName = $articlePlacementLocalizedNamesByName;
 		$this->article = $article;
 		$this->defaultSeoMetaDescription = $defaultSeoMetaDescription;
@@ -91,7 +82,7 @@ class ArticleFormType extends AbstractType {
 				->add('placement', FormType::CHOICE, [
 					'required' => true,
 					'choices' => $this->articlePlacementLocalizedNamesByName,
-					'placeholder' => $this->translator->trans('-- Vyberte umístění článku --'),
+					'placeholder' => t('-- Vyberte umístění článku --'),
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Prosím vyberte umístění článku']),
 					],

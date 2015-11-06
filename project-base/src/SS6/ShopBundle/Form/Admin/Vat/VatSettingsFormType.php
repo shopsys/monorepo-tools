@@ -8,7 +8,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class VatSettingsFormType extends AbstractType {
@@ -24,23 +23,15 @@ class VatSettingsFormType extends AbstractType {
 	private $roundingTypes;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param array $roundingTypes
-	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 */
 	public function __construct(
 		array $vats,
-		array $roundingTypes,
-		TranslatorInterface $translator
+		array $roundingTypes
 	) {
 		$this->vats = $vats;
 		$this->roundingTypes = $roundingTypes;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -88,9 +79,9 @@ class VatSettingsFormType extends AbstractType {
 	 */
 	private function getRoundingTypesLabels() {
 		return [
-			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => $this->translator->trans('Na setiny (haléře)'),
-			PricingSetting::ROUNDING_TYPE_FIFTIES => $this->translator->trans('Na padesátníky'),
-			PricingSetting::ROUNDING_TYPE_INTEGER => $this->translator->trans('Na celá čísla (koruny)'),
+			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('Na setiny (haléře)'),
+			PricingSetting::ROUNDING_TYPE_FIFTIES => t('Na padesátníky'),
+			PricingSetting::ROUNDING_TYPE_INTEGER => t('Na celá čísla (koruny)'),
 		];
 	}
 

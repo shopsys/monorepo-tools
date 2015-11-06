@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form\Admin\Product;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
@@ -39,11 +38,6 @@ class ProductFormTypeFactory {
 	private $unitFacade;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
@@ -54,7 +48,6 @@ class ProductFormTypeFactory {
 		BrandRepository $brandRepository,
 		FlagFacade $flagFacade,
 		UnitFacade $unitFacade,
-		Translator $translator,
 		Domain $domain
 	) {
 		$this->vatRepository = $vatRepository;
@@ -62,7 +55,6 @@ class ProductFormTypeFactory {
 		$this->brandRepository = $brandRepository;
 		$this->flagFacade = $flagFacade;
 		$this->unitFacade = $unitFacade;
-		$this->translator = $translator;
 		$this->domain = $domain;
 	}
 
@@ -83,7 +75,6 @@ class ProductFormTypeFactory {
 			$brands,
 			$flags,
 			$units,
-			$this->translator,
 			$this->domain->getAll(),
 			$product
 		);

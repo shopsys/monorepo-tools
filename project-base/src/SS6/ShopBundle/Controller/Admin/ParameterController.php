@@ -53,11 +53,14 @@ class ParameterController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Parametr <strong>{{ name }}</strong> byl smazán', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Parametr <strong>{{ name }}</strong> byl smazán'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený parametr neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený parametr neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_parameter_list');

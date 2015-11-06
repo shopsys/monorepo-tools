@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSettingFacade;
@@ -42,20 +41,13 @@ class VatController extends AdminBaseController {
 	 */
 	private $vatInlineEdit;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		VatFacade $vatFacade,
 		PricingSetting $pricingSetting,
 		VatInlineEdit $vatInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		PricingSettingFacade $pricingSettingFacade
 	) {
-		$this->translator = $translator;
 		$this->vatFacade = $vatFacade;
 		$this->pricingSetting = $pricingSetting;
 		$this->vatInlineEdit = $vatInlineEdit;
@@ -82,7 +74,7 @@ class VatController extends AdminBaseController {
 		try {
 			$vat = $this->vatFacade->getById($id);
 			if ($this->vatFacade->isVatUsed($vat)) {
-				$message = $this->translator->trans(
+				$message = t(
 					'Pro odstranění sazby "%name% musíte zvolit, která se má všude, '
 					. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
 					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?',
@@ -92,7 +84,7 @@ class VatController extends AdminBaseController {
 
 				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
 			} else {
-				$message = $this->translator->trans(
+				$message = t(
 					'Opravdu si přejete trvale odstranit sazbu "%name%"? Nikde není použita.',
 					['%name%' => $vat->getName()]
 				);
@@ -100,7 +92,7 @@ class VatController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolené DPH neexistuje'));
+			return new Response(t('Zvolené DPH neexistuje'));
 		}
 
 	}
@@ -138,13 +130,16 @@ class VatController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('DPH <strong>{{ name }}</strong> bylo smazáno', [
-					'name' => $fullName,
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('DPH <strong>{{ name }}</strong> bylo smazáno'),
+					[
+						'name' => $fullName,
+					]
+				);
 			} else {
 				$newVat = $this->vatFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
+					t('DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.'),
 					[
 						'name' => $fullName,
 						'newName' => $newVat->getName(),
@@ -152,7 +147,7 @@ class VatController extends AdminBaseController {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolené DPH neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolené DPH neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_vat_list');
@@ -165,8 +160,7 @@ class VatController extends AdminBaseController {
 		$vats = $this->vatFacade->getAll();
 		$form = $this->createForm(new VatSettingsFormType(
 			$vats,
-			PricingSetting::getRoundingTypes(),
-			$this->translator
+			PricingSetting::getRoundingTypes()
 		));
 
 		try {
@@ -185,12 +179,12 @@ class VatController extends AdminBaseController {
 						$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
 					}
 				);
-				$this->getFlashMessageSender()->addSuccessFlash('Nastavení DPH bylo upraveno');
+				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
 
 				return $this->redirectToRoute('admin_vat_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Neplatné nastavení zaokrouhlování');
+			$this->getFlashMessageSender()->addErrorFlash(t('Neplatné nastavení zaokrouhlování'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', [

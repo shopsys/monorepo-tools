@@ -79,7 +79,7 @@ class TransportAndPaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení dopravy a platby zdarma bylo uloženo');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení dopravy a platby zdarma bylo uloženo'));
 
 			return $this->redirectToRoute('admin_transportandpayment_freetransportandpaymentlimit');
 		}

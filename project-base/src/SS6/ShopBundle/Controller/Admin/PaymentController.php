@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -53,13 +52,7 @@ class PaymentController extends AdminBaseController {
 	 */
 	private $currencyFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		PaymentEditFormTypeFactory $paymentEditFormTypeFactory,
 		PaymentEditDataFactory $paymentEditDataFactory,
 		CurrencyFacade $currencyFacade,
@@ -68,7 +61,6 @@ class PaymentController extends AdminBaseController {
 		PaymentGridFactory $paymentGridFactory,
 		Breadcrumb $breadcrumb
 	) {
-		$this->translator = $translator;
 		$this->paymentEditFormTypeFactory = $paymentEditFormTypeFactory;
 		$this->paymentEditDataFactory = $paymentEditDataFactory;
 		$this->currencyFacade = $currencyFacade;
@@ -95,16 +87,18 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla vytvořena platba'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $payment->getName(),
-				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla vytvořena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $payment->getName(),
+					'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', [
@@ -133,19 +127,21 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla upravena platba'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $payment->getName(),
-				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla upravena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $payment->getName(),
+					'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace platby - ') . $payment->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace platby - ') . $payment->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', [
 			'form' => $form->createView(),
@@ -168,11 +164,14 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Platba <strong>{{ name }}</strong> byla smazána', [
-				'name' => $paymentName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Platba <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $paymentName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená platba neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená platba neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_transportandpayment_list');

@@ -14,8 +14,8 @@ class ArticlePlacementList extends AbstractTranslatedConstantList {
 	 */
 	public function getTranslationsIndexedByValue() {
 		return [
-			self::PLACEMENT_TOP_MENU => $this->translator->trans('v horním menu'),
-			self::PLACEMENT_FOOTER => $this->translator->trans('v patičce'),
+			self::PLACEMENT_TOP_MENU => t('v horním menu'),
+			self::PLACEMENT_FOOTER => t('v patičce'),
 		];
 	}
 

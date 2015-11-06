@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 
 class TopProductGridFactory implements GridFactoryInterface {
@@ -33,23 +32,16 @@ class TopProductGridFactory implements GridFactoryInterface {
 	 */
 	private $localization;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(
 		EntityManager $em,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
-		Localization $localization,
-		Translator $translator
+		Localization $localization
 	) {
 		$this->em = $em;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->localization = $localization;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -68,15 +60,15 @@ class TopProductGridFactory implements GridFactoryInterface {
 		$dataSource = new QueryBuilderDataSource($queryBuilder, 'tp.id');
 
 		$grid = $this->gridFactory->create('topProductList', $dataSource);
-		$grid->addColumn('product', 'pt.name', $this->translator->trans('Produkt'));
+		$grid->addColumn('product', 'pt.name', t('Produkt'));
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn(
 				'delete',
-				$this->translator->trans('Smazat'),
+				t('Smazat'),
 				'admin_topproduct_delete',
 				['id' => 'tp.id']
 			)
-			->setConfirmMessage($this->translator->trans('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
+			->setConfirmMessage(t('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/TopProduct/listGrid.html.twig');
 

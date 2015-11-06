@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class ProductFormType extends AbstractType {
@@ -48,11 +47,6 @@ class ProductFormType extends AbstractType {
 	private $units;
 
 	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product|null
 	 */
 	private $product;
@@ -68,7 +62,6 @@ class ProductFormType extends AbstractType {
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
-	 * @param \Symfony\Component\Translation\TranslatorInterface $translator
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
 	 */
@@ -78,7 +71,6 @@ class ProductFormType extends AbstractType {
 		array $brands,
 		array $flags,
 		array $units,
-		TranslatorInterface $translator,
 		array $domainConfigs,
 		Product $product = null
 	) {
@@ -87,7 +79,6 @@ class ProductFormType extends AbstractType {
 		$this->brands = $brands;
 		$this->flags = $flags;
 		$this->units = $units;
-		$this->translator = $translator;
 		$this->domainConfigs = $domainConfigs;
 		$this->product = $product;
 	}
@@ -139,7 +130,7 @@ class ProductFormType extends AbstractType {
 			->add('brand', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->brands, 'name', [], null, 'id'),
-				'placeholder' => $this->translator->trans('-- Vyberte značku --'),
+				'placeholder' => t('-- Vyberte značku --'),
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
 			->add('stockQuantity', FormType::INTEGER, [
@@ -155,7 +146,7 @@ class ProductFormType extends AbstractType {
 			->add('unit', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
-				'placeholder' => $this->translator->trans('-- Vyberte jednotku --'),
+				'placeholder' => t('-- Vyberte jednotku --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte jednotku',
@@ -165,7 +156,7 @@ class ProductFormType extends AbstractType {
 			->add('availability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => $this->translator->trans('-- Vyberte dostupnost --'),
+				'placeholder' => t('-- Vyberte dostupnost --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
@@ -177,11 +168,11 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => false,
 				'choices' => [
-					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => $this->translator->trans('Nastavit alternativní dostupnost'),
-					Product::OUT_OF_STOCK_ACTION_HIDE => $this->translator->trans('Skrýt zboží'),
-					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => $this->translator->trans('Vyřadit z prodeje'),
+					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => t('Nastavit alternativní dostupnost'),
+					Product::OUT_OF_STOCK_ACTION_HIDE => t('Skrýt zboží'),
+					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => t('Vyřadit z prodeje'),
 				],
-				'placeholder' => $this->translator->trans('-- Vyberte akci --'),
+				'placeholder' => t('-- Vyberte akci --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte akci',
@@ -192,7 +183,7 @@ class ProductFormType extends AbstractType {
 			->add('outOfStockAvailability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => $this->translator->trans('-- Vyberte dostupnost --'),
+				'placeholder' => t('-- Vyberte dostupnost --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte dostupnost',
@@ -248,8 +239,8 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => true,
 				'choices' => [
-					Product::PRICE_CALCULATION_TYPE_AUTO => $this->translator->trans('Automaticky'),
-					Product::PRICE_CALCULATION_TYPE_MANUAL => $this->translator->trans('Ručně'),
+					Product::PRICE_CALCULATION_TYPE_AUTO => t('Automaticky'),
+					Product::PRICE_CALCULATION_TYPE_MANUAL => t('Ručně'),
 				],
 			]);
 

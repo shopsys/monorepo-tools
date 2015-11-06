@@ -15,9 +15,9 @@ class ModuleList extends AbstractTranslatedConstantList {
 	 */
 	public function getTranslationsIndexedByValue() {
 		return [
-			self::ACCESSORIES_ON_BUY => $this->translator->trans('Příslušenství v mezikošíku'),
-			self::PRODUCT_FILTER_COUNTS => $this->translator->trans('Počty zboží ve filtru'),
-			self::PRODUCT_STOCK_CALCULATIONS => $this->translator->trans('Automatické výpočty skladových zásob'),
+			self::ACCESSORIES_ON_BUY => t('Příslušenství v mezikošíku'),
+			self::PRODUCT_FILTER_COUNTS => t('Počty zboží ve filtru'),
+			self::PRODUCT_STOCK_CALCULATIONS => t('Automatické výpočty skladových zásob'),
 		];
 	}
 

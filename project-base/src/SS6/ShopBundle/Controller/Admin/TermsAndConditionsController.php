@@ -62,12 +62,12 @@ class TermsAndConditionsController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno nastavení obchodních podmínek.');
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Bylo upraveno nastavení obchodních podmínek.'));
 			return $this->redirectToRoute('admin_termsandconditions_setting');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/TermsAndConditions/setting.html.twig', [

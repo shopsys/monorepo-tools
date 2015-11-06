@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Form;
 
 use SS6\ShopBundle\Component\Transformers\NoopDataTransformer;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,20 +11,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class YesNoType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Transformers\NoopDataTransformer
 	 */
 	private $noopDataTransformer;
 
 	public function __construct(
-		Translator $translator,
 		NoopDataTransformer $noopDataTransformer
 	) {
-		$this->translator = $translator;
 		$this->noopDataTransformer = $noopDataTransformer;
 	}
 
@@ -47,8 +39,8 @@ class YesNoType extends AbstractType {
 			'choice_list' => new IndexedChoiceList(
 				[true, false],
 				[
-					$this->translator->trans('Ano'),
-					$this->translator->trans('Ne'),
+					t('Ano'),
+					t('Ne'),
 				],
 				['yes', 'no'],
 				['1', '0']

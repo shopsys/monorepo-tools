@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Product\ProductMassActionFormType;
 use SS6\ShopBundle\Form\Admin\Product\VariantFormType;
@@ -35,11 +34,6 @@ class ProductController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
-
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade
@@ -108,7 +102,6 @@ class ProductController extends AdminBaseController {
 
 	public function __construct(
 		CategoryFacade $categoryFacade,
-		Translator $translator,
 		ProductMassActionFacade $productMassActionFacade,
 		GridFactory $gridFactory,
 		ProductEditFacade $productEditFacade,
@@ -124,7 +117,6 @@ class ProductController extends AdminBaseController {
 		ProductExtension $productExtension
 	) {
 		$this->categoryFacade = $categoryFacade;
-		$this->translator = $translator;
 		$this->productMassActionFacade = $productMassActionFacade;
 		$this->gridFactory = $gridFactory;
 		$this->productEditFacade = $productEditFacade;
@@ -160,18 +152,21 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				[
+					'product' => $product,
+				]
+			);
 			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
+			new MenuItem(t('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
 		);
 
 		$viewParameters = [
@@ -209,15 +204,17 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
-					. ' <strong>{{ product|productDisplayName }}</strong>', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				[
+					'product' => $product,
+				]
+			);
 			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
@@ -245,7 +242,7 @@ class ProductController extends AdminBaseController {
 		// See: https://github.com/symfony/symfony/issues/12244
 		$quickSearchForm->submit($request->query->get($quickSearchForm->getName()));
 
-		$massActionForm = $this->createForm(new ProductMassActionFormType($this->translator));
+		$massActionForm = $this->createForm(new ProductMassActionFormType());
 		$massActionForm->handleRequest($request);
 
 		$isAdvancedSearchFormSubmitted = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
@@ -264,7 +261,7 @@ class ProductController extends AdminBaseController {
 				array_map('intval', $grid->getSelectedRowIds())
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Hromadná úprava byla provedena');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Hromadná úprava byla provedena'));
 
 			return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
 		}
@@ -295,11 +292,14 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán'),
+				[
+					'product' => $product,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený produkt neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_product_list');
@@ -339,7 +339,8 @@ class ProductController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.', [
+					t('Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.'),
+					[
 						'productVariant' => $newMainVariant,
 					]
 				);
@@ -347,7 +348,7 @@ class ProductController extends AdminBaseController {
 				return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\VariantException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(
-					'Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.'
+					t('Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.')
 				);
 			}
 		}

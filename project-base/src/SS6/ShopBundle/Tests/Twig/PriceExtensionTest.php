@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Tests\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -45,8 +44,6 @@ class PriceExtensionTest extends FunctionalTestCase {
 	 * @dataProvider priceFilterDataProvider
 	 */
 	public function testPriceFilter($input, $domainId, $result) {
-		$translator = $this->getContainer()->get(Translator::class);
-		/* @var $translator \SS6\ShopBundle\Component\Domain\Domain */
 		$currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
 		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 		$domain = $this->getContainer()->get(Domain::class);
@@ -62,7 +59,6 @@ class PriceExtensionTest extends FunctionalTestCase {
 		$domain->switchDomainById($domainId);
 
 		$priceExtension = new PriceExtension(
-			$translator,
 			$currencyFacade,
 			$domain,
 			$localization,

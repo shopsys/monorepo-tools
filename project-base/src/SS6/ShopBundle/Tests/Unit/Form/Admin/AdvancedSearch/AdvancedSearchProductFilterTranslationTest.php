@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Form\Admin\AdvancedSearch;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
@@ -23,10 +22,7 @@ class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase {
 	}
 
 	public function testTranslateFilterNameNotFoundException() {
-		$translatorMock = $this->getMockBuilder(Translator::class)
-			->disableOriginalConstructor()
-			->getMock();
-		$advancedSearchTranslator = new AdvancedSearchProductFilterTranslation($translatorMock);
+		$advancedSearchTranslator = new AdvancedSearchProductFilterTranslation();
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
 		$advancedSearchTranslator->translateFilterName('nonexistingFilterName');

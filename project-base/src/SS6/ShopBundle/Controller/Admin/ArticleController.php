@@ -10,7 +10,6 @@ use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
@@ -28,11 +27,6 @@ class ArticleController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -88,7 +82,6 @@ class ArticleController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		FriendlyUrlFacade $friendlyUrlFacade,
-		Translator $translator,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		TermsAndConditionsFacade $termsAndConditionsFacade
 	) {
@@ -100,7 +93,6 @@ class ArticleController extends AdminBaseController {
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
-		$this->translator = $translator;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
 	}
@@ -130,18 +122,21 @@ class ArticleController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $article->getName(),
-					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $article->getName(),
+						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace článku - ') . $article->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace článku - ') . $article->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
@@ -186,15 +181,18 @@ class ArticleController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $article->getName(),
-					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $article->getName(),
+						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
@@ -216,11 +214,14 @@ class ArticleController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Článek <strong>{{ name }}</strong> byl smazán'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený článek neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený článek neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_article_list');
@@ -233,7 +234,7 @@ class ArticleController extends AdminBaseController {
 	public function deleteConfirmAction($id) {
 		$article = $this->articleEditFacade->getById($id);
 		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
-			$message = $this->translator->trans(
+			$message = t(
 				'Článek "%name%" je nastaven pro zobrazení obchodních podmínek.
 				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
 				['%name%' => $article->getName()]

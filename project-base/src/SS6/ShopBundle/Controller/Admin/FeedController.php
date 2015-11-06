@@ -52,7 +52,7 @@ class FeedController extends AdminBaseController {
 
 		$this->feedFacade->generateFeeds();
 		$this->feedFacade->generateDeliveryFeeds();
-		$this->getFlashMessageSender()->addSuccessFlash('XML Feedy byly vygenerovány');
+		$this->getFlashMessageSender()->addSuccessFlash(t('XML Feedy byly vygenerovány'));
 
 		return $this->redirectToRoute('admin_feed_list');
 	}

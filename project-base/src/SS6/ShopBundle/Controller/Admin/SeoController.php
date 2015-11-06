@@ -64,13 +64,13 @@ class SeoController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Natavení SEO atributů bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Natavení SEO atributů bylo upraveno'));
 
 			return $this->redirectToRoute('admin_seo_index');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Seo/seoSetting.html.twig', [

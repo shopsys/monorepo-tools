@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
@@ -62,11 +61,6 @@ class OrderController extends AdminBaseController {
 	private $orderFormTypeFactory;
 
 	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
 	 */
 	private $orderItemFacade;
@@ -84,7 +78,6 @@ class OrderController extends AdminBaseController {
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
-		Translator $translator,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
@@ -96,7 +89,6 @@ class OrderController extends AdminBaseController {
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
-		$this->translator = $translator;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
@@ -131,26 +123,32 @@ class OrderController extends AdminBaseController {
 					}
 				);
 
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Byla upravena objednávka č.'
-						. ' <strong><a href="{{ url }}">{{ number }}</a></strong>', [
-					'number' => $order->getNumber(),
-					'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Byla upravena objednávka č. <strong><a href="{{ url }}">{{ number }}</a></strong>'),
+					[
+						'number' => $order->getNumber(),
+						'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
+					]
+				);
 				return $this->redirectToRoute('admin_order_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$this->getFlashMessageSender()->addErrorFlash('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje');
+			$this->getFlashMessageSender()->addErrorFlash(
+				t('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje')
+			);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$this->getFlashMessageSender()->addErrorFlash('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje');
+			$this->getFlashMessageSender()->addErrorFlash(
+				t('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje')
+			);
 		} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
-			$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odeslat aktualizační email');
+			$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odeslat aktualizační email'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace objednávky - č. ') . $order->getNumber()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace objednávky - č. ') . $order->getNumber()));
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
@@ -284,11 +282,14 @@ class OrderController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Objednávka č. <strong>{{ number }}</strong> byla smazána', [
-				'number' => $orderNumber,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Objednávka č. <strong>{{ number }}</strong> byla smazána'),
+				[
+					'number' => $orderNumber,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená objednávka neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená objednávka neexistuje'));
 		}
 
 		return $this->redirectToRoute('admin_order_list');

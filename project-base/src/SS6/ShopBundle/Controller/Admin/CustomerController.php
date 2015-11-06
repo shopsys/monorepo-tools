@@ -10,7 +10,6 @@ use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Controller\Admin\LoginController;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
@@ -39,11 +38,6 @@ class CustomerController extends AdminBaseController {
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
-
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerListAdminFacade
@@ -102,7 +96,6 @@ class CustomerController extends AdminBaseController {
 
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		Translator $translator,
 		CustomerListAdminFacade $customerListAdminFacade,
 		CustomerEditFacade $customerEditFacade,
 		CustomerFormTypeFactory $customerFormTypeFactory,
@@ -116,7 +109,6 @@ class CustomerController extends AdminBaseController {
 		DomainRouterFactory $domainRouterFactory
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->translator = $translator;
 		$this->customerListAdminFacade = $customerListAdminFacade;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->customerFormTypeFactory = $customerFormTypeFactory;
@@ -157,7 +149,7 @@ class CustomerController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					t('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 					[
 						'name' => $user->getFullName(),
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
@@ -166,14 +158,14 @@ class CustomerController extends AdminBaseController {
 				return $this->redirectToRoute('admin_customer_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
+			$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($this->translator->trans('Editace zákazníka - ') . $user->getFullName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace zákazníka - ') . $user->getFullName()));
 
 		$orders = $this->orderFacade->getCustomerOrderList($user);
 
@@ -267,7 +259,7 @@ class CustomerController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					t('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 					[
 						'name' => $user->getFullName(),
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
@@ -276,11 +268,11 @@ class CustomerController extends AdminBaseController {
 				return $this->redirectToRoute('admin_customer_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('userData')->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
+			$form->get('userData')->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', [
@@ -301,11 +293,14 @@ class CustomerController extends AdminBaseController {
 					$this->customerEditFacade->delete($id);
 				}
 			);
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Zákazník <strong>{{ name }}</strong> byl smazán', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Zákazník <strong>{{ name }}</strong> byl smazán'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený zákazník neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený zákazník neexistuje'));
 		}
 
 		return $this->redirectToRoute('admin_customer_list');

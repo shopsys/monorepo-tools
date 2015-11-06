@@ -6,7 +6,6 @@ use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -18,11 +17,6 @@ class PriceExtension extends Twig_Extension {
 
 	const MINIMUM_FRACTION_DIGITS = 2;
 	const MAXIMUM_FRACTION_DIGITS = 10;
-
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
@@ -50,14 +44,12 @@ class PriceExtension extends Twig_Extension {
 	private $intlCurrencyRepository;
 
 	public function __construct(
-		Translator $translator,
 		CurrencyFacade $currencyFacade,
 		Domain $domain,
 		Localization $localization,
 		NumberFormatRepositoryInterface $numberFormatRepository,
 		CurrencyRepositoryInterface $intlCurrencyRepository
 	) {
-		$this->translator = $translator;
 		$this->currencyFacade = $currencyFacade;
 		$this->domain = $domain;
 		$this->localization = $localization;
@@ -146,7 +138,7 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function priceTextFilter($price) {
 		if ($price == 0) {
-			return $this->translator->trans('Zdarma');
+			return t('Zdarma');
 		} else {
 			return $this->priceFilter($price);
 		}
@@ -160,7 +152,7 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function priceTextWithCurrencyByCurrencyIdAndLocaleFilter($price, $currencyId, $locale) {
 		if ($price == 0) {
-			return $this->translator->trans('Zdarma');
+			return t('Zdarma');
 		} else {
 			$currency = $this->currencyFacade->getById($currencyId);
 			return $this->formatCurrency($price, $currency, $locale);

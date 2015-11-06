@@ -115,7 +115,7 @@ class CartController extends FrontBaseController {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirectToRoute('front_order_index');
 				} else {
-					$this->getFlashMessageSender()->addSuccessFlash('Množství položek v košíku bylo úspěšně přepočítáno.');
+					$this->getFlashMessageSender()->addSuccessFlash(t('Množství položek v košíku bylo úspěšně přepočítáno.'));
 					return $this->redirectToRoute('front_cart');
 				}
 			}
@@ -125,7 +125,7 @@ class CartController extends FrontBaseController {
 
 		if ($invalidCartRecalc) {
 			$this->getFlashMessageSender()->addErrorFlash(
-				'Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.'
+				t('Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.')
 			);
 		}
 
@@ -193,11 +193,11 @@ class CartController extends FrontBaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství, které chcete vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zadejte prosím platné množství, které chcete vložit do košíku.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zboží se nepodařilo vložit do košíku.'));
 			}
 		} else {
 			// Form errors list in flash message is temporary solution.
@@ -205,7 +205,8 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				'Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+				t('Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}'),
+				[
 					'errors' => implode('<br/>', $formErrors),
 				]
 			);
@@ -247,11 +248,11 @@ class CartController extends FrontBaseController {
 					'accessoryDetails' => $accessoryDetails,
 				]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zvolené zboží již není v nabídce nebo neexistuje.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zadejte prosím platné množství, které chcete vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zadejte prosím platné množství, které chcete vložit do košíku.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Zboží se nepodařilo vložit do košíku.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Zboží se nepodařilo vložit do košíku.'));
 			}
 		} else {
 			// Form errors list in flash message is temporary solution.
@@ -259,7 +260,8 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				'Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}', [
+				t('Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}'),
+				[
 					'errors' => implode('<br/>', $formErrors),
 				]
 			);
@@ -276,7 +278,7 @@ class CartController extends FrontBaseController {
 	) {
 		if ($addProductResult->getIsNew()) {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})',
+				t('Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})'),
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getAddedQuantity(),
@@ -285,7 +287,7 @@ class CartController extends FrontBaseController {
 			);
 		} else {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})',
+				t('Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})'),
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getCartItem()->getQuantity(),
@@ -308,15 +310,18 @@ class CartController extends FrontBaseController {
 				$productName = $this->cartFacade->getProductByCartItemId($cartItemId)->getName();
 				$this->cartFacade->deleteCartItem($cartItemId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Z košíku bylo odstraněno zboží {{ name }}',
+					t('Z košíku bylo odstraněno zboží {{ name }}'),
 					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno');
+				$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno'));
 			}
 		} else {
-			$this->getFlashMessageSender()->addErrorFlash('Nepodařilo se odstranit položku z košíku.
-					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.');
+			$this->getFlashMessageSender()->addErrorFlash(
+				t('Nepodařilo se odstranit položku z košíku.
+					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.'
+				)
+			);
 		}
 
 		return $this->redirectToRoute('front_cart');

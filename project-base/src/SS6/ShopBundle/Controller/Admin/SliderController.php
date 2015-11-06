@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
@@ -44,20 +43,13 @@ class SliderController extends AdminBaseController {
 	 */
 	private $sliderItemFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		SliderItemFacade $sliderItemFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		SliderItemFormTypeFactory $sliderItemFormTypeFactory,
 		Breadcrumb $breadcrumb
 	) {
-		$this->translator = $translator;
 		$this->sliderItemFacade = $sliderItemFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -112,16 +104,18 @@ class SliderController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla vytvořena stránka slideru'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $sliderItem->getName(),
-				'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $sliderItem->getName(),
+					'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_slider_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', [
@@ -153,7 +147,7 @@ class SliderController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				t('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 				[
 					'name' => $sliderItem->getName(),
 					'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
@@ -164,11 +158,11 @@ class SliderController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace stránky slideru - ') . $sliderItem->getName())
+			new MenuItem(t('Editace stránky slideru - ') . $sliderItem->getName())
 		);
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', [
@@ -191,11 +185,14 @@ class SliderController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', [
-				'name' => $name,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Stránka <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $name,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená stránka neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená stránka neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_slider_list');

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Front\Contact\ContactFormType;
 use SS6\ShopBundle\Model\ContactForm\ContactFormData;
 use SS6\ShopBundle\Model\ContactForm\ContactFormFacade;
@@ -17,14 +16,8 @@ class ContactFormController extends FrontBaseController {
 	 */
 	private $contactFormFacade;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	public function __construct(ContactFormFacade $contactFormFacade, Translator $translator) {
+	public function __construct(ContactFormFacade $contactFormFacade) {
 		$this->contactFormFacade = $contactFormFacade;
-		$this->translator = $translator;
 	}
 
 	/**
@@ -55,9 +48,9 @@ class ContactFormController extends FrontBaseController {
 						'method' => 'POST',
 					]
 				);
-				$message = $this->translator->trans('Děkujeme, váš vzkaz byl odeslán.');
+				$message = t('Děkujeme, váš vzkaz byl odeslán.');
 			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
-				$message = $this->translator->trans('Nastala chyba při odesílání mailu.');
+				$message = t('Nastala chyba při odesílání mailu.');
 			}
 
 		}

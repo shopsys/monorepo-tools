@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Module\ModulesFormType;
 use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -55,17 +54,11 @@ class SuperadminController extends AdminBaseController {
 	 */
 	private $pricingSettingFacade;
 
-	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
 		ModuleList $moduleList,
 		ModuleFacade $moduleFacade,
 		PricingSetting $pricingSetting,
 		PricingSettingFacade $pricingSettingFacade,
-		Translator $translator,
 		GridFactory $gridFactory,
 		Localization $localization,
 		LocalizedRouterFactory $localizedRouterFactory
@@ -74,7 +67,6 @@ class SuperadminController extends AdminBaseController {
 		$this->moduleFacade = $moduleFacade;
 		$this->pricingSetting = $pricingSetting;
 		$this->pricingSettingFacade = $pricingSettingFacade;
-		$this->translator = $translator;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
 		$this->localizedRouterFactory = $localizedRouterFactory;
@@ -91,7 +83,7 @@ class SuperadminController extends AdminBaseController {
 	 * @Route("/superadmin/pricing/")
 	 */
 	public function pricingAction(Request $request) {
-		$form = $this->createForm(new InputPriceTypeFormType($this->translator));
+		$form = $this->createForm(new InputPriceTypeFormType());
 
 		$pricingSettingData = [];
 		if (!$form->isSubmitted()) {
@@ -110,7 +102,7 @@ class SuperadminController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno',
+				t('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno'),
 				[
 					'url' => $this->generateUrl('admin_superadmin_pricing'),
 				]
@@ -186,9 +178,12 @@ class SuperadminController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
-				'url' => $this->generateUrl('admin_superadmin_pricing'),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Nastavení zapínacích modulů bylo upraveno'),
+				[
+					'url' => $this->generateUrl('admin_superadmin_pricing'),
+				]
+			);
 			return $this->redirectToRoute('admin_superadmin_modules');
 		}
 

@@ -74,15 +74,15 @@ class RegistrationController extends FrontBaseController {
 
 				$this->login($user);
 
-				$this->getFlashMessageSender()->addSuccessFlash('Byli jste úspěšně zaregistrováni');
+				$this->getFlashMessageSender()->addSuccessFlash(t('Byli jste úspěšně zaregistrováni'));
 				return $this->redirectToRoute('front_homepage');
 			}
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError('V databázi se již nachází zákazník s tímto e-mailem'));
+			$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', [
@@ -118,7 +118,7 @@ class RegistrationController extends FrontBaseController {
 				$this->em->commit();
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.',
+					t('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.'),
 					[
 						'email' => $email,
 					]
@@ -126,11 +126,13 @@ class RegistrationController extends FrontBaseController {
 				return $this->redirectToRoute('front_registration_reset_password');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
-					. ' <a href="{{ registrationLink }}">Zaregistrovat</a>', [
+					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
+						. ' <a href="{{ registrationLink }}">Zaregistrovat</a>'),
+					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
-					]);
+					]
+				);
 			} catch (\Exception $ex) {
 				$this->em->rollback();
 				throw $ex;
@@ -147,7 +149,7 @@ class RegistrationController extends FrontBaseController {
 		$hash = $request->query->get('hash');
 
 		if (!$this->registrationFacade->isResetPasswordHashValid($email, $this->domain->getId(), $hash)) {
-			$this->getFlashMessageSender()->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
 			return $this->redirectToRoute('front_homepage');
 		}
 
@@ -167,20 +169,23 @@ class RegistrationController extends FrontBaseController {
 				$this->em->commit();
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->em->rollback();
-				$this->getFlashMessageSender()->addErrorFlashTwig('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
-					. ' <a href="{{ registrationLink }}">Zaregistrovat</a>', [
+				$this->getFlashMessageSender()->addErrorFlashTwig(
+					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.
+						<a href="{{ registrationLink }}">Zaregistrovat</a>'),
+					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
-					]);
+					]
+				);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
 				$this->em->rollback();
-				$this->getFlashMessageSender()->addErrorFlash('Platnost odkazu pro změnu hesla vypršela.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
 			} catch (\Exception $ex) {
 				$this->em->rollback();
 				throw $ex;
 			}
 
-			$this->getFlashMessageSender()->addSuccessFlash('Heslo bylo úspěšně změněno');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Heslo bylo úspěšně změněno'));
 			return $this->redirectToRoute('front_homepage');
 		}
 

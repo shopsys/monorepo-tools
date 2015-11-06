@@ -6,7 +6,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
@@ -30,18 +29,11 @@ class AvailabilityController extends AdminBaseController {
 	 */
 	private $availabilityInlineEdit;
 
-	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
 	public function __construct(
-		Translator $translator,
 		AvailabilityFacade $availabilityFacade,
 		AvailabilityInlineEdit $availabilityInlineEdit,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
-		$this->translator = $translator;
 		$this->availabilityFacade = $availabilityFacade;
 		$this->availabilityInlineEdit = $availabilityInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
@@ -76,21 +68,26 @@ class AvailabilityController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', [
-					'name' => $fullName,
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Dostupnost <strong>{{ name }}</strong> byla smazána'),
+					[
+						'name' => $fullName,
+					]
+				);
 			} else {
 				$newAvailability = $this->availabilityFacade->getById($newId);
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
-					. ' <strong>{{ newName }}</strong> a byla smazána.',
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
+						. ' <strong>{{ newName }}</strong> a byla smazána.'),
 					[
 						'oldName' => $fullName,
 						'newName' => $newAvailability->getName(),
-					]);
+					]
+				);
 			}
 
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená dostupnost neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená dostupnost neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_availability_list');
@@ -106,14 +103,14 @@ class AvailabilityController extends AdminBaseController {
 			$isAvailabilityDefault = $this->availabilityFacade->isAvailabilityDefault($availability);
 			if ($this->availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
 				if ($isAvailabilityDefault) {
-					$message = $this->translator->trans(
+					$message = t(
 						'Dostupnost "%name%" je nastavena jako výchozí. '
 						. 'Pro její odstranění musíte zvolit, která se má všude, '
 						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou dostupnost místo ní chcete nastavit?',
 						['%name%' => $availability->getName()]
 					);
 				} else {
-					$message = $this->translator->trans(
+					$message = t(
 						'Jelikož dostupnost "%name%" je používána ještě u některých produktů, '
 						. 'musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?',
 						['%name%' => $availability->getName()]
@@ -131,7 +128,7 @@ class AvailabilityController extends AdminBaseController {
 					$availabilityNamesById
 				);
 			} else {
-				$message = $this->translator->trans(
+				$message = t(
 					'Opravdu si přejete trvale odstranit dostupnost "%name%"? Nikde není použitá.',
 					['%name%' => $availability->getName()]
 				);
@@ -139,7 +136,7 @@ class AvailabilityController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			return new Response($this->translator->trans('Zvolená dostupnost neexistuje'));
+			return new Response(t('Zvolená dostupnost neexistuje'));
 		}
 	}
 
@@ -165,7 +162,7 @@ class AvailabilityController extends AdminBaseController {
 					$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
 				}
 			);
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno'));
 
 			return $this->redirectToRoute('admin_availability_list');
 		}

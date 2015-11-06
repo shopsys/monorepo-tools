@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
 use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
@@ -36,11 +35,6 @@ class AdministratorController extends AdminBaseController {
 	private $gridFactory;
 
 	/**
-	 * @var \Symfony\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
 	 */
 	private $administratorActivityFacade;
@@ -49,13 +43,11 @@ class AdministratorController extends AdminBaseController {
 		AdministratorFacade $administratorFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Translator $translator,
 		AdministratorActivityFacade $administratorActivityFacade
 	) {
 		$this->administratorFacade = $administratorFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
-		$this->translator = $translator;
 		$this->administratorActivityFacade = $administratorActivityFacade;
 	}
 
@@ -114,7 +106,8 @@ class AdministratorController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', [
+					t('Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
 						'name' => $administratorData->realName,
 						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
 					]
@@ -123,13 +116,15 @@ class AdministratorController extends AdminBaseController {
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné', [
+					t('Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné'),
+					[
 						'name' => $administratorData->username,
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					'Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje', [
+					t('Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje'),
+					[
 						'name' => $administratorData->username,
 					]
 				);
@@ -138,11 +133,11 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem($this->translator->trans('Editace administrátora - ') . $administrator->getRealName())
+			new MenuItem(t('Editace administrátora - ') . $administrator->getRealName())
 		);
 
 		$lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(
@@ -184,7 +179,8 @@ class AdministratorController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>', [
+					t('Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
 						'name' => $administrator->getRealName(),
 						'url' => $this->generateUrl('admin_administrator_list', ['id' => $administrator->getId()]),
 					]
@@ -208,7 +204,7 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Administrator/new.html.twig', [
@@ -230,17 +226,23 @@ class AdministratorController extends AdminBaseController {
 					$this->administratorFacade->delete($id);
 				}
 			);
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Administrátor <strong>{{ name }}</strong> byl smazán.', [
-				'name' => $realName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Administrátor <strong>{{ name }}</strong> byl smazán.'),
+				[
+					'name' => $realName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Nemůžete smazat sami sebe.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Nemůžete smazat sami sebe.'));
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.', [
-				'name' => $this->administratorFacade->getById($id)->getRealName(),
-			]);
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				t('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.'),
+				[
+					'name' => $this->administratorFacade->getById($id)->getRealName(),
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený administrátor neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený administrátor neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_administrator_list');

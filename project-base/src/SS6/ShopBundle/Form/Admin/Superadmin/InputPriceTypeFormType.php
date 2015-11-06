@@ -7,19 +7,9 @@ use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints;
 
 class InputPriceTypeFormType extends AbstractType {
-
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
-	public function __construct(TranslatorInterface $translator) {
-		$this->translator = $translator;
-	}
 
 	/**
 	 * @return string
@@ -61,8 +51,8 @@ class InputPriceTypeFormType extends AbstractType {
 	 */
 	private function getInputPriceTypesLabels() {
 		return [
-			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => $this->translator->trans('Bez DPH'),
-			PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => $this->translator->trans('S DPH'),
+			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Bez DPH'),
+			PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('S DPH'),
 		];
 	}
 

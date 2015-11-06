@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Form\Admin\AdvancedSearch;
 
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
@@ -32,10 +31,7 @@ class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase {
 	}
 
 	public function testTranslateOperatorNotFoundException() {
-		$translatorMock = $this->getMockBuilder(Translator::class)
-			->disableOriginalConstructor()
-			->getMock();
-		$advancedSearchTranslator = new AdvancedSearchOperatorTranslation($translatorMock);
+		$advancedSearchTranslator = new AdvancedSearchOperatorTranslation();
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
 		$advancedSearchTranslator->translateOperator('nonexistingOperator');
