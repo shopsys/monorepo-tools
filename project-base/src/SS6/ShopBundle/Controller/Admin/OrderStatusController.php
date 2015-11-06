@@ -67,30 +67,39 @@ class OrderStatusController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Stav objednávek <strong>{{ name }}</strong> byl smazán', [
-					'name' => $orderStatus->getName(),
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Stav objednávek <strong>{{ name }}</strong> byl smazán'),
+					[
+						'name' => $orderStatus->getName(),
+					]
+				);
 			} else {
 				$newOrderStatus = $this->orderStatusFacade->getById($newId);
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem'
-					. ' <strong>{{ newName }}</strong> a byl smazán.',
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán.'),
 					[
 						'oldName' => $orderStatus->getName(),
 						'newName' => $newOrderStatus->getName(),
-					]);
+					]
+				);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
-					. ' je rezervovaný a nelze jej smazat', [
-				'name' => $e->getOrderStatus()->getName(),
-			]);
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				t('Stav objednávek <strong>{{ name }}</strong> je rezervovaný a nelze jej smazat'),
+				[
+					'name' => $e->getOrderStatus()->getName(),
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Stav objednávek <strong>{{ name }}</strong>'
-					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav', [
-				'name' => $e->getOrderStatus()->getName(),
-			]);
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				t('Stav objednávek <strong>{{ name }}</strong>'
+					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav'),
+				[
+					'name' => $e->getOrderStatus()->getName(),
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený stav objednávek neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený stav objednávek neexistuje'));
 		}
 
 		return $this->redirectToRoute('admin_orderstatus_list');

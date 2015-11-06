@@ -138,13 +138,15 @@ class DomainController extends AdminBaseController {
 				}
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Byla upravena doména <strong>{{ name }}</strong>', ['name' => $domain->getName()]);
+					t('Byla upravena doména <strong>{{ name }}</strong>'),
+					['name' => $domain->getName()]
+				);
 
 				return new JsonResponse(['result' => 'valid']);
 			} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Typ souboru není podporován.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Typ souboru není podporován.'));
 			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Nahrání souboru selhalo, zkuste to, prosím, znovu.');
+				$this->getFlashMessageSender()->addErrorFlash(t('Nahrání souboru selhalo, zkuste to, prosím, znovu.'));
 			}
 
 		}

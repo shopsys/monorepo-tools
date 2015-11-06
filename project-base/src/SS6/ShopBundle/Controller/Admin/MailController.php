@@ -147,13 +147,13 @@ class MailController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení šablony e-mailu bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení šablony e-mailu bylo upraveno'));
 
 			return $this->redirectToRoute('admin_mail_template');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
@@ -223,7 +223,7 @@ class MailController extends AdminBaseController {
 					$this->mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
 				}
 			);
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení emailů bylo upraveno.');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení emailů bylo upraveno.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', [

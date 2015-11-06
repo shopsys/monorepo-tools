@@ -96,7 +96,7 @@ class BestsellingProductController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					'Bylo nastaveno nejprodávanější zboží kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+					t('Bylo nastaveno nejprodávanější zboží kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 					[
 						'name' => $category->getName(),
 						'url' => $this->generateUrl(

@@ -92,15 +92,18 @@ class CurrencyController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Měna <strong>{{ name }}</strong> byla smazána', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Měna <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(
-				'Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky'
+				t('Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky')
 			);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená měna neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená měna neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_currency_list');
@@ -146,7 +149,7 @@ class CurrencyController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení měn bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Nastavení měn bylo upraveno'));
 
 			return $this->redirectToRoute('admin_currency_list');
 		}

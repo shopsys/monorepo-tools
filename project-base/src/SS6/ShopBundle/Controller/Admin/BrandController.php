@@ -73,15 +73,18 @@ class BrandController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byla upravena značka <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $brand->getName(),
-					'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byla upravena značka <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $brand->getName(),
+						'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_brand_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace značky - ') . $brand->getName()));
@@ -145,15 +148,18 @@ class BrandController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byla vytvořena značka <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $brand->getName(),
-					'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byla vytvořena značka <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $brand->getName(),
+						'url' => $this->generateUrl('admin_brand_edit', ['id' => $brand->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_brand_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Brand/new.html.twig', [
@@ -175,11 +181,14 @@ class BrandController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Značka <strong>{{ name }}</strong> byl smazána', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Značka <strong>{{ name }}</strong> byl smazána'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená značka neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená značka neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_brand_list');

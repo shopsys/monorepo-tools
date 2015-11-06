@@ -102,7 +102,7 @@ class SuperadminController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno',
+				t('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno'),
 				[
 					'url' => $this->generateUrl('admin_superadmin_pricing'),
 				]
@@ -178,9 +178,12 @@ class SuperadminController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Nastavení zapínacích modulů bylo upraveno', [
-				'url' => $this->generateUrl('admin_superadmin_pricing'),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Nastavení zapínacích modulů bylo upraveno'),
+				[
+					'url' => $this->generateUrl('admin_superadmin_pricing'),
+				]
+			);
 			return $this->redirectToRoute('admin_superadmin_modules');
 		}
 

@@ -49,14 +49,14 @@ class PromoCodeController extends FrontBaseController {
 				'message' => t('Slevový kód není platný. Prosím, zkontrolujte ho.'),
 			]);
 		}
-		$this->getFlashMessageSender()->addSuccessFlash('Slevový kód byl přidán do objednávky.');
+		$this->getFlashMessageSender()->addSuccessFlash(t('Slevový kód byl přidán do objednávky.'));
 
 		return new JsonResponse(['result' => true]);
 	}
 
 	public function removeAction() {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
-		$this->getFlashMessageSender()->addSuccessFlash('Slevový kód byl odebrán z objednávky.');
+		$this->getFlashMessageSender()->addSuccessFlash(t('Slevový kód byl odebrán z objednávky.'));
 
 		return $this->redirectToRoute('front_cart');
 	}

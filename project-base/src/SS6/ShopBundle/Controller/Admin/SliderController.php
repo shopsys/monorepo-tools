@@ -104,16 +104,18 @@ class SliderController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla vytvořena stránka slideru'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $sliderItem->getName(),
-				'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $sliderItem->getName(),
+					'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_slider_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/new.html.twig', [
@@ -145,7 +147,7 @@ class SliderController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				t('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 				[
 					'name' => $sliderItem->getName(),
 					'url' => $this->generateUrl('admin_slider_edit', ['id' => $sliderItem->getId()]),
@@ -156,7 +158,7 @@ class SliderController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(
@@ -183,11 +185,14 @@ class SliderController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Stránka <strong>{{ name }}</strong> byla smazána', [
-				'name' => $name,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Stránka <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $name,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená stránka neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená stránka neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_slider_list');

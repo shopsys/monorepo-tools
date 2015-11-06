@@ -68,21 +68,26 @@ class AvailabilityController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ name }}</strong> byla smazána', [
-					'name' => $fullName,
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Dostupnost <strong>{{ name }}</strong> byla smazána'),
+					[
+						'name' => $fullName,
+					]
+				);
 			} else {
 				$newAvailability = $this->availabilityFacade->getById($newId);
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
-					. ' <strong>{{ newName }}</strong> a byla smazána.',
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
+						. ' <strong>{{ newName }}</strong> a byla smazána.'),
 					[
 						'oldName' => $fullName,
 						'newName' => $newAvailability->getName(),
-					]);
+					]
+				);
 			}
 
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená dostupnost neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená dostupnost neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_availability_list');
@@ -157,7 +162,7 @@ class AvailabilityController extends AdminBaseController {
 					$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
 				}
 			);
-			$this->getFlashMessageSender()->addSuccessFlash('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno'));
 
 			return $this->redirectToRoute('admin_availability_list');
 		}

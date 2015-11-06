@@ -87,16 +87,18 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla vytvořena platba'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $payment->getName(),
-				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla vytvořena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $payment->getName(),
+					'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', [
@@ -125,16 +127,18 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Byla upravena platba'
-					. ' <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-				'name' => $payment->getName(),
-				'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Byla upravena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				[
+					'name' => $payment->getName(),
+					'url' => $this->generateUrl('admin_payment_edit', ['id' => $payment->getId()]),
+				]
+			);
 			return $this->redirectToRoute('admin_transportandpayment_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace platby - ') . $payment->getName()));
@@ -160,11 +164,14 @@ class PaymentController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Platba <strong>{{ name }}</strong> byla smazána', [
-				'name' => $paymentName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Platba <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $paymentName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená platba neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená platba neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_transportandpayment_list');

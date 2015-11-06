@@ -84,7 +84,7 @@ class CategoryController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				t('Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 				[
 					'name' => $category->getName(),
 					'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
@@ -94,7 +94,7 @@ class CategoryController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace kategorie - ') . $category->getName()));
@@ -127,7 +127,7 @@ class CategoryController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				'Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>',
+				t('Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 				[
 					'name' => $category->getName(),
 					'url' => $this->generateUrl('admin_category_edit', ['id' => $category->getId()]),
@@ -138,7 +138,7 @@ class CategoryController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Category/new.html.twig', [
@@ -215,11 +215,14 @@ class CategoryController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Kategorie <strong>{{ name }}</strong> byla smazána', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Kategorie <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená kategorie neexistuje');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená kategorie neexistuje'));
 		}
 
 		return $this->redirectToRoute('admin_category_list');

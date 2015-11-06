@@ -99,14 +99,17 @@ class AdvertController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla upravena', [
-					'name' => $advert->getName(),
-				]);
+				->addSuccessFlashTwig(
+					t('Reklama <strong>{{ name }}</strong> byla upravena'),
+					[
+						'name' => $advert->getName(),
+					]
+				);
 			return $this->redirectToRoute('admin_advert_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace reklamy - ') . $advert->getName()));
@@ -188,14 +191,17 @@ class AdvertController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla vytvořena', [
-					'name' => $advert->getName(),
-				]);
+				->addSuccessFlashTwig(
+					t('Reklama <strong>{{ name }}</strong> byla vytvořena'),
+					[
+						'name' => $advert->getName(),
+					]
+				);
 			return $this->redirectToRoute('admin_advert_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/new.html.twig', [
@@ -217,11 +223,14 @@ class AdvertController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Reklama <strong>{{ name }}</strong> byla smazána', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Reklama <strong>{{ name }}</strong> byla smazána'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená reklama neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená reklama neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_advert_list');

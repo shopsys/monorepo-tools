@@ -122,15 +122,18 @@ class ArticleController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $article->getName(),
-					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $article->getName(),
+						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace článku - ') . $article->getName()));
@@ -178,15 +181,18 @@ class ArticleController extends AdminBaseController {
 			);
 
 			$this->getFlashMessageSender()
-				->addSuccessFlashTwig('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>', [
-					'name' => $article->getName(),
-					'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
-				]);
+				->addSuccessFlashTwig(
+					t('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					[
+						'name' => $article->getName(),
+						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
+					]
+				);
 			return $this->redirectToRoute('admin_article_list');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
@@ -208,11 +214,14 @@ class ArticleController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Článek <strong>{{ name }}</strong> byl smazán', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Článek <strong>{{ name }}</strong> byl smazán'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený článek neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený článek neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_article_list');

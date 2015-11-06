@@ -130,13 +130,16 @@ class VatController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('DPH <strong>{{ name }}</strong> bylo smazáno', [
-					'name' => $fullName,
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('DPH <strong>{{ name }}</strong> bylo smazáno'),
+					[
+						'name' => $fullName,
+					]
+				);
 			} else {
 				$newVat = $this->vatFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.',
+					t('DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.'),
 					[
 						'name' => $fullName,
 						'newName' => $newVat->getName(),
@@ -144,7 +147,7 @@ class VatController extends AdminBaseController {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolené DPH neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolené DPH neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_vat_list');
@@ -176,12 +179,12 @@ class VatController extends AdminBaseController {
 						$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
 					}
 				);
-				$this->getFlashMessageSender()->addSuccessFlash('Nastavení DPH bylo upraveno');
+				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
 
 				return $this->redirectToRoute('admin_vat_list');
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Neplatné nastavení zaokrouhlování');
+			$this->getFlashMessageSender()->addErrorFlash(t('Neplatné nastavení zaokrouhlování'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', [

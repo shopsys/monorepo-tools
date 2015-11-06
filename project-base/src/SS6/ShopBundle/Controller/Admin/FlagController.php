@@ -55,11 +55,14 @@ class FlagController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Příznak <strong>{{ name }}</strong> byl smazán', [
-				'name' => $fullName,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Příznak <strong>{{ name }}</strong> byl smazán'),
+				[
+					'name' => $fullName,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený příznak neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený příznak neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_flag_list');

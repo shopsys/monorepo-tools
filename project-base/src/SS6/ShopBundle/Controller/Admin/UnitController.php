@@ -99,13 +99,16 @@ class UnitController extends AdminBaseController {
 			);
 
 			if ($newId === null) {
-				$this->getFlashMessageSender()->addSuccessFlashTwig('Jednotka <strong>{{ name }}</strong> byla smazána', [
-					'name' => $fullName,
-				]);
+				$this->getFlashMessageSender()->addSuccessFlashTwig(
+					t('Jednotka <strong>{{ name }}</strong> byla smazána'),
+					[
+						'name' => $fullName,
+					]
+				);
 			} else {
 				$newUnit = $this->unitFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Jednotka <strong>{{ name }}</strong> byla smazána a byla nahrazena jednotkou <strong>{{ newName }}</strong>.',
+					t('Jednotka <strong>{{ name }}</strong> byla smazána a byla nahrazena jednotkou <strong>{{ newName }}</strong>.'),
 					[
 						'name' => $fullName,
 						'newName' => $newUnit->getName(),
@@ -113,7 +116,7 @@ class UnitController extends AdminBaseController {
 				);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolená jednotka neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená jednotka neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_unit_list');

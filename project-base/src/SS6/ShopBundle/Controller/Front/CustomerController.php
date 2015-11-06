@@ -56,7 +56,7 @@ class CustomerController extends FrontBaseController {
 
 	public function editAction(Request $request) {
 		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
-			$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
+			$this->getFlashMessageSender()->addErrorFlash(t('Pro přístup na tuto stránku musíte být přihlášeni'));
 			return $this->redirectToRoute('front_login');
 		}
 
@@ -80,12 +80,12 @@ class CustomerController extends FrontBaseController {
 				$customerData
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Vaše údaje byly úspěšně zaktualizovány');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Vaše údaje byly úspěšně zaktualizovány'));
 			return $this->redirectToRoute('front_customer_edit');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Customer/edit.html.twig', [
@@ -95,7 +95,7 @@ class CustomerController extends FrontBaseController {
 
 	public function ordersAction() {
 		if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
-			$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
+			$this->getFlashMessageSender()->addErrorFlash(t('Pro přístup na tuto stránku musíte být přihlášeni'));
 			return $this->redirectToRoute('front_login');
 		}
 
@@ -129,7 +129,7 @@ class CustomerController extends FrontBaseController {
 	private function orderDetailAction($urlHash = null, $orderNumber = null) {
 		if ($orderNumber !== null) {
 			if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
-				$this->getFlashMessageSender()->addErrorFlash('Pro přístup na tuto stránku musíte být přihlášeni');
+				$this->getFlashMessageSender()->addErrorFlash(t('Pro přístup na tuto stránku musíte být přihlášeni'));
 				return $this->redirectToRoute('front_login');
 			}
 
@@ -138,7 +138,7 @@ class CustomerController extends FrontBaseController {
 				$order = $this->orderFacade->getByOrderNumberAndUser($orderNumber, $user);
 				/* @var $order \SS6\ShopBundle\Model\Order\Order */
 			} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash('Objednávka nebyla nalezena');
+				$this->getFlashMessageSender()->addErrorFlash(t('Objednávka nebyla nalezena'));
 				return $this->redirectToRoute('front_customer_orders');
 			}
 		} else {
@@ -165,7 +165,7 @@ class CustomerController extends FrontBaseController {
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 			$adminFlashMessageSender = $this->get('ss6.shop.component.flash_message.sender.admin');
 			/* @var $adminFlashMessageSender \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender */
-			$adminFlashMessageSender->addErrorFlash('Uživatel nebyl nalezen.');
+			$adminFlashMessageSender->addErrorFlash(t('Uživatel nebyl nalezen.'));
 
 			return $this->redirectToRoute('admin_customer_list');
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException $e) {

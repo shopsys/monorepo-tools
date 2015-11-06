@@ -152,14 +152,17 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				[
+					'product' => $product,
+				]
+			);
 			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		$this->breadcrumb->replaceLastItem(
@@ -201,15 +204,17 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Bylo vytvořeno zboží'
-					. ' <strong>{{ product|productDisplayName }}</strong>', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				[
+					'product' => $product,
+				]
+			);
 			return $this->redirectToRoute('admin_product_edit', ['id' => $product->getId()]);
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Prosím zkontrolujte si správnost vyplnění všech údajů');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
@@ -256,7 +261,7 @@ class ProductController extends AdminBaseController {
 				array_map('intval', $grid->getSelectedRowIds())
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash('Hromadná úprava byla provedena');
+			$this->getFlashMessageSender()->addSuccessFlash(t('Hromadná úprava byla provedena'));
 
 			return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
 		}
@@ -287,11 +292,14 @@ class ProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán', [
-				'product' => $product,
-			]);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán'),
+				[
+					'product' => $product,
+				]
+			);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash('Zvolený produkt neexistuje.');
+			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený produkt neexistuje.'));
 		}
 
 		return $this->redirectToRoute('admin_product_list');
@@ -331,7 +339,8 @@ class ProductController extends AdminBaseController {
 				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					'Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.', [
+					t('Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.'),
+					[
 						'productVariant' => $newMainVariant,
 					]
 				);
@@ -339,7 +348,7 @@ class ProductController extends AdminBaseController {
 				return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\VariantException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(
-					'Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.'
+					t('Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.')
 				);
 			}
 		}

@@ -53,9 +53,9 @@ class TopProductController extends AdminBaseController {
 				}
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig('Zboží bylo odstraněno');
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Zboží bylo odstraněno'));
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {
-			$this->getFlashMessageSender()->addErrorFlashTwig('Zboží se nepodařilo odstranit - zboží není v tomto seznamu.');
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Zboží se nepodařilo odstranit - zboží není v tomto seznamu.'));
 		}
 
 		return $this->redirectToRoute('admin_topproduct_list');
