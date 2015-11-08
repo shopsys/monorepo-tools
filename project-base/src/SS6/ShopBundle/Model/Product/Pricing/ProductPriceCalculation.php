@@ -73,7 +73,7 @@ class ProductPriceCalculation {
 
 		$priceCalculationType = $product->getPriceCalculationType();
 		if ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_AUTO) {
-			return $this->calculateProductPriceForPricingGroupAuto($product, $pricingGroup);
+			return $this->calculateProductPriceForPricingGroupAuto($product, $pricingGroup, $domainId);
 		} elseif ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 			return $this->calculateProductPriceForPricingGroupManual($product, $pricingGroup);
 		} else {
@@ -146,26 +146,26 @@ class ProductPriceCalculation {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
-	private function calculateProductPriceForPricingGroupAuto(Product $product, PricingGroup $pricingGroup) {
+	private function calculateProductPriceForPricingGroupAuto(Product $product, PricingGroup $pricingGroup, $domainId) {
 		$basePrice = $this->calculateBasePrice($product);
 
 		$price = $this->basePriceCalculation->applyCoefficients(
 			$basePrice,
 			$product->getVat(),
-			[$pricingGroup->getCoefficient(), $this->getDomainDefaultCurrencyReversedExchangeRate($pricingGroup)]
+			[$pricingGroup->getCoefficient(), $this->getDomainDefaultCurrencyReversedExchangeRate($domainId)]
 		);
 
 		return new ProductPrice($price, false);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
 	 * @return string
 	 */
-	private function getDomainDefaultCurrencyReversedExchangeRate(PricingGroup $pricingGroup) {
-		$domainId = $pricingGroup->getDomainId();
+	private function getDomainDefaultCurrencyReversedExchangeRate($domainId) {
 		$domainDefaultCurrencyId = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainId);
 		$currency = $this->currencyFacade->getById($domainDefaultCurrencyId);
 
