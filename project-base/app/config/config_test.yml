@@ -31,13 +31,18 @@ monolog:
     console:
       type: "null"
 
-# simple login for crawler tests
 security:
+  # simple login for crawler tests
   firewalls:
     administration:
       http_basic: ~
     frontend:
       http_basic: ~
+  # quicker password encryption in test data fixtures
+  encoders:
+    Symfony\Component\Security\Core\User\UserInterface:
+      algorithm: bcrypt
+      cost: 4
 
 swiftmailer:
   transport: "%test_mailer_transport%"
