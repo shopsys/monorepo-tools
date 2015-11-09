@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVariantFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -42,7 +43,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
 		$this->createVariants($productsByCatnum);
 
-		$manager->flush();
 		$this->runRecalculators();
 	}
 
@@ -83,16 +83,21 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	private function createVariants(array $productsByCatnum) {
 		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$productVariantFacade = $this->get(ProductVariantFacade::class);
+		/* @var $productVariantFacade \SS6\ShopBundle\Model\Product\ProductVariantFacade */
 
 		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
 
 		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
-			$mainVariant = $productsByCatnum[$mainVariantCatnum];
-			/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
+			$mainProduct = $productsByCatnum[$mainVariantCatnum];
+			/* @var $mainProduct \SS6\ShopBundle\Model\Product\Product */
 
+			$variants = [];
 			foreach ($variantsCatnums as $variantCatnum) {
-				$mainVariant->addVariant($productsByCatnum[$variantCatnum]);
+				$variants[] = $productsByCatnum[$variantCatnum];
 			}
+
+			$productVariantFacade->createVariant($mainProduct, $variants);
 		}
 	}
 
