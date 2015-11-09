@@ -36,7 +36,7 @@ class BestsellingProductController extends FrontBaseController {
 	}
 
 	public function listAction(Category $category) {
-		$bestsellingProducts = $this->bestsellingProductsFacade->getAllListableProductDetails(
+		$bestsellingProducts = $this->bestsellingProductsFacade->getAllOfferedProductDetails(
 			$this->domain->getId(), $category, $this->currentCustomer->getPricingGroup()
 		);
 

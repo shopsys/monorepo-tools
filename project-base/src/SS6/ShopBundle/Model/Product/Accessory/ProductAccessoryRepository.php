@@ -47,11 +47,12 @@ class ProductAccessoryRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $limit
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getTop3ListableAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
-		$queryBuilder = $this->getAllListableAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup);
-		$queryBuilder->setMaxResults(3);
+	public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
+		$queryBuilder = $this->getAllOfferedAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup);
+		$queryBuilder->setMaxResults($limit);
 
 		return $queryBuilder->getQuery()->getResult();
 	}
@@ -70,8 +71,8 @@ class ProductAccessoryRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getAllListableAccessoriesByProduct(Product $product, $domainId, PricingGroup $pricingGroup) {
-		return $this->getAllListableAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup)
+	public function getAllOfferedAccessoriesByProduct(Product $product, $domainId, PricingGroup $pricingGroup) {
+		return $this->getAllOfferedAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup)
 			->getQuery()
 			->getResult();
 	}
@@ -82,8 +83,8 @@ class ProductAccessoryRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	private function getAllListableAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup) {
-		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainId, $pricingGroup);
+	private function getAllOfferedAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup) {
+		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 		$this->queryBuilderService->addOrExtendJoin(
 			$queryBuilder,
 			ProductAccessory::class,

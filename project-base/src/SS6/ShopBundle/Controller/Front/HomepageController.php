@@ -52,7 +52,7 @@ class HomepageController extends FrontBaseController {
 
 	public function indexAction() {
 		$sliderItems = $this->sliderItemFacade->getAllOnCurrentDomain();
-		$topProductsDetails = $this->topProductFacade->getAllVisibleProductDetails(
+		$topProductsDetails = $this->topProductFacade->getAllOfferedProductDetails(
 			$this->domain->getId(),
 			$this->currentCustomer->getPricingGroup()
 		);

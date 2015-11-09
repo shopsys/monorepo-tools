@@ -21,6 +21,9 @@ use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\Search\ProductSearchRepository;
 use SS6\ShopBundle\Model\Product\Unit\Unit;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ */
 class ProductRepository {
 
 	/**
@@ -90,8 +93,7 @@ class ProductRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getAllListableQueryBuilder($domainId, $pricingGroup) {
-		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
-		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
+		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 		$queryBuilder->andWhere('p.variantType != :variantTypeVariant')
 			->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT);
 
@@ -104,10 +106,21 @@ class ProductRepository {
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getAllSellableQueryBuilder($domainId, $pricingGroup) {
-		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
-		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
+		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 		$queryBuilder->andWhere('p.variantType != :variantTypeMain')
 			->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN);
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllOfferedQueryBuilder($domainId, $pricingGroup) {
+		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
 
 		return $queryBuilder;
 	}
@@ -182,6 +195,23 @@ class ProductRepository {
 	) {
 		$queryBuilder = $this->getAllSellableQueryBuilder($domainId, $pricingGroup);
 		$this->filterByCategory($queryBuilder, $category, $domainId);
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getOfferedInCategoryQueryBuilder(
+		$domainId,
+		PricingGroup $pricingGroup,
+		Category $category
+	) {
+		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
+		$this->filterByCategory($queryBuilder, $category, $domainId);
+
 		return $queryBuilder;
 	}
 

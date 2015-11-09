@@ -99,8 +99,8 @@ class BestsellingProductFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
-	public function getAllListableProductDetails($domainId, Category $category, PricingGroup $pricingGroup) {
-		$bestsellingProducts = $this->bestsellingProductRepository->getListableManualBestsellingProducts(
+	public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup) {
+		$bestsellingProducts = $this->bestsellingProductRepository->getOfferedManualBestsellingProducts(
 			$domainId,
 			$category,
 			$pricingGroup
@@ -111,7 +111,7 @@ class BestsellingProductFacade {
 			$manualBestsellingProductsIndexedByPosition[$bestsellingProduct->getPosition()] = $bestsellingProduct->getProduct();
 		}
 
-		$automaticBestsellingProducts = $this->bestsellingProductRepository->getListableAutomaticBestsellingProducts(
+		$automaticBestsellingProducts = $this->bestsellingProductRepository->getOfferedAutomaticBestsellingProducts(
 			$domainId,
 			$category,
 			$pricingGroup,

@@ -20,10 +20,11 @@ class ProductAccessoryFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $limit
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getTop3ListableAccessories(Product $product, $domainId, PricingGroup $pricingGroup) {
-		return $this->productAccessoryRepository->getTop3ListableAccessories($product, $domainId, $pricingGroup);
+	public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
+		return $this->productAccessoryRepository->getTopOfferedAccessories($product, $domainId, $pricingGroup, $limit);
 	}
 
 }
