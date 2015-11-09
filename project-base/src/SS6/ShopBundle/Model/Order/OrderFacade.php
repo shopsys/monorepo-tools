@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
+use SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
@@ -86,9 +86,9 @@ class OrderFacade {
 	private $localization;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade
+	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
 	 */
-	private $administratorSecurityFacade;
+	private $administratorFrontSecurityFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
@@ -137,7 +137,7 @@ class OrderFacade {
 		OrderHashGeneratorRepository $orderHashGeneratorRepository,
 		Setting $setting,
 		Localization $localization,
-		AdministratorSecurityFacade $administratorSecurityFacade,
+		AdministratorFrontSecurityFacade $administratorFrontSecurityFacade,
 		CurrentPromoCodeFacade $currentPromoCodeFacade,
 		CartFacade $cartFacade,
 		CustomerEditFacade $customerEditFacade,
@@ -157,7 +157,7 @@ class OrderFacade {
 		$this->orderHashGeneratorRepository = $orderHashGeneratorRepository;
 		$this->setting = $setting;
 		$this->localization = $localization;
-		$this->administratorSecurityFacade = $administratorSecurityFacade;
+		$this->administratorFrontSecurityFacade = $administratorFrontSecurityFacade;
 		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 		$this->cartFacade = $cartFacade;
 		$this->customerEditFacade = $customerEditFacade;
@@ -347,9 +347,9 @@ class OrderFacade {
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 */
 	private function setOrderDataAdministrator(OrderData $orderData) {
-		if ($this->administratorSecurityFacade->isAdministratorLoggedAsCustomer()) {
+		if ($this->administratorFrontSecurityFacade->isAdministratorLoggedAsCustomer()) {
 			try {
-				$currentAdmin = $this->administratorSecurityFacade->getCurrentAdministrator();
+				$currentAdmin = $this->administratorFrontSecurityFacade->getCurrentAdministrator();
 				$orderData->createdAsAdministrator = $currentAdmin;
 				$orderData->createdAsAdministratorName = $currentAdmin->getRealName();
 			} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {

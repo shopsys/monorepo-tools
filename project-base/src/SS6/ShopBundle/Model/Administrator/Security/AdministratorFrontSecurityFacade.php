@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class AdministratorSecurityFacade {
+class AdministratorFrontSecurityFacade {
 
 	// same as in security.yml
 	const ADMINISTRATION_CONTEXT = 'administration';

@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Security;
 
-use SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade;
+use SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Security\Roles;
@@ -39,29 +39,29 @@ class LoginAsUserFacade {
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade
+	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
 	 */
-	private $administratorSecurityFacade;
+	private $administratorFrontSecurityFacade;
 
 	/**
 	 * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
 	 * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $eventDispatcher
 	 * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \SS6\ShopBundle\Model\Administrator\Security\AdministratorSecurityFacade $administratorSecurityFacade
+	 * @param \SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
 	 */
 	public function __construct(
 		TokenStorageInterface $tokenStorage,
 		EventDispatcherInterface $eventDispatcher,
 		SessionInterface $session,
 		UserRepository $userRepository,
-		AdministratorSecurityFacade $administratorSecurityFacade
+		AdministratorFrontSecurityFacade $administratorFrontSecurityFacade
 	) {
 		$this->tokenStorage = $tokenStorage;
 		$this->eventDispatcher = $eventDispatcher;
 		$this->session = $session;
 		$this->userRepository = $userRepository;
-		$this->administratorSecurityFacade = $administratorSecurityFacade;
+		$this->administratorFrontSecurityFacade = $administratorFrontSecurityFacade;
 	}
 
 	/**
@@ -75,7 +75,7 @@ class LoginAsUserFacade {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function loginAsRememberedUser(Request $request) {
-		if (!$this->administratorSecurityFacade->isAdministratorLogged()) {
+		if (!$this->administratorFrontSecurityFacade->isAdministratorLogged()) {
 			throw new \SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
 		}
 
