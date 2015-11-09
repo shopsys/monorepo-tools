@@ -84,6 +84,10 @@ class TransportAndPaymentController extends AdminBaseController {
 			return $this->redirectToRoute('admin_transportandpayment_freetransportandpaymentlimit');
 		}
 
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+		}
+
 		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [
 			'form' => $form->createView(),
 			'domain' => $this->domain,
