@@ -108,6 +108,10 @@ class BestsellingProductController extends AdminBaseController {
 			return $this->redirectToRoute('admin_bestsellingproduct_list');
 		}
 
+		if ($form->isSubmitted() && !$form->isValid()) {
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+		}
+
 		$this->breadcrumb->replaceLastItem(new MenuItem($category->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/detail.html.twig', [
