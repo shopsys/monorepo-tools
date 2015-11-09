@@ -86,9 +86,7 @@ class SuperadminController extends AdminBaseController {
 		$form = $this->createForm(new InputPriceTypeFormType());
 
 		$pricingSettingData = [];
-		if (!$form->isSubmitted()) {
-			$pricingSettingData['type'] = $this->pricingSetting->getInputPriceType();
-		}
+		$pricingSettingData['type'] = $this->pricingSetting->getInputPriceType();
 
 		$form->setData($pricingSettingData);
 		$form->handleRequest($request);

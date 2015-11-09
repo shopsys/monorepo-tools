@@ -89,10 +89,7 @@ class AdministratorController extends AdminBaseController {
 		$form = $this->createForm(new AdministratorFormType(AdministratorFormType::SCENARIO_EDIT));
 
 		$administratorData = new AdministratorData();
-
-		if (!$form->isSubmitted()) {
-			$administratorData->setFromEntity($administrator);
-		}
+		$administratorData->setFromEntity($administrator);
 
 		$form->setData($administratorData);
 		$form->handleRequest($request);

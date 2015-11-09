@@ -24,11 +24,6 @@ class ImageController extends AdminBaseController {
 	 */
 	private $imageFacade;
 
-	/**
-	 * @var \Symfony\Component\Translation\TranslatorInterface
-	 */
-	private $translator;
-
 	public function __construct(ImageFacade $imageFacade) {
 		$this->imageFacade = $imageFacade;
 	}

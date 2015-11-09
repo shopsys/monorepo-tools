@@ -133,10 +133,7 @@ class CustomerController extends AdminBaseController {
 
 		try {
 			$customerData = new CustomerData();
-
-			if (!$form->isSubmitted()) {
-				$customerData->setFromEntity($user);
-			}
+			$customerData->setFromEntity($user);
 
 			$form->setData($customerData);
 			$form->handleRequest($request);
