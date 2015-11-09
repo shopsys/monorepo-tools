@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -53,9 +54,12 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
 		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+		$em = $this->get(EntityManager::class);
+		/* @var $em \Doctrine\ORM\EntityManager */
+		$em->clear();
 
-		$productAvailabilityRecalculator->runImmediateRecalculations();
-		$productPriceRecalculator->runImmediateRecalculations();
+		$productAvailabilityRecalculator->runAllScheduledRecalculations();
+		$productPriceRecalculator->runAllScheduledRecalculations();
 		$productVisibilityFacade->refreshProductsVisibility();
 		// Main variant is set for recalculations after change of variants visibility.
 		$productPriceRecalculator->runAllScheduledRecalculations();
