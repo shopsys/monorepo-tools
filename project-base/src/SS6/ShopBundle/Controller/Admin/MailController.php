@@ -131,9 +131,9 @@ class MailController extends AdminBaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function templateAction(Request $request) {
-		$allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
-
 		$form = $this->createForm($this->allMailTemplatesFormTypeFactory->create());
+
+		$allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
 
 		$form->setData($allMailTemplatesData);
 		$form->handleRequest($request);
