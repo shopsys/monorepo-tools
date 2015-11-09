@@ -75,9 +75,10 @@ class PaymentController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$form = $this->createForm($this->paymentEditFormTypeFactory->create());
 		$paymentEditData = $this->paymentEditDataFactory->createDefault();
 
-		$form = $this->createForm($this->paymentEditFormTypeFactory->create(), $paymentEditData);
+		$form->setData($paymentEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -115,9 +116,11 @@ class PaymentController extends AdminBaseController {
 	public function editAction(Request $request, $id) {
 		$payment = $this->paymentEditFacade->getByIdWithTransports($id);
 
+		$form = $this->createForm($this->paymentEditFormTypeFactory->create());
+
 		$paymentEditData = $this->paymentEditDataFactory->createFromPayment($payment);
 
-		$form = $this->createForm($this->paymentEditFormTypeFactory->create(), $paymentEditData);
+		$form->setData($paymentEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
