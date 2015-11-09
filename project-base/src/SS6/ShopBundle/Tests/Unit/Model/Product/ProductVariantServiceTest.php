@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
+use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
@@ -40,6 +41,18 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotContains($variant1, $variantsArray);
 		$this->assertContains($variant2, $variantsArray);
 		$this->assertContains($variant3, $variantsArray);
+	}
+
+	public function testCreateVariant() {
+		$mainVariantEditData = new ProductEditData();
+		$mainProduct = new Product(new ProductData());
+		$variants = [];
+
+		$productVariantService = new ProductVariantService();
+		$mainVariant = $productVariantService->createMainVariant($mainVariantEditData, $mainProduct, $variants);
+
+		$this->assertNotSame($mainProduct, $mainVariant);
+		$this->assertTrue(in_array($mainProduct, $mainVariant->getVariants()));
 	}
 
 }
