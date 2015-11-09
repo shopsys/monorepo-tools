@@ -65,10 +65,7 @@ class CustomerController extends FrontBaseController {
 		$form = $this->createForm(new CustomerFormType());
 
 		$customerData = new CustomerData();
-
-		if (!$form->isSubmitted()) {
-			$customerData->setFromEntity($user);
-		}
+		$customerData->setFromEntity($user);
 
 		$form->setData($customerData);
 		$form->handleRequest($request);
