@@ -83,10 +83,7 @@ class AdvertController extends AdminBaseController {
 		$form = $this->createForm($this->advertFormTypeFactory->create($advert));
 
 		$advertData = new AdvertData();
-
-		if (!$form->isSubmitted()) {
-			$advertData->setFromEntity($advert);
-		}
+		$advertData->setFromEntity($advert);
 
 		$form->setData($advertData);
 		$form->handleRequest($request);
