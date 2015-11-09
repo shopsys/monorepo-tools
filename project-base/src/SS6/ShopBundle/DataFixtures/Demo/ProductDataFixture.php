@@ -42,7 +42,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			$productNo++;
 		}
 
-		$this->createVariants($productsByCatnum);
+		$this->createVariants($productsByCatnum, $productNo);
 
 		$this->runRecalculators();
 	}
@@ -83,8 +83,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[catnum] $productsByCatnum
+	 * @param int $productNo
 	 */
-	private function createVariants(array $productsByCatnum) {
+	private function createVariants(array $productsByCatnum, $productNo) {
 		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 		$productVariantFacade = $this->get(ProductVariantFacade::class);
@@ -101,7 +102,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 				$variants[] = $productsByCatnum[$variantCatnum];
 			}
 
-			$productVariantFacade->createVariant($mainProduct, $variants);
+			$mainVariant = $productVariantFacade->createVariant($mainProduct, $variants);
+			$this->addReference(self::PRODUCT_PREFIX . $productNo, $mainVariant);
+			$productNo++;
 		}
 	}
 
