@@ -75,9 +75,11 @@ class TransportController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function newAction(Request $request) {
+		$form = $this->createForm($this->transportEditFormTypeFactory->create());
+
 		$transportEditData = $this->transportEditDataFactory->createDefault();
 
-		$form = $this->createForm($this->transportEditFormTypeFactory->create(), $transportEditData);
+		$form->setData($transportEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
@@ -115,10 +117,11 @@ class TransportController extends AdminBaseController {
 	public function editAction(Request $request, $id) {
 		$transport = $this->transportEditFacade->getById($id);
 		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+		$form = $this->createForm($this->transportEditFormTypeFactory->create());
 
 		$transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
 
-		$form = $this->createForm($this->transportEditFormTypeFactory->create(), $transportEditData);
+		$form->setData($transportEditData);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
