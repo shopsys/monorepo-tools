@@ -45,11 +45,9 @@ class SeoController extends AdminBaseController {
 		$form = $this->createForm($this->seoSettingFormTypeFactory->create());
 
 		$seoSettingData = [];
-		if (!$form->isSubmitted()) {
-			$seoSettingData['title'] = $this->seoSettingFacade->getTitleMainPage($selectedDomainId);
-			$seoSettingData['metaDescription'] = $this->seoSettingFacade->getDescriptionMainPage($selectedDomainId);
-			$seoSettingData['titleAddOn'] = $this->seoSettingFacade->getTitleAddOn($selectedDomainId);
-		}
+		$seoSettingData['title'] = $this->seoSettingFacade->getTitleMainPage($selectedDomainId);
+		$seoSettingData['metaDescription'] = $this->seoSettingFacade->getDescriptionMainPage($selectedDomainId);
+		$seoSettingData['titleAddOn'] = $this->seoSettingFacade->getTitleAddOn($selectedDomainId);
 
 		$form->setData($seoSettingData);
 		$form->handleRequest($request);
