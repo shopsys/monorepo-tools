@@ -229,8 +229,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
-		$product = new Product(new ProductData());
-		$product->setVariants($variants);
+		$product = new Product(new ProductData(), $variants);
 
 		$productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 		/* @var $productPrice \SS6\ShopBundle\Model\Product\Pricing\ProductPrice */
@@ -279,8 +278,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
-		$product = new Product(new ProductData());
-		$product->addVariant(new Product(new ProductData()));
+		$variant = new Product(new ProductData());
+		$product = new Product(new ProductData(), [$variant]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 

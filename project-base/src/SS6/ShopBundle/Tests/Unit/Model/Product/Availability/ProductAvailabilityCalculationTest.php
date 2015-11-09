@@ -128,8 +128,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 		$variant4 = new Product($productData);
 
 		$variants = [$variant1, $variant2, $variant3, $variant4];
-		$mainVariant = new Product(new ProductData());
-		$mainVariant->setVariants($variants);
+		$mainVariant = new Product(new ProductData(), $variants);
 
 		$availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, [], [], '', false);
 		$productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class,	[],	[], '',	false);
@@ -163,7 +162,10 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 
 	public function testGetCalculatedAvailabilityMainVariantWithNoSellableVariants() {
 		$productData = new ProductData();
-		$mainVariant = new Product($productData);
+		$productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
+		$variant = new Product($productData);
+
+		$mainVariant = new Product(new ProductData(), [$variant]);
 
 		$availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, ['getDefaultInStockAvailability'], [], '', false);
 		$defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
@@ -190,11 +192,8 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 			$productRepositoryMock
 		);
 
-		$productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
-		$variant1 = new Product($productData);
-		$variant1->setCalculatedAvailability($productAvailabilityCalculation->getCalculatedAvailability($variant1));
+		$variant->setCalculatedAvailability($productAvailabilityCalculation->getCalculatedAvailability($variant));
 
-		$mainVariant->setVariants([$variant1]);
 		$mainVariantCalculatedAvailability = $productAvailabilityCalculation->getCalculatedAvailability($mainVariant);
 
 		$this->assertSame($defaultInStockAvailability, $mainVariantCalculatedAvailability);

@@ -15,7 +15,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			[1, true, 'Visible and not selling denied product is not listed'],
 			[6, false, 'Visible and selling denied product is listed'],
 			[53, false, 'Product variant is listed'],
-			[69, true, 'Product main variant is not listed'],
+			[148, true, 'Product main variant is not listed'],
 		];
 	}
 
@@ -47,7 +47,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			[1, true, 'Visible and not selling denied product is not sellable'],
 			[6, false, 'Visible and selling denied product is sellable'],
 			[53, true, 'Product variant is not listed'],
-			[69, false, 'Product main variant is listed'],
+			[148, false, 'Product main variant is listed'],
 		];
 	}
 

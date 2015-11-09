@@ -23,8 +23,10 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant3 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
+		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
 		$variant1ProductEditData->productData->sellingDenied = true;
@@ -34,10 +36,12 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertTrue($variant1->getCalculatedSellingDenied());
 		$this->assertFalse($variant2->getCalculatedSellingDenied());
+		$this->assertFalse($variant3->getCalculatedSellingDenied());
 		$this->assertFalse($mainVariant->getCalculatedSellingDenied());
 	}
 
@@ -54,7 +58,9 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
@@ -63,15 +69,20 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		$variant2ProductEditData = $productEditDataFactory->createFromProduct($variant2);
 		$variant2ProductEditData->productData->sellingDenied = true;
 		$productEditFacade->edit($variant2->getId(), $variant2ProductEditData);
+		$variant3ProductEditData = $productEditDataFactory->createFromProduct($variant3);
+		$variant3ProductEditData->productData->sellingDenied = true;
+		$productEditFacade->edit($variant3->getId(), $variant3ProductEditData);
 
 		$productSellingDeniedRecalculator->calculateSellingDeniedForProduct($mainVariant);
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertTrue($variant1->getCalculatedSellingDenied());
 		$this->assertTrue($variant2->getCalculatedSellingDenied());
+		$this->assertTrue($variant3->getCalculatedSellingDenied());
 		$this->assertTrue($mainVariant->getCalculatedSellingDenied());
 	}
 
@@ -88,7 +99,9 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant3 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
 		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
 
 		$mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
@@ -99,10 +112,12 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertTrue($variant1->getCalculatedSellingDenied());
 		$this->assertTrue($variant2->getCalculatedSellingDenied());
+		$this->assertTrue($variant3->getCalculatedSellingDenied());
 		$this->assertTrue($mainVariant->getCalculatedSellingDenied());
 	}
 }

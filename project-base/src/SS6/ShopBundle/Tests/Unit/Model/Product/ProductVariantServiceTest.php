@@ -13,10 +13,8 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCheckProductIsNotMainVariantException() {
 		$productVariantService = new ProductVariantService();
 		$productData = new ProductData();
-		$mainVariant = new Product($productData);
 		$variant = new Product($productData);
-
-		$mainVariant->addVariant($variant);
+		$mainVariant = new Product($productData, [$variant]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
 		$productVariantService->checkProductIsNotMainVariant($mainVariant);
@@ -25,13 +23,10 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 	public function testRefreshProductVariants() {
 		$productVariantService = new ProductVariantService();
 		$productData = new ProductData();
-		$mainVariant = new Product($productData);
 		$variant1 = new Product($productData);
 		$variant2 = new Product($productData);
 		$variant3 = new Product($productData);
-
-		$mainVariant->addVariant($variant1);
-		$mainVariant->addVariant($variant2);
+		$mainVariant = new Product($productData, [$variant1, $variant2]);
 
 		$currentVariants = [$variant2, $variant3];
 		$productVariantService->refreshProductVariants($mainVariant, $currentVariants);

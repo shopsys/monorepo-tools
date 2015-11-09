@@ -56,11 +56,9 @@ class OrderProductTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testConstructWithMainVariantThrowsException() {
-		$mainVariant = new Product(new ProductData());
 		$variant = new Product(new ProductData());
+		$mainVariant = new Product(new ProductData(), [$variant]);
 		$productPrice = new Price(0, 0);
-
-		$mainVariant->addVariant($variant);
 
 		$orderMock = $this->getMock(Order::class, [], [], '', false);
 
