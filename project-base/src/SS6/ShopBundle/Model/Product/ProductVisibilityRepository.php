@@ -69,13 +69,14 @@ class ProductVisibilityRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
 	 */
-	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup) {
+	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId) {
 		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
 			SELECT id, :pricingGroupId, :domainId, :visible FROM products', new ResultSetMapping());
 		$query->execute([
 			'pricingGroupId' => $pricingGroup->getId(),
-			'domainId' => $pricingGroup->getDomainId(),
+			'domainId' => $domainId,
 			'visible' => false,
 		]);
 		$this->refreshProductsVisibility();

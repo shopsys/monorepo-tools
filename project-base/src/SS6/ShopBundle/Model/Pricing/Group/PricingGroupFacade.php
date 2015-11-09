@@ -100,7 +100,10 @@ class PricingGroupFacade {
 		$this->em->flush();
 
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
-		$this->productVisibilityRepository->createAndRefreshProductVisibilitiesForPricingGroup($pricingGroup);
+		$this->productVisibilityRepository->createAndRefreshProductVisibilitiesForPricingGroup(
+			$pricingGroup,
+			$pricingGroup->getDomainId()
+		);
 		$this->productCalculatedPriceRepository->createProductCalculatedPricesForPricingGroup($pricingGroup);
 
 		return $pricingGroup;
