@@ -38,10 +38,19 @@ class ProductAvailabilityRecalculator {
 	}
 
 	/**
+	 * @return int
+	 */
+	public function runAllScheduledRecalculations() {
+		return $this->runScheduledRecalculationsWhile(function () {
+			return true;
+		});
+	}
+
+	/**
 	 * @param callable $canRunCallback
 	 * @return int
 	 */
-	public function runScheduledRecalculations(callable $canRunCallback) {
+	public function runScheduledRecalculationsWhile(callable $canRunCallback) {
 		$productRows = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForRecalculation();
 		$count = 0;
 

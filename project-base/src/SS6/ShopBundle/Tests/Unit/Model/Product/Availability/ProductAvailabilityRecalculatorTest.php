@@ -46,7 +46,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productAvailabilityRecalculator->runImmediateRecalculations();
 	}
 
-	public function testRunScheduledRecalculations() {
+	public function testRunScheduledRecalculationsWhile() {
 		$calculationLimit = 3;
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productIterator = [
@@ -87,9 +87,11 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$calculationCallbackLimit = $calculationLimit;
-		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculations(function () use (&$calculationCallbackLimit) {
-			return $calculationCallbackLimit-- > 0;
-		});
+		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculationsWhile(
+			function () use (&$calculationCallbackLimit) {
+				return $calculationCallbackLimit-- > 0;
+			}
+		);
 
 		$this->assertSame($calculationLimit, $recalculatedCount);
 	}
