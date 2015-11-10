@@ -14,9 +14,9 @@
 				<tr>
 					<td>
 						{% if item.transport is defined %}
-							{{ 'Doprava - '|trans }}
+							{{ 'Doprava'|trans }} -
 						{% elseif item.payment is defined %}
-							{{ 'Platba - '|trans }}
+							{{ 'Platba'|trans }} -
 						{% endif %}
 						{{ item.name }}
 					</td>

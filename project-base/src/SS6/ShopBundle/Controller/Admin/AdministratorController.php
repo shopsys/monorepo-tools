@@ -134,7 +134,7 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem(t('Editace administrátora - ') . $administrator->getRealName())
+			new MenuItem(t('Editace administrátora - %name%', ['%name%' => $administrator->getRealName()]))
 		);
 
 		$lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(

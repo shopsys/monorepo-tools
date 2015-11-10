@@ -225,7 +225,7 @@
 						{{ domainIcon(domainId, 'large') }}
 					</span>
 					<strong class="form-line__box__title__name">
-						{{ 'Doména '|trans ~ getDomainName(domainId) }}
+						{{ 'Doména %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
 					</strong>
 					{{ form_errors(form.mainOnDomains[domainId]) }}
 				</div>

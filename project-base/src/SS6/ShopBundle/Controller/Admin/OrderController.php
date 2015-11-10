@@ -148,7 +148,7 @@ class OrderController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace objednávky - č. ') . $order->getNumber()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace objednávky - č. %number%', ['%number%' => $order->getNumber()])));
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
