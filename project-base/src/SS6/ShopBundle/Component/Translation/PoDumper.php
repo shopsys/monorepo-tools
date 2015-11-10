@@ -6,9 +6,19 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
+use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
 use SS6\ShopBundle\Component\Translation\Translator;
 
 class PoDumper implements DumperInterface {
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\MessageIdNormalizer
+	 */
+	private $messageIdNormalizer;
+
+	public function __construct(MessageIdNormalizer $messageIdNormalizer) {
+		$this->messageIdNormalizer = $messageIdNormalizer;
+	}
 
 	/**
 	 * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
@@ -16,6 +26,17 @@ class PoDumper implements DumperInterface {
 	 * @return string
 	 */
 	public function dump(MessageCatalogue $catalogue, $domain = 'messages') {
+		$normalizedCatalogue = $this->messageIdNormalizer->getNormalizedCatalogue($catalogue);
+
+		return $this->dumpCatalogue($normalizedCatalogue, $domain);
+	}
+
+	/**
+	 * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
+	 * @param string $domain
+	 * @return string
+	 */
+	private function dumpCatalogue(MessageCatalogue $catalogue, $domain = 'messages') {
 		$output = 'msgid ""' . "\n";
 		$output .= 'msgstr ""' . "\n";
 		$output .= '"Content-Type: text/plain; charset=UTF-8\n"' . "\n";

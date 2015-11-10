@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
 use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -24,7 +25,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('source message %parameter%'))
+			->willReturn('normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->trans(
 			'source message %parameter%',
@@ -33,7 +46,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 			Translator::SOURCE_LOCALE
 		);
 
-		$this->assertSame('source message parameter value', $translatedMessage);
+		$this->assertSame('normalized source message parameter value', $translatedMessage);
 	}
 
 	public function testTransWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage() {
@@ -42,7 +55,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('trans')
 			->with(
-				$this->identicalTo('source message %parameter%'),
+				$this->identicalTo('normalized source message %parameter%'),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
 			->willReturn('translated message parameter value');
@@ -53,7 +66,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$messageCatalogue = new MessageCatalogue(
 			Translator::SOURCE_LOCALE,
 			[
-				'translationDomain' => ['source message %parameter%' => 'translated message %parameter%'],
+				'translationDomain' => ['normalized source message %parameter%' => 'translated message %parameter%'],
 			]
 		);
 
@@ -62,7 +75,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('source message %parameter%'))
+			->willReturn('normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->trans(
 			'source message %parameter%',
@@ -89,14 +114,26 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('source message %parameter%'))
+			->willReturn('normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->trans(
 			'source message %parameter%',
 			['%parameter%' => 'parameter value']
 		);
 
-		$this->assertSame('source message parameter value', $translatedMessage);
+		$this->assertSame('normalized source message parameter value', $translatedMessage);
 	}
 
 	public function testTransWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
@@ -105,7 +142,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('trans')
 			->with(
-				$this->identicalTo('source message %parameter%'),
+				$this->identicalTo('normalized source message %parameter%'),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
 			->willReturn('source message parameter value');
@@ -118,7 +155,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('source message %parameter%'))
+			->willReturn('normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->trans(
 			'source message %parameter%',
@@ -136,7 +185,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('trans')
 			->with(
-				$this->identicalTo('source message %parameter%'),
+				$this->identicalTo('normalized source message %parameter%'),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
 			->willReturn('translated message parameter value');
@@ -147,7 +196,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$messageCatalogue = new MessageCatalogue(
 			'nonSourceLocale',
 			[
-				'translationDomain' => ['source message %parameter%' => 'translated message %parameter%'],
+				'translationDomain' => ['normalized source message %parameter%' => 'translated message %parameter%'],
 			]
 		);
 
@@ -156,7 +205,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('source message %parameter%'))
+			->willReturn('normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->trans(
 			'source message %parameter%',
@@ -180,7 +241,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('{0}zero|{1}source message %parameter%'))
+			->willReturn('{0}zero|{1}normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->transChoice(
 			'{0}zero|{1}source message %parameter%',
@@ -190,7 +263,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 			Translator::SOURCE_LOCALE
 		);
 
-		$this->assertSame('source message parameter value', $translatedMessage);
+		$this->assertSame('normalized source message parameter value', $translatedMessage);
 	}
 
 	public function testTransChoiceWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage() {
@@ -199,7 +272,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('transChoice')
 			->with(
-				$this->identicalTo('{0}zero|{1}source message %parameter%'),
+				$this->identicalTo('{0}zero|{1}normalized source message %parameter%'),
 				$this->identicalTo(1),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
@@ -211,7 +284,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$messageCatalogue = new MessageCatalogue(
 			Translator::SOURCE_LOCALE,
 			[
-				'translationDomain' => ['{0}zero|{1}source message %parameter%' => '{0}zero|{1}translated message %parameter%'],
+				'translationDomain' => ['{0}zero|{1}normalized source message %parameter%' => '{0}zero|{1}translated message %parameter%'],
 			]
 		);
 
@@ -220,7 +293,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('{0}zero|{1}source message %parameter%'))
+			->willReturn('{0}zero|{1}normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->transChoice(
 			'{0}zero|{1}source message %parameter%',
@@ -248,7 +333,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('{0}zero|{1}source message %parameter%'))
+			->willReturn('{0}zero|{1}normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->transChoice(
 			'{0}zero|{1}source message %parameter%',
@@ -256,7 +353,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 			['%parameter%' => 'parameter value']
 		);
 
-		$this->assertSame('source message parameter value', $translatedMessage);
+		$this->assertSame('normalized source message parameter value', $translatedMessage);
 	}
 
 	public function testTransChoiceWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
@@ -265,7 +362,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('transChoice')
 			->with(
-				$this->identicalTo('{0}zero|{1}source message %parameter%'),
+				$this->identicalTo('{0}zero|{1}normalized source message %parameter%'),
 				$this->identicalTo(1),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
@@ -279,7 +376,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('{0}zero|{1}source message %parameter%'))
+			->willReturn('{0}zero|{1}normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->transChoice(
 			'{0}zero|{1}source message %parameter%',
@@ -298,7 +407,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$originalTranslatorMock->expects($this->any())->method('transChoice')
 			->with(
-				$this->identicalTo('{0}zero|{1}source message %parameter%'),
+				$this->identicalTo('{0}zero|{1}normalized source message %parameter%'),
 				$this->identicalTo(1),
 				$this->identicalTo(['%parameter%' => 'parameter value'])
 			)
@@ -310,7 +419,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 		$messageCatalogue = new MessageCatalogue(
 			'nonSourceLocale',
 			[
-				'translationDomain' => ['{0}zero|{1}source message %parameter%' => '{0}zero|{1}translated message %parameter%'],
+				'translationDomain' => ['{0}zero|{1}normalized source message %parameter%' => '{0}zero|{1}translated message %parameter%'],
 			]
 		);
 
@@ -319,7 +428,19 @@ class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 		$identityTranslator = new IdentityTranslator(new MessageSelector());
 
-		$translator = new Translator($originalTranslatorMock, $originalTranslatorBagMock, $identityTranslator);
+		$messageIdNormalizerMock = $this->getMockBuilder(MessageIdNormalizer::class)
+			->getMock();
+
+		$messageIdNormalizerMock->expects($this->atLeastOnce())->method('normalizeMessageId')
+			->with($this->identicalTo('{0}zero|{1}source message %parameter%'))
+			->willReturn('{0}zero|{1}normalized source message %parameter%');
+
+		$translator = new Translator(
+			$originalTranslatorMock,
+			$originalTranslatorBagMock,
+			$identityTranslator,
+			$messageIdNormalizerMock
+		);
 
 		$translatedMessage = $translator->transChoice(
 			'{0}zero|{1}source message %parameter%',
