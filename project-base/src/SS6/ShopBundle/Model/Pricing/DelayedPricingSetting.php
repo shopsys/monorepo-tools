@@ -27,7 +27,7 @@ class DelayedPricingSetting {
 	/**
 	 * @param int $inputPriceType
 	 */
-	public function setInputPriceType($inputPriceType) {
+	public function scheduleSetInputPriceType($inputPriceType) {
 		if (!in_array($inputPriceType, $this->pricingSetting->getInputPriceTypes())) {
 			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException('Unknow input price type');
 		}

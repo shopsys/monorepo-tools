@@ -12,8 +12,8 @@ use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
+use SS6\ShopBundle\Model\Pricing\DelayedPricingSetting;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\PricingSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
@@ -50,15 +50,15 @@ class SuperadminController extends AdminBaseController {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSettingFacade
+	 * @var \SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
 	 */
-	private $pricingSettingFacade;
+	private $delayedPricingSetting;
 
 	public function __construct(
 		ModuleList $moduleList,
 		ModuleFacade $moduleFacade,
 		PricingSetting $pricingSetting,
-		PricingSettingFacade $pricingSettingFacade,
+		DelayedPricingSetting $delayedPricingSetting,
 		GridFactory $gridFactory,
 		Localization $localization,
 		LocalizedRouterFactory $localizedRouterFactory
@@ -66,7 +66,7 @@ class SuperadminController extends AdminBaseController {
 		$this->moduleList = $moduleList;
 		$this->moduleFacade = $moduleFacade;
 		$this->pricingSetting = $pricingSetting;
-		$this->pricingSettingFacade = $pricingSettingFacade;
+		$this->delayedPricingSetting = $delayedPricingSetting;
 		$this->gridFactory = $gridFactory;
 		$this->localization = $localization;
 		$this->localizedRouterFactory = $localizedRouterFactory;
@@ -95,7 +95,7 @@ class SuperadminController extends AdminBaseController {
 			$pricingSettingData = $form->getData();
 			$this->transactional(
 				function () use ($pricingSettingData) {
-					$this->pricingSettingFacade->setInputPriceType($pricingSettingData['type']);
+					$this->delayedPricingSetting->scheduleSetInputPriceType($pricingSettingData['type']);
 				}
 			);
 
