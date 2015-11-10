@@ -7,18 +7,8 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Localization\Localization;
 
 class PoDumper implements DumperInterface {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
-	 */
-	private $localization;
-
-	public function __construct(Localization $localization) {
-		$this->localization = $localization;
-	}
 
 	/**
 	 * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
