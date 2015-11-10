@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Form;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DomainType extends AbstractType {
@@ -21,18 +23,19 @@ class DomainType extends AbstractType {
 	}
 
 	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 * @inheritdoc
+	 */
+	public function buildView(FormView $view, FormInterface $form, array $options) {
+		$view->vars['domainConfigs'] = $this->domain->getAll();
+		$view->vars['displayUrl'] = $options['displayUrl'];
+	}
+
+	/**
+	 * {@inheritdoc}
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$choices = [];
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$choices[$domainConfig->getId()] = $domainConfig->getName();
-		}
-
 		$resolver->setDefaults([
-			'choices' => $choices,
-			'multiple' => false,
-			'expanded' => false,
+			'displayUrl' => false,
 		]);
 	}
 
@@ -40,7 +43,7 @@ class DomainType extends AbstractType {
 	 * @return string
 	 */
 	public function getParent() {
-		return 'choice';
+		return 'integer';
 	}
 
 	/**

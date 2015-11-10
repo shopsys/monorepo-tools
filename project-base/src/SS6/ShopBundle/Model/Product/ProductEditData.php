@@ -53,7 +53,7 @@ class ProductEditData {
 	public $descriptions;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
+	 * @var array
 	 */
 	public $urls;
 
@@ -113,8 +113,11 @@ class ProductEditData {
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->descriptions = $descriptions;
-		$this->urls[UrlListType::TO_DELETE] = [];
-		$this->urls[UrlListType::MAIN_ON_DOMAINS] = [];
+		$this->urls = [
+			UrlListType::TO_DELETE => [],
+			UrlListType::MAIN_ON_DOMAINS => [],
+			UrlListType::NEW_URLS => [],
+		];
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;
 		$this->variants = $variants;

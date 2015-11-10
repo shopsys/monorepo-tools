@@ -32,14 +32,18 @@ class CategoryData {
 	public $heurekaCzFeedCategory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][]
+	 * @var array
 	 */
 	public $urls;
 
 	public function __construct() {
 		$this->name = [];
 		$this->hiddenOnDomains = [];
-		$this->urls[UrlListType::TO_DELETE] = [];
+		$this->urls = [
+			UrlListType::TO_DELETE => [],
+			UrlListType::MAIN_ON_DOMAINS => [],
+			UrlListType::NEW_URLS => [],
+		];
 	}
 
 	/**

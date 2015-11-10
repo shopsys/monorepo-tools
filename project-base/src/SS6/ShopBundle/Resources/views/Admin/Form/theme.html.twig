@@ -216,10 +216,10 @@
 
 {% block url_list_widget -%}
 	<div class="js-entity-url-list form-line__line">
-		{{ form_errors(form.newSlugsOnDomains) }}
+		{{ form_errors(form.newUrls) }}
 
 		{% for domainId, friendlyUrlForms in form.toDelete %}
-			<div class="form-line__box js-entity-url-list-domain-{{ domainId }}" data-new-url-prototype="{{ _self.urlListWidgetNewUrlRow(form.newSlugsOnDomains[domainId].vars.prototype)|e }}">
+			<div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
 				<div class="form-line__box__title">
 					<span class="form-line__box__title__image">
 						{{ domainIcon(domainId, 'large') }}
@@ -271,30 +271,31 @@
 								</span>
 						</label>
 						{% endfor %}
-						{% for newUrlForm in form.newSlugsOnDomains[domainId] %}
-							{{ _self.urlListWidgetNewUrlRow(newUrlForm, form.vars.domainUrlsById[domainId]) }}
-						{% endfor %}
 					</div>
 				</div>
 			</div>
 		{% endfor %}
-		<button type="button" class="js-entity-url-list-button-add-url btn" data-window-content-ajax-url="{{ url('admin_urllist_newurlform') }}">
+		<div id="{{ form.newUrls.vars.id }}" class="js-entity-url-list-new-urls" data-new-url-prototype="{{ form_widget(form.newUrls.vars.prototype)|e }}">
+			{% for newUrlForm in form.newUrls %}
+				{{ form_widget(newUrlForm) }}
+			{% endfor %}
+		</div>
+		<button type="button" class="js-entity-url-list-button-add-url btn">
 			<span class="btn__icon sprite sprite-plus"></span>{{ 'Přidat URL'|trans }}
 		</button>
 	</div>
 {%- endblock url_list_widget -%}
 
-{% macro urlListWidgetNewUrlRow(form, domainUrl) %}
-	<label class="form-choice-list__item js-entity-url-list-new-row">
-		<span class="js-entity-url-list-new-row-domain-url">{{ domainUrl }}/</span>
-		<span class="js-entity-url-list-new-row-slug">{{ form.vars.value }}</span>
-		{{ form_errors(form) }}
-		{{ form_widget(form, {attr: {class: 'js-entity-url-list-new-row-slug-input display-none', id: null}}) }}
-		<button class="js-entity-url-list-new-row-delete-button" type="button">
-			<span class="svg svg-circle-remove"></span>
+{% block friendly_url_widget %}
+	<div class="js-entity-url-list-new-row" data-index="{{ form.vars.name }}">
+		{{ form_widget(form.domain) }}/
+		{{ form_widget(form.slug) }}
+		{{ form_errors(form.slug) }}
+		<button class="js-entity-url-list-new-row-delete-button btn-no-style" type="button">
+			<i class="svg svg-circle-cross"></i>
 		</button>
-	</label>
-{% endmacro %}
+	</div>
+{% endblock friendly_url_widget %}
 
 {% block ckeditor_row -%}
 	{{ block('textarea_row') }}
@@ -603,6 +604,21 @@
 		{{- block('appendix_block') -}}
 	</div>
 {% endblock yes_no_widget %}
+
+{% block domain_widget %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
+	<select {{ block('widget_attributes') }}>
+		{% for domainConfig in domainConfigs %}
+			<option value="{{ domainConfig.id }}"{{ domainConfig.id == form.vars.value ? ' selected=""' : '' }}>
+				{% if displayUrl %}
+					{{ domainConfig.url }}
+				{% else %}
+					{{ domainConfig.name }}
+				{% endif %}
+			</option>
+		{% endfor %}
+	</select>
+{% endblock domain_widget %}
 
 {% block domains_widget %}
 	{% spaceless %}

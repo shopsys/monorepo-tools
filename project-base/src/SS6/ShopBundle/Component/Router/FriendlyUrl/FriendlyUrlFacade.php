@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use SS6\ShopBundle\Form\FriendlyUrlType;
 use SS6\ShopBundle\Form\UrlListType;
 
 class FriendlyUrlFacade {
@@ -157,12 +158,12 @@ class FriendlyUrlFacade {
 			}
 		}
 
-		foreach ($urlListFormData[UrlListType::NEW_SLUGS_ON_DOMAINS] as $domainId => $newSlugs) {
-			foreach ($newSlugs as $newSlug) {
-				$newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);
-				$this->em->persist($newFriendlyUrl);
-				$toFlush[] = $newFriendlyUrl;
-			}
+		foreach ($urlListFormData[UrlListType::NEW_URLS] as $urlData) {
+			$domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
+			$newSlug = $urlData[FriendlyUrlType::FIELD_SLUG];
+			$newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);
+			$this->em->persist($newFriendlyUrl);
+			$toFlush[] = $newFriendlyUrl;
 		}
 
 		$this->em->flush($toFlush);

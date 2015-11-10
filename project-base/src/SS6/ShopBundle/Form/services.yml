@@ -39,6 +39,11 @@ services:
     tags:
       - { name: form.type, alias: file_upload }
 
+  ss6.shop.form.friendly_url:
+    class: SS6\ShopBundle\Form\FriendlyUrlType
+    tags:
+      - { name: form.type, alias: friendly_url }
+
   ss6.shop.form.honey_pot:
     class: SS6\ShopBundle\Form\HoneyPotType
     tags:

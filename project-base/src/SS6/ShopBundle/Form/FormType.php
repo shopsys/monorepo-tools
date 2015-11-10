@@ -23,6 +23,7 @@ class FormType {
 	const FORM = 'form';
 	const FILE = 'file';
 	const FILE_UPLOAD = 'file_upload';
+	const FRIENDLY_URL = 'friendly_url';
 	const HIDDEN = 'hidden';
 	const HONEY_POT = 'honey_pot';
 	const INTEGER = 'integer';
