@@ -440,11 +440,11 @@ msgstr ""
 msgid "Detail"
 msgstr ""
 
-#: CartController.php:290
+#: CartController.php:293
 msgid "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})"
 msgstr ""
 
-#: CartController.php:281
+#: CartController.php:284
 msgid "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})"
 msgstr ""
 
@@ -479,8 +479,11 @@ msgstr ""
 #: Content/Slider/new.html.twig:8
 #: Content/Transport/detail.html.twig:23
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:17
-#: Admin/Form/theme.html.twig:228
 msgid "Doména"
+msgstr ""
+
+#: Admin/Form/theme.html.twig:228
+msgid "Doména %domainName%"
 msgstr ""
 
 #: Content/Article/edit.html.twig:8
@@ -516,14 +519,11 @@ msgid "Doposud nejsou žádné url adresy."
 msgstr ""
 
 #: ImageController.php:67
+#: Content/Order/preview.html.twig:17
 #: Content/Transport/detail.html.twig:4
 #: Content/Transport/detail.html.twig:8
 #: Content/Customer/orders.html.twig:23
 msgid "Doprava"
-msgstr ""
-
-#: Content/Order/preview.html.twig:17
-msgid "Doprava -"
 msgstr ""
 
 #: TransportController.php:172
@@ -614,7 +614,7 @@ msgid "Editace administrátora"
 msgstr ""
 
 #: AdministratorController.php:137
-msgid "Editace administrátora -"
+msgid "Editace administrátora - %name%"
 msgstr ""
 
 #: Content/Transport/edit.html.twig:3
@@ -623,7 +623,7 @@ msgid "Editace dopravy"
 msgstr ""
 
 #: TransportController.php:148
-msgid "Editace dopravy -"
+msgid "Editace dopravy - %name%"
 msgstr ""
 
 #: Content/Category/edit.html.twig:3
@@ -632,11 +632,11 @@ msgid "Editace kategorie"
 msgstr ""
 
 #: CategoryController.php:100
-msgid "Editace kategorie -"
+msgid "Editace kategorie - %name%"
 msgstr ""
 
 #: OrderController.php:151
-msgid "Editace objednávky - č."
+msgid "Editace objednávky - č. %number%"
 msgstr ""
 
 #: Content/Payment/edit.html.twig:3
@@ -645,7 +645,7 @@ msgid "Editace platby"
 msgstr ""
 
 #: PaymentController.php:147
-msgid "Editace platby -"
+msgid "Editace platby - %name%"
 msgstr ""
 
 #: Content/Advert/edit.html.twig:3
@@ -654,7 +654,7 @@ msgid "Editace reklamy"
 msgstr ""
 
 #: AdvertController.php:112
-msgid "Editace reklamy -"
+msgid "Editace reklamy - %name%"
 msgstr ""
 
 #: Content/Slider/edit.html.twig:3
@@ -663,7 +663,7 @@ msgid "Editace stránky slideru"
 msgstr ""
 
 #: SliderController.php:165
-msgid "Editace stránky slideru -"
+msgid "Editace stránky slideru - %name%"
 msgstr ""
 
 #: Content/Brand/edit.html.twig:4
@@ -671,15 +671,12 @@ msgid "Editace zančky"
 msgstr ""
 
 #: Content/Product/edit.html.twig:4
+#: Content/Product/edit.html.twig:8
 msgid "Editace zboží"
 msgstr ""
 
 #: ProductController.php:169
-msgid "Editace zboží -"
-msgstr ""
-
-#: Content/Product/edit.html.twig:8
-msgid "Editace zboží:"
+msgid "Editace zboží - %name%"
 msgstr ""
 
 #: Content/Brand/edit.html.twig:3
@@ -687,7 +684,7 @@ msgid "Editace značky"
 msgstr ""
 
 #: BrandController.php:90
-msgid "Editace značky -"
+msgid "Editace značky - %name%"
 msgstr ""
 
 #: Content/Customer/edit.html.twig:3
@@ -696,7 +693,7 @@ msgid "Editace zákazníka"
 msgstr ""
 
 #: CustomerController.php:165
-msgid "Editace zákazníka -"
+msgid "Editace zákazníka - %name%"
 msgstr ""
 
 #: Content/Article/edit.html.twig:3
@@ -705,7 +702,7 @@ msgid "Editace článku"
 msgstr ""
 
 #: ArticleController.php:139
-msgid "Editace článku -"
+msgid "Editace článku - %name%"
 msgstr ""
 
 #: Content/Domain/listGrid.html.twig:14
@@ -720,11 +717,8 @@ msgstr ""
 #: Content/Customer/orderDetail.html.twig:22
 #: Content/Registration/register.html.twig:16
 #: Content/Registration/resetPassword.html.twig:18
-msgid "Email"
-msgstr ""
-
 #: Mail/ContactForm/mail.html.twig:4
-msgid "Email:"
+msgid "Email"
 msgstr ""
 
 #: Content/Customer/orderList.html.twig:10
@@ -945,12 +939,9 @@ msgstr ""
 #: Content/Customer/orderDetail.html.twig:14
 #: Content/Order/step3.html.twig:15
 #: Content/Registration/register.html.twig:14
+#: Mail/ContactForm/mail.html.twig:1
 #: Mail/Order/billingAddress.html.twig:3
 msgid "Jméno"
-msgstr ""
-
-#: Mail/ContactForm/mail.html.twig:1
-msgid "Jméno:"
 msgstr ""
 
 #: Content/Product/detail.html.twig:3
@@ -992,7 +983,7 @@ msgstr ""
 msgid "Kategorie můžete nastavit na kartě hlavního zboží"
 msgstr ""
 
-#: Admin/Form/theme.html.twig:371
+#: Admin/Form/theme.html.twig:372
 msgid "Kliknutím přejdete k výběru produktu"
 msgstr ""
 
@@ -1051,7 +1042,7 @@ msgstr ""
 msgid "Množství"
 msgstr ""
 
-#: CartController.php:118
+#: CartController.php:120
 msgid "Množství položek v košíku bylo úspěšně přepočítáno."
 msgstr ""
 
@@ -1401,11 +1392,11 @@ msgstr ""
 msgid "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte."
 msgstr ""
 
-#: CartController.php:321
+#: CartController.php:324
 msgid "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 msgstr ""
 
-#: CartController.php:317
+#: CartController.php:320
 msgid "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno"
 msgstr ""
 
@@ -1486,7 +1477,7 @@ msgstr ""
 #: Content/Product/detail.html.twig:39
 #: Content/Slider/detail.html.twig:19
 #: Content/Transport/detail.html.twig:22
-#: Admin/Form/theme.html.twig:434
+#: Admin/Form/theme.html.twig:435
 #: Content/Cart/index.html.twig:24
 #: Content/Customer/orderDetail.html.twig:99
 #: Content/Product/detail.html.twig:149
@@ -1599,7 +1590,7 @@ msgstr ""
 msgid "Obrázky"
 msgstr ""
 
-#: Admin/Form/theme.html.twig:379
+#: Admin/Form/theme.html.twig:380
 #: Order/PromoCode/index.html.twig:11
 msgid "Odebrat"
 msgstr ""
@@ -1759,14 +1750,11 @@ msgid "Partno"
 msgstr ""
 
 #: ImageController.php:64
+#: Content/Order/preview.html.twig:19
 #: Content/Payment/detail.html.twig:4
 #: Content/Payment/detail.html.twig:8
 #: Content/Customer/orders.html.twig:24
 msgid "Platba"
-msgstr ""
-
-#: Content/Order/preview.html.twig:19
-msgid "Platba -"
 msgstr ""
 
 #: PaymentController.php:171
@@ -1985,7 +1973,7 @@ msgstr ""
 msgid "Prosím zkontrolujte si správnost vyplnění všech údajů"
 msgstr ""
 
-#: CartController.php:128
+#: CartController.php:130
 msgid "Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku."
 msgstr ""
 
@@ -2118,8 +2106,7 @@ msgstr ""
 msgid "Přidat"
 msgstr ""
 
-#: Admin/Form/theme.html.twig:282
-#: Admin/Form/urlListNewUrlForm.html.twig:3
+#: Admin/Form/theme.html.twig:284
 msgid "Přidat URL"
 msgstr ""
 
@@ -2140,7 +2127,7 @@ msgid "Přidat variantu"
 msgstr ""
 
 #: Content/Order/edit.html.twig:195
-#: Admin/Form/theme.html.twig:449
+#: Admin/Form/theme.html.twig:450
 msgid "Přidat zboží"
 msgstr ""
 
@@ -2790,14 +2777,6 @@ msgstr ""
 msgid "Vytvořit"
 msgstr ""
 
-#: Content/Category/list.html.twig:8
-msgid "Vytvořit novou kategorii"
-msgstr ""
-
-#: Admin/Form/urlListNewUrlForm.html.twig:26
-msgid "Vytvořit URL"
-msgstr ""
-
 #: Pricing/Groups/listGrid.html.twig:12
 msgid "Vytvořit cenovou skupinu"
 msgstr ""
@@ -2816,6 +2795,10 @@ msgstr ""
 
 #: Content/Currency/listGrid.html.twig:62
 msgid "Vytvořit měnu"
+msgstr ""
+
+#: Content/Category/list.html.twig:8
+msgid "Vytvořit novou kategorii"
 msgstr ""
 
 #: Content/Advert/list.html.twig:9
@@ -2886,7 +2869,7 @@ msgid "Vyřadit z prodeje"
 msgstr ""
 
 #: Mail/ContactForm/mail.html.twig:7
-msgid "Vzkaz:"
+msgid "Vzkaz"
 msgstr ""
 
 #: Content/Cart/index.html.twig:14
@@ -2960,26 +2943,20 @@ msgid "Všechny výsledky hledání"
 msgstr ""
 
 #: Content/Feed/list.html.twig:4
-msgid "XML Feedy"
-msgstr ""
-
 #: Content/Feed/list.html.twig:3
-msgid "XML Feedy -"
+msgid "XML Feedy"
 msgstr ""
 
 #: FeedController.php:55
 msgid "XML Feedy byly vygenerovány"
 msgstr ""
 
+#: Content/Feed/listDelivery.html.twig:3
 #: Content/Feed/listDelivery.html.twig:4
 msgid "XML dostupnostní feedy"
 msgstr ""
 
-#: Content/Feed/listDelivery.html.twig:3
-msgid "XML dostupnostní feedy -"
-msgstr ""
-
-#: CartController.php:313
+#: CartController.php:316
 msgid "Z košíku bylo odstraněno zboží {{ name }}"
 msgstr ""
 
@@ -2991,13 +2968,13 @@ msgstr ""
 msgid "Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje"
 msgstr ""
 
-#: CartController.php:198
-#: CartController.php:253
+#: CartController.php:200
+#: CartController.php:256
 msgid "Zadejte prosím platné množství, které chcete vložit do košíku."
 msgstr ""
 
-#: CartController.php:208
-#: CartController.php:263
+#: CartController.php:210
+#: CartController.php:266
 msgid "Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}"
 msgstr ""
 
@@ -3108,8 +3085,8 @@ msgstr ""
 msgid "Zboží se nepodařilo vložit"
 msgstr ""
 
-#: CartController.php:200
-#: CartController.php:255
+#: CartController.php:202
+#: CartController.php:258
 msgid "Zboží se nepodařilo vložit do košíku."
 msgstr ""
 
@@ -3296,8 +3273,8 @@ msgstr ""
 msgid "Zvolené DPH neexistuje."
 msgstr ""
 
-#: CartController.php:196
-#: CartController.php:251
+#: CartController.php:198
+#: CartController.php:254
 msgid "Zvolené zboží již není v nabídce nebo neexistuje."
 msgstr ""
 
@@ -3350,8 +3327,8 @@ msgstr ""
 msgid "Zákazník prozatím nemá žádné objednávky."
 msgstr ""
 
-#: RegistrationController.php:173
 #: RegistrationController.php:129
+#: RegistrationController.php:173
 msgid "Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje. <a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
 msgstr ""
 

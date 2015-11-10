@@ -49,7 +49,7 @@ msgstr ""
 msgid "Prosím zadejte číslo"
 msgstr ""
 
-#: ShopBundle/Form/UrlListType.php:97
+#: ShopBundle/Form/UrlListType.php:93
 msgid "Původně vybraná hlavní URL již neexistuje"
 msgstr ""
 
