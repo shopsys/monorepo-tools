@@ -5,11 +5,11 @@ msgstr ""
 "Language: en\n"
 
 #: Inline/Cart/cartBox.html.twig:8
-msgid "\t\t\t\t\t{1} <strong class=\"cart-box__state\">%itemsCount%</strong> položka za <strong class=\"cart-box__state\">%priceWithVat%</strong>\n\t\t\t\t\t|[2,4] <strong class=\"cart-box__state\">%itemsCount%</strong> položky za <strong class=\"cart-box__state\">%priceWithVat%</strong>\n\t\t\t\t\t|[5,Inf] <strong class=\"cart-box__state\">%itemsCount%</strong> položek za <strong class=\"cart-box__state\">%priceWithVat%</strong>\n\t\t\t\t"
+msgid "{1} <strong class=\"cart-box__state\">%itemsCount%</strong> položka za <strong class=\"cart-box__state\">%priceWithVat%</strong> |[2,4] <strong class=\"cart-box__state\">%itemsCount%</strong> položky za <strong class=\"cart-box__state\">%priceWithVat%</strong> |[5,Inf] <strong class=\"cart-box__state\">%itemsCount%</strong> položek za <strong class=\"cart-box__state\">%priceWithVat%</strong>"
 msgstr ""
 
 #: Content/Search/autocomplete.html.twig:26
-msgid "\t\t\t\t{0} Nebyl nalezen žádný produkt\n\t\t\t\t|\n\t\t\t\t{1} Celkem nalezen 1 produkt\n\t\t\t\t|\n\t\t\t\t[2,4] Celkem nalezeny %totalProductCount% produkty\n\t\t\t\t|\n\t\t\t\t[5,Inf] Celkem nalezeno %totalProductCount% produktů\n\t\t\t"
+msgid "{0} Nebyl nalezen žádný produkt | {1} Celkem nalezen 1 produkt | [2,4] Celkem nalezeny %totalProductCount% produkty | [5,Inf] Celkem nalezeno %totalProductCount% produktů"
 msgstr ""
 
 #: Content/Currency/listGrid.html.twig:29
@@ -79,11 +79,11 @@ msgid "<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>D
 msgstr ""
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:24
-msgid "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní.\n\t\tBohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
+msgid "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
 msgstr ""
 
 #: Content/Customer/edit.html.twig:25
-msgid "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.\n\t\t\t\t\t\tPokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
+msgid "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně. Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
 msgstr ""
 
 #: Content/Login/loginForm.html.twig:15
@@ -352,7 +352,7 @@ msgid "Cenová skupina"
 msgstr ""
 
 #: PricingGroupController.php:125
-msgid "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou cenovou skupinu místo ní chcete nastavit?"
+msgid "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 msgstr ""
 
 #: PricingGroupController.php:82
@@ -360,7 +360,7 @@ msgid "Cenová skupina <strong>{{ name }}</strong> byla smazána"
 msgstr ""
 
 #: PricingGroupController.php:90
-msgid "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou\n\t\t\t\t\t\t<strong>{{ newName }}</strong>."
+msgid "Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou <strong>{{ newName }}</strong>."
 msgstr ""
 
 #: Pricing/Groups/list.html.twig:3
@@ -479,11 +479,8 @@ msgstr ""
 #: Content/Slider/new.html.twig:8
 #: Content/Transport/detail.html.twig:23
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:17
-msgid "Doména"
-msgstr ""
-
 #: Admin/Form/theme.html.twig:228
-msgid "Doména "
+msgid "Doména"
 msgstr ""
 
 #: Content/Article/edit.html.twig:8
@@ -526,7 +523,7 @@ msgid "Doprava"
 msgstr ""
 
 #: Content/Order/preview.html.twig:17
-msgid "Doprava - "
+msgid "Doprava -"
 msgstr ""
 
 #: TransportController.php:172
@@ -576,7 +573,7 @@ msgid "Dostupnost"
 msgstr "Availability"
 
 #: AvailabilityController.php:106
-msgid "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou dostupnost místo ní chcete nastavit?"
+msgid "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou dostupnost místo ní chcete nastavit?"
 msgstr ""
 
 #: AvailabilityController.php:72
@@ -617,7 +614,7 @@ msgid "Editace administrátora"
 msgstr ""
 
 #: AdministratorController.php:137
-msgid "Editace administrátora - "
+msgid "Editace administrátora -"
 msgstr ""
 
 #: Content/Transport/edit.html.twig:3
@@ -626,7 +623,7 @@ msgid "Editace dopravy"
 msgstr ""
 
 #: TransportController.php:148
-msgid "Editace dopravy - "
+msgid "Editace dopravy -"
 msgstr ""
 
 #: Content/Category/edit.html.twig:3
@@ -635,11 +632,11 @@ msgid "Editace kategorie"
 msgstr ""
 
 #: CategoryController.php:100
-msgid "Editace kategorie - "
+msgid "Editace kategorie -"
 msgstr ""
 
 #: OrderController.php:151
-msgid "Editace objednávky - č. "
+msgid "Editace objednávky - č."
 msgstr ""
 
 #: Content/Payment/edit.html.twig:3
@@ -648,7 +645,7 @@ msgid "Editace platby"
 msgstr ""
 
 #: PaymentController.php:147
-msgid "Editace platby - "
+msgid "Editace platby -"
 msgstr ""
 
 #: Content/Advert/edit.html.twig:3
@@ -657,7 +654,7 @@ msgid "Editace reklamy"
 msgstr ""
 
 #: AdvertController.php:112
-msgid "Editace reklamy - "
+msgid "Editace reklamy -"
 msgstr ""
 
 #: Content/Slider/edit.html.twig:3
@@ -666,7 +663,7 @@ msgid "Editace stránky slideru"
 msgstr ""
 
 #: SliderController.php:165
-msgid "Editace stránky slideru - "
+msgid "Editace stránky slideru -"
 msgstr ""
 
 #: Content/Brand/edit.html.twig:4
@@ -678,11 +675,11 @@ msgid "Editace zboží"
 msgstr ""
 
 #: ProductController.php:169
-msgid "Editace zboží - "
+msgid "Editace zboží -"
 msgstr ""
 
 #: Content/Product/edit.html.twig:8
-msgid "Editace zboží: "
+msgid "Editace zboží:"
 msgstr ""
 
 #: Content/Brand/edit.html.twig:3
@@ -690,7 +687,7 @@ msgid "Editace značky"
 msgstr ""
 
 #: BrandController.php:90
-msgid "Editace značky - "
+msgid "Editace značky -"
 msgstr ""
 
 #: Content/Customer/edit.html.twig:3
@@ -699,7 +696,7 @@ msgid "Editace zákazníka"
 msgstr ""
 
 #: CustomerController.php:165
-msgid "Editace zákazníka - "
+msgid "Editace zákazníka -"
 msgstr ""
 
 #: Content/Article/edit.html.twig:3
@@ -708,7 +705,7 @@ msgid "Editace článku"
 msgstr ""
 
 #: ArticleController.php:139
-msgid "Editace článku - "
+msgid "Editace článku -"
 msgstr ""
 
 #: Content/Domain/listGrid.html.twig:14
@@ -727,7 +724,7 @@ msgid "Email"
 msgstr ""
 
 #: Mail/ContactForm/mail.html.twig:4
-msgid "Email: "
+msgid "Email:"
 msgstr ""
 
 #: Content/Customer/orderList.html.twig:10
@@ -953,7 +950,7 @@ msgid "Jméno"
 msgstr ""
 
 #: Mail/ContactForm/mail.html.twig:1
-msgid "Jméno: "
+msgid "Jméno:"
 msgstr ""
 
 #: Content/Product/detail.html.twig:3
@@ -1030,7 +1027,7 @@ msgid "Kód"
 msgstr ""
 
 #: Content/CustomerCommunication/orderSubmitted.html.twig:54
-msgid "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit\n\t\t\t\t\t\t\todkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu\n\t\t\t\t\t\t\tvyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených\n\t\t\t\t\t\t\tzávorek)."
+msgid "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu vyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených závorek)."
 msgstr ""
 
 #: Content/Product/detail.html.twig:315
@@ -1405,7 +1402,7 @@ msgid "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás 
 msgstr ""
 
 #: CartController.php:321
-msgid "Nepodařilo se odstranit položku z košíku.\n\t\t\t\t\tZřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
+msgid "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 msgstr ""
 
 #: CartController.php:317
@@ -1769,7 +1766,7 @@ msgid "Platba"
 msgstr ""
 
 #: Content/Order/preview.html.twig:19
-msgid "Platba - "
+msgid "Platba -"
 msgstr ""
 
 #: PaymentController.php:171
@@ -1903,7 +1900,7 @@ msgid "Pořadí se nepodařilo uložit"
 msgstr ""
 
 #: PricingGroupController.php:118
-msgid "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou cenovou skupinu místo ní chcete nastavit?"
+msgid "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 msgstr ""
 
 #: UnitController.php:63
@@ -2552,7 +2549,7 @@ msgid "Titulek"
 msgstr ""
 
 #: Content/Error/error.html.twig:51
-msgid "To je nemilé, to je nemilé. A zrovna\n\t\t\t\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\t\t\t\tto je jak naschvál!"
+msgid "To je nemilé, to je nemilé. A zrovna <strong>\"%status_code% %status_text%\"</strong>, to je jak naschvál!"
 msgstr ""
 
 #: Content/Product/detail.html.twig:135
@@ -2794,7 +2791,7 @@ msgid "Vytvořit"
 msgstr ""
 
 #: Content/Category/list.html.twig:8
-msgid "Vytvořit \tnovou kategorii"
+msgid "Vytvořit novou kategorii"
 msgstr ""
 
 #: Admin/Form/urlListNewUrlForm.html.twig:26
@@ -2889,7 +2886,7 @@ msgid "Vyřadit z prodeje"
 msgstr ""
 
 #: Mail/ContactForm/mail.html.twig:7
-msgid "Vzkaz: "
+msgid "Vzkaz:"
 msgstr ""
 
 #: Content/Cart/index.html.twig:14
@@ -2967,7 +2964,7 @@ msgid "XML Feedy"
 msgstr ""
 
 #: Content/Feed/list.html.twig:3
-msgid "XML Feedy - "
+msgid "XML Feedy -"
 msgstr ""
 
 #: FeedController.php:55
@@ -2979,7 +2976,7 @@ msgid "XML dostupnostní feedy"
 msgstr ""
 
 #: Content/Feed/listDelivery.html.twig:3
-msgid "XML dostupnostní feedy - "
+msgid "XML dostupnostní feedy -"
 msgstr ""
 
 #: CartController.php:313
@@ -3354,9 +3351,6 @@ msgid "Zákazník prozatím nemá žádné objednávky."
 msgstr ""
 
 #: RegistrationController.php:173
-msgid "Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.\n\t\t\t\t\t\t<a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
-msgstr ""
-
 #: RegistrationController.php:129
 msgid "Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje. <a href=\"{{ registrationLink }}\">Zaregistrovat</a>"
 msgstr ""
@@ -3605,7 +3599,7 @@ msgid "Článek"
 msgstr ""
 
 #: ArticleController.php:237
-msgid "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek.\n\t\t\t\tToto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
+msgid "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 msgstr ""
 
 #: ArticleController.php:218
