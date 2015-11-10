@@ -26,7 +26,7 @@ class PoDumper implements DumperInterface {
 		foreach ($catalogue->getDomain($domain)->all() as $message) {
 			/* @var $message \JMS\TranslationBundle\Model\Message */
 			$output .= $this->getReferences($message);
-			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getSourceString()));
+			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
 			if ($message->isNew() && $catalogue->getLocale() !== Translator::SOURCE_LOCALE) {
 				$output .= 'msgstr ""' . "\n";
 			} else {
