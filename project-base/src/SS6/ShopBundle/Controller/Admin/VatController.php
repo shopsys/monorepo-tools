@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\PricingSettingFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,11 +26,6 @@ class VatController extends AdminBaseController {
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSettingFacade
-	 */
-	private $pricingSettingFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
@@ -45,14 +39,12 @@ class VatController extends AdminBaseController {
 		VatFacade $vatFacade,
 		PricingSetting $pricingSetting,
 		VatInlineEdit $vatInlineEdit,
-		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-		PricingSettingFacade $pricingSettingFacade
+		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory
 	) {
 		$this->vatFacade = $vatFacade;
 		$this->pricingSetting = $pricingSetting;
 		$this->vatInlineEdit = $vatInlineEdit;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
-		$this->pricingSettingFacade = $pricingSettingFacade;
 	}
 
 	/**
@@ -176,7 +168,7 @@ class VatController extends AdminBaseController {
 				$this->transactional(
 					function () use ($vatSettingsFormData) {
 						$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
-						$this->pricingSettingFacade->setRoundingType($vatSettingsFormData['roundingType']);
+						$this->pricingSetting->setRoundingType($vatSettingsFormData['roundingType']);
 					}
 				);
 				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
