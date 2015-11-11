@@ -170,8 +170,8 @@ class RegistrationController extends FrontBaseController {
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->em->rollback();
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.
-						<a href="{{ registrationLink }}">Zaregistrovat</a>'),
+					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
+						. ' <a href="{{ registrationLink }}">Zaregistrovat</a>'),
 					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),

@@ -6,18 +6,18 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
+use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
 use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Localization\Localization;
 
 class PoDumper implements DumperInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \SS6\ShopBundle\Component\Translation\MessageIdNormalizer
 	 */
-	private $localization;
+	private $messageIdNormalizer;
 
-	public function __construct(Localization $localization) {
-		$this->localization = $localization;
+	public function __construct(MessageIdNormalizer $messageIdNormalizer) {
+		$this->messageIdNormalizer = $messageIdNormalizer;
 	}
 
 	/**
@@ -26,6 +26,17 @@ class PoDumper implements DumperInterface {
 	 * @return string
 	 */
 	public function dump(MessageCatalogue $catalogue, $domain = 'messages') {
+		$normalizedCatalogue = $this->messageIdNormalizer->getNormalizedCatalogue($catalogue);
+
+		return $this->dumpCatalogue($normalizedCatalogue, $domain);
+	}
+
+	/**
+	 * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
+	 * @param string $domain
+	 * @return string
+	 */
+	private function dumpCatalogue(MessageCatalogue $catalogue, $domain = 'messages') {
 		$output = 'msgid ""' . "\n";
 		$output .= 'msgstr ""' . "\n";
 		$output .= '"Content-Type: text/plain; charset=UTF-8\n"' . "\n";
@@ -36,7 +47,7 @@ class PoDumper implements DumperInterface {
 		foreach ($catalogue->getDomain($domain)->all() as $message) {
 			/* @var $message \JMS\TranslationBundle\Model\Message */
 			$output .= $this->getReferences($message);
-			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getSourceString()));
+			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
 			if ($message->isNew() && $catalogue->getLocale() !== Translator::SOURCE_LOCALE) {
 				$output .= 'msgstr ""' . "\n";
 			} else {

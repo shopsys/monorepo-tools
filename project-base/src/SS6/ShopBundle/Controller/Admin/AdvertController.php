@@ -109,7 +109,7 @@ class AdvertController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace reklamy - ') . $advert->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace reklamy - %name%', ['%name%' => $advert->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/edit.html.twig', [
 			'form' => $form->createView(),

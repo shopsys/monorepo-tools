@@ -166,7 +166,7 @@ class ProductController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem(t('Editace zboží - ') . $this->productExtension->getProductDisplayName($product))
+			new MenuItem(t('Editace zboží - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]))
 		);
 
 		$viewParameters = [

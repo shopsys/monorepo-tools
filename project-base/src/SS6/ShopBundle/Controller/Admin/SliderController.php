@@ -162,7 +162,7 @@ class SliderController extends AdminBaseController {
 		}
 
 		$this->breadcrumb->replaceLastItem(
-			new MenuItem(t('Editace stránky slideru - ') . $sliderItem->getName())
+			new MenuItem(t('Editace stránky slideru - %name%', ['%name%' => $sliderItem->getName()]))
 		);
 
 		return $this->render('@SS6Shop/Admin/Content/Slider/edit.html.twig', [

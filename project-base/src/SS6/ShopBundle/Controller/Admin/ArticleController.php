@@ -136,7 +136,7 @@ class ArticleController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace článku - ') . $article->getName()));
+		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace článku - %name%', ['%name%' => $article->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),

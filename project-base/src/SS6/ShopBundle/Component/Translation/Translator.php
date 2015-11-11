@@ -31,14 +31,21 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 */
 	private $identityTranslator;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\MessageIdNormalizer
+	 */
+	private $messageIdNormalizer;
+
 	public function __construct(
 		TranslatorInterface $originalTranslator,
 		TranslatorBagInterface $originalTranslatorBag,
-		TranslatorInterface $identityTranslator
+		TranslatorInterface $identityTranslator,
+		MessageIdNormalizer $messageIdNormalizer
 	) {
 		$this->originalTranslator = $originalTranslator;
 		$this->originalTranslatorBag = $originalTranslatorBag;
 		$this->identityTranslator = $identityTranslator;
+		$this->messageIdNormalizer = $messageIdNormalizer;
 	}
 
 	/**
@@ -48,21 +55,22 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 * {@inheritdoc}
 	 */
 	public function trans($id, array $parameters = [], $domain = null, $locale = null) {
+		$normalizedId = $this->messageIdNormalizer->normalizeMessageId($id);
 		$resolvedLocale = $this->resolveLocale($locale);
 		$resolvedDomain = $this->resolveDomain($domain);
 
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
 		if ($resolvedLocale === self::SOURCE_LOCALE) {
-			if ($catalogue->defines($id, $resolvedDomain)) {
-				$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+			if ($catalogue->defines($normalizedId, $resolvedDomain)) {
+				$message = $this->originalTranslator->trans($normalizedId, $parameters, $resolvedDomain, $resolvedLocale);
 			} else {
-				$message = $this->identityTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+				$message = $this->identityTranslator->trans($normalizedId, $parameters, $resolvedDomain, $resolvedLocale);
 			}
 		} else {
-			$message = $this->originalTranslator->trans($id, $parameters, $resolvedDomain, $resolvedLocale);
+			$message = $this->originalTranslator->trans($normalizedId, $parameters, $resolvedDomain, $resolvedLocale);
 
-			if (!$catalogue->has($id, $resolvedDomain)) {
+			if (!$catalogue->has($normalizedId, $resolvedDomain)) {
 				$message = self::NOT_TRANSLATED_PREFIX . $message;
 			}
 		}
@@ -77,21 +85,22 @@ class Translator implements TranslatorInterface, TranslatorBagInterface {
 	 * {@inheritdoc}
 	 */
 	public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
+		$normalizedId = $this->messageIdNormalizer->normalizeMessageId($id);
 		$resolvedLocale = $this->resolveLocale($locale);
 		$resolvedDomain = $this->resolveDomain($domain);
 
 		$catalogue = $this->originalTranslatorBag->getCatalogue($resolvedLocale);
 
 		if ($resolvedLocale === self::SOURCE_LOCALE) {
-			if ($catalogue->defines($id, $resolvedDomain)) {
-				$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+			if ($catalogue->defines($normalizedId, $resolvedDomain)) {
+				$message = $this->originalTranslator->transChoice($normalizedId, $number, $parameters, $resolvedDomain, $resolvedLocale);
 			} else {
-				$message = $this->identityTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+				$message = $this->identityTranslator->transChoice($normalizedId, $number, $parameters, $resolvedDomain, $resolvedLocale);
 			}
 		} else {
-			$message = $this->originalTranslator->transChoice($id, $number, $parameters, $resolvedDomain, $resolvedLocale);
+			$message = $this->originalTranslator->transChoice($normalizedId, $number, $parameters, $resolvedDomain, $resolvedLocale);
 
-			if (!$catalogue->has($id, $resolvedDomain)) {
+			if (!$catalogue->has($normalizedId, $resolvedDomain)) {
 				$message = self::NOT_TRANSLATED_PREFIX . $message;
 			}
 		}
