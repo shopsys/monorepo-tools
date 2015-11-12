@@ -45,6 +45,8 @@
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
 	<property name="path.web.scripts" value="${path.web}/assets/scripts"/>
+	<property name="path.web.styles.admin" value="${path.web}/assets/admin/styles"/>
+	<property name="path.web.styles.front" value="${path.web}/assets/frontend/styles"/>
 
 	<if>
 		<os family="windows" />
@@ -56,8 +58,8 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,grunt,dump-translations-custom,db-rebuild,warmup"/>
-	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,grunt,dump-translations-custom,db-demo,warmup"/>
+	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
+	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-fixtures-base-settings"/>
 
@@ -98,6 +100,19 @@
 				<exclude name="/" />
 			</fileset>
 			<fileset dir="${path.web.scripts}/">
+				<exclude name="/" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="clean-styles">
+		<mkdir dir="${path.web.styles.admin}" mode="${mkdir.mode}"/>
+		<mkdir dir="${path.web.styles.front}" mode="${mkdir.mode}"/>
+		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${path.web.styles.admin}/">
+				<exclude name="/" />
+			</fileset>
+			<fileset dir="${path.web.styles.front}/">
 				<exclude name="/" />
 			</fileset>
 		</delete>
@@ -220,7 +235,7 @@
 		</exec>
 	</target>
 
-	<target name="grunt" depends="gruntfile">
+	<target name="grunt" depends="gruntfile,clean-styles">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
 	</target>
 

@@ -102,3 +102,8 @@ services:
     class: SS6\ShopBundle\Twig\SeoExtension
     tags:
       - { name: twig.extension }
+
+  ss6.twig.setting_extension:
+    class: SS6\ShopBundle\Twig\SettingExtension
+    tags:
+      - { name: twig.extension }

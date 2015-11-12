@@ -89,6 +89,11 @@ services:
     tags:
       - { name: form.type, alias: url_list }
 
+  ss6.shop.form.wysiwyg:
+    class: SS6\ShopBundle\Form\WysiwygType
+    tags:
+      - { name: form.type_extension, alias: ckeditor }
+
   ss6.shop.form.yes_no:
     class: SS6\ShopBundle\Form\YesNoType
     tags:
