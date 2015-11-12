@@ -9,7 +9,7 @@
 		$('.js-mass-action-submit').click(function () {
 			if (!isConfirmed) {
 				var action = $('.js-mass-action-value option:selected').text().toLowerCase();
-				var selectType = $('.js-mass-action-select-type select').val();
+				var selectType = $('.js-mass-action-select-type').val();
 				var count;
 				switch (selectType) {
 					case SS6.constant('SS6\\ShopBundle\\Model\\Product\\MassAction\\ProductMassActionData::SELECT_TYPE_CHECKED'):
