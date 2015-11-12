@@ -7,14 +7,14 @@ module.exports = function(grunt) {
 		less: {
 			admin: {
 				files: {
-					'web/assets/admin/styles/index.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
+					'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
 				},
 				options: {
 					compress: true,
 					sourceMap: true,
-					sourceMapFilename: 'web/assets/admin/styles/index.css.map',
+					sourceMapFilename: 'web/assets/admin/styles/index_{{ cssVersion }}.css.map',
 					sourceMapBasepath: 'web',
-					sourceMapURL: 'index.css.map',
+					sourceMapURL: 'index_{{ cssVersion }}.css.map',
 					sourceMapRootpath: '../../../'
 				}
 			},
@@ -22,14 +22,14 @@ module.exports = function(grunt) {
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
 					files: {
-						'web/assets/frontend/styles/index{{ domain.id }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
+						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
 					},
 					options: {
 						compress: true,
 						sourceMap: true,
-						sourceMapFilename: 'web/assets/frontend/styles/index{{ domain.id }}.css.map',
+						sourceMapFilename: 'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css.map',
 						sourceMapBasepath: 'web',
-						sourceMapURL: 'index{{ domain.id }}.css.map',
+						sourceMapURL: 'index{{ domain.id }}_{{ cssVersion }}.css.map',
 						sourceMapRootpath: '../../../'
 					}
 				},
@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 			{% for domain in domains -%}
 				wysiwyg{{ domain.id }}: {
 					files: {
-						'web/assets/admin/styles/wysiwyg.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
+						'web/assets/admin/styles/wysiwyg_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/wysiwyg.less'
 					},
 					options: {
 						compress: true
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 					overridesOnly: false
 				},
 				files: {
-						'web/assets/admin/styles/index-ie8.css': 'web/assets/admin/styles/index.css'
+						'web/assets/admin/styles/index_{{ cssVersion }}-ie8.css': 'web/assets/admin/styles/index_{{ cssVersion }}.css'
 				}
 			},
 
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 						overridesOnly: false
 					},
 					files: {
-						'web/assets/frontend/styles/index{{ domain.id }}-ie8.css': 'web/assets/frontend/styles/index{{ domain.id }}.css'
+						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}-ie8.css': 'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css'
 					}
 				}{% if not loop.last %},{% endif %}
 
@@ -140,8 +140,8 @@ module.exports = function(grunt) {
 				options: {
 					name: 'Shopsys 6 - common',
 					include: [
-						'web/assets/frontend/styles/index1.css',
-						'web/assets/admin/styles/index.css'
+						'web/assets/frontend/styles/index1_{{ cssVersion }}.css',
+						'web/assets/admin/styles/index_{{ cssVersion }}.css'
 					]
 				},
 				files: {
