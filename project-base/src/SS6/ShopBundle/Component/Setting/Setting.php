@@ -12,6 +12,7 @@ class Setting {
 	const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
 	const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
 	const CSS_VERSION = 'cssVersion';
+	const DOMAIN_DATA_CREATED = 'domainDataCreated';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
