@@ -39,6 +39,13 @@
 		</exec>
 	</target>
 
+	<target name="create-domains-data">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:domains-data:create" />
+		</exec>
+	</target>
+
 	<target name="dump-translations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
