@@ -14,12 +14,19 @@ class FeedConfigRepository {
 	 */
 	private $heurekaDeliveryItemIteratorFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 */
+	private $zboziItemIteratorFactory;
+
 	public function __construct(
 		FeedItemIteratorFactoryInterface $heurekaItemIteratorFactory,
-		FeedItemIteratorFactoryInterface $heurekaDeliveryItemIteratorFactory
+		FeedItemIteratorFactoryInterface $heurekaDeliveryItemIteratorFactory,
+		FeedItemIteratorFactoryInterface $zboziItemIteratorFactory
 	) {
 		$this->heurekaItemIteratorFactory = $heurekaItemIteratorFactory;
 		$this->heurekaDeliveryItemIteratorFactory = $heurekaDeliveryItemIteratorFactory;
+		$this->zboziItemIteratorFactory = $zboziItemIteratorFactory;
 	}
 
 	/**
@@ -33,6 +40,12 @@ class FeedConfigRepository {
 			'heureka',
 			'@SS6Shop/Feed/heureka.xml.twig',
 			$this->heurekaItemIteratorFactory
+		);
+		$feedConfigs[] = new FeedConfig(
+			'Zboží.cz',
+			'zbozi',
+			'@SS6Shop/Feed/zbozi.xml.twig',
+			$this->zboziItemIteratorFactory
 		);
 
 		return $feedConfigs;
