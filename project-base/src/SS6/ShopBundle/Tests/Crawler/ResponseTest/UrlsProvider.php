@@ -16,6 +16,10 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProvider {
 
+	const ROUTE_NAME_KEY = 'routeName';
+	const ROUTE_PARAMETERS_KEY = 'routeParameters';
+	const EXPECTED_STATUS_CODE_KEY = 'expectedStatusCode';
+
 	/**
 	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
 	 */
@@ -203,20 +207,39 @@ class UrlsProvider {
 	 */
 	public function getFrontTestableUrlsProviderData() {
 		$urls = [];
+		foreach ($this->getFrontTestableRoutesData() as $frontTestableRouteData) {
+			$routeName = $frontTestableRouteData[self::ROUTE_NAME_KEY];
+			$routeParameters = $frontTestableRouteData[self::ROUTE_PARAMETERS_KEY];
+			$urls[] = [
+				$routeName,
+				$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
+				$frontTestableRouteData[self::EXPECTED_STATUS_CODE_KEY],
+				in_array($routeName, $this->frontAsLoggedRouteNames),
+			];
+		}
+
+		return $urls;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getFrontTestableRoutesData() {
+		$routesData = [];
 		foreach ($this->router->getRouteCollection() as $routeName => $route) {
 			if ($this->isTestableRoute($route, $routeName) && $this->isFrontRouteName($routeName)) {
 				$routeParameters = $this->getRouteParameters($route, $routeName);
 				$routeParameters = $this->addRouteCsrfParameter($routeName, $routeParameters);
-				$urls[] = [
-					$routeName,
-					$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
-					$this->getExpectedStatusCode($route, $routeName),
-					in_array($routeName, $this->frontAsLoggedRouteNames),
+				$expectedStatusCode = $this->getExpectedStatusCode($route, $routeName);
+				$routesData[] = [
+					self::ROUTE_NAME_KEY => $routeName,
+					self::ROUTE_PARAMETERS_KEY => $routeParameters,
+					self::EXPECTED_STATUS_CODE_KEY => $expectedStatusCode,
 				];
 			}
 		}
 
-		return $urls;
+		return $routesData;
 	}
 
 	/**
