@@ -169,7 +169,7 @@ class SuperadminController extends AdminBaseController {
 		if ($form->isValid()) {
 			$formData = $form->getData();
 			$this->transactional(
-				function () use ($formData, $moduleName, $isEnabled) {
+				function () use ($formData, $moduleName) {
 					foreach ($formData[ModulesFormType::MODULES_SUBFORM_NAME] as $moduleName => $isEnabled) {
 						$this->moduleFacade->setEnabled($moduleName, $isEnabled);
 					}
