@@ -67,8 +67,7 @@ class ProductDetailFactory {
 			$product,
 			$this,
 			$this->getBasePrice($product),
-			$this->getSellingPrice($product),
-			$this->getProductDomainsIndexedByDomainId($product)
+			$this->getSellingPrice($product)
 		);
 	}
 
@@ -137,7 +136,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
-	private function getProductDomainsIndexedByDomainId(Product $product) {
+	public function getProductDomainsIndexedByDomainId(Product $product) {
 		return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 	}
 

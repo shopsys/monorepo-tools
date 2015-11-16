@@ -29,7 +29,7 @@ class ProductDetail {
 	private $sellingPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]|null
 	 */
 	private $productDomainsIndexedByDomainId;
 
@@ -48,7 +48,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
 	 * @param \SS6\ShopBundle\Component\Image\Image[imageId]|null $imagesById
 	 */
@@ -57,7 +57,7 @@ class ProductDetail {
 		ProductDetailFactory $productDetailFactory,
 		Price $basePrice,
 		$sellingPrice,
-		array $productDomainsIndexedByDomainId,
+		array $productDomainsIndexedByDomainId = null,
 		array $parameters = null,
 		array $imagesById = null
 	) {
@@ -95,6 +95,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	public function getProductDomainsIndexedByDomainId() {
+		if ($this->productDomainsIndexedByDomainId === null) {
+			$this->productDomainsIndexedByDomainId = $this->productDetailFactory->getProductDomainsIndexedByDomainId($this->product);
+		}
+
 		return $this->productDomainsIndexedByDomainId;
 	}
 
