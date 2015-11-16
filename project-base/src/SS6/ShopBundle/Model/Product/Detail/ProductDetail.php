@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetail {
@@ -44,6 +45,11 @@ class ProductDetail {
 	private $imagesById;
 
 	/**
+	 * @var bool
+	 */
+	private $sellingPriceLoaded;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
@@ -56,7 +62,7 @@ class ProductDetail {
 		Product $product,
 		ProductDetailFactory $productDetailFactory,
 		Price $basePrice,
-		$sellingPrice,
+		ProductPrice $sellingPrice = null,
 		array $productDomainsIndexedByDomainId = null,
 		array $parameters = null,
 		array $imagesById = null
@@ -68,6 +74,7 @@ class ProductDetail {
 		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
 		$this->parameters = $parameters;
 		$this->imagesById = $imagesById;
+		$this->sellingPriceLoaded = false;
 	}
 
 	/**
@@ -88,6 +95,11 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	public function getSellingPrice() {
+		if (!$this->sellingPriceLoaded) {
+			$this->sellingPrice = $this->productDetailFactory->getSellingPrice($this->product);
+			$this->sellingPriceLoaded = true;
+		}
+
 		return $this->sellingPrice;
 	}
 

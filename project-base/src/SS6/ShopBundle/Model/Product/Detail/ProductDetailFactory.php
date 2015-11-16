@@ -66,8 +66,7 @@ class ProductDetailFactory {
 		return new ProductDetail(
 			$product,
 			$this,
-			$this->getBasePrice($product),
-			$this->getSellingPrice($product)
+			$this->getBasePrice($product)
 		);
 	}
 
@@ -97,7 +96,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
-	private function getSellingPrice(Product $product) {
+	public function getSellingPrice(Product $product) {
 		try {
 			$productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
 		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
