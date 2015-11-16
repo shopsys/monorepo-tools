@@ -65,6 +65,11 @@ class HeurekaItem {
 	private $cpc;
 
 	/**
+	 * @var int|null
+	 */
+	private $groupId;
+
+	/**
 	 * @param int $itemId
 	 * @param string $productName
 	 * @param string $description
@@ -77,6 +82,7 @@ class HeurekaItem {
 	 * @param string|null $categoryText
 	 * @param string[paramName] $params
 	 * @param string|null $cpc
+	 * @param int|null $groupId
 	 */
 	public function __construct(
 		$itemId,
@@ -90,7 +96,8 @@ class HeurekaItem {
 		$manufacturer,
 		$categoryText,
 		$params,
-		$cpc
+		$cpc,
+		$groupId
 	) {
 		$this->itemId = $itemId;
 		$this->productName = $productName;
@@ -104,6 +111,7 @@ class HeurekaItem {
 		$this->categoryText = $categoryText;
 		$this->params = $params;
 		$this->cpc = $cpc;
+		$this->groupId = $groupId;
 	}
 
 	/**
@@ -188,6 +196,13 @@ class HeurekaItem {
 	 */
 	public function getCpc() {
 		return $this->cpc;
+	}
+
+	/**
+	 * @return int|null
+	 */
+	public function getGroupId() {
+		return $this->groupId;
 	}
 
 }

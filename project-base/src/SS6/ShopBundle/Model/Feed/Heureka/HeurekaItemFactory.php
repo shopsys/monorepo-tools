@@ -75,6 +75,11 @@ class HeurekaItemFactory implements FeedItemFactoryInterface {
 			} else {
 				$params = [];
 			}
+			if ($product->isVariant()) {
+				$groupId = $product->getMainVariant()->getId();
+			} else {
+				$groupId = null;
+			}
 
 			$items[] = new HeurekaItem(
 				$product->getId(),
@@ -88,7 +93,8 @@ class HeurekaItemFactory implements FeedItemFactoryInterface {
 				$manufacturer,
 				$this->getProductCategorytext($product, $domainConfig),
 				$params,
-				$productDomainsByProductId[$product->getId()]->getHeurekaCpc()
+				$productDomainsByProductId[$product->getId()]->getHeurekaCpc(),
+				$groupId
 			);
 		}
 
