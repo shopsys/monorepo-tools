@@ -34,7 +34,7 @@ class ProductDetail {
 	private $productDomainsIndexedByDomainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null
 	 */
 	private $parameters;
 
@@ -49,7 +49,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
 	 * @param \SS6\ShopBundle\Component\Image\Image[imageId]|null $imagesById
 	 */
 	public function __construct(
@@ -58,7 +58,7 @@ class ProductDetail {
 		Price $basePrice,
 		$sellingPrice,
 		array $productDomainsIndexedByDomainId,
-		array $parameters,
+		array $parameters = null,
 		array $imagesById = null
 	) {
 		$this->product = $product;
@@ -102,6 +102,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getParameters() {
+		if ($this->parameters === null) {
+			$this->parameters = $this->productDetailFactory->getParameters($this->product);
+		}
+
 		return $this->parameters;
 	}
 

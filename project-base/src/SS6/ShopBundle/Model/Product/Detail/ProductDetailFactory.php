@@ -68,8 +68,7 @@ class ProductDetailFactory {
 			$this,
 			$this->getBasePrice($product),
 			$this->getSellingPrice($product),
-			$this->getProductDomainsIndexedByDomainId($product),
-			$this->getParameters($product)
+			$this->getProductDomainsIndexedByDomainId($product)
 		);
 	}
 
@@ -112,7 +111,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
-	private function getParameters(Product $product) {
+	public function getParameters(Product $product) {
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
 		foreach ($productParameterValues as $index => $productParameterValue) {
 			$parameter = $productParameterValue->getParameter();
