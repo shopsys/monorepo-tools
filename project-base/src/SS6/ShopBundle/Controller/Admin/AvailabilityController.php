@@ -94,7 +94,7 @@ class AvailabilityController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/product/availability/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/product/availability/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {

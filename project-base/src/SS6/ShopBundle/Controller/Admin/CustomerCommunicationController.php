@@ -30,14 +30,14 @@ class CustomerCommunicationController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/customer_communication/")
+	 * @Route("/customer-communication/")
 	 */
 	public function indexAction() {
 		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/index.html.twig');
 	}
 
 	/**
-	 * @Route("/customer_communication/order_submitted/")
+	 * @Route("/customer-communication/order-submitted/")
 	 */
 	public function orderSubmittedAction(Request $request) {
 		$data = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());

@@ -47,7 +47,7 @@ class BestsellingProductController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/product/bestselling_product/list/")
+	 * @Route("/product/bestselling-product/list/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
@@ -65,7 +65,7 @@ class BestsellingProductController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/product/bestselling_product/detail/")
+	 * @Route("/product/bestselling-product/detail/")
 	 */
 	public function detailAction(Request $request) {
 		$form = $this->createForm(new BestsellingProductFormType());

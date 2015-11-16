@@ -103,7 +103,7 @@ class PricingGroupController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/pricing/group/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/pricing/group/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {

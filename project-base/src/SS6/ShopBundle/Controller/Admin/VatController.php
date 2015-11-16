@@ -59,7 +59,7 @@ class VatController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/vat/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/vat/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {

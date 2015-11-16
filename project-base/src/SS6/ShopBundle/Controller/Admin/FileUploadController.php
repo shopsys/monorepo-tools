@@ -31,7 +31,7 @@ class FileUploadController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/file_upload/")
+	 * @Route("/file-upload/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
@@ -68,7 +68,7 @@ class FileUploadController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/file_upload/delete_temporary_file/")
+	 * @Route("/file-upload/delete-temporary-file/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */

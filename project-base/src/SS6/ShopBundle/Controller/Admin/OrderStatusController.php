@@ -39,7 +39,7 @@ class OrderStatusController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/order_status/list/")
+	 * @Route("/order-status/list/")
 	 */
 	public function listAction() {
 		$grid = $this->orderStatusInlineEdit->getGrid();
@@ -50,7 +50,7 @@ class OrderStatusController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/order_status/delete/{id}", requirements={"id" = "\d+"})
+	 * @Route("/order-status/delete/{id}", requirements={"id" = "\d+"})
 	 * @CsrfProtection
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $id
@@ -106,7 +106,7 @@ class OrderStatusController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/order_status/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/order-status/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {

@@ -59,7 +59,7 @@ class CurrencyController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/currency/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/currency/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {

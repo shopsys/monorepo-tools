@@ -71,7 +71,7 @@ class DomainController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/multidomain/select_domain/{id}", requirements={"id" = "\d+"})
+	 * @Route("/multidomain/select-domain/{id}", requirements={"id" = "\d+"})
 	 * @param Request $request
 	 */
 	public function selectDomainAction(Request $request, $id) {

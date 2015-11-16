@@ -30,7 +30,7 @@ class GridController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/_grid/get_form/")
+	 * @Route("/_grid/get-form/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function getFormAction(Request $request) {
@@ -43,7 +43,7 @@ class GridController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/_grid/save_form/")
+	 * @Route("/_grid/save-form/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveFormAction(Request $request) {
@@ -67,7 +67,7 @@ class GridController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/_grid/save_ordering/")
+	 * @Route("/_grid/save-ordering/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveOrderingAction(Request $request) {

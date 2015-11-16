@@ -228,7 +228,7 @@ class ArticleController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/article/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/article/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {
@@ -247,7 +247,7 @@ class ArticleController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/article/save_ordering/")
+	 * @Route("/article/save-ordering/")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */

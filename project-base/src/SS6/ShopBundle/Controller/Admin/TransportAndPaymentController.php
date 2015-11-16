@@ -30,14 +30,14 @@ class TransportAndPaymentController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/transport_and_payment/list/")
+	 * @Route("/transport-and-payment/list/")
 	 */
 	public function listAction() {
 		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/list.html.twig');
 	}
 
 	/**
-	 * @Route("/transport_and_payment/free_transport_and_payment_limit/")
+	 * @Route("/transport-and-payment/free-transport-and-payment-limit/")
 	 *
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */

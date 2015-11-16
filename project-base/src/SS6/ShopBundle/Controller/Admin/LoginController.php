@@ -53,7 +53,7 @@ class LoginController extends AdminBaseController {
 
 	/**
 	 * @Route("/", name="admin_login")
-	 * @Route("/login_check/", name="admin_login_check")
+	 * @Route("/login-check/", name="admin_login_check")
 	 * @Route("/logout/", name="admin_logout")
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */

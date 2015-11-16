@@ -52,7 +52,7 @@ class UnitController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/unit/delete_confirm/{id}", requirements={"id" = "\d+"})
+	 * @Route("/unit/delete-confirm/{id}", requirements={"id" = "\d+"})
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {
