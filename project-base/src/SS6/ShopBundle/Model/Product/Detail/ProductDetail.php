@@ -39,7 +39,7 @@ class ProductDetail {
 	private $parameters;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Image[]
+	 * @var \SS6\ShopBundle\Component\Image\Image[]|null
 	 */
 	private $imagesById;
 
@@ -50,7 +50,7 @@ class ProductDetail {
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
-	 * @param \SS6\ShopBundle\Component\Image\Image[imageId] $imagesById
+	 * @param \SS6\ShopBundle\Component\Image\Image[imageId]|null $imagesById
 	 */
 	public function __construct(
 		Product $product,
@@ -59,7 +59,7 @@ class ProductDetail {
 		$sellingPrice,
 		array $productDomainsIndexedByDomainId,
 		array $parameters,
-		array $imagesById
+		array $imagesById = null
 	) {
 		$this->product = $product;
 		$this->productDetailFactory = $productDetailFactory;
@@ -109,6 +109,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Component\Image\Image[]
 	 */
 	public function getImagesIndexedById() {
+		if ($this->imagesById === null) {
+			$this->imagesById = $this->productDetailFactory->getImagesIndexedById($this->product);
+		}
+
 		return $this->imagesById;
 	}
 
