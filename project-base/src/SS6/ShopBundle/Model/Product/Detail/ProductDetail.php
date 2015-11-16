@@ -20,7 +20,7 @@ class ProductDetail {
 	private $productDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $basePrice;
 
@@ -52,7 +52,7 @@ class ProductDetail {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
@@ -61,7 +61,7 @@ class ProductDetail {
 	public function __construct(
 		Product $product,
 		ProductDetailFactory $productDetailFactory,
-		Price $basePrice,
+		Price $basePrice = null,
 		ProductPrice $sellingPrice = null,
 		array $productDomainsIndexedByDomainId = null,
 		array $parameters = null,
@@ -88,6 +88,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function getBasePrice() {
+		if ($this->basePrice === null) {
+			$this->basePrice = $this->productDetailFactory->getBasePrice($this->product);
+		}
+
 		return $this->basePrice;
 	}
 

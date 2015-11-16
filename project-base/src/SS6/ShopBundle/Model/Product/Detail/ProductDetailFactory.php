@@ -63,11 +63,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail
 	 */
 	public function getDetailForProduct(Product $product) {
-		return new ProductDetail(
-			$product,
-			$this,
-			$this->getBasePrice($product)
-		);
+		return new ProductDetail($product, $this);
 	}
 
 	/**
@@ -88,7 +84,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function getBasePrice(Product $product) {
+	public function getBasePrice(Product $product) {
 		return $this->productPriceCalculation->calculateBasePrice($product);
 	}
 
