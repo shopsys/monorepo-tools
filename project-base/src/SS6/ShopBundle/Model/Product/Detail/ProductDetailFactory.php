@@ -65,6 +65,7 @@ class ProductDetailFactory {
 	public function getDetailForProduct(Product $product) {
 		return new ProductDetail(
 			$product,
+			$this,
 			$this->getBasePrice($product),
 			$this->getSellingPrice($product),
 			$this->getProductDomainsIndexedByDomainId($product),

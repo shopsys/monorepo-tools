@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetail {
@@ -11,6 +12,11 @@ class ProductDetail {
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 */
 	private $product;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 */
+	private $productDetailFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Price
@@ -39,6 +45,7 @@ class ProductDetail {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
@@ -47,6 +54,7 @@ class ProductDetail {
 	 */
 	public function __construct(
 		Product $product,
+		ProductDetailFactory $productDetailFactory,
 		Price $basePrice,
 		$sellingPrice,
 		array $productDomainsIndexedByDomainId,
@@ -54,6 +62,7 @@ class ProductDetail {
 		array $imagesById
 	) {
 		$this->product = $product;
+		$this->productDetailFactory = $productDetailFactory;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
 		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
