@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
 class ProductDetail {
