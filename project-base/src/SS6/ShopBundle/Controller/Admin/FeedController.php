@@ -71,19 +71,19 @@ class FeedController extends AdminBaseController {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 				$feeds[] = [
-					'feedName' => $feedConfig->getName(),
-					'domainName' => $domainConfig->getName(),
+					'feedLabel' => $feedConfig->getLabel(),
+					'feedName' => $feedConfig->getFeedName(),
 					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
 					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
 				];
 			}
 		}
 
-		$dataSource = new ArrayDataSource($feeds, 'name');
+		$dataSource = new ArrayDataSource($feeds, 'label');
 
 		$grid = $this->gridFactory->create('feedsList', $dataSource);
 
-		$grid->addColumn('name', 'feedName', 'Feed');
+		$grid->addColumn('label', 'feedLabel', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
 		$grid->addColumn('url', 'url', 'Url adresa');
 

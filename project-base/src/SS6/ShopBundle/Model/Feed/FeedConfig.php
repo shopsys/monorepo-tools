@@ -10,12 +10,12 @@ class FeedConfig {
 	/**
 	 * @var string
 	 */
-	private $name;
+	private $label;
 
 	/**
 	 * @var string
 	 */
-	private $filenamePrefix;
+	private $name;
 
 	/**
 	 * @var string
@@ -28,19 +28,19 @@ class FeedConfig {
 	private $feedItemIteratorFactory;
 
 	/**
+	 * @param string $label
 	 * @param string $name
-	 * @param string $filenamePrefix
 	 * @param string $templateFilepath
 	 * @param \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	 */
 	public function __construct(
+		$label,
 		$name,
-		$filenamePrefix,
 		$templateFilepath,
 		FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	) {
+		$this->label = $label;
 		$this->name = $name;
-		$this->filenamePrefix = $filenamePrefix;
 		$this->templateFilepath = $templateFilepath;
 		$this->feedItemIteratorFactory = $feedItemIteratorFactory;
 	}
@@ -48,7 +48,14 @@ class FeedConfig {
 	/**
 	 * @return string
 	 */
-	public function getName() {
+	public function getLabel() {
+		return $this->label;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFeedName() {
 		return $this->name;
 	}
 
@@ -57,7 +64,7 @@ class FeedConfig {
 	 * @return string
 	 */
 	public function getFeedFilename(DomainConfig $domainConfig) {
-		return $this->filenamePrefix . '_' . $domainConfig->getId() . '.xml';
+		return $this->name . '_' . $domainConfig->getId() . '.xml';
 	}
 
 	/**

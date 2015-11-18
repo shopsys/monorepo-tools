@@ -4,7 +4,7 @@
 	{{ row.feedName }} - {{ row.domainName }}
 {% endmacro %}
 
-{% block grid_value_cell_id_name %}
+{% block grid_value_cell_id_label %}
 	{% if row.created %}
 		<a href="{{ row.url }}" target="_blank">{{ _self.getName(row) }}</a>
 	{% else %}
