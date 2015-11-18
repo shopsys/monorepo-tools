@@ -81,7 +81,7 @@ class ProductAvailabilityRecalculator {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	private function recalculateAvailabilityForProduct(Product $product) {
-		$calculatedAvailability = $this->productAvailabilityCalculation->getCalculatedAvailability($product);
+		$calculatedAvailability = $this->productAvailabilityCalculation->calculateAvailability($product);
 		$product->setCalculatedAvailability($calculatedAvailability);
 		if ($product->isVariant()) {
 			$this->recalculateAvailabilityForProduct($product->getMainVariant());

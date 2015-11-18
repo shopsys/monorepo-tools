@@ -19,14 +19,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->once())
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
@@ -59,14 +59,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->exactly($calculationLimit))
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
@@ -125,14 +125,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 			->willReturn([$variantMock]);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->exactly(2))
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 
 		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(

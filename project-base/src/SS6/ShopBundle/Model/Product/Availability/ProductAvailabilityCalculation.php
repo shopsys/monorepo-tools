@@ -54,9 +54,9 @@ class ProductAvailabilityCalculation {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
-	public function getCalculatedAvailability(Product $product) {
+	public function calculateAvailability(Product $product) {
 		if ($product->isMainVariant()) {
-			return $this->getMainVariantCalculatedAvailability($product);
+			return $this->calculateMainVariantAvailability($product);
 		}
 		if ($product->isUsingStock()) {
 			if ($product->getStockQuantity() <= 0
@@ -75,15 +75,15 @@ class ProductAvailabilityCalculation {
 	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
-	private function getMainVariantCalculatedAvailability(Product $mainVariant) {
+	private function calculateMainVariantAvailability(Product $mainVariant) {
 		$atLeastSomewhereSellableVariants = $this->getAtLeastSomewhereSellableVariantsByMainVariant($mainVariant);
 		if (count($atLeastSomewhereSellableVariants) === 0) {
 			return $this->availabilityFacade->getDefaultInStockAvailability();
 		}
-		$fastestAvailability = $this->getCalculatedAvailability(array_shift($atLeastSomewhereSellableVariants));
+		$fastestAvailability = $this->calculateAvailability(array_shift($atLeastSomewhereSellableVariants));
 
 		foreach ($atLeastSomewhereSellableVariants as $variant) {
-			$variantCalculatedAvailability = $this->getCalculatedAvailability($variant);
+			$variantCalculatedAvailability = $this->calculateAvailability($variant);
 			if ($fastestAvailability->getDispatchTime() === null
 				|| $variantCalculatedAvailability->getDispatchTime() !== null
 				&& $variantCalculatedAvailability->getDispatchTime() < $fastestAvailability->getDispatchTime()
