@@ -63,10 +63,7 @@ class FeedController extends AdminBaseController {
 	public function listAction() {
 		$feeds = [];
 
-		$feedConfigs = array_merge(
-			$this->feedConfigFacade->getFeedConfigs(),
-			$this->feedConfigFacade->getDeliveryFeedConfigs()
-		);
+		$feedConfigs = $this->feedConfigFacade->getAllFeedConfigs();
 		foreach ($feedConfigs as $feedConfig) {
 			foreach ($this->domain->getAll() as $domainConfig) {
 				$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);

@@ -53,6 +53,13 @@ class FeedConfigFacade {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 */
+	public function getAllFeedConfigs() {
+		return $this->feedConfigRepository->getAllFeedConfigs();
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string

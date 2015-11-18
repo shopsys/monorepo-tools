@@ -67,4 +67,11 @@ class FeedConfigRepository {
 		return $feedConfigs;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 */
+	public function getAllFeedConfigs() {
+		return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());
+	}
+
 }
