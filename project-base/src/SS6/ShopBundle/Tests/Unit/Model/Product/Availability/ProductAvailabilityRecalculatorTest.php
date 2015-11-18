@@ -46,7 +46,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productAvailabilityRecalculator->runImmediateRecalculations();
 	}
 
-	public function testRunScheduledRecalculationsWhile() {
+	public function testRunScheduledRecalculationsWhileCallbackReturnsTrue() {
 		$calculationLimit = 3;
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productIterator = [
