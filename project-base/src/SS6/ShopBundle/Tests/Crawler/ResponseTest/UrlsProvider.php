@@ -51,7 +51,8 @@ class UrlsProvider {
 		// used only for internal setting of selected domain by tab control in admin
 		'admin_domain_selectdomain',
 		// do not rewrite XML feed by test products
-		'admin_feed_generate',
+		'admin_feed_generateall',
+		'admin_feed_generatesingle',
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'admin_login_check',

@@ -72,7 +72,7 @@ class FeedFacade {
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
-	private function generateFeed(
+	public function generateFeed(
 		FeedConfig $feedConfig,
 		DomainConfig $domainConfig
 	) {

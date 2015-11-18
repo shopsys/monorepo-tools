@@ -10,6 +10,7 @@ use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
+use SS6\ShopBundle\Model\Security\Roles;
 
 class FeedController extends AdminBaseController {
 
@@ -46,13 +47,43 @@ class FeedController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/feed/generate/")
+	 * @Route("/feed/generate-all/")
 	 */
-	public function generateAction() {
+	public function generateAllAction() {
 
 		$this->feedFacade->generateFeeds();
 		$this->feedFacade->generateDeliveryFeeds();
 		$this->getFlashMessageSender()->addSuccessFlash(t('XML Feedy byly vygenerovány'));
+
+		return $this->redirectToRoute('admin_feed_list');
+	}
+
+	/**
+	 * @Route("/feed/generate-single/{feedName}/{domainId}", requirements={"domainId" = "\d+"})
+	 * @param string $feedName
+	 * @param int $domainId
+	 */
+	public function generateSingleAction($feedName, $domainId) {
+		try {
+			$feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedName);
+			$domainConfig = $this->domain->getDomainConfigById((int)$domainId);
+
+			$this->feedFacade->generateFeed($feedConfig, $domainConfig);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(
+				t('Feed "{{ feedName }}" byl úspěšně vygenerován.'),
+				[
+					'feedName' => $feedName,
+				]
+			);
+
+		} catch (\SS6\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
+			$this->getFlashMessageSender()->addErrorFlashTwig(
+				t('Feed s názvem "{{ feedName }}" nebyl nalezen.'),
+				[
+					'feedName' => $feedName,
+				]
+			);
+		}
 
 		return $this->redirectToRoute('admin_feed_list');
 	}
@@ -70,8 +101,10 @@ class FeedController extends AdminBaseController {
 				$feeds[] = [
 					'feedLabel' => $feedConfig->getLabel(),
 					'feedName' => $feedConfig->getFeedName(),
+					'domainConfig' => $domainConfig,
 					'url' => $this->feedConfigFacade->getFeedUrl($feedConfig, $domainConfig),
 					'created' => file_exists($filepath) ? new DateTime('@' . filemtime($filepath)) : null,
+					'actions' => null,
 				];
 			}
 		}
@@ -83,6 +116,9 @@ class FeedController extends AdminBaseController {
 		$grid->addColumn('label', 'feedLabel', 'Feed');
 		$grid->addColumn('created', 'created', 'Vygenerováno');
 		$grid->addColumn('url', 'url', 'Url adresa');
+		if ($this->isGranted(Roles::ROLE_SUPER_ADMIN)) {
+			$grid->addColumn('actions', 'actions', 'Akce')->setClassAttribute('column--superadmin');
+		}
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
 

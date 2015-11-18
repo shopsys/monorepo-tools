@@ -4,7 +4,7 @@
 {% block h1 %}{{ 'XML Feedy'|trans }}{% endblock %}
 
 {% block main_content %}
-	<a href="{{ url('admin_feed_generate') }}" class="btn">Vygenerovat feedy</a>
+	<a href="{{ url('admin_feed_generateall') }}" class="btn">Vygenerovat feedy</a>
 
 	{{ gridView.render() }}
-{% endblock%}
+{% endblock %}
