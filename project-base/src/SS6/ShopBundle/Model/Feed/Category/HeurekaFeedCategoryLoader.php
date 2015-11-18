@@ -10,11 +10,11 @@ class HeurekaFeedCategoryLoader {
 	/**
 	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData[]
 	 */
-	public function load($heurekaCategoryFeedUrl) {
+	public function load($heurekaCategoryFeedUrlOrFilePath) {
 		$feedCategoriesData = [];
 
 		try {
-			$xml = new SimpleXMLElement($heurekaCategoryFeedUrl, LIBXML_NOERROR | LIBXML_NOWARNING, true);
+			$xml = new SimpleXMLElement($heurekaCategoryFeedUrlOrFilePath, LIBXML_NOERROR | LIBXML_NOWARNING, true);
 		} catch (\Exception $ex) {
 			throw new \SS6\ShopBundle\Model\Feed\Category\Exception\FeedCategoryLoadException('Cannot load feed categories XML', $ex);
 		}

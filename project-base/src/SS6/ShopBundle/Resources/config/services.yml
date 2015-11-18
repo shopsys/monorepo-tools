@@ -334,6 +334,7 @@ services:
     class: SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade
     arguments:
       - %ss6.heureka_category_feed_url%
+      - %ss6.heureka_category_feed_backup_filepath%
 
   ss6.shop.feed.feed_config_facade:
     class: SS6\ShopBundle\Model\Feed\FeedConfigFacade

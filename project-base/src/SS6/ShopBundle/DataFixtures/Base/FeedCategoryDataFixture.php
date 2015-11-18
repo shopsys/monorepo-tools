@@ -15,7 +15,11 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture {
 		$feedCategoryDownloadFacade = $this->get(FeedCategoryDownloadFacade::class);
 		/* @var $feedCategoryDownloadFacade \SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade */
 
-		$feedCategoryDownloadFacade->download();
+		try {
+			$feedCategoryDownloadFacade->download();
+		} catch (\SS6\ShopBundle\Model\Feed\Category\Exception\FeedCategoryLoadException $ex) {
+			$feedCategoryDownloadFacade->loadFromBackupFile();
+		}
 	}
 
 }
