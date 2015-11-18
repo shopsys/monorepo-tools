@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Feed\Category;
 use SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade;
 use SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
 
-class FeedCategoryDownloadFacade {
+class FeedCategoryLoaderFacade {
 
 	/**
 	 * @var string

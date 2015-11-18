@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade;
+use SS6\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade;
 
 class FeedCategoryDataFixture extends AbstractReferenceFixture {
 
@@ -12,13 +12,13 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$feedCategoryDownloadFacade = $this->get(FeedCategoryDownloadFacade::class);
-		/* @var $feedCategoryDownloadFacade \SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade */
+		$feedCategoryLoaderFacade = $this->get(FeedCategoryLoaderFacade::class);
+		/* @var $feedCategoryLoaderFacade \SS6\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade */
 
 		try {
-			$feedCategoryDownloadFacade->download();
+			$feedCategoryLoaderFacade->download();
 		} catch (\SS6\ShopBundle\Model\Feed\Category\Exception\FeedCategoryLoadException $ex) {
-			$feedCategoryDownloadFacade->loadFromBackupFile();
+			$feedCategoryLoaderFacade->loadFromBackupFile();
 		}
 	}
 
