@@ -49,8 +49,6 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$providerData = $urlsProvider->getFrontTestableUrlsProviderData();
 
-		$this->assertCount(2, $providerData);
-
 		$this->assertSame('front_foo', $providerData[0][0]);
 		$this->assertSame('foo', $providerData[0][1]);
 		$this->assertSame(200, $providerData[0][2]);
@@ -200,7 +198,7 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 		]);
 
 		$frontProviderData = $urlsProvider->getFrontTestableUrlsProviderData();
-		$this->assertCount(1, $frontProviderData);
+
 		$this->assertSame('front_testable', $frontProviderData[0][0]);
 		$this->assertSame('testable', $frontProviderData[0][1]);
 
@@ -224,9 +222,9 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$routerMock->expects($this->atLeastOnce())->method('getRouteCollection')->willReturn($routeCollection);
 		$routerMock->expects($this->atLeastOnce())->method('generate')->willReturnCallback(function ($routeName, $parameters) {
-			$this->assertSame(1, $parameters['id']);
-			$this->assertSame(1, $parameters['bazId']);
 			if ($routeName === 'foo') {
+				$this->assertSame(1, $parameters['id']);
+				$this->assertSame(1, $parameters['bazId']);
 				return 'foo';
 			}
 		});
