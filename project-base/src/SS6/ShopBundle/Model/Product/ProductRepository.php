@@ -643,4 +643,20 @@ class ProductRepository {
 		return $this->getProductRepository()->findBy(['unit' => $unit]);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('p')
+			->from(Product::class, 'p')
+			->andWhere('p.visible = TRUE')
+			->andWhere('p.calculatedSellingDenied = FALSE')
+			->andWhere('p.variantType = :variantTypeVariant')->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT)
+			->andWhere('p.mainVariant = :mainVariant')->setParameter('mainVariant', $mainVariant);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
 }

@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
@@ -30,16 +31,23 @@ class ProductAvailabilityCalculation {
 	 */
 	private $em;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	private $productRepository;
+
 	public function __construct(
 		AvailabilityFacade $availabilityFacade,
 		ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
 		ProductVisibilityFacade $productVisibilityFacade,
-		EntityManager $em
+		EntityManager $em,
+		ProductRepository $productRepository
 	) {
 		$this->availabilityFacade = $availabilityFacade;
 		$this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
 		$this->em = $em;
 		$this->productVisibilityFacade = $productVisibilityFacade;
+		$this->productRepository = $productRepository;
 	}
 
 	/**
@@ -97,18 +105,10 @@ class ProductAvailabilityCalculation {
 			$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($variant);
 			$variant->markForVisibilityRecalculation();
 		}
-		$this->em->flush();
+		$this->em->flush($allVariants);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 
-		$atLeastSomewhereSellableVariants = [];
-		foreach ($allVariants as $variant) {
-			$this->em->refresh($variant);
-			if ($variant->getCalculatedSellingDenied() === false && $variant->isVisible()) {
-				$atLeastSomewhereSellableVariants[] = $variant;
-			}
-		}
-
-		return $atLeastSomewhereSellableVariants;
+		return $this->productRepository->getAtLeastSomewhereSellableVariantsByMainVariant($mainVariant);
 	}
 
 }
