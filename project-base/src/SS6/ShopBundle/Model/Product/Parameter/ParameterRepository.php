@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Product;
@@ -120,23 +121,26 @@ class ParameterRepository {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
 	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 * @return string[productId][paramName]
 	 */
-	public function getProductParameterValuesByProductsAndLocale(array $products, $locale) {
+	public function getParameterValuesIndexedByProductIdAndParameterNameForProducts(array $products, $locale) {
 		$queryBuilder = $this->em->createQueryBuilder()
-			->select('ppv', 'p', 'pt', 'pv')
+			->select('IDENTITY(ppv.product) as productId', 'pt.name', 'pv.text')
 			->from(ProductParameterValue::class, 'ppv')
 			->join('ppv.parameter', 'p')
 			->join('p.translations', 'pt')
 			->join('ppv.value', 'pv')
 			->where('ppv.product IN (:products)')
 			->andWhere('pv.locale = :locale')
+			->andWhere('pt.locale = :locale')
 			->setParameters([
 				'products' => $products,
 				'locale' => $locale,
 			]);
 
-		return $queryBuilder->getQuery()->execute();
+		$productIdsAndParameterNamesAndValues = $queryBuilder->getQuery()->execute(null, Query::HYDRATE_ARRAY);
+
+		return $this->getParameterValuesIndexedByProductIdAndParameterName($productIdsAndParameterNamesAndValues);
 	}
 
 	/**
@@ -174,5 +178,21 @@ class ParameterRepository {
 		}
 
 		return $queryBuilder->getQuery()->getOneOrNullResult();
+	}
+
+	/**
+	 * @param array $productIdsAndParameterNamesAndValues
+	 * @return string[productId][paramName]
+	 */
+	private function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues) {
+		$productParameterValuesIndexedByProductIdAndParameterName = [];
+		foreach ($productIdsAndParameterNamesAndValues as $productIdAndParameterNameAndValue) {
+			$parameterName = $productIdAndParameterNameAndValue['name'];
+			$productId = $productIdAndParameterNameAndValue['productId'];
+			$parameterValue = $productIdAndParameterNameAndValue['text'];
+			$productParameterValuesIndexedByProductIdAndParameterName[$productId][$parameterName] = $parameterValue;
+		}
+
+		return $productParameterValuesIndexedByProductIdAndParameterName;
 	}
 }

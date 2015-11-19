@@ -148,11 +148,7 @@ class ProductCollectionFacade {
 	 */
 	public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig) {
 		$locale = $domainConfig->getLocale();
-		$productParametersValues = $this->parameterRepository->getProductParameterValuesByProductsAndLocale($products, $locale);
 
-		return $this->productCollectionService->getParametersIndexedByProductId(
-			$productParametersValues,
-			$locale
-		);
+		return $this->parameterRepository->getParameterValuesIndexedByProductIdAndParameterNameForProducts($products, $locale);
 	}
 }

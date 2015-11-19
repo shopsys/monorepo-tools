@@ -23,23 +23,4 @@ class ProductCollectionService {
 		return $imagesOrNullByProductId;
 	}
 
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $productParameterValues
-	 * @param string $locale
-	 * @return string[productId][paramName]
-	 */
-	public function getParametersIndexedByProductId(
-		array $productParameterValues,
-		$locale
-	) {
-		$productParameterValuesIndexedByProductIdAndParameterName = [];
-		foreach ($productParameterValues as $productParameterValue) {
-			$parameterName = $productParameterValue->getParameter()->getName($locale);
-			$productId = $productParameterValue->getProduct()->getId();
-			$productParameterValuesIndexedByProductIdAndParameterName[$productId][$parameterName] =
-				$productParameterValue->getValue()->getText();
-		}
-
-		return $productParameterValuesIndexedByProductIdAndParameterName;
-	}
 }
