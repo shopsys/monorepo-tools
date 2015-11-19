@@ -346,6 +346,7 @@ services:
     arguments:
       - @ss6.shop.feed.heureka.heureka_item_iterator_factory
       - @ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory
+      - @ss6.shop.feed.zbozi.zbozi_item_iterator_factory
 
   ss6.shop.feed.feed_facade:
     class: SS6\ShopBundle\Model\Feed\FeedFacade
@@ -357,6 +358,9 @@ services:
 
   ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory:
     class: SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory
+
+  ss6.shop.feed.zbozi.zbozi_item_iterator_factory:
+    class: SS6\ShopBundle\Model\Feed\Zbozi\ZboziItemIteratorFactory
 
   ss6.shop.http_foundation.response_listener:
     class: SS6\ShopBundle\Component\HttpFoundation\ResponseListener

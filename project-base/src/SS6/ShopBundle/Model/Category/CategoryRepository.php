@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
@@ -313,4 +314,25 @@ class CategoryRepository extends NestedTreeRepository {
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param  \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return string[]
+	 */
+	public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+		$queryBuilder = $this->getAllQueryBuilder();
+		$domainId = $domainConfig->getId();
+		$locale = $domainConfig->getLocale();
+		$mainCategory = $this->getProductMainCategoryOnDomain($product, $domainId);
+
+		$this->addTranslation($queryBuilder, $locale);
+		$queryBuilder
+			->select('ct.name')
+			->andWhere('c.lft <= :mainCategoryLft AND c.rgt >= :mainCategoryRgt')
+			->setParameter('mainCategoryLft', $mainCategory->getLft())
+			->setParameter('mainCategoryRgt', $mainCategory->getRgt());
+		$result = $queryBuilder->getQuery()->getScalarResult();
+
+		return array_map('current', $result);
+	}
 }

@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Category\CategoryData;
@@ -275,7 +276,7 @@ class CategoryFacade {
 		return $paginationResult;
 	}
 
-	/*
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Category\Category[domainId]
 	 */
@@ -298,5 +299,14 @@ class CategoryFacade {
 	 */
 	public function getProductMainCategoryByDomainId(Product $product, $domainId) {
 		return $this->categoryRepository->getProductMainCategoryOnDomain($product, $domainId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return string[]
+	 */
+	public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+		return $this->categoryRepository->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain($product, $domainConfig);
 	}
 }
