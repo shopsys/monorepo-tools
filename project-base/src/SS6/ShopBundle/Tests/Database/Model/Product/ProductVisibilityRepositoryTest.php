@@ -381,8 +381,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant3 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
+		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
 		$variant1ProductEditData->productData->hidden = true;
@@ -392,10 +394,12 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertFalse($variant1->isVisible());
 		$this->assertTrue($variant2->isVisible());
+		$this->assertTrue($variant3->isVisible());
 		$this->assertTrue($mainVariant->isVisible());
 	}
 
@@ -412,8 +416,10 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
-		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant3 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
+		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
 		$variant1ProductEditData->productData->hidden = true;
@@ -423,14 +429,20 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$variant2ProductEditData->productData->hidden = true;
 		$productEditFacade->edit($variant2->getId(), $variant2ProductEditData);
 
+		$variant3ProductEditData = $productEditDataFactory->createFromProduct($variant3);
+		$variant3ProductEditData->productData->hidden = true;
+		$productEditFacade->edit($variant3->getId(), $variant3ProductEditData);
+
 		$productVisibilityRepository->refreshProductsVisibility(true);
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertFalse($variant1->isVisible());
 		$this->assertFalse($variant2->isVisible());
+		$this->assertFalse($variant3->isVisible());
 		$this->assertFalse($mainVariant->isVisible());
 	}
 
@@ -447,7 +459,9 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		/* @var $variant1 \SS6\ShopBundle\Model\Product\Product */
 		$variant2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '54');
 		/* @var $variant2 \SS6\ShopBundle\Model\Product\Product */
-		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		$variant3 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '69');
+		/* @var $variant3 \SS6\ShopBundle\Model\Product\Product */
+		$mainVariant = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '148');
 		/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
 
 		$mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
@@ -458,10 +472,12 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$em->refresh($variant1);
 		$em->refresh($variant2);
+		$em->refresh($variant3);
 		$em->refresh($mainVariant);
 
 		$this->assertFalse($variant1->isVisible());
 		$this->assertFalse($variant2->isVisible());
+		$this->assertFalse($variant3->isVisible());
 		$this->assertFalse($mainVariant->isVisible());
 	}
 

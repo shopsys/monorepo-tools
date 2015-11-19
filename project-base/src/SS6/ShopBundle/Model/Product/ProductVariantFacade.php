@@ -82,22 +82,30 @@ class ProductVariantFacade {
 	public function createVariant(Product $mainProduct, array $variants) {
 		$this->productVariantService->checkProductIsNotMainVariant($mainProduct);
 
-		try {
-			$variants[] = $mainProduct;
-			$mainProductEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
-			$newMainVariant = $this->productEditFacade->create($mainProductEditData);
-			$newMainVariant->setVariants($variants);
-			$this->imageFacade->copyImages($mainProduct, $newMainVariant);
-			$this->productService->markProductForVisibilityRecalculation($newMainVariant);
+		$mainVariantEditData = $this->productEditDataFactory->createFromProduct($mainProduct);
+		$mainVariant = $this->productVariantService->createMainVariant($mainVariantEditData, $mainProduct, $variants);
+		$this->em->persist($mainVariant);
 
-			$this->em->flush();
+		try {
+			$this->em->beginTransaction();
+
+			$toFlush = $mainVariant->getVariants();
+			$toFlush[] = $mainVariant;
+			$this->em->flush($toFlush);
+
+			$this->productEditFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
+			$this->imageFacade->copyImages($mainProduct, $mainVariant);
+
+			$this->em->commit();
 		} catch (\Exception $exception) {
+			$this->em->rollback();
 			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 			$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+
 			throw $exception;
 		}
 
-		return $newMainVariant;
+		return $mainVariant;
 	}
 
 }

@@ -158,8 +158,19 @@ class ProductEditFacade {
 		$product = new Product($productEditData->productData);
 
 		$this->em->persist($product);
-		$this->em->beginTransaction();
-		$this->em->flush($product);
+		$this->em->transactional(function () use ($product, $productEditData) {
+			$this->em->flush($product);
+			$this->setAdditionalDataAfterCreate($product, $productEditData);
+		});
+
+		return $product;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData) {
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->createProductVisibilities($product);
@@ -171,13 +182,10 @@ class ProductEditFacade {
 
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
-		$this->em->commit();
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
-
-		return $product;
 	}
 
 	/**

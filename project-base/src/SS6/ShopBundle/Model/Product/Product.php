@@ -280,9 +280,10 @@ class Product extends AbstractTranslatableEntity {
 	private $variantType;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \SS6\ShopBundle\Model\Product\Product[]|null $variants
 	 */
-	public function __construct(ProductData $productData) {
+	public function __construct(ProductData $productData, array $variants = null) {
 		$this->translations = new ArrayCollection();
 		$this->catnum = $productData->catnum;
 		$this->partno = $productData->partno;
@@ -321,8 +322,14 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedHidden = true;
 		$this->calculatedSellingDenied = true;
 		$this->brand = $productData->brand;
+
 		$this->variants = new ArrayCollection();
-		$this->variantType = self::VARIANT_TYPE_NONE;
+		if ($variants === null) {
+			$this->variantType = self::VARIANT_TYPE_NONE;
+		} else {
+			$this->variantType = self::VARIANT_TYPE_MAIN;
+			$this->addVariants($variants);
+		}
 	}
 
 	/**
@@ -695,17 +702,17 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\Product $variant
 	 */
 	public function addVariant(Product $variant) {
-		if ($this->variantType === self::VARIANT_TYPE_VARIANT) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCannotBeMainVariantException($this->getId());
+		if (!$this->isMainVariant()) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException(
+				$this->getId(),
+				$variant->getId()
+			);
 		}
-		if ($variant->variantType === self::VARIANT_TYPE_MAIN || $this === $variant) {
+		if ($variant->isMainVariant()) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException($variant->getId());
 		}
-		if ($variant->variantType === self::VARIANT_TYPE_VARIANT) {
+		if ($variant->isVariant()) {
 			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException($variant->getId());
-		}
-		if ($this->variantType === self::VARIANT_TYPE_NONE) {
-			$this->variantType = self::VARIANT_TYPE_MAIN;
 		}
 
 		if (!$this->variants->contains($variant)) {
@@ -717,7 +724,7 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
 	 */
-	public function setVariants(array $variants) {
+	private function addVariants(array $variants) {
 		foreach ($variants as $variant) {
 			$this->addVariant($variant);
 		}

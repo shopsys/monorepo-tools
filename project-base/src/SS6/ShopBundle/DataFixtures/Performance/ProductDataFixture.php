@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVariantFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -120,24 +121,21 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	private function createVariants(array $variantCatnumsByMainVariantCatnum) {
 		$uniqueIndex = $this->getUniqueIndex();
-		$variantsToFlush = [];
+		$productVariantFacade = $this->get(ProductVariantFacade::class);
+		/* @var $productVariantFacade \SS6\ShopBundle\Model\Product\ProductVariantFacade */
 
 		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
 			try {
-				$mainVariant = $this->getProductByCatnum($mainVariantCatnum . $uniqueIndex);
+				$mainProduct = $this->getProductByCatnum($mainVariantCatnum . $uniqueIndex);
+				$variants = [];
 				foreach ($variantsCatnums as $variantCatnum) {
-					$variant = $this->getProductByCatnum($variantCatnum . $uniqueIndex);
-					$mainVariant->addVariant($variant);
-					$variantsToFlush[] = $variant;
+					$variants[] = $this->getProductByCatnum($variantCatnum . $uniqueIndex);
 				}
+				$productVariantFacade->createVariant($mainProduct, $variants);
 			} catch (\Doctrine\ORM\NoResultException $e) {
 				continue;
 			}
 		}
-
-		$em = $this->get(EntityManager::class);
-		/* @var $em \Doctrine\ORM\EntityManager */
-		$em->flush($variantsToFlush);
 	}
 
 	/**

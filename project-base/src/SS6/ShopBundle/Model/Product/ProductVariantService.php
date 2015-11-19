@@ -48,4 +48,16 @@ class ProductVariantService {
 		}
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $mainVariantEditData
+	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function createMainVariant(ProductEditData $mainVariantEditData, Product $mainProduct, array $variants) {
+		$variants[] = $mainProduct;
+
+		return new Product($mainVariantEditData->productData, $variants);
+	}
+
 }

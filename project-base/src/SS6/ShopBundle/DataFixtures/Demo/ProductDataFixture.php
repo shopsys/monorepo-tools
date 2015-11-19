@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -11,6 +12,7 @@ use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use SS6\ShopBundle\Model\Product\ProductVariantFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -40,9 +42,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			$productNo++;
 		}
 
-		$this->createVariants($productsByCatnum);
+		$this->createVariants($productsByCatnum, $productNo);
 
-		$manager->flush();
 		$this->runRecalculators();
 	}
 
@@ -53,9 +54,12 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
 		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+		$em = $this->get(EntityManager::class);
+		/* @var $em \Doctrine\ORM\EntityManager */
+		$em->clear();
 
-		$productAvailabilityRecalculator->runImmediateRecalculations();
-		$productPriceRecalculator->runImmediateRecalculations();
+		$productAvailabilityRecalculator->runAllScheduledRecalculations();
+		$productPriceRecalculator->runAllScheduledRecalculations();
 		$productVisibilityFacade->refreshProductsVisibility();
 		// Main variant is set for recalculations after change of variants visibility.
 		$productPriceRecalculator->runAllScheduledRecalculations();
@@ -79,20 +83,28 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product[catnum] $productsByCatnum
+	 * @param int $productNo
 	 */
-	private function createVariants(array $productsByCatnum) {
+	private function createVariants(array $productsByCatnum, $productNo) {
 		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$productVariantFacade = $this->get(ProductVariantFacade::class);
+		/* @var $productVariantFacade \SS6\ShopBundle\Model\Product\ProductVariantFacade */
 
 		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
 
 		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
-			$mainVariant = $productsByCatnum[$mainVariantCatnum];
-			/* @var $mainVariant \SS6\ShopBundle\Model\Product\Product */
+			$mainProduct = $productsByCatnum[$mainVariantCatnum];
+			/* @var $mainProduct \SS6\ShopBundle\Model\Product\Product */
 
+			$variants = [];
 			foreach ($variantsCatnums as $variantCatnum) {
-				$mainVariant->addVariant($productsByCatnum[$variantCatnum]);
+				$variants[] = $productsByCatnum[$variantCatnum];
 			}
+
+			$mainVariant = $productVariantFacade->createVariant($mainProduct, $variants);
+			$this->addReference(self::PRODUCT_PREFIX . $productNo, $mainVariant);
+			$productNo++;
 		}
 	}
 

@@ -24,7 +24,7 @@ class ProductAvailabilityCronModule implements CronModuleInterface {
 	 */
 	public function run(Logger $logger) {
 		$timeStart = time();
-		$recalculated = $this->productAvailabilityRecalculator->runScheduledRecalculations(function () use ($timeStart) {
+		$recalculated = $this->productAvailabilityRecalculator->runScheduledRecalculationsWhile(function () use ($timeStart) {
 			return time() - $timeStart < self::PRODUCTS_AVAILABILITY_RECALCULATIONS_TIMELIMIT;
 		});
 		$logger->debug('Recalculated: ' . $recalculated);

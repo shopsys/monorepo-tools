@@ -19,14 +19,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->once())
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
@@ -46,7 +46,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productAvailabilityRecalculator->runImmediateRecalculations();
 	}
 
-	public function testRunScheduledRecalculations() {
+	public function testRunScheduledRecalculationsWhileCallbackReturnsTrue() {
 		$calculationLimit = 3;
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productIterator = [
@@ -59,14 +59,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->exactly($calculationLimit))
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
@@ -87,9 +87,11 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$calculationCallbackLimit = $calculationLimit;
-		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculations(function () use (&$calculationCallbackLimit) {
-			return $calculationCallbackLimit-- > 0;
-		});
+		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculationsWhile(
+			function () use (&$calculationCallbackLimit) {
+				return $calculationCallbackLimit-- > 0;
+			}
+		);
 
 		$this->assertSame($calculationLimit, $recalculatedCount);
 	}
@@ -123,14 +125,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 			->willReturn([$variantMock]);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
-			['getCalculatedAvailability'],
+			['calculateAvailability'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityCalculationMock
 			->expects($this->exactly(2))
-			->method('getCalculatedAvailability')
+			->method('calculateAvailability')
 			->willReturn(new Availability(new AvailabilityData([])));
 
 		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
