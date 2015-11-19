@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use SS6\ShopBundle\Controller\Front\ProductController;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
@@ -16,6 +17,7 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProvider {
 
+	const SEARCH_KEYWORD = 'a';
 	const ROUTE_NAME_KEY = 'routeName';
 	const ROUTE_PARAMETERS_KEY = 'routeParameters';
 	const EXPECTED_STATUS_CODE_KEY = 'expectedStatusCode';
@@ -238,6 +240,9 @@ class UrlsProvider {
 				];
 			}
 		}
+		$routesData[] = $this->getNonEmptySearchRouteData();
+		$routesData[] = $this->getProductListFilteringRouteData();
+		$routesData[] = $this->getSearchFilteringRouteData();
 
 		return $routesData;
 	}
@@ -332,6 +337,61 @@ class UrlsProvider {
 		}
 
 		return 200;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getNonEmptySearchRouteData() {
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_search',
+			self::ROUTE_PARAMETERS_KEY => [ProductController::SEARCH_TEXT_PARAMETER => self::SEARCH_KEYWORD],
+			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getProductListFilteringRouteData() {
+		$productListFilterData = [
+			'minimalPrice' => '100',
+			'inStock' => '1',
+			'parameters' => [
+				1 => ['1'],
+			],
+		];
+		$productListRouteParameters = [
+			'id' => 3,
+			'productFilter_form' => $productListFilterData,
+		];
+
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_list',
+			self::ROUTE_PARAMETERS_KEY => $productListRouteParameters,
+			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getSearchFilteringRouteData() {
+		$productSearchFilterData = [
+			'inStock' => '1',
+			'flags' => ['2'],
+			'brands' => ['2', '19'],
+		];
+		$productSearchParameters = [
+			ProductController::SEARCH_TEXT_PARAMETER => self::SEARCH_KEYWORD,
+			'productFilter_form' => $productSearchFilterData,
+		];
+
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_search',
+			self::ROUTE_PARAMETERS_KEY => $productSearchParameters,
+			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
 	}
 
 }
