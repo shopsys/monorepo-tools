@@ -36,20 +36,28 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 	public function testCreateNewDomainsDataOneNewDomain() {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.com:8080', 'example', 'cs', 'design2', 'stylesDirectory'),
 		];
 
 		$domain = new Domain($domainConfigs);
 
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
-			->expects($this->once())
+			->expects($this->exactly(count($domainConfigs)))
 			->method('get')
-			->with($this->equalTo(Setting::DOMAIN_DATA_CREATED), $this->equalTo(1))
-			->willThrowException(new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException());
+			->willReturnCallback(function ($key, $domainId) {
+				$this->assertEquals(Setting::DOMAIN_DATA_CREATED, $key);
+				if ($domainId === 1) {
+					return true;
+				}
+				throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+			});
+		$settingMock
+			->expects($this->once())
+			->method('copyAllMultidomainSettings')
+			->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
-		$emMock->expects($this->once())->method('persist');
-		$emMock->expects($this->once())->method('flush');
 
 		$domainDataCreator = new DomainDataCreator($domain, $settingMock, $emMock);
 		$newDomainsDataCreated = $domainDataCreator->createNewDomainsData();

@@ -5,9 +5,10 @@ namespace SS6\ShopBundle\Component\Domain;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 
 class DomainDataCreator {
+
+	const TEMPLATE_DOMAIN_ID = 1;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -40,9 +41,7 @@ class DomainDataCreator {
 			try {
 				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);
 			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
-				$domainDataCreatedSettingValue = new SettingValue(Setting::DOMAIN_DATA_CREATED, true, $domainId);
-				$this->em->persist($domainDataCreatedSettingValue);
-				$this->em->flush($domainDataCreatedSettingValue);
+				$this->setting->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
 				$newDomainsCount++;
 			}
 		}
