@@ -330,10 +330,11 @@ services:
     arguments:
       - %ss6.data_fixtures.resource_customers_filepath%
 
-  ss6.shop.feed.category.feed_category_download_facade:
-    class: SS6\ShopBundle\Model\Feed\Category\FeedCategoryDownloadFacade
+  ss6.shop.feed.category.feed_category_loader_facade:
+    class: SS6\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
     arguments:
       - %ss6.heureka_category_feed_url%
+      - %ss6.heureka_category_feed_backup_filepath%
 
   ss6.shop.feed.feed_config_facade:
     class: SS6\ShopBundle\Model\Feed\FeedConfigFacade

@@ -13,6 +13,7 @@ parameters:
   ss6.feed_url_prefix: /assets/content/feeds/
   ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%
   ss6.filemanager_upload_web_dir: assets/uploads
+  ss6.heureka_category_feed_backup_filepath: %ss6.resources_dir%/feeds/heureka-category-feed-backup.xml
   ss6.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
   ss6.image_dir: %ss6.web_dir%/assets/content/images
   ss6.image_url_prefix: /assets/content/images/
