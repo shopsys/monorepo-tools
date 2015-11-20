@@ -63,14 +63,7 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail
 	 */
 	public function getDetailForProduct(Product $product) {
-		return new ProductDetail(
-			$product,
-			$this->getBasePrice($product),
-			$this->getSellingPrice($product),
-			$this->getProductDomainsIndexedByDomainId($product),
-			$this->getParameters($product),
-			$this->getImagesIndexedById($product)
-		);
+		return new ProductDetail($product, $this);
 	}
 
 	/**
@@ -91,7 +84,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	private function getBasePrice(Product $product) {
+	public function getBasePrice(Product $product) {
 		return $this->productPriceCalculation->calculateBasePrice($product);
 	}
 
@@ -99,7 +92,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
-	private function getSellingPrice(Product $product) {
+	public function getSellingPrice(Product $product) {
 		try {
 			$productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
 		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
@@ -112,7 +105,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
-	private function getParameters(Product $product) {
+	public function getParameters(Product $product) {
 		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
 		foreach ($productParameterValues as $index => $productParameterValue) {
 			$parameter = $productParameterValue->getParameter();
@@ -130,7 +123,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Component\Image\Image[imageId]
 	 */
-	private function getImagesIndexedById(Product $product) {
+	public function getImagesIndexedById(Product $product) {
 		return $this->imageFacade->getImagesByEntityIndexedById($product, null);
 	}
 
@@ -138,7 +131,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
-	private function getProductDomainsIndexedByDomainId(Product $product) {
+	public function getProductDomainsIndexedByDomainId(Product $product) {
 		return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
 	}
 

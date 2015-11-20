@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Model\Pricing\Price;
+use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -14,7 +15,12 @@ class ProductDetail {
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 */
+	private $productDetailFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $basePrice;
 
@@ -24,42 +30,51 @@ class ProductDetail {
 	private $sellingPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]|null
 	 */
 	private $productDomainsIndexedByDomainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null
 	 */
 	private $parameters;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Image[]
+	 * @var \SS6\ShopBundle\Component\Image\Image[]|null
 	 */
 	private $imagesById;
 
 	/**
+	 * @var bool
+	 */
+	private $sellingPriceLoaded;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $basePrice
+	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $basePrice
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[] $productDomainsIndexedByDomainId
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[] $parameters
-	 * @param \SS6\ShopBundle\Component\Image\Image[imageId] $imagesById
+	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
+	 * @param \SS6\ShopBundle\Component\Image\Image[imageId]|null $imagesById
 	 */
 	public function __construct(
 		Product $product,
-		Price $basePrice,
-		$sellingPrice,
-		array $productDomainsIndexedByDomainId,
-		array $parameters,
-		array $imagesById
+		ProductDetailFactory $productDetailFactory,
+		Price $basePrice = null,
+		ProductPrice $sellingPrice = null,
+		array $productDomainsIndexedByDomainId = null,
+		array $parameters = null,
+		array $imagesById = null
 	) {
 		$this->product = $product;
+		$this->productDetailFactory = $productDetailFactory;
 		$this->basePrice = $basePrice;
 		$this->sellingPrice = $sellingPrice;
 		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
 		$this->parameters = $parameters;
 		$this->imagesById = $imagesById;
+		$this->sellingPriceLoaded = false;
 	}
 
 	/**
@@ -73,6 +88,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function getBasePrice() {
+		if ($this->basePrice === null) {
+			$this->basePrice = $this->productDetailFactory->getBasePrice($this->product);
+		}
+
 		return $this->basePrice;
 	}
 
@@ -80,6 +99,11 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	public function getSellingPrice() {
+		if (!$this->sellingPriceLoaded) {
+			$this->sellingPrice = $this->productDetailFactory->getSellingPrice($this->product);
+			$this->sellingPriceLoaded = true;
+		}
+
 		return $this->sellingPrice;
 	}
 
@@ -87,6 +111,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	public function getProductDomainsIndexedByDomainId() {
+		if ($this->productDomainsIndexedByDomainId === null) {
+			$this->productDomainsIndexedByDomainId = $this->productDetailFactory->getProductDomainsIndexedByDomainId($this->product);
+		}
+
 		return $this->productDomainsIndexedByDomainId;
 	}
 
@@ -94,6 +122,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getParameters() {
+		if ($this->parameters === null) {
+			$this->parameters = $this->productDetailFactory->getParameters($this->product);
+		}
+
 		return $this->parameters;
 	}
 
@@ -101,6 +133,10 @@ class ProductDetail {
 	 * @return \SS6\ShopBundle\Component\Image\Image[]
 	 */
 	public function getImagesIndexedById() {
+		if ($this->imagesById === null) {
+			$this->imagesById = $this->productDetailFactory->getImagesIndexedById($this->product);
+		}
+
 		return $this->imagesById;
 	}
 
