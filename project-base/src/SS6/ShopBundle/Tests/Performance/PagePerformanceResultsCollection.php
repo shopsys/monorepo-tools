@@ -24,10 +24,10 @@ class PagePerformanceResultsCollection {
 	 * @param bool $isSuccessful
 	 */
 	public function addMeasurement($routeName, $url, $duration, $queryCount, $statusCode, $isSuccessful) {
-		if (!array_key_exists($routeName, $this->results)) {
-			$this->results[$routeName] = new PagePerformanceResult($routeName, $url);
+		if (!array_key_exists($url, $this->results)) {
+			$this->results[$url] = new PagePerformanceResult($routeName, $url);
 		}
-		$this->results[$routeName]->addMeasurement($duration, $queryCount, $statusCode, $isSuccessful);
+		$this->results[$url]->addMeasurement($duration, $queryCount, $statusCode, $isSuccessful);
 	}
 
 	/**
