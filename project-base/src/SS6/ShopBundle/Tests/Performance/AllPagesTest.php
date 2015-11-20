@@ -138,7 +138,7 @@ class AllPagesTest extends FunctionalTestCase {
 					'%s: %3d%% (%s)',
 					'Pass ' . $pass . '/' . self::PASSES,
 					round($pageIndex / $countTestedUrls * 100),
-					$routeName
+					$url
 				);
 				$consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
