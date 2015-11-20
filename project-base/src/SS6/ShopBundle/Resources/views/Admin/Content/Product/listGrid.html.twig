@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
-	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_MAIN') %}
+	{% if row.p.variantType == VARIANT_TYPE_MAIN %}
 		<span class="in-letter c-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
 	{% endif %}
-	{% if row.p.variantType == constant('SS6\\ShopBundle\\Model\\Product\\Product::VARIANT_TYPE_VARIANT') %}
+	{% if row.p.variantType == VARIANT_TYPE_VARIANT %}
 		<span class="in-letter c-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
 	{% endif %}
 	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>

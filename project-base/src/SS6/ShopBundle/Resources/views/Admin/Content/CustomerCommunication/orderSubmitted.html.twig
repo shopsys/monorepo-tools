@@ -31,19 +31,19 @@
 			<tbody>
 				<tr class="grid-row-cells">
 					<td>
-						{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS') }}
+						{{ VARIABLE_TRANSPORT_INSTRUCTIONS }}
 					</td>
 					<td>{{ 'Pokyny k dopravě'|trans }}</td>
 				</tr>
 				<tr class="grid-row-cells">
 					<td>
-						{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS') }}
+						{{ VARIABLE_PAYMENT_INSTRUCTIONS }}
 					</td>
 					<td>{{ 'Pokyny k platbě'|trans }}</td>
 				</tr>
 				<tr class="grid-row-cells">
 					<td>
-						{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_ORDER_DETAIL_URL') }}
+						{{ VARIABLE_ORDER_DETAIL_URL }}
 					</td>
 					<td>
 						{{ 'URL adresa objednávky' }}
@@ -51,13 +51,13 @@
 							'Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit
 							odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu
 							vyberete protokol <jiný> a do políčka URL vložíte text "%orderDetailUrlConstant%" (včetně složených
-							závorek).'|trans({'%orderDetailUrlConstant%' : constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_ORDER_DETAIL_URL')}) }}"
+							závorek).'|trans({'%orderDetailUrlConstant%' : VARIABLE_ORDER_DETAIL_URL}) }}"
 						></i>
 					</td>
 				</tr>
 				<tr class="grid-row-cells">
 					<td>
-						{{ constant('SS6\\ShopBundle\\Model\\Order\\Mail\\OrderMailService::VARIABLE_NUMBER') }}
+						{{ VARIABLE_NUMBER }}
 					</td>
 					<td>{{ 'Číslo objednávky'|trans }}</td>
 				</tr>

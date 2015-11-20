@@ -37,7 +37,7 @@
 
 	{% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
 		<li class="search__hint__item search__hint__item--info">
-			<a href="{{ url('front_product_search', { (constant('SS6\\ShopBundle\\Controller\\Front\\ProductController::SEARCH_TEXT_PARAMETER')): searchText }) }}">
+			<a href="{{ url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }) }}">
 				{{ 'Zobrazit všechny výsledky'|trans }}
 			</a>
 		</li>

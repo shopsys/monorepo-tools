@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
 use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -193,6 +194,7 @@ class MailController extends AdminBaseController {
 			'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
 			'resetPasswordVariables' => $resetPasswordTemplateVariables,
 			'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
+			'TYPE_NEW' => OrderStatus::TYPE_NEW,
 		]);
 	}
 

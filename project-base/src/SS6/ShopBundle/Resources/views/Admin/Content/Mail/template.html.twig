@@ -91,7 +91,7 @@
 		{{ form_errors(form) }}
 			{% for orderStatusId, orderStatusTemplate in form.orderStatusTemplates %}
 				{% set orderStatus = orderStatusesIndexedById[orderStatusId] %}
-				{% if orderStatus.type == constant('TYPE_NEW', orderStatus) %}
+				{% if orderStatus.type == TYPE_NEW %}
 					{{ _self.mailTemplate(
 							orderStatus.name,
 							orderStatusTemplate,

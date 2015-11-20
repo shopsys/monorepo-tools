@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
+use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
@@ -162,6 +163,8 @@ class ProductController extends FrontBaseController {
 		if ($request->isXmlHttpRequest()) {
 			return $this->render('@SS6Shop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
 		} else {
+			$viewParameters['POSITION_PRODUCT_LIST'] = AdvertPositionList::POSITION_PRODUCT_LIST;
+
 			return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', $viewParameters);
 		}
 	}
@@ -215,6 +218,7 @@ class ProductController extends FrontBaseController {
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'searchText' => $searchText,
+			'SEARCH_TEXT_PARAMETER' => self::SEARCH_TEXT_PARAMETER,
 		];
 
 		if ($request->isXmlHttpRequest()) {

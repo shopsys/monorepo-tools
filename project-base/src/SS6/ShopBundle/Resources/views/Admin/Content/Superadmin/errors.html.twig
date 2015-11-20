@@ -5,7 +5,7 @@
 
 {% block main_content %}
 
-	{% if app.environment == constant('SS6\\Environment::ENVIRONMENT_DEVELOPMENT') %}
+	{% if app.environment == ENVIRONMENT_DEVELOPMENT %}
 		{% set codes = [403, 404, 500] %}
 		{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
 

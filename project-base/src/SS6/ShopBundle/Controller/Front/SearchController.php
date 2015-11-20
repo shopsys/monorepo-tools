@@ -43,6 +43,7 @@ class SearchController extends FrontBaseController {
 			'searchText' => $searchText,
 			'categoriesPaginationResult' => $categoriesPaginationResult,
 			'productsPaginationResult' => $productsPaginationResult,
+			'SEARCH_TEXT_PARAMETER' => ProductController::SEARCH_TEXT_PARAMETER,
 		]);
 	}
 
@@ -51,6 +52,7 @@ class SearchController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Search/searchBox.html.twig', [
 			'searchText' => $searchText,
+			'SEARCH_TEXT_PARAMETER' => ProductController::SEARCH_TEXT_PARAMETER,
 		]);
 	}
 

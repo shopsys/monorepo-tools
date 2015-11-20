@@ -156,6 +156,7 @@ class AdvertController extends AdminBaseController {
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [
 			'advertPositionsByName' => $this->advertPositionList->getTranslationsIndexedByValue(),
+			'TYPE_IMAGE' => Advert::TYPE_IMAGE,
 		]);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);

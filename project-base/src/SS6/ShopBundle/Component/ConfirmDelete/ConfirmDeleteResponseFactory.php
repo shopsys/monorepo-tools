@@ -56,6 +56,7 @@ class ConfirmDeleteResponseFactory {
 			'entityId' => $entityId,
 			'routeCsrfToken' => $this->routeCsrfProtector->getCsrfTokenByRoute($route),
 			'listOfNewEntities' => $listOfNewEntities,
+			'CSRF_TOKEN_REQUEST_PARAMETER' => RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER,
 		]);
 	}
 }

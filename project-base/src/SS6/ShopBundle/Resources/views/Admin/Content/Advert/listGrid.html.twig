@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_preview %}
-	{% if row.advert.type == constant('SS6\\ShopBundle\\Model\\Advert\\Advert::TYPE_IMAGE') %}
+	{% if row.advert.type == TYPE_IMAGE %}
 		{{ image(row.advert, {size: 'original', height: 30}) }}
 	{% else %}
 		{{ '-' }}

@@ -22,6 +22,7 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use SS6\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
@@ -174,6 +175,7 @@ class ProductController extends AdminBaseController {
 			'product' => $product,
 			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
 			'productMainCategoriesIndexedByDomainId' => $this->categoryFacade->getProductMainCategoriesIndexedByDomainId($product),
+			'PRICE_CALCULATION_TYPE_AUTO' => Product::PRICE_CALCULATION_TYPE_AUTO,
 		];
 
 		try {
@@ -387,7 +389,10 @@ class ProductController extends AdminBaseController {
 		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', ['id' => 'p.id'])
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig');
+		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig', [
+			'VARIANT_TYPE_MAIN' => Product::VARIANT_TYPE_MAIN,
+			'VARIANT_TYPE_VARIANT' => Product::VARIANT_TYPE_VARIANT,
+		]);
 
 		return $grid;
 	}

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Model\AdminNavigation\Menu;
+use SS6\ShopBundle\Model\Security\Roles;
 
 class MenuController extends AdminBaseController {
 
@@ -22,6 +23,7 @@ class MenuController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', [
 			'menu' => $this->menu,
 			'activePath' => $activePath,
+			'ROLE_SUPER_ADMIN' => Roles::ROLE_SUPER_ADMIN,
 		]);
 	}
 

@@ -11,6 +11,7 @@ use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
 use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
+use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -138,6 +139,8 @@ class ProductPickerController extends AdminBaseController {
 		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10 text-center');
 		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-15 text-center');
 
+		$gridViewParameters['VARIANT_TYPE_MAIN'] = Product::VARIANT_TYPE_MAIN;
+		$gridViewParameters['VARIANT_TYPE_VARIANT'] = Product::VARIANT_TYPE_VARIANT;
 		$grid->setTheme('@SS6Shop/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);

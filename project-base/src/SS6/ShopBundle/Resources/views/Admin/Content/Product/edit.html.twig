@@ -243,7 +243,7 @@
 						{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
 						{{ form_errors(form.productData.price) }}
 					</td>
-					{% if productDetail.product.priceCalculationType == constant('SS6\\ShopBundle\\Model\\Product\\Product::PRICE_CALCULATION_TYPE_AUTO') %}
+					{% if productDetail.product.priceCalculationType == PRICE_CALCULATION_TYPE_AUTO %}
 						<td class="table-form__cell">{{ productDetail.basePrice.priceWithoutVat|priceWithCurrencyAdmin }}</td>
 						<td class="table-form__cell"><strong>{{ productDetail.basePrice.priceWithVat|priceWithCurrencyAdmin }}</strong></td>
 					{% else %}

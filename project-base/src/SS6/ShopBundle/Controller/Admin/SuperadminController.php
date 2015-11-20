@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use SS6\Environment;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
@@ -76,7 +77,9 @@ class SuperadminController extends AdminBaseController {
 	 * @Route("/superadmin/errors/")
 	 */
 	public function errorsAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/errors.html.twig');
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/errors.html.twig', [
+			'ENVIRONMENT_DEVELOPMENT' => Environment::ENVIRONMENT_DEVELOPMENT,
+		]);
 	}
 
 	/**

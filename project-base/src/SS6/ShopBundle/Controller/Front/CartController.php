@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Cart\AddProductResult;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
+use SS6\ShopBundle\Model\Module\ModuleList;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
@@ -249,6 +250,7 @@ class CartController extends FrontBaseController {
 
 				return $this->render('@SS6Shop/Front/Inline/Cart/afterAddWindow.html.twig', [
 					'accessoryDetails' => $accessoryDetails,
+					'ACCESSORIES_ON_BUY' => ModuleList::ACCESSORIES_ON_BUY,
 				]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
