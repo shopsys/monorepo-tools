@@ -21,4 +21,12 @@ class ServiceHelper {
 		$id = strtr($id, '\\', '.');
 		return strtolower($id);
 	}
+
+	/**
+	 * @param string $id
+	 * @return bool
+	 */
+	public function isServiceId($id) {
+		return preg_match('/^[a-z\d\._]+$/', $id) > 0;
+	}
 }
