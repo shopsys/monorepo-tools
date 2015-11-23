@@ -3,17 +3,19 @@
 namespace SS6\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
+use ReflectionFunctionAbstract;
 use SS6\AutoServicesBundle\Compiler\AutoServicesCollector;
 use SS6\AutoServicesBundle\Compiler\ContainerClassList;
 use SS6\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ScopeInterface;
 
 class AutoContainer implements ContainerInterface {
 
 	/**
 	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
 	 */
-	private $classResolver;
+	private $serviceHelper;
 
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -32,11 +34,11 @@ class AutoContainer implements ContainerInterface {
 
 	public function __construct(
 		ContainerInterface $container,
-		ServiceHelper $classResolver,
+		ServiceHelper $serviceHelper,
 		ContainerClassList $containerClassList,
 		AutoServicesCollector $autoServiceCollector
 	) {
-		$this->classResolver = $classResolver;
+		$this->serviceHelper = $serviceHelper;
 		$this->container = $container;
 		$this->containerClassList = $containerClassList;
 		$this->autoServiceCollector = $autoServiceCollector;
@@ -91,11 +93,11 @@ class AutoContainer implements ContainerInterface {
 	 * @return object
 	 */
 	private function createServiceByClassName($className) {
-		if (!$this->classResolver->canBeService($className)) {
+		if (!$this->serviceHelper->canBeService($className)) {
 			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($className);
 		}
 
-		$classServiceId = $this->classResolver->convertClassNameToServiceId($className);
+		$classServiceId = $this->serviceHelper->convertClassNameToServiceId($className);
 		$reflectionClass = new ReflectionClass($className);
 		$constructor = $reflectionClass->getConstructor();
 
@@ -114,7 +116,7 @@ class AutoContainer implements ContainerInterface {
 	 * @param \ReflectionFunctionAbstract $constructor
 	 * @return array
 	 */
-	private function getConstructorArguments(\ReflectionFunctionAbstract $constructor) {
+	private function getConstructorArguments(ReflectionFunctionAbstract $constructor) {
 		$arguments = [];
 		foreach ($constructor->getParameters() as $parameter) {
 			/* @var $parameter \ReflectionParameter */
@@ -128,7 +130,7 @@ class AutoContainer implements ContainerInterface {
 		return $arguments;
 	}
 
-	public function addScope(\Symfony\Component\DependencyInjection\ScopeInterface $scope) {
+	public function addScope(ScopeInterface $scope) {
 		$this->container->addScope($scope);
 	}
 
