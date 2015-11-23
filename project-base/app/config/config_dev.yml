@@ -3,6 +3,10 @@
 assetic:
   use_controller: false
 
+doctrine:
+  orm:
+    auto_generate_proxy_classes: true
+
 monolog:
   handlers:
     main:
