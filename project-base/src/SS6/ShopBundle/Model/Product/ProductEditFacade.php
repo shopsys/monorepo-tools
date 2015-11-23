@@ -158,10 +158,8 @@ class ProductEditFacade {
 		$product = new Product($productEditData->productData);
 
 		$this->em->persist($product);
-		$this->em->transactional(function () use ($product, $productEditData) {
-			$this->em->flush($product);
-			$this->setAdditionalDataAfterCreate($product, $productEditData);
-		});
+		$this->em->flush($product);
+		$this->setAdditionalDataAfterCreate($product, $productEditData);
 
 		return $product;
 	}

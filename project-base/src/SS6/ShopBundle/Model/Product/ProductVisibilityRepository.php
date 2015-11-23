@@ -52,18 +52,30 @@ class ProductVisibilityRepository {
 		$this->calculateIndependentVisibility($onlyMarkedProducts);
 		$this->propagateMainVariantVisibilityToVariants($onlyMarkedProducts);
 		$this->propagateVariantsVisibilityToMainVariant($onlyMarkedProducts);
-		$this->refreshGlobalProductVisibility();
-		$this->markAllProductsVisibilityAsRecalculated();
+		$this->refreshGlobalProductVisibility($onlyMarkedProducts);
+		$this->markAllProductsVisibilityAsRecalculated($onlyMarkedProducts);
 	}
 
-	private function refreshGlobalProductVisibility() {
-		$query = $this->em->createNativeQuery('UPDATE products AS p
+	/**
+	 * @param bool $onlyMarkedProducts
+	 */
+	private function refreshGlobalProductVisibility($onlyMarkedProducts) {
+		if ($onlyMarkedProducts) {
+			$onlyMarkedProductsWhereClause = ' WHERE p.recalculate_visibility = TRUE';
+		} else {
+			$onlyMarkedProductsWhereClause = '';
+		}
+
+		$query = $this->em->createNativeQuery('
+			UPDATE products AS p
 			SET visible = (p.calculated_hidden = FALSE) AND EXISTS(
 					SELECT 1
 					FROM product_visibilities AS pv
 					WHERE pv.product_id = p.id
 						AND pv.visible = TRUE
-				)', new ResultSetMapping());
+				)
+			' . $onlyMarkedProductsWhereClause,
+			new ResultSetMapping());
 		$query->execute();
 	}
 
@@ -112,9 +124,20 @@ class ProductVisibilityRepository {
 		return $productVisibility;
 	}
 
-	private function markAllProductsVisibilityAsRecalculated() {
-		$this->em->createNativeQuery('UPDATE products SET recalculate_visibility = FALSE', new ResultSetMapping())
-			->execute();
+	/**
+	 * @param bool $onlyMarkedProducts
+	 */
+	private function markAllProductsVisibilityAsRecalculated($onlyMarkedProducts) {
+		if ($onlyMarkedProducts) {
+			$onlyMarkedProductsWhereClause = ' WHERE recalculate_visibility = TRUE';
+		} else {
+			$onlyMarkedProductsWhereClause = '';
+		}
+
+		$this->em->createNativeQuery(
+			'UPDATE products SET recalculate_visibility = FALSE' . $onlyMarkedProductsWhereClause,
+			new ResultSetMapping()
+		)->execute();
 	}
 
 	/**
