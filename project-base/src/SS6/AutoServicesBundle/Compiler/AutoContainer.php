@@ -45,7 +45,7 @@ class AutoContainer implements ContainerInterface {
 	}
 
 	public function get($serviceId, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE) {
-		if ($this->container->has($serviceId)) {
+		if ($this->serviceHelper->isServiceId($serviceId) && $this->container->has($serviceId)) {
 			return $this->container->get($serviceId, $invalidBehavior);
 		}
 
