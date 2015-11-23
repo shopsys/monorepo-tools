@@ -26,11 +26,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	/**
 	 * @var int
 	 */
-	private $randomImportIndex;
-
-	/**
-	 * @var int
-	 */
 	private $countImported;
 
 	/**
@@ -49,7 +44,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	private $productsByCatnum;
 
 	public function __construct() {
-		$this->randomImportIndex = rand(1, 10000) * 1000000;
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
 	}
@@ -182,7 +176,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @return string
 	 */
 	private function getUniqueIndex() {
-		return ' #' . ($this->randomImportIndex + $this->demoDataIterationCounter);
+		return ' #' . $this->demoDataIterationCounter;
 	}
 
 	/**
