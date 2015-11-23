@@ -58,7 +58,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $objectManager
 	 */
 	public function load(ObjectManager $objectManager) {
-		$em = $this->get('doctrine.orm.entity_manager');
+		$em = $this->get(EntityManager::class);
 		/* @var $em \Doctrine\ORM\EntityManager */
 		$productEditFacade = $this->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
