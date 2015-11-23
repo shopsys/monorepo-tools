@@ -132,7 +132,11 @@ class CustomerEditFacade {
 		);
 		$this->em->persist($user);
 
-		$this->em->flush();
+		$this->em->flush([
+			$billingAddress,
+			$deliveryAddress,
+			$user,
+		]);
 
 		if ($customerData->sendRegistrationMail) {
 			$this->customerMailFacade->sendRegistrationMail($user);

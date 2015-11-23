@@ -87,10 +87,9 @@ class CategoryFacade {
 			$rootCategory = $this->categoryRepository->getRootCategory();
 			$category = $this->categoryService->create($categoryData, $rootCategory);
 			$this->em->persist($category);
-			$this->em->flush();
+			$this->em->flush($category);
 			$this->createCategoryDomains($category, $this->domain->getAll());
 			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-			$this->em->flush();
 
 			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
 
@@ -136,10 +135,15 @@ class CategoryFacade {
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 */
 	private function createCategoryDomains(Category $category, array $domainConfigs) {
+		$toFlush = [];
+
 		foreach ($domainConfigs as $domainConfig) {
 			$categoryDomain = new CategoryDomain($category, $domainConfig->getId());
 			$this->em->persist($categoryDomain);
+			$toFlush[] = $categoryDomain;
 		}
+
+		$this->em->flush($toFlush);
 	}
 
 	/**

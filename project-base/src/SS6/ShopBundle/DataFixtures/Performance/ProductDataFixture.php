@@ -7,7 +7,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
@@ -42,11 +44,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	private $batchStartMicrotime;
 
 	/**
-	 * @var \Doctrine\DBAL\Logging\SQLLogger|null
-	 */
-	private $sqlLogger;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product[catnum]
 	 */
 	private $productsByCatnum;
@@ -61,15 +58,18 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param \Doctrine\Common\Persistence\ObjectManager $objectManager
 	 */
 	public function load(ObjectManager $objectManager) {
-		$em = $this->get('doctrine.orm.entity_manager');
+		$em = $this->get(EntityManager::class);
 		/* @var $em \Doctrine\ORM\EntityManager */
 		$productEditFacade = $this->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$loaderService = $this->get(ProductDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		$sqlLoggerFacade = $this->get(SqlLoggerFacade::class);
+		/* @var $sqlLoggerFacade \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade */
 
 		// Sql logging during mass data import makes memory leak
-		$this->temporailyDisableLogging($em);
+		$sqlLoggerFacade->temporarilyDisableLogging();
+
 		$productsEditData = $this->cleanAndWarmUp($em);
 		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
 
@@ -81,6 +81,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
+			$this->setRandomProductEditDataCategories($productEditData);
 			$product = $productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -97,7 +98,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$this->createVariants($variantCatnumsByMainVariantCatnum);
 		$this->runRecalculators(true);
 		$em->clear();
-		$this->reenableLogging($em);
+		$sqlLoggerFacade->reenableLogging();
 	}
 
 	private function printProgress() {
@@ -153,22 +154,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		}
 
 		return $this->productsByCatnum[$catnum];
-	}
-
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 */
-	private function temporailyDisableLogging(EntityManager $em) {
-		$this->sqlLogger = $em->getConnection()->getConfiguration()->getSQLLogger();
-		$em->getConnection()->getConfiguration()->setSQLLogger(null);
-	}
-
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 */
-	private function reenableLogging(EntityManager $em) {
-		$em->getConnection()->getConfiguration()->setSQLLogger($this->sqlLogger);
-		$this->sqlLogger = null;
 	}
 
 	/**
@@ -238,7 +223,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$this->productsByCatnum = [];
 
 		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
-		/* @var $$productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
 		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
 
@@ -252,6 +237,28 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function getDependencies() {
 		return ProductDataFixtureReferenceInjector::getDependencies();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	private function setRandomProductEditDataCategories(ProductEditData $productEditData) {
+		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 1);
+		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 2);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param int $domainId
+	 */
+	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
+		$categoryRepository = $this->get(CategoryRepository::class);
+		/* @var $categoryRepository \SS6\ShopBundle\Model\Category\CategoryRepository */
+		$allCategoryIds = $categoryRepository->getAllIds();
+
+		$randomCategoryIds = (array)array_rand($allCategoryIds, rand(1, 4));
+		$randomCategories = $categoryRepository->getCategoriesByIds($randomCategoryIds);
+		$productEditData->productData->categoriesByDomainId[$domainId] = $randomCategories;
 	}
 
 }
