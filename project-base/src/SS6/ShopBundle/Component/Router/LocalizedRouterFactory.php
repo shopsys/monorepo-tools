@@ -36,8 +36,9 @@ class LocalizedRouterFactory {
 	 */
 	public function getRouter($locale, RequestContext $context) {
 		if (!array_key_exists($locale, $this->localeRoutersResourcesFilepaths)) {
-			$message = 'Router with locale "' . $locale . '" does not have localized data.';
-			throw new \SS6\ShopBundle\Component\Router\Exception\RouterNotResolvedException($message);
+			$message = 'File with localized routes "routing_front_' . $locale . '.yml" was not found. '
+				. 'Please add it to Resources/config folder.';
+			throw new \SS6\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException($message);
 		}
 
 		if (!array_key_exists($locale, $this->routersByLocaleAndHost)

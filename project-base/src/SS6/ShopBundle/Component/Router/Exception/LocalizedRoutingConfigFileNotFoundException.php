@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\Component\Router\Exception;
 
 use Exception;
 
-class RouterNotResolvedException extends Exception implements RouterException {
+class LocalizedRoutingConfigFileNotFoundException extends Exception implements RouterException {
 
 	/**
 	 * @param string $message
