@@ -9,8 +9,8 @@ parameters:
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
   ss6.domain_images_url_prefix: /assets/admin/images/domain
   ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
-  ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
-  ss6.feed_url_prefix: /assets/content/feeds/
+  ss6.feed_dir: %ss6.web_dir%/content/feeds
+  ss6.feed_url_prefix: /content/feeds/
   ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%
   ss6.filemanager_upload_web_dir: assets/uploads
   ss6.heureka_category_feed_backup_filepath: %ss6.resources_dir%/feeds/heureka-category-feed-backup.xml

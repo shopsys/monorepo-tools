@@ -186,10 +186,10 @@
 	<target name="dirs-structure" depends="img-dirs,uploaded-file-dirs">
 		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
-		<mkdir dir="${path.web}/assets/content/feeds" mode="${mkdir.mode}"/>
+		<mkdir dir="${path.web}/content/feeds" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/assets/content/sitemaps" mode="${mkdir.mode}"/>
 		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${path.web}/assets/content/feeds/">
+			<fileset dir="${path.web}/content/feeds/">
 				<exclude name="/" />
 			</fileset>
 			<fileset dir="${path.web}/assets/content/sitemaps/">
