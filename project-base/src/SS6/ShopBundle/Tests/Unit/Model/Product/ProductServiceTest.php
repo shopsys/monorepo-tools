@@ -133,7 +133,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$product = new Product($productData);
 
-		$this->assertNull($productService->delete($product)->getProductForRecalculations());
+		$this->assertEmpty($productService->delete($product)->getProductsForRecalculations());
 	}
 
 	public function testDeleteVariant() {
@@ -155,7 +155,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$variant = new Product($productData);
 		$mainVariant = new Product($productData, [$variant]);
 
-		$this->assertSame($mainVariant, $productService->delete($variant)->getProductForRecalculations());
+		$this->assertSame([$mainVariant], $productService->delete($variant)->getProductsForRecalculations());
 	}
 
 	public function testDeleteMainVariant() {
@@ -177,7 +177,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$variant = new Product($productData);
 		$mainVariant = new Product($productData, [$variant]);
 
-		$this->assertNull($productService->delete($mainVariant)->getProductForRecalculations());
+		$this->assertEmpty($productService->delete($mainVariant)->getProductsForRecalculations());
 		$this->assertFalse($variant->isVariant());
 	}
 

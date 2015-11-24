@@ -145,7 +145,7 @@ class ProductService {
 			}
 		}
 		if ($product->isVariant()) {
-			return new ProductDeleteResult($product->getMainVariant());
+			return new ProductDeleteResult([$product->getMainVariant()]);
 		}
 
 		return new ProductDeleteResult();

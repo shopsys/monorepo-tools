@@ -233,8 +233,8 @@ class ProductEditFacade {
 	public function delete($productId) {
 		$product = $this->productRepository->getById($productId);
 		$productDeleteResult = $this->productService->delete($product);
-		$productForRecalculations = $productDeleteResult->getProductForRecalculations();
-		if ($productForRecalculations !== null) {
+		$productsForRecalculations = $productDeleteResult->getProductsForRecalculations();
+		foreach ($productsForRecalculations as $productForRecalculations) {
 			$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productForRecalculations);
 			$this->productService->markProductForVisibilityRecalculation($productForRecalculations);
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productForRecalculations);
