@@ -226,7 +226,7 @@
 
 	<target name="uploaded-file-dirs">
 		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/assets/content/uploadedFiles">
+			<fileset dir="${path.root}/web/content/uploadedFiles">
 			</fileset>
 		</delete>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">

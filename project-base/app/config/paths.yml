@@ -26,6 +26,6 @@ parameters:
   ss6.sitemaps_url_prefix: /content/sitemaps/
   ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
   ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/uploaded_files.yml
-  ss6.uploaded_file_dir: %ss6.web_dir%/assets/content/uploadedFiles
-  ss6.uploaded_file_url_prefix: /assets/content/uploadedFiles/
+  ss6.uploaded_file_dir: %ss6.web_dir%/content/uploadedFiles
+  ss6.uploaded_file_url_prefix: /content/uploadedFiles/
   ss6.web_dir: %kernel.root_dir%/../web
