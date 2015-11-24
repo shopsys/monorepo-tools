@@ -22,8 +22,8 @@ parameters:
   ss6.javascript_url_prefix: /assets/scripts/
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.root_dir: %kernel.root_dir%/..
-  ss6.sitemaps_dir: %ss6.web_dir%/assets/content/sitemaps
-  ss6.sitemaps_url_prefix: /assets/content/sitemaps/
+  ss6.sitemaps_dir: %ss6.web_dir%/content/sitemaps
+  ss6.sitemaps_url_prefix: /content/sitemaps/
   ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
   ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/uploaded_files.yml
   ss6.uploaded_file_dir: %ss6.web_dir%/assets/content/uploadedFiles
