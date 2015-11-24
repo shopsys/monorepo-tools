@@ -44,7 +44,7 @@ services:
 
   ss6.twig.image_extension:
     class: SS6\ShopBundle\Twig\ImageExtension
-    arguments: [%ss6.image_url_prefix%]
+    arguments: [%ss6.front_design_image_url_prefix%]
     tags:
       - { name: twig.extension }
 

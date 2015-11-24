@@ -248,10 +248,7 @@
 
 	<target name="img-dirs">
 		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/assets/content/images">
-				<exclude name="noimage.gif" />
-				<exclude name =".gitignore" />
-			</fileset>
+			<fileset dir="${path.root}/web/content/images" />
 			<fileset dir="${path.root}/web/assets/admin/images/domain" />
 		</delete>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
