@@ -21,7 +21,7 @@ class ImageExtension extends Twig_Extension {
 	private $imageUrlPrefix;
 
 	/**
-	 * @var ContainerInterface
+	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	private $container;
 
@@ -45,6 +45,14 @@ class ImageExtension extends Twig_Extension {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @param string $imageUrlPrefix
+	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Component\Image\ImageLocator $imageLocator
+	 * @param \SS6\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
+	 * @param \SS6\ShopBundle\Component\Image\ImageFacade $imageFacade
+	 */
 	public function __construct(
 		$imageUrlPrefix,
 		ContainerInterface $container,
