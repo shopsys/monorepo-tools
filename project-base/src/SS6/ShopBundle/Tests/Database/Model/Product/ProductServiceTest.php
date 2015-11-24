@@ -34,7 +34,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$productData->price = 1000;
 		$productData->vat = $vat;
 		$productData->unit = $this->getReference(UnitDataFixture::PCS);
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
 
@@ -61,7 +61,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$productData->price = 1000;
 		$productData->vat = $vat;
 		$productData->unit = $this->getReference(UnitDataFixture::PCS);
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, 1000);
 

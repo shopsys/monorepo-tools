@@ -25,14 +25,11 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 
 		$vat = new Vat(new VatData('vat', 21));
 		$productData1 = new ProductData();
-		$productData1->name = ['cs' => 'Product 1'];
+		$productData1->name = [];
 		$productData1->price = 100;
 		$productData1->vat = $vat;
-		$productMock = $this->getMockBuilder(Product::class)
-			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([$productData1])
-			->getMock();
-		$productMock->expects($this->any())->method('getCurrentLocale')->willReturn('cs');
+		$productData1->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
+		$productMock = Product::create($productData1);
 
 		$productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
 		/* @var $productPriceCalculationForUser \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
@@ -48,7 +45,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$this->assertEmpty($modifiedItems1);
 
 		$productData2 = new ProductData();
-		$productData2->name = ['cs' => 'Product 2'];
+		$productData2->name = [];
 		$productData2->price = 200;
 		$productData2->vat = $vat;
 
@@ -88,13 +85,10 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 
 	public function testGetNotListableItemsWithVisibleButNotSellableProduct() {
 		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
+		$productData->name = [];
 		$productData->price = 100;
 		$productData->vat = new Vat(new VatData('vat', 21));
-		$productMock = $this->getMockBuilder(Product::class)
-			->setMethods(['getCurrentLocale'])
-			->setConstructorArgs([$productData])
-			->getMock();
+		$product = Product::create($productData);
 
 		$cartItemMock = $this->getMockBuilder(CartItem::class)
 			->disableOriginalConstructor()
@@ -103,7 +97,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cartItemMock
 			->expects($this->any())
 			->method('getProduct')
-			->willReturn($productMock);
+			->willReturn($product);
 
 		$expectedPricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
 		$currentCustomerMock = $this->getMockBuilder(CurrentCustomer::class)

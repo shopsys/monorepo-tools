@@ -43,7 +43,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$productService->edit($product, $productData);
 	}
@@ -75,7 +75,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$productService->setInputPrice($product, 100);
 	}
@@ -107,7 +107,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$vatData = new VatData();
 		$vat = new Vat($vatData);
@@ -131,7 +131,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->assertEmpty($productService->delete($product)->getProductsForRecalculations());
 	}
@@ -152,8 +152,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
 		$this->assertSame([$mainVariant], $productService->delete($variant)->getProductsForRecalculations());
 	}
@@ -174,8 +174,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
 		$this->assertEmpty($productService->delete($mainVariant)->getProductsForRecalculations());
 		$this->assertFalse($variant->isVariant());

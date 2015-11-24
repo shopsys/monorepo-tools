@@ -27,13 +27,13 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$productData1->name = ['cs' => 'Product 1'];
 		$productData1->price = 100;
 		$productData1->vat = $vat;
-		$product1 = new Product($productData1);
+		$product1 = Product::create($productData1);
 
 		$productData2 = new ProductData();
 		$productData2->name = ['cs' => 'Product 2'];
 		$productData2->price = 200;
 		$productData2->vat = $vat;
-		$product2 = new Product($productData2);
+		$product2 = Product::create($productData2);
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');
@@ -60,7 +60,7 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -77,13 +77,13 @@ class CartTest extends PHPUnit_Framework_TestCase {
 		$productData1->name = ['cs' => 'Product 1'];
 		$productData1->price = 100;
 		$productData1->vat = $vat;
-		$product1 = new Product($productData1);
+		$product1 = Product::create($productData1);
 
 		$productData2 = new ProductData();
 		$productData2->name = ['cs' => 'Product 2'];
 		$productData2->price = 200;
 		$productData2->vat = $vat;
-		$product2 = new Product($productData2);
+		$product2 = Product::create($productData2);
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');

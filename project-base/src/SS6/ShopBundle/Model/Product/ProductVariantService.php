@@ -57,7 +57,7 @@ class ProductVariantService {
 	public function createMainVariant(ProductEditData $mainVariantEditData, Product $mainProduct, array $variants) {
 		$variants[] = $mainProduct;
 
-		return new Product($mainVariantEditData->productData, $variants);
+		return Product::createMainVariant($mainVariantEditData->productData, $variants);
 	}
 
 }

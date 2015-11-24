@@ -22,7 +22,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->vat = new Vat(new VatData('VatName', '10.0'));
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId'], [], '', false);
 		$pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
@@ -58,7 +58,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->vat = new Vat(new VatData('VatName', '10.0'));
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
@@ -102,7 +102,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->vat = new Vat(new VatData('VatName', '10.0'));
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$pricingGroupMock1 = $this->getMock(PricingGroup::class, ['getId', 'getDomainId'], [], '', false);
 		$pricingGroupMock1->expects($this->any())->method('getId')->willReturn(1);
@@ -144,7 +144,7 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->vat = new Vat(new VatData('VatName', '10.0'));
 		$productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
 		$productData->price = '1000';
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$inputPriceCalculation = new InputPriceCalculation();
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);

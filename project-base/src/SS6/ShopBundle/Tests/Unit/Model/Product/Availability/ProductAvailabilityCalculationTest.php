@@ -35,7 +35,7 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 		$productData->outOfStockAction = $outOfStockAction;
 		$productData->outOfStockAvailability = $outOfStockAvailability;
 
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$availabilityFacadeMock = $this->getMockBuilder(AvailabilityFacade::class)
 			->setMethods(['getDefaultInStockAvailability'])
@@ -116,19 +116,19 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 		$productData = new ProductData();
 
 		$productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
-		$variant1 = new Product($productData);
+		$variant1 = Product::create($productData);
 
 		$productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
-		$variant2 = new Product($productData);
+		$variant2 = Product::create($productData);
 
 		$productData->availability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
-		$variant3 = new Product($productData);
+		$variant3 = Product::create($productData);
 
 		$productData->availability = $this->getReference(AvailabilityDataFixture::PREPARING);
-		$variant4 = new Product($productData);
+		$variant4 = Product::create($productData);
 
 		$variants = [$variant1, $variant2, $variant3, $variant4];
-		$mainVariant = new Product(new ProductData(), $variants);
+		$mainVariant = Product::createMainVariant(new ProductData(), $variants);
 
 		$availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, [], [], '', false);
 		$productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class,	[],	[], '',	false);
@@ -163,9 +163,9 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 	public function testCalculateAvailabilityMainVariantWithNoSellableVariants() {
 		$productData = new ProductData();
 		$productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
-		$variant = new Product($productData);
+		$variant = Product::create($productData);
 
-		$mainVariant = new Product(new ProductData(), [$variant]);
+		$mainVariant = Product::createMainVariant(new ProductData(), [$variant]);
 
 		$availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, ['getDefaultInStockAvailability'], [], '', false);
 		$defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);

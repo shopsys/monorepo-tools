@@ -29,7 +29,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
@@ -49,7 +49,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
@@ -69,7 +69,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
@@ -89,7 +89,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$quantity = 2;
 
@@ -110,7 +110,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -134,7 +134,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -155,13 +155,13 @@ class CartServiceTest extends FunctionalTestCase {
 		$productData1->name = ['cs' => 'Product 1'];
 		$productData1->price = $price;
 		$productData1->vat = $vat;
-		$product1 = new Product($productData1);
+		$product1 = Product::create($productData1);
 
 		$productData2 = new ProductData();
 		$productData2->name = ['cs' => 'Product 2'];
 		$productData2->price = $price;
 		$productData2->vat = $vat;
-		$product2 = new Product($productData2);
+		$product2 = Product::create($productData2);
 
 		$sessionId1 = 'abc123';
 		$sessionId2 = 'def456';

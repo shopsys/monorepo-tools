@@ -22,11 +22,11 @@ class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData->name = ['cs' => 'Product 1'];
 		$productData->price = $price;
 		$productData->vat = $vat;
-		$product1 = new Product($productData);
-		$product2 = new Product($productData);
-		$product3 = new Product($productData);
-		$product4 = new Product($productData);
-		$product5 = new Product($productData);
+		$product1 = Product::create($productData);
+		$product2 = Product::create($productData);
+		$product3 = Product::create($productData);
+		$product4 = Product::create($productData);
+		$product5 = Product::create($productData);
 
 		$manualBestsellingProductsIndexedByPosition = [
 			0 => $product1,

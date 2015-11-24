@@ -155,7 +155,7 @@ class ProductEditFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function create(ProductEditData $productEditData) {
-		$product = new Product($productEditData->productData);
+		$product = Product::create($productEditData->productData);
 
 		$this->em->persist($product);
 		$this->em->flush($product);

@@ -21,7 +21,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->usingStock = true;
 		$productData->stockQuantity = $productStockQuantity;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 		$productPrice = new Price(0, 0);
 
 		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
@@ -41,7 +41,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->usingStock = false;
 		$productData->stockQuantity = $productStockQuantity;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 		$productPrice = new Price(0, 0);
 
 		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
@@ -61,7 +61,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->usingStock = true;
 		$productData->stockQuantity = $productStockQuantity;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 		$productPrice = new Price(0, 0);
 
 		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);
@@ -81,7 +81,7 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$productData->usingStock = false;
 		$productData->stockQuantity = $productStockQuantity;
-		$product = new Product($productData);
+		$product = Product::create($productData);
 		$productPrice = new Price(0, 0);
 
 		$orderProduct = new OrderProduct($orderMock, 'productName', $productPrice, 0, $orderProductQuantity, null, null, $product);

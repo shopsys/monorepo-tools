@@ -29,8 +29,8 @@ class CartItemTest extends DatabaseTestCase {
 		$productData->availability = $availability;
 		$productData->unit = $this->getReference(UnitDataFixture::PCS);
 
-		$product1 = new Product($productData);
-		$product2 = new Product($productData);
+		$product1 = Product::create($productData);
+		$product2 = Product::create($productData);
 		$em->persist($vat);
 		$em->persist($availability);
 		$em->persist($product1);

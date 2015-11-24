@@ -29,8 +29,8 @@ class CartTest extends DatabaseTestCase {
 		$productData->vat = $vat;
 		$productData->availability = $availability;
 		$productData->unit = $this->getReference(UnitDataFixture::PCS);
-		$product1 = new Product($productData);
-		$product2 = new Product($productData);
+		$product1 = Product::create($productData);
+		$product2 = Product::create($productData);
 
 		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
 		$cartItem2 = new CartItem($customerIdentifier, $product2, 3, '0.0');

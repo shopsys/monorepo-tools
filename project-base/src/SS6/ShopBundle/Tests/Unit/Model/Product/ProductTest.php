@@ -10,7 +10,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoVariant() {
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->assertFalse($product->isVariant());
 		$this->assertFalse($product->isMainVariant());
@@ -18,8 +18,8 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsVariant() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		Product::createMainVariant($productData, [$variant]);
 
 		$this->assertTrue($variant->isVariant());
 		$this->assertFalse($variant->isMainVariant());
@@ -27,8 +27,8 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsMainVariant() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
 		$this->assertFalse($mainVariant->isVariant());
 		$this->assertTrue($mainVariant->isMainVariant());
@@ -36,15 +36,15 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMainVariant() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
 		$this->assertSame($mainVariant, $variant->getMainVariant());
 	}
 
 	public function testGetMainVariantException() {
 		$productData = new ProductData();
-		$product = new Product($productData);
+		$product = Product::create($productData);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException::class);
 		$product->getMainVariant();
@@ -52,10 +52,10 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateVariantFromVariantException() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$variant2 = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
-		new Product($productData, [$variant2]);
+		$variant = Product::create($productData);
+		$variant2 = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
+		Product::createMainVariant($productData, [$variant2]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException::class);
 		$mainVariant->addVariant($variant2);
@@ -63,10 +63,10 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateVariantFromMainVariantException() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$variant2 = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
-		$mainVariant2 = new Product($productData, [$variant2]);
+		$variant = Product::create($productData);
+		$variant2 = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
+		$mainVariant2 = Product::createMainVariant($productData, [$variant2]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
 		$mainVariant->addVariant($mainVariant2);
@@ -74,11 +74,11 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateMainVariantFromVariantException() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$variant2 = new Product($productData);
-		$variant3 = new Product($productData);
-		new Product($productData, [$variant]);
-		new Product($productData, [$variant2]);
+		$variant = Product::create($productData);
+		$variant2 = Product::create($productData);
+		$variant3 = Product::create($productData);
+		Product::createMainVariant($productData, [$variant]);
+		Product::createMainVariant($productData, [$variant2]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException::class);
 		$variant2->addVariant($variant3);
@@ -86,8 +86,8 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testAddSelfAsVariantException() {
 		$productData = new ProductData();
-		$variant = new Product($productData);
-		$mainVariant = new Product($productData, [$variant]);
+		$variant = Product::create($productData);
+		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
 		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
 		$mainVariant->addVariant($mainVariant);

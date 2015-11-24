@@ -283,7 +283,7 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Product[]|null $variants
 	 */
-	public function __construct(ProductData $productData, array $variants = null) {
+	private function __construct(ProductData $productData, array $variants = null) {
 		$this->translations = new ArrayCollection();
 		$this->catnum = $productData->catnum;
 		$this->partno = $productData->partno;
@@ -330,6 +330,23 @@ class Product extends AbstractTranslatableEntity {
 			$this->variantType = self::VARIANT_TYPE_MAIN;
 			$this->addVariants($variants);
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public static function create(ProductData $productData) {
+		return new self($productData, null);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \SS6\ShopBundle\Model\Product\ProductData[] $variants
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public static function createMainVariant(ProductData $productData, array $variants) {
+		return new self($productData, $variants);
 	}
 
 	/**
