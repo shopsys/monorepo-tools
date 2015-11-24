@@ -17,7 +17,7 @@ class Entity {
 	private $id;
 
 	/**
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", length=200)
 	 */
 	private $name;
 

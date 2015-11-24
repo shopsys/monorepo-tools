@@ -107,7 +107,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 			$constraints[] = new Constraints\NotBlank();
 		}
 
-		if (in_array($fieldMapping['type'], ['string', 'text'])) {
+		if ($fieldMapping['type'] === 'string') {
 			if ($fieldMapping['length'] !== null) {
 				$constraints[] = new Constraints\Length(['max' => $fieldMapping['length']]);
 			}
