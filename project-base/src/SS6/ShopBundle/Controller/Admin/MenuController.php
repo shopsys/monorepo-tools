@@ -38,6 +38,7 @@ class MenuController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', [
 			'items' => $secondLevelItems,
 			'activePath' => $activePath,
+			'ROLE_SUPER_ADMIN' => Roles::ROLE_SUPER_ADMIN,
 		]);
 	}
 }
