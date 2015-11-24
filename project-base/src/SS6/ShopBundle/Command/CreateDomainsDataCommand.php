@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Command;
 
 use SS6\ShopBundle\Component\Domain\DomainDataCreator;
+use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,6 +28,15 @@ class CreateDomainsDataCommand extends ContainerAwareCommand {
 		$domainsCreated = $domainDataCreator->createNewDomainsData();
 
 		$output->writeln('<fg=green>New domains created: ' . $domainsCreated . '.</fg=green>');
+
+		$multidomainEntityClassFinderFacade = $this->getContainer()->get(MultidomainEntityClassFinderFacade::class);
+		/* @var $multidomainEntityClassFinderFacade \SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
+
+		$multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getAllMultidomainEntitiesNames();
+		$output->writeln('<fg=green>Multidomain entities found:</fg=green>');
+		foreach ($multidomainEntitiesNames as $multidomainEntityName) {
+			$output->writeln($multidomainEntityName);
+		}
 	}
 
 }
