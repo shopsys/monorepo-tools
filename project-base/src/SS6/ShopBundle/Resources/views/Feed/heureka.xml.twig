@@ -6,6 +6,9 @@
 {% block item %}
 	<SHOPITEM>
 		<ITEM_ID>{{ item.itemId }}</ITEM_ID>
+		{% if item.groupId is not null -%}
+			<ITEMGROUP_ID>{{ item.groupId }}</ITEMGROUP_ID>
+		{% endif -%}
 		<PRODUCTNAME>{{ item.productName }}</PRODUCTNAME>
 		<DESCRIPTION>{{ item.description|striptags|replace("\n", ' ')|trim }}</DESCRIPTION>
 		<URL>{{ item.url }}</URL>
@@ -33,9 +36,6 @@
 		{% endfor -%}
 		{% if item.cpc is not null -%}
 			<HEUREKA_CPC>{{ item.cpc|number_format(2, ',', '') }}</HEUREKA_CPC>
-		{% endif -%}
-		{% if item.groupId is not null -%}
-			<ITEMGROUP_ID>{{ item.groupId }}</ITEMGROUP_ID>
 		{% endif -%}
 	</SHOPITEM>
 {% endblock %}
