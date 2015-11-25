@@ -7,25 +7,26 @@ parameters:
   ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v6.zip
   ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v5.sql
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml
-  ss6.domain_images_url_prefix: /assets/admin/images/domain
+  ss6.domain_images_url_prefix: /content/admin/images/domain
   ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
-  ss6.feed_dir: %ss6.web_dir%/assets/content/feeds
-  ss6.feed_url_prefix: /assets/content/feeds/
+  ss6.feed_dir: %ss6.web_dir%/content/feeds
+  ss6.feed_url_prefix: /content/feeds/
   ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%
   ss6.filemanager_upload_web_dir: assets/uploads
+  ss6.front_design_image_url_prefix: /assets/frontend/images/
   ss6.heureka_category_feed_backup_filepath: %ss6.resources_dir%/feeds/heureka-category-feed-backup.xml
   ss6.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
-  ss6.image_dir: %ss6.web_dir%/assets/content/images
-  ss6.image_url_prefix: /assets/content/images/
+  ss6.image_dir: %ss6.web_dir%/content/images
+  ss6.image_url_prefix: /content/images/
   ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
   ss6.javascript_sources_dir: %ss6.resources_dir%/scripts
   ss6.javascript_url_prefix: /assets/scripts/
   ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
   ss6.root_dir: %kernel.root_dir%/..
-  ss6.sitemaps_dir: %ss6.web_dir%/assets/content/sitemaps
-  ss6.sitemaps_url_prefix: /assets/content/sitemaps/
+  ss6.sitemaps_dir: %ss6.web_dir%/content/sitemaps
+  ss6.sitemaps_url_prefix: /content/sitemaps/
   ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
   ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/uploaded_files.yml
-  ss6.uploaded_file_dir: %ss6.web_dir%/assets/content/uploadedFiles
-  ss6.uploaded_file_url_prefix: /assets/content/uploadedFiles/
+  ss6.uploaded_file_dir: %ss6.web_dir%/content/uploadedFiles
+  ss6.uploaded_file_url_prefix: /content/uploadedFiles/
   ss6.web_dir: %kernel.root_dir%/../web

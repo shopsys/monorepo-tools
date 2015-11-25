@@ -18,7 +18,7 @@ class ImageExtension extends Twig_Extension {
 	/**
 	 * @var string
 	 */
-	private $imageUrlPrefix;
+	private $frontDesignImageUrlPrefix;
 
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -46,7 +46,7 @@ class ImageExtension extends Twig_Extension {
 	private $imageFacade;
 
 	/**
-	 * @param string $imageUrlPrefix
+	 * @param string $frontDesignImageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 * @param \SS6\ShopBundle\Component\Image\ImageLocator $imageLocator
@@ -54,14 +54,14 @@ class ImageExtension extends Twig_Extension {
 	 * @param \SS6\ShopBundle\Component\Image\ImageFacade $imageFacade
 	 */
 	public function __construct(
-		$imageUrlPrefix,
+		$frontDesignImageUrlPrefix,
 		ContainerInterface $container,
 		Domain $domain,
 		ImageLocator $imageLocator,
 		ImageConfig $imageConfig,
 		ImageFacade $imageFacade
 	) {
-		$this->imageUrlPrefix = $imageUrlPrefix;
+		$this->frontDesignImageUrlPrefix = $frontDesignImageUrlPrefix;
 		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
 		$this->domain = $domain;
 		$this->imageLocator = $imageLocator;
@@ -161,7 +161,7 @@ class ImageExtension extends Twig_Extension {
 	 * @return string
 	 */
 	private function getEmptyImageUrl() {
-		return $this->domain->getUrl() . $this->imageUrlPrefix . self::NOIMAGE_FILENAME;
+		return $this->domain->getUrl() . $this->frontDesignImageUrlPrefix . self::NOIMAGE_FILENAME;
 	}
 
 	/**
