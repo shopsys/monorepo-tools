@@ -47,23 +47,11 @@ class FeedController extends AdminBaseController {
 	}
 
 	/**
-	 * @Route("/feed/generate-all/")
-	 */
-	public function generateAllAction() {
-
-		$this->feedFacade->generateFeeds();
-		$this->feedFacade->generateDeliveryFeeds();
-		$this->getFlashMessageSender()->addSuccessFlash(t('XML Feedy byly vygenerovány'));
-
-		return $this->redirectToRoute('admin_feed_list');
-	}
-
-	/**
-	 * @Route("/feed/generate-single/{feedName}/{domainId}", requirements={"domainId" = "\d+"})
+	 * @Route("/feed/generate/{feedName}/{domainId}", requirements={"domainId" = "\d+"})
 	 * @param string $feedName
 	 * @param int $domainId
 	 */
-	public function generateSingleAction($feedName, $domainId) {
+	public function generateAction($feedName, $domainId) {
 		try {
 			$feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedName);
 			$domainConfig = $this->domain->getDomainConfigById((int)$domainId);
