@@ -7,14 +7,8 @@ use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Category\CategoryRepository;
 
 class CategoryDataFixture {
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
-	 */
-	private $categoryRepository;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
@@ -42,11 +36,9 @@ class CategoryDataFixture {
 	private $categoriesCreated;
 
 	public function __construct(
-		CategoryRepository $categoryRepository,
-		SqlLoggerFacade $sqlLoggerFacade,
-		CategoryFacade $categoryFacade
+		CategoryFacade $categoryFacade,
+		SqlLoggerFacade $sqlLoggerFacade
 	) {
-		$this->categoryRepository = $categoryRepository;
 		$this->categoryFacade = $categoryFacade;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->faker = FakerFactory::create();
@@ -55,7 +47,7 @@ class CategoryDataFixture {
 	}
 
 	public function load() {
-		$rootCategory = $this->categoryRepository->getRootCategory();
+		$rootCategory = $this->categoryFacade->getRootCategory();
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 		$this->recursivelyCreateCategoryTree($rootCategory);
 		$this->sqlLoggerFacade->reenableLogging();
