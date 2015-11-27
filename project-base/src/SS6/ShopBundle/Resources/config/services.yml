@@ -114,6 +114,11 @@ services:
     arguments:
       - @monolog.logger.cron
 
+  ss6.shop.component.css.css_facade:
+      class: SS6\ShopBundle\Component\Css\CssFacade
+      arguments:
+        - %ss6.css_version_filepath%
+
   ss6.shop.component.domain:
     class: SS6\ShopBundle\Component\Domain\Domain
     factory_service: ss6.shop.component.domain.domain_factory

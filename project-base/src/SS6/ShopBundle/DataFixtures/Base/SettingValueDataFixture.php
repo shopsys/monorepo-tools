@@ -74,7 +74,6 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo eshop', 2));
 		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), 1));
 		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2));
-		$manager->persist(new SettingValue(Setting::CSS_VERSION, 0, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 1));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 2));
 		// @codingStandardsIgnoreStop

@@ -2,9 +2,8 @@
 
 namespace SS6\ShopBundle\Command;
 
+use SS6\ShopBundle\Component\Css\CssFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,11 +26,11 @@ class GenerateGruntfileCommand extends ContainerAwareCommand {
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$twig = $this->getContainer()->get(Twig_Environment::class);
 		/* @var $twig \Twig_Environment */
-		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		$cssFacade = $this->getContainer()->get(CssFacade::class);
+		/* @var $cssFacade \SS6\ShopBundle\Component\Css\CssFacade */
 
 		$cssVersion = time();
-		$setting->set(Setting::CSS_VERSION, $cssVersion, SettingValue::DOMAIN_ID_COMMON);
+		$cssFacade->setCssVersion($cssVersion);
 
 		$output->writeln('Start of generating Gruntfile.js.');
 		$gruntfileContents = $twig->render('@SS6Shop/Grunt/gruntfile.js.twig', [

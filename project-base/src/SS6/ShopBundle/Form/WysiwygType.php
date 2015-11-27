@@ -2,27 +2,26 @@
 
 namespace SS6\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
+use SS6\ShopBundle\Component\Css\CssFacade;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class WysiwygType extends AbstractTypeExtension {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Css\CssFacade
 	 */
-	private $setting;
+	private $cssFacade;
 
-	public function __construct(Setting $setting) {
-		$this->setting = $setting;
+	public function __construct(CssFacade $cssFacade) {
+		$this->cssFacade = $cssFacade;
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$cssVersion = $this->setting->get(Setting::CSS_VERSION, SettingValue::DOMAIN_ID_COMMON);
+		$cssVersion = $this->cssFacade->getCssVersion();
 
 		$resolver->setDefaults([
 			'config' => [

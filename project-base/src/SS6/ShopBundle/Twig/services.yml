@@ -5,6 +5,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.css_extension:
+    class: SS6\ShopBundle\Twig\CssExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.date_time_formatter_extension:
     class: SS6\ShopBundle\Twig\DateTimeFormatterExtension
     tags:
@@ -100,10 +105,5 @@ services:
 
   ss6.twig.seo_extension:
     class: SS6\ShopBundle\Twig\SeoExtension
-    tags:
-      - { name: twig.extension }
-
-  ss6.twig.setting_extension:
-    class: SS6\ShopBundle\Twig\SettingExtension
     tags:
       - { name: twig.extension }
