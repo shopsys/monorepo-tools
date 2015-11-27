@@ -52,7 +52,7 @@
 					{% endif %}
 					{{ form_row(templateForm.attachment, { label: 'Nahrát přílohu'|trans}) }}
 					{% if sendMailText is not null %}
-						{{ form_row(templateForm.sendMail, { label: sendMailText }) }}
+						{{ form_row(templateForm.sendMail, { label: sendMailText, attr: {class: 'js-send-mail-checkbox'} }) }}
 					{% else %}
 						{{ form_widget(templateForm.sendMail, { 'attr': {'class': 'display-none'} }) }}
 					{% endif %}

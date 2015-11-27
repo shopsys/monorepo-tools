@@ -20,6 +20,15 @@
 		$('.js-mail-template-toggle-container.js-toggle-container:has(.js-validation-errors-list:not(.display-none))').each(function () {
 			SS6.toggleElement.show($(this));
 		});
+
+		$('.js-send-mail-checkbox')
+			.bind('change.requiredFields', SS6.mailTemplate.toggleRequiredFields)
+			.trigger('change.requiredFields');
+	};
+
+	SS6.mailTemplate.toggleRequiredFields = function () {
+		var sendMail = $(this).is(':checked');
+		$(this).closest('.js-mail-template').find('.js-form-compulsory').toggle(sendMail);
 	};
 
 	$(document).ready(function () {
