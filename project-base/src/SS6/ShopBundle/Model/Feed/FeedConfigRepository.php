@@ -52,6 +52,21 @@ class FeedConfigRepository {
 	}
 
 	/**
+	 * @param string $feedName
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig
+	 */
+	public function getFeedConfigByName($feedName) {
+		foreach ($this->getAllFeedConfigs() as $feedConfig) {
+			if ($feedConfig->getFeedName() === $feedName) {
+				return $feedConfig;
+			}
+		}
+
+		$message = 'Feed config with name "' . $feedName . ' not found.';
+		throw new \SS6\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($message);
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getDeliveryFeedConfigs() {
@@ -65,6 +80,13 @@ class FeedConfigRepository {
 		);
 
 		return $feedConfigs;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 */
+	public function getAllFeedConfigs() {
+		return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());
 	}
 
 }

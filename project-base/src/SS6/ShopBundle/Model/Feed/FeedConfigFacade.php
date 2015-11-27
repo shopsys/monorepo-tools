@@ -46,10 +46,25 @@ class FeedConfigFacade {
 	}
 
 	/**
+	 * @param string $feedName
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig
+	 */
+	public function getFeedConfigByName($feedName) {
+		return $this->feedConfigRepository->getFeedConfigByName($feedName);
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getDeliveryFeedConfigs() {
 		return $this->feedConfigRepository->getDeliveryFeedConfigs();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 */
+	public function getAllFeedConfigs() {
+		return $this->feedConfigRepository->getAllFeedConfigs();
 	}
 
 	/**
