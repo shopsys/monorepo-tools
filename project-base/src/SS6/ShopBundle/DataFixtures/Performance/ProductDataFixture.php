@@ -2,10 +2,8 @@
 
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -18,10 +16,65 @@ use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
-class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class ProductDataFixture {
 
 	const PRODUCTS = 40000;
 	const BATCH_SIZE = 1000;
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
+	 */
+	private $productDataFixtureLoader;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade
+	 */
+	private $sqlLoggerFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVariantFacade
+	 */
+	private $productVariantFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
+	 */
+	private $productAvailabilityRecalculator;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+	 */
+	private $productVisibilityFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
+	 */
+	private $productPriceRecalculator;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
+	 */
+	private $productDataReferenceInjector;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 */
+	private $persistentReferenceService;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 */
+	private $categoryRepository;
 
 	/**
 	 * @var int
@@ -43,29 +96,40 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	private $productsByCatnum;
 
-	public function __construct() {
+	public function __construct(
+		EntityManager $em,
+		ProductEditFacade $productEditFacade,
+		ProductDataFixtureLoader $productDataFixtureLoader,
+		SqlLoggerFacade $sqlLoggerFacade,
+		ProductVariantFacade $productVariantFacade,
+		ProductAvailabilityRecalculator $productAvailabilityRecalculator,
+		ProductVisibilityFacade $productVisibilityFacade,
+		ProductPriceRecalculator $productPriceRecalculator,
+		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
+		PersistentReferenceService $persistentReferenceService,
+		CategoryRepository $categoryRepository
+	) {
+		$this->em = $em;
+		$this->productEditFacade = $productEditFacade;
+		$this->productDataFixtureLoader = $productDataFixtureLoader;
+		$this->sqlLoggerFacade = $sqlLoggerFacade;
+		$this->productVariantFacade = $productVariantFacade;
+		$this->productAvailabilityRecalculator = $productAvailabilityRecalculator;
+		$this->productVisibilityFacade = $productVisibilityFacade;
+		$this->productPriceRecalculator = $productPriceRecalculator;
+		$this->productDataReferenceInjector = $productDataReferenceInjector;
+		$this->persistentReferenceService = $persistentReferenceService;
+		$this->categoryRepository = $categoryRepository;
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
 	}
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $objectManager
-	 */
-	public function load(ObjectManager $objectManager) {
-		$em = $this->get(EntityManager::class);
-		/* @var $em \Doctrine\ORM\EntityManager */
-		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
-		$loaderService = $this->get(ProductDataFixtureLoader::class);
-		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-		$sqlLoggerFacade = $this->get(SqlLoggerFacade::class);
-		/* @var $sqlLoggerFacade \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade */
-
+	public function load() {
 		// Sql logging during mass data import makes memory leak
-		$sqlLoggerFacade->temporarilyDisableLogging();
+		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
-		$productsEditData = $this->cleanAndWarmUp($em);
-		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
+		$productsEditData = $this->cleanAndWarmUp($this->em);
+		$variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum();
 
 		while ($this->countImported < self::PRODUCTS) {
 			$productEditData = next($productsEditData);
@@ -76,7 +140,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 			}
 			$this->makeProductEditDataUnique($productEditData);
 			$this->setRandomProductEditDataCategories($productEditData);
-			$product = $productEditFacade->create($productEditData);
+			$product = $this->productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
 				$this->productsByCatnum[$product->getCatnum()] = $product;
@@ -84,15 +148,15 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 
 			$this->printProgress();
 			if ($this->countImported % self::BATCH_SIZE === 0) {
-				$productsEditData = $this->cleanAndWarmUp($em);
+				$productsEditData = $this->cleanAndWarmUp($this->em);
 			}
 
 			$this->countImported++;
 		}
 		$this->createVariants($variantCatnumsByMainVariantCatnum);
 		$this->runRecalculators(true);
-		$em->clear();
-		$sqlLoggerFacade->reenableLogging();
+		$this->em->clear();
+		$this->sqlLoggerFacade->reenableLogging();
 	}
 
 	private function printProgress() {
@@ -116,8 +180,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	private function createVariants(array $variantCatnumsByMainVariantCatnum) {
 		$uniqueIndex = $this->getUniqueIndex();
-		$productVariantFacade = $this->get(ProductVariantFacade::class);
-		/* @var $productVariantFacade \SS6\ShopBundle\Model\Product\ProductVariantFacade */
 
 		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
 			try {
@@ -126,7 +188,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 				foreach ($variantsCatnums as $variantCatnum) {
 					$variants[] = $this->getProductByCatnum($variantCatnum . $uniqueIndex);
 				}
-				$productVariantFacade->createVariant($mainProduct, $variants);
+				$this->productVariantFacade->createVariant($mainProduct, $variants);
 			} catch (\Doctrine\ORM\NoResultException $e) {
 				continue;
 			}
@@ -139,10 +201,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	private function getProductByCatnum($catnum) {
 		if (!array_key_exists($catnum, $this->productsByCatnum)) {
-			$em = $this->get(EntityManager::class);
-			/* @var $em \Doctrine\ORM\EntityManager */
-
-			$query = $em->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.catnum = :catnum')
+			$query = $this->em->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.catnum = :catnum')
 				->setParameter('catnum', $catnum);
 			$this->productsByCatnum[$catnum] = $query->getSingleResult();
 		}
@@ -183,17 +242,10 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param bool $runGlobalRecalculators
 	 */
 	private function runRecalculators($runGlobalRecalculators = false) {
-		$productAvailabilityRecalculator = $this->get(ProductAvailabilityRecalculator::class);
-		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
-		$productVisibilityFacade = $this->get(ProductVisibilityFacade::class);
-		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
-		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
-		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
-
-		$productAvailabilityRecalculator->runImmediateRecalculations();
-		$productPriceRecalculator->runImmediateRecalculations();
+		$this->productAvailabilityRecalculator->runImmediateRecalculations();
+		$this->productPriceRecalculator->runImmediateRecalculations();
 		if ($runGlobalRecalculators) {
-			$productVisibilityFacade->refreshProductsVisibility();
+			$this->productVisibilityFacade->refreshProductsVisibility();
 		}
 	}
 
@@ -216,21 +268,9 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
-		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
-		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
-		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
-		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
+		$this->productDataReferenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceService);
 
-		$referenceInjector->loadReferences($productDataFixtureLoader, $this->referenceRepository);
-
-		return $productDataFixtureLoader->getProductsEditData();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getDependencies() {
-		return ProductDataFixtureReferenceInjector::getDependencies();
+		return $this->productDataFixtureLoader->getProductsEditData();
 	}
 
 	/**
@@ -246,12 +286,10 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @param int $domainId
 	 */
 	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
-		$categoryRepository = $this->get(CategoryRepository::class);
-		/* @var $categoryRepository \SS6\ShopBundle\Model\Category\CategoryRepository */
-		$allCategoryIds = $categoryRepository->getAllIds();
+		$allCategoryIds = $this->categoryRepository->getAllIds();
 
 		$randomCategoryIds = (array)array_rand($allCategoryIds, rand(1, 4));
-		$randomCategories = $categoryRepository->getCategoriesByIds($randomCategoryIds);
+		$randomCategories = $this->categoryRepository->getCategoriesByIds($randomCategoryIds);
 		$productEditData->productData->categoriesByDomainId[$domainId] = $randomCategories;
 	}
 

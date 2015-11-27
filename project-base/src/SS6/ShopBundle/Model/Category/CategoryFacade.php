@@ -84,7 +84,7 @@ class CategoryFacade {
 		try {
 			$this->em->beginTransaction();
 
-			$rootCategory = $this->categoryRepository->getRootCategory();
+			$rootCategory = $this->getRootCategory();
 			$category = $this->categoryService->create($categoryData, $rootCategory);
 			$this->em->persist($category);
 			$this->em->flush($category);
@@ -111,7 +111,7 @@ class CategoryFacade {
 		try {
 			$this->em->beginTransaction();
 
-			$rootCategory = $this->categoryRepository->getRootCategory();
+			$rootCategory = $this->getRootCategory();
 			$category = $this->categoryRepository->getById($categoryId);
 			$this->categoryService->edit($category, $categoryData, $rootCategory);
 			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
@@ -186,7 +186,7 @@ class CategoryFacade {
 
 		try {
 			$this->em->beginTransaction();
-			$rootCategory = $this->categoryRepository->getRootCategory();
+			$rootCategory = $this->getRootCategory();
 			foreach ($parentIdByCategoryId as $categoryId => $parentId) {
 				if ($parentId === null) {
 					$parent = $rootCategory;
@@ -312,5 +312,12 @@ class CategoryFacade {
 	 */
 	public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
 		return $this->categoryRepository->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain($product, $domainConfig);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getRootCategory() {
+		return $this->categoryRepository->getRootCategory();
 	}
 }

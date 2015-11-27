@@ -17,7 +17,7 @@
 	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" />
 
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-fixtures-demo" />
-	<target name="test-db-performance" depends="test-db-drop,test-db-create,test-db-fixtures-performance" />
+	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" />
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
 
 	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" />
@@ -567,12 +567,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Performance" />
-			<arg value="--append" />
-			<arg value="--no-interaction" />
+			<arg value="ss6:performance-data" />
 		</exec>
 	</target>
 

@@ -77,7 +77,7 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function getRootCategory() {
 		$rootCategory = $this->getCategoryRepository()->findOneBy(['parent' => null]);
