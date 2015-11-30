@@ -47,6 +47,7 @@
 				},
 				success: function () {
 					self.$saveButton.addClass('btn--disabled');
+					SS6.formChangeInfo.removeInfo();
 					SS6.window({
 						content: SS6.translator.trans('Pořadí bylo uloženo.')
 					});
