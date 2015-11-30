@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormFactory;
 class OrderStatusInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var OrderStatusFacade
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
 	 */
 	private $orderStatusFacade;
 
