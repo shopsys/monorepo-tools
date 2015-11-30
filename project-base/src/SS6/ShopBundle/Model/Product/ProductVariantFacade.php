@@ -87,18 +87,12 @@ class ProductVariantFacade {
 		$this->em->persist($mainVariant);
 
 		try {
-			$this->em->beginTransaction();
-
 			$toFlush = $mainVariant->getVariants();
 			$toFlush[] = $mainVariant;
 			$this->em->flush($toFlush);
-
 			$this->productEditFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
 			$this->imageFacade->copyImages($mainProduct, $mainVariant);
-
-			$this->em->commit();
 		} catch (\Exception $exception) {
-			$this->em->rollback();
 			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 			$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 

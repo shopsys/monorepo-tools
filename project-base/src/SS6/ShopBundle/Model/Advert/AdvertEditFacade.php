@@ -71,11 +71,9 @@ class AdvertEditFacade {
 		$advert = new Advert($advertData);
 
 		$this->em->persist($advert);
-		$this->em->beginTransaction();
 		$this->em->flush();
 		$this->imageFacade->uploadImage($advert, $advertData->image, null);
 		$this->em->flush();
-		$this->em->commit();
 
 		return $advert;
 	}
@@ -89,11 +87,9 @@ class AdvertEditFacade {
 		$advert = $this->advertRepository->getById($advertId);
 		$advert->edit($advertData);
 
-		$this->em->beginTransaction();
 		$this->em->flush();
 		$this->imageFacade->uploadImage($advert, $advertData->image, null);
 		$this->em->flush();
-		$this->em->commit();
 
 		return $advert;
 	}

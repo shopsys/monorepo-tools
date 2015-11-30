@@ -81,25 +81,16 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function create(CategoryData $categoryData) {
-		try {
-			$this->em->beginTransaction();
+		$rootCategory = $this->getRootCategory();
+		$category = $this->categoryService->create($categoryData, $rootCategory);
+		$this->em->persist($category);
+		$this->em->flush($category);
+		$this->createCategoryDomains($category, $this->domain->getAll());
+		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 
-			$rootCategory = $this->getRootCategory();
-			$category = $this->categoryService->create($categoryData, $rootCategory);
-			$this->em->persist($category);
-			$this->em->flush($category);
-			$this->createCategoryDomains($category, $this->domain->getAll());
-			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
 
-			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
-
-			$this->em->commit();
-
-			return $category;
-		} catch (\Exception $ex) {
-			$this->em->rollback();
-			throw $ex;
-		}
+		return $category;
 	}
 
 	/**
@@ -108,26 +99,17 @@ class CategoryFacade {
 	 * @return \SS6\ShopBundle\Model\Category\Category
 	 */
 	public function edit($categoryId, CategoryData $categoryData) {
-		try {
-			$this->em->beginTransaction();
+		$rootCategory = $this->getRootCategory();
+		$category = $this->categoryRepository->getById($categoryId);
+		$this->categoryService->edit($category, $categoryData, $rootCategory);
+		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
+		$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
+		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+		$this->em->flush();
 
-			$rootCategory = $this->getRootCategory();
-			$category = $this->categoryRepository->getById($categoryId);
-			$this->categoryService->edit($category, $categoryData, $rootCategory);
-			$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
-			$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
-			$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-			$this->em->flush();
+		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
 
-			$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
-
-			$this->em->commit();
-
-			return $category;
-		} catch (\Exception $ex) {
-			$this->em->rollback();
-			throw $ex;
-		}
+		return $category;
 	}
 
 	/**
@@ -166,7 +148,6 @@ class CategoryFacade {
 	 */
 	public function deleteById($categoryId) {
 		$category = $this->categoryRepository->getById($categoryId);
-		$this->em->beginTransaction();
 		$this->categoryService->setChildrenAsSiblings($category);
 		// Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
 		// We need to update `parent` attribute of children first.
@@ -174,7 +155,6 @@ class CategoryFacade {
 
 		$this->em->remove($category);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**
@@ -184,26 +164,19 @@ class CategoryFacade {
 		// eager-load all categories into identity map
 		$this->categoryRepository->getAll();
 
-		try {
-			$this->em->beginTransaction();
-			$rootCategory = $this->getRootCategory();
-			foreach ($parentIdByCategoryId as $categoryId => $parentId) {
-				if ($parentId === null) {
-					$parent = $rootCategory;
-				} else {
-					$parent = $this->categoryRepository->getById($parentId);
-				}
-				$category = $this->categoryRepository->getById($categoryId);
-				$category->setParent($parent);
-				$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
+		$rootCategory = $this->getRootCategory();
+		foreach ($parentIdByCategoryId as $categoryId => $parentId) {
+			if ($parentId === null) {
+				$parent = $rootCategory;
+			} else {
+				$parent = $this->categoryRepository->getById($parentId);
 			}
-
-			$this->em->flush();
-			$this->em->commit();
-		} catch (\Exception $e) {
-			$this->em->rollback();
-			throw $e;
+			$category = $this->categoryRepository->getById($categoryId);
+			$category->setParent($parent);
+			$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
 		}
+
+		$this->em->flush();
 	}
 
 	/**

@@ -36,18 +36,9 @@ class CategoryVisibilityRepository {
 	}
 
 	public function refreshCategoriesVisibility() {
-		try {
-			$this->em->beginTransaction();
-
-			$domains = $this->domain->getAll();
-			foreach ($domains as $domainConfig) {
-				$this->refreshCategoriesVisibilityOnDomain($domainConfig);
-			}
-
-			$this->em->commit();
-		} catch (\Exception $ex) {
-			$this->em->rollback();
-			throw $ex;
+		$domains = $this->domain->getAll();
+		foreach ($domains as $domainConfig) {
+			$this->refreshCategoriesVisibilityOnDomain($domainConfig);
 		}
 	}
 
@@ -135,7 +126,14 @@ class CategoryVisibilityRepository {
 		}
 
 		if ($this->categoryVisibilityRecalculationScheduler->isRecalculationScheduled()) {
-			$this->refreshCategoriesVisibility();
+			try {
+				$this->em->beginTransaction();
+				$this->refreshCategoriesVisibility();
+				$this->em->commit();
+			} catch (\Exception $ex) {
+				$this->em->rollback();
+				throw $ex;
+			}
 		}
 	}
 

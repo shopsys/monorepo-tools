@@ -66,13 +66,11 @@ class OrderStatusFacade {
 	public function create(OrderStatusData $orderStatusFormData) {
 		$orderStatus = new OrderStatus($orderStatusFormData, OrderStatus::TYPE_IN_PROGRESS);
 		$this->em->persist($orderStatus);
-		$this->em->beginTransaction();
 		$this->em->flush();
 
 		$this->mailTemplateFacade->createMailTemplateForAllDomains(
 			OrderMailService::MAIL_TEMPLATE_NAME_PREFIX . $orderStatus->getId()
 		);
-		$this->em->commit();
 
 		return $orderStatus;
 	}
