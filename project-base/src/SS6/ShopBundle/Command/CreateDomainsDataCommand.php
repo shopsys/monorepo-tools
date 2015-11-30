@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Command;
 
 use SS6\ShopBundle\Component\Domain\DomainDataCreator;
+use SS6\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,6 +23,10 @@ class CreateDomainsDataCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$output->writeln('Start of creating new domains data.');
+
+		$domainDbFunctionsFacade = $this->getContainer()->get(DomainDbFunctionsFacade::class);
+		/* @var $domainDbFunctionsFacade \SS6\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
+		$domainDbFunctionsFacade->createDomainDbFunctions();
 
 		$domainDataCreator = $this->getContainer()->get(DomainDataCreator::class);
 		/* @var $domainDataCreator \SS6\ShopBundle\Component\Domain\DomainDataCreator */
