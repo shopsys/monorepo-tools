@@ -15,7 +15,9 @@
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
+	<span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
+		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"
+	></span>
 	{% if row.p.calculatedSellingDenied %}
 		<i class="svg svg-cart cart-disabled in-icon" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
 	{% endif %}
@@ -23,9 +25,15 @@
 
 {% block grid_value_cell_id_select %}
 	{%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
-		<i class="in-icon svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které je hlavní variantou"></i>
+		<i class="in-icon svg svg-info c-help js-tooltip"
+			data-toggle="tooltip" data-placement="left"
+			title="" data-original-title="Nelze vybrat zboží, které je hlavní variantou"
+		></i>
 	{% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<i class="in-icon svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="left" title="" data-original-title="Nelze vybrat zboží, které je variantou"></i>
+		<i class="in-icon svg svg-info c-help js-tooltip"
+			data-toggle="tooltip" data-placement="left" title=""
+			data-original-title="Nelze vybrat zboží, které je variantou"
+		></i>
 	{% elseif isMultiple %}
 		<a
 			class="js-products-picker-window-add-product"
