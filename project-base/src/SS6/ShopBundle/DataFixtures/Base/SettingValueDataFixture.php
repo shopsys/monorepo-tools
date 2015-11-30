@@ -20,6 +20,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
 		$vat = $this->getReference(VatDataFixture::VAT_HIGH);
@@ -39,11 +40,20 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
 		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
 
-		$orderSentText = '
+		$orderSentTextCs = '
 			<p>
 				Objednávka číslo {number} byla odeslána, děkujeme za Váš nákup.
 				Budeme Vás kontaktovat o dalším průběhu vyřizování. <br /><br />
 				Uschovejte si permanentní <a href="{order_detail_url}">odkaz na detail objednávky</a>. <br />
+				{transport_instructions} <br />
+				{payment_instructions} <br />
+			</p>
+		';
+		$orderSentTextEn = '
+			<p>
+				Order number {number} has been sent, thank you for your purchase.
+				We will contact you about next order status. <br /><br />
+				<a href="{order_detail_url}">Track</a> the status of your order. <br />
 				{transport_instructions} <br />
 				{payment_instructions} <br />
 			</p>
@@ -53,7 +63,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(PricingSetting::ROUNDING_TYPE, PricingSetting::ROUNDING_TYPE_INTEGER, SettingValue::DOMAIN_ID_COMMON));
 		$manager->persist(new SettingValue(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON));
-		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentText, SettingValue::DOMAIN_ID_COMMON));
+		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentTextCs, 1));
+		$manager->persist(new SettingValue(Setting::ORDER_SUBMITTED_SETTING_NAME, $orderSentTextEn, 2));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 1));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL_NAME, 'Shopsys', 1));
 		$manager->persist(new SettingValue(MailSetting::MAIN_ADMIN_MAIL, 'no-reply@netdevelo.cz', 2));
