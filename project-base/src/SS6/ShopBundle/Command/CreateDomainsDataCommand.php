@@ -32,7 +32,7 @@ class CreateDomainsDataCommand extends ContainerAwareCommand {
 		$multidomainEntityClassFinderFacade = $this->getContainer()->get(MultidomainEntityClassFinderFacade::class);
 		/* @var $multidomainEntityClassFinderFacade \SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
 
-		$multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getAllMultidomainEntitiesNames();
+		$multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getMultidomainEntitiesNames();
 		$output->writeln('<fg=green>Multidomain entities found:</fg=green>');
 		foreach ($multidomainEntitiesNames as $multidomainEntityName) {
 			$output->writeln($multidomainEntityName);
