@@ -58,7 +58,7 @@
 			if (showInWindowAfterLoad) {
 				showInWindow();
 			}
-		}
+		};
 	};
 
 	$(document).ready(function () {

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Twig;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
@@ -20,15 +21,23 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	private $pricingGroupSettingFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		ProductVisibilityRepository $productVisibilityRepository,
-		PricingGroupSettingFacade $pricingGroupSettingFacade
+		PricingGroupSettingFacade $pricingGroupSettingFacade,
+		Domain $domain
 	) {
 		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -37,6 +46,9 @@ class ProductVisibilityExtension extends \Twig_Extension {
 	public function getFunctions() {
 		return [
 			new Twig_SimpleFunction('isVisibileForDefaultPricingGroup', [$this, 'isVisibileForDefaultPricingGroupOnDomain']),
+			new Twig_SimpleFunction(
+				'isVisibleForDefaultPricingGroupOnEachDomain', [$this, 'isVisibleForDefaultPricingGroupOnEachDomain']
+			),
 		];
 	}
 
@@ -59,4 +71,17 @@ class ProductVisibilityExtension extends \Twig_Extension {
 		return $productVisibility->isVisible();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return bool
+	 */
+	public function isVisibleForDefaultPricingGroupOnEachDomain(Product $product) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			if (!$this->isVisibileForDefaultPricingGroupOnDomain($product, $domainConfig->getId())) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }

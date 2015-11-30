@@ -382,7 +382,7 @@ class ProductController extends AdminBaseController {
 
 		$grid->addColumn('name', 'pt.name', 'Název', true);
 		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('text-center table-col table-col-10');
+		$grid->addColumn('visibility', 'p.visible', 'Viditelnost')->setClassAttribute('text-center table-col table-col-10');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);
@@ -395,6 +395,18 @@ class ProductController extends AdminBaseController {
 		]);
 
 		return $grid;
+	}
+
+	/**
+	 * @Route("/product/visibility/{productId}")
+	 * @param int $productId
+	 */
+	public function visibilityAction($productId) {
+		$product = $this->productEditFacade->getById($productId);
+
+		return $this->render('@SS6Shop/Admin/Content/Product/visibility.html.twig', [
+			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
+		]);
 	}
 
 }
