@@ -111,12 +111,15 @@ class CustomerEditFacade {
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
 	public function create(CustomerData $customerData) {
+		$toFlush = [];
 		$billingAddress = new BillingAddress($customerData->billingAddressData);
 		$this->em->persist($billingAddress);
+		$toFlush[] = $billingAddress;
 
 		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->deliveryAddressData);
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
+			$toFlush[] = $deliveryAddress;
 		}
 
 		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
@@ -131,12 +134,9 @@ class CustomerEditFacade {
 			$userByEmailAndDomain
 		);
 		$this->em->persist($user);
+		$toFlush[] = $user;
 
-		$this->em->flush([
-			$billingAddress,
-			$deliveryAddress,
-			$user,
-		]);
+		$this->em->flush($toFlush);
 
 		if ($customerData->sendRegistrationMail) {
 			$this->customerMailFacade->sendRegistrationMail($user);
