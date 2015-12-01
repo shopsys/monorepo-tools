@@ -15,7 +15,7 @@ class ProductVisibilityFacade {
 	/**
 	 * @var bool
 	 */
-	private $recalcVisibility = false;
+	private $recalcVisibilityForMarked = false;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
@@ -24,8 +24,8 @@ class ProductVisibilityFacade {
 		$this->productVisibilityRepository = $productVisibilityRepository;
 	}
 
-	public function refreshProductsVisibilityDelayed() {
-		$this->recalcVisibility = true;
+	public function refreshProductsVisibilityForMarkedDelayed() {
+		$this->recalcVisibilityForMarked = true;
 	}
 
 	public function refreshProductsVisibility() {
@@ -44,7 +44,7 @@ class ProductVisibilityFacade {
 			return;
 		}
 
-		if ($this->recalcVisibility) {
+		if ($this->recalcVisibilityForMarked) {
 			$this->refreshProductsVisibilityForMarked();
 		}
 	}

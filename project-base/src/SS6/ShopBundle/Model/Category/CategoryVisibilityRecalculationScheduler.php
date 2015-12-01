@@ -22,7 +22,7 @@ class CategoryVisibilityRecalculationScheduler {
 
 	public function scheduleRecalculation() {
 		$this->recaluculate = true;
-		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 	}
 
 	/**

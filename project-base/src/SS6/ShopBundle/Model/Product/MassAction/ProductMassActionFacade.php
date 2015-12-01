@@ -64,7 +64,7 @@ class ProductMassActionFacade {
 					$productMassActionData->value === ProductMassActionData::VALUE_PRODUCT_HIDE
 				);
 				$this->productHiddenRecalculator->calculateHiddenForAll();
-				$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+				$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 			}
 		}
 	}
