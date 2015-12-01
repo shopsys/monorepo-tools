@@ -13,6 +13,7 @@ class Setting {
 	const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
 	const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
 	const DOMAIN_DATA_CREATED = 'domainDataCreated';
+	const FEED_HASH = 'feedHash';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

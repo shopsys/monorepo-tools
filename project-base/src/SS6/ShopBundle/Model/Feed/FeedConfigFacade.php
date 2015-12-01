@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Feed;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigRepository;
 
@@ -24,18 +26,26 @@ class FeedConfigFacade {
 	private $feedConfigRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 */
+	private $setting;
+
+	/**
 	 * @param string $feedUrlPrefix
 	 * @param string $feedDir
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfigRepository $feedConfigRepository
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		$feedUrlPrefix,
 		$feedDir,
-		FeedConfigRepository $feedConfigRepository
+		FeedConfigRepository $feedConfigRepository,
+		Setting $setting
 	) {
 		$this->feedUrlPrefix = $feedUrlPrefix;
 		$this->feedDir = $feedDir;
 		$this->feedConfigRepository = $feedConfigRepository;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -73,7 +83,8 @@ class FeedConfigFacade {
 	 * @return string
 	 */
 	public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig) {
-		return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig);
+		$feedHash = $this->setting->get(Setting::FEED_HASH, SettingValue::DOMAIN_ID_COMMON);
+		return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig, $feedHash);
 	}
 
 	/**
@@ -82,7 +93,8 @@ class FeedConfigFacade {
 	 * @return string
 	 */
 	public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {
-		return $this->feedDir . '/' . $feedConfig->getFeedFilename($domainConfig);
+		$feedHash = $this->setting->get(Setting::FEED_HASH, SettingValue::DOMAIN_ID_COMMON);
+		return $this->feedDir . '/' . $feedConfig->getFeedFilename($domainConfig, $feedHash);
 	}
 
 }

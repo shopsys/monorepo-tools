@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
+use SS6\ShopBundle\Component\String\HashGenerator;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
@@ -39,6 +40,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $termsAndConditions \SS6\ShopBundle\Model\Article\Article */
 		$termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
 		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
+		$hashGenerator = $this->get(HashGenerator::class);
+		/* @var $hashGenerator \SS6\ShopBundle\Component\String\HashGenerator */
 
 		$orderSentTextCs = '
 			<p>
@@ -87,6 +90,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 1));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 2));
+		$manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
