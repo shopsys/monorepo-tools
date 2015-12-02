@@ -63,14 +63,14 @@ class UserDataFixture {
 
 	public function load() {
 		// Sql logging during mass data import makes memory leak
-		$this->sqlLoggerFacade->temporarilyDisableLogging($this->em);
+		$this->sqlLoggerFacade->temporarilyDisableLogging();
 		foreach ($this->domain->getAll() as $domainConfig) {
 			for ($i = 0; $i <  self::USERS_ON_EACH_DOMAIN; $i++) {
 				$this->createCustomerOnDomain($domainConfig->getId(), $i);
 				$this->em->clear();
 			}
 		}
-		$this->sqlLoggerFacade->reenableLogging($this->em);
+		$this->sqlLoggerFacade->reenableLogging();
 	}
 
 	/**

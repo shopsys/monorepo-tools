@@ -26,6 +26,7 @@ class SqlLoggerFacade {
 	 */
 	public function __construct(EntityManager $em) {
 		$this->em = $em;
+		$this->isLoggerTemporarilyDisabled = false;
 	}
 
 	public function temporarilyDisableLogging() {
@@ -45,7 +46,7 @@ class SqlLoggerFacade {
 		}
 		$this->em->getConnection()->getConfiguration()->setSQLLogger($this->sqlLogger);
 		$this->sqlLogger = null;
-		$this->isLoggerTemporarilyDisabled = true;
+		$this->isLoggerTemporarilyDisabled = false;
 	}
 
 }
