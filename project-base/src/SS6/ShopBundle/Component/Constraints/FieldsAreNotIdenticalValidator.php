@@ -18,7 +18,10 @@ class FieldsAreNotIdenticalValidator extends ConstraintValidator {
 		}
 
 		$propertyAccessor = PropertyAccess::createPropertyAccessor();
-		if ($propertyAccessor->getValue($values, $constraint->field1) === $propertyAccessor->getValue($values, $constraint->field2)) {
+		$value1 = $propertyAccessor->getValue($values, $constraint->field1);
+		$value2 = $propertyAccessor->getValue($values, $constraint->field2);
+
+		if ($value1 === $value2) {
 			$this->context->addViolationAt($constraint->errorPath, $constraint->message);
 			return;
 		}
