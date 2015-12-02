@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Front\Registration;
 
+use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use SS6\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use SS6\ShopBundle\Model\Customer\UserData;
@@ -42,7 +44,7 @@ class RegistrationFormType extends AbstractType {
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
-						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
 					],
 				],
 				'invalid_message' => 'Hesla se neshodují',
@@ -65,6 +67,20 @@ class RegistrationFormType extends AbstractType {
 			'data_class' => UserData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 			TimedFormTypeExtension::OPTION_ENABLED => true,
+			'constraints' => [
+				new FieldsAreNotIdentical([
+					'field1' => 'email',
+					'field2' => 'password',
+					'errorPath' => 'password',
+					'message' => 'Heslo nesmí být stejné jako přihlašovací e-mail.',
+				]),
+				new NotIdenticalToEmailLocalPart([
+					'password' => 'password',
+					'email' => 'email',
+					'errorPath' => 'password',
+					'message' => 'Heslo nesmí být stejné jako část e-mailu před zavináčem.',
+				]),
+			],
 		]);
 	}
 

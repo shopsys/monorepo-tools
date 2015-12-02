@@ -29,6 +29,12 @@
 				<div class="wrap-box">
 					<h2>{{ 'Registrovaní zák.'|trans }}</h2>
 					{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
+					<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
+						data-toggle="tooltip"
+						data-placement="right"
+						title=""
+						data-original-title="{{ 'Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným e-mailem ani s částí e-mailu před zavináčem.'|trans }}">
+					 </i>
 					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
 				</div>
 
