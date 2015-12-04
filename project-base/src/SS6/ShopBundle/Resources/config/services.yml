@@ -69,7 +69,7 @@ services:
       - 'metadata'
 
   ss6.doctrine.cache_driver.sqlite:
-    class: SQLite3
+    class: SS6\ShopBundle\Component\Sqlite\Sqlite3ComplyingUmask
     arguments:
       - %ss6.doctrine.cache_driver.sqlite_filepath%
       # autowiring can not detect optional parameters for class SQLite3
