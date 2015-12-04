@@ -36,6 +36,46 @@ services:
     arguments:
       - %kernel.root_dir%/lock
 
+  ss6.doctrine.cache_driver.query_cache:
+    class: Doctrine\Common\Cache\ChainCache
+    arguments:
+      -
+        - @ss6.doctrine.cache_driver.query_cache.array
+        - @ss6.doctrine.cache_driver.query_cache.sqlite
+
+  ss6.doctrine.cache_driver.query_cache.array:
+    class: Doctrine\Common\Cache\ArrayCache
+
+  ss6.doctrine.cache_driver.query_cache.sqlite:
+    class: Doctrine\Common\Cache\SQLite3Cache
+    arguments:
+      - @ss6.doctrine.cache_driver.sqlite
+      - 'query'
+
+  ss6.doctrine.cache_driver.metadata_cache:
+    class: Doctrine\Common\Cache\ChainCache
+    arguments:
+      -
+        - @ss6.doctrine.cache_driver.metadata_cache.array
+        - @ss6.doctrine.cache_driver.metadata_cache.sqlite
+
+  ss6.doctrine.cache_driver.metadata_cache.array:
+    class: Doctrine\Common\Cache\ArrayCache
+
+  ss6.doctrine.cache_driver.metadata_cache.sqlite:
+    class: Doctrine\Common\Cache\SQLite3Cache
+    arguments:
+      - @ss6.doctrine.cache_driver.sqlite
+      - 'metadata'
+
+  ss6.doctrine.cache_driver.sqlite:
+    class: SS6\ShopBundle\Component\Sqlite\Sqlite3ComplyingUmask
+    arguments:
+      - %ss6.doctrine.cache_driver.sqlite_filepath%
+      # autowiring can not detect optional parameters for class SQLite3
+      - 6 # SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE
+      - ~
+
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
     factory_service: ss6.shop.admin_navigation.breadcrumb_factory
