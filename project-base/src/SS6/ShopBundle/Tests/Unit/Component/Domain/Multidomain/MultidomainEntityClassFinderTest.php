@@ -23,7 +23,7 @@ class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 			->willReturn(['domainId']);
 		$classMetadataMock2
 			->method('getName')
-			->willReturn('NonMultidomainClass1');
+			->willReturn('NonMultidomainClass2');
 
 		$classMetadataMock3 = $this->getMock(ClassMetadata::class, [], [], '', false);
 		$classMetadataMock3
@@ -34,8 +34,8 @@ class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 			->willReturn('MultidomainClass');
 		$allClassesMetadata = [$classMetadataMock1, $classMetadataMock2, $classMetadataMock3];
 
-		$multidomainEntityService = new MultidomainEntityClassFinder();
-		$allMultidomainEntitiesNames = $multidomainEntityService->getAllMultidomainEntitiesNames($allClassesMetadata);
+		$multidomainEntityClassFinder = new MultidomainEntityClassFinder();
+		$allMultidomainEntitiesNames = $multidomainEntityClassFinder->getAllMultidomainEntitiesNames($allClassesMetadata);
 
 		$this->assertSame(['MultidomainClass'], $allMultidomainEntitiesNames);
 	}
