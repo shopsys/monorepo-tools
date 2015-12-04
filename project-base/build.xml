@@ -59,6 +59,7 @@
 	</if>
 
 	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,grunt,warmup"/>
+	<target name="build-new" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
 	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-fixtures-base-settings"/>
