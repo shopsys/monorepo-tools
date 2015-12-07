@@ -8,10 +8,8 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\ArticleDataFactory;
@@ -24,19 +22,9 @@ use Symfony\Component\HttpFoundation\Request;
 class ArticleController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
-	 */
-	private $friendlyUrlFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
-	 */
-	private $administratorGridFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
@@ -77,22 +65,18 @@ class ArticleController extends AdminBaseController {
 		ArticleEditFacade $articleEditFacade,
 		ArticleDataFactory $articleDataFactory,
 		ArticleFormTypeFactory $articleFormTypeFactory,
-		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
-		FriendlyUrlFacade $friendlyUrlFacade,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
 		TermsAndConditionsFacade $termsAndConditionsFacade
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
 		$this->articleFormTypeFactory = $articleFormTypeFactory;
-		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
-		$this->friendlyUrlFacade = $friendlyUrlFacade;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
 	}
