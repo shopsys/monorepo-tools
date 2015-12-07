@@ -70,7 +70,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window__close" title="Zavřít">X</a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close" title="Zavřít (Esc)">X</a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -79,6 +79,13 @@
 				});
 			$window.append($windowButtonClose);
 		}
+
+		$('body').keyup(function (event) {
+			if (event.keyCode === SS6.keyCodes.ESCAPE) {
+				$window.trigger('windowClose');
+				return false;
+			}
+		});
 
 		var $windowActions = $('<div class="window__actions"></div>');
 		if (options.buttonContinue) {
