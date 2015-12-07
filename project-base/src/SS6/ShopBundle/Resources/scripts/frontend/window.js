@@ -148,6 +148,10 @@
 
 		function show() {
 			showOverlay();
+			getOverlay().click(function () {
+				$window.trigger('windowClose');
+				return false;
+			});
 			$window.hide().appendTo(getMainContainer());
 			if (options.wide) {
 				moveToCenter();
