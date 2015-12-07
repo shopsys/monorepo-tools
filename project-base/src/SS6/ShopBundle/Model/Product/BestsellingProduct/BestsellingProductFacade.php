@@ -60,7 +60,6 @@ class BestsellingProductFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $bestsellingProducts
 	 */
 	public function edit(Category $category, $domainId, array $bestsellingProducts) {
-		$this->em->beginTransaction();
 		$toDelete = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId($category, $domainId);
 		foreach ($toDelete as $item) {
 			$this->em->remove($item);
@@ -74,7 +73,6 @@ class BestsellingProductFacade {
 			}
 		}
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	public function getBestsellingProductsIndexedByPosition($categoryId, $domainId) {

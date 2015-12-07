@@ -128,11 +128,8 @@ class CurrencyFacade {
 		if (in_array($currency->getId(), $this->getNotAllowedToDeleteCurrencyIds())) {
 			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException();
 		}
-		$this->em->beginTransaction();
-
 		$this->em->remove($currency);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**

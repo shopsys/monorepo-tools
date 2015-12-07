@@ -117,21 +117,14 @@ class ArticleEditFacade {
 		$article = $this->articleRepository->getById($articleId);
 		$article->edit($articleData);
 
-		$this->em->beginTransaction();
 		$this->friendlyUrlFacade->saveUrlListFormData('front_article_detail', $article->getId(), $articleData->urls);
-		try {
-			$this->friendlyUrlFacade->createFriendlyUrlForDomain(
-				'front_article_detail',
-				$article->getId(),
-				$article->getName(),
-				$article->getDomainId()
-			);
-			$this->em->flush();
-			$this->em->commit();
-		} catch (\Exception $exception) {
-			$this->em->rollback();
-			throw $exception;
-		}
+		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+			'front_article_detail',
+			$article->getId(),
+			$article->getName(),
+			$article->getDomainId()
+		);
+		$this->em->flush();
 
 		return $article;
 	}

@@ -86,12 +86,10 @@ class PaymentEditFacade {
 	public function create(PaymentEditData $paymentEditData) {
 		$payment = new Payment($paymentEditData->paymentData);
 		$this->em->persist($payment);
-		$this->em->beginTransaction();
 		$this->em->flush();
 		$this->updatePaymentPrices($payment, $paymentEditData->prices);
 		$this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
 		$this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
-		$this->em->commit();
 
 		return $payment;
 	}
@@ -102,12 +100,10 @@ class PaymentEditFacade {
 	 */
 	public function edit(Payment $payment, PaymentEditData $paymentEditData) {
 		$payment->edit($paymentEditData->paymentData);
-		$this->em->beginTransaction();
 		$this->updatePaymentPrices($payment, $paymentEditData->prices);
 		$this->deletePaymentDomainsByPayment($payment);
 		$this->createPaymentDomains($payment, $paymentEditData->paymentData->domains);
 		$this->setAddionalDataAndFlush($payment, $paymentEditData->paymentData);
-		$this->em->commit();
 	}
 
 	/**
@@ -140,10 +136,8 @@ class PaymentEditFacade {
 	public function deleteById($id) {
 		$payment = $this->getById($id);
 		$payment->markAsDeleted();
-		$this->em->beginTransaction();
 		$this->deletePaymentDomainsByPayment($payment);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**

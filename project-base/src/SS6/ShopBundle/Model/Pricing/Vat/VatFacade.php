@@ -142,8 +142,6 @@ class VatFacade {
 			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatWithReplacedDeleteException();
 		}
 
-		$this->em->beginTransaction();
-
 		if ($newVat !== null) {
 			$newDefaultVat = $this->vatService->getNewDefaultVat(
 				$this->getDefaultVat(),
@@ -160,7 +158,6 @@ class VatFacade {
 		}
 
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**

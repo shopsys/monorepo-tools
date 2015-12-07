@@ -196,29 +196,22 @@ class ProductEditFacade {
 
 		$this->productService->edit($product, $productEditData->productData);
 
-		$this->em->beginTransaction();
-		try {
-			$this->saveParameters($product, $productEditData->parameters);
-			$this->refreshProductDomains($product, $productEditData);
-			if (!$product->isMainVariant()) {
-				$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
-			} else {
-				$this->productVariantService->refreshProductVariants($product, $productEditData->variants);
-			}
-			$this->refreshProductAccessories($product, $productEditData->accessories);
-			$this->em->flush();
-			$this->productHiddenRecalculator->calculateHiddenForProduct($product);
-			$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
-			$this->imageFacade->saveImagePositions($productEditData->imagePositions);
-			$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
-			$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
-			$this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
-			$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
-			$this->em->commit();
-		} catch (\Exception $exception) {
-			$this->em->rollback();
-			throw $exception;
+		$this->saveParameters($product, $productEditData->parameters);
+		$this->refreshProductDomains($product, $productEditData);
+		if (!$product->isMainVariant()) {
+			$this->refreshProductManualInputPrices($product, $productEditData->manualInputPrices);
+		} else {
+			$this->productVariantService->refreshProductVariants($product, $productEditData->variants);
 		}
+		$this->refreshProductAccessories($product, $productEditData->accessories);
+		$this->em->flush();
+		$this->productHiddenRecalculator->calculateHiddenForProduct($product);
+		$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($product);
+		$this->imageFacade->saveImagePositions($productEditData->imagePositions);
+		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
+		$this->imageFacade->deleteImages($product, $productEditData->imagesToDelete);
+		$this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
+		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();

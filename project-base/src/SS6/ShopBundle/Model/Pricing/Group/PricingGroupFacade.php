@@ -137,8 +137,6 @@ class PricingGroupFacade {
 			$newPricingGroup = null;
 		}
 
-		$this->em->beginTransaction();
-
 		if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefault($oldPricingGroup)) {
 			$this->pricingGroupSettingFacade->setDefaultPricingGroup($newPricingGroup);
 		}
@@ -146,7 +144,6 @@ class PricingGroupFacade {
 
 		$this->em->remove($oldPricingGroup);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**

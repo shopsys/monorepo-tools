@@ -64,11 +64,9 @@ class SliderItemFacade {
 	public function create(SliderItemData $sliderItemData) {
 		$sliderItem = new SliderItem($sliderItemData, $this->selectedDomain->getId());
 
-		$this->em->beginTransaction();
 		$this->em->persist($sliderItem);
 		$this->em->flush();
 		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->image, null);
-		$this->em->commit();
 
 		return $sliderItem;
 	}
@@ -82,10 +80,8 @@ class SliderItemFacade {
 		$sliderItem = $this->sliderItemRepository->getById($sliderItemId);
 		$sliderItem->edit($sliderItemData);
 
-		$this->em->beginTransaction();
 		$this->em->flush();
 		$this->imageFacade->uploadImage($sliderItem, $sliderItemData->image, null);
-		$this->em->commit();
 
 		return $sliderItem;
 	}

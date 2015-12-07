@@ -83,13 +83,11 @@ class TransportEditFacade {
 	public function create(TransportEditData $transportEditData) {
 		$transport = new Transport($transportEditData->transportData);
 		$this->em->persist($transport);
-		$this->em->beginTransaction();
 		$this->em->flush();
 		$this->updateTransportPrices($transport, $transportEditData->prices);
 		$this->createTransportDomains($transport, $transportEditData->transportData->domains);
 		$this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
 		$this->em->flush();
-		$this->em->commit();
 
 		return $transport;
 	}
@@ -101,13 +99,11 @@ class TransportEditFacade {
 	public function edit(Transport $transport, TransportEditData $transportEditData) {
 		$transport->edit($transportEditData->transportData);
 
-		$this->em->beginTransaction();
 		$this->updateTransportPrices($transport, $transportEditData->prices);
 		$this->deleteTransportDomainsByTransport($transport);
 		$this->createTransportDomains($transport, $transportEditData->transportData->domains);
 		$this->imageFacade->uploadImage($transport, $transportEditData->transportData->image, null);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**
@@ -129,10 +125,8 @@ class TransportEditFacade {
 			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
 			$payment->getTransports()->removeElement($transport);
 		}
-		$this->em->beginTransaction();
 		$this->deleteTransportDomainsByTransport($transport);
 		$this->em->flush();
-		$this->em->commit();
 	}
 
 	/**
