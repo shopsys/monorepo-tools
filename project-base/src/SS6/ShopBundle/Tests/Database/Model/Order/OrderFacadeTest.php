@@ -132,8 +132,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderItemData2->vatPercent = 0;
 		$orderItemData2->quantity = 1;
 
-		$orderItemsData['new_1'] = $orderItemData1;
-		$orderItemsData['new_2'] = $orderItemData2;
+		$orderItemsData[OrderData::NEW_ITEM_PREFIX . '1'] = $orderItemData1;
+		$orderItemsData[OrderData::NEW_ITEM_PREFIX . '2'] = $orderItemData2;
 
 		$orderData->itemsWithoutTransportAndPayment = $orderItemsData;
 		$orderFacade->edit($order->getId(), $orderData);

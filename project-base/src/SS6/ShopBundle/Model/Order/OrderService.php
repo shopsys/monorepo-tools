@@ -83,23 +83,21 @@ class OrderService {
 		}
 
 		$orderItemsToCreate = [];
-		foreach ($orderItemsWithoutTransportAndPaymentData as $index => $orderItemData) {
-			if (strpos($index, 'new_') === 0) {
-				$orderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderItemData);
-				$orderItem = new OrderProduct(
-					$order,
-					$orderItemData->name,
-					new Price(
-						$orderItemData->priceWithoutVat,
-						$orderItemData->priceWithVat
-					),
-					$orderItemData->vatPercent,
-					$orderItemData->quantity,
-					$orderItemData->unitName,
-					$orderItemData->catnum
-				);
-				$orderItemsToCreate[] = $orderItem;
-			}
+		foreach ($orderData->getNewItemsWithoutTransportAndPayment() as $newOrderItemData) {
+			$newOrderItemData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($newOrderItemData);
+			$newOrderItem = new OrderProduct(
+				$order,
+				$newOrderItemData->name,
+				new Price(
+					$newOrderItemData->priceWithoutVat,
+					$newOrderItemData->priceWithVat
+				),
+				$newOrderItemData->vatPercent,
+				$newOrderItemData->quantity,
+				$newOrderItemData->unitName,
+				$newOrderItemData->catnum
+			);
+			$orderItemsToCreate[] = $newOrderItem;
 		}
 
 		$this->calculateTotalPrice($order);

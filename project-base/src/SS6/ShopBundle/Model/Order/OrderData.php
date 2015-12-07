@@ -12,6 +12,8 @@ use SS6\ShopBundle\Model\Order\Order;
  */
 class OrderData {
 
+	const NEW_ITEM_PREFIX = 'new_';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Transport\Transport
 	 */
@@ -198,6 +200,20 @@ class OrderData {
 		$this->orderTransport->setFromEntity($order->getOrderTransport());
 		$this->orderPayment = new OrderPaymentData();
 		$this->orderPayment->setFromEntity($order->getOrderPayment());
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItemData[]
+	 */
+	public function getNewItemsWithoutTransportAndPayment() {
+		$newItemsWithoutTransportAndPayment = [];
+		foreach ($this->itemsWithoutTransportAndPayment as $index => $item) {
+			if (strpos($index, self::NEW_ITEM_PREFIX) === 0) {
+				$newItemsWithoutTransportAndPayment[] = $item;
+			}
+		}
+
+		return $newItemsWithoutTransportAndPayment;
 	}
 
 }
