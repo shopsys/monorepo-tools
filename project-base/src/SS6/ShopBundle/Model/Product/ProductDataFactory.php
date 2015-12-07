@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductDataFactory {
 
@@ -18,12 +19,19 @@ class ProductDataFactory {
 	 */
 	private $productInputPriceFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitFacade
+	 */
+	private $unitFacade;
+
 	public function __construct(
 		VatFacade $vatFacade,
-		ProductInputPriceFacade $productInputPriceFacade
+		ProductInputPriceFacade $productInputPriceFacade,
+		UnitFacade $unitFacade
 	) {
 		$this->vatFacade = $vatFacade;
 		$this->productInputPriceFacade = $productInputPriceFacade;
+		$this->unitFacade = $unitFacade;
 	}
 
 	/**
@@ -33,6 +41,7 @@ class ProductDataFactory {
 		$productData = new ProductData();
 
 		$productData->vat = $this->vatFacade->getDefaultVat();
+		$productData->unit = $this->unitFacade->getDefaultUnit();
 
 		return $productData;
 	}

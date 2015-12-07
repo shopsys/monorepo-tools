@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use SS6\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
 use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 use SS6\ShopBundle\Model\Product\Unit\UnitInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,16 +59,28 @@ class UnitController extends AdminBaseController {
 	public function deleteConfirmAction($id) {
 		try {
 			$unit = $this->unitFacade->getById($id);
+			$isUnitDefault = $this->unitFacade->isUnitDefault($unit);
 
-			if ($this->unitFacade->isUnitUsed($unit)) {
-				$message = t(
-					'Pro odstranění jednotky "%name% musíte zvolit, která se má všude, '
-					. 'kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?',
-					['%name%' => $unit->getName()]
-				);
-				$unitNamesById = $this->unitFacade->getUnitNamesByIdExceptId($id);
+			if ($this->unitFacade->isUnitUsed($unit) || $isUnitDefault) {
+				if ($isUnitDefault) {
+					$message = t(
+						'Jednotka "%name%" je nastavena jako výchozí. '
+						. 'Pro její odstranění musíte zvolit novou výchozí jednotku.' . "\n\n"
+						. 'Jakou jednotku místo ní chcete nastavit?',
+						['%name%' => $unit->getName()]
+					);
+				} else {
+					$message = t(
+						'Pro odstranění jednotky "%name% musíte zvolit, která se má všude, '
+						. 'kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?',
+						['%name%' => $unit->getName()]
+					);
+				}
+					$unitNamesById = $this->unitFacade->getUnitNamesByIdExceptId($id);
 
-				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_unit_delete', $id, $unitNamesById);
+					return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+						$message, 'admin_unit_delete', $id, $unitNamesById
+					);
 			} else {
 				$message = t(
 					'Opravdu si přejete trvale odstranit jednotku "%name%"? Nikde není použita.',
@@ -122,4 +135,35 @@ class UnitController extends AdminBaseController {
 		return $this->redirectToRoute('admin_unit_list');
 	}
 
+	/**
+	 * @Route("/product/unit/setting/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function settingAction(Request $request) {
+		$units = $this->unitFacade->getAll();
+		$form = $this->createForm(new UnitSettingFormType($units));
+
+		$unitSettingsFormData = [];
+		$unitSettingsFormData['defaultUnit'] = $this->unitFacade->getDefaultUnit();
+
+		$form->setData($unitSettingsFormData);
+
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$unitSettingsFormData = $form->getData();
+			$this->transactional(
+				function () use ($unitSettingsFormData) {
+					$this->unitFacade->setDefaultUnit($unitSettingsFormData['defaultUnit']);
+				}
+			);
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí jednotky bylo upraveno'));
+
+			return $this->redirectToRoute('admin_unit_list');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Unit/setting.html.twig', [
+			'form' => $form->createView(),
+		]);
+	}
 }

@@ -146,7 +146,6 @@ class ProductFormType extends AbstractType {
 			->add('unit', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
-				'placeholder' => t('-- Vyberte jednotku --'),
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Prosím vyberte jednotku',

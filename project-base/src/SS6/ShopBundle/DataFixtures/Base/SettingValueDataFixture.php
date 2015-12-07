@@ -42,6 +42,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
 		$hashGenerator = $this->get(HashGenerator::class);
 		/* @var $hashGenerator \SS6\ShopBundle\Component\String\HashGenerator */
+		$defaultUnit = $this->getReference(UnitDataFixture::PCS);
+		/* @var $defaultUnit \SS6\ShopBundle\Model\Product\Unit\Unit */
 
 		$orderSentTextCs = '
 			<p>
@@ -91,6 +93,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 1));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 2));
 		$manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));
+		$manager->persist(new SettingValue(Setting::DEFAULT_UNIT, $defaultUnit->getId(), SettingValue::DOMAIN_ID_COMMON));
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();

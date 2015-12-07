@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\Unit\Unit;
 use SS6\ShopBundle\Model\Product\Unit\UnitData;
@@ -32,21 +34,29 @@ class UnitFacade {
 	private $productEditFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 */
+	private $setting;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitService $unitService
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditFacade $productEditFacade
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		EntityManager $em,
 		UnitRepository $unitRepository,
 		UnitService $unitService,
-		ProductEditFacade $productEditFacade
+		ProductEditFacade $productEditFacade,
+		Setting $setting
 	) {
 		$this->em = $em;
 		$this->unitRepository = $unitRepository;
 		$this->unitService = $unitService;
 		$this->productEditFacade = $productEditFacade;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -92,6 +102,9 @@ class UnitFacade {
 		if ($newUnitId !== null) {
 			$newUnit = $this->unitRepository->getById($newUnitId);
 			$this->productEditFacade->replaceOldUnitWithNewUnit($oldUnit, $newUnit);
+			if ($this->isUnitDefault($oldUnit)) {
+				$this->setDefaultUnit($newUnit);
+			}
 		}
 
 		$this->em->remove($oldUnit);
@@ -127,4 +140,34 @@ class UnitFacade {
 		return $namesById;
 	}
 
+	/**
+	 * @return int
+	 */
+	private function getDefaultUnitId() {
+		return $this->setting->get(Setting::DEFAULT_UNIT, SettingValue::DOMAIN_ID_COMMON);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 */
+	public function getDefaultUnit() {
+		$defaultUnitId = $this->getDefaultUnitId();
+
+		return $this->unitRepository->getById($defaultUnitId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 */
+	public function setDefaultUnit(Unit $unit) {
+		$this->setting->set(Setting::DEFAULT_UNIT, $unit->getId(), SettingValue::DOMAIN_ID_COMMON);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @return bool
+	 */
+	public function isUnitDefault(Unit $unit) {
+		return $this->getDefaultUnit() === $unit;
+	}
 }

@@ -14,6 +14,7 @@ class Setting {
 	const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
 	const DOMAIN_DATA_CREATED = 'domainDataCreated';
 	const FEED_HASH = 'feedHash';
+	const DEFAULT_UNIT = 'defaultUnitId';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

@@ -4,5 +4,7 @@
 {% block h1 %}{{ 'Přehled jednotek'|trans }}{% endblock %}
 
 {% block main_content %}
+	{{ render(controller('SS6ShopBundle:Admin/Unit:setting')) }}
+
 	{{ gridView.render() }}
 {% endblock %}
