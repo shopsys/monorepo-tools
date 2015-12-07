@@ -17,6 +17,25 @@
 		return $mainContainer;
 	};
 
+	var getOverlay = function() {
+		var $overlay = $('#js-overlay');
+		if ($overlay.size() === 0) {
+			$overlay = $('<div id="js-overlay"></div>');
+		}
+		return $overlay;
+	};
+
+	var showOverlay = function () {
+		var $overlay = getOverlay();
+		$('body').append($overlay);
+	};
+
+	var hideOverlay = function () {
+		if ($('#js-overlay').size() !== 0) {
+			$('#js-overlay').remove();
+		}
+	};
+
 	/**
 	 * content (string)
 	 * buttonClose (bool)
@@ -60,6 +79,7 @@
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
+			hideOverlay();
 			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
 		});
 
@@ -127,6 +147,7 @@
 		return $window;
 
 		function show() {
+			showOverlay();
 			$window.hide().appendTo(getMainContainer());
 			if (options.wide) {
 				moveToCenter();
