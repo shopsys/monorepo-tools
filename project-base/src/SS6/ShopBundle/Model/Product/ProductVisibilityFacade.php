@@ -15,6 +15,11 @@ class ProductVisibilityFacade {
 	/**
 	 * @var bool
 	 */
+	private $recalcVisibilityForMarked = false;
+
+	/**
+	 * @var bool
+	 */
 	private $recalcVisibility = false;
 
 	/**
@@ -22,6 +27,10 @@ class ProductVisibilityFacade {
 	 */
 	public function __construct(ProductVisibilityRepository $productVisibilityRepository) {
 		$this->productVisibilityRepository = $productVisibilityRepository;
+	}
+
+	public function refreshProductsVisibilityForMarkedDelayed() {
+		$this->recalcVisibilityForMarked = true;
 	}
 
 	public function refreshProductsVisibilityDelayed() {
@@ -44,8 +53,12 @@ class ProductVisibilityFacade {
 			return;
 		}
 
-		if ($this->recalcVisibility) {
+		if ($this->recalcVisibilityForMarked) {
 			$this->refreshProductsVisibilityForMarked();
+		}
+
+		if ($this->recalcVisibility) {
+			$this->refreshProductsVisibility();
 		}
 	}
 }

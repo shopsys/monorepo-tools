@@ -17,7 +17,7 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 			->with($this->equalTo(true));
 
 		$productVisibilityFacade = new ProductVisibilityFacade($productVisibilityRepositoryMock);
-		$productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 
 		$eventMock = $this->getMockBuilder(FilterResponseEvent::class)
 			->disableOriginalConstructor()

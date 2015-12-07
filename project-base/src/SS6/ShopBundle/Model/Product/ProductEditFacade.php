@@ -182,7 +182,7 @@ class ProductEditFacade {
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
-		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 	}
 
@@ -221,7 +221,7 @@ class ProductEditFacade {
 		}
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
-		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
+		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
 
 		return $product;
