@@ -159,6 +159,11 @@ services:
       arguments:
         - %ss6.css_version_filepath%
 
+  ss6.shop.component.doctrine.database_schema_facade:
+      class: SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
+      arguments:
+        - %ss6.default_db_schema_filepath%
+
   ss6.shop.component.domain:
     class: SS6\ShopBundle\Component\Domain\Domain
     factory_service: ss6.shop.component.domain.domain_factory
