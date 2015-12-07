@@ -44,7 +44,7 @@
 			$.magnificPopup.open({
 				items: {src: $pickerButton.data('product-picker-url').replace('__instance_id__', instanceId)},
 				type: 'iframe',
-				closeOnBgClick: false
+				closeOnBgClick: true
 			});
 
 			event.preventDefault();
