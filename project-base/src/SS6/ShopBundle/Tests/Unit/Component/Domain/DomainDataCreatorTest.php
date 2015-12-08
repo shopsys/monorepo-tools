@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainDataCreator;
+use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use SS6\ShopBundle\Component\Setting\Setting;
 
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
@@ -27,7 +28,9 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
 
-		$domainDataCreator = new DomainDataCreator($domain, $settingMock, $emMock);
+		$multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
+
+		$domainDataCreator = new DomainDataCreator($domain, $settingMock, $emMock, $multidomainEntityDataCreatorMock);
 		$newDomainsDataCreated = $domainDataCreator->createNewDomainsData();
 
 		$this->assertEquals(0, $newDomainsDataCreated);
@@ -59,7 +62,12 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
 
-		$domainDataCreator = new DomainDataCreator($domain, $settingMock, $emMock);
+		$multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
+		$multidomainEntityDataCreatorMock
+			->method('copyAllMultidomainDataForNewDomain')
+			->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
+
+		$domainDataCreator = new DomainDataCreator($domain, $settingMock, $emMock, $multidomainEntityDataCreatorMock);
 		$newDomainsDataCreated = $domainDataCreator->createNewDomainsData();
 
 		$this->assertEquals(1, $newDomainsDataCreated);

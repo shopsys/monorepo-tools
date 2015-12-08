@@ -1,27 +1,36 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace SS6\ShopBundle\Component\Domain;
 
-use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Component\Domain\Domain;
 
-class DomainFunctionsDataFixture extends AbstractNativeFixture {
+class DomainDbFunctionsFacade {
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
-	public function load(ObjectManager $manager) {
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct(EntityManager $em, Domain $domain) {
+		$this->em = $em;
+		$this->domain = $domain;
+	}
+
+	public function createDomainDbFunctions() {
 		$this->createDomainIdsByLocaleFunction();
 		$this->createLocaleByDomainIdFunction();
 	}
 
 	private function createDomainIdsByLocaleFunction() {
-		$domain = $this->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
-
 		$domainsIdsByLocale = [];
-		foreach ($domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAll() as $domainConfig) {
 			$domainsIdsByLocale[$domainConfig->getLocale()][] = $domainConfig->getId();
 		}
 
@@ -31,7 +40,7 @@ class DomainFunctionsDataFixture extends AbstractNativeFixture {
 				'WHEN locale = \'' . $locale . '\' THEN RETURN QUERY VALUES (' . implode(', ', $domainIds) . ');';
 		}
 
-		$this->executeNativeQuery('
+		$query = $this->em->createNativeQuery('
 			CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS TABLE(domain_id integer)  AS $$
 			BEGIN
 				CASE
@@ -40,21 +49,22 @@ class DomainFunctionsDataFixture extends AbstractNativeFixture {
 				END CASE;
 			END
 			$$ LANGUAGE plpgsql IMMUTABLE;
-		');
+			',
+			new ResultSetMapping()
+		);
+
+		return $query->execute();
 	}
 
 	private function createLocaleByDomainIdFunction() {
-		$domain = $this->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
-
 		$localeByDomainIdSqlClauses = [];
-		foreach ($domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAll() as $domainConfig) {
 			$localeByDomainIdSqlClauses[] =
 				'WHEN domain_id = ' . $domainConfig->getId()
 				. ' THEN RETURN \'' . $domainConfig->getLocale() . '\';';
 		}
 
-		$this->executeNativeQuery('
+		$query = $this->em->createNativeQuery('
 			CREATE OR REPLACE FUNCTION get_domain_locale(domain_id integer) RETURNS text AS $$
 			BEGIN
 				CASE
@@ -63,7 +73,11 @@ class DomainFunctionsDataFixture extends AbstractNativeFixture {
 				END CASE;
 			END
 			$$ LANGUAGE plpgsql IMMUTABLE;
-		');
+			',
+			new ResultSetMapping()
+		);
+
+		return $query->execute();
 	}
 
 }

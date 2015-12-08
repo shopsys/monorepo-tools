@@ -8,7 +8,7 @@ use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 
 class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetAllMultidomainEntitiesNames() {
+	public function testGetMultidomainEntitiesNames() {
 		$classMetadataMock1 = $this->getMock(ClassMetadata::class, [], [], '', false);
 		$classMetadataMock1
 			->method('getIdentifierFieldNames')
@@ -35,9 +35,9 @@ class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 		$allClassesMetadata = [$classMetadataMock1, $classMetadataMock2, $classMetadataMock3];
 
 		$multidomainEntityClassFinder = new MultidomainEntityClassFinder();
-		$allMultidomainEntitiesNames = $multidomainEntityClassFinder->getAllMultidomainEntitiesNames($allClassesMetadata);
+		$multidomainEntitiesNames = $multidomainEntityClassFinder->getMultidomainEntitiesNames($allClassesMetadata, []);
 
-		$this->assertSame(['MultidomainClass'], $allMultidomainEntitiesNames);
+		$this->assertSame(['MultidomainClass'], $multidomainEntitiesNames);
 	}
 
 }
