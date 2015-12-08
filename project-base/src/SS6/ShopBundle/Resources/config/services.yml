@@ -70,11 +70,13 @@ services:
 
   ss6.doctrine.cache_driver.sqlite:
     class: SS6\ShopBundle\Component\Sqlite\Sqlite3ComplyingUmask
+    factory_service: ss6.doctrine.cache_driver.sqlite.factory
+    factory_method: create
     arguments:
       - %ss6.doctrine.cache_driver.sqlite_filepath%
-      # autowiring can not detect optional parameters for class SQLite3
-      - 6 # SQLITE3_OPEN_READWRITE | SQLITE3_OPEN_CREATE
-      - ~
+
+  ss6.doctrine.cache_driver.sqlite.factory:
+    class: SS6\ShopBundle\Component\Sqlite\Sqlite3Factory
 
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
