@@ -318,7 +318,10 @@
 {% endblock %}
 
 {% block grid_value_cell_type_boolean %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}" ></span>
+	<span
+		class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
+		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"
+	></span>
 {% endblock %}
 
 {% block grid_value_cell_type_DateTime %}

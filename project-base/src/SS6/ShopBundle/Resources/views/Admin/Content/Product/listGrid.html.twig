@@ -23,8 +23,21 @@
 	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>
 {% endblock %}
 
-{% block grid_value_cell_id_visible %}
-	<span class="grid_boolean_{{ value ? 'true' : 'false' }} in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
+{% block grid_value_cell_id_visibility %}
+	<span class="js-product-visibility relative" data-visibility-url="{{ url('admin_product_visibility', {productId: row.p.id}) }}">
+		<span class="js-product-visibility-icon in-icon svg
+			{% if isVisibleForDefaultPricingGroupOnEachDomain(row.product) %}
+				svg-visible in-icon--visible
+			{% elseif value and not isVisibleForDefaultPricingGroupOnEachDomain(row.product) %}
+				svg-visible in-icon--partially-visible
+			{% else %}
+				svg-invisible in-icon--invisible
+			{% endif %}"
+		></span>
+		<span class="js-product-visibility-box">
+			<span class="product-visibility js-product-visibility-box-window display-none"></span>
+		</span>
+	</span>
 	{% if row.p.calculatedSellingDenied %}
 		<span class="in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
 	{% endif %}

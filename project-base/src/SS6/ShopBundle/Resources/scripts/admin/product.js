@@ -24,7 +24,6 @@
 			window.close();
 			return false;
 		});
-
 	};
 
 	SS6.product.toggleIsUsingStock = function (isUsingStock) {
