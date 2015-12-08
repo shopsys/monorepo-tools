@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
@@ -286,11 +287,27 @@ class ProductDataFixture {
 	 * @param int $domainId
 	 */
 	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
-		$allCategoryIds = $this->categoryRepository->getAllIds();
+		$performanceCategoryIds = $this->getPerformanceCategoryIds();
+		$randomPerformanceCategoryIds = (array)array_rand($performanceCategoryIds, rand(1, 4));
+		$randomPerformanceCategories = $this->categoryRepository->getCategoriesByIds($randomPerformanceCategoryIds);
 
-		$randomCategoryIds = (array)array_rand($allCategoryIds, rand(1, 4));
-		$randomCategories = $this->categoryRepository->getCategoriesByIds($randomCategoryIds);
-		$productEditData->productData->categoriesByDomainId[$domainId] = $randomCategories;
+		foreach ($randomPerformanceCategories as $performanceCategory) {
+			if (!in_array($performanceCategory, $productEditData->productData->categoriesByDomainId[$domainId], true)) {
+				$productEditData->productData->categoriesByDomainId[$domainId][] = $performanceCategory;
+			}
+		}
 	}
 
+	/**
+	 * @return int[]
+	 */
+	private function getPerformanceCategoryIds() {
+		$allCategoryIds = $this->categoryRepository->getAllIds();
+		$firstPerformanceCategory = $this->persistentReferenceService->getReference(
+			CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
+		);
+		$firstPerformanceCategoryKey = array_search($firstPerformanceCategory->getId(), $allCategoryIds, true);
+
+		return array_slice($allCategoryIds, $firstPerformanceCategoryKey);
+	}
 }
