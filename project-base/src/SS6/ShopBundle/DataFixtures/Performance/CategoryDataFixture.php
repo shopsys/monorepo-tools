@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
 
 class CategoryDataFixture {
 
@@ -43,10 +44,16 @@ class CategoryDataFixture {
 	 */
 	private $persistentReferenceService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository
+	 */
+	private $categoryVisibilityRepository;
+
 	public function __construct(
 		CategoryFacade $categoryFacade,
 		SqlLoggerFacade $sqlLoggerFacade,
-		PersistentReferenceService $persistentReferenceService
+		PersistentReferenceService $persistentReferenceService,
+		CategoryVisibilityRepository $categoryVisibilityRepository
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
@@ -54,12 +61,14 @@ class CategoryDataFixture {
 		$this->categoriesCountsByLevel = [2, 4, 6];
 		$this->categoriesCreated = 0;
 		$this->persistentReferenceService = $persistentReferenceService;
+		$this->categoryVisibilityRepository = $categoryVisibilityRepository;
 	}
 
 	public function load() {
 		$rootCategory = $this->categoryFacade->getRootCategory();
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 		$this->recursivelyCreateCategoryTree($rootCategory);
+		$this->categoryVisibilityRepository->refreshCategoriesVisibility();
 		$this->sqlLoggerFacade->reenableLogging();
 	}
 
