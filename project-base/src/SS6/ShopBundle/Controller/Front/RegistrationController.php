@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
-use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
@@ -18,11 +17,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class RegistrationController extends FrontBaseController {
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
@@ -48,14 +42,12 @@ class RegistrationController extends FrontBaseController {
 		Domain $domain,
 		UserDataFactory $userDataFactory,
 		CustomerEditFacade $customerEditFacade,
-		RegistrationFacade $registrationFacade,
-		EntityManager $em
+		RegistrationFacade $registrationFacade
 	) {
 		$this->domain = $domain;
 		$this->userDataFactory = $userDataFactory;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->registrationFacade = $registrationFacade;
-		$this->em = $em;
 	}
 
 	public function registerAction(Request $request) {
@@ -70,7 +62,11 @@ class RegistrationController extends FrontBaseController {
 			if ($form->isValid()) {
 				$userData = $form->getData();
 				$userData->domainId = $this->domain->getId();
-				$user = $this->customerEditFacade->register($userData);
+				$user = $this->transactional(
+					function () use ($userData) {
+						return $this->customerEditFacade->register($userData);
+					}
+				);
 
 				$this->login($user);
 
@@ -113,9 +109,11 @@ class RegistrationController extends FrontBaseController {
 			$email = $formData['email'];
 
 			try {
-				$this->em->beginTransaction();
-				$this->registrationFacade->resetPassword($email, $this->domain->getId());
-				$this->em->commit();
+				$this->transactional(
+					function () use ($email) {
+						$this->registrationFacade->resetPassword($email, $this->domain->getId());
+					}
+				);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.'),
@@ -133,9 +131,6 @@ class RegistrationController extends FrontBaseController {
 						'registrationLink' => $this->generateUrl('front_registration_register'),
 					]
 				);
-			} catch (\Exception $ex) {
-				$this->em->rollback();
-				throw $ex;
 			}
 		}
 
@@ -163,12 +158,13 @@ class RegistrationController extends FrontBaseController {
 			$newPassword = $formData['newPassword'];
 
 			try {
-				$this->em->beginTransaction();
-				$user = $this->registrationFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
+				$user = $this->transactional(
+					function () use ($email, $hash, $newPassword) {
+						return $this->registrationFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
+					}
+				);
 				$this->login($user);
-				$this->em->commit();
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
-				$this->em->rollback();
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
 						. ' <a href="{{ registrationLink }}">Zaregistrovat</a>'),
@@ -178,11 +174,7 @@ class RegistrationController extends FrontBaseController {
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
-				$this->em->rollback();
 				$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
-			} catch (\Exception $ex) {
-				$this->em->rollback();
-				throw $ex;
 			}
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Heslo bylo úspěšně změněno'));
