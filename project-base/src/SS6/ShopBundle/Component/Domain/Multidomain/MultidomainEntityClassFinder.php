@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Domain\Multidomain;
 
+use Doctrine\ORM\Mapping\ClassMetadata;
+
 class MultidomainEntityClassFinder {
 
 	/**
@@ -14,13 +16,22 @@ class MultidomainEntityClassFinder {
 		foreach ($allClassesMetadata as $classMetadata) {
 			$entityName = $classMetadata->getName();
 			$isEntityIgnored = in_array($entityName, $ignoredEntitiesNames, true);
-			$identifierFieldNames = $classMetadata->getIdentifierFieldNames();
-			if (!$isEntityIgnored && count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames)) {
+			if (!$isEntityIgnored && $this->isMultidomainEntity($classMetadata)) {
 				$multidomainEntitiesNames[] = $classMetadata->getName();
 			}
 		}
 
 		return $multidomainEntitiesNames;
+	}
+
+	/**
+	 * @param \Doctrine\ORM\Mapping\ClassMetadata $classMetadata
+	 * @return bool
+	 */
+	private function isMultidomainEntity(ClassMetadata $classMetadata) {
+		$identifierFieldNames = $classMetadata->getIdentifierFieldNames();
+
+		return count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames);
 	}
 
 }
