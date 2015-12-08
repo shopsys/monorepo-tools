@@ -14,12 +14,19 @@
 		var showInWindowAfterLoad = false;
 
 		this.init = function () {
+			var keepVisible = false;
 			$visibilityIcon
 				.mouseenter(function () {
 					$visibilityBox.show();
 				})
 				.mouseleave(function () {
-					$visibilityBox.hide();
+					keepVisible = false;
+					setTimeout(function () {
+						if (!keepVisible) {
+							$visibilityBox.hide();
+						}
+					}, 700);
+
 				})
 				.click(function () {
 					if (isLoaded) {
@@ -40,6 +47,13 @@
 						}
 					},
 					out: function () {}
+				});
+			$visibilityBox
+				.mouseenter(function () {
+					keepVisible = true;
+				})
+				.mouseleave(function() {
+					$visibilityBox.hide();
 				});
 		};
 
