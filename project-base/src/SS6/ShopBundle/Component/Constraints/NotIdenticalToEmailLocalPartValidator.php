@@ -6,22 +6,22 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class FieldsAreNotIdenticalValidator extends ConstraintValidator {
+class NotIdenticalToEmailLocalPartValidator extends ConstraintValidator {
 
 	/**
 	 * @param array $values
 	 * @param \Symfony\Component\Validator\Constraint $constraint
 	 */
 	public function validate($values, Constraint $constraint) {
-		if (!$constraint instanceof FieldsAreNotIdentical) {
-			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, FieldsAreNotIdentical::class);
+		if (!$constraint instanceof NotIdenticalToEmailLocalPart) {
+			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, NotIdenticalToEmailLocalPart::class);
 		}
 
 		$propertyAccessor = PropertyAccess::createPropertyAccessor();
-		$value1 = $propertyAccessor->getValue($values, $constraint->field1);
-		$value2 = $propertyAccessor->getValue($values, $constraint->field2);
+		$password = $propertyAccessor->getValue($values, $constraint->password);
+		$email = $propertyAccessor->getValue($values, $constraint->email);
 
-		if ($value1 === $value2) {
+		if (strpos($email, $password . '@') === 0) {
 			$this->context->addViolationAt($constraint->errorPath, $constraint->message);
 			return;
 		}

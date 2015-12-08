@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer;
 
+use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use SS6\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
@@ -43,7 +45,7 @@ class UserFormType extends AbstractType {
 				],
 				'first_options' => [
 					'constraints' => [
-						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
 					],
 					'attr' => ['autocomplete' => 'off'],
 				],
@@ -51,10 +53,27 @@ class UserFormType extends AbstractType {
 			]);
 	}
 
+	/**
+	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'data_class' => UserData::class,
 			'attr' => ['novalidate' => 'novalidate'],
+			'constraints' => [
+				new FieldsAreNotIdentical([
+					'field1' => 'email',
+					'field2' => 'password',
+					'errorPath' => 'password',
+					'message' => 'Heslo nesmí být stejné jako přihlašovací e-mail.',
+				]),
+				new NotIdenticalToEmailLocalPart([
+					'password' => 'password',
+					'email' => 'email',
+					'errorPath' => 'password',
+					'message' => 'Heslo nesmí být stejné jako část e-mailu před zavináčem.',
+				]),
+			],
 		]);
 	}
 
