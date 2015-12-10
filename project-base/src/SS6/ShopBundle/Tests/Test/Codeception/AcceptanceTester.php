@@ -23,6 +23,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 class AcceptanceTester extends \Codeception\Actor {
 
 	const DEFAULT_AJAX_TIMEOUT_SEC = 10;
+	const WAIT_TIMEOUT_SEC = 10;
 
 	use _generated\AcceptanceTesterActions;
 
@@ -32,6 +33,7 @@ class AcceptanceTester extends \Codeception\Actor {
 			$lastWindow = end($handles);
 			$this->switchToWindow($lastWindow);
 		});
+		$this->waitForElement('body', self::WAIT_TIMEOUT_SEC);
 	}
 
 	/**
