@@ -14,7 +14,7 @@
 	{{ row.product|productListDisplayName }}
 {% endblock %}
 
-{% block grid_value_cell_id_visible %}
+{% block grid_value_cell_id_calculatedVisibility %}
 	<span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
 		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"
 	></span>

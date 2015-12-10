@@ -23,7 +23,7 @@
 	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>
 {% endblock %}
 
-{% block grid_value_cell_id_visibility %}
+{% block grid_value_cell_id_calculatedVisibility %}
 	<span class="js-product-visibility relative" data-visibility-url="{{ url('admin_product_visibility', {productId: row.p.id}) }}">
 		<span class="js-product-visibility-icon in-icon svg
 			{% if isVisibleForDefaultPricingGroupOnEachDomain(row.product) %}

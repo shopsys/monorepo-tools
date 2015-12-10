@@ -68,7 +68,7 @@ class ProductVisibilityRepository {
 
 		$query = $this->em->createNativeQuery('
 			UPDATE products AS p
-			SET visible = (p.calculated_hidden = FALSE) AND EXISTS(
+			SET calculated_visibility = (p.calculated_hidden = FALSE) AND EXISTS(
 					SELECT 1
 					FROM product_visibilities AS pv
 					WHERE pv.product_id = p.id
@@ -85,11 +85,11 @@ class ProductVisibilityRepository {
 	 */
 	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId) {
 		$query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
-			SELECT id, :pricingGroupId, :domainId, :visible FROM products', new ResultSetMapping());
+			SELECT id, :pricingGroupId, :domainId, :calculatedVisibility FROM products', new ResultSetMapping());
 		$query->execute([
 			'pricingGroupId' => $pricingGroup->getId(),
 			'domainId' => $domainId,
-			'visible' => false,
+			'calculatedVisibility' => false,
 		]);
 		$this->refreshProductsVisibility();
 	}

@@ -206,7 +206,7 @@ class Product extends AbstractTranslatableEntity {
 	 *
 	 * @ORM\Column(type="boolean")
 	 */
-	private $visible;
+	private $calculatedVisibility;
 
 	/**
 	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\ProductCategoryDomain[]
@@ -307,7 +307,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->outOfStockAvailability = $productData->outOfStockAvailability;
 		$this->calculatedAvailability = $this->availability;
 		$this->recalculateAvailability = true;
-		$this->visible = false;
+		$this->calculatedVisibility = false;
 		$this->setTranslations($productData);
 		$this->productCategoryDomains = new ArrayCollection();
 		foreach ($productData->categoriesByDomainId as $domainId => $categories) {
@@ -678,8 +678,15 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @return bool
 	 */
+	private function getCalculatedVisibility() {
+		return $this->calculatedVisibility;
+	}
+
+	/**
+	 * @return bool
+	 */
 	public function isVisible() {
-		return $this->visible;
+		return $this->getCalculatedVisibility();
 	}
 
 	public function markPriceAsRecalculated() {

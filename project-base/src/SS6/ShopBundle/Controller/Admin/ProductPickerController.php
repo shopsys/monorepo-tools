@@ -136,7 +136,8 @@ class ProductPickerController extends AdminBaseController {
 
 		$grid->addColumn('name', 'pt.name', 'Název', true);
 		$grid->addColumn('catnum', 'p.catnum', 'Katalogové číslo', true);
-		$grid->addColumn('visible', 'p.visible', 'Viditelnost', true)->setClassAttribute('table-col table-col-10 text-center');
+		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', 'Viditelnost', true)
+			->setClassAttribute('table-col table-col-10 text-center');
 		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-15 text-center');
 
 		$gridViewParameters['VARIANT_TYPE_MAIN'] = Product::VARIANT_TYPE_MAIN;

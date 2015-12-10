@@ -651,7 +651,7 @@ class ProductRepository {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
-			->andWhere('p.visible = TRUE')
+			->andWhere('p.calculatedVisibility = TRUE')
 			->andWhere('p.calculatedSellingDenied = FALSE')
 			->andWhere('p.variantType = :variantTypeVariant')->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT)
 			->andWhere('p.mainVariant = :mainVariant')->setParameter('mainVariant', $mainVariant);
