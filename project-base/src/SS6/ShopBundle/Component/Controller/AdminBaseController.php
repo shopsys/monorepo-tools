@@ -20,6 +20,8 @@ class AdminBaseController extends Controller {
 	 */
 	public function transactional(Closure $closure) {
 		$em = $this->get(EntityManager::class);
+		/* @var $em \Doctrine\ORM\EntityManager */
+
 		return $em->transactional($closure);
 	}
 }
