@@ -56,6 +56,7 @@
 			urlContinue: '#',
 			wide: false,
 			cssClass: '',
+			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
 			eventCancel: function () {}
@@ -148,10 +149,12 @@
 
 		function show() {
 			showOverlay();
-			getOverlay().click(function () {
-				$window.trigger('windowClose');
-				return false;
-			});
+			if (options.closeOnBgClick) {
+				getOverlay().click(function () {
+					$window.trigger('windowClose');
+					return false;
+				});
+			}
 			$window.hide().appendTo(getMainContainer());
 			if (options.wide) {
 				moveToCenter();
