@@ -1,4 +1,3 @@
-config_version: 1434722947
 domains:
   - id: 1
     url: http://localhost:8080

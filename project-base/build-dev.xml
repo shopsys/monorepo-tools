@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,grunt,checks-diff" />
-	<target name="build-demo-dev" depends="clean,composer-dev,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,checks-diff" />
-	<target name="build-demo-ci" depends="clean,composer-dev,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" />
-	<target name="build-demo-ci-diff" depends="clean,composer-dev,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" />
+	<target name="build-dev" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,grunt,checks-diff" />
+	<target name="build-demo-dev" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,checks-diff" />
+	<target name="build-demo-ci" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" />
+	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" />
 
 	<target name="checks" depends="standards,tests" />
 	<target name="checks-diff" depends="standards-diff,tests" />
