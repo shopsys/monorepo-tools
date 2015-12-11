@@ -72,9 +72,10 @@ class CustomerController extends FrontBaseController {
 
 		if ($form->isValid()) {
 			$customerData = $form->getData();
-			$this->customerEditFacade->editByCustomer(
-				$user->getId(),
-				$customerData
+			$this->transactional(
+				function () use ($user, $customerData) {
+					$this->customerEditFacade->editByCustomer($user->getId(), $customerData);
+				}
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Vaše údaje byly úspěšně zaktualizovány'));
