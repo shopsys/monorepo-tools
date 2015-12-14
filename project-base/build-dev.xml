@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,grunt,checks-diff" />
+	<target name="build-dev" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,checks-diff" />
 	<target name="build-demo-dev" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,checks-diff" />
 	<target name="build-demo-ci" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" />
 	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" />
@@ -16,7 +16,7 @@
 	<target name="standards-ci" depends="standards,phpstorm-inspect" />
 	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" />
 
-	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-check-schema,test-db-fixtures-demo" />
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-check-schema,create-domains-data,test-db-fixtures-demo" />
 	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" />
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
 
@@ -36,13 +36,6 @@
 	<target name="docs">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
 			<arg value="docs" />
-		</exec>
-	</target>
-
-	<target name="create-domains-data">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:domains-data:create" />
 		</exec>
 	</target>
 
