@@ -30,6 +30,11 @@ class DomainsConfigLoader {
 		$processedConfig = $this->getProcessedConfig($domainsConfigFilepath, new DomainsConfigDefinition());
 		$processedUrlsConfig = $this->getProcessedConfig($domainsUrlsConfigFilepath, new DomainsUrlsConfigDefinition());
 
+		if (!$this->isConfigMatchingUrlsConfig($processedConfig, $processedUrlsConfig)) {
+			$message =
+				'File ' . $domainsUrlsConfigFilepath . ' does not contain urls for all domains listed in ' . $domainsConfigFilepath;
+			throw new \SS6\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
+		}
 		$proccessedConfigWithUrls = $this->addUrlsToProccessedConfig($processedConfig, $processedUrlsConfig);
 
 		$domainConfigs = $this->loadDomainConfigsFromArray($proccessedConfigWithUrls);
@@ -99,6 +104,21 @@ class DomainsConfigLoader {
 		$parsedConfig = $yamlParser->parse(file_get_contents($filepath));
 
 		return $processor->processConfiguration($configDefinition, [$parsedConfig]);
+	}
+
+	/**
+	 * @param array $processedConfig
+	 * @param array $processedUrlsConfig
+	 * @return bool
+	 */
+	private function isConfigMatchingUrlsConfig($processedConfig, $processedUrlsConfig) {
+		foreach (array_keys($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS]) as $domainId) {
+			if (!array_key_exists($domainId, $processedUrlsConfig[DomainsUrlsConfigDefinition::CONFIG_DOMAINS_URLS])) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

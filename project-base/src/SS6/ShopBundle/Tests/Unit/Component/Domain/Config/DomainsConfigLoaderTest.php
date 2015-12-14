@@ -41,4 +41,15 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 		$domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, 'nonexistentFilename');
 	}
 
+	public function testLoadDomainConfigsFromYamlDomainConfigsDoNotMatchException() {
+		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+		/* @var $domainsConfigLoader \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
+		$domainsConfigFilepath = __DIR__ . '/test_domains.yml';
+		$domainsUrlsConfigFilepath = __DIR__ . '/test_domains_urls.yml';
+
+		$this->setExpectedException(\SS6\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException::class);
+
+		$domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
+	}
+
 }
