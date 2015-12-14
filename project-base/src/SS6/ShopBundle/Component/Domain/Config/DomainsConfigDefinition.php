@@ -10,7 +10,6 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 
 	const CONFIG_DOMAINS = 'domains';
 	const CONFIG_ID = 'id';
-	const CONFIG_URL = 'url';
 	const CONFIG_NAME = 'name';
 	const CONFIG_LOCALE = 'locale';
 	const CONFIG_TEMPLATES_DIRECTORY = 'templates_directory';
@@ -30,7 +29,6 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 					->prototype('array')
 						->children()
 							->scalarNode(self::CONFIG_ID)->isRequired()->cannotBeEmpty()->end()
-							->scalarNode(self::CONFIG_URL)->isRequired()->cannotBeEmpty()->end()
 							->scalarNode(self::CONFIG_NAME)->isRequired()->cannotBeEmpty()->end()
 							->scalarNode(self::CONFIG_LOCALE)->isRequired()->cannotBeEmpty()->end()
 							->scalarNode(self::CONFIG_TEMPLATES_DIRECTORY)->isRequired()->cannotBeEmpty()->end()

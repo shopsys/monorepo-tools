@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Domain\Config;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainsUrlsConfigDefinition;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -20,25 +22,17 @@ class DomainsConfigLoader {
 	}
 
 	/**
-	 * @param string $filename
+	 * @param string $domainsConfigFilepath
+	 * @param string $domainsUrlsConfigFilepath
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
-	public function loadDomainConfigsFromYaml($filename) {
-		$yamlParser = new Parser();
+	public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
+		$processedConfig = $this->getProcessedConfig($domainsConfigFilepath, new DomainsConfigDefinition());
+		$processedUrlsConfig = $this->getProcessedConfig($domainsUrlsConfigFilepath, new DomainsUrlsConfigDefinition());
 
-		if (!$this->filesystem->exists($filename)) {
-			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException(
-				'File ' . $filename . ' does not exist'
-			);
-		}
+		$proccessedConfigWithUrls = $this->addUrlsToProccessedConfig($processedConfig, $processedUrlsConfig);
 
-		$domainConfigDefinition = new DomainsConfigDefinition();
-		$processor = new Processor();
-
-		$parsedConfig = $yamlParser->parse(file_get_contents($filename));
-		$processedConfig = $processor->processConfiguration($domainConfigDefinition, [$parsedConfig]);
-
-		$domainConfigs = $this->loadDomainConfigsFromArray($processedConfig);
+		$domainConfigs = $this->loadDomainConfigsFromArray($proccessedConfigWithUrls);
 
 		return $domainConfigs;
 	}
@@ -64,12 +58,47 @@ class DomainsConfigLoader {
 	private function processDomainConfigArray(array $domainConfig) {
 		return new DomainConfig(
 			$domainConfig[DomainsConfigDefinition::CONFIG_ID],
-			$domainConfig[DomainsConfigDefinition::CONFIG_URL],
+			$domainConfig[DomainsUrlsConfigDefinition::CONFIG_URL],
 			$domainConfig[DomainsConfigDefinition::CONFIG_NAME],
 			$domainConfig[DomainsConfigDefinition::CONFIG_LOCALE],
 			$domainConfig[DomainsConfigDefinition::CONFIG_TEMPLATES_DIRECTORY],
 			$domainConfig[DomainsConfigDefinition::CONFIG_STYLES_DIRECTORY]
 		);
+	}
+
+	/**
+	 * @param array $processedConfig
+	 * @param array $processedUrlsConfig
+	 * @return array
+	 */
+	private function addUrlsToProccessedConfig($processedConfig, $processedUrlsConfig) {
+		foreach ($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS] as $domainId => $domainConfigArray) {
+			$domainConfigArray[DomainsUrlsConfigDefinition::CONFIG_URL] =
+				$processedUrlsConfig[DomainsUrlsConfigDefinition::CONFIG_DOMAINS_URLS][$domainId][DomainsUrlsConfigDefinition::CONFIG_URL];
+			$processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS][$domainId] = $domainConfigArray;
+		}
+
+		return $processedConfig;
+	}
+
+	/**
+	 * @param string $filepath
+	 * @param \Symfony\Component\Config\Definition\ConfigurationInterface $configDefinition
+	 * @return array
+	 */
+	private function getProcessedConfig($filepath, ConfigurationInterface $configDefinition) {
+		$yamlParser = new Parser();
+		$processor = new Processor();
+
+		if (!$this->filesystem->exists($filepath)) {
+			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException(
+				'File ' . $filepath . ' does not exist'
+			);
+		}
+
+		$parsedConfig = $yamlParser->parse(file_get_contents($filepath));
+
+		return $processor->processConfiguration($configDefinition, [$parsedConfig]);
 	}
 
 }

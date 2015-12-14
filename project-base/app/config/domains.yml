@@ -1,12 +1,10 @@
 domains:
   - id: 1
-    url: http://shopsys6:8080
     name: shopsys6
     locale: cs
     templates_directory: cz
 
   - id: 2
-    url: http://2.shopsys6:8080
     name: 2.shopsys6
     locale: en
     templates_directory: en
