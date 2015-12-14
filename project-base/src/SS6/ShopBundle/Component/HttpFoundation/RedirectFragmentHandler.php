@@ -18,8 +18,7 @@ class RedirectFragmentHandler extends LazyLoadingFragmentHandler {
 		// when handling the master request.
 		if (!$response->isSuccessful() && !$response->isRedirection()) {
 			$message = sprintf(
-				'Error when rendering "%s" (Status code is %s).',
-				$this->getRequest()->getUri(),
+				'Error when rendering response (Status code is %s).',
 				$response->getStatusCode()
 			);
 			throw new \RuntimeException($message);
