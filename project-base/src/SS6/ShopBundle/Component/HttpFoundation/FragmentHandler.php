@@ -31,4 +31,15 @@ class FragmentHandler extends LazyLoadingFragmentHandler {
 		$response->sendContent();
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
+	public function render($uri, $renderer = 'inline', array $options = []) {
+		if (!isset($options['ignore_errors'])) {
+			$options['ignore_errors'] = false;
+		}
+
+		return parent::render($uri, $renderer, $options);
+	}
+
 }
