@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler;
 
-class RedirectFragmentHandler extends LazyLoadingFragmentHandler {
+class FragmentHandler extends LazyLoadingFragmentHandler {
 
 	/**
 	 * Copy-pasted from Symfony\Component\HttpKernel\Fragment\FragmentHandler::deliver().

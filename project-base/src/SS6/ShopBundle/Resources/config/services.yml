@@ -4,7 +4,7 @@ imports:
 
 parameters:
   fp_js_form_validator.factory.class: SS6\ShopBundle\Component\Validator\JsFormValidatorFactory
-  fragment.handler.class: SS6\ShopBundle\Component\HttpFoundation\RedirectFragmentHandler
+  fragment.handler.class: SS6\ShopBundle\Component\HttpFoundation\FragmentHandler
   prezent_doctrine_translatable.listener.class: SS6\ShopBundle\Model\Localization\TranslatableListener
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
