@@ -26,6 +26,7 @@ class DomainsConfigDefinition implements ConfigurationInterface {
 		$rootNode
 			->children()
 				->arrayNode(self::CONFIG_DOMAINS)
+					->useAttributeAsKey(self::CONFIG_ID, false)
 					->prototype('array')
 						->children()
 							->scalarNode(self::CONFIG_ID)->isRequired()->cannotBeEmpty()->end()
