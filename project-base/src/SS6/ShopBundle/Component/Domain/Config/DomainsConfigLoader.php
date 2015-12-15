@@ -29,27 +29,29 @@ class DomainsConfigLoader {
 	public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
 		$processedConfig = $this->getProcessedConfig($domainsConfigFilepath, new DomainsConfigDefinition());
 		$processedUrlsConfig = $this->getProcessedConfig($domainsUrlsConfigFilepath, new DomainsUrlsConfigDefinition());
+		$domainConfigsByDomainId = $processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS];
+		$domainUrlsConfigsByDomainId = $processedUrlsConfig[DomainsUrlsConfigDefinition::CONFIG_DOMAINS_URLS];
 
-		if (!$this->isConfigMatchingUrlsConfig($processedConfig, $processedUrlsConfig)) {
+		if (!$this->isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)) {
 			$message =
 				'File ' . $domainsUrlsConfigFilepath . ' does not contain urls for all domains listed in ' . $domainsConfigFilepath;
 			throw new \SS6\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
 		}
-		$proccessedConfigWithUrls = $this->addUrlsToProccessedConfig($processedConfig, $processedUrlsConfig);
+		$processedConfigsWithUrlsByDomainId = $this->addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId);
 
-		$domainConfigs = $this->loadDomainConfigsFromArray($proccessedConfigWithUrls);
+		$domainConfigs = $this->loadDomainConfigsFromArray($processedConfigsWithUrlsByDomainId);
 
 		return $domainConfigs;
 	}
 
 	/**
-	 * @param array $processedConfig
+	 * @param array $processedConfigsByDomainId
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
-	private function loadDomainConfigsFromArray($processedConfig) {
+	private function loadDomainConfigsFromArray($processedConfigsByDomainId) {
 		$domainConfigs = [];
 
-		foreach ($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS] as $domainConfigArray) {
+		foreach ($processedConfigsByDomainId as $domainConfigArray) {
 			$domainConfigs[] = $this->processDomainConfigArray($domainConfigArray);
 		}
 
@@ -72,18 +74,18 @@ class DomainsConfigLoader {
 	}
 
 	/**
-	 * @param array $processedConfig
-	 * @param array $processedUrlsConfig
+	 * @param array $domainConfigsByDomainId
+	 * @param array $domainUrlsConfigsByDomainId
 	 * @return array
 	 */
-	private function addUrlsToProccessedConfig($processedConfig, $processedUrlsConfig) {
-		foreach ($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS] as $domainId => $domainConfigArray) {
+	private function addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId) {
+		foreach ($domainConfigsByDomainId as $domainId => $domainConfigArray) {
 			$domainConfigArray[DomainsUrlsConfigDefinition::CONFIG_URL] =
-				$processedUrlsConfig[DomainsUrlsConfigDefinition::CONFIG_DOMAINS_URLS][$domainId][DomainsUrlsConfigDefinition::CONFIG_URL];
-			$processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS][$domainId] = $domainConfigArray;
+				$domainUrlsConfigsByDomainId[$domainId][DomainsUrlsConfigDefinition::CONFIG_URL];
+			$domainConfigsByDomainId[$domainId] = $domainConfigArray;
 		}
 
-		return $processedConfig;
+		return $domainConfigsByDomainId;
 	}
 
 	/**
@@ -107,13 +109,13 @@ class DomainsConfigLoader {
 	}
 
 	/**
-	 * @param array $processedConfig
-	 * @param array $processedUrlsConfig
+	 * @param array $domainConfigsByDomainId
+	 * @param array $domainUrlsConfigsByDomainId
 	 * @return bool
 	 */
-	private function isConfigMatchingUrlsConfig($processedConfig, $processedUrlsConfig) {
-		foreach (array_keys($processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS]) as $domainId) {
-			if (!array_key_exists($domainId, $processedUrlsConfig[DomainsUrlsConfigDefinition::CONFIG_DOMAINS_URLS])) {
+	private function isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId) {
+		foreach (array_keys($domainConfigsByDomainId) as $domainId) {
+			if (!array_key_exists($domainId, $domainUrlsConfigsByDomainId)) {
 				return false;
 			}
 		}
