@@ -17,6 +17,25 @@
 		return $mainContainer;
 	};
 
+	var getOverlay = function() {
+		var $overlay = $('#js-overlay');
+		if ($overlay.size() === 0) {
+			$overlay = $('<div id="js-overlay"></div>');
+		}
+		return $overlay;
+	};
+
+	var showOverlay = function () {
+		var $overlay = getOverlay();
+		$('body').append($overlay);
+	};
+
+	var hideOverlay = function () {
+		if ($('#js-overlay').size() !== 0) {
+			$('#js-overlay').remove();
+		}
+	};
+
 	/**
 	 * content (string)
 	 * buttonClose (bool)
@@ -37,6 +56,7 @@
 			urlContinue: '#',
 			wide: false,
 			cssClass: '',
+			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
 			eventCancel: function () {}
@@ -60,6 +80,7 @@
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
+			hideOverlay();
 			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
 		});
 
@@ -70,7 +91,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window__close" title="Zavřít">X</a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close" title="Zavřít (Esc)">X</a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -79,6 +100,13 @@
 				});
 			$window.append($windowButtonClose);
 		}
+
+		$('body').keyup(function (event) {
+			if (event.keyCode === SS6.keyCodes.ESCAPE) {
+				$window.trigger('windowClose');
+				return false;
+			}
+		});
 
 		var $windowActions = $('<div class="window__actions"></div>');
 		if (options.buttonContinue) {
@@ -120,6 +148,13 @@
 		return $window;
 
 		function show() {
+			showOverlay();
+			if (options.closeOnBgClick) {
+				getOverlay().click(function () {
+					$window.trigger('windowClose');
+					return false;
+				});
+			}
 			$window.hide().appendTo(getMainContainer());
 			if (options.wide) {
 				moveToCenter();
