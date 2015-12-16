@@ -15,6 +15,10 @@
 	"repositories": [
 		{
 			"type": "vcs",
+			"url": "https://github.com/sustmi/doctrine2.git"
+		},
+		{
+			"type": "vcs",
 			"url": "https://github.com/sustmi/jparser.git"
 		},
 		{
@@ -49,7 +53,7 @@
 		"doctrine/doctrine-bundle": "1.5.0",
 		"doctrine/doctrine-fixtures-bundle": "2.2.0",
 		"doctrine/doctrine-migrations-bundle": "v1.1.0",
-		"doctrine/orm": "2.5.0",
+		"doctrine/orm": "dev-master#55c4788",
 		"egeloen/ckeditor-bundle": "2.5.0",
 		"fabpot/php-cs-fixer": "1.8.1",
 		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",

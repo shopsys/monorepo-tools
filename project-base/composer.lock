@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "125fad37d472f9fa3f9be309ef162736",
-    "content-hash": "58142065b8daf0c29b2459b37977217a",
+    "hash": "596e0b1a216d2b242caa8b2edb31fa38",
+    "content-hash": "44377e7fadcdf0e57a098c86bcfbf555",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1231,17 +1231,32 @@
         },
         {
             "name": "doctrine/orm",
-            "version": "v2.5.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
-                "reference": "aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe"
+                "url": "https://github.com/sustmi/doctrine2.git",
+                "reference": "55c4788"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe",
-                "reference": "aa80c7d2c55a372f5f9f825f5c66dbda53a6e3fe",
+                "url": "https://api.github.com/repos/sustmi/doctrine2/zipball/1b09bb75b060445ab29be55bf53482c5989e2af6",
+                "reference": "55c4788",
                 "shasum": ""
+            },
+            "archive": {
+                "exclude": [
+                    "!vendor",
+                    "tests",
+                    "*phpunit.xml",
+                    ".travis.yml",
+                    "build.xml",
+                    "build.properties",
+                    "composer.phar",
+                    "vendor/satooshi",
+                    "lib/vendor",
+                    "*.swp",
+                    "*coveralls.yml"
+                ]
             },
             "require": {
                 "doctrine/cache": "~1.4",
@@ -1272,15 +1287,23 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\ORM\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\ORM\\": "lib/Doctrine/ORM"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Doctrine\\Tests\\": "tests/Doctrine/Tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
                 {
                     "name": "Roman Borschel",
                     "email": "roman@code-factory.org"
@@ -1288,10 +1311,6 @@
                 {
                     "name": "Benjamin Eberlei",
                     "email": "kontakt@beberlei.de"
-                },
-                {
-                    "name": "Guilherme Blanco",
-                    "email": "guilhermeblanco@gmail.com"
                 },
                 {
                     "name": "Jonathan Wage",
@@ -1304,7 +1323,10 @@
                 "database",
                 "orm"
             ],
-            "time": "2015-04-02 20:40:18"
+            "support": {
+                "source": "https://github.com/sustmi/doctrine2/tree/master"
+            },
+            "time": "2015-12-16 14:06:31"
         },
         {
             "name": "egeloen/ckeditor-bundle",
@@ -5465,6 +5487,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "craue/formflow-bundle": 20,
+        "doctrine/orm": 20,
         "fp/jsformvalidator-bundle": 20,
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
