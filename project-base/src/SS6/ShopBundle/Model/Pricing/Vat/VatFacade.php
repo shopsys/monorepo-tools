@@ -10,7 +10,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class VatFacade {
@@ -41,11 +40,6 @@ class VatFacade {
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
-	 */
-	private $productEditFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $trasnportEditFacade;
@@ -61,8 +55,8 @@ class VatFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatService $vatService
 	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditFacade $productEditFacade
 	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $trasnportEditFacade
+	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -70,7 +64,6 @@ class VatFacade {
 		VatService $vatService,
 		Setting $setting,
 		PaymentEditFacade $paymentEditFacade,
-		ProductEditFacade $productEditFacade,
 		TransportEditFacade $trasnportEditFacade,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
@@ -79,7 +72,6 @@ class VatFacade {
 		$this->vatService = $vatService;
 		$this->setting = $setting;
 		$this->paymentEditFacade = $paymentEditFacade;
-		$this->productEditFacade = $productEditFacade;
 		$this->trasnportEditFacade = $trasnportEditFacade;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
