@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
@@ -169,18 +168,6 @@ class TransportEditFacade {
 		$transports = $this->transportRepository->getAllByDomainId($domainId);
 
 		return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePaymentsOnDomain, $domainId);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
-	 */
-	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
-		$transports = $this->transportRepository->getAllIncludingDeletedByVat($oldVat);
-		foreach ($transports as $transport) {
-			$transport->changeVat($newVat);
-		}
-		$this->em->flush();
 	}
 
 	/**

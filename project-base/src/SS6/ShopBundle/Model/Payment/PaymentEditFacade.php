@@ -14,7 +14,6 @@ use SS6\ShopBundle\Model\Payment\PaymentRepository;
 use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
@@ -166,18 +165,6 @@ class PaymentEditFacade {
 		$allPayments = $this->paymentRepository->getAllWithTransports();
 
 		return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
-	 */
-	public function replaceOldVatWithNewVat(Vat $oldVat, Vat $newVat) {
-		$payments = $this->paymentRepository->getAllIncludingDeletedByVat($oldVat);
-		foreach ($payments as $payment) {
-			$payment->changeVat($newVat);
-		}
-		$this->em->flush();
 	}
 
 	/**

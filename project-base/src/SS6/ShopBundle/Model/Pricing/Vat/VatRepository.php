@@ -162,4 +162,37 @@ class VatRepository {
 		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	public function replaceVat(Vat $oldVat, Vat $newVat) {
+		$this->replacePaymentsVat($oldVat, $newVat);
+		$this->replaceTransportsVat($oldVat, $newVat);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	private function replacePaymentsVat(Vat $oldVat, Vat $newVat) {
+		$this->em->createQueryBuilder()
+			->update(Payment::class, 'p')
+			->set('p.vat', ':newVat')->setParameter('newVat', $newVat)
+			->where('p.vat = :oldVat')->setParameter('oldVat', $oldVat)
+			->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $oldVat
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 */
+	private function replaceTransportsVat(Vat $oldVat, Vat $newVat) {
+		$this->em->createQueryBuilder()
+			->update(Transport::class, 't')
+			->set('t.vat', ':newVat')->setParameter('newVat', $newVat)
+			->where('t.vat = :oldVat')->setParameter('oldVat', $oldVat)
+			->getQuery()->execute();
+	}
+
 }
