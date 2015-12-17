@@ -19,7 +19,6 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\Search\ProductSearchRepository;
-use SS6\ShopBundle\Model\Product\Unit\Unit;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
@@ -633,14 +632,6 @@ class ProductRepository {
 			->andWhere('p.stockQuantity > 0');
 
 		return $queryBuilder;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
-	 */
-	public function getAllByUnit(Unit $unit) {
-		return $this->getProductRepository()->findBy(['unit' => $unit]);
 	}
 
 	/**

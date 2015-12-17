@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\Unit;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\Unit\Unit;
 use SS6\ShopBundle\Model\Product\Unit\UnitData;
 use SS6\ShopBundle\Model\Product\Unit\UnitRepository;
@@ -29,11 +28,6 @@ class UnitFacade {
 	private $unitService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
-	 */
-	private $productEditFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
@@ -42,20 +36,17 @@ class UnitFacade {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitService $unitService
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditFacade $productEditFacade
 	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		EntityManager $em,
 		UnitRepository $unitRepository,
 		UnitService $unitService,
-		ProductEditFacade $productEditFacade,
 		Setting $setting
 	) {
 		$this->em = $em;
 		$this->unitRepository = $unitRepository;
 		$this->unitService = $unitService;
-		$this->productEditFacade = $productEditFacade;
 		$this->setting = $setting;
 	}
 
@@ -101,7 +92,7 @@ class UnitFacade {
 
 		if ($newUnitId !== null) {
 			$newUnit = $this->unitRepository->getById($newUnitId);
-			$this->productEditFacade->replaceOldUnitWithNewUnit($oldUnit, $newUnit);
+			$this->unitRepository->replaceUnit($oldUnit, $newUnit);
 			if ($this->isUnitDefault($oldUnit)) {
 				$this->setDefaultUnit($newUnit);
 			}

@@ -794,13 +794,6 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
-	 */
-	public function setUnit(Unit $unit) {
-		$this->unit = $unit;
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function setTranslations(ProductData $productData) {
