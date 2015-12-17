@@ -173,13 +173,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 */
-	public function setPricingGroup(PricingGroup $pricingGroup) {
-		$this->pricingGroup = $pricingGroup;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getId() {
