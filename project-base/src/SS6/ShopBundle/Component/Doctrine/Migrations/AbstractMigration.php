@@ -27,4 +27,11 @@ abstract class AbstractMigration extends DoctrineAbstractMigration {
 		return $this->connection->executeQuery($query, $params, $types, $qcp);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public function isTransactional() {
+		return false;
+	}
+
 }

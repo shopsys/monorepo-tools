@@ -574,9 +574,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="doctrine:migrations:migrate" />
-			<arg value="--no-interaction" />
-			<arg value="--allow-no-migration" />
+			<arg value="ss6:migrations:migrate" />
 		</exec>
 	</target>
 
