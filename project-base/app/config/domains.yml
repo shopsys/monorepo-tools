@@ -1,14 +1,11 @@
-config_version: 1434722947
 domains:
   - id: 1
-    url: http://localhost:8080
-    name: localhost
+    name: shopsys6
     locale: cs
     templates_directory: cz
 
   - id: 2
-    url: http://2.localhost:8080
-    name: localhosten
+    name: 2.shopsys6
     locale: en
     templates_directory: en
     styles_directory: domain2

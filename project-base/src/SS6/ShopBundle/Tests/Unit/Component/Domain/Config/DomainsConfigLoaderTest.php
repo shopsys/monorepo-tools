@@ -10,10 +10,11 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 
 	public function testLoadDomainConfigsFromYaml() {
 		$domainsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_config_filepath');
+		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_urls_config_filepath');
 		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
 		/* @var $domainsConfigLoader \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
 
-		$domainConfigs = $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath);
+		$domainConfigs = $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
 
 		$this->assertGreaterThan(0, count($domainConfigs));
 
@@ -22,12 +23,33 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 		}
 	}
 
-	public function testLoadDomainConfigsFromYamlFileNotFound() {
+	public function testLoadDomainConfigsFromYamlConfigFileNotFound() {
 		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
 		/* @var $domainsConfigLoader \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
+		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_urls_config_filepath');
 
 		$this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
-		$domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename');
+		$domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename', $domainsUrlsConfigFilepath);
+	}
+
+	public function testLoadDomainConfigsFromYamlUrlsConfigFileNotFound() {
+		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+		/* @var $domainsConfigLoader \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
+		$domainsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_config_filepath');
+
+		$this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
+		$domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, 'nonexistentFilename');
+	}
+
+	public function testLoadDomainConfigsFromYamlDomainConfigsDoNotMatchException() {
+		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
+		/* @var $domainsConfigLoader \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
+		$domainsConfigFilepath = __DIR__ . '/test_domains.yml';
+		$domainsUrlsConfigFilepath = __DIR__ . '/test_domains_urls.yml';
+
+		$this->setExpectedException(\SS6\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException::class);
+
+		$domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
 	}
 
 }

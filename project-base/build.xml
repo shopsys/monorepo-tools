@@ -58,11 +58,11 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,grunt,warmup"/>
-	<target name="build-new" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
-	<target name="build-demo" depends="clean,composer,configs-check,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
-	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-demo"/>
-	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-base-settings"/>
+	<target name="build" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
+	<target name="build-new" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
+	<target name="build-demo" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
+	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,create-domains-data,db-fixtures-demo"/>
+	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-check-schema,create-domains-data,db-fixtures-base-settings"/>
 
 	<target name="assetic">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true" output="${dev.null}">
@@ -131,9 +131,10 @@
 		</exec>
 	</target>
 
-	<target name="configs-check">
+	<target name="create-domains-data">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="${path.app}/checkConfigVersions.php" />
+			<arg value="app/console" />
+			<arg value="ss6:domains-data:create" />
 		</exec>
 	</target>
 

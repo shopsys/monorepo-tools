@@ -19,11 +19,13 @@ class DomainFactory {
 	}
 
 	/**
-	 * @param string $filename
+	 * @param string $domainsConfigFilepath
+	 * @param string $domainsUrlsConfigFilepath
 	 * @return \SS6\ShopBundle\Component\Domain\Domain
 	 */
-	public function create($filename) {
-		$domain = new Domain($this->domainsConfigLoader->loadDomainConfigsFromYaml($filename));
+	public function create($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
+		$domainConfigs = $this->domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
+		$domain = new Domain($domainConfigs);
 
 		$domainId = getenv('DOMAIN');
 		if ($domainId !== false) {

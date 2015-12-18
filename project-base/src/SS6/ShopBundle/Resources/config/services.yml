@@ -170,6 +170,7 @@ services:
     factory_method: create
     arguments:
       - %ss6.domain_config_filepath%
+      - %ss6.domain_urls_config_filepath%
 
   ss6.shop.component.domain.domain_facade:
     class: SS6\ShopBundle\Component\Domain\DomainFacade
