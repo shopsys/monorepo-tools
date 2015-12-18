@@ -58,9 +58,9 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
-	<target name="build-new" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
-	<target name="build-demo" depends="clean,composer,npm,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
+	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
+	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
+	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,create-domains-data,db-fixtures-demo"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-check-schema,create-domains-data,db-fixtures-base-settings"/>
 
@@ -215,6 +215,17 @@
 				<exclude name="admin" />
 			</fileset>
 		</delete>
+	</target>
+
+	<target name="domains-urls-check">
+		<if>
+			<not>
+				<available file='${path.app}/config/domains_urls.yml' type='file' />
+			</not>
+			<then>
+				<fail message = "File domains_urls.yml does not exist. You should create it using domains_urls.yml.dist as a template."/>
+			</then>
+		</if>
 	</target>
 
 	<target name="dump-translations-custom">
