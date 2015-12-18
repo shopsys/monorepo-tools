@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "990cd85fa7c3d95cec40ed0258e7e1ba",
+    "hash": "125fad37d472f9fa3f9be309ef162736",
+    "content-hash": "58142065b8daf0c29b2459b37977217a",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -251,7 +252,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/2ca2cf4a45ab0d3bfa48d89dbb8d5a74720a9b97",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/d14fcb159245b9f079f0908a17e5aef08dc38df8",
                 "reference": "55da501",
                 "shasum": ""
             },
@@ -2477,48 +2478,6 @@
                 }
             ],
             "time": "2015-02-03 12:10:50"
-        },
-        {
-            "name": "phpmd/phpmd",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpmd/phpmd.git",
-                "reference": "68ced5452910d3555a38720bd87f5f2356c5a003"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/68ced5452910d3555a38720bd87f5f2356c5a003",
-                "reference": "68ced5452910d3555a38720bd87f5f2356c5a003",
-                "shasum": ""
-            },
-            "require": {
-                "pdepend/pdepend": "2.0.*",
-                "php": ">=5.3.0",
-                "symfony/config": "@stable",
-                "symfony/dependency-injection": "@stable",
-                "symfony/filesystem": "@stable"
-            },
-            "bin": [
-                "src/bin/phpmd"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "PHPMD\\": "src/main/php",
-                    "PDepend\\": "vendor/pdepend/pdepend/src/main/php/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "include-path": [
-                "../../pdepend/pdepend/src/main/php",
-                "src/main/php"
-            ],
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Official version of PHPMD handled with Composer.",
-            "time": "2014-05-21 12:45:23"
         },
         {
             "name": "phpspec/prophecy",
@@ -5158,7 +5117,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/70f62a8c0b1c4524481f417761bf5f8794fb5c1f",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/2ead2e4043ab125bee9554f356e0a86742c2d4fa",
                 "reference": "41365ce",
                 "shasum": ""
             },
@@ -5194,6 +5153,48 @@
             "description": "This tool check syntax of PHP files about 20x faster than serial check.",
             "homepage": "https://github.com/JakubOnderka/PHP-Parallel-Lint",
             "time": "2015-02-05 21:43:32"
+        },
+        {
+            "name": "phpmd/phpmd",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpmd/phpmd.git",
+                "reference": "68ced5452910d3555a38720bd87f5f2356c5a003"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpmd/phpmd/zipball/68ced5452910d3555a38720bd87f5f2356c5a003",
+                "reference": "68ced5452910d3555a38720bd87f5f2356c5a003",
+                "shasum": ""
+            },
+            "require": {
+                "pdepend/pdepend": "2.0.*",
+                "php": ">=5.3.0",
+                "symfony/config": "@stable",
+                "symfony/dependency-injection": "@stable",
+                "symfony/filesystem": "@stable"
+            },
+            "bin": [
+                "src/bin/phpmd"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPMD\\": "src/main/php",
+                    "PDepend\\": "vendor/pdepend/pdepend/src/main/php/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "../../pdepend/pdepend/src/main/php",
+                "src/main/php"
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Official version of PHPMD handled with Composer.",
+            "time": "2014-05-21 12:45:23"
         },
         {
             "name": "psr/http-message",
@@ -5323,6 +5324,33 @@
                 "testing"
             ],
             "time": "2015-03-02 10:08:04"
+        },
+        {
+            "name": "shopsys/coding-standards",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "http://gitlab.netdevelo/ss6/coding-standards.git",
+                "reference": "9609c8c2d55306dc6de24849c7dcce0f2c36ba3f"
+            },
+            "require": {
+                "phpmd/phpmd": "2.0.0",
+                "squizlabs/php_codesniffer": "2.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "ShopSys\\": "src/ShopSys/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Miroslav Sustek",
+                    "email": "miroslav.sustek@shopsys.cz"
+                }
+            ],
+            "description": "Common coding standards for new ShopSys projects",
+            "time": "2015-12-18 13:16:43"
         },
         {
             "name": "shopsys/phpstorm-inspect",

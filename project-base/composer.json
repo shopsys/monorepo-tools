@@ -31,6 +31,10 @@
 		},
 		{
 			"type": "vcs",
+			"url": "http://gitlab.netdevelo/ss6/coding-standards.git"
+		},
+		{
+			"type": "vcs",
 			"url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git"
 		}
 	],
@@ -57,7 +61,6 @@
 		"jms/translation-bundle": "dev-fix-external-translations#527da12",
 		"pdepend/pdepend": "2.0.0",
 		"phing/phing": "2.9.1",
-		"phpmd/phpmd": "2.0.0",
 		"phpunit/phpunit": "4.8.4",
 		"presta/sitemap-bundle": "1.4",
 		"prezent/doctrine-translatable-bundle": "dev-master#adfc849",
@@ -81,8 +84,8 @@
 		"codeception/codeception": "2.1.2",
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"se/selenium-server-standalone": "2.45.0",
-		"shopsys/phpstorm-inspect": "1.0.4",
-		"squizlabs/php_codesniffer": "2.3.2"
+		"shopsys/coding-standards": "1.0.0",
+		"shopsys/phpstorm-inspect": "1.0.4"
 	},
 	"scripts": {
 		"post-install-cmd": [
