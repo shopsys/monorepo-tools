@@ -14,6 +14,8 @@ use SS6\ShopBundle\Model\Customer\UserData;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
+	const USER_PREFIX = 'user_';
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
@@ -27,13 +29,14 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 		$customersData = $loaderService->getCustomersData();
 		/* @var $customersData \SS6\ShopBundle\Model\Customer\CustomerData[] */
 
-		foreach ($customersData as $customerData) {
+		foreach ($customersData as $index => $customerData) {
 			if ($customerData->deliveryAddressData !== null) {
 				$deliveryAddress = new DeliveryAddress($customerData->deliveryAddressData);
 			} else {
 				$deliveryAddress = null;
 			}
 			$this->createCustomer(
+				self::USER_PREFIX . $index,
 				$manager,
 				$registrationService,
 				$customerData->userData,
@@ -52,6 +55,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
 	 */
 	public function createCustomer(
+		$referenceName,
 		ObjectManager $manager,
 		RegistrationService $registrationService,
 		UserData $userData,
@@ -69,6 +73,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 		if ($deliveryAddress !== null) {
 			$manager->persist($deliveryAddress);
 		}
+
+		$this->addReference($referenceName, $user);
 	}
 
 	/**
