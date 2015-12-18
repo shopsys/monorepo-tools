@@ -1,0 +1,19 @@
+{
+	"name": "shopsys/coding-standards",
+	"description": "Common coding standards for new ShopSys projects",
+	"authors": [
+		{
+			"name": "Miroslav Sustek",
+			"email": "miroslav.sustek@shopsys.cz"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"ShopSys\\": "src/ShopSys/"
+		}
+	},
+	"require": {
+		"phpmd/phpmd": "2.0.0",
+		"squizlabs/php_codesniffer": "2.3.2"
+	}
+}
