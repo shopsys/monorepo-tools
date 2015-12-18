@@ -2,15 +2,14 @@
 	.reset-ul();
 	display: block;
 	margin-left: @width-panel;
-	// margin-right: 230px;
-	
+
 	font-size: 0;
 
 	&--side {
 		float: right;
 		margin: 0 20px 0 0;
 
-		text-align: right;	
+		text-align: right;
 
 		.navig {
 
@@ -20,27 +19,27 @@
 					padding: 0 10px;
 				}
 			}
-		}	
+		}
 	}
 
 	&--main {
-		
+
 		border-left: 1px solid @bg-primary-darker;
 
 		.navig {
 
 			&__item {
 
-				&__link {										
+				&__link {
 
 					border-right: 1px solid @bg-primary-darker;
 					font-size: 11px;
 
-					.transition(color);					
+					.transition(color);
 
-					i {						
+					i {
 
-						.transition(none);						
+						.transition(none);
 					}
 
 					div {
@@ -51,7 +50,7 @@
 						i {
 							display: block;
 						}
-					}	
+					}
 				}
 			}
 		}
@@ -67,29 +66,28 @@
 		&__link {
 			display: block;
 			height: @height-header;
-			line-height: @height-header;			
-			padding: 0 20px;	
+			line-height: @height-header;
+			padding: 0 20px;
 
 			color: @color-alterlink;
-			text-decoration: none;	
-			text-align: center;					
+			text-decoration: none;
+			text-align: center;
 
 			div {
 				span {
 					display: none;
 				}
-			}					
+			}
 
-			i {								
+			i {
 				position: relative;
 				font-size: 16px;
-				// top: -3px;
-				
-				text-shadow: 1px 1px 0 @bg-primary-dark;				
+
+				text-shadow: 1px 1px 0 @bg-primary-dark;
 
 				.dump-mode & {
 					top: 20px;
-				}				
+				}
 			}
 
 			@media @query-xl {
@@ -100,11 +98,11 @@
 						display: block;
 						margin-top: 8px;
 					}
-				}	
+				}
 
 				i {
 					font-size: 22px;
-				}		
+				}
 			}
 
 			&:hover {
