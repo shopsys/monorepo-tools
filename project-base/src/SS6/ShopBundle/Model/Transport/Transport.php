@@ -110,13 +110,6 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 */
-	public function changeVat(Vat $vat) {
-		$this->vat = $vat;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getId() {

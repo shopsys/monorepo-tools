@@ -324,18 +324,6 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $oldUnit
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $newUnit
-	 */
-	public function replaceOldUnitWithNewUnit($oldUnit, $newUnit) {
-		$products = $this->productRepository->getAllByUnit($oldUnit);
-		foreach ($products as $product) {
-			$product->setUnit($newUnit);
-		}
-		$this->em->flush();
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param string[] $manualInputPrices
 	 */

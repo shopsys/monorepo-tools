@@ -165,16 +165,6 @@ class OrderRepository {
 			->getQuery()->execute();
 	}
 
-	/*
-	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Order[]
-	 */
-	public function getOrdersByStatusId($orderStatusId) {
-		return $this->getOrderRepository()->findBy([
-			'status' => $orderStatusId,
-		]);
-	}
-
 	/**
 	 * @param string $urlHash
 	 * @param int $domainId

@@ -73,14 +73,6 @@ class UserRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Customer\User[]
-	 */
-	public function getAllByPricingGroup(PricingGroup $pricingGroup) {
-		return $this->getUserRepository()->findBy(['pricingGroup' => $pricingGroup]);
-	}
-
-	/**
 	 * @param int $id
 	 * @return \SS6\ShopBundle\Model\Customer\User|null
 	 */
@@ -149,6 +141,18 @@ class UserRepository {
 		}
 
 		return $queryBuilder;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $oldPricingGroup
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $newPricingGroup
+	 */
+	public function replaceUsersPricingGroup(PricingGroup $oldPricingGroup, PricingGroup $newPricingGroup) {
+		$this->em->createQueryBuilder()
+			->update(User::class, 'u')
+			->set('u.pricingGroup', ':newPricingGroup')->setParameter('newPricingGroup', $newPricingGroup)
+			->where('u.pricingGroup = :oldPricingGroup')->setParameter('oldPricingGroup', $oldPricingGroup)
+			->getQuery()->execute();
 	}
 
 }

@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Pricing\Group;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
@@ -35,11 +35,6 @@ class PricingGroupFacade {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
-	 */
-	private $customerEditFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
@@ -59,26 +54,31 @@ class PricingGroupFacade {
 	 */
 	private $productCalculatedPriceRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 */
+	private $userRepository;
+
 	public function __construct(
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
 		Domain $domain,
 		SelectedDomain $selectedDomain,
-		CustomerEditFacade $customerEditFacade,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		ProductVisibilityRepository $productVisibilityRepository,
-		ProductCalculatedPriceRepository $productCalculatedPriceRepository
+		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
+		UserRepository $userRepository
 	) {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
-		$this->customerEditFacade = $customerEditFacade;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -133,6 +133,7 @@ class PricingGroupFacade {
 		$oldPricingGroup = $this->pricingGroupRepository->getById($oldPricingGroupId);
 		if ($newPricingGroupId !== null) {
 			$newPricingGroup = $this->pricingGroupRepository->getById($newPricingGroupId);
+			$this->userRepository->replaceUsersPricingGroup($oldPricingGroup, $newPricingGroup);
 		} else {
 			$newPricingGroup = null;
 		}
@@ -140,7 +141,6 @@ class PricingGroupFacade {
 		if ($newPricingGroup !== null && $this->pricingGroupSettingFacade->isPricingGroupDefault($oldPricingGroup)) {
 			$this->pricingGroupSettingFacade->setDefaultPricingGroup($newPricingGroup);
 		}
-		$this->customerEditFacade->replaceOldPricingGroupWithNewPricingGroup($oldPricingGroup, $newPricingGroup);
 
 		$this->em->remove($oldPricingGroup);
 		$this->em->flush();

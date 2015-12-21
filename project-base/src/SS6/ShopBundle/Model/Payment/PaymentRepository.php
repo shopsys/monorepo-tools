@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
@@ -116,14 +115,6 @@ class PaymentRepository {
 			->setParameter('transportId', $transport->getId())
 			->getQuery()
 			->getResult();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
-	 */
-	public function getAllIncludingDeletedByVat(Vat $vat) {
-		return $this->getPaymentRepository()->findBy(['vat' => $vat]);
 	}
 
 	/**

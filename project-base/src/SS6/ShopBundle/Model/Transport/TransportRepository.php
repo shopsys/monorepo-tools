@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Transport\Transport;
 
 class TransportRepository {
@@ -102,14 +101,6 @@ class TransportRepository {
 			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException('Transport with ID ' . $id . ' not found.');
 		}
 		return $transport;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
-	 */
-	public function getAllIncludingDeletedByVat(Vat $vat) {
-		return $this->getTransportRepository()->findBy(['vat' => $vat]);
 	}
 
 	/**

@@ -101,8 +101,6 @@ class AvailabilityRepository {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $newAvailability
 	 */
 	public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability) {
-		$this->em->flush();
-
 		$this->em->createQueryBuilder()
 			->update(Product::class, 'p')
 			->set('p.availability', ':newAvailability')->setParameter('newAvailability', $newAvailability)

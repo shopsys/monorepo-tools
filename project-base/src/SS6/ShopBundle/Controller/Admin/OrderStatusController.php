@@ -90,14 +90,6 @@ class OrderStatusController extends AdminBaseController {
 					'name' => $e->getOrderStatus()->getName(),
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionWithOrdersException $e) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Stav objednávek <strong>{{ name }}</strong>'
-					. ' mají nastaveny některé objednávky, před smazáním jim prosím změňte stav'),
-				[
-					'name' => $e->getOrderStatus()->getName(),
-				]
-			);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený stav objednávek neexistuje'));
 		}

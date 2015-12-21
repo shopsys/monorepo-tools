@@ -94,14 +94,11 @@ class OrderStatusFacade {
 	 */
 	public function deleteById($orderStatusId, $newOrderStatusId = null) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
-		$orders = $this->orderRepository->getOrdersByStatusId($orderStatusId);
+		$this->orderStatusService->checkForDelete($orderStatus);
 		if ($newOrderStatusId !== null) {
 			$newOrderStatus = $this->orderStatusRepository->findById($newOrderStatusId);
-		} else {
-			$newOrderStatus = null;
+			$this->orderStatusRepository->replaceOrderStatus($orderStatus, $newOrderStatus);
 		}
-
-		$this->orderStatusService->delete($orderStatus, $orders, $newOrderStatus);
 
 		$this->em->remove($orderStatus);
 		$this->em->flush();

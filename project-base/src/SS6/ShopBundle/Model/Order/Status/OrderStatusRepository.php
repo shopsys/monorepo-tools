@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository {
@@ -95,4 +96,15 @@ class OrderStatusRepository {
 		return $qb->getQuery()->getResult();
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
+	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+	 */
+	public function replaceOrderStatus(OrderStatus $oldOrderStatus, OrderStatus $newOrderStatus) {
+		$this->em->createQueryBuilder()
+			->update(Order::class, 'o')
+			->set('o.status', ':newOrderStatus')->setParameter('newOrderStatus', $newOrderStatus)
+			->where('o.status = :oldOrderStatus')->setParameter('oldOrderStatus', $oldOrderStatus)
+			->getQuery()->execute();
+	}
 }

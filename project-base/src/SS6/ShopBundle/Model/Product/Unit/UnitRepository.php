@@ -90,4 +90,16 @@ class UnitRepository {
 		return $qb->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $oldUnit
+	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $newUnit
+	 */
+	public function replaceUnit(Unit $oldUnit, Unit $newUnit) {
+		$this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.unit', ':newUnit')->setParameter('newUnit', $newUnit)
+			->where('p.unit = :oldUnit')->setParameter('oldUnit', $oldUnit)
+			->getQuery()->execute();
+	}
+
 }
