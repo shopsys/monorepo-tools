@@ -80,7 +80,7 @@ framework:
     collect: false
 
 monolog:
-  channels: ["cron"]
+  channels: ["cron", "slow"]
   handlers:
     main:
       type: fingers_crossed
@@ -90,12 +90,17 @@ monolog:
       type: stream
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
-      channels: "!cron"
+      channels: ["!cron", "!slow"]
     cron:
       type: rotating_file
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
       channels: cron
+    slow:
+      type: rotating_file
+      max_files: 7
+      path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
+      channels: slow
     cron_console:
       type:   console
       verbosity_levels:
