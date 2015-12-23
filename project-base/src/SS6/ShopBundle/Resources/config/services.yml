@@ -278,6 +278,14 @@ services:
   ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
+  ss6.shop.component.log.slow_log_facade:
+    class: SS6\ShopBundle\Component\Log\SlowLogFacade
+    arguments:
+      - @monolog.logger.slow
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
+
   ss6.shop.component.sitemap.sitemap_dumper_factory:
     class: SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory
     arguments:

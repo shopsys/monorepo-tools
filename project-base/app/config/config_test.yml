@@ -30,6 +30,8 @@ monolog:
       type: "null"
     console:
       type: "null"
+    slow:
+      type: "null"
 
 security:
   # simple login for crawler tests
