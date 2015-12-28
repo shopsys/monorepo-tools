@@ -86,6 +86,13 @@ class Domain {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 */
+	public function getAllIncludingDomainConfigsWithoutDataCreated() {
+		return $this->domainConfigs;
+	}
+
+	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
