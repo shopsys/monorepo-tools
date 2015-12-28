@@ -7,13 +7,15 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelegateRouter() {
 		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'en', 'stylesDirectory');
-		$domain = new Domain([$domainConfigs]);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain([$domainConfigs], $settingMock);
 		$domain->switchDomainById(1);
 
 		$generateResult = 'generateResult';

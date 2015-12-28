@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use SS6\ShopBundle\Component\Setting\Setting;
 
 class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -15,7 +16,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir', 'stylesDirectory'),
 			new DomainConfig(2, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$friendlyUrlService = new FriendlyUrlService($domain);
 
@@ -43,7 +45,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$friendlyUrlService = new FriendlyUrlService($domain);
 
@@ -65,7 +68,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$friendlyUrlService = new FriendlyUrlService($domain);
 
@@ -90,7 +94,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.com', 'example.com', 'en', 'templateDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$friendlyUrlService = new FriendlyUrlService($domain);
 
@@ -119,7 +124,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs', 'templateDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$friendlyUrlService = new FriendlyUrlService($domain);
 		$friendlyUrl = new FriendlyUrl('routeName', 1, 1, 'slug/');

@@ -17,14 +17,14 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1', 'stylesDirectory'),
 		];
 
-		$domain = new Domain($domainConfigs);
-
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
 			->expects($this->once())
 			->method('get')
 			->with($this->equalTo(Setting::DOMAIN_DATA_CREATED), $this->equalTo(1))
 			->willReturn(true);
+
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
 
@@ -42,8 +42,6 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 			new DomainConfig(2, 'http://example.com:8080', 'example', 'cs', 'design2', 'stylesDirectory'),
 		];
 
-		$domain = new Domain($domainConfigs);
-
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
 			->expects($this->exactly(count($domainConfigs)))
@@ -59,6 +57,8 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 			->expects($this->once())
 			->method('copyAllMultidomainSettings')
 			->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
+
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
 
