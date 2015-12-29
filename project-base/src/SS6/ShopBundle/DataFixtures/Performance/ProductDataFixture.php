@@ -149,7 +149,9 @@ class ProductDataFixture {
 
 			$this->printProgress();
 			if ($this->countImported % self::BATCH_SIZE === 0) {
+				$currentKey = key($productsEditData);
 				$productsEditData = $this->cleanAndWarmUp($this->em);
+				$this->setArrayPointerByKey($productsEditData, $currentKey);
 			}
 
 			$this->countImported++;
@@ -309,5 +311,18 @@ class ProductDataFixture {
 		$firstPerformanceCategoryKey = array_search($firstPerformanceCategory->getId(), $allCategoryIds, true);
 
 		return array_slice($allCategoryIds, $firstPerformanceCategoryKey);
+	}
+
+	/**
+	 * @param array $array
+	 * @param string|int $key
+	 */
+	private function setArrayPointerByKey(array &$array, $key) {
+		reset($array);
+		while (key($array) !== $key) {
+			if (each($array) === false) {
+				throw \SS6\ShopBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
+			}
+		}
 	}
 }
