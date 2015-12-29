@@ -588,7 +588,7 @@ class ProductRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Iterator|\SS6\ShopBundle\Model\Product\Product[][0]
 	 */
 	public function getProductsForPriceRecalculationIterator() {
 		return $this->getProductRepository()->createQueryBuilder('p')->where('p.recalculatePrice = TRUE')->getQuery()->iterate();

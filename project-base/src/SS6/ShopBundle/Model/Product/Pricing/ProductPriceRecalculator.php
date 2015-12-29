@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 class ProductPriceRecalculator {
 
 	const BATCH_SIZE = 100;
-
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
@@ -44,10 +43,16 @@ class ProductPriceRecalculator {
 	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null
 	 */
 	private $allPricingGroups;
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
+
+	/**
+	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
+	 */
+	private $productRowsIterator;
 
 	public function __construct(
 		EntityManager $em,
@@ -66,37 +71,34 @@ class ProductPriceRecalculator {
 	}
 
 	/**
-	 * @param callable $canRunCallback
-	 * @return int
+	 * @return bool
 	 */
-	public function runScheduledRecalculationsWhile(callable $canRunCallback) {
-		$productRows = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
-		$count = 0;
+	public function runScheduledRecalculationsBatch() {
+		if ($this->productRowsIterator === null) {
+			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
+		}
 
-		foreach ($productRows as $row) {
-			if (!$canRunCallback()) {
-				return $count;
-			}
-			$this->recalculateProductPrices($row[0]);
-			$count++;
-			if ($count % self::BATCH_SIZE === 0) {
+		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+			$row = $this->productRowsIterator->next();
+			if ($row === false) {
 				$this->clearCache();
 				$this->em->clear();
+
+				return false;
 			}
+			$this->recalculateProductPrices($row[0]);
 		}
 		$this->clearCache();
 		$this->em->clear();
 
-		return $count;
+		return true;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function runAllScheduledRecalculations() {
-		$this->runScheduledRecalculationsWhile(function () {
-			return true;
-		});
+		$this->productRowsIterator = null;
+		// @codingStandardsIgnoreStart
+		while ($this->runScheduledRecalculationsBatch()) {};
+		// @codingStandardsIgnoreEnd
 	}
 
 	public function runImmediateRecalculations() {
