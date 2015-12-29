@@ -13,11 +13,19 @@
 		var options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
 		var $loaderOverlay = getLoaderOverlay(options.loaderMessage);
+		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
 			clearTimeout(loaderOverlayTimeout);
 			$loaderOverlay.remove();
+		};
+
+		options.error = function (jqXHR) {
+			// on FireFox abort ajax request, but request was probably successful
+			if (jqXHR.status !== 0) {
+				userErrorCallback.apply(this, [jqXHR]);
+			}
 		};
 
 		loaderOverlayTimeout = setTimeout(function () {
