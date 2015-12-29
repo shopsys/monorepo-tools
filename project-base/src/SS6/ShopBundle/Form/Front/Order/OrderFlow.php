@@ -137,11 +137,11 @@ class OrderFlow extends FormFlow {
 		$stepsData = $this->retrieveStepData();
 		if (array_key_exists($stepNumber, $stepsData)) {
 			$stepForm = $this->createFormForStep($stepNumber);
-			$stepForm->bind($stepsData[$stepNumber]); // the form is validated here
+			$stepForm->submit($stepsData[$stepNumber]); // the form is validated here
 			return $stepForm->isValid();
 		}
 
-		return $step->getType() === null;
+		return $step->getFormType() === null;
 	}
 
 	/**
@@ -158,7 +158,7 @@ class OrderFlow extends FormFlow {
 		$request = $this->getRequest()->request;
 		$requestParameters = $request->all();
 		$requestParameters['flow_order_step'] = $step->getNumber();
-		$requestParameters[$step->getType()->getName()] = $stepData;
+		$requestParameters[$step->getFormType()->getName()] = $stepData;
 		$request->replace($requestParameters);
 	}
 

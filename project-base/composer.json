@@ -48,7 +48,7 @@
 		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
 		"commerceguys/intl": "0.5",
-		"craue/formflow-bundle": "dev-master#55da501",
+		"craue/formflow-bundle": "dev-master#d14fcb1",
 		"doctrine/common": "2.5.0",
 		"doctrine/doctrine-bundle": "1.5.0",
 		"doctrine/doctrine-fixtures-bundle": "2.2.0",

@@ -462,7 +462,6 @@ services:
   ss6.shop.order.flow:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
-    scope: request
 
   ss6.shop.order.order_transport_and_payment_watcher_service:
     class: SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
