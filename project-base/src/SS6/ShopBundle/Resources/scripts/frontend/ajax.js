@@ -3,6 +3,7 @@
 	SS6 = window.SS6 || {};
 
 	SS6.ajax = function (options) {
+		var loaderOverlayTimeout;
 		var defaults = {
 			loaderElement: 'body',
 			loaderMessage: '',
@@ -15,10 +16,13 @@
 
 		options.complete = function (jqXHR, textStatus) {
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
+			clearTimeout(loaderOverlayTimeout);
 			$loaderOverlay.remove();
 		};
 
-		showLoaderOverlay(options.loaderElement, $loaderOverlay);
+		loaderOverlayTimeout = setTimeout(function () {
+			showLoaderOverlay(options.loaderElement, $loaderOverlay);
+		}, 200);
 		$.ajax(options);
 	};
 
