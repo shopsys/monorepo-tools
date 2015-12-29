@@ -65,8 +65,9 @@ class FlagFilterChoiceRepository {
 
 		$flagsQueryBuilder = $productsQueryBuilder->getEntityManager()->createQueryBuilder();
 		$flagsQueryBuilder
-			->select('f')
+			->select('f, ft')
 			->from(Flag::class, 'f')
+			->join('f.translations', 'ft')
 			->andWhere($flagsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder));
 
 		foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
