@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\Cron;
 
 use DateTime;
 use SS6\ShopBundle\Component\Cron\Config\CronConfig;
+use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade {
@@ -37,8 +38,7 @@ class CronFacade {
 		$this->logger->addInfo('====== Start of cron ======');
 
 		foreach ($cronModuleConfigs as $cronModuleConfig) {
-			$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
-			$cronModuleConfig->getCronModule()->run($this->logger);
+			$this->runModule($cronModuleConfig);
 		}
 
 		$this->logger->addInfo('======= End of cron =======');
@@ -48,6 +48,25 @@ class CronFacade {
 	 * @param string $moduleId
 	 */
 	public function runModuleByModuleId($moduleId) {
-		$this->runModules([$this->cronConfig->getCronModuleConfigByModuleId($moduleId)]);
+		$this->runModule($this->cronConfig->getCronModuleConfigByModuleId($moduleId));
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 */
+	private function runModule(CronModuleConfig $cronModuleConfig) {
+		$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
+		$cronModule = $cronModuleConfig->getCronModule();
+
+		if ($cronModule instanceof CronModuleInterface) {
+			$cronModule->run($this->logger);
+		} elseif ($cronModule instanceof IteratedCronModuleInterface) {
+			$cronModule->initialize($this->logger);
+			// @codingStandardsIgnoreStart
+			while ($cronModule->iterate()) {}
+			// @codingStandardsIgnoreEnd
+		}
+
+		$this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
 	}
 }
