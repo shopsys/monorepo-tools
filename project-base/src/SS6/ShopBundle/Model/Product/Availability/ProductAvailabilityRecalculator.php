@@ -27,6 +27,11 @@ class ProductAvailabilityRecalculator {
 	 */
 	private $productAvailabilityCalculation;
 
+	/**
+	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
+	 */
+	private $productRowsIterator;
+
 	public function __construct(
 		EntityManager $em,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
@@ -37,36 +42,34 @@ class ProductAvailabilityRecalculator {
 		$this->productAvailabilityCalculation = $productAvailabilityCalculation;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function runAllScheduledRecalculations() {
-		return $this->runScheduledRecalculationsWhile(function () {
-			return true;
-		});
+		$this->productRowsIterator = null;
+		// @codingStandardsIgnoreStart
+		while ($this->runScheduledRecalculationsBatch()) {};
+		// @codingStandardsIgnoreEnd
 	}
 
 	/**
-	 * @param callable $canRunCallback
-	 * @return int
+	 * @return bool
 	 */
-	public function runScheduledRecalculationsWhile(callable $canRunCallback) {
-		$productRows = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForRecalculation();
-		$count = 0;
+	public function runScheduledRecalculationsBatch() {
+		if ($this->productRowsIterator === null) {
+			$this->productRowsIterator = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForRecalculation();
+		}
 
-		foreach ($productRows as $row) {
-			if (!$canRunCallback()) {
-				return $count;
+		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+			$row = $this->productRowsIterator->next();
+			if ($row === false) {
+				$this->em->clear();
+
+				return false;
 			}
 			$this->recalculateAvailabilityForProduct($row[0]);
-			$count++;
-			if ($count % self::BATCH_SIZE === 0) {
-				$this->em->clear();
-			}
 		}
+
 		$this->em->clear();
 
-		return $count;
+		return true;
 	}
 
 	public function runImmediateRecalculations() {
