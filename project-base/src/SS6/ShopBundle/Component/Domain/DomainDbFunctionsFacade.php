@@ -30,7 +30,7 @@ class DomainDbFunctionsFacade {
 
 	private function createDomainIdsByLocaleFunction() {
 		$domainsIdsByLocale = [];
-		foreach ($this->domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
 			$domainsIdsByLocale[$domainConfig->getLocale()][] = $domainConfig->getId();
 		}
 
@@ -58,7 +58,7 @@ class DomainDbFunctionsFacade {
 
 	private function createLocaleByDomainIdFunction() {
 		$localeByDomainIdSqlClauses = [];
-		foreach ($this->domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
 			$localeByDomainIdSqlClauses[] =
 				'WHEN domain_id = ' . $domainConfig->getId()
 				. ' THEN RETURN \'' . $domainConfig->getLocale() . '\';';

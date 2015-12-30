@@ -48,7 +48,7 @@ class DomainDataCreator {
 	 */
 	public function createNewDomainsData() {
 		$newDomainsCount = 0;
-		foreach ($this->domain->getAll() as $domainConfig) {
+		foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			try {
 				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);

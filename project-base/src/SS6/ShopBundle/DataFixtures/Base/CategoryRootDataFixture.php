@@ -2,15 +2,17 @@
 
 namespace SS6\ShopBundle\DataFixtures\Base;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryDomain;
 use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
 
-class CategoryRootDataFixture extends AbstractReferenceFixture {
+class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const ROOT = 'category_root';
 
@@ -36,6 +38,15 @@ class CategoryRootDataFixture extends AbstractReferenceFixture {
 		$manager->flush();
 
 		$categoryVisibilityRepository->refreshCategoriesVisibility();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return [
+			SettingValueDataFixture::class,
+		];
 	}
 
 }

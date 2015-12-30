@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Domain;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainListener;
+use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -16,8 +17,9 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 		$eventMock->expects($this->once())->method('isMasterRequest')->will($this->returnValue(false));
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 
-		$domain = new Domain([]);
+		$domain = new Domain([], $settingMock);
 
 		$domainListener = new DomainListener($domain);
 		$domainListener->onKernelRequest($eventMock);

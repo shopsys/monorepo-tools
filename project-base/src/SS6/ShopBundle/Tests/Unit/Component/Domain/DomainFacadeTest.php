@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Component\Domain\DomainService;
 use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
@@ -20,7 +21,8 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 			2 => new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
 			3 => new DomainConfig(3, 'http://example.edu:8080', 'example.edu', 'en', 'design3', 'stylesDirectory'),
 		];
-		$domain = new Domain($testDomainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($testDomainConfigs, $settingMock);
 
 		$currencyMock = $this->getMock(Currency::class, ['getId'], [], '', false);
 		$currencyMock->expects($this->any())->method('getId')->willReturn(1);

@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
@@ -21,7 +22,8 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest 
 			new DomainConfig(1, 'http://example.cz', 'name1', 'cs', 'templatesDir', 'stylesDirectory'),
 			new DomainConfig(2, 'http://example.com', 'name2', 'en', 'templatesDir', 'stylesDirectory'),
 		];
-		$domain = new Domain($domainConfigs);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain($domainConfigs, $settingMock);
 
 		$routerMock = $this->getMockBuilder(RouterInterface::class)
 			->setMethods(['match'])

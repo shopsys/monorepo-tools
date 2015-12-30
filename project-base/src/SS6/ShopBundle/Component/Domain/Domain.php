@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Domain;
 
+use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
 class Domain {
@@ -19,10 +20,17 @@ class Domain {
 	private $domainConfigs;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
-	public function __construct(array $domainConfigs) {
+	private $setting;
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 */
+	public function __construct(array $domainConfigs, Setting $setting) {
 		$this->domainConfigs = $domainConfigs;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -64,6 +72,23 @@ class Domain {
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAll() {
+		$domainConfigsWithDataCreated = [];
+		foreach ($this->domainConfigs as $domainConfig) {
+			$domainId = $domainConfig->getId();
+			try {
+				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);
+				$domainConfigsWithDataCreated[] = $domainConfig;
+			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
+			}
+		}
+
+		return $domainConfigsWithDataCreated;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 */
+	public function getAllIncludingDomainConfigsWithoutDataCreated() {
 		return $this->domainConfigs;
 	}
 

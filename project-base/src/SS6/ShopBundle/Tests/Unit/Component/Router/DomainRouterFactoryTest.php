@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
 use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -18,7 +19,8 @@ class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testGetRouter() {
 
 		$domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en', 'templateDirectory', 'stylesDirectory');
-		$domain = new Domain([$domainConfig]);
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$domain = new Domain([$domainConfig], $settingMock);
 
 		$localizedRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();
 		$friendlyUrlRouterMock = $this->getMockBuilder(FriendlyUrlRouter::class)
