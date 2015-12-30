@@ -140,6 +140,7 @@ class ProductDataFixtureLoader {
 	public function getProductsEditData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
+		$productsEditData = [];
 		foreach ($rows as $rowId => $row) {
 			if ($rowId === 0) {
 				continue;

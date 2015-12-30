@@ -31,11 +31,11 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 		$userDataFixture = $container->get(UserDataFixture::class);
 		/* @var $userDataFixture \SS6\ShopBundle\DataFixtures\Performance\UserDataFixture */
 
-		$output->write('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
+		$output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
 		$categoryDataFixture->load();
-		$output->write('<fg=green>loading ' . ProductDataFixture::class . '</fg=green>');
+		$output->writeln('<fg=green>loading ' . ProductDataFixture::class . '</fg=green>');
 		$productDataFixture->load();
-		$output->write('<fg=green>loading ' . UserDataFixture::class . '</fg=green>');
+		$output->writeln('<fg=green>loading ' . UserDataFixture::class . '</fg=green>');
 		$userDataFixture->load();
 	}
 
