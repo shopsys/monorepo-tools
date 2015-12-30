@@ -46,7 +46,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('design1', $domain->getTemplatesDirectory());
 	}
 
-	public function testGetAll() {
+	public function testGetAllIncludingDomainConfigsWithoutDataCreated() {
 		$domainConfigs = [
 			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
 			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
@@ -55,7 +55,45 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 		$domain = new Domain($domainConfigs, $settingMock);
 
-		$this->assertSame($domainConfigs, $domain->getAll());
+		$this->assertSame($domainConfigs, $domain->getAllIncludingDomainConfigsWithoutDataCreated());
+	}
+
+	public function testGetAll() {
+		$domainConfigWithDataCreated = new DomainConfig(
+			1,
+			'http://example.com:8080',
+			'example.com',
+			'cs',
+			'design1',
+			'stylesDirectory'
+		);
+		$domainConfigWithoutDataCreated = new DomainConfig(
+			2,
+			'http://example.org:8080',
+			'example.org',
+			'en',
+			'design2',
+			'stylesDirectory'
+		);
+		$domainConfigs = [
+			$domainConfigWithDataCreated,
+			$domainConfigWithoutDataCreated,
+		];
+		$settingMock = $this->getMock(Setting::class, [], [], '', false);
+		$settingMock
+			->expects($this->exactly(count($domainConfigs)))
+			->method('get')
+			->willReturnCallback(function ($key, $domainId) use ($domainConfigWithDataCreated) {
+				$this->assertEquals(Setting::DOMAIN_DATA_CREATED, $key);
+				if ($domainId === $domainConfigWithDataCreated->getId()) {
+					return true;
+				}
+				throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+			});
+
+		$domain = new Domain($domainConfigs, $settingMock);
+
+		$this->assertSame([$domainConfigWithDataCreated], $domain->getAll());
 	}
 
 	public function testGetDomainConfigById() {
