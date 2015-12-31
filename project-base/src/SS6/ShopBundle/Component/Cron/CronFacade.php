@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\Cron;
 use DateTime;
 use SS6\ShopBundle\Component\Cron\Config\CronConfig;
 use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use SS6\ShopBundle\Component\Cron\CronModuleFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade {
@@ -18,17 +19,27 @@ class CronFacade {
 	 * @var \SS6\ShopBundle\Component\Cron\Config\CronConfig
 	 */
 	private $cronConfig;
+	/**
+	 * @var \SS6\ShopBundle\Component\Cron\CronModuleFacade
+	 */
+	private $cronModuleFacade;
 
-	public function __construct(Logger $logger, CronConfig $cronConfig) {
+	public function __construct(Logger $logger, CronConfig $cronConfig, CronModuleFacade $cronModuleFacade) {
 		$this->logger = $logger;
 		$this->cronConfig = $cronConfig;
+		$this->cronModuleFacade = $cronModuleFacade;
 	}
 
 	/**
 	 * @param \DateTime $roundedTime
 	 */
 	public function runModulesByTime(DateTime $roundedTime) {
-		$this->runModules($this->cronConfig->getCronModuleConfigsByTime($roundedTime));
+		$cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
+		$this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
+
+		$cronModuleConfigs = $this->cronConfig->getAll();
+		$scheduledCronModuleConfigs = $this->cronModuleFacade->getOnlyScheduledCronModuleConfigs($cronModuleConfigs);
+		$this->runModules($scheduledCronModuleConfigs);
 	}
 
 	/**
@@ -66,6 +77,7 @@ class CronFacade {
 			while ($cronModuleService->iterate()) {}
 			// @codingStandardsIgnoreEnd
 		}
+		$this->cronModuleFacade->unscheduledModule($cronModuleConfig->getModuleId());
 
 		$this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
 	}
