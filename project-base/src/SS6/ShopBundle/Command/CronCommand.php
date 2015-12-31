@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Command;
 
+use DateTime;
+use DateTimeImmutable;
 use SS6\ShopBundle\Component\Cron\CronFacade;
 use SS6\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -45,14 +47,14 @@ class CronCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @return \DateTime
+	 * @return \DateTimeImmutable
 	 */
 	private function getActualRoundedTime() {
-		$time = new \DateTime(null);
+		$time = new DateTime(null);
 		$time->modify('-' . $time->format('s') . ' sec');
 		$time->modify('-' . ($time->format('i') % 5) . ' min');
 
-		return $time;
+		return DateTimeImmutable::createFromMutable($time);
 	}
 
 }

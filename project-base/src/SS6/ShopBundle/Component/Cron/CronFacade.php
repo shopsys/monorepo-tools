@@ -2,8 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Cron;
 
-use DateTime;
 use DateTimeImmutable;
+use DateTimeInterface;
 use SS6\ShopBundle\Component\Cron\Config\CronConfig;
 use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronModuleFacade;
@@ -38,9 +38,9 @@ class CronFacade {
 	}
 
 	/**
-	 * @param \DateTimeImmutable $roundedTime
+	 * @param \DateTimeInterface $roundedTime
 	 */
-	public function runModulesByTime(DateTime $roundedTime) {
+	public function runModulesByTime(DateTimeInterface $roundedTime) {
 		$this->canRunTo = new DateTimeImmutable('+4 minutes');
 		$cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
 		$this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
@@ -106,7 +106,7 @@ class CronFacade {
 	 * @return bool
 	 */
 	private function canRun() {
-		$now = new DateTime();
+		$now = new DateTimeImmutable();
 
 		return $this->canRunTo->diff($now)->invert === 1;
 	}

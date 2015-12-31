@@ -2,17 +2,17 @@
 
 namespace SS6\ShopBundle\Component\Cron;
 
-use DateTime;
+use DateTimeInterface;
 use SS6\ShopBundle\Component\Cron\CronTimeInterface;
 
 class CronTimeResolver {
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Cron\CronTimeInterface $cronTime
-	 * @param \DateTime $dateTime
+	 * @param \DateTimeInterface $dateTime
 	 * @return bool
 	 */
-	public function isValidAtTime(CronTimeInterface $cronTime, DateTime $dateTime) {
+	public function isValidAtTime(CronTimeInterface $cronTime, DateTimeInterface $dateTime) {
 		$hour = (int)$dateTime->format('G');
 		$minute = (int)$dateTime->format('i');
 
