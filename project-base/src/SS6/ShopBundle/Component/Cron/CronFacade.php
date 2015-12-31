@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Cron;
 
 use DateTime;
+use DateTimeImmutable;
 use SS6\ShopBundle\Component\Cron\Config\CronConfig;
 use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronModuleFacade;
@@ -19,10 +20,16 @@ class CronFacade {
 	 * @var \SS6\ShopBundle\Component\Cron\Config\CronConfig
 	 */
 	private $cronConfig;
+
 	/**
 	 * @var \SS6\ShopBundle\Component\Cron\CronModuleFacade
 	 */
 	private $cronModuleFacade;
+
+	/**
+	 * @var \DateTimeImmutable|null
+	 */
+	private $canRunTo;
 
 	public function __construct(Logger $logger, CronConfig $cronConfig, CronModuleFacade $cronModuleFacade) {
 		$this->logger = $logger;
@@ -31,9 +38,10 @@ class CronFacade {
 	}
 
 	/**
-	 * @param \DateTime $roundedTime
+	 * @param \DateTimeImmutable $roundedTime
 	 */
 	public function runModulesByTime(DateTime $roundedTime) {
+		$this->canRunTo = new DateTimeImmutable('+4 minutes');
 		$cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
 		$this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
 
@@ -49,7 +57,12 @@ class CronFacade {
 		$this->logger->addInfo('====== Start of cron ======');
 
 		foreach ($cronModuleConfigs as $cronModuleConfig) {
-			$this->runModule($cronModuleConfig);
+			if ($this->canRun()) {
+				$this->runModule($cronModuleConfig);
+			} else {
+				$this->logger->info('Cron reached timeout.');
+				break;
+			}
 		}
 
 		$this->logger->addInfo('======= End of cron =======');
@@ -59,6 +72,7 @@ class CronFacade {
 	 * @param string $moduleId
 	 */
 	public function runModuleByModuleId($moduleId) {
+		$this->canRunTo = new DateTimeImmutable('+4 minutes');
 		$this->runModule($this->cronConfig->getCronModuleConfigByModuleId($moduleId));
 	}
 
@@ -71,14 +85,29 @@ class CronFacade {
 
 		if ($cronModuleService instanceof CronModuleInterface) {
 			$cronModuleService->run($this->logger);
+			$this->cronModuleFacade->unscheduledModule($cronModuleConfig->getModuleId());
 		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
 			$cronModuleService->initialize($this->logger);
-			// @codingStandardsIgnoreStart
-			while ($cronModuleService->iterate()) {}
-			// @codingStandardsIgnoreEnd
+			$inProgress = true;
+			while ($this->canRun() && $inProgress === true) {
+				$inProgress = $cronModuleService->iterate();
+			}
+			if ($inProgress) {
+				$this->cronModuleFacade->suspendModule($cronModuleConfig->getModuleId());
+			} else {
+				$this->cronModuleFacade->unscheduledModule($cronModuleConfig->getModuleId());
+			}
 		}
-		$this->cronModuleFacade->unscheduledModule($cronModuleConfig->getModuleId());
 
 		$this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
+	}
+
+	/**
+	 * @return bool
+	 */
+	private function canRun() {
+		$now = new DateTime();
+
+		return $this->canRunTo->diff($now)->invert === 1;
 	}
 }

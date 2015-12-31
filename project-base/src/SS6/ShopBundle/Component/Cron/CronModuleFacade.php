@@ -63,4 +63,13 @@ class CronModuleFacade {
 		$this->em->flush($cronModule);
 	}
 
+	/**
+	 * @param string $moduleId
+	 */
+	public function suspendModule($moduleId) {
+		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($moduleId);
+		$cronModule->suspend();
+		$this->em->flush($cronModule);
+	}
+
 }
