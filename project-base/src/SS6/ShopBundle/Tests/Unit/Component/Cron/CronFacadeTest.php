@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Cron\Config\CronConfig;
 use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronFacade;
+use SS6\ShopBundle\Component\Cron\CronModuleExecutorFactory;
 use SS6\ShopBundle\Component\Cron\CronModuleFacade;
 use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Component\Cron\CronTimeResolver;
@@ -25,8 +26,9 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
 		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduledModule')->with($this->equalTo($moduleId));
+		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
-		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock);
+		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
 		$cronFacade->runModuleByModuleId($moduleId);
 	}
 
@@ -47,8 +49,9 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
 		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduledModule')->with($this->equalTo($moduleId));
+		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
-		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock);
+		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
 		$cronFacade->runModuleByModuleId($moduleId);
 	}
 
@@ -92,7 +95,9 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 				return true;
 			}));
 
-		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock);
+		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
+
+		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
 		$cronFacade->runModulesByTime(new DateTime());
 	}
 
