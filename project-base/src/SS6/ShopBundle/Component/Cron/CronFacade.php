@@ -56,14 +56,14 @@ class CronFacade {
 	 */
 	private function runModule(CronModuleConfig $cronModuleConfig) {
 		$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
-		$cronModule = $cronModuleConfig->getCronModule();
+		$cronModuleService = $cronModuleConfig->getCronModuleService();
 
-		if ($cronModule instanceof CronModuleInterface) {
-			$cronModule->run($this->logger);
-		} elseif ($cronModule instanceof IteratedCronModuleInterface) {
-			$cronModule->initialize($this->logger);
+		if ($cronModuleService instanceof CronModuleInterface) {
+			$cronModuleService->run($this->logger);
+		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
+			$cronModuleService->initialize($this->logger);
 			// @codingStandardsIgnoreStart
-			while ($cronModule->iterate()) {}
+			while ($cronModuleService->iterate()) {}
 			// @codingStandardsIgnoreEnd
 		}
 

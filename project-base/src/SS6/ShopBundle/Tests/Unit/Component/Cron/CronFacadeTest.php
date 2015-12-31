@@ -15,9 +15,9 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunModuleByModuleId() {
 		$moduleId = 'moduleId';
-		$cronModuleMock = $this->getMockForAbstractClass(CronModuleInterface::class);
-		$cronModuleMock->expects($this->once())->method('run');
-		$cronModuleConfig = new CronModuleConfig($cronModuleMock, $moduleId, '', '');
+		$cronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
+		$cronModuleServiceMock->expects($this->once())->method('run');
+		$cronModuleConfig = new CronModuleConfig($cronModuleServiceMock, $moduleId, '', '');
 		$cronTimeResolver = new CronTimeResolver();
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 
@@ -28,14 +28,16 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunIterableModuleByModuleId() {
 		$moduleId = 'moduleId';
-		$cronModuleMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
-		$cronModuleMock->expects($this->once())->method('initialize');
+		$cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
+		$cronModuleServiceMock->expects($this->once())->method('initialize');
 		$iterations = 3;
-		$cronModuleMock->expects($this->exactly($iterations))->method('iterate')->willReturnCallback(function () use (&$iterations) {
-			$iterations--;
-			return $iterations > 0;
-		});
-		$cronModuleConfig = new CronModuleConfig($cronModuleMock, $moduleId, '', '');
+		$cronModuleServiceMock->expects($this->exactly($iterations))->method('iterate')->willReturnCallback(
+			function () use (&$iterations) {
+				$iterations--;
+				return $iterations > 0;
+			}
+		);
+		$cronModuleConfig = new CronModuleConfig($cronModuleServiceMock, $moduleId, '', '');
 		$cronTimeResolver = new CronTimeResolver();
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
