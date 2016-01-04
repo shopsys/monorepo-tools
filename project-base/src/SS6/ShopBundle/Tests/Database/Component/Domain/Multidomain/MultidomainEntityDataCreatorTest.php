@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Database\Component\Domain\Multidomain;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
+use SS6\ShopBundle\Component\Sql\SqlQuoter;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
@@ -37,7 +38,9 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
 				'_test_table' => ['title'],
 			]);
 
-		$multidomainEntityDataCreator = new MultidomainEntityDataCreator($multidomainEntityClassFinderFacadeMock, $em);
+		$sqlQuoter = new SqlQuoter($em);
+
+		$multidomainEntityDataCreator = new MultidomainEntityDataCreator($multidomainEntityClassFinderFacadeMock, $em, $sqlQuoter);
 
 		$multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(1, 2);
 
@@ -90,7 +93,9 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
 				'_test_table' => ['domain_id', 'title'],
 			]);
 
-		$multidomainEntityDataCreator = new MultidomainEntityDataCreator($multidomainEntityClassFinderFacadeMock, $em);
+		$sqlQuoter = new SqlQuoter($em);
+
+		$multidomainEntityDataCreator = new MultidomainEntityDataCreator($multidomainEntityClassFinderFacadeMock, $em, $sqlQuoter);
 
 		try {
 			$multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(1, 2);
