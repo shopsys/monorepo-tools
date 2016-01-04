@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreator {
 
@@ -31,16 +32,23 @@ class DomainDataCreator {
 	 */
 	private $multidomainEntityDataCreator;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator
+	 */
+	private $translatableEntityDataCreator;
+
 	public function __construct(
 		Domain $domain,
 		Setting $setting,
 		EntityManager $em,
-		MultidomainEntityDataCreator $multidomainEntityDataCreator
+		MultidomainEntityDataCreator $multidomainEntityDataCreator,
+		TranslatableEntityDataCreator $translatableEntityDataCreator
 	) {
 		$this->domain = $domain;
 		$this->setting = $setting;
 		$this->em = $em;
 		$this->multidomainEntityDataCreator = $multidomainEntityDataCreator;
+		$this->translatableEntityDataCreator = $translatableEntityDataCreator;
 	}
 
 	/**
@@ -55,10 +63,38 @@ class DomainDataCreator {
 			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
 				$this->setting->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
 				$this->multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(self::TEMPLATE_DOMAIN_ID, $domainId);
+				$locale = $domainConfig->getLocale();
+				if ($this->isNewLocale($locale)) {
+					$this->translatableEntityDataCreator->copyAllTranslatableDataForNewLocale(
+						$this->getTemplateLocale(),
+						$locale
+					);
+				}
 				$newDomainsCount++;
 			}
 		}
 
 		return $newDomainsCount;
+	}
+
+	/**
+	 * @param string $locale
+	 * @return bool
+	 */
+	private function isNewLocale($locale) {
+		foreach ($this->domain->getAll() as $domainConfig) {
+			if ($domainConfig->getLocale() === $locale) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getTemplateLocale() {
+		return $this->domain->getDomainConfigById(self::TEMPLATE_DOMAIN_ID)->getLocale();
 	}
 }
