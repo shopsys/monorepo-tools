@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 
 class CronModuleExecutor {
 
@@ -23,13 +22,13 @@ class CronModuleExecutor {
 		$this->canRunTo = new DateTimeImmutable('+' . $secondsTimeout . ' sec');
 	}
 
+	//@codingStandardsIgnoreStart
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
 	 * @return string
 	 */
-	public function runModule(CronModuleConfig $cronModuleConfig) {
-		$cronModuleService = $cronModuleConfig->getCronModuleService();
-
+	public function runModule($cronModuleService) {
+		//@codingStandardsIgnoreStop
 		if (!$this->canRun()) {
 			return self::RUN_STATUS_TIMEOUT;
 		}
@@ -54,4 +53,5 @@ class CronModuleExecutor {
 	public function canRun() {
 		return $this->canRunTo > new DateTimeImmutable();
 	}
+
 }
