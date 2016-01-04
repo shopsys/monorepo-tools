@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
 use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Symfony\Bridge\Monolog\Logger;
 
 class CronModuleExecutor {
 
@@ -25,11 +24,10 @@ class CronModuleExecutor {
 	}
 
 	/**
-	 * @param \Symfony\Bridge\Monolog\Logger $logger
 	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 * @return string
 	 */
-	public function runModule(Logger $logger, CronModuleConfig $cronModuleConfig) {
+	public function runModule(CronModuleConfig $cronModuleConfig) {
 		$cronModuleService = $cronModuleConfig->getCronModuleService();
 
 		if (!$this->canRun()) {
@@ -37,11 +35,10 @@ class CronModuleExecutor {
 		}
 
 		if ($cronModuleService instanceof CronModuleInterface) {
-			$cronModuleService->run($logger);
+			$cronModuleService->run();
 
 			return self::RUN_STATUS_OK;
 		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
-			$cronModuleService->setLogger($logger);
 			$inProgress = true;
 			while ($this->canRun() && $inProgress === true) {
 				$inProgress = $cronModuleService->iterate();

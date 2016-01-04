@@ -18,9 +18,13 @@ class DeliveryFeedCronModule implements CronModuleInterface {
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * @inheritdoc
 	 */
-	public function run(Logger $logger) {
+	public function setLogger(Logger $logger) {
+
+	}
+
+	public function run() {
 		$this->feedFacade->generateDeliveryFeeds();
 	}
 

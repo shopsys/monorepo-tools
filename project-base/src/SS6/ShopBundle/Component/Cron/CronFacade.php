@@ -95,7 +95,8 @@ class CronFacade {
 	 */
 	private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig) {
 		$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
-		$status = $cronModuleExecutor->runModule($this->logger, $cronModuleConfig);
+		$cronModuleConfig->getCronModuleService()->setLogger($this->logger);
+		$status = $cronModuleExecutor->runModule($cronModuleConfig);
 
 		if ($status === CronModuleExecutor::RUN_STATUS_OK) {
 			$this->cronModuleFacade->unscheduleModule($cronModuleConfig->getModuleId());
