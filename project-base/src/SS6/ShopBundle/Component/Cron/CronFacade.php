@@ -97,13 +97,13 @@ class CronFacade {
 		$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
 		$status = $cronModuleExecutor->runModule($this->logger, $cronModuleConfig);
 
-		if ($status === $cronModuleExecutor::RUN_STATUS_OK) {
+		if ($status === CronModuleExecutor::RUN_STATUS_OK) {
 			$this->cronModuleFacade->unscheduleModule($cronModuleConfig->getModuleId());
 			$this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
-		} elseif ($status === $cronModuleExecutor::RUN_STATUS_SUSPENDED) {
+		} elseif ($status === CronModuleExecutor::RUN_STATUS_SUSPENDED) {
 			$this->cronModuleFacade->suspendModule($cronModuleConfig->getModuleId());
 			$this->logger->addInfo('Suspend' . $cronModuleConfig->getModuleId());
-		} elseif ($status === $cronModuleExecutor::RUN_STATUS_TIMEOUT) {
+		} elseif ($status === CronModuleExecutor::RUN_STATUS_TIMEOUT) {
 			$this->logger->info('Cron reached timeout.');
 		}
 	}
