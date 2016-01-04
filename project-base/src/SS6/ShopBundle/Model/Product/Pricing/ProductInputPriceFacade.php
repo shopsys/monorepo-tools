@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
-use Closure;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
@@ -63,6 +62,11 @@ class ProductInputPriceFacade {
 	 */
 	private $productService;
 
+	/**
+	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
+	 */
+	private $productRowsIterator;
+
 	public function __construct(
 		EntityManager $em,
 		ProductInputPriceService $productInputPriceService,
@@ -118,35 +122,32 @@ class ProductInputPriceFacade {
 	}
 
 	/**
-	 * @param \Closure $canRunClosure
-	 * @return int
+	 * @return bool
 	 */
-	public function replaceVatAndRecalculateInputPrices(Closure $canRunClosure) {
-		$productIterator = $this->productRepository->getProductIteratorForReplaceVat();
-		$count = 0;
+	public function replaceBatchVatAndRecalculateInputPrices() {
+		if ($this->productRowsIterator === null) {
+			$this->productRowsIterator = $this->productRepository->getProductIteratorForReplaceVat();
+		}
 
-		foreach ($productIterator as $row) {
-			$product = $row[0];
-			/* @var $product \SS6\ShopBundle\Model\Product\Product */
-			if (!$canRunClosure()) {
-				return $count;
+		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
+			$row = $this->productRowsIterator->next();
+			if ($row === false) {
+				$this->em->flush();
+				$this->em->clear();
+
+				return false;
 			}
-
+			$product = $row[0];
 			$newVat = $product->getVat()->getReplaceWith();
 			$productManualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
 			$this->productService->recalculateInputPriceForNewVatPercent($product, $productManualInputPrices, $newVat->getPercent());
 			$product->changeVat($newVat);
-
-			$count++;
-			if ($count % self::BATCH_SIZE === 0) {
-				$this->em->flush();
-				$this->em->clear();
-			}
 		}
+
 		$this->em->flush();
 		$this->em->clear();
 
-		return $count;
+		return true;
 	}
 
 }

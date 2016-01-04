@@ -2,14 +2,17 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Vat;
 
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
+use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class VatDeletionCronModule implements CronModuleInterface {
+class VatDeletionCronModule implements IteratedCronModuleInterface {
 
-	const PRODUCTS_REPLACE_VAT_TIMELIMIT = 240;
+	/**
+	 * @var \Symfony\Bridge\Monolog\Logger
+	 */
+	private $logger;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
@@ -27,17 +30,26 @@ class VatDeletionCronModule implements CronModuleInterface {
 	}
 
 	/**
-	 * @inheritDoc
+	 * @inheritdoc
 	 */
-	public function run(Logger $logger) {
-		$timeStart = time();
+	public function initialize(Logger $logger) {
+		$this->logger = $logger;
+	}
 
-		$recalculatedCount = $this->productInputPriceFacade->replaceVatAndRecalculateInputPrices(function () use ($timeStart) {
-			return time() - $timeStart < self::PRODUCTS_REPLACE_VAT_TIMELIMIT;
-		});
-		$logger->addInfo('Recalculated ' . $recalculatedCount . ' products.');
+	/**
+	 * @inheritdoc
+	 */
+	public function iterate() {
+		$batchResult = $this->productInputPriceFacade->replaceBatchVatAndRecalculateInputPrices();
+		$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
 
-		$deletedVats = $this->vatFacade->deleteAllReplacedVats();
-		$logger->addInfo('Deleted ' . $deletedVats . ' vats.');
+		if ($batchResult) {
+			$this->logger->debug('Batch is done');
+		} else {
+			$this->logger->debug('All vats are replaced');
+		}
+		$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
+
+		return $batchResult;
 	}
 }

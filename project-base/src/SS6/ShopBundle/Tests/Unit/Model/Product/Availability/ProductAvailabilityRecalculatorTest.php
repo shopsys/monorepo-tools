@@ -46,56 +46,6 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productAvailabilityRecalculator->runImmediateRecalculations();
 	}
 
-	public function testRunScheduledRecalculationsWhileCallbackReturnsTrue() {
-		$calculationLimit = 3;
-		$productMock = $this->getMock(Product::class, null, [], '', false);
-		$productIterator = [
-			[$productMock],
-			[$productMock],
-			[$productMock],
-			[$productMock],
-		];
-
-		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
-		$productAvailabilityCalculationMock = $this->getMock(
-			ProductAvailabilityCalculation::class,
-			['calculateAvailability'],
-			[],
-			'',
-			false
-		);
-		$productAvailabilityCalculationMock
-			->expects($this->exactly($calculationLimit))
-			->method('calculateAvailability')
-			->willReturn(new Availability(new AvailabilityData([])));
-		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
-			ProductAvailabilityRecalculationScheduler::class,
-			['getProductsIteratorForRecalculation'],
-			[],
-			'',
-			false
-		);
-		$productAvailabilityRecalculationSchedulerMock
-			->expects($this->once())
-			->method('getProductsIteratorForRecalculation')
-			->willReturn($productIterator);
-
-		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
-			$emMock,
-			$productAvailabilityRecalculationSchedulerMock,
-			$productAvailabilityCalculationMock
-		);
-
-		$calculationCallbackLimit = $calculationLimit;
-		$recalculatedCount = $productAvailabilityRecalculator->runScheduledRecalculationsWhile(
-			function () use (&$calculationCallbackLimit) {
-				return $calculationCallbackLimit-- > 0;
-			}
-		);
-
-		$this->assertSame($calculationLimit, $recalculatedCount);
-	}
-
 	public function testRecalculateAvailabilityForVariant() {
 		$variantMock = $this->getMock(Product::class, ['isVariant', 'getMainVariant', 'setCalculatedAvailability'], [], '', false);
 		$mainVariantMock = $this->getMock(Product::class, ['setCalculatedAvailability'], [], '', false);

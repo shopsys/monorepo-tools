@@ -495,7 +495,7 @@ class ProductRepository {
 	}
 
 	/**
-	 * @return \Iterator
+	 * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]
 	 */
 	public function getProductIteratorForReplaceVat() {
 		$query = $this->em->createQuery('
@@ -588,14 +588,14 @@ class ProductRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]
 	 */
 	public function getProductsForPriceRecalculationIterator() {
 		return $this->getProductRepository()->createQueryBuilder('p')->where('p.recalculatePrice = TRUE')->getQuery()->iterate();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
 	 */
 	public function getProductsForAvailabilityRecalculationIterator() {
 		return $this->getProductRepository()
