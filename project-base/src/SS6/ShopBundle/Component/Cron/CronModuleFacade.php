@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Cron;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronModuleRepository;
 use SS6\ShopBundle\Component\Cron\CronService;
 
@@ -55,19 +56,19 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param string $moduleId
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 */
-	public function unscheduleModule($moduleId) {
-		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($moduleId);
+	public function unscheduleModule(CronModuleConfig $cronModuleConfig) {
+		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
 		$cronModule->unschedule();
 		$this->em->flush($cronModule);
 	}
 
 	/**
-	 * @param string $moduleId
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 */
-	public function suspendModule($moduleId) {
-		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($moduleId);
+	public function suspendModule(CronModuleConfig $cronModuleConfig) {
+		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
 		$cronModule->suspend();
 		$this->em->flush($cronModule);
 	}
