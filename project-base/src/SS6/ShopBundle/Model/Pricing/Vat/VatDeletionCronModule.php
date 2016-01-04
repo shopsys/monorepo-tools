@@ -36,19 +36,28 @@ class VatDeletionCronModule implements IteratedCronModuleInterface {
 		$this->logger = $logger;
 	}
 
+	public function sleep() {
+		$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
+		$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
+	}
+
+	public function wakeUp() {
+
+	}
+
 	/**
 	 * @inheritdoc
 	 */
 	public function iterate() {
 		$batchResult = $this->productInputPriceFacade->replaceBatchVatAndRecalculateInputPrices();
-		$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
 
 		if ($batchResult) {
 			$this->logger->debug('Batch is done');
 		} else {
+			$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
 			$this->logger->debug('All vats are replaced');
+			$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
 		}
-		$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
 
 		return $batchResult;
 	}

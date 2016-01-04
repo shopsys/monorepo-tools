@@ -73,4 +73,14 @@ class CronModuleFacade {
 		$this->em->flush($cronModule);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @return bool
+	 */
+	public function isModuleSuspended(CronModuleConfig $cronModuleConfig) {
+		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
+
+		return $cronModule->isSuspended();
+	}
+
 }

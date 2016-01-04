@@ -25,9 +25,10 @@ class CronModuleExecutor {
 	//@codingStandardsIgnoreStart
 	/**
 	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+	 * @param bool $suspended
 	 * @return string
 	 */
-	public function runModule($cronModuleService) {
+	public function runModule($cronModuleService, $suspended) {
 		//@codingStandardsIgnoreStop
 		if (!$this->canRun()) {
 			return self::RUN_STATUS_TIMEOUT;
@@ -38,12 +39,19 @@ class CronModuleExecutor {
 
 			return self::RUN_STATUS_OK;
 		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
+			if ($suspended) {
+				$cronModuleService->wakeUp();
+			}
 			$inProgress = true;
 			while ($this->canRun() && $inProgress === true) {
 				$inProgress = $cronModuleService->iterate();
 			}
-
-			return $inProgress ? self::RUN_STATUS_SUSPENDED : self::RUN_STATUS_OK;
+			if ($inProgress === true) {
+				$cronModuleService->sleep();
+				return self::RUN_STATUS_SUSPENDED;
+			} else {
+				return self::RUN_STATUS_OK;
+			}
 		}
 	}
 
