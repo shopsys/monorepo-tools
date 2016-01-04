@@ -2,14 +2,9 @@
 
 namespace SS6\ShopBundle\Component\Cron;
 
-use Symfony\Bridge\Monolog\Logger;
+use SS6\ShopBundle\Component\Cron\LoggingCronModuleInterface;
 
-interface IteratedCronModuleInterface {
-
-	/**
-	 * @param \Symfony\Bridge\Monolog\Logger $logger
-	 */
-	public function setLogger(Logger $logger);
+interface IteratedCronModuleInterface extends LoggingCronModuleInterface {
 
 	/**
 	 * @return bool
