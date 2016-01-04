@@ -9,7 +9,7 @@ interface IteratedCronModuleInterface {
 	/**
 	 * @param \Symfony\Bridge\Monolog\Logger $logger
 	 */
-	public function initialize(Logger $logger);
+	public function setLogger(Logger $logger);
 
 	/**
 	 * @return bool

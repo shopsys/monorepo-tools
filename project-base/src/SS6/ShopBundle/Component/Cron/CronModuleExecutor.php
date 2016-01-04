@@ -41,7 +41,7 @@ class CronModuleExecutor {
 
 			return self::RUN_STATUS_OK;
 		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
-			$cronModuleService->initialize($logger);
+			$cronModuleService->setLogger($logger);
 			$inProgress = true;
 			while ($this->canRun() && $inProgress === true) {
 				$inProgress = $cronModuleService->iterate();

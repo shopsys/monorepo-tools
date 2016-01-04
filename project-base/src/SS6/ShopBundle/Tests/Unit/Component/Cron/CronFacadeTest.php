@@ -35,7 +35,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 	public function testRunIterableModuleByModuleId() {
 		$moduleId = 'moduleId';
 		$cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
-		$cronModuleServiceMock->expects($this->once())->method('initialize');
+		$cronModuleServiceMock->expects($this->once())->method('setLogger');
 		$iterations = 3;
 		$cronModuleServiceMock->expects($this->exactly($iterations))->method('iterate')->willReturnCallback(
 			function () use (&$iterations) {

@@ -25,7 +25,7 @@ class ProductPriceCronModule implements IteratedCronModuleInterface {
 	/**
 	 * @inheritdoc
 	 */
-	public function initialize(Logger $logger) {
+	public function setLogger(Logger $logger) {
 		$this->logger = $logger;
 	}
 
