@@ -53,10 +53,10 @@ class LocalizationExtension extends \Twig_Extension {
 			$title = $this->getTitle($locale);
 			$html = '<img src="' . htmlspecialchars($src, ENT_QUOTES)
 				. '" alt="' . htmlspecialchars($locale, ENT_QUOTES)
-				. '" title="' . htmlspecialchars($title, ENT_QUOTES) . '" />';
+				. '" title="' . htmlspecialchars($title, ENT_QUOTES) . '" width="16" height="11" />';
 		} else {
 			$html = '<img src="' . htmlspecialchars($src, ENT_QUOTES)
-				. '" alt="' . htmlspecialchars($locale, ENT_QUOTES) . '" />';
+				. '" alt="' . htmlspecialchars($locale, ENT_QUOTES) . '" width="16" height="11" />';
 		}
 
 		return $html;
