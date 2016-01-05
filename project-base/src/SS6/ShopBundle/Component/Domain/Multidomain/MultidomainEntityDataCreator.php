@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Component\Domain\Multidomain;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
+use SS6\ShopBundle\Component\Sql\SqlQuoter;
 
 class MultidomainEntityDataCreator {
 
@@ -18,9 +19,19 @@ class MultidomainEntityDataCreator {
 	 */
 	private $em;
 
-	public function __construct(MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade, EntityManager $em) {
+	/**
+	 * @var \SS6\ShopBundle\Component\Sql\SqlQuoter
+	 */
+	private $sqlQuoter;
+
+	public function __construct(
+		MultidomainEntityClassFinderFacade $multidomainEntityClassFinderFacade,
+		EntityManager $em,
+		SqlQuoter $sqlQuoter
+	) {
 		$this->multidomainEntityClassFinderFacade = $multidomainEntityClassFinderFacade;
 		$this->em = $em;
+		$this->sqlQuoter = $sqlQuoter;
 	}
 
 	/**
@@ -51,8 +62,9 @@ class MultidomainEntityDataCreator {
 	 * @param string[] $columnNames
 	 */
 	private function copyMultidomainDataForNewDomain($templateDomainId, $newDomainId, $tableName, array $columnNames) {
-		$quotedColumnNamesSql = $this->getQuotedColumnNamesSql($columnNames);
-		$quotedTableName = $this->quoteIdentifier($tableName);
+		$quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
+		$quotedColumnNamesSql = implode(', ', $quotedColumnNames);
+		$quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);
 		$query = $this->em->createNativeQuery('
 			INSERT INTO ' . $quotedTableName . ' (domain_id, ' . $quotedColumnNamesSql . ')
 			SELECT :newDomainId, ' . $quotedColumnNamesSql . '
@@ -64,23 +76,5 @@ class MultidomainEntityDataCreator {
 			'newDomainId' => $newDomainId,
 			'templateDomainId' => $templateDomainId,
 		]);
-	}
-
-	/**
-	 * @param string[] $columnNames
-	 * @return string
-	 */
-	private function getQuotedColumnNamesSql(array $columnNames) {
-		$quotedColumnNames = array_map([$this, 'quoteIdentifier'], $columnNames);
-
-		return implode(', ', $quotedColumnNames);
-	}
-
-	/**
-	 * @param string $string
-	 * @return string
-	 */
-	private function quoteIdentifier($string) {
-		return $this->em->getConnection()->quoteIdentifier($string);
 	}
 }
