@@ -178,6 +178,7 @@ class CategoryRepository extends NestedTreeRepository {
 	 */
 	private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale) {
 		$categoriesQueryBuilder
+			->addSelect('ct')
 			->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
 			->setParameter('locale', $locale);
 	}

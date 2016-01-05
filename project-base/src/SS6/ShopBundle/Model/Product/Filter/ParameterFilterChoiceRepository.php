@@ -89,8 +89,9 @@ class ParameterFilterChoiceRepository {
 		}
 
 		$parametersQueryBuilder = $this->em->createQueryBuilder()
-			->select('pp')
+			->select('pp, pt')
 			->from(Parameter::class, 'pp')
+			->join('pp.translations', 'pt')
 			->where('pp.id IN (:parameterIds)');
 		$parametersQueryBuilder->setParameter('parameterIds', $parameterIds);
 		$parameters = $parametersQueryBuilder->getQuery()->execute();
