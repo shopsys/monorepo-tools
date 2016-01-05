@@ -156,7 +156,7 @@
           visible: false
 
     - label: 'Komunikace se zákazníkem'
-      route: admin_customercommunication_index
+      route: admin_mail_setting
       items:
         - label: 'Nastavení emailů'
           route: admin_mail_setting
