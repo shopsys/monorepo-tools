@@ -96,7 +96,7 @@ class CronFacade {
 		$status = $cronModuleExecutor->runModule($this->logger, $cronModuleConfig);
 
 		if ($status === $cronModuleExecutor::RUN_STATUS_OK) {
-			$this->cronModuleFacade->unscheduledModule($cronModuleConfig->getModuleId());
+			$this->cronModuleFacade->unscheduleModule($cronModuleConfig->getModuleId());
 			$this->logger->addInfo('End of ' . $cronModuleConfig->getModuleId());
 		} elseif ($status === $cronModuleExecutor::RUN_STATUS_SUSPENDED) {
 			$this->cronModuleFacade->suspendModule($cronModuleConfig->getModuleId());

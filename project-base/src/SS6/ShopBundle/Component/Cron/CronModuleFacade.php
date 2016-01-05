@@ -57,7 +57,7 @@ class CronModuleFacade {
 	/**
 	 * @param string $moduleId
 	 */
-	public function unscheduledModule($moduleId) {
+	public function unscheduleModule($moduleId) {
 		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($moduleId);
 		$cronModule->unschedule();
 		$this->em->flush($cronModule);

@@ -25,7 +25,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
-		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduledModule')->with($this->equalTo($moduleId));
+		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduleModule')->with($this->equalTo($moduleId));
 		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
 		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
@@ -48,7 +48,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
-		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduledModule')->with($this->equalTo($moduleId));
+		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduleModule')->with($this->equalTo($moduleId));
 		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
 		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
@@ -89,7 +89,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 			->willReturn([$scheduledCronModuleConfig, $inQueueCronModuleConfig]);
 		$cronModuleFacadeMock
 			->expects($this->atLeastOnce())
-			->method('unscheduledModule')
+			->method('unscheduleModule')
 			->with($this->callback(function ($moduleId) {
 				$this->assertContains($moduleId, ['scheduled', 'inQueue']);
 				return true;
