@@ -11,7 +11,7 @@ class CronModuleConfig implements CronTimeInterface {
 	/**
 	 * @var \SS6\ShopBundle\Component\Cron\CronModuleInterface
 	 */
-	private $cronModule;
+	private $cronModuleService;
 
 	/**
 	 * @var string
@@ -30,17 +30,20 @@ class CronModuleConfig implements CronTimeInterface {
 
 	// @codingStandardsIgnoreStart
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModule
+	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
 	 * @param string $moduleId
 	 * @param string $timeHours
 	 * @param string $timeMinutes
 	 */
-	public function __construct($cronModule, $moduleId, $timeHours, $timeMinutes) {
+	public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes) {
 		// @codingStandardsIgnoreEnd
-		if (!$cronModule instanceof CronModuleInterface && !$cronModule instanceof IteratedCronModuleInterface) {
+		if (
+			!$cronModuleService instanceof CronModuleInterface
+			&& !$cronModuleService instanceof IteratedCronModuleInterface
+		) {
 			throw new \SS6\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);
 		}
-		$this->cronModule = $cronModule;
+		$this->cronModuleService = $cronModuleService;
 		$this->moduleId = $moduleId;
 		$this->timeHours = $timeHours;
 		$this->timeMinutes = $timeMinutes;
@@ -49,8 +52,8 @@ class CronModuleConfig implements CronTimeInterface {
 	/**
 	 * @return \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface
 	 */
-	public function getCronModule() {
-		return $this->cronModule;
+	public function getCronModuleService() {
+		return $this->cronModuleService;
 	}
 
 	/**

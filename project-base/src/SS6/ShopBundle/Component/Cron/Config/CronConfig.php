@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Cron\Config;
 
-use DateTime;
+use DateTimeInterface;
 use SS6\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronConfig {
@@ -37,10 +37,10 @@ class CronConfig {
 	}
 
 	/**
-	 * @param \DateTime $roundedTime
+	 * @param \DateTimeInterface $roundedTime
 	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
-	public function getCronModuleConfigsByTime(DateTime $roundedTime) {
+	public function getCronModuleConfigsByTime(DateTimeInterface $roundedTime) {
 		$matchedCronConfigs = [];
 
 		foreach ($this->cronModuleConfigs as $cronConfig) {
