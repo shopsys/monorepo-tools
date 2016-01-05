@@ -2,7 +2,6 @@
 	.reset-ul();
 	display: block;
 	margin-left: @width-panel;
-	margin-right: 230px;
 
 	font-size: 0;
 
@@ -11,6 +10,10 @@
 		margin: 0 20px 0 0;
 
 		text-align: right;
+	}
+
+	&--main {
+		border-left: 1px solid @bg-primary-darker;
 	}
 
 	&__item {
@@ -23,18 +26,66 @@
 			display: block;
 			height: @height-header;
 			line-height: @height-header;
-			padding: 0 20px;
+			width: 50px;
 
 			color: @color-alterlink;
 			text-decoration: none;
-			font-size: 26px;
+			text-align: center;
+
+			.navig--side & {
+				padding: 0 10px;
+				width: auto;
+			}
+
+			.navig--main & {
+				border-right: 1px solid @bg-primary-darker;
+				font-size: 11px;
+
+				.transition(color);
+
+
+
+				div {
+					display: inline-block;
+					vertical-align: middle;
+					line-height: 1;
+
+					i {
+						display: block;
+					}
+				}
+			}
+
+			div {
+				span {
+					display: none;
+				}
+			}
 
 			i {
 				position: relative;
-				top: -3px;
+				font-size: 16px;
+
+				text-shadow: 1px 1px 0 @bg-primary-dark;
 
 				.dump-mode & {
 					top: 20px;
+				}
+			}
+
+			@media @query-xl {
+				padding: 0 0;
+				width: 90px;
+
+				div {
+					span {
+						display: block;
+						margin-top: 8px;
+					}
+				}
+
+				i {
+					font-size: 22px;
 				}
 			}
 

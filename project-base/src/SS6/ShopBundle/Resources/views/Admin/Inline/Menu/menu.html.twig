@@ -23,17 +23,23 @@
 	</ul>
 
 	<nav>
-		<ul class="navig">
+		<ul class="navig navig--main">
 			{% for item in menu.regularItems %}
 				{% if (item.visible) %}
 					<li class="navig__item" >
 						{% if item.route %}
 							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
-								<i class="svg svg-{{ item.icon }}"></i>
+								<div>
+									<i class="svg svg-{{ item.icon }}"></i>
+									<span>{{ item.label }}</span>
+								</div>
 							</a>
 						{% else %}
 							<a href="#" class="navig__item__link {% if item in activePath %}navig__item__link--active{% endif %}" title="{{ item.label }}">
-								<i class="svg svg-{{ item.icon }}"></i>
+								<div>
+									<i class="svg svg-{{ item.icon }}"></i>
+									<span>{{ item.label }}</span>
+								</div>
 							</a>
 						{% endif %}
 					</li>
