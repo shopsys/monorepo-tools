@@ -25,7 +25,10 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
-		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduleModule')->with($this->equalTo($moduleId));
+		$cronModuleFacadeMock
+			->expects($this->atLeastOnce())
+			->method('unscheduleModule')
+			->with($this->equalTo($cronModuleConfig));
 		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
 		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
@@ -35,7 +38,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 	public function testRunIterableModuleByModuleId() {
 		$moduleId = 'moduleId';
 		$cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
-		$cronModuleServiceMock->expects($this->once())->method('initialize');
+		$cronModuleServiceMock->expects($this->once())->method('setLogger');
 		$iterations = 3;
 		$cronModuleServiceMock->expects($this->exactly($iterations))->method('iterate')->willReturnCallback(
 			function () use (&$iterations) {
@@ -48,7 +51,10 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$cronConfig = new CronConfig($cronTimeResolver, [$cronModuleConfig]);
 		$loggerMock = $this->getMock(Logger::class, [], [], '', false);
 		$cronModuleFacadeMock = $this->getMock(CronModuleFacade::class, [], [], '', false);
-		$cronModuleFacadeMock->expects($this->atLeastOnce())->method('unscheduleModule')->with($this->equalTo($moduleId));
+		$cronModuleFacadeMock
+			->expects($this->atLeastOnce())
+			->method('unscheduleModule')
+			->with($this->equalTo($cronModuleConfig));
 		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 
 		$cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
@@ -107,7 +113,7 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase {
 		$cronModuleFacadeMock
 			->expects($this->atLeastOnce())
 			->method('unscheduleModule')
-			->with($this->equalTo('scheduled'));
+			->with($this->equalTo($scheduledCronModuleConfig));
 
 		$cronModuleExecutorFactory = new CronModuleExecutorFactory();
 

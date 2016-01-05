@@ -3,8 +3,6 @@
 namespace SS6\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use Symfony\Bridge\Monolog\Logger;
 
 class CronModuleExecutor {
 
@@ -24,30 +22,36 @@ class CronModuleExecutor {
 		$this->canRunTo = new DateTimeImmutable('+' . $secondsTimeout . ' sec');
 	}
 
+	//@codingStandardsIgnoreStart
 	/**
-	 * @param \Symfony\Bridge\Monolog\Logger $logger
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+	 * @param bool $suspended
 	 * @return string
 	 */
-	public function runModule(Logger $logger, CronModuleConfig $cronModuleConfig) {
-		$cronModuleService = $cronModuleConfig->getCronModuleService();
-
+	public function runModule($cronModuleService, $suspended) {
+		//@codingStandardsIgnoreStop
 		if (!$this->canRun()) {
 			return self::RUN_STATUS_TIMEOUT;
 		}
 
 		if ($cronModuleService instanceof CronModuleInterface) {
-			$cronModuleService->run($logger);
+			$cronModuleService->run();
 
 			return self::RUN_STATUS_OK;
 		} elseif ($cronModuleService instanceof IteratedCronModuleInterface) {
-			$cronModuleService->initialize($logger);
+			if ($suspended) {
+				$cronModuleService->wakeUp();
+			}
 			$inProgress = true;
 			while ($this->canRun() && $inProgress === true) {
 				$inProgress = $cronModuleService->iterate();
 			}
-
-			return $inProgress ? self::RUN_STATUS_SUSPENDED : self::RUN_STATUS_OK;
+			if ($inProgress === true) {
+				$cronModuleService->sleep();
+				return self::RUN_STATUS_SUSPENDED;
+			} else {
+				return self::RUN_STATUS_OK;
+			}
 		}
 	}
 
@@ -57,4 +61,5 @@ class CronModuleExecutor {
 	public function canRun() {
 		return $this->canRunTo > new DateTimeImmutable();
 	}
+
 }

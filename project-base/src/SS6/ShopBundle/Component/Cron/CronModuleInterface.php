@@ -2,12 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Cron;
 
-use Symfony\Bridge\Monolog\Logger;
+use SS6\ShopBundle\Component\Cron\LoggingCronModuleInterface;
 
-interface CronModuleInterface {
+interface CronModuleInterface extends LoggingCronModuleInterface {
 
-	/**
-	 * @param \Symfony\Bridge\Monolog\Logger $logger
-	 */
-	public function run(Logger $logger);
+	public function run();
+
 }

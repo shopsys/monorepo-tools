@@ -20,7 +20,14 @@ class FeedCategoryCronModule implements CronModuleInterface {
 		$this->feedCategoryLoaderFacade = $feedCategoryLoaderFacade;
 	}
 
-	public function run(Logger $logger) {
+	/**
+	 * @inheritdoc
+	 */
+	public function setLogger(Logger $logger) {
+
+	}
+
+	public function run() {
 		$this->feedCategoryLoaderFacade->download();
 	}
 
