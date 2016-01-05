@@ -49,11 +49,13 @@ class CronFacade {
 	/**
 	 * @param \DateTimeInterface $roundedTime
 	 */
-	public function runModulesByTime(DateTimeInterface $roundedTime) {
-		$cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
-
+	public function scheduleModulesByTime(DateTimeInterface $roundedTime) {
 		$cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
 		$this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
+	}
+
+	public function runScheduledModules() {
+		$cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
 
 		$cronModuleConfigs = $this->cronConfig->getAll();
 		$scheduledCronModuleConfigs = $this->cronModuleFacade->getOnlyScheduledCronModuleConfigs($cronModuleConfigs);
