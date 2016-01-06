@@ -10,10 +10,19 @@
 </div>
 <div class="js-main-navigation">
 	<ul class="navig navig--side">
-		<li class="navig__item" >
-			<a href="{{ url(menu.settingsItem.route, menu.settingsItem.routeParameters) }}" class="navig__item__link {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ menu.settingsItem.label }}">
+		<li id="js-setting-menu" class="navig__item" >
+			<div class="navig__item__link {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}">
 				<i class="svg svg-gear"></i>
-			</a>
+			</div>
+			<ul id="js-setting-menu-links" class="display-none">
+				{% for item in menu.getSettingsItems %}
+					{% if not (item.superadmin and not is_granted(ROLE_SUPER_ADMIN)) %}
+						<li>
+							<a href="{{ url(item.route, item.routeParameters) }}">{{ item.label }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
 		</li>
 		<li class="navig__item">
 			<a href="{{ url('admin_logout', { _csrf_token: csrf_token('admin_logout')}) }}" class="navig__item__link" id="js-navig-item-logout" title="{{ 'Odhlásit se'|trans }}">

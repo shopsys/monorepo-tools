@@ -16,7 +16,11 @@
 	var updateNavigationInfo = function (event) {
 		switch (event.type) {
 			case 'mouseenter':
-				$('#js-position-go-to').text($(this).attr('title'));
+				var goToText = $(this).attr('title');
+				if (goToText === undefined) {
+					goToText = $(this).text();
+				}
+				$('#js-position-go-to').text(goToText);
 				showNavigation(navigationTypes.GOTO);
 				break;
 			case 'mouseleave':
