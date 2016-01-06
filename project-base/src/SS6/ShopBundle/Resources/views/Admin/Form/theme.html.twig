@@ -197,9 +197,17 @@
 				{{ form_label(form, label) }}
 			{% endif %}
 			{{- form_errors(form) -}}
-			<div class="form-line__line">
-				{{- form_widget(form) -}}
-			</div>
+			{% if newline is not defined %}
+				<div class="form-line__side">
+					<div class="form-line__item">
+						{{- form_widget(form) -}}
+					</div>
+				</div>
+			{% else %}
+				<div class="form-line__line">
+					{{- form_widget(form) -}}
+				</div>
+			{% endif %}
 		</div>
 	{% endif %}
 {%- endblock textarea_row %}
