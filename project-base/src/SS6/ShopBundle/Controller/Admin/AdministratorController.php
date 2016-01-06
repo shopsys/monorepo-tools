@@ -85,6 +85,10 @@ class AdministratorController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$administrator = $this->administratorFacade->getById($id);
+		if ($administrator->isSuperadmin()) {
+			$message = 'Superadmin cannot be edited.';
+			throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException($message);
+		}
 
 		$form = $this->createForm(new AdministratorFormType(AdministratorFormType::SCENARIO_EDIT));
 

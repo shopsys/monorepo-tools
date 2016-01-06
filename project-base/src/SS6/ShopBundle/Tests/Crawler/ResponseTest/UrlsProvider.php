@@ -154,6 +154,10 @@ class UrlsProvider {
 			case 'front_registration_set_new_password':
 				return ['email' => 'no-reply@netdevelo.cz', 'hash' => 'invalidHash'];
 
+			case 'admin_administrator_edit':
+				// admin ID 1 is reserved for superadmin, which is not editable
+				return ['id' => 2];
+
 			default:
 				$parameters = [];
 				foreach ($this->getRouteParametersNames($route) as $parameterName) {
@@ -188,17 +192,15 @@ class UrlsProvider {
 	 */
 	public function getAdminTestableUrlsProviderData() {
 		$urls = [];
-		foreach ($this->router->getRouteCollection() as $routeName => $route) {
-			if ($this->isTestableRoute($route, $routeName) && $this->isAdminRouteName($routeName)) {
-				$routeParameters = $this->getRouteParameters($route, $routeName);
-				$routeParameters = $this->addRouteCsrfParameter($routeName, $routeParameters);
-				$urls[] = [
-					$routeName,
-					$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
-					$this->getExpectedStatusCode($route, $routeName),
-					true,
-				];
-			}
+		foreach ($this->getAdminTestableRoutesData() as $adminTestableRouteData) {
+			$routeName = $adminTestableRouteData[self::ROUTE_NAME_KEY];
+			$routeParameters = $adminTestableRouteData[self::ROUTE_PARAMETERS_KEY];
+			$urls[] = [
+				$routeName,
+				$this->router->generate($routeName, $routeParameters, RouterInterface::RELATIVE_PATH),
+				$adminTestableRouteData[self::EXPECTED_STATUS_CODE_KEY],
+				true,
+			];
 		}
 
 		return $urls;
@@ -221,6 +223,28 @@ class UrlsProvider {
 		}
 
 		return $urls;
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getAdminTestableRoutesData() {
+		$routesData = [];
+		foreach ($this->router->getRouteCollection() as $routeName => $route) {
+			if ($this->isTestableRoute($route, $routeName) && $this->isAdminRouteName($routeName)) {
+				$routeParameters = $this->getRouteParameters($route, $routeName);
+				$routeParameters = $this->addRouteCsrfParameter($routeName, $routeParameters);
+				$expectedStatusCode = $this->getExpectedStatusCode($route, $routeName);
+				$routesData[] = [
+					self::ROUTE_NAME_KEY => $routeName,
+					self::ROUTE_PARAMETERS_KEY => $routeParameters,
+					self::EXPECTED_STATUS_CODE_KEY => $expectedStatusCode,
+				];
+			}
+		}
+		$routesData[] = $this->getSuperadminEditRouteData();
+
+		return $routesData;
 	}
 
 	/**
@@ -391,6 +415,17 @@ class UrlsProvider {
 			self::ROUTE_NAME_KEY => 'front_product_search',
 			self::ROUTE_PARAMETERS_KEY => $productSearchParameters,
 			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getSuperadminEditRouteData() {
+		return [
+			self::ROUTE_NAME_KEY => 'admin_administrator_edit',
+			self::ROUTE_PARAMETERS_KEY => ['id' => 1],
+			self::EXPECTED_STATUS_CODE_KEY => 403,
 		];
 	}
 

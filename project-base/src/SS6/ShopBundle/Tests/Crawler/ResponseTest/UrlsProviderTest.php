@@ -85,7 +85,6 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 
 		$providerData = $urlsProvider->getAdminTestableUrlsProviderData();
 
-		$this->assertCount(1, $providerData);
 		$this->assertSame('admin_bar', $providerData[0][0]);
 		$this->assertSame('bar', $providerData[0][1]);
 		$this->assertSame(200, $providerData[0][2]);
@@ -203,7 +202,6 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('testable', $frontProviderData[0][1]);
 
 		$adminProviderData = $urlsProvider->getAdminTestableUrlsProviderData();
-		$this->assertCount(1, $adminProviderData);
 		$this->assertSame('admin_testable', $adminProviderData[0][0]);
 		$this->assertSame('admin/testable', $adminProviderData[0][1]);
 	}
