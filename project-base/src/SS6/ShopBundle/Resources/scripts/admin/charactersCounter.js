@@ -23,7 +23,7 @@
 				currentLength = placeholder.length;
 			}
 			$info.text(SS6.translator.trans(
-				'Je využito %currentLength% znaků. Doporučujeme maximálně %recommendedLength%',
+				'Využito: %currentLength% znaků. Doporučeno max. %recommendedLength%',
 				{
 					'%currentLength%': currentLength,
 					'%recommendedLength%': recommendedLength
