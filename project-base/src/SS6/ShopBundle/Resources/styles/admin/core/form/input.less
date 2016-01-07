@@ -35,6 +35,25 @@
 
 	}
 
+	&__wysiwyg {
+		position: absolute;
+		top: 131px;
+		bottom: 37px;
+		width: 22px;
+
+		&:after {
+			position: absolute;
+			top: -18px;
+			bottom: -3px;
+			width: 1px;
+			right: -7px;
+			display: block;
+			content: '';
+
+			background: @color-border;
+		}
+	}
+
 	&__wrap {
 		position: relative;
 
@@ -78,6 +97,16 @@
 			content: '';
 
 			background: @color-border;
+		}
+
+		&--wysiwyg {
+			position: relative;
+			top: 0;
+			left: 4px;
+
+			&:after {
+				display: none;
+			}
 		}
 
 		img {

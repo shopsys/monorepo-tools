@@ -180,10 +180,7 @@
 			<div class="form-line__item">
 				<div class="input__wrap">
 					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--flag')|trim}) %}
-					{{ form_widget(form, { attr: inputAttr }) }}
-					<span class="input__flag">
-						{{ localeFlag(locale) }}
-					</span>
+					{{ form_widget(form, { attr: inputAttr, localized: true, locale: locale }) }}
 				</div>
 			</div>
 			{{ form_errors(form) }}
@@ -515,10 +512,30 @@
 	{{- block('appendix_block') -}}
 {% endblock form_widget_simple %}
 
+{% use '@IvoryCKEditor/Form/ckeditor_widget.html.twig' with ckeditor_widget as base_ckeditor_widget %}
+{% block ckeditor_widget %}
+	{% if localized is defined %}
+		{% set config = config|merge({'contentsCss': config.contentsCss|merge(['assets/admin/styles/wysiwyg-localized_' ~ getCssVersion() ~ '.css'])}) %}
+		{{ block('base_ckeditor_widget') }}
+		<span class="input__wysiwyg">
+			<span class="input__flag input__flag--wysiwyg">
+				{{ localeFlag(locale) }}
+			</span>
+		</span>
+	{% else %}
+		{{ block('base_ckeditor_widget') }}
+	{% endif %}
+{% endblock ckeditor_widget %}
+
 {% block textarea_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input input--textarea')|trim}) %}
 	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
 	{{ parent('textarea_widget') }}
+	{% if localized is defined %}
+		<span class="input__flag }}">
+			{{ localeFlag(locale) }}
+		</span>
+	{% endif %}
 {% endblock textarea_widget %}
 
 {% block button_widget %}

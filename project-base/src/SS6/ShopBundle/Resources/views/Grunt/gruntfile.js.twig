@@ -33,8 +33,8 @@ module.exports = function(grunt) {
 						sourceMapRootpath: '../../../'
 					}
 				},
-
 			{% endfor -%}
+
 			{% for domain in domains -%}
 				wysiwyg{{ domain.id }}: {
 					files: {
@@ -43,8 +43,18 @@ module.exports = function(grunt) {
 					options: {
 						compress: true
 					}
-				}{% if not loop.last %},{% endif %}
+				},
+			{% endfor -%}
 
+			{% for domain in domains -%}
+				wysiwygLocalized{{ domain.id }}: {
+					files: {
+						'web/assets/admin/styles/wysiwyg-localized_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/admin/')|raw }}/wysiwyg-localized.less'
+					},
+					options: {
+						compress: true
+					}
+				}{% if not loop.last %},{% endif %}
 			{% endfor -%}
 		},
 
