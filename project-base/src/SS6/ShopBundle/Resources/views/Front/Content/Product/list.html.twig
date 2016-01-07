@@ -21,7 +21,7 @@
 
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	<div class="position-relative">
+	<div class="position-relative js-product-list-with-filter">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}
 			<div class="box-filter js-product-filter">
 				{{ productFilterForm.filterForm(
@@ -35,9 +35,6 @@
 			</div>
 		{% endif %}
 
-		<div class="js-product-list-ajax-filter-loading text-center display-none">
-			<i class="fa fa-spinner fa-spin fa-5x position-top-150" title="{{ 'Načítám'|trans }}"></i>
-		</div>
 		<div class="js-product-list-ajax-filter-products-with-controls">
 			<div>
 				{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForList')) }}
