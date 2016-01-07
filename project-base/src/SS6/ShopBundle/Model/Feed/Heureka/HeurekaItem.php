@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
-class HeurekaItem {
+use SS6\ShopBundle\Model\Feed\FeedItemInterface;
+
+class HeurekaItem implements FeedItemInterface {
 
 	/**
 	 * @var int

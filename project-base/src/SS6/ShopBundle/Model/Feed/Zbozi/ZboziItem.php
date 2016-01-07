@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Feed\Zbozi;
 
-class ZboziItem {
+use SS6\ShopBundle\Model\Feed\FeedItemInterface;
+
+class ZboziItem implements FeedItemInterface {
 
 	/**
 	 * @var int
