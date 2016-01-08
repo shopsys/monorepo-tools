@@ -5,14 +5,15 @@
 {% endblock %}
 
 {% block content %}
-	{% if error %}
-		<p class="in-message in-message--danger">{{ error }}</p>
-	{% endif %}
 
 	{{ form_start(form, {attr: {class: 'box-login'}}) }}
 		{{ form_errors(form) }}
 
 		<h1 class="box-login__heading">{{ 'Administrace'|trans }}</h1>
+
+		{% if error %}
+			<p class="in-message in-message--danger">{{ error }}</p>
+		{% endif %}
 
 		<div class="box-login__row">
 			<span class="box-login__error">
