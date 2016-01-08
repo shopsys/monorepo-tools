@@ -53,7 +53,8 @@
 			rowIds: SS6.grid.dragAndDrop.getPositions($grid)
 		};
 
-		$.ajax({
+		SS6.ajax({
+			loaderElement: '.js-drag-and-drop-grid-submit, js-drag-and-drop-grid-submit-all',
 			url: $grid.data('drag-and-drop-url-save-ordering'),
 			type: 'POST',
 			data: data,

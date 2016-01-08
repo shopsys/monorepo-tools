@@ -52,7 +52,7 @@
 		};
 
 		this.deleteTemporaryFile = function(filename) {
-			$.ajax({
+			SS6.ajax({
 				url: deleteUrl,
 				type: 'POST',
 				data: {filename: filename},

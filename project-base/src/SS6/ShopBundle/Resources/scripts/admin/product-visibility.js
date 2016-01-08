@@ -40,7 +40,8 @@
 					over: function () {
 						if (!isLoaded && !isLoading) {
 							isLoading = true;
-							$.ajax({
+							SS6.ajax({
+								loaderElement: null,
 								url: url,
 								success: onLoadVisibility
 							});

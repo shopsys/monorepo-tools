@@ -38,7 +38,8 @@
 		var onClickLoadMoreButton = function () {
 			$(this).hide();
 			$loadMoreSpinner.show();
-			$.ajax({
+			SS6.ajax({
+				loaderElement: '.js-product-list-with-paginator',
 				type: 'GET',
 				url: document.location,
 				data: {page: page + 1},

@@ -6,7 +6,8 @@
 	SS6.login.init = function () {
 		$('body').on('submit', '.js-front-login-window', function() {
 			$('.js-front-login-window-message').empty();
-			$.ajax({
+			SS6.ajax({
+				loaderElement: '.js-front-login-window',
 				type: 'POST',
 				url: $(this).attr('action'),
 				data: $(this).serialize(),

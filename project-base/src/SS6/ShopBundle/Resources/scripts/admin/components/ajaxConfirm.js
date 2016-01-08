@@ -11,7 +11,7 @@
 		$(this)
 			.unbind('click.ajaxConfirm')
 			.bind('click.ajaxConfirm', function () {
-				$.ajax({
+				SS6.ajax({
 					url: $(this).attr('href'),
 					context: this,
 					success: function(data) {
