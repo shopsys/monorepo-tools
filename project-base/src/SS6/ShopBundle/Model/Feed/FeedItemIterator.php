@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 
 class FeedItemIterator implements Iterator {
 
-	const BUFFER_SIZE = 500;
+	const BUFFER_SIZE = 100;
 
 	/**
 	 * @var int
@@ -40,6 +40,11 @@ class FeedItemIterator implements Iterator {
 	 * @var array
 	 */
 	private $itemsByPosition;
+
+	/**
+	 * @var int|null
+	 */
+	private $feedItemIdToContinue;
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
@@ -75,6 +80,12 @@ class FeedItemIterator implements Iterator {
 			$offset = $this->position - ($this->position % self::BUFFER_SIZE);
 
 			$queryBuilder = clone $this->queryBuilder;
+			$queryBuilder->orderBy('p.id');
+			if ($this->feedItemIdToContinue !== null) {
+				$queryBuilder
+					->andWhere('p.id > :feedItemIdToContinue')
+					->setParameter('feedItemIdToContinue', $this->feedItemIdToContinue);
+			}
 			$queryBuilder->setFirstResult($offset);
 			$queryBuilder->setMaxResults(self::BUFFER_SIZE);
 
@@ -107,6 +118,14 @@ class FeedItemIterator implements Iterator {
 	 */
 	public function valid() {
 		return $this->current() !== false;
+	}
+
+	/**
+	 * @param int|null $feedItemIdToContinue
+	 */
+	public function setFeedItemIdToContinue($feedItemIdToContinue) {
+		$this->feedItemIdToContinue = $feedItemIdToContinue;
+		$this->rewind();
 	}
 
 }

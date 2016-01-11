@@ -6,6 +6,8 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
+use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
+use SS6\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
 use SS6\ShopBundle\Model\Feed\FeedGenerator;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -38,26 +40,64 @@ class FeedFacade {
 	 */
 	private $feedConfigFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerationConfigFactory
+	 */
+	private $feedGenerationConfigFactory;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerationConfig[]
+	 */
+	private $feedGenerationConfigs;
+
 	public function __construct(
 		$feedsPath,
 		FeedGenerator $feedGenerator,
 		Domain $domain,
 		Filesystem $filesystem,
-		FeedConfigFacade $feedConfigFacade
+		FeedConfigFacade $feedConfigFacade,
+		FeedGenerationConfigFactory $feedGenerationConfigFactory
 	) {
 		$this->feedsPath = $feedsPath;
 		$this->feedGenerator = $feedGenerator;
 		$this->domain = $domain;
 		$this->filesystem = $filesystem;
 		$this->feedConfigFacade = $feedConfigFacade;
+		$this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
+		$this->feedGenerationConfigs = $this->feedGenerationConfigFactory->createAll();
 	}
 
-	public function generateFeeds() {
-		foreach ($this->feedConfigFacade->getFeedConfigs() as $feedConfig) {
-			foreach ($this->domain->getAll() as $domainConfig) {
-				$this->generateFeed($feedConfig, $domainConfig);
+	/**
+	 * @param \SS6\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
+	 * @return \SS6\ShopBundle\Model\Feed\FeedGenerationConfig|null
+	 */
+	public function generateFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue) {
+		foreach ($this->feedGenerationConfigs as $key => $feedGenerationConfig) {
+			if ($feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToContinue)) {
+				$feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedGenerationConfig->getFeedName());
+				$domainConfig = $this->domain->getDomainConfigById($feedGenerationConfig->getDomainId());
+				$feedItemToContinue = $this->generateFeedIteratively(
+					$feedConfig,
+					$domainConfig,
+					$feedGenerationConfigToContinue->getFeedItemId()
+				);
+				if ($feedItemToContinue !== null) {
+					return new FeedGenerationConfig(
+						$feedConfig->getFeedName(),
+						$domainConfig->getId(),
+						$feedItemToContinue->getItemId()
+					);
+				} else {
+					if (array_key_exists($key + 1, $this->feedGenerationConfigs)) {
+						return $this->feedGenerationConfigs[$key + 1];
+					} else {
+						return null;
+					}
+				}
 			}
 		}
+
+		return null;
 	}
 
 	public function generateDeliveryFeeds() {
@@ -86,5 +126,40 @@ class FeedFacade {
 			$temporaryFeedFilepath
 		);
 		$this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param int|null $feedItemIdToContinue
+	 * @return \SS6\ShopBundle\Model\Feed\FeedItemInterface|null
+	 */
+	public function generateFeedIteratively(
+		FeedConfig $feedConfig,
+		DomainConfig $domainConfig,
+		$feedItemIdToContinue
+	) {
+		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
+		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SULFIX;
+
+		$feedItemToContinue = $this->feedGenerator->generateIteratively(
+			$feedConfig->getFeedItemIteratorFactory(),
+			$domainConfig,
+			$feedConfig->getTemplateFilepath(),
+			$temporaryFeedFilepath,
+			$feedItemIdToContinue
+		);
+		if ($feedItemToContinue === null) {
+			$this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+		}
+
+		return $feedItemToContinue;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Feed\FeedGenerationConfig
+	 */
+	public function getFirstFeedGenerationConfig() {
+		return reset($this->feedGenerationConfigs);
 	}
 }
