@@ -2,8 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Performance;
 
-use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
-
 class ThresholdService {
 
 	const STATUS_CRITICAL = 2;
@@ -41,16 +39,16 @@ class ThresholdService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $collection
+	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
 	 * @return int
 	 */
-	public function getPagePerformanceCollectionStatus(PagePerformanceResultsCollection $collection) {
+	public function getPerformanceTestSamplesStatus(array $performanceTestSamples) {
 		$allStatuses = [self::STATUS_OK];
 
-		foreach ($collection->getAll() as $pagePerformanceResult) {
-			$allStatuses[] = $this->getStatusForDuration($pagePerformanceResult->getAvgDuration());
-			$allStatuses[] = $this->getStatusForQueryCount($pagePerformanceResult->getMaxQueryCount());
-			$allStatuses[] = $this->getStatusForErrorsCount($pagePerformanceResult->getErrorsCount());
+		foreach ($performanceTestSamples as $performanceTestSample) {
+			$allStatuses[] = $this->getStatusForDuration($performanceTestSample->getDuration());
+			$allStatuses[] = $this->getStatusForQueryCount($performanceTestSample->getQueryCount());
+			$allStatuses[] = $this->getStatusForErrorsCount($performanceTestSample->isSuccessful() ? 0 : 1);
 		}
 
 		return max($allStatuses);

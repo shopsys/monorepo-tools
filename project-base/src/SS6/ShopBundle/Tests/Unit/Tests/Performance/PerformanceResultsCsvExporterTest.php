@@ -3,8 +3,8 @@
 namespace SS6\ShopBundle\Tests\Unit\Tests\Performance;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
 use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
 
 class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 
@@ -14,7 +14,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 		$performanceResultsCsvExporter = new PerformanceResultsCsvExporter();
 
 		$performanceResultsCsvExporter->exportJmeterCsvReport(
-			$this->getPagePerformanceResultsCollection(),
+			$this->getPerformanceTestSamples(),
 			$outputFilename
 		);
 
@@ -25,8 +25,6 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 			'responseCode',
 			'success',
 			'URL',
-			'SampleCount',
-			'ErrorCount',
 			'Variables',
 		];
 
@@ -56,11 +54,12 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection
+	 * @return \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[]
 	 */
-	private function getPagePerformanceResultsCollection() {
-		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
-		$pagePerformanceResultsCollection->addMeasurement(
+	private function getPerformanceTestSamples() {
+		$performanceTestSamples = [];
+
+		$performanceTestSamples[] = new PerformanceTestSample(
 			'routeName1',
 			'url1',
 			1000.1,
@@ -68,7 +67,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 			200,
 			true
 		);
-		$pagePerformanceResultsCollection->addMeasurement(
+		$performanceTestSamples[] = new PerformanceTestSample(
 			'routeName2',
 			'url2',
 			2000,
@@ -77,7 +76,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 			true
 		);
 
-		return $pagePerformanceResultsCollection;
+		return $performanceTestSamples;
 	}
 
 	/**

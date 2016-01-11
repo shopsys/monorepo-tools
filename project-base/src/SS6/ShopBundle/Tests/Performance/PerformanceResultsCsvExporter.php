@@ -5,11 +5,11 @@ namespace SS6\ShopBundle\Tests\Performance;
 class PerformanceResultsCsvExporter {
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
+	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
 	 * @param string $outputFilename
 	 */
 	public function exportJmeterCsvReport(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
+		array $performanceTestSamples,
 		$outputFilename
 	) {
 		$handle = fopen($outputFilename, 'w');
@@ -21,22 +21,18 @@ class PerformanceResultsCsvExporter {
 			'responseCode',
 			'success',
 			'URL',
-			'SampleCount',
-			'ErrorCount',
 			'Variables',
 		]);
 
-		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
+		foreach ($performanceTestSamples as $performanceTestSample) {
 			fputcsv($handle, [
 				time(),
-				round($pagePerformanceResult->getAvgDuration()),
-				$pagePerformanceResult->getRouteName(),
-				$pagePerformanceResult->getMostImportantStatusCode(),
-				($pagePerformanceResult->getErrorsCount() === 0) ? 'true' : 'false',
-				'/' . $pagePerformanceResult->getUrl(),
-				$pagePerformanceResult->getMeasurementsCount(),
-				$pagePerformanceResult->getErrorsCount(),
-				$pagePerformanceResult->getMaxQueryCount(),
+				round($performanceTestSample->getDuration()),
+				$performanceTestSample->getRouteName(),
+				$performanceTestSample->getStatusCode(),
+				$performanceTestSample->isSuccessful() ? 'true' : 'false',
+				'/' . $performanceTestSample->getUrl(),
+				$performanceTestSample->getQueryCount(),
 			]);
 		}
 
