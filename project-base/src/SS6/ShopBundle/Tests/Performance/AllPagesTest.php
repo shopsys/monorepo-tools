@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Performance;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
+use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
 use SS6\ShopBundle\Tests\Performance\ThresholdService;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -122,6 +123,9 @@ class AllPagesTest extends FunctionalTestCase {
 		$password,
 		$jmeterOutputFilename
 	) {
+		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
+		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter */
+
 		$consoleOutput = new ConsoleOutput();
 		$thresholdService = new ThresholdService();
 		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
@@ -155,7 +159,7 @@ class AllPagesTest extends FunctionalTestCase {
 		}
 
 		$this->printSummary($pagePerformanceResultsCollection, $thresholdService, $consoleOutput);
-		$this->saveJmeterCsvReport($pagePerformanceResultsCollection, $jmeterOutputFilename);
+		$performanceResultsCsvExporter->exportJmeterCsvReport($pagePerformanceResultsCollection, $jmeterOutputFilename);
 
 		$this->doAssert($pagePerformanceResultsCollection, $thresholdService);
 	}
@@ -258,45 +262,6 @@ class AllPagesTest extends FunctionalTestCase {
 				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
 				return;
 		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
-	 * @param string $outputFilename
-	 */
-	private function saveJmeterCsvReport(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
-		$outputFilename
-	) {
-		$handle = fopen($outputFilename, 'w');
-
-		fputcsv($handle, [
-			'timestamp',
-			'elapsed',
-			'label',
-			'responseCode',
-			'success',
-			'URL',
-			'SampleCount',
-			'ErrorCount',
-			'Variables',
-		]);
-
-		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
-			fputcsv($handle, [
-				time(),
-				$pagePerformanceResult->getAvgDuration(),
-				$pagePerformanceResult->getRouteName(),
-				$pagePerformanceResult->getMostImportantStatusCode(),
-				($pagePerformanceResult->getErrorsCount() === 0) ? 'true' : 'false',
-				'/' . $pagePerformanceResult->getUrl(),
-				$pagePerformanceResult->getMeasurementsCount(),
-				$pagePerformanceResult->getErrorsCount(),
-				$pagePerformanceResult->getMaxQueryCount(),
-			]);
-		}
-
-		fclose($handle);
 	}
 
 	/**
