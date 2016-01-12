@@ -65,7 +65,7 @@ class PerformanceTestSummaryPrinter {
 
 		$tag = $this->getFormatterTagForDuration($performanceTestSample->getDuration());
 		$consoleOutput->writeln(
-			'<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>'
+			'<' . $tag . '>Average duration: ' . round($performanceTestSample->getDuration()) . 'ms</' . $tag . '>'
 		);
 
 		$tag = $this->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
