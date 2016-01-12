@@ -25,25 +25,7 @@ class PerformanceTestSummaryPrinter {
 		ConsoleOutput $consoleOutput
 	) {
 		foreach ($performanceTestSamples as $performanceTestSample) {
-			$consoleOutput->writeln('');
-			$consoleOutput->writeln(
-				'Route name: ' . $performanceTestSample->getRouteName() . ' (' . $performanceTestSample->getUrl() . ')'
-			);
-
-			$tag = $this->getFormatterTagForDuration($performanceTestSample->getDuration());
-			$consoleOutput->writeln(
-				'<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>'
-			);
-
-			$tag = $this->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
-			$consoleOutput->writeln(
-				'<' . $tag . '>Max query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>'
-			);
-
-			if (!$performanceTestSample->isSuccessful()) {
-				$tag = $this->getFormatterTagForError();
-				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
-			}
+			$this->printSample($performanceTestSample, $consoleOutput);
 		}
 
 		$resultStatus = $this->performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
@@ -61,6 +43,35 @@ class PerformanceTestSummaryPrinter {
 			default:
 				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
 				return;
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample $performanceTestSample
+	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
+	 */
+	private function printSample(
+		PerformanceTestSample $performanceTestSample,
+		ConsoleOutput $consoleOutput
+	) {
+		$consoleOutput->writeln('');
+		$consoleOutput->writeln(
+			'Route name: ' . $performanceTestSample->getRouteName() . ' (' . $performanceTestSample->getUrl() . ')'
+		);
+
+		$tag = $this->getFormatterTagForDuration($performanceTestSample->getDuration());
+		$consoleOutput->writeln(
+			'<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>'
+		);
+
+		$tag = $this->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
+		$consoleOutput->writeln(
+			'<' . $tag . '>Max query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>'
+		);
+
+		if (!$performanceTestSample->isSuccessful()) {
+			$tag = $this->getFormatterTagForError();
+			$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
 		}
 	}
 
