@@ -25,7 +25,11 @@ class PerformanceTestSummaryPrinter {
 		ConsoleOutput $consoleOutput
 	) {
 		foreach ($performanceTestSamples as $performanceTestSample) {
-			$this->printSample($performanceTestSample, $consoleOutput);
+			$sampleStatus = $this->performanceTestSampleQualifier->getSampleStatus($performanceTestSample);
+
+			if ($sampleStatus !== PerformanceTestSampleQualifier::STATUS_OK) {
+				$this->printSample($performanceTestSample, $consoleOutput);
+			}
 		}
 
 		$resultStatus = $this->performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
