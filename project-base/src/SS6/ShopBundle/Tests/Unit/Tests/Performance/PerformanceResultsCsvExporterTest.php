@@ -33,6 +33,21 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 		$this->assertCsvRowEquals($expectedLine, $outputFilename, 0);
 	}
 
+	public function testExportJmeterCsvReportRoundsDuration() {
+		$outputFilename = $this->getTemporaryFilename();
+
+		$performanceResultsCsvExporter = new PerformanceResultsCsvExporter();
+
+		$performanceResultsCsvExporter->exportJmeterCsvReport(
+			$this->getPerformanceTestSamples(),
+			$outputFilename
+		);
+
+		$line = $this->getCsvLine($outputFilename, 1);
+
+		$this->assertEquals(1000, $line[1]);
+	}
+
 	/**
 	 * @return string
 	 */
@@ -48,7 +63,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 		$pagePerformanceResultsCollection->addMeasurement(
 			'routeName1',
 			'url1',
-			1000,
+			1000.1,
 			10,
 			200,
 			true
@@ -56,7 +71,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 		$pagePerformanceResultsCollection->addMeasurement(
 			'routeName2',
 			'url2',
-			1000,
+			2000,
 			20,
 			301,
 			true
@@ -71,6 +86,16 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	 * @param int $lineIndex
 	 */
 	private function assertCsvRowEquals(array $expectedLine, $filename, $lineIndex) {
+		$actualLine = $this->getCsvLine($filename, $lineIndex);
+
+		$this->assertSame($expectedLine, $actualLine);
+	}
+
+	/**
+	 * @param string $filename
+	 * @param int $lineIndex
+	 */
+	private function getCsvLine($filename, $lineIndex) {
 		$handle = fopen($filename, 'r');
 
 		// seek to $rowIndex
@@ -78,9 +103,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 			fgetcsv($handle);
 		}
 
-		$actualLine = fgetcsv($handle);
-
-		$this->assertSame($expectedLine, $actualLine);
+		return fgetcsv($handle);
 	}
 
 }

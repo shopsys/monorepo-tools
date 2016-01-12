@@ -29,7 +29,7 @@ class PerformanceResultsCsvExporter {
 		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
 			fputcsv($handle, [
 				time(),
-				$pagePerformanceResult->getAvgDuration(),
+				round($pagePerformanceResult->getAvgDuration()),
 				$pagePerformanceResult->getRouteName(),
 				$pagePerformanceResult->getMostImportantStatusCode(),
 				($pagePerformanceResult->getErrorsCount() === 0) ? 'true' : 'false',
