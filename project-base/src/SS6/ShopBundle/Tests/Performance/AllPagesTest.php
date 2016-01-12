@@ -201,11 +201,11 @@ class AllPagesTest extends FunctionalTestCase {
 		/* @var $em \Doctrine\ORM\EntityManager */
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
-		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
+		$urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		$client->enableProfiler();
 		$em->beginTransaction();
-		$client->request('GET', $url);
+		$client->request('GET', $urlWithCsrfToken);
 		$em->rollback();
 
 		$profile = $client->getProfile();
