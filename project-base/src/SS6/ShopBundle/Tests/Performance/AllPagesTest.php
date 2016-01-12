@@ -6,9 +6,9 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSummaryPrinter;
-use SS6\ShopBundle\Tests\Performance\ThresholdService;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
@@ -131,7 +131,6 @@ class AllPagesTest extends FunctionalTestCase {
 		/* @var $performanceTestSamplesAggregator \SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator */
 
 		$consoleOutput = new ConsoleOutput();
-		$thresholdService = new ThresholdService();
 		$consoleOutput->writeln('');
 
 		$performanceTestSamples = [];
@@ -169,7 +168,7 @@ class AllPagesTest extends FunctionalTestCase {
 
 		$performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
 
-		$this->doAssert($performanceTestSamplesAggregatedByUrl, $thresholdService);
+		$this->doAssert($performanceTestSamplesAggregatedByUrl);
 	}
 
 	/**
@@ -230,20 +229,21 @@ class AllPagesTest extends FunctionalTestCase {
 
 	/**
 	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
-	 * @param \SS6\ShopBundle\Tests\Performance\ThresholdService $thresholdService
 	 */
 	private function doAssert(
-		array $performanceTestSamples,
-		ThresholdService $thresholdService
+		array $performanceTestSamples
 	) {
-		$resultStatus = $thresholdService->getPerformanceTestSamplesStatus($performanceTestSamples);
+		$performanceTestSampleQualifier = $this->getContainer()->get(PerformanceTestSampleQualifier::class);
+		/* @var $performanceTestSampleQualifier \SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier */
 
-		switch ($resultStatus) {
-			case ThresholdService::STATUS_OK:
-			case ThresholdService::STATUS_WARNING:
+		$overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
+
+		switch ($overallStatus) {
+			case PerformanceTestSampleQualifier::STATUS_OK:
+			case PerformanceTestSampleQualifier::STATUS_WARNING:
 				$this->assertTrue(true);
 				return;
-			case ThresholdService::STATUS_CRITICAL:
+			case PerformanceTestSampleQualifier::STATUS_CRITICAL:
 			default:
 				$this->fail('Values are above critical threshold');
 				return;
