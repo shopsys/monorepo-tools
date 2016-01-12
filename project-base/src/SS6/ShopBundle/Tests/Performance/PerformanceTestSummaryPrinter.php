@@ -2,16 +2,26 @@
 
 namespace SS6\ShopBundle\Tests\Performance;
 
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
 class PerformanceTestSummaryPrinter {
 
 	/**
+	 * @var \SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier
+	 */
+	private $performanceTestSampleQualifier;
+
+	public function __construct(PerformanceTestSampleQualifier $performanceTestSampleQualifier) {
+		$this->performanceTestSampleQualifier = $performanceTestSampleQualifier;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
-	 * @param \SS6\ShopBundle\Tests\Performance\ThresholdService $thresholdService
 	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
 	 */
 	public function printSummary(
 		array $performanceTestSamples,
-		ThresholdService $thresholdService,
 		ConsoleOutput $consoleOutput
 	) {
 		foreach ($performanceTestSamples as $performanceTestSample) {
@@ -20,37 +30,77 @@ class PerformanceTestSummaryPrinter {
 				'Route name: ' . $performanceTestSample->getRouteName() . ' (' . $performanceTestSample->getUrl() . ')'
 			);
 
-			$tag = $thresholdService->getFormatterTagForDuration($performanceTestSample->getDuration());
+			$tag = $this->getFormatterTagForDuration($performanceTestSample->getDuration());
 			$consoleOutput->writeln(
 				'<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>'
 			);
 
-			$tag = $thresholdService->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
+			$tag = $this->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
 			$consoleOutput->writeln(
 				'<' . $tag . '>Max query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>'
 			);
 
 			if (!$performanceTestSample->isSuccessful()) {
-				$tag = $thresholdService->getFormatterTagForError();
+				$tag = $this->getFormatterTagForError();
 				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
 			}
 		}
 
-		$resultStatus = $thresholdService->getPerformanceTestSamplesStatus($performanceTestSamples);
-		$resultColor = $thresholdService->getStatusConsoleTextColor($resultStatus);
+		$resultStatus = $this->performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
+		$resultColor = $this->getStatusConsoleTextColor($resultStatus);
 		$resultTag = 'fg=' . $resultColor;
 		$consoleOutput->writeln('');
 		switch ($resultStatus) {
-			case ThresholdService::STATUS_OK:
+			case PerformanceTestSampleQualifier::STATUS_OK:
 				$consoleOutput->write('<' . $resultTag . '>Test passed</' . $resultTag . '>');
 				return;
-			case ThresholdService::STATUS_WARNING:
+			case PerformanceTestSampleQualifier::STATUS_WARNING:
 				$consoleOutput->write('<' . $resultTag . '>Test passed, but contains some warnings</' . $resultTag . '>');
 				return;
-			case ThresholdService::STATUS_CRITICAL:
+			case PerformanceTestSampleQualifier::STATUS_CRITICAL:
 			default:
 				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
 				return;
+		}
+	}
+
+	/**
+	 * @param float $duration
+	 * @return string
+	 */
+	private function getFormatterTagForDuration($duration) {
+		$status = $this->performanceTestSampleQualifier->getStatusForDuration($duration);
+		return 'fg=' . $this->getStatusConsoleTextColor($status);
+	}
+
+	/**
+	 * @param int $queryCount
+	 * @return string
+	 */
+	private function getFormatterTagForQueryCount($queryCount) {
+		$status = $this->performanceTestSampleQualifier->getStatusForQueryCount($queryCount);
+		return 'fg=' . $this->getStatusConsoleTextColor($status);
+	}
+
+	/**
+	 * @return string
+	 */
+	private function getFormatterTagForError() {
+		return 'fg=' . $this->getStatusConsoleTextColor(PerformanceTestSampleQualifier::STATUS_CRITICAL);
+	}
+
+	/**
+	 * @param int $status
+	 * @return string
+	 */
+	private function getStatusConsoleTextColor($status) {
+		switch ($status) {
+			case PerformanceTestSampleQualifier::STATUS_OK:
+				return 'green';
+			case PerformanceTestSampleQualifier::STATUS_WARNING:
+				return 'yellow';
+			default:
+				return 'red';
 		}
 	}
 

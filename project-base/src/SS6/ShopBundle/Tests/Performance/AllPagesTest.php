@@ -167,7 +167,7 @@ class AllPagesTest extends FunctionalTestCase {
 		$performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
 			->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
 
-		$performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $thresholdService, $consoleOutput);
+		$performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
 
 		$this->doAssert($performanceTestSamplesAggregatedByUrl, $thresholdService);
 	}
