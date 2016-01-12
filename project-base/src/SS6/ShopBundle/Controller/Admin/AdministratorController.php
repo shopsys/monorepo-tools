@@ -224,11 +224,7 @@ class AdministratorController extends AdminBaseController {
 		try {
 			$realName = $this->administratorFacade->getById($id)->getRealName();
 
-			$this->transactional(
-				function () use ($id) {
-					$this->administratorFacade->delete($id);
-				}
-			);
+			$this->administratorFacade->delete($id);
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Administrátor <strong>{{ name }}</strong> byl smazán.'),
 				[

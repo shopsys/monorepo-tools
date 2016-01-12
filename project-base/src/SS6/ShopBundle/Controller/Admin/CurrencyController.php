@@ -85,12 +85,7 @@ class CurrencyController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->currencyFacade->getById($id)->getName();
-
-			$this->transactional(
-				function () use ($id) {
-					$this->currencyFacade->deleteById($id);
-				}
-			);
+			$this->currencyFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Měna <strong>{{ name }}</strong> byla smazána'),
