@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AllPagesTest extends FunctionalTestCase {
 
-	const PASSES = 3;
+	const PASSES = 5;
 
 	const ADMIN_USERNAME = 'superadmin';
 	const ADMIN_PASSWORD = 'admin123';
