@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator;
 use SS6\ShopBundle\Tests\Performance\ThresholdService;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -123,6 +124,8 @@ class AllPagesTest extends FunctionalTestCase {
 	) {
 		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
 		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter */
+		$performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
+		/* @var $performanceTestSamplesAggregator \SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator */
 
 		$consoleOutput = new ConsoleOutput();
 		$thresholdService = new ThresholdService();
@@ -156,10 +159,14 @@ class AllPagesTest extends FunctionalTestCase {
 			}
 		}
 
-		$this->printSummary($performanceTestSamples, $thresholdService, $consoleOutput);
 		$performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
 
-		$this->doAssert($performanceTestSamples, $thresholdService);
+		$performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
+			->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
+
+		$this->printSummary($performanceTestSamplesAggregatedByUrl, $thresholdService, $consoleOutput);
+
+		$this->doAssert($performanceTestSamplesAggregatedByUrl, $thresholdService);
 	}
 
 	/**
@@ -228,17 +235,17 @@ class AllPagesTest extends FunctionalTestCase {
 		ThresholdService $thresholdService,
 		ConsoleOutput $consoleOutput
 	) {
-		foreach ($performanceTestSamples as $performanceTestSample) {
+		foreach ($performanceTestSamplesAggregatedByUrl as $performanceTestSample) {
 			$consoleOutput->writeln('');
 			$consoleOutput->writeln(
 				'Route name: ' . $performanceTestSample->getRouteName() . ' (' . $performanceTestSample->getUrl() . ')'
 			);
 			$tag = $thresholdService->getFormatterTagForDuration($performanceTestSample->getDuration());
-			$consoleOutput->writeln('<' . $tag . '>Duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>');
+			$consoleOutput->writeln('<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>');
 			$tag = $thresholdService->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
-			$consoleOutput->writeln('<' . $tag . '>Query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>');
-			if ($thresholdService->getStatusForErrorsCount($performanceTestSample->isSuccessful() ? 0 : 1) !== ThresholdService::STATUS_OK) {
-				$tag = $thresholdService->getFormatterTagForErrorsCount($performanceTestSample->isSuccessful() ? 0 : 1);
+			$consoleOutput->writeln('<' . $tag . '>Max query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>');
+			if (!$performanceTestSample->isSuccessful()) {
+				$tag = $thresholdService->getFormatterTagForError();
 				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
 			}
 		}

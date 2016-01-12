@@ -31,11 +31,10 @@ class ThresholdService {
 	}
 
 	/**
-	 * @param int $errorsCount
 	 * @return string
 	 */
-	public function getFormatterTagForErrorsCount($errorsCount) {
-		return 'fg=' . $this->getStatusConsoleTextColor($this->getStatusForErrorsCount($errorsCount));
+	public function getFormatterTagForError() {
+		return 'fg=' . $this->getStatusConsoleTextColor(self::STATUS_CRITICAL);
 	}
 
 	/**
@@ -48,7 +47,7 @@ class ThresholdService {
 		foreach ($performanceTestSamples as $performanceTestSample) {
 			$allStatuses[] = $this->getStatusForDuration($performanceTestSample->getDuration());
 			$allStatuses[] = $this->getStatusForQueryCount($performanceTestSample->getQueryCount());
-			$allStatuses[] = $this->getStatusForErrorsCount($performanceTestSample->isSuccessful() ? 0 : 1);
+			$allStatuses[] = $this->getStatusForSuccess($performanceTestSample->isSuccessful());
 		}
 
 		return max($allStatuses);
@@ -98,11 +97,11 @@ class ThresholdService {
 	}
 
 	/**
-	 * @param int $errorsCount
+	 * @param bool $isSuccessful
 	 * @return int
 	 */
-	public function getStatusForErrorsCount($errorsCount) {
-		return $errorsCount > 0 ? self::STATUS_CRITICAL : self::STATUS_OK;
+	private function getStatusForSuccess($isSuccessful) {
+		return $isSuccessful ? self::STATUS_CRITICAL : self::STATUS_OK;
 	}
 
 }
