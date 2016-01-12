@@ -7,6 +7,7 @@ use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
 use SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSummaryPrinter;
 use SS6\ShopBundle\Tests\Performance\ThresholdService;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -122,6 +123,8 @@ class AllPagesTest extends FunctionalTestCase {
 		$password,
 		$jmeterOutputFilename
 	) {
+		$performanceTestSummaryPrinter = $this->getContainer()->get(PerformanceTestSummaryPrinter::class);
+		/* @var $performanceTestSummaryPrinter \SS6\ShopBundle\Tests\Performance\PerformanceTestSummaryPrinter */
 		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
 		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter */
 		$performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
@@ -164,7 +167,7 @@ class AllPagesTest extends FunctionalTestCase {
 		$performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
 			->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
 
-		$this->printSummary($performanceTestSamplesAggregatedByUrl, $thresholdService, $consoleOutput);
+		$performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $thresholdService, $consoleOutput);
 
 		$this->doAssert($performanceTestSamplesAggregatedByUrl, $thresholdService);
 	}
@@ -223,49 +226,6 @@ class AllPagesTest extends FunctionalTestCase {
 			$statusCode,
 			$statusCode === $expectedStatusCode
 		);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
-	 * @param \SS6\ShopBundle\Tests\Performance\ThresholdService $thresholdService
-	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
-	 */
-	private function printSummary(
-		array $performanceTestSamples,
-		ThresholdService $thresholdService,
-		ConsoleOutput $consoleOutput
-	) {
-		foreach ($performanceTestSamplesAggregatedByUrl as $performanceTestSample) {
-			$consoleOutput->writeln('');
-			$consoleOutput->writeln(
-				'Route name: ' . $performanceTestSample->getRouteName() . ' (' . $performanceTestSample->getUrl() . ')'
-			);
-			$tag = $thresholdService->getFormatterTagForDuration($performanceTestSample->getDuration());
-			$consoleOutput->writeln('<' . $tag . '>Average duration: ' . $performanceTestSample->getDuration() . 'ms</' . $tag . '>');
-			$tag = $thresholdService->getFormatterTagForQueryCount($performanceTestSample->getQueryCount());
-			$consoleOutput->writeln('<' . $tag . '>Max query count: ' . $performanceTestSample->getQueryCount() . '</' . $tag . '>');
-			if (!$performanceTestSample->isSuccessful()) {
-				$tag = $thresholdService->getFormatterTagForError();
-				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
-			}
-		}
-
-		$resultStatus = $thresholdService->getPerformanceTestSamplesStatus($performanceTestSamples);
-		$resultColor = $thresholdService->getStatusConsoleTextColor($resultStatus);
-		$resultTag = 'fg=' . $resultColor;
-		$consoleOutput->writeln('');
-		switch ($resultStatus) {
-			case ThresholdService::STATUS_OK:
-				$consoleOutput->write('<' . $resultTag . '>Test passed</' . $resultTag . '>');
-				return;
-			case ThresholdService::STATUS_WARNING:
-				$consoleOutput->write('<' . $resultTag . '>Test passed, but contains some warnings</' . $resultTag . '>');
-				return;
-			case ThresholdService::STATUS_CRITICAL:
-			default:
-				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
-				return;
-		}
 	}
 
 	/**
