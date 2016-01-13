@@ -8,7 +8,7 @@ button types
 .btn {
 	width: auto;
 	height: @btn-height;
-	padding: 5px 8px;
+	padding: 5px 15px;
 	line-height: @btn-height - 10;
 	vertical-align:middle;
 	display: inline-block;
@@ -32,12 +32,30 @@ button types
 	&__icon {
 		margin-right: 7px;
 		float: left;
+
+		&--plus {
+			position: absolute;
+			top: 6px;
+			left: 6px;
+
+			text-align: center;
+			line-height: 19px;
+			font-size: 20px;
+			font-weight: normal;
+
+			.size(18px);
+		}
 	}
 
 	&--block {
 		width: 100%;
 
 		text-align: center;
+	}
+
+	&--plus {
+		position: relative;
+		padding-left: 34px;
 	}
 
 	&--lg {

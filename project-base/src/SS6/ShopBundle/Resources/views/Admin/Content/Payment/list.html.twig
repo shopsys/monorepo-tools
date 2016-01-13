@@ -1,5 +1,9 @@
-<h2>Platby</h2>
+<div class="wrap-bar">
+	<h2 class="wrap-bar__heading">Platby</h2>
 
-<a href="{{ url('admin_payment_new') }}" class="btn">{{ 'Vytvořit platbu'|trans }}</a>
+	<a href="{{ url('admin_payment_new') }}" class="btn btn--plus wrap-bar__btn">
+		<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit platbu'|trans }}
+	</a>
+</div>
 
 {{ gridView.render() }}
