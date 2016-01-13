@@ -1,0 +1,20 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block h1 %}{% endblock %}
+
+{% block main_content %}
+	{{ form_start(form) }}
+		{{ form_errors(form) }}
+
+		{{ form_id(script|default(null)) }}
+
+		{{ form_row(form.name, { label: 'Název'|trans}) }}
+		{{ form_row(form.code, { label: 'Kód'|trans, attr: {class: 'measuring-code-input'} }) }}
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_save(script|default(null), form) }}
+			{% endblock %}
+		{% endembed %}
+	{{ form_end(form) }}
+{% endblock %}
