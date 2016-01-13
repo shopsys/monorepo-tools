@@ -11,6 +11,9 @@ use SS6\ShopBundle\Model\Script\ScriptData;
  */
 class Script {
 
+	const PLACEMENT_ORDER_SENT_PAGE = 'placementOrderSentPage';
+	const PLACEMENT_ALL_PAGES = 'placementAllPages';
+
 	/**
 	 * @var int
 	 *
@@ -35,11 +38,19 @@ class Script {
 	private $code;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="text")
+	 */
+	private $placement;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
 	 */
 	public function __construct(ScriptData $scriptData) {
 		$this->name = $scriptData->name;
 		$this->code = $scriptData->code;
+		$this->placement = $scriptData->placement;
 	}
 
 	/**
@@ -61,5 +72,12 @@ class Script {
 	 */
 	public function getName() {
 		return $this->name;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPlacement() {
+		return $this->placement;
 	}
 }

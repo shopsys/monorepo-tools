@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Script;
 
+use SS6\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Script\ScriptData;
 use Symfony\Component\Form\AbstractType;
@@ -34,6 +35,9 @@ class ScriptFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím kód skriptu']),
 				],
 			])
+			->add($builder
+				->create('placement', FormType::CHECKBOX, ['required' => false])
+				->addModelTransformer(new ScriptPlacementToBooleanTransformer()))
 			->add('save', FormType::SUBMIT);
 	}
 

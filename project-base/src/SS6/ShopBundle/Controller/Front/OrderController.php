@@ -19,6 +19,7 @@ use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use SS6\ShopBundle\Model\Script\Script;
 use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
@@ -298,6 +299,7 @@ class OrderController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $this->orderFacade->getOrderConfirmText($orderId),
+			'PLACEMENT_ORDER_SENT_PAGE' => Script::PLACEMENT_ORDER_SENT_PAGE,
 		]);
 	}
 

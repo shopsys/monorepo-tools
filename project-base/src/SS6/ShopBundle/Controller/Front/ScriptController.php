@@ -16,11 +16,13 @@ class ScriptController extends FrontBaseController {
 		$this->scriptFacade = $scriptFacade;
 	}
 
-	public function embedAction() {
-		$scripts = $this->scriptFacade->getAll();
-
+	/**
+	 * @param string $placement
+	 */
+	public function embedAction($placement) {
 		return $this->render('@SS6Shop/Front/Inline/MeasuringScript/scripts.html.twig', [
-			'scripts' => $scripts,
+			'scripts' => $this->scriptFacade->getScriptsByPlacement($placement),
 		]);
 	}
+
 }

@@ -30,10 +30,11 @@ class ScriptFacade {
 	}
 
 	/**
+	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Script\Script[]
 	 */
-	public function getAll() {
-		return $this->scriptRepository->getAll();
+	public function getScriptsByPlacement($placement) {
+		return $this->scriptRepository->getScriptsByPlacement($placement);
 	}
 
 	/**

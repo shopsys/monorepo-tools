@@ -26,10 +26,11 @@ class ScriptRepository {
 	}
 
 	/**
+	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Script\Script[]
 	 */
-	public function getAll() {
-		return $this->getScriptRepository()->findAll();
+	public function getScriptsByPlacement($placement) {
+		return $this->getScriptRepository()->findBy(['placement' => $placement]);
 	}
 
 }

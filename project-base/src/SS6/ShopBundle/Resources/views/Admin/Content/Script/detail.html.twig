@@ -11,6 +11,7 @@
 
 		{{ form_row(form.name, { label: 'Název'|trans}) }}
 		{{ form_row(form.code, { label: 'Kód'|trans, attr: {class: 'measuring-code-input'} }) }}
+		{{ form_row(form.placement, { label: 'Vložit jen na stránku s potvrzením objednávky'|trans}) }}
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				{{ form_save(script|default(null), form) }}

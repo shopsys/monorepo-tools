@@ -14,4 +14,9 @@ class ScriptData {
 	 */
 	public $code;
 
+	/**
+	 * @var string|null
+	 */
+	public $placement;
+
 }
