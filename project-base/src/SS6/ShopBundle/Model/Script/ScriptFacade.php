@@ -3,9 +3,13 @@
 namespace SS6\ShopBundle\Model\Script;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Script\ScriptRepository;
 
 class ScriptFacade {
+
+	const VARIABLE_NUMBER = '{number}';
+	const VARIABLE_TOTAL_PRICE = '{total_price}';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -30,14 +34,6 @@ class ScriptFacade {
 	}
 
 	/**
-	 * @param string $placement
-	 * @return \SS6\ShopBundle\Model\Script\Script[]
-	 */
-	public function getScriptsByPlacement($placement) {
-		return $this->scriptRepository->getScriptsByPlacement($placement);
-	}
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
 	 * @return \SS6\ShopBundle\Model\Script\Script
 	 */
@@ -50,4 +46,46 @@ class ScriptFacade {
 		return $script;
 	}
 
+	/**
+	 * @return string[]
+	 */
+	public function getAllPagesScriptCodes() {
+		$allPagesScripts = $this->scriptRepository->getScriptsByPlacement(Script::PLACEMENT_ALL_PAGES);
+		$scriptCodes = [];
+
+		foreach ($allPagesScripts as $script) {
+			$scriptCodes[] = $script->getCode();
+		}
+
+		return $scriptCodes;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string[]
+	 */
+	public function getOrderSentPageScriptCodesWithReplacedVariables(Order $order) {
+		$scripts = $this->scriptRepository->getScriptsByPlacement(Script::PLACEMENT_ORDER_SENT_PAGE);
+		$scriptCodes = [];
+
+		foreach ($scripts as $script) {
+			$scriptCodes[] = $this->replaceVariables($script->getCode(), $order);
+		}
+
+		return $scriptCodes;
+	}
+
+	/**
+	 * @param string $code
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @return string
+	 */
+	private function replaceVariables($code, Order $order) {
+		$variableReplacements = [
+			self::VARIABLE_NUMBER => $order->getNumber(),
+			self::VARIABLE_TOTAL_PRICE => $order->getTotalPriceWithVat(),
+		];
+
+		return strtr($code, $variableReplacements);
+	}
 }

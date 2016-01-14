@@ -18,4 +18,29 @@
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}
+	<div id="js-order-sent-page-variables">
+		<table class="table-main">
+			<thead>
+				<tr>
+					<th>
+						{{ 'Použitelné proměnné'|trans }}
+					</th>
+					<th>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for variable, label in scriptVariables %}
+					<tr>
+						<td>
+							{{ variable }}
+						</td>
+						<td>
+							{{ label }}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

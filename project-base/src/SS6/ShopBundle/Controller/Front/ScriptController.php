@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Script\ScriptFacade;
 
 class ScriptController extends FrontBaseController {
@@ -16,12 +17,18 @@ class ScriptController extends FrontBaseController {
 		$this->scriptFacade = $scriptFacade;
 	}
 
-	/**
-	 * @param string $placement
-	 */
-	public function embedAction($placement) {
+	public function embedAllPagesScriptsAction() {
 		return $this->render('@SS6Shop/Front/Inline/MeasuringScript/scripts.html.twig', [
-			'scripts' => $this->scriptFacade->getScriptsByPlacement($placement),
+			'scriptsCodes' => $this->scriptFacade->getAllPagesScriptCodes(),
+		]);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 */
+	public function embedOrderSentPageScriptsAction(Order $order) {
+		return $this->render('@SS6Shop/Front/Inline/MeasuringScript/scripts.html.twig', [
+			'scriptsCodes' => $this->scriptFacade->getOrderSentPageScriptCodesWithReplacedVariables($order),
 		]);
 	}
 

@@ -48,6 +48,6 @@
 			<script async src="//localhost:35729/livereload.js"></script>
 		{% endif %}
 
-		{{ render(controller('SS6ShopBundle:Front/Script:embed', {placement: constant('SS6\\ShopBundle\\Model\\Script\\Script::PLACEMENT_ALL_PAGES')})) }}
+		{{ render(controller('SS6ShopBundle:Front/Script:embedAllPagesScripts')) }}
 	</body>
 </html>

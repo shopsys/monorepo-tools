@@ -27,6 +27,7 @@ class ScriptController extends AdminBaseController {
 	public function newAction(Request $request) {
 		$form = $this->createForm(new ScriptFormType());
 		$scriptData = new ScriptData();
+		$scriptVariables = $this->getOrderSentPageScriptVariableLabelsIndexedByVariables();
 
 		$form->setData($scriptData);
 		$form->handleRequest($request);
@@ -49,11 +50,23 @@ class ScriptController extends AdminBaseController {
 				);
 			return $this->render('@SS6Shop/Admin/Content/Script/new.html.twig', [
 				'form' => $form->createView(),
+				'scriptVariables' => $scriptVariables,
 			]);
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Script/new.html.twig', [
 			'form' => $form->createView(),
+			'scriptVariables' => $scriptVariables,
 		]);
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function getOrderSentPageScriptVariableLabelsIndexedByVariables() {
+		return [
+			ScriptFacade::VARIABLE_NUMBER => t('Číslo objednávky'),
+			ScriptFacade::VARIABLE_TOTAL_PRICE => t('Celková cena objednávky s DPH'),
+		];
 	}
 }
