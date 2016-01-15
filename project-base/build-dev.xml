@@ -129,6 +129,29 @@
 		</exec>
 	</target>
 
+	<target name="phpcbf-diff" depends="diff-files-phpcs">
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+						executable="${path.phpcbf.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+				>
+					<arg value="--standard=${path.phpcs.ruleset}"/>
+					<arg value="--extensions=php"/>
+					<arg value="--encoding=utf-8"/>
+					<arg value="--ignore=${path.phpcs.ignored}"/>
+					<arg value="--no-patch"/>
+					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
+	</target>
+
 	<target name="phpcs">
 		<exec
 			executable="${path.phpcs.executable}"
@@ -143,6 +166,29 @@
 			<arg value="--ignore=${path.phpcs.ignored}"/>
 			<arg path="${path.src}"/>
 		</exec>
+	</target>
+
+	<target name="phpcs-diff" depends="diff-files-phpcs">
+		<if>
+			<not>
+				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
+			</not>
+			<then>
+				<exec
+						executable="${path.phpcs.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+				>
+					<arg value="--standard=${path.phpcs.ruleset}"/>
+					<arg value="--extensions=php"/>
+					<arg value="--encoding=utf-8"/>
+					<arg value="-sp"/>
+					<arg value="--ignore=${path.phpcs.ignored}"/>
+					<arg line="${diff.files.phpcs}"/>
+				</exec>
+			</then>
+		</if>
 	</target>
 
 	<target name="phpcs-fixer">
@@ -173,52 +219,6 @@
 			<arg value="--verbose" />
 			<arg path="${path.src}" />
 		</exec>
-	</target>
-
-	<target name="phpcbf-diff" depends="diff-files-phpcs">
-		<if>
-			<not>
-				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
-			</not>
-			<then>
-				<exec
-					executable="${path.phpcbf.executable}"
-					logoutput="true"
-					passthru="true"
-					checkreturn="true"
-				>
-					<arg value="--standard=${path.phpcs.ruleset}"/>
-					<arg value="--extensions=php"/>
-					<arg value="--encoding=utf-8"/>
-					<arg value="--ignore=${path.phpcs.ignored}"/>
-					<arg value="--no-patch"/>
-					<arg line="${diff.files.phpcs}"/>
-				</exec>
-			</then>
-		</if>
-	</target>
-
-	<target name="phpcs-diff" depends="diff-files-phpcs">
-		<if>
-			<not>
-				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
-			</not>
-			<then>
-				<exec
-					executable="${path.phpcs.executable}"
-					logoutput="true"
-					passthru="true"
-					checkreturn="true"
-				>
-					<arg value="--standard=${path.phpcs.ruleset}"/>
-					<arg value="--extensions=php"/>
-					<arg value="--encoding=utf-8"/>
-					<arg value="-sp"/>
-					<arg value="--ignore=${path.phpcs.ignored}"/>
-					<arg line="${diff.files.phpcs}"/>
-				</exec>
-			</then>
-		</if>
 	</target>
 
 	<target name="phpcs-fixer-diff" depends="diff-files">
@@ -408,21 +408,6 @@
 		</trycatch>
 	</target>
 
-	<target name="tests-unit">
-		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Unit"/>
-		</exec>
-	</target>
-
 	<target name="tests-acceptance" depends="test-db-dump">
 		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
 		<if>
@@ -471,6 +456,21 @@
 		</exec>
 	</target>
 
+	<target name="tests-crawler">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Crawler"/>
+		</exec>
+	</target>
+
 	<target name="tests-db">
 		<exec
 			executable="${path.phpunit.executable}"
@@ -486,18 +486,52 @@
 		</exec>
 	</target>
 
-	<target name="tests-crawler">
+	<target name="tests-performance">
 		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
 		>
 			<arg value="--colors=always"/>
 			<arg value="--configuration"/>
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
-			<arg value="Crawler"/>
+			<arg value="Performance"/>
+			<arg value="--exclude-group"/>
+			<arg value="warmup"/>
+		</exec>
+	</target>
+
+	<target name="tests-performance-warmup">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Performance"/>
+			<arg value="--group"/>
+			<arg value="warmup"/>
+		</exec>
+	</target>
+
+	<target name="tests-unit">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Unit"/>
 		</exec>
 	</target>
 
@@ -584,40 +618,6 @@
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="ss6:migrations:migrate" />
-		</exec>
-	</target>
-
-	<target name="tests-performance-warmup">
-		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Performance"/>
-			<arg value="--group"/>
-			<arg value="warmup"/>
-		</exec>
-	</target>
-
-	<target name="tests-performance">
-		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Performance"/>
-			<arg value="--exclude-group"/>
-			<arg value="warmup"/>
 		</exec>
 	</target>
 

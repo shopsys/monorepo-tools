@@ -250,17 +250,6 @@
 		</exec>
 	</target>
 
-	<target name="uploaded-file-dirs">
-		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/content/uploadedFiles">
-			</fileset>
-		</delete>
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:uploaded-file:directories" />
-		</exec>
-	</target>
-
 	<target name="grunt" depends="gruntfile,clean-styles">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true" />
 	</target>
@@ -272,6 +261,13 @@
 		</exec>
 	</target>
 
+	<target name="img-demo">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:image:demo" />
+		</exec>
+	</target>
+
 	<target name="img-dirs">
 		<delete includeemptydirs="true">
 			<fileset dir="${path.root}/web/content/images" />
@@ -280,13 +276,6 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="ss6:image:directories" />
-		</exec>
-	</target>
-
-	<target name="img-demo">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:image:demo" />
 		</exec>
 	</target>
 
@@ -306,6 +295,17 @@
 			checkreturn="true"
 		>
 			<arg value="install"/>
+		</exec>
+	</target>
+
+	<target name="uploaded-file-dirs">
+		<delete includeemptydirs="true">
+			<fileset dir="${path.root}/web/content/uploadedFiles">
+			</fileset>
+		</delete>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:uploaded-file:directories" />
 		</exec>
 	</target>
 
