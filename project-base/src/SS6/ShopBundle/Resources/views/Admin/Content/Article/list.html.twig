@@ -8,7 +8,11 @@
 	<div class="js-multiple-grids-rows-unified">
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-		<a href="{{ url('admin_article_new') }}" class="btn">{{ 'Vytvořit nový článek'|trans }}</a>
+		<div class="wrap-bar">
+			<a href="{{ url('admin_article_new') }}" class="btn btn--plus wrap-bar__btn">
+				<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit nový článek'|trans }}
+			</a>
+		</div>
 
 		{% if articlesCountOnSelectedDomain > 0 %}
 			<h2>{{ 'Články v horním menu'|trans }}</h2>

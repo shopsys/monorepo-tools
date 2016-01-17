@@ -36,8 +36,14 @@
 		</div>
 
 		<div class="wrap-border">
-			<a href="{{ url('admin_product_new') }}" class="btn" target="_blank">{{ 'Vytvořit nové zboží'|trans }}</a>
-			<a href="{{ url('admin_product_createvariant') }}" class="btn">{{ 'Vytvořit variantu'|trans }}</a>
+			<div class="wrap-bar mb0">
+				<a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
+					<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit nové zboží'|trans }}
+				</a>
+				<a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
+					<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit variantu'|trans }}
+				</a>
+			</div>
 		</div>
 		{{ gridView.render() }}
 		{{ gridView.renderHiddenInputs('page') }}

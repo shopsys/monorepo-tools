@@ -6,7 +6,11 @@
 {% block main_content %}
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-	<a href="{{ url('admin_advert_new') }}" class="btn">{{ 'Vytvořit novou reklamu'|trans }}</a>
+	<div class="wrap-bar">
+		<a href="{{ url('admin_advert_new') }}" class="btn btn--plus wrap-bar__btn">
+			<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit novou reklamu'|trans }}
+		</a>
+	</div>
 
 	{{ gridView.render() }}
 {% endblock %}

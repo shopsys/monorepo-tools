@@ -4,7 +4,11 @@
 {% block h1 %}{{ 'Přehled zákazníků'|trans }}{% endblock %}
 
 {% block main_content %}
-	<a href="{{ url('admin_customer_new') }}" class="btn mb25">{{ 'Vytvořit nového zákazníka'|trans }}</a>
+	<div class="wrap-bar">
+		<a href="{{ url('admin_customer_new') }}" class="btn btn--plus wrap-bar__btn">
+			<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit nového zákazníka'|trans }}
+		</a>
+	</div>
 
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
