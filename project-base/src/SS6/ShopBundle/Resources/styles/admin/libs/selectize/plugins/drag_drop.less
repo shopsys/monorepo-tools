@@ -11,7 +11,7 @@
 		visibility: hidden;
 	}
 	.ui-sortable-helper {
-		.selectize-box-shadow(0 2px 5px rgba(0,0,0,0.2));		
+		.selectize-box-shadow(0 2px 5px rgba(0,0,0,0.2));
 	}
 }
 
@@ -19,5 +19,25 @@
 	.ui-sortable-helper {
 		background: #fff;
 		display: table;
+	}
+}
+
+.table-form {
+	.ui-sortable-helper {
+		background: #fff;
+		display: table-row;
+
+		.table-form__cell {
+			display: table-cell;
+		}
+
+	}
+	tr.ui-sortable-placeholder {
+		visibility: visible !important;
+		background: #f2f2f2 !important;
+		background: rgba(0,0,0,0.06) !important;
+		border: 0 none !important;
+		height: 46px !important;
+		.selectize-box-shadow(inset 0 0 12px 4px #fff);
 	}
 }
