@@ -45,6 +45,11 @@
 				&--bordered {
 					border-right: 1px solid @bg-primary-darker;
 					border-left: 1px solid @bg-primary-darker;
+
+					&.navig__item__link--active {
+						border-right: 1px solid @bg-primary;
+						border-left: 1px solid @bg-primary;
+					}
 				}
 			}
 
@@ -118,6 +123,8 @@
 
 			background: @bg-primary;
 			text-align: left;
+			border: 1px solid @color-border-blue;
+			border-top: 0;
 
 			&__item {
 				border-top: 1px solid @color-border-blue;
@@ -130,8 +137,8 @@
 					text-decoration: none;
 
 					&:hover {
-						color: @color-f;
-						background: @bg-primary-dark;
+						color: @color-yellow;
+						background: darken(@bg-primary, 5%);
 					}
 				}
 			}
