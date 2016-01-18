@@ -19,6 +19,11 @@
 	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
 	<h1>{{ category.name|trans }}</h1>
 
+	<h2>Seznam podkategorií</h2>
+	{% for child in category.children %}
+		<div><a href="{{ url('front_product_list', { id: child.id }) }}">{{ child.name }}</a></div>
+	{% endfor %}
+
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
 	<div class="position-relative js-product-list-with-filter">
