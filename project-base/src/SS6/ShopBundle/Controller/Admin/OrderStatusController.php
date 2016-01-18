@@ -60,11 +60,7 @@ class OrderStatusController extends AdminBaseController {
 
 		try {
 			$orderStatus = $this->orderStatusFacade->getById($id);
-			$this->transactional(
-				function () use ($id, $newId) {
-					$this->orderStatusFacade->deleteById($id, $newId);
-				}
-			);
+			$this->orderStatusFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
