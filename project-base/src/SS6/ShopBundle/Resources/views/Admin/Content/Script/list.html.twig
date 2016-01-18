@@ -5,6 +5,8 @@
 
 {% block main_content %}
 
+	<div class="in-message in-message--block in-message--danger">{{ 'POZOR - vkládání skriptů na stránky může vážně ohrozit bezpečnost, výkonnost nebo vzhled aplikace!'|trans }}</div>
+
 	<a href="{{ url('admin_script_new') }}" class="btn">{{ 'Vytvořit nový skript'|trans }}</a>
 
 	{{ gridView.render() }}
