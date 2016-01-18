@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Category;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
@@ -50,6 +51,11 @@ class CategoryFacade {
 	 */
 	private $friendlyUrlFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 */
+	private $imageFacade;
+
 	public function __construct(
 		EntityManager $em,
 		CategoryRepository $categoryRepository,
@@ -57,7 +63,8 @@ class CategoryFacade {
 		Domain $domain,
 		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
 		CategoryDetailFactory $categoryDetailFactory,
-		FriendlyUrlFacade $friendlyUrlFacade
+		FriendlyUrlFacade $friendlyUrlFacade,
+		ImageFacade $imageFacade
 	) {
 		$this->em = $em;
 		$this->categoryRepository = $categoryRepository;
@@ -66,6 +73,7 @@ class CategoryFacade {
 		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
 		$this->categoryDetailFactory = $categoryDetailFactory;
 		$this->friendlyUrlFacade = $friendlyUrlFacade;
+		$this->imageFacade = $imageFacade;
 	}
 
 	/**
@@ -87,6 +95,7 @@ class CategoryFacade {
 		$this->em->flush($category);
 		$this->createCategoryDomains($category, $this->domain->getAll());
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+		$this->imageFacade->uploadImage($category, $categoryData->image, null);
 
 		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
 
@@ -105,6 +114,7 @@ class CategoryFacade {
 		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
 		$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+		$this->imageFacade->uploadImage($category, $categoryData->image, null);
 		$this->em->flush();
 
 		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();

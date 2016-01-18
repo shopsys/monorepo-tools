@@ -18,6 +18,11 @@
   sizes:
     - { name: ~, width: ~, height: 20, crop: false }
 
+- name: category
+  class: SS6\ShopBundle\Model\Category\Category
+  sizes:
+    - { name: ~, width: ~, height: 20, crop: false }
+
 - name: product
   class: SS6\ShopBundle\Model\Product\Product
   multiple: true

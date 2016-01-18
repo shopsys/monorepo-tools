@@ -36,6 +36,11 @@ class CategoryData {
 	 */
 	public $urls;
 
+	/**
+	 * @var string[]
+	 */
+	public $image;
+
 	public function __construct() {
 		$this->name = [];
 		$this->hiddenOnDomains = [];
@@ -44,6 +49,7 @@ class CategoryData {
 			UrlListType::MAIN_ON_DOMAINS => [],
 			UrlListType::NEW_URLS => [],
 		];
+		$this->image = [];
 	}
 
 	/**
