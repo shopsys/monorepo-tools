@@ -26,6 +26,33 @@ class ScriptRepository {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Script\Script
+	 */
+	public function getById($scriptId) {
+		$script = $this->getScriptRepository()->find($scriptId);
+
+		if ($script === null) {
+			throw new \SS6\ShopBundle\Model\Script\Exception\ScriptNotFoundException('Script with ID ' . $scriptId . ' does not exist.');
+		}
+
+		return $script;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Script\Script[]
+	 */
+	public function getAll() {
+		return $this->getScriptRepository()->findAll();
+	}
+
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllQueryBuilder() {
+		return $this->getScriptRepository()->createQueryBuilder('s');
+	}
+
+	/**
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Script\Script[]
 	 */

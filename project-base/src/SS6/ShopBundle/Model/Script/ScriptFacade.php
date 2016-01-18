@@ -34,6 +34,27 @@ class ScriptFacade {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Script\Script[]
+	 */
+	public function getAll() {
+		return $this->scriptRepository->getAll();
+	}
+
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getAllQueryBuilder() {
+		return $this->scriptRepository->getAllQueryBuilder();
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Script\Script
+	 */
+	public function getById($scriptId) {
+		return $this->scriptRepository->getById($scriptId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
 	 * @return \SS6\ShopBundle\Model\Script\Script
 	 */
@@ -44,6 +65,32 @@ class ScriptFacade {
 		$this->em->flush();
 
 		return $script;
+	}
+
+	/**
+	 * @param int $scriptId
+	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
+	 * @return \SS6\ShopBundle\Model\Script\Script
+	 */
+	public function edit($scriptId, ScriptData $scriptData) {
+		$script = $this->scriptRepository->getById($scriptId);
+
+		$script->edit($scriptData);
+
+		$this->em->persist($script);
+		$this->em->flush();
+
+		return $script;
+	}
+
+	/**
+	 * @param int $scriptId
+	 */
+	public function delete($scriptId) {
+		$script = $this->scriptRepository->getById($scriptId);
+
+		$this->em->remove($script);
+		$this->em->flush();
 	}
 
 	/**

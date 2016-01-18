@@ -80,4 +80,13 @@ class Script {
 	public function getPlacement() {
 		return $this->placement;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
+	 */
+	public function edit(ScriptData $scriptData) {
+		$this->name = $scriptData->name;
+		$this->code = $scriptData->code;
+		$this->placement = $scriptData->placement;
+	}
 }
