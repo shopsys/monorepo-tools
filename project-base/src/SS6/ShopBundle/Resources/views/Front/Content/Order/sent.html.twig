@@ -10,6 +10,8 @@
 
 {% block main_content %}
 
+	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
+
 	<h1>{{ 'Objednávka byla odeslána'|trans }}</h1>
 
 	{{ orderConfirmationText|raw }}
@@ -20,6 +22,5 @@
 		</a>
 	</div>
 
-	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
 
 {% endblock %}

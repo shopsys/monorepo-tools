@@ -4,6 +4,8 @@
 {% block h1 %}{% endblock %}
 
 {% block main_content %}
+	<div class="in-message in-message--block">{{ 'Skript bude vložen na začátek stránky, za tag <body>.'|trans }} </div>
+
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
