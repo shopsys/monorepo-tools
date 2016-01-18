@@ -288,6 +288,13 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
 
+  ss6.shop.component.request.transactional_master_request_service:
+    class: SS6\ShopBundle\Component\Request\TransactionalMasterRequestService
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
   ss6.shop.component.sitemap.sitemap_dumper_factory:
     class: SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory
     arguments:
