@@ -11,7 +11,7 @@
 			cursor: 'move',
 			handle: '.c-move',
 			items: '.js-grid-row, .js-grid-row-holder',
-			placeholder: 'table-drop',
+			placeholder: 'in-drop-place',
 			revert: 200,
 			change: SS6.grid.multipleDragAndDrop.onUpdate,
 			update: SS6.grid.multipleDragAndDrop.onUpdate
@@ -65,7 +65,7 @@
 
 	SS6.grid.multipleDragAndDrop.toggleRowHolders = function () {
 		 $('.js-multiple-grids-rows-unified .js-grid').each(function() {
-			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .table-drop').size();
+			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .in-drop-place').size();
 			var $rowHolder = $(this).find('.js-grid-row-holder');
 			$rowHolder.toggle(gridRowsCount === 0);
 		});
