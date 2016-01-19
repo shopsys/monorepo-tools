@@ -53,7 +53,7 @@
 	};
 
 	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName, newIndex) {
-		$rule.addClass('advanced-search-rule-disabled');
+		$rule.addClass('in-disabled');
 		$.ajax({
 			url: $rulesContainer.data('rule-form-url'),
 			type: 'post',

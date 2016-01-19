@@ -10,7 +10,7 @@
 			cursor: 'move',
 			handle: '.c-move',
 			items: '.js-grid-row',
-			placeholder: 'table-drop',
+			placeholder: 'in-drop-place',
 			revert: 200,
 			update: SS6.grid.dragAndDrop.onUpdate
 		});
