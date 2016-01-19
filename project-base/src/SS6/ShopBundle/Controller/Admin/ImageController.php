@@ -15,6 +15,7 @@ class ImageController extends AdminBaseController {
 	const ENTITY_NAME_SLIDER_ITEM = 'sliderItem';
 	const ENTITY_NAME_TRANSPORT = 'transport';
 	const ENTITY_NAME_ADVERT = 'noticer';
+	const ENTITY_NAME_CATEGORY = 'category';
 	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThumbnail';
 	const SIZE_NAME_LIST = 'list';
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
@@ -61,6 +62,7 @@ class ImageController extends AdminBaseController {
 	 */
 	private function getEntityNameTranslation($entityName) {
 		$entityNamesTranslations = [
+			self::ENTITY_NAME_CATEGORY => t('Kategorie'),
 			self::ENTITY_NAME_PAYMENT => t('Platba'),
 			self::ENTITY_NAME_PRODUCT => t('Produkt'),
 			self::ENTITY_NAME_SLIDER_ITEM => t('Stránka slideru'),
@@ -131,6 +133,11 @@ class ImageController extends AdminBaseController {
 			self::ENTITY_NAME_TRANSPORT => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
 					'Front-end: Objednávkový proces'
+				),
+			],
+			self::ENTITY_NAME_CATEGORY => [
+			ImageConfig::DEFAULT_SIZE_NAME => t(
+				'Front-end: Rozcestník kategorií'
 				),
 			],
 			self::ENTITY_NAME_ADVERT => [
