@@ -22,7 +22,13 @@
 
 	<h2>Seznam podkategorií</h2>
 	{% for child in category.children %}
-		<div><a href="{{ url('front_product_list', { id: child.id }) }}">{{ child.name }}</a></div>
+		<span class="box-chooser__image">
+			<a href="{{ url('front_product_list', { id: child.id }) }}">{{ child.name }}
+				{% if imageExists(child) %}
+					{{ image(child) }}
+				{% endif %}
+			</a>
+		</span>
 	{% endfor %}
 
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
