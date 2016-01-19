@@ -62,11 +62,7 @@ class RegistrationController extends FrontBaseController {
 			if ($form->isValid()) {
 				$userData = $form->getData();
 				$userData->domainId = $this->domain->getId();
-				$user = $this->transactional(
-					function () use ($userData) {
-						return $this->customerEditFacade->register($userData);
-					}
-				);
+				$user = $this->customerEditFacade->register($userData);
 
 				$this->login($user);
 
