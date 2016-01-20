@@ -12,7 +12,7 @@
 		};
 		var options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
-		var $loaderOverlay = getLoaderOverlay(options.loaderMessage);
+		var $loaderOverlay = getLoaderOverlay(options.loaderMessage, options.loaderElement);
 		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {
@@ -34,15 +34,21 @@
 		$.ajax(options);
 	};
 
-	var getLoaderOverlay = function(loaderMessage) {
-		return $($.parseHTML(
-			'<div class="js-loader-overlay">' +
-				'<div class="js-loader-overlay-spinner">' +
-					'<i class="fa fa-spinner fa-spin"></i>' +
-					loaderMessage +
-				'</div>' +
+	var getLoaderOverlay = function(loaderMessage, loaderElement) {
+		var overlaySpinnerClass = 'js-loader-overlay-spinner';
+		if (loaderElement !== 'body') {
+			overlaySpinnerClass += '--absolute';
+		}
+
+		var $loaderOverlayDiv = $('<div class="js-loader-overlay"></div>');
+		var $loaderOverlaySpinnerDiv = $($.parseHTML(
+			'<div class="' + overlaySpinnerClass + '">' +
+				'<i class="fa fa-spinner fa-lg fa-spin"></i>' +
+				loaderMessage +
 			'</div>'
 		));
+
+		return $loaderOverlayDiv.append($loaderOverlaySpinnerDiv);
 	};
 
 	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {

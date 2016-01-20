@@ -42,7 +42,8 @@
 			rowIdsByGridId: SS6.grid.multipleDragAndDrop.getPositionsIndexedByGridId($grids)
 		};
 
-		$.ajax({
+		SS6.ajax({
+			loaderElement: '.js-multiple-grids-save-all-button',
 			url: $saveButton.data('drag-and-drop-url-save-ordering'),
 			type: 'POST',
 			data: data,

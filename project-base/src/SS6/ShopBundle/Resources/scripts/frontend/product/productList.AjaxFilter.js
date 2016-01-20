@@ -45,7 +45,6 @@
 			var $productsHtml = $wrappedData.find('.js-product-list-ajax-filter-products-with-controls');
 			$productsWithControls.html($productsHtml.html());
 			$productsWithControls.show();
-			$productsWithControls.removeClass('js-disable');
 			ajaxMoreLoader.reInit();
 			SS6.register.registerNewContent($productsWithControls);
 		};
@@ -88,9 +87,7 @@
 		};
 
 		var submitFormWithAjax = function () {
-			$productsWithControls.addClass('js-disable');
-			$('.js-product-list-ajax-filter-loading').show();
-			$.ajax({
+			SS6.ajax({
 				url: SS6.url.getBaseUrl(),
 				data: $productFilterForm.serialize(),
 				success: function (data) {
@@ -99,7 +96,6 @@
 					showProducts($wrappedData);
 					updateFiltersCounts($wrappedData);
 					updateFiltersDisabled();
-					$('.js-product-list-ajax-filter-loading').hide();
 				}
 			});
 		};

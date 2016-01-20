@@ -68,7 +68,7 @@
 			$originalRow.data('inline-edit-row-id');
 		}
 
-		$.ajax({
+		SS6.ajax({
 			url: $grid.data('inline-edit-url-save-form'),
 			type: 'POST',
 			data: $virtualForm.serialize(),
@@ -90,7 +90,7 @@
 	}
 
 	SS6.grid.inlineEdit.startEditRow = function ($row, $grid) {
-		$.ajax({
+		SS6.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
 			type: 'POST',
 			data: {
@@ -110,7 +110,7 @@
 	}
 
 	SS6.grid.inlineEdit.addNewRow = function ($grid) {
-		$.ajax({
+		SS6.ajax({
 			url: $grid.data('inline-edit-url-get-form'),
 			type: 'POST',
 			data: {

@@ -27,7 +27,7 @@
 		};
 
 		var canDeleteDirectly = function () {
-			$.ajax({
+			SS6.ajax({
 				url: $confirmLink.attr('href'),
 				success: function(data) {
 					if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').size() > 0) {

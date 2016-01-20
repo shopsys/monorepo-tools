@@ -82,7 +82,7 @@
 
 	SS6.order.items.addProduct = function(productId, productName) {
 		var $collection = $('#js-order-items');
-		$.ajax({
+		SS6.ajax({
 			url: $collection.data('order-product-add-url'),
 			method: 'POST',
 			data: {

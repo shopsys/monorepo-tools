@@ -17,7 +17,7 @@
 	SS6.register.registerCallback(domainIcon);
 
 	SS6.domainIcon.openDialog = function($editDomainIcon) {
-		$.ajax({
+		SS6.ajax({
 			url: $editDomainIcon.closest('.js-domain-icon-edit-container').data('url'),
 			success: function (data) {
 				SS6.window({
@@ -33,7 +33,7 @@
 		var $spinner = $('.js-overlay-spinner');
 		$iconErrorListContainer.hide();
 		$spinner.show();
-		$.ajax({
+		SS6.ajax({
 			url: $form.attr('action'),
 			data: $form.serialize(),
 			type: $form.attr('method'),

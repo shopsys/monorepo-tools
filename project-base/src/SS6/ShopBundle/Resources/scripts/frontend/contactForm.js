@@ -8,9 +8,8 @@
 	});
 
 	SS6.contactForm.ajaxSumbit = function (event) {
-		$('#js-contact-form-spinner').show();
-		$(this).addClass('js-disable');
-		$.ajax({
+		SS6.ajax({
+			loaderElement: '#js-contact-form-container',
 			url: $(this).attr('action'),
 			method: 'post',
 			data: $(this).serialize(),
@@ -21,7 +20,6 @@
 	};
 
 	var onSuccess = function (data) {
-		$('#js-contact-form-spinner').hide();
 		$('#js-contact-form-container').html(data['contactFormHtml']);
 		SS6.register.registerNewContent($('#js-contact-form-container'));
 		SS6.window({

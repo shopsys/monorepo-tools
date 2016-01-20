@@ -9,7 +9,8 @@
 
 	SS6.cartBox.reload = function (event) {
 
-		$.ajax({
+		SS6.ajax({
+			loaderElement: '.cart-box',
 			url: $(this).data('reload-url'),
 			type: 'get',
 			success: function (data) {

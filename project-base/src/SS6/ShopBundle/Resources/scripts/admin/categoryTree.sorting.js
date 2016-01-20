@@ -39,7 +39,7 @@
 				return;
 			}
 
-			$.ajax({
+			SS6.ajax({
 				url: self.$saveButton.data('category-save-order-url'),
 				type: 'post',
 				data: {

@@ -8,7 +8,7 @@
 	};
 
 	SS6.addProduct.ajaxSubmit = function (event) {
-		$.ajax({
+		SS6.ajax({
 			url: $(this).data('ajax-url'),
 			type: 'POST',
 			data: $(this).serialize(),

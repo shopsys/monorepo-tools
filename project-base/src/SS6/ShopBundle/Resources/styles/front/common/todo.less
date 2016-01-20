@@ -84,23 +84,6 @@
 	opacity: 0.5;
 }
 
-.js-product-list-ajax-filter-loading {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 100;
-	display: block;
-	background: rgba(255, 255, 255, 0.5) none repeat scroll 0 0;
-}
-
-.js-contact-form-spinner {
-	position: relative;
-	top: -350px;
-	z-index:100;
-}
-
 .position-relative {
 	position: relative;
 }
@@ -143,5 +126,33 @@ table.table-variants > tbody > tr > td {
 	top: 0px;
 	left: 0px;
 	z-index:4000;
+	text-align: center;
+}
+
+.js-loader-overlay-spinner {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin-top: -30px;
+	margin-left: -30px;
+	line-height: 60px;
+	font-size: 30px;
+
+	text-align: center;
+}
+
+.js-loader-overlay-spinner--absolute {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 60px;
+	height: 60px;
+	margin-top: -30px;
+	margin-left: -30px;
+	line-height: 60px;
+	font-size: 30px;
+
 	text-align: center;
 }

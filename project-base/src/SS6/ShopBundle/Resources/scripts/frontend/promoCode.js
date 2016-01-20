@@ -23,7 +23,8 @@
 			if (code !== '') {
 				var data = {};
 				data[SS6.constant('SS6\\ShopBundle\\Controller\\Front\\PromoCodeController::PROMO_CODE_PARAMETER')] = code;
-				$.ajax({
+				SS6.ajax({
+					loaderElement: '#js-promo-code-submit-button',
 					url: $promoCodeInput.data('apply-code-url'),
 					dataType: 'json',
 					method: 'post',

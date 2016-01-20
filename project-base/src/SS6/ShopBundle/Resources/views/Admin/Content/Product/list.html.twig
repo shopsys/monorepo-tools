@@ -21,7 +21,7 @@
 	{{ form_end(quickSearchForm) }}
 
 	{{ form_start(massActionForm) }}
-		<div class="wrap-border">
+		<div class="wrap-border js-product-list-with-filter">
 			{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
 			{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
 			<div class="form-line">
