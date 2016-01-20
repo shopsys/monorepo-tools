@@ -21,7 +21,7 @@
 - name: category
   class: SS6\ShopBundle\Model\Category\Category
   sizes:
-    - { name: ~, width: ~, height: 20, crop: false }
+    - { name: ~, width: 30, height: 30, crop: true }
 
 - name: product
   class: SS6\ShopBundle\Model\Product\Product

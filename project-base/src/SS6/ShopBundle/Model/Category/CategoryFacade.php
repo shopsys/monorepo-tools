@@ -238,6 +238,15 @@ class CategoryFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
+		return $this->categoryRepository->getAllVisibleChildrenByCategoryAndDomainId($category, $domainId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
 	public function getAllWithoutBranch(Category $category) {

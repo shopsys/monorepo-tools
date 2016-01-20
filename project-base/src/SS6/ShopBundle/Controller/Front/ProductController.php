@@ -158,6 +158,7 @@ class ProductController extends FrontBaseController {
 			'category' => $category,
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
+			'visibleChildren' => $this->categoryFacade->getAllVisibleChildrenByCategoryAndDomainId($category, $this->domain->getId()),
 		];
 
 		if ($request->isXmlHttpRequest()) {
