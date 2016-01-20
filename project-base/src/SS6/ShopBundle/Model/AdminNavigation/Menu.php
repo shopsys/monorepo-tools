@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\AdminNavigation;
 
+use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+
 class Menu {
 
 	/**
@@ -61,6 +63,13 @@ class Menu {
 	 */
 	public function getSettingsItem() {
 		return $this->settingsItem;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 */
+	public function getSettingsItems() {
+		return $this->settingsItem->getItems();
 	}
 
 	/**
@@ -136,6 +145,23 @@ class Menu {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
+	 * @return bool
+	 */
+	private function isItemDescendantOfSettings(MenuItem $item) {
+		$itemPath = $this->getItemPath($item);
+		if ($itemPath !== null) {
+			foreach ($itemPath as $ancestor) {
+				if ($ancestor->getType() === MenuItem::TYPE_SETTINGS) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $items
 	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $item
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
@@ -174,4 +200,17 @@ class Menu {
 		return $menuPath;
 	}
 
+	/**
+	 * @param string $route
+	 * @param array|null $parameters
+	 * @return bool
+	 */
+	public function isRouteMatchingDescendantOfSettings($route, $parameters) {
+		$matchingItem = $this->getItemMatchingRoute($route, $parameters);
+		if ($matchingItem === null) {
+			return false;
+		}
+
+		return $this->isItemDescendantOfSettings($matchingItem);
+	}
 }

@@ -30,13 +30,14 @@ class MenuController extends AdminBaseController {
 	public function panelAction($route, array $parameters = null) {
 		$activePath = $this->menu->getMenuPath($route, $parameters);
 
-		$secondLevelItems = [];
-		if (isset($activePath[0])) {
-			$secondLevelItems = $activePath[0]->getItems();
+		if (isset($activePath[1]) && $this->menu->isRouteMatchingDescendantOfSettings($route, $parameters)) {
+			$panelItems = $activePath[1]->getItems();
+		} elseif (isset($activePath[0])) {
+			$panelItems = $activePath[0]->getItems();
 		}
 
 		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', [
-			'items' => $secondLevelItems,
+			'items' => $panelItems,
 			'activePath' => $activePath,
 			'ROLE_SUPER_ADMIN' => Roles::ROLE_SUPER_ADMIN,
 		]);

@@ -132,16 +132,23 @@
     - label: 'Identifikace e-shopu'
       route: admin_domain_list
       items:
+        - label: 'Identifikace e-shopu'
+          route: admin_domain_list
         - label: 'Editace domény'
           route: admin_domain_edit
           visible: false
 
     - label: 'Obchodní podmínky'
       route: admin_termsandconditions_setting
+      items:
+        - label: 'Obchodní podmínky'
+          route: admin_termsandconditions_setting
 
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
       items:
+        - label: 'Dopravy a platby'
+          route: admin_transportandpayment_list
         - label: 'Nová doprava'
           route: admin_transport_new
           visible: false
@@ -156,7 +163,7 @@
           visible: false
 
     - label: 'Komunikace se zákazníkem'
-      route: admin_customercommunication_index
+      route: admin_mail_setting
       items:
         - label: 'Nastavení emailů'
           route: admin_mail_setting
@@ -214,9 +221,15 @@
 
     - label: 'Rozměry obrázků'
       route: admin_image_overview
+      items:
+      - label: 'Rozměry obrázků'
+        route: admin_image_overview
 
     - label: 'SEO'
       route: admin_seo_index
+      items:
+      - label: 'SEO'
+        route: admin_seo_index
 
     - label: 'Superadmin'
       route: admin_superadmin_modules
