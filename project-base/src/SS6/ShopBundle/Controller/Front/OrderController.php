@@ -298,6 +298,7 @@ class OrderController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $this->orderFacade->getOrderConfirmText($orderId),
+			'order' => $this->orderFacade->getById($orderId),
 		]);
 	}
 

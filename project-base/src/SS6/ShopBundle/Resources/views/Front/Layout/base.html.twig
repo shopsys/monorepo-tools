@@ -42,10 +42,14 @@
 	</head>
 
 	<body class="body">
+
+		{{ render(controller('SS6ShopBundle:Front/Script:embedAllPagesScripts')) }}
+
 		{% block html_body %}{% endblock %}
 
 		{% if app.environment == 'dev' %}
 			<script async src="//localhost:35729/livereload.js"></script>
 		{% endif %}
+
 	</body>
 </html>

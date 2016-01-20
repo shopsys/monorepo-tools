@@ -1,0 +1,13 @@
+{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+
+{% block grid_no_data %}
+	{{ 'Doposud nejsou žádné skripty.'|trans }}
+{% endblock %}
+
+{% block grid_value_cell_id_placement %}
+	{% if value == PLACEMENT_ORDER_SENT_PAGE %}
+		{{ 'Stránka s potvrzením objednávky'|trans }}
+	{% elseif value == PLACEMENT_ALL_PAGES %}
+		{{ 'Všechny stránky'|trans }}
+	{% endif %}
+{% endblock %}

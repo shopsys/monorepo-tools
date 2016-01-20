@@ -241,3 +241,15 @@
           route: admin_superadmin_errors
         - label: 'Nastavení prodeje s/bez DPH'
           route: admin_superadmin_pricing
+
+    - label: 'Měřící skripty'
+      route: admin_script_list
+      items:
+      - label: 'Přehled skriptů'
+        route: admin_script_list
+      - label: 'Nový skript'
+        route: admin_script_new
+        visible: false
+      - label: 'Editace skriptu'
+        route: admin_script_edit
+        visible: false
