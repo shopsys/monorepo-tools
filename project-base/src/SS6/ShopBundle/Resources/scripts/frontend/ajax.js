@@ -43,7 +43,7 @@
 		var $loaderOverlayDiv = $('<div class="js-loader-overlay"></div>');
 		var $loaderOverlaySpinnerDiv = $($.parseHTML(
 			'<div class="' + overlaySpinnerClass + '">' +
-				'<i class="fa fa-spinner fa-spin"></i>' +
+				'<i class="fa fa-spinner fa-lg fa-spin"></i>' +
 				loaderMessage +
 			'</div>'
 		));
