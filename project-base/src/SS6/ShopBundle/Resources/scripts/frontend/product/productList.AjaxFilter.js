@@ -88,7 +88,6 @@
 
 		var submitFormWithAjax = function () {
 			SS6.ajax({
-				loaderElement: '.js-product-list-with-filter',
 				url: SS6.url.getBaseUrl(),
 				data: $productFilterForm.serialize(),
 				success: function (data) {
