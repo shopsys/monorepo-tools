@@ -105,11 +105,7 @@ class RegistrationController extends FrontBaseController {
 			$email = $formData['email'];
 
 			try {
-				$this->transactional(
-					function () use ($email) {
-						$this->registrationFacade->resetPassword($email, $this->domain->getId());
-					}
-				);
+				$this->registrationFacade->resetPassword($email, $this->domain->getId());
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.'),
@@ -154,11 +150,8 @@ class RegistrationController extends FrontBaseController {
 			$newPassword = $formData['newPassword'];
 
 			try {
-				$user = $this->transactional(
-					function () use ($email, $hash, $newPassword) {
-						return $this->registrationFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
-					}
-				);
+				$user = $this->registrationFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
+
 				$this->login($user);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(

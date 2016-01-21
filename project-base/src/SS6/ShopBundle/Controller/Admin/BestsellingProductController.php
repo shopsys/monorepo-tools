@@ -84,15 +84,7 @@ class BestsellingProductController extends AdminBaseController {
 		if ($form->isValid()) {
 			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
 
-			$this->transactional(
-				function () use ($category, $domainId, $formBestsellingProducts) {
-					$this->bestsellingProductFacade->edit(
-						$category,
-						$domainId,
-						$formBestsellingProducts
-					);
-				}
-			);
+			$this->bestsellingProductFacade->edit($category, $domainId, $formBestsellingProducts);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(

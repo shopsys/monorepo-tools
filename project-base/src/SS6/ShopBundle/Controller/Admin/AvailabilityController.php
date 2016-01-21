@@ -61,11 +61,8 @@ class AvailabilityController extends AdminBaseController {
 
 		try {
 			$fullName = $this->availabilityFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id, $newId) {
-					$this->availabilityFacade->deleteById($id, $newId);
-				}
-			);
+
+			$this->availabilityFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -157,11 +154,9 @@ class AvailabilityController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$availabilitySettingsFormData = $form->getData();
-			$this->transactional(
-				function () use ($availabilitySettingsFormData) {
-					$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
-				}
-			);
+
+			$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
+
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno'));
 
 			return $this->redirectToRoute('admin_availability_list');

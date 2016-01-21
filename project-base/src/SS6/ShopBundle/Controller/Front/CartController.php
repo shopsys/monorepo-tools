@@ -109,11 +109,7 @@ class CartController extends FrontBaseController {
 
 		if ($form->isValid()) {
 			try {
-				$this->transactional(
-					function () use ($form) {
-						$this->cartFacade->changeQuantities($form->getData()['quantities']);
-					}
-				);
+				$this->cartFacade->changeQuantities($form->getData()['quantities']);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$invalidCartRecalc = true;
 			}
@@ -196,11 +192,9 @@ class CartController extends FrontBaseController {
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
-				$addProductResult = $this->transactional(
-					function () use ($formData) {
-						return $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
-					}
-				);
+
+				$addProductResult = $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
+
 				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
@@ -243,11 +237,8 @@ class CartController extends FrontBaseController {
 		if ($form->isValid()) {
 			try {
 				$formData = $form->getData();
-				$addProductResult = $this->transactional(
-					function () use ($formData) {
-						return $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
-					}
-				);
+
+				$addProductResult = $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 
@@ -324,11 +315,9 @@ class CartController extends FrontBaseController {
 		if ($this->get('form.csrf_provider')->isCsrfTokenValid('front_cart_delete_' . $cartItemId, $token)) {
 			try {
 				$productName = $this->cartFacade->getProductByCartItemId($cartItemId)->getName();
-				$this->transactional(
-					function () use ($cartItemId) {
-						$this->cartFacade->deleteCartItem($cartItemId);
-					}
-				);
+
+				$this->cartFacade->deleteCartItem($cartItemId);
+
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Z košíku bylo odstraněno zboží {{ name }}'),
 					['name' => $productName]

@@ -47,11 +47,8 @@ class ParameterController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->parameterFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->parameterFacade->deleteById($id);
-				}
-			);
+
+			$this->parameterFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Parametr <strong>{{ name }}</strong> byl smazán'),

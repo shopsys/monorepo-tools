@@ -53,13 +53,10 @@ class TermsAndConditionsController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$termsAndConditionsArticle = $form->getData()['termsAndConditionsArticle'];
-			$this->transactional(
-				function () use ($selectedDomainId, $termsAndConditionsArticle) {
-					$this->termsAndConditionsFacade->setTermsTermsAndConditionsArticleOnDomain(
-						$termsAndConditionsArticle,
-						$selectedDomainId
-					);
-				}
+
+			$this->termsAndConditionsFacade->setTermsTermsAndConditionsArticleOnDomain(
+				$termsAndConditionsArticle,
+				$selectedDomainId
 			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Bylo upraveno nastavení obchodních podmínek.'));

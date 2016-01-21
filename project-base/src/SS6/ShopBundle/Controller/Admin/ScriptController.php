@@ -44,11 +44,7 @@ class ScriptController extends AdminBaseController {
 		if ($form->isValid()) {
 			$scriptData = $form->getData();
 
-			$script = $this->transactional(
-				function () use ($scriptData) {
-					return $this->scriptFacade->create($scriptData);
-				}
-			);
+			$script = $this->scriptFacade->create($scriptData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -86,11 +82,7 @@ class ScriptController extends AdminBaseController {
 		if ($form->isValid()) {
 			$scriptData = $form->getData();
 
-			$script = $this->transactional(
-				function () use ($scriptId, $scriptData) {
-					return $this->scriptFacade->edit($scriptId, $scriptData);
-				}
-			);
+			$script = $this->scriptFacade->edit($scriptId, $scriptData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -140,11 +132,9 @@ class ScriptController extends AdminBaseController {
 	public function deleteAction($scriptId) {
 		try {
 			$script = $this->scriptFacade->getById($scriptId);
-			$this->transactional(
-				function () use ($scriptId) {
-					$this->scriptFacade->delete($scriptId);
-				}
-			);
+
+			$this->scriptFacade->delete($scriptId);
+
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Skript <strong>{{ name }}</strong> byl smazán'),
 				[

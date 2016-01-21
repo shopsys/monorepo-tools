@@ -63,21 +63,17 @@ class TransportAndPaymentController extends AdminBaseController {
 			$formData = $form->getData();
 			$subformData = $formData[FreeTransportAndPaymentPriceLimitsFormType::DOMAINS_SUBFORM_NAME];
 
-			$this->transactional(
-				function () use ($subformData) {
-					foreach ($this->domain->getAll() as $domainConfig) {
-						$domainId = $domainConfig->getId();
+			foreach ($this->domain->getAll() as $domainConfig) {
+				$domainId = $domainConfig->getId();
 
-						if ($subformData[$domainId][FreeTransportAndPaymentPriceLimitsFormType::FIELD_ENABLED]) {
-							$priceLimit = $subformData[$domainId][FreeTransportAndPaymentPriceLimitsFormType::FIELD_PRICE_LIMIT];
-						} else {
-							$priceLimit = null;
-						}
-
-						$this->pricingSetting->setFreeTransportAndPaymentPriceLimit($domainId, $priceLimit);
-					}
+				if ($subformData[$domainId][FreeTransportAndPaymentPriceLimitsFormType::FIELD_ENABLED]) {
+					$priceLimit = $subformData[$domainId][FreeTransportAndPaymentPriceLimitsFormType::FIELD_PRICE_LIMIT];
+				} else {
+					$priceLimit = null;
 				}
-			);
+
+				$this->pricingSetting->setFreeTransportAndPaymentPriceLimit($domainId, $priceLimit);
+			}
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení dopravy a platby zdarma bylo uloženo'));
 

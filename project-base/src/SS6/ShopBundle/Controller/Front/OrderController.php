@@ -189,11 +189,7 @@ class OrderController extends FrontBaseController {
 			if ($this->flow->nextStep()) {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
-				$order = $this->transactional(
-					function () use ($orderData) {
-						return $this->orderFacade->createOrderFromFront($orderData);
-					}
-				);
+				$order = $this->orderFacade->createOrderFromFront($orderData);
 
 				$this->flow->reset();
 

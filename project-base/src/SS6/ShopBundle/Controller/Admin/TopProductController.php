@@ -47,11 +47,8 @@ class TopProductController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$this->topProductFacade->getById($id);
-			$this->transactional(
-				function () use ($id) {
-					$this->topProductFacade->deleteById($id);
-				}
-			);
+
+			$this->topProductFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Zboží bylo odstraněno'));
 		} catch (\SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException $e) {

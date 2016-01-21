@@ -54,13 +54,9 @@ class SeoController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$seoSettingData = $form->getData();
-			$this->transactional(
-				function () use ($seoSettingData, $selectedDomainId) {
-					$this->seoSettingFacade->setTitleMainPage($seoSettingData['title'], $selectedDomainId);
-					$this->seoSettingFacade->setDescriptionMainPage($seoSettingData['metaDescription'], $selectedDomainId);
-					$this->seoSettingFacade->setTitleAddOn($seoSettingData['titleAddOn'], $selectedDomainId);
-				}
-			);
+			$this->seoSettingFacade->setTitleMainPage($seoSettingData['title'], $selectedDomainId);
+			$this->seoSettingFacade->setDescriptionMainPage($seoSettingData['metaDescription'], $selectedDomainId);
+			$this->seoSettingFacade->setTitleAddOn($seoSettingData['titleAddOn'], $selectedDomainId);
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Natavení SEO atributů bylo upraveno'));
 

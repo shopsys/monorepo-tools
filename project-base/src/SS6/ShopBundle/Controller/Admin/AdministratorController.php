@@ -100,11 +100,7 @@ class AdministratorController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			try {
-				$this->transactional(
-					function () use ($id, $administratorData) {
-						$this->administratorFacade->edit($id, $administratorData);
-					}
-				);
+				$this->administratorFacade->edit($id, $administratorData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -173,11 +169,7 @@ class AdministratorController extends AdminBaseController {
 			$administratorData = $form->getData();
 
 			try {
-				$administrator = $this->transactional(
-					function () use ($administratorData) {
-						return $this->administratorFacade->create($administratorData);
-					}
-				);
+				$administrator = $this->administratorFacade->create($administratorData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),

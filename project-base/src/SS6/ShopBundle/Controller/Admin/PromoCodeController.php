@@ -47,11 +47,8 @@ class PromoCodeController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$code = $this->promoCodeFacade->getById($id)->getCode();
-			$this->transactional(
-				function () use ($id) {
-					$this->promoCodeFacade->deleteById($id);
-				}
-			);
+
+			$this->promoCodeFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Slevový kupón <strong>{{ code }}</strong> byl smazán'),

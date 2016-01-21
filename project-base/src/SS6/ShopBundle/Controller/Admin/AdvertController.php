@@ -89,11 +89,7 @@ class AdvertController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $advertData) {
-					$this->advertEditFacade->edit($id, $advertData);
-				}
-			);
+			$this->advertEditFacade->edit($id, $advertData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -182,11 +178,7 @@ class AdvertController extends AdminBaseController {
 		if ($form->isValid()) {
 			$advertData = $form->getData();
 
-			$advert = $this->transactional(
-				function () use ($advertData) {
-					return $this->advertEditFacade->create($advertData);
-				}
-			);
+			$advert = $this->advertEditFacade->create($advertData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -215,11 +207,8 @@ class AdvertController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->advertEditFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->advertEditFacade->delete($id);
-				}
-			);
+
+			$this->advertEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Reklama <strong>{{ name }}</strong> byla smazána'),

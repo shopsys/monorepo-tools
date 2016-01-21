@@ -77,11 +77,7 @@ class CategoryController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $categoryData) {
-					$this->categoryFacade->edit($id, $categoryData);
-				}
-			);
+			$this->categoryFacade->edit($id, $categoryData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla upravena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -120,11 +116,7 @@ class CategoryController extends AdminBaseController {
 		if ($form->isValid()) {
 			$categoryData = $form->getData();
 
-			$category = $this->transactional(
-				function () use ($categoryData) {
-					return $this->categoryFacade->create($categoryData);
-				}
-			);
+			$category = $this->categoryFacade->create($categoryData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla vytvořena kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -191,11 +183,7 @@ class CategoryController extends AdminBaseController {
 			$parentIdByCategoryId[$categoryId] = $parentId;
 		}
 
-		$this->transactional(
-			function () use ($parentIdByCategoryId) {
-				$this->categoryFacade->editOrdering($parentIdByCategoryId);
-			}
-		);
+		$this->categoryFacade->editOrdering($parentIdByCategoryId);
 
 		return new Response('OK - dummy');
 	}
@@ -209,11 +197,7 @@ class CategoryController extends AdminBaseController {
 		try {
 			$fullName = $this->categoryFacade->getById($id)->getName();
 
-			$this->transactional(
-				function () use ($id) {
-					$this->categoryFacade->deleteById($id);
-				}
-			);
+			$this->categoryFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Kategorie <strong>{{ name }}</strong> byla smazána'),

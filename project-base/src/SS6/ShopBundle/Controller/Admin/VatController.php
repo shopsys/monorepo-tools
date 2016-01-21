@@ -115,11 +115,7 @@ class VatController extends AdminBaseController {
 		try {
 			$fullName = $this->vatFacade->getById($id)->getName();
 
-			$this->transactional(
-				function () use ($id, $newId) {
-					$this->vatFacade->deleteById($id, $newId);
-				}
-			);
+			$this->vatFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -165,12 +161,10 @@ class VatController extends AdminBaseController {
 
 			if ($form->isValid()) {
 				$vatSettingsFormData = $form->getData();
-				$this->transactional(
-					function () use ($vatSettingsFormData) {
-						$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
-						$this->pricingSetting->setRoundingType($vatSettingsFormData['roundingType']);
-					}
-				);
+
+				$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
+				$this->pricingSetting->setRoundingType($vatSettingsFormData['roundingType']);
+
 				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
 
 				return $this->redirectToRoute('admin_vat_list');

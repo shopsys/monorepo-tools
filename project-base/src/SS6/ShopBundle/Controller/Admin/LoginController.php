@@ -103,9 +103,7 @@ class LoginController extends AdminBaseController {
 	public function ssoAction(Request $request, $originalDomainId) {
 		$administrator = $this->getUser();
 		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
-		$multidomainToken = $this->transactional(function () use ($administrator) {
-			return $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
-		});
+		$multidomainToken = $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
 		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
 		$redirectTo = $originalDomainRouter->generate(
 			'admin_login_authorization',

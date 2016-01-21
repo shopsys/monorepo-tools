@@ -49,11 +49,8 @@ class FlagController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->flagFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->flagFacade->deleteById($id);
-				}
-			);
+
+			$this->flagFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Příznak <strong>{{ name }}</strong> byl smazán'),

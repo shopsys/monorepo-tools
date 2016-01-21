@@ -147,11 +147,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $form) {
-					$this->productEditFacade->edit($id, $form->getData());
-				}
-			);
+			$this->productEditFacade->edit($id, $form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>'),
@@ -200,11 +196,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$product = $this->transactional(
-				function () use ($form) {
-					return $this->productEditFacade->create($form->getData());
-				}
-			);
+			$product = $this->productEditFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>'),
@@ -288,11 +280,7 @@ class ProductController extends AdminBaseController {
 		try {
 			$product = $this->productEditFacade->getById($id);
 
-			$this->transactional(
-				function () use ($id) {
-					$this->productEditFacade->delete($id);
-				}
-			);
+			$this->productEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán'),
@@ -331,14 +319,7 @@ class ProductController extends AdminBaseController {
 			$formData = $form->getData();
 			$mainVariant = $formData[VariantFormType::MAIN_VARIANT];
 			try {
-				$newMainVariant = $this->transactional(
-					function () use ($mainVariant, $formData) {
-						return $this->productVariantFacade->createVariant(
-							$mainVariant,
-							$formData[VariantFormType::VARIANTS]
-						);
-					}
-				);
+				$newMainVariant = $this->productVariantFacade->createVariant($mainVariant, $formData[VariantFormType::VARIANTS]);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.'),

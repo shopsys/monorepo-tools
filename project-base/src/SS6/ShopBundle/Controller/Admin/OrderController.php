@@ -117,11 +117,7 @@ class OrderController extends AdminBaseController {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$order = $this->transactional(
-					function () use ($id, $orderData) {
-						return $this->orderFacade->edit($id, $orderData);
-					}
-				);
+				$order = $this->orderFacade->edit($id, $orderData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byla upravena objednávka č. <strong><a href="{{ url }}">{{ number }}</a></strong>'),
@@ -175,11 +171,7 @@ class OrderController extends AdminBaseController {
 	public function addProductAction(Request $request, $orderId) {
 		$productId = $request->get('productId');
 
-		$orderItem = $this->transactional(
-			function () use ($orderId, $productId) {
-				return $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
-			}
-		);
+		$orderItem = $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
 
 		$order = $this->orderFacade->getById($orderId);
 
@@ -276,11 +268,8 @@ class OrderController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$orderNumber = $this->orderFacade->getById($id)->getNumber();
-			$this->transactional(
-				function () use ($id) {
-					$this->orderFacade->deleteById($id);
-				}
-			);
+
+			$this->orderFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Objednávka č. <strong>{{ number }}</strong> byla smazána'),

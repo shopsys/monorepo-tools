@@ -66,11 +66,7 @@ class BrandController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $brandData) {
-					$this->brandFacade->edit($id, $brandData);
-				}
-			);
+			$this->brandFacade->edit($id, $brandData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -141,11 +137,7 @@ class BrandController extends AdminBaseController {
 		if ($form->isValid()) {
 			$brandData = $form->getData();
 
-			$brand = $this->transactional(
-				function () use ($brandData) {
-					return $this->brandFacade->create($brandData);
-				}
-			);
+			$brand = $this->brandFacade->create($brandData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -175,11 +167,8 @@ class BrandController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->brandFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->brandFacade->deleteById($id);
-				}
-			);
+
+			$this->brandFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Značka <strong>{{ name }}</strong> byl smazána'),

@@ -99,11 +99,7 @@ class ArticleController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $articleData) {
-					$this->articleEditFacade->edit($id, $articleData);
-				}
-			);
+			$this->articleEditFacade->edit($id, $articleData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -158,11 +154,7 @@ class ArticleController extends AdminBaseController {
 		if ($form->isValid()) {
 			$articleData = $form->getData();
 
-			$article = $this->transactional(
-				function () use ($articleData) {
-					return $this->articleEditFacade->create($articleData);
-				}
-			);
+			$article = $this->articleEditFacade->create($articleData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -192,11 +184,8 @@ class ArticleController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->articleEditFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->articleEditFacade->delete($id);
-				}
-			);
+
+			$this->articleEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Článek <strong>{{ name }}</strong> byl smazán'),
@@ -236,11 +225,8 @@ class ArticleController extends AdminBaseController {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function saveOrderingAction(Request $request) {
-		$this->transactional(
-			function () use ($request) {
-				$this->articleEditFacade->saveOrdering($request->get('rowIdsByGridId'));
-			}
-		);
+		$this->articleEditFacade->saveOrdering($request->get('rowIdsByGridId'));
+
 		$responseData = ['success' => true];
 
 		return new JsonResponse($responseData);

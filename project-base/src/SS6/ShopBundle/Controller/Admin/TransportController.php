@@ -83,11 +83,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = $this->transactional(
-				function () use ($form) {
-					return $this->transportEditFacade->create($form->getData());
-				}
-			);
+			$transport = $this->transportEditFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla vytvořena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -125,11 +121,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($transport, $transportEditData) {
-					$this->transportEditFacade->edit($transport, $transportEditData);
-				}
-			);
+			$this->transportEditFacade->edit($transport, $transportEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla upravena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -162,11 +154,8 @@ class TransportController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$transportName = $this->transportEditFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->transportEditFacade->deleteById($id);
-				}
-			);
+
+			$this->transportEditFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Doprava <strong>{{ name }}</strong> byla smazána'),

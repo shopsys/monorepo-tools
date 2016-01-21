@@ -82,11 +82,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$payment = $this->transactional(
-				function () use ($paymentEditData) {
-					return $this->paymentEditFacade->create($paymentEditData);
-				}
-			);
+			$payment = $this->paymentEditFacade->create($paymentEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla vytvořena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -124,11 +120,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($payment, $paymentEditData) {
-					$this->paymentEditFacade->edit($payment, $paymentEditData);
-				}
-			);
+			$this->paymentEditFacade->edit($payment, $paymentEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla upravena platba <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -161,11 +153,8 @@ class PaymentController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$paymentName = $this->paymentEditFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->paymentEditFacade->deleteById($id);
-				}
-			);
+
+			$this->paymentEditFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Platba <strong>{{ name }}</strong> byla smazána'),

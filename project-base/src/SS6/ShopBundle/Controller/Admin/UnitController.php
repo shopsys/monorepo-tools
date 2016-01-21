@@ -105,11 +105,8 @@ class UnitController extends AdminBaseController {
 
 		try {
 			$fullName = $this->unitFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id, $newId) {
-					$this->unitFacade->deleteById($id, $newId);
-				}
-			);
+
+			$this->unitFacade->deleteById($id, $newId);
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -152,11 +149,9 @@ class UnitController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$unitSettingsFormData = $form->getData();
-			$this->transactional(
-				function () use ($unitSettingsFormData) {
-					$this->unitFacade->setDefaultUnit($unitSettingsFormData['defaultUnit']);
-				}
-			);
+
+			$this->unitFacade->setDefaultUnit($unitSettingsFormData['defaultUnit']);
+
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí jednotky bylo upraveno'));
 
 			return $this->redirectToRoute('admin_unit_list');

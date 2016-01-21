@@ -98,11 +98,7 @@ class SliderController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$sliderItem = $this->transactional(
-				function () use ($form) {
-					return $this->sliderItemFacade->create($form->getData());
-				}
-			);
+			$sliderItem = $this->sliderItemFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -140,11 +136,7 @@ class SliderController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transactional(
-				function () use ($id, $sliderItemData) {
-					$this->sliderItemFacade->edit($id, $sliderItemData);
-				}
-			);
+			$this->sliderItemFacade->edit($id, $sliderItemData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla upravena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -179,11 +171,8 @@ class SliderController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$name = $this->sliderItemFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id) {
-					$this->sliderItemFacade->delete($id);
-				}
-			);
+
+			$this->sliderItemFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Stránka <strong>{{ name }}</strong> byla smazána'),

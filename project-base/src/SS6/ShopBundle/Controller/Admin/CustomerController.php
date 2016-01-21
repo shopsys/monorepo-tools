@@ -139,11 +139,7 @@ class CustomerController extends AdminBaseController {
 			$form->handleRequest($request);
 
 			if ($form->isValid()) {
-				$this->transactional(
-					function () use ($id, $customerData) {
-						$this->customerEditFacade->editByAdmin($id, $customerData);
-					}
-				);
+				$this->customerEditFacade->editByAdmin($id, $customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -249,11 +245,7 @@ class CustomerController extends AdminBaseController {
 			if ($form->isValid()) {
 				$customerData = $form->getData();
 
-				$user = $this->transactional(
-					function () use ($customerData) {
-						return $this->customerEditFacade->create($customerData);
-					}
-				);
+				$user = $this->customerEditFacade->create($customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -285,11 +277,9 @@ class CustomerController extends AdminBaseController {
 	public function deleteAction($id) {
 		try {
 			$fullName = $this->customerEditFacade->getUserById($id)->getFullName();
-			$this->transactional(
-				function () use ($id) {
-					$this->customerEditFacade->delete($id);
-				}
-			);
+
+			$this->customerEditFacade->delete($id);
+
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Zákazník <strong>{{ name }}</strong> byl smazán'),
 				[

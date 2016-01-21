@@ -51,11 +51,8 @@ class GridController extends AdminBaseController {
 		$rowId = json_decode($request->get('rowId'));
 
 		try {
-			$rowId = $this->transactional(
-				function () use ($request, $rowId) {
-					return $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
-				}
-			);
+			$rowId = $this->inlineEditService->saveFormData($request->get('serviceName'), $request, $rowId);
+
 			$responseData['success'] = true;
 			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
 		} catch (\SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
@@ -71,13 +68,9 @@ class GridController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function saveOrderingAction(Request $request) {
-		$this->transactional(
-			function () use ($request) {
-				$this->gridOrderingFacade->saveOrdering(
-					$request->get('entityClass'),
-					array_map('json_decode', $request->get('rowIds'))
-				);
-			}
+		$this->gridOrderingFacade->saveOrdering(
+			$request->get('entityClass'),
+			array_map('json_decode', $request->get('rowIds'))
 		);
 		$responseData = ['success' => true];
 

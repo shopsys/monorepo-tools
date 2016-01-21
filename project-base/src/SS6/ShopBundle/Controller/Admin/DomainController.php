@@ -130,11 +130,8 @@ class DomainController extends AdminBaseController {
 			try {
 				if (count($form->getData()[DomainFormType::DOMAIN_ICON]) !== 0) {
 					$iconName = reset($form->getData()[DomainFormType::DOMAIN_ICON]);
-					$this->transactional(
-						function () use ($id, $iconName) {
-							$this->domainFacade->editIcon($id, $iconName);
-						}
-					);
+
+					$this->domainFacade->editIcon($id, $iconName);
 				}
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(

@@ -130,19 +130,15 @@ class CurrencyController extends AdminBaseController {
 		if ($form->isValid()) {
 			$currencySettingsFormData = $form->getData();
 
-			$this->transactional(
-				function () use ($currencySettingsFormData) {
-					$this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
+			$this->currencyFacade->setDefaultCurrency($currencySettingsFormData['defaultCurrency']);
 
-					foreach ($this->domain->getAll() as $domainConfig) {
-						$domainId = $domainConfig->getId();
-						$this->currencyFacade->setDomainDefaultCurrency(
-							$currencySettingsFormData['domainDefaultCurrencies'][$domainId],
-							$domainId
-						);
-					}
-				}
-			);
+			foreach ($this->domain->getAll() as $domainConfig) {
+				$domainId = $domainConfig->getId();
+				$this->currencyFacade->setDomainDefaultCurrency(
+					$currencySettingsFormData['domainDefaultCurrencies'][$domainId],
+					$domainId
+				);
+			}
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Nastavení měn bylo upraveno'));
 

@@ -71,11 +71,8 @@ class PricingGroupController extends AdminBaseController {
 
 		try {
 			$name = $this->pricingGroupFacade->getById($id)->getName();
-			$this->transactional(
-				function () use ($id, $newId) {
-					$this->pricingGroupFacade->delete($id, $newId);
-				}
-			);
+
+			$this->pricingGroupFacade->delete($id, $newId);
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -167,11 +164,9 @@ class PricingGroupController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$pricingGroupSettingsFormData = $form->getData();
-			$this->transactional(
-				function () use ($pricingGroupSettingsFormData) {
-					$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
-				}
-			);
+
+			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
+
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí cenové skupiny bylo upraveno'));
 
 			return $this->redirectToRoute('admin_pricinggroup_list');
