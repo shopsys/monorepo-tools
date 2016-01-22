@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fada832d5534f6c49f4d9e4d603b7a36",
-    "content-hash": "bea3754b01eacceea9772155b1bece19",
+    "hash": "9b553265203ffbda3249e6e9de9440b5",
+    "content-hash": "00880ebc51470f0b7fdeb4a6b5cb4a6d",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -203,16 +203,16 @@
         },
         {
             "name": "commerceguys/intl",
-            "version": "v0.5",
+            "version": "v0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/commerceguys/intl.git",
-                "reference": "f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8"
+                "reference": "d975da224440180cfb97c9db135b53ec3ed52079"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/commerceguys/intl/zipball/f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8",
-                "reference": "f78f9854f3ebfe9b2ccbbd57e3824f5a689252b8",
+                "url": "https://api.github.com/repos/commerceguys/intl/zipball/d975da224440180cfb97c9db135b53ec3ed52079",
+                "reference": "d975da224440180cfb97c9db135b53ec3ed52079",
                 "shasum": ""
             },
             "require": {
@@ -224,6 +224,11 @@
                 "phpunit/phpunit": "~4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "CommerceGuys\\Intl\\": "src"
@@ -239,7 +244,7 @@
                 }
             ],
             "description": "Internationalization library powered by CLDR data.",
-            "time": "2015-02-23 01:02:33"
+            "time": "2015-10-05 14:01:23"
         },
         {
             "name": "craue/formflow-bundle",
