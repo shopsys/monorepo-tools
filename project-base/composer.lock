@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df41a1c6790c2532ac2da2151f7d688f",
-    "content-hash": "e71864eab6a28c29ad451776b6da9bb9",
+    "hash": "0e875235ff33b6cf5b50a3cc4bc62368",
+    "content-hash": "12675bbb72d05299e8d86eb5e2901441",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -939,16 +939,16 @@
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
-            "version": "v1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineMigrationsBundle.git",
-                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8"
+                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
-                "reference": "93ec729e3f2f1bb882904cce9d2c1dde6f139ec8",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMigrationsBundle/zipball/303a576e2124efb07ec215e34ea2480b841cf5e4",
+                "reference": "303a576e2124efb07ec215e34ea2480b841cf5e4",
                 "shasum": ""
             },
             "require": {
@@ -993,7 +993,7 @@
                 "migrations",
                 "schema"
             ],
-            "time": "2015-09-29 10:07:00"
+            "time": "2015-11-04 13:45:30"
         },
         {
             "name": "doctrine/inflector",
@@ -1172,23 +1172,23 @@
         },
         {
             "name": "doctrine/migrations",
-            "version": "v1.1.0",
+            "version": "v1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "d196ddc229f50c66c5a015c158adb78a2dfb4351"
+                "reference": "6b70c2c4484c02878743929bb3cd3fdbf41193a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/d196ddc229f50c66c5a015c158adb78a2dfb4351",
-                "reference": "d196ddc229f50c66c5a015c158adb78a2dfb4351",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/6b70c2c4484c02878743929bb3cd3fdbf41193a6",
+                "reference": "6b70c2c4484c02878743929bb3cd3fdbf41193a6",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.2",
                 "php": ">=5.4.0",
-                "symfony/console": "~2.3",
-                "symfony/yaml": "~2.3"
+                "symfony/console": "~2.3|~3.0",
+                "symfony/yaml": "~2.3|~3.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "dev-master",
@@ -1197,9 +1197,6 @@
                 "mockery/mockery": "^0.9.4",
                 "phpunit/phpunit": "~4.7",
                 "satooshi/php-coveralls": "0.6.*"
-            },
-            "suggest": {
-                "symfony/console": "to run the migration from the console"
             },
             "bin": [
                 "bin/doctrine-migrations"
@@ -1227,6 +1224,10 @@
                 {
                     "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Michael Simonson",
+                    "email": "contact@mikesimonson.com"
                 }
             ],
             "description": "Database Schema migrations using Doctrine DBAL",
@@ -1235,7 +1236,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-09-29 11:13:06"
+            "time": "2016-01-07 21:28:50"
         },
         {
             "name": "doctrine/orm",
