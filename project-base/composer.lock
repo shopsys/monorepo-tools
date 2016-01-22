@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd807860c258b286cc35fabf5184a1dd",
-    "content-hash": "65c10d7855527f3255726985ed57f117",
+    "hash": "1772026ca173d14be33d4440f1e6e363",
+    "content-hash": "2c1ec78017da67e505e9196fcc44c1ee",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -2446,16 +2446,16 @@
         },
         {
             "name": "phing/phing",
-            "version": "2.9.1",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phingofficial/phing.git",
-                "reference": "393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c"
+                "reference": "a5b10a50160c8a4744545aacb33ef158349e655c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phingofficial/phing/zipball/393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c",
-                "reference": "393edeffa8a85d43636ce0c9b4deb1ff9ac60a5c",
+                "url": "https://api.github.com/repos/phingofficial/phing/zipball/a5b10a50160c8a4744545aacb33ef158349e655c",
+                "reference": "a5b10a50160c8a4744545aacb33ef158349e655c",
                 "shasum": ""
             },
             "require": {
@@ -2464,20 +2464,21 @@
             "require-dev": {
                 "ext-pdo_sqlite": "*",
                 "lastcraft/simpletest": "@dev",
-                "pdepend/pdepend": "1.x",
-                "pear-pear.php.net/http_request2": "2.2.x",
-                "pear-pear.php.net/net_growl": "2.7.x",
-                "pear-pear.php.net/pear_packagefilemanager": "1.7.x",
-                "pear-pear.php.net/pear_packagefilemanager2": "1.0.x",
-                "pear-pear.php.net/xml_serializer": "0.20.x",
-                "pear/pear_exception": "@dev",
+                "pdepend/pdepend": "2.x",
+                "pear/archive_tar": "1.4.x",
+                "pear/http_request2": "dev-trunk",
+                "pear/net_growl": "dev-trunk",
+                "pear/pear-core-minimal": "1.10.1",
                 "pear/versioncontrol_git": "@dev",
-                "pear/versioncontrol_svn": "@dev",
+                "pear/versioncontrol_svn": "~0.5",
                 "phpdocumentor/phpdocumentor": "2.x",
-                "phploc/phploc": "2.x",
+                "phploc/phploc": "~2.0.6",
+                "phpmd/phpmd": "~2.2",
                 "phpunit/phpunit": ">=3.7",
+                "sebastian/git": "~1.0",
                 "sebastian/phpcpd": "2.x",
-                "squizlabs/php_codesniffer": "1.5.x"
+                "squizlabs/php_codesniffer": "~2.2",
+                "symfony/yaml": "~2.7"
             },
             "suggest": {
                 "pdepend/pdepend": "PHP version of JDepend",
@@ -2498,7 +2499,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.9.x-dev"
+                    "dev-master": "2.13.x-dev"
                 }
             },
             "autoload": {
@@ -2515,23 +2516,23 @@
             ],
             "authors": [
                 {
-                    "name": "Phing Community",
-                    "homepage": "http://www.phing.info/trac/wiki/Development/Contributors"
-                },
-                {
                     "name": "Michiel Rook",
                     "email": "mrook@php.net"
+                },
+                {
+                    "name": "Phing Community",
+                    "homepage": "https://www.phing.info/trac/wiki/Development/Contributors"
                 }
             ],
             "description": "PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant.",
-            "homepage": "http://www.phing.info/",
+            "homepage": "https://www.phing.info/",
             "keywords": [
                 "build",
                 "phing",
                 "task",
                 "tool"
             ],
-            "time": "2014-12-03 09:18:46"
+            "time": "2015-12-04 09:45:44"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
