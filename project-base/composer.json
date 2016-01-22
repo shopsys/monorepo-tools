@@ -66,7 +66,7 @@
 		"pdepend/pdepend": "2.0.0",
 		"phing/phing": "2.13.0",
 		"phpunit/phpunit": "4.8.4",
-		"presta/sitemap-bundle": "1.4",
+		"presta/sitemap-bundle": "1.4.2",
 		"prezent/doctrine-translatable-bundle": "1.0.1",
 		"raulfraile/ladybug-bundle": "1.0.6",
 		"sensio/distribution-bundle": "4.0.1",
