@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3c86838c464ef00253d110c1efd33475",
-    "content-hash": "5da597a82b03a8a6098ecd9d63e95efa",
+    "hash": "fada832d5534f6c49f4d9e4d603b7a36",
+    "content-hash": "bea3754b01eacceea9772155b1bece19",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -111,17 +111,17 @@
         },
         {
             "name": "bmatzner/jquery-bundle",
-            "version": "1.11.1",
+            "version": "2.1.1",
             "target-dir": "Bmatzner/JQueryBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmatzner/BmatznerJQueryBundle.git",
-                "reference": "0987164e37b6674ae715b5b4661863987549158c"
+                "reference": "c47ebfd993782560d425081d6866393274537953"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/0987164e37b6674ae715b5b4661863987549158c",
-                "reference": "0987164e37b6674ae715b5b4661863987549158c",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/c47ebfd993782560d425081d6866393274537953",
+                "reference": "c47ebfd993782560d425081d6866393274537953",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
                 "jquery",
                 "symfony"
             ],
-            "time": "2014-05-05 16:17:29"
+            "time": "2014-05-05 16:19:00"
         },
         {
             "name": "bmatzner/jquery-ui-bundle",
@@ -251,7 +251,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/d14fcb159245b9f079f0908a17e5aef08dc38df8",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/fd090f2c9d7248837f5582a345dd981cc074fe94",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -5142,7 +5142,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/2ead2e4043ab125bee9554f356e0a86742c2d4fa",
+                "url": "https://api.github.com/repos/JakubOnderka/PHP-Parallel-Lint/zipball/dafb48ea240a3c70dadf5d862598c8c5a18f5f9b",
                 "reference": "41365ce",
                 "shasum": ""
             },

@@ -45,7 +45,7 @@
 	"require": {
 		"php": "5.6.*",
 		"arvenil/ninja-mutex": "0.4.1",
-		"bmatzner/jquery-bundle": "1.11.1",
+		"bmatzner/jquery-bundle": "2.1.1",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
 		"commerceguys/intl": "0.5",
 		"craue/formflow-bundle": "dev-master#d14fcb1",
