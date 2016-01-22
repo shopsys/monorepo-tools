@@ -87,7 +87,7 @@
 	"require-dev": {
 		"codeception/codeception": "2.1.2",
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
-		"se/selenium-server-standalone": "2.45.0",
+		"se/selenium-server-standalone": "2.48.2",
 		"shopsys/coding-standards": "1.0.0",
 		"shopsys/phpstorm-inspect": "1.0.4"
 	},

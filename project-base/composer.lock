@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "35ecb9299d41750589d5d34922786ace",
-    "content-hash": "3d9217891a972e5f6e9c0198502c8f78",
+    "hash": "9285146ca18753634011c60708fda3e8",
+    "content-hash": "b8857a13ba72ebd0247e8aadacff0d17",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -5251,20 +5251,23 @@
         },
         {
             "name": "se/selenium-server-standalone",
-            "version": "v2.45.0",
+            "version": "v2.48.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sveneisenschmidt/selenium-server-standalone.git",
-                "reference": "3d8ec4f4e766c504345f489a11ce14b2db8c254d"
+                "reference": "2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/3d8ec4f4e766c504345f489a11ce14b2db8c254d",
-                "reference": "3d8ec4f4e766c504345f489a11ce14b2db8c254d",
+                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40",
+                "reference": "2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40",
                 "shasum": ""
             },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
             "bin": [
-                "composer/bin/selenium-server-standalone"
+                "bin/selenium-server-standalone"
             ],
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -5283,7 +5286,7 @@
                 "selenium",
                 "testing"
             ],
-            "time": "2015-03-02 10:08:04"
+            "time": "2016-01-05 13:12:30"
         },
         {
             "name": "shopsys/coding-standards",
