@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "41545119e0fc18ad4b55cacdcf801670",
-    "content-hash": "0e67688d7ea42a67bb836e628b9eaf95",
+    "hash": "4a4cfaae483fe88b789f01afa8a61b7d",
+    "content-hash": "4cdc8a88e083d84305992b4321e55675",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -3004,16 +3004,16 @@
         },
         {
             "name": "prezent/doctrine-translatable",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Prezent/doctrine-translatable.git",
-                "reference": "49be30d155bf7aae3bf146a1fb64b3b28ebd14a2"
+                "reference": "8874a08cccc79d5a83a211ba2efbca61f60df20a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Prezent/doctrine-translatable/zipball/49be30d155bf7aae3bf146a1fb64b3b28ebd14a2",
-                "reference": "49be30d155bf7aae3bf146a1fb64b3b28ebd14a2",
+                "url": "https://api.github.com/repos/Prezent/doctrine-translatable/zipball/8874a08cccc79d5a83a211ba2efbca61f60df20a",
+                "reference": "8874a08cccc79d5a83a211ba2efbca61f60df20a",
                 "shasum": ""
             },
             "require": {
@@ -3053,20 +3053,20 @@
                 "i18n",
                 "translatable"
             ],
-            "time": "2014-12-02 15:13:31"
+            "time": "2015-03-04 07:50:24"
         },
         {
             "name": "prezent/doctrine-translatable-bundle",
-            "version": "dev-master",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Prezent/doctrine-translatable-bundle.git",
-                "reference": "adfc849"
+                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/Prezent/doctrine-translatable-bundle/zipball/adfc8496d909f483f946cfdb0fe2820e617251d8",
-                "reference": "adfc849",
+                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8",
                 "shasum": ""
             },
             "require": {
@@ -5502,7 +5502,6 @@
         "fp/jsformvalidator-bundle": 20,
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
-        "prezent/doctrine-translatable-bundle": 20,
         "symfony-cmf/routing": 20,
         "timwhitlock/jparser": 20,
         "jakub-onderka/php-parallel-lint": 20
