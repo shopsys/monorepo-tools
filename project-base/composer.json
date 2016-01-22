@@ -54,7 +54,7 @@
 		"doctrine/doctrine-fixtures-bundle": "2.3.0",
 		"doctrine/doctrine-migrations-bundle": "1.1.1",
 		"doctrine/orm": "dev-master#55c4788",
-		"egeloen/ckeditor-bundle": "2.5.0",
+		"egeloen/ckeditor-bundle": "4.0.1",
 		"fabpot/php-cs-fixer": "1.8.1",
 		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",
 		"fzaninotto/faker": "v1.5.0",
