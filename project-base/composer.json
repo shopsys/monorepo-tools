@@ -61,7 +61,7 @@
 		"helios-ag/fm-elfinder-bundle": "4.0.2",
 		"incenteev/composer-parameter-handler": "v2.1.2",
 		"intaro/postgres-search-bundle": "dev-master#0eb26e0812",
-		"intervention/image": "2.0.17",
+		"intervention/image": "2.3.5",
 		"jms/translation-bundle": "dev-fix-external-translations#527da12",
 		"pdepend/pdepend": "2.0.0",
 		"phing/phing": "2.9.1",
