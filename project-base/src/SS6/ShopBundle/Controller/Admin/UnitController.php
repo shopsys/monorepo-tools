@@ -76,11 +76,14 @@ class UnitController extends AdminBaseController {
 						['%name%' => $unit->getName()]
 					);
 				}
-					$unitNamesById = $this->unitFacade->getUnitNamesByIdExceptId($id);
+				$unitNamesById = $this->unitFacade->getUnitNamesByIdExceptId($id);
 
-					return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
-						$message, 'admin_unit_delete', $id, $unitNamesById
-					);
+				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+					$message,
+					'admin_unit_delete',
+					$id,
+					$unitNamesById
+				);
 			} else {
 				$message = t(
 					'Opravdu si přejete trvale odstranit jednotku "%name%"? Nikde není použita.',
