@@ -13,14 +13,10 @@ front_customer_orders:
 front_customer_order_detail_registered:
   pattern: /zakaznik/detail-objednavky/{orderNumber}
   defaults: { _controller: SS6ShopBundle:Front\Customer:orderDetailRegistered }
-  requirements:
-    cartItemId: \d+
 
 front_customer_order_detail_unregistered:
   pattern: /detail-objednavky/{urlHash}
   defaults: { _controller: SS6ShopBundle:Front\Customer:orderDetailUnregistered }
-  requirements:
-    cartItemId: \d+
 
 front_login:
   pattern: /prihlaseni/
