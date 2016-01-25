@@ -4,14 +4,17 @@ namespace SS6\ShopBundle\Tests\Performance;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
-use SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection;
-use SS6\ShopBundle\Tests\Performance\ThresholdService;
+use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator;
+use SS6\ShopBundle\Tests\Performance\PerformanceTestSummaryPrinter;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AllPagesTest extends FunctionalTestCase {
 
-	const PASSES = 3;
+	const PASSES = 5;
 
 	const ADMIN_USERNAME = 'superadmin';
 	const ADMIN_PASSWORD = 'admin123';
@@ -82,7 +85,6 @@ class AllPagesTest extends FunctionalTestCase {
 		$password
 	) {
 		$consoleOutput = new ConsoleOutput();
-		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
 		$consoleOutput->writeln('');
 
 		$countTestedUrls = count($testableUrlsDataProviderData);
@@ -99,7 +101,6 @@ class AllPagesTest extends FunctionalTestCase {
 			$consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
 			$this->doTestUrl(
-				$pagePerformanceResultsCollection,
 				$routeName,
 				$url,
 				$expectedStatusCode,
@@ -122,10 +123,17 @@ class AllPagesTest extends FunctionalTestCase {
 		$password,
 		$jmeterOutputFilename
 	) {
+		$performanceTestSummaryPrinter = $this->getContainer()->get(PerformanceTestSummaryPrinter::class);
+		/* @var $performanceTestSummaryPrinter \SS6\ShopBundle\Tests\Performance\PerformanceTestSummaryPrinter */
+		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
+		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter */
+		$performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
+		/* @var $performanceTestSamplesAggregator \SS6\ShopBundle\Tests\Performance\PerformanceTestSamplesAggregator */
+
 		$consoleOutput = new ConsoleOutput();
-		$thresholdService = new ThresholdService();
-		$pagePerformanceResultsCollection = new PagePerformanceResultsCollection();
 		$consoleOutput->writeln('');
+
+		$performanceTestSamples = [];
 
 		$countTestedUrls = count($testableUrlsDataProviderData);
 		for ($pass = 1; $pass <= self::PASSES; $pass++) {
@@ -142,8 +150,7 @@ class AllPagesTest extends FunctionalTestCase {
 				);
 				$consoleOutput->write(str_pad($progressLine, 80) . "\r");
 
-				$this->doTestUrl(
-					$pagePerformanceResultsCollection,
+				$performanceTestSamples[] = $this->doTestUrl(
 					$routeName,
 					$url,
 					$expectedStatusCode,
@@ -154,23 +161,26 @@ class AllPagesTest extends FunctionalTestCase {
 			}
 		}
 
-		$this->printSummary($pagePerformanceResultsCollection, $thresholdService, $consoleOutput);
-		$this->saveJmeterCsvReport($pagePerformanceResultsCollection, $jmeterOutputFilename);
+		$performanceResultsCsvExporter->exportJmeterCsvReport($performanceTestSamples, $jmeterOutputFilename);
 
-		$this->doAssert($pagePerformanceResultsCollection, $thresholdService);
+		$performanceTestSamplesAggregatedByUrl = $performanceTestSamplesAggregator
+			->getPerformanceTestSamplesAggregatedByUrl($performanceTestSamples);
+
+		$performanceTestSummaryPrinter->printSummary($performanceTestSamplesAggregatedByUrl, $consoleOutput);
+
+		$this->doAssert($performanceTestSamplesAggregatedByUrl);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
 	 * @param string $routeName
 	 * @param string $url
 	 * @param int $expectedStatusCode
 	 * @param bool $asLogged
 	 * @param string $username
 	 * @param string $password
+	 * @return \SS6\ShopBundle\Tests\Performance\PerformanceTestSample
 	 */
 	private function doTestUrl(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
 		$routeName,
 		$url,
 		$expectedStatusCode,
@@ -191,11 +201,11 @@ class AllPagesTest extends FunctionalTestCase {
 		/* @var $em \Doctrine\ORM\EntityManager */
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
-		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
+		$urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		$client->enableProfiler();
 		$em->beginTransaction();
-		$client->request('GET', $url);
+		$client->request('GET', $urlWithCsrfToken);
 		$em->rollback();
 
 		$profile = $client->getProfile();
@@ -207,7 +217,7 @@ class AllPagesTest extends FunctionalTestCase {
 
 		$statusCode = $client->getResponse()->getStatusCode();
 
-		$pagePerformanceResultsCollection->addMeasurement(
+		return new PerformanceTestSample(
 			$routeName,
 			$url,
 			$timeCollector->getDuration(),
@@ -218,103 +228,22 @@ class AllPagesTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
-	 * @param \SS6\ShopBundle\Tests\Performance\ThresholdService $thresholdService
-	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
-	 */
-	private function printSummary(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
-		ThresholdService $thresholdService,
-		ConsoleOutput $consoleOutput
-	) {
-		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
-			$consoleOutput->writeln('');
-			$consoleOutput->writeln(
-				'Route name: ' . $pagePerformanceResult->getRouteName() . ' (' . $pagePerformanceResult->getUrl() . ')'
-			);
-			$tag = $thresholdService->getFormatterTagForDuration($pagePerformanceResult->getAvgDuration());
-			$consoleOutput->writeln('<' . $tag . '>Avg duration: ' . $pagePerformanceResult->getAvgDuration() . 'ms</' . $tag . '>');
-			$tag = $thresholdService->getFormatterTagForQueryCount($pagePerformanceResult->getMaxQueryCount());
-			$consoleOutput->writeln('<' . $tag . '>Max query count: ' . $pagePerformanceResult->getMaxQueryCount() . '</' . $tag . '>');
-			if ($thresholdService->getStatusForErrorsCount($pagePerformanceResult->getErrorsCount()) !== ThresholdService::STATUS_OK) {
-				$tag = $thresholdService->getFormatterTagForErrorsCount($pagePerformanceResult->getErrorsCount());
-				$consoleOutput->writeln('<' . $tag . '>Wrong response status code</' . $tag . '>');
-			}
-		}
-
-		$resultStatus = $thresholdService->getPagePerformanceCollectionStatus($pagePerformanceResultsCollection);
-		$resultColor = $thresholdService->getStatusConsoleTextColor($resultStatus);
-		$resultTag = 'fg=' . $resultColor;
-		$consoleOutput->writeln('');
-		switch ($resultStatus) {
-			case ThresholdService::STATUS_OK:
-				$consoleOutput->write('<' . $resultTag . '>Test passed</' . $resultTag . '>');
-				return;
-			case ThresholdService::STATUS_WARNING:
-				$consoleOutput->write('<' . $resultTag . '>Test passed, but contains some warnings</' . $resultTag . '>');
-				return;
-			case ThresholdService::STATUS_CRITICAL:
-			default:
-				$consoleOutput->write('<' . $resultTag . '>Test failed</' . $resultTag . '>');
-				return;
-		}
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
-	 * @param string $outputFilename
-	 */
-	private function saveJmeterCsvReport(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
-		$outputFilename
-	) {
-		$handle = fopen($outputFilename, 'w');
-
-		fputcsv($handle, [
-			'timestamp',
-			'elapsed',
-			'label',
-			'responseCode',
-			'success',
-			'URL',
-			'SampleCount',
-			'ErrorCount',
-			'Variables',
-		]);
-
-		foreach ($pagePerformanceResultsCollection->getAll() as $pagePerformanceResult) {
-			fputcsv($handle, [
-				time(),
-				$pagePerformanceResult->getAvgDuration(),
-				$pagePerformanceResult->getRouteName(),
-				$pagePerformanceResult->getMostImportantStatusCode(),
-				($pagePerformanceResult->getErrorsCount() === 0) ? 'true' : 'false',
-				'/' . $pagePerformanceResult->getUrl(),
-				$pagePerformanceResult->getMeasurementsCount(),
-				$pagePerformanceResult->getErrorsCount(),
-				$pagePerformanceResult->getMaxQueryCount(),
-			]);
-		}
-
-		fclose($handle);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PagePerformanceResultsCollection $pagePerformanceResultsCollection
-	 * @param \SS6\ShopBundle\Tests\Performance\ThresholdService $thresholdService
+	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
 	 */
 	private function doAssert(
-		PagePerformanceResultsCollection $pagePerformanceResultsCollection,
-		ThresholdService $thresholdService
+		array $performanceTestSamples
 	) {
-		$resultStatus = $thresholdService->getPagePerformanceCollectionStatus($pagePerformanceResultsCollection);
+		$performanceTestSampleQualifier = $this->getContainer()->get(PerformanceTestSampleQualifier::class);
+		/* @var $performanceTestSampleQualifier \SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier */
 
-		switch ($resultStatus) {
-			case ThresholdService::STATUS_OK:
-			case ThresholdService::STATUS_WARNING:
+		$overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
+
+		switch ($overallStatus) {
+			case PerformanceTestSampleQualifier::STATUS_OK:
+			case PerformanceTestSampleQualifier::STATUS_WARNING:
 				$this->assertTrue(true);
 				return;
-			case ThresholdService::STATUS_CRITICAL:
+			case PerformanceTestSampleQualifier::STATUS_CRITICAL:
 			default:
 				$this->fail('Values are above critical threshold');
 				return;
