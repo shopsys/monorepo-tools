@@ -8,7 +8,10 @@
 		<table class="table-form">
 			<thead>
 				<tr class="table-form__row">
-					<th class="table-form__cell">{{ inputPriceLabel() }}</th>
+					<th class="table-form__cell table-form__cell--label">
+						{{ inputPriceLabel() }}
+					</th>
+					<th class="table-form__cell table-form__cell--field"></th>
 					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
 					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
 				</tr>
@@ -16,11 +19,12 @@
 			<tbody>
 				{% for currencyId, currency in currencies %}
 					<tr class="table-form__row">
-						<td class="table-form__cell">
-							{{ form_row(
-								form.prices[currencyId],
-								{label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), symbolAfterInput:currencySymbolByCurrencyId(currencyId) }
-							) }}
+						<td class="table-form__cell table-form__cell--label">
+							{{ form_label(form.prices[currencyId], 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+						</td>
+						<td class="table-form__cell table-form__cell--filed">
+							{{ form_widget(form.prices[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
+							{{ form_errors(form.prices[currencyId]) }}
 						</td>
 						<td class="table-form__cell">{{ paymentDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
 						<td class="table-form__cell">{{ paymentDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
