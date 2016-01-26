@@ -2,6 +2,14 @@
 
 {% block title %}- {{ 'Přehled zboží'|trans }}{% endblock %}
 {% block h1 %}{{ 'Přehled zboží'|trans }}{% endblock %}
+{% block btn %}
+	<a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
+		<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit nové zboží'|trans }}
+	</a>
+	<a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
+		<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit variantu'|trans }}
+	</a>
+{% endblock %}
 
 {% block main_content %}
 	{{ form_start(quickSearchForm) }}
@@ -35,16 +43,6 @@
 			</div>
 		</div>
 
-		<div class="wrap-border">
-			<div class="wrap-bar mb0">
-				<a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
-					<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit nové zboží'|trans }}
-				</a>
-				<a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
-					<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit variantu'|trans }}
-				</a>
-			</div>
-		</div>
 		{{ gridView.render() }}
 		{{ gridView.renderHiddenInputs('page') }}
 	{{ form_end(massActionForm) }}

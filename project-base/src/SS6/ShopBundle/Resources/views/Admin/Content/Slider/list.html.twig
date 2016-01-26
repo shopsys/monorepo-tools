@@ -3,14 +3,13 @@
 {% block title %}- {{ 'Stránky slideru'|trans }}{% endblock %}
 {% block h1 %}{{ 'Stránky slideru'|trans }}{% endblock %}
 
+{% block btn %}
+	<a href="{{ url('admin_slider_new') }}" class="btn btn--plus wrap-bar__btn">
+		<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit novou stránku'|trans }}
+	</a>
+{% endblock %}
+
 {% block main_content %}
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-
-	<div class="wrap-bar">
-		<a href="{{ url('admin_slider_new') }}" class="btn btn--plus wrap-bar__btn">
-			<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit novou stránku'|trans }}
-		</a>
-	</div>
-
 	{{ gridView.render() }}
 {% endblock %}
