@@ -140,7 +140,7 @@ class ProductDataFixture {
 				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
-			$this->setRandomProductEditDataCategories($productEditData);
+			$this->addRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -279,16 +279,16 @@ class ProductDataFixture {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function setRandomProductEditDataCategories(ProductEditData $productEditData) {
-		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 1);
-		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 2);
+	private function addRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData) {
+		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 1);
+		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 2);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param int $domainId
 	 */
-	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
+	private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
 		$performanceCategoryIds = $this->getPerformanceCategoryIds();
 		$randomPerformanceCategoryIds = (array)array_rand($performanceCategoryIds, rand(1, 4));
 		$randomPerformanceCategories = $this->categoryRepository->getCategoriesByIds($randomPerformanceCategoryIds);
