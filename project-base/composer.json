@@ -10,7 +10,7 @@
 				"src/SS6/"
 			]
 		},
-		"files": [ "src/SS6/ShopBundle/Component/Translation/functions.php" ]
+		"files": ["src/SS6/ShopBundle/Component/Translation/functions.php"]
 	},
 	"repositories": [
 		{
@@ -61,6 +61,7 @@
 		"fp/jsformvalidator-bundle": "dev-master#4a12964",
 		"fzaninotto/faker": "1.5.0",
 		"helios-ag/fm-elfinder-bundle": "4.0.2",
+		"heureka/overeno-zakazniky": "2.0.4",
 		"incenteev/composer-parameter-handler": "2.1.2",
 		"intaro/postgres-search-bundle": "dev-master#0eb26e0812",
 		"intervention/image": "2.3.5",
@@ -112,8 +113,12 @@
 		"symfony-app-dir": "app",
 		"symfony-web-dir": "web",
 		"incenteev-parameters": [
-			{ "file": "app/config/parameters.yml" },
-			{ "file": "app/config/parameters_test.yml" }
+			{
+				"file": "app/config/parameters.yml"
+			},
+			{
+				"file": "app/config/parameters_test.yml"
+			}
 		]
 	}
 }
