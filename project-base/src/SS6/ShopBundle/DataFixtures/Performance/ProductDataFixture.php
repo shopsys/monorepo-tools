@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
@@ -148,7 +149,7 @@ class ProductDataFixture {
 				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
-			$this->addRandomPerformanceCategoriesToProductEditData($productEditData);
+			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -287,9 +288,23 @@ class ProductDataFixture {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function addRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData) {
+	private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData) {
+		$this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 1);
+		$this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 2);
 		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 1);
 		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 2);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param int $domainId
+	 */
+	private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
+		foreach ($productEditData->productData->categoriesByDomainId[$domainId] as $key => $category) {
+			if ($this->isPerformanceCategory($category)) {
+				unset($productEditData->productData->categoriesByDomainId[$domainId][$key]);
+			}
+		}
 	}
 
 	/**
@@ -322,6 +337,19 @@ class ProductDataFixture {
 		$firstPerformanceCategoryKey = array_search($firstPerformanceCategory->getId(), $allCategoryIds, true);
 
 		return array_slice($allCategoryIds, $firstPerformanceCategoryKey);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return bool
+	 */
+	private function isPerformanceCategory(Category $category) {
+		$firstPerformanceCategory = $this->persistentReferenceService->getReference(
+			CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
+		);
+		/* @var $firstPerformanceCategory \SS6\ShopBundle\Model\Category\Category */
+
+		return $category->getId() >= $firstPerformanceCategory->getId();
 	}
 
 	/**
