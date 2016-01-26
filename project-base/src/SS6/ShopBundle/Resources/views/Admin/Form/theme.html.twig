@@ -285,8 +285,9 @@
 				{{ form_widget(newUrlForm) }}
 			{% endfor %}
 		</div>
-		<button type="button" class="js-entity-url-list-button-add-url btn">
-			<span class="btn__icon sprite sprite-plus"></span>{{ 'Přidat URL'|trans }}
+		<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
+			<i class="btn__icon">+</i>
+			{ 'Přidat URL'|trans }}
 		</button>
 	</div>
 {%- endblock url_list_widget -%}
@@ -447,8 +448,8 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<a href="#" class="btn js-products-picker-button-add">
-			<i class="sprite sprite-plus"></i>
+		<a href="#" class="btn btn--plus js-products-picker-button-add">
+			<i class="btn__icon">+</i>
 			{% if labelButtonAdd is defined %}
 				{{ labelButtonAdd }}
 			{% else %}

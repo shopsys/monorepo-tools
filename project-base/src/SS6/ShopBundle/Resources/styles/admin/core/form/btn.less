@@ -32,8 +32,10 @@ button types
 	&__icon {
 		margin-right: 7px;
 		float: left;
+		position: relative;
+		top: 3px;
 
-		&--plus {
+		.btn--plus & {
 			position: absolute;
 			top: 6px;
 			left: 6px;
@@ -47,15 +49,15 @@ button types
 		}
 	}
 
+	&--plus {
+		position: relative;
+		padding-left: 34px;
+	}
+
 	&--block {
 		width: 100%;
 
 		text-align: center;
-	}
-
-	&--plus {
-		position: relative;
-		padding-left: 34px;
 	}
 
 	&--lg {
