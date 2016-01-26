@@ -38,8 +38,9 @@
 
 	SS6.productsPicker.window.markAddButtonAsAdded = function ($addButton) {
 		$addButton
-			.addClass('cursor-default btn-success')
-			.find('.js-products-picker-icon').removeClass('svg-circle-plus in-icon in-icon--add').addClass('svg-circle-cross in-icon in-icon--delete').end()
+			.addClass('cursor-auto btn--success').removeClass('btn--plus btn--light')
+			.find('.js-products-picker-label').text(SS6.translator.trans('Přidáno')).end()
+			.find('.js-products-picker-icon').addClass('svg svg-checked').empty().end()
 			.click(function () {
 				return false;
 			});
@@ -47,11 +48,12 @@
 
 	SS6.productsPicker.window.markAddButtonAsDeny = function ($addButton) {
 		$addButton
-			.addClass('cursor-help btn-warning')
+			.addClass('cursor-help')
 			.tooltip({
 				title: SS6.translator.trans('Nelze přiřadit produkt sám sobě'),
 				placement: 'left'
 			})
+			.find('.js-products-picker-label').text(SS6.translator.trans('Nelze'))
 			.find('.js-products-picker-icon').removeClass('svg-circle-plus in-icon in-icon--add').addClass('svg-circle-remove in-icon in-icon--denied').end()
 			.click(function () {
 				return false;

@@ -47,11 +47,33 @@ button types
 
 			.size(18px);
 		}
+
+		.btn--small & {
+			margin-right: 5px;
+			top: -1px;
+		}
+
+		.btn--small.btn--plus & {
+			top: 1px;
+			left: 1px;
+		}
+	}
+
+	&--small {
+		height: @btn-height - 8;
+		line-height: @btn-height - 18;
+		padding-left: 8px;
+		padding-right: 8px;
 	}
 
 	&--plus {
 		position: relative;
 		padding-left: 34px;
+
+		&.btn--small {
+			padding-left: 22px;
+			padding-right: 10px;
+		}
 	}
 
 	&--block {
@@ -83,6 +105,27 @@ button types
 		&:hover {
 			background: @btn-disabled-bg;
 			color: @btn-disabled-color;
+		}
+	}
+
+	&--light {
+		background: @color-f;
+		color: @color-base;
+		border: 1px solid @color-border;
+
+		&:hover {
+			background: @color-fa;
+			color: @color-base;
+		}
+	}
+
+	&--success {
+		background: @color-green;
+		color: @color-f;
+
+		&:hover {
+			background: @color-green;
+			color: @color-f;
 		}
 	}
 }
