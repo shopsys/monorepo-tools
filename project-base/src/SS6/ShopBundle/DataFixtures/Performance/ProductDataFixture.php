@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
+use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
@@ -97,6 +98,11 @@ class ProductDataFixture {
 	 */
 	private $productsByCatnum;
 
+	/**
+	 * @var \Faker\Generator
+	 */
+	private $faker;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
@@ -108,7 +114,8 @@ class ProductDataFixture {
 		ProductPriceRecalculator $productPriceRecalculator,
 		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
 		PersistentReferenceService $persistentReferenceService,
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		Faker $faker
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
@@ -123,6 +130,7 @@ class ProductDataFixture {
 		$this->categoryRepository = $categoryRepository;
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
+		$this->faker = $faker;
 	}
 
 	public function load() {
@@ -290,7 +298,10 @@ class ProductDataFixture {
 	 */
 	private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
 		$performanceCategoryIds = $this->getPerformanceCategoryIds();
-		$randomPerformanceCategoryIds = (array)array_rand($performanceCategoryIds, rand(1, 4));
+		$randomPerformanceCategoryIds = $this->faker->randomElements(
+			$performanceCategoryIds,
+			$this->faker->numberBetween(1, 4)
+		);
 		$randomPerformanceCategories = $this->categoryRepository->getCategoriesByIds($randomPerformanceCategoryIds);
 
 		foreach ($randomPerformanceCategories as $performanceCategory) {
