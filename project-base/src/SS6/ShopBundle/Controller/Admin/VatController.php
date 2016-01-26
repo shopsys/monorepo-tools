@@ -10,6 +10,7 @@ use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -72,9 +73,14 @@ class VatController extends AdminBaseController {
 					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?',
 					['%name%' => $vat->getName()]
 				);
-				$vatNamesById = $this->getVatNamesByIdExceptId($this->vatFacade, $id);
+				$remainingVatsList = new ObjectChoiceList($this->vatFacade->getAllExceptId($id), 'name', [], null, 'id');
 
-				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse($message, 'admin_vat_delete', $id, $vatNamesById);
+				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+					$message,
+					'admin_vat_delete',
+					$id,
+					$remainingVatsList
+				);
 			} else {
 				$message = t(
 					'Opravdu si přejete trvale odstranit sazbu "%name%"? Nikde není použita.',
@@ -87,20 +93,6 @@ class VatController extends AdminBaseController {
 			return new Response(t('Zvolené DPH neexistuje'));
 		}
 
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatFacade $vatFacade
-	 * @param int $id
-	 * @return array
-	 */
-	private function getVatNamesByIdExceptId($vatFacade, $id) {
-		$vatNamesById = [];
-		foreach ($vatFacade->getAllExceptId($id) as $newVat) {
-			$vatNamesById[$newVat->getId()] = $newVat->getName();
-		}
-
-		return $vatNamesById;
 	}
 
 	/**

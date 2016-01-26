@@ -118,17 +118,10 @@ class UnitFacade {
 
 	/**
 	 * @param int $unitId
-	 * @return string[unitId]
+	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit[]
 	 */
-	public function getUnitNamesByIdExceptId($unitId) {
-		$namesById = [];
-
-		$unitsExceptId = $this->unitRepository->getAllExceptId($unitId);
-		foreach ($unitsExceptId as $unit) {
-			$namesById[$unit->getId()] = $unit->getName();
-		}
-
-		return $namesById;
+	public function getAllExceptId($unitId) {
+		return $this->unitRepository->getAllExceptId($unitId);
 	}
 
 	/**
