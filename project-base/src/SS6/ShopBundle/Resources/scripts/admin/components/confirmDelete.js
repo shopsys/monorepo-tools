@@ -13,7 +13,7 @@
 		var $messageContainer = $(messageContainerSelector);
 		var $confirmDeleteForm = $messageContainer.find('.js-confirm-delete-form');
 		var $confirmDeleteFormSelect = $confirmDeleteForm.find('.js-confirm-delete-select');
-		var $confirmDeleteFormButton = $confirmDeleteForm.find('.btn-primary');
+		var $confirmDeleteFormButton = $confirmDeleteForm.find('.btn');
 		var $directDeleteLink = $messageContainer.find('.js-confirm-delete-direct-link');
 
 		this.init = function () {
@@ -50,11 +50,11 @@
 		var refreshSubmitButton = function () {
 			if (isSelectedNewValue()) {
 				$confirmDeleteFormButton
-					.removeClass('btn-disabled cursor-help')
+					.removeClass('btn--disabled c-help')
 					.tooltip('destroy');
 			} else {
 				$confirmDeleteFormButton
-					.addClass('btn-disabled cursor-help')
+					.addClass('btn--disabled c-help')
 					.tooltip({
 						title: SS6.translator.trans('Nejprve vybrete novou hodnotu'),
 						placement: 'right'
