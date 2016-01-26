@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Model\Heureka;
 
 use Heureka\ShopCertification;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Model\Heureka\HeurekaSetting;
+use SS6\ShopBundle\Model\Heureka\HeurekaShopCertificationService;
 use SS6\ShopBundle\Model\Order\Order;
 
 class HeurekaShopCertificationFactory {
@@ -14,10 +16,28 @@ class HeurekaShopCertificationFactory {
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaSetting
 	 */
-	public function __construct(Domain $domain) {
+	private $heurekaSetting;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaShopCertificationService
+	 */
+	private $heurekaShopCertificationService;
+
+	/**
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Model\Heureka\HeurekaSetting
+	 * @param \SS6\ShopBundle\Model\Heureka\HeurekaShopCertificationService
+	 */
+	public function __construct(
+		Domain $domain,
+		HeurekaSetting $heurekaSetting,
+		HeurekaShopCertificationService $heurekaShopCertificationService
+	) {
 		$this->domain = $domain;
+		$this->heurekaSetting = $heurekaSetting;
+		$this->heurekaShopCertificationService = $heurekaShopCertificationService;
 	}
 
 	/**
@@ -26,8 +46,9 @@ class HeurekaShopCertificationFactory {
 	 */
 	public function create(Order $order) {
 		$domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
-		$languageId = $this->getLanguageIdByLocale($domainConfig->getLocale());
-		$heurekaApiKey = '';
+
+		$languageId = $this->heurekaShopCertificationService->getLanguageIdByLocale($domainConfig->getLocale());
+		$heurekaApiKey = $this->heurekaSetting->getApiKeyByDomainId($domainConfig->getId());
 		$options = ['service' => $languageId];
 
 		$heurekaShopCertification = new ShopCertification($heurekaApiKey, $options);
@@ -38,24 +59,6 @@ class HeurekaShopCertificationFactory {
 		}
 
 		return $heurekaShopCertification;
-	}
-
-	/**
-	 * @param string $locale
-	 * @return int
-	 */
-	private function getLanguageIdByLocale($locale) {
-		$supportedLanguagesByLocale = [
-			'cs' => ShopCertification::HEUREKA_CZ,
-			'sk' => ShopCertification::HEUREKA_SK,
-		];
-
-		if (array_key_exists($locale, $supportedLanguagesByLocale)) {
-			return $supportedLanguagesByLocale[$locale];
-		}
-
-		$message = 'Locale "' . $locale . '" is not supported.';
-		throw new \SS6\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException($message);
 	}
 
 }

@@ -1,0 +1,28 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ '- Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
+{% block h1 %}{{ 'Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
+
+{% block main_content %}
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
+	{% if form is not null %}
+		{{ form_start(form) }}
+			<div class="wrap-group">
+				{{ form_row(form.heurekaApiKey, {label: 'Kód služby Ověřeno zákazníky'|trans, icon: {
+					title: 'Zadejte 32-místný kód, který bude odeslán na server %serverName%'|trans ({'%serverName%': serverName}) } }) }}
+			</div>
+
+
+			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+				{% block fixed_bar_content %}
+					{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+				{% endblock %}
+			{% endembed %}
+		{{ form_end(form) }}
+	{% else %}
+		<div class="in-message in-message--info">
+			{{ 'Služba Heureka - Ověřeno zákazníky nepodporuje jazyk této domény.'|trans }}
+		</div>
+	{% endif %}
+{% endblock %}

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use Exception;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -13,7 +14,7 @@ use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory;
+use SS6\ShopBundle\Model\Heureka\HeurekaFacade;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Item\OrderProductFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
@@ -28,7 +29,6 @@ use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use Symfony\Bridge\Monolog\Logger;
 
 class OrderFacade {
 
@@ -133,17 +133,16 @@ class OrderFacade {
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory
+	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaFacade
 	 */
-	private $heurekaShopCertificationFactory;
+	private $heurekaFacade;
 
 	/**
-	 * @var \Symfony\Bridge\Monolog\Logger
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
-	private $logger;
+	private $domain;
 
 	public function __construct(
-		Logger $logger,
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
 		OrderRepository $orderRepository,
@@ -163,9 +162,9 @@ class OrderFacade {
 		OrderPreviewFactory $orderPreviewFactory,
 		OrderProductFacade $orderProductFacade,
 		DomainRouterFactory $domainRouterFactory,
-		HeurekaShopCertificationFactory $heurekaShopCertificationFactory
+		HeurekaFacade $heurekaFacade,
+		Domain $domain
 	) {
-		$this->logger = $logger;
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
 		$this->orderRepository = $orderRepository;
@@ -185,7 +184,8 @@ class OrderFacade {
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->orderProductFacade = $orderProductFacade;
 		$this->domainRouterFactory = $domainRouterFactory;
-		$this->heurekaShopCertificationFactory = $heurekaShopCertificationFactory;
+		$this->heurekaFacade = $heurekaFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -228,6 +228,9 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
+		$domainConfig = $this->domain->getDomainConfigById($orderData->domainId);
+		$locale = $domainConfig->getLocale();
+
 		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
 		$user = $this->currentCustomer->findCurrentUser();
@@ -240,13 +243,11 @@ class OrderFacade {
 		if ($user instanceof User) {
 			$this->customerFacade->amendCustomerDataFromOrder($user, $order);
 		}
-		try {
-			$heurekaShopCertification = $this->heurekaShopCertificationFactory->create($order);
-			$heurekaShopCertification->logOrder();
-		} catch (\SS6\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException $ex) {
-			$this->logError($ex, $order);
-		} catch (\Heureka\ShopCertification\Exception $ex) {
-			$this->logError($ex, $order);
+		if (
+			$this->heurekaFacade->isHeurekaShopCertificationActivated($orderData->domainId) &&
+			$this->heurekaFacade->isDomainLocaleSupported($locale)
+		) {
+			$this->heurekaFacade->sendOrderInfo($order);
 		}
 
 		return $order;
@@ -386,15 +387,6 @@ class OrderFacade {
 			} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
 			}
 		}
-	}
-
-	/**
-	 * @param \Exception $ex
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 */
-	private function logError(Exception $ex, Order $order) {
-		$message = 'Sending order (ID = "' . $order->getId() . '") to Heureka failed - ' . get_class($ex) . ': ' . $ex->getMessage();
-		$this->logger->error($message);
 	}
 
 }

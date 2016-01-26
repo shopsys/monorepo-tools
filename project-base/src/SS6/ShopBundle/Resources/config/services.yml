@@ -479,8 +479,8 @@ services:
     class: SS6\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
 
-  ss6.shop.order.order_facade:
-    class: SS6\ShopBundle\Model\Order\OrderFacade
+  ss6.shop.heureka.heureka_facade:
+    class: SS6\ShopBundle\Model\Heureka\HeurekaFacade
     arguments:
       - @logger
 
