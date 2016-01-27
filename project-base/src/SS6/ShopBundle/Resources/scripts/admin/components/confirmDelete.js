@@ -56,7 +56,7 @@
 				$confirmDeleteFormButton
 					.addClass('btn--disabled c-help')
 					.tooltip({
-						title: SS6.translator.trans('Nejprve vybrete novou hodnotu'),
+						title: SS6.translator.trans('Nejprve vyberte novou hodnotu'),
 						placement: 'right'
 					});
 			}
