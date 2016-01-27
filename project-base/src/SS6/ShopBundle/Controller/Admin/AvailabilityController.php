@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Form\Admin\Product\Availability\AvailabilitySettingFormType;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityInlineEdit;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -113,16 +114,13 @@ class AvailabilityController extends AdminBaseController {
 						['%name%' => $availability->getName()]
 					);
 				}
-				$availabilityNamesById = [];
-				foreach ($this->availabilityFacade->getAllExceptId($id) as $newAvailabilty) {
-					$availabilityNamesById[$newAvailabilty->getId()] = $newAvailabilty->getName();
-				}
+				$remainingAvailabilitiesList = new ObjectChoiceList($this->availabilityFacade->getAllExceptId($id), 'name', [], null, 'id');
 
 				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
 					$message,
 					'admin_availability_delete',
 					$id,
-					$availabilityNamesById
+					$remainingAvailabilitiesList
 				);
 			} else {
 				$message = t(

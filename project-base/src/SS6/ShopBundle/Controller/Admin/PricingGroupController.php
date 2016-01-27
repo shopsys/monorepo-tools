@@ -10,6 +10,7 @@ use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
 use SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -106,11 +107,9 @@ class PricingGroupController extends AdminBaseController {
 	public function deleteConfirmAction($id) {
 		try {
 			$pricingGroup = $this->pricingGroupFacade->getById($id);
-			$pricingGroupsNamesById = [];
-			$pricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
-			foreach ($pricingGroups as $newPricingGroup) {
-				$pricingGroupsNamesById[$newPricingGroup->getId()] = $newPricingGroup->getName();
-			}
+			$remainingPricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
+			$remainingPricingGroupsList = new ObjectChoiceList($remainingPricingGroups, 'name', [], null, 'id');
+
 			if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
 				$message = t(
 					'Pro odstranění cenové skupiny "%name%" musíte zvolit, která se má všude, '
@@ -131,7 +130,7 @@ class PricingGroupController extends AdminBaseController {
 					$message,
 					'admin_pricinggroup_delete',
 					$id,
-					$pricingGroupsNamesById
+					$remainingPricingGroupsList
 				);
 			} else {
 				$message = t(

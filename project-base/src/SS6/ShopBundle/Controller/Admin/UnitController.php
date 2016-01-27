@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
 use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 use SS6\ShopBundle\Model\Product\Unit\UnitInlineEdit;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -76,11 +77,20 @@ class UnitController extends AdminBaseController {
 						['%name%' => $unit->getName()]
 					);
 				}
-					$unitNamesById = $this->unitFacade->getUnitNamesByIdExceptId($id);
+				$remainingUnitsList = new ObjectChoiceList(
+					$this->unitFacade->getAllExceptId($id),
+					'name',
+					[],
+					null,
+					'id'
+				);
 
-					return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
-						$message, 'admin_unit_delete', $id, $unitNamesById
-					);
+				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
+					$message,
+					'admin_unit_delete',
+					$id,
+					$remainingUnitsList
+				);
 			} else {
 				$message = t(
 					'Opravdu si přejete trvale odstranit jednotku "%name%"? Nikde není použita.',

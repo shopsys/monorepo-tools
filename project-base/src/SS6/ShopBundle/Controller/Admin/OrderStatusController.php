@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -107,16 +108,13 @@ class OrderStatusController extends AdminBaseController {
 					. 'Při této změně stavu nebude odeslán email zákazníkům.',
 					['%name%' => $orderStatus->getName()]
 				);
-				$ordersStatusNamesById = [];
-				foreach ($this->orderStatusFacade->getAllExceptId($id) as $newOrderStatus) {
-					$ordersStatusNamesById[$newOrderStatus->getId()] = $newOrderStatus->getName();
-				}
+				$remainingOrderStatusesList = new ObjectChoiceList($this->orderStatusFacade->getAllExceptId($id), 'name', [], null, 'id');
 
 				return $this->confirmDeleteResponseFactory->createSetNewAndDeleteResponse(
 					$message,
 					'admin_orderstatus_delete',
 					$id,
-					$ordersStatusNamesById
+					$remainingOrderStatusesList
 				);
 			} else {
 				$message = t(

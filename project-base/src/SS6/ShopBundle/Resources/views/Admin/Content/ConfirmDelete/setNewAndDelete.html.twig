@@ -1,4 +1,4 @@
-{% if listOfNewEntities|length > 0 %}
+{% if remainingEntitiesChoiceList.choices|length > 0 %}
 	{{ message|nl2br }}
 
 	<form action="{{ url(route, {id: entityId}) }}" method="get" class="mt-1 js-confirm-delete-form">
@@ -9,13 +9,18 @@
 		/>
 		<select name="newId" class="js-confirm-delete-select">
 			<option value="">-- {{ 'Zvolte novou hodnotu'|trans }} --</option>
-			{% for newEntityId, name in listOfNewEntities %}
-				<option value="{{ newEntityId }}">{{ name }}</option>
+			{% for preferredView in remainingEntitiesChoiceList.preferredViews %}
+				<option value="{{ preferredView.value }}">{{ preferredView.label }}</option>
+			{% endfor %}
+			{% for remainingView in remainingEntitiesChoiceList.remainingViews %}
+				<option value="{{ remainingView.value }}">{{ remainingView.label }}</option>
 			{% endfor %}
 		</select>
 
 		<div class="window__actions">
-			<input type="submit" class="btn" value="{{ 'Smazat a nastavit'|trans }}" />
+			<button type="submit" class="btn">
+				{{ 'Smazat a nastavit'|trans }}
+			</button>
 		</div>
 	</form>
 {% else %}

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\ConfirmDelete;
 
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 
 class ConfirmDeleteResponseFactory {
 
@@ -46,16 +47,16 @@ class ConfirmDeleteResponseFactory {
 	 * @param string $message
 	 * @param string $route
 	 * @param mixed $entityId
-	 * @param string[entityId] $listOfNewEntities
+	 * @param \Symfony\Component\Form\ChoiceList\ChoiceListInterface $remainingEntitiesChoiceList
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function createSetNewAndDeleteResponse($message, $route, $entityId, array $listOfNewEntities) {
+	public function createSetNewAndDeleteResponse($message, $route, $entityId, ChoiceListInterface $remainingEntitiesChoiceList) {
 		return $this->templating->renderResponse('@SS6Shop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
 			'message' => $message,
 			'route' => $route,
 			'entityId' => $entityId,
 			'routeCsrfToken' => $this->routeCsrfProtector->getCsrfTokenByRoute($route),
-			'listOfNewEntities' => $listOfNewEntities,
+			'remainingEntitiesChoiceList' => $remainingEntitiesChoiceList,
 			'CSRF_TOKEN_REQUEST_PARAMETER' => RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER,
 		]);
 	}
