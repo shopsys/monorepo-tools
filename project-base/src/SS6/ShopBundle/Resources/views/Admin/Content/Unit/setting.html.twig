@@ -1,5 +1,7 @@
 {{ form_start(form) }}
-	{{ form_row(form.defaultUnit, { label: 'Výchozí jednotka'|trans, icon: { title : 'Výchozí jednotka bude použita při vytvoření nového produktu' } }) }}
+	<div class="mb25">
+		{{ form_row(form.defaultUnit, { label: 'Výchozí jednotka'|trans, icon: { title : 'Výchozí jednotka bude použita při vytvoření nového produktu' } }) }}
+	</div>
 
 	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 		{% block fixed_bar_content %}

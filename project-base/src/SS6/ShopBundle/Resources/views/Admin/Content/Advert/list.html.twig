@@ -3,10 +3,13 @@
 {% block title %}- {{ 'Reklamní systém'|trans }}{% endblock %}
 {% block h1 %}{{ 'Reklamní systém'|trans }}{% endblock %}
 
+{% block btn %}
+	<a href="{{ url('admin_advert_new') }}" class="btn btn--plus wrap-bar__btn">
+		<i class="btn__icon btn__icon--plus">+</i>{{ 'Vytvořit novou reklamu'|trans }}
+	</a>
+{% endblock %}
+
 {% block main_content %}
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-
-	<a href="{{ url('admin_advert_new') }}" class="btn">{{ 'Vytvořit novou reklamu'|trans }}</a>
-
 	{{ gridView.render() }}
 {% endblock %}

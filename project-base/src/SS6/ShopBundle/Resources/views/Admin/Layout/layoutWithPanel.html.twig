@@ -20,7 +20,13 @@
 
 			{{ render(controller('SS6ShopBundle:Admin/FlashMessage:index')) }}
 
-			<h1>{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}</h1>
+			<div class="wrap-bar">
+				<h1 class="wrap-bar__heading">
+					{% block h1 %}{{ 'Administrace'|trans }}{% endblock %}
+				</h1>
+				{% block btn %}{% endblock %}
+			</div>
+
 			{% block main_content %}{% endblock %}
 		</div>
 	</div>

@@ -353,7 +353,10 @@
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	<a href="#" class="btn js-inline-edit-add">
-		{{ addEntity|default('Vytvořit záznam'|trans) }}
-	</a>
+	<div class="wrap-bar">
+		<a href="#" class="btn btn--plus wrap-bar__btn js-inline-edit-add">
+			<i class="btn__icon btn__icon--plus">+</i>
+			{{ addEntity|default('Vytvořit záznam'|trans) }}
+		</a>
+	</div>
 {% endblock %}
