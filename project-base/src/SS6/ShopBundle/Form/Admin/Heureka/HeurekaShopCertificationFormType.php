@@ -33,6 +33,9 @@ class HeurekaShopCertificationFormType extends AbstractType {
 					]),
 				],
 			])
+			->add('heurekaWidgetCode', FormType::TEXTAREA, [
+				'required' => false,
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

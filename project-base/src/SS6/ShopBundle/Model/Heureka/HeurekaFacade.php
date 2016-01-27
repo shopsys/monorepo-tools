@@ -71,6 +71,14 @@ class HeurekaFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return bool
+	 */
+	public function isHeurekaWidgetActivated($domainId) {
+		return $this->heurekaSetting->isHeurekaWidgetActivated($domainId);
+	}
+
+	/**
 	 * @param string $locale
 	 * @return bool
 	 */

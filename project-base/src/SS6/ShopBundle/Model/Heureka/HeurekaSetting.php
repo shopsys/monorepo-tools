@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Setting\Setting;
 class HeurekaSetting {
 
 	const HEUREKA_API_KEY = 'heurekaApiKey';
+	const HEUREKA_WIDGET_CODE = 'heurekaWidgetCode';
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Setting\Setting
@@ -29,6 +30,14 @@ class HeurekaSetting {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return string
+	 */
+	public function getHeurekaShopCertificationWidgetByDomainId($domainId) {
+		return $this->setting->getForDomain(self::HEUREKA_WIDGET_CODE, $domainId);
+	}
+
+	/**
 	 * @param string $apiKey
 	 * @param int $domainId
 	 */
@@ -37,10 +46,26 @@ class HeurekaSetting {
 	}
 
 	/**
+	 * @param string $heurekaWidgetCode
+	 * @param int $domainId
+	 */
+	public function setHeurekaShopCertificationWidgetForDomain($heurekaWidgetCode, $domainId) {
+		$this->setting->setForDomain(self::HEUREKA_WIDGET_CODE, $heurekaWidgetCode, $domainId);
+	}
+
+	/**
 	 * @param int $domainId
 	 * @return bool
 	 */
 	public function isHeurekaShopCertificationActivated($domainId) {
 		return !empty($this->setting->getForDomain(self::HEUREKA_API_KEY, $domainId));
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return bool
+	 */
+	public function isHeurekaWidgetActivated($domainId) {
+		return !empty($this->setting->getForDomain(self::HEUREKA_WIDGET_CODE, $domainId));
 	}
 }

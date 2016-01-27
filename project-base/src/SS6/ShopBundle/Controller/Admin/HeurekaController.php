@@ -9,6 +9,7 @@ use SS6\ShopBundle\Form\Admin\Heureka\HeurekaShopCertificationFormType;
 use SS6\ShopBundle\Model\Heureka\HeurekaFacade;
 use SS6\ShopBundle\Model\Heureka\HeurekaSetting;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HeurekaController extends AdminBaseController {
 
@@ -48,6 +49,9 @@ class HeurekaController extends AdminBaseController {
 			$heurekaShopCertificationData = [];
 
 			$heurekaShopCertificationData['heurekaApiKey'] = $this->heurekaSetting->getApiKeyByDomainId($selectedDomainId);
+			$heurekaShopCertificationData['heurekaWidgetCode'] = $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId(
+				$selectedDomainId
+			);
 			$form->setData($heurekaShopCertificationData);
 			$form->handleRequest($request);
 
@@ -55,8 +59,12 @@ class HeurekaController extends AdminBaseController {
 				$heurekaShopCertificationData = $form->getData();
 
 				$this->heurekaSetting->setApiKeyForDomain($heurekaShopCertificationData['heurekaApiKey'], $selectedDomainId);
+				$this->heurekaSetting->setHeurekaShopCertificationWidgetForDomain(
+					$heurekaShopCertificationData['heurekaWidgetCode'],
+					$selectedDomainId
+				);
 
-				$this->getFlashMessageSender()->addSuccessFlash(t('Kód služby byl úspěšně uložen.'));
+				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení bylo upraveno.'));
 			}
 			$formView = $form->createView();
 		}
@@ -65,6 +73,18 @@ class HeurekaController extends AdminBaseController {
 			'form' => $formView,
 			'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
 			'selectedDomainConfig' => $selectedDomainConfig,
+		]);
+	}
+
+	public function embedWidgetAction() {
+		$domainId = $this->selectedDomain->getId();
+
+		if (!$this->heurekaFacade->isHeurekaWidgetActivated($domainId)) {
+			return new Response('');
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Heureka/widget.html.twig', [
+			'widgetCode' => $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId($domainId),
 		]);
 	}
 }

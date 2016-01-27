@@ -38,6 +38,8 @@
 		{{ js_validator_config() }}
 		{{ init_js_validation() }}
 
+		{{ render(controller('SS6ShopBundle:Admin/Heureka:embedWidget')) }}
+
 		{% block javascripts %}{% endblock %}
 
 		<title>{% block title %}ShopSys 6{% endblock %}{{ getSeoTitleAddOn() }}</title>
