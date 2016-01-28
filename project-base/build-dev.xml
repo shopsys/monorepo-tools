@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,checks-diff" />
+	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,checks-diff" />
 	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,checks-diff" />
 	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" />
 	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" />

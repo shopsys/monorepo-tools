@@ -58,7 +58,7 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
+	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
 	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-rebuild,grunt,warmup"/>
 	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-demo,create-domains-data"/>
