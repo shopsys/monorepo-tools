@@ -199,27 +199,18 @@
 	</target>
 
 	<target name="dirs-clean">
-		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${path.web}/content/feeds/">
-				<exclude name="/" />
-			</fileset>
-			<fileset dir="${path.web}/content/sitemaps/">
-				<exclude name="/" />
-			</fileset>
+ 		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${path.app}/lock/">
+ 				<exclude name="/" />
+ 			</fileset>
 			<fileset dir="${path.root}/docs/">
-				<exclude name="/" />
-				<exclude name="admin" />
-			</fileset>
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/content/images" />
-			<fileset dir="${path.root}/web/content/admin/images/domain" />
-		</delete>
-		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/content/uploadedFiles">
-			</fileset>
-		</delete>
-	</target>
+ 				<exclude name="/" />
+ 			</fileset>
+			<fileset dir="${path.web}/content/">
+ 				<exclude name="/" />
+ 			</fileset>
+ 		</delete>
+ 	</target>
 
 	<target name="dirs-structure">
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
