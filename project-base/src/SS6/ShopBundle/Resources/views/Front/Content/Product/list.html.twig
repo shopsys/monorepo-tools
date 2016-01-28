@@ -24,7 +24,7 @@
 		<h2>{{ 'Seznam podkategorií'|trans }}</h2>
 		<ul class="list-items-line">
 			{% for child in visibleChildren %}
-				<li class="list-items-line__item">
+				<li class="list-items-line__item categories-list-item">
 					<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-items-line__block">
 						<div class="list-items-line__image">
 							<span>
@@ -46,7 +46,7 @@
 
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	<div class="position-relative js-product-list-with-filter">
+	<div class="position-relative js-product-list-with-filter clear">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}
 			<div class="box-filter js-product-filter">
 				{{ productFilterForm.filterForm(
