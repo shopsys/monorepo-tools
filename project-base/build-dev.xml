@@ -392,7 +392,7 @@
 				checkreturn="true"
 				>
 			<arg value="-jar" />
-			<arg path="vendor/se/selenium-server-standalone/composer/bin/selenium-server-standalone.jar" />
+			<arg path="vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar" />
 		</exec>
 	</target>
 

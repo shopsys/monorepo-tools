@@ -61,7 +61,6 @@ class PoDumper implements DumperInterface {
 	}
 
 	/**
-
 	 * @param \JMS\TranslationBundle\Model\Message $message
 	 * @return string
 	 */

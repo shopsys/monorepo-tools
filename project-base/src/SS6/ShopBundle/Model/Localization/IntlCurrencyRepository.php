@@ -89,7 +89,6 @@ class IntlCurrencyRepository extends BaseCurrencyRepository {
 		'LKR',
 		'LRD',
 		'LSL',
-		'LTL',
 		'LYD',
 		'MAD',
 		'MDL',
