@@ -221,11 +221,21 @@
 		</delete>
 	</target>
 
-	<target name="dirs-structure" depends="img-dirs,uploaded-file-dirs">
+	<target name="dirs-structure">
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/feeds" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/sitemaps" mode="${mkdir.mode}"/>
+
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:image:directories" />
+		</exec>
+
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:uploaded-file:directories" />
+		</exec>
 	</target>
 
 	<target name="domains-urls-check">
@@ -279,13 +289,6 @@
 		</exec>
 	</target>
 
-	<target name="img-dirs">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:image:directories" />
-		</exec>
-	</target>
-
 	<target name="maintenance-off">
 		<delete file="${path.root}/MAINTENANCE" />
 	</target>
@@ -302,13 +305,6 @@
 			checkreturn="true"
 		>
 			<arg value="install"/>
-		</exec>
-	</target>
-
-	<target name="uploaded-file-dirs">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:uploaded-file:directories" />
 		</exec>
 	</target>
 
