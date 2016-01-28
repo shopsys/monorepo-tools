@@ -58,9 +58,9 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
-	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
-	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
+	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
+	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-rebuild,grunt,warmup"/>
+	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-demo,create-domains-data"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-base-settings,create-domains-data"/>
 
@@ -212,7 +212,7 @@
  		</delete>
  	</target>
 
-	<target name="dirs-structure">
+	<target name="dirs-create">
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/feeds" mode="${mkdir.mode}"/>
