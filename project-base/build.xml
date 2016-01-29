@@ -58,9 +58,9 @@
 		</else>
 	</if>
 
-	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
-	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-rebuild,grunt,warmup"/>
-	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-structure,dump-translations-custom,db-demo,grunt,warmup"/>
+	<target name="build" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,grunt,warmup"/>
+	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-rebuild,grunt,warmup"/>
+	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,warmup"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-demo,create-domains-data"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-check-schema,db-fixtures-base-settings,create-domains-data"/>
 
@@ -198,23 +198,35 @@
 		</exec>
 	</target>
 
-	<target name="dirs-structure" depends="img-dirs,uploaded-file-dirs">
-		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
+	<target name="dirs-clean">
+ 		<delete failonerror="false" includeemptydirs="true">
+			<fileset dir="${path.app}/lock/">
+ 				<exclude name="/" />
+ 			</fileset>
+			<fileset dir="${path.root}/docs/">
+ 				<exclude name="/" />
+ 			</fileset>
+			<fileset dir="${path.web}/content/">
+ 				<exclude name="/" />
+ 			</fileset>
+ 		</delete>
+ 	</target>
+
+	<target name="dirs-create">
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
+		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/feeds" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/sitemaps" mode="${mkdir.mode}"/>
-		<delete failonerror="false" includeemptydirs="true">
-			<fileset dir="${path.web}/content/feeds/">
-				<exclude name="/" />
-			</fileset>
-			<fileset dir="${path.web}/content/sitemaps/">
-				<exclude name="/" />
-			</fileset>
-			<fileset dir="${path.root}/docs/">
-				<exclude name="/" />
-				<exclude name="admin" />
-			</fileset>
-		</delete>
+
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:image:directories" />
+		</exec>
+
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:uploaded-file:directories" />
+		</exec>
 	</target>
 
 	<target name="domains-urls-check">
@@ -268,17 +280,6 @@
 		</exec>
 	</target>
 
-	<target name="img-dirs">
-		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/content/images" />
-			<fileset dir="${path.root}/web/content/admin/images/domain" />
-		</delete>
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:image:directories" />
-		</exec>
-	</target>
-
 	<target name="maintenance-off">
 		<delete file="${path.root}/MAINTENANCE" />
 	</target>
@@ -295,17 +296,6 @@
 			checkreturn="true"
 		>
 			<arg value="install"/>
-		</exec>
-	</target>
-
-	<target name="uploaded-file-dirs">
-		<delete includeemptydirs="true">
-			<fileset dir="${path.root}/web/content/uploadedFiles">
-			</fileset>
-		</delete>
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:uploaded-file:directories" />
 		</exec>
 	</target>
 
