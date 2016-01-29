@@ -22,7 +22,19 @@
 
 	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" />
 
-	<target name="composer-dev">
+	<target name="composer-check">
+		<exec
+			executable="${path.composer.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="validate" />
+			<arg value="--no-check-all" />
+		</exec>
+	</target>
+
+	<target name="composer-dev" depends="composer-check">
 		<exec
 			executable="${path.composer.executable}"
 			logoutput="true"
