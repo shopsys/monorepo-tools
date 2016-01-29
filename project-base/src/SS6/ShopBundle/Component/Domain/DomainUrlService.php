@@ -2,29 +2,79 @@
 
 namespace SS6\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\ResultSetMapping;
+use SS6\ShopBundle\Component\Entity\EntityStringColumnsFinder;
+use SS6\ShopBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \SS6\ShopBundle\Component\Entity\EntityStringColumnsFinder
 	 */
-	private $setting;
+	private $entityStringColumnsFinder;
 
-	public function __construct(Setting $setting) {
-		$this->setting = $setting;
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Sql\SqlQuoter
+	 */
+	private $sqlQuoter;
+
+	public function __construct(
+		EntityStringColumnsFinder $entityStringColumnsFinder,
+		EntityManager $em,
+		SqlQuoter $sqlQuoter
+	) {
+		$this->entityStringColumnsFinder = $entityStringColumnsFinder;
+		$this->em = $em;
+		$this->sqlQuoter = $sqlQuoter;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return bool
+	 * @param string $domainConfigUrl
+	 * @param string $domainSettingUrl
 	 */
-	public function isDomainConfigUrlMatchingDomainSettingUrl(DomainConfig $domainConfig) {
-		$domainConfigUrl = $domainConfig->getUrl();
-		$domainSettingUrl = $this->setting->get(Setting::BASE_URL, $domainConfig->getId());
+	public function replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl) {
+		$stringColumnNames = $this->getAllStringColumnNamesIndexedByTableName();
+		foreach ($stringColumnNames as $tableName => $columnNames) {
+			$urlReplacementSql = $this->getUrlReplacementSql($tableName, $columnNames, $domainSettingUrl, $domainConfigUrl);
 
-		return $domainConfigUrl === $domainSettingUrl;
+			$this->em->createNativeQuery($urlReplacementSql, new ResultSetMapping())->execute();
+		}
+	}
+
+	/**
+	 * @return string[tableName][]
+	 */
+	private function getAllStringColumnNamesIndexedByTableName() {
+		$classesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
+
+		return $this->entityStringColumnsFinder->getAllStringColumnNamesIndexedByTableName($classesMetadata);
+	}
+
+	/**
+	 * @param string $tableName
+	 * @param string[] $columnNames
+	 * @param string $domainSettingUrl
+	 * @param string $domainConfigUrl
+	 * @return string
+	 */
+	private function getUrlReplacementSql($tableName, array $columnNames, $domainSettingUrl, $domainConfigUrl) {
+		$sqlParts = [];
+		$quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);
+		$quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
+		$quotedDomainSettingUrl = $this->sqlQuoter->quote($domainSettingUrl);
+		$quotedDomainConfigUrl = $this->sqlQuoter->quote($domainConfigUrl);
+		foreach ($quotedColumnNames as $quotedName) {
+			$sqlParts[] =
+				$quotedName . ' = replace(' . $quotedName . ', ' . $quotedDomainSettingUrl . ', ' . $quotedDomainConfigUrl . ')';
+		}
+
+		return 'UPDATE ' . $quotedTableName . ' SET ' . implode(',', $sqlParts);
 	}
 
 }

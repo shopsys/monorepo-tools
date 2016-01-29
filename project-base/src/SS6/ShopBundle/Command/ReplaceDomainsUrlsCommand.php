@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Command;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainUrlService;
+use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,9 +26,20 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand {
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 		$domainUrlService = $this->getContainer()->get(DomainUrlService::class);
 		/* @var $domainUrlService \SS6\ShopBundle\Component\Domain\DomainUrlService */
+		$setting = $this->getContainer()->get(Setting::class);
+		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+
 		foreach ($domain->getAll() as $domainConfig) {
-			if (!$domainUrlService->isDomainConfigUrlMatchingDomainSettingUrl($domainConfig)) {
-				$output->writeln('Domain ' . $domainConfig->getId() . ' URL is not matching URL stored in database.');
+			$domainConfigUrl = $domainConfig->getUrl();
+			$domainSettingUrl = $setting->get(Setting::BASE_URL, $domainConfig->getId());
+
+			if ($domainConfigUrl !== $domainSettingUrl) {
+				$output->writeln(
+					'Domain ' . $domainConfig->getId() . ' URL is not matching URL stored in database.'
+				);
+				$output->writeln('Replacing domain URL in all string columns...');
+				$domainUrlService->replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl);
+				$output->writeln('<fg=green>URL successfully replaced.</fg=green>');
 			} else {
 				$output->writeln('Domain ' . $domainConfig->getId() . ' URL is matching URL stored in database.');
 			}
