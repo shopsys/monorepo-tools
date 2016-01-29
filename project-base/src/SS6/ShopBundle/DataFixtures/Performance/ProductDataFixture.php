@@ -3,11 +3,13 @@
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
+use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
@@ -97,6 +99,11 @@ class ProductDataFixture {
 	 */
 	private $productsByCatnum;
 
+	/**
+	 * @var \Faker\Generator
+	 */
+	private $faker;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
@@ -108,7 +115,8 @@ class ProductDataFixture {
 		ProductPriceRecalculator $productPriceRecalculator,
 		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
 		PersistentReferenceService $persistentReferenceService,
-		CategoryRepository $categoryRepository
+		CategoryRepository $categoryRepository,
+		Faker $faker
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
@@ -123,6 +131,7 @@ class ProductDataFixture {
 		$this->categoryRepository = $categoryRepository;
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
+		$this->faker = $faker;
 	}
 
 	public function load() {
@@ -140,7 +149,7 @@ class ProductDataFixture {
 				$this->demoDataIterationCounter++;
 			}
 			$this->makeProductEditDataUnique($productEditData);
-			$this->setRandomProductEditDataCategories($productEditData);
+			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -279,18 +288,35 @@ class ProductDataFixture {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
-	private function setRandomProductEditDataCategories(ProductEditData $productEditData) {
-		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 1);
-		$this->setRandomProductEditDataCategoriesByDomainId($productEditData, 2);
+	private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData) {
+		$this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 1);
+		$this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 2);
+		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 1);
+		$this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 2);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param int $domainId
 	 */
-	private function setRandomProductEditDataCategoriesByDomainId(ProductEditData $productEditData, $domainId) {
+	private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
+		foreach ($productEditData->productData->categoriesByDomainId[$domainId] as $key => $category) {
+			if ($this->isPerformanceCategory($category)) {
+				unset($productEditData->productData->categoriesByDomainId[$domainId][$key]);
+			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param int $domainId
+	 */
+	private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
 		$performanceCategoryIds = $this->getPerformanceCategoryIds();
-		$randomPerformanceCategoryIds = (array)array_rand($performanceCategoryIds, rand(1, 4));
+		$randomPerformanceCategoryIds = $this->faker->randomElements(
+			$performanceCategoryIds,
+			$this->faker->numberBetween(1, 4)
+		);
 		$randomPerformanceCategories = $this->categoryRepository->getCategoriesByIds($randomPerformanceCategoryIds);
 
 		foreach ($randomPerformanceCategories as $performanceCategory) {
@@ -311,6 +337,19 @@ class ProductDataFixture {
 		$firstPerformanceCategoryKey = array_search($firstPerformanceCategory->getId(), $allCategoryIds, true);
 
 		return array_slice($allCategoryIds, $firstPerformanceCategoryKey);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @return bool
+	 */
+	private function isPerformanceCategory(Category $category) {
+		$firstPerformanceCategory = $this->persistentReferenceService->getReference(
+			CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
+		);
+		/* @var $firstPerformanceCategory \SS6\ShopBundle\Model\Category\Category */
+
+		return $category->getId() >= $firstPerformanceCategory->getId();
 	}
 
 	/**
