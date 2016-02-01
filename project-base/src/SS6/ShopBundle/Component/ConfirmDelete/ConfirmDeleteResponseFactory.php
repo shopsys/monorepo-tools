@@ -47,7 +47,7 @@ class ConfirmDeleteResponseFactory {
 	 * @param string $message
 	 * @param string $route
 	 * @param mixed $entityId
-	 * @param \Symfony\Component\Form\ChoiceList\ChoiceListInterface $remainingEntitiesChoiceList
+	 * @param \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $remainingEntitiesChoiceList
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function createSetNewAndDeleteResponse($message, $route, $entityId, ChoiceListInterface $remainingEntitiesChoiceList) {
