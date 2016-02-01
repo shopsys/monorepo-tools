@@ -114,7 +114,7 @@ class DomainRouterFactory {
 			if ($urlComponents['scheme'] === 'http') {
 				$requestContext->setHttpPort($urlComponents['port']);
 			} elseif ($urlComponents['scheme'] === 'https') {
-				$requestContext->setHttpsPort($urlComponents['post']);
+				$requestContext->setHttpsPort($urlComponents['port']);
 			}
 		}
 
