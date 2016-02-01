@@ -2,8 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Constraints;
 
+use ArrayAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Traversable;
 
 class NotInArrayValidator extends ConstraintValidator {
 
@@ -16,25 +18,23 @@ class NotInArrayValidator extends ConstraintValidator {
 			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, NotInArray::class);
 		}
 
+		if (!is_array($constraint->array)
+			&& !($constraint->array instanceof Traversable && $constraint->array instanceof ArrayAccess)
+		) {
+			throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException(
+				$constraint->array,
+				'array or Traversable and ArrayAccess'
+			);
+		}
+
 		if (in_array($value, $constraint->array)) {
 			$this->context->addViolation(
 				$constraint->message, [
-					'{{ array }}' => $this->formatArray($value),
+					'{{ array }}' => implode(', ', $constraint->array),
 				]
 			);
 		}
 
 	}
 
-	/**
-	 * @param mixed $values
-	 * @return string
-	 */
-	private function formatArray($values) {
-		if (!is_array($values)) {
-			return $values;
-		}
-
-		return implode(', ', $values);
-	}
 }

@@ -9,7 +9,14 @@ use Symfony\Component\Validator\Constraint;
  */
 class NotInArray extends Constraint {
 
+	/**
+	 * @var string
+	 */
 	public $message = 'Value must not be neither of following: {{ array }}';
+
+	/**
+	 * @var array
+	 */
 	public $array = [];
 
 	public function getRequiredOptions() {
