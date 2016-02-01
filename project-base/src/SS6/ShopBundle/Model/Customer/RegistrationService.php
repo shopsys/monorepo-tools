@@ -35,9 +35,12 @@ class RegistrationService {
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $userByEmail
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */
-	public function create(UserData $userData,
-			BillingAddress $billingAddress, DeliveryAddress $deliveryAddress = null,
-			User $userByEmail = null) {
+	public function create(
+		UserData $userData,
+		BillingAddress $billingAddress,
+		DeliveryAddress $deliveryAddress = null,
+		User $userByEmail = null
+	) {
 		if ($userByEmail instanceof User) {
 			$isSameEmail = (mb_strtolower($userByEmail->getEmail()) === mb_strtolower($userData->email));
 			$isSameDomain = ($userByEmail->getDomainId() === $userData->domainId);
