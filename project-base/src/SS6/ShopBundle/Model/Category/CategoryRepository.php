@@ -266,6 +266,19 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
+			->andWhere('c.parent = :category')
+			->setParameter('category', $category);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string|null $searchText
 	 */

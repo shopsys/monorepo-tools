@@ -16,12 +16,37 @@
 {% endblock %}
 
 {% block main_content %}
+
 	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
 	<h1>{{ category.name|trans }}</h1>
 
+	{% if visibleChildren|length > 0 %}
+		<h2>{{ 'Seznam podkategorií'|trans }}</h2>
+		<ul class="list-items-line">
+			{% for child in visibleChildren %}
+				<li class="list-items-line__item categories-list-item">
+					<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-items-line__block">
+						<div class="list-items-line__image">
+							<span>
+								{% if imageExists(child) %}
+									{{ image(child) }}
+								{% else %}
+									<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ child.name }}">
+								{% endif %}
+							</span>
+						</div>
+						<h3 class="list-items-line__title">
+							{{ child.name }}
+						</h3>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	<div class="position-relative js-product-list-with-filter">
+	<div class="position-relative js-product-list-with-filter clear">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}
 			<div class="box-filter js-product-filter">
 				{{ productFilterForm.filterForm(

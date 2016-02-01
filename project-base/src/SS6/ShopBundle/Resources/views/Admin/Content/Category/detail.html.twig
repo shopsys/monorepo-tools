@@ -15,6 +15,9 @@
 		{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
 		{% block category_urls %}{% endblock %}
 
+		{% block image %}{% endblock %}
+		{{ form_row(form.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_category_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
