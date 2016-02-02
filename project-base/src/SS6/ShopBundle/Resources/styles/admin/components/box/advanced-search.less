@@ -1,0 +1,78 @@
+.box-advanced-search {
+	&__item {
+		margin: 5px 0;
+
+		font-size: 0;
+
+		&__num {
+			display: inline-block;
+			vertical-align: middle;
+			width: 3%;
+
+			font-size: @font-size;
+			font-weight: bold;
+			text-align: right;
+
+		}
+
+		&__first {
+			display: inline-block;
+			vertical-align: middle;
+
+			font-size: @font-size;
+			width: 30%;
+			margin-left: 1%;
+
+		}
+
+		&__second {
+			display: inline-block;
+			vertical-align: middle;
+			margin-left: 1%;
+			width: 30%;
+
+			font-size: @font-size;
+
+		}
+
+		&__third {
+			display: inline-block;
+			vertical-align: middle;
+			width: 30%;
+			margin-left: 1%;
+
+			font-size: @font-size;
+
+		}
+
+		&__icon {
+			display: inline-block;
+			vertical-align: middle;
+			width: 4%;
+
+			font-size: @font-size;
+			text-align: center;
+
+		}
+
+		select, input {
+			width: 100%;
+		}
+	}
+
+	&__line {
+		padding: 0 20px 5px;
+		margin: 0 -10px;
+
+		text-align: right;
+
+		&--dark {
+			padding-top: 5px;
+
+			border-top: 1px solid @color-border;
+			border-bottom: 1px solid @color-border;
+			background: @bg-dark;
+			text-align: left;
+		}
+	}
+}
