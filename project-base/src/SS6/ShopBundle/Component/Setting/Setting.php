@@ -15,6 +15,7 @@ class Setting {
 	const DOMAIN_DATA_CREATED = 'domainDataCreated';
 	const FEED_HASH = 'feedHash';
 	const DEFAULT_UNIT = 'defaultUnitId';
+	const BASE_URL = 'baseUrl';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

@@ -36,4 +36,13 @@ class SqlQuoter {
 		return $this->em->getConnection()->quoteIdentifier($identifier);
 	}
 
+	/**
+	 * @param mixed $input
+	 * @param string|null $type
+	 * @return string
+	 */
+	public function quote($input, $type = null) {
+		return $this->em->getConnection()->quote($input, $type);
+	}
+
 }
