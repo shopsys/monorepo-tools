@@ -25,7 +25,7 @@ class ProductParameterValueFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'productParameterValue';
+		return 'product_parameter_value_form';
 	}
 
 	/**

@@ -15,7 +15,7 @@ class ParameterFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'parameter';
+		return 'parameter_form';
 	}
 
 	/**

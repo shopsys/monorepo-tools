@@ -33,7 +33,7 @@ class OrderingSettingFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'productListOrderingSetting';
+		return 'product_list_ordering_setting_form';
 	}
 
 	/**

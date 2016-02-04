@@ -14,7 +14,7 @@ class MailSettingFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'mailSettingType_form';
+		return 'mail_setting_form';
 	}
 
 	/**

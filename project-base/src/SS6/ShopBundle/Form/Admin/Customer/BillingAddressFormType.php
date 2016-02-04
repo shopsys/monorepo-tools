@@ -19,7 +19,7 @@ class BillingAddressFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'billingAddress_form';
+		return 'billing_address_form';
 	}
 
 	/**

@@ -32,7 +32,7 @@ class PaymentFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'payment';
+		return 'payment_form';
 	}
 
 	/**

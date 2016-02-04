@@ -55,7 +55,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	 * @return string
 	 */
 	public function getName() {
-		return 'parameterFilter_form';
+		return 'parameter_filter_form';
 	}
 
 	/**
