@@ -23,16 +23,16 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase 
 		$uploadedFileFacadeMock = $this->getMock(UploadedFileFacade::class, ['deleteFileFromFilesystem'], [], '', false);
 		$uploadedFileFacadeMock->expects($this->once())->method('deleteFileFromFilesystem')->with($this->equalTo($uploadedFile));
 
-		$conatinerMock = $this->getMockBuilder(ContainerInterface::class)
+		$containerMock = $this->getMockBuilder(ContainerInterface::class)
 			->disableOriginalConstructor()
 			->setMethods(['get'])
 			->getMockForAbstractClass();
-		$conatinerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
+		$containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
 
 		$args = $this->getMock(LifecycleEventArgs::class, ['getEntity'], [], '', false);
 		$args->method('getEntity')->willReturn($uploadedFile);
 
-		$doctrineListener = new UploadedFileDeleteDoctrineListener($conatinerMock, $uploadedFileConfig);
+		$doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
 		$doctrineListener->preRemove($args);
 	}
 
@@ -52,11 +52,11 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase 
 			->with($this->equalTo($entity))
 			->willReturn($uploadedFile);
 
-		$conatinerMock = $this->getMockBuilder(ContainerInterface::class)
+		$containerMock = $this->getMockBuilder(ContainerInterface::class)
 			->disableOriginalConstructor()
 			->setMethods(['get'])
 			->getMockForAbstractClass();
-		$conatinerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
+		$containerMock->expects($this->once())->method('get')->willReturn($uploadedFileFacadeMock);
 
 		$emMock = $this->getMock(EntityManager::class, ['remove'], [], '', false);
 		$emMock->expects($this->once())->method('remove')->with($uploadedFile);
@@ -65,7 +65,7 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase 
 		$args->method('getEntity')->willReturn($entity);
 		$args->method('getEntityManager')->willReturn($emMock);
 
-		$doctrineListener = new UploadedFileDeleteDoctrineListener($conatinerMock, $uploadedFileConfig);
+		$doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
 		$doctrineListener->preRemove($args);
 	}
 
