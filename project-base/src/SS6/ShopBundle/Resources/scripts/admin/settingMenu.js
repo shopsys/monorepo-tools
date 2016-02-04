@@ -9,6 +9,9 @@
 				$links.toggle();
 				event.stopPropagation();
 			});
+			$links.click(function (event) {
+				event.stopPropagation();
+			});
 		};
 
 		$(document).on('click', function () {
