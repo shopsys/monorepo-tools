@@ -25,31 +25,38 @@
 
 {% block grid_value_cell_id_select %}
 	{%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
-		<i class="in-icon svg svg-info c-help js-tooltip"
+		<i class="in-icon in-icon--info svg svg-info c-help js-tooltip"
 			data-toggle="tooltip" data-placement="left"
 			title="" data-original-title="Nelze vybrat zboží, které je hlavní variantou"
 		></i>
 	{% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<i class="in-icon svg svg-info c-help js-tooltip"
+		<i class="in-icon in-icon--info svg svg-info c-help js-tooltip"
 			data-toggle="tooltip" data-placement="left" title=""
 			data-original-title="Nelze vybrat zboží, které je variantou"
 		></i>
 	{% elseif isMultiple %}
 		<a
-			class="js-products-picker-window-add-product"
+			class="js-products-picker-window-add-product btn btn--light btn--plus btn--small"
 			href="#"
 			data-product-picker-instance-id="{{ jsInstanceId }}"
 			data-product-picker-product-id="{{ row.p.id }}"
 			data-product-picker-product-name="{{ row.pt.name }}"
-		><i class="js-products-picker-icon svg svg-circle-plus in-icon in-icon--add"></i></a>
+		>
+			<i class="js-products-picker-icon btn__icon">+</i>
+			<span class="js-products-picker-label">
+				{{ 'Přidat'|trans }}
+			</span>
+		</a>
 	{% else %}
 		<a
 			href="#"
 			onclick="SS6.productPicker.onClickSelectProduct('{{ parentInstanceId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
-			class="btn"
+			class="btn btn--light btn--plus btn--small"
 		>
-			<i class="btn__icon svg svg-checked"></i>
-			{{ 'Vybrat'|trans }}
+			<i class="js-products-picker-icon btn__icon">+</i>
+			<span class="js-products-picker-label">
+				{{ 'Vybrat'|trans }}
+			</span>
 		</a>
 	{% endif %}
 {% endblock %}

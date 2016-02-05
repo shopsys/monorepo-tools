@@ -32,8 +32,10 @@ button types
 	&__icon {
 		margin-right: 7px;
 		float: left;
+		position: relative;
+		top: 3px;
 
-		&--plus {
+		.btn--plus & {
 			position: absolute;
 			top: 6px;
 			left: 6px;
@@ -45,17 +47,45 @@ button types
 
 			.size(18px);
 		}
+
+		.btn--small & {
+			margin-right: 5px;
+			top: 1px;
+
+			font-size: 10px;
+		}
+
+		.btn--small.btn--plus & {
+			top: 1px;
+			left: 1px;
+
+			font-size: 20px;
+		}
+	}
+
+	&--small {
+		height: @btn-height - 8;
+		line-height: @btn-height - 18;
+		padding-left: 8px;
+		padding-right: 8px;
+
+		font-size: 11px;
+	}
+
+	&--plus {
+		position: relative;
+		padding-left: 34px;
+
+		&.btn--small {
+			padding-left: 22px;
+			padding-right: 10px;
+		}
 	}
 
 	&--block {
 		width: 100%;
 
 		text-align: center;
-	}
-
-	&--plus {
-		position: relative;
-		padding-left: 34px;
 	}
 
 	&--lg {
@@ -81,6 +111,27 @@ button types
 		&:hover {
 			background: @btn-disabled-bg;
 			color: @btn-disabled-color;
+		}
+	}
+
+	&--light {
+		background: @color-f;
+		color: @color-base;
+		border: 1px solid @color-border;
+
+		&:hover {
+			background: @color-fa;
+			color: @color-base;
+		}
+	}
+
+	&--success {
+		background: @color-green;
+		color: @color-f;
+
+		&:hover {
+			background: @color-green;
+			color: @color-f;
 		}
 	}
 }

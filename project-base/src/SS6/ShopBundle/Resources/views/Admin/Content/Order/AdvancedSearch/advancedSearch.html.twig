@@ -3,8 +3,9 @@
 	<div id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_order_getruleform') }}">
 		{% include '@SS6Shop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
 	</div>
-	<button type="button" class="btn btn-primary" id="js-advanced-search-add-rule-button">
-		<i class="sprite sprite-plus"></i> {{ 'Přidat'|trans }}
+	<button type="button" class="btn btn--plus" id="js-advanced-search-add-rule-button">
+		<i class="btn__icon">+</i>
+		{{ 'Přidat'|trans }}
 	</button>
 	<br />
 	<a href="{{ url('admin_order_list') }}" class="btn-link-style">{{ 'Zrušit filtr'|trans }}</a>
