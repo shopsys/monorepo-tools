@@ -5,22 +5,18 @@
 
 	SS6.settingMenu.Toggler = function ($settingMenu, $links) {
 		this.init = function () {
-			$settingMenu
-					.hover(show, hide)
-					.click(toggle);
+			$settingMenu.click(function (event) {
+				$links.toggle();
+				event.stopPropagation();
+			});
+			$links.click(function (event) {
+				event.stopPropagation();
+			});
 		};
 
-		function show() {
-			$links.fadeIn('fast');
-		}
-
-		function hide() {
+		$(document).on('click', function () {
 			$links.hide();
-		}
-
-		function toggle() {
-			$links.toggle();
-		}
+		});
 	};
 
 	$(document).ready(function () {
