@@ -4,7 +4,7 @@
 	{% if notAllowedToDeleteCurrencyIds is defined %}
 		{% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
 			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky'|trans }}"
-				class="js-tooltip table-action c-help in-icon" data-toggle="tooltip" data-placement="bottom"
+				class="js-tooltip c-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 			>
 				<i class="svg svg-info"></i>
 			</span>
