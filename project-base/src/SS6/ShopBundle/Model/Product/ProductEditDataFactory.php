@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
@@ -84,10 +83,6 @@ class ProductEditDataFactory {
 		$productEditData->accessories = [];
 		$productEditData->heurekaCpcValues = [];
 
-		$productEditData->urls[UrlListType::TO_DELETE] = [];
-		$productEditData->urls[UrlListType::MAIN_ON_DOMAINS] = [];
-		$productEditData->urls[UrlListType::NEW_URLS] = [];
-
 		return $productEditData;
 	}
 
@@ -156,7 +151,7 @@ class ProductEditDataFactory {
 			$productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
 			$productEditData->descriptions[$domainId] = $productDomain->getDescription();
 
-			$productEditData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
+			$productEditData->urls->mainOnDomains[$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 			$productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
 		}

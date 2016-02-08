@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Form\UrlListData;
 use SS6\ShopBundle\Model\Product\ProductData;
 
 class ProductEditData {
@@ -53,7 +53,7 @@ class ProductEditData {
 	public $descriptions;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
 
@@ -113,11 +113,7 @@ class ProductEditData {
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->descriptions = $descriptions;
-		$this->urls = [
-			UrlListType::TO_DELETE => [],
-			UrlListType::MAIN_ON_DOMAINS => [],
-			UrlListType::NEW_URLS => [],
-		];
+		$this->urls = new UrlListData();
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;
 		$this->variants = $variants;

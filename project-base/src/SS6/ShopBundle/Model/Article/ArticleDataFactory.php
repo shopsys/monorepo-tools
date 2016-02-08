@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Article;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Form\UrlListType;
 
 class ArticleDataFactory {
 
@@ -43,7 +42,7 @@ class ArticleDataFactory {
 		$articleData->setFromEntity($article);
 
 		foreach ($this->domain->getAll() as $domainCongig) {
-			$articleData->urls[UrlListType::MAIN_ON_DOMAINS][$domainCongig->getId()] =
+			$articleData->urls->mainOnDomains[$domainCongig->getId()] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl(
 					$domainCongig->getId(),
 					'front_article_detail',

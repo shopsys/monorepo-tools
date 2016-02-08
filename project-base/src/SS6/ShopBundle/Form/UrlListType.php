@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Form\UrlListData;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -122,6 +123,7 @@ class UrlListType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
+			'data_class' => UrlListData::class,
 			'required' => false,
 			'route_name' => null,
 			'entity_id' => null,

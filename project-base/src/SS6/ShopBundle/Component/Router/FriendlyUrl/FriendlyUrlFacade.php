@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use SS6\ShopBundle\Form\FriendlyUrlType;
-use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Form\UrlListData;
 
 class FriendlyUrlFacade {
 
@@ -138,19 +138,19 @@ class FriendlyUrlFacade {
 	/**
 	 * @param string $routeName
 	 * @param int $entityId
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[][] $urlListFormData
+	 * @param \SS6\ShopBundle\Form\UrlListData $urlListData
 	 */
-	public function saveUrlListFormData($routeName, $entityId, array $urlListFormData) {
+	public function saveUrlListFormData($routeName, $entityId, UrlListData $urlListData) {
 		$toFlush = [];
 
-		foreach ($urlListFormData[UrlListType::MAIN_ON_DOMAINS] as $friendlyUrl) {
+		foreach ($urlListData->mainOnDomains as $friendlyUrl) {
 			if ($friendlyUrl !== null) {
 				$this->setFriendlyUrlAsMain($friendlyUrl);
 				$toFlush[] = $friendlyUrl;
 			}
 		}
 
-		foreach ($urlListFormData[UrlListType::TO_DELETE] as $friendlyUrls) {
+		foreach ($urlListData->toDelete as $friendlyUrls) {
 			foreach ($friendlyUrls as $friendlyUrl) {
 				if (!$friendlyUrl->isMain()) {
 					$this->em->remove($friendlyUrl);
@@ -158,7 +158,7 @@ class FriendlyUrlFacade {
 			}
 		}
 
-		foreach ($urlListFormData[UrlListType::NEW_URLS] as $urlData) {
+		foreach ($urlListData->newUrls as $urlData) {
 			$domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
 			$newSlug = $urlData[FriendlyUrlType::FIELD_SLUG];
 			$newFriendlyUrl = new FriendlyUrl($routeName, $entityId, $domainId, $newSlug);

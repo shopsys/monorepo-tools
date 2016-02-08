@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Form\UrlListType;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 
@@ -40,7 +39,7 @@ class CategoryDataFactory {
 		foreach ($categoryDomains as $categoryDomain) {
 			$domainId = $categoryDomain->getDomainId();
 
-			$categoryData->urls[UrlListType::MAIN_ON_DOMAINS][$domainId] =
+			$categoryData->urls->mainOnDomains[$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_list', $category->getId());
 		}
 

@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Category;
 
 use SS6\ShopBundle\Component\Validator;
-use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Form\UrlListData;
 use SS6\ShopBundle\Model\Category\Category;
 
 /**
@@ -32,7 +32,7 @@ class CategoryData {
 	public $heurekaCzFeedCategory;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
 
@@ -44,11 +44,7 @@ class CategoryData {
 	public function __construct() {
 		$this->name = [];
 		$this->hiddenOnDomains = [];
-		$this->urls = [
-			UrlListType::TO_DELETE => [],
-			UrlListType::MAIN_ON_DOMAINS => [],
-			UrlListType::NEW_URLS => [],
-		];
+		$this->urls = new UrlListData();
 		$this->image = [];
 	}
 
