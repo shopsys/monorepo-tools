@@ -80,7 +80,7 @@
 		"symfony/symfony": "2.7.3",
 		"symfony-cmf/routing": "dev-master#bb25b51744",
 		"symfony-cmf/routing-bundle": "1.3.3",
-		"timwhitlock/jparser": "dev-fix-imports#e996c9c",
+		"timwhitlock/jparser": "dev-get-rid-of-import#c37f4c6",
 		"tracy/tracy": "2.3.8",
 		"twig/extensions": "1.3.0"
 	},
