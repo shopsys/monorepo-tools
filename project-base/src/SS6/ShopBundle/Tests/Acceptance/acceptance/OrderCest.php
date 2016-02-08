@@ -15,15 +15,15 @@ class OrderCest {
 		$me->click('Přejít do košíku');
 		$me->click('Objednat');
 
-		$me->dontSeeCheckboxIsChecked('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->checkOption('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->dontSeeCheckboxIsChecked('input[name="transportAndPayment_form[payment]"][value="2"]');
-		$me->checkOption('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->click('Pokračovat v objednávce');
 		$me->click('Zpět na výběr dopravy a platby');
 
-		$me->seeCheckboxIsChecked('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->seeCheckboxIsChecked('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
 	}
 
 	public function testFormRemembersPaymentAndTransportWhenGoingDirectlyToUrl(AcceptanceTester $me) {
@@ -35,15 +35,15 @@ class OrderCest {
 		$me->click('Přejít do košíku');
 		$me->click('Objednat');
 
-		$me->dontSeeCheckboxIsChecked('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->checkOption('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->dontSeeCheckboxIsChecked('input[name="transportAndPayment_form[payment]"][value="2"]');
-		$me->checkOption('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->click('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
-		$me->seeCheckboxIsChecked('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->seeCheckboxIsChecked('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
 	}
 
 	public function testFormRemembersFirstName(AcceptanceTester $me) {
@@ -54,16 +54,16 @@ class OrderCest {
 		$me->waitForAjax();
 		$me->click('Přejít do košíku');
 		$me->click('Objednat');
-		$me->checkOption('input[name="transportAndPayment_form[transport]"][value="1"]');
-		$me->checkOption('input[name="transportAndPayment_form[payment]"][value="2"]');
+		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->click('Pokračovat v objednávce');
 
-		$me->fillField('input[name="orderPersonalInfo_form[firstName]"]', 'Jan');
+		$me->fillField('input[name="order_personal_info_form[firstName]"]', 'Jan');
 		$me->click('Zpět na výběr dopravy a platby');
 		$me->amOnPage('/objednavka/');
 		$me->click('Pokračovat v objednávce');
 
-		$me->seeInField('input[name="orderPersonalInfo_form[firstName]"]', 'Jan');
+		$me->seeInField('input[name="order_personal_info_form[firstName]"]', 'Jan');
 	}
 
 }

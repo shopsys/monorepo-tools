@@ -48,7 +48,7 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 	 * @return string
 	 */
 	public function getName() {
-		return 'translation';
+		return 'translation_form';
 	}
 
 	/**

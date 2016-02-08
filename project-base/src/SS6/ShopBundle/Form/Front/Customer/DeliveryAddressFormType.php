@@ -19,7 +19,7 @@ class DeliveryAddressFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'deliveryAddress_form';
+		return 'delivery_address_form';
 	}
 
 	/**

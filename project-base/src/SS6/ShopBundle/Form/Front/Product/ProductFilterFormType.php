@@ -91,7 +91,7 @@ class ProductFilterFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'productFilter_form';
+		return 'product_filter_form';
 	}
 
 	/**
