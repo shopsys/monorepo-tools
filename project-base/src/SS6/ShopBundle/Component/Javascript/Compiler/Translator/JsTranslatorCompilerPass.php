@@ -2,9 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Compiler\Translator;
 
-import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
-
-use JProgramNode;
+use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
@@ -31,7 +29,7 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface {
 	}
 
 	/**
-	 * @param \JProgramNode $node
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
 	 */
 	public function process(JProgramNode $node) {
 		$jsTranslatorsCalls = $this->jsTranslatorCallParser->parse($node);

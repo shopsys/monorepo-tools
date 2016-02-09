@@ -2,12 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser\Constant;
 
-import('PLUG.JavaScript.JLexBase'); // contains J_* constants
-import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
-import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
-
-use JCallExprNode;
-use JProgramNode;
+use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
+use PLUG\JavaScript\JNodes\JNodeBase;
+use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
+use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
@@ -39,14 +37,14 @@ class JsConstantCallParser {
 	}
 
 	/**
-	 * @param \JProgramNode $node
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
 	 * @return \SS6\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCall[]
 	 */
 	public function parse(JProgramNode $node) {
 		$jsConstantCalls = [];
 
 		$callExprNodes = $node->get_nodes_by_symbol(J_CALL_EXPR);
-		/* @var $callExprNodes \JCallExprNode[] */
+		/* @var $callExprNodes \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode[] */
 		foreach ($callExprNodes as $callExprNode) {
 			if ($this->isConstantFunctionCall($callExprNode)) {
 				$constantNameArgumentNode = $this->getConstantNameArgumentNode($callExprNode);
@@ -63,7 +61,7 @@ class JsConstantCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
 	 * @return bool
 	 */
 	private function isConstantFunctionCall(JCallExprNode $callExprNode) {
@@ -73,10 +71,10 @@ class JsConstantCallParser {
 	}
 
 	/**
-	 * @param \JNodeBase $constantNameArgumentNode
+	 * @param \PLUG\JavaScript\JNodes\JNodeBase $constantNameArgumentNode
 	 * @return string
 	 */
-	private function getConstantName(\JNodeBase $constantNameArgumentNode) {
+	private function getConstantName(JNodeBase $constantNameArgumentNode) {
 		try {
 			$constantName = $this->jsStringParser->getConcatenatedString($constantNameArgumentNode);
 		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
@@ -92,8 +90,8 @@ class JsConstantCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
-	 * @return \JNodeBase
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
+	 * @return \PLUG\JavaScript\JNodes\JNodeBase
 	 */
 	private function getConstantNameArgumentNode(JCallExprNode $callExprNode) {
 		$argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);

@@ -2,15 +2,13 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser;
 
-import('PLUG.JavaScript.JLexBase'); // contains J_* constants
-import('PLUG.JavaScript.JNodes.JNodeBase');
-
-use JNodeBase;
+use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
+use PLUG\JavaScript\JNodes\JNodeBase;
 
 class JsStringParser {
 
 	/**
-	 * @param \JNodeBase $node
+	 * @param \PLUG\JavaScript\JNodes\JNodeBase $node
 	 * @return string
 	 */
 	public function getConcatenatedString(JNodeBase $node) {

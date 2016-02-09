@@ -2,14 +2,12 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser\Constant;
 
-import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
-
-use JCallExprNode;
+use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
 class JsConstantCall {
 
 	/**
-	 * @var \JCallExprNode
+	 * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
 	 */
 	private $callExprNode;
 
@@ -19,7 +17,7 @@ class JsConstantCall {
 	private $constantName;
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
 	 * @param string $constantName
 	 */
 	public function __construct(
@@ -31,7 +29,7 @@ class JsConstantCall {
 	}
 
 	/**
-	 * @return \JCallExprNode
+	 * @return \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
 	 */
 	public function getCallExprNode() {
 		return $this->callExprNode;

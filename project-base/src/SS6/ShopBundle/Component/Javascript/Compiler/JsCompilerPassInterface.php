@@ -2,9 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Compiler;
 
-import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
-
-use JProgramNode;
+use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 
 interface JsCompilerPassInterface {
 
