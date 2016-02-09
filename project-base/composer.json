@@ -85,7 +85,7 @@
 		"twig/extensions": "1.3.0"
 	},
 	"require-dev": {
-		"codeception/codeception": "2.1.2",
+		"codeception/codeception": "2.1.5",
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"se/selenium-server-standalone": "2.48.2",
 		"shopsys/coding-standards": "1.0.0",
