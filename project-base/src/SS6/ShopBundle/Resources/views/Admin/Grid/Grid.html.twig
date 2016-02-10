@@ -215,7 +215,7 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	<div class="in-grid-control__show">
+	<div class="in-grid-control__item in-grid-control__item--show">
 		<strong>
 			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
 			{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
@@ -229,7 +229,9 @@
 
 			{% if grid.page > 1 %}
 				<li class="in-paging__item in-paging__item--prev">
-					<a href="{{ gridView.url({'page': grid.page - 1}) }}">&lt;</a>
+					<a href="{{ gridView.url({'page': grid.page - 1}) }}">
+						<i class="svg svg-arrow"></i>
+					</a>
 				</li>
 
 				<li class="in-paging__item">
@@ -272,7 +274,9 @@
 					<a href="{{ gridView.url({'page': grid.pageCount}) }}">{{ grid.pageCount }}</a>
 				</li>
 				<li class="in-paging__item in-paging__item--next">
-					<a href="{{ gridView.url({'page': grid.page + 1}) }}">&gt;</a>
+					<a href="{{ gridView.url({'page': grid.page + 1}) }}">
+						<i class="svg svg-arrow"></i>
+					</a>
 				</li>
 			{% endif %}
 		</ul>
@@ -281,26 +285,34 @@
 {% endblock %}
 
 {% block grid_pager_results_perpage %}
-	<div class="in-grid-control__settings">
-		<span class="">
-			{{ 'Položek na stránku:'|trans }}
-			<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
-				{% for value in grid.allowedLimits %}
-					<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
-				{% endfor %}
-			</select>
+	<div class="in-grid-control__item in-grid-control__item--settings">
+		<span class="in-grid-control__item__go">
+			<span class="in-grid-control__item__go__text">
+				{{ 'Položek na stránku:'|trans }}
+			</span>
+			<div class="in-grid-control__item__go__block">
+				<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
+					{% for value in grid.allowedLimits %}
+						<option value="{{ value }}"{% if (value == grid.limit) %} selected="selected"{% endif %}>{{ value }}</option>
+					{% endfor %}
+				</select>
+			</div>
 		</span>
-		<div class="js-grid-go-to">
-			<span>{{ 'Přejít na stránku:'|trans }}</span>
-			<input
-				type="number"
-				min="1"
-				max="{{ grid.pageCount }}"
-				value="{{ grid.page }}"
-				class="current input js-grid-go-to-input"
-				size="2"
-			/>
-			<a class="btn js-grid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">&gt;&gt;</a>
+		<div class="js-grid-go-to in-grid-control__item__go">
+			<span class="in-grid-control__item__go__text">{{ 'Přejít na stránku:'|trans }}</span>
+			<div class="in-grid-control__item__go__block form-type-and-go">
+				<input
+					type="number"
+					min="1"
+					max="{{ grid.pageCount }}"
+					value="{{ grid.page }}"
+					class="current input form-type-and-go__input js-grid-go-to-input"
+					size="2"
+				/>
+				<a class="btn form-type-and-go__btn js-grid-go-to-button" href="#" data-url="{{ gridView.url({'page' : '--page--'}) }}">
+					<i class="svg svg-arrow-thin"></i>
+				</a>
+			</div>
 		</div>
 	</div>
 {% endblock %}
@@ -308,7 +320,7 @@
 {% block grid_pager %}
 	<div class="in-grid-control">
 		{{ gridView.renderBlock('grid_pager_totalcount') }}
-		<div class="in-grid-control__paging">
+		<div class="in-grid-control__item in-grid-control__item--paging">
 			{% if grid.pageCount > 1 %}
 				{{ gridView.renderBlock('grid_pager_selectpage') }}
 			{% endif %}

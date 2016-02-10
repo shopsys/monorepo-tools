@@ -9,6 +9,7 @@
 
 		a, strong, span {
 			display: inline-block;
+			vertical-align: middle;
 			height: 30px;
 			line-height: 30px;
 			padding: 0 5px;
@@ -32,6 +33,28 @@
 		strong {
 			cursor: auto;
 			background: @color-f;
+		}
+
+		&--next {
+			font-size: 10px;
+
+			.rotate(-90deg);
+
+			i {
+				position: relative;
+				top: -2px;
+			}
+		}
+
+		&--prev {
+			font-size: 10px;
+
+			.rotate(90deg);
+
+			i {
+				position: relative;
+				top: -2px;
+			}
 		}
 	}
 }

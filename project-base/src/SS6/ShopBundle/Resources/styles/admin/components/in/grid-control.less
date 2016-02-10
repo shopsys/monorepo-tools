@@ -9,31 +9,48 @@ Control panel for grid etc.
 
 	font-size: 0;
 
-	&__show {
+	&__item {
 		display: inline-block;
 		vertical-align: top;
 		width: 30%;
 
 		font-size: 12px;
 		color: @color-action;
-	}
 
-	&__paging {
-		display: inline-block;
-		vertical-align: top;
-		width: 40%;
+		&--paging {
+			width: 40%;
 
-		text-align: center;
-		font-size: 13px;
-	}
+			text-align: center;
+		}
 
-	&__settings {
-		display: inline-block;
-		vertical-align: top;
-		width: 30%;
+		&--settings {
+			text-align: right;
+		}
 
-		text-align: right;
-		font-size: 12px;
-		color: @color-action;
+		&--show {
+			line-height: 22px;
+			padding: 5px 0;
+		}
+
+		&__go {
+			display: block;
+
+			text-align: right;
+
+			&__text {
+				line-height: 32px;
+				display: inline-block;
+				margin-right: 5px;
+
+				font-weight: bold;
+			}
+
+			&__block {
+				display: inline-block;
+				width: 70px;
+				margin-bottom: 3px;
+				position: relative;
+			}
+		}
 	}
 }
