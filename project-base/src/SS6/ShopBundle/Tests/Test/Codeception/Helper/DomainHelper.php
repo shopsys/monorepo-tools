@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 use Codeception\Module;
 use Codeception\TestCase;
 use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
+use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module {
 
@@ -15,8 +16,8 @@ class DomainHelper extends Module {
 	 */
 	public function _before(TestCase $test) {
 	// @codingStandardsIgnoreEnd
-		$webDriver = $this->getModule('WebDriver');
-		/* @var $webDriver \Codeception\Module\WebDriver */
+		$webDriver = $this->getModule(StrictWebDriver::class);
+		/* @var $webDriver \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
 		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
 		$domain = $symfonyHelper->grabServiceFromContainer('ss6.shop.component.domain');

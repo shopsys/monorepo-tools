@@ -6,6 +6,7 @@ use Codeception\Module;
 use Codeception\TestCase;
 use Facebook\WebDriver\Remote\DriverCommand;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class CloseNewlyOpenedWindowsHelper extends Module {
 
@@ -16,8 +17,8 @@ class CloseNewlyOpenedWindowsHelper extends Module {
 	 */
 	public function _after(TestCase $test) {
 		// @codingStandardsIgnoreEnd
-		$webDriver = $this->getModule('WebDriver');
-		/* @var $webDriver \Codeception\Module\WebDriver */
+		$webDriver = $this->getModule(StrictWebDriver::class);
+		/* @var $webDriver \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
 
 		$this->closeNewlyOpenedWindows($webDriver->webDriver);
 	}
