@@ -484,8 +484,8 @@
 		<div class="form-tree form-tree--open js-category-tree-form">
 			{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form, true) }}
 		</div>
+		{{- block('appendix_block') -}}
 	</div>
-	{{- block('appendix_block') -}}
 {% endblock categories_widget %}
 
 {% block form_errors %}
@@ -578,11 +578,12 @@
 				{{- block('choice_widget_options') -}}
 			</select>
 
-			{{- block('appendix_block') -}}
-
 	{% if isSimple|default(false) == false %}
 			</div>
+			{{- block('appendix_block') -}}
 		</div>
+	{% else %}
+		{{- block('appendix_block') -}}
 	{% endif %}
 {%- endblock choice_widget_collapsed %}
 
