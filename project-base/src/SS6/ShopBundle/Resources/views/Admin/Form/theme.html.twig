@@ -287,7 +287,7 @@
 		</div>
 		<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
 			<i class="btn__icon">+</i>
-			{ 'Přidat URL'|trans }}
+			{{ 'Přidat URL'|trans }}
 		</button>
 	</div>
 {%- endblock url_list_widget -%}
@@ -484,8 +484,8 @@
 		<div class="form-tree form-tree--open js-category-tree-form">
 			{{ _self.categoriesWidgetItem(form.vars.categoryDetails, form, true) }}
 		</div>
+		{{- block('appendix_block') -}}
 	</div>
-	{{- block('appendix_block') -}}
 {% endblock categories_widget %}
 
 {% block form_errors %}
@@ -578,11 +578,12 @@
 				{{- block('choice_widget_options') -}}
 			</select>
 
-			{{- block('appendix_block') -}}
-
 	{% if isSimple|default(false) == false %}
 			</div>
+			{{- block('appendix_block') -}}
 		</div>
+	{% else %}
+		{{- block('appendix_block') -}}
 	{% endif %}
 {%- endblock choice_widget_collapsed %}
 
