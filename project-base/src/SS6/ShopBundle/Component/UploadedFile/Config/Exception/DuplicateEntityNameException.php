@@ -14,7 +14,7 @@ class DuplicateEntityNameException extends Exception implements UploadedFileConf
 
 	/**
 	 * @param string $entityName
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($entityName, Exception $previous = null) {
 		$this->entityName = $entityName;

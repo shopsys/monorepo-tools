@@ -14,7 +14,7 @@ class OrderStatusDeletionForbiddenException extends Exception implements OrderSt
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct(OrderStatus $orderStatus, Exception $previous = null) {
 		$this->orderStatus = $orderStatus;

@@ -7,10 +7,10 @@ use Exception;
 class InvalidResetPasswordHashException extends Exception implements CustomerException {
 
 	/**
-	 * @param string|null $message
-	 * @param Exception $previous
+	 * @param string $message
+	 * @param \Exception|null $previous
 	 */
-	public function __construct($message = null, $previous = null) {
+	public function __construct($message = '', Exception $previous = null) {
 		parent::__construct($message, 0, $previous);
 	}
 

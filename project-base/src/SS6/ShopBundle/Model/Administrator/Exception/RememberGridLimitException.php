@@ -13,9 +13,9 @@ class RememberGridLimitException extends Exception implements AdministratorExcep
 
 	/**
 	 * @param string $gridId
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
-	public function __construct($gridId, $previous = null) {
+	public function __construct($gridId, Exception $previous = null) {
 		$this->gridId = $gridId;
 		parent::__construct('Grid \'' . $this->gridId . ' \' does not allow paging', 0, $previous);
 	}

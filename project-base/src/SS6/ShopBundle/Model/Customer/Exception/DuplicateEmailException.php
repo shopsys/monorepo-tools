@@ -13,7 +13,7 @@ class DuplicateEmailException extends Exception implements CustomerException {
 
 	/**
 	 * @param string $email
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($email, $previous = null) {
 		$this->email = $email;

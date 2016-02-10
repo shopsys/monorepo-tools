@@ -8,7 +8,7 @@ class GeneratorTargetFileAlreadyExistsExpception extends Exception implements Ge
 
 	/**
 	 * @param string $filepath
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($filepath, Exception $previous = null) {
 		$message = 'File "' . $filepath . '" already exists';

@@ -8,10 +8,11 @@ use SS6\ShopBundle\Component\Breadcrumb\Exception\BreadcrumbException;
 class UnableToGenerateBreadcrumbItemsException extends Exception implements BreadcrumbException {
 
 	/**
-	 * @param \Exception $previous
+	 * @param string $message
+	 * @param \Exception|null $previous
 	 */
-	public function __construct(Exception $previous = null) {
-		parent::__construct(null, 0, $previous);
+	public function __construct($message = '', Exception $previous = null) {
+		parent::__construct($message, 0, $previous);
 	}
 
 }

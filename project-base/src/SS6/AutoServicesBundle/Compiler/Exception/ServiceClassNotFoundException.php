@@ -9,7 +9,7 @@ class ServiceClassNotFoundException extends Exception implements CompilerExcepti
 
 	/**
 	 * @param string $className
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($className, $previous = null) {
 		parent::__construct('Service for class "' . $className . '" can not be resolved.', 0, $previous);

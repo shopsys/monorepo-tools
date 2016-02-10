@@ -14,7 +14,7 @@ class UploadedFileConfigurationParseException extends Exception implements Uploa
 
 	/**
 	 * @param string $entityClass
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($entityClass, Exception $previous = null) {
 		$this->entityClass = $entityClass;

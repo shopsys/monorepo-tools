@@ -13,9 +13,9 @@ class InvalidFormDataException extends Exception implements InlineEditException 
 
 	/**
 	 * @param array $formErrors
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
-	public function __construct($formErrors, Exception $previous = null) {
+	public function __construct(array $formErrors, Exception $previous = null) {
 		$this->formErrors = $formErrors;
 		parent::__construct('Inline edit form is not valid', 0, $previous);
 	}

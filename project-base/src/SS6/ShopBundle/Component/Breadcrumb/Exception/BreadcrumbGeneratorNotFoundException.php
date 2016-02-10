@@ -9,7 +9,7 @@ class BreadcrumbGeneratorNotFoundException extends Exception implements Breadcru
 
 	/**
 	 * @param string $routeName
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($routeName, Exception $previous = null) {
 		parent::__construct('Breadcrumb generator not found for route "' . $routeName . '"', 0, $previous);

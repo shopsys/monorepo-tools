@@ -10,7 +10,7 @@ class CategoryDomainNotFoundException extends NotFoundHttpException implements C
 	/**
 	 * @param int $categoryId
 	 * @param int $domainId
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($categoryId, $domainId, \Exception $previous = null) {
 		$message = sprintf(

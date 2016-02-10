@@ -8,7 +8,7 @@ class DuplicateGeneratorNameException extends Exception implements GeneratorExce
 
 	/**
 	 * @param string $name
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($name, Exception $previous = null) {
 		$message = 'Generator with name "' . $name . '" already exists';

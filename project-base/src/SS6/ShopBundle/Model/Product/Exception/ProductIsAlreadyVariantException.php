@@ -9,7 +9,7 @@ class ProductIsAlreadyVariantException extends Exception implements VariantExcep
 
 	/**
 	 * @param int $productId
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($productId, Exception $previous = null) {
 		$message = 'Product with ID ' . $productId . ' is already variant.';

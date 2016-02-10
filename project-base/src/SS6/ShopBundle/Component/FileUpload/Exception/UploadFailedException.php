@@ -8,10 +8,9 @@ class UploadFailedException extends Exception implements FileUploadException {
 
 	/**
 	 * @param string $message
-	 * @param int $code
-	 * @param Exception $previous
+	 * @param \Exception|null $previous
 	 */
-	public function __construct($message = null, $code = 0, $previous = null) {
-		parent::__construct($message, $code, $previous);
+	public function __construct($message = '', Exception $previous = null) {
+		parent::__construct($message, 0, $previous);
 	}
 }

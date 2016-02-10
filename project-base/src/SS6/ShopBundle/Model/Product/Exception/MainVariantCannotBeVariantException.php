@@ -9,7 +9,7 @@ class MainVariantCannotBeVariantException extends Exception implements VariantEx
 
 	/**
 	 * @param int $productId
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($productId, Exception $previous = null) {
 		$message = 'Product with ID ' . $productId . ' is already main variant.';

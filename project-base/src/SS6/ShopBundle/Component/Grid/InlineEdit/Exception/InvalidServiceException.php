@@ -13,7 +13,7 @@ class InvalidServiceException extends Exception implements InlineEditException {
 
 	/**
 	 * @param string $serviceName
-	 * @param \Exception $previous
+	 * @param \Exception|null $previous
 	 */
 	public function __construct($serviceName, Exception $previous = null) {
 		$this->serviceName = $serviceName;
