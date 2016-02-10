@@ -41,6 +41,33 @@
 
 			border: 1px solid @color-border;
 			background: @color-f;
+
+			&__type {
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				line-height: 144px;
+
+				text-align: center;
+				font-size: 60px;
+				color: @color-base;
+				cursor: default;
+
+				&--pdf {
+					color: @color-red;
+				}
+				&--excel {
+					color: darken(@color-green, 7%);
+				}
+				&--word {
+					color: @color-blue;
+				}
+				&--xml {
+					color: @color-orange;
+				}
+			}
 		}
 
 		img {

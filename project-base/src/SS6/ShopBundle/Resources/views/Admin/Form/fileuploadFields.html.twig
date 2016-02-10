@@ -11,7 +11,7 @@
 							<div class="list-images__item__in">
 								<div class="list-images__item__image">
 									{% if iconType is not null %}
-										<i class="fa fa-{{ iconType }} fa-5x js-file-upload-icon-type"></i>
+										<i class="svg svg-file-{{ iconType }} js-file-upload-icon-type list-images__item__image__type list-images__item__image__type--{{ iconType }}"></i>
 									{% endif %}
 
 									{% if thumbnailUri is same as(false) %}

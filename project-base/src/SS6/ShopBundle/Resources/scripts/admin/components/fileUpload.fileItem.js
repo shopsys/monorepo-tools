@@ -59,8 +59,7 @@
 		var setIconType = function (iconType) {
 			if (iconType !== null) {
 				$iconType
-					.removeClass('fa-__icon-type__')
-					.addClass('fa-' + iconType)
+					.attr('class', $iconType.attr('class').replace(/__icon-type__/g, iconType))
 					.show();
 			}
 		};

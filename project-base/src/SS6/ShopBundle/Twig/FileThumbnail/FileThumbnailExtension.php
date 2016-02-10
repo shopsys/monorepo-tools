@@ -10,7 +10,7 @@ use Twig_SimpleFunction;
 
 class FileThumbnailExtension extends Twig_Extension {
 
-	const DEFAULT_ICON_TYPE = 'file-o';
+	const DEFAULT_ICON_TYPE = 'all';
 	const IMAGE_THUMBNAIL_QUALITY = 80;
 
 	/**
@@ -32,17 +32,18 @@ class FileThumbnailExtension extends Twig_Extension {
 		$this->fileUpload = $fileUpload;
 		$this->imageThumbnailFactory = $imageThumbnailFactory;
 		$this->iconsByExtension = [
-			'csv' => 'file-excel-o',
-			'doc' => 'file-word-o',
-			'docx' => 'file-word-o',
-			'ods' => 'file-excel-o',
-			'odt' => 'file-word-o',
-			'pdf' => 'file-pdf-o',
-			'rtf' => 'file-word-o',
-			'txt' => 'file-text-o',
-			'xls' => 'file-excel-o',
-			'xlsx' => 'file-excel-o',
-			'xml' => 'file-code-o',
+			'csv' => 'excel',
+			'doc' => 'word',
+			'docx' => 'word',
+			'html' => 'xml',
+			'ods' => 'excel',
+			'odt' => 'word',
+			'pdf' => 'pdf',
+			'rtf' => 'word',
+			'xls' => 'excel',
+			'xlsx' => 'excel',
+			'xhtml' => 'xml',
+			'xml' => 'xml',
 		];
 	}
 
