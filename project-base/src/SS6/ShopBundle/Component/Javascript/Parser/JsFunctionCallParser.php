@@ -2,20 +2,18 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser;
 
-import('PLUG.JavaScript.JLexBase'); // contains J_* constants
-import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
-
-use JCallExprNode;
+use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
+use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
 class JsFunctionCallParser {
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
 	 * @return string|null
 	 */
 	public function getFunctionName(JCallExprNode $callExprNode) {
 		$memberExprNodes = $callExprNode->get_nodes_by_symbol(J_MEMBER_EXPR, 1);
-		/* @var $memberExprNodes \JMemberExprNode[] */
+		/* @var $memberExprNodes \PLUG\JavaScript\JNodes\nonterminal\JMemberExprNode[] */
 
 		if (isset($memberExprNodes[0])) {
 			return (string)$memberExprNodes[0];
@@ -25,12 +23,12 @@ class JsFunctionCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
-	 * @return \JNodeBase[]
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
+	 * @return \PLUG\JavaScript\JNodes\JNodeBase[]
 	 */
 	public function getArgumentNodes(JCallExprNode $callExprNode) {
 		$argListNodes = $callExprNode->get_nodes_by_symbol(J_ARG_LIST, 2);
-		/* @var $argListNodes \JArgListNode[] */
+		/* @var $argListNodes \PLUG\JavaScript\JNodes\nonterminal\JArgListNode[] */
 
 		$argumentNodes = [];
 		if (isset($argListNodes[0])) {

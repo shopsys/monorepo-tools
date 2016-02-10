@@ -2,12 +2,10 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
 
-import('PLUG.JavaScript.JLexBase'); // contains J_* constants
-import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
-import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
-
-use JCallExprNode;
-use JProgramNode;
+use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
+use PLUG\JavaScript\JNodes\JNodeBase;
+use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
+use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
@@ -51,14 +49,14 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JProgramNode $node
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
 	 * @return \SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall[]
 	 */
 	public function parse(JProgramNode $node) {
 		$jsTranslatorCalls = [];
 
 		$callExprNodes = $node->get_nodes_by_symbol(J_CALL_EXPR);
-		/* @var $callExprNodes \JCallExprNode[] */
+		/* @var $callExprNodes \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode[] */
 		foreach ($callExprNodes as $callExprNode) {
 			if ($this->isTransFunctionCall($callExprNode)) {
 				$messageIdArgumentNode = $this->getMessageIdArgumentNode($callExprNode);
@@ -77,7 +75,7 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
 	 * @return bool
 	 */
 	private function isTransFunctionCall(JCallExprNode $callExprNode) {
@@ -93,10 +91,10 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JNodeBase $messageIdArgumentNode
+	 * @param \PLUG\JavaScript\JNodes\JNodeBase $messageIdArgumentNode
 	 * @return string
 	 */
-	private function getMessageId(\JNodeBase $messageIdArgumentNode) {
+	private function getMessageId(JNodeBase $messageIdArgumentNode) {
 		try {
 			$messageId = $this->jsStringParser->getConcatenatedString($messageIdArgumentNode);
 		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
@@ -112,7 +110,7 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
 	 * @return string
 	 */
 	private function getDomain(JCallExprNode $callExprNode) {
@@ -139,8 +137,8 @@ class JsTranslatorCallParser {
 	}
 
 	/**
-	 * @param \JCallExprNode $callExprNode
-	 * @return \JNodeBase
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
+	 * @return \PLUG\JavaScript\JNodes\JNodeBase
 	 */
 	private function getMessageIdArgumentNode(JCallExprNode $callExprNode) {
 		$functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);

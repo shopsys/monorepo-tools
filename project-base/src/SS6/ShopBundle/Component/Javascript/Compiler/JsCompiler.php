@@ -2,11 +2,8 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Compiler;
 
-import('PLUG.JavaScript.JParser');
-import('PLUG.JavaScript.JTokenizer');
-
-use JParser;
-use JTokenizer;
+use PLUG\JavaScript\JParser;
+use PLUG\JavaScript\JTokenizer;
 
 class JsCompiler {
 
@@ -28,7 +25,7 @@ class JsCompiler {
 	 */
 	public function compile($content) {
 		$node = JParser::parse_string($content, true, JParser::class, JTokenizer::class);
-		/* @var $node \JProgramNode */
+		/* @var $node \PLUG\JavaScript\JNodes\nonterminal\JProgramNode */
 
 		foreach ($this->compilerPasses as $compilerPass) {
 			$compilerPass->process($node);

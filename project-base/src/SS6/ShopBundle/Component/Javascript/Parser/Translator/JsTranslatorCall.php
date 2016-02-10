@@ -2,21 +2,18 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
 
-import('PLUG.JavaScript.JNodes.JNodeBase');
-import('PLUG.JavaScript.JNodes.nonterminal.JCallExprNode');
-
-use JCallExprNode;
-use JNodeBase;
+use PLUG\JavaScript\JNodes\JNodeBase;
+use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
 class JsTranslatorCall {
 
 	/**
-	 * @var \JCallExprNode
+	 * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
 	 */
 	private $callExprNode;
 
 	/**
-	 * @var \JNodeBase
+	 * @var \PLUG\JavaScript\JNodes\JNodeBase
 	 */
 	private $messageIdArgumentNode;
 
@@ -36,8 +33,8 @@ class JsTranslatorCall {
 	private $functionName;
 
 	/**
-	 * @param \JCallExprNode $callExprNode
-	 * @param \JNodeBase $messageIdArgumentNode
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
+	 * @param \PLUG\JavaScript\JNodes\JNodeBase $messageIdArgumentNode
 	 * @param string $messageId
 	 * @param string $domain
 	 */
@@ -56,14 +53,14 @@ class JsTranslatorCall {
 	}
 
 	/**
-	 * @return \JCallExprNode
+	 * @return \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
 	 */
 	public function getCallExprNode() {
 		return $this->callExprNode;
 	}
 
 	/**
-	 * @return \JNodeBase
+	 * @return \PLUG\JavaScript\JNodes\JNodeBase
 	 */
 	public function getMessageIdArgumentNode() {
 		return $this->messageIdArgumentNode;

@@ -2,9 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Javascript\Compiler\Constant;
 
-import('PLUG.JavaScript.JNodes.nonterminal.JProgramNode');
-
-use JProgramNode;
+use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
 use SS6\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser;
 
@@ -22,7 +20,7 @@ class JsConstantCompilerPass implements JsCompilerPassInterface {
 	}
 
 	/**
-	 * @param \JProgramNode $node
+	 * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
 	 */
 	public function process(JProgramNode $node) {
 		$jsConstantCalls = $this->jsConstantCallParser->parse($node);

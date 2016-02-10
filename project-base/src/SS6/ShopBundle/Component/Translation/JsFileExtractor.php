@@ -2,16 +2,12 @@
 
 namespace SS6\ShopBundle\Component\Translation;
 
-import('PLUG.JavaScript.JParser');
-import('PLUG.JavaScript.JTokenizer');
-import('PLUG.parsing.ParseError');
-
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
-use JParser;
-use JTokenizer;
+use PLUG\JavaScript\JParser;
+use PLUG\JavaScript\JTokenizer;
 use SplFileInfo;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use Twig_Node;
@@ -54,7 +50,7 @@ class JsFileExtractor implements FileVisitorInterface {
 
 		try {
 			$this->parseFile($contents);
-		} catch (\ParseError $ex) {
+		} catch (\PLUG\parsing\ParseError $ex) {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException(
 				$ex->getMessage() . "\n" . 'in file ' . $this->file->getRealPath()
 			);
