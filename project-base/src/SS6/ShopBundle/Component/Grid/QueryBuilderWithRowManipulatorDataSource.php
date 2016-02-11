@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Grid;
 
+use Closure;
 use Doctrine\ORM\QueryBuilder;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 
@@ -15,9 +16,9 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param string $rowIdSourceColumnName
-	 * @param callable $manipulateRowCallback
+	 * @param \Closure $manipulateRowCallback
 	 */
-	public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName, callable $manipulateRowCallback) {
+	public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName, Closure $manipulateRowCallback) {
 		parent::__construct($queryBuilder, $rowIdSourceColumnName);
 		$this->manipulateRowCallback = $manipulateRowCallback;
 	}
