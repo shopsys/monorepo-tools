@@ -62,12 +62,12 @@ class AdministratorController extends AdminBaseController {
 		$grid = $this->gridFactory->create('administratorList', $dataSource);
 		$grid->setDefaultOrder('realName');
 
-		$grid->addColumn('realName', 'a.realName', 'Jméno', true);
-		$grid->addColumn('email', 'a.email', 'Email');
+		$grid->addColumn('realName', 'a.realName', t('Jméno'), true);
+		$grid->addColumn('email', 'a.email', t('Email'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_administrator_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_administrator_delete', ['id' => 'a.id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_administrator_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_administrator_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tohoto administrátora?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig');

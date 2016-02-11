@@ -73,10 +73,10 @@ class SliderController extends AdminBaseController {
 		$grid = $this->gridFactory->create('sliderItemList', $dataSource);
 		$grid->enableDragAndDrop(SliderItem::class);
 
-		$grid->addColumn('name', 's.name', 'Název');
-		$grid->addColumn('link', 's.link', 'Odkaz');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_slider_edit', ['id' => 's.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_slider_delete', ['id' => 's.id'])
+		$grid->addColumn('name', 's.name', t('Název'));
+		$grid->addColumn('link', 's.link', t('Odkaz'));
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_slider_edit', ['id' => 's.id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_slider_delete', ['id' => 's.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Slider/listGrid.html.twig');

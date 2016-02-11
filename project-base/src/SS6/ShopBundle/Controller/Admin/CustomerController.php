@@ -195,20 +195,20 @@ class CustomerController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'name', 'Jméno', true);
-		$grid->addColumn('city', 'city', 'Město', true);
-		$grid->addColumn('telephone', 'telephone', 'Telefon', true);
-		$grid->addColumn('email', 'u.email', 'Email', true);
-		$grid->addColumn('pricingGroup', 'pricingGroup', 'Cenová skupina', true);
-		$grid->addColumn('orders_count', 'ordersCount', 'Počet objednávek', true)->setClassAttribute('text-right');
-		$grid->addColumn('orders_sum_price', 'ordersSumPrice', 'Hodnota objednávek', true)
+		$grid->addColumn('name', 'name', t('Jméno'), true);
+		$grid->addColumn('city', 'city', t('Město'), true);
+		$grid->addColumn('telephone', 'telephone', t('Telefon'), true);
+		$grid->addColumn('email', 'u.email', t('Email'), true);
+		$grid->addColumn('pricingGroup', 'pricingGroup', t('Cenová skupina'), true);
+		$grid->addColumn('orders_count', 'ordersCount', t('Počet objednávek'), true)->setClassAttribute('text-right');
+		$grid->addColumn('orders_sum_price', 'ordersSumPrice', t('Hodnota objednávek'), true)
 			->setClassAttribute('text-right');
-		$grid->addColumn('last_order_at', 'lastOrderAt', 'Poslední objednávka', true)
+		$grid->addColumn('last_order_at', 'lastOrderAt', t('Poslední objednávka'), true)
 			->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_customer_edit', ['id' => 'id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_customer_delete', ['id' => 'id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_customer_edit', ['id' => 'id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_customer_delete', ['id' => 'id'])
 			->setConfirmMessage('Opravdu chcete odstranit tohoto zákazníka?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');

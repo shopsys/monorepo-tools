@@ -361,14 +361,14 @@ class ProductController extends AdminBaseController {
 		$grid->enableSelecting();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'pt.name', 'Název', true);
-		$grid->addColumn('price', 'p.price', 'Cena', true)->setClassAttribute('text-right');
-		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', 'Viditelnost')
+		$grid->addColumn('name', 'pt.name', t('Název'), true);
+		$grid->addColumn('price', 'p.price', t('Cena'), true)->setClassAttribute('text-right');
+		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Viditelnost'))
 			->setClassAttribute('text-center table-col table-col-10');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_product_edit', ['id' => 'p.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_product_delete', ['id' => 'p.id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_product_edit', ['id' => 'p.id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_product_delete', ['id' => 'p.id'])
 			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig', [

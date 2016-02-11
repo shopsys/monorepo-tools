@@ -95,9 +95,9 @@ class DomainController extends AdminBaseController {
 
 		$grid = $this->gridFactory->create('domainsList', $dataSource);
 
-		$grid->addColumn('name', 'name', 'Název domény');
-		$grid->addColumn('locale', 'locale', 'Jazyk');
-		$grid->addColumn('icon', 'icon', 'Ikona');
+		$grid->addColumn('name', 'name', t('Název domény'));
+		$grid->addColumn('locale', 'locale', t('Jazyk'));
+		$grid->addColumn('icon', 'icon', t('Ikona'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Domain/listGrid.html.twig');
 

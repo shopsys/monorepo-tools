@@ -140,14 +140,14 @@ class AdvertController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('visible', 'a.hidden', 'Viditelnost', true)->setClassAttribute('table-col table-col-10');
-		$grid->addColumn('name', 'a.name', 'Název', true);
-		$grid->addColumn('preview', 'a.id', 'Náhled', false);
-		$grid->addColumn('positionName', 'a.positionName', 'Plocha', true);
+		$grid->addColumn('visible', 'a.hidden', t('Viditelnost'), true)->setClassAttribute('table-col table-col-10');
+		$grid->addColumn('name', 'a.name', t('Název'), true);
+		$grid->addColumn('preview', 'a.id', t('Náhled'), false);
+		$grid->addColumn('positionName', 'a.positionName', t('Plocha'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_advert_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_advert_delete', ['id' => 'a.id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_advert_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_advert_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto reklamu?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [

@@ -225,17 +225,17 @@ class OrderController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
-		$grid->addColumn('preview', 'o.id', 'Náhled', false);
-		$grid->addColumn('number', 'o.number', 'Č. objednávky', true);
-		$grid->addColumn('created_at', 'o.createdAt', 'Vytvořena', true);
-		$grid->addColumn('customer_name', 'customerName', 'Zákazník', true);
-		$grid->addColumn('domain_id', 'o.domainId', 'Doména', true);
-		$grid->addColumn('status_name', 'statusName', 'Stav', true);
-		$grid->addColumn('total_price', 'o.totalPriceWithVat', 'Celková cena', false)->setClassAttribute('text-right text-nowrap');
+		$grid->addColumn('preview', 'o.id', t('Náhled'), false);
+		$grid->addColumn('number', 'o.number', t('Č. objednávky'), true);
+		$grid->addColumn('created_at', 'o.createdAt', t('Vytvořena'), true);
+		$grid->addColumn('customer_name', 'customerName', t('Zákazník'), true);
+		$grid->addColumn('domain_id', 'o.domainId', t('Doména'), true);
+		$grid->addColumn('status_name', 'statusName', t('Stav'), true);
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)->setClassAttribute('text-right text-nowrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_order_edit', ['id' => 'id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_order_delete', ['id' => 'id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_order_edit', ['id' => 'id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_order_delete', ['id' => 'id'])
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');

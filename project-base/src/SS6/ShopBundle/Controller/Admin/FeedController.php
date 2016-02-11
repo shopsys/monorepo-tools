@@ -101,11 +101,11 @@ class FeedController extends AdminBaseController {
 
 		$grid = $this->gridFactory->create('feedsList', $dataSource);
 
-		$grid->addColumn('label', 'feedLabel', 'Feed');
-		$grid->addColumn('created', 'created', 'Vygenerováno');
-		$grid->addColumn('url', 'url', 'Url adresa');
+		$grid->addColumn('label', 'feedLabel', t('Feed'));
+		$grid->addColumn('created', 'created', t('Vygenerováno'));
+		$grid->addColumn('url', 'url', t('Url adresa'));
 		if ($this->isGranted(Roles::ROLE_SUPER_ADMIN)) {
-			$grid->addColumn('actions', 'actions', 'Akce')->setClassAttribute('column--superadmin');
+			$grid->addColumn('actions', 'actions', t('Akce'))->setClassAttribute('column--superadmin');
 		}
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');

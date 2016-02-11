@@ -248,11 +248,11 @@ class ArticleController extends AdminBaseController {
 		$grid = $this->gridFactory->create($gridId, $dataSource);
 		$grid->setDefaultOrder('position');
 
-		$grid->addColumn('name', 'a.name', 'Název');
+		$grid->addColumn('name', 'a.name', t('Název'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', 'Upravit', 'admin_article_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', 'Smazat', 'admin_article_deleteconfirm', ['id' => 'a.id'])
+		$grid->addActionColumn('edit', t('Upravit'), 'admin_article_edit', ['id' => 'a.id']);
+		$grid->addActionColumn('delete', t('Smazat'), 'admin_article_deleteconfirm', ['id' => 'a.id'])
 			->setAjaxConfirm();
 
 		$grid->enableMultipleDragAndDrop();
