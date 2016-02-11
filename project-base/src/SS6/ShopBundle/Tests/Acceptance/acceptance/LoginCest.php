@@ -12,7 +12,7 @@ class LoginCest {
 		$me->see('Administrace');
 		$me->fillField('admin_login_form[username]', 'admin');
 		$me->fillField('admin_login_form[password]', 'admin123');
-		$me->click('Přihlásit');
+		$me->clickByText('Přihlásit');
 		$me->see('Nástěnka');
 	}
 
@@ -22,7 +22,7 @@ class LoginCest {
 		$me->see('Přihlášení');
 		$me->fillField('front_login_form[email]', 'no-reply@netdevelo.cz');
 		$me->fillField('front_login_form[password]', 'user123');
-		$me->click('Přihlásit');
+		$me->clickByText('Přihlásit');
 		$me->see('Jaromír');
 	}
 

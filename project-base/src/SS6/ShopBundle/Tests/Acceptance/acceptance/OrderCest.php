@@ -10,17 +10,17 @@ class OrderCest {
 		$me->wantTo('have my payment and transport remebered by order');
 
 		$me->amOnPage('/televize-audio/');
-		$me->click('Vložit do košíku');
+		$me->clickByText('Vložit do košíku');
 		$me->waitForAjax();
-		$me->click('Přejít do košíku');
-		$me->click('Objednat');
+		$me->clickByText('Přejít do košíku');
+		$me->clickByText('Objednat');
 
 		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
-		$me->click('Pokračovat v objednávce');
-		$me->click('Zpět na výběr dopravy a platby');
+		$me->clickByText('Pokračovat v objednávce');
+		$me->clickByText('Zpět na výběr dopravy a platby');
 
 		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
@@ -30,16 +30,16 @@ class OrderCest {
 		$me->wantTo('have my payment and transport remebered by order');
 
 		$me->amOnPage('/televize-audio/');
-		$me->click('Vložit do košíku');
+		$me->clickByText('Vložit do košíku');
 		$me->waitForAjax();
-		$me->click('Přejít do košíku');
-		$me->click('Objednat');
+		$me->clickByText('Přejít do košíku');
+		$me->clickByText('Objednat');
 
 		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
-		$me->click('Pokračovat v objednávce');
+		$me->clickByText('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
 		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
@@ -50,18 +50,18 @@ class OrderCest {
 		$me->wantTo('have my first name remebered by order');
 
 		$me->amOnPage('/televize-audio/');
-		$me->click('Vložit do košíku');
+		$me->clickByText('Vložit do košíku');
 		$me->waitForAjax();
-		$me->click('Přejít do košíku');
-		$me->click('Objednat');
+		$me->clickByText('Přejít do košíku');
+		$me->clickByText('Objednat');
 		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
-		$me->click('Pokračovat v objednávce');
+		$me->clickByText('Pokračovat v objednávce');
 
 		$me->fillField('input[name="order_personal_info_form[firstName]"]', 'Jan');
-		$me->click('Zpět na výběr dopravy a platby');
+		$me->clickByText('Zpět na výběr dopravy a platby');
 		$me->amOnPage('/objednavka/');
-		$me->click('Pokračovat v objednávce');
+		$me->clickByText('Pokračovat v objednávce');
 
 		$me->seeInField('input[name="order_personal_info_form[firstName]"]', 'Jan');
 	}

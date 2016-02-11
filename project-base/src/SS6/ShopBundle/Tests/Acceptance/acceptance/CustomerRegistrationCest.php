@@ -9,14 +9,14 @@ class CustomerRegistrationCest {
 	public function testSuccessfulRegistration(AcceptanceTester $me) {
 		$me->wantTo('successfully register new customer');
 		$me->amOnPage('/');
-		$me->click('Registrace');
+		$me->clickByText('Registrace');
 		$me->fillField('input[name="registration_form[firstName]"]', 'Roman');
 		$me->fillField('input[name="registration_form[lastName]"]', 'Štěpánek');
 		$me->fillField('input[name="registration_form[email]"]', 'no-reply.16@netdevelo.cz');
 		$me->fillField('input[name="registration_form[password][first]"]', 'user123');
 		$me->fillField('input[name="registration_form[password][second]"]', 'user123');
 		$me->wait(5);
-		$me->click('button[name="registration_form[save]"]');
+		$me->clickByName('registration_form[save]');
 		$me->see('Byli jste úspěšně zaregistrováni');
 		$me->see('Roman Štěpánek');
 		$me->see('Odhlásit se');
@@ -31,7 +31,7 @@ class CustomerRegistrationCest {
 		$me->fillField('input[name="registration_form[password][first]"]', 'user123');
 		$me->fillField('input[name="registration_form[password][second]"]', 'user123');
 		$me->wait(5);
-		$me->click('button[name="registration_form[save]"]');
+		$me->clickByName('registration_form[save]');
 		$me->waitForAjax();
 		$me->see('V databázi se již nachází zákazník s tímto e-mailem');
 	}
@@ -45,7 +45,7 @@ class CustomerRegistrationCest {
 		$me->fillField('input[name="registration_form[password][first]"]', 'user123');
 		$me->fillField('input[name="registration_form[password][second]"]', 'wrongPassword');
 		$me->wait(5);
-		$me->click('button[name="registration_form[save]"]');
+		$me->clickByName('registration_form[save]');
 		$me->waitForAjax();
 		$me->see('Hesla se neshodují');
 	}
