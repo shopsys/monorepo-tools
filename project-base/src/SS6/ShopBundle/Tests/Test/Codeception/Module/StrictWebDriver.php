@@ -23,6 +23,30 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	protected function match($page, $selector, $throwMalformed = true) {
+		if (!is_array($selector)) {
+			$message = 'Using match() with fuzzy locator is slow. '
+				. 'You should implement new method with strict locator. See ' . self::class;
+			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		}
+		return parent::match($page, $selector, $throwMalformed);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	protected function findFields($selector) {
+		if (!is_array($selector)) {
+			$message = 'Using findFields() with fuzzy locator is slow. '
+				. 'You should implement new method with strict locator. See ' . self::class;
+			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		}
+		return parent::findFields($selector);
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function click($link, $context = null) {
