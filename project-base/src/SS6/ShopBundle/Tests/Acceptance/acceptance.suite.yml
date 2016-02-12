@@ -35,3 +35,4 @@ modules:
       url: ~
       browser: firefox
       window_size: 1024x786
+      wait: 1
