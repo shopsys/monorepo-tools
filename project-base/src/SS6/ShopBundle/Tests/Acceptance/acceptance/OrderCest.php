@@ -16,9 +16,9 @@ class OrderCest {
 		$me->clickByText('Objednat');
 
 		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
-		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->checkOptionById('transport_and_payment_form_transport_0');
 		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
-		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->checkOptionById('transport_and_payment_form_payment_1');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->clickByText('Zpět na výběr dopravy a platby');
 
@@ -36,9 +36,9 @@ class OrderCest {
 		$me->clickByText('Objednat');
 
 		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
-		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->checkOptionById('transport_and_payment_form_transport_0');
 		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
-		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->checkOptionById('transport_and_payment_form_payment_1');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
@@ -54,8 +54,8 @@ class OrderCest {
 		$me->waitForAjax();
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
-		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
-		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->checkOptionById('transport_and_payment_form_transport_0');
+		$me->checkOptionById('transport_and_payment_form_payment_1');
 		$me->clickByText('Pokračovat v objednávce');
 
 		$me->fillFieldByName('order_personal_info_form[firstName]', 'Jan');

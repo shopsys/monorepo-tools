@@ -128,4 +128,25 @@ class StrictWebDriver extends WebDriver {
 		parent::dontSeeCheckboxIsChecked(['xpath' => $xpath]);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public function checkOption($option) {
+		$strictAlternatives = [
+			'checkOptionById',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param string $optionId
+	 */
+	public function checkOptionById($optionId) {
+		$locator = Crawler::xpathLiteral(trim($optionId));
+		$xpath = ".//input[@type = 'checkbox' or @type = 'radio'][./@id = $locator]";
+
+		parent::checkOption(['xpath' => $xpath]);
+	}
+
 }
