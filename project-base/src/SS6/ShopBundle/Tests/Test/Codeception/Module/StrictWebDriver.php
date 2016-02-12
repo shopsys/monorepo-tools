@@ -149,4 +149,26 @@ class StrictWebDriver extends WebDriver {
 		parent::checkOption(['xpath' => $xpath]);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public function seeInField($field, $value) {
+		$strictAlternatives = [
+			'seeInFieldByName',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param string $fieldName
+	 * @param string $value
+	 */
+	public function seeInFieldByName($fieldName, $value) {
+		$locator = Crawler::xpathLiteral(trim($fieldName));
+		$xpath = ".//*[self::input | self::textarea | self::select][@name = $locator]";
+
+		parent::seeInField(['xpath' => $xpath], $value);
+	}
+
 }
