@@ -10,8 +10,8 @@ class LoginCest {
 		$me->wantTo('login on admin');
 		$me->amOnPage('/admin/');
 		$me->see('Administrace');
-		$me->fillField('admin_login_form[username]', 'admin');
-		$me->fillField('admin_login_form[password]', 'admin123');
+		$me->fillFieldByName('admin_login_form[username]', 'admin');
+		$me->fillFieldByName('admin_login_form[password]', 'admin123');
 		$me->clickByText('Přihlásit');
 		$me->see('Nástěnka');
 	}
@@ -20,8 +20,8 @@ class LoginCest {
 		$me->wantTo('login on FE');
 		$me->amOnPage('/prihlaseni/');
 		$me->see('Přihlášení');
-		$me->fillField('front_login_form[email]', 'no-reply@netdevelo.cz');
-		$me->fillField('front_login_form[password]', 'user123');
+		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
+		$me->fillFieldByName('front_login_form[password]', 'user123');
 		$me->clickByText('Přihlásit');
 		$me->see('Jaromír');
 	}

@@ -58,7 +58,7 @@ class OrderCest {
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->clickByText('Pokračovat v objednávce');
 
-		$me->fillField('input[name="order_personal_info_form[firstName]"]', 'Jan');
+		$me->fillFieldByName('order_personal_info_form[firstName]', 'Jan');
 		$me->clickByText('Zpět na výběr dopravy a platby');
 		$me->amOnPage('/objednavka/');
 		$me->clickByText('Pokračovat v objednávce');

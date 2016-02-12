@@ -10,8 +10,8 @@ class CustomerLoginCest {
 		$me->wantTo('login as a customer from main page');
 		$me->amOnPage('/');
 		$me->clickByText('Přihlásit se');
-		$me->fillField('input[name="front_login_form[email]"]', 'no-reply@netdevelo.cz');
-		$me->fillField('input[name="front_login_form[password]"]', 'user123');
+		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
+		$me->fillFieldByName('front_login_form[password]', 'user123');
 		$me->clickByName('front_login_form[login]');
 		$me->waitForAjax();
 		$me->see('Jaromír Jágr');
@@ -23,8 +23,8 @@ class CustomerLoginCest {
 		$me->wantTo('login as a customer from category page');
 		$me->amOnPage('/pocitace-prislusenstvi/');
 		$me->clickByText('Přihlásit se');
-		$me->fillField('input[name="front_login_form[email]"]', 'no-reply@netdevelo.cz');
-		$me->fillField('input[name="front_login_form[password]"]', 'user123');
+		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
+		$me->fillFieldByName('front_login_form[password]', 'user123');
 		$me->clickByName('front_login_form[login]');
 		$me->waitForAjax();
 		$me->see('Jaromír Jágr');

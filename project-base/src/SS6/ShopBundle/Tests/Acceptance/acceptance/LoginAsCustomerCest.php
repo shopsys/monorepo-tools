@@ -10,8 +10,8 @@ class LoginAsCustomerCest {
 		$me->wantTo('login as a customer from admin');
 		$me->amOnPage('/admin/');
 		$me->see('Administrace');
-		$me->fillField('admin_login_form[username]', 'admin');
-		$me->fillField('admin_login_form[password]', 'admin123');
+		$me->fillFieldByName('admin_login_form[username]', 'admin');
+		$me->fillFieldByName('admin_login_form[password]', 'admin123');
 		$me->clickByText('Přihlásit');
 		$me->amOnPage('/admin/customer/edit/3');
 		$me->clickByText('Přihlásit za uživatele');

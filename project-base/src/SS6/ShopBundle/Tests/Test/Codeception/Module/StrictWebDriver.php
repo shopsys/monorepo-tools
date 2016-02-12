@@ -64,4 +64,26 @@ class StrictWebDriver extends WebDriver {
 		parent::click(['xpath' => $xpath]);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public function fillField($field, $value) {
+		$strictAlternatives = [
+			'fillFieldByName',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param string $fieldName
+	 * @param string $value
+	 */
+	public function fillFieldByName($fieldName, $value) {
+		$locator = Crawler::xpathLiteral(trim($fieldName));
+		$xpath = ".//*[self::input | self::textarea | self::select][@name = $locator]";
+
+		parent::fillField(['xpath' => $xpath], $value);
+	}
+
 }
