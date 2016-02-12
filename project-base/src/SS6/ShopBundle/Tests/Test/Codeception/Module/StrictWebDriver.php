@@ -86,4 +86,46 @@ class StrictWebDriver extends WebDriver {
 		parent::fillField(['xpath' => $xpath], $value);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public function seeCheckboxIsChecked($checkbox) {
+		$strictAlternatives = [
+			'seeCheckboxIsCheckedById',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param string $checkboxId
+	 */
+	public function seeCheckboxIsCheckedById($checkboxId) {
+		$locator = Crawler::xpathLiteral(trim($checkboxId));
+		$xpath = ".//input[@type = 'checkbox'][./@id = $locator]";
+
+		parent::seeCheckboxIsChecked(['xpath' => $xpath]);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public function dontSeeCheckboxIsChecked($checkbox) {
+		$strictAlternatives = [
+			'dontSeeCheckboxIsCheckedById',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param string $checkboxId
+	 */
+	public function dontSeeCheckboxIsCheckedById($checkboxId) {
+		$locator = Crawler::xpathLiteral(trim($checkboxId));
+		$xpath = ".//input[@type = 'checkbox'][./@id = $locator]";
+
+		parent::dontSeeCheckboxIsChecked(['xpath' => $xpath]);
+	}
+
 }

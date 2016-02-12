@@ -15,15 +15,15 @@ class OrderCest {
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
 
-		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
 		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
-		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->clickByText('Zpět na výběr dopravy a platby');
 
-		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
-		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->seeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
+		$me->seeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
 	}
 
 	public function testFormRemembersPaymentAndTransportWhenGoingDirectlyToUrl(AcceptanceTester $me) {
@@ -35,15 +35,15 @@ class OrderCest {
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
 
-		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
+		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
 		$me->checkOption('input[name="transport_and_payment_form[transport]"][value="1"]');
-		$me->dontSeeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->dontSeeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
 		$me->checkOption('input[name="transport_and_payment_form[payment]"][value="2"]');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
-		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[transport]"][value="1"]');
-		$me->seeCheckboxIsChecked('input[name="transport_and_payment_form[payment]"][value="2"]');
+		$me->seeCheckboxIsCheckedById('transport_and_payment_form_transport_0');
+		$me->seeCheckboxIsCheckedById('transport_and_payment_form_payment_1');
 	}
 
 	public function testFormRemembersFirstName(AcceptanceTester $me) {
