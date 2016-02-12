@@ -14,7 +14,7 @@ modules:
     # therefore DatabaseHelper must be included before Db.
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\DatabaseHelper
     - SS6\ShopBundle\Tests\Test\Codeception\Module\Db
-    - WebDriver
+    - SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver
     - SS6\ShopBundle\Tests\Test\Codeception\Helper\WebDriverHelper
     # DomainHelper sets WebDriver's URL in _before().
     # The setting is reset before _before() of WebDriver is called,
@@ -29,9 +29,10 @@ modules:
       dump: ../app/cache/test-db-dump.sql
       populate: false
       cleanup: true
-    WebDriver:
+    SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver:
       host: localhost
       port: 4444
       url: ~
       browser: firefox
       window_size: 1024x786
+      wait: 1
