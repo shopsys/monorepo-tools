@@ -12,21 +12,28 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="wrap-tab">
+	<div class="wrap-tab js-tabs">
 		<div class="wrap-tab__heading">
-			<a href="#" class="wrap-tab__heading__item active">{{ 'Rychlé vyhledávání'|trans }}</a>
-			<a href="#" class="wrap-tab__heading__item" id="js-advanced-search-enable-button">{{ 'Rozšířené hledání'|trans }}</a>
+			<a href="#"
+				class="wrap-tab__heading__item active js-tabs-tab-link{{ not isAdvancedSearchFormSubmitted ? ' active' }}"
+				data-tab-id="quick"
+			>
+				{{ 'Rychlé vyhledávání'|trans }}
+			</a>
+			<a href="#"
+				class="wrap-tab__heading__item js-tabs-tab-link{{ isAdvancedSearchFormSubmitted ? ' active' }}"
+				data-tab-id="advanced"
+			>
+				{{ 'Rozšířené hledání'|trans }}
+			</a>
 		</div>
 		<div class="wrap-tab__content">
-			<div class="wrap-tab__content__in {{ isAdvancedSearchFormSubmitted ? ' display-none' : '' }}">
+			<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="quick">
 				{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 			</div>
-			<div class="wrap-tab__content__in">
+			<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="advanced">
 				{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-					with {
-						advancedSearchForm: advancedSearchForm,
-						isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-					}
+					with {advancedSearchForm: advancedSearchForm}
 				%}
 			</div>
 		</div>

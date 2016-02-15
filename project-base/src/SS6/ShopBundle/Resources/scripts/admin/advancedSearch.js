@@ -4,17 +4,13 @@
 	SS6.advancedSearch = SS6.advancedSearch || {};
 
 	SS6.advancedSearch.init = function () {
-		var $quickSearch = $('#js-quick-search');
-		var $advancedSearch = $('#js-advanced-search');
 		var $addRuleButton = $('#js-advanced-search-add-rule-button');
-		var $enableButton = $('#js-advanced-search-enable-button');
 		var $rulesContainer = $('#js-advanced-search-rules-container');
 		var $ruleTemplate = $('#js-advanced-search-rule-template');
 		$ruleTemplate.detach().show().removeAttr('id').find('*[id]').removeAttr('id');
 
 		var newRuleIndexCounter = 0;
 
-		SS6.advancedSearch.registerEnableButton($enableButton, $quickSearch, $advancedSearch);
 		SS6.advancedSearch.actualizeAllValuesByOperator($rulesContainer);
 
 		$addRuleButton.click(function () {
@@ -38,18 +34,6 @@
 			var $rule = $(this).closest('.js-advanced-search-rule');
 			SS6.advancedSearch.actualizeValueByOperator($rulesContainer, $rule, $(this).val());
 		});
-	};
-
-	SS6.advancedSearch.registerEnableButton = function ($enableButton, $quickSearch, $advancedSearch) {
-		if ($advancedSearch.hasClass('js-advanced-search-enabled')) {
-			$quickSearch.remove();
-		} else if ($enableButton.size() > 0) {
-			$advancedSearch.detach();
-			$enableButton.click(function () {
-				$quickSearch.replaceWith($advancedSearch.show());
-				return false;
-			});
-		}
 	};
 
 	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName, newIndex) {
