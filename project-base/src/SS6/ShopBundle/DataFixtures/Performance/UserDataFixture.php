@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
-use Faker\Factory as FakerFactory;
+use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
@@ -51,14 +51,15 @@ class UserDataFixture {
 		Domain $domain,
 		SqlLoggerFacade $sqlLoggerFacade,
 		CustomerEditFacade $customerEditFacade,
-		UserDataFactory $userDataFactory
+		UserDataFactory $userDataFactory,
+		Faker $faker
 	) {
 		$this->em = $em;
 		$this->domain = $domain;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->customerEditFacade = $customerEditFacade;
 		$this->userDataFactory = $userDataFactory;
-		$this->faker = FakerFactory::create();
+		$this->faker = $faker;
 	}
 
 	public function load() {
