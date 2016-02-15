@@ -18,19 +18,17 @@
 			<a href="#" class="wrap-tab__heading__item" id="js-advanced-search-enable-button">{{ 'Rozšířené hledání'|trans }}</a>
 		</div>
 		<div class="wrap-tab__content">
-			{{ form_start(quickSearchForm) }}
-				<div class="wrap-tab__content__in {{ isAdvancedSearchFormSubmitted ? ' display-none' : '' }}">
-					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
-				</div>
-				<div class="wrap-tab__content__in">
-					{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-						with {
-							advancedSearchForm: advancedSearchForm,
-							isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-						}
-					%}
-				</div>
-			{{ form_end(quickSearchForm) }}
+			<div class="wrap-tab__content__in {{ isAdvancedSearchFormSubmitted ? ' display-none' : '' }}">
+				{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+			</div>
+			<div class="wrap-tab__content__in">
+				{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+					with {
+						advancedSearchForm: advancedSearchForm,
+						isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+					}
+				%}
+			</div>
 		</div>
 	</div>
 

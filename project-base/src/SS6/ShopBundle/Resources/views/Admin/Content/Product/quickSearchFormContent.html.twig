@@ -1,8 +1,10 @@
-<div id="js-quick-search" class="box-fast-search">
-	{{ form_widget(quickSearchForm.text, { attr: { class: 'box-fast-search__input'}} ) }}
-	{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, attr: { class: 'box-fast-search__btn'}, full_name: '' }) }}
-	<i class="svg svg-info c-help js-tooltip box-fast-search__icon in-icon in-icon--info"
-	 data-toggle="tooltip" data-placement="left"
-	 title="{{ 'Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Je možné používat operátory * a ?.'|trans }}"
-	></i>
-</div>
+{{ form_start(quickSearchForm) }}
+	<div id="js-quick-search" class="box-fast-search">
+		{{ form_widget(quickSearchForm.text, { attr: { class: 'box-fast-search__input'}} ) }}
+		{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, attr: { class: 'box-fast-search__btn'}, full_name: '' }) }}
+		<i class="svg svg-info c-help js-tooltip box-fast-search__icon in-icon in-icon--info"
+		 data-toggle="tooltip" data-placement="left"
+		 title="{{ 'Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Je možné používat operátory * a ?.'|trans }}"
+		></i>
+	</div>
+{{ form_end(quickSearchForm) }}

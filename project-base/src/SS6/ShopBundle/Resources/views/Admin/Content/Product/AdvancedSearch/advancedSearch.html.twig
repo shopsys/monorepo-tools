@@ -1,19 +1,21 @@
-<div class="box-advanced-search {{ isAdvancedSearchFormSubmitted ? ' js-advanced-search-enabled' : ' display-none'}}" id="js-advanced-search">
-	<div id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
-		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
-	</div>
-	<div class="box-advanced-search__line">
-		<input type="submit" value="{{ 'Vyhledat'|trans }}" class="btn">
-	</div>
-	<div class="box-advanced-search__line box-advanced-search__line--dark">
-		<button type="button" class="in-iconic-link in-iconic-link--add" id="js-advanced-search-add-rule-button">
-			<i class="svg svg-circle-plus"></i>
-			{{ 'Přidat'|trans }}
-		</button>
+{{ form_start(advancedSearchForm) }}
+	<div class="box-advanced-search {{ isAdvancedSearchFormSubmitted ? ' js-advanced-search-enabled' : ' display-none'}}" id="js-advanced-search">
+		<div id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
+			{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
+		</div>
+		<div class="box-advanced-search__line">
+			<input type="submit" value="{{ 'Vyhledat'|trans }}" class="btn">
+		</div>
+		<div class="box-advanced-search__line box-advanced-search__line--dark">
+			<button type="button" class="in-iconic-link in-iconic-link--add" id="js-advanced-search-add-rule-button">
+				<i class="svg svg-circle-plus"></i>
+				{{ 'Přidat'|trans }}
+			</button>
 
-		<a href="{{ url('admin_product_list') }}" class="in-iconic-link">
-			<i class="svg svg-circle-cross"></i>
-			{{ 'Zrušit filtr'|trans }}
-		</a>
+			<a href="{{ url('admin_product_list') }}" class="in-iconic-link">
+				<i class="svg svg-circle-cross"></i>
+				{{ 'Zrušit filtr'|trans }}
+			</a>
+		</div>
 	</div>
-</div>
+{{ form_end(advancedSearchForm) }}

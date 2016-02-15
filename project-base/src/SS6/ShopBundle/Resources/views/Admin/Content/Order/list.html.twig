@@ -4,8 +4,6 @@
 {% block h1 %}{{ 'Přehled objednávek'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ form_start(quickSearchForm) }}
-
 	<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
 		{% include '@SS6Shop/Admin/Content/Order/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 	</div>
@@ -16,5 +14,4 @@
 	}
 	%}
 	{{ gridView.render() }}
-	{{ form_end(quickSearchForm) }}
 {% endblock %}

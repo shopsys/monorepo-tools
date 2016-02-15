@@ -1,11 +1,13 @@
-<div class="wrap-border" id="js-quick-search">
-	{{ form_widget(quickSearchForm.text) }}
-	{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, full_name: ''}) }}
-	<i class="svg svg-info c-help js-tooltip"
-		data-toggle="tooltip" data-placement="right"
-		title="{{ 'Vyhledávání hledá v číslu objednávky, emailu registrovaného zákazníka, emailu zákazníka v objednávce, příjmení zákazníka a názvu firmy. Je možné používat operátory * a ?.'|trans }}"
-	></i>
-	<div class="mt20">
-		<a href="#" id="js-advanced-search-enable-button">{{ 'Rozšířené hledání'|trans }}</a>
+{{ form_start(quickSearchForm) }}
+	<div class="wrap-border" id="js-quick-search">
+		{{ form_widget(quickSearchForm.text) }}
+		{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, full_name: ''}) }}
+		<i class="svg svg-info c-help js-tooltip"
+			data-toggle="tooltip" data-placement="right"
+			title="{{ 'Vyhledávání hledá v číslu objednávky, emailu registrovaného zákazníka, emailu zákazníka v objednávce, příjmení zákazníka a názvu firmy. Je možné používat operátory * a ?.'|trans }}"
+		></i>
+		<div class="mt20">
+			<a href="#" id="js-advanced-search-enable-button">{{ 'Rozšířené hledání'|trans }}</a>
+		</div>
 	</div>
-</div>
+{{ form_end(quickSearchForm) }}
