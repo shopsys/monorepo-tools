@@ -41,10 +41,10 @@ class ArticleDataFactory {
 		$articleData = new ArticleData();
 		$articleData->setFromEntity($article);
 
-		foreach ($this->domain->getAll() as $domainCongig) {
-			$articleData->urls->mainOnDomains[$domainCongig->getId()] =
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$articleData->urls->mainOnDomains[$domainConfig->getId()] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl(
-					$domainCongig->getId(),
+					$domainConfig->getId(),
 					'front_article_detail',
 					$article->getId()
 				);
