@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Article;
 
 use SS6\ShopBundle\Component\Validator;
-use SS6\ShopBundle\Form\UrlListType;
+use SS6\ShopBundle\Form\UrlListData;
 use SS6\ShopBundle\Model\Article\Article;
 
 /**
@@ -37,7 +37,7 @@ class ArticleData {
 	public $domainId;
 
 	/**
-	 * @var array
+	 * @var \SS6\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
 
@@ -47,11 +47,7 @@ class ArticleData {
 	public $placement;
 
 	public function __construct() {
-		$this->urls = [
-			UrlListType::TO_DELETE => [],
-			UrlListType::MAIN_ON_DOMAINS => [],
-			UrlListType::NEW_URLS => [],
-		];
+		$this->urls = new UrlListData();
 	}
 
 	/**
