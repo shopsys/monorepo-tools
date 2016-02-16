@@ -61,7 +61,9 @@ class FlagFilterChoiceRepository {
 
 		$clonnedProductsQueryBuilder
 			->select('1')
-			->join('p.flags', 'pf', Join::WITH, 'pf.id = f.id');
+			->join('p.flags', 'pf')
+			->andWhere('pf.id = f.id')
+			->resetDQLPart('orderBy');
 
 		$flagsQueryBuilder = $productsQueryBuilder->getEntityManager()->createQueryBuilder();
 		$flagsQueryBuilder

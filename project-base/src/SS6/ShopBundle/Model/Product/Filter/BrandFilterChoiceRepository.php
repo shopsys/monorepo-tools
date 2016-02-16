@@ -61,7 +61,9 @@ class BrandFilterChoiceRepository {
 
 		$clonnedProductsQueryBuilder
 			->select('1')
-			->join('p.brand', 'pb', Join::WITH, 'pb.id = b.id');
+			->join('p.brand', 'pb')
+			->andWhere('pb.id = b.id')
+			->resetDQLPart('orderBy');
 
 		$brandsQueryBuilder = $productsQueryBuilder->getEntityManager()->createQueryBuilder();
 		$brandsQueryBuilder
