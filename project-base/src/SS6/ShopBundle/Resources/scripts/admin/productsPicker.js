@@ -51,6 +51,11 @@
 			SS6.formChangeInfo.showInfo();
 		};
 
+		this.removeItemByProductId = function (productId) {
+			var $item = findProductItemByProductId(productId);
+			removeItem($item);
+		};
+
 		this.hasProduct = function (productId) {
 			return findProductItemIndex(productId) !== null;
 		};
@@ -120,6 +125,10 @@
 
 		var actualizeHeader = function () {
 			$header.toggle(productItems.length !== 0);
+		};
+
+		var findProductItemByProductId = function (productId) {
+			return productItems[findProductItemIndex(productId)];
 		};
 	};
 

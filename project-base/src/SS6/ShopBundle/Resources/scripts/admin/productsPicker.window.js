@@ -35,12 +35,36 @@
 		return false;
 	};
 
+	SS6.productsPicker.window.onClickOnAddedButton = function ($addButton, originalLabelText, originalIconText) {
+		var productsPicker = window.parent.SS6.productsPicker.instances[$addButton.data('product-picker-instance-id')];
+		SS6.productsPicker.window.unmarkAddButtonAsAdded($addButton, originalLabelText, originalIconText);
+		$addButton.unbind('click.removeProduct');
+		productsPicker.removeItemByProductId($addButton.data('product-picker-product-id'));
+
+		return false;
+	};
 
 	SS6.productsPicker.window.markAddButtonAsAdded = function ($addButton) {
+		var originalLabelText = $addButton.find('.js-products-picker-label').text();
+		var originalIconText = $addButton.find('.js-products-picker-icon').text();
 		$addButton
 			.addClass('cursor-auto btn--success').removeClass('btn--plus btn--light')
 			.find('.js-products-picker-label').text(SS6.translator.trans('Přidáno')).end()
 			.find('.js-products-picker-icon').addClass('svg svg-checked').empty().end()
+			.bind('click.removeProduct', function () {
+				SS6.productsPicker.window.onClickOnAddedButton($addButton, originalLabelText, originalIconText);
+			})
+			.click(function () {
+				return false;
+			});
+	};
+
+	SS6.productsPicker.window.unmarkAddButtonAsAdded = function ($addButton, originalLabelText, originalIconText) {
+		$addButton
+			.addClass('btn--plus btn--light').removeClass('cursor-auto btn--success')
+			.find('.js-products-picker-label').text(originalLabelText).end()
+			.find('.js-products-picker-icon').removeClass('svg svg-checked').text(originalIconText).end()
+			.bind('click.addProduct', SS6.productsPicker.window.onClickAddButton)
 			.click(function () {
 				return false;
 			});
