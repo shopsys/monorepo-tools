@@ -10,6 +10,7 @@ parameters:
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
   validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
+  faker.seed: 1234
 
 services:
 
@@ -31,6 +32,8 @@ services:
     class: Faker\Generator
     factory_class: Faker\Factory
     factory_method: create
+    calls:
+      - [seed, [%faker.seed%]]
 
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:

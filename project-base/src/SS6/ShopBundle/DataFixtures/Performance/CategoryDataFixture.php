@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
-use Faker\Factory as FakerFactory;
+use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Model\Category\Category;
@@ -53,11 +53,12 @@ class CategoryDataFixture {
 		CategoryFacade $categoryFacade,
 		SqlLoggerFacade $sqlLoggerFacade,
 		PersistentReferenceService $persistentReferenceService,
-		CategoryVisibilityRepository $categoryVisibilityRepository
+		CategoryVisibilityRepository $categoryVisibilityRepository,
+		Faker $faker
 	) {
 		$this->categoryFacade = $categoryFacade;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
-		$this->faker = FakerFactory::create();
+		$this->faker = $faker;
 		$this->categoriesCountsByLevel = [2, 4, 6];
 		$this->categoriesCreated = 0;
 		$this->persistentReferenceService = $persistentReferenceService;
