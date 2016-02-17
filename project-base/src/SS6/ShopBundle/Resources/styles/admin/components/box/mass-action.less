@@ -1,0 +1,84 @@
+.box-mass-action {
+	&__click {
+		display: inline-block;
+		padding: 0 12px;
+		height: 32px;
+		line-height: 32px;
+		margin: 0 15px;
+		position: relative;
+		top: 1px;
+		z-index: 2;
+
+		background: @color-f;
+		border: 1px solid @color-border-dark;
+		cursor: pointer;
+
+		.border-radius(5px);
+
+		.active & {
+			border-bottom-color: @color-f;
+
+			.border-radius(5px 5px 0 0);
+		}
+
+		&__icon {
+			margin-left: 5px;
+			position: relative;
+			top: -1px;
+
+			font-size: 10px;
+			color: @color-primary;
+
+			.active & {
+				.rotate(180deg);
+			}
+		}
+	}
+
+	&__content {
+		display: none;
+		position: relative;
+		z-index: 1;
+		padding: 15px;
+
+		border: 1px solid @color-border-dark;
+		background: @color-f;
+
+		.active & {
+			display: block;
+		}
+	}
+
+	&__title {
+		display: inline-block;
+		line-height: 32px;
+		margin-right: 5px;
+
+		font-weight: bold;
+	}
+
+	&__filter {
+		margin-top: 15px;
+
+		&__line {
+			margin: 5px -5px;
+			.flex();
+
+			&--submit {
+				text-align: right;
+			}
+
+			&__item {
+				.flex-basis();
+				.flex-grow(1);
+				padding: 0 5px;
+
+				select, input {
+					width: 100%;
+				}
+			}
+		}
+	}
+
+
+}
