@@ -1,6 +1,6 @@
 .box-advanced-search {
 	&__item {
-		margin: 5px 0;
+		margin: 5px 0 5px -1%;
 
 		font-size: 0;
 
@@ -9,8 +9,12 @@
 			vertical-align: middle;
 
 			font-size: @font-size;
-			width: 30%;
+			width: 31%;
 			margin-left: 1%;
+
+			.box-advanced-search__item--more-info & {
+				width: 30%;
+			}
 
 		}
 
@@ -18,19 +22,27 @@
 			display: inline-block;
 			vertical-align: middle;
 			margin-left: 1%;
-			width: 30%;
+			width: 31%;
 
 			font-size: @font-size;
+
+			.box-advanced-search__item--more-info & {
+				width: 30%;
+			}
 
 		}
 
 		&__third {
 			display: inline-block;
 			vertical-align: middle;
-			width: 30%;
+			width: 32%;
 			margin-left: 1%;
 
 			font-size: @font-size;
+
+			.box-advanced-search__item--more-info & {
+				width: 31%;
+			}
 
 		}
 
@@ -42,16 +54,15 @@
 			font-size: @font-size;
 			font-weight: bold;
 			text-align: right;
-
 		}
 
 		&__icon {
 			display: inline-block;
 			vertical-align: middle;
-			width: 4%;
+			width: 3%;
 
 			font-size: @font-size;
-			text-align: center;
+			text-align: right;
 
 		}
 
@@ -61,13 +72,13 @@
 	}
 
 	&__line {
-		padding: 0 20px 5px;
+		padding: 0 10px 5px;
 		margin: 0 -10px;
 
 		text-align: right;
 
 		&--dark {
-			padding-top: 5px;
+			padding: 5px 20px;
 
 			border-top: 1px solid @color-border;
 			border-bottom: 1px solid @color-border;

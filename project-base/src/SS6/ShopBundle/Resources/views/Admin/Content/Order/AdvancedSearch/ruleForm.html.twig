@@ -3,7 +3,7 @@
 	{% set isTemplate = key is same as('__template__') %}
 
 	<div
-		class="box-advanced-search__item js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
+		class="box-advanced-search__item {% if ruleForm.subject.vars.value == 'orderTotalPriceWithVat' %}box-advanced-search__item--more-info{% endif %} js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
 		{{- isTemplate ? ' id="js-advanced-search-rule-template"' : '' -}}
 	>
 
@@ -17,21 +17,21 @@
 
 		<div class="box-advanced-search__item__third">
 			<span class="js-advanced-search-rule-value">
-				{{ form_widget(ruleForm.value) }}
+				{{ form_widget(ruleForm.value, { isSimple: true }) }}
 			</span>
-		</div>
-
-		<div class="box-advanced-search__item__hint">
-			{% if ruleForm.subject.vars.value == 'orderTotalPriceWithVat' %}
-				<i class="js-tooltip svg svg-info c-help"
-					data-toggle="tooltip" data-placement="right"
-					title="{{ 'Vyhledává se ve všech měnách'|trans }}"
-				></i>
-			{% endif %}
 		</div>
 
 		<div class="box-advanced-search__item__icon">
 			<i class="svg svg-circle-cross c-pointer js-advanced-search-remove-rule-button in-icon in-icon--remove"></i>
+		</div>
+
+		<div class="box-advanced-search__item__hint">
+			{% if ruleForm.subject.vars.value == 'orderTotalPriceWithVat' %}
+				<i class="js-tooltip svg svg-info c-help in-icon in-icon--info"
+					data-toggle="tooltip" data-placement="right"
+					title="{{ 'Vyhledává se ve všech měnách'|trans }}"
+				></i>
+			{% endif %}
 		</div>
 	</div>
 {% endfor %}
