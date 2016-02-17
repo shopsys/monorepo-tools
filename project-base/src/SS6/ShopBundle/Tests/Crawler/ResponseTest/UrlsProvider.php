@@ -265,7 +265,9 @@ class UrlsProvider {
 			}
 		}
 		$routesData[] = $this->getNonEmptySearchRouteData();
-		$routesData[] = $this->getProductListFilteringRouteData();
+		$routesData[] = $this->getProductListFilteringInCategoryWith500ProductsRouteData();
+		$routesData[] = $this->getProductListFilteringInCategoryWith7600ProductsRouteData();
+		$routesData[] = $this->getProductListFilteringInCategoryWith13600ProductsRouteData();
 		$routesData[] = $this->getSearchFilteringRouteData();
 
 		return $routesData;
@@ -377,7 +379,29 @@ class UrlsProvider {
 	/**
 	 * @return array
 	 */
-	private function getProductListFilteringRouteData() {
+	private function getProductListFilteringInCategoryWith500ProductsRouteData() {
+		$productListFilterData = [
+			'inStock' => '1',
+			'parameters' => [
+				41 => [58],
+			],
+		];
+		$productListRouteParameters = [
+			'id' => 8,
+			'productFilter_form' => $productListFilterData,
+		];
+
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_list',
+			self::ROUTE_PARAMETERS_KEY => $productListRouteParameters,
+			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getProductListFilteringInCategoryWith7600ProductsRouteData() {
 		$productListFilterData = [
 			'minimalPrice' => '100',
 			'inStock' => '1',
@@ -387,6 +411,26 @@ class UrlsProvider {
 		];
 		$productListRouteParameters = [
 			'id' => 3,
+			'productFilter_form' => $productListFilterData,
+		];
+
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_list',
+			self::ROUTE_PARAMETERS_KEY => $productListRouteParameters,
+			self::EXPECTED_STATUS_CODE_KEY => 200,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getProductListFilteringInCategoryWith13600ProductsRouteData() {
+		$productListFilterData = [
+			'minimalPrice' => '100',
+			'inStock' => '1',
+		];
+		$productListRouteParameters = [
+			'id' => 11,
 			'productFilter_form' => $productListFilterData,
 		];
 
