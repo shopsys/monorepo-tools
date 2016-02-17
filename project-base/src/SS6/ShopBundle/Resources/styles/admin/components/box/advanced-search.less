@@ -1,69 +1,27 @@
 .box-advanced-search {
 	&__item {
-		margin: 5px 0 5px -1%;
+		margin: 5px -5px;
+		.flex();
+		.flex-align-items(center);
 
-		font-size: 0;
+		&__content {
+			.flex-grow(1);
+			.flex-basis();
+			padding: 0 5px;
 
-		&__first {
-			display: inline-block;
-			vertical-align: middle;
+			&--small {
+				width: 25px;
+				padding: 0 5px 0 0;
+				.flex-basis(unset);
+				.flex-grow(unset);
 
-			font-size: @font-size;
-			width: 31%;
-			margin-left: 1%;
+				text-align: right;
 
-			.box-advanced-search__item--more-info & {
-				width: 30%;
+				i {
+					position: relative;
+					top: -2px;
+				}
 			}
-
-		}
-
-		&__second {
-			display: inline-block;
-			vertical-align: middle;
-			margin-left: 1%;
-			width: 31%;
-
-			font-size: @font-size;
-
-			.box-advanced-search__item--more-info & {
-				width: 30%;
-			}
-
-		}
-
-		&__third {
-			display: inline-block;
-			vertical-align: middle;
-			width: 32%;
-			margin-left: 1%;
-
-			font-size: @font-size;
-
-			.box-advanced-search__item--more-info & {
-				width: 31%;
-			}
-
-		}
-
-		&__hint {
-			display: inline-block;
-			vertical-align: middle;
-			width: 3%;
-
-			font-size: @font-size;
-			font-weight: bold;
-			text-align: right;
-		}
-
-		&__icon {
-			display: inline-block;
-			vertical-align: middle;
-			width: 3%;
-
-			font-size: @font-size;
-			text-align: right;
-
 		}
 
 		select, input {
