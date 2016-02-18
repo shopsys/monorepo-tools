@@ -188,14 +188,10 @@ class AllPagesTest extends FunctionalTestCase {
 		$username,
 		$password
 	) {
-		$kernelOptions = [
-			'debug' => true,
-		];
-
 		if ($asLogged) {
-			$client = $this->getClient(true, $username, $password, $kernelOptions);
+			$client = $this->getClient(true, $username, $password);
 		} else {
-			$client = $this->getClient(true, null, null, $kernelOptions);
+			$client = $this->getClient(true);
 		}
 		$em = $client->getContainer()->get(EntityManager::class);
 		/* @var $em \Doctrine\ORM\EntityManager */
@@ -203,25 +199,21 @@ class AllPagesTest extends FunctionalTestCase {
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 		$urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
-		$client->enableProfiler();
 		$em->beginTransaction();
+
+		$startTime = microtime(true);
 		$client->request('GET', $urlWithCsrfToken);
+		$endTime = microtime(true);
+
 		$em->rollback();
-
-		$profile = $client->getProfile();
-
-		$timeCollector = $profile->getCollector('time');
-		/* @var $timeCollector \Symfony\Component\HttpKernel\DataCollector\TimeDataCollector */
-		$dbCollector = $profile->getCollector('db');
-		/* @var	$dbCollector \Symfony\Bridge\Doctrine\DataCollector\DoctrineDataCollector */
 
 		$statusCode = $client->getResponse()->getStatusCode();
 
 		return new PerformanceTestSample(
 			$routeName,
 			$url,
-			$timeCollector->getDuration(),
-			$dbCollector->getQueryCount(),
+			($endTime - $startTime) * 1000,
+			0, // Currently, we are not able to measure query count
 			$statusCode,
 			$statusCode === $expectedStatusCode
 		);
