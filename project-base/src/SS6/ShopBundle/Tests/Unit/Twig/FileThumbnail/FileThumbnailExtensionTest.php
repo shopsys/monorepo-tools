@@ -61,7 +61,7 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
 		$fileThumbnailExtension = new FileThumbnailExtension($fileUploadMock, $imageThumbnailFactoryMock);
 		$fileThumbnailInfo = $fileThumbnailExtension->getFileThumbnailInfoByTemporaryFilename($temporaryFilename);
 
-		$this->assertSame('file-word-o', $fileThumbnailInfo->getIconType());
+		$this->assertSame('word', $fileThumbnailInfo->getIconType());
 		$this->assertNull($fileThumbnailInfo->getImageUri());
 	}
 }
