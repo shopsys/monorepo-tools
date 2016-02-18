@@ -47,9 +47,15 @@
 			return;
 		}
 
-		var isJsFileUpload = $(element.domNode).closest('.js-file-upload').size() > 0;
+		var $domNode = $(element.domNode);
 
-		$(element.domNode)
+		if ($domNode.closest('.js-no-validate').size() > 0) {
+			return;
+		}
+
+		var isJsFileUpload = $domNode.closest('.js-file-upload').size() > 0;
+
+		$domNode
 			.bind('blur change', function (event) {
 				if (this.jsFormValidator && isJsFileUpload === true) {
 					event.preventDefault();
