@@ -73,7 +73,7 @@ class PerformanceTestSample {
 	}
 
 	/**
-	 * @return int
+	 * @return float
 	 */
 	public function getDuration() {
 		return $this->duration;
