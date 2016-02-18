@@ -37,7 +37,7 @@ class FileUploadExtension extends Twig_Extension {
 		$filename = $this->fileUpload->getOriginalFilenameByTemporary($temporaryFilename);
 		$filepath = ($this->fileUpload->getTemporaryDirectory() . DIRECTORY_SEPARATOR . $temporaryFilename);
 		if (file_exists($filepath) && is_file($filepath) && is_writable($filepath)) {
-			$fileSize = round((int)filesize($filepath) / 1024 / 1024, 2);
+			$fileSize = round((int)filesize($filepath) / 1000 / 1000, 2); //https://en.wikipedia.org/wiki/Binary_prefix
 			return $filename . ' (' . $fileSize . ' MB)';
 		}
 		return '';
