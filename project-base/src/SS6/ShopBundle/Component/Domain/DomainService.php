@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Component\Domain;
 
 use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DomainService {
@@ -20,10 +21,17 @@ class DomainService {
 	 */
 	private $filesystem;
 
+	/**
+	 * @var \Symfony\Bridge\Monolog\Logger
+	 */
+	private $logger;
+
 	public function __construct(
+		Logger $logger,
 		ImageProcessingService $imageProcessingService,
 		Filesystem $filesystem
 	) {
+		$this->logger = $logger;
 		$this->imageProcessingService = $imageProcessingService;
 		$this->filesystem = $filesystem;
 	}
@@ -56,7 +64,12 @@ class DomainService {
 			$this->filesystem->remove($filepath);
 		} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
 			$message = 'Move file from temporary directory to domain directory failed';
-			throw new \SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException($message, $ex);
+			$moveToFolderFailedException = new \SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException(
+				$message,
+				$ex
+			);
+			$this->logger->addError($message, ['exception' => $moveToFolderFailedException]);
+			throw $moveToFolderFailedException;
 		}
 	}
 }

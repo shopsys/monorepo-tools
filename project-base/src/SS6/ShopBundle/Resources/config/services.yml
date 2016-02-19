@@ -195,6 +195,11 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
+  ss6.shop.component.domain.domain_service:
+    class: SS6\ShopBundle\Component\Domain\DomainService
+    arguments:
+      - @monolog.logger
+
   ss6.shop.component.error.exception_listener:
     class: SS6\ShopBundle\Component\Error\ExceptionListener
     tags:
