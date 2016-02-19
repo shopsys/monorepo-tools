@@ -207,7 +207,6 @@ class ProductVisibilityRepository {
 				'now' => $now,
 				'locale' => $domain->getLocale(),
 				'domainId' => $domain->getId(),
-				'priceCalculationType' => Product::PRICE_CALCULATION_TYPE_MANUAL,
 				'pricingGroupId' => $pricingGroup->getId(),
 				'variantTypeMain' => Product::VARIANT_TYPE_MAIN,
 			]);
