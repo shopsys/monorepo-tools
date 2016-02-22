@@ -89,7 +89,8 @@
 		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"se/selenium-server-standalone": "2.48.2",
 		"shopsys/coding-standards": "1.0.0",
-		"shopsys/phpstorm-inspect": "1.0.4"
+		"shopsys/phpstorm-inspect": "1.0.4",
+		"symfony/web-profiler-bundle": "2.8.2"
 	},
 	"scripts": {
 		"post-install-cmd": [
