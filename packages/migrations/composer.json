@@ -9,7 +9,9 @@
 		}
 	},
 	"require": {
+		"doctrine/dbal": "~2.5",
 		"doctrine/doctrine-migrations-bundle": "~1.1",
+		"doctrine/orm": "~2.5",
 		"php": "5.6.*",
 		"symfony/framework-bundle": "~2.7.3 || ~3"
 	}
