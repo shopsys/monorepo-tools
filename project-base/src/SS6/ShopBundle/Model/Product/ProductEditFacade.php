@@ -169,6 +169,11 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData) {
+		// Persist of ProductCategoryDomain requires known primary key of Product
+		// @see https://github.com/doctrine/doctrine2/issues/4869
+		$product->setCategories($productEditData->productData->categoriesByDomainId);
+		$this->em->flush($product);
+
 		$this->saveParameters($product, $productEditData->parameters);
 		$this->createProductDomains($product, $this->domain->getAll());
 		$this->createProductVisibilities($product);

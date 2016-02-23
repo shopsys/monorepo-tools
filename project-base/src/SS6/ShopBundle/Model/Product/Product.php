@@ -309,12 +309,6 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedVisibility = false;
 		$this->setTranslations($productData);
 		$this->productCategoryDomains = new ArrayCollection();
-		foreach ($productData->categoriesByDomainId as $domainId => $categories) {
-			foreach ($categories as $category) {
-				$productCategoryDomain = new ProductCategoryDomain($this, $category, $domainId);
-				$this->productCategoryDomains->add($productCategoryDomain);
-			}
-		}
 		$this->flags = $productData->flags;
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
@@ -588,7 +582,7 @@ class Product extends AbstractTranslatableEntity {
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param int $domainId
 	 */
-	private function setCategories(array $categoriesByDomainId) {
+	public function setCategories(array $categoriesByDomainId) {
 		foreach ($categoriesByDomainId as $domainId => $categories) {
 			$this->removeOldProductCategoryDomains($categories, $domainId);
 			$this->createNewProductCategoryDomains($categories, $domainId);

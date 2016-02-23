@@ -15,7 +15,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/doctrine2.git"
+			"url": "https://github.com/pk16011990/doctrine2.git"
 		},
 		{
 			"type": "vcs",
@@ -53,7 +53,7 @@
 		"doctrine/doctrine-bundle": "1.6.1",
 		"doctrine/doctrine-fixtures-bundle": "2.3.0",
 		"doctrine/doctrine-migrations-bundle": "1.1.1",
-		"doctrine/orm": "dev-master#55c4788",
+		"doctrine/orm": "dev-ddc1960-hotfix-and-ddc4005-hotfix as 2.5.1",
 		"egeloen/ckeditor-bundle": "4.0.1",
 		"fabpot/php-cs-fixer": "1.11.1",
 		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",
