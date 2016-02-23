@@ -40,6 +40,10 @@
 		{
 			"type": "vcs",
 			"url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git"
+		},
+		{
+			"type": "vcs",
+			"url": "http://gitlab.netdevelo/ss6/migrations.git"
 		}
 	],
 	"require": {
@@ -52,7 +56,6 @@
 		"doctrine/common": "2.5.0",
 		"doctrine/doctrine-bundle": "1.6.1",
 		"doctrine/doctrine-fixtures-bundle": "2.3.0",
-		"doctrine/doctrine-migrations-bundle": "1.1.1",
 		"doctrine/orm": "dev-ddc1960-hotfix-and-ddc4005-hotfix as 2.5.1",
 		"egeloen/ckeditor-bundle": "4.0.1",
 		"fabpot/php-cs-fixer": "1.11.1",
@@ -72,6 +75,7 @@
 		"sensio/distribution-bundle": "4.0.1",
 		"sensio/framework-extra-bundle": "3.0.10",
 		"sensio/generator-bundle": "2.5.3",
+		"shopsys/migrations": "1.0.0",
 		"stof/doctrine-extensions-bundle": "1.2.1",
 		"symfony/assetic-bundle": "2.6.1",
 		"symfony/finder": "2.7.3",

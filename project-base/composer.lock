@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c84cfc13f87ad28d4759f33c31016813",
-    "content-hash": "bc1a1e841c5e8afeeeb481d0b60639a4",
+    "hash": "b14d401fd981bae97290518d49013fd3",
+    "content-hash": "7f75f80aaffeef707a89aec2906f302c",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -256,7 +256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/bf0c14e099bde4a392b26be293383b8277e9b9b0",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/8aecaf663fc5061c181b46fe552763b709ac7867",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -269,9 +269,9 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1",
+                "phpunit/phpunit": "~4.1|~5.0",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "~2.7",
+                "symfony/phpunit-bridge": "^2.8.1|^3.0.1",
                 "symfony/symfony": "^2.6.4|~3.0"
             },
             "type": "symfony-bundle",
@@ -4248,6 +4248,34 @@
             ],
             "description": "A security checker for your composer.lock",
             "time": "2015-11-07 08:07:40"
+        },
+        {
+            "name": "shopsys/migrations",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "http://gitlab.netdevelo/ss6/migrations.git",
+                "reference": "85029238ce8e754f3c5b6c2f5fa8aa9a2a5eef26"
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "doctrine/doctrine-migrations-bundle": "~1.1",
+                "doctrine/orm": "~2.5",
+                "php": "5.6.*",
+                "symfony/framework-bundle": "~2.7.3 || ~3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.2"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "ShopSys\\": [
+                        "src/ShopSys/"
+                    ]
+                }
+            },
+            "time": "2016-02-23 15:02:58"
         },
         {
             "name": "stof/doctrine-extensions-bundle",

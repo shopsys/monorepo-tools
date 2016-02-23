@@ -629,7 +629,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:migrations:migrate" />
+			<arg value="shopsys:migrations:migrate" />
 		</exec>
 	</target>
 
