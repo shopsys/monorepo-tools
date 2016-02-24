@@ -58,7 +58,6 @@
 		"doctrine/doctrine-fixtures-bundle": "2.3.0",
 		"doctrine/orm": "dev-ddc1960-hotfix-and-ddc4005-hotfix as 2.5.1",
 		"egeloen/ckeditor-bundle": "4.0.1",
-		"fabpot/php-cs-fixer": "1.11.1",
 		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",
 		"fzaninotto/faker": "1.5.0",
 		"helios-ag/fm-elfinder-bundle": "4.0.2",
@@ -90,9 +89,8 @@
 	},
 	"require-dev": {
 		"codeception/codeception": "2.1.5",
-		"jakub-onderka/php-parallel-lint": "dev-master#41365ce",
 		"se/selenium-server-standalone": "2.48.2",
-		"shopsys/coding-standards": "1.0.0",
+		"shopsys/coding-standards": "1.1.0",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"symfony/web-profiler-bundle": "2.8.2"
 	},
