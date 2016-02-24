@@ -25,12 +25,16 @@
 	{% if product.isVariant %}
 		<div class="wrap-border">
 			<div class="form-line">
-				<strong>
-					{{ 'Produkt je variantou'|trans }}
-					<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
-						<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
-					</a>
+				<strong class="form-line__label">
+					{{ 'Produkt je variantou'|trans }} :
 				</strong>
+				<div class="form-line__side">
+					<div class="form-line__item form-line__item--text">
+						<a href="{{ url('admin_product_edit', {id: product.mainVariant.id}) }}" target="_blank">
+							<i class="svg svg-forward-page in-icon in-icon--link ml5 mr5"></i>{{ product.mainVariant.name }}
+						</a>
+					</div>
+				</div>
 			</div>
 			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
 		</div>
