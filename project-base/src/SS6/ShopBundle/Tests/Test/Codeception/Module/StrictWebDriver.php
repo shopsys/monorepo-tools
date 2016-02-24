@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;
 use Codeception\Util\Locator;
+use Facebook\WebDriver\WebDriverElement;
 use Symfony\Component\DomCrawler\Crawler;
 
 class StrictWebDriver extends WebDriver {
@@ -38,7 +39,7 @@ class StrictWebDriver extends WebDriver {
 	 * {@inheritDoc}
 	 */
 	protected function findFields($selector) {
-		if (!is_array($selector)) {
+		if (!is_array($selector) && !$selector instanceof WebDriverElement) {
 			$message = 'Using findFields() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
 			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
