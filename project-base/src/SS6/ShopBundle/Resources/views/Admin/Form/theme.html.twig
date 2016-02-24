@@ -195,14 +195,15 @@
 			{% endif %}
 			{{- form_errors(form) -}}
 			{% if newline is not defined %}
-				<div class="form-line__side">
+				<div class="form-line__line">
 					<div class="form-line__item">
 						{{- form_widget(form) -}}
 					</div>
 				</div>
 			{% else %}
 				<div class="form-line__line">
-					{{- form_widget(form) -}}
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--textarea-big')|trim}) %}
+					{{- form_widget(form, { attr: inputAttr } ) -}}
 				</div>
 			{% endif %}
 		</div>
