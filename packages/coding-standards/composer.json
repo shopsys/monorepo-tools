@@ -13,6 +13,7 @@
 		}
 	},
 	"require": {
+		"fabpot/php-cs-fixer": "~1.11",
 		"phpmd/phpmd": "2.0.0",
 		"squizlabs/php_codesniffer": "2.3.2"
 	}
