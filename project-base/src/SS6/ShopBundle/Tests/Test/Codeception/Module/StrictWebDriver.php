@@ -60,8 +60,9 @@ class StrictWebDriver extends WebDriver {
 
 	/**
 	 * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
 	 */
-	public function clickByText($text) {
+	public function clickByText($text, $contextSelector = null) {
 		$locator = Crawler::xpathLiteral(trim($text));
 
 		$xpath = Locator::combine(
@@ -71,13 +72,14 @@ class StrictWebDriver extends WebDriver {
 			'.//input[./@type = "submit" or ./@type = "image" or ./@type = "button"][normalize-space(@value)=' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath]);
+		parent::click(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
 	 * @param string $name
+	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
 	 */
-	public function clickByName($name) {
+	public function clickByName($name, $contextSelector = null) {
 		$locator = Crawler::xpathLiteral(trim($name));
 
 		$xpath = Locator::combine(
@@ -85,7 +87,7 @@ class StrictWebDriver extends WebDriver {
 			'.//button[./@name = ' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath]);
+		parent::click(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
