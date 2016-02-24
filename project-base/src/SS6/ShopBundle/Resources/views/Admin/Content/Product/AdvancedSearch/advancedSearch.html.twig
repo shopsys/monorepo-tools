@@ -1,5 +1,5 @@
 {{ form_start(advancedSearchForm) }}
-	<div class="box-advanced-search">
+	<div id="js-advanced-search-rules-box" class="box-advanced-search">
 		<div id="js-advanced-search-rules-container" data-rule-form-url="{{ url('admin_product_getruleform') }}">
 			{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig' with {rulesForm: advancedSearchForm} %}
 		</div>
