@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;
 use Codeception\Util\Locator;
+use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -27,7 +28,7 @@ class StrictWebDriver extends WebDriver {
 	 * {@inheritDoc}
 	 */
 	protected function match($page, $selector, $throwMalformed = true) {
-		if (!is_array($selector)) {
+		if (!is_array($selector) && !$selector instanceof WebDriverBy) {
 			$message = 'Using match() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
 			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -204,6 +205,14 @@ class StrictWebDriver extends WebDriver {
 		$xpath = './/*[self::input | self::textarea | self::select][@name = ' . $locator . ']';
 
 		parent::seeInField(['xpath' => $xpath], $value);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string $value
+	 */
+	public function seeInFieldByElement(WebDriverElement $element, $value) {
+		parent::seeInField($element, $value);
 	}
 
 }
