@@ -114,6 +114,14 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $css
+	 * @param string $value
+	 */
+	public function fillFieldByCss($css, $value) {
+		parent::fillField(['css' => $css], $value);
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function seeCheckboxIsChecked($checkbox) {
