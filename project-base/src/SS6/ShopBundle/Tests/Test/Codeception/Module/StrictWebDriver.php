@@ -16,7 +16,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	private function getDeprecatedMethodExceptionMessage(array $alternatives) {
 		$messageWithAlternativesPlaceholder = 'This method is deprecated because it uses fuzzy locators. '
-			. 'Use one of strict alternatives instead: %s. Or implement new method with strict locator.';
+			. 'Use one of strict alternatives instead: %s. Or implement new method with strict locator. See ' . self::class;
 
 		return sprintf(
 			$messageWithAlternativesPlaceholder,
@@ -53,8 +53,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function click($link, $context = null) {
 		$strictAlternatives = [
-			'clickByText',
-			'clickByName',
+			'clickBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -97,7 +96,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function fillField($field, $value) {
 		$strictAlternatives = [
-			'fillFieldByName',
+			'fillFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -127,7 +126,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function seeCheckboxIsChecked($checkbox) {
 		$strictAlternatives = [
-			'seeCheckboxIsCheckedById',
+			'seeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -148,7 +147,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function dontSeeCheckboxIsChecked($checkbox) {
 		$strictAlternatives = [
-			'dontSeeCheckboxIsCheckedById',
+			'dontSeeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -169,7 +168,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function checkOption($option) {
 		$strictAlternatives = [
-			'checkOptionById',
+			'checkOptionBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -190,7 +189,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function seeInField($field, $value) {
 		$strictAlternatives = [
-			'seeInFieldByName',
+			'seeInFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
