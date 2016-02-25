@@ -57,7 +57,8 @@ class GridController extends AdminBaseController {
 			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
 		} catch (\SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
-			$responseData['errors'] = array_unique($e->getFormErrors());
+			// reset array keys for array representation in JSON, otherwise it could be treated as an object
+			$responseData['errors'] = array_values(array_unique($e->getFormErrors()));
 		}
 
 		return new JsonResponse($responseData);
