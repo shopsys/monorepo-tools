@@ -88,4 +88,23 @@ $config = Symfony\CS\Config\Config::create()
 	->addCustomFixer(new ShopSys\CodingStandards\CsFixer\OrmJoinColumnRequireNullableFixer())
 	->addCustomFixer(new ShopSys\CodingStandards\CsFixer\UnusedUseFixer());
 
+// variable $path is available from include from FixCommand::execute()
+if (!is_dir($path) && !is_file($path)) {
+	$realpaths = [];
+
+	foreach (explode(' ', trim($path)) as $filepath) {
+		$splFileInfo = new \SplFileInfo($filepath);
+		$realpaths[] = $splFileInfo->getRealPath();
+	}
+
+	$config->getFinder()
+		->filter(
+			function (\SplFileInfo $file) use ($realpaths) {
+				return in_array($file->getRealPath(), $realpaths, true);
+			}
+		);
+
+	$path = getcwd();
+}
+
 return $config;
