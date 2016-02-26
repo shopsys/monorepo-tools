@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject;
+namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListComponent;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent;
 use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class ProductListPage {
@@ -14,7 +14,7 @@ class ProductListPage {
 	private $webDriver;
 
 	/**
-	 * @var \SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListComponent
+	 * @var \SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
 	 */
 	private $productListComponent;
 

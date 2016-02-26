@@ -3,9 +3,9 @@
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\CartPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\HomepagePage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\HomepagePage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest {
