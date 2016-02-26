@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;
 use Codeception\Util\Locator;
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverElement;
 use Symfony\Component\DomCrawler\Crawler;
 
 class StrictWebDriver extends WebDriver {
@@ -14,7 +16,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	private function getDeprecatedMethodExceptionMessage(array $alternatives) {
 		$messageWithAlternativesPlaceholder = 'This method is deprecated because it uses fuzzy locators. '
-			. 'Use one of strict alternatives instead: %s. Or implement new method with strict locator.';
+			. 'Use one of strict alternatives instead: %s. Or implement new method with strict locator. See ' . self::class;
 
 		return sprintf(
 			$messageWithAlternativesPlaceholder,
@@ -26,7 +28,7 @@ class StrictWebDriver extends WebDriver {
 	 * {@inheritDoc}
 	 */
 	protected function match($page, $selector, $throwMalformed = true) {
-		if (!is_array($selector)) {
+		if (!is_array($selector) && !$selector instanceof WebDriverBy) {
 			$message = 'Using match() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
 			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -38,7 +40,7 @@ class StrictWebDriver extends WebDriver {
 	 * {@inheritDoc}
 	 */
 	protected function findFields($selector) {
-		if (!is_array($selector)) {
+		if (!is_array($selector) && !$selector instanceof WebDriverElement) {
 			$message = 'Using findFields() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
 			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -51,8 +53,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function click($link, $context = null) {
 		$strictAlternatives = [
-			'clickByText',
-			'clickByName',
+			'clickBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -60,8 +61,9 @@ class StrictWebDriver extends WebDriver {
 
 	/**
 	 * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
 	 */
-	public function clickByText($text) {
+	public function clickByText($text, $contextSelector = null) {
 		$locator = Crawler::xpathLiteral(trim($text));
 
 		$xpath = Locator::combine(
@@ -71,13 +73,14 @@ class StrictWebDriver extends WebDriver {
 			'.//input[./@type = "submit" or ./@type = "image" or ./@type = "button"][normalize-space(@value)=' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath]);
+		parent::click(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
 	 * @param string $name
+	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
 	 */
-	public function clickByName($name) {
+	public function clickByName($name, $contextSelector = null) {
 		$locator = Crawler::xpathLiteral(trim($name));
 
 		$xpath = Locator::combine(
@@ -85,7 +88,7 @@ class StrictWebDriver extends WebDriver {
 			'.//button[./@name = ' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath]);
+		parent::click(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
@@ -93,7 +96,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function fillField($field, $value) {
 		$strictAlternatives = [
-			'fillFieldByName',
+			'fillFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -111,11 +114,19 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $css
+	 * @param string $value
+	 */
+	public function fillFieldByCss($css, $value) {
+		parent::fillField(['css' => $css], $value);
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function seeCheckboxIsChecked($checkbox) {
 		$strictAlternatives = [
-			'seeCheckboxIsCheckedById',
+			'seeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -136,7 +147,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function dontSeeCheckboxIsChecked($checkbox) {
 		$strictAlternatives = [
-			'dontSeeCheckboxIsCheckedById',
+			'dontSeeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -157,7 +168,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function checkOption($option) {
 		$strictAlternatives = [
-			'checkOptionById',
+			'checkOptionBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -178,7 +189,7 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function seeInField($field, $value) {
 		$strictAlternatives = [
-			'seeInFieldByName',
+			'seeInFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
@@ -193,6 +204,14 @@ class StrictWebDriver extends WebDriver {
 		$xpath = './/*[self::input | self::textarea | self::select][@name = ' . $locator . ']';
 
 		parent::seeInField(['xpath' => $xpath], $value);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string $value
+	 */
+	public function seeInFieldByElement(WebDriverElement $element, $value) {
+		parent::seeInField($element, $value);
 	}
 
 }
