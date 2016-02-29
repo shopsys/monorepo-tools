@@ -9,9 +9,45 @@ class CartPage extends AbstractPage {
 
 	/**
 	 * @param string $productName
+	 * @param int $quantity
+	 */
+	public function assertProductQuantity($productName, $quantity) {
+		$quantityField = $this->getQuantityFieldByProductName($productName);
+		$this->tester->seeInFieldByElement($quantity, $quantityField);
+	}
+
+	/**
+	 * @param string $productName
+	 * @param string $formattedPriceWithCurrency
+	 */
+	public function assertProductPrice($productName, $formattedPriceWithCurrency) {
+		$productPriceColumn = $this->getProductPriceColumnByName($productName);
+		$this->tester->seeInElement($formattedPriceWithCurrency, $productPriceColumn);
+	}
+
+	/**
+	 * @param string $formattedPriceWithCurrency
+	 */
+	public function assertTotalPriceWithVat($formattedPriceWithCurrency) {
+		$orderPriceColumn = $this->getTotalProductsPriceColumn();
+		$this->tester->seeInElement('Celková cena s DPH: ' . $formattedPriceWithCurrency, $orderPriceColumn);
+	}
+
+	/**
+	 * @param string $productName
+	 * @param int $quantity
+	 */
+	public function changeProductQuantity($productName, $quantity) {
+		$quantityField = $this->getQuantityFieldByProductName($productName);
+		$this->tester->fillFieldByElement($quantityField, $quantity);
+		$this->tester->clickByText('Přepočítat');
+	}
+
+	/**
+	 * @param string $productName
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
-	public function getQuantityFieldByProductName($productName) {
+	private function getQuantityFieldByProductName($productName) {
 		$row = $this->findProductRowInCartByName($productName);
 
 		return $row->findElement(WebDriverBy::cssSelector('input[name^="cart_form[quantities]"]'));
@@ -44,7 +80,7 @@ class CartPage extends AbstractPage {
 	 * @param string $productName
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
-	public function getProductPriceColumnByName($productName) {
+	private function getProductPriceColumnByName($productName) {
 		$row = $this->findProductRowInCartByName($productName);
 
 		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
@@ -53,7 +89,7 @@ class CartPage extends AbstractPage {
 	/**
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
-	public function getTotalProductsPriceColumn() {
+	private function getTotalProductsPriceColumn() {
 		return $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart .table-cart__foot .table-cart__foot__total'));
 	}
 
