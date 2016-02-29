@@ -7,52 +7,52 @@
 {% endblock %}
 
 {% block product_calculated_prices %}
-	<div class="table-form__wrap">
-		<table class="table-form">
-			<thead>
-				<tr class="table-form__row">
-					<th class="table-form__cell table-form__cell--label">
-						{{ inputPriceLabel({ isSimple: true }) }}
-					</th>
-					<th class="table-form__cell table-form__cell--field"></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="table-form__row js-input-price-type-auto">
-					<td class="table-form__cell table-form__cell--label">
-						{{ form_label(form.productData.price, 'Základní cena'|trans, { isSimple: true } ) }}
-					</td>
-					<td class="table-form__cell table-form__cell--filed">
-						{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
-						{{ form_errors(form.productData.price) }}
-					</td>
-				</tr>
-				{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
-					<tr class="table-form__row table-form__row--group js-input-price-type-manual">
-						<th class="table-form__cell" colspan="4">
-							<span class="table-form__cell__image">
-								{{ domainIcon(domainId, 'large') }}
-							</span>
-							<strong class="table-form__cell__group-name">
-								{{ getDomainName(domainId) }}
-							</strong>
-						</th>
-					</tr>
-					{% for pricingGroup in pricingGroups %}
-						<tr class="table-form__row js-input-price-type-manual">
-							<td class="table-form__cell table-form__cell--label">
-								{{ form_label(form.manualInputPrices[pricingGroup.id], pricingGroup.name, { isSimple: true }) }}
-							</td>
-							<td class="table-form__cell table-form__cell--filed js-input-price-type-manual">
-								{{ form_widget(form.manualInputPrices[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
-								{{ form_errors(form.manualInputPrices[pricingGroup.id]) }}
-							</td>
-						</tr>
-					{% endfor %}
-				{% endfor %}
-			</tbody>
-		</table>
+	<div class="form-price-heading">
+		<div class="form-price-heading__cell form-price-heading__cell--field">
+			{{ inputPriceLabel({ isSimple: true }) }}
+		</div>
 	</div>
+	<div class="form-line js-input-price-type-auto">
+		<div class="form-line__label">
+			{{ form_label(form.productData.price, 'Základní cena'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
+		</div>
+		<div class="form-line__side">
+			<div class="form-line__item">
+				{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
+			</div>
+			{{ form_errors(form.productData.price) }}
+		</div>
+	</div>
+	{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
+		<div class="js-input-price-type-manual">
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__line form-line__line--no-space">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">
+							{{ getDomainName(domainId) }}
+						</strong>
+					</div>
+				</div>
+			</div>
+			{% for pricingGroup in pricingGroups %}
+				<div class="form-line">
+					<div class="form-line__label">
+						{{ form_label(form.manualInputPrices[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
+					</div>
+					<div class="form-line__side">
+						<div class="form-line__item js-input-price-type-manual">
+							{{ form_widget(form.manualInputPrices[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+						</div>
+						<div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
+					</div>
+					{{ form_errors(form.manualInputPrices[pricingGroup.id]) }}
+				</div>
+			{% endfor %}
+		</div>
+	{% endfor %}
 {% endblock %}
 
 {% block product_urls %}
