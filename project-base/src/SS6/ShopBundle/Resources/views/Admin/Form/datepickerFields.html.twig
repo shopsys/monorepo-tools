@@ -1,6 +1,8 @@
 {% block date_picker_widget %}
-	{% spaceless %}
-		{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker input')|trim)}) %}
-		<input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-	{% endspaceless %}
+	<div class="form-line__side">
+		{% spaceless %}
+			{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker input')|trim)}) %}
+			<input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+		{% endspaceless %}
+	</div>
 {% endblock date_picker_widget %}
