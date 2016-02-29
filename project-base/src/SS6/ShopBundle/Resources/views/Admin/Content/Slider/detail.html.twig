@@ -13,16 +13,23 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-border">
+		<div class="form-group wrap-border">
+			<div class="form-group__title">
+				{{ 'Nastavení'|trans }}
+			</div>
 			{{ form_id(sliderItem|default(null)) }}
 			{% block domain %}{% endblock %}
 			{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace' } }) }}
 			{{ form_row(form.link, { label: 'Odkaz'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans}) }}
 		</div>
 
-		{% block image %}{% endblock %}
-		{{ form_row(form.image, { label: 'Nahrát obrázek'|trans}) }}
-
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Obrázek'|trans }}
+			</div>
+			{% block image %}{% endblock %}
+			{{ form_row(form.image, { label: 'Nahrát obrázek'|trans}) }}
+		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
