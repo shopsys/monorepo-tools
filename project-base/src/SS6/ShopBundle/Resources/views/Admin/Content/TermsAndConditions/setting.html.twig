@@ -8,7 +8,12 @@
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 	{{ form_start(form) }}
-		{{ form_row(form.termsAndConditionsArticle, { label: 'Obchodní podmínky'|trans, icon: { title: 'Vyberte článek, který bude sloužit jako obchodní podmínky, se kterými musí zákazník souhlasit při vytváření objednávky.' } }) }}
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Nastavení'|trans }}
+			</div>
+			{{ form_row(form.termsAndConditionsArticle, { label: 'Obchodní podmínky'|trans, icon: { title: 'Vyberte článek, který bude sloužit jako obchodní podmínky, se kterými musí zákazník souhlasit při vytváření objednávky.' } }) }}
+		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
