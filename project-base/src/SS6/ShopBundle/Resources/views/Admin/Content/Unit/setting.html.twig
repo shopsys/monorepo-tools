@@ -1,5 +1,8 @@
 {{ form_start(form) }}
-	<div class="mb25">
+	<div class="form-group">
+		<div class="form-group__title">
+			{{ 'Nastavení'|trans }}
+		</div>
 		{{ form_row(form.defaultUnit, { label: 'Výchozí jednotka'|trans, icon: { title : 'Výchozí jednotka bude použita při vytvoření nového produktu' } }) }}
 	</div>
 
