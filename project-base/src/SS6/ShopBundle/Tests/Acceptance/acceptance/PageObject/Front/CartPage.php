@@ -3,18 +3,9 @@
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class CartPage {
-
-	/**
-	 * @var \Facebook\WebDriver\WebDriver
-	 */
-	private $webDriver;
-
-	public function __construct(StrictWebDriver $webDriver) {
-		$this->webDriver = $webDriver->webDriver;
-	}
+class CartPage extends AbstractPage {
 
 	/**
 	 * @param string $productName

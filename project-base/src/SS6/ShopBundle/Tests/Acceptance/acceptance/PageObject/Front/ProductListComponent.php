@@ -4,28 +4,9 @@ namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class ProductListComponent {
-
-	/**
-	 * @var \Facebook\WebDriver\WebDriver
-	 */
-	private $webDriver;
-
-	/**
-	 * @var \SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester
-	 */
-	private $tester;
-
-	public function __construct(
-		StrictWebDriver $webDriver,
-		AcceptanceTester $tester
-	) {
-		$this->webDriver = $webDriver->webDriver;
-		$this->tester = $tester;
-	}
+class ProductListComponent extends AbstractPage {
 
 	/**
 	 * @param string $productName
