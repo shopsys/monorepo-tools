@@ -7,7 +7,10 @@
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 	{{ form_start(form) }}
-		<div class="wrap-group">
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Nastavení'|trans }}
+			</div>
 			{{ form_row(form.email, { 'label': 'Hlavní administrátorský email' }) }}
 			{{ form_row(form.name, { 'label': 'Jméno k emailu' }) }}
 		</div>
