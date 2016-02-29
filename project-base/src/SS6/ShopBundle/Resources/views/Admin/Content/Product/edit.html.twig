@@ -44,9 +44,9 @@
 			{% if product.variants|length > 0 %}
 				<strong>
 					{{ 'Produkt je hlavní variantou a má nastaveny varianty'|trans }}:
-					<ul>
+					<ul class="list-main">
 						{% for variant in product.variants %}
-							<li>
+							<li class="list-main__item">
 								<a href="{{ url('admin_product_edit', {id: variant.id}) }}" target="_blank">
 									{{ variant.name }}<i class="svg svg-forward-page"></i>
 								</a>
