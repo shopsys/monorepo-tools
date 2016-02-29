@@ -4,32 +4,35 @@
 {% block h1 %}{{ 'Editace dopravy'|trans }} - {{ transportDetail.transport.name }}{% endblock %}
 
 {% block transport_base_prices %}
-	<div id="transport_prices" class="table-form__wrap">
-		<table class="table-form">
-			<thead>
-				<tr class="table-form__row">
-					<th class="table-form__cell table-form__cell--label">{{ inputPriceLabel() }}</th>
-					<th class="table-form__cell--field"></th>
-					<th class="table-form__cell">{{ 'Cena bez DPH'|trans }}</th>
-					<th class="table-form__cell">{{ 'Cena s DPH'|trans }}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for currencyId, currency in currencies %}
-					<tr class="table-form__row">
-						<td class="table-form__cell table-form__cell--label">
-							{{ form_label(form.prices[currencyId], 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
-						</td>
-						<td class="table-form__cell table-form__cell--filed">
-							{{ form_widget(form.prices[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
-							{{ form_errors(form.prices[currencyId]) }}
-						</td>
-						<td class="table-form__cell">{{ transportDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
-						<td class="table-form__cell">{{ transportDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+	<div id="transport_prices">
+		<div class="form-price-heading">
+			<div class="form-price-heading__cell form-price-heading__cell--field">
+				{{ inputPriceLabel({ isSimple: true }) }}
+			</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena bez DPH'|trans }}</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena s DPH'|trans }}</div>
+		</div>
+		{% for currencyId, currency in currencies %}
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ form_label(form.prices[currencyId], 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+				</div>
+				<div class="form-line__side">
+					<div class="form-line__item">
+						{{ form_widget(form.prices[currencyId], { symbolAfterInput: currencySymbolByCurrencyId(currencyId) }) }}
+					</div>
+					<div class="form-line__item--right">
+						<div class="form-line__item__price">
+							{{ transportDetail.basePrices[currencyId].priceWithoutVat|priceWithCurrencyByCurrencyId(currencyId) }}
+						</div>
+						<div class="form-line__item__price">
+							<strong>{{ transportDetail.basePrices[currencyId].priceWithVat|priceWithCurrencyByCurrencyId(currencyId) }}</strong>
+						</div>
+					</div>
+					{{ form_errors(form.prices[currencyId]) }}
+				</div>
+			</div>
+		{% endfor %}
 	</div>
 {% endblock %}
 
