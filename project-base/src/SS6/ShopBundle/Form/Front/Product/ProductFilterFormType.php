@@ -12,6 +12,8 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFilterFormType extends AbstractType {
 
+	const NAME = 'product_filter_form';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
@@ -91,7 +93,7 @@ class ProductFilterFormType extends AbstractType {
 	 * @return string
 	 */
 	public function getName() {
-		return 'product_filter_form';
+		return self::NAME;
 	}
 
 	/**

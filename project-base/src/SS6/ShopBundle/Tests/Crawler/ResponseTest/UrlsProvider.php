@@ -11,6 +11,7 @@ use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use SS6\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -388,7 +389,7 @@ class UrlsProvider {
 		];
 		$productListRouteParameters = [
 			'id' => 8,
-			'productFilter_form' => $productListFilterData,
+			ProductFilterFormType::NAME => $productListFilterData,
 		];
 
 		return [
@@ -411,7 +412,7 @@ class UrlsProvider {
 		];
 		$productListRouteParameters = [
 			'id' => 3,
-			'productFilter_form' => $productListFilterData,
+			ProductFilterFormType::NAME => $productListFilterData,
 		];
 
 		return [
@@ -431,7 +432,7 @@ class UrlsProvider {
 		];
 		$productListRouteParameters = [
 			'id' => 11,
-			'productFilter_form' => $productListFilterData,
+			ProductFilterFormType::NAME => $productListFilterData,
 		];
 
 		return [
@@ -452,7 +453,7 @@ class UrlsProvider {
 		];
 		$productSearchParameters = [
 			ProductController::SEARCH_TEXT_PARAMETER => self::SEARCH_KEYWORD,
-			'productFilter_form' => $productSearchFilterData,
+			ProductFilterFormType::NAME => $productSearchFilterData,
 		];
 
 		return [
