@@ -49,4 +49,14 @@ class CartPage {
 		throw new \Facebook\WebDriver\Exception\NoSuchElementException($message);
 	}
 
+	/**
+	 * @param string $productName
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function getProductPriceColumnByName($productName) {
+		$row = $this->findProductRowInCartByName($productName);
+
+		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
+	}
+
 }
