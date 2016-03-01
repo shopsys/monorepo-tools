@@ -97,6 +97,15 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		// @codingStandardsIgnoreStop
 
 		$manager->flush();
+
+		$this->clearSettingCache();
+	}
+
+	private function clearSettingCache() {
+		$setting = $this->get(Setting::class);
+		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+
+		$setting->clearCache();
 	}
 
 	/**

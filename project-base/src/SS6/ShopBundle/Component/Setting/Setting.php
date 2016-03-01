@@ -30,7 +30,7 @@ class Setting {
 	/**
 	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
 	 */
-	private $values = [];
+	private $values;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
@@ -44,6 +44,7 @@ class Setting {
 	public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository) {
 		$this->em = $em;
 		$this->settingValueRepository = $settingValueRepository;
+		$this->clearCache();
 	}
 
 	/**
@@ -101,6 +102,8 @@ class Setting {
 			'fromDomainId' => $fromDomainId,
 			'commonDomainId' => SettingValue::DOMAIN_ID_COMMON,
 		]);
+
+		$this->clearCache();
 	}
 
 	/**
@@ -162,6 +165,11 @@ class Setting {
 				$this->valuesDefault[$settingValue->getName()] = $settingValue;
 			}
 		}
+	}
+
+	public function clearCache() {
+		$this->values = [];
+		$this->valuesDefault = null;
 	}
 
 }
