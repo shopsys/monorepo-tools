@@ -92,6 +92,21 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $css
+	 */
+	public function clickByCss($css) {
+		parent::click(['css' => $css]);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function clickByElement(WebDriverElement $element) {
+		$element->click();
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function fillField($field, $value) {
@@ -100,6 +115,15 @@ class StrictWebDriver extends WebDriver {
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string $value
+	 */
+	public function fillFieldByElement(WebDriverElement $element, $value) {
+		$element->clear();
+		$element->sendKeys($value);
 	}
 
 	/**
@@ -119,6 +143,22 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function fillFieldByCss($css, $value) {
 		parent::fillField(['css' => $css], $value);
+	}
+
+	/**
+	 * @param string $text
+	 * @param string $css
+	 */
+	public function seeInCss($text, $css) {
+		parent::see($text, ['css' => $css]);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string $text
+	 */
+	public function seeInElement(WebDriverElement $element, $text) {
+		$this->assertContains($text, $element->getText());
 	}
 
 	/**
