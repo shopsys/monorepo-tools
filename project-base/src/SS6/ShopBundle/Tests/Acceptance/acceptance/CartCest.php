@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
 use Facebook\WebDriver\WebDriverBy;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\CartPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\HomepagePage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
@@ -37,6 +38,17 @@ class CartCest {
 		$me->amOnPage('/kosik/');
 		$productPriceColumn = $cartPage->getProductPriceColumnByName('Defender 2.0 SPK-480');
 		$me->seeInElement($productPriceColumn, '119,00 Kč');
+	}
+
+	public function testAddToCartFromHomepage(CartPage $cartPage, HomepagePage $homepagePage, AcceptanceTester $me) {
+		$me->wantTo('add product to cart from homepage');
+		$me->amOnPage('/');
+		$homepagePage->addProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
+		$me->see('Do košíku bylo vloženo zboží');
+		$me->seeInCss('1 položka', '.cart-box__info');
+		$me->amOnPage('/kosik/');
+		$productPrice = $cartPage->getProductPriceColumnByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
+		$me->seeInElement($productPrice, '3 499,00 Kč');
 	}
 
 }
