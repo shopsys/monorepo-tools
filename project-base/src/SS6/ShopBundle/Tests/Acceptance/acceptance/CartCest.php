@@ -26,7 +26,7 @@ class CartCest {
 		$me->amOnPage('/kosik/');
 
 		$quantityField = $cartPage->getQuantityFieldByProductName('22" Sencor SLE 22F46DM4 HELLO KITTY');
-		$me->seeInFieldByElement($quantityField, 6);
+		$me->seeInFieldByElement(6, $quantityField);
 	}
 
 	public function testAddToCartFromProductListPage(CartPage $cartPage, ProductListPage $productListPage, AcceptanceTester $me) {
@@ -37,7 +37,7 @@ class CartCest {
 		$me->seeInCss('1 položka', '.cart-box__info');
 		$me->amOnPage('/kosik/');
 		$productPriceColumn = $cartPage->getProductPriceColumnByName('Defender 2.0 SPK-480');
-		$me->seeInElement($productPriceColumn, '119,00 Kč');
+		$me->seeInElement('119,00 Kč', $productPriceColumn);
 	}
 
 	public function testAddToCartFromHomepage(CartPage $cartPage, HomepagePage $homepagePage, AcceptanceTester $me) {
@@ -48,7 +48,7 @@ class CartCest {
 		$me->seeInCss('1 položka', '.cart-box__info');
 		$me->amOnPage('/kosik/');
 		$productPrice = $cartPage->getProductPriceColumnByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
-		$me->seeInElement($productPrice, '3 499,00 Kč');
+		$me->seeInElement('3 499,00 Kč', $productPrice);
 	}
 
 }

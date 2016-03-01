@@ -384,22 +384,22 @@ trait AcceptanceTesterActions
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string $text
+     * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverElement $element
      * Conditional Assertion: Test won't be stopped on fail
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInElement()
      */
-    public function canSeeInElement($element, $text) {
+    public function canSeeInElement($text, $element) {
         return $this->getScenario()->runStep(new \Codeception\Step\ConditionalAssertion('seeInElement', func_get_args()));
     }
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string $text
+     * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverElement $element
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInElement()
      */
-    public function seeInElement($element, $text) {
+    public function seeInElement($text, $element) {
         return $this->getScenario()->runStep(new \Codeception\Step\Assertion('seeInElement', func_get_args()));
     }
 
@@ -534,22 +534,22 @@ trait AcceptanceTesterActions
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param string $fieldName
-	 * @param string $value
+     * @param string $value
+	 * @param string $fieldName
      * Conditional Assertion: Test won't be stopped on fail
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByName()
      */
-    public function canSeeInFieldByName($fieldName, $value) {
+    public function canSeeInFieldByName($value, $fieldName) {
         return $this->getScenario()->runStep(new \Codeception\Step\ConditionalAssertion('seeInFieldByName', func_get_args()));
     }
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param string $fieldName
-	 * @param string $value
+     * @param string $value
+	 * @param string $fieldName
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByName()
      */
-    public function seeInFieldByName($fieldName, $value) {
+    public function seeInFieldByName($value, $fieldName) {
         return $this->getScenario()->runStep(new \Codeception\Step\Assertion('seeInFieldByName', func_get_args()));
     }
 
@@ -557,22 +557,22 @@ trait AcceptanceTesterActions
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string $value
+     * @param string $value
+	 * @param \Facebook\WebDriver\WebDriverElement $element
      * Conditional Assertion: Test won't be stopped on fail
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByElement()
      */
-    public function canSeeInFieldByElement($element, $value) {
+    public function canSeeInFieldByElement($value, $element) {
         return $this->getScenario()->runStep(new \Codeception\Step\ConditionalAssertion('seeInFieldByElement', func_get_args()));
     }
     /**
      * [!] Method is generated. Documentation taken from corresponding module.
      *
-     * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string $value
+     * @param string $value
+	 * @param \Facebook\WebDriver\WebDriverElement $element
      * @see \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByElement()
      */
-    public function seeInFieldByElement($element, $value) {
+    public function seeInFieldByElement($value, $element) {
         return $this->getScenario()->runStep(new \Codeception\Step\Assertion('seeInFieldByElement', func_get_args()));
     }
 

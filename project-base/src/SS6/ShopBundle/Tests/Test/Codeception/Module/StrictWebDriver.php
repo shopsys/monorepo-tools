@@ -154,10 +154,10 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
-	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 */
-	public function seeInElement(WebDriverElement $element, $text) {
+	public function seeInElement($text, WebDriverElement $element) {
 		$this->assertContains($text, $element->getText());
 	}
 
@@ -236,10 +236,10 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
-	 * @param string $fieldName
 	 * @param string $value
+	 * @param string $fieldName
 	 */
-	public function seeInFieldByName($fieldName, $value) {
+	public function seeInFieldByName($value, $fieldName) {
 		$locator = Crawler::xpathLiteral(trim($fieldName));
 		$xpath = './/*[self::input | self::textarea | self::select][@name = ' . $locator . ']';
 
@@ -247,10 +247,10 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
-	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 * @param string $value
+	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 */
-	public function seeInFieldByElement(WebDriverElement $element, $value) {
+	public function seeInFieldByElement($value, WebDriverElement $element) {
 		parent::seeInField($element, $value);
 	}
 
