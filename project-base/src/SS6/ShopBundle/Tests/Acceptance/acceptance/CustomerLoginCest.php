@@ -33,4 +33,16 @@ class CustomerLoginCest {
 		$me->seeCurrentPageEquals('/');
 	}
 
+	public function testLoginAsCustomerFromLoginPage(AcceptanceTester $me) {
+		$me->wantTo('login as a customer from login page');
+		$me->amOnPage('/prihlaseni/');
+		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
+		$me->fillFieldByName('front_login_form[password]', 'user123');
+		$me->clickByName('front_login_form[login]');
+		$me->see('Jaromír Jágr');
+		$me->clickByText('Odhlásit se');
+		$me->see('Přihlásit se');
+		$me->seeCurrentPageEquals('/');
+	}
+
 }
