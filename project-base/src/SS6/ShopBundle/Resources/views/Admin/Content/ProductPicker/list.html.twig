@@ -3,16 +3,41 @@
 {% block content %}
 	{{ form_start(quickSearchForm) }}
 
-		<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
-			{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+		<div class="wrap-tab mt50 js-tabs">
+			<div class="wrap-tab__heading">
+				<a href="#"
+					class="{{ isAdvancedSearchFormSubmitted ? 'display-none ' : 'active ' }}wrap-tab__heading__item js-tabs-tab-link{{ not isAdvancedSearchFormSubmitted ? ' active' }}"
+					data-tab-id="quick"
+				>
+					{{ 'Rychlé vyhledávání'|trans }}
+				</a>
+				<a href="#"
+					class="{{ isAdvancedSearchFormSubmitted ? 'active ' }}wrap-tab__heading__item js-tabs-tab-link{{ isAdvancedSearchFormSubmitted ? ' active' }}"
+					data-tab-id="advanced"
+				>
+					{{ 'Rozšířené hledání'|trans }}
+				</a>
+			</div>
+			<div class="wrap-tab__content">
+				<div class="{{ isAdvancedSearchFormSubmitted ? 'display-none ' : '' }}wrap-tab__content__in js-tabs-tab-content" data-tab-id="quick">
+					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+				</div>
+				<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="advanced">
+					{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+						with {
+							advancedSearchForm: advancedSearchForm,
+							isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
+						}
+					%}
+				</div>
+			</div>
 		</div>
 
-		{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-			with {
-				advancedSearchForm: advancedSearchForm,
-				isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-			}
-		%}
+		<div>
+
+		</div>
+
+
 
 		{{ gridView.render() }}
 		{{ gridView.renderHiddenInputs('page') }}

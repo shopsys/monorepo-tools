@@ -12,34 +12,73 @@
 {% endblock %}
 
 {% block main_content %}
-	{{ form_start(quickSearchForm) }}
-		<div class="wrap-border">
-
-			<div{{ isAdvancedSearchFormSubmitted ? ' class="display-none"' : '' }}>
+	<div class="wrap-tab js-tabs">
+		<div class="wrap-tab__heading">
+			<a href="#"
+				class="wrap-tab__heading__item active js-tabs-tab-link{{ not isAdvancedSearchFormSubmitted ? ' active' }}"
+				data-tab-id="quick"
+			>
+				{{ 'Rychlé vyhledávání'|trans }}
+			</a>
+			<a href="#"
+				class="wrap-tab__heading__item js-tabs-tab-link{{ isAdvancedSearchFormSubmitted ? ' active' }}"
+				data-tab-id="advanced"
+			>
+				{{ 'Rozšířené hledání'|trans }}
+			</a>
+		</div>
+		<div class="wrap-tab__content">
+			<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="quick">
 				{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 			</div>
-
-			{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
-				with {
-					advancedSearchForm: advancedSearchForm,
-					isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
-				}
-			%}
+			<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="advanced">
+				{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+					with {advancedSearchForm: advancedSearchForm}
+				%}
+			</div>
 		</div>
-	{{ form_end(quickSearchForm) }}
+	</div>
+
 
 	{{ form_start(massActionForm) }}
 		<div class="wrap-border js-product-list-with-filter">
-			{{ form_row(massActionForm.selectType, { label: 'Změna pro'|trans, attr: { class: 'js-mass-action-select-type' } }) }}
-			{{ form_row(massActionForm.action, { label: 'Proveď úpravu'|trans }) }}
-			<div class="form-line">
-				<div class="form-line__label form-line__label--input">
-					{{ form_widget(massActionForm.subject, { isSimple: true }) }}
+			<div class="box-mass-action" id="js-mass-action">
+				<span class="box-mass-action__click" id="js-mass-action-button">
+					{{ 'Hromadné úpravy'|trans }}:
+					<i class="box-mass-action__click__icon svg svg-arrow"></i>
+				</span>
+				<div class="box-mass-action__content">
+					<strong class="box-mass-action__title">
+						{{ 'Změna pro'|trans }}:
+					</strong>
+					{{ form_widget(massActionForm.selectType, { attr: { class: 'js-mass-action-select-type' } , isSimple: true }) }}
+
+					<div class="box-mass-action__filter">
+						<strong class="box-mass-action__title">
+							{{ 'Proveď úpravu'|trans }}:
+						</strong>
+
+						<div class="box-mass-action__filter__line">
+							<div class="box-mass-action__filter__line__item">
+								{{ form_widget(massActionForm.action , { isSimple: true }) }}
+							</div>
+
+							<div class="box-mass-action__filter__line__item">
+								{{ form_widget(massActionForm.subject, { isSimple: true }) }}
+							</div>
+
+							<div class="box-mass-action__filter__line__item">
+								{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' }, isSimple: true }) }}
+							</div>
+						</div>
+
+						<div class="box-mass-action__filter__line box-mass-action__filter__line--submit">
+							<div class="box-mass-action__filter__line__item">
+								{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn btn--medium js-mass-action-submit' } }) }}
+							</div>
+						</div>
+					</div>
 				</div>
-				{{ form_widget(massActionForm.value, { attr: { class: 'js-mass-action-value' } }) }}
-			</div>
-			<div class="form-line">
-				{{ form_widget(massActionForm.submit, { label: 'Provést úpravu'|trans, attr: { class: 'btn js-mass-action-submit' } }) }}
 			</div>
 		</div>
 

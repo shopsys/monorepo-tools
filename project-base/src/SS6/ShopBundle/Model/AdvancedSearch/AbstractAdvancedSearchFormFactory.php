@@ -48,7 +48,12 @@ abstract class AbstractAdvancedSearchFormFactory {
 	 * @return \Symfony\Component\Form\Form
 	 */
 	public function createRulesForm($name, $rulesViewData) {
-		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, ['csrf_protection' => false]);
+		$options = [
+			'csrf_protection' => false,
+			'attr' => ['novalidate' => 'novalidate'],
+		];
+		$formBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, $options);
+		$formBuilder->setMethod('GET');
 
 		foreach ($rulesViewData as $ruleKey => $ruleViewData) {
 			$ruleFilter = $this->advancedSearchConfig->getFilter($ruleViewData['subject']);
