@@ -59,4 +59,11 @@ class CartPage {
 		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
 	}
 
+	/**
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function getTotalProductsPriceColumn() {
+		return $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart .table-cart__foot .table-cart__foot__total'));
+	}
+
 }

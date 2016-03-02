@@ -68,4 +68,22 @@ class CartCest {
 		$me->see('22" Sencor SLE 22F46DM4 HELLO KITTY');
 	}
 
+	public function testChangeCartItemAndRecalculatePrice(CartPage $cartPage, AcceptanceTester $me) {
+		$me->wantTo('change items in cart and recalculate price');
+		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
+		$me->see('Vložit do košíku');
+		$me->fillFieldByCss(self::PRODUCT_DETAIL_QUANTITY_INPUT, '3');
+		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
+		$me->waitForAjax();
+		$me->clickByText('Přejít do košíku');
+
+		$quantityField = $cartPage->getQuantityFieldByProductName('22" Sencor SLE 22F46DM4 HELLO KITTY');
+		$me->fillFieldByElement($quantityField, 10);
+		$me->waitForAjax();
+		$me->clickByText('Přepočítat');
+		$me->waitForAjax();
+		$orderPriceColumn = $cartPage->getTotalProductsPriceColumn();
+		$me->seeInElement('Celková cena s DPH: 34 990,00 Kč', $orderPriceColumn);
+	}
+
 }
