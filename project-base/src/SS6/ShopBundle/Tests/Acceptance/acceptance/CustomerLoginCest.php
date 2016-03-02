@@ -17,6 +17,7 @@ class CustomerLoginCest {
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
 		$me->see('Přihlásit se');
+		$me->seeCurrentPageEquals('/');
 	}
 
 	public function testLoginAsCustomerFromCategoryPage(AcceptanceTester $me) {
