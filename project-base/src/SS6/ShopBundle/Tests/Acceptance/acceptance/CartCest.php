@@ -10,6 +10,9 @@ use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest {
 
+	const PRODUCT_DETAIL_QUANTITY_INPUT = '.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]';
+	const PRODUCT_DETAIL_MAIN_WRAPPER = '.js-product-detail-main-add-to-cart-wrapper';
+
 	public function testAddingSameProductToCartMakesSum(CartPage $cartPage, AcceptanceTester $me) {
 		$me->wantTo('have more pieces of the same product as one item in cart');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
@@ -49,6 +52,20 @@ class CartCest {
 		$me->amOnPage('/kosik/');
 		$productPrice = $cartPage->getProductPriceColumnByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
 		$me->seeInElement('3 499,00 Kč', $productPrice);
+	}
+
+	public function testAddToCartFromProductDetail(AcceptanceTester $me) {
+		$me->wantTo('add product to cart from product detail');
+		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
+		$me->see('Vložit do košíku');
+		$me->fillFieldByCss(self::PRODUCT_DETAIL_QUANTITY_INPUT, '3');
+		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
+		$me->waitForAjax();
+		$me->see('Do košíku bylo vloženo zboží');
+		$me->clickByCss('.window-button-close');
+		$me->seeInCss('1 položka za 10 497,00 Kč', '.cart-box__info');
+		$me->amOnPage('/kosik/');
+		$me->see('22" Sencor SLE 22F46DM4 HELLO KITTY');
 	}
 
 }
