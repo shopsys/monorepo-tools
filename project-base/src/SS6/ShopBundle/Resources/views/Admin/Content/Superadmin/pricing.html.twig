@@ -5,7 +5,10 @@
 
 {% block main_content %}
 	{{ form_start(form) }}
-		<div class="wrap-group">
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Nastavení'|trans }}
+			</div>
 			{{ form_row(form.type, { 'label': 'Typ vstupní ceny'|trans }) }}
 		</div>
 

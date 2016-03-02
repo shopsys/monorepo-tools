@@ -2,21 +2,29 @@
 
 {% block title %}- {{ 'Kategorie'|trans }}{% endblock %}
 {% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
-
 {% block main_content %}
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
+		<div class="form-group wrap-border">
+			<div class="form-group__title">
+				{{ 'Nastavení'|trans }}
+			</div>
+			{{ form_id(category|default(null)) }}
+			{% block category_url %}{% endblock %}
+			{{ form_row(form.name, { label: 'Název'|trans }) }}
+			{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
+			{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+			{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
+			{% block category_urls %}{% endblock %}
+		</div>
 
-		{{ form_id(category|default(null)) }}
-		{% block category_url %}{% endblock %}
-		{{ form_row(form.name, { label: 'Název'|trans }) }}
-		{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
-		{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
-		{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
-		{% block category_urls %}{% endblock %}
-
-		{% block image %}{% endblock %}
-		{{ form_row(form.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Obrázek'|trans }}
+			</div>
+			{% block image %}{% endblock %}
+			{{ form_row(form.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}

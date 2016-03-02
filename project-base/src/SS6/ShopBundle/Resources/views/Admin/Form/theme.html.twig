@@ -169,8 +169,8 @@
 					{{ form_widget(form) }}
 				</div>
 			</div>
+			{{ form_errors(form) }}
 		</div>
-		{{ form_errors(form) }}
 	{% endif %}
 {% endblock %}
 
@@ -202,7 +202,8 @@
 				</div>
 			{% else %}
 				<div class="form-line__line">
-					{{- form_widget(form) -}}
+					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--textarea-big')|trim}) %}
+					{{- form_widget(form, { attr: inputAttr } ) -}}
 				</div>
 			{% endif %}
 		</div>
@@ -240,7 +241,7 @@
 						{% for slug, friendlyUrlForm in friendlyUrlForms %}
 							<label class="form-choice-list__item js-entity-url-list-friendly-url">
 								{% set mainUrlRadioButton = form.mainOnDomains[domainId][slug] %}
-								{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main' } }) }}
+								{{ form_widget(mainUrlRadioButton, { attr: { class: 'js-entity-url-list-select-main form-choice-list__input' } }) }}
 
 								<span class="js-entity-url-list-row-label">
 									{% set absoluteUrl = form.vars.absoluteUrlsByDomainIdAndSlug[domainId][friendlyUrlForm.vars.value] %}
@@ -255,7 +256,7 @@
 								<span class="js-entity-url-list-row-delete-revert-wrapper">
 									<span class="js-entity-url-list-row-delete-block">
 										<button class="btn-no-style form-choice-list__item__remove js-entity-url-list-row-delete-block-button" type="button">
-											<span class="svg svg-circle-cross"></span>
+											<span class="svg svg-circle-cross in-icon in-icon--delete"></span>
 										</button>
 									</span>
 									<span class="js-entity-url-list-row-revert-block display-none">
@@ -271,8 +272,8 @@
 									</span>
 								</span>
 								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-									class="js-entity-url-list-info-main-delete js-tooltip c-help form-icon display-none" data-toggle="tooltip" data-placement="right">
-									<span class="svg svg-info"></span>
+									class="js-entity-url-list-info-main-delete js-tooltip c-help display-none form-choice-list__info" data-toggle="tooltip" data-placement="right">
+									<span class="svg svg-info in-icon in-icon--info "></span>
 								</span>
 						</label>
 						{% endfor %}
@@ -285,21 +286,34 @@
 				{{ form_widget(newUrlForm) }}
 			{% endfor %}
 		</div>
-		<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
-			<i class="btn__icon">+</i>
-			{{ 'Přidat URL'|trans }}
-		</button>
+		<div class="mt5">
+			<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
+				<i class="btn__icon">+</i>
+				{{ 'Přidat URL'|trans }}
+			</button>
+		</div>
 	</div>
 {%- endblock url_list_widget -%}
 
 {% block friendly_url_widget %}
-	<div class="js-entity-url-list-new-row" data-index="{{ form.vars.name }}">
-		{{ form_widget(form.domain) }}/
-		{{ form_widget(form.slug) }}
+	<div class="js-entity-url-list-new-row form-line" data-index="{{ form.vars.name }}">
+		<div class="form-line__label form-line__label--input">
+			{{ form_widget(form.domain) }}
+		</div>
+		<div class="form-line__side">
+			<div class="form-line__item form-line__item--text">
+				/
+			</div>
+			<div class="form-line__item">
+				{{ form_widget(form.slug) }}
+			</div>
+			<div class="form-line__item">
+				<button class="js-entity-url-list-new-row-delete-button btn-no-style" type="button">
+					<i class="svg svg-circle-cross in-icon in-icon--delete"></i>
+				</button>
+			</div>
+		</div>
 		{{ form_errors(form.slug) }}
-		<button class="js-entity-url-list-new-row-delete-button btn-no-style" type="button">
-			<i class="svg svg-circle-cross"></i>
-		</button>
 	</div>
 {% endblock friendly_url_widget %}
 
@@ -327,7 +341,7 @@
 				{% endif %}
 				{% if not isCheckbox|default(false) %}:{% endif %}
 				{% if required %}
-					<span class="js-form-compulsory form-compulsory {{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__compulsory' }}">
+					<span class="js-form-compulsory form-compulsory {{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__compulsory' }} {{ compulsoryClass|default('') }}">
 						<span class="sprite sprite-star"></span>
 					</span>
 				{% endif %}

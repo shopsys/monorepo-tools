@@ -1,9 +1,9 @@
 {{ form_start(form) }}
-	<div class="wrap-border">
+	<div class="wrap-border form-group">
+		<div class="form-group__title">
+			{{ 'Nastavení'|trans }}
+		</div>
 		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna eshopu'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen' } }) }}
-	</div>
-
-	<div class="wrap-border">
 		{% for item in form.domainDefaultCurrencies %}
 			{{ form_row(item, { label: 'Základní měna domény %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}

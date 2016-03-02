@@ -5,6 +5,10 @@ Form field constructions, with many variants and uses
 
 */
 
+@form-line-input-size: 230px;
+@form-line-label-size: 230px;
+@form-line-gap-size: 10px;
+
 .form-line {
 	.cfx();
 	padding: 10px 15px 10px 15px;
@@ -46,7 +50,7 @@ Form field constructions, with many variants and uses
 	}
 
 	&__label {
-		width: 230px;
+		width: @form-line-label-size;
 		padding: 6px 10px 6px 0;
 		float: left;
 
@@ -94,7 +98,7 @@ Form field constructions, with many variants and uses
 
 	&__item {
 		display: inline-block;
-		padding-right: 10px;
+		padding-right: @form-line-gap-size;
 		position: relative;
 		vertical-align: middle;
 
@@ -131,6 +135,11 @@ Form field constructions, with many variants and uses
 			text-align: center;
 		}
 
+		&--input-size {
+			width: @form-line-input-size - @form-line-gap-size;
+			height: 32px;
+		}
+
 		&__icon {
 			position: absolute;
 			top: 4px;
@@ -150,6 +159,16 @@ Form field constructions, with many variants and uses
 			img {
 				.center-image();
 			}
+		}
+
+		&__price {
+			padding-top: 6px;
+			padding-bottom: 6px;
+			width: 140px;
+			display: inline-block;
+			vertical-align: middle;
+
+			text-align: right;
 		}
 	}
 

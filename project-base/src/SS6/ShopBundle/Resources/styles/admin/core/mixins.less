@@ -389,28 +389,52 @@
 
 .flex-wrap(@wrap: nowrap) {
 	-webkit-box-wrap: @wrap;
-	-webkit-flex-wrap: @wrap;
-	-moz-flex-wrap: @wrap;
-	-ms-flex-wrap: @wrap;
+	--webkit-flex-wrap: @wrap;
+	--moz-flex-wrap: @wrap;
+	--ms-flex-wrap: @wrap;
 	flex-wrap: @wrap;
 }
 
-.align-items(@align: stretch) {
+.flex-align-items(@align: stretch) {
 	-webkit-align-items: @align;
-	-moz-align-items: @align;
-	-ms-align-items: @align;
+	--moz-align-items: @align;
+	--ms-align-items: @align;
 	align-items: @align;
+}
+
+.flex-align-self(@align: flex-start) {
+	-webkit-align-self: @align;
+	align-self: @align;
 }
 
 .flex-order(@order) {
 	-webkit-box-ordinal-group: @order;
-	-moz-box-ordinal-group: @order;
-	-ms-flex-order: @order;
-	-webkit-order: @order;
+	--moz-box-ordinal-group: @order;
+	--ms-flex-order: @order;
+	--webkit-order: @order;
 	order: @order;
 }
 
 .flex-grow(@grow: 1) {
 	-webkit-flex-grow: @grow;
 	flex-grow: @grow;
+}
+
+.flex-justify(@justify: space-between) {
+	justify-content: @justify;
+}
+
+.flex-basis(@base: 0) {
+	flex-basis: @base;
+}
+
+.flex-direction(@direction: row) {
+	flex-direction: @direction;
+}
+
+.width-calc(@equation, @fallback) {
+	width: @fallback;
+	width: ~"-webkit-calc(@{equation})";
+	width: ~"-moz-calc(@{equation})";
+	width: ~"calc(@{equation})";
 }
