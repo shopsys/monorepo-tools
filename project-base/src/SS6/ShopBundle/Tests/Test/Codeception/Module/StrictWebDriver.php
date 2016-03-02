@@ -92,6 +92,21 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $css
+	 */
+	public function clickByCss($css) {
+		parent::click(['css' => $css]);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function clickByElement(WebDriverElement $element) {
+		$element->click();
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function fillField($field, $value) {
@@ -100,6 +115,15 @@ class StrictWebDriver extends WebDriver {
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
 		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string $value
+	 */
+	public function fillFieldByElement(WebDriverElement $element, $value) {
+		$element->clear();
+		$element->sendKeys($value);
 	}
 
 	/**
@@ -119,6 +143,22 @@ class StrictWebDriver extends WebDriver {
 	 */
 	public function fillFieldByCss($css, $value) {
 		parent::fillField(['css' => $css], $value);
+	}
+
+	/**
+	 * @param string $text
+	 * @param string $css
+	 */
+	public function seeInCss($text, $css) {
+		parent::see($text, ['css' => $css]);
+	}
+
+	/**
+	 * @param string $text
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 */
+	public function seeInElement($text, WebDriverElement $element) {
+		$this->assertContains($text, $element->getText());
 	}
 
 	/**
@@ -196,10 +236,10 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
-	 * @param string $fieldName
 	 * @param string $value
+	 * @param string $fieldName
 	 */
-	public function seeInFieldByName($fieldName, $value) {
+	public function seeInFieldByName($value, $fieldName) {
 		$locator = Crawler::xpathLiteral(trim($fieldName));
 		$xpath = './/*[self::input | self::textarea | self::select][@name = ' . $locator . ']';
 
@@ -207,10 +247,10 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
-	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 * @param string $value
+	 * @param \Facebook\WebDriver\WebDriverElement $element
 	 */
-	public function seeInFieldByElement(WebDriverElement $element, $value) {
+	public function seeInFieldByElement($value, WebDriverElement $element) {
 		parent::seeInField($element, $value);
 	}
 

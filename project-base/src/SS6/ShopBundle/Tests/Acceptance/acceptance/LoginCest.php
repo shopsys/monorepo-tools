@@ -38,14 +38,4 @@ class LoginCest {
 		$me->seeCurrentPageEquals('/admin/');
 	}
 
-	public function testLoginFront(AcceptanceTester $me) {
-		$me->wantTo('login on FE');
-		$me->amOnPage('/prihlaseni/');
-		$me->see('Přihlášení');
-		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
-		$me->fillFieldByName('front_login_form[password]', 'user123');
-		$me->clickByText('Přihlásit');
-		$me->see('Jaromír');
-	}
-
 }

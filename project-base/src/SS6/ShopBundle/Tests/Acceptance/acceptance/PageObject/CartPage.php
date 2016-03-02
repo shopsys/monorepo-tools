@@ -21,25 +21,49 @@ class CartPage {
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	public function getQuantityFieldByProductName($productName) {
-		$table = $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart'));
+		$row = $this->findProductRowInCartByName($productName);
 
-		$rows = $table->findElements(WebDriverBy::cssSelector('tr'));
+		return $row->findElement(WebDriverBy::cssSelector('input[name^="cart_form[quantities]"]'));
+	}
+
+	/**
+	 * @param string $productName
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	private function findProductRowInCartByName($productName) {
+		$rows = $this->webDriver->findElements(WebDriverBy::cssSelector('.table-cart tr'));
 
 		foreach ($rows as $row) {
 			try {
 				$nameCell = $row->findElement(WebDriverBy::cssSelector('.table-cart__title'));
 
 				if ($nameCell->getText() === $productName) {
-					$quantityInput = $row->findElement(WebDriverBy::cssSelector('input[name^="cart_form[quantities]"]'));
-					return $quantityInput;
+					return $row;
 				}
 			} catch (\Facebook\WebDriver\Exception\NoSuchElementException $ex) {
 				continue;
 			}
 		}
 
-		$message = 'Unable to find quantity input in cart for product "' . $productName . '"';
+		$message = 'Unable to find row containing product "' . $productName . '" in cart.';
 		throw new \Facebook\WebDriver\Exception\NoSuchElementException($message);
+	}
+
+	/**
+	 * @param string $productName
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function getProductPriceColumnByName($productName) {
+		$row = $this->findProductRowInCartByName($productName);
+
+		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
+	}
+
+	/**
+	 * @return \Facebook\WebDriver\WebDriverElement
+	 */
+	public function getTotalProductsPriceColumn() {
+		return $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart .table-cart__foot .table-cart__foot__total'));
 	}
 
 }

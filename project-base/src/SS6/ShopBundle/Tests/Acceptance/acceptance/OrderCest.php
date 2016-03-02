@@ -63,7 +63,7 @@ class OrderCest {
 		$me->amOnPage('/objednavka/');
 		$me->clickByText('Pokračovat v objednávce');
 
-		$me->seeInFieldByName('order_personal_info_form[firstName]', 'Jan');
+		$me->seeInFieldByName('Jan', 'order_personal_info_form[firstName]');
 	}
 
 }
