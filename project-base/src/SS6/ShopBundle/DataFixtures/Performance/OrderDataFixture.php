@@ -68,12 +68,13 @@ class OrderDataFixture {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
-		for ($i = 0; $i < self::ORDERS_COUNT; $i++) {
-			if ($i % self::BATCH_SIZE === 0) {
+		for ($orderIndex = 0; $orderIndex < self::ORDERS_COUNT; $orderIndex++) {
+			$this->createOrder();
+
+			if ($orderIndex % self::BATCH_SIZE === 0) {
+				$this->printProgress($orderIndex);
 				$this->em->clear();
 			}
-
-			$this->createOrder();
 		}
 
 		$this->sqlLoggerFacade->reenableLogging();
@@ -134,6 +135,13 @@ class OrderDataFixture {
 		$orderData->currency = $this->persistentReferenceService->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
 		return $orderData;
+	}
+
+	/**
+	 * @param $orderIndex
+	 */
+	private function printProgress($orderIndex) {
+		echo sprintf("%d/%d\r", $orderIndex, self::ORDERS_COUNT);
 	}
 
 }
