@@ -60,6 +60,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData = new OrderData();
 		$orderData->transport = $transport;
 		$orderData->payment = $payment;
+		$orderData->status = $orderStatus;
 		$orderData->firstName = 'orderFirstName';
 		$orderData->lastName = 'orderLastName';
 		$orderData->email = 'order@email.com';
@@ -77,7 +78,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$order = new Order(
 			$orderData,
 			'123456',
-			$orderStatus,
 			'7ebafe9fe'
 		);
 		$order->setCompanyInfo(
@@ -113,6 +113,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData = new OrderData();
 		$orderData->transport = $transport;
 		$orderData->payment = $payment;
+		$orderData->status = $orderStatus;
 		$orderData->firstName = 'orderFirstName';
 		$orderData->lastName = 'orderLastName';
 		$orderData->email = 'order@email.com';
@@ -130,7 +131,6 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 		$order = new Order(
 			$orderData,
 			'123456',
-			$orderStatus,
 			'7eba123456fe9fe'
 		);
 		$order->setCompanyInfo(

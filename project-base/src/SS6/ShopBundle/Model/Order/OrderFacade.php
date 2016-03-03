@@ -174,7 +174,7 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
-		$orderStatus = $this->orderStatusRepository->getDefault();
+		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
 
@@ -183,7 +183,6 @@ class OrderFacade {
 		$order = new Order(
 			$orderData,
 			$orderNumber,
-			$orderStatus,
 			$orderUrlHash,
 			$user
 		);
@@ -228,8 +227,7 @@ class OrderFacade {
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
 		$originalOrderStatus = $order->getStatus();
-		$newOrderStatus = $orderData->status;
-		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus);
+		$orderEditResult = $this->orderService->editOrder($order, $orderData);
 
 		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
 			$this->em->persist($orderItem);
@@ -248,7 +246,7 @@ class OrderFacade {
 			if ($originalOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
 				$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 			}
-			if ($newOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
+			if ($orderData->status->getType() === OrderStatus::TYPE_CANCELED) {
 				$this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
 			}
 
