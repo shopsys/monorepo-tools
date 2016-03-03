@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 
+use DateTime;
+use DateTimeInterface;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
@@ -98,6 +100,48 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('deliveryStreet', $order->getDeliveryStreet());
 		$this->assertSame('deliveryCity', $order->getDeliveryCity());
 		$this->assertSame('deliveryPostcode', $order->getDeliveryPostCode());
+	}
+
+	public function testOrderCreatedWithEmptyCreatedAtIsCreatedNow() {
+		$orderData = new OrderData();
+		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
+		$user = null;
+
+		$orderData->createdAt = null;
+		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', $user);
+
+		$this->assertDateTimeIsCloseTo(new DateTime(), $order->getCreatedAt(), 5);
+	}
+
+	public function testOrderCanBeCreatedWithSpecificCreatedAt() {
+		$orderData = new OrderData();
+		$orderStatus = new OrderStatus(new OrderStatusData(), OrderStatus::TYPE_NEW);
+		$user = null;
+
+		$createAt = new DateTime('2000-01-01 01:00:00');
+		$orderData->createdAt = $createAt;
+		$order = new Order($orderData, 'orderNumber', $orderStatus, 'urlHash', $user);
+
+		$this->assertEquals($createAt, $order->getCreatedAt());
+	}
+
+	/**
+	 * @param \DateTimeInterface $expected
+	 * @param \DateTimeInterface $actual
+	 * @param int $deltaInSeconds
+	 */
+	private function assertDateTimeIsCloseTo(DateTimeInterface $expected, DateTimeInterface $actual, $deltaInSeconds) {
+		$diffInSeconds = $expected->getTimestamp() - $actual->getTimestamp();
+
+		if (abs($diffInSeconds) > $deltaInSeconds) {
+			$message = sprintf(
+				'Failed asserting that %s is close to %s (delta: %d seconds)',
+				$expected->format(DateTime::ISO8601),
+				$actual->format(DateTime::ISO8601),
+				$deltaInSeconds
+			);
+			$this->fail($message);
+		}
 	}
 
 }

@@ -308,7 +308,11 @@ class Order {
 		$this->status = $orderStatus;
 		$this->customer = $user;
 		$this->deleted = false;
-		$this->createdAt = new DateTime();
+		if ($orderData->createdAt === null) {
+			$this->createdAt = new DateTime();
+		} else {
+			$this->createdAt = $orderData->createdAt;
+		}
 		$this->domainId = $orderData->domainId;
 		$this->urlHash = $urlHash;
 		$this->currency = $orderData->currency;

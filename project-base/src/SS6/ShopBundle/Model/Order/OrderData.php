@@ -130,6 +130,11 @@ class OrderData {
 	public $itemsWithoutTransportAndPayment;
 
 	/**
+	 * @var \DateTime|null
+	 */
+	public $createdAt;
+
+	/**
 	 * @var int
 	 */
 	public $domainId;
@@ -192,6 +197,7 @@ class OrderData {
 			$orderItemsWithoutTransportAndPaymentData[$orderItem->getId()] = $orderItemData;
 		}
 		$this->itemsWithoutTransportAndPayment = $orderItemsWithoutTransportAndPaymentData;
+		$this->createdAt = $order->getCreatedAt();
 		$this->domainId = $order->getDomainId();
 		$this->currency = $order->getCurrency();
 		$this->createdAsAdministrator = $order->getCreatedAsAdministrator();

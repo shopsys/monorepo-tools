@@ -131,6 +131,7 @@ class OrderDataFixture {
 		$orderData->deliveryCity = 'Zemín';
 		$orderData->deliveryPostcode = '54321';
 		$orderData->note = 'Prosím o dodání do pátku. Děkuji.';
+		$orderData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
 		$orderData->domainId = 1;
 		$orderData->currency = $this->persistentReferenceService->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
