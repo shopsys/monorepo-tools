@@ -7,16 +7,24 @@ use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
+use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use SS6\ShopBundle\Model\Product\Product;
+use SS6\ShopBundle\Model\Product\ProductEditFacade;
 
 class OrderDataFixture {
 
 	const ORDERS_COUNT = 50000;
+	const PRODUCTS_PER_ORDER_COUNT = 6;
 	const BATCH_SIZE = 10;
+
+	/**
+	 * @var int[]
+	 */
+	private $performanceProductIds;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -48,25 +56,35 @@ class OrderDataFixture {
 	 */
 	private $orderPreviewFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 */
+	private $productEditFacade;
+
 	public function __construct(
 		EntityManager $em,
 		SqlLoggerFacade $sqlLoggerFacade,
 		Faker $faker,
 		PersistentReferenceService $persistentReferenceService,
 		OrderFacade $orderFacade,
-		OrderPreviewFactory $orderPreviewFactory
+		OrderPreviewFactory $orderPreviewFactory,
+		ProductEditFacade $productEditFacade
 	) {
+		$this->performanceProductIds = [];
 		$this->em = $em;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->faker = $faker;
 		$this->persistentReferenceService = $persistentReferenceService;
 		$this->orderFacade = $orderFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
+		$this->productEditFacade = $productEditFacade;
 	}
 
 	public function load() {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
+
+		$this->loadPerformanceProductIds();
 
 		for ($orderIndex = 0; $orderIndex < self::ORDERS_COUNT; $orderIndex++) {
 			$this->createOrder();
@@ -83,16 +101,8 @@ class OrderDataFixture {
 	private function createOrder() {
 		$user = null;
 		$orderData = $this->createOrderData();
-		$products = [
-				DemoProductDataFixture::PRODUCT_PREFIX . '1' => 2,
-				DemoProductDataFixture::PRODUCT_PREFIX . '3' => 1,
-		];
+		$quantifiedProducts = $this->createQuantifiedProducts();
 
-		$quantifiedProducts = [];
-		foreach ($products as $productReferenceName => $quantity) {
-			$product = $this->persistentReferenceService->getReference($productReferenceName);
-			$quantifiedProducts[] = new QuantifiedProduct($product, $quantity);
-		}
 		$orderPreview = $this->orderPreviewFactory->create(
 			$orderData->currency,
 			$orderData->domainId,
@@ -137,6 +147,48 @@ class OrderDataFixture {
 		$orderData->currency = $this->persistentReferenceService->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
 		return $orderData;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[]
+	 */
+	private function createQuantifiedProducts() {
+		$quantifiedProducts = [];
+
+		$randomProductIds = $this->getRandomPerformanceProductIds(self::PRODUCTS_PER_ORDER_COUNT);
+		foreach ($randomProductIds as $randomProductId) {
+			$product = $this->productEditFacade->getById($randomProductId);
+			$quantity = $this->faker->numberBetween(1, 10);
+
+			$quantifiedProducts[] = new QuantifiedProduct($product, $quantity);
+		}
+
+		return $quantifiedProducts;
+	}
+
+	private function loadPerformanceProductIds() {
+		$firstPerformaceProduct = $this->persistentReferenceService->getReference(
+			PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
+		);
+		/* @var $firstPerformaceProduct \SS6\ShopBundle\Model\Product\Product */
+
+		$qb = $this->em->createQueryBuilder()
+			->select('p.id')
+			->from(Product::class, 'p')
+			->where('p.id >= :firstPerformanceProductId')
+			->andWhere('p.variantType != :mainVariantType')
+			->setParameter('firstPerformanceProductId', $firstPerformaceProduct->getId())
+			->setParameter('mainVariantType', Product::VARIANT_TYPE_MAIN);
+
+		$this->performanceProductIds = array_map('array_pop', $qb->getQuery()->getResult());
+	}
+
+	/**
+	 * @param int $count
+	 * @return int[]
+	 */
+	private function getRandomPerformanceProductIds($count) {
+		return $this->faker->randomElements($this->performanceProductIds, $count);
 	}
 
 	/**
