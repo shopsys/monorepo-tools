@@ -62,7 +62,7 @@ class OrderService {
 		$orderPaymentData = $orderData->orderPayment;
 		$orderPaymentData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
 
-		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
+		$statusChanged = $order->getStatus() !== $orderData->status;
 		$order->edit(
 			$orderData,
 			$orderStatus

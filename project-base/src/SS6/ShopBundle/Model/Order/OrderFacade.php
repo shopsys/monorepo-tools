@@ -228,7 +228,7 @@ class OrderFacade {
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
 		$originalOrderStatus = $order->getStatus();
-		$newOrderStatus = $this->orderStatusRepository->getById($orderData->statusId);
+		$newOrderStatus = $orderData->status;
 		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus);
 
 		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {

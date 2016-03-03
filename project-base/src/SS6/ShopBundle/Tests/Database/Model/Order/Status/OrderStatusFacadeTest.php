@@ -26,7 +26,7 @@ class OrderStatusFacadeTest extends DatabaseTestCase {
 
 		$orderData = new OrderData();
 		$orderData->setFromEntity($order);
-		$orderData->statusId = $orderStatusToDelete->getId();
+		$orderData->status = $orderStatusToDelete;
 		$orderFacade->edit($order->getId(), $orderData);
 
 		$orderStatusFacade->deleteById($orderStatusToDelete->getId(), $orderStatusToReplaceWith->getId());

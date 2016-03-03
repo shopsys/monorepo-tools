@@ -8,6 +8,7 @@ use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -56,16 +57,10 @@ class OrderFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$orderStatusChoices = [];
-		foreach ($this->allOrderStatuses as $orderStatus) {
-			/* @var $orderStatus \SS6\ShopBundle\Model\Order\Status\OrderStatus */
-			$orderStatusChoices[$orderStatus->getId()] = $orderStatus->getName();
-		}
-
 		$builder
 			->add('orderNumber', FormType::TEXT, ['read_only' => true])
-			->add('statusId', FormType::CHOICE, [
-				'choices' => $orderStatusChoices,
+			->add('status', FormType::CHOICE, [
+				'choice_list' => new ObjectChoiceList($this->allOrderStatuses, 'name', [], null, 'id'),
 				'multiple' => false,
 				'expanded' => false,
 				'required' => true,
