@@ -174,7 +174,6 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
-		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
 
@@ -206,6 +205,7 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
+		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
 		$user = $this->currentCustomer->findCurrentUser();
 		$order = $this->createOrder($orderData, $orderPreview, $user);

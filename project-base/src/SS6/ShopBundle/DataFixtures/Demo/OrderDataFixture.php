@@ -14,7 +14,6 @@ use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -33,6 +32,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Jiří';
 		$orderData->lastName = 'Ševčík';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -49,13 +49,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '9' => 2,
 				ProductDataFixture::PRODUCT_PREFIX . '10' => 3,
 			],
-			$this->getReference('order_status_done'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Iva';
 		$orderData->lastName = 'Jačková';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -74,13 +74,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '20' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '15' => 5,
 			],
-			$this->getReference('order_status_new'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_cp');
 		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Adamovský';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -97,13 +97,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '4' => 6,
 				ProductDataFixture::PRODUCT_PREFIX . '11' => 1,
 			],
-			$this->getReference('order_status_done'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_ppl');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Iveta';
 		$orderData->lastName = 'Prvá';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -119,13 +119,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
 			],
-			$this->getReference('order_status_in_progress'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Jana';
 		$orderData->lastName = 'Janíčková';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -143,13 +143,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '1' => 2,
 			],
-			$this->getReference('order_status_done'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_ppl');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Dominik';
 		$orderData->lastName = 'Hašek';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -170,13 +170,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '17' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '18' => 1,
 			],
-			$this->getReference('order_status_new'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Jiří';
 		$orderData->lastName = 'Sovák';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -193,13 +193,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '7' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '8' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '12' => 2,
-			],
-			$this->getReference('order_status_canceled')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_cp');
 		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Josef';
 		$orderData->lastName = 'Somr';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -216,13 +216,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '1' => 6,
 				ProductDataFixture::PRODUCT_PREFIX . '2' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '12' => 1,
-			],
-			$this->getReference('order_status_done')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_cp');
 		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Václav';
 		$orderData->lastName = 'Svěrkoš';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -237,13 +237,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$orderData,
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
-			],
-			$this->getReference('order_status_in_progress')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Ivan';
 		$orderData->lastName = 'Horník';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -259,14 +259,14 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '9' => 3,
 				ProductDataFixture::PRODUCT_PREFIX . '13' => 2,
-			],
-			$this->getReference('order_status_canceled')
+			]
 		);
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Novák';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -293,7 +293,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '1' => 2,
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
-			$this->getReference('order_status_new'),
 			$user
 		);
 
@@ -301,6 +300,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_cp');
 		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jindřich';
 		$orderData->lastName = 'Němec';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -317,13 +317,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '2' => 2,
 				ProductDataFixture::PRODUCT_PREFIX . '4' => 4,
 			],
-			$this->getReference('order_status_new'),
 			$user
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_ppl');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Adam';
 		$orderData->lastName = 'Bořič';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -338,13 +338,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$orderData,
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
-			],
-			$this->getReference('order_status_new')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Evžen';
 		$orderData->lastName = 'Farný';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -361,13 +361,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '2' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
-			],
-			$this->getReference('order_status_in_progress')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Ivana';
 		$orderData->lastName = 'Janečková';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -383,13 +383,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '4' => 2,
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
-			],
-			$this->getReference('order_status_done')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_cp');
 		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Pavel';
 		$orderData->lastName = 'Novák';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -405,13 +405,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '10' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '20' => 4,
-			],
-			$this->getReference('order_status_new')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_ppl');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Pavla';
 		$orderData->lastName = 'Adámková';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -429,13 +429,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '18' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '19' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
-			],
-			$this->getReference('order_status_done')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Adam';
 		$orderData->lastName = 'Žitný';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -452,13 +452,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '19' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '6' => 1,
-			],
-			$this->getReference('order_status_in_progress')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_ppl');
 		$orderData->payment = $this->getReference('payment_card');
+		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Radim';
 		$orderData->lastName = 'Svátek';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -480,13 +480,13 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
 				ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
-			],
-			$this->getReference('order_status_new')
+			]
 		);
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference('transport_personal');
 		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Viktor';
 		$orderData->lastName = 'Pátek';
 		$orderData->email = 'no-reply@netdevelo.cz';
@@ -501,8 +501,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			$orderData,
 			[
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 10,
-			],
-			$this->getReference('order_status_canceled')
+			]
 		);
 
 		$manager->flush();
@@ -511,13 +510,11 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param array $products
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	private function createOrder(
 		OrderData $orderData,
 		array $products,
-		OrderStatus $orderStatus,
 		User $user = null
 	) {
 		$orderFacade = $this->get(OrderFacade::class);
@@ -542,7 +539,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$order = $orderFacade->createOrder($orderData, $orderPreview, $user);
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
-		$order->setStatus($orderStatus);
+
 		$referenceName = self::ORDER_PREFIX . $order->getId();
 		$this->addReference($referenceName, $order);
 	}

@@ -113,6 +113,7 @@ class OrderDataFixture {
 		$orderData = new OrderData();
 		$orderData->transport = $this->persistentReferenceService->getReference('transport_personal');
 		$orderData->payment = $this->persistentReferenceService->getReference('payment_cash');
+		$orderData->status = $this->persistentReferenceService->getReference('order_status_done');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Novák';
 		$orderData->email = 'no-reply@netdevelo.cz';
