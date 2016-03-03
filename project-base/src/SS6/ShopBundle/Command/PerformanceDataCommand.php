@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Command;
 
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
+use SS6\ShopBundle\DataFixtures\Performance\OrderDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -30,6 +31,8 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 		/* @var $productDataFixture \SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture */
 		$userDataFixture = $container->get(UserDataFixture::class);
 		/* @var $userDataFixture \SS6\ShopBundle\DataFixtures\Performance\UserDataFixture */
+		$orderDataFixture = $container->get(OrderDataFixture::class);
+		/* @var $orderDataFixture \SS6\ShopBundle\DataFixtures\Performance\OrderDataFixture */
 
 		$output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
 		$categoryDataFixture->load();
@@ -37,6 +40,8 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 		$productDataFixture->load();
 		$output->writeln('<fg=green>loading ' . UserDataFixture::class . '</fg=green>');
 		$userDataFixture->load();
+		$output->writeln('<fg=green>loading ' . OrderDataFixture::class . '</fg=green>');
+		$orderDataFixture->load();
 	}
 
 }
