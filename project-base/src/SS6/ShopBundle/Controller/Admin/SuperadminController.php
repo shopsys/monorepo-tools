@@ -99,12 +99,7 @@ class SuperadminController extends AdminBaseController {
 
 			$this->delayedPricingSetting->scheduleSetInputPriceType($pricingSettingData['type']);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('<strong><a href="{{ url }}">Nastavení cenotvorby</a></strong> bylo upraveno'),
-				[
-					'url' => $this->generateUrl('admin_superadmin_pricing'),
-				]
-			);
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení cenotvorby bylo upraveno'));
 			return $this->redirectToRoute('admin_superadmin_pricing');
 		}
 
@@ -173,12 +168,7 @@ class SuperadminController extends AdminBaseController {
 				$this->moduleFacade->setEnabled($moduleName, $isEnabled);
 			}
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Nastavení zapínacích modulů bylo upraveno'),
-				[
-					'url' => $this->generateUrl('admin_superadmin_pricing'),
-				]
-			);
+			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení zapínacích modulů bylo upraveno'));
 			return $this->redirectToRoute('admin_superadmin_modules');
 		}
 
