@@ -7,6 +7,15 @@
 		$('.js-no-validate-button').click(function () {
 			$(this).closest('form').addClass('js-no-validate');
 		});
+		$('.js-validation-error-close').click(function () {
+			$(this).closest('.js-validation-error').hide();
+		});
+		$('.js-validation-error-toggle').click(function () {
+			$(this)
+				.closest('.js-validation-errors-list')
+				.find('.js-validation-error')
+				.toggle();
+		});
 	});
 
 	SS6.validation.showErrors = function (errors, elementName) {

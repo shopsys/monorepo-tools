@@ -506,8 +506,8 @@
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
 		<div class="form-line__error form-error {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
-			<span class="svg svg-circle-remove"></span>
-			<div class="in-message in-message--error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
+			<span class="svg svg-circle-remove js-validation-error-toggle"></span>
+			<div class="in-message in-message--error js-validation-error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
 				<ul class="in-message__list">
 					{% if errors|length > 0 %}
 						{% for error in errors %}
@@ -515,6 +515,7 @@
 						{% endfor %}
 					{% endif %}
 				</ul>
+				<span class="in-message__close js-validation-error-close">x</span>
 			</div>
 		</div>
 	{% endspaceless %}
