@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
@@ -141,7 +142,7 @@ class OrderDataFixture {
 	private function createOrderData() {
 		$orderData = new OrderData();
 		$orderData->transport = $this->getRandomTransport();
-		$orderData->payment = $this->persistentReferenceService->getReference('payment_cash');
+		$orderData->payment = $this->getRandomPayment();
 		$orderData->status = $this->persistentReferenceService->getReference('order_status_done');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Novák';
@@ -250,6 +251,17 @@ class OrderDataFixture {
 		);
 
 		return $this->persistentReferenceService->getReference($randomTransportReferenceName);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 */
+	private function getRandomPayment() {
+		$randomPaymentReferenceName = $this->faker->randomElement(
+			PaymentDataFixture::ALL_PAYMENT_PERSISTENT_REFERECE_NAMES
+		);
+
+		return $this->persistentReferenceService->getReference($randomPaymentReferenceName);
 	}
 
 	/**
