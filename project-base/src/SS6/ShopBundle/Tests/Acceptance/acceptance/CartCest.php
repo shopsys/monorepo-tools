@@ -54,7 +54,7 @@ class CartCest {
 	) {
 		$me->wantTo('add product to cart from homepage');
 		$me->amOnPage('/');
-		$homepagePage->addProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
+		$homepagePage->addTopProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
 		$me->see('Do košíku bylo vloženo zboží');
 		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');
