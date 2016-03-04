@@ -12,7 +12,7 @@ class LoginAsCustomerCest {
 		$me->amOnPage('/admin/customer/edit/3');
 		$me->clickByText('Přihlásit za uživatele');
 		$me->switchToLastOpenedWindow();
-		$me->see('Internetový obchod');
+		$me->seeCurrentPageEquals('/');
 		$me->see('Igor Anpilogov');
 	}
 
