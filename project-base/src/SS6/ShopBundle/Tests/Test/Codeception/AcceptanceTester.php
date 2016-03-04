@@ -43,4 +43,14 @@ class AcceptanceTester extends \Codeception\Actor {
 		$this->waitForJS('return $.active == 0;', $timeout);
 	}
 
+	/**
+	 * @param string $username
+	 * @param string $password
+	 */
+	public function loginAsAdmin($username, $password) {
+		$this->amOnPage('/admin/');
+		$this->fillFieldByName('admin_login_form[username]', $username);
+		$this->fillFieldByName('admin_login_form[password]', $password);
+		$this->clickByText('Přihlásit');
+	}
 }
