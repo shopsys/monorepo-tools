@@ -41,6 +41,12 @@ class SliderItemFormType extends AbstractType {
 			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => $this->scenarioCreate,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte obrázek',
+						'groups' => 'create',
+					]),
+				],
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
@@ -61,9 +67,12 @@ class SliderItemFormType extends AbstractType {
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
+		$validationGroups = $this->scenarioCreate ? ['Default', 'create'] : ['Default'];
+
 		$resolver->setDefaults([
 			'data_class' => SliderItemData::class,
 			'attr' => ['novalidate' => 'novalidate'],
+			'validation_groups' => $validationGroups,
 		]);
 	}
 
