@@ -93,9 +93,10 @@ class AdvertController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Reklama <strong>{{ name }}</strong> byla upravena'),
+					t('Reklama <a href="{{ url }}"><strong>{{ name }}</strong></a> byla upravena'),
 					[
 						'name' => $advert->getName(),
+						'url' => $this->generateUrl('admin_advert_edit', ['id' => $advert->getId()]),
 					]
 				);
 			return $this->redirectToRoute('admin_advert_list');
@@ -182,9 +183,10 @@ class AdvertController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Reklama <strong>{{ name }}</strong> byla vytvořena'),
+					t('Reklama <a href="{{ url }}"><strong>{{ name }}</strong></a> byla vytvořena'),
 					[
 						'name' => $advert->getName(),
+						'url' => $this->generateUrl('admin_advert_edit', ['id' => $advert->getId()]),
 					]
 				);
 			return $this->redirectToRoute('admin_advert_list');
