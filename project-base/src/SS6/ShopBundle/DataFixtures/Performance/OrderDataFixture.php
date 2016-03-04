@@ -157,29 +157,29 @@ class OrderDataFixture {
 			$orderData->companyNumber = $billingAddress->getCompanyNumber();
 			$orderData->companyTaxNumber = $billingAddress->getCompanyTaxNumber();
 		} else {
-			$orderData->firstName = 'Jan';
-			$orderData->lastName = 'Novák';
-			$orderData->email = 'no-reply@netdevelo.cz';
-			$orderData->telephone = '+420123456789';
-			$orderData->street = 'Pouliční 11';
-			$orderData->city = 'Městník';
-			$orderData->postcode = '12345';
-			$orderData->companyName = 'netdevelo s.r.o.';
-			$orderData->companyNumber = '123456789';
-			$orderData->companyTaxNumber = '987654321';
+			$orderData->firstName = $this->faker->firstName;
+			$orderData->lastName = $this->faker->lastName;
+			$orderData->email = $this->faker->safeEmail;
+			$orderData->telephone = $this->faker->phoneNumber;
+			$orderData->street = $this->faker->streetAddress;
+			$orderData->city = $this->faker->city;
+			$orderData->postcode = $this->faker->postcode;
+			$orderData->companyName = $this->faker->company;
+			$orderData->companyNumber = $this->faker->randomNumber(6);
+			$orderData->companyTaxNumber = $this->faker->randomNumber(6);
 		}
 
 		$orderData->transport = $this->getRandomTransport();
 		$orderData->payment = $this->getRandomPayment();
 		$orderData->status = $this->persistentReferenceService->getReference('order_status_done');
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = 'Karel Vesela';
-		$orderData->deliveryCompanyName = 'Bestcompany';
-		$orderData->deliveryTelephone = '+420987654321';
-		$orderData->deliveryStreet = 'Zakopaná 42';
-		$orderData->deliveryCity = 'Zemín';
-		$orderData->deliveryPostcode = '54321';
-		$orderData->note = 'Prosím o dodání do pátku. Děkuji.';
+		$orderData->deliveryContactPerson = $this->faker->firstName . ' ' . $this->faker->lastName;
+		$orderData->deliveryCompanyName = $this->faker->company;
+		$orderData->deliveryTelephone = $this->faker->phoneNumber;
+		$orderData->deliveryStreet = $this->faker->streetAddress;
+		$orderData->deliveryCity = $this->faker->city;
+		$orderData->deliveryPostcode = $this->faker->postcode;
+		$orderData->note = $this->faker->text(200);
 		$orderData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
 		$orderData->domainId = 1;
 		$orderData->currency = $this->persistentReferenceService->getReference(CurrencyDataFixture::CURRENCY_CZK);
