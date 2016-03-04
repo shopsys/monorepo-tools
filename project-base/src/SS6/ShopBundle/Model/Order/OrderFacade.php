@@ -194,7 +194,6 @@ class OrderFacade {
 
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
-		$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 		$this->em->flush();
 
 		return $order;
@@ -208,7 +207,9 @@ class OrderFacade {
 		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
 		$user = $this->currentCustomer->findCurrentUser();
+
 		$order = $this->createOrder($orderData, $orderPreview, $user);
+		$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 
 		$this->cartFacade->cleanCart();
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
