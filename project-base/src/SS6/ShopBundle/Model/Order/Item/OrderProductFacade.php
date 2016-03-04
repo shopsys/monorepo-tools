@@ -106,7 +106,7 @@ class OrderProductFacade {
 			$this->productHiddenRecalculator->calculateHiddenForProduct($relevantProduct);
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($relevantProduct);
 			$this->productService->markProductForVisibilityRecalculation($relevantProduct);
-			$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 		}
+		$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 	}
 }
