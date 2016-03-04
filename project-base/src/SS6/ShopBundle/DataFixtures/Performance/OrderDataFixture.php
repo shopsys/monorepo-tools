@@ -120,7 +120,7 @@ class OrderDataFixture {
 
 	private function createOrder() {
 		$user = $this->getRandomUserOrNull();
-		$orderData = $this->createOrderData();
+		$orderData = $this->createOrderData($user);
 		$quantifiedProducts = $this->createQuantifiedProducts();
 
 		$orderPreview = $this->orderPreviewFactory->create(
@@ -137,23 +137,41 @@ class OrderDataFixture {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 * @return \SS6\ShopBundle\Model\Order\OrderData
 	 */
-	private function createOrderData() {
+	private function createOrderData(User $user = null) {
 		$orderData = new OrderData();
+
+		if ($user !== null) {
+			$orderData->firstName = $user->getFirstName();
+			$orderData->lastName = $user->getLastName();
+			$orderData->email = $user->getEmail();
+
+			$billingAddress = $user->getBillingAddress();
+			$orderData->telephone = $billingAddress->getTelephone();
+			$orderData->street = $billingAddress->getStreet();
+			$orderData->city = $billingAddress->getCity();
+			$orderData->postcode = $billingAddress->getPostcode();
+			$orderData->companyName = $billingAddress->getCompanyName();
+			$orderData->companyNumber = $billingAddress->getCompanyNumber();
+			$orderData->companyTaxNumber = $billingAddress->getCompanyTaxNumber();
+		} else {
+			$orderData->firstName = 'Jan';
+			$orderData->lastName = 'Novák';
+			$orderData->email = 'no-reply@netdevelo.cz';
+			$orderData->telephone = '+420123456789';
+			$orderData->street = 'Pouliční 11';
+			$orderData->city = 'Městník';
+			$orderData->postcode = '12345';
+			$orderData->companyName = 'netdevelo s.r.o.';
+			$orderData->companyNumber = '123456789';
+			$orderData->companyTaxNumber = '987654321';
+		}
+
 		$orderData->transport = $this->getRandomTransport();
 		$orderData->payment = $this->getRandomPayment();
 		$orderData->status = $this->persistentReferenceService->getReference('order_status_done');
-		$orderData->firstName = 'Jan';
-		$orderData->lastName = 'Novák';
-		$orderData->email = 'no-reply@netdevelo.cz';
-		$orderData->telephone = '+420123456789';
-		$orderData->street = 'Pouliční 11';
-		$orderData->city = 'Městník';
-		$orderData->postcode = '12345';
-		$orderData->companyName = 'netdevelo s.r.o.';
-		$orderData->companyNumber = '123456789';
-		$orderData->companyTaxNumber = '987654321';
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = 'Karel Vesela';
 		$orderData->deliveryCompanyName = 'Bestcompany';
