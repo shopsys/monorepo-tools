@@ -2,44 +2,37 @@
 
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LoginPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CustomerLoginCest {
 
-	public function testLoginAsCustomerFromMainPage(AcceptanceTester $me) {
+	public function testLoginAsCustomerFromMainPage(LoginPage $loginPage, AcceptanceTester $me) {
 		$me->wantTo('login as a customer from main page');
 		$me->amOnPage('/');
 		$me->clickByText('Přihlásit se');
-		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
-		$me->fillFieldByName('front_login_form[password]', 'user123');
-		$me->clickByName('front_login_form[login]');
-		$me->waitForAjax();
+		$loginPage->login('no-reply@netdevelo.cz', 'user123');
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
 		$me->see('Přihlásit se');
 		$me->seeCurrentPageEquals('/');
 	}
 
-	public function testLoginAsCustomerFromCategoryPage(AcceptanceTester $me) {
+	public function testLoginAsCustomerFromCategoryPage(LoginPage $loginPage, AcceptanceTester $me) {
 		$me->wantTo('login as a customer from category page');
 		$me->amOnPage('/pocitace-prislusenstvi/');
 		$me->clickByText('Přihlásit se');
-		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
-		$me->fillFieldByName('front_login_form[password]', 'user123');
-		$me->clickByName('front_login_form[login]');
-		$me->waitForAjax();
+		$loginPage->login('no-reply@netdevelo.cz', 'user123');
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
 		$me->see('Přihlásit se');
 		$me->seeCurrentPageEquals('/');
 	}
 
-	public function testLoginAsCustomerFromLoginPage(AcceptanceTester $me) {
+	public function testLoginAsCustomerFromLoginPage(LoginPage $loginPage, AcceptanceTester $me) {
 		$me->wantTo('login as a customer from login page');
 		$me->amOnPage('/prihlaseni/');
-		$me->fillFieldByName('front_login_form[email]', 'no-reply@netdevelo.cz');
-		$me->fillFieldByName('front_login_form[password]', 'user123');
-		$me->clickByName('front_login_form[login]');
+		$loginPage->login('no-reply@netdevelo.cz', 'user123');
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
 		$me->see('Přihlásit se');

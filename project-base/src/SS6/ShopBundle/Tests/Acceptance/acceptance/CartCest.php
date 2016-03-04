@@ -2,88 +2,105 @@
 
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
-use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\CartPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\HomepagePage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartBoxPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\HomepagePage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductDetailPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest {
 
-	const PRODUCT_DETAIL_QUANTITY_INPUT = '.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]';
-	const PRODUCT_DETAIL_MAIN_WRAPPER = '.js-product-detail-main-add-to-cart-wrapper';
+	public function testAddToCart(ProductListPage $productListPage, AcceptanceTester $me) {
+		$me->wantTo('add product to cart');
+		$me->amOnPage('/televize-audio/');
+		$me->see('Vložit do košíku');
+		$productListPage->addProductToCartByName('Defender 2.0 SPK-480');
+		$me->see('Do košíku bylo vloženo zboží');
+		$me->clickByText('Přejít do košíku');
+		$me->seeInCurrentUrl('/kosik/');
+		$me->see('Objednat');
+	}
 
-	public function testAddingSameProductToCartMakesSum(CartPage $cartPage, AcceptanceTester $me) {
+	public function testAddingSameProductToCartMakesSum(
+		CartPage $cartPage,
+		ProductDetailPage $productDetailPage,
+		CartBoxPage $cartBoxPage,
+		AcceptanceTester $me
+	) {
 		$me->wantTo('have more pieces of the same product as one item in cart');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
-		$me->fillFieldByCss('.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]', '3');
-		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector('.js-product-detail-main-add-to-cart-wrapper'));
-		$me->waitForAjax();
-		$me->see('1 položka za 10 497,00 Kč', WebDriverBy::cssSelector('#cart-box'));
 
-		$me->fillFieldByCss('.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]', '3');
-		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector('.js-product-detail-main-add-to-cart-wrapper'));
-		$me->waitForAjax();
-		$me->see('1 položka za 20 994,00 Kč', WebDriverBy::cssSelector('#cart-box'));
+		$productDetailPage->addProductIntoCart(3);
+		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
+
+		$productDetailPage->addProductIntoCart(3);
+		$cartBoxPage->seeInCartBox('1 položka za 20 994,00 Kč');
 
 		$me->amOnPage('/kosik/');
 
-		$quantityField = $cartPage->getQuantityFieldByProductName('22" Sencor SLE 22F46DM4 HELLO KITTY');
-		$me->seeInFieldByElement(6, $quantityField);
+		$cartPage->assertProductQuantity('22" Sencor SLE 22F46DM4 HELLO KITTY', 6);
 	}
 
-	public function testAddToCartFromProductListPage(CartPage $cartPage, ProductListPage $productListPage, AcceptanceTester $me) {
+	public function testAddToCartFromProductListPage(
+		CartPage $cartPage,
+		ProductListPage $productListPage,
+		CartBoxPage $cartBoxPage,
+		AcceptanceTester $me
+	) {
 		$me->wantTo('add product to cart from product list');
 		$me->amOnPage('/televize-audio/');
 		$productListPage->addProductToCartByName('Defender 2.0 SPK-480', 1);
 		$me->see('Do košíku bylo vloženo zboží');
-		$me->seeInCss('1 položka', '.cart-box__info');
+		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');
-		$productPriceColumn = $cartPage->getProductPriceColumnByName('Defender 2.0 SPK-480');
-		$me->seeInElement('119,00 Kč', $productPriceColumn);
+		$cartPage->assertProductPrice('Defender 2.0 SPK-480', '119,00 Kč');
 	}
 
-	public function testAddToCartFromHomepage(CartPage $cartPage, HomepagePage $homepagePage, AcceptanceTester $me) {
+	public function testAddToCartFromHomepage(
+		CartPage $cartPage,
+		HomepagePage $homepagePage,
+		CartBoxPage $cartBoxPage,
+		AcceptanceTester $me
+	) {
 		$me->wantTo('add product to cart from homepage');
 		$me->amOnPage('/');
 		$homepagePage->addProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
 		$me->see('Do košíku bylo vloženo zboží');
-		$me->seeInCss('1 položka', '.cart-box__info');
+		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');
-		$productPrice = $cartPage->getProductPriceColumnByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
-		$me->seeInElement('3 499,00 Kč', $productPrice);
+		$cartPage->assertProductPrice('22" Sencor SLE 22F46DM4 HELLO KITTY', '3 499,00 Kč');
 	}
 
-	public function testAddToCartFromProductDetail(AcceptanceTester $me) {
+	public function testAddToCartFromProductDetail(
+		ProductDetailPage $productDetailPage,
+		CartBoxPage $cartBoxPage,
+		AcceptanceTester $me
+	) {
 		$me->wantTo('add product to cart from product detail');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 		$me->see('Vložit do košíku');
-		$me->fillFieldByCss(self::PRODUCT_DETAIL_QUANTITY_INPUT, '3');
-		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
-		$me->waitForAjax();
+		$productDetailPage->addProductIntoCart(3);
 		$me->see('Do košíku bylo vloženo zboží');
 		$me->clickByCss('.window-button-close');
-		$me->seeInCss('1 položka za 10 497,00 Kč', '.cart-box__info');
+		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
 		$me->amOnPage('/kosik/');
 		$me->see('22" Sencor SLE 22F46DM4 HELLO KITTY');
 	}
 
-	public function testChangeCartItemAndRecalculatePrice(CartPage $cartPage, AcceptanceTester $me) {
+	public function testChangeCartItemAndRecalculatePrice(
+		CartPage $cartPage,
+		ProductDetailPage $productDetailPage,
+		AcceptanceTester $me
+	) {
 		$me->wantTo('change items in cart and recalculate price');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 		$me->see('Vložit do košíku');
-		$me->fillFieldByCss(self::PRODUCT_DETAIL_QUANTITY_INPUT, '3');
-		$me->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
-		$me->waitForAjax();
+		$productDetailPage->addProductIntoCart(3);
 		$me->clickByText('Přejít do košíku');
 
-		$quantityField = $cartPage->getQuantityFieldByProductName('22" Sencor SLE 22F46DM4 HELLO KITTY');
-		$me->fillFieldByElement($quantityField, 10);
-		$me->waitForAjax();
-		$me->clickByText('Přepočítat');
-		$me->waitForAjax();
-		$orderPriceColumn = $cartPage->getTotalProductsPriceColumn();
-		$me->seeInElement('Celková cena s DPH: 34 990,00 Kč', $orderPriceColumn);
+		$cartPage->changeProductQuantity('22" Sencor SLE 22F46DM4 HELLO KITTY', 10);
+		$cartPage->assertTotalPriceWithVat('34 990,00 Kč');
 	}
 
 }

@@ -1,29 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject;
+namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListComponent;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent;
+use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class HomepagePage {
+class HomepagePage extends AbstractPage {
 
 	/**
-	 * @var \Facebook\WebDriver\WebDriver
-	 */
-	private $webDriver;
-
-	/**
-	 * @var \SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\ProductListComponent
+	 * @var \SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
 	 */
 	private $productListComponent;
 
 	public function __construct(
-		StrictWebDriver $webDriver,
+		StrictWebDriver $strictWebDriver,
+		AcceptanceTester $tester,
 		ProductListComponent $productListComponent
 	) {
-		$this->webDriver = $webDriver->webDriver;
 		$this->productListComponent = $productListComponent;
+		parent::__construct($strictWebDriver, $tester);
 	}
 
 	/**
