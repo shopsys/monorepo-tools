@@ -8,6 +8,9 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
+use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
+use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
@@ -19,12 +22,19 @@ class OrderDataFixture {
 
 	const ORDERS_COUNT = 50000;
 	const PRODUCTS_PER_ORDER_COUNT = 6;
+	const PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS = 25;
+
 	const BATCH_SIZE = 10;
 
 	/**
 	 * @var int[]
 	 */
 	private $performanceProductIds;
+
+	/**
+	 * @var int[]
+	 */
+	private $performanceUserIds;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -61,6 +71,11 @@ class OrderDataFixture {
 	 */
 	private $productEditFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 */
+	private $customerEditFacade;
+
 	public function __construct(
 		EntityManager $em,
 		SqlLoggerFacade $sqlLoggerFacade,
@@ -68,7 +83,8 @@ class OrderDataFixture {
 		PersistentReferenceService $persistentReferenceService,
 		OrderFacade $orderFacade,
 		OrderPreviewFactory $orderPreviewFactory,
-		ProductEditFacade $productEditFacade
+		ProductEditFacade $productEditFacade,
+		CustomerEditFacade $customerEditFacade
 	) {
 		$this->performanceProductIds = [];
 		$this->em = $em;
@@ -78,6 +94,7 @@ class OrderDataFixture {
 		$this->orderFacade = $orderFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->productEditFacade = $productEditFacade;
+		$this->customerEditFacade = $customerEditFacade;
 	}
 
 	public function load() {
@@ -85,6 +102,7 @@ class OrderDataFixture {
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
 		$this->loadPerformanceProductIds();
+		$this->loadPerformanceUserIdsOnFirstDomain();
 
 		for ($orderIndex = 0; $orderIndex < self::ORDERS_COUNT; $orderIndex++) {
 			$this->createOrder();
@@ -99,7 +117,7 @@ class OrderDataFixture {
 	}
 
 	private function createOrder() {
-		$user = null;
+		$user = $this->getRandomUserOrNull();
 		$orderData = $this->createOrderData();
 		$quantifiedProducts = $this->createQuantifiedProducts();
 
@@ -189,6 +207,37 @@ class OrderDataFixture {
 	 */
 	private function getRandomPerformanceProductIds($count) {
 		return $this->faker->randomElements($this->performanceProductIds, $count);
+	}
+
+	private function loadPerformanceUserIdsOnFirstDomain() {
+		$firstPerformaceUser = $this->persistentReferenceService->getReference(
+			PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
+		);
+		/* @var $firstPerformaceUser \SS6\ShopBundle\Model\Customer\User */
+
+		$qb = $this->em->createQueryBuilder()
+			->select('u.id')
+			->from(User::class, 'u')
+			->where('u.id >= :firstPerformanceUserId')
+			->andWhere('u.domainId = :domainId')
+			->setParameter('firstPerformanceUserId', $firstPerformaceUser->getId())
+			->setParameter('domainId', 1);
+
+		$this->performanceUserIds = array_map('array_pop', $qb->getQuery()->getResult());
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 */
+	private function getRandomUserOrNull() {
+		$shouldBeRegisteredUser = $this->faker->boolean(self::PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS);
+
+		if ($shouldBeRegisteredUser) {
+			$userId = $this->faker->randomElement($this->performanceUserIds);
+			return $this->customerEditFacade->getUserById($userId);
+		} else {
+			return null;
+		}
 	}
 
 	/**
