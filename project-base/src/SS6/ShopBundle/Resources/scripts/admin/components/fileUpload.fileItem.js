@@ -35,7 +35,7 @@
 		};
 
 		this.setLabel = function (filename, filesize) {
-			var sizeInMB = Math.round(filesize / 1024 / 1024 * 100) / 100;
+			var sizeInMB = Math.round(filesize / 1000 / 1000 * 100) / 100; //https://en.wikipedia.org/wiki/Binary_prefix
 			$label.text(filename + ' (' + sizeInMB + ' MB)');
 		};
 

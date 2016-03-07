@@ -328,6 +328,7 @@
 			{% block images %}{% endblock %}
 
 			{{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' }, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+			{{ form_errors(form.imagesToUpload) }}
 			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 		</div>
 
