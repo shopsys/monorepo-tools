@@ -183,6 +183,29 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $label
+	 */
+	public function seeCheckboxIsCheckedByLabel($label) {
+
+		/*
+		 * XPath explanation:
+		 *
+		 * First combine() argument:
+		 * Search for <input type="checkbox" id=myCheckboxId>,
+		 * where myCheckboxId is value of "for" attribute of <label for=myCheckboxId>$label</label>.
+		 *
+		 * Second combine() argument:
+		 * Search for <label>$label</label>. Inside of it search for <input type="checkbox">.
+		 */
+		$xpath = Locator::combine(
+			'.//*[self::input[@type="checkbox"]][./@id = //label[contains(normalize-space(string(.)), "' . $label . '")]/@for]',
+			'.//label[contains(normalize-space(string(.)), "' . $label . '")]//.//*[self::input[@type="checkbox"]]'
+		);
+
+		parent::seeCheckboxIsChecked(['xpath' => $xpath]);
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function dontSeeCheckboxIsChecked($checkbox) {
@@ -199,6 +222,29 @@ class StrictWebDriver extends WebDriver {
 	public function dontSeeCheckboxIsCheckedById($checkboxId) {
 		$locator = Crawler::xpathLiteral(trim($checkboxId));
 		$xpath = './/input[@type = "checkbox"][./@id = ' . $locator . ']';
+
+		parent::dontSeeCheckboxIsChecked(['xpath' => $xpath]);
+	}
+
+	/**
+	 * @param string $label
+	 */
+	public function dontSeeCheckboxIsCheckedByLabel($label) {
+
+		/*
+		 * XPath explanation:
+		 *
+		 * First combine() argument:
+		 * Search for <input type="checkbox" id=myCheckboxId>,
+		 * where myCheckboxId is value of "for" attribute of <label for=myCheckboxId>$label</label>.
+		 *
+		 * Second combine() argument:
+		 * Search for <label>$label</label>. Inside of it search for <input type="checkbox">.
+		 */
+		$xpath = Locator::combine(
+			'.//*[self::input[@type="checkbox"]][./@id = //label[contains(normalize-space(string(.)), "' . $label . '")]/@for]',
+			'.//label[contains(normalize-space(string(.)), "' . $label . '")]//.//*[self::input[@type="checkbox"]]'
+		);
 
 		parent::dontSeeCheckboxIsChecked(['xpath' => $xpath]);
 	}
@@ -221,6 +267,28 @@ class StrictWebDriver extends WebDriver {
 		$locator = Crawler::xpathLiteral(trim($optionId));
 		$xpath = './/input[@type = "checkbox" or @type = "radio"][./@id = ' . $locator . ']';
 
+		parent::checkOption(['xpath' => $xpath]);
+	}
+
+	/**
+	 * @param string $label
+	 */
+	public function checkOptionByLabel($label) {
+
+		/*
+		 * XPath explanation:
+		 *
+		 * First combine() argument:
+		 * Search for <input type="checkbox" id=myCheckboxId>,
+		 * where myCheckboxId is value of "for" attribute of <label for=myCheckboxId>$label</label>.
+		 *
+		 * Second combine() argument:
+		 * Search for <label>$label</label>. Inside of it search for <input type="checkbox">.
+		 */
+		$xpath = Locator::combine(
+			'.//*[self::input[@type="checkbox"]][./@id = //label[contains(normalize-space(string(.)), "' . $label . '")]/@for]',
+			'.//label[contains(normalize-space(string(.)), "' . $label . '")]//.//*[self::input[@type="checkbox"]]'
+		);
 		parent::checkOption(['xpath' => $xpath]);
 	}
 
