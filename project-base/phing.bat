@@ -1,3 +1,3 @@
 @ECHO OFF
-SET BIN_TARGET=%~dp0/vendor/phing/phing/bin/phing
+SET BIN_TARGET=%~dp0/phing
 php "%BIN_TARGET%" %*
