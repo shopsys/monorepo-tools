@@ -176,6 +176,7 @@ class OrderFacade {
 	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
+		$toFlush = [];
 
 		$this->setOrderDataAdministrator($orderData);
 
@@ -185,16 +186,18 @@ class OrderFacade {
 			$orderUrlHash,
 			$user
 		);
+		$toFlush[] = $order;
 
 		$this->orderCreationService->fillOrderItems($order, $orderPreview);
 
 		foreach ($order->getItems() as $orderItem) {
 			$this->em->persist($orderItem);
+			$toFlush[] = $orderItem;
 		}
 
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
-		$this->em->flush();
+		$this->em->flush($toFlush);
 
 		return $order;
 	}
