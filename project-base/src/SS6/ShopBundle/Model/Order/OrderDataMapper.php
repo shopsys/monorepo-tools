@@ -16,7 +16,7 @@ class OrderDataMapper {
 		$orderData->transport = $frontOrderData->transport;
 		$orderData->payment = $frontOrderData->payment;
 		$orderData->orderNumber = $frontOrderData->orderNumber;
-		$orderData->statusId = $frontOrderData->statusId;
+		$orderData->status = $frontOrderData->status;
 		$orderData->firstName = $frontOrderData->firstName;
 		$orderData->lastName = $frontOrderData->lastName;
 		$orderData->email = $frontOrderData->email;

@@ -9,7 +9,6 @@ use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -53,20 +52,16 @@ class OrderService {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Order $order
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
 	 */
-	public function editOrder(Order $order, OrderData $orderData, OrderStatus $orderStatus) {
+	public function editOrder(Order $order, OrderData $orderData) {
 		$orderTransportData = $orderData->orderTransport;
 		$orderTransportData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
 		$orderPaymentData = $orderData->orderPayment;
 		$orderPaymentData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderPaymentData);
 
-		$statusChanged = $order->getStatus()->getId() !== $orderData->statusId;
-		$order->edit(
-			$orderData,
-			$orderStatus
-		);
+		$statusChanged = $order->getStatus() !== $orderData->status;
+		$order->edit($orderData);
 
 		$orderItemsWithoutTransportAndPaymentData = $orderData->itemsWithoutTransportAndPayment;
 

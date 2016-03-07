@@ -276,14 +276,12 @@ class Order {
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
 	 * @param string $orderNumber
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @param string $urlHash
 	 * @param \SS6\ShopBundle\Model\Customer\User $user
 	 */
 	public function __construct(
 		OrderData $orderData,
 		$orderNumber,
-		OrderStatus $orderStatus,
 		$urlHash,
 		User $user = null
 	) {
@@ -305,10 +303,14 @@ class Order {
 		);
 		$this->setDeliveryAddress($orderData);
 		$this->number = $orderNumber;
-		$this->status = $orderStatus;
+		$this->status = $orderData->status;
 		$this->customer = $user;
 		$this->deleted = false;
-		$this->createdAt = new DateTime();
+		if ($orderData->createdAt === null) {
+			$this->createdAt = new DateTime();
+		} else {
+			$this->createdAt = $orderData->createdAt;
+		}
 		$this->domainId = $orderData->domainId;
 		$this->urlHash = $urlHash;
 		$this->currency = $orderData->currency;
@@ -318,12 +320,8 @@ class Order {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 */
-	public function edit(
-		OrderData $orderData,
-		OrderStatus $orderStatus
-	) {
+	public function edit(OrderData $orderData) {
 		$this->firstName = $orderData->firstName;
 		$this->lastName = $orderData->lastName;
 		$this->email = $orderData->email;
@@ -339,7 +337,7 @@ class Order {
 			$orderData->companyTaxNumber
 		);
 		$this->setDeliveryAddress($orderData);
-		$this->status = $orderStatus;
+		$this->status = $orderData->status;
 
 		$this->editOrderTransport($orderData);
 		$this->editOrderPayment($orderData);

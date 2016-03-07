@@ -30,9 +30,9 @@ class OrderData {
 	public $orderNumber;
 
 	/**
-	 * @var int
+	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus
 	 */
-	public $statusId;
+	public $status;
 
 	/**
 	 * @var string
@@ -130,6 +130,11 @@ class OrderData {
 	public $itemsWithoutTransportAndPayment;
 
 	/**
+	 * @var \DateTime|null
+	 */
+	public $createdAt;
+
+	/**
 	 * @var int
 	 */
 	public $domainId;
@@ -164,7 +169,7 @@ class OrderData {
 	 */
 	public function setFromEntity(Order $order) {
 		$this->orderNumber = $order->getNumber();
-		$this->statusId = $order->getStatus()->getId();
+		$this->status = $order->getStatus();
 		$this->firstName = $order->getFirstName();
 		$this->lastName = $order->getLastName();
 		$this->email = $order->getEmail();
@@ -192,6 +197,7 @@ class OrderData {
 			$orderItemsWithoutTransportAndPaymentData[$orderItem->getId()] = $orderItemData;
 		}
 		$this->itemsWithoutTransportAndPayment = $orderItemsWithoutTransportAndPaymentData;
+		$this->createdAt = $order->getCreatedAt();
 		$this->domainId = $order->getDomainId();
 		$this->currency = $order->getCurrency();
 		$this->createdAsAdministrator = $order->getCreatedAsAdministrator();

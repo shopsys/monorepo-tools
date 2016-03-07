@@ -24,6 +24,8 @@ class ProductDataFixture {
 	const PRODUCTS = 40000;
 	const BATCH_SIZE = 1000;
 
+	const FIRST_PERFORMANCE_PRODUCT = 'first_performance_product';
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
@@ -151,6 +153,10 @@ class ProductDataFixture {
 			$this->makeProductEditDataUnique($productEditData);
 			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);
+
+			if ($this->countImported === 0) {
+				$this->persistentReferenceService->persistReference(self::FIRST_PERFORMANCE_PRODUCT, $product);
+			}
 
 			if ($product->getCatnum() !== null) {
 				$this->productsByCatnum[$product->getCatnum()] = $product;

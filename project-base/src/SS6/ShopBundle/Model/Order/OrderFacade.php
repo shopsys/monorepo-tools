@@ -174,30 +174,30 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
-		$orderStatus = $this->orderStatusRepository->getDefault();
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
 		$orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
+		$toFlush = [];
 
 		$this->setOrderDataAdministrator($orderData);
 
 		$order = new Order(
 			$orderData,
 			$orderNumber,
-			$orderStatus,
 			$orderUrlHash,
 			$user
 		);
+		$toFlush[] = $order;
 
 		$this->orderCreationService->fillOrderItems($order, $orderPreview);
 
 		foreach ($order->getItems() as $orderItem) {
 			$this->em->persist($orderItem);
+			$toFlush[] = $orderItem;
 		}
 
 		$this->orderService->calculateTotalPrice($order);
 		$this->em->persist($order);
-		$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
-		$this->em->flush();
+		$this->em->flush($toFlush);
 
 		return $order;
 	}
@@ -207,9 +207,12 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
+		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
 		$user = $this->currentCustomer->findCurrentUser();
+
 		$order = $this->createOrder($orderData, $orderPreview, $user);
+		$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 
 		$this->cartFacade->cleanCart();
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
@@ -228,8 +231,7 @@ class OrderFacade {
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
 		$originalOrderStatus = $order->getStatus();
-		$newOrderStatus = $this->orderStatusRepository->getById($orderData->statusId);
-		$orderEditResult = $this->orderService->editOrder($order, $orderData, $newOrderStatus);
+		$orderEditResult = $this->orderService->editOrder($order, $orderData);
 
 		foreach ($orderEditResult->getOrderItemsToCreate() as $orderItem) {
 			$this->em->persist($orderItem);
@@ -248,7 +250,7 @@ class OrderFacade {
 			if ($originalOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
 				$this->orderProductFacade->subtractOrderProductsFromStock($order->getProductItems());
 			}
-			if ($newOrderStatus->getType() === OrderStatus::TYPE_CANCELED) {
+			if ($orderData->status->getType() === OrderStatus::TYPE_CANCELED) {
 				$this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
 			}
 

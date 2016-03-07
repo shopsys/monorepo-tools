@@ -12,6 +12,12 @@ use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
+	const ALL_PAYMENT_PERSISTENT_REFERECE_NAMES = [
+		'payment_card',
+		'payment_cod',
+		'payment_cash',
+	];
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */

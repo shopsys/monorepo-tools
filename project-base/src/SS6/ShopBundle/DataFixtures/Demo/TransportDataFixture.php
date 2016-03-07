@@ -12,6 +12,12 @@ use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
+	const ALL_TRANSPORT_PERSISTENT_REFERECE_NAMES = [
+		'transport_cp',
+		'transport_ppl',
+		'transport_personal',
+	];
+
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
