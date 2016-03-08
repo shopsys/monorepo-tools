@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Copy-pasted from \Symfony\Component\Validator\ValidatorBuilder
+ * and added support for custom loaders (see custom code in getValidator() ).
+ */
+
+// @codingStandardsIgnoreStart
+
 /*
  * This file is part of the Symfony package.
  *
@@ -9,7 +16,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Component\Validator;
+namespace SS6\ShopBundle\Component\Validator;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
@@ -18,6 +25,7 @@ use Doctrine\Common\Cache\ArrayCache;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextFactory;
 use Symfony\Component\Validator\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Exception\ValidatorException;
@@ -25,12 +33,17 @@ use Symfony\Component\Validator\Mapping\Cache\CacheInterface;
 use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Loader\LoaderChain;
+use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
 use Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader;
 use Symfony\Component\Validator\Mapping\Loader\XmlFileLoader;
 use Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader;
 use Symfony\Component\Validator\Mapping\Loader\YamlFileLoader;
 use Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader;
+use Symfony\Component\Validator\MetadataFactoryInterface;
+use Symfony\Component\Validator\ObjectInitializerInterface;
+use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
+use Symfony\Component\Validator\ValidatorBuilderInterface;
 
 /**
  * The default implementation of {@link ValidatorBuilderInterface}.
@@ -339,6 +352,10 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 				$loaders[] = new AnnotationLoader($this->annotationReader);
 			}
 
+			// custom code start
+			$loaders = array_merge($loaders, $this->customLoaders);
+			// custom code end
+
 			$loader = null;
 
 			if (count($loaders) > 1) {
@@ -367,4 +384,18 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 		return new RecursiveValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
 	}
 
+	/**
+	 * @var \Symfony\Component\Validator\Mapping\Loader\LoaderInterface[]
+	 */
+	private $customLoaders = [];
+
+	/**
+	 * @param \Symfony\Component\Validator\Mapping\Loader\LoaderInterface $loader
+	 */
+	public function addLoader(LoaderInterface $loader) {
+		$this->customLoaders[] = $loader;
+	}
+
 }
+
+// @codingStandardsIgnoreStop
