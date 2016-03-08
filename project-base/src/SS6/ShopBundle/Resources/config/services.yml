@@ -49,42 +49,20 @@ services:
     arguments:
       -
         - @ss6.doctrine.cache_driver.query_cache.array
-        - @ss6.doctrine.cache_driver.query_cache.sqlite
+        - @ss6.shop.component.doctrine.cache.query.permanent_php_file_cache
 
   ss6.doctrine.cache_driver.query_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
-
-  ss6.doctrine.cache_driver.query_cache.sqlite:
-    class: Doctrine\Common\Cache\SQLite3Cache
-    arguments:
-      - @ss6.doctrine.cache_driver.sqlite
-      - 'query'
 
   ss6.doctrine.cache_driver.metadata_cache:
     class: Doctrine\Common\Cache\ChainCache
     arguments:
       -
         - @ss6.doctrine.cache_driver.metadata_cache.array
-        - @ss6.doctrine.cache_driver.metadata_cache.sqlite
+        - @ss6.shop.component.doctrine.cache.metadata.permanent_php_file_cache
 
   ss6.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
-
-  ss6.doctrine.cache_driver.metadata_cache.sqlite:
-    class: Doctrine\Common\Cache\SQLite3Cache
-    arguments:
-      - @ss6.doctrine.cache_driver.sqlite
-      - 'metadata'
-
-  ss6.doctrine.cache_driver.sqlite:
-    class: SS6\ShopBundle\Component\Sqlite\Sqlite3ComplyingUmask
-    factory_service: ss6.doctrine.cache_driver.sqlite.factory
-    factory_method: create
-    arguments:
-      - %ss6.doctrine.cache_driver.sqlite_filepath%
-
-  ss6.doctrine.cache_driver.sqlite.factory:
-    class: SS6\ShopBundle\Component\Sqlite\Sqlite3Factory
 
   ss6.shop.admin_navigation.breadcrumb:
     class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
@@ -168,6 +146,16 @@ services:
       class: SS6\ShopBundle\Component\Css\CssFacade
       arguments:
         - %ss6.css_version_filepath%
+
+  ss6.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
+      class: SS6\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
+      arguments:
+        - %ss6.doctrine.metadata_cache_directory_path%
+
+  ss6.shop.component.doctrine.cache.query.permanent_php_file_cache:
+      class: SS6\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
+      arguments:
+        - %ss6.doctrine.query_cache_directory_path%
 
   ss6.shop.component.doctrine.database_schema_facade:
       class: SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
