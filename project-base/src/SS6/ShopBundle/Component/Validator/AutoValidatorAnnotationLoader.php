@@ -104,7 +104,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		$fieldMapping = $entityMetadata->getFieldMapping($fieldName);
 
 		if (!$fieldMapping['nullable']) {
-			$constraints[] = new Constraints\NotBlank();
+			$constraints[] = new Constraints\NotNull();
 		}
 
 		if ($fieldMapping['type'] === 'string') {
