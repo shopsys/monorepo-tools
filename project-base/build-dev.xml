@@ -670,6 +670,11 @@
 			<arg value="lint:yaml" />
 			<arg value="@SS6ShopBundle" />
 		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="lint:yaml" />
+			<arg value="${path.app}/config" />
+		</exec>
 	</target>
 
 </project>
