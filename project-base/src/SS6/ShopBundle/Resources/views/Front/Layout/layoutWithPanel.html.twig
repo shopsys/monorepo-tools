@@ -1,23 +1,20 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block content %}
-	<div class="web-panel">
-		<div class="wrap-panel mb20">
-			{% block panel_content %}{% endblock %}
-			<div id="js-contact-form-container">
-				{{ render(controller('SS6ShopBundle:Front/ContactForm:index')) }}
-			</div>
-			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
+	<div class="web__main web__main--with-panel">
+		<div class="web__main__content">
+			{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+			{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+			{% block main_content %}{% endblock %}
 		</div>
-	</div>
 
-	<div class="main-content">
-		<div class="web-content">
-			<div class="web-content__clear">
-				{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
-				{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
-				{% block main_content %}{% endblock %}
+		<div class="web__main__panel">
+			<div class="wrap-panel mb20">
+				{% block panel_content %}{% endblock %}
+				<div id="js-contact-form-container">
+					{{ render(controller('SS6ShopBundle:Front/ContactForm:index')) }}
+				</div>
+				{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
 			</div>
 		</div>
-	</div>
 {% endblock %}

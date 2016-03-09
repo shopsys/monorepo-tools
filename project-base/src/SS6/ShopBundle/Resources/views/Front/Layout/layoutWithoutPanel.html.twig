@@ -1,10 +1,13 @@
 {% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
 
 {% block content %}
-	<div class="main-content">
-		{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
-		{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+	<div class="web__main">
+		<div class="web__main__content">
+				{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+				{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
 
-		{% block main_content %}{% endblock %}
+				{% block main_content %}{% endblock %}
+			</div>
+		</div>
 	</div>
 {% endblock %}

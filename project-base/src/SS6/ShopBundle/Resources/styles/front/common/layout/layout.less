@@ -8,49 +8,81 @@
 	font-size: @font-size;
 	font-family: @font;
 	color: @color-base;
-	background: @bg-web url('../images/bg.png') 0 90px repeat-x;
+	background: @bg-web;
 }
 
 img {
 	max-width: 100%;
 }
 
-.web-wrap {
-	padding: 0 20px 20px;
+.web {
+	&--with-info {
+		padding-top: 42px;
+	}
 
-	background: @bg-page;
+	&__line {
+		&--light {
+			background: @color-f;
+		}
 
-	&--admin {
-		padding-top: 40px;
+		&--split {
+			border-top: 1px solid @color-border;
+			background: @color-f;
+		}
+	}
+
+	&__container {
+		padding: 0 20px;
+	}
+
+	&__main {
+		padding-bottom: 20px;
+
+		&__content {
+			.web__main--with-panel & {
+				margin-bottom: 20px;
+			}
+		}
 	}
 }
 
-.web-panel {
-	float: left;
-	width: 220px;
-}
+@media @m-query-md {
+	.web {
+		&__main {
+			&--with-panel {
+				.flex();
+				width: 100%;
+			}
 
-.web-content {
-	margin-left: 240px;
-}
+			&__content {
+				.flex-order(2);
+				.flex-grow(1);
+				.width-calc(~"100% - 260px", 70%);
 
-.web-content__clear {
-	float: left;
-	width: 100%;
+			}
+
+			&__panel {
+				.flex-order(1);
+				.flex-shrink(0);
+				width: 260px;
+				padding-right: 20px;
+			}
+		}
+	}
 }
 
 @media @m-query-lg {
-	.web-wrap {
-		width: @width-page;
-		margin: 0 auto;
+	.web {
+		&__container {
+			width: @width-page;
+			margin: 0 auto;
+		}
 	}
 }
 
 .header {
-	.cfx();
+	padding: 20px 0;
 	position: relative;
-	padding: 20px 0 0;
-	margin-bottom: 20px;
 }
 
 .header-panel {
@@ -62,9 +94,8 @@ img {
 }
 
 .footer {
-	margin-top: 20px;
-	padding: 20px;
-
-	font-size: 12px;
-	background: @bg-box;
+	&__bottom {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 }
