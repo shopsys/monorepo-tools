@@ -12,50 +12,7 @@
 		<div class="web__line web__line--light">
 			<div class="web__header">
 				<div class="web__container">
-					<header class="header">
-						<div class="logo">
-							<a href="{{ url('front_homepage') }}">{{ 'Internetový obchod'|trans }}</a>
-						</div>
-
-						{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
-
-						<ul class="top-menu">
-							{% if is_granted('ROLE_CUSTOMER') %}
-								<li class="top-menu__item top-menu__item--main in-dropdown">
-									<a href="#">{{ app.user.firstName }} {{ app.user.lastName }}</a>
-									<ul class="in-dropdown__menu">
-										<li class="in-dropdown__menu__item">
-											<a href="{{ url('front_customer_edit') }}">{{ 'Osobní údaje'|trans }}</a>
-											<a href="{{ url('front_customer_orders') }}">{{ 'Mé objednávky'|trans }}</a>
-										</li>
-									</ul>
-								</li>
-								<li class="top-menu__item top-menu__item--main">
-									<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
-								</li>
-							{% else %}
-								<li class="top-menu__item top-menu__item--main">
-									<a href="{{ url('front_registration_register') }}">{{ 'Registrace'|trans }}</a>
-								</li>
-								<li class="top-menu__item top-menu__item--main">
-									<a
-										href="{{ url('front_login') }}"
-										onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
-									><strong>{{ 'Přihlásit se'|trans }}</strong></a>
-								</li>
-							{% endif %}
-
-						</ul>
-
-						{{ render(controller('SS6ShopBundle:Front/Search:box')) }}
-
-						<div class="header__panel">
-							<ul class="articles-menu">
-								{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
-							</ul>
-						</div>
-						{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_HEADER')})) }}
-					</header>
+					{% include '@SS6Shop/Front/Layout/header.html.twig' %}
 				</div>
 			</div>
 			<div class="web__container">
@@ -63,19 +20,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="web__footer footer">
-		<div class="web__line web__line--split">
-			<div class="web__container footer__top">
-				{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_FOOTER')})) }}
-			</div>
-		</div>
-		<div class="web__line">
-			<footer class="web__container footer__bottom">
-				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
-				<ul class="articles-menu">
-					{{ render(controller('SS6ShopBundle:Front/Article:footer')) }}
-				</ul>
-			</footer>
-		</div>
+	<div class="web__footer">
+		{% include '@SS6Shop/Front/Layout/footer.html.twig' %}
 	</div>
 {% endblock %}
