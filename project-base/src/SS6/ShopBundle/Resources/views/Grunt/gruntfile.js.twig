@@ -183,6 +183,27 @@ module.exports = function(grunt) {
 						mixinPrefix: 'svg-'
 					}
 				}
+			},
+			frontend: {
+				src: 'src/SS6/ShopBundle/Resources/svg/front/*.svg',
+				dest: 'web/assets/frontend/fonts',
+				destCss: 'src/SS6/ShopBundle/Resources/styles/front/common/libs/',
+				options: {
+					font: 'svg',
+					hashes: true,
+					types: 'eot,woff,ttf,svg',
+					engine: 'node',
+					stylesheet: 'less',
+					relativeFontPath: '../fonts',
+					fontHeight: '512',
+					descent: '0',
+					destHtml: 'docs/common/frontend',
+					templateOptions: {
+						baseClass: 'svg',
+						classPrefix: 'svg-',
+						mixinPrefix: 'svg-'
+					}
+				}
 			}
 		},
 
@@ -208,6 +229,10 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true,
 				}
+			},
+			frontendWebfont: {
+				files: ['src/SS6/ShopBundle/Resources/svg/front/*.svg'],
+				tasks: ['webfont:admin', 'adminLess']
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
@@ -247,7 +272,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'legacssy']);
 
 	{% for domain in domains -%}
-		grunt.registerTask('frontend{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
 	{% endfor -%}
 	grunt.registerTask('frontendSprite', [{% for domain in domains -%}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]);
 	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin']);
