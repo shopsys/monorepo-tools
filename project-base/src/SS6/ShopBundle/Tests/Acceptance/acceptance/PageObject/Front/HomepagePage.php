@@ -28,7 +28,7 @@ class HomepagePage extends AbstractPage {
 	 * @param string $productName
 	 * @param int $quantity
 	 */
-	public function addProductToCartByName($productName, $quantity = 1) {
+	public function addTopProductToCartByName($productName, $quantity = 1) {
 		$topProductsContext = $this->getTopProductsContext();
 
 		$this->productListComponent->addProductToCartByName($productName, $quantity, $topProductsContext);

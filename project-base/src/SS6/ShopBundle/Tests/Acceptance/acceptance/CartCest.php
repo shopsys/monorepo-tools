@@ -11,17 +11,6 @@ use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest {
 
-	public function testAddToCart(ProductListPage $productListPage, AcceptanceTester $me) {
-		$me->wantTo('add product to cart');
-		$me->amOnPage('/televize-audio/');
-		$me->see('Vložit do košíku');
-		$productListPage->addProductToCartByName('Defender 2.0 SPK-480');
-		$me->see('Do košíku bylo vloženo zboží');
-		$me->clickByText('Přejít do košíku');
-		$me->seeInCurrentUrl('/kosik/');
-		$me->see('Objednat');
-	}
-
 	public function testAddingSameProductToCartMakesSum(
 		CartPage $cartPage,
 		ProductDetailPage $productDetailPage,
@@ -65,7 +54,7 @@ class CartCest {
 	) {
 		$me->wantTo('add product to cart from homepage');
 		$me->amOnPage('/');
-		$homepagePage->addProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
+		$homepagePage->addTopProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
 		$me->see('Do košíku bylo vloženo zboží');
 		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');

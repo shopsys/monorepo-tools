@@ -21,16 +21,16 @@ class CartPage extends AbstractPage {
 	 * @param string $formattedPriceWithCurrency
 	 */
 	public function assertProductPrice($productName, $formattedPriceWithCurrency) {
-		$productPriceColumn = $this->getProductPriceColumnByName($productName);
-		$this->tester->seeInElement($formattedPriceWithCurrency, $productPriceColumn);
+		$productPriceCell = $this->getProductPriceCellByName($productName);
+		$this->tester->seeInElement($formattedPriceWithCurrency, $productPriceCell);
 	}
 
 	/**
 	 * @param string $formattedPriceWithCurrency
 	 */
 	public function assertTotalPriceWithVat($formattedPriceWithCurrency) {
-		$orderPriceColumn = $this->getTotalProductsPriceColumn();
-		$this->tester->seeInElement('Celková cena s DPH: ' . $formattedPriceWithCurrency, $orderPriceColumn);
+		$orderPriceCell = $this->getTotalProductsPriceCell();
+		$this->tester->seeInElement('Celková cena s DPH: ' . $formattedPriceWithCurrency, $orderPriceCell);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class CartPage extends AbstractPage {
 	 * @param string $productName
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
-	private function getProductPriceColumnByName($productName) {
+	private function getProductPriceCellByName($productName) {
 		$row = $this->findProductRowInCartByName($productName);
 
 		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
@@ -89,7 +89,7 @@ class CartPage extends AbstractPage {
 	/**
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
-	private function getTotalProductsPriceColumn() {
+	private function getTotalProductsPriceCell() {
 		return $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart .table-cart__foot .table-cart__foot__total'));
 	}
 

@@ -20,15 +20,15 @@ class OrderCest {
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
 
-		$orderPage->assertCzechPostTransportIsNotSelected();
-		$orderPage->selectCzechPostTransport();
-		$orderPage->assertCashOnDeliveryPaymentIsNotSelected();
-		$orderPage->selectCashOnDeliveryPayment();
+		$orderPage->assertTransportIsNotSelected('Česká pošta - balík do ruky');
+		$orderPage->selectTransport('Česká pošta - balík do ruky');
+		$orderPage->assertPaymentIsNotSelected('Dobírka');
+		$orderPage->selectPayment('Dobírka');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->clickByText('Zpět na výběr dopravy a platby');
 
-		$orderPage->assertCzechPostTransportIsSelected();
-		$orderPage->assertCashOnDeliveryPaymentIsSelected();
+		$orderPage->assertTransportIsSelected('Česká pošta - balík do ruky');
+		$orderPage->assertPaymentIsSelected('Dobírka');
 	}
 
 	public function testFormRemembersPaymentAndTransportWhenGoingDirectlyToUrl(
@@ -43,15 +43,15 @@ class OrderCest {
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
 
-		$orderPage->assertCzechPostTransportIsNotSelected();
-		$orderPage->selectCzechPostTransport();
-		$orderPage->assertCashOnDeliveryPaymentIsNotSelected();
-		$orderPage->selectCashOnDeliveryPayment();
+		$orderPage->assertTransportIsNotSelected('Česká pošta - balík do ruky');
+		$orderPage->selectTransport('Česká pošta - balík do ruky');
+		$orderPage->assertPaymentIsNotSelected('Dobírka');
+		$orderPage->selectPayment('Dobírka');
 		$me->clickByText('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
-		$orderPage->assertCzechPostTransportIsSelected();
-		$orderPage->assertCashOnDeliveryPaymentIsSelected();
+		$orderPage->assertTransportIsSelected('Česká pošta - balík do ruky');
+		$orderPage->assertPaymentIsSelected('Dobírka');
 	}
 
 	public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me) {
@@ -61,8 +61,8 @@ class OrderCest {
 		$productListPage->addProductToCartByName('Defender 2.0 SPK-480');
 		$me->clickByText('Přejít do košíku');
 		$me->clickByText('Objednat');
-		$orderPage->selectCzechPostTransport();
-		$orderPage->selectCashOnDeliveryPayment();
+		$orderPage->selectTransport('Česká pošta - balík do ruky');
+		$orderPage->selectPayment('Dobírka');
 		$me->clickByText('Pokračovat v objednávce');
 
 		$orderPage->fillFirstName('Jan');
