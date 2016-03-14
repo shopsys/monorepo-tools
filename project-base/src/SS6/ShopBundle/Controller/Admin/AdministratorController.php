@@ -175,7 +175,7 @@ class AdministratorController extends AdminBaseController {
 					t('Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
 					[
 						'name' => $administrator->getRealName(),
-						'url' => $this->generateUrl('admin_administrator_list', ['id' => $administrator->getId()]),
+						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
 					]
 				);
 				return $this->redirectToRoute('admin_administrator_list');
