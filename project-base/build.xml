@@ -215,6 +215,7 @@
 	<target name="dirs-create">
 		<mkdir dir="${path.app}/lock" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.root}/docs/admin" mode="${mkdir.mode}"/>
+		<mkdir dir="${path.root}/docs/frontend" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/feeds" mode="${mkdir.mode}"/>
 		<mkdir dir="${path.web}/content/sitemaps" mode="${mkdir.mode}"/>
 
