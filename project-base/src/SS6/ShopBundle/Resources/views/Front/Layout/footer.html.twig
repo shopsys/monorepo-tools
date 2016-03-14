@@ -1,0 +1,15 @@
+<div class="footer">
+	<div class="web__line web__line--split">
+		<div class="web__container footer__top">
+			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_FOOTER')})) }}
+		</div>
+	</div>
+	<div class="web__line">
+		<footer class="web__container footer__bottom">
+			&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+			<ul class="articles-menu">
+				{{ render(controller('SS6ShopBundle:Front/Article:footer')) }}
+			</ul>
+		</footer>
+	</div>
+</div>
