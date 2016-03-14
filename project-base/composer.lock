@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0774ec40b57701194c7d64f32a8a8d43",
-    "content-hash": "1121629bfaf9dbfee5d9753bb5fe935c",
+    "hash": "a36a378a80c68f2d0c32fe190c45a0f8",
+    "content-hash": "74ecf0cde4f7a8e829b020963e166a22",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -256,7 +256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/971f337ccc23ab6bbfc9f04c0332eb36390e918e",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/cc90c2dcca7c4d541882c2b4882d0cc972ef50a4",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -5500,16 +5500,17 @@
         },
         {
             "name": "shopsys/coding-standards",
-            "version": "v1.1.0",
+            "version": "dev-rv-update-dependencies",
             "source": {
                 "type": "git",
                 "url": "http://gitlab.netdevelo/ss6/coding-standards.git",
-                "reference": "aef36a51e1a29d541e4a13d00186868ec0816500"
+                "reference": "0e772e9"
             },
             "require": {
                 "fabpot/php-cs-fixer": "~1.11",
                 "jakub-onderka/php-parallel-lint": "~0.9",
-                "phpmd/phpmd": "2.0.0",
+                "pdepend/pdepend": "2.0.0",
+                "phpmd/phpmd": "~2.0",
                 "squizlabs/php_codesniffer": "2.3.2"
             },
             "require-dev": {
@@ -5528,7 +5529,7 @@
                 }
             ],
             "description": "Common coding standards for new ShopSys projects",
-            "time": "2016-02-25 12:51:55"
+            "time": "2016-03-14 14:31:28"
         },
         {
             "name": "shopsys/phpstorm-inspect",
@@ -5713,7 +5714,8 @@
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
         "symfony-cmf/routing": 20,
-        "timwhitlock/jparser": 20
+        "timwhitlock/jparser": 20,
+        "shopsys/coding-standards": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

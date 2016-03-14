@@ -90,7 +90,7 @@
 	"require-dev": {
 		"codeception/codeception": "2.1.5",
 		"se/selenium-server-standalone": "2.48.2",
-		"shopsys/coding-standards": "1.1.0",
+		"shopsys/coding-standards": "dev-rv-update-dependencies#0e772e9",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"symfony/web-profiler-bundle": "2.8.2"
 	},
