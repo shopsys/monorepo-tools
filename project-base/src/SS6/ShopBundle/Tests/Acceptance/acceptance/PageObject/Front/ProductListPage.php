@@ -38,7 +38,7 @@ class ProductListPage extends AbstractPage {
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function getProductListCompomentContext() {
-		return $this->webDriver->findElement(WebDriverBy::cssSelector('.main-content'));
+		return $this->webDriver->findElement(WebDriverBy::cssSelector('.web__main__content'));
 	}
 
 }
