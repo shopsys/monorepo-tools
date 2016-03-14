@@ -9,7 +9,6 @@ use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(
@@ -46,7 +45,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	/**
 	 * @ORM\Column(type="string", length=255)
-	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
 	private $email;
 

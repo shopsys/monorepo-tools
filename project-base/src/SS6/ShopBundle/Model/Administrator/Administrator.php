@@ -11,7 +11,6 @@ use SS6\ShopBundle\Model\Security\Roles;
 use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
 use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -59,7 +58,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
 	/**
 	 * @ORM\Column(type="string", length=255)
-	 * @Assert\Email(message = "E-mail '{{ value }}' není validní.")
 	 */
 	private $email;
 
