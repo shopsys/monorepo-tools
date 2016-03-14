@@ -197,7 +197,7 @@ module.exports = function(grunt) {
 					relativeFontPath: '../fonts',
 					fontHeight: '512',
 					descent: '0',
-					destHtml: 'docs/common/frontend',
+					destHtml: 'docs/frontend',
 					templateOptions: {
 						baseClass: 'svg',
 						classPrefix: 'svg-',
@@ -210,36 +210,39 @@ module.exports = function(grunt) {
 		watch: {
 			admin: {
 				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less'],
-				tasks: ['admin']
+				tasks: ['adminLess']
 			},
 			adminSprite: {
 				files: ['web/assets/admin/images/icons/**/*.png'],
-				tasks: ['sprite:admin', 'adminLess'],
+				tasks: ['sprite:admin'],
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			adminWebfont: {
 				files: ['src/SS6/ShopBundle/Resources/svg/admin/*.svg'],
-				tasks: ['webfont:admin', 'adminLess']
+				tasks: ['webfont:admin'],
+				options: {
+					livereload: true
+				}
 			},
 			frontendSprite: {
 				files: ['web/assets/frontend/images/icons/**/*.png'],
-				tasks: ['frontendSprite'],
+				tasks: ['sprite:frontend'],
 				options: {
-					livereload: true,
+					livereload: true
 				}
 			},
 			frontendWebfont: {
 				files: ['src/SS6/ShopBundle/Resources/svg/front/*.svg'],
-				tasks: ['webfont:admin', 'adminLess']
+				tasks: ['webfont:frontend']
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
 					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less'],
-					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
-						['frontend{{ domain.id }}']
+						['frontendLess{{ domain.id }}']
 					{% endif -%}
 				},
 			{% endfor %}
@@ -258,8 +261,6 @@ module.exports = function(grunt) {
 				}
 			}
 		}
-
-
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-less');
@@ -274,9 +275,11 @@ module.exports = function(grunt) {
 	{% for domain in domains -%}
 		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
 	{% endfor -%}
-	grunt.registerTask('frontendSprite', [{% for domain in domains -%}'frontend{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]);
-	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin']);
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
-
 	grunt.registerTask('docs', ['styledocco']);
+
+	{% for domain in domains -%}
+		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+	{% endfor -%}
+	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
 };
