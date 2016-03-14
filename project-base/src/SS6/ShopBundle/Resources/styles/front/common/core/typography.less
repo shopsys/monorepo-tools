@@ -1,20 +1,90 @@
+/*************************************************************************************
+*  TYPOGRAPHY
+**************************************************************************************/
+
 h1, h2, h3, h4, h5, h6 {
-	font-family: @font-title;
+	color: @color-base;
+	font-family: @font-base;
+	font-weight: 400;
+	line-height: 1.3em;
+	text-rendering: optimizelegibility;
 }
 
-a {
-	color: @color-link;
-	text-decoration: underline;
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	display: block;
 
-	.set-transition();
-	.transition(~"background, color");
+	font-family: @font;
+}
+
+h1, .h1 {
+	margin: 0 0 20px 0;
+
+	font-size: 28px;
+	font-weight: normal;
+}
+
+h2, .h2 {
+	margin: 0 0 10px 0;
+
+	font-size: 22px;
+	font-weight: normal;
+}
+
+h3, .h3 {
+	margin: 0 0 10px 0;
+
+	font-size: 18px;
+	font-weight: normal;
+}
+
+h4, .h4 {
+	margin: 0 0 10px 0;
+
+	font-size: 14px;
+	font-weight: bold;
+}
+
+h5, .h5 {
+	margin: 0 0 10px 0;
+
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+h6, .h6 {
+	margin: 0 0 10px 0;
+
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/*************************************************************************************
+*  LINKS
+**************************************************************************************/
+
+a {
+	text-decoration: underline;
+	color: @color-link;
+	cursor: pointer;
+	outline: none;
+
+	.transition(color);
 
 	&:hover {
+		text-decoration: none;
 		color: @color-link-hover;
-		text-decoration: underline;
 	}
 }
 
-label {
-	cursor: pointer;
+/*************************************************************************************
+*  MAIN
+**************************************************************************************/
+body {
+	color: @color-base;
 }

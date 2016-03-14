@@ -48,10 +48,10 @@
 		border-top: 0px;
 		background: @color-f;
 
-		.border-radius(0 0 5px 5px);
+		.border-radius(0 0 @radius @radius);
 
 		&__item {
-			border-top: 1px dashed @color-border-light;
+			border-top: 1px dashed @color-border;
 
 			&__link {
 				display: table;
@@ -76,7 +76,7 @@
 			}
 
 			&:last-child {
-				.border-radius(0 0 5px 5px);
+				.border-radius(0 0 @radius @radius);
 			}
 		}
 
