@@ -114,4 +114,25 @@ class CartCest {
 		$cartPage->removeProductFromCart('Kniha Bodový systém a pravidla silničního provozu');
 		$me->see('Váš nákupní košík je bohužel prázdný.');
 	}
+
+	public function testAddingDistinctProductsToCart(
+		CartPage $cartPage,
+		CartBoxPage $cartBoxPage,
+		ProductDetailPage $productDetailPage,
+		AcceptanceTester $me
+	) {
+		$me->wantTo('add distinct products to cart');
+
+		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
+		$productDetailPage->addProductIntoCart();
+		$cartBoxPage->seeInCartBox('1 položka za 3 499,00 Kč');
+
+		$me->amOnPage('/canon-pixma-ip7250/');
+		$productDetailPage->addProductIntoCart();
+		$cartBoxPage->seeInCartBox('2 položky za 27 687,00 Kč');
+
+		$me->amOnPage('/kosik/');
+		$cartPage->assertProductIsInCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
+		$cartPage->assertProductIsInCartByName('Canon PIXMA iP7250');
+	}
 }
