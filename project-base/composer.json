@@ -65,7 +65,6 @@
 		"intaro/postgres-search-bundle": "dev-master#0eb26e0812",
 		"intervention/image": "2.3.5",
 		"jms/translation-bundle": "dev-fix-external-translations#527da12",
-		"pdepend/pdepend": "2.0.0",
 		"phing/phing": "2.13.0",
 		"phpunit/phpunit": "4.8.4",
 		"presta/sitemap-bundle": "1.4.2",
@@ -90,7 +89,7 @@
 	"require-dev": {
 		"codeception/codeception": "2.1.5",
 		"se/selenium-server-standalone": "2.48.2",
-		"shopsys/coding-standards": "1.1.0",
+		"shopsys/coding-standards": "1.2.0",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"symfony/web-profiler-bundle": "2.8.2"
 	},
