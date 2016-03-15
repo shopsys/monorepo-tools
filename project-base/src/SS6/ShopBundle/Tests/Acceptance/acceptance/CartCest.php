@@ -92,4 +92,26 @@ class CartCest {
 		$cartPage->assertTotalPriceWithVat('34 990,00 Kč');
 	}
 
+	public function testRemovingItemsFromCart(
+		CartPage $cartPage,
+		ProductDetailPage $productDetailPage,
+		AcceptanceTester $me
+	) {
+		$me->wantTo('add some items to cart and remove them');
+
+		$me->amOnPage('/kniha-bodovy-system-a-pravidla-silnicniho-provozu/');
+		$productDetailPage->addProductIntoCart();
+		$me->amOnPage('/jura-impressa-j9-tft-carbon/');
+		$productDetailPage->addProductIntoCart();
+
+		$me->amOnPage('/kosik/');
+		$cartPage->assertProductIsInCartByName('JURA Impressa J9 TFT Carbon');
+		$cartPage->assertProductIsInCartByName('Kniha Bodový systém a pravidla silničního provozu');
+
+		$cartPage->removeProductFromCart('JURA Impressa J9 TFT Carbon');
+		$cartPage->assertProductIsNotInCartByName('JURA Impressa J9 TFT Carbon');
+
+		$cartPage->removeProductFromCart('Kniha Bodový systém a pravidla silničního provozu');
+		$me->see('Váš nákupní košík je bohužel prázdný.');
+	}
 }

@@ -45,6 +45,29 @@ class CartPage extends AbstractPage {
 
 	/**
 	 * @param string $productName
+	 */
+	public function removeProductFromCart($productName) {
+		$row = $this->findProductRowInCartByName($productName);
+		$removingButton = $row->findElement(WebDriverBy::cssSelector('td.table-cart__remove a'));
+		$this->tester->clickByElement($removingButton);
+	}
+
+	/**
+	 * @param string $productName
+	 */
+	public function assertProductIsInCartByName($productName) {
+		$this->tester->see($productName, WebDriverBy::cssSelector('.table-cart__title'));
+	}
+
+	/**
+	 * @param string $productName
+	 */
+	public function assertProductIsNotInCartByName($productName) {
+		$this->tester->dontSee($productName, WebDriverBy::cssSelector('.table-cart__title'));
+	}
+
+	/**
+	 * @param string $productName
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function getQuantityFieldByProductName($productName) {
