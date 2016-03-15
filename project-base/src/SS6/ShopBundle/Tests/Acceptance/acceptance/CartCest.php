@@ -135,4 +135,22 @@ class CartCest {
 		$cartPage->assertProductIsInCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY');
 		$cartPage->assertProductIsInCartByName('Canon PIXMA iP7250');
 	}
+
+	public function testPricingInCart(
+		CartPage $cartPage,
+		ProductDetailPage $productDetailPage,
+		AcceptanceTester $me
+	) {
+		$me->wantTo('see that prices of products in cart are calculated well');
+
+		$me->amOnPage('/aquila-aquagym-pramenita-voda-neperliva/');
+		$productDetailPage->addProductIntoCart(10);
+		$me->amOnPage('/stokorunova-poukazka/');
+		$productDetailPage->addProductIntoCart(100);
+		$me->amOnPage('/premiumcord-micro-usb-a-b-1m/');
+		$productDetailPage->addProductIntoCart(75);
+
+		$me->amOnPage('/kosik/');
+		$cartPage->assertTotalPriceWithVat('17 350,00 Kč');
+	}
 }
