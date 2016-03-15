@@ -2,10 +2,12 @@
 
 namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
 
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
+use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
@@ -71,6 +73,7 @@ class BestsellingProductRepository {
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \DateTime $ordersCreatedAtLimit
 	 * @param int $maxResults
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
@@ -78,6 +81,7 @@ class BestsellingProductRepository {
 		$domainId,
 		Category $category,
 		PricingGroup $pricingGroup,
+		DateTime $ordersCreatedAtLimit,
 		$maxResults
 	) {
 		$queryBuilder = $this->productRepository->getOfferedInCategoryQueryBuilder($domainId, $pricingGroup, $category);
@@ -85,11 +89,17 @@ class BestsellingProductRepository {
 		$queryBuilder
 			->addSelect('COUNT(op) AS HIDDEN orderCount')
 			->join(ProductCalculatedPrice::class, 'pcp', Join::WITH, 'pcp.product = p')
-			->leftJoin(OrderProduct::class, 'op', Join::WITH, 'op.product = p')
+			->join(OrderProduct::class, 'op', Join::WITH, 'op.product = p')
+			->join('op.order', 'o')
+			->join('o.status', 'os')
 			->andWhere('pcp.pricingGroup = prv.pricingGroup')
+			->andWhere('os.type = :orderStatusType')
+			->setParameter('orderStatusType', OrderStatus::TYPE_DONE)
+			->andWhere('o.createdAt >= :createdAt')
+			->setParameter('createdAt', $ordersCreatedAtLimit)
 			->orderBy('orderCount', 'DESC')
 			->addOrderBy('pcp.priceWithVat', 'DESC')
-			->groupBy('p, pcp')
+			->groupBy('p.id, pcp.product, pcp.pricingGroup')
 			->setMaxResults($maxResults);
 
 		return $queryBuilder->getQuery()->execute();

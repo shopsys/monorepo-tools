@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
 
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
@@ -13,6 +14,7 @@ use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 class BestsellingProductFacade {
 
 	const MAX_RESULTS = 10;
+	const ORDERS_CREATED_AT_LIMIT = '-1 month';
 	const MAX_SHOW_RESULTS = 3;
 
 	/**
@@ -113,6 +115,7 @@ class BestsellingProductFacade {
 			$domainId,
 			$category,
 			$pricingGroup,
+			new DateTime(self::ORDERS_CREATED_AT_LIMIT),
 			self::MAX_RESULTS
 		);
 
