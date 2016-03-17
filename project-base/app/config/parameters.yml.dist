@@ -9,5 +9,8 @@ parameters:
   mailer_host: 127.0.0.1
   mailer_user: ~
   mailer_password: ~
+  mailer_disable_delivery: false
+  mailer_master_email_address: no-reply@shopsys.cz
+  mailer_delivery_whitelist: [/@shopsys.cz$/]
 
   secret: ThisTokenIsNotSoSecretChangeIt
