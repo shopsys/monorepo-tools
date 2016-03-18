@@ -104,7 +104,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 		$fieldMapping = $entityMetadata->getFieldMapping($fieldName);
 
 		if (!$fieldMapping['nullable']) {
-			$constraints[] = new Constraints\NotBlank();
+			$constraints[] = new Constraints\NotNull();
 		}
 
 		if ($fieldMapping['type'] === 'string') {
@@ -121,7 +121,7 @@ class AutoValidatorAnnotationLoader implements LoaderInterface {
 			$constraints[] = new Constraints\DateTime();
 		}
 
-		if ($fieldMapping['type'] === 'integer') {
+		if (in_array($fieldMapping['type'], ['integer', 'decimal'])) {
 			$constraints[] = new Constraints\LessThanOrEqual([
 				'value' => ConstraintValue::INTEGER_MAX_VALUE,
 			]);

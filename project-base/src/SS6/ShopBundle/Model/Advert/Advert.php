@@ -37,9 +37,9 @@ class Advert {
 	private $name;
 
 	/**
-	 * @var string|null
+	 * @var string
 	 *
-	 * @ORM\Column(type="text", nullable=true)
+	 * @ORM\Column(type="text")
 	 */
 	private $type;
 
@@ -133,7 +133,7 @@ class Advert {
 	}
 
 	/**
-	 * @return string|null
+	 * @return string
 	 */
 	public function getType() {
 		return $this->type;
