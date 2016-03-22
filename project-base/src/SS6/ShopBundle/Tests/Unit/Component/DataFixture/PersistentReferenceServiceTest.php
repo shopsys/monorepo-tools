@@ -44,12 +44,15 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$productMock1 = $this->getMock(Product::class, [], [], '', false);
-		$productMock2 = $this->getMock(Product::class, [], [], '', false);
+		$productMock = $this->getMockBuilder(Product::class)
+			->setMethods(['getId'])
+			->disableOriginalConstructor()
+			->getMock();
+
+		$productMock->expects($this->any())->method('getId')->willReturn(1);
 
 		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
-		$persistentReferenceService->persistReference('referenceName', $productMock1);
-		$persistentReferenceService->persistReference('referenceName', $productMock2);
+		$persistentReferenceService->persistReference('referenceName', $productMock);
 	}
 
 	public function testGetReference() {
