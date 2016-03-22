@@ -23,14 +23,14 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Cache\ArrayCache;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\ConstraintValidatorFactoryInterface;
 use Symfony\Component\Validator\Context\ExecutionContextFactory;
-use Symfony\Component\Validator\Context\LegacyExecutionContextFactory;
 use Symfony\Component\Validator\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\Exception\ValidatorException;
 use Symfony\Component\Validator\Mapping\Cache\CacheInterface;
-use Symfony\Component\Validator\Mapping\ClassMetadataFactory;
+use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Loader\LoaderChain;
 use Symfony\Component\Validator\Mapping\Loader\LoaderInterface;
@@ -42,8 +42,6 @@ use Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader;
 use Symfony\Component\Validator\MetadataFactoryInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 use Symfony\Component\Validator\Validation;
-use Symfony\Component\Validator\Validator as ValidatorV24;
-use Symfony\Component\Validator\Validator\LegacyValidator;
 use Symfony\Component\Validator\Validator\RecursiveValidator;
 use Symfony\Component\Validator\ValidatorBuilderInterface;
 
@@ -51,7 +49,6 @@ use Symfony\Component\Validator\ValidatorBuilderInterface;
  * The default implementation of {@link ValidatorBuilderInterface}.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
- * @SuppressWarnings(PHPMD)
  */
 class ValidatorBuilder implements ValidatorBuilderInterface {
 
@@ -76,27 +73,27 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	private $methodMappings = [];
 
 	/**
-	 * @var Reader
+	 * @var Reader|null
 	 */
-	private $annotationReader = null;
+	private $annotationReader;
 
 	/**
-	 * @var MetadataFactoryInterface
+	 * @var MetadataFactoryInterface|null
 	 */
 	private $metadataFactory;
 
 	/**
-	 * @var ConstraintValidatorFactoryInterface
+	 * @var ConstraintValidatorFactoryInterface|null
 	 */
 	private $validatorFactory;
 
 	/**
-	 * @var CacheInterface
+	 * @var CacheInterface|null
 	 */
 	private $metadataCache;
 
 	/**
-	 * @var TranslatorInterface
+	 * @var TranslatorInterface|null
 	 */
 	private $translator;
 
@@ -106,14 +103,9 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 	private $translationDomain;
 
 	/**
-	 * @var PropertyAccessorInterface
+	 * @var PropertyAccessorInterface|null
 	 */
 	private $propertyAccessor;
-
-	/**
-	 * @var int
-	 */
-	private $apiVersion;
 
 	/**
 	 * {@inheritdoc}
@@ -300,8 +292,13 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @deprecated since version 2.5, to be removed in 3.0.
+	 *             The validator will function without a property accessor.
 	 */
 	public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor) {
+		@trigger_error('The ' . __METHOD__ . ' method is deprecated since version 2.5 and will be removed in 3.0. The validator will function without a property accessor.', E_USER_DEPRECATED);
+
 		if (null !== $this->validatorFactory) {
 			throw new ValidatorException('You cannot set a property accessor after setting a custom validator factory. Configure your validator factory instead.');
 		}
@@ -313,23 +310,15 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 
 	/**
 	 * {@inheritdoc}
+	 *
+	 * @deprecated since version 2.7, to be removed in 3.0.
 	 */
 	public function setApiVersion($apiVersion) {
+		@trigger_error('The ' . __METHOD__ . ' method is deprecated in version 2.7 and will be removed in version 3.0.', E_USER_DEPRECATED);
+
 		if (!in_array($apiVersion, [Validation::API_VERSION_2_4, Validation::API_VERSION_2_5, Validation::API_VERSION_2_5_BC])) {
-			throw new InvalidArgumentException(sprintf(
-				'The requested API version is invalid: "%s"', $apiVersion
-			));
+			throw new InvalidArgumentException(sprintf('The requested API version is invalid: "%s"', $apiVersion));
 		}
-
-		if (version_compare(PHP_VERSION, '5.3.9', '<') && $apiVersion === Validation::API_VERSION_2_5_BC) {
-			throw new InvalidArgumentException(sprintf(
-				'The Validator API that is compatible with both Symfony 2.4 ' .
-				'and Symfony 2.5 can only be used on PHP 5.3.9 and higher. ' .
-				'Your current PHP version is %s.', PHP_VERSION
-			));
-		}
-
-		$this->apiVersion = $apiVersion;
 
 		return $this;
 	}
@@ -375,34 +364,24 @@ class ValidatorBuilder implements ValidatorBuilderInterface {
 				$loader = $loaders[0];
 			}
 
-			$metadataFactory = new ClassMetadataFactory($loader, $this->metadataCache);
+			$metadataFactory = new LazyLoadingMetadataFactory($loader, $this->metadataCache);
 		}
 
-		$validatorFactory = $this->validatorFactory;
-		$translator = $this->translator ?: new DefaultTranslator();
-		$apiVersion = $this->apiVersion;
+		$validatorFactory = $this->validatorFactory ?: new ConstraintValidatorFactory($this->propertyAccessor);
+		$translator = $this->translator;
 
-		if (null === $apiVersion) {
-			$apiVersion = version_compare(PHP_VERSION, '5.3.9', '<') ? Validation::API_VERSION_2_4 : Validation::API_VERSION_2_5_BC;
+		if (null === $translator) {
+			$translator = new IdentityTranslator();
+			// Force the locale to be 'en' when no translator is provided rather than relying on the Intl default locale
+			// This avoids depending on Intl or the stub implementation being available. It also ensures that Symfony
+			// validation messages are pluralized properly even when the default locale gets changed because they are in
+			// English.
+			$translator->setLocale('en');
 		}
 
-		if (Validation::API_VERSION_2_4 === $apiVersion) {
-			$validatorFactory = $validatorFactory ?: new ConstraintValidatorFactory($this->propertyAccessor);
+		$contextFactory = new ExecutionContextFactory($translator, $this->translationDomain);
 
-			return new ValidatorV24($metadataFactory, $validatorFactory, $translator, $this->translationDomain, $this->initializers);
-		}
-
-		if (Validation::API_VERSION_2_5 === $apiVersion) {
-			$contextFactory = new ExecutionContextFactory($translator, $this->translationDomain);
-			$validatorFactory = $validatorFactory ?: new ConstraintValidatorFactory($this->propertyAccessor);
-
-			return new RecursiveValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
-		}
-
-		$contextFactory = new LegacyExecutionContextFactory($metadataFactory, $translator, $this->translationDomain);
-		$validatorFactory = $validatorFactory ?: new LegacyConstraintValidatorFactory($this->propertyAccessor);
-
-		return new LegacyValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
+		return new RecursiveValidator($contextFactory, $metadataFactory, $validatorFactory, $this->initializers);
 	}
 
 	/**
