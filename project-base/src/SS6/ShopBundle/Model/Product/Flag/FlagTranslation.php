@@ -7,7 +7,7 @@ use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 
 /**
- * @ORM\Table(name="flags_translations")
+ * @ORM\Table(name="flag_translations")
  * @ORM\Entity
  */
 class FlagTranslation extends AbstractTranslation {
