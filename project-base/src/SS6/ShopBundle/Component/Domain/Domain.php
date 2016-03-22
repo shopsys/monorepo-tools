@@ -126,7 +126,7 @@ class Domain {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException();
+		throw new \SS6\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException($url);
 	}
 
 	/**
