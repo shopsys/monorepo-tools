@@ -25,8 +25,6 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 
 		$orderStatusData->name = ['cs' => 'Stornována', 'en' => 'Canceled'];
 		$this->createOrderStatus($manager, 'order_status_canceled', $orderStatusData, OrderStatus::TYPE_CANCELED);
-
-		$manager->flush();
 	}
 
 	/**
@@ -38,6 +36,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	public function createOrderStatus(ObjectManager $manager, $referenceName, OrderStatusData $orderStatusData, $type) {
 		$orderStatus = new OrderStatus($orderStatusData, $type);
 		$manager->persist($orderStatus);
+		$manager->flush($orderStatus);
 		$this->addReference($referenceName, $orderStatus);
 	}
 

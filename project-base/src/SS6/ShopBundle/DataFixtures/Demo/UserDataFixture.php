@@ -44,7 +44,6 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 				$deliveryAddress
 			);
 		}
-		$manager->flush();
 	}
 
 	/**
@@ -73,6 +72,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 		if ($deliveryAddress !== null) {
 			$manager->persist($deliveryAddress);
 		}
+		$manager->flush($user);
 
 		$this->addReference($referenceName, $user);
 	}
