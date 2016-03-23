@@ -53,10 +53,11 @@ img {
 			}
 
 			&__content {
-				.flex-order(2);
-				.flex-grow(1);
-				.width-calc(~"100% - @{width-panel}", 70%);
-
+				.web__main--with-panel & {
+					.flex-order(2);
+					.flex-grow(1);
+					.width-calc(~"100% - @{width-panel}", 70%);
+				}
 			}
 
 			&__panel {
