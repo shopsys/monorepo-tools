@@ -71,8 +71,6 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentEditData->paymentData->description = [];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		$this->createPayment('payment_cash', $paymentEditData, ['transport_personal']);
-
-		$manager->flush();
 	}
 
 	/**

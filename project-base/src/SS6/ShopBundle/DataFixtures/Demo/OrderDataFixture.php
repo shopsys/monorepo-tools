@@ -503,8 +503,6 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 				ProductDataFixture::PRODUCT_PREFIX . '3' => 10,
 			]
 		);
-
-		$manager->flush();
 	}
 
 	/**
