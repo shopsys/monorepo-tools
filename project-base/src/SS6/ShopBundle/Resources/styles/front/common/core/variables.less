@@ -42,68 +42,37 @@
 @color-e: #eee;
 @color-f: #fff;
 
-@color-fa: #fafafa;
-
-@color-grey-dark: #cacaca;
-@color-grey: #dadada;
-@color-grey-light: #eaeaea;
-
 @color-blue: #009BD9;
 @color-green: #A0C515;
 @color-orange: #FFA200;
 @color-red: #D60000;
-@color-yellow: #FFDD0E;
 
 // context colors
-@color-base: #31454D;
-@color-desc: @color-5;
+@color-base: @color-3;
 
 @color-primary: @color-blue;
-@color-add: @color-f;
+@color-add: @color-green;
+
+@color-price: @color-red;
+
+@color-link: @color-blue;
+@color-link-hover: @color-base;
 
 @color-info: @color-green;
 @color-alert: @color-red;
 @color-warning: @color-orange;
 
-@color-link: @color-blue;
-@color-link-hover: @color-base;
+@color-inactive: @color-a;
+@color-border: @color-d;
 
-@color-alterlink: @color-f;
-@color-alterlink-hover: @color-yellow;
-
-@color-darklink: #818d92;
-@color-darklink-hover: @color-blue;
-
-@color-border: #DCDFE0;
-@color-border-dark: #CCD0D4;
-@color-border-darker: #C1CDD1;
-@color-border-blue: #0089c0;
-
-@color-inactive: #BCC2C5;
-@color-hint: #66757B;
-@color-action: #66757b;
-@color-move: #818d92;
-
-@bg-web: #CCD0D4;
-@bg-page: #EDF2F4;
-@bg-box: @color-f;
-@bg-window: @color-f;
-@bg-table: #dbe3e5;
-@bg-stripe: #e5ecf3;
-@bg-primary: @color-primary;
-@bg-primary-dark: #0573a0;
-@bg-primary-darker: #0487bc;
-@bg-bread: #E1E8EB;
-@bg-input-icon: #EBECED;
-@bg-upload: #EBECED;
-@bg-dark: #dee4e7;
+@bg-web: @color-3;
+@bg-page: @color-f;
+@bg-box: #f4f4f4;
 
 @bg-success: #dff0d8;
 @bg-info: #BCE0EE;
 @bg-warning: #fcf8e3;
 @bg-alert: #FFEDED;
-@bg-light: #f8f8f8;
-@bg-edit: #faffd7;
 
 // message colors
 @color-message-alert: #F7D6D6;
@@ -152,14 +121,9 @@
 @window-width: 400px;
 @window-height: 150px;
 
-@window-preview-width: 650px;
-@window-preview-height: 150px;
-
 @window-wide-width: 900px;
 @window-wide-height: auto;
 
-@window-wide-float-width: 600px;
-@window-wide-float-height: 250px;
 /*******************************************************************
 // RESPONSIVE POINTS
 *******************************************************************/
@@ -171,8 +135,10 @@
 @respons-3-a: (@respons-3 - 1);
 @respons-4: 768px;
 @respons-4-a: (@respons-4 - 1);
-@respons-5: @width-web;
+@respons-5: 1024px;
 @respons-5-a: (@respons-5 - 1);
+@respons-6: @width-web;
+@respons-6-a: (@respons-6 - 1);
 
 /*******************************************************************
 // MEDIA QUERIES
@@ -182,6 +148,7 @@
 @query-md: ~"screen and (min-width: @{respons-3})";
 @query-lg: ~"screen and (min-width: @{respons-4})";
 @query-xl: ~"screen and (min-width: @{respons-5})";
+@query-xxl: ~"screen and (min-width: @{respons-6})";
 
 @query-mobile-xs: ~"screen and (max-width: @{respons-2-a})";
 @query-mobile: ~"screen and (max-width: @{respons-3-a})";
