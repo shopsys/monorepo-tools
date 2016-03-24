@@ -285,4 +285,32 @@
 		};
 	};
 
+	SS6.validation.isExpandedChoiceFormType = function(element, value) {
+		return element.type === SS6.constant('SS6\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
+	};
+
+	SS6.validation.isExpandedChoiceEmpty = function(value) {
+		var isEmpty = true;
+
+		$.each(value, function(key, value) {
+			if (value !== false) {
+				isEmpty = false;
+				return false;
+			}
+		});
+
+		return isEmpty;
+	};
+
+	FpJsFormValidator._isValueEmty = FpJsFormValidator.isValueEmty;
+	FpJsFormValidator.isValueEmty = function (value, element) {
+		if (element instanceof FpJsFormElement) {
+			if (SS6.validation.isExpandedChoiceFormType(element, value)) {
+				return SS6.validation.isExpandedChoiceEmpty(value);
+			}
+		}
+
+		return FpJsFormValidator._isValueEmty(value);
+	};
+
 })(jQuery);
