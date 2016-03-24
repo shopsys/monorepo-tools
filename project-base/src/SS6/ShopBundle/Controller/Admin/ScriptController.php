@@ -48,9 +48,10 @@ class ScriptController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl vytvořen skript <strong>{{ name }}</strong>'),
+					t('Byl vytvořen skript <a href="{{ url }}"><strong>{{ name }}</strong></a>'),
 					[
 						'name' => $script->getName(),
+						'url' => $this->generateUrl('admin_script_edit', ['scriptId' => $script->getId()]),
 					]
 				);
 
@@ -86,9 +87,10 @@ class ScriptController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl upraven skript <strong>{{ name }}</strong>'),
+					t('Byl upraven skript <a href="{{ url }}"><strong>{{ name }}</strong></a>'),
 					[
 						'name' => $script->getName(),
+						'url' => $this->generateUrl('admin_script_edit', ['scriptId' => $scriptId]),
 					]
 				);
 			return $this->redirectToRoute('admin_script_list');
