@@ -2,7 +2,9 @@
 
 namespace SS6\ShopBundle\Tests\Test\Codeception;
 
+use Codeception\Actor;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
+use SS6\ShopBundle\Tests\Test\Codeception\_generated\AcceptanceTesterActions;
 
 /**
  * Inherited Methods
@@ -20,12 +22,12 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
  *
  * @SuppressWarnings(PHPMD)
  */
-class AcceptanceTester extends \Codeception\Actor {
+class AcceptanceTester extends Actor {
 
 	const DEFAULT_AJAX_TIMEOUT_SEC = 10;
 	const WAIT_TIMEOUT_SEC = 10;
 
-	use _generated\AcceptanceTesterActions;
+	use AcceptanceTesterActions;
 
 	public function switchToLastOpenedWindow() {
 		$this->executeInSelenium(function (RemoteWebDriver $webdriver) {
