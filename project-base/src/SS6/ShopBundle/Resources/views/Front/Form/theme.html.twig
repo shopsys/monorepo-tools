@@ -106,12 +106,12 @@
 {% endblock form_errors %}
 
 {% block form_widget_simple %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	{{ parent('form_widget_simple') }}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
 	{{ parent('textarea_widget') }}
 {% endblock textarea_widget %}
@@ -136,7 +136,7 @@
 	{% if required and placeholder is none and not placeholder_in_choices and not multiple -%}
 		{% set required = false %}
 	{% endif %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-control')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
 		{% if placeholder is not none -%}
 			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder }}</option>
