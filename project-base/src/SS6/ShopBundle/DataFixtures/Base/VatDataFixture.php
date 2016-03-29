@@ -36,13 +36,12 @@ class VatDataFixture extends AbstractReferenceFixture {
 		$vatData->name = 'Vyšší sazba';
 		$vatData->percent = '21';
 		$this->createVat($manager, self::VAT_HIGH, $vatData);
-
-		$manager->flush();
 	}
 
 	private function createVat(ObjectManager $manager, $referenceName, VatData $vatData) {
 		$vat = new Vat($vatData);
 		$manager->persist($vat);
+		$manager->flush($vat);
 		$this->addReference($referenceName, $vat);
 	}
 

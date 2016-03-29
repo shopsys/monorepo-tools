@@ -62,8 +62,6 @@ class ArticleDataFixture extends AbstractReferenceFixture {
 		$articleData->placement = ArticlePlacementList::PLACEMENT_FOOTER;
 		$this->createArticle($articleData);
 		// @codingStandardsIgnoreStop
-
-		$manager->flush();
 	}
 
 	/**

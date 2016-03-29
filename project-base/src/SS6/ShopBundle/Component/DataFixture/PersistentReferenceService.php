@@ -54,18 +54,20 @@ class PersistentReferenceService {
 		$entityName = get_class($object);
 
 		if (method_exists($object, 'getId')) {
-			// persist and flush entity to obtain ID
-			$this->em->persist($object);
-			$this->em->flush();
+			$objectId = $object->getId();
+
+			if ($objectId === null) {
+				throw new \SS6\ShopBundle\Component\DataFixture\Exception\EntityIdIsNotSetException($name, $object);
+			}
 
 			if (array_key_exists($name, $this->persistentReferencesByName)) {
-				$this->persistentReferencesByName[$name]->replace($entityName, $object->getId());
+				$this->persistentReferencesByName[$name]->replace($entityName, $objectId);
 			} else {
-				$persistentReference = new PersistentReference($name, $entityName, $object->getId());
+				$persistentReference = new PersistentReference($name, $entityName, $objectId);
 				$this->persistentReferencesByName[$name] = $persistentReference;
 				$this->em->persist($persistentReference);
 			}
-			$this->em->flush();
+			$this->em->flush($persistentReference);
 		} else {
 			$message = 'Entity "' . $entityName . '" does not have a method "getId", which is necessary for persistent references.';
 			throw new \SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);

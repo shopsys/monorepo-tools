@@ -19,8 +19,6 @@ class UnitDataFixture extends AbstractReferenceFixture {
 
 		$unitData->name = ['cs' => 'ks', 'en' => 'pcs'];
 		$this->createUnit($manager, self::PCS, $unitData);
-
-		$manager->flush();
 	}
 
 	/**
@@ -31,6 +29,7 @@ class UnitDataFixture extends AbstractReferenceFixture {
 	private function createUnit(ObjectManager $manager, $referenceName, UnitData $unitData) {
 		$unit = new Unit($unitData);
 		$manager->persist($unit);
+		$manager->flush($unit);
 		$this->addReference($referenceName, $unit);
 	}
 

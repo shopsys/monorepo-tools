@@ -27,6 +27,7 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 		$superadmin->setEmail('no-reply@netdevelo.cz');
 
 		$manager->persist($superadmin);
+		$manager->flush($superadmin);
 		$this->addReference(self::SUPERADMINISTRATOR, $superadmin);
 
 		$administrator = new Administrator(new AdministratorData());
@@ -36,9 +37,8 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 		$administrator->setEmail('no-reply@netdevelo.cz');
 
 		$manager->persist($administrator);
+		$manager->flush($administrator);
 		$this->addReference(self::ADMINISTRATOR, $administrator);
-
-		$manager->flush();
 	}
 
 }

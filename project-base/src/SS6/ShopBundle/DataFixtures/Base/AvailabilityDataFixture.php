@@ -34,8 +34,6 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 		$availabilityData->name = ['cs' => 'Nedostupné', 'en' => 'Out of stock'];
 		$availabilityData->dispatchTime = null;
 		$this->createAvailability($manager, self::OUT_OF_STOCK, $availabilityData);
-
-		$manager->flush();
 	}
 
 	/**
@@ -46,6 +44,7 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 	private function createAvailability(ObjectManager $manager, $referenceName, AvailabilityData $availabilityData) {
 		$availability = new Availability($availabilityData);
 		$manager->persist($availability);
+		$manager->flush($availability);
 		$this->addReference($referenceName, $availability);
 	}
 

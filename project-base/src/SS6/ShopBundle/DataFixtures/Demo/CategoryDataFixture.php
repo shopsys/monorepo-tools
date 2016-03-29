@@ -71,8 +71,6 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 		$categoryData->name = ['cs' => 'Jídlo', 'en' => 'Food'];
 		$this->createCategory(self::FOOD, $categoryData);
 
-		$manager->flush();
-
 		$categoryVisibilityRepository->refreshCategoriesVisibility();
 	}
 

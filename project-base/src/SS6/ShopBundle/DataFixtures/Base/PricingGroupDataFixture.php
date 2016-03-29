@@ -32,9 +32,6 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 
 		$pricingGroupData->name = 'VIP customer';
 		$this->createPricingGroup($manager, $pricingGroupData, 2, self::VIP_DOMAIN_2);
-
-		$manager->flush();
-
 	}
 
 	/**
@@ -50,6 +47,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 	) {
 		$pricingGroup = new PricingGroup($pricingGroupData, $domainId);
 		$manager->persist($pricingGroup);
+		$manager->flush($pricingGroup);
 		$this->addReference($referenceName, $pricingGroup);
 	}
 }

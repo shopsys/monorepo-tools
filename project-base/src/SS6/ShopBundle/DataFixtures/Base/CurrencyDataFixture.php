@@ -27,13 +27,12 @@ class CurrencyDataFixture extends AbstractReferenceFixture {
 		$currencyData->code = Currency::CODE_EUR;
 		$currencyData->exchangeRate = 25;
 		$this->createCurrency($manager, self::CURRENCY_EUR, $currencyData);
-
-		$manager->flush();
 	}
 
 	private function createCurrency(ObjectManager $manager, $referenceName, CurrencyData $currencyData) {
 		$currency = new Currency($currencyData);
 		$manager->persist($currency);
+		$manager->flush($currency);
 		$this->addReference($referenceName, $currency);
 	}
 

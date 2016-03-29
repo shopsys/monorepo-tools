@@ -30,8 +30,6 @@ class FlagDataFixture extends AbstractReferenceFixture {
 		$flagData->name = ['cs' => 'Akce', 'en' => 'Action'];
 		$flagData->rgbColor = '#f9ffd6';
 		$this->createFlag($manager, self::ACTION_PRODUCT, $flagData);
-
-		$manager->flush();
 	}
 
 	/**
@@ -42,6 +40,7 @@ class FlagDataFixture extends AbstractReferenceFixture {
 	private function createFlag(ObjectManager $manager, $referenceName, FlagData $flagData) {
 		$flag = new Flag($flagData);
 		$manager->persist($flag);
+		$manager->flush($flag);
 		$this->addReference($referenceName, $flag);
 	}
 
