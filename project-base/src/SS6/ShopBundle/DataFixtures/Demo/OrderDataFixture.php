@@ -30,8 +30,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply@netdevelo.cz', 1);
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Jiří';
 		$orderData->lastName = 'Ševčík';
@@ -53,8 +53,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Iva';
 		$orderData->lastName = 'Jačková';
@@ -78,8 +78,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_cp');
-		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_COD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Adamovský';
@@ -101,8 +101,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_ppl');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Iveta';
 		$orderData->lastName = 'Prvá';
@@ -123,8 +123,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Jana';
 		$orderData->lastName = 'Janíčková';
@@ -147,8 +147,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_ppl');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Dominik';
 		$orderData->lastName = 'Hašek';
@@ -174,8 +174,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Jiří';
 		$orderData->lastName = 'Sovák';
@@ -197,8 +197,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_cp');
-		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_COD);
 		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Josef';
 		$orderData->lastName = 'Somr';
@@ -220,8 +220,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_cp');
-		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_COD);
 		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Václav';
 		$orderData->lastName = 'Svěrkoš';
@@ -241,8 +241,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Ivan';
 		$orderData->lastName = 'Horník';
@@ -264,8 +264,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Novák';
@@ -298,8 +298,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_cp');
-		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_COD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Jindřich';
 		$orderData->lastName = 'Němec';
@@ -321,8 +321,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_ppl');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Adam';
 		$orderData->lastName = 'Bořič';
@@ -342,8 +342,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Evžen';
 		$orderData->lastName = 'Farný';
@@ -365,8 +365,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Ivana';
 		$orderData->lastName = 'Janečková';
@@ -387,8 +387,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_cp');
-		$orderData->payment = $this->getReference('payment_cod');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_COD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Pavel';
 		$orderData->lastName = 'Novák';
@@ -409,8 +409,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_ppl');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_done');
 		$orderData->firstName = 'Pavla';
 		$orderData->lastName = 'Adámková';
@@ -433,8 +433,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_in_progress');
 		$orderData->firstName = 'Adam';
 		$orderData->lastName = 'Žitný';
@@ -456,8 +456,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_ppl');
-		$orderData->payment = $this->getReference('payment_card');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PPL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CARD);
 		$orderData->status = $this->getReference('order_status_new');
 		$orderData->firstName = 'Radim';
 		$orderData->lastName = 'Svátek';
@@ -484,8 +484,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference('transport_personal');
-		$orderData->payment = $this->getReference('payment_cash');
+		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference('order_status_canceled');
 		$orderData->firstName = 'Viktor';
 		$orderData->lastName = 'Pátek';

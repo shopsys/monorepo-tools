@@ -264,9 +264,11 @@ class OrderDataFixture {
 	 * @return \SS6\ShopBundle\Model\Transport\Transport
 	 */
 	private function getRandomTransport() {
-		$randomTransportReferenceName = $this->faker->randomElement(
-			TransportDataFixture::ALL_TRANSPORT_PERSISTENT_REFERECE_NAMES
-		);
+		$randomTransportReferenceName = $this->faker->randomElement([
+			TransportDataFixture::TRANSPORT_CZECH_POST,
+			TransportDataFixture::TRANSPORT_PPL,
+			TransportDataFixture::TRANSPORT_PERSONAL,
+		]);
 
 		return $this->persistentReferenceService->getReference($randomTransportReferenceName);
 	}
@@ -275,9 +277,11 @@ class OrderDataFixture {
 	 * @return \SS6\ShopBundle\Model\Payment\Payment
 	 */
 	private function getRandomPayment() {
-		$randomPaymentReferenceName = $this->faker->randomElement(
-			PaymentDataFixture::ALL_PAYMENT_PERSISTENT_REFERECE_NAMES
-		);
+		$randomPaymentReferenceName = $this->faker->randomElement([
+			PaymentDataFixture::PAYMENT_CARD,
+			PaymentDataFixture::PAYMENT_COD,
+			PaymentDataFixture::PAYMENT_CASH,
+		]);
 
 		return $this->persistentReferenceService->getReference($randomPaymentReferenceName);
 	}

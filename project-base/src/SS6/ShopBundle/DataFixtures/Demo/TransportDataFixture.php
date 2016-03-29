@@ -12,11 +12,9 @@ use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	const ALL_TRANSPORT_PERSISTENT_REFERECE_NAMES = [
-		'transport_cp',
-		'transport_ppl',
-		'transport_personal',
-	];
+	const TRANSPORT_CZECH_POST = 'transport_cp';
+	const TRANSPORT_PPL = 'transport_ppl';
+	const TRANSPORT_PERSONAL = 'transport_personal';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -43,7 +41,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 		$transportEditData->transportData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		$transportEditData->transportData->domains = [1, 2];
 		$transportEditData->transportData->hidden = false;
-		$this->createTransport('transport_cp', $transportEditData);
+		$this->createTransport(self::TRANSPORT_CZECH_POST, $transportEditData);
 
 		$transportEditData->transportData->name = [
 			'cs' => 'PPL',
@@ -58,7 +56,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 			'en' => null,
 		];
 		$transportEditData->transportData->instructions = [];
-		$this->createTransport('transport_ppl', $transportEditData);
+		$this->createTransport(self::TRANSPORT_PPL, $transportEditData);
 
 		$transportEditData->transportData->name = [
 			'cs' => 'Osobní převzetí',
@@ -73,7 +71,7 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 			'en' => 'You will be welcomed friendly staff!',
 		];
 		$transportEditData->transportData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-		$this->createTransport('transport_personal', $transportEditData);
+		$this->createTransport(self::TRANSPORT_PERSONAL, $transportEditData);
 	}
 
 	/**
