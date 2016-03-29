@@ -80,8 +80,8 @@
 						<iframe name="js-terms-and-conditions-frame" width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
 					</div>
 					<div class="text-right">
-						<button id="js-terms-and-conditions-print" class="button button--simple" type="button">{{ 'Vytisknout'|trans }}</button>
-						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="button button--simple" type="button">{{ 'Stáhnout'|trans }}</a>
+						<button id="js-terms-and-conditions-print" class="btn" type="button">{{ 'Vytisknout'|trans }}</button>
+						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn" type="button">{{ 'Stáhnout'|trans }}</a>
 					</div>
 				{% endif %}
 				{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
@@ -94,9 +94,9 @@
 	</div>
 
 	<div class="box-buttons">
-		{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'button button--large button-primary box-buttons__right' } }) }}
+		{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn box-buttons__right' } }) }}
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="button button--alter box-buttons__left js-no-validate-button">
+		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn box-buttons__left js-no-validate-button">
 			{{ 'Zpět na výběr dopravy a platby'|trans }}
 		</button>
 	</div>

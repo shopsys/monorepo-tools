@@ -117,7 +117,7 @@
 {% endblock textarea_widget %}
 
 {% block button_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' button')|trim}) %}
+	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn')|trim}) %}
 
 	{%- if label is empty -%}
 		{%- if label_format is not empty -%}

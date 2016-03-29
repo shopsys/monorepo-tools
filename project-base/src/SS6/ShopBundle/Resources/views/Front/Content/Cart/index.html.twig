@@ -61,9 +61,9 @@
 
 							<td class="table-cart__ammount">
 								<span class="form-input-spinbox js-spinbox">
-									<input type="button" class="button form-input-spinbox__button js-spinbox-minus" value="-" />
+									<input type="button" class="btn form-input-spinbox__button js-spinbox-minus" value="-" />
 									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
-									<input type="button" class="button form-input-spinbox__button js-spinbox-plus" value="+" />
+									<input type="btn" class="btn form-input-spinbox__button js-spinbox-plus" value="+" />
 									{{ cartItem.product.unit.name }}
 								</span>
 							</td>
@@ -118,10 +118,10 @@
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn box-buttons__right'}}) }}
 				{% endif %}
 
-				<a href="{{ url('front_homepage') }}" class="button button--alter box-buttons__left">
+				<a href="{{ url('front_homepage') }}" class="btn box-buttons__left">
 					{{ 'Zpět k nákupu'|trans }}
 				</a>
 			</div>
@@ -139,7 +139,7 @@
 		</div>
 
 		<div class="box-buttons">
-			<a href="{{url('front_homepage') }}" class="button button--alter box-buttons__left">
+			<a href="{{url('front_homepage') }}" class="btn box-buttons__left">
 				{{ 'Zpět k nákupu'|trans }}
 			</a>
 		</div>

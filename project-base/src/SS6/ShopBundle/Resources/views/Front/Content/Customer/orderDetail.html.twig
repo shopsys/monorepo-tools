@@ -131,6 +131,6 @@
 	</table>
 	<br />
 	{% if is_granted('ROLE_CUSTOMER') %}
-		<a href="{{ url('front_customer_orders') }}" class="button btn btn-primary">{{ 'Zpět na přehled objednávek'|trans }}</a>
+		<a href="{{ url('front_customer_orders') }}" class="btn">{{ 'Zpět na přehled objednávek'|trans }}</a>
 	{% endif %}
 {% endblock %}
