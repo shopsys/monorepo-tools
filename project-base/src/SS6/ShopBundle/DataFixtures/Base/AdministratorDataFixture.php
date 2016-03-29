@@ -11,7 +11,7 @@ use SS6\ShopBundle\Model\Administrator\AdministratorService;
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
 	const SUPERADMINISTRATOR = 'administrator_superadministrator';
-	const ADMINISTRATOR = 'admistrator_administrator';
+	const ADMINISTRATOR = 'administrator_administrator';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
