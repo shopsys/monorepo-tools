@@ -5,93 +5,86 @@
 {% endblock %}
 
 {% block content %}
-	<div class="row">
+	<div class="wrap-box">
+		<h2 class="mt-0">{{ 'Osobní údaje'|trans }}</h2>
 
-		<div class="col-sm-12 col-md-8">
-			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Osobní údaje'|trans }}</h2>
-
-				<fieldset>
-					{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
-					{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
-					{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-					{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
-				</fieldset>
-
-			</div>
-
-			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
-				<fieldset>
-					{{ form_row(form.companyCustomer, {
-						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-						label: 'Nakupuji na firmu'|trans})
-					}}
-					<div id="js-company-fields">
-						{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
-						{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
-					</div>
-				</fieldset>
-			</div>
-
-			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Fakturační údaje'|trans }} <span class="heading-addition">{{ '(Tato adresa bude na daňovém dokladu)'|trans }}</span></h2>
-
-				<fieldset>
-					{{ form_row(form.street, { label: 'Ulice'|trans }) }}
-					{{ form_row(form.city, { label: 'Město'|trans }) }}
-					{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
-				</fieldset>
-
-			</div>
-
-			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
-				<fieldset>
-					{{ form_row(form.deliveryAddressFilled, {
-						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-						label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
-					}}
-					<div id="js-delivery-address-fields">
-						{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
-						{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-						{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
-						{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
-						{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-						{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
-					<div>
-				</fieldset>
-			</div>
-
-			<div class="wrap-box">
-				<h2 class="mt-0">{{ 'Poznámka'|trans }}</h2>
-
-				<fieldset>
-					{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
-				</fieldset>
-
-			</div>
-
-			<div class="wrap-box">
-				{% if termsAndConditionsArticle is not null %}
-					<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
-					<div class="box-condition">
-						<iframe name="js-terms-and-conditions-frame" width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
-					</div>
-					<div class="text-right">
-						<button id="js-terms-and-conditions-print" class="btn" type="button">{{ 'Vytisknout'|trans }}</button>
-						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn" type="button">{{ 'Stáhnout'|trans }}</a>
-					</div>
-				{% endif %}
-				{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
-			</div>
-
-		</div>
-
-		{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
+		<fieldset>
+			{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
+			{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+			{{ form_row(form.email, { label: 'E-mail'|trans }) }}
+			{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+		</fieldset>
 
 	</div>
+
+	<div class="wrap-box">
+		<h2 class="mt-0">{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
+		<fieldset>
+			{{ form_row(form.companyCustomer, {
+				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+				label: 'Nakupuji na firmu'|trans})
+			}}
+			<div id="js-company-fields">
+				{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
+				{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+				{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+			</div>
+		</fieldset>
+	</div>
+
+	<div class="wrap-box">
+		<h2 class="mt-0">{{ 'Fakturační údaje'|trans }} <span class="heading-addition">{{ '(Tato adresa bude na daňovém dokladu)'|trans }}</span></h2>
+
+		<fieldset>
+			{{ form_row(form.street, { label: 'Ulice'|trans }) }}
+			{{ form_row(form.city, { label: 'Město'|trans }) }}
+			{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+		</fieldset>
+
+	</div>
+
+	<div class="wrap-box">
+		<h2 class="mt-0">{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
+		<fieldset>
+			{{ form_row(form.deliveryAddressFilled, {
+				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+				label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
+			}}
+			<div id="js-delivery-address-fields">
+				{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
+				{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
+				{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+				{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
+				{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
+				{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+			<div>
+		</fieldset>
+	</div>
+
+	<div class="wrap-box">
+		<h2 class="mt-0">{{ 'Poznámka'|trans }}</h2>
+
+		<fieldset>
+			{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
+		</fieldset>
+
+	</div>
+
+	<div class="wrap-box">
+		{% if termsAndConditionsArticle is not null %}
+			<h2 class="mt-0">{{ 'Obchodní podmínky'|trans }}</h2>
+			<div class="box-condition">
+				<iframe name="js-terms-and-conditions-frame" width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
+			</div>
+			<div class="text-right">
+				<button id="js-terms-and-conditions-print" class="btn" type="button">{{ 'Vytisknout'|trans }}</button>
+				<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn" type="button">{{ 'Stáhnout'|trans }}</a>
+			</div>
+		{% endif %}
+		{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
+	</div>
+
+	{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
 
 	<div class="box-buttons">
 		{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--primary box-buttons__right' } }) }}
@@ -100,4 +93,5 @@
 			{{ 'Zpět na výběr dopravy a platby'|trans }}
 		</button>
 	</div>
+
 {% endblock %}

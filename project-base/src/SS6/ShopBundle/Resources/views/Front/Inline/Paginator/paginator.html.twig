@@ -1,14 +1,14 @@
 {% macro paginatorNavigation(paginationResult, entityName) %}
-	<div class="row text-center mb-half">
+	<div class="text-center mb-half">
 		{% set route = getRoute() %}
 		{% set routeParams = getAllRequestParams() %}
 		{% set pageCount = paginationResult.pageCount %}
-		<strong class="mt-half col-md-3">
+		<strong class="mt-half">
 			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}
 			{{ paginationResult.fromItem }} - <span class="js-pagination-to-item">{{ paginationResult.toItem }}</span> {{ 'z'|trans }} {{ paginationResult.totalCount }}
 		</strong>
 
-		<div class="col-md-6 text-center">
+		<div class="text-center">
 			<ul class="pagination mb-0 mt-half">
 				{% if pageCount > 1 %}
 					{% if paginationResult.page > 1 %}
