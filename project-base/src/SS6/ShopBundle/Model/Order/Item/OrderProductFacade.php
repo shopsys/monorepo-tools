@@ -107,6 +107,8 @@ class OrderProductFacade {
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($relevantProduct);
 			$this->productService->markProductForVisibilityRecalculation($relevantProduct);
 		}
+		$this->em->flush($relevantProducts);
+
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarked();
 	}
 }
