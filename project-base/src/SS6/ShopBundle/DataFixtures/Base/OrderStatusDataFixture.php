@@ -33,7 +33,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
 	 */
-	public function createOrderStatus(ObjectManager $manager, $referenceName, OrderStatusData $orderStatusData, $type) {
+	private function createOrderStatus(ObjectManager $manager, $referenceName, OrderStatusData $orderStatusData, $type) {
 		$orderStatus = new OrderStatus($orderStatusData, $type);
 		$manager->persist($orderStatus);
 		$manager->flush($orderStatus);
