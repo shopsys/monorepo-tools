@@ -88,6 +88,7 @@
 
 		var submitFormWithAjax = function () {
 			SS6.ajax({
+				overlayDelay: 0,
 				url: SS6.url.getBaseUrl(),
 				data: $productFilterForm.serialize(),
 				success: function (data) {

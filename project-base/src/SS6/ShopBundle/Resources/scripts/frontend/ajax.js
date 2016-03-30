@@ -7,6 +7,7 @@
 		var defaults = {
 			loaderElement: 'body',
 			loaderMessage: '',
+			overlayDelay: 200,
 			error: showDefaultError,
 			complete: function () {}
 		};
@@ -30,7 +31,7 @@
 
 		loaderOverlayTimeout = setTimeout(function () {
 			showLoaderOverlay(options.loaderElement, $loaderOverlay);
-		}, 200);
+		}, options.overlayDelay);
 		$.ajax(options);
 	};
 
