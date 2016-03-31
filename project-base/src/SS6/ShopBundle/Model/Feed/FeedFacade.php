@@ -14,6 +14,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class FeedFacade {
 
 	const TEMPORARY_FILENAME_SUFFIX = '.tmp';
+	const BATCH_SIZE = 200;
 
 	/**
 	 * @var string
@@ -130,29 +131,46 @@ class FeedFacade {
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param int|null $feedItemIdToContinue
+	 * @param int|null $seekItemId
 	 * @return \SS6\ShopBundle\Model\Feed\FeedItemInterface|null
 	 */
 	private function generateFeedBatch(
 		FeedConfig $feedConfig,
 		DomainConfig $domainConfig,
-		$feedItemIdToContinue
+		$seekItemId
 	) {
 		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
-		$feedItemToContinue = $this->feedXmlWriter->generateIteratively(
-			$feedConfig->getFeedItemIteratorFactory(),
-			$domainConfig,
-			$feedConfig->getTemplateFilepath(),
-			$temporaryFeedFilepath,
-			$feedItemIdToContinue
-		);
-		if ($feedItemToContinue === null) {
-			$this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+		$items = $feedConfig->getFeedItemRepository()->getItems($domainConfig, $seekItemId, self::BATCH_SIZE);
+
+		if ($seekItemId === null) {
+			$this->feedXmlWriter->writeBegin(
+				$domainConfig,
+				$feedConfig->getTemplateFilepath(),
+				$temporaryFeedFilepath
+			);
 		}
 
-		return $feedItemToContinue;
+		$this->feedXmlWriter->writeItems(
+			$items,
+			$domainConfig,
+			$feedConfig->getTemplateFilepath(),
+			$temporaryFeedFilepath
+		);
+
+		if (count($items) === self::BATCH_SIZE) {
+			return array_pop($items);
+		} else {
+			$this->feedXmlWriter->writeEnd(
+				$domainConfig,
+				$feedConfig->getTemplateFilepath(),
+				$temporaryFeedFilepath
+			);
+			$this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+
+			return null;
+		}
 	}
 
 	/**

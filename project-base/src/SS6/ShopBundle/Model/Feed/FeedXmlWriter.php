@@ -2,121 +2,65 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use Twig_Environment;
 use Twig_Template;
 
 class FeedXmlWriter {
-
-	const BATCH_SIZE = 100;
 
 	/**
 	 * @var \Twig_Environment
 	 */
 	private $twig;
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
-
-	public function __construct(Twig_Environment $twig, EntityManager $em) {
+	public function __construct(Twig_Environment $twig) {
 		$this->twig = $twig;
-		$this->em = $em;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */
-	public function generate(
-		FeedItemIteratorFactoryInterface $feedItemIteratorFactory,
-		DomainConfig $domainConfig,
-		$feedTemplatePath,
-		$targetFilepath
-	) {
-		set_time_limit(0);
+	public function writeBegin(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
 		$twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
-		file_put_contents($targetFilepath, $this->getRenderedBlock($twigTemplate, 'begin'));
-
-		$feedItemIterator = $feedItemIteratorFactory->getIterator($domainConfig);
-
-		$this->generateItems($twigTemplate, $targetFilepath, $feedItemIterator, false);
-
-		file_put_contents($targetFilepath, $this->getRenderedBlock($twigTemplate, 'end'), FILE_APPEND);
+		$renderedBlock = $this->getRenderedBlock($twigTemplate, 'begin', ['domainConfig' => $domainConfig]);
+		file_put_contents($targetFilepath, $renderedBlock);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface $feedItemIteratorFactory
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
-	 * @param int|null $feedItemIdToContinue
-	 * @return \SS6\ShopBundle\Model\Feed\FeedItemInterface|null
 	 */
-	public function generateIteratively(
-		FeedItemIteratorFactoryInterface $feedItemIteratorFactory,
-		DomainConfig $domainConfig,
-		$feedTemplatePath,
-		$targetFilepath,
-		$feedItemIdToContinue
-	) {
+	public function writeEnd(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
 		$twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
-		if ($feedItemIdToContinue === null) {
-			file_put_contents($targetFilepath, $this->getRenderedBlock($twigTemplate, 'begin'));
-		}
-
-		$feedItemIterator = $feedItemIteratorFactory->getIterator($domainConfig);
-		$feedItemIterator->setFeedItemIdToContinue($feedItemIdToContinue);
-
-		$this->generateItems($twigTemplate, $targetFilepath, $feedItemIterator, true);
-		$feedItemToContinue = $feedItemIterator->current();
-		if ($feedItemToContinue === false) {
-			file_put_contents($targetFilepath, $this->getRenderedBlock($twigTemplate, 'end'), FILE_APPEND);
-
-			return null;
-		} else {
-			return $feedItemToContinue;
-		}
+		$renderedBlock = $this->getRenderedBlock($twigTemplate, 'end', ['domainConfig' => $domainConfig]);
+		file_put_contents($targetFilepath, $renderedBlock, FILE_APPEND);
 	}
 
 	/**
-	 * @param \Twig_Template $twigTemplate
+	 * @param \SS6\ShopBundle\Model\Feed\FeedItemInterface[] $items
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
-	 * @param \SS6\ShopBundle\Model\Feed\FeedItemInterface[] $feedItemIterator
-	 * @param bool $iteratively
 	 */
-	private function generateItems(
-		Twig_Template $twigTemplate,
-		$targetFilepath,
-		$feedItemIterator,
-		$iteratively
-	) {
-		$buffer = '';
-		$counter = 0;
-		foreach ($feedItemIterator as $feedItem) {
-			$counter++;
-			$buffer .= $this->getRenderedBlock($twigTemplate, 'item', ['item' => $feedItem]);
-			if ($counter >= self::BATCH_SIZE) {
-				file_put_contents($targetFilepath, $buffer, FILE_APPEND);
-				$buffer = '';
-				$counter = 0;
-				$this->em->clear();
-				if ($iteratively) {
-					return;
-				}
-			}
+	public function writeItems(array $items, DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
+		$twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
+
+		$renderedContent = '';
+		foreach ($items as $item) {
+			$renderedContent .= $this->getRenderedBlock(
+				$twigTemplate,
+				'item',
+				[
+					'item' => $item,
+					'domainConfig' => $domainConfig,
+				]
+			);
 		}
 
-		if ($counter > 0) {
-			file_put_contents($targetFilepath, $buffer, FILE_APPEND);
-			$this->em->clear();
-		}
-
+		file_put_contents($targetFilepath, $renderedContent, FILE_APPEND);
 	}
 
 	/**
