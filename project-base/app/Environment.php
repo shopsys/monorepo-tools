@@ -73,7 +73,7 @@ class Environment {
 	private static function getEnvironmentSetting() {
 		if (is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
 			return self::ENVIRONMENT_TEST;
-		}	elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
+		} elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
 			return self::ENVIRONMENT_DEVELOPMENT;
 		} elseif (is_file(self::getRootDir() . '/' . self::FILE_PRODUCTION)) {
 			return self::ENVIRONMENT_PRODUCTION;
