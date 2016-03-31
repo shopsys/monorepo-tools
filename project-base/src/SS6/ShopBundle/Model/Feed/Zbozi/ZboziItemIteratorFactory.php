@@ -5,10 +5,11 @@ namespace SS6\ShopBundle\Model\Feed\Zbozi;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedItemIterator;
 use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
+use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface {
+class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface, FeedItemRepositoryInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -48,4 +49,28 @@ class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface {
 
 		return new FeedItemIterator($queryBuilder, $this->zboziItemFactory, $domainConfig);
 	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults) {
+		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
+		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
+		$this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
+		$queryBuilder
+			->addSelect('v')->join('p.vat', 'v')
+			->addSelect('a')->join('p.calculatedAvailability', 'a')
+			->addSelect('b')->leftJoin('p.brand', 'b')
+			->orderBy('p.id', 'asc')
+			->setMaxResults($maxResults);
+
+		if ($seekItemId !== null) {
+			$queryBuilder->andWhere('p.id > :seekItemId')->setParameter('seekItemId', $seekItemId);
+		}
+
+		$products = $queryBuilder->getQuery()->execute();
+
+		return $this->zboziItemFactory->createItems($products, $domainConfig);
+	}
+
 }
