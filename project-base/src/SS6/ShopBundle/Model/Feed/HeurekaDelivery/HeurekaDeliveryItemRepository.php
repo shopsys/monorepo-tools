@@ -1,15 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Zbozi;
+namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedItemIterator;
 use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface, FeedItemRepositoryInterface {
+class HeurekaDeliveryItemRepository implements FeedItemIteratorFactoryInterface, FeedItemRepositoryInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -22,32 +23,31 @@ class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface, Feed
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Zbozi\ZboziItemFactory
+	 * @var \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory
 	 */
-	private $zboziItemFactory;
+	private $heurekaDeliveryItemFactory;
 
 	public function __construct(
 		ProductRepository $productRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		ZboziItemFactory $zboziItemFactory
+		HeurekaDeliveryItemFactory $heurekaDeliveryItemFactory
 	) {
 		$this->productRepository = $productRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->zboziItemFactory = $zboziItemFactory;
+		$this->heurekaDeliveryItemFactory = $heurekaDeliveryItemFactory;
 	}
 
 	/**
-	 * @inheritDoc
+	 * {@inheritDoc}
 	 */
 	public function getIterator(DomainConfig $domainConfig) {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
-		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
-		$this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
-		$queryBuilder->addSelect('v')->join('p.vat', 'v');
-		$queryBuilder->addSelect('a')->join('p.calculatedAvailability', 'a');
-		$queryBuilder->addSelect('b')->leftJoin('p.brand', 'b');
+		$queryBuilder = $this->productRepository->getAllSellableUsingStockInStockQueryBuilder(
+			$domainConfig->getId(),
+			$defaultPricingGroup
+		);
 
-		return new FeedItemIterator($queryBuilder, $this->zboziItemFactory, $domainConfig);
+		return new FeedItemIterator($queryBuilder, $this->heurekaDeliveryItemFactory, $domainConfig);
 	}
 
 	/**
@@ -55,12 +55,11 @@ class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface, Feed
 	 */
 	public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults) {
 		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
-		$queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
-		$this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());
+		$queryBuilder = $this->productRepository->getAllSellableUsingStockInStockQueryBuilder(
+			$domainConfig->getId(),
+			$defaultPricingGroup
+		);
 		$queryBuilder
-			->addSelect('v')->join('p.vat', 'v')
-			->addSelect('a')->join('p.calculatedAvailability', 'a')
-			->addSelect('b')->leftJoin('p.brand', 'b')
 			->orderBy('p.id', 'asc')
 			->setMaxResults($maxResults);
 
@@ -70,7 +69,7 @@ class ZboziItemIteratorFactory implements FeedItemIteratorFactoryInterface, Feed
 
 		$products = $queryBuilder->getQuery()->execute();
 
-		return $this->zboziItemFactory->createItems($products, $domainConfig);
+		return $this->heurekaDeliveryItemFactory->createItems($products, $domainConfig);
 	}
 
 }

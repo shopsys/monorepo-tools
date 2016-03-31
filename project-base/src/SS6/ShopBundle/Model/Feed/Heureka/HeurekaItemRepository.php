@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaItemIteratorFactory implements FeedItemIteratorFactoryInterface, FeedItemRepositoryInterface {
+class HeurekaItemRepository implements FeedItemIteratorFactoryInterface, FeedItemRepositoryInterface {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository

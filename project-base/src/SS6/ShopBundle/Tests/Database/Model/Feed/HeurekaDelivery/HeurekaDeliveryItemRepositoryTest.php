@@ -8,9 +8,9 @@ use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
+class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 
-	public function testGetIteratorWithProductInStock() {
+	public function testGetItemsWithProductInStock() {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
@@ -27,11 +27,13 @@ class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 1;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
-		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
-		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
+		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		/* @var $heurekaDeliveryItemRepository \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+		$seekItemId = null;
+		$maxResults = PHP_INT_MAX;
+		$heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-		foreach ($iterator as $heurekaDeliveryItem) {
+		foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
 			if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
 				return;
@@ -41,7 +43,7 @@ class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 		$this->fail('Sellable product using stock in stock must be in XML heureka delivery feed.');
 	}
 
-	public function testGetIteratorWithProductOutOfStock() {
+	public function testGetItemsWithProductOutOfStock() {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
@@ -58,11 +60,13 @@ class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 0;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
-		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
-		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
+		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		/* @var $heurekaDeliveryItemRepository \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+		$seekItemId = null;
+		$maxResults = PHP_INT_MAX;
+		$heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-		foreach ($iterator as $heurekaDeliveryItem) {
+		foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
 			if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
 				$this->fail('Sellable product out of stock can not be in XML heureka delivery feed.');
@@ -70,7 +74,7 @@ class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 		}
 	}
 
-	public function testGetIteratorWithProductWithoutStock() {
+	public function testGetItemsWithProductWithoutStock() {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
@@ -87,11 +91,13 @@ class HeurekaDeliveryItemIteratorFactoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = null;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$itemIteratorFactory = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_iterator_factory');
-		/* @var $itemIteratorFactory \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemIteratorFactory */
-		$iterator = $itemIteratorFactory->getIterator($domain->getCurrentDomainConfig());
+		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		/* @var $heurekaDeliveryItemRepository \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
+		$seekItemId = null;
+		$maxResults = PHP_INT_MAX;
+		$heurekaDeliveryItems = $heurekaDeliveryItemRepository->getItems($domain->getCurrentDomainConfig(), $seekItemId, $maxResults);
 
-		foreach ($iterator as $heurekaDeliveryItem) {
+		foreach ($heurekaDeliveryItems as $heurekaDeliveryItem) {
 			/* @var $heurekaDeliveryItem \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem*/
 			if ($heurekaDeliveryItem->getItemId() == $product->getId()) {
 				$this->fail('Sellable product without stock can not be in XML heureka delivery feed.');
