@@ -116,16 +116,15 @@ class FeedFacade {
 		FeedConfig $feedConfig,
 		DomainConfig $domainConfig
 	) {
-		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
-
-		$this->feedGenerator->generate(
-			$feedConfig->getFeedItemIteratorFactory(),
-			$domainConfig,
-			$feedConfig->getTemplateFilepath(),
-			$temporaryFeedFilepath
-		);
-		$this->filesystem->rename($temporaryFeedFilepath, $filepath, true);
+		$seekItemId = null;
+		do {
+			$lastFeedItem = $this->generateFeedBatch($feedConfig, $domainConfig, $seekItemId);
+			if ($lastFeedItem === null) {
+				$seekItemId = null;
+			} else {
+				$seekItemId = $lastFeedItem->getItemId();
+			}
+		} while ($seekItemId !== null);
 	}
 
 	/**
