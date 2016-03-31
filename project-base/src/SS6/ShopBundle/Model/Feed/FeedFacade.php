@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
 use SS6\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
-use SS6\ShopBundle\Model\Feed\FeedGenerator;
+use SS6\ShopBundle\Model\Feed\FeedXmlWriter;
 use Symfony\Component\Filesystem\Filesystem;
 
 class FeedFacade {
@@ -31,9 +31,9 @@ class FeedFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerator
+	 * @var \SS6\ShopBundle\Model\Feed\FeedXmlWriter
 	 */
-	private $feedGenerator;
+	private $feedXmlWriter;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigFacade
@@ -52,14 +52,14 @@ class FeedFacade {
 
 	public function __construct(
 		$feedsPath,
-		FeedGenerator $feedGenerator,
+		FeedXmlWriter $feedXmlWriter,
 		Domain $domain,
 		Filesystem $filesystem,
 		FeedConfigFacade $feedConfigFacade,
 		FeedGenerationConfigFactory $feedGenerationConfigFactory
 	) {
 		$this->feedsPath = $feedsPath;
-		$this->feedGenerator = $feedGenerator;
+		$this->feedXmlWriter = $feedXmlWriter;
 		$this->domain = $domain;
 		$this->filesystem = $filesystem;
 		$this->feedConfigFacade = $feedConfigFacade;
@@ -141,7 +141,7 @@ class FeedFacade {
 		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
 		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
-		$feedItemToContinue = $this->feedGenerator->generateIteratively(
+		$feedItemToContinue = $this->feedXmlWriter->generateIteratively(
 			$feedConfig->getFeedItemIteratorFactory(),
 			$domainConfig,
 			$feedConfig->getTemplateFilepath(),

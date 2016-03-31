@@ -8,7 +8,7 @@ use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use Twig_Environment;
 use Twig_Template;
 
-class FeedGenerator {
+class FeedXmlWriter {
 
 	const BATCH_SIZE = 100;
 
