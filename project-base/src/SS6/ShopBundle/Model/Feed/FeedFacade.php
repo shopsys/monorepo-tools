@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
@@ -51,13 +52,19 @@ class FeedFacade {
 	 */
 	private $feedGenerationConfigs;
 
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	private $em;
+
 	public function __construct(
 		$feedsPath,
 		FeedXmlWriter $feedXmlWriter,
 		Domain $domain,
 		Filesystem $filesystem,
 		FeedConfigFacade $feedConfigFacade,
-		FeedGenerationConfigFactory $feedGenerationConfigFactory
+		FeedGenerationConfigFactory $feedGenerationConfigFactory,
+		EntityManager $em
 	) {
 		$this->feedsPath = $feedsPath;
 		$this->feedXmlWriter = $feedXmlWriter;
@@ -66,6 +73,7 @@ class FeedFacade {
 		$this->feedConfigFacade = $feedConfigFacade;
 		$this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
 		$this->feedGenerationConfigs = $this->feedGenerationConfigFactory->createAll();
+		$this->em = $em;
 	}
 
 	/**
@@ -158,6 +166,8 @@ class FeedFacade {
 			$feedConfig->getTemplateFilepath(),
 			$temporaryFeedFilepath
 		);
+
+		$this->em->clear();
 
 		if (count($items) === self::BATCH_SIZE) {
 			return array_pop($items);
