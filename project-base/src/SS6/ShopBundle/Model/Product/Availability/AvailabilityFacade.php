@@ -9,7 +9,6 @@ use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class AvailabilityFacade {
@@ -44,19 +43,13 @@ class AvailabilityFacade {
 	 */
 	private $productRepository;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
-	 */
-	private $productEditFacade;
-
 	public function __construct(
 		EntityManager $em,
 		AvailabilityRepository $availabilityRepository,
 		AvailabilityService $availabilityService,
 		Setting $setting,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
-		ProductRepository $productRepository,
-		ProductEditFacade $productEditFacade
+		ProductRepository $productRepository
 	) {
 		$this->em = $em;
 		$this->availabilityRepository = $availabilityRepository;
@@ -64,7 +57,6 @@ class AvailabilityFacade {
 		$this->setting = $setting;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->productRepository = $productRepository;
-		$this->productEditFacade = $productEditFacade;
 	}
 
 	/**
