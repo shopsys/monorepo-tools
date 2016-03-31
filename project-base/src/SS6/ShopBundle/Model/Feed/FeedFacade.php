@@ -76,7 +76,7 @@ class FeedFacade {
 			if ($feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToContinue)) {
 				$feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedGenerationConfig->getFeedName());
 				$domainConfig = $this->domain->getDomainConfigById($feedGenerationConfig->getDomainId());
-				$feedItemToContinue = $this->generateFeedIteratively(
+				$feedItemToContinue = $this->generateFeedBatch(
 					$feedConfig,
 					$domainConfig,
 					$feedGenerationConfigToContinue->getFeedItemId()
@@ -134,7 +134,7 @@ class FeedFacade {
 	 * @param int|null $feedItemIdToContinue
 	 * @return \SS6\ShopBundle\Model\Feed\FeedItemInterface|null
 	 */
-	public function generateFeedIteratively(
+	private function generateFeedBatch(
 		FeedConfig $feedConfig,
 		DomainConfig $domainConfig,
 		$feedItemIdToContinue
