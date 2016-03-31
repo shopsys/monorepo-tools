@@ -20,7 +20,7 @@ class Environment {
 	public static function checkEnvironment(Event $event) {
 		$io = $event->getIO();
 		/* @var $io \Composer\IO\IOInterface */
-		if ($io->isInteractive() && self::getEnvironmentSetting() === null) {
+		if ($io->isInteractive() && self::getEnvironmentSetting(false) === null) {
 			if ($io->askConfirmation('Build in production environment? (Y/n): ', true)) {
 				self::createFile(self::getRootDir() . '/' . self::FILE_PRODUCTION);
 			} else {
@@ -31,10 +31,11 @@ class Environment {
 	}
 
 	/**
+	 * @param bool $console
 	 * @return string
 	 */
-	public static function getEnvironment() {
-		$environmentSetting = self::getEnvironmentSetting();
+	public static function getEnvironment($console) {
+		$environmentSetting = self::getEnvironmentSetting($console);
 		return $environmentSetting ?: self::ENVIRONMENT_PRODUCTION;
 	}
 
@@ -49,7 +50,7 @@ class Environment {
 	 * @param \Composer\IO\IOInterface $io
 	 */
 	public static function printEnvironmentInfo(IOInterface $io) {
-		$io->write("\nEnvironment is <info>" . self::getEnvironment() . "</info>\n");
+		$io->write("\nEnvironment is <info>" . self::getEnvironment(false) . "</info>\n");
 	}
 
 	/**
@@ -68,10 +69,11 @@ class Environment {
 	}
 
 	/**
+	 * @param bool $ignoreTestFile
 	 * @return string|null
 	 */
-	private static function getEnvironmentSetting() {
-		if (is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
+	private static function getEnvironmentSetting($ignoreTestFile) {
+		if (!$ignoreTestFile && is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
 			return self::ENVIRONMENT_TEST;
 		} elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {
 			return self::ENVIRONMENT_DEVELOPMENT;

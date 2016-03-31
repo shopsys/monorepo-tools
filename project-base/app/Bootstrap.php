@@ -23,7 +23,7 @@ class Bootstrap {
 
 	public function __construct($console = false, $environment = null) {
 		if ($environment === null) {
-			$this->environment = Environment::getEnvironment();
+			$this->environment = Environment::getEnvironment($console);
 		} else {
 			$this->environment = $environment;
 		}
