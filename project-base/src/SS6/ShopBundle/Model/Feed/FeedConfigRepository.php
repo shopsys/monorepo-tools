@@ -2,27 +2,30 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
+use SS6\ShopBundle\Model\Feed\FeedConfig;
+use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+
 class FeedConfigRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $heurekaItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $heurekaDeliveryItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $zboziItemRepository;
 
 	public function __construct(
-		FeedItemIteratorFactoryInterface $heurekaItemRepository,
-		FeedItemIteratorFactoryInterface $heurekaDeliveryItemRepository,
-		FeedItemIteratorFactoryInterface $zboziItemRepository
+		FeedItemRepositoryInterface $heurekaItemRepository,
+		FeedItemRepositoryInterface $heurekaDeliveryItemRepository,
+		FeedItemRepositoryInterface $zboziItemRepository
 	) {
 		$this->heurekaItemRepository = $heurekaItemRepository;
 		$this->heurekaDeliveryItemRepository = $heurekaDeliveryItemRepository;

@@ -77,13 +77,6 @@ class FeedConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
-	 */
-	public function getFeedItemIteratorFactory() {
-		return $this->feedItemRepository;
-	}
-
-	/**
 	 * @return \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	public function getFeedItemRepository() {
