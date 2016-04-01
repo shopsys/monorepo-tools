@@ -35,6 +35,7 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 		$productData->outOfStockAction = $outOfStockAction;
 		$productData->usingStock = true;
 		$productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
+		$productData->outOfStockAvailability = $this->getReference(AvailabilityDataFixture::OUT_OF_STOCK);
 		$productData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
 		$productData->unit = $this->getReference(UnitDataFixture::PCS);
 
