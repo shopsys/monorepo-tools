@@ -220,7 +220,7 @@ class Product extends AbstractTranslatableEntity {
 	private $productCategoryDomains;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 *
 	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Flag\Flag")
 	 * @ORM\JoinTable(name="product_flags")
@@ -309,7 +309,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedVisibility = false;
 		$this->setTranslations($productData);
 		$this->productCategoryDomains = new ArrayCollection();
-		$this->flags = $productData->flags;
+		$this->flags = new ArrayCollection($productData->flags);
 		$this->recalculatePrice = true;
 		$this->recalculateVisibility = true;
 		$this->calculatedHidden = true;
@@ -352,7 +352,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->sellingDenied = $productData->sellingDenied;
 		$this->recalculateAvailability = true;
 		$this->hidden = $productData->hidden;
-		$this->flags = $productData->flags;
+		$this->editFlags($productData->flags);
 		$this->brand = $productData->brand;
 		$this->unit = $productData->unit;
 		$this->setTranslations($productData);
@@ -375,6 +375,16 @@ class Product extends AbstractTranslatableEntity {
 			} else {
 				$this->setPrice(null);
 			}
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 */
+	private function editFlags(array $flags) {
+		$this->flags->clear();
+		foreach ($flags as $flag) {
+			$this->flags->add($flag);
 		}
 	}
 
