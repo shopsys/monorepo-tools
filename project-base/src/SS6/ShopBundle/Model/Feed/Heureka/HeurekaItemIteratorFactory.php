@@ -3,13 +3,10 @@
 namespace SS6\ShopBundle\Model\Feed\Heureka;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Feed\FeedItemIterator;
 use SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface;
 use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class HeurekaItemIteratorFactory implements FeedItemIteratorFactoryInterface {
@@ -25,21 +22,6 @@ class HeurekaItemIteratorFactory implements FeedItemIteratorFactoryInterface {
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
-	 */
-	private $productPriceCalculationForUser;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade
-	 */
-	private $productCollectionFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
-	 */
-	private $categoryFacade;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItemFactory
 	 */
 	private $heurekaItemFactory;
@@ -47,16 +29,10 @@ class HeurekaItemIteratorFactory implements FeedItemIteratorFactoryInterface {
 	public function __construct(
 		ProductRepository $productRepository,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
-		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ProductCollectionFacade $productCollectionFacade,
-		CategoryFacade $categoryFacade,
 		HeurekaItemFactory $heurekaItemFactory
 	) {
 		$this->productRepository = $productRepository;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
-		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
-		$this->productCollectionFacade = $productCollectionFacade;
-		$this->categoryFacade = $categoryFacade;
 		$this->heurekaItemFactory = $heurekaItemFactory;
 	}
 
