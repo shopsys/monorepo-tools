@@ -13,7 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class FeedFacade {
 
-	const TEMPORARY_FILENAME_SULFIX = '.tmp';
+	const TEMPORARY_FILENAME_SUFFIX = '.tmp';
 
 	/**
 	 * @var string
@@ -117,7 +117,7 @@ class FeedFacade {
 		DomainConfig $domainConfig
 	) {
 		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SULFIX;
+		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
 		$this->feedGenerator->generate(
 			$feedConfig->getFeedItemIteratorFactory(),
@@ -140,7 +140,7 @@ class FeedFacade {
 		$feedItemIdToContinue
 	) {
 		$filepath = $this->feedConfigFacade->getFeedFilepath($feedConfig, $domainConfig);
-		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SULFIX;
+		$temporaryFeedFilepath = $filepath . self::TEMPORARY_FILENAME_SUFFIX;
 
 		$feedItemToContinue = $this->feedGenerator->generateIteratively(
 			$feedConfig->getFeedItemIteratorFactory(),
