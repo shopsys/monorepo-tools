@@ -175,4 +175,11 @@ class AutoContainer implements ContainerInterface {
 		$this->container->setParameter($name, $value);
 	}
 
+	/**
+	 * @return \Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+	 */
+	public function getParameterBag() {
+		return $this->container->getParameterBag();
+	}
+
 }
