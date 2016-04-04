@@ -4,17 +4,13 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -46,26 +42,6 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		}
 
 		$this->createVariants($productsByCatnum, $productNo);
-
-		$this->runRecalculators();
-	}
-
-	private function runRecalculators() {
-		$productAvailabilityRecalculator = $this->get(ProductAvailabilityRecalculator::class);
-		/* @var $productAvailabilityRecalculator \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator */
-		$productVisibilityFacade = $this->get(ProductVisibilityFacade::class);
-		/* @var $productVisibilityFacade \SS6\ShopBundle\Model\Product\ProductVisibilityFacade */
-		$productPriceRecalculator = $this->get(ProductPriceRecalculator::class);
-		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
-		$em = $this->get(EntityManager::class);
-		/* @var $em \Doctrine\ORM\EntityManager */
-		$em->clear();
-
-		$productAvailabilityRecalculator->runAllScheduledRecalculations();
-		$productPriceRecalculator->runAllScheduledRecalculations();
-		$productVisibilityFacade->refreshProductsVisibility();
-		// Main variant is set for recalculations after change of variants visibility.
-		$productPriceRecalculator->runAllScheduledRecalculations();
 	}
 
 	/**
