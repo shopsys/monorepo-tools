@@ -16,6 +16,9 @@ class Setting {
 	const FEED_HASH = 'feedHash';
 	const DEFAULT_UNIT = 'defaultUnitId';
 	const BASE_URL = 'baseUrl';
+	const FEED_NAME_TO_CONTINUE = 'feedNameToContinue';
+	const FEED_DOMAIN_ID_TO_CONTINUE = 'feedDomainIdToContinue';
+	const FEED_ITEM_ID_TO_CONTINUE = 'feedItemIdToContinue';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

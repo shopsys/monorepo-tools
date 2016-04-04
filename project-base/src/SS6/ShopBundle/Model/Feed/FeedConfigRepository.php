@@ -2,31 +2,34 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
+use SS6\ShopBundle\Model\Feed\FeedConfig;
+use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+
 class FeedConfigRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
-	private $heurekaItemIteratorFactory;
+	private $heurekaItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
-	private $heurekaDeliveryItemIteratorFactory;
+	private $heurekaDeliveryItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemIteratorFactoryInterface
+	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
-	private $zboziItemIteratorFactory;
+	private $zboziItemRepository;
 
 	public function __construct(
-		FeedItemIteratorFactoryInterface $heurekaItemIteratorFactory,
-		FeedItemIteratorFactoryInterface $heurekaDeliveryItemIteratorFactory,
-		FeedItemIteratorFactoryInterface $zboziItemIteratorFactory
+		FeedItemRepositoryInterface $heurekaItemRepository,
+		FeedItemRepositoryInterface $heurekaDeliveryItemRepository,
+		FeedItemRepositoryInterface $zboziItemRepository
 	) {
-		$this->heurekaItemIteratorFactory = $heurekaItemIteratorFactory;
-		$this->heurekaDeliveryItemIteratorFactory = $heurekaDeliveryItemIteratorFactory;
-		$this->zboziItemIteratorFactory = $zboziItemIteratorFactory;
+		$this->heurekaItemRepository = $heurekaItemRepository;
+		$this->heurekaDeliveryItemRepository = $heurekaDeliveryItemRepository;
+		$this->zboziItemRepository = $zboziItemRepository;
 	}
 
 	/**
@@ -39,13 +42,13 @@ class FeedConfigRepository {
 			'Heureka',
 			'heureka',
 			'@SS6Shop/Feed/heureka.xml.twig',
-			$this->heurekaItemIteratorFactory
+			$this->heurekaItemRepository
 		);
 		$feedConfigs[] = new FeedConfig(
 			'Zboží.cz',
 			'zbozi',
 			'@SS6Shop/Feed/zbozi.xml.twig',
-			$this->zboziItemIteratorFactory
+			$this->zboziItemRepository
 		);
 
 		return $feedConfigs;
@@ -76,7 +79,7 @@ class FeedConfigRepository {
 			t('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),
 			'heureka_delivery',
 			'@SS6Shop/Feed/heurekaDelivery.xml.twig',
-			$this->heurekaDeliveryItemIteratorFactory
+			$this->heurekaDeliveryItemRepository
 		);
 
 		return $feedConfigs;
