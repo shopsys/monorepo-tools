@@ -189,6 +189,10 @@
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:recalculations" />
+		</exec>
 	</target>
 
 	<target name="db-migrations">
