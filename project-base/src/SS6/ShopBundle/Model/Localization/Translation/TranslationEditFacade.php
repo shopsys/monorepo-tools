@@ -30,11 +30,6 @@ class TranslationEditFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Translation\PoFileLoader
 	 */
 	private $poFileLoader;
@@ -52,7 +47,6 @@ class TranslationEditFacade {
 	public function __construct(
 		$rootDir,
 		$cacheDir,
-		Translator $translator,
 		Filesystem $filesystem,
 		PoFileLoader $poFileLoader,
 		PoDumper $poDumper,
@@ -60,7 +54,6 @@ class TranslationEditFacade {
 	) {
 		$this->rootDir = $rootDir;
 		$this->cacheDir = $cacheDir;
-		$this->translator = $translator;
 		$this->filesystem = $filesystem;
 		$this->poFileLoader = $poFileLoader;
 		$this->poDumper = $poDumper;
