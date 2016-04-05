@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
 	/**
-	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */

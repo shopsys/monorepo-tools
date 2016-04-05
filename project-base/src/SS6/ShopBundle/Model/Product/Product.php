@@ -38,7 +38,7 @@ class Product extends AbstractTranslatableEntity {
 	/**
 	 * @var int
 	 *
-	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
