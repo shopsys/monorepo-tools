@@ -310,7 +310,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		return serialize([
 			$this->id,
 			$this->email,
-			$this->password,
 			time(), // lastActivity
 			$this->domainId,
 		]);
@@ -323,7 +322,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		list(
 			$this->id,
 			$this->email,
-			$this->password,
 			$timestamp,
 			$this->domainId
 		) = unserialize($serialized);

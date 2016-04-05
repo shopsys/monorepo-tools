@@ -88,10 +88,6 @@ class LoginAsUserFacade {
 		$this->session->remove(self::SESSION_LOGIN_AS);
 		$freshUser = $this->userRepository->getUserById($unserializedUser->getId());
 
-		if ($unserializedUser->getPassword() !== $freshUser->getPassword()) {
-			throw new \SS6\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('The credentials were changed.');
-		}
-
 		$password = '';
 		$firewallName = 'frontend';
 		$freshUserRoles = array_merge($freshUser->getRoles(), [Roles::ROLE_ADMIN_AS_CUSTOMER]);
