@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
@@ -64,12 +63,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 		}
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				ActionColumn::TYPE_DELETE,
-				t('Smazat'),
-				'admin_parameter_delete',
-				['id' => 'p.id']
-			)
+		$grid->addDeleteActionColumn('admin_parameter_delete', ['id' => 'p.id'])
 			->setConfirmMessage(t('Opravdu chcete odstranit tento parametr? '
 				. 'Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. '
 				. 'Tento krok je nevratný!'));

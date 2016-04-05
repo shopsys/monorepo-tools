@@ -113,8 +113,8 @@ class ScriptController extends AdminBaseController {
 
 		$grid->addColumn('name', 's.name', t('Název skriptu'));
 		$grid->addColumn('placement', 's.placement', t('Umístění'));
-		$grid->addActionColumn('edit', t('Upravit'), 'admin_script_edit', ['scriptId' => 's.id']);
-		$grid->addActionColumn('delete', t('Smazat'), 'admin_script_delete', ['scriptId' => 's.id'])
+		$grid->addEditActionColumn('admin_script_edit', ['scriptId' => 's.id']);
+		$grid->addDeleteActionColumn('admin_script_delete', ['scriptId' => 's.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tento skript?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Script/listGrid.html.twig', [

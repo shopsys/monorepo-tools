@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Transport\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
@@ -80,18 +79,8 @@ class TransportGridFactory implements GridFactoryInterface {
 		$grid->addColumn('price', 'transportDetail', t('Cena'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-			ActionColumn::TYPE_EDIT,
-			t('Upravit'),
-			'admin_transport_edit',
-			['id' => 't.id']
-		);
-		$grid->addActionColumn(
-				ActionColumn::TYPE_DELETE,
-				t('Smazat'),
-				'admin_transport_delete',
-				['id' => 't.id']
-			)
+		$grid->addEditActionColumn('admin_transport_edit', ['id' => 't.id']);
+		$grid->addDeleteActionColumn('admin_transport_delete', ['id' => 't.id'])
 			->setConfirmMessage(t('Opravdu chcete odstranit tuto dopravu?'));
 
 		$grid->setTheme(

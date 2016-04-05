@@ -55,12 +55,7 @@ class FlagGridFactory implements GridFactoryInterface {
 		$grid->addColumn('rgbColor', 'a.rgbColor', t('Barva'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				'delete',
-				t('Smazat'),
-				'admin_flag_delete',
-				['id' => 'a.id']
-			)
+		$grid->addDeleteActionColumn('admin_flag_delete', ['id' => 'a.id'])
 			->setConfirmMessage(t('Opravdu chcete odstranit tento příznak?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Flag/listGrid.html.twig');

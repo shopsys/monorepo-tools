@@ -62,12 +62,7 @@ class TopProductGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('topProductList', $dataSource);
 		$grid->addColumn('product', 'pt.name', t('Produkt'));
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				'delete',
-				t('Smazat'),
-				'admin_topproduct_delete',
-				['id' => 'tp.id']
-			)
+		$grid->addDeleteActionColumn('admin_topproduct_delete', ['id' => 'tp.id'])
 			->setConfirmMessage(t('Opravdu chcete odebrat tento produkt z akce na titulní stránce?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/TopProduct/listGrid.html.twig');

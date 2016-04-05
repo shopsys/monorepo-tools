@@ -54,12 +54,7 @@ class UnitGridFactory implements GridFactoryInterface {
 		$grid->addColumn('name', 'ut.name', t('Název'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				'delete',
-				t('Smazat'),
-				'admin_unit_deleteconfirm',
-				['id' => 'u.id']
-			)
+		$grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])
 			->setAjaxConfirm();
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Unit/listGrid.html.twig');

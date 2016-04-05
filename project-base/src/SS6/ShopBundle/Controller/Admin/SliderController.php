@@ -75,8 +75,8 @@ class SliderController extends AdminBaseController {
 
 		$grid->addColumn('name', 's.name', t('Název'));
 		$grid->addColumn('link', 's.link', t('Odkaz'));
-		$grid->addActionColumn('edit', t('Upravit'), 'admin_slider_edit', ['id' => 's.id']);
-		$grid->addActionColumn('delete', t('Smazat'), 'admin_slider_delete', ['id' => 's.id'])
+		$grid->addEditActionColumn('admin_slider_edit', ['id' => 's.id']);
+		$grid->addDeleteActionColumn('admin_slider_delete', ['id' => 's.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto stránku?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Slider/listGrid.html.twig');

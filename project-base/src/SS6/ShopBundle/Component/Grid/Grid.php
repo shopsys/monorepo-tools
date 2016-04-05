@@ -254,6 +254,26 @@ class Grid {
 	}
 
 	/**
+	 * @param string $route
+	 * @param array|null $bindingRouteParams
+	 * @param array|null $additionalRouteParams
+	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 */
+	public function addEditActionColumn($route, array $bindingRouteParams = null, array $additionalRouteParams = null) {
+		return $this->addActionColumn(ActionColumn::TYPE_EDIT, t('Upravit'), $route, $bindingRouteParams, $additionalRouteParams);
+	}
+
+	/**
+	 * @param string $route
+	 * @param array|null $bindingRouteParams
+	 * @param array|null $additionalRouteParams
+	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 */
+	public function addDeleteActionColumn($route, array $bindingRouteParams = null, array $additionalRouteParams = null) {
+		return $this->addActionColumn(ActionColumn::TYPE_DELETE, t('Smazat'), $route, $bindingRouteParams, $additionalRouteParams);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $inlineEditService
 	 */
 	public function setInlineEditService(GridInlineEditInterface $inlineEditService) {

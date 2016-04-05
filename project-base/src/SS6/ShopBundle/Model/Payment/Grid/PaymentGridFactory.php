@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Payment\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
@@ -80,18 +79,8 @@ class PaymentGridFactory implements GridFactoryInterface {
 		$grid->addColumn('price', 'paymentDetail', t('Cena'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-			ActionColumn::TYPE_EDIT,
-			t('Upravit'),
-			'admin_payment_edit',
-			['id' => 'p.id']
-		);
-		$grid->addActionColumn(
-				ActionColumn::TYPE_DELETE,
-				t('Smazat'),
-				'admin_payment_delete',
-				['id' => 'p.id']
-			)
+		$grid->addEditActionColumn('admin_payment_edit', ['id' => 'p.id']);
+		$grid->addDeleteActionColumn('admin_payment_delete', ['id' => 'p.id'])
 			->setConfirmMessage(t('Opravdu chcete odstranit tuto platbu?'));
 
 		$grid->setTheme(
