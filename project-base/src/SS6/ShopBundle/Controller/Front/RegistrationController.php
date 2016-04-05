@@ -53,24 +53,26 @@ class RegistrationController extends FrontBaseController {
 	public function registerAction(Request $request) {
 		$form = $this->createForm(new RegistrationFormType());
 
-		try {
-			$userData = $this->userDataFactory->createDefault($this->domain->getId());
+		$userData = $this->userDataFactory->createDefault($this->domain->getId());
 
-			$form->setData($userData);
-			$form->handleRequest($request);
+		$form->setData($userData);
+		$form->handleRequest($request);
 
-			if ($form->isValid()) {
-				$userData = $form->getData();
-				$userData->domainId = $this->domain->getId();
+		if ($form->isValid()) {
+			$userData = $form->getData();
+			$userData->domainId = $this->domain->getId();
+
+			try {
 				$user = $this->customerEditFacade->register($userData);
 
 				$this->login($user);
 
 				$this->getFlashMessageSender()->addSuccessFlash(t('Byli jste úspěšně zaregistrováni'));
+
 				return $this->redirectToRoute('front_homepage');
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+				$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 			}
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {

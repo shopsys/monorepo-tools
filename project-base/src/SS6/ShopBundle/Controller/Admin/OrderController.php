@@ -109,14 +109,14 @@ class OrderController extends AdminBaseController {
 		$order = $this->orderFacade->getById($id);
 		$form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 
-		try {
-			$orderData = new OrderData();
-			$orderData->setFromEntity($order);
+		$orderData = new OrderData();
+		$orderData->setFromEntity($order);
 
-			$form->setData($orderData);
-			$form->handleRequest($request);
+		$form->setData($orderData);
+		$form->handleRequest($request);
 
-			if ($form->isValid()) {
+		if ($form->isValid()) {
+			try {
 				$order = $this->orderFacade->edit($id, $orderData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -127,17 +127,17 @@ class OrderController extends AdminBaseController {
 					]
 				);
 				return $this->redirectToRoute('admin_order_list');
+			} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
+				$this->getFlashMessageSender()->addErrorFlash(
+					t('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje')
+				);
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+				$this->getFlashMessageSender()->addErrorFlash(
+					t('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje')
+				);
+			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
+				$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odeslat aktualizační email'));
 			}
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-			$this->getFlashMessageSender()->addErrorFlash(
-				t('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje')
-			);
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$this->getFlashMessageSender()->addErrorFlash(
-				t('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje')
-			);
-		} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odeslat aktualizační email'));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
