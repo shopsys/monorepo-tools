@@ -1,0 +1,19 @@
+services:
+  shopsys.migration.component.doctrine.database_schema_facade:
+    class: ShopSys\MigrationBundle\Component\Doctrine\DatabaseSchemaFacade
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
+      - '@shopsys.migration.component.doctrine.schema_diff_filter'
+      - '@shopsys.migration.doctrine_schema_comparator'
+      - '@shopsys.migration.doctrine_schema_tool'
+
+  shopsys.migration.component.doctrine.schema_diff_filter:
+    class: ShopSys\MigrationBundle\Component\Doctrine\SchemaDiffFilter
+
+  shopsys.migration.doctrine_schema_comparator:
+    class: Doctrine\DBAL\Schema\Comparator
+
+  shopsys.migration.doctrine_schema_tool:
+    class: Doctrine\ORM\Tools\SchemaTool
+    arguments:
+      - '@doctrine.orm.default_entity_manager'
