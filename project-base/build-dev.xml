@@ -560,7 +560,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:schema:check" />
+			<arg value="shopsys:migrations:check-schema" />
 		</exec>
 	</target>
 

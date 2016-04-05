@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "99d250cf3efc29244d2affb69405e897",
-    "content-hash": "c975bbd9b6c9494e672b2581f04b722c",
+    "hash": "a43effbe1c27a8433af197af3374eee3",
+    "content-hash": "cd08cd2ca68cf868e0ea23491b2fd473",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -256,7 +256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/cc90c2dcca7c4d541882c2b4882d0cc972ef50a4",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/960e233d9bab61e6d081b4ccadba063e5764883d",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -4158,11 +4158,11 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "http://gitlab.netdevelo/ss6/migrations.git",
-                "reference": "85029238ce8e754f3c5b6c2f5fa8aa9a2a5eef26"
+                "reference": "3789f9d04c605c0ea02d7d18c1120064ac6a572f"
             },
             "require": {
                 "doctrine/dbal": "~2.5",
@@ -4182,7 +4182,7 @@
                     ]
                 }
             },
-            "time": "2016-02-23 15:02:58"
+            "time": "2016-04-06 14:59:03"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
