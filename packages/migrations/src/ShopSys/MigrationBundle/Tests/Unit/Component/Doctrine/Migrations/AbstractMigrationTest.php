@@ -1,6 +1,6 @@
 <?php
 
-namespace ShopSys\MigrationBundle\Tests\Unit\Component\Doctrine;
+namespace ShopSys\MigrationBundle\Tests\Unit\Component\Doctrine\Migrations;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
