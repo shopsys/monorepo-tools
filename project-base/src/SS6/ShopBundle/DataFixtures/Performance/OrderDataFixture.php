@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
@@ -171,7 +172,7 @@ class OrderDataFixture {
 
 		$orderData->transport = $this->getRandomTransport();
 		$orderData->payment = $this->getRandomPayment();
-		$orderData->status = $this->persistentReferenceService->getReference('order_status_done');
+		$orderData->status = $this->persistentReferenceService->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = $this->faker->firstName . ' ' . $this->faker->lastName;
 		$orderData->deliveryCompanyName = $this->faker->company;
