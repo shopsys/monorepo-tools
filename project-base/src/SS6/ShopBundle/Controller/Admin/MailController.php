@@ -129,7 +129,6 @@ class MailController extends AdminBaseController {
 
 	/**
 	 * @Route("/mail/template/")
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function templateAction(Request $request) {
 		$form = $this->createForm($this->allMailTemplatesFormTypeFactory->create());
@@ -154,45 +153,10 @@ class MailController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
-		$registrationTemplateVariables = $this->customerMailService->getTemplateVariables();
-		$resetPasswordTemplateVariables = array_unique(array_merge(
-			$this->resetPasswordMail->getBodyVariables(),
-			$this->resetPasswordMail->getSubjectVariables()
-		));
-		$resetPasswordTemplateRequiredVariables = array_unique(array_merge(
-			$this->resetPasswordMail->getRequiredBodyVariables(),
-			$this->resetPasswordMail->getRequiredSubjectVariables()
-		));
+		$templateParameters = $this->getTemplateParameters();
+		$templateParameters['form'] = $form->createView();
 
-		$selectedDomainId = $this->selectedDomain->getId();
-		$orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
-			$selectedDomainId
-		);
-		$registrationMailTemplate = $this->mailTemplateFacade->get(
-			MailTemplate::REGISTRATION_CONFIRM_NAME,
-			$selectedDomainId
-		);
-		$resetPasswordMailTemplate = $this->mailTemplateFacade->get(
-			MailTemplate::RESET_PASSWORD_NAME,
-			$selectedDomainId
-		);
-
-		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', [
-			'form' => $form->createView(),
-			'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
-			'orderStatusMailTemplatesByOrderStatusId' => $orderStatusMailTemplatesByOrderStatusId,
-			'orderStatusVariables' => $orderStatusesTemplateVariables,
-			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
-			'registrationMailTemplate' => $registrationMailTemplate,
-			'registrationVariables' => $registrationTemplateVariables,
-			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
-			'resetPasswordMailTemplate' => $resetPasswordMailTemplate,
-			'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
-			'resetPasswordVariables' => $resetPasswordTemplateVariables,
-			'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
-			'TYPE_NEW' => OrderStatus::TYPE_NEW,
-		]);
+		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', $templateParameters);
 	}
 
 	/**
@@ -225,6 +189,50 @@ class MailController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', [
 			'form' => $form->createView(),
 		]);
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getTemplateParameters() {
+		$orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
+		$registrationTemplateVariables = $this->customerMailService->getTemplateVariables();
+		$resetPasswordTemplateVariables = array_unique(array_merge(
+			$this->resetPasswordMail->getBodyVariables(),
+			$this->resetPasswordMail->getSubjectVariables()
+		));
+		$resetPasswordTemplateRequiredVariables = array_unique(array_merge(
+			$this->resetPasswordMail->getRequiredBodyVariables(),
+			$this->resetPasswordMail->getRequiredSubjectVariables()
+		));
+
+		$selectedDomainId = $this->selectedDomain->getId();
+		$orderStatusMailTemplatesByOrderStatusId = $this->mailTemplateFacade->getOrderStatusMailTemplatesIndexedByOrderStatusId(
+			$selectedDomainId
+		);
+		$registrationMailTemplate = $this->mailTemplateFacade->get(
+			MailTemplate::REGISTRATION_CONFIRM_NAME,
+			$selectedDomainId
+		);
+		$resetPasswordMailTemplate = $this->mailTemplateFacade->get(
+			MailTemplate::RESET_PASSWORD_NAME,
+			$selectedDomainId
+		);
+
+		return [
+			'orderStatusesIndexedById' => $this->orderStatusFacade->getAllIndexedById(),
+			'orderStatusMailTemplatesByOrderStatusId' => $orderStatusMailTemplatesByOrderStatusId,
+			'orderStatusVariables' => $orderStatusesTemplateVariables,
+			'orderStatusVariablesLabels' => $this->getOrderStatusVariablesLabels(),
+			'registrationMailTemplate' => $registrationMailTemplate,
+			'registrationVariables' => $registrationTemplateVariables,
+			'registrationVariablesLabels' => $this->getRegistrationVariablesLabels(),
+			'resetPasswordMailTemplate' => $resetPasswordMailTemplate,
+			'resetPasswordRequiredVariables' => $resetPasswordTemplateRequiredVariables,
+			'resetPasswordVariables' => $resetPasswordTemplateVariables,
+			'resetPasswordVariablesLabels' => $this->getResetPasswordVariablesLabels(),
+			'TYPE_NEW' => OrderStatus::TYPE_NEW,
+		];
 	}
 
 }
