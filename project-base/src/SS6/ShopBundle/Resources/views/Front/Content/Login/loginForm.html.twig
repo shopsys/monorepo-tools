@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block main_content %}
-	{{ form_errors(form, {errors_attr: { class: 'in-message--static'}}) }}
+	{{ form_errors(form) }}
 
 	{{ form_start(form, {attr: {'multipleForm': true}}) }}
 

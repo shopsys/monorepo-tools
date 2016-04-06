@@ -3,15 +3,15 @@
 
 {{ form_errors(form) }}
 	{{ form_label(form.name, 'Jméno'|trans) }}
-	{{ form_errors(form.name, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_errors(form.name) }}
 	{{ form_widget(form.name) }}
 
 	{{ form_label(form.email, 'Email'|trans) }}
-	{{ form_errors(form.email, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_errors(form.email) }}
 	{{ form_widget(form.email) }}
 
 	{{ form_label(form.message, 'Vzkaz'|trans) }}
-	{{ form_errors(form.message, {errors_attr: { class: 'in-message--static-small'}}) }}
+	{{ form_errors(form.message) }}
 	{{ form_widget(form.message) }}
 
 	<br/>

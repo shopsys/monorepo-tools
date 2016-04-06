@@ -13,7 +13,7 @@
 			<h2 class="mt-0">{{ 'Výběr dopravy'|trans }}</h2>
 
 			<div class="box-chooser js-form-group">
-				{{ form_errors(form.transport, { errors_attr: {class: 'in-message--on-top'} }) }}
+				{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
 
 				<div id="transportAndPayment_transport">
 					{% for child in form.transport %}
@@ -59,7 +59,7 @@
 			<h2 class="mt-0">{{ 'Výběr platby'|trans }}</h2>
 
 			<div class="box-chooser box-chooser--smaller js-form-group">
-				{{ form_errors(form.payment, { errors_attr: {class: 'in-message--on-top'} }) }}
+				{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
 
 				<div id="transportAndPayment_payment">
 					{% for child in form.payment %}
