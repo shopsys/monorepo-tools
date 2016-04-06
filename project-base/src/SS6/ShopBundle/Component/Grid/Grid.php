@@ -236,8 +236,12 @@ class Grid {
 	 * @param array $additionalRouteParams
 	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
 	 */
-	public function addActionColumn($type, $name, $route, array $bindingRouteParams = null,
-		array $additionalRouteParams = null
+	public function addActionColumn(
+		$type,
+		$name,
+		$route,
+		array $bindingRouteParams = [],
+		array $additionalRouteParams = []
 	) {
 		$actionColumn = new ActionColumn(
 			$this->router,
@@ -245,12 +249,32 @@ class Grid {
 			$type,
 			$name,
 			$route,
-			(array)$bindingRouteParams,
-			(array)$additionalRouteParams
+			$bindingRouteParams,
+			$additionalRouteParams
 		);
 		$this->actionColumns[] = $actionColumn;
 
 		return $actionColumn;
+	}
+
+	/**
+	 * @param string $route
+	 * @param array $bindingRouteParams
+	 * @param array $additionalRouteParams
+	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 */
+	public function addEditActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
+		return $this->addActionColumn(ActionColumn::TYPE_EDIT, t('Upravit'), $route, $bindingRouteParams, $additionalRouteParams);
+	}
+
+	/**
+	 * @param string $route
+	 * @param array $bindingRouteParams
+	 * @param array $additionalRouteParams
+	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 */
+	public function addDeleteActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
+		return $this->addActionColumn(ActionColumn::TYPE_DELETE, t('Smazat'), $route, $bindingRouteParams, $additionalRouteParams);
 	}
 
 	/**

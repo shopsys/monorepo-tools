@@ -234,8 +234,8 @@ class OrderController extends AdminBaseController {
 		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)->setClassAttribute('text-right text-nowrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', t('Upravit'), 'admin_order_edit', ['id' => 'id']);
-		$grid->addActionColumn('delete', t('Smazat'), 'admin_order_delete', ['id' => 'id'])
+		$grid->addEditActionColumn('admin_order_edit', ['id' => 'id']);
+		$grid->addDeleteActionColumn('admin_order_delete', ['id' => 'id'])
 			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');

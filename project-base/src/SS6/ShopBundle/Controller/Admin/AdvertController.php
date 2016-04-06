@@ -147,8 +147,8 @@ class AdvertController extends AdminBaseController {
 		$grid->addColumn('positionName', 'a.positionName', t('Plocha'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn('edit', t('Upravit'), 'admin_advert_edit', ['id' => 'a.id']);
-		$grid->addActionColumn('delete', t('Smazat'), 'admin_advert_delete', ['id' => 'a.id'])
+		$grid->addEditActionColumn('admin_advert_edit', ['id' => 'a.id']);
+		$grid->addDeleteActionColumn('admin_advert_delete', ['id' => 'a.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tuto reklamu?');
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Pricing\Currency\Grid;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
@@ -57,7 +56,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 		$grid->addColumn('code', 'c.code', t('Kód'), true);
 		$grid->addColumn('exchangeRate', 'c.exchangeRate', t('Kurz'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(ActionColumn::TYPE_DELETE, t('Smazat'), 'admin_currency_deleteconfirm', ['id' => 'c.id'])
+		$grid->addDeleteActionColumn('admin_currency_deleteconfirm', ['id' => 'c.id'])
 			->setAjaxConfirm();
 
 		$grid->setTheme(

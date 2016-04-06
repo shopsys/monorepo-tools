@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Pricing\Group\Grid;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
@@ -54,12 +53,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 		$grid->addColumn('name', 'pg.name', t('Název'), true);
 		$grid->addColumn('coefficient', 'pg.coefficient', t('Koeficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				ActionColumn::TYPE_DELETE,
-				t('Smazat'),
-				'admin_pricinggroup_deleteconfirm',
-				['id' => 'pg.id']
-			)
+		$grid->addDeleteActionColumn('admin_pricinggroup_deleteconfirm', ['id' => 'pg.id'])
 			->setAjaxConfirm();
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Pricing/Groups/listGrid.html.twig');

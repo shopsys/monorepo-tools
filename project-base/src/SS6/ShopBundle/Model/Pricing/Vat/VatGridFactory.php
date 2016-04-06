@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\ActionColumn;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
@@ -69,12 +68,7 @@ class VatGridFactory implements GridFactoryInterface {
 		$grid->addColumn('percent', 'v.percent', t('Procent'), true);
 		$grid->addColumn('coefficient', 'v.percent', t('Koeficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addActionColumn(
-				ActionColumn::TYPE_DELETE,
-				t('Smazat'),
-				'admin_vat_deleteconfirm',
-				['id' => 'v.id']
-			)
+		$grid->addDeleteActionColumn('admin_vat_deleteconfirm', ['id' => 'v.id'])
 			->setAjaxConfirm();
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Vat/listGrid.html.twig');
