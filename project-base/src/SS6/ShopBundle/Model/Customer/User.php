@@ -49,7 +49,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	private $email;
 
 	/**
-	 * @ORM\Column(name="password", type="string", length=100)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $password;
 

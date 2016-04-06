@@ -42,12 +42,12 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $realName;
 
 	/**
-	 * @ORM\Column(name="password", type="string", length=100)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $password;
 
 	/**
-	 * @ORM\Column(name="login_token", type="string", length=32)
+	 * @ORM\Column(type="string", length=32)
 	 */
 	private $loginToken;
 
