@@ -12,14 +12,13 @@ use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	const ALL_PAYMENT_PERSISTENT_REFERECE_NAMES = [
-		'payment_card',
-		'payment_cod',
-		'payment_cash',
-	];
+	const PAYMENT_CARD = 'payment_card';
+	const PAYMENT_COD = 'payment_cod';
+	const PAYMENT_CASH = 'payment_cash';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
 		$paymentEditData = new PaymentEditData();
@@ -43,7 +42,10 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
 		$paymentEditData->paymentData->domains = [1, 2];
 		$paymentEditData->paymentData->hidden = false;
-		$this->createPayment('payment_card', $paymentEditData, ['transport_personal', 'transport_ppl']);
+		$this->createPayment(self::PAYMENT_CARD, $paymentEditData, [
+			TransportDataFixture::TRANSPORT_PERSONAL,
+			TransportDataFixture::TRANSPORT_PPL,
+		]);
 
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Dobírka',
@@ -57,7 +59,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentEditData->paymentData->description = [];
 		$paymentEditData->paymentData->instructions = [];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$this->createPayment('payment_cod', $paymentEditData, ['transport_cp']);
+		$this->createPayment(self::PAYMENT_COD, $paymentEditData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
 
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Hotově',
@@ -70,7 +72,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		];
 		$paymentEditData->paymentData->description = [];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$this->createPayment('payment_cash', $paymentEditData, ['transport_personal']);
+		$this->createPayment(self::PAYMENT_CASH, $paymentEditData, [TransportDataFixture::TRANSPORT_PERSONAL]);
 	}
 
 	/**

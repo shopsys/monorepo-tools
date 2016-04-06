@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing\Group;
 
 use ReflectionClass;
+use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerData;
@@ -39,7 +40,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $prodcu \SS6\ShopBundle\Model\Product\Product */
-		$pricingGroup = $this->getReference('pricing_group_ordinary_domain_1');
+		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 		$pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
@@ -78,7 +79,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
 		$pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'));
-		$pricingGroupToReplaceWith = $this->getReference('pricing_group_ordinary_domain_1');
+		$pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
 		$user = $this->getReference(UserDataFixture::USER_PREFIX . '1');
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */

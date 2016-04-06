@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Order\Status;
 
+use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
 use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
@@ -19,7 +20,7 @@ class OrderStatusFacadeTest extends DatabaseTestCase {
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 
 		$orderStatusToDelete = $orderStatusFacade->create(new OrderStatusData(['cs' => 'name']));
-		$orderStatusToReplaceWith = $this->getReference('order_status_new');
+		$orderStatusToReplaceWith = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		/* @var $orderStatusToReplaceWith \SS6\ShopBundle\Model\Order\Status\OrderStatus */
 		$order = $this->getReference(OrderDataFixture::ORDER_PREFIX . '1');
 		/* @var $order \SS6\ShopBundle\Model\Order\Order */
