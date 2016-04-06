@@ -10,7 +10,6 @@ use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\ArrayDataSource;
 use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,11 +32,6 @@ class DomainController extends AdminBaseController {
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private $domainFacade;
@@ -51,14 +45,12 @@ class DomainController extends AdminBaseController {
 		Domain $domain,
 		SelectedDomain $selectedDomain,
 		GridFactory $gridFactory,
-		Translator $translator,
 		DomainFacade $domainFacade,
 		ErrorService $errorService
 	) {
 		$this->domain = $domain;
 		$this->selectedDomain = $selectedDomain;
 		$this->gridFactory = $gridFactory;
-		$this->translator = $translator;
 		$this->domainFacade = $domainFacade;
 		$this->errorService = $errorService;
 	}

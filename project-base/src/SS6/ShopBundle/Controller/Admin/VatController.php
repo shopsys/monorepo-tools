@@ -143,7 +143,6 @@ class VatController extends AdminBaseController {
 			PricingSetting::getRoundingTypes()
 		));
 
-		try {
 			$vatSettingsFormData = [];
 			$vatSettingsFormData['defaultVat'] = $this->vatFacade->getDefaultVat();
 			$vatSettingsFormData['roundingType'] = $this->pricingSetting->getRoundingType();
@@ -151,18 +150,19 @@ class VatController extends AdminBaseController {
 			$form->setData($vatSettingsFormData);
 			$form->handleRequest($request);
 
-			if ($form->isValid()) {
-				$vatSettingsFormData = $form->getData();
+		if ($form->isValid()) {
+			$vatSettingsFormData = $form->getData();
 
+			try {
 				$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
 				$this->pricingSetting->setRoundingType($vatSettingsFormData['roundingType']);
 
 				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
 
 				return $this->redirectToRoute('admin_vat_list');
+			} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
+				$this->getFlashMessageSender()->addErrorFlash(t('Neplatné nastavení zaokrouhlování'));
 			}
-		} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Neplatné nastavení zaokrouhlování'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', [

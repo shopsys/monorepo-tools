@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Security;
 
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,17 +20,10 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
 	private $router;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
-	 */
-	private $translator;
-
-	/**
 	 * @param \SS6\ShopBundle\Component\Router\CurrentDomainRouter $router
-	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
 	 */
-	public function __construct(CurrentDomainRouter $router, Translator $translator) {
+	public function __construct(CurrentDomainRouter $router) {
 		$this->router = $router;
-		$this->translator = $translator;
 	}
 
 	/**

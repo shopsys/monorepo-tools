@@ -131,14 +131,14 @@ class CustomerController extends AdminBaseController {
 		$user = $this->customerEditFacade->getUserById($id);
 		$form = $this->createForm($this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
 
-		try {
-			$customerData = new CustomerData();
-			$customerData->setFromEntity($user);
+		$customerData = new CustomerData();
+		$customerData->setFromEntity($user);
 
-			$form->setData($customerData);
-			$form->handleRequest($request);
+		$form->setData($customerData);
+		$form->handleRequest($request);
 
-			if ($form->isValid()) {
+		if ($form->isValid()) {
+			try {
 				$this->customerEditFacade->editByAdmin($id, $customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -148,10 +148,12 @@ class CustomerController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
 					]
 				);
+
 				return $this->redirectToRoute('admin_customer_list');
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+				$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 			}
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
+
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
@@ -232,19 +234,19 @@ class CustomerController extends AdminBaseController {
 			['validation_groups' => ['Default', CustomerFormType::SCENARIO_CREATE]]
 		);
 
-		try {
-			$customerData = new CustomerData();
-			$userData = new UserData();
-			$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupBySelectedDomain();
-			$userData->pricingGroup = $defaultPricingGroup;
-			$customerData->userData = $userData;
+		$customerData = new CustomerData();
+		$userData = new UserData();
+		$defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupBySelectedDomain();
+		$userData->pricingGroup = $defaultPricingGroup;
+		$customerData->userData = $userData;
 
-			$form->setData($customerData);
-			$form->handleRequest($request);
+		$form->setData($customerData);
+		$form->handleRequest($request);
 
-			if ($form->isValid()) {
-				$customerData = $form->getData();
+		if ($form->isValid()) {
+			$customerData = $form->getData();
 
+			try {
 				$user = $this->customerEditFacade->create($customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
@@ -254,10 +256,11 @@ class CustomerController extends AdminBaseController {
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
 					]
 				);
+
 				return $this->redirectToRoute('admin_customer_list');
+			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+				$form->get('userData')->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 			}
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-			$form->get('userData')->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
