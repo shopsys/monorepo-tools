@@ -5,33 +5,23 @@
 
 	<div class="js-front-login-window-message in-message in-message--alert"></div>
 
-	<div class="form-group">
-		{{ form_errors(form.email) }}
-		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
-	</div>
+	{{ form_errors(form.email) }}
+	{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 
-	<div class="form-group">
-		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
-	</div>
+	{{ form_errors(form.password) }}
+	{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 
-	<div class="form-group">
-		<label>
-			{{ form_widget(form.rememberMe) }}
-			{{ 'Zapamatuj si mé přihlášení'|trans }}
-			<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
-				data-toggle="tooltip" data-placement="right"
-				title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
-			 ></i>
-		</label>
-	</div>
+	<label>
+		{{ form_widget(form.rememberMe) }}
+		{{ 'Zapamatuj si mé přihlášení'|trans }}
+		<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
+			data-toggle="tooltip" data-placement="right"
+			title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+		 ></i>
+	</label>
 
-	<div class="form-group">
-		{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
-	</div>
+	{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
 
-	<div class="form-group">
-		<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
-	</div>
+	<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
 
 {{ form_end(form) }}

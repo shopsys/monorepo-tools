@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<div class="product-image pos-relative">
+	<div class="product-image">
 		{{ productFlags.list(productDetail.product) }}
 		<span>
 			{% if imageExists(productDetail.product) %}
@@ -99,7 +99,7 @@
 			</dl>
 		{% endif %}
 
-		<div class="wrap-box mb-1 mt-1 js-product-detail-main-add-to-cart-wrapper">
+		<div class="js-product-detail-main-add-to-cart-wrapper">
 			<dl class="list-params-side">
 				<dt class="list-params-side__title">
 					<strong>
@@ -140,7 +140,7 @@
 				<tr>
 					<th></th>
 					<th>{{ 'Název'|trans }}</th>
-					<th class="text-right">{{ 'Cena s DPH'|trans }}</th>
+					<th>{{ 'Cena s DPH'|trans }}</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -163,10 +163,10 @@
 								{{ variantDetail.product.name }}
 							{% endif %}
 						</td>
-						<td class="text-right">
+						<td>
 							{{ variantDetail.sellingPrice.priceWithVat|price }}
 						</td>
-						<td class="text-right">
+						<td>
 							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: variantDetail.product})) }}
 						</td>
 					</tr>
@@ -176,24 +176,20 @@
 	{% endif %}
 
 	{% if productDomain.description or productDetail.parameters %}
-		<div class="wrap-border mt-2">
-			{% if productDomain.description %}
-				<h2>{{ 'Informace o produktu'|trans }}</h2>
-				{{ productDomain.description|raw }}
-			{% endif %}
+		{% if productDomain.description %}
+			<h2>{{ 'Informace o produktu'|trans }}</h2>
+			{{ productDomain.description|raw }}
+		{% endif %}
 
-			{% if productDetail.parameters %}
-				<div class="wrap-box">
-					<h3>{{ 'Technické parametry'|trans }}:</h3>
-					{% for productParameterValue in productDetail.parameters %}
-						<dl class="list-params">
-							<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
-							<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
-						</dl>
-					{% endfor %}
-				</div>
-			{% endif %}
-		</div>
+		{% if productDetail.parameters %}
+			<h3>{{ 'Technické parametry'|trans }}:</h3>
+			{% for productParameterValue in productDetail.parameters %}
+				<dl class="list-params">
+					<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
+					<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
+				</dl>
+			{% endfor %}
+		{% endif %}
 	{% endif %}
 
 	{% if accesoriesDetails|length > 0 %}

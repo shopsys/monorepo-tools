@@ -125,7 +125,7 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn ml-1"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
