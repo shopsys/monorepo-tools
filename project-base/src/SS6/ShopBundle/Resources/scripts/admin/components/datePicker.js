@@ -3,7 +3,7 @@
 	SS6 = window.SS6 || {};
 
 	var datePicker = function ($container) {
-		$container.find('.js-date-picker').each(function() {
+		$container.filterAllNodes('.js-date-picker').each(function() {
 			$(this).datepicker({
 				'dateFormat': SS6.constant('\\SS6\\ShopBundle\\Form\\DatePickerType::FORMAT_JS')
 			});

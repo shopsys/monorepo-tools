@@ -57,7 +57,7 @@
 	};
 
 	SS6.productPicker.init = function ($container) {
-		$container.find('.js-product-picker-create-picker-button').each(function () {
+		$container.filterAllNodes('.js-product-picker-create-picker-button').each(function () {
 			var productPicker = new SS6.productPicker.ProductPicker($(this));
 			productPicker.init();
 		});

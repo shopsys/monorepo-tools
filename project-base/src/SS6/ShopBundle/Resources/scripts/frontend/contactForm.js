@@ -4,7 +4,7 @@
 	SS6.contactForm = SS6.contactForm || {};
 
 	SS6.register.registerCallback(function ($container) {
-		$container.find('form[name="contact_form"]').bind('contactFormAjaxSumbit', SS6.contactForm.ajaxSumbit);
+		$container.filterAllNodes('form[name="contact_form"]').bind('contactFormAjaxSumbit', SS6.contactForm.ajaxSumbit);
 	});
 
 	SS6.contactForm.ajaxSumbit = function (event) {

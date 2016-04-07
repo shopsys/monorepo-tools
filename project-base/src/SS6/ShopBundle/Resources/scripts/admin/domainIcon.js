@@ -4,11 +4,11 @@
 	SS6.domainIcon = SS6.domainIcon || {};
 
 	var domainIcon = function ($container) {
-		$container.find('.js-edit-domain-icon').click(function () {
+		$container.filterAllNodes('.js-edit-domain-icon').click(function () {
 			SS6.domainIcon.openDialog($(this));
 			return false;
 		});
-		$container.find('#domain_form_save').closest('form').submit(function () {
+		$container.filterAllNodes('#domain_form_save').closest('form').submit(function () {
 			SS6.domainIcon.uploadIcon($(this));
 			return false;
 		});

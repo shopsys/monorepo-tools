@@ -4,7 +4,7 @@
 	SS6.ajaxConfirm = SS6.ajaxConfirm || {};
 
 	SS6.ajaxConfirm.init = function ($container) {
-		$container.find('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
+		$container.filterAllNodes('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
 	};
 
 	SS6.ajaxConfirm.bind = function () {

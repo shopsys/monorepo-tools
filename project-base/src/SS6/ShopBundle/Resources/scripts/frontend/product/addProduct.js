@@ -4,7 +4,7 @@
 	SS6.addProduct = SS6.addProduct || {};
 
 	SS6.addProduct.init = function ($container) {
-		$container.find('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
+		$container.filterAllNodes('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
 	};
 
 	SS6.addProduct.ajaxSubmit = function (event) {

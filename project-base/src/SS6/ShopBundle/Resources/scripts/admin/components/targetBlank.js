@@ -4,7 +4,7 @@
 	SS6.targetBlank = SS6.targetBlank || {};
 
 	SS6.targetBlank.init = function ($container) {
-		$container.find('a[target="_blank"]').each(SS6.targetBlank.bind);
+		$container.filterAllNodes('a[target="_blank"]').each(SS6.targetBlank.bind);
 	};
 
 	SS6.targetBlank.bind = function () {

@@ -4,7 +4,7 @@
 	SS6.cartBox = SS6.cartBox || {};
 
 	SS6.cartBox.init = function ($container) {
-		$container.find('#cart-box').bind('reload', SS6.cartBox.reload);
+		$container.filterAllNodes('#cart-box').bind('reload', SS6.cartBox.reload);
 	};
 
 	SS6.cartBox.reload = function (event) {

@@ -4,7 +4,7 @@
 	SS6.fileUpload = SS6.fileUpload || {};
 
 	var fileUpload = function ($container) {
-		$container.find('.js-file-upload').each(function() {
+		$container.filterAllNodes('.js-file-upload').each(function() {
 			var uploader = new SS6.fileUpload.Uploader($(this));
 			uploader.init();
 		});
