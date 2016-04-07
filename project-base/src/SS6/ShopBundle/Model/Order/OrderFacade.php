@@ -15,7 +15,6 @@ use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Item\OrderProductFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderCreationService;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -29,6 +28,11 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderFacade {
+
+	const VARIABLE_NUMBER = '{number}';
+	const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
+	const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
+	const VARIABLE_TRANSPORT_INSTRUCTIONS = '{transport_instructions}';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -270,10 +274,10 @@ class OrderFacade {
 		$confirmTextTemplate = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
 
 		$variables = [
-			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
-			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => $order->getPayment()->getInstructions(),
-			OrderMailService::VARIABLE_ORDER_DETAIL_URL => $orderDetailUrl,
-			OrderMailService::VARIABLE_NUMBER => $order->getNumber(),
+			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),
+			self::VARIABLE_PAYMENT_INSTRUCTIONS => $order->getPayment()->getInstructions(),
+			self::VARIABLE_ORDER_DETAIL_URL => $orderDetailUrl,
+			self::VARIABLE_NUMBER => $order->getNumber(),
 		];
 
 		return strtr($confirmTextTemplate, $variables);

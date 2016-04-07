@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
+use SS6\ShopBundle\Model\Order\OrderFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends AdminBaseController {
@@ -51,10 +51,10 @@ class CustomerCommunicationController extends AdminBaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
 			'form' => $form->createView(),
-			'VARIABLE_TRANSPORT_INSTRUCTIONS' => OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS,
-			'VARIABLE_PAYMENT_INSTRUCTIONS' => OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS,
-			'VARIABLE_ORDER_DETAIL_URL' => OrderMailService::VARIABLE_ORDER_DETAIL_URL,
-			'VARIABLE_NUMBER' => OrderMailService::VARIABLE_NUMBER,
+			'VARIABLE_TRANSPORT_INSTRUCTIONS' => OrderFacade::VARIABLE_TRANSPORT_INSTRUCTIONS,
+			'VARIABLE_PAYMENT_INSTRUCTIONS' => OrderFacade::VARIABLE_PAYMENT_INSTRUCTIONS,
+			'VARIABLE_ORDER_DETAIL_URL' => OrderFacade::VARIABLE_ORDER_DETAIL_URL,
+			'VARIABLE_NUMBER' => OrderFacade::VARIABLE_NUMBER,
 		]);
 	}
 
