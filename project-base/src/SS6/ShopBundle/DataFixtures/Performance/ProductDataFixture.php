@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -54,9 +54,9 @@ class ProductDataFixture {
 	private $productDataReferenceInjector;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
-	private $persistentReferenceService;
+	private $persistentReferenceFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
@@ -95,7 +95,7 @@ class ProductDataFixture {
 		SqlLoggerFacade $sqlLoggerFacade,
 		ProductVariantFacade $productVariantFacade,
 		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
-		PersistentReferenceService $persistentReferenceService,
+		PersistentReferenceFacade $persistentReferenceFacade,
 		CategoryRepository $categoryRepository,
 		Faker $faker
 	) {
@@ -105,7 +105,7 @@ class ProductDataFixture {
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->productVariantFacade = $productVariantFacade;
 		$this->productDataReferenceInjector = $productDataReferenceInjector;
-		$this->persistentReferenceService = $persistentReferenceService;
+		$this->persistentReferenceFacade = $persistentReferenceFacade;
 		$this->categoryRepository = $categoryRepository;
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
@@ -131,7 +131,7 @@ class ProductDataFixture {
 			$product = $this->productEditFacade->create($productEditData);
 
 			if ($this->countImported === 0) {
-				$this->persistentReferenceService->persistReference(self::FIRST_PERFORMANCE_PRODUCT, $product);
+				$this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_PRODUCT, $product);
 			}
 
 			if ($product->getCatnum() !== null) {
@@ -249,7 +249,7 @@ class ProductDataFixture {
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
-		$this->productDataReferenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceService);
+		$this->productDataReferenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade);
 
 		return $this->productDataFixtureLoader->getProductsEditData();
 	}
@@ -300,7 +300,7 @@ class ProductDataFixture {
 	 */
 	private function getPerformanceCategoryIds() {
 		$allCategoryIds = $this->categoryRepository->getAllIds();
-		$firstPerformanceCategory = $this->persistentReferenceService->getReference(
+		$firstPerformanceCategory = $this->persistentReferenceFacade->getReference(
 			CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
 		);
 		$firstPerformanceCategoryKey = array_search($firstPerformanceCategory->getId(), $allCategoryIds, true);
@@ -313,7 +313,7 @@ class ProductDataFixture {
 	 * @return bool
 	 */
 	private function isPerformanceCategory(Category $category) {
-		$firstPerformanceCategory = $this->persistentReferenceService->getReference(
+		$firstPerformanceCategory = $this->persistentReferenceFacade->getReference(
 			CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
 		);
 		/* @var $firstPerformanceCategory \SS6\ShopBundle\Model\Category\Category */

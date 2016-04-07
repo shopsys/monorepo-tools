@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
@@ -49,9 +49,9 @@ class UserDataFixture {
 	private $faker;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
-	private $persistentReferenceService;
+	private $persistentReferenceFacade;
 
 	public function __construct(
 		EntityManager $em,
@@ -60,7 +60,7 @@ class UserDataFixture {
 		CustomerEditFacade $customerEditFacade,
 		UserDataFactory $userDataFactory,
 		Faker $faker,
-		PersistentReferenceService $persistentReferenceService
+		PersistentReferenceFacade $persistentReferenceFacade
 	) {
 		$this->em = $em;
 		$this->domain = $domain;
@@ -68,7 +68,7 @@ class UserDataFixture {
 		$this->customerEditFacade = $customerEditFacade;
 		$this->userDataFactory = $userDataFactory;
 		$this->faker = $faker;
-		$this->persistentReferenceService = $persistentReferenceService;
+		$this->persistentReferenceFacade = $persistentReferenceFacade;
 	}
 
 	public function load() {
@@ -82,7 +82,7 @@ class UserDataFixture {
 				$user = $this->createCustomerOnDomain($domainConfig->getId(), $i);
 
 				if ($isFirstUser) {
-					$this->persistentReferenceService->persistReference(self::FIRST_PERFORMANCE_USER, $user);
+					$this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_USER, $user);
 					$isFirstUser = false;
 				}
 

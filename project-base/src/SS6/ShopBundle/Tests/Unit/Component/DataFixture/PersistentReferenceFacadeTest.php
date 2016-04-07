@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Tests\Unit\Component\DataFixture;
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\DataFixture\PersistentReference;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
 use SS6\ShopBundle\Model\Product\Product;
 use stdClass;
 
-class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
+class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testPersistReferenceWrongEntity() {
 		$emMock = $this->getMockBuilder(EntityManager::class)
@@ -26,9 +26,9 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$persistentReferenceRepositoryMock->expects($this->never())->method('deleteAll');
 
-		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
+		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
 		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
-		$persistentReferenceService->persistReference('referenceName', new stdClass());
+		$persistentReferenceFacade->persistReference('referenceName', new stdClass());
 	}
 
 	public function testPersistReference() {
@@ -51,8 +51,8 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 
 		$productMock->expects($this->any())->method('getId')->willReturn(1);
 
-		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
-		$persistentReferenceService->persistReference('referenceName', $productMock);
+		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
+		$persistentReferenceFacade->persistReference('referenceName', $productMock);
 	}
 
 	public function testGetReference() {
@@ -74,9 +74,9 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 			->method('getByReferenceName')
 			->will($this->returnValue($persistentReference));
 
-		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
+		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
 
-		$this->assertSame($expectedObject, $persistentReferenceService->getReference('referenceName'));
+		$this->assertSame($expectedObject, $persistentReferenceFacade->getReference('referenceName'));
 	}
 
 	public function testGetReferenceNotFound() {
@@ -97,10 +97,10 @@ class PersistentReferenceServiceTest extends PHPUnit_Framework_TestCase {
 			->method('getByReferenceName')
 			->will($this->returnValue($persistentReference));
 
-		$persistentReferenceService = new PersistentReferenceService($emMock, $persistentReferenceRepositoryMock);
+		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
 
 		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
-		$persistentReferenceService->getReference('referenceName');
+		$persistentReferenceFacade->getReference('referenceName');
 	}
 
 }

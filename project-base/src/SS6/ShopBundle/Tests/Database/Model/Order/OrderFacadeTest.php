@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Database\Model\Order;
 
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
@@ -40,8 +40,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		/* @var $transportRepository \SS6\ShopBundle\Model\Transport\TransportRepository */
 		$paymentRepository = $this->getContainer()->get(PaymentRepository::class);
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
-		$persistentReferenceService = $this->getContainer()->get(PersistentReferenceService::class);
-		/* @var $persistentReferenceService \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
+		$persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
+		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 
@@ -55,7 +55,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData = new OrderData();
 		$orderData->transport = $transport;
 		$orderData->payment = $payment;
-		$orderData->status = $persistentReferenceService->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
+		$orderData->status = $persistentReferenceFacade->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		$orderData->firstName = 'firstName';
 		$orderData->lastName = 'lastName';
 		$orderData->email = 'email';

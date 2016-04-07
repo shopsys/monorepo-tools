@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\DataFixture;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 
-class PersistentReferenceService {
+class PersistentReferenceFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

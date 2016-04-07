@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
@@ -39,14 +39,14 @@ class CategoryDataFixture {
 	private $categoriesCreated;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
-	private $persistentReferenceService;
+	private $persistentReferenceFacade;
 
 	public function __construct(
 		CategoryFacade $categoryFacade,
 		SqlLoggerFacade $sqlLoggerFacade,
-		PersistentReferenceService $persistentReferenceService,
+		PersistentReferenceFacade $persistentReferenceFacade,
 		Faker $faker
 	) {
 		$this->categoryFacade = $categoryFacade;
@@ -54,7 +54,7 @@ class CategoryDataFixture {
 		$this->faker = $faker;
 		$this->categoriesCountsByLevel = [2, 4, 6];
 		$this->categoriesCreated = 0;
-		$this->persistentReferenceService = $persistentReferenceService;
+		$this->persistentReferenceFacade = $persistentReferenceFacade;
 	}
 
 	public function load() {
@@ -74,7 +74,7 @@ class CategoryDataFixture {
 			$newCategory = $this->categoryFacade->create($categoryData);
 			$this->categoriesCreated++;
 			if ($this->categoriesCreated === 1) {
-				$this->persistentReferenceService->persistReference(self::FIRST_PERFORMANCE_CATEGORY, $newCategory);
+				$this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_CATEGORY, $newCategory);
 			}
 			if (array_key_exists($categoryLevel + 1, $this->categoriesCountsByLevel)) {
 				$this->recursivelyCreateCategoryTree($newCategory, $categoryLevel + 1);

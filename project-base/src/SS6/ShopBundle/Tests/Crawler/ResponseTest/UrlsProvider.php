@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Controller\Front\ProductController;
@@ -24,9 +24,9 @@ class UrlsProvider {
 	const EXPECTED_STATUS_CODE_KEY = 'expectedStatusCode';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
-	private $persistentReferenceService;
+	private $persistentReferenceFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Router\CurrentDomainRouter
@@ -119,28 +119,28 @@ class UrlsProvider {
 				return ['icon' => 'delete'];
 
 			case 'admin_pricinggroup_delete':
-				return ['id' => $this->persistentReferenceService->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1)->getId()];
+				return ['id' => $this->persistentReferenceFacade->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1)->getId()];
 
 			case 'admin_unit_delete':
 				return [
-					'id' => $this->persistentReferenceService->getReference(BaseUnitDataFixture::PCS)->getId(),
-					'newId' => $this->persistentReferenceService->getReference(DemoUnitDataFixture::M3)->getId(),
+					'id' => $this->persistentReferenceFacade->getReference(BaseUnitDataFixture::PCS)->getId(),
+					'newId' => $this->persistentReferenceFacade->getReference(DemoUnitDataFixture::M3)->getId(),
 				];
 
 			case 'admin_vat_delete':
 				return [
-					'id' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW)->getId(),
-					'newId' => $this->persistentReferenceService->getReference(VatDataFixture::VAT_LOW)->getId(),
+					'id' => $this->persistentReferenceFacade->getReference(VatDataFixture::VAT_SECOND_LOW)->getId(),
+					'newId' => $this->persistentReferenceFacade->getReference(VatDataFixture::VAT_LOW)->getId(),
 				];
 
 			case 'front_article_detail':
 				return ['id' => 1];
 
 			case 'front_customer_order_detail_unregistered':
-				return ['urlHash' => $this->persistentReferenceService->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getUrlHash()];
+				return ['urlHash' => $this->persistentReferenceFacade->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getUrlHash()];
 
 			case 'front_customer_order_detail_registered':
-				return ['orderNumber' => $this->persistentReferenceService->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getNumber()];
+				return ['orderNumber' => $this->persistentReferenceFacade->getReference(OrderDataFixture::ORDER_PREFIX . '1')->getNumber()];
 
 			case 'front_error_page':
 			case 'front_error_page_format':
@@ -171,18 +171,18 @@ class UrlsProvider {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @param \Symfony\Component\Routing\RouterInterface $router
 	 * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
 	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
 	 */
 	public function __construct(
-		PersistentReferenceService $persistentReferenceService,
+		PersistentReferenceFacade $persistentReferenceFacade,
 		CurrentDomainRouter $router,
 		CsrfTokenManagerInterface $tokenManager,
 		RouteCsrfProtector $routeCsrfProtector
 	) {
-		$this->persistentReferenceService = $persistentReferenceService;
+		$this->persistentReferenceFacade = $persistentReferenceFacade;
 		$this->router = $router;
 		$this->tokenManager = $tokenManager;
 		$this->routeCsrfProtector = $routeCsrfProtector;

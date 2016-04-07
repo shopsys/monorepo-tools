@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
@@ -55,9 +55,9 @@ class OrderDataFixture {
 	private $faker;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService
+	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
-	private $persistentReferenceService;
+	private $persistentReferenceFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
@@ -83,7 +83,7 @@ class OrderDataFixture {
 		EntityManager $em,
 		SqlLoggerFacade $sqlLoggerFacade,
 		Faker $faker,
-		PersistentReferenceService $persistentReferenceService,
+		PersistentReferenceFacade $persistentReferenceFacade,
 		OrderFacade $orderFacade,
 		OrderPreviewFactory $orderPreviewFactory,
 		ProductEditFacade $productEditFacade,
@@ -93,7 +93,7 @@ class OrderDataFixture {
 		$this->em = $em;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->faker = $faker;
-		$this->persistentReferenceService = $persistentReferenceService;
+		$this->persistentReferenceFacade = $persistentReferenceFacade;
 		$this->orderFacade = $orderFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->productEditFacade = $productEditFacade;
@@ -172,7 +172,7 @@ class OrderDataFixture {
 
 		$orderData->transport = $this->getRandomTransport();
 		$orderData->payment = $this->getRandomPayment();
-		$orderData->status = $this->persistentReferenceService->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
+		$orderData->status = $this->persistentReferenceFacade->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = $this->faker->firstName . ' ' . $this->faker->lastName;
 		$orderData->deliveryCompanyName = $this->faker->company;
@@ -183,7 +183,7 @@ class OrderDataFixture {
 		$orderData->note = $this->faker->text(200);
 		$orderData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
 		$orderData->domainId = 1;
-		$orderData->currency = $this->persistentReferenceService->getReference(CurrencyDataFixture::CURRENCY_CZK);
+		$orderData->currency = $this->persistentReferenceFacade->getReference(CurrencyDataFixture::CURRENCY_CZK);
 
 		return $orderData;
 	}
@@ -206,7 +206,7 @@ class OrderDataFixture {
 	}
 
 	private function loadPerformanceProductIds() {
-		$firstPerformaceProduct = $this->persistentReferenceService->getReference(
+		$firstPerformaceProduct = $this->persistentReferenceFacade->getReference(
 			PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
 		);
 		/* @var $firstPerformaceProduct \SS6\ShopBundle\Model\Product\Product */
@@ -231,7 +231,7 @@ class OrderDataFixture {
 	}
 
 	private function loadPerformanceUserIdsOnFirstDomain() {
-		$firstPerformaceUser = $this->persistentReferenceService->getReference(
+		$firstPerformaceUser = $this->persistentReferenceFacade->getReference(
 			PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
 		);
 		/* @var $firstPerformaceUser \SS6\ShopBundle\Model\Customer\User */
@@ -271,7 +271,7 @@ class OrderDataFixture {
 			TransportDataFixture::TRANSPORT_PERSONAL,
 		]);
 
-		return $this->persistentReferenceService->getReference($randomTransportReferenceName);
+		return $this->persistentReferenceFacade->getReference($randomTransportReferenceName);
 	}
 
 	/**
@@ -284,7 +284,7 @@ class OrderDataFixture {
 			PaymentDataFixture::PAYMENT_CASH,
 		]);
 
-		return $this->persistentReferenceService->getReference($randomPaymentReferenceName);
+		return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
 	}
 
 	/**

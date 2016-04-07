@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\Model\Product\ProductEditData;
@@ -24,10 +24,10 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
 		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
-		$persistentReferenceService = $this->get(PersistentReferenceService::class);
-		/* @var $persistentReferenceService \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
+		$persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
+		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
-		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceService);
+		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade);
 
 		$productsEditData = $productDataFixtureLoader->getProductsEditData();
 		$productNo = 1;

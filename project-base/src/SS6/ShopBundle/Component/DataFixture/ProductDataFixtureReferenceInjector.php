@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Component\DataFixture;
 
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
@@ -18,20 +18,20 @@ class ProductDataFixtureReferenceInjector {
 
 	/**
 	 * @param \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function loadReferences(
 		ProductDataFixtureLoader $productDataFixtureLoader,
-		PersistentReferenceService $persistentReferenceService
+		PersistentReferenceFacade $persistentReferenceFacade
 	) {
-		$vats = $this->getVatReferences($persistentReferenceService);
-		$availabilities = $this->getAvailabilityReferences($persistentReferenceService);
-		$categories = $this->getCategoryReferences($persistentReferenceService);
-		$flags = $this->getFlagReferences($persistentReferenceService);
-		$brands = $this->getBrandReferences($persistentReferenceService);
-		$units = $this->getUnitReferences($persistentReferenceService);
-		$pricingGroups = $this->getPricingGroupReferences($persistentReferenceService);
+		$vats = $this->getVatReferences($persistentReferenceFacade);
+		$availabilities = $this->getAvailabilityReferences($persistentReferenceFacade);
+		$categories = $this->getCategoryReferences($persistentReferenceFacade);
+		$flags = $this->getFlagReferences($persistentReferenceFacade);
+		$brands = $this->getBrandReferences($persistentReferenceFacade);
+		$units = $this->getUnitReferences($persistentReferenceFacade);
+		$pricingGroups = $this->getPricingGroupReferences($persistentReferenceFacade);
 
 		$productDataFixtureLoader->injectReferences(
 			$vats,
@@ -45,136 +45,136 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getVatReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getVatReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'high' => $persistentReferenceService->getReference(VatDataFixture::VAT_HIGH),
-			'low' => $persistentReferenceService->getReference(VatDataFixture::VAT_LOW),
-			'second_low' => $persistentReferenceService->getReference(VatDataFixture::VAT_SECOND_LOW),
-			'zero' => $persistentReferenceService->getReference(VatDataFixture::VAT_ZERO),
+			'high' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_HIGH),
+			'low' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_LOW),
+			'second_low' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_SECOND_LOW),
+			'zero' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_ZERO),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getAvailabilityReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getAvailabilityReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'in-stock' => $persistentReferenceService->getReference(AvailabilityDataFixture::IN_STOCK),
-			'out-of-stock' => $persistentReferenceService->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
-			'on-request' => $persistentReferenceService->getReference(AvailabilityDataFixture::ON_REQUEST),
+			'in-stock' => $persistentReferenceFacade->getReference(AvailabilityDataFixture::IN_STOCK),
+			'out-of-stock' => $persistentReferenceFacade->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
+			'on-request' => $persistentReferenceFacade->getReference(AvailabilityDataFixture::ON_REQUEST),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getCategoryReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getCategoryReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			CategoryDataFixture::TV => $persistentReferenceService->getReference(
+			CategoryDataFixture::TV => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::TV
 			),
-			CategoryDataFixture::PHOTO => $persistentReferenceService->getReference(
+			CategoryDataFixture::PHOTO => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO
 			),
-			CategoryDataFixture::PRINTERS => $persistentReferenceService->getReference(
+			CategoryDataFixture::PRINTERS => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS
 			),
-			CategoryDataFixture::PC => $persistentReferenceService->getReference(
+			CategoryDataFixture::PC => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::PC
 			),
-			CategoryDataFixture::PHONES => $persistentReferenceService->getReference(
+			CategoryDataFixture::PHONES => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::PHONES
 			),
-			CategoryDataFixture::COFFEE => $persistentReferenceService->getReference(
+			CategoryDataFixture::COFFEE => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::COFFEE
 			),
-			CategoryDataFixture::BOOKS => $persistentReferenceService->getReference(
+			CategoryDataFixture::BOOKS => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::BOOKS
 			),
-			CategoryDataFixture::TOYS => $persistentReferenceService->getReference(
+			CategoryDataFixture::TOYS => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::TOYS
 			),
-			CategoryDataFixture::GARDEN_TOOLS => $persistentReferenceService->getReference(
+			CategoryDataFixture::GARDEN_TOOLS => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::GARDEN_TOOLS
 			),
-			CategoryDataFixture::FOOD => $persistentReferenceService->getReference(
+			CategoryDataFixture::FOOD => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::FOOD
 			),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getFlagReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getFlagReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'action' => $persistentReferenceService->getReference(FlagDataFixture::ACTION_PRODUCT),
-			'new' => $persistentReferenceService->getReference(FlagDataFixture::NEW_PRODUCT),
-			'top' => $persistentReferenceService->getReference(FlagDataFixture::TOP_PRODUCT),
+			'action' => $persistentReferenceFacade->getReference(FlagDataFixture::ACTION_PRODUCT),
+			'new' => $persistentReferenceFacade->getReference(FlagDataFixture::NEW_PRODUCT),
+			'top' => $persistentReferenceFacade->getReference(FlagDataFixture::TOP_PRODUCT),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getBrandReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getBrandReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'apple' => $persistentReferenceService->getReference(BrandDataFixture::APPLE),
-			'canon' => $persistentReferenceService->getReference(BrandDataFixture::CANON),
-			'lg' => $persistentReferenceService->getReference(BrandDataFixture::LG),
-			'philips' => $persistentReferenceService->getReference(BrandDataFixture::PHILIPS),
-			'sencor' => $persistentReferenceService->getReference(BrandDataFixture::SENCOR),
-			'a4tech' => $persistentReferenceService->getReference(BrandDataFixture::A4TECH),
-			'brother' => $persistentReferenceService->getReference(BrandDataFixture::BROTHER),
-			'verbatim' => $persistentReferenceService->getReference(BrandDataFixture::VERBATIM),
-			'dlink' => $persistentReferenceService->getReference(BrandDataFixture::DLINK),
-			'defender' => $persistentReferenceService->getReference(BrandDataFixture::DEFENDER),
-			'delonghi' => $persistentReferenceService->getReference(BrandDataFixture::DELONGHI),
-			'genius' => $persistentReferenceService->getReference(BrandDataFixture::GENIUS),
-			'gigabyte' => $persistentReferenceService->getReference(BrandDataFixture::GIGABYTE),
-			'hp' => $persistentReferenceService->getReference(BrandDataFixture::HP),
-			'htc' => $persistentReferenceService->getReference(BrandDataFixture::HTC),
-			'jura' => $persistentReferenceService->getReference(BrandDataFixture::JURA),
-			'logitech' => $persistentReferenceService->getReference(BrandDataFixture::LOGITECH),
-			'microsoft' => $persistentReferenceService->getReference(BrandDataFixture::MICROSOFT),
-			'samsung' => $persistentReferenceService->getReference(BrandDataFixture::SAMSUNG),
-			'sony' => $persistentReferenceService->getReference(BrandDataFixture::SONY),
-			'orava' => $persistentReferenceService->getReference(BrandDataFixture::ORAVA),
-			'olympus' => $persistentReferenceService->getReference(BrandDataFixture::OLYMPUS),
-			'hyundai' => $persistentReferenceService->getReference(BrandDataFixture::HYUNDAI),
-			'nikon' => $persistentReferenceService->getReference(BrandDataFixture::NIKON),
+			'apple' => $persistentReferenceFacade->getReference(BrandDataFixture::APPLE),
+			'canon' => $persistentReferenceFacade->getReference(BrandDataFixture::CANON),
+			'lg' => $persistentReferenceFacade->getReference(BrandDataFixture::LG),
+			'philips' => $persistentReferenceFacade->getReference(BrandDataFixture::PHILIPS),
+			'sencor' => $persistentReferenceFacade->getReference(BrandDataFixture::SENCOR),
+			'a4tech' => $persistentReferenceFacade->getReference(BrandDataFixture::A4TECH),
+			'brother' => $persistentReferenceFacade->getReference(BrandDataFixture::BROTHER),
+			'verbatim' => $persistentReferenceFacade->getReference(BrandDataFixture::VERBATIM),
+			'dlink' => $persistentReferenceFacade->getReference(BrandDataFixture::DLINK),
+			'defender' => $persistentReferenceFacade->getReference(BrandDataFixture::DEFENDER),
+			'delonghi' => $persistentReferenceFacade->getReference(BrandDataFixture::DELONGHI),
+			'genius' => $persistentReferenceFacade->getReference(BrandDataFixture::GENIUS),
+			'gigabyte' => $persistentReferenceFacade->getReference(BrandDataFixture::GIGABYTE),
+			'hp' => $persistentReferenceFacade->getReference(BrandDataFixture::HP),
+			'htc' => $persistentReferenceFacade->getReference(BrandDataFixture::HTC),
+			'jura' => $persistentReferenceFacade->getReference(BrandDataFixture::JURA),
+			'logitech' => $persistentReferenceFacade->getReference(BrandDataFixture::LOGITECH),
+			'microsoft' => $persistentReferenceFacade->getReference(BrandDataFixture::MICROSOFT),
+			'samsung' => $persistentReferenceFacade->getReference(BrandDataFixture::SAMSUNG),
+			'sony' => $persistentReferenceFacade->getReference(BrandDataFixture::SONY),
+			'orava' => $persistentReferenceFacade->getReference(BrandDataFixture::ORAVA),
+			'olympus' => $persistentReferenceFacade->getReference(BrandDataFixture::OLYMPUS),
+			'hyundai' => $persistentReferenceFacade->getReference(BrandDataFixture::HYUNDAI),
+			'nikon' => $persistentReferenceFacade->getReference(BrandDataFixture::NIKON),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getUnitReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getUnitReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'pcs' => $persistentReferenceService->getReference(BaseUnitDataFixture::PCS),
-			'm3' => $persistentReferenceService->getReference(DemoUnitDataFixture::M3),
+			'pcs' => $persistentReferenceFacade->getReference(BaseUnitDataFixture::PCS),
+			'm3' => $persistentReferenceFacade->getReference(DemoUnitDataFixture::M3),
 		];
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService $persistentReferenceService
+	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
-	private function getPricingGroupReferences(PersistentReferenceService $persistentReferenceService) {
+	private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
-			'ordinary_domain_1' => $persistentReferenceService->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1),
-			'ordinary_domain_2' => $persistentReferenceService->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2),
-			'partner_domain_1' => $persistentReferenceService->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1),
-			'vip_domain_1' => $persistentReferenceService->getReference(PricingGroupDataFixture::VIP_DOMAIN_1),
-			'vip_domain_2' => $persistentReferenceService->getReference(PricingGroupDataFixture::VIP_DOMAIN_2),
+			'ordinary_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1),
+			'ordinary_domain_2' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2),
+			'partner_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::PARTNER_DOMAIN_1),
+			'vip_domain_1' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::VIP_DOMAIN_1),
+			'vip_domain_2' => $persistentReferenceFacade->getReference(PricingGroupDataFixture::VIP_DOMAIN_2),
 		];
 	}
 

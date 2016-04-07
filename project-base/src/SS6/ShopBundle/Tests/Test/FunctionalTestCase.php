@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Test;
 
 use SS6\Environment;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceService;
+use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -74,10 +74,10 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @return object
 	 */
 	protected function getReference($referenceName) {
-		$persistentReferenceService = $this->getContainer()->get(PersistentReferenceService::class);
-		/* @var $persistentReferenceService \SS6\ShopBundle\Component\DataFixture\PersistentReferenceService */
+		$persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
+		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
-		return $persistentReferenceService->getReference($referenceName);
+		return $persistentReferenceFacade->getReference($referenceName);
 	}
 
 }
