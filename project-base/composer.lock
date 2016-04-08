@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a43effbe1c27a8433af197af3374eee3",
-    "content-hash": "cd08cd2ca68cf868e0ea23491b2fd473",
+    "hash": "578a9d21c7c9d385b0267202b6895304",
+    "content-hash": "4feb2998bf3fce65a2cea7223d1482ed",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -269,9 +269,9 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1|~5.0",
+                "phpunit/phpunit": "~4.1",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "^2.8.1|^3.0.1",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/symfony": "^2.6.4|~3.0"
             },
             "type": "symfony-bundle",
@@ -4161,7 +4161,7 @@
             "version": "v1.1.0",
             "source": {
                 "type": "git",
-                "url": "http://gitlab.netdevelo/ss6/migrations.git",
+                "url": "https://github.com/shopsys/migrations.git",
                 "reference": "3789f9d04c605c0ea02d7d18c1120064ac6a572f"
             },
             "require": {
@@ -5527,7 +5527,7 @@
             "version": "v1.2.0",
             "source": {
                 "type": "git",
-                "url": "http://gitlab.netdevelo/ss6/coding-standards.git",
+                "url": "https://github.com/shopsys/coding-standards.git",
                 "reference": "da4f62f61e1dbf4ea3f4fbf2f84cb3a3473cefac"
             },
             "require": {
@@ -5559,7 +5559,7 @@
             "version": "v1.0.4",
             "source": {
                 "type": "git",
-                "url": "http://gitlab.netdevelo/ss6/phpstorm-inspect.git",
+                "url": "https://github.com/shopsys/phpstorm-inspect.git",
                 "reference": "f7ebbbcf7b1ba33e8a1f1039336235baf591e018"
             },
             "require": {
