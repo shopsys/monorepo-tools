@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface {
 
 	/**
-	 * @ORM\Column(name="id", type="integer")
+	 * @ORM\Column(type="integer")
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
@@ -42,12 +42,12 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $realName;
 
 	/**
-	 * @ORM\Column(name="password", type="string", length=100)
+	 * @ORM\Column(type="string", length=100)
 	 */
 	private $password;
 
 	/**
-	 * @ORM\Column(name="login_token", type="string", length=32)
+	 * @ORM\Column(type="string", length=32)
 	 */
 	private $loginToken;
 
