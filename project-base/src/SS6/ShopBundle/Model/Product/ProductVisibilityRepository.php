@@ -50,8 +50,8 @@ class ProductVisibilityRepository {
 	 */
 	public function refreshProductsVisibility($onlyMarkedProducts = false) {
 		$this->calculateIndependentVisibility($onlyMarkedProducts);
-		$this->propagateMainVariantVisibilityToVariants($onlyMarkedProducts);
-		$this->propagateVariantsVisibilityToMainVariant($onlyMarkedProducts);
+		$this->hideVariantsWithInvisibleMainVariant($onlyMarkedProducts);
+		$this->hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts);
 		$this->refreshGlobalProductVisibility($onlyMarkedProducts);
 		$this->markAllProductsVisibilityAsRecalculated($onlyMarkedProducts);
 	}
@@ -216,7 +216,7 @@ class ProductVisibilityRepository {
 	/**
 	 * @param bool $onlyMarkedProducts
 	 */
-	private function propagateMainVariantVisibilityToVariants($onlyMarkedProducts) {
+	private function hideVariantsWithInvisibleMainVariant($onlyMarkedProducts) {
 		if ($onlyMarkedProducts) {
 			$onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
 		} else {
@@ -248,7 +248,7 @@ class ProductVisibilityRepository {
 	/**
 	 * @param bool $onlyMarkedProducts
 	 */
-	private function propagateVariantsVisibilityToMainVariant($onlyMarkedProducts) {
+	private function hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts) {
 		if ($onlyMarkedProducts) {
 			$onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
 		} else {
