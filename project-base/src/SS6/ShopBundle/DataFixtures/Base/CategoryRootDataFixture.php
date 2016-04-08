@@ -22,13 +22,13 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
 		$domain = $this->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
-		$category = new Category(new CategoryData());
-		$manager->persist($category);
-		$manager->flush();
-		$this->addReference(self::ROOT, $category);
+		$rootCategory = new Category(new CategoryData());
+		$manager->persist($rootCategory);
+		$manager->flush($rootCategory);
+		$this->addReference(self::ROOT, $rootCategory);
 
 		foreach ($domain->getAll() as $domainConfig) {
-			$categoryDomain = new CategoryDomain($category, $domainConfig->getId());
+			$categoryDomain = new CategoryDomain($rootCategory, $domainConfig->getId());
 			$manager->persist($categoryDomain);
 		}
 
