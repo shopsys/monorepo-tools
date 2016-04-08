@@ -11,13 +11,10 @@ use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductDataFixture {
 
@@ -50,21 +47,6 @@ class ProductDataFixture {
 	 * @var \SS6\ShopBundle\Model\Product\ProductVariantFacade
 	 */
 	private $productVariantFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
-	 */
-	private $productAvailabilityRecalculator;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
-	 */
-	private $productVisibilityFacade;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
-	 */
-	private $productPriceRecalculator;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
@@ -112,9 +94,6 @@ class ProductDataFixture {
 		ProductDataFixtureLoader $productDataFixtureLoader,
 		SqlLoggerFacade $sqlLoggerFacade,
 		ProductVariantFacade $productVariantFacade,
-		ProductAvailabilityRecalculator $productAvailabilityRecalculator,
-		ProductVisibilityFacade $productVisibilityFacade,
-		ProductPriceRecalculator $productPriceRecalculator,
 		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
 		PersistentReferenceService $persistentReferenceService,
 		CategoryRepository $categoryRepository,
@@ -125,9 +104,6 @@ class ProductDataFixture {
 		$this->productDataFixtureLoader = $productDataFixtureLoader;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->productVariantFacade = $productVariantFacade;
-		$this->productAvailabilityRecalculator = $productAvailabilityRecalculator;
-		$this->productVisibilityFacade = $productVisibilityFacade;
-		$this->productPriceRecalculator = $productPriceRecalculator;
 		$this->productDataReferenceInjector = $productDataReferenceInjector;
 		$this->persistentReferenceService = $persistentReferenceService;
 		$this->categoryRepository = $categoryRepository;
@@ -172,7 +148,6 @@ class ProductDataFixture {
 			$this->countImported++;
 		}
 		$this->createVariants($variantCatnumsByMainVariantCatnum);
-		$this->runRecalculators(true);
 		$this->em->clear();
 		$this->sqlLoggerFacade->reenableLogging();
 	}
@@ -257,21 +232,9 @@ class ProductDataFixture {
 	}
 
 	/**
-	 * @param bool $runGlobalRecalculators
-	 */
-	private function runRecalculators($runGlobalRecalculators = false) {
-		$this->productAvailabilityRecalculator->runImmediateRecalculations();
-		$this->productPriceRecalculator->runImmediateRecalculations();
-		if ($runGlobalRecalculators) {
-			$this->productVisibilityFacade->refreshProductsVisibility();
-		}
-	}
-
-	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	private function clearResources(EntityManager $em) {
-		$this->runRecalculators();
 		$em->clear();
 		gc_collect_cycles();
 		echo "\nMemory usage: " . round(memory_get_usage() / 1024 / 1024, 1) . "MB\n";

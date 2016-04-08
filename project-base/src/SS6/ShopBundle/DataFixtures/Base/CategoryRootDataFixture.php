@@ -10,7 +10,6 @@ use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryDomain;
-use SS6\ShopBundle\Model\Category\CategoryVisibilityRepository;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -22,8 +21,6 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
 	public function load(ObjectManager $manager) {
 		$domain = $this->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
-		$categoryVisibilityRepository = $this->get(CategoryVisibilityRepository::class);
-		/* @var $categoryVisibilityRepository \SS6\ShopBundle\Model\Category\CategoryVisibilityRepository */
 
 		$category = new Category(new CategoryData());
 		$manager->persist($category);
@@ -36,8 +33,6 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
 		}
 
 		$manager->flush();
-
-		$categoryVisibilityRepository->refreshCategoriesVisibility();
 	}
 
 	/**

@@ -616,6 +616,11 @@
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:recalculations" />
+			<arg value="--env=test" />
+		</exec>
 	</target>
 
 	<target name="test-db-fixtures-performance">
@@ -623,6 +628,11 @@
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="ss6:performance-data" />
+		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="ss6:recalculations" />
 		</exec>
 	</target>
 
