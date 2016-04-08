@@ -35,36 +35,31 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. '{transport_instructions} <br />'
 			. '{payment_instructions}';
 
-		$mailTemplate = new MailTemplate('order_status_1', 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_1', 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaši objednávku již vyřizujeme.';
 
-		$mailTemplate = new MailTemplate('order_status_2', 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_2', 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaše objednávka je vyřízena.';
 
-		$mailTemplate = new MailTemplate('order_status_3', 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_3', 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaše objednávka byla stornována.';
 
-		$mailTemplate = new MailTemplate('order_status_4', 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_4', 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Žádost o nové heslo';
 		$mailTemplateData->body = 'Dobrý den.<br /><br />'
 			. 'Nové heslo nastavíte zde: <a href="{new_password_url}">{new_password_url}</a>';
 
-		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, MailTemplate::RESET_PASSWORD_NAME, 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Potvrzení registrace';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
@@ -74,8 +69,7 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'URL adresa eshopu: {url}<br />'
 			. 'Přihlašovací stránka: {login_page}';
 
-		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 1, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, MailTemplate::REGISTRATION_CONFIRM_NAME, 1, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Děkujeme za objednávku na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den,<br /><br />'
@@ -95,29 +89,25 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. '{transport_instructions} <br />'
 			. '{payment_instructions}';
 
-		$mailTemplate = new MailTemplate('order_status_1', 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_1', 2, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaši objednávku již vyřizujeme.';
 
-		$mailTemplate = new MailTemplate('order_status_2', 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_2', 2, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaše objednávka je vyřízena.';
 
-		$mailTemplate = new MailTemplate('order_status_3', 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_3', 2, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Změna stavu vaší objednávky na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
 			. 'Vaše objednávka byla stornována.';
 
-		$mailTemplate = new MailTemplate('order_status_4', 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, 'order_status_4', 2, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Potvrzení registrace na druhé doméně';
 		$mailTemplateData->body = 'Dobrý den, <br /><br />'
@@ -127,17 +117,28 @@ class MailTemplateDataFixture extends AbstractReferenceFixture {
 			. 'URL adresa eshopu: {url}<br />'
 			. 'Přihlašovací stránka: {login_page}';
 
-		$mailTemplate = new MailTemplate(MailTemplate::REGISTRATION_CONFIRM_NAME, 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
+		$this->createMailTemplate($manager, MailTemplate::REGISTRATION_CONFIRM_NAME, 2, $mailTemplateData);
 
 		$mailTemplateData->subject = 'Žádost o nové heslo';
 		$mailTemplateData->body = 'Dobrý den.<br /><br />'
 			. 'Nové heslo nastavíte zde: <a href="{new_password_url}">{new_password_url}</a>';
 
-		$mailTemplate = new MailTemplate(MailTemplate::RESET_PASSWORD_NAME, 2, $mailTemplateData);
-		$manager->persist($mailTemplate);
-
-		$manager->flush();
+		$this->createMailTemplate($manager, MailTemplate::RESET_PASSWORD_NAME, 2, $mailTemplateData);
 	}
 
+	/**
+	 * @param string $name
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
+	 */
+	private function createMailTemplate(
+		ObjectManager $manager,
+		$name,
+		$domainId,
+		MailTemplateData $mailTemplateData
+	) {
+		$mailTemplate = new MailTemplate($name, $domainId, $mailTemplateData);
+		$manager->persist($mailTemplate);
+		$manager->flush($mailTemplate);
+	}
 }

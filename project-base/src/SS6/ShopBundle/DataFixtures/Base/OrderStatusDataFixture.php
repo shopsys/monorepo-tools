@@ -20,29 +20,36 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$orderStatusData = new OrderStatusData();
 		$orderStatusData->name = ['cs' => 'Nová', 'en' => 'New'];
-		$this->createOrderStatus($manager, self::ORDER_STATUS_NEW, $orderStatusData, OrderStatus::TYPE_NEW);
+		$this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_NEW, self::ORDER_STATUS_NEW);
 
 		$orderStatusData->name = ['cs' => 'Vyřizuje se', 'en' => 'In progress'];
-		$this->createOrderStatus($manager, self::ORDER_STATUS_IN_PROGRESS, $orderStatusData, OrderStatus::TYPE_IN_PROGRESS);
+		$this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_IN_PROGRESS, self::ORDER_STATUS_IN_PROGRESS);
 
 		$orderStatusData->name = ['cs' => 'Vyřízena', 'en' => 'Done'];
-		$this->createOrderStatus($manager, self::ORDER_STATUS_DONE, $orderStatusData, OrderStatus::TYPE_DONE);
+		$this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_DONE, self::ORDER_STATUS_DONE);
 
 		$orderStatusData->name = ['cs' => 'Stornována', 'en' => 'Canceled'];
-		$this->createOrderStatus($manager, self::ORDER_STATUS_CANCELED, $orderStatusData, OrderStatus::TYPE_CANCELED);
+		$this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_CANCELED, self::ORDER_STATUS_CANCELED);
 	}
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
+	 * @param string|null $referenceName
 	 */
-	private function createOrderStatus(ObjectManager $manager, $referenceName, OrderStatusData $orderStatusData, $type) {
+	private function createOrderStatus(
+		ObjectManager $manager,
+		OrderStatusData $orderStatusData,
+		$type,
+		$referenceName = null
+	) {
 		$orderStatus = new OrderStatus($orderStatusData, $type);
 		$manager->persist($orderStatus);
 		$manager->flush($orderStatus);
-		$this->addReference($referenceName, $orderStatus);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $orderStatus);
+		}
 	}
 
 }

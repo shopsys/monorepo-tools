@@ -32,8 +32,8 @@ class AdvertDataFixture extends AbstractReferenceFixture {
 	 * @param \SS6\ShopBundle\Model\Advert\AdvertData $advertData
 	 */
 	private function createAdvert(AdvertData $advertData) {
-		$advertEdditFacade = $this->get(AdvertEditFacade::class);
-		/* @var $advertEdditFacade \SS6\ShopBundle\Model\Advert\AdvertEditFacade */
-		$advertEdditFacade->create($advertData);
+		$advertEditFacade = $this->get(AdvertEditFacade::class);
+		/* @var $advertEditFacade \SS6\ShopBundle\Model\Advert\AdvertEditFacade */
+		$advertEditFacade->create($advertData);
 	}
 }

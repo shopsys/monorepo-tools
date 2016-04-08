@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture {
 
@@ -21,19 +22,26 @@ class CurrencyDataFixture extends AbstractReferenceFixture {
 
 		$currencyData->name = 'Česká koruna';
 		$currencyData->code = Currency::CODE_CZK;
-		$this->createCurrency($manager, self::CURRENCY_CZK, $currencyData);
+		$this->createCurrency($currencyData, self::CURRENCY_CZK);
 
 		$currencyData->name = 'Euro';
 		$currencyData->code = Currency::CODE_EUR;
 		$currencyData->exchangeRate = 25;
-		$this->createCurrency($manager, self::CURRENCY_EUR, $currencyData);
+		$this->createCurrency($currencyData, self::CURRENCY_EUR);
 	}
 
-	private function createCurrency(ObjectManager $manager, $referenceName, CurrencyData $currencyData) {
-		$currency = new Currency($currencyData);
-		$manager->persist($currency);
-		$manager->flush($currency);
-		$this->addReference($referenceName, $currency);
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param string|null $referenceName
+	 */
+	private function createCurrency(CurrencyData $currencyData, $referenceName = null) {
+		$currencyFacade = $this->get(CurrencyFacade::class);
+		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+
+		$currency = $currencyFacade->create($currencyData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $currency);
+		}
 	}
 
 }

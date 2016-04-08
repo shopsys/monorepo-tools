@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture {
 
@@ -21,31 +22,33 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 		$availabilityData = new AvailabilityData();
 		$availabilityData->name = ['cs' => 'Připravujeme', 'en' => 'Preparing'];
 		$availabilityData->dispatchTime = 14;
-		$this->createAvailability($manager, self::PREPARING, $availabilityData);
+		$this->createAvailability($availabilityData, self::PREPARING);
 
 		$availabilityData->name = ['cs' => 'Skladem', 'en' => 'In stock'];
 		$availabilityData->dispatchTime = 0;
-		$this->createAvailability($manager, self::IN_STOCK, $availabilityData);
+		$this->createAvailability($availabilityData, self::IN_STOCK);
 
 		$availabilityData->name = ['cs' => 'Na dotaz', 'en' => 'On request'];
 		$availabilityData->dispatchTime = 7;
-		$this->createAvailability($manager, self::ON_REQUEST, $availabilityData);
+		$this->createAvailability($availabilityData, self::ON_REQUEST);
 
 		$availabilityData->name = ['cs' => 'Nedostupné', 'en' => 'Out of stock'];
 		$availabilityData->dispatchTime = null;
-		$this->createAvailability($manager, self::OUT_OF_STOCK, $availabilityData);
+		$this->createAvailability($availabilityData, self::OUT_OF_STOCK);
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 * @param string|null $referenceName
 	 */
-	private function createAvailability(ObjectManager $manager, $referenceName, AvailabilityData $availabilityData) {
-		$availability = new Availability($availabilityData);
-		$manager->persist($availability);
-		$manager->flush($availability);
-		$this->addReference($referenceName, $availability);
+	private function createAvailability(AvailabilityData $availabilityData, $referenceName = null) {
+		$availabilityFacade = $this->get(AvailabilityFacade::class);
+		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
+
+		$availability = $availabilityFacade->create($availabilityData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $availability);
+		}
 	}
 
 }

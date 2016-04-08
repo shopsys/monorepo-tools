@@ -4,9 +4,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Administrator\Administrator;
 use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Model\Administrator\AdministratorService;
+use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
@@ -17,28 +16,32 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$administratorService = $this->get(AdministratorService::class);
-		/* @var $administratorService \SS6\ShopBundle\Model\Administrator\AdministratorService */
+		$superadminData = new AdministratorData(true);
+		$superadminData->username = 'superadmin';
+		$superadminData->realName = 'netdevelo s.r.o. - superadmin';
+		$superadminData->email = 'no-reply@netdevelo.cz';
+		$superadminData->password = 'admin123';
+		$this->createAdministrator($superadminData, self::SUPERADMINISTRATOR);
 
-		$superadmin = new Administrator(new AdministratorData(true));
-		$superadmin->setUsername('superadmin');
-		$superadmin->setRealname('netdevelo s.r.o. - superadmin');
-		$superadmin->setPassword($administratorService->getPasswordHash($superadmin, 'admin123'));
-		$superadmin->setEmail('no-reply@netdevelo.cz');
-
-		$manager->persist($superadmin);
-		$manager->flush($superadmin);
-		$this->addReference(self::SUPERADMINISTRATOR, $superadmin);
-
-		$administrator = new Administrator(new AdministratorData());
-		$administrator->setUsername('admin');
-		$administrator->setRealname('netdevelo s.r.o.');
-		$administrator->setPassword($administratorService->getPasswordHash($administrator, 'admin123'));
-		$administrator->setEmail('no-reply@netdevelo.cz');
-
-		$manager->persist($administrator);
-		$manager->flush($administrator);
-		$this->addReference(self::ADMINISTRATOR, $administrator);
+		$administratorData = new AdministratorData();
+		$administratorData->username = 'admin';
+		$administratorData->realName = 'netdevelo s.r.o.';
+		$administratorData->password = 'admin123';
+		$administratorData->email = 'no-reply@netdevelo.cz';
+		$this->createAdministrator($administratorData, self::ADMINISTRATOR);
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @param string|null $referenceName
+	 */
+	private function createAdministrator(AdministratorData $administratorData, $referenceName = null) {
+		$administratorFacade = $this->get(AdministratorFacade::class);
+		/* @var $administratorFacade \SS6\ShopBundle\Model\Administrator\AdministratorFacade */
+
+		$administrator = $administratorFacade->create($administratorData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $administrator);
+		}
+	}
 }

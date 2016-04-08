@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Product\Flag\Flag;
 use SS6\ShopBundle\Model\Product\Flag\FlagData;
+use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
 
 class FlagDataFixture extends AbstractReferenceFixture {
 
@@ -21,27 +21,29 @@ class FlagDataFixture extends AbstractReferenceFixture {
 
 		$flagData->name = ['cs' => 'Novinka', 'en' => 'New'];
 		$flagData->rgbColor = '#efd6ff';
-		$this->createFlag($manager, self::NEW_PRODUCT, $flagData);
+		$this->createFlag($flagData, self::NEW_PRODUCT);
 
 		$flagData->name = ['cs' => 'Nejprodávanější', 'en' => 'TOP'];
 		$flagData->rgbColor = '#d6fffa';
-		$this->createFlag($manager, self::TOP_PRODUCT, $flagData);
+		$this->createFlag($flagData, self::TOP_PRODUCT);
 
 		$flagData->name = ['cs' => 'Akce', 'en' => 'Action'];
 		$flagData->rgbColor = '#f9ffd6';
-		$this->createFlag($manager, self::ACTION_PRODUCT, $flagData);
+		$this->createFlag($flagData, self::ACTION_PRODUCT);
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param string|null $referenceName
 	 */
-	private function createFlag(ObjectManager $manager, $referenceName, FlagData $flagData) {
-		$flag = new Flag($flagData);
-		$manager->persist($flag);
-		$manager->flush($flag);
-		$this->addReference($referenceName, $flag);
+	private function createFlag(FlagData $flagData, $referenceName = null) {
+		$flagFacade = $this->get(FlagFacade::class);
+		/* @var $flagFacade \SS6\ShopBundle\Model\Product\Flag\FlagFacade */
+
+		$flag = $flagFacade->create($flagData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $flag);
+		}
 	}
 
 }

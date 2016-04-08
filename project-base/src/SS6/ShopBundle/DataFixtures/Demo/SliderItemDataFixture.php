@@ -29,8 +29,6 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 		$sliderItemData->link = 'http://www.pojdtesnamirust.cz/';
 
 		$this->createSliderItem($manager, $sliderItemData, 1);
-
-		$manager->flush();
 	}
 
 	/**
@@ -45,5 +43,6 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	) {
 		$sliderItem = new SliderItem($sliderItemData, $domainId);
 		$manager->persist($sliderItem);
+		$manager->flush($sliderItem);
 	}
 }
