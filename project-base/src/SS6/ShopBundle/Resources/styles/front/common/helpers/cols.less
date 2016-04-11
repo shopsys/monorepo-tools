@@ -10,19 +10,19 @@
 
 
 .column (@i, @step, @max, @postfix: ~'') when (@i <= @max) {
-  	&--@{i}@{postfix} {
+	&--@{i}@{postfix} {
 		width: ~'@{i}%';
-  	}
-  	.column(@i + @step, @step, @max, @postfix);
+	}
+	.column(@i + @step, @step, @max, @postfix);
 }
 
 .column-spec (@i, @postfix: ~'') when (@i > 0) {
 	@size: extract(@cols-special, @i);
 
-  	&--@{size}@{postfix} {
-		width: ~'@{size}%';
-  	}
-  	.column-spec(@i - 1, @postfix);
+	&--@{size}@{postfix} {
+	width: ~'@{size}%';
+	}
+	.column-spec(@i - 1, @postfix);
 }
 
 .col {
