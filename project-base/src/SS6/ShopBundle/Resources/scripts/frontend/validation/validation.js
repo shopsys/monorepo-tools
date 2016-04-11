@@ -67,9 +67,9 @@
 		var $submitButtons = $form.find('.button[type="submit"]:not(.js-no-validate-button)');
 
 		if (SS6.validation.isFormValid($form)) {
-			$submitButtons.removeClass('button--alter');
+			$submitButtons.removeClass('btn--disabled');
 		} else {
-			$submitButtons.addClass('button--alter');
+			$submitButtons.addClass('btn--disabled');
 		}
 	};
 
