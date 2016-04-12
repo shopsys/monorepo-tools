@@ -63,6 +63,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.mailer_setting_extension:
+    class: SS6\ShopBundle\Twig\MailerSettingExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.module_extension:
     class: SS6\ShopBundle\Twig\ModuleExtension
     tags:
