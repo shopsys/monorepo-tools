@@ -3,7 +3,7 @@
 1. In your applications ```composer.json``` add repository
 ```
 "type": "vcs",
-"url": "http://gitlab.netdevelo/ss6/migrations.git"
+"url": "https://github.com/shopsys/migrations.git"
 ```
 2. Require ```shopsys/migrations```
 3. Register bundles in your ```app/AppKernel```:
