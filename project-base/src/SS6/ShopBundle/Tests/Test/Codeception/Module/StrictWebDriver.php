@@ -322,4 +322,13 @@ class StrictWebDriver extends WebDriver {
 		parent::seeInField($element, $value);
 	}
 
+	/**
+	 * @param string $css
+	 * @param null|int $offsetX
+	 * @param null|int $offsetY
+	 */
+	public function moveMouseOverByCss($css, $offsetX = null, $offsetY = null) {
+		parent::moveMouseOver(['css' => $css], $offsetX, $offsetY);
+	}
+
 }

@@ -23,4 +23,20 @@ class RegistrationPage extends AbstractPage {
 		$this->tester->clickByName('registration_form[save]');
 	}
 
+	/**
+	 * @param string $text
+	 */
+	public function seeEmailError($text) {
+		$this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_email');
+		$this->tester->see($text);
+	}
+
+	/**
+	 * @param string $text
+	 */
+	public function seePasswordError($text) {
+		$this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_password_first');
+		$this->tester->see($text);
+	}
+
 }

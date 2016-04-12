@@ -1,94 +1,90 @@
-<div class="col-sm-12 col-md-4">
-	<div class="wrap-box">
-		<h2 class="mt-0">{{ 'Přehled zboží v košíku'|trans }}</h2>
-		<table class="list-cart-preview">
-			<tbody>
+<h2>{{ 'Přehled zboží v košíku'|trans }}</h2>
+<table class="list-cart-preview">
+	<tbody>
 
-				{% for quantifiedProductKey, quantifiedProduct in orderPreview.quantifiedProducts %}
-					{% set quantifiedProductPrice = orderPreview.quantifiedItemsPrices[quantifiedProductKey] %}
-					{% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
-					<tr class="list-cart-preview__row">
-						<td class="list-cart-preview__cell">
-							<strong>{{ quantifiedProduct.quantity|formatNumber }} {{ quantifiedProduct.product.unit.name }}</strong>
-							{{ quantifiedProduct.product.name }}
-						</td>
-						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
-						</td>
-					</tr>
-					{% if quantifiedProductDiscount is not null %}
-						<tr>
-							<td class="list-cart-preview__cell">
-								{{ 'Sleva'|trans }}:
-							</td>
-							<td class="list-cart-preview__cell list-cart-preview__cell--price">
-								{{ quantifiedProductDiscount.priceWithVat|price }}
-							</td>
-						</tr>
-					{% endif %}
-				{% endfor %}
-
-				{% if orderPreview.transport is not empty %}
-					<tr class="list-cart-preview__row">
-						<td class="list-cart-preview__cell">
-							{{ 'Způsob dopravy'|trans }}: {{ orderPreview.transport.name }}
-						</td>
-						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.transportPrice.priceWithVat|priceText }}
-						</td>
-					</tr>
-				{% endif %}
-
-				{% if orderPreview.payment is not empty %}
-					<tr class="list-cart-preview__row">
-						<td class="list-cart-preview__cell">
-							{{ 'Způsob platby'|trans }}: {{ orderPreview.payment.name }}
-						</td>
-						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.paymentPrice.priceWithVat|priceText }}
-						</td>
-					</tr>
-				{% endif %}
-
-				{% if orderPreview.roundingPrice is not empty %}
-					<tr class="list-cart-preview__row">
-						<td class="list-cart-preview__cell">
-							{{ 'Zaokrouhlení'|trans }}:
-						</td>
-						<td class="list-cart-preview__cell list-cart-preview__cell--price">
-							{{ orderPreview.roundingPrice|price }}
-						</td>
-					</tr>
-				{% endif %}
-
-				<tr class="list-cart-preview__row list-cart-preview__row--total list-cart-preview__row--important">
+		{% for quantifiedProductKey, quantifiedProduct in orderPreview.quantifiedProducts %}
+			{% set quantifiedProductPrice = orderPreview.quantifiedItemsPrices[quantifiedProductKey] %}
+			{% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
+			<tr class="list-cart-preview__row">
+				<td class="list-cart-preview__cell">
+					<strong>{{ quantifiedProduct.quantity|formatNumber }} {{ quantifiedProduct.product.unit.name }}</strong>
+					{{ quantifiedProduct.product.name }}
+				</td>
+				<td class="list-cart-preview__cell list-cart-preview__cell--price">
+					{{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
+				</td>
+			</tr>
+			{% if quantifiedProductDiscount is not null %}
+				<tr>
 					<td class="list-cart-preview__cell">
-						{{ 'Cena celkem s DPH'|trans }}:
+						{{ 'Sleva'|trans }}:
 					</td>
 					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPrice.priceWithVat|price }}
+						{{ quantifiedProductDiscount.priceWithVat|price }}
 					</td>
 				</tr>
+			{% endif %}
+		{% endfor %}
 
-				<tr class="list-cart-preview__row list-cart-preview__row--total">
-					<td class="list-cart-preview__cell">
-						{{ 'Cena celkem bez DPH'|trans }}:
-					</td>
-					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPrice.priceWithoutVat|price }}
-					</td>
-				</tr>
+		{% if orderPreview.transport is not empty %}
+			<tr class="list-cart-preview__row">
+				<td class="list-cart-preview__cell">
+					{{ 'Způsob dopravy'|trans }}: {{ orderPreview.transport.name }}
+				</td>
+				<td class="list-cart-preview__cell list-cart-preview__cell--price">
+					{{ orderPreview.transportPrice.priceWithVat|priceText }}
+				</td>
+			</tr>
+		{% endif %}
 
-				<tr class="list-cart-preview__row list-cart-preview__row--total">
-					<td class="list-cart-preview__cell">
-						{{ 'Celková výše DPH'|trans }}:
-					</td>
-					<td class="list-cart-preview__cell list-cart-preview__cell--price">
-						{{ orderPreview.totalPrice.vatAmount|price }}
-					</td>
-				</tr>
+		{% if orderPreview.payment is not empty %}
+			<tr class="list-cart-preview__row">
+				<td class="list-cart-preview__cell">
+					{{ 'Způsob platby'|trans }}: {{ orderPreview.payment.name }}
+				</td>
+				<td class="list-cart-preview__cell list-cart-preview__cell--price">
+					{{ orderPreview.paymentPrice.priceWithVat|priceText }}
+				</td>
+			</tr>
+		{% endif %}
 
-			</tbody>
-		</table>
-	</div>
-</div>
+		{% if orderPreview.roundingPrice is not empty %}
+			<tr class="list-cart-preview__row">
+				<td class="list-cart-preview__cell">
+					{{ 'Zaokrouhlení'|trans }}:
+				</td>
+				<td class="list-cart-preview__cell list-cart-preview__cell--price">
+					{{ orderPreview.roundingPrice|price }}
+				</td>
+			</tr>
+		{% endif %}
+
+		<tr class="list-cart-preview__row list-cart-preview__row--total list-cart-preview__row--important">
+			<td class="list-cart-preview__cell">
+				{{ 'Cena celkem s DPH'|trans }}:
+			</td>
+			<td class="list-cart-preview__cell list-cart-preview__cell--price">
+				{{ orderPreview.totalPrice.priceWithVat|price }}
+			</td>
+		</tr>
+
+		<tr class="list-cart-preview__row list-cart-preview__row--total">
+			<td class="list-cart-preview__cell">
+				{{ 'Cena celkem bez DPH'|trans }}:
+			</td>
+			<td class="list-cart-preview__cell list-cart-preview__cell--price">
+				{{ orderPreview.totalPrice.priceWithoutVat|price }}
+			</td>
+		</tr>
+
+		<tr class="list-cart-preview__row list-cart-preview__row--total">
+			<td class="list-cart-preview__cell">
+				{{ 'Celková výše DPH'|trans }}:
+			</td>
+			<td class="list-cart-preview__cell list-cart-preview__cell--price">
+				{{ orderPreview.totalPrice.vatAmount|price }}
+			</td>
+		</tr>
+
+	</tbody>
+</table>

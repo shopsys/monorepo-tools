@@ -110,7 +110,7 @@
 
 		var $windowActions = $('<div class="window__actions"></div>');
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-button-continue button btn btn-primary"></a>');
+			var $windowButtonContinue = $('<a href="" class="window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
 				.attr('href', options.urlContinue)
@@ -125,7 +125,7 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-button-cancel button btn btn-primary ml-1"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
 				.bind('click.windowEventCancel', options.eventCancel)

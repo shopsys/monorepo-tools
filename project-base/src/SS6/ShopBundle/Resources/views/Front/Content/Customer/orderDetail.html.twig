@@ -9,7 +9,7 @@
 {% block main_content %}
 	<h1>{{ 'Objednávka č.'|trans }} {{order.number}}</h1>
 	<h2>{{ 'Fakturační adresa'|trans }}</h2>
-	<table class="spaced">
+	<table class="table-main">
 		<tr>
 			<td>{{ 'Jméno'|trans }}: </td>
 			<td>{{ order.firstName }}</td>
@@ -59,7 +59,7 @@
 	</table>
 	{% if order.deliveryStreet is not null %}
 		<h2>{{ 'Doručovací adresa'|trans }}</h2>
-		<table class="spaced">
+		<table class="table-main">
 			{% if order.deliveryContactPerson is not null %}
 				<tr>
 					<td>{{ 'Kontaktní osoba'|trans }}: </td>
@@ -94,7 +94,7 @@
 	{% endif %}
 
 	<h2>{{ 'Položky'|trans }}</h2>
-	<table class="spaced">
+	<table class="table-main">
 		<tr>
 			<th>{{ 'Název'|trans }}</th>
 			<th>{{ 'Jednotková cena s DPH'|trans }}</th>
@@ -119,7 +119,7 @@
 	<h2>{{ 'Datum vytvoření'|trans }}</h2>
 	{{ order.createdAt|formatDate }}
 	<h2>{{ 'Celková cena'|trans }}</h2>
-	<table class="spaced">
+	<table class="table-main">
 		<tr>
 			<td>{{ 'S DPH'|trans }}: </td>
 			<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
@@ -131,6 +131,6 @@
 	</table>
 	<br />
 	{% if is_granted('ROLE_CUSTOMER') %}
-		<a href="{{ url('front_customer_orders') }}" class="button btn btn-primary">{{ 'Zpět na přehled objednávek'|trans }}</a>
+		<a href="{{ url('front_customer_orders') }}" class="btn">{{ 'Zpět na přehled objednávek'|trans }}</a>
 	{% endif %}
 {% endblock %}

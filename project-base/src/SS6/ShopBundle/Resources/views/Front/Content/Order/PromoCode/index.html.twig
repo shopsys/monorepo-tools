@@ -1,12 +1,12 @@
 {% if validEnteredPromoCode is null %}
 	<label>
 		{{ 'Slevový kód'|trans }}:
-		<input type="text" value="" id="js-promo-code-input" class="form-control" data-apply-code-url="{{ url('front_promo_code_apply') }}"/>
+		<input type="text" value="" id="js-promo-code-input" class="input" data-apply-code-url="{{ url('front_promo_code_apply') }}"/>
 	</label>
-	<button type="button" id="js-promo-code-submit-button" class="button">{{ 'Vložit'|trans }}</button>
+	<button type="button" id="js-promo-code-submit-button" class="btn">{{ 'Vložit'|trans }}</button>
 {% else %}
 	<div>
-		<span class="in-message in-message--static in-message--success js-flash-message">
+		<span class="in-message in-message--success js-flash-message">
 			{{ 'Vaše sleva'|trans }}: {{ validEnteredPromoCode.percent|formatPercent }}
 			<a href="{{ url('front_promo_code_remove') }}"><i class="fa fa-remove"></i>{{ 'Odebrat'|trans }}</a>
 		</span>

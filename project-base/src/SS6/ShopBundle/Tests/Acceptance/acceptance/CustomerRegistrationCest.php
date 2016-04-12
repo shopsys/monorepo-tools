@@ -21,14 +21,14 @@ class CustomerRegistrationCest {
 		$me->wantTo('use already used email while registration');
 		$me->amOnPage('/registrace/');
 		$registrationPage->register('Roman', 'Štěpánek', 'no-reply@netdevelo.cz', 'user123', 'user123');
-		$me->see('V databázi se již nachází zákazník s tímto e-mailem');
+		$registrationPage->seeEmailError('V databázi se již nachází zákazník s tímto e-mailem');
 	}
 
 	public function testPasswordMismatch(RegistrationPage $registrationPage, AcceptanceTester $me) {
 		$me->wantTo('use mismatching passwords while registration');
 		$me->amOnPage('/registrace/');
 		$registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'missmatchingPassword');
-		$me->see('Hesla se neshodují');
+		$registrationPage->seePasswordError('Hesla se neshodují');
 	}
 
 }

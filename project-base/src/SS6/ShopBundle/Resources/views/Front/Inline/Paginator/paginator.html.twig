@@ -1,18 +1,18 @@
 {% macro paginatorNavigation(paginationResult, entityName) %}
-	<div class="row text-center mb-half">
+	<div class="in-paging">
 		{% set route = getRoute() %}
 		{% set routeParams = getAllRequestParams() %}
 		{% set pageCount = paginationResult.pageCount %}
-		<strong class="mt-half col-md-3">
+		<strong class="in-paging__info">
 			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů')|trim }}
 			{{ paginationResult.fromItem }} - <span class="js-pagination-to-item">{{ paginationResult.toItem }}</span> {{ 'z'|trans }} {{ paginationResult.totalCount }}
 		</strong>
 
-		<div class="col-md-6 text-center">
-			<ul class="pagination mb-0 mt-half">
+		<div class="in-paging__control">
+			<ul class="in-paging__list">
 				{% if pageCount > 1 %}
 					{% if paginationResult.page > 1 %}
-						<li>
+						<li class="in-paging__list__arrow">
 							{% set page = paginationResult.page - 1 %}
 							{% if page == 1 %}
 								{% set page = null %}
@@ -21,7 +21,7 @@
 							<a href="{{ path(route, routeParams) }}" rel ="prev">&lt;</a>
 						</li>
 
-						<li>
+						<li class="in-paging__list__num">
 							{% set routeParams = routeParams|merge({'page': null}) %}
 							{% if paginationResult.page == 2 %}
 								<a href="{{ path(route, routeParams) }}" rel="prev">1</a>
@@ -34,14 +34,14 @@
 					{% set pagerExpand = 2 %}
 
 					{% if paginationResult.page > pagerExpand + 2 %}
-						<li class="disabled">
-							<a href="#" class="cursor-default">...</a>
+						<li class="in-paging__list__separate">
+							<a href="#">...</a>
 						</li>
 
 					{% endif %}
 
 					{% for page in (paginationResult.page - pagerExpand)..(paginationResult.page) if page > 1 and page < paginationResult.page %}
-						<li>
+						<li class="in-paging__list__num">
 							{% set routeParams = routeParams|merge({'page': page}) %}
 							{% if page == (paginationResult.page - 1) %}
 								<a href="{{ path(route, routeParams) }}" rel="prev">{{ page }}</a>
@@ -50,12 +50,12 @@
 							{% endif %}
 						</li>
 					{% endfor %}
-					<li class="active">
+					<li class="in-paging__list__num in-paging__list__num--active">
 						<span>{{ paginationResult.page }}</span>
 					</li>
 
 					{% for page in (paginationResult.page + 1)..(paginationResult.page + pagerExpand) if page > paginationResult.page and page < pageCount %}
-						<li>
+						<li class="in-paging__list__num">
 							{% set routeParams = routeParams|merge({'page': page}) %}
 							{% if page == (paginationResult.page + 1) %}
 								<a href="{{ path(route, routeParams) }}" rel="next">{{ page }}</a>
@@ -66,13 +66,13 @@
 					{% endfor %}
 
 					{% if paginationResult.page <= pageCount - pagerExpand - 2 %}
-						<li class="disabled">
+						<li class="in-paging__list__separate">
 							<a href="#" class="cursor-default">...</a>
 						</li>
 					{% endif %}
 
 					{% if paginationResult.page < pageCount %}
-						<li>
+						<li class="in-paging__list__num">
 							{% set routeParams = routeParams|merge({'page': pageCount}) %}
 							{% if paginationResult.page == (pageCount - 1) %}
 								<a href="{{ path(route, routeParams) }}" rel="next">{{ pageCount }}</a>
@@ -80,7 +80,7 @@
 								<a href="{{ path(route, routeParams) }}">{{ pageCount }}</a>
 							{% endif %}
 						</li>
-						<li>
+						<li class="in-paging__list__arrow">
 							{% set routeParams = routeParams|merge({'page': paginationResult.page + 1}) %}
 							<a href="{{ path(route, routeParams) }}" rel="next">&gt;</a>
 						</li>

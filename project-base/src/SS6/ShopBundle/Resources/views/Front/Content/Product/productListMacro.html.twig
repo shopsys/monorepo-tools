@@ -56,7 +56,7 @@
 					{% if not productDetail.product.isMainVariant %}
 						{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
 					{% else %}
-						<a href="{{ url('front_product_detail', { id: productDetail.product.id }) }}" class="button">{{ 'Vybrat variantu'|trans }}</a>
+						<a href="{{ url('front_product_detail', { id: productDetail.product.id }) }}" class="btn btn--primary">{{ 'Vybrat variantu'|trans }}</a>
 					{% endif %}
 				</div>
 			</li>

@@ -20,13 +20,13 @@
 			<table class="table-cart">
 				<thead class="table-cart__heading">
 					<tr>
-						<th class="table-col-10">{{ 'Obrázek'|trans }}</th>
-						<th class="table-col-35">{{ 'Název'|trans }}</th>
-						<th class="table-col-15">{{ 'Cena za jednotku s DPH'|trans }}</th>
-						<th class="table-col-10">{{ 'Sazba DPH'|trans }}</th>
-						<th class="table-col-15 text-center">{{ 'Množství'|trans }}</th>
-						<th class="table-col-10 text-center">{{ 'Cena s DPH'|trans }}</th>
-						<th class="table-col-5 text-right">&nbsp;</th>
+						<th>{{ 'Obrázek'|trans }}</th>
+						<th>{{ 'Název'|trans }}</th>
+						<th>{{ 'Cena za jednotku s DPH'|trans }}</th>
+						<th>{{ 'Sazba DPH'|trans }}</th>
+						<th>{{ 'Množství'|trans }}</th>
+						<th>{{ 'Cena s DPH'|trans }}</th>
+						<th>&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -61,9 +61,9 @@
 
 							<td class="table-cart__ammount">
 								<span class="form-input-spinbox js-spinbox">
-									<input type="button" class="button form-input-spinbox__button js-spinbox-minus" value="-" />
+									<input type="button" class="btn form-input-spinbox__button js-spinbox-minus" value="-" />
 									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
-									<input type="button" class="button form-input-spinbox__button js-spinbox-plus" value="+" />
+									<input type="button" class="btn form-input-spinbox__button js-spinbox-plus" value="+" />
 									{{ cartItem.product.unit.name }}
 								</span>
 							</td>
@@ -118,28 +118,23 @@
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'button button--large button-primary box-buttons__right'}}) }}
+					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary box-buttons__right'}}) }}
 				{% endif %}
 
-				<a href="{{ url('front_homepage') }}" class="button button--alter box-buttons__left">
+				<a href="{{ url('front_homepage') }}" class="btn box-buttons__left">
 					{{ 'Zpět k nákupu'|trans }}
 				</a>
 			</div>
 		{{ form_end(form) }}
 	{% else %}
-		<div class="row">
-			<div class="col-sm-5 col-xs-12 text-center">
-				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
-			</div>
-			<div class="col-sm-6 col-xs-12">
-				<strong class="heading heading--visible">
-					{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
-				</strong>
-			</div>
-		</div>
+		<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
+
+		<strong class="heading heading--visible">
+			{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
+		</strong>
 
 		<div class="box-buttons">
-			<a href="{{url('front_homepage') }}" class="button button--alter box-buttons__left">
+			<a href="{{url('front_homepage') }}" class="btn box-buttons__left">
 				{{ 'Zpět k nákupu'|trans }}
 			</a>
 		</div>

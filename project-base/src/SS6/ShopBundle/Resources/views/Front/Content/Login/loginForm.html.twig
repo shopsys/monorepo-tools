@@ -9,42 +9,31 @@
 {% endblock %}
 
 {% block main_content %}
-	{{ form_errors(form, {errors_attr: { class: 'in-message--static'}}) }}
+	{{ form_errors(form) }}
 
-	<div class="row">
-		<div class="col-md-4 col-sm-12">
-			{{ form_start(form, {attr: {'multipleForm': true}}) }}
+	{{ form_start(form, {attr: {'multipleForm': true}}) }}
 
-				<h1>{{ 'Přihlášení'|trans }}</h1>
+		<h1>{{ 'Přihlášení'|trans }}</h1>
 
-				<div class="form-group">
-					{{ form_errors(form.email) }}
-					{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
-				</div>
+		{{ form_errors(form.email) }}
+		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 
-				<div class="form-group">
-					{{ form_errors(form.password) }}
-					{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
-				</div>
+		{{ form_errors(form.password) }}
+		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 
-				<div class="form-group">
-					<label>
-						{{ form_widget(form.rememberMe) }}
-						{{ 'Zapamatuj si mé přihlášení'|trans }}
-						<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
-							data-toggle="tooltip" data-placement="right"
-							title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
-						 ></i>
-					</label>
-				</div>
+		<label>
+			{{ form_widget(form.rememberMe) }}
+			{{ 'Zapamatuj si mé přihlášení'|trans }}
+			<i class="fa fa-info-circle form-line__info js-tooltip"
+				data-toggle="tooltip" data-placement="right"
+				title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+			 ></i>
+		</label>
 
-				{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
+		{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
 
-				<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+		<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
 
-			{{ form_end(form) }}
-
-		</div>
-	</div>
+	{{ form_end(form) }}
 
 {% endblock %}

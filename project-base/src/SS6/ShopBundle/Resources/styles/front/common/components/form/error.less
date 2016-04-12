@@ -1,37 +1,89 @@
 /*
 Form error
-===========
-Error state of input, multiple variants - on element, on wrapping element, used with JS
 
-	<div class="form-line">
-		<label class="form-line__label">
-			Type 1
-		</label>
-		<span class="form-line__field form-error">
-			<input class="form-control" type="text">
-		</span>
-	</div>
-
-	<div class="form-line">
-		<label class="form-line__label">
-			Type 2
-		</label>
-		<span class="form-line__field">
-			<input class="form-control form-error" type="text">
-		</span>
-	</div>
 */
 
 .form-error {
-	select, input, textarea {
-		background: @bg-alert;
-		border: 1px solid @color-red;
-	}
-}
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
 
-select, input, textarea {
-	&.form-error {
-		background: @bg-alert;
-		border: 1px solid @color-red;
+	&--inline {
+		.flex();
+		.flex-align-items(baseline);
+		margin-bottom: 5px;
+	}
+
+	&__icon {
+		display: inline-block;
+		vertical-align: middle;
+		width: 15px;
+		height: 15px;
+
+		color: @color-alert;
+		font-weight: bold;
+		font-size: 14px;
+		text-align: center;
+
+
+		.form-error--inline & {
+			width: auto;
+			margin-right: 5px;
+		}
+	}
+
+	&__list {
+		.reset-ul();
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		width: 120px;
+		margin-left: -60px;
+		margin-top: 10px;
+		padding: 5px;
+		display: none;
+
+		background: rgba(0,0,0, 0.7);
+		color: @color-f;
+		text-align: center;
+
+		&:after {
+			position: absolute;
+			top: -6px;
+			left: 50%;
+			margin-left: -6px;
+			content: '';
+
+			border-bottom: 6px solid rgba(0,0,0, 0.7);
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+		}
+
+		.form-error:hover & {
+			display: block;
+		}
+
+		.form-error--inline:hover & {
+			display: inline-block;
+		}
+
+		.form-error--inline & {
+			display: inline-block;
+			position: static;
+			width: auto;
+			padding: 0;
+			margin: 0;
+
+			background: none;
+			color: @color-base;
+
+			&:after {
+				display: none;
+			}
+		}
+
+		li {
+			font-size: 12px;
+		}
 	}
 }

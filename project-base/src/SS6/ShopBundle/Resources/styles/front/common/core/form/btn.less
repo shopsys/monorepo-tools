@@ -1,0 +1,60 @@
+/*
+Default buttons
+===========
+button types
+
+*/
+
+.btn {
+	width: auto;
+	height: @btn-height;
+	padding: 5px 15px;
+	line-height: @btn-height - 10;
+	vertical-align:middle;
+	display: inline-block;
+
+	border: 0;
+	color: @btn-color;
+	background: @btn-bg;
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+	font-size: 13px;
+
+	.set-transition();
+	.transition(~"background, color");
+
+	&:hover {
+		color: @btn-color-hover;
+		background: @btn-bg-hover;
+	}
+
+	&--primary {
+		color: @btn-primary-color;
+		background: @btn-primary-bg;
+
+		&:hover {
+			color: @btn-primary-color-hover;
+			background: @btn-primary-bg-hover;
+		}
+	}
+
+	&--disabled {
+		color: @color-7;
+		background: @color-e;
+		cursor: no-drop;
+
+		&:hover {
+			color: @color-7;
+			background: @color-e;
+		}
+	}
+}
+
+.btn-no-style {
+	padding: 0;
+	display: inline-block;
+
+	border: 0;
+	background: none;
+}
