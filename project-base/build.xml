@@ -228,6 +228,7 @@
 		<mkdir dir="${path.app}/lock" />
 		<mkdir dir="${path.root}/docs/admin" />
 		<mkdir dir="${path.root}/docs/frontend" />
+		<mkdir dir="${path.web}/content" />
 		<mkdir dir="${path.web}/content/feeds" />
 		<mkdir dir="${path.web}/content/sitemaps" />
 
