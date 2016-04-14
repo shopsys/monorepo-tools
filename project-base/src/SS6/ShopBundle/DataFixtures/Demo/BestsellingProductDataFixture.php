@@ -16,6 +16,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 	 */
 	public function load(ObjectManager $manager) {
 		$bestsellingProductFacade = $this->get(BestsellingProductFacade::class);
+		/* @var $bestsellingProductFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade */
 
 		$bestsellingProductFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
