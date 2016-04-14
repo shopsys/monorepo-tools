@@ -92,7 +92,7 @@ class DirectoryStructureCreator {
 		$directories = [];
 		foreach ($sizeConfigs as $sizeConfig) {
 			$relativePath = $this->imageLocator->getRelativeImagePath($entityName, $type, $sizeConfig->getName());
-			$directories[] = $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
+			$directories[] = $this->imageDir . $relativePath;
 		}
 
 		return $directories;

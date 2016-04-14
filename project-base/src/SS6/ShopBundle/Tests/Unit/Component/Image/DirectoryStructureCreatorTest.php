@@ -13,7 +13,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {
-		$imageDir = 'imageDir';
+		$imageDir = 'imageDir/';
 		$domainImageDir = 'domainImageDir';
 		$imageEntityConfigByClass = [
 			new ImageEntityConfig(

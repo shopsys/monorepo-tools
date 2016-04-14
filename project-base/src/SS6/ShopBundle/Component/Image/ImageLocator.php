@@ -41,7 +41,7 @@ class ImageLocator {
 	public function getAbsoluteImageFilepath(Image $image, $sizeName) {
 		$relativePath = $this->getRelativeImageFilepath($image, $sizeName);
 
-		return $this->imageDir . DIRECTORY_SEPARATOR . $relativePath;
+		return $this->imageDir . $relativePath;
 	}
 
 	/**

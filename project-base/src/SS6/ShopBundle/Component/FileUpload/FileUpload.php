@@ -117,7 +117,7 @@ class FileUpload {
 	 */
 	public function getUploadDirectory($isImage, $category, $targetDirectory) {
 		return ($isImage ? $this->imageDir : $this->uploadedFileDir)
-			. DIRECTORY_SEPARATOR . $category
+			. $category
 			. ($targetDirectory !== null ? DIRECTORY_SEPARATOR . $targetDirectory : '');
 	}
 

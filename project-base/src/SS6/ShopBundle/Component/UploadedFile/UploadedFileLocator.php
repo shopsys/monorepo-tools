@@ -80,7 +80,7 @@ class UploadedFileLocator {
 	 * @return string
 	 */
 	public function getAbsoluteFilePath($entityName) {
-		return $this->uploadedFileDir . DIRECTORY_SEPARATOR . $this->getRelativeFilePath($entityName);
+		return $this->uploadedFileDir . $this->getRelativeFilePath($entityName);
 	}
 
 }
