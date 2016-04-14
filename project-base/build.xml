@@ -203,6 +203,13 @@
 		</exec>
 	</target>
 
+	<target name="db-migrations-count">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="shopsys:migrations:count" />
+		</exec>
+	</target>
+
 	<target name="dirs-clean">
  		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.app}/lock/">
