@@ -22,21 +22,27 @@
 	}
 
 	&__top {
-		.flex-order(-1);
-		.flex();
-		.flex-align-items(center);
-		padding: 5px;
-		width: 100%;
+		display: none;
+	}
+}
 
-		background: @color-e;
+@media @query-lg {
+	.header {
+		&__top {
+			.flex-order(-1);
+			.flex();
+			.flex-align-items(center);
+			width: 100%;
 
-		&__left {
-			.flex-grow(1);
+			background: @color-e;
+
+			&__left {
+				.flex-grow(1);
+			}
+
+			&__right {
+				.flex-grow(1);
+			}
 		}
-
-		&__right {
-			.flex-grow(1);
-		}
-
 	}
 }

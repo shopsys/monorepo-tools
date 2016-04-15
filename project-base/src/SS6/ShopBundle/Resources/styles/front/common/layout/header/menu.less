@@ -1,49 +1,18 @@
 .menu {
-	float: right;
 	.reset-ul();
 
-	&--reverse {
-		float: left;
-	}
+	font-size: 0;
 
 	&__item {
-		float: left;
+		display: inline-block;
+		vertical-align: middle;
 
-		border-left: 1px solid @color-border;
+		font-size: @font-size;
 
-		a {
-			padding: 10px 20px;
-			height: 40px;
-			line-height: 20px;
+		&__link {
 			display: block;
-
-			color: @color-base;
-			font-size: 12px;
-			text-transform: uppercase;
-			text-decoration: none;
-
-			&:hover {
-				text-decoration: none;
-			}
+			padding: 5px;
+			margin-left: 5px;
 		}
-
-		.menu--reverse & {
-			border-right: 1px solid @color-border;
-			border-left: 0;
-		}
-
-		.menu--footer & {
-			border-left: 0;
-
-			a {
-				color: @color-f;
-
-				&:hover {
-					color: @color-f;
-					text-decoration: underline;
-				}
-			}
-		}
-
 	}
 }

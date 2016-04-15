@@ -1,0 +1,43 @@
+.menu-iconic {
+	.reset-ul();
+
+	font-size: 0;
+	text-align: right;
+
+	&__item {
+		display: inline-block;
+		vertical-align: middle;
+
+		font-size: @font-size;
+
+		text-align: left;
+
+		&__link {
+			display: block;
+			padding: 5px;
+			margin-right: 5px;
+
+			text-decoration: none;
+
+			.svg {
+				display: inline-block;
+				vertical-align: middle;
+
+				font-size: 11px;
+			}
+
+			span {
+				display: inline-block;
+				vertical-align: middle;
+
+				text-decoration: underline;
+			}
+
+			&:hover {
+				span {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+}
