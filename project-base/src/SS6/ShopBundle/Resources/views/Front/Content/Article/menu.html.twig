@@ -1,5 +1,5 @@
 {% for article in articles %}
-	<li class="articles-menu__item">
+	<li class="menu__item">
 		<a href="{{ url('front_article_detail', { id: article.id }) }}">{{ article.name }}</a>
 	</li>
 {% endfor %}
