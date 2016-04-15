@@ -28,7 +28,6 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
 		];
 		$productEditFacade->edit($product->getId(), $productEditData);
-		$manager->flush($product);
 	}
 
 	/**

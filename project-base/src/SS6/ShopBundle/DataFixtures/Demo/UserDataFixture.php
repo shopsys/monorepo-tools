@@ -7,10 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
-use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\DeliveryAddress;
-use SS6\ShopBundle\Model\Customer\RegistrationService;
-use SS6\ShopBundle\Model\Customer\UserData;
+use SS6\ShopBundle\Model\Customer\CustomerData;
+use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -20,9 +18,6 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$registrationService = $this->get(RegistrationService::class);
-		/* @var $registrationService \SS6\ShopBundle\Model\Customer\RegistrationService */
-
 		$loaderService = $this->get(UserDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
 
@@ -30,50 +25,19 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 		/* @var $customersData \SS6\ShopBundle\Model\Customer\CustomerData[] */
 
 		foreach ($customersData as $index => $customerData) {
-			if ($customerData->deliveryAddressData !== null) {
-				$deliveryAddress = new DeliveryAddress($customerData->deliveryAddressData);
-			} else {
-				$deliveryAddress = null;
-			}
-			$this->createCustomer(
-				self::USER_PREFIX . $index,
-				$manager,
-				$registrationService,
-				$customerData->userData,
-				new BillingAddress($customerData->billingAddressData),
-				$deliveryAddress
-			);
+			$this->createCustomer($customerData, self::USER_PREFIX . $index);
 		}
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
-	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress $deliveryAddress
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
+	 * @param string $referenceName
 	 */
-	public function createCustomer(
-		$referenceName,
-		ObjectManager $manager,
-		RegistrationService $registrationService,
-		UserData $userData,
-		BillingAddress $billingAddress,
-		DeliveryAddress $deliveryAddress = null
-	) {
-		$user = $registrationService->create(
-			$userData,
-			$billingAddress,
-			$deliveryAddress
-		);
+	private function createCustomer(CustomerData $customerData, $referenceName = null) {
+		$customerEditFacade = $this->get(CustomerEditFacade::class);
+		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
 
-		$manager->persist($user);
-		$manager->persist($billingAddress);
-		if ($deliveryAddress !== null) {
-			$manager->persist($deliveryAddress);
-		}
-		$manager->flush($user);
-
+		$user = $customerEditFacade->create($customerData);
 		$this->addReference($referenceName, $user);
 	}
 

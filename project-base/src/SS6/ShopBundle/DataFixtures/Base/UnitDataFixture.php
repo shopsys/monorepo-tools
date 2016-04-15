@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Product\Unit\Unit;
 use SS6\ShopBundle\Model\Product\Unit\UnitData;
+use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture {
 
@@ -18,19 +18,21 @@ class UnitDataFixture extends AbstractReferenceFixture {
 		$unitData = new UnitData();
 
 		$unitData->name = ['cs' => 'ks', 'en' => 'pcs'];
-		$this->createUnit($manager, self::PCS, $unitData);
+		$this->createUnit($unitData, self::PCS);
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param string|null $referenceName
 	 */
-	private function createUnit(ObjectManager $manager, $referenceName, UnitData $unitData) {
-		$unit = new Unit($unitData);
-		$manager->persist($unit);
-		$manager->flush($unit);
-		$this->addReference($referenceName, $unit);
+	private function createUnit(UnitData $unitData, $referenceName = null) {
+		$unitFacade = $this->get(UnitFacade::class);
+		/* @var $unitFacade \SS6\ShopBundle\Model\Product\Unit\UnitFacade */
+
+		$unit = $unitFacade->create($unitData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $unit);
+		}
 	}
 
 }

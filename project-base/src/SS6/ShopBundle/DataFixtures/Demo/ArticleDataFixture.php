@@ -71,6 +71,7 @@ class ArticleDataFixture extends AbstractReferenceFixture {
 	private function createArticle(ArticleData $articleData, $referenceName = null) {
 		$articleEditFacade = $this->get(ArticleEditFacade::class);
 		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
+
 		$article = $articleEditFacade->create($articleData);
 		if ($referenceName !== null) {
 			$this->addReference($referenceName, $article);

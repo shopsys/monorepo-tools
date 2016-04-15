@@ -26,8 +26,6 @@ class ScriptDataFixture extends AbstractReferenceFixture {
 		$scriptData->placement = Script::PLACEMENT_ORDER_SENT_PAGE;
 
 		$this->createScript($scriptData);
-
-		$manager->flush();
 	}
 
 	/**

@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture {
 
@@ -23,26 +23,33 @@ class VatDataFixture extends AbstractReferenceFixture {
 
 		$vatData->name = 'Nulová sazba';
 		$vatData->percent = '0';
-		$this->createVat($manager, self::VAT_ZERO, $vatData);
+		$this->createVat($vatData, self::VAT_ZERO);
 
 		$vatData->name = 'Druhá nižší sazba';
 		$vatData->percent = '10';
-		$this->createVat($manager, self::VAT_SECOND_LOW, $vatData);
+		$this->createVat($vatData, self::VAT_SECOND_LOW);
 
 		$vatData->name = 'Nižší sazba';
 		$vatData->percent = '15';
-		$this->createVat($manager, self::VAT_LOW, $vatData);
+		$this->createVat($vatData, self::VAT_LOW);
 
 		$vatData->name = 'Vyšší sazba';
 		$vatData->percent = '21';
-		$this->createVat($manager, self::VAT_HIGH, $vatData);
+		$this->createVat($vatData, self::VAT_HIGH);
 	}
 
-	private function createVat(ObjectManager $manager, $referenceName, VatData $vatData) {
-		$vat = new Vat($vatData);
-		$manager->persist($vat);
-		$manager->flush($vat);
-		$this->addReference($referenceName, $vat);
+	/**
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @param string|null $referenceName
+	 */
+	private function createVat(VatData $vatData, $referenceName = null) {
+		$vatFacade = $this->get(VatFacade::class);
+		/* @var $vatFacade \SS6\ShopBundle\Model\Pricing\Vat\VatFacade */
+
+		$vat = $vatFacade->create($vatData);
+		if ($referenceName !== null) {
+			$this->addReference($referenceName, $vat);
+		}
 	}
 
 }

@@ -90,8 +90,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
 		$payment = $paymentEditFacade->create($paymentEditData);
 
-		foreach ($transportsReferenceNames as $transportsReferenceName) {
-			$payment->addTransport($this->getReference($transportsReferenceName));
+		foreach ($transportsReferenceNames as $transportReferenceName) {
+			$payment->addTransport($this->getReference($transportReferenceName));
 		}
 
 		$this->addReference($referenceName, $payment);
