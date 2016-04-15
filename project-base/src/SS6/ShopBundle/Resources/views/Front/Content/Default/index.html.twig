@@ -13,6 +13,10 @@
 	{{- title -}}
 {% endblock %}
 
+{% block logo %}
+	<h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Internetový obchod'|trans }}"></h1>
+{% endblock %}
+
 {% block main_content %}
 
 	{% if sliderItems is not empty %}

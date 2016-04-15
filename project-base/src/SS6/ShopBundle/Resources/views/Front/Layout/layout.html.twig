@@ -1,4 +1,5 @@
 {% extends '@SS6Shop/Front/Layout/base.html.twig' %}
+{% use '@SS6Shop/Front/Layout/header.html.twig' %}
 
 {% block html_body %}
 	{% set adminLoggedAsCustomer = is_granted(constant('SS6\\ShopBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
@@ -18,7 +19,7 @@
 		<div class="web__line web__line--light">
 			<div class="web__header">
 				<div class="web__container">
-					{% include '@SS6Shop/Front/Layout/header.html.twig' %}
+					{{ block('header') }}
 				</div>
 			</div>
 			<div class="web__container">

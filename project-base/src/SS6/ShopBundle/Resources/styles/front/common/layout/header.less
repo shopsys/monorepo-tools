@@ -6,8 +6,8 @@
 	.flex-align-items(center);
 
 	&__logo {
-		.flex-grow(1);
-		.flex-order(1);
+		width: 100%;
+		padding: 10px;
 	}
 
 	&__middle {
@@ -23,6 +23,15 @@
 
 	&__top {
 		display: none;
+	}
+}
+
+@media @query-md {
+	.header {
+		&__logo {
+			.flex-grow(1);
+			.flex-order(1);
+		}
 	}
 }
 
