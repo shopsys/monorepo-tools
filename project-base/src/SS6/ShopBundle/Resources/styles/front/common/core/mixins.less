@@ -35,11 +35,6 @@
 	margin: auto;
 }
 
-.set-transition(@this-time: @transition-time, @this-function: @transition) {
-	transition-timing-function: @this-function !important;
-	transition-duration: @this-time !important;
-}
-
 .cfx() {
 	*zoom:1;
 
@@ -176,11 +171,11 @@
 	height: @height;
 }
 
-.transition(@transition) {
-	-webkit-transition: @transition;
-	-moz-transition: @transition;
-	-o-transition: @transition;
-	transition: @transition;
+.transition(@transition, @transition-settings: @transition-settings) {
+	-webkit-transition: @transition @transition-settings;
+	-moz-transition: @transition @transition-settings;
+	-o-transition: @transition @transition-settings;
+	transition: @transition @transition-settings;
 }
 
 .transform(@transform) {
