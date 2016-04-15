@@ -1,12 +1,42 @@
 .header {
-	padding: 20px 0;
+	padding: 0 0 20px;
 	position: relative;
+	.flex();
+	.flex-wrap(wrap);
+	.flex-align-items(center);
 
-	&__panel {
-		.cfx();
-		clear: both;
-		margin-top: 20px;
+	&__logo {
+		.flex-grow(1);
+		.flex-order(1);
+	}
 
-		background: @bg-box;
+	&__middle {
+		.flex-grow(0);
+		.flex-order(2);
+		width: 300px;
+	}
+
+	&__cart {
+		.flex-grow(1);
+		.flex-order(3);
+	}
+
+	&__top {
+		.flex-order(-1);
+		.flex();
+		.flex-align-items(center);
+		padding: 5px;
+		width: 100%;
+
+		background: @color-e;
+
+		&__left {
+			.flex-grow(1);
+		}
+
+		&__right {
+			.flex-grow(1);
+		}
+
 	}
 }

@@ -1,13 +1,9 @@
 .logo {
-	float: left;
+	display: inline-block;
+	width: 220px;
+	height: 70px;
+	max-width: 100%;
 
-	a {
-		color: @color-primary;
-		font-size: 34px;
-		text-decoration: none;
-
-		&:hover {
-			text-decoration: none;
-		}
-	}
+	.background('logo.png');
+	background-size: contain;
 }
