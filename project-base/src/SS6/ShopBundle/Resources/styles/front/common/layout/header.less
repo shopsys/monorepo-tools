@@ -11,18 +11,22 @@
 	}
 
 	&__middle {
-		.flex-grow(0);
+		width: 100%;
 		.flex-order(2);
-		width: 300px;
 	}
 
 	&__cart {
-		.flex-grow(1);
-		.flex-order(3);
+		width: 38px;
 	}
 
 	&__top {
 		display: none;
+	}
+
+	&__mobile {
+		.width-calc(~"100% - 38px", 80%);
+
+		text-align: right;
 	}
 }
 
@@ -31,6 +35,21 @@
 		&__logo {
 			.flex-grow(1);
 			.flex-order(1);
+		}
+
+		&__middle {
+			.flex-grow(0);
+			.flex-order(2);
+			width: 300px;
+		}
+
+		&__cart {
+			.flex-grow(1);
+			.flex-order(3);
+		}
+
+		&__mobile {
+			display: none;
 		}
 	}
 }

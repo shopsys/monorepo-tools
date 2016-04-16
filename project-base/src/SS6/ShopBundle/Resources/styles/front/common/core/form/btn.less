@@ -57,3 +57,63 @@ button types
 	border: 0;
 	background: none;
 }
+
+.btn-tap {
+	display: inline-block;
+	min-width: 28px;
+	height: 28px;
+	line-height: 28px;
+	margin: 0 5px;
+
+	text-align: center;
+
+	&--menu {
+		.svg {
+			margin-right: 5px;
+			vertical-align: baseline;
+
+			font-size: 11px;
+		}
+	}
+
+	&__in {
+		padding: 0 10px;
+		display: block;
+		position: relative;
+
+		color: @color-base;
+		text-decoration: none;
+		font-size: 16px;
+
+		.transition(color);
+
+		.btn-tap--menu & {
+			background: @color-light;
+			font-size: 14px;
+		}
+
+		&:hover, &:active {
+			color: @color-primary;
+			text-decoration: none;
+
+			.btn-tap--menu & {
+				color: @color-f;
+				background: @color-primary;
+			}
+		}
+
+		&__info {
+			position: absolute;
+			top: -3px;
+			right: -3px;
+			width: 16px;
+			height: 16px;
+			line-height: 16px;
+
+			.border-radius(50%);
+			color: @color-f;
+			background: @color-red;
+			font-size: 12px;
+		}
+	}
+}

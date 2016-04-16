@@ -18,6 +18,27 @@
 			{{ render(controller('SS6ShopBundle:Front/Search:box')) }}
 		</div>
 
+		<div class="header__mobile">
+			<span class="btn-tap btn-tap--menu left ml0">
+				<span class="btn-tap__in">
+					<i class="svg svg-burger-menu"></i>
+					{{ 'Menu'|trans }}
+				</span>
+			</span>
+
+			<span class="btn-tap">
+				<a href="tel:777123456" class="btn-tap__in">
+					<i class="svg svg-phone"></i>
+				</a>
+			</span>
+
+			<span class="btn-tap">
+				<span class="btn-tap__in">
+					<i class="svg svg-user"></i>
+				</span>
+			</span>
+		</div>
+
 		<div class="header__cart">
 			{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
 		</div>
