@@ -1,3 +1,24 @@
 .contact-us {
 	display: none;
 }
+
+@media @query-md {
+	.contact-us {
+		display: block;
+		margin-top: 5px;
+
+		color: @color-inactive;
+		font-size: 11px;
+
+		&__phone {
+			display: inline-block;
+			margin-right: 10px;
+
+			.svg {
+				margin-right: 3px;
+
+				font-size: 10px;
+			}
+		}
+	}
+}

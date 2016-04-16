@@ -1,6 +1,8 @@
 <div id="cart-box" class="cart" data-reload-url="{{ url('front_cart_box') }}" >
 	<a class="cart__block" href="{{ url('front_cart') }}">
-		<strong>{{ 'Košík'|trans }}</strong>
+		<span class="cart__icon">
+			<i class="svg svg-cart"></i>
+		</span>
 		<div class="cart__info">
 			{% if cart.isEmpty %}
 				{{ 'Váš nákupní košík je prázdný'|trans }}
