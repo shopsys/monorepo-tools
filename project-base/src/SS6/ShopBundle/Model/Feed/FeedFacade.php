@@ -18,11 +18,6 @@ class FeedFacade {
 	const BATCH_SIZE = 200;
 
 	/**
-	 * @var string
-	 */
-	private $feedsPath;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
@@ -58,7 +53,6 @@ class FeedFacade {
 	private $em;
 
 	public function __construct(
-		$feedsPath,
 		FeedXmlWriter $feedXmlWriter,
 		Domain $domain,
 		Filesystem $filesystem,
@@ -66,7 +60,6 @@ class FeedFacade {
 		FeedGenerationConfigFactory $feedGenerationConfigFactory,
 		EntityManager $em
 	) {
-		$this->feedsPath = $feedsPath;
 		$this->feedXmlWriter = $feedXmlWriter;
 		$this->domain = $domain;
 		$this->filesystem = $filesystem;

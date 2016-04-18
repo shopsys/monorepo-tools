@@ -41,7 +41,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$localArchiveFilepath = $cachePath . DIRECTORY_SEPARATOR . 'demoImages.zip';
 		$imagesPath = $this->getContainer()->getParameter('ss6.image_dir');
 		$domainImagesPath = $this->getContainer()->getParameter('ss6.domain_images_dir');
-		$unpackedDomainImagesPath = $imagesPath . DIRECTORY_SEPARATOR . 'domain';
+		$unpackedDomainImagesPath = $imagesPath . 'domain';
 
 		if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {
 			if ($this->unpackImages($output, $imagesPath, $localArchiveFilepath)) {

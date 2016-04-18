@@ -94,7 +94,7 @@ class FeedConfigFacade {
 	 */
 	public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {
 		$feedHash = $this->setting->get(Setting::FEED_HASH, SettingValue::DOMAIN_ID_COMMON);
-		return $this->feedDir . '/' . $feedConfig->getFeedFilename($domainConfig, $feedHash);
+		return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
 	}
 
 }

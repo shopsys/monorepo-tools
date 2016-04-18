@@ -418,11 +418,6 @@ services:
       - @ss6.shop.feed.heureka.heureka_delivery_item_repository
       - @ss6.shop.feed.zbozi.zbozi_item_repository
 
-  ss6.shop.feed.feed_facade:
-    class: SS6\ShopBundle\Model\Feed\FeedFacade
-    arguments:
-      - %ss6.feed_dir%
-
   ss6.shop.feed.heureka.heureka_item_repository:
     class: SS6\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository
 

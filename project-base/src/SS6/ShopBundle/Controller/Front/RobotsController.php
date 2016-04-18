@@ -31,7 +31,7 @@ class RobotsController extends FrontBaseController {
 		$sitemapsUrlPrefix = $this->get('service_container')->getParameter('ss6.sitemaps_url_prefix');
 		$sitemapFilePrefix = $this->sitemapService->getSitemapFilePrefixForDomain($this->domain->getId());
 
-		$sitemapUrl = $this->domain->getUrl() . $sitemapsUrlPrefix . $sitemapFilePrefix . '.xml';
+		$sitemapUrl = $this->domain->getUrl() . $sitemapsUrlPrefix . '/' . $sitemapFilePrefix . '.xml';
 
 		$response = new Response();
 		$response->headers->set('Content-Type', 'text/plain');
