@@ -42,12 +42,6 @@ doctrine:
         alias: SS6ShopBundleComponent
         prefix: SS6\ShopBundle\Component
         is_bundle: false
-      SS6ShopBundleTestsUnitComponentValidator:
-        type: annotation
-        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Tests/Unit/Component/Validator
-        alias: SS6ShopBundleTestsUnitComponentValidator
-        prefix: SS6\ShopBundle\Tests\Unit\Component\Validator
-        is_bundle: false
     hydrators:
       GroupedScalarHydrator: \SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
