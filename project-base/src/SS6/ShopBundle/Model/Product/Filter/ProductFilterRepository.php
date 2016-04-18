@@ -80,22 +80,24 @@ class ProductFilterRepository {
 		$maximalPrice,
 		PricingGroup $pricingGroup
 	) {
-		$priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
-		if ($minimalPrice !== null) {
-			$priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
-			$productsQueryBuilder->setParameter('minimalPrice', $minimalPrice);
+		if ($maximalPrice !== null || $minimalPrice !== null) {
+			$priceLimits = 'pcp.product = p AND pcp.pricingGroup = :pricingGroup';
+			if ($minimalPrice !== null) {
+				$priceLimits .= ' AND pcp.priceWithVat >= :minimalPrice';
+				$productsQueryBuilder->setParameter('minimalPrice', $minimalPrice);
+			}
+			if ($maximalPrice !== null) {
+				$priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
+				$productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
+			}
+			$this->queryBuilderService->addOrExtendJoin(
+				$productsQueryBuilder,
+				ProductCalculatedPrice::class,
+				'pcp',
+				$priceLimits
+			);
+			$productsQueryBuilder->setParameter('pricingGroup', $pricingGroup);
 		}
-		if ($maximalPrice !== null) {
-			$priceLimits .= ' AND pcp.priceWithVat <= :maximalPrice';
-			$productsQueryBuilder->setParameter('maximalPrice', $maximalPrice);
-		}
-		$this->queryBuilderService->addOrExtendJoin(
-			$productsQueryBuilder,
-			ProductCalculatedPrice::class,
-			'pcp',
-			$priceLimits
-		);
-		$productsQueryBuilder->setParameter('pricingGroup', $pricingGroup);
 	}
 
 	/**
