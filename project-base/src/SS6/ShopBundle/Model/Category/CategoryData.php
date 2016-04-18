@@ -2,13 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Category;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Form\UrlListData;
 use SS6\ShopBundle\Model\Category\Category;
 
-/**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Category\Category")
- */
 class CategoryData {
 
 	/**

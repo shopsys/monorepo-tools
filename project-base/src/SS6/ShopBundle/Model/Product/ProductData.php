@@ -2,12 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Product\Product;
 
 /**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Product")
- *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
 class ProductData {

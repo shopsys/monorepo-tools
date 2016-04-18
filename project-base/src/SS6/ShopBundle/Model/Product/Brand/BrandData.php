@@ -2,12 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Product\Brand;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
 
-/**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Product\Brand\Brand")
- */
 class BrandData {
 
 	/**
