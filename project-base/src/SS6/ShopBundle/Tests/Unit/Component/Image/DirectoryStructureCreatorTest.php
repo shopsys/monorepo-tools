@@ -41,13 +41,8 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 			->method('mkdir')
 			->with($this->callback(function ($actual) {
 				$expected = [
-					'imageDir' . DIRECTORY_SEPARATOR
-						. 'entityName1' . DIRECTORY_SEPARATOR
-						. 'sizeName1_1' . DIRECTORY_SEPARATOR,
-					'imageDir' . DIRECTORY_SEPARATOR
-						. 'entityName2' . DIRECTORY_SEPARATOR
-						. 'type' . DIRECTORY_SEPARATOR
-						. 'sizeName2_1' . DIRECTORY_SEPARATOR,
+					'imageDir/entityName1/sizeName1_1/',
+					'imageDir/entityName2/type/sizeName2_1/',
 					'domainImageDir',
 				];
 				asort($expected);

@@ -73,6 +73,6 @@ class ImageLocator {
 			$pathParts[] = $sizeName;
 		}
 
-		return implode(DIRECTORY_SEPARATOR, $pathParts) . DIRECTORY_SEPARATOR;
+		return implode('/', $pathParts) . '/';
 	}
 }

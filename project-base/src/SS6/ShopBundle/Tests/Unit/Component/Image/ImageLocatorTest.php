@@ -77,25 +77,25 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 				'Name_1',
 				'TypeName_1',
 				'SizeName_1_1',
-				'Name_1' . DIRECTORY_SEPARATOR . 'TypeName_1' . DIRECTORY_SEPARATOR . 'SizeName_1_1' . DIRECTORY_SEPARATOR,
+				'Name_1/TypeName_1/SizeName_1_1/',
 			],
 			[
 				'Name_1',
 				'TypeName_1',
 				null,
-				'Name_1' . DIRECTORY_SEPARATOR . 'TypeName_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR,
+				'Name_1/TypeName_1/' . ImageConfig::DEFAULT_SIZE_NAME . '/',
 			],
 			[
 				'Name_1',
 				null,
 				'SizeName_0_1',
-				'Name_1' . DIRECTORY_SEPARATOR . 'SizeName_0_1' . DIRECTORY_SEPARATOR,
+				'Name_1/SizeName_0_1/',
 			],
 			[
 				'Name_1',
 				null,
 				null,
-				'Name_1' . DIRECTORY_SEPARATOR . ImageConfig::DEFAULT_SIZE_NAME . DIRECTORY_SEPARATOR,
+				'Name_1/' . ImageConfig::DEFAULT_SIZE_NAME . '/',
 			],
 		];
 	}
