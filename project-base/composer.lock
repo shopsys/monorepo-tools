@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3067f7c88f29c704514c1f25a8d5d462",
-    "content-hash": "c5efb2f9326114458ca63f4e5f774ffe",
+    "hash": "b99b8ec67a35bca87ea4167da09b09c0",
+    "content-hash": "9d805811bf80bd996dd22e3f308a15ba",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -4158,16 +4158,16 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "dev-rv-deploy-lock",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "4da3bed"
+                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/migrations/zipball/4da3bedef00f3a1e27122b0b7b33241102a2a722",
-                "reference": "4da3bed",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/dc0f6367390796e1f71a89983d9ebf1658e3632a",
+                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a",
                 "shasum": ""
             },
             "require": {
@@ -4189,10 +4189,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/shopsys/migrations/tree/rv-deploy-lock",
+                "source": "https://github.com/shopsys/migrations/tree/master",
                 "issues": "https://github.com/shopsys/migrations/issues"
             },
-            "time": "2016-04-15 08:43:32"
+            "time": "2016-04-19 07:18:25"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -5746,7 +5746,6 @@
         "fp/jsformvalidator-bundle": 20,
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
-        "shopsys/migrations": 20,
         "symfony-cmf/routing": 20,
         "timwhitlock/jparser": 20
     },
