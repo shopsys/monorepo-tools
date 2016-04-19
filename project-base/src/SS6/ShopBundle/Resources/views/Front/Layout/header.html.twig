@@ -34,9 +34,17 @@
 			</span>
 
 			<span class="btn-tap">
-				<span class="btn-tap__in">
-					<i class="svg svg-user"></i>
-				</span>
+				{% if is_granted('ROLE_CUSTOMER') %}
+					<a href="{{ url('front_customer_edit') }}" class="btn-tap__in">
+						<i class="svg svg-user"></i>
+					</a>
+				{% else %}
+					<a href="{{ url('front_login') }}"
+						onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+						class="btn-tap__in">
+						<i class="svg svg-user"></i>
+					</a>
+				{% endif %}
 			</span>
 		</div>
 
@@ -53,7 +61,7 @@
 				<ul class="menu-iconic">
 					{% if is_granted('ROLE_CUSTOMER') %}
 						<li class="menu-iconic__item">
-							<a href="#" class="menu-iconic__item__link">
+							<a href="{{ url('front_customer_edit') }}" class="menu-iconic__item__link">
 								<i class="svg svg-user"></i>
 								<span>
 									{{ app.user.firstName }} {{ app.user.lastName }}
