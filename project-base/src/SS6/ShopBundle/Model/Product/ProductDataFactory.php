@@ -84,6 +84,7 @@ class ProductDataFactory {
 		$productData->categoriesByDomainId = $product->getCategoriesIndexedByDomainId();
 		$productData->priceCalculationType = $product->getPriceCalculationType();
 		$productData->brand = $product->getBrand();
+		$productData->orderingPriority = $product->getOrderingPriority();
 
 		return $productData;
 	}

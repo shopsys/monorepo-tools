@@ -117,6 +117,11 @@ class ProductData {
 	 */
 	public $variantAlias;
 
+	/**
+	 * @var int
+	 */
+	public $orderingPriority;
+
 	public function __construct() {
 		$this->name = [];
 		$this->price = 0;
@@ -127,6 +132,7 @@ class ProductData {
 		$this->categoriesByDomainId = [];
 		$this->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
 		$this->variantAlias = [];
+		$this->orderingPriority = 0;
 	}
 
 }
