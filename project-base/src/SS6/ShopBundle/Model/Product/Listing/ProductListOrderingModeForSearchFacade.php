@@ -25,6 +25,7 @@ class ProductListOrderingModeForSearchFacade {
 		return new ProductListOrderingConfig(
 			[
 				ProductListOrderingModeService::ORDER_BY_RELEVANCE => t('relevance'),
+				ProductListOrderingModeService::ORDER_BY_PRIORITY => t('TOP'),
 				ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('abecedně A -> Z'),
 				ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('abecedně Z -> A'),
 				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('od nejlevnějšího'),
