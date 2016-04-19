@@ -24,12 +24,13 @@ class ProductListOrderingModeForListFacade {
 	public function getProductListOrderingConfig() {
 		return new ProductListOrderingConfig(
 			[
+				ProductListOrderingModeService::ORDER_BY_PRIORITY => t('TOP'),
 				ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('abecedně A -> Z'),
 				ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('abecedně Z -> A'),
 				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('od nejlevnějšího'),
 				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => t('od nejdražšího'),
 			],
-			ProductListOrderingModeService::ORDER_BY_NAME_ASC,
+			ProductListOrderingModeService::ORDER_BY_PRIORITY,
 			self::COOKIE_NAME
 		);
 	}

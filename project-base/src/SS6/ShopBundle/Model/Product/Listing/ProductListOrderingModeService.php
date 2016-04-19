@@ -12,6 +12,7 @@ class ProductListOrderingModeService {
 	const ORDER_BY_NAME_DESC = 'name_desc';
 	const ORDER_BY_PRICE_ASC = 'price_asc';
 	const ORDER_BY_PRICE_DESC = 'price_desc';
+	const ORDER_BY_PRIORITY = 'priority';
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
