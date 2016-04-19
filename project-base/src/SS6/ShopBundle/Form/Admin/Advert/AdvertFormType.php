@@ -56,7 +56,12 @@ class AdvertFormType extends AbstractType {
 			]),
 		];
 		$builder
-			->add('domainId', FormType::DOMAIN, ['required' => true])
+			->add('domainId', FormType::DOMAIN, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank(),
+				],
+			])
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
@@ -90,9 +95,7 @@ class AdvertFormType extends AbstractType {
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
-			->add('link', FormType::TEXT, [
-				'required' => false,
-			])
+			->add('link', FormType::TEXT, ['required' => false])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,
 				'file_constraints' => [

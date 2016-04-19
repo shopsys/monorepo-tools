@@ -25,16 +25,27 @@ class BillingAddressFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('telephone', FormType::TEXT, ['required' => false])
+			->add('telephone', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length(['max' => 30, 'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků']),
+				],
+			])
 			->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
 			->add('companyName', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím název firmy',
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+					]),
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
@@ -46,12 +57,50 @@ class BillingAddressFormType extends AbstractType {
 						'message' => 'Vyplňte prosím IČ',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
+					new Constraints\Length([
+						'max' => 50,
+						'maxMessage' => 'IČ nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+					]),
 				],
 			])
-			->add('companyTaxNumber', FormType::TEXT, ['required' => false])
-			->add('street', FormType::TEXT, ['required' => false])
-			->add('city', FormType::TEXT, ['required' => false])
-			->add('postcode', FormType::TEXT, ['required' => false]);
+			->add('companyTaxNumber', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 50,
+						'maxMessage' => 'DIČ nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
+					]),
+				],
+			])
+			->add('street', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			])
+			->add('city', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			])
+			->add('postcode', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 30,
+						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			]);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

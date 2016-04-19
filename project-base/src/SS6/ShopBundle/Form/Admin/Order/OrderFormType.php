@@ -68,40 +68,62 @@ class OrderFormType extends AbstractType {
 			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Jméno nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Příjmení nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('telephone', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím telefon']),
+					new Constraints\Length(['max' => 30, 'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('companyName', FormType::TEXT, ['required' => false])
-			->add('companyNumber', FormType::TEXT, ['required' => false])
-			->add('companyTaxNumber', FormType::TEXT, ['required' => false])
+			->add('companyName', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('companyNumber', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length(['max' => 50, 'maxMessage' => 'IČ nesmí být delší než {{ limit }} znaků']),
+				],
+			])
+			->add('companyTaxNumber', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length(['max' => 50, 'maxMessage' => 'DIČ nesmí být delší než {{ limit }} znaků']),
+				],
+			])
 			->add('street', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím ulici']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('city', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím město']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('postcode', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím PSČ']),
+					new Constraints\Length(['max' => 30, 'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
@@ -112,15 +134,43 @@ class OrderFormType extends AbstractType {
 						'message' => 'Vyplňte prosím kontatkní osobu',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
+					new Constraints\Length([
+						'max' => 200,
+						'maxMessage' => 'Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
 				],
 			])
-			->add('deliveryCompanyName', FormType::TEXT, ['required' => false])
-			->add('deliveryTelephone', FormType::TEXT, ['required' => false])
+			->add('deliveryCompanyName', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
+			->add('deliveryTelephone', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 30,
+						'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
 			->add('deliveryStreet', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
 				],
@@ -132,6 +182,10 @@ class OrderFormType extends AbstractType {
 						'message' => 'Vyplňte prosím město',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
+					new Constraints\Length(['max' => 100,
+						'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
 				],
 			])
 			->add('deliveryPostcode', FormType::TEXT, [
@@ -139,6 +193,11 @@ class OrderFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+					new Constraints\Length([
+						'max' => 30,
+						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
 				],

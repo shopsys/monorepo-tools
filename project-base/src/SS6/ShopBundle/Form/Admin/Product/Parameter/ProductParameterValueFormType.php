@@ -46,6 +46,11 @@ class ProductParameterValueFormType extends AbstractType {
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte hodnotu parametru']),
 				],
+				'options' => [
+					'constraints' => [
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
+					],
+				],
 			]);
 	}
 

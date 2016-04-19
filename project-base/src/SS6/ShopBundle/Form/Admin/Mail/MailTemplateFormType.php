@@ -40,6 +40,7 @@ class MailTemplateFormType extends AbstractType {
 				'required' => false,
 				'constraints' => [
 					new Constraints\Email(),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('subject', FormType::TEXT, [
@@ -78,6 +79,10 @@ class MailTemplateFormType extends AbstractType {
 		$subjectConstraints[] = new Constraints\NotBlank([
 			'message' => 'Vyplňte prosím předmět',
 			'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
+		]);
+		$subjectConstraints[] = new Constraints\Length([
+			'max' => 255,
+			'maxMessage' => 'Předmět e-mailu nesmí být delší než {{ limit }} znaků',
 		]);
 
 		foreach ($this->mailType->getRequiredSubjectVariables() as $variableName) {

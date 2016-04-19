@@ -99,11 +99,21 @@ class ProductFormType extends AbstractType {
 		if ($this->product !== null && $this->product->isVariant()) {
 			$builder->add('variantAlias', FormType::LOCALIZED, [
 				'required' => false,
+				'options' => [
+					'constraints' => [
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Alias varianty nesmí být delší než {{ limit }} znaků']),
+					],
+				],
 			]);
 		}
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'required' => false,
+				'options' => [
+					'constraints' => [
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název produktu nesmí být delší než {{ limit }} znaků']),
+					],
+				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('sellingDenied', FormType::YES_NO, [
