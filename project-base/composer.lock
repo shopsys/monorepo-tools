@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "578a9d21c7c9d385b0267202b6895304",
-    "content-hash": "4feb2998bf3fce65a2cea7223d1482ed",
+    "hash": "b99b8ec67a35bca87ea4167da09b09c0",
+    "content-hash": "9d805811bf80bd996dd22e3f308a15ba",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -269,9 +269,9 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1",
+                "phpunit/phpunit": "~4.1|~5.0",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "~2.7",
+                "symfony/phpunit-bridge": "^2.8.1|^3.0.1",
                 "symfony/symfony": "^2.6.4|~3.0"
             },
             "type": "symfony-bundle",
@@ -4158,11 +4158,17 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "3789f9d04c605c0ea02d7d18c1120064ac6a572f"
+                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/dc0f6367390796e1f71a89983d9ebf1658e3632a",
+                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a",
+                "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "~2.5",
@@ -4182,7 +4188,11 @@
                     ]
                 }
             },
-            "time": "2016-04-06 14:59:03"
+            "support": {
+                "source": "https://github.com/shopsys/migrations/tree/master",
+                "issues": "https://github.com/shopsys/migrations/issues"
+            },
+            "time": "2016-04-19 07:18:25"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4363,12 +4373,12 @@
             "version": "1.3.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony-cmf/RoutingBundle.git",
+                "url": "https://github.com/symfony-cmf/routing-bundle.git",
                 "reference": "330c3ac0d11ba0257a41647bb413aa727f3d4a65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/RoutingBundle/zipball/330c3ac0d11ba0257a41647bb413aa727f3d4a65",
+                "url": "https://api.github.com/repos/symfony-cmf/routing-bundle/zipball/330c3ac0d11ba0257a41647bb413aa727f3d4a65",
                 "reference": "330c3ac0d11ba0257a41647bb413aa727f3d4a65",
                 "shasum": ""
             },
