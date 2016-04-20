@@ -155,7 +155,7 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @return int[mainVariantRowId][]
+	 * @return string[mainVariantRowId][]
 	 */
 	public function getVariantCatnumsIndexedByMainVariantCatnum() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
