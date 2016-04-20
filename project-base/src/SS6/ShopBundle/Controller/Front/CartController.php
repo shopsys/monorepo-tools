@@ -166,8 +166,9 @@ class CartController extends FrontBaseController {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $type
 	 */
-	public function addProductFormAction(Product $product) {
+	public function addProductFormAction(Product $product, $type = 'normal') {
 		$formData = ['productId' => $product->getId()];
 		$form = $this->createForm(new AddProductFormType(), $formData, [
 			'action' => $this->generateUrl('front_cart_add_product'),
@@ -177,6 +178,7 @@ class CartController extends FrontBaseController {
 		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', [
 			'form' => $form->createView(),
 			'product' => $product,
+			'type' => $type,
 		]);
 	}
 
