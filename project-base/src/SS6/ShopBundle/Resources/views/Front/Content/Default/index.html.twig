@@ -20,12 +20,14 @@
 {% block main_content %}
 
 	{% if sliderItems is not empty %}
-		<div id="slider-hp">
-		{% for item in sliderItems %}
-			<div>
-				<a href = "{{ item.link }}">{{ image(item) }}</a>
+		<div class="box-slider">
+			<div id="js-slider-homepage" class="box-slider__in">
+				{% for item in sliderItems %}
+					<div class="box-slider__item">
+						<a href = "{{ item.link }}">{{ image(item) }}</a>
+					</div>
+				{% endfor %}
 			</div>
-		{% endfor %}
 		</div>
 	{% endif %}
 

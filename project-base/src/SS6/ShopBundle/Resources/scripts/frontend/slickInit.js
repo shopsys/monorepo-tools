@@ -4,7 +4,7 @@
 	SS6.slickInit = SS6.slickInit || {};
 
 	SS6.slickInit.init = function () {
-		$('#slider-hp').slick({
+		$('#js-slider-homepage').slick({
 			dots: true,
 			arrows: false,
 			autoplay: true,
