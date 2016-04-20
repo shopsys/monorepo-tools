@@ -6,9 +6,13 @@
 	</div>
 	<div class="web__line">
 		<footer class="web__container footer__bottom">
-			&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+			<div class="footer__bottom__copyright">
+				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+			</div>
 
-			{{ render(controller('SS6ShopBundle:Front/Article:footer')) }}
+			<div class="footer__bottom__articles">
+				{{ render(controller('SS6ShopBundle:Front/Article:footer')) }}
+			</div>
 		</footer>
 	</div>
 </div>
