@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
+use SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 
 class BestsellingProductEditFacade {
 
@@ -18,12 +19,19 @@ class BestsellingProductEditFacade {
 	 */
 	private $bestsellingProductRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+	 */
+	private $cachedBestsellingProductFacade;
+
 	public function __construct(
 		EntityManager $em,
-		BestsellingProductRepository $bestsellingProductRepository
+		BestsellingProductRepository $bestsellingProductRepository,
+		CachedBestsellingProductFacade $cachedBestsellingProductFacade
 	) {
 		$this->em = $em;
 		$this->bestsellingProductRepository = $bestsellingProductRepository;
+		$this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
 	}
 
 	/**
@@ -45,6 +53,7 @@ class BestsellingProductEditFacade {
 			}
 		}
 		$this->em->flush();
+		$this->cachedBestsellingProductFacade->invalidateCacheByDomainIdAndCategory($domainId, $category);
 	}
 
 	/**

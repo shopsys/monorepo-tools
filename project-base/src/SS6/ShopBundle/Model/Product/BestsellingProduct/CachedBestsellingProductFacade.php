@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
 use Doctrine\Common\Cache\CacheProvider;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -39,18 +40,25 @@ class CachedBestsellingProductFacade {
 	 */
 	private $productService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 */
+	private $pricingGroupRepository;
+
 	public function __construct(
 		CacheProvider $cacheProvider,
 		BestsellingProductFacade $bestsellingProductFacade,
 		ProductDetailFactory $productDetailFactory,
 		ProductRepository $productRepository,
-		ProductService $productService
+		ProductService $productService,
+		PricingGroupRepository $pricingGroupRepository
 	) {
 		$this->cacheProvider = $cacheProvider;
 		$this->bestsellingProductFacade = $bestsellingProductFacade;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->productRepository = $productRepository;
 		$this->productService = $productService;
+		$this->pricingGroupRepository = $pricingGroupRepository;
 	}
 
 	/**
@@ -74,6 +82,18 @@ class CachedBestsellingProductFacade {
 			return $bestsellingProductDetails;
 		} else {
 			return $this->getOrderedProductDetails($domainId, $pricingGroup, $orderedProductIds);
+		}
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 */
+	public function invalidateCacheByDomainIdAndCategory($domainId, Category $category) {
+		$pricingGroups = $this->pricingGroupRepository->getPricingGroupsByDomainId($domainId);
+		foreach ($pricingGroups as $pricingGroup) {
+			$cacheId = $this->getCacheId($domainId, $category, $pricingGroup);
+			$this->cacheProvider->delete($cacheId);
 		}
 	}
 
