@@ -1,34 +1,39 @@
-/*
-Spinbox
-=======
-Input spinbox (input with +/- buttons)
-
-	<div class="form-input-spinbox">
-		<a href="#" class="form-input-spinbox__button button">-</a>
-		<input type="text" class="form-input-spinbox__input">
-		<a href="#" class="form-input-spinbox__button button">+</a>
-	</div>
-
-*/
+@form-input-spinbox-padding-vertical: 3px;
 
 .form-input-spinbox {
-}
-
-.form-input-spinbox__button {
-	padding: 0;
-	width: @input-height;
 	display: inline-block;
-}
-
-.form-input-spinbox__input {
-	display: inline-block;
-	width: 40px;
-	height: @input-height;
-	line-height: @input-height;
-	padding: 0;
+	vertical-align: middle;
+	position: relative;
+	padding: @form-input-spinbox-padding-vertical 24px @form-input-spinbox-padding-vertical 3px;
 
 	border: 1px solid @color-border;
-	text-align: center;
 
-	.border-radius(@radius);
+	&__input {
+		width: 28px;
+		padding: 0;
+		height: @input-height - 2 * @form-input-spinbox-padding-vertical;
+		line-height: @input-height - 2 * @form-input-spinbox-padding-vertical;
+
+		text-align: center;
+	}
+
+	&__btn {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 24px;
+		height: 50%;
+
+		background: @color-light;
+		color: @color-base;
+
+		&--minus {
+			top: auto;
+			bottom: 0;
+		}
+
+		&:hover {
+			background: darken(@color-light, 5%);
+		}
+	}
 }
