@@ -11,6 +11,8 @@ use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
+use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
@@ -88,6 +90,16 @@ class ProductDataFixture {
 	 */
 	private $faker;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 */
+	private $productAvailabilityRecalculationScheduler;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 */
+	private $productPriceRecalculationScheduler;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
@@ -97,7 +109,9 @@ class ProductDataFixture {
 		ProductDataFixtureReferenceInjector $productDataReferenceInjector,
 		PersistentReferenceFacade $persistentReferenceFacade,
 		CategoryRepository $categoryRepository,
-		Faker $faker
+		Faker $faker,
+		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
@@ -110,6 +124,8 @@ class ProductDataFixture {
 		$this->countImported = 0;
 		$this->demoDataIterationCounter = 0;
 		$this->faker = $faker;
+		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
+		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
 	public function load() {
@@ -235,6 +251,8 @@ class ProductDataFixture {
 	 * @param \Doctrine\ORM\EntityManager $em
 	 */
 	private function clearResources(EntityManager $em) {
+		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 		$em->clear();
 		gc_collect_cycles();
 		echo "\nMemory usage: " . round(memory_get_usage() / 1024 / 1024, 1) . "MB\n";
