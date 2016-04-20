@@ -3,7 +3,7 @@
 {% block title %}- {{ 'Přehled zboží'|trans }}{% endblock %}
 {% block h1 %}{{ 'Přehled zboží'|trans }}{% endblock %}
 {% block btn %}
-	<a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn">
+	<a href="{{ url('admin_product_new') }}" class="btn btn--plus wrap-bar__btn" target="_blank">
 		<i class="btn__icon">+</i>{{ 'Vytvořit nové zboží'|trans }}
 	</a>
 	<a href="{{ url('admin_product_createvariant') }}" class="btn btn--plus wrap-bar__btn">
