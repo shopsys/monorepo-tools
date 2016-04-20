@@ -121,9 +121,9 @@ class AdvertFormType extends AbstractType {
 				$advertData = $form->getData();
 				/* @var $advertData \SS6\ShopBundle\Model\Advert\AdvertData */
 
-				if ($advertData->type === \SS6\ShopBundle\Model\Advert\Advert::TYPE_CODE) {
+				if ($advertData->type === Advert::TYPE_CODE) {
 					$validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;
-				} elseif ($advertData->type === \SS6\ShopBundle\Model\Advert\Advert::TYPE_IMAGE) {
+				} elseif ($advertData->type === Advert::TYPE_IMAGE) {
 					$validationGroups[] = self::VALIDATION_GROUP_TYPE_IMAGE;
 				}
 				return $validationGroups;
