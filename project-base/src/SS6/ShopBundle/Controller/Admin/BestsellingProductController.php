@@ -9,7 +9,7 @@ use SS6\ShopBundle\Form\Admin\BestsellingProduct\BestsellingProductFormType;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
+use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BestsellingProductController extends AdminBaseController {
@@ -30,17 +30,17 @@ class BestsellingProductController extends AdminBaseController {
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade
+	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade
 	 */
-	private $bestsellingProductFacade;
+	private $bestsellingProductEditFacade;
 
 	public function __construct(
-		BestsellingProductFacade $bestsellingProductFacade,
+		BestsellingProductEditFacade $bestsellingProductEditFacade,
 		CategoryFacade $categoryFacade,
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb
 	) {
-		$this->bestsellingProductFacade = $bestsellingProductFacade;
+		$this->bestsellingProductEditFacade = $bestsellingProductEditFacade;
 		$this->categoryFacade = $categoryFacade;
 		$this->selectedDomain = $selectedDomain;
 		$this->breadcrumb = $breadcrumb;
@@ -55,7 +55,8 @@ class BestsellingProductController extends AdminBaseController {
 
 		$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 
-		$bestsellingProductsInCategories = $this->bestsellingProductFacade->getManualBestsellingProductCountsInCategories($domainId);
+		$bestsellingProductsInCategories = $this->bestsellingProductEditFacade
+			->getManualBestsellingProductCountsInCategories($domainId);
 
 		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
@@ -73,7 +74,7 @@ class BestsellingProductController extends AdminBaseController {
 		$category = $this->categoryFacade->getById($request->get('categoryId'));
 		$domainId = $request->get('domainId');
 
-		$bestsellingProducts = $this->bestsellingProductFacade->getBestsellingProductsIndexedByPosition(
+		$bestsellingProducts = $this->bestsellingProductEditFacade->getBestsellingProductsIndexedByPosition(
 			$category,
 			$domainId
 		);
@@ -84,7 +85,7 @@ class BestsellingProductController extends AdminBaseController {
 		if ($form->isValid()) {
 			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
 
-			$this->bestsellingProductFacade->edit($category, $domainId, $formBestsellingProducts);
+			$this->bestsellingProductEditFacade->edit($category, $domainId, $formBestsellingProducts);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
