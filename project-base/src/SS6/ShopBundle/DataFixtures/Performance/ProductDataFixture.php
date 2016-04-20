@@ -329,7 +329,7 @@ class ProductDataFixture {
 		reset($array);
 		while (key($array) !== $key) {
 			if (each($array) === false) {
-				throw \SS6\ShopBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
+				throw new \SS6\ShopBundle\DataFixtures\Performance\Exception\UndefinedArrayKeyException($key);
 			}
 		}
 	}
