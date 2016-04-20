@@ -57,7 +57,7 @@ class BestsellingProductFacade {
 	}
 
 	/**
-	 * @param Category $category
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $bestsellingProducts
 	 */
@@ -77,6 +77,11 @@ class BestsellingProductFacade {
 		$this->em->flush();
 	}
 
+	/**
+	 * @param int $categoryId
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
 	public function getBestsellingProductsIndexedByPosition($categoryId, $domainId) {
 		$category = $this->categoryFacade->getById($categoryId);
 		$bestsellingProducts = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId(

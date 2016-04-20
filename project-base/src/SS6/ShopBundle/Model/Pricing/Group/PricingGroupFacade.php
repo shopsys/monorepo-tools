@@ -162,6 +162,9 @@ class PricingGroupFacade {
 		return $this->pricingGroupRepository->getAllExceptIdByDomainId($id, $domainId);
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[domainId][]
+	 */
 	public function getAllIndexedByDomainId() {
 		foreach ($this->domain->getAll() as $domain) {
 			$domainId = $domain->getId();
