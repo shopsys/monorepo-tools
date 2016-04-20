@@ -1,5 +1,6 @@
 parameters:
   ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
+  ss6.bestselling_product.cache_directory_path: %kernel.cache_dir%/bestselling_product
   ss6.cron_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/cron.yml
   ss6.css_version_filepath: %ss6.web_dir%/assets/cssVersion
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv

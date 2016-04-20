@@ -7,13 +7,14 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
+use SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 
 class BestsellingProductController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade
+	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
 	 */
-	private $bestsellingProductsFacade;
+	private $cachedBestsellingProductFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -26,17 +27,17 @@ class BestsellingProductController extends FrontBaseController {
 	private $currentCustomer;
 
 	public function __construct(
-		BestsellingProductFacade $bestsellingProductFacade,
+		CachedBestsellingProductFacade $cachedBestsellingProductFacade,
 		Domain $domain,
 		CurrentCustomer $currentCustomer
 	) {
-		$this->bestsellingProductsFacade = $bestsellingProductFacade;
+		$this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
 	}
 
 	public function listAction(Category $category) {
-		$bestsellingProducts = $this->bestsellingProductsFacade->getAllOfferedProductDetails(
+		$bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedProductDetails(
 			$this->domain->getId(), $category, $this->currentCustomer->getPricingGroup()
 		);
 
