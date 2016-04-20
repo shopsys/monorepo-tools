@@ -1,0 +1,36 @@
+.cart {
+	display: none;
+}
+
+@media @query-lg {
+	.cart {
+		display: inline-block;
+		position: relative;
+		.cfx();
+
+		text-align: left;
+
+		&__block {
+			display: block;
+
+			text-decoration: none;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+
+		&__icon {
+			width: 30px;
+			float: left;
+
+			font-size: 20px;
+			text-align: center;
+		}
+
+		&__info {
+			margin-left: 40px;
+			max-width: 90px;
+		}
+	}
+}

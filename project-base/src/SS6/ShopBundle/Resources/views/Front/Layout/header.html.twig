@@ -1,44 +1,113 @@
-<header class="header">
-	<div class="logo">
-		<a href="{{ url('front_homepage') }}">{{ 'Internetový obchod'|trans }}</a>
-	</div>
+{% block header %}
+	<header class="header">
+		<div class="header__logo">
+			{% block logo %}
+				<a class="logo" href="{{ url('front_homepage') }}" title="{{ 'Internetový obchod'|trans }}"></a>
+			{% endblock %}
+		</div>
 
-	{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
+		<div class="header__middle">
+			{{ render(controller('SS6ShopBundle:Front/Search:box')) }}
+			<div class="contact-us">
+				<span class="contact-us__phone">
+					<i class="svg svg-phone"></i>
+					777 123 456
+				</span>
+				<span class="contact-us__days">
+					(po-pá, 10:00 - 16:00)
+				</span>
+			</div>
+		</div>
 
-	<ul class="top-menu">
-		{% if is_granted('ROLE_CUSTOMER') %}
-			<li class="top-menu__item top-menu__item--main in-dropdown">
-				<a href="#">{{ app.user.firstName }} {{ app.user.lastName }}</a>
-				<ul class="in-dropdown__menu">
-					<li class="in-dropdown__menu__item">
-						<a href="{{ url('front_customer_edit') }}">{{ 'Osobní údaje'|trans }}</a>
-						<a href="{{ url('front_customer_orders') }}">{{ 'Mé objednávky'|trans }}</a>
-					</li>
+		<div class="header__mobile">
+			<span class="btn-tap btn-tap--menu left ml0">
+				<span class="btn-tap__in">
+					<i class="svg svg-burger-menu"></i>
+					{{ 'Menu'|trans }}
+				</span>
+			</span>
+
+			<span class="btn-tap">
+				<a href="tel:777123456" class="btn-tap__in">
+					<i class="svg svg-phone"></i>
+				</a>
+			</span>
+
+			<span class="btn-tap">
+				{% if is_granted('ROLE_CUSTOMER') %}
+					<a href="{{ url('front_customer_edit') }}" class="btn-tap__in">
+						<i class="svg svg-user"></i>
+					</a>
+				{% else %}
+					<a href="{{ url('front_login') }}"
+						onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+						class="btn-tap__in">
+						<i class="svg svg-user"></i>
+					</a>
+				{% endif %}
+			</span>
+		</div>
+
+		<div class="header__cart">
+			{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
+		</div>
+
+		<div class="header__top">
+			<div class="header__top__left">
+				{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
+			</div>
+
+			<div class="header__top__right">
+				<ul class="menu-iconic">
+					{% if is_granted('ROLE_CUSTOMER') %}
+						<li class="menu-iconic__item">
+							<a href="{{ url('front_customer_edit') }}" class="menu-iconic__item__link">
+								<i class="svg svg-user"></i>
+								<span>
+									{{ app.user.firstName }} {{ app.user.lastName }}
+								</span>
+							</a>
+							<ul class="menu-iconic__sub">
+								<li class="menu-iconic__sub__item">
+									<a href="{{ url('front_customer_edit') }}" class="menu-iconic__sub__item__link">{{ 'Osobní údaje'|trans }}</a>
+								</li>
+								<li class="menu-iconic__sub__item">
+									<a href="{{ url('front_customer_orders') }}" class="menu-iconic__sub__item__link">{{ 'Mé objednávky'|trans }}</a>
+								</li>
+							</ul>
+						</li>
+						<li class="menu-iconic__item">
+							<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}" class="menu-iconic__item__link">
+								<span>
+									{{ 'Odhlásit se'|trans }}
+								<span>
+							</a>
+						</li>
+					{% else %}
+						<li class="menu-iconic__item">
+							<a
+								href="{{ url('front_login') }}"
+								onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+								class="menu-iconic__item__link"
+							>
+								<i class="svg svg-user"></i>
+								<span>
+									{{ 'Přihlásit se'|trans }}
+								</span>
+							</a>
+						</li>
+						<li class="menu-iconic__item">
+							<a href="{{ url('front_registration_register') }}" class="menu-iconic__item__link">
+								<span>
+									{{ 'Registrace'|trans }}
+								</span>
+							</a>
+						</li>
+					{% endif %}
 				</ul>
-			</li>
-			<li class="top-menu__item top-menu__item--main">
-				<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
-			</li>
-		{% else %}
-			<li class="top-menu__item top-menu__item--main">
-				<a href="{{ url('front_registration_register') }}">{{ 'Registrace'|trans }}</a>
-			</li>
-			<li class="top-menu__item top-menu__item--main">
-				<a
-					href="{{ url('front_login') }}"
-					onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
-				><strong>{{ 'Přihlásit se'|trans }}</strong></a>
-			</li>
-		{% endif %}
+			</div>
+		</div>
+	</header>
 
-	</ul>
-
-	{{ render(controller('SS6ShopBundle:Front/Search:box')) }}
-
-	<div class="header__panel">
-		<ul class="articles-menu">
-			{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
-		</ul>
-	</div>
 	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_HEADER')})) }}
-</header>
+{% endblock %}

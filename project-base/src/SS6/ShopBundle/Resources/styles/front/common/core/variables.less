@@ -52,6 +52,7 @@
 
 @color-primary: @color-blue;
 @color-add: @color-green;
+@color-light: #f4f4f4;
 
 @color-price: @color-red;
 
@@ -67,7 +68,7 @@
 
 @bg-web: @color-3;
 @bg-page: @color-f;
-@bg-box: #f4f4f4;
+@bg-box: @color-light;
 
 @bg-success: #dff0d8;
 @bg-info: #BCE0EE;
@@ -116,8 +117,9 @@
 /*******************************************************************
 // OTHER
 *******************************************************************/
-@transition: cubic-bezier(.61, .20, .48, 1.0);
+@transition-type: cubic-bezier(.61, .20, .48, 1.0);
 @transition-time: 0.3s;
+@transition-settings: @transition-time @transition-type;
 
 @radius: 3px;
 
@@ -139,7 +141,7 @@
 @respons-2-a: (@respons-2 - 1);
 @respons-3: 600px;
 @respons-3-a: (@respons-3 - 1);
-@respons-4: 768px;
+@respons-4: 769px;
 @respons-4-a: (@respons-4 - 1);
 @respons-5: 1024px;
 @respons-5-a: (@respons-5 - 1);
@@ -153,8 +155,8 @@
 @query-sm: ~"screen and (min-width: @{respons-2})";
 @query-md: ~"screen and (min-width: @{respons-3})";
 @query-lg: ~"screen and (min-width: @{respons-4})";
-@query-xl: ~"screen and (min-width: @{respons-5})";
-@query-xxl: ~"screen and (min-width: @{respons-6})";
+@query-vl: ~"screen and (min-width: @{respons-5})";
+@query-xl: ~"screen and (min-width: @{respons-6})";
 
 @query-mobile-xs: ~"screen and (max-width: @{respons-2-a})";
 @query-mobile: ~"screen and (max-width: @{respons-3-a})";
