@@ -74,7 +74,7 @@ class BestsellingProductController extends AdminBaseController {
 		$domainId = $request->get('domainId');
 
 		$bestsellingProducts = $this->bestsellingProductFacade->getBestsellingProductsIndexedByPosition(
-			$category->getId(),
+			$category,
 			$domainId
 		);
 

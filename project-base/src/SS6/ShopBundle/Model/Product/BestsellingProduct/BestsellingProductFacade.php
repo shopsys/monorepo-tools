@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
@@ -16,11 +15,6 @@ class BestsellingProductFacade {
 	const MAX_RESULTS = 10;
 	const ORDERS_CREATED_AT_LIMIT = '-1 month';
 	const MAX_SHOW_RESULTS = 3;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
-	 */
-	private $categoryFacade;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -46,13 +40,11 @@ class BestsellingProductFacade {
 		EntityManager $em,
 		BestsellingProductRepository $bestsellingProductRepository,
 		ProductDetailFactory $productDetailFactory,
-		CategoryFacade $categoryFacade,
 		BestsellingProductService $bestsellingProductService
 	) {
 		$this->em = $em;
 		$this->bestsellingProductRepository = $bestsellingProductRepository;
 		$this->productDetailFactory = $productDetailFactory;
-		$this->categoryFacade = $categoryFacade;
 		$this->bestsellingProductService = $bestsellingProductService;
 	}
 
@@ -78,12 +70,11 @@ class BestsellingProductFacade {
 	}
 
 	/**
-	 * @param int $categoryId
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getBestsellingProductsIndexedByPosition($categoryId, $domainId) {
-		$category = $this->categoryFacade->getById($categoryId);
+	public function getBestsellingProductsIndexedByPosition($category, $domainId) {
 		$bestsellingProducts = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId(
 			$category,
 			$domainId
