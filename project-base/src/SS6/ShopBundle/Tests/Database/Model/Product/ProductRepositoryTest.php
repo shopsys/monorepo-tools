@@ -34,7 +34,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
 		$productId = $product->getId();
 
-		$queryBuilder = $productRepository->getAllListableQueryBuilder($domain->getId(), $pricingGroup->getId());
+		$queryBuilder = $productRepository->getAllListableQueryBuilder($domain->getId(), $pricingGroup);
 		$queryBuilder->andWhere('p.id = :id')
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
@@ -66,7 +66,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
 		$productId = $product->getId();
 
-		$queryBuilder = $productRepository->getAllSellableQueryBuilder($domain->getId(), $pricingGroup->getId());
+		$queryBuilder = $productRepository->getAllSellableQueryBuilder($domain->getId(), $pricingGroup);
 		$queryBuilder->andWhere('p.id = :id')
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
@@ -98,7 +98,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . $productReferenceId);
 		$productId = $product->getId();
 
-		$queryBuilder = $productRepository->getAllOfferedQueryBuilder($domain->getId(), $pricingGroup->getId());
+		$queryBuilder = $productRepository->getAllOfferedQueryBuilder($domain->getId(), $pricingGroup);
 		$queryBuilder->andWhere('p.id = :id')
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();

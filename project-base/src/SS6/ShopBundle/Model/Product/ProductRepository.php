@@ -91,7 +91,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllListableQueryBuilder($domainId, $pricingGroup) {
+	public function getAllListableQueryBuilder($domainId, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 		$queryBuilder->andWhere('p.variantType != :variantTypeVariant')
 			->setParameter('variantTypeVariant', Product::VARIANT_TYPE_VARIANT);
@@ -104,7 +104,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllSellableQueryBuilder($domainId, $pricingGroup) {
+	public function getAllSellableQueryBuilder($domainId, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 		$queryBuilder->andWhere('p.variantType != :variantTypeMain')
 			->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN);
@@ -117,7 +117,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllOfferedQueryBuilder($domainId, $pricingGroup) {
+	public function getAllOfferedQueryBuilder($domainId, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->getAllVisibleQueryBuilder($domainId, $pricingGroup);
 		$queryBuilder->andWhere('p.calculatedSellingDenied = FALSE');
 
@@ -129,7 +129,7 @@ class ProductRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getAllVisibleQueryBuilder($domainId, $pricingGroup) {
+	public function getAllVisibleQueryBuilder($domainId, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('p')
 			->from(Product::class, 'p')
