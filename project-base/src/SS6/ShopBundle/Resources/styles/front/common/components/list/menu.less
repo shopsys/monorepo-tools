@@ -1,97 +1,41 @@
-/*
-Menu list
-========
-Multi level menu list
-
-	<ul class="list-menu">
-		<li class="list-menu__item">
-			<a class="list-menu__item__link" href="./">Menu item</a>
-			<ul class="list-menu">
-				<li class="list-menu__item">
-					<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-				</li>
-				<li class="list-menu__item">
-					<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-				</li>
-				<li class="list-menu__item">
-					<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-					<ul class="list-menu">
-						<li class="list-menu__item">
-							<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-						</li>
-						<li class="list-menu__item">
-							<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-						</li>
-						<li class="list-menu__item">
-							<a class="list-menu__item__link list-menu__item__link--2" href="./">Menu item</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li class="list-menu__item">
-			<a class="list-menu__item__link" href="./">Menu item</a>
-		</li>
-		<li class="list-menu__item">
-			<a class="list-menu__item__link" href="./">Menu item</a>
-		</li>
-	</ul>
-
-*/
-
 .list-menu {
 	.reset-ul();
-	.cfx();
-	width: 100%;
-}
+	margin-bottom: @margin-gap;
 
-.list-menu__item {
-	display: block;
-	margin: 0;
-	padding: 0;
+	&__item {
+		display: block;
 
-	border-top: 1px solid @color-border;
-}
+		border-top: 1px solid @color-border;
+		background: @color-light;
 
-.list-menu__item__link {
-	display: block;
-	padding: 8px 10px;
+		&:first-child {
+			border-top: 0;
+		}
 
-	text-decoration: none;
-	color: @color-7;
-	font-size: 12px;
+		&__link {
+			display: block;
+			padding: 8px 10px;
 
-	&:hover {
-		text-decoration: none;
-		background: @color-primary;
-		color: @color-f;
+			text-decoration: none;
+			font-size: 12px;
+
+			&--level-2 {
+				padding-left: 20px;
+			}
+
+			&--level-3 {
+				padding-left: 30px;
+			}
+
+			&--level-4 {
+				padding-left: 40px;
+			}
+		}
 	}
-}
 
-.list-menu__item__link--1 {
-	font-size: 14px;
-}
+	& & {
+		margin-bottom: 0;
 
-.list-menu__item__link--2 {
-	padding-left: 20px;
-}
-
-.list-menu__item__link--3 {
-	padding-left: 30px;
-}
-
-.list-menu__item__link--4 {
-	padding-left: 40px;
-}
-
-.list-menu__item__link--5 {
-	padding-left: 50px;
-}
-
-.list-menu__item__link--6 {
-	padding-left: 60px;
-}
-
-.list-menu__item__link--7 {
-	padding-left: 70px;
+		border-top: 1px solid @color-border;
+	}
 }
