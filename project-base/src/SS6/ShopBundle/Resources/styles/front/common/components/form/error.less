@@ -1,12 +1,9 @@
-/*
-Form error
-
-*/
-
 .form-error {
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
+
+	cursor: default;
 
 	&--inline {
 		.flex();
@@ -42,6 +39,7 @@ Form error
 		margin-top: 10px;
 		padding: 5px;
 		display: none;
+		z-index: 50;
 
 		background: rgba(0,0,0, 0.7);
 		color: @color-f;

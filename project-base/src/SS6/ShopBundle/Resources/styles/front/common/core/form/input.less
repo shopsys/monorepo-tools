@@ -8,7 +8,12 @@
 	border: 1px solid @color-border;
 	color: @color-base;
 
-	.box-shadow(inset 0 1px 2px rgba(0, 0, 0, 0.15));
+	&--textarea {
+		height: @btn-height * 3;
+		line-height: 20px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
 
 	&:focus {
 		outline: 0;
@@ -16,9 +21,15 @@
 
 	.form-input-error & ,
 	&.form-input-error {
+		padding-right: 20px;
+
 		border-color: @color-red;
 
 		.box-shadow(none);
+
+		&:focus {
+			border-color: @color-red;
+		}
 	}
 
 	.form-input-disabled &,
