@@ -481,6 +481,16 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
+  ss6.shop.product.bestselling_product.cache_provider:
+    class: Doctrine\Common\Cache\FilesystemCache
+    arguments:
+      - %ss6.bestselling_product.cache_directory_path%
+
+  ss6.shop.product.bestselling_product.cached_bestselling_product_facade:
+    class: SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+    arguments:
+      - @ss6.shop.product.bestselling_product.cache_provider
+
   ss6.shop.product.pricing.product_price_recalculator:
     class: SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
     tags:

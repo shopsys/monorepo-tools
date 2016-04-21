@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
+use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -15,10 +15,10 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$bestsellingProductFacade = $this->get(BestsellingProductFacade::class);
-		/* @var $bestsellingProductFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade */
+		$bestsellingProductEditFacade = $this->get(BestsellingProductEditFacade::class);
+		/* @var $bestsellingProductEditFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
 
-		$bestsellingProductFacade->edit(
+		$bestsellingProductEditFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			1,
 			[
@@ -28,7 +28,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 			]
 		);
 
-		$bestsellingProductFacade->edit(
+		$bestsellingProductEditFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			2,
 			[$this->getReference('product_7')]

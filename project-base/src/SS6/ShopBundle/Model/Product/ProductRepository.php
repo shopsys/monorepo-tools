@@ -650,4 +650,21 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int[] $productIds
+	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 */
+	public function getOfferedByIds($domainId, PricingGroup $pricingGroup, array $productIds) {
+		if (count($productIds) === 0) {
+			return [];
+		}
+
+		$queryBuilder = $this->getAllOfferedQueryBuilder($domainId, $pricingGroup);
+		$queryBuilder->andWhere('p.id IN (:productIds)')->setParameter('productIds', $productIds);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
 }

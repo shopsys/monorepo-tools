@@ -276,4 +276,48 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productService->markProductForVisibilityRecalculation($variantMock);
 	}
 
+	public function testSortingProducts() {
+		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
+		$inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
+		$basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
+		$pricingSettingMock = $this->getMock(PricingSetting::class, null, [], '', false);
+		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
+
+		$productMock1 = $this->getMock(Product::class, ['getId'], [], '', false);
+		$productMock1->method('getId')->willReturn(1);
+
+		$productMock2 = $this->getMock(Product::class, ['getId'], [], '', false);
+		$productMock2->method('getId')->willReturn(2);
+
+		$products = [$productMock1, $productMock2];
+
+		$productService = new ProductService(
+			$productPriceCalculationMock,
+			$inputPriceCalculationMock,
+			$basePriceCalculationMock,
+			$pricingSettingMock,
+			$productPriceRecalculationSchedulerMock
+		);
+
+		$orderedProducts = $productService->sortProductsByProductIds(
+			$products,
+			[
+				$productMock1->getId(),
+				$productMock2->getId(),
+			]
+		);
+		$this->assertSame($productMock1, $orderedProducts[0]);
+		$this->assertSame($productMock2, $orderedProducts[1]);
+
+		$converselyOrderedProducts = $productService->sortProductsByProductIds(
+			$products,
+			[
+				$productMock2->getId(),
+				$productMock1->getId(),
+			]
+		);
+		$this->assertSame($productMock2, $converselyOrderedProducts[0]);
+		$this->assertSame($productMock1, $converselyOrderedProducts[1]);
+	}
+
 }
