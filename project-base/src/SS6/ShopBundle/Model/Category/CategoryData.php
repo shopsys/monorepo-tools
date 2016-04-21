@@ -13,6 +13,11 @@ class CategoryData {
 	public $name;
 
 	/**
+	 * @var string[]
+	 */
+	public $descriptions;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public $parent;
@@ -39,6 +44,7 @@ class CategoryData {
 
 	public function __construct() {
 		$this->name = [];
+		$this->descriptions = [];
 		$this->hiddenOnDomains = [];
 		$this->urls = new UrlListData();
 		$this->image = [];
@@ -46,6 +52,7 @@ class CategoryData {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\CategoryDomain[] $categoryDomains
 	 */
 	public function setFromEntity(Category $category, array $categoryDomains) {
 		$translations = $category->getTranslations();
@@ -56,13 +63,16 @@ class CategoryData {
 		$this->name = $names;
 		$this->parent = $category->getParent();
 		$this->heurekaCzFeedCategory = $category->getHeurekaCzFeedCategory();
+		$descriptions = [];
 		$hiddenOnDomains = [];
 		foreach ($categoryDomains as $categoryDomain) {
+			$descriptions[$categoryDomain->getDomainId()] = $categoryDomain->getDescription();
 			if ($categoryDomain->isHidden()) {
 				$hiddenOnDomains[] = $categoryDomain->getDomainId();
 			}
 		}
 		$this->hiddenOnDomains = $hiddenOnDomains;
+		$this->descriptions = $descriptions;
 	}
 
 }

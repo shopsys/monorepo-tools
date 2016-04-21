@@ -93,7 +93,7 @@ class CategoryFacade {
 		$category = $this->categoryService->create($categoryData, $rootCategory);
 		$this->em->persist($category);
 		$this->em->flush($category);
-		$this->createCategoryDomains($category, $this->domain->getAll());
+		$this->createCategoryDomains($category, $categoryData, $this->domain->getAll());
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 		$this->imageFacade->uploadImage($category, $categoryData->image, null);
 
@@ -111,7 +111,7 @@ class CategoryFacade {
 		$rootCategory = $this->getRootCategory();
 		$category = $this->categoryRepository->getById($categoryId);
 		$this->categoryService->edit($category, $categoryData, $rootCategory);
-		$this->refreshCategoryDomains($category, $categoryData->hiddenOnDomains);
+		$this->refreshCategoryDomains($category, $categoryData);
 		$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 		$this->imageFacade->uploadImage($category, $categoryData->image, null);
@@ -124,13 +124,18 @@ class CategoryFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 */
-	private function createCategoryDomains(Category $category, array $domainConfigs) {
+	private function createCategoryDomains(Category $category, CategoryData $categoryData, array $domainConfigs) {
 		$toFlush = [];
 
 		foreach ($domainConfigs as $domainConfig) {
-			$categoryDomain = new CategoryDomain($category, $domainConfig->getId());
+			$domainId = $domainConfig->getId();
+			$categoryDomain = new CategoryDomain($category, $domainId);
+
+			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
+
 			$this->em->persist($categoryDomain);
 			$toFlush[] = $categoryDomain;
 		}
@@ -140,12 +145,16 @@ class CategoryFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param int[] $hiddenOnDomainData
+	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
-	private function refreshCategoryDomains(Category $category, array $hiddenOnDomainData) {
+	private function refreshCategoryDomains(Category $category, CategoryData $categoryData) {
 		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
+
 		foreach ($categoryDomains as $categoryDomain) {
-			if (in_array($categoryDomain->getDomainId(), $hiddenOnDomainData)) {
+			$domainId = $categoryDomain->getDomainId();
+
+			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
+			if (in_array($domainId, $categoryData->hiddenOnDomains)) {
 				$categoryDomain->setHidden(true);
 			} else {
 				$categoryDomain->setHidden(false);
