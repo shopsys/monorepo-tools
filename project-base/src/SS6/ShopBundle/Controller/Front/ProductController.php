@@ -155,6 +155,7 @@ class ProductController extends FrontBaseController {
 			'paginationResult' => $paginationResult,
 			'productFilterCountData' => $productFilterCountData,
 			'category' => $category,
+			'categoryDomain' => $category->getCategoryDomain($this->domain->getId()),
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'visibleChildren' => $this->categoryFacade->getAllVisibleChildrenByCategoryAndDomainId($category, $this->domain->getId()),
