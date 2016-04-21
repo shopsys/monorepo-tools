@@ -2,20 +2,14 @@
 <h2>{{ 'Napište nám'|trans }}</h2>
 
 {{ form_errors(form) }}
-	{{ form_label(form.name, 'Jméno'|trans) }}
-	{{ form_errors(form.name) }}
-	{{ form_widget(form.name) }}
 
-	{{ form_label(form.email, 'Email'|trans) }}
-	{{ form_errors(form.email) }}
-	{{ form_widget(form.email) }}
+	{{ form_row(form.name, { label: 'Jméno'|trans, rowClass: 'form-line-block' }) }}
+	{{ form_row(form.email, { label: 'Email'|trans, rowClass: 'form-line-block' }) }}
+	{{ form_row(form.message, { label: 'Vzkaz'|trans, rowClass: 'form-line-block' }) }}
 
-	{{ form_label(form.message, 'Vzkaz'|trans) }}
-	{{ form_errors(form.message) }}
-	{{ form_widget(form.message) }}
-
-	<br/>
-	{{ form_widget(form.send, { label: 'Odeslat'|trans }) }}
+	<div class="text-right">
+		{{ form_widget(form.send, { label: 'Odeslat'|trans }) }}
+	</div>
 
 {{ form_end(form) }}
 {{ init_js_validation(form, null) }}
