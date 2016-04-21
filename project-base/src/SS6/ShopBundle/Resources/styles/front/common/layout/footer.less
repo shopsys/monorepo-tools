@@ -4,5 +4,38 @@
 		padding-bottom: 20px;
 
 		color: @color-f;
+		text-align: center;
+
+		&__copyright {
+			margin-bottom: 10px;
+		}
+
+		a {
+			&:hover {
+				color: @color-f;
+			}
+		}
+	}
+}
+
+@media @query-lg {
+	.footer {
+		&__bottom {
+			.cfx();
+
+			text-align: left;
+
+			&__copyright {
+				float: left;
+				width: 50%;
+			}
+
+			&__articles {
+				float: right;
+				width: 50%;
+
+				text-align: right;
+			}
+		}
 	}
 }

@@ -30,11 +30,11 @@ class ProductListComponent extends AbstractPage {
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function findProductListItemByName($productName, WebDriverElement $context) {
-		$productItems = $context->findElements(WebDriverBy::cssSelector('.list-items__item'));
+		$productItems = $context->findElements(WebDriverBy::cssSelector('.js-list-products-item'));
 
 		foreach ($productItems as $item) {
 			try {
-				$nameElement = $item->findElement(WebDriverBy::cssSelector('.list-items__title'));
+				$nameElement = $item->findElement(WebDriverBy::cssSelector('.js-list-products-item-title'));
 
 				if ($nameElement->getText() === $productName) {
 					return $item;
