@@ -717,6 +717,10 @@ class Product extends AbstractTranslatableEntity {
 		$this->recalculateVisibility = true;
 	}
 
+	public function markForAvailabilityRecalculation() {
+		$this->recalculateAvailability = true;
+	}
+
 	/**
 	 * @return bool
 	 */
