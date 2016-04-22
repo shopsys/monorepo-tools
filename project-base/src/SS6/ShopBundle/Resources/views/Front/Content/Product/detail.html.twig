@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
@@ -12,6 +12,9 @@
 	{{- productDomain.getSeoTitleForHtml(domain) -}}
 {% endblock %}
 
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+{% endblock %}
 {% block main_content %}
 	<div class="product-image">
 		{{ productFlags.list(productDetail.product) }}
