@@ -46,9 +46,18 @@
 		<div class="box-detail__info">
 			<h1>{{ productDetail.product.name }}</h1>
 
+			{% if productDetail.product.calculatedAvailability %}
+				<div class="box-detail__info__availability">
+					{% if productDetail.product.calculatedSellingDenied %}
+						{{ 'Zboží se již neprodává'|trans }}
+					{% else %}
+						{{ productDetail.product.calculatedAvailability.name }}
+					{% endif %}
+				</div>
+			{% endif %}
+
 			{% if productDetail.product.brand or not productDetail.product.isMainVariant and (
 				productDetail.product.catnum or
-				productDetail.product.calculatedAvailability or
 				productDetail.product.partno or
 				productDetail.product.ean
 			) %}
@@ -69,19 +78,6 @@
 							</dt>
 							<dd>
 								{{ productDetail.product.catnum }}
-							</dd>
-						{% endif %}
-
-						{% if productDetail.product.calculatedAvailability %}
-							<dt>
-							{{ 'Dostupnost'|trans }}:
-							</dt>
-							<dd>
-								{% if productDetail.product.calculatedSellingDenied %}
-									{{ 'Zboží se již neprodává'|trans }}
-								{% else %}
-									{{ productDetail.product.calculatedAvailability.name }}
-								{% endif %}
 							</dd>
 						{% endif %}
 
