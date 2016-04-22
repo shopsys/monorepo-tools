@@ -15,31 +15,39 @@
 {% block panel_content %}
 	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
 {% endblock %}
-{% block main_content %}
-	<div class="product-image">
-		{{ productFlags.list(productDetail.product) }}
-		<span>
-			{% if imageExists(productDetail.product) %}
-				<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-popup-image">
-					{{ image(productDetail.product) }}
-				</a>
-			{% else %}
-				<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
-			{% endif %}
-		</span>
-	</div>
-	{% set galleryImages = getImages(productDetail.product) %}
-	{% if galleryImages|length > 1 %}
-		<div class="product-gallery js-gallery">
-			{% for galleryImage in galleryImages %}
-				<a href="{{ imageUrl(galleryImage, 'original') }}" class="product-gallery__image">
-					{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
-				</a>
-			{% endfor %}
-		</div>
-	{% endif %}
 
-	<h1>{{ productDetail.product.name }}</h1>
+{% block main_content %}
+	<div class="box-detail">
+		<div class="box-detail__image">
+			<div class="box-detail__image__main">
+				{% if imageExists(productDetail.product) %}
+					<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-popup-image">
+						{{ image(productDetail.product) }}
+					</a>
+				{% else %}
+					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
+				{% endif %}
+			</div>
+			{{ productFlags.list(productDetail.product) }}
+
+			{% set galleryImages = getImages(productDetail.product) %}
+			{% if galleryImages|length > 1 %}
+				<div class="box-gallery js-gallery">
+					{% for galleryImage in galleryImages %}
+						<div class="box-gallery__item">
+							<a href="{{ imageUrl(galleryImage, 'original') }}" class="box-gallery__item__link">
+								{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+		<div class="box-detail__info">
+			<h1>{{ productDetail.product.name }}</h1>
+		</div>
+	</div>
+
 
 	{% if productDetail.product.brand %}
 		<dl class="list-params">

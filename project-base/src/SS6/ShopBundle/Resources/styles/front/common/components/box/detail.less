@@ -1,0 +1,42 @@
+.box-detail {
+	&__image {
+		position: relative;
+		margin-bottom: @margin-gap;
+
+		&__main {
+			padding: 10px;
+			margin-bottom: @margin-gap;
+
+			border: 1px solid @color-border;
+			text-align: center;
+			font-size: 0;
+
+			img {
+				width: auto;
+				height: auto;
+			}
+		}
+	}
+
+	&__info {
+		margin-bottom: @margin-gap;
+
+	}
+}
+
+@media @query-lg {
+	.box-detail {
+		.cfx();
+
+		&__image {
+			width: 50%;
+			float: left;
+			padding-right: 20px;
+		}
+
+		&__info {
+			width: 50%;
+			float: right;
+		}
+	}
+}
