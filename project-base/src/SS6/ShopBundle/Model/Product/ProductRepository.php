@@ -432,6 +432,12 @@ class ProductRepository {
 				$queryBuilder->orderBy('relevance', 'asc');
 				break;
 
+			case ProductListOrderingModeService::ORDER_BY_PRIORITY:
+				$queryBuilder->orderBy('p.orderingPriority', 'desc');
+				$collation = $this->localization->getCollationByLocale($locale);
+				$queryBuilder->addOrderBy("COLLATE(pt.name, '" . $collation . "')", 'asc');
+				break;
+
 			default:
 				$message = 'Product list ordering mode "' . $orderingMode . '" is not supported.';
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidOrderingModeException($message);

@@ -11,8 +11,8 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
+use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 
 class ProductDataFixtureLoader {
 
@@ -96,14 +96,20 @@ class ProductDataFixtureLoader {
 	private $pricingGroups;
 
 	/**
-	 * @param string $path
-	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+	 * @var \SS6\ShopBundle\Model\Product\ProductEditDataFactory
 	 */
-	public function __construct($path, CsvReader $csvReader, ParameterFacade $parameterFacade) {
+	private $productEditDataFactory;
+
+	public function __construct(
+		$path,
+		CsvReader $csvReader,
+		ParameterFacade $parameterFacade,
+		ProductEditDataFactory $productEditDataFactory
+	) {
 		$this->path = $path;
 		$this->csvReader = $csvReader;
 		$this->parameterFacade = $parameterFacade;
+		$this->productEditDataFactory = $productEditDataFactory;
 	}
 
 	/**
@@ -183,8 +189,8 @@ class ProductDataFixtureLoader {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getProductEditDataFromCsvRow(array $row) {
-		$productEditData = new ProductEditData();
-		$productEditData->productData = new ProductData();
+		$productEditData = $this->productEditDataFactory->createDefault();
+
 		$productEditData->productData->name = ['cs' => $row[self::COLUMN_NAME_CS], 'en' => $row[self::COLUMN_NAME_EN]];
 		$productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
 		$productEditData->productData->partno = $row[self::COLUMN_PARTNO];

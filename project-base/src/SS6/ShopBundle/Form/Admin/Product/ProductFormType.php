@@ -241,6 +241,12 @@ class ProductFormType extends AbstractType {
 					Product::PRICE_CALCULATION_TYPE_AUTO => t('Automaticky'),
 					Product::PRICE_CALCULATION_TYPE_MANUAL => t('Ručně'),
 				],
+			])
+			->add('orderingPriority', FormType::INTEGER, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyplňte prioritu řazení zboží']),
+				],
 			]);
 
 		$builder->add('categoriesByDomainId', FormType::FORM, ['required' => false]);

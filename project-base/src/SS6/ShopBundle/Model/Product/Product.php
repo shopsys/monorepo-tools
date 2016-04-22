@@ -279,6 +279,13 @@ class Product extends AbstractTranslatableEntity {
 	private $variantType;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $orderingPriority;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Product[]|null $variants
 	 */
@@ -315,6 +322,7 @@ class Product extends AbstractTranslatableEntity {
 		$this->calculatedHidden = true;
 		$this->calculatedSellingDenied = true;
 		$this->brand = $productData->brand;
+		$this->orderingPriority = $productData->orderingPriority;
 
 		$this->variants = new ArrayCollection();
 		if ($variants === null) {
@@ -376,6 +384,8 @@ class Product extends AbstractTranslatableEntity {
 				$this->setPrice(null);
 			}
 		}
+
+		$this->orderingPriority = $productData->orderingPriority;
 	}
 
 	/**
@@ -562,6 +572,13 @@ class Product extends AbstractTranslatableEntity {
 	 */
 	public function getCalculatedAvailability() {
 		return $this->calculatedAvailability;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getOrderingPriority() {
+		return $this->orderingPriority;
 	}
 
 	/**
