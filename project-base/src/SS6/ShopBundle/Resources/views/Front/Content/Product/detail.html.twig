@@ -45,70 +45,73 @@
 		</div>
 		<div class="box-detail__info">
 			<h1>{{ productDetail.product.name }}</h1>
+
+			{% if productDetail.product.brand or not productDetail.product.isMainVariant and (
+				productDetail.product.catnum or
+				productDetail.product.calculatedAvailability or
+				productDetail.product.partno or
+				productDetail.product.ean
+			) %}
+				<dl class="box-detail__info__params">
+					{% if productDetail.product.brand %}
+						<dt>
+							{{ 'Značka'|trans }}:
+						</dt>
+						<dd>
+							{{ productDetail.product.brand.name }}
+						</dd>
+					{% endif %}
+
+					{% if not productDetail.product.isMainVariant %}
+						{% if productDetail.product.catnum %}
+							<dt>
+								{{ 'Katalogové číslo'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.catnum }}
+							</dd>
+						{% endif %}
+
+						{% if productDetail.product.calculatedAvailability %}
+							<dt>
+							{{ 'Dostupnost'|trans }}:
+							</dt>
+							<dd>
+								{% if productDetail.product.calculatedSellingDenied %}
+									{{ 'Zboží se již neprodává'|trans }}
+								{% else %}
+									{{ productDetail.product.calculatedAvailability.name }}
+								{% endif %}
+							</dd>
+						{% endif %}
+
+						{% if productDetail.product.partno %}
+							<dt>
+								{{ 'Výrobní číslo'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.partno }}
+							</dd>
+						{% endif %}
+
+						{% if productDetail.product.ean %}
+							<dt>
+								{{ 'EAN'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.ean }}
+							</dd>
+						{% endif %}
+					{% endif %}
+				</dl>
+			{% endif %}
 		</div>
 	</div>
 
 
-	{% if productDetail.product.brand %}
-		<dl class="list-params">
-			<dt class="list-params__title">
-				{{ 'Značka'|trans }}:
-			</dt>
-			<dd class="list-params__definition">
-				{{ productDetail.product.brand.name }}
-			</dd>
-		</dl>
-	{% endif %}
+
 
 	{% if not productDetail.product.isMainVariant %}
-
-		{% if productDetail.product.catnum %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Katalogové číslo'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.catnum }}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.calculatedAvailability %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Dostupnost'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{% if productDetail.product.calculatedSellingDenied %}
-						{{ 'Zboží se již neprodává'|trans }}
-					{% else %}
-						{{ productDetail.product.calculatedAvailability.name }}
-					{% endif %}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.partno %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Výrobní číslo'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.partno }}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.ean %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'EAN'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.ean }}
-				</dd>
-			</dl>
-		{% endif %}
 
 		<div class="js-product-detail-main-add-to-cart-wrapper">
 			<dl class="list-params-side">
@@ -196,8 +199,8 @@
 			<h3>{{ 'Technické parametry'|trans }}:</h3>
 			{% for productParameterValue in productDetail.parameters %}
 				<dl class="list-params">
-					<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
-					<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
+					<dt>{{ productParameterValue.parameter.name }}</dt>
+					<dd>{{ productParameterValue.value.text }}</dd>
 				</dl>
 			{% endfor %}
 		{% endif %}
