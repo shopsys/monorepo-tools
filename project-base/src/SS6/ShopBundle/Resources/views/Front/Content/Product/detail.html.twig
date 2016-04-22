@@ -56,6 +56,27 @@
 				</div>
 			{% endif %}
 
+			{% if not productDetail.product.isMainVariant %}
+				<div class="js-product-detail-main-add-to-cart-wrapper box-detail-add">
+					<div class="box-detail-add__prices">
+						<div class="box-detail-add__prices__item box-detail-add__prices__item--main">
+							{{ productDetail.sellingPrice.priceWithVat|price }}
+						</div>
+						<div class="box-detail-add__prices__item">
+							{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+						</div>
+					</div>
+
+					{% if not productDetail.product.calculatedSellingDenied %}
+						{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
+					{% else %}
+						<div>
+							{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
 			{% if productDetail.product.brand or not productDetail.product.isMainVariant and (
 				productDetail.product.catnum or
 				productDetail.product.partno or
@@ -104,45 +125,6 @@
 		</div>
 	</div>
 
-
-
-
-	{% if not productDetail.product.isMainVariant %}
-
-		<div class="js-product-detail-main-add-to-cart-wrapper">
-			<dl class="list-params-side">
-				<dt class="list-params-side__title">
-					<strong>
-						{{ 'Cena s DPH'|trans }}:
-					</strong>
-				</dt>
-				<dd class="list-params-side__definition">
-					<strong class="price-main price-big">
-						{{ productDetail.sellingPrice.priceWithVat|price }}
-					</strong>
-				</dd>
-			</dl>
-			<dl class="list-params-side mb-1">
-				<dt class="list-params-side__title">
-					<strong>
-						{{ 'Cena bez DPH'|trans }}:
-					</strong>
-				</dt>
-				<dd class="list-params-side__definition">
-					<strong>
-						{{ productDetail.sellingPrice.priceWithoutVat|price }}
-					</strong>
-				</dd>
-			</dl>
-			{% if not productDetail.product.calculatedSellingDenied %}
-				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
-			{% else %}
-				<div>
-					{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
-				</div>
-			{% endif %}
-		</div>
-	{% endif %}
 
 	{% if productDetail.product.isMainVariant %}
 		<table class="table-main">
