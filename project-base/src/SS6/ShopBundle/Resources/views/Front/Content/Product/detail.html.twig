@@ -125,7 +125,6 @@
 		</div>
 	</div>
 
-
 	{% if productDetail.product.isMainVariant %}
 		<table class="table-main">
 			<thead>
@@ -167,27 +166,65 @@
 		<table>
 	{% endif %}
 
-	{% if productDomain.description or productDetail.parameters %}
-		{% if productDomain.description %}
-			<h2>{{ 'Informace o produktu'|trans }}</h2>
-			{{ productDomain.description|raw }}
-		{% endif %}
+	{% if productDomain.description or
+	productDetail.parameters or
+	accesoriesDetails|length > 0 %}
+		<div class="in-tab">
+			<div class="in-tab__head">
+				{% if productDomain.description %}
+					<a href="#" class="in-tab__head__item active">
+						{{ 'Informace o produktu'|trans }}
+					</a>
+				{% endif %}
 
-		{% if productDetail.parameters %}
-			<h3>{{ 'Technické parametry'|trans }}:</h3>
-			{% for productParameterValue in productDetail.parameters %}
-				<dl class="list-params">
-					<dt>{{ productParameterValue.parameter.name }}</dt>
-					<dd>{{ productParameterValue.value.text }}</dd>
-				</dl>
-			{% endfor %}
-		{% endif %}
-	{% endif %}
+				{% if productDetail.parameters %}
+					<a href="#" class="in-tab__head__item">
+						{{ 'Technické parametry'|trans }}
+					</a>
+				{% endif %}
 
-	{% if accesoriesDetails|length > 0 %}
-		<h2>{{ 'Příslušenství'|trans }}</h2>
-		<div>
-			{{ productList.list(accesoriesDetails) }}
+				{% if accesoriesDetails|length > 0 %}
+					<a href="#" class="in-tab__head__item">
+						{{ 'Příslušenství'|trans }}
+					</a>
+				{% endif %}
+			</div>
+			<div class="in-tab__content">
+				{% if productDomain.description %}
+					<a href="#" class="in-tab__content__title active">
+						{{ 'Informace o produktu'|trans }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item active">
+						{{ productDomain.description|raw }}
+					</div>
+				{% endif %}
+
+				{% if productDetail.parameters %}
+					<a href="#" class="in-tab__content__title">
+						{{ 'Technické parametry'|trans }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item">
+						{% for productParameterValue in productDetail.parameters %}
+							<dl class="list-params">
+								<dt>{{ productParameterValue.parameter.name }}</dt>
+								<dd>{{ productParameterValue.value.text }}</dd>
+							</dl>
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if accesoriesDetails|length > 0 %}
+					<a href="#" class="in-tab__content__title">
+						{{ 'Příslušenství'|trans }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item">
+						{{ productList.list(accesoriesDetails) }}
+					</div>
+				{% endif %}
+			</div>
 		</div>
 	{% endif %}
 {% endblock %}
