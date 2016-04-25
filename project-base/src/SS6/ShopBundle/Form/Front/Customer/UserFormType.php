@@ -29,14 +29,19 @@ class UserFormType extends AbstractType {
 			->add('firstName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Jméno nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('lastName', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Příjmení nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('email', FormType::EMAIL, ['read_only' => true, 'required' => false])
+			->add('email', FormType::EMAIL, [
+				'read_only' => true,
+				'required' => false,
+			])
 			->add('password', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
 				'required' => false,

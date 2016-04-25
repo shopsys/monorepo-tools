@@ -4,7 +4,6 @@ namespace SS6\ShopBundle;
 
 use SS6\ShopBundle\Component\Translation\Translator;
 use SS6\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
-use SS6\ShopBundle\DependencyInjection\Compiler\ValidatorBuilderCompilerPass;
 use SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -17,7 +16,6 @@ class SS6ShopBundle extends Bundle {
 	public function build(ContainerBuilder $container) {
 		parent::build($container);
 
-		$container->addCompilerPass(new ValidatorBuilderCompilerPass());
 		$container->addCompilerPass(new CustomTranslationsCompilerPass());
 	}
 

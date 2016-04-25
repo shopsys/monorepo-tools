@@ -24,7 +24,7 @@ class NewPasswordFormType extends AbstractType {
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
-						new Constraints\Length(['min' => 5, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
 					],
 				],
 				'invalid_message' => 'Hesla se neshodují',

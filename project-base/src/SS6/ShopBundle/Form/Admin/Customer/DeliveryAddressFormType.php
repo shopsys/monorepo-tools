@@ -25,18 +25,48 @@ class DeliveryAddressFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('addressFilled', FormType::CHECKBOX, ['required' => false])
-			->add('companyName', FormType::TEXT, ['required' => false])
-			->add('contactPerson', FormType::TEXT, ['required' => false])
-			->add('telephone', FormType::TEXT, ['required' => false])
+			->add('companyName', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			])
+			->add('contactPerson', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 200,
+						'maxMessage' => 'Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			])
+			->add('telephone', FormType::TEXT, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\Length([
+						'max' => 30,
+						'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků',
+					]),
+				],
+			])
 			->add('street', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím ulici',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
@@ -48,6 +78,11 @@ class DeliveryAddressFormType extends AbstractType {
 						'message' => 'Vyplňte prosím město',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
 				],
 			])
 			->add('postcode', FormType::TEXT, [
@@ -55,6 +90,11 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\NotBlank([
 						'message' => 'Vyplňte prosím PSČ',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
+					new Constraints\Length([
+						'max' => 30,
+						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],

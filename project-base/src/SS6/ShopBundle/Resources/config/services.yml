@@ -9,7 +9,6 @@ parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
-  validator.builder.factory.class: SS6\ShopBundle\Component\Validator\ValidatorBuilderFactory
   faker.seed: 1234
 
 services:
@@ -363,10 +362,6 @@ services:
     arguments:
       - %ss6.uploaded_file_dir%
       - %ss6.uploaded_file_url_prefix%
-
-  ss6.shop.component.validator.auto_validator_annotation_loader:
-    class: SS6\ShopBundle\Component\Validator\AutoValidatorAnnotationLoader
-    arguments: [@annotation_reader]
 
   ss6.shop.component.validator.constraints.not_selected_domain_to_show:
     class: SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShowValidator

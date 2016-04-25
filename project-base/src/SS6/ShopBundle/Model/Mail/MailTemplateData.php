@@ -2,12 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Mail;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 
-/**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Article\Article")
- */
 class MailTemplateData {
 
 	/**

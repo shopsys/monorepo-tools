@@ -39,11 +39,6 @@ services:
     tags:
       - { name: form.type, alias: file_upload }
 
-  ss6.shop.fom.form:
-    class: SS6\ShopBundle\Form\FormTypeExtension
-    tags:
-        - { name: form.type_extension, alias: form }
-
   ss6.shop.form.friendly_url:
     class: SS6\ShopBundle\Form\FriendlyUrlType
     tags:

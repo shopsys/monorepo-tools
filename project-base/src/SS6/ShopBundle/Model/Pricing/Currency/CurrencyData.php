@@ -2,12 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Pricing\Currency;
 
-use SS6\ShopBundle\Component\Validator;
 use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 
-/**
- * @Validator\Auto(entity="SS6\ShopBundle\Model\Pricing\Currency\Currency")
- */
 class CurrencyData {
 
 	/**

@@ -42,7 +42,12 @@ class TransportFormType extends AbstractType {
 				'main_constraints' => [
 					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
 				],
-				'options' => ['required' => false],
+				'options' => [
+					'required' => false,
+					'constraints' => [
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
+					],
+				],
 			])
 			->add('domains', FormType::DOMAINS, [
 				'constraints' => [

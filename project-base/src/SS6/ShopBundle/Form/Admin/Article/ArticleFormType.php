@@ -55,8 +55,14 @@ class ArticleFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('name', FormType::TEXT)
-			->add('text', FormType::WYSIWYG, ['required' => true,
+			->add('name', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název článku']),
+				],
+			])
+			->add('text', FormType::WYSIWYG, [
+				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
 				],
