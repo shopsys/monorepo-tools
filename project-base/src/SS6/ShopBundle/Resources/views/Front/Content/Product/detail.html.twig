@@ -206,12 +206,20 @@
 						<i class="svg svg-arrow"></i>
 					</a>
 					<div class="in-tab__content__item">
-						{% for productParameterValue in productDetail.parameters %}
-							<dl class="list-params">
-								<dt>{{ productParameterValue.parameter.name }}</dt>
-								<dd>{{ productParameterValue.value.text }}</dd>
-							</dl>
-						{% endfor %}
+						<table class="table-params">
+							<tbody>
+								{% for productParameterValue in productDetail.parameters %}
+									<tr>
+										<th>
+											{{ productParameterValue.parameter.name }}
+										</th>
+										<td>
+											{{ productParameterValue.value.text }}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
 					</div>
 				{% endif %}
 
