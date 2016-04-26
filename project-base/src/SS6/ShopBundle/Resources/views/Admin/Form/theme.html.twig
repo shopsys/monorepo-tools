@@ -253,6 +253,10 @@
 									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
 								</span>
 
+								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip text-no-decoration" target="_blank" data-toggle="tooltip" data-placement="top">
+									<i class="svg svg-forward-page"></i>
+								</a>
+
 								<span class="js-entity-url-list-row-delete-revert-wrapper">
 									<span class="js-entity-url-list-row-delete-block">
 										<button class="btn-no-style form-choice-list__item__remove js-entity-url-list-row-delete-block-button" type="button">
