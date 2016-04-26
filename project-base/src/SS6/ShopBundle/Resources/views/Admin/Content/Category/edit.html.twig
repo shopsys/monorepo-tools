@@ -3,14 +3,6 @@
 {% block title %}- {{ 'Editace kategorie'|trans }} - {{ category.name }}{% endblock %}
 {% block h1 %}{{ 'Editace kategorie'|trans }} - {{ category.name }}{% endblock %}
 
-{% block category_url %}
-	<div class="form-line">
-		<span class="form-line__line">
-			<a href="{{ url('front_product_list', { id: category.id }) }}" target="_blank">{{ url('front_product_list', { id: category.id }) }}</a>
-		</span>
-	</div>
-{% endblock %}
-
 {% block category_urls %}
 	{{ form_row(form.urls, { label: 'URL adresy'|trans }) }}
 {% endblock %}
