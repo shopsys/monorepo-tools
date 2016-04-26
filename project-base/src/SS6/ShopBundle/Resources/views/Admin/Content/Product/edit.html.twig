@@ -298,6 +298,35 @@
 	{% endif %}
 {% endblock %}
 
+{% block product_short_description %}
+	<div class="form-group__title">
+		{{ 'Krátký popis'|trans }}
+	</div>
+	{% if product.isVariant %}
+		<div class="form-line form-line--disabled">
+			<div class="form-line__item form-line__item--text">
+				<strong>{{ 'Krátký popis se nastavuje u hlavní varianty.'|trans }}</strong>
+			</div>
+		</div>
+	{% else %}
+		{% for domainId, shortDescriptionForm in form.shortDescriptions %}
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__group">
+					<span class="form-line__group__image">
+						{{ domainIcon(domainId, 'large') }}
+					</span>
+					<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_widget(shortDescriptionForm) }}
+				</div>
+			</div>
+		{% endfor %}
+	{% endif %}
+{% endblock %}
+
 {% block images %}
 	{% if form.imagePositions|length > 0 %}
 		<div class="list-images__wrap">

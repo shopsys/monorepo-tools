@@ -311,6 +311,7 @@ class ProductEditFacade {
 		$seoMetaDescriptions = $productEditData->seoMetaDescriptions;
 		if (!$product->isVariant()) {
 			$descriptions = $productEditData->descriptions;
+			$shortDescriptions = $productEditData->shortDescriptions;
 		}
 		$heurekaCpcValues = $productEditData->heurekaCpcValues;
 		foreach ($productDomains as $domainId => $productDomain) {
@@ -322,6 +323,9 @@ class ProductEditFacade {
 			}
 			if (!empty($descriptions)) {
 				$productDomain->setDescription($descriptions[$domainId]);
+			}
+			if (!empty($shortDescriptions)) {
+				$productDomain->setShortDescription($shortDescriptions[$domainId]);
 			}
 			if (!empty($heurekaCpcValues)) {
 				$productDomain->setHeurekaCpc($heurekaCpcValues[$domainId]);

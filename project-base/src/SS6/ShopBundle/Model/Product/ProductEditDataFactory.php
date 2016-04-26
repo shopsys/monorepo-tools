@@ -80,6 +80,7 @@ class ProductEditDataFactory {
 		$productEditData->seoTitles = [];
 		$productEditData->seoMetaDescriptions = [];
 		$productEditData->descriptions = [];
+		$productEditData->shortDescriptions = [];
 		$productEditData->accessories = [];
 		$productEditData->heurekaCpcValues = [];
 
@@ -150,6 +151,7 @@ class ProductEditDataFactory {
 			$productEditData->seoTitles[$domainId] = $productDomain->getSeoTitle();
 			$productEditData->seoMetaDescriptions[$domainId] = $productDomain->getSeoMetaDescription();
 			$productEditData->descriptions[$domainId] = $productDomain->getDescription();
+			$productEditData->shortDescriptions[$domainId] = $productDomain->getShortDescription();
 
 			$productEditData->urls->mainOnDomains[$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
