@@ -50,6 +50,12 @@ class ProductDomain {
 	private $description;
 
 	/**
+	 * @var string|null
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $shortDescription;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(type="tsvector", nullable=false)
@@ -135,10 +141,24 @@ class ProductDomain {
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getShortDescription() {
+		return $this->shortDescription;
+	}
+
+	/**
 	 * @param string|null $description
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+
+	/**
+	 * @param string|null $shortDescription
+	 */
+	public function setShortDescription($shortDescription) {
+		$this->shortDescription = $shortDescription;
 	}
 
 	/**
