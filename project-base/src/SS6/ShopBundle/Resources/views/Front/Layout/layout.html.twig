@@ -3,9 +3,8 @@
 
 {% block html_body %}
 	{% set adminLoggedAsCustomer = is_granted(constant('SS6\\ShopBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
-	{% set showWindowFixedBarTop = adminLoggedAsCustomer or isMailerSettingUnusual() %}
-	{% if showWindowFixedBarTop %}
-		<div class="window-fixed-bar--top">
+	{% if adminLoggedAsCustomer or isMailerSettingUnusual() %}
+		<div class="window-bar--top">
 			{% if adminLoggedAsCustomer %}
 				<strong>{{ 'Pozor! Jste jako administrátor přihlášen za zákazníka.'|trans }}</strong>
 				<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}"><strong>{{ 'Odhlásit se'|trans }}</strong></a>
@@ -15,7 +14,7 @@
 			{% endif %}
 		</div>
 	{% endif %}
-	<div class="web {% if showWindowFixedBarTop %} web--with-info {% endif %}">
+	<div class="web">
 		<div class="web__line web__line--light">
 			<div class="web__header">
 				<div class="web__container">

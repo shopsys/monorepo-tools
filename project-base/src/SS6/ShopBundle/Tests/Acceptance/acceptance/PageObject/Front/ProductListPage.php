@@ -35,6 +35,20 @@ class ProductListPage extends AbstractPage {
 	}
 
 	/**
+	 * @param int $expectedCount
+	 */
+	public function assertProductsTotalCount($expectedCount) {
+		$totalCountElement = $this->getProductListCompomentContext()
+			->findElement(WebDriverBy::cssSelector('.js-paging-total-count'));
+		$actualCount = (int)trim($totalCountElement->getText());
+
+		if ($expectedCount !== $actualCount) {
+			$message = 'Product list expects ' . $expectedCount . ' products but contains ' . $actualCount . '.';
+			throw new \PHPUnit_Framework_ExpectationFailedException($message);
+		}
+	}
+
+	/**
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function getProductListCompomentContext() {

@@ -2,11 +2,11 @@
 
 namespace SS6\ShopBundle\Form\Front\Product;
 
+use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -38,8 +38,9 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 					'label' => $parameterFilterChoice->getParameter()->getName(),
 					'expanded' => true,
 					'multiple' => true,
-					'choice_list' => new ObjectChoiceList(
+					'choice_list' => new IndexedObjectChoiceList(
 						$parameterFilterChoice->getValues(),
+						'id',
 						'text',
 						[],
 						null,

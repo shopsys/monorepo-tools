@@ -2,10 +2,10 @@
 
 namespace SS6\ShopBundle\Form\Front\Product;
 
+use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -78,13 +78,13 @@ class ProductFilterFormType extends AbstractType {
 				'required' => false,
 				'expanded' => true,
 				'multiple' => true,
-				'choice_list' => new ObjectChoiceList($this->flagFilterChoices, 'name', [], null, 'id'),
+				'choice_list' => new IndexedObjectChoiceList($this->flagFilterChoices, 'id', 'name', [], null, 'id'),
 			])
 			->add('brands', FormType::CHOICE, [
 				'required' => false,
 				'expanded' => true,
 				'multiple' => true,
-				'choice_list' => new ObjectChoiceList($this->brandFilterChoices, 'name', [], null, 'id'),
+				'choice_list' => new IndexedObjectChoiceList($this->brandFilterChoices, 'id', 'name', [], null, 'id'),
 			])
 			->add('search', FormType::SUBMIT);
 	}
