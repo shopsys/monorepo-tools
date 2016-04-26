@@ -435,8 +435,13 @@ table {
 body, form, input, select, button, p, pre, dfn, address, ul, ol, li,
 h1, h2, h3, h4, h5, h6, img,
 table, tr, td, th, input, textarea {
+	color: @color-base;
 	font-family: @font-base;
-	font-size: @font-size;
+	font-size: @font-size-mobile;
+
+	@media @query-lg {
+		font-size: @font-size;
+	}
 }
 
 td, th {
