@@ -61,10 +61,9 @@
 
 							<td class="table-cart__cell table-cart__cell--amount">
 								<span class="form-input-spinbox js-spinbox">
-									<input type="button" class="btn form-input-spinbox__button js-spinbox-minus" value="-" />
-									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
-									<input type="button" class="btn form-input-spinbox__button js-spinbox-plus" value="+" />
-									{{ cartItem.product.unit.name }}
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
+									<button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
 								</span>
 							</td>
 
