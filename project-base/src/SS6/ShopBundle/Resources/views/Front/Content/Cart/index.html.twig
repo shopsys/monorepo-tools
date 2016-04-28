@@ -161,11 +161,14 @@
 			</div>
 		{{ form_end(form) }}
 	{% else %}
-		<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
-
-		<strong class="heading heading--visible">
-			{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
-		</strong>
+		<div class="box-cart-empty">
+			<div class="box-cart-empty__image">
+				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
+			</div>
+			<div class="box-cart-empty__text">
+				{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
+			</div>
+		</div>
 
 		<div class="in-action">
 			<div class="in-action__left">
