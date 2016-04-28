@@ -169,22 +169,22 @@
 	{% if productDomain.description or
 	productDetail.parameters or
 	accesoriesDetails|length > 0 %}
-		<div class="in-tab">
+		<div class="in-tab js-tabs">
 			<div class="in-tab__head">
 				{% if productDomain.description %}
-					<a href="#" class="in-tab__head__item active">
+					<a href="#" class="in-tab__head__item active js-tabs-tab-link" data-tab-id="description">
 						{{ 'Informace o produktu'|trans }}
 					</a>
 				{% endif %}
 
 				{% if productDetail.parameters %}
-					<a href="#" class="in-tab__head__item">
+					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="parameters">
 						{{ 'Technické parametry'|trans }}
 					</a>
 				{% endif %}
 
 				{% if accesoriesDetails|length > 0 %}
-					<a href="#" class="in-tab__head__item">
+					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="accesories">
 						{{ 'Příslušenství'|trans }}
 					</a>
 				{% endif %}
@@ -195,7 +195,7 @@
 						{{ 'Informace o produktu'|trans }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item active">
+					<div class="in-tab__content__item active js-tabs-tab-content" data-tab-id="description">
 						{{ productDomain.description|raw }}
 					</div>
 				{% endif %}
@@ -205,7 +205,7 @@
 						{{ 'Technické parametry'|trans }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item">
+					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="parameters">
 						<table class="table-params">
 							<tbody>
 								{% for productParameterValue in productDetail.parameters %}
@@ -228,7 +228,7 @@
 						{{ 'Příslušenství'|trans }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item">
+					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="accesories">
 						{{ productList.list(accesoriesDetails) }}
 					</div>
 				{% endif %}
