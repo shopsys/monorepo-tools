@@ -6,11 +6,11 @@
 
 {% block content %}
 
-	<div class="box-transport-payment">
+	<div class="box-order">
 
-		<div id="transportAndPayment" class="box-transport-payment__choose">
+		<div id="transportAndPayment" class="box-order__info">
 
-			<div class="box-transport-payment__choose__item">
+			<div class="box-order__info__item">
 
 				<h2>{{ 'Výběr dopravy'|trans }}</h2>
 
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 
-			<div class="box-transport-payment__choose__item">
+			<div class="box-order__info__item">
 
 				<h2>{{ 'Výběr platby'|trans }}</h2>
 
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 
-		<div class="box-transport-payment__info">
+		<div class="box-order__cart">
 			{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
 		</div>
 	</div>

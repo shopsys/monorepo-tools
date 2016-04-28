@@ -1,25 +1,25 @@
-.box-transport-payment {
-	&__choose {
+.box-order {
+	&__info {
 		&__item {
 			margin-bottom: @margin-gap;
 		}
 	}
 
-	&__info {
+	&__cart {
 		margin-bottom: @margin-gap;
 	}
 }
 
 @media @query-lg {
-	.box-transport-payment {
+	.box-order {
 		width: 100%;
 		.flex();
 
-		&__choose {
+		&__info {
 			width: 100%/3*2;
 		}
 
-		&__info {
+		&__cart {
 			width: 100%/3;
 			padding-left: 20px;
 		}
@@ -27,8 +27,8 @@
 }
 
 @media @query-vl {
-	.box-transport-payment {
-		&__info {
+	.box-order {
+		&__cart {
 			padding-left: 40px;
 		}
 	}
