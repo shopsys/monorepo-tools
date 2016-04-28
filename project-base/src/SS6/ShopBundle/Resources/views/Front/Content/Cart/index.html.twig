@@ -115,15 +115,37 @@
 
 			</table>
 
-			{% if isFreeTransportAndPaymentActive %}
-				{% if isPaymentAndTransportFree %}
-					<strong>{{ 'Dopravu i platbu máte zdarma!'|trans }}</strong>
-				{% else %}
-					<strong>{{ 'Musíte ještě nakoupit zboží za %remaining%, abyste měli dopravu i platbu zdarma.'|trans({'%remaining%': remainingPriceWithVat|price })|raw }}</strong>
-				{% endif %}
-			{% endif %}
+			<div class="box-cart-bottom">
+				<div class="box-cart-bottom__info">
+					{% if isFreeTransportAndPaymentActive %}
+						{% if isPaymentAndTransportFree %}
+							<div class="box-free-transport box-free-transport--done">
+								{% trans %}
+									Dopravu i platbu máte
+									<strong>zdarma!</strong>
+								{% endtrans %}
+							</div>
+						{% else %}
+							<div class="box-free-transport">
+								{% trans with {'%price%': remainingPriceWithVat|price} %}
+									Musíte ještě nakoupit zboží za
+									<strong>
+										%price%
+									</strong>
+									abyste měli dopravu i platbu
+									<strong>
+										zdarma.
+									</strong>
+								{% endtrans %}
+							</div>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="box-cart-bottom__promo">
+					{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
+				</div>
+			</div>
 
-			{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
 
 			<div class="box-buttons">
 				{% if cart.itemsCount > 0 %}
