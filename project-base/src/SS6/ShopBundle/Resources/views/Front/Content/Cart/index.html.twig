@@ -146,15 +146,18 @@
 				</div>
 			</div>
 
-
-			<div class="box-buttons">
+			<div class="in-action">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary box-buttons__right'}}) }}
+					<div class="in-action__right">
+						{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big'}}) }}
+					</div>
 				{% endif %}
 
-				<a href="{{ url('front_homepage') }}" class="btn box-buttons__left">
-					{{ 'Zpět k nákupu'|trans }}
-				</a>
+				<div class="in-action__left">
+					<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
+						{{ 'Zpět k nákupu'|trans }}
+					</a>
+				</div>
 			</div>
 		{{ form_end(form) }}
 	{% else %}
@@ -164,10 +167,12 @@
 			{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
 		</strong>
 
-		<div class="box-buttons">
-			<a href="{{url('front_homepage') }}" class="btn box-buttons__left">
-				{{ 'Zpět k nákupu'|trans }}
-			</a>
+		<div class="in-action">
+			<div class="in-action__left">
+				<a href="{{url('front_homepage') }}" class="btn in-action__btn">
+					{{ 'Zpět k nákupu'|trans }}
+				</a>
+			</div>
 		</div>
 	{% endif %}
 

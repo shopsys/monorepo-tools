@@ -71,12 +71,16 @@
 
 	{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
 
-	<div class="box-buttons">
-		{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--primary box-buttons__right' } }) }}
+	<div class="in-action">
+		<div class="in-action__right">
+			{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big' } }) }}
+		</div>
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn box-buttons__left js-no-validate-button">
-			{{ 'Zpět na výběr dopravy a platby'|trans }}
-		</button>
+		<div class="in-action__left">
+			<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
+				{{ 'Zpět na výběr dopravy a platby'|trans }}
+			</button>
+		</div>
 	</div>
 
 {% endblock %}

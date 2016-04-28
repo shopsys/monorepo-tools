@@ -96,11 +96,15 @@
 
 	</div>
 
-	<div class="box-buttons">
-		{{ form_widget(form.save, { label: 'Pokračovat v objednávce'|trans, attr: { class: 'btn btn--primary box-buttons__right' } }) }}
+	<div class="in-action">
+		<div class="in-action__right">
+			{{ form_widget(form.save, { label: 'Pokračovat v objednávce'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big' } }) }}
+		</div>
 
-		<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn box-buttons__left js-no-validate-button">
-			{{ 'Zpět do košíku'|trans }}
-		</button>
+		<div class="in-action__left">
+			<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
+				{{ 'Zpět do košíku'|trans }}
+			</button>
+		</div>
 	</div>
 {% endblock %}
