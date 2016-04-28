@@ -87,13 +87,13 @@ class Setting {
 	 */
 	public function copyAllMultidomainSettings($fromDomainId, $toDomainId) {
 		$query = $this->em->createNativeQuery('
-			INSERT INTO settings3 (name, value, type, domain_id)
+			INSERT INTO setting_values (name, value, type, domain_id)
 			SELECT name, value, type, :toDomainId
-			FROM settings3
+			FROM setting_values
 			WHERE domain_id = :fromDomainId
 				AND EXISTS (
 					SELECT 1
-					FROM settings3
+					FROM setting_values
 					WHERE domain_id IS NOT NULL
 						AND domain_id != :commonDomainId
 				)

@@ -153,7 +153,7 @@ CREATE TABLE images (id SERIAL NOT NULL, entity_name VARCHAR(100) NOT NULL, enti
 CREATE INDEX IDX_E01FBE6A16EFC72D81257D5D8CDE5729 ON images (entity_name, entity_id, type);
 CREATE TABLE friendly_urls (domain_id INT NOT NULL, slug TEXT NOT NULL, route_name VARCHAR(255) NOT NULL, entity_id INT NOT NULL, main BOOLEAN NOT NULL, PRIMARY KEY(domain_id, slug));
 CREATE INDEX IDX_64EC05ABF3667F8381257D5D ON friendly_urls (route_name, entity_id);
-CREATE TABLE settings3 (name VARCHAR(255) NOT NULL, domain_id INT NOT NULL, value TEXT DEFAULT NULL, type VARCHAR(7) NOT NULL, PRIMARY KEY(name, domain_id));
+CREATE TABLE setting_values (name VARCHAR(255) NOT NULL, domain_id INT NOT NULL, value TEXT DEFAULT NULL, type VARCHAR(7) NOT NULL, PRIMARY KEY(name, domain_id));
 CREATE TABLE uploaded_files (id SERIAL NOT NULL, entity_name VARCHAR(100) NOT NULL, entity_id INT NOT NULL, extension VARCHAR(5) NOT NULL, modified_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id));
 CREATE INDEX IDX_E60EFB516EFC72D81257D5D ON uploaded_files (entity_name, entity_id);
 CREATE TABLE entity (id SERIAL NOT NULL, name TEXT NOT NULL, short VARCHAR(100) DEFAULT NULL, PRIMARY KEY(id));

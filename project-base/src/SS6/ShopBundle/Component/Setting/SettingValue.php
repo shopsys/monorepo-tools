@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\Setting;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="settings3")
+ * @ORM\Table(name="setting_values")
  * @ORM\Entity
  */
 class SettingValue {
