@@ -41,7 +41,8 @@
 		</dt>
 		<dd>
 			{{ form_widget(form) }}
-			{{ form_errors(form) }}
+			{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
+			{{ form_errors(form, { errors_attr: errors_attr } ) }}
 		</dd>
 	</dl>
 {% endblock form_row %}
@@ -49,10 +50,17 @@
 {% block checkbox_row %}
 	<dl class="{{ rowClass|default('form-line') }}">
 		<dt></dt>
-		<dd class="checkbox">
-			{{ form_label(form) }}
-			{{ form_errors(form) }}
-			{{ form_widget(form) }}
+		<dd>
+			<div class="form-choice">
+				<div class="form-choice__input">
+					{{ form_widget(form) }}
+				</div>
+				<div class="form-choice__label">
+					{{ form_label(form) }}
+					{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--choice'))}) %}
+					{{ form_errors(form, { errors_attr: errors_attr } ) }}
+				</div>
+			</div>
 		</dd>
 	</dl>
 {% endblock checkbox_row %}
@@ -64,7 +72,8 @@
 		</dt>
 		<dd>
 			{{- form_widget(form) -}}
-			{{- form_errors(form) -}}
+			{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
+			{{ form_errors(form, { errors_attr: errors_attr } ) }}
 		</dd>
 	</dl>
 {%- endblock textarea_row %}

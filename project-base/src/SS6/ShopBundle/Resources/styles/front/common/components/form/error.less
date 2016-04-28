@@ -5,6 +5,12 @@
 
 	cursor: default;
 
+	&--line {
+		position: absolute;
+		top: 9px;
+		right: 5px;
+	}
+
 	&--inline {
 		.flex();
 		.flex-align-items(baseline);
@@ -12,6 +18,20 @@
 		padding: 5px;
 
 		background: @color-alert;
+	}
+
+	&--choice {
+		right: auto;
+		top: -5px;
+		margin-bottom: -5px;
+	}
+
+	&--line-block {
+		position: absolute;
+		top: 9px;
+		right: 5px;
+
+		z-index: 10;
 	}
 
 	&__icon {
@@ -86,10 +106,17 @@
 
 		li {
 			font-size: 12px;
+			color: @color-f;
+		}
+	}
+}
 
-			.form-error--inline & {
-				color: @color-f;
-			}
+
+@media @query-lg {
+	.form-error {
+		&--line {
+			right: auto;
+			left: 300px;
 		}
 	}
 }
