@@ -11,7 +11,7 @@
 		{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
 		{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
 		{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-		{{ form_row(form.telephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+		{{ form_row(form.telephone, { label: 'Telefon'|trans }) }}
 	</fieldset>
 
 	<h2>{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
@@ -22,8 +22,8 @@
 		}}
 		<div id="js-company-fields">
 			{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
-			{{ form_row(form.companyNumber, { label: 'IČ'|trans, attr: { class: 'form-line--size-3' } }) }}
-			{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans, attr: { class: 'form-line--size-3' } }) }}
+			{{ form_row(form.companyNumber, { label: 'IČ'|trans }) }}
+			{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans }) }}
 		</div>
 	</fieldset>
 
@@ -32,7 +32,7 @@
 	<fieldset>
 		{{ form_row(form.street, { label: 'Ulice'|trans }) }}
 		{{ form_row(form.city, { label: 'Město'|trans }) }}
-		{{ form_row(form.postcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+		{{ form_row(form.postcode, { label: 'PSČ'|trans }) }}
 	</fieldset>
 
 	<h2>{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
@@ -44,10 +44,10 @@
 		<div id="js-delivery-address-fields">
 			{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
 			{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-			{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans, attr: { class: 'form-line--size-3' } }) }}
+			{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans }) }}
 			{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
 			{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-			{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans, attr: { class: 'form-line--size-2' } }) }}
+			{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans }) }}
 		<div>
 	</fieldset>
 
