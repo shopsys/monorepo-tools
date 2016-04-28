@@ -22,28 +22,28 @@
 							{% set choice = form.transport.vars.choices[child.vars.name] %}
 							{% set transportPrice = transportsPrices[choice.data.id] %}
 							<label class="box-chooser__item">
-								<span class="box-chooser__check">
+								<span class="box-chooser__item__check">
 									{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
 								</span>
 
-								<span class="box-chooser__image">
+								<span class="box-chooser__item__image">
 									{% if imageExists(choice.data) %}
 										{{ image(choice.data) }}
 									{% endif %}
 								</span>
 
-								<span class="box-chooser__title">
-									<strong>
+								<span class="box-chooser__item__title">
+									<strong class="box-chooser__item__title__name">
 										{{ choice.data.name }}
 									</strong>
 									{% if choice.data.description %}
-										<span class="box-chooser__description">
+										<span class="box-chooser__item__title__description">
 											- {{ choice.data.description }}
 										</span>
 									{% endif %}
 								</span>
 
-								<span class="box-chooser__price price-main">
+								<span class="box-chooser__item__price">
 									{{ transportPrice.priceWithVat|priceText }}
 								</span>
 							</label>
@@ -67,28 +67,28 @@
 							{% set choice = form.payment.vars.choices[child.vars.name] %}
 							{% set paymentPrice = paymentsPrices[choice.data.id] %}
 							<label class="box-chooser__item">
-								<span class="box-chooser__check">
+								<span class="box-chooser__item__check">
 									{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
 								</span>
 
-								<span class="box-chooser__image">
+								<span class="box-chooser__item__image">
 									{% if imageExists(choice.data) %}
 										{{ image(choice.data) }}
 									{% endif %}
 								</span>
 
-								<span class="box-chooser__title">
-									<strong>
+								<span class="box-chooser__item__title">
+									<strong class="box-chooser__title__name">
 										{{ choice.data.name }}
 									</strong>
 									{% if choice.data.description %}
-										<span class="box-chooser__description">
+										<span class="box-chooser__item__title__description">
 											- {{ choice.data.description }}
 										</span>
 									{% endif %}
 								</span>
 
-								<span class="box-chooser__price price-main">
+								<span class="box-chooser__item__price">
 									{{ paymentPrice.priceWithVat|priceText }}
 								</span>
 							</label>
