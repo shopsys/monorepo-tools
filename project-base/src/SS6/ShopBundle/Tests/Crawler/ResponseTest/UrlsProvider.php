@@ -265,7 +265,6 @@ class UrlsProvider {
 				];
 			}
 		}
-		$routesData[] = $this->getNonEmptySearchRouteData();
 		$routesData[] = $this->getProductListFilteringInCategoryWith500ProductsRouteData();
 		$routesData[] = $this->getProductListFilteringInCategoryWith7600ProductsRouteData();
 		$routesData[] = $this->getProductListFilteringInCategoryWith13600ProductsRouteData();
@@ -364,17 +363,6 @@ class UrlsProvider {
 		}
 
 		return 200;
-	}
-
-	/**
-	 * @return array
-	 */
-	private function getNonEmptySearchRouteData() {
-		return [
-			self::ROUTE_NAME_KEY => 'front_product_search',
-			self::ROUTE_PARAMETERS_KEY => [ProductController::SEARCH_TEXT_PARAMETER => self::SEARCH_KEYWORD],
-			self::EXPECTED_STATUS_CODE_KEY => 200,
-		];
 	}
 
 	/**
