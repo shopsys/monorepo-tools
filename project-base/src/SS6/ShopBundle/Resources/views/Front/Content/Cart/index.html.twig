@@ -36,7 +36,7 @@
 						{% set cartItemDiscount = cartItemDiscounts[cartItem.id] %}
 						<tr class="table-cart__row">
 							<td class="table-cart__cell table-cart__cell--image">
-								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">
 									{% if imageExists(cartItem.product) %}
 										{{ image(cartItem.product, { size: 'thumbnail' }) }}
 									{% else %}
@@ -49,6 +49,15 @@
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
 									{{ cartItem.name }}
 								</a>
+								<div class="table-cart__cell__price-mobile">
+									{{ cartItemPrice.totalPrice.priceWithVat|price }}
+									{% if cartItemDiscount is not null %}
+										<div>
+											{{ 'Sleva' }}:
+											{{ cartItemDiscount.priceWithVat|price }}
+										</div>
+									{% endif %}
+								</div>
 							</td>
 
 							<td class="table-cart__cell table-cart__cell--price">
@@ -79,7 +88,7 @@
 
 							<td class="table-cart__cell table-cart__cell--action">
 								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
-									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="{{ 'Odstranit'|trans }}">
+									<i class="svg svg-remove"></i>
 								</a>
 							</td>
 						</tr>
@@ -91,12 +100,14 @@
 						<td class="table-cart__cell table-cart__cell--image">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--name">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--recalc">
-							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans}) }}
+							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans, attr: { class: 'btn--small' } }) }}
 						</td>
 						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--total-price" colspan="2">
 							{{ 'Celková cena s DPH'|trans }}:
-							{{ productsPrice.priceWithVat|price }}
+							<span>
+								{{ productsPrice.priceWithVat|price }}
+							</span>
 						</td>
 						<td class="table-cart__cell">&nbsp;</td>
 					</tr>
