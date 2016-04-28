@@ -6,94 +6,104 @@
 
 {% block content %}
 
-	<div id="transportAndPayment">
+	<div class="box-transport-payment">
 
-		<h2>{{ 'Výběr dopravy'|trans }}</h2>
+		<div id="transportAndPayment" class="box-transport-payment__choose">
 
-		<div class="box-chooser js-form-group">
-			{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
+			<div class="box-transport-payment__choose__item">
 
-			<div id="transportAndPayment_transport">
-				{% for child in form.transport %}
-					{% set choice = form.transport.vars.choices[child.vars.name] %}
-					{% set transportPrice = transportsPrices[choice.data.id] %}
-					<label class="box-chooser__item">
-						<span class="box-chooser__check">
-							{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
-						</span>
+				<h2>{{ 'Výběr dopravy'|trans }}</h2>
 
-						<span class="box-chooser__image">
-							{% if imageExists(choice.data) %}
-								{{ image(choice.data) }}
-							{% endif %}
-						</span>
+				<div class="box-chooser js-form-group">
+					{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
 
-						<span class="box-chooser__title">
-							<strong>
-								{{ choice.data.name }}
-							</strong>
-							{% if choice.data.description %}
-								<span class="box-chooser__description">
-									- {{ choice.data.description }}
+					<div id="transportAndPayment_transport">
+						{% for child in form.transport %}
+							{% set choice = form.transport.vars.choices[child.vars.name] %}
+							{% set transportPrice = transportsPrices[choice.data.id] %}
+							<label class="box-chooser__item">
+								<span class="box-chooser__check">
+									{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
 								</span>
-							{% endif %}
-						</span>
 
-						<span class="box-chooser__price price-main">
-							{{ transportPrice.priceWithVat|priceText }}
-						</span>
-					</label>
-				{% else %}
-					{% do form.transport.setRendered %}
-					{{ 'Není z čeho vybírat'|trans }}
-				{% endfor %}
+								<span class="box-chooser__image">
+									{% if imageExists(choice.data) %}
+										{{ image(choice.data) }}
+									{% endif %}
+								</span>
+
+								<span class="box-chooser__title">
+									<strong>
+										{{ choice.data.name }}
+									</strong>
+									{% if choice.data.description %}
+										<span class="box-chooser__description">
+											- {{ choice.data.description }}
+										</span>
+									{% endif %}
+								</span>
+
+								<span class="box-chooser__price price-main">
+									{{ transportPrice.priceWithVat|priceText }}
+								</span>
+							</label>
+						{% else %}
+							{% do form.transport.setRendered %}
+							{{ 'Není z čeho vybírat'|trans }}
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+
+			<div class="box-transport-payment__choose__item">
+
+				<h2>{{ 'Výběr platby'|trans }}</h2>
+
+				<div class="box-chooser box-chooser--smaller js-form-group">
+					{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
+
+					<div id="transportAndPayment_payment">
+						{% for child in form.payment %}
+							{% set choice = form.payment.vars.choices[child.vars.name] %}
+							{% set paymentPrice = paymentsPrices[choice.data.id] %}
+							<label class="box-chooser__item">
+								<span class="box-chooser__check">
+									{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
+								</span>
+
+								<span class="box-chooser__image">
+									{% if imageExists(choice.data) %}
+										{{ image(choice.data) }}
+									{% endif %}
+								</span>
+
+								<span class="box-chooser__title">
+									<strong>
+										{{ choice.data.name }}
+									</strong>
+									{% if choice.data.description %}
+										<span class="box-chooser__description">
+											- {{ choice.data.description }}
+										</span>
+									{% endif %}
+								</span>
+
+								<span class="box-chooser__price price-main">
+									{{ paymentPrice.priceWithVat|priceText }}
+								</span>
+							</label>
+						{% else %}
+							{% do form.payment.setRendered %}
+							{{ 'Není z čeho vybírat'|trans }}
+						{% endfor %}
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<h2>{{ 'Výběr platby'|trans }}</h2>
-
-		<div class="box-chooser box-chooser--smaller js-form-group">
-			{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
-
-			<div id="transportAndPayment_payment">
-				{% for child in form.payment %}
-					{% set choice = form.payment.vars.choices[child.vars.name] %}
-					{% set paymentPrice = paymentsPrices[choice.data.id] %}
-					<label class="box-chooser__item">
-						<span class="box-chooser__check">
-							{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
-						</span>
-
-						<span class="box-chooser__image">
-							{% if imageExists(choice.data) %}
-								{{ image(choice.data) }}
-							{% endif %}
-						</span>
-
-						<span class="box-chooser__title">
-							<strong>
-								{{ choice.data.name }}
-							</strong>
-							{% if choice.data.description %}
-								<span class="box-chooser__description">
-									- {{ choice.data.description }}
-								</span>
-							{% endif %}
-						</span>
-
-						<span class="box-chooser__price price-main">
-							{{ paymentPrice.priceWithVat|priceText }}
-						</span>
-					</label>
-				{% else %}
-					{% do form.payment.setRendered %}
-					{{ 'Není z čeho vybírat'|trans }}
-				{% endfor %}
-			</div>
+		<div class="box-transport-payment__info">
+			{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
 		</div>
-
-		{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
-
 	</div>
 
 	<div class="in-action">

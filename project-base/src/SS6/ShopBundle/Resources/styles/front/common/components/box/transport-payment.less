@@ -1,0 +1,39 @@
+.box-transport-payment {
+
+	&__choose {
+
+		&__item {
+			margin-bottom: @margin-gap;
+		}
+	}
+
+	&__info {
+		width: 100%/3;
+		padding-left: 40px;
+		margin-bottom: @margin-gap;
+	}
+}
+
+@media @query-lg {
+	.box-transport-payment {
+		width: 100%;
+		.flex();
+
+		&__choose {
+			width: 100%/3*2;
+		}
+
+		&__info {
+			width: 100%/3;
+			padding-left: 20px;
+		}
+	}
+}
+
+@media @query-vl {
+	.box-transport-payment {
+		&__info {
+			padding-left: 40px;
+		}
+	}
+}
