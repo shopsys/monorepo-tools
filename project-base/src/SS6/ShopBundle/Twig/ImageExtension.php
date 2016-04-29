@@ -62,7 +62,7 @@ class ImageExtension extends Twig_Extension {
 		ImageFacade $imageFacade
 	) {
 		$this->frontDesignImageUrlPrefix = $frontDesignImageUrlPrefix;
-		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
+		$this->container = $container;
 		$this->domain = $domain;
 		$this->imageLocator = $imageLocator;
 		$this->imageConfig = $imageConfig;
@@ -70,7 +70,8 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * Get service "templating" cannot by called in constructor - https://github.com/symfony/symfony/issues/2347
+	 * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
+	 * because it causes circular dependency
 	 *
 	 * @return \Symfony\Bundle\TwigBundle\Debug\TimedTwigEngine
 	 */

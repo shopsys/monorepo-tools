@@ -16,11 +16,12 @@ class FormDetailExtension extends Twig_Extension {
 	private $container;
 
 	public function __construct(ContainerInterface $container) {
-		$this->container = $container; // Must inject main container - https://github.com/symfony/symfony/issues/2347
+		$this->container = $container;
 	}
 
 	/**
-	 * Get service "templating" cannot by called in constructor - https://github.com/symfony/symfony/issues/2347
+	 * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
+	 * because it causes circular dependency
 	 *
 	 * @return Twig_Environment
 	 */
