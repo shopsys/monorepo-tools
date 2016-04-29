@@ -77,11 +77,7 @@
 				</div>
 			{% endif %}
 
-			{% if productDetail.product.brand or not productDetail.product.isMainVariant and (
-				productDetail.product.catnum or
-				productDetail.product.partno or
-				productDetail.product.ean
-			) %}
+			{% if productDetail.hasContentForDetailBox %}
 				<dl class="box-detail__info__params">
 					{% if productDetail.product.brand %}
 						<dt>
