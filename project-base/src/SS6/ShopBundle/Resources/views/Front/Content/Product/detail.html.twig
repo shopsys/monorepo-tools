@@ -162,9 +162,10 @@
 		</table>
 	{% endif %}
 
-	{% if productDomain.description or
-	productDetail.parameters or
-	accesoriesDetails|length > 0 %}
+	{% if productDomain.description
+		or productDetail.parameters
+		or accesoriesDetails|length > 0
+	%}
 		<div class="in-tab js-tabs">
 			<div class="in-tab__head">
 				{% if productDomain.description %}
