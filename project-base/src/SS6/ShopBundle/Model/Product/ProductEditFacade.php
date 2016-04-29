@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
@@ -106,6 +107,11 @@ class ProductEditFacade {
 	 */
 	private $productVariantService;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
+	 */
+	private $availabilityFacade;
+
 	public function __construct(
 		EntityManager $em,
 		ProductRepository $productRepository,
@@ -122,7 +128,8 @@ class ProductEditFacade {
 		ProductHiddenRecalculator $productHiddenRecalculator,
 		ProductSellingDeniedRecalculator $productSellingDeniedRecalculator,
 		ProductAccessoryRepository $productAccessoryRepository,
-		ProductVariantService $productVariantService
+		ProductVariantService $productVariantService,
+		AvailabilityFacade $availabilityFacade
 	) {
 		$this->em = $em;
 		$this->productRepository = $productRepository;
@@ -140,6 +147,7 @@ class ProductEditFacade {
 		$this->productSellingDeniedRecalculator = $productSellingDeniedRecalculator;
 		$this->productAccessoryRepository = $productAccessoryRepository;
 		$this->productVariantService = $productVariantService;
+		$this->availabilityFacade = $availabilityFacade;
 	}
 
 	/**
@@ -156,6 +164,12 @@ class ProductEditFacade {
 	 */
 	public function create(ProductEditData $productEditData) {
 		$product = Product::create($productEditData->productData);
+
+		if ($product->isUsingStock()) {
+			$defaultInStockAvailability = $this->availabilityFacade->getDefaultInStockAvailability();
+			$product->setCalculatedAvailability($defaultInStockAvailability);
+			$product->markForAvailabilityRecalculation();
+		}
 
 		$this->em->persist($product);
 		$this->em->flush($product);

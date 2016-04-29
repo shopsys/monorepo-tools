@@ -173,9 +173,9 @@ class Product extends AbstractTranslatableEntity {
 	private $outOfStockAction;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
-	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=false)
+	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
 
@@ -715,6 +715,10 @@ class Product extends AbstractTranslatableEntity {
 
 	public function markForVisibilityRecalculation() {
 		$this->recalculateVisibility = true;
+	}
+
+	public function markForAvailabilityRecalculation() {
+		$this->recalculateAvailability = true;
 	}
 
 	/**
