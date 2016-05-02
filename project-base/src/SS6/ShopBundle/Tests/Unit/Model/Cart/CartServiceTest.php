@@ -21,15 +21,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = [];
 		$cart = new Cart($cartItems);
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
@@ -42,14 +34,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = [];
 		$cart = new Cart($cartItems);
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
@@ -62,14 +47,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = [];
 		$cart = new Cart($cartItems);
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
@@ -82,14 +60,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$cartItems = [];
 		$cart = new Cart($cartItems);
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$quantity = 2;
 
@@ -103,14 +74,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -127,14 +91,7 @@ class CartServiceTest extends FunctionalTestCase {
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $price;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$product = $this->createProduct();
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -149,19 +106,8 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartService = $this->getContainer()->get(CartService::class);
 		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 
-		$price = 100;
-		$vat = new Vat(new VatData('vat', 21));
-		$productData1 = new ProductData();
-		$productData1->name = ['cs' => 'Product 1'];
-		$productData1->price = $price;
-		$productData1->vat = $vat;
-		$product1 = Product::create($productData1);
-
-		$productData2 = new ProductData();
-		$productData2->name = ['cs' => 'Product 2'];
-		$productData2->price = $price;
-		$productData2->vat = $vat;
-		$product2 = Product::create($productData2);
+		$product1 = $this->createProduct();
+		$product2 = $this->createProduct();
 
 		$sessionId1 = 'abc123';
 		$sessionId2 = 'def456';
@@ -188,4 +134,19 @@ class CartServiceTest extends FunctionalTestCase {
 		$this->assertSame(2, $mergingCart->getItemsCount());
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	private function createProduct() {
+		$price = 100;
+		$vat = new Vat(new VatData('vat', 21));
+
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Any name'];
+		$productData->price = $price;
+		$productData->vat = $vat;
+		$product = Product::create($productData);
+
+		return $product;
+	}
 }
