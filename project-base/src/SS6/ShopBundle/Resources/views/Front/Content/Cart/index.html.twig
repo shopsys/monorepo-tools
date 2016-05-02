@@ -17,7 +17,7 @@
 	{% if cart.itemsCount > 0 %}
 		{{ form_start(form, { attr: { class: 'js-no-validate' }}) }}
 			{{ form_errors(form) }}
-			<table class="table-cart">
+			<table class="table-cart js-cart">
 				<thead>
 					<tr class="table-cart__row">
 						<th class="table-cart__cell table-cart__cell--image">{{ 'Obrázek'|trans }}</th>
@@ -34,7 +34,7 @@
 					{% for cartItem in cartItems %}
 						{% set cartItemPrice = cartItemPrices[cartItem.id] %}
 						{% set cartItemDiscount = cartItemDiscounts[cartItem.id] %}
-						<tr class="table-cart__row">
+						<tr class="table-cart__row js-cart-item">
 							<td class="table-cart__cell table-cart__cell--image">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">
 									{% if imageExists(cartItem.product) %}
@@ -45,7 +45,7 @@
 								</a>
 							</td>
 
-							<td class="table-cart__cell table-cart__cell--name">
+							<td class="table-cart__cell table-cart__cell--name js-cart-item-name">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
 									{{ cartItem.name }}
 								</a>
@@ -76,7 +76,7 @@
 								</span>
 							</td>
 
-							<td class="table-cart__cell table-cart__cell--price">
+							<td class="table-cart__cell table-cart__cell--price js-cart-item-total-price">
 								{{ cartItemPrice.totalPrice.priceWithVat|price }}
 								{% if cartItemDiscount is not null %}
 									<div>
@@ -87,7 +87,10 @@
 							</td>
 
 							<td class="table-cart__cell table-cart__cell--action">
-								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
+								<a
+									href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}"
+									class="js-cart-item-remove-button"
+								>
 									<i class="svg svg-remove"></i>
 								</a>
 							</td>
@@ -103,7 +106,7 @@
 							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans, attr: { class: 'btn--small' } }) }}
 						</td>
 						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
-						<td class="table-cart__cell table-cart__cell--total-price" colspan="2">
+						<td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
 							{{ 'Celková cena s DPH'|trans }}:
 							<span>
 								{{ productsPrice.priceWithVat|price }}
