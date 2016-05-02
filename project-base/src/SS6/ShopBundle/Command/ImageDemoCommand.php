@@ -38,7 +38,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$archiveUrl = $this->getContainer()->getParameter('ss6.demo_images_archive_url');
 		$dqlUrl = $this->getContainer()->getParameter('ss6.demo_images_dql_url');
 		$cachePath = $this->getContainer()->getParameter('kernel.cache_dir');
-		$localArchiveFilepath = $cachePath . DIRECTORY_SEPARATOR . 'demoImages.zip';
+		$localArchiveFilepath = $cachePath . '/' . 'demoImages.zip';
 		$imagesPath = $this->getContainer()->getParameter('ss6.image_dir');
 		$domainImagesPath = $this->getContainer()->getParameter('ss6.domain_images_dir');
 		$unpackedDomainImagesPath = $imagesPath . 'domain';
@@ -138,9 +138,9 @@ class ImageDemoCommand extends ContainerAwareCommand {
 	private function moveFiles($origin, $target) {
 		$files = scandir($origin);
 		foreach ($files as $file) {
-			$filepath = $origin . DIRECTORY_SEPARATOR . $file;
+			$filepath = $origin . '/' . $file;
 			if (is_file($filepath)) {
-				$newFilepath = $target . DIRECTORY_SEPARATOR . $file;
+				$newFilepath = $target . '/' . $file;
 				$this->filesystem->rename($filepath, $newFilepath, true);
 			}
 		}

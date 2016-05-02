@@ -17,7 +17,7 @@ class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTes
 	}
 
 	public function testValidateValidLength() {
-		$file = new File(__DIR__ . DIRECTORY_SEPARATOR . 'non-existent.file', false);
+		$file = new File(__DIR__ . '/' . 'non-existent.file', false);
 
 		$constraint = new FileExtensionMaxLength([
 			'limit' => 4,
@@ -29,7 +29,7 @@ class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTes
 	}
 
 	public function testValidateInvalidLength() {
-		$file = new File(__DIR__ . DIRECTORY_SEPARATOR . 'non-existent.file', false);
+		$file = new File(__DIR__ . '/' . 'non-existent.file', false);
 
 		$constraint = new FileExtensionMaxLength([
 			'limit' => 3,

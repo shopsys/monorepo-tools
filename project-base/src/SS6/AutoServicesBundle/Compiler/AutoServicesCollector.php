@@ -38,7 +38,7 @@ class AutoServicesCollector {
 	 * @return string
 	 */
 	private function getConfigFilepath() {
-		return $this->cacheDir . DIRECTORY_SEPARATOR . self::CONFIG_FILENAME;
+		return $this->cacheDir . '/' . self::CONFIG_FILENAME;
 	}
 
 	/**
@@ -69,7 +69,7 @@ class AutoServicesCollector {
 	}
 
 	private function invalidateContainer() {
-		$containerClassFilepath = $this->cacheDir . DIRECTORY_SEPARATOR . $this->containerClass . '.php';
+		$containerClassFilepath = $this->cacheDir . '/' . $this->containerClass . '.php';
 		$this->filesystem->remove($containerClassFilepath);
 	}
 

@@ -29,7 +29,7 @@ class PoDumperTest extends PHPUnit_Framework_TestCase {
 		$poDumper = new PoDumper($messageIdNormalizer);
 
 		$dump = $poDumper->dump($catalogue);
-		$expectedDump = file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'dump.po');
+		$expectedDump = file_get_contents(__DIR__ . '/' . 'dump.po');
 
 		$this->assertEquals($expectedDump, $dump);
 	}

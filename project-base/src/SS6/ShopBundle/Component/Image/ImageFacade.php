@@ -229,7 +229,7 @@ class ImageFacade {
 		if ($this->imageLocator->imageExists($image)) {
 			return $domainConfig->getUrl()
 				. $this->imageUrlPrefix
-				. str_replace(DIRECTORY_SEPARATOR, '/', $this->imageLocator->getRelativeImageFilepath($image, $sizeName));
+				. $this->imageLocator->getRelativeImageFilepath($image, $sizeName);
 		}
 
 		throw new \SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException();
