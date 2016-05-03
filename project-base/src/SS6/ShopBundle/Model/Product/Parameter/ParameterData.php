@@ -12,10 +12,17 @@ class ParameterData {
 	public $name;
 
 	/**
-	 * @param string[] $name
+	 * @var bool
 	 */
-	public function __construct(array $name = []) {
+	public $visible;
+
+	/**
+	 * @param string[] $name
+	 * @param bool $visible
+	 */
+	public function __construct(array $name = [], $visible = false) {
 		$this->name = $name;
+		$this->visible = $visible;
 	}
 
 	/**
@@ -28,6 +35,7 @@ class ParameterData {
 			$names[$translate->getLocale()] = $translate->getName();
 		}
 		$this->name = $names;
+		$this->visible = $parameter->isVisible();
 	}
 
 }

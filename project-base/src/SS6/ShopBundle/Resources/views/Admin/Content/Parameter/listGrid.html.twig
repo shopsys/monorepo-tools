@@ -13,3 +13,11 @@
 	{% set addEntity = 'Vytvořit parametr'|trans %}
 	{{ parent() }}
 {% endblock %}
+
+{% block grid_value_cell_id_visible %}
+	{% if row.p.visible %}
+		{{ 'Ano'|trans }}
+	{% else %}
+		{{ 'Ne'|trans }}
+	{% endif %}
+{% endblock %}

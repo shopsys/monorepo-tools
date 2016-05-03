@@ -32,7 +32,8 @@ class ParameterFormType extends AbstractType {
 						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název parametru nesmí být delší než {{ limit }} znaků']),
 					],
 				],
-			]);
+			])
+			->add('visible', FormType::CHECKBOX, ['required' => false]);
 	}
 
 	/**
