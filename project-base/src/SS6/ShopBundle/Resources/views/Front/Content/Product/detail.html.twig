@@ -4,6 +4,9 @@
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
+{% set descriptionHeadline = 'Informace o produktu'|trans %}
+{% set parametersHeadline = 'Technické parametry'|trans %}
+{% set accessoriesHeadline = 'Příslušenství'|trans %}
 {% block meta_description %}
 	{{- productDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
@@ -170,26 +173,26 @@
 			<div class="in-tab__head">
 				{% if productDomain.description %}
 					<a href="#" class="in-tab__head__item active js-tabs-tab-link" data-tab-id="description">
-						{{ 'Informace o produktu'|trans }}
+						{{ descriptionHeadline }}
 					</a>
 				{% endif %}
 
 				{% if productDetail.parameters %}
 					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="parameters">
-						{{ 'Technické parametry'|trans }}
+						{{ parametersHeadline }}
 					</a>
 				{% endif %}
 
 				{% if accesoriesDetails|length > 0 %}
 					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="accesories">
-						{{ 'Příslušenství'|trans }}
+						{{ accessoriesHeadline }}
 					</a>
 				{% endif %}
 			</div>
 			<div class="in-tab__content">
 				{% if productDomain.description %}
 					<a href="#" class="in-tab__content__title active">
-						{{ 'Informace o produktu'|trans }}
+						{{ descriptionHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
 					<div class="in-tab__content__item active js-tabs-tab-content" data-tab-id="description">
@@ -199,7 +202,7 @@
 
 				{% if productDetail.parameters %}
 					<a href="#" class="in-tab__content__title">
-						{{ 'Technické parametry'|trans }}
+						{{ parametersHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
 					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="parameters">
@@ -222,7 +225,7 @@
 
 				{% if accesoriesDetails|length > 0 %}
 					<a href="#" class="in-tab__content__title">
-						{{ 'Příslušenství'|trans }}
+						{{ accessoriesHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
 					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="accesories">
