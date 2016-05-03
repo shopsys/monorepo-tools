@@ -38,6 +38,7 @@ class FilemanagerAccess {
 	}
 
 	/**
+	 * @see \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader::access()
 	 * @param string $attr
 	 * @param string $path
 	 * @param $data
@@ -64,6 +65,7 @@ class FilemanagerAccess {
 	}
 
 	/**
+	 * @see \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader::access()
 	 * @param string $attr
 	 * @param string $path
 	 * @param $data
