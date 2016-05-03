@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Security\Filesystem;
 
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
+use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilemanagerAccess {
 
@@ -21,12 +22,19 @@ class FilemanagerAccess {
 	 */
 	private $elFinderConfigurationReader;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Filesystem\FilepathComparator
+	 */
+	private $filepathComparator;
+
 	public function __construct(
 		$filamanagerUploadDir,
-		ElFinderConfigurationReader $elFinderConfigurationReader
+		ElFinderConfigurationReader $elFinderConfigurationReader,
+		FilepathComparator $filepathComparator
 	) {
 		$this->filemanagerUploadDir = realpath($filamanagerUploadDir);
 		$this->elFinderConfigurationReader = $elFinderConfigurationReader;
+		$this->filepathComparator = $filepathComparator;
 	}
 
 	/**
@@ -37,37 +45,11 @@ class FilemanagerAccess {
 	 * @return bool|null
 	 */
 	public function isPathAccessible($attr, $path, $data, $volume) {
-		$realpath = $this->parseClosestRealpath($path);
-
-		if ($realpath === false || strpos($realpath, $this->filemanagerUploadDir) !== 0) {
-			return false;
-		}
-
-		$pathInUploadDir = substr($realpath, strlen($this->filemanagerUploadDir));
-		// must use DIRECTORY_SEPARATOR, because $pathInUploadDir is result of realpath()
-		if ($pathInUploadDir !== false && strpos($pathInUploadDir, DIRECTORY_SEPARATOR) !== 0) {
+		if (!$this->filepathComparator->isPathWithinDirectory($path, $this->filemanagerUploadDir)) {
 			return false;
 		}
 
 		return $this->elFinderConfigurationReader->access($attr, $path, $data, $volume);
-	}
-
-	/**
-	 * @param string $path
-	 * @return string|bool
-	 */
-	private function parseClosestRealpath($path) {
-		if (empty($path)) {
-			return false;
-		}
-		$realpath = realpath($path);
-
-		while ($realpath === false && $path !== dirname($path)) {
-			$path = dirname($path);
-			$realpath = realpath($path);
-		}
-
-		return $realpath;
 	}
 
 	/**
