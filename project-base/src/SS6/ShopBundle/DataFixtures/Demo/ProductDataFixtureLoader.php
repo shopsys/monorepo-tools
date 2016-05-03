@@ -278,7 +278,7 @@ class ProductDataFixtureLoader {
 				$parameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
 				$parameter = $this->parameterFacade->findParameterByNames($parameterNames);
 				if ($parameter === null) {
-					$parameter = $this->parameterFacade->create(new ParameterData($parameterNames));
+					$parameter = $this->parameterFacade->create(new ParameterData($parameterNames, true));
 				}
 				$this->parameters[$serializedParameterNames] = $parameter;
 			}
