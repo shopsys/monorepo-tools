@@ -14,7 +14,7 @@ class FilemanagerAccess {
 	/**
 	 * @var string
 	 */
-	private $filamanagerUploadDir;
+	private $filemanagerUploadDir;
 
 	/**
 	 * @var \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader
@@ -25,7 +25,7 @@ class FilemanagerAccess {
 		$filamanagerUploadDir,
 		ElFinderConfigurationReader $elFinderConfigurationReader
 	) {
-		$this->filamanagerUploadDir = realpath($filamanagerUploadDir);
+		$this->filemanagerUploadDir = realpath($filamanagerUploadDir);
 		$this->elFinderConfigurationReader = $elFinderConfigurationReader;
 	}
 
@@ -39,11 +39,11 @@ class FilemanagerAccess {
 	public function isPathAccessible($attr, $path, $data, $volume) {
 		$realpath = $this->parseClosestRealpath($path);
 
-		if ($realpath === false || strpos($realpath, $this->filamanagerUploadDir) !== 0) {
+		if ($realpath === false || strpos($realpath, $this->filemanagerUploadDir) !== 0) {
 			return false;
 		}
 
-		$pathInUploadDir = substr($realpath, strlen($this->filamanagerUploadDir));
+		$pathInUploadDir = substr($realpath, strlen($this->filemanagerUploadDir));
 		// must use DIRECTORY_SEPARATOR, because $pathInUploadDir is result of realpath()
 		if ($pathInUploadDir !== false && strpos($pathInUploadDir, DIRECTORY_SEPARATOR) !== 0) {
 			return false;
