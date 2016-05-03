@@ -35,7 +35,7 @@ class FlagFilterChoiceRepository {
 			$category
 		);
 
-		return $this->getFlagsByProductsQueryBuilder($productsQueryBuilder);
+		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder);
 	}
 
 	/**
@@ -49,20 +49,21 @@ class FlagFilterChoiceRepository {
 		$productsQueryBuilder = $this->productRepository
 			->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
-		return $this->getFlagsByProductsQueryBuilder($productsQueryBuilder);
+		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder);
 	}
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
-	private function getFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
+	private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
 		$clonnedProductsQueryBuilder = clone $productsQueryBuilder;
 
 		$clonnedProductsQueryBuilder
 			->select('1')
 			->join('p.flags', 'pf')
 			->andWhere('pf.id = f.id')
+			->andWhere('f.visible = true')
 			->resetDQLPart('orderBy');
 
 		$flagsQueryBuilder = $productsQueryBuilder->getEntityManager()->createQueryBuilder();
