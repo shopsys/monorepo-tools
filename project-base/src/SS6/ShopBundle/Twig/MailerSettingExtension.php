@@ -39,7 +39,7 @@ class MailerSettingExtension extends Twig_Extension {
 	 * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
 	 * because it causes circular dependency
 	 *
-	 * @return \Twig_Environment
+	 * @return \Symfony\Bundle\TwigBundle\TwigEngine
 	 */
 	private function getTemplatingService() {
 		return $this->container->get('templating');

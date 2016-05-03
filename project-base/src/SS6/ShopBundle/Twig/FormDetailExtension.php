@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormView;
-use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -23,7 +22,7 @@ class FormDetailExtension extends Twig_Extension {
 	 * Get service "templating" cannot be called in constructor - https://github.com/symfony/symfony/issues/2347
 	 * because it causes circular dependency
 	 *
-	 * @return Twig_Environment
+	 * @return \Symfony\Bundle\TwigBundle\TwigEngine
 	 */
 	private function getTemplatingService() {
 		return $this->container->get('templating');
