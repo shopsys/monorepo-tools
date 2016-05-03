@@ -44,7 +44,8 @@ class FilemanagerAccess {
 		}
 
 		$pathInUploadDir = substr($realpath, strlen($this->filamanagerUploadDir));
-		if ($pathInUploadDir !== false && strpos($pathInUploadDir, '/') === false) {
+		// must use DIRECTORY_SEPARATOR, because $pathInUploadDir is result of realpath()
+		if ($pathInUploadDir !== false && strpos($pathInUploadDir, DIRECTORY_SEPARATOR) !== 0) {
 			return false;
 		}
 

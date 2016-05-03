@@ -34,6 +34,24 @@ class FilemanagerAccessTest extends PHPUnit_Framework_TestCase {
 				'read',
 				false,
 			],
+			[
+				__DIR__ . '/sandbox',
+				__DIR__ . '/sandboxSecreet/dummyFile',
+				'read',
+				false,
+			],
+			[
+				__DIR__ . '/sandbox',
+				__DIR__ . '/sandbox/subdirectory/dummyFile',
+				'read',
+				null,
+			],
+			[
+				__DIR__ . '/sandbox',
+				__DIR__ . '/sandbox/dummyFile',
+				'read',
+				null,
+			],
 		];
 	}
 
