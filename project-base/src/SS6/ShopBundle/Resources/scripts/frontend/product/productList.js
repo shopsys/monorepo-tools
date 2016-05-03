@@ -4,12 +4,14 @@
 	SS6.productList = SS6.productList || {};
 
 	SS6.register.registerCallback(function () {
-		$('.js-product-list-ordering-mode').change(function () {
+		$('.js-product-list-ordering-mode').click(function () {
 			var cookieName = $(this).data('cookie-name');
+			var orderingName = $(this).data('ordering-mode');
 
-			$.cookie(cookieName, $(this).val(), { path: '/' });
-
+			$.cookie(cookieName, orderingName, { path: '/' });
 			location.reload(true);
+
+			return false;
 		});
 	});
 

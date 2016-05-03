@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Form\Front\Product\OrderingSettingFormType;
 use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
 use SS6\ShopBundle\Model\Advert\AdvertPositionList;
 use SS6\ShopBundle\Model\Category\Category;
@@ -272,13 +271,10 @@ class ProductController extends FrontBaseController {
 		$orderingMode = $this->productListOrderingModeForListFacade->getOrderingModeFromRequest(
 			$request
 		);
-		$form = $this->createForm(new OrderingSettingFormType(
-			$productListOrderingConfig->getSupportedOrderingModesNames()
-		));
-		$form->setData(['orderingMode' => $orderingMode]);
 
 		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
-			'form' => $form->createView(),
+			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
+			'activeOrderingMode' => $orderingMode,
 			'cookieName' => $productListOrderingConfig->getCookieName(),
 		]);
 	}
@@ -289,13 +285,10 @@ class ProductController extends FrontBaseController {
 		$orderingMode = $this->productListOrderingModeForSearchFacade->getOrderingModeFromRequest(
 			$request
 		);
-		$form = $this->createForm(new OrderingSettingFormType(
-			$productListOrderingConfig->getSupportedOrderingModesNames()
-		));
-		$form->setData(['orderingMode' => $orderingMode]);
 
 		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
-			'form' => $form->createView(),
+			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
+			'activeOrderingMode' => $orderingMode,
 			'cookieName' => $productListOrderingConfig->getCookieName(),
 		]);
 	}
