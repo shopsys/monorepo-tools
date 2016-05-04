@@ -358,8 +358,9 @@ class ProductDataFixtureLoader {
 				}
 				break;
 			default:
-				$message = 'Price calculation type "' . $row[self::COLUMN_PRICE_CALCULATION_TYPE] . '" is not valid.';
-				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
+				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
+					$row[self::COLUMN_PRICE_CALCULATION_TYPE]
+				);
 		}
 	}
 

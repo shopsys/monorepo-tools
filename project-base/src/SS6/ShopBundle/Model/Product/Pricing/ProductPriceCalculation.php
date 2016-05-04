@@ -77,8 +77,9 @@ class ProductPriceCalculation {
 		} elseif ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 			return $this->calculateProductPriceForPricingGroupManual($product, $pricingGroup);
 		} else {
-			$message = 'Product price calculation type ' . $priceCalculationType . ' is not supported';
-			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
+			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
+				$priceCalculationType
+			);
 		}
 	}
 
