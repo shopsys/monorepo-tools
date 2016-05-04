@@ -1,9 +1,12 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
+{% set descriptionHeadline = 'Informace o produktu'|trans %}
+{% set parametersHeadline = 'Technické parametry'|trans %}
+{% set accessoriesHeadline = 'Příslušenství'|trans %}
 {% block meta_description %}
 	{{- productDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
@@ -12,127 +15,114 @@
 	{{- productDomain.getSeoTitleForHtml(domain) -}}
 {% endblock %}
 
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+{% endblock %}
+
 {% block main_content %}
-	<div class="product-image">
-		{{ productFlags.list(productDetail.product) }}
-		<span>
-			{% if imageExists(productDetail.product) %}
-				<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-popup-image">
-					{{ image(productDetail.product) }}
-				</a>
-			{% else %}
-				<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}" width="336px" height="200px">
+	<div class="box-detail">
+		<div class="box-detail__image">
+			<div class="box-detail__image__main">
+				{% if imageExists(productDetail.product) %}
+					<a href="{{ imageUrl(productDetail.product, 'original') }}" class="js-popup-image">
+						{{ image(productDetail.product) }}
+					</a>
+				{% else %}
+					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
+				{% endif %}
+			</div>
+			{{ productFlags.list(productDetail.product) }}
+
+			{% set galleryImages = getImages(productDetail.product) %}
+			{% if galleryImages|length > 1 %}
+				<div class="box-gallery js-gallery">
+					{% for galleryImage in galleryImages %}
+						<div class="box-gallery__item">
+							<a href="{{ imageUrl(galleryImage, 'original') }}" class="box-gallery__item__link">
+								{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
+							</a>
+						</div>
+					{% endfor %}
+				</div>
 			{% endif %}
-		</span>
-	</div>
-	{% set galleryImages = getImages(productDetail.product) %}
-	{% if galleryImages|length > 1 %}
-		<div class="product-gallery js-gallery">
-			{% for galleryImage in galleryImages %}
-				<a href="{{ imageUrl(galleryImage, 'original') }}" class="product-gallery__image">
-					{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
-				</a>
-			{% endfor %}
 		</div>
-	{% endif %}
+		<div class="box-detail__info">
+			<h1>{{ productDetail.product.name }}</h1>
 
-	<h1>{{ productDetail.product.name }}</h1>
-
-	{% if productDetail.product.brand %}
-		<dl class="list-params">
-			<dt class="list-params__title">
-				{{ 'Značka'|trans }}:
-			</dt>
-			<dd class="list-params__definition">
-				{{ productDetail.product.brand.name }}
-			</dd>
-		</dl>
-	{% endif %}
-
-	{% if not productDetail.product.isMainVariant %}
-
-		{% if productDetail.product.catnum %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Katalogové číslo'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.catnum }}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.calculatedAvailability %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Dostupnost'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
+			{% if productDetail.product.calculatedAvailability %}
+				<div class="box-detail__info__availability">
 					{% if productDetail.product.calculatedSellingDenied %}
 						{{ 'Zboží se již neprodává'|trans }}
 					{% else %}
 						{{ productDetail.product.calculatedAvailability.name }}
 					{% endif %}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.partno %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'Výrobní číslo'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.partno }}
-				</dd>
-			</dl>
-		{% endif %}
-
-		{% if productDetail.product.ean %}
-			<dl class="list-params">
-				<dt class="list-params__title">
-					{{ 'EAN'|trans }}:
-				</dt>
-				<dd class="list-params__definition">
-					{{ productDetail.product.ean }}
-				</dd>
-			</dl>
-		{% endif %}
-
-		<div class="js-product-detail-main-add-to-cart-wrapper">
-			<dl class="list-params-side">
-				<dt class="list-params-side__title">
-					<strong>
-						{{ 'Cena s DPH'|trans }}:
-					</strong>
-				</dt>
-				<dd class="list-params-side__definition">
-					<strong class="price-main price-big">
-						{{ productDetail.sellingPrice.priceWithVat|price }}
-					</strong>
-				</dd>
-			</dl>
-			<dl class="list-params-side mb-1">
-				<dt class="list-params-side__title">
-					<strong>
-						{{ 'Cena bez DPH'|trans }}:
-					</strong>
-				</dt>
-				<dd class="list-params-side__definition">
-					<strong>
-						{{ productDetail.sellingPrice.priceWithoutVat|price }}
-					</strong>
-				</dd>
-			</dl>
-			{% if not productDetail.product.calculatedSellingDenied %}
-				{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product})) }}
-			{% else %}
-				<div>
-					{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
 				</div>
 			{% endif %}
+
+			{% if not productDetail.product.isMainVariant %}
+				<div class="js-product-detail-main-add-to-cart-wrapper box-detail-add">
+					<div class="box-detail-add__prices">
+						<div class="box-detail-add__prices__item box-detail-add__prices__item--main">
+							{{ productDetail.sellingPrice.priceWithVat|price }}
+						</div>
+						<div class="box-detail-add__prices__item">
+							{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+						</div>
+					</div>
+
+					{% if not productDetail.product.calculatedSellingDenied %}
+						{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
+					{% else %}
+						<div>
+							{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
+						</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if productDetail.hasContentForDetailBox %}
+				<dl class="box-detail__info__params">
+					{% if productDetail.product.brand %}
+						<dt>
+							{{ 'Značka'|trans }}:
+						</dt>
+						<dd>
+							{{ productDetail.product.brand.name }}
+						</dd>
+					{% endif %}
+
+					{% if not productDetail.product.isMainVariant %}
+						{% if productDetail.product.catnum %}
+							<dt>
+								{{ 'Katalogové číslo'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.catnum }}
+							</dd>
+						{% endif %}
+
+						{% if productDetail.product.partno %}
+							<dt>
+								{{ 'Výrobní číslo'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.partno }}
+							</dd>
+						{% endif %}
+
+						{% if productDetail.product.ean %}
+							<dt>
+								{{ 'EAN'|trans }}:
+							</dt>
+							<dd>
+								{{ productDetail.product.ean }}
+							</dd>
+						{% endif %}
+					{% endif %}
+				</dl>
+			{% endif %}
 		</div>
-	{% endif %}
+	</div>
 
 	{% if productDetail.product.isMainVariant %}
 		<table class="table-main">
@@ -172,30 +162,77 @@
 					</tr>
 				{% endfor %}
 			</tbody>
-		<table>
+		</table>
 	{% endif %}
 
-	{% if productDomain.description or productDetail.parameters %}
-		{% if productDomain.description %}
-			<h2>{{ 'Informace o produktu'|trans }}</h2>
-			{{ productDomain.description|raw }}
-		{% endif %}
+	{% if productDomain.description
+		or productDetail.parameters
+		or accesoriesDetails|length > 0
+	%}
+		<div class="in-tab js-tabs">
+			<div class="in-tab__head">
+				{% if productDomain.description %}
+					<a href="#" class="in-tab__head__item active js-tabs-tab-link" data-tab-id="description">
+						{{ descriptionHeadline }}
+					</a>
+				{% endif %}
 
-		{% if productDetail.parameters %}
-			<h3>{{ 'Technické parametry'|trans }}:</h3>
-			{% for productParameterValue in productDetail.parameters %}
-				<dl class="list-params">
-					<dt class="list-params__title">{{ productParameterValue.parameter.name }}</dt>
-					<dd class="list-params__definition">{{ productParameterValue.value.text }}</dd>
-				</dl>
-			{% endfor %}
-		{% endif %}
-	{% endif %}
+				{% if productDetail.parameters %}
+					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="parameters">
+						{{ parametersHeadline }}
+					</a>
+				{% endif %}
 
-	{% if accesoriesDetails|length > 0 %}
-		<h2>{{ 'Příslušenství'|trans }}</h2>
-		<div>
-			{{ productList.list(accesoriesDetails) }}
+				{% if accesoriesDetails|length > 0 %}
+					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="accesories">
+						{{ accessoriesHeadline }}
+					</a>
+				{% endif %}
+			</div>
+			<div class="in-tab__content">
+				{% if productDomain.description %}
+					<a href="#" class="in-tab__content__title active js-tabs-tab-link" data-tab-id="description">
+						{{ descriptionHeadline }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item active js-tabs-tab-content" data-tab-id="description">
+						{{ productDomain.description|raw }}
+					</div>
+				{% endif %}
+
+				{% if productDetail.parameters %}
+					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="parameters">
+						{{ parametersHeadline }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="parameters">
+						<table class="table-params">
+							<tbody>
+								{% for productParameterValue in productDetail.parameters %}
+									<tr>
+										<th>
+											{{ productParameterValue.parameter.name }}
+										</th>
+										<td>
+											{{ productParameterValue.value.text }}
+										</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				{% endif %}
+
+				{% if accesoriesDetails|length > 0 %}
+					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="accesories">
+						{{ accessoriesHeadline }}
+						<i class="svg svg-arrow"></i>
+					</a>
+					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="accesories">
+						{{ productList.list(accesoriesDetails) }}
+					</div>
+				{% endif %}
+			</div>
 		</div>
 	{% endif %}
 {% endblock %}

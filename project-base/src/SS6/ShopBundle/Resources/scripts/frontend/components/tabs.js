@@ -16,7 +16,7 @@
 
 		var onSelectTab = function () {
 			$tabLinks.removeClass('active');
-			$(this).addClass('active');
+			$tabLinks.filter('[data-tab-id="' + $(this).data('tab-id') + '"]').addClass('active');
 			$tabContents.hide();
 			$tabContents.filter('[data-tab-id="' + $(this).data('tab-id') + '"]').show();
 

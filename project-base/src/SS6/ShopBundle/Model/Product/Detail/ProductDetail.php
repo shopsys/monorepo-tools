@@ -140,4 +140,22 @@ class ProductDetail {
 		return $this->imagesById;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function hasContentForDetailBox() {
+		if ($this->product->isMainVariant()) {
+			if ($this->product->getBrand() !== null) {
+				return true;
+			}
+		} else {
+			return $this->product->getBrand() !== null
+				|| $this->product->getCatnum() !== null
+				|| $this->product->getPartno() !== null
+				|| $this->product->getEan() !== null;
+		}
+
+		return false;
+	}
+
 }
