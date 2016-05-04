@@ -42,9 +42,9 @@
 			<div class="form-block">
 				<label class="form-block__label">{{ 'Příznaky'|trans }}:</label>
 				<div class="form-block__field">
-					<div class="form-choice" id="product_filter_form_flags">
+					<div id="product_filter_form_flags">
 						{% for flagForm in filterForm.flags %}
-							<div class="form-choice__item">
+							<div class="form-choice form-choice--block">
 								<label>
 									{{ form_widget(flagForm, { attr: { class: 'form-choice__input'} }) }}
 									<span class="form-choice__text">
@@ -74,9 +74,9 @@
 			<div class="form-block">
 				<label class="form-block__label">{{ 'Značka'|trans }}:</label>
 				<div class="form-block__field">
-					<div class="form-choice" id="product_filter_form_brands">
+					<div id="product_filter_form_brands">
 						{% for brandForm in filterForm.brands %}
-							<div class="form-choice__item">
+							<div class="form-choice form-choice--block">
 								<label>
 									{{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
 									<span class="form-choice__text">
@@ -112,9 +112,9 @@
 							<div class="form-block js-product-filter-parameter">
 								<label class="form-block__label">{{ parameterForm.vars.label }}:</label>
 								<div class="form-block__field">
-									<div id="{{ parameterForm.vars.id }}" class="form-choice">
+									<div id="{{ parameterForm.vars.id }}">
 										{% for parameterValueForm in parameterForm %}
-											<div class="form-choice__item js-product-filter-parameter-value">
+											<div class="form-choice form-choice--block js-product-filter-parameter-value">
 												<label>
 													{{ form_widget(parameterValueForm, { attr: { class: 'form-choice__input'} }) }}
 

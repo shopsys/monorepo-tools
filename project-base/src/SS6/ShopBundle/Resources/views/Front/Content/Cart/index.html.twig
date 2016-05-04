@@ -17,16 +17,16 @@
 	{% if cart.itemsCount > 0 %}
 		{{ form_start(form, { attr: { class: 'js-no-validate' }}) }}
 			{{ form_errors(form) }}
-			<table class="table-cart">
-				<thead class="table-cart__heading">
-					<tr>
-						<th>{{ 'Obrázek'|trans }}</th>
-						<th>{{ 'Název'|trans }}</th>
-						<th>{{ 'Cena za jednotku s DPH'|trans }}</th>
-						<th>{{ 'Sazba DPH'|trans }}</th>
-						<th>{{ 'Množství'|trans }}</th>
-						<th>{{ 'Cena s DPH'|trans }}</th>
-						<th>&nbsp;</th>
+			<table class="table-cart js-cart">
+				<thead>
+					<tr class="table-cart__row">
+						<th class="table-cart__cell table-cart__cell--image">{{ 'Obrázek'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--name">{{ 'Název'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Cena za jednotku s DPH'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Sazba DPH'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--amount">{{ 'Množství'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Cena s DPH'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--action">&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -34,9 +34,9 @@
 					{% for cartItem in cartItems %}
 						{% set cartItemPrice = cartItemPrices[cartItem.id] %}
 						{% set cartItemDiscount = cartItemDiscounts[cartItem.id] %}
-						<tr class="table-cart__item">
-							<td class="table-cart__image text-center">
-								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}">
+						<tr class="table-cart__row js-cart-item">
+							<td class="table-cart__cell table-cart__cell--image">
+								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">
 									{% if imageExists(cartItem.product) %}
 										{{ image(cartItem.product, { size: 'thumbnail' }) }}
 									{% else %}
@@ -45,30 +45,38 @@
 								</a>
 							</td>
 
-							<td class="table-cart__title">
+							<td class="table-cart__cell table-cart__cell--name js-cart-item-name">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="">
 									{{ cartItem.name }}
 								</a>
+								<div class="table-cart__cell__price-mobile">
+									{{ cartItemPrice.totalPrice.priceWithVat|price }}
+									{% if cartItemDiscount is not null %}
+										<div>
+											{{ 'Sleva' }}:
+											{{ cartItemDiscount.priceWithVat|price }}
+										</div>
+									{% endif %}
+								</div>
 							</td>
 
-							<td class="table-cart__price-piece">
+							<td class="table-cart__cell table-cart__cell--price">
 								{{ cartItemPrice.unitPrice.priceWithVat|price }}
 							</td>
 
-							<td>
+							<td class="table-cart__cell table-cart__cell--price">
 								{{ cartItem.product.vat.percent|formatPercent }}
 							</td>
 
-							<td class="table-cart__ammount">
+							<td class="table-cart__cell table-cart__cell--amount">
 								<span class="form-input-spinbox js-spinbox">
-									<input type="button" class="btn form-input-spinbox__button js-spinbox-minus" value="-" />
-									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input js-spinbox-input', 'data-spinbox-min': 1}}) }}
-									<input type="button" class="btn form-input-spinbox__button js-spinbox-plus" value="+" />
-									{{ cartItem.product.unit.name }}
+									{{ form_widget(form.quantities[cartItem.id], { attr: { class: 'form-input-spinbox__input input-no-style js-spinbox-input', 'data-spinbox-min': 1}}) }}
+									<button type="button" class="btn-no-style form-input-spinbox__btn js-spinbox-plus">+</button>
+									<button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
 								</span>
 							</td>
 
-							<td class="table-cart__price-final">
+							<td class="table-cart__cell table-cart__cell--price js-cart-item-total-price">
 								{{ cartItemPrice.totalPrice.priceWithVat|price }}
 								{% if cartItemDiscount is not null %}
 									<div>
@@ -78,65 +86,99 @@
 								{% endif %}
 							</td>
 
-							<td class="table-cart__remove">
-								<a href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}">
-									<img src="{{ asset('assets/frontend/images/icons/trash.png') }}" alt="{{ 'Odstranit'|trans }}">
+							<td class="table-cart__cell table-cart__cell--action">
+								<a
+									href="{{ url('front_cart_delete', {cartItemId: cartItem.id, _token: csrf_token('front_cart_delete_' ~ cartItem.id)}) }}"
+									class="js-cart-item-remove-button"
+								>
+									<i class="svg svg-remove"></i>
 								</a>
 							</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 
-
-				<tfoot class="table-cart__foot">
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>
-							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans}) }}
+				<tfoot>
+					<tr class="table-cart__row">
+						<td class="table-cart__cell table-cart__cell--image">&nbsp;</td>
+						<td class="table-cart__cell table-cart__cell--name">&nbsp;</td>
+						<td class="table-cart__cell table-cart__cell--recalc">
+							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans, attr: { class: 'btn--small' } }) }}
 						</td>
-						<td colspan="4" class="table-cart__foot__total text-right">
+						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
+						<td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
 							{{ 'Celková cena s DPH'|trans }}:
-							<span class="table-cart__price-total">
-								<span class="price-main price-big">{{ productsPrice.priceWithVat|price }}</span>
+							<span>
+								{{ productsPrice.priceWithVat|price }}
 							</span>
 						</td>
+						<td class="table-cart__cell">&nbsp;</td>
 					</tr>
 				</tfoot>
 
 			</table>
 
-			{% if isFreeTransportAndPaymentActive %}
-				{% if isPaymentAndTransportFree %}
-					<strong>{{ 'Dopravu i platbu máte zdarma!'|trans }}</strong>
-				{% else %}
-					<strong>{{ 'Musíte ještě nakoupit zboží za %remaining%, abyste měli dopravu i platbu zdarma.'|trans({'%remaining%': remainingPriceWithVat|price })|raw }}</strong>
-				{% endif %}
-			{% endif %}
+			<div class="box-cart-bottom">
+				<div class="box-cart-bottom__info">
+					{% if isFreeTransportAndPaymentActive %}
+						{% if isPaymentAndTransportFree %}
+							<div class="box-free-transport box-free-transport--done">
+								{% trans %}
+									Dopravu i platbu máte
+									<strong>zdarma!</strong>
+								{% endtrans %}
+							</div>
+						{% else %}
+							<div class="box-free-transport">
+								{% trans with {'%price%': remainingPriceWithVat|price} %}
+									Musíte ještě nakoupit zboží za
+									<strong>
+										%price%
+									</strong>
+									abyste měli dopravu i platbu
+									<strong>
+										zdarma.
+									</strong>
+								{% endtrans %}
+							</div>
+						{% endif %}
+					{% endif %}
+				</div>
+				<div class="box-cart-bottom__promo">
+					{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
+				</div>
+			</div>
 
-			{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
-
-			<div class="box-buttons">
+			<div class="in-action">
 				{% if cart.itemsCount > 0 %}
-					{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary box-buttons__right'}}) }}
+					<div class="in-action__right">
+						{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big'}}) }}
+					</div>
 				{% endif %}
 
-				<a href="{{ url('front_homepage') }}" class="btn box-buttons__left">
-					{{ 'Zpět k nákupu'|trans }}
-				</a>
+				<div class="in-action__left">
+					<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
+						{{ 'Zpět k nákupu'|trans }}
+					</a>
+				</div>
 			</div>
 		{{ form_end(form) }}
 	{% else %}
-		<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
+		<div class="box-cart-empty">
+			<div class="box-cart-empty__image">
+				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
+			</div>
+			<div class="box-cart-empty__text">
+				{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
+			</div>
+		</div>
 
-		<strong class="heading heading--visible">
-			{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
-		</strong>
-
-		<div class="box-buttons">
-			<a href="{{url('front_homepage') }}" class="btn box-buttons__left">
-				{{ 'Zpět k nákupu'|trans }}
-			</a>
+		<div class="in-action">
+			<div class="in-action__left">
+				<a href="{{url('front_homepage') }}" class="btn in-action__btn">
+					{{ 'Zpět k nákupu'|trans }}
+				</a>
+			</div>
 		</div>
 	{% endif %}
 

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartBoxPage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartPage;
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\FloatingWindowPage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\HomepagePage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductDetailPage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
@@ -15,13 +16,15 @@ class CartCest {
 		CartPage $cartPage,
 		ProductDetailPage $productDetailPage,
 		CartBoxPage $cartBoxPage,
-		AcceptanceTester $me
+		AcceptanceTester $me,
+		FloatingWindowPage $floatingWindowPage
 	) {
 		$me->wantTo('have more pieces of the same product as one item in cart');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 
 		$productDetailPage->addProductIntoCart(3);
 		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
+		$floatingWindowPage->closeFloatingWindow();
 
 		$productDetailPage->addProductIntoCart(3);
 		$cartBoxPage->seeInCartBox('1 položka za 20 994,00 Kč');
@@ -35,13 +38,15 @@ class CartCest {
 		CartPage $cartPage,
 		ProductListPage $productListPage,
 		CartBoxPage $cartBoxPage,
-		AcceptanceTester $me
+		AcceptanceTester $me,
+		FloatingWindowPage $floatingWindowPage
 	) {
 		$me->wantTo('add product to cart from product list');
 		$me->amOnPage('/televize-audio/');
 		$productListPage->addProductToCartByName('Defender 2.0 SPK-480', 1);
 		$me->see('Do košíku bylo vloženo zboží');
 		$cartBoxPage->seeInCartBox('1 položka');
+		$floatingWindowPage->closeFloatingWindow();
 		$me->amOnPage('/kosik/');
 		$cartPage->assertProductPrice('Defender 2.0 SPK-480', '119,00 Kč');
 	}
@@ -64,14 +69,15 @@ class CartCest {
 	public function testAddToCartFromProductDetail(
 		ProductDetailPage $productDetailPage,
 		CartBoxPage $cartBoxPage,
-		AcceptanceTester $me
+		AcceptanceTester $me,
+		FloatingWindowPage $floatingWindowPage
 	) {
 		$me->wantTo('add product to cart from product detail');
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 		$me->see('Vložit do košíku');
 		$productDetailPage->addProductIntoCart(3);
 		$me->see('Do košíku bylo vloženo zboží');
-		$me->clickByCss('.window-button-close');
+		$floatingWindowPage->closeFloatingWindow();
 		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
 		$me->amOnPage('/kosik/');
 		$me->see('22" Sencor SLE 22F46DM4 HELLO KITTY');
@@ -119,16 +125,19 @@ class CartCest {
 		CartPage $cartPage,
 		CartBoxPage $cartBoxPage,
 		ProductDetailPage $productDetailPage,
-		AcceptanceTester $me
+		AcceptanceTester $me,
+		FloatingWindowPage $floatingWindowPage
 	) {
 		$me->wantTo('add distinct products to cart');
 
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 		$productDetailPage->addProductIntoCart();
+		$floatingWindowPage->closeFloatingWindow();
 		$cartBoxPage->seeInCartBox('1 položka za 3 499,00 Kč');
 
 		$me->amOnPage('/canon-pixma-ip7250/');
 		$productDetailPage->addProductIntoCart();
+		$floatingWindowPage->closeFloatingWindow();
 		$cartBoxPage->seeInCartBox('2 položky za 27 687,00 Kč');
 
 		$me->amOnPage('/kosik/');

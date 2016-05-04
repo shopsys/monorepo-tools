@@ -48,7 +48,7 @@ class CartPage extends AbstractPage {
 	 */
 	public function removeProductFromCart($productName) {
 		$row = $this->findProductRowInCartByName($productName);
-		$removingButton = $row->findElement(WebDriverBy::cssSelector('td.table-cart__remove a'));
+		$removingButton = $row->findElement(WebDriverBy::cssSelector('.js-cart-item-remove-button'));
 		$this->tester->clickByElement($removingButton);
 	}
 
@@ -56,14 +56,14 @@ class CartPage extends AbstractPage {
 	 * @param string $productName
 	 */
 	public function assertProductIsInCartByName($productName) {
-		$this->tester->see($productName, WebDriverBy::cssSelector('.table-cart__title'));
+		$this->tester->see($productName, WebDriverBy::cssSelector('.js-cart-item-name'));
 	}
 
 	/**
 	 * @param string $productName
 	 */
 	public function assertProductIsNotInCartByName($productName) {
-		$this->tester->dontSee($productName, WebDriverBy::cssSelector('.table-cart__title'));
+		$this->tester->dontSee($productName, WebDriverBy::cssSelector('.js-cart-item-name'));
 	}
 
 	/**
@@ -81,11 +81,11 @@ class CartPage extends AbstractPage {
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function findProductRowInCartByName($productName) {
-		$rows = $this->webDriver->findElements(WebDriverBy::cssSelector('.table-cart tr'));
+		$rows = $this->webDriver->findElements(WebDriverBy::cssSelector('.js-cart-item'));
 
 		foreach ($rows as $row) {
 			try {
-				$nameCell = $row->findElement(WebDriverBy::cssSelector('.table-cart__title'));
+				$nameCell = $row->findElement(WebDriverBy::cssSelector('.js-cart-item-name'));
 
 				if ($nameCell->getText() === $productName) {
 					return $row;
@@ -106,14 +106,14 @@ class CartPage extends AbstractPage {
 	private function getProductPriceCellByName($productName) {
 		$row = $this->findProductRowInCartByName($productName);
 
-		return $row->findElement(WebDriverBy::cssSelector('td.table-cart__price-final'));
+		return $row->findElement(WebDriverBy::cssSelector('.js-cart-item-total-price'));
 	}
 
 	/**
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function getTotalProductsPriceCell() {
-		return $this->webDriver->findElement(WebDriverBy::cssSelector('.table-cart .table-cart__foot .table-cart__foot__total'));
+		return $this->webDriver->findElement(WebDriverBy::cssSelector('.js-cart-total-price'));
 	}
 
 }

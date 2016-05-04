@@ -8,8 +8,8 @@ button types
 .btn {
 	width: auto;
 	min-height: @btn-height;
-	padding: 11px 15px;
-	line-height: @btn-height - 22;
+	padding: @btn-padding-vertical 15px;
+	line-height: @btn-height - 2 * @btn-padding-vertical;
 	vertical-align:middle;
 	display: inline-block;
 
@@ -19,6 +19,7 @@ button types
 	cursor: pointer;
 	font-weight: bold;
 	text-decoration: none;
+	text-align: center;
 	font-size: 13px;
 	outline: 0;
 
@@ -40,8 +41,8 @@ button types
 	}
 
 	&--disabled {
-		color: @color-7;
-		background: @color-e;
+		color: @color-c;
+		background: @color-light;
 		cursor: no-drop;
 
 		&:hover {
@@ -55,6 +56,13 @@ button types
 		padding-right: 25px;
 
 		font-size: 16px;
+	}
+
+	&--small {
+		padding: 5px 10px;
+		min-height: @btn-height - 10;
+
+		font-size: 11px;
 	}
 }
 

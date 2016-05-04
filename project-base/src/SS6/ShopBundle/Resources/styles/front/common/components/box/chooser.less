@@ -1,91 +1,46 @@
-/*
-Checkbox box-chooser
-===============
-Checkboxes With image and text on right - typical for payments, shipping
-
-	<div class="box-chooser">
-		<label class="box-chooser__item">
-			<span class="box-chooser__check">
-				<input type="checkbox">
-			</span>
-
-			<span class="box-chooser__image">
-				img
-			</span>
-
-			<span class="box-chooser__title">
-				Label text
-			</span>
-
-			<span class="box-chooser__price">
-				for Free
-			</span>
-		</label>
-		<label class="box-chooser__item box-chooser__item--active">
-			<span class="box-chooser__check">
-				<input type="checkbox">
-			</span>
-
-			<span class="box-chooser__image">
-				img
-			</span>
-
-			<span class="box-chooser__title">
-				Label text
-			</span>
-
-			<span class="box-chooser__price">
-				for Free
-			</span>
-		</label>
-	</div>
-*/
-
 .box-chooser {
-	position: relative;
-}
+	margin-bottom: @margin-gap;
 
-.box-chooser__item {
-	width: 100%;
-	margin: 5px 0;
-	display: table;
+	border: 1px solid @color-border;
 
-	font-size: 12px;
-	cursor: pointer;
-	font-weight: normal;
-}
+	&__item {
+		width: 100%;
+		padding: 10px;
+		.flex();
+		.flex-align-items(flex-start);
 
-.box-chooser__item--active span {
-	color: @color-primary;
-}
+		&__check {
+			.flex-short(0 0 20px);
+		}
 
-.box-chooser__item--inactive span {
-	color: @color-inactive;
-}
+		&__image {
+			.flex-short(0 0 40px);
 
-.box-chooser__check {
-	width: 3%;
-	.center-it(left);
-}
+			text-align: center;
+		}
 
-.box-chooser__image {
-	width: 7%;
-	.center-it(left);
+		&__title {
+			.flex-grow(1);
+			padding: 0 10px;
 
-	img {
-		display: block;
+			.box-chooser__item--inactive & {
+				color: @color-inactive;
+			}
+		}
+
+		&__price {
+			width: 80px;
+
+			text-align: right;
+			font-weight: bold;
+
+			.box-chooser__item--active & {
+				color: @color-price-main;
+			}
+
+			.box-chooser__item--inactive & {
+				color: @color-inactive;
+			}
+		}
 	}
-}
-
-.box-chooser__title {
-	width: 75%;
-	.center-it(left);
-}
-
-.box-chooser__price {
-	width: 15%;
-	.center-it(right);
-
-	font-weight: bold;
-	font-size: 14px;
 }

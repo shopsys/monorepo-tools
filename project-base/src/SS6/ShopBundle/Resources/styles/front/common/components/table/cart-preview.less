@@ -1,0 +1,30 @@
+.table-cart-preview {
+	width: 100%;
+	margin-bottom: @margin-gap;
+
+	&__row {
+		border-top: 1px solid @color-border;
+
+		&:first-child {
+			border-top: 0;
+		}
+	}
+
+	&__cell {
+		padding: 5px 0;
+
+		.table-cart-preview__row--total & {
+			font-weight: bold;
+		}
+
+		&--price {
+			padding-left: 5px;
+
+			text-align: right;
+
+			.table-cart-preview__row--total & {
+				color: @color-price-main;
+			}
+		}
+	}
+}

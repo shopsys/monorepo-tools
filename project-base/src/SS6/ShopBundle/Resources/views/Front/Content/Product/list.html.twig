@@ -22,20 +22,18 @@
 
 	{% if visibleChildren|length > 0 %}
 		<h2>{{ 'Seznam podkategorií'|trans }}</h2>
-		<ul class="list-items-line">
+		<ul class="list-categories">
 			{% for child in visibleChildren %}
-				<li class="list-items-line__item categories-list-item">
-					<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-items-line__block">
-						<div class="list-items-line__image">
-							<span>
-								{% if imageExists(child) %}
-									{{ image(child) }}
-								{% else %}
-									<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ child.name }}">
-								{% endif %}
-							</span>
-						</div>
-						<h3 class="list-items-line__title">
+				<li class="list-categories__item">
+					<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-categories__item__block">
+						<span class="list-categories__item__image">
+							{% if imageExists(child) %}
+								{{ image(child) }}
+							{% else %}
+								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ child.name }}">
+							{% endif %}
+						</span>
+						<h3 class="list-categories__item__title">
 							{{ child.name }}
 						</h3>
 					</a>

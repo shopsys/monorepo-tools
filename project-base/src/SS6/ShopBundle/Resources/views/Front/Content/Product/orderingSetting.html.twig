@@ -1,8 +1,12 @@
-{{ form_start(form) }}
-	<div class="form-line">
-		<strong class="form-line__label">{{ 'Řazení'|trans }}:</strong>
-		<div class="form-line__field">
-			{{ form_widget(form.orderingMode, { attr: { class: 'js-product-list-ordering-mode', 'data-cookie-name': cookieName  } }) }}
-		</div>
-	</div>
-{{ form_end(form) }}
+<div class="box-order-type">
+	{% for orderingMode, orderingModeName in orderingModesNames %}
+		<a
+			href="#"
+			class="box-order-type__item js-product-list-ordering-mode {{ activeOrderingMode == orderingMode ? 'active' }}"
+			data-cookie-name="{{ cookieName }}"
+			data-ordering-mode="{{ orderingMode }}"
+		>
+			{{ orderingModeName }}
+		</a>
+	{% endfor %}
+</div>

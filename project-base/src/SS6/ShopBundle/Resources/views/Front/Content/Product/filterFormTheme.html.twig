@@ -20,12 +20,12 @@
 
 {% block choice_widget_expanded %}
 	{% spaceless %}
-			<div class="form-choice" {{ block('widget_container_attributes') }}>
+			<div {{ block('widget_container_attributes') }}>
 			{% for child in form %}
-				<div class="form-choice__item">
+				<div class="form-choice form-choice--block">
 					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 						{{ form_widget(child, { attr: {class: 'form-choice__input'} }) }}
-						<span class="form-choice__text">
+						<span class="form-choice__label">
 							{{ child.vars.label }}
 						</span>
 					</label>

@@ -1,0 +1,38 @@
+.box-order-type {
+	margin-bottom: @margin-gap;
+	.cfx();
+
+	&__item {
+		float: left;
+		padding: 5px 10px;
+
+		border: 1px solid transparent;
+		font-size: 12px;
+
+		&.active {
+			background: @color-f;
+			border-color:  @color-border;
+			color: @color-base;
+			text-decoration: none;
+			font-weight: bold;
+		}
+	}
+}
+
+@media @query-md {
+	.box-order-type {
+		&__item {
+			padding: 8px 15px;
+
+			font-size: @font-size;
+		}
+	}
+}
+
+@media @query-xl {
+	.box-order-type {
+		&__item {
+			padding: 10px 20px;
+		}
+	}
+}

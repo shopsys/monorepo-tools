@@ -297,8 +297,8 @@
 }
 
 .flex-shrink(@shrink: 1) {
-	-webkit-flex-grow: @shrink;
-	flex-grow: @shrink;
+	-webkit-flex-shrink: @shrink;
+	flex-shrink: @shrink;
 }
 
 .flex-justify(@justify: space-between) {
@@ -311,6 +311,12 @@
 
 .flex-direction(@direction: row) {
 	flex-direction: @direction;
+}
+
+.flex-short(@flex) {
+	-webkit-flex: @flex;
+	-ms-flex: @flex;
+	flex: @flex;
 }
 
 .width-calc(@equation, @fallback) {
