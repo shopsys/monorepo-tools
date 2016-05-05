@@ -45,7 +45,7 @@ class ProductPriceRecalculationScheduler {
 	/**
 	 * @return \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]
 	 */
-	public function getProductsIteratorForRecalculation() {
+	public function getProductsIteratorForDelayedRecalculation() {
 		return $this->productRepository->getProductsForPriceRecalculationIterator();
 	}
 

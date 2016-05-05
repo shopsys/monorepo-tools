@@ -75,7 +75,7 @@ class ProductPriceRecalculator {
 	 */
 	public function runScheduledRecalculationsBatch() {
 		if ($this->productRowsIterator === null) {
-			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
+			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
 		}
 
 		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
