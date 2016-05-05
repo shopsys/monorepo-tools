@@ -34,10 +34,9 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 	left: 50%;
 	margin: -@window-height/2 0 0 -@window-width/2;
 	padding: 25px 30px 30px;
-	z-index: 10000;
+	z-index: 10001;
 
 	text-align: center;
-	border: 1px solid @color-border;
 	background: @color-f;
 	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
 
@@ -75,5 +74,16 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 
 	&__actions {
 		margin-top: @margin-gap;
+	}
+
+	&__overlay {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 10000;
+
+		background: rgba(0,0,0, 0.5);
 	}
 }

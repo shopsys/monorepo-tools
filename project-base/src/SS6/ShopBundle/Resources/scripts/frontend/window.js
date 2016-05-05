@@ -20,7 +20,7 @@
 	var getOverlay = function() {
 		var $overlay = $('#js-overlay');
 		if ($overlay.size() === 0) {
-			$overlay = $('<div id="js-overlay"></div>');
+			$overlay = $('<div class="window__overlay" id="js-overlay"></div>');
 		}
 		return $overlay;
 	};
