@@ -1,14 +1,3 @@
-/*
-Message
-=======
-Alert, info, success atc messages box
-
-	<div class="in-message">
-
-	</div>
-
-*/
-
 .in-message {
 	display: block;
 	padding: 6px 9px;
@@ -24,25 +13,26 @@ Alert, info, success atc messages box
 
 	&--error {
 		color: @color-message-alert-text;
-		background: @color-message-alert;
+		border: 1px solid @color-message-alert;
 	}
 
 	&--warning {
 		color: @color-message-warning-text;
-		background: @color-message-warning;
+		border: 1px solid @color-message-warning;
 	}
 
 	&--info {
 		color: @color-message-info-text;
-		background: @color-message-info;
+		border: 1px solid @color-message-info;
 	}
 
 	&--success {
 		color: @color-message-success-text;
-		background: @color-message-success;
+		border: 1px solid @color-message-success;
 	}
 
 	&--alert {
 		color: @color-message-alert-text;
+		border: 1px solid @color-message-alert;
 	}
 }
