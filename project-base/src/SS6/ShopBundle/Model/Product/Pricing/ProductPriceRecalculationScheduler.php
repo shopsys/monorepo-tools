@@ -27,7 +27,7 @@ class ProductPriceRecalculationScheduler {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	public function scheduleRecalculatePriceForProduct(Product $product) {
+	public function scheduleProductForImmediateRecalculation(Product $product) {
 		$this->products[$product->getId()] = $product;
 	}
 
