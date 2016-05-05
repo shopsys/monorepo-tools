@@ -54,7 +54,7 @@ class TermsAndConditionsController extends AdminBaseController {
 		if ($form->isValid()) {
 			$termsAndConditionsArticle = $form->getData()['termsAndConditionsArticle'];
 
-			$this->termsAndConditionsFacade->setTermsTermsAndConditionsArticleOnDomain(
+			$this->termsAndConditionsFacade->setTermsAndConditionsArticleOnDomain(
 				$termsAndConditionsArticle,
 				$selectedDomainId
 			);

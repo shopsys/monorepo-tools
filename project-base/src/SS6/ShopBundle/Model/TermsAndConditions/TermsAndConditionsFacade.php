@@ -54,7 +54,7 @@ class TermsAndConditionsFacade {
 	 * @param \SS6\ShopBundle\Model\Article\Article|null $termsAndConditionsArticle
 	 * @param int $domainId
 	 */
-	public function setTermsTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId) {
+	public function setTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId) {
 		$termsAndConditionsArticleId = null;
 		if ($termsAndConditionsArticle !== null) {
 			$termsAndConditionsArticleId = $termsAndConditionsArticle->getId();
