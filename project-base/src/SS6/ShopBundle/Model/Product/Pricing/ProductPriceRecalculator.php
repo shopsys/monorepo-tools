@@ -73,7 +73,7 @@ class ProductPriceRecalculator {
 	/**
 	 * @return bool
 	 */
-	public function runScheduledRecalculationsBatch() {
+	public function runBatchOfScheduledDelayedRecalculations() {
 		if ($this->productRowsIterator === null) {
 			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
 		}
@@ -97,7 +97,7 @@ class ProductPriceRecalculator {
 	public function runAllScheduledRecalculations() {
 		$this->productRowsIterator = null;
 		// @codingStandardsIgnoreStart
-		while ($this->runScheduledRecalculationsBatch()) {};
+		while ($this->runBatchOfScheduledDelayedRecalculations()) {};
 		// @codingStandardsIgnoreEnd
 	}
 
