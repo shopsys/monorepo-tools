@@ -39,8 +39,11 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 	text-align: center;
 	border: 1px solid @color-border;
 	background: @color-f;
-
 	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
+
+	&--active {
+		display: block;
+	}
 
 	&--wide {
 		position: absolute;
@@ -49,32 +52,28 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 		height: @window-wide-height;
 		margin: 0 0 0 -@window-wide-width/2;
 	}
-}
 
-.window--active {
-	display: block;
-}
+	&__close {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 25px;
+		height: 25px;
+		line-height: 25px;
 
-.window__close {
-	position: absolute;
-	top: 0;
-	right: 0;
-	width: 25px;
-	height: 25px;
-	line-height: 25px;
-
-	background: @bg-box;
-	color: @color-base;
-	text-decoration: none;
-	font-weight: bold;
-
-	&:hover {
-		background: @color-0;
-		color: @color-f;
+		background: @bg-box;
+		color: @color-base;
 		text-decoration: none;
-	}
-}
+		font-weight: bold;
 
-.window__actions {
-	margin-top: 20px;
+		&:hover {
+			background: @color-0;
+			color: @color-f;
+			text-decoration: none;
+		}
+	}
+
+	&__actions {
+		margin-top: @margin-gap;
+	}
 }
