@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Security\Filesystem;
 
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
+use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilemanagerAccess {
 
@@ -14,22 +15,30 @@ class FilemanagerAccess {
 	/**
 	 * @var string
 	 */
-	private $filamanagerUploadDir;
+	private $filemanagerUploadDir;
 
 	/**
 	 * @var \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader
 	 */
 	private $elFinderConfigurationReader;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Filesystem\FilepathComparator
+	 */
+	private $filepathComparator;
+
 	public function __construct(
 		$filamanagerUploadDir,
-		ElFinderConfigurationReader $elFinderConfigurationReader
+		ElFinderConfigurationReader $elFinderConfigurationReader,
+		FilepathComparator $filepathComparator
 	) {
-		$this->filamanagerUploadDir = realpath($filamanagerUploadDir);
+		$this->filemanagerUploadDir = realpath($filamanagerUploadDir);
 		$this->elFinderConfigurationReader = $elFinderConfigurationReader;
+		$this->filepathComparator = $filepathComparator;
 	}
 
 	/**
+	 * @see \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader::access()
 	 * @param string $attr
 	 * @param string $path
 	 * @param $data
@@ -37,36 +46,11 @@ class FilemanagerAccess {
 	 * @return bool|null
 	 */
 	public function isPathAccessible($attr, $path, $data, $volume) {
-		$realpath = $this->parseClosestRealpath($path);
-
-		if ($realpath === false || strpos($realpath, $this->filamanagerUploadDir) !== 0) {
-			return false;
-		}
-
-		$pathInUploadDir = substr($realpath, strlen($this->filamanagerUploadDir));
-		if ($pathInUploadDir !== false && strpos($pathInUploadDir, DIRECTORY_SEPARATOR) === false) {
+		if (!$this->filepathComparator->isPathWithinDirectory($path, $this->filemanagerUploadDir)) {
 			return false;
 		}
 
 		return $this->elFinderConfigurationReader->access($attr, $path, $data, $volume);
-	}
-
-	/**
-	 * @param string $path
-	 * @return string|bool
-	 */
-	private function parseClosestRealpath($path) {
-		if (empty($path)) {
-			return false;
-		}
-		$realpath = realpath($path);
-
-		while ($realpath === false && $path !== dirname($path)) {
-			$path = dirname($path);
-			$realpath = realpath($path);
-		}
-
-		return $realpath;
 	}
 
 	/**
@@ -81,6 +65,7 @@ class FilemanagerAccess {
 	}
 
 	/**
+	 * @see \FM\ElfinderBundle\Configuration\ElFinderConfigurationReader::access()
 	 * @param string $attr
 	 * @param string $path
 	 * @param $data

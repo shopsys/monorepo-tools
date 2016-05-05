@@ -10,7 +10,7 @@ use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testFileExists() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData' . DIRECTORY_SEPARATOR;
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
 		$uploadedFileUrlPrefix = '';
 
 		$uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
@@ -22,7 +22,7 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testFileNotExists() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData';
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
 		$uploadedFileUrlPrefix = '';
 
 		$uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
@@ -34,7 +34,7 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAbsoluteFilePath() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData' . DIRECTORY_SEPARATOR;
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
 		$uploadedFileUrlPrefix = '';
 
 		$uploadedFileLocator = new UploadedFileLocator($uploadedFileDir, $uploadedFileUrlPrefix);
@@ -45,7 +45,7 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAbsoluteUploadedFileFilepath() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData' . DIRECTORY_SEPARATOR;
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
 		$uploadedFileUrlPrefix = '';
 
 		$uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
@@ -54,13 +54,13 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 
 		$uploadedFileLocator = new UploadedFileLocator($uploadedFileDir, $uploadedFileUrlPrefix);
 		$this->assertSame(
-			$uploadedFileDir . 'entityName' . DIRECTORY_SEPARATOR . 'dummy.txt',
+			$uploadedFileDir . 'entityName/dummy.txt',
 			$uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFileMock)
 		);
 	}
 
 	public function testGetRelativeUploadedFileFilepath() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData';
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
 		$uploadedFileUrlPrefix = '';
 
 		$uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
@@ -69,13 +69,13 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 
 		$uploadedFileLocator = new UploadedFileLocator($uploadedFileDir, $uploadedFileUrlPrefix);
 		$this->assertSame(
-			'entityName' . DIRECTORY_SEPARATOR . 'dummy.txt',
+			'entityName/dummy.txt',
 			$uploadedFileLocator->getRelativeUploadedFileFilepath($uploadedFileMock)
 		);
 	}
 
 	public function testGetUploadedFileUrl() {
-		$uploadedFileDir = __DIR__ . DIRECTORY_SEPARATOR . 'UploadedFileLocatorData' . DIRECTORY_SEPARATOR;
+		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
 		$uploadedFileUrlPrefix = '/assets/';
 
 		$domainConfig = new DomainConfig(1, 'http://www.example.com', 'example domain', 'en', '', '');

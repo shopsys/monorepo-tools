@@ -43,7 +43,7 @@ class DomainService {
 	 */
 	public function convertToDomainIconFormatAndSave($domainId, $filepath, $domainImagesDirectory) {
 		$newTemporaryFilepath = pathinfo($filepath, PATHINFO_DIRNAME)
-			. DIRECTORY_SEPARATOR
+			. '/'
 			. $domainId
 			. '.'
 			. ImageProcessingService::EXTENSION_PNG;
@@ -57,7 +57,7 @@ class DomainService {
 		$resizedImage->save($newTemporaryFilepath);
 
 		$targetFileName = pathinfo($newTemporaryFilepath, PATHINFO_BASENAME);
-		$targetFilePath = $domainImagesDirectory . DIRECTORY_SEPARATOR . $targetFileName;
+		$targetFilePath = $domainImagesDirectory . '/' . $targetFileName;
 
 		try {
 			$this->filesystem->rename($newTemporaryFilepath, $targetFilePath, true);

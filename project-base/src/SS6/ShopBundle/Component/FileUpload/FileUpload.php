@@ -99,14 +99,14 @@ class FileUpload {
 	 * @return string
 	 */
 	public function getTemporaryFilepath($temporaryFilename) {
-		return $this->getTemporaryDirectory() . DIRECTORY_SEPARATOR . TransformString::safeFilename($temporaryFilename);
+		return $this->getTemporaryDirectory() . '/' . TransformString::safeFilename($temporaryFilename);
 	}
 
 	/**
 	 * @return string
 	 */
 	public function getTemporaryDirectory() {
-		return $this->temporaryDir . DIRECTORY_SEPARATOR . self::TEMPORARY_DIRECTORY;
+		return $this->temporaryDir . '/' . self::TEMPORARY_DIRECTORY;
 	}
 
 	/**
@@ -118,7 +118,7 @@ class FileUpload {
 	public function getUploadDirectory($isImage, $category, $targetDirectory) {
 		return ($isImage ? $this->imageDir : $this->uploadedFileDir)
 			. $category
-			. ($targetDirectory !== null ? DIRECTORY_SEPARATOR . $targetDirectory : '');
+			. ($targetDirectory !== null ? '/' . $targetDirectory : '');
 	}
 
 	/**
@@ -129,7 +129,7 @@ class FileUpload {
 	 * @return string
 	 */
 	private function getTargetFilepath($filename, $isImage, $category, $targetDirectory) {
-		return $this->getUploadDirectory($isImage, $category, $targetDirectory) . DIRECTORY_SEPARATOR . $filename;
+		return $this->getUploadDirectory($isImage, $category, $targetDirectory) . '/' . $filename;
 	}
 
 	/**

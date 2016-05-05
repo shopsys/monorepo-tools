@@ -87,7 +87,7 @@ class DomainFacade {
 	 * @return bool
 	 */
 	public function existsDomainIcon($domainId) {
-		return $this->filesystem->exists($this->domainImagesDirectory . DIRECTORY_SEPARATOR . $domainId . '.png');
+		return $this->filesystem->exists($this->domainImagesDirectory . '/' . $domainId . '.png');
 	}
 
 }

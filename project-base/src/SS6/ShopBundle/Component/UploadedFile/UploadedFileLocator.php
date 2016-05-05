@@ -31,7 +31,7 @@ class UploadedFileLocator {
 	 * @return string
 	 */
 	public function getRelativeUploadedFileFilepath(UploadedFile $uploadedFile) {
-		return $this->getRelativeFilePath($uploadedFile->getEntityName()) . DIRECTORY_SEPARATOR . $uploadedFile->getFilename();
+		return $this->getRelativeFilePath($uploadedFile->getEntityName()) . '/' . $uploadedFile->getFilename();
 	}
 
 	/**
@@ -39,7 +39,7 @@ class UploadedFileLocator {
 	 * @return string
 	 */
 	public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
-		return $this->getAbsoluteFilePath($uploadedFile->getEntityName()) . DIRECTORY_SEPARATOR . $uploadedFile->getFilename();
+		return $this->getAbsoluteFilePath($uploadedFile->getEntityName()) . '/' . $uploadedFile->getFilename();
 	}
 
 	/**
@@ -51,7 +51,7 @@ class UploadedFileLocator {
 		if ($this->fileExists($uploadedFile)) {
 			return $domainConfig->getUrl()
 			. $this->uploadedFileUrlPrefix
-			. str_replace(DIRECTORY_SEPARATOR, '/', $this->getRelativeUploadedFileFilepath($uploadedFile));
+			. $this->getRelativeUploadedFileFilepath($uploadedFile);
 		}
 
 		throw new \SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException();

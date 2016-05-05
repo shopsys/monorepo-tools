@@ -67,7 +67,7 @@ class ImageProcessingService {
 	 */
 	public function convertToShopFormatAndGetNewFilename($filepath) {
 		$extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
-		$newFilepath = pathinfo($filepath, PATHINFO_DIRNAME) . DIRECTORY_SEPARATOR . pathinfo($filepath, PATHINFO_FILENAME) . '.';
+		$newFilepath = pathinfo($filepath, PATHINFO_DIRNAME) . '/' . pathinfo($filepath, PATHINFO_FILENAME) . '.';
 
 		if ($extension === self::EXTENSION_PNG) {
 			$newFilepath .= self::EXTENSION_PNG;
