@@ -6,8 +6,11 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookiesFacade {
+
+	const EU_COOKIES_COOKIE_CONSENT_NAME = 'eu-cookies';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
@@ -24,14 +27,21 @@ class CookiesFacade {
 	 */
 	private $domain;
 
+	/**
+	 * @var \Symfony\Component\HttpFoundation\RequestStack
+	 */
+	private $requestStack;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		Setting $setting,
-		Domain $domain
+		Domain $domain,
+		RequestStack $requestStack
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->setting = $setting;
 		$this->domain = $domain;
+		$this->requestStack = $requestStack;
 	}
 
 	/**
@@ -80,4 +90,12 @@ class CookiesFacade {
 		return false;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isCookiesConsentGiven() {
+		$masterRequest = $this->requestStack->getMasterRequest();
+
+		return $masterRequest->cookies->has(self::EU_COOKIES_COOKIE_CONSENT_NAME);
+	}
 }

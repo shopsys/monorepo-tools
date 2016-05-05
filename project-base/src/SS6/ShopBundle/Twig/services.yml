@@ -5,6 +5,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.cookies_extension:
+    class: SS6\ShopBundle\Twig\CookiesExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.css_extension:
     class: SS6\ShopBundle\Twig\CssExtension
     tags:
