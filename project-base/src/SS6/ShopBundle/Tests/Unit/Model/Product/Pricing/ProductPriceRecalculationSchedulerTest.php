@@ -27,7 +27,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
 		$productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
-		$productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$products = $productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(0, $products);

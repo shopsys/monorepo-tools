@@ -49,7 +49,7 @@ class ProductPriceRecalculationScheduler {
 		return $this->productRepository->getProductsForPriceRecalculationIterator();
 	}
 
-	public function cleanImmediatelyRecalculationSchedule() {
+	public function cleanScheduleForImmediateRecalculation() {
 		$this->products = [];
 	}
 

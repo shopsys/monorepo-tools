@@ -106,7 +106,7 @@ class ProductPriceRecalculator {
 		foreach ($products as $product) {
 			$this->recalculateProductPrices($product);
 		}
-		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$this->clearCache();
 	}
 
