@@ -23,6 +23,9 @@
 						</div>
 
 						<div class="list-products__item__info">
+							<p class="list-products__item__info__description">
+								{{ productDomain.shortDescription }}
+							</p>
 							{% if productDetail.sellingPrice is not null %}
 								<div class="list-products__item__info__price">
 									<div class="list-products__item__info__price__item list-products__item__info__price__item--main">
@@ -39,10 +42,6 @@
 									</div>
 								</div>
 							{% endif %}
-
-							<div>
-								{{ productDomain.shortDescription }}
-							</div>
 
 							<div class="list-products__item__info__availability">
 								{{ productDetail.product.calculatedAvailability.getName }}
