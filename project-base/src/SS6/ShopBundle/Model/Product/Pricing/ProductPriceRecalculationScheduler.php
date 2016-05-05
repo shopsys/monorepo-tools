@@ -38,7 +38,7 @@ class ProductPriceRecalculationScheduler {
 	/**
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getProductsForImmediatelyRecalculation() {
+	public function getProductsForImmediateRecalculation() {
 		return $this->products;
 	}
 

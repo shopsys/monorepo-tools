@@ -102,7 +102,7 @@ class ProductPriceRecalculator {
 	}
 
 	public function runImmediateRecalculations() {
-		$products = $this->productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$products = $this->productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 		foreach ($products as $product) {
 			$this->recalculateProductPrices($product);
 		}

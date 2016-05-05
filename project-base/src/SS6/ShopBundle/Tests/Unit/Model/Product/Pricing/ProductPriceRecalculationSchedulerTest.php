@@ -15,7 +15,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
 		$productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
-		$products = $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$products = $productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(1, $products);
 		$this->assertSame($productMock, array_pop($products));
@@ -28,7 +28,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
 		$productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
 		$productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-		$products = $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$products = $productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(0, $products);
 	}
@@ -52,7 +52,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
 		$productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
-		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation());
+		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediateRecalculation());
 		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForRecalculation());
 	}
 
