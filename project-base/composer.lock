@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b99b8ec67a35bca87ea4167da09b09c0",
-    "content-hash": "9d805811bf80bd996dd22e3f308a15ba",
+    "hash": "4a1cf515ce876ed0a439ec8dc7fb107b",
+    "content-hash": "c97397b560c310cc90dae95d33d12812",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -256,7 +256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/960e233d9bab61e6d081b4ccadba063e5764883d",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/551482eadb8b5d9cacda46a8afa8108ae9e08cdb",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -269,9 +269,9 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1|~5.0",
+                "phpunit/phpunit": "~4.1",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "^2.8.1|^3.0.1",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/symfony": "^2.6.4|~3.0"
             },
             "type": "symfony-bundle",
@@ -1245,12 +1245,12 @@
             "version": "dev-ddc1960-hotfix-and-ddc4005-hotfix",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pk16011990/doctrine2.git",
+                "url": "https://github.com/shopsys/doctrine2.git",
                 "reference": "ba2fa4bb174c467766ab6d0c205be7cf51ac395f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pk16011990/doctrine2/zipball/ba2fa4bb174c467766ab6d0c205be7cf51ac395f",
+                "url": "https://api.github.com/repos/shopsys/doctrine2/zipball/ba2fa4bb174c467766ab6d0c205be7cf51ac395f",
                 "reference": "ba2fa4bb174c467766ab6d0c205be7cf51ac395f",
                 "shasum": ""
             },
@@ -1456,12 +1456,12 @@
             "target-dir": "Fp/JsFormValidatorBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sustmi/JsFormValidatorBundle.git",
+                "url": "https://github.com/shopsys/JsFormValidatorBundle.git",
                 "reference": "bb2be7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/JsFormValidatorBundle/zipball/88ba9696c77da536fba0719f871963d61ec1d2bf",
+                "url": "https://api.github.com/repos/shopsys/JsFormValidatorBundle/zipball/88ba9696c77da536fba0719f871963d61ec1d2bf",
                 "reference": "bb2be7e",
                 "shasum": ""
             },
@@ -2091,12 +2091,12 @@
             "target-dir": "JMS/TranslationBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sustmi/JMSTranslationBundle.git",
+                "url": "https://github.com/shopsys/JMSTranslationBundle.git",
                 "reference": "527da12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/JMSTranslationBundle/zipball/527da1230ed11a85f62dda5a0c61e7f58c15924e",
+                "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/527da1230ed11a85f62dda5a0c61e7f58c15924e",
                 "reference": "527da12",
                 "shasum": ""
             },
@@ -4313,12 +4313,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sustmi/Routing.git",
+                "url": "https://github.com/shopsys/Routing.git",
                 "reference": "bb25b51744"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/Routing/zipball/a068c329cc5250652024ed8f919b7aa2cf30f8fd",
+                "url": "https://api.github.com/repos/shopsys/Routing/zipball/a068c329cc5250652024ed8f919b7aa2cf30f8fd",
                 "reference": "bb25b51744",
                 "shasum": ""
             },
@@ -4741,12 +4741,12 @@
             "version": "dev-get-rid-of-import",
             "source": {
                 "type": "git",
-                "url": "https://github.com/sustmi/jparser.git",
+                "url": "https://github.com/shopsys/jparser.git",
                 "reference": "c37f4c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sustmi/jparser/zipball/c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
+                "url": "https://api.github.com/repos/shopsys/jparser/zipball/c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
                 "reference": "c37f4c6",
                 "shasum": ""
             },

@@ -15,23 +15,23 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/pk16011990/doctrine2.git"
+			"url": "https://github.com/shopsys/doctrine2.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/jparser.git"
+			"url": "https://github.com/shopsys/jparser.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/JsFormValidatorBundle.git"
+			"url": "https://github.com/shopsys/JsFormValidatorBundle.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/JMSTranslationBundle.git"
+			"url": "https://github.com/shopsys/JMSTranslationBundle.git"
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/sustmi/Routing.git"
+			"url": "https://github.com/shopsys/Routing.git"
 		},
 		{
 			"type": "vcs",
