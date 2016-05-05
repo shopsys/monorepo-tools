@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+	require('es6-promise').polyfill();
+
 	grunt.initConfig({
 
 		pkg: grunt.file.readJSON('package.json'),
@@ -56,6 +58,21 @@ module.exports = function(grunt) {
 					}
 				}{% if not loop.last %},{% endif %}
 			{% endfor -%}
+		},
+
+		postcss: {
+			options: {
+				 map: {
+					inline: false,
+					annotation: 'web/assets/admin/styles/'
+				},
+				processors: [
+					require('autoprefixer')({browsers: ['last 3 versions', 'ios 6', 'ie 7', 'ie 8', 'ie 9']})
+				]
+			},
+			dist: {
+				src: 'web/assets/frontend/styles/*.css'
+			}
 		},
 
 		legacssy: {
@@ -269,8 +286,9 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-spritesmith');
 	grunt.loadNpmTasks('grunt-styledocco');
 	grunt.loadNpmTasks('grunt-webfont');
+	grunt.loadNpmTasks('grunt-postcss');
 
-	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'legacssy']);
+	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'postcss', 'legacssy']);
 
 	{% for domain in domains -%}
 		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
