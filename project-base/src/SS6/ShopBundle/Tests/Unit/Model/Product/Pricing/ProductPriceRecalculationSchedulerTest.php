@@ -33,7 +33,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 		$this->assertCount(0, $products);
 	}
 
-	public function testScheduleRecalculatePriceForAllProducts() {
+	public function testAllProductsCanBeScheduledForDelayedRecalculation() {
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productsIterator = [$productMock];
 		$productRepositoryMock = $this->getMock(
@@ -50,7 +50,7 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 			->willReturn($productsIterator);
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
-		$productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
 		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation());
 		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForRecalculation());

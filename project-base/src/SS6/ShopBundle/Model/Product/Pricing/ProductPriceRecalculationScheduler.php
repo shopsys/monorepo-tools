@@ -31,7 +31,7 @@ class ProductPriceRecalculationScheduler {
 		$this->products[$product->getId()] = $product;
 	}
 
-	public function scheduleRecalculatePriceForAllProducts() {
+	public function scheduleAllProductsForDelayedRecalculation() {
 		$this->productRepository->markAllProductsForPriceRecalculation();
 	}
 

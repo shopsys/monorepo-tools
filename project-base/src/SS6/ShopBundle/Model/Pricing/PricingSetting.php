@@ -96,7 +96,7 @@ class PricingSetting {
 		}
 
 		$this->setting->set(self::ROUNDING_TYPE, $roundingType, SettingValue::DOMAIN_ID_COMMON);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 	}
 
 	/**
