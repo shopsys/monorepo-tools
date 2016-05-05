@@ -253,6 +253,10 @@
 									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
 								</span>
 
+								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip text-no-decoration" target="_blank" data-toggle="tooltip" data-placement="top">
+									<i class="svg svg-forward-page"></i>
+								</a>
+
 								<span class="js-entity-url-list-row-delete-revert-wrapper">
 									<span class="js-entity-url-list-row-delete-block">
 										<button class="btn-no-style form-choice-list__item__remove js-entity-url-list-row-delete-block-button" type="button">
@@ -265,14 +269,14 @@
 										</button>
 
 										<span title="{{ 'Po uložení bude url smazána'|trans }}"
-											class="js-tooltip c-help form-icon" data-toggle="tooltip" data-placement="bottom">
+											class="js-tooltip c-help form-icon" data-toggle="tooltip" data-placement="top">
 											<span class="svg svg-info"></span>
 										</button>
 										</span>
 									</span>
 								</span>
 								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-									class="js-entity-url-list-info-main-delete js-tooltip c-help display-none form-choice-list__info" data-toggle="tooltip" data-placement="right">
+									class="js-entity-url-list-info-main-delete js-tooltip c-help display-none form-choice-list__info" data-toggle="tooltip" data-placement="top">
 									<span class="svg svg-info in-icon in-icon--info "></span>
 								</span>
 						</label>

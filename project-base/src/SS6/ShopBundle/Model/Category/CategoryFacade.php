@@ -312,4 +312,20 @@ class CategoryFacade {
 	public function getRootCategory() {
 		return $this->categoryRepository->getRootCategory();
 	}
+
+	/**
+	 * @param int $domainId
+	 * @param int $categoryId
+	 * @return \SS6\ShopBundle\Model\Category\Category
+	 */
+	public function getVisibleOnDomainById($domainId, $categoryId) {
+		$category = $this->getById($categoryId);
+		$categoryDomain = $category->getCategoryDomain($domainId);
+		if (!$categoryDomain->isVisible()) {
+			$message = 'Category ID ' . $categoryId . ' is not visible on domain ID ' . $domainId;
+			throw new \SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException($message);
+		}
+
+		return $category;
+	}
 }
