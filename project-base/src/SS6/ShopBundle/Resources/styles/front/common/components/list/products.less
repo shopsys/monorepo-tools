@@ -51,11 +51,20 @@
 		&__info {
 			.flex();
 			.flex-align-items(center);
+			flex-wrap: wrap;
 			width: 100%;
 			margin-bottom: 10px;
 
+			&__description {
+				flex: 0 0 100%;
+				.eliminate-lines(16px, 4);
+				margin-bottom: 10px;
+
+				font-size: 12px;
+			}
+
 			&__price {
-				width: 50%;
+				flex: 0 0 50%;
 				padding-right: 5px;
 
 				&__item {
@@ -74,7 +83,7 @@
 			}
 
 			&__availability {
-				width: 50%;
+				flex: 0 0 50%;
 				padding-left: 5px;
 
 				text-align: right;

@@ -53,6 +53,11 @@ class ProductEditData {
 	public $descriptions;
 
 	/**
+	 * @var string[domainId]
+	 */
+	public $shortDescriptions;
+
+	/**
 	 * @var \SS6\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
@@ -82,6 +87,7 @@ class ProductEditData {
 	 * @param string[] $seoTitles
 	 * @param string[] $seoMetaDescriptions
 	 * @param string[] $descriptions
+	 * @param string[] $shortDescriptions
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 * @param string[] $heurekaCpcValues
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
@@ -96,6 +102,7 @@ class ProductEditData {
 		array $seoTitles = [],
 		array $seoMetaDescriptions = [],
 		array $descriptions = [],
+		array $shortDescriptions = [],
 		array $accessories = [],
 		array $heurekaCpcValues = [],
 		array $variants = []
@@ -113,6 +120,7 @@ class ProductEditData {
 		$this->seoTitles = $seoTitles;
 		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->descriptions = $descriptions;
+		$this->shortDescriptions = $shortDescriptions;
 		$this->urls = new UrlListData();
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;

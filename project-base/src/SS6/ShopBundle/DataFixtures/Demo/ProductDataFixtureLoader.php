@@ -23,22 +23,24 @@ class ProductDataFixtureLoader {
 	const COLUMN_EAN = 4;
 	const COLUMN_DESCRIPTION_CS = 5;
 	const COLUMN_DESCRIPTION_EN = 6;
-	const COLUMN_PRICE_CALCULATION_TYPE = 7;
-	const COLUMN_MAIN_PRICE = 8;
-	const COLUMN_MANUAL_PRICES = 9;
-	const COLUMN_VAT = 10;
-	const COLUMN_SELLING_FROM = 11;
-	const COLUMN_SELLING_TO = 12;
-	const COLUMN_STOCK_QUANTITY = 13;
-	const COLUMN_UNIT = 14;
-	const COLUMN_AVAILABILITY = 15;
-	const COLUMN_PARAMETERS = 16;
-	const COLUMN_CATEGORIES_1 = 17;
-	const COLUMN_CATEGORIES_2 = 18;
-	const COLUMN_FLAGS = 19;
-	const COLUMN_SELLING_DENIED = 20;
-	const COLUMN_BRAND = 21;
-	const COLUMN_MAIN_VARIANT_CATNUM = 22;
+	const COLUMN_SHORT_DESCRIPTION_CS = 7;
+	const COLUMN_SHORT_DESCRIPTION_EN = 8;
+	const COLUMN_PRICE_CALCULATION_TYPE = 9;
+	const COLUMN_MAIN_PRICE = 10;
+	const COLUMN_MANUAL_PRICES = 11;
+	const COLUMN_VAT = 12;
+	const COLUMN_SELLING_FROM = 13;
+	const COLUMN_SELLING_TO = 14;
+	const COLUMN_STOCK_QUANTITY = 15;
+	const COLUMN_UNIT = 16;
+	const COLUMN_AVAILABILITY = 17;
+	const COLUMN_PARAMETERS = 18;
+	const COLUMN_CATEGORIES_1 = 19;
+	const COLUMN_CATEGORIES_2 = 20;
+	const COLUMN_FLAGS = 21;
+	const COLUMN_SELLING_DENIED = 22;
+	const COLUMN_BRAND = 23;
+	const COLUMN_MAIN_VARIANT_CATNUM = 24;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
@@ -196,6 +198,10 @@ class ProductDataFixtureLoader {
 		$productEditData->productData->partno = $row[self::COLUMN_PARTNO];
 		$productEditData->productData->ean = $row[self::COLUMN_EAN];
 		$productEditData->descriptions = [1 => $row[self::COLUMN_DESCRIPTION_CS], 2 => $row[self::COLUMN_DESCRIPTION_EN]];
+		$productEditData->shortDescriptions = [
+			1 => $row[self::COLUMN_SHORT_DESCRIPTION_CS],
+			2 => $row[self::COLUMN_SHORT_DESCRIPTION_EN],
+		];
 		$productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
 		$this->setProductDataPricesFromCsv($row, $productEditData);
 		switch ($row[self::COLUMN_VAT]) {
