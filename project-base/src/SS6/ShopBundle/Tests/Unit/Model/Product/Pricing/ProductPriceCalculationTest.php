@@ -122,7 +122,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$vat = new Vat(new VatData('vat', $vatPercent));
 
 		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
+		$productData->name = ['cs' => 'anyProductName'];
 		$productData->price = $inputPrice;
 		$productData->vat = $vat;
 
@@ -159,30 +159,21 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function calculatePriceMainVariantProvider() {
-		$vat = new Vat(new VatData('vat', 10));
-		$productData1 = new ProductData();
-		$productData1->name = ['cs' => 'Product 1'];
-		$productData1->price = '100';
-		$productData1->vat = $vat;
-
-		$productData2 = new ProductData();
-		$productData2->name = ['cs' => 'Product 2'];
-		$productData2->price = '200';
-		$productData2->vat = $vat;
+		$vatPercent = 10;
 
 		return [
 			[
 				'variants' => [
-					Product::create($productData1),
-					Product::create($productData2),
+					$this->getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType('100', $vatPercent),
+					$this->getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType('200', $vatPercent),
 				],
 				'expectedPriceWithVat' => 100,
 				'expectedFrom' => true,
 			],
 			[
 				'variants' => [
-					Product::create($productData2),
-					Product::create($productData2),
+					$this->getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType('200', $vatPercent),
+					$this->getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType('200', $vatPercent),
 				],
 				'expectedPriceWithVat' => 200,
 				'expectedFrom' => false,
