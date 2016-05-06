@@ -72,18 +72,20 @@
 		var $window = $('<div class="window window--active"></div>');
 		if (options.wide) {
 			$window.addClass('window--wide');
+		} else {
+			$window.addClass('window--standart');
 		}
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
 		}
 
-		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);
+		var $windowContent = $('<div class="js-window-content window__in"></div>').html(options.content);
 
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
 			hideOverlay();
-			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
+			$(this).removeClass('window--active');
 		});
 
 		$window.bind('windowFastClose', function () {
@@ -93,7 +95,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="Zavřít (Esc)">X</a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="Zavřít (Esc)"><i class="svg svg-remove"></a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -111,8 +113,12 @@
 		});
 
 		var $windowActions = $('<div class="window__actions"></div>');
+		if (options.buttonContinue && options.buttonCancel) {
+			$windowActions.addClass('window__actions--multiple-buttons');
+		}
+
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window__actions__btn window__actions__btn--continue window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
 				.addClass(options.cssClassContinue)
@@ -128,7 +134,7 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window__actions__btn window__actions__btn--cancel window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
 				.addClass(options.cssClassCancel)
@@ -157,22 +163,20 @@
 					return false;
 				});
 			}
-			$window.hide().appendTo(getMainContainer());
-			if (options.wide) {
-				moveToCenter();
-			}
-			$window.fadeIn('fast');
+			$window.appendTo(getMainContainer());
+			$window.addClass('window--active');
+			moveToCenter();
 		}
 
 		function moveToCenter() {
-			var relativeY = $(window).height() / 2 - $window.height() / 2;
+			var relativeY = $(window).height() / 2 - $window.innerHeight() / 2;
 			var minRelativeY = $(window).height() * 0.1;
 
 			if (relativeY < minRelativeY) {
 				relativeY = minRelativeY;
 			}
 
-			var top = Math.round($(window).scrollTop() + relativeY);
+			var top = Math.round(relativeY);
 
 			$window.css({ top: top + 'px' });
 		}

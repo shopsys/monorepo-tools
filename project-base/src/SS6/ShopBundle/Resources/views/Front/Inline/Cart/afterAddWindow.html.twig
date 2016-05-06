@@ -3,7 +3,7 @@
 
 {% if isModuleEnabled(ACCESSORIES_ON_BUY) %}
 	{% if accessoryDetails|length > 0 %}
-		<div class="wrap-box mt20">
+		<div class="wrap-box h-margin-top-20 h-margin-bottom-0">
 			<h3 class="wrap-box__title">
 				{{ 'Naši zákaznící k tomuto produktu nejčastěji nakupují'|trans }}
 			</h3>
@@ -11,6 +11,7 @@
 				{{ productList.list(accessoryDetails) }}
 			</div>
 		</div>
+		<span class="js-add-product-wide-window" data-wide="true"></span>
 	{% endif %}
 {% endif %}
 <span class="js-add-product-url-cart" data-url="{{ url('front_cart') }}"></span>

@@ -1,69 +1,42 @@
-/*
-Floating window
-============
-Floating fixed window for actions or messages, --active modifier shows window,
-default is hidden, --wide is modifier for bigger and absolute positioned window
-
-	<div class="window window--active">
-		<a href="#" class="window__close">X</a>
-		<p>
-			Content of window
-		</p>
-		<div class="window__actions">
-			<a href="#" class="button">Button or something</a>
-		</div>
-	</div>
-
-	<div class="window window--wide window--active">
-		<a href="#" class="window__close">X</a>
-		<p>
-			Content of window
-		</p>
-		<div class="window__actions">
-			<a href="#" class="button">Button or something</a>
-		</div>
-	</div>
-*/
-
 .window {
-	display: none;
-	width: @window-width;
-	min-height: @window-height;
 	position: fixed;
-	top: 50%;
-	left: 50%;
-	margin: -@window-height/2 0 0 -@window-width/2;
-	padding: 25px 30px 30px;
+	display: none;
+	width: calc( ~"100vw - 20px" );
+	max-height: calc( ~"100vh - 20px" );
+	left: 10px;
+	top: 10px;
+	padding: 20px;
 	z-index: 10001;
 
-	text-align: center;
 	background: @color-f;
 	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
 
 	&--active {
-		display: block;
+		display: flex;
+		flex-direction: column;
 	}
 
-	&--wide {
-		position: absolute;
-		top: 200px;
-		width: @window-wide-width;
-		height: @window-wide-height;
-		margin: 0 0 0 -@window-wide-width/2;
+	&__in {
+		width: 100%;
+		max-height: 100vh;
+		overflow: auto;
+		flex: 1;
 	}
 
 	&__close {
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 25px;
-		height: 25px;
-		line-height: 25px;
+		width: 20px;
+		height: 20px;
+		line-height: 20px;
 
 		background: @bg-box;
-		color: @color-base;
+		color: @color-7;
 		text-decoration: none;
 		font-weight: bold;
+		text-align: center;
+		font-size: 10px;
 
 		&:hover {
 			background: @color-0;
@@ -73,7 +46,22 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 	}
 
 	&__actions {
-		margin-top: @margin-gap;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		width: 100%;
+
+		text-align: center;
+
+		&--multiple-buttons {
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__btn {
+			.window__actions--multiple-buttons & {
+				margin: 2px 0;
+			}
+		}
 	}
 
 	&__overlay {
@@ -85,5 +73,54 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 		z-index: 10000;
 
 		background: rgba(0,0,0, 0.5);
+	}
+}
+
+@media @query-sm {
+	.window {
+		&__actions {
+			padding-bottom: 0;
+
+			&--multiple-buttons {
+				width: 100%;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+
+			&__btn {
+				&--cancel {
+					order: -1;
+				}
+			}
+		}
+	}
+}
+
+@media @query-md {
+	.window {
+		&--standart {
+			position: fixed;
+			width: @window-width;
+			left: 50%;
+			margin-left: -@window-width/2;
+		}
+
+		&--wide {
+			width: calc( ~"100vw - 40px" );
+			max-height: calc( ~"100vh - 40px" );
+			left: 20px;
+			top: 20px;
+		}
+	}
+}
+
+@media @query-lg {
+	.window {
+		&--wide {
+			position: fixed;
+			width: @window-wide-width;
+			left: 50%;
+			margin-left: -@window-wide-width/2;
+		}
 	}
 }
