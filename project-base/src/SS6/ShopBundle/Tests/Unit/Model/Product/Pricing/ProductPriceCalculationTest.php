@@ -214,7 +214,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expectedFrom, $productPrice->isPriceFrom());
 	}
 
-	public function testCalculatePriceMainVariantWithoutSellableVariants() {
+	public function testCalculatePriceOfMainVariantWithoutAnySellableVariants() {
 		$productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
 			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
 			[]
