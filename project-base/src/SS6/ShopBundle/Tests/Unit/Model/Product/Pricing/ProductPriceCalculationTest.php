@@ -108,6 +108,25 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param string $inputPrice
+	 * @param string $vatPercent
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	private function getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
+		$inputPrice,
+		$vatPercent
+	) {
+		$vat = new Vat(new VatData('vat', $vatPercent));
+
+		$productData = new ProductData();
+		$productData->name = ['cs' => 'Product 1'];
+		$productData->price = $inputPrice;
+		$productData->vat = $vat;
+
+		return Product::create($productData);
+	}
+
+	/**
 	 * @dataProvider calculatePriceProvider
 	 */
 	public function testCalculatePrice(
@@ -120,14 +139,12 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	) {
 		$productPriceCalculation = $this->getProductPriceCalculationWithInputPriceType($inputPriceType);
 
-		$vat = new Vat(new VatData('vat', $vatPercent));
-		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
+		$product = $this->getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
+			$inputPrice,
+			$vatPercent
+		);
 
-		$productData = new ProductData();
-		$productData->name = ['cs' => 'Product 1'];
-		$productData->price = $inputPrice;
-		$productData->vat = $vat;
-		$product = Product::create($productData);
+		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
 
 		$productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 
