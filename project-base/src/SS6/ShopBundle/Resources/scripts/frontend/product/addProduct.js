@@ -27,7 +27,8 @@
 			wide: true,
 			buttonContinue: true,
 			textContinue: SS6.translator.trans('Přejít do košíku'),
-			urlContinue: buttonContinueUrl
+			urlContinue: buttonContinueUrl,
+			cssClassContinue: 'btn--primary'
 		});
 
 		$('#cart-box').trigger('reload');

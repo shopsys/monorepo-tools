@@ -56,6 +56,8 @@
 			urlContinue: '#',
 			wide: false,
 			cssClass: '',
+			cssClassContinue: '',
+			cssClassCancel: '',
 			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
@@ -113,6 +115,7 @@
 			var $windowButtonContinue = $('<a href="" class="window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
+				.addClass(options.cssClassContinue)
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
 				.bind('click.windowContinue', function () {
@@ -128,6 +131,7 @@
 			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
+				.addClass(options.cssClassCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
 				.bind('click.windowEventClose', options.eventClose)
 				.bind('click.windowClose', function () {
