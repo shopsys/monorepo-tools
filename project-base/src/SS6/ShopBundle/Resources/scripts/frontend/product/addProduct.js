@@ -21,9 +21,13 @@
 	};
 
 	SS6.addProduct.onSuccess = function (data) {
+		var buttonContinueUrl = $($.parseHTML(data)).filterAllNodes('.js-add-product-url-cart').data('url');
 		SS6.window({
 			content: data,
-			wide: true
+			wide: true,
+			buttonContinue: true,
+			textContinue: SS6.translator.trans('Přejít do košíku'),
+			urlContinue: buttonContinueUrl
 		});
 
 		$('#cart-box').trigger('reload');
