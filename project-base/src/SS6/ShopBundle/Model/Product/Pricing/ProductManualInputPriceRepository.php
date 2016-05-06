@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use SS6\ShopBundle\Model\Product\Product;
