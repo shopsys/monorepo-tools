@@ -44,17 +44,11 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
+	 * @param int $inputPriceType
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 * @dataProvider calculatePriceProvider
 	 */
-	public function testCalculatePrice(
-		$inputPriceType,
-		$inputPrice,
-		$vatPercent,
-		$pricingGroupCoefficient,
-		$priceWithoutVat,
-		$priceWithVat
-	) {
+	private function getProductPriceCalculationWithInputPriceType($inputPriceType) {
 		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
 			->setMethods(['getInputPriceType', 'getRoundingType', 'getDomainDefaultCurrencyIdByDomainId'])
 			->disableOriginalConstructor()
@@ -103,7 +97,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$priceCalculation = new PriceCalculation($rounding);
 		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
 
-		$productPriceCalculation = new ProductPriceCalculation(
+		return new ProductPriceCalculation(
 			$basePriceCalculation,
 			$pricingSettingMock,
 			$productManualInputPriceRepositoryMock,
@@ -111,6 +105,20 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 			$productRepositoryMock,
 			$pricingServiceMock
 		);
+	}
+
+	/**
+	 * @dataProvider calculatePriceProvider
+	 */
+	public function testCalculatePrice(
+		$inputPriceType,
+		$inputPrice,
+		$vatPercent,
+		$pricingGroupCoefficient,
+		$priceWithoutVat,
+		$priceWithVat
+	) {
+		$productPriceCalculation = $this->getProductPriceCalculationWithInputPriceType($inputPriceType);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', $pricingGroupCoefficient), 1);
