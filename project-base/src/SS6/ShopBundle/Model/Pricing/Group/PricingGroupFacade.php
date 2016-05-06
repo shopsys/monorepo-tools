@@ -99,7 +99,7 @@ class PricingGroupFacade {
 		$this->em->persist($pricingGroup);
 		$this->em->flush();
 
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 		$this->productVisibilityRepository->createAndRefreshProductVisibilitiesForPricingGroup(
 			$pricingGroup,
 			$pricingGroup->getDomainId()
@@ -120,7 +120,7 @@ class PricingGroupFacade {
 
 		$this->em->flush();
 
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
 		return $pricingGroup;
 	}

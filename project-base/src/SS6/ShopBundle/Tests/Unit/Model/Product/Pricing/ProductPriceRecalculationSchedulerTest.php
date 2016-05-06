@@ -9,31 +9,31 @@ use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase {
 
-	public function testScheduleRecalculatePriceForProduct() {
+	public function testProductCanBeScheduledForImmediateRecalculation() {
 		$productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
-		$productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productMock);
-		$products = $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
+		$products = $productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(1, $products);
 		$this->assertSame($productMock, array_pop($products));
 	}
 
-	public function testCleanImmediatelyRecalculationSchedule() {
+	public function testImmediateRecalculationScheduleCanBeCleaned() {
 		$productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
-		$productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productMock);
-		$productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-		$products = $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
+		$productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
+		$products = $productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(0, $products);
 	}
 
-	public function testScheduleRecalculatePriceForAllProducts() {
+	public function testAllProductsCanBeScheduledForDelayedRecalculation() {
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 		$productsIterator = [$productMock];
 		$productRepositoryMock = $this->getMock(
@@ -50,10 +50,10 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase 
 			->willReturn($productsIterator);
 
 		$productPriceRecalculationScheduler = new ProductPriceRecalculationScheduler($productRepositoryMock);
-		$productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
-		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation());
-		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForRecalculation());
+		$this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediateRecalculation());
+		$this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation());
 	}
 
 }

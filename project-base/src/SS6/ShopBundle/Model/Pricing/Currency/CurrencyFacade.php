@@ -114,7 +114,7 @@ class CurrencyFacade {
 		$currency = $this->currencyRepository->getById($currencyId);
 		$this->currencyService->edit($currency, $currencyData, $this->isDefaultCurrency($currency));
 		$this->em->flush();
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
 		return $currency;
 	}
@@ -168,7 +168,7 @@ class CurrencyFacade {
 	 */
 	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
 		$this->pricingSetting->setDomainDefaultCurrency($currency, $domainId);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 	}
 
 	/**

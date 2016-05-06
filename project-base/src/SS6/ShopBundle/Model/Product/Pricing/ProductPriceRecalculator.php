@@ -73,9 +73,9 @@ class ProductPriceRecalculator {
 	/**
 	 * @return bool
 	 */
-	public function runScheduledRecalculationsBatch() {
+	public function runBatchOfScheduledDelayedRecalculations() {
 		if ($this->productRowsIterator === null) {
-			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForRecalculation();
+			$this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
 		}
 
 		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
@@ -95,18 +95,20 @@ class ProductPriceRecalculator {
 	}
 
 	public function runAllScheduledRecalculations() {
+		$this->runImmediateRecalculations();
+
 		$this->productRowsIterator = null;
 		// @codingStandardsIgnoreStart
-		while ($this->runScheduledRecalculationsBatch()) {};
+		while ($this->runBatchOfScheduledDelayedRecalculations()) {};
 		// @codingStandardsIgnoreEnd
 	}
 
 	public function runImmediateRecalculations() {
-		$products = $this->productPriceRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$products = $this->productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
 		foreach ($products as $product) {
 			$this->recalculateProductPrices($product);
 		}
-		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$this->clearCache();
 	}
 

@@ -32,7 +32,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleRecalculatePriceForProduct');
+		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
 
 		$productService = new ProductService(
 			$productPriceCalculationMock,
@@ -64,7 +64,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleRecalculatePriceForProduct');
+		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
 
 		$productService = new ProductService(
 			$productPriceCalculationMock,
@@ -96,7 +96,7 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase {
 		$productPriceRecalculationSchedulerMock = $this->getMockBuilder(ProductPriceRecalculationScheduler::class)
 			->disableOriginalConstructor()
 			->getMock();
-		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleRecalculatePriceForProduct');
+		$productPriceRecalculationSchedulerMock->expects($this->once())->method('scheduleProductForImmediateRecalculation');
 
 		$productService = new ProductService(
 			$productPriceCalculationMock,

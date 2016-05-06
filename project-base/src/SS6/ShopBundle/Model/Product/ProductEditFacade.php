@@ -202,7 +202,7 @@ class ProductEditFacade {
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 	}
 
 	/**
@@ -234,7 +234,7 @@ class ProductEditFacade {
 
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 
 		return $product;
 	}
@@ -247,7 +247,7 @@ class ProductEditFacade {
 		$productDeleteResult = $this->productService->delete($product);
 		$productsForRecalculations = $productDeleteResult->getProductsForRecalculations();
 		foreach ($productsForRecalculations as $productForRecalculations) {
-			$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($productForRecalculations);
+			$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
 			$this->productService->markProductForVisibilityRecalculation($productForRecalculations);
 			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productForRecalculations);
 		}

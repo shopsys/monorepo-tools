@@ -34,7 +34,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 			false
 		);
 		$productPriceRecalculationSchedulerMock = $this->getMock(ProductPriceRecalculationScheduler::class, null, [], '', false);
-		$productPriceRecalculationSchedulerMock->scheduleRecalculatePriceForProduct($productMock);
+		$productPriceRecalculationSchedulerMock->scheduleProductForImmediateRecalculation($productMock);
 		$pricingGroupFacadeMock = $this->getMock(PricingGroupFacade::class, ['getAll'], [], '', false);
 		$pricingGroupFacadeMock->expects($this->once())->method('getAll')->willReturn([$pricingGroupMock]);
 

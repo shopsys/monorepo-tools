@@ -94,7 +94,7 @@ class ProductVariantFacade {
 			$this->imageFacade->copyImages($mainProduct, $mainVariant);
 		} catch (\Exception $exception) {
 			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-			$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+			$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 
 			throw $exception;
 		}

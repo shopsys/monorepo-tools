@@ -95,7 +95,7 @@ class ProductService {
 	 */
 	public function edit(Product $product, ProductData $productData) {
 		$product->edit($productData);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 		$this->markProductForVisibilityRecalculation($product);
 	}
 
@@ -105,7 +105,7 @@ class ProductService {
 	 */
 	public function setInputPrice(Product $product, $inputPrice) {
 		$product->setPrice($inputPrice);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 	}
 
 	/**
@@ -114,7 +114,7 @@ class ProductService {
 	 */
 	public function changeVat(Product $product, Vat $vat) {
 		$product->changeVat($vat);
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForProduct($product);
+		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 	}
 
 	/**

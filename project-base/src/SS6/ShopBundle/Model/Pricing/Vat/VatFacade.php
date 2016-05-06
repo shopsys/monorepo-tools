@@ -95,7 +95,7 @@ class VatFacade {
 		$this->vatService->edit($vat, $vatData);
 		$this->em->flush();
 
-		$this->productPriceRecalculationScheduler->scheduleRecalculatePriceForAllProducts();
+		$this->productPriceRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
 		return $vat;
 	}

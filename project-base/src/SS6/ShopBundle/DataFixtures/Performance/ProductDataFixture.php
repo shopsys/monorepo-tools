@@ -252,7 +252,7 @@ class ProductDataFixture {
 	 */
 	private function clearResources(EntityManager $em) {
 		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-		$this->productPriceRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$em->clear();
 		gc_collect_cycles();
 		echo "\nMemory usage: " . round(memory_get_usage() / 1024 / 1024, 1) . "MB\n";
