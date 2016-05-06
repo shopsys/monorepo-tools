@@ -215,41 +215,9 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCalculatePriceMainVariantWithoutSellableVariants() {
-		$pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$productManualInputPriceRepositoryMock = $this->getMockBuilder(ProductManualInputPriceRepository::class)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$currencyFacadeMock = $this->getMockBuilder(CurrencyFacade::class)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$productRepositoryMock = $this->getMockBuilder(ProductRepository::class)
-			->setMethods(['getAllSellableVariantsByMainVariant'])
-			->disableOriginalConstructor()
-			->getMock();
-		$productRepositoryMock
-			->expects($this->once())->method('getAllSellableVariantsByMainVariant')
-				->will($this->returnValue([]));
-
-		$pricingServiceMock = $this->getMockBuilder(PricingService::class)
-			->disableOriginalConstructor()
-			->getMock();
-
-		$rounding = new Rounding($pricingSettingMock);
-		$priceCalculation = new PriceCalculation($rounding);
-		$basePriceCalculation = new BasePriceCalculation($priceCalculation, $rounding);
-
-		$productPriceCalculation = new ProductPriceCalculation(
-			$basePriceCalculation,
-			$pricingSettingMock,
-			$productManualInputPriceRepositoryMock,
-			$currencyFacadeMock,
-			$productRepositoryMock,
-			$pricingServiceMock
+		$productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
+			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
+			[]
 		);
 
 		$pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
