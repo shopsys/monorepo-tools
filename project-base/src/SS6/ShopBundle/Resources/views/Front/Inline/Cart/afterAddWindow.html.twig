@@ -3,10 +3,14 @@
 
 {% if isModuleEnabled(ACCESSORIES_ON_BUY) %}
 	{% if accessoryDetails|length > 0 %}
-
-		<h3>Naši zákaznící k tomuto produktu nejčastěji nakupují</h3>
-
-		{{ productList.list(accessoryDetails) }}
+		<div class="wrap-box mt20">
+			<h3 class="wrap-box__title">
+				{{ 'Naši zákaznící k tomuto produktu nejčastěji nakupují'|trans }}
+			</h3>
+			<div class="wrap-box__in">
+				{{ productList.list(accessoryDetails) }}
+			</div>
+		</div>
 	{% endif %}
 {% endif %}
 
