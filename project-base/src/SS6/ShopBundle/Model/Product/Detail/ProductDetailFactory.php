@@ -92,7 +92,7 @@ class ProductDetailFactory {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getBasePrice(Product $product) {
+	public function getBasePriceForAutoPriceCalculationType(Product $product) {
 		return $this->basePriceCalculation->calculateBasePrice(
 			$product->getPrice(),
 			$this->pricingSetting->getInputPriceType(),

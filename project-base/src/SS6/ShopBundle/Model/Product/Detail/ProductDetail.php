@@ -22,7 +22,7 @@ class ProductDetail {
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
 	 */
-	private $basePrice;
+	private $basePriceForAutoPriceCalculationType;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
@@ -52,7 +52,7 @@ class ProductDetail {
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $basePrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $basePriceForAutoPriceCalculationType
 	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
 	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
@@ -61,7 +61,7 @@ class ProductDetail {
 	public function __construct(
 		Product $product,
 		ProductDetailFactory $productDetailFactory,
-		Price $basePrice = null,
+		Price $basePriceForAutoPriceCalculationType = null,
 		ProductPrice $sellingPrice = null,
 		array $productDomainsIndexedByDomainId = null,
 		array $parameters = null,
@@ -69,7 +69,7 @@ class ProductDetail {
 	) {
 		$this->product = $product;
 		$this->productDetailFactory = $productDetailFactory;
-		$this->basePrice = $basePrice;
+		$this->basePriceForAutoPriceCalculationType = $basePriceForAutoPriceCalculationType;
 		$this->sellingPrice = $sellingPrice;
 		$this->productDomainsIndexedByDomainId = $productDomainsIndexedByDomainId;
 		$this->parameters = $parameters;
@@ -87,12 +87,13 @@ class ProductDetail {
 	/**
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function getBasePrice() {
-		if ($this->basePrice === null) {
-			$this->basePrice = $this->productDetailFactory->getBasePrice($this->product);
+	public function getBasePriceForAutoPriceCalculationType() {
+		if ($this->basePriceForAutoPriceCalculationType === null) {
+			$this->basePriceForAutoPriceCalculationType = $this->productDetailFactory
+				->getBasePriceForAutoPriceCalculationType($this->product);
 		}
 
-		return $this->basePrice;
+		return $this->basePriceForAutoPriceCalculationType;
 	}
 
 	/**
