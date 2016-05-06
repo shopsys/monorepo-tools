@@ -193,7 +193,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider calculatePriceMainVariantProvider
 	 */
-	public function testCalculatePriceMainVariant(
+	public function testCalculatePriceOfMainVariantWithVariantsAndAutoCalculationPriceType(
 		$variants,
 		$expectedPriceWithVat,
 		$expectedFrom
