@@ -155,6 +155,20 @@
 
 		show();
 
+		$(window).resize(function() {
+			SS6.timeout.setTimeoutAndClearPrevious('window.window.resize', function() {
+				fixVerticalAlign();
+			}, 200);
+		});
+
+		function fixVerticalAlign() {
+			if (!options.wide || options.wide && SS6.responsive.isDesktopVersion()) {
+				moveToCenter();
+			} else {
+				$window.css({ top: '' });
+			}
+		}
+
 		function show() {
 			showOverlay();
 			if (options.closeOnBgClick) {
@@ -165,7 +179,8 @@
 			}
 			$window.appendTo(getMainContainer());
 			$window.addClass('window--active');
-			moveToCenter();
+
+			fixVerticalAlign();
 		}
 
 		function moveToCenter() {
