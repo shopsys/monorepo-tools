@@ -4,8 +4,9 @@ namespace SS6\ShopBundle\Model\Product\Detail;
 
 use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Localization\Localization;
+use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
@@ -18,9 +19,9 @@ class ProductDetailFactory {
 	private $productPriceCalculationForUser;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
-	private $productPriceCalculation;
+	private $basePriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -42,20 +43,27 @@ class ProductDetailFactory {
 	 */
 	private $localization;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 */
+	private $pricingSetting;
+
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
-		ProductPriceCalculation $productPriceCalculation,
+		BasePriceCalculation $basePriceCalculation,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ImageFacade $imageFacade,
-		Localization $localization
+		Localization $localization,
+		PricingSetting $pricingSetting
 	) {
 		$this->productPriceCalculationForUser = $productPriceCalculationForUser;
-		$this->productPriceCalculation = $productPriceCalculation;
+		$this->basePriceCalculation = $basePriceCalculation;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->imageFacade = $imageFacade;
 		$this->localization = $localization;
+		$this->pricingSetting = $pricingSetting;
 	}
 
 	/**
@@ -85,7 +93,11 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
 	public function getBasePrice(Product $product) {
-		return $this->productPriceCalculation->calculateBasePrice($product);
+		return $this->basePriceCalculation->calculateBasePrice(
+			$product->getPrice(),
+			$this->pricingSetting->getInputPriceType(),
+			$product->getVat()
+		);
 	}
 
 	/**

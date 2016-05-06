@@ -7,8 +7,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Model\Transport\Transport;
@@ -29,9 +30,9 @@ class InputPriceRecalculator {
 	private $inputPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
-	private $productPriceCalculation;
+	private $basePriceCalculation;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
@@ -49,26 +50,26 @@ class InputPriceRecalculator {
 	private $productService;
 
 	/**
-	 * @param EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\InputPriceCalculation $inputPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation $productPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
 	 */
+	private $pricingSetting;
+
 	public function __construct(
 		EntityManager $em,
 		InputPriceCalculation $inputPriceCalculation,
-		ProductPriceCalculation $productPriceCalculation,
+		BasePriceCalculation $basePriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		ProductService $productService
+		ProductService $productService,
+		PricingSetting $pricingSetting
 	) {
 		$this->em = $em;
 		$this->inputPriceCalculation = $inputPriceCalculation;
-		$this->productPriceCalculation = $productPriceCalculation;
+		$this->basePriceCalculation = $basePriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->productService = $productService;
+		$this->pricingSetting = $pricingSetting;
 	}
 
 	public function recalculateToInputPricesWithoutVat() {
@@ -98,7 +99,11 @@ class InputPriceRecalculator {
 			->getQuery();
 
 		$this->batchProcessQuery($query, function (Product $product) use ($toInputPriceType) {
-			$productPrice = $this->productPriceCalculation->calculateBasePrice($product);
+			$productPrice = $this->basePriceCalculation->calculateBasePrice(
+				$product->getPrice(),
+				$this->pricingSetting->getInputPriceType(),
+				$product->getVat()
+			);
 
 			$newInputPrice = $this->inputPriceCalculation->getInputPrice(
 				$toInputPriceType,
