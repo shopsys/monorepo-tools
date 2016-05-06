@@ -129,7 +129,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @dataProvider calculatePriceProvider
 	 */
-	public function testCalculatePrice(
+	public function testCalculatePriceWithAutoCalculationPriceType(
 		$inputPriceType,
 		$inputPrice,
 		$vatPercent,
