@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
 use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
@@ -17,7 +16,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportEditData;
@@ -167,8 +165,6 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
 		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
 		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
@@ -184,14 +180,10 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em->persist($vat);
 		$em->persist($availability);
 
-		$productEditData = new ProductEditData();
-		$productEditData->productData->name = ['cs' => 'name'];
-		$productEditData->productData->price = $inputPriceWithoutVat;
-		$productEditData->productData->vat = $vat;
-		$productEditData->productData->availability = $availability;
-		$productEditData->productData->unit = $this->getReference(UnitDataFixture::PCS);
-		$product = $productEditFacade->create($productEditData);
-		/* @var $product \SS6\ShopBundle\Model\Product\Product */
+		$product = $this->createProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
+			$inputPriceWithoutVat,
+			$vatPercent
+		);
 
 		$paymentEditData = new PaymentEditData();
 		$paymentEditData->paymentData->name = ['cs' => 'name'];
