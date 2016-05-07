@@ -72,11 +72,11 @@
 
 				if (willFilterZeroProducts($countElement)) {
 					if (!$formElement.is(':checked')) {
-						$label.addClass('js-disable');
+						$label.addClass('in-disable');
 						$formElement.prop('disabled', true);
 					}
 				} else {
-					$label.removeClass('js-disable');
+					$label.removeClass('in-disable');
 					$formElement.prop('disabled', false);
 				}
 			});
