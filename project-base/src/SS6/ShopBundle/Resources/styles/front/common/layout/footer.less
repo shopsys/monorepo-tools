@@ -21,18 +21,18 @@
 @media @query-lg {
 	.footer {
 		&__bottom {
-			.cfx();
+			display: flex;
+			align-items: center;
 
 			text-align: left;
 
 			&__copyright {
-				float: left;
-				width: 50%;
+				flex: 1 50%;
+				margin-bottom: 0;
 			}
 
 			&__articles {
-				float: right;
-				width: 50%;
+				flex: 1 50%;
 
 				text-align: right;
 			}
