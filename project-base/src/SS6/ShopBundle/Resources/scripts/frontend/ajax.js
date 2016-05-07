@@ -36,16 +36,16 @@
 	};
 
 	var getLoaderOverlay = function(loaderMessage, loaderElement) {
-		var overlaySpinnerClass = 'js-loader-overlay-spinner';
+		var overlaySpinnerClass = 'in-overlay__spinner';
 		if (loaderElement !== 'body') {
-			overlaySpinnerClass += '--absolute';
+			overlaySpinnerClass += ' in-overlay__spinner--absolute';
 		}
 
-		var $loaderOverlayDiv = $('<div class="js-loader-overlay"></div>');
+		var $loaderOverlayDiv = $('<div class="in-overlay"></div>');
 		var $loaderOverlaySpinnerDiv = $($.parseHTML(
 			'<div class="' + overlaySpinnerClass + '">' +
-				'<i class="fa fa-spinner fa-lg fa-spin"></i>' +
-				loaderMessage +
+				'<span class="in-overlay__spinner__icon"></span>' +
+				'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
 			'</div>'
 		));
 
@@ -54,7 +54,7 @@
 
 	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
 		$(loaderElement)
-			.addClass('relative pos-relative')
+			.addClass('relative')
 			.append($loaderOverlay);
 	};
 
