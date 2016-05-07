@@ -20,17 +20,17 @@
 @media @query-md {
 	.in-action {
 		width: 100%;
-		.flex();
-		.flex-align-items(center);
+		display: flex;
+		align-items: center;
 
 		&__left {
-			.flex-order(1);
-			.flex-grow(1);
+			order: 1;
+			flex-grow: 1;
 		}
 
 		&__right {
-			.flex-order(2);
-			.flex-grow(1);
+			order: 2;
+			flex-grow: 1;
 			margin-bottom: 0;
 
 			text-align: right;

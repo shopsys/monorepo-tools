@@ -1,14 +1,14 @@
 .in-progress {
 	.reset-ul();
-	.flex();
-	.flex-align-items(stretch);
+	display: flex;
+	align-items: stretch;
 	width: 100%;
 	margin-bottom: @margin-gap;
 
 	&__item {
 		width: 100%/3;
-		.flex();
-		.flex-align-items(center);
+		display: flex;
+		align-items: center;
 
 		background: @color-light;
 		border-left: 1px solid @color-f;

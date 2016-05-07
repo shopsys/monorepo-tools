@@ -6,7 +6,7 @@
 	}
 
 	&__control {
-		.flex-grow(3);
+		flex-grow: 3;
 
 		text-align: center;
 		font-size: 0;
@@ -64,16 +64,16 @@
 
 @media @query-md {
 	.in-paging {
-		.flex();
-		.flex-align-items(center);
+		display: flex;
+		align-items: center;
 
 		&__info {
 			display: block;
-			.flex-grow(1);
+			flex-grow: 1;
 		}
 
 		&__control {
-			.flex-grow(3);
+			flex-grow: 3;
 
 			text-align: right;
 		}
