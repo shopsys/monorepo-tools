@@ -20,7 +20,7 @@
 	var getOverlay = function() {
 		var $overlay = $('#js-overlay');
 		if ($overlay.size() === 0) {
-			$overlay = $('<div class="window__overlay" id="js-overlay"></div>');
+			$overlay = $('<div class="window-popup__overlay" id="js-overlay"></div>');
 		}
 		return $overlay;
 	};
@@ -69,23 +69,23 @@
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window window--active"></div>');
+		var $window = $('<div class="window-popup window-popup--active"></div>');
 		if (options.wide) {
-			$window.addClass('window--wide');
+			$window.addClass('window-popup--wide');
 		} else {
-			$window.addClass('window--standart');
+			$window.addClass('window-popup--standart');
 		}
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
 		}
 
-		var $windowContent = $('<div class="js-window-content window__in"></div>').html(options.content);
+		var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(options.content);
 
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
 			hideOverlay();
-			$(this).removeClass('window--active');
+			$(this).removeClass('window-popup--active');
 		});
 
 		$window.bind('windowFastClose', function () {
@@ -95,7 +95,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="Zavřít (Esc)"><i class="svg svg-remove"></a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="Zavřít (Esc)"><i class="svg svg-remove"></a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -112,13 +112,13 @@
 			}
 		});
 
-		var $windowActions = $('<div class="window__actions"></div>');
+		var $windowActions = $('<div class="window-popup__actions"></div>');
 		if (options.buttonContinue && options.buttonCancel) {
-			$windowActions.addClass('window__actions--multiple-buttons');
+			$windowActions.addClass('window-popup__actions--multiple-buttons');
 		}
 
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window__actions__btn window__actions__btn--continue window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
 				.addClass(options.cssClassContinue)
@@ -134,7 +134,7 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window__actions__btn window__actions__btn--cancel window-button-cancel btn"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
 				.addClass(options.cssClassCancel)
@@ -178,7 +178,7 @@
 				});
 			}
 			$window.appendTo(getMainContainer());
-			$window.addClass('window--active');
+			$window.addClass('window-popup--active');
 
 			fixVerticalAlign();
 		}
