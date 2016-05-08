@@ -43,6 +43,13 @@ class CategoryDomain {
 	private $visible;
 
 	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $description;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 */
@@ -61,6 +68,13 @@ class CategoryDomain {
 	}
 
 	/**
+	 * @return string|null
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isHidden() {
@@ -72,6 +86,13 @@ class CategoryDomain {
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;
+	}
+
+	/**
+	 * @param string $description
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
 	}
 
 	/**

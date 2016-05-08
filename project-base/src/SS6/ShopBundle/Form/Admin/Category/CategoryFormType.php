@@ -55,6 +55,7 @@ class CategoryFormType extends AbstractType {
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
 	 * @param array $options
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
@@ -68,6 +69,10 @@ class CategoryFormType extends AbstractType {
 						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
 					],
 				],
+			])
+			->add('descriptions', FormType::MULTIDOMAIN, [
+				'type' => FormType::WYSIWYG,
+				'required' => false,
 			])
 			->add('parent', FormType::CHOICE, [
 				'required' => false,
