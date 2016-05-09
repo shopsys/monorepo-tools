@@ -32,13 +32,21 @@
 			{% set galleryImages = getImages(productDetail.product) %}
 			{% if galleryImages|length > 1 %}
 				<div class="box-gallery js-gallery">
-					{% for galleryImage in galleryImages %}
-						<div class="box-gallery__item">
-							<a href="{{ imageUrl(galleryImage, 'original') }}" class="box-gallery__item__link">
-								{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
-							</a>
-						</div>
-					{% endfor %}
+					<span class="box-gallery__arrow box-gallery__arrow--prev js-gallery-prev">
+						<i class="svg svg-arrow"></i>
+					</span>
+					<div class="box-gallery__in js-gallery-slides">
+						{% for galleryImage in galleryImages %}
+							<div class="box-gallery__item">
+								<a href="{{ imageUrl(galleryImage, 'original') }}" class="box-gallery__item__link">
+									{{ image(galleryImage, {size: 'galleryThumbnail'}) }}
+								</a>
+							</div>
+						{% endfor %}
+					</div>
+					<span class="box-gallery__arrow box-gallery__arrow--next js-gallery-next">
+						<i class="svg svg-arrow"></i>
+					</span>
 				</div>
 			{% endif %}
 		</div>
