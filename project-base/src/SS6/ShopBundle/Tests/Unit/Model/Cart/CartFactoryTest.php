@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetSameCart() {
+	public function testGetReturnsTheSameCartForTheSameCustomer() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
 			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
@@ -35,7 +35,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue($cart1 === $cart2);
 	}
 
-	public function testGetDifferentCart() {
+	public function testGetReturnsDifferentCartsForDifferentCustomers() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
 			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
 			->disableOriginalConstructor()

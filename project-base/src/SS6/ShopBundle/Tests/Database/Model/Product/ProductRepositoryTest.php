@@ -17,19 +17,23 @@ use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductRepositoryTest extends DatabaseTestCase{
 
-	public function getAllListableQueryBuilderProvider() {
-		return [
-			[1, true, 'Visible and not selling denied product is not listed'],
-			[6, false, 'Visible and selling denied product is listed'],
-			[53, false, 'Product variant is listed'],
-			[148, true, 'Product main variant is not listed'],
-		];
+	public function testVisibleAndNotSellingDeniedProductIsListed() {
+		$this->getAllListableQueryBuilderTest(1, true);
 	}
 
-	/**
-	 * @dataProvider getAllListableQueryBuilderProvider
-	 */
-	public function testGetAllListableQueryBuilder($productReferenceId, $isExpectedInResult, $failMessage) {
+	public function testVisibleAndSellingDeniedProductIsNotListed() {
+		$this->getAllListableQueryBuilderTest(6, false);
+	}
+
+	public function testProductVariantIsNotListed() {
+		$this->getAllListableQueryBuilderTest(53, false);
+	}
+
+	public function testProductMainVariantIsListed() {
+		$this->getAllListableQueryBuilderTest(148, true);
+	}
+
+	private function getAllListableQueryBuilderTest($productReferenceId, $isExpectedInResult) {
 		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -46,22 +50,26 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		$this->assertSame(in_array($product, $result, true), $isExpectedInResult, $failMessage);
+		$this->assertSame(in_array($product, $result, true), $isExpectedInResult);
 	}
 
-	public function getAllSellableQueryBuilderProvider() {
-		return [
-			[1, true, 'Visible and not selling denied product is not sellable'],
-			[6, false, 'Visible and selling denied product is sellable'],
-			[53, true, 'Product variant is not listed'],
-			[148, false, 'Product main variant is listed'],
-		];
+	public function testVisibleAndNotSellingDeniedProductIsSellable() {
+		$this->getAllSellableQueryBuilderTest(1, true);
 	}
 
-	/**
-	 * @dataProvider getAllSellableQueryBuilderProvider
-	 */
-	public function testGetAllSellableQueryBuilder($productReferenceId, $isExpectedInResult, $failMessage) {
+	public function testVisibleAndSellingDeniedProductIsNotSellable() {
+		$this->getAllSellableQueryBuilderTest(6, false);
+	}
+
+	public function testProductVariantIsSellable() {
+		$this->getAllSellableQueryBuilderTest(53, true);
+	}
+
+	public function testProductMainVariantIsNotSellable() {
+		$this->getAllSellableQueryBuilderTest(148, false);
+	}
+
+	private function getAllSellableQueryBuilderTest($productReferenceId, $isExpectedInResult) {
 		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -78,22 +86,26 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		$this->assertSame(in_array($product, $result, true), $isExpectedInResult, $failMessage);
+		$this->assertSame(in_array($product, $result, true), $isExpectedInResult);
 	}
 
-	public function getAllOfferedQueryBuilderProvider() {
-		return [
-			[1, true, 'Visible and not selling denied product is not offered'],
-			[6, false, 'Visible and selling denied product is offered'],
-			[53, true, 'Product variant is not offered'],
-			[69, true, 'Product main variant is not offered'],
-		];
+	public function testVisibleAndNotSellingDeniedProductIsOfferred() {
+		$this->getAllOfferedQueryBuilderTest(1, true);
 	}
 
-	/**
-	 * @dataProvider getAllOfferedQueryBuilderProvider
-	 */
-	public function testGetAllOfferedQueryBuilder($productReferenceId, $isExpectedInResult, $failMessage) {
+	public function testVisibleAndSellingDeniedProductIsNotOfferred() {
+		$this->getAllOfferedQueryBuilderTest(6, false);
+	}
+
+	public function testProductVariantIsOfferred() {
+		$this->getAllOfferedQueryBuilderTest(53, true);
+	}
+
+	public function testProductMainVariantIsOfferred() {
+		$this->getAllOfferedQueryBuilderTest(69, true);
+	}
+
+	private function getAllOfferedQueryBuilderTest($productReferenceId, $isExpectedInResult) {
 		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		/* @var $productRepository \SS6\ShopBundle\Model\Product\ProductRepository */
 		$pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -110,7 +122,7 @@ class ProductRepositoryTest extends DatabaseTestCase{
 			->setParameter('id', $productId);
 		$result = $queryBuilder->getQuery()->execute();
 
-		$this->assertSame(in_array($product, $result, true), $isExpectedInResult, $failMessage);
+		$this->assertSame(in_array($product, $result, true), $isExpectedInResult);
 	}
 
 	public function testOrderingByProductPriorityInCategory() {
