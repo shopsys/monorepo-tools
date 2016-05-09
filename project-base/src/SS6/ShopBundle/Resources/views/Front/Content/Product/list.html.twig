@@ -44,7 +44,7 @@
 
 	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	<div class="position-relative js-product-list-with-filter clear">
+	<div class="js-product-list-with-filter">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}
 			<div class="box-filter js-product-filter">
 				{{ productFilterForm.filterForm(
