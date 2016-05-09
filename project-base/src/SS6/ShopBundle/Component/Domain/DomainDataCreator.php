@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreator {
@@ -21,6 +22,11 @@ class DomainDataCreator {
 	 * @var \SS6\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Setting\SettingValueRepository
+	 */
+	private $settingValueRepository;
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager;
@@ -40,12 +46,14 @@ class DomainDataCreator {
 	public function __construct(
 		Domain $domain,
 		Setting $setting,
+		SettingValueRepository $settingValueRepository,
 		EntityManager $em,
 		MultidomainEntityDataCreator $multidomainEntityDataCreator,
 		TranslatableEntityDataCreator $translatableEntityDataCreator
 	) {
 		$this->domain = $domain;
 		$this->setting = $setting;
+		$this->settingValueRepository = $settingValueRepository;
 		$this->em = $em;
 		$this->multidomainEntityDataCreator = $multidomainEntityDataCreator;
 		$this->translatableEntityDataCreator = $translatableEntityDataCreator;
@@ -61,7 +69,8 @@ class DomainDataCreator {
 			try {
 				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);
 			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
-				$this->setting->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
+				$this->settingValueRepository->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
+				$this->setting->clearCache();
 				$this->multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(self::TEMPLATE_DOMAIN_ID, $domainId);
 				$locale = $domainConfig->getLocale();
 				if ($this->isNewLocale($locale)) {
