@@ -125,38 +125,40 @@
 	</div>
 
 	{% if productDetail.product.isMainVariant %}
-		<table class="table-main">
+		<table class="table-variants">
 			<thead>
-				<tr>
-					<th></th>
-					<th>{{ 'Název'|trans }}</th>
-					<th>{{ 'Cena s DPH'|trans }}</th>
-					<th></th>
+				<tr class="table-variants__row">
+					<th class="table-variants__cell table-variants__cell--image"></th>
+					<th class="table-variants__cell table-variants__cell--name">{{ 'Název'|trans }}</th>
+					<th class="table-variants__cell table-variants__cell--price">{{ 'Cena s DPH'|trans }}</th>
+					<th class="table-variants__cell table-variants__cell--action"></th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for variantDetail in variantsDetails %}
-					<tr>
-						<td class="h-text-center">
-							{% if imageExists(variantDetail.product) %}
-								<a href="{{ imageUrl(variantDetail.product, 'original') }}" class="js-popup-image">
-									{{ image(variantDetail.product, { size: 'thumbnail' }) }}
-								</a>
-							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
-							{% endif %}
+					<tr class="table-variants__row">
+						<td class="table-variants__cell table-variants__cell--image">
+							<div class="table-variants__cell__image">
+								{% if imageExists(variantDetail.product) %}
+									<a href="{{ imageUrl(variantDetail.product, 'original') }}" class="js-popup-image">
+										{{ image(variantDetail.product, { size: 'thumbnail' }) }}
+									</a>
+								{% else %}
+									<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
+								{% endif %}
+							</div>
 						</td>
-						<td>
+						<td class="table-variants__cell table-variants__cell--name">
 							{% if variantDetail.product.variantAlias is not null %}
 								{{ variantDetail.product.variantAlias }}
 							{% else %}
 								{{ variantDetail.product.name }}
 							{% endif %}
 						</td>
-						<td>
+						<td class="table-variants__cell table-variants__cell--price">
 							{{ variantDetail.sellingPrice.priceWithVat|price }}
 						</td>
-						<td>
+						<td class="table-variants__cell table-variants__cell--action">
 							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: variantDetail.product})) }}
 						</td>
 					</tr>
