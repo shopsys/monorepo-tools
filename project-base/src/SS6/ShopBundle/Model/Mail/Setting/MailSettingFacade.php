@@ -22,34 +22,34 @@ class MailSettingFacade {
 	}
 
 	/**
-	 * @param int|null $domainId
+	 * @param int $domainId
 	 * @return string
 	 */
-	public function getMainAdminMail($domainId = null) {
+	public function getMainAdminMail($domainId) {
 		return $this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $domainId);
 	}
 
 	/**
-	 * @param int|null $domainId
+	 * @param int $domainId
 	 * @return string
 	 */
-	public function getMainAdminMailName($domainId = null) {
+	public function getMainAdminMailName($domainId) {
 		return $this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $domainId);
 	}
 
 	/**
 	 * @param string $mainAdminMail
-	 * @param int|null $domainId
+	 * @param int $domainId
 	 */
-	public function setMainAdminMail($mainAdminMail, $domainId = null) {
+	public function setMainAdminMail($mainAdminMail, $domainId) {
 		$this->setting->set(MailSetting::MAIN_ADMIN_MAIL, $mainAdminMail, $domainId);
 	}
 
 	/**
 	 * @param string $mainAdminMailName
-	 * @param int|null $domainId
+	 * @param int $domainId
 	 */
-	public function setMainAdminMailName($mainAdminMailName, $domainId = null) {
+	public function setMainAdminMailName($mainAdminMailName, $domainId) {
 		$this->setting->set(MailSetting::MAIN_ADMIN_MAIL_NAME, $mainAdminMailName, $domainId);
 	}
 }

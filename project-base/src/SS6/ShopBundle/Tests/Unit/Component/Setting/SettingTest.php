@@ -27,9 +27,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['getAllDefault', 'getAllByDomainId'])
+			->setMethods(['getAllByDomainId'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllDefault')->willReturn([]);
 		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllByDomainId')->willReturnMap($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
@@ -56,9 +55,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['getAllDefault', 'getAllByDomainId'])
+			->setMethods(['getAllByDomainId'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllDefault')->willReturn([]);
 		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllByDomainId')->willReturnMap($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
@@ -97,9 +95,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['getAllDefault', 'getAllByDomainId'])
+			->setMethods(['getAllByDomainId'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllDefault')->willReturn([]);
 		$settingValueRepositoryMock->expects($this->atLeastOnce())->method('getAllByDomainId')->willReturn($settingValueArray);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
@@ -109,7 +106,6 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetValues() {
-		$settingValueArrayDefault = [new SettingValue('key', 'valueDefault', SettingValue::DOMAIN_ID_DEFAULT)];
 		$settingValueArrayByDomainIdMap = [
 			[SettingValue::DOMAIN_ID_COMMON, [new SettingValue('key', 'valueCommon', SettingValue::DOMAIN_ID_COMMON)]],
 			[1, [new SettingValue('key', 'value', 1)]],
@@ -125,10 +121,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['getAllDefault', 'getAllByDomainId'])
+			->setMethods(['getAllByDomainId'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())
-				->method('getAllDefault')->willReturn($settingValueArrayDefault);
 		$settingValueRepositoryMock->expects($this->atLeastOnce())
 				->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
@@ -144,7 +138,6 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSetValueNewDomain() {
-		$settingValueArrayDefault = [new SettingValue('key', 'valueDefault', SettingValue::DOMAIN_ID_DEFAULT)];
 		$settingValueArrayByDomainIdMap = [
 			[SettingValue::DOMAIN_ID_COMMON, [new SettingValue('key', 'valueCommon', SettingValue::DOMAIN_ID_COMMON)]],
 			[1, [new SettingValue('key', 'value', 1)]],
@@ -161,10 +154,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
-			->setMethods(['getAllDefault', 'getAllByDomainId'])
+			->setMethods(['getAllByDomainId'])
 			->getMock();
-		$settingValueRepositoryMock->expects($this->atLeastOnce())
-				->method('getAllDefault')->willReturn($settingValueArrayDefault);
 		$settingValueRepositoryMock->expects($this->atLeastOnce())
 				->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
