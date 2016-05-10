@@ -22,6 +22,11 @@ module.exports = function(grunt) {
 			},
 
 			{% for domain in domains -%}
+				helpers{{ domain.id }}: {
+					files: {
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less'
+					}
+				},
 				frontend{{ domain.id }}: {
 					files: {
 						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
@@ -256,8 +261,15 @@ module.exports = function(grunt) {
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
-					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less'],
+					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less', '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less', '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					{% else -%}
+						['frontendLess{{ domain.id }}']
+					{% endif -%}
+				},
+				helpers{{ domain.id }}: {
+					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less', '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'],
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
 						['frontendLess{{ domain.id }}']
 					{% endif -%}
