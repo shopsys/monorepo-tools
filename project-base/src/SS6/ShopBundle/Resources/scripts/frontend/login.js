@@ -15,14 +15,16 @@
 					if (data.success === true) {
 						document.location = data.urlToRedirect;
 					} else {
-						$('.js-front-login-window-message').text(SS6.translator.trans('Byly zadány neplatné přihlašovací údaje'));
+						$('.js-front-login-window-message')
+							.text(SS6.translator.trans('Byly zadány neplatné přihlašovací údaje'))
+							.show();
 					}
 				}
 			});
 			return false;
 		});
 		$('body').on('focus', '.js-front-login-window', function() {
-			$('.js-front-login-window-message').empty();
+			$('.js-front-login-window-message').empty().hide();
 		});
 	};
 

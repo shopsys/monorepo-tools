@@ -1,27 +1,43 @@
 {{ form_start(form, {attr: {class: 'js-front-login-window', 'multipleForm': true}}) }}
 	{{ form_errors(form) }}
 
-	<h3>{{ 'Přihlášení'|trans }}</h3>
+	<div class="box-login">
+		<h3 class="box-login__title">{{ 'Přihlášení'|trans }}</h3>
 
-	<div class="js-front-login-window-message in-message in-message--alert"></div>
+		<div class="js-front-login-window-message in-message in-message--alert display-none"></div>
 
-	{{ form_errors(form.email) }}
-	{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
+		<div class="box-login__item">
+			{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
+			{{ form_errors(form.email) }}
+		</div>
 
-	{{ form_errors(form.password) }}
-	{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+		<div class="box-login__item">
+			{{ form_errors(form.password) }}
+			{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+		</div>
 
-	<label>
-		{{ form_widget(form.rememberMe) }}
-		{{ 'Zapamatuj si mé přihlášení'|trans }}
-		<i class="fa fa-info-circle cursor-help form-line__info js-tooltip"
-			data-toggle="tooltip" data-placement="right"
-			title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
-		 ></i>
-	</label>
+		<div class="box-login__item box-login__item--checkbox">
+			<label class="form-choice">
+				<span class="form-choice__input">
+					{{ form_widget(form.rememberMe) }}
+				</span>
+				<span class="form-choice__label">
+					{{ 'Zapamatuj si mé přihlášení'|trans }}
+					<i class="svg svg-info in-icon in-icon--info js-tooltip"
+						data-toggle="tooltip" data-placement="right"
+						title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+					 ></i>
+				</span>
+			</label>
+		</div>
 
-	{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
+		<div class="box-login__item box-login__item--submit">
+			{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
+		</div>
 
-	<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+		<div class="box-login__item box-login__item--info">
+			<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+		</div>
+	</div>
 
 {{ form_end(form) }}
