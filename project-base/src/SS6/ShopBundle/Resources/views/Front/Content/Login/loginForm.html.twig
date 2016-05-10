@@ -15,24 +15,30 @@
 
 		<h1>{{ 'Přihlášení'|trans }}</h1>
 
-		{{ form_errors(form.email) }}
-		{{ form_widget(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
+		{{ form_row(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
 
-		{{ form_errors(form.password) }}
-		{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+		{{ form_row(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
 
 		<label>
-			{{ form_widget(form.rememberMe) }}
-			{{ 'Zapamatuj si mé přihlášení'|trans }}
+			{{ form_row(form.rememberMe, { label: 'Zapamatuj si mé přihlášení'|trans } ) }}
 			<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
 				data-toggle="tooltip" data-placement="right"
 				title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
 			 ></i>
 		</label>
 
-		{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
-
-		<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+		<dl class="form-line">
+			<dt></dt>
+			<dd>
+				{{ form_row(form.login, {label: 'Přihlásit'|trans}) }}
+			</dd>
+		</dl>
+		<dl class="form-line">
+			<dt></dt>
+			<dd>
+				<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+			</dd>
+		</dl>
 
 	{{ form_end(form) }}
 
