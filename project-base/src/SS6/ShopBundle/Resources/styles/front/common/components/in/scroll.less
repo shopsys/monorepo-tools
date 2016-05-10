@@ -1,0 +1,19 @@
+.in-scroll {
+	width: 100%;
+	overflow: auto;
+
+	&__in {
+		min-width: 800px;
+	}
+}
+
+@media @query-vl {
+	.in-scroll {
+		width: auto;
+		overflow: auto;
+
+		&__inner {
+			min-width: 0;
+		}
+	}
+}

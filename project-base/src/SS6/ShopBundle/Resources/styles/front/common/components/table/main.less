@@ -1,3 +1,18 @@
 .table-main {
+	tr {
+		background: @color-f;
 
+		&:nth-child(2n) {
+			background: @color-light;
+		}
+	}
+
+	td, th {
+		padding: 10px;
+	}
+
+	th {
+		font-weight: bold;
+		text-align: left;
+	}
 }
