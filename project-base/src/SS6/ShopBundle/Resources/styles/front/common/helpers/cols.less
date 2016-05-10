@@ -12,6 +12,7 @@
 	&--@{i}@{postfix} {
 		width: ~'@{i}%';
 	}
+
 	.column(@i + @step, @step, @max, @postfix);
 }
 
@@ -19,14 +20,14 @@
 	@size: extract(@cols-special, @i);
 
 	&--@{size}@{postfix} {
-	width: ~'@{size}%';
+		width: ~'@{size}%';
 	}
+
 	.column-spec(@i - 1, @postfix);
 }
 
 .col {
 	float: left;
-
 	.column(@cols-minimum, @cols-stepper, @cols-maximum);
 	.column-spec(@cols-special-lenght);
 
