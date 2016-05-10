@@ -42,7 +42,7 @@ class CustomerCommunicationController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			$this->setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
+			$this->setting->setForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení textu po potvrzení objednávky bylo upraveno'));
 

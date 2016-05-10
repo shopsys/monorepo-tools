@@ -59,7 +59,7 @@ class TermsAndConditionsFacade {
 		if ($termsAndConditionsArticle !== null) {
 			$termsAndConditionsArticleId = $termsAndConditionsArticle->getId();
 		}
-		$this->setting->set(
+		$this->setting->setForDomain(
 			Setting::TERMS_AND_CONDITIONS_ARTICLE_ID,
 			$termsAndConditionsArticleId,
 			$domainId

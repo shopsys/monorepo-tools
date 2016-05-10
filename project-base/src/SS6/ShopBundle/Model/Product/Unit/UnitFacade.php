@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Product\Unit\Unit;
 use SS6\ShopBundle\Model\Product\Unit\UnitData;
 use SS6\ShopBundle\Model\Product\Unit\UnitRepository;
@@ -144,7 +143,7 @@ class UnitFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
 	 */
 	public function setDefaultUnit(Unit $unit) {
-		$this->setting->set(Setting::DEFAULT_UNIT, $unit->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->setting->set(Setting::DEFAULT_UNIT, $unit->getId());
 	}
 
 	/**

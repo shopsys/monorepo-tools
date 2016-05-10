@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
@@ -159,7 +158,7 @@ class VatFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function setDefaultVat(Vat $vat) {
-		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId());
 	}
 
 	/**

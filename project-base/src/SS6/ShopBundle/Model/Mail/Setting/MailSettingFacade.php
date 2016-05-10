@@ -42,7 +42,7 @@ class MailSettingFacade {
 	 * @param int $domainId
 	 */
 	public function setMainAdminMail($mainAdminMail, $domainId) {
-		$this->setting->set(MailSetting::MAIN_ADMIN_MAIL, $mainAdminMail, $domainId);
+		$this->setting->setForDomain(MailSetting::MAIN_ADMIN_MAIL, $mainAdminMail, $domainId);
 	}
 
 	/**
@@ -50,6 +50,6 @@ class MailSettingFacade {
 	 * @param int $domainId
 	 */
 	public function setMainAdminMailName($mainAdminMailName, $domainId) {
-		$this->setting->set(MailSetting::MAIN_ADMIN_MAIL_NAME, $mainAdminMailName, $domainId);
+		$this->setting->setForDomain(MailSetting::MAIN_ADMIN_MAIL_NAME, $mainAdminMailName, $domainId);
 	}
 }

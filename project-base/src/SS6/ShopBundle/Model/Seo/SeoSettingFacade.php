@@ -48,7 +48,7 @@ class SeoSettingFacade {
 	 * @param int $domainId
 	 */
 	public function setTitleMainPage($value, $domainId) {
-		$this->setting->set(self::SEO_TITLE_MAIN_PAGE, $value, $domainId);
+		$this->setting->setForDomain(self::SEO_TITLE_MAIN_PAGE, $value, $domainId);
 	}
 
 	/**
@@ -56,7 +56,7 @@ class SeoSettingFacade {
 	 * @param int $domainId
 	 */
 	public function setDescriptionMainPage($value, $domainId) {
-		$this->setting->set(self::SEO_META_DESCRIPTION_MAIN_PAGE, $value, $domainId);
+		$this->setting->setForDomain(self::SEO_META_DESCRIPTION_MAIN_PAGE, $value, $domainId);
 	}
 
 	/**
@@ -64,7 +64,7 @@ class SeoSettingFacade {
 	 * @param int $domainId
 	 */
 	public function setTitleAddOn($value, $domainId) {
-		$this->setting->set(self::SEO_TITLE_ADD_ON, $value, $domainId);
+		$this->setting->setForDomain(self::SEO_TITLE_ADD_ON, $value, $domainId);
 	}
 
 }

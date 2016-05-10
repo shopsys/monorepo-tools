@@ -69,7 +69,7 @@ class CookiesFacade {
 		if ($cookiesArticle !== null) {
 			$cookiesArticleId = $cookiesArticle->getId();
 		}
-		$this->setting->set(
+		$this->setting->setForDomain(
 			Setting::COOKIES_ARTICLE_ID,
 			$cookiesArticleId,
 			$domainId

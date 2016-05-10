@@ -83,52 +83,38 @@ class Setting {
 	/**
 	 * @param string $key
 	 * @param string|int|float|bool|null $value
-	 * @param int $domainId
 	 */
-	public function set($key, $value, $domainId) {
-		$settingValue = $this->getSettingValue($key, $domainId);
-		if ($settingValue->getDomainId() === $domainId) {
-			$settingValue->edit($value);
-		} else {
-			$settingValue = new SettingValue($key, $value, $domainId);
-			$this->em->persist($settingValue);
-			$this->values[$domainId][$key] = $settingValue;
-		}
+	public function set($key, $value) {
+		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
 
-		$this->em->flush($settingValue);
+		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
+			$settingValue = $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
+			$settingValue->edit($value);
+
+			$this->em->flush($settingValue);
+		} else {
+			$message = 'Common setting value with name "' . $key . '" not found.';
+			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+		}
 	}
 
 	/**
 	 * @param string $key
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Component\Setting\SettingValue
-	 */
-	private function getSettingValue($key, $domainId) {
-		$this->loadValues($domainId);
-
-		if ($domainId !== SettingValue::DOMAIN_ID_COMMON) {
-			if (array_key_exists($key, $this->values[$domainId])) {
-				return $this->values[$domainId][$key];
-			}
-		}
-
-		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
-			return $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
-		}
-
-		$message = 'Setting value with name "' . $key . '"  for domain with ID "' . $domainId . '" not found.';
-		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
-	}
-
-	/**
+	 * @param string|int|float|bool|null $value
 	 * @param int $domainId
 	 */
-	private function loadValues($domainId) {
-		if ($domainId !== SettingValue::DOMAIN_ID_COMMON) {
-			$this->loadDomainValues($domainId);
-		}
+	public function setForDomain($key, $value, $domainId) {
+		$this->loadDomainValues($domainId);
 
-		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
+		if (array_key_exists($key, $this->values[$domainId])) {
+			$settingValue = $this->values[$domainId][$key];
+			$settingValue->edit($value);
+
+			$this->em->flush($settingValue);
+		} else {
+			$message = 'Setting value with name "' . $key . '" for domain ID "' . $domainId . '" not found.';
+			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+		}
 	}
 
 	/**

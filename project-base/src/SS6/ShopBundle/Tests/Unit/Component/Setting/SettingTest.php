@@ -33,11 +33,11 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 		$this->assertSame('value', $setting->getForDomain('key', 1));
-		$setting->set('key', 'newValue', 1);
+		$setting->setForDomain('key', 'newValue', 1);
 		$this->assertSame('newValue', $setting->getForDomain('key', 1));
 
 		$this->setExpectedException(SettingValueNotFoundException::class);
-		$setting->set('key2', 'value', 1);
+		$setting->setForDomain('key2', 'value', 1);
 	}
 
 	public function testSetNotFoundException() {
@@ -62,7 +62,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
 		$this->setExpectedException(SettingValueNotFoundException::class);
-		$setting->set('key2', 'value', 1);
+		$setting->setForDomain('key2', 'value', 1);
 	}
 
 	public function testSetInvalidArgumentException() {
@@ -80,7 +80,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 
 		$this->setExpectedException(InvalidArgumentException::class);
-		$setting->set('key2', 'value', null);
+		$setting->setForDomain('key2', 'value', null);
 	}
 
 	public function testGetNotFoundException() {
@@ -129,9 +129,9 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
 		$this->assertSame('valueCommon', $setting->get('key'));
 		$this->assertSame('value', $setting->getForDomain('key', 1));
-		$setting->set('key', 'newValue', 1);
+		$setting->setForDomain('key', 'newValue', 1);
 		$this->assertSame('newValue', $setting->getForDomain('key', 1));
-		$setting->set('key', 'newValueCommon', SettingValue::DOMAIN_ID_COMMON);
+		$setting->set('key', 'newValueCommon');
 		$this->assertSame('newValue', $setting->getForDomain('key', 1));
 		$this->assertSame('newValueCommon', $setting->get('key'));
 	}
@@ -146,10 +146,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 
 		$entityManagerMock = $this->getMockBuilder(EntityManager::class)
 			->disableOriginalConstructor()
-			->setMethods(['flush', 'persist'])
 			->getMock();
-		$entityManagerMock->expects($this->atLeastOnce())->method('flush');
-		$entityManagerMock->expects($this->atLeastOnce())->method('persist');
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
@@ -159,9 +156,8 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 				->method('getAllByDomainId')->willReturnMap($settingValueArrayByDomainIdMap);
 
 		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
-		$setting->set('key', 'newValue', 2);
+
 		$this->assertSame('value', $setting->getForDomain('key', 1));
-		$this->assertSame('newValue', $setting->getForDomain('key', 2));
 	}
 
 }

@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Pricing;
 
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationScheduler {
@@ -53,15 +52,13 @@ class InputPriceRecalculationScheduler {
 			$this->inputPriceRecalculator->recalculateToInputPricesWithoutVat();
 			$this->setting->set(
 				PricingSetting::INPUT_PRICE_TYPE,
-				PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
-				SettingValue::DOMAIN_ID_COMMON
+				PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT
 			);
 		} elseif ($this->recalculateInputPricesWithVat) {
 			$this->inputPriceRecalculator->recalculateToInputPricesWithVat();
 			$this->setting->set(
 				PricingSetting::INPUT_PRICE_TYPE,
-				PricingSetting::INPUT_PRICE_TYPE_WITH_VAT,
-				SettingValue::DOMAIN_ID_COMMON
+				PricingSetting::INPUT_PRICE_TYPE_WITH_VAT
 			);
 		}
 	}

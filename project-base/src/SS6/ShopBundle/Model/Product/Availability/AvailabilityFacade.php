@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
@@ -125,7 +124,7 @@ class AvailabilityFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setDefaultInStockAvailability(Availability $availability) {
-		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId(), SettingValue::DOMAIN_ID_COMMON);
+		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId());
 		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
 	}
 

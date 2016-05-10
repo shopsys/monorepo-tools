@@ -65,7 +65,7 @@ class PricingGroupSettingFacade {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
 	public function setDefaultPricingGroup(PricingGroup $pricingGroup) {
-		$this->setting->set(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
+		$this->setting->setForDomain(Setting::DEFAULT_PRICING_GROUP, $pricingGroup->getId(), $this->selectedDomain->getId());
 	}
 
 	/**
