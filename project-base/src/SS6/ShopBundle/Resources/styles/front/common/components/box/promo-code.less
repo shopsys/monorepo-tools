@@ -15,4 +15,30 @@
 		display: inline-block;
 		vertical-align: middle;
 	}
+
+	&__added {
+		display: flex;
+		align-items: center;
+		padding: 10px;
+
+		border: 1px solid @color-border;
+		color: @color-green;
+
+		&__remove {
+			margin-left: 10px;
+			position: relative;
+			top: -1px;
+
+			text-decoration: none;
+			color: @color-a;
+
+			&:hover {
+				color: @color-red;
+			}
+
+			.svg {
+				font-size: 11px;
+			}
+		}
+	}
 }

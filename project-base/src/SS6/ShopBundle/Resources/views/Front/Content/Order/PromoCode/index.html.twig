@@ -1,17 +1,21 @@
-{% if validEnteredPromoCode is null %}
-	<div class="box-promo-code">
+<div class="box-promo-code">
+	{% if validEnteredPromoCode is null %}
 		<label class="box-promo-code__input">
 			{{ 'Slevový kód'|trans }}:
 			<input type="text" value="" id="js-promo-code-input" class="input" data-apply-code-url="{{ url('front_promo_code_apply') }}"/>
 		</label>
 		<button type="button" id="js-promo-code-submit-button" class="btn box-promo-code__btn">{{ 'Vložit'|trans }}</button>
-	</div>
-
-{% else %}
-	<div>
-		<span class="in-message in-message--success js-flash-message">
-			{{ 'Vaše sleva'|trans }}: {{ validEnteredPromoCode.percent|formatPercent }}
-			<a href="{{ url('front_promo_code_remove') }}"><i class="fa fa-remove"></i>{{ 'Odebrat'|trans }}</a>
+	{% else %}
+		<span class="js-flash-message box-promo-code__added">
+			<span class="box-promo-code__added__discount">
+				{{ 'Vaše sleva'|trans }}:
+				<strong>
+					{{ validEnteredPromoCode.percent|formatPercent }}
+				</strong>
+			</span>
+			<a href="{{ url('front_promo_code_remove') }}" class="box-promo-code__added__remove">
+				<i class="svg svg-remove"></i>
+			</a>
 		</span>
-	</div><br /><br />
-{% endif %}
+	{% endif %}
+</div>
