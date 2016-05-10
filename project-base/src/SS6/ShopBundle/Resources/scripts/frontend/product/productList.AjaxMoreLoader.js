@@ -7,7 +7,6 @@
 	SS6.productList.AjaxMoreLoader = function () {
 		var self = this;
 		var $loadMoreButton;
-		var $loadMoreSpinner;
 		var $currentProductList;
 		var $paginationToItemSpan;
 
@@ -18,7 +17,6 @@
 
 		this.init = function () {
 			$loadMoreButton = $('.js-load-more-button');
-			$loadMoreSpinner = $('.js-load-more-spinner');
 			$currentProductList = $('.js-product-list');
 			$paginationToItemSpan = $('.js-pagination-to-item');
 
@@ -37,7 +35,6 @@
 
 		var onClickLoadMoreButton = function () {
 			$(this).hide();
-			$loadMoreSpinner.show();
 			SS6.ajax({
 				loaderElement: '.js-product-list-with-paginator',
 				type: 'GET',
@@ -47,7 +44,6 @@
 					var $response = $($.parseHTML(data));
 					var $nextProducts = $response.find('.js-product-list > li');
 					$currentProductList.append($nextProducts);
-					$loadMoreSpinner.hide();
 					page++;
 					paginationToItem += $nextProducts.length;
 					$paginationToItemSpan.text(paginationToItem);
