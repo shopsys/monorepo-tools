@@ -1,3 +1,5 @@
+@form-error-size: 20px;
+
 .form-error {
 	display: inline-block;
 	vertical-align: middle;
@@ -7,7 +9,7 @@
 
 	&--line {
 		position: absolute;
-		top: 9px;
+		top: 7px;
 		right: 5px;
 	}
 
@@ -22,13 +24,13 @@
 
 	&--choice {
 		right: auto;
-		top: -5px;
+		top: -3px;
 		margin-bottom: -5px;
 	}
 
 	&--line-block {
 		position: absolute;
-		top: 9px;
+		top: 7px;
 		right: 5px;
 
 		z-index: 10;
@@ -37,14 +39,13 @@
 	&__icon {
 		display: inline-block;
 		vertical-align: middle;
-		width: 15px;
-		height: 15px;
+		width: @form-error-size;
+		height: @form-error-size;
 
 		color: @color-alert;
 		font-weight: bold;
-		font-size: 14px;
+		font-size: 17px;
 		text-align: center;
-
 
 		.form-error--inline & {
 			width: auto;
@@ -116,7 +117,7 @@
 	.form-error {
 		&--line {
 			right: auto;
-			left: 300px;
+			left: 295px;
 		}
 	}
 }

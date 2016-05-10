@@ -112,7 +112,7 @@
 		<span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'h-display-none' }}">
 			{% if form.parent %}
 				<span class="form-error__icon">
-					!
+					<i class="svg svg-warning"></i>
 				</span>
 			{% endif %}
 			<ul class="{{ form.parent ? 'form-error__list' : 'in-message__list' }}">
