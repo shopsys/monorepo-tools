@@ -160,4 +160,39 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('value', $setting->getForDomain('key', 1));
 	}
 
+	public function testCannotSetNonexistentCommonValue() {
+		$entityManagerMock = $this->createDummyEntityManagerMock();
+
+		$settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+		$settingValueRepositoryMock->expects($this->any())->method('getAllByDomainId')->willReturn([]);
+
+		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
+
+		$this->setExpectedException(
+			SettingValueNotFoundException::class,
+			'Common setting value with name "nonexistentKey" not found.'
+		);
+		$setting->set('nonexistentKey', 'anyValue');
+	}
+
+	public function testCannotSetNonexistentValueForDomain() {
+		$entityManagerMock = $this->createDummyEntityManagerMock();
+
+		$settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+		$settingValueRepositoryMock->expects($this->any())->method('getAllByDomainId')->willReturn([]);
+
+		$setting = new Setting($entityManagerMock, $settingValueRepositoryMock);
+
+		$this->setExpectedException(
+			SettingValueNotFoundException::class,
+			'Setting value with name "nonexistentKey" for domain ID "1" not found.'
+		);
+		$setting->setForDomain('nonexistentKey', 'anyValue', 1);
+	}
+
+	private function createDummyEntityManagerMock() {
+		return $this->getMockBuilder(EntityManager::class)
+			->disableOriginalConstructor()
+			->getMock();
+	}
 }
