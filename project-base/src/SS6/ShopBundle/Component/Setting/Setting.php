@@ -47,11 +47,37 @@ class Setting {
 
 	/**
 	 * @param string $key
+	 * @return string|int|float|bool|null
+	 */
+	public function get($key) {
+		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
+
+		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
+			$settingValue = $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
+
+			return $settingValue->getValue();
+		}
+
+		$message = 'Common setting value with name "' . $key . '" not found.';
+		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+	}
+
+	/**
+	 * @param string $key
 	 * @param int $domainId
 	 * @return string|int|float|bool|null
 	 */
-	public function get($key, $domainId) {
-		return $this->getSettingValue($key, $domainId)->getValue();
+	public function getForDomain($key, $domainId) {
+		$this->loadDomainValues($domainId);
+
+		if (array_key_exists($key, $this->values[$domainId])) {
+			$settingValue = $this->values[$domainId][$key];
+
+			return $settingValue->getValue();
+		}
+
+		$message = 'Setting value with name "' . $key . '" for domain with ID "' . $domainId . '" not found.';
+		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
 	/**

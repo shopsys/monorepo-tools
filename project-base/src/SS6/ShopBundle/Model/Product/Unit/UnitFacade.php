@@ -128,7 +128,7 @@ class UnitFacade {
 	 * @return int
 	 */
 	private function getDefaultUnitId() {
-		return $this->setting->get(Setting::DEFAULT_UNIT, SettingValue::DOMAIN_ID_COMMON);
+		return $this->setting->get(Setting::DEFAULT_UNIT);
 	}
 
 	/**

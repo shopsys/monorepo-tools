@@ -24,7 +24,7 @@ class SeoSettingFacade {
 	 * @return string
 	 */
 	public function getTitleMainPage($domainId) {
-		return $this->setting->get(self::SEO_TITLE_MAIN_PAGE, $domainId);
+		return $this->setting->getForDomain(self::SEO_TITLE_MAIN_PAGE, $domainId);
 	}
 
 	/**
@@ -32,7 +32,7 @@ class SeoSettingFacade {
 	 * @return string
 	 */
 	public function getDescriptionMainPage($domainId) {
-		return $this->setting->get(self::SEO_META_DESCRIPTION_MAIN_PAGE, $domainId);
+		return $this->setting->getForDomain(self::SEO_META_DESCRIPTION_MAIN_PAGE, $domainId);
 	}
 
 	/**
@@ -40,7 +40,7 @@ class SeoSettingFacade {
 	 * @return string
 	 */
 	public function getTitleAddOn($domainId) {
-		return $this->setting->get(self::SEO_TITLE_ADD_ON, $domainId);
+		return $this->setting->getForDomain(self::SEO_TITLE_ADD_ON, $domainId);
 	}
 
 	/**

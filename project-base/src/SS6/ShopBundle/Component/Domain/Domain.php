@@ -76,7 +76,7 @@ class Domain {
 		foreach ($this->domainConfigs as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			try {
-				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);
+				$this->setting->getForDomain(Setting::DOMAIN_DATA_CREATED, $domainId);
 				$domainConfigsWithDataCreated[] = $domainConfig;
 			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
 			}

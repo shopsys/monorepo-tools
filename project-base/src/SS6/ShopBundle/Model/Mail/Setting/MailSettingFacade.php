@@ -26,7 +26,7 @@ class MailSettingFacade {
 	 * @return string
 	 */
 	public function getMainAdminMail($domainId) {
-		return $this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $domainId);
+		return $this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL, $domainId);
 	}
 
 	/**
@@ -34,7 +34,7 @@ class MailSettingFacade {
 	 * @return string
 	 */
 	public function getMainAdminMailName($domainId) {
-		return $this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $domainId);
+		return $this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL_NAME, $domainId);
 	}
 
 	/**

@@ -67,7 +67,7 @@ class DomainDataCreator {
 		foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			try {
-				$this->setting->get(Setting::DOMAIN_DATA_CREATED, $domainId);
+				$this->setting->getForDomain(Setting::DOMAIN_DATA_CREATED, $domainId);
 			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
 				$this->settingValueRepository->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
 				$this->setting->clearCache();

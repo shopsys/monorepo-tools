@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Pricing\Vat;
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
@@ -27,7 +26,7 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase {
 		$settingMock
 			->expects($this->once())
 			->method('get')
-			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT), $this->equalTo(SettingValue::DOMAIN_ID_COMMON))
+			->with($this->equalTo(Vat::SETTING_DEFAULT_VAT))
 			->will($this->returnValue(1));
 
 		$vatRepositoryMock = $this->getMockBuilder(VatRepository::class)

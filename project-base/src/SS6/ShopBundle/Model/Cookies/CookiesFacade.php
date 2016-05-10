@@ -49,11 +49,11 @@ class CookiesFacade {
 	 * @return \SS6\ShopBundle\Model\Article\Article|null
 	 */
 	public function findCookiesArticleByDomainId($domainId) {
-		$cookiesArticleId = $this->setting->get(Setting::COOKIES_ARTICLE_ID, $domainId);
+		$cookiesArticleId = $this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId);
 
 		if ($cookiesArticleId !== null) {
 			return $this->articleEditFacade->findById(
-				$this->setting->get(Setting::COOKIES_ARTICLE_ID, $domainId)
+				$this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId)
 			);
 		}
 

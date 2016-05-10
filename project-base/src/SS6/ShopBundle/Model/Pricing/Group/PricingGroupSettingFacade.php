@@ -42,7 +42,7 @@ class PricingGroupSettingFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getDefaultPricingGroupByDomainId($domainId) {
-		$defaultPricingGroupId = $this->setting->get(Setting::DEFAULT_PRICING_GROUP, $domainId);
+		$defaultPricingGroupId = $this->setting->getForDomain(Setting::DEFAULT_PRICING_GROUP, $domainId);
 
 		return $this->pricingGroupRepository->getById($defaultPricingGroupId);
 	}

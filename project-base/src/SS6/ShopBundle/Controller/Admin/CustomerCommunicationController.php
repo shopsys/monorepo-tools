@@ -34,7 +34,7 @@ class CustomerCommunicationController extends AdminBaseController {
 	 * @Route("/customer-communication/order-submitted/")
 	 */
 	public function orderSubmittedAction(Request $request) {
-		$data = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
+		$data = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
 		$form->setData(['content' => $data]);

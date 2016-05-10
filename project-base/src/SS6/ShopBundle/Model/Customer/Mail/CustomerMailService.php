@@ -43,8 +43,8 @@ class CustomerMailService {
 			$mailTemplate->getBccEmail(),
 			$mailTemplate->getBody(),
 			$mailTemplate->getSubject(),
-			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
-			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId()),
+			$this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL, $user->getDomainId()),
+			$this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL_NAME, $user->getDomainId()),
 			$this->getVariablesReplacements($user)
 		);
 	}

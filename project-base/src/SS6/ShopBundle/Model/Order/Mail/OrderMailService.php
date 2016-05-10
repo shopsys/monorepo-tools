@@ -104,8 +104,8 @@ class OrderMailService {
 			$mailTemplate->getBccEmail(),
 			$mailTemplate->getBody(),
 			$mailTemplate->getSubject(),
-			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
-			$this->setting->get(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId()),
+			$this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL, $order->getDomainId()),
+			$this->setting->getForDomain(MailSetting::MAIN_ADMIN_MAIL_NAME, $order->getDomainId()),
 			$this->getVariablesReplacementsForBody($order),
 			$this->getVariablesReplacementsForSubject($order)
 		);

@@ -22,7 +22,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
 			->expects($this->once())
-			->method('get')
+			->method('getForDomain')
 			->with($this->equalTo(Setting::DOMAIN_DATA_CREATED), $this->equalTo(1))
 			->willReturn(true);
 
@@ -55,7 +55,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
-			->method('get')
+			->method('getForDomain')
 			->willReturnCallback(function ($key, $domainId) {
 				$this->assertEquals(Setting::DOMAIN_DATA_CREATED, $key);
 				if ($domainId === 1) {

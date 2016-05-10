@@ -31,7 +31,7 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand {
 
 		foreach ($domain->getAll() as $domainConfig) {
 			$domainConfigUrl = $domainConfig->getUrl();
-			$domainSettingUrl = $setting->get(Setting::BASE_URL, $domainConfig->getId());
+			$domainSettingUrl = $setting->getForDomain(Setting::BASE_URL, $domainConfig->getId());
 
 			if ($domainConfigUrl !== $domainSettingUrl) {
 				$output->writeln(

@@ -44,21 +44,21 @@ class PricingSetting {
 	 * @return int
 	 */
 	public function getInputPriceType() {
-		return $this->setting->get(self::INPUT_PRICE_TYPE, SettingValue::DOMAIN_ID_COMMON);
+		return $this->setting->get(self::INPUT_PRICE_TYPE);
 	}
 
 	/**
 	 * @return int
 	 */
 	public function getRoundingType() {
-		return $this->setting->get(self::ROUNDING_TYPE, SettingValue::DOMAIN_ID_COMMON);
+		return $this->setting->get(self::ROUNDING_TYPE);
 	}
 
 	/**
 	 * @return int
 	 */
 	public function getDefaultCurrencyId() {
-		return $this->setting->get(self::DEFAULT_CURRENCY, SettingValue::DOMAIN_ID_COMMON);
+		return $this->setting->get(self::DEFAULT_CURRENCY);
 	}
 
 	/**
@@ -66,7 +66,7 @@ class PricingSetting {
 	 * @return int
 	 */
 	public function getDomainDefaultCurrencyIdByDomainId($domainId) {
-		return $this->setting->get(self::DEFAULT_DOMAIN_CURRENCY, $domainId);
+		return $this->setting->getForDomain(self::DEFAULT_DOMAIN_CURRENCY, $domainId);
 	}
 
 	/**
@@ -104,7 +104,7 @@ class PricingSetting {
 	 * @return string|null
 	 */
 	public function getFreeTransportAndPaymentPriceLimit($domainId) {
-		return $this->setting->get(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $domainId);
+		return $this->setting->getForDomain(self::FREE_TRANSPORT_AND_PAYMENT_PRICE_LIMIT, $domainId);
 	}
 
 	/**

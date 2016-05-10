@@ -150,7 +150,7 @@ class VatFacade {
 	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getDefaultVat() {
-		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT, SettingValue::DOMAIN_ID_COMMON);
+		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT);
 
 		return $this->vatRepository->getById($defaultVatId);
 	}

@@ -116,7 +116,7 @@ class AvailabilityFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getDefaultInStockAvailability() {
-		$availabilityId = $this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK, SettingValue::DOMAIN_ID_COMMON);
+		$availabilityId = $this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK);
 
 		return $this->getById($availabilityId);
 	}
