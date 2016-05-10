@@ -351,12 +351,12 @@ class ProductEditFacade {
 	 * @param string[] $manualInputPrices
 	 */
 	private function refreshProductManualInputPrices(Product $product, array $manualInputPrices) {
-		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
-			$this->productManualInputPriceFacade->deleteByProduct($product);
-		} else {
+		if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 			foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
 				$this->productManualInputPriceFacade->refresh($product, $pricingGroup, $manualInputPrices[$pricingGroup->getId()]);
 			}
+		} else {
+			$this->productManualInputPriceFacade->deleteByProduct($product);
 		}
 	}
 

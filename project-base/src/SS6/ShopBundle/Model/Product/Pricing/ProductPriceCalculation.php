@@ -7,6 +7,7 @@ use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\PricingService;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
 use SS6\ShopBundle\Model\Product\Product;
@@ -77,8 +78,9 @@ class ProductPriceCalculation {
 		} elseif ($priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 			return $this->calculateProductPriceForPricingGroupManual($product, $pricingGroup);
 		} else {
-			$message = 'Product price calculation type ' . $priceCalculationType . ' is not supported';
-			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException($message);
+			throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
+				$priceCalculationType
+			);
 		}
 	}
 
@@ -111,15 +113,16 @@ class ProductPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $inputPrice
+	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return \SS6\ShopBundle\Model\Pricing\Price
 	 */
-	public function calculateBasePrice(Product $product) {
+	private function calculateBasePrice($inputPrice, Vat $vat) {
 		return $this->basePriceCalculation->calculateBasePrice(
-				$product->getPrice(),
-				$this->pricingSetting->getInputPriceType(),
-				$product->getVat()
-			);
+			$inputPrice,
+			$this->pricingSetting->getInputPriceType(),
+			$vat
+		);
 	}
 
 	/**
@@ -130,17 +133,13 @@ class ProductPriceCalculation {
 	private function calculateProductPriceForPricingGroupManual(Product $product, PricingGroup $pricingGroup) {
 		$manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
 		if ($manualInputPrice !== null) {
-			$price = $manualInputPrice->getInputPrice();
+			$inputPrice = $manualInputPrice->getInputPrice();
 		} else {
-			$price = 0;
+			$inputPrice = 0;
 		}
-		$price = $this->basePriceCalculation->calculateBasePrice(
-			$price,
-			$this->pricingSetting->getInputPriceType(),
-			$product->getVat()
-		);
+		$basePrice = $this->calculateBasePrice($inputPrice, $product->getVat());
 
-		return new ProductPrice($price, false);
+		return new ProductPrice($basePrice, false);
 	}
 
 	/**
@@ -150,7 +149,7 @@ class ProductPriceCalculation {
 	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	private function calculateProductPriceForPricingGroupAuto(Product $product, PricingGroup $pricingGroup, $domainId) {
-		$basePrice = $this->calculateBasePrice($product);
+		$basePrice = $this->calculateBasePrice($product->getPrice(), $product->getVat());
 
 		$price = $this->basePriceCalculation->applyCoefficients(
 			$basePrice,
