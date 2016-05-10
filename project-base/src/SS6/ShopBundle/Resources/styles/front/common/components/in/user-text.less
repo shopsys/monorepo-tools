@@ -1,0 +1,32 @@
+.in-user-text {
+	ul {
+		.reset-ul();
+		margin-bottom: @margin-gap;
+
+		li {
+			position: relative;
+			padding-left: 15px;
+			line-height: 18px;
+			margin-bottom: 5px;
+
+			&:after {
+				position: absolute;
+				content: '';
+				top: 6px;
+				left: 0;
+				width: 6px;
+				height: 6px;
+
+				background: @color-green;
+			}
+		}
+
+		ul {
+			margin: 5px 0 0 15px;
+		}
+	}
+
+	img {
+		height: auto !important;
+	}
+}

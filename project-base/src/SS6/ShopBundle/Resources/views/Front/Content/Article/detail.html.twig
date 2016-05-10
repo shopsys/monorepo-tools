@@ -11,5 +11,7 @@
 {% block main_content %}
 	<h1>{{ article.name }}</h1>
 
-	{{ article.text|raw }}
+	<div class="in-user-text">
+		{{ article.text|raw }}
+	</div>
 {% endblock %}

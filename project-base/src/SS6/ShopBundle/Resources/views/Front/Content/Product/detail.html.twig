@@ -196,7 +196,9 @@
 						<i class="svg svg-arrow"></i>
 					</a>
 					<div class="in-tab__content__item active js-tabs-tab-content" data-tab-id="description">
-						{{ productDomain.description|raw }}
+						<div class="in-user-text">
+							{{ productDomain.description|raw }}
+						</div>
 					</div>
 				{% endif %}
 

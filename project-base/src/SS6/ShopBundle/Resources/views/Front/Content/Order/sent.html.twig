@@ -14,7 +14,9 @@
 
 	<h1>{{ 'Objednávka byla odeslána'|trans }}</h1>
 
-	{{ orderConfirmationText|raw }}
+	<div class="in-user-text">
+		{{ orderConfirmationText|raw }}
+	</div>
 
 	<div class="in-action">
 		<div class="in-action__left">
