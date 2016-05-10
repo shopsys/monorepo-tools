@@ -6,21 +6,21 @@
 	&__item {
 		width: 100%;
 		padding: 10px;
-		.flex();
-		.flex-align-items(flex-start);
+		display: flex;
+		align-items: flex-start;
 
 		&__check {
-			.flex-short(0 0 20px);
+			flex: 0 20px;
 		}
 
 		&__image {
-			.flex-short(0 0 40px);
+			flex: 0 40px;
 
 			text-align: center;
 		}
 
 		&__title {
-			.flex-grow(1);
+			flex: 1;
 			padding: 0 10px;
 
 			.box-chooser__item--inactive & {

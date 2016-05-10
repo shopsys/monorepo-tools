@@ -1,9 +1,9 @@
 .header {
 	padding-bottom: 10px;
 	position: relative;
-	.flex();
-	.flex-wrap(wrap);
-	.flex-align-items(center);
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 
 	&__logo {
 		width: 100%;
@@ -13,7 +13,7 @@
 	&__middle {
 		width: 100%;
 		margin: 10px 0;
-		.flex-order(2);
+		order: 2;
 	}
 
 	&__cart {
@@ -25,7 +25,8 @@
 	}
 
 	&__mobile {
-		.width-calc(~"100% - 38px", 80%);
+		width: 80%;
+		width: calc(~"100% - 38px");
 
 		text-align: right;
 	}
@@ -36,39 +37,38 @@
 		padding-bottom: 20px;
 
 		&__top {
-			.flex-order(-1);
-			.flex();
-			.flex-align-items(center);
+			order: -1;
+			display: flex;
+			align-items: center;
 			width: 100%;
 			margin-bottom: 10px;
 
 			&__left {
-				.flex-grow(1);
+				flex: 1;
 			}
 
 			&__right {
-				.flex-grow(1);
+				flex: 1;
 			}
 		}
 
 		&__logo {
-			.flex-grow(1);
-			.flex-order(1);
+			flex: 1;
+			order: 1;
 			width: auto;
 			padding-right: 20px;
 		}
 
 		&__middle {
-			.flex-grow(0);
-			.flex-order(2);
+			order: 2;
 			width: 280px;
 			margin: 0;
 		}
 
 		&__cart {
 			padding-left: 20px;
-			.flex-grow(1);
-			.flex-order(3);
+			flex: 1;
+			order: 3;
 
 			text-align: right;
 		}

@@ -23,7 +23,7 @@ button types
 	font-size: 13px;
 	outline: 0;
 
-	.transition(~"background, color");
+	transition: @transition background, color;
 
 	&:hover {
 		color: @btn-color-hover;
@@ -103,7 +103,7 @@ button types
 		text-decoration: none;
 		font-size: 16px;
 
-		.transition(color);
+		transition: @transition color;
 
 		.btn-tap--menu & {
 			background: @color-light;
@@ -128,7 +128,7 @@ button types
 			height: 16px;
 			line-height: 16px;
 
-			.border-radius(50%);
+			border-radius: 50%;
 			color: @color-f;
 			background: @color-red;
 			font-size: 12px;
