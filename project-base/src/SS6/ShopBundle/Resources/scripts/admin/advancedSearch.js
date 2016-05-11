@@ -7,7 +7,7 @@
 		var $addRuleButton = $('#js-advanced-search-add-rule-button');
 		var $rulesContainer = $('#js-advanced-search-rules-container');
 		var $ruleTemplate = $('#js-advanced-search-rule-template');
-		$ruleTemplate.detach().removeClass('display-none').removeAttr('id').find('*[id]').removeAttr('id');
+		$ruleTemplate.detach().removeClass('h-display-none').removeAttr('id').find('*[id]').removeAttr('id');
 
 		var newRuleIndexCounter = 0;
 

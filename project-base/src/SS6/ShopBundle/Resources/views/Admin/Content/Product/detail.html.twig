@@ -247,7 +247,7 @@
 									</div>
 								{% endfor %}
 							</td>
-							<td class="table-form__cell text-right">
+							<td class="table-form__cell h-text-right">
 								<a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
 							</td>
 						</tr>
@@ -316,7 +316,7 @@
 				</strong>
 
 				{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
+					<div class="form-line__side {% if not loop.first %}h-margin-top-5{% endif %} js-characters-counter">
 						<div class="form-line__item form-line__item--left">
 							<span class="input__wrap">
 								{{ form_widget(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain input--seo' } }) }}

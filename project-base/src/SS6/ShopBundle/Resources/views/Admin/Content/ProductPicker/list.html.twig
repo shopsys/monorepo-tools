@@ -3,10 +3,10 @@
 {% block content %}
 	{{ form_start(quickSearchForm) }}
 
-		<div class="wrap-tab mt50 js-tabs">
+		<div class="wrap-tab h-margin-top-50 js-tabs">
 			<div class="wrap-tab__heading">
 				<a href="#"
-					class="{{ isAdvancedSearchFormSubmitted ? 'display-none ' : 'active ' }}wrap-tab__heading__item js-tabs-tab-link{{ not isAdvancedSearchFormSubmitted ? ' active' }}"
+					class="{{ isAdvancedSearchFormSubmitted ? 'h-display-none ' : 'active ' }}wrap-tab__heading__item js-tabs-tab-link{{ not isAdvancedSearchFormSubmitted ? ' active' }}"
 					data-tab-id="quick"
 				>
 					{{ 'Rychlé vyhledávání'|trans }}
@@ -19,7 +19,7 @@
 				</a>
 			</div>
 			<div class="wrap-tab__content">
-				<div class="{{ isAdvancedSearchFormSubmitted ? 'display-none ' : '' }}wrap-tab__content__in js-tabs-tab-content" data-tab-id="quick">
+				<div class="{{ isAdvancedSearchFormSubmitted ? 'h-display-none ' : '' }}wrap-tab__content__in js-tabs-tab-content" data-tab-id="quick">
 					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 				</div>
 				<div class="wrap-tab__content__in js-tabs-tab-content" data-tab-id="advanced">

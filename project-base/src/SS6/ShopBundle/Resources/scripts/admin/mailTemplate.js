@@ -17,7 +17,7 @@
 			});
 		});
 
-		$('.js-mail-template-toggle-container.js-toggle-container:has(.js-validation-errors-list:not(.display-none))').each(function () {
+		$('.js-mail-template-toggle-container.js-toggle-container:has(.js-validation-errors-list:not(.h-display-none))').each(function () {
 			SS6.toggleElement.show($(this));
 		});
 

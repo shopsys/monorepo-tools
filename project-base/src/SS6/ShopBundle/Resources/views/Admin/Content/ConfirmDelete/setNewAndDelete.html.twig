@@ -1,7 +1,7 @@
 {% if remainingEntitiesChoiceList.choices|length > 0 %}
 	{{ message|nl2br }}
 	{# custom form rendering because of csrf token and input names - controllers delete actions expect "newId" parameter #}
-	<form action="{{ url(route, {id: entityId}) }}" method="get" class="mt-1 js-confirm-delete-form">
+	<form action="{{ url(route, {id: entityId}) }}" method="get" class="js-confirm-delete-form h-margin-top-20">
 		<input
 			type="hidden"
 			name="{{ CSRF_TOKEN_REQUEST_PARAMETER }}"

@@ -13,22 +13,22 @@
 				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
 			{% endif %}
 		</td>
-		<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'text-right'}}) }}</td>
-		<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right text-middle">
+		<td>{{ form_widget(orderItemForm.catnum, {attr: { class: 'h-text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.priceWithVat, {attr: { class: 'h-text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.quantity, {attr: { class: 'h-text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.unitName, {attr: { class: 'h-text-right'}}) }}</td>
+		<td>{{ form_widget(orderItemForm.vatPercent, {attr: { class: 'h-text-right'}}) }}</td>
+		<td class="h-text-right h-text-middle">
 			{% if orderItemTotalPricesById[orderItemId] is defined %}
 				{{ orderItemTotalPricesById[orderItemId].priceWithVat|priceWithCurrency(currency) }}
 			{% endif %}
 		</td>
-		<td class="text-right text-middle">
+		<td class="h-text-right h-text-middle">
 			{% if orderItemTotalPricesById[orderItemId] is defined %}
 				{{ orderItemTotalPricesById[orderItemId].priceWithoutVat|priceWithCurrency(currency) }}
 			{% endif %}
 		</td>
-		<td class="table-col-5 table-edit__body__cell text-center">
+		<td class="table-col-5 table-edit__body__cell h-text-center">
 			<a href="#" class="js-order-item-remove table-action"><i class="svg svg-trash"></i></a>
 		</td>
 	</tr>
@@ -41,13 +41,13 @@
 			data-transport-vat-percents-by-transport-id="{{ transportVatPercentsByTransportId|json_encode() }}"
 			>
 		<td>{{ form_widget(orderTransportForm.transport, {isSimple: true}) }}</td>
-		<td class="text-right">-</td>
-		<td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">1</td>
-		<td class="text-right"></td>
-		<td class="text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
-		<td class="text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+		<td class="h-text-right">-</td>
+		<td>{{ form_widget(orderTransportForm.priceWithVat, {attr: { class: 'h-text-right'}}) }}</td>
+		<td class="h-text-right">1</td>
+		<td class="h-text-right"></td>
+		<td class="h-text-right">{{ form_widget(orderTransportForm.vatPercent, {attr: { class: 'h-text-right'}}) }}</td>
+		<td class="h-text-right">{{ order.orderTransport.priceWithVat|priceWithCurrency(order.currency) }}</td>
+		<td class="h-text-right">{{ order.orderTransport.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
 		<td></td>
 	</tr>
 {% endmacro %}
@@ -59,13 +59,13 @@
 			data-payment-vat-percents-by-payment-id="{{ paymentVatPercentsByPaymentId|json_encode() }}"
 			>
 		<td>{{ form_widget(orderPaymentForm.payment, {isSimple: true}) }}</td>
-		<td class="text-right">-</td>
-		<td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">1</td>
-		<td class="text-right"></td>
-		<td class="text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'text-right'}}) }}</td>
-		<td class="text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
-		<td class="text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+		<td class="h-text-right">-</td>
+		<td>{{ form_widget(orderPaymentForm.priceWithVat, {attr: { class: 'h-text-right'}}) }}</td>
+		<td class="h-text-right">1</td>
+		<td class="h-text-right"></td>
+		<td class="h-text-right">{{ form_widget(orderPaymentForm.vatPercent, {attr: { class: 'h-text-right'}}) }}</td>
+		<td class="h-text-right">{{ order.orderPayment.priceWithVat|priceWithCurrency(order.currency) }}</td>
+		<td class="h-text-right">{{ order.orderPayment.priceWithoutVat|priceWithCurrency(order.currency) }}</td>
 		<td></td>
 	</tr>
 {% endmacro %}

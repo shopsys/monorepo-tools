@@ -108,7 +108,7 @@
 {% block grid_rows %}
 	<tbody class="js-inline-edit-rows {% if grid.dragAndDrop %}js-drag-and-drop-grid-rows{% endif %}">
 		{% if grid.multipleDragAndDrop %}
-			<tr class="table-grid__row js-grid-row-holder display-none">
+			<tr class="table-grid__row js-grid-row-holder h-display-none">
 				<td colspan="100" class="table-grid__cell">
 					{{ gridView.renderBlock('grid_multiple_drag_and_drop_row_holder') }}
 				</td>
@@ -138,7 +138,7 @@
 	>
 		{% if grid.dragAndDrop or grid.multipleDragAndDrop %}
 			<td class="table-grid__cell table-grid__cell--move">
-				<i class="c-move svg svg-move"></i>
+				<i class="h-cursor-move svg svg-move"></i>
 			</td>
 		{% endif %}
 		{% if grid.enabledSelecting %}

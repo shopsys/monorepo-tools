@@ -15,7 +15,7 @@
 						{{ name }}
 					<span class="form-group__title__click js-toggle-button">+</span>
 				</h2>
-				<div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
+				<div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content h-display-none box-expand__hidden">
 					{{ form_row(templateForm.subject, { label: 'Předmět'|trans}) }}
 					{{ form_row(templateForm.bccEmail, { label: 'Skrytá kopie'|trans}) }}
 					{{ form_row(templateForm.body, { label: 'Text'|trans}) }}
@@ -42,7 +42,7 @@
 											<i class="svg svg-arrow-back"></i>
 										</button>
 										<span class="list-images__item__overlay js-mail-template-attachment-delete-revert">{{ 'Po uložení bude soubor smazán'|trans }}</span>
-										{{ form_widget(templateForm.deleteAttachment, {attr: {class: 'display-none js-mail-template-attachment-delete-checkbox'}}) }}
+										{{ form_widget(templateForm.deleteAttachment, {attr: {class: 'h-display-none js-mail-template-attachment-delete-checkbox'}}) }}
 									</div>
 								</div>
 							</div>
@@ -54,7 +54,7 @@
 					{% if sendMailText is not null %}
 						{{ form_row(templateForm.sendMail, { label: sendMailText, attr: {class: 'js-send-mail-checkbox'} }) }}
 					{% else %}
-						{{ form_widget(templateForm.sendMail, { 'attr': {'class': 'display-none'} }) }}
+						{{ form_widget(templateForm.sendMail, { 'attr': {'class': 'h-display-none'} }) }}
 					{% endif %}
 
 					<table class="table-main">
@@ -63,7 +63,7 @@
 								<th>
 									{{ 'Použitelné proměnné'|trans }}
 									{% if variablesInfoText is not null %}
-										<i class="svg svg-info c-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
+										<i class="svg svg-info h-cursor-help js-tooltip" data-toggle="tooltip" data-placement="right" title="" data-original-title="{{ variablesInfoText }}"></i>
 									{% endif %}
 								</th>
 								<th></th>

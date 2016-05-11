@@ -4,7 +4,7 @@
 	{% if notAllowedToDeleteCurrencyIds is defined %}
 		{% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
 			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky'|trans }}"
-				class="js-tooltip c-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+				class="js-tooltip h-cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 			>
 				<i class="svg svg-info"></i>
 			</span>
@@ -22,11 +22,11 @@
 		{{ form_widget(form.exchangeRate) }}
 		<span class="form-edit-block__info">
 			{% if row is null %}
-				<span title="" class="js-tooltip c-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
+				<span title="" class="js-tooltip h-cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
 					<i class="svg svg-question"></i>
 				</span>
 			{% elseif row.c.id != defaultCurrency.id %}
-				<span title="" class="js-tooltip c-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+				<span title="" class="js-tooltip h-cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
 					'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
 					'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 				}) }}">
