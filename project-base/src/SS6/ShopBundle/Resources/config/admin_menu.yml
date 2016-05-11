@@ -144,6 +144,12 @@
         - label: 'Obchodní podmínky'
           route: admin_termsandconditions_setting
 
+    - label: 'Informace o cookies'
+      route: admin_cookies_setting
+      items:
+        - label: 'Informace o cookies'
+          route: admin_cookies_setting
+
     - label: 'Dopravy a platby'
       route: admin_transportandpayment_list
       items:

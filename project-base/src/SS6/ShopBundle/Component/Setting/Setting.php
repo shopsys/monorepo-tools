@@ -12,6 +12,7 @@ class Setting {
 	const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';
 	const DEFAULT_AVAILABILITY_IN_STOCK = 'defaultAvailabilityInStockId';
 	const TERMS_AND_CONDITIONS_ARTICLE_ID = 'termsAndConditionsArticleId';
+	const COOKIES_ARTICLE_ID = 'cookiesArticleId';
 	const DOMAIN_DATA_CREATED = 'domainDataCreated';
 	const FEED_HASH = 'feedHash';
 	const DEFAULT_UNIT = 'defaultUnitId';

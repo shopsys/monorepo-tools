@@ -40,6 +40,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		/* @var $termsAndConditions \SS6\ShopBundle\Model\Article\Article */
 		$termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
 		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
+		$cookies = $this->getReference(ArticleDataFixture::COOKIES_1);
+		/* @var $cookies \SS6\ShopBundle\Model\Article\Article */
+		$cookies2 = $this->getReference(ArticleDataFixture::COOKIES_2);
+		/* @var $cookies2 \SS6\ShopBundle\Model\Article\Article */
 		$hashGenerator = $this->get(HashGenerator::class);
 		/* @var $hashGenerator \SS6\ShopBundle\Component\String\HashGenerator */
 		$defaultUnit = $this->getReference(UnitDataFixture::PCS);
@@ -90,6 +94,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$manager->persist(new SettingValue(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo eshop', 2));
 		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditions->getId(), 1));
 		$manager->persist(new SettingValue(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $termsAndConditionsDomain2->getId(), 2));
+		$manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, $cookies->getId(), 1));
+		$manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, $cookies2->getId(), 2));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 1));
 		$manager->persist(new SettingValue(Setting::DOMAIN_DATA_CREATED, true, 2));
 		$manager->persist(new SettingValue(Setting::FEED_HASH, $hashGenerator->generateHash(10), SettingValue::DOMAIN_ID_COMMON));

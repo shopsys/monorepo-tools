@@ -15,6 +15,7 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Article\ArticleDataFactory;
 use SS6\ShopBundle\Model\Article\ArticleEditFacade;
 use SS6\ShopBundle\Model\Article\ArticlePlacementList;
+use SS6\ShopBundle\Model\Cookies\CookiesFacade;
 use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +62,11 @@ class ArticleController extends AdminBaseController {
 	 */
 	private $termsAndConditionsFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Cookies\CookiesFacade
+	 */
+	private $cookiesFacade;
+
 	public function __construct(
 		ArticleEditFacade $articleEditFacade,
 		ArticleDataFactory $articleDataFactory,
@@ -69,7 +75,8 @@ class ArticleController extends AdminBaseController {
 		SelectedDomain $selectedDomain,
 		Breadcrumb $breadcrumb,
 		ConfirmDeleteResponseFactory $confirmDeleteResponseFactory,
-		TermsAndConditionsFacade $termsAndConditionsFacade
+		TermsAndConditionsFacade $termsAndConditionsFacade,
+		CookiesFacade $cookiesFacade
 	) {
 		$this->articleEditFacade = $articleEditFacade;
 		$this->articleDataFactory = $articleDataFactory;
@@ -79,6 +86,7 @@ class ArticleController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->confirmDeleteResponseFactory = $confirmDeleteResponseFactory;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
+		$this->cookiesFacade = $cookiesFacade;
 	}
 
 	/**
@@ -209,6 +217,12 @@ class ArticleController extends AdminBaseController {
 		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
 			$message = t(
 				'Článek "%name%" je nastaven pro zobrazení obchodních podmínek.
+				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
+				['%name%' => $article->getName()]
+			);
+		} elseif ($this->cookiesFacade->isArticleUsedAsCookiesInfo($article)) {
+			$message = t(
+				'Článek "%name%" je nastaven pro zobrazení informací o cookies.
 				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
 				['%name%' => $article->getName()]
 			);
