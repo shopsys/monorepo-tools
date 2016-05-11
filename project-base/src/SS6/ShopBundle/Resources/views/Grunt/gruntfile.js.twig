@@ -7,6 +7,11 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		less: {
+			helpersAdmin: {
+				files: {
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less': '{{ rootStylesDirectory|raw }}/admin/helpers.less'
+				}
+			},
 			admin: {
 				files: {
 					'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
@@ -231,8 +236,12 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less'],
+				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less', '!{{ rootStylesDirectory|raw }}/admin/helpers.less', '!{{ rootStylesDirectory|raw }}/admin/helpers/*.less', '{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'],
 				tasks: ['adminLess']
+			},
+			adminHelpers: {
+				files: ['{{ rootStylesDirectory|raw }}/admin/helpers.less', '{{ rootStylesDirectory|raw }}/admin/helpers/*.less', '!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'],
+				tasks: ['less:helpersAdmin']
 			},
 			adminSprite: {
 				files: ['web/assets/admin/images/icons/**/*.png'],
