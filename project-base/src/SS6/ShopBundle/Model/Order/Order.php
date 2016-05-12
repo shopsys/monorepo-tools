@@ -174,6 +174,13 @@ class Order {
 	private $postcode;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=false)
+	 */
+	private $country;
+
+	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
@@ -221,6 +228,13 @@ class Order {
 	 * @ORM\Column(type="string", length=30)
 	 */
 	private $deliveryPostcode;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="delivery_country_id", referencedColumnName="id", nullable=true)
+	 */
+	private $deliveryCountry;
 
 	/**
 	 * @var string|null
@@ -717,6 +731,13 @@ class Order {
 	 */
 	public function getDeliveryPostcode() {
 		return $this->deliveryPostcode;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public function getDeliveryCountry() {
+		return $this->deliveryCountry;
 	}
 
 	/**

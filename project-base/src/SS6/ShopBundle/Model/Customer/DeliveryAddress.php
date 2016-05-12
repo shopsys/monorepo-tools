@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Country\Country;
 
 /**
  * @ORM\Table(name="delivery_addresses")
@@ -62,6 +63,13 @@ class DeliveryAddress {
 	private $telephone;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
+	 */
+	private $country;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
 	public function __construct(DeliveryAddressData $deliveryAddressData) {
@@ -71,6 +79,7 @@ class DeliveryAddress {
 		$this->companyName = $deliveryAddressData->companyName;
 		$this->contactPerson = $deliveryAddressData->contactPerson;
 		$this->telephone = $deliveryAddressData->telephone;
+		$this->country = $deliveryAddressData->country;
 	}
 
 	/**
@@ -83,6 +92,7 @@ class DeliveryAddress {
 		$this->companyName = $deliveryAddressData->companyName;
 		$this->contactPerson = $deliveryAddressData->contactPerson;
 		$this->telephone = $deliveryAddressData->telephone;
+		$this->country = $deliveryAddressData->country;
 	}
 
 	/**
@@ -125,6 +135,13 @@ class DeliveryAddress {
 	 */
 	public function getTelephone() {
 		return $this->telephone;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public function getCountry() {
+		return $this->country;
 	}
 
 }

@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
+use SS6\ShopBundle\Model\Country\Country;
+
 class DeliveryAddressData {
 
 	/**
@@ -40,6 +42,11 @@ class DeliveryAddressData {
 	public $postcode;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public $country;
+
+	/**
 	 * @param bool $addressFilled
 	 * @param string|null $street
 	 * @param string|null $city
@@ -47,6 +54,7 @@ class DeliveryAddressData {
 	 * @param string|null $companyName
 	 * @param string|null $contactPerson
 	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Country\Country|null $country
 	 */
 	public function __construct(
 		$addressFilled = false,
@@ -55,7 +63,8 @@ class DeliveryAddressData {
 		$postcode = null,
 		$companyName = null,
 		$contactPerson = null,
-		$telephone = null
+		$telephone = null,
+		Country $country = null
 	) {
 		$this->addressFilled = $addressFilled;
 		$this->street = $street;
@@ -64,6 +73,7 @@ class DeliveryAddressData {
 		$this->companyName = $companyName;
 		$this->contactPerson = $contactPerson;
 		$this->telephone = $telephone;
+		$this->country = $country;
 	}
 
 	/**
@@ -78,6 +88,7 @@ class DeliveryAddressData {
 			$this->street = $deliveryAddress->getStreet();
 			$this->city = $deliveryAddress->getCity();
 			$this->postcode = $deliveryAddress->getPostcode();
+			$this->country = $deliveryAddress->getCountry();
 		} else {
 			$this->addressFilled = false;
 		}

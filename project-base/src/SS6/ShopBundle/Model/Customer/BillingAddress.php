@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Model\Country\Country;
 
 /**
  * @ORM\Table(name="billing_addresses")
@@ -76,6 +77,13 @@ class BillingAddress {
 	private $telephone;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
+	 */
+	private $country;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
 	 */
 	public function __construct(BillingAddressData $billingAddressData) {
@@ -89,10 +97,11 @@ class BillingAddress {
 			$this->companyTaxNumber = $billingAddressData->companyTaxNumber;
 		}
 		$this->telephone = $billingAddressData->telephone;
+		$this->country = $billingAddressData->country;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $billingAddressData
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
 	 */
 	public function edit(BillingAddressData $billingAddressData) {
 		$this->street = $billingAddressData->street;
@@ -109,6 +118,7 @@ class BillingAddress {
 			$this->companyTaxNumber = null;
 		}
 		$this->telephone = $billingAddressData->telephone;
+		$this->country = $billingAddressData->country;
 	}
 
 	/**
@@ -165,6 +175,13 @@ class BillingAddress {
 	 */
 	public function getTelephone() {
 		return $this->telephone;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public function getCountry() {
+		return $this->country;
 	}
 
 }

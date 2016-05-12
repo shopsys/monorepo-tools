@@ -47,6 +47,7 @@ class CustomerFacade {
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerService $customerService
+	 * @param \SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -167,6 +168,7 @@ class CustomerFacade {
 	}
 
 	/**
+	 * @param int $userId
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
 	 * @return \SS6\ShopBundle\Model\Customer\User
 	 */

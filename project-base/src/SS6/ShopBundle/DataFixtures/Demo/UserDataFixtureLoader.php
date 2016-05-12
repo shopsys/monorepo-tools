@@ -28,6 +28,11 @@ class UserDataFixtureLoader {
 	private $userDataFactory;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 */
+	private $countries;
+
+	/**
 	 * @param string $path
 	 * @param \SS6\ShopBundle\Component\Csv\CsvReader $csvReader
 	 * @param \SS6\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
@@ -39,12 +44,20 @@ class UserDataFixtureLoader {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 */
+	public function injectReferences(array $countries) {
+		$this->countries = $countries;
+	}
+
+	/**
 	 * @return  \SS6\ShopBundle\Model\Customer\CustomerData[]
 	 */
 	public function getCustomersData() {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
 
 		$rowId = 0;
+		$customersData = [];
 		foreach ($rows as $row) {
 			if ($rowId !== 0) {
 				$row = array_map([TransformString::class, 'emptyToNull'], $row);
@@ -62,7 +75,7 @@ class UserDataFixtureLoader {
 	 */
 	private function getCustomerDataFromCsvRow(array $row) {
 		$customerData = new CustomerData();
-		$domainId = $row[19];
+		$domainId = $row[21];
 		$userData = $this->userDataFactory->createDefault($domainId);
 		$billingAddressData = new BillingAddressData();
 
@@ -79,15 +92,17 @@ class UserDataFixtureLoader {
 		$billingAddressData->city = $row[9];
 		$billingAddressData->postcode = $row[10];
 		$billingAddressData->telephone = $row[11];
-		if ($row[12] === 'true') {
+		$billingAddressData->country = $this->getCountryByName($row[12]);
+		if ($row[13] === 'true') {
 			$deliveryAddressData = new DeliveryAddressData();
 			$deliveryAddressData->addressFilled = true;
-			$deliveryAddressData->city = $row[13];
-			$deliveryAddressData->companyName = $row[14];
-			$deliveryAddressData->contactPerson = $row[15];
-			$deliveryAddressData->postcode = $row[16];
-			$deliveryAddressData->street = $row[17];
-			$deliveryAddressData->telephone = $row[18];
+			$deliveryAddressData->city = $row[14];
+			$deliveryAddressData->companyName = $row[15];
+			$deliveryAddressData->contactPerson = $row[16];
+			$deliveryAddressData->postcode = $row[17];
+			$deliveryAddressData->street = $row[18];
+			$deliveryAddressData->telephone = $row[19];
+			$deliveryAddressData->country = $this->getCountryByName($row[20]);
 			$customerData->deliveryAddressData = $deliveryAddressData;
 		} else {
 			$customerData->deliveryAddressData = new DeliveryAddressData();
@@ -99,4 +114,20 @@ class UserDataFixtureLoader {
 
 		return $customerData;
 	}
+
+	/**
+	 * @param string $countryName
+	 * @return \SS6\ShopBundle\Model\Country\Country
+	 */
+	private function getCountryByName($countryName) {
+		foreach ($this->countries as $country) {
+			if ($country->getName() === $countryName) {
+				return $country;
+			}
+		}
+
+		$message = 'Country with name "' . $countryName . '" was not found.';
+		throw new \SS6\ShopBundle\Model\Country\Exception\CountryNotFoundException($message);
+	}
+
 }
