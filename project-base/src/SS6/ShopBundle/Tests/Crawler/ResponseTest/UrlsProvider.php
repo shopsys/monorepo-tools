@@ -71,6 +71,8 @@ class UrlsProvider {
 		'admin_article_saveordering',
 		// in TEST environment is different security configuration
 		'admin_logout',
+		// temporarily not tested until it will be optimized at US-1517
+		'admin_unit_delete',
 	];
 
 	/**
