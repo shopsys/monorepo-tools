@@ -16,61 +16,67 @@
 {% endblock %}
 
 {% block main_content %}
+	<div class="box-list">
+		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
+		<h1>{{ category.name|trans }}</h1>
 
-	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
-	<h1>{{ category.name|trans }}</h1>
-
-	{% if visibleChildren|length > 0 %}
-		<h2>{{ 'Seznam podkategorií'|trans }}</h2>
-		<ul class="list-categories">
-			{% for child in visibleChildren %}
-				<li class="list-categories__item">
-					<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-categories__item__block">
-						<span class="list-categories__item__image">
-							{% if imageExists(child) %}
-								{{ image(child) }}
-							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ child.name }}">
-							{% endif %}
-						</span>
-						<h3 class="list-categories__item__title">
-							{{ child.name }}
-						</h3>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	{% endif %}
-
-	{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
-
-	<div class="js-product-list-with-filter">
-		{% if paginationResult.results|length > 0 or filterFormSubmited %}
-			<div class="box-filter js-product-filter">
-				{{ productFilterForm.filterForm(
-					filterForm,
-					url('front_product_list', { id: category.id }),
-					url('front_product_list', { id: category.id }),
-					null,
-					'product_list',
-					productFilterCountData
-				) }}
-			</div>
+		{% if visibleChildren|length > 0 %}
+			<h2>{{ 'Seznam podkategorií'|trans }}</h2>
+			<ul class="list-categories">
+				{% for child in visibleChildren %}
+					<li class="list-categories__item">
+						<a href="{{ url('front_product_list', { id: child.id }) }}" class="list-categories__item__block">
+							<span class="list-categories__item__image">
+								{% if imageExists(child) %}
+									{{ image(child) }}
+								{% else %}
+									<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ child.name }}">
+								{% endif %}
+							</span>
+							<h3 class="list-categories__item__title">
+								{{ child.name }}
+							</h3>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
 		{% endif %}
 
-		<div class="js-product-list-ajax-filter-products-with-controls">
-			<div>
-				{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForList')) }}
-			</div>
-			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
-		</div>
-	</div>
+		{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-	<div class="js-category-description">
-		{{ categoryDomain.description|raw }}
-	</div>
-	<div class="js-category-description-load-more category-description-load-more display-none">
-		{{ 'Zobrazit více'|trans }}
+		<div class="js-product-list-with-filter">
+			{% if paginationResult.results|length > 0 or filterFormSubmited %}
+				<div class="box-filter js-product-filter">
+					{{ productFilterForm.filterForm(
+						filterForm,
+						url('front_product_list', { id: category.id }),
+						url('front_product_list', { id: category.id }),
+						null,
+						'product_list',
+						productFilterCountData
+					) }}
+				</div>
+			{% endif %}
+
+			<div class="js-product-list-ajax-filter-products-with-controls">
+				<div>
+					{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForList')) }}
+				</div>
+				{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+			</div>
+		</div>
+
+		<div class="box-list__description">
+			<p class="js-category-description box-list__description__text">
+				{{ categoryDomain.description|raw }}
+			</p>
+			<div class="box-list__description__more">
+				<span class="js-category-description-load-more category-description-load-more link-style box-list__description__more__btn">
+					{{ 'Zobrazit více'|trans }}
+				</span>
+			</div>
+		</div>
+
 	</div>
 
 {% endblock %}
