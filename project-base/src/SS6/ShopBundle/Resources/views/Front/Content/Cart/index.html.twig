@@ -53,7 +53,7 @@
 									{{ cartItemPrice.totalPrice.priceWithVat|price }}
 									{% if cartItemDiscount is not null %}
 										<div>
-											{{ 'Sleva' }}:
+											{{ 'Sleva'|trans }}:
 											{{ cartItemDiscount.priceWithVat|price }}
 										</div>
 									{% endif %}
@@ -80,7 +80,7 @@
 								{{ cartItemPrice.totalPrice.priceWithVat|price }}
 								{% if cartItemDiscount is not null %}
 									<div>
-										{{ 'Sleva' }}:
+										{{ 'Sleva'|trans }}:
 										{{ cartItemDiscount.priceWithVat|price }}
 									</div>
 								{% endif %}
