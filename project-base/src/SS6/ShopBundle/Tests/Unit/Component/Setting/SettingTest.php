@@ -144,9 +144,7 @@ class SettingTest extends PHPUnit_Framework_TestCase {
 			[3, []],
 		];
 
-		$entityManagerMock = $this->getMockBuilder(EntityManager::class)
-			->disableOriginalConstructor()
-			->getMock();
+		$entityManagerMock = $this->createDummyEntityManagerMock();
 
 		$settingValueRepositoryMock = $this->getMockBuilder(SettingValueRepository::class)
 			->disableOriginalConstructor()
