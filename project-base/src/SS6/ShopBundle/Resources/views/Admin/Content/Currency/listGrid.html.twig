@@ -23,14 +23,14 @@
 		<span class="form-edit-block__info">
 			{% if row is null %}
 				<span title="" class="js-tooltip c-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
-					<i class="svg svg-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
+					<i class="svg svg-question"></i>
 				</span>
 			{% elseif row.c.id != defaultCurrency.id %}
 				<span title="" class="js-tooltip c-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
 					'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
 					'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 				}) }}">
-					<i class="svg svg-question" id="aeaoofnhgocdbnbeljkmbjdmhbcokfdb-mousedown"></i>
+					<i class="svg svg-question"></i>
 				</span>
 			{% endif %}
 		</span>
