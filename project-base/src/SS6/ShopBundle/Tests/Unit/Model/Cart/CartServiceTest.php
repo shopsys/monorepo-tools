@@ -15,8 +15,7 @@ use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 class CartServiceTest extends FunctionalTestCase {
 
 	public function testCannotAddProductFloatQuantityToCart() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -29,8 +28,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testCannotAddProductZeroQuantityToCart() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -43,8 +41,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testCannotAddProductNegativeQuantityToCart() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -57,8 +54,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartMarksAddedProductAsNew() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -73,8 +69,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -90,8 +85,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductResultContainsAddedProductQuantity() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -106,8 +100,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -123,8 +116,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testCleanCartMakesCartEmpty() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$product = $this->createProduct();
@@ -139,8 +131,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	public function testMergeCartsReturnsCartWithSummedProducts() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
+		$cartService = $this->getCartService();
 
 		$product1 = $this->createProduct();
 		$product2 = $this->createProduct();
@@ -184,5 +175,12 @@ class CartServiceTest extends FunctionalTestCase {
 		$product = Product::create($productData);
 
 		return $product;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Cart\CartService
+	 */
+	private function getCartService() {
+		return $this->getContainer()->get(CartService::class);
 	}
 }
