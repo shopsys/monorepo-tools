@@ -16,9 +16,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testCannotAddProductFloatQuantityToCart() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItems = [];
 		$cart = new Cart($cartItems);
@@ -29,9 +29,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testCannotAddProductZeroQuantityToCart() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItems = [];
 		$cart = new Cart($cartItems);
@@ -42,9 +42,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testCannotAddProductNegativeQuantityToCart() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItems = [];
 		$cart = new Cart($cartItems);
@@ -55,9 +55,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testAddProductToCartMarksAddedProductAsNew() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItems = [];
 		$cart = new Cart($cartItems);
@@ -70,9 +70,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -86,9 +86,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testAddProductResultContainsAddedProductQuantity() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItems = [];
 		$cart = new Cart($cartItems);
@@ -101,9 +101,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
@@ -117,9 +117,9 @@ class CartServiceTest extends FunctionalTestCase {
 
 	public function testCleanCartMakesCartEmpty() {
 		$cartService = $this->getCartService();
+		$product = $this->createProduct();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
-		$product = $this->createProduct();
 
 		$cartItem = new CartItem($customerIdentifier, $product, 1, '0.0');
 		$cartItems = [$cartItem];
