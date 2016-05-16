@@ -63,7 +63,7 @@ class FriendlyUrl {
 		$this->entityId = $entityId;
 		$this->domainId = $domainId;
 		$this->slug = $slug;
-		$this->main = true;
+		$this->main = false;
 	}
 
 	/**
