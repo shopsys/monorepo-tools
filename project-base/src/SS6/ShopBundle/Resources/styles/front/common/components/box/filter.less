@@ -1,34 +1,38 @@
-/*
-Filter box
-================
-Box for filtering with many inputs.
-
-*/
+@box-filter-padding: 10px;
 
 .box-filter {
-	margin-bottom: 20px;
-	padding: 20px;
+	margin-bottom: @margin-gap;
+	padding: @box-filter-padding;
 
-	background: @bg-box;
-}
-
-.box-filter__group {
-	margin-bottom: 10px;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: flex-end;
-}
-
-.box-filter__group__item {
-	padding-right: 10px;
-	padding-bottom: 10px;
-	width: 100% / 4;
-}
-
-.box-filter__buttons {
-	padding: 10px;
-
-	background: lighten(@bg-box, 5%);
-	text-align: right;
 	border: 1px solid @color-border;
+
+	&__price {
+		margin-bottom: @margin-gap;
+	}
+
+	&__choice {
+		margin-bottom: @margin-gap;
+
+		&__title {
+			display: block;
+			margin-bottom: @margin-gap/2;
+
+			font-weight: bold;
+		}
+	}
+
+	&__parameters {
+		&__title {
+			display: block;
+			padding: @box-filter-padding;
+			margin: 0 -@box-filter-padding @margin-gap/2;
+
+			font-weight: bold;
+			background: @color-light;
+		}
+	}
+
+	&__action {
+		text-align: right;
+	}
 }

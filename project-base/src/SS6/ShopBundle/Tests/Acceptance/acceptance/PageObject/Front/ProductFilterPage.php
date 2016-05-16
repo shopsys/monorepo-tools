@@ -68,7 +68,7 @@ class ProductFilterPage extends AbstractPage {
 
 		foreach ($parameterItems as $item) {
 			try {
-				$itemLabel = $item->findElement(WebDriverBy::cssSelector('label'));
+				$itemLabel = $item->findElement(WebDriverBy::cssSelector('.js-product-filter-parameter-label'));
 
 				if (stripos($itemLabel->getText(), $parameterLabel) !== false) {
 					return $item;
@@ -88,12 +88,10 @@ class ProductFilterPage extends AbstractPage {
 	 * @return \Facebook\WebDriver\WebDriverElement
 	 */
 	private function getLabelElementByParameterValueText($parameterElement, $parameterValueText) {
-		$valueElements = $parameterElement->findElements(WebDriverBy::cssSelector('.js-product-filter-parameter-value'));
+		$labelElements = $parameterElement->findElements(WebDriverBy::cssSelector('.js-product-filter-parameter-value'));
 
-		foreach ($valueElements as $valueElement) {
+		foreach ($labelElements as $labelElement) {
 			try {
-				$labelElement = $valueElement->findElement(WebDriverBy::cssSelector('label'));
-
 				if (stripos($labelElement->getText(), $parameterValueText) !== false) {
 					return $labelElement;
 				}

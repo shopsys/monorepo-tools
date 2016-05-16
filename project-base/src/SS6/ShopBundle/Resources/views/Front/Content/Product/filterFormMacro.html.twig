@@ -12,56 +12,58 @@
 			/>
 		{% endif %}
 
-		<div class="box-filter__group">
-			<div class="box-filter__group__item">
-				{{ form_row(filterForm.minimalPrice, {label: 'Cena od'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
-			</div>
-
-			<div class="box-filter__group__item">
-				{{ form_row(filterForm.maximalPrice, {label: 'Cena do'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
-			</div>
-
+		<div class="box-filter__price">
+			{{ form_row(filterForm.minimalPrice, {label: 'Cena od'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+			{{ form_row(filterForm.maximalPrice, {label: 'Cena do'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 		</div>
 
-		<label>
-			{{ form_widget(filterForm.inStock) }}
-			{{ 'Jen zboží skladem'|trans }}
-			{% if productFilterCountData is not null %}
-				<span
-					class="js-product-filter-count"
-					data-form-id="{{ filterForm.inStock.vars.id }}"
-				>
-					({{ productFilterCountData.countInStock }})
+		<div class="box-filter__choice">
+			<label class="form-choice">
+				<span class="form-choice__input">
+					{{ form_widget(filterForm.inStock) }}
 				</span>
-			{% endif %}
-		</label>
+				<span class="form-choice__label">
+					{{ 'Jen zboží skladem'|trans }}
+					{% if productFilterCountData is not null %}
+						<span
+							class="js-product-filter-count"
+							data-form-id="{{ filterForm.inStock.vars.id }}"
+						>
+							({{ productFilterCountData.countInStock }})
+						</span>
+					{% endif %}
+				</span>
+			</label>
+		</div>
 
 		{% if filterForm.flags is empty %}
 			{% do filterForm.flags.setRendered %}
 		{% else %}
-			<div class="form-block">
-				<label class="form-block__label">{{ 'Příznaky'|trans }}:</label>
-				<div class="form-block__field">
+			<div class="box-filter__choice">
+				<span class="box-filter__choice__title">
+					{{ 'Příznaky'|trans }}:
+				</span>
+				<div class="box-filter__choice__inputs">
 					<div id="product_filter_form_flags">
 						{% for flagForm in filterForm.flags %}
-							<div class="form-choice form-choice--block">
-								<label>
-									{{ form_widget(flagForm, { attr: { class: 'form-choice__input'} }) }}
-									<span class="form-choice__text">
-										{{ flagForm.vars.label }}
-										{% if productFilterCountData is not null %}
-											<span
-												class="js-product-filter-count"
-												data-form-id="{{ flagForm.vars.id }}"
-											>
-												{% if not flagForm.vars.checked %}
-													({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
-												{% endif %}
-											</span>
-										{% endif %}
-									</span>
-								</label>
-							</div>
+							<label class="form-choice">
+								<span class="form-choice__input">
+									{{ form_widget(flagForm) }}
+								</span>
+								<span class="form-choice__label">
+									{{ flagForm.vars.label }}
+									{% if productFilterCountData is not null %}
+										<span
+											class="js-product-filter-count"
+											data-form-id="{{ flagForm.vars.id }}"
+										>
+											{% if not flagForm.vars.checked %}
+												({% if filterForm.flags.vars.data is not empty %}+{% endif %}{{ productFilterCountData.countByFlagId[flagForm.vars.value]|default(0) }})
+											{% endif %}
+										</span>
+									{% endif %}
+								</span>
+							</label>
 						{% endfor %}
 					</div>
 				</div>
@@ -71,30 +73,30 @@
 		{% if filterForm.brands is empty %}
 			{% do filterForm.brands.setRendered %}
 		{% else %}
-			<div class="form-block">
-				<label class="form-block__label">{{ 'Značka'|trans }}:</label>
-				<div class="form-block__field">
+			<div class="box-filter__choice">
+				<span class="box-filter__choice__title">
+					{{ 'Značka'|trans }}:
+				</span>
+				<div class="box-filter__choice__inputs">
 					<div id="product_filter_form_brands">
 						{% for brandForm in filterForm.brands %}
-							<div class="form-choice form-choice--block">
-								<label>
-									{{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
-									<span class="form-choice__text">
-										{{ brandForm.vars.label }}
-										{% if productFilterCountData is not null %}
-											<span
-												class="js-product-filter-count"
-												data-form-id="{{ brandForm.vars.id }}"
-											>
-												{% set brandCount = productFilterCountData.countByBrandId[brandForm.vars.value]|default(0) %}
-												{% if not brandForm.vars.checked %}
-													({% if filterForm.brands.vars.data is not empty and brandCount > 0 %}+{% endif %}{{ brandCount }})
-												{% endif %}
-											</span>
-										{% endif %}
-									</span>
-								</label>
-							</div>
+							<label class="form-choice">
+								{{ form_widget(brandForm, { attr: { class: 'form-choice__input'} }) }}
+								<span class="form-choice__label">
+									{{ brandForm.vars.label }}
+									{% if productFilterCountData is not null %}
+										<span
+											class="js-product-filter-count"
+											data-form-id="{{ brandForm.vars.id }}"
+										>
+											{% set brandCount = productFilterCountData.countByBrandId[brandForm.vars.value]|default(0) %}
+											{% if not brandForm.vars.checked %}
+												({% if filterForm.brands.vars.data is not empty and brandCount > 0 %}+{% endif %}{{ brandCount }})
+											{% endif %}
+										</span>
+									{% endif %}
+								</span>
+							</label>
 						{% endfor %}
 					</div>
 				</div>
@@ -104,53 +106,53 @@
 		{% if isSearch or filterForm.parameters is empty %}
 			{% do filterForm.parameters.setRendered %}
 		{% else %}
-			<div class="form-block">
-				<label class="form-block__label">{{ 'Parametry'|trans }}:</label>
-				<div class="form-block__field">
-					<div class="form-block__wrap" id="{{ filterForm.parameters.vars.id }}">
-						{% for parameterId, parameterForm in filterForm.parameters %}
-							<div class="form-block js-product-filter-parameter">
-								<label class="form-block__label">{{ parameterForm.vars.label }}:</label>
-								<div class="form-block__field">
-									<div id="{{ parameterForm.vars.id }}">
-										{% for parameterValueForm in parameterForm %}
-											<div class="form-choice form-choice--block js-product-filter-parameter-value">
-												<label>
-													{{ form_widget(parameterValueForm, { attr: { class: 'form-choice__input'} }) }}
-
-													<span class="form-choice__text">
-														{{ parameterValueForm.vars.label }}
-
-														{% if productFilterCountData is not null %}
-															<span
-																class="js-product-filter-count"
-																data-form-id="{{ parameterValueForm.vars.id }}"
-															>
-																{% if not parameterValueForm.vars.checked %}
-																	(
-																		{%- if parameterForm.vars.data is not empty %}+{% endif -%}
-																		{{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
-																	)
-																{% endif %}
-															</span>
+			<div class="box-filter__parameters">
+				<span class="box-filter__parameters__title">
+					{{ 'Parametry'|trans }}:
+				</span>
+				<div id="{{ filterForm.parameters.vars.id }}">
+					{% for parameterId, parameterForm in filterForm.parameters %}
+						<div class="js-product-filter-parameter">
+							<div class="box-filter__choice">
+								<span class="box-filter__choice__title js-product-filter-parameter-label">
+									{{ parameterForm.vars.label }}:
+								</span>
+								<div id="{{ parameterForm.vars.id }}" class="box-filter__choice__inputs">
+									{% for parameterValueForm in parameterForm %}
+										<label class="form-choice js-product-filter-parameter-value">
+											<span class="form-choice__input">
+												{{ form_widget(parameterValueForm) }}
+											</span>
+											<span class="form-choice__label">
+												{{ parameterValueForm.vars.label }}
+												{% if productFilterCountData is not null %}
+													<span
+														class="js-product-filter-count"
+														data-form-id="{{ parameterValueForm.vars.id }}"
+													>
+														{% if not parameterValueForm.vars.checked %}
+															(
+																{%- if parameterForm.vars.data is not empty %}+{% endif -%}
+																{{- productFilterCountData.countByParameterIdAndValueId[parameterId][parameterValueForm.vars.value]|default(0) -}}
+															)
 														{% endif %}
 													</span>
-												</label>
-											</div>
-										{% endfor %}
-									</div>
+												{% endif %}
+											</span>
+										</label>
+									{% endfor %}
 								</div>
 							</div>
-						{% endfor %}
-					</div>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		{% endif %}
 
-		<div class="box-filter__buttons">
+		<div class="box-filter__action">
 
 			<a class="btn js-product-filter-reset-button" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
-			{{ form_widget(filterForm.search, { label: 'Zobrazit výsledky'|trans, attr: {class: 'js-product-filter-show-result-button' } }) }}
+			{{ form_widget(filterForm.search, { label: 'Zobrazit výsledky'|trans, attr: {class: 'js-product-filter-show-result-button btn--success' } }) }}
 		</div>
 
 	{{ form_end(filterForm) }}
