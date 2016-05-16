@@ -8,7 +8,7 @@
 
 {% block main_content %}
 	<h1>{{ 'Mé objednávky'|trans }}</h1>
-	{% if orders|length == 0 %}700
+	{% if orders|length == 0 %}
 		{{ 'Dosud nemáte žádnou objednávku.'|trans }}
 	{% else %}
 		<div class="in-scroll">
