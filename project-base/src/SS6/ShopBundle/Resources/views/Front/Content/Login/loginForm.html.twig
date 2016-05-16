@@ -15,17 +15,15 @@
 
 		<h1>{{ 'Přihlášení'|trans }}</h1>
 
-		{{ form_row(form.email, {attr: {placeholder: 'Uživatelské jméno'|trans}}) }}
+		{{ form_row(form.email, {label: 'Uživatelské jméno'|trans} ) }}
 
-		{{ form_row(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+		{{ form_row(form.password, {label: 'Heslo'|trans} ) }}
 
-		<label>
-			{{ form_row(form.rememberMe, { label: 'Zapamatuj si mé přihlášení'|trans } ) }}
-			<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
-				data-toggle="tooltip" data-placement="right"
-				title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
-			 ></i>
-		</label>
+		{{ form_row(form.rememberMe, { label: 'Zapamatuj si mé přihlášení'|trans } ) }}
+		<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
+			data-toggle="tooltip" data-placement="right"
+			title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+		 ></i>
 
 		<dl class="form-line">
 			<dt></dt>
