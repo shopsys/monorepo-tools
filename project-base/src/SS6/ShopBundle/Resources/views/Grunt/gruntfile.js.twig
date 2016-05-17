@@ -72,16 +72,12 @@ module.exports = function(grunt) {
 
 		postcss: {
 			options: {
-				 map: {
-					inline: false,
-					annotation: 'web/assets/admin/styles/'
-				},
 				processors: [
 					require('autoprefixer')({browsers: ['last 3 versions', 'ios 6', 'ie 7', 'ie 8', 'ie 9']})
 				]
 			},
 			dist: {
-				src: 'web/assets/frontend/styles/*.css'
+				src: ['web/assets/frontend/styles/*.css', 'web/assets/admin/styles/*.css']
 			}
 		},
 
@@ -93,7 +89,7 @@ module.exports = function(grunt) {
 					overridesOnly: false
 				},
 				files: {
-						'web/assets/admin/styles/index_{{ cssVersion }}-ie8.css': 'web/assets/admin/styles/index_{{ cssVersion }}.css'
+					'web/assets/admin/styles/index_{{ cssVersion }}-ie8.css': 'web/assets/admin/styles/index_{{ cssVersion }}.css'
 				}
 			},
 
@@ -137,7 +133,7 @@ module.exports = function(grunt) {
 				cssOpts: {
 					functions: false,
 					cssClass: function (item) {
-							return '.' + item.name;
+						return '.' + item.name;
 					}
 				}
 			},
@@ -166,7 +162,7 @@ module.exports = function(grunt) {
 				cssOpts: {
 					functions: false,
 					cssClass: function (item) {
-							return '.' + item.name;
+						return '.' + item.name;
 					}
 				}
 			}
@@ -330,7 +326,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'postcss', 'legacssy']);
 
 	{% for domain in domains -%}
-		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
 	{% endfor -%}
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
 	grunt.registerTask('docs', ['styledocco']);
