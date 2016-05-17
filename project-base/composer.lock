@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a1cf515ce876ed0a439ec8dc7fb107b",
-    "content-hash": "c97397b560c310cc90dae95d33d12812",
+    "hash": "0e80e3e16cbe7d41cca8b513b182b1c7",
+    "content-hash": "55490f1b591fe1afdda265814c6b9902",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1457,7 +1457,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/JsFormValidatorBundle.git",
-                "reference": "bb2be7e"
+                "reference": "88ba9696c77da536fba0719f871963d61ec1d2bf"
             },
             "dist": {
                 "type": "zip",
@@ -2092,7 +2092,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/JMSTranslationBundle.git",
-                "reference": "527da12"
+                "reference": "527da1230ed11a85f62dda5a0c61e7f58c15924e"
             },
             "dist": {
                 "type": "zip",
@@ -4314,7 +4314,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/Routing.git",
-                "reference": "bb25b51744"
+                "reference": "a068c329cc5250652024ed8f919b7aa2cf30f8fd"
             },
             "dist": {
                 "type": "zip",
@@ -4366,7 +4366,7 @@
             "support": {
                 "source": "https://github.com/sustmi/Routing/tree/master"
             },
-            "time": "2015-09-30 09:50:25"
+            "time": "2015-09-19 14:58:43"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -4742,7 +4742,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/jparser.git",
-                "reference": "c37f4c6"
+                "reference": "c37f4c6300fccdd2658c737fafecc0da7ef7ed7d"
             },
             "dist": {
                 "type": "zip",
@@ -5495,16 +5495,16 @@
         },
         {
             "name": "se/selenium-server-standalone",
-            "version": "v2.48.2",
+            "version": "v2.53.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sveneisenschmidt/selenium-server-standalone.git",
-                "reference": "2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40"
+                "reference": "b67b6b933edce2ffa26f075247a05c464a335cea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40",
-                "reference": "2e52d21fe1db34b65b3b7c0e9b2e5ff9ba670f40",
+                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/b67b6b933edce2ffa26f075247a05c464a335cea",
+                "reference": "b67b6b933edce2ffa26f075247a05c464a335cea",
                 "shasum": ""
             },
             "require-dev": {
@@ -5530,7 +5530,7 @@
                 "selenium",
                 "testing"
             ],
-            "time": "2016-01-05 13:12:30"
+            "time": "2016-03-21 15:02:15"
         },
         {
             "name": "shopsys/coding-standards",
