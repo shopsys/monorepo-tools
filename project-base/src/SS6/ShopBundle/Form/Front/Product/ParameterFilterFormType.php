@@ -64,7 +64,7 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate', 'class' => 'form-block__wrap'],
+			'attr' => ['novalidate' => 'novalidate'],
 		]);
 	}
 
