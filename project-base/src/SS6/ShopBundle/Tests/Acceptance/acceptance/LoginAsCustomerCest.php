@@ -13,6 +13,7 @@ class LoginAsCustomerCest {
 		$me->clickByText('Přihlásit za uživatele');
 		$me->switchToLastOpenedWindow();
 		$me->seeCurrentPageEquals('/');
+		$me->see('Pozor! Jste jako administrátor přihlášen za zákazníka.');
 		$me->see('Igor Anpilogov');
 	}
 

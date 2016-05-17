@@ -310,6 +310,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		return serialize([
 			$this->id,
 			$this->email,
+			// When unserialized user has empty password,
+			// then UsernamePasswordToken is reloaded and ROLE_ADMIN_AS_CUSTOMER is lost.
+			$this->password,
 			time(), // lastActivity
 			$this->domainId,
 		]);
@@ -322,6 +325,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 		list(
 			$this->id,
 			$this->email,
+			$this->password,
 			$timestamp,
 			$this->domainId
 		) = unserialize($serialized);
