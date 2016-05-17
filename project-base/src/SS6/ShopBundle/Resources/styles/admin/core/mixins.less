@@ -2,23 +2,19 @@
 *  MIXINS - OUR BASE
 **************************************************************************************/
 
-// Resetování ul nebo ol listu
 .reset-ul() {
 	padding: 0;
 	margin: 0;
 	list-style: none;
-} // .reset-ul
+}
 
-
-// Nastavení centrování elementu, defaultně i horizontáně, parametrem lze horizontální změnit
 .center-it(@text-align: center) {
 	display: table-cell;
 	vertical-align: middle;
 
 	text-align: @text-align;
-} // .center-it
+}
 
-// Centrování obrázku
 .center-image(@border: 0) {
 	position: absolute;
 	top: @border;
@@ -28,8 +24,10 @@
 	margin: auto;
 	width: auto;
 	height: auto;
+	max-width: 100%;
+	max-height: 100%;
 }
-// Centrování obrázku s nastavenou sirkou a vyskou
+
 .center-image-sized(@border: 0) {
 	position: absolute;
 	top: @border;
@@ -39,15 +37,6 @@
 	margin: auto;
 }
 
-
-// Nastavení transition délka např 0.2s, a funkce např linear - defaultně nastavení z variables
-.set-transition(@this-time: @transition-time, @this-function: @transition) {
-	transition-timing-function: @this-function !important;
-	transition-duration: @this-time !important;
-} // .set-transition
-
-
-// Clearfix
 .cfx() {
 	*zoom:1;
 
@@ -61,15 +50,12 @@
 	}
 }
 
-
-// Nastavení background image, cesta do design se nastavuje sama, dále pozice a repeat, default hodnoty nastaveny
 .background(@background-url: none, @background-position: 0 0, @background-repeat: no-repeat) {
 	background-image: url('@{path-design}/@{background-url}');
 	background-repeat: @background-repeat;
 	background-position: @background-position;
 }
 
-// Skrytí scrollbaru ve všech prohlížečích
 .scrollbar-hide() {
 	overflow: auto;
 	-ms-overflow-style: none;
@@ -80,22 +66,17 @@
 	}
 }
 
-
-// Nastavuje výšku řádku a počet řádků, kolik si element bude udržovat a kde text usekne
 .eliminate-lines(@height-line, @count-line) {
 	height: @height-line * @count-line;
 	line-height: @height-line;
 	overflow: hidden;
 }
 
-
-// Nastavuje elementu stejnou výšku a stejnou výšku řádku
 .h-lh(@height) {
 	height: @height;
 	line-height: @height;
 }
 
-// Nastavení pro fontface, načte font, stačí mu dodat název a  název souboru, cesta je nastavena z variables
 .font-face(@font-name, @font-file, @font-weight: '400', @font-style: 'normal') {
 
 	@font-face {
@@ -110,254 +91,16 @@
 		font-style: @font-style;
 
 	}
-  	@media screen and (-webkit-min-device-pixel-ratio:0) {
-  		@font-face {
-	  		font-family: '@{font-name}';
-		  	src: url('@{path-font}/@{font-file}.svg') format('svg');
-	  	}
-  	}
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		@font-face {
+			font-family: '@{font-name}';
+			src: url('@{path-font}/@{font-file}.svg') format('svg');
+		}
+	}
 
 }
 
-
-/*************************************************************************************
-*  MIXINS - CLASSIC BASE
-**************************************************************************************/
-
-// Border radius
-.border-radius(@radius) {
-	-webkit-border-radius: @radius;
-	-moz-border-radius: @radius;
-	border-radius: @radius;
-}
-
-// Box shadow
-.box-shadow(@shadow) {
-	-webkit-box-shadow: @shadow;
-	-moz-box-shadow: @shadow;
-	box-shadow: @shadow;
-}
-
-// Box double shadow
-.box-double-shadow(@shadow, @shadow2) {
-	-webkit-box-shadow: @shadow, @shadow2;
-	-moz-box-shadow: @shadow, @shadow2;
-	box-shadow: @shadow, @shadow2;
-}
-
-
-// Gradient
-.gradient(@start-color, @end-color) {
-	background: @start-color;
-	background: -moz-linear-gradient(top, @start-color 0%, @end-color 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start-color), color-stop(100%,@end-color));
-	background: -webkit-linear-gradient(top, @start-color 0%,@end-color 100%);
-	background: -o-linear-gradient(top, @start-color 0%,@end-color 100%);
-	background: -ms-linear-gradient(top, @start-color 0%,@end-color 100%);
-	background: linear-gradient(to bottom, @start-color 0%,@end-color 100%);
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-	-ms-filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-}
-
-// Gradient s nastavením procent
-.gradient(@start-color, @start-perc: 0%, @end-color, @end-perc: 100%) {
-	background: @start-color;
-	background: -moz-linear-gradient(top, @start-color @start-perc, @end-color @end-perc);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(@start-perc,@start-color), color-stop(@end-perc,@end-color));
-	background: -webkit-linear-gradient(top, @start-color @start-perc,@end-color @end-perc);
-	background: -o-linear-gradient(top, @start-color @start-perc,@end-color @end-perc);
-	background: -ms-linear-gradient(top, @start-color @start-perc,@end-color @end-perc);
-	background: linear-gradient(to bottom, @start-color @start-perc,@end-color @end-perc);
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-	-ms-filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-}
-
-// Gradient horizontální
-.gradient-horizontal(@start-color, @end-color) {
-	background: @start-color;
-	background: -moz-linear-gradient(left, @start-color 0%, @end-color 100%);
-	background: -webkit-gradient(linear, left top, right top, color-stop(0%,@start-color), color-stop(100%,@end-color));
-	background: -webkit-linear-gradient(left, @start-color 0%,@end-color 100%);
-	background: -o-linear-gradient(left, @start-color 0%,@end-color 100%);
-	background: -ms-linear-gradient(left, @start-color 0%,@end-color 100%);
-	background: linear-gradient(to right, @start-color 0%,@end-color 100%);
-	filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-	-ms-filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='@{start-color}', endColorstr='@{end-color}', GradientType=0)";
-}
-
-.box-sizing(@sizing) {
-	-webkit-box-sizing: @sizing;
-	-moz-box-sizing: @sizing;
-	box-sizing: @sizing;
-}
-
-// Zápis width a height - čtverec
-.size(@square) {
-	width: @square;
-	height: @square;
-}
-
-// Zápis width a height - obdélník
-.size(@width, @height) {
-	width: @width;
-	height: @height;
-}
-
-.transition(@transition) {
-	-webkit-transition: @transition;
-	-moz-transition: @transition;
-	-o-transition: @transition;
-	transition: @transition;
-}
-
-.transform(@transform) {
-	-webkit-transform: @transform;
-	-moz-transform: @transform;
-	-ms-transform: @transform;
-	-o-transform: @transform;
-	transform: @transform;
-}
-
-.rotate(@degrees) {
-	-webkit-transform: rotate(@degrees);
-	-moz-transform: rotate(@degrees);
-	-ms-transform: rotate(@degrees);
-	-o-transform: rotate(@degrees);
-	transform: rotate(@degrees);
-}
-
-.scale(@ratio) {
-	-webkit-transform: scale(@ratio);
-	-moz-transform: scale(@ratio);
-	-ms-transform: scale(@ratio);
-	-o-transform: scale(@ratio);
-	transform: scale(@ratio);
-}
-
-.translate(@x, @y) {
-	-webkit-transform: translate(@x, @y);
-	-moz-transform: translate(@x, @y);
-	-ms-transform: translate(@x, @y);
-	-o-transform: translate(@x, @y);
-	transform: translate(@x, @y);
-}
-
-.skew(@x, @y) {
-	-webkit-transform: skew(@x, @y);
-	-moz-transform: skew(@x, @y);
-	-ms-transform: skew(@x, @y);
-	-o-transform: skew(@x, @y);
-	transform: skew(@x, @y);
-}
-
-.translate3d(@x, @y, @z) {
-	-webkit-transform: translate3d(@x, @y, @z);
-	-moz-transform: translate3d(@x, @y, @z);
-	-o-transform: translate3d(@x, @y, @z);
-	transform: translate3d(@x, @y, @z);
-}
-
-// Backface visibility - oprava pro 3d transformace
-.backface-visibility(@visibility){
-	-webkit-backface-visibility: @visibility;
-	-moz-backface-visibility: @visibility;
-	backface-visibility: @visibility;
-}
-
-// Opacity
-.opacity(@opacity) {
-	opacity: @opacity / 100;
-	filter: ~"alpha(opacity=@{opacity})";
-}
-
-// převod na rgba
-.rgba(@color, @opacity){
-	@r:red(@color);
-	@g:green(@color);
-	@b:blue(@color);
-	background-color: @color;
-	background-color: rgba(@r,@g,@b,@opacity);
-}
-
-.animation(@animation) {
-	animation: @animation;
-	-moz-animation: @animation;
-	-webkit-animation: @animation;
-}
-
-// Background clip
-.background-clip(@clip) {
-	background-clip: @clip;
-	-moz-background-clip: @clip;
-	-webkit-background-clip: @clip;
-}
-
-.flex() {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flexbox;
-	display: -ms-flex;
-	display: flex;
-}
-
-.flex-wrap(@wrap: nowrap) {
-	-webkit-box-wrap: @wrap;
-	--webkit-flex-wrap: @wrap;
-	--moz-flex-wrap: @wrap;
-	--ms-flex-wrap: @wrap;
-	flex-wrap: @wrap;
-}
-
-.flex-align-items(@align: stretch) {
-	-webkit-align-items: @align;
-	--moz-align-items: @align;
-	--ms-align-items: @align;
-	align-items: @align;
-}
-
-.flex-order(@order) {
-	-webkit-box-ordinal-group: @order;
-	--moz-box-ordinal-group: @order;
-	--ms-flex-order: @order;
-	--webkit-order: @order;
-	order: @order;
-}
-
-.flex-grow(@grow: 1) {
-	-webkit-flex-grow: @grow;
-	flex-grow: @grow;
-}
-
-.flex-justify(@justify: space-between) {
-	justify-content: @justify;
-}
-
-.flex-basis(@base: 0) {
-	flex-basis: @base;
-}
-
-.flex-direction(@direction: row) {
-	flex-direction: @direction;
-}
-
-.width-calc(@equation, @fallback) {
-	width: @fallback;
-	width: ~"-webkit-calc(@{equation})";
-	width: ~"-moz-calc(@{equation})";
-	width: ~"calc(@{equation})";
-}
-
-
-/*************************************************************************************
-*  MIXINS - DRAWING ARROWS
-**************************************************************************************/
-
-
-// Náhrada za before, nastavuje hlasické nastavení pro before bez ikonky s možností nastavení pozadí
-// hodí se pro případ, kdy chceme udělat útvar bez ikonky, nebo pozadi s pismem, popř tímhle něco zakrýt
-.after-c(@width, @height, @bg: transparent, @content: '' , @left: 0, @top: 0) {
+.after-content(@width, @height, @bg: transparent, @content: '' , @left: 0, @top: 0) {
 	position: relative;
 
 	&:after {
@@ -370,10 +113,10 @@
 		height: @height;
 		background: @bg;
 	}
-} // .after
+}
 
 .draw-arrow-right(@size, @bg, @pos-x, @pos-y) {
-	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
 	&:after {
 		border-left: @size solid @bg;
@@ -383,7 +126,7 @@
 }
 
 .draw-arrow-left(@size, @bg, @pos-x, @pos-y) {
-	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
 	&:after {
 		border-right: @size solid @bg;
@@ -393,7 +136,7 @@
 }
 
 .draw-arrow-top(@size, @bg, @pos-x, @pos-y) {
-	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
 	&:after {
 		border-bottom: @size solid @bg;
@@ -403,7 +146,7 @@
 }
 
 .draw-arrow-bottom(@size, @bg, @pos-x, @pos-y) {
-	.after-c(0, 0, transparent, '', @pos-x, @pos-y);
+	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
 	&:after {
 		border-top: @size solid @bg;

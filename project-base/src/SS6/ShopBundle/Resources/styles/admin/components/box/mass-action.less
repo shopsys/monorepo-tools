@@ -13,12 +13,12 @@
 		border: 1px solid @color-border-dark;
 		cursor: pointer;
 
-		.border-radius(5px);
+		border-radius: 5px;
 
 		.active & {
 			border-bottom-color: @color-f;
 
-			.border-radius(5px 5px 0 0);
+			border-radius: 5px 5px 0 0;
 		}
 
 		&__icon {
@@ -30,7 +30,7 @@
 			color: @color-primary;
 
 			.active & {
-				.rotate(180deg);
+				transform: rotate(180deg);
 			}
 		}
 	}
@@ -62,15 +62,14 @@
 
 		&__line {
 			margin: 5px -5px;
-			.flex();
+			display: flex;
 
 			&--submit {
 				text-align: right;
 			}
 
 			&__item {
-				.flex-basis();
-				.flex-grow(1);
+				flex: 1;
 				padding: 0 5px;
 
 				select, input {
