@@ -127,10 +127,6 @@ class OrderController extends AdminBaseController {
 					]
 				);
 				return $this->redirectToRoute('admin_order_list');
-			} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $e) {
-				$this->getFlashMessageSender()->addErrorFlash(
-					t('Zadaný stav objednávky nebyl nalezen, prosím překontrolujte zadané údaje')
-				);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 				$this->getFlashMessageSender()->addErrorFlash(
 					t('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje')
