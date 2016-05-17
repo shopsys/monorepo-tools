@@ -75,7 +75,16 @@ class UploadedFileExtension extends Twig_Extension {
 		$fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfo($filepath);
 
 		if ($fileThumbnailInfo->getIconType() !== null) {
-			return '<i class="fa fa-' . $fileThumbnailInfo->getIconType() . ' fa-5x"></i>';
+			$classes = [
+				'svg',
+				'svg-file-' . $fileThumbnailInfo->getIconType(),
+				'list-images__item__image__type',
+				'list-images__item__image__type--' . $fileThumbnailInfo->getIconType(),
+				'h-text-no-decoration',
+				'h-cursor-pointer',
+			];
+
+			return '<i class="' . implode(' ', $classes) . '"></i>';
 		} else {
 			return '<img src="' . $fileThumbnailInfo->getImageUri() . '"/>';
 		}
