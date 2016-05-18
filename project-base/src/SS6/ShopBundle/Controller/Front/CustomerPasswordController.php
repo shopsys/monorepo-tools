@@ -4,8 +4,8 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
-use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
+use SS6\ShopBundle\Form\Front\Customer\Password\NewPasswordFormType;
+use SS6\ShopBundle\Form\Front\Customer\Password\ResetPasswordFormType;
 use SS6\ShopBundle\Model\Customer\CustomerPasswordFacade;
 use SS6\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\HttpFoundation\Request;

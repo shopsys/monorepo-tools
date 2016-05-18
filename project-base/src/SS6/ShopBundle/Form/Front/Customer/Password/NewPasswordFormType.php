@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Registration;
+namespace SS6\ShopBundle\Form\Front\Customer\Password;
 
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
