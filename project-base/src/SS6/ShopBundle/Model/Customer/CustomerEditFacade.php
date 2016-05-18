@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Customer;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\CustomerService;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
-use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
@@ -33,11 +32,6 @@ class CustomerEditFacade {
 	private $orderService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\RegistrationService
-	 */
-	private $registrationService;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CustomerService
 	 */
 	private $customerService;
@@ -52,7 +46,6 @@ class CustomerEditFacade {
 	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
-	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerService $customerService
 	 */
 	public function __construct(
@@ -60,7 +53,6 @@ class CustomerEditFacade {
 		OrderRepository $orderRepository,
 		UserRepository $userRepository,
 		OrderService $orderService,
-		RegistrationService $registrationService,
 		CustomerService $customerService,
 		CustomerMailFacade $customerMailFacade
 	) {
@@ -68,7 +60,6 @@ class CustomerEditFacade {
 		$this->orderRepository = $orderRepository;
 		$this->userRepository = $userRepository;
 		$this->orderService = $orderService;
-		$this->registrationService = $registrationService;
 		$this->customerService = $customerService;
 		$this->customerMailFacade = $customerMailFacade;
 	}
@@ -90,7 +81,7 @@ class CustomerEditFacade {
 
 		$billingAddress = new BillingAddress(new BillingAddressData());
 
-		$user = $this->registrationService->create(
+		$user = $this->customerService->create(
 			$userData,
 			$billingAddress,
 			null,
@@ -116,7 +107,7 @@ class CustomerEditFacade {
 		$this->em->persist($billingAddress);
 		$toFlush[] = $billingAddress;
 
-		$deliveryAddress = $this->registrationService->createDeliveryAddress($customerData->deliveryAddressData);
+		$deliveryAddress = $this->customerService->createDeliveryAddress($customerData->deliveryAddressData);
 		if ($deliveryAddress !== null) {
 			$this->em->persist($deliveryAddress);
 			$toFlush[] = $deliveryAddress;
@@ -127,7 +118,7 @@ class CustomerEditFacade {
 			$customerData->userData->domainId
 		);
 
-		$user = $this->registrationService->create(
+		$user = $this->customerService->create(
 			$customerData->userData,
 			$billingAddress,
 			$deliveryAddress,
@@ -153,12 +144,12 @@ class CustomerEditFacade {
 	private function edit($userId, CustomerData $customerData) {
 		$user = $this->userRepository->getUserById($userId);
 
-		$this->registrationService->edit($user, $customerData->userData);
+		$this->customerService->edit($user, $customerData->userData);
 
 		$user->getBillingAddress()->edit($customerData->billingAddressData);
 
 		$oldDeliveryAddress = $user->getDeliveryAddress();
-		$deliveryAddress = $this->registrationService->editDeliveryAddress(
+		$deliveryAddress = $this->customerService->editDeliveryAddress(
 			$user,
 			$customerData->deliveryAddressData,
 			$oldDeliveryAddress
@@ -186,7 +177,7 @@ class CustomerEditFacade {
 			$customerData->userData->email,
 			$customerData->userData->domainId
 		);
-		$this->registrationService->changeEmail($user, $customerData->userData->email, $userByEmailAndDomain);
+		$this->customerService->changeEmail($user, $customerData->userData->email, $userByEmailAndDomain);
 
 		$this->em->flush();
 
