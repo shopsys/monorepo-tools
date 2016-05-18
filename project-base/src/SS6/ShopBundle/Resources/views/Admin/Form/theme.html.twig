@@ -620,6 +620,10 @@
 {%- endblock choice_widget_options %}
 
 {% block choice_widget_expanded %}
+	{% if isSimple|default(false) == false %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+	{% endif %}
 	{% spaceless %}
 		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-choice-list')|trim}) %}
 		<div {{ block('widget_container_attributes') }}>
@@ -634,10 +638,20 @@
 			{% endfor %}
 		</div>
 	{% endspaceless %}
-	{{- block('appendix_block') -}}
+	{% if isSimple|default(false) == false %}
+			</div>
+			{{- block('appendix_block') -}}
+		</div>
+	{% else %}
+		{{- block('appendix_block') -}}
+	{% endif %}
 {% endblock choice_widget_expanded %}
 
 {% block yes_no_widget %}
+	{% if isSimple|default(false) == false %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+	{% endif %}
 	<div {{ block('widget_container_attributes') }}>
 		{% for child in form %}
 			{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice')|trim}) %}
@@ -646,8 +660,14 @@
 				{{ child.vars.label }}
 			</label>
 		{% endfor %}
-		{{- block('appendix_block') -}}
 	</div>
+	{% if isSimple|default(false) == false %}
+			</div>
+			{{- block('appendix_block') -}}
+		</div>
+	{% else %}
+		{{- block('appendix_block') -}}
+	{% endif %}
 {% endblock yes_no_widget %}
 
 {% block domain_widget %}
