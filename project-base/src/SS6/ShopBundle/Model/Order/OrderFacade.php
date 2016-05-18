@@ -9,7 +9,7 @@ use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Localization\Localization;
@@ -105,9 +105,9 @@ class OrderFacade {
 	private $cartFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
-	private $customerEditFacade;
+	private $customerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
@@ -144,7 +144,7 @@ class OrderFacade {
 		AdministratorFrontSecurityFacade $administratorFrontSecurityFacade,
 		CurrentPromoCodeFacade $currentPromoCodeFacade,
 		CartFacade $cartFacade,
-		CustomerEditFacade $customerEditFacade,
+		CustomerFacade $customerFacade,
 		CurrentCustomer $currentCustomer,
 		OrderPreviewFactory $orderPreviewFactory,
 		OrderProductFacade $orderProductFacade,
@@ -164,7 +164,7 @@ class OrderFacade {
 		$this->administratorFrontSecurityFacade = $administratorFrontSecurityFacade;
 		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 		$this->cartFacade = $cartFacade;
-		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFacade = $customerFacade;
 		$this->currentCustomer = $currentCustomer;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->orderProductFacade = $orderProductFacade;
@@ -221,7 +221,7 @@ class OrderFacade {
 		$this->cartFacade->cleanCart();
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 		if ($user instanceof User) {
-			$this->customerEditFacade->amendCustomerDataFromOrder($user, $order);
+			$this->customerFacade->amendCustomerDataFromOrder($user, $order);
 		}
 
 		return $order;

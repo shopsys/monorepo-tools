@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Controller\Front;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\UserDataFactory;
 use SS6\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\Form\FormError;
@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 class RegistrationController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
-	private $customerEditFacade;
+	private $customerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\UserDataFactory
@@ -36,12 +36,12 @@ class RegistrationController extends FrontBaseController {
 	public function __construct(
 		Domain $domain,
 		UserDataFactory $userDataFactory,
-		CustomerEditFacade $customerEditFacade,
+		CustomerFacade $customerFacade,
 		LoginService $loginService
 	) {
 		$this->domain = $domain;
 		$this->userDataFactory = $userDataFactory;
-		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFacade = $customerFacade;
 		$this->loginService = $loginService;
 	}
 
@@ -58,7 +58,7 @@ class RegistrationController extends FrontBaseController {
 			$userData->domainId = $this->domain->getId();
 
 			try {
-				$user = $this->customerEditFacade->register($userData);
+				$user = $this->customerFacade->register($userData);
 
 				$this->loginService->loginUser($user, $request);
 

@@ -7,7 +7,7 @@ use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\UserData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -75,8 +75,8 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
-		$customerEditFacade = $this->getContainer()->get(CustomerEditFacade::class);
-		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
+		$customerFacade = $this->getContainer()->get(CustomerFacade::class);
+		/* @var $customerFacade \SS6\ShopBundle\Model\Customer\CustomerFacade */
 
 		$pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'));
 		$pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -88,7 +88,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 
 		$userData->pricingGroup = $pricingGroupToDelete;
 		$customerData = new CustomerData($userData);
-		$customerEditFacade->editByAdmin($user->getId(), $customerData);
+		$customerFacade->editByAdmin($user->getId(), $customerData);
 
 		$pricingGroupFacade->delete($pricingGroupToDelete->getId(), $pricingGroupToReplaceWith->getId());
 

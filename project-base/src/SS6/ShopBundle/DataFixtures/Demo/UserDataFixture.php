@@ -8,7 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -34,10 +34,10 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	 * @param string $referenceName
 	 */
 	private function createCustomer(CustomerData $customerData, $referenceName = null) {
-		$customerEditFacade = $this->get(CustomerEditFacade::class);
-		/* @var $customerEditFacade \SS6\ShopBundle\Model\Customer\CustomerEditFacade */
+		$customerFacade = $this->get(CustomerFacade::class);
+		/* @var $customerFacade \SS6\ShopBundle\Model\Customer\CustomerFacade */
 
-		$user = $customerEditFacade->create($customerData);
+		$user = $customerFacade->create($customerData);
 		$this->addReference($referenceName, $user);
 	}
 

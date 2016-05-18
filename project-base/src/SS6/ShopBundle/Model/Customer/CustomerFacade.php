@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Order\OrderRepository;
 use SS6\ShopBundle\Model\Order\OrderService;
 
-class CustomerEditFacade {
+class CustomerFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

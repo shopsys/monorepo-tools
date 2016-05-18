@@ -9,7 +9,7 @@ use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\UserDataFactory;
 
@@ -34,7 +34,7 @@ class UserDataFixture {
 	private $sqlLoggerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerEditFacade;
 
@@ -57,7 +57,7 @@ class UserDataFixture {
 		EntityManager $em,
 		Domain $domain,
 		SqlLoggerFacade $sqlLoggerFacade,
-		CustomerEditFacade $customerEditFacade,
+		CustomerFacade $customerEditFacade,
 		UserDataFactory $userDataFactory,
 		Faker $faker,
 		PersistentReferenceFacade $persistentReferenceFacade
