@@ -1,4 +1,5 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% set showHeading = false %}
 
 {% block title %}- {{ 'Karta zboží'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
@@ -28,7 +29,6 @@
 {% block breadcrumb %}{% endblock %}
 
 {% block main_content %}
-
 	{{ form_start(form) }}
 		<div id="product_edit_form_productData"></div>
 		{{ form_errors(form) }}
