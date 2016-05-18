@@ -44,8 +44,8 @@ front_registration_register:
 
 front_registration_reset_password:
   pattern: /forgotten-password/
-  defaults: { _controller: SS6ShopBundle:Front\Registration:resetPassword }
+  defaults: { _controller: SS6ShopBundle:Front\CustomerPassword:resetPassword }
 
 front_registration_set_new_password:
   pattern: /new-password/
-  defaults: { _controller: SS6ShopBundle:Front\Registration:setNewPassword }
+  defaults: { _controller: SS6ShopBundle:Front\CustomerPassword:setNewPassword }
