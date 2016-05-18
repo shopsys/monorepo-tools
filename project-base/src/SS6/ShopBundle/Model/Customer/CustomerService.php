@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Order;
 
-class CustomerEditService {
+class CustomerService {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Customer\User $user

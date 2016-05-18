@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
-use SS6\ShopBundle\Model\Customer\CustomerEditService;
+use SS6\ShopBundle\Model\Customer\CustomerService;
 use SS6\ShopBundle\Model\Customer\DeliveryAddress;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use SS6\ShopBundle\Model\Customer\User;
@@ -19,13 +19,13 @@ use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
-class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
+class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testGetAmendedCustomerDataByOrderWithoutChanges() {
-		$customerEditService = new CustomerEditService();
+		$customerService = new CustomerService();
 
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
@@ -86,7 +86,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			'companyTaxNumber'
 		);
 
-		$customerData = $customerEditService->getAmendedCustomerDataByOrder($user, $order);
+		$customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
 
 		$this->assertEquals($userData, $customerData->userData);
 		$this->assertEquals($billingAddressData, $customerData->billingAddressData);
@@ -97,7 +97,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testGetAmendedCustomerDataByOrder() {
-		$customerEditService = new CustomerEditService();
+		$customerService = new CustomerService();
 
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
@@ -149,7 +149,7 @@ class CustomerEditServiceTest extends PHPUnit_Framework_TestCase {
 			$order->getDeliveryTelephone()
 		);
 
-		$customerData = $customerEditService->getAmendedCustomerDataByOrder($user, $order);
+		$customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
 
 		$this->assertEquals($userData, $customerData->userData);
 		$this->assertEquals($deliveryAddressData, $customerData->deliveryAddressData);

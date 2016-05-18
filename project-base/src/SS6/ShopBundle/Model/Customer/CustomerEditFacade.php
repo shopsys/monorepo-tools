@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Customer\CustomerEditService;
+use SS6\ShopBundle\Model\Customer\CustomerService;
 use SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
 use SS6\ShopBundle\Model\Customer\RegistrationService;
 use SS6\ShopBundle\Model\Order\Order;
@@ -38,9 +38,9 @@ class CustomerEditFacade {
 	private $registrationService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditService
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerService
 	 */
-	private $customerEditService;
+	private $customerService;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade
@@ -53,7 +53,7 @@ class CustomerEditFacade {
 	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
 	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
 	 * @param \SS6\ShopBundle\Model\Customer\RegistrationService $registrationService
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerEditService $customerEditService
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerService $customerService
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -61,7 +61,7 @@ class CustomerEditFacade {
 		UserRepository $userRepository,
 		OrderService $orderService,
 		RegistrationService $registrationService,
-		CustomerEditService $customerEditService,
+		CustomerService $customerService,
 		CustomerMailFacade $customerMailFacade
 	) {
 		$this->em = $em;
@@ -69,7 +69,7 @@ class CustomerEditFacade {
 		$this->userRepository = $userRepository;
 		$this->orderService = $orderService;
 		$this->registrationService = $registrationService;
-		$this->customerEditService = $customerEditService;
+		$this->customerService = $customerService;
 		$this->customerMailFacade = $customerMailFacade;
 	}
 
@@ -223,7 +223,7 @@ class CustomerEditFacade {
 	public function amendCustomerDataFromOrder(User $user, Order $order) {
 		$this->edit(
 			$user->getId(),
-			$this->customerEditService->getAmendedCustomerDataByOrder($user, $order)
+			$this->customerService->getAmendedCustomerDataByOrder($user, $order)
 		);
 
 		$this->em->flush();
