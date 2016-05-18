@@ -2,8 +2,12 @@
 
 {% block html_body %}
 	{% if isMailerSettingUnusual() %}
-		<div class="window-fixed-bar--top">
-				{{ getMailerSettingInfo() }}
+		<div class="window-fixed-bar window-fixed-bar--top window-fixed-bar--type-alert">
+			<div class="window-fixed-bar__in">
+				<div class="window-fixed-bar__item">
+					{{ getMailerSettingInfo() }}
+				</div>
+			</div>
 		</div>
 	{% endif %}
 	<div class="web {% if isMailerSettingUnusual() %} web--with-info {% endif %}">

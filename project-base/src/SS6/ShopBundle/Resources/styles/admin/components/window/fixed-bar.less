@@ -11,16 +11,28 @@
 		bottom: 36px;
 	}
 
+	&--top {
+		top: 0;
+		bottom: auto;
+
+		border: 0;
+	}
+
 	&__in {
 		.flex();
 		width: 100%;
-		height: @height-footer;
+		height: @height-fixed-bar;
 		margin: 0 auto;
 		min-width: 768px;
 		max-width: 100%;
 
 		background: @color-f;
 		text-align: center;
+
+		.window-fixed-bar--type-alert & {
+			background: @color-alert;
+			color: @color-f;
+		}
 	}
 
 	&__item {
@@ -29,7 +41,7 @@
 		.flex-grow();
 		.flex();
 		.flex-align-items(center);
-		height: @height-footer;
+		height: @height-fixed-bar;
 
 		border-left: 1px solid @color-border-dark;
 
