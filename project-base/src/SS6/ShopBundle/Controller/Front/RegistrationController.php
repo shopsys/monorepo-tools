@@ -6,12 +6,10 @@ use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
 use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
-use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserDataFactory;
+use SS6\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class RegistrationController extends FrontBaseController {
 
@@ -30,14 +28,21 @@ class RegistrationController extends FrontBaseController {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private $loginService;
+
 	public function __construct(
 		Domain $domain,
 		UserDataFactory $userDataFactory,
-		CustomerEditFacade $customerEditFacade
+		CustomerEditFacade $customerEditFacade,
+		LoginService $loginService
 	) {
 		$this->domain = $domain;
 		$this->userDataFactory = $userDataFactory;
 		$this->customerEditFacade = $customerEditFacade;
+		$this->loginService = $loginService;
 	}
 
 	public function registerAction(Request $request) {
@@ -55,7 +60,7 @@ class RegistrationController extends FrontBaseController {
 			try {
 				$user = $this->customerEditFacade->register($userData);
 
-				$this->login($user);
+				$this->loginService->loginUser($user, $request);
 
 				$this->getFlashMessageSender()->addSuccessFlash(t('Byli jste úspěšně zaregistrováni'));
 
@@ -72,19 +77,6 @@ class RegistrationController extends FrontBaseController {
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', [
 			'form' => $form->createView(),
 		]);
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 */
-	private function login(User $user) {
-		$token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
-		$this->get('security.token_storage')->setToken($token);
-
-		// dispatch the login event
-		$request = $this->get('request');
-		$event = new InteractiveLoginEvent($request, $token);
-		$this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
 	}
 
 }

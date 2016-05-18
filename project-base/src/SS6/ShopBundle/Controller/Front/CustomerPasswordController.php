@@ -7,10 +7,8 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Registration\NewPasswordFormType;
 use SS6\ShopBundle\Form\Front\Registration\ResetPasswordFormType;
 use SS6\ShopBundle\Model\Customer\CustomerPasswordFacade;
-use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class CustomerPasswordController extends FrontBaseController {
 
@@ -24,25 +22,19 @@ class CustomerPasswordController extends FrontBaseController {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private $loginService;
+
 	public function __construct(
 		Domain $domain,
-		CustomerPasswordFacade $customerPasswordFacade
+		CustomerPasswordFacade $customerPasswordFacade,
+		LoginService $loginService
 	) {
 		$this->domain = $domain;
 		$this->customerPasswordFacade = $customerPasswordFacade;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 */
-	private function login(User $user) {
-		$token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
-		$this->get('security.token_storage')->setToken($token);
-
-		// dispatch the login event
-		$request = $this->get('request');
-		$event = new InteractiveLoginEvent($request, $token);
-		$this->get('event_dispatcher')->dispatch('security.interactive_login', $event);
+		$this->loginService = $loginService;
 	}
 
 	public function resetPasswordAction(Request $request) {
@@ -102,7 +94,7 @@ class CustomerPasswordController extends FrontBaseController {
 			try {
 				$user = $this->customerPasswordFacade->setNewPassword($email, $this->domain->getId(), $hash, $newPassword);
 
-				$this->login($user);
+				$this->loginService->loginUser($user, $request);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
