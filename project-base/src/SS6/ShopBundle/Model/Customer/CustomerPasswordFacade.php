@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 
-class RegistrationFacade {
+class CustomerPasswordFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
