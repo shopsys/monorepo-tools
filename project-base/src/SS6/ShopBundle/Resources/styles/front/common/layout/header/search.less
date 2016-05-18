@@ -10,10 +10,9 @@
 		position: absolute;
 		top: 9px;
 		left: 10px;
+		transition: @transition color;
 
 		color: @color-inactive;
-
-		transition: @transition color;
 
 		.search__input:focus + & {
 			color: @color-primary;
@@ -31,7 +30,6 @@
 		border: 1px solid @color-border;
 		border-top: 0px;
 		background: @color-f;
-
 		border-radius: 0 0 @radius @radius;
 
 		&__item {
@@ -69,6 +67,15 @@
 
 			img {
 				max-width: 30px;
+			}
+
+			.svg {
+				position: relative;
+				top: -2px;
+				margin-bottom: -2px;
+
+				font-size: 20px;
+				color: @color-base;
 			}
 		}
 

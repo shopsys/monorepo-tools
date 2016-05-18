@@ -1,28 +1,25 @@
 {% extends '@SS6Shop/Front/Form/theme.html.twig' %}
 
 {% block form_row %}
-	<div class="form-block">
-		{{ form_errors(form) }}
-		{{ form_label(form, label, { label_attr: {class: 'form-block__label'} }) }}
-		<div class="form-block__field">
+	<dl class="form-line">
+		<dt>
+			{{ form_label(form, label) }}
+		</dt>
+		<dd>
 			{{ form_widget(form) }}
+			{{ form_errors(form) }}
 			{% if symbolAfterInput is defined %}
 				{{symbolAfterInput}}
 			{% endif %}
-		</div>
-	</div>
+		</dd>
+	</dl>
 {% endblock form_row %}
-
-{% block form_widget_simple %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' form-block__item')|trim}) %}
-	{{ parent('form_widget_simple') }}
-{% endblock form_widget_simple %}
 
 {% block choice_widget_expanded %}
 	{% spaceless %}
 			<div {{ block('widget_container_attributes') }}>
 			{% for child in form %}
-				<div class="form-choice form-choice--block">
+				<div class="form-choice">
 					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 						{{ form_widget(child, { attr: {class: 'form-choice__input'} }) }}
 						<span class="form-choice__label">
@@ -36,7 +33,6 @@
 			</div>
 	{% endspaceless %}
 {% endblock choice_widget_expanded %}
-
 
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}

@@ -10,11 +10,11 @@
 
 		if (descriptionHeight > 32) {
 			$loadMoreButton.show();
-			$description.addClass('shortened-category-description');
+			$description.addClass('box-list__description__text--small');
 		}
 
 		$loadMoreButton.click(function () {
-			$description.removeClass('shortened-category-description');
+			$description.removeClass('box-list__description__text--small');
 			$loadMoreButton.closest('.js-category-description-load-more').hide();
 		});
 	};

@@ -1,0 +1,24 @@
+@box-list-description-line-height: 16px;
+@box-list-description-lines: 2;
+
+.box-list {
+	&__description {
+		&__text {
+			margin-bottom: @margin-gap/2;
+			line-height: @box-list-description-line-height;
+
+			&--small {
+				overflow: hidden;
+				height: @box-list-description-line-height * @box-list-description-lines;
+			}
+		}
+
+		&__more {
+			text-align: center;
+
+			&__btn {
+				display: none;
+			}
+		}
+	}
+}

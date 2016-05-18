@@ -16,11 +16,12 @@
 
 	{{ orderConfirmationText|raw }}
 
-	<div class="box-buttons">
-		<a href="{{ url('front_homepage') }}" class="btn box-buttons__left">
-			{{ 'Zpět do obchodu'|trans }}
-		</a>
+	<div class="in-action">
+		<div class="in-action__left">
+			<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
+				{{ 'Zpět do obchodu'|trans }}
+			</a>
+		</div>
 	</div>
-
 
 {% endblock %}

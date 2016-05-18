@@ -1,10 +1,3 @@
-/*
-Default buttons
-===========
-button types
-
-*/
-
 .btn {
 	width: auto;
 	min-height: @btn-height;
@@ -12,6 +5,7 @@ button types
 	line-height: @btn-height - 2 * @btn-padding-vertical;
 	vertical-align:middle;
 	display: inline-block;
+	transition: @transition background, color;
 
 	border: 0;
 	color: @btn-color;
@@ -22,8 +16,6 @@ button types
 	text-align: center;
 	font-size: 13px;
 	outline: 0;
-
-	transition: @transition background, color;
 
 	&:hover {
 		color: @btn-color-hover;
@@ -37,6 +29,16 @@ button types
 		&:hover {
 			color: @btn-primary-color-hover;
 			background: @btn-primary-bg-hover;
+		}
+	}
+
+	&--success {
+		color: @btn-success-color;
+		background: @btn-success-bg;
+
+		&:hover {
+			color: @btn-success-color-hover;
+			background: @btn-success-bg-hover;
 		}
 	}
 
@@ -98,12 +100,11 @@ button types
 		padding: 0 10px;
 		display: block;
 		position: relative;
+		transition: @transition color;
 
 		color: @color-base;
 		text-decoration: none;
 		font-size: 16px;
-
-		transition: @transition color;
 
 		.btn-tap--menu & {
 			background: @color-light;
