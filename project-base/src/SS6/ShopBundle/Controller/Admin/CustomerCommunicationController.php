@@ -34,7 +34,7 @@ class CustomerCommunicationController extends AdminBaseController {
 	 * @Route("/customer-communication/order-submitted/")
 	 */
 	public function orderSubmittedAction(Request $request) {
-		$data = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
+		$data = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $this->selectedDomain->getId());
 		$form = $this->createForm(new CustomerCommunicationFormType());
 
 		$form->setData(['content' => $data]);
@@ -42,7 +42,7 @@ class CustomerCommunicationController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$formData = $form->getData();
-			$this->setting->set(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
+			$this->setting->setForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $formData['content'], $this->selectedDomain->getId());
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení textu po potvrzení objednávky bylo upraveno'));
 

@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Feed;
 
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigRepository;
 
@@ -83,7 +82,7 @@ class FeedConfigFacade {
 	 * @return string
 	 */
 	public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig) {
-		$feedHash = $this->setting->get(Setting::FEED_HASH, SettingValue::DOMAIN_ID_COMMON);
+		$feedHash = $this->setting->get(Setting::FEED_HASH);
 		return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig, $feedHash);
 	}
 
@@ -93,7 +92,7 @@ class FeedConfigFacade {
 	 * @return string
 	 */
 	public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {
-		$feedHash = $this->setting->get(Setting::FEED_HASH, SettingValue::DOMAIN_ID_COMMON);
+		$feedHash = $this->setting->get(Setting::FEED_HASH);
 		return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
 	}
 

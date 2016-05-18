@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Feed;
 
 use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
@@ -55,18 +54,15 @@ class FeedCronModule implements IteratedCronModuleInterface {
 	public function sleep() {
 		$this->setting->set(
 			Setting::FEED_NAME_TO_CONTINUE,
-			$this->feedGenerationConfigToContinue->getFeedName(),
-			SettingValue::DOMAIN_ID_COMMON
+			$this->feedGenerationConfigToContinue->getFeedName()
 		);
 		$this->setting->set(
 			Setting::FEED_DOMAIN_ID_TO_CONTINUE,
-			$this->feedGenerationConfigToContinue->getDomainId(),
-			SettingValue::DOMAIN_ID_COMMON
+			$this->feedGenerationConfigToContinue->getDomainId()
 		);
 		$this->setting->set(
 			Setting::FEED_ITEM_ID_TO_CONTINUE,
-			$this->feedGenerationConfigToContinue->getFeedItemId(),
-			SettingValue::DOMAIN_ID_COMMON
+			$this->feedGenerationConfigToContinue->getFeedItemId()
 		);
 	}
 
@@ -75,9 +71,9 @@ class FeedCronModule implements IteratedCronModuleInterface {
 	 */
 	public function wakeUp() {
 		$this->feedGenerationConfigToContinue = new FeedGenerationConfig(
-			$this->setting->get(Setting::FEED_NAME_TO_CONTINUE, SettingValue::DOMAIN_ID_COMMON),
-			$this->setting->get(Setting::FEED_DOMAIN_ID_TO_CONTINUE, SettingValue::DOMAIN_ID_COMMON),
-			$this->setting->get(Setting::FEED_ITEM_ID_TO_CONTINUE, SettingValue::DOMAIN_ID_COMMON)
+			$this->setting->get(Setting::FEED_NAME_TO_CONTINUE),
+			$this->setting->get(Setting::FEED_DOMAIN_ID_TO_CONTINUE),
+			$this->setting->get(Setting::FEED_ITEM_ID_TO_CONTINUE)
 		);
 	}
 

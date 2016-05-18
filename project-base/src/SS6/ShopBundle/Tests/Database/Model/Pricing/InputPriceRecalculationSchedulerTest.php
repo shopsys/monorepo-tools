@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
 
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
@@ -101,7 +100,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$availability = new Availability(new AvailabilityData([], 0));
@@ -170,7 +169,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
 		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
 		$currency1 = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$currency2 = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);

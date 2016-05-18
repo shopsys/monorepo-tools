@@ -271,7 +271,7 @@ class OrderFacade {
 	public function getOrderConfirmText($orderId) {
 		$order = $this->getById($orderId);
 		$orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
-		$confirmTextTemplate = $this->setting->get(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
+		$confirmTextTemplate = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
 
 		$variables = [
 			self::VARIABLE_TRANSPORT_INSTRUCTIONS => $order->getTransport()->getInstructions(),

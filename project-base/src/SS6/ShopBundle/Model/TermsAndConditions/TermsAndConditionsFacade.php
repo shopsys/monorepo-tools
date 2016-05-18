@@ -39,11 +39,11 @@ class TermsAndConditionsFacade {
 	 * @return \SS6\ShopBundle\Model\Article\Article|null
 	 */
 	public function findTermsAndConditionsArticleByDomainId($domainId) {
-		$termsAndConditionsArticleId = $this->setting->get(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
+		$termsAndConditionsArticleId = $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
 
 		if ($termsAndConditionsArticleId !== null) {
 			return $this->articleEditFacade->findById(
-				$this->setting->get(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId)
+				$this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId)
 			);
 		}
 
@@ -59,7 +59,7 @@ class TermsAndConditionsFacade {
 		if ($termsAndConditionsArticle !== null) {
 			$termsAndConditionsArticleId = $termsAndConditionsArticle->getId();
 		}
-		$this->setting->set(
+		$this->setting->setForDomain(
 			Setting::TERMS_AND_CONDITIONS_ARTICLE_ID,
 			$termsAndConditionsArticleId,
 			$domainId

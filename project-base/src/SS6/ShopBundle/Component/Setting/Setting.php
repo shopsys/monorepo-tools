@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 
 class Setting {
@@ -37,11 +36,6 @@ class Setting {
 	private $values;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
-	 */
-	private $valuesDefault;
-
-	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Component\Setting\SettingValueRepository $settingValueRepository
 	 */
@@ -53,11 +47,55 @@ class Setting {
 
 	/**
 	 * @param string $key
+	 * @return string|int|float|bool|null
+	 */
+	public function get($key) {
+		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
+
+		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
+			$settingValue = $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
+
+			return $settingValue->getValue();
+		}
+
+		$message = 'Common setting value with name "' . $key . '" not found.';
+		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+	}
+
+	/**
+	 * @param string $key
 	 * @param int $domainId
 	 * @return string|int|float|bool|null
 	 */
-	public function get($key, $domainId) {
-		return $this->getSettingValue($key, $domainId)->getValue();
+	public function getForDomain($key, $domainId) {
+		$this->loadDomainValues($domainId);
+
+		if (array_key_exists($key, $this->values[$domainId])) {
+			$settingValue = $this->values[$domainId][$key];
+
+			return $settingValue->getValue();
+		}
+
+		$message = 'Setting value with name "' . $key . '" for domain with ID "' . $domainId . '" not found.';
+		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+	}
+
+	/**
+	 * @param string $key
+	 * @param string|int|float|bool|null $value
+	 */
+	public function set($key, $value) {
+		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
+
+		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
+			$settingValue = $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
+			$settingValue->edit($value);
+
+			$this->em->flush($settingValue);
+		} else {
+			$message = 'Common setting value with name "' . $key . '" not found.';
+			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+		}
 	}
 
 	/**
@@ -65,93 +103,29 @@ class Setting {
 	 * @param string|int|float|bool|null $value
 	 * @param int $domainId
 	 */
-	public function set($key, $value, $domainId) {
-		if ($domainId === SettingValue::DOMAIN_ID_DEFAULT) {
-			throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException('Cannot set default setting value');
-		}
+	public function setForDomain($key, $value, $domainId) {
+		$this->loadDomainValues($domainId);
 
-		$settingValue = $this->getSettingValue($key, $domainId);
-		if ($settingValue->getDomainId() === $domainId) {
+		if (array_key_exists($key, $this->values[$domainId])) {
+			$settingValue = $this->values[$domainId][$key];
 			$settingValue->edit($value);
+
+			$this->em->flush($settingValue);
 		} else {
-			$settingValue = new SettingValue($key, $value, $domainId);
-			$this->em->persist($settingValue);
-			$this->values[$domainId][$key] = $settingValue;
+			$message = 'Setting value with name "' . $key . '" for domain ID "' . $domainId . '" not found.';
+			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 		}
-
-		$this->em->flush($settingValue);
 	}
 
 	/**
-	 * @param int $fromDomainId
-	 * @param int $toDomainId
-	 */
-	public function copyAllMultidomainSettings($fromDomainId, $toDomainId) {
-		$query = $this->em->createNativeQuery('
-			INSERT INTO setting_values (name, value, type, domain_id)
-			SELECT name, value, type, :toDomainId
-			FROM setting_values
-			WHERE domain_id = :fromDomainId
-				AND EXISTS (
-					SELECT 1
-					FROM setting_values
-					WHERE domain_id IS NOT NULL
-						AND domain_id != :commonDomainId
-				)
-			',
-			new ResultSetMapping()
-		);
-		$query->execute([
-			'toDomainId' => $toDomainId,
-			'fromDomainId' => $fromDomainId,
-			'commonDomainId' => SettingValue::DOMAIN_ID_COMMON,
-		]);
-
-		$this->clearCache();
-	}
-
-	/**
-	 * @param string $key
-	 * @param int|null $domainId
-	 * @return \SS6\ShopBundle\Component\Setting\SettingValue
-	 */
-	private function getSettingValue($key, $domainId) {
-		$this->loadValues($domainId);
-
-		if ($domainId !== SettingValue::DOMAIN_ID_COMMON && $domainId !== SettingValue::DOMAIN_ID_DEFAULT) {
-			if (array_key_exists($key, $this->values[$domainId])) {
-				return $this->values[$domainId][$key];
-			}
-		}
-
-		if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
-			return $this->values[SettingValue::DOMAIN_ID_COMMON][$key];
-		}
-
-		if (array_key_exists($key, $this->valuesDefault)) {
-			return $this->valuesDefault[$key];
-		}
-
-		$message = 'Setting value with name "' . $key . '" not found.';
-		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
-	}
-
-	/**
-	 * @param int|null $domainId
-	 */
-	private function loadValues($domainId) {
-		if ($domainId !== SettingValue::DOMAIN_ID_COMMON && $domainId !== SettingValue::DOMAIN_ID_DEFAULT) {
-			$this->loadDomainValues($domainId);
-		}
-
-		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
-		$this->loadDefaultValues();
-	}
-
-	/**
-	 * @param int|null $domainId
+	 * @param int $domainId
 	 */
 	private function loadDomainValues($domainId) {
+		if ($domainId === null) {
+			$message = 'Cannot load setting value for null domain ID';
+			throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
+		}
+
 		if (!array_key_exists($domainId, $this->values)) {
 			$this->values[$domainId] = [];
 			foreach ($this->settingValueRepository->getAllByDomainId($domainId) as $settingValue) {
@@ -161,19 +135,8 @@ class Setting {
 		}
 	}
 
-	private function loadDefaultValues() {
-		if ($this->valuesDefault === null) {
-			$this->valuesDefault = [];
-			foreach ($this->settingValueRepository->getAllDefault() as $settingValue) {
-				/* @var $settingValue SettingValue */
-				$this->valuesDefault[$settingValue->getName()] = $settingValue;
-			}
-		}
-	}
-
 	public function clearCache() {
 		$this->values = [];
-		$this->valuesDefault = null;
 	}
 
 }

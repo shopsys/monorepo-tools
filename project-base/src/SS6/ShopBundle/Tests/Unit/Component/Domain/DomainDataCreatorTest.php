@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\DomainDataCreator;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use SS6\ShopBundle\Component\Setting\Setting;
+use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
@@ -21,7 +22,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
 			->expects($this->once())
-			->method('get')
+			->method('getForDomain')
 			->with($this->equalTo(Setting::DOMAIN_DATA_CREATED), $this->equalTo(1))
 			->willReturn(true);
 
@@ -29,12 +30,14 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
 
+		$settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
 		$multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
 		$translatableEntityDataCreatorMock = $this->getMock(TranslatableEntityDataCreator::class, [], [], '', false);
 
 		$domainDataCreator = new DomainDataCreator(
 			$domain,
 			$settingMock,
+			$settingValueRepositoryMock,
 			$emMock,
 			$multidomainEntityDataCreatorMock,
 			$translatableEntityDataCreatorMock
@@ -52,7 +55,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
-			->method('get')
+			->method('getForDomain')
 			->willReturnCallback(function ($key, $domainId) {
 				$this->assertEquals(Setting::DOMAIN_DATA_CREATED, $key);
 				if ($domainId === 1) {
@@ -60,14 +63,16 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 				}
 				throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
 			});
-		$settingMock
-			->expects($this->once())
-			->method('copyAllMultidomainSettings')
-			->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
 
 		$domain = new Domain($domainConfigs, $settingMock);
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+
+		$settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
+		$settingValueRepositoryMock
+			->expects($this->any())
+			->method('copyAllMultidomainSettings')
+			->with($this->equalTo(DomainDataCreator::TEMPLATE_DOMAIN_ID), $this->equalTo(2));
 
 		$multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
 		$multidomainEntityDataCreatorMock
@@ -79,6 +84,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 		$domainDataCreator = new DomainDataCreator(
 			$domain,
 			$settingMock,
+			$settingValueRepositoryMock,
 			$emMock,
 			$multidomainEntityDataCreatorMock,
 			$translatableEntityDataCreatorMock
@@ -122,6 +128,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 			->willReturn($domainConfigWithDataCreated);
 
 		$emMock = $this->getMock(EntityManager::class, [], [], '', false);
+		$settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
 		$multidomainEntityDataCreatorMock = $this->getMock(MultidomainEntityDataCreator::class, [], [], '', false);
 		$translatableEntityDataCreatorMock = $this->getMock(TranslatableEntityDataCreator::class, [], [], '', false);
 		$translatableEntityDataCreatorMock
@@ -132,6 +139,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 		$domainDataCreator = new DomainDataCreator(
 			$domainMock,
 			$settingMock,
+			$settingValueRepositoryMock,
 			$emMock,
 			$multidomainEntityDataCreatorMock,
 			$translatableEntityDataCreatorMock

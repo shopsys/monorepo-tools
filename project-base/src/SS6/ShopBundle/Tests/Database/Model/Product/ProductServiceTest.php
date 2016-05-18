@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
 use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
@@ -23,7 +22,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$setting = $this->getContainer()->get(Setting::class);
 		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT, SettingValue::DOMAIN_ID_COMMON);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
 		$vatData = new VatData('vat', 21);
 		$vat = new Vat($vatData);
@@ -50,7 +49,7 @@ class ProductServiceTest extends DatabaseTestCase {
 		$setting = $this->getContainer()->get(Setting::class);
 		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
 
-		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT, SettingValue::DOMAIN_ID_COMMON);
+		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
 		$vatData = new VatData('vat', 21);
 		$vat = new Vat($vatData);

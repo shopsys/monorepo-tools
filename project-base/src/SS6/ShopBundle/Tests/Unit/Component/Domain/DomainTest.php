@@ -82,7 +82,7 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$settingMock
 			->expects($this->exactly(count($domainConfigs)))
-			->method('get')
+			->method('getForDomain')
 			->willReturnCallback(function ($key, $domainId) use ($domainConfigWithDataCreated) {
 				$this->assertEquals(Setting::DOMAIN_DATA_CREATED, $key);
 				if ($domainId === $domainConfigWithDataCreated->getId()) {
