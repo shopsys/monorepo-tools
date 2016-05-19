@@ -308,6 +308,7 @@ class Order {
 		$this->street = $orderData->street;
 		$this->city = $orderData->city;
 		$this->postcode = $orderData->postcode;
+		$this->country = $orderData->country;
 		$this->note = $orderData->note;
 		$this->items = new ArrayCollection();
 		$this->setCompanyInfo(
@@ -343,6 +344,7 @@ class Order {
 		$this->street = $orderData->street;
 		$this->city = $orderData->city;
 		$this->postcode = $orderData->postcode;
+		$this->country = $orderData->country;
 		$this->note = $orderData->note;
 
 		$this->setCompanyInfo(
@@ -387,6 +389,7 @@ class Order {
 			$this->deliveryStreet = $orderData->street;
 			$this->deliveryCity = $orderData->city;
 			$this->deliveryPostcode = $orderData->postcode;
+			$this->deliveryCountry = $orderData->country;
 		} else {
 			$this->deliveryContactPerson = $orderData->deliveryContactPerson;
 			$this->deliveryCompanyName = $orderData->deliveryCompanyName;
@@ -394,6 +397,7 @@ class Order {
 			$this->deliveryStreet = $orderData->deliveryStreet;
 			$this->deliveryCity = $orderData->deliveryCity;
 			$this->deliveryPostcode = $orderData->deliveryPostcode;
+			$this->deliveryCountry = $orderData->deliveryCountry;
 		}
 	}
 
@@ -682,6 +686,13 @@ class Order {
 	 */
 	public function getPostcode() {
 		return $this->postcode;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country
+	 */
+	public function getCountry() {
+		return $this->country;
 	}
 
 	/**

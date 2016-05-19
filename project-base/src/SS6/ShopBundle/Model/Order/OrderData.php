@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Order;
 
+use SS6\ShopBundle\Model\Country\Country;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderPaymentData;
 use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
@@ -85,6 +86,11 @@ class OrderData {
 	public $postcode;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country
+	 */
+	public $country;
+
+	/**
 	 * @var bool
 	 */
 	public $deliveryAddressSameAsBillingAddress;
@@ -118,6 +124,11 @@ class OrderData {
 	 * @var string
 	 */
 	public $deliveryPostcode;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country
+	 */
+	public $deliveryCountry;
 
 	/**
 	 * @var string
@@ -180,6 +191,7 @@ class OrderData {
 		$this->street = $order->getStreet();
 		$this->city = $order->getCity();
 		$this->postcode = $order->getPostcode();
+		$this->country = $order->getCountry();
 		$this->deliveryAddressSameAsBillingAddress = $order->isDeliveryAddressSameAsBillingAddress();
 		if (!$order->isDeliveryAddressSameAsBillingAddress()) {
 			$this->deliveryContactPerson = $order->getDeliveryContactPerson();
@@ -188,6 +200,7 @@ class OrderData {
 			$this->deliveryStreet = $order->getDeliveryStreet();
 			$this->deliveryCity = $order->getDeliveryCity();
 			$this->deliveryPostcode = $order->getDeliveryPostcode();
+			$this->deliveryCountry = $order->getDeliveryCountry();
 		}
 		$this->note = $order->getNote();
 		$orderItemsWithoutTransportAndPaymentData = [];
