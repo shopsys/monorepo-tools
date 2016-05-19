@@ -16,6 +16,9 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class CartFacadeTest extends DatabaseTestCase {
 
 	public function testAddProductToCart() {

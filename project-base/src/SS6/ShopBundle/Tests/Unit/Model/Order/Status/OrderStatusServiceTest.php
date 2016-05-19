@@ -8,6 +8,9 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatus;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
 
+/**
+ * @UglyTest
+ */
 class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function checkForDeleteProvider() {

@@ -16,6 +16,9 @@ use SS6\ShopBundle\Model\Pricing\Rounding;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 
+/**
+ * @UglyTest
+ */
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function calculateIndependentPriceProvider() {

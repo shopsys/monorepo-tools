@@ -13,6 +13,9 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
+/**
+ * @UglyTest
+ */
 class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetPricingGroupNotLogged() {

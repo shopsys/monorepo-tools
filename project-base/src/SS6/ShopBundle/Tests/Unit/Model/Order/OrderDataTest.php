@@ -6,6 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\OrderData;
 
+/**
+ * @UglyTest
+ */
 class OrderDataTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetNewItemsWithoutTransportAndPayment() {

@@ -10,6 +10,9 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportDomain;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 	public function testIsIndependentlyVisible() {

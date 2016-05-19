@@ -6,6 +6,9 @@ use SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
 use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class JsConstantCompilerPassTest extends FunctionalTestCase {
 
 	public function testProcess() {

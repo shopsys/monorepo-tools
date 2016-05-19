@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Fulltext;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Fulltext\TsqueryFactory;
 
+/**
+ * @UglyTest
+ */
 class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 
 	/**

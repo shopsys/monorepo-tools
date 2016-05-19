@@ -14,6 +14,9 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * @UglyTest
+ */
 class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRouter() {

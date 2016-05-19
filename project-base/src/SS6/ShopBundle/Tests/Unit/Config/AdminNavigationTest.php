@@ -6,6 +6,9 @@ use SS6\ShopBundle\Model\AdminNavigation\Menu;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class AdminNavigationTest extends FunctionalTestCase {
 
 	public function testHasSettingsItem() {

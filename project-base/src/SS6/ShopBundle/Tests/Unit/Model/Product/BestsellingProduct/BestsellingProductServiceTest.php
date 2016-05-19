@@ -9,6 +9,9 @@ use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
+/**
+ * @UglyTest
+ */
 class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCombineManualAndAutomaticBestsellingProducts() {

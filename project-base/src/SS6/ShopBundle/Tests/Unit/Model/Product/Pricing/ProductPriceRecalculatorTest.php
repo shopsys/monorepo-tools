@@ -15,6 +15,9 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductService;
 
+/**
+ * @UglyTest
+ */
 class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunImmediatelyRecalculations() {

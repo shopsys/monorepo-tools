@@ -20,6 +20,9 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
+/**
+ * @UglyTest
+ */
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function calculatePriceProvider() {

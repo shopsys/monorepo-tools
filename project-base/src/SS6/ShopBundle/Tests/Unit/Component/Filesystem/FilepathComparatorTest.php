@@ -6,6 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException;
 use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
 
+/**
+ * @UglyTest
+ */
 class FilepathComparatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsPathWithinDirectoryThrowsExceptionWithNonExistentDirectoryPath() {

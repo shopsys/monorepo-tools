@@ -12,6 +12,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use stdClass;
 
+/**
+ * @UglyTest
+ */
 class VatFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDefaultVat() {

@@ -6,6 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\String\EncodingConverter;
 use stdClass;
 
+/**
+ * @UglyTest
+ */
 class EncodingConverterTest extends PHPUnit_Framework_TestCase {
 
 	const STRING_UTF8 = 'příšerně žluťoučký kůň úpěl ďábelské ódy. PŘÍŠERNĚ ŽLUŤOUČKÝ KŮŇ ÚPĚL ĎÁBELSKÉ ÓDY.';

@@ -8,6 +8,9 @@ use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
 
+/**
+ * @UglyTest
+ */
 class UserTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFullNameSimpleUser() {

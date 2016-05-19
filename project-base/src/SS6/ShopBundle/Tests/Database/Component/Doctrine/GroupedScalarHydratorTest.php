@@ -8,6 +8,9 @@ use SS6\ShopBundle\Model\Order\Item\OrderItem;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class GroupedScalarHydratorTest extends DatabaseTestCase {
 
 	public function testHydrateAllData() {

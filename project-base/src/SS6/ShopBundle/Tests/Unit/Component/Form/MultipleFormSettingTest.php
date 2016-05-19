@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Form;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Form\MultipleFormSetting;
 
+/**
+ * @UglyTest
+ */
 class MultipleFormSettingTest extends PHPUnit_Framework_TestCase {
 
 	public function testCurrentFormIsMultiple() {

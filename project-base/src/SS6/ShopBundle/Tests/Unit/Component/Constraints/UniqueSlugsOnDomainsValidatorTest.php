@@ -12,6 +12,9 @@ use SS6\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
+/**
+ * @UglyTest
+ */
 class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest {
 
 	/**

@@ -15,6 +15,9 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class PricingGroupFacadeTest extends DatabaseTestCase {
 
 	public function testCreate() {

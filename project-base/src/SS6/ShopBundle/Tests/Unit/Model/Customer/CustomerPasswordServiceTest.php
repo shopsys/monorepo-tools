@@ -9,6 +9,9 @@ use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
+/**
+ * @UglyTest
+ */
 class CustomerPasswordServiceTest extends FunctionalTestCase {
 
 	public function isResetPasswordHashValidProvider() {

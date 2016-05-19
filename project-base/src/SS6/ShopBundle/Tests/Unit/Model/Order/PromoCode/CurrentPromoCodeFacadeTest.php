@@ -11,6 +11,9 @@ use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * @UglyTest
+ */
 class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetEnteredPromoCode() {

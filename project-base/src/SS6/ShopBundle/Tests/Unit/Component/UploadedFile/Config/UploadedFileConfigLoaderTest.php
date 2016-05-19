@@ -7,6 +7,9 @@ use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
 use SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @UglyTest
+ */
 class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoadFromYaml() {

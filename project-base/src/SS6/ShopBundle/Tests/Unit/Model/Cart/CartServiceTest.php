@@ -12,6 +12,9 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class CartServiceTest extends FunctionalTestCase {
 
 	public function testCannotAddProductFloatQuantityToCart() {

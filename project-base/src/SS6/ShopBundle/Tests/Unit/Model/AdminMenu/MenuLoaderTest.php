@@ -6,6 +6,9 @@ use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class MenuLoaderTest extends FunctionalTestCase {
 
 	public function testLoadFromArray() {

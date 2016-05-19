@@ -4,6 +4,9 @@ namespace SS6\ShopBundle\Tests\Unit\Component\FlashMessage;
 
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class BagTest extends FunctionalTestCase {
 
 	public function testAddFrontVsAdmin() {

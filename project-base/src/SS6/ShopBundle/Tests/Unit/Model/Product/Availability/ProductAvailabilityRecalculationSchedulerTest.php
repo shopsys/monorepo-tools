@@ -7,6 +7,9 @@ use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationSc
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
+/**
+ * @UglyTest
+ */
 class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_TestCase {
 
 	public function testScheduleRecalculateAvailabilityForProduct() {

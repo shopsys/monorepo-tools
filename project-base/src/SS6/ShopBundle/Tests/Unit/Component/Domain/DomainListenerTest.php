@@ -9,6 +9,9 @@ use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
+/**
+ * @UglyTest
+ */
 class DomainListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnKernelRequestWithoutMasterRequest() {
