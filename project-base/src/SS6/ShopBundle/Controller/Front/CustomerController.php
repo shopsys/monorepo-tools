@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Customer\CustomerFormType;
 use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
@@ -16,9 +16,9 @@ use Symfony\Component\HttpFoundation\Request;
 class CustomerController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
-	private $customerEditFacade;
+	private $customerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -41,13 +41,13 @@ class CustomerController extends FrontBaseController {
 	private $loginAsUserFacade;
 
 	public function __construct(
-		CustomerEditFacade $customerEditFacade,
+		CustomerFacade $customerFacade,
 		OrderFacade $orderFacade,
 		Domain $domain,
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		LoginAsUserFacade $loginAsUserFacade
 	) {
-		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFacade = $customerFacade;
 		$this->orderFacade = $orderFacade;
 		$this->domain = $domain;
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
@@ -73,7 +73,7 @@ class CustomerController extends FrontBaseController {
 		if ($form->isValid()) {
 			$customerData = $form->getData();
 
-			$this->customerEditFacade->editByCustomer($user->getId(), $customerData);
+			$this->customerFacade->editByCustomer($user->getId(), $customerData);
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Vaše údaje byly úspěšně zaktualizovány'));
 			return $this->redirectToRoute('front_customer_edit');

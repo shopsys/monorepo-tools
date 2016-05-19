@@ -3,10 +3,11 @@
 namespace SS6\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Model\Customer\CustomerPasswordService;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 
-class RegistrationFacade {
+class CustomerPasswordFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -24,19 +25,19 @@ class RegistrationFacade {
 	private $resetPasswordMailFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\RegistrationService
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerPasswordService
 	 */
-	private $registrationService;
+	private $customerPasswordService;
 
 	public function __construct(
 		EntityManager $em,
 		UserRepository $userRepository,
-		RegistrationService $registrationService,
+		CustomerPasswordService $customerPasswordService,
 		ResetPasswordMailFacade $resetPasswordMailFacade
 	) {
 		$this->em = $em;
 		$this->userRepository = $userRepository;
-		$this->registrationService = $registrationService;
+		$this->customerPasswordService = $customerPasswordService;
 		$this->resetPasswordMailFacade = $resetPasswordMailFacade;
 	}
 
@@ -47,7 +48,7 @@ class RegistrationFacade {
 	public function resetPassword($email, $domainId) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-		$this->registrationService->resetPassword($user);
+		$this->customerPasswordService->resetPassword($user);
 		$this->em->flush($user);
 		$this->resetPasswordMailFacade->sendMail($user);
 	}
@@ -60,7 +61,7 @@ class RegistrationFacade {
 	public function isResetPasswordHashValid($email, $domainId, $hash) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-		return $this->registrationService->isResetPasswordHashValid($user, $hash);
+		return $this->customerPasswordService->isResetPasswordHashValid($user, $hash);
 	}
 
 	/**
@@ -73,7 +74,7 @@ class RegistrationFacade {
 	public function setNewPassword($email, $domainId, $hash, $newPassword) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
-		$this->registrationService->setNewPassword($user, $hash, $newPassword);
+		$this->customerPasswordService->setNewPassword($user, $hash, $newPassword);
 
 		return $user;
 	}

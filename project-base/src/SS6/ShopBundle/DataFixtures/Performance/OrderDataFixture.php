@@ -12,7 +12,7 @@ use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -75,9 +75,9 @@ class OrderDataFixture {
 	private $productEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
-	private $customerEditFacade;
+	private $customerFacade;
 
 	public function __construct(
 		EntityManager $em,
@@ -87,7 +87,7 @@ class OrderDataFixture {
 		OrderFacade $orderFacade,
 		OrderPreviewFactory $orderPreviewFactory,
 		ProductEditFacade $productEditFacade,
-		CustomerEditFacade $customerEditFacade
+		CustomerFacade $customerFacade
 	) {
 		$this->performanceProductIds = [];
 		$this->em = $em;
@@ -97,7 +97,7 @@ class OrderDataFixture {
 		$this->orderFacade = $orderFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->productEditFacade = $productEditFacade;
-		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFacade = $customerFacade;
 	}
 
 	public function load() {
@@ -255,7 +255,7 @@ class OrderDataFixture {
 
 		if ($shouldBeRegisteredUser) {
 			$userId = $this->faker->randomElement($this->performanceUserIds);
-			return $this->customerEditFacade->getUserById($userId);
+			return $this->customerFacade->getUserById($userId);
 		} else {
 			return null;
 		}

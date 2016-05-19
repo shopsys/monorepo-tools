@@ -5,11 +5,13 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Security;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Security\LoginService;
 use StdClass;
+use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class LoginServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckLoginProcessWithRequestError() {
-		$loginService = new LoginService();
+		$loginService = $this->getLoginService();
 
 		$requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
 		/* @var $requestMock \Symfony\Component\HttpFoundation\Request|\PHPUnit_Framework_MockObject_MockObject */
@@ -24,7 +26,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCheckLoginProcessWithSessionError() {
-		$loginService = new LoginService();
+		$loginService = $this->getLoginService();
 
 		$sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
 		$sessionMock->expects($this->atLeastOnce())->method('get')->will($this->returnValue(new StdClass()));
@@ -43,7 +45,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCheckLoginProcessWithoutSessionError() {
-		$loginService = new LoginService();
+		$loginService = $this->getLoginService();
 
 		$sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
 		$sessionMock->expects($this->once())->method('get')->will($this->returnValue(null));
@@ -58,5 +60,15 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$requestMock->attributes->expects($this->never())->method('get');
 
 		$this->assertSame(true, $loginService->checkLoginProcess($requestMock));
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Security\LoginService
+	 */
+	private function getLoginService() {
+		$tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
+		$traceableEventDispatcherMock = $this->getMock(TraceableEventDispatcher::class, [], [], '', false);
+
+		return new LoginService($tokenStorageMock, $traceableEventDispatcherMock);
 	}
 }

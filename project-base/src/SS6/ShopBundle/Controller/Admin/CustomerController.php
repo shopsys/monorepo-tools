@@ -19,7 +19,7 @@ use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerEditFacade;
+use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserData;
@@ -45,9 +45,9 @@ class CustomerController extends AdminBaseController {
 	private $customerListAdminFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerEditFacade
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
 	 */
-	private $customerEditFacade;
+	private $customerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
@@ -97,7 +97,7 @@ class CustomerController extends AdminBaseController {
 	public function __construct(
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		CustomerListAdminFacade $customerListAdminFacade,
-		CustomerEditFacade $customerEditFacade,
+		CustomerFacade $customerFacade,
 		CustomerFormTypeFactory $customerFormTypeFactory,
 		Breadcrumb $breadcrumb,
 		AdministratorGridFacade $administratorGridFacade,
@@ -110,7 +110,7 @@ class CustomerController extends AdminBaseController {
 	) {
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->customerListAdminFacade = $customerListAdminFacade;
-		$this->customerEditFacade = $customerEditFacade;
+		$this->customerFacade = $customerFacade;
 		$this->customerFormTypeFactory = $customerFormTypeFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->administratorGridFacade = $administratorGridFacade;
@@ -128,7 +128,7 @@ class CustomerController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$user = $this->customerEditFacade->getUserById($id);
+		$user = $this->customerFacade->getUserById($id);
 		$form = $this->createForm($this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
 
 		$customerData = new CustomerData();
@@ -139,7 +139,7 @@ class CustomerController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			try {
-				$this->customerEditFacade->editByAdmin($id, $customerData);
+				$this->customerFacade->editByAdmin($id, $customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -247,7 +247,7 @@ class CustomerController extends AdminBaseController {
 			$customerData = $form->getData();
 
 			try {
-				$user = $this->customerEditFacade->create($customerData);
+				$user = $this->customerFacade->create($customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
 					t('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
@@ -279,9 +279,9 @@ class CustomerController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$fullName = $this->customerEditFacade->getUserById($id)->getFullName();
+			$fullName = $this->customerFacade->getUserById($id)->getFullName();
 
-			$this->customerEditFacade->delete($id);
+			$this->customerFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Zákazník <strong>{{ name }}</strong> byl smazán'),
@@ -301,7 +301,7 @@ class CustomerController extends AdminBaseController {
 	 * @param int $userId
 	 */
 	public function loginAsUserAction($userId) {
-		$user = $this->customerEditFacade->getUserById($userId);
+		$user = $this->customerFacade->getUserById($userId);
 		$this->loginAsUserFacade->rememberLoginAsUser($user);
 
 		return $this->redirectToRoute('front_customer_login_as_remembered_user');
