@@ -53,6 +53,7 @@
 			{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
 			{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
 			{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans}) }}
+			{{ form_row(form.billingAddressData.country, { label: 'Stát'|trans}) }}
 		</div>
 
 		<div id="{{ form.deliveryAddressData.vars.id }}">
@@ -68,6 +69,7 @@
 				{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
 				{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
 				{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans}) }}
+				{{ form_row(form.deliveryAddressData.country, { label: 'Stát'|trans}) }}
 			</div>
 		</div>
 

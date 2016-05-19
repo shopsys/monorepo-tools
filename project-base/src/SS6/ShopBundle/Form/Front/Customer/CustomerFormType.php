@@ -12,6 +12,18 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CustomerFormType extends AbstractType {
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 */
+	private $countries;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 */
+	public function __construct(array $countries = null) {
+		$this->countries = $countries;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName() {
@@ -25,8 +37,8 @@ class CustomerFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
 			->add('userData', new UserFormType())
-			->add('billingAddressData', new BillingAddressFormType())
-			->add('deliveryAddressData', new DeliveryAddressFormType())
+			->add('billingAddressData', new BillingAddressFormType($this->countries))
+			->add('deliveryAddressData', new DeliveryAddressFormType($this->countries))
 			->add('save', FormType::SUBMIT);
 	}
 
