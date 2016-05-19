@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 
 class CountryFacade {
 
@@ -17,15 +18,23 @@ class CountryFacade {
 	private $countryRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Country\CountryRepository $countryRepository
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		EntityManager $em,
-		CountryRepository $countryRepository
+		CountryRepository $countryRepository,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->countryRepository = $countryRepository;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -68,6 +77,13 @@ class CountryFacade {
 	 */
 	public function getAllByDomainId($domainId) {
 		return $this->countryRepository->getAllByDomainId($domainId);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country[]
+	 */
+	public function getAllOnCurrentDomain() {
+		return $this->countryRepository->getAllByDomainId($this->domain->getId());
 	}
 
 }

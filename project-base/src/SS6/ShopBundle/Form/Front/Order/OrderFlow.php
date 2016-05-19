@@ -24,12 +24,19 @@ class OrderFlow extends FormFlow {
 	private $payments;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 */
+	private $countries;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
 	 */
-	public function setFormTypesData(array $transports, array $payments) {
+	public function setFormTypesData(array $transports, array $payments, array $countries) {
 		$this->transports = $transports;
 		$this->payments = $payments;
+		$this->countries = $countries;
 	}
 
 	/**
@@ -51,7 +58,7 @@ class OrderFlow extends FormFlow {
 				'type' => new TransportAndPaymentFormType($this->transports, $this->payments),
 			],
 			[
-				'type' => new PersonalInfoFormType(),
+				'type' => new PersonalInfoFormType($this->countries),
 			],
 		];
 	}

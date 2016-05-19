@@ -5,8 +5,10 @@ namespace SS6\ShopBundle\Form\Front\Order;
 use SS6\ShopBundle\Component\Transformers\InverseTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
+use SS6\ShopBundle\Model\Country\Country;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,6 +18,18 @@ class PersonalInfoFormType extends AbstractType {
 
 	const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
 	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 */
+	private $countries;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 */
+	public function __construct(array $countries) {
+		$this->countries = $countries;
+	}
 
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
@@ -105,6 +119,9 @@ class PersonalInfoFormType extends AbstractType {
 					new Constraints\Length(['max' => 30, 'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků']),
 				],
 			])
+			->add('country', FormType::CHOICE, [
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+			])
 			->add($builder
 				->create('deliveryAddressFilled', FormType::CHECKBOX, [
 					'required' => false,
@@ -187,6 +204,10 @@ class PersonalInfoFormType extends AbstractType {
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
+			])
+			->add('deliveryCountry', FormType::CHOICE, [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
 			->add('termsAndConditionsAgreement', FormType::CHECKBOX, [

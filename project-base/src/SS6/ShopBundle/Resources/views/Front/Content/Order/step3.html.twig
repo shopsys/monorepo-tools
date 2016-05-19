@@ -35,6 +35,7 @@
 				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
 				{{ form_row(form.city, { label: 'Město'|trans }) }}
 				{{ form_row(form.postcode, { label: 'PSČ'|trans }) }}
+				{{ form_row(form.country, { label: 'Stát'|trans }) }}
 			</fieldset>
 
 			<h2>{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
@@ -50,6 +51,7 @@
 					{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
 					{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
 					{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans }) }}
+					{{ form_row(form.deliveryCountry, { label: 'Stát'|trans }) }}
 				<div>
 			</fieldset>
 

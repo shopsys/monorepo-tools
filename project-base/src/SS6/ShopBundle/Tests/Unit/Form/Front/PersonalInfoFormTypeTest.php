@@ -2,12 +2,16 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Form\Front;
 
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class PersonalInfoFormTypeTest extends FunctionalTestCase {
+class PersonalInfoFormTypeTest extends DatabaseTestCase {
 
+	/**
+	 * @return array
+	 */
 	public function getTermsAndConditionsAgreementIsMandatoryData() {
 		return [
 			[$this->getPersonalInfoFormData(true), true],
@@ -21,7 +25,15 @@ class PersonalInfoFormTypeTest extends FunctionalTestCase {
 	public function testTermsAndConditionsAgreementIsMandatory($personalInfoFormData, $isExpectedValid) {
 		$formFactory = $this->getContainer()->get(FormFactoryInterface::class);
 		/* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
-		$personalInfoForm = $formFactory->create(new PersonalInfoFormType(), null, ['csrf_protection' => false]);
+
+		$countries = [
+			$this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
+			$this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2),
+			$this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1),
+			$this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2),
+		];
+
+		$personalInfoForm = $formFactory->create(new PersonalInfoFormType($countries), null, ['csrf_protection' => false]);
 
 		$personalInfoForm->submit($personalInfoFormData);
 
@@ -33,6 +45,9 @@ class PersonalInfoFormTypeTest extends FunctionalTestCase {
 	 * @return mixed
 	 */
 	private function getPersonalInfoFormData($termsAndConditionsAgreement) {
+		$country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+		/* @var $country \SS6\ShopBundle\Model\Country\Country */
+
 		$personalInfoFormData['firstName'] = 'test';
 		$personalInfoFormData['lastName'] = 'test';
 		$personalInfoFormData['email'] = 'test@test.cz';
@@ -40,6 +55,7 @@ class PersonalInfoFormTypeTest extends FunctionalTestCase {
 		$personalInfoFormData['street'] = 'test';
 		$personalInfoFormData['city'] = 'test';
 		$personalInfoFormData['postcode'] = '12345';
+		$personalInfoFormData['country'] = $country->getId();
 		$personalInfoFormData['termsAndConditionsAgreement'] = $termsAndConditionsAgreement;
 
 		return $personalInfoFormData;
