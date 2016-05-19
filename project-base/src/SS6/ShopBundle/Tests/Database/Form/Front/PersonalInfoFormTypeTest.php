@@ -20,9 +20,11 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase {
 	}
 
 	/**
+	 * @param array $personalInfoFormData
+	 * @param $isExpectedValid
 	 * @dataProvider getTermsAndConditionsAgreementIsMandatoryData
 	 */
-	public function testTermsAndConditionsAgreementIsMandatory($personalInfoFormData, $isExpectedValid) {
+	public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid) {
 		$formFactory = $this->getContainer()->get(FormFactoryInterface::class);
 		/* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
@@ -42,12 +44,13 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase {
 
 	/**
 	 * @param bool $termsAndConditionsAgreement
-	 * @return mixed
+	 * @return array
 	 */
 	private function getPersonalInfoFormData($termsAndConditionsAgreement) {
 		$country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		/* @var $country \SS6\ShopBundle\Model\Country\Country */
 
+		$personalInfoFormData = [];
 		$personalInfoFormData['firstName'] = 'test';
 		$personalInfoFormData['lastName'] = 'test';
 		$personalInfoFormData['email'] = 'test@test.cz';
