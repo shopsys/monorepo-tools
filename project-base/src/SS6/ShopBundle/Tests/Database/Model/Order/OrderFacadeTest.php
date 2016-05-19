@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Database\Model\Order;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
@@ -66,6 +67,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->street = 'street';
 		$orderData->city = 'city';
 		$orderData->postcode = 'postcode';
+		$orderData->country = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = 'deliveryContanctPerson';
 		$orderData->deliveryCompanyName = 'deliveryCompanyName';
@@ -73,6 +75,7 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->deliveryStreet = 'deliveryStreet';
 		$orderData->deliveryCity = 'deliveryCity';
 		$orderData->deliveryPostcode = 'deliveryPostcode';
+		$orderData->deliveryCountry = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->note = 'note';
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -94,12 +97,14 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$this->assertSame($orderData->street, $orderFromDb->getStreet());
 		$this->assertSame($orderData->city, $orderFromDb->getCity());
 		$this->assertSame($orderData->postcode, $orderFromDb->getPostcode());
+		$this->assertSame($orderData->country, $orderFromDb->getCountry());
 		$this->assertSame($orderData->deliveryContactPerson, $orderFromDb->getDeliveryContactPerson());
 		$this->assertSame($orderData->deliveryCompanyName, $orderFromDb->getDeliveryCompanyName());
 		$this->assertSame($orderData->deliveryTelephone, $orderFromDb->getDeliveryTelephone());
 		$this->assertSame($orderData->deliveryStreet, $orderFromDb->getDeliveryStreet());
 		$this->assertSame($orderData->deliveryCity, $orderFromDb->getDeliveryCity());
 		$this->assertSame($orderData->deliveryPostcode, $orderFromDb->getDeliveryPostcode());
+		$this->assertSame($orderData->deliveryCountry, $orderFromDb->getDeliveryCountry());
 		$this->assertSame($orderData->note, $orderFromDb->getNote());
 		$this->assertSame($orderData->domainId, $orderFromDb->getDomainId());
 

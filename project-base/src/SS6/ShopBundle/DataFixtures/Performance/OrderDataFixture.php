@@ -154,6 +154,7 @@ class OrderDataFixture {
 			$orderData->street = $billingAddress->getStreet();
 			$orderData->city = $billingAddress->getCity();
 			$orderData->postcode = $billingAddress->getPostcode();
+			$orderData->country = $billingAddress->getCountry();
 			$orderData->companyName = $billingAddress->getCompanyName();
 			$orderData->companyNumber = $billingAddress->getCompanyNumber();
 			$orderData->companyTaxNumber = $billingAddress->getCompanyTaxNumber();
@@ -165,6 +166,7 @@ class OrderDataFixture {
 			$orderData->street = $this->faker->streetAddress;
 			$orderData->city = $this->faker->city;
 			$orderData->postcode = $this->faker->postcode;
+			$orderData->country = $this->faker->country;
 			$orderData->companyName = $this->faker->company;
 			$orderData->companyNumber = $this->faker->randomNumber(6);
 			$orderData->companyTaxNumber = $this->faker->randomNumber(6);
@@ -180,6 +182,7 @@ class OrderDataFixture {
 		$orderData->deliveryStreet = $this->faker->streetAddress;
 		$orderData->deliveryCity = $this->faker->city;
 		$orderData->deliveryPostcode = $this->faker->postcode;
+		$orderData->deliveryCountry = $this->faker->country;
 		$orderData->note = $this->faker->text(200);
 		$orderData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
 		$orderData->domainId = 1;

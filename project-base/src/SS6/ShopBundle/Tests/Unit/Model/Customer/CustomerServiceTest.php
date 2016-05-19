@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Country\Country;
+use SS6\ShopBundle\Model\Country\CountryData;
 use SS6\ShopBundle\Model\Customer\BillingAddress;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerPasswordService;
@@ -153,6 +155,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
+	const DOMAIN_ID = 1;
+
 	/**
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
@@ -162,6 +166,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
 		$userData->lastName = 'lastName';
+		$billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
 		$billingAddressData = new BillingAddressData(
 			'street',
 			'city',
@@ -170,8 +175,10 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			'companyName',
 			'companyNumber',
 			'companyTaxNumber',
-			'telephone'
+			'telephone',
+			$billingCountry
 		);
+		$deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 		$deliveryAddressData = new DeliveryAddressData(
 			true,
 			'deliveryStreet',
@@ -179,7 +186,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			'deliveryPostcode',
 			'deliveryCompanyName',
 			'deliveryContactPerson',
-			'deliveryTelephone'
+			'deliveryTelephone',
+			$deliveryCountry
 		);
 
 		$billingAddress = new BillingAddress($billingAddressData);
@@ -200,6 +208,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'orderStreet';
 		$orderData->city = 'orderCity';
 		$orderData->postcode = 'orderPostcode';
+		$orderData->country = $billingCountry;
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
 		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
@@ -207,6 +216,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryStreet = 'orderDeliveryStreet';
 		$orderData->deliveryCity = 'orderDeliveryCity';
 		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
+		$orderData->deliveryCountry = $deliveryCountry;
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -231,6 +241,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testGetAmendedCustomerDataByOrder() {
 		$customerService = $this->getCustomerService();
 
+		$billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
+		$deliveryCountry = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
 		$userData->lastName = 'lastName';
@@ -253,6 +265,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'orderStreet';
 		$orderData->city = 'orderCity';
 		$orderData->postcode = 'orderPostcode';
+		$orderData->country = $billingCountry;
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
 		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
@@ -260,6 +273,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryStreet = 'orderDeliveryStreet';
 		$orderData->deliveryCity = 'orderDeliveryCity';
 		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
+		$orderData->deliveryCountry = $deliveryCountry;
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -278,7 +292,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$order->getDeliveryPostcode(),
 			$order->getDeliveryCompanyName(),
 			$order->getDeliveryContactPerson(),
-			$order->getDeliveryTelephone()
+			$order->getDeliveryTelephone(),
+			$deliveryCountry
 		);
 
 		$customerData = $customerService->getAmendedCustomerDataByOrder($user, $order);
@@ -293,6 +308,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($order->getCity(), $customerData->billingAddressData->city);
 		$this->assertSame($order->getPostcode(), $customerData->billingAddressData->postcode);
 		$this->assertSame($order->getTelephone(), $customerData->billingAddressData->telephone);
+		$this->assertSame($order->getCountry(), $customerData->billingAddressData->country);
 	}
 
 	/**

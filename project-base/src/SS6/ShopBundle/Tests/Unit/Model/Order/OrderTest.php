@@ -5,6 +5,8 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Order;
 use DateTime;
 use DateTimeInterface;
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Model\Country\Country;
+use SS6\ShopBundle\Model\Country\CountryData;
 use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Order;
@@ -14,6 +16,8 @@ use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Price;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
+
+	const DOMAIN_ID = 1;
 
 	public function testGetProductItems() {
 		$payment = new Payment(new PaymentData());
@@ -48,6 +52,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 
 	public function testOrderWithDeliveryAddressSameAsBillingAddress() {
 		$orderData = new OrderData();
+		$country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 
 		$orderData->companyName = 'companyName';
 		$orderData->telephone = 'telephone';
@@ -56,6 +61,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'street';
 		$orderData->city = 'city';
 		$orderData->postcode = 'postcode';
+		$orderData->country = $country;
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 
 		$order = new Order($orderData, 'orderNumber', 'urlHash', null);
@@ -66,10 +72,12 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('street', $order->getDeliveryStreet());
 		$this->assertSame('city', $order->getDeliveryCity());
 		$this->assertSame('postcode', $order->getDeliveryPostcode());
+		$this->assertSame($country, $order->getDeliveryCountry());
 	}
 
 	public function testOrderWithoutDeliveryAddressSameAsBillingAddress() {
 		$orderData = new OrderData();
+		$country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 
 		$orderData->companyName = 'companyName';
 		$orderData->telephone = 'telephone';
@@ -78,6 +86,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$orderData->street = 'street';
 		$orderData->city = 'city';
 		$orderData->postcode = 'postCode';
+		$orderData->country = $country;
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryCompanyName = 'deliveryCompanyName';
 		$orderData->deliveryTelephone = 'deliveryTelephone';
@@ -85,6 +94,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryStreet = 'deliveryStreet';
 		$orderData->deliveryCity = 'deliveryCity';
 		$orderData->deliveryPostcode = 'deliveryPostcode';
+		$orderData->deliveryCountry = $country;
 
 		$order = new Order($orderData, 'orderNumber', 'urlHash', null);
 
@@ -94,6 +104,7 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('deliveryStreet', $order->getDeliveryStreet());
 		$this->assertSame('deliveryCity', $order->getDeliveryCity());
 		$this->assertSame('deliveryPostcode', $order->getDeliveryPostCode());
+		$this->assertSame($country, $order->getDeliveryCountry());
 	}
 
 	public function testOrderCreatedWithEmptyCreatedAtIsCreatedNow() {

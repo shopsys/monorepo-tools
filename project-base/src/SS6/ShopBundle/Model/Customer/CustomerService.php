@@ -165,6 +165,7 @@ class CustomerService {
 			$billingAddressData->street = $order->getStreet();
 			$billingAddressData->city = $order->getCity();
 			$billingAddressData->postcode = $order->getPostcode();
+			$billingAddressData->country = $order->getCountry();
 		}
 
 		if ($billingAddress->getTelephone() === null) {
@@ -187,6 +188,7 @@ class CustomerService {
 			$deliveryAddressData->street = $order->getDeliveryStreet();
 			$deliveryAddressData->city = $order->getDeliveryCity();
 			$deliveryAddressData->postcode = $order->getDeliveryPostcode();
+			$deliveryAddressData->country = $order->getDeliveryCountry();
 			$deliveryAddressData->companyName = $order->getDeliveryCompanyName();
 			$deliveryAddressData->contactPerson = $order->getDeliveryContactPerson();
 			$deliveryAddressData->telephone = $order->getDeliveryTelephone();
