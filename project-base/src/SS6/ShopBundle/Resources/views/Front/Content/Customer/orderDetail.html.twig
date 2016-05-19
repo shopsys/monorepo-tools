@@ -57,6 +57,10 @@
 				<th>{{ 'PSČ'|trans }}: </th>
 				<td>{{ order.postcode }}</td>
 			</tr>
+			<tr>
+				<td>{{ 'Stát'|trans }}: </td>
+				<td>{{ order.country.name }}</td>
+			</tr>
 		</table>
 	</div>
 	{% if order.deliveryStreet is not null %}
@@ -92,6 +96,10 @@
 				<tr>
 					<th>{{ 'PSČ'|trans }}: </th>
 					<td>{{ order.deliveryPostcode }}</td>
+				</tr>
+				<tr>
+					<th>{{ 'Stát'|trans }}: </th>
+					<td>{{ order.deliveryCountry.name }}</td>
 				</tr>
 			</table>
 		</div>
