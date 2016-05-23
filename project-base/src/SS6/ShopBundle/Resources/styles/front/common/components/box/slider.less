@@ -1,3 +1,5 @@
+@box-slider-width: @web-width - @web-panel-width - 2*@web-padding;
+
 .box-slider {
 	display: none;
 }
@@ -7,7 +9,7 @@
 		display: block;
 		position: relative;
 		margin-bottom: @margin-gap;
-		width: @width-web - @width-panel - 2*@padding-web;
+		width: @box-slider-width;
 		max-width: 100%;
 
 		&__in {

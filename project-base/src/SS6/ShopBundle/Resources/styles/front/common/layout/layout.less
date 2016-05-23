@@ -27,7 +27,7 @@ img {
 	}
 
 	&__container {
-		padding: 0 @padding-web;
+		padding: 0 @web-padding;
 	}
 
 	&__main {
@@ -57,7 +57,7 @@ img {
 				.web__main--with-panel & {
 					order: 2;
 					width: 70%;
-					width: calc(~"100% - @{width-panel}");
+					width: calc(~"100% - @{web-panel-width}");
 				}
 			}
 
@@ -65,7 +65,7 @@ img {
 				display: block;
 				order: 1;
 				flex-shrink: 0;
-				width: @width-panel;
+				width: @web-panel-width;
 				padding-right: 20px;
 			}
 		}
@@ -75,7 +75,7 @@ img {
 @media @query-xl {
 	.web {
 		&__container {
-			width: @width-web;
+			width: @web-width;
 			margin: 0 auto;
 		}
 	}

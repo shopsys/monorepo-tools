@@ -1,4 +1,6 @@
 @box-cookies-height: @web-footer-with-cookies-margin-bottom;
+@box-cookies-padding: @web-padding;
+@box-cookies-width: @web-width;
 
 .box-cookies {
 	position: fixed;
@@ -19,7 +21,7 @@
 	}
 
 	&__in {
-		padding: 0 @padding-web;
+		padding: 0 @box-cookies-padding;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -35,7 +37,7 @@
 	.box-cookies {
 		&__in {
 			margin: 0 auto;
-			width: @width-web;
+			width: @box-cookies-width;
 		}
 	}
 }
