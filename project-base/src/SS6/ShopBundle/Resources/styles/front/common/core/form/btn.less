@@ -1,3 +1,4 @@
+// Default button
 .btn {
 	width: auto;
 	min-height: @btn-height;
@@ -21,7 +22,10 @@
 		color: @btn-color-hover;
 		background: @btn-bg-hover;
 	}
+}
 
+//// Modifications - color
+.btn {
 	&--primary {
 		color: @btn-primary-color;
 		background: @btn-primary-bg;
@@ -52,7 +56,10 @@
 			background: @color-e;
 		}
 	}
+}
 
+//// Modifications - size
+.btn {
 	&--large {
 		padding-left: 25px;
 		padding-right: 25px;
@@ -68,6 +75,7 @@
 	}
 }
 
+// Button with removed styles
 .btn-no-style {
 	padding: 0;
 	display: inline-block;
@@ -77,6 +85,7 @@
 	outline: 0;
 }
 
+// Button for mobile head
 .btn-tap {
 	display: inline-block;
 	min-width: 28px;
@@ -86,18 +95,6 @@
 
 	text-align: center;
 	outline: 0;
-
-	&--menu {
-		float: left;
-		margin-left: 0;
-
-		.svg {
-			margin-right: 5px;
-			vertical-align: baseline;
-
-			font-size: 11px;
-		}
-	}
 
 	&__in {
 		padding: 0 10px;
@@ -109,19 +106,9 @@
 		text-decoration: none;
 		font-size: 16px;
 
-		.btn-tap--menu & {
-			background: @color-light;
-			font-size: 14px;
-		}
-
 		.active & {
 			color: @color-primary;
 			text-decoration: none;
-		}
-
-		.btn-tap--menu.active &  {
-			color: @color-f;
-			background: @color-primary;
 		}
 
 		&__info {
@@ -136,6 +123,33 @@
 			color: @color-f;
 			background: @color-red;
 			font-size: 12px;
+		}
+	}
+}
+
+//// Modification - menu
+.btn-tap {
+	&--menu {
+		float: left;
+		margin-left: 0;
+
+		.svg {
+			margin-right: 5px;
+			vertical-align: baseline;
+
+			font-size: 11px;
+		}
+	}
+
+	&__in {
+		.btn-tap--menu & {
+			background: @color-light;
+			font-size: 14px;
+		}
+
+		.btn-tap--menu.active &  {
+			color: @color-f;
+			background: @color-primary;
 		}
 	}
 }
