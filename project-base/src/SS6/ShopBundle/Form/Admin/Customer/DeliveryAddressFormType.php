@@ -115,6 +115,9 @@ class DeliveryAddressFormType extends AbstractType {
 			->add('country', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+				],
 			]);
 	}
 

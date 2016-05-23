@@ -121,6 +121,9 @@ class PersonalInfoFormType extends AbstractType {
 			])
 			->add('country', FormType::CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+				],
 			])
 			->add($builder
 				->create('deliveryAddressFilled', FormType::CHECKBOX, [
@@ -208,6 +211,12 @@ class PersonalInfoFormType extends AbstractType {
 			->add('deliveryCountry', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Prosím vyberte stát',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
+				],
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
 			->add('termsAndConditionsAgreement', FormType::CHECKBOX, [

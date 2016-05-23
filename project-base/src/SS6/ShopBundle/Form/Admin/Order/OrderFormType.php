@@ -136,6 +136,9 @@ class OrderFormType extends AbstractType {
 			])
 			->add('country', FormType::CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+				],
 			])
 			->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
 			->add('deliveryContactPerson', FormType::TEXT, [
@@ -216,6 +219,9 @@ class OrderFormType extends AbstractType {
 			->add('deliveryCountry', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+				],
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])
 			->add('itemsWithoutTransportAndPayment', FormType::COLLECTION, [
