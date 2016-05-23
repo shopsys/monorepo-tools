@@ -1,5 +1,6 @@
 @table-cart-image-width: 60px;
 @table-cart-image-height: 60px;
+@table-cart-image-gap: 10px;
 
 .table-cart {
 	margin-bottom: @margin-gap;
@@ -72,7 +73,7 @@
 			}
 
 			&--name {
-				padding-left: @table-cart-image-width + 10;
+				padding-left: @table-cart-image-width + @table-cart-image-gap;
 				padding-right: 20px;
 			}
 
@@ -81,7 +82,7 @@
 			}
 
 			&--amount {
-				padding-left: @table-cart-image-width + 10;
+				padding-left: @table-cart-image-width + @table-cart-image-gap;
 				padding-top: 10px;
 			}
 
@@ -143,7 +144,7 @@
 			}
 
 			&--image {
-				width: @table-cart-image-width + 10;
+				width: @table-cart-image-width + @table-cart-image-gap;
 			}
 
 			&--amount {
