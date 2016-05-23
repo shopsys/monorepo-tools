@@ -1,12 +1,17 @@
+@in-flag-position-top: 10px;
+@in-flag-position-left: 10px;
+@in-flag-in-list-position-top: 0;
+@in-flag-in-list-position-left: 0;
+
 .in-flag {
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: @in-flag-position-top;
+	left: @in-flag-position-left;
 	.cfx();
 
 	&--in-list {
-		top: 0;
-		left: 0;
+		top: @in-flag-in-list-position-top;
+		left: @in-flag-in-list-position-left;
 	}
 
 	&__item {
