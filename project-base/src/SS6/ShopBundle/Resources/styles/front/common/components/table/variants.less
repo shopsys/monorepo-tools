@@ -5,6 +5,7 @@
 @table-variants-image-height: 60px;
 @table-variants-image-width-mobile: 40px;
 @table-variants-image-height-mobile: 40px;
+@table-variants-image-gap: 10px;
 
 .table-variants {
 	margin-bottom: @margin-gap;
@@ -52,11 +53,11 @@
 
 		&__cell {
 			display: block;
-			padding-left: @table-variants-image-width-mobile + 10;
+			padding-left: @table-variants-image-width-mobile + @table-variants-image-gap;
 
 			&--image {
 				float: left;
-				width: 40px;
+				width: @table-variants-image-width-mobile;
 				padding-left: 0;
 			}
 
