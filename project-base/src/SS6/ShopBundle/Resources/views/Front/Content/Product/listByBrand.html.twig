@@ -18,15 +18,19 @@
 	<div class="box-list">
 		<h1>{{ brand.name }}</h1>
 
-		<div>
-			{% if imageExists(brand) %}
-				{{ image(brand) }}
-			{% else %}
-				<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ brand.name }}">
-			{% endif %}
-			{% if brand.description is not null %}
-				{{ brand.description|raw }}
-			{% endif %}
+		<div class="box-list__producer">
+			<div class="box-list__producer__image">
+				{% if imageExists(brand) %}
+					{{ image(brand) }}
+				{% else %}
+					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ brand.name }}">
+				{% endif %}
+			</div>
+			<div class="box-list__producer__text">
+				{% if brand.description is not null %}
+					{{ brand.description|raw }}
+				{% endif %}
+			</div>
 		</div>
 
 		<div>
