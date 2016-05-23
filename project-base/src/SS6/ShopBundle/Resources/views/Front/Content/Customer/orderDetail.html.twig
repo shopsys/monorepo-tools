@@ -8,7 +8,7 @@
 
 {% block main_content %}
 	<h1>{{ 'Objednávka č.'|trans }} {{order.number}}</h1>
-	<div class="mb20">
+	<div class="h-margin-bottom-20">
 		<h2>{{ 'Fakturační adresa'|trans }}</h2>
 		<table class="table-params">
 			<tr>
@@ -64,7 +64,7 @@
 		</table>
 	</div>
 	{% if order.deliveryStreet is not null %}
-		<div class="mb20">
+		<div class="h-margin-bottom-20">
 			<h2>{{ 'Doručovací adresa'|trans }}</h2>
 			<table class="table-params">
 				{% if order.deliveryContactPerson is not null %}
@@ -105,7 +105,7 @@
 		</div>
 	{% endif %}
 
-	<div class="mb20">
+	<div class="h-margin-bottom-20">
 		<h2>{{ 'Položky'|trans }}</h2>
 		<div class="in-scroll">
 			<div class="in-scroll__in">
@@ -133,17 +133,17 @@
 		</div>
 	</div>
 
-	<div class="mb20">
+	<div class="h-margin-bottom-20">
 		<h2>{{ 'Stav'|trans }}</h2>
 		{{ order.status.name }}
 	</div>
 
-	<div class="mb20">
+	<div class="h-margin-bottom-20">
 		<h2>{{ 'Datum vytvoření'|trans }}</h2>
 		{{ order.createdAt|formatDate }}
 	</div>
 
-	<div class="mb20">
+	<div class="h-margin-bottom-20">
 		<h2>{{ 'Celková cena'|trans }}</h2>
 		<table class="table-params">
 			<tr>

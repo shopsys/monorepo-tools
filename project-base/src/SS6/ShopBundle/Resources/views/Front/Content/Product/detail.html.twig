@@ -137,7 +137,7 @@
 			<tbody>
 				{% for variantDetail in variantsDetails %}
 					<tr>
-						<td class="text-center">
+						<td class="h-text-center">
 							{% if imageExists(variantDetail.product) %}
 								<a href="{{ imageUrl(variantDetail.product, 'original') }}" class="js-popup-image">
 									{{ image(variantDetail.product, { size: 'thumbnail' }) }}

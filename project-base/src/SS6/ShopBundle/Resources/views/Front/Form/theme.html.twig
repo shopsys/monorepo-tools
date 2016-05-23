@@ -109,7 +109,7 @@
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
-		<span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
+		<span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'h-display-none' }}">
 			{% if form.parent %}
 				<span class="form-error__icon">
 					!
