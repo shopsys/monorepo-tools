@@ -1,14 +1,17 @@
+@box-condition-width: 490px;
+@box-condition-gap: 10px;
+
 .box-condition {
-	padding: 10px;
+	padding: @box-condition-gap;
 	margin-bottom: @margin-gap;
-	width: 490px;
+	width: @box-condition-width;
 	max-width: 100%;
 
 	background: @color-f;
 	border: 1px solid @color-border;
 
 	&__in {
-		margin-bottom: 10px;
+		margin-bottom: @box-condition-gap;
 	}
 
 	&__control {
