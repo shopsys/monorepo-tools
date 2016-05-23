@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block grid_value_cell_id_calculatedVisibility %}
-	<span class="js-product-visibility relative" data-visibility-url="{{ url('admin_product_visibility', {productId: row.p.id}) }}">
+	<span class="js-product-visibility h-position-relative" data-visibility-url="{{ url('admin_product_visibility', {productId: row.p.id}) }}">
 		<span class="js-product-visibility-icon in-icon svg
 			{% if isVisibleForDefaultPricingGroupOnEachDomain(row.product) %}
 				svg-visible in-icon--visible
