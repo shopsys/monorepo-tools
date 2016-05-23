@@ -1,3 +1,5 @@
+@in-user-text-ul-point-size: 6px;
+
 .in-user-text {
 	ul {
 		.reset-ul();
@@ -12,10 +14,10 @@
 			&:after {
 				position: absolute;
 				content: '';
-				top: 6px;
+				top: @in-user-text-ul-point-size;
 				left: 0;
-				width: 6px;
-				height: 6px;
+				width: @in-user-text-ul-point-size;
+				height: @in-user-text-ul-point-size;
 
 				background: @color-green;
 			}
