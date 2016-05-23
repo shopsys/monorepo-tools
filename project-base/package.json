@@ -17,7 +17,6 @@
     "grunt-legacssy": "^0.3.1",
     "grunt-postcss": "^0.8.0",
     "grunt-spritesmith": "^1.26.0",
-    "grunt-styledocco": "^0.1.4",
     "grunt-webfont": "^0.5.4"
   }
 }
