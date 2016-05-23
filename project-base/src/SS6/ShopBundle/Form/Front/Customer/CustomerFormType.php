@@ -12,14 +12,14 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CustomerFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 */
-	public function __construct(array $countries = null) {
+	public function __construct(array $countries) {
 		$this->countries = $countries;
 	}
 

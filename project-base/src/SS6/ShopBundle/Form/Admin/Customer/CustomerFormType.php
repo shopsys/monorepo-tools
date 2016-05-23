@@ -29,21 +29,21 @@ class CustomerFormType extends AbstractType {
 	private $pricingGroups;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
 	 * @param string $scenario
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 * @param \SS6\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
-	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
 	 */
-	public function __construct($scenario, $selectedDomain = null, $pricingGroups = null, array $countries = null) {
+	public function __construct($scenario, array $countries, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;
+		$this->countries = $countries;
 		$this->selectedDomain = $selectedDomain;
 		$this->pricingGroups = $pricingGroups;
-		$this->countries = $countries;
 	}
 
 	/**

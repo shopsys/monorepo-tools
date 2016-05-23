@@ -24,14 +24,14 @@ class OrderFlow extends FormFlow {
 	private $payments;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
 	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function setFormTypesData(array $transports, array $payments, array $countries) {
 		$this->transports = $transports;

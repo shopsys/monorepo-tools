@@ -50,7 +50,7 @@ class CustomerFormTypeFactory {
 
 		$countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
 
-		return new CustomerFormType($scenario, $this->selectedDomain, $allPricingGroups, $countries);
+		return new CustomerFormType($scenario, $countries, $this->selectedDomain, $allPricingGroups);
 	}
 
 }

@@ -20,12 +20,12 @@ class PersonalInfoFormType extends AbstractType {
 	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $countries) {
 		$this->countries = $countries;

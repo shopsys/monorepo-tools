@@ -35,7 +35,7 @@ class OrderFormType extends AbstractType {
 	private $payments;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]|null
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
@@ -43,7 +43,7 @@ class OrderFormType extends AbstractType {
 	 * @param array $allOrderStatuses
 	 * @param array $transports
 	 * @param array $payments
-	 * @param \SS6\ShopBundle\Model\Country\Country[]|null $countries
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $allOrderStatuses, array $transports, array $payments, array $countries) {
 		$this->allOrderStatuses = $allOrderStatuses;
