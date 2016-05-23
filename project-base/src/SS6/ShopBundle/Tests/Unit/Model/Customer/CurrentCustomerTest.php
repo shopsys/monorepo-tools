@@ -13,12 +13,9 @@ use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-/**
- * @UglyTest
- */
 class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetPricingGroupNotLogged() {
+	public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup() {
 		$expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
 		$tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
@@ -39,7 +36,7 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame($expectedPricingGroup, $pricingGroup);
 	}
 
-	public function testGetPricingGroup() {
+	public function testGetPricingGroupForRegisteredCustomerReturnsHisPricingGroup() {
 		$expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 		$billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
 		$userData = new UserData();
