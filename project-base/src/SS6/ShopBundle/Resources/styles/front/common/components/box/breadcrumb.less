@@ -1,3 +1,6 @@
+@box-breadcrumb-padding-horizontal: 10px;
+@box-breadcrumb-padding-vertical: 3px;
+
 .box-breadcrumb {
 	margin-bottom: @margin-gap;
 
@@ -6,7 +9,7 @@
 	&__item {
 		display: inline-block;
 		vertical-align: middle;
-		padding: 3px 10px;
+		padding: @box-breadcrumb-padding-vertical @box-breadcrumb-padding-horizontal;
 
 		font-size: @font-size;
 
