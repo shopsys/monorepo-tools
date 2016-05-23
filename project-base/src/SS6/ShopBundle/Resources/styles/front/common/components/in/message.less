@@ -1,3 +1,13 @@
+@in-message-alert: #F7D6D6;
+@in-message-warning: @color-orange;
+@in-message-info: #BAE3F2;
+@in-message-success: @color-green;
+
+@in-message-alert-text: @color-red;
+@in-message-warning-text: @color-orange;
+@in-message-info-text: #005B7E;
+@in-message-success-text: @color-green;
+
 .in-message {
 	display: block;
 	padding: 6px 9px;
@@ -12,27 +22,27 @@
 	}
 
 	&--error {
-		color: @color-message-alert-text;
-		border: 1px solid @color-message-alert;
+		color: @in-message-alert-text;
+		border: 1px solid @in-message-alert;
 	}
 
 	&--warning {
-		color: @color-message-warning-text;
-		border: 1px solid @color-message-warning;
+		color: @in-message-warning-text;
+		border: 1px solid @in-message-warning;
 	}
 
 	&--info {
-		color: @color-message-info-text;
-		border: 1px solid @color-message-info;
+		color: @in-message-info-text;
+		border: 1px solid @in-message-info;
 	}
 
 	&--success {
-		color: @color-message-success-text;
-		border: 1px solid @color-message-success;
+		color: @in-message-success-text;
+		border: 1px solid @in-message-success;
 	}
 
 	&--alert {
-		color: @color-message-alert-text;
-		border: 1px solid @color-message-alert;
+		color: @in-message-alert-text;
+		border: 1px solid @in-message-alert;
 	}
 }
