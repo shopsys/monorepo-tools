@@ -1,15 +1,26 @@
-.input {
-	width: 210px;
-	max-width: 100%;
-	height: @btn-height;
-	line-height: @btn-height - 2;
-	padding: 0 10px;
+@input-height: @form-item-height;
+@input-textarea-height: @input-height * 3;
+@input-width: 210px;
+@input-padding-horizontal: 10px;
 
-	border: 1px solid @color-border;
+@input-border-color: @color-border;
+@input-error-border-color: @color-red;
+@input-background: @color-f;
+@input-disabled-background: #eff1f2;
+
+.input {
+	width: @input-width;
+	max-width: 100%;
+	height: @input-height;
+	line-height: @input-height - 2;
+	padding: 0 @input-padding-horizontal;
+
+	border: 1px solid @input-border-color;
 	color: @color-base;
+	background: @input-background;
 
 	&--textarea {
-		height: @btn-height * 3;
+		height: @input-textarea-height;
 		line-height: 20px;
 		padding-top: 5px;
 		padding-bottom: 5px;
@@ -23,17 +34,17 @@
 	&.form-input-error {
 		padding-right: 25px;
 
-		border-color: @color-red;
+		border-color: @input-error-border-color;
 		box-shadow: none;
 
 		&:focus {
-			border-color: @color-red;
+			border-color: @input-error-border-color;
 		}
 	}
 
 	.form-input-disabled &,
 	&.form-input-disabled {
-		background: #eff1f2;
+		background: @input-disabled-background;
 	}
 }
 
