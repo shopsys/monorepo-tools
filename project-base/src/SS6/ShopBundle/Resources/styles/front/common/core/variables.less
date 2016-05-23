@@ -90,32 +90,32 @@
 //// Default postfixes for responsive helpers generator
 @postfixes: -tablet, -mobile, -mobile-small;
 
-// Responsive break points
-@respons-1: 320px;
-@respons-1-a: (@respons-1 - 1);
-@respons-2: 480px;
-@respons-2-a: (@respons-2 - 1);
-@respons-3: 600px;
-@respons-3-a: (@respons-3 - 1);
-@respons-4: 769px;
-@respons-4-a: (@respons-4 - 1);
-@respons-5: 1024px;
-@respons-5-a: (@respons-5 - 1);
-@respons-6: @web-width;
-@respons-6-a: (@respons-6 - 1);
+// Responsive breakpoints
+@breakpoint-1: 320px;
+@breakpoint-1-a: (@breakpoint-1 - 1);
+@breakpoint-2: 480px;
+@breakpoint-2-a: (@breakpoint-2 - 1);
+@breakpoint-3: 600px;
+@breakpoint-3-a: (@breakpoint-3 - 1);
+@breakpoint-4: 769px;
+@breakpoint-4-a: (@breakpoint-4 - 1);
+@breakpoint-5: 1024px;
+@breakpoint-5-a: (@breakpoint-5 - 1);
+@breakpoint-6: @web-width;
+@breakpoint-6-a: (@breakpoint-6 - 1);
 
 // Media queries
 //// Mobile first
-@query-xs: ~"screen and (min-width: @{respons-1})";
-@query-sm: ~"screen and (min-width: @{respons-2})";
-@query-md: ~"screen and (min-width: @{respons-3})";
-@query-lg: ~"screen and (min-width: @{respons-4})";
-@query-vl: ~"screen and (min-width: @{respons-5})";
-@query-xl: ~"screen and (min-width: @{respons-6})";
+@query-xs: ~"screen and (min-width: @{breakpoint-1})";
+@query-sm: ~"screen and (min-width: @{breakpoint-2})";
+@query-md: ~"screen and (min-width: @{breakpoint-3})";
+@query-lg: ~"screen and (min-width: @{breakpoint-4})";
+@query-vl: ~"screen and (min-width: @{breakpoint-5})";
+@query-xl: ~"screen and (min-width: @{breakpoint-6})";
 
 //// Desktop first
-@query-mobile-xs: ~"screen and (max-width: @{respons-2-a})";
-@query-mobile: ~"screen and (max-width: @{respons-3-a})";
-@query-tablet: ~"screen and (max-width: @{respons-4-a})";
-@query-tablet-only: ~"screen and (min-width: @{respons-3}) and (max-width: @{respons-4-a})";
-@query-not-large-desktop: ~"screen and (max-width: @{respons-5-a})";
+@query-mobile-xs: ~"screen and (max-width: @{breakpoint-2-a})";
+@query-mobile: ~"screen and (max-width: @{breakpoint-3-a})";
+@query-tablet: ~"screen and (max-width: @{breakpoint-4-a})";
+@query-tablet-only: ~"screen and (min-width: @{breakpoint-3}) and (max-width: @{breakpoint-4-a})";
+@query-not-large-desktop: ~"screen and (max-width: @{breakpoint-5-a})";
