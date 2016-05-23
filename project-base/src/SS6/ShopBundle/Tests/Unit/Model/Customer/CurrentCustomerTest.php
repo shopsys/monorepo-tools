@@ -30,7 +30,6 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 			false
 		);
 		$pricingGroupSettingFacadeMock
-			->expects($this->once())
 			->method('getDefaultPricingGroupByCurrentDomain')
 			->willReturn($expectedPricingGroup);
 
@@ -50,10 +49,10 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
 		$tokenMock = $this->getMockBuilder(TokenInterface::class)
 			->setMethods(['getUser'])
 			->getMockForAbstractClass();
-		$tokenMock->expects($this->once())->method('getUser')->willReturn($user);
+		$tokenMock->method('getUser')->willReturn($user);
 
 		$tokenStorageMock = $this->getMock(TokenStorage::class, ['getToken'], [], '', false);
-		$tokenStorageMock->expects($this->once())->method('getToken')->willReturn($tokenMock);
+		$tokenStorageMock->method('getToken')->willReturn($tokenMock);
 
 		$pricingGroupFacadeMock = $this->getMock(PricingGroupSettingFacade::class, [], [], '', false);
 
