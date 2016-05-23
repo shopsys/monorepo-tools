@@ -236,11 +236,20 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less', '!{{ rootStylesDirectory|raw }}/admin/helpers.less', '!{{ rootStylesDirectory|raw }}/admin/helpers/*.less', '{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'],
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/**/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
 				tasks: ['adminLess']
 			},
 			adminHelpers: {
-				files: ['{{ rootStylesDirectory|raw }}/admin/helpers.less', '{{ rootStylesDirectory|raw }}/admin/helpers/*.less', '!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'],
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
 				tasks: ['less:helpersAdmin']
 			},
 			adminSprite: {
@@ -270,14 +279,23 @@ module.exports = function(grunt) {
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
-					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less', '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less', '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less', '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'],
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+					],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
 						['frontendLess{{ domain.id }}']
 					{% endif -%}
 				},
 				helpers{{ domain.id }}: {
-					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less', '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less', '!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'],
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+					],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
 						['frontendLess{{ domain.id }}']
