@@ -6,12 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException;
 
-/**
- * @UglyTest
- */
 class CustomerIdentifierTest extends PHPUnit_Framework_TestCase {
 
-	public function testCreateEmpty() {
+	public function testCannotCreateIdentifierForEmptySessionIdAndNullUser() {
 		$sessionId = '';
 		$user = null;
 
