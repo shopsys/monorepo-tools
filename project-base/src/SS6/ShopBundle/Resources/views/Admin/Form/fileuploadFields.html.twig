@@ -23,7 +23,9 @@
 									<i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Smazat'|trans }}"></i>
 
 									<div class="js-file-upload-progress list-images__item__pipe">
-										<div class="js-file-upload-progress-bar list-images__item__pipe__line">0%</div>
+										<div class="js-file-upload-progress-bar list-images__item__pipe__line">
+											<span class="js-file-upload-progress-bar-value list-images__item__pipe__line__value">0%</span>
+										</div>
 									</div>
 								</div>
 								<div class="list-images__item__info">
@@ -46,7 +48,7 @@
 						{% endfor %}
 					</ul>
 					<div class="h-display-none">
-						 <span class="js-file-upload-status in-message in-message--info">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
+						 <span class="js-file-upload-status in-message in-message--info box-upload__uploading">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
 					</div>
 				</div>
 			</div>

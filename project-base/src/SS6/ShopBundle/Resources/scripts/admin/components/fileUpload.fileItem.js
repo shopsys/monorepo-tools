@@ -9,6 +9,7 @@
 		var $deleteButton = $file.find('.js-file-upload-delete');
 		var $progress = $file.find('.js-file-upload-progress');
 		var $progressBar = $file.find('.js-file-upload-progress-bar');
+		var $progressBarValue = $file.find('.js-file-upload-progress-bar-value');
 		var $input = $file.find('.js-file-upload-input');
 		var $iconType = $file.find('.js-file-upload-icon-type');
 		var $imageThumbnail = $file.find('.js-file-upload-image-thumbnail');
@@ -41,7 +42,8 @@
 
 		this.setProgress = function (percent) {
 			$progress.show();
-			$progressBar.width(percent + '%').text(percent + '%');
+			$progressBar.width(percent + '%');
+			$progressBarValue.text(percent + '%');
 
 			if (percent === 100) {
 				setTimeout(function () {
