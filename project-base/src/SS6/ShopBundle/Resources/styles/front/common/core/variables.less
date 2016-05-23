@@ -75,10 +75,11 @@
 ////// Base color for background of components
 @color-box: @color-light;
 
-// Forms
-@form-item-height: 36px;
 
 // Other
+//// Forms
+@form-item-height: 36px;
+
 //// Default transition settings
 @transition-type: cubic-bezier(.8, .20, .48, 1.0);
 @transition-time: 0.2s;
@@ -104,8 +105,8 @@
 @breakpoint-6: @web-width;
 @breakpoint-6-a: (@breakpoint-6 - 1);
 
-// Media queries
-//// Mobile first
+//// Media queries
+////// Mobile first
 @query-xs: ~"screen and (min-width: @{breakpoint-1})";
 @query-sm: ~"screen and (min-width: @{breakpoint-2})";
 @query-md: ~"screen and (min-width: @{breakpoint-3})";
@@ -113,7 +114,7 @@
 @query-vl: ~"screen and (min-width: @{breakpoint-5})";
 @query-xl: ~"screen and (min-width: @{breakpoint-6})";
 
-//// Desktop first
+////// Desktop first
 @query-mobile-xs: ~"screen and (max-width: @{breakpoint-2-a})";
 @query-mobile: ~"screen and (max-width: @{breakpoint-3-a})";
 @query-tablet: ~"screen and (max-width: @{breakpoint-4-a})";
