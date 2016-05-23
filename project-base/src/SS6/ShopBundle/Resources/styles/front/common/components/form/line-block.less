@@ -1,16 +1,19 @@
+@form-line-block-margin-bottom: 15px;
+@form-line-block-label-field-gap: 5px;
+
 .form-line-block {
 	position: relative;
-	margin: 0 0 15px;
+	margin: 0 0 @form-line-block-margin-bottom;
 	padding: 0;
 
 	dt {
-		margin: 0 0 5px;
+		margin: 0 0 @form-line-block-label-field-gap;
 		padding: 0;
 		display: block;
 	}
 
 	dd {
-		margin: 0 0 5px;
+		margin: 0 0 @form-line-block-label-field-gap;
 		padding: 0;
 		display: block;
 		position: relative;
