@@ -1,9 +1,11 @@
+@list-categories-gap: 5px;
+
 .list-categories {
 	.reset-ul();
 	margin-bottom: @margin-gap;
 
 	&__item {
-		margin-bottom: 5px;
+		margin-bottom: @list-categories-gap;
 
 		&__block {
 			display: flex;
@@ -36,14 +38,14 @@
 
 @media @query-sm {
 	.list-categories {
-		margin-left: -5px;
+		margin-left: -@list-categories-gap;
 
 		font-size: 0;
 
 		&__item {
 			display: inline-block;
 			vertical-align: top;
-			padding-left: 5px;
+			padding-left: @list-categories-gap;
 			width: 100%/2;
 		}
 	}
