@@ -26,6 +26,10 @@
 	.column-spec(@i - 1, @postfix);
 }
 
+.row {
+	.clearfix();
+}
+
 .col {
 	float: left;
 	.column(@cols-minimum, @cols-stepper, @cols-maximum);
@@ -44,9 +48,5 @@
 	@media @query-mobile-xs {
 		.column(@cols-minimum, @cols-stepper, @cols-maximum, extract(@postfixes, 3));
 		.column-spec(@cols-special-lenght, extract(@postfixes, 3));
-	}
-
-	&__row {
-		.clearfix();
 	}
 }
