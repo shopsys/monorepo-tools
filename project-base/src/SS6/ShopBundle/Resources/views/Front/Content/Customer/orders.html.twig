@@ -22,7 +22,7 @@
 						<th>{{ 'Doprava'|trans }}</th>
 						<th>{{ 'Platba'|trans }}</th>
 						<th>{{ 'Celková cena s DPH'|trans }}</th>
-						<th class="h-text-center">{{ 'Detail'|trans }}</th>
+						<th class="text-center">{{ 'Detail'|trans }}</th>
 					</tr>
 					{% for order in orders %}
 						<tr>
@@ -33,7 +33,7 @@
 							<td>{{ order.transportName }}</td>
 							<td>{{ order.paymentName }}</td>
 							<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
-							<td class="h-text-center"><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}" class="in-icon in-icon--detail"><i class="svg svg-search"></i></a></td>
+							<td class="text-center"><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}" class="in-icon in-icon--detail"><i class="svg svg-search"></i></a></td>
 						</tr>
 					{% endfor %}
 				</table>
