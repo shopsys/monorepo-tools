@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,6 +15,18 @@ use Symfony\Component\Validator\Constraints;
 class DeliveryAddressFormType extends AbstractType {
 
 	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 */
+	private $countries;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 */
+	public function __construct(array $countries) {
+		$this->countries = $countries;
+	}
 
 	/**
 	 * @return string
@@ -97,6 +110,13 @@ class DeliveryAddressFormType extends AbstractType {
 						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
+				],
+			])
+			->add('country', FormType::CHOICE, [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
 				],
 			]);
 	}

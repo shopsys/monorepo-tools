@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
@@ -15,6 +16,9 @@ use SS6\ShopBundle\Model\Order\OrderData;
 use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassLength)
+ */
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const ORDER_PREFIX = 'order_';
@@ -40,6 +44,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'První 1';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71200';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -63,6 +68,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Druhá 2';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71300';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -88,6 +94,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Třetí 3';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71200';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -111,6 +118,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Čtvrtá 4';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '70030';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -133,6 +141,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Pátá 55';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71200';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -157,6 +166,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Šestá 39';
 		$orderData->city = 'Pardubice';
 		$orderData->postcode = '58941';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -184,6 +194,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Sedmá 1488';
 		$orderData->city = 'Opava';
 		$orderData->postcode = '85741';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -207,6 +218,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Osmá 1';
 		$orderData->city = 'Praha';
 		$orderData->postcode = '30258';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -230,6 +242,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Devátá 25';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71200';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 2;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -251,6 +264,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Desátá 10';
 		$orderData->city = 'Plzeň';
 		$orderData->postcode = '30010';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -274,6 +288,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Pouliční 11';
 		$orderData->city = 'Městník';
 		$orderData->postcode = '12345';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2);
 		$orderData->companyName = 'netdevelo s.r.o.';
 		$orderData->companyNumber = '123456789';
 		$orderData->companyTaxNumber = '987654321';
@@ -284,8 +299,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->deliveryStreet = 'Zakopaná 42';
 		$orderData->deliveryCity = 'Zemín';
 		$orderData->deliveryPostcode = '54321';
+		$orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2);
 		$orderData->note = 'Prosím o dodání do pátku. Děkuji.';
-		$orderData->domainId = 1;
+		$orderData->domainId = 2;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
@@ -308,6 +324,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Sídlištní 3259';
 		$orderData->city = 'Orlová';
 		$orderData->postcode = '65421';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 2;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -331,6 +348,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Cihelní 5';
 		$orderData->city = 'Liberec';
 		$orderData->postcode = '65421';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -352,6 +370,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Gagarinova 333';
 		$orderData->city = 'Hodonín';
 		$orderData->postcode = '69501';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -375,6 +394,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Kalužní 88';
 		$orderData->city = 'Lednice';
 		$orderData->postcode = '69144';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -397,6 +417,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Adresní 6';
 		$orderData->city = 'Opava';
 		$orderData->postcode = '72589';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -419,6 +440,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Výpočetni 16';
 		$orderData->city = 'Praha';
 		$orderData->postcode = '30015';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -443,6 +465,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Přímá 1';
 		$orderData->city = 'Plzeň';
 		$orderData->postcode = '30010';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 1;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
@@ -466,6 +489,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Křivá 11';
 		$orderData->city = 'Jablonec';
 		$orderData->postcode = '78952';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->companyName = 'BestCompanyEver, s.r.o.';
 		$orderData->companyNumber = '555555';
@@ -494,6 +518,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->street = 'Vyhlídková 88';
 		$orderData->city = 'Ostrava';
 		$orderData->postcode = '71201';
+		$orderData->country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2);
 		$orderData->deliveryAddressSameAsBillingAddress = true;
 		$orderData->domainId = 2;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
@@ -552,6 +577,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			PaymentDataFixture::class,
 			UserDataFixture::class,
 			OrderStatusDataFixture::class,
+			CountryDataFixture::class,
 		];
 	}
 

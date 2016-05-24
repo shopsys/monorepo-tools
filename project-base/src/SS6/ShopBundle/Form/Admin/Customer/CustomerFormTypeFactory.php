@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Form\Admin\Customer;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use SS6\ShopBundle\Model\Country\CountryFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
@@ -20,12 +21,19 @@ class CustomerFormTypeFactory {
 	 */
 	private $pricingGroupRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 */
+	private $countryFacade;
+
 	public function __construct(
 		SelectedDomain $selectedDomain,
-		PricingGroupRepository $pricingGroupRepository
+		PricingGroupRepository $pricingGroupRepository,
+		CountryFacade $countryFacade
 	) {
 		$this->selectedDomain = $selectedDomain;
 		$this->pricingGroupRepository = $pricingGroupRepository;
+		$this->countryFacade = $countryFacade;
 	}
 
 	/**
@@ -40,7 +48,9 @@ class CustomerFormTypeFactory {
 			$allPricingGroups = $this->pricingGroupRepository->getAll();
 		}
 
-		return new CustomerFormType($scenario, $this->selectedDomain, $allPricingGroups);
+		$countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
+
+		return new CustomerFormType($scenario, $countries, $this->selectedDomain, $allPricingGroups);
 	}
 
 }

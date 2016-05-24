@@ -174,6 +174,13 @@ class Order {
 	private $postcode;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=false)
+	 */
+	private $country;
+
+	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
@@ -221,6 +228,13 @@ class Order {
 	 * @ORM\Column(type="string", length=30)
 	 */
 	private $deliveryPostcode;
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Country\Country")
+	 * @ORM\JoinColumn(name="delivery_country_id", referencedColumnName="id", nullable=true)
+	 */
+	private $deliveryCountry;
 
 	/**
 	 * @var string|null
@@ -294,6 +308,7 @@ class Order {
 		$this->street = $orderData->street;
 		$this->city = $orderData->city;
 		$this->postcode = $orderData->postcode;
+		$this->country = $orderData->country;
 		$this->note = $orderData->note;
 		$this->items = new ArrayCollection();
 		$this->setCompanyInfo(
@@ -329,6 +344,7 @@ class Order {
 		$this->street = $orderData->street;
 		$this->city = $orderData->city;
 		$this->postcode = $orderData->postcode;
+		$this->country = $orderData->country;
 		$this->note = $orderData->note;
 
 		$this->setCompanyInfo(
@@ -373,6 +389,7 @@ class Order {
 			$this->deliveryStreet = $orderData->street;
 			$this->deliveryCity = $orderData->city;
 			$this->deliveryPostcode = $orderData->postcode;
+			$this->deliveryCountry = $orderData->country;
 		} else {
 			$this->deliveryContactPerson = $orderData->deliveryContactPerson;
 			$this->deliveryCompanyName = $orderData->deliveryCompanyName;
@@ -380,6 +397,7 @@ class Order {
 			$this->deliveryStreet = $orderData->deliveryStreet;
 			$this->deliveryCity = $orderData->deliveryCity;
 			$this->deliveryPostcode = $orderData->deliveryPostcode;
+			$this->deliveryCountry = $orderData->deliveryCountry;
 		}
 	}
 
@@ -671,6 +689,13 @@ class Order {
 	}
 
 	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
 	 * @return bool
 	 */
 	public function isDeliveryAddressSameAsBillingAddress() {
@@ -717,6 +742,13 @@ class Order {
 	 */
 	public function getDeliveryPostcode() {
 		return $this->deliveryPostcode;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public function getDeliveryCountry() {
+		return $this->deliveryCountry;
 	}
 
 	/**

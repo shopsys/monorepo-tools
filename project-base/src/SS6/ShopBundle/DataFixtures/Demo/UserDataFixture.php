@@ -6,6 +6,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
@@ -20,6 +21,14 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	public function load(ObjectManager $manager) {
 		$loaderService = $this->get(UserDataFixtureLoader::class);
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
+
+		$countries = [
+			$this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1),
+			$this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2),
+			$this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_1),
+			$this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2),
+		];
+		$loaderService->injectReferences($countries);
 
 		$customersData = $loaderService->getCustomersData();
 		/* @var $customersData \SS6\ShopBundle\Model\Customer\CustomerData[] */
@@ -47,6 +56,7 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
 	public function getDependencies() {
 		return [
 			SettingValueDataFixture::class,
+			CountryDataFixture::class,
 		];
 	}
 }

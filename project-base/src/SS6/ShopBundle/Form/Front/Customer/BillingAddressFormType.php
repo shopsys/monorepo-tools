@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,6 +15,18 @@ use Symfony\Component\Validator\Constraints;
 class BillingAddressFormType extends AbstractType {
 
 	const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 */
+	private $countries;
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 */
+	public function __construct(array $countries) {
+		$this->countries = $countries;
+	}
 
 	/**
 	 * @return string
@@ -91,6 +104,10 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length(['max' => 30, 'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků']),
 				],
+			])
+			->add('country', FormType::CHOICE, [
+				'required' => false,
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
 			]);
 	}
 

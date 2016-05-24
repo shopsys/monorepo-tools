@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\Customer;
 
+use SS6\ShopBundle\Model\Country\Country;
+
 class BillingAddressData {
 
 	/**
@@ -45,6 +47,11 @@ class BillingAddressData {
 	public $postcode;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country|null
+	 */
+	public $country;
+
+	/**
 	 * @param string|null $street
 	 * @param string|null $city
 	 * @param string|null $postcode
@@ -53,6 +60,7 @@ class BillingAddressData {
 	 * @param string|null $companyNumber
 	 * @param string|null $companyTaxNumber
 	 * @param string|null $telephone
+	 * @param \SS6\ShopBundle\Model\Country\Country|null $country
 	 */
 	public function __construct(
 		$street = null,
@@ -62,7 +70,8 @@ class BillingAddressData {
 		$companyName = null,
 		$companyNumber = null,
 		$companyTaxNumber = null,
-		$telephone = null
+		$telephone = null,
+		Country $country = null
 	) {
 		$this->street = $street;
 		$this->city = $city;
@@ -72,6 +81,7 @@ class BillingAddressData {
 		$this->companyNumber = $companyNumber;
 		$this->companyTaxNumber = $companyTaxNumber;
 		$this->telephone = $telephone;
+		$this->country = $country;
 	}
 
 	/**
@@ -86,6 +96,7 @@ class BillingAddressData {
 		$this->street = $billingAddress->getStreet();
 		$this->city = $billingAddress->getCity();
 		$this->postcode = $billingAddress->getPostcode();
+		$this->country = $billingAddress->getCountry();
 	}
 
 }

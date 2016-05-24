@@ -215,6 +215,9 @@
         - label: 'Jednotky'
           route: admin_unit_list
 
+        - label: 'Státy'
+          route: admin_country_list
+
     - label: 'Překlady'
       route: admin_translation_list
       items:

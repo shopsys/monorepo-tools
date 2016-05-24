@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Country\CountryFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
@@ -105,6 +106,11 @@ class OrderController extends FrontBaseController {
 	 */
 	private $termsAndConditionsFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 */
+	private $countryFacade;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		Cart $cart,
@@ -120,7 +126,8 @@ class OrderController extends FrontBaseController {
 		Session $session,
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
 		OrderMailFacade $orderMailFacade,
-		TermsAndConditionsFacade $termsAndConditionsFacade
+		TermsAndConditionsFacade $termsAndConditionsFacade,
+		CountryFacade $countryFacade
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->cart = $cart;
@@ -137,6 +144,7 @@ class OrderController extends FrontBaseController {
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
+		$this->countryFacade = $countryFacade;
 	}
 
 	/**
@@ -167,8 +175,9 @@ class OrderController extends FrontBaseController {
 		if ($this->flow->isBackToCartTransition()) {
 			return $this->redirectToRoute('front_cart');
 		}
+		$countries = $this->countryFacade->getAllOnCurrentDomain();
 
-		$this->flow->setFormTypesData($transports, $payments);
+		$this->flow->setFormTypesData($transports, $payments, $countries);
 		$this->flow->bind($frontOrderFormData);
 		$this->flow->saveSentStepData();
 
@@ -275,8 +284,9 @@ class OrderController extends FrontBaseController {
 	public function saveOrderFormAction() {
 		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
 		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
+		$countries = $this->countryFacade->getAllOnCurrentDomain();
 
-		$this->flow->setFormTypesData($transports, $payments);
+		$this->flow->setFormTypesData($transports, $payments, $countries);
 		$this->flow->bind(new FrontOrderData());
 		$form = $this->flow->createForm();
 		$this->flow->saveCurrentStepData($form);

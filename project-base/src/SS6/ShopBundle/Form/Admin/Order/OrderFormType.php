@@ -6,6 +6,7 @@ use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderTransportFormType;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
+use SS6\ShopBundle\Model\Country\Country;
 use SS6\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -34,14 +35,21 @@ class OrderFormType extends AbstractType {
 	private $payments;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 */
+	private $countries;
+
+	/**
 	 * @param array $allOrderStatuses
 	 * @param array $transports
 	 * @param array $payments
+	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
 	 */
-	public function __construct(array $allOrderStatuses, array $transports, array $payments) {
+	public function __construct(array $allOrderStatuses, array $transports, array $payments, array $countries) {
 		$this->allOrderStatuses = $allOrderStatuses;
 		$this->transports = $transports;
 		$this->payments = $payments;
+		$this->countries = $countries;
 	}
 
 	/**
@@ -126,6 +134,12 @@ class OrderFormType extends AbstractType {
 					new Constraints\Length(['max' => 30, 'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků']),
 				],
 			])
+			->add('country', FormType::CHOICE, [
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+				],
+			])
 			->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
 			->add('deliveryContactPerson', FormType::TEXT, [
 				'required' => true,
@@ -200,6 +214,13 @@ class OrderFormType extends AbstractType {
 						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
+				],
+			])
+			->add('deliveryCountry', FormType::CHOICE, [
+				'required' => true,
+				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
+				'constraints' => [
+					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
 				],
 			])
 			->add('note', FormType::TEXTAREA, ['required' => false])

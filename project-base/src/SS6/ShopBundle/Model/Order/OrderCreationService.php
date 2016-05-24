@@ -104,6 +104,7 @@ class OrderCreationService {
 		$frontOrderData->street = $user->getBillingAddress()->getStreet();
 		$frontOrderData->city = $user->getBillingAddress()->getCity();
 		$frontOrderData->postcode = $user->getBillingAddress()->getPostcode();
+		$frontOrderData->country = $user->getBillingAddress()->getCountry();
 		if ($user->getDeliveryAddress() !== null) {
 			$frontOrderData->deliveryAddressSameAsBillingAddress = false;
 			$frontOrderData->deliveryContactPerson = $user->getDeliveryAddress()->getContactPerson();
@@ -112,6 +113,7 @@ class OrderCreationService {
 			$frontOrderData->deliveryStreet = $user->getDeliveryAddress()->getStreet();
 			$frontOrderData->deliveryCity = $user->getDeliveryAddress()->getCity();
 			$frontOrderData->deliveryPostcode = $user->getDeliveryAddress()->getPostcode();
+			$frontOrderData->deliveryCountry = $user->getDeliveryAddress()->getCountry();
 		} else {
 			$frontOrderData->deliveryAddressSameAsBillingAddress = true;
 		}
