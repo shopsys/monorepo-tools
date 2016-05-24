@@ -19,19 +19,21 @@
 		</div>
 	{% endif %}
 	<div class="web">
-		<div class="web__line web__line--light">
-			<div class="web__header">
+		<div class="web__in">
+			<div class="web__line web__line--light">
+				<div class="web__header">
+					<div class="web__container">
+						{{ block('header') }}
+					</div>
+				</div>
 				<div class="web__container">
-					{{ block('header') }}
+					{% block content %}{% endblock %}
 				</div>
 			</div>
-			<div class="web__container">
-				{% block content %}{% endblock %}
-			</div>
 		</div>
-	</div>
-	<div class="web__footer">
-		{% include '@SS6Shop/Front/Layout/footer.html.twig' %}
+		<div class="web__footer">
+			{% include '@SS6Shop/Front/Layout/footer.html.twig' %}
+		</div>
 	</div>
 	{% if not isCookiesConsentGiven() %}
 		{% set cookiesArticle = findCookiesArticleByDomainId(getDomain().id) %}

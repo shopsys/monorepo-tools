@@ -1,12 +1,21 @@
-body {
-	background: @bg-web;
-}
-
 img {
 	max-width: 100%;
 }
 
 .web {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+
+	&__in {
+		flex: 1;
+	}
+
+	&__footer {
+		flex: 0;
+
+		background: @bg-web;
+	}
 
 	&__line {
 		&--light {
