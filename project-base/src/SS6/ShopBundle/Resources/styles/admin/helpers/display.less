@@ -1,0 +1,11 @@
+.h-display {
+	.display-generator();
+
+	@media @query-tablet {
+		.display-generator(extract(@postfixes, 1));
+	}
+
+	@media @query-mobile {
+		.display-generator(extract(@postfixes, 2));
+	}
+}
