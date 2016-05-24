@@ -1,0 +1,33 @@
+// Set  only variables, it generate helpers for you
+
+@col-minimum: 20;
+@col-stepper: 5;
+@col-maximum: 80;
+@col-special: 48, 49, 51, 52, 100;
+@col-special-lenght: length(@col-special);
+
+.row {
+	.clearfix();
+}
+
+.col {
+	float: left;
+
+	.column-generator(@col-minimum, @col-stepper, @col-maximum);
+	.column-special-generator(@col-special-lenght);
+
+	@media @query-tablet {
+		.column-generator(@col-minimum, @col-stepper, @col-maximum, extract(@postfixes, 1));
+		.column-special-generator(@col-special-lenght, extract(@postfixes, 1));
+	}
+
+	@media @query-mobile {
+		.column-generator(@col-minimum, @col-stepper, @col-maximum, extract(@postfixes, 2));
+		.column-special-generator(@col-special-lenght, extract(@postfixes, 2));
+	}
+
+	@media @query-mobile-xs {
+		.column-generator(@col-minimum, @col-stepper, @col-maximum, extract(@postfixes, 3));
+		.column-special-generator(@col-special-lenght, extract(@postfixes, 3));
+	}
+}
