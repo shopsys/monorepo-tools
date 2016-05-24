@@ -301,7 +301,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->deliveryPostcode = '54321';
 		$orderData->deliveryCountry = $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2);
 		$orderData->note = 'Prosím o dodání do pátku. Děkuji.';
-		$orderData->domainId = 1;
+		$orderData->domainId = 2;
 		$orderData->currency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
 		$this->createOrder(
 			$orderData,
