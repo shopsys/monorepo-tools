@@ -193,11 +193,10 @@
 				});
 			}
 			$window.appendTo(getMainContainer());
+			fixVerticalAlign();
 			setTimeout(function(){
 				$window.addClass('window-popup--active');
 			}, animationTime);
-
-			fixVerticalAlign();
 		}
 
 		function moveToCenter() {
