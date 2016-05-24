@@ -253,13 +253,13 @@
 									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox h-display-none'}}) }}
 								</span>
 
-								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip h-text-no-decoration" target="_blank" data-toggle="tooltip" data-placement="top">
+								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip h-text-no-decoration in-icon in-icon--link form-choice-list__item__action form-choice-list__item__action--link" target="_blank" data-toggle="tooltip" data-placement="top">
 									<i class="svg svg-forward-page"></i>
 								</a>
 
 								<span class="js-entity-url-list-row-delete-revert-wrapper">
 									<span class="js-entity-url-list-row-delete-block">
-										<button class="btn-no-style form-choice-list__item__remove js-entity-url-list-row-delete-block-button" type="button">
+										<button class="btn-no-style form-choice-list__item__action js-entity-url-list-row-delete-block-button" type="button">
 											<span class="svg svg-circle-cross in-icon in-icon--delete"></span>
 										</button>
 									</span>
@@ -276,7 +276,7 @@
 									</span>
 								</span>
 								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-									class="js-entity-url-list-info-main-delete js-tooltip h-cursor-help h-display-none form-choice-list__info" data-toggle="tooltip" data-placement="top">
+									class="js-entity-url-list-info-main-delete js-tooltip h-cursor-help h-display-none form-choice-list__item__action" data-toggle="tooltip" data-placement="top">
 									<span class="svg svg-info in-icon in-icon--info "></span>
 								</span>
 						</label>
