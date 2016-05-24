@@ -28,13 +28,6 @@ class Country {
 	private $name;
 
 	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean")
-	 */
-	private $visible;
-
-	/**
 	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
@@ -47,7 +40,6 @@ class Country {
 	 */
 	public function __construct(CountryData $countryData, $domainId) {
 		$this->name = $countryData->name;
-		$this->visible = $countryData->visible;
 		$this->domainId = $domainId;
 	}
 
@@ -56,7 +48,6 @@ class Country {
 	 */
 	public function edit(CountryData $countryData) {
 		$this->name = $countryData->name;
-		$this->visible = $countryData->visible;
 	}
 
 	/**
@@ -71,13 +62,6 @@ class Country {
 	 */
 	public function getName() {
 		return $this->name;
-	}
-
-	/**
-	 * @return bool
-	 */
-	public function isVisible() {
-		return $this->visible;
 	}
 
 	/**

@@ -30,8 +30,7 @@ class CountryFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název státu']),
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'Název státu nesmí být delší než {{ limit }} znaků']),
 				],
-			])
-			->add('visible', FormType::CHECKBOX);
+			]);
 	}
 
 	/**

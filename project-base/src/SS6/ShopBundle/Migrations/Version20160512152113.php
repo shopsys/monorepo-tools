@@ -53,6 +53,8 @@ class Version20160512152113 extends AbstractMigration {
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEE76AA954 FOREIGN KEY (delivery_country_id)
 			REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 		$this->sql('CREATE INDEX IDX_E52FFDEEE76AA954 ON orders (delivery_country_id)');
+
+		$this->sql('ALTER TABLE countries DROP visible');
 	}
 
 	/**

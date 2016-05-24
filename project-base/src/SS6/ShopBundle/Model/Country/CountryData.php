@@ -10,17 +10,10 @@ class CountryData {
 	public $name;
 
 	/**
-	 * @var bool
-	 */
-	public $visible;
-
-	/**
 	 * @param string $name
-	 * @param bool $visible
 	 */
-	public function __construct($name = '', $visible = true) {
+	public function __construct($name = '') {
 		$this->name = $name;
-		$this->visible = $visible;
 	}
 
 	/**
@@ -28,7 +21,6 @@ class CountryData {
 	 */
 	public function setFromEntity(Country $country) {
 		$this->name = $country->getName();
-		$this->visible = $country->isVisible();
 	}
 
 }
