@@ -84,7 +84,7 @@
 		if (options.wide) {
 			$window.addClass('window-popup--wide');
 		} else {
-			$window.addClass('window-popup--standart');
+			$window.addClass('window-popup--standard');
 		}
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
