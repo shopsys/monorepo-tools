@@ -1,0 +1,60 @@
+.reset-ul() {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.center-image(@border: 0) {
+	position: absolute;
+	top: @border;
+	bottom: @border;
+	right: @border;
+	left: @border;
+	margin: auto;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.center-image-sized(@border: 0) {
+	position: absolute;
+	top: @border;
+	bottom: @border;
+	right: @border;
+	left: @border;
+	margin: auto;
+}
+
+.clearfix() {
+	*zoom: 1;
+
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+.eliminate-lines(@height-line, @count-line) {
+	height: @height-line * @count-line;
+	line-height: @height-line;
+	overflow: hidden;
+}
+
+.font-face(@font-name, @font-file, @font-weight: '400', @font-style: 'normal') {
+	@font-face {
+		font-family: '@{font-name}';
+		src: url('@{path-font}/@{font-file}.eot');
+		src: url('@{path-font}/@{font-file}.eot?#iefix') format('embedded-opentype'),
+			url('@{path-font}/@{font-file}.woff2') format('woff2'),
+			url('@{path-font}/@{font-file}.woff') format('woff'),
+			url('@{path-font}/@{font-file}.ttf') format('truetype'),
+			url('@{path-font}/@{font-file}.svg#@{font-name}') format('svg');
+		font-weight: @font-weight;
+		font-style: @font-style;
+	}
+}
