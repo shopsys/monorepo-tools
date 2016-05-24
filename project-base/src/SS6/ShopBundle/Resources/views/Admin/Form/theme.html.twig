@@ -507,9 +507,9 @@
 {% endblock categories_widget %}
 
 {% block form_errors %}
-	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
+	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-line__error'))}) %}
 	{% spaceless %}
-		<div class="form-line__error form-error {{ errors|length > 0 ? '' : ' h-display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
+		<div class="form-error {{ errors|length > 0 ? '' : ' h-display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
 			<span class="svg svg-circle-remove js-validation-error-toggle"></span>
 			<div class="in-message in-message--error js-validation-error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
 				<ul class="in-message__list">

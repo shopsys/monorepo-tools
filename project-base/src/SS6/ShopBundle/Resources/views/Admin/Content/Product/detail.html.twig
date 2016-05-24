@@ -243,7 +243,7 @@
 										<span class="input__flag">
 											{{ localeFlag(locale) }}
 										</span>
-										{{ form_errors(valueTextLocaleForm) }}
+										{{ form_errors(valueTextLocaleForm, { errors_attr: { class: 'table-form__cell__error' } } ) }}
 									</div>
 								{% endfor %}
 							</td>
