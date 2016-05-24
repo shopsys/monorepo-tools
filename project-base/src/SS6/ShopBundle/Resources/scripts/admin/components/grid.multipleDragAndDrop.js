@@ -9,7 +9,7 @@
 		$('.js-multiple-grids-save-all-button').click(SS6.grid.multipleDragAndDrop.saveOrdering);
 		$('.js-multiple-grids-rows-unified').sortable({
 			cursor: 'move',
-			handle: '.h-cursor-move',
+			handle: '.cursor-move',
 			items: '.js-grid-row, .js-grid-row-holder',
 			placeholder: 'in-drop-place',
 			revert: 200,

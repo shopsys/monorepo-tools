@@ -80,8 +80,8 @@ class UploadedFileExtension extends Twig_Extension {
 				'svg-file-' . $fileThumbnailInfo->getIconType(),
 				'list-images__item__image__type',
 				'list-images__item__image__type--' . $fileThumbnailInfo->getIconType(),
-				'h-text-no-decoration',
-				'h-cursor-pointer',
+				'text-no-decoration',
+				'cursor-pointer',
 			];
 
 			return '<i class="' . implode(' ', $classes) . '"></i>';

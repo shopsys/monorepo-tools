@@ -61,7 +61,7 @@
 
 	SS6.productsPicker.window.unmarkAddButtonAsAdded = function ($addButton, originalLabelText, originalIconText) {
 		$addButton
-			.addClass('btn--plus btn--light').removeClass('h-cursor-auto btn--success')
+			.addClass('btn--plus btn--light').removeClass('cursor-auto btn--success')
 			.find('.js-products-picker-label').text(originalLabelText).end()
 			.find('.js-products-picker-icon').removeClass('svg svg-checked').text(originalIconText).end()
 			.bind('click.addProduct', SS6.productsPicker.window.onClickAddButton)
@@ -72,7 +72,7 @@
 
 	SS6.productsPicker.window.markAddButtonAsDeny = function ($addButton) {
 		$addButton
-			.addClass('h-cursor-help')
+			.addClass('cursor-help')
 			.tooltip({
 				title: SS6.translator.trans('Nelze přiřadit produkt sám sobě'),
 				placement: 'left'

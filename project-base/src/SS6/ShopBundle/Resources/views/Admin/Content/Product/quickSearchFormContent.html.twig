@@ -2,7 +2,7 @@
 	<div class="box-quick-search">
 		{{ form_widget(quickSearchForm.text, { attr: { class: 'box-quick-search__input'}} ) }}
 		{{ form_widget(quickSearchForm.submit, { label: 'Vyhledat'|trans, attr: { class: 'box-quick-search__btn'}, full_name: '' }) }}
-		<i class="svg svg-info h-cursor-help js-tooltip box-quick-search__icon in-icon in-icon--info"
+		<i class="svg svg-info cursor-help js-tooltip box-quick-search__icon in-icon in-icon--info"
 		 data-toggle="tooltip" data-placement="left"
 		 title="{{ 'Vyhledávání hledá v názvu, katalogovém číslu nebo partno produktu. Je možné používat operátory * a ?.'|trans }}"
 		></i>

@@ -50,11 +50,11 @@
 		var refreshSubmitButton = function () {
 			if (isSelectedNewValue()) {
 				$confirmDeleteFormButton
-					.removeClass('btn--disabled h-cursor-help')
+					.removeClass('btn--disabled cursor-help')
 					.tooltip('destroy');
 			} else {
 				$confirmDeleteFormButton
-					.addClass('btn--disabled h-cursor-help')
+					.addClass('btn--disabled cursor-help')
 					.tooltip({
 						title: SS6.translator.trans('Nejprve vyberte novou hodnotu'),
 						placement: 'right'

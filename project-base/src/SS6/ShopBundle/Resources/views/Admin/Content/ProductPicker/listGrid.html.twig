@@ -6,10 +6,10 @@
 
 {% block grid_value_cell_id_name %}
 	{% if row.p.variantType == VARIANT_TYPE_MAIN %}
-		<span class="in-letter h-cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
 	{% endif %}
 	{% if row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<span class="in-letter h-cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
 	{% endif %}
 	{{ row.product|productListDisplayName }}
 {% endblock %}
@@ -25,12 +25,12 @@
 
 {% block grid_value_cell_id_select %}
 	{%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
-		<i class="in-icon in-icon--info svg svg-info h-cursor-help js-tooltip"
+		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left"
 			title="" data-original-title="Nelze vybrat zboží, které je hlavní variantou"
 		></i>
 	{% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<i class="in-icon in-icon--info svg svg-info h-cursor-help js-tooltip"
+		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left" title=""
 			data-original-title="Nelze vybrat zboží, které je variantou"
 		></i>

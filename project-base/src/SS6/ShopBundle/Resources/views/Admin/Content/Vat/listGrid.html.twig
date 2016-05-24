@@ -9,7 +9,7 @@
 			{% if row is not null %}
 				<span
 					title="{{ 'Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou.'|trans }}"
-					class="js-tooltip table-action h-cursor-help in-action-icons__item"
+					class="js-tooltip table-action cursor-help in-action-icons__item"
 					data-toggle="tooltip"
 					data-placement="bottom"
 				>
@@ -22,11 +22,11 @@
 
 {% block grid_value_cell_id_name %}
 	{% if row.vat.markedAsDeleted %}
-		<span class="h-text-muted">
+		<span class="text-muted">
 			{{ value }}
 			<span
 				title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
-				class="js-tooltip table-action h-cursor-help"
+				class="js-tooltip table-action cursor-help"
 				data-toggle="tooltip"
 				data-placement="right"
 			>
@@ -42,7 +42,7 @@
 	{% if row.vat.markedAsDeleted %}
 		<span
 			title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
-			class="js-tooltip table-action h-cursor-help h-text-muted"
+			class="js-tooltip table-action cursor-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
 		>
@@ -51,7 +51,7 @@
 	{% elseif row.asReplacementCount > 0 %}
 		<span
 			title="{{ 'Sazba DPH nemůže být odstraněna, protože právě probíhá přepočet na tuto sazbu DPH.'|trans }}"
-			class="js-tooltip table-action h-cursor-help h-text-muted"
+			class="js-tooltip table-action cursor-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
 		>

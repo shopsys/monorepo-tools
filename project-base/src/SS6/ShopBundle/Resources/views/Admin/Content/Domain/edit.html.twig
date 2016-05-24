@@ -1,5 +1,5 @@
-<div class="h-text-left">
-	<div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors h-display-none">
+<div class="text-left">
+	<div id="js-domain-icon-errors" class="in-message in-message--danger js-domain-icon-errors display-none">
 		<ul class="in-message__list"></ul>
 	</div>
 
@@ -15,11 +15,11 @@
 
 			{{ form_row(form.icon, { label: 'Nahrát ikonu'|trans}) }}
 		</div>
-		<div class="h-text-right">
+		<div class="text-right">
 			{{ form_save(domain|default(null), form) }}
 		</div>
 	{{ form_end(form) }}
 </div>
-<div class="js-overlay-spinner h-display-none h-text-center">
+<div class="js-overlay-spinner display-none text-center">
 	<i class="svg svg-gear" title="{{ 'Načítám'|trans }}"></i>
 </div>

@@ -3,19 +3,19 @@
 {% block grid_action_cell_type_delete %}
 	{% if row.os.type == TYPE_NEW %}
 		<span title="{{ 'Tento stav není možné smazat. Jde o stav, který je automaticky přiřazen všem novým objednávkám.'|trans }}"
-			class="js-tooltip h-cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+			class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="svg svg-info"></i>
 		</span>
 	{% elseif row.os.type == TYPE_DONE %}
 		<span title="{{ 'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny.'|trans }}"
-			class="js-tooltip h-cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+			class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="svg svg-info"></i>
 		</span>
 	{% elseif row.os.type == TYPE_CANCELED %}
 		<span title="{{ 'Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které nebyly úspěšně vyřízeny.'|trans }}"
-			class="js-tooltip h-cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
+			class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 		>
 			<i class="svg svg-info"></i>
 		</span>

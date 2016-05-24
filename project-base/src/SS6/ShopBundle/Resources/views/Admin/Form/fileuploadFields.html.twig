@@ -37,7 +37,7 @@
 						</li>
 					{% endmacro %}
 
-					<ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template h-display-none')|escape }}">
+					<ul class="list-images js-file-upload-uploaded-files" data-prototype="{{ _self.uploadedFile(form.uploadedFiles.vars.prototype, '', '__icon-type__', false, 'js-file-upload-uploaded-file-template display-none')|escape }}">
 						{% for uploadedFile in form.uploadedFiles %}
 							{% set fileThumbnailInfo = getFileThumbnailInfoByTemporaryFilename(uploadedFile.vars.value) %}
 							{{ _self.uploadedFile(uploadedFile, getLabelByTemporaryFilename(uploadedFile.vars.value), fileThumbnailInfo.iconType, fileThumbnailInfo.imageUri) }}
@@ -47,7 +47,7 @@
 							</li>
 						{% endfor %}
 					</ul>
-					<div class="h-display-none">
+					<div class="display-none">
 						 <span class="js-file-upload-status in-message in-message--info box-upload__uploading">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
 					</div>
 				</div>
