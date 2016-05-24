@@ -3,21 +3,24 @@
 @window-popup-inner-padding: 20px;
 
 .window-popup {
+	display: flex;
+	flex-direction: column;
 	position: fixed;
-	display: none;
-	width: calc( ~"100vw - @{window-popup-inner-padding}" );
+	top: 10px;
 	max-height: calc( ~"100vh - @{window-popup-inner-padding}" );
 	left: 10px;
-	top: 10px;
 	padding: @window-popup-inner-padding;
 	z-index: 10001;
+	transform: rotateY(90deg);
+	width: calc( ~"100vw - @{window-popup-inner-padding}" );
+	will-change: transform;
 
 	background: @color-f;
 	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
+	transition: @transition transform;
 
 	&--active {
-		display: flex;
-		flex-direction: column;
+		transform: rotateY(0);
 	}
 
 	&__in {
@@ -76,7 +79,11 @@
 		left: 0;
 		z-index: 10000;
 
-		background: rgba(0,0,0, 0.5);
+		transition: @transition background;
+
+		&--active {
+			background: rgba(0,0,0, 0.7);
+		}
 	}
 }
 

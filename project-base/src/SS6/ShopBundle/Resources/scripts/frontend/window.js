@@ -7,6 +7,7 @@
 	SS6.window = SS6.window || {};
 
 	var $activeWindow = null;
+	var animationTime = 300;
 
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
@@ -28,11 +29,21 @@
 	var showOverlay = function () {
 		var $overlay = getOverlay();
 		$('body').append($overlay);
+
+		// timeout 0 to asynchronous run to fix css animation fade
+		setTimeout(function(){
+			$overlay.addClass('window-popup__overlay--active');
+		}, 0);
 	};
 
 	var hideOverlay = function () {
-		if ($('#js-overlay').size() !== 0) {
-			$('#js-overlay').remove();
+		var $overlay = $('#js-overlay');
+		$overlay.removeClass('window-popup__overlay--active');
+
+		if ($overlay.size() !== 0) {
+			setTimeout(function(){
+				$overlay.remove();
+			}, animationTime);
 		}
 	};
 
@@ -69,7 +80,7 @@
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window-popup window-popup--active"></div>');
+		var $window = $('<div class="window-popup"></div>');
 		if (options.wide) {
 			$window.addClass('window-popup--wide');
 		} else {
@@ -84,8 +95,12 @@
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
+			$window.removeClass('window-popup--active');
 			hideOverlay();
-			$(this).removeClass('window-popup--active');
+
+			setTimeout(function(){
+				$activeWindow.trigger('windowFastClose');
+			}, animationTime);
 		});
 
 		$window.bind('windowFastClose', function () {
@@ -178,7 +193,9 @@
 				});
 			}
 			$window.appendTo(getMainContainer());
-			$window.addClass('window-popup--active');
+			setTimeout(function(){
+				$window.addClass('window-popup--active');
+			}, animationTime);
 
 			fixVerticalAlign();
 		}
