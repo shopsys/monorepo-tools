@@ -1,3 +1,5 @@
+@web-footer-with-cookies-margin-bottom: 36px;
+
 img {
 	max-width: 100%;
 }
@@ -13,8 +15,14 @@ img {
 
 	&__footer {
 		flex: 0;
+		will-change: margin;
 
 		background: @bg-web;
+		transition: @transition margin;
+
+		&--with-cookies {
+			margin-bottom: @web-footer-with-cookies-margin-bottom;
+		}
 	}
 
 	&__container {

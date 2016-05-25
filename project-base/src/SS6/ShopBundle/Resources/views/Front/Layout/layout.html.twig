@@ -30,7 +30,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="web__footer">
+	<div class="web__footer{% if not isCookiesConsentGiven() %} web__footer--with-cookies js-eu-cookies-consent-footer-gap{% endif %}">
 		{% include '@SS6Shop/Front/Layout/footer.html.twig' %}
 	</div>
 	{% if not isCookiesConsentGiven() %}

@@ -6,8 +6,12 @@
 
 	$(document).ready(function () {
 		$('.js-eu-cookies-consent-button').click(function () {
+			var $cookiesFooterGap = $('.js-eu-cookies-consent-footer-gap');
+			var $cookiesBlock = $('.js-eu-cookies');
 			$.cookie(cookieName, true, { expires: tenYears, path: '/' });
-			$('.js-eu-cookies').hide();
+
+			$cookiesBlock.addClass('box-cookies--closing');
+			$cookiesFooterGap.removeClass('web__footer--with-cookies');
 		});
 	});
 

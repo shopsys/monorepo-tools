@@ -1,3 +1,5 @@
+@box-cookies-height: @web-footer-with-cookies-margin-bottom;
+
 .box-cookies {
 	position: fixed;
 	bottom: 0;
@@ -5,9 +7,16 @@
 	right: 0;
 	z-index: 1000;
 	padding: 5px 0;
+	height: @box-cookies-height;
+	will-change: transform;
 
 	background: @bg-info;
 	text-align: center;
+	transition: @transition transform;
+
+	&--closing {
+		transform: rotateX(90deg);
+	}
 
 	&__in {
 		padding: 0 @padding-web;
