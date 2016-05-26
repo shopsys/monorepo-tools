@@ -23,7 +23,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);
 
-		$this->assertTrue($cart1 === $cart2);
+		$this->assertSame($cart1, $cart2, 'Users with the same session ID have different carts.');
 	}
 
 	public function testGetReturnsDifferentCartsForDifferentCustomers() {
@@ -37,7 +37,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);
 
-		$this->assertFalse($cart1 === $cart2);
+		$this->assertNotSame($cart1, $cart2, 'Users with different session IDs have the same cart.');
 	}
 
 	/**
