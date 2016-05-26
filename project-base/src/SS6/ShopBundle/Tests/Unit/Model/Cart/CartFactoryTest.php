@@ -14,19 +14,7 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetReturnsTheSameCartForTheSameCustomer() {
-		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
-			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartItemRepository->expects($this->any())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
-
-		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
-			->setMethods(['__construct', 'checkCartModifications'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
-
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
+		$cartFactory = $this->getCartFactory();
 
 		$sessionId = 'abc123';
 		$customerIdentifier1 = new CustomerIdentifier($sessionId);
@@ -39,6 +27,23 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetReturnsDifferentCartsForDifferentCustomers() {
+		$cartFactory = $this->getCartFactory();
+
+		$sessionId1 = 'abc123';
+		$sessionId2 = 'def456';
+		$customerIdentifier1 = new CustomerIdentifier($sessionId1);
+		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
+
+		$cart1 = $cartFactory->get($customerIdentifier1);
+		$cart2 = $cartFactory->get($customerIdentifier2);
+
+		$this->assertFalse($cart1 === $cart2);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Cart\CartFactory
+	 */
+	private function getCartFactory() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
 			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
@@ -51,17 +56,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-
-		$sessionId1 = 'abc123';
-		$sessionId2 = 'def456';
-		$customerIdentifier1 = new CustomerIdentifier($sessionId1);
-		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
-
-		$cart1 = $cartFactory->get($customerIdentifier1);
-		$cart2 = $cartFactory->get($customerIdentifier2);
-
-		$this->assertFalse($cart1 === $cart2);
+		return new CartFactory($cartItemRepository, $cartWatcherFacade);
 	}
 
 }
