@@ -18,7 +18,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemRepository->expects($this->once())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
+		$cartItemRepository->expects($this->any())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
 
 		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
 			->setMethods(['__construct', 'checkCartModifications'])
@@ -43,7 +43,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
 			->disableOriginalConstructor()
 			->getMock();
-		$cartItemRepository->expects($this->exactly(2))->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
+		$cartItemRepository->expects($this->any())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
 
 		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
 			->setMethods(['__construct', 'checkCartModifications'])
