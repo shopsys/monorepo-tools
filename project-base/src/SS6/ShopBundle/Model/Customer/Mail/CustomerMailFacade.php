@@ -2,7 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Customer\Mail;
 
-use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
+use SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Mail\MailerService;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
@@ -21,23 +21,23 @@ class CustomerMailFacade {
 	private $mailTemplateFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
+	 * @var \SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService
 	 */
-	private $customerMailService;
+	private $registrationMailService;
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailer
 	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
-	 * @param \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService $customerMailService
+	 * @param \SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService $registrationMailService
 	 */
 	public function __construct(
 		MailerService $mailer,
 		MailTemplateFacade $mailTemplateFacade,
-		CustomerMailService $customerMailService
+		RegistrationMailService $registrationMailService
 	) {
 		$this->mailer = $mailer;
 		$this->mailTemplateFacade = $mailTemplateFacade;
-		$this->customerMailService = $customerMailService;
+		$this->registrationMailService = $registrationMailService;
 	}
 
 	/**
@@ -45,7 +45,7 @@ class CustomerMailFacade {
 	 */
 	public function sendRegistrationMail(User $user) {
 		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());
-		$messageData = $this->customerMailService->getMessageDataByUser($user, $mailTemplate);
+		$messageData = $this->registrationMailService->getMessageDataByUser($user, $mailTemplate);
 		$messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
 		$this->mailer->send($messageData);
 	}

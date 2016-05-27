@@ -7,7 +7,7 @@ use SS6\ShopBundle\Component\Controller\AdminBaseController;
 use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
 use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
-use SS6\ShopBundle\Model\Customer\Mail\CustomerMailService;
+use SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService;
 use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
@@ -25,9 +25,9 @@ class MailController extends AdminBaseController {
 	private $allMailTemplatesFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\CustomerMailService
+	 * @var \SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService
 	 */
-	private $customerMailService;
+	private $registrationMailService;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
@@ -63,7 +63,7 @@ class MailController extends AdminBaseController {
 		AllMailTemplatesFormTypeFactory $allMailTemplatesFormTypeFactory,
 		ResetPasswordMail $resetPasswordMail,
 		OrderMailService $orderMailService,
-		CustomerMailService $customerMailService,
+		RegistrationMailService $registrationMailService,
 		SelectedDomain $selectedDomain,
 		MailTemplateFacade $mailTemplateFacade,
 		MailSettingFacade $mailSettingFacade,
@@ -72,7 +72,7 @@ class MailController extends AdminBaseController {
 		$this->allMailTemplatesFormTypeFactory = $allMailTemplatesFormTypeFactory;
 		$this->resetPasswordMail = $resetPasswordMail;
 		$this->orderMailService = $orderMailService;
-		$this->customerMailService = $customerMailService;
+		$this->registrationMailService = $registrationMailService;
 		$this->selectedDomain = $selectedDomain;
 		$this->mailTemplateFacade = $mailTemplateFacade;
 		$this->mailSettingFacade = $mailSettingFacade;
@@ -109,11 +109,11 @@ class MailController extends AdminBaseController {
 	 */
 	private function getRegistrationVariablesLabels() {
 		return [
-			CustomerMailService::VARIABLE_FIRST_NAME => t('Jméno'),
-			CustomerMailService::VARIABLE_LAST_NAME => t('Příjmení'),
-			CustomerMailService::VARIABLE_EMAIL => t('Email'),
-			CustomerMailService::VARIABLE_URL => t('URL adresa e-shopu'),
-			CustomerMailService::VARIABLE_LOGIN_PAGE => t('Odkaz na stránku s přihlášením'),
+			RegistrationMailService::VARIABLE_FIRST_NAME => t('Jméno'),
+			RegistrationMailService::VARIABLE_LAST_NAME => t('Příjmení'),
+			RegistrationMailService::VARIABLE_EMAIL => t('Email'),
+			RegistrationMailService::VARIABLE_URL => t('URL adresa e-shopu'),
+			RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Odkaz na stránku s přihlášením'),
 		];
 	}
 
@@ -196,7 +196,7 @@ class MailController extends AdminBaseController {
 	 */
 	private function getTemplateParameters() {
 		$orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
-		$registrationTemplateVariables = $this->customerMailService->getTemplateVariables();
+		$registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();
 		$resetPasswordTemplateVariables = array_unique(array_merge(
 			$this->resetPasswordMail->getBodyVariables(),
 			$this->resetPasswordMail->getSubjectVariables()

@@ -9,7 +9,7 @@ use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Mail\MessageData;
 use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
 
-class CustomerMailService {
+class RegistrationMailService {
 
 	const VARIABLE_FIRST_NAME = '{first_name}';
 	const VARIABLE_LAST_NAME = '{last_name}';
