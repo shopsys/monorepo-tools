@@ -7,6 +7,11 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 
 		less: {
+			helpersAdmin: {
+				files: {
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less': '{{ rootStylesDirectory|raw }}/admin/helpers.less'
+				}
+			},
 			admin: {
 				files: {
 					'web/assets/admin/styles/index_{{ cssVersion }}.css': '{{ rootStylesDirectory|raw }}/admin/main.less'
@@ -22,6 +27,11 @@ module.exports = function(grunt) {
 			},
 
 			{% for domain in domains -%}
+				helpers{{ domain.id }}: {
+					files: {
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less'
+					}
+				},
 				frontend{{ domain.id }}: {
 					files: {
 						'web/assets/frontend/styles/index{{ domain.id }}_{{ cssVersion }}.css': '{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/main.less'
@@ -226,8 +236,21 @@ module.exports = function(grunt) {
 
 		watch: {
 			admin: {
-				files: ['{{ rootStylesDirectory|raw }}/admin/**/*.less'],
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/**/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
 				tasks: ['adminLess']
+			},
+			adminHelpers: {
+				files: [
+					'{{ rootStylesDirectory|raw }}/admin/helpers.less',
+					'{{ rootStylesDirectory|raw }}/admin/helpers/*.less',
+					'!{{ rootStylesDirectory|raw }}/admin/helpers/helpers-generated.less'
+				],
+				tasks: ['less:helpersAdmin']
 			},
 			adminSprite: {
 				files: ['web/assets/admin/images/icons/**/*.png'],
@@ -256,8 +279,24 @@ module.exports = function(grunt) {
 			},
 			{% for domain in domains -%}
 				frontend{{ domain.id }}: {
-					files: ['{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less'],
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+					],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
+					{% else -%}
+						['frontendLess{{ domain.id }}']
+					{% endif -%}
+				},
+				helpers{{ domain.id }}: {
+					files: [
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+					],
+					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
 						['frontendLess{{ domain.id }}']
 					{% endif -%}

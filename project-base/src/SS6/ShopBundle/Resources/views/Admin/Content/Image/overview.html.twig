@@ -27,7 +27,7 @@
 					<th class="table-col-10">{{ 'Šířka [px]'|trans }}</th>
 					<th class="table-col-10">{{ 'Výška [px]'|trans }}</th>
 					<th class="table-col-50">{{ 'Výskyt'|trans }}</th>
-					<th class="table-col-10 text-right">{{ 'Ořezávání'|trans }}</th>
+					<th class="table-col-10 h-text-right">{{ 'Ořezávání'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +38,7 @@
 							<td>{{ sizeConfig.width|default('-')}}</td>
 							<td>{{ sizeConfig.height|default('-') }}</td>
 							<td>{{ usages[sizeConfig.name|default('default')] }}</td>
-							<td class ="text-right">
+							<td class ="h-text-right">
 								{% if sizeConfig.crop == true %}
 									{{ 'Ano'|trans }}
 								{% else %}

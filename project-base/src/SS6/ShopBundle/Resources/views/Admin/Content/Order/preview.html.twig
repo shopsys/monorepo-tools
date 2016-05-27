@@ -1,12 +1,12 @@
-<div class="text-left">
+<div class="h-text-left">
 	<h3 class="window__title">{{ 'Objednávka č. %orderNumber%'|trans({'%orderNumber%' : order.number}) }}</h3>
 
 	<table class="table-main">
 		<thead>
 			<tr>
 				<th class="table-col-60">{{ 'Název položky'|trans }}</th>
-				<th class="table-col-20 text-center">{{ 'Množství'|trans }}</th>
-				<th class="table-col-20 text-right">{{ 'Cena s DPH'|trans }}</th>
+				<th class="table-col-20 h-text-center">{{ 'Množství'|trans }}</th>
+				<th class="table-col-20 h-text-right">{{ 'Cena s DPH'|trans }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,8 +20,8 @@
 						{% endif %}
 						{{ item.name }}
 					</td>
-					<td class="text-center">{{ item.quantity }} {{ item.unitName }}</td>
-					<td class="text-right">{{ item.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+					<td class="h-text-center">{{ item.quantity }} {{ item.unitName }}</td>
+					<td class="h-text-right">{{ item.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
 				</tr>
 			{% endfor %}
 		</tbody>
@@ -29,7 +29,7 @@
 			<tr>
 				<td><strong>{{ 'Celkem s DPH'|trans }}</strong></td>
 				<td></td>
-				<td class="text-right"><strong>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</strong></td>
+				<td class="h-text-right"><strong>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</strong></td>
 			</tr>
 		</tfoot>
 	</table>

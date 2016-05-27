@@ -3,7 +3,7 @@
 		<span class="position__title">{{ 'Nacházíte se v:'|trans }}</span>
 		<strong class="position__actual">{{ (activePath|first).label }}</strong>
 	</div>
-	<div id="js-position-go-to-container" class="display-none">
+	<div id="js-position-go-to-container" class="h-display-none">
 		<span class="position__title">{{ 'Přejít na:'|trans }}</span>
 		<strong class="position__actual" id="js-position-go-to"></strong>
 	</div>
@@ -14,7 +14,7 @@
 			<div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}">
 				<i class="svg svg-gear"></i>
 			</div>
-			<ul id="js-setting-menu-links" class="display-none navig__item__sub">
+			<ul id="js-setting-menu-links" class="h-display-none navig__item__sub">
 				{% for item in menu.getSettingsItems %}
 					{% if not (item.superadmin and not is_granted(ROLE_SUPER_ADMIN)) %}
 						<li class="navig__item__sub__item">

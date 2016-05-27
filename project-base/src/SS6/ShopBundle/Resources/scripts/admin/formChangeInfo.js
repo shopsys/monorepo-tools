@@ -46,7 +46,7 @@
 		if (!isInfoShown) {
 			$fixedBarIn.prepend(
 				'<div class="window-fixed-bar__item">\
-					<div id="js-form-change-info" class="window-fixed-bar__item__cell text-center">\
+					<div id="js-form-change-info" class="window-fixed-bar__item__cell h-text-center">\
 						<strong>' + textToShow + '</strong>\
 					</div>\
 				</div>');

@@ -227,7 +227,8 @@ class OrderController extends AdminBaseController {
 		$grid->addColumn('customer_name', 'customerName', t('Zákazník'), true);
 		$grid->addColumn('domain_id', 'o.domainId', t('Doména'), true);
 		$grid->addColumn('status_name', 'statusName', t('Stav'), true);
-		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)->setClassAttribute('text-right text-nowrap');
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)
+			->setClassAttribute('h-text-right h-text-no-wrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_order_edit', ['id' => 'id']);

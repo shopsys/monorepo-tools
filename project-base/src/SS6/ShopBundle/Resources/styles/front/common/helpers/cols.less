@@ -6,13 +6,13 @@
 @cols-special: 48, 49, 51, 52, 100;
 @cols-special-lenght: length(@cols-special);
 
-@postfixes: -tab, -mob, -mobx;
 
 
 .column (@i, @step, @max, @postfix: ~'') when (@i <= @max) {
 	&--@{i}@{postfix} {
 		width: ~'@{i}%';
 	}
+
 	.column(@i + @step, @step, @max, @postfix);
 }
 
@@ -20,14 +20,14 @@
 	@size: extract(@cols-special, @i);
 
 	&--@{size}@{postfix} {
-	width: ~'@{size}%';
+		width: ~'@{size}%';
 	}
+
 	.column-spec(@i - 1, @postfix);
 }
 
 .col {
 	float: left;
-
 	.column(@cols-minimum, @cols-stepper, @cols-maximum);
 	.column-spec(@cols-special-lenght);
 
@@ -46,7 +46,7 @@
 		.column-spec(@cols-special-lenght, extract(@postfixes, 3));
 	}
 
-	&__wrap {
+	&__row {
 		.cfx();
 	}
 }

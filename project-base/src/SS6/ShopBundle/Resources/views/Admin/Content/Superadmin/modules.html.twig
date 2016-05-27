@@ -9,16 +9,16 @@
 			<thead>
 				<tr>
 					<th class="table-col-80">Název modulu</th>
-					<th class="table-col-10 text-center">Aktivní</th>
-					<th class="table-col-10 text-center">Neaktivní</th>
+					<th class="table-col-10 h-text-center">Aktivní</th>
+					<th class="table-col-10 h-text-center">Neaktivní</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for moduleName, moduleForm in form.modules %}
 					<tr>
 						<td class="table-col-80">{{ moduleForm.vars.label }}{{ form_errors(moduleForm) }}</td>
-						<td class="table-col-10 text-center">{{ form_widget(moduleForm.yes) }}</td>
-						<td class="table-col-10 text-center">{{ form_widget(moduleForm.no) }}</td>
+						<td class="table-col-10 h-text-center">{{ form_widget(moduleForm.yes) }}</td>
+						<td class="table-col-10 h-text-center">{{ form_widget(moduleForm.no) }}</td>
 					</tr>
 				{% endfor %}
 			</tbody>

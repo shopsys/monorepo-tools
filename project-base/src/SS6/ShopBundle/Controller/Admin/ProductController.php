@@ -362,9 +362,9 @@ class ProductController extends AdminBaseController {
 		$grid->setDefaultOrder('name');
 
 		$grid->addColumn('name', 'pt.name', t('Název'), true);
-		$grid->addColumn('price', 'p.price', t('Cena'), true)->setClassAttribute('text-right');
+		$grid->addColumn('price', 'p.price', t('Cena'), true)->setClassAttribute('h-text-right');
 		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Viditelnost'))
-			->setClassAttribute('text-center table-col table-col-10');
+			->setClassAttribute('h-text-center table-col table-col-10');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_product_edit', ['id' => 'p.id']);

@@ -1,0 +1,40 @@
+@padding-minimum: 0;
+@padding-stepper: 5;
+@padding-maximum: 20;
+@padding-unit: 'px';
+
+.padding (@i, @step, @max, @postfix: ~'') when (@i <= @max) {
+	&-@{i}@{postfix} {
+		padding: ~'@{i}@{padding-unit}';
+	}
+
+	&-left-@{i}@{postfix} {
+		padding-left: ~'@{i}@{padding-unit}';
+	}
+
+	&-right-@{i}@{postfix} {
+		padding-right: ~'@{i}@{padding-unit}';
+	}
+
+	&-bottom-@{i}@{postfix} {
+		padding-bottom: ~'@{i}@{padding-unit}';
+	}
+
+	&-top-@{i}@{postfix} {
+		padding-top: ~'@{i}@{padding-unit}';
+	}
+
+	.padding(@i + @step, @step, @max, @postfix);
+}
+
+.h-padding {
+	.padding(@padding-minimum, @padding-stepper, @padding-maximum);
+
+	@media @query-tablet {
+		.padding(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 1));
+	}
+
+	@media @query-mobile {
+		.padding(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 2));
+	}
+}

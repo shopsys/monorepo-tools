@@ -37,7 +37,7 @@
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
-		<div class="in-message in-message--danger js-validation-errors-list {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
+		<div class="in-message in-message--danger js-validation-errors-list {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'h-display-none' }}">
 			<ul class="in-message__list">
 				{% if errors|length > 0 %}
 					{% for error in errors %}
