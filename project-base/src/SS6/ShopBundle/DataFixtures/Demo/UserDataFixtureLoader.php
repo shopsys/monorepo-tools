@@ -12,6 +12,29 @@ use SS6\ShopBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixtureLoader {
 
+	const	COLUMN_FIRSTNAME = 0;
+	const	COLUMN_LASTNAME = 1;
+	const	COLUMN_EMAIL = 2;
+	const	COLUMN_PASSWORD = 3;
+	const	COLUMN_COMPANY_CUSTOMER = 4;
+	const	COLUMN_COMPANY_NAME = 5;
+	const	COLUMN_COMPANY_NUMBER = 6;
+	const	COLUMN_COMPANY_TAX_NUMBER = 7;
+	const	COLUMN_STREET = 8;
+	const	COLUMN_CITY = 9;
+	const	COLUMN_POSTCODE = 10;
+	const	COLUMN_TELEPHONE = 11;
+	const	COLUMN_COUNTRY = 12;
+	const	COLUMN_DELIVERY_ADDRESS_FILLED = 13;
+	const	COLUMN_DELIVERY_CITY = 14;
+	const	COLUMN_DELIVERY_COMPANY_NAME = 15;
+	const	COLUMN_DELIVERY_CONTACT_PERSON = 16;
+	const	COLUMN_DELIVERY_POSTCODE = 17;
+	const	COLUMN_DELIVERY_STREET = 18;
+	const	COLUMN_DELIVERY_TELEPHONE = 19;
+	const	COLUMN_DELIVERY_COUNTRY = 20;
+	const	COLUMN_DOMAIN_ID = 21;
+
 	/**
 	 * @var CsvReader
 	 */
@@ -75,34 +98,34 @@ class UserDataFixtureLoader {
 	 */
 	private function getCustomerDataFromCsvRow(array $row) {
 		$customerData = new CustomerData();
-		$domainId = $row[21];
+		$domainId = $row[self::COLUMN_DOMAIN_ID];
 		$userData = $this->userDataFactory->createDefault($domainId);
 		$billingAddressData = new BillingAddressData();
 
-		$userData->firstName = $row[0];
-		$userData->lastName = $row[1];
-		$userData->email = $row[2];
-		$userData->password = $row[3];
+		$userData->firstName = $row[self::COLUMN_FIRSTNAME];
+		$userData->lastName = $row[self::COLUMN_LASTNAME];
+		$userData->email = $row[self::COLUMN_EMAIL];
+		$userData->password = $row[self::COLUMN_PASSWORD];
 
-		$billingAddressData->companyCustomer = $row[4];
-		$billingAddressData->companyName = $row[5];
-		$billingAddressData->companyNumber = $row[6];
-		$billingAddressData->companyTaxNumber = $row[7];
-		$billingAddressData->street = $row[8];
-		$billingAddressData->city = $row[9];
-		$billingAddressData->postcode = $row[10];
-		$billingAddressData->telephone = $row[11];
-		$billingAddressData->country = $this->getCountryByName($row[12]);
-		if ($row[13] === 'true') {
+		$billingAddressData->companyCustomer = $row[self::COLUMN_COMPANY_CUSTOMER];
+		$billingAddressData->companyName = $row[self::COLUMN_COMPANY_NAME];
+		$billingAddressData->companyNumber = $row[self::COLUMN_COMPANY_NUMBER];
+		$billingAddressData->companyTaxNumber = $row[self::COLUMN_COMPANY_TAX_NUMBER];
+		$billingAddressData->street = $row[self::COLUMN_STREET];
+		$billingAddressData->city = $row[self::COLUMN_CITY];
+		$billingAddressData->postcode = $row[self::COLUMN_POSTCODE];
+		$billingAddressData->telephone = $row[self::COLUMN_TELEPHONE];
+		$billingAddressData->country = $this->getCountryByName($row[self::COLUMN_COUNTRY]);
+		if ($row[self::COLUMN_DELIVERY_ADDRESS_FILLED] === 'true') {
 			$deliveryAddressData = new DeliveryAddressData();
 			$deliveryAddressData->addressFilled = true;
-			$deliveryAddressData->city = $row[14];
-			$deliveryAddressData->companyName = $row[15];
-			$deliveryAddressData->contactPerson = $row[16];
-			$deliveryAddressData->postcode = $row[17];
-			$deliveryAddressData->street = $row[18];
-			$deliveryAddressData->telephone = $row[19];
-			$deliveryAddressData->country = $this->getCountryByName($row[20]);
+			$deliveryAddressData->city = $row[self::COLUMN_DELIVERY_CITY];
+			$deliveryAddressData->companyName = $row[self::COLUMN_DELIVERY_COMPANY_NAME];
+			$deliveryAddressData->contactPerson = $row[self::COLUMN_DELIVERY_CONTACT_PERSON];
+			$deliveryAddressData->postcode = $row[self::COLUMN_DELIVERY_POSTCODE];
+			$deliveryAddressData->street = $row[self::COLUMN_DELIVERY_STREET];
+			$deliveryAddressData->telephone = $row[self::COLUMN_DELIVERY_TELEPHONE];
+			$deliveryAddressData->country = $this->getCountryByName($row[self::COLUMN_DELIVERY_COUNTRY]);
 			$customerData->deliveryAddressData = $deliveryAddressData;
 		} else {
 			$customerData->deliveryAddressData = new DeliveryAddressData();
