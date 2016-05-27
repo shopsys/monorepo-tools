@@ -83,7 +83,7 @@ class BrandController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace značky - %name%', ['%name%' => $brand->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace značky - %name%', ['%name%' => $brand->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Brand/edit.html.twig', [
 			'form' => $form->createView(),

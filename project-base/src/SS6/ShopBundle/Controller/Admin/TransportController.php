@@ -137,7 +137,7 @@ class TransportController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace dopravy - %name%', ['%name%' => $transport->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace dopravy - %name%', ['%name%' => $transport->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),

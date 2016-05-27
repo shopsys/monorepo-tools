@@ -14,7 +14,7 @@ class Breadcrumb {
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
-	private $lastItem;
+	private $overrdingLastItem;
 
 	public function __construct(Menu $menu) {
 		$this->menu = $menu;
@@ -23,8 +23,8 @@ class Breadcrumb {
 	/**
 	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
 	 */
-	public function replaceLastItem(MenuItem $menuItem) {
-		$this->lastItem = $menuItem;
+	public function overrideLastItem(MenuItem $menuItem) {
+		$this->overrdingLastItem = $menuItem;
 	}
 
 	/**
@@ -33,9 +33,9 @@ class Breadcrumb {
 	public function getItems($route, $routeParameters) {
 		$items = $this->menu->getMenuPath($route, $routeParameters);
 
-		if ($this->lastItem !== null) {
+		if ($this->overrdingLastItem !== null) {
 			array_pop($items);
-			$items[] = $this->lastItem;
+			$items[] = $this->overrdingLastItem;
 		}
 
 		return $items;

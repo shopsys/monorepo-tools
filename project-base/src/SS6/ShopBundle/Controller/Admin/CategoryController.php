@@ -93,7 +93,7 @@ class CategoryController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace kategorie - %name%', ['%name%' => $category->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace kategorie - %name%', ['%name%' => $category->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', [
 			'form' => $form->createView(),

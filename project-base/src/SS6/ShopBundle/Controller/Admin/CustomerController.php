@@ -160,7 +160,7 @@ class CustomerController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace zákazníka - %name%', ['%name%' => $user->getFullName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace zákazníka - %name%', ['%name%' => $user->getFullName()])));
 
 		$orders = $this->orderFacade->getCustomerOrderList($user);
 
