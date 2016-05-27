@@ -16,8 +16,12 @@ class BreadcrumbController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 	}
 
-	public function indexAction() {
-		$items = $this->breadcrumb->getItems();
+	/**
+	 * @param string $route
+	 * @param array|null $parameters
+	 */
+	public function indexAction($route, array $parameters = null) {
+		$items = $this->breadcrumb->getItems($route, $parameters);
 
 		return $this->render('@SS6Shop/Admin/Inline/Breadcrumb/breadcrumb.html.twig', [
 			'items' => $items,

@@ -2,39 +2,43 @@
 
 namespace SS6\ShopBundle\Model\AdminNavigation;
 
+use SS6\ShopBundle\Model\AdminNavigation\Menu;
+
 class Breadcrumb {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\Menu
 	 */
-	private $menuItems;
-
-	public function __construct() {
-		$this->menuItems = [];
-	}
+	private $menu;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
-	public function addItem(MenuItem $menuItem) {
-		$this->menuItems[] = $menuItem;
+	private $lastItem;
+
+	public function __construct(Menu $menu) {
+		$this->menu = $menu;
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
 	 */
 	public function replaceLastItem(MenuItem $menuItem) {
-		if (count($this->menuItems) > 0) {
-			array_pop($this->menuItems);
-		}
-		$this->menuItems[] = $menuItem;
+		$this->lastItem = $menuItem;
 	}
 
 	/**
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
-	public function getItems() {
-		return $this->menuItems;
+	public function getItems($route, $routeParameters) {
+		$items = $this->menu->getMenuPath($route, $routeParameters);
+
+		if ($this->lastItem !== null) {
+			array_pop($items);
+			$items[] = $this->lastItem;
+		}
+
+		return $items;
 	}
 
 }
