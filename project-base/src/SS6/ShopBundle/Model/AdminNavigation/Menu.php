@@ -191,13 +191,12 @@ class Menu {
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getMenuPath($route, $parameters) {
-		$menuPath = [];
 		$matchingItem = $this->getItemMatchingRoute($route, $parameters);
-		if ($matchingItem !== null) {
-			$menuPath = $this->getItemPath($matchingItem);
+		if ($matchingItem === null) {
+			throw new \SS6\ShopBundle\Model\AdminNavigation\Exception\MenuItemNotMatchingRouteException($route, $parameters);
 		}
 
-		return $menuPath;
+		return $this->getItemPath($matchingItem);
 	}
 
 	/**
