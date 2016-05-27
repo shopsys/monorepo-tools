@@ -5,19 +5,16 @@
 
 	&__item {
 		margin: 5px -5px;
-		.flex();
-		.flex-align-items(center);
+		display: flex;
+		align-items: center;
 
 		&__content {
-			.flex-grow(1);
-			.flex-basis();
+			flex: 1;
 			padding: 0 5px;
 
 			&--small {
-				width: 25px;
 				padding: 0 5px 0 0;
-				.flex-basis(unset);
-				.flex-grow(unset);
+				flex: 0 25px;
 
 				text-align: right;
 

@@ -136,8 +136,9 @@
 /*******************************************************************
 // OTHER
 *******************************************************************/
-@transition: cubic-bezier(.61, .20, .48, 1.0);
+@transition-type: cubic-bezier(.61, .20, .48, 1.0);
 @transition-time: 0.3s;
+@transition: @transition-time @transition-type;
 
 @postfixes: -tablet, -mobile, -mobile-small;
 

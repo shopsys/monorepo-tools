@@ -20,9 +20,7 @@ button types
 	font-weight: bold;
 	text-decoration: none;
 	font-size: 13px;
-
-	.set-transition();
-	.transition(~"background, color");
+	transition: @transition ~"background, color";
 
 	&:hover {
 		color: @btn-color-hover;
@@ -39,13 +37,13 @@ button types
 			position: absolute;
 			top: 6px;
 			left: 6px;
+			width: 18px;
+			height: 18px;
 
 			text-align: center;
 			line-height: 19px;
 			font-size: 20px;
 			font-weight: normal;
-
-			.size(18px);
 		}
 
 		.btn--small & {
