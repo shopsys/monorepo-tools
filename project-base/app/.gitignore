@@ -1,4 +1,4 @@
 /cache
 /lock
 /logs
-bootstrap.php.cache
+/bootstrap.php.cache
