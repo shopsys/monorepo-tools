@@ -6,6 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Pricing\PricingService;
 
+/**
+ * @UglyTest
+ */
 class PricingServiceTest extends PHPUnit_Framework_TestCase {
 
 	/**

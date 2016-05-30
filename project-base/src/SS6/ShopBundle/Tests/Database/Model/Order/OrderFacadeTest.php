@@ -19,6 +19,9 @@ use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Model\Transport\TransportRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class OrderFacadeTest extends DatabaseTestCase {
 
 	/**

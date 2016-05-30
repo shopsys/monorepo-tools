@@ -6,6 +6,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Cron\CronModuleExecutor;
 use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
+/**
+ * @UglyTest
+ */
 class CronModuleExecutorTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunModuleSuspendAfterTimeout() {

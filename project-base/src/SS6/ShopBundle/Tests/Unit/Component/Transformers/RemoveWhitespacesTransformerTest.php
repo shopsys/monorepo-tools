@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Router;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 
+/**
+ * @UglyTest
+ */
 class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase {
 
 	public function transformValuesProvider() {

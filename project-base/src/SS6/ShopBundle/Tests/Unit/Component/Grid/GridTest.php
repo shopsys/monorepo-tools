@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
+/**
+ * @UglyTest
+ */
 class GridTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetParametersFromRequest() {

@@ -14,6 +14,9 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductService;
 
+/**
+ * @UglyTest
+ */
 class ProductServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testEditSchedulesPriceRecalculation() {

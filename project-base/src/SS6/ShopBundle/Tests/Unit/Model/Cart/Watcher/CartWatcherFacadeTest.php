@@ -12,6 +12,9 @@ use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 
+/**
+ * @UglyTest
+ */
 class CartWatcherFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckCartModificationsRemovePromoCodeOnEmptyCart() {

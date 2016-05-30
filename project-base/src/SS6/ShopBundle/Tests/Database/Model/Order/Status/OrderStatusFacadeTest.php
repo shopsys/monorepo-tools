@@ -10,6 +10,9 @@ use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
 use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class OrderStatusFacadeTest extends DatabaseTestCase {
 
 	public function testDeleteByIdAndReplace() {

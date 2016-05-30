@@ -8,6 +8,9 @@ use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * @UglyTest
+ */
 class DomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRouter() {

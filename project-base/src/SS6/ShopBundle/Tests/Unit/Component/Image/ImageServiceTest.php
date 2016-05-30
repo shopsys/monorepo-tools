@@ -11,6 +11,9 @@ use SS6\ShopBundle\Component\Image\ImageService;
 use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @UglyTest
+ */
 class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetUploadedImagesException() {

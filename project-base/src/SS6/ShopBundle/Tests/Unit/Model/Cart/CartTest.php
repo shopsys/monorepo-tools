@@ -11,6 +11,9 @@ use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
+/**
+ * @UglyTest
+ */
 class CartTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetItemsCountZero() {

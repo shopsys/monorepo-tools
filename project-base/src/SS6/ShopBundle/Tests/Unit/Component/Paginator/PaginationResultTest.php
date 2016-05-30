@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Paginator;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
 
+/**
+ * @UglyTest
+ */
 class PaginationResultTest extends PHPUnit_Framework_TestCase {
 
 	public function getTestPageCountData() {

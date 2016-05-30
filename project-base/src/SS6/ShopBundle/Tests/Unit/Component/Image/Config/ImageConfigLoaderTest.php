@@ -12,6 +12,9 @@ use SS6\ShopBundle\Component\Image\Config\ImageConfigLoader;
 use SS6\ShopBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * @UglyTest
+ */
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoadFromArrayDuplicateEntityName() {

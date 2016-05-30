@@ -6,6 +6,9 @@ use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase {
 
 	public function testTranslateOperator() {

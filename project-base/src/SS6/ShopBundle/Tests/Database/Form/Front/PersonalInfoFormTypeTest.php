@@ -7,6 +7,9 @@ use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
+/**
+ * @UglyTest
+ */
 class PersonalInfoFormTypeTest extends DatabaseTestCase {
 
 	/**

@@ -8,6 +8,9 @@ use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductVariantService;
 
+/**
+ * @UglyTest
+ */
 class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckProductIsNotMainVariantException() {

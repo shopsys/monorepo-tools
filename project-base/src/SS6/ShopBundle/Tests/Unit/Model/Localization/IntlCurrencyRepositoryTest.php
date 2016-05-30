@@ -5,6 +5,9 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Localization;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
 
+/**
+ * @UglyTest
+ */
 class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase {
 
 	/**

@@ -8,6 +8,9 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
 
+/**
+ * @UglyTest
+ */
 class MessageIdNormalizerTest extends PHPUnit_Framework_TestCase {
 
 	public function normalizeMessageIdProvider() {

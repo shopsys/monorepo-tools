@@ -17,6 +17,9 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
+/**
+ * @UglyTest
+ */
 class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceByUserAndDomainIdWithUser() {

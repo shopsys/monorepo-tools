@@ -8,6 +8,9 @@ use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
 
+/**
+ * @UglyTest
+ */
 class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateUploadedFile() {

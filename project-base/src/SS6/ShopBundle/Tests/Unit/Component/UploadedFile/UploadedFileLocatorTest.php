@@ -7,6 +7,9 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
 use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 
+/**
+ * @UglyTest
+ */
 class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testFileExists() {

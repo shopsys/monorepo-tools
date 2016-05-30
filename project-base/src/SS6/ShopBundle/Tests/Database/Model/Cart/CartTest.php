@@ -14,6 +14,9 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class CartTest extends DatabaseTestCase {
 
 	public function testRemoveItem() {

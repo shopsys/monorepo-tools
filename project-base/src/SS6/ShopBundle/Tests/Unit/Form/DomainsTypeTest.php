@@ -6,6 +6,9 @@ use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
+/**
+ * @UglyTest
+ */
 class DomainsTypeTest extends FunctionalTestCase {
 
 	public function testGetDataReturnsCorrectArray() {

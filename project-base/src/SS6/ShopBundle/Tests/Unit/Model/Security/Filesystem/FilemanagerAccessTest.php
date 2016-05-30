@@ -7,6 +7,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
 use SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 
+/**
+ * @UglyTest
+ */
 class FilemanagerAccessTest extends PHPUnit_Framework_TestCase {
 
 	public function isPathAccessibleProvider() {

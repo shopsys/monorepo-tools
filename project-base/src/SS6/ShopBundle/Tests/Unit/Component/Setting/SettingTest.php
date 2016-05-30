@@ -10,6 +10,9 @@ use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 
+/**
+ * @UglyTest
+ */
 class SettingTest extends PHPUnit_Framework_TestCase {
 
 	public function testSet() {

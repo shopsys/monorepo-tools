@@ -9,6 +9,9 @@ use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use SS6\ShopBundle\Component\Setting\Setting;
 
+/**
+ * @UglyTest
+ */
 class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateFriendlyUrls() {

@@ -11,6 +11,9 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
+/**
+ * @UglyTest
+ */
 class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase {
 
 	public function testSubRequest() {

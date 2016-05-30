@@ -11,6 +11,9 @@ use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationSc
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use SS6\ShopBundle\Model\Product\Product;
 
+/**
+ * @UglyTest
+ */
 class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunImmediatelyRecalculations() {

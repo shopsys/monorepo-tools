@@ -14,6 +14,9 @@ use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 
 	/**

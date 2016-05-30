@@ -8,6 +8,9 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory;
 
+/**
+ * @UglyTest
+ */
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase {
 
 	public function testExtractController() {

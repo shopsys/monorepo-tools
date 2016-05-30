@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Entity\EntityStringColumnsFinder;
 
+/**
+ * @UglyTest
+ */
 class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetAllStringColumnNamesIndexedByTableName() {

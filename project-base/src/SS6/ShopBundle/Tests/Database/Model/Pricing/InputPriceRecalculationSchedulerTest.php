@@ -22,6 +22,9 @@ use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
+/**
+ * @UglyTest
+ */
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 	public function testOnKernelResponseNoAction() {

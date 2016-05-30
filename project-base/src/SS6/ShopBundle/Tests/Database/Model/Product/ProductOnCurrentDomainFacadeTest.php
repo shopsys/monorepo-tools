@@ -15,6 +15,9 @@ use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase {
 
 	public function testFilterByMinimalPrice() {

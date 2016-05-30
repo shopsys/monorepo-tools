@@ -10,7 +10,7 @@ use SS6\ShopBundle\Model\Customer\UserData;
 
 class UserTest extends PHPUnit_Framework_TestCase {
 
-	public function testGetFullNameSimpleUser() {
+	public function testGetFullNameReturnsLastnameAndFirstnameForUser() {
 		$userData = new UserData(1, 'Firstname', 'Lastname');
 		$billingAddressData = new BillingAddressData();
 		$billingAddress = new BillingAddress($billingAddressData);
@@ -19,7 +19,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame('Lastname Firstname', $user->getFullName());
 	}
 
-	public function testGetFullNameCompanyUser() {
+	public function testGetFullNameReturnsCompanyNameForCompanyUser() {
 		$userData = new UserData(1, 'Firstname', 'Lastname');
 		$billingAddressData = new BillingAddressData();
 		$billingAddressData->companyCustomer = true;

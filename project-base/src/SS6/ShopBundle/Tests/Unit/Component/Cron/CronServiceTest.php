@@ -7,6 +7,9 @@ use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronModuleInterface;
 use SS6\ShopBundle\Component\Cron\CronService;
 
+/**
+ * @UglyTest
+ */
 class CronServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testFilterScheduledCronModuleConfigs() {

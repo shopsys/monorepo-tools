@@ -9,6 +9,9 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
 use SS6\ShopBundle\Component\Translation\PoDumper;
 
+/**
+ * @UglyTest
+ */
 class PoDumperTest extends PHPUnit_Framework_TestCase {
 
 	public function testDump() {

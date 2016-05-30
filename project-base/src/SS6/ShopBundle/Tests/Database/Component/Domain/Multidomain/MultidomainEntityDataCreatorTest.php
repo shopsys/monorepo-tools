@@ -8,6 +8,9 @@ use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
 use SS6\ShopBundle\Component\Sql\SqlQuoter;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
+/**
+ * @UglyTest
+ */
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
 
 	public function testCopyAllMultidomainDataForNewDomainCopiesTestRow() {

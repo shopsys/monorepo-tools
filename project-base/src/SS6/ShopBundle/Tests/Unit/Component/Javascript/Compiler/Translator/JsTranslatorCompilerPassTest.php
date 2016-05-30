@@ -6,6 +6,9 @@ use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use SS6\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
+/**
+ * @UglyTest
+ */
 class JsTranslatorCompilerPassTest extends FunctionalTestCase {
 
 	public function testProcess() {

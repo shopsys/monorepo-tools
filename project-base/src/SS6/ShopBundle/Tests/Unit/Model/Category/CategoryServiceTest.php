@@ -7,6 +7,9 @@ use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryService;
 
+/**
+ * @UglyTest
+ */
 class CategoryServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateSetRoot() {
