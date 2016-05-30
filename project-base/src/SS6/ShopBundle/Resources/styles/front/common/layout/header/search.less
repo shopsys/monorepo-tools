@@ -36,10 +36,11 @@
 			border-top: 1px dashed @color-border;
 
 			&__link {
-				display: table;
+				display: flex;
+				align-items: center;
 				width: 100%;
 				padding: 10px;
-				.cfx();
+				.clearfix();
 
 				text-decoration: none;
 
@@ -62,11 +63,12 @@
 		}
 
 		&__image {
-			width: 30px;
-			.center-it();
+			position: relative;
+			height: 30px;
+			flex: 0 30px;
 
 			img {
-				max-width: 30px;
+				.center-image();
 			}
 
 			.svg {
@@ -81,7 +83,7 @@
 
 		&__name {
 			padding-left: 10px;
-			.center-it(left);
+			flex: 1;
 		}
 	}
 }
