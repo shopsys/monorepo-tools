@@ -8,7 +8,7 @@
 
 		{{ productList.list(paginationResult.results) }}
 
-		<div class="h-text-center">
+		<div class="h-text-center h-margin-bottom-20">
 			<input type="button" class="js-load-more-button btn"
 				data-page="{{ paginationResult.page }}"
 				data-total-count="{{ paginationResult.totalCount }}"
@@ -20,7 +20,7 @@
 		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 	</div>
 {% else %}
-	<div class="in-message in-message--info">
+	<div class="in-message in-message--info h-margin-bottom-20">
 		{% if (filterFormSubmited) %}
 			{{ 'Filtru neodpovídají žádné výsledky'|trans }}
 		{% elseif searchText is defined %}
