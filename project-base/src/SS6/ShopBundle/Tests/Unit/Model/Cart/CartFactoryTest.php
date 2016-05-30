@@ -14,19 +14,7 @@ use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetReturnsTheSameCartForTheSameCustomer() {
-		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
-			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartItemRepository->expects($this->once())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
-
-		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
-			->setMethods(['__construct', 'checkCartModifications'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
-
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
+		$cartFactory = $this->getCartFactory();
 
 		$sessionId = 'abc123';
 		$customerIdentifier1 = new CustomerIdentifier($sessionId);
@@ -35,23 +23,11 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);
 
-		$this->assertTrue($cart1 === $cart2);
+		$this->assertSame($cart1, $cart2, 'Users with the same session ID have different carts.');
 	}
 
 	public function testGetReturnsDifferentCartsForDifferentCustomers() {
-		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
-			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartItemRepository->expects($this->exactly(2))->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
-
-		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
-			->setMethods(['__construct', 'checkCartModifications'])
-			->disableOriginalConstructor()
-			->getMock();
-		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
-
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
+		$cartFactory = $this->getCartFactory();
 
 		$sessionId1 = 'abc123';
 		$sessionId2 = 'def456';
@@ -61,7 +37,26 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);
 
-		$this->assertFalse($cart1 === $cart2);
+		$this->assertNotSame($cart1, $cart2, 'Users with different session IDs have the same cart.');
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Cart\CartFactory
+	 */
+	private function getCartFactory() {
+		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)
+			->setMethods(['__construct', 'getAllByCustomerIdentifier'])
+			->disableOriginalConstructor()
+			->getMock();
+		$cartItemRepository->expects($this->any())->method('getAllByCustomerIdentifier')->will($this->returnValue([]));
+
+		$cartWatcherFacade = $this->getMockBuilder(CartWatcherFacade::class)
+			->setMethods(['__construct', 'checkCartModifications'])
+			->disableOriginalConstructor()
+			->getMock();
+		$cartWatcherFacade->expects($this->any())->method('checkCartModifications');
+
+		return new CartFactory($cartItemRepository, $cartWatcherFacade);
 	}
 
 }
