@@ -1,22 +1,20 @@
-body {
-	background: @bg-web;
-}
-
 img {
 	max-width: 100%;
 }
 
 .web {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 
-	&__line {
-		&--light {
-			background: @color-f;
-		}
+	&__in {
+		flex: 1;
+	}
 
-		&--split {
-			border-top: 1px solid @color-border;
-			background: @color-f;
-		}
+	&__footer {
+		flex: 0;
+
+		background: @bg-web;
 	}
 
 	&__container {
