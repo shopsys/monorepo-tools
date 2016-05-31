@@ -11,6 +11,6 @@ parameters:
   mailer_password: ~
   mailer_disable_delivery: false
   mailer_master_email_address: no-reply@shopsys.cz
-  mailer_delivery_whitelist: [/@shopsys.cz$/]
+  mailer_delivery_whitelist: [/@shopsys\.cz$/]
 
   secret: ThisTokenIsNotSoSecretChangeIt
