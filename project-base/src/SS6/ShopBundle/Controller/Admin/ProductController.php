@@ -162,7 +162,7 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(
+		$this->breadcrumb->overrideLastItem(
 			new MenuItem(t('Editace zboží - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]))
 		);
 

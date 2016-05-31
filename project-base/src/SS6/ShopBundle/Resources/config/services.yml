@@ -63,14 +63,6 @@ services:
   ss6.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
 
-  ss6.shop.admin_navigation.breadcrumb:
-    class: SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
-    factory_service: ss6.shop.admin_navigation.breadcrumb_factory
-    factory_method: get
-
-  ss6.shop.admin_navigation.breadcrumb_factory:
-    class: SS6\ShopBundle\Model\AdminNavigation\BreadcrumbFactory
-
   ss6.shop.admin_navigation.menu:
     class: SS6\ShopBundle\Model\AdminNavigation\Menu
     factory_service: ss6.shop.admin_navigation.menu_loader

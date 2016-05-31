@@ -105,7 +105,7 @@ class BestsellingProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem($category->getName()));
+		$this->breadcrumb->overrideLastItem(new MenuItem($category->getName()));
 
 		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/detail.html.twig', [
 			'form' => $form->createView(),

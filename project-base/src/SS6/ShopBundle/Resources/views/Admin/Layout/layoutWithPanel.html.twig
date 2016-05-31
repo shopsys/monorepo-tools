@@ -15,7 +15,10 @@
 
 		<div class="web__content">
 			{% block breadcrumb %}
-				{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index'	)) }}
+				{{ render(controller('SS6ShopBundle:Admin/Breadcrumb:index', {
+					route: app.request.get('_route'),
+					parameters: app.request.attributes.get('_route_params')
+				} )) }}
 			{% endblock %}
 
 			<div class="mt15">

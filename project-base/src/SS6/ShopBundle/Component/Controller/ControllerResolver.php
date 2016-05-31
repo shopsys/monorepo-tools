@@ -28,11 +28,7 @@ class ControllerResolver extends SymfonyControllerResolver {
 
 		list($class, $method) = explode('::', $controller, 2);
 
-		if ($this->container->has($class)) {
-			$controller = $this->container->get($class);
-		} else {
-			throw new \InvalidArgumentException(sprintf('Class "%s" does not exist.', $class));
-		}
+		$controller = $this->container->get($class);
 
 		if ($controller instanceof ContainerAwareInterface) {
 			$controller->setContainer($this->container);

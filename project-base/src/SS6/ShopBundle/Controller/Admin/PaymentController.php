@@ -136,7 +136,7 @@ class PaymentController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(new MenuItem(t('Editace platby - %name%', ['%name%' => $payment->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace platby - %name%', ['%name%' => $payment->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', [
 			'form' => $form->createView(),

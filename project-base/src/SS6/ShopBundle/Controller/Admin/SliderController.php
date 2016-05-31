@@ -153,7 +153,7 @@ class SliderController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
 		}
 
-		$this->breadcrumb->replaceLastItem(
+		$this->breadcrumb->overrideLastItem(
 			new MenuItem(t('Editace stránky slideru - %name%', ['%name%' => $sliderItem->getName()]))
 		);
 
