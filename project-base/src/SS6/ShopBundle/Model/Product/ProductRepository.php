@@ -11,6 +11,7 @@ use SS6\ShopBundle\Component\Paginator\QueryPaginator;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use SS6\ShopBundle\Model\Product\Brand\Brand;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
@@ -184,6 +185,22 @@ class ProductRepository {
 	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getListableForBrandQueryBuilder(
+		$domainId,
+		PricingGroup $pricingGroup,
+		Brand $brand
+	) {
+		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
+		$this->filterByBrand($queryBuilder, $brand, $domainId);
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
@@ -249,6 +266,18 @@ class ProductRepository {
 	}
 
 	/**
+	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
+	 * @param int $domainId
+	 */
+	private function filterByBrand(QueryBuilder $queryBuilder, Brand $brand, $domainId) {
+		$queryBuilder->join('p.productCategoryDomains', 'pcd', Join::WITH, 'pcd.domainId = :domainId')
+			->andWhere('p.brand = :brand');
+		$queryBuilder->setParameter('brand', $brand);
+		$queryBuilder->setParameter('domainId', $domainId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param string $locale
@@ -277,6 +306,38 @@ class ProductRepository {
 			$pricingGroup
 		);
 
+		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
+
+		$queryPaginator = new QueryPaginator($queryBuilder);
+
+		return $queryPaginator->getResult($page, $limit);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
+	 * @param int $domainId
+	 * @param string $orderingMode
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $page
+	 * @param int $limit
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginationResultForListableForBrand(
+		Brand $brand,
+		$domainId,
+		$locale,
+		$orderingMode,
+		PricingGroup $pricingGroup,
+		$page,
+		$limit
+	) {
+		$queryBuilder = $this->getListableForBrandQueryBuilder(
+			$domainId,
+			$pricingGroup,
+			$brand
+		);
+
+		$this->addTranslation($queryBuilder, $locale);
 		$this->applyOrdering($queryBuilder, $orderingMode, $pricingGroup, $locale);
 
 		$queryPaginator = new QueryPaginator($queryBuilder);

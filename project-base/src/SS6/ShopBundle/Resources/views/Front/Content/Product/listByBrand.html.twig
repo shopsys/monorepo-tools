@@ -1,0 +1,28 @@
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+
+{% block meta_robots %}
+	{{ paginator.metaRobots(paginationResult) }}
+{% endblock %}
+
+{% block title %}
+	- {{ 'Katalog zboží - %brandName%'|trans({'%brandName%' : brand.name}) }}
+{% endblock %}
+
+{% block panel_content %}
+	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+{% endblock %}
+
+{% block main_content %}
+	<div class="box-list">
+		<h1>{{ brand.name }}</h1>
+
+		<div>
+			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForListByBrand')) }}
+			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: false } %}
+		</div>
+
+	</div>
+
+{% endblock %}

@@ -10,7 +10,9 @@ use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Module\ModuleFacade;
 use SS6\ShopBundle\Model\Module\ModuleList;
+use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade;
 use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
@@ -54,6 +56,11 @@ class ProductController extends FrontBaseController {
 	private $productListOrderingModeForListFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade
+	 */
+	private $productListOrderingModeForBrandFacade;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade
 	 */
 	private $productListOrderingModeForSearchFacade;
@@ -63,6 +70,11 @@ class ProductController extends FrontBaseController {
 	 */
 	private $moduleFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandFacade
+	 */
+	private $brandFacade;
+
 	public function __construct(
 		RequestExtension $requestExtension,
 		CategoryFacade $categoryFacade,
@@ -70,8 +82,10 @@ class ProductController extends FrontBaseController {
 		ProductOnCurrentDomainFacade $productOnCurrentDomainFacade,
 		ProductFilterFormTypeFactory $productFilterFormTypeFactory,
 		ProductListOrderingModeForListFacade $productListOrderingModeForListFacade,
+		ProductListOrderingModeForBrandFacade $productListOrderingModeForBrandFacade,
 		ProductListOrderingModeForSearchFacade $productListOrderingModeForSearchFacade,
-		ModuleFacade $moduleFacade
+		ModuleFacade $moduleFacade,
+		BrandFacade $brandFacade
 	) {
 		$this->requestExtension = $requestExtension;
 		$this->categoryFacade = $categoryFacade;
@@ -79,8 +93,10 @@ class ProductController extends FrontBaseController {
 		$this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
 		$this->productFilterFormTypeFactory = $productFilterFormTypeFactory;
 		$this->productListOrderingModeForListFacade = $productListOrderingModeForListFacade;
+		$this->productListOrderingModeForBrandFacade = $productListOrderingModeForBrandFacade;
 		$this->productListOrderingModeForSearchFacade = $productListOrderingModeForSearchFacade;
 		$this->moduleFacade = $moduleFacade;
+		$this->brandFacade = $brandFacade;
 	}
 
 	/**
@@ -168,6 +184,38 @@ class ProductController extends FrontBaseController {
 
 			return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', $viewParameters);
 		}
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param int $brandId
+	 */
+	public function listByBrandAction(Request $request, $brandId) {
+		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
+		if (!$this->isRequestPageValid($requestPage)) {
+			$parameters = $this->requestExtension->getAllRequestParams();
+			unset($parameters[self::PAGE_QUERY_PARAMETER]);
+			return $this->redirectToRoute('front_product_list', $parameters);
+		}
+		$page = $requestPage === null ? 1 : (int)$requestPage;
+
+		$orderingMode = $this->productListOrderingModeForBrandFacade->getOrderingModeFromRequest(
+			$request
+		);
+
+		$paginationResult = $this->productOnCurrentDomainFacade->getPaginatedProductDetailsForBrand(
+			$orderingMode,
+			$page,
+			self::PRODUCTS_PER_PAGE,
+			$brandId
+		);
+
+		$viewParameters = [
+			'paginationResult' => $paginationResult,
+			'brand' => $this->brandFacade->getById($brandId),
+		];
+
+		return $this->render('@SS6Shop/Front/Content/Product/listByBrand.html.twig', $viewParameters);
 	}
 
 	/**
@@ -270,6 +318,20 @@ class ProductController extends FrontBaseController {
 		$productListOrderingConfig = $this->productListOrderingModeForListFacade->getProductListOrderingConfig();
 
 		$orderingMode = $this->productListOrderingModeForListFacade->getOrderingModeFromRequest(
+			$request
+		);
+
+		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
+			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
+			'activeOrderingMode' => $orderingMode,
+			'cookieName' => $productListOrderingConfig->getCookieName(),
+		]);
+	}
+
+	public function selectOrderingModeForListByBrandAction(Request $request) {
+		$productListOrderingConfig = $this->productListOrderingModeForBrandFacade->getProductListOrderingConfig();
+
+		$orderingMode = $this->productListOrderingModeForBrandFacade->getOrderingModeFromRequest(
 			$request
 		);
 
