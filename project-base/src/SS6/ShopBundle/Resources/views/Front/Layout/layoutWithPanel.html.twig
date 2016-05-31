@@ -9,12 +9,14 @@
 		</div>
 
 		<div class="web__main__panel">
-			<div class="wrap-panel h-margin-bottom-20">
-				{% block panel_content %}{% endblock %}
-				<div id="js-contact-form-container">
-					{{ render(controller('SS6ShopBundle:Front/ContactForm:index')) }}
-				</div>
-				{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
+			{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+
+			{% block panel_content %}{% endblock %}
+
+			<div id="js-contact-form-container">
+				{{ render(controller('SS6ShopBundle:Front/ContactForm:index')) }}
 			</div>
+
+			{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('SS6\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_LEFT_SIDEBAR')})) }}
 		</div>
 {% endblock %}

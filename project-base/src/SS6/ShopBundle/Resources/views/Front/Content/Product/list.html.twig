@@ -11,10 +11,6 @@
 	- {{ 'Katalog zboží - '~category.name|trans }}
 {% endblock %}
 
-{% block panel_content %}
-	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
-{% endblock %}
-
 {% block main_content %}
 	<div class="box-list">
 		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}

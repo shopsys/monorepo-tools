@@ -12,10 +12,6 @@
 	{{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
-{% block panel_content %}
-	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
-{% endblock %}
-
 {% block main_content %}
 	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
