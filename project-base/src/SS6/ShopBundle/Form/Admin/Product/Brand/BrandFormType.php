@@ -31,6 +31,10 @@ class BrandFormType extends AbstractType {
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
 				],
 			])
+			->add('descriptions', FormType::LOCALIZED, [
+				'type' => FormType::WYSIWYG,
+				'required' => false,
+			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => false,
 				'file_constraints' => [
