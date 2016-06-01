@@ -57,7 +57,7 @@ class BrandController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$brand = $this->brandFacade->getById($id);
-		$form = $this->createForm(new BrandFormType($brand));
+		$form = $this->createForm(new BrandFormType());
 
 		$brandData = new BrandData();
 		$brandData->setFromEntity($brand);
