@@ -50,3 +50,8 @@
     - { name: productList, width: 920, height: ~, crop: false }
     - { name: leftSidebar, width: 220, height: ~, crop: false }
 
+- name: brand
+  class: SS6\ShopBundle\Model\Product\Brand\Brand
+  sizes:
+    - { name: ~, width: 300, height: 200, crop: false }
+

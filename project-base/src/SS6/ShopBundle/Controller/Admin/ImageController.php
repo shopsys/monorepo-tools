@@ -16,6 +16,7 @@ class ImageController extends AdminBaseController {
 	const ENTITY_NAME_TRANSPORT = 'transport';
 	const ENTITY_NAME_ADVERT = 'noticer';
 	const ENTITY_NAME_CATEGORY = 'category';
+	const ENTITY_NAME_BRAND = 'brand';
 	const SIZE_NAME_GALLERY_THUMBNAIL = 'galleryThumbnail';
 	const SIZE_NAME_LIST = 'list';
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
@@ -68,6 +69,7 @@ class ImageController extends AdminBaseController {
 			self::ENTITY_NAME_SLIDER_ITEM => t('Stránka slideru'),
 			self::ENTITY_NAME_TRANSPORT => t('Doprava'),
 			self::ENTITY_NAME_ADVERT => t('Reklama'),
+			self::ENTITY_NAME_BRAND => t('Značka'),
 		];
 
 		if (array_key_exists($entityName, $entityNamesTranslations)) {
@@ -152,6 +154,11 @@ class ImageController extends AdminBaseController {
 				),
 				AdvertPositionList::POSITION_LEFT_SIDEBAR => t(
 					'Front-end: Reklama v levém panelu pod stromem kategorií'
+				),
+			],
+			self::ENTITY_NAME_BRAND => [
+				ImageConfig::DEFAULT_SIZE_NAME => t(
+					'Front-end: Stránka značky'
 				),
 			],
 		];

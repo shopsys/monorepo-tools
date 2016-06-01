@@ -12,10 +12,13 @@ class BrandData {
 	public $name;
 
 	/**
-	 * @param string $name
+	 * @var string[]
 	 */
-	public function __construct($name = null) {
-		$this->name = $name;
+	public $image;
+
+	public function __construct() {
+		$this->name = '';
+		$this->image = [];
 	}
 
 	/**

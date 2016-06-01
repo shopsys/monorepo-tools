@@ -2,3 +2,16 @@
 
 {% block title %}- {{ 'Editace značky'|trans }} - {{ brand.name }}{% endblock %}
 {% block h1 %}{{ 'Editace zančky'|trans }} - {{ brand.name }}{% endblock %}
+
+{% block image %}
+    <div class="form-line">
+        <label class="form-line__label">
+            {{ 'Obrázek'|trans }}:
+        </label>
+        <div class="form-line__side">
+            <div class="form-line__item">
+                {{ image(brand, { size: 'original', height: 100 }) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

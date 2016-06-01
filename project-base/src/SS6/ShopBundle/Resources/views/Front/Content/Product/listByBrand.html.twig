@@ -19,6 +19,14 @@
 		<h1>{{ brand.name }}</h1>
 
 		<div>
+			{% if imageExists(brand) %}
+				{{ image(brand) }}
+			{% else %}
+				<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ brand.name }}">
+			{% endif %}
+		</div>
+
+		<div>
 			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForListByBrand')) }}
 			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: false } %}
 		</div>
