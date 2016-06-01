@@ -145,8 +145,6 @@
 
 		show();
 
-		return $window;
-
 		function show() {
 			showOverlay();
 			if (options.closeOnBgClick) {
@@ -174,6 +172,8 @@
 
 			$window.css({ top: top + 'px' });
 		}
+
+		return $window;
 	};
 
 })(jQuery);
