@@ -41,7 +41,8 @@ class FlagFormType extends AbstractType {
 						'maxMessage' => 'Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků',
 					]),
 				],
-			]);
+			])
+			->add('visible', FormType::CHECKBOX, ['required' => false]);
 	}
 
 	/**

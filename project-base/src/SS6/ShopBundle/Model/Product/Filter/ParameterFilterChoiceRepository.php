@@ -63,16 +63,18 @@ class ParameterFilterChoiceRepository {
 
 		$rows = $productsQueryBuilder->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
 
-		$parametersIndexedById = $this->getParametersIndexedById($rows);
+		$visibleParametersIndexedById = $this->getVisibleParametersIndexedById($rows);
 		$parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterId($rows);
 
 		$parameterFilterChoices = [];
 
 		foreach ($parameterValuesIndexedByParameterId as $parameterId => $values) {
-			$parameterFilterChoices[] = new ParameterFilterChoice(
-				$parametersIndexedById[$parameterId],
-				$values
-			);
+			if (array_key_exists($parameterId, $visibleParametersIndexedById)) {
+				$parameterFilterChoices[] = new ParameterFilterChoice(
+					$visibleParametersIndexedById[$parameterId],
+					$values
+				);
+			}
 		}
 
 		return $parameterFilterChoices;
@@ -82,7 +84,7 @@ class ParameterFilterChoiceRepository {
 	 * @param array $rows
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
-	private function getParametersIndexedById(array $rows) {
+	private function getVisibleParametersIndexedById(array $rows) {
 		$parameterIds = [];
 		foreach ($rows as $row) {
 			$parameterIds[$row['pp']['id']] = $row['pp']['id'];
@@ -92,7 +94,8 @@ class ParameterFilterChoiceRepository {
 			->select('pp, pt')
 			->from(Parameter::class, 'pp')
 			->join('pp.translations', 'pt')
-			->where('pp.id IN (:parameterIds)');
+			->where('pp.id IN (:parameterIds)')
+			->andWhere('pp.visible = true');
 		$parametersQueryBuilder->setParameter('parameterIds', $parameterIds);
 		$parameters = $parametersQueryBuilder->getQuery()->execute();
 

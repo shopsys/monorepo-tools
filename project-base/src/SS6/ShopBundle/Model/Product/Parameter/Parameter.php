@@ -32,11 +32,19 @@ class Parameter extends AbstractTranslatableEntity {
 	protected $translations;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $visible;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 */
 	public function __construct(ParameterData $parameterData) {
 		$this->translations = new ArrayCollection();
 		$this->setTranslations($parameterData);
+		$this->visible = $parameterData->visible;
 	}
 
 	/**
@@ -52,6 +60,13 @@ class Parameter extends AbstractTranslatableEntity {
 	 */
 	public function getName($locale = null) {
 		return $this->translation($locale)->getName();
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isVisible() {
+		return $this->visible;
 	}
 
 	/**
@@ -75,6 +90,7 @@ class Parameter extends AbstractTranslatableEntity {
 	 */
 	public function edit(ParameterData $parameterData) {
 		$this->setTranslations($parameterData);
+		$this->visible = $parameterData->visible;
 	}
 
 }

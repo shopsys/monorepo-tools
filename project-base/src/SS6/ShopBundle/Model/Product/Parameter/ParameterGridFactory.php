@@ -61,6 +61,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 				);
 			}
 		}
+		$grid->addColumn('visible', 'p.visible', t('Filtrovat podle'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_parameter_delete', ['id' => 'p.id'])

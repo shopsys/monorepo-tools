@@ -53,6 +53,7 @@ class FlagGridFactory implements GridFactoryInterface {
 
 		$grid->addColumn('name', 'at.name', t('Název'), true);
 		$grid->addColumn('rgbColor', 'a.rgbColor', t('Barva'), true);
+		$grid->addColumn('visible', 'a.visible', t('Filtrovat podle'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_flag_delete', ['id' => 'a.id'])

@@ -21,14 +21,17 @@ class FlagDataFixture extends AbstractReferenceFixture {
 
 		$flagData->name = ['cs' => 'Novinka', 'en' => 'New'];
 		$flagData->rgbColor = '#efd6ff';
+		$flagData->visible = true;
 		$this->createFlag($flagData, self::NEW_PRODUCT);
 
 		$flagData->name = ['cs' => 'Nejprodávanější', 'en' => 'TOP'];
 		$flagData->rgbColor = '#d6fffa';
+		$flagData->visible = true;
 		$this->createFlag($flagData, self::TOP_PRODUCT);
 
 		$flagData->name = ['cs' => 'Akce', 'en' => 'Action'];
 		$flagData->rgbColor = '#f9ffd6';
+		$flagData->visible = true;
 		$this->createFlag($flagData, self::ACTION_PRODUCT);
 	}
 

@@ -19,3 +19,11 @@
 		<span class="in-pill" style="background-color: {{ value }};">{{ value }}</span>
 	{% endif %}
 {% endblock %}
+
+{% block grid_value_cell_id_visible %}
+	{% if row.a.visible %}
+		{{ 'Ano'|trans }}
+	{% else %}
+		{{ 'Ne'|trans }}
+	{% endif %}
+{% endblock %}
