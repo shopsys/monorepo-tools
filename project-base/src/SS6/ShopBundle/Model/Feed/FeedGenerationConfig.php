@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Feed;
 class FeedGenerationConfig {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $feedName;
 
 	/**
-	 * @var int
+	 * @var int|null
 	 */
 	private $domainId;
 
@@ -20,8 +20,8 @@ class FeedGenerationConfig {
 	private $feedItemId;
 
 	/**
-	 * @param string $feedName
-	 * @param string $domainId
+	 * @param string|null $feedName
+	 * @param string|null $domainId
 	 * @param int|null $feedItemId
 	 */
 	public function __construct($feedName, $domainId, $feedItemId = null) {
@@ -31,14 +31,14 @@ class FeedGenerationConfig {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getFeedName() {
 		return $this->feedName;
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
 	public function getDomainId() {
 		return $this->domainId;
