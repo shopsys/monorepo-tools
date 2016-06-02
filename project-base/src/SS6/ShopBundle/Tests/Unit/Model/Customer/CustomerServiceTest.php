@@ -30,7 +30,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreate() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress = new BillingAddress(new BillingAddressData());
+		$billingAddress = $this->createBillingAddress();
 		$deliveryAddress = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
 		$userData = new UserData();
@@ -52,7 +52,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateNotDuplicateEmail() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
+		$billingAddress1 = $this->createBillingAddress();
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
 		$userData1 = new UserData();
@@ -69,7 +69,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		);
 		$this->assertInstanceOf(User::class, $user1);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
+		$billingAddress2 = $this->createBillingAddress();
 		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
@@ -89,7 +89,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateDuplicateEmail() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
+		$billingAddress1 = $this->createBillingAddress();
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
 		$userData1 = new UserData();
@@ -105,7 +105,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$userByEmail
 		);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
+		$billingAddress2 = $this->createBillingAddress();
 		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
@@ -125,7 +125,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateDuplicateEmailCaseInsentitive() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
+		$billingAddress1 = $this->createBillingAddress();
 		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
 		$userByEmail = null;
 		$userData1 = new UserData();
@@ -141,7 +141,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$userByEmail
 		);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
+		$billingAddress2 = $this->createBillingAddress();
 		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
@@ -193,7 +193,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$deliveryCountry
 		);
 
-		$billingAddress = new BillingAddress($billingAddressData);
+		$billingAddress = $this->createBillingAddress($billingAddressData);
 		$deliveryAddress = new DeliveryAddress($deliveryAddressData);
 		$user = new User($userData, $billingAddress, $deliveryAddress);
 
@@ -250,9 +250,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
 		$userData->lastName = 'lastName';
-		$billingAddressData = new BillingAddressData();
 
-		$billingAddress = new BillingAddress($billingAddressData);
+		$billingAddress = $this->createBillingAddress();
 		$user = new User($userData, $billingAddress, null);
 
 		$transport = new Transport(new TransportData(['cs' => 'transportName']));
@@ -323,6 +322,18 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$customerPasswordServiceMock = $this->getMock(CustomerPasswordService::class, [], [], '', false);
 
 		return new CustomerService($customerPasswordServiceMock);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
+	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 */
+	private function createBillingAddress(BillingAddressData $billingAddressData = null) {
+		if ($billingAddressData === null) {
+			$billingAddressData = new BillingAddressData();
+		}
+
+		return new BillingAddress($billingAddressData);
 	}
 
 }
