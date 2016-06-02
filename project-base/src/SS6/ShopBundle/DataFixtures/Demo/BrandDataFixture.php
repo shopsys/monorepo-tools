@@ -45,6 +45,10 @@ class BrandDataFixture extends AbstractReferenceFixture {
 
 		foreach ($this->getBrandNamesIndexedByBrandConstants() as $brandConstant => $brandName) {
 			$brandData->name = $brandName;
+			$brandData->descriptions = [
+				'cs' => 'Toto je popis značky ' . $brandData->name . '.',
+				'en' => 'This is description of brand ' . $brandData->name . '.',
+			];
 			$brand = $brandFacade->create($brandData);
 			$this->addReference($brandConstant, $brand);
 		}
