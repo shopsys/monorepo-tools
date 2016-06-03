@@ -220,6 +220,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryCity = 'orderDeliveryCity';
 		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
 		$orderData->deliveryCountry = $deliveryCountry;
+		$orderData->domainId = self::DOMAIN_ID;
 		$order = new Order(
 			$orderData,
 			'123456',
@@ -277,6 +278,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryCity = 'orderDeliveryCity';
 		$orderData->deliveryPostcode = 'orderDeliveryPostcode';
 		$orderData->deliveryCountry = $deliveryCountry;
+		$orderData->domainId = self::DOMAIN_ID;
 		$order = new Order(
 			$orderData,
 			'123456',

@@ -136,7 +136,7 @@ class CustomerService {
 
 		return new CustomerData(
 			new UserData(
-				1,
+				$order->getDomainId(),
 				Condition::ifNull($user->getFirstName(), $order->getFirstName()),
 				Condition::ifNull($user->getLastName(), $order->getLastName()),
 				null,
