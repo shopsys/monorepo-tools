@@ -1,10 +1,6 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
-{% block panel_content %}
-	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
-{% endblock %}
-
 {% block meta_description %}
 	{{- metaDescription -}}
 {% endblock %}

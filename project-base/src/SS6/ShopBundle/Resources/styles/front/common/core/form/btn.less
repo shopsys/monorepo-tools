@@ -114,14 +114,14 @@
 			font-size: 14px;
 		}
 
-		&:hover, &:active {
+		.active & {
 			color: @color-primary;
 			text-decoration: none;
+		}
 
-			.btn-tap--menu & {
-				color: @color-f;
-				background: @color-primary;
-			}
+		.btn-tap--menu.active &  {
+			color: @color-f;
+			background: @color-primary;
 		}
 
 		&__info {

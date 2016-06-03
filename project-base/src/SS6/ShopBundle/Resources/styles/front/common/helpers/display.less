@@ -1,0 +1,29 @@
+.display(@postfix: ~'') {
+	&-block@{postfix} {
+		display: block;
+	}
+
+	&-inline@{postfix} {
+		display: inline;
+	}
+
+	&-inline-block@{postfix} {
+		display: inline-block;
+	}
+
+	&-none@{postfix} {
+		display: none;
+	}
+}
+
+.h-display {
+	.display();
+
+	@media @query-tablet {
+		.display(extract(@postfixes, 1));
+	}
+
+	@media @query-mobile {
+		.display(extract(@postfixes, 2));
+	}
+}
