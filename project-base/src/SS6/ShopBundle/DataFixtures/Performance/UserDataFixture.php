@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\Model\Customer\BillingAddressData;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
@@ -112,6 +113,8 @@ class UserDataFixture {
 	private function getRandomCustomerDataByDomainId($domainId, $userNumber) {
 		$customerData = new CustomerData();
 
+		$country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
+
 		$userData = $this->userDataFactory->createDefault($domainId);
 		$userData->firstName = $this->faker->firstName;
 		$userData->lastName = $this->faker->lastName;
@@ -130,7 +133,7 @@ class UserDataFixture {
 		$billingAddressData->street = $this->faker->streetAddress;
 		$billingAddressData->city = $this->faker->city;
 		$billingAddressData->postcode = $this->faker->postcode;
-		$billingAddressData->country = $this->faker->country;
+		$billingAddressData->country = $country;
 		$billingAddressData->telephone = $this->faker->phoneNumber;
 		$customerData->billingAddressData = $billingAddressData;
 
@@ -140,7 +143,7 @@ class UserDataFixture {
 		$deliveryAddressData->companyName = $this->faker->company;
 		$deliveryAddressData->contactPerson = $this->faker->name;
 		$deliveryAddressData->postcode = $this->faker->postcode;
-		$deliveryAddressData->country = $this->faker->country;
+		$deliveryAddressData->country = $country;
 		$deliveryAddressData->street = $this->faker->streetAddress;
 		$deliveryAddressData->telephone = $this->faker->phoneNumber;
 		$customerData->deliveryAddressData = $deliveryAddressData;
