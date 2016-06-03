@@ -429,7 +429,7 @@
 {% macro productsWidgetItem(product, form, sortable) %}
 	<tr class="js-products-picker-item table-form__row">
 		<td class="table-form__cell">
-			{%if sortable %}
+			{% if sortable %}
 				<span class="js-products-picker-item-handle table-form__cell__move">
 					<span class="in-icon in-icon--move svg svg-move"></span>
 				</span>
