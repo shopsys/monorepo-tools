@@ -3,13 +3,15 @@
 
 {% if isModuleEnabled(ACCESSORIES_ON_BUY) %}
 	{% if accessoryDetails|length > 0 %}
-
-		<h3>Naši zákaznící k tomuto produktu nejčastěji nakupují</h3>
-
-		{{ productList.list(accessoryDetails) }}
+		<div class="wrap-box h-margin-top-20 h-margin-bottom-0">
+			<h3 class="wrap-box__title">
+				{{ 'Naši zákaznící k tomuto produktu nejčastěji nakupují'|trans }}
+			</h3>
+			<div class="wrap-box__in">
+				{{ productList.list(accessoryDetails) }}
+			</div>
+		</div>
+		<span class="js-add-product-wide-window" data-wide="true"></span>
 	{% endif %}
 {% endif %}
-
-<a href="{{ url('front_cart') }}" class="btn btn--primary">
-	{{ 'Přejít do košíku'|trans }}
-</a>
+<span class="js-add-product-url-cart" data-url="{{ url('front_cart') }}"></span>

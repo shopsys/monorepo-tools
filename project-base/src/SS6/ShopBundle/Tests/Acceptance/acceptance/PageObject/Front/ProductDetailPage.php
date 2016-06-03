@@ -20,6 +20,7 @@ class ProductDetailPage extends AbstractPage {
 		);
 		$this->tester->clickByText('Vložit do košíku', WebDriverBy::cssSelector(self::PRODUCT_DETAIL_MAIN_WRAPPER));
 		$this->tester->waitForAjax();
+		$this->tester->wait(1); // animation of popup window
 	}
 
 }

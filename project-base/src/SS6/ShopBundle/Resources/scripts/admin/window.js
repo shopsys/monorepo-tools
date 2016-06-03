@@ -7,7 +7,6 @@
 	SS6.window = SS6.window || {};
 
 	var $activeWindow = null;
-	var animationTime = 300;
 
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
@@ -21,7 +20,7 @@
 	var getOverlay = function() {
 		var $overlay = $('#js-overlay');
 		if ($overlay.size() === 0) {
-			$overlay = $('<div class="window-popup__overlay" id="js-overlay"></div>');
+			$overlay = $('<div id="js-overlay"></div>');
 		}
 		return $overlay;
 	};
@@ -29,21 +28,11 @@
 	var showOverlay = function () {
 		var $overlay = getOverlay();
 		$('body').append($overlay);
-
-		// timeout 0 to asynchronous run to fix css animation fade
-		setTimeout(function(){
-			$overlay.addClass('window-popup__overlay--active');
-		}, 0);
 	};
 
 	var hideOverlay = function () {
-		var $overlay = $('#js-overlay');
-		$overlay.removeClass('window-popup__overlay--active');
-
-		if ($overlay.size() !== 0) {
-			setTimeout(function(){
-				$overlay.remove();
-			}, animationTime);
+		if ($('#js-overlay').size() !== 0) {
+			$('#js-overlay').remove();
 		}
 	};
 
@@ -67,8 +56,6 @@
 			urlContinue: '#',
 			wide: false,
 			cssClass: '',
-			cssClassContinue: '',
-			cssClassCancel: '',
 			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
@@ -80,27 +67,21 @@
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window-popup"></div>');
+		var $window = $('<div class="window window--active"></div>');
 		if (options.wide) {
-			$window.addClass('window-popup--wide');
-		} else {
-			$window.addClass('window-popup--standard');
+			$window.addClass('window--wide');
 		}
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
 		}
 
-		var $windowContent = $('<div class="js-window-content window-popup__in"></div>').html(options.content);
+		var $windowContent = $('<div class="js-window-content"></div>').html(options.content);
 
 		$activeWindow = $window;
 
 		$window.bind('windowClose', function () {
-			$window.removeClass('window-popup--active');
 			hideOverlay();
-
-			setTimeout(function(){
-				$activeWindow.trigger('windowFastClose');
-			}, animationTime);
+			$(this).fadeOut('fast', function () {$(this).trigger('windowFastClose')});
 		});
 
 		$window.bind('windowFastClose', function () {
@@ -110,7 +91,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="Zavřít (Esc)"><i class="svg svg-remove"></a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="Zavřít (Esc)">X</a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -127,16 +108,11 @@
 			}
 		});
 
-		var $windowActions = $('<div class="window-popup__actions"></div>');
-		if (options.buttonContinue && options.buttonCancel) {
-			$windowActions.addClass('window-popup__actions--multiple-buttons');
-		}
-
+		var $windowActions = $('<div class="window__actions"></div>');
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
-				.addClass(options.cssClassContinue)
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
 				.bind('click.windowContinue', function () {
@@ -149,10 +125,9 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
 			$windowButtonCancel
 				.text(options.textCancel)
-				.addClass(options.cssClassCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
 				.bind('click.windowEventClose', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -170,19 +145,7 @@
 
 		show();
 
-		$(window).resize(function() {
-			SS6.timeout.setTimeoutAndClearPrevious('window.window.resize', function() {
-				fixVerticalAlign();
-			}, 200);
-		});
-
-		function fixVerticalAlign() {
-			if (!options.wide || options.wide && SS6.responsive.isDesktopVersion()) {
-				moveToCenter();
-			} else {
-				$window.css({ top: '' });
-			}
-		}
+		return $window;
 
 		function show() {
 			showOverlay();
@@ -192,27 +155,25 @@
 					return false;
 				});
 			}
-			$window.appendTo(getMainContainer());
-			fixVerticalAlign();
-			setTimeout(function(){
-				$window.addClass('window-popup--active');
-			}, animationTime);
+			$window.hide().appendTo(getMainContainer());
+			if (options.wide) {
+				moveToCenter();
+			}
+			$window.fadeIn('fast');
 		}
 
 		function moveToCenter() {
-			var relativeY = $(window).height() / 2 - $window.innerHeight() / 2;
+			var relativeY = $(window).height() / 2 - $window.height() / 2;
 			var minRelativeY = $(window).height() * 0.1;
 
 			if (relativeY < minRelativeY) {
 				relativeY = minRelativeY;
 			}
 
-			var top = Math.round(relativeY);
+			var top = Math.round($(window).scrollTop() + relativeY);
 
 			$window.css({ top: top + 'px' });
 		}
-
-		return $window;
 	};
 
 })(jQuery);

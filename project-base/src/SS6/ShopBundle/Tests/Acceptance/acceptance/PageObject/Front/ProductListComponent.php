@@ -22,6 +22,7 @@ class ProductListComponent extends AbstractPage {
 		$this->tester->fillFieldByElement($quantityElement, $quantity);
 		$this->tester->clickByElement($addButtonElement);
 		$this->tester->waitForAjax();
+		$this->tester->wait(1); // animation of popup window
 	}
 
 	/**

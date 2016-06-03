@@ -21,9 +21,16 @@
 	};
 
 	SS6.addProduct.onSuccess = function (data) {
+		var buttonContinueUrl = $($.parseHTML(data)).filterAllNodes('.js-add-product-url-cart').data('url');
+		var isWide = $($.parseHTML(data)).filterAllNodes('.js-add-product-wide-window').data('wide');
+
 		SS6.window({
 			content: data,
-			wide: true
+			wide: isWide,
+			buttonContinue: true,
+			textContinue: SS6.translator.trans('Přejít do košíku'),
+			urlContinue: buttonContinueUrl,
+			cssClassContinue: 'btn--primary'
 		});
 
 		$('#cart-box').trigger('reload');
