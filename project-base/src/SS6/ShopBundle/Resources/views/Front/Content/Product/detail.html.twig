@@ -178,33 +178,33 @@
 		or productDetail.parameters
 		or accesoriesDetails|length > 0
 	%}
-		<div class="in-tab js-tabs">
+		<div class="in-tab js-responsive-tabs">
 			<div class="in-tab__head">
 				{% if productDomain.description %}
-					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="description">
+					<a href="#" class="in-tab__head__item js-tabs-button active" data-tab-id="description">
 						{{ descriptionHeadline }}
 					</a>
 				{% endif %}
 
 				{% if productDetail.parameters %}
-					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="parameters">
+					<a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="parameters">
 						{{ parametersHeadline }}
 					</a>
 				{% endif %}
 
 				{% if accesoriesDetails|length > 0 %}
-					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="accesories">
+					<a href="#" class="in-tab__head__item js-tabs-button" data-tab-id="accesories">
 						{{ accessoriesHeadline }}
 					</a>
 				{% endif %}
 			</div>
 			<div class="in-tab__content">
 				{% if productDomain.description %}
-					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="description">
+					<a href="#" class="in-tab__content__title js-tabs-button active" data-tab-id="description">
 						{{ descriptionHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="description">
+					<div class="in-tab__content__item js-tabs-content active" data-tab-id="description">
 						<div class="in-user-text">
 							{{ productDomain.description|raw }}
 						</div>
@@ -212,11 +212,11 @@
 				{% endif %}
 
 				{% if productDetail.parameters %}
-					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="parameters">
+					<a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="parameters">
 						{{ parametersHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="parameters">
+					<div class="in-tab__content__item js-tabs-content" data-tab-id="parameters">
 						<table class="table-params">
 							<tbody>
 								{% for productParameterValue in productDetail.parameters %}
@@ -235,11 +235,11 @@
 				{% endif %}
 
 				{% if accesoriesDetails|length > 0 %}
-					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="accesories">
+					<a href="#" class="in-tab__content__title js-tabs-button" data-tab-id="accesories">
 						{{ accessoriesHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="accesories">
+					<div class="in-tab__content__item js-tabs-content" data-tab-id="accesories">
 						{{ productList.list(accesoriesDetails) }}
 					</div>
 				{% endif %}
