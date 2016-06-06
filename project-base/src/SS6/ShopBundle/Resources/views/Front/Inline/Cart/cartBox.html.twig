@@ -1,29 +1,31 @@
-<div id="js-cart-box" class="cart" data-reload-url="{{ url('front_cart_box') }}" >
-	<a class="cart__block" href="{{ url('front_cart') }}">
-		<span class="cart__icon">
-			<i class="svg svg-cart"></i>
-		</span>
-		<div class="cart__info js-cart-info">
-			{% if cart.isEmpty %}
-				{{ 'Váš nákupní košík je prázdný'|trans }}
-			{% else %}
-				{% transchoice cart.itemsCount with { '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price } %}
-					{1} <strong class="cart__state">%itemsCount%</strong> položka za <strong class="cart__state">%priceWithVat%</strong>
-					|[2,4] <strong class="cart__state">%itemsCount%</strong> položky za <strong class="cart__state">%priceWithVat%</strong>
-					|[5,Inf] <strong class="cart__state">%itemsCount%</strong> položek za <strong class="cart__state">%priceWithVat%</strong>
-				{% endtranschoice %}
-			{% endif %}
-		</div>
-	</a>
-</div>
-
-<div class="cart-mobile btn-tap">
-	<a href="{{ url('front_cart') }}" class="btn-tap__in">
-		<i class="svg svg-cart"></i>
-		{% if not cart.isEmpty %}
-			<span class="btn-tap__in__info">
-				{{ cart.itemsCount }}
+<div id="js-cart-box" data-reload-url="{{ url('front_cart_box') }}">
+	<div class="cart">
+		<a class="cart__block" href="{{ url('front_cart') }}">
+			<span class="cart__icon">
+				<i class="svg svg-cart"></i>
 			</span>
-		{% endif %}
-	</a>
+			<div class="cart__info js-cart-info">
+				{% if cart.isEmpty %}
+					{{ 'Váš nákupní košík je prázdný'|trans }}
+				{% else %}
+					{% transchoice cart.itemsCount with { '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price } %}
+						{1} <strong class="cart__state">%itemsCount%</strong> položka za <strong class="cart__state">%priceWithVat%</strong>
+						|[2,4] <strong class="cart__state">%itemsCount%</strong> položky za <strong class="cart__state">%priceWithVat%</strong>
+						|[5,Inf] <strong class="cart__state">%itemsCount%</strong> položek za <strong class="cart__state">%priceWithVat%</strong>
+					{% endtranschoice %}
+				{% endif %}
+			</div>
+		</a>
+	</div>
+
+	<div class="cart-mobile btn-tap">
+		<a href="{{ url('front_cart') }}" class="btn-tap__in">
+			<i class="svg svg-cart"></i>
+			{% if not cart.isEmpty %}
+				<span class="btn-tap__in__info">
+					{{ cart.itemsCount }}
+				</span>
+			{% endif %}
+		</a>
+	</div>
 </div>
