@@ -10,9 +10,12 @@
 	SS6 = window.SS6 || {};
 
 	var activeButtonClass = 'active';
+	var instanceCoutner = 0;
 
 	SS6.ResponsiveToggle = function ($button, $elementToHide, hideOnClickOut) {
 		var defaultActive = null;
+		var instanceNumber = instanceCoutner;
+		instanceCoutner++;
 
 		this.init = function () {
 			defaultActive = isActive();
@@ -25,7 +28,7 @@
 			}
 
 			$(window).resize(function() {
-				SS6.timeout.setTimeoutAndClearPrevious('ResponsiveToggle.window.resize', onWindowResize, 200);
+				SS6.timeout.setTimeoutAndClearPrevious('ResponsiveToggle.window.resize.' + instanceNumber, onWindowResize, 200);
 			});
 		};
 
