@@ -57,7 +57,7 @@
 		}
 
 		return $errorList;
-	}
+	};
 
 	SS6.validation.findElementsToHighlight = function ($formInput) {
 		return $formInput.filter('input, select, textarea, .form-line');
@@ -77,6 +77,6 @@
 		SS6.window({
 			content: SS6.translator.trans('Překontrolujte prosím zadané hodnoty.')
 		});
-	}
+	};
 
 })(jQuery);
