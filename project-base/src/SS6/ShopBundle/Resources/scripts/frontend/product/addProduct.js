@@ -33,7 +33,7 @@
 			cssClassContinue: 'btn--primary'
 		});
 
-		$('#cart-box').trigger('reload');
+		$('#js-cart-box').trigger('reload');
 	};
 
 	SS6.addProduct.onError = function (jqXHR) {

@@ -4,19 +4,19 @@
 	SS6.cartBox = SS6.cartBox || {};
 
 	SS6.cartBox.init = function ($container) {
-		$container.filterAllNodes('#cart-box').bind('reload', SS6.cartBox.reload);
+		$container.filterAllNodes('#js-cart-box').bind('reload', SS6.cartBox.reload);
 	};
 
 	SS6.cartBox.reload = function (event) {
 
 		SS6.ajax({
-			loaderElement: '#cart-box',
+			loaderElement: '#js-cart-box',
 			url: $(this).data('reload-url'),
 			type: 'get',
 			success: function (data) {
-				$('#cart-box').replaceWith(data);
+				$('#js-cart-box').replaceWith(data);
 
-				SS6.register.registerNewContent($('#cart-box').parent());
+				SS6.register.registerNewContent($('#js-cart-box').parent());
 			}
 		});
 
