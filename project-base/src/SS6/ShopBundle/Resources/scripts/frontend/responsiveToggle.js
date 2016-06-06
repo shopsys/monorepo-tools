@@ -21,6 +21,7 @@
 			defaultActive = isActive();
 			$button.click(function () {
 				toggle(!isActive());
+				return false;
 			});
 
 			if (hideOnClickOut) {
