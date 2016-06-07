@@ -14,14 +14,12 @@
 			<div class="panel__in__title">
 				{{ 'Viditelnost'|trans }}
 			</div>
-			<ul class="list-domain">
-				{% if productDetail.product.calculatedSellingDenied %}
-					<div class="list-domain__item">
-						{{ 'Zboží je vyřazeno z prodeje.'|trans }}
-					</div>
-				{% endif %}
-				{% include '@SS6Shop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
-			</ul>
+			{% if productDetail.product.calculatedSellingDenied %}
+				<div class="list-domain__item">
+					{{ 'Zboží je vyřazeno z prodeje.'|trans }}
+				</div>
+			{% endif %}
+			{% include '@SS6Shop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
 		</div>
 	</div>
 {% endblock %}
