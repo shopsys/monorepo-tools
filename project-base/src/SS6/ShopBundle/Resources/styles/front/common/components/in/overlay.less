@@ -1,15 +1,23 @@
 @in-overlay-spinner-size: 32px;
 
 .in-overlay {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	z-index:4000;
+	position: relative !important;
 
-	background: rgba(255,255,255,0.5);
-	text-align: center;
+	&__in {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		top: 0px;
+		left: 0px;
+		z-index: 4000;
+
+		background: rgba(255, 255, 255, 0.5);
+		text-align: center;
+
+		&--absolute {
+			position: absolute;
+		}
+	}
 
 	&__spinner {
 		position: fixed;

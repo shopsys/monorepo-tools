@@ -20,6 +20,7 @@
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
 			clearTimeout(loaderOverlayTimeout);
 			$loaderOverlay.remove();
+			$(options.loaderElement).removeClass('in-overlay');
 		};
 
 		options.error = function (jqXHR) {
@@ -36,12 +37,14 @@
 	};
 
 	var getLoaderOverlay = function(loaderMessage, loaderElement) {
+		var $loaderOverlayDiv = $('<div class="in-overlay__in"></div>');
+
 		var overlaySpinnerClass = 'in-overlay__spinner';
 		if (loaderElement !== 'body') {
 			overlaySpinnerClass += ' in-overlay__spinner--absolute';
+			$loaderOverlayDiv.addClass('in-overlay__in--absolute');
 		}
 
-		var $loaderOverlayDiv = $('<div class="in-overlay"></div>');
 		var $loaderOverlaySpinnerDiv = $($.parseHTML(
 			'<div class="' + overlaySpinnerClass + '">' +
 				'<span class="in-overlay__spinner__icon"></span>' +
@@ -54,7 +57,7 @@
 
 	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
 		$(loaderElement)
-			.addClass('relative')
+			.addClass('in-overlay')
 			.append($loaderOverlay);
 	};
 
