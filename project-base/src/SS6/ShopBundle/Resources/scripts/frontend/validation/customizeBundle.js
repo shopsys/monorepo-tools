@@ -191,6 +191,20 @@
 		return element;
 	};
 
+	// disable JS validation for form fields in element with class js-no-validate
+	FpJsFormValidator._createElement = FpJsFormValidator.createElement;
+	FpJsFormValidator.createElement = function (model) {
+		var element = this._createElement(model);
+		if (!element) {
+			return null;
+		}
+		if ($(element.domNode).closest('.js-no-validate').size() > 0) {
+			return null;
+		}
+
+		return element;
+	};
+
 	// reported as https://github.com/formapro/JsFormValidatorBundle/issues/66
 	FpJsFormValidator._checkValidationGroups = FpJsFormValidator.checkValidationGroups;
 	FpJsFormValidator.checkValidationGroups = function (needle, haystack) {
