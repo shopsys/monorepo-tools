@@ -12,27 +12,24 @@ Form block construction, where is one choice on one line.
 	padding-bottom: 5px;
 
 	&__item {
-		display: block;
-		padding: 2px 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		padding: 3px 0;
 
-		&__remove {
+		&__action {
 			display: inline-block;
-			margin: 3px 4px;
-			position: relative;
-			top: -1px;
+			margin-left: 5px;
 
-			font-size: 20px;
-			color: @color-hint;
-
-			&:hover {
-				color: @color-base;
+			&--link {
+				position: relative;
+				top: -1px;
+				margin-left: 10px;
 			}
 		}
 	}
 
 	&__input {
-		position: relative;
-		top: 1px;
 		margin-right: 5px;
 	}
 
@@ -56,10 +53,5 @@ Form block construction, where is one choice on one line.
 			max-height: 100%;
 			margin: auto;
 		}
-	}
-
-	&__info {
-		position: relative;
-		top: -2px;
 	}
 }
