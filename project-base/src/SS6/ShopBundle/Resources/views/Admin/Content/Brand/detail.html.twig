@@ -7,9 +7,20 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group">
+		<div class="wrap-group wrap-border">
 			{{ form_id(brand|default(null)) }}
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
+			{{ form_row(form.descriptions, { label: 'Popis'|trans}) }}
+		</div>
+
+		{% block urls %}{% endblock %}
+
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Obrázek'|trans }}
+			</div>
+			{% block image %}{% endblock %}
+			{{ form_row(form.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
 		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

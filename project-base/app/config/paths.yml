@@ -7,8 +7,8 @@ parameters:
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
   ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources
   ss6.default_db_schema_filepath: %ss6.resources_dir%/database/schema.sql
-  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v7.zip
-  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v6.sql
+  ss6.demo_images_archive_url: http://images.mephisto.netdevelo/demoImages.v8.zip
+  ss6.demo_images_dql_url: http://images.mephisto.netdevelo/demoImagesSql.v7.sql
   ss6.doctrine.metadata_cache_directory_path: %kernel.cache_dir%/doctrine_metadata
   ss6.doctrine.query_cache_directory_path: %kernel.cache_dir%/doctrine_query
   ss6.domain_config_filepath: %kernel.root_dir%/config/domains.yml

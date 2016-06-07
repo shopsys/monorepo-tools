@@ -31,6 +31,21 @@ class BrandFormType extends AbstractType {
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
 				],
 			])
+			->add('descriptions', FormType::LOCALIZED, [
+				'type' => FormType::WYSIWYG,
+				'required' => false,
+			])
+			->add('image', FormType::FILE_UPLOAD, [
+				'required' => false,
+				'file_constraints' => [
+					new Constraints\Image([
+						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
+						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
+						'maxSize' => '2M',
+						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+					]),
+				],
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

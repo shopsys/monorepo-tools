@@ -91,7 +91,9 @@
 							{{ 'Značka'|trans }}:
 						</dt>
 						<dd>
-							{{ productDetail.product.brand.name }}
+							<a href="{{ url('front_brand_detail', { brandId: productDetail.product.brand.id }) }}">
+								{{ productDetail.product.brand.name }}
+							</a>
 						</dd>
 					{% endif %}
 

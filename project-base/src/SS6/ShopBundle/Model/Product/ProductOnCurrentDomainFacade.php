@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Paginator\PaginationResult;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
 use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -56,6 +57,11 @@ class ProductOnCurrentDomainFacade {
 	 */
 	private $productAccessoryRepository;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandRepository
+	 */
+	private $brandRepository;
+
 	public function __construct(
 		ProductRepository $productRepository,
 		Domain $domain,
@@ -64,7 +70,8 @@ class ProductOnCurrentDomainFacade {
 		CategoryRepository $categoryRepository,
 		ProductVisibilityRepository $productVisibilityRepository,
 		ProductFilterCountRepository $productFilterCountRepository,
-		ProductAccessoryRepository $productAccessoryRepository
+		ProductAccessoryRepository $productAccessoryRepository,
+		BrandRepository $brandRepository
 	) {
 		$this->productRepository = $productRepository;
 		$this->domain = $domain;
@@ -74,6 +81,7 @@ class ProductOnCurrentDomainFacade {
 		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productFilterCountRepository = $productFilterCountRepository;
 		$this->productAccessoryRepository = $productAccessoryRepository;
+		$this->brandRepository = $brandRepository;
 	}
 
 	/**
@@ -140,6 +148,40 @@ class ProductOnCurrentDomainFacade {
 			$this->domain->getId(),
 			$this->domain->getLocale(),
 			$productFilterData,
+			$orderingMode,
+			$this->currentCustomer->getPricingGroup(),
+			$page,
+			$limit
+		);
+		$products = $paginationResult->getResults();
+
+		return new PaginationResult(
+			$paginationResult->getPage(),
+			$paginationResult->getPageSize(),
+			$paginationResult->getTotalCount(),
+			$this->productDetailFactory->getDetailsForProducts($products)
+		);
+	}
+
+	/**
+	 * @param string $orderingMode
+	 * @param int $page
+	 * @param int $limit
+	 * @param int $brandId
+	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 */
+	public function getPaginatedProductDetailsForBrand(
+		$orderingMode,
+		$page,
+		$limit,
+		$brandId
+	) {
+		$brand = $this->brandRepository->getById($brandId);
+
+		$paginationResult = $this->productRepository->getPaginationResultForListableForBrand(
+			$brand,
+			$this->domain->getId(),
+			$this->domain->getLocale(),
 			$orderingMode,
 			$this->currentCustomer->getPricingGroup(),
 			$page,

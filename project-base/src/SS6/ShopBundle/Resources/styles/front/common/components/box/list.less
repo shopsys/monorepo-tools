@@ -1,6 +1,8 @@
 @box-list-description-line-height: 16px;
 @box-list-description-lines: 2;
 
+@box-list-producer-image-space-around: 10px;
+
 .box-list {
 	&__description {
 		&__text {
@@ -19,6 +21,22 @@
 			&__btn {
 				display: none;
 			}
+		}
+	}
+
+	&__producer {
+		.cfx();
+		width: 100%;
+		margin-bottom: @margin-gap;
+
+		&__text {
+			text-align: justify;
+		}
+
+		&__image {
+			float: right;
+			width: 30%;
+			margin: 0 0 @box-list-producer-image-space-around @box-list-producer-image-space-around;
 		}
 	}
 }

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
@@ -38,16 +39,23 @@ class BrandController extends AdminBaseController {
 	 */
 	private $gridFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		BrandFacade $brandFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
-		Breadcrumb $breadcrumb
+		Breadcrumb $breadcrumb,
+		Domain $domain
 	) {
 		$this->brandFacade = $brandFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -57,7 +65,7 @@ class BrandController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$brand = $this->brandFacade->getById($id);
-		$form = $this->createForm(new BrandFormType($brand));
+		$form = $this->createForm(new BrandFormType());
 
 		$brandData = new BrandData();
 		$brandData->setFromEntity($brand);
@@ -88,6 +96,7 @@ class BrandController extends AdminBaseController {
 		return $this->render('@SS6Shop/Admin/Content/Brand/edit.html.twig', [
 			'form' => $form->createView(),
 			'brand' => $brand,
+			'domains' => $this->domain->getAll(),
 		]);
 	}
 
@@ -156,6 +165,7 @@ class BrandController extends AdminBaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/Brand/new.html.twig', [
 			'form' => $form->createView(),
+			'domains' => $this->domain->getAll(),
 		]);
 	}
 

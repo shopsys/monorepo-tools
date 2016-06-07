@@ -49,3 +49,9 @@ front_registration_reset_password:
 front_registration_set_new_password:
   pattern: /new-password/
   defaults: { _controller: SS6ShopBundle:Front\CustomerPassword:setNewPassword }
+
+front_brand_detail:
+  pattern: /brand/{brandId}/
+  defaults: { _controller: SS6ShopBundle:Front\Product:listByBrand }
+  requirements:
+    brandId: \d+
