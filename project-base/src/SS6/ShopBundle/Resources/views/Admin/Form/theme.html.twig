@@ -426,15 +426,21 @@
 	{{ label }}
 {% endblock products_label -%}
 
-{% macro productsWidgetItem(productName, form, sortable) %}
+{% macro productsWidgetItem(product, form, sortable) %}
 	<tr class="js-products-picker-item table-form__row">
 		<td class="table-form__cell">
-			{%if sortable %}
+			{% if sortable %}
 				<span class="js-products-picker-item-handle table-form__cell__move">
 					<span class="in-icon in-icon--move svg svg-move"></span>
 				</span>
 			{% endif %}
-			<span class="js-products-picker-item-product-name">{{ productName }}</span>
+			<span class="js-products-picker-item-product-name">
+				{% if product is not null %}
+					<a href="{{ url('admin_product_edit', {id: product.id}) }}" target="_blank" class="btn-link-style btn-link-style--iconic-l">
+						<span>{{ product.name }}</span>&nbsp;<i class="svg svg-forward-page"></i>
+					</a>
+				{% endif %}
+			</span>
 		</td>
 		<td class="table-form__cell table-form__cell--actions">
 			<span class="h-cursor-pointer js-products-picker-item-button-delete">
@@ -449,7 +455,7 @@
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' js-products-picker')|trim}) %}
 	<div
 		{{ block('widget_attributes') }}
-		data-products-picker-prototype="{{ _self.productsWidgetItem('', form.vars.prototype, form.vars.sortable)|e }}"
+		data-products-picker-prototype="{{ _self.productsWidgetItem(null, form.vars.prototype, form.vars.sortable)|e }}"
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
@@ -462,7 +468,7 @@
 			</thead>
 			<tbody class="js-products-picker-items">
 				{% for key, productForm in form %}
-					{{ _self.productsWidgetItem(form.vars.products[key].name, productForm, form.vars.sortable) }}
+					{{ _self.productsWidgetItem(form.vars.products[key], productForm, form.vars.sortable) }}
 				{% endfor %}
 			</tbody>
 		</table>
