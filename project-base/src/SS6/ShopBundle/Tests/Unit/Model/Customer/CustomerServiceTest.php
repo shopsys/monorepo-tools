@@ -30,8 +30,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreate() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress = new BillingAddress(new BillingAddressData());
-		$deliveryAddress = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress = $this->createBillingAddress();
+		$deliveryAddress = $this->createDeliveryAddress();
 		$userByEmail = null;
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
@@ -52,8 +52,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateNotDuplicateEmail() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress1 = $this->createBillingAddress();
+		$deliveryAddress1 = $this->createDeliveryAddress();
 		$userByEmail = null;
 		$userData1 = new UserData();
 		$userData1->firstName = 'firstName1';
@@ -69,8 +69,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		);
 		$this->assertInstanceOf(User::class, $user1);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress2 = $this->createBillingAddress();
+		$deliveryAddress2 = $this->createDeliveryAddress();
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
 		$userData2->lastName = 'lastName2';
@@ -89,8 +89,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateDuplicateEmail() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress1 = $this->createBillingAddress();
+		$deliveryAddress1 = $this->createDeliveryAddress();
 		$userByEmail = null;
 		$userData1 = new UserData();
 		$userData1->firstName = 'firstName1';
@@ -105,8 +105,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$userByEmail
 		);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress2 = $this->createBillingAddress();
+		$deliveryAddress2 = $this->createDeliveryAddress();
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
 		$userData2->lastName = 'lastName2';
@@ -125,8 +125,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	public function testCreateDuplicateEmailCaseInsentitive() {
 		$customerService = $this->getCustomerService();
 
-		$billingAddress1 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress1 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress1 = $this->createBillingAddress();
+		$deliveryAddress1 = $this->createDeliveryAddress();
 		$userByEmail = null;
 		$userData1 = new UserData();
 		$userData1->firstName = 'firstName1';
@@ -141,8 +141,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$userByEmail
 		);
 
-		$billingAddress2 = new BillingAddress(new BillingAddressData());
-		$deliveryAddress2 = new DeliveryAddress(new DeliveryAddressData());
+		$billingAddress2 = $this->createBillingAddress();
+		$deliveryAddress2 = $this->createDeliveryAddress();
 		$userData2 = new UserData();
 		$userData2->firstName = 'firstName2';
 		$userData2->lastName = 'lastName2';
@@ -193,8 +193,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$deliveryCountry
 		);
 
-		$billingAddress = new BillingAddress($billingAddressData);
-		$deliveryAddress = new DeliveryAddress($deliveryAddressData);
+		$billingAddress = $this->createBillingAddress($billingAddressData);
+		$deliveryAddress = $this->createDeliveryAddress($deliveryAddressData);
 		$user = new User($userData, $billingAddress, $deliveryAddress);
 
 		$transport = new Transport(new TransportData(['cs' => 'transportName']));
@@ -250,9 +250,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$userData = new UserData();
 		$userData->firstName = 'firstName';
 		$userData->lastName = 'lastName';
-		$billingAddressData = new BillingAddressData();
 
-		$billingAddress = new BillingAddress($billingAddressData);
+		$billingAddress = $this->createBillingAddress();
 		$user = new User($userData, $billingAddress, null);
 
 		$transport = new Transport(new TransportData(['cs' => 'transportName']));
@@ -323,6 +322,30 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$customerPasswordServiceMock = $this->getMock(CustomerPasswordService::class, [], [], '', false);
 
 		return new CustomerService($customerPasswordServiceMock);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
+	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 */
+	private function createBillingAddress(BillingAddressData $billingAddressData = null) {
+		if ($billingAddressData === null) {
+			$billingAddressData = new BillingAddressData();
+		}
+
+		return new BillingAddress($billingAddressData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
+	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 */
+	private function createDeliveryAddress(DeliveryAddressData $deliveryAddressData = null) {
+		if ($deliveryAddressData === null) {
+			$deliveryAddressData = new DeliveryAddressData();
+		}
+
+		return new DeliveryAddress($deliveryAddressData);
 	}
 
 }
