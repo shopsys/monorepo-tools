@@ -8,9 +8,6 @@
 		</div>
 
 		<div class="list-domain__item__info">
-			{% if productDetail.product.calculatedSellingDenied %}
-				<span class="list-domain__item__info__denied in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
-			{% endif %}
 			<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisible ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisible ? 'Ano'|trans : 'Ne'|trans }}"></span>
 		</div>
 
