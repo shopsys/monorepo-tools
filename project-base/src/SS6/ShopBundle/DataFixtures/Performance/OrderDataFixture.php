@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
 use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
@@ -166,7 +167,7 @@ class OrderDataFixture {
 			$orderData->street = $this->faker->streetAddress;
 			$orderData->city = $this->faker->city;
 			$orderData->postcode = $this->faker->postcode;
-			$orderData->country = $this->faker->country;
+			$orderData->country = $this->getRandomCountryFromFirstDomain();
 			$orderData->companyName = $this->faker->company;
 			$orderData->companyNumber = $this->faker->randomNumber(6);
 			$orderData->companyTaxNumber = $this->faker->randomNumber(6);
@@ -182,7 +183,7 @@ class OrderDataFixture {
 		$orderData->deliveryStreet = $this->faker->streetAddress;
 		$orderData->deliveryCity = $this->faker->city;
 		$orderData->deliveryPostcode = $this->faker->postcode;
-		$orderData->deliveryCountry = $this->faker->country;
+		$orderData->deliveryCountry = $this->getRandomCountryFromFirstDomain();
 		$orderData->note = $this->faker->text(200);
 		$orderData->createdAt = $this->faker->dateTimeBetween('-1 year', 'now');
 		$orderData->domainId = 1;
@@ -285,6 +286,18 @@ class OrderDataFixture {
 			PaymentDataFixture::PAYMENT_CARD,
 			PaymentDataFixture::PAYMENT_COD,
 			PaymentDataFixture::PAYMENT_CASH,
+		]);
+
+		return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Country\Country
+	 */
+	private function getRandomCountryFromFirstDomain() {
+		$randomPaymentReferenceName = $this->faker->randomElement([
+			CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1,
+			CountryDataFixture::COUNTRY_SLOVAKIA_1,
 		]);
 
 		return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
