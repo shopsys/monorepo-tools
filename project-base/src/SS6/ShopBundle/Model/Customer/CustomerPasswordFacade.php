@@ -57,6 +57,7 @@ class CustomerPasswordFacade {
 	 * @param string $email
 	 * @param int $domainId
 	 * @param string|null $hash
+	 * @return bool
 	 */
 	public function isResetPasswordHashValid($email, $domainId, $hash) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
