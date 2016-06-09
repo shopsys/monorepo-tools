@@ -71,9 +71,9 @@
 		var $submitButtons = $form.find('.btn-primary[type="submit"]');
 
 		if (SS6.validation.isFormValid($form)) {
-			$submitButtons.removeClass('btn-disabled');
+			$submitButtons.removeClass('btn--disabled');
 		} else {
-			$submitButtons.addClass('btn-disabled');
+			$submitButtons.addClass('btn--disabled');
 		}
 	};
 
