@@ -1,0 +1,192 @@
+// Settings for default elements
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+	margin: 0;
+}
+
+html, body {
+	min-height: 100%;
+	padding: 0;
+}
+
+body, form, input, select, button, p, pre, dfn, address, ul, ol, li,
+h1, h2, h3, h4, h5, h6, img,
+table, tr, td, th, input, textarea {
+	color: @color-base;
+	font-family: @font-base;
+	font-size: @font-size-mobile;
+
+	@media @query-lg {
+		font-size: @font-size;
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+td, th {
+	text-align: left;
+}
+
+hr {
+	height: 1px;
+}
+
+dfn {
+	font-style: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: @color-base;
+	font-family: @font;
+	font-weight: 400;
+	line-height: 1.3em;
+	text-rendering: optimizelegibility;
+}
+
+h1 {
+	margin: 0 0 10px 0;
+
+	font-size: 20px;
+	font-weight: normal;
+
+	@media @query-md {
+		font-size: 24px;
+	}
+
+	@media @query-lg {
+		margin-bottom: 15px;
+
+		font-size: 28px;
+	}
+
+	@media @query-vl {
+		margin-bottom: 20px;
+
+		font-size: 32px;
+	}
+}
+
+h2 {
+	margin: 0 0 10px 0;
+
+	font-size: 16px;
+	font-weight: normal;
+
+	@media @query-md {
+		font-size: 18px;
+	}
+
+	@media @query-lg {
+		margin-bottom: 15px;
+
+		font-size: 20px;
+	}
+
+	@media @query-vl {
+		margin-bottom: 20px;
+
+		font-size: 22px;
+	}
+}
+
+h3 {
+	margin: 0 0 10px 0;
+
+	font-size: 14px;
+	font-weight: normal;
+
+	@media @query-md {
+		font-size: 15px;
+	}
+
+	@media @query-lg {
+		margin-bottom: 15px;
+
+		font-size: 16px;
+	}
+
+	@media @query-vl {
+		margin-bottom: 20px;
+
+		font-size: 18px;
+	}
+}
+
+h4 {
+	margin: 0 0 10px 0;
+
+	font-size: 10px;
+	font-weight: bold;
+
+	@media @query-md {
+		font-size: 11px;
+	}
+
+	@media @query-lg {
+		margin-bottom: 15px;
+
+		font-size: 12px;
+	}
+
+	@media @query-vl {
+		margin-bottom: 20px;
+
+		font-size: 14px;
+	}
+}
+
+h5 {
+	margin: 0 0 10px 0;
+
+	font-size: 9px;
+	text-transform: uppercase;
+	font-weight: bold;
+
+	@media @query-md {
+		font-size: 10px;
+	}
+
+	@media @query-lg {
+		margin-bottom: 15px;
+
+		font-size: 11px;
+	}
+
+	@media @query-vl {
+		margin-bottom: 20px;
+
+		font-size: 12px;
+	}
+}
+
+h6 {
+	margin: 0 0 10px 0;
+
+	font-size: 12px;
+	font-weight: bold;
+}
+
+a {
+	text-decoration: underline;
+	color: @color-link;
+	cursor: pointer;
+	outline: none;
+	transition: @transition color;
+
+	&:hover {
+		text-decoration: none;
+		color: @color-link-hover;
+	}
+}
