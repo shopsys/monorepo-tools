@@ -1,3 +1,5 @@
+@header-cart-width: 38px;
+
 .header {
 	padding-bottom: 10px;
 	position: relative;
@@ -17,7 +19,7 @@
 	}
 
 	&__cart {
-		width: 38px;
+		width: @header-cart-width;
 	}
 
 	&__top {
@@ -26,7 +28,7 @@
 
 	&__mobile {
 		width: 80%;
-		width: calc(~"100% - 38px");
+		width: calc(~"100% - @{header-cart-width}");
 
 		text-align: right;
 	}

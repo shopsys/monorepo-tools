@@ -1,8 +1,16 @@
 // Default button
+@btn-height: @form-item-height;
+@btn-padding-vertical: 11px;
+@btn-padding-horizontal: 15px;
+@btn-color: @color-base;
+@btn-color-hover: @color-base;
+@btn-bg: @color-d;
+@btn-bg-hover: darken(@btn-bg, 5%);
+
 .btn {
 	width: auto;
 	min-height: @btn-height;
-	padding: @btn-padding-vertical 15px;
+	padding: @btn-padding-vertical @btn-padding-horizontal;
 	line-height: @btn-height - 2 * @btn-padding-vertical;
 	vertical-align:middle;
 	display: inline-block;
@@ -26,6 +34,11 @@
 
 //// Modifications - color
 .btn {
+	@btn-primary-color: @color-f;
+	@btn-primary-color-hover: @color-f;
+	@btn-primary-bg: @color-green;
+	@btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
+
 	&--primary {
 		color: @btn-primary-color;
 		background: @btn-primary-bg;
@@ -36,6 +49,11 @@
 		}
 	}
 
+	@btn-success-color: @color-f;
+	@btn-success-color-hover: @color-f;
+	@btn-success-bg: @color-blue;
+	@btn-success-bg-hover: darken(@btn-success-bg, 5%);
+
 	&--success {
 		color: @btn-success-color;
 		background: @btn-success-bg;
@@ -45,6 +63,9 @@
 			background: @btn-success-bg-hover;
 		}
 	}
+
+	@btn-disabled-bg: #C1CDD1;
+	@btn-disabled-color: @color-f;
 
 	&--disabled {
 		color: @color-c;
@@ -60,16 +81,22 @@
 
 //// Modifications - size
 .btn {
+	@btn-large-padding-horizontal: 25px;
+
 	&--large {
-		padding-left: 25px;
-		padding-right: 25px;
+		padding-left: @btn-large-padding-horizontal;
+		padding-right: @btn-large-padding-horizontal;
 
 		font-size: 16px;
 	}
 
+	@btn-small-padding-vertical: 5px;
+	@btn-small-padding-horizontal: 10px;
+	@btn-small-height: @btn-height - 10;
+
 	&--small {
-		padding: 5px 10px;
-		min-height: @btn-height - 10;
+		padding: @btn-small-padding-vertical @btn-small-padding-horizontal;
+		min-height: @btn-small-height;
 
 		font-size: 11px;
 	}

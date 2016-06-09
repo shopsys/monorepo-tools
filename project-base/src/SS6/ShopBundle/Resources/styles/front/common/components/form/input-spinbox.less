@@ -1,15 +1,16 @@
 @form-input-spinbox-padding-vertical: 3px;
+@form-input-spinbox-buttons-width: 24px;
 
 .form-input-spinbox {
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
-	padding: @form-input-spinbox-padding-vertical 24px @form-input-spinbox-padding-vertical 3px;
+	padding: @form-input-spinbox-padding-vertical @form-input-spinbox-buttons-width @form-input-spinbox-padding-vertical 3px;
 
 	border: 1px solid @color-border;
 
 	&__input {
-		width: 28px;
+		width: @form-input-spinbox-buttons-width + @form-input-spinbox-padding-vertical;
 		padding: 0;
 		height: @input-height - 2 * @form-input-spinbox-padding-vertical;
 		line-height: @input-height - 2 * @form-input-spinbox-padding-vertical;
@@ -21,7 +22,7 @@
 		position: absolute;
 		top: 0;
 		right: 0;
-		width: 24px;
+		width: @form-input-spinbox-buttons-width;
 		height: 50%;
 
 		background: @color-light;

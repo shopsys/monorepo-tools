@@ -1,31 +1,23 @@
-/*******************************************************************
-// PATHS
-*******************************************************************/
+// Paths
 @path-design: '../images';
 @path-font: '../fonts';
 
-
-/*******************************************************************
-// FONTS
-*******************************************************************/
+// Fonts
 @font-base: Arial, Helvetica, sans-serif;
 @font: @font-base;
 
 @font-size: 14px;
 @font-size-mobile: 12px;
 
-/*******************************************************************
-// SIZES
-*******************************************************************/
-@width-web: 1200px;
-@width-panel: 260px;
-@padding-web: 20px;
+// Layout
+@web-width: 1200px;
+@web-padding: 20px;
+@web-panel-width: 260px;
 
 @margin-gap: 20px;
 
-/*******************************************************************
-// COLORS
-*******************************************************************/
+// Colors
+//// Gray scale
 @color-0: #000;
 @color-1: #111;
 @color-2: #222;
@@ -43,125 +35,88 @@
 @color-e: #eee;
 @color-f: #fff;
 
+//// Classic colors of design
 @color-blue: #009BD9;
 @color-green: #a0c519;
 @color-orange: #FFA200;
 @color-red: #D60000;
 
-// context colors
+//// Context colors
+////// Base color of text
 @color-base: @color-3;
 
+////// Color, which is main in design (used in titles or links, other significant places)
 @color-primary: @color-blue;
+
+////// Color, which is additional in desing (second main color)
 @color-add: @color-green;
+
+////// Color, which is the most used grey in design
 @color-light: #f4f4f4;
 
+////// Color for common prices
 @color-price: @color-a;
+////// Color for more visible prices (main price)
 @color-price-main: @color-red;
 
+////// Color for main links and its hover color
 @color-link: @color-blue;
 @color-link-hover: @color-base;
 
+////// Special colors
 @color-info: @color-green;
 @color-alert: @color-red;
 @color-warning: @color-orange;
 
+////// Color for inactive text (muted)
 @color-inactive: @color-a;
+////// Base color of border
 @color-border: @color-d;
-
-@bg-web: @color-3;
-@bg-page: @color-f;
-@bg-box: @color-light;
-
-@bg-success: #dff0d8;
-@bg-info: #BCE0EE;
-@bg-warning: #fcf8e3;
-@bg-alert: #FFEDED;
-
-// message colors
-@color-message-alert: #F7D6D6;
-@color-message-warning: @color-orange;
-@color-message-info: #BAE3F2;
-@color-message-success: @color-green;
-
-@color-message-alert-text: @color-red;
-@color-message-warning-text: @color-orange;
-@color-message-info-text: #005B7E;
-@color-message-success-text: @color-green;
+////// Base color for background of components
+@color-box: @color-light;
 
 
-/*******************************************************************
-// BUTTONS
-*******************************************************************/
-// btn default
-@btn-color: @color-base;
-@btn-color-hover: @color-base;
-@btn-bg: @color-d;
-@btn-bg-hover: darken(@btn-bg, 5%);
-@btn-height: 36px;
-@btn-padding-vertical: 11px;
+// Other
+//// Forms
+@form-item-height: 36px;
 
-// btn primary
-@btn-primary-color: @color-f;
-@btn-primary-color-hover: @color-f;
-@btn-primary-bg: @color-green;
-@btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
-
-// btn success
-@btn-success-color: @color-f;
-@btn-success-color-hover: @color-f;
-@btn-success-bg: @color-blue;
-@btn-success-bg-hover: darken(@btn-success-bg, 5%);
-
-// btn disabled
-@btn-disabled-bg: #C1CDD1;
-@btn-disabled-color: @color-f;
-
-
-/*******************************************************************
-// INPUTS
-*******************************************************************/
-@input-height: @btn-height;
-
-
-/*******************************************************************
-// OTHER
-*******************************************************************/
+//// Default transition settings
 @transition-type: cubic-bezier(.8, .20, .48, 1.0);
 @transition-time: 0.2s;
 @transition: @transition-time @transition-type;
 
+//// Default border radius value
 @radius: 3px;
 
+//// Default postfixes for responsive helpers generator
 @postfixes: -tablet, -mobile, -mobile-small;
 
-/*******************************************************************
-// RESPONSIVE POINTS
-*******************************************************************/
-@respons-1: 320px;
-@respons-1-a: (@respons-1 - 1);
-@respons-2: 480px;
-@respons-2-a: (@respons-2 - 1);
-@respons-3: 600px;
-@respons-3-a: (@respons-3 - 1);
-@respons-4: 769px;
-@respons-4-a: (@respons-4 - 1);
-@respons-5: 1024px;
-@respons-5-a: (@respons-5 - 1);
-@respons-6: @width-web;
-@respons-6-a: (@respons-6 - 1);
+// Responsive breakpoints
+@breakpoint-1: 320px;
+@breakpoint-1-a: (@breakpoint-1 - 1);
+@breakpoint-2: 480px;
+@breakpoint-2-a: (@breakpoint-2 - 1);
+@breakpoint-3: 600px;
+@breakpoint-3-a: (@breakpoint-3 - 1);
+@breakpoint-4: 769px;
+@breakpoint-4-a: (@breakpoint-4 - 1);
+@breakpoint-5: 1024px;
+@breakpoint-5-a: (@breakpoint-5 - 1);
+@breakpoint-6: @web-width;
+@breakpoint-6-a: (@breakpoint-6 - 1);
 
-/*******************************************************************
-// MEDIA QUERIES
-*******************************************************************/
-@query-xs: ~"screen and (min-width: @{respons-1})";
-@query-sm: ~"screen and (min-width: @{respons-2})";
-@query-md: ~"screen and (min-width: @{respons-3})";
-@query-lg: ~"screen and (min-width: @{respons-4})";
-@query-vl: ~"screen and (min-width: @{respons-5})";
-@query-xl: ~"screen and (min-width: @{respons-6})";
+//// Media queries
+////// Mobile first
+@query-xs: ~"screen and (min-width: @{breakpoint-1})";
+@query-sm: ~"screen and (min-width: @{breakpoint-2})";
+@query-md: ~"screen and (min-width: @{breakpoint-3})";
+@query-lg: ~"screen and (min-width: @{breakpoint-4})";
+@query-vl: ~"screen and (min-width: @{breakpoint-5})";
+@query-xl: ~"screen and (min-width: @{breakpoint-6})";
 
-@query-mobile-xs: ~"screen and (max-width: @{respons-2-a})";
-@query-mobile: ~"screen and (max-width: @{respons-3-a})";
-@query-tablet: ~"screen and (max-width: @{respons-4-a})";
-@query-tablet-only: ~"screen and (min-width: @{respons-3}) and (max-width: @{respons-4-a})";
-@query-not-large-desktop: ~"screen and (max-width: @{respons-5-a})";
+////// Desktop first
+@query-mobile-xs: ~"screen and (max-width: @{breakpoint-2-a})";
+@query-mobile: ~"screen and (max-width: @{breakpoint-3-a})";
+@query-tablet: ~"screen and (max-width: @{breakpoint-4-a})";
+@query-tablet-only: ~"screen and (min-width: @{breakpoint-3}) and (max-width: @{breakpoint-4-a})";
+@query-not-large-desktop: ~"screen and (max-width: @{breakpoint-5-a})";

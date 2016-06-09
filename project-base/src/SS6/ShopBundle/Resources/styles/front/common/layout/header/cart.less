@@ -1,3 +1,6 @@
+@cart-icon-width: 30px;
+@cart-icon-gap: 10px;
+
 .cart {
 	display: none;
 }
@@ -21,7 +24,7 @@
 		}
 
 		&__icon {
-			width: 30px;
+			width: @cart-icon-width;
 			float: left;
 
 			font-size: 20px;
@@ -29,7 +32,7 @@
 		}
 
 		&__info {
-			margin-left: 40px;
+			margin-left: @cart-icon-width + @cart-icon-gap;
 			max-width: 90px;
 		}
 	}
