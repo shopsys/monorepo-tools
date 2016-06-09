@@ -10,10 +10,6 @@
 	- {{ 'Katalog zboží - %brandName%'|trans({'%brandName%' : brand.name}) }}
 {% endblock %}
 
-{% block panel_content %}
-	{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
-{% endblock %}
-
 {% block main_content %}
 	<div class="box-list">
 		<h1>{{ brand.name }}</h1>
