@@ -5,7 +5,7 @@
 
 	SS6.spinbox.init = function (formElement) {
 		$('.js-spinbox').each(SS6.spinbox.bindSpinbox);
-	}
+	};
 
 	SS6.spinbox.bindSpinbox = function () {
 		var $input = $(this).find('input.js-spinbox-input');
@@ -32,10 +32,10 @@
 				repeater.stopAutorepeat();
 			});
 
-	}
+	};
 
 	SS6.spinbox.plus = function() {
-		var value = $.trim($(this).val())
+		var value = $.trim($(this).val());
 		var max = $(this).data('spinbox-max');
 
 		if (value.match(/^\d+$/)) {
@@ -46,10 +46,10 @@
 			$(this).val(value);
 			$(this).change();
 		}
-	}
+	};
 
 	SS6.spinbox.minus = function() {
-		var value = $.trim($(this).val())
+		var value = $.trim($(this).val());
 		var min = $(this).data('spinbox-min');
 
 		if (value.match(/^\d+$/)) {
@@ -60,7 +60,7 @@
 			$(this).val(value);
 			$(this).change();
 		}
-	}
+	};
 
 	var repeater = {
 		timerDelay: null,

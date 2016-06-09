@@ -78,7 +78,7 @@
 			});
 
 			return categoriesOrderingData;
-		}
+		};
 
 		self.onChange = function () {
 			self.$saveButton.removeClass('btn--disabled');

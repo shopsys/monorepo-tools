@@ -5,7 +5,7 @@
 
 	SS6.grid.init = function (formElement) {
 		$('.js-grid-go-to').each(SS6.grid.bindGoTo);
-	}
+	};
 
 	SS6.grid.bindGoTo = function () {
 		var $button = $(this).find('.js-grid-go-to-button');
@@ -21,7 +21,7 @@
 			document.location = $(this).data('url').replace('--page--', $input.val());
 			return false;
 		});
-	}
+	};
 
 	$(document).ready(function () {
 		SS6.grid.init();
