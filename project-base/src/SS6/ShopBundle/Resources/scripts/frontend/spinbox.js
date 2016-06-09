@@ -3,7 +3,7 @@
 	SS6 = window.SS6 || {};
 	SS6.spinbox = SS6.spinbox || {};
 
-	SS6.spinbox.init = function (formElement) {
+	SS6.spinbox.init = function () {
 		$('.js-spinbox').each(SS6.spinbox.bindSpinbox);
 	};
 
