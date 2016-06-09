@@ -11,7 +11,7 @@
 	left: 10px;
 	padding: @window-popup-inner-padding;
 	z-index: 10001;
-	transform: rotateY(90deg);
+	transform: scaleX(0);
 	width: calc( ~"100vw - @{window-popup-inner-padding}" );
 	will-change: transform;
 
@@ -20,7 +20,7 @@
 	transition: @transition transform;
 
 	&--active {
-		transform: rotateY(0);
+		transform: scaleX(1);
 	}
 
 	&__in {
