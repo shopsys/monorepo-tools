@@ -3,8 +3,8 @@
 	SS6 = window.SS6 || {};
 	SS6.spinbox = SS6.spinbox || {};
 
-	SS6.spinbox.init = function () {
-		$('.js-spinbox').each(SS6.spinbox.bindSpinbox);
+	SS6.spinbox.init = function ($container) {
+		$container.filterAllNodes('.js-spinbox').each(SS6.spinbox.bindSpinbox);
 	};
 
 	SS6.spinbox.bindSpinbox = function () {
@@ -83,8 +83,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.spinbox.init();
-	});
+	SS6.register.registerCallback(SS6.spinbox.init);
 
 })(jQuery);
