@@ -68,7 +68,7 @@
 	};
 
 	SS6.validation.highlightSubmitButtons = function($form){
-		var $submitButtons = $form.find('.btn-primary[type="submit"]');
+		var $submitButtons = $form.find('.btn[type="submit"]');
 
 		if (SS6.validation.isFormValid($form)) {
 			$submitButtons.removeClass('btn--disabled');
