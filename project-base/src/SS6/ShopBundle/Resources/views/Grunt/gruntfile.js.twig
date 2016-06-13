@@ -1,6 +1,10 @@
 module.exports = function(grunt) {
 
 	require('es6-promise').polyfill();
+	require('jit-grunt')(grunt, {
+		sprite: 'grunt-spritesmith'
+	});
+	require('time-grunt')(grunt);
 
 	grunt.initConfig({
 
@@ -168,23 +172,6 @@ module.exports = function(grunt) {
 			}
 		},
 
-		styledocco: {
-			dist: {
-				options: {
-					name: 'Shopsys 6 - common',
-					include: [
-						'web/assets/frontend/styles/index1_{{ cssVersion }}.css',
-						'web/assets/admin/styles/index_{{ cssVersion }}.css'
-					]
-				},
-				files: {
-					'docs/common/frontend/components': '{{ rootStylesDirectory|raw }}/front/common/components/',
-					'docs/common/frontend/core/buttons': '{{ rootStylesDirectory|raw }}/front/common/core/forms/buttons.less',
-					'docs/common/admin/components': '{{ rootStylesDirectory|raw }}/admin/components/'
-				}
-			}
-		},
-
 		webfont: {
 			admin: {
 				src: 'src/SS6/ShopBundle/Resources/svg/admin/*.svg',
@@ -315,21 +302,12 @@ module.exports = function(grunt) {
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-legacssy');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-spritesmith');
-	grunt.loadNpmTasks('grunt-styledocco');
-	grunt.loadNpmTasks('grunt-webfont');
-	grunt.loadNpmTasks('grunt-postcss');
-
 	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'postcss', 'legacssy']);
 
 	{% for domain in domains -%}
 		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
 	{% endfor -%}
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
-	grunt.registerTask('docs', ['styledocco']);
 
 	{% for domain in domains -%}
 		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
