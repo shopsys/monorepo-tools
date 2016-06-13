@@ -25,7 +25,7 @@
 	SS6.validation.showErrors = function (errors, elementName) {
 		var $errorList = SS6.validation.findOrCreateErrorList($(this), elementName);
 		var $errorListUl = $errorList.find('ul:first');
-		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this), elementName);
+		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this));
 
 		var elementErrorClass = 'js-' + elementName;
 		$errorListUl.find('li').remove();
