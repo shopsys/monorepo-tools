@@ -49,7 +49,7 @@
 		var $errorList = $('.' + errorListClass);
 		if ($errorList.size() === 0) {
 			$errorList = $($.parseHTML(
-				'<div class="in-message--static in-message--danger js-validation-errors-list ' + errorListClass + '">\
+				'<div class="in-message in-message--danger js-validation-errors-list ' + errorListClass + '">\
 					<ul class="in-message__list"></ul>\
 				</div>'
 			));
