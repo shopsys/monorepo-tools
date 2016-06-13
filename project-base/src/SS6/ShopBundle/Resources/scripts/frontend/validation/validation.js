@@ -64,7 +64,7 @@
 	};
 
 	SS6.validation.highlightSubmitButtons = function($form){
-		var $submitButtons = $form.find('.button[type="submit"]:not(.js-no-validate-button)');
+		var $submitButtons = $form.find('.btn[type="submit"]:not(.js-no-validate-button)');
 
 		if (SS6.validation.isFormValid($form)) {
 			$submitButtons.removeClass('btn--disabled');
