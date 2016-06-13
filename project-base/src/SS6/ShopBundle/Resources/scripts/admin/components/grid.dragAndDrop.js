@@ -109,7 +109,7 @@
 			$saveAllButton.click(function() {
 				$gridSaveButtons.click();
 			});
-		};
+		}
 	};
 
 	$(document).ready(function () {

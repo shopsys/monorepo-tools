@@ -6,7 +6,7 @@
 
 	SS6.grid.inlineEdit.init = function () {
 		$('.js-grid[data-inline-edit-service-name]').each(SS6.grid.inlineEdit.bind);
-	}
+	};
 
 	SS6.grid.inlineEdit.bind = function () {
 		var $grid = $(this);
@@ -53,7 +53,7 @@
 			return false;
 		});
 
-	}
+	};
 
 	SS6.grid.inlineEdit.saveRow = function ($formRow, $grid) {
 		var $buttons = $formRow.find('.js-inline-edit-buttons').hide();
@@ -64,7 +64,7 @@
 
 		var $originalRow = $formRow.data('$originalRow');
 		if ($originalRow) {
-			$virtualForm.append($('<input type="hidden" name="rowId" />').val($originalRow.data('inline-edit-row-id')))
+			$virtualForm.append($('<input type="hidden" name="rowId" />').val($originalRow.data('inline-edit-row-id')));
 			$originalRow.data('inline-edit-row-id');
 		}
 
@@ -87,7 +87,7 @@
 				}
 			}
 		});
-	}
+	};
 
 	SS6.grid.inlineEdit.startEditRow = function ($row, $grid) {
 		SS6.ajax({
@@ -107,7 +107,7 @@
 				$formRow.data('$originalRow', $row);
 			}
 		});
-	}
+	};
 
 	SS6.grid.inlineEdit.addNewRow = function ($grid) {
 		SS6.ajax({
@@ -126,7 +126,7 @@
 				$formRow.find('input[type=text]:first').focus();
 			}
 		});
-	}
+	};
 
 	SS6.grid.inlineEdit.cancelEdit = function ($formRow) {
 		var $originalRow = $formRow.data('$originalRow');
@@ -136,19 +136,19 @@
 			SS6.grid.inlineEdit.enableRow($originalRow);
 		}
 		$formRow.remove();
-	}
+	};
 
 	SS6.grid.inlineEdit.disableRow = function ($row) {
 		return $row.addClass('js-inactive');
-	}
+	};
 
 	SS6.grid.inlineEdit.enableRow = function ($row) {
 		return $row.removeClass('js-inactive');
-	}
+	};
 
 	SS6.grid.inlineEdit.isRowEnabled = function ($row) {
 		return !$row.hasClass('js-inactive');
-	}
+	};
 
 	$(document).ready(function () {
 		SS6.grid.inlineEdit.init();

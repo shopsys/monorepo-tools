@@ -32,7 +32,7 @@
 			} else {
 				this.selectProduct(productId, productName)
 			}
-		}
+		};
 
 		this.selectProduct = function (productId, productName) {
 			$input.val(productId);

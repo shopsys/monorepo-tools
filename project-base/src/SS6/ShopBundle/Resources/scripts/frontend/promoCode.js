@@ -14,7 +14,7 @@
 				if (event.keyCode === SS6.keyCodes.ENTER) {
 					applyPromoCode();
 					return false;
-				};
+				}
 			});
 		};
 
