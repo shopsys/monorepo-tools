@@ -14,6 +14,7 @@ class QueryBuilderService {
 	 * @param string $class
 	 * @param string $alias
 	 * @param string $condition
+	 * @return \Doctrine\ORM\QueryBuilder $queryBuilder
 	 */
 	public function addOrExtendJoin(QueryBuilder $queryBuilder, $class, $alias, $condition) {
 		$rootAlias = $this->getRootAlias($queryBuilder);
@@ -38,6 +39,8 @@ class QueryBuilderService {
 		} else {
 			$queryBuilder->andWhere($condition);
 		}
+
+		return $queryBuilder;
 	}
 
 	/**
