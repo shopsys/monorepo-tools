@@ -22,16 +22,16 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			1,
 			[
-				0 => $this->getReference('product_7'),
-				2 => $this->getReference('product_8'),
-				8 => $this->getReference('product_5'),
+				0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
+				2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
+				8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
 			]
 		);
 
 		$bestsellingProductEditFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			2,
-			[$this->getReference('product_7')]
+			[$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7')]
 		);
 	}
 
