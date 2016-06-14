@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
