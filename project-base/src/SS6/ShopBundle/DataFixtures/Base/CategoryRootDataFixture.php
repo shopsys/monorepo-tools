@@ -19,18 +19,13 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$domain = $this->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
-
 		$rootCategory = new Category(new CategoryData());
 		$manager->persist($rootCategory);
 		$manager->flush($rootCategory);
 		$this->addReference(self::ROOT, $rootCategory);
 
-		foreach ($domain->getAll() as $domainConfig) {
-			$categoryDomain = new CategoryDomain($rootCategory, $domainConfig->getId());
-			$manager->persist($categoryDomain);
-		}
+		$categoryDomain = new CategoryDomain($rootCategory, Domain::FIRST_DOMAIN_ID);
+		$manager->persist($categoryDomain);
 
 		$manager->flush();
 	}
