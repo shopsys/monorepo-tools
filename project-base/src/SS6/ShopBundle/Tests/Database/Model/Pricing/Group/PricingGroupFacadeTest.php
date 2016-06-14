@@ -84,7 +84,7 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'));
 		$pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
-		$user = $this->getReference(UserDataFixture::USER_PREFIX . '1');
+		$user = $customerFacade->getUserById(1);
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */
 		$userData = new UserData();
 		$userData->setFromEntity($user);
