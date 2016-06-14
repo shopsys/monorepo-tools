@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt,checks-diff" />
-	<target name="build-dev-quick" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt" />
-	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,checks-diff" />
-	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" />
-	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" />
+	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-front-and-common,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt,checks-diff" description="Build application for development"/>
+	<target name="build-dev-quick" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt" description="Quick build application for development"/>
+	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,checks-diff" description="Build application for development with demo data"/>
+	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
+	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
 
-	<target name="checks" depends="standards,tests" />
-	<target name="checks-diff" depends="standards-diff,tests" />
-	<target name="checks-ci" depends="standards-ci,tests,tests-acceptance" />
-	<target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" />
+	<target name="checks" depends="standards,tests" description="Run standards and tests"/>
+	<target name="checks-diff" depends="standards-diff,tests" description="Run standards and tests, runs only on modified files"/>
+	<target name="checks-ci" depends="standards-ci,tests,tests-acceptance" description="Run CI standards, tests and acceptance tests"/>
+	<target name="checks-ci-diff" depends="standards-ci-diff,tests,tests-acceptance" description="Run CI standards, tests and acceptance tests (only on modified files)"/>
 
-	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" />
-	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" />
-	<target name="standards-ci" depends="standards,phpstorm-inspect" />
-	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" />
+	<target name="standards" depends="phplint,phpcs-fixer,phpcs,phpmd,twig-lint,yaml-lint" description="Run phplint, phpcs-fixer, phpcs, phpmd, twig-lint and yaml-lint"/>
+	<target name="standards-diff" depends="phplint-diff,phpcs-fixer-diff,phpcs-diff,phpmd-diff,twig-lint-diff,yaml-lint" description="Run phplint-diff, phpcs-fixer-diff, phpcs-diff, phpmd-diff, twig-lint-diff, yaml-lint"/>
+	<target name="standards-ci" depends="standards,phpstorm-inspect" description="Run standards and phpstorm-inspect"/>
+	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Run standards-diff and phpstorm-inspect"/>
 
-	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-check-schema,test-db-fixtures-demo,test-create-domains-data,test-replace-domains-urls" />
-	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" />
-	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" />
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-check-schema,test-db-fixtures-demo,test-create-domains-data,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
+	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Rebuild test database and import performance demo data"/>
+	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Run unit, database and crawler tests on the new test demo database"/>
 
-	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" />
+	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Run performance tests (clean, test-db-performance, tests-performance-warmup, tests-performance)"/>
 
-	<target name="composer-check">
+	<target name="composer-check" description="Composer: Check if composer.lock is OK">
 		<exec
 			executable="${path.composer.executable}"
 			logoutput="true"
@@ -35,7 +35,7 @@
 		</exec>
 	</target>
 
-	<target name="composer-dev" depends="composer-check">
+	<target name="composer-dev" depends="composer-check" description="Composer: Install dependencies including dev dependencies">
 		<exec
 			executable="${path.composer.executable}"
 			logoutput="true"
@@ -46,13 +46,13 @@
 		</exec>
 	</target>
 
-	<target name="docs">
+	<target name="docs" description="Grunt: deprecated">
 		<exec executable="${path.grunt.executable}" passthru="true" checkreturn="true">
 			<arg value="docs" />
 		</exec>
 	</target>
 
-	<target name="dump-translations">
+	<target name="dump-translations" description="Extracts translation messages from whole project including back-end">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="translation:extract" />
@@ -70,7 +70,7 @@
 		</exec>
 	</target>
 
-	<target name="diff-files">
+	<target name="diff-files" description="Find modified files on current branch">
 		<exec
 			command="git merge-base origin/master HEAD"
 			outputProperty="git.merge.base"
@@ -116,7 +116,7 @@
 		</property>
 	</target>
 
-	<target name="diff-files-phpcs" depends="diff-files">
+	<target name="diff-files-phpcs" depends="diff-files" description="Find modified files for phpcs">
 		<property name="diff.files.phpcs" value="${diff.files.php}">
 			<filterchain>
 				<replaceregexp>
@@ -126,7 +126,7 @@
 		</property>
 	</target>
 
-	<target name="phpcbf">
+	<target name="phpcbf" description="Fix php coding standards by PHP Code Beautifier">
 		<exec
 			executable="${path.phpcbf.executable}"
 			logoutput="true"
@@ -142,7 +142,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcbf-diff" depends="diff-files-phpcs">
+	<target name="phpcbf-diff" depends="diff-files-phpcs" description="Fix php coding standards by PHP Code Beautifier only on modified files">
 		<if>
 			<not>
 				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
@@ -165,7 +165,7 @@
 		</if>
 	</target>
 
-	<target name="phpcs">
+	<target name="phpcs" description="Check coding standards by PHP Code Sniffer">
 		<exec
 			executable="${path.phpcs.executable}"
 			logoutput="true"
@@ -181,7 +181,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcs-diff" depends="diff-files-phpcs">
+	<target name="phpcs-diff" depends="diff-files-phpcs" description="Check coding standards (only on modified files)">
 		<if>
 			<not>
 				<equals arg1="${diff.files.phpcs}" arg2="" trim="true" />
@@ -204,7 +204,7 @@
 		</if>
 	</target>
 
-	<target name="phpcs-fixer">
+	<target name="phpcs-fixer" description="PHP CS Fixer dry run">
 		<exec
 			executable="${path.phpcs-fixer.executable}"
 			logoutput="true"
@@ -220,7 +220,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcs-fixer-fix">
+	<target name="phpcs-fixer-fix" description="Fix coding standards by PHP CS Fixer">
 		<exec
 			executable="${path.phpcs-fixer.executable}"
 			logoutput="true"
@@ -234,7 +234,7 @@
 		</exec>
 	</target>
 
-	<target name="phpcs-fixer-diff" depends="diff-files">
+	<target name="phpcs-fixer-diff" depends="diff-files" description="PHP CS Fixer dry (only on modified files)">
 		<property name="diff.files.phpcs-fixer" value="${diff.files.all}">
 			<filterchain>
 				<replaceregexp>
@@ -265,7 +265,7 @@
 		</if>
 	</target>
 
-	<target name="phpcs-fixer-fix-diff" depends="diff-files">
+	<target name="phpcs-fixer-fix-diff" depends="diff-files" description="Fix coding standards by PHP CS Fixer (only on modified files)">
 		<property name="diff.files.phpcs-fixer" value="${diff.files.all}">
 			<filterchain>
 				<replaceregexp>
@@ -295,7 +295,7 @@
 		</if>
 	</target>
 
-	<target name="phplint">
+	<target name="phplint" description="Check syntax of php files">
 		<exec
 			executable="${path.phplint.executable}"
 			logoutput="true"
@@ -308,7 +308,7 @@
 		</exec>
 	</target>
 
-	<target name="phplint-diff" depends="diff-files">
+	<target name="phplint-diff" depends="diff-files" description="Check syntax of php files (only on modified files)">
 		<property name="diff.files.phplint" value="${diff.files.php}">
 			<filterchain>
 				<replaceregexp>
@@ -334,7 +334,7 @@
 		</if>
 	</target>
 
-	<target name="phpmd">
+	<target name="phpmd" description="Check coding standards by PHP Mess Detector">
 		<exec
 			executable="${path.phpmd.executable}"
 			logoutput="true"
@@ -350,7 +350,7 @@
 		</exec>
 	</target>
 
-	<target name="phpmd-diff" depends="diff-files">
+	<target name="phpmd-diff" depends="diff-files" description="Check coding standards by PHP Mess Detector (only on modified files)">
 		<property name="diff.files.phpmd" value="${diff.files.php}">
 			<filterchain>
 				<replaceregexp>
@@ -382,7 +382,7 @@
 		</if>
 	</target>
 
-	<target name="phpstorm-inspect">
+	<target name="phpstorm-inspect" description="Run phpstorm inspections">
 		<exec
 			executable="${path.phpstorm-inspect.executable}"
 			logoutput="true"
@@ -397,7 +397,7 @@
 		</exec>
 	</target>
 
-	<target name="selenium-start">
+	<target name="selenium-start" description="Start the selenium server">
 		<exec
 				executable="${path.java.executable}"
 				logoutput="true"
@@ -409,7 +409,7 @@
 		</exec>
 	</target>
 
-	<target name="standards-fix-diff">
+	<target name="standards-fix-diff" description="Fix files (only on modified files)">
 		<phingcall target="phpcs-fixer-fix-diff" />
 		<trycatch>
 			<try>
@@ -421,7 +421,7 @@
 		</trycatch>
 	</target>
 
-	<target name="tests-acceptance" depends="test-db-dump">
+	<target name="tests-acceptance" depends="test-db-dump" description="Run acceptance tests on test database">
 		<available file="${path.env.test}" type="file" property="path.env.test.existed" />
 		<if>
 			<not>
@@ -457,7 +457,7 @@
 		</trycatch>
 	</target>
 
-	<target name="tests-acceptance-build">
+	<target name="tests-acceptance-build" description="Generate AcceptanceTesterActions.php (should run after change of Codeceptions modules or StrictWebdriver)">
 		<exec
 			executable="${path.codeception.executable}"
 			logoutput="true"
@@ -469,7 +469,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-crawler">
+	<target name="tests-crawler" description="Run crawler tests">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -484,7 +484,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-db">
+	<target name="tests-db" description="Run database tests">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -499,7 +499,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-performance">
+	<target name="tests-performance" description="Run performance tests">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -516,7 +516,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-performance-warmup">
+	<target name="tests-performance-warmup" description="Dry run performance tests for warmup caches">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -533,7 +533,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-unit">
+	<target name="tests-unit" description="Run unit tests">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -548,7 +548,7 @@
 		</exec>
 	</target>
 
-	<target name="test-create-domains-data">
+	<target name="test-create-domains-data" description="Create domains data for new domains in tests database">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="ss6:domains-data:create" />
@@ -556,7 +556,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-check-schema">
+	<target name="test-db-check-schema" description="Check if test database schema is satisfying ORM and return a list of suggestions for repair schema">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -564,7 +564,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-create">
+	<target name="test-db-create" description="Create test database public schema and import basic database structure (without migrations)">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -577,7 +577,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-drop">
+	<target name="test-db-drop" description="Drop test database public schema">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -585,7 +585,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-dump">
+	<target name="test-db-dump" description="Dump test database">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -595,7 +595,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-base-settings">
+	<target name="test-db-fixtures-base-settings" description="Load base data fixtures for tests">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -606,7 +606,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-demo">
+	<target name="test-db-fixtures-demo" description="Load base and demo data fixtures for tests, run ss6:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -623,7 +623,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-performance">
+	<target name="test-db-fixtures-performance" description="Import performance data to test db. Demo and base data fixtures must be imported first, run ss6:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -636,7 +636,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-migrations">
+	<target name="test-db-migrations" description="Database migrations on test database">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -644,7 +644,7 @@
 		</exec>
 	</target>
 
-	<target name="test-replace-domains-urls">
+	<target name="test-replace-domains-urls" description="Replace domains urls in test database">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -652,7 +652,7 @@
 		</exec>
 	</target>
 
-	<target name="twig-lint">
+	<target name="twig-lint" description="Lint: Check syntax of twig templates">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="lint:twig" />
@@ -660,7 +660,7 @@
 		</exec>
 	</target>
 
-	<target name="twig-lint-diff" depends="diff-files">
+	<target name="twig-lint-diff" depends="diff-files" description="Lint: Check syntax of twig templates (only on modified files)">
 		<if>
 			<not>
 				<equals arg1="${diff.files.twig}" arg2="" trim="true" />
@@ -675,7 +675,7 @@
 		</if>
 	</target>
 
-	<target name="yaml-lint">
+	<target name="yaml-lint" description="Lint: Check syntax of yml files">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="lint:yaml" />
