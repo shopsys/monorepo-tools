@@ -17,7 +17,7 @@
 	<target name="standards-ci" depends="standards,phpstorm-inspect" description="Run standards and phpstorm-inspect"/>
 	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Run standards-diff and phpstorm-inspect"/>
 
-	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo,test-create-domains-data,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
 	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Rebuild test database and import performance demo data"/>
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Run unit, database and crawler tests on the new test demo database"/>
 
@@ -606,7 +606,23 @@
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-demo" description="Load base and demo data fixtures for tests, run ss6:recalculations">
+	<target name="test-db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures to test database excluding first domain, run ss6:recalculations">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="--env=test" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:recalculations" />
+			<arg value="--env=test" />
+		</exec>
+	</target>
+
+	<target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run ss6:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />

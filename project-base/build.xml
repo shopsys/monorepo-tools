@@ -62,7 +62,7 @@
 	<target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,replace-domains-urls,grunt,error-pages-generate,warmup" description="Build dependent second part"/>
 	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-rebuild,grunt,error-pages-generate,warmup" description="Build with rebuild database (for production)"/>
 	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,warmup" description="Similarly like build-new, but this creates a demo data (for production)"/>
-	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo,create-domains-data,replace-domains-urls" description="Drop database, create database, install demo data"/>
+	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo-singledomain,create-domains-data,db-fixtures-demo-multidomain,replace-domains-urls" description="Drop database, create database, install demo data"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-fixtures-base-settings,create-domains-data,replace-domains-urls" description="Drop database, create database, install base data fixture"/>
 
 	<target name="assetic" description="Symfony: Dumps all assets to the filesystem">
@@ -178,7 +178,21 @@
 		</exec>
 	</target>
 
-	<target name="db-fixtures-demo" description="Load base and demo data fixtures, run ss6:recalculations">
+	<target name="db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures excluding first domain, run ss6:recalculations">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="doctrine:fixtures:load" />
+			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+			<arg value="--append" />
+			<arg value="--no-interaction" />
+		</exec>
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:recalculations" />
+		</exec>
+	</target>
+
+	<target name="db-fixtures-demo-singledomain" description="Load base and demo data fixtures for first domain, run ss6:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
