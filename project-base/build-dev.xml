@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-custom,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt,checks-diff" description="Build application for development"/>
+	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-front-and-common,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt,checks-diff" description="Build application for development"/>
 	<target name="build-dev-quick" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,db-migrations,db-check-schema,create-domains-data,replace-domains-urls,grunt" description="Quick build application for development"/>
-	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,checks-diff" description="Build application for development with demo data"/>
-	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
-	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-custom,db-demo,grunt,img-demo,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
+	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,checks-diff" description="Build application for development with demo data"/>
+	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
+	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
 
 	<target name="checks" depends="standards,tests" description="Run standards and tests"/>
 	<target name="checks-diff" depends="standards-diff,tests" description="Run standards and tests, runs only on modified files"/>
