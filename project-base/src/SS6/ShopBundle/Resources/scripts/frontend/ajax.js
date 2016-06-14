@@ -37,22 +37,20 @@
 	};
 
 	var getLoaderOverlay = function(loaderMessage, loaderElement) {
-		var $loaderOverlayDiv = $('<div class="in-overlay__in"></div>');
+		var $loaderOverlay = $($.parseHTML(
+			'<div class="in-overlay__in">' +
+				'<div class="in-overlay__spinner">' +
+					'<span class="in-overlay__spinner__icon"></span>' +
+					'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
+				'</div>' +
+			'</div>'));
 
-		var overlaySpinnerClass = 'in-overlay__spinner';
 		if (loaderElement !== 'body') {
-			overlaySpinnerClass += ' in-overlay__spinner--absolute';
-			$loaderOverlayDiv.addClass('in-overlay__in--absolute');
+			$loaderOverlay.addClass('in-overlay__in--absolute');
+			$loaderOverlay.find('.in-overlay__spinner').addClass('in-overlay__spinner--absolute');
 		}
 
-		var $loaderOverlaySpinnerDiv = $($.parseHTML(
-			'<div class="' + overlaySpinnerClass + '">' +
-				'<span class="in-overlay__spinner__icon"></span>' +
-				'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-			'</div>'
-		));
-
-		return $loaderOverlayDiv.append($loaderOverlaySpinnerDiv);
+		return $loaderOverlay;
 	};
 
 	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
