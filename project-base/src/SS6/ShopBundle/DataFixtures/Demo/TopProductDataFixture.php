@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
@@ -15,32 +16,27 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$topProductsOnDomainData = [
-			// $productReferenceName => $domainId
-			ProductDataFixture::PRODUCT_PREFIX . '1' => 1,
-			ProductDataFixture::PRODUCT_PREFIX . '17' => 1,
-			ProductDataFixture::PRODUCT_PREFIX . '9' => 1,
-			ProductDataFixture::PRODUCT_PREFIX . '14' => 2,
-			ProductDataFixture::PRODUCT_PREFIX . '10' => 2,
-			ProductDataFixture::PRODUCT_PREFIX . '7' => 2,
+		$topProductReferenceNames = [
+			ProductDataFixture::PRODUCT_PREFIX . '1',
+			ProductDataFixture::PRODUCT_PREFIX . '17',
+			ProductDataFixture::PRODUCT_PREFIX . '9',
 		];
-		foreach ($topProductsOnDomainData as $productReferenceName => $domainId) {
-			$this->createTopProduct($productReferenceName, $domainId);
+		foreach ($topProductReferenceNames as $productReferenceName) {
+			$this->createTopProduct($productReferenceName);
 		}
 	}
 
 	/**
 	 * @param string $productReferenceName
-	 * @param int $domainId
 	 */
-	private function createTopProduct($productReferenceName, $domainId) {
+	private function createTopProduct($productReferenceName) {
 		$topProductFacade = $this->get(TopProductFacade::class);
 		/* @var $topProductFacade \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade */
 
 		$topProductData = new TopProductData();
 		$topProductData->product = $this->getReference($productReferenceName);
 
-		$topProductFacade->create($topProductData, $domainId);
+		$topProductFacade->create($topProductData, Domain::FIRST_DOMAIN_ID);
 	}
 
 	/**
