@@ -4,8 +4,10 @@ namespace SS6\ShopBundle\Form\Front\Product;
 
 use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
 use SS6\ShopBundle\Form\FormType;
+use SS6\ShopBundle\Model\Product\Filter\PriceRange;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -30,14 +32,26 @@ class ProductFilterFormType extends AbstractType {
 	private $brandFilterChoices;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
+	 * @var \SS6\ShopBundle\Model\Product\Filter\PriceRange
 	 */
-	public function __construct(array $parameterFilterChoices, array $flagFilterChoices, array $brandFilterChoices) {
+	private $priceRange;
+
+	/**
+	 * @param array $parameterFilterChoices
+	 * @param array $flagFilterChoices
+	 * @param array $brandFilterChoices
+	 * @param \SS6\ShopBundle\Model\Product\Filter\PriceRange $priceRange
+	 */
+	public function __construct(
+		array $parameterFilterChoices,
+		array $flagFilterChoices,
+		array $brandFilterChoices,
+		PriceRange $priceRange
+	) {
 		$this->parameterFilterChoices = $parameterFilterChoices;
 		$this->flagFilterChoices = $flagFilterChoices;
 		$this->brandFilterChoices = $brandFilterChoices;
+		$this->priceRange = $priceRange;
 	}
 
 	/**
@@ -45,11 +59,15 @@ class ProductFilterFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$priceScale = 2;
+		$priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
+
 		$builder
 			->add('minimalPrice', FormType::MONEY, [
 				'currency' => false,
-				'precision' => 2,
+				'scale' => $priceScale,
 				'required' => false,
+				'attr' => ['placeholder' => $priceTransformer->transform($this->priceRange->getMinimalPrice())],
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
@@ -60,8 +78,9 @@ class ProductFilterFormType extends AbstractType {
 			])
 			->add('maximalPrice', FormType::MONEY, [
 				'currency' => false,
-				'precision' => 2,
+				'scale' => $priceScale,
 				'required' => false,
+				'attr' => ['placeholder' => $priceTransformer->transform($this->priceRange->getMaximalPrice())],
 				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
