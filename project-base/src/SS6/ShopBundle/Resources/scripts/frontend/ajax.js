@@ -20,6 +20,7 @@
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
 			clearTimeout(loaderOverlayTimeout);
 			$loaderOverlay.remove();
+			$(options.loaderElement).removeClass('in-overlay');
 		};
 
 		options.error = function (jqXHR) {
@@ -36,25 +37,25 @@
 	};
 
 	var getLoaderOverlay = function(loaderMessage, loaderElement) {
-		var overlaySpinnerClass = 'in-overlay__spinner';
+		var $loaderOverlay = $($.parseHTML(
+			'<div class="in-overlay__in">' +
+				'<div class="in-overlay__spinner">' +
+					'<span class="in-overlay__spinner__icon"></span>' +
+					'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
+				'</div>' +
+			'</div>'));
+
 		if (loaderElement !== 'body') {
-			overlaySpinnerClass += ' in-overlay__spinner--absolute';
+			$loaderOverlay.addClass('in-overlay__in--absolute');
+			$loaderOverlay.find('.in-overlay__spinner').addClass('in-overlay__spinner--absolute');
 		}
 
-		var $loaderOverlayDiv = $('<div class="in-overlay"></div>');
-		var $loaderOverlaySpinnerDiv = $($.parseHTML(
-			'<div class="' + overlaySpinnerClass + '">' +
-				'<span class="in-overlay__spinner__icon"></span>' +
-				'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-			'</div>'
-		));
-
-		return $loaderOverlayDiv.append($loaderOverlaySpinnerDiv);
+		return $loaderOverlay;
 	};
 
 	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
 		$(loaderElement)
-			.addClass('relative')
+			.addClass('in-overlay')
 			.append($loaderOverlay);
 	};
 
