@@ -16,7 +16,7 @@
 
 {% block grid_title_cell_id_dispatchTime %}
 	{{ gridView.renderBlock('grid_title_cell', { column:column }) }}
-	<span title="" class="js-tooltip h-cursor-help" data-toggle="tooltip" data-placement="top" data-original-title="{{ 'Zadává se ve dnech. Nula reprezentuje zboží skladem, nevyplněné znamená, že dostupnost je neznámá.'|trans }}">
+	<span title="" class="js-tooltip cursor-help" data-toggle="tooltip" data-placement="top" data-original-title="{{ 'Zadává se ve dnech. Nula reprezentuje zboží skladem, nevyplněné znamená, že dostupnost je neznámá.'|trans }}">
 		<i class="svg svg-question"></i>
 	</span>
 {% endblock %}

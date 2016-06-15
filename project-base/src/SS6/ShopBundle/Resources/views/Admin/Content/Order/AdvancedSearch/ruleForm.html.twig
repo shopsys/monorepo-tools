@@ -3,7 +3,7 @@
 	{% set isTemplate = key is same as('__template__') %}
 
 	<div
-		class="box-advanced-search__item js-advanced-search-rule{{ isTemplate ? ' h-display-none' : '' }}"
+		class="box-advanced-search__item js-advanced-search-rule{{ isTemplate ? ' display-none' : '' }}"
 		{{- isTemplate ? ' id="js-advanced-search-rule-template"' : '' -}}
 	>
 
@@ -22,12 +22,12 @@
 		</div>
 
 		<div class="box-advanced-search__item__content box-advanced-search__item__content--small">
-			<i class="svg svg-circle-cross h-cursor-pointer js-advanced-search-remove-rule-button in-icon in-icon--remove"></i>
+			<i class="svg svg-circle-cross cursor-pointer js-advanced-search-remove-rule-button in-icon in-icon--remove"></i>
 		</div>
 
 		<div class="box-advanced-search__item__content box-advanced-search__item__content--small">
 			{% if ruleForm.subject.vars.value == 'orderTotalPriceWithVat' %}
-				<i class="js-tooltip svg svg-info h-cursor-help in-icon in-icon--info"
+				<i class="js-tooltip svg svg-info cursor-help in-icon in-icon--info"
 					data-toggle="tooltip" data-placement="right"
 					title="{{ 'Vyhledává se ve všech měnách'|trans }}"
 				></i>

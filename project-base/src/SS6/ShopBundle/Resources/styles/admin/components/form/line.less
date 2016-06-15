@@ -10,7 +10,7 @@ Form field constructions, with many variants and uses
 @form-line-gap-size: 10px;
 
 .form-line {
-	.cfx();
+	.clearfix();
 	padding: 10px 15px 10px 15px;
 	position: relative;
 
@@ -38,7 +38,7 @@ Form field constructions, with many variants and uses
 	}
 
 	&--disabled {
-		.background('bg/disabled.png', 0 0, repeat);
+		background: url('@{path-design}/bg/disabled.png');
 	}
 
 	&--error {
@@ -89,7 +89,7 @@ Form field constructions, with many variants and uses
 
 	&__side {
 		margin-left: 230px;
-		.cfx();
+		.clearfix();
 
 		& + .form-line__side {
 			margin-top: 10px;
@@ -214,7 +214,7 @@ Form field constructions, with many variants and uses
 	}
 
 	&__group {
-		.cfx();
+		.clearfix();
 		padding: 6px 15px;
 
 		background: @bg-info;
@@ -245,7 +245,7 @@ Form field constructions, with many variants and uses
 		margin-bottom: 4px;
 
 		&__title {
-			.cfx();
+			.clearfix();
 			padding: 6px 15px;
 
 			background: @bg-info;

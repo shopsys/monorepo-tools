@@ -250,10 +250,10 @@
 									{% else %}
 										{{ absoluteUrl }}
 									{% endif %}
-									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox h-display-none'}}) }}
+									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
 								</span>
 
-								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip h-text-no-decoration in-icon in-icon--link form-choice-list__item__action form-choice-list__item__action--link" target="_blank" data-toggle="tooltip" data-placement="top">
+								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip text-no-decoration in-icon in-icon--link form-choice-list__item__action form-choice-list__item__action--link" target="_blank" data-toggle="tooltip" data-placement="top">
 									<i class="svg svg-forward-page"></i>
 								</a>
 
@@ -263,20 +263,20 @@
 											<span class="svg svg-circle-cross in-icon in-icon--delete"></span>
 										</button>
 									</span>
-									<span class="js-entity-url-list-row-revert-block h-display-none">
+									<span class="js-entity-url-list-row-revert-block display-none">
 										<button class="btn js-entity-url-list-row-revert-block-button" type="button">
 											{{ 'Vrátit zpět'|trans }}
 										</button>
 
 										<span title="{{ 'Po uložení bude url smazána'|trans }}"
-											class="js-tooltip h-cursor-help form-icon" data-toggle="tooltip" data-placement="top">
+											class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="top">
 											<span class="svg svg-info"></span>
 										</button>
 										</span>
 									</span>
 								</span>
 								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
-									class="js-entity-url-list-info-main-delete js-tooltip h-cursor-help h-display-none form-choice-list__item__action" data-toggle="tooltip" data-placement="top">
+									class="js-entity-url-list-info-main-delete js-tooltip cursor-help display-none form-choice-list__item__action" data-toggle="tooltip" data-placement="top">
 									<span class="svg svg-info in-icon in-icon--info "></span>
 								</span>
 						</label>
@@ -290,7 +290,7 @@
 				{{ form_widget(newUrlForm) }}
 			{% endfor %}
 		</div>
-		<div class="h-margin-top-5">
+		<div class="margin-top-5">
 			<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
 				<i class="btn__icon">+</i>
 				{{ 'Přidat URL'|trans }}
@@ -400,7 +400,7 @@
 			</button>
 		</span>
 		{% if enableRemove %}
-			<a href="#" class="js-product-picker-remove-button h-display-none">
+			<a href="#" class="js-product-picker-remove-button display-none">
 				{{ 'Odebrat'|trans }}
 			</a>
 		{% endif %}
@@ -443,7 +443,7 @@
 			</span>
 		</td>
 		<td class="table-form__cell table-form__cell--actions">
-			<span class="h-cursor-pointer js-products-picker-item-button-delete">
+			<span class="cursor-pointer js-products-picker-item-button-delete">
 				<span class="svg svg-circle-cross in-icon"></span>
 				{{ form_widget(form, {attr: {class: 'js-products-picker-item-input'}}) }}
 			</span>
@@ -459,7 +459,7 @@
 		data-products-picker-url="{{ url('admin_productpicker_pickmultiple', {jsInstanceId: '__js_instance_id__', allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
 		data-products-picker-main-product-id="{{ form.vars.main_product ? form.vars.main_product.id : '' }}"
 	>
-		<table class="table-form h-margin-bottom-20">
+		<table class="table-form margin-bottom-20">
 			<thead class="js-products-picker-header">
 				<tr class="table-form__row">
 					<td class="table-form__cell">{{ 'Název'|trans }}</td>
@@ -489,7 +489,7 @@
 			{% set categoryForm = form[categoryDetail.category.id] %}
 			<li class="form-tree__item {% if form.vars.mutedNotVisibleOnDomainId is defined and not categoryDetail.category.categoryDomain(form.vars.mutedNotVisibleOnDomainId).visible %}form-tree__item--muted{% endif %} js-category-tree-form-item">
 				<div class="form-tree__item__click">
-					<span class="form-tree__item__icon js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' h-cursor-pointer' : ''}}"></span>
+					<span class="form-tree__item__icon js-category-tree-form-item-icon{{ categoryDetail.children|length > 0 ? ' cursor-pointer' : ''}}"></span>
 					<span class="form-tree__item__name">
 						<label>
 							{{ form_widget(categoryForm, { inTree: true, attr: { class: 'js-category-tree-form-item-checkbox' } }) }}
@@ -515,7 +515,7 @@
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-line__error'))}) %}
 	{% spaceless %}
-		<div class="form-error {{ errors|length > 0 ? '' : ' h-display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
+		<div class="form-error {{ errors|length > 0 ? '' : ' display-none' }}  js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ errors_attr.class }}">
 			<span class="svg svg-circle-remove js-validation-error-toggle"></span>
 			<div class="in-message in-message--error js-validation-error {{ form.parent is not empty ? ' in-message--pin' : '' }}">
 				<ul class="in-message__list">
@@ -772,7 +772,7 @@
 		<span class="form-line__item form-line__item--text">{{ symbolAfterInput }}</span>
 	{% endif %}
 	{% if icon is defined %}
-		<i class="svg svg-{{ icon.type|default('info') }} in-icon h-cursor-help form-line__item form-line__item--text js-tooltip"
+		<i class="svg svg-{{ icon.type|default('info') }} in-icon cursor-help form-line__item form-line__item--text js-tooltip"
 			data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
 			title="{{ icon.title }}"
 		 ></i>

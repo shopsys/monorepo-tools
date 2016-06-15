@@ -5,25 +5,7 @@
 @font-size-special-lenght: length(@font-size-special);
 @font-size-unit: 'px';
 
-.font-size (@i, @step, @max, @postfix: ~'') when (@i <= @max) {
-	&-@{i}@{postfix} {
-		font-size: ~'@{i}@{font-size-unit}';
-	}
-
-	.font-size(@i + @step, @step, @max, @postfix);
-}
-
-.font-size-spec (@i, @postfix: ~'') when (@i > 0) {
-	@size: extract(@font-size-special, @i);
-
-	&-@{size}@{postfix} {
-		font-size: ~'@{size}@{font-size-unit}';
-	}
-
-	.font-size-spec(@i - 1, @postfix);
-}
-
-.h-font-size {
-	.font-size(@font-size-minimum, @font-size-stepper, @font-size-maximum);
-	.font-size-spec(@font-size-special-lenght);
+.font-size {
+	.font-size-generator(@font-size-minimum, @font-size-stepper, @font-size-maximum);
+	.font-size-special-generator(@font-size-special-lenght);
 }

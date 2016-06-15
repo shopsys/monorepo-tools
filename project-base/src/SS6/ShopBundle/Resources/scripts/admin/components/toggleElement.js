@@ -13,7 +13,7 @@
 		$container.trigger('showContent.toogleElement');
 
 		$content.slideDown('fast', function() {
-			$content.removeClass('h-display-none');
+			$content.removeClass('display-none');
 		});
 	};
 
@@ -23,14 +23,14 @@
 		$container.trigger('hideContent.toogleElement');
 
 		$content.slideUp('fast', function() {
-			$content.addClass('h-display-none');
+			$content.addClass('display-none');
 		});
 	};
 
 	SS6.toggleElement.toggle = function () {
 		var $container = $(this).closest('.js-toggle-container');
 		var $content = $container.find('.js-toggle-content');
-		if ($content.hasClass('h-display-none')) {
+		if ($content.hasClass('display-none')) {
 			SS6.toggleElement.show($container);
 		} else {
 			SS6.toggleElement.hide($container);
