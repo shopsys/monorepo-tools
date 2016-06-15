@@ -1,29 +1,11 @@
-.display(@postfix: ~'') {
-	&-block@{postfix} {
-		display: block;
-	}
-
-	&-inline@{postfix} {
-		display: inline;
-	}
-
-	&-inline-block@{postfix} {
-		display: inline-block;
-	}
-
-	&-none@{postfix} {
-		display: none;
-	}
-}
-
-.h-display {
-	.display();
+.display {
+	.display-generator();
 
 	@media @query-tablet {
-		.display(extract(@postfixes, 1));
+		.display-generator(extract(@postfixes, 1));
 	}
 
 	@media @query-mobile {
-		.display(extract(@postfixes, 2));
+		.display-generator(extract(@postfixes, 2));
 	}
 }

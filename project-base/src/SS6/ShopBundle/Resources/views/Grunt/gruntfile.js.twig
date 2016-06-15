@@ -266,7 +266,9 @@ module.exports = function(grunt) {
 						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/**/*.less',
 						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
 						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
-						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
 					],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'frontendLess{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
@@ -277,7 +279,9 @@ module.exports = function(grunt) {
 					files: [
 						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers.less',
 						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/*.less',
-						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less'
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/helpers/helpers-generated.less',
+						'{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/*.less',
+						'!{{ (rootStylesDirectory ~ '/front/' ~ domain.stylesDirectory)|raw }}/core/mixin/base.less'
 					],
 					tasks: {%- if domain.id == 1 -%}[{% for domain in domains %}'less:helpers{{ domain.id }}'{% if not loop.last %},{% endif %}{% endfor %}]
 					{% else -%}
