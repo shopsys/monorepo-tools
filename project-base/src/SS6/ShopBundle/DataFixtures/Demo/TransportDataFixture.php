@@ -75,7 +75,6 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	}
 
 	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 * @param string $referenceName
 	 * @param \SS6\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 */
