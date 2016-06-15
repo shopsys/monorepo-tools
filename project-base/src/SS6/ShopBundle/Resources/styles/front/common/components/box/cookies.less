@@ -16,11 +16,10 @@
 
 	background: @box-cookies-background;
 	text-align: center;
-	transform: translate3d(0,0,0);
 	transition: @transition transform;
 
 	&--closing {
-		transform: rotateX(90deg);
+		transform: scaleY(0);
 	}
 
 	&__in {
