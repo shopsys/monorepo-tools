@@ -365,6 +365,11 @@ services:
     tags:
       - { name: validator.constraint_validator, alias: SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
 
+  ss6.shop.cookies.cookies_facade:
+    class: SS6\ShopBundle\Model\Cookies\CookiesFacade
+    arguments:
+      - %kernel.environment%
+
   ss6.shop.customer.customer_identifier:
     class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
     factory_service: ss6.shop.customer.customer_identifier_factory

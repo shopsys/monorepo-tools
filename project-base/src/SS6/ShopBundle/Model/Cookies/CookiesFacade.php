@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Cookies;
 
+use SS6\Environment;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Article\Article;
@@ -11,6 +12,11 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class CookiesFacade {
 
 	const EU_COOKIES_COOKIE_CONSENT_NAME = 'eu-cookies';
+
+	/**
+	 * @var string
+	 */
+	private $environment;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
@@ -32,12 +38,21 @@ class CookiesFacade {
 	 */
 	private $requestStack;
 
+	/**
+	 * @param string $environment
+	 * @param \SS6\ShopBundle\Model\Article\ArticleEditFacade $articleEditFacade
+	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+	 */
 	public function __construct(
+		$environment,
 		ArticleEditFacade $articleEditFacade,
 		Setting $setting,
 		Domain $domain,
 		RequestStack $requestStack
 	) {
+		$this->environment = $environment;
 		$this->articleEditFacade = $articleEditFacade;
 		$this->setting = $setting;
 		$this->domain = $domain;
@@ -94,6 +109,10 @@ class CookiesFacade {
 	 * @return bool
 	 */
 	public function isCookiesConsentGiven() {
+		// Cookie fixed bar overlays some elements in viewport and mouseover fails on these elements in acceptance tests.
+		if ($this->environment === Environment::ENVIRONMENT_TEST) {
+			return true;
+		}
 		$masterRequest = $this->requestStack->getMasterRequest();
 
 		return $masterRequest->cookies->has(self::EU_COOKIES_COOKIE_CONSENT_NAME);
