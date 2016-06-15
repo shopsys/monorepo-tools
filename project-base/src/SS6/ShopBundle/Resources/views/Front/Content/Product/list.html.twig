@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-	- {{ 'Katalog zboží - '~category.name|trans }}
+	{{ parent() }} - {{ 'Katalog zboží - '~category.name|trans }}
 {% endblock %}
 
 {% block main_content %}

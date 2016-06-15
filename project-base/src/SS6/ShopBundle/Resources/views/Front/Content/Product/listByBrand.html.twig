@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-	- {{ 'Katalog zboží - %brandName%'|trans({'%brandName%' : brand.name}) }}
+	{{ parent() }} - {{ 'Katalog zboží - %brandName%'|trans({'%brandName%' : brand.name}) }}
 {% endblock %}
 
 {% block main_content %}
