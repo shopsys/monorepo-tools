@@ -8,13 +8,6 @@
 	- {{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}
 {% endblock %}
 
-{% block javascripts %}
-	{{ parent() }}
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery.ui.theme.css') }}" />
-	<script type="text/javascript" src="{{ asset('bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js') }}"></script>
-{% endblock %}
-
 {% block meta_robots %}
 	{{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
