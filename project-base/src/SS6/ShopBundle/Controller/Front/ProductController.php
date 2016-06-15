@@ -195,7 +195,7 @@ class ProductController extends FrontBaseController {
 		if (!$this->isRequestPageValid($requestPage)) {
 			$parameters = $this->requestExtension->getAllRequestParams();
 			unset($parameters[self::PAGE_QUERY_PARAMETER]);
-			return $this->redirectToRoute('front_product_list', $parameters);
+			return $this->redirectToRoute('front_brand_detail', $parameters);
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
