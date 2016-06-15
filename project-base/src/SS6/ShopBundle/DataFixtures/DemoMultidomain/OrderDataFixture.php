@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
@@ -10,7 +11,8 @@ use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
@@ -21,7 +23,7 @@ use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
-class OrderDataFixture extends AbstractReferenceFixture {
+class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -33,7 +35,7 @@ class OrderDataFixture extends AbstractReferenceFixture {
 		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
 		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
 		$orderData->firstName = 'Václav';
@@ -56,7 +58,7 @@ class OrderDataFixture extends AbstractReferenceFixture {
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
 		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		$orderData->firstName = 'Jan';
@@ -92,7 +94,7 @@ class OrderDataFixture extends AbstractReferenceFixture {
 
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_CZECH_POST);
+		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
 		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		$orderData->firstName = 'Jindřich';
@@ -116,7 +118,7 @@ class OrderDataFixture extends AbstractReferenceFixture {
 		);
 
 		$orderData = new OrderData();
-		$orderData->transport = $this->getReference(TransportDataFixture::TRANSPORT_PERSONAL);
+		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
 		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_CANCELED);
 		$orderData->firstName = 'Viktor';
@@ -173,6 +175,15 @@ class OrderDataFixture extends AbstractReferenceFixture {
 
 		$referenceName = DemoOrderDataFixture::ORDER_PREFIX . $order->getId();
 		$this->addReference($referenceName, $order);
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getDependencies() {
+		return [
+			TransportDataFixture::class,
+		];
 	}
 
 }
