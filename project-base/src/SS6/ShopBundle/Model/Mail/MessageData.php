@@ -50,6 +50,11 @@ class MessageData {
 	public $attachmentsFilepaths;
 
 	/**
+	 * @var string|null
+	 */
+	public $replyTo;
+
+	/**
 	 * @param string $toEmail
 	 * @param string|null $bccEmail
 	 * @param string $body
@@ -59,6 +64,7 @@ class MessageData {
 	 * @param string[] $variablesReplacementsForBody
 	 * @param string[] $variablesReplacementsForSubject
 	 * @param string[] $attachmentsFilepaths
+	 * @param string|null $replyTo
 	 */
 	public function __construct(
 		$toEmail,
@@ -69,7 +75,8 @@ class MessageData {
 		$fromName,
 		array $variablesReplacementsForBody = [],
 		array $variablesReplacementsForSubject = [],
-		array $attachmentsFilepaths = []
+		array $attachmentsFilepaths = [],
+		$replyTo = null
 	) {
 		$this->toEmail = $toEmail;
 		$this->bccEmail = $bccEmail;
@@ -84,6 +91,7 @@ class MessageData {
 			$this->variablesReplacementsForSubject = $variablesReplacementsForBody;
 		}
 		$this->attachmentsFilepaths = $attachmentsFilepaths;
+		$this->replyTo = $replyTo;
 	}
 
 }

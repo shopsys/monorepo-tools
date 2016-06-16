@@ -55,6 +55,9 @@ class MailerService {
 		if ($messageData->bccEmail !== null) {
 			$message->addBcc($messageData->bccEmail);
 		}
+		if ($messageData->replyTo !== null) {
+			$message->addReplyTo($messageData->replyTo);
+		}
 		$message->setContentType('text/plain; charset=UTF-8');
 		$message->setBody(strip_tags($body), 'text/plain');
 		$message->addPart($body, 'text/html');
