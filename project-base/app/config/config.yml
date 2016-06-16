@@ -138,7 +138,6 @@ twig:
   form:
     resources:
       - '@SS6Shop/Common/Form/theme.html.twig'
-      - '@SS6Shop/Admin/Form/datepickerFields.html.twig'
       - '@SS6Shop/Admin/Form/colorpickerFields.html.twig'
       - '@SS6Shop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true

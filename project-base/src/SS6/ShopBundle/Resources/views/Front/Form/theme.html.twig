@@ -255,3 +255,10 @@
 {% block honey_pot_row %}
 	{{ form_row(form, {rowClass: 'js-honey ' ~ rowClass|default('')}) }}
 {% endblock honey_pot_row %}
+
+{% block date_picker_widget %}
+	{% spaceless %}
+		{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker')|trim)}) %}
+		{{- block('form_widget') -}}
+	{% endspaceless %}
+{% endblock date_picker_widget %}
