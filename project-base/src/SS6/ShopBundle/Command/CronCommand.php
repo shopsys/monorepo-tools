@@ -33,11 +33,11 @@ class CronCommand extends ContainerAwareCommand {
 		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
 
 		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
-		$mutex = $mutexFactory->getCronMutex();
 		if ($moduleArgument === null) {
 			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
 		}
 
+		$mutex = $mutexFactory->getCronMutex();
 		if ($mutex->acquireLock(0)) {
 			if ($moduleArgument === null) {
 				$cronFacade->runScheduledModules();
