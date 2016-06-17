@@ -21,6 +21,9 @@
 			<h2>{{ 'Články v patičce'|trans }}</h2>
 			{{ gridViewFooter.render() }}
 
+			<h2>{{ 'Články bez umístění'|trans }}</h2>
+			{{ gridViewNone.render() }}
+
 			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 				{% block fixed_bar_content %}
 					<button class="js-multiple-grids-save-all-button btn btn--disabled" data-drag-and-drop-url-save-ordering="{{ url('admin_article_saveordering') }}" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
