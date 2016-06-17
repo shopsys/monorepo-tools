@@ -39,7 +39,7 @@ class RouterExtension extends Twig_Extension {
 	 * @param bool $absolute
 	 * @return string|null
 	 */
-	public function findUrlByDomainId($route, $routeParams, $domainId, $absolute = true) {
+	public function findUrlByDomainId($route, array $routeParams, $domainId, $absolute = true) {
 		$domainRouter = $this->domainRouterFactory->getRouter($domainId);
 
 		try {
