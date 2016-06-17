@@ -33,28 +33,29 @@ class CronCommand extends ContainerAwareCommand {
 		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
 
 		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
-		$mutex = $mutexFactory->getCronMutex();
 		if ($moduleArgument === null) {
-			$cronFacade->scheduleModulesByTime($this->getActualRoundedTime());
+			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
 		}
 
+		$mutex = $mutexFactory->getCronMutex();
 		if ($mutex->acquireLock(0)) {
 			if ($moduleArgument === null) {
 				$cronFacade->runScheduledModules();
 			} else {
-				$cronFacade->runModuleByModuleId($input->getOption(self::ARGUMENT_MODULE));
+				$cronFacade->runModuleByModuleId($moduleArgument);
 			}
 			$mutex->releaseLock();
 		} else {
-			throw new \SS6\ShopBundle\Command\Exception\CronCommandException('Cron can run only one at this time');
+			throw new \SS6\ShopBundle\Command\Exception\CronCommandException(
+				'Cron is locked. Another cron module is already running.'
+			);
 		}
-
 	}
 
 	/**
 	 * @return \DateTimeImmutable
 	 */
-	private function getActualRoundedTime() {
+	private function getCurrentRoundedTime() {
 		$time = new DateTime(null);
 		$time->modify('-' . $time->format('s') . ' sec');
 		$time->modify('-' . ($time->format('i') % 5) . ' min');
