@@ -48,7 +48,6 @@ class CronCommand extends ContainerAwareCommand {
 		} else {
 			throw new \SS6\ShopBundle\Command\Exception\CronCommandException('Cron can run only one at this time');
 		}
-
 	}
 
 	/**
