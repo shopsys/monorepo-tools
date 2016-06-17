@@ -46,7 +46,9 @@ class CronCommand extends ContainerAwareCommand {
 			}
 			$mutex->releaseLock();
 		} else {
-			throw new \SS6\ShopBundle\Command\Exception\CronCommandException('Cron can run only one at this time');
+			throw new \SS6\ShopBundle\Command\Exception\CronCommandException(
+				'Cron is locked. Another cron module is already running.'
+			);
 		}
 	}
 
