@@ -42,7 +42,7 @@ class CronCommand extends ContainerAwareCommand {
 			if ($moduleArgument === null) {
 				$cronFacade->runScheduledModules();
 			} else {
-				$cronFacade->runModuleByModuleId($input->getOption(self::ARGUMENT_MODULE));
+				$cronFacade->runModuleByModuleId($moduleArgument);
 			}
 			$mutex->releaseLock();
 		} else {
