@@ -35,7 +35,7 @@ class CronCommand extends ContainerAwareCommand {
 		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
 		$mutex = $mutexFactory->getCronMutex();
 		if ($moduleArgument === null) {
-			$cronFacade->scheduleModulesByTime($this->getActualRoundedTime());
+			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
 		}
 
 		if ($mutex->acquireLock(0)) {
@@ -54,7 +54,7 @@ class CronCommand extends ContainerAwareCommand {
 	/**
 	 * @return \DateTimeImmutable
 	 */
-	private function getActualRoundedTime() {
+	private function getCurrentRoundedTime() {
 		$time = new DateTime(null);
 		$time->modify('-' . $time->format('s') . ' sec');
 		$time->modify('-' . ($time->format('i') % 5) . ' min');
