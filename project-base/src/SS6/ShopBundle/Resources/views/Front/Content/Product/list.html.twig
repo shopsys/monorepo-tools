@@ -11,6 +11,13 @@
 	{{ parent() }} - {{ 'Katalog zboží - '~category.name|trans }}
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery.ui.theme.css') }}" />
+	<script type="text/javascript" src="{{ asset('bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js') }}"></script>
+{% endblock %}
+
 {% block main_content %}
 	<div class="box-list">
 		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
@@ -49,7 +56,8 @@
 						url('front_product_list', { id: category.id }),
 						null,
 						'product_list',
-						productFilterCountData
+						productFilterCountData,
+						priceRange
 					) }}
 				</div>
 			{% endif %}

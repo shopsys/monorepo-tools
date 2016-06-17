@@ -1,4 +1,4 @@
-{% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page, productFilterCountData) %}
+{% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page, productFilterCountData, priceRange) %}
 	{{ form_start(filterForm, { action: actionUrl }) }}
 		{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
 
@@ -15,6 +15,13 @@
 		<div class="box-filter__price">
 			{{ form_row(filterForm.minimalPrice, {label: 'Cena od'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
 			{{ form_row(filterForm.maximalPrice, {label: 'Cena do'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id) }) }}
+			<div
+				class="js-range-slider"
+				data-minimum-input-id="{{ filterForm.minimalPrice.vars.id }}"
+				data-minimal-value="{{ priceRange.minimalPrice }}"
+				data-maximum-input-id="{{ filterForm.maximalPrice.vars.id }}"
+				data-maximal-value="{{ priceRange.maximalPrice }}"
+			></div>
 		</div>
 
 		<div class="box-filter__choice">

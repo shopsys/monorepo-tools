@@ -173,6 +173,7 @@ class ProductController extends FrontBaseController {
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'visibleChildren' => $this->categoryFacade->getAllVisibleChildrenByCategoryAndDomainId($category, $this->domain->getId()),
+			'priceRange' => $productFilterFormType->getPriceRange(),
 		];
 
 		if ($request->isXmlHttpRequest()) {
@@ -264,6 +265,7 @@ class ProductController extends FrontBaseController {
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'searchText' => $searchText,
 			'SEARCH_TEXT_PARAMETER' => self::SEARCH_TEXT_PARAMETER,
+			'priceRange' => $productFilterFormType->getPriceRange(),
 		];
 
 		if ($request->isXmlHttpRequest()) {

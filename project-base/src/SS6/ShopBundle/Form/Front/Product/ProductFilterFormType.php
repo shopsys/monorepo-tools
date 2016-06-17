@@ -148,4 +148,11 @@ class ProductFilterFormType extends AbstractType {
 		return $this->flagFilterChoices;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Product\Filter\PriceRange
+	 */
+	public function getPriceRange() {
+		return $this->priceRange;
+	}
+
 }

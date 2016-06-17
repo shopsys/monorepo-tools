@@ -14,4 +14,8 @@
 		}
 	};
 
+	SS6.number.formatDecimalNumber = function (value, scale) {
+		return value.toFixed(scale).replace('.', ',');
+	};
+
 })();

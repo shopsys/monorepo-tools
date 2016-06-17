@@ -65,18 +65,13 @@ class PriceRangeRepository {
 	private function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup) {
 		$queryBuilder = clone $productsQueryBuilder;
 
-		$this->queryBuilderService->addOrExtendJoin(
-			$queryBuilder,
-			ProductCalculatedPrice::class,
-			'pcp',
-			'pcp.product = p AND pcp.pricingGroup = :pricingGroup'
-		);
-
-		$queryBuilder
-			->select('MIN(pcp.priceWithVat) AS minimalPrice, MAX(pcp.priceWithVat) AS maximalPrice')
+		$this->queryBuilderService
+			->addOrExtendJoin($queryBuilder, ProductCalculatedPrice::class, 'pcp', 'pcp.product = p')
+			->andWhere('pcp.pricingGroup = :pricingGroup')
 			->setParameter('pricingGroup', $pricingGroup)
 			->resetDQLPart('groupBy')
-			->resetDQLPart('orderBy');
+			->resetDQLPart('orderBy')
+			->select('MIN(pcp.priceWithVat) AS minimalPrice, MAX(pcp.priceWithVat) AS maximalPrice');
 
 		$priceRangeData = $queryBuilder->getQuery()->execute();
 		$priceRangeDataRow = reset($priceRangeData);
