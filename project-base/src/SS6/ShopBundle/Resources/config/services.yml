@@ -161,6 +161,11 @@ services:
       - %ss6.domain_config_filepath%
       - %ss6.domain_urls_config_filepath%
 
+  ss6.shop.component.domain.domain_aware_https_response_headers_setter:
+    class: SS6\ShopBundle\Component\Domain\DomainAwareHttpsResponseHeadersSetter
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+
   ss6.shop.component.domain.domain_facade:
     class: SS6\ShopBundle\Component\Domain\DomainFacade
     arguments:

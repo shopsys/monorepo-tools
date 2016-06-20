@@ -95,4 +95,11 @@ class DomainConfig {
 		return $this->stylesDirectory;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isHttps() {
+		return strpos($this->url, 'https://') === 0;
+	}
+
 }
