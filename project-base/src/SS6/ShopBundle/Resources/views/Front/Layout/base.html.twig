@@ -10,6 +10,7 @@
 		{% block meta_robots %}{% endblock %}
 
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/styles/index' ~ getDomain().id ~ '_' ~ getCssVersion() ~ '.css') }}" media="screen, projection">
+		<link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerjqueryui/css/smoothness/jquery-ui.css') }}" />
 		<!--[if lte IE 8 ]>
 			<link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend/styles/index' ~ getDomain().id ~ '_' ~ getCssVersion() ~ '-ie8.css') }}" media="screen, projection">
 		<![endif]-->
@@ -18,6 +19,7 @@
 		{{ importJavascripts([
 			'bundles/bmatznerjquery/js/jquery.min.js',
 			'frontend/plugins/jquery.migrate.js',
+			'bundles/bmatznerjqueryui/js/minified/jquery-ui.min.js',
 			'frontend/components/escape.js',
 			'frontend/components/keyCodes.js',
 			'bundles/fpjsformvalidator/js/fp_js_validator.js',

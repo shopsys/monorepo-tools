@@ -1,4 +1,4 @@
-(function ($) {
+(function () {
 
 	SS6 = SS6 || {};
 	SS6.number = SS6.number || {};
@@ -12,6 +12,10 @@
 		} else {
 			return null;
 		}
-	}
+	};
 
-})(jQuery);
+	SS6.number.formatDecimalNumber = function (value, scale) {
+		return value.toFixed(scale).replace('.', ',');
+	};
+
+})();

@@ -131,9 +131,7 @@ class ProductController extends FrontBaseController {
 
 		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
 		if (!$this->isRequestPageValid($requestPage)) {
-			$parameters = $this->requestExtension->getAllRequestParams();
-			unset($parameters[self::PAGE_QUERY_PARAMETER]);
-			return $this->redirectToRoute('front_product_list', $parameters);
+			return $this->redirectToRoute('front_product_list', $this->getRequestParametersWithoutPage());
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
@@ -175,6 +173,7 @@ class ProductController extends FrontBaseController {
 			'filterForm' => $filterForm->createView(),
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'visibleChildren' => $this->categoryFacade->getAllVisibleChildrenByCategoryAndDomainId($category, $this->domain->getId()),
+			'priceRange' => $productFilterFormType->getPriceRange(),
 		];
 
 		if ($request->isXmlHttpRequest()) {
@@ -193,9 +192,7 @@ class ProductController extends FrontBaseController {
 	public function listByBrandAction(Request $request, $brandId) {
 		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
 		if (!$this->isRequestPageValid($requestPage)) {
-			$parameters = $this->requestExtension->getAllRequestParams();
-			unset($parameters[self::PAGE_QUERY_PARAMETER]);
-			return $this->redirectToRoute('front_brand_detail', $parameters);
+			return $this->redirectToRoute('front_brand_detail', $this->getRequestParametersWithoutPage());
 		}
 		$page = $requestPage === null ? 1 : (int)$requestPage;
 
@@ -268,6 +265,7 @@ class ProductController extends FrontBaseController {
 			'filterFormSubmited' => $filterForm->isSubmitted(),
 			'searchText' => $searchText,
 			'SEARCH_TEXT_PARAMETER' => self::SEARCH_TEXT_PARAMETER,
+			'priceRange' => $productFilterFormType->getPriceRange(),
 		];
 
 		if ($request->isXmlHttpRequest()) {
@@ -362,6 +360,15 @@ class ProductController extends FrontBaseController {
 	 */
 	private function isRequestPageValid($page) {
 		return $page === null || (preg_match('@^([2-9]|[1-9][0-9]+)$@', $page));
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getRequestParametersWithoutPage() {
+		$parameters = $this->requestExtension->getAllRequestParams();
+		unset($parameters[self::PAGE_QUERY_PARAMETER]);
+		return $parameters;
 	}
 
 }
