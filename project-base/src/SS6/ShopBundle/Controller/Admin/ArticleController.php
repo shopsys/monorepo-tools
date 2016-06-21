@@ -138,11 +138,13 @@ class ArticleController extends AdminBaseController {
 	public function listAction() {
 		$gridTop = $this->getGrid(ArticlePlacementList::PLACEMENT_TOP_MENU);
 		$gridFooter = $this->getGrid(ArticlePlacementList::PLACEMENT_FOOTER);
+		$gridNone = $this->getGrid(ArticlePlacementList::PLACEMENT_NONE);
 		$articlesCountOnSelectedDomain = $this->articleEditFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
 
 		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
 			'gridViewTop' => $gridTop->createView(),
 			'gridViewFooter' => $gridFooter->createView(),
+			'gridViewNone' => $gridNone->createView(),
 			'articlesCountOnSelectedDomain' => $articlesCountOnSelectedDomain,
 		]);
 	}

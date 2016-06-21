@@ -8,6 +8,7 @@ class ArticlePlacementList extends AbstractTranslatedConstantList {
 
 	const PLACEMENT_TOP_MENU = 'topMenu';
 	const PLACEMENT_FOOTER = 'footer';
+	const PLACEMENT_NONE = 'none';
 
 	/**
 	 * @inheritdoc
@@ -16,6 +17,7 @@ class ArticlePlacementList extends AbstractTranslatedConstantList {
 		return [
 			self::PLACEMENT_TOP_MENU => t('v horním menu'),
 			self::PLACEMENT_FOOTER => t('v patičce'),
+			self::PLACEMENT_NONE => t('bez umístění'),
 		];
 	}
 
