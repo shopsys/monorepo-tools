@@ -69,6 +69,13 @@ class Domain {
 	}
 
 	/**
+	 * @return bool
+	 */
+	public function isHttps() {
+		return $this->getCurrentDomainConfig()->isHttps();
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAll() {
