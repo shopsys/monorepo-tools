@@ -54,7 +54,7 @@
 					{{ 'Zaokrouhlení'|trans }}:
 				</td>
 				<td class="table-cart-preview__cell table-cart-preview__cell--price">
-					{{ orderPreview.roundingPrice|price }}
+					{{ orderPreview.roundingPrice.priceWithVat|price }}
 				</td>
 			</tr>
 		{% endif %}
