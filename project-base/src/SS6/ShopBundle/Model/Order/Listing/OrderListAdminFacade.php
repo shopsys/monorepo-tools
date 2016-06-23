@@ -5,12 +5,12 @@ namespace SS6\ShopBundle\Model\Order\Listing;
 class OrderListAdminFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
+	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminRepository
 	 */
 	private $orderListAdminRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
+	 * @param \SS6\ShopBundle\Model\Order\Listing\OrderListAdminRepository $productListAdminRepository
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
 	 */
 	public function __construct(
