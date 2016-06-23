@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\Domain;
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class DomainAwareHttpsResponseHeadersSetter {
+class DomainAwareSecurityHeadersSetter {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
