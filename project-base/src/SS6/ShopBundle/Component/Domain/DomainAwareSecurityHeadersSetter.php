@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\Domain;
 use SS6\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class DomainAwareHttpsResponseHeadersSetter {
+class DomainAwareSecurityHeadersSetter {
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -25,8 +25,15 @@ class DomainAwareHttpsResponseHeadersSetter {
 		}
 
 		if ($this->domain->isHttps()) {
-			// do not allow to download content from non-HTTPS URLs
-			$event->getResponse()->headers->set('Content-Security-Policy', 'default-src https:');
+			// Do not allow to external content from non-HTTPS URLs.
+			// Other security features stays as if CSP was not used:
+			// - allow inline JavaScript and CSS
+			// - allow eval() function in JavaScript
+			// - allow data URLs
+			$event->getResponse()->headers->set(
+				'Content-Security-Policy',
+				"default-src https: 'unsafe-inline' 'unsafe-eval' data:"
+			);
 		}
 	}
 
