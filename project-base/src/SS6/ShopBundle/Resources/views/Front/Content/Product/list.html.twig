@@ -8,13 +8,13 @@
 {% endblock %}
 
 {% block title %}
-	{{ parent() }} - {{ 'Katalog zboží - '~category.name|trans }}
+	{{ parent() }} - {{ 'Katalog zboží -  %categoryName%'|trans({ '%categoryName%' : category.name }) }}
 {% endblock %}
 
 {% block main_content %}
 	<div class="box-list">
 		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
-		<h1>{{ category.name|trans }}</h1>
+		<h1>{{ category.name }}</h1>
 
 		{% if visibleChildren|length > 0 %}
 			<h2>{{ 'Seznam podkategorií'|trans }}</h2>
