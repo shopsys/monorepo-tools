@@ -1,4 +1,4 @@
-{{ form_start(form) }}
+{{ form_start(form, { attr: { 'data-on-submit': 'ajaxSumbit' }}) }}
 	{{ form_errors(form) }}
 	{{ 'Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje.'|trans }}
 	{{ form_widget(form.email, { attr: {placeholder: '-- vyplňte e-mail'|trans }}) }}
