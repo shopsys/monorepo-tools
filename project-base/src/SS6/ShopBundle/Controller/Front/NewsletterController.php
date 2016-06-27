@@ -4,9 +4,19 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
+use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class NewsletterController extends FrontBaseController {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterFacade
+	 */
+	private $newsletterFacade;
+
+	public function __construct(NewsletterFacade $newsletterFacade) {
+		$this->newsletterFacade = $newsletterFacade;
+	}
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
@@ -17,6 +27,7 @@ class NewsletterController extends FrontBaseController {
 
 		if ($form->isValid()) {
 			$email = $form->getData()['email'];
+			$this->newsletterFacade->addSubscribedEmail($email);
 
 			return $this->render('@SS6Shop/Front/Inline/Newsletter/send.html.twig');
 		}
