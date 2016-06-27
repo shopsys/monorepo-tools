@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+	{{ form_errors(form) }}
+	{{ 'Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje.'|trans }}
+	{{ form_widget(form.email, { attr: {placeholder: '-- vyplňte e-mail'|trans }}) }}
+	{{ form_errors(form.email) }}
+	{{ form_widget(form.send, { label: 'Přihlásit se k odběru'|trans }) }}
+{{ form_end(form) }}
+{{ init_js_validation(form, false) }}
