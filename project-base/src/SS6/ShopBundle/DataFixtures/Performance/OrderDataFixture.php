@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
+use SS6\ShopBundle\Component\Console\ProgressBar;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
@@ -21,6 +22,7 @@ use SS6\ShopBundle\Model\Order\OrderFacade;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture {
 
@@ -101,21 +103,35 @@ class OrderDataFixture {
 		$this->customerFacade = $customerFacade;
 	}
 
-	public function load() {
+	/**
+	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 */
+	public function load(OutputInterface $output) {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
 		$this->loadPerformanceProductIds();
 		$this->loadPerformanceUserIdsOnFirstDomain();
 
+		$progressBar = new ProgressBar($output, self::ORDERS_COUNT);
+		$progressBar->setFormat(
+			'%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% orders/s (%step_duration:.3f% s/ord.),'
+			. ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
+		);
+		$progressBar->setRedrawFrequency(10);
+		$progressBar->start();
+
 		for ($orderIndex = 0; $orderIndex < self::ORDERS_COUNT; $orderIndex++) {
 			$this->createOrder();
 
+			$progressBar->advance();
+
 			if ($orderIndex % self::BATCH_SIZE === 0) {
-				$this->printProgress($orderIndex);
 				$this->em->clear();
 			}
 		}
+
+		$progressBar->finish();
 
 		$this->sqlLoggerFacade->reenableLogging();
 	}
@@ -301,13 +317,6 @@ class OrderDataFixture {
 		]);
 
 		return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
-	}
-
-	/**
-	 * @param $orderIndex
-	 */
-	private function printProgress($orderIndex) {
-		echo sprintf("%d/%d\r", $orderIndex, self::ORDERS_COUNT);
 	}
 
 }
