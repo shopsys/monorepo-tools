@@ -28,11 +28,6 @@
 			<div class="web__container">
 				{% block content %}{% endblock %}
 			</div>
-			<div class="web__line web__line">
-				<div class="web__container web__container--newsletter padding-top-5 padding-bottom-5">
-					{{ render(controller('SS6ShopBundle:Front/Newsletter:subscription')) }}
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="web__footer{% if not isCookiesConsentGiven() %} web__footer--with-cookies js-eu-cookies-consent-footer-gap{% endif %}">

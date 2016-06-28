@@ -23,7 +23,7 @@
 	var onSuccess = function (data) {
 		$(subscriptionFormSelector).replaceWith(data);
 
-		// must select again from modified DOM, because replaceWith() do not change previous jQuery collection
+		// We must select again from modified DOM, because replaceWith() does not change previous jQuery collection.
 		var $newContent = $(subscriptionFormSelector);
 		SS6.register.registerNewContent($newContent);
 	};

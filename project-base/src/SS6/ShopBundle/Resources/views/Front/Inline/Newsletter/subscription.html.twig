@@ -1,8 +1,18 @@
 {{ form_start(form, { attr: { 'data-on-submit': 'ajaxSumbit' }}) }}
-	{{ form_errors(form) }}
-	{{ 'Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje.'|trans }}
-	{{ form_widget(form.email, { attr: {placeholder: '-- vyplňte e-mail'|trans }}) }}
-	{{ form_errors(form.email) }}
-	{{ form_widget(form.send, { label: 'Přihlásit se k odběru'|trans }) }}
+	<div class="footer__newsletter">
+		<div class="footer__newsletter__text">
+			<p>
+				{{ 'Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje.'|trans }}
+			</p>
+			{{ form_errors(form) }}
+		</div>
+		<div class="footer__newsletter__form">
+			<div class="footer__newsletter__form__in">
+				{{ form_widget(form.email, { attr: {placeholder: 'Zadejte e-mail'|trans, class: 'footer__newsletter__input'} }) }}
+				{{ form_errors(form.email) }}
+			</div>
+			{{ form_widget(form.send, { label: 'Přihlásit'|trans, attr: { class: "footer__newsletter__form__btn" }}) }}
+		</div>
+	</div>
 {{ form_end(form) }}
 {{ init_js_validation(form, false) }}
