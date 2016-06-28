@@ -34,5 +34,8 @@ modules:
       port: 4444
       url: ~
       browser: firefox
+      capabilities:
+        # accept untrusted (eg. self-signed) HTTPS certificates
+        acceptSslCerts: true
       window_size: 1024x786
       wait: 1
