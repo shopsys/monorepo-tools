@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
+use SS6\ShopBundle\Component\Console\ProgressBar;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
@@ -17,6 +18,7 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductVariantFacade;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class ProductDataFixture {
 
@@ -128,12 +130,23 @@ class ProductDataFixture {
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 	}
 
-	public function load() {
+	/**
+	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 */
+	public function load(OutputInterface $output) {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
 		$productsEditData = $this->cleanAndWarmUp($this->em);
 		$variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum();
+
+		$progressBar = new ProgressBar($output, self::PRODUCTS);
+		$progressBar->setFormat(
+			'%current%/%max% [%bar%] %percent:3s%%,%speed:6.1f% prod./s (%step_duration:.3f% s/prod.),'
+			. ' Elapsed: %elapsed_hms%, Remaining: %remaining_hms%, MEM:%memory:9s%'
+		);
+		$progressBar->setRedrawFrequency(10);
+		$progressBar->start();
 
 		while ($this->countImported < self::PRODUCTS) {
 			$productEditData = next($productsEditData);
@@ -154,7 +167,6 @@ class ProductDataFixture {
 				$this->productsByCatnum[$product->getCatnum()] = $product;
 			}
 
-			$this->printProgress();
 			if ($this->countImported % self::BATCH_SIZE === 0) {
 				$currentKey = key($productsEditData);
 				$productsEditData = $this->cleanAndWarmUp($this->em);
@@ -162,26 +174,15 @@ class ProductDataFixture {
 			}
 
 			$this->countImported++;
+
+			$progressBar->setProgress($this->countImported);
 		}
 		$this->createVariants($variantCatnumsByMainVariantCatnum);
+
+		$progressBar->finish();
+
 		$this->em->clear();
 		$this->sqlLoggerFacade->reenableLogging();
-	}
-
-	private function printProgress() {
-		$spentMicrotime = microtime(true) - $this->batchStartMicrotime;
-		$batchNumber = ceil($this->countImported / self::BATCH_SIZE);
-		$totalBatches = ceil(self::PRODUCTS / self::BATCH_SIZE);
-		$batchImported = $this->countImported % self::BATCH_SIZE;
-		$batchImported = $batchImported ?: self::BATCH_SIZE;
-		echo sprintf(
-			'Batch %2d / %2d - %3d%% - %4.1f s / %2.3f s' . "\r",
-			$batchNumber,
-			$totalBatches,
-			100 * $this->countImported / self::PRODUCTS,
-			$spentMicrotime,
-			$spentMicrotime / $batchImported
-		);
 	}
 
 	/**
@@ -255,7 +256,6 @@ class ProductDataFixture {
 		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$em->clear();
 		gc_collect_cycles();
-		echo "\nMemory usage: " . round(memory_get_usage() / 1024 / 1024, 1) . "MB\n";
 	}
 
 	/**
