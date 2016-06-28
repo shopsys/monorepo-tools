@@ -1,28 +1,27 @@
-{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
-	<li class="list-domain__item">
-		{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
-		{% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
+<ul class="list-domain">
+	{% for productDomain in productDetail.productDomainsIndexedByDomainId %}
+		<li class="list-domain__item">
+			{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
+			{% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
 
-		<div class="list-domain__item__image">
-			{{ domainIcon(productDomain.domainId) }}
-		</div>
+			<div class="list-domain__item__image">
+				{{ domainIcon(productDomain.domainId) }}
+			</div>
 
-		<div class="list-domain__item__info">
-			{% if productDetail.product.calculatedSellingDenied %}
-				<span class="list-domain__item__info__denied in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
+			<div class="list-domain__item__info">
+				<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisible ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisible ? 'Ano'|trans : 'Ne'|trans }}"></span>
+			</div>
+
+			{% if isVisible %}
+				<a href="{{ url }}" class="list-domain__item__name" target="_blank">
+					{{ getDomainName(productDomain.domainId) }}
+					<i class="svg svg-arrow-simple"></i>
+				</a>
+			{% else %}
+				<span class="list-domain__item__name">
+					{{ getDomainName(productDomain.domainId) }}
+				</span>
 			{% endif %}
-			<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisible ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisible ? 'Ano'|trans : 'Ne'|trans }}"></span>
-		</div>
-
-		{% if isVisible %}
-			<a href="{{ url }}" class="list-domain__item__name" target="_blank">
-				{{ getDomainName(productDomain.domainId) }}
-				<i class="svg svg-arrow-simple"></i>
-			</a>
-		{% else %}
-			<span class="list-domain__item__name">
-				{{ getDomainName(productDomain.domainId) }}
-			</span>
-		{% endif %}
-	</li>
-{% endfor %}
+		</li>
+	{% endfor %}
+</ul>

@@ -14,9 +14,12 @@
 			<div class="panel__in__title">
 				{{ 'Viditelnost'|trans }}
 			</div>
-			<ul class="list-domain">
-				{% include '@SS6Shop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
-			</ul>
+			{% if productDetail.product.calculatedSellingDenied %}
+				<div class="in-message in-message--warning in-message--small in-message--block">
+					{{ 'Zboží je vyřazeno z prodeje.'|trans }}
+				</div>
+			{% endif %}
+			{% include '@SS6Shop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
 		</div>
 	</div>
 {% endblock %}
