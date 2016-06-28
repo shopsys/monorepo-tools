@@ -109,6 +109,8 @@
         - label: 'Editace nejprodávanějšího zboží'
           route: admin_bestsellingproduct_detail
           visible: false
+    - label: 'Emaily zpravodaje'
+      route: admin_newsletter_index
 
 - label: 'Administrátoři'
   route: admin_administrator_list

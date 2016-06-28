@@ -37,4 +37,11 @@ class NewsletterFacade {
 		}
 	}
 
+	/**
+	 * @return \Doctrine\ORM\Internal\Hydration\IterableResult|string[][0]['email']
+	 */
+	public function getAllEmailsDataIterator() {
+		return $this->newsletterRepository->getAllEmailsDataIterator();
+	}
+
 }
