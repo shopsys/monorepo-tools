@@ -1,7 +1,7 @@
 (function ($){
 	$(document).ready(function () {
 
-		var $transportAndPaymentForm = $('#transportAndPayment_form');
+		var $transportAndPaymentForm = $('#transport_and_payment_form');
 		$transportAndPaymentForm.jsFormValidator({
 			callbacks: {
 				validateTransportPaymentRelation: function () {
@@ -16,10 +16,10 @@
 			'groups': function () {
 
 				var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
-				if ($orderPersonalInfoForm.find('#orderPersonalInfo_form_deliveryAddressFilled').is(':checked')) {
+				if ($orderPersonalInfoForm.find('#order_personal_info_form_deliveryAddressFilled').is(':checked')) {
 					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Front\\Customer\\DeliveryAddressFormType::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS'));
 				}
-				if ($orderPersonalInfoForm.find('#orderPersonalInfo_form_companyCustomer').is(':checked')) {
+				if ($orderPersonalInfoForm.find('#order_personal_info_form_companyCustomer').is(':checked')) {
 					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Front\\Customer\\BillingAddressFormType::VALIDATION_GROUP_COMPANY_CUSTOMER'));
 				}
 
