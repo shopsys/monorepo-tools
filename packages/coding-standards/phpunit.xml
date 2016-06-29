@@ -14,7 +14,7 @@
 
 	<testsuites>
 		<testsuite name="Unit">
-			<directory>../src/ShopSys/Tests/Unit</directory>
+			<directory>src/ShopSys/Tests/Unit</directory>
 		</testsuite>
 	</testsuites>
 
