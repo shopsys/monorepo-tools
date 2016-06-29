@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/shopsys/coding-standards.svg?branch=master)](https://travis-ci.org/shopsys/coding-standards)
+
 ## About
 This project provides common coding standards for new ShopSys projects.
 Project includes following tools:
