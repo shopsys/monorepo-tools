@@ -5,7 +5,8 @@
 		$transportAndPaymentForm.jsFormValidator({
 			callbacks: {
 				validateTransportPaymentRelation: function () {
-					// validation combination of transport and payment is in ../../order.js
+					// JS validation is not necessary as it is not possible to select
+					// an invalid combination of transport and payment.
 				}
 			}
 		});
