@@ -25,6 +25,8 @@
 				$searchAutocompleteResults.show();
 			}
 		});
+
+		$(document).click(SS6.search.onDocumentClickHideAutocompleteResults);
 	};
 
 	SS6.search.autocomplete.onInputChange = function(event) {
@@ -38,6 +40,13 @@
 		// (except "paste" event that must be propagated otherwise the value is not pasted)
 		if (event.type !== 'paste') {
 			return false;
+		}
+	};
+
+	SS6.search.onDocumentClickHideAutocompleteResults = function (event) {
+		var $autocompleteElements = $input.add($searchAutocompleteResults);
+		if (resultExists && $(event.target).closest($autocompleteElements).size() === 0) {
+			$searchAutocompleteResults.hide();
 		}
 	};
 
