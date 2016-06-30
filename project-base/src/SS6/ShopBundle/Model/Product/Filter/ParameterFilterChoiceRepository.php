@@ -63,16 +63,15 @@ class ParameterFilterChoiceRepository {
 
 		$rows = $productsQueryBuilder->getQuery()->execute(null, GroupedScalarHydrator::HYDRATION_MODE);
 
-		$visibleParametersIndexedById = $this->getVisibleParametersIndexedById($rows);
-		$parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterId($rows);
-
+		$visibleParametersIndexedById = $this->getVisibleParametersIndexedByIdOrderedByName($rows, $locale);
+		$parameterValuesIndexedByParameterId = $this->getParameterValuesIndexedByParameterIdOrderedByValueText($rows);
 		$parameterFilterChoices = [];
 
-		foreach ($parameterValuesIndexedByParameterId as $parameterId => $values) {
-			if (array_key_exists($parameterId, $visibleParametersIndexedById)) {
+		foreach ($visibleParametersIndexedById as $parameterId => $parameter) {
+			if (array_key_exists($parameterId, $parameterValuesIndexedByParameterId)) {
 				$parameterFilterChoices[] = new ParameterFilterChoice(
-					$visibleParametersIndexedById[$parameterId],
-					$values
+					$parameter,
+					$parameterValuesIndexedByParameterId[$parameterId]
 				);
 			}
 		}
@@ -82,9 +81,10 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param array $rows
+	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
-	private function getVisibleParametersIndexedById(array $rows) {
+	private function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale) {
 		$parameterIds = [];
 		foreach ($rows as $row) {
 			$parameterIds[$row['pp']['id']] = $row['pp']['id'];
@@ -93,10 +93,12 @@ class ParameterFilterChoiceRepository {
 		$parametersQueryBuilder = $this->em->createQueryBuilder()
 			->select('pp, pt')
 			->from(Parameter::class, 'pp')
-			->join('pp.translations', 'pt')
+			->join('pp.translations', 'pt', Join::WITH, 'pt.locale = :locale')
 			->where('pp.id IN (:parameterIds)')
-			->andWhere('pp.visible = true');
+			->andWhere('pp.visible = true')
+			->orderBy('pt.name', 'asc');
 		$parametersQueryBuilder->setParameter('parameterIds', $parameterIds);
+		$parametersQueryBuilder->setParameter('locale', $locale);
 		$parameters = $parametersQueryBuilder->getQuery()->execute();
 
 		$parametersIndexedById = [];
@@ -112,12 +114,21 @@ class ParameterFilterChoiceRepository {
 	 * @param array $rows
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[][]
 	 */
-	private function getParameterValuesIndexedByParameterId(array $rows) {
-		$valuesIndexedById = $this->getParameterValuesIndexedById($rows);
+	private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows) {
+		$parameterIdsByValueId = [];
+		foreach ($rows as $row) {
+			$valueId = $row['pv']['id'];
+			$parameterId = $row['pp']['id'];
+			$parameterIdsByValueId[$valueId][] = $parameterId;
+		}
+
+		$valuesIndexedById = $this->getParameterValuesIndexedByIdOrderedByText($rows);
 
 		$valuesIndexedByParameterId = [];
-		foreach ($rows as $row) {
-			$valuesIndexedByParameterId[$row['pp']['id']][] = $valuesIndexedById[$row['pv']['id']];
+		foreach ($valuesIndexedById as $valueId => $value) {
+			foreach ($parameterIdsByValueId[$valueId] as $parameterId) {
+				$valuesIndexedByParameterId[$parameterId][] = $value;
+			}
 		}
 
 		return $valuesIndexedByParameterId;
@@ -127,17 +138,21 @@ class ParameterFilterChoiceRepository {
 	 * @param array $rows
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
 	 */
-	private function getParameterValuesIndexedById(array $rows) {
+	private function getParameterValuesIndexedByIdOrderedByText(array $rows) {
 		$valueIds = [];
 		foreach ($rows as $row) {
-			$valueIds[$row['pv']['id']] = $row['pv']['id'];
+			$valueId = $row['pv']['id'];
+			$valueIds[$valueId] = $valueId;
 		}
 
 		$valuesQueryBuilder = $this->em->createQueryBuilder()
 			->select('pv')
 			->from(ParameterValue::class, 'pv')
-			->where('pv.id IN (:valueIds)');
+			->where('pv.id IN (:valueIds)')
+			->andWhere('pv.locale = :locale')
+			->orderBy('pv.text', 'asc');
 		$valuesQueryBuilder->setParameter('valueIds', $valueIds);
+		$valuesQueryBuilder->setParameter('locale', 'cs');
 		$values = $valuesQueryBuilder->getQuery()->execute();
 
 		$valuesIndexedById = [];
