@@ -25,17 +25,18 @@ class FlagFilterChoiceRepository {
 	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
-	public function getFlagFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category) {
+	public function getFlagFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, $locale, Category $category) {
 		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
 			$domainId,
 			$pricingGroup,
 			$category
 		);
 
-		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder);
+		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder, $locale);
 	}
 
 	/**
@@ -49,14 +50,15 @@ class FlagFilterChoiceRepository {
 		$productsQueryBuilder = $this->productRepository
 			->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
-		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder);
+		return $this->getVisibleFlagsByProductsQueryBuilder($productsQueryBuilder, $locale);
 	}
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
+	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
 	 */
-	private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
+	private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, $locale) {
 		$clonnedProductsQueryBuilder = clone $productsQueryBuilder;
 
 		$clonnedProductsQueryBuilder
@@ -70,8 +72,10 @@ class FlagFilterChoiceRepository {
 		$flagsQueryBuilder
 			->select('f, ft')
 			->from(Flag::class, 'f')
-			->join('f.translations', 'ft')
-			->andWhere($flagsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder));
+			->join('f.translations', 'ft', Join::WITH, 'ft.locale = :locale')
+			->andWhere($flagsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder))
+			->orderBy('ft.name', 'asc')
+			->setParameter('locale', $locale);
 
 		foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
 			$flagsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
