@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9e1d9c7b6e8989f3e798d42b902cc945",
-    "content-hash": "5f9356410b7d0deb03b1134e9ec79e7f",
+    "hash": "9ede2598e98cfe397b3815bd963f45fc",
+    "content-hash": "302ff08f0d18e7afb2bbe2aee190d599",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1521,7 +1521,7 @@
                 "symfony",
                 "validation"
             ],
-            "time": "2015-06-19 14:38:58"
+            "time": "2016-03-29 14:06:14"
         },
         {
             "name": "fzaninotto/faker",
@@ -2092,12 +2092,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/JMSTranslationBundle.git",
-                "reference": "527da1230ed11a85f62dda5a0c61e7f58c15924e"
+                "reference": "527da12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/527da1230ed11a85f62dda5a0c61e7f58c15924e",
-                "reference": "527da1230ed11a85f62dda5a0c61e7f58c15924e",
+                "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/527da12",
+                "reference": "527da12",
                 "shasum": ""
             },
             "require": {
@@ -4158,16 +4158,16 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a"
+                "reference": "c0b943d98d7fdd0de7ec1b7bd7787998b48992aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/migrations/zipball/dc0f6367390796e1f71a89983d9ebf1658e3632a",
-                "reference": "dc0f6367390796e1f71a89983d9ebf1658e3632a",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/c0b943d98d7fdd0de7ec1b7bd7787998b48992aa",
+                "reference": "c0b943d98d7fdd0de7ec1b7bd7787998b48992aa",
                 "shasum": ""
             },
             "require": {
@@ -4192,7 +4192,7 @@
                 "source": "https://github.com/shopsys/migrations/tree/master",
                 "issues": "https://github.com/shopsys/migrations/issues"
             },
-            "time": "2016-04-19 07:18:25"
+            "time": "2016-07-08 07:29:05"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4314,12 +4314,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/Routing.git",
-                "reference": "a068c329cc5250652024ed8f919b7aa2cf30f8fd"
+                "reference": "bb25b51744"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/Routing/zipball/a068c329cc5250652024ed8f919b7aa2cf30f8fd",
-                "reference": "a068c329cc5250652024ed8f919b7aa2cf30f8fd",
+                "url": "https://api.github.com/repos/shopsys/Routing/zipball/bb25b51744",
+                "reference": "bb25b51744",
                 "shasum": ""
             },
             "require": {
@@ -4742,12 +4742,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/jparser.git",
-                "reference": "c37f4c6300fccdd2658c737fafecc0da7ef7ed7d"
+                "reference": "c37f4c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/jparser/zipball/c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
-                "reference": "c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
+                "url": "https://api.github.com/repos/shopsys/jparser/zipball/c37f4c6",
+                "reference": "c37f4c6",
                 "shasum": ""
             },
             "require": {
