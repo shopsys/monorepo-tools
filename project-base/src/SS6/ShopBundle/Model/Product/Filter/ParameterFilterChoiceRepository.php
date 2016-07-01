@@ -112,7 +112,7 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param array $rows
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[][]
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[][]
 	 */
 	private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows) {
 		$parameterIdsByValueId = [];
