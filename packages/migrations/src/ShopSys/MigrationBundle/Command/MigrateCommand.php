@@ -9,10 +9,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateCommand extends ContainerAwareCommand {
 
+	const RETURN_CODE_OK = 0;
+	const RETURN_CODE_ERROR = 1;
+
 	protected function configure() {
 		$this
 			->setName('shopsys:migrations:migrate')
-			->setDescription('Execute all database migrations in one transaction.');
+			->setDescription(
+				'Execute all database migrations and check if database schema is satisfying ORM, all in one transaction.'
+			);
 	}
 
 	/**
@@ -25,6 +30,10 @@ class MigrateCommand extends ContainerAwareCommand {
 
 		$em->transactional(function () use ($output) {
 			$this->executeDoctrineMigrateCommand($output);
+
+			$output->writeln('');
+
+			$this->executeCheckSchemaCommand($output);
 		});
 	}
 
@@ -48,4 +57,19 @@ class MigrateCommand extends ContainerAwareCommand {
 		}
 	}
 
+	private function executeCheckSchemaCommand(OutputInterface $output) {
+		$checkSchemaCommand = $this->getApplication()->find('shopsys:migrations:check-schema');
+		$arguments = [
+			'command' => 'shopsys:migrations:check-schema',
+		];
+		$input = new ArrayInput($arguments);
+		$input->setInteractive(false);
+
+		$exitCode = $checkSchemaCommand->run($input, $output);
+
+		if ($exitCode !== 0) {
+			$message = 'Database schema check did not exit properly (exit code is ' . $exitCode . ').';
+			throw new \ShopSys\MigrationBundle\Command\Exception\CheckSchemaCommandException($message);
+		}
+	}
 }
