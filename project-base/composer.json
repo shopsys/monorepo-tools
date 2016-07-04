@@ -23,10 +23,6 @@
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/shopsys/JsFormValidatorBundle.git"
-		},
-		{
-			"type": "vcs",
 			"url": "https://github.com/shopsys/JMSTranslationBundle.git"
 		},
 		{
@@ -58,7 +54,7 @@
 		"doctrine/doctrine-fixtures-bundle": "2.3.0",
 		"doctrine/orm": "dev-ddc1960-hotfix-and-ddc4005-hotfix as 2.5.1",
 		"egeloen/ckeditor-bundle": "4.0.1",
-		"fp/jsformvalidator-bundle": "dev-translate-invalid-message#bb2be7e",
+		"fp/jsformvalidator-bundle": "dev-master#4a12964",
 		"fzaninotto/faker": "1.5.0",
 		"helios-ag/fm-elfinder-bundle": "4.0.2",
 		"incenteev/composer-parameter-handler": "2.1.2",

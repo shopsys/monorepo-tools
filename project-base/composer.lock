@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0e80e3e16cbe7d41cca8b513b182b1c7",
-    "content-hash": "55490f1b591fe1afdda265814c6b9902",
+    "hash": "9e1d9c7b6e8989f3e798d42b902cc945",
+    "content-hash": "5f9356410b7d0deb03b1134e9ec79e7f",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -256,7 +256,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/551482eadb8b5d9cacda46a8afa8108ae9e08cdb",
+                "url": "https://api.github.com/repos/craue/CraueFormFlowBundle/zipball/d14fcb1",
                 "reference": "d14fcb1",
                 "shasum": ""
             },
@@ -1452,33 +1452,35 @@
         },
         {
             "name": "fp/jsformvalidator-bundle",
-            "version": "dev-translate-invalid-message",
+            "version": "dev-master",
             "target-dir": "Fp/JsFormValidatorBundle",
             "source": {
                 "type": "git",
-                "url": "https://github.com/shopsys/JsFormValidatorBundle.git",
-                "reference": "88ba9696c77da536fba0719f871963d61ec1d2bf"
+                "url": "https://github.com/formapro/JsFormValidatorBundle.git",
+                "reference": "4a12964"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/JsFormValidatorBundle/zipball/88ba9696c77da536fba0719f871963d61ec1d2bf",
-                "reference": "bb2be7e",
+                "url": "https://api.github.com/repos/formapro/JsFormValidatorBundle/zipball/4a12964",
+                "reference": "4a12964",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/form": ">=2.3",
-                "symfony/validator": ">=2.3"
+                "symfony/form": "^2.7|^3.0",
+                "symfony/validator": "^2.7|^3.0"
             },
             "require-dev": {
                 "behat/mink-bundle": "dev-master",
-                "behat/mink-selenium2-driver": "1.1.0",
-                "doctrine/doctrine-bundle": "~1.2",
+                "behat/mink-selenium2-driver": "^1.1.0",
+                "doctrine/doctrine-bundle": "~1.4",
                 "doctrine/orm": ">=2.2.3",
                 "phpunit/phpunit": "3.7.*",
-                "satooshi/php-coveralls": "dev-master",
-                "symfony/assetic-bundle": ">=2.3",
-                "symfony/symfony": ">=2.3"
+                "ptcong/php-image-uploader": "^6.0",
+                "satooshi/php-coveralls": "1.0.*",
+                "se/selenium-server-standalone": "2.*",
+                "symfony/assetic-bundle": ">=2.5",
+                "symfony/symfony": "^3.0"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "For the UniqueEntity validation",
@@ -1489,7 +1491,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -1497,6 +1499,7 @@
                     "Fp\\JsFormValidatorBundle": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1513,15 +1516,12 @@
             "description": "Javascript validation for sf2 forms.",
             "homepage": "https://github.com/formapro/JsFormValidatorBundle",
             "keywords": [
-                "Form",
-                "Javascript",
-                "Symfony",
-                "Validation"
+                "form",
+                "javascript",
+                "symfony",
+                "validation"
             ],
-            "support": {
-                "source": "https://github.com/sustmi/JsFormValidatorBundle/tree/translate-invalid-message"
-            },
-            "time": "2015-01-30 09:41:02"
+            "time": "2015-06-19 14:38:58"
         },
         {
             "name": "fzaninotto/faker",
@@ -1886,7 +1886,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1on/postgres-search-bundle/zipball/069a875ce9a66def9b010caf9f10f916bfb0ac0d",
+                "url": "https://api.github.com/repos/1on/postgres-search-bundle/zipball/0eb26e0812",
                 "reference": "0eb26e0812",
                 "shasum": ""
             },
@@ -2097,7 +2097,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/shopsys/JMSTranslationBundle/zipball/527da1230ed11a85f62dda5a0c61e7f58c15924e",
-                "reference": "527da12",
+                "reference": "527da1230ed11a85f62dda5a0c61e7f58c15924e",
                 "shasum": ""
             },
             "require": {
@@ -4319,7 +4319,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/shopsys/Routing/zipball/a068c329cc5250652024ed8f919b7aa2cf30f8fd",
-                "reference": "bb25b51744",
+                "reference": "a068c329cc5250652024ed8f919b7aa2cf30f8fd",
                 "shasum": ""
             },
             "require": {
@@ -4747,7 +4747,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/shopsys/jparser/zipball/c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
-                "reference": "c37f4c6",
+                "reference": "c37f4c6300fccdd2658c737fafecc0da7ef7ed7d",
                 "shasum": ""
             },
             "require": {
@@ -5183,6 +5183,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-02-26 07:37:29"
         },
         {
