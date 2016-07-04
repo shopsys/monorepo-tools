@@ -28,12 +28,11 @@ class NewsletterController extends FrontBaseController {
 		if ($form->isValid()) {
 			$email = $form->getData()['email'];
 			$this->newsletterFacade->addSubscribedEmail($email);
-
-			return $this->render('@SS6Shop/Front/Inline/Newsletter/send.html.twig');
 		}
 
 		return $this->render('@SS6Shop/Front/Inline/Newsletter/subscription.html.twig', [
 			'form' => $form->createView(),
+			'success' => $form->isValid(),
 		]);
 	}
 
@@ -42,6 +41,7 @@ class NewsletterController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Inline/Newsletter/subscription.html.twig', [
 			'form' => $form->createView(),
+			'success' => $form->isValid(),
 		]);
 	}
 
