@@ -5,11 +5,18 @@
 	SS6.productDetail = SS6.productDetail || {};
 
 	SS6.productDetail.init = function () {
+		$('.js-gallery-main-image').click(function (event) {
+			var $slides = $('.js-gallery .slick-slide:not(.slick-cloned) .js-gallery-slide-link');
+			$slides.filter(':first').trigger('click', event);
+
+			return false;
+		});
+
 		var $gallery = $('.js-gallery');
 
 		$gallery.magnificPopup({
 			type: 'image',
-			delegate: 'a',
+			delegate: '.js-gallery-slide-link',
 			gallery: {
 				enabled: true,
 				navigateByImgClick: true,
