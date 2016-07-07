@@ -61,7 +61,7 @@ class ProductFilterFormTypeFactory {
 		$parameterFilterChoices = $this->parameterFilterChoiceRepository
 			->getParameterFilterChoicesInCategory($domainId, $pricingGroup, $locale, $category);
 		$flagFilterChoices = $this->flagFilterChoiceRepository
-			->getFlagFilterChoicesInCategory($domainId, $pricingGroup, $category);
+			->getFlagFilterChoicesInCategory($domainId, $pricingGroup, $locale, $category);
 		$brandFilterChoices = $this->brandFilterChoiceRepository
 			->getBrandFilterChoicesInCategory($domainId, $pricingGroup, $category);
 		$priceRange = $this->priceRangeRepository->getPriceRangeInCategory($domainId, $pricingGroup, $category);

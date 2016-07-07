@@ -69,7 +69,8 @@ class BrandFilterChoiceRepository {
 		$brandsQueryBuilder
 			->select('b')
 			->from(Brand::class, 'b')
-			->andWhere($brandsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder));
+			->andWhere($brandsQueryBuilder->expr()->exists($clonnedProductsQueryBuilder))
+			->orderBy('b.name', 'asc');
 
 		foreach ($clonnedProductsQueryBuilder->getParameters() as $parameter) {
 			$brandsQueryBuilder->setParameter($parameter->getName(), $parameter->getValue());
