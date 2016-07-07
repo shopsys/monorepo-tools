@@ -28,13 +28,19 @@ class MigrateCommand extends ContainerAwareCommand {
 		$em = $this->getContainer()->get('doctrine.orm.entity_manager');
 		/* @var $em \Doctrine\ORM\EntityManager */
 
-		$em->transactional(function () use ($output) {
-			$this->executeDoctrineMigrateCommand($output);
+		try {
+			$em->transactional(function () use ($output) {
+				$this->executeDoctrineMigrateCommand($output);
 
-			$output->writeln('');
+				$output->writeln('');
 
-			$this->executeCheckSchemaCommand($output);
-		});
+				$this->executeCheckSchemaCommand($output);
+			});
+		} catch (\Exception $ex) {
+			$message = "Database migration process did not run properly. Transaction was reverted.\n"
+				. 'For more informations see the previous exception.';
+			throw new \ShopSys\MigrationBundle\Command\Exception\MigrateCommandException($message, $ex);
+		}
 	}
 
 	/**
