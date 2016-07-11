@@ -81,7 +81,7 @@ class CartItem {
 	 * @param int $newQuantity
 	 */
 	public function changeQuantity($newQuantity) {
-		if (!is_int($newQuantity) || $newQuantity <= 0) {
+		if (filter_var($newQuantity, FILTER_VALIDATE_INT) === false || $newQuantity <= 0) {
 			throw new \SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
 		}
 
