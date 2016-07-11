@@ -23,6 +23,8 @@ class CartController extends FrontBaseController {
 
 	const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
 
+	const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
@@ -115,11 +117,8 @@ class CartController extends FrontBaseController {
 			}
 
 			if (!$invalidCart) {
-				if ($form->get('recalcToOrder')->isClicked()) {
+				if (!$request->get(self::RECALCULATE_ONLY_PARAMETER_NAME, false)) {
 					return $this->redirectToRoute('front_order_index');
-				} else {
-					$this->getFlashMessageSender()->addSuccessFlash(t('Množství položek v košíku bylo úspěšně přepočítáno.'));
-					return $this->redirectToRoute('front_cart');
 				}
 			}
 		} elseif ($form->isSubmitted()) {

@@ -37,7 +37,10 @@
 
 	SS6.cartRecalculator.reload = function () {
 		var formData = $('.js-cart-form').serializeArray();
-		formData['cart_form[recalc]'] = 1;
+		formData.push({
+			name: SS6.constant('SS6\\ShopBundle\\Controller\\Front\\CartController::RECALCULATE_ONLY_PARAMETER_NAME'),
+			value: 1
+		});
 
 		SS6.ajax({
 			overlayDelay: 0, // show loader immediately to avoid clicking during AJAX request

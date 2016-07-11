@@ -44,8 +44,7 @@ class CartFormType extends AbstractType {
 						]),
 					],
 				])
-			->add('recalc', FormType::SUBMIT)
-			->add('recalcToOrder', FormType::SUBMIT);
+			->add('submit', FormType::SUBMIT);
 	}
 
 	/**
