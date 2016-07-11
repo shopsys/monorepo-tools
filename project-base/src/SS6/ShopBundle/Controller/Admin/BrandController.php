@@ -128,6 +128,7 @@ class BrandController extends AdminBaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/Brand/list.html.twig', [
 			'gridView' => $grid->createView(),
+			'domains' => $this->domain->getAll(),
 		]);
 	}
 

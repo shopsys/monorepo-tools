@@ -5,6 +5,19 @@
 
 {% block main_content %}
 	<div class="wrap-bar">
+		<div class="form-line">
+			{% for domain in domains %}
+				<div class="form-line__line">
+					<div class="form-line__item">
+						{{ 'Doména'|trans }} {{  getDomainName(domain.id) }}
+						{{ domainIcon(domain.id) }}
+						<a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">
+							{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
 		<a href="{{ url('admin_brand_new') }}" class="btn btn--plus wrap-bar__btn">
 			<i class="btn__icon">+</i>
 			{{ 'Vytvořit novou značku'|trans }}
