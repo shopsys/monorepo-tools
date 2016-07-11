@@ -17,7 +17,7 @@
 		var $directDeleteLink = $messageContainer.find('.js-confirm-delete-direct-link');
 
 		this.init = function () {
-			if ($directDeleteLink.size() !== 0) {
+			if ($directDeleteLink.length !== 0) {
 				$directDeleteLink.click(canDeleteDirectly);
 			} else {
 				$confirmDeleteForm.submit(onConfirmDeleteFormSubmit);
@@ -30,7 +30,7 @@
 			SS6.ajax({
 				url: $confirmLink.attr('href'),
 				success: function(data) {
-					if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').size() > 0) {
+					if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').length > 0) {
 						document.location = $directDeleteLink.attr('href');
 					} else {
 						$messageContainer.html(data);

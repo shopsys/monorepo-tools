@@ -45,7 +45,7 @@
 	};
 
 	SS6.parameters.refreshCount = function($collection) {
-		if ($collection.find('.js-parameters-item').size() === 0) {
+		if ($collection.find('.js-parameters-item').length === 0) {
 			$collection.find('.js-parameters-empty-item').show();
 		} else {
 			$collection.find('.js-parameters-empty-item').hide();

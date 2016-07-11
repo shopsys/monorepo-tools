@@ -10,7 +10,7 @@
 
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
-		if ($mainContainer.size() === 0) {
+		if ($mainContainer.length === 0) {
 			$mainContainer = $('<div id="window-main-container"></div>');
 			$('body').append($mainContainer);
 		}
@@ -19,7 +19,7 @@
 
 	var getOverlay = function() {
 		var $overlay = $('#js-overlay');
-		if ($overlay.size() === 0) {
+		if ($overlay.length === 0) {
 			$overlay = $('<div id="js-overlay"></div>');
 		}
 		return $overlay;
@@ -31,7 +31,7 @@
 	};
 
 	var hideOverlay = function () {
-		if ($('#js-overlay').size() !== 0) {
+		if ($('#js-overlay').length !== 0) {
 			$('#js-overlay').remove();
 		}
 	};
@@ -137,7 +137,7 @@
 			$windowActions.append($windowButtonCancel);
 		}
 
-		if ($windowActions.children().size() > 0) {
+		if ($windowActions.children().length > 0) {
 			$window.append($windowActions);
 		}
 

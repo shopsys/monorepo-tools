@@ -12,7 +12,7 @@
 				SS6.formChangeInfo.showInfo();
 			})
 			.each(function() {
-				if ($(this).find('.form-input-error:first, .js-validation-errors-list li:first').size() > 0) {
+				if ($(this).find('.form-input-error:first, .js-validation-errors-list li:first').length > 0) {
 					SS6.formChangeInfo.showInfo();
 				}
 			});
@@ -53,7 +53,7 @@
 		} else {
 			$infoDiv.text = textToShow;
 		}
-		if ($fixedBarIn.size() > 0) {
+		if ($fixedBarIn.length > 0) {
 			isInfoShown = true;
 		}
 	};

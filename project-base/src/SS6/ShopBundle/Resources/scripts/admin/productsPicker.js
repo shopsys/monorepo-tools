@@ -40,7 +40,7 @@
 		};
 
 		this.addProduct = function (productId, productName) {
-			var nextIndex = $itemsContainer.find('.js-products-picker-item').size();
+			var nextIndex = $itemsContainer.find('.js-products-picker-item').length;
 			var itemHtml = $productsPicker.data('products-picker-prototype').replace(/__name__/g, nextIndex);
 			var $item = $($.parseHTML(itemHtml));
 			$item.find('.js-products-picker-item-product-name').text(productName);

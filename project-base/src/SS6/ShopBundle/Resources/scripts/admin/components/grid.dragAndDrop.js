@@ -93,7 +93,7 @@
 		var $gridsOnPage = $('.js-grid[data-drag-and-drop-ordering-entity-class]');
 		var $saveAllButton = $('.js-drag-and-drop-grid-submit-all');
 
-		if ($saveAllButton.size() === 1) {
+		if ($saveAllButton.length === 1) {
 			$gridSaveButtons.hide();
 
 			$gridsOnPage.on('update', function() {

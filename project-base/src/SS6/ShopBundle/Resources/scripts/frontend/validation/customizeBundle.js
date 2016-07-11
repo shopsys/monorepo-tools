@@ -20,7 +20,7 @@
 	};
 
 	SS6.validation.isFormValid = function (form) {
-		return $(form).find('.js-validation-errors-message').size() === 0;
+		return $(form).find('.js-validation-errors-message').length === 0;
 	};
 
 	SS6.validation.getErrorListClass = function (elementName) {
@@ -49,11 +49,11 @@
 
 		var $domNode = $(element.domNode);
 
-		if ($domNode.closest('.js-no-validate').size() > 0) {
+		if ($domNode.closest('.js-no-validate').length > 0) {
 			return;
 		}
 
-		var isJsFileUpload = $domNode.closest('.js-file-upload').size() > 0;
+		var isJsFileUpload = $domNode.closest('.js-file-upload').length > 0;
 
 		$domNode
 			.bind('blur change', function (event) {
@@ -198,7 +198,7 @@
 		if (!element) {
 			return null;
 		}
-		if ($(element.domNode).closest('.js-no-validate').size() > 0) {
+		if ($(element.domNode).closest('.js-no-validate').length > 0) {
 			return null;
 		}
 
@@ -277,7 +277,7 @@
 	SS6.validation.reverseCollectionToArray = function ($collection) {
 		var result = [];
 
-		for (var i = $collection.size() - 1; i >= 0; i--) {
+		for (var i = $collection.length - 1; i >= 0; i--) {
 			result.push($collection[i]);
 		}
 
@@ -345,7 +345,7 @@
 					.text(message));
 			});
 			$errorList.show();
-		} else if ($errorListUl.find('li').size() === 0) {
+		} else if ($errorListUl.find('li').length === 0) {
 			$elementsToHighlight.removeClass('form-input-error');
 			$errorList.hide();
 		}
@@ -356,7 +356,7 @@
 	SS6.validation.findOrCreateErrorList = function ($formInput, elementName) {
 		var errorListClass = SS6.validation.getErrorListClass(elementName);
 		var $errorList = $('.' + errorListClass);
-		if ($errorList.size() === 0) {
+		if ($errorList.length === 0) {
 			$errorList = $($.parseHTML(
 				'<div class="in-message in-message--danger js-validation-errors-list ' + errorListClass + '">\
 					<ul class="in-message__list"></ul>\
@@ -413,7 +413,7 @@
 
 			if (inputId !== undefined) {
 				var $label = SS6.validation.findLabelByInputId(inputId);
-				if ($label.size() > 0) {
+				if ($label.length > 0) {
 					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 				}
 			}
@@ -426,13 +426,13 @@
 		var $label = $('label[for="' + inputId + '"]');
 		var $input = $('#' + inputId);
 
-		if ($label.size() === 0) {
+		if ($label.length === 0) {
 			$label = SS6.validation.getClosestLabel($input, '.js-validation-label');
 		}
-		if ($label.size() === 0) {
+		if ($label.length === 0) {
 			$label = SS6.validation.getClosestLabel($input, 'label');
 		}
-		if ($label.size() === 0) {
+		if ($label.length === 0) {
 			$label = SS6.validation.getClosestLabel($input, '.form-full__title');
 		}
 

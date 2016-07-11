@@ -27,7 +27,7 @@
 
 		var getNextNewUrlIndex = function () {
 			var index = 0;
-			while ($newUrlsContainer.find('.js-entity-url-list-new-row[data-index=' + index.toString() + ']').size() > 0) {
+			while ($newUrlsContainer.find('.js-entity-url-list-new-row[data-index=' + index.toString() + ']').length > 0) {
 				index++;
 			}
 

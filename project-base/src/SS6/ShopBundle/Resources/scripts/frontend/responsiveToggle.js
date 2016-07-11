@@ -45,8 +45,8 @@
 		function onClickOut(event) {
 			if (
 				isActive()
-				&& $(event.target).closest($button).size() === 0
-				&& $(event.target).closest($elementToHide).size() === 0
+				&& $(event.target).closest($button).length === 0
+				&& $(event.target).closest($elementToHide).length === 0
 			) {
 				toggle(false);
 			}

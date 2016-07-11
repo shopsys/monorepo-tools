@@ -66,7 +66,7 @@
 
 	SS6.grid.multipleDragAndDrop.toggleRowHolders = function () {
 		 $('.js-multiple-grids-rows-unified .js-grid').each(function() {
-			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .in-drop-place').size();
+			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .in-drop-place').length;
 			var $rowHolder = $(this).find('.js-grid-row-holder');
 			$rowHolder.toggle(gridRowsCount === 0);
 		});

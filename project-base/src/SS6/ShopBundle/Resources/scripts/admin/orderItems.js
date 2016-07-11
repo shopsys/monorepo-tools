@@ -109,7 +109,7 @@
 
 	SS6.order.items.refreshCount = function($collection) {
 		var $items = $collection.find('.js-order-item');
-		if ($items.size() === 1) {
+		if ($items.length === 1) {
 			$items.find('.js-order-item-remove')
 				.addClass('text-disabled')
 				.tooltip({

@@ -45,7 +45,7 @@
 
 	SS6.search.onDocumentClickHideAutocompleteResults = function (event) {
 		var $autocompleteElements = $input.add($searchAutocompleteResults);
-		if (resultExists && $(event.target).closest($autocompleteElements).size() === 0) {
+		if (resultExists && $(event.target).closest($autocompleteElements).length === 0) {
 			$searchAutocompleteResults.hide();
 		}
 	};

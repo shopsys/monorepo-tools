@@ -35,7 +35,7 @@
 
 	SS6.order.updateTransports = function () {
 		var $checkedPayment = $('input.payment:checked');
-		if ($checkedPayment.size()) {
+		if ($checkedPayment.length) {
 			var checkedPaymentId = $checkedPayment.data('id');
 			$('input.transport').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
@@ -58,14 +58,14 @@
 		}
 
 		var $checkedTransport = $('input.transport:checked');
-		if ($checkedTransport.size()) {
+		if ($checkedTransport.length) {
 			$checkedTransport.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive').addClass('box-chooser__item--active');
 		}
 	};
 
 	SS6.order.updatePayments = function () {
 		var $checkedTransport = $('input.transport:checked');
-		if ($checkedTransport.size()) {
+		if ($checkedTransport.length) {
 			var checkedTransportId = $checkedTransport.data('id');
 			$('input.payment').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
@@ -88,7 +88,7 @@
 		}
 
 		var $checkedPayment = $('input.payment:checked');
-		if ($checkedPayment.size()) {
+		if ($checkedPayment.length) {
 			$checkedPayment.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive').addClass('box-chooser__item--active');
 		}
 	};
