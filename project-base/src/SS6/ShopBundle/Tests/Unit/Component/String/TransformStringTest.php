@@ -40,6 +40,10 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 				'actual' => '.foo.dat',
 				'expected' => 'foo.dat',
 			],
+			[
+				'actual' => 'BG 747 fixˇ.dat',
+				'expected' => 'BG_747_fix.dat',
+			],
 		];
 	}
 
@@ -75,6 +79,10 @@ class TransformStringTest extends PHPUnit_Framework_TestCase {
 			[
 				'actual' => 'Příliš žluťoučký kůň úpěl ďábelské ódy',
 				'expected' => 'prilis-zlutoucky-kun-upel-dabelske-ody',
+			],
+			[
+				'actual' => 'BG-747 is fixedˇ',
+				'expected' => 'bg-747-is-fixed',
 			],
 		];
 	}
