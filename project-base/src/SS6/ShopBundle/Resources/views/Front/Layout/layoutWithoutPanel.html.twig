@@ -2,7 +2,7 @@
 
 {% block content %}
 	<div class="web__main">
-		<div class="web__main__content">
+		<div class="web__main__content js-main-content">
 				{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
 				{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
 

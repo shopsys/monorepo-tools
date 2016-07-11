@@ -15,7 +15,7 @@
 
 
 	{% if cart.itemsCount > 0 %}
-		{{ form_start(form, { attr: { class: 'js-no-validate' }}) }}
+		{{ form_start(form, { attr: { class: 'js-no-validate js-cart-form' }}) }}
 			{{ form_errors(form) }}
 			<table class="table-cart js-cart">
 				<thead>
