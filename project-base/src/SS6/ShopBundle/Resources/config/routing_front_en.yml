@@ -55,3 +55,7 @@ front_brand_detail:
   defaults: { _controller: SS6ShopBundle:Front\Product:listByBrand }
   requirements:
     brandId: \d+
+
+front_brand_list:
+  pattern: /brands-list/
+  defaults: { _controller: SS6ShopBundle:Front\Brand:list }

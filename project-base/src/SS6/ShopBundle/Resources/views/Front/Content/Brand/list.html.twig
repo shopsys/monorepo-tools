@@ -1,0 +1,25 @@
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}
+	{{ parent() }} - {{ 'Přehled značek'|trans }}
+{% endblock %}
+
+{% block main_content %}
+	<div>
+		<h1>{{ 'Přehled značek'|trans }}</h1>
+
+		<div>
+			<ul>
+				{% for brand in brands %}
+					<li>
+						<a href="{{ url('front_brand_detail', { brandId: brand.id }) }}">
+							{{ image(brand) }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+
+	</div>
+
+{% endblock %}
