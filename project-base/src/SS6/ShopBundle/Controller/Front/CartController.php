@@ -105,16 +105,16 @@ class CartController extends FrontBaseController {
 		$form = $this->createForm(new CartFormType($this->cart));
 		$form->setData($cartFormData);
 		$form->handleRequest($request);
-		$invalidCartRecalc = false;
+		$invalidCart = false;
 
 		if ($form->isValid()) {
 			try {
 				$this->cartFacade->changeQuantities($form->getData()['quantities']);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$invalidCartRecalc = true;
+				$invalidCart = true;
 			}
 
-			if (!$invalidCartRecalc) {
+			if (!$invalidCart) {
 				if ($form->get('recalcToOrder')->isClicked()) {
 					return $this->redirectToRoute('front_order_index');
 				} else {
@@ -123,10 +123,10 @@ class CartController extends FrontBaseController {
 				}
 			}
 		} elseif ($form->isSubmitted()) {
-			$invalidCartRecalc = true;
+			$invalidCart = true;
 		}
 
-		if ($invalidCartRecalc) {
+		if ($invalidCart) {
 			$this->getFlashMessageSender()->addErrorFlash(
 				t('Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.')
 			);
