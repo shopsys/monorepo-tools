@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverKeys;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class CartPage extends AbstractPage {
@@ -40,7 +41,8 @@ class CartPage extends AbstractPage {
 	public function changeProductQuantity($productName, $quantity) {
 		$quantityField = $this->getQuantityFieldByProductName($productName);
 		$this->tester->fillFieldByElement($quantityField, $quantity);
-		$this->tester->clickByText('Přepočítat');
+		$this->tester->pressKeysByElement($quantityField, WebDriverKeys::ENTER);
+		$this->tester->waitForAjax();
 	}
 
 	/**
