@@ -14,6 +14,7 @@
 			);
 		}
 
+		// reload content after delay when clicking +/-
 		$container.filterAllNodes('.js-cart-item .js-spinbox-plus, .js-cart-item .js-spinbox-minus').click(
 			function (event) {
 				reloadWithDelay(1000);
@@ -21,6 +22,8 @@
 			}
 		);
 
+		// reload content after delay after leaving input or pressing ENTER
+		// but only if value was changed
 		$container.filterAllNodes('.js-cart-item .js-spinbox-input')
 			.change(function () {
 				$(this).blur(function () {
