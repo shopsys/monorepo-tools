@@ -112,14 +112,12 @@ class CartController extends FrontBaseController {
 		if ($form->isValid()) {
 			try {
 				$this->cartFacade->changeQuantities($form->getData()['quantities']);
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$invalidCart = true;
-			}
 
-			if (!$invalidCart) {
 				if (!$request->get(self::RECALCULATE_ONLY_PARAMETER_NAME, false)) {
 					return $this->redirectToRoute('front_order_index');
 				}
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+				$invalidCart = true;
 			}
 		} elseif ($form->isSubmitted()) {
 			$invalidCart = true;
