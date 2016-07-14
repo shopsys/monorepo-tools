@@ -91,7 +91,7 @@ class ContainerClassList {
 	public function addClass($serviceId, $class) {
 		$this->load();
 
-		if (empty($class) || !is_string($class) || !class_exists($class)) {
+		if (empty($class) || !is_string($class) || !$this->classOrInterfaceExists($class)) {
 			return;
 		}
 		$reflection = new ReflectionClass($class);
@@ -111,6 +111,14 @@ class ContainerClassList {
 			$this->serviceIdsByClass[$parent->getName()][] = $serviceId;
 			$parent = $parent->getParentClass();
 		}
+	}
+
+	/**
+	 * @param string $classOrInterfaceName
+	 * @return bool
+	 */
+	private function classOrInterfaceExists($classOrInterfaceName) {
+		return class_exists($classOrInterfaceName) || interface_exists($classOrInterfaceName);
 	}
 
 }
