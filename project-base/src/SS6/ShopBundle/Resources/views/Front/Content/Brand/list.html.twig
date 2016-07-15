@@ -9,10 +9,10 @@
 		<h1>{{ 'Přehled značek'|trans }}</h1>
 
 		<div>
-			<ul>
+			<ul class='list-images'>
 				{% for brand in brands %}
-					<li>
-						<a href="{{ url('front_brand_detail', { brandId: brand.id }) }}">
+					<li class="list-images__item">
+						<a href="{{ url('front_brand_detail', { brandId: brand.id }) }}" class="list-images__item__block">
 							{{ image(brand) }}
 						</a>
 					</li>
