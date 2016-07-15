@@ -47,7 +47,7 @@ class Setting {
 
 	/**
 	 * @param string $key
-	 * @return string|int|float|bool|null
+	 * @return \DateTime|string|int|float|bool|null
 	 */
 	public function get($key) {
 		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
@@ -65,7 +65,7 @@ class Setting {
 	/**
 	 * @param string $key
 	 * @param int $domainId
-	 * @return string|int|float|bool|null
+	 * @return \DateTime|string|int|float|bool|null
 	 */
 	public function getForDomain($key, $domainId) {
 		$this->loadDomainValues($domainId);
@@ -82,7 +82,7 @@ class Setting {
 
 	/**
 	 * @param string $key
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 */
 	public function set($key, $value) {
 		$this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
@@ -100,7 +100,7 @@ class Setting {
 
 	/**
 	 * @param string $key
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 * @param int $domainId
 	 */
 	public function setForDomain($key, $value, $domainId) {

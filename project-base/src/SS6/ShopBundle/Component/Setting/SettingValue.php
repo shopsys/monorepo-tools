@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Component\Setting;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,11 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class SettingValue {
+	const DATETIME_STORED_FORMAT = DateTime::ISO8601;
 
 	const TYPE_STRING = 'string';
 	const TYPE_INTEGER = 'integer';
 	const TYPE_FLOAT = 'float';
 	const TYPE_BOOLEAN = 'boolean';
+	const TYPE_DATETIME = 'datetime';
 	const TYPE_NULL = 'none';
 
 	const BOOLEAN_TRUE = 'true';
@@ -47,13 +50,13 @@ class SettingValue {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=7)
+	 * @ORM\Column(type="string", length=8)
 	 */
 	private $type;
 
 	/**
 	 * @param string $name
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 * @param int $domainId
 	 */
 	public function __construct($name, $value, $domainId) {
@@ -63,7 +66,7 @@ class SettingValue {
 	}
 
 	/**
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 */
 	public function edit($value) {
 		$this->setValue($value);
@@ -77,7 +80,7 @@ class SettingValue {
 	}
 
 	/**
-	 * @return string|int|float|bool|null
+	 * @return \DateTime|string|int|float|bool|null
 	 */
 	public function getValue() {
 		switch ($this->type) {
@@ -87,6 +90,18 @@ class SettingValue {
 				return (float)$this->value;
 			case self::TYPE_BOOLEAN:
 				return $this->value === self::BOOLEAN_TRUE;
+			case self::TYPE_DATETIME:
+				if ($this->value === null) {
+					return null;
+				}
+
+				$dateTime = DateTime::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
+				if ($dateTime === false) {
+					$message = sprintf('DateTime "%s" is not valid.', var_export($this->value, true));
+					throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
+				}
+
+				return $dateTime;
 			default:
 				return $this->value;
 		}
@@ -100,7 +115,7 @@ class SettingValue {
 	}
 
 	/**
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 */
 	private function setValue($value) {
 		$this->type = $this->getValueType($value);
@@ -108,13 +123,15 @@ class SettingValue {
 			$this->value = $value === true ? self::BOOLEAN_TRUE : self::BOOLEAN_FALSE;
 		} elseif ($this->type === self::TYPE_NULL) {
 			$this->value = $value;
+		} elseif ($this->type === self::TYPE_DATETIME) {
+			$this->value = $value->format(self::DATETIME_STORED_FORMAT);
 		} else {
 			$this->value = (string)$value;
 		}
 	}
 
 	/**
-	 * @param string|int|float|bool|null $value
+	 * @param \DateTime|string|int|float|bool|null $value
 	 * @return string
 	 */
 	private function getValueType($value) {
@@ -128,10 +145,12 @@ class SettingValue {
 			return self::TYPE_STRING;
 		} elseif (is_null($value)) {
 			return self::TYPE_NULL;
+		} elseif ($value instanceof DateTime) {
+			return self::TYPE_DATETIME;
 		}
 
 		$message = 'Setting value type of "' . gettype($value) . '" is unsupported.'
-			. ' Supported is string, integer, float, boolean or null.';
+			. ' Supported is \DateTime, string, integer, float, boolean or null.';
 		throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
 	}
 

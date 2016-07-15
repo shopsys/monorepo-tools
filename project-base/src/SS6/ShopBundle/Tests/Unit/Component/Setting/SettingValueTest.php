@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Component\Setting;
 
+use DateTime;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
 use SS6\ShopBundle\Component\Setting\SettingValue;
@@ -44,6 +45,12 @@ class SettingValueTest extends PHPUnit_Framework_TestCase {
 	public function testEditException($value) {
 		$this->setExpectedException(InvalidArgumentException::class);
 		new SettingValue('name', $value, 1);
+	}
+
+	public function testStoreDatetime() {
+		$value = new DateTime();
+		$settingValue = new SettingValue('name', $value, 1);
+		$this->assertEquals($value, $settingValue->getValue());
 	}
 
 }
