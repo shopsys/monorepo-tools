@@ -5,15 +5,22 @@
 
 {% block main_content %}
 	<div class="wrap-bar">
-		<div class="form-line">
-			{% for domain in domains %}
-				<div class="form-line__line">
-					<div class="form-line__item">
-						{{ 'Doména'|trans }} {{  getDomainName(domain.id) }}
-						{{ domainIcon(domain.id) }}
-						<a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">
-							{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}
-						</a>
+		<div class="form-group margin-bottom-20">
+			<h2 class="form-group__title">
+				{{ 'Odkaz na přehled značek'|trans }}
+			</h2>
+				{% for domain in domains %}
+				<div class="form-line">
+					<div class="form-line__line">
+						<div class="form-line__label">
+							{{ getDomainName(domain.id) }}
+							{{ domainIcon(domain.id) }}
+						</div>
+						<div class="form-line__item form-line__item--text">
+							<a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">
+								{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}
+							</a>
+						</div>
 					</div>
 				</div>
 			{% endfor %}
