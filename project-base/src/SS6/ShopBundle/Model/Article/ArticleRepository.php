@@ -46,6 +46,17 @@ class ArticleRepository {
 
 	/**
 	 * @param int $domainId
+	 * @param string $placement
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getVisibleOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
+		return $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
+			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
+			->orderBy('a.position, a.id');
+	}
+
+	/**
+	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getArticlesByDomainIdQueryBuilder($domainId) {
@@ -53,6 +64,16 @@ class ArticleRepository {
 			->select('a')
 			->from(Article::class, 'a')
 			->where('a.domainId = :domainId')->setParameter('domainId', $domainId);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getVisibleArticlesByDomainIdQueryBuilder($domainId) {
+		return $this->getAllVisibleQueryBuilder()
+			->andWhere('a.domainId = :domainId')
+			->setParameter('domainId', $domainId);
 	}
 
 	/**
@@ -70,8 +91,8 @@ class ArticleRepository {
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForPlacement($domainId, $placement) {
-		$queryBuilder = $this->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
+	public function getVisibleArticlesForPlacement($domainId, $placement) {
+		$queryBuilder = $this->getVisibleOrderedArticlesByDomainIdAndPlacementQueryBuilder(
 			$domainId,
 			$placement
 		);
@@ -90,6 +111,33 @@ class ArticleRepository {
 			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
 		return $user;
+	}
+
+	/**
+	 * @param int $articleId
+	 * @return \SS6\ShopBundle\Model\Article\Article
+	 */
+	public function getVisibleById($articleId) {
+		$article = $this->getAllVisibleQueryBuilder()
+			->andWhere('a.id = :articleId')
+			->setParameter('articleId', $articleId)
+			->getQuery()->getOneOrNullResult();
+
+		if ($article === null) {
+			$message = 'Article with ID ' . $articleId . ' not found';
+			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+		}
+		return $article;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllVisibleQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('a')
+			->from(Article::class, 'a')
+			->where('a.hidden = false');
 	}
 
 	/**

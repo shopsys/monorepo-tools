@@ -86,7 +86,7 @@ class SitemapRepository {
 	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
-		$queryBuilder = $this->articleRepository->getArticlesByDomainIdQueryBuilder($domainConfig->getId());
+		$queryBuilder = $this->articleRepository->getVisibleArticlesByDomainIdQueryBuilder($domainConfig->getId());
 		$queryBuilder
 			->select('fu.slug')
 			->join(FriendlyUrl::class, 'fu', Join::WITH,
