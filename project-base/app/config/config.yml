@@ -79,6 +79,7 @@ monolog:
   handlers:
     main:
       type: fingers_crossed
+      buffer_size: 1000
       action_level: error
       handler: nested
     nested:
