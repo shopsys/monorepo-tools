@@ -32,6 +32,7 @@
 				$productFilterForm
 					.find(':radio, :checkbox').removeAttr('checked').end()
 					.find('textarea, :text, select').val('');
+				$productFilterForm.find('.js-product-filter-call-change-after-reset').change();
 				var resetUrl = $(this).attr('href');
 				history.pushState({}, '', resetUrl);
 				submitFormWithAjax();
