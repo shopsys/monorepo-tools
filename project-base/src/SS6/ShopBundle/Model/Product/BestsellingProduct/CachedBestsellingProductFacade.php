@@ -69,9 +69,9 @@ class CachedBestsellingProductFacade {
 	 */
 	public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup) {
 		$cacheId = $this->getCacheId($domainId, $category, $pricingGroup);
-		$orderedProductIds = $this->cacheProvider->fetch($cacheId);
+		$sortedProducts = $this->cacheProvider->fetch($cacheId);
 
-		if ($orderedProductIds === false) {
+		if ($sortedProducts === false) {
 			$bestsellingProductDetails = $this->bestsellingProductFacade->getAllOfferedProductDetails(
 				$domainId,
 				$category,
@@ -81,7 +81,7 @@ class CachedBestsellingProductFacade {
 
 			return $bestsellingProductDetails;
 		} else {
-			return $this->getOrderedProductDetails($domainId, $pricingGroup, $orderedProductIds);
+			return $this->getSortedProductDetails($domainId, $pricingGroup, $sortedProducts);
 		}
 	}
 
@@ -102,25 +102,25 @@ class CachedBestsellingProductFacade {
 	 * @param string $cacheId
 	 */
 	private function saveToCache(array $bestsellingProductDetails, $cacheId) {
-		$orderedProductIds = [];
+		$sortedProductIds = [];
 		foreach ($bestsellingProductDetails as $productDetail) {
-			$orderedProductIds[] = $productDetail->getProduct()->getId();
+			$sortedProductIds[] = $productDetail->getProduct()->getId();
 		}
 
-		$this->cacheProvider->save($cacheId, $orderedProductIds, self::LIFETIME);
+		$this->cacheProvider->save($cacheId, $sortedProductIds, self::LIFETIME);
 	}
 
 	/**
 	 * @param int $domainId
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param int[] $orderedProductIds
+	 * @param int[] $sortedProductIds
 	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
-	private function getOrderedProductDetails($domainId, PricingGroup $pricingGroup, array $orderedProductIds) {
-		$products = $this->productRepository->getOfferedByIds($domainId, $pricingGroup, $orderedProductIds);
-		$orderedProducts = $this->productService->sortProductsByProductIds($products, $orderedProductIds);
+	private function getSortedProductDetails($domainId, PricingGroup $pricingGroup, array $sortedProductIds) {
+		$products = $this->productRepository->getOfferedByIds($domainId, $pricingGroup, $sortedProductIds);
+		$sortedProducts = $this->productService->sortProductsByProductIds($products, $sortedProductIds);
 
-		return $this->productDetailFactory->getDetailsForProducts($orderedProducts);
+		return $this->productDetailFactory->getDetailsForProducts($sortedProducts);
 	}
 
 	/**
