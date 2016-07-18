@@ -51,6 +51,12 @@ front_login_check:
   pattern: /login/check/
   # controller's action is unnecessary, because firewall processes whole request
 
+front_newsletter_send:
+  pattern: /newsletter/subscribe-email/
+  defaults: { _controller: SS6ShopBundle:Front\Newsletter:subscribeEmail }
+  methods: [POST]
+  condition: "request.isXmlHttpRequest()"
+
 front_order_save_form:
   pattern: /order/save-form/
   defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }

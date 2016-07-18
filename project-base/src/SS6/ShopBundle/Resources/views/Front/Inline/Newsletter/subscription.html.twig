@@ -1,0 +1,20 @@
+{{ form_start(form, { attr: { 'data-on-submit': 'ajaxSumbit', 'data-success': success ? 'true' : 'false' }}) }}
+	<div class="footer__newsletter">
+		<div class="footer__newsletter__text">
+			<p>
+				{{ 'Chcete dostávat nejnovější informace z našeho obchodu? Přihlašte se do našeho e-mailového zpravodaje.'|trans }}
+			</p>
+		</div>
+		<div class="footer__newsletter__form">
+			<div class="footer__newsletter__form__wrap">
+				<div class="footer__newsletter__form__in">
+					{{ form_widget(form.email, { attr: {placeholder: 'Zadejte e-mail'|trans, class: 'footer__newsletter__input'} }) }}
+					{{ form_errors(form.email) }}
+				</div>
+				{{ form_widget(form.send, { label: 'Přihlásit'|trans, attr: { class: "footer__newsletter__form__btn" }}) }}
+			</div>
+			{{ form_errors(form, { errors_attr: { class : 'in-message--alert' } }) }}
+		</div>
+	</div>
+{{ form_end(form) }}
+{{ init_js_validation(form, false) }}

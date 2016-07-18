@@ -1,4 +1,37 @@
+@footer-newsletter-gap: 20px;
+@footer-newsletter-button-width: 150px;
+
 .footer {
+	&__newsletter {
+		padding: @footer-newsletter-gap 0;
+		position: relative;
+
+		&__input {
+			width: 100%;
+		}
+
+		&__form  {
+			&__wrap {
+				margin-bottom: 5px;
+			}
+
+			&__in {
+				position: relative;
+			}
+
+			&__btn {
+				width: 100%;
+			}
+		}
+
+		.form-error {
+			position: absolute;
+			top: 50%;
+			margin-top: -10px;
+			right: 10px;
+		}
+	}
+
 	&__bottom {
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -18,8 +51,51 @@
 	}
 }
 
+@media @query-sm {
+	.footer {
+		&__newsletter {
+			&__form {
+				&__wrap {
+					display: flex;
+				}
+
+				&__in {
+					flex: 1;
+				}
+
+				&__btn {
+					flex: 0 @footer-newsletter-button-width;
+				}
+			}
+		}
+	}
+}
+
 @media @query-lg {
 	.footer {
+		&__newsletter {
+			display: flex;
+			align-items: center;
+
+			&__text {
+				flex: 1;
+				padding-right: 20px;
+
+				p {
+					line-height: 18px;
+				}
+			}
+
+			&__form {
+				flex: 0 380px;
+
+				&__wrap {
+					text-align: right;
+				}
+
+			}
+		}
+
 		&__bottom {
 			display: flex;
 			align-items: center;

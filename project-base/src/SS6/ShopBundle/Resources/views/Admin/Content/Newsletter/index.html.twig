@@ -1,0 +1,10 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}{{ 'Emaily zpravodaje'|trans }}{% endblock %}
+{% block h1 %}{{ 'Emaily zpravodaje'|trans }}{% endblock %}
+
+{% block main_content %}
+	<a href="{{ url('admin_newsletter_export') }}" class="btn">
+		{{ 'Exportovat seznam emailů jako CSV'|trans }}
+	</a>
+{% endblock %}
