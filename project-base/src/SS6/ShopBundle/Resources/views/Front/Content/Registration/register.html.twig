@@ -14,13 +14,13 @@
 		{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
 		{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
 		{{ form_row(form.email, { label: 'Email'|trans }) }}
-		{{ form_row(form.password.first, { label: 'Heslo'|trans }) }}
-		<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
-			data-toggle="tooltip"
-			data-placement="right"
-			title=""
-			data-original-title="{{ 'Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným e-mailem ani s částí e-mailu před zavináčem.'|trans }}">
-		</i>
+		{{ form_row(form.password.first, {
+			label: 'Heslo'|trans,
+			icon: {
+				type: 'info',
+				title: 'Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným e-mailem ani s částí e-mailu před zavináčem.'|trans
+			}
+		}) }}
 		{{ form_row(form.password.second, { label: 'Heslo znovu'|trans }) }}
 
 		{{ form_widget(form.save, { label: 'Registrovat'|trans }) }}
