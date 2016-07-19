@@ -46,17 +46,6 @@ class ArticleRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param string $placement
-	 * @return \Doctrine\ORM\QueryBuilder
-	 */
-	public function getVisibleOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
-		return $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
-			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
-			->orderBy('a.position, a.id');
-	}
-
-	/**
-	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getArticlesByDomainIdQueryBuilder($domainId) {
@@ -92,10 +81,9 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
 	public function getVisibleArticlesForPlacement($domainId, $placement) {
-		$queryBuilder = $this->getVisibleOrderedArticlesByDomainIdAndPlacementQueryBuilder(
-			$domainId,
-			$placement
-		);
+		$queryBuilder = $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
+			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
+			->orderBy('a.position, a.id');
 
 		return $queryBuilder->getQuery()->execute();
 	}
