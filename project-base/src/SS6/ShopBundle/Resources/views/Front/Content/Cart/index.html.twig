@@ -15,7 +15,7 @@
 
 
 	{% if cart.itemsCount > 0 %}
-		{{ form_start(form, { attr: { class: 'js-no-validate' }}) }}
+		{{ form_start(form, { attr: { class: 'js-no-validate js-cart-form' }}) }}
 			{{ form_errors(form) }}
 			<table class="table-cart js-cart">
 				<thead>
@@ -102,9 +102,6 @@
 					<tr class="table-cart__row">
 						<td class="table-cart__cell table-cart__cell--image">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--name">&nbsp;</td>
-						<td class="table-cart__cell table-cart__cell--recalc">
-							{{ form_widget(form.recalc, { label: 'Přepočítat'|trans, attr: { class: 'btn--small' } }) }}
-						</td>
 						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
 							{{ 'Celková cena s DPH'|trans }}:
@@ -152,7 +149,7 @@
 			<div class="in-action">
 				{% if cart.itemsCount > 0 %}
 					<div class="in-action__right">
-						{{ form_row(form.recalcToOrder, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big'}}) }}
+						{{ form_row(form.submit, { label: 'Objednat'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big'}}) }}
 					</div>
 				{% endif %}
 

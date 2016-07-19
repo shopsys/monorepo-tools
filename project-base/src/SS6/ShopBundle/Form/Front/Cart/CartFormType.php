@@ -25,27 +25,25 @@ class CartFormType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-
 		$builder
 			->add('quantities', FormType::COLLECTION, [
 				'allow_add' => true,
 				'allow_delete' => true,
-				'type' => FormType::INTEGER,
+				'type' => FormType::TEXT,
 				'constraints' => [
-						new Constraints\All([
-							'constraints' => [
-								new Constraints\NotBlank(['message' => 'Musíte zadat množství']),
-								new Constraints\GreaterThan(['value' => 0, 'message' => 'Musíte zadat kladné množství']),
-								new Constraints\LessThanOrEqual([
-									'value' => ConstraintValue::INTEGER_MAX_VALUE,
-									'message' => 'Zadejte prosím platné množství',
-								]),
-							],
-						]),
-					],
-				])
-			->add('recalc', FormType::SUBMIT)
-			->add('recalcToOrder', FormType::SUBMIT);
+					new Constraints\All([
+						'constraints' => [
+							new Constraints\NotBlank(['message' => 'Musíte zadat množství']),
+							new Constraints\GreaterThan(['value' => 0, 'message' => 'Musíte zadat kladné množství']),
+							new Constraints\LessThanOrEqual([
+								'value' => ConstraintValue::INTEGER_MAX_VALUE,
+								'message' => 'Zadejte prosím platné množství',
+							]),
+						],
+					]),
+				],
+			])
+			->add('submit', FormType::SUBMIT);
 	}
 
 	/**

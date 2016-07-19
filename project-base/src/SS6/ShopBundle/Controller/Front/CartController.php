@@ -23,6 +23,8 @@ class CartController extends FrontBaseController {
 
 	const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
 
+	const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';
+
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\Cart
 	 */
@@ -105,28 +107,23 @@ class CartController extends FrontBaseController {
 		$form = $this->createForm(new CartFormType($this->cart));
 		$form->setData($cartFormData);
 		$form->handleRequest($request);
-		$invalidCartRecalc = false;
+		$invalidCart = false;
 
 		if ($form->isValid()) {
 			try {
 				$this->cartFacade->changeQuantities($form->getData()['quantities']);
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$invalidCartRecalc = true;
-			}
 
-			if (!$invalidCartRecalc) {
-				if ($form->get('recalcToOrder')->isClicked()) {
+				if (!$request->get(self::RECALCULATE_ONLY_PARAMETER_NAME, false)) {
 					return $this->redirectToRoute('front_order_index');
-				} else {
-					$this->getFlashMessageSender()->addSuccessFlash(t('Množství položek v košíku bylo úspěšně přepočítáno.'));
-					return $this->redirectToRoute('front_cart');
 				}
+			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+				$invalidCart = true;
 			}
 		} elseif ($form->isSubmitted()) {
-			$invalidCartRecalc = true;
+			$invalidCart = true;
 		}
 
-		if ($invalidCartRecalc) {
+		if ($invalidCart) {
 			$this->getFlashMessageSender()->addErrorFlash(
 				t('Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.')
 			);

@@ -331,4 +331,31 @@ class StrictWebDriver extends WebDriver {
 		parent::moveMouseOver(['css' => $css], $offsetX, $offsetY);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public function pressKey($element, $char) {
+		$strictAlternatives = [
+			'pressKeysBy*',
+		];
+		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
+		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+	}
+
+	/**
+	 * Examples:
+	 * $I->pressKeysByElement($element, 'hello'); // hello
+	 * $I->pressKeysByElement($element, ['n', 'e', 'w']); // new
+	 * $I->pressKeysByElement($element, [[\Facebook\WebDriver\WebDriverKeys, 'day'], 1]); // DAY1
+	 *
+	 * For available keys:
+	 * @see \Facebook\WebDriver\WebDriverKeys
+	 *
+	 * @param \Facebook\WebDriver\WebDriverElement $element
+	 * @param string|string[] $keys
+	 */
+	public function pressKeysByElement(WebDriverElement $element, $keys) {
+		$element->sendKeys($keys);
+	}
+
 }

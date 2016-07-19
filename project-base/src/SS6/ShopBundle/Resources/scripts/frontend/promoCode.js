@@ -3,10 +3,10 @@
 	SS6 = SS6 || {};
 	SS6.promoCode = SS6.promoCode || {};
 
-	SS6.promoCode.PromoCode = function() {
+	SS6.promoCode.PromoCode = function($container) {
 		var self = this;
-		var $promoCodeSubmitButton = $('#js-promo-code-submit-button');
-		var $promoCodeInput = $('#js-promo-code-input');
+		var $promoCodeSubmitButton = $container.filterAllNodes('#js-promo-code-submit-button');
+		var $promoCodeInput = $container.filterAllNodes('#js-promo-code-input');
 
 		this.init = function() {
 			$promoCodeSubmitButton.click(applyPromoCode);
@@ -49,8 +49,8 @@
 		};
 	};
 
-	$(document).ready(function(){
-		var promoCode = new SS6.promoCode.PromoCode();
+	SS6.register.registerCallback(function ($container) {
+		var promoCode = new SS6.promoCode.PromoCode($container);
 		promoCode.init();
 	});
 
