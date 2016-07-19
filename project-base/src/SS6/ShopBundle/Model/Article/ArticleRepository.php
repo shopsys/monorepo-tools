@@ -48,7 +48,7 @@ class ArticleRepository {
 	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getArticlesByDomainIdQueryBuilder($domainId) {
+	private function getArticlesByDomainIdQueryBuilder($domainId) {
 		return $this->em->createQueryBuilder()
 			->select('a')
 			->from(Article::class, 'a')
