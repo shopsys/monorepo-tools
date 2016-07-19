@@ -93,12 +93,12 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function getById($articleId) {
-		$user = $this->getArticleRepository()->find($articleId);
-		if ($user === null) {
+		$article = $this->getArticleRepository()->find($articleId);
+		if ($article === null) {
 			$message = 'Article with ID ' . $articleId . ' not found';
 			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
-		return $user;
+		return $article;
 	}
 
 	/**
