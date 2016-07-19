@@ -24,16 +24,26 @@
 		var buttonContinueUrl = $($.parseHTML(data)).filterAllNodes('.js-add-product-url-cart').data('url');
 		var isWide = $($.parseHTML(data)).filterAllNodes('.js-add-product-wide-window').data('wide');
 
-		SS6.window({
-			content: data,
-			wide: isWide,
-			buttonContinue: true,
-			textContinue: SS6.translator.trans('Přejít do košíku'),
-			urlContinue: buttonContinueUrl,
-			cssClassContinue: 'btn--primary'
-		});
+		if (buttonContinueUrl !== undefined) {
+			SS6.window({
+				content: data,
+				wide: isWide,
+				buttonContinue: true,
+				textContinue: SS6.translator.trans('Přejít do košíku'),
+				urlContinue: buttonContinueUrl,
+				cssClassContinue: 'btn--primary'
+			});
 
-		$('#js-cart-box').trigger('reload');
+			$('#js-cart-box').trigger('reload');
+		} else {
+			SS6.window({
+				content: data,
+				wide: isWide,
+				buttonCancel: true,
+				textCancel: SS6.translator.trans('Zavřít'),
+				cssClassCancel: 'btn--primary'
+			});
+		}
 	};
 
 	SS6.addProduct.onError = function (jqXHR) {

@@ -208,9 +208,9 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}'),
+				t('Zadejte prosím platné množství, které chcete vložit do košíku:<br/><ul><li>{{ errors|raw }}</li></ul>'),
 				[
-					'errors' => implode('<br/>', $formErrors),
+					'errors' => implode('</li><li>', $formErrors),
 				]
 			);
 		}
@@ -266,9 +266,9 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Zadejte prosím platné množství, které chcete vložit do košíku.<br/> {{ errors|raw }}'),
+				t('Zadejte prosím platné množství, které chcete vložit do košíku:<br/><ul><li>{{ errors|raw }}</li></ul>'),
 				[
-					'errors' => implode('<br/>', $formErrors),
+					'errors' => implode('</li><li>', $formErrors),
 				]
 			);
 		}
