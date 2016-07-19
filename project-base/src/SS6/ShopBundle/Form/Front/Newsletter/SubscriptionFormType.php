@@ -31,7 +31,7 @@ class SubscriptionFormType extends AbstractType {
 					new Constraints\Email(),
 				],
 			])
-			->add('email2', FormType::HONEY_POT)
+			->add('captcha', FormType::HONEY_POT)
 			->add('send', FormType::SUBMIT);
 	}
 

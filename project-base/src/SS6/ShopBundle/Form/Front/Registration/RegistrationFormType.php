@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType {
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])
-			->add('email2', FormType::HONEY_POT)
+			->add('captcha', FormType::HONEY_POT)
 			->add('password', FormType::REPEATED, [
 				'type' => FormType::PASSWORD,
 				'options' => [

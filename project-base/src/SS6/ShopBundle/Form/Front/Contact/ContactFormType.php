@@ -43,7 +43,7 @@ class ContactFormType extends AbstractType {
 					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
-			->add('email2', FormType::HONEY_POT)
+			->add('captcha', FormType::HONEY_POT)
 			->add('send', FormType::SUBMIT);
 	}
 
