@@ -18,6 +18,7 @@
 			{% block article_placement %}{% endblock %}
 
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
+			{{ form_row(form.hidden, { label: 'Skrýt'|trans, newline: true}) }}
 			{{ form_row(form.text, { label: 'Text'|trans, newline: true}) }}
 			<div class="form-line js-characters-counter">
 				{{ form_errors(form.seoTitle) }}

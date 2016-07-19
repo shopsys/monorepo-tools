@@ -58,7 +58,10 @@ class SliderItemRepository {
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
 	 */
-	public function getAllByDomainId($domainId) {
-		return $this->getSliderItemRepository()->findBy(['domainId' => $domainId]);
+	public function getAllVisibleByDomainId($domainId) {
+		return $this->getSliderItemRepository()->findBy([
+			'domainId' => $domainId,
+			'hidden' => false,
+		]);
 	}
 }

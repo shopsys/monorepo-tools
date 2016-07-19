@@ -20,6 +20,11 @@ class SliderItemData {
 	public $image;
 
 	/**
+	 * @var bool|null
+	 */
+	public $hidden;
+
+	/**
 	 * @param string $name
 	 * @param string $link
 	 * @param string $image
@@ -27,11 +32,13 @@ class SliderItemData {
 	public function __construct(
 		$name = null,
 		$link = null,
-		$image = null
+		$image = null,
+		$visible = null
 	) {
 		$this->name = $name;
 		$this->link = $link;
 		$this->image = $image;
+		$this->hidden = $visible;
 	}
 
 	/**
@@ -40,5 +47,6 @@ class SliderItemData {
 	public function setFromEntity(SliderItem $sliderItem) {
 		$this->name = $sliderItem->getName();
 		$this->link = $sliderItem->getLink();
+		$this->hidden = $sliderItem->isHidden();
 	}
 }

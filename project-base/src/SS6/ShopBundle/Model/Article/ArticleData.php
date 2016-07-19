@@ -42,6 +42,11 @@ class ArticleData {
 	 */
 	public $placement;
 
+	/**
+	 * @var bool|null
+	 */
+	public $hidden;
+
 	public function __construct() {
 		$this->urls = new UrlListData();
 	}
@@ -56,5 +61,6 @@ class ArticleData {
 		$this->seoMetaDescription = $article->getSeoMetaDescription();
 		$this->domainId = $article->getDomainId();
 		$this->placement = $article->getPlacement();
+		$this->hidden = $article->isHidden();
 	}
 }

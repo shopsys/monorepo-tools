@@ -99,7 +99,7 @@ class SliderItemFacade {
 	/**
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem[]
 	 */
-	public function getAllOnCurrentDomain() {
-		return $this->sliderItemRepository->getAllByDomainId($this->domain->getId());
+	public function getAllVisibleOnCurrentDomain() {
+		return $this->sliderItemRepository->getAllVisibleByDomainId($this->domain->getId());
 	}
 }

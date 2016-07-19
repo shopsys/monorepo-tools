@@ -61,6 +61,7 @@ class ArticleFormType extends AbstractType {
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím název článku']),
 				],
 			])
+			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('text', FormType::WYSIWYG, [
 				'required' => true,
 				'constraints' => [

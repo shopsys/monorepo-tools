@@ -48,11 +48,21 @@ class ArticleRepository {
 	 * @param int $domainId
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
-	public function getArticlesByDomainIdQueryBuilder($domainId) {
+	private function getArticlesByDomainIdQueryBuilder($domainId) {
 		return $this->em->createQueryBuilder()
 			->select('a')
 			->from(Article::class, 'a')
 			->where('a.domainId = :domainId')->setParameter('domainId', $domainId);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	public function getVisibleArticlesByDomainIdQueryBuilder($domainId) {
+		return $this->getAllVisibleQueryBuilder()
+			->andWhere('a.domainId = :domainId')
+			->setParameter('domainId', $domainId);
 	}
 
 	/**
@@ -70,11 +80,10 @@ class ArticleRepository {
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForPlacement($domainId, $placement) {
-		$queryBuilder = $this->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
-			$domainId,
-			$placement
-		);
+	public function getVisibleArticlesForPlacement($domainId, $placement) {
+		$queryBuilder = $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
+			->andWhere('a.placement = :placement')->setParameter('placement', $placement)
+			->orderBy('a.position, a.id');
 
 		return $queryBuilder->getQuery()->execute();
 	}
@@ -84,12 +93,39 @@ class ArticleRepository {
 	 * @return \SS6\ShopBundle\Model\Article\Article
 	 */
 	public function getById($articleId) {
-		$user = $this->getArticleRepository()->find($articleId);
-		if ($user === null) {
+		$article = $this->getArticleRepository()->find($articleId);
+		if ($article === null) {
 			$message = 'Article with ID ' . $articleId . ' not found';
 			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
-		return $user;
+		return $article;
+	}
+
+	/**
+	 * @param int $articleId
+	 * @return \SS6\ShopBundle\Model\Article\Article
+	 */
+	public function getVisibleById($articleId) {
+		$article = $this->getAllVisibleQueryBuilder()
+			->andWhere('a.id = :articleId')
+			->setParameter('articleId', $articleId)
+			->getQuery()->getOneOrNullResult();
+
+		if ($article === null) {
+			$message = 'Article with ID ' . $articleId . ' not found';
+			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+		}
+		return $article;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getAllVisibleQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('a')
+			->from(Article::class, 'a')
+			->where('a.hidden = false');
 	}
 
 	/**

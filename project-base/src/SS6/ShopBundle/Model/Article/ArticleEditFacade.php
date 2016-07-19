@@ -64,6 +64,14 @@ class ArticleEditFacade {
 	}
 
 	/**
+	 * @param int $articleId
+	 * @return \SS6\ShopBundle\Model\Article\Article
+	 */
+	public function getVisibleById($articleId) {
+		return $this->articleRepository->getVisibleById($articleId);
+	}
+
+	/**
 	 * @param $domainId
 	 * @return int
 	 */
@@ -75,8 +83,8 @@ class ArticleEditFacade {
 	 * @param string $placement
 	 * @return \SS6\ShopBundle\Model\Article\Article[]
 	 */
-	public function getArticlesForPlacementOnCurrentDomain($placement) {
-		return $this->articleRepository->getArticlesForPlacement($this->domain->getId(), $placement);
+	public function getVisibleArticlesForPlacementOnCurrentDomain($placement) {
+		return $this->articleRepository->getVisibleArticlesForPlacement($this->domain->getId(), $placement);
 	}
 
 	/**

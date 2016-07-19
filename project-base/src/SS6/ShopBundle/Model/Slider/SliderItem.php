@@ -51,12 +51,20 @@ class SliderItem implements OrderableEntityInterface {
 	private $position;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $hidden;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 */
 	public function __construct(SliderItemData $sliderItemData, $domainId) {
 		$this->domainId = $domainId;
 		$this->name = $sliderItemData->name;
 		$this->link = $sliderItemData->link;
+		$this->hidden = $sliderItemData->hidden;
 	}
 
 	/**
@@ -65,6 +73,7 @@ class SliderItem implements OrderableEntityInterface {
 	public function edit(SliderItemData $sliderItemData) {
 		$this->name = $sliderItemData->name;
 		$this->link = $sliderItemData->link;
+		$this->hidden = $sliderItemData->hidden;
 	}
 
 	/**
@@ -107,6 +116,13 @@ class SliderItem implements OrderableEntityInterface {
 	 */
 	public function setPosition($position) {
 		$this->position = $position;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isHidden() {
+		return $this->hidden;
 	}
 
 }

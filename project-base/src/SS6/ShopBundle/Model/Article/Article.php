@@ -75,6 +75,13 @@ class Article implements OrderableEntityInterface {
 	private $placement;
 
 	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="boolean")
+	 */
+	private $hidden;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function __construct(ArticleData $articleData) {
@@ -85,6 +92,7 @@ class Article implements OrderableEntityInterface {
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
 		$this->placement = $articleData->placement;
 		$this->position = SortablePosition::LAST_POSITION;
+		$this->hidden = $articleData->hidden;
 	}
 
 	/**
@@ -96,6 +104,7 @@ class Article implements OrderableEntityInterface {
 		$this->seoTitle = $articleData->seoTitle;
 		$this->seoMetaDescription = $articleData->seoMetaDescription;
 		$this->placement = $articleData->placement;
+		$this->hidden = $articleData->hidden;
 	}
 
 	/**
@@ -159,6 +168,13 @@ class Article implements OrderableEntityInterface {
 	 */
 	public function setPlacement($placement) {
 		$this->placement = $placement;
+	}
+
+	/**
+	 * @return string $visible
+	 */
+	public function isHidden() {
+		return $this->hidden;
 	}
 
 }

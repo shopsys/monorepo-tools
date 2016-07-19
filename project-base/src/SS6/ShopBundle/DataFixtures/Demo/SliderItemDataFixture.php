@@ -17,6 +17,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 
 		$sliderItemData->name = 'Shopsys';
 		$sliderItemData->link = 'http://www.shopsys.cz/';
+		$sliderItemData->hidden = false;
 
 		$this->createSliderItem($manager, $sliderItemData, 1);
 

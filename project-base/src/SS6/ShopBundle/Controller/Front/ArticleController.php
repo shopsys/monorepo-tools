@@ -21,7 +21,7 @@ class ArticleController extends FrontBaseController {
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$article = $this->articleEditFacade->getById($id);
+		$article = $this->articleEditFacade->getVisibleById($id);
 
 		return $this->render('@SS6Shop/Front/Content/Article/detail.html.twig', [
 			'article' => $article,
@@ -29,7 +29,7 @@ class ArticleController extends FrontBaseController {
 	}
 
 	public function menuAction() {
-		$articles = $this->articleEditFacade->getArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
+		$articles = $this->articleEditFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
 
 		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,
@@ -37,7 +37,7 @@ class ArticleController extends FrontBaseController {
 	}
 
 	public function footerAction() {
-		$articles = $this->articleEditFacade->getArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
+		$articles = $this->articleEditFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
 
 		return $this->render('@SS6Shop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,
