@@ -500,6 +500,13 @@ services:
       # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 10 }
 
+  # Define RedicrectController explicitly to prevent creating it on-the-fly
+  # when redirecting (it causes unnecessary container rebuild).
+  ss6.shop.redirect_controller:
+    class: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+    calls:
+      - [setContainer, [@service_container]]
+
   ss6.shop.router.current_domain_router:
     class: SS6\ShopBundle\Component\Router\CurrentDomainRouter
     tags:
