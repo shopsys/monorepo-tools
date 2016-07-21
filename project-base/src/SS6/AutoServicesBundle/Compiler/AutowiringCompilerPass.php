@@ -99,6 +99,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 				$definition = new Definition($class);
 				$this->autowireClassDefinition($containerBuilder, $serviceId, $definition, $containerClassList);
 				$containerBuilder->setDefinition($serviceId, $definition);
+				$containerClassList->addClass($serviceId, $class);
 			}
 		}
 		$autoServicesCollector->setServices($newCollectorData);
