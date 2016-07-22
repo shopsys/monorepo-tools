@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Model\Customer\UserRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
@@ -28,11 +27,6 @@ class PricingGroupFacade {
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
@@ -63,7 +57,6 @@ class PricingGroupFacade {
 		EntityManager $em,
 		PricingGroupRepository $pricingGroupRepository,
 		Domain $domain,
-		SelectedDomain $selectedDomain,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
 		PricingGroupSettingFacade $pricingGroupSettingFacade,
 		ProductVisibilityRepository $productVisibilityRepository,
@@ -73,7 +66,6 @@ class PricingGroupFacade {
 		$this->em = $em;
 		$this->pricingGroupRepository = $pricingGroupRepository;
 		$this->domain = $domain;
-		$this->selectedDomain = $selectedDomain;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
 		$this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
 		$this->productVisibilityRepository = $productVisibilityRepository;
@@ -91,10 +83,11 @@ class PricingGroupFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
-	public function create(PricingGroupData $pricingGroupData) {
-		$pricingGroup = new PricingGroup($pricingGroupData, $this->selectedDomain->getId());
+	public function create(PricingGroupData $pricingGroupData, $domainId) {
+		$pricingGroup = new PricingGroup($pricingGroupData, $domainId);
 
 		$this->em->persist($pricingGroup);
 		$this->em->flush();
