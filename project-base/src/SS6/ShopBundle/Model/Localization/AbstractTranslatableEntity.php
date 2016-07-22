@@ -48,7 +48,10 @@ abstract class AbstractTranslatableEntity extends AbstractTranslatable {
 		}
 
 		if (!$locale) {
-			throw new \RuntimeException('No locale has been set and currentLocale is empty');
+			throw new \SS6\ShopBundle\Model\Localization\Exception\ImplicitLocaleNotSetException(
+				$this,
+				$this->id
+			);
 		}
 
 		if ($this->currentTranslation && $this->currentTranslation->getLocale() === $locale) {

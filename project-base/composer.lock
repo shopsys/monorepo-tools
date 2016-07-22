@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9ede2598e98cfe397b3815bd963f45fc",
-    "content-hash": "302ff08f0d18e7afb2bbe2aee190d599",
+    "hash": "7206b6eb3b2c7795b5c9f5e14154b255",
+    "content-hash": "2774456e655488053195f6e1d6ff3e7c",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1521,7 +1521,7 @@
                 "symfony",
                 "validation"
             ],
-            "time": "2016-03-29 14:06:14"
+            "time": "2015-06-19 14:38:58"
         },
         {
             "name": "fzaninotto/faker",
@@ -3103,22 +3103,22 @@
         },
         {
             "name": "prezent/doctrine-translatable-bundle",
-            "version": "1.0.1",
+            "version": "dev-rise-locale-listener-priority",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Prezent/doctrine-translatable-bundle.git",
-                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8"
+                "url": "https://github.com/shopsys/doctrine-translatable-bundle.git",
+                "reference": "09863c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Prezent/doctrine-translatable-bundle/zipball/adfc8496d909f483f946cfdb0fe2820e617251d8",
-                "reference": "adfc8496d909f483f946cfdb0fe2820e617251d8",
+                "url": "https://api.github.com/repos/shopsys/doctrine-translatable-bundle/zipball/09863c2",
+                "reference": "09863c2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "~1.2",
                 "prezent/doctrine-translatable": ">=1.0,<2.0-dev",
-                "symfony/symfony": "~2.2"
+                "symfony/symfony": "~2.2|~3.0"
             },
             "type": "library",
             "extra": {
@@ -3131,7 +3131,6 @@
                     "Prezent\\Doctrine\\TranslatableBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3144,14 +3143,19 @@
             "description": "Integrate the doctrine-translatable extension in Symfony2",
             "homepage": "http://www.prezent.nl",
             "keywords": [
-                "Symfony2",
                 "bundle",
                 "doctrine2",
                 "extensions",
                 "i18n",
+                "symfony2",
                 "translatable"
             ],
-            "time": "2014-11-20 15:29:43"
+            "support": {
+                "wiki": "https://github.com/prezent/doctrine-translatable-bundle/tree/master/Resources/doc",
+                "issues": "https://github.com/prezent/doctrine-translatable-bundle/issues",
+                "source": "https://github.com/prezent/doctrine-translatable-bundle"
+            },
+            "time": "2016-07-22 10:52:12"
         },
         {
             "name": "psr/http-message",
@@ -4366,7 +4370,7 @@
             "support": {
                 "source": "https://github.com/sustmi/Routing/tree/master"
             },
-            "time": "2015-09-19 14:58:43"
+            "time": "2015-09-30 09:50:25"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -5747,6 +5751,7 @@
         "fp/jsformvalidator-bundle": 20,
         "intaro/postgres-search-bundle": 20,
         "jms/translation-bundle": 20,
+        "prezent/doctrine-translatable-bundle": 20,
         "symfony-cmf/routing": 20,
         "timwhitlock/jparser": 20
     },

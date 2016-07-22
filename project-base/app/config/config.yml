@@ -110,6 +110,11 @@ monolog:
 presta_sitemap:
   route_annotation_listener: false
 
+prezent_doctrine_translatable:
+  # do not use fallback locale
+  # (currentLocale of entities should be set by request or stay NULL)
+  fallback_locale: ~
+
 ss6_shop:
   router:
     locale_router_filepaths:
