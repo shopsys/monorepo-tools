@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 
 use Codeception\Module;
-use Codeception\TestCase;
+use Codeception\TestInterface;
 use Facebook\WebDriver\Remote\DriverCommand;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
@@ -15,7 +15,7 @@ class CloseNewlyOpenedWindowsHelper extends Module {
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	public function _after(TestCase $test) {
+	public function _after(TestInterface $test) {
 		// @codingStandardsIgnoreEnd
 		$webDriver = $this->getModule(StrictWebDriver::class);
 		/* @var $webDriver \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
