@@ -36,9 +36,9 @@ class NewProductTest extends FunctionalTestCase {
 		$flashMessageBag = $client2->getContainer()->get('ss6.shop.component.flash_message.bag.admin');
 		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
 
+		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 		$this->assertNotEmpty($flashMessageBag->getSuccessMessages());
 		$this->assertEmpty($flashMessageBag->getErrorMessages());
-		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 	}
 
 	/**
