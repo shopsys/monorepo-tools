@@ -189,6 +189,12 @@ class CartFacadeTest extends DatabaseTestCase {
 	public function testDeleteCartItem() {
 		$em = $this->getEntityManager();
 
+		// Set currentLocale in TranslatableListener as it done in real request
+		// because CartWatcherFacade works with entity translations.
+		$translatableListener = $this->getContainer()->get(\SS6\ShopBundle\Model\Localization\TranslatableListener::class);
+		/* @var $translatableListener \SS6\ShopBundle\Model\Localization\TranslatableListener */
+		$translatableListener->setCurrentLocale('cs');
+
 		$cartService = $this->getContainer()->get(CartService::class);
 		$productRepository = $this->getContainer()->get(ProductRepository::class);
 		$customerIdentifier = new CustomerIdentifier('randomString');
