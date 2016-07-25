@@ -86,6 +86,7 @@ class AutoContainer implements ContainerInterface {
 	private function registerServiceToContainer($serviceId, $service, $className) {
 		$this->container->set($serviceId, $service);
 		$this->autoServiceCollector->addService($serviceId, $className);
+		$this->containerClassList->addClass($serviceId, $className);
 	}
 
 	/**
