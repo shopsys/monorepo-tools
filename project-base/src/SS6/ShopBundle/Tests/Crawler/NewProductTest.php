@@ -7,6 +7,7 @@ use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Symfony\Component\DomCrawler\Form;
 
 class NewProductTest extends FunctionalTestCase {
 
@@ -49,7 +50,7 @@ class NewProductTest extends FunctionalTestCase {
 	/**
 	 * @param \Symfony\Component\DomCrawler\Form $form
 	 */
-	private function fillForm($form) {
+	private function fillForm(Form $form) {
 		$form['product_edit_form[productData][name][cs]'] = 'testProduct';
 		$form['product_edit_form[productData][catnum]'] = '123456';
 		$form['product_edit_form[productData][partno]'] = '123456';
@@ -68,7 +69,7 @@ class NewProductTest extends FunctionalTestCase {
 	 * @param \Symfony\Component\DomCrawler\Form $form
 	 * @param string $csrfToken
 	 */
-	private function setFormCsrfToken($form, $csrfToken) {
+	private function setFormCsrfToken(Form $form, $csrfToken) {
 		$form['product_edit_form[_token]'] = $csrfToken;
 	}
 
