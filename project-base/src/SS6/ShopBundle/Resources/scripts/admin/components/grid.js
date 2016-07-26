@@ -11,9 +11,11 @@
 		var $button = $(this).find('.js-grid-go-to-button');
 		var $input = $(this).find('.js-grid-go-to-input');
 
-		$input.bind('keyup.gridGoTo', function (event) {
+		$input.bind('keydown.gridGoTo', function (event) {
 			if (event.keyCode == SS6.keyCodes.ENTER) {
 				$button.trigger('click.gridGoTo', event);
+
+				return false;
 			}
 		});
 
