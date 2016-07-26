@@ -85,6 +85,13 @@
 						content: 'Prosím překontrolujte následující informace:<br/><br/>• ' + saveResult.errors.join('<br/>• ')
 					});
 				}
+			},
+			error: function () {
+				SS6.window({
+					content: SS6.translator.trans('Nastala chyba, zkuste to, prosím, znovu.')
+				});
+				$buttons.show();
+				$saving.hide();
 			}
 		});
 	};
