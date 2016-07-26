@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 use AppKernel;
 use Codeception\Configuration;
 use Codeception\Module;
-use Codeception\TestCase;
+use Codeception\TestInterface;
 use SS6\Environment;
 
 class SymfonyHelper extends Module {
@@ -38,7 +38,7 @@ class SymfonyHelper extends Module {
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	public function _before(TestCase $test) {
+	public function _before(TestInterface $test) {
 	// @codingStandardsIgnoreEnd
 		$this->kernel->boot();
 	}

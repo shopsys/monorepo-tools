@@ -33,7 +33,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 		/* @var $connection \Doctrine\DBAL\Connection */
 
 		$command = sprintf(
-			'%s --dbname=%s --username=%s --no-password --inserts',
+			'%s --dbname=%s --username=%s --no-password',
 			escapeshellcmd($input->getOption(self::OPT_PGDUMP_BIN)),
 			escapeshellarg($connection->getDatabase()),
 			escapeshellarg($connection->getUsername()),

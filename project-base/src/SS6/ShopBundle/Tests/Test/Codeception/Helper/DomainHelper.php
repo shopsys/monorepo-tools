@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
 
 use Codeception\Module;
-use Codeception\TestCase;
+use Codeception\TestInterface;
 use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
@@ -14,7 +14,7 @@ class DomainHelper extends Module {
 	 * {@inheritDoc}
 	 * @SuppressWarnings(PHPMD.CamelCaseMethodName)
 	 */
-	public function _before(TestCase $test) {
+	public function _before(TestInterface $test) {
 	// @codingStandardsIgnoreEnd
 		$webDriver = $this->getModule(StrictWebDriver::class);
 		/* @var $webDriver \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
