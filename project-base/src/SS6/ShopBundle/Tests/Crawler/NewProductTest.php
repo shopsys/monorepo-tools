@@ -7,6 +7,7 @@ use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture;
 use SS6\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Symfony\Component\DomCrawler\Form;
 
 class NewProductTest extends FunctionalTestCase {
 
@@ -21,31 +22,35 @@ class NewProductTest extends FunctionalTestCase {
 	public function testCreateOrEditProduct($relativeUrl) {
 		$client1 = $this->getClient(false, 'admin', 'admin123');
 		$crawler = $client1->request('GET', $relativeUrl);
+
 		$form = $crawler->filter('form[name=product_edit_form]')->form();
+		$this->fillForm($form);
 
 		$client2 = $this->getClient(true, 'admin', 'admin123');
 		$em2 = $client2->getContainer()->get('doctrine.orm.entity_manager');
 		/* @var $em2 \Doctrine\ORM\EntityManager */
 
 		$em2->beginTransaction();
+
 		$csrfToken = $client2->getContainer()->get('form.csrf_provider')->generateCsrfToken(ProductEditFormType::INTENTION);
-		$this->setFormValuesAndToken($form, $csrfToken);
+		$this->setFormCsrfToken($form, $csrfToken);
+
 		$client2->submit($form);
+
 		$em2->rollback();
 
 		$flashMessageBag = $client2->getContainer()->get('ss6.shop.component.flash_message.bag.admin');
 		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
 
+		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 		$this->assertNotEmpty($flashMessageBag->getSuccessMessages());
 		$this->assertEmpty($flashMessageBag->getErrorMessages());
-		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 	}
 
 	/**
 	 * @param \Symfony\Component\DomCrawler\Form $form
-	 * @param string $csrfToken
 	 */
-	private function setFormValuesAndToken($form, $csrfToken) {
+	private function fillForm(Form $form) {
 		$form['product_edit_form[productData][name][cs]'] = 'testProduct';
 		$form['product_edit_form[productData][catnum]'] = '123456';
 		$form['product_edit_form[productData][partno]'] = '123456';
@@ -58,6 +63,13 @@ class NewProductTest extends FunctionalTestCase {
 		$form['product_edit_form[productData][stockQuantity]'] = '10';
 		$form['product_edit_form[productData][unit]']->select($this->getReference(UnitDataFixture::M3)->getId());
 		$form['product_edit_form[productData][availability]']->select($this->getReference(AvailabilityDataFixture::IN_STOCK)->getId());
+	}
+
+	/**
+	 * @param \Symfony\Component\DomCrawler\Form $form
+	 * @param string $csrfToken
+	 */
+	private function setFormCsrfToken(Form $form, $csrfToken) {
 		$form['product_edit_form[_token]'] = $csrfToken;
 	}
 

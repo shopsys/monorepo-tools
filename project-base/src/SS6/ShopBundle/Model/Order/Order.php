@@ -484,7 +484,7 @@ class Order {
 	 * @return string
 	 */
 	public function getTransportName() {
-		return $this->getTransport()->getName();
+		return $this->getOrderTransport()->getName();
 	}
 
 	/**

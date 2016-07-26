@@ -19,6 +19,10 @@
 		},
 		{
 			"type": "vcs",
+			"url": "https://github.com/shopsys/doctrine-translatable-bundle.git"
+		},
+		{
+			"type": "vcs",
 			"url": "https://github.com/shopsys/jparser.git"
 		},
 		{
@@ -64,7 +68,7 @@
 		"phing/phing": "2.13.0",
 		"phpunit/phpunit": "4.8.4",
 		"presta/sitemap-bundle": "1.4.2",
-		"prezent/doctrine-translatable-bundle": "1.0.1",
+		"prezent/doctrine-translatable-bundle": "dev-rise-locale-listener-priority#09863c2",
 		"raulfraile/ladybug-bundle": "1.0.6",
 		"sensio/distribution-bundle": "4.0.1",
 		"sensio/framework-extra-bundle": "3.0.10",
