@@ -1,3 +1,12 @@
+/**
+ * Warning before acutalization!!!
+ *
+ * This file contains SS6 customization.
+ *
+ * Changes:
+ *  - set ModernizrProto._config.classPrefix = 'enabled-'
+ */
+
 /*!
  * modernizr v3.3.1
  * Build http://modernizr.com/download?-backgroundsize-checked-csscalc-flexbox-sizes-svg-svgasimg-setclasses-dontmin
@@ -44,7 +53,7 @@
     // Any settings that don't work as separate modules
     // can go in here as configuration.
     _config: {
-      'classPrefix': '',
+      'classPrefix': 'enabled-',
       'enableClasses': true,
       'enableJSClass': true,
       'usePrefixes': true
