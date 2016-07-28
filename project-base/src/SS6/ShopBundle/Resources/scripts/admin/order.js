@@ -14,12 +14,16 @@
 		var showInWindowAfterLoad = false;
 
 		this.init = function () {
+			var keepVisible = false;
+
 			$previewIcon
-				.mouseenter(function() {
-					$previewBox.show();
-				})
 				.mouseleave(function () {
-					$previewBox.hide();
+					keepVisible = false;
+					setTimeout(function () {
+						if (!keepVisible) {
+							$previewBox.hide();
+						}
+					}, 20); // Mouse needs some time to leave the icon and enter the $visibilityBox
 				})
 				.click(function () {
 					if (isLoaded) {
@@ -29,8 +33,9 @@
 					}
 				})
 				.hoverIntent({
-					interval: 100,
+					interval: 200,
 					over: function () {
+						$previewBox.show();
 						if (!isLoaded && !isLoading) {
 							isLoading = true;
 							SS6.ajax({
@@ -41,6 +46,13 @@
 						}
 					},
 					out: function () {}
+				});
+			$previewBox
+				.mouseenter(function () {
+					keepVisible = true;
+				})
+				.mouseleave(function() {
+					$previewBox.hide();
 				});
 		};
 
