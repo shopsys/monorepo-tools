@@ -268,7 +268,7 @@
 {% block icon %}
 	{% spaceless %}
 		{% if icon is defined %}
-			<i class="svg svg-{{ icon.type|default('info') }} in-icon in-icon--info form-line__info js-tooltip"
+			<i class="{{ icon.format|default('svg') }} {{ icon.format|default('svg') }}-{{ icon.type|default('info') }} {{ icon.class|default('') }}"
 				data-toggle="tooltip"
 				data-placement="{{ icon.data.placement|default('right') }}"
 				title="{{ icon.title }}">
