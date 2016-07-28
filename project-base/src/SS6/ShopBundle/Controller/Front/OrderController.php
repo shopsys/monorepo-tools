@@ -9,6 +9,7 @@ use SS6\ShopBundle\Form\Front\Order\OrderFlow;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Country\CountryFacade;
 use SS6\ShopBundle\Model\Customer\User;
+use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
 use SS6\ShopBundle\Model\Order\FrontOrderData;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
 use SS6\ShopBundle\Model\Order\OrderData;
@@ -107,6 +108,11 @@ class OrderController extends FrontBaseController {
 	private $termsAndConditionsFacade;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterFacade
+	 */
+	private $newsletterFacade;
+
+	/**
 	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
@@ -127,6 +133,7 @@ class OrderController extends FrontBaseController {
 		TransportAndPaymentWatcherService $transportAndPaymentWatcherService,
 		OrderMailFacade $orderMailFacade,
 		TermsAndConditionsFacade $termsAndConditionsFacade,
+		NewsletterFacade $newsletterFacade,
 		CountryFacade $countryFacade
 	) {
 		$this->orderFacade = $orderFacade;
@@ -144,6 +151,7 @@ class OrderController extends FrontBaseController {
 		$this->transportAndPaymentWatcherService = $transportAndPaymentWatcherService;
 		$this->orderMailFacade = $orderMailFacade;
 		$this->termsAndConditionsFacade = $termsAndConditionsFacade;
+		$this->newsletterFacade = $newsletterFacade;
 		$this->countryFacade = $countryFacade;
 	}
 
@@ -199,6 +207,10 @@ class OrderController extends FrontBaseController {
 				$form = $this->flow->createForm();
 			} elseif ($flashMessageBag->isEmpty()) {
 				$order = $this->orderFacade->createOrderFromFront($orderData);
+
+				if ($frontOrderFormData->newsletterSubscription) {
+					$this->newsletterFacade->addSubscribedEmail($frontOrderFormData->email);
+				}
 
 				$this->flow->reset();
 

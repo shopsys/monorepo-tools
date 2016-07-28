@@ -228,6 +228,9 @@ class PersonalInfoFormType extends AbstractType {
 					]),
 				],
 			])
+			->add('newsletterSubscription', FormType::CHECKBOX, [
+				'required' => false,
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

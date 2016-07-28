@@ -74,6 +74,7 @@
 				</div>
 			{% endif %}
 			{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
+			{{ form_row(form.newsletterSubscription, { label: 'Chci se přihlásit k odběru newsletteru'|trans }) }}
 		</div>
 		<div class="box-order__cart">
 			{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}

@@ -63,6 +63,7 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase {
 		$personalInfoFormData['postcode'] = '12345';
 		$personalInfoFormData['country'] = $country->getId();
 		$personalInfoFormData['termsAndConditionsAgreement'] = $termsAndConditionsAgreement;
+		$personalInfoFormData['newsletterSubscription'] = false;
 
 		return $personalInfoFormData;
 	}

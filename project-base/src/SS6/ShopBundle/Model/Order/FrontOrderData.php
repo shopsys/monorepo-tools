@@ -9,4 +9,9 @@ class FrontOrderData extends OrderData {
 	 */
 	public $companyCustomer;
 
+	/**
+	 * @var bool
+	 */
+	public $newsletterSubscription;
+
 }
