@@ -16,17 +16,13 @@
 		this.init = function () {
 			var keepVisible = false;
 			$visibilityIcon
-				.mouseenter(function () {
-					$visibilityBox.show();
-				})
 				.mouseleave(function () {
 					keepVisible = false;
 					setTimeout(function () {
 						if (!keepVisible) {
 							$visibilityBox.hide();
 						}
-					}, 700);
-
+					}, 20); // Mouse needs some time to leave the icon and enter the $visibilityBox
 				})
 				.click(function () {
 					if (isLoaded) {
@@ -36,8 +32,9 @@
 					}
 				})
 				.hoverIntent({
-					interval: 100,
+					interval: 200,
 					over: function () {
+						$visibilityBox.show();
 						if (!isLoaded && !isLoading) {
 							isLoading = true;
 							SS6.ajax({
