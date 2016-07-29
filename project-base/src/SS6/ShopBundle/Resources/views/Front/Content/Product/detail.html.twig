@@ -181,7 +181,7 @@
 		<div class="in-tab js-tabs">
 			<div class="in-tab__head">
 				{% if productDomain.description %}
-					<a href="#" class="in-tab__head__item active js-tabs-tab-link" data-tab-id="description">
+					<a href="#" class="in-tab__head__item js-tabs-tab-link" data-tab-id="description">
 						{{ descriptionHeadline }}
 					</a>
 				{% endif %}
@@ -200,11 +200,11 @@
 			</div>
 			<div class="in-tab__content">
 				{% if productDomain.description %}
-					<a href="#" class="in-tab__content__title active js-tabs-tab-link" data-tab-id="description">
+					<a href="#" class="in-tab__content__title js-tabs-tab-link" data-tab-id="description">
 						{{ descriptionHeadline }}
 						<i class="svg svg-arrow"></i>
 					</a>
-					<div class="in-tab__content__item active js-tabs-tab-content" data-tab-id="description">
+					<div class="in-tab__content__item js-tabs-tab-content" data-tab-id="description">
 						<div class="in-user-text">
 							{{ productDomain.description|raw }}
 						</div>

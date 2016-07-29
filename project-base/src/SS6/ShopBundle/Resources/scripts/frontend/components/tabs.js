@@ -11,7 +11,7 @@
 
 		this.init = function () {
 			$tabLinks.bind('click.selectTab', onSelectTab);
-			$tabLinks.filter('.active').trigger('click.selectTab');
+			$tabLinks.first().addClass('active').trigger('click.selectTab');
 		};
 
 		var onSelectTab = function () {
