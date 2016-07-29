@@ -32,6 +32,7 @@ class SearchController extends FrontBaseController {
 
 	public function autocompleteAction(Request $request) {
 		$searchText = $request->get('searchText');
+		$searchUrl = $this->generateUrl('front_product_search', [ProductController::SEARCH_TEXT_PARAMETER => $searchText]);
 
 		$categoriesPaginationResult = $this->categoryFacade
 			->getSearchAutocompleteCategories($searchText, self::AUTOCOMPLETE_CATEGORY_LIMIT);
@@ -40,10 +41,9 @@ class SearchController extends FrontBaseController {
 			->getSearchAutocompleteProducts($searchText, self::AUTOCOMPLETE_PRODUCT_LIMIT);
 
 		return $this->render('@SS6Shop/Front/Content/Search/autocomplete.html.twig', [
-			'searchText' => $searchText,
+			'searchUrl' => $searchUrl,
 			'categoriesPaginationResult' => $categoriesPaginationResult,
 			'productsPaginationResult' => $productsPaginationResult,
-			'SEARCH_TEXT_PARAMETER' => ProductController::SEARCH_TEXT_PARAMETER,
 		]);
 	}
 

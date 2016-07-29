@@ -37,7 +37,7 @@
 
 	{% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
 		<li class="search__hint__item search__hint__item--info">
-			<a href="{{ url('front_product_search', { SEARCH_TEXT_PARAMETER : searchText }) }}">
+			<a href="{{ searchUrl }}">
 				{{ 'Zobrazit všechny výsledky'|trans }}
 			</a>
 		</li>
