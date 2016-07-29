@@ -118,11 +118,13 @@ class ProductDetailFactory {
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getParameters(Product $product) {
-		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
+		$locale = $this->localization->getLocale();
+
+		$productParameterValues = $this->parameterRepository->getProductParameterValuesByProductSortedByName($product, $locale);
 		foreach ($productParameterValues as $index => $productParameterValue) {
 			$parameter = $productParameterValue->getParameter();
 			if ($parameter->getName() === null
-				|| $productParameterValue->getValue()->getLocale() !== $this->localization->getLocale()
+				|| $productParameterValue->getValue()->getLocale() !== $locale
 			) {
 				unset($productParameterValues[$index]);
 			}

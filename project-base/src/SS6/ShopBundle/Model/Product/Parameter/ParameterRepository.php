@@ -110,10 +110,43 @@ class ParameterRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $locale
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function getProductParameterValuesByProductSortedByNameQueryBuilder(Product $product, $locale) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('ppv')
+			->from(ProductParameterValue::class, 'ppv')
+			->join('ppv.parameter', 'p')
+			->join('p.translations', 'pt')
+			->where('ppv.product = :product_id')
+			->andWhere('pt.locale = :locale')
+			->setParameters([
+				'product_id' => $product->getId(),
+				'locale' => $locale,
+			])
+			->orderBy('pt.name');
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getProductParameterValuesByProduct(Product $product) {
 		$queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 */
+	public function getProductParameterValuesByProductSortedByName(Product $product, $locale) {
+		$queryBuilder = $this->getProductParameterValuesByProductSortedByNameQueryBuilder($product, $locale);
 
 		return $queryBuilder->getQuery()->execute();
 	}
