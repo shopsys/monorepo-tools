@@ -13,7 +13,6 @@ use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
 use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class ProductOnCurrentDomainFacade {
 
@@ -43,11 +42,6 @@ class ProductOnCurrentDomainFacade {
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
-	 */
-	private $productVisibilityRepository;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountRepository
 	 */
 	private $productFilterCountRepository;
@@ -68,7 +62,6 @@ class ProductOnCurrentDomainFacade {
 		ProductDetailFactory $productDetailFactory,
 		CurrentCustomer $currentCustomer,
 		CategoryRepository $categoryRepository,
-		ProductVisibilityRepository $productVisibilityRepository,
 		ProductFilterCountRepository $productFilterCountRepository,
 		ProductAccessoryRepository $productAccessoryRepository,
 		BrandRepository $brandRepository
@@ -78,7 +71,6 @@ class ProductOnCurrentDomainFacade {
 		$this->currentCustomer = $currentCustomer;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->categoryRepository = $categoryRepository;
-		$this->productVisibilityRepository = $productVisibilityRepository;
 		$this->productFilterCountRepository = $productFilterCountRepository;
 		$this->productAccessoryRepository = $productAccessoryRepository;
 		$this->brandRepository = $brandRepository;
