@@ -65,6 +65,28 @@ class ErrorPagesFacade {
 	/**
 	 * @param int $domainId
 	 * @param int $statusCode
+	 * @return string
+	 */
+	public function getErrorPageContentByDomainIdAndStatusCode($domainId, $statusCode) {
+		$errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
+		if ($errorPageContent === false) {
+			throw new \ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
+		}
+
+		return $errorPageContent;
+	}
+
+	/**
+	 * @param int $statusCode
+	 * @return int
+	 */
+	public function getErrorPageStatusCodeByStatusCode($statusCode) {
+		return $statusCode === Response::HTTP_NOT_FOUND ? self::PAGE_STATUS_CODE_404 : self::PAGE_STATUS_CODE_500;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param int $statusCode
 	 */
 	private function generateAndSaveErrorPage($domainId, $statusCode) {
 		$domainRouter = $this->domainRouterFactory->getRouter($domainId);

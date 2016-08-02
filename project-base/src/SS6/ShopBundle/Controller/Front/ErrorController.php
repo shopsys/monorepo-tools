@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use Exception;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Error\ErrorPagesFacade;
 use SS6\ShopBundle\Component\Error\ExceptionController;
 use SS6\ShopBundle\Component\Error\ExceptionListener;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,12 +27,26 @@ class ErrorController extends FrontBaseController {
 	 */
 	private $exceptionListener;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Error\ErrorPagesFacade
+	 */
+	private $errorPagesFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		ExceptionController $exceptionController,
-		ExceptionListener $exceptionListener
+		ExceptionListener $exceptionListener,
+		ErrorPagesFacade $errorPagesFacade,
+		Domain $domain
 	) {
 		$this->exceptionController = $exceptionController;
 		$this->exceptionListener = $exceptionListener;
+		$this->errorPagesFacade = $errorPagesFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -38,6 +54,7 @@ class ErrorController extends FrontBaseController {
 	 */
 	public function errorPageAction($code) {
 		$this->exceptionController->setDebug(false);
+		$this->exceptionController->setShowErrorPagePrototype();
 
 		throw new \Symfony\Component\HttpKernel\Exception\HttpException($code);
 	}
@@ -54,10 +71,12 @@ class ErrorController extends FrontBaseController {
 		DebugLoggerInterface $logger = null,
 		$format = 'html'
 	) {
-		if ($this->exceptionController->getDebug()) {
+		if ($this->exceptionController->isShownErrorPagePrototype()) {
+			return $this->createErrorPagePrototypeResponse($exception, $logger, $format);
+		} elseif ($this->exceptionController->getDebug()) {
 			return $this->createExceptionResponse($request, $exception, $logger);
 		} else {
-			return $this->createErrorPagePrototypeResponse($exception, $logger, $format);
+			return $this->createErrorPageResponse($exception->getStatusCode());
 		}
 	}
 
@@ -76,6 +95,20 @@ class ErrorController extends FrontBaseController {
 			'exception' => $exception,
 			'logger' => $logger,
 		]);
+	}
+
+	/**
+	 * @param int $statusCode
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createErrorPageResponse($statusCode) {
+		$errorPageStatusCode = $this->errorPagesFacade->getErrorPageStatusCodeByStatusCode($statusCode);
+		$errorPageContent = $this->errorPagesFacade->getErrorPageContentByDomainIdAndStatusCode(
+			$this->domain->getId(),
+			$errorPageStatusCode
+		);
+
+		return new Response($errorPageContent, $errorPageStatusCode);
 	}
 
 	/**
