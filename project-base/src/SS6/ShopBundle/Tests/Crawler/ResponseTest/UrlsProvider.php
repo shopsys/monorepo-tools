@@ -490,7 +490,7 @@ class UrlsProvider {
 		return [
 			self::ROUTE_NAME_KEY => 'admin_administrator_edit',
 			self::ROUTE_PARAMETERS_KEY => ['id' => 1],
-			self::EXPECTED_STATUS_CODE_KEY => 403,
+			self::EXPECTED_STATUS_CODE_KEY => 404,
 		];
 	}
 

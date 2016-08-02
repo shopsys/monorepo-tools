@@ -81,7 +81,11 @@ class ErrorPagesFacade {
 	 * @return int
 	 */
 	public function getErrorPageStatusCodeByStatusCode($statusCode) {
-		return $statusCode === Response::HTTP_NOT_FOUND ? self::PAGE_STATUS_CODE_404 : self::PAGE_STATUS_CODE_500;
+		if ($statusCode === Response::HTTP_NOT_FOUND || $statusCode === Response::HTTP_FORBIDDEN) {
+			return self::PAGE_STATUS_CODE_404;
+		} else {
+			return self::PAGE_STATUS_CODE_500;
+		}
 	}
 
 	/**
