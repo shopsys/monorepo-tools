@@ -69,7 +69,7 @@ class ErrorController extends FrontBaseController {
 			return $this->getPrettyExceptionResponse($lastException);
 		}
 
-		return $this->exceptionController->showAction($request, $exception, $logger, $format);
+		return $this->exceptionController->showAction($request, $exception, $logger);
 	}
 
 	/**
