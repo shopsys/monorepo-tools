@@ -3,6 +3,7 @@ This bundle provides commands which can be useful for database migrations:
 * `shopsys:migrations:check-schema` checks if database schema is satisfying ORM.
 * `shopsys:migrations:count` returns count of migrations to execute.
 * `shopsys:migrations:migrate` executes all database migrations in one transaction.
+* `shopsys:migrations:generate` generate database migrations if necessary.
 
 This bundle uses [DoctrineMigrationsBundle](https://symfony.com/doc/current/bundles/DoctrineMigrationsBundle), so you have to install both.
 

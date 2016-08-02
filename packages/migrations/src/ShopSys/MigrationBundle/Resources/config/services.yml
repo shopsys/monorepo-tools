@@ -17,3 +17,10 @@ services:
     class: Doctrine\ORM\Tools\SchemaTool
     arguments:
       - '@doctrine.orm.default_entity_manager'
+
+  shopsys.migration.component.generator.generate_migrations_service:
+    class: ShopSys\MigrationBundle\Component\Generator\GenerateMigrationsService
+    arguments:
+      - '@templating'
+      - '%doctrine_migrations.namespace%'
+      - '%doctrine_migrations.dir_name%'

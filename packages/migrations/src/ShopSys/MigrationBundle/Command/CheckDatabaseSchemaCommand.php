@@ -37,6 +37,7 @@ class CheckDatabaseSchemaCommand extends ContainerAwareCommand {
 			foreach ($filteredSchemaDiffSqlCommands as $sqlCommand) {
 				$output->writeln('<fg=red>' . $sqlCommand . ';</fg=red>');
 			}
+			$output->writeln('<info>TIP: you can use shopsys:migrations:generate</info>');
 			$output->writeln('');
 
 			return self::RETURN_CODE_ERROR;
