@@ -59,9 +59,9 @@
 
 	<target name="build" depends="build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent" description="Run build-deploy-part-1-db-independent, build-deploy-part-2-db-dependent (for production)"/>
 	<target name="build-deploy-part-1-db-independent" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-front-and-common" description="Build first part"/>
-	<target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,replace-domains-urls,grunt,warmup" description="Build dependent second part"/>
-	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-rebuild,grunt,warmup" description="Build with rebuild database (for production)"/>
-	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,warmup" description="Similarly like build-new, but this creates a demo data (for production)"/>
+	<target name="build-deploy-part-2-db-dependent" depends="db-migrations,create-domains-data,replace-domains-urls,grunt,error-pages-generate,warmup" description="Build dependent second part"/>
+	<target name="build-new" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-rebuild,grunt,error-pages-generate,warmup" description="Build with rebuild database (for production)"/>
+	<target name="build-demo" depends="clean,composer,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,warmup" description="Similarly like build-new, but this creates a demo data (for production)"/>
 	<target name="db-demo" depends="db-drop,db-create,db-migrations,db-fixtures-demo,create-domains-data,replace-domains-urls" description="Drop database, create database, install demo data"/>
 	<target name="db-rebuild" depends="db-drop,db-create,db-migrations,db-fixtures-base-settings,create-domains-data,replace-domains-urls" description="Drop database, create database, install base data fixture"/>
 
@@ -226,6 +226,7 @@
 
 	<target name="dirs-create" description="creates system directories like lock, docs, content, image, directory for uploaded files">
 		<mkdir dir="${path.app}/lock" />
+		<mkdir dir="${path.app}/errorPages" />
 		<mkdir dir="${path.root}/docs/admin" />
 		<mkdir dir="${path.root}/docs/frontend" />
 		<mkdir dir="${path.web}/content" />
@@ -273,6 +274,13 @@
 			<arg value="--output-dir=${path.translations.custom}" />
 
 			<arg value="en" />
+		</exec>
+	</target>
+
+	<target name="error-pages-generate" description="Generate all error pages for production">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:error-page:generate-all" />
 		</exec>
 	</target>
 

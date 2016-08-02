@@ -15,6 +15,7 @@ parameters:
   ss6.domain_images_dir: %ss6.web_dir%%ss6.domain_images_url_prefix%
   ss6.domain_images_url_prefix: /content/admin/images/domain
   ss6.domain_urls_config_filepath: %kernel.root_dir%/config/domains_urls.yml
+  ss6.error_pages_dir: %kernel.root_dir%/errorPages/
   ss6.feed_dir: %ss6.web_dir%%ss6.feed_url_prefix%
   ss6.feed_url_prefix: /content/feeds/
   ss6.filemanager_upload_dir: %ss6.web_dir%/%ss6.filemanager_upload_web_dir%

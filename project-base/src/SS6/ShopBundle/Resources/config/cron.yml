@@ -42,3 +42,9 @@
   time:
     hours: '3'
     minutes: '0'
+
+# This module should run as last because it creates multiple kernels and fake requests.
+- service: SS6\ShopBundle\Component\Error\ErrorPageCronModule
+  time:
+    hours: '21'
+    minutes: '10'
