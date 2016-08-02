@@ -54,16 +54,37 @@ class ErrorController extends FrontBaseController {
 		DebugLoggerInterface $logger = null,
 		$format = 'html'
 	) {
-		if (!$this->exceptionController->getDebug()) {
-			$code = $exception->getStatusCode();
-			return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
-				'status_code' => $code,
-				'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
-				'exception' => $exception,
-				'logger' => $logger,
-			]);
+		if ($this->exceptionController->getDebug()) {
+			return $this->createExceptionResponse($request, $exception, $logger);
+		} else {
+			return $this->createErrorPagePrototypeResponse($exception, $logger, $format);
 		}
+	}
 
+	/**
+	 * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+	 * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
+	 * @param string $format
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format) {
+		$code = $exception->getStatusCode();
+
+		return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
+			'status_code' => $code,
+			'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+			'exception' => $exception,
+			'logger' => $logger,
+		]);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+	 * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createExceptionResponse(Request $request, FlattenException $exception, DebugLoggerInterface $logger) {
 		$lastException = $this->exceptionListener->getLastException();
 		if ($lastException !== null) {
 			return $this->getPrettyExceptionResponse($lastException);
