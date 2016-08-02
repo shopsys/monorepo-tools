@@ -16,15 +16,28 @@ use Tracy\Debugger;
 class ErrorController extends FrontBaseController {
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Error\ExceptionController
+	 */
+	private $exceptionController;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Error\ExceptionListener
+	 */
+	private $exceptionListener;
+
+	public function __construct(
+		ExceptionController $exceptionController,
+		ExceptionListener $exceptionListener
+	) {
+		$this->exceptionController = $exceptionController;
+		$this->exceptionListener = $exceptionListener;
+	}
+
+	/**
 	 * @param int $code
 	 */
 	public function errorPageAction($code) {
-		/* @var $exceptionController \SS6\ShopBundle\Component\Error\ExceptionController */
-		$exceptionController = $this->get('twig.controller.exception');
-
-		if ($exceptionController instanceof ExceptionController) {
-			$exceptionController->setDebug(false);
-		}
+		$this->exceptionController->setDebug(false);
 
 		throw new \Symfony\Component\HttpKernel\Exception\HttpException($code);
 	}
@@ -41,29 +54,22 @@ class ErrorController extends FrontBaseController {
 		DebugLoggerInterface $logger = null,
 		$format = 'html'
 	) {
-		$exceptionController = $this->get('twig.controller.exception');
-		/* @var $exceptionController \Symfony\Bundle\TwigBundle\Controller\ExceptionController */
-		$exceptionListener = $this->get(ExceptionListener::class);
-		/* @var $exceptionListener \SS6\ShopBundle\Component\Error\ExceptionListener */
-
-		if ($exceptionController instanceof ExceptionController) {
-			if (!$exceptionController->getDebug()) {
-				$code = $exception->getStatusCode();
-				return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
-					'status_code' => $code,
-					'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
-					'exception' => $exception,
-					'logger' => $logger,
-				]);
-			}
+		if (!$this->exceptionController->getDebug()) {
+			$code = $exception->getStatusCode();
+			return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
+				'status_code' => $code,
+				'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+				'exception' => $exception,
+				'logger' => $logger,
+			]);
 		}
 
-		$lastException = $exceptionListener->getLastException();
+		$lastException = $this->exceptionListener->getLastException();
 		if ($lastException !== null) {
 			return $this->getPrettyExceptionResponse($lastException);
 		}
 
-		return $exceptionController->showAction($request, $exception, $logger, $format);
+		return $this->exceptionController->showAction($request, $exception, $logger, $format);
 	}
 
 	/**
