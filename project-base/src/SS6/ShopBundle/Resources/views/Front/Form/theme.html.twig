@@ -38,6 +38,7 @@
 	<dl class="{{ rowClass|default('form-line') }}">
 		<dt>
 			{{ form_label(form, label) }}
+			{{ block('icon') }}
 		</dt>
 		<dd>
 			{{ form_widget(form) }}
@@ -59,6 +60,7 @@
 					{{ form_label(form) }}
 					{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--choice'))}) %}
 					{{ form_errors(form, { errors_attr: errors_attr } ) }}
+					{{ block('icon') }}
 				</div>
 			</div>
 		</dd>
@@ -262,3 +264,15 @@
 		{{- block('form_widget') -}}
 	{% endspaceless %}
 {% endblock date_picker_widget %}
+
+{% block icon %}
+	{% spaceless %}
+		{% if icon is defined %}
+			<i class="{{ icon.format|default('svg') }} {{ icon.format|default('svg') }}-{{ icon.type|default('info') }} {{ icon.class|default('') }}"
+				data-toggle="tooltip"
+				data-placement="{{ icon.data.placement|default('right') }}"
+				title="{{ icon.title }}">
+			</i>
+		{% endif %}
+	{% endspaceless %}
+{% endblock %}

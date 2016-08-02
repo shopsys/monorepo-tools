@@ -19,11 +19,13 @@
 
 		{{ form_row(form.password, {label: 'Heslo'|trans} ) }}
 
-		{{ form_row(form.rememberMe, { label: 'Zapamatuj si mé přihlášení'|trans } ) }}
-		<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
-			data-toggle="tooltip" data-placement="right"
-			title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
-		 ></i>
+		{{ form_row(form.rememberMe, {
+			label: 'Zapamatuj si mé přihlášení'|trans,
+			icon: {
+				type: 'info',
+				title: 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans
+			}
+		}) }}
 
 		<dl class="form-line">
 			<dt></dt>
