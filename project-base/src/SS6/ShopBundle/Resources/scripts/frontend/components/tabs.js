@@ -7,11 +7,16 @@
 		var self = this;
 
 		var $tabLinks = $tabs.find('.js-tabs-tab-link');
+		var $activeTabLinks = $tabLinks.filter('.active');
 		var $tabContents = $tabs.find('.js-tabs-tab-content');
 
 		this.init = function () {
 			$tabLinks.bind('click.selectTab', onSelectTab);
-			$tabLinks.first().addClass('active').trigger('click.selectTab');
+			if ($activeTabLinks.length === 0) {
+				$tabLinks.first().addClass('active');
+			}
+			$activeTabLinks = $tabLinks.filter('.active');
+			$activeTabLinks.trigger('click.selectTab');
 		};
 
 		var onSelectTab = function () {
