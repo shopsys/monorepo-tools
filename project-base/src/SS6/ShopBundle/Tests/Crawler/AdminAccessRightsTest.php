@@ -20,7 +20,7 @@ class AdminAccessRightsTest extends FunctionalTestCase {
 	public function testAdminAccessDenied($route) {
 		$client = $this->getClient(true, 'admin', 'admin123');
 		$client->request('GET', $route);
-		$this->assertSame(403, $client->getResponse()->getStatusCode());
+		$this->assertSame(404, $client->getResponse()->getStatusCode());
 	}
 
 }

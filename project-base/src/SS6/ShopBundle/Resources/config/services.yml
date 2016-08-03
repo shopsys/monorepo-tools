@@ -184,6 +184,11 @@ services:
     arguments:
       - @monolog.logger
 
+  ss6.shop.component.error.error_pages_facade:
+    class: SS6\ShopBundle\Component\Error\ErrorPagesFacade
+    arguments:
+      - %ss6.error_pages_dir%
+
   ss6.shop.component.error.exception_listener:
     class: SS6\ShopBundle\Component\Error\ExceptionListener
     tags:

@@ -5,33 +5,26 @@
 
 {% block main_content %}
 
-	{% if app.environment == ENVIRONMENT_DEVELOPMENT %}
-		{% set codes = [403, 404, 500] %}
-		{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
+	{% set codes = [404, 500] %}
+	{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
 
-		<table class="table-main">
-			<thead>
-				<tr>
-					<td>{{ 'Chybové hlášky'|trans }}</td>
-				</tr>
-			</thead>
-			<tbody>
-				{% for format in formats %}
-					{% for code in codes %}
-						<tr>
-							<td>
-								<a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a>
-							</td>
-						</tr>
-					{% endfor %}
+	<table class="table-main">
+		<thead>
+			<tr>
+				<td>{{ 'Chybové hlášky'|trans }}</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for format in formats %}
+				{% for code in codes %}
+					<tr>
+						<td>
+							<a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a>
+						</td>
+					</tr>
 				{% endfor %}
-			</tbody>
-		</table>
-	{% else %}
-		<div class="in-message in-message--info js-flash-message">
-			<a href="#" class="in-message__close js-flash-message-close" title="{{ 'Zavřít'|trans }}">X</a>
-			{{ '<strong>Pozor! </strong>Chybové stránky se zobrazují pouze v <strong>DEVELOPMENT</strong> módu.'|trans|raw }}
-		</div>
-	{% endif %}
+			{% endfor %}
+		</tbody>
+	</table>
 
 {% endblock %}

@@ -29,6 +29,19 @@ front_customer_login_as_remembered_user:
   pattern: /login-as-remembered-user/
   defaults: { _controller: SS6ShopBundle:Front\Customer:loginAsRememberedUser}
 
+front_error_page:
+  pattern: /_error/{code}/
+  defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}
+  requirements:
+    code: \d+
+
+front_error_page_format:
+  pattern: /_error/{code}/{_format}/
+  defaults: { _controller: SS6ShopBundle:Front\Error:errorPage}
+  requirements:
+    code: \d+
+    _format: css|html|js|json|txt|xml
+
 front_homepage:
   pattern: /
   defaults: { _controller: SS6ShopBundle:Front\Homepage:index }

@@ -4,6 +4,8 @@ namespace SS6\ShopBundle\Controller\Front;
 
 use Exception;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Component\Error\ErrorPagesFacade;
 use SS6\ShopBundle\Component\Error\ExceptionController;
 use SS6\ShopBundle\Component\Error\ExceptionListener;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,15 +18,43 @@ use Tracy\Debugger;
 class ErrorController extends FrontBaseController {
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Error\ExceptionController
+	 */
+	private $exceptionController;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Error\ExceptionListener
+	 */
+	private $exceptionListener;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Error\ErrorPagesFacade
+	 */
+	private $errorPagesFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	public function __construct(
+		ExceptionController $exceptionController,
+		ExceptionListener $exceptionListener,
+		ErrorPagesFacade $errorPagesFacade,
+		Domain $domain
+	) {
+		$this->exceptionController = $exceptionController;
+		$this->exceptionListener = $exceptionListener;
+		$this->errorPagesFacade = $errorPagesFacade;
+		$this->domain = $domain;
+	}
+
+	/**
 	 * @param int $code
 	 */
 	public function errorPageAction($code) {
-		/* @var $exceptionController \SS6\ShopBundle\Component\Error\ExceptionController */
-		$exceptionController = $this->get('twig.controller.exception');
-
-		if ($exceptionController instanceof ExceptionController) {
-			$exceptionController->setDebug(false);
-		}
+		$this->exceptionController->setDebug(false);
+		$this->exceptionController->setShowErrorPagePrototype();
 
 		throw new \Symfony\Component\HttpKernel\Exception\HttpException($code);
 	}
@@ -41,29 +71,59 @@ class ErrorController extends FrontBaseController {
 		DebugLoggerInterface $logger = null,
 		$format = 'html'
 	) {
-		$exceptionController = $this->get('twig.controller.exception');
-		/* @var $exceptionController \Symfony\Bundle\TwigBundle\Controller\ExceptionController */
-		$exceptionListener = $this->get(ExceptionListener::class);
-		/* @var $exceptionListener \SS6\ShopBundle\Component\Error\ExceptionListener */
-
-		if ($exceptionController instanceof ExceptionController) {
-			if (!$exceptionController->getDebug()) {
-				$code = $exception->getStatusCode();
-				return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
-					'status_code' => $code,
-					'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
-					'exception' => $exception,
-					'logger' => $logger,
-				]);
-			}
+		if ($this->exceptionController->isShownErrorPagePrototype()) {
+			return $this->createErrorPagePrototypeResponse($exception, $logger, $format);
+		} elseif ($this->exceptionController->getDebug()) {
+			return $this->createExceptionResponse($request, $exception, $logger);
+		} else {
+			return $this->createErrorPageResponse($exception->getStatusCode());
 		}
+	}
 
-		$lastException = $exceptionListener->getLastException();
+	/**
+	 * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+	 * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
+	 * @param string $format
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format) {
+		$code = $exception->getStatusCode();
+
+		return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
+			'status_code' => $code,
+			'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+			'exception' => $exception,
+			'logger' => $logger,
+		]);
+	}
+
+	/**
+	 * @param int $statusCode
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createErrorPageResponse($statusCode) {
+		$errorPageStatusCode = $this->errorPagesFacade->getErrorPageStatusCodeByStatusCode($statusCode);
+		$errorPageContent = $this->errorPagesFacade->getErrorPageContentByDomainIdAndStatusCode(
+			$this->domain->getId(),
+			$errorPageStatusCode
+		);
+
+		return new Response($errorPageContent, $errorPageStatusCode);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param \Symfony\Component\HttpKernel\Exception\FlattenException $exception
+	 * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	private function createExceptionResponse(Request $request, FlattenException $exception, DebugLoggerInterface $logger) {
+		$lastException = $this->exceptionListener->getLastException();
 		if ($lastException !== null) {
 			return $this->getPrettyExceptionResponse($lastException);
 		}
 
-		return $exceptionController->showAction($request, $exception, $logger, $format);
+		return $this->exceptionController->showAction($request, $exception, $logger);
 	}
 
 	/**

@@ -14,9 +14,5 @@ ss6_generator:
   resource: "@SS6GeneratorBundle/Resources/config/routing.yml"
   prefix: /
 
-ss6_shop_errors:
-  resource: "@SS6ShopBundle/Resources/config/routing_dev.yml"
-  prefix: /
-
 _main:
   resource: routing.yml

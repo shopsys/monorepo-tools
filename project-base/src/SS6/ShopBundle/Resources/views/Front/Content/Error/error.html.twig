@@ -1,71 +1,51 @@
-{% extends '@SS6Shop/Front/Layout/layout.html.twig' %}
+{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
 	{{ 'Nastala chyba'|trans }}: {{ status_text }}
 {% endblock %}
 
-{% block html_body %}
+{% block content %}
+	<div class="row">
+		{% if status_code == 404 %}
+			<div class="col-md-8 col-sm-12">
 
-	<div class="web-wrap">
+				<h1 class="heading--huge mb-0 mt-0">{{ 'Stránka nenalezena!'|trans }}</h1>
 
-		<div class="header">
-			<div class="logo">
-				<a href="{{ url('front_homepage') }}">{{ 'Internetový obchod'|trans }}</a>
-			</div>
-		</div>
+				<p>
+					{{ 'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'|trans }}
+				</p>
 
-			<div class="content">
-				<div class="main-content">
-					<div class="row">
-						{% if status_code == 404 %}
-							<div class="col-md-8 col-sm-12">
+				<h2>{{ 'Prosím, pokračujte podle pokynů'|trans }}:</h2>
 
-								<h1 class="heading--huge mb-0 mt-0">{{ 'Stránka nenalezena!'|trans }}</h1>
-
-								<p>
-									{{ 'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'|trans }}
-								</p>
-
-								<h2>{{ 'Prosím, pokračujte podle pokynů'|trans }}:</h2>
-
-								<ul>
-									<li>{{ 'Zkontrolujte správnost adresy'|trans }}</li>
-									<li>{{ 'Zkuste použít vyhledávání na webu'|trans }}</li>
-								</ul>
-							</div>
-
-
-							<div class="col-md-4 col-sm-12 text-center">
-								<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Stránka nenalezena!'|trans }}">
-							</div>
-
-						{% else %}
-
-							<div class="col-md-12 col-sm-12">
-
-								<h1 class="heading--huge mb-0 mt-0">{{ 'Jejda! Nastala chyba.'|trans }}</h1>
-
-								<p>
-									{{ 'To je nemilé, to je nemilé. A zrovna
-									<strong>"%status_code% %status_text%"</strong>,
-									to je jak naschvál!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
-								</p>
-
-								<p>
-									{{ 'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.'|trans }}
-								</p>
-
-							</div>
-
-						{% endif %}
-
-					</div>
-
-				</div>
+				<ul>
+					<li>{{ 'Zkontrolujte správnost adresy'|trans }}</li>
+					<li>{{ 'Zkuste použít vyhledávání na webu'|trans }}</li>
+				</ul>
 			</div>
 
-			<div class="footer">
-				&copy; 2014 - Shopsys 6 - <a href="http://www.shopsys.cz">Shopsys Enterprise</a>
+
+			<div class="col-md-4 col-sm-12 text-center">
+				<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Stránka nenalezena!'|trans }}">
 			</div>
-		</div>
+
+		{% else %}
+
+			<div class="col-md-12 col-sm-12">
+
+				<h1 class="heading--huge mb-0 mt-0">{{ 'Jejda! Nastala chyba.'|trans }}</h1>
+
+				<p>
+					{{ 'To je nemilé, to je nemilé. A zrovna
+					<strong>"%status_code% %status_text%"</strong>,
+					to je jak naschvál!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
+				</p>
+
+				<p>
+					{{ 'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.'|trans }}
+				</p>
+
+			</div>
+
+		{% endif %}
+	</div>
 {% endblock %}
