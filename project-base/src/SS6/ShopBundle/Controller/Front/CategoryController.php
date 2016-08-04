@@ -27,7 +27,7 @@ class CategoryController extends FrontBaseController {
 	}
 
 	public function panelAction() {
-		$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain(
+		$categoryDetails = $this->categoryFacade->getVisibleFirstLevelCategoryDetailsForDomain(
 			$this->domain->getId(),
 			$this->domain->getLocale()
 		);

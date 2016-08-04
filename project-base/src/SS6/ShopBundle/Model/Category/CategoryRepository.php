@@ -157,6 +157,21 @@ class CategoryRepository extends NestedTreeRepository {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getPreOrderTreeTraversalForVisibleFirstLevelCategoriesByDomain($domainId, $locale) {
+		$queryBuilder = $this->getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale);
+
+		$queryBuilder
+			->andWhere('cd.visible = TRUE')
+			->andWhere('c.level = 1');
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	private function getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale) {

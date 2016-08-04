@@ -232,6 +232,19 @@ class CategoryFacade {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 */
+	public function getVisibleFirstLevelCategoryDetailsForDomain($domainId, $locale) {
+		$categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleFirstLevelCategoriesByDomain($domainId, $locale);
+
+		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+
+		return $categoryDetails;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @param string $locale
 	 * @param string $searchText
 	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */
