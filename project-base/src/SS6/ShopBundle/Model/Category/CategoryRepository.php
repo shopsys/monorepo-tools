@@ -174,6 +174,7 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param \Doctrine\ORM\QueryBuilder $categoriesQueryBuilder
 	 * @param string $locale
 	 */
 	private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale) {

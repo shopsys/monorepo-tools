@@ -8,7 +8,7 @@ class CategoryDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */
 	public function createDetailsHierarchy(array $categories) {
 		$firstLevelCategories = $this->getFirstLevelCategories($categories);
@@ -65,7 +65,7 @@ class CategoryDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @return \SS6\ShopBundle\Model\Category\Category[parentId]
+	 * @return \SS6\ShopBundle\Model\Category\Category[parentId][]
 	 */
 	private function getCategoriesIndexedByParentId(array $categories) {
 		$categoriesIndexedByParentId = [];
