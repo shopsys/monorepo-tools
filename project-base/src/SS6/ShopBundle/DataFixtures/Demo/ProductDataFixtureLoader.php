@@ -202,6 +202,7 @@ class ProductDataFixtureLoader {
 			1 => $row[self::COLUMN_SHORT_DESCRIPTION_CS],
 			2 => $row[self::COLUMN_SHORT_DESCRIPTION_EN],
 		];
+		$productEditData->showInZboziFeed = [1 => true, 2 => true];
 		$productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
 		$this->setProductDataPricesFromCsv($row, $productEditData);
 		switch ($row[self::COLUMN_VAT]) {

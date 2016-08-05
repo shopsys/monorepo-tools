@@ -77,12 +77,21 @@ class ProductDomain {
 	private $heurekaCpc;
 
 	/**
+	 * @var bool
+	 *
+	 * @ORM\Column(type="boolean", nullable=false)
+	 */
+	private $showInZboziFeed;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
+	 * @param bool $showInZboziFeed
 	 */
-	public function __construct(Product $product, $domainId) {
+	public function __construct(Product $product, $domainId, $showInZboziFeed = true) {
 		$this->product = $product;
 		$this->domainId = $domainId;
+		$this->showInZboziFeed = $showInZboziFeed;
 	}
 
 	/**
@@ -180,6 +189,20 @@ class ProductDomain {
 	 */
 	public function setHeurekaCpc($heurekaCpc) {
 		$this->heurekaCpc = $heurekaCpc;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getShowInZboziFeed() {
+		return $this->showInZboziFeed;
+	}
+
+	/**
+	 * @param bool $showInZboziFeed
+	 */
+	public function setShowInZboziFeed($showInZboziFeed) {
+		$this->showInZboziFeed = $showInZboziFeed;
 	}
 
 }

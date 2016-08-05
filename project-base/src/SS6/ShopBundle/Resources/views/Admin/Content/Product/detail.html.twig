@@ -351,6 +351,24 @@
 					{{ form_row(form.heurekaCpcValues, { label: 'Maximální částka za proklik'|trans }) }}
 				</div>
 			</div>
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__group">
+					<strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
+				</div>
+			</div>
+			{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
+				<div class="form-line">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
+					<div class="form-line__line form-line__line--no-space">
+						{{ form_row(showInZboziFeedForm, { label: 'Nabízet ve feedu pro tuto doménu'|trans }) }}
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 
 		<div class="form-group wrap-border">

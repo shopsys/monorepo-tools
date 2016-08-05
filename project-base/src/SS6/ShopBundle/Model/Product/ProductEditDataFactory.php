@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
@@ -12,6 +13,11 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductDataFactory;
 
 class ProductEditDataFactory {
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -49,6 +55,7 @@ class ProductEditDataFactory {
 	private $imageFacade;
 
 	public function __construct(
+		Domain $domain,
 		ProductRepository $productRepository,
 		ParameterRepository $parameterRepository,
 		ProductDataFactory $productDataFactory,
@@ -57,6 +64,7 @@ class ProductEditDataFactory {
 		ProductAccessoryRepository $productAccessoryRepository,
 		ImageFacade $imageFacade
 	) {
+		$this->domain = $domain;
 		$this->productRepository = $productRepository;
 		$this->parameterRepository = $parameterRepository;
 		$this->productDataFactory = $productDataFactory;
@@ -83,6 +91,9 @@ class ProductEditDataFactory {
 		$productEditData->shortDescriptions = [];
 		$productEditData->accessories = [];
 		$productEditData->heurekaCpcValues = [];
+		foreach ($this->domain->getAllIds() as $domainId) {
+			$productEditData->showInZboziFeed[$domainId] = true;
+		}
 
 		return $productEditData;
 	}
@@ -156,6 +167,7 @@ class ProductEditDataFactory {
 			$productEditData->urls->mainOnDomains[$domainId] =
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 			$productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
+			$productEditData->showInZboziFeed[$domainId] = $productDomain->getShowInZboziFeed();
 		}
 	}
 

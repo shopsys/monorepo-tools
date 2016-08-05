@@ -314,6 +314,7 @@ class ProductEditFacade {
 			$shortDescriptions = $productEditData->shortDescriptions;
 		}
 		$heurekaCpcValues = $productEditData->heurekaCpcValues;
+		$showInZboziFeed = $productEditData->showInZboziFeed;
 		foreach ($productDomains as $domainId => $productDomain) {
 			if (!empty($seoTitles)) {
 				$productDomain->setSeoTitle($seoTitles[$domainId]);
@@ -329,6 +330,9 @@ class ProductEditFacade {
 			}
 			if (!empty($heurekaCpcValues)) {
 				$productDomain->setHeurekaCpc($heurekaCpcValues[$domainId]);
+			}
+			if (!empty($showInZboziFeed)) {
+				$productDomain->setShowInZboziFeed($showInZboziFeed[$domainId]);
 			}
 		}
 

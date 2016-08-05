@@ -78,6 +78,11 @@ class ProductEditData {
 	public $variants;
 
 	/**
+	 * @var bool[domainId]
+	 */
+	public $showInZboziFeed;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
@@ -91,6 +96,7 @@ class ProductEditData {
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
 	 * @param string[] $heurekaCpcValues
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 * @param bool[] $showInZboziFeed
 	 */
 	public function __construct(
 		ProductData $productData = null,
@@ -105,7 +111,8 @@ class ProductEditData {
 		array $shortDescriptions = [],
 		array $accessories = [],
 		array $heurekaCpcValues = [],
-		array $variants = []
+		array $variants = [],
+		array $showInZboziFeed = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -125,6 +132,7 @@ class ProductEditData {
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;
 		$this->variants = $variants;
+		$this->showInZboziFeed = $showInZboziFeed;
 	}
 
 }

@@ -218,6 +218,10 @@ class ProductEditFormType extends AbstractType {
 					],
 				],
 			])
+			->add('showInZboziFeed', FormType::MULTIDOMAIN, [
+				'type' => FormType::YES_NO,
+				'required' => false,
+			])
 			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {
