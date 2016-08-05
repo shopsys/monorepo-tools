@@ -230,14 +230,14 @@ class CategoryFacade {
 	}
 
 	/**
-	 * @param int $domainId
-	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
 	 */
-	public function getVisibleFirstLevelCategoryDetailsForDomain($domainId, $locale) {
-		$categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleFirstLevelCategoriesByDomain($domainId, $locale);
+	public function getVisibleCollapsibleCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
+		$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
 
-		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+		$categoryDetails = $this->categoryDetailFactory->createCollapsibleDetails($categories, $domainConfig->getId());
 
 		return $categoryDetails;
 	}

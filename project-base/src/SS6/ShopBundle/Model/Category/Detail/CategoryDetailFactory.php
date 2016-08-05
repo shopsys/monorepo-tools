@@ -3,8 +3,18 @@
 namespace SS6\ShopBundle\Model\Category\Detail;
 
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Category\CategoryRepository;
 
 class CategoryDetailFactory {
+
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 */
+	private $categoryRepository;
+
+	public function __construct(CategoryRepository $categoryRepository) {
+		$this->categoryRepository = $categoryRepository;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
@@ -23,6 +33,23 @@ class CategoryDetailFactory {
 		}
 
 		return $categoryDetails;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 */
+	public function createCollapsibleDetails($categories, $domainId) {
+		$categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainId);
+
+		$collapsibleCategoryDetails = [];
+		foreach ($categories as $category) {
+			$hasChildren = in_array($category, $categoriesWithChildren, true);
+			$collapsibleCategoryDetails[] = new CollapsibleCategoryDetail($category, $hasChildren);
+		}
+
+		return $collapsibleCategoryDetails;
 	}
 
 	/**

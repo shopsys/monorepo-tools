@@ -27,13 +27,13 @@ class CategoryController extends FrontBaseController {
 	}
 
 	public function panelAction() {
-		$categoryDetails = $this->categoryFacade->getVisibleFirstLevelCategoryDetailsForDomain(
-			$this->domain->getId(),
-			$this->domain->getLocale()
+		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
+			$this->categoryFacade->getRootCategory(),
+			$this->domain->getCurrentDomainConfig()
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
-			'categoryDetails' => $categoryDetails,
+			'collapsibleCategoryDetails' => $categoryDetails,
 		]);
 	}
 
