@@ -210,6 +210,13 @@
 		</exec>
 	</target>
 
+	<target name="db-migrations-generate" description="Generate migration file if need it">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="shopsys:migrations:generate" />
+		</exec>
+	</target>
+
 	<target name="dirs-clean" description="Clean up lock, docs and content directories">
  		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.app}/lock/">
