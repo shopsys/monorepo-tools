@@ -83,6 +83,16 @@ class ProductEditData {
 	public $showInZboziFeed;
 
 	/**
+	 * @var string[domainId]
+	 */
+	public $zboziCpcValues;
+
+	/**
+	 * @var string[domainId]
+	 */
+	public $zboziCpcSearchValues;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
@@ -97,6 +107,8 @@ class ProductEditData {
 	 * @param string[] $heurekaCpcValues
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
 	 * @param bool[] $showInZboziFeed
+	 * @param string[] $zboziCpcValues
+	 * @param string[] $zboziCpcSearchValues
 	 */
 	public function __construct(
 		ProductData $productData = null,
@@ -112,7 +124,9 @@ class ProductEditData {
 		array $accessories = [],
 		array $heurekaCpcValues = [],
 		array $variants = [],
-		array $showInZboziFeed = []
+		array $showInZboziFeed = [],
+		array $zboziCpcValues = [],
+		array $zboziCpcSearchValues = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -133,6 +147,8 @@ class ProductEditData {
 		$this->heurekaCpcValues = $heurekaCpcValues;
 		$this->variants = $variants;
 		$this->showInZboziFeed = $showInZboziFeed;
+		$this->zboziCpcValues = $zboziCpcValues;
+		$this->zboziCpcSearchValues = $zboziCpcSearchValues;
 	}
 
 }

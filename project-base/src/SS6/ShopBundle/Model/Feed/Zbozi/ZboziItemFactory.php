@@ -92,7 +92,9 @@ class ZboziItemFactory implements FeedItemFactoryInterface {
 				$manufacturer,
 				$this->getProductCategoryText($product, $domainConfig),
 				$params,
-				$product->getPartno()
+				$product->getPartno(),
+				$productDomainsByProductId[$product->getId()]->getZboziCpc(),
+				$productDomainsByProductId[$product->getId()]->getZboziCpcSearch()
 			);
 		}
 

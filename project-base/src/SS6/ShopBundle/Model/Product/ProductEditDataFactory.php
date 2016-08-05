@@ -94,6 +94,8 @@ class ProductEditDataFactory {
 		foreach ($this->domain->getAllIds() as $domainId) {
 			$productEditData->showInZboziFeed[$domainId] = true;
 		}
+		$productEditData->zboziCpcValues = [];
+		$productEditData->zboziCpcSearchValues = [];
 
 		return $productEditData;
 	}
@@ -168,6 +170,8 @@ class ProductEditDataFactory {
 				$this->friendlyUrlFacade->findMainFriendlyUrl($domainId, 'front_product_detail', $product->getId());
 			$productEditData->heurekaCpcValues[$domainId] = $productDomain->getHeurekaCpc();
 			$productEditData->showInZboziFeed[$domainId] = $productDomain->getShowInZboziFeed();
+			$productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
+			$productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
 		}
 	}
 

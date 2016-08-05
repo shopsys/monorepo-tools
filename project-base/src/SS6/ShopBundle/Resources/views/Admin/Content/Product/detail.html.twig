@@ -369,6 +369,16 @@
 					</div>
 				</div>
 			{% endfor %}
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_row(form.zboziCpcValues, { label: 'Maximální částka za proklik'|trans }) }}
+				</div>
+			</div>
+			<div class="form-line">
+				<div class="form-line__line form-line__line--no-space">
+					{{ form_row(form.zboziCpcSearchValues, { label: 'Maximální částka za proklik v nabídkách'|trans }) }}
+				</div>
+			</div>
 		</div>
 
 		<div class="form-group wrap-border">

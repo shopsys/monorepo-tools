@@ -315,6 +315,9 @@ class ProductEditFacade {
 		}
 		$heurekaCpcValues = $productEditData->heurekaCpcValues;
 		$showInZboziFeed = $productEditData->showInZboziFeed;
+		$zboziCpcValues = $productEditData->zboziCpcValues;
+		$zboziCpcSearchValues = $productEditData->zboziCpcSearchValues;
+
 		foreach ($productDomains as $domainId => $productDomain) {
 			if (!empty($seoTitles)) {
 				$productDomain->setSeoTitle($seoTitles[$domainId]);
@@ -333,6 +336,12 @@ class ProductEditFacade {
 			}
 			if (!empty($showInZboziFeed)) {
 				$productDomain->setShowInZboziFeed($showInZboziFeed[$domainId]);
+			}
+			if (!empty($zboziCpcValues)) {
+				$productDomain->setZboziCpc($zboziCpcValues[$domainId]);
+			}
+			if (!empty($zboziCpcSearchValues)) {
+				$productDomain->setZboziCpcSearch($zboziCpcSearchValues[$domainId]);
 			}
 		}
 

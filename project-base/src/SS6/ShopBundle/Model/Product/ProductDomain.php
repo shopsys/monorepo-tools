@@ -84,6 +84,20 @@ class ProductDomain {
 	private $showInZboziFeed;
 
 	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
+	 */
+	private $zboziCpc;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="decimal", precision=16, scale=2, nullable=true)
+	 */
+	private $zboziCpcSearch;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param bool $showInZboziFeed
@@ -203,6 +217,34 @@ class ProductDomain {
 	 */
 	public function setShowInZboziFeed($showInZboziFeed) {
 		$this->showInZboziFeed = $showInZboziFeed;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getZboziCpc() {
+		return $this->zboziCpc;
+	}
+
+	/**
+	 * @param string|null $zboziCpc
+	 */
+	public function setZboziCpc($zboziCpc) {
+		$this->zboziCpc = $zboziCpc;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getZboziCpcSearch() {
+		return $this->zboziCpcSearch;
+	}
+
+	/**
+	 * @param string|null $zboziCpcSearch
+	 */
+	public function setZboziCpcSearch($zboziCpcSearch) {
+		$this->zboziCpcSearch = $zboziCpcSearch;
 	}
 
 }
