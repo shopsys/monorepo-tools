@@ -18,6 +18,11 @@ front_cart_delete:
   requirements:
     cartItemId: \d+
 
+front_category_panel:
+  pattern: /categoryPanel/{parentCategoryId}/
+  defaults: { _controller: SS6ShopBundle:Front\Category:panel }
+  condition: "request.isXmlHttpRequest()"
+
 front_contact_form_send:
   pattern: /contactForm/
   defaults: { _controller: SS6ShopBundle:Front\ContactForm:send }

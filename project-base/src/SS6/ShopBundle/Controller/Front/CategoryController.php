@@ -26,9 +26,18 @@ class CategoryController extends FrontBaseController {
 		$this->categoryFacade = $categoryFacade;
 	}
 
-	public function panelAction() {
+	/**
+	 * @param int $parentCategoryId
+	 */
+	public function panelAction($parentCategoryId = null) {
+		if ($parentCategoryId === null) {
+			$parentCategory = $this->categoryFacade->getRootCategory();
+		} else {
+			$parentCategory = $this->categoryFacade->getById($parentCategoryId);
+		}
+
 		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
-			$this->categoryFacade->getRootCategory(),
+			$parentCategory,
 			$this->domain->getCurrentDomainConfig()
 		);
 
