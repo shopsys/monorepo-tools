@@ -38,22 +38,22 @@ class ProductEditData {
 	public $manualInputPrices;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $seoTitles;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $seoMetaDescriptions;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $descriptions;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $shortDescriptions;
 
@@ -68,7 +68,7 @@ class ProductEditData {
 	public $accessories;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $heurekaCpcValues;
 
@@ -83,12 +83,12 @@ class ProductEditData {
 	public $showInZboziFeed;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $zboziCpcValues;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $zboziCpcSearchValues;
 
@@ -99,16 +99,16 @@ class ProductEditData {
 	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagesToDelete
 	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagePositions
 	 * @param string[] $manualInputPrices
-	 * @param string[] $seoTitles
-	 * @param string[] $seoMetaDescriptions
-	 * @param string[] $descriptions
-	 * @param string[] $shortDescriptions
+	 * @param string[]|null[] $seoTitles
+	 * @param string[]|null[] $seoMetaDescriptions
+	 * @param string[]|null[] $descriptions
+	 * @param string[]|null[] $shortDescriptions
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
-	 * @param string[] $heurekaCpcValues
+	 * @param string[]|null[] $heurekaCpcValues
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
-	 * @param bool[] $showInZboziFeed
-	 * @param string[] $zboziCpcValues
-	 * @param string[] $zboziCpcSearchValues
+	 * @param bool[domainId] $showInZboziFeed
+	 * @param string[]|null[] $zboziCpcValues
+	 * @param string[]|null[] $zboziCpcSearchValues
 	 */
 	public function __construct(
 		ProductData $productData = null,

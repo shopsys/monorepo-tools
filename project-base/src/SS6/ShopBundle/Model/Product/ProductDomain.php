@@ -30,21 +30,21 @@ class ProductDomain {
 	private $domainId;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $seoTitle;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 *
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $seoMetaDescription;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 * @ORM\Column(type="text", nullable=true)
 	 */
 	private $description;
@@ -116,28 +116,28 @@ class ProductDomain {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getSeoTitle() {
 		return $this->seoTitle;
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
 	public function getSeoMetaDescription() {
 		return $this->seoMetaDescription;
 	}
 
 	/**
-	 * @param string $seoTitle
+	 * @param string|null $seoTitle
 	 */
 	public function setSeoTitle($seoTitle) {
 		$this->seoTitle = $seoTitle;
 	}
 
 	/**
-	 * @param string $seoMetaDescription
+	 * @param string|null $seoMetaDescription
 	 */
 	public function setSeoMetaDescription($seoMetaDescription) {
 		$this->seoMetaDescription = $seoMetaDescription;
