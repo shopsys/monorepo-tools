@@ -25,6 +25,10 @@ class CategoryVisibilityRecalculationScheduler {
 		$this->productVisibilityFacade->refreshProductsVisibilityDelayed();
 	}
 
+	public function scheduleRecalculationWithoutDependencies() {
+		$this->recaluculate = true;
+	}
+
 	/**
 	 * @return bool
 	 */

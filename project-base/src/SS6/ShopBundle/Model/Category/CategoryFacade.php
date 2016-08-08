@@ -97,7 +97,7 @@ class CategoryFacade {
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 		$this->imageFacade->uploadImage($category, $categoryData->image, null);
 
-		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation();
+		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculationWithoutDependencies();
 
 		return $category;
 	}
