@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -43,6 +44,13 @@ class ProductVisibilityFacade {
 
 	public function refreshProductsVisibilityForMarked() {
 		$this->productVisibilityRepository->refreshProductsVisibility(true);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 */
+	public function markProductsForRecalculationAffectedByCategory(Category $category) {
+		$this->productVisibilityRepository->markProductsForRecalculationAffectedByCategory($category);
 	}
 
 	/**
