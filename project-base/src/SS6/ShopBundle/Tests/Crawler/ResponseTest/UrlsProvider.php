@@ -56,8 +56,6 @@ class UrlsProvider {
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'admin_login_check',
-		// currently, we cannot test AJAX requests
-		'admin_order_addproduct',
 		// when tests are processed, there are no images in the shop
 		'front_image',
 		// when tests are processed, there are no images in the shop
@@ -65,10 +63,6 @@ class UrlsProvider {
 		// used by firewall to catch login requests
 		// http://symfony.com/doc/current/reference/configuration/security.html#check-path
 		'front_login_check',
-		// currently, we cannot test AJAX requests
-		'admin_domain_edit',
-		// currently, we cannot test AJAX requests
-		'admin_article_saveordering',
 		// in TEST environment is different security configuration
 		'admin_logout',
 		// temporarily not tested until it will be optimized at US-1517
@@ -348,6 +342,7 @@ class UrlsProvider {
 			|| count($route->getMethods()) > 0 && !in_array('GET', $route->getMethods())
 			|| strpos($route->getPath(), '/_') === 0
 			|| strpos($route->getPath(), '/admin/_') === 0
+			|| $route->getCondition() === 'request.isXmlHttpRequest()'
 		) {
 			return false;
 		}
