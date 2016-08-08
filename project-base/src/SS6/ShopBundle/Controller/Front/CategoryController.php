@@ -30,7 +30,9 @@ class CategoryController extends FrontBaseController {
 	 * @param int $parentCategoryId
 	 */
 	public function panelAction($parentCategoryId = null) {
-		if ($parentCategoryId === null) {
+		$isRootParentCategory = $parentCategoryId === null;
+
+		if ($isRootParentCategory) {
 			$parentCategory = $this->categoryFacade->getRootCategory();
 		} else {
 			$parentCategory = $this->categoryFacade->getById($parentCategoryId);
@@ -43,6 +45,7 @@ class CategoryController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
 			'collapsibleCategoryDetails' => $categoryDetails,
+			'isRootParentCategory' => $isRootParentCategory,
 		]);
 	}
 

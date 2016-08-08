@@ -1,6 +1,6 @@
-{% macro categories(collapsibleCategoryDetails) %}
+{% macro categories(collapsibleCategoryDetails, isRootParentCategory) %}
 	{% if collapsibleCategoryDetails|length > 0 %}
-		<ul class="list-menu js-category-list" id="js-categories">
+		<ul class="js-category-list list-menu {% if isRootParentCategory %}list-menu--root{% endif %}" {% if isRootParentCategory %}id="js-categories"{% endif %}>
 			{% for collapsibleCategoryDetail in collapsibleCategoryDetails %}
 				<li class="list-menu__item js-category-item">
 					<a href="{{ url('front_product_list', { id: collapsibleCategoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ collapsibleCategoryDetail.category.level }}">
@@ -16,4 +16,4 @@
 	{% endif %}
 {% endmacro %}
 
-{{ _self.categories(collapsibleCategoryDetails) }}
+{{ _self.categories(collapsibleCategoryDetails, isRootParentCategory) }}
