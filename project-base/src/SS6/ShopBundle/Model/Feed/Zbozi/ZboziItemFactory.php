@@ -60,41 +60,23 @@ class ZboziItemFactory implements FeedItemFactoryInterface {
 
 		$items = [];
 		foreach ($products as $product) {
-			$productPrice = $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
-				$product,
-				$domainConfig->getId(),
-				null
-			);
-			$manufacturer = null;
-			if ($product->getBrand() !== null) {
-				$manufacturer = $product->getBrand()->getName();
-			}
-			if (array_key_exists($product->getId(), $paramsByProductId)) {
-				$params = $paramsByProductId[$product->getId()];
-			} else {
-				$params = [];
-			}
-			if ($product->getCalculatedAvailability()->getDispatchTime() === null) {
-				$deliveryDate = -1;
-			} else {
-				$deliveryDate = $product->getCalculatedAvailability()->getDispatchTime();
-			}
+			$productDomain = $productDomainsByProductId[$product->getId()];
 
 			$items[] = new ZboziItem(
 				$product->getId(),
 				$product->getName($domainConfig->getLocale()),
-				$productDomainsByProductId[$product->getId()]->getDescription(),
+				$productDomain->getDescription(),
 				$urlsByProductId[$product->getId()],
 				$imagesByProductId[$product->getId()],
-				$productPrice->getPriceWithVat(),
+				$this->getProductPrice($product, $domainConfig->getId())->getPriceWithVat(),
 				$product->getEan(),
-				$deliveryDate,
-				$manufacturer,
+				$this->getProductDeliveryDate($product),
+				$this->getProductManufacturer($product),
 				$this->getProductCategoryText($product, $domainConfig),
-				$params,
+				$this->getProductParams($product, $paramsByProductId),
 				$product->getPartno(),
-				$productDomainsByProductId[$product->getId()]->getZboziCpc(),
-				$productDomainsByProductId[$product->getId()]->getZboziCpcSearch()
+				$productDomain->getZboziCpc(),
+				$productDomain->getZboziCpcSearch()
 			);
 		}
 
@@ -113,6 +95,61 @@ class ZboziItemFactory implements FeedItemFactoryInterface {
 		);
 
 		return implode(' | ', $pathFromRootCategoryToMainCategory);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return string|null
+	 */
+	private function getProductManufacturer(Product $product) {
+		$manufacturer = null;
+		if ($product->getBrand() !== null) {
+			$manufacturer = $product->getBrand()->getName();
+		}
+
+		return $manufacturer;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return string[productId][paramName] $paramsByProductId
+	 * @return string[paramName]
+	 */
+	private function getProductParams(Product $product, $paramsByProductId) {
+		if (array_key_exists($product->getId(), $paramsByProductId)) {
+			$params = $paramsByProductId[$product->getId()];
+		} else {
+			$params = [];
+		}
+
+		return $params;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @return int
+	 */
+	private function getProductDeliveryDate(Product $product) {
+		if ($product->getCalculatedAvailability()->getDispatchTime() === null) {
+			$deliveryDate = -1;
+		} else {
+			$deliveryDate = $product->getCalculatedAvailability()->getDispatchTime();
+		}
+
+		return $deliveryDate;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int
+	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
+	 */
+	private function getProductPrice(Product $product, $domainId) {
+		return $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
+			$product,
+			$domainId,
+			null
+		);
 	}
 
 }
