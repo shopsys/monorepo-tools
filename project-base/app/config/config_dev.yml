@@ -12,7 +12,8 @@ doctrine:
 monolog:
   handlers:
     main:
-      type: stream
+      type: rotating_file
+      max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
     # configuration is merged (not overriden) so "nested" handler must be disabled explicitly

@@ -95,9 +95,6 @@
 			<fileset dir="${path.app}/cache/">
 				<exclude name="/" />
 			</fileset>
-			<fileset dir="${path.app}/logs/">
-				<exclude name="/" />
-			</fileset>
 			<fileset dir="${path.build.stats}/">
 				<exclude name="/" />
 			</fileset>
