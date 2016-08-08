@@ -4,8 +4,10 @@ namespace SS6\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use SS6\ShopBundle\Model\Product\Product;
@@ -54,6 +56,29 @@ class ProductVisibilityRepository {
 		$this->hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts);
 		$this->refreshGlobalProductVisibility($onlyMarkedProducts);
 		$this->markAllProductsVisibilityAsRecalculated($onlyMarkedProducts);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 */
+	public function markProductsForRecalculationAffectedByCategory(Category $category) {
+		$affectedProductsDql = $this->em->createQueryBuilder()
+			->select('IDENTITY(pcd.product)')
+			->from(ProductCategoryDomain::class, 'pcd')
+			->join(Category::class, 'c', Join::WITH, 'c = pcd.category AND c.lft >= :lft AND c.rgt <= :rgt')
+			->getDQL();
+
+		$this->em->createQueryBuilder()
+			->update(Product::class, 'p')
+			->set('p.recalculateVisibility', 'TRUE')
+			->where('p.recalculateVisibility = FALSE')
+			->andWhere('p IN (' . $affectedProductsDql . ')')
+			->setParameters([
+				'lft' => $category->getLft(),
+				'rgt' => $category->getRgt(),
+			])
+			->getQuery()
+			->execute();
 	}
 
 	/**

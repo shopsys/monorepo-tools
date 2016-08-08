@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product;
 
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
@@ -18,11 +19,6 @@ class ProductVisibilityFacade {
 	private $recalcVisibilityForMarked = false;
 
 	/**
-	 * @var bool
-	 */
-	private $recalcVisibility = false;
-
-	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
 	 */
 	public function __construct(ProductVisibilityRepository $productVisibilityRepository) {
@@ -33,16 +29,19 @@ class ProductVisibilityFacade {
 		$this->recalcVisibilityForMarked = true;
 	}
 
-	public function refreshProductsVisibilityDelayed() {
-		$this->recalcVisibility = true;
-	}
-
 	public function refreshProductsVisibility() {
 		$this->productVisibilityRepository->refreshProductsVisibility();
 	}
 
 	public function refreshProductsVisibilityForMarked() {
 		$this->productVisibilityRepository->refreshProductsVisibility(true);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 */
+	public function markProductsForRecalculationAffectedByCategory(Category $category) {
+		$this->productVisibilityRepository->markProductsForRecalculationAffectedByCategory($category);
 	}
 
 	/**
@@ -55,10 +54,6 @@ class ProductVisibilityFacade {
 
 		if ($this->recalcVisibilityForMarked) {
 			$this->refreshProductsVisibilityForMarked();
-		}
-
-		if ($this->recalcVisibility) {
-			$this->refreshProductsVisibility();
 		}
 	}
 }
