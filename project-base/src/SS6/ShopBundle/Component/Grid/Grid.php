@@ -553,23 +553,26 @@ class Grid {
 	}
 
 	private function loadFromRequest() {
-		$requestData = $this->requestStack->getMasterRequest()->get(self::GET_PARAMETER, []);
-		if (array_key_exists($this->id, $requestData)) {
-			$gridData = $requestData[$this->id];
-			if (array_key_exists('limit', $gridData)) {
-				$this->setLimit((int)trim($gridData['limit']));
+		$queryData = $this->requestStack->getMasterRequest()->query->get(self::GET_PARAMETER, []);
+		if (array_key_exists($this->id, $queryData)) {
+			$gridQueryData = $queryData[$this->id];
+			if (array_key_exists('limit', $gridQueryData)) {
+				$this->setLimit((int)trim($gridQueryData['limit']));
 				$this->isLimitFromRequest = true;
 			}
-			if (array_key_exists('page', $gridData)) {
-				$this->page = max((int)trim($gridData['page']), 1);
+			if (array_key_exists('page', $gridQueryData)) {
+				$this->page = max((int)trim($gridQueryData['page']), 1);
 			}
-			if (array_key_exists('order', $gridData)) {
-				$this->setOrderingByOrderString(trim($gridData['order']));
+			if (array_key_exists('order', $gridQueryData)) {
+				$this->setOrderingByOrderString(trim($gridQueryData['order']));
 				$this->isOrderFromRequest = true;
 			}
-
-			if (array_key_exists('selectedRowIds', $gridData) && is_array($gridData['selectedRowIds'])) {
-				$this->selectedRowIds = array_map('json_decode', $gridData['selectedRowIds']);
+		}
+		$requestData = $this->requestStack->getMasterRequest()->request->get(self::GET_PARAMETER, []);
+		if (array_key_exists($this->id, $requestData)) {
+			$gridRequestData = $requestData[$this->id];
+			if (array_key_exists('selectedRowIds', $gridRequestData) && is_array($gridRequestData['selectedRowIds'])) {
+				$this->selectedRowIds = array_map('json_decode', $gridRequestData['selectedRowIds']);
 			}
 		}
 	}
