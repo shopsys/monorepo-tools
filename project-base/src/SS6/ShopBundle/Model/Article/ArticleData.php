@@ -43,12 +43,13 @@ class ArticleData {
 	public $placement;
 
 	/**
-	 * @var bool|null
+	 * @var bool
 	 */
 	public $hidden;
 
 	public function __construct() {
 		$this->urls = new UrlListData();
+		$this->hidden = false;
 	}
 
 	/**
