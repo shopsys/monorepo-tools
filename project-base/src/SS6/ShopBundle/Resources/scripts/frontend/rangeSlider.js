@@ -66,8 +66,8 @@
 
 	};
 
-	$(document).ready(function() {
-		$('.js-range-slider').each(function() {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-range-slider').each(function() {
 			var $this = $(this);
 			var rangeSlider = new SS6.rangeSlider.RangeSlider($this);
 			rangeSlider.init();

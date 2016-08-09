@@ -21,8 +21,8 @@
 		};
 	};
 
-	$(document).ready(function () {
-		$('.js-dynamic-placeholder').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-dynamic-placeholder').each(function () {
 			var dynamicPlaceholder = new SS6.dynamicPlaceholder.DynamicPlaceholder($(this));
 			dynamicPlaceholder.init();
 		});

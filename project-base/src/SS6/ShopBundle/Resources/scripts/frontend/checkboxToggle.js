@@ -5,8 +5,8 @@
 
 	var containerIdDataAttribute = 'checkbox-toggle-container-id';
 
-	SS6.checkboxToggle.init = function () {
-		var $checkboxToggles = $('.js-checkbox-toggle');
+	SS6.checkboxToggle.init = function ($container) {
+		var $checkboxToggles = $container.filterAllNodes('.js-checkbox-toggle');
 
 		$checkboxToggles.on('change', SS6.checkboxToggle.onChange);
 
@@ -43,8 +43,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.checkboxToggle.init();
-	});
+	SS6.register.registerCallback(SS6.checkboxToggle.init);
 
 })(jQuery);

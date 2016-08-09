@@ -5,9 +5,9 @@
 
 	SS6.order.paymentTransportRelations = [];
 
-	SS6.order.init = function () {
-		var $transportInputs = $('input.transport');
-		var $paymentInputs = $('input.payment');
+	SS6.order.init = function ($container) {
+		var $transportInputs = $container.filterAllNodes('input.transport');
+		var $paymentInputs = $container.filterAllNodes('input.payment');
 
 		$transportInputs.change(SS6.order.onTransportChange);
 		$paymentInputs.change(SS6.order.onPaymentChange);
@@ -155,8 +155,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.order.init();
-	});
+	SS6.register.registerCallback(SS6.order.init);
 
 })(jQuery);

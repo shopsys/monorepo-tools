@@ -6,11 +6,11 @@
 	SS6.orderRememberData.delayedSaveDataTimer = null;
 	SS6.orderRememberData.delayedSaveDataDelay = 200;
 
-	SS6.orderRememberData.init = function () {
-		$('#js-order-form input, #js-order-form select, #js-order-form textarea')
+	SS6.orderRememberData.init = function ($container) {
+		$container.filterAllNodes('#js-order-form input, #js-order-form select, #js-order-form textarea')
 			.bind('change.orderRememberData', SS6.orderRememberData.saveData);
 
-		$('#js-order-form input, #js-order-form textarea')
+		$container.filterAllNodes('#js-order-form input, #js-order-form textarea')
 			.bind('keyup.orderRememberData', SS6.orderRememberData.delayedSaveData);
 	};
 
@@ -32,8 +32,6 @@
 		});
 	};
 
-	$(document).ready(function () {
-		SS6.orderRememberData.init();
-	});
+	SS6.register.registerCallback(SS6.orderRememberData.init);
 
 })(jQuery);

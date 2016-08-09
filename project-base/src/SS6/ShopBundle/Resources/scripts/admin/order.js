@@ -74,8 +74,8 @@
 		};
 	};
 
-	$(document).ready(function () {
-		$('.js-order-preview').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-order-preview').each(function () {
 			var orderPreview = new SS6.order.OrderPreview($(this));
 			orderPreview.init();
 		});

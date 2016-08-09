@@ -9,8 +9,8 @@
 		$.magnificPopup.close();
 	};
 
-	SS6.productsPicker.init = function () {
-		$('.js-products-picker').each(function () {
+	SS6.productsPicker.init = function ($container) {
+		$container.filterAllNodes('.js-products-picker').each(function () {
 			var productsPicker = new SS6.productsPicker.ProductsPicker($(this));
 			productsPicker.init();
 		});
@@ -132,8 +132,6 @@
 		};
 	};
 
-	$(document).ready(function () {
-		SS6.productsPicker.init();
-	});
+	SS6.register.registerCallback(SS6.productsPicker.init);
 
 })(jQuery);

@@ -21,8 +21,8 @@
 		}
 	};
 
-	$(document).ready(function () {
-		$('.js-free-transport-and-payment-price-limit').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-free-transport-and-payment-price-limit').each(function () {
 			var freeTransportAndPayment = new SS6.freeTransportAndPayment.FreeTransportAndPayment($(this));
 			freeTransportAndPayment.init();
 		});

@@ -3,8 +3,9 @@
 	SS6 = window.SS6 || {};
 	SS6.toggleElement = SS6.toggleElement || {};
 
-	SS6.toggleElement.init = function () {
-		$('.js-toggle-container .js-toggle-button').bind('click', SS6.toggleElement.toggle);
+	SS6.toggleElement.init = function ($container) {
+		$container.filterAllNodes('.js-toggle-container .js-toggle-button')
+			.bind('click', SS6.toggleElement.toggle);
 	};
 
 	SS6.toggleElement.show = function ($container) {
@@ -37,8 +38,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.toggleElement.init();
-	});
+	SS6.register.registerCallback(SS6.toggleElement.init);
 
 })(jQuery);
