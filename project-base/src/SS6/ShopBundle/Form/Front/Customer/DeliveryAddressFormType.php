@@ -54,8 +54,12 @@ class DeliveryAddressFormType extends AbstractType {
 				],
 			])
 			->add('contactPerson', FormType::TEXT, [
-				'required' => false,
+				'required' => true,
 				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím kontaktní osobu',
+						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
+					]),
 					new Constraints\Length([
 						'max' => 200,
 						'maxMessage' => 'Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků',
