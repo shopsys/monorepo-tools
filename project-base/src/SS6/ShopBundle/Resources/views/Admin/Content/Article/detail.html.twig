@@ -7,7 +7,7 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="form-group">
+		<div class="form-group wrap-border">
 			<div class="form-group__title">
 				{{ 'Údaje článku'|trans }}
 			</div>
@@ -20,20 +20,55 @@
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
 			{{ form_row(form.hidden, { label: 'Skrýt'|trans, newline: true}) }}
 			{{ form_row(form.text, { label: 'Text'|trans, newline: true}) }}
-			<div class="form-line js-characters-counter">
-				{{ form_errors(form.seoTitle) }}
-				{{ form_label(form.seoTitle, 'SEO titulek'|trans) }}
-				{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
-				<div class="js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
+		</div>
+		
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'SEO'|trans }}
 			</div>
-			<div class="form-line js-characters-counter">
-				{{ form_errors(form.seoMetaDescription) }}
-				{{ form_label(form.seoMetaDescription, 'SEO meta description'|trans) }}
-				{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input'}}) }}
-				<div class="js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
+			
+			<div class="form-line">
+				<strong class="form-line__label">
+					{{ form_label(form.seoTitle, 'Titulek'|trans) }}
+				</strong>
+
+				<div class="form-line__side js-characters-counter">
+					<div class="form-line__item form-line__item--left">
+						<div class="input__wrap">
+							{{ form_widget(form.seoTitle, {attr: {class: 'js-dynamic-placeholder js-characters-counter-input', 'data-placeholder-source-input-id': 'article_form_name'}}) }}
+						</div>
+					</div>
+
+					<div class="form-line__count">
+						<div class="form-line__count__desc js-characters-counter-info form-line__appendix" data-recommended-length="60"></div>
+					</div>
+					{{ form_errors(form.seoTitle) }}
+				</div>
 			</div>
+
+			<div class="form-line">
+				<strong class="form-line__label">
+					{{ form_label(form.seoMetaDescription, 'Meta description'|trans) }}
+				</strong>
+
+				<div class="form-line__side js-characters-counter">
+					<div class="form-line__item form-line__item--left">
+						<div class="input__wrap">
+							{{ form_widget(form.seoMetaDescription, {attr: {class: 'js-characters-counter-input input--seo'}}) }}
+						</div>
+					</div>
+
+					<div class="form-line__count">
+						<div class="form-line__count__desc js-characters-counter-info form-line__appendix" data-recommended-length="155"></div>
+					</div>
+					{{ form_errors(form.seoMetaDescription) }}
+				</div>
+			</div>
+
 			{% block article_urls %}{% endblock %}
 		</div>
+
+			
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
