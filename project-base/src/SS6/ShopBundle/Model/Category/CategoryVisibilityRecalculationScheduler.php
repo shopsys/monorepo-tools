@@ -10,7 +10,7 @@ class CategoryVisibilityRecalculationScheduler {
 	/**
 	 * @var bool
 	 */
-	private $recaluculate = false;
+	private $recalculate = false;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
@@ -25,19 +25,19 @@ class CategoryVisibilityRecalculationScheduler {
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 */
 	public function scheduleRecalculation(Category $category) {
-		$this->recaluculate = true;
+		$this->recalculate = true;
 		$this->productVisibilityFacade->markProductsForRecalculationAffectedByCategory($category);
 	}
 
 	public function scheduleRecalculationWithoutDependencies() {
-		$this->recaluculate = true;
+		$this->recalculate = true;
 	}
 
 	/**
 	 * @return bool
 	 */
 	public function isRecalculationScheduled() {
-		return $this->recaluculate;
+		return $this->recalculate;
 	}
 
 }
