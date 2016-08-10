@@ -7,6 +7,8 @@ use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
 class Version20160512152113 extends AbstractMigration {
 
+	const COUNTRIES_SEQUENCE_NAME = 'countries_id_seq';
+
 	/**
 	 * @param \Doctrine\DBAL\Schema\Schema $schema
 	 */
@@ -18,13 +20,9 @@ class Version20160512152113 extends AbstractMigration {
 				domain_id INT NOT NULL,
 				PRIMARY KEY(id))'
 		);
-		$this->sql(
-			'INSERT INTO countries (name, domain_id) VALUES
-			(\'Česká republika\', 1),
-			(\'Czech republic\', 2)
-			'
-		);
-		$czechRepublicCountryId = $this->sql('SELECT id FROM countries WHERE domain_id = 1')->fetchColumn();
+		$this->sql('INSERT INTO countries (name, domain_id) VALUES (\'Česká republika\', 1)');
+		$czechRepublicCountryIdOnDomain1 = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
+		$this->sql('INSERT INTO countries (name, domain_id) VALUES (\'Czech republic\', 2)');
 
 		$this->sql('ALTER TABLE billing_addresses ADD COLUMN country_id INT DEFAULT NULL');
 		$this->sql(
@@ -39,7 +37,7 @@ class Version20160512152113 extends AbstractMigration {
 		);
 		$this->sql('CREATE INDEX IDX_2BAF3984F92F3E70 ON delivery_addresses (country_id)');
 
-		$this->sql('ALTER TABLE orders ADD country_id INT NOT NULL DEFAULT ' . $czechRepublicCountryId);
+		$this->sql('ALTER TABLE orders ADD country_id INT NOT NULL DEFAULT ' . $czechRepublicCountryIdOnDomain1);
 		$this->sql('ALTER TABLE orders ALTER country_id DROP DEFAULT');
 
 		$this->sql(
