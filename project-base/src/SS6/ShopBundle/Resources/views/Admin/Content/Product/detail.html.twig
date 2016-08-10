@@ -281,7 +281,7 @@
 			</div>
 			<div class="form-line">
 				<strong class="form-line__label">
-					{{ 'Titulek'|trans }}
+					{{ 'Titulek'|trans }}:
 				</strong>
 				{% for domainId, seoTitleForm in form.seoTitles %}
 					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
@@ -312,7 +312,7 @@
 
 			<div class="form-line">
 				<strong class="form-line__label">
-					{{ 'Meta description'|trans }}
+					{{ 'Meta description'|trans }}:
 				</strong>
 
 				{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
