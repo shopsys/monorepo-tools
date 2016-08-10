@@ -136,7 +136,7 @@ class PersonalInfoFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím kontatkní osobu',
+						'message' => 'Vyplňte prosím kontaktní osobu',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([

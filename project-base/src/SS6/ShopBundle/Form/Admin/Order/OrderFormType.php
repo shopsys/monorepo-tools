@@ -145,7 +145,7 @@ class OrderFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím kontatkní osobu',
+						'message' => 'Vyplňte prosím kontaktní osobu',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
 					new Constraints\Length([
