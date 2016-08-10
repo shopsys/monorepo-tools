@@ -174,6 +174,23 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getTranslatedVisibleSubcategoriesByDomain(Category $parentCategory, DomainConfig $domainConfig) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId());
+		$this->addTranslation($queryBuilder, $domainConfig->getLocale());
+
+		$queryBuilder
+			->andWhere('c.parent = :parentCategory')
+			->setParameter('parentCategory', $parentCategory);
+
+		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \Doctrine\ORM\QueryBuilder $categoriesQueryBuilder
 	 * @param string $locale
 	 */
 	private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale) {
@@ -374,4 +391,21 @@ class CategoryRepository extends NestedTreeRepository {
 
 		return $queryBuilder->getQuery()->getResult();
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getCategoriesWithVisibleChildren(array $categories, $domainId) {
+		$queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
+
+		$queryBuilder
+			->join(Category::class, 'cc', Join::WITH, 'cc.parent = c')
+			->andWhere('c IN (:categories)')
+			->setParameter('categories', $categories);
+
+		return $queryBuilder->getQuery()->getResult();
+	}
+
 }

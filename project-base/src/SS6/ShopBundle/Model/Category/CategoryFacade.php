@@ -230,6 +230,19 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 */
+	public function getVisibleCollapsibleCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
+		$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
+
+		$categoryDetails = $this->categoryDetailFactory->createCollapsibleDetails($categories, $domainConfig->getId());
+
+		return $categoryDetails;
+	}
+
+	/**
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param string $searchText
