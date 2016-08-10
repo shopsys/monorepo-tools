@@ -15,14 +15,13 @@ class Version20160512152113 extends AbstractMigration {
 			'CREATE TABLE countries (
 				id SERIAL NOT NULL,
 				name VARCHAR(255) NOT NULL,
-				visible BOOLEAN NOT NULL,
 				domain_id INT NOT NULL,
 				PRIMARY KEY(id))'
 		);
 		$this->sql(
-			'INSERT INTO countries (name, visible, domain_id) VALUES
-			(\'Česká republika\', TRUE, 1),
-			(\'Czech republic\', TRUE, 2)
+			'INSERT INTO countries (name, domain_id) VALUES
+			(\'Česká republika\', 1),
+			(\'Czech republic\', 2)
 			'
 		);
 		$czechRepublicCountryId = $this->sql('SELECT id FROM countries WHERE domain_id = 1')->fetchColumn();
@@ -53,8 +52,6 @@ class Version20160512152113 extends AbstractMigration {
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEE76AA954 FOREIGN KEY (delivery_country_id)
 			REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 		$this->sql('CREATE INDEX IDX_E52FFDEEE76AA954 ON orders (delivery_country_id)');
-
-		$this->sql('ALTER TABLE countries DROP visible');
 	}
 
 	/**
