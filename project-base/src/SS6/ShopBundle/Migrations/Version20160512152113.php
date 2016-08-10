@@ -23,6 +23,7 @@ class Version20160512152113 extends AbstractMigration {
 		$this->sql('INSERT INTO countries (name, domain_id) VALUES (\'Česká republika\', 1)');
 		$czechRepublicCountryIdOnDomain1 = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
 		$this->sql('INSERT INTO countries (name, domain_id) VALUES (\'Czech republic\', 2)');
+		$czechRepublicCountryIdOnDomain2 = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
 
 		$this->sql('ALTER TABLE billing_addresses ADD COLUMN country_id INT DEFAULT NULL');
 		$this->sql(
@@ -37,14 +38,16 @@ class Version20160512152113 extends AbstractMigration {
 		);
 		$this->sql('CREATE INDEX IDX_2BAF3984F92F3E70 ON delivery_addresses (country_id)');
 
-		$this->sql('ALTER TABLE orders ADD country_id INT NOT NULL DEFAULT ' . $czechRepublicCountryIdOnDomain1);
-		$this->sql('ALTER TABLE orders ALTER country_id DROP DEFAULT');
-
+		$this->sql('ALTER TABLE orders ADD country_id INT');
 		$this->sql(
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEF92F3E70 FOREIGN KEY (country_id)
 			REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
 		);
 		$this->sql('CREATE INDEX IDX_E52FFDEEF92F3E70 ON orders (country_id)');
+		$this->sql('UPDATE orders SET country_id = ' . $czechRepublicCountryIdOnDomain1 . ' WHERE domain_id = 1');
+		$this->sql('UPDATE orders SET country_id = ' . $czechRepublicCountryIdOnDomain2 . ' WHERE domain_id = 2');
+		$this->sql('ALTER TABLE orders ALTER country_id SET NOT NULL');
+
 		$this->sql('ALTER TABLE orders ADD delivery_country_id INT DEFAULT NULL');
 		$this->sql(
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEE76AA954 FOREIGN KEY (delivery_country_id)
