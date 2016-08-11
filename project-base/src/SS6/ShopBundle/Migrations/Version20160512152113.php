@@ -4,8 +4,13 @@ namespace SS6\ShopBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
+use SS6\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
 class Version20160512152113 extends AbstractMigration {
+
+	use MultidomainMigrationTrait;
+
+	const COUNTRIES_SEQUENCE_NAME = 'countries_id_seq';
 
 	/**
 	 * @param \Doctrine\DBAL\Schema\Schema $schema
@@ -15,17 +20,9 @@ class Version20160512152113 extends AbstractMigration {
 			'CREATE TABLE countries (
 				id SERIAL NOT NULL,
 				name VARCHAR(255) NOT NULL,
-				visible BOOLEAN NOT NULL,
 				domain_id INT NOT NULL,
 				PRIMARY KEY(id))'
 		);
-		$this->sql(
-			'INSERT INTO countries (name, visible, domain_id) VALUES
-			(\'Česká republika\', TRUE, 1),
-			(\'Czech republic\', TRUE, 2)
-			'
-		);
-		$czechRepublicCountryId = $this->sql('SELECT id FROM countries WHERE domain_id = 1')->fetchColumn();
 
 		$this->sql('ALTER TABLE billing_addresses ADD COLUMN country_id INT DEFAULT NULL');
 		$this->sql(
@@ -40,21 +37,45 @@ class Version20160512152113 extends AbstractMigration {
 		);
 		$this->sql('CREATE INDEX IDX_2BAF3984F92F3E70 ON delivery_addresses (country_id)');
 
-		$this->sql('ALTER TABLE orders ADD country_id INT NOT NULL DEFAULT ' . $czechRepublicCountryId);
-		$this->sql('ALTER TABLE orders ALTER country_id DROP DEFAULT');
-
+		$this->sql('ALTER TABLE orders ADD country_id INT');
 		$this->sql(
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEF92F3E70 FOREIGN KEY (country_id)
 			REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
 		);
 		$this->sql('CREATE INDEX IDX_E52FFDEEF92F3E70 ON orders (country_id)');
+		foreach ($this->getAllDomainIds() as $domainId) {
+			$this->sql(
+				'INSERT INTO countries (name, domain_id) VALUES (:countryName, :domainId)',
+				[
+					'countryName' => $this->getDefaultCountryNameByDomainId($domainId),
+					'domainId' => $domainId,
+				]);
+			$countryId = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
+			$this->sql(
+				'UPDATE orders SET country_id = :countryId WHERE domain_id = :domainId',
+				[
+					'countryId' => $countryId,
+					'domainId' => $domainId,
+				]
+			);
+		}
+		$this->sql('ALTER TABLE orders ALTER country_id SET NOT NULL');
+
 		$this->sql('ALTER TABLE orders ADD delivery_country_id INT DEFAULT NULL');
 		$this->sql(
 			'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEE76AA954 FOREIGN KEY (delivery_country_id)
 			REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
 		$this->sql('CREATE INDEX IDX_E52FFDEEE76AA954 ON orders (delivery_country_id)');
+	}
 
-		$this->sql('ALTER TABLE countries DROP visible');
+	/**
+	 * @param int $domainId
+	 * @return string
+	 */
+	private function getDefaultCountryNameByDomainId($domainId) {
+		$domainLocale = $this->getDomainLocale($domainId);
+
+		return $domainLocale === 'en' ? 'Czech republic' : 'Česká republika';
 	}
 
 	/**
