@@ -1,4 +1,4 @@
-{% macro categories(collapsibleCategoryDetails, isRootParentCategory) %}
+{% macro categories(collapsibleCategoryDetails, isRootParentCategory, openCategories) %}
 	{% if collapsibleCategoryDetails|length > 0 %}
 		<ul class="js-category-list list-menu {% if isRootParentCategory %}list-menu--root{% endif %}" {% if isRootParentCategory %}id="js-categories"{% endif %}>
 			{% for collapsibleCategoryDetail in collapsibleCategoryDetails %}
@@ -9,11 +9,15 @@
 							<i class="list-menu__item__control svg svg-arrow js-category-collapse-control" data-url="{{ url('front_category_branch', { parentCategoryId: collapsibleCategoryDetail.category.id }) }}"></i>
 						{% endif %}
 					</a>
-					<div class="display-none js-category-list-placeholder"></div>
+					{% if collapsibleCategoryDetail.category in openCategories %}
+						{{ _self.categories(collapsibleCategoryDetail.children, false, openCategories) }}
+					{% else %}
+						<div class="display-none js-category-list-placeholder"></div>
+					{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 {% endmacro %}
 
-{{ _self.categories(collapsibleCategoryDetails, isRootParentCategory) }}
+{{ _self.categories(collapsibleCategoryDetails, isRootParentCategory, openCategories) }}

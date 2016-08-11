@@ -2,9 +2,15 @@
 
 namespace SS6\ShopBundle\Model\Category\Detail;
 
+use Closure;
 use SS6\ShopBundle\Model\Category\Category;
 
 class CollapsibleCategoryDetail {
+
+	/**
+	 * @var \Closure
+	 */
+	private $lazyLoadChildrenCallback;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category
@@ -17,10 +23,21 @@ class CollapsibleCategoryDetail {
 	private $hasChildren;
 
 	/**
+	 * @var \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]|null
+	 */
+	private $children;
+
+	/**
+	 * @param \Closure $lazyLoadChildrenCallback
 	 * @param \SS6\ShopBundle\Model\Category\Category $category
 	 * @param bool $hasChildren
 	 */
-	public function __construct(Category $category, $hasChildren) {
+	public function __construct(
+		Closure $lazyLoadChildrenCallback,
+		Category $category,
+		$hasChildren
+	) {
+		$this->lazyLoadChildrenCallback = $lazyLoadChildrenCallback;
 		$this->category = $category;
 		$this->hasChildren = $hasChildren;
 	}
@@ -39,4 +56,14 @@ class CollapsibleCategoryDetail {
 		return $this->hasChildren;
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 */
+	public function getChildren() {
+		if ($this->children === null) {
+			$this->children = call_user_func($this->lazyLoadChildrenCallback);
+		}
+
+		return $this->children;
+	}
 }

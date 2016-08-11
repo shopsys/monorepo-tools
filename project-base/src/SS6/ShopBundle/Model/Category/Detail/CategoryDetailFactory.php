@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Category\Detail;
 
+use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 
@@ -37,16 +38,25 @@ class CategoryDetailFactory {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @param int $domainId
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
 	 */
-	public function createCollapsibleDetails($categories, $domainId) {
-		$categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainId);
+	public function createCollapsibleDetails($categories, DomainConfig $domainConfig) {
+		$categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainConfig->getId());
 
 		$collapsibleCategoryDetails = [];
 		foreach ($categories as $category) {
 			$hasChildren = in_array($category, $categoriesWithChildren, true);
-			$collapsibleCategoryDetails[] = new CollapsibleCategoryDetail($category, $hasChildren);
+			$collapsibleCategoryDetails[] = new CollapsibleCategoryDetail(
+				function () use ($category, $domainConfig) {
+					$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($category, $domainConfig);
+					$categoryDetails = $this->createCollapsibleDetails($categories, $domainConfig);
+
+					return $categoryDetails;
+				},
+				$category,
+				$hasChildren
+			);
 		}
 
 		return $collapsibleCategoryDetails;
