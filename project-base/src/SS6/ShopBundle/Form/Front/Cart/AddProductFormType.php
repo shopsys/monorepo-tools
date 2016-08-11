@@ -47,6 +47,7 @@ class AddProductFormType extends AbstractType {
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
 			'attr' => ['novalidate' => 'novalidate'],
+			'csrf_protection' => false, // CSRF is not necessary (and can be annoying) in this form
 		]);
 	}
 
