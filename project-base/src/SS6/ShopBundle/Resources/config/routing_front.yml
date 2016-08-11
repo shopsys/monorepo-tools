@@ -18,8 +18,13 @@ front_cart_delete:
   requirements:
     cartItemId: \d+
 
-front_category_panel:
+front_category_branch:
   pattern: /categoryPanel/{parentCategoryId}/
+  defaults: { _controller: SS6ShopBundle:Front\Category:branch }
+  condition: "request.isXmlHttpRequest()"
+
+front_category_panel:
+  pattern: /categoryPanel/
   defaults: { _controller: SS6ShopBundle:Front\Category:panel }
   condition: "request.isXmlHttpRequest()"
 

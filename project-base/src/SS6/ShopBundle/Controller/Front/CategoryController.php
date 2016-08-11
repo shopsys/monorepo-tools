@@ -26,17 +26,23 @@ class CategoryController extends FrontBaseController {
 		$this->categoryFacade = $categoryFacade;
 	}
 
+	public function panelAction() {
+		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
+			$this->categoryFacade->getRootCategory(),
+			$this->domain->getCurrentDomainConfig()
+		);
+
+		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
+			'collapsibleCategoryDetails' => $categoryDetails,
+			'isRootParentCategory' => true,
+		]);
+	}
+
 	/**
 	 * @param int $parentCategoryId
 	 */
-	public function panelAction($parentCategoryId = null) {
-		$isRootParentCategory = $parentCategoryId === null;
-
-		if ($isRootParentCategory) {
-			$parentCategory = $this->categoryFacade->getRootCategory();
-		} else {
-			$parentCategory = $this->categoryFacade->getById($parentCategoryId);
-		}
+	public function branchAction($parentCategoryId) {
+		$parentCategory = $this->categoryFacade->getById($parentCategoryId);
 
 		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
 			$parentCategory,
@@ -45,7 +51,7 @@ class CategoryController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
 			'collapsibleCategoryDetails' => $categoryDetails,
-			'isRootParentCategory' => $isRootParentCategory,
+			'isRootParentCategory' => false,
 		]);
 	}
 

@@ -6,7 +6,7 @@
 					<a href="{{ url('front_product_list', { id: collapsibleCategoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ collapsibleCategoryDetail.category.level }}">
 						{{ collapsibleCategoryDetail.category.name }}
 						{% if collapsibleCategoryDetail.hasChildren %}
-							<i class="list-menu__item__control svg svg-arrow js-category-collapse-control" data-url="{{ url('front_category_panel', { parentCategoryId: collapsibleCategoryDetail.category.id }) }}"></i>
+							<i class="list-menu__item__control svg svg-arrow js-category-collapse-control" data-url="{{ url('front_category_branch', { parentCategoryId: collapsibleCategoryDetail.category.id }) }}"></i>
 						{% endif %}
 					</a>
 					<div class="display-none js-category-list-placeholder"></div>
