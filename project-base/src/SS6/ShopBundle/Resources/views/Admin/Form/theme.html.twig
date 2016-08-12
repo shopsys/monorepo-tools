@@ -663,7 +663,9 @@
 			{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice')|trim}) %}
 			<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{{ form_widget(child, { inList: true, attr: { class: 'form-choice__input' } }) }}
-				{{ child.vars.label }}
+				<span class="form-choice__label">
+					{{ child.vars.label }}
+				</span>
 			</label>
 		{% endfor %}
 	</div>
