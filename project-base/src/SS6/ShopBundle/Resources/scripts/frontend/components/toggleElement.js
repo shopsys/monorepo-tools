@@ -10,7 +10,7 @@
 	SS6.toggleElement.show = function ($container) {
 		var $content = $container.find('.js-toggle-content');
 
-		$container.trigger('showContent.toogleElement');
+		$container.trigger('showContent.toggleElement');
 
 		$content.slideDown('fast', function() {
 			$content.removeClass('display-none');
@@ -20,7 +20,7 @@
 	SS6.toggleElement.hide = function ($container) {
 		var $content = $container.find('.js-toggle-content');
 
-		$container.trigger('hideContent.toogleElement');
+		$container.trigger('hideContent.toggleElement');
 
 		$content.slideUp('fast', function() {
 			$content.addClass('display-none');

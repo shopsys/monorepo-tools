@@ -8,11 +8,11 @@
 			var $toggleContainer = $(this);
 			var $toggleButton = $toggleContainer.find('.js-toggle-button');
 
-			$toggleContainer.bind('showContent.toogleElement', function () {
+			$toggleContainer.bind('showContent.toggleElement', function () {
 				$toggleButton.text('-');
 			});
 
-			$toggleContainer.bind('hideContent.toogleElement', function () {
+			$toggleContainer.bind('hideContent.toggleElement', function () {
 				$toggleButton.text('+');
 			});
 		});
