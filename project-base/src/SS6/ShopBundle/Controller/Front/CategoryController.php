@@ -58,6 +58,7 @@ class CategoryController extends FrontBaseController {
 			'collapsibleCategoryDetails' => $categoryDetails,
 			'isRootParentCategory' => true,
 			'openCategories' => $openCategories,
+			'currentCategory' => $currentCategory,
 		]);
 	}
 
@@ -76,6 +77,7 @@ class CategoryController extends FrontBaseController {
 			'collapsibleCategoryDetails' => $categoryDetails,
 			'isRootParentCategory' => false,
 			'openCategories' => [],
+			'currentCategory' => null,
 		]);
 	}
 
