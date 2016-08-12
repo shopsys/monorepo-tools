@@ -6,13 +6,16 @@
 	var containerIdDataAttribute = 'checkbox-toggle-container-id';
 
 	SS6.checkboxToggle.init = function () {
-		$('.js-checkbox-toggle').on('change', SS6.checkboxToggle.onChange);
+		var $checkboxToggles = $('.js-checkbox-toggle');
 
-		$('.js-checkbox-toggle').each(function () {
-			var containerId = $(this).data(containerIdDataAttribute);
+		$checkboxToggles.on('change', SS6.checkboxToggle.onChange);
 
-			var show = $(this).is(':checked');
-			if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+		$checkboxToggles.each(function () {
+			var $checkboxToggle = $(this);
+			var containerId = $checkboxToggle.data(containerIdDataAttribute);
+
+			var show = $checkboxToggle.is(':checked');
+			if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
 				show = !show;
 			}
 
@@ -25,10 +28,11 @@
 	};
 
 	SS6.checkboxToggle.onChange = function () {
-		var containerId = $(this).data(containerIdDataAttribute);
+		var $checkboxToggle = $(this);
+		var containerId = $checkboxToggle.data(containerIdDataAttribute);
 
-		var show = $(this).is(':checked');
-		if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+		var show = $checkboxToggle.is(':checked');
+		if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
 			show = !show;
 		}
 
