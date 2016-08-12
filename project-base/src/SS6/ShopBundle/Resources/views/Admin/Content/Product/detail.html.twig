@@ -353,13 +353,11 @@
 				</div>
 			</div>
 			<div class="form-line">
-				<div class="form-line__label">
-					{{ form_label(form.showInZboziFeed, 'Nabízet ve feedu'|trans) }}
-				</div>
+				{{ form_label(form.showInZboziFeed, 'Nabízet ve feedu'|trans) }}
 				{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
 					<div class="form-line__side">
 						<div class="form-line__item">
-								{{ domainIcon(domainId, 'normal') }}
+								{{ domainIcon(domainId, 'long-bordered') }}
 						</div>
 						<div class="form-line__item">
 							{{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
