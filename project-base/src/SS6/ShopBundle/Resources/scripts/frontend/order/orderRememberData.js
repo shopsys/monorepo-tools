@@ -22,7 +22,7 @@
 		}, SS6.orderRememberData.delayedSaveDataDelay);
 	};
 
-	SS6.orderRememberData.saveData = function(event) {
+	SS6.orderRememberData.saveData = function() {
 		clearTimeout(SS6.orderRememberData.delayedSaveDataTimer);
 		$.ajax({
 			type: "POST",

@@ -24,7 +24,7 @@
 		});
 	};
 
-	SS6.checkboxToggle.onChange = function (event) {
+	SS6.checkboxToggle.onChange = function () {
 		var containerId = $(this).data(containerIdDataAttribute);
 
 		var show = $(this).is(':checked');
