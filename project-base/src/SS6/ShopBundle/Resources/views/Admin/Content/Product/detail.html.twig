@@ -366,8 +366,31 @@
 					</div>
 				{% endfor %}
 			</div>
-			{{ form_row(form.zboziCpcValues, { label: 'Maximální částka za proklik'|trans }) }}
-			{{ form_row(form.zboziCpcSearchValues, { label: 'Maximální částka za proklik v nabídkách'|trans }) }}
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ 'Maximální částka za proklik'|trans }}:
+					<i
+						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC'|trans }}"
+		 			></i>
+				</div>
+				{{ form_widget(form.zboziCpcValues) }}
+				{{ form_errors(form.zboziCpcValues) }}
+			</div>
+
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ 'Maximální částka za proklik v nabídkách'|trans }}:
+					<i
+						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC_SEARCH'|trans }}"
+		 			></i>
+				</div>
+				{{ form_widget(form.zboziCpcSearchValues) }}
+				{{ form_errors(form.zboziCpcSearchValues) }}
+			</div>
 		</div>
 
 		<div class="form-group wrap-border">
