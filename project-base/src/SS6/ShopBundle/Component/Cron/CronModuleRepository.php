@@ -32,6 +32,7 @@ class CronModuleRepository {
 		if ($cronModule === null) {
 			$cronModule = new CronModule($moduleId);
 			$this->em->persist($cronModule);
+			$this->em->flush($cronModule);
 		}
 
 		return $cronModule;
