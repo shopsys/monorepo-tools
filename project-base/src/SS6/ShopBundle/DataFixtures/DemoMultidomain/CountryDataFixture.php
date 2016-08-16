@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
@@ -10,8 +10,8 @@ use SS6\ShopBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture {
 
-	const COUNTRY_CZECH_REPUBLIC_1 = 'country_czech_republic_1';
-	const COUNTRY_SLOVAKIA_1 = 'country_slovakia_1';
+	const COUNTRY_CZECH_REPUBLIC_2 = 'country_czech_republic_2';
+	const COUNTRY_SLOVAKIA_2 = 'country_slovakia_2';
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -25,16 +25,16 @@ class CountryDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	private function addCzechCountryReference(ObjectManager $manager) {
-		$country = $manager->getRepository(Country::class)->findOneBy(['domainId' => 1]);
-		$this->addReference(self::COUNTRY_CZECH_REPUBLIC_1, $country);
+		$country = $manager->getRepository(Country::class)->findOneBy(['domainId' => 2]);
+		$this->addReference(self::COUNTRY_CZECH_REPUBLIC_2, $country);
 	}
 
 	private function loadSlovakCountry() {
-		$domainId = 1;
+		$domainId = 2;
 		$countryData = new CountryData();
-		$countryData->name = 'Slovenská republika';
+		$countryData->name = 'Slovakia';
 		$country = $this->createCountry($countryData, $domainId);
-		$this->addReference(self::COUNTRY_SLOVAKIA_1, $country);
+		$this->addReference(self::COUNTRY_SLOVAKIA_2, $country);
 	}
 
 	/**

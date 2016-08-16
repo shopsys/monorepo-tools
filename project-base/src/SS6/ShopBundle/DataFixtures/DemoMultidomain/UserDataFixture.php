@@ -2,13 +2,14 @@
 
 namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 
-class UserDataFixture extends AbstractReferenceFixture {
+class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -30,6 +31,15 @@ class UserDataFixture extends AbstractReferenceFixture {
 		foreach ($customersData as $customerData) {
 			$customerFacade->create($customerData);
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getDependencies() {
+		return [
+			CountryDataFixture::class,
+		];
 	}
 
 }

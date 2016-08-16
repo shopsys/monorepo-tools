@@ -7,11 +7,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
@@ -183,6 +183,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 */
 	public function getDependencies() {
 		return [
+			CountryDataFixture::class,
 			PaymentDataFixture::class,
 			TransportDataFixture::class,
 		];
