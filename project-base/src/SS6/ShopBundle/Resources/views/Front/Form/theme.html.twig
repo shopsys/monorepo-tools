@@ -255,6 +255,7 @@
 {%- endblock button_attributes %}
 
 {% block honey_pot_row %}
+	{{ formHoneyPotCheckPasswordAlreadyRendered(form) }}
 	{{ form_row(form, {rowClass: 'js-honey ' ~ rowClass|default('')}) }}
 {% endblock honey_pot_row %}
 
