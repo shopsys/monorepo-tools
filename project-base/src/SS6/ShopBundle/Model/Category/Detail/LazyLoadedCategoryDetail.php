@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Model\Category\Detail;
 use Closure;
 use SS6\ShopBundle\Model\Category\Category;
 
-class CollapsibleCategoryDetail {
+class LazyLoadedCategoryDetail {
 
 	/**
 	 * @var \Closure
@@ -23,7 +23,7 @@ class CollapsibleCategoryDetail {
 	private $hasChildren;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]|null
+	 * @var \SS6\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]|null
 	 */
 	private $children;
 
@@ -57,7 +57,7 @@ class CollapsibleCategoryDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 * @return \SS6\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
 	 */
 	public function getChildren() {
 		if ($this->children === null) {

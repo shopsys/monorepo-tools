@@ -39,18 +39,18 @@ class CategoryDetailFactory {
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 * @return \SS6\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
 	 */
-	public function createCollapsibleDetails($categories, DomainConfig $domainConfig) {
+	public function createLazyLoadedDetails($categories, DomainConfig $domainConfig) {
 		$categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainConfig->getId());
 
-		$collapsibleCategoryDetails = [];
+		$lazyLoadedCategoryDetails = [];
 		foreach ($categories as $category) {
 			$hasChildren = in_array($category, $categoriesWithChildren, true);
-			$collapsibleCategoryDetails[] = new CollapsibleCategoryDetail(
+			$lazyLoadedCategoryDetails[] = new LazyLoadedCategoryDetail(
 				function () use ($category, $domainConfig) {
 					$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($category, $domainConfig);
-					$categoryDetails = $this->createCollapsibleDetails($categories, $domainConfig);
+					$categoryDetails = $this->createLazyLoadedDetails($categories, $domainConfig);
 
 					return $categoryDetails;
 				},
@@ -59,7 +59,7 @@ class CategoryDetailFactory {
 			);
 		}
 
-		return $collapsibleCategoryDetails;
+		return $lazyLoadedCategoryDetails;
 	}
 
 	/**

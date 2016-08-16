@@ -39,7 +39,7 @@ class CategoryController extends FrontBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function panelAction(Request $request) {
-		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
+		$categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
 			$this->categoryFacade->getRootCategory(),
 			$this->domain->getCurrentDomainConfig()
 		);
@@ -55,7 +55,7 @@ class CategoryController extends FrontBaseController {
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
-			'collapsibleCategoryDetails' => $categoryDetails,
+			'lazyLoadedCategoryDetails' => $categoryDetails,
 			'isFirstLevel' => true,
 			'openCategories' => $openCategories,
 			'currentCategory' => $currentCategory,
@@ -68,13 +68,13 @@ class CategoryController extends FrontBaseController {
 	public function branchAction($parentCategoryId) {
 		$parentCategory = $this->categoryFacade->getById($parentCategoryId);
 
-		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
+		$categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
 			$parentCategory,
 			$this->domain->getCurrentDomainConfig()
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
-			'collapsibleCategoryDetails' => $categoryDetails,
+			'lazyLoadedCategoryDetails' => $categoryDetails,
 			'isFirstLevel' => false,
 			'openCategories' => [],
 			'currentCategory' => null,
