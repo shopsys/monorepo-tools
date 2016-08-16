@@ -190,8 +190,12 @@ class CategoryFacade {
 			} else {
 				$parent = $this->categoryRepository->getById($parentId);
 			}
+
 			$category = $this->categoryRepository->getById($categoryId);
 			$category->setParent($parent);
+			// Category must be flushed after parent change before calling moveDown for correct calculation of lft and rgt
+			$this->em->flush($category);
+
 			$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
 		}
 
