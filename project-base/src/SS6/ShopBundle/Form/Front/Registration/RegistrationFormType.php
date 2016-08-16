@@ -51,7 +51,7 @@ class RegistrationFormType extends AbstractType {
 				],
 				'invalid_message' => 'Hesla se neshodují',
 			])
-			->add('captcha', FormType::HONEY_POT)
+			->add('email2', FormType::HONEY_POT)
 			->add('save', FormType::SUBMIT);
 	}
 
