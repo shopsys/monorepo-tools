@@ -33,8 +33,8 @@
 
 	};
 
-	$(document).ready(function () {
-		$('.js-characters-counter').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-characters-counter').each(function () {
 			var instance = new SS6.charactersCounter.Counter($(this));
 			instance.init();
 		});

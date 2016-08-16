@@ -43,8 +43,8 @@
 		};
 	};
 
-	$(document).ready(function () {
-		$('.js-entity-url-list').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-entity-url-list').each(function () {
 			var entityUrlsNewUrl = new SS6.entityUrls.NewUrl($(this));
 			entityUrlsNewUrl.init();
 		});

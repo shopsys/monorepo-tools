@@ -30,8 +30,8 @@
 
 	};
 
-	$(document).ready(function () {
-		$('.js-tabs').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-tabs').each(function () {
 			var tab = new SS6.tabs.Tabs($(this));
 			tab.init();
 		});

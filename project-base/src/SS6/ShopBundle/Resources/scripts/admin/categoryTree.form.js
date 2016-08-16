@@ -4,8 +4,8 @@
 	SS6.categoryTree = SS6.categoryTree || {};
 	SS6.categoryTree.Form = SS6.categoryTree.Form || {};
 
-	$(document).ready(function () {
-		$('.js-category-tree-form').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-category-tree-form').each(function () {
 			var categoryTreeForm = new SS6.categoryTree.Form($(this));
 			categoryTreeForm.init();
 		});

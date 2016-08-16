@@ -3,10 +3,7 @@
 	SS6 = window.SS6 || {};
 	SS6.advancedSearch = SS6.advancedSearch || {};
 
-	SS6.advancedSearch.init = function () {
-		var $addRuleButton = $('#js-advanced-search-add-rule-button');
-		var $rulesContainer = $('#js-advanced-search-rules-container');
-		var $ruleTemplate = $('#js-advanced-search-rule-template');
+	SS6.advancedSearch.init = function ($addRuleButton, $rulesContainer, $ruleTemplate) {
 		$ruleTemplate.detach().removeClass('display-none').removeAttr('id').find('*[id]').removeAttr('id');
 
 		var newRuleIndexCounter = 0;
@@ -74,8 +71,14 @@
 		$rule.find('.js-advanced-search-rule-value').toggle(operator !== SS6.constant('\\SS6\\ShopBundle\\Model\\AdvancedSearch\\AdvancedSearchFilterInterface::OPERATOR_NOT_SET'));
 	};
 
-	$(document).ready(function () {
-		SS6.advancedSearch.init();
+	SS6.register.registerCallback(function ($container) {
+		var $addRuleButton = $container.filterAllNodes('#js-advanced-search-add-rule-button');
+		var $rulesContainer = $container.filterAllNodes('#js-advanced-search-rules-container');
+		var $ruleTemplate = $container.filterAllNodes('#js-advanced-search-rule-template');
+
+		if ($addRuleButton.length > 0 && $rulesContainer.length > 0 && $ruleTemplate.length > 0) {
+			SS6.advancedSearch.init($addRuleButton, $rulesContainer, $ruleTemplate);
+		}
 	});
 
 })(jQuery);

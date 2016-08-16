@@ -5,14 +5,17 @@
 
 	var containerIdDataAttribute = 'checkbox-toggle-container-id';
 
-	SS6.checkboxToggle.init = function () {
-		$('.js-checkbox-toggle').on('change', SS6.checkboxToggle.onChange);
+	SS6.checkboxToggle.init = function ($container) {
+		var $checkboxToggles = $container.filterAllNodes('.js-checkbox-toggle');
 
-		$('.js-checkbox-toggle').each(function () {
-			var containerId = $(this).data(containerIdDataAttribute);
+		$checkboxToggles.on('change', SS6.checkboxToggle.onChange);
 
-			var show = $(this).is(':checked');
-			if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+		$checkboxToggles.each(function () {
+			var $checkboxToggle = $(this);
+			var containerId = $checkboxToggle.data(containerIdDataAttribute);
+
+			var show = $checkboxToggle.is(':checked');
+			if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
 				show = !show;
 			}
 
@@ -24,11 +27,12 @@
 		});
 	};
 
-	SS6.checkboxToggle.onChange = function (event) {
-		var containerId = $(this).data(containerIdDataAttribute);
+	SS6.checkboxToggle.onChange = function () {
+		var $checkboxToggle = $(this);
+		var containerId = $checkboxToggle.data(containerIdDataAttribute);
 
-		var show = $(this).is(':checked');
-		if ($(this).hasClass('js-checkbox-toggle--inverted')) {
+		var show = $checkboxToggle.is(':checked');
+		if ($checkboxToggle.hasClass('js-checkbox-toggle--inverted')) {
 			show = !show;
 		}
 
@@ -39,8 +43,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.checkboxToggle.init();
-	});
+	SS6.register.registerCallback(SS6.checkboxToggle.init);
 
 })(jQuery);

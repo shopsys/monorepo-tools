@@ -5,8 +5,9 @@
 
 	var isConfirmed = false;
 
-	SS6.massActionConfirm.init = function () {
-		$('.js-mass-action-submit').click(function () {
+	SS6.massActionConfirm.init = function ($container) {
+		$container.filterAllNodes('.js-mass-action-submit').click(function () {
+			var $button = $(this);
 			if (!isConfirmed) {
 				var action = $('.js-mass-action-value option:selected').text().toLowerCase();
 				var selectType = $('.js-mass-action-select-type').val();
@@ -25,7 +26,7 @@
 					buttonContinue: true,
 					eventContinue: function () {
 						isConfirmed = true;
-						$('.js-mass-action-submit').trigger('click');
+						$button.trigger('click');
 					}
 				});
 
@@ -35,8 +36,6 @@
 
 	};
 
-	$(document).ready(function () {
-		SS6.massActionConfirm.init();
-	});
+	SS6.register.registerCallback(SS6.massActionConfirm.init);
 
 })(jQuery);

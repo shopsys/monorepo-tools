@@ -32,8 +32,8 @@
 		}
 	};
 
-	$(document).ready(function () {
-		$('.js-mail-template-attachment').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-mail-template-attachment').each(function () {
 			var attachmentDelete = new SS6.mailTemplate.AttachmentDelete($(this));
 			attachmentDelete.init();
 		});

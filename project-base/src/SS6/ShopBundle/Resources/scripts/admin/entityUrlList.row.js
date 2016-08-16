@@ -60,8 +60,8 @@
 		};
 	};
 
-	$(document).ready(function () {
-		$('.js-entity-url-list-friendly-url').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-entity-url-list-friendly-url').each(function () {
 			var entityUrlsRow = new SS6.entityUrls.Row($(this));
 			entityUrlsRow.init();
 		});

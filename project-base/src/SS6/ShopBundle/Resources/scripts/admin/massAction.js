@@ -3,14 +3,12 @@
 	SS6 = SS6 || {};
 	SS6.massAction = SS6.massAction || {};
 
-	SS6.massAction.init = function () {
-		$('#js-mass-action-button').click(function () {
+	SS6.massAction.init = function ($container) {
+		$container.filterAllNodes('#js-mass-action-button').click(function () {
 			$('#js-mass-action').toggleClass('active');
 		});
 	};
 
-	$(document).ready(function () {
-		SS6.massAction.init();
-	});
+	SS6.register.registerCallback(SS6.massAction.init);
 
 })(jQuery);

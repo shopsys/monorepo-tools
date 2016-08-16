@@ -4,12 +4,14 @@
 	SS6.categoryTree = SS6.categoryTree || {};
 	SS6.categoryTree.sorting = SS6.categoryTree.sorting || {};
 
-	$(document).ready(function () {
-		var sorting = new SS6.categoryTree.sorting.constructor(
-			$('#js-category-tree-sorting > .js-category-tree-items'),
-			$('#js-category-tree-sorting-save-button')
-		);
-		sorting.init();
+	SS6.register.registerCallback(function ($container) {
+		var $rootTree = $container.filterAllNodes('#js-category-tree-sorting > .js-category-tree-items');
+		var $saveButton = $container.filterAllNodes('#js-category-tree-sorting-save-button');
+		
+		if ($rootTree.length > 0 && $saveButton.length > 0) {
+			var sorting = new SS6.categoryTree.sorting.constructor($rootTree, $saveButton);
+			sorting.init();
+		}
 	});
 
 	SS6.categoryTree.sorting.constructor = function ($rootTree, $saveButton) {

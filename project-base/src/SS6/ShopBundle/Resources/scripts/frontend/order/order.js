@@ -5,14 +5,17 @@
 
 	SS6.order.paymentTransportRelations = [];
 
-	SS6.order.init = function () {
-		$('input.transport').change(SS6.order.onTransportChange);
-		$('input.payment').change(SS6.order.onPaymentChange);
+	SS6.order.init = function ($container) {
+		var $transportInputs = $container.filterAllNodes('input.transport');
+		var $paymentInputs = $container.filterAllNodes('input.payment');
+
+		$transportInputs.change(SS6.order.onTransportChange);
+		$paymentInputs.change(SS6.order.onPaymentChange);
 		SS6.order.updateTransports();
 		SS6.order.updatePayments();
 
-		$('input.transport').change(SS6.order.updateContinueButton);
-		$('input.payment').change(SS6.order.updateContinueButton);
+		$transportInputs.change(SS6.order.updateContinueButton);
+		$paymentInputs.change(SS6.order.updateContinueButton);
 		SS6.order.updateContinueButton();
 	};
 
@@ -94,8 +97,9 @@
 	};
 
 	SS6.order.onTransportChange = function () {
-		var checked = $(this).prop('checked');
-		var checkedId = $(this).data('id');
+		var $this = $(this);
+		var checked = $this.prop('checked');
+		var checkedId = $this.data('id');
 
 		if (checked) {
 			// uncheckOtherTransports
@@ -108,17 +112,18 @@
 				}
 			});
 
-			$(this).closest('label.box-chooser__item').addClass('box-chooser__item--active');
+			$this.closest('label.box-chooser__item').addClass('box-chooser__item--active');
 		} else {
-			$(this).closest('label.box-chooser__item').removeClass('box-chooser__item--active');
+			$this.closest('label.box-chooser__item').removeClass('box-chooser__item--active');
 		}
 
 		SS6.order.updatePayments();
 	};
 
 	SS6.order.onPaymentChange = function () {
-		var checked = $(this).prop('checked');
-		var checkedId = $(this).data('id');
+		var $this = $(this);
+		var checked = $this.prop('checked');
+		var checkedId = $this.data('id');
 
 		if (checked) {
 			// uncheckOtherPayments
@@ -131,9 +136,9 @@
 				}
 			});
 
-			$(this).closest('label.box-chooser__item').addClass('box-chooser__item--active');
+			$this.closest('label.box-chooser__item').addClass('box-chooser__item--active');
 		} else {
-			$(this).closest('label.box-chooser__item').removeClass('box-chooser__item--active');
+			$this.closest('label.box-chooser__item').removeClass('box-chooser__item--active');
 		}
 
 		SS6.order.updateTransports();
@@ -150,8 +155,6 @@
 		}
 	};
 
-	$(document).ready(function () {
-		SS6.order.init();
-	});
+	SS6.register.registerCallback(SS6.order.init);
 
 })(jQuery);
