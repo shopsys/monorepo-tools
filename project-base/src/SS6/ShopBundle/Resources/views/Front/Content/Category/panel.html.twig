@@ -1,6 +1,6 @@
-{% macro categories(collapsibleCategoryDetails, isRootParentCategory, openCategories, currentCategory) %}
+{% macro categories(collapsibleCategoryDetails, isFirstLevel, openCategories, currentCategory) %}
 	{% if collapsibleCategoryDetails|length > 0 %}
-		<ul class="js-category-list list-menu {% if isRootParentCategory %}list-menu--root{% endif %}" {% if isRootParentCategory %}id="js-categories"{% endif %}>
+		<ul class="js-category-list list-menu {% if isFirstLevel %}list-menu--root{% endif %}" {% if isFirstLevel %}id="js-categories"{% endif %}>
 			{% for collapsibleCategoryDetail in collapsibleCategoryDetails %}
 				{% set isCurrentCategory = (currentCategory is not null and currentCategory == collapsibleCategoryDetail.category) %}
 				<li class="list-menu__item js-category-item {% if isCurrentCategory %}current{% endif %}">
@@ -21,4 +21,4 @@
 	{% endif %}
 {% endmacro %}
 
-{{ _self.categories(collapsibleCategoryDetails, isRootParentCategory, openCategories, currentCategory) }}
+{{ _self.categories(collapsibleCategoryDetails, isFirstLevel, openCategories, currentCategory) }}

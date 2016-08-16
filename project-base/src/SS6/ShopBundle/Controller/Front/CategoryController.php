@@ -56,7 +56,7 @@ class CategoryController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
 			'collapsibleCategoryDetails' => $categoryDetails,
-			'isRootParentCategory' => true,
+			'isFirstLevel' => true,
 			'openCategories' => $openCategories,
 			'currentCategory' => $currentCategory,
 		]);
@@ -75,7 +75,7 @@ class CategoryController extends FrontBaseController {
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
 			'collapsibleCategoryDetails' => $categoryDetails,
-			'isRootParentCategory' => false,
+			'isFirstLevel' => false,
 			'openCategories' => [],
 			'currentCategory' => null,
 		]);
