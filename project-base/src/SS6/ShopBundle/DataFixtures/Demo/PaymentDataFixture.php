@@ -18,13 +18,11 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function load(ObjectManager $manager) {
 		$paymentEditData = new PaymentEditData();
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Kreditní kartou',
-			'en' => 'Credit card',
 		];
 		$paymentEditData->paymentData->czkRounding = false;
 		$paymentEditData->prices = [
@@ -33,14 +31,12 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		];
 		$paymentEditData->paymentData->description = [
 			'cs' => 'Rychle, levně a spolehlivě!',
-			'en' => 'Quick, cheap and reliable!',
 		];
 		$paymentEditData->paymentData->instructions = [
 			'cs' => '<b>Zvolili jste platbu kreditní kartou. Prosím proveďte ji do dvou pracovních dnů.</b>',
-			'en' => '<b>You have chosen payment by credit card. Please finish it in two business days.</b>',
 		];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-		$paymentEditData->paymentData->domains = [1, 2];
+		$paymentEditData->paymentData->domains = [1];
 		$paymentEditData->paymentData->hidden = false;
 		$this->createPayment(self::PAYMENT_CARD, $paymentEditData, [
 			TransportDataFixture::TRANSPORT_PERSONAL,
@@ -49,7 +45,6 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Dobírka',
-			'en' => 'Personal collection',
 		];
 		$paymentEditData->paymentData->czkRounding = false;
 		$paymentEditData->prices = [
@@ -63,7 +58,6 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Hotově',
-			'en' => 'Cash',
 		];
 		$paymentEditData->paymentData->czkRounding = true;
 		$paymentEditData->prices = [

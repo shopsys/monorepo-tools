@@ -9,9 +9,10 @@ use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
@@ -36,7 +37,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
-		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
+		$orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_IN_PROGRESS);
 		$orderData->firstName = 'Václav';
 		$orderData->lastName = 'Svěrkoš';
@@ -59,7 +60,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.2@netdevelo.cz', 2);
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
-		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
+		$orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		$orderData->firstName = 'Jan';
 		$orderData->lastName = 'Novák';
@@ -95,7 +96,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$user = $userRepository->findUserByEmailAndDomain('no-reply.7@netdevelo.cz', 2);
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
-		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
+		$orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_NEW);
 		$orderData->firstName = 'Jindřich';
 		$orderData->lastName = 'Němec';
@@ -119,7 +120,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_PERSONAL);
-		$orderData->payment = $this->getReference(PaymentDataFixture::PAYMENT_CASH);
+		$orderData->payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH);
 		$orderData->status = $this->getReference(OrderStatusDataFixture::ORDER_STATUS_CANCELED);
 		$orderData->firstName = 'Viktor';
 		$orderData->lastName = 'Pátek';
@@ -182,6 +183,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 */
 	public function getDependencies() {
 		return [
+			PaymentDataFixture::class,
 			TransportDataFixture::class,
 		];
 	}
