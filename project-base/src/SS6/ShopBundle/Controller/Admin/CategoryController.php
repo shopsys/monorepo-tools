@@ -177,6 +177,8 @@ class CategoryController extends AdminBaseController {
 	 */
 	public function saveOrderAction(Request $request) {
 		$categoriesOrderingData = $request->get('categoriesOrderingData');
+
+		$parentIdByCategoryId = [];
 		foreach ($categoriesOrderingData as $categoryOrderingData) {
 			$categoryId = (int)$categoryOrderingData['categoryId'];
 			$parentId = $categoryOrderingData['parentId'] === '' ? null : (int)$categoryOrderingData['parentId'];
