@@ -1,3 +1,8 @@
+- service: SS6\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
+  time:
+    hours: '*'
+    minutes: '55'
+
 - service: SS6\ShopBundle\Model\Pricing\Vat\VatDeletionCronModule
   time:
     hours: '*'

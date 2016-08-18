@@ -195,6 +195,16 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
+  ss6.shop.component.error.reporting.error_reporting_from_last_hour_cron_module:
+    class: SS6\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
+    arguments:
+      - %error_reporting_to_email%
+
+  ss6.shop.component.error.reporting.log_error_reporting_facade:
+    class: SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
+    arguments:
+      - %kernel.logs_dir%
+
   ss6.shop.component.file_upload:
     class: SS6\ShopBundle\Component\FileUpload\FileUpload
     arguments: [%kernel.cache_dir%, %ss6.uploaded_file_dir%, %ss6.image_dir%]
