@@ -234,14 +234,23 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
+		return $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain($category, $domainId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CollapsibleCategoryDetail[]
+	 * @return \SS6\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
 	 */
-	public function getVisibleCollapsibleCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
+	public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
 		$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
 
-		$categoryDetails = $this->categoryDetailFactory->createCollapsibleDetails($categories, $domainConfig->getId());
+		$categoryDetails = $this->categoryDetailFactory->createLazyLoadedDetails($categories, $domainConfig);
 
 		return $categoryDetails;
 	}

@@ -1,19 +1,24 @@
-{% macro categories(collapsibleCategoryDetails, isRootParentCategory) %}
-	{% if collapsibleCategoryDetails|length > 0 %}
-		<ul class="js-category-list list-menu {% if isRootParentCategory %}list-menu--root{% endif %}" {% if isRootParentCategory %}id="js-categories"{% endif %}>
-			{% for collapsibleCategoryDetail in collapsibleCategoryDetails %}
+{% macro categories(lazyLoadedCategoryDetails, isFirstLevel, openCategories, currentCategory) %}
+	{% if lazyLoadedCategoryDetails|length > 0 %}
+		<ul class="js-category-list list-menu {% if isFirstLevel %}list-menu--root{% endif %}" {% if isFirstLevel %}id="js-categories"{% endif %}>
+			{% for lazyLoadedCategoryDetail in lazyLoadedCategoryDetails %}
+				{% set isCurrentCategory = (currentCategory is not null and currentCategory == lazyLoadedCategoryDetail.category) %}
 				<li class="list-menu__item js-category-item">
-					<a href="{{ url('front_product_list', { id: collapsibleCategoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ collapsibleCategoryDetail.category.level }}">
-						{{ collapsibleCategoryDetail.category.name }}
-						{% if collapsibleCategoryDetail.hasChildren %}
-							<i class="list-menu__item__control svg svg-arrow js-category-collapse-control" data-url="{{ url('front_category_panel', { parentCategoryId: collapsibleCategoryDetail.category.id }) }}"></i>
+					<a href="{{ url('front_product_list', { id: lazyLoadedCategoryDetail.category.id }) }}" class="list-menu__item__link list-menu__item__link--level-{{ lazyLoadedCategoryDetail.category.level }} {% if isCurrentCategory %}current{% endif %}">
+						{{ lazyLoadedCategoryDetail.category.name }}
+						{% if lazyLoadedCategoryDetail.hasChildren %}
+							<i class="list-menu__item__control svg svg-arrow js-category-collapse-control {% if lazyLoadedCategoryDetail.category in openCategories %}open{% endif %}" data-url="{{ url('front_category_branch', { parentCategoryId: lazyLoadedCategoryDetail.category.id }) }}"></i>
 						{% endif %}
 					</a>
-					<div class="display-none js-category-list-placeholder"></div>
+					{% if lazyLoadedCategoryDetail.category in openCategories %}
+						{{ _self.categories(lazyLoadedCategoryDetail.children, false, openCategories, currentCategory) }}
+					{% else %}
+						<div class="display-none js-category-list-placeholder"></div>
+					{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 {% endmacro %}
 
-{{ _self.categories(collapsibleCategoryDetails, isRootParentCategory) }}
+{{ _self.categories(lazyLoadedCategoryDetails, isFirstLevel, openCategories, currentCategory) }}

@@ -27,7 +27,7 @@
 				transition: @transition-type 200ms transform;
 			}
 
-			&.active:before {
+			&.open:before {
 				transform: rotateX(180deg);
 			}
 		}
@@ -91,6 +91,11 @@
 				&--level-4 {
 					padding-left: 60px;
 				}
+
+				&.current {
+					background: @list-menu-mobile-border-color;
+					font-weight: bold;
+				}
 			}
 		}
 
@@ -141,6 +146,11 @@
 
 				&--level-4 {
 					padding-left: 40px;
+				}
+
+				&.current {
+					color: @color-base;
+					font-weight: bold;
 				}
 			}
 

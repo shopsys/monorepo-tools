@@ -2,9 +2,11 @@
 
 namespace SS6\ShopBundle\Controller\Front;
 
+use SS6\ShopBundle\Component\Category\CurrentCategoryResolver;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
+use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController {
 
@@ -18,34 +20,64 @@ class CategoryController extends FrontBaseController {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Category\CurrentCategoryResolver
+	 */
+	private $currentCategoryResolver;
+
 	public function __construct(
 		Domain $domain,
-		CategoryFacade $categoryFacade
+		CategoryFacade $categoryFacade,
+		CurrentCategoryResolver $currentCategoryResolver
 	) {
 		$this->domain = $domain;
 		$this->categoryFacade = $categoryFacade;
+		$this->currentCategoryResolver = $currentCategoryResolver;
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function panelAction(Request $request) {
+		$categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
+			$this->categoryFacade->getRootCategory(),
+			$this->domain->getCurrentDomainConfig()
+		);
+		$currentCategory = $this->currentCategoryResolver->findCurrentCategoryByRequest($request, $this->domain->getId());
+
+		if ($currentCategory !== null) {
+			$openCategories = $this->categoryFacade->getVisibleCategoriesInPathFromRootOnDomain(
+				$currentCategory,
+				$this->domain->getId()
+			);
+		} else {
+			$openCategories = [];
+		}
+
+		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
+			'lazyLoadedCategoryDetails' => $categoryDetails,
+			'isFirstLevel' => true,
+			'openCategories' => $openCategories,
+			'currentCategory' => $currentCategory,
+		]);
 	}
 
 	/**
 	 * @param int $parentCategoryId
 	 */
-	public function panelAction($parentCategoryId = null) {
-		$isRootParentCategory = $parentCategoryId === null;
+	public function branchAction($parentCategoryId) {
+		$parentCategory = $this->categoryFacade->getById($parentCategoryId);
 
-		if ($isRootParentCategory) {
-			$parentCategory = $this->categoryFacade->getRootCategory();
-		} else {
-			$parentCategory = $this->categoryFacade->getById($parentCategoryId);
-		}
-
-		$categoryDetails = $this->categoryFacade->getVisibleCollapsibleCategoryDetailsForParent(
+		$categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
 			$parentCategory,
 			$this->domain->getCurrentDomainConfig()
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
-			'collapsibleCategoryDetails' => $categoryDetails,
-			'isRootParentCategory' => $isRootParentCategory,
+			'lazyLoadedCategoryDetails' => $categoryDetails,
+			'isFirstLevel' => false,
+			'openCategories' => [],
+			'currentCategory' => null,
 		]);
 	}
 

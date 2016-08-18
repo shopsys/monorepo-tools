@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="web__main__panel">
-			{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+			{{ render(controller('SS6ShopBundle:Front/Category:panel', { request: app.request } )) }}
 
 			{% block panel_content %}{% endblock %}
 

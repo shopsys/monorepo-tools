@@ -15,7 +15,7 @@
 		var $categoryCollapseControl = $(this);
 		var $categoryItem = $categoryCollapseControl.closest('.js-category-item');
 		var $categoryList = $categoryItem.find('.js-category-list').first();
-		var isOpen = $categoryCollapseControl.hasClass('active');
+		var isOpen = $categoryCollapseControl.hasClass('open');
 
 		if (isOpen) {
 			$categoryList.slideUp('fast');
@@ -25,7 +25,7 @@
 			loadCategoryItemContent($categoryItem, $categoryCollapseControl.data('url'))
 		}
 
-		$categoryCollapseControl.toggleClass('active', !isOpen);
+		$categoryCollapseControl.toggleClass('open', !isOpen);
 	}
 
 	function loadCategoryItemContent($categoryItem, url) {

@@ -12,6 +12,6 @@
 	</div>
 
 	<div class="display-none display-block-tablet">
-		{{ render(controller('SS6ShopBundle:Front/Category:panel')) }}
+		{{ render(controller('SS6ShopBundle:Front/Category:panel', { request: app.request } )) }}
 	</div>
 {% endblock %}
