@@ -82,6 +82,8 @@ monolog:
       buffer_size: 1000
       action_level: error
       handler: nested
+      excluded_404s:
+        - ^/
     nested:
       type: rotating_file
       max_files: 7
