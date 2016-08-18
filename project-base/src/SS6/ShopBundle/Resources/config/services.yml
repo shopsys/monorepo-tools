@@ -9,6 +9,7 @@ parameters:
   sensio_framework_extra.routing.loader.annot_class.class: SS6\ShopBundle\Component\AnnotatedRouteControllerLoader
   translation.loader.po.class: SS6\ShopBundle\Component\Translation\PoFileLoader
   twig.controller.exception.class: SS6\ShopBundle\Component\Error\ExceptionController
+  twig.exception_listener.class: SS6\ShopBundle\Component\Error\NotLogFakeHttpExceptionsExceptionListener
   faker.seed: 1234
 
 services:

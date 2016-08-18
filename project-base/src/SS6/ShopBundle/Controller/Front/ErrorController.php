@@ -56,7 +56,7 @@ class ErrorController extends FrontBaseController {
 		$this->exceptionController->setDebug(false);
 		$this->exceptionController->setShowErrorPagePrototype();
 
-		throw new \Symfony\Component\HttpKernel\Exception\HttpException($code);
+		throw new \SS6\ShopBundle\Component\Error\Exception\FakeHttpException($code);
 	}
 
 	/**
