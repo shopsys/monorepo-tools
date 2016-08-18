@@ -80,7 +80,7 @@ monolog:
     main:
       type: fingers_crossed
       buffer_size: 1000
-      action_level: error
+      action_level: warning
       handler: nested
       excluded_404s:
         - ^/
