@@ -32,7 +32,6 @@
 				$allRadioButtons.each(function () {
 					updateMain($(this));
 				});
-				return false;
 			});
 
 			markAsDeleted($checkbox.is(':checked'));
