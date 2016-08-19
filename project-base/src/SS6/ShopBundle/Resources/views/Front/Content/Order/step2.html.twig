@@ -8,7 +8,7 @@
 
 	<div class="box-order">
 
-		<div id="transportAndPayment" class="box-order__info">
+		<div id="{{ form.vars.id }}" class="box-order__info">
 
 			<div class="box-order__info__item">
 
@@ -17,7 +17,7 @@
 				<div class="box-chooser js-form-group">
 					{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
 
-					<div id="transportAndPayment_transport">
+					<div id="{{ form.transport.vars.id }}">
 						{% for child in form.transport %}
 							{% set choice = form.transport.vars.choices[child.vars.name] %}
 							{% set transportPrice = transportsPrices[choice.data.id] %}
@@ -62,7 +62,7 @@
 				<div class="box-chooser box-chooser--smaller js-form-group">
 					{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
 
-					<div id="transportAndPayment_payment">
+					<div id="{{ form.payment.vars.id }}">
 						{% for child in form.payment %}
 							{% set choice = form.payment.vars.choices[child.vars.name] %}
 							{% set paymentPrice = paymentsPrices[choice.data.id] %}
