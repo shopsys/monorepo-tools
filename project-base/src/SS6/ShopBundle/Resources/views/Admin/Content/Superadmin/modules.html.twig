@@ -4,6 +4,10 @@
 {% block h1 %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
 
 {% block main_content %}
+	<div class="in-message in-message--warning margin-bottom-15">
+		Pokud chcete, aby se změny projevily všude (na produkci, develu, localhostu apod.), dejte vědět programátorovi, aby změny zavedl do GITu!
+	</div>
+
 	{{ form_start(form) }}
 		<table class="table-main">
 			<thead>
