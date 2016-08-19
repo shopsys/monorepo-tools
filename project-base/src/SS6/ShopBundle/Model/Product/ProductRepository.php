@@ -194,7 +194,7 @@ class ProductRepository {
 		Brand $brand
 	) {
 		$queryBuilder = $this->getAllListableQueryBuilder($domainId, $pricingGroup);
-		$this->filterByBrand($queryBuilder, $brand, $domainId);
+		$this->filterByBrand($queryBuilder, $brand);
 		return $queryBuilder;
 	}
 
@@ -268,13 +268,10 @@ class ProductRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
-	 * @param int $domainId
 	 */
-	private function filterByBrand(QueryBuilder $queryBuilder, Brand $brand, $domainId) {
-		$queryBuilder->join('p.productCategoryDomains', 'pcd', Join::WITH, 'pcd.domainId = :domainId')
-			->andWhere('p.brand = :brand');
+	private function filterByBrand(QueryBuilder $queryBuilder, Brand $brand) {
+		$queryBuilder->andWhere('p.brand = :brand');
 		$queryBuilder->setParameter('brand', $brand);
-		$queryBuilder->setParameter('domainId', $domainId);
 	}
 
 	/**
