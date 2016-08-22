@@ -134,18 +134,15 @@ class CustomerService {
 		$billingAddress = $user->getBillingAddress();
 		$deliveryAddress = $user->getDeliveryAddress();
 
-		return new CustomerData(
-			new UserData(
-				$order->getDomainId(),
-				Condition::ifNull($user->getFirstName(), $order->getFirstName()),
-				Condition::ifNull($user->getLastName(), $order->getLastName()),
-				null,
-				null,
-				$user->getPricingGroup()
-			),
-			$this->getAmendedBillingAddressDataByOrder($order, $billingAddress),
-			$this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress)
-		);
+		$customerData = new CustomerData();
+		$customerData->setFromEntity($user);
+
+		$customerData->userData->firstName = Condition::ifNull($user->getFirstName(), $order->getFirstName());
+		$customerData->userData->lastName = Condition::ifNull($user->getLastName(), $order->getLastName());
+		$customerData->billingAddressData = $this->getAmendedBillingAddressDataByOrder($order, $billingAddress);
+		$customerData->deliveryAddressData = $this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress);
+
+		return $customerData;
 	}
 
 	/**
