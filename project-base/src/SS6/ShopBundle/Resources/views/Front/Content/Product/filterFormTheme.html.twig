@@ -7,7 +7,8 @@
 		</dt>
 		<dd>
 			{{ form_widget(form) }}
-			{{ form_errors(form) }}
+			{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
+			{{ form_errors(form, { errors_attr: errors_attr } ) }}
 			{% if symbolAfterInput is defined %}
 				{{symbolAfterInput}}
 			{% endif %}
@@ -30,21 +31,26 @@
 			{% else %}
 				{{ empty_message|default('Není z čeho vybírat.'|trans) }}
 			{% endfor %}
-			</div>
+		</div>
 	{% endspaceless %}
 {% endblock choice_widget_expanded %}
 
 {% block form_errors %}
 	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
 	{% spaceless %}
-		<div class="in-message in-message--danger js-validation-errors-list {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
-			<ul class="in-message__list">
+		<span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
+			{% if form.parent %}
+				<span class="form-error__icon">
+					<i class="svg svg-warning"></i>
+				</span>
+			{% endif %}
+			<ul class="{{ form.parent ? 'form-error__list' : 'in-message__list' }}">
 				{% if errors|length > 0 %}
 					{% for error in errors %}
 						<li>{{ error.message }}</li>
 					{% endfor %}
 				{% endif %}
 			</ul>
-		</div>
+		</span>
 	{% endspaceless %}
 {% endblock form_errors %}
