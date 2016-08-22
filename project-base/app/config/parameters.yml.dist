@@ -13,4 +13,6 @@ parameters:
   mailer_master_email_address: no-reply@shopsys.cz
   mailer_delivery_whitelist: [/@shopsys\.cz$/]
 
+  error_reporting_to_email: errors.ss6@shopsys.cz
+
   secret: ThisTokenIsNotSoSecretChangeIt
