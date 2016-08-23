@@ -17,11 +17,13 @@
 		this.init = function () {
 			$deleteBlockButton.click(function () {
 				markAsDeleted(true);
+				SS6.formChangeInfo.showInfo();
 				return false;
 			});
 
 			$revertBlockButton.click(function () {
 				markAsDeleted(false);
+				SS6.formChangeInfo.showInfo();
 				return false;
 			});
 
@@ -30,7 +32,6 @@
 				$allRadioButtons.each(function () {
 					updateMain($(this));
 				});
-				return false;
 			});
 
 			markAsDeleted($checkbox.is(':checked'));
