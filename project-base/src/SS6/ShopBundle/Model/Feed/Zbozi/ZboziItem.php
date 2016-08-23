@@ -67,6 +67,16 @@ class ZboziItem implements FeedItemInterface {
 	private $partno;
 
 	/**
+	 * @var string|null
+	 */
+	private $cpc;
+
+	/**
+	 * @var string|null
+	 */
+	private $cpcSearch;
+
+	/**
 	 * @param int $itemId
 	 * @param string $productName
 	 * @param string $description
@@ -92,7 +102,9 @@ class ZboziItem implements FeedItemInterface {
 		$manufacturer,
 		$categoryText,
 		$params,
-		$partno
+		$partno,
+		$cpc,
+		$cpcSearch
 	) {
 		$this->itemId = $itemId;
 		$this->productName = $productName;
@@ -106,6 +118,8 @@ class ZboziItem implements FeedItemInterface {
 		$this->categoryText = $categoryText;
 		$this->params = $params;
 		$this->partno = $partno;
+		$this->cpc = $cpc;
+		$this->cpcSearch = $cpcSearch;
 	}
 
 	/**
@@ -190,6 +204,20 @@ class ZboziItem implements FeedItemInterface {
 	 */
 	public function getPartno() {
 		return $this->partno;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCpc() {
+		return $this->cpc;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCpcSearch() {
+		return $this->cpcSearch;
 	}
 
 }

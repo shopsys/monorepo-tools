@@ -346,10 +346,50 @@
 					<strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
 				</div>
 			</div>
-			<div class="form-line">
-				<div class="form-line__line form-line__line--no-space">
-					{{ form_row(form.heurekaCpcValues, { label: 'Maximální částka za proklik'|trans }) }}
+			{{ form_row(form.heurekaCpcValues, { label: 'Maximální cena za proklik'|trans }) }}
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__group">
+					<strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
 				</div>
+			</div>
+			<div class="form-line">
+				{{ form_label(form.showInZboziFeed, 'Nabízet ve feedu'|trans) }}
+				{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
+					<div class="form-line__side">
+						<div class="form-line__item">
+								{{ domainIcon(domainId, 'long-bordered') }}
+						</div>
+						<div class="form-line__item">
+							{{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
+							{{ form_errors(showInZboziFeedForm) }}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ 'Maximální cena za proklik'|trans }}:
+					<i
+						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC. Pokud není uvedeno, tato informace se do feedu nepřenáší.'|trans }}"
+		 			></i>
+				</div>
+				{{ form_widget(form.zboziCpcValues) }}
+				{{ form_errors(form.zboziCpcValues) }}
+			</div>
+
+			<div class="form-line">
+				<div class="form-line__label">
+					{{ 'Maximální cena za proklik v nabídkách'|trans }}:
+					<i
+						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC_SEARCH. Pokud není uvedeno, tato informace se do feedu nepřenáší.'|trans }}"
+		 			></i>
+				</div>
+				{{ form_widget(form.zboziCpcSearchValues) }}
+				{{ form_errors(form.zboziCpcSearchValues) }}
 			</div>
 		</div>
 

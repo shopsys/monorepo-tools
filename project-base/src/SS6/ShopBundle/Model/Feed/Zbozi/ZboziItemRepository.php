@@ -2,9 +2,11 @@
 
 namespace SS6\ShopBundle\Model\Feed\Zbozi;
 
+use Doctrine\ORM\Query\Expr\Join;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use SS6\ShopBundle\Model\Product\ProductDomain;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class ZboziItemRepository implements FeedItemRepositoryInterface {
@@ -45,6 +47,8 @@ class ZboziItemRepository implements FeedItemRepositoryInterface {
 			->addSelect('v')->join('p.vat', 'v')
 			->addSelect('a')->join('p.calculatedAvailability', 'a')
 			->addSelect('b')->leftJoin('p.brand', 'b')
+			->join(ProductDomain::class, 'pd', Join::WITH, 'pd.product = p.id AND pd.domainId = :domainId')
+			->andWhere('pd.showInZboziFeed = true')
 			->orderBy('p.id', 'asc')
 			->setMaxResults($maxResults);
 

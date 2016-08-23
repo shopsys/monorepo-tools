@@ -218,6 +218,38 @@ class ProductEditFormType extends AbstractType {
 					],
 				],
 			])
+			->add('showInZboziFeed', FormType::MULTIDOMAIN, [
+				'type' => FormType::YES_NO,
+				'required' => false,
+			])
+			->add('zboziCpcValues', FormType::MULTIDOMAIN, [
+				'type' => FormType::MONEY,
+				'required' => false,
+				'options' => [
+					'currency' => 'CZK',
+					'precision' => 2,
+					'constraints' => [
+						new Constraints\Range([
+							'min' => 1,
+							'max' => 500,
+						]),
+					],
+				],
+			])
+			->add('zboziCpcSearchValues', FormType::MULTIDOMAIN, [
+				'type' => FormType::MONEY,
+				'required' => false,
+				'options' => [
+					'currency' => 'CZK',
+					'precision' => 2,
+					'constraints' => [
+						new Constraints\Range([
+							'min' => 1,
+							'max' => 500,
+						]),
+					],
+				],
+			])
 			->add('save', FormType::SUBMIT);
 
 		foreach ($this->pricingGroups as $pricingGroup) {

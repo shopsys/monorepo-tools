@@ -38,22 +38,22 @@ class ProductEditData {
 	public $manualInputPrices;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $seoTitles;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $seoMetaDescriptions;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $descriptions;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $shortDescriptions;
 
@@ -68,7 +68,7 @@ class ProductEditData {
 	public $accessories;
 
 	/**
-	 * @var string[domainId]
+	 * @var string[]|null[]
 	 */
 	public $heurekaCpcValues;
 
@@ -78,19 +78,37 @@ class ProductEditData {
 	public $variants;
 
 	/**
+	 * @var bool[domainId]
+	 */
+	public $showInZboziFeed;
+
+	/**
+	 * @var string[]|null[]
+	 */
+	public $zboziCpcValues;
+
+	/**
+	 * @var string[]|null[]
+	 */
+	public $zboziCpcSearchValues;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
 	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $parameters
 	 * @param string[] $imagesToUpload
 	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagesToDelete
 	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagePositions
 	 * @param string[] $manualInputPrices
-	 * @param string[] $seoTitles
-	 * @param string[] $seoMetaDescriptions
-	 * @param string[] $descriptions
-	 * @param string[] $shortDescriptions
+	 * @param string[]|null[] $seoTitles
+	 * @param string[]|null[] $seoMetaDescriptions
+	 * @param string[]|null[] $descriptions
+	 * @param string[]|null[] $shortDescriptions
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
-	 * @param string[] $heurekaCpcValues
+	 * @param string[]|null[] $heurekaCpcValues
 	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 * @param bool[domainId] $showInZboziFeed
+	 * @param string[]|null[] $zboziCpcValues
+	 * @param string[]|null[] $zboziCpcSearchValues
 	 */
 	public function __construct(
 		ProductData $productData = null,
@@ -105,7 +123,10 @@ class ProductEditData {
 		array $shortDescriptions = [],
 		array $accessories = [],
 		array $heurekaCpcValues = [],
-		array $variants = []
+		array $variants = [],
+		array $showInZboziFeed = [],
+		array $zboziCpcValues = [],
+		array $zboziCpcSearchValues = []
 	) {
 		if ($productData !== null) {
 			$this->productData = $productData;
@@ -125,6 +146,9 @@ class ProductEditData {
 		$this->accessories = $accessories;
 		$this->heurekaCpcValues = $heurekaCpcValues;
 		$this->variants = $variants;
+		$this->showInZboziFeed = $showInZboziFeed;
+		$this->zboziCpcValues = $zboziCpcValues;
+		$this->zboziCpcSearchValues = $zboziCpcSearchValues;
 	}
 
 }

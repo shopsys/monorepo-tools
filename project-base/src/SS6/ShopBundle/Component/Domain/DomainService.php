@@ -8,8 +8,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DomainService {
 
-	const DOMAIN_ICON_WIDTH = 16;
-	const DOMAIN_ICON_HEIGHT = 11;
+	const DOMAIN_ICON_WIDTH = 48;
+	const DOMAIN_ICON_HEIGHT = 33;
+	const DOMAIN_ICON_CROP = false;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService
@@ -52,7 +53,7 @@ class DomainService {
 			$this->imageProcessingService->createInterventionImage($filepath),
 			self::DOMAIN_ICON_WIDTH,
 			self::DOMAIN_ICON_HEIGHT,
-			true
+			self::DOMAIN_ICON_CROP
 		);
 		$resizedImage->save($newTemporaryFilepath);
 

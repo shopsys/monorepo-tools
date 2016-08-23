@@ -84,9 +84,16 @@ class DomainExtension extends \Twig_Extension {
 		if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
 			$src = $this->assetPackages->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
 
-			return '<img src="' . htmlspecialchars($src, ENT_QUOTES)
-				. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
-				. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>';
+			return '
+				<span class="in-image in-image--' . $size . '">
+					<span
+						class="in-image__in"
+					>
+						<img src="' . htmlspecialchars($src, ENT_QUOTES)
+						. '" alt="' . htmlspecialchars($domainId, ENT_QUOTES) . '"'
+						. ' title="' . htmlspecialchars($domainName, ENT_QUOTES) . '"/>
+					</span>
+				</span>';
 		} else {
 			return '
 				<span class="in-image in-image--' . $size . '">

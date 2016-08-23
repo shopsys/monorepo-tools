@@ -93,6 +93,18 @@ class Domain {
 	}
 
 	/**
+	 * @return int[]
+	 */
+	public function getAllIds() {
+		$ids = [];
+		foreach ($this->getAll() as $domainConfig) {
+			$ids[] = $domainConfig->getId();
+		}
+
+		return $ids;
+	}
+
+	/**
 	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAllIncludingDomainConfigsWithoutDataCreated() {
