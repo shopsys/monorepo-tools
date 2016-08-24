@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Tests\Database\Model\Pricing\Group;
 use ReflectionClass;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\UserData;
