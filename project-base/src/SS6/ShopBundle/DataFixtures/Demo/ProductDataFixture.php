@@ -36,7 +36,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$productNo = 1;
 		$productsByCatnum = [];
 		foreach ($csvRows as $row) {
-			$productEditData = $productDataFixtureLoader->getProductEditDataFromRow($row);
+			$productEditData = $productDataFixtureLoader->createProductEditDataFromRowForFirstDomain($row);
 			$product = $this->createProduct(self::PRODUCT_PREFIX . $productNo, $productEditData);
 
 			if ($product->getCatnum() !== null) {

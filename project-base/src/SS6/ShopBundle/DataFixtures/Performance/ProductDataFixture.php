@@ -166,7 +166,8 @@ class ProductDataFixture {
 				$row = reset($csvRows);
 				$this->demoDataIterationCounter++;
 			}
-			$productEditData = $this->productDataFixtureLoader->getProductEditDataFromRow($row);
+			$productEditData = $this->productDataFixtureLoader->createProductEditDataFromRowForFirstDomain($row);
+			$this->productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
 			$this->makeProductEditDataUnique($productEditData);
 			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);

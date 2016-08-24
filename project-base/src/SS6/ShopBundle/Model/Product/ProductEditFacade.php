@@ -408,4 +408,12 @@ class ProductEditFacade {
 		$this->em->flush($toFlush);
 	}
 
+	/**
+	 * @param string $productCatnum
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getOneByCatnumExcludeMainVariants($productCatnum) {
+		return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
+	}
+
 }

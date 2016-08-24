@@ -130,10 +130,9 @@ class ProductDataFixtureLoader {
 	 * @param array $row
 	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
-	public function getProductEditDataFromRow($row) {
+	public function createProductEditDataFromRowForFirstDomain($row) {
 		$productEditData = $this->productEditDataFactory->createDefault();
 		$this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
-		$this->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
 
 		return $productEditData;
 	}
@@ -222,11 +221,19 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
+	 * @param array $row
+	 * @return string
+	 */
+	public function getCatnumFromRow($row) {
+		return $row[self::COLUMN_CATNUM];
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param array $row
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	private function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row) {
+	public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row) {
 		$domainId = 2;
 		$locale = 'en';
 		$productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_EN];
@@ -392,6 +399,7 @@ class ProductDataFixtureLoader {
 					$manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
 				}
 				$manualPrices = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
+				$this->createDefaultManualPriceForAllPricingGroups($productEditData);
 				foreach ($manualPrices as $pricingGroup => $manualPrice) {
 					$pricingGroup = $this->pricingGroups[$pricingGroup];
 					$productEditData->manualInputPrices[$pricingGroup->getId()] = $manualPrice;
@@ -401,6 +409,17 @@ class ProductDataFixtureLoader {
 				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
 					$row[self::COLUMN_PRICE_CALCULATION_TYPE]
 				);
+		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 */
+	private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData) {
+		foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
+			if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPrices)) {
+				$productEditData->manualInputPrices[$pricingGroup->getId()] = null;
+			}
 		}
 	}
 
