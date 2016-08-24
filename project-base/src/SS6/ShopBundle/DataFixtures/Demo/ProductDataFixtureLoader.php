@@ -243,7 +243,10 @@ class ProductDataFixtureLoader {
 				$productEditData->productData->availability = $this->availabilities['on-request'];
 				break;
 		}
-		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[self::COLUMN_PARAMETERS]);
+		$productEditData->parameters = $this->getProductParameterValuesDataFromString(
+			$row[self::COLUMN_PARAMETERS],
+			$domainId
+		);
 		$productEditData->productData->categoriesByDomainId[$domainId] =
 			$this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
 		$productEditData->productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
@@ -267,15 +270,20 @@ class ProductDataFixtureLoader {
 		$productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
 		$productEditData->showInZboziFeed[$domainId] = true;
 		$this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
+		$productEditData->parameters = $this->getProductParameterValuesDataFromString(
+			$row[self::COLUMN_PARAMETERS],
+			$domainId
+		);
 		$productEditData->productData->categoriesByDomainId[$domainId] =
 			$this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
 	}
 
 	/**
 	 * @param string $string
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
 	 */
-	private function getProductParameterValuesDataFromString($string) {
+	private function getProductParameterValuesDataFromString($string, $domainId) {
 		$rows = explode(';', $string);
 
 		$productParameterValuesData = [];
@@ -284,27 +292,74 @@ class ProductDataFixtureLoader {
 			if (count($rowData) !== 2) {
 				continue;
 			}
-
 			list($serializedParameterNames, $serializedValueTexts) = $rowData;
 			$serializedParameterNames = trim($serializedParameterNames, '[]');
 			$serializedValueTexts = trim($serializedValueTexts, '[]');
 
-			if (!isset($this->parameters[$serializedParameterNames])) {
-				$parameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
-				$parameter = $this->parameterFacade->findParameterByNames($parameterNames);
-				if ($parameter === null) {
-					$parameter = $this->parameterFacade->create(new ParameterData($parameterNames, true));
-				}
-				$this->parameters[$serializedParameterNames] = $parameter;
-			}
+			$productParameterValuesData = $this->addProductParameterValuesData(
+				$productParameterValuesData,
+				$domainId,
+				$serializedParameterNames,
+				$serializedValueTexts
+			);
+		}
 
-			$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
-			foreach ($valueTexts as $locale => $valueText) {
-				$productParameterValueData = new ProductParameterValueData();
-				$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
-				$productParameterValueData->parameter = $this->parameters[$serializedParameterNames];
-				$productParameterValuesData[] = $productParameterValueData;
+		return $productParameterValuesData;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
+	 * @param int $domainId
+	 * @param string $serializedParameterNames
+	 * @param string $serializedValueTexts
+	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 */
+	private function addProductParameterValuesData(
+		array $productParameterValuesData,
+		$domainId,
+		$serializedParameterNames,
+		$serializedValueTexts
+	) {
+		$csvParameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
+
+		if (!isset($this->parameters[$serializedParameterNames])) {
+			$csPrameterNames = [
+				'cs' => $csvParameterNames['cs'],
+			];
+			if ($domainId === 1) {
+				$parametersNames = $csPrameterNames;
+			} else {
+				$parametersNames = $csvParameterNames;
 			}
+			$parameter = $this->parameterFacade->findParameterByNames($csPrameterNames);
+			if ($parameter === null) {
+				$parameter = $this->parameterFacade->create(new ParameterData($parametersNames, true));
+			}
+			$this->parameters[$serializedParameterNames] = $parameter;
+		} else {
+			$parameter = $this->parameters[$serializedParameterNames];
+		}
+
+		if (
+			$domainId === 2
+			&& array_key_exists('en', $csvParameterNames)
+			&& $parameter->getName('en') !== $csvParameterNames['en']
+		) {
+			$parameterData = new ParameterData();
+			$parameterData->setFromEntity($parameter);
+			$parameterData->name['en'] = $csvParameterNames['en'];
+			$this->parameterFacade->edit($parameter->getId(), $parameterData);
+		}
+
+		$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
+		foreach ($valueTexts as $locale => $valueText) {
+			if ($domainId === 1 && $locale === 'en') {
+				continue;
+			}
+			$productParameterValueData = new ProductParameterValueData();
+			$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
+			$productParameterValueData->parameter = $parameter;
+			$productParameterValuesData[] = $productParameterValueData;
 		}
 
 		return $productParameterValuesData;
