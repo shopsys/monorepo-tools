@@ -157,7 +157,10 @@ class ProductDataFixtureLoader {
 
 			$row = array_map([TransformString::class, 'emptyToNull'], $row);
 			$row = EncodingConverter::cp1250ToUtf8($row);
-			$productsEditData[] = $this->getProductEditDataFromCsvRow($row);
+			$productEditData = $this->productEditDataFactory->createDefault();
+			$this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
+			$this->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
+			$productsEditData[] = $productEditData;
 		}
 
 		return $productsEditData;
@@ -187,26 +190,22 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param array $row
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
-	private function getProductEditDataFromCsvRow(array $row) {
-		$productEditData = $this->productEditDataFactory->createDefault();
-
-		$productEditData->productData->name = ['cs' => $row[self::COLUMN_NAME_CS], 'en' => $row[self::COLUMN_NAME_EN]];
+	private function updateProductEditDataFromCsvRowForFirstDomain(ProductEditData $productEditData, array $row) {
+		$domainId = 1;
+		$locale = 'cs';
+		$productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_CS];
 		$productEditData->productData->catnum = $row[self::COLUMN_CATNUM];
 		$productEditData->productData->partno = $row[self::COLUMN_PARTNO];
 		$productEditData->productData->ean = $row[self::COLUMN_EAN];
-		$productEditData->descriptions = [1 => $row[self::COLUMN_DESCRIPTION_CS], 2 => $row[self::COLUMN_DESCRIPTION_EN]];
-		$productEditData->shortDescriptions = [
-			1 => $row[self::COLUMN_SHORT_DESCRIPTION_CS],
-			2 => $row[self::COLUMN_SHORT_DESCRIPTION_EN],
-		];
-		$productEditData->showInZboziFeed = [1 => true, 2 => true];
+		$productEditData->descriptions[$domainId] = $row[self::COLUMN_DESCRIPTION_CS];
+		$productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_CS];
+		$productEditData->showInZboziFeed[$domainId] = true;
 		$productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
-		$this->setProductDataPricesFromCsv($row, $productEditData, 1);
-		$this->setProductDataPricesFromCsv($row, $productEditData, 2);
+		$this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
 		switch ($row[self::COLUMN_VAT]) {
 			case 'high':
 				$productEditData->productData->vat = $this->vats['high'];
@@ -245,18 +244,31 @@ class ProductDataFixtureLoader {
 				break;
 		}
 		$productEditData->parameters = $this->getProductParameterValuesDataFromString($row[self::COLUMN_PARAMETERS]);
-		$productEditData->productData->categoriesByDomainId = [
-			1 => $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories),
-			2 => $this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories),
-		];
+		$productEditData->productData->categoriesByDomainId[$domainId] =
+			$this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_1], $this->categories);
 		$productEditData->productData->flags = $this->getValuesByKeyString($row[self::COLUMN_FLAGS], $this->flags);
 		$productEditData->productData->sellingDenied = $row[self::COLUMN_SELLING_DENIED];
 
 		if ($row[self::COLUMN_BRAND] !== null) {
 			$productEditData->productData->brand = $this->brands[$row[self::COLUMN_BRAND]];
 		}
+	}
 
-		return $productEditData;
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param array $row
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+	 */
+	private function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row) {
+		$domainId = 2;
+		$locale = 'en';
+		$productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_EN];
+		$productEditData->descriptions[$domainId] = $row[self::COLUMN_DESCRIPTION_EN];
+		$productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
+		$productEditData->showInZboziFeed[$domainId] = true;
+		$this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
+		$productEditData->productData->categoriesByDomainId[$domainId] =
+			$this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
 	}
 
 	/**
