@@ -18,7 +18,7 @@ class CronCommand extends ContainerAwareCommand {
 	protected function configure() {
 		$this
 			->setName('ss6:cron')
-			->setDescription('Maintenance service of ShopSys 6')
+			->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
 			->addOption(self::ARGUMENT_MODULE, null, InputArgument::OPTIONAL, 'Service ID');
 	}
 

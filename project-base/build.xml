@@ -136,7 +136,7 @@
 		</exec>
 	</target>
 
-	<target name="cron" description="Maintenance service of ShopSys 6">
+	<target name="cron" description="Runs background jobs. Should be executed periodically by system CRON every 5 minutes.">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="ss6:cron" />
