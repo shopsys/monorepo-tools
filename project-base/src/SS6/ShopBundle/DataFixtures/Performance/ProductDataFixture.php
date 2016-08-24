@@ -145,7 +145,7 @@ class ProductDataFixture {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
-		$this->cleanAndLoadReferences($this->em);
+		$this->cleanAndLoadReferences();
 		$csvRows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		$variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum(
 			$csvRows
@@ -181,7 +181,7 @@ class ProductDataFixture {
 
 			if ($this->countImported % self::BATCH_SIZE === 0) {
 				$currentKey = key($csvRows);
-				$this->cleanAndLoadReferences($this->em);
+				$this->cleanAndLoadReferences();
 				$this->setArrayPointerByKey($csvRows, $currentKey);
 			}
 
@@ -260,21 +260,15 @@ class ProductDataFixture {
 		return ' #' . $this->demoDataIterationCounter;
 	}
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 */
-	private function clearResources(EntityManager $em) {
+	private function clearResources() {
 		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
-		$em->clear();
+		$this->em->clear();
 		gc_collect_cycles();
 	}
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 */
-	private function cleanAndLoadReferences(EntityManager $em) {
-		$this->clearResources($em);
+	private function cleanAndLoadReferences() {
+		$this->clearResources();
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
