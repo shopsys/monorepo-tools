@@ -402,8 +402,8 @@ services:
   ss6.shop.customer.frontend_user_provider:
     class: SS6\ShopBundle\Model\Customer\FrontendUserProvider
 
-  ss6.shop.data_fixtures.product_data_fixture_loader:
-    class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
+  ss6.shop.data_fixtures.product_data_fixture_csv_reader:
+    class: SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
     arguments:
       - %ss6.data_fixtures.resource_products_filepath%
 

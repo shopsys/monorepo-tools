@@ -3,9 +3,7 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Component\Csv\CsvReader;
-use SS6\ShopBundle\Component\String\EncodingConverter;
-use SS6\ShopBundle\Component\String\TransformString;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
@@ -44,19 +42,9 @@ class ProductDataFixtureLoader {
 	const COLUMN_MAIN_VARIANT_CATNUM = 25;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
-	 */
-	private $csvReader;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
 	 */
 	private $parameterFacade;
-
-	/**
-	 * @var string
-	 */
-	private $path;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
@@ -103,16 +91,19 @@ class ProductDataFixtureLoader {
 	 */
 	private $productEditDataFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
+	 */
+	private $productDataFixtureCsvReader;
+
 	public function __construct(
-		$path,
-		CsvReader $csvReader,
 		ParameterFacade $parameterFacade,
-		ProductEditDataFactory $productEditDataFactory
+		ProductEditDataFactory $productEditDataFactory,
+		ProductDataFixtureCsvReader $productDataFixtureCsvReader
 	) {
-		$this->path = $path;
-		$this->csvReader = $csvReader;
 		$this->parameterFacade = $parameterFacade;
 		$this->productEditDataFactory = $productEditDataFactory;
+		$this->productDataFixtureCsvReader = $productDataFixtureCsvReader;
 	}
 
 	/**
@@ -147,16 +138,9 @@ class ProductDataFixtureLoader {
 	 * @return \SS6\ShopBundle\Model\Product\ProductEditData[]
 	 */
 	public function getProductsEditData() {
-		$rows = $this->csvReader->getRowsFromCsv($this->path);
-
+		$rows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		$productsEditData = [];
-		foreach ($rows as $rowId => $row) {
-			if ($rowId === 0) {
-				continue;
-			}
-
-			$row = array_map([TransformString::class, 'emptyToNull'], $row);
-			$row = EncodingConverter::cp1250ToUtf8($row);
+		foreach ($rows as $row) {
 			$productEditData = $this->productEditDataFactory->createDefault();
 			$this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
 			$this->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
@@ -170,17 +154,10 @@ class ProductDataFixtureLoader {
 	 * @return string[mainVariantRowId][]
 	 */
 	public function getVariantCatnumsIndexedByMainVariantCatnum() {
-		$rows = $this->csvReader->getRowsFromCsv($this->path);
+		$rows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 
 		$variantCatnumsByMainVariantCatnum = [];
-		foreach ($rows as $rowId => $row) {
-			if ($rowId === 0) {
-				continue;
-			}
-
-			$row = array_map([TransformString::class, 'emptyToNull'], $row);
-			$row = EncodingConverter::cp1250ToUtf8($row);
-
+		foreach ($rows as $row) {
 			if ($row[self::COLUMN_MAIN_VARIANT_CATNUM] !== null && $row[self::COLUMN_CATNUM] !== null) {
 				$variantCatnumsByMainVariantCatnum[$row[self::COLUMN_MAIN_VARIANT_CATNUM]][] = $row[self::COLUMN_CATNUM];
 			}
