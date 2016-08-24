@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\Console\ProgressBar;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
 use SS6\ShopBundle\Model\Category\Category;
@@ -102,6 +103,11 @@ class ProductDataFixture {
 	 */
 	private $productPriceRecalculationScheduler;
 
+	/**
+	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
+	 */
+	private $productDataFixtureCsvReader;
+
 	public function __construct(
 		EntityManager $em,
 		ProductEditFacade $productEditFacade,
@@ -113,7 +119,8 @@ class ProductDataFixture {
 		CategoryRepository $categoryRepository,
 		Faker $faker,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
-		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
+		ProductDataFixtureCsvReader $productDataFixtureCsvReader
 	) {
 		$this->em = $em;
 		$this->productEditFacade = $productEditFacade;
@@ -128,6 +135,7 @@ class ProductDataFixture {
 		$this->faker = $faker;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
+		$this->productDataFixtureCsvReader = $productDataFixtureCsvReader;
 	}
 
 	/**
@@ -137,8 +145,11 @@ class ProductDataFixture {
 		// Sql logging during mass data import makes memory leak
 		$this->sqlLoggerFacade->temporarilyDisableLogging();
 
-		$productsEditData = $this->cleanAndWarmUp($this->em);
-		$variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum();
+		$this->cleanAndLoadReferences($this->em);
+		$csvRows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
+		$variantCatnumsByMainVariantCatnum = $this->productDataFixtureLoader->getVariantCatnumsIndexedByMainVariantCatnum(
+			$csvRows
+		);
 
 		$progressBar = new ProgressBar($output, self::PRODUCTS);
 		$progressBar->setFormat(
@@ -149,12 +160,13 @@ class ProductDataFixture {
 		$progressBar->start();
 
 		while ($this->countImported < self::PRODUCTS) {
-			$productEditData = next($productsEditData);
-			if ($productEditData === false) {
+			$row = next($csvRows);
+			if ($row === false) {
 				$this->createVariants($variantCatnumsByMainVariantCatnum);
-				$productEditData = reset($productsEditData);
+				$row = reset($csvRows);
 				$this->demoDataIterationCounter++;
 			}
+			$productEditData = $this->productDataFixtureLoader->getProductEditDataFromRow($row);
 			$this->makeProductEditDataUnique($productEditData);
 			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
 			$product = $this->productEditFacade->create($productEditData);
@@ -168,9 +180,9 @@ class ProductDataFixture {
 			}
 
 			if ($this->countImported % self::BATCH_SIZE === 0) {
-				$currentKey = key($productsEditData);
-				$productsEditData = $this->cleanAndWarmUp($this->em);
-				$this->setArrayPointerByKey($productsEditData, $currentKey);
+				$currentKey = key($csvRows);
+				$this->cleanAndLoadReferences($this->em);
+				$this->setArrayPointerByKey($csvRows, $currentKey);
 			}
 
 			$this->countImported++;
@@ -260,16 +272,13 @@ class ProductDataFixture {
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData[]
 	 */
-	private function cleanAndWarmUp(EntityManager $em) {
+	private function cleanAndLoadReferences(EntityManager $em) {
 		$this->clearResources($em);
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
 		$this->productDataReferenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade);
-
-		return $this->productDataFixtureLoader->getProductsEditData();
 	}
 
 	/**

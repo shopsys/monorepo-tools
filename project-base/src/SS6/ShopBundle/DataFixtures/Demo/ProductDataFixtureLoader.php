@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
@@ -91,19 +90,12 @@ class ProductDataFixtureLoader {
 	 */
 	private $productEditDataFactory;
 
-	/**
-	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
-	 */
-	private $productDataFixtureCsvReader;
-
 	public function __construct(
 		ParameterFacade $parameterFacade,
-		ProductEditDataFactory $productEditDataFactory,
-		ProductDataFixtureCsvReader $productDataFixtureCsvReader
+		ProductEditDataFactory $productEditDataFactory
 	) {
 		$this->parameterFacade = $parameterFacade;
 		$this->productEditDataFactory = $productEditDataFactory;
-		$this->productDataFixtureCsvReader = $productDataFixtureCsvReader;
 	}
 
 	/**
@@ -135,27 +127,22 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData[]
+	 * @param array $row
+	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
 	 */
-	public function getProductsEditData() {
-		$rows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
-		$productsEditData = [];
-		foreach ($rows as $row) {
-			$productEditData = $this->productEditDataFactory->createDefault();
-			$this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
-			$this->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
-			$productsEditData[] = $productEditData;
-		}
+	public function getProductEditDataFromRow($row) {
+		$productEditData = $this->productEditDataFactory->createDefault();
+		$this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
+		$this->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
 
-		return $productsEditData;
+		return $productEditData;
 	}
 
 	/**
+	 * @param array $rows
 	 * @return string[mainVariantRowId][]
 	 */
-	public function getVariantCatnumsIndexedByMainVariantCatnum() {
-		$rows = $this->productDataFixtureCsvReader->getProductDataFixtureCsvRows();
-
+	public function getVariantCatnumsIndexedByMainVariantCatnum($rows) {
 		$variantCatnumsByMainVariantCatnum = [];
 		foreach ($rows as $row) {
 			if ($row[self::COLUMN_MAIN_VARIANT_CATNUM] !== null && $row[self::COLUMN_CATNUM] !== null) {

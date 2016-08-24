@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
@@ -26,13 +27,16 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
 		$persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
 		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+		$productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
+		/* @var $productDataFixtureCsvReader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
 		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade);
 
-		$productsEditData = $productDataFixtureLoader->getProductsEditData();
+		$csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		$productNo = 1;
 		$productsByCatnum = [];
-		foreach ($productsEditData as $productEditData) {
+		foreach ($csvRows as $row) {
+			$productEditData = $productDataFixtureLoader->getProductEditDataFromRow($row);
 			$product = $this->createProduct(self::PRODUCT_PREFIX . $productNo, $productEditData);
 
 			if ($product->getCatnum() !== null) {
@@ -69,8 +73,11 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $loaderService \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 		$productVariantFacade = $this->get(ProductVariantFacade::class);
 		/* @var $productVariantFacade \SS6\ShopBundle\Model\Product\ProductVariantFacade */
+		$productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
+		/* @var $productDataFixtureCsvReader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
-		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum();
+		$csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();
+		$variantCatnumsByMainVariantCatnum = $loaderService->getVariantCatnumsIndexedByMainVariantCatnum($csvRows);
 
 		foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
 			$mainProduct = $productsByCatnum[$mainVariantCatnum];
