@@ -27,20 +27,21 @@ class ProductDataFixtureLoader {
 	const COLUMN_SHORT_DESCRIPTION_EN = 8;
 	const COLUMN_PRICE_CALCULATION_TYPE = 9;
 	const COLUMN_MAIN_PRICE = 10;
-	const COLUMN_MANUAL_PRICES = 11;
-	const COLUMN_VAT = 12;
-	const COLUMN_SELLING_FROM = 13;
-	const COLUMN_SELLING_TO = 14;
-	const COLUMN_STOCK_QUANTITY = 15;
-	const COLUMN_UNIT = 16;
-	const COLUMN_AVAILABILITY = 17;
-	const COLUMN_PARAMETERS = 18;
-	const COLUMN_CATEGORIES_1 = 19;
-	const COLUMN_CATEGORIES_2 = 20;
-	const COLUMN_FLAGS = 21;
-	const COLUMN_SELLING_DENIED = 22;
-	const COLUMN_BRAND = 23;
-	const COLUMN_MAIN_VARIANT_CATNUM = 24;
+	const COLUMN_MANUAL_PRICES_DOMAIN_1 = 11;
+	const COLUMN_MANUAL_PRICES_DOMAIN_2 = 12;
+	const COLUMN_VAT = 13;
+	const COLUMN_SELLING_FROM = 14;
+	const COLUMN_SELLING_TO = 15;
+	const COLUMN_STOCK_QUANTITY = 16;
+	const COLUMN_UNIT = 17;
+	const COLUMN_AVAILABILITY = 18;
+	const COLUMN_PARAMETERS = 19;
+	const COLUMN_CATEGORIES_1 = 20;
+	const COLUMN_CATEGORIES_2 = 21;
+	const COLUMN_FLAGS = 22;
+	const COLUMN_SELLING_DENIED = 23;
+	const COLUMN_BRAND = 24;
+	const COLUMN_MAIN_VARIANT_CATNUM = 25;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Csv\CsvReader
@@ -204,7 +205,8 @@ class ProductDataFixtureLoader {
 		];
 		$productEditData->showInZboziFeed = [1 => true, 2 => true];
 		$productEditData->productData->priceCalculationType = $row[self::COLUMN_PRICE_CALCULATION_TYPE];
-		$this->setProductDataPricesFromCsv($row, $productEditData);
+		$this->setProductDataPricesFromCsv($row, $productEditData, 1);
+		$this->setProductDataPricesFromCsv($row, $productEditData, 2);
 		switch ($row[self::COLUMN_VAT]) {
 			case 'high':
 				$productEditData->productData->vat = $this->vats['high'];
@@ -345,14 +347,20 @@ class ProductDataFixtureLoader {
 	/**
 	 * @param array $row
 	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param int $domainId
 	 */
-	private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData) {
+	private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId) {
 		switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
 			case 'auto':
 				$productEditData->productData->price = $row[self::COLUMN_MAIN_PRICE];
 				break;
 			case 'manual':
-				$manualPrices = $this->getProductManualPricesIndexedByPricingGroupFromString($row[self::COLUMN_MANUAL_PRICES]);
+				if ($domainId === 1) {
+					$manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_1];
+				} elseif ($domainId === 2) {
+					$manualPricesColumn = $row[self::COLUMN_MANUAL_PRICES_DOMAIN_2];
+				}
+				$manualPrices = $this->getProductManualPricesIndexedByPricingGroupFromString($manualPricesColumn);
 				foreach ($manualPrices as $pricingGroup => $manualPrice) {
 					$pricingGroup = $this->pricingGroups[$pricingGroup];
 					$productEditData->manualInputPrices[$pricingGroup->getId()] = $manualPrice;
