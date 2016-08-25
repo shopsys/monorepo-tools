@@ -110,7 +110,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="Zavřít (Esc)"><i class="svg svg-remove"></a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="' + SS6.translator.trans('Zavřít (Esc)') + '"><i class="svg svg-remove"></i></a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
