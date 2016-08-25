@@ -4,10 +4,11 @@ namespace SS6\ShopBundle\Tests\Database\Model\Product;
 
 use DateTime;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture as DemoPricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -73,7 +74,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productAgain,
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
@@ -105,7 +106,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productAgain->getId(),
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
@@ -256,14 +257,14 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productId,
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
 
 		$productVisibility2 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productId,
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
+			'pricingGroup' => $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
 			'domainId' => 2,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
@@ -299,14 +300,14 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 
 		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productId,
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
 
 		$productVisibility2 = $em->getRepository(ProductVisibility::class)->findOneBy([
 			'product' => $productId,
-			'pricingGroup' => $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
+			'pricingGroup' => $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
 			'domainId' => 2,
 		]);
 		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
@@ -333,8 +334,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 			$productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
 		}
 
-		$pricingGroupWithZeroPriceId = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
-		$pricingGroupWithNullPriceId = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId();
+		$pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
+		$pricingGroupWithNullPriceId = $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId();
 
 		$productEditData->manualInputPrices[$pricingGroupWithZeroPriceId] = 0;
 		$productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;

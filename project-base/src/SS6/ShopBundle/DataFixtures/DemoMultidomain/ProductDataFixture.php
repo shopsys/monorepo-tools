@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
@@ -13,7 +14,7 @@ use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 
-class ProductDataFixture extends AbstractReferenceFixture {
+class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -30,7 +31,8 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		$productEditFacade = $this->get(ProductEditFacade::class);
 		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
 
-		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade);
+		$onlyForFirstDomain = false;
+		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade, $onlyForFirstDomain);
 
 		$csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		foreach ($csvRows as $row) {
@@ -59,6 +61,13 @@ class ProductDataFixture extends AbstractReferenceFixture {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
 		$productEditFacade->edit($product->getId(), $productEditData);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return ProductDataFixtureReferenceInjector::getDependenciesForMultidomain();
 	}
 
 }

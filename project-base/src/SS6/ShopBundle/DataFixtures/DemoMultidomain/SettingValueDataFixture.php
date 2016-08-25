@@ -8,6 +8,7 @@ use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\ArticleDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -22,6 +23,10 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 		$cookiesDomain2 = $this->getReference(ArticleDataFixture::COOKIES_2);
 		/* @var $cookiesDomain2 \SS6\ShopBundle\Model\Article\Article */
 		$manager->persist(new SettingValue(Setting::COOKIES_ARTICLE_ID, $cookiesDomain2->getId(), 2));
+
+		/* @var $pricingGroup2 \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
+		$pricingGroup2 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_2);
+		$manager->persist(new SettingValue(Setting::DEFAULT_PRICING_GROUP, $pricingGroup2->getId(), 2));
 
 		$manager->flush();
 
@@ -41,6 +46,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	public function getDependencies() {
 		return [
 			ArticleDataFixture::class,
+			PricingGroupDataFixture::class,
 		];
 	}
 

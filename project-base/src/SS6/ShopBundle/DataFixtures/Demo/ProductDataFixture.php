@@ -30,7 +30,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
 		/* @var $productDataFixtureCsvReader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 
-		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade);
+		$onlyForFirstDomain = true;
+		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade, $onlyForFirstDomain);
 
 		$csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		$productNo = 1;
@@ -98,7 +99,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * {@inheritDoc}
 	 */
 	public function getDependencies() {
-		return ProductDataFixtureReferenceInjector::getDependencies();
+		return ProductDataFixtureReferenceInjector::getDependenciesForFirstDomain();
 	}
 
 }

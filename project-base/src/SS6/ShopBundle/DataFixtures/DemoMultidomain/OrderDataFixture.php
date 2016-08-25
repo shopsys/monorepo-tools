@@ -13,6 +13,7 @@ use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
+use SS6\ShopBundle\DataFixtures\DemoMultidomain\SettingValueDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
@@ -186,6 +187,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 			CountryDataFixture::class,
 			PaymentDataFixture::class,
 			TransportDataFixture::class,
+			SettingValueDataFixture::class,
 		];
 	}
 

@@ -273,7 +273,12 @@ class ProductDataFixture {
 		$this->batchStartMicrotime = microtime(true);
 		$this->productsByCatnum = [];
 
-		$this->productDataReferenceInjector->loadReferences($this->productDataFixtureLoader, $this->persistentReferenceFacade);
+		$onlyForFirstDomain = false;
+		$this->productDataReferenceInjector->loadReferences(
+			$this->productDataFixtureLoader,
+			$this->persistentReferenceFacade,
+			$onlyForFirstDomain
+		);
 	}
 
 	/**
