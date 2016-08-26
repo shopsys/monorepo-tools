@@ -26,8 +26,8 @@
 (function ($) {
 	SS6 = window.SS6 || {};
 
-	$(document).ready(function () {
-		$('.js-tabs').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-tabs').each(function () {
 			var hybridTabs = new SS6.hybridTabs.HybridTabs($(this));
 			hybridTabs.init(SS6.hybridTabs.TABS_MODE_SINGLE);
 		});

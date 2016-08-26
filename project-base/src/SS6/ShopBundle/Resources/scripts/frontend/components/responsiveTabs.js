@@ -43,8 +43,8 @@
 (function ($) {
 	SS6 = window.SS6 || {};
 
-	$(document).ready(function () {
-		$('.js-responsive-tabs').each(function () {
+	SS6.register.registerCallback(function ($container) {
+		$container.filterAllNodes('.js-responsive-tabs').each(function () {
 			var hybridTabs = new SS6.hybridTabs.HybridTabs($(this));
 			hybridTabs.init(getHybridTabsModeForCurrentResponsiveMode());
 
