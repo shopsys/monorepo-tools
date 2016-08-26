@@ -61,6 +61,20 @@
 				} else {
 					activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
 				}
+			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
+				// activate all tabs that have at least one active button
+				var $activeButtons = $tabButtons.filter('.active');
+				$activeButtons.each(function () {
+					activateTab($(this).data('tab-id'));
+				});
+
+				// deactivate all tabs that have any inactive button left
+				// (all the tabs that had any active button have now all the buttons
+				// in active state from the previous step)
+				var $inactiveButtons = $tabButtons.filter(':not(.active)');
+				$inactiveButtons.each(function () {
+					deactivateTab($(this).data('tab-id'));
+				});
 			}
 		}
 
