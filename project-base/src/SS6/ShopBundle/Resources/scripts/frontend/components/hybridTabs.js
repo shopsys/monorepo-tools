@@ -55,9 +55,9 @@
 
 		function fixTabsState() {
 			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
-				var $lastActiveButton = $tabButtons.filter('.active').last();
-				if ($lastActiveButton.length > 0) {
-					activateOneTabAndDeactivateOther($lastActiveButton.data('tab-id'));
+				var $activeButtons = $tabButtons.filter('.active');
+				if ($activeButtons.length > 0) {
+					activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
 				} else {
 					activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
 				}
