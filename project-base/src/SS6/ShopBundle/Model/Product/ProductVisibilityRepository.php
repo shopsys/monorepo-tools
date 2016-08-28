@@ -55,7 +55,7 @@ class ProductVisibilityRepository {
 		$this->hideVariantsWithInvisibleMainVariant($onlyMarkedProducts);
 		$this->hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts);
 		$this->refreshGlobalProductVisibility($onlyMarkedProducts);
-		$this->markAllProductsVisibilityAsRecalculated($onlyMarkedProducts);
+		$this->markAllProductsVisibilityAsRecalculated();
 	}
 
 	/**
@@ -149,18 +149,9 @@ class ProductVisibilityRepository {
 		return $productVisibility;
 	}
 
-	/**
-	 * @param bool $onlyMarkedProducts
-	 */
-	private function markAllProductsVisibilityAsRecalculated($onlyMarkedProducts) {
-		if ($onlyMarkedProducts) {
-			$onlyMarkedProductsWhereClause = ' WHERE recalculate_visibility = TRUE';
-		} else {
-			$onlyMarkedProductsWhereClause = '';
-		}
-
+	private function markAllProductsVisibilityAsRecalculated() {
 		$this->em->createNativeQuery(
-			'UPDATE products SET recalculate_visibility = FALSE' . $onlyMarkedProductsWhereClause,
+			'UPDATE products SET recalculate_visibility = FALSE WHERE recalculate_visibility = TRUE',
 			new ResultSetMapping()
 		)->execute();
 	}

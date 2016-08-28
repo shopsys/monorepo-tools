@@ -636,7 +636,8 @@ class ProductRepository {
 
 	public function markAllProductsForAvailabilityRecalculation() {
 		$this->em
-			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculateAvailability = TRUE')
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculateAvailability = TRUE
+				WHERE p.recalculateAvailability = FALSE')
 			->execute();
 	}
 
@@ -646,7 +647,8 @@ class ProductRepository {
 		// and visibility recalculation is triggered by variant price recalculation.
 		// Therefore main variant price recalculation is useless here.
 		$this->em
-			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE WHERE p.variantType != :variantyTypeMain')
+			->createQuery('UPDATE ' . Product::class . ' p SET p.recalculatePrice = TRUE
+				WHERE p.variantType != :variantyTypeMain AND p.recalculateAvailability = FALSE')
 			->setParameter('variantyTypeMain', Product::VARIANT_TYPE_MAIN)
 			->execute();
 	}
