@@ -54,8 +54,9 @@
 		};
 
 		function fixTabsState() {
+			var $activeButtons = $tabButtons.filter('.active');
+
 			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
-				var $activeButtons = $tabButtons.filter('.active');
 				if ($activeButtons.length > 0) {
 					activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
 				} else {
@@ -63,7 +64,6 @@
 				}
 			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
 				// activate all tabs that have at least one active button
-				var $activeButtons = $tabButtons.filter('.active');
 				$activeButtons.each(function () {
 					toggleTab($(this).data('tab-id'), true);
 				});
@@ -86,11 +86,7 @@
 			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
 				var isTabActive = $(this).hasClass('active');
 
-				if (isTabActive) {
-					toggleTab(tabId, false);
-				} else {
-					toggleTab(tabId, true);
-				}
+				toggleTab(tabId, !isTabActive);
 			}
 
 			return false;
@@ -100,12 +96,9 @@
 		function activateOneTabAndDeactivateOther(tabId) {
 			$tabButtons.each(function () {
 				var currentTabId = $(this).data('tab-id');
+				var isCurrentTab = currentTabId === tabId;
 
-				if (currentTabId === tabId) {
-					toggleTab(currentTabId, true);
-				} else {
-					toggleTab(currentTabId, false);
-				}
+				toggleTab(currentTabId, isCurrentTab);
 			});
 		}
 
@@ -114,15 +107,9 @@
 			var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
 			var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
 
-			if (display) {
-				$tabButton.addClass('active');
-				$tabContent.addClass('active');
-				$tabContent.show();
-			} else {
-				$tabButton.removeClass('active');
-				$tabContent.removeClass('active');
-				$tabContent.hide();
-			}
+			$tabButton.toggleClass('active', display);
+			$tabContent.toggleClass('active', display);
+			$tabContent.toggle(display);
 		}
 	};
 
