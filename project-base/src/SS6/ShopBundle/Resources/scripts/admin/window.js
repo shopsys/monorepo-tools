@@ -109,8 +109,21 @@
 		});
 
 		var $windowActions = $('<div class="window__actions"></div>');
+		if (options.buttonCancel) {
+			var $windowButtonCancel = $('<a href="#" class="window__actions__btn window-button-cancel btn btn--default"></a>');
+			$windowButtonCancel
+				.text(options.textCancel)
+				.bind('click.windowEventCancel', options.eventCancel)
+				.bind('click.windowEventClose', options.eventClose)
+				.bind('click.windowClose', function () {
+					$window.trigger('windowClose');
+					return false;
+				});
+			$windowActions.append($windowButtonCancel);
+		}
+		
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window__actions__btn window-button-continue btn"></a>');
 			$windowButtonContinue
 				.text(options.textContinue)
 				.attr('href', options.urlContinue)
@@ -122,19 +135,6 @@
 					}
 				});
 			$windowActions.append($windowButtonContinue);
-		}
-
-		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-button-cancel btn"></a>');
-			$windowButtonCancel
-				.text(options.textCancel)
-				.bind('click.windowEventCancel', options.eventCancel)
-				.bind('click.windowEventClose', options.eventClose)
-				.bind('click.windowClose', function () {
-					$window.trigger('windowClose');
-					return false;
-				});
-			$windowActions.append($windowButtonCancel);
 		}
 
 		if ($windowActions.children().length > 0) {

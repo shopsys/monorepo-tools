@@ -11,14 +11,14 @@
 <div class="js-main-navigation">
 	<ul class="navig navig--side">
 		<li id="js-setting-menu" class="navig__item" >
-			<div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}">
+			<div class="navig__item__link navig__item__link--bordered {% if menu.settingsItem in activePath %}navig__item__link--active js-navig-item-active{% endif %}" title="{{ 'Nastavení'|trans }}">
 				<i class="svg svg-gear"></i>
 			</div>
 			<ul id="js-setting-menu-links" class="display-none navig__item__sub">
 				{% for item in menu.getSettingsItems %}
 					{% if not (item.superadmin and not is_granted(ROLE_SUPER_ADMIN)) %}
 						<li class="navig__item__sub__item">
-							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link">{{ item.label }}</a>
+							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
 						</li>
 					{% endif %}
 				{% endfor %}

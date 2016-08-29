@@ -1,31 +1,3 @@
-/*
-Floating window
-============
-Floating fixed window for actions or messages, --active modifier shows window,
-default is hidden, --wide is modifier for bigger and absolute positioned window
-
-	<div class="window window--active">
-		<a href="#" class="window__close">X</a>
-		<p>
-			Content of window
-		</p>
-		<div class="window__actions">
-			<a href="#" class="btn btn--primary">Button or something</a>
-		</div>
-	</div>
-
-	<div class="window window--wide window--active">
-		<a href="#" class="window__close">X</a>
-		<p>
-			Content of window
-		</p>
-		<div class="window__actions">
-			<a href="#" class="button">Button or something</a>
-		</div>
-	</div>
-
-*/
-
 .window {
 	display: none;
 	width: @window-width;
@@ -34,7 +6,7 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 	top: 50%;
 	left: 50%;
 	margin: -@window-height/2 0 0 -@window-width/2;
-	padding: 25px 30px 30px;
+	padding: 25px 50px 25px 50px;
 	z-index: 10002;
 
 	text-align: center;
@@ -101,5 +73,10 @@ default is hidden, --wide is modifier for bigger and absolute positioned window
 
 	&__actions {
 		margin-top: 20px;
+
+		&__btn {
+			min-width: 100px;
+			margin: 0 5px;
+		}
 	}
 }

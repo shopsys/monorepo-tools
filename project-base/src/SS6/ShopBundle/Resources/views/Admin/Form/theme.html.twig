@@ -339,11 +339,10 @@
 			{% endif %}
 			<label class="{{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__label' }}"{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 				{% if raw is not defined %}
-					{{ label }}
+					{{ label }}{% if not isCheckbox|default(false) %}:{% endif %}
 				{% else %}
-					{{ label|raw }}
+					{{ label|raw }}{% if not isCheckbox|default(false) %}:{% endif %}
 				{% endif %}
-				{% if not isCheckbox|default(false) %}:{% endif %}
 				{% if required %}
 					<span class="js-form-compulsory form-compulsory {{ isCheckbox|default(false) or isSimple|default(false) ? '' : 'form-line__compulsory' }} {{ compulsoryClass|default('') }}">
 						<span class="sprite sprite-star"></span>
