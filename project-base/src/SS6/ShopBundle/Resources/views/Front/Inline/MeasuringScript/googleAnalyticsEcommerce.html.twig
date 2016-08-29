@@ -1,0 +1,26 @@
+<script>
+
+ga('require', 'ecommerce');
+
+ga('ecommerce:addTransaction', {
+	'id': '{{ order.number|escape('js') }}',
+	'revenue': '{{ order.totalPriceWithVat }}',
+	'shipping': '{{ order.transportAndPaymentPrice.priceWithVat }}',
+	'tax': '{{ order.totalVatAmount }}',
+	'currency': '{{ order.currency.code|escape('js') }}'
+});
+
+{% for orderProduct in order.productItems %}
+	ga('ecommerce:addItem', {
+		'id': '{{ order.number|escape('js')	 }}',
+		'name': '{{ orderProduct.product.name|escape('js') }}',
+		'sku': '{{ orderProduct.product.catnum|escape('js') }}',
+		'category': '{{ productMainCategory(orderProduct.product, getDomain().id).name|escape('js') }}',
+		'price': '{{ orderProduct.priceWithVat }}',
+		'quantity': '{{ orderProduct.quantity }}'
+	});
+{% endfor %}
+
+ga('ecommerce:send');
+
+</script>

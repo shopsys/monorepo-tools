@@ -4,8 +4,10 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use SS6\ShopBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
 use SS6\ShopBundle\Form\Admin\Script\ScriptFormType;
 use SS6\ShopBundle\Model\Script\Script;
 use SS6\ShopBundle\Model\Script\ScriptData;
@@ -24,9 +26,19 @@ class ScriptController extends AdminBaseController {
 	 */
 	private $gridFactory;
 
-	public function __construct(ScriptFacade $scriptFacade, GridFactory $gridFactory) {
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 */
+	private $selectedDomain;
+
+	public function __construct(
+		ScriptFacade $scriptFacade,
+		GridFactory $gridFactory,
+		SelectedDomain $selectedDomain
+	) {
 		$this->scriptFacade = $scriptFacade;
 		$this->gridFactory = $gridFactory;
+		$this->selectedDomain = $selectedDomain;
 	}
 
 	/**
@@ -148,6 +160,28 @@ class ScriptController extends AdminBaseController {
 		}
 
 		return $this->redirectToRoute('admin_script_list');
+	}
+
+	/**
+	 * @Route("/script/google-analytics/")
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function googleAnalyticsAction(Request $request) {
+		$domainId = $this->selectedDomain->getId();
+		$form = $this->createForm(new GoogleAnalyticsScriptFormType());
+		$formData = ['trackingId' => $this->scriptFacade->getGoogleAnalyticsTrackingId($domainId)];
+
+		$form->setData($formData);
+		$form->handleRequest($request);
+
+		if ($form->isValid()) {
+			$this->scriptFacade->setGoogleAnalyticsTrackingId($form->getData()['trackingId'], $domainId);
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Kód skriptu Google analytics byl nastaven'));
+		}
+
+		return $this->render('@SS6Shop/Admin/Content/Script/googleAnalytics.html.twig', [
+			'form' => $form->createView(),
+		]);
 	}
 
 	/**

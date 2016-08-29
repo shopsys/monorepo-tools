@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Script;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Order\Order;
 use SS6\ShopBundle\Model\Script\ScriptRepository;
 
@@ -22,15 +23,22 @@ class ScriptFacade {
 	private $scriptRepository;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 */
+	private $setting;
+
+	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Script\ScriptRepository $scriptRepository
 	 */
 	public function __construct(
 		EntityManager $em,
-		ScriptRepository $scriptRepository
+		ScriptRepository $scriptRepository,
+		Setting $setting
 	) {
 		$this->em = $em;
 		$this->scriptRepository = $scriptRepository;
+		$this->setting = $setting;
 	}
 
 	/**
@@ -120,6 +128,30 @@ class ScriptFacade {
 		}
 
 		return $scriptCodes;
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return bool
+	 */
+	public function isGoogleAnalyticsActivated($domainId) {
+		return !empty($this->setting->getForDomain(Script::GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME, $domainId));
+	}
+
+	/**
+	 * @param string|null $trackingId
+	 * @param int $domainId
+	 */
+	public function setGoogleAnalyticsTrackingId($trackingId, $domainId) {
+		$this->setting->setForDomain(Script::GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME, $trackingId, $domainId);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return string|null
+	 */
+	public function getGoogleAnalyticsTrackingId($domainId) {
+		return $this->setting->getForDomain(Script::GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME, $domainId);
 	}
 
 	/**

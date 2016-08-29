@@ -11,6 +11,7 @@ use SS6\ShopBundle\Model\Order\Item\OrderPayment;
 use SS6\ShopBundle\Model\Order\Item\OrderProduct;
 use SS6\ShopBundle\Model\Order\Item\OrderTransport;
 use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use SS6\ShopBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Table(name="orders")
@@ -522,6 +523,13 @@ class Order {
 	/**
 	 * @return string
 	 */
+	public function getTotalVatAmount() {
+		return $this->totalPriceWithVat - $this->totalPriceWithoutVat;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function getTotalProductPriceWithVat() {
 		return $this->totalProductPriceWithVat;
 	}
@@ -603,6 +611,35 @@ class Order {
 		}
 
 		return $itemsWithoutTransportAndPayment;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 */
+	private function getTransportAndPaymentItems() {
+		$transportAndPaymentItems = [];
+		foreach ($this->getItems() as $orderItem) {
+			if ($orderItem instanceof OrderTransport || $orderItem instanceof OrderPayment) {
+				$transportAndPaymentItems[] = $orderItem;
+			}
+		}
+
+		return $transportAndPaymentItems;
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 */
+	public function getTransportAndPaymentPrice() {
+		$transportAndPaymentItems = $this->getTransportAndPaymentItems();
+		$totalPrice = new Price(0, 0);
+
+		foreach ($transportAndPaymentItems as $item) {
+			$itemPrice = new Price($item->getPriceWithoutVat(), $item->getPriceWithVat());
+			$totalPrice = $totalPrice->add($itemPrice);
+		}
+
+		return $totalPrice;
 	}
 
 	/**

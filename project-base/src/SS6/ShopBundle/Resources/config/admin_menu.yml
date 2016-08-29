@@ -264,3 +264,5 @@
       - label: 'Editace skriptu'
         route: admin_script_edit
         visible: false
+      - label: 'Google analytics'
+        route: admin_script_googleanalytics
