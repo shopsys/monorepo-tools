@@ -109,7 +109,6 @@
 
 			$tabButton.toggleClass('active', display);
 			$tabContent.toggleClass('active', display);
-			$tabContent.toggle(display);
 		}
 	};
 
