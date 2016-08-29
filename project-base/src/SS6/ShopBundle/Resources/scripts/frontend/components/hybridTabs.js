@@ -54,26 +54,21 @@
 		};
 
 		function fixTabsState() {
-			var $activeButtons = $tabButtons.filter('.active');
 
 			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
+				var $activeButtons = $tabButtons.filter('.active');
 				if ($activeButtons.length > 0) {
 					activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
 				} else {
 					activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
 				}
 			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
-				// activate all tabs that have at least one active button
-				$activeButtons.each(function () {
-					toggleTab($(this).data('tab-id'), true);
-				});
+				$tabContents.each(function () {
+					var tabId = $(this).data('tab-id');
+					var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
+					var isTabActive = $tabButton.hasClass('active');
 
-				// deactivate all tabs that have any inactive button left
-				// (all the tabs that had any active button have now all the buttons
-				// in active state from the previous step)
-				var $inactiveButtons = $tabButtons.filter(':not(.active)');
-				$inactiveButtons.each(function () {
-					toggleTab($(this).data('tab-id'), false);
+					toggleTab(tabId, isTabActive);
 				});
 			}
 		}
