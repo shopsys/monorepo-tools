@@ -65,7 +65,7 @@
 				// activate all tabs that have at least one active button
 				var $activeButtons = $tabButtons.filter('.active');
 				$activeButtons.each(function () {
-					activateTab($(this).data('tab-id'));
+					toggleTab($(this).data('tab-id'), true);
 				});
 
 				// deactivate all tabs that have any inactive button left
@@ -73,7 +73,7 @@
 				// in active state from the previous step)
 				var $inactiveButtons = $tabButtons.filter(':not(.active)');
 				$inactiveButtons.each(function () {
-					deactivateTab($(this).data('tab-id'));
+					toggleTab($(this).data('tab-id'), false);
 				});
 			}
 		}
@@ -87,9 +87,9 @@
 				var isTabActive = $(this).hasClass('active');
 
 				if (isTabActive) {
-					deactivateTab(tabId);
+					toggleTab(tabId, false);
 				} else {
-					activateTab(tabId);
+					toggleTab(tabId, true);
 				}
 			}
 
@@ -102,31 +102,27 @@
 				var currentTabId = $(this).data('tab-id');
 
 				if (currentTabId === tabId) {
-					activateTab(currentTabId);
+					toggleTab(currentTabId, true);
 				} else {
-					deactivateTab(currentTabId);
+					toggleTab(currentTabId, false);
 				}
 			});
 		}
 
-		// activates tab without checking single/multiple mode
-		function activateTab(tabId) {
+		// use true to show the tab or false to hide it without checking single/multiple mode
+		function toggleTab(tabId, display) {
 			var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
 			var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
 
-			$tabButton.addClass('active');
-			$tabContent.addClass('active');
-			$tabContent.show();
-		}
-
-		// deactivates tab without checking single/multiple mode
-		function deactivateTab(tabId) {
-			var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
-			var $tabContent = $tabContents.filter('[data-tab-id="' + tabId + '"]');
-
-			$tabButton.removeClass('active');
-			$tabContent.removeClass('active');
-			$tabContent.hide();
+			if (display) {
+				$tabButton.addClass('active');
+				$tabContent.addClass('active');
+				$tabContent.show();
+			} else {
+				$tabButton.removeClass('active');
+				$tabContent.removeClass('active');
+				$tabContent.hide();
+			}
 		}
 	};
 
