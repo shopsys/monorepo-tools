@@ -84,7 +84,13 @@
 			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
 				activateOneTabAndDeactivateOther(tabId);
 			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
-				toggleTab(tabId);
+				var isTabActive = $(this).hasClass('active');
+
+				if (isTabActive) {
+					deactivateTab(tabId);
+				} else {
+					activateTab(tabId);
+				}
 			}
 
 			return false;
@@ -101,18 +107,6 @@
 					deactivateTab(currentTabId);
 				}
 			});
-		}
-
-		// toggles tab (in "multiple" mode)
-		function toggleTab(tabId) {
-			var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
-			var isTabActive = $tabButton.hasClass('active');
-
-			if (isTabActive) {
-				deactivateTab(tabId);
-			} else {
-				activateTab(tabId);
-			}
 		}
 
 		// activates tab without checking single/multiple mode
