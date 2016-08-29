@@ -87,7 +87,7 @@
 			return false;
 		}
 
-		// activates exactely one tab (in "single" mode)
+		// activates exactly one tab (in "single" mode)
 		function activateOneTabAndDeactivateOther(tabId) {
 			$tabButtons.each(function () {
 				var currentTabId = $(this).data('tab-id');
