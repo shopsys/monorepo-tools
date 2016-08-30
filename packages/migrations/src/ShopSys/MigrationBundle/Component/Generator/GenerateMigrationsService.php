@@ -83,6 +83,8 @@ class GenerateMigrationsService {
 	 * @return string
 	 */
 	private function formatSqlCommand($filteredSchemaDiffSqlCommand) {
+		SqlFormatter::$tab = "\t";
+		
 		$formattedQuery = SqlFormatter::format($filteredSchemaDiffSqlCommand, self::HIGHLIGHT_OFF);
 		$formattedQueryLines = array_map('rtrim', explode("\n", $formattedQuery));
 
