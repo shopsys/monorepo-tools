@@ -9,11 +9,7 @@
 							{{ loop.index }}.
 						</div>
 						<div class="list-products-line__item__image">
-							{% if imageExists(productDetail.product) %}
-								{{ image(productDetail.product, { size: 'thumbnail' }) }}
-							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
-							{% endif %}
+							{{ image(productDetail.product, { size: 'thumbnail', alt: productDetail.product.name }) }}
 						</div>
 						<h3 class="list-products-line__item__title">
 							{{ productDetail.product.name }}

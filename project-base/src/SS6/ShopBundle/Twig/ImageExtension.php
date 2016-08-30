@@ -13,7 +13,7 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension {
 
-	const NOIMAGE_FILENAME = 'noimage.gif';
+	const NOIMAGE_FILENAME = 'noimage.jpg';
 
 	/**
 	 * @var string
@@ -87,6 +87,7 @@ class ImageExtension extends Twig_Extension {
 			new Twig_SimpleFunction('imageExists', [$this, 'imageExists']),
 			new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
 			new Twig_SimpleFunction('image', [$this, 'getImageHtml'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('noimage', [$this, 'getNoimageHtml'], ['is_safe' => ['html']]),
 			new Twig_SimpleFunction('getImages', [$this, 'getImages']),
 		];
 	}
@@ -155,6 +156,28 @@ class ImageExtension extends Twig_Extension {
 		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
 			'attr' => $htmlAttributes,
 			'imageCssClass' => $this->getImageCssClass($entityName, $attributtes['type'], $attributtes['size']),
+		]);
+	}
+
+	/**
+	 * @param array $attributes
+	 * @return string
+	 */
+	public function getNoimageHtml(array $attributes) {
+		Condition::setArrayDefaultValue($attributes, 'type');
+		Condition::setArrayDefaultValue($attributes, 'size');
+		Condition::setArrayDefaultValue($attributes, 'alt', '');
+		Condition::setArrayDefaultValue($attributes, 'title', $attributes['alt']);
+
+		$entityName = 'noimage';
+		$attributes['src'] = $this->getEmptyImageUrl();
+
+		$htmlAttributes = $attributes;
+		unset($htmlAttributes['type'], $htmlAttributes['size']);
+
+		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
+			'attr' => $htmlAttributes,
+			'imageCssClass' => $this->getImageCssClass($entityName, $attributes['type'], $attributes['size']),
 		]);
 	}
 

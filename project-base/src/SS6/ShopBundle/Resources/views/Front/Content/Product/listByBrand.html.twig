@@ -16,11 +16,7 @@
 
 		<div class="box-list__producer">
 			<div class="box-list__producer__image">
-				{% if imageExists(brand) %}
-					{{ image(brand) }}
-				{% else %}
-					<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ brand.name }}">
-				{% endif %}
+				{{ image(brand, { alt: brand.name }) }}
 			</div>
 			<div class="box-list__producer__text">
 				{% if brand.description is not null %}
