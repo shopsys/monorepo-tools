@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb816fd8b8a9e52388381dafb34770d2",
-    "content-hash": "7efba576507a9c7e709938b96a0f8660",
+    "hash": "9a88ed50cb1751ec56881ccf4b2b0831",
+    "content-hash": "d620efec3353195b4294ddbcefcb6266",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -269,9 +269,9 @@
             },
             "require-dev": {
                 "doctrine/common": "~2.3",
-                "phpunit/phpunit": "~4.1|~5.0",
+                "phpunit/phpunit": "~4.1",
                 "sensio/framework-extra-bundle": "~3.0",
-                "symfony/phpunit-bridge": "^2.8.1|^3.0.1",
+                "symfony/phpunit-bridge": "~2.7",
                 "symfony/symfony": "^2.6.4|~3.0"
             },
             "type": "symfony-bundle",
@@ -1521,7 +1521,7 @@
                 "symfony",
                 "validation"
             ],
-            "time": "2015-06-19 14:38:58"
+            "time": "2016-03-29 14:06:14"
         },
         {
             "name": "fzaninotto/faker",
@@ -4162,16 +4162,16 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "5fd0038b994fbbf96933c6e6581d387f325927b0"
+                "reference": "36a599ea0fa1954cc49e5a379ca3377d15fd616a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/migrations/zipball/5fd0038b994fbbf96933c6e6581d387f325927b0",
-                "reference": "5fd0038b994fbbf96933c6e6581d387f325927b0",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/36a599ea0fa1954cc49e5a379ca3377d15fd616a",
+                "reference": "36a599ea0fa1954cc49e5a379ca3377d15fd616a",
                 "shasum": ""
             },
             "require": {
@@ -4194,10 +4194,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/shopsys/migrations/tree/v1.4.0",
+                "source": "https://github.com/shopsys/migrations/tree/v1.4.1",
                 "issues": "https://github.com/shopsys/migrations/issues"
             },
-            "time": "2016-08-05 07:53:13"
+            "time": "2016-08-31 14:16:35"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -4371,7 +4371,7 @@
             "support": {
                 "source": "https://github.com/sustmi/Routing/tree/master"
             },
-            "time": "2015-09-30 09:50:25"
+            "time": "2015-09-19 14:58:43"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -5255,6 +5255,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-02-26 07:37:29"
         },
         {
