@@ -83,10 +83,25 @@ class GenerateMigrationsService {
 	 * @return string
 	 */
 	private function formatSqlCommand($filteredSchemaDiffSqlCommand) {
-		$formattedQuery = SqlFormatter::format($filteredSchemaDiffSqlCommand, self::HIGHLIGHT_OFF);
+		$formattedQuery = $this->formatSqlQueryWithTabs($filteredSchemaDiffSqlCommand);
 		$formattedQueryLines = array_map('rtrim', explode("\n", $formattedQuery));
 
 		return "\n" . implode("\n", $this->indentSqlCommandLines($formattedQueryLines));
+	}
+
+	/**
+	 * @param string $query
+	 * @return string
+	 */
+	private function formatSqlQueryWithTabs($query) {
+		$previousTab = SqlFormatter::$tab;
+		SqlFormatter::$tab = "\t";
+
+		$formattedQuery = SqlFormatter::format($query, self::HIGHLIGHT_OFF);
+
+		SqlFormatter::$tab = $previousTab;
+
+		return $formattedQuery;
 	}
 
 	/**
