@@ -215,7 +215,11 @@ class PriceExtension extends Twig_Extension {
 			$locale
 		);
 
-		return $numberFormatter->formatCurrency($price, $intlCurrency);
+		// $price can be float so we round it before formatting to overcome floating point errors.
+		// If the amounts will be 10^9 or less, the errors should not be in the first 6 decimal places.
+		$priceWithFixedFloatingPointError = round($price, 6);
+
+		return $numberFormatter->formatCurrency($priceWithFixedFloatingPointError, $intlCurrency);
 	}
 
 	/**
