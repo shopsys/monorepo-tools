@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 use SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use SS6\ShopBundle\Component\Setting\SettingValue;
+use SS6\ShopBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade {
 
@@ -60,6 +61,9 @@ class MultidomainEntityClassFinderFacade {
 	 * @return string[]
 	 */
 	private function getIgnoredEntitiesNames() {
-		return [SettingValue::class];
+		return [
+			SettingValue::class,
+			ProductVisibility::class,
+		];
 	}
 }
