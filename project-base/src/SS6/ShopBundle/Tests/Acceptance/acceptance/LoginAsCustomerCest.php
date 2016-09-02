@@ -9,7 +9,7 @@ class LoginAsCustomerCest {
 	public function testLoginAsCustomer(AcceptanceTester $me) {
 		$me->wantTo('login as a customer from admin');
 		$me->loginAsAdmin('admin', 'admin123');
-		$me->amOnPage('/admin/customer/edit/3');
+		$me->amOnPage('/admin/customer/edit/2');
 		$me->clickByText('Přihlásit za uživatele');
 		$me->switchToLastOpenedWindow();
 		$me->seeCurrentPageEquals('/');
