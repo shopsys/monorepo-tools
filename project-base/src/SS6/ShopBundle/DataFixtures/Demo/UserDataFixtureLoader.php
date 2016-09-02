@@ -99,7 +99,8 @@ class UserDataFixtureLoader {
 		$filteredRows = [];
 		$rowId = 0;
 		foreach ($rows as $row) {
-			if ($rowId === 0) {
+			$rowId++;
+			if ($rowId === 1) {
 				// skip header
 				continue;
 			}
@@ -110,7 +111,6 @@ class UserDataFixtureLoader {
 			}
 
 			$filteredRows[] = $row;
-			$rowId++;
 		}
 
 		return $filteredRows;
