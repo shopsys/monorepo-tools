@@ -17,10 +17,10 @@ class Version20160129122637 extends AbstractMigration {
 		';
 		$this->sql($sql);
 
-		$this->sql('CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS TABLE(domain_id integer)  AS $$
+		$this->sql('CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
 			BEGIN
 				CASE
-					WHEN locale = \'cs\' THEN RETURN QUERY VALUES (1);
+					WHEN locale = \'cs\' THEN RETURN NEXT 1;
 					ELSE RAISE EXCEPTION \'Locale % does not exists\', locale;
 				END CASE;
 			END
