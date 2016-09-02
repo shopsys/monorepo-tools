@@ -17,36 +17,29 @@ class CountryDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$this->addCzechCountryReference($manager);
-		$this->loadSlovakCountry();
-	}
+		$domainId = 2;
+		$countryData = new CountryData();
+		$countryData->name = 'Czech republic';
+		$this->createCountry($countryData, $domainId, self::COUNTRY_CZECH_REPUBLIC_2);
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	private function addCzechCountryReference(ObjectManager $manager) {
-		$country = $manager->getRepository(Country::class)->findOneBy(['domainId' => 2]);
-		$this->addReference(self::COUNTRY_CZECH_REPUBLIC_2, $country);
-	}
-
-	private function loadSlovakCountry() {
 		$domainId = 2;
 		$countryData = new CountryData();
 		$countryData->name = 'Slovakia';
-		$country = $this->createCountry($countryData, $domainId);
-		$this->addReference(self::COUNTRY_SLOVAKIA_2, $country);
+		$this->createCountry($countryData, $domainId, self::COUNTRY_SLOVAKIA_2);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
 	 * @param int $domainId
+	 * @param string $referenceName
 	 * @return \SS6\ShopBundle\Model\Country\Country
 	 */
-	private function createCountry(CountryData $countryData, $domainId) {
+	private function createCountry(CountryData $countryData, $domainId, $referenceName) {
 		$countryFacade = $this->get(CountryFacade::class);
 		/* @var $countryFacade \SS6\ShopBundle\Model\Country\CountryFacade */
 
-		return $countryFacade->create($countryData, $domainId);
+		$country = $countryFacade->create($countryData, $domainId);
+		$this->addReference($referenceName, $country);
 	}
 
 }
