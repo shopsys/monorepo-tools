@@ -51,6 +51,10 @@ class PersistentReferenceFacade {
 	 * @param object $object
 	 */
 	public function persistReference($name, $object) {
+		if (!is_object($object)) {
+			throw new \SS6\ShopBundle\Component\DataFixture\Exception\ObjectRequiredException($object);
+		}
+
 		$entityName = get_class($object);
 
 		if (method_exists($object, 'getId')) {
