@@ -30,21 +30,18 @@ class PaymentDataFixture extends AbstractReferenceFixture {
 		$paymentEditData->paymentData->instructions['en'] =
 			'<b>You have chosen payment by credit card. Please finish it in two business days.</b>';
 		$paymentEditData->prices[$currencyEur->getId()] = 2.95;
-		$paymentEditData->paymentData->domains[] = 2;
 		$paymentEditFacade->edit($payment, $paymentEditData);
 
 		$payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH_ON_DELIVERY);
 		$paymentEditData = $paymentEditDataFactory->createFromPayment($payment);
 		$paymentEditData->paymentData->name['en'] = 'Personal collection';
 		$paymentEditData->prices[$currencyEur->getId()] = 1.95;
-		$paymentEditData->paymentData->domains[] = 2;
 		$paymentEditFacade->edit($payment, $paymentEditData);
 
 		$payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CASH);
 		$paymentEditData = $paymentEditDataFactory->createFromPayment($payment);
 		$paymentEditData->paymentData->name['en'] = 'Cash';
 		$paymentEditData->prices[$currencyEur->getId()] = 0;
-		$paymentEditData->paymentData->domains[] = 2;
 		$paymentEditFacade->edit($payment, $paymentEditData);
 	}
 
