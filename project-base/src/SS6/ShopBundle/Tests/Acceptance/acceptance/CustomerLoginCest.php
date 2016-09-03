@@ -2,15 +2,20 @@
 
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LayoutPage;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LoginPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CustomerLoginCest {
 
-	public function testLoginAsCustomerFromMainPage(LoginPage $loginPage, AcceptanceTester $me) {
+	public function testLoginAsCustomerFromMainPage(
+		LoginPage $loginPage,
+		AcceptanceTester $me,
+		LayoutPage $layoutPage
+	) {
 		$me->wantTo('login as a customer from main page');
 		$me->amOnPage('/');
-		$me->clickByText('Přihlásit se');
+		$layoutPage->openLoginPopup();
 		$loginPage->login('no-reply@netdevelo.cz', 'user123');
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
@@ -18,10 +23,14 @@ class CustomerLoginCest {
 		$me->seeCurrentPageEquals('/');
 	}
 
-	public function testLoginAsCustomerFromCategoryPage(LoginPage $loginPage, AcceptanceTester $me) {
+	public function testLoginAsCustomerFromCategoryPage(
+		LoginPage $loginPage,
+		AcceptanceTester $me,
+		LayoutPage $layoutPage
+	) {
 		$me->wantTo('login as a customer from category page');
 		$me->amOnPage('/pocitace-prislusenstvi/');
-		$me->clickByText('Přihlásit se');
+		$layoutPage->openLoginPopup();
 		$loginPage->login('no-reply@netdevelo.cz', 'user123');
 		$me->see('Jaromír Jágr');
 		$me->clickByText('Odhlásit se');
