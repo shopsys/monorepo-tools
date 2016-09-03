@@ -402,13 +402,13 @@
 
 	<target name="selenium-start" description="Start the selenium server">
 		<exec
-				executable="${path.java.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-				>
-			<arg value="-jar" />
-			<arg path="vendor/se/selenium-server-standalone/bin/selenium-server-standalone.jar" />
+			executable="${path.chromedriver.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--port=4444" />
+			<arg value="--url-base=wd/hub" />
 		</exec>
 	</target>
 

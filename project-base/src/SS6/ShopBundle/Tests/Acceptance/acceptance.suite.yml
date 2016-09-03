@@ -33,7 +33,7 @@ modules:
       host: localhost
       port: 4444
       url: ~
-      browser: firefox
+      browser: chrome
       capabilities:
         # accept untrusted (eg. self-signed) HTTPS certificates
         acceptSslCerts: true
