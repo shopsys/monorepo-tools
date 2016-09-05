@@ -13,7 +13,7 @@ use Twig_SimpleFunction;
 
 class ImageExtension extends Twig_Extension {
 
-	const NOIMAGE_FILENAME = 'noimage.gif';
+	const NOIMAGE_FILENAME = 'noimage.jpg';
 
 	/**
 	 * @var string
@@ -87,6 +87,7 @@ class ImageExtension extends Twig_Extension {
 			new Twig_SimpleFunction('imageExists', [$this, 'imageExists']),
 			new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
 			new Twig_SimpleFunction('image', [$this, 'getImageHtml'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('noimage', [$this, 'getNoimageHtml'], ['is_safe' => ['html']]),
 			new Twig_SimpleFunction('getImages', [$this, 'getImages']),
 		];
 	}
@@ -131,31 +132,35 @@ class ImageExtension extends Twig_Extension {
 
 	/**
 	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
-	 * @param array $attributtes
+	 * @param array $attributes
 	 * @return string
 	 */
-	public function getImageHtml($imageOrEntity, array $attributtes = []) {
-		Condition::setArrayDefaultValue($attributtes, 'type');
-		Condition::setArrayDefaultValue($attributtes, 'size');
-		Condition::setArrayDefaultValue($attributtes, 'alt', '');
-		Condition::setArrayDefaultValue($attributtes, 'title', $attributtes['alt']);
+	public function getImageHtml($imageOrEntity, array $attributes = []) {
+		$this->preventDefault($attributes);
 
 		try {
-			$image = $this->imageFacade->getImageByObject($imageOrEntity, $attributtes['type']);
+			$image = $this->imageFacade->getImageByObject($imageOrEntity, $attributes['type']);
 			$entityName = $image->getEntityName();
-			$attributtes['src'] = $this->getImageUrl($image, $attributtes['size'], $attributtes['type']);
+			$attributes['src'] = $this->getImageUrl($image, $attributes['size'], $attributes['type']);
 		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			$entityName = 'noimage';
-			$attributtes['src'] = $this->getEmptyImageUrl();
+			$attributes['src'] = $this->getEmptyImageUrl();
 		}
 
-		$htmlAttributes = $attributtes;
-		unset($htmlAttributes['type'], $htmlAttributes['size']);
+		return $this->getImageHtmlByEntityName($attributes, $entityName);
+	}
 
-		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
-			'attr' => $htmlAttributes,
-			'imageCssClass' => $this->getImageCssClass($entityName, $attributtes['type'], $attributtes['size']),
-		]);
+	/**
+	 * @param array $attributes
+	 * @return string
+	 */
+	public function getNoimageHtml(array $attributes) {
+		$this->preventDefault($attributes);
+
+		$entityName = 'noimage';
+		$attributes['src'] = $this->getEmptyImageUrl();
+
+		return $this->getImageHtmlByEntityName($attributes, $entityName);
 	}
 
 	/**
@@ -187,5 +192,30 @@ class ImageExtension extends Twig_Extension {
 	 */
 	public function getName() {
 		return 'image_extension';
+	}
+
+	/**
+	 * @param array $attributes
+	 */
+	private function preventDefault(array &$attributes) {
+		Condition::setArrayDefaultValue($attributes, 'type');
+		Condition::setArrayDefaultValue($attributes, 'size');
+		Condition::setArrayDefaultValue($attributes, 'alt', '');
+		Condition::setArrayDefaultValue($attributes, 'title', $attributes['alt']);
+	}
+
+	/**
+	 * @param array $attributes
+	 * @param $entityName
+	 * @return string
+	 */
+	private function getImageHtmlByEntityName(array $attributes, $entityName) {
+		$htmlAttributes = $attributes;
+		unset($htmlAttributes['type'], $htmlAttributes['size']);
+
+		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
+			'attr' => $htmlAttributes,
+			'imageCssClass' => $this->getImageCssClass($entityName, $attributes['type'], $attributes['size']),
+		]);
 	}
 }

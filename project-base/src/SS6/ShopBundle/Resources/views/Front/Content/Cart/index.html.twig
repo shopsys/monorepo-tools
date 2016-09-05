@@ -37,11 +37,7 @@
 						<tr class="table-cart__row js-cart-item">
 							<td class="table-cart__cell table-cart__cell--image">
 								<a href="{{ url('front_product_detail', {id: cartItem.product.id}) }}" title="{{ cartItem.product.name }}" class="table-cart__cell__image">
-									{% if imageExists(cartItem.product) %}
-										{{ image(cartItem.product, { size: 'thumbnail' }) }}
-									{% else %}
-										<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="" width="60px" height="40px">
-									{% endif %}
+									{{ image(cartItem.product, { size: 'thumbnail' }) }}
 								</a>
 							</td>
 

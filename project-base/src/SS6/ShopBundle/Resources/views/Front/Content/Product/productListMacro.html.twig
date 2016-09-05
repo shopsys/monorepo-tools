@@ -14,11 +14,7 @@
 						</h2>
 
 						<div class="list-products__item__image">
-							{% if imageExists(productDetail.product) %}
-								{{ image(productDetail.product, { size: 'list' }) }}
-							{% else %}
-								<img src="{{ asset('assets/frontend/images/bez.jpg') }}" alt="{{ productDetail.product.name }}">
-							{% endif %}
+							{{ image(productDetail.product, { size: 'list', alt: productDetail.product.name }) }}
 							{{ productFlags.list(productDetail.product, 'in-flag--in-list') }}
 						</div>
 
