@@ -25,7 +25,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	private $logger;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	private $errorReportingToEmail;
 
@@ -45,7 +45,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	private $setting;
 
 	/**
-	 * @param string $errorReportingToEmail
+	 * @param string|null $errorReportingToEmail
 	 * @param \SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
 	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailerService
 	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
