@@ -10,4 +10,4 @@ parameters:
   test_mailer_user: ~
   test_mailer_password: ~
 
-  error_reporting_to_email: ~
+  email_for_error_reporting: ~
