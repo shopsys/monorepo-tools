@@ -70,6 +70,11 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	}
 
 	public function run() {
+		if ($this->emailForErrorReporting === null) {
+			$this->logger->addInfo('Email for error reporting is not set');
+			return;
+		}
+
 		$reportProblemFrom = new DateTime('-' . self::REPORT_ERRORS_FOR_LAST_SECONDS . ' seconds');
 		if ($this->logErrorReportingFacade->existsLogEntryFromDateTime($reportProblemFrom, self::ROTATED_LOG_NAME)) {
 			$this->logger->addInfo('Found new errors in logs');
