@@ -266,3 +266,9 @@
         visible: false
       - label: 'Google analytics'
         route: admin_script_googleanalytics
+
+    - label: 'Heureka - Ověřeno zákazníky'
+      route: admin_heureka_setting
+      items:
+      - label: 'Heureka - Ověřeno zákazníky'
+        route: admin_heureka_setting

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9a88ed50cb1751ec56881ccf4b2b0831",
-    "content-hash": "d620efec3353195b4294ddbcefcb6266",
+    "hash": "37b4a3640ee71401fa9934fd99bf04e2",
+    "content-hash": "b899e8ce13514a2217911a7fce213219",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1823,6 +1823,52 @@
                 "filemanager"
             ],
             "time": "2015-11-16 04:03:08"
+        },
+        {
+            "name": "heureka/overeno-zakazniky",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heureka/overeno-zakazniky.git",
+                "reference": "f3ed058116e7a4cca5bf314f59f2856ba6cd2b76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heureka/overeno-zakazniky/zipball/f3ed058116e7a4cca5bf314f59f2856ba6cd2b76",
+                "reference": "f3ed058116e7a4cca5bf314f59f2856ba6cd2b76",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.4",
+                "phpunit/phpunit": "~4.8.0"
+            },
+            "suggest": {
+                "ext-curl": "Simplifies the library usage (you don't have to provide your own requester)"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Heureka\\": [
+                        "src/",
+                        "tests"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Heureka.cz",
+                    "email": "podpora@heureka.cz"
+                }
+            ],
+            "description": "Heureka 'Ověřeno zákazníky' (ShopCertification) service API implementation",
+            "time": "2016-06-29 10:59:50"
         },
         {
             "name": "incenteev/composer-parameter-handler",

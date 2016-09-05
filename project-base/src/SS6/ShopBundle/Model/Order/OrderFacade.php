@@ -3,6 +3,8 @@
 namespace SS6\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
+use Exception;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
@@ -12,6 +14,7 @@ use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Customer\UserRepository;
+use SS6\ShopBundle\Model\Heureka\HeurekaFacade;
 use SS6\ShopBundle\Model\Localization\Localization;
 use SS6\ShopBundle\Model\Order\Item\OrderProductFacade;
 use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
@@ -129,6 +132,16 @@ class OrderFacade {
 	 */
 	private $domainRouterFactory;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaFacade
+	 */
+	private $heurekaFacade;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		EntityManager $em,
 		OrderNumberSequenceRepository $orderNumberSequenceRepository,
@@ -148,7 +161,9 @@ class OrderFacade {
 		CurrentCustomer $currentCustomer,
 		OrderPreviewFactory $orderPreviewFactory,
 		OrderProductFacade $orderProductFacade,
-		DomainRouterFactory $domainRouterFactory
+		DomainRouterFactory $domainRouterFactory,
+		HeurekaFacade $heurekaFacade,
+		Domain $domain
 	) {
 		$this->em = $em;
 		$this->orderNumberSequenceRepository = $orderNumberSequenceRepository;
@@ -169,6 +184,8 @@ class OrderFacade {
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->orderProductFacade = $orderProductFacade;
 		$this->domainRouterFactory = $domainRouterFactory;
+		$this->heurekaFacade = $heurekaFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -211,6 +228,9 @@ class OrderFacade {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
+		$domainConfig = $this->domain->getDomainConfigById($orderData->domainId);
+		$locale = $domainConfig->getLocale();
+
 		$orderData->status = $this->orderStatusRepository->getDefault();
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($orderData->transport, $orderData->payment);
 		$user = $this->currentCustomer->findCurrentUser();
@@ -222,6 +242,12 @@ class OrderFacade {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 		if ($user instanceof User) {
 			$this->customerFacade->amendCustomerDataFromOrder($user, $order);
+		}
+		if (
+			$this->heurekaFacade->isHeurekaShopCertificationActivated($orderData->domainId) &&
+			$this->heurekaFacade->isDomainLocaleSupported($locale)
+		) {
+			$this->heurekaFacade->sendOrderInfo($order);
 		}
 
 		return $order;
@@ -362,4 +388,5 @@ class OrderFacade {
 			}
 		}
 	}
+
 }
