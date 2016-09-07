@@ -20,7 +20,6 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
 	private $persistentReferenceFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 */
 	public function setContainer(ContainerInterface $container = null) {
