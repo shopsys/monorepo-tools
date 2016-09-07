@@ -20,6 +20,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	public function load(ObjectManager $manager) {
 		$setting = $this->get(Setting::class);
 		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		$setting->clearCache();
 
 		$termsAndConditionsDomain2 = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS_2);
 		/* @var $termsAndConditionsDomain2 \SS6\ShopBundle\Model\Article\Article */
