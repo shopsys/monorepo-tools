@@ -23,7 +23,7 @@
 							{% set transportPrice = transportsPrices[choice.data.id] %}
 							<label class="box-chooser__item">
 								<span class="box-chooser__item__check">
-									{{ form_widget(child, { attr: { class: 'transport', 'data-id': choice.data.id} }) }}
+									{{ form_widget(child, { attr: { class: 'transport js-order-transport-input', 'data-id': choice.data.id} }) }}
 								</span>
 
 								<span class="box-chooser__item__image">
@@ -68,7 +68,7 @@
 							{% set paymentPrice = paymentsPrices[choice.data.id] %}
 							<label class="box-chooser__item">
 								<span class="box-chooser__item__check">
-									{{ form_widget(child, { attr: { class: 'payment', 'data-id': choice.data.id} }) }}
+									{{ form_widget(child, { attr: { class: 'payment js-order-payment-input', 'data-id': choice.data.id} }) }}
 								</span>
 
 								<span class="box-chooser__item__image">
@@ -101,8 +101,11 @@
 			</div>
 		</div>
 
-		<div class="box-order__cart">
-			{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
+		<div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
+			{{ render(controller('SS6ShopBundle:Front/Order:preview', {
+				transportId: transport is empty ? null : transport.id,
+				paymentId: payment is empty ? null : payment.id
+			})) }}
 		</div>
 	</div>
 
