@@ -4,7 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
 
@@ -18,7 +18,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture {
 		/* @var $bestsellingProductEditFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
 
 		$bestsellingProductEditFacade->edit(
-			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
+			$this->getReference(DemoCategoryDataFixture::PREFIX . DemoCategoryDataFixture::PHOTO),
 			2,
 			[$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
 		);
