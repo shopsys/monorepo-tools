@@ -294,15 +294,15 @@ class ProductDataFixtureLoader {
 		$csvParameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
 
 		if (!isset($this->parameters[$serializedParameterNames])) {
-			$csPrameterNames = [
+			$csPrametersNames = [
 				'cs' => $csvParameterNames['cs'],
 			];
 			if ($domainId === 1) {
-				$parametersNames = $csPrameterNames;
+				$parametersNames = $csPrametersNames;
 			} else {
 				$parametersNames = $csvParameterNames;
 			}
-			$parameter = $this->parameterFacade->findParameterByNames($csPrameterNames);
+			$parameter = $this->parameterFacade->findParameterByNames($csPrametersNames);
 			if ($parameter === null) {
 				$parameter = $this->parameterFacade->create(new ParameterData($parametersNames, true));
 			}
