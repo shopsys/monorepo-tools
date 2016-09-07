@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -18,29 +19,27 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 		$pricingGroupData = new PricingGroupData();
 
 		$pricingGroupData->name = 'Obyčejný zákazník';
-		$this->createPricingGroup($pricingGroupData, 1, self::ORDINARY_DOMAIN_1);
+		$this->createPricingGroup($pricingGroupData, self::ORDINARY_DOMAIN_1);
 
 		$pricingGroupData->name = 'Partner';
-		$this->createPricingGroup($pricingGroupData, 1, self::PARTNER_DOMAIN_1);
+		$this->createPricingGroup($pricingGroupData, self::PARTNER_DOMAIN_1);
 
 		$pricingGroupData->name = 'VIP zákazník';
-		$this->createPricingGroup($pricingGroupData, 1, self::VIP_DOMAIN_1);
+		$this->createPricingGroup($pricingGroupData, self::VIP_DOMAIN_1);
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
-	 * @param int $domainId
 	 * @param string $referenceName
 	 */
 	private function createPricingGroup(
 		PricingGroupData $pricingGroupData,
-		$domainId,
 		$referenceName
 	) {
 		$pricingGroupFacade = $this->get(PricingGroupFacade::class);
 		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
-		$pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
+		$pricingGroup = $pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);
 		$this->addReference($referenceName, $pricingGroup);
 	}
 }

@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Country\Country;
 use SS6\ShopBundle\Model\Country\CountryData;
 use SS6\ShopBundle\Model\Country\CountryFacade;
@@ -25,7 +26,7 @@ class CountryDataFixture extends AbstractReferenceFixture {
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	private function addCzechCountryReference(ObjectManager $manager) {
-		$country = $manager->getRepository(Country::class)->findOneBy(['domainId' => 1]);
+		$country = $manager->getRepository(Country::class)->findOneBy(['domainId' => Domain::FIRST_DOMAIN_ID]);
 		$this->addReference(self::COUNTRY_CZECH_REPUBLIC_1, $country);
 	}
 

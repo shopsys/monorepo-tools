@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
 use SS6\ShopBundle\Model\Payment\PaymentEditData;
@@ -36,7 +37,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 			'cs' => '<b>Zvolili jste platbu kreditní kartou. Prosím proveďte ji do dvou pracovních dnů.</b>',
 		];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_ZERO);
-		$paymentEditData->paymentData->domains = [1];
+		$paymentEditData->paymentData->domains = [Domain::FIRST_DOMAIN_ID];
 		$paymentEditData->paymentData->hidden = false;
 		$this->createPayment(self::PAYMENT_CARD, $paymentEditData, [
 			TransportDataFixture::TRANSPORT_PERSONAL,
