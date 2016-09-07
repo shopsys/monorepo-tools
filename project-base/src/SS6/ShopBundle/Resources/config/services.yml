@@ -198,7 +198,7 @@ services:
   ss6.shop.component.error.reporting.error_reporting_from_last_hour_cron_module:
     class: SS6\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
     arguments:
-      - %error_reporting_to_email%
+      - %email_for_error_reporting%
 
   ss6.shop.component.error.reporting.log_error_reporting_facade:
     class: SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade

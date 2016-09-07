@@ -25,9 +25,9 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	private $logger;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
-	private $errorReportingToEmail;
+	private $emailForErrorReporting;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
@@ -45,18 +45,18 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	private $setting;
 
 	/**
-	 * @param string $errorReportingToEmail
+	 * @param string|null $emailForErrorReporting
 	 * @param \SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
 	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailerService
 	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
-		$errorReportingToEmail,
+		$emailForErrorReporting,
 		LogErrorReportingFacade $logErrorReportingFacade,
 		MailerService $mailerService,
 		Setting $setting
 	) {
-		$this->errorReportingToEmail = $errorReportingToEmail;
+		$this->emailForErrorReporting = $emailForErrorReporting;
 		$this->logErrorReportingFacade = $logErrorReportingFacade;
 		$this->mailerService = $mailerService;
 		$this->setting = $setting;
@@ -70,6 +70,11 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	}
 
 	public function run() {
+		if ($this->emailForErrorReporting === null) {
+			$this->logger->addInfo('Email for error reporting is not set');
+			return;
+		}
+
 		$reportProblemFrom = new DateTime('-' . self::REPORT_ERRORS_FOR_LAST_SECONDS . ' seconds');
 		if ($this->logErrorReportingFacade->existsLogEntryFromDateTime($reportProblemFrom, self::ROTATED_LOG_NAME)) {
 			$this->logger->addInfo('Found new errors in logs');
@@ -99,7 +104,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 			. '<code>' . nl2br(htmlspecialchars($logsTail)) . '</code>';
 
 		return new MessageData(
-			$this->errorReportingToEmail,
+			$this->emailForErrorReporting,
 			null,
 			$body,
 			$subject,
