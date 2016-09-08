@@ -43,7 +43,7 @@ class MultidomainEntityDataCreator {
 			->getAllNotNullableColumnNamesIndexedByTableName();
 		foreach ($columnNamesIndexedByTableName as $tableName => $columnNames) {
 			$columnNamesExcludingDomainId = array_filter($columnNames, function ($columnName) {
-				return $columnName !== 'domain_id';
+				return $columnName !== 'id' && $columnName !== 'domain_id';
 			});
 
 			$this->copyMultidomainDataForNewDomain(
