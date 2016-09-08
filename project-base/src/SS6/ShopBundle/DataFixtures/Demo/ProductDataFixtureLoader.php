@@ -3,10 +3,6 @@
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductEditData;
 use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
@@ -41,9 +37,9 @@ class ProductDataFixtureLoader {
 	const COLUMN_MAIN_VARIANT_CATNUM = 25;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader
 	 */
-	private $parameterFacade;
+	private $productParametersFixtureLoader;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
@@ -54,11 +50,6 @@ class ProductDataFixtureLoader {
 	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
-	 */
-	private $parameters;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Category\Category[]
@@ -91,10 +82,10 @@ class ProductDataFixtureLoader {
 	private $productEditDataFactory;
 
 	public function __construct(
-		ParameterFacade $parameterFacade,
+		ProductParametersFixtureLoader $productParametersFixtureLoader,
 		ProductEditDataFactory $productEditDataFactory
 	) {
-		$this->parameterFacade = $parameterFacade;
+		$this->productParametersFixtureLoader = $productParametersFixtureLoader;
 		$this->productEditDataFactory = $productEditDataFactory;
 	}
 
@@ -121,7 +112,6 @@ class ProductDataFixtureLoader {
 		$this->categories = $categories;
 		$this->flags = $flags;
 		$this->brands = $brands;
-		$this->parameters = [];
 		$this->units = $units;
 		$this->pricingGroups = $pricingGroups;
 	}
@@ -206,7 +196,7 @@ class ProductDataFixtureLoader {
 				$productEditData->productData->availability = $this->availabilities['on-request'];
 				break;
 		}
-		$productEditData->parameters = $this->getProductParameterValuesDataFromString(
+		$productEditData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
 			$row[self::COLUMN_PARAMETERS],
 			$domainId
 		);
@@ -241,99 +231,12 @@ class ProductDataFixtureLoader {
 		$productEditData->shortDescriptions[$domainId] = $row[self::COLUMN_SHORT_DESCRIPTION_EN];
 		$productEditData->showInZboziFeed[$domainId] = true;
 		$this->setProductDataPricesFromCsv($row, $productEditData, $domainId);
-		$productEditData->parameters = $this->getProductParameterValuesDataFromString(
+		$productEditData->parameters = $this->productParametersFixtureLoader->getProductParameterValuesDataFromString(
 			$row[self::COLUMN_PARAMETERS],
 			$domainId
 		);
 		$productEditData->productData->categoriesByDomainId[$domainId] =
 			$this->getValuesByKeyString($row[self::COLUMN_CATEGORIES_2], $this->categories);
-	}
-
-	/**
-	 * @param string $string
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
-	 */
-	private function getProductParameterValuesDataFromString($string, $domainId) {
-		$rows = explode(';', $string);
-
-		$productParameterValuesData = [];
-		foreach ($rows as $row) {
-			$rowData = explode('=', $row);
-			if (count($rowData) !== 2) {
-				continue;
-			}
-			list($serializedParameterNames, $serializedValueTexts) = $rowData;
-			$serializedParameterNames = trim($serializedParameterNames, '[]');
-			$serializedValueTexts = trim($serializedValueTexts, '[]');
-
-			$productParameterValuesData = $this->addProductParameterValuesData(
-				$productParameterValuesData,
-				$domainId,
-				$serializedParameterNames,
-				$serializedValueTexts
-			);
-		}
-
-		return $productParameterValuesData;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
-	 * @param int $domainId
-	 * @param string $serializedParameterNames
-	 * @param string $serializedValueTexts
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
-	 */
-	private function addProductParameterValuesData(
-		array $productParameterValuesData,
-		$domainId,
-		$serializedParameterNames,
-		$serializedValueTexts
-	) {
-		$csvParameterNames = $this->unserializeLocalizedValues($serializedParameterNames);
-
-		if (!isset($this->parameters[$serializedParameterNames])) {
-			$csPrametersNames = [
-				'cs' => $csvParameterNames['cs'],
-			];
-			if ($domainId === 1) {
-				$parametersNames = $csPrametersNames;
-			} else {
-				$parametersNames = $csvParameterNames;
-			}
-			$parameter = $this->parameterFacade->findParameterByNames($csPrametersNames);
-			if ($parameter === null) {
-				$parameter = $this->parameterFacade->create(new ParameterData($parametersNames, true));
-			}
-			$this->parameters[$serializedParameterNames] = $parameter;
-		} else {
-			$parameter = $this->parameters[$serializedParameterNames];
-		}
-
-		if (
-			$domainId === 2
-			&& array_key_exists('en', $csvParameterNames)
-			&& $parameter->getName('en') !== $csvParameterNames['en']
-		) {
-			$parameterData = new ParameterData();
-			$parameterData->setFromEntity($parameter);
-			$parameterData->name['en'] = $csvParameterNames['en'];
-			$this->parameterFacade->edit($parameter->getId(), $parameterData);
-		}
-
-		$valueTexts = $this->unserializeLocalizedValues($serializedValueTexts);
-		foreach ($valueTexts as $locale => $valueText) {
-			if ($domainId === 1 && $locale === 'en') {
-				continue;
-			}
-			$productParameterValueData = new ProductParameterValueData();
-			$productParameterValueData->parameterValueData = new ParameterValueData($valueText, $locale);
-			$productParameterValueData->parameter = $parameter;
-			$productParameterValuesData[] = $productParameterValueData;
-		}
-
-		return $productParameterValuesData;
 	}
 
 	/**
@@ -349,20 +252,6 @@ class ProductDataFixtureLoader {
 		}
 
 		return $productManualPrices;
-	}
-
-	/**
-	 * @param string $string
-	 * @return string[locale]
-	 */
-	private function unserializeLocalizedValues($string) {
-		$array = [];
-		$items = explode(',', $string);
-		foreach ($items as $item) {
-			list($locale, $value) = explode(':', $item);
-			$array[$locale] = $value;
-		}
-		return $array;
 	}
 
 	/**
