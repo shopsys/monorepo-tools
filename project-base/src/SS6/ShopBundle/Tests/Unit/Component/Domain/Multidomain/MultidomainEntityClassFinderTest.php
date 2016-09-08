@@ -38,7 +38,7 @@ class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 		$allClassesMetadata = [$classMetadataMock1, $classMetadataMock2, $classMetadataMock3];
 
 		$multidomainEntityClassFinder = new MultidomainEntityClassFinder();
-		$multidomainEntitiesNames = $multidomainEntityClassFinder->getMultidomainEntitiesNames($allClassesMetadata, []);
+		$multidomainEntitiesNames = $multidomainEntityClassFinder->getMultidomainEntitiesNames($allClassesMetadata, [], []);
 
 		$this->assertSame(['MultidomainClass'], $multidomainEntitiesNames);
 	}

@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 use SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use SS6\ShopBundle\Component\Setting\SettingValue;
+use SS6\ShopBundle\Model\Mail\MailTemplate;
 use SS6\ShopBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade {
@@ -41,7 +42,8 @@ class MultidomainEntityClassFinderFacade {
 	public function getMultidomainEntitiesNames() {
 		return $this->multidomainEntityClassFinder->getMultidomainEntitiesNames(
 			$this->em->getMetadataFactory()->getAllMetadata(),
-			$this->getIgnoredEntitiesNames()
+			$this->getIgnoredEntitiesNames(),
+			$this->getManualMultidomainEntitiesNames()
 		);
 	}
 
@@ -64,6 +66,15 @@ class MultidomainEntityClassFinderFacade {
 		return [
 			SettingValue::class,
 			ProductVisibility::class,
+		];
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function getManualMultidomainEntitiesNames() {
+		return [
+			MailTemplate::class,
 		];
 	}
 }
