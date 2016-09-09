@@ -76,8 +76,11 @@
 			{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
 			{{ form_row(form.newsletterSubscription, { label: 'Chci se přihlásit k odběru newsletteru'|trans }) }}
 		</div>
-		<div class="box-order__cart">
-			{{ include('@SS6Shop/Front/Content/Order/preview.html.twig') }}
+		<div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
+			{{ render(controller('SS6ShopBundle:Front/Order:preview', {
+				transportId: transport is empty ? null : transport.id,
+				paymentId: payment is empty ? null : payment.id
+			})) }}
 		</div>
 	</div>
 

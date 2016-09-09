@@ -6,8 +6,8 @@
 	SS6.order.paymentTransportRelations = [];
 
 	SS6.order.init = function ($container) {
-		var $transportInputs = $container.filterAllNodes('input.transport');
-		var $paymentInputs = $container.filterAllNodes('input.payment');
+		var $transportInputs = $container.filterAllNodes('.js-order-transport-input');
+		var $paymentInputs = $container.filterAllNodes('.js-order-payment-input');
 
 		$transportInputs.change(SS6.order.onTransportChange);
 		$paymentInputs.change(SS6.order.onPaymentChange);
@@ -37,10 +37,10 @@
 	};
 
 	SS6.order.updateTransports = function () {
-		var $checkedPayment = $('input.payment:checked');
-		if ($checkedPayment.length) {
+		var $checkedPayment = $('.js-order-payment-input:checked');
+		if ($checkedPayment.length > 0) {
 			var checkedPaymentId = $checkedPayment.data('id');
-			$('input.transport').each(function (i, checkbox) {
+			$('.js-order-transport-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
 				if (SS6.order.paymentTransportRelationExists(checkedPaymentId, id)) {
@@ -53,24 +53,24 @@
 				}
 			});
 		} else {
-			$('input.transport').each(function (i, checkbox) {
+			$('.js-order-transport-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				$checkbox.prop('disabled', false);
 				$checkbox.closest('label.box-chooser__item').removeClass('box-chooser__item--active').removeClass('box-chooser__item--inactive');
 			});
 		}
 
-		var $checkedTransport = $('input.transport:checked');
-		if ($checkedTransport.length) {
+		var $checkedTransport = $('.js-order-transport-input:checked');
+		if ($checkedTransport.length > 0) {
 			$checkedTransport.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive').addClass('box-chooser__item--active');
 		}
 	};
 
 	SS6.order.updatePayments = function () {
-		var $checkedTransport = $('input.transport:checked');
-		if ($checkedTransport.length) {
+		var $checkedTransport = $('.js-order-transport-input:checked');
+		if ($checkedTransport.length > 0) {
 			var checkedTransportId = $checkedTransport.data('id');
-			$('input.payment').each(function (i, checkbox) {
+			$('.js-order-payment-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
 				if (SS6.order.paymentTransportRelationExists(id, checkedTransportId)) {
@@ -83,15 +83,15 @@
 				}
 			});
 		} else {
-			$('input.payment').each(function (i, checkbox) {
+			$('.js-order-payment-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				$checkbox.prop('disabled', false);
 				$checkbox.closest('label.box-chooser__item').removeClass('box-chooser__item--active').removeClass('box-chooser__item--inactive');
 			});
 		}
 
-		var $checkedPayment = $('input.payment:checked');
-		if ($checkedPayment.length) {
+		var $checkedPayment = $('.js-order-payment-input:checked');
+		if ($checkedPayment.length > 0) {
 			$checkedPayment.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive').addClass('box-chooser__item--active');
 		}
 	};
@@ -103,7 +103,7 @@
 
 		if (checked) {
 			// uncheckOtherTransports
-			$('input.transport:checked').each(function (i, checkbox) {
+			$('.js-order-transport-input:checked').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
 				if (id !== checkedId) {
@@ -127,7 +127,7 @@
 
 		if (checked) {
 			// uncheckOtherPayments
-			$('input.payment:checked').each(function (i, checkbox) {
+			$('.js-order-payment-input:checked').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
 				if (id !== checkedId) {
@@ -145,8 +145,8 @@
 	};
 
 	SS6.order.updateContinueButton = function () {
-		var checkedTransport = $('input.transport:checked');
-		var checkedPayment = $('input.payment:checked');
+		var checkedTransport = $('.js-order-transport-input:checked');
+		var checkedPayment = $('.js-order-payment-input:checked');
 
 		if (checkedTransport.length === 1 && checkedPayment.length === 1) {
 			$('#transport_and_payment_form_save').removeClass('btn--disabled');

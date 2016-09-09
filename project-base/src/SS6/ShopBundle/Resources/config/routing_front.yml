@@ -80,6 +80,12 @@ front_newsletter_send:
   methods: [POST]
   condition: "request.isXmlHttpRequest()"
 
+front_order_preview:
+  pattern: /order/preview/
+  defaults: { _controller: SS6ShopBundle:Front\Order:preview }
+  condition: "request.isXmlHttpRequest()"
+  methods: [GET]
+
 front_order_save_form:
   pattern: /order/save-form/
   defaults: { _controller: SS6ShopBundle:Front\Order:saveOrderForm }

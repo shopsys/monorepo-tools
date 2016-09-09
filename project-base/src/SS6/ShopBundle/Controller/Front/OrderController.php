@@ -25,6 +25,7 @@ use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -235,7 +236,8 @@ class OrderController extends FrontBaseController {
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
 			'form' => $form->createView(),
 			'flow' => $this->flow,
-			'orderPreview' => $orderPreview,
+			'transport' => $transport,
+			'payment' => $payment,
 			'payments' => $payments,
 			'transportsPrices' => $this->transportPriceCalculation->calculatePricesById(
 				$transports,
@@ -252,6 +254,32 @@ class OrderController extends FrontBaseController {
 			'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
 				$this->domain->getId()
 			),
+		]);
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
+	public function previewAction(Request $request) {
+		$transportId = $request->get('transportId');
+		$paymentId = $request->get('paymentId');
+
+		if ($transportId === null) {
+			$transport = null;
+		} else {
+			$transport = $this->transportEditFacade->getById($transportId);
+		}
+
+		if ($paymentId === null) {
+			$payment = null;
+		} else {
+			$payment = $this->paymentEditFacade->getById($paymentId);
+		}
+
+		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
+
+		return $this->render('@SS6Shop/Front/Content/Order/preview.html.twig', [
+			'orderPreview' => $orderPreview,
 		]);
 	}
 
