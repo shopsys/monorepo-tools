@@ -17,9 +17,10 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture {
 		$bestsellingProductEditFacade = $this->get(BestsellingProductEditFacade::class);
 		/* @var $bestsellingProductEditFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
 
+		$domainId = 2;
 		$bestsellingProductEditFacade->edit(
 			$this->getReference(DemoCategoryDataFixture::PREFIX . DemoCategoryDataFixture::PHOTO),
-			2,
+			$domainId,
 			[$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
 		);
 	}

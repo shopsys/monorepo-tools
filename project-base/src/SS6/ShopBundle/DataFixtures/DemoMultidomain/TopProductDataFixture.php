@@ -20,8 +20,9 @@ class TopProductDataFixture extends AbstractReferenceFixture {
 			DemoProductDataFixture::PRODUCT_PREFIX . '7',
 		];
 
+		$domainId = 2;
 		foreach ($topProductReferenceNamesOnDomain2 as $productReferenceName) {
-			$this->createTopProduct($productReferenceName, 2);
+			$this->createTopProduct($productReferenceName, $domainId);
 		}
 	}
 

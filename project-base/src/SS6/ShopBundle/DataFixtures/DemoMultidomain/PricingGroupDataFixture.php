@@ -16,10 +16,12 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 		$pricingGroupData = new PricingGroupData();
 
 		$pricingGroupData->name = 'Ordinary customer';
-		$this->createPricingGroup($pricingGroupData, 2, self::ORDINARY_DOMAIN_2);
+		$domainId = 2;
+		$this->createPricingGroup($pricingGroupData, $domainId, self::ORDINARY_DOMAIN_2);
 
 		$pricingGroupData->name = 'VIP customer';
-		$this->createPricingGroup($pricingGroupData, 2, self::VIP_DOMAIN_2);
+		$domainId1 = 2;
+		$this->createPricingGroup($pricingGroupData, $domainId1, self::VIP_DOMAIN_2);
 	}
 
 	/**
