@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Form\Admin\Mail;
 
 use SS6\ShopBundle\Component\Constraints\Contains;
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\ValidationGroup;
@@ -39,7 +40,7 @@ class MailTemplateFormType extends AbstractType {
 			->add('bccEmail', FormType::EMAIL, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Email(),
+					new Email(),
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])

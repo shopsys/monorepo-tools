@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Admin\Order;
 
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
 use SS6\ShopBundle\Form\Admin\Order\OrderTransportFormType;
 use SS6\ShopBundle\Form\FormType;
@@ -88,7 +89,7 @@ class OrderFormType extends AbstractType {
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Email(['message' => 'Vyplňte prosím platný e-mail']),
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])

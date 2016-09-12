@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Newsletter;
 
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\Form\AbstractType;
@@ -28,7 +29,7 @@ class SubscriptionFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank(),
-					new Constraints\Email(),
+					new Email(),
 				],
 			])
 			->add('email2', FormType::HONEY_POT)

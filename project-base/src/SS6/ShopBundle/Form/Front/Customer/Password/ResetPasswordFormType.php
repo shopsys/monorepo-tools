@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Customer\Password;
 
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,7 @@ class ResetPasswordFormType extends AbstractType {
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Email(['message' => 'Vyplňte prosím platný e-mail']),
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
 				],
 			])

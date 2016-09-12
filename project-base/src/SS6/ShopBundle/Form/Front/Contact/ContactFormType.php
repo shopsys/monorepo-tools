@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Contact;
 
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use SS6\ShopBundle\Model\ContactForm\ContactFormData;
@@ -40,7 +41,7 @@ class ContactFormType extends AbstractType {
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Constraints\Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Email(['message' => 'Vyplňte prosím platný e-mail']),
 				],
 			])
 			->add('email2', FormType::HONEY_POT)

@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Form\Front\Login;
 
+use SS6\ShopBundle\Component\Constraints\Email;
 use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +20,7 @@ class LoginFormType extends AbstractType {
 			->add('email', FormType::TEXT, [
 					'constraints' => [
 						new Constraints\NotBlank(['message' => 'Vyplňte prosím email']),
-						new Constraints\Email(),
+						new Email(),
 					],
 				]
 			)
