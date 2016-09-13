@@ -13,7 +13,7 @@ use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const PAYMENT_CARD = 'payment_card';
-	const PAYMENT_COD = 'payment_cod';
+	const PAYMENT_CASH_ON_DELIVERY = 'payment_cash_on_delivery';
 	const PAYMENT_CASH = 'payment_cash';
 
 	/**
@@ -59,7 +59,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		$paymentEditData->paymentData->description = [];
 		$paymentEditData->paymentData->instructions = [];
 		$paymentEditData->paymentData->vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		$this->createPayment(self::PAYMENT_COD, $paymentEditData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
+		$this->createPayment(self::PAYMENT_CASH_ON_DELIVERY, $paymentEditData, [TransportDataFixture::TRANSPORT_CZECH_POST]);
 
 		$paymentEditData->paymentData->name = [
 			'cs' => 'Hotově',

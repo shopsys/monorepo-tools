@@ -300,7 +300,7 @@ class OrderDataFixture {
 	private function getRandomPayment() {
 		$randomPaymentReferenceName = $this->faker->randomElement([
 			PaymentDataFixture::PAYMENT_CARD,
-			PaymentDataFixture::PAYMENT_COD,
+			PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY,
 			PaymentDataFixture::PAYMENT_CASH,
 		]);
 
