@@ -5,10 +5,8 @@
 
 {% block main_content %}
 	{{ form_start(form) }}
-		<div class="wrap-group">
-			{{ form_row(form.mainVariant, { label: 'Hlavní zboží'|trans }) }}
-			{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
-			{{ form_row(form.save, { label: 'Vytvořit'|trans }) }}
-		</div>
+		{{ form_row(form.mainVariant, { label: 'Hlavní zboží'|trans }) }}
+		{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
+		{{ form_row(form.save, { label: 'Vytvořit'|trans }) }}
 	{{ form_end(form) }}
 {% endblock %}

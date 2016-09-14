@@ -8,11 +8,9 @@
 
 	{% if form is not null %}
 		{{ form_start(form) }}
-			<div class="wrap-group">
-				{{ form_row(form.heurekaApiKey, {label: 'Kód služby Ověřeno zákazníky'|trans, icon: {
-					title: 'Zadejte 32-místný kód, který bude odeslán na server %serverName%'|trans ({'%serverName%': serverName}) } }) }}
-				{{ form_row(form.heurekaWidgetCode, {label: 'Kód Heureka Widgetu'|trans, attr: {class: 'heureka-widget-input'} }) }}
-			</div>
+			{{ form_row(form.heurekaApiKey, {label: 'Kód služby Ověřeno zákazníky'|trans, icon: {
+				title: 'Zadejte 32-místný kód, který bude odeslán na server %serverName%'|trans ({'%serverName%': serverName}) } }) }}
+			{{ form_row(form.heurekaWidgetCode, {label: 'Kód Heureka Widgetu'|trans, attr: {class: 'heureka-widget-input'} }) }}
 
 
 			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}

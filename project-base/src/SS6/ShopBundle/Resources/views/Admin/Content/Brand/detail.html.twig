@@ -7,7 +7,7 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		<div class="wrap-group wrap-border">
+		<div class="wrap-border">
 			{{ form_id(brand|default(null)) }}
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
 			{{ form_row(form.descriptions, { label: 'Popis'|trans}) }}
