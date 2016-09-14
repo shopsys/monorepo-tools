@@ -1,3 +1,4 @@
+// base message settings and elements
 .in-message {
 	display: inline-block;
 	padding: 6px 9px;
@@ -10,7 +11,7 @@
 	&__icon {
 		margin-right: 2px;
 		position: relative;
-		top: -2px;
+		top: -1px;
 	}
 
 	&__close {
@@ -27,28 +28,39 @@
 		font-size: 14px;
 		text-align: center;
 		text-decoration: none;
-
-		.in-message--block & {
-			top: 2px;
-		}
 	}
 
 	&__list {
 		.reset-ul();
 	}
+}
 
-	&--block {
-		display: block;
-		margin-bottom: 10px;
-		position: relative;
-	}
-
+// Modifications - types
+.in-message {
 	&--small {
 		padding: 3px 6px;
 
 		font-size: 12px;
 	}
 
+	&--block {
+		display: block;
+		margin-bottom: 10px;
+		padding-right: 20px;
+		position: relative;
+
+		.in-message__close {
+			top: 0;
+		}
+
+		&.in-message--small .in-message__close {
+			top: -4px;
+		}
+	}
+}
+
+// Modifications - colors
+.in-message {
 	&--error {
 		color: @color-message-alert-text;
 		background: @color-message-alert;
@@ -72,7 +84,11 @@
 	&--danger {
 		color: @color-message-alert-text;
 	}
+}
 
+
+// Modifications - special type - pinned
+.in-message {
 	&--pin {
 		position: absolute;
 		top: 100%;
