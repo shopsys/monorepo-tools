@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
@@ -20,18 +21,12 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 
 		$bestsellingProductEditFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
-			1,
+			Domain::FIRST_DOMAIN_ID,
 			[
-				0 => $this->getReference('product_7'),
-				2 => $this->getReference('product_8'),
-				8 => $this->getReference('product_5'),
+				0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
+				2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
+				8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
 			]
-		);
-
-		$bestsellingProductEditFacade->edit(
-			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
-			2,
-			[$this->getReference('product_7')]
 		);
 	}
 

@@ -377,9 +377,9 @@ class ProductEditFacade {
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
 	private function createProductVisibilities(Product $product) {
+		$toFlush = [];
 		foreach ($this->domain->getAll() as $domainConfig) {
 			$domainId = $domainConfig->getId();
-			$toFlush = [];
 			foreach ($this->pricingGroupRepository->getPricingGroupsByDomainId($domainId) as $pricingGroup) {
 				$productVisibility = new ProductVisibility($product, $pricingGroup, $domainId);
 				$this->em->persist($productVisibility);
@@ -406,6 +406,14 @@ class ProductEditFacade {
 			$toFlush[] = $newProductAccessory;
 		}
 		$this->em->flush($toFlush);
+	}
+
+	/**
+	 * @param string $productCatnum
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getOneByCatnumExcludeMainVariants($productCatnum) {
+		return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
 	}
 
 }

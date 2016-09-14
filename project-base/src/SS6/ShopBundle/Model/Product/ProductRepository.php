@@ -733,4 +733,25 @@ class ProductRepository {
 		return $queryBuilder->getQuery()->execute();
 	}
 
+	/**
+	 * @param string $productCatnum
+	 * @return \SS6\ShopBundle\Model\Product\Product
+	 */
+	public function getOneByCatnumExcludeMainVariants($productCatnum) {
+		$queryBuilder = $this->getProductRepository()->createQueryBuilder('p')
+			->andWhere('p.catnum = :catnum')
+			->andWhere('p.variantType != :variantTypeMain')
+			->setParameter('catnum', $productCatnum)
+			->setParameter('variantTypeMain', Product::VARIANT_TYPE_MAIN);
+		$product = $queryBuilder->getQuery()->getOneOrNullResult();
+
+		if ($product === null) {
+			throw new \SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException(
+				'Product with catnum ' . $productCatnum . ' does not exist.'
+			);
+		}
+
+		return $product;
+	}
+
 }

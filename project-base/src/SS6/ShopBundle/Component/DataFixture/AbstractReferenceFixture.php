@@ -2,12 +2,12 @@
 
 namespace SS6\ShopBundle\Component\DataFixture;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractReferenceFixture extends AbstractFixture implements ContainerAwareInterface {
+abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAwareInterface {
 
 	/**
 	 * @var \Symfony\Component\DependencyInjection\ContainerInterface
@@ -20,7 +20,6 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	private $persistentReferenceFacade;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 */
 	public function setContainer(ContainerInterface $container = null) {
@@ -42,8 +41,6 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	 * @param bool $persistent
 	 */
 	public function addReference($name, $object, $persistent = true) {
-		parent::addReference($name, $object);
-
 		if ($persistent) {
 			$this->persistentReferenceFacade->persistReference($name, $object);
 		}
@@ -55,11 +52,17 @@ abstract class AbstractReferenceFixture extends AbstractFixture implements Conta
 	 * @param bool $persistent
 	 */
 	public function setReference($name, $object, $persistent = true) {
-		parent::setReference($name, $object);
-
 		if ($persistent) {
 			$this->persistentReferenceFacade->persistReference($name, $object);
 		}
+	}
+
+	/**
+	 * @param string $name
+	 * @return object
+	 */
+	public function getReference($name) {
+		return $this->persistentReferenceFacade->getReference($name);
 	}
 
 }

@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Tests\Database\Model\Pricing\Group;
 use ReflectionClass;
 use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\UserDataFixture;
 use SS6\ShopBundle\Model\Customer\CustomerData;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 use SS6\ShopBundle\Model\Customer\UserData;
@@ -29,7 +28,8 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
 		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
 		$pricingGroupData = new PricingGroupData('pricing_group_name', 1);
-		$pricingGroup = $pricingGroupFacade->create($pricingGroupData);
+		$domainId = 1;
+		$pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
 		$productPriceRecalculator->runAllScheduledRecalculations();
 		$productCalculatedPrice = $em->getRepository(ProductCalculatedPrice::class)->findOneBy([
 			'product' => $product,
@@ -81,10 +81,11 @@ class PricingGroupFacadeTest extends DatabaseTestCase {
 		$customerFacade = $this->getContainer()->get(CustomerFacade::class);
 		/* @var $customerFacade \SS6\ShopBundle\Model\Customer\CustomerFacade */
 
-		$pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'));
+		$domainId = 1;
+		$pricingGroupToDelete = $pricingGroupFacade->create(new PricingGroupData('name'), $domainId);
 		$pricingGroupToReplaceWith = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
 		/* @var $pricingGroup \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
-		$user = $this->getReference(UserDataFixture::USER_PREFIX . '1');
+		$user = $customerFacade->getUserById(1);
 		/* @var $user \SS6\ShopBundle\Model\Customer\User */
 		$userData = new UserData();
 		$userData->setFromEntity($user);

@@ -1,14 +1,14 @@
 firstName;lastName;email;password;company;companyName;companyNumber;companyTaxNumber;street;city;postcode;telephone;country;deliveryAddressFilled;dCity;dCompanyName;dContactPerson;dPostcode;dStreet;dTelephone;dCountry;domainId
 Jaromír;Jágr;no-reply@netdevelo.cz;user123;true;Netdevelo;123456;;Hlubinská;Ostrava;70200;605000123;Èeská republika;false;;;;;;;;1
-Jana;Anovèínová;no-reply.2@netdevelo.cz;no-reply.2;false;;;;;Až;;;Èeská republika;false;;;;;;;;2
+Jana;Anovèínová;no-reply.2@netdevelo.cz;no-reply.2;false;;;;;Až;;;Czech republic;false;;;;;;;;2
 Igor;Anpilogov;no-reply.3@netdevelo.cz;no-reply.3;false;;;;;Budišov nad Budišovkou;;;Èeská republika;false;;;;;;;;1
-Ida;Anpilogova;no-reply.4@netdevelo.cz;no-reply.4;false;;;;;Praha;;;Èeská republika;false;;;;;;;;2
+Ida;Anpilogova;no-reply.4@netdevelo.cz;no-reply.4;false;;;;;Praha;;;Czech republic;false;;;;;;;;2
 Hana;Anrejsová;no-reply.5@netdevelo.cz;no-reply.5;false;;;;;Brno;;;Èeská republika;false;;;;;;;;1
-Petr;Anrig;no-reply.6@netdevelo.cz;no-reply.6;false;;;;;Jeseník;;;Èeská republika;true;Opava;;;70000;Ostravská;;Èeská republika;2
-Silva;Anrigová;no-reply.7@netdevelo.cz;no-reply.7;false;;;;;Ostrava;;;Èeská republika;false;;;;;;;;2
-Derick;Ansah;no-reply.8@netdevelo.cz;no-reply.8;false;;;;;Opava;;;Èeská republika;false;;;;;;;;2
+Petr;Anrig;no-reply.6@netdevelo.cz;no-reply.6;false;;;;;Jeseník;;;Czech republic;true;Opava;;;70000;Ostravská;;Czech republic;2
+Silva;Anrigová;no-reply.7@netdevelo.cz;no-reply.7;false;;;;;Ostrava;;;Czech republic;false;;;;;;;;2
+Derick;Ansah;no-reply.8@netdevelo.cz;no-reply.8;false;;;;;Opava;;;Czech republic;false;;;;;;;;2
 Alexandr;Ton;no-reply.9@netdevelo.cz;no-reply.9;false;;;;Na Strzi 3;Bohumín;69084;;Èeská republika;false;;;;;;;;1
 Pavel;Nedvìd;no-reply.10@netdevelo.cz;no-reply.10;false;;;;Turínská 5;Turín;12345;606060606;Èeská republika;true;Bahamy;;;99999;Bahamská 99;;Èeská republika;1
 Rostislav;Vítek;vitek@netdevelo.cz;user123;true;Netdevelo;123456;123456;Hlubinská;Ostrava;70200;605000123;Èeská republika;true;Ostrava;Rockpoint;Wallicová;70030;Rudná;123456789;Èeská republika;1
-Johny;English;no-reply@netdevelo.cz;user123;true;Netdevelo;123456;;Hlubinská;Ostrava;70200;603123456;Èeská republika;false;London;;;;;;;2
-¼ubomír;Novák;No-reply.11@netdevelo.cz;test123;false;;;;Brnìnská;Bratislava;01010;;Slovenská republika;true;Bratislava;;;10100;Ostravská 55/65A;758686320;Slovenská republika;1
+Johny;English;no-reply@netdevelo.cz;user123;true;Netdevelo;123456;;Hlubinská;Ostrava;70200;603123456;Czech republic;false;London;;;;;;;2
+¼ubomír;Novák;No-reply.11@netdevelo.cz;test123;false;;;;Brnìnská;Bratislava;1010;;Slovenská republika;true;Bratislava;;;10100;Ostravská 55/65A;758686320;Slovenská republika;1

@@ -36,12 +36,15 @@ class DomainDbFunctionsFacade {
 
 		$domainIdsByLocaleSqlClauses = [];
 		foreach ($domainsIdsByLocale as $locale => $domainIds) {
-			$domainIdsByLocaleSqlClauses[] =
-				'WHEN locale = \'' . $locale . '\' THEN RETURN QUERY VALUES (' . implode(', ', $domainIds) . ');';
+			$sql = 'WHEN locale = \'' . $locale . '\' THEN ';
+			foreach ($domainIds as $domainId) {
+				$sql .= ' RETURN NEXT ' . $domainId . ';';
+			}
+			$domainIdsByLocaleSqlClauses[] = $sql;
 		}
 
 		$query = $this->em->createNativeQuery('
-			CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS TABLE(domain_id integer)  AS $$
+			CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
 			BEGIN
 				CASE
 					' . implode("\n", $domainIdsByLocaleSqlClauses) . '

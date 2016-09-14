@@ -84,18 +84,20 @@ class ProductEditDataFactory {
 		$productParameterValuesData = [];
 		$productEditData->parameters = $productParameterValuesData;
 
+		$nullForAllDomains = $this->getNullForAllDomains();
+
 		$productEditData->manualInputPrices = [];
-		$productEditData->seoTitles = [];
-		$productEditData->seoMetaDescriptions = [];
-		$productEditData->descriptions = [];
-		$productEditData->shortDescriptions = [];
+		$productEditData->seoTitles = $nullForAllDomains;
+		$productEditData->seoMetaDescriptions = $nullForAllDomains;
+		$productEditData->descriptions = $nullForAllDomains;
+		$productEditData->shortDescriptions = $nullForAllDomains;
 		$productEditData->accessories = [];
-		$productEditData->heurekaCpcValues = [];
+		$productEditData->heurekaCpcValues = $nullForAllDomains;
 		foreach ($this->domain->getAllIds() as $domainId) {
 			$productEditData->showInZboziFeed[$domainId] = true;
 		}
-		$productEditData->zboziCpcValues = [];
-		$productEditData->zboziCpcSearchValues = [];
+		$productEditData->zboziCpcValues = $nullForAllDomains;
+		$productEditData->zboziCpcSearchValues = $nullForAllDomains;
 
 		return $productEditData;
 	}
@@ -173,6 +175,18 @@ class ProductEditDataFactory {
 			$productEditData->zboziCpcValues[$domainId] = $productDomain->getZboziCpc();
 			$productEditData->zboziCpcSearchValues[$domainId] = $productDomain->getZboziCpcSearch();
 		}
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getNullForAllDomains() {
+		$nullForAllDomains = [];
+		foreach ($this->domain->getAll() as $domainConfig) {
+			$nullForAllDomains[$domainConfig->getId()] = null;
+		}
+
+		return $nullForAllDomains;
 	}
 
 }

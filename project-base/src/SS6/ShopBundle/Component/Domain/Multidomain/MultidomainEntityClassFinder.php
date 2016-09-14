@@ -9,14 +9,23 @@ class MultidomainEntityClassFinder {
 	/**
 	 * @param \Doctrine\ORM\Mapping\ClassMetadata[] $allClassesMetadata
 	 * @param string[] $ignoredEntitiesNames
+	 * @param string[] $manualMultidomainEntitiesNames
 	 * @return string[]
 	 */
-	public function getMultidomainEntitiesNames(array $allClassesMetadata, array $ignoredEntitiesNames) {
+	public function getMultidomainEntitiesNames(
+		array $allClassesMetadata,
+		array $ignoredEntitiesNames,
+		array $manualMultidomainEntitiesNames
+	) {
 		$multidomainEntitiesNames = [];
 		foreach ($allClassesMetadata as $classMetadata) {
 			$entityName = $classMetadata->getName();
 			$isEntityIgnored = in_array($entityName, $ignoredEntitiesNames, true);
-			if (!$isEntityIgnored && $this->isMultidomainEntity($classMetadata)) {
+			$isManualMultidomainEntity = in_array($entityName, $manualMultidomainEntitiesNames, true);
+			if (
+				$isManualMultidomainEntity
+				|| !$isEntityIgnored && $this->isMultidomainEntity($classMetadata)
+			) {
 				$multidomainEntitiesNames[] = $classMetadata->getName();
 			}
 		}

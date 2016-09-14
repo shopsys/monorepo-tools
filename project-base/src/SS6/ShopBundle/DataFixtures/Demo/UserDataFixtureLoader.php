@@ -74,22 +74,46 @@ class UserDataFixtureLoader {
 	}
 
 	/**
+	 * @param int $domainId
 	 * @return  \SS6\ShopBundle\Model\Customer\CustomerData[]
 	 */
-	public function getCustomersData() {
+	public function getCustomersDataByDomainId($domainId) {
 		$rows = $this->csvReader->getRowsFromCsv($this->path);
+		$filteredRows = $this->filterRowsByDomainId($rows, $domainId);
 
-		$rowId = 0;
 		$customersData = [];
-		foreach ($rows as $row) {
-			if ($rowId !== 0) {
-				$row = array_map([TransformString::class, 'emptyToNull'], $row);
-				$row = EncodingConverter::cp1250ToUtf8($row);
-				$customersData[] = $this->getCustomerDataFromCsvRow($row);
-			}
-			$rowId++;
+		foreach ($filteredRows as $row) {
+			$row = array_map([TransformString::class, 'emptyToNull'], $row);
+			$row = EncodingConverter::cp1250ToUtf8($row);
+			$customersData[] = $this->getCustomerDataFromCsvRow($row);
 		}
 		return $customersData;
+	}
+
+	/**
+	 * @param array $rows
+	 * @param int $domainId
+	 * @return array
+	 */
+	private function filterRowsByDomainId(array $rows, $domainId) {
+		$filteredRows = [];
+		$rowId = 0;
+		foreach ($rows as $row) {
+			$rowId++;
+			if ($rowId === 1) {
+				// skip header
+				continue;
+			}
+
+			if ((int)$row[self::COLUMN_DOMAIN_ID] !== $domainId) {
+				// filter by domain ID
+				continue;
+			}
+
+			$filteredRows[] = $row;
+		}
+
+		return $filteredRows;
 	}
 
 	/**
@@ -98,7 +122,7 @@ class UserDataFixtureLoader {
 	 */
 	private function getCustomerDataFromCsvRow(array $row) {
 		$customerData = new CustomerData();
-		$domainId = $row[self::COLUMN_DOMAIN_ID];
+		$domainId = (int)$row[self::COLUMN_DOMAIN_ID];
 		$userData = $this->userDataFactory->createDefault($domainId);
 		$billingAddressData = new BillingAddressData();
 
