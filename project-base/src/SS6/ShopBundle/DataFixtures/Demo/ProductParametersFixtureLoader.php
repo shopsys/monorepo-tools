@@ -57,6 +57,10 @@ class ProductParametersFixtureLoader {
 		return $productParameterValuesDataCollection->toArray();
 	}
 
+	public function clearCache() {
+		$this->parameters = [];
+	}
+
 	/**
 	 * @param \Doctrine\Common\Collections\ArrayCollection $productParameterValuesDataCollection
 	 * @param int $domainId

@@ -98,7 +98,7 @@ class ProductDataFixtureLoader {
 	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
-	public function injectReferences(
+	public function refreshCachedEntities(
 		array $vats,
 		array $availabilities,
 		array $categories,
@@ -114,6 +114,7 @@ class ProductDataFixtureLoader {
 		$this->brands = $brands;
 		$this->units = $units;
 		$this->pricingGroups = $pricingGroups;
+		$this->productParametersFixtureLoader->clearCache();
 	}
 
 	/**

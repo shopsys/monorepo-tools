@@ -39,7 +39,7 @@ class ProductDataFixtureReferenceInjector {
 			$pricingGroups = $this->getPricingGroupReferences($persistentReferenceFacade);
 		}
 
-		$productDataFixtureLoader->injectReferences(
+		$productDataFixtureLoader->refreshCachedEntities(
 			$vats,
 			$availabilities,
 			$categories,
