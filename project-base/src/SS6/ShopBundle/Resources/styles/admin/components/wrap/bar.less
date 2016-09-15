@@ -1,6 +1,9 @@
+@wrap-bar-margin-bottom: @item-gap;
+@wrap-bar-btn-gap: 10px;
+
 .wrap-bar {
-	padding: 15px 0 25px;
-	margin-bottom: 25px;
+	padding: 15px 0 @wrap-bar-margin-bottom;
+	margin-bottom: @wrap-bar-margin-bottom;
 	.clearfix();
 
 	border-bottom: 1px solid @color-border-dark;
@@ -12,6 +15,6 @@
 
 	&__btn {
 		float: right;
-		margin-left: 10px;
+		margin-left: @wrap-bar-btn-gap;
 	}
 }
