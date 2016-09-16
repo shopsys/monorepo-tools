@@ -9,7 +9,7 @@ use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
@@ -54,7 +54,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				ProductDataFixture::PRODUCT_PREFIX . '14' => 1,
+				DemoProductDataFixture::PRODUCT_PREFIX . '14' => 1,
 			]
 		);
 
@@ -88,8 +88,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				ProductDataFixture::PRODUCT_PREFIX . '1' => 2,
-				ProductDataFixture::PRODUCT_PREFIX . '3' => 1,
+				DemoProductDataFixture::PRODUCT_PREFIX . '1' => 2,
+				DemoProductDataFixture::PRODUCT_PREFIX . '3' => 1,
 			],
 			$user
 		);
@@ -113,8 +113,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				ProductDataFixture::PRODUCT_PREFIX . '2' => 2,
-				ProductDataFixture::PRODUCT_PREFIX . '4' => 4,
+				DemoProductDataFixture::PRODUCT_PREFIX . '2' => 2,
+				DemoProductDataFixture::PRODUCT_PREFIX . '4' => 4,
 			],
 			$user
 		);
@@ -137,7 +137,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$this->createOrder(
 			$orderData,
 			[
-				ProductDataFixture::PRODUCT_PREFIX . '3' => 10,
+				DemoProductDataFixture::PRODUCT_PREFIX . '3' => 10,
 			]
 		);
 	}
