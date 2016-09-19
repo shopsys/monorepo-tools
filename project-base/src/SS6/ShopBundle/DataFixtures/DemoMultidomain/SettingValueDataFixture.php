@@ -55,7 +55,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 			2
 		);
 		$setting->setForDomain(SeoSettingFacade::SEO_TITLE_MAIN_PAGE, 'ShopSys 6 - Title page', 2);
-		$setting->setForDomain(SeoSettingFacade::SEO_TITLE_ADD_ON, ' | Demo eshop', 2);
+		$setting->setForDomain(SeoSettingFacade::SEO_TITLE_ADD_ON, '| Demo eshop', 2);
 	}
 
 	/**
