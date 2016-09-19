@@ -100,8 +100,8 @@ class OrderRepository {
 			FROM ' . Order::class . ' o
 			WHERE o.status = :status')
 			->setParameter('status', $orderStatus->getId());
-		$result = $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
-		return $result;
+
+		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
 	}
 
 	/**
@@ -146,8 +146,8 @@ class OrderRepository {
 						NORMALIZE(u.email) LIKE NORMALIZE(:text)
 					)'
 				);
-			$querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
-			$queryBuilder->setParameter('text', $querySerachText);
+			$querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
+			$queryBuilder->setParameter('text', $querySearchText);
 		}
 
 		return $queryBuilder;
@@ -202,7 +202,7 @@ class OrderRepository {
 			->getQuery()->getOneOrNullResult();
 
 		if ($order === null) {
-			$message = 'Order with number ' . $orderNumber . ' and urerId ' . $user->getId() . ' not found.';
+			$message = 'Order with number "' . $orderNumber . '" and userId "' . $user->getId() . '" not found.';
 			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException($message);
 		}
 
@@ -228,4 +228,5 @@ class OrderRepository {
 			->groupBy('c')
 			->getQuery()->execute();
 	}
+
 }
