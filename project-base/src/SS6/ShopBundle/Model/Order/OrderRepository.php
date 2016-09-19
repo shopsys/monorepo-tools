@@ -34,13 +34,23 @@ class OrderRepository {
 	}
 
 	/**
+	 * @return \Doctrine\ORM\QueryBuilder
+	 */
+	private function createOrderQueryBuilder() {
+		return $this->em->createQueryBuilder()
+			->select('o')
+			->from(Order::class, 'o')
+			->where('o.deleted = FALSE');
+	}
+
+	/**
 	 * @param int $userId
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function getOrdersByUserId($userId) {
-		return $this->getOrderRepository()->findBy([
-			'customer' => $userId,
-		]);
+		return $this->createOrderQueryBuilder()
+			->andWhere('o.customer = :customer')->setParameter(':customer', $userId)
+			->getQuery()->getResult();
 	}
 
 	/**
@@ -48,14 +58,11 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order|null
 	 */
 	public function findLastByUserId($userId) {
-		return $this->getOrderRepository()->findOneBy(
-			[
-				'customer' => $userId,
-			],
-			[
-				'createdAt' => 'DESC',
-			]
-		);
+		return $this->createOrderQueryBuilder()
+			->andWhere('o.customer = :customer')->setParameter(':customer', $userId)
+			->orderBy('o.createdAt', 'DESC')
+			->setMaxResults(1)
+			->getQuery()->getOneOrNullResult();
 	}
 
 	/**
@@ -63,7 +70,10 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order|null
 	 */
 	public function findById($id) {
-		return $this->getOrderRepository()->find($id);
+		return $this->createOrderQueryBuilder()
+			->andWhere('o.id = :orderId')->setParameter(':orderId', $id)
+			->setMaxResults(1)
+			->getQuery()->getOneOrNullResult();
 	}
 
 	/**
@@ -103,7 +113,7 @@ class OrderRepository {
 		$locale,
 		QuickSearchFormData $quickSearchData
 	) {
-		$queryBuilder = $this->em->createQueryBuilder()
+		$queryBuilder = $this->createOrderQueryBuilder()
 			->select('
 				o.id,
 				o.number,
@@ -115,12 +125,9 @@ class OrderRepository {
 							THEN o.companyName
 							ELSE CONCAT(o.lastName, \' \', o.firstName)
 						END) AS customerName')
-			->from(Order::class, 'o')
-			->where('o.deleted = :deleted')
 			->join('o.status', 'os')
 			->join('os.translations', 'ost', Join::WITH, 'ost.locale = :locale')
 			->groupBy('o.id')
-			->setParameter('deleted', false)
 			->setParameter('locale', $locale);
 
 		if ($quickSearchData->text !== null && $quickSearchData->text !== '') {
@@ -151,17 +158,15 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order[]
 	 */
 	public function getCustomerOrderList(User $user) {
-		return $this->em->createQueryBuilder()
+		return $this->createOrderQueryBuilder()
 			->select('o, oi, os, ost, c')
-			->from(Order::class, 'o')
 			->join('o.items', 'oi')
 			->join('o.status', 'os')
 			->join('os.translations', 'ost')
 			->join('o.currency', 'c')
-			->where('o.customer = :customer AND o.deleted = :deleted')
+			->andWhere('o.customer = :customer')
 			->orderBy('o.createdAt', 'DESC')
 			->setParameter('customer', $user)
-			->setParameter('deleted', false)
 			->getQuery()->execute();
 	}
 
@@ -171,10 +176,11 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function getByUrlHashAndDomain($urlHash, $domainId) {
-		$order = $this->getOrderRepository()->findOneBy([
-			'urlHash' => $urlHash,
-			'domainId' => $domainId,
-		]);
+		$order = $this->createOrderQueryBuilder()
+			->andWhere('o.urlHash = :urlHash')->setParameter(':urlHash', $urlHash)
+			->andWhere('o.domainId = :domainId')->setParameter(':domainId', $domainId)
+			->setMaxResults(1)
+			->getQuery()->getOneOrNullResult();
 
 		if ($order === null) {
 			throw new \SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException();
@@ -189,8 +195,11 @@ class OrderRepository {
 	 * @return \SS6\ShopBundle\Model\Order\Order
 	 */
 	public function getByOrderNumberAndUser($orderNumber, User $user) {
-		$criteria = ['number' => $orderNumber, 'customer' => $user];
-		$order = $this->getOrderRepository()->findOneBy($criteria);
+		$order = $this->createOrderQueryBuilder()
+			->andWhere('o.number = :number')->setParameter(':number', $orderNumber)
+			->andWhere('o.customer = :customer')->setParameter(':customer', $user)
+			->setMaxResults(1)
+			->getQuery()->getOneOrNullResult();
 
 		if ($order === null) {
 			$message = 'Order with number ' . $orderNumber . ' and urerId ' . $user->getId() . ' not found.';
@@ -204,7 +213,7 @@ class OrderRepository {
 	 * @param string $urlHash
 	 * @return \SS6\ShopBundle\Model\Order\Order|null
 	 */
-	public function findByUrlHash($urlHash) {
+	public function findByUrlHashIncludingDeletedOrders($urlHash) {
 		return $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
 	}
 

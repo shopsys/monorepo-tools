@@ -35,7 +35,7 @@ class OrderHashGeneratorRepository {
 		$triesCount = 0;
 		do {
 			$hash = $this->hashGenerator->generateHash(self::HASH_LENGTH);
-			$order = $this->orderRepository->findByUrlHash($hash);
+			$order = $this->orderRepository->findByUrlHashIncludingDeletedOrders($hash);
 			$triesCount++;
 			if ($triesCount > self::MAX_GENERATE_TRIES) {
 				throw new \SS6\ShopBundle\Model\Order\Exception\OrderHashGenerateException('Trying generate hash reached the limit.');
