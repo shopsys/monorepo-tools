@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Tests\Test;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
 abstract class DatabaseTestCase extends FunctionalTestCase {
+
 	/**
 	 * @return \Doctrine\ORM\EntityManager
 	 */
