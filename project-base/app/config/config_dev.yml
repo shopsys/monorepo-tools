@@ -19,9 +19,6 @@ monolog:
     # configuration is merged (not overriden) so "nested" handler must be disabled explicitly
     nested:
       type: "null"
-    console:
-      type: console
-      bubble: false
 #    doctrine:
 #      action_level: debug
 #      type:  stream
