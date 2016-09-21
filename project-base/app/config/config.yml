@@ -101,7 +101,7 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
     cron_console:
-      type:   console
+      type: console
       verbosity_levels:
         VERBOSITY_NORMAL: INFO
         VERBOSITY_VERBOSE: DEBUG
