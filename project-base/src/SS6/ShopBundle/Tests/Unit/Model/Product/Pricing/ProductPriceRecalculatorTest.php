@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Price;
@@ -26,6 +27,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productServiceMock = $this->getMock(ProductService::class, null, [], '', false);
 
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
+		$entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
 		$productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, ['calculatePrice'], [], '', false);
 		$productPrice = new ProductPrice(new Price(0, 0), false);
 		$productPriceCalculationMock->expects($this->once())->method('calculatePrice')->willReturn($productPrice);
@@ -43,6 +45,7 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 		$productPriceRecalculator = new ProductPriceRecalculator(
 			$emMock,
+			$entityManagerFacadeMock,
 			$productPriceCalculationMock,
 			$productCalculatedPriceRepositoryMock,
 			$productPriceRecalculationSchedulerMock,

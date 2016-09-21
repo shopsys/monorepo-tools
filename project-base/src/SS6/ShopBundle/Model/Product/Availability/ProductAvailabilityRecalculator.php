@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
@@ -16,6 +17,11 @@ class ProductAvailabilityRecalculator {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 */
+	private $entityManagerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
@@ -34,10 +40,12 @@ class ProductAvailabilityRecalculator {
 
 	public function __construct(
 		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		ProductAvailabilityRecalculationScheduler $productAvailabilityRecalculationScheduler,
 		ProductAvailabilityCalculation $productAvailabilityCalculation
 	) {
 		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->productAvailabilityRecalculationScheduler = $productAvailabilityRecalculationScheduler;
 		$this->productAvailabilityCalculation = $productAvailabilityCalculation;
 	}
@@ -60,14 +68,14 @@ class ProductAvailabilityRecalculator {
 		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
 			$row = $this->productRowsIterator->next();
 			if ($row === false) {
-				$this->em->clear();
+				$this->entityManagerFacade->clear();
 
 				return false;
 			}
 			$this->recalculateAvailabilityForProduct($row[0]);
 		}
 
-		$this->em->clear();
+		$this->entityManagerFacade->clear();
 
 		return true;
 	}

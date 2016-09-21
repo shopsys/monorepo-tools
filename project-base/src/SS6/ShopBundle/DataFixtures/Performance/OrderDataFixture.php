@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\Console\ProgressBar;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
@@ -48,6 +49,11 @@ class OrderDataFixture {
 	private $em;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 */
+	private $entityManagerFacade;
+
+	/**
 	 * @var \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade
 	 */
 	private $sqlLoggerFacade;
@@ -84,6 +90,7 @@ class OrderDataFixture {
 
 	public function __construct(
 		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		SqlLoggerFacade $sqlLoggerFacade,
 		Faker $faker,
 		PersistentReferenceFacade $persistentReferenceFacade,
@@ -94,6 +101,7 @@ class OrderDataFixture {
 	) {
 		$this->performanceProductIds = [];
 		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->faker = $faker;
 		$this->persistentReferenceFacade = $persistentReferenceFacade;
@@ -127,7 +135,7 @@ class OrderDataFixture {
 			$progressBar->advance();
 
 			if ($orderIndex % self::BATCH_SIZE === 0) {
-				$this->em->clear();
+				$this->entityManagerFacade->clear();
 			}
 		}
 

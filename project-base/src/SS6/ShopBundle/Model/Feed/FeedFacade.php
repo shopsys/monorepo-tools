@@ -2,10 +2,9 @@
 
 namespace SS6\ShopBundle\Model\Feed;
 
-use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Model\Feed\FeedConfig;
 use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
 use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
@@ -49,14 +48,9 @@ class FeedFacade {
 	private $feedGenerationConfigs;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
-	private $em;
-
-	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
-	 */
-	private $setting;
+	private $entityManagerFacade;
 
 	public function __construct(
 		FeedXmlWriter $feedXmlWriter,
@@ -64,8 +58,7 @@ class FeedFacade {
 		Filesystem $filesystem,
 		FeedConfigFacade $feedConfigFacade,
 		FeedGenerationConfigFactory $feedGenerationConfigFactory,
-		EntityManager $em,
-		Setting $setting
+		EntityManagerFacade $entityManagerFacade
 	) {
 		$this->feedXmlWriter = $feedXmlWriter;
 		$this->domain = $domain;
@@ -73,8 +66,7 @@ class FeedFacade {
 		$this->feedConfigFacade = $feedConfigFacade;
 		$this->feedGenerationConfigFactory = $feedGenerationConfigFactory;
 		$this->feedGenerationConfigs = $this->feedGenerationConfigFactory->createAll();
-		$this->em = $em;
-		$this->setting = $setting;
+		$this->entityManagerFacade = $entityManagerFacade;
 	}
 
 	/**
@@ -168,8 +160,7 @@ class FeedFacade {
 			$temporaryFeedFilepath
 		);
 
-		$this->em->clear();
-		$this->setting->clearCache();
+		$this->entityManagerFacade->clear();
 
 		if (count($items) === self::BATCH_SIZE) {
 			return array_pop($items);

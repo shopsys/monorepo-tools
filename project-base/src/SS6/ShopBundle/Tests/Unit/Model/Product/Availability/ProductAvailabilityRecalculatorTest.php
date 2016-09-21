@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Tests\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
@@ -20,6 +21,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 
 		$emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
+		$entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,
 			['calculateAvailability'],
@@ -42,6 +44,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
 			$emMock,
+			$entityManagerFacadeMock,
 			$productAvailabilityRecalculationSchedulerMock,
 			$productAvailabilityCalculationMock
 		);
@@ -65,6 +68,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 			->method('setCalculatedAvailability');
 
 		$emMock = $this->getMock(EntityManager::class, ['flush'], [], '', false);
+		$entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
 			['getProductsForImmediatelyRecalculation'],
@@ -90,6 +94,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 
 		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
 			$emMock,
+			$entityManagerFacadeMock,
 			$productAvailabilityRecalculationSchedulerMock,
 			$productAvailabilityCalculationMock
 		);

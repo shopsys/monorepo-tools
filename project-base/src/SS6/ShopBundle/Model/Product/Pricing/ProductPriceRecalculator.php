@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
@@ -14,10 +15,16 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 class ProductPriceRecalculator {
 
 	const BATCH_SIZE = 100;
+
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 */
+	private $entityManagerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
@@ -56,6 +63,7 @@ class ProductPriceRecalculator {
 
 	public function __construct(
 		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		ProductPriceCalculation $productPriceCalculation,
 		ProductCalculatedPriceRepository $productCalculatedPriceRepository,
 		ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
@@ -63,6 +71,7 @@ class ProductPriceRecalculator {
 		ProductService $productService
 	) {
 		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->productPriceCalculation = $productPriceCalculation;
 		$this->productCalculatedPriceRepository = $productCalculatedPriceRepository;
 		$this->productPriceRecalculationScheduler = $productPriceRecalculationScheduler;
@@ -82,14 +91,14 @@ class ProductPriceRecalculator {
 			$row = $this->productRowsIterator->next();
 			if ($row === false) {
 				$this->clearCache();
-				$this->em->clear();
+				$this->entityManagerFacade->clear();
 
 				return false;
 			}
 			$this->recalculateProductPrices($row[0]);
 		}
 		$this->clearCache();
-		$this->em->clear();
+		$this->entityManagerFacade->clear();
 
 		return true;
 	}

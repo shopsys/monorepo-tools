@@ -7,6 +7,7 @@ use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\Console\ProgressBar;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
@@ -32,6 +33,11 @@ class ProductDataFixture {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 */
+	private $entityManagerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
@@ -110,6 +116,7 @@ class ProductDataFixture {
 
 	public function __construct(
 		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		ProductEditFacade $productEditFacade,
 		ProductDataFixtureLoader $productDataFixtureLoader,
 		SqlLoggerFacade $sqlLoggerFacade,
@@ -123,6 +130,7 @@ class ProductDataFixture {
 		ProductDataFixtureCsvReader $productDataFixtureCsvReader
 	) {
 		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->productEditFacade = $productEditFacade;
 		$this->productDataFixtureLoader = $productDataFixtureLoader;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
@@ -194,7 +202,7 @@ class ProductDataFixture {
 
 		$progressBar->finish();
 
-		$this->em->clear();
+		$this->entityManagerFacade->clear();
 		$this->sqlLoggerFacade->reenableLogging();
 	}
 
@@ -264,7 +272,7 @@ class ProductDataFixture {
 	private function clearResources() {
 		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
 		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
-		$this->em->clear();
+		$this->entityManagerFacade->clear();
 		gc_collect_cycles();
 	}
 

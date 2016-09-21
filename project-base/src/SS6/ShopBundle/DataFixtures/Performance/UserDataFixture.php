@@ -2,9 +2,9 @@
 
 namespace SS6\ShopBundle\DataFixtures\Performance;
 
-use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
@@ -20,9 +20,9 @@ class UserDataFixture {
 	const FIRST_PERFORMANCE_USER = 'first_performance_user';
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
-	private $em;
+	private $entityManagerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -55,7 +55,7 @@ class UserDataFixture {
 	private $persistentReferenceFacade;
 
 	public function __construct(
-		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		Domain $domain,
 		SqlLoggerFacade $sqlLoggerFacade,
 		CustomerFacade $customerEditFacade,
@@ -63,7 +63,7 @@ class UserDataFixture {
 		Faker $faker,
 		PersistentReferenceFacade $persistentReferenceFacade
 	) {
-		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->domain = $domain;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->customerEditFacade = $customerEditFacade;
@@ -87,7 +87,7 @@ class UserDataFixture {
 					$isFirstUser = false;
 				}
 
-				$this->em->clear();
+				$this->entityManagerFacade->clear();
 			}
 		}
 

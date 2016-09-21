@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Tests\Unit\Model\Product;
 
-use Doctrine\ORM\EntityManager;
 use ReflectionClass;
 use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
@@ -49,10 +48,10 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 
 		$product = $productEditFacade->create($productEditData);
 
-		$entityManager = $this->getContainer()->get(EntityManager::class);
-		/* @var $entityManager \Doctrine\ORM\EntityManager */
+		$entityManagerFacade = $this->getEntityManagerFacade();
+		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
 
-		$entityManager->clear();
+		$entityManagerFacade->clear();
 
 		$productFromDb = $productEditFacade->getById($product->getId());
 

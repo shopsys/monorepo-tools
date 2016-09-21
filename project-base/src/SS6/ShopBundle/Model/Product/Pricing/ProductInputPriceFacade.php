@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use SS6\ShopBundle\Component\Domain\DomainFacade;
 use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
@@ -21,6 +22,11 @@ class ProductInputPriceFacade {
 	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
+
+	/**
+	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 */
+	private $entityManagerFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceService
@@ -69,6 +75,7 @@ class ProductInputPriceFacade {
 
 	public function __construct(
 		EntityManager $em,
+		EntityManagerFacade $entityManagerFacade,
 		ProductInputPriceService $productInputPriceService,
 		CurrencyFacade $currencyFacade,
 		PricingSetting $pricingSetting,
@@ -79,6 +86,7 @@ class ProductInputPriceFacade {
 		ProductService $productService
 	) {
 		$this->em = $em;
+		$this->entityManagerFacade = $entityManagerFacade;
 		$this->productInputPriceService = $productInputPriceService;
 		$this->currencyFacade = $currencyFacade;
 		$this->pricingSetting = $pricingSetting;
@@ -133,7 +141,7 @@ class ProductInputPriceFacade {
 			$row = $this->productRowsIterator->next();
 			if ($row === false) {
 				$this->em->flush();
-				$this->em->clear();
+				$this->entityManagerFacade->clear();
 
 				return false;
 			}
@@ -145,7 +153,7 @@ class ProductInputPriceFacade {
 		}
 
 		$this->em->flush();
-		$this->em->clear();
+		$this->entityManagerFacade->clear();
 
 		return true;
 	}
