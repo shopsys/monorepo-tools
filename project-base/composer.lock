@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "37b4a3640ee71401fa9934fd99bf04e2",
-    "content-hash": "b899e8ce13514a2217911a7fce213219",
+    "hash": "ea2990981b843332645ac71d898af652",
+    "content-hash": "bec636d93d9dd28b7997a5980299126b",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -1521,7 +1521,7 @@
                 "symfony",
                 "validation"
             ],
-            "time": "2016-03-29 14:06:14"
+            "time": "2015-06-19 14:38:58"
         },
         {
             "name": "fzaninotto/faker",
@@ -4417,7 +4417,7 @@
             "support": {
                 "source": "https://github.com/sustmi/Routing/tree/master"
             },
-            "time": "2015-09-19 14:58:43"
+            "time": "2015-09-30 09:50:25"
         },
         {
             "name": "symfony-cmf/routing-bundle",
@@ -5848,6 +5848,66 @@
             "description": "Symfony WebProfilerBundle",
             "homepage": "https://symfony.com",
             "time": "2016-01-14 08:26:52"
+        },
+        {
+            "name": "vasek-purchart/console-errors-bundle",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VasekPurchart/Console-Errors-Bundle.git",
+                "reference": "e4ec6729d18749fccd746b28c62303d8fd99e822"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VasekPurchart/Console-Errors-Bundle/zipball/e4ec6729d18749fccd746b28c62303d8fd99e822",
+                "reference": "e4ec6729d18749fccd746b28c62303d8fd99e822",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~5.6|~7.0",
+                "psr/log": "~1.0",
+                "symfony/config": "~2.6|~3.0",
+                "symfony/console": "~2.6|~3.0",
+                "symfony/dependency-injection": "~2.6|~3.0",
+                "symfony/http-kernel": "~2.6|~3.0",
+                "symfony/yaml": "~2.6|~3.0"
+            },
+            "require-dev": {
+                "consistence/coding-standard": "0.11.1",
+                "jakub-onderka/php-console-highlighter": "0.3.2",
+                "jakub-onderka/php-parallel-lint": "0.9.2",
+                "matthiasnoback/symfony-dependency-injection-test": "1.0",
+                "phing/phing": "2.14",
+                "phpunit/phpunit": "5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VasekPurchart\\ConsoleErrorsBundle\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vašek Purchart",
+                    "email": "me@vasekpurchart.cz",
+                    "homepage": "http://vasekpurchart.cz"
+                }
+            ],
+            "description": "Logging of exceptions and error codes for Symfony Console",
+            "keywords": [
+                "bundle",
+                "console",
+                "debug",
+                "error",
+                "exception",
+                "logging",
+                "symfony"
+            ],
+            "time": "2016-08-14 12:04:07"
         }
     ],
     "aliases": [

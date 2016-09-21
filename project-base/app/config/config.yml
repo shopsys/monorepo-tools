@@ -89,25 +89,28 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
-      channels: ["!cron", "!slow"]
     cron:
       type: rotating_file
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
       channels: cron
+      level: debug
     slow:
       type: rotating_file
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
-    cron_console:
-      type:   console
+      level: debug
+    # use custom verbosity in console in cron
+    cron_console_output:
+      type: console
       verbosity_levels:
         VERBOSITY_NORMAL: INFO
         VERBOSITY_VERBOSE: DEBUG
       channels: cron
+      # stop propagation to the second "console" handler so that message is not printed twice
       bubble: false
-    console:
+    console_output:
       type: console
 
 presta_sitemap:
