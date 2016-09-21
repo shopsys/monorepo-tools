@@ -95,11 +95,13 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.cron.log"
       channels: cron
+      level: debug
     slow:
       type: rotating_file
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
+      level: debug
     # use custom verbosity in console in cron
     cron_console_output:
       type: console
