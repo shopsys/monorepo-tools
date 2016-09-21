@@ -26,9 +26,9 @@ monolog:
       type: "null"
     cron:
       type: "null"
-    cron_console:
+    cron_console_output:
       type: "null"
-    console:
+    console_output:
       type: "null"
     slow:
       type: "null"

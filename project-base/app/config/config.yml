@@ -100,14 +100,14 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
-    cron_console:
+    cron_console_output:
       type: console
       verbosity_levels:
         VERBOSITY_NORMAL: INFO
         VERBOSITY_VERBOSE: DEBUG
       channels: cron
       bubble: false
-    console:
+    console_output:
       type: console
 
 presta_sitemap:
