@@ -89,7 +89,6 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.log"
       level: debug
-      channels: ["!cron", "!slow"]
     cron:
       type: rotating_file
       max_files: 7
