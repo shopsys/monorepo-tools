@@ -100,12 +100,14 @@ monolog:
       max_files: 7
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
+    # use custom verbosity in console in cron
     cron_console_output:
       type: console
       verbosity_levels:
         VERBOSITY_NORMAL: INFO
         VERBOSITY_VERBOSE: DEBUG
       channels: cron
+      # stop propagation to the second "console" handler so that message is not printed twice
       bubble: false
     console_output:
       type: console
