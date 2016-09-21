@@ -26,11 +26,11 @@ monolog:
       type: "null"
     cron:
       type: "null"
+    slow:
+      type: "null"
     cron_console_output:
       type: "null"
     console_output:
-      type: "null"
-    slow:
       type: "null"
 
 security:
