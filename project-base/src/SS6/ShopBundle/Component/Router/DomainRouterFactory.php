@@ -121,4 +121,14 @@ class DomainRouterFactory {
 		return $requestContext;
 	}
 
+	/**
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
+	 */
+	public function getFriendlyUrlRouter(DomainConfig $domainConfig) {
+		$context = $this->getRequestContextByDomainConfig($domainConfig);
+
+		return $this->friendlyUrlRouterFactory->createRouter($domainConfig, $context);
+	}
+
 }
