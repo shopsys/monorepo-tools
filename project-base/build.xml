@@ -250,6 +250,7 @@
 		<mkdir dir="${path.web}/content" />
 		<mkdir dir="${path.web}/content/feeds" />
 		<mkdir dir="${path.web}/content/sitemaps" />
+		<mkdir dir="${path.web}/content/wysiwyg" />
 
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
