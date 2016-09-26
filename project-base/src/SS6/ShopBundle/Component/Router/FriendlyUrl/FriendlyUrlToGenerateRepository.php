@@ -9,6 +9,7 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use SS6\ShopBundle\Model\Article\Article;
 use SS6\ShopBundle\Model\Category\Category;
+use SS6\ShopBundle\Model\Product\Brand\Brand;
 use SS6\ShopBundle\Model\Product\Product;
 
 class FriendlyUrlToGenerateRepository {
@@ -79,6 +80,24 @@ class FriendlyUrlToGenerateRepository {
 			->setParameter('routeName', $routeName)
 			->setParameter('domainId', $domainConfig->getId())
 			->where('f.entityId IS NULL AND ct.name IS NOT NULL');
+
+		return $this->createFriendlyUrlsData($queryBuilder);
+	}
+
+	/**
+	 * @param string $routeName
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return array
+	 */
+	public function getBrandDetailData($routeName, DomainConfig $domainConfig) {
+		$queryBuilder = $this->em->createQueryBuilder()
+			->select('b.id, b.name')
+			->distinct()
+			->from(Brand::class, 'b')
+			->leftJoin(FriendlyUrl::class, 'f', Join::WITH, 'b.id = f.entityId AND f.routeName = :routeName AND f.domainId = :domainId')
+			->setParameter('routeName', $routeName)
+			->setParameter('domainId', $domainConfig->getId())
+			->where('f.entityId IS NULL');
 
 		return $this->createFriendlyUrlsData($queryBuilder);
 	}

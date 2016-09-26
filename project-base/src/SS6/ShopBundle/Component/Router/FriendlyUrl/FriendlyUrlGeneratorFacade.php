@@ -119,6 +119,9 @@ class FriendlyUrlGeneratorFacade {
 
 			case 'front_product_list':
 				return $this->friendlyUrlToGenerateRepository->getProductListData($routeName, $domainConfig);
+
+			case 'front_brand_detail':
+				return $this->friendlyUrlToGenerateRepository->getBrandDetailData($routeName, $domainConfig);
 		}
 
 		throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotSupportedException($routeName);
