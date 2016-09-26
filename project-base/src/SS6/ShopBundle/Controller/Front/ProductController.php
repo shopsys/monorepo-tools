@@ -187,9 +187,9 @@ class ProductController extends FrontBaseController {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param int $brandId
+	 * @param int $id
 	 */
-	public function listByBrandAction(Request $request, $brandId) {
+	public function listByBrandAction(Request $request, $id) {
 		$requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
 		if (!$this->isRequestPageValid($requestPage)) {
 			return $this->redirectToRoute('front_brand_detail', $this->getRequestParametersWithoutPage());
@@ -204,12 +204,12 @@ class ProductController extends FrontBaseController {
 			$orderingMode,
 			$page,
 			self::PRODUCTS_PER_PAGE,
-			$brandId
+			$id
 		);
 
 		$viewParameters = [
 			'paginationResult' => $paginationResult,
-			'brand' => $this->brandFacade->getById($brandId),
+			'brand' => $this->brandFacade->getById($id),
 		];
 
 		return $this->render('@SS6Shop/Front/Content/Product/listByBrand.html.twig', $viewParameters);

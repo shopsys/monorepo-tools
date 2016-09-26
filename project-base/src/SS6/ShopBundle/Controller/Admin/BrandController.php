@@ -14,6 +14,7 @@ use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
 use SS6\ShopBundle\Model\Product\Brand\BrandData;
+use SS6\ShopBundle\Model\Product\Brand\BrandDataFactory;
 use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -44,18 +45,25 @@ class BrandController extends AdminBaseController {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandDataFactory
+	 */
+	private $brandDataFactory;
+
 	public function __construct(
 		BrandFacade $brandFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		Breadcrumb $breadcrumb,
-		Domain $domain
+		Domain $domain,
+		BrandDataFactory $brandDataFactory
 	) {
 		$this->brandFacade = $brandFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->domain = $domain;
+		$this->brandDataFactory = $brandDataFactory;
 	}
 
 	/**
@@ -65,10 +73,9 @@ class BrandController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$brand = $this->brandFacade->getById($id);
-		$form = $this->createForm(new BrandFormType());
+		$form = $this->createForm(new BrandFormType($brand));
 
-		$brandData = new BrandData();
-		$brandData->setFromEntity($brand);
+		$brandData = $this->brandDataFactory->createFromBrand($brand);
 
 		$form->setData($brandData);
 		$form->handleRequest($request);
