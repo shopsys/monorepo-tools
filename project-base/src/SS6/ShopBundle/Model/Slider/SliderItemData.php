@@ -33,12 +33,12 @@ class SliderItemData {
 		$name = null,
 		$link = null,
 		$image = null,
-		$visible = null
+		$hidden = null
 	) {
 		$this->name = $name;
 		$this->link = $link;
 		$this->image = $image;
-		$this->hidden = $visible;
+		$this->hidden = $hidden;
 	}
 
 	/**
