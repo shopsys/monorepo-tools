@@ -12,7 +12,7 @@
 
 			<div class="box-order__info__item">
 
-				<h2>{{ 'Výběr dopravy'|trans }}</h2>
+				<h2 id="js-label-{{ form.transport.vars.id }}">{{ 'Výběr dopravy'|trans }}</h2>
 
 				<div class="box-chooser js-form-group">
 					{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
@@ -57,7 +57,7 @@
 
 			<div class="box-order__info__item">
 
-				<h2>{{ 'Výběr platby'|trans }}</h2>
+				<h2 id="js-label-{{ form.payment.vars.id }}">{{ 'Výběr platby'|trans }}</h2>
 
 				<div class="box-chooser box-chooser--smaller js-form-group">
 					{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}

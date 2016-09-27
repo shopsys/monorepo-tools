@@ -427,6 +427,9 @@
 		var $input = $('#' + inputId);
 
 		if ($label.length === 0) {
+			$label = $('#js-label-' + inputId);
+		}
+		if ($label.length === 0) {
 			$label = SS6.validation.getClosestLabel($input, '.js-validation-label');
 		}
 		if ($label.length === 0) {
