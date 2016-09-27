@@ -97,6 +97,7 @@ class UrlsProvider {
 	 * @param string $routeName
 	 * @return array
 	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getRouteParameters(Route $route, $routeName) {
 		switch ($routeName) {
@@ -130,6 +131,9 @@ class UrlsProvider {
 				];
 
 			case 'front_article_detail':
+				return ['id' => 1];
+
+			case 'front_brand_detail':
 				return ['id' => 1];
 
 			case 'front_customer_order_detail_unregistered':

@@ -2,12 +2,14 @@
 
 namespace SS6\ShopBundle\DataFixtures\Demo;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use SS6\ShopBundle\Model\Product\Brand\BrandData;
 use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
 
-class BrandDataFixture extends AbstractReferenceFixture {
+class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	const APPLE = 'brand_apple';
 	const CANON = 'brand_canon';
@@ -83,6 +85,15 @@ class BrandDataFixture extends AbstractReferenceFixture {
 			self::OLYMPUS => 'Olympus',
 			self::HYUNDAI => 'Hyundai',
 			self::NIKON => 'Nikon',
+		];
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return [
+			SettingValueDataFixture::class,
 		];
 	}
 

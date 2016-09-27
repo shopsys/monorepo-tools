@@ -11,9 +11,8 @@
 			{{ form_id(brand|default(null)) }}
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
 			{{ form_row(form.descriptions, { label: 'Popis'|trans}) }}
+			{% block brand_urls %}{% endblock %}
 		</div>
-
-		{% block urls %}{% endblock %}
 
 		<div class="form-group">
 			<div class="form-group__title">

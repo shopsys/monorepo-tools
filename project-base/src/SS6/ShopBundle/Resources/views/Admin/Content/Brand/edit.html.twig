@@ -3,26 +3,8 @@
 {% block title %}- {{ 'Editace značky'|trans }} - {{ brand.name }}{% endblock %}
 {% block h1 %}{{ 'Editace značky'|trans }} - {{ brand.name }}{% endblock %}
 
-{% block urls %}
-    <div class="form-group wrap-border">
-        <div class="form-group__title">
-            {{ 'URL adresy'|trans }}
-        </div>
-
-        <div class="form-line">
-            {% for domain in domains %}
-                <div class="form-line__line">
-                    <div class="form-line__item">
-                        {{ 'Doména'|trans }} {{  getDomainName(domain.id) }}
-                        {{ domainIcon(domain.id) }}
-                        <a href="{{ findUrlByDomainId('front_brand_detail', { brandId: brand.id }, domain.id) }}" target="_blank">
-                            {{ findUrlByDomainId('front_brand_detail', { brandId: brand.id }, domain.id) }}
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+{% block brand_urls %}
+	{{ form_row(form.urls, { label: 'URL adresy'|trans }) }}
 {% endblock %}
 
 {% block image %}

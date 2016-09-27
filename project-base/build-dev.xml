@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ShopSys6-dev" default="build-demo-ci">
 
-	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-front-and-common,db-migrations,create-domains-data,replace-domains-urls,grunt,error-pages-generate,checks-diff" description="Build application for development"/>
-	<target name="build-dev-quick" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,db-migrations,create-domains-data,replace-domains-urls,grunt" description="Quick build application for development"/>
+	<target name="build-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,dump-translations-front-and-common,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,checks-diff" description="Build application for development"/>
+	<target name="build-dev-quick" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-create,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt" description="Quick build application for development"/>
 	<target name="build-demo-dev" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,error-pages-generate,checks-diff" description="Build application for development with demo data"/>
 	<target name="build-demo-ci" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci" description="Build application for development with demo data checked by checks-ci"/>
 	<target name="build-demo-ci-diff" depends="clean,composer-dev,npm,domains-urls-check,assetic,assets,dirs-clean,dirs-create,dump-translations-front-and-common,db-demo,grunt,img-demo,error-pages-generate,checks-ci-diff" description="Build application for development with demo data checked by checks-ci-diff"/>
@@ -17,7 +17,7 @@
 	<target name="standards-ci" depends="standards,phpstorm-inspect" description="Run standards and phpstorm-inspect"/>
 	<target name="standards-ci-diff" depends="standards-diff,phpstorm-inspect" description="Run standards-diff and phpstorm-inspect"/>
 
-	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
+	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
 	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Rebuild test database and import performance demo data"/>
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Run unit, database and crawler tests on the new test demo database"/>
 

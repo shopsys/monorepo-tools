@@ -50,12 +50,6 @@ front_registration_set_new_password:
   pattern: /nove-heslo/
   defaults: { _controller: SS6ShopBundle:Front\CustomerPassword:setNewPassword }
 
-front_brand_detail:
-  pattern: /znacka/{brandId}/
-  defaults: { _controller: SS6ShopBundle:Front\Product:listByBrand }
-  requirements:
-    brandId: \d+
-
 front_brand_list:
   pattern: /prehled-znacek/
   defaults: { _controller: SS6ShopBundle:Front\Brand:list }

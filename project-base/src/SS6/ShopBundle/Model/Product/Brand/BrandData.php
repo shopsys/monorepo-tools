@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\Product\Brand;
 
+use SS6\ShopBundle\Form\UrlListData;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
 
 class BrandData {
@@ -21,10 +22,16 @@ class BrandData {
 	 */
 	public $descriptions;
 
+	/**
+	 * @var \SS6\ShopBundle\Form\UrlListData
+	 */
+	public $urls;
+
 	public function __construct() {
 		$this->name = '';
 		$this->image = [];
 		$this->descriptions = [];
+		$this->urls = new UrlListData();
 	}
 
 	/**

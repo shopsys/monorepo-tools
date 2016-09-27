@@ -3,7 +3,9 @@
 namespace SS6\ShopBundle\Model\Product\Brand;
 
 use Doctrine\ORM\EntityManager;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Image\ImageFacade;
+use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 use SS6\ShopBundle\Model\Product\Brand\Brand;
 use SS6\ShopBundle\Model\Product\Brand\BrandData;
 use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
@@ -25,14 +27,21 @@ class BrandFacade {
 	 */
 	private $imageFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 */
+	private $friendlyUrlFacade;
+
 	public function __construct(
 		EntityManager $em,
 		BrandRepository $brandRepository,
-		ImageFacade $imageFacade
+		ImageFacade $imageFacade,
+		FriendlyUrlFacade $friendlyUrlFacade
 	) {
 		$this->em = $em;
 		$this->brandRepository = $brandRepository;
 		$this->imageFacade = $imageFacade;
+		$this->friendlyUrlFacade = $friendlyUrlFacade;
 	}
 
 	/**
@@ -53,6 +62,14 @@ class BrandFacade {
 		$this->em->flush();
 		$this->imageFacade->uploadImage($brand, $brandData->image, null);
 
+		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+			'front_brand_detail',
+			$brand->getId(),
+			$brand->getName(),
+			Domain::FIRST_DOMAIN_ID
+		);
+		$this->em->flush();
+
 		return $brand;
 	}
 
@@ -65,6 +82,15 @@ class BrandFacade {
 		$brand = $this->brandRepository->getById($brandId);
 		$brand->edit($brandData);
 		$this->imageFacade->uploadImage($brand, $brandData->image, null);
+		$this->em->flush();
+
+		$this->friendlyUrlFacade->saveUrlListFormData('front_brand_detail', $brand->getId(), $brandData->urls);
+		$this->friendlyUrlFacade->createFriendlyUrlForDomain(
+			'front_brand_detail',
+			$brand->getId(),
+			$brand->getName(),
+			Domain::FIRST_DOMAIN_ID
+		);
 		$this->em->flush();
 
 		return $brand;
