@@ -5,40 +5,41 @@ namespace SS6\ShopBundle\Model\Slider;
 class SliderItemData {
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	public $name;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	public $link;
 
 	/**
-	 * @var string
+	 * @var string|null
 	 */
 	public $image;
 
 	/**
-	 * @var bool|null
+	 * @var bool
 	 */
 	public $hidden;
 
 	/**
-	 * @param string $name
-	 * @param string $link
-	 * @param string $image
+	 * @param string|null $name
+	 * @param string|null $link
+	 * @param string|null $image
+	 * @param bool $hidden
 	 */
 	public function __construct(
 		$name = null,
 		$link = null,
 		$image = null,
-		$visible = null
+		$hidden = false
 	) {
 		$this->name = $name;
 		$this->link = $link;
 		$this->image = $image;
-		$this->hidden = $visible;
+		$this->hidden = $hidden;
 	}
 
 	/**

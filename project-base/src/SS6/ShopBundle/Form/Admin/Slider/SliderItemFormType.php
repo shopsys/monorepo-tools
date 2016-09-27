@@ -63,7 +63,14 @@ class SliderItemFormType extends AbstractType {
 					new Constraints\Url(['message' => 'Odkaz musí být validní URL adresa']),
 				],
 			])
-			->add('hidden', FormType::YES_NO, ['required' => false])
+			->add('hidden', FormType::YES_NO, [
+				'required' => false,
+				'constraints' => [
+					new Constraints\NotNull([
+						'message' => 'Prosím vyberte viditelnost.',
+					]),
+				],
+			])
 			->add('save', FormType::SUBMIT);
 	}
 
