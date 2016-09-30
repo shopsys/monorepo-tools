@@ -212,7 +212,11 @@ class ProductController extends FrontBaseController {
 			'brand' => $this->brandFacade->getById($id),
 		];
 
-		return $this->render('@SS6Shop/Front/Content/Product/listByBrand.html.twig', $viewParameters);
+		if ($request->isXmlHttpRequest()) {
+			return $this->render('@SS6Shop/Front/Content/Product/ajaxListByBrand.html.twig', $viewParameters);
+		} else {
+			return $this->render('@SS6Shop/Front/Content/Product/listByBrand.html.twig', $viewParameters);
+		}
 	}
 
 	/**
