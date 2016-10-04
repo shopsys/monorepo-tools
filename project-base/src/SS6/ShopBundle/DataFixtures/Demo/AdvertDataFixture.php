@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace SS6\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
@@ -17,7 +17,7 @@ class AdvertDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 
 		$advertData = new AdvertData();
-		$advertData->domainId = 2;
+		$advertData->domainId = 1;
 		$advertData->name = 'Demo advert';
 		$advertData->type = Advert::TYPE_CODE;
 		$advertData->hidden = false;
