@@ -20,6 +20,9 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
 	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Rebuild test database and import performance demo data"/>
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Run unit, database and crawler tests on the new test demo database"/>
+	<target name="tests-crawler" depends="tests-crawler-multidomain" description="Run crawler tests"/>
+	<target name="tests-db" depends="tests-db-multidomain" description="Run database tests"/>
+	<target name="tests-unit" depends="tests-unit-multidomain" description="Run unit tests"/>
 
 	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Run performance tests (clean, test-db-performance, tests-performance-warmup, tests-performance)"/>
 
@@ -469,7 +472,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-crawler" description="Run crawler tests">
+	<target name="tests-crawler-multidomain" description="Run crawler multidomain tests">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -481,10 +484,29 @@
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
 			<arg value="Crawler"/>
+			<arg value="--exclude-group"/>
+			<arg value="singledomain"/>
 		</exec>
 	</target>
 
-	<target name="tests-db" description="Run database tests">
+	<target name="tests-crawler-singledomain" description="Run crawler singledomain tests">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Crawler"/>
+			<arg value="--exclude-group"/>
+			<arg value="multidomain"/>
+		</exec>
+	</target>
+
+	<target name="tests-db-multidomain" description="Run database multidomain tests">
 		<exec
 			executable="${path.phpunit.executable}"
 			logoutput="true"
@@ -496,6 +518,25 @@
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
 			<arg value="Database"/>
+			<arg value="--exclude-group"/>
+			<arg value="singledomain"/>
+		</exec>
+	</target>
+
+	<target name="tests-db-singledomain" description="Run database singledomain tests">
+		<exec
+			executable="${path.phpunit.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Database"/>
+			<arg value="--exclude-group"/>
+			<arg value="multidomain"/>
 		</exec>
 	</target>
 
@@ -533,7 +574,7 @@
 		</exec>
 	</target>
 
-	<target name="tests-unit" description="Run unit tests">
+	<target name="tests-unit-multidomain" description="Run unit multidomain tests">
 		<exec
 				executable="${path.phpunit.executable}"
 				logoutput="true"
@@ -545,6 +586,25 @@
 			<arg value="${path.phpunit.configuration}"/>
 			<arg value="--testsuite"/>
 			<arg value="Unit"/>
+			<arg value="--exclude-group"/>
+			<arg value="singledomain"/>
+		</exec>
+	</target>
+
+	<target name="tests-unit-singledomain" description="Run unit singledomain tests">
+		<exec
+				executable="${path.phpunit.executable}"
+				logoutput="true"
+				passthru="true"
+				checkreturn="true"
+		>
+			<arg value="--colors=always"/>
+			<arg value="--configuration"/>
+			<arg value="${path.phpunit.configuration}"/>
+			<arg value="--testsuite"/>
+			<arg value="Unit"/>
+			<arg value="--exclude-group"/>
+			<arg value="multidomain"/>
 		</exec>
 	</target>
 

@@ -40,9 +40,9 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 	public function testIsIndependentlyVisibleEmptyName() {
 		$em = $this->getEntityManager();
 
-		$domainId = 2;
+		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => ''], $vat, [], [], false));
+		$transport = new Transport(new TransportData(['cs' => null], $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
@@ -63,16 +63,11 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$domainId = 1;
-		$diffetentDomainId = 2;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], $vat, [], [], false));
+		$transport = new Transport(new TransportData(['cs' => 'transportName'], $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($transport);
-		$em->flush();
-
-		$transportDomain = new TransportDomain($transport, $diffetentDomainId);
-		$em->persist($transportDomain);
 		$em->flush();
 
 		$independentTransportVisibilityCalculation =
@@ -87,7 +82,7 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
 
 		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData(['cs' => 'transportName', 'en' => 'transportName'], $vat, [], [], true));
+		$transport = new Transport(new TransportData(['cs' => 'transportName'], $vat, [], [], true));
 
 		$em->persist($vat);
 		$em->persist($transport);

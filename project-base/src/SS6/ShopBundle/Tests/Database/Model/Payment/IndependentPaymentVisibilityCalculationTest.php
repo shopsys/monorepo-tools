@@ -40,9 +40,9 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 	public function testIsIndependentlyVisibleEmptyName() {
 		$em = $this->getEntityManager();
 
-		$domainId = 2;
+		$domainId = 1;
 		$vat = new Vat(new VatData('vat', 21));
-		$payment = new Payment(new PaymentData(['cs' => 'paymentName', 'en' => ''], $vat, [], [], false));
+		$payment = new Payment(new PaymentData(['cs' => null], $vat, [], [], false));
 
 		$em->persist($vat);
 		$em->persist($payment);
