@@ -242,24 +242,10 @@
  		</delete>
  	</target>
 
-	<target name="dirs-create" description="creates system directories like lock, docs, content, image, directory for uploaded files">
-		<mkdir dir="${path.app}/lock" />
-		<mkdir dir="${path.app}/errorPages" />
-		<mkdir dir="${path.root}/docs/admin" />
-		<mkdir dir="${path.root}/docs/frontend" />
-		<mkdir dir="${path.web}/content" />
-		<mkdir dir="${path.web}/content/feeds" />
-		<mkdir dir="${path.web}/content/sitemaps" />
-		<mkdir dir="${path.web}/content/wysiwyg" />
-
+	<target name="dirs-create" description="creates application directories for locks, docs, content, images, uploaded files, etc.">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:image:directories" />
-		</exec>
-
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:uploaded-file:directories" />
+			<arg value="ss6:create-directories" />
 		</exec>
 	</target>
 
