@@ -88,7 +88,6 @@
 	<target name="clean" description="Clean up directories with cache, logs, stats and scripts">
 		<mkdir dir="${path.app}/cache" />
 		<mkdir dir="${path.app}/logs" />
-		<mkdir dir="${path.web.scripts}" />
 		<mkdir dir="${path.build.stats}" />
 
 		<delete failonerror="false" includeemptydirs="true">
@@ -105,8 +104,6 @@
 	</target>
 
 	<target name="clean-styles" description="Clean directories with css/less">
-		<mkdir dir="${path.web.styles.admin}" />
-		<mkdir dir="${path.web.styles.front}" />
 		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${path.web.styles.admin}/">
 				<exclude name="/" />

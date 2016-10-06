@@ -33,6 +33,9 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand {
 		$directories[] = $this->getContainer()->getParameter('kernel.root_dir') . '/errorPages';
 		$directories[] = $this->getContainer()->getParameter('ss6.root_dir') . '/docs/admin';
 		$directories[] = $this->getContainer()->getParameter('ss6.root_dir') . '/docs/frontend';
+		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/assets/admin/styles';
+		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/assets/frontend/styles';
+		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/assets/scripts';
 		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/content/feeds';
 		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/content/sitemaps';
 		$directories[] = $this->getContainer()->getParameter('ss6.web_dir') . '/content/wysiwyg';
