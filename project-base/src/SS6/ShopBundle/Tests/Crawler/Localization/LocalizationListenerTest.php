@@ -24,6 +24,9 @@ class LocalizationListenerTest extends DatabaseTestCase {
 		);
 	}
 
+	/**
+	 * @group multidomain
+	 */
 	public function testProductDetailLocaleEn() {
 		$domain = $this->getContainer()->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */

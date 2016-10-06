@@ -8,7 +8,6 @@ use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture as DemoPricingGroup
 use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
@@ -245,7 +244,7 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$this->assertFalse($product2Again->isVisible());
 	}
 
-	public function testIsVisibleWithEmptyName() {
+	public function testIsVisibleWithFilledName() {
 		$em = $this->getEntityManager();
 		$entityManagerFacade = $this->getEntityManagerFacade();
 		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -259,36 +258,53 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$product = $productEditFacade->create($productEditData);
 		$productPriceRecalculator->runImmediateRecalculations();
 
-		$productId = $product->getId();
 		$entityManagerFacade->clear();
 
 		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
-		$productFromDb = $em->getRepository(Product::class)->find($productId);
-		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
-
-		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
 			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
+		/* @var $productVisibility \SS6\ShopBundle\Model\Product\ProductVisibility */
 
-		$productVisibility2 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
-			'pricingGroup' => $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
-			'domainId' => 2,
-		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
-
-		$this->assertTrue($productFromDb->isVisible());
-		$this->assertTrue($productVisibility1->isVisible());
-		$this->assertFalse($productVisibility2->isVisible());
+		$this->assertTrue($productVisibility->isVisible());
 	}
 
-	public function testIsVisibleAccordingToVisibilityOfCategory() {
+	public function testIsNotVisibleWithEmptyName() {
+		$em = $this->getEntityManager();
+		$entityManagerFacade = $this->getEntityManagerFacade();
+		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
+		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->name = ['cs' => null];
+		$product = $productEditFacade->create($productEditData);
+		$productPriceRecalculator->runImmediateRecalculations();
+
+		$entityManagerFacade->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'domainId' => 1,
+		]);
+		/* @var $productVisibility \SS6\ShopBundle\Model\Product\ProductVisibility */
+
+		$this->assertFalse($productVisibility->isVisible());
+	}
+
+	public function testIsVisibleInVisibileCategory() {
 		$em = $this->getEntityManager();
 		$entityManagerFacade = $this->getEntityManagerFacade();
 		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -304,36 +320,52 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		$product = $productEditFacade->create($productEditData);
 		$productPriceRecalculator->runImmediateRecalculations();
 
-		$productId = $product->getId();
 		$entityManagerFacade->clear();
 
 		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
-		$productFromDb = $em->getRepository(Product::class)->find($productId);
-		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
-
-		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
 			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
 			'domainId' => 1,
 		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
+		/* @var $productVisibility \SS6\ShopBundle\Model\Product\ProductVisibility */
 
-		$productVisibility2 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
-			'pricingGroup' => $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId(),
-			'domainId' => 2,
-		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
-
-		$this->assertTrue($productFromDb->isVisible());
-		$this->assertTrue($productVisibility1->isVisible());
-		$this->assertFalse($productVisibility2->isVisible());
+		$this->assertTrue($productVisibility->isVisible());
 	}
 
-	public function testIsNotVisibleWhenNullOrZeroManualPrice() {
+	public function testIsNotVisibleInHiddenCategory() {
+		$em = $this->getEntityManager();
+		$entityManagerFacade = $this->getEntityManagerFacade();
+		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
+		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->categoriesByDomainId = [];
+		$product = $productEditFacade->create($productEditData);
+		$productPriceRecalculator->runImmediateRecalculations();
+
+		$entityManagerFacade->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
+			'pricingGroup' => $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId(),
+			'domainId' => 1,
+		]);
+
+		$this->assertFalse($productVisibility->isVisible());
+	}
+
+	public function testIsNotVisibleWhenZeroManualPrice() {
 		$em = $this->getEntityManager();
 		$entityManagerFacade = $this->getEntityManagerFacade();
 		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -353,41 +385,67 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase {
 		}
 
 		$pricingGroupWithZeroPriceId = $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
-		$pricingGroupWithNullPriceId = $this->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2)->getId();
 
 		$productEditData->manualInputPrices[$pricingGroupWithZeroPriceId] = 0;
-		$productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;
 
 		$product = $productEditFacade->create($productEditData);
 		$productPriceRecalculator->runImmediateRecalculations();
 
-		$productId = $product->getId();
 		$entityManagerFacade->clear();
 
 		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
 		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
 		$productVisibilityRepository->refreshProductsVisibility();
 
-		$productFromDb = $em->getRepository(Product::class)->find($productId);
-		/* @var $productFromDb \SS6\ShopBundle\Model\Product\Product */
-
-		$productVisibility1 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
 			'pricingGroup' => $pricingGroupWithZeroPriceId,
 			'domainId' => 1,
 		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
+		/* @var $productVisibility \SS6\ShopBundle\Model\Product\ProductVisibility */
 
-		$productVisibility2 = $em->getRepository(ProductVisibility::class)->findOneBy([
-			'product' => $productId,
+		$this->assertFalse($productVisibility->isVisible());
+	}
+
+	public function testIsNotVisibleWhenNullManualPrice() {
+		$em = $this->getEntityManager();
+		$entityManagerFacade = $this->getEntityManagerFacade();
+		/* @var $entityManagerFacade \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade */
+		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
+		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		$productPriceRecalculator = $this->getContainer()->get(ProductPriceRecalculator::class);
+		/* @var $productPriceRecalculator \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator */
+		$pricingGroupFacade = $this->getContainer()->get(PricingGroupFacade::class);
+		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+
+		$productEditData = $this->getDefaultProductEditData();
+		$productEditData->productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
+
+		$allPricingGroups = $pricingGroupFacade->getAll();
+		foreach ($allPricingGroups as $pricingGroup) {
+			$productEditData->manualInputPrices[$pricingGroup->getId()] = 10;
+		}
+
+		$pricingGroupWithNullPriceId = $this->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1)->getId();
+		$productEditData->manualInputPrices[$pricingGroupWithNullPriceId] = null;
+
+		$product = $productEditFacade->create($productEditData);
+		$productPriceRecalculator->runImmediateRecalculations();
+
+		$entityManagerFacade->clear();
+
+		$productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
+		/* @var $productVisibilityRepository \SS6\ShopBundle\Model\Product\ProductVisibilityRepository */
+		$productVisibilityRepository->refreshProductsVisibility();
+
+		$productVisibility = $em->getRepository(ProductVisibility::class)->findOneBy([
+			'product' => $product,
 			'pricingGroup' => $pricingGroupWithNullPriceId,
-			'domainId' => 2,
+			'domainId' => 1,
 		]);
-		/* @var $productVisibility1 \SS6\ShopBundle\Model\Product\ProductVisibility */
+		/* @var $productVisibility \SS6\ShopBundle\Model\Product\ProductVisibility */
 
-		$this->assertTrue($productFromDb->isVisible());
-		$this->assertFalse($productVisibility1->isVisible());
-		$this->assertFalse($productVisibility2->isVisible());
+		$this->assertFalse($productVisibility->isVisible());
 	}
 
 	public function testRefreshProductsVisibilityVisibleVariants() {

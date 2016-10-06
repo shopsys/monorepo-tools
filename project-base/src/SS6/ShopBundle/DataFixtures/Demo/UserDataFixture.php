@@ -11,9 +11,6 @@ use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use SS6\ShopBundle\Model\Customer\CustomerFacade;
 
-/**
- * @multidomain
- */
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**

@@ -100,7 +100,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase {
 		$category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
 		$parameterFilterData = $this->createParameterFilterData(
-			['cs' => 'Rozlišení tisku', 'en' => 'Print resolution'],
+			['cs' => 'Rozlišení tisku'],
 			[['cs' => '4800x1200']]
 		);
 		$productFilterData = new ProductFilterData();
@@ -115,7 +115,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase {
 		$category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
 		$parameterFilterData = $this->createParameterFilterData(
-			['cs' => 'Rozlišení tisku', 'en' => 'Print resolution'],
+			['cs' => 'Rozlišení tisku'],
 			[
 				['cs' => '4800x1200'],
 				['cs' => '2400x600'],
@@ -132,7 +132,7 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase {
 		$category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
 		$parameterFilterData1 = $this->createParameterFilterData(
-			['cs' => 'Rozlišení tisku', 'en' => 'Print resolution'],
+			['cs' => 'Rozlišení tisku'],
 			[['cs' => '2400x600']]
 		);
 		$parameterFilterData2 = $this->createParameterFilterData(
