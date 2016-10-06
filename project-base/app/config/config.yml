@@ -67,6 +67,9 @@ framework:
   session:
     handler_id: ~
     cookie_httponly: true
+    # Disable the default PHP session garbage collection.
+    # Session garbage collection is responsibility of hosting.
+    gc_probability: 0
   fragments: ~
   http_method_override: true
   translator: ~
