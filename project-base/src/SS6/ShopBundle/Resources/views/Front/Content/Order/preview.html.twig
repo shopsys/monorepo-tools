@@ -20,7 +20,7 @@
 						{{ 'Slevový kupón'|trans }}:
 					</td>
 					<td class="table-cart-preview__cell table-cart-preview__cell--price">
-						{{ quantifiedProductDiscount.priceWithVat|price }}
+						{{ (-quantifiedProductDiscount.priceWithVat)|price }}
 					</td>
 				</tr>
 			{% endif %}
