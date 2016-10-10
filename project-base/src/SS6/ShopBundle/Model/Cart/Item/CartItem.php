@@ -32,7 +32,7 @@ class CartItem {
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Customer\User")
-	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true)
+	 * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable = true, onDelete="CASCADE")
 	 */
 	private $user;
 
