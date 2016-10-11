@@ -59,9 +59,14 @@ class OrderPreview {
 	private $roundingPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-	 * @param \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
+	 * @var float|null
+	 */
+	private $discountPercent;
+
+	/**
+	 * @param array $quantifiedProducts
+	 * @param array $quantifiedItemsPrices
+	 * @param array $quantifiedItemsDiscounts
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
@@ -69,6 +74,7 @@ class OrderPreview {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
+	 * @param float|null $discountPercent
 	 */
 	public function __construct(
 		array $quantifiedProducts,
@@ -80,7 +86,8 @@ class OrderPreview {
 		Price $transportPrice = null,
 		Payment $payment = null,
 		Price $paymentPrice = null,
-		Price $roundingPrice = null
+		Price $roundingPrice = null,
+		$discountPercent = null
 	) {
 		$this->quantifiedProducts = $quantifiedProducts;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
@@ -92,6 +99,7 @@ class OrderPreview {
 		$this->payment = $payment;
 		$this->paymentPrice = $paymentPrice;
 		$this->roundingPrice = $roundingPrice;
+		$this->discountPercent = $discountPercent;
 	}
 
 	/**
@@ -162,6 +170,13 @@ class OrderPreview {
 	 */
 	public function getRoundingPrice() {
 		return $this->roundingPrice;
+	}
+
+	/**
+	 * @return float|null
+	 */
+	public function getDiscountPercent() {
+		return $this->discountPercent;
 	}
 
 }

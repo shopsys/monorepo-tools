@@ -133,7 +133,8 @@ class OrderPreviewCalculation {
 			$transportPrice,
 			$payment,
 			$paymentPrice,
-			$roundingPrice
+			$roundingPrice,
+			$discountPercent
 		);
 	}
 
