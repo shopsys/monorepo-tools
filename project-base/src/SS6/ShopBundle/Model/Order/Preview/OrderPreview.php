@@ -61,7 +61,7 @@ class OrderPreview {
 	/**
 	 * @var float|null
 	 */
-	private $discountPercent;
+	private $promoCodeDiscountPercent;
 
 	/**
 	 * @param array $quantifiedProducts
@@ -74,7 +74,7 @@ class OrderPreview {
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
-	 * @param float|null $discountPercent
+	 * @param float|null $promoCodeDiscountPercent
 	 */
 	public function __construct(
 		array $quantifiedProducts,
@@ -87,7 +87,7 @@ class OrderPreview {
 		Payment $payment = null,
 		Price $paymentPrice = null,
 		Price $roundingPrice = null,
-		$discountPercent = null
+		$promoCodeDiscountPercent = null
 	) {
 		$this->quantifiedProducts = $quantifiedProducts;
 		$this->quantifiedItemsPrices = $quantifiedItemsPrices;
@@ -99,7 +99,7 @@ class OrderPreview {
 		$this->payment = $payment;
 		$this->paymentPrice = $paymentPrice;
 		$this->roundingPrice = $roundingPrice;
-		$this->discountPercent = $discountPercent;
+		$this->promoCodeDiscountPercent = $promoCodeDiscountPercent;
 	}
 
 	/**
@@ -175,8 +175,8 @@ class OrderPreview {
 	/**
 	 * @return float|null
 	 */
-	public function getDiscountPercent() {
-		return $this->discountPercent;
+	public function getPromoCodeDiscountPercent() {
+		return $this->promoCodeDiscountPercent;
 	}
 
 }

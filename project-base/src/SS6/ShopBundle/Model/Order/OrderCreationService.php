@@ -214,7 +214,7 @@ class OrderCreationService {
 			);
 
 			if ($quantifiedItemDiscount !== null) {
-				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale, $orderPreview->getDiscountPercent());
+				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale, $orderPreview->getPromoCodeDiscountPercent());
 			}
 		}
 	}

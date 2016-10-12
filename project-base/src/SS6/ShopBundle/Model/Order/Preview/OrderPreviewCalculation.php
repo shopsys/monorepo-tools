@@ -61,7 +61,7 @@ class OrderPreviewCalculation {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @param float|null $discountPercent
+	 * @param float|null $promoCodeDiscountPercent
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
@@ -72,7 +72,7 @@ class OrderPreviewCalculation {
 		Transport $transport = null,
 		Payment $payment = null,
 		User $user = null,
-		$discountPercent = null
+		$promoCodeDiscountPercent = null
 	) {
 		$quantifiedItemsPrices = $this->quantifiedProductPriceCalculation->calculatePrices(
 			$quantifiedProducts,
@@ -81,7 +81,7 @@ class OrderPreviewCalculation {
 		);
 		$quantifiedItemsDiscounts = $this->quantifiedProductDiscountCalculation->calculateDiscounts(
 			$quantifiedItemsPrices,
-			$discountPercent
+			$promoCodeDiscountPercent
 		);
 
 		$productsPrice = $this->getProductsPrice($quantifiedItemsPrices, $quantifiedItemsDiscounts);
@@ -134,7 +134,7 @@ class OrderPreviewCalculation {
 			$payment,
 			$paymentPrice,
 			$roundingPrice,
-			$discountPercent
+			$promoCodeDiscountPercent
 		);
 	}
 

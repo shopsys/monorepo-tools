@@ -92,7 +92,7 @@ class OrderPreviewFactory {
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
 	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @param float|null $discountPercent
+	 * @param float|null $promoCodeDiscountPercent
 	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function create(
@@ -102,7 +102,7 @@ class OrderPreviewFactory {
 		Transport $transport = null,
 		Payment $payment = null,
 		User $user = null,
-		$discountPercent = null
+		$promoCodeDiscountPercent = null
 	) {
 		return $this->orderPreviewCalculation->calculatePreview(
 			$currency,
@@ -111,7 +111,7 @@ class OrderPreviewFactory {
 			$transport,
 			$payment,
 			$user,
-			$discountPercent
+			$promoCodeDiscountPercent
 		);
 	}
 
