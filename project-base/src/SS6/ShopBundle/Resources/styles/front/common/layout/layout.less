@@ -9,7 +9,11 @@ img {
 .web {
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	min-height: 100%;
+
+	.is-no-flex &, .is-safari & {
+		display: block;
+	}
 
 	&__in {
 		flex: 1;
