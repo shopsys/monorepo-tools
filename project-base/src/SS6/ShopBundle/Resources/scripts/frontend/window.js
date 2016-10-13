@@ -8,6 +8,8 @@
 
 	var $activeWindow = null;
 	var animationTime = 300;
+	var flexPopupHeightIssueDetectionBoundaryHeight = 45;
+
 
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
@@ -193,7 +195,11 @@
 				});
 			}
 			$window.appendTo(getMainContainer());
+			if ($window.height() < flexPopupHeightIssueDetectionBoundaryHeight) {
+				$('html').addClass('is-flex-popup-height-issue-detected');
+			}
 			fixVerticalAlign();
+
 			setTimeout(function(){
 				$window.addClass('window-popup--active');
 			}, animationTime);
