@@ -19,6 +19,10 @@
 	box-shadow: 0 0 20px rgba(0,0,0, 0.3);
 	transition: @transition transform;
 
+	.is-no-flex &, .is-safari &, .is-flex-popup-height-issue-detected & {
+		display: block;
+	}
+
 	&--active {
 		transform: scaleX(1);
 	}
