@@ -201,7 +201,8 @@ class OrderDataFixture {
 		$orderData->payment = $this->getRandomPayment();
 		$orderData->status = $this->persistentReferenceFacade->getReference(OrderStatusDataFixture::ORDER_STATUS_DONE);
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = $this->faker->firstName . ' ' . $this->faker->lastName;
+		$orderData->deliveryFirstName = $this->faker->firstName;
+		$orderData->deliveryLastName = $this->faker->lastName;
 		$orderData->deliveryCompanyName = $this->faker->company;
 		$orderData->deliveryTelephone = $this->faker->phoneNumber;
 		$orderData->deliveryStreet = $this->faker->streetAddress;

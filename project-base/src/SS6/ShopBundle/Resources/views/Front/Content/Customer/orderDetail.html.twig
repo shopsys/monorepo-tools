@@ -67,10 +67,16 @@
 		<div class="margin-bottom-20">
 			<h2>{{ 'Doručovací adresa'|trans }}</h2>
 			<table class="table-params">
-				{% if order.deliveryContactPerson is not null %}
+				{% if order.deliveryFirstName is not null %}
 					<tr>
-						<th>{{ 'Kontaktní osoba'|trans }}: </th>
-						<td>{{ order.deliveryContactPerson }}</td>
+						<th>{{ 'Jméno'|trans }}: </th>
+						<td>{{ order.deliveryFirstName }}</td>
+					</tr>
+				{% endif %}
+				{% if order.deliveryLastName is not null %}
+					<tr>
+						<th>{{ 'Příjmení'|trans }}: </th>
+						<td>{{ order.deliveryLastName }}</td>
 					</tr>
 				{% endif %}
 				{% if order.deliveryCompanyName is not null %}

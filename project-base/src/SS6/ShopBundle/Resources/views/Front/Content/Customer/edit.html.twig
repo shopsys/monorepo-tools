@@ -64,7 +64,8 @@
 			}}
 			<div id="js-delivery-address-fields">
 				{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
-				{{ form_row(form.deliveryAddressData.contactPerson, { label: 'Kontaktní osoba'|trans}) }}
+				{{ form_row(form.deliveryAddressData.firstName, { label: 'Jméno'|trans}) }}
+				{{ form_row(form.deliveryAddressData.lastName, { label: 'Příjmení'|trans}) }}
 				{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans}) }}
 				{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
 				{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}

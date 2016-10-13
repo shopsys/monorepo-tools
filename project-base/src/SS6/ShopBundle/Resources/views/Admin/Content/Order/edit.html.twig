@@ -126,7 +126,8 @@
 					label: 'Doručovací adresa je stejná jako fakturační'|trans})
 				}}
 				<div id="js-delivery-address-fields" class="form-line__js">
-					{{ form_row(form.deliveryContactPerson, { label: 'Kontaktní osoba'|trans }) }}
+					{{ form_row(form.deliveryFirstName, { label: 'Jméno'|trans }) }}
+					{{ form_row(form.deliveryLastName, { label: 'Příjmení'|trans }) }}
 					{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
 					{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans }) }}
 					{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}

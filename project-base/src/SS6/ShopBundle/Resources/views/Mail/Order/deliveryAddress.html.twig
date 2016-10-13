@@ -1,6 +1,7 @@
 <table>
 	<tr>
-		<th>{% trans into orderLocale %}Kontaktní osoba{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Jméno{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Příjmení{% endtrans %}</th>
 		<th>{% trans into orderLocale %}Firma{% endtrans %}</th>
 		<th>{% trans into orderLocale %}Telefon{% endtrans %}</th>
 		<th>{% trans into orderLocale %}Ulice{% endtrans %}</th>
@@ -8,7 +9,8 @@
 		<th>{% trans into orderLocale %}PSČ{% endtrans %}</th>
 	</tr>
 	<tr>
-		<td>{{ order.deliveryContactPerson }}</td>
+		<td>{{ order.deliveryFirstName }}</td>
+		<td>{{ order.deliveryLastName }}</td>
 		<td>{{ order.deliveryCompanyName }}</td>
 		<td>{{ order.deliveryTelephone }}</td>
 		<td>{{ order.deliveryStreet }}</td>

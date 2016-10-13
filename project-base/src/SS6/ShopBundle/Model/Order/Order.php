@@ -191,9 +191,16 @@ class Order {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(type="string", length=200)
+	 * @ORM\Column(type="string", length=100)
 	 */
-	private $deliveryContactPerson;
+	private $deliveryFirstName;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(type="string", length=100)
+	 */
+	private $deliveryLastName;
 
 	/**
 	 * @var string|null
@@ -384,7 +391,8 @@ class Order {
 	private function setDeliveryAddress(OrderData $orderData) {
 		$this->deliveryAddressSameAsBillingAddress = $orderData->deliveryAddressSameAsBillingAddress;
 		if ($orderData->deliveryAddressSameAsBillingAddress) {
-			$this->deliveryContactPerson = $orderData->firstName . ' ' . $orderData->lastName;
+			$this->deliveryFirstName = $orderData->firstName;
+			$this->deliveryLastName = $orderData->lastName;
 			$this->deliveryCompanyName = $orderData->companyName;
 			$this->deliveryTelephone = $orderData->telephone;
 			$this->deliveryStreet = $orderData->street;
@@ -392,7 +400,8 @@ class Order {
 			$this->deliveryPostcode = $orderData->postcode;
 			$this->deliveryCountry = $orderData->country;
 		} else {
-			$this->deliveryContactPerson = $orderData->deliveryContactPerson;
+			$this->deliveryFirstName = $orderData->deliveryFirstName;
+			$this->deliveryLastName = $orderData->deliveryLastName;
 			$this->deliveryCompanyName = $orderData->deliveryCompanyName;
 			$this->deliveryTelephone = $orderData->deliveryTelephone;
 			$this->deliveryStreet = $orderData->deliveryStreet;
@@ -742,8 +751,15 @@ class Order {
 	/**
 	 * @return string
 	 */
-	public function getDeliveryContactPerson() {
-		return $this->deliveryContactPerson;
+	public function getDeliveryFirstName() {
+		return $this->deliveryFirstName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDeliveryLastName() {
+		return $this->deliveryLastName;
 	}
 
 	/**

@@ -141,7 +141,8 @@ class UserDataFixture {
 		$deliveryAddressData->addressFilled = true;
 		$deliveryAddressData->city = $this->faker->city;
 		$deliveryAddressData->companyName = $this->faker->company;
-		$deliveryAddressData->contactPerson = $this->faker->name;
+		$deliveryAddressData->firstName = $this->faker->firstName;
+		$deliveryAddressData->lastName = $this->faker->lastName;
 		$deliveryAddressData->postcode = $this->faker->postcode;
 		$deliveryAddressData->country = $country;
 		$deliveryAddressData->street = $this->faker->streetAddress;

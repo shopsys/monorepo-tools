@@ -19,7 +19,12 @@ class DeliveryAddressData {
 	/**
 	 * @var string|null
 	 */
-	public $contactPerson;
+	public $firstName;
+
+	/**
+	 * @var string|null
+	 */
+	public $lastName;
 
 	/**
 	 * @var string|null
@@ -52,7 +57,8 @@ class DeliveryAddressData {
 	 * @param string|null $city
 	 * @param string|null $postcode
 	 * @param string|null $companyName
-	 * @param string|null $contactPerson
+	 * @param string|null $firstName
+	 * @param null|null $lastName
 	 * @param string|null $telephone
 	 * @param \SS6\ShopBundle\Model\Country\Country|null $country
 	 */
@@ -62,7 +68,8 @@ class DeliveryAddressData {
 		$city = null,
 		$postcode = null,
 		$companyName = null,
-		$contactPerson = null,
+		$firstName = null,
+		$lastName = null,
 		$telephone = null,
 		Country $country = null
 	) {
@@ -71,7 +78,8 @@ class DeliveryAddressData {
 		$this->city = $city;
 		$this->postcode = $postcode;
 		$this->companyName = $companyName;
-		$this->contactPerson = $contactPerson;
+		$this->firstName = $firstName;
+		$this->lastName = $lastName;
 		$this->telephone = $telephone;
 		$this->country = $country;
 	}
@@ -83,7 +91,8 @@ class DeliveryAddressData {
 		if ($deliveryAddress !== null) {
 			$this->addressFilled = true;
 			$this->companyName = $deliveryAddress->getCompanyName();
-			$this->contactPerson = $deliveryAddress->getContactPerson();
+			$this->firstName = $deliveryAddress->getFirstName();
+			$this->lastName = $deliveryAddress->getLastName();
 			$this->telephone = $deliveryAddress->getTelephone();
 			$this->street = $deliveryAddress->getStreet();
 			$this->city = $deliveryAddress->getCity();

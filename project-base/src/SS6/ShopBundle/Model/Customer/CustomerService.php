@@ -187,7 +187,8 @@ class CustomerService {
 			$deliveryAddressData->postcode = $order->getDeliveryPostcode();
 			$deliveryAddressData->country = $order->getDeliveryCountry();
 			$deliveryAddressData->companyName = $order->getDeliveryCompanyName();
-			$deliveryAddressData->contactPerson = $order->getDeliveryContactPerson();
+			$deliveryAddressData->firstName = $order->getDeliveryFirstName();
+			$deliveryAddressData->lastName = $order->getDeliveryLastName();
 			$deliveryAddressData->telephone = $order->getDeliveryTelephone();
 		} else {
 			$deliveryAddressData->setFromEntity($deliveryAddress);

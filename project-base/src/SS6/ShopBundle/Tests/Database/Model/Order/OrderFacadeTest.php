@@ -72,7 +72,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$orderData->postcode = 'postcode';
 		$orderData->country = $persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = 'deliveryContanctPerson';
+		$orderData->deliveryFirstName = 'deliveryFirstName';
+		$orderData->deliveryLastName = 'deliveryLastName';
 		$orderData->deliveryCompanyName = 'deliveryCompanyName';
 		$orderData->deliveryTelephone = 'deliveryTelephone';
 		$orderData->deliveryStreet = 'deliveryStreet';
@@ -101,7 +102,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		$this->assertSame($orderData->city, $orderFromDb->getCity());
 		$this->assertSame($orderData->postcode, $orderFromDb->getPostcode());
 		$this->assertSame($orderData->country, $orderFromDb->getCountry());
-		$this->assertSame($orderData->deliveryContactPerson, $orderFromDb->getDeliveryContactPerson());
+		$this->assertSame($orderData->deliveryFirstName, $orderFromDb->getDeliveryFirstName());
+		$this->assertSame($orderData->deliveryLastName, $orderFromDb->getDeliveryLastName());
 		$this->assertSame($orderData->deliveryCompanyName, $orderFromDb->getDeliveryCompanyName());
 		$this->assertSame($orderData->deliveryTelephone, $orderFromDb->getDeliveryTelephone());
 		$this->assertSame($orderData->deliveryStreet, $orderFromDb->getDeliveryStreet());

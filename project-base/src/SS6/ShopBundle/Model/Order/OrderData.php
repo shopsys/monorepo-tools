@@ -98,7 +98,12 @@ class OrderData {
 	/**
 	 * @var string
 	 */
-	public $deliveryContactPerson;
+	public $deliveryFirstName;
+
+	/**
+	 * @var string
+	 */
+	public $deliveryLastName;
 
 	/**
 	 * @var string
@@ -194,7 +199,8 @@ class OrderData {
 		$this->country = $order->getCountry();
 		$this->deliveryAddressSameAsBillingAddress = $order->isDeliveryAddressSameAsBillingAddress();
 		if (!$order->isDeliveryAddressSameAsBillingAddress()) {
-			$this->deliveryContactPerson = $order->getDeliveryContactPerson();
+			$this->deliveryFirstName = $order->getDeliveryFirstName();
+			$this->deliveryLastName = $order->getDeliveryLastName();
 			$this->deliveryCompanyName = $order->getDeliveryCompanyName();
 			$this->deliveryTelephone = $order->getDeliveryTelephone();
 			$this->deliveryStreet = $order->getDeliveryStreet();

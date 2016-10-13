@@ -30,9 +30,16 @@ class DeliveryAddress {
 	/**
 	 * @var string|null
 	 *
-	 * @ORM\Column(type="string", length=200, nullable=true)
+	 * @ORM\Column(type="string", length=100, nullable=true)
 	 */
-	private $contactPerson;
+	private $firstName;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="string", length=100, nullable=true)
+	 */
+	private $lastName;
 
 	/**
 	 * @var string|null
@@ -77,7 +84,8 @@ class DeliveryAddress {
 		$this->city = $deliveryAddressData->city;
 		$this->postcode = $deliveryAddressData->postcode;
 		$this->companyName = $deliveryAddressData->companyName;
-		$this->contactPerson = $deliveryAddressData->contactPerson;
+		$this->firstName = $deliveryAddressData->firstName;
+		$this->lastName = $deliveryAddressData->lastName;
 		$this->telephone = $deliveryAddressData->telephone;
 		$this->country = $deliveryAddressData->country;
 	}
@@ -90,7 +98,8 @@ class DeliveryAddress {
 		$this->city = $deliveryAddressData->city;
 		$this->postcode = $deliveryAddressData->postcode;
 		$this->companyName = $deliveryAddressData->companyName;
-		$this->contactPerson = $deliveryAddressData->contactPerson;
+		$this->firstName = $deliveryAddressData->firstName;
+		$this->lastName = $deliveryAddressData->lastName;
 		$this->telephone = $deliveryAddressData->telephone;
 		$this->country = $deliveryAddressData->country;
 	}
@@ -105,8 +114,15 @@ class DeliveryAddress {
 	/**
 	 * @return string|null
 	 */
-	public function getContactPerson() {
-		return $this->contactPerson;
+	public function getFirstName() {
+		return $this->firstName;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getLastName() {
+		return $this->lastName;
 	}
 
 	/**

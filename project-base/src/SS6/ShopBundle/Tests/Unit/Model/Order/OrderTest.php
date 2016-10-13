@@ -71,7 +71,8 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame('companyName', $order->getDeliveryCompanyName());
 		$this->assertSame('telephone', $order->getDeliveryTelephone());
-		$this->assertSame('firstName lastName', $order->getDeliveryContactPerson());
+		$this->assertSame('firstName', $order->getDeliveryFirstName());
+		$this->assertSame('lastName', $order->getDeliveryLastName());
 		$this->assertSame('street', $order->getDeliveryStreet());
 		$this->assertSame('city', $order->getDeliveryCity());
 		$this->assertSame('postcode', $order->getDeliveryPostcode());
@@ -93,7 +94,8 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 		$orderData->deliveryAddressSameAsBillingAddress = false;
 		$orderData->deliveryCompanyName = 'deliveryCompanyName';
 		$orderData->deliveryTelephone = 'deliveryTelephone';
-		$orderData->deliveryContactPerson = 'deliveryContactPerson';
+		$orderData->deliveryFirstName = 'deliveryFirstName';
+		$orderData->deliveryLastName = 'deliveryLastName';
 		$orderData->deliveryStreet = 'deliveryStreet';
 		$orderData->deliveryCity = 'deliveryCity';
 		$orderData->deliveryPostcode = 'deliveryPostcode';
@@ -103,7 +105,8 @@ class OrderTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertSame('deliveryCompanyName', $order->getDeliveryCompanyName());
 		$this->assertSame('deliveryTelephone', $order->getDeliveryTelephone());
-		$this->assertSame('deliveryContactPerson', $order->getDeliveryContactPerson());
+		$this->assertSame('deliveryFirstName', $order->getDeliveryFirstName());
+		$this->assertSame('deliveryLastName', $order->getDeliveryLastName());
 		$this->assertSame('deliveryStreet', $order->getDeliveryStreet());
 		$this->assertSame('deliveryCity', $order->getDeliveryCity());
 		$this->assertSame('deliveryPostcode', $order->getDeliveryPostCode());

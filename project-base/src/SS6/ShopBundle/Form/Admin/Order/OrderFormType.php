@@ -142,16 +142,30 @@ class OrderFormType extends AbstractType {
 				],
 			])
 			->add('deliveryAddressSameAsBillingAddress', FormType::CHECKBOX, ['required' => false])
-			->add('deliveryContactPerson', FormType::TEXT, [
+			->add('deliveryFirstName', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím kontaktní osobu',
+						'message' => 'Vyplňte prosím jméno kontaktní osoby',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
 					new Constraints\Length([
-						'max' => 200,
+						'max' => 100,
 						'maxMessage' => 'Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+				],
+			])
+			->add('deliveryLastName', FormType::TEXT, [
+				'required' => true,
+				'constraints' => [
+					new Constraints\NotBlank([
+						'message' => 'Vyplňte prosím příjemní kontaktní osoby',
+						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
+					]),
+					new Constraints\Length([
+						'max' => 100,
+						'maxMessage' => 'Příjmení kontaktní osoby nesmí být delší než {{ limit }} znaků',
 						'groups' => [self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS],
 					]),
 				],

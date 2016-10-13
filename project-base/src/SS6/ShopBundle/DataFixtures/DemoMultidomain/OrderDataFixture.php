@@ -75,7 +75,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		$orderData->companyNumber = '123456789';
 		$orderData->companyTaxNumber = '987654321';
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = 'Karel Vesela';
+		$orderData->deliveryFirstName = 'Karel';
+		$orderData->deliveryLastName = 'Vesela';
 		$orderData->deliveryCompanyName = 'Bestcompany';
 		$orderData->deliveryTelephone = '+420987654321';
 		$orderData->deliveryStreet = 'Zakopaná 42';

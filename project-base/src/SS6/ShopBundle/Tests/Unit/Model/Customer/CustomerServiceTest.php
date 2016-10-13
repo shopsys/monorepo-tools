@@ -188,7 +188,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			'deliveryCity',
 			'deliveryPostcode',
 			'deliveryCompanyName',
-			'deliveryContactPerson',
+			'deliveryFirstName',
+			'deliveryLastName',
 			'deliveryTelephone',
 			$deliveryCountry
 		);
@@ -213,7 +214,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->postcode = 'orderPostcode';
 		$orderData->country = $billingCountry;
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
+		$orderData->deliveryFirstName = 'orderDeliveryFirstName';
+		$orderData->deliveryLastName = 'orderDeliveryLastName';
 		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
 		$orderData->deliveryTelephone = 'orderDeliveryTelephone';
 		$orderData->deliveryStreet = 'orderDeliveryStreet';
@@ -270,7 +272,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$orderData->postcode = 'orderPostcode';
 		$orderData->country = $billingCountry;
 		$orderData->deliveryAddressSameAsBillingAddress = false;
-		$orderData->deliveryContactPerson = 'orderDeliveryContactPerson';
+		$orderData->deliveryFirstName = 'orderDeliveryFirstName';
+		$orderData->deliveryLastName = 'orderDeliveryLastName';
 		$orderData->deliveryCompanyName = 'orderDeliveryCompanyName';
 		$orderData->deliveryTelephone = 'orderDeliveryTelephone';
 		$orderData->deliveryStreet = 'orderDeliveryStreet';
@@ -295,7 +298,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 			$order->getDeliveryCity(),
 			$order->getDeliveryPostcode(),
 			$order->getDeliveryCompanyName(),
-			$order->getDeliveryContactPerson(),
+			$order->getDeliveryFirstName(),
+			$order->getDeliveryLastName(),
 			$order->getDeliveryTelephone(),
 			$deliveryCountry
 		);

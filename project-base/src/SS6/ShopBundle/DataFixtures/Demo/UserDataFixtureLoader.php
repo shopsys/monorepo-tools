@@ -28,12 +28,13 @@ class UserDataFixtureLoader {
 	const	COLUMN_DELIVERY_ADDRESS_FILLED = 13;
 	const	COLUMN_DELIVERY_CITY = 14;
 	const	COLUMN_DELIVERY_COMPANY_NAME = 15;
-	const	COLUMN_DELIVERY_CONTACT_PERSON = 16;
-	const	COLUMN_DELIVERY_POSTCODE = 17;
-	const	COLUMN_DELIVERY_STREET = 18;
-	const	COLUMN_DELIVERY_TELEPHONE = 19;
-	const	COLUMN_DELIVERY_COUNTRY = 20;
-	const	COLUMN_DOMAIN_ID = 21;
+	const	COLUMN_DELIVERY_FIRST_NAME = 16;
+	const	COLUMN_DELIVERY_LAST_NAME = 17;
+	const	COLUMN_DELIVERY_POSTCODE = 18;
+	const	COLUMN_DELIVERY_STREET = 19;
+	const	COLUMN_DELIVERY_TELEPHONE = 20;
+	const	COLUMN_DELIVERY_COUNTRY = 21;
+	const	COLUMN_DOMAIN_ID = 22;
 
 	/**
 	 * @var CsvReader
@@ -145,7 +146,8 @@ class UserDataFixtureLoader {
 			$deliveryAddressData->addressFilled = true;
 			$deliveryAddressData->city = $row[self::COLUMN_DELIVERY_CITY];
 			$deliveryAddressData->companyName = $row[self::COLUMN_DELIVERY_COMPANY_NAME];
-			$deliveryAddressData->contactPerson = $row[self::COLUMN_DELIVERY_CONTACT_PERSON];
+			$deliveryAddressData->firstName = $row[self::COLUMN_DELIVERY_FIRST_NAME];
+			$deliveryAddressData->lastName = $row[self::COLUMN_DELIVERY_LAST_NAME];
 			$deliveryAddressData->postcode = $row[self::COLUMN_DELIVERY_POSTCODE];
 			$deliveryAddressData->street = $row[self::COLUMN_DELIVERY_STREET];
 			$deliveryAddressData->telephone = $row[self::COLUMN_DELIVERY_TELEPHONE];

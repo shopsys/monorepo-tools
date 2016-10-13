@@ -107,7 +107,8 @@ class OrderCreationService {
 		$frontOrderData->country = $user->getBillingAddress()->getCountry();
 		if ($user->getDeliveryAddress() !== null) {
 			$frontOrderData->deliveryAddressSameAsBillingAddress = false;
-			$frontOrderData->deliveryContactPerson = $user->getDeliveryAddress()->getContactPerson();
+			$frontOrderData->deliveryFirstName = $user->getDeliveryAddress()->getFirstName();
+			$frontOrderData->deliveryLastName = $user->getDeliveryAddress()->getLastName();
 			$frontOrderData->deliveryCompanyName = $user->getDeliveryAddress()->getCompanyName();
 			$frontOrderData->deliveryTelephone = $user->getDeliveryAddress()->getTelephone();
 			$frontOrderData->deliveryStreet = $user->getDeliveryAddress()->getStreet();
