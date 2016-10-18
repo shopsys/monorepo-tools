@@ -17,10 +17,10 @@
 			{% if quantifiedProductDiscount is not null %}
 				<tr>
 					<td class="table-cart-preview__cell">
-						{{ 'Sleva'|trans }}:
+						{{ 'Slevový kupón'|trans }} {{ (-orderPreview.promoCodeDiscountPercent)|formatPercent }}
 					</td>
 					<td class="table-cart-preview__cell table-cart-preview__cell--price">
-						{{ quantifiedProductDiscount.priceWithVat|price }}
+						{{ (-quantifiedProductDiscount.priceWithVat)|price }}
 					</td>
 				</tr>
 			{% endif %}

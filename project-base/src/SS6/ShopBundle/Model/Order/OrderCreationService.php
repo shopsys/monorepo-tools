@@ -18,6 +18,7 @@ use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use SS6\ShopBundle\Twig\NumberFormatterExtension;
 
 class OrderCreationService {
 
@@ -51,13 +52,19 @@ class OrderCreationService {
 	 */
 	private $domain;
 
+	/**
+	 * @var \SS6\ShopBundle\Twig\NumberFormatterExtension
+	 */
+	private $numberFormatterExtension;
+
 	public function __construct(
 		OrderItemPriceCalculation $orderItemPriceCalculation,
 		OrderPriceCalculation $orderPriceCalculation,
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		TransportPriceCalculation $transportPriceCalculation,
-		Domain $domain
+		Domain $domain,
+		NumberFormatterExtension $numberFormatterExtension
 	) {
 		$this->orderItemPriceCalculation = $orderItemPriceCalculation;
 		$this->orderPriceCalculation = $orderPriceCalculation;
@@ -65,6 +72,7 @@ class OrderCreationService {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->domain = $domain;
+		$this->numberFormatterExtension = $numberFormatterExtension;
 	}
 
 	/**
@@ -206,7 +214,7 @@ class OrderCreationService {
 			);
 
 			if ($quantifiedItemDiscount !== null) {
-				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale);
+				$this->addOrderItemDiscount($orderItem, $quantifiedItemDiscount, $locale, $orderPreview->getPromoCodeDiscountPercent());
 			}
 		}
 	}
@@ -235,11 +243,18 @@ class OrderCreationService {
 	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $discount
 	 * @param string $locale
+	 * @param float $discountPercent
 	 */
-	private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale) {
+	private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale, $discountPercent) {
+		$name = sprintf('%s %s - %s',
+			t('Slevový kupón', [], 'messages', $locale),
+			$this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),
+			$orderItem->getName()
+		);
+
 		new OrderProduct(
 			$orderItem->getOrder(),
-			t('Sleva', [], 'messages', $locale) . ' - ' . $orderItem->getName(),
+			$name,
 			new Price(
 				-$discount->getPriceWithoutVat(),
 				-$discount->getPriceWithVat()
