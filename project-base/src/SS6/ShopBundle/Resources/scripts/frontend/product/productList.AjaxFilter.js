@@ -3,6 +3,9 @@
 	SS6 = window.SS6 || {};
 	SS6.productList = SS6.productList || {};
 	SS6.productList.AjaxFilter = SS6.productList.AjaxFilter || {};
+	var historyPushStateObject = {
+		productFilter: true
+	};
 
 	SS6.productList.AjaxFilter = function (ajaxMoreLoader) {
 		var $productsWithControls = $('.js-product-list-ajax-filter-products-with-controls');
@@ -13,13 +16,16 @@
 		var requestDelay = 1000;
 
 		this.init = function () {
-			$(window).on('popstate', function () {
-				location.reload();
+			$(window).on('popstate', function (event) {
+				var state = event.originalEvent.state;
+				if (state.hasOwnProperty('productFilter') && state.productFilter === true) {
+					location.reload();
+				}
 			});
 			$productFilterForm.change(function () {
 				clearTimeout(requestTimer);
 				requestTimer = setTimeout(submitFormWithAjax, requestDelay);
-				history.pushState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
+				history.pushState(historyPushStateObject, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 			});
 
 			$showResultsButton.click(function () {
@@ -35,7 +41,7 @@
 				$productFilterForm.find('.js-product-filter-call-change-after-reset').change();
 				clearTimeout(requestTimer);
 				var resetUrl = $(this).attr('href');
-				history.pushState({}, '', resetUrl);
+				history.pushState(historyPushStateObject, '', resetUrl);
 				submitFormWithAjax();
 				return false;
 			});
