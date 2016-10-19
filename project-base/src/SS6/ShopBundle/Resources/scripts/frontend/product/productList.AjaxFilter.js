@@ -13,13 +13,10 @@
 		var requestDelay = 1000;
 
 		this.init = function () {
-			$(window).on('popstate', function () {
-				location.reload();
-			});
 			$productFilterForm.change(function () {
 				clearTimeout(requestTimer);
 				requestTimer = setTimeout(submitFormWithAjax, requestDelay);
-				history.pushState({}, '', SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
+				SS6.history.pushReloadState(SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 			});
 
 			$showResultsButton.click(function () {
@@ -35,7 +32,7 @@
 				$productFilterForm.find('.js-product-filter-call-change-after-reset').change();
 				clearTimeout(requestTimer);
 				var resetUrl = $(this).attr('href');
-				history.pushState({}, '', resetUrl);
+				SS6.history.pushReloadState(resetUrl);
 				submitFormWithAjax();
 				return false;
 			});
