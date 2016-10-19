@@ -64,9 +64,9 @@ class OrderPreview {
 	private $promoCodeDiscountPercent;
 
 	/**
-	 * @param array $quantifiedProducts
-	 * @param array $quantifiedItemsPrices
-	 * @param array $quantifiedItemsDiscounts
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
+	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
 	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
