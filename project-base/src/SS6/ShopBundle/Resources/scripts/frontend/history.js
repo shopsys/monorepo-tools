@@ -4,6 +4,12 @@
 	SS6.history = SS6.history || {};
 
 	SS6.history.pushReloadState = function (url, title, stateObject) {
+		var currentState = history.state || {};
+		if (!currentState.hasOwnProperty('refreshOnPopstate') || currentState.refreshOnPopstate !== true) {
+			currentState.refreshOnPopstate = true;
+			history.replaceState(currentState, document.title, location.href);
+		}
+
 		if (title === undefined) {
 			title = '';
 		}
