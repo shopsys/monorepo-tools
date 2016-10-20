@@ -8,6 +8,9 @@
 	{{ 'Košík'|trans }}
 {% endblock %}
 
+{% block breadcrumb %}
+{% endblock %}
+
 {% block main_content %}
 	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
 

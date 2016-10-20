@@ -3,8 +3,12 @@
 {% block content %}
 	<div class="web__main web__main--with-panel">
 		<div class="web__main__content js-main-content">
-			{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+			{% block breadcrumb %}
+				{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+			{% endblock %}
+
 			{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
+
 			{% block main_content %}{% endblock %}
 		</div>
 
