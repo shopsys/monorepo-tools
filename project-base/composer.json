@@ -108,7 +108,8 @@
 		]
 	},
 	"config": {
-		"bin-dir": "bin"
+		"bin-dir": "bin",
+		"preferred-install": "dist"
 	},
 	"extra": {
 		"symfony-app-dir": "app",
