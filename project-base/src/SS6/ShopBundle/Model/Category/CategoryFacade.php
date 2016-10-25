@@ -333,6 +333,15 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 */
+	public function findProductMainCategoryByDomainId(Product $product, $domainId) {
+		return $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainId);
+	}
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string[]

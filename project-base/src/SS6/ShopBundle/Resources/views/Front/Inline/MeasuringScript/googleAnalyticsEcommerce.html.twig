@@ -12,10 +12,15 @@ ga('ecommerce:addTransaction', {
 
 {% for orderProduct in order.productItems %}
 	ga('ecommerce:addItem', {
-		'id': '{{ order.number|escape('js')	 }}',
-		'name': '{{ orderProduct.product.name|escape('js') }}',
-		'sku': '{{ orderProduct.product.catnum|escape('js') }}',
-		'category': '{{ productMainCategory(orderProduct.product, getDomain().id).name|escape('js') }}',
+		'id': '{{ order.number|escape('js') }}',
+		'name': '{{ orderProduct.name|escape('js') }}',
+		'sku': '{{ orderProduct.catnum|escape('js') }}',
+		{% if orderProduct.product is not null %}
+			{% set productMainCategory = findProductMainCategory(orderProduct.product, getDomain().id) %}
+			{% if productMainCategory is not null %}
+				'category': '{{ productMainCategory.name|escape('js') }}',
+			{% endif %}
+		{% endif %}
 		'price': '{{ orderProduct.priceWithVat }}',
 		'quantity': '{{ orderProduct.quantity }}'
 	});

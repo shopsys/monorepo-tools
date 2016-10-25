@@ -37,6 +37,10 @@ class ProductExtension extends \Twig_Extension {
 				'productMainCategory',
 				[$this, 'getProductMainCategory']
 			),
+			new Twig_SimpleFunction(
+				'findProductMainCategory',
+				[$this, 'findProductMainCategory']
+			),
 		];
 	}
 
@@ -80,6 +84,15 @@ class ProductExtension extends \Twig_Extension {
 	 */
 	public function getProductMainCategory(Product $product, $domainId) {
 		return $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainId);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 */
+	public function findProductMainCategory(Product $product, $domainId) {
+		return $this->categoryFacade->findProductMainCategoryByDomainId($product, $domainId);
 	}
 
 }
