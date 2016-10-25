@@ -6,6 +6,8 @@
 
 {% block content %}
 	<div class="row">
+		{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+
 		{% if status_code == 404 %}
 			<div class="col-md-8 col-sm-12">
 

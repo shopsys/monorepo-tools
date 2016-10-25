@@ -46,6 +46,11 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 				return [
 					new BreadcrumbItem(t('Prehled značek')),
 				];
+			case 'front_error_page':
+				return $this->getBreacrumbItemForErrorPage($routeParameters['code']);
+
+			case 'front_error_page_format':
+				return $this->getBreacrumbItemForErrorPage($routeParameters['code']);
 		}
 	}
 
@@ -63,6 +68,23 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 		$frontBreadcrumbResolver->registerGenerator('front_registration_register', $this);
 		$frontBreadcrumbResolver->registerGenerator('front_brand_list', $this);
 		$frontBreadcrumbResolver->registerGenerator('front_customer_edit', $this);
+		$frontBreadcrumbResolver->registerGenerator('front_error_page', $this);
+		$frontBreadcrumbResolver->registerGenerator('front_error_page_format', $this);
+	}
+
+	/**
+	 * @param string $code
+	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem
+	 */
+	private function getBreacrumbItemForErrorPage($code) {
+		$breadcrumbName = t('Jejda! Nastala chyba');
+		if ($code === '404') {
+			$breadcrumbName = t('Stránka nenalezena');
+		}
+
+		return [
+			new BreadcrumbItem($breadcrumbName),
+		];
 	}
 
 }
