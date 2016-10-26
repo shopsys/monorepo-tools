@@ -23,11 +23,7 @@ class BreadcrumbController extends FrontBaseController {
 	 * @param array $routeParameters
 	 */
 	public function indexAction($routeName, array $routeParameters = []) {
-		if ($this->breadcrumbResolver->hasGeneratorForRoute($routeName)) {
-			$breadcrumbItems = $this->breadcrumbResolver->resolveBreadcrumbItems($routeName, $routeParameters);
-		} else {
-			$breadcrumbItems = null;
-		}
+		$breadcrumbItems = $this->breadcrumbResolver->resolveBreadcrumbItems($routeName, $routeParameters);
 
 		return $this->render('@SS6Shop/Front/Inline/Breadcrumb/breadcrumb.html.twig', [
 			'breadcrumbItems' => $breadcrumbItems,
