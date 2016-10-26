@@ -7,8 +7,9 @@
 		$container.filterAllNodes('form').each(function () {
 			var isFormSubmittingDisabled = false;
 
-			$(this).on('submit', function () {
+			$(this).on('submit', function (event) {
 				if (isFormSubmittingDisabled === true) {
+					event.stopImmediatePropagation();
 					return false;
 				}
 				isFormSubmittingDisabled = true;
