@@ -7,18 +7,16 @@
 		$container.filterAllNodes('form').each(function () {
 			var isFormSubmittingDisabled = false;
 
-			$(this).on('submit', function (event) {
-				if (isFormSubmittingDisabled === true) {
+			$(this).submit(function (event) {
+				if (isFormSubmittingDisabled) {
 					event.stopImmediatePropagation();
-					return false;
-				}
-				isFormSubmittingDisabled = true;
-				setTimeout(
-					function () {
+					event.preventDefault();
+				} else {
+					isFormSubmittingDisabled = true;
+					setTimeout(function () {
 						isFormSubmittingDisabled = false;
-					},
-					200
-				);
+					}, 200);
+				}
 			});
 		});
 	};
