@@ -1,9 +1,10 @@
 (function ($) {
 
 	SS6 = window.SS6 || {};
+	SS6.form = SS6.form || {};
 
-	$(document).ready(function () {
-		$('form').each(function () {
+	SS6.form.disableDoubleSubmit = function ($container) {
+		$container.filterAllNodes('form').each(function () {
 			var isFormSubmittingDisabled = false;
 
 			$(this).on('submit', function () {
@@ -19,6 +20,8 @@
 				);
 			});
 		});
-	});
+	};
+
+	SS6.register.registerCallback(SS6.form.disableDoubleSubmit, SS6.register.CALL_PRIORITY_HIGH);
 
 })(jQuery);
