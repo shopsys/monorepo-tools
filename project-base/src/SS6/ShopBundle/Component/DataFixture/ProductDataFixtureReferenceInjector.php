@@ -81,6 +81,9 @@ class ProductDataFixtureReferenceInjector {
 	 */
 	private function getCategoryReferences(PersistentReferenceFacade $persistentReferenceFacade) {
 		return [
+			CategoryDataFixture::ELECTRONICS => $persistentReferenceFacade->getReference(
+				CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS
+			),
 			CategoryDataFixture::TV => $persistentReferenceFacade->getReference(
 				CategoryDataFixture::PREFIX . CategoryDataFixture::TV
 			),
