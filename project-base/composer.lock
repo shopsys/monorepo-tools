@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8947470ec18423e8737009e6b3920d8f",
-    "content-hash": "9080ab5d8fe7578feb702fec80ebbc4d",
+    "hash": "9b5a9d48c71ed72e4c95981b07774d55",
+    "content-hash": "d9af6de2ab6a7608542dad71955f2012",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -4208,16 +4208,16 @@
         },
         {
             "name": "shopsys/migrations",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopsys/migrations.git",
-                "reference": "36a599ea0fa1954cc49e5a379ca3377d15fd616a"
+                "reference": "3f5d52ebd0d0ccd3173acc783be715cc7946d006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopsys/migrations/zipball/36a599ea0fa1954cc49e5a379ca3377d15fd616a",
-                "reference": "36a599ea0fa1954cc49e5a379ca3377d15fd616a",
+                "url": "https://api.github.com/repos/shopsys/migrations/zipball/3f5d52ebd0d0ccd3173acc783be715cc7946d006",
+                "reference": "3f5d52ebd0d0ccd3173acc783be715cc7946d006",
                 "shasum": ""
             },
             "require": {
@@ -4225,7 +4225,7 @@
                 "doctrine/doctrine-migrations-bundle": "~1.1",
                 "doctrine/orm": "~2.5",
                 "jdorn/sql-formatter": "~1.2",
-                "php": "5.6.*",
+                "php": "^5.6 || ^7.0",
                 "symfony/framework-bundle": "~2.7.3 || ~3"
             },
             "require-dev": {
@@ -4240,10 +4240,10 @@
                 }
             },
             "support": {
-                "source": "https://github.com/shopsys/migrations/tree/v1.4.1",
+                "source": "https://github.com/shopsys/migrations/tree/v1.4.2",
                 "issues": "https://github.com/shopsys/migrations/issues"
             },
-            "time": "2016-08-31 14:16:35"
+            "time": "2016-11-02 07:49:16"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
