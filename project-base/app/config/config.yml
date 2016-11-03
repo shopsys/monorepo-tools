@@ -104,12 +104,14 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%.slow.log"
       channels: slow
       level: debug
-    # use custom verbosity in console in cron
+    # display cron.DEBUG messages in console for -v, -vv and -vvv verbosities
     cron_console_output:
       type: console
       verbosity_levels:
         VERBOSITY_NORMAL: INFO
         VERBOSITY_VERBOSE: DEBUG
+        VERBOSITY_VERY_VERBOSE: DEBUG
+        VERBOSITY_DEBUG: DEBUG
       channels: cron
       # stop propagation to the second "console" handler so that message is not printed twice
       bubble: false
