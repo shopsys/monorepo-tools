@@ -8,6 +8,9 @@
 	{{ 'Objednávka dokončena'|trans }}
 {% endblock %}
 
+{% block breadcrumb %}
+{% endblock %}
+
 {% block main_content %}
 
 	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
