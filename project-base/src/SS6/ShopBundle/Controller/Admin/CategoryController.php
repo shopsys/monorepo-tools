@@ -143,10 +143,14 @@ class CategoryController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		if ($request->query->has('domain')) {
-			$domainId = (int)$request->query->get('domain');
+		if (count($this->domain->getAll()) > 1) {
+			if ($request->query->has('domain')) {
+				$domainId = (int)$request->query->get('domain');
+			} else {
+				$domainId = (int)$this->session->get('categories_selected_domain_id', 0);
+			}
 		} else {
-			$domainId = (int)$this->session->get('categories_selected_domain_id', 0);
+			$domainId = 0;
 		}
 
 		if ($domainId !== 0) {
