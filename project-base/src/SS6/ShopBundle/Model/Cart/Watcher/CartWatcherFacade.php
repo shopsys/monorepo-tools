@@ -7,7 +7,6 @@ use SS6\ShopBundle\Component\FlashMessage\FlashMessageSender;
 use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 
 class CartWatcherFacade {
 
@@ -31,23 +30,16 @@ class CartWatcherFacade {
 	 */
 	private $currentCustomer;
 
-	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
-	 */
-	private $currentPromoCodeFacade;
-
 	public function __construct(
 		FlashMessageSender $flashMessageSender,
 		EntityManager $em,
 		CartWatcherService $cartWatcherService,
-		CurrentCustomer $currentCustomer,
-		CurrentPromoCodeFacade $currentPromoCodeFacade
+		CurrentCustomer $currentCustomer
 	) {
 		$this->flashMessageSender = $flashMessageSender;
 		$this->em = $em;
 		$this->cartWatcherService = $cartWatcherService;
 		$this->currentCustomer = $currentCustomer;
-		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 	}
 
 	/**
@@ -56,7 +48,6 @@ class CartWatcherFacade {
 	public function checkCartModifications(Cart $cart) {
 		$this->checkNotListableItems($cart);
 		$this->checkModifiedPrices($cart);
-		$this->checkEmptyCart($cart);
 
 		$this->em->flush();
 	}
@@ -101,15 +92,6 @@ class CartWatcherFacade {
 		}
 
 		$this->em->flush();
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 */
-	private function checkEmptyCart(Cart $cart) {
-		if ($cart->isEmpty()) {
-			$this->currentPromoCodeFacade->removeEnteredPromoCode();
-		}
 	}
 
 }

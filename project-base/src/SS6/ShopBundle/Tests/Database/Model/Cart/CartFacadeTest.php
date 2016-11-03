@@ -13,6 +13,7 @@ use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -29,6 +30,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
 		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$currentPromoCodeFacade = $this->getContainer()->get(CurrentPromoCodeFacade::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$productId = $product1->getId();
@@ -43,7 +45,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 		$cartFacade->addProductToCart($productId, $quantity);
 
@@ -67,6 +70,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
 		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$currentPromoCodeFacade = $this->getContainer()->get(CurrentPromoCodeFacade::class);
 
 		$product = $this->getReference('product_6');
 		$productId = $product->getId();
@@ -81,7 +85,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 
 		// @codingStandardsIgnoreStart
@@ -110,6 +115,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
 		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$currentPromoCodeFacade = $this->getContainer()->get(CurrentPromoCodeFacade::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
@@ -123,7 +129,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
 		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), 2)->getCartItem();
@@ -137,7 +144,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 		$cartFacade->changeQuantities([
 			$cartItem1->getId() => 5,
@@ -165,6 +173,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$customerIdentifier = new CustomerIdentifier('randomString');
 		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$currentPromoCodeFacade = $this->getContainer()->get(CurrentPromoCodeFacade::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
@@ -180,7 +189,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 		$this->setExpectedException('\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
 		$cartFacade->deleteCartItem($cartItem->getId() + 1);
@@ -202,6 +212,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
 		$domain = $this->getContainer()->get(Domain::class);
 		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$currentPromoCodeFacade = $this->getContainer()->get(CurrentPromoCodeFacade::class);
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
@@ -220,7 +231,8 @@ class CartFacadeTest extends DatabaseTestCase {
 			$productRepository,
 			$customerIdentifier,
 			$domain,
-			$currentCustomer
+			$currentCustomer,
+			$currentPromoCodeFacade
 		);
 		$cartFacade->deleteCartItem($cartItem1->getId());
 

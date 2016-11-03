@@ -97,6 +97,10 @@ class CartController extends FrontBaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction(Request $request) {
+		if ($this->cart->isEmpty()) {
+			$this->cartFacade->cleanAdditionalData();
+		}
+
 		$cartFormData = [
 			'quantities' => [],
 		];
