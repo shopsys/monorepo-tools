@@ -11,7 +11,7 @@
 			error: showDefaultError,
 			complete: function () {}
 		};
-		var options = $.extend(defaults, options);
+		options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
 		var $loaderOverlay = getLoaderOverlay(options.loaderMessage, options.loaderElement);
 		var userErrorCallback = options.error;
