@@ -14,7 +14,9 @@
 
 		<table class="table-main">
 			<thead>
-				<th>{{ 'Doména'|trans }}</th>
+				{% if isMultidomain() %}
+					<th>{{ 'Doména'|trans }}</th>
+				{% endif %}
 				<th>{{ 'Používat'|trans }}</th>
 				<th>{{ 'Minimální cena zboží'|trans }}</th>
 			</thead>
@@ -22,7 +24,9 @@
 				{% for domainId, priceLimitForm in form.priceLimits %}
 					{% set domainName = domain.getDomainConfigById(domainId).getName() %}
 					<tr id="{{ priceLimitForm.vars.id }}" class="js-free-transport-and-payment-price-limit" data-domain-id="{{ domainId }}">
-						<td>{{ domainName }}</td>
+						{% if isMultidomain() %}
+							<td>{{ domainName }}</td>
+						{% endif %}
 						<td>
 							{{ form_widget(priceLimitForm.enabled, { attr: { class: 'js-free-transport-and-payment-price-limit-enabled' } } ) }}
 						</td>
