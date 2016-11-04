@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Grid\DataSourceInterface;
 use SS6\ShopBundle\Component\Grid\GridFactory;
 use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
@@ -75,6 +76,11 @@ class OrderController extends AdminBaseController {
 	 */
 	private $paymentEditFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
 	public function __construct(
 		OrderFacade $orderFacade,
 		AdvancedSearchOrderFacade $advancedSearchOrderFacade,
@@ -85,7 +91,8 @@ class OrderController extends AdminBaseController {
 		Breadcrumb $breadcrumb,
 		OrderItemFacade $orderItemFacade,
 		TransportEditFacade $transportEditFacade,
-		PaymentEditFacade $paymentEditFacade
+		PaymentEditFacade $paymentEditFacade,
+		Domain $domain
 	) {
 		$this->orderFacade = $orderFacade;
 		$this->advancedSearchOrderFacade = $advancedSearchOrderFacade;
@@ -97,6 +104,7 @@ class OrderController extends AdminBaseController {
 		$this->orderItemFacade = $orderItemFacade;
 		$this->transportEditFacade = $transportEditFacade;
 		$this->paymentEditFacade = $paymentEditFacade;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -225,7 +233,9 @@ class OrderController extends AdminBaseController {
 		$grid->addColumn('number', 'o.number', t('Č. objednávky'), true);
 		$grid->addColumn('created_at', 'o.createdAt', t('Vytvořena'), true);
 		$grid->addColumn('customer_name', 'customerName', t('Zákazník'), true);
-		$grid->addColumn('domain_id', 'o.domainId', t('Doména'), true);
+		if ($this->domain->isMultidomain()) {
+			$grid->addColumn('domain_id', 'o.domainId', t('Doména'), true);
+		}
 		$grid->addColumn('status_name', 'statusName', t('Stav'), true);
 		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)
 			->setClassAttribute('text-right text-no-wrap');

@@ -160,4 +160,11 @@ class Domain {
 		return $this->currentDomainConfig;
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function isMultidomain() {
+		return count($this->getAll()) > 1;
+	}
+
 }
