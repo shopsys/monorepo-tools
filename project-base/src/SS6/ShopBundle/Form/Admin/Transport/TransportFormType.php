@@ -50,9 +50,7 @@ class TransportFormType extends AbstractType {
 				],
 			])
 			->add('domains', FormType::DOMAINS, [
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Musíte vybrat alespoň jednu doménu']),
-				],
+				'required' => false,
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('vat', FormType::CHOICE, [

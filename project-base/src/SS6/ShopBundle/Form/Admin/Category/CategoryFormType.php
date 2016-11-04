@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Category;
 
-use SS6\ShopBundle\Component\Constraints\NotSelectedDomainToShow;
 use SS6\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use SS6\ShopBundle\Form\FormType;
 use SS6\ShopBundle\Model\Category\Category;
@@ -80,11 +79,9 @@ class CategoryFormType extends AbstractType {
 			])
 			->add($builder
 				->create('showOnDomains', FormType::DOMAINS, [
-					'constraints' => [
-						new NotSelectedDomainToShow(['message' => 'Musíte vybrat alespoň jednu doménu']),
-					],
 					InvertChoiceTypeExtension::INVERT_OPTION => true,
 					'property_path' => 'hiddenOnDomains',
+					'required' => false,
 				])
 			)
 			->add('heurekaCzFeedCategory', FormType::CHOICE, [
