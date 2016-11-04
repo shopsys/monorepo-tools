@@ -121,7 +121,9 @@
 {% block product_main_categories %}
 	<div class="form-line">
 
-		<label class="form-line__label">{{ 'Hlavní kategorie na doménách :' |trans }}</label>
+		{% if productMainCategoriesIndexedByDomainId|length > 1 %}
+			<label class="form-line__label">{{ 'Hlavní kategorie na doménách :' |trans }}</label>
+		{% endif %}
 
 		{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
 			<div class="form-line__line">
@@ -132,7 +134,11 @@
 				{% endif %}
 
 				<label class="form-line__label">
-					{{ getDomainName(domainId) ~ ' :' }}
+					{% if productMainCategoriesIndexedByDomainId|length > 1 %}
+						{{ getDomainName(domainId) ~ ' :' }}
+					{% else %}
+						{{ 'Hlavní kategorie:' |trans }}
+					{% endif %}
 				</label>
 
 				<div class="form-line__side">

@@ -17,6 +17,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CategoryController extends AdminBaseController {
 
+	const ALL_DOMAINS = 0;
+
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
@@ -143,23 +145,27 @@ class CategoryController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function listAction(Request $request) {
-		if ($request->query->has('domain')) {
-			$domainId = (int)$request->query->get('domain');
+		if (count($this->domain->getAll()) > 1) {
+			if ($request->query->has('domain')) {
+				$domainId = (int)$request->query->get('domain');
+			} else {
+				$domainId = (int)$this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
+			}
 		} else {
-			$domainId = (int)$this->session->get('categories_selected_domain_id', 0);
+			$domainId = self::ALL_DOMAINS;
 		}
 
-		if ($domainId !== 0) {
+		if ($domainId !== self::ALL_DOMAINS) {
 			try {
 				$this->domain->getDomainConfigById($domainId);
 			} catch (\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
-				$domainId = 0;
+				$domainId = self::ALL_DOMAINS;
 			}
 		}
 
 		$this->session->set('categories_selected_domain_id', $domainId);
 
-		if ($domainId === 0) {
+		if ($domainId === self::ALL_DOMAINS) {
 			$categoryDetails = $this->categoryFacade->getAllCategoryDetails($request->getLocale());
 		} else {
 			$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
@@ -167,7 +173,7 @@ class CategoryController extends AdminBaseController {
 
 		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
-			'isForAllDomains' => ($domainId === 0),
+			'isForAllDomains' => ($domainId === self::ALL_DOMAINS),
 		]);
 	}
 
@@ -215,7 +221,7 @@ class CategoryController extends AdminBaseController {
 	}
 
 	public function listDomainTabsAction() {
-		$domainId = $this->session->get('categories_selected_domain_id', 0);
+		$domainId = $this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
 
 		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
 			'domainConfigs' => $this->domain->getAll(),
