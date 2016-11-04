@@ -12,7 +12,7 @@
 			{{ form_id(category|default(null)) }}
 			{{ form_row(form.name, { label: 'Název'|trans }) }}
 			{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
-			{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+			{{ form_row(form.showOnDomains, { label: 'Zobrazovat na'|trans}) }}
 			{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
 			{% block category_urls %}{% endblock %}
 		</div>
