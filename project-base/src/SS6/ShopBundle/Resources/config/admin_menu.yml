@@ -223,9 +223,11 @@
 
     - label: 'Překlady'
       route: admin_translation_list
+      superadmin: true
       items:
         - label: 'Překlady konstant'
           route: admin_translation_list
+          superadmin: true
 
         - label: 'URL adresy'
           route: admin_superadmin_urls
