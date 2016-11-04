@@ -43,6 +43,6 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	) {
 		$sliderItem = new SliderItem($sliderItemData, Domain::FIRST_DOMAIN_ID);
 		$manager->persist($sliderItem);
-		$manager->flush($sliderItem);
+		$manager->flush();
 	}
 }
