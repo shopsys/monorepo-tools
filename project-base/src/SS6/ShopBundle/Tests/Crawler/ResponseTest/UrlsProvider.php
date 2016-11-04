@@ -272,6 +272,7 @@ class UrlsProvider {
 		$routesData[] = $this->getProductListWithFilteringInCategoryWith7600ProductsRouteData();
 		$routesData[] = $this->getProductWithListFilteringInCategoryWith13600ProductsRouteData();
 		$routesData[] = $this->getSearchFilteringRouteData();
+		$routesData[] = $this->getMainVarinatDetailRouteData();
 
 		return $routesData;
 	}
@@ -490,6 +491,17 @@ class UrlsProvider {
 			self::ROUTE_NAME_KEY => 'admin_administrator_edit',
 			self::ROUTE_PARAMETERS_KEY => ['id' => 1],
 			self::EXPECTED_STATUS_CODE_KEY => 404,
+		];
+	}
+
+	/**
+	 * @return array
+	 */
+	private function getMainVarinatDetailRouteData() {
+		return [
+			self::ROUTE_NAME_KEY => 'front_product_detail',
+			self::ROUTE_PARAMETERS_KEY => ['id' => 150],
+			self::EXPECTED_STATUS_CODE_KEY => 200,
 		];
 	}
 
