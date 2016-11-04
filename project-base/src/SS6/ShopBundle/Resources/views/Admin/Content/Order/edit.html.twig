@@ -27,14 +27,16 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-line">
-					<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-					<div class="form-line__side">
-						<div class="form-line__item form-line__item--text">
-							{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
+				{% if isMultidomain() %}
+					<div class="form-line">
+						<label class="form-line__label">{{ 'Doména'|trans }}:</label>
+						<div class="form-line__side">
+							<div class="form-line__item form-line__item--text">
+								{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
+							</div>
 						</div>
 					</div>
-				</div>
+				{% endif %}
 				{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
 				{{ form_row(form.status, { label: 'Stav'|trans }) }}
 				<div class="form-line">

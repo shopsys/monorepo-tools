@@ -39,6 +39,7 @@ class DomainExtension extends \Twig_Extension {
 			new Twig_SimpleFunction('getDomain', [$this, 'getDomain']),
 			new Twig_SimpleFunction('getDomainName', [$this, 'getDomainNameById']),
 			new Twig_SimpleFunction('domainIcon', [$this, 'getDomainIconHtml'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('isMultidomain', [$this, 'isMultidomain']),
 		];
 	}
 
@@ -105,4 +106,12 @@ class DomainExtension extends \Twig_Extension {
 			';
 		}
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMultidomain() {
+		return $this->getDomain()->isMultidomain();
+	}
+
 }
