@@ -154,7 +154,7 @@ class ImageExtension extends Twig_Extension {
 	 * @param array $attributes
 	 * @return string
 	 */
-	public function getNoimageHtml(array $attributes) {
+	public function getNoimageHtml(array $attributes = []) {
 		$this->preventDefault($attributes);
 
 		$entityName = 'noimage';
