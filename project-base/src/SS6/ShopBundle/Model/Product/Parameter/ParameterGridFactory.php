@@ -45,21 +45,30 @@ class ParameterGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('parameterList', $this->getParametersDataSource());
 		$grid->setDefaultOrder('pt.name');
 
-		$grid->addColumn(
-			'name',
-			'pt.name',
-			t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
-			true
-		);
-		foreach ($locales as $locale) {
-			if ($locale !== $defaultLocale) {
-				$grid->addColumn(
-					'name_' . $locale,
-					'pt_' . $locale . '.name',
-					t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
-					true
-				);
+		if (count($locales) > 1) {
+			$grid->addColumn(
+				'name',
+				'pt.name',
+				t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
+				true
+			);
+			foreach ($locales as $locale) {
+				if ($locale !== $defaultLocale) {
+					$grid->addColumn(
+						'name_' . $locale,
+						'pt_' . $locale . '.name',
+						t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
+						true
+					);
+				}
 			}
+		} else {
+			$grid->addColumn(
+				'name',
+				'pt.name',
+				t('Název'),
+				true
+			);
 		}
 		$grid->addColumn('visible', 'p.visible', t('Filtrovat podle'), true);
 
