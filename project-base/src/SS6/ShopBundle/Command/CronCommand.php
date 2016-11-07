@@ -8,14 +8,13 @@ use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronFacade;
 use SS6\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CronCommand extends ContainerAwareCommand {
 
-	const ARGUMENT_MODULE = 'module';
+	const OPTION_MODULE = 'module';
 	const OPTION_LIST = 'list';
 
 	protected function configure() {
@@ -23,7 +22,7 @@ class CronCommand extends ContainerAwareCommand {
 			->setName('ss6:cron')
 			->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
 			->addOption(self::OPTION_LIST, null, InputOption::VALUE_NONE, 'List all Service commands')
-			->addOption(self::ARGUMENT_MODULE, null, InputArgument::OPTIONAL, 'Service ID');
+			->addOption(self::OPTION_MODULE, null, InputOption::VALUE_OPTIONAL, 'Service ID');
 	}
 
 	/**
@@ -61,7 +60,7 @@ class CronCommand extends ContainerAwareCommand {
 	 * @param \SS6\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
 	 */
 	private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory) {
-		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
+		$moduleArgument = $input->getOption(self::OPTION_MODULE);
 		if ($moduleArgument === null) {
 			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
 		}
