@@ -48,6 +48,11 @@ class MenuItem {
 	private $icon;
 
 	/**
+	 * @var bool
+	 */
+	private $multidomainOnly;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string|null $route
@@ -55,6 +60,7 @@ class MenuItem {
 	 * @param bool $visible
 	 * @param bool $superadmin
 	 * @param string|null $icon
+	 * @param bool $multidomainOnly
 	 * @param array $items
 	 */
 	public function __construct(
@@ -65,6 +71,7 @@ class MenuItem {
 		$visible = true,
 		$superadmin = false,
 		$icon = null,
+		$multidomainOnly = false,
 		array $items = []
 	) {
 		if (isset($type)) {
@@ -101,6 +108,7 @@ class MenuItem {
 		}
 
 		$this->items = $items;
+		$this->multidomainOnly = $multidomainOnly;
 	}
 
 	/**
@@ -150,6 +158,13 @@ class MenuItem {
 	 */
 	public function isSuperadmin() {
 		return $this->superadmin === true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMultidomainOnly() {
+		return $this->multidomainOnly;
 	}
 
 	/**

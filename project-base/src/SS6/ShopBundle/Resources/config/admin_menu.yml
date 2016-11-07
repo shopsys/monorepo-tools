@@ -133,6 +133,7 @@
   items:
     - label: 'Identifikace e-shopu'
       route: admin_domain_list
+      multidomain_only: true
       items:
         - label: 'Identifikace e-shopu'
           route: admin_domain_list
