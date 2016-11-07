@@ -32,6 +32,15 @@ class CronCommand extends ContainerAwareCommand {
 		$mutexFactory = $this->getContainer()->get(MutexFactory::class);
 		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
 
+		$this->runCron($input, $cronFacade, $mutexFactory);
+	}
+
+	/**
+	 * @param \Symfony\Component\Console\Input\InputInterface $input
+	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
+	 * @param \SS6\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
+	 */
+	private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory) {
 		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
 		if ($moduleArgument === null) {
 			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
