@@ -25,7 +25,7 @@
 	SS6.orderRememberData.saveData = function() {
 		clearTimeout(SS6.orderRememberData.delayedSaveDataTimer);
 		var $orderForm = $('#js-order-form');
-		SS6.ajaxClearAndEnqueue('SS6.orderRememberData.saveData', {
+		SS6.ajaxPendingCall('SS6.orderRememberData.saveData', {
 			type: "POST",
 			url: $orderForm.data('ajax-save-url'),
 			data: $orderForm.serialize(),

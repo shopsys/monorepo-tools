@@ -22,7 +22,7 @@
 			data['paymentId'] = $checkedPayment.data('id');
 		}
 
-		SS6.ajaxClearAndEnqueue('SS6.orderPreview.loadOrderPreview', {
+		SS6.ajaxPendingCall('SS6.orderPreview.loadOrderPreview', {
 			loaderElement: '#js-order-preview',
 			url: $orderPreview.data('url'),
 			type: 'get',

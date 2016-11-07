@@ -66,7 +66,7 @@
 	};
 
 	SS6.search.autocomplete.searchRequest = function (searchText) {
-		SS6.ajaxClearAndEnqueue('SS6.search.autocomplete.searchRequest', {
+		SS6.ajaxPendingCall('SS6.search.autocomplete.searchRequest', {
 			loaderElement: null,
 			url: $input.data('autocomplete-url'),
 			type: 'post',

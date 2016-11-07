@@ -73,7 +73,7 @@
 	 * @param {string} pendingCallName
 	 * @param {object} options
 	 */
-	SS6.ajaxClearAndEnqueue = function (pendingCallName, options) {
+	SS6.ajaxPendingCall = function (pendingCallName, options) {
 		if (typeof pendingCallName !== 'string') {
 			throw 'Ajax queued call must have name!';
 		}
