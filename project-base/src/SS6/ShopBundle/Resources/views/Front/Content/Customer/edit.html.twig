@@ -13,64 +13,81 @@
 		{{ form_errors(form) }}
 
 		<div id="{{ form.userData.vars.id }}">
-			<h2>{{ 'Osobní údaje'|trans }}</h2>
-			{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
-			{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
-			{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans}) }}
-			{{ form_row(form.userData.email, { label: 'Email'|trans}) }}
-			<p>
-				{{ 'Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
-				Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.'|trans }}
-			</p>
+			<div class="wrap-box">
+				<h2 class="wrap-box__title">{{ 'Osobní údaje'|trans }}</h2>
+				<div class="wrap-box__in">
+					{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
+					{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
+					{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans}) }}
+					{{ form_row(form.userData.email, { label: 'Email'|trans}) }}
+					<p>
+						{{ 'Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.
+						Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte.'|trans }}
+					</p>
+				</div>
+			</div>
 
-			<h2>{{ 'Změna hesla'|trans }}</h2>
-			<div id="{{ form.userData.password.vars.id }}">
-				{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
-				<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
-					data-toggle="tooltip"
-					data-placement="right"
-					title=""
-					data-original-title="{{ 'Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným e-mailem ani s částí e-mailu před zavináčem.'|trans }}">
-				 </i>
-				{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
+			<div class="wrap-box">
+				<h2 class="wrap-box__title">{{ 'Změna hesla'|trans }}</h2>
+				<div class="wrap-box__in" id="{{ form.userData.password.vars.id }}">
+					{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
+					<i class="svg svg-info in-icon in-icon--info form-line__info js-tooltip"
+						data-toggle="tooltip"
+						data-placement="right"
+						title=""
+						data-original-title="{{ 'Heslo musí mít alespoň šest znaků a nesmí být shodné se zadaným e-mailem ani s částí e-mailu před zavináčem.'|trans }}">
+					 </i>
+					{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
+				</div>
 			</div>
 		</div>
 
 
 		<div id="{{ form.billingAddressData.vars.id }}">
-			<h2>{{ 'Firemní údaje'|trans }}</h2>
-			{{ form_row(form.billingAddressData.companyCustomer, {
-				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-				label: 'Nakupuji na firmu'|trans})
-			}}
-			<div id="js-company-fields">
-				{{ form_row(form.billingAddressData.companyName, { label: 'Firma'|trans}) }}
-				{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'|trans}) }}
-				{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'|trans}) }}
+			<div class="wrap-box">
+				<h2 class="wrap-box__title">{{ 'Firemní údaje'|trans }}</h2>
+				<div class="wrap-box__in">
+					{{ form_row(form.billingAddressData.companyCustomer, {
+						attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
+						label: 'Nakupuji na firmu'|trans})
+					}}
+					<div id="js-company-fields">
+						{{ form_row(form.billingAddressData.companyName, { label: 'Firma'|trans}) }}
+						{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'|trans}) }}
+						{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'|trans}) }}
+					</div>
+				</div>
 			</div>
 
-			<h2>{{ 'Adresa'|trans }}</h2>
-			{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
-			{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
-			{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans}) }}
-			{{ form_row(form.billingAddressData.country, { label: 'Stát'|trans}) }}
+			<div class="wrap-box">
+				<h2 class="wrap-box__title">{{ 'Adresa'|trans }}</h2>
+
+				<div class="wrap-box__in">
+					{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
+					{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
+					{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans}) }}
+					{{ form_row(form.billingAddressData.country, { label: 'Stát'|trans}) }}
+				</div>
+			</div>
 		</div>
 
-		<div id="{{ form.deliveryAddressData.vars.id }}">
-			<h2>{{ 'Doručovací adresa'|trans }}</h2>
-			{{ form_row(form.deliveryAddressData.addressFilled, {
-				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-				label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
-			}}
-			<div id="js-delivery-address-fields">
-				{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
-				{{ form_row(form.deliveryAddressData.firstName, { label: 'Jméno'|trans}) }}
-				{{ form_row(form.deliveryAddressData.lastName, { label: 'Příjmení'|trans}) }}
-				{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans}) }}
-				{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
-				{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
-				{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans}) }}
-				{{ form_row(form.deliveryAddressData.country, { label: 'Stát'|trans}) }}
+		<div id="{{ form.deliveryAddressData.vars.id }}" class="wrap-box">
+			<h2 class="wrap-box__title">{{ 'Doručovací adresa'|trans }}</h2>
+			<div class="wrap-box__in">
+				{{ form_row(form.deliveryAddressData.addressFilled, {
+					attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
+					label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
+				}}
+				<div id="js-delivery-address-fields">
+					{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
+					{{ form_row(form.deliveryAddressData.firstName, { label: 'Jméno'|trans}) }}
+					{{ form_row(form.deliveryAddressData.lastName, { label: 'Příjmení'|trans}) }}
+					{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans}) }}
+					{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
+					{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
+					{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans}) }}
+					{{ form_row(form.deliveryAddressData.country, { label: 'Stát'|trans}) }}
+				</div>
 			</div>
 		</div>
 
