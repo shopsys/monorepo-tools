@@ -11,9 +11,9 @@
 	{% if orders|length == 0 %}
 		{{ 'Dosud nemáte žádnou objednávku.'|trans }}
 	{% else %}
-		<div class="in-scroll">
+		<div class="in-scroll box-orders">
 			<div class="in-scroll__in">
-				<table class="table-main">
+				<table class="table-main box-orders__table">
 					<tr>
 						<th>{{ 'Číslo objednávky'|trans }}</th>
 						<th>{{ 'Datum vytvoření'|trans }}</th>
