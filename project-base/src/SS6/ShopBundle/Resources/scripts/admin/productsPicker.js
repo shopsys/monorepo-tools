@@ -47,7 +47,7 @@
 			$item.find('.js-products-picker-item-input').val(productId);
 			$itemsContainer.append($item);
 			initItem($item);
-			actualizeHeader();
+			updateHeader();
 			SS6.formChangeInfo.showInfo();
 		};
 
@@ -104,7 +104,7 @@
 
 			$item.remove();
 			reIndex();
-			actualizeHeader();
+			updateHeader();
 			SS6.formChangeInfo.showInfo();
 		};
 
@@ -123,7 +123,7 @@
 			SS6.formChangeInfo.showInfo();
 		};
 
-		var actualizeHeader = function () {
+		var updateHeader = function () {
 			$header.toggle(productItems.length !== 0);
 		};
 

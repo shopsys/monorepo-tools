@@ -8,7 +8,7 @@
 
 		var newRuleIndexCounter = 0;
 
-		SS6.advancedSearch.actualizeAllValuesByOperator($rulesContainer);
+		SS6.advancedSearch.updateAllValuesByOperator($rulesContainer);
 
 		$addRuleButton.click(function () {
 			SS6.advancedSearch.addRule($rulesContainer, $ruleTemplate, 'new_' + newRuleIndexCounter);
@@ -23,17 +23,17 @@
 
 		$rulesContainer.on('change', '.js-advanced-search-rule-subject', function () {
 			var $rule = $(this).closest('.js-advanced-search-rule');
-			SS6.advancedSearch.actualizeRule($rulesContainer, $rule, $(this).val(), 'new_' + newRuleIndexCounter);
+			SS6.advancedSearch.updateRule($rulesContainer, $rule, $(this).val(), 'new_' + newRuleIndexCounter);
 			newRuleIndexCounter++;
 		});
 
 		$rulesContainer.on('change', '.js-advanced-search-rule-operator', function () {
 			var $rule = $(this).closest('.js-advanced-search-rule');
-			SS6.advancedSearch.actualizeValueByOperator($rulesContainer, $rule, $(this).val());
+			SS6.advancedSearch.updateValueByOperator($rulesContainer, $rule, $(this).val());
 		});
 	};
 
-	SS6.advancedSearch.actualizeRule = function ($rulesContainer, $rule, filterName, newIndex) {
+	SS6.advancedSearch.updateRule = function ($rulesContainer, $rule, filterName, newIndex) {
 		$rule.addClass('in-disabled');
 		SS6.ajax({
 			loaderElement: '#js-advanced-search-rules-box',
@@ -60,14 +60,14 @@
 		SS6.register.registerNewContent($rule);
 	};
 
-	SS6.advancedSearch.actualizeAllValuesByOperator = function ($rulesContainer) {
+	SS6.advancedSearch.updateAllValuesByOperator = function ($rulesContainer) {
 		$rulesContainer.find('.js-advanced-search-rule').each(function () {
 			var operator = $(this).find('.js-advanced-search-rule-operator').val();
-			SS6.advancedSearch.actualizeValueByOperator($rulesContainer, $(this), operator);
+			SS6.advancedSearch.updateValueByOperator($rulesContainer, $(this), operator);
 		});
 	};
 
-	SS6.advancedSearch.actualizeValueByOperator = function ($rulesContainer, $rule, operator) {
+	SS6.advancedSearch.updateValueByOperator = function ($rulesContainer, $rule, operator) {
 		$rule.find('.js-advanced-search-rule-value').toggle(operator !== SS6.constant('\\SS6\\ShopBundle\\Model\\AdvancedSearch\\AdvancedSearchFilterInterface::OPERATOR_NOT_SET'));
 	};
 
