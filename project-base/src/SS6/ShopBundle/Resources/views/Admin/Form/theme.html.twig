@@ -703,17 +703,22 @@
 
 {% block domain_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
-	<select {{ block('widget_attributes') }}>
-		{% for domainConfig in domainConfigs %}
-			<option value="{{ domainConfig.id }}"{{ domainConfig.id == form.vars.value ? ' selected=""' : '' }}>
-				{% if displayUrl %}
-					{{ domainConfig.url }}
-				{% else %}
-					{{ domainConfig.name }}
-				{% endif %}
-			</option>
-		{% endfor %}
-	</select>
+	{% if isMultidomain() %}
+		<select {{ block('widget_attributes') }}>
+			{% for domainConfig in domainConfigs %}
+				<option value="{{ domainConfig.id }}"{{ domainConfig.id == form.vars.value ? ' selected=""' : '' }}>
+					{% if displayUrl %}
+						{{ domainConfig.url }}
+					{% else %}
+						{{ domainConfig.name }}
+					{% endif %}
+				</option>
+			{% endfor %}
+		</select>
+	{% else %}
+		<strong class="form-line__label">{{ getDomain().url }}</strong>
+		<input type="hidden" {{ block('widget_attributes') }} value="{{ getDomain().id }}" />
+	{% endif %}
 {% endblock domain_widget %}
 
 {% block domains_widget %}
