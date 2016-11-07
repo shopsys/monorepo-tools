@@ -1,20 +1,23 @@
+@table-params-column-fixed-width: 200px;
+
 .table-params {
 	width: 100%;
 
 	tr {
 		background: @color-f;
+		border-top: 1px solid @color-border;
 
-		&:nth-child(2n) {
-			background: @color-light;
+		&:first-child {
+			border-top: 0;
 		}
 	}
 
 	td, th {
-		padding: 5px 10px;
+		padding: 8px 12px;
 	}
 
 	th {
-		width: 160px;
+		width: @table-params-column-fixed-width;
 
 		font-weight: bold;
 		text-align: left;

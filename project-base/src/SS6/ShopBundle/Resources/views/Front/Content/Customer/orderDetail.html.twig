@@ -8,159 +8,163 @@
 
 {% block main_content %}
 	<h1>{{ 'Objednávka č.'|trans }} {{order.number}}</h1>
-	<div class="margin-bottom-20">
-		<h2>{{ 'Fakturační adresa'|trans }}</h2>
-		<table class="table-params">
-			<tr>
-				<th>{{ 'Jméno'|trans }}: </th>
-				<td>{{ order.firstName }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Příjmení'|trans }}: </th>
-				<td>{{ order.lastName }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Email'|trans }}: </th>
-				<td>{{ order.email }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Telefon'|trans }}: </th>
-				<td>{{ order.telephone }}</td>
-			</tr>
-			{% if order.companyName is not null %}
-				<tr>
-					<th>{{ 'Název firmy'|trans }}: </th>
-					<td>{{ order.companyName }}</td>
-				</tr>
-			{% endif %}
-			{% if order.companyNumber is not null %}
-				<tr>
-					<th>{{ 'IČ'|trans }}: </th>
-					<td>{{ order.companyNumber }}</td>
-				</tr>
-			{% endif %}
-			{% if order.companyTaxNumber is not null %}
-				<tr>
-					<th>{{ 'DIČ'|trans }}: </th>
-					<td>{{ order.companyTaxNumber }}</td>
-				</tr>
-			{% endif %}
-			<tr>
-				<th>{{ 'Ulice'|trans }}: </th>
-				<td>{{ order.street }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Město'|trans }}: </th>
-				<td>{{ order.city }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'PSČ'|trans }}: </th>
-				<td>{{ order.postcode }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Stát'|trans }}: </th>
-				<td>{{ order.country.name }}</td>
-			</tr>
-		</table>
-	</div>
-	{% if order.deliveryStreet is not null %}
-		<div class="margin-bottom-20">
-			<h2>{{ 'Doručovací adresa'|trans }}</h2>
-			<table class="table-params">
-				{% if order.deliveryFirstName is not null %}
+	<div class="box-order-detail">
+		<div class="wrap-box">
+			<h2 class="wrap-box__title">{{ 'Fakturační adresa'|trans }}</h2>
+			<div class="wrap-box__in">
+				<table class="table-params">
 					<tr>
 						<th>{{ 'Jméno'|trans }}: </th>
-						<td>{{ order.deliveryFirstName }}</td>
+						<td>{{ order.firstName }}</td>
 					</tr>
-				{% endif %}
-				{% if order.deliveryLastName is not null %}
 					<tr>
 						<th>{{ 'Příjmení'|trans }}: </th>
-						<td>{{ order.deliveryLastName }}</td>
+						<td>{{ order.lastName }}</td>
 					</tr>
-				{% endif %}
-				{% if order.deliveryCompanyName is not null %}
 					<tr>
-						<th>{{ 'Firma'|trans }}: </th>
-						<td>{{ order.deliveryCompanyName }}</td>
+						<th>{{ 'Email'|trans }}: </th>
+						<td>{{ order.email }}</td>
 					</tr>
-				{% endif %}
-				{% if order.deliveryTelephone is not null %}
 					<tr>
 						<th>{{ 'Telefon'|trans }}: </th>
-						<td>{{ order.deliveryTelephone }}</td>
+						<td>{{ order.telephone }}</td>
 					</tr>
-				{% endif %}
-				<tr>
-					<th>{{ 'Ulice'|trans }}: </th>
-					<td>{{ order.deliveryStreet }}</td>
-				</tr>
-				<tr>
-					<th>{{ 'Město'|trans }}: </th>
-					<td>{{ order.deliveryCity }}</td>
-				</tr>
-				<tr>
-					<th>{{ 'PSČ'|trans }}: </th>
-					<td>{{ order.deliveryPostcode }}</td>
-				</tr>
-				<tr>
-					<th>{{ 'Stát'|trans }}: </th>
-					<td>{{ order.deliveryCountry.name }}</td>
-				</tr>
-			</table>
-		</div>
-	{% endif %}
-
-	<div class="margin-bottom-20">
-		<h2>{{ 'Položky'|trans }}</h2>
-		<div class="in-scroll">
-			<div class="in-scroll__in">
-				<table class="table-main">
-					<tr>
-						<th>{{ 'Název'|trans }}</th>
-						<th>{{ 'Jednotková cena s DPH'|trans }}</th>
-						<th>{{ 'Množství'|trans }}</th>
-						<th>{{ 'Sazba DPH (%)'|trans }}</th>
-						<th>{{ 'Celkem s DPH'|trans }}</th>
-						<th>{{ 'Celkem bez DPH'|trans }}</th>
-					</tr>
-					{% for item in order.items %}
+					{% if order.companyName is not null %}
 						<tr>
-							<td>{{ item.name }}</td>
-							<td>{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
-							<td>{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
-							<td>{{ item.vatPercent|formatPercent }}</td>
-							<td>{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
-							<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+							<th>{{ 'Název firmy'|trans }}: </th>
+							<td>{{ order.companyName }}</td>
 						</tr>
-					{% endfor %}
+					{% endif %}
+					{% if order.companyNumber is not null %}
+						<tr>
+							<th>{{ 'IČ'|trans }}: </th>
+							<td>{{ order.companyNumber }}</td>
+						</tr>
+					{% endif %}
+					{% if order.companyTaxNumber is not null %}
+						<tr>
+							<th>{{ 'DIČ'|trans }}: </th>
+							<td>{{ order.companyTaxNumber }}</td>
+						</tr>
+					{% endif %}
+					<tr>
+						<th>{{ 'Ulice'|trans }}: </th>
+						<td>{{ order.street }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Město'|trans }}: </th>
+						<td>{{ order.city }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'PSČ'|trans }}: </th>
+						<td>{{ order.postcode }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Stát'|trans }}: </th>
+						<td>{{ order.country.name }}</td>
+					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
+	{% if order.deliveryStreet is not null %}
+		<div class="wrap-box">
+			<h2 class="wrap-box__title">{{ 'Doručovací adresa'|trans }}</h2>
+			<div class="wrap-box__in">
+				<table class="table-params">
+					{% if order.deliveryFirstName is not null %}
+						<tr>
+							<th>{{ 'Jméno'|trans }}: </th>
+							<td>{{ order.deliveryFirstName }}</td>
+						</tr>
+					{% endif %}
+					{% if order.deliveryLastName is not null %}
+						<tr>
+							<th>{{ 'Příjmení'|trans }}: </th>
+							<td>{{ order.deliveryLastName }}</td>
+						</tr>
+					{% endif %}
+					{% if order.deliveryCompanyName is not null %}
+						<tr>
+							<th>{{ 'Firma'|trans }}: </th>
+							<td>{{ order.deliveryCompanyName }}</td>
+						</tr>
+					{% endif %}
+					{% if order.deliveryTelephone is not null %}
+						<tr>
+							<th>{{ 'Telefon'|trans }}: </th>
+							<td>{{ order.deliveryTelephone }}</td>
+						</tr>
+					{% endif %}
+					<tr>
+						<th>{{ 'Ulice'|trans }}: </th>
+						<td>{{ order.deliveryStreet }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Město'|trans }}: </th>
+						<td>{{ order.deliveryCity }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'PSČ'|trans }}: </th>
+						<td>{{ order.deliveryPostcode }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Stát'|trans }}: </th>
+						<td>{{ order.deliveryCountry.name }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	{% endif %}
 
-	<div class="margin-bottom-20">
-		<h2>{{ 'Stav'|trans }}</h2>
-		{{ order.status.name }}
-	</div>
-
-	<div class="margin-bottom-20">
-		<h2>{{ 'Datum vytvoření'|trans }}</h2>
-		{{ order.createdAt|formatDate }}
-	</div>
-
-	<div class="margin-bottom-20">
-		<h2>{{ 'Celková cena'|trans }}</h2>
-		<table class="table-params">
-			<tr>
-				<th>{{ 'S DPH'|trans }}: </th>
-				<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
-			</tr>
-			<tr>
-				<th>{{ 'Bez DPH'|trans }}: </th>
-				<td>{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</td>
-			</tr>
-		</table>
+	<div class="wrap-box">
+		<h2 class="wrap-box__title">{{ 'Položky'|trans }}</h2>
+		<div class="wrap-box__in">
+			<div class="in-scroll margin-bottom-20">
+				<div class="in-scroll__in">
+					<table class="table-main box-orders">
+						<tr>
+							<th>{{ 'Název'|trans }}</th>
+							<th>{{ 'Jednotková cena s DPH'|trans }}</th>
+							<th>{{ 'Množství'|trans }}</th>
+							<th>{{ 'Sazba DPH (%)'|trans }}</th>
+							<th>{{ 'Celkem s DPH'|trans }}</th>
+							<th>{{ 'Celkem bez DPH'|trans }}</th>
+						</tr>
+						{% for item in order.items %}
+							<tr>
+								<td>{{ item.name }}</td>
+								<td>{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
+								<td>{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
+								<td>{{ item.vatPercent|formatPercent }}</td>
+								<td>{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
+								<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+			</div>
+			<div class="box-order-detail__total">
+				<table class="box-order-detail__total__table">
+					<tr>
+						<th>{{ 'Celková cena s DPH'|trans }}: </th>
+						<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Celková cena bez DPH'|trans }}: </th>
+						<td>{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Stav'|trans }}: </th>
+						<td>{{ order.status.name }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Datum vytvoření'|trans }}: </th>
+						<td>{{ order.createdAt|formatDate }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 
 	{% if is_granted('ROLE_CUSTOMER') %}
