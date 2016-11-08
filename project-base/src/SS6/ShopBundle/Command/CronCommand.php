@@ -37,7 +37,7 @@ class CronCommand extends ContainerAwareCommand {
 
 		$optionList = $input->getOption(self::OPTION_LIST);
 		if ($optionList === true) {
-			$this->listAllCronModules($output, $cronFacade);
+			$this->listAllCronModulesSortedByModuleId($output, $cronFacade);
 		} else {
 			$this->runCron($input, $cronFacade, $mutexFactory);
 		}
@@ -47,8 +47,13 @@ class CronCommand extends ContainerAwareCommand {
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
 	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
 	 */
-	private function listAllCronModules(OutputInterface $output, CronFacade $cronFacade) {
+	private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade) {
 		$cronModuleConfigs = $cronFacade->getAll();
+
+		uasort($cronModuleConfigs, function (CronModuleConfig $cronModuleConfigA, CronModuleConfig $cronModuleConfigB) {
+			return $cronModuleConfigA->getModuleId() > $cronModuleConfigB->getModuleId();
+		});
+
 		foreach ($cronModuleConfigs as $cronModuleConfig) {
 			$output->writeln(sprintf('php app/console ss6:cron --module="%s"', $cronModuleConfig->getModuleId()));
 		}
