@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<div>
+	<div itemscope itemtype="http://schema.org/Product">
 		<div class="box-detail">
 			<div class="box-detail__image">
 				{% set galleryImages = getImages(productDetail.product) %}
@@ -24,7 +24,7 @@
 				<div class="box-detail__image__main">
 					{% if imageExists(productDetail.product) %}
 						<a href="{{ imageUrl(productDetail.product, 'original') }}" class="{{ showGallery ? 'js-gallery-main-image' : 'js-popup-image' }}">
-							{{ image(productDetail.product) }}
+							{{ image(productDetail.product, { itemprop: 'image' }) }}
 						</a>
 					{% else %}
 						{{ noimage({ alt: productDetail.product.name }) }}
@@ -53,7 +53,7 @@
 				{% endif %}
 			</div>
 			<div class="box-detail__info">
-				<h1>{{ productDetail.product.name }}</h1>
+				<h1 itemprop="name">{{ productDetail.product.name }}</h1>
 
 				{% if productDetail.product.calculatedAvailability %}
 					<div class="box-detail__info__availability">
@@ -67,13 +67,27 @@
 
 				{% if not productDetail.product.isMainVariant %}
 					<div class="js-product-detail-main-add-to-cart-wrapper box-detail-add">
-						<div class="box-detail-add__prices">
+						<div {% if productDetail.sellingPrice is not null %}itemprop="offers"
+							itemscope
+							itemtype="http://schema.org/Offer" {% endif %}
+							class="box-detail-add__prices">
 							<div class="box-detail-add__prices__item box-detail-add__prices__item--main">
 								{{ productDetail.sellingPrice.priceWithVat|price }}
 							</div>
 							<div class="box-detail-add__prices__item">
 								{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
 							</div>
+							{% if productDetail.sellingPrice is not null %}
+								<meta itemprop="priceCurrency"
+									content="{{ currencyCode(domain.id) }}"
+								>
+								<meta itemprop="price"
+									content="{{ productDetail.sellingPrice.priceWithVat }}"
+								>
+								<link itemprop="availability"
+									href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
+								>
+							{% endif %}
 						</div>
 
 						{% if not productDetail.product.calculatedSellingDenied %}
@@ -94,7 +108,7 @@
 							</dt>
 							<dd>
 								<a href="{{ url('front_brand_detail', { id: productDetail.product.brand.id }) }}">
-									{{ productDetail.product.brand.name }}
+									<span itemprop="brand">{{ productDetail.product.brand.name }}</span>
 								</a>
 							</dd>
 						{% endif %}
@@ -133,12 +147,29 @@
 		</div>
 
 		{% if productDetail.product.isMainVariant %}
-			<table class="table-variants">
+			<table {% if productDetail.sellingPrice is not null %}itemprop="offers"
+				itemscope
+				itemtype="http://schema.org/AggregateOffer" {% endif %}
+				class="table-variants"
+			>
 				<thead>
 					<tr class="table-variants__row">
 						<th class="table-variants__cell table-variants__cell--image"></th>
 						<th class="table-variants__cell table-variants__cell--name">{{ 'Název'|trans }}</th>
-						<th class="table-variants__cell table-variants__cell--price">{{ 'Cena s DPH'|trans }}</th>
+						<th class="table-variants__cell table-variants__cell--price">
+							{{ 'Cena s DPH'|trans }}
+							{% if productDetail.sellingPrice is not null %}
+								<meta itemprop="priceCurrency"
+									content="{{ currencyCode(domain.id) }}"
+								>
+								<meta itemprop="lowPrice"
+									content="{{ productDetail.sellingPrice.priceWithVat }}"
+								>
+								<link itemprop="availability"
+									href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
+								>
+							{% endif %}
+						</th>
 						<th class="table-variants__cell table-variants__cell--action"></th>
 					</tr>
 				</thead>
@@ -206,7 +237,7 @@
 							<i class="svg svg-arrow"></i>
 						</a>
 						<div class="in-tab__content__item js-tabs-content active" data-tab-id="description">
-							<div class="in-user-text">
+							<div class="in-user-text" itemprop="description">
 								{{ productDomain.description|raw }}
 							</div>
 						</div>
