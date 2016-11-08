@@ -25,10 +25,11 @@
 	SS6.orderRememberData.saveData = function() {
 		clearTimeout(SS6.orderRememberData.delayedSaveDataTimer);
 		var $orderForm = $('#js-order-form');
-		$.ajax({
+		SS6.ajaxPendingCall('SS6.orderRememberData.saveData', {
 			type: "POST",
 			url: $orderForm.data('ajax-save-url'),
-			data: $orderForm.serialize()
+			data: $orderForm.serialize(),
+			loaderElement: null
 		});
 	};
 
