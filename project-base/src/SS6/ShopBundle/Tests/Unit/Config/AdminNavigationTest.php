@@ -38,9 +38,7 @@ class AdminNavigationTest extends FunctionalTestCase {
 					$router->generate($item->getRoute(), $item->getRouteParameters());
 				}
 
-				if ($item->getItems() !== null) {
-					$this->resolveRoutesRecursive($item->getItems());
-				}
+				$this->resolveRoutesRecursive($item->getItems());
 			}
 		}
 	}

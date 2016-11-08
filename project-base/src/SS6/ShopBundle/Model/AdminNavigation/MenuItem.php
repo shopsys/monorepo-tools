@@ -18,7 +18,7 @@ class MenuItem {
 	private $type;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private $items;
 
@@ -55,7 +55,7 @@ class MenuItem {
 	 * @param bool $visible
 	 * @param bool $superadmin
 	 * @param string|null $icon
-	 * @param array|null $items
+	 * @param array $items
 	 */
 	public function __construct(
 		$label,
@@ -65,7 +65,7 @@ class MenuItem {
 		$visible = true,
 		$superadmin = false,
 		$icon = null,
-		array $items = null
+		array $items = []
 	) {
 		if (isset($type)) {
 			$this->setType($type);
@@ -118,7 +118,7 @@ class MenuItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getItems() {
 		return $this->items;

@@ -78,7 +78,7 @@ class MenuLoader {
 		if (isset($array['items'])) {
 			$items = $this->loadItems($array['items']);
 		} else {
-			$items = null;
+			$items = [];
 		}
 
 		$item = new MenuItem(
