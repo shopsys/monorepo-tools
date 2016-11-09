@@ -1,22 +1,22 @@
-<ul class="in-progress">
-	<li class="in-progress__item {% if step == 1 %}in-progress__item--active{% elseif step > 1 %}in-progress__item--done{% endif %}{% if step == 2 %} in-progress__item--previous-active{% endif %}">
-		<span class="in-progress__item__inner">
-			<span class="in-progress__item__step">1.</span>
-			<span class="in-progress__item__title">{{ 'Košík'|trans }}</span>
+<ul class="box-progress">
+	<li class="box-progress__item {% if step == 1 %}box-progress__item--active{% elseif step > 1 %}box-progress__item--done{% endif %}{% if step == 2 %} box-progress__item--previous-active{% endif %}">
+		<span class="box-progress__item__inner">
+			<span class="box-progress__item__step">1.</span>
+			<span class="box-progress__item__title">{{ 'Košík'|trans }}</span>
 		</span>
 	</li>
 
-	<li class="in-progress__item {% if step == 2 %}in-progress__item--active{% elseif step > 2 %}in-progress__item--done{% endif %}{% if step == 3 %} in-progress__item--previous-active{% endif %}">
-		<span class="in-progress__item__inner">
-			<span class="in-progress__item__step">2.</span>
-			<span class="in-progress__item__title">{{ 'Doprava a platba'|trans }}</span>
+	<li class="box-progress__item {% if step == 2 %}box-progress__item--active{% elseif step > 2 %}box-progress__item--done{% endif %}{% if step == 3 %} box-progress__item--previous-active{% endif %}">
+		<span class="box-progress__item__inner">
+			<span class="box-progress__item__step">2.</span>
+			<span class="box-progress__item__title">{{ 'Doprava a platba'|trans }}</span>
 		</span>
 	</li>
 
-	<li class="in-progress__item {% if step == 3 %}in-progress__item--active{% endif %}">
-		<span class="in-progress__item__inner">
-			<span class="in-progress__item__step">3.</span>
-			<span class="in-progress__item__title">{{ 'Dodací údaje'|trans }}</span>
+	<li class="box-progress__item {% if step == 3 %}box-progress__item--active{% endif %}">
+		<span class="box-progress__item__inner">
+			<span class="box-progress__item__step">3.</span>
+			<span class="box-progress__item__title">{{ 'Dodací údaje'|trans }}</span>
 		</span>
 	</li>
 </ul>
