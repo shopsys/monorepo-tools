@@ -31,6 +31,7 @@
 			slidesToScroll: 1,
 			lazyLoad: 'ondemand',
 			mobileFirst: true,
+			infinite: false,
 			prevArrow: $gallery.filterAllNodes('.js-gallery-prev'),
 			nextArrow: $gallery.filterAllNodes('.js-gallery-next'),
 			responsive: [
