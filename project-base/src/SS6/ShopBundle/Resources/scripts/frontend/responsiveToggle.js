@@ -39,7 +39,7 @@
 
 		function toggle(show) {
 			$button.toggleClass(activeButtonClass, show);
-			$elementToHide.fadeToggle(show);
+			$elementToHide.slideToggle(show);
 		}
 
 		function onClickOut(event) {
