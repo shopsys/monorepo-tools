@@ -1,12 +1,12 @@
 <ul class="in-progress">
-	<li class="in-progress__item {% if step == 1 %}in-progress__item--active{% elseif step > 1 %}in-progress__item--done{% endif %}">
+	<li class="in-progress__item {% if step == 1 %}in-progress__item--active{% elseif step > 1 %}in-progress__item--done{% endif %}{% if step == 2 %} in-progress__item--previous-active{% endif %}">
 		<span class="in-progress__item__inner">
 			<span class="in-progress__item__step">1.</span>
 			<span class="in-progress__item__title">{{ 'Košík'|trans }}</span>
 		</span>
 	</li>
 
-	<li class="in-progress__item {% if step == 2 %}in-progress__item--active{% elseif step > 2 %}in-progress__item--done{% endif %}">
+	<li class="in-progress__item {% if step == 2 %}in-progress__item--active{% elseif step > 2 %}in-progress__item--done{% endif %}{% if step == 3 %} in-progress__item--previous-active{% endif %}">
 		<span class="in-progress__item__inner">
 			<span class="in-progress__item__step">2.</span>
 			<span class="in-progress__item__title">{{ 'Doprava a platba'|trans }}</span>
