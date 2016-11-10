@@ -1,3 +1,6 @@
+@box-order-info-width: (100% / 3 * 2);
+@box-order-cart-width: ~"calc(100% - @{box-order-info-width})";
+
 .box-order {
 	&__info {
 		&__item {
@@ -15,13 +18,28 @@
 		width: 100%;
 		display: flex;
 
+		.is-no-flex & {
+			display: block;
+			.clearfix();
+		}
+
 		&__info {
-			width: 100% / 3 * 2;
+			flex: 0 @box-order-info-width;
+
+			.is-no-flex & {
+				float: left;
+				width: @box-order-info-width;
+			}
 		}
 
 		&__cart {
-			width: 100% / 3;
+			flex: 0 @box-order-cart-width;
 			padding-left: 20px;
+
+			.is-no-flex & {
+				float: right;
+				width: @box-order-cart-width;
+			}
 		}
 	}
 }
