@@ -1,3 +1,5 @@
+@box-progress-steps-count: 3;
+
 .box-progress {
 	.reset-ul();
 	display: flex;
@@ -5,13 +7,24 @@
 	width: 100%;
 	margin-bottom: @margin-gap;
 
+	.is-no-flex & {
+		display: block;
+		.clearfix();
+	}
+
 	&__item {
-		width: 100%/3;
+		flex: 1;
 		display: flex;
 		align-items: center;
 
 		background: @color-light;
 		border-left: 1px solid @color-f;
+
+		.is-no-flex & {
+			float: left;
+			width: 100%/@box-progress-steps-count;
+			display: block;
+		}
 
 		&:first-child {
 			border-left: 0;
@@ -38,6 +51,10 @@
 			text-align: center;
 
 			font-size: 12px;
+
+			.is-no-flex & {
+				display: block;
+			}
 		}
 
 		&__step {
