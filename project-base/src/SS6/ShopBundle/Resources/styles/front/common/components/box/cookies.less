@@ -28,10 +28,27 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
+
+		.is-no-flex & {
+			display: block;
+			text-align: center;
+		}
+	}
+
+	&__text {
+		.is-no-flex & {
+			display: inline-block;
+			vertical-align: middle;
+		}
 	}
 
 	&__btn {
 		padding-left: 10px;
+
+		.is-no-flex & {
+			display: inline-block;
+			vertical-align: middle;
+		}
 	}
 }
 
