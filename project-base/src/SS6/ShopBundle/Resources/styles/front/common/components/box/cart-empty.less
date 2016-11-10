@@ -23,6 +23,10 @@
 			vertical-align: middle;
 			width: 100%/2;
 		}
+
+		@media @query-lg {
+			padding-right: @box-cart-empty-gap-desktop;
+		}
 	}
 
 	&__text {
@@ -37,36 +41,19 @@
 			vertical-align: middle;
 			width: 100%/2;
 		}
-	}
-}
 
-@media @query-md {
-	.box-cart-empty {
-		&__text {
+		@media @query-md {
 			font-size: 14px;
 		}
-	}
-}
 
-
-@media @query-lg {
-	.box-cart-empty {
-		&__image {
-			padding-right: @box-cart-empty-gap-desktop;
-		}
-
-		&__text {
+		@media @query-md {
 			padding-left: @box-cart-empty-gap-desktop;
 			padding-right: @box-cart-empty-gap-desktop;
 
 			font-size: 16px;
 		}
-	}
-}
 
-@media @query-vl {
-	.box-cart-empty {
-		&__text {
+		@media @query-vl {
 			font-size: 20px;
 		}
 	}

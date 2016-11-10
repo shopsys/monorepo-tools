@@ -1,18 +1,7 @@
 .box-cart-bottom {
 	margin-bottom: @margin-gap;
 
-	&__info {
-		margin-bottom: 10px;
-		text-align: center;
-	}
-
-	&__promo {
-		text-align: center;
-	}
-}
-
-@media @query-lg {
-	.box-cart-bottom {
+	@media @query-lg {
 		width: 100%;
 		display: flex;
 
@@ -20,8 +9,13 @@
 			display: block;
 			.clearfix();
 		}
+	}
 
-		&__info {
+	&__info {
+		margin-bottom: 10px;
+		text-align: center;
+
+		@media @query-lg {
 			flex: 1;
 			text-align: left;
 
@@ -30,8 +24,12 @@
 				width: 100%/2;
 			}
 		}
+	}
 
-		&__promo {
+	&__promo {
+		text-align: center;
+
+		@media @query-lg {
 			flex: 1;
 			text-align: right;
 

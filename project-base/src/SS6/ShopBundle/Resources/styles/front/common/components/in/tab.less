@@ -1,6 +1,34 @@
 .in-tab {
 	&__head {
 		display: none;
+
+		@media @query-lg {
+			display: block;
+			margin-bottom: -1px;
+			position: relative;
+			z-index: 2;
+			.clearfix();
+
+			&__item {
+				float: left;
+				padding: 8px 15px;
+
+				border: 1px solid transparent;
+				border-bottom: 0;
+
+				@media @query-xl {
+					padding: 10px 20px;
+				}
+
+				&.active {
+					background: @color-f;
+					border-color:  @color-border;
+					color: @color-base;
+					text-decoration: none;
+					font-weight: bold;
+				}
+			}
+		}
 	}
 
 	&__content {
@@ -14,6 +42,11 @@
 			border: 1px solid @color-border;
 			color: @color-base;
 			font-weight: bold;
+
+
+			@media @query-lg {
+				display: none;
+			}
 
 			.svg {
 				position: absolute;
@@ -35,65 +68,19 @@
 		&__item {
 			display: none;
 
-			&.active {
-				display: block;
-				margin-bottom: 10px;
-			}
-		}
-	}
-}
-
-@media @query-lg {
-	.in-tab {
-		&__head {
-			display: block;
-			margin-bottom: -1px;
-			position: relative;
-			z-index: 2;
-			.clearfix();
-
-			&__item {
-				float: left;
-				padding: 8px 15px;
-
-				border: 1px solid transparent;
-				border-bottom: 0;
-
-				&.active {
-					background: @color-f;
-					border-color:  @color-border;
-					color: @color-base;
-					text-decoration: none;
-					font-weight: bold;
-				}
-			}
-		}
-
-		&__content {
-			&__title {
-				display: none;
-			}
-
-			&__item {
+			@media @query-lg {
 				padding: 15px;
 
 				border: 1px solid @color-border;
 			}
-		}
-	}
-}
 
-@media @query-xl {
-	.in-tab {
-		&__head {
-			&__item {
-				padding: 10px 20px;
-			}
-		}
-
-		&__content {
-			&__item {
+			@media @query-xl {
 				padding: 20px;
+			}
+
+			&.active {
+				display: block;
+				margin-bottom: 10px;
 			}
 		}
 	}

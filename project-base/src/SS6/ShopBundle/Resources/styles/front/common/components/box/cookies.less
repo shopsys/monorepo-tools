@@ -33,6 +33,11 @@
 			display: block;
 			text-align: center;
 		}
+
+		@media @query-xl {
+			margin: 0 auto;
+			width: @box-cookies-width;
+		}
 	}
 
 	&__text {
@@ -48,15 +53,6 @@
 		.is-no-flex & {
 			display: inline-block;
 			vertical-align: middle;
-		}
-	}
-}
-
-@media @query-xl {
-	.box-cookies {
-		&__in {
-			margin: 0 auto;
-			width: @box-cookies-width;
 		}
 	}
 }

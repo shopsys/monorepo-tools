@@ -55,22 +55,16 @@
 			.is-no-flex & {
 				display: block;
 			}
+
+			@media @query-lg {
+				font-size: 14px;
+			}
 		}
 
 		&__step {
 			font-weight: bold;
-		}
-	}
-}
 
-@media @query-lg {
-	.box-progress {
-		&__item {
-			&__inner {
-				font-size: 14px;
-			}
-
-			&__step {
+			@media @query-lg {
 				font-size: 18px;
 			}
 		}

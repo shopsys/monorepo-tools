@@ -12,6 +12,11 @@
 		position: absolute;
 		top: 7px;
 		right: 5px;
+
+		@media @query-lg {
+			right: auto;
+			left: 295px;
+		}
 	}
 
 	&--inline {
@@ -109,16 +114,6 @@
 		li {
 			font-size: 12px;
 			color: @color-f;
-		}
-	}
-}
-
-
-@media @query-lg {
-	.form-error {
-		&--line {
-			right: auto;
-			left: 295px;
 		}
 	}
 }

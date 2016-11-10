@@ -3,8 +3,18 @@
 .in-paging {
 	margin-bottom: @margin-gap;
 
+	@media @query-md {
+		display: flex;
+		align-items: center;
+	}
+
 	&__info {
 		display: none;
+
+		@media @query-md {
+			display: block;
+			flex: 1;
+		}
 	}
 
 	&__control {
@@ -12,6 +22,10 @@
 		text-align: center;
 
 		font-size: 0;
+
+		@media @query-md {
+			flex: 3;
+		}
 
 		&__item {
 			display: inline-block;
@@ -60,23 +74,6 @@
 					}
 				}
 			}
-		}
-	}
-}
-
-@media @query-md {
-	.in-paging {
-		display: flex;
-		align-items: center;
-
-		&__info {
-			display: block;
-			flex: 1;
-		}
-
-		&__control {
-			flex: 3;
-			text-align: right;
 		}
 	}
 }
