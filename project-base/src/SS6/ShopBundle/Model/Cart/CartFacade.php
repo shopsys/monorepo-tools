@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -32,9 +33,9 @@ class CartFacade {
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
-	private $customerIdentifier;
+	private $customerIdentifierFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -48,6 +49,13 @@ class CartFacade {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 */
 	private $currentPromoCodeFacade;
 
@@ -56,7 +64,7 @@ class CartFacade {
 		CartService $cartService,
 		Cart $cart,
 		ProductRepository $productRepository,
-		CustomerIdentifier $customerIdentifier,
+		CustomerIdentifierFactory $customerIdentifierFactory,
 		Domain $domain,
 		CurrentCustomer $currentCustomer,
 		CurrentPromoCodeFacade $currentPromoCodeFacade
@@ -65,7 +73,7 @@ class CartFacade {
 		$this->cartService = $cartService;
 		$this->cart = $cart;
 		$this->productRepository = $productRepository;
-		$this->customerIdentifier = $customerIdentifier;
+		$this->customerIdentifierFactory = $customerIdentifierFactory;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
 		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
@@ -82,7 +90,8 @@ class CartFacade {
 			$this->domain->getId(),
 			$this->currentCustomer->getPricingGroup()
 		);
-		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
+		$customerIdentifier = $this->customerIdentifierFactory->get();
+		$result = $this->cartService->addProductToCart($this->cart, $customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 
 		$this->em->persist($result->getCartItem());
