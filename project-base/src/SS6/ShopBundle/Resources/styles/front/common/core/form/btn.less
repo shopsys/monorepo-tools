@@ -34,24 +34,10 @@
 
 //// Modifications - color
 .btn {
-	@btn-primary-color: @color-f;
-	@btn-primary-color-hover: @color-f;
-	@btn-primary-bg: @color-green;
-	@btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
-
-	&--primary {
-		color: @btn-primary-color;
-		background: @btn-primary-bg;
-
-		&:hover {
-			color: @btn-primary-color-hover;
-			background: @btn-primary-bg-hover;
-		}
-	}
-
+	// call to action button
 	@btn-success-color: @color-f;
 	@btn-success-color-hover: @color-f;
-	@btn-success-bg: @color-blue;
+	@btn-success-bg: @color-green;
 	@btn-success-bg-hover: darken(@btn-success-bg, 5%);
 
 	&--success {
@@ -61,6 +47,22 @@
 		&:hover {
 			color: @btn-success-color-hover;
 			background: @btn-success-bg-hover;
+		}
+	}
+
+	// primary button
+	@btn-primary-color: @color-f;
+	@btn-primary-color-hover: @color-f;
+	@btn-primary-bg: @color-blue;
+	@btn-primary-bg-hover: darken(@btn-primary-bg, 5%);
+
+	&--primary {
+		color: @btn-primary-color;
+		background: @btn-primary-bg;
+
+		&:hover {
+			color: @btn-primary-color-hover;
+			background: @btn-primary-bg-hover;
 		}
 	}
 

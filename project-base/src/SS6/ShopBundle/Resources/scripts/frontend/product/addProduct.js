@@ -31,7 +31,7 @@
 				buttonContinue: true,
 				textContinue: SS6.translator.trans('Přejít do košíku'),
 				urlContinue: buttonContinueUrl,
-				cssClassContinue: 'btn--primary'
+				cssClassContinue: 'btn--success'
 			});
 
 			$('#js-cart-box').trigger('reload');
@@ -41,7 +41,7 @@
 				wide: isWide,
 				buttonCancel: true,
 				textCancel: SS6.translator.trans('Zavřít'),
-				cssClassCancel: 'btn--primary'
+				cssClassCancel: 'btn--success'
 			});
 		}
 	};
