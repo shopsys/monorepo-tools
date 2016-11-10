@@ -37,12 +37,20 @@
 
 	SS6.product.initializeSideNavigation = function () {
 		var $productDetailNavigation = $('.js-product-detail-navigation');
+		var $webContent = $('.web__content');
+
 		$('.form-group__title, .form-full__title').each(function () {
 			var $title = $(this);
 			var $titleClone = $title.clone();
+
 			$titleClone.find('.js-validation-errors-list').remove();
-			var $navigationItem = $.parseHTML('<li class="anchor-menu__item"><span class="anchor-menu__item__anchor link cursor-pointer">' + $titleClone.text() + '</span></li>');
+			var $navigationItem = $('<li class="anchor-menu__item"><span class="anchor-menu__item__anchor link cursor-pointer">' + $titleClone.text() + '</span></li>');
 			$productDetailNavigation.append($navigationItem);
+
+			$navigationItem.click(function () {
+				var scrollOffsetTop = $title.offset().top - $webContent.offset().top
+				$('html, body').animate({ scrollTop: scrollOffsetTop }, 'slow');
+			});
 		});
 	};
 
