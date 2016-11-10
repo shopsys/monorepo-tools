@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
@@ -23,9 +24,9 @@ class CartFacade {
 	private $cartService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
-	private $cart;
+	private $cartFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -51,7 +52,7 @@ class CartFacade {
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
 	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
 	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
@@ -62,7 +63,7 @@ class CartFacade {
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
-		Cart $cart,
+		CartFactory $cartFactory,
 		ProductRepository $productRepository,
 		CustomerIdentifierFactory $customerIdentifierFactory,
 		Domain $domain,
@@ -71,7 +72,7 @@ class CartFacade {
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
-		$this->cart = $cart;
+		$this->cartFactory = $cartFactory;
 		$this->productRepository = $productRepository;
 		$this->customerIdentifierFactory = $customerIdentifierFactory;
 		$this->domain = $domain;
@@ -91,7 +92,8 @@ class CartFacade {
 			$this->currentCustomer->getPricingGroup()
 		);
 		$customerIdentifier = $this->customerIdentifierFactory->get();
-		$result = $this->cartService->addProductToCart($this->cart, $customerIdentifier, $product, $quantity);
+		$cart = $this->cartFactory->get($customerIdentifier);
+		$result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 
 		$this->em->persist($result->getCartItem());
@@ -104,7 +106,8 @@ class CartFacade {
 	 * @param array $quantities CartItem.id => quantity
 	 */
 	public function changeQuantities(array $quantities) {
-		$this->cartService->changeQuantities($this->cart, $quantities);
+		$cart = $this->getCartOfCurrentCustomer();
+		$this->cartService->changeQuantities($cart, $quantities);
 		$this->em->flush();
 	}
 
@@ -112,15 +115,17 @@ class CartFacade {
 	 * @param int $cartItemId
 	 */
 	public function deleteCartItem($cartItemId) {
-		$cartItemToDelete = $this->cartService->getCartItemById($this->cart, $cartItemId);
-		$this->cart->removeItemById($cartItemId);
+		$cart = $this->getCartOfCurrentCustomer();
+		$cartItemToDelete = $this->cartService->getCartItemById($cart, $cartItemId);
+		$cart->removeItemById($cartItemId);
 		$this->em->remove($cartItemToDelete);
 		$this->em->flush();
 	}
 
 	public function cleanCart() {
-		$cartItemsToDelete = $this->cart->getItems();
-		$this->cartService->cleanCart($this->cart);
+		$cart = $this->getCartOfCurrentCustomer();
+		$cartItemsToDelete = $cart->getItems();
+		$this->cartService->cleanCart($cart);
 
 		foreach ($cartItemsToDelete as $cartItemToDelete) {
 			$this->em->remove($cartItemToDelete);
@@ -136,10 +141,20 @@ class CartFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getProductByCartItemId($cartItemId) {
-		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
+		$cart = $this->getCartOfCurrentCustomer();
+		return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
 	}
 
 	public function cleanAdditionalData() {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 	}
+	/**
+	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 */
+	public function getCartOfCurrentCustomer() {
+		$customerIdentifier = $this->customerIdentifierFactory->get();
+
+		return $this->cartFactory->get($customerIdentifier);
+	}
+
 }

@@ -8,7 +8,6 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
 use SS6\ShopBundle\Form\Front\Cart\CartFormType;
 use SS6\ShopBundle\Model\Cart\AddProductResult;
-use SS6\ShopBundle\Model\Cart\Cart;
 use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Module\ModuleList;
@@ -24,11 +23,6 @@ class CartController extends FrontBaseController {
 	const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
 
 	const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';
-
-	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
-	 */
-	private $cart;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
@@ -77,7 +71,6 @@ class CartController extends FrontBaseController {
 		Domain $domain,
 		FreeTransportAndPaymentFacade $freeTransportAndPaymentFacade,
 		ProductDetailFactory $productDetailFactory,
-		Cart $cart,
 		OrderPreviewFactory $orderPreviewFactory,
 		ErrorService $errorService
 	) {
@@ -87,7 +80,6 @@ class CartController extends FrontBaseController {
 		$this->domain = $domain;
 		$this->freeTransportAndPaymentFacade = $freeTransportAndPaymentFacade;
 		$this->productDetailFactory = $productDetailFactory;
-		$this->cart = $cart;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->errorService = $errorService;
 	}
@@ -97,18 +89,20 @@ class CartController extends FrontBaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction(Request $request) {
-		if ($this->cart->isEmpty()) {
+		$cart = $this->cartFacade->getCartOfCurrentCustomer();
+
+		if ($cart->isEmpty()) {
 			$this->cartFacade->cleanAdditionalData();
 		}
 
 		$cartFormData = [
 			'quantities' => [],
 		];
-		foreach ($this->cart->getItems() as $cartItem) {
+		foreach ($cart->getItems() as $cartItem) {
 			$cartFormData['quantities'][$cartItem->getId()] = $cartItem->getQuantity();
 		}
 
-		$form = $this->createForm(new CartFormType($this->cart));
+		$form = $this->createForm(new CartFormType($cart));
 		$form->setData($cartFormData);
 		$form->handleRequest($request);
 		$invalidCart = false;
@@ -133,7 +127,7 @@ class CartController extends FrontBaseController {
 			);
 		}
 
-		$cartItems = $this->cart->getItems();
+		$cartItems = $cart->getItems();
 		$domainId = $this->domain->getId();
 
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
@@ -144,7 +138,7 @@ class CartController extends FrontBaseController {
 		);
 
 		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
-			'cart' => $this->cart,
+			'cart' => $cart,
 			'cartItems' => $cartItems,
 			'cartItemPrices' => $orderPreview->getQuantifiedItemsPrices(),
 			'form' => $form->createView(),
@@ -160,7 +154,7 @@ class CartController extends FrontBaseController {
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 
 		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', [
-			'cart' => $this->cart,
+			'cart' => $this->cartFacade->getCartOfCurrentCustomer(),
 			'productsPrice' => $orderPreview->getProductsPrice(),
 		]);
 	}

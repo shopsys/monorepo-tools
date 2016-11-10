@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
 use SS6\ShopBundle\Form\Front\Order\OrderFlow;
-use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Country\CountryFacade;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
@@ -39,9 +39,9 @@ class OrderController extends FrontBaseController {
 	private $flow;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
-	private $cart;
+	private $cartFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -120,7 +120,7 @@ class OrderController extends FrontBaseController {
 
 	public function __construct(
 		OrderFacade $orderFacade,
-		Cart $cart,
+		CartFacade $cartFacade,
 		OrderPreviewFactory $orderPreviewFactory,
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
@@ -138,7 +138,7 @@ class OrderController extends FrontBaseController {
 		CountryFacade $countryFacade
 	) {
 		$this->orderFacade = $orderFacade;
-		$this->cart = $cart;
+		$this->cartFacade = $cartFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
@@ -163,7 +163,8 @@ class OrderController extends FrontBaseController {
 		$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
 
-		if ($this->cart->isEmpty()) {
+		$cart = $this->cartFacade->getCartOfCurrentCustomer();
+		if ($cart->isEmpty()) {
 			return $this->redirectToRoute('front_cart');
 		}
 

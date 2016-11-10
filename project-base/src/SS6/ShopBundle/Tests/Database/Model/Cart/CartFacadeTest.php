@@ -133,7 +133,7 @@ class CartFacadeTest extends DatabaseTestCase {
 		return new CartFacade(
 			$this->getEntityManager(),
 			$this->getContainer()->get(CartService::class),
-			$this->getCartByCustomerIdentifier($customerIdentifier),
+			$this->getContainer()->get(CartFactory::class),
 			$this->getContainer()->get(ProductRepository::class),
 			$this->getCustomerIdentifierFactoryMock($customerIdentifier),
 			$this->getContainer()->get(Domain::class),
