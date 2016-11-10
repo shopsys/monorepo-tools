@@ -8,46 +8,41 @@
 	<div class="row">
 		{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
 
-		{% if status_code == 404 %}
-			<div class="col-md-8 col-sm-12">
+		<div class="box-error-page">
+			{% if status_code == 404 %}
+				<div class="box-error-page__text">
+					<h1>{{ 'Stránka nenalezena!'|trans }}</h1>
 
-				<h1 class="heading--huge mb-0 mt-0">{{ 'Stránka nenalezena!'|trans }}</h1>
+					<p class="box-error-page__text__main">
+						{{ 'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'|trans }}
+					</p>
 
-				<p>
-					{{ 'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'|trans }}
-				</p>
+					<h2>{{ 'Prosím, pokračujte podle pokynů'|trans }}:</h2>
 
-				<h2>{{ 'Prosím, pokračujte podle pokynů'|trans }}:</h2>
+					<ul class="list-simple">
+						<li class="list-simple__item">{{ 'Zkontrolujte správnost adresy'|trans }}</li>
+						<li class="list-simple__item">{{ 'Zkuste použít vyhledávání na webu'|trans }}</li>
+					</ul>
+				</div>
 
-				<ul>
-					<li>{{ 'Zkontrolujte správnost adresy'|trans }}</li>
-					<li>{{ 'Zkuste použít vyhledávání na webu'|trans }}</li>
-				</ul>
-			</div>
+				<div class="box-error-page__image">
+					<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Stránka nenalezena!'|trans }}">
+				</div>
+			{% else %}
+				<div class="box-error-page__text">
+					<h1>{{ 'Jejda! Nastala chyba.'|trans }}</h1>
 
+					<p>
+						{{ 'To je nemilé, to je nemilé. A zrovna
+						<strong>"%status_code% %status_text%"</strong>,
+						to je jak naschvál!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
+					</p>
 
-			<div class="col-md-4 col-sm-12 text-center">
-				<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Stránka nenalezena!'|trans }}">
-			</div>
-
-		{% else %}
-
-			<div class="col-md-12 col-sm-12">
-
-				<h1 class="heading--huge mb-0 mt-0">{{ 'Jejda! Nastala chyba.'|trans }}</h1>
-
-				<p>
-					{{ 'To je nemilé, to je nemilé. A zrovna
-					<strong>"%status_code% %status_text%"</strong>,
-					to je jak naschvál!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
-				</p>
-
-				<p>
-					{{ 'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.'|trans }}
-				</p>
-
-			</div>
-
-		{% endif %}
+					<p>
+						{{ 'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na [mail] nebo telefonicky 123 456 789.'|trans }}
+					</p>
+				</div>
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}

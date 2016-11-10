@@ -1,0 +1,26 @@
+.box-error-page {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	&__text {
+		flex: 0 100%;;
+
+		@media @query-md {
+			flex: 1;
+		}
+
+		&__main {
+			margin: 40px 0;
+		}
+	}
+
+	&__image {
+		flex: 0 100%;
+		text-align: center;
+
+		@media @query-md {
+			flex: 1;
+		}
+	}
+}
