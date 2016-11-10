@@ -93,7 +93,7 @@ class ProductVariantFacade {
 			$this->productEditFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
 			$this->imageFacade->copyImages($mainProduct, $mainVariant);
 		} catch (\Exception $exception) {
-			$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+			$this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 			$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 
 			throw $exception;

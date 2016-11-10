@@ -104,7 +104,7 @@ class OrderProductFacade {
 		foreach ($relevantProducts as $relevantProduct) {
 			$this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($relevantProduct);
 			$this->productHiddenRecalculator->calculateHiddenForProduct($relevantProduct);
-			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($relevantProduct);
+			$this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($relevantProduct);
 			$this->productService->markProductForVisibilityRecalculation($relevantProduct);
 		}
 		$this->em->flush($relevantProducts);

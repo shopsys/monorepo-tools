@@ -17,8 +17,8 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 
 		$productAvailabilityRecalculationScheduler = new ProductAvailabilityRecalculationScheduler($productRepositoryMock);
-		$productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productMock);
-		$products = $productAvailabilityRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
+		$products = $productAvailabilityRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(1, $products);
 		$this->assertSame($productMock, array_pop($products));
@@ -29,9 +29,9 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 		$productMock = $this->getMock(Product::class, null, [], '', false);
 
 		$productAvailabilityRecalculationScheduler = new ProductAvailabilityRecalculationScheduler($productRepositoryMock);
-		$productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productMock);
-		$productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
-		$products = $productAvailabilityRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productMock);
+		$productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
+		$products = $productAvailabilityRecalculationScheduler->getProductsForImmediateRecalculation();
 
 		$this->assertCount(0, $products);
 	}
@@ -53,10 +53,10 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
 			->willReturn($productsIterator);
 
 		$productAvailabilityRecalculationScheduler = new ProductAvailabilityRecalculationScheduler($productRepositoryMock);
-		$productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
+		$productAvailabilityRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 
-		$this->assertCount(0, $productAvailabilityRecalculationScheduler->getProductsForImmediatelyRecalculation());
-		$this->assertSame($productsIterator, $productAvailabilityRecalculationScheduler->getProductsIteratorForRecalculation());
+		$this->assertCount(0, $productAvailabilityRecalculationScheduler->getProductsForImmediateRecalculation());
+		$this->assertSame($productsIterator, $productAvailabilityRecalculationScheduler->getProductsIteratorForDelayedRecalculation());
 	}
 
 }

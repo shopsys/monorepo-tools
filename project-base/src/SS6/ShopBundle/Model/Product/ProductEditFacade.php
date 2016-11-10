@@ -200,7 +200,7 @@ class ProductEditFacade {
 		$this->imageFacade->uploadImages($product, $productEditData->imagesToUpload, null);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
+		$this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 	}
@@ -232,7 +232,7 @@ class ProductEditFacade {
 		$this->friendlyUrlFacade->saveUrlListFormData('front_product_detail', $product->getId(), $productEditData->urls);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_detail', $product->getId(), $product->getNames());
 
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($product);
+		$this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 		$this->productVisibilityFacade->refreshProductsVisibilityForMarkedDelayed();
 		$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
 
@@ -249,7 +249,7 @@ class ProductEditFacade {
 		foreach ($productsForRecalculations as $productForRecalculations) {
 			$this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
 			$this->productService->markProductForVisibilityRecalculation($productForRecalculations);
-			$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForProduct($productForRecalculations);
+			$this->productAvailabilityRecalculationScheduler->scheduleProductForImmediateRecalculation($productForRecalculations);
 		}
 		$this->em->remove($product);
 		$this->em->flush();

@@ -40,7 +40,7 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 			'',
 			false
 		);
-		$productAvailabilityRecalculationSchedulerMock->scheduleRecalculateAvailabilityForProduct($productMock);
+		$productAvailabilityRecalculationSchedulerMock->scheduleProductForImmediateRecalculation($productMock);
 
 		$productAvailabilityRecalculator = new ProductAvailabilityRecalculator(
 			$emMock,
@@ -71,14 +71,14 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 		$entityManagerFacadeMock = $this->getMock(EntityManagerFacade::class, [], [], '', false);
 		$productAvailabilityRecalculationSchedulerMock = $this->getMock(
 			ProductAvailabilityRecalculationScheduler::class,
-			['getProductsForImmediatelyRecalculation'],
+			['getProductsForImmediateRecalculation'],
 			[],
 			'',
 			false
 		);
 		$productAvailabilityRecalculationSchedulerMock
 			->expects($this->once())
-			->method('getProductsForImmediatelyRecalculation')
+			->method('getProductsForImmediateRecalculation')
 			->willReturn([$variantMock]);
 		$productAvailabilityCalculationMock = $this->getMock(
 			ProductAvailabilityCalculation::class,

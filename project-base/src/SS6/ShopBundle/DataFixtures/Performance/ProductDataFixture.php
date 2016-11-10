@@ -270,7 +270,7 @@ class ProductDataFixture {
 	}
 
 	private function clearResources() {
-		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 		$this->entityManagerFacade->clear();
 		gc_collect_cycles();

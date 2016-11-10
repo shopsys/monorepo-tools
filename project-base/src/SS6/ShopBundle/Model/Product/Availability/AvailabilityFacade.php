@@ -125,7 +125,7 @@ class AvailabilityFacade {
 	 */
 	public function setDefaultInStockAvailability(Availability $availability) {
 		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId());
-		$this->productAvailabilityRecalculationScheduler->scheduleRecalculateAvailabilityForAllProducts();
+		$this->productAvailabilityRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
 	}
 
 	/**

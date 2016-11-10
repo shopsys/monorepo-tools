@@ -53,16 +53,16 @@ class ProductAvailabilityRecalculator {
 	public function runAllScheduledRecalculations() {
 		$this->productRowsIterator = null;
 		// @codingStandardsIgnoreStart
-		while ($this->runScheduledRecalculationsBatch()) {};
+		while ($this->runBatchOfScheduledDelayedRecalculations()) {};
 		// @codingStandardsIgnoreEnd
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function runScheduledRecalculationsBatch() {
+	public function runBatchOfScheduledDelayedRecalculations() {
 		if ($this->productRowsIterator === null) {
-			$this->productRowsIterator = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForRecalculation();
+			$this->productRowsIterator = $this->productAvailabilityRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
 		}
 
 		for ($count = 0; $count < self::BATCH_SIZE; $count++) {
@@ -72,7 +72,7 @@ class ProductAvailabilityRecalculator {
 
 				return false;
 			}
-			$this->recalculateAvailabilityForProduct($row[0]);
+			$this->recalculateProductAvailability($row[0]);
 		}
 
 		$this->entityManagerFacade->clear();
@@ -81,21 +81,21 @@ class ProductAvailabilityRecalculator {
 	}
 
 	public function runImmediateRecalculations() {
-		$products = $this->productAvailabilityRecalculationScheduler->getProductsForImmediatelyRecalculation();
+		$products = $this->productAvailabilityRecalculationScheduler->getProductsForImmediateRecalculation();
 		foreach ($products as $product) {
-			$this->recalculateAvailabilityForProduct($product);
+			$this->recalculateProductAvailability($product);
 		}
-		$this->productAvailabilityRecalculationScheduler->cleanImmediatelyRecalculationSchedule();
+		$this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
 	}
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 */
-	private function recalculateAvailabilityForProduct(Product $product) {
+	private function recalculateProductAvailability(Product $product) {
 		$calculatedAvailability = $this->productAvailabilityCalculation->calculateAvailability($product);
 		$product->setCalculatedAvailability($calculatedAvailability);
 		if ($product->isVariant()) {
-			$this->recalculateAvailabilityForProduct($product->getMainVariant());
+			$this->recalculateProductAvailability($product->getMainVariant());
 		}
 		$this->em->flush($product);
 	}
