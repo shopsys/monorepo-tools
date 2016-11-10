@@ -1,3 +1,7 @@
+@in-action-button-big-height: @btn-height + 10px;
+@in-action-button-big-padding-vertical: @btn-padding-vertical;
+@in-action-button-big-padding-horizontal: 30px;
+
 .in-action {
 	&__right {
 		margin-bottom: 5px;
@@ -7,10 +11,10 @@
 		width: 100%;
 
 		&--big {
-			min-height: @btn-height + 10;
-			line-height: @btn-height + 10 - 2 * @btn-padding-vertical;
-			padding-left: 30px;
-			padding-right: 30px;
+			min-height: @in-action-button-big-height;
+			line-height: @in-action-button-big-height - 2 * @in-action-button-big-padding-vertical;
+			padding-left: @in-action-button-big-padding-horizontal;
+			padding-right: @in-action-button-big-padding-horizontal;
 
 			font-size: 18px;
 		}
@@ -23,9 +27,19 @@
 		display: flex;
 		align-items: center;
 
+		.is-no-flex & {
+			display: block;
+			.clearfix();
+		}
+
 		&__left {
 			order: 1;
 			flex: 1;
+
+			.is-no-flex & {
+				float: left;
+				width: 100%/2;
+			}
 		}
 
 		&__right {
@@ -33,6 +47,11 @@
 			flex: 1;
 			margin-bottom: 0;
 			text-align: right;
+
+			.is-no-flex & {
+				float: right;
+				width: 100%/2;
+			}
 		}
 
 		&__btn {
