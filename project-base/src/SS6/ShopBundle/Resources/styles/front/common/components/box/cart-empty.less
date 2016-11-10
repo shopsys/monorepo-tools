@@ -7,18 +7,36 @@
 	align-items: center;
 	margin-bottom: @margin-gap;
 
+	.is-no-flex & {
+		display: block;
+
+		font-size: 0;
+	}
+
 	&__image {
-		flex: 1 50%;
+		flex: 1;
 		padding-right: @box-cart-empty-gap-mobile;
 		text-align: center;
+
+		.is-no-flex & {
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%/2;
+		}
 	}
 
 	&__text {
-		flex: 1 50%;
+		flex: 1;
 		padding: 0 @box-cart-empty-gap-mobile;
 		text-align: center;
 
 		font-size: 12px;
+
+		.is-no-flex & {
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%/2;
+		}
 	}
 }
 
