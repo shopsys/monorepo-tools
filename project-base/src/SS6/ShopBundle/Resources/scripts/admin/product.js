@@ -38,10 +38,11 @@
 	SS6.product.initializeSideNavigation = function () {
 		var $productDetailNavigation = $('.js-product-detail-navigation');
 		$('.form-group__title, .form-full__title').each(function () {
-			var $titleClone = $(this).clone();
+			var $title = $(this);
+			var $titleClone = $title.clone();
 			$titleClone.find('.js-validation-errors-list').remove();
-			var $navigationItemLi = '<li class="anchor-menu__item"><a class="anchor-menu__item__anchor" href="#">' + $titleClone.text() + '</a></li>';
-			$productDetailNavigation.append($navigationItemLi);
+			var $navigationItem = $.parseHTML('<li class="anchor-menu__item"><span class="anchor-menu__item__anchor link cursor-pointer">' + $titleClone.text() + '</span></li>');
+			$productDetailNavigation.append($navigationItem);
 		});
 	};
 
