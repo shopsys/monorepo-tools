@@ -2,114 +2,109 @@
 @footer-newsletter-button-width: 150px;
 
 .footer {
-	&__newsletter {
-		padding: @footer-newsletter-gap 0;
-		position: relative;
 
-		&__input {
-			width: 100%;
-		}
-
-		&__form  {
-			&__wrap {
-				margin-bottom: 5px;
-			}
-
-			&__in {
-				position: relative;
-			}
-
-			&__btn {
-				width: 100%;
-			}
-		}
-
-		.form-error {
-			position: absolute;
-			top: 50%;
-			margin-top: -10px;
-			right: 10px;
-		}
-	}
-
-	&__bottom {
-		padding-top: 20px;
-		padding-bottom: 20px;
-		text-align: center;
-
-		color: @color-f;
-
-		&__copyright {
-			margin-bottom: 10px;
-		}
-
-		a {
-			&:hover {
-				color: @color-f;
-			}
-		}
-	}
 }
 
-@media @query-sm {
-	.footer {
-		&__newsletter {
-			&__form {
-				&__wrap {
-					display: flex;
-				}
+// newsletter
+.footer__newsletter {
+	padding: @footer-newsletter-gap 0;
+	position: relative;
 
-				&__in {
-					flex: 1;
-				}
+	@media @query-lg {
+		display: flex;
+		align-items: center;
+	}
 
-				&__btn {
-					flex: 0 @footer-newsletter-button-width;
-				}
+	&__input {
+		width: 100%;
+	}
+
+	&__text {
+		@media @query-lg {
+			flex: 1;
+			padding-right: 20px;
+
+			p {
+				line-height: 18px;
 			}
 		}
 	}
-}
 
-@media @query-lg {
-	.footer {
-		&__newsletter {
-			display: flex;
-			align-items: center;
-
-			&__text {
-				flex: 1;
-				padding-right: 20px;
-
-				p {
-					line-height: 18px;
-				}
-			}
-
-			&__form {
-				flex: 0 380px;
-
-				&__wrap {
-					text-align: right;
-				}
-
-			}
+	&__form  {
+		@media @query-lg {
+			flex: 0 380px;
 		}
 
-		&__bottom {
-			display: flex;
-			align-items: center;
-			text-align: left;
+		&__wrap {
+			margin-bottom: 5px;
 
-			&__copyright {
-				flex: 1 50%;
-				margin-bottom: 0;
+			@media @query-sm {
+				display: flex;
 			}
 
-			&__articles {
-				flex: 1 50%;
+			@media @query-lg {
 				text-align: right;
 			}
+		}
+
+		&__in {
+			position: relative;
+
+			@media @query-sm {
+				flex: 1;
+			}
+		}
+
+		&__btn {
+			width: 100%;
+
+			@media @query-sm {
+				flex: 0 @footer-newsletter-button-width;
+			}
+		}
+	}
+
+	.form-error {
+		position: absolute;
+		top: 50%;
+		margin-top: -10px;
+		right: 10px;
+	}
+}
+
+// bottom of footer
+.footer__bottom {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+
+	color: @color-f;
+
+	@media @query-lg {
+		display: flex;
+		align-items: center;
+		text-align: left;
+	}
+
+	&__copyright {
+		margin-bottom: 10px;
+
+		@media @query-lg {
+			flex: 1 50%;
+			margin-bottom: 0;
+		}
+	}
+
+	&__articles {
+		@media @query-lg {
+			flex: 1 50%;
+			text-align: right;
+		}
+	}
+
+	a {
+		&:hover {
+			color: @color-f;
 		}
 	}
 }
