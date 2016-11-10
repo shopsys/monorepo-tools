@@ -74,12 +74,10 @@ class OrderPreviewFactory {
 			$validEnteredPromoCodePercent = $validEnteredPromoCode->getPercent();
 		}
 
-		$cart = $this->cartFacade->getCartOfCurrentCustomer();
-
 		return $this->create(
 			$currency,
 			$this->domain->getId(),
-			$cart->getQuantifiedProducts(),
+			$this->cartFacade->getQuantifiedProductsOfCurrentCustomer(),
 			$transport,
 			$payment,
 			$this->currentCustomer->findCurrentUser(),

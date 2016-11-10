@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use SS6\ShopBundle\Model\Product\Product;
 
@@ -87,7 +88,7 @@ class CartService {
 	 */
 	public function mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier) {
 		foreach ($mergedCart->getItems() as $cartItem) {
-			$similarCartItem = $resultingCart->findSimilarCartItemByCartItem($cartItem);
+			$similarCartItem = $this->findSimilarCartItemByCartItem($resultingCart, $cartItem);
 			if ($similarCartItem instanceof CartItem) {
 				$similarCartItem->changeQuantity($cartItem->getQuantity());
 			} else {
@@ -100,6 +101,34 @@ class CartService {
 				$resultingCart->addItem($newCartItem);
 			}
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
+	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem|null
+	 */
+	private function findSimilarCartItemByCartItem(Cart $cart, CartItem $cartItem) {
+		foreach ($cart->getItems() as $similarCartItem) {
+			if ($similarCartItem->isSimilarItemAs($cartItem)) {
+				return $similarCartItem;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+	 */
+	public function getQuantifiedProducts(Cart $cart) {
+		$quantifiedProducts = [];
+		foreach ($cart->getItems() as $cartItem) {
+			$quantifiedProducts[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
+		}
+
+		return $quantifiedProducts;
 	}
 
 }

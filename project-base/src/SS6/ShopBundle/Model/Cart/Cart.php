@@ -3,7 +3,6 @@
 namespace SS6\ShopBundle\Model\Cart;
 
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
 
 class Cart {
 
@@ -52,18 +51,6 @@ class Cart {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
-	 */
-	public function getQuantifiedProducts() {
-		$quantifiedProducts = [];
-		foreach ($this->getItems() as $cartItem) {
-			$quantifiedProducts[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());
-		}
-
-		return $quantifiedProducts;
-	}
-
-	/**
 	 * @return int
 	 */
 	public function getItemsCount() {
@@ -75,20 +62,6 @@ class Cart {
 	 */
 	public function isEmpty() {
 		return $this->getItemsCount() === 0;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem|null
-	 */
-	public function findSimilarCartItemByCartItem(CartItem $cartItem) {
-		foreach ($this->getItems() as $similarCartItem) {
-			if ($similarCartItem->isSimilarItemAs($cartItem)) {
-				return $similarCartItem;
-			}
-		}
-
-		return null;
 	}
 
 }

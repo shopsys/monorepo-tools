@@ -5,6 +5,7 @@ namespace SS6\ShopBundle\Model\Cart;
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Cart\CartFactory;
+use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
@@ -142,6 +143,7 @@ class CartFacade {
 	 */
 	public function getProductByCartItemId($cartItemId) {
 		$cart = $this->getCartOfCurrentCustomer();
+
 		return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
 	}
 
@@ -155,6 +157,15 @@ class CartFacade {
 		$customerIdentifier = $this->customerIdentifierFactory->get();
 
 		return $this->cartFactory->get($customerIdentifier);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+	 */
+	public function getQuantifiedProductsOfCurrentCustomer() {
+		$cart = $this->getCartOfCurrentCustomer();
+
+		return $this->cartService->getQuantifiedProducts($cart);
 	}
 
 }
