@@ -311,7 +311,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
 
 	{% for domain in domains -%}
-		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}', 'postcss']);
 	{% endfor -%}
 	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
 };
