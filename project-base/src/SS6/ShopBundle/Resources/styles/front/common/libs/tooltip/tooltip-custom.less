@@ -1,7 +1,18 @@
 .tooltip {
 	z-index: 499;
+	line-height: 16px;
+	text-transform: none;
+
+	font-style: normal;
+	font-size: 11px;
+
+	&.in {
+		opacity: 1;
+	}
 }
 
 .tooltip-inner {
 	min-width: 120px;
+
+	border: 1px solid @color-border;
 }
