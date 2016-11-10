@@ -16,16 +16,29 @@
 		width: 100%;
 		display: flex;
 
+		.is-no-flex & {
+			display: block;
+			.clearfix();
+		}
+
 		&__info {
-			width: 50%;
 			flex: 1;
 			text-align: left;
+
+			.is-no-flex & {
+				float: left;
+				width: 100%/2;
+			}
 		}
 
 		&__promo {
-			width: 50%;
 			flex: 1;
 			text-align: right;
+
+			.is-no-flex & {
+				float: right;
+				width: 100%/2;
+			}
 		}
 	}
 }
