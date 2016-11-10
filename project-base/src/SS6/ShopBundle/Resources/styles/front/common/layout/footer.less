@@ -6,6 +6,8 @@
 }
 
 // newsletter
+@footer-newsletter-form-width: 380px;
+
 .footer__newsletter {
 	padding: @footer-newsletter-gap 0;
 	position: relative;
@@ -32,7 +34,7 @@
 
 	&__form  {
 		@media @query-lg {
-			flex: 0 380px;
+			flex: 0 @footer-newsletter-form-width;
 		}
 
 		&__wrap {
@@ -73,9 +75,11 @@
 }
 
 // bottom of footer
+@footer-bottom-padding: 20px;
+
 .footer__bottom {
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: @footer-bottom-padding;
+	padding-bottom: @footer-bottom-padding;
 	text-align: center;
 
 	color: @color-f;
@@ -90,14 +94,14 @@
 		margin-bottom: 10px;
 
 		@media @query-lg {
-			flex: 1 50%;
+			flex: 0 100%/2;
 			margin-bottom: 0;
 		}
 	}
 
 	&__articles {
 		@media @query-lg {
-			flex: 1 50%;
+			flex: 0 100%/2;
 			text-align: right;
 		}
 	}
