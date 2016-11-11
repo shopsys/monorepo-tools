@@ -63,4 +63,40 @@ class OrderPage extends AbstractPage {
 	public function assertFirstNameIsFilled($firstName) {
 		$this->tester->seeInFieldByName($firstName, self::FIRST_NAME_FIELD_NAME);
 	}
+
+	/**
+	 * @param string $firstName
+	 * @param string $lastName
+	 * @param string $email
+	 * @param string $telephone
+	 */
+	public function fillPersonalInfo($firstName, $lastName, $email, $telephone) {
+		$this->fillFirstName($firstName);
+		$this->tester->fillFieldByName('order_personal_info_form[lastName]', $lastName);
+		$this->tester->fillFieldByName('order_personal_info_form[email]', $email);
+		$this->tester->fillFieldByName('order_personal_info_form[telephone]', $telephone);
+	}
+
+	/**
+	 * @param string $street
+	 * @param string $city
+	 * @param string $postcode
+	 */
+	public function fillBillingAddress($street, $city, $postcode) {
+		$this->tester->fillFieldByName('order_personal_info_form[street]', $street);
+		$this->tester->fillFieldByName('order_personal_info_form[city]', $city);
+		$this->tester->fillFieldByName('order_personal_info_form[postcode]', $postcode);
+	}
+
+	/**
+	 * @param string $note
+	 */
+	public function fillNote($note) {
+		$this->tester->fillFieldByName('order_personal_info_form[note]', $note);
+	}
+
+	public function acceptTermsAndConditions() {
+		$this->tester->checkOptionByLabel('Souhlasím s obchodními podmínkami');
+	}
+
 }
