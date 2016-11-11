@@ -3,10 +3,6 @@
 {% block title %}- {{ 'Nový článek'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nový článek'|trans }}{% endblock %}
 
-{% block article_domain %}
-	{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
-{% endblock %}
-
 {% block article_placement %}
 	{{ form_row(form.placement, { label: 'Umístění'|trans }) }}
 {% endblock %}

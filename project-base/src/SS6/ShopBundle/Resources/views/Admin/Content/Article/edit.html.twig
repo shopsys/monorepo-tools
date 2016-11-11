@@ -4,19 +4,21 @@
 {% block h1 %}{{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
 
 {% block article_domain %}
-	<div class="form-line">
-		<label class="form-line__label">{{ 'Doména:'|trans }}</label>
-		<div class="form-line__side">
-			<div class="form-line__item">
-				<input
-					type="text"
-					value="{{ getDomainName(article.domainId) }}"
-					class="input"
-					readonly="readonly"
-				>
+	{% if isMultidomain() %}
+		<div class="form-line">
+			<label class="form-line__label">{{ 'Doména:'|trans }}</label>
+			<div class="form-line__side">
+				<div class="form-line__item">
+					<input
+						type="text"
+						value="{{ getDomainName(article.domainId) }}"
+						class="input"
+						readonly="readonly"
+					>
+				</div>
 			</div>
 		</div>
-	</div>
+	{% endif %}
 {% endblock %}
 
 {% block article_urls %}

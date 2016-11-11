@@ -14,7 +14,9 @@
 
 			{{ form_id(article|default(null)) }}
 
-			{% block article_domain %}{% endblock %}
+			{% block article_domain %}
+				{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
+			{% endblock %}
 			{% block article_placement %}{% endblock %}
 
 			{{ form_row(form.name, { label: 'Název'|trans}) }}
