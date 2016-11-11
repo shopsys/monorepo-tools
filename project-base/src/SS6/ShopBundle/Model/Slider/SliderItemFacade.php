@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
 use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Model\Slider\SliderItemRepository;
 
@@ -21,11 +20,6 @@ class SliderItemFacade {
 	private $sliderItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
-
-	/**
 	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
@@ -38,13 +32,11 @@ class SliderItemFacade {
 	public function __construct(
 		EntityManager $em,
 		SliderItemRepository $sliderItemRepository,
-		SelectedDomain $selectedDomain,
 		ImageFacade	$imageFacade,
 		Domain $domain
 	) {
 		$this->em = $em;
 		$this->sliderItemRepository = $sliderItemRepository;
-		$this->selectedDomain = $selectedDomain;
 		$this->imageFacade = $imageFacade;
 		$this->domain = $domain;
 	}
@@ -62,7 +54,7 @@ class SliderItemFacade {
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
 	 */
 	public function create(SliderItemData $sliderItemData) {
-		$sliderItem = new SliderItem($sliderItemData, $this->selectedDomain->getId());
+		$sliderItem = new SliderItem($sliderItemData);
 
 		$this->em->persist($sliderItem);
 		$this->em->flush();
