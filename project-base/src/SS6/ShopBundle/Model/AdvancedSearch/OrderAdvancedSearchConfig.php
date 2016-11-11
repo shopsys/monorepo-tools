@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
 use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
@@ -17,7 +18,8 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig {
 		OrderPriceFilterWithVatFilter $orderPriceFilterWithVatFilter,
 		OrderDomainFilter $orderDomainFilter,
 		OrderStatusFilter $orderStatusFilter,
-		OrderProductFilter $orderProductFilter
+		OrderProductFilter $orderProductFilter,
+		Domain $domain
 	) {
 		parent::__construct();
 
@@ -25,7 +27,9 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig {
 		$this->registerFilter($orderNumberFilter);
 		$this->registerFilter($orderCreateDateFilter);
 		$this->registerFilter($orderStatusFilter);
-		$this->registerFilter($orderDomainFilter);
+		if ($domain->isMultidomain()) {
+			$this->registerFilter($orderDomainFilter);
+		}
 		$this->registerFilter($orderProductFilter);
 	}
 
