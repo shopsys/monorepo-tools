@@ -677,6 +677,16 @@
 	{% endif %}
 {% endblock yes_no_widget %}
 
+{% block domain_row %}
+	{% if isMultidomain() %}
+		{{ block('form_row') }}
+	{% else %}
+		<div class="display-none">
+			{{ block('form_row') }}
+		</div>
+	{% endif %}
+{% endblock domain_row %}
+
 {% block domain_widget %}
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
 	<select {{ block('widget_attributes') }}>
