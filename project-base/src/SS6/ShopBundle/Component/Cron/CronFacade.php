@@ -113,4 +113,11 @@ class CronFacade {
 		}
 	}
 
+	/**
+	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 */
+	public function getAll() {
+		return $this->cronConfig->getAll();
+	}
+
 }

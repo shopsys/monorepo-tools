@@ -140,6 +140,14 @@
 		</exec>
 	</target>
 
+	<target name="cron-list" description="List all background jobs.">
+		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+			<arg value="app/console" />
+			<arg value="ss6:cron" />
+			<arg value="--list" />
+		</exec>
+	</target>
+
 	<target name="db-check-schema" description="Check if database schema is satisfying ORM and return a list of suggestions for repair schema">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />

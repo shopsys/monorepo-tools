@@ -4,22 +4,25 @@ namespace SS6\ShopBundle\Command;
 
 use DateTime;
 use DateTimeImmutable;
+use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use SS6\ShopBundle\Component\Cron\CronFacade;
 use SS6\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CronCommand extends ContainerAwareCommand {
 
-	const ARGUMENT_MODULE = 'module';
+	const OPTION_MODULE = 'module';
+	const OPTION_LIST = 'list';
 
 	protected function configure() {
 		$this
 			->setName('ss6:cron')
 			->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
-			->addOption(self::ARGUMENT_MODULE, null, InputArgument::OPTIONAL, 'Service ID');
+			->addOption(self::OPTION_LIST, null, InputOption::VALUE_NONE, 'List all Service commands')
+			->addOption(self::OPTION_MODULE, null, InputOption::VALUE_OPTIONAL, 'Service ID');
 	}
 
 	/**
@@ -32,7 +35,37 @@ class CronCommand extends ContainerAwareCommand {
 		$mutexFactory = $this->getContainer()->get(MutexFactory::class);
 		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
 
-		$moduleArgument = $input->getOption(self::ARGUMENT_MODULE);
+		$optionList = $input->getOption(self::OPTION_LIST);
+		if ($optionList === true) {
+			$this->listAllCronModulesSortedByModuleId($output, $cronFacade);
+		} else {
+			$this->runCron($input, $cronFacade, $mutexFactory);
+		}
+	}
+
+	/**
+	 * @param \Symfony\Component\Console\Output\OutputInterface $output
+	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
+	 */
+	private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade) {
+		$cronModuleConfigs = $cronFacade->getAll();
+
+		uasort($cronModuleConfigs, function (CronModuleConfig $cronModuleConfigA, CronModuleConfig $cronModuleConfigB) {
+			return $cronModuleConfigA->getModuleId() > $cronModuleConfigB->getModuleId();
+		});
+
+		foreach ($cronModuleConfigs as $cronModuleConfig) {
+			$output->writeln(sprintf('php app/console ss6:cron --module="%s"', $cronModuleConfig->getModuleId()));
+		}
+	}
+
+	/**
+	 * @param \Symfony\Component\Console\Input\InputInterface $input
+	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
+	 * @param \SS6\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
+	 */
+	private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory) {
+		$moduleArgument = $input->getOption(self::OPTION_MODULE);
 		if ($moduleArgument === null) {
 			$cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
 		}
