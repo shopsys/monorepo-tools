@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade {
@@ -46,14 +47,10 @@ class CartFacade {
 	private $currentCustomer;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
+	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 */
+	private $currentPromoCodeFacade;
+
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
@@ -61,7 +58,8 @@ class CartFacade {
 		ProductRepository $productRepository,
 		CustomerIdentifier $customerIdentifier,
 		Domain $domain,
-		CurrentCustomer $currentCustomer
+		CurrentCustomer $currentCustomer,
+		CurrentPromoCodeFacade $currentPromoCodeFacade
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
@@ -70,6 +68,7 @@ class CartFacade {
 		$this->customerIdentifier = $customerIdentifier;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
+		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 	}
 
 	/**
@@ -119,6 +118,8 @@ class CartFacade {
 		}
 
 		$this->em->flush();
+
+		$this->cleanAdditionalData();
 	}
 
 	/**
@@ -127,5 +128,9 @@ class CartFacade {
 	 */
 	public function getProductByCartItemId($cartItemId) {
 		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
+	}
+
+	public function cleanAdditionalData() {
+		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 	}
 }

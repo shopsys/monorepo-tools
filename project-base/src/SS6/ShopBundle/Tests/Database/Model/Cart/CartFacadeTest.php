@@ -9,143 +9,68 @@ use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartFactory;
 use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class CartFacadeTest extends DatabaseTestCase {
 
-	public function testAddProductToCart() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
-		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
-		$domain = $this->getContainer()->get(Domain::class);
-		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
-
-		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-		$productId = $product1->getId();
+	public function testAddProductToCartAddsItemsOnlyToCurrentCart() {
+		$customerIdentifier = new CustomerIdentifier('secretSessionHash');
+		$anotherCustomerIdentifier = new CustomerIdentifier('anotherSecretSessionHash');
+		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+		$productId = $product->getId();
 		$quantity = 10;
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
+		$cartFacade = $this->createCartFacade($customerIdentifier);
+
 		$cartFacade->addProductToCart($productId, $quantity);
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
+		$cart = $this->getCartByCustomerIdentifier($customerIdentifier);
 		$cartItems = $cart->getItems();
-		$product1 = array_pop($cartItems)->getProduct();
-		$this->assertSame($productId, $product1->getId(), 'Add correct product');
+		$product = array_pop($cartItems)->getProduct();
+		$this->assertSame($productId, $product->getId(), 'Add correct product');
 
-		$customerIdentifier = new CustomerIdentifier('anotherSecreetSessionHash');
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$this->assertSame(0, $cart->getItemsCount(), 'Add only in their own cart');
+		$anotherCart = $this->getCartByCustomerIdentifier($anotherCustomerIdentifier);
+		$this->assertSame(0, $anotherCart->getItemsCount(), 'Add only in their own cart');
 	}
 
-	public function testAddUnsellableProductToCart() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
-		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
-		$domain = $this->getContainer()->get(Domain::class);
-		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
-
-		$product = $this->getReference('product_6');
+	public function testCannotAddUnsellableProductToCart() {
+		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '6');
 		$productId = $product->getId();
 		$quantity = 1;
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
+		$customerIdentifier = new CustomerIdentifier('secretSessionHash');
+		$cartFacade = $this->createCartFacade($customerIdentifier);
 
-		// @codingStandardsIgnoreStart
-		try {
-			$cartFacade->addProductToCart($productId, $quantity);
-		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+		$this->setExpectedException('\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException');
+		$cartFacade->addProductToCart($productId, $quantity);
 
-		}
-		// @codingStandardsIgnoreEnd
-
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
+		$cart = $this->getCartByCustomerIdentifier($customerIdentifier);
 		$cartItems = $cart->getItems();
 
 		$this->assertEmpty($cartItems, 'Product add not suppressed');
 	}
 
-	/**
-	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-	 */
-	public function testChangeQuantities() {
-		$cartService = $this->getContainer()->get(CartService::class);
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		$customerIdentifier = new CustomerIdentifier('secreetSessionHash');
-		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
-		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
-		$domain = $this->getContainer()->get(Domain::class);
-		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
-
+	public function testCanChangeCartItemsQuantities() {
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
+		$customerIdentifier = new CustomerIdentifier('secretSessionHash');
+		$cartFacade = $this->createCartFacade($customerIdentifier);
+
 		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), 1)->getCartItem();
 		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), 2)->getCartItem();
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
 		$cartFacade->changeQuantities([
 			$cartItem1->getId() => 5,
 			$cartItem2->getId() => 9,
 		]);
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
+		$cart = $this->getCartByCustomerIdentifier($customerIdentifier);
 		foreach ($cart->getItems() as $cartItem) {
 			if ($cartItem->getId() === $cartItem1->getId()) {
 				$this->assertSame(5, $cartItem->getQuantity(), 'Correct change quantity product');
@@ -157,79 +82,93 @@ class CartFacadeTest extends DatabaseTestCase {
 		}
 	}
 
-	public function testDeleteCartItemNonexistItem() {
-		$em = $this->getEntityManager();
+	public function testCannotDeleteNonexistentCartItem() {
+		$customerIdentifier = new CustomerIdentifier('secretSessionHash');
 
-		$cartService = $this->getContainer()->get(CartService::class);
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		$customerIdentifier = new CustomerIdentifier('randomString');
-		$domain = $this->getContainer()->get(Domain::class);
-		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
+		$quantity = 1;
 
-		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-		$cartItem = new CartItem($customerIdentifier, $product1, 1, '0.0');
-		$em->persist($cartItem);
-		$em->flush();
-		$cartItems = [$cartItem];
-		$cart = new Cart($cartItems);
+		$cartFacade = $this->createCartFacade($customerIdentifier);
+		$cartFacade->addProductToCart($product->getId(), $quantity);
 
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
+		$cart = $this->getCartByCustomerIdentifier($customerIdentifier);
+		$cartItems = $cart->getItems();
+		$cartItem = array_pop($cartItems);
+
 		$this->setExpectedException('\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException');
 		$cartFacade->deleteCartItem($cartItem->getId() + 1);
 	}
 
-	public function testDeleteCartItem() {
-		$em = $this->getEntityManager();
-
+	public function testCanDeleteCartItem() {
 		// Set currentLocale in TranslatableListener as it done in real request
 		// because CartWatcherFacade works with entity translations.
 		$translatableListener = $this->getContainer()->get(\SS6\ShopBundle\Model\Localization\TranslatableListener::class);
 		/* @var $translatableListener \SS6\ShopBundle\Model\Localization\TranslatableListener */
 		$translatableListener->setCurrentLocale('cs');
 
-		$cartService = $this->getContainer()->get(CartService::class);
-		$productRepository = $this->getContainer()->get(ProductRepository::class);
-		$customerIdentifier = new CustomerIdentifier('randomString');
-		$cartItemRepository = $this->getContainer()->get(CartItemRepository::class);
-		$cartWatcherFacade = $this->getContainer()->get(CartWatcherFacade::class);
-		$domain = $this->getContainer()->get(Domain::class);
-		$currentCustomer = $this->getContainer()->get(CurrentCustomer::class);
+		$customerIdentifier = new CustomerIdentifier('secretSessionHash');
 
 		$product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
-		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '3');
-		$cartItem1 = new CartItem($customerIdentifier, $product1, 1, '0.0');
-		$cartItem2 = new CartItem($customerIdentifier, $product2, 1, '0.0');
-		$em->persist($cartItem1);
-		$em->persist($cartItem2);
-		$em->flush();
-		$cartItems = [$cartItem1, $cartItem2];
-		$cart = new Cart($cartItems);
+		$product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '2');
+		$quantity = 1;
 
-		$cartFacade = new CartFacade(
-			$this->getEntityManager(),
-			$cartService,
-			$cart,
-			$productRepository,
-			$customerIdentifier,
-			$domain,
-			$currentCustomer
-		);
+		$cartFacade = $this->createCartFacade($customerIdentifier);
+		$cartItem1 = $cartFacade->addProductToCart($product1->getId(), $quantity)->getCartItem();
+		$cartItem2 = $cartFacade->addProductToCart($product2->getId(), $quantity)->getCartItem();
+
 		$cartFacade->deleteCartItem($cartItem1->getId());
 
-		$cartFactory = new CartFactory($cartItemRepository, $cartWatcherFacade);
-		$cart = $cartFactory->get($customerIdentifier);
-		$this->assertSame(1, $cart->getItemsCount());
+		$cart = $this->getCartByCustomerIdentifier($customerIdentifier);
 		$cartItems = $cart->getItems();
-		$cartItem = array_pop($cartItems);
-		$this->assertSame($cartItem2->getId(), $cartItem->getId());
+
+		$this->assertArrayHasSameElements([$cartItem2], $cartItems);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \SS6\ShopBundle\Model\Cart\CartFacade
+	 */
+	private function createCartFacade(CustomerIdentifier $customerIdentifier) {
+		return new CartFacade(
+			$this->getEntityManager(),
+			$this->getContainer()->get(CartService::class),
+			$this->getCartByCustomerIdentifier($customerIdentifier),
+			$this->getContainer()->get(ProductRepository::class),
+			$customerIdentifier,
+			$this->getContainer()->get(Domain::class),
+			$this->getContainer()->get(CurrentCustomer::class),
+			$this->getContainer()->get(CurrentPromoCodeFacade::class)
+		);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 */
+	private function getCartByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
+		$cartFactory = $this->getContainer()->get(CartFactory::class);
+
+		return $cartFactory->get($customerIdentifier);
+	}
+
+	/**
+	 * @param array $expected
+	 * @param array $actual
+	 */
+	private function assertArrayHasSameElements(array $expected, array $actual) {
+		foreach ($expected as $expectedElement) {
+			$key = array_search($expectedElement, $actual, true);
+
+			if ($key === false) {
+				$this->fail('Actual array does not contain expected element: ' . var_export($expectedElement, true));
+			}
+
+			unset($actual[$key]);
+		}
+
+		if (!empty($actual)) {
+			$this->fail('Actual array contains extra elements: ' . var_export($actual, true));
+		}
 	}
 
 }
