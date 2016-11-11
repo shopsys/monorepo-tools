@@ -4,9 +4,11 @@
 			{% set url = findUrlByDomainId('front_product_detail', { id: productDetail.product.id }, productDomain.domainId) %}
 			{% set isVisible = isVisibleForDefaultPricingGroup(productDetail.product, productDomain.domainId) %}
 
-			<div class="list-domain__item__image">
-				{{ domainIcon(productDomain.domainId) }}
-			</div>
+			{% if isMultidomain() %}
+				<div class="list-domain__item__image">
+					{{ domainIcon(productDomain.domainId) }}
+				</div>
+			{% endif %}
 
 			<div class="list-domain__item__info">
 				<span class="list-domain__item__info__visible in-icon svg svg-{{ isVisible ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ isVisible ? 'Ano'|trans : 'Ne'|trans }}"></span>

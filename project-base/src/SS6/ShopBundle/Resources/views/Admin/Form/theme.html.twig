@@ -119,11 +119,16 @@
 		<div class="form-line__side">
 			<div class="form-line__item">
 				<div class="input__wrap">
-					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
+					{% set inputAttr = attr %}
+					{% if isMultidomain() %}
+						{% set inputAttr = inputAttr|merge({'class': (inputAttr.class|default('') ~ ' input--domain')|trim}) %}
+					{% endif %}
 					{{ form_widget(form, { attr: inputAttr }) }}
-					<span class="input__domain">
-						{{ domainIcon(domainId) }}
-					</span>
+					{% if isMultidomain() %}
+						<span class="input__domain">
+							{{ domainIcon(domainId) }}
+						</span>
+					{% endif %}
 				</div>
 			</div>
 			{{ form_errors(form) }}
@@ -152,11 +157,16 @@
 		<div class="form-line__side">
 			<div class="form-line__item">
 				<div class="input__wrap">
-					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--domain')|trim}) %}
+					{% set inputAttr = attr %}
+					{% if isMultidomain() %}
+						{% set inputAttr = inputAttr|merge({'class': (inputAttr.class|default('') ~ ' input--domain')|trim}) %}
+					{% endif %}
 					{{ form_widget(form, { attr: inputAttr }) }}
-					<span class="input__domain">
-						{{ domainIcon(domainId) }}
-					</span>
+					{% if isMultidomain() %}
+						<span class="input__domain">
+							{{ domainIcon(domainId) }}
+						</span>
+					{% endif %}
 				</div>
 			</div>
 			{{ form_errors(form) }}
@@ -188,20 +198,22 @@
 	{% else %}
 		<div class="form-line">
 			{% if multidomain is defined %}
-				{{ form_label(form, getDomainName(domainId)) }}
-				{{ domainIcon(domainId) }}
+				{% if isMultidomain() %}
+					{{ form_label(form, getDomainName(domainId)) }}
+					{{ domainIcon(domainId) }}
+				{% endif %}
 			{% else %}
 				{{ form_label(form, label) }}
 			{% endif %}
 			{{- form_errors(form) -}}
 			{% if newline is not defined %}
-				<div class="form-line__side">
+				<div{% if isMultidomain() %} class="form-line__side"{% endif %}>
 					<div class="form-line__item">
 						{{- form_widget(form) -}}
 					</div>
 				</div>
 			{% else %}
-				<div class="form-line__line">
+				<div{% if isMultidomain() %} class="form-line__side"{% endif %}>
 					{% set inputAttr = attr|merge({'class': (attr.class|default('') ~ ' input--textarea-big')|trim}) %}
 					{{- form_widget(form, { attr: inputAttr } ) -}}
 				</div>
@@ -226,16 +238,18 @@
 
 		{% for domainId, friendlyUrlForms in form.toDelete %}
 			<div class="form-line__box js-entity-url-list-domain-{{ domainId }}">
-				<div class="form-line__box__title">
-					<span class="form-line__box__title__image">
-						{{ domainIcon(domainId, 'large') }}
-					</span>
-					<strong class="form-line__box__title__name">
-						{{ 'Doména %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
-					</strong>
-					{{ form_errors(form.mainOnDomains[domainId]) }}
-				</div>
-				<div class="form-line__box__content">
+				{% if isMultidomain() %}
+					<div class="form-line__box__title">
+						<span class="form-line__box__title__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__box__title__name">
+							{{ 'Doména %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+						</strong>
+						{{ form_errors(form.mainOnDomains[domainId]) }}
+					</div>
+				{% endif %}
+				<div{% if isMultidomain() %} class="form-line__box__content"{% endif %}>
 					<div class="form-choice-list js-entity-url-list-container">
 						{% set mainUrl = findUrlByDomainId(form.vars.routeName, { id: entityId }, domainId) %}
 						{% for slug, friendlyUrlForm in friendlyUrlForms %}
@@ -710,9 +724,11 @@
 				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' form-choice-list__item')|trim}) %}
 				<label {% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
 					{{ form_widget(child, { inList: true}) }}
-					<span class="form-choice-list__icon">
-						{{ domainIcon(domainId, 'small') }}
-					</span>
+					{% if isMultidomain() %}
+						<span class="form-choice-list__icon">
+							{{ domainIcon(domainId, 'small') }}
+						</span>
+					{% endif %}
 					{{ child.vars.label }}
 				</label>
 			{% endfor %}

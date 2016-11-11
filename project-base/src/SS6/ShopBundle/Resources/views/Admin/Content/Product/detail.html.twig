@@ -29,6 +29,12 @@
 {% block breadcrumb %}{% endblock %}
 
 {% block main_content %}
+	{% if isMultidomain() %}
+		{% set cssClassOnMultidomainInputs = 'input--domain' %}
+	{% else %}
+		{% set cssClassOnMultidomainInputs = '' %}
+	{% endif %}
+
 	{{ form_start(form) }}
 		<div id="product_edit_form_productData"></div>
 		{{ form_errors(form) }}
@@ -110,15 +116,17 @@
 					<div class="form-line__line">
 						{% for domainId, categoriesForm in form.productData.categoriesByDomainId %}
 							<div class="form-line__box">
-								<div class="form-line__group form-line__box__title">
-									<span class="form-line__group__image">
-										<span class="in-image in-image--large">
-											<span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
+								{% if isMultidomain() %}
+									<div class="form-line__group form-line__box__title">
+										<span class="form-line__group__image">
+											<span class="in-image in-image--large">
+												<span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
+											</span>
 										</span>
-									</span>
-									<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-								</div>
-								<div class="form-line__box__content">
+										<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+									</div>
+								{% endif %}
+								<div{% if isMultidomain() %} class="form-line__box__content"{% endif %}>
 									{{ form_widget(categoriesForm) }}
 									{{ form_errors(categoriesForm) }}
 								</div>
@@ -170,14 +178,16 @@
 				</div>
 
 				{% for domainId, descriptionForm in form.descriptions %}
-					<div class="form-line form-line--no-padd">
-						<div class="form-line__group">
-							<span class="form-line__group__image">
-								{{ domainIcon(domainId, 'large') }}
-							</span>
-							<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					{% if isMultidomain() %}
+						<div class="form-line form-line--no-padd">
+							<div class="form-line__group">
+								<span class="form-line__group__image">
+									{{ domainIcon(domainId, 'large') }}
+								</span>
+								<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 					<div class="form-line">
 						<div class="form-line__line form-line__line--no-space">
 							{{ form_widget(descriptionForm) }}
@@ -195,14 +205,16 @@
 				</div>
 
 				{% for domainId, shortDescriptionForm in form.shortDescriptions %}
-					<div class="form-line form-line--no-padd">
-						<div class="form-line__group">
-							<span class="form-line__group__image">
-								{{ domainIcon(domainId, 'large') }}
-							</span>
+					{% if isMultidomain() %}
+						<div class="form-line form-line--no-padd">
+							<div class="form-line__group">
+								<span class="form-line__group__image">
+									{{ domainIcon(domainId, 'large') }}
+								</span>
 							<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+							</div>
 						</div>
-					</div>
+					{% endif %}
 					<div class="form-line">
 						<div class="form-line__line form-line__line--no-space">
 							{{ form_widget(shortDescriptionForm) }}
@@ -291,13 +303,15 @@
 									multidomain: true,
 									domainId: domainId,
 									attr: {
-										class: 'js-dynamic-placeholder js-characters-counter-input input--domain',
+										class: 'js-dynamic-placeholder js-characters-counter-input ' ~ cssClassOnMultidomainInputs,
 										'data-placeholder-source-input-id': 'product_edit_form_productData_name_' ~ seoTitleForm.vars.domainConfig.locale
 									}
 								}) }}
-								<span class="input__domain">
-									{{ domainIcon(domainId) }}
-								</span>
+								{% if isMultidomain() %}
+									<span class="input__domain">
+										{{ domainIcon(domainId) }}
+									</span>
+								{% endif %}
 							</div>
 						</div>
 
@@ -319,10 +333,12 @@
 					<div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
 						<div class="form-line__item form-line__item--left">
 							<span class="input__wrap">
-								{{ form_widget(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--domain input--seo' } }) }}
-								<span class="input__domain">
-									{{ domainIcon(domainId) }}
-								</span>
+								{{ form_widget(seoMetaDescriptionForm, { multidomain: true, domainId: domainId, attr: { class: 'js-characters-counter-input input--seo ' ~ cssClassOnMultidomainInputs } }) }}
+								{% if isMultidomain() %}
+									<span class="input__domain">
+										{{ domainIcon(domainId) }}
+									</span>
+								{% endif %}
 							</span>
 						</div>
 
@@ -356,9 +372,11 @@
 				{{ form_label(form.showInZboziFeed, 'Nabízet ve feedu'|trans) }}
 				{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
 					<div class="form-line__side">
-						<div class="form-line__item">
+						{% if isMultidomain() %}
+							<div class="form-line__item">
 								{{ domainIcon(domainId, 'long-bordered') }}
-						</div>
+							</div>
+						{% endif %}
 						<div class="form-line__item">
 							{{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
 							{{ form_errors(showInZboziFeedForm) }}

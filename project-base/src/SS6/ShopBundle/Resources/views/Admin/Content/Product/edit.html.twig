@@ -146,12 +146,14 @@
 						<input
 							type="text"
 							value="{{ mainCategoryName }}"
-							class="input input--domain"
+							class="input{% if isMultidomain() %} input--domain{% endif %}"
 							readonly="readonly"
 						>
-						<span class="input__domain">
-							{{ domainIcon(domainId) }}
-						</span>
+						{% if isMultidomain() %}
+							<span class="input__domain">
+								{{ domainIcon(domainId) }}
+							</span>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -223,18 +225,20 @@
 		</div>
 	</div>
 	{% for domainId, productSellingPrices in productSellingPricesIndexedByDomainId %}
-		<div class="form-line form-line--no-padd">
-			<div class="form-line__line form-line__line--no-space">
-				<div class="form-line__group">
-					<span class="form-line__group__image">
-						{{ domainIcon(domainId, 'large') }}
-					</span>
-					<strong class="form-line__group__name">
-						{{ getDomainName(domainId) }}
-					</strong>
+		{% if isMultidomain() %}
+			<div class="form-line form-line--no-padd">
+				<div class="form-line__line form-line__line--no-space">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">
+							{{ getDomainName(domainId) }}
+						</strong>
+					</div>
 				</div>
 			</div>
-		</div>
+		{% endif %}
 		{% for productSellingPrice in productSellingPrices %}
 			<div class="form-line">
 				<div class="form-line__label">
@@ -275,14 +279,16 @@
 		{% do form.descriptions.setRendered %}
 	{% else %}
 		{% for domainId, descriptionForm in form.descriptions %}
-			<div class="form-line form-line--no-padd">
-				<div class="form-line__group">
-					<span class="form-line__group__image">
-						{{ domainIcon(domainId, 'large') }}
-					</span>
+			{% if isMultidomain() %}
+				<div class="form-line form-line--no-padd">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
 					<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
 				</div>
-			</div>
+			{% endif %}
 			<div class="form-line">
 				<div class="form-line__line form-line__line--no-space">
 					{{ form_widget(descriptionForm) }}
@@ -304,14 +310,16 @@
 		</div>
 	{% else %}
 		{% for domainId, shortDescriptionForm in form.shortDescriptions %}
-			<div class="form-line form-line--no-padd">
-				<div class="form-line__group">
-					<span class="form-line__group__image">
-						{{ domainIcon(domainId, 'large') }}
-					</span>
-					<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+			{% if isMultidomain() %}
+				<div class="form-line form-line--no-padd">
+					<div class="form-line__group">
+						<span class="form-line__group__image">
+							{{ domainIcon(domainId, 'large') }}
+						</span>
+						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+					</div>
 				</div>
-			</div>
+			{% endif %}
 			<div class="form-line">
 				<div class="form-line__line form-line__line--no-space">
 					{{ form_widget(shortDescriptionForm, { attr: { class: 'input--textarea-big' } } ) }}
