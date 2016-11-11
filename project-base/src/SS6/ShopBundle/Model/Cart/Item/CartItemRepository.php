@@ -36,7 +36,7 @@ class CartItemRepository {
 		if ($customerIdentifier->getUser() !== null) {
 			$criteria['user'] = $customerIdentifier->getUser()->getId();
 		} else {
-			$criteria['sessionId'] = $customerIdentifier->getSessionId();
+			$criteria['cartIdentifier'] = $customerIdentifier->getCartIdentifier();
 		}
 
 		return $this->getCartItemRepository()->findBy($criteria, ['id' => 'desc']);

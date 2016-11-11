@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class CartMigrationFacade {
 
-	const SESSION_PREVIOUS_ID = 'previous_id';
+	const SESSION_PREVIOUS_CART_IDENTIFIER = 'previous_id';
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -82,12 +82,12 @@ class CartMigrationFacade {
 	public function onKernelController(FilterControllerEvent $filterControllerEvent) {
 		$session = $filterControllerEvent->getRequest()->getSession();
 
-		$previousId = $session->get(self::SESSION_PREVIOUS_ID);
-		if (!empty($previousId) && $previousId !== $session->getId()) {
-			$previousCustomerIdentifier = $this->customerIdentifierFactory->getOnlyWithSessionId($previousId);
+		$previousCartIdentifier = $session->get(self::SESSION_PREVIOUS_CART_IDENTIFIER);
+		if (!empty($previousCartIdentifier) && $previousCartIdentifier !== $session->getId()) {
+			$previousCustomerIdentifier = $this->customerIdentifierFactory->getOnlyWithCartIdentifier($previousCartIdentifier);
 			$cart = $this->cartFactory->get($previousCustomerIdentifier);
 			$this->mergeCurrentCartWithCart($cart);
 		}
-		$session->set(self::SESSION_PREVIOUS_ID, $session->getId());
+		$session->set(self::SESSION_PREVIOUS_CART_IDENTIFIER, $session->getId());
 	}
 }

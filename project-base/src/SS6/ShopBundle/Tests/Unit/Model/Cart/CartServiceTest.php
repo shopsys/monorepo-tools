@@ -139,10 +139,10 @@ class CartServiceTest extends FunctionalTestCase {
 		$product1 = $this->createProduct();
 		$product2 = $this->createProduct();
 
-		$sessionId1 = 'abc123';
-		$sessionId2 = 'def456';
-		$customerIdentifier1 = new CustomerIdentifier($sessionId1);
-		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
+		$cartIdentifier1 = 'abc123';
+		$cartIdentifier2 = 'def456';
+		$customerIdentifier1 = new CustomerIdentifier($cartIdentifier1);
+		$customerIdentifier2 = new CustomerIdentifier($cartIdentifier2);
 
 		$cartItem = new CartItem($customerIdentifier1, $product1, 2, '0.0');
 		$cartItems = [$cartItem];
@@ -156,8 +156,8 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartService->mergeCarts($mainCart, $mergingCart, $customerIdentifier1);
 
 		foreach ($mainCart->getItems() as $item) {
-			if ($item->getSessionId() !== $customerIdentifier1->getSessionId()) {
-				$this->fail('Merged cart contain cartItem with wrong sessionId');
+			if ($item->getCartIdentifier() !== $customerIdentifier1->getCartIdentifier()) {
+				$this->fail('Merged cart contain cartItem with wrong cartIdentifier');
 			}
 		}
 

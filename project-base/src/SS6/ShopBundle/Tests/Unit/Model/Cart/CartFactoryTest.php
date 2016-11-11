@@ -16,9 +16,9 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testGetReturnsTheSameCartForTheSameCustomer() {
 		$cartFactory = $this->getCartFactory();
 
-		$sessionId = 'abc123';
-		$customerIdentifier1 = new CustomerIdentifier($sessionId);
-		$customerIdentifier2 = new CustomerIdentifier($sessionId);
+		$cartIdentifier = 'abc123';
+		$customerIdentifier1 = new CustomerIdentifier($cartIdentifier);
+		$customerIdentifier2 = new CustomerIdentifier($cartIdentifier);
 
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);
@@ -29,10 +29,10 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 	public function testGetReturnsDifferentCartsForDifferentCustomers() {
 		$cartFactory = $this->getCartFactory();
 
-		$sessionId1 = 'abc123';
-		$sessionId2 = 'def456';
-		$customerIdentifier1 = new CustomerIdentifier($sessionId1);
-		$customerIdentifier2 = new CustomerIdentifier($sessionId2);
+		$cartIdentifier1 = 'abc123';
+		$cartIdentifier2 = 'def456';
+		$customerIdentifier1 = new CustomerIdentifier($cartIdentifier1);
+		$customerIdentifier2 = new CustomerIdentifier($cartIdentifier2);
 
 		$cart1 = $cartFactory->get($customerIdentifier1);
 		$cart2 = $cartFactory->get($customerIdentifier2);

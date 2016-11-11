@@ -8,12 +8,12 @@ use SS6\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException;
 
 class CustomerIdentifierTest extends PHPUnit_Framework_TestCase {
 
-	public function testCannotCreateIdentifierForEmptySessionIdAndNullUser() {
-		$sessionId = '';
+	public function testCannotCreateIdentifierForEmptyCartIdentifierAndNullUser() {
+		$cartIdentifier = '';
 		$user = null;
 
 		$this->setExpectedException(EmptyCustomerIdentifierException::class);
-		new CustomerIdentifier($sessionId, $user);
+		new CustomerIdentifier($cartIdentifier, $user);
 	}
 
 }

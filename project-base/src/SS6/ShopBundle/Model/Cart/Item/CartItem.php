@@ -26,7 +26,7 @@ class CartItem {
 	 *
 	 * @ORM\Column(type="string", length=127)
 	 */
-	private $sessionId;
+	private $cartIdentifier;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
@@ -70,7 +70,7 @@ class CartItem {
 		$quantity,
 		$watchedPrice
 	) {
-		$this->sessionId = $customerIdentifier->getSessionId();
+		$this->cartIdentifier = $customerIdentifier->getCartIdentifier();
 		$this->user = $customerIdentifier->getUser();
 		$this->product = $product;
 		$this->watchedPrice = $watchedPrice;
@@ -146,7 +146,7 @@ class CartItem {
 	/**
 	 * @return string
 	 */
-	public function getSessionId() {
-		return $this->sessionId;
+	public function getCartIdentifier() {
+		return $this->cartIdentifier;
 	}
 }

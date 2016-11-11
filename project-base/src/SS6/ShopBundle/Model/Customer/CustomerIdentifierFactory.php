@@ -27,25 +27,25 @@ class CustomerIdentifierFactory {
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	public function get() {
-		$sessionId = $this->session->getId();
+		$cartIdentifier = $this->session->getId();
 
 		// when session is not started, returning empty string is behaviour of session_id()
-		if ($sessionId === '') {
+		if ($cartIdentifier === '') {
 			$this->session->start();
-			$sessionId = $this->session->getId();
+			$cartIdentifier = $this->session->getId();
 		}
 
-		$customerIdentifier = new CustomerIdentifier($sessionId, $this->currentCustomer->findCurrentUser());
+		$customerIdentifier = new CustomerIdentifier($cartIdentifier, $this->currentCustomer->findCurrentUser());
 
 		return $customerIdentifier;
 	}
 
 	/**
-	 * @param string $sessionId
+	 * @param string $cartIdentifier
 	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
-	public function getOnlyWithSessionId($sessionId) {
-		$customerIdentifier = new CustomerIdentifier($sessionId, null);
+	public function getOnlyWithCartIdentifier($cartIdentifier) {
+		$customerIdentifier = new CustomerIdentifier($cartIdentifier, null);
 
 		return $customerIdentifier;
 	}

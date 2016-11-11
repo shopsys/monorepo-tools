@@ -9,7 +9,7 @@ class CustomerIdentifier {
 	/**
 	 * @var string
 	 */
-	private $sessionId = '';
+	private $cartIdentifier = '';
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Customer\User|null
@@ -17,26 +17,26 @@ class CustomerIdentifier {
 	private $user;
 
 	/**
-	 * @param string $sessionId
+	 * @param string $cartIdentifier
 	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
 	 */
-	public function __construct($sessionId, User $user = null) {
-		if ($sessionId === '' && $user === null) {
+	public function __construct($cartIdentifier, User $user = null) {
+		if ($cartIdentifier === '' && $user === null) {
 			$message = 'Can not be created empty CustomerIdentifier';
 			throw new \SS6\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException($message);
 		}
 
 		$this->user = $user;
 		if ($this->user === null) {
-			$this->sessionId = $sessionId;
+			$this->cartIdentifier = $cartIdentifier;
 		}
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getSessionId() {
-		return $this->sessionId;
+	public function getCartIdentifier() {
+		return $this->cartIdentifier;
 	}
 
 	/**
@@ -55,7 +55,7 @@ class CustomerIdentifier {
 		} else {
 			$userId = 'NULL';
 		}
-		return 'session:' . $this->sessionId . ';userId:' . $userId . ';';
+		return 'session:' . $this->cartIdentifier . ';userId:' . $userId . ';';
 	}
 
 }
