@@ -18,10 +18,10 @@
 						<th>{{ 'Číslo objednávky'|trans }}</th>
 						<th>{{ 'Datum vytvoření'|trans }}</th>
 						<th>{{ 'Aktuální stav'|trans }}</th>
-						<th>{{ 'Počet položek'|trans }}</th>
+						<th class="text-right">{{ 'Počet položek'|trans }}</th>
 						<th>{{ 'Doprava'|trans }}</th>
 						<th>{{ 'Platba'|trans }}</th>
-						<th>{{ 'Celková cena s DPH'|trans }}</th>
+						<th class="text-right">{{ 'Celková cena s DPH'|trans }}</th>
 						<th class="text-center">{{ 'Detail'|trans }}</th>
 					</tr>
 					{% for order in orders %}
@@ -29,10 +29,10 @@
 							<td><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}">{{ order.number }}</a></td>
 							<td>{{ order.createdAt|formatDate }}</td>
 							<td>{{ order.status.name }}</td>
-							<td>{{ order.productItemsCount }}</td>
+							<td class="text-right">{{ order.productItemsCount }}</td>
 							<td>{{ order.transportName }}</td>
 							<td>{{ order.paymentName }}</td>
-							<td>{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
+							<td class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</td>
 							<td class="text-center"><a href="{{ url('front_customer_order_detail_registered', { orderNumber: order.number }) }}" class="in-icon in-icon--detail"><i class="svg svg-search"></i></a></td>
 						</tr>
 					{% endfor %}
