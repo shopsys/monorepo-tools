@@ -67,17 +67,17 @@
 
 				{% if not productDetail.product.isMainVariant %}
 					<div class="js-product-detail-main-add-to-cart-wrapper box-detail-add">
-						<div {% if productDetail.sellingPrice is not null %}itemprop="offers"
-							itemscope
-							itemtype="http://schema.org/Offer" {% endif %}
-							class="box-detail-add__prices">
-							<div class="box-detail-add__prices__item box-detail-add__prices__item--main">
-								{{ productDetail.sellingPrice.priceWithVat|price }}
-							</div>
-							<div class="box-detail-add__prices__item">
-								{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
-							</div>
-							{% if productDetail.sellingPrice is not null %}
+						{% if not productDetail.product.calculatedSellingDenied %}
+							<div itemprop="offers"
+								itemscope
+								itemtype="http://schema.org/Offer"
+								class="box-detail-add__prices">
+								<div class="box-detail-add__prices__item box-detail-add__prices__item--main">
+									{{ productDetail.sellingPrice.priceWithVat|price }}
+								</div>
+								<div class="box-detail-add__prices__item">
+									{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+								</div>
 								<meta itemprop="priceCurrency"
 									content="{{ currencyCode(domain.id) }}"
 								>
@@ -87,10 +87,7 @@
 								<link itemprop="availability"
 									href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
 								>
-							{% endif %}
-						</div>
-
-						{% if not productDetail.product.calculatedSellingDenied %}
+							</div>
 							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
 						{% else %}
 							<div>
