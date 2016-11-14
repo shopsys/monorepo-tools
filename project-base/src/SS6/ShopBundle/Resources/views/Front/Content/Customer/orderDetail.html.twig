@@ -122,23 +122,23 @@
 		<div class="wrap-box__in">
 			<div class="in-scroll margin-bottom-20">
 				<div class="in-scroll__in">
-					<table class="table-main box-orders">
+					<table class="table-main box-order-detail__table">
 						<tr>
 							<th>{{ 'Název'|trans }}</th>
-							<th>{{ 'Jednotková cena s DPH'|trans }}</th>
-							<th>{{ 'Množství'|trans }}</th>
-							<th>{{ 'Sazba DPH (%)'|trans }}</th>
-							<th>{{ 'Celkem s DPH'|trans }}</th>
-							<th>{{ 'Celkem bez DPH'|trans }}</th>
+							<th class="text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
+							<th class="text-right">{{ 'Množství'|trans }}</th>
+							<th class="text-right">{{ 'Sazba DPH (%)'|trans }}</th>
+							<th class="text-right">{{ 'Celkem s DPH'|trans }}</th>
+							<th class="text-right">{{ 'Celkem bez DPH'|trans }}</th>
 						</tr>
 						{% for item in order.items %}
 							<tr>
 								<td>{{ item.name }}</td>
-								<td>{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
-								<td>{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
-								<td>{{ item.vatPercent|formatPercent }}</td>
-								<td>{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
-								<td>{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
+								<td class="text-right">{{ item.priceWithVat|priceWithCurrency(order.currency) }}</td>
+								<td class="text-right">{{ item.quantity|formatNumber }} {{ item.unitName }}</td>
+								<td class="text-right">{{ item.vatPercent|formatPercent }}</td>
+								<td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithVat|priceWithCurrency(order.currency) }}</td>
+								<td class="text-right">{{ orderItemTotalPricesById[item.id].priceWithoutVat|priceWithCurrency(order.currency) }}</td>
 							</tr>
 						{% endfor %}
 					</table>
