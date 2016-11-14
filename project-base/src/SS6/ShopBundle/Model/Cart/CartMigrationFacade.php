@@ -4,7 +4,6 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Model\Cart\CartFactory;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
@@ -23,11 +22,6 @@ class CartMigrationFacade {
 	private $cartService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
-	 */
-	private $customerIdentifier;
-
-	/**
 	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
 	private $cartFactory;
@@ -40,20 +34,17 @@ class CartMigrationFacade {
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier
 	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
 	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
-		CustomerIdentifier $customerIdentifier,
 		CartFactory $cartFactory,
 		CustomerIdentifierFactory $customerIdentifierFactory
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
-		$this->customerIdentifier = $customerIdentifier;
 		$this->cartFactory = $cartFactory;
 		$this->customerIdentifierFactory = $customerIdentifierFactory;
 	}
@@ -62,8 +53,9 @@ class CartMigrationFacade {
 	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function mergeCurrentCartWithCart(Cart $cart) {
-		$currentCart = $this->cartFactory->get($this->customerIdentifier);
-		$this->cartService->mergeCarts($currentCart, $cart, $this->customerIdentifier);
+		$customerIdentifier = $this->customerIdentifierFactory->get();
+		$currentCart = $this->cartFactory->get($customerIdentifier);
+		$this->cartService->mergeCarts($currentCart, $cart, $customerIdentifier);
 
 		foreach ($cart->getItems() as $itemToRemove) {
 			$this->em->remove($itemToRemove);

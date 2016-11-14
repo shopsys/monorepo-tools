@@ -4,8 +4,11 @@ namespace SS6\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Domain;
+use SS6\ShopBundle\Model\Cart\CartFactory;
+use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
@@ -22,9 +25,9 @@ class CartFacade {
 	private $cartService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
 	 */
-	private $cart;
+	private $cartFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
@@ -32,9 +35,9 @@ class CartFacade {
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifier
+	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
-	private $customerIdentifier;
+	private $customerIdentifierFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Domain\Domain
@@ -48,24 +51,31 @@ class CartFacade {
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
+	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 */
 	private $currentPromoCodeFacade;
 
 	public function __construct(
 		EntityManager $em,
 		CartService $cartService,
-		Cart $cart,
+		CartFactory $cartFactory,
 		ProductRepository $productRepository,
-		CustomerIdentifier $customerIdentifier,
+		CustomerIdentifierFactory $customerIdentifierFactory,
 		Domain $domain,
 		CurrentCustomer $currentCustomer,
 		CurrentPromoCodeFacade $currentPromoCodeFacade
 	) {
 		$this->em = $em;
 		$this->cartService = $cartService;
-		$this->cart = $cart;
+		$this->cartFactory = $cartFactory;
 		$this->productRepository = $productRepository;
-		$this->customerIdentifier = $customerIdentifier;
+		$this->customerIdentifierFactory = $customerIdentifierFactory;
 		$this->domain = $domain;
 		$this->currentCustomer = $currentCustomer;
 		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
@@ -82,7 +92,9 @@ class CartFacade {
 			$this->domain->getId(),
 			$this->currentCustomer->getPricingGroup()
 		);
-		$result = $this->cartService->addProductToCart($this->cart, $this->customerIdentifier, $product, $quantity);
+		$customerIdentifier = $this->customerIdentifierFactory->get();
+		$cart = $this->cartFactory->get($customerIdentifier);
+		$result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
 		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
 
 		$this->em->persist($result->getCartItem());
@@ -95,7 +107,8 @@ class CartFacade {
 	 * @param array $quantities CartItem.id => quantity
 	 */
 	public function changeQuantities(array $quantities) {
-		$this->cartService->changeQuantities($this->cart, $quantities);
+		$cart = $this->getCartOfCurrentCustomer();
+		$this->cartService->changeQuantities($cart, $quantities);
 		$this->em->flush();
 	}
 
@@ -103,15 +116,17 @@ class CartFacade {
 	 * @param int $cartItemId
 	 */
 	public function deleteCartItem($cartItemId) {
-		$cartItemToDelete = $this->cartService->getCartItemById($this->cart, $cartItemId);
-		$this->cart->removeItemById($cartItemId);
+		$cart = $this->getCartOfCurrentCustomer();
+		$cartItemToDelete = $this->cartService->getCartItemById($cart, $cartItemId);
+		$cart->removeItemById($cartItemId);
 		$this->em->remove($cartItemToDelete);
 		$this->em->flush();
 	}
 
 	public function cleanCart() {
-		$cartItemsToDelete = $this->cart->getItems();
-		$this->cartService->cleanCart($this->cart);
+		$cart = $this->getCartOfCurrentCustomer();
+		$cartItemsToDelete = $cart->getItems();
+		$this->cartService->cleanCart($cart);
 
 		foreach ($cartItemsToDelete as $cartItemToDelete) {
 			$this->em->remove($cartItemToDelete);
@@ -127,10 +142,30 @@ class CartFacade {
 	 * @return \SS6\ShopBundle\Model\Product\Product
 	 */
 	public function getProductByCartItemId($cartItemId) {
-		return $this->cartService->getCartItemById($this->cart, $cartItemId)->getProduct();
+		$cart = $this->getCartOfCurrentCustomer();
+
+		return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
 	}
 
 	public function cleanAdditionalData() {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 	}
+	/**
+	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 */
+	public function getCartOfCurrentCustomer() {
+		$customerIdentifier = $this->customerIdentifierFactory->get();
+
+		return $this->cartFactory->get($customerIdentifier);
+	}
+
+	/**
+	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+	 */
+	public function getQuantifiedProductsOfCurrentCustomer() {
+		$cart = $this->getCartOfCurrentCustomer();
+
+		return $this->cartService->getQuantifiedProducts($cart);
+	}
+
 }

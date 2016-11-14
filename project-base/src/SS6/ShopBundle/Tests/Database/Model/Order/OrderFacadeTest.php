@@ -6,7 +6,7 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
 use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Cart\CartService;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 use SS6\ShopBundle\Model\Order\Item\OrderItemData;
@@ -28,10 +28,10 @@ class OrderFacadeTest extends DatabaseTestCase {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function testCreate() {
-		$cart = $this->getContainer()->get(Cart::class);
-		/* @var $cart \SS6\ShopBundle\Model\Cart\Cart */
+		$cartFacade = $this->getContainer()->get(CartFacade::class);
+		/* @var $cartFacade \SS6\ShopBundle\Model\Cart\CartFacade */
 		$cartService = $this->getContainer()->get(CartService::class);
-		/* @var $cart \SS6\ShopBundle\Model\Cart\CartService */
+		/* @var $cartService \SS6\ShopBundle\Model\Cart\CartService */
 		$orderFacade = $this->getContainer()->get(OrderFacade::class);
 		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
 		$orderPreviewFactory = $this->getContainer()->get(OrderPreviewFactory::class);
@@ -46,6 +46,8 @@ class OrderFacadeTest extends DatabaseTestCase {
 		/* @var $paymentRepository \SS6\ShopBundle\Model\Payment\PaymentRepository */
 		$persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
 		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+
+		$cart = $cartFacade->getCartOfCurrentCustomer();
 
 		$customerIdentifier = new CustomerIdentifier('randomString');
 

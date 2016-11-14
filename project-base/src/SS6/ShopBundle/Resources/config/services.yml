@@ -85,16 +85,6 @@ services:
   ss6.shop.breadcrumb.front_breadcrumb_resolver_factory:
     class: SS6\ShopBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory
 
-  ss6.shop.cart:
-    class: SS6\ShopBundle\Model\Cart\Cart
-    factory_service: ss6.shop.cart.cart_factory
-    factory_method: get
-    arguments:
-      - @ss6.shop.customer.customer_identifier
-
-  ss6.shop.cart.cart_factory:
-    class: SS6\ShopBundle\Model\Cart\CartFactory
-
   ss6.shop.cart.cart_migration_facade:
     class: SS6\ShopBundle\Model\Cart\CartMigrationFacade
     tags:
@@ -390,14 +380,6 @@ services:
     class: SS6\ShopBundle\Model\Cookies\CookiesFacade
     arguments:
       - %kernel.environment%
-
-  ss6.shop.customer.customer_identifier:
-    class: SS6\ShopBundle\Model\Customer\CustomerIdentifier
-    factory_service: ss6.shop.customer.customer_identifier_factory
-    factory_method: get
-
-  ss6.shop.customer.customer_identifier_factory:
-    class: SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
 
   ss6.shop.customer.frontend_user_provider:
     class: SS6\ShopBundle\Model\Customer\FrontendUserProvider

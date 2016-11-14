@@ -3,7 +3,7 @@
 namespace SS6\ShopBundle\Model\Order\Preview;
 
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Cart\Cart;
+use SS6\ShopBundle\Model\Cart\CartFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\User;
 use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
@@ -36,9 +36,9 @@ class OrderPreviewFactory {
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
 	 */
-	private $cart;
+	private $cartFacade;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
@@ -50,14 +50,14 @@ class OrderPreviewFactory {
 		Domain $domain,
 		CurrencyFacade $currencyFacade,
 		CurrentCustomer $currentCustomer,
-		Cart $cart,
+		CartFacade $cartFacade,
 		CurrentPromoCodeFacade $currentPromoCodeFacade
 	) {
 		$this->orderPreviewCalculation = $orderPreviewCalculation;
 		$this->domain = $domain;
 		$this->currencyFacade = $currencyFacade;
 		$this->currentCustomer = $currentCustomer;
-		$this->cart = $cart;
+		$this->cartFacade = $cartFacade;
 		$this->currentPromoCodeFacade = $currentPromoCodeFacade;
 	}
 
@@ -77,7 +77,7 @@ class OrderPreviewFactory {
 		return $this->create(
 			$currency,
 			$this->domain->getId(),
-			$this->cart->getQuantifiedProducts(),
+			$this->cartFacade->getQuantifiedProductsOfCurrentCustomer(),
 			$transport,
 			$payment,
 			$this->currentCustomer->findCurrentUser(),

@@ -12,6 +12,7 @@ use SS6\ShopBundle\Model\Cart\Item\CartItem;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -132,9 +133,9 @@ class CartFacadeTest extends DatabaseTestCase {
 		return new CartFacade(
 			$this->getEntityManager(),
 			$this->getContainer()->get(CartService::class),
-			$this->getCartByCustomerIdentifier($customerIdentifier),
+			$this->getContainer()->get(CartFactory::class),
 			$this->getContainer()->get(ProductRepository::class),
-			$customerIdentifier,
+			$this->getCustomerIdentifierFactoryMock($customerIdentifier),
 			$this->getContainer()->get(Domain::class),
 			$this->getContainer()->get(CurrentCustomer::class),
 			$this->getContainer()->get(CurrentPromoCodeFacade::class)
@@ -169,6 +170,20 @@ class CartFacadeTest extends DatabaseTestCase {
 		if (!empty($actual)) {
 			$this->fail('Actual array contains extra elements: ' . var_export($actual, true));
 		}
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private function getCustomerIdentifierFactoryMock(CustomerIdentifier $customerIdentifier) {
+		$customerIdentifierFactoryMock = $this->getMockBuilder(CustomerIdentifierFactory::class)
+			->disableOriginalConstructor()
+			->getMock();
+
+		$customerIdentifierFactoryMock->method('get')->willReturn($customerIdentifier);
+
+		return $customerIdentifierFactoryMock;
 	}
 
 }
