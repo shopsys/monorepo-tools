@@ -9,6 +9,24 @@
 {% block main_content %}
 	<h1>{{ 'Objednávka č.'|trans }} {{order.number}}</h1>
 	<div class="box-order-detail">
+
+		<div class="wrap-box">
+			<h2 class="wrap-box__title">{{ 'Základní informace'|trans }}</h2>
+			<div class="wrap-box__in">
+				<table class="table-params">
+					<tr>
+						<th>{{ 'Stav'|trans }}: </th>
+						<td>{{ order.status.name }}</td>
+					</tr>
+					<tr>
+						<th>{{ 'Datum vytvoření'|trans }}: </th>
+						<td>{{ order.createdAt|formatDate }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
 		<div class="wrap-box">
 			<h2 class="wrap-box__title">{{ 'Fakturační adresa'|trans }}</h2>
 			<div class="wrap-box__in">
@@ -153,14 +171,6 @@
 					<tr>
 						<th>{{ 'Celková cena bez DPH'|trans }}: </th>
 						<td>{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</td>
-					</tr>
-					<tr>
-						<th>{{ 'Stav'|trans }}: </th>
-						<td>{{ order.status.name }}</td>
-					</tr>
-					<tr>
-						<th>{{ 'Datum vytvoření'|trans }}: </th>
-						<td>{{ order.createdAt|formatDate }}</td>
 					</tr>
 				</table>
 			</div>
