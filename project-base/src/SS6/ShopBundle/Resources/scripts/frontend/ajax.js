@@ -15,7 +15,7 @@
 		};
 		options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
-		var $loaderOverlay = getLoaderOverlay(options.loaderMessage, options.loaderElement);
+		var $loaderOverlay = SS6.loaderOverlay.getLoaderOverlay(options.loaderMessage, options.loaderElement);
 		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {
@@ -33,32 +33,9 @@
 		};
 
 		loaderOverlayTimeout = setTimeout(function () {
-			showLoaderOverlay(options.loaderElement, $loaderOverlay);
+			SS6.loaderOverlay.showLoaderOverlay(options.loaderElement, $loaderOverlay);
 		}, options.overlayDelay);
 		$.ajax(options);
-	};
-
-	var getLoaderOverlay = function(loaderMessage, loaderElement) {
-		var $loaderOverlay = $($.parseHTML(
-			'<div class="in-overlay__in">' +
-				'<div class="in-overlay__spinner">' +
-					'<span class="in-overlay__spinner__icon"></span>' +
-					'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-				'</div>' +
-			'</div>'));
-
-		if (loaderElement !== 'body') {
-			$loaderOverlay.addClass('in-overlay__in--absolute');
-			$loaderOverlay.find('.in-overlay__spinner').addClass('in-overlay__spinner--absolute');
-		}
-
-		return $loaderOverlay;
-	};
-
-	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
-		$(loaderElement)
-			.addClass('in-overlay')
-			.append($loaderOverlay);
 	};
 
 	var showDefaultError = function () {
