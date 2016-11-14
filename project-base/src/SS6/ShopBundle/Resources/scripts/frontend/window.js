@@ -10,7 +10,6 @@
 	var animationTime = 300;
 	var flexPopupHeightIssueDetectionBoundaryHeight = 45;
 
-
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
 		if ($mainContainer.length === 0) {
@@ -30,7 +29,7 @@
 
 	var showOverlay = function () {
 		var $overlay = getOverlay();
-		$('body').append($overlay);
+		$('body').addClass('web--window-activated').append($overlay);
 
 		// timeout 0 to asynchronous run to fix css animation fade
 		setTimeout(function(){
@@ -40,6 +39,7 @@
 
 	var hideOverlay = function () {
 		var $overlay = $('#js-overlay');
+		$('body').removeClass('web--window-activated');
 		$overlay.removeClass('window-popup__overlay--active');
 
 		if ($overlay.length !== 0) {
@@ -74,15 +74,16 @@
 			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
-			eventCancel: function () {}
+			eventCancel: function () {},
+			eventOnLoad: function () {}
 		};
-		var options = $.extend(defaults, options);
+		options = $.extend(defaults, options);
 
 		if ($activeWindow !== null) {
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window-popup"></div>');
+		var $window = $('<div class="window-popup" id="js-window"></div>');
 		if (options.wide) {
 			$window.addClass('window-popup--wide');
 		} else {
@@ -107,6 +108,7 @@
 
 		$window.bind('windowFastClose', function () {
 			$(this).remove();
+			hideOverlay();
 			$activeWindow = null;
 		});
 
@@ -135,9 +137,9 @@
 		}
 
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonContinue
-				.text(options.textContinue)
+				.append(options.textContinue)
 				.addClass(options.cssClassContinue)
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
@@ -151,9 +153,9 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonCancel
-				.text(options.textCancel)
+				.append(options.textCancel)
 				.addClass(options.cssClassCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
 				.bind('click.windowEventClose', options.eventClose)
@@ -199,15 +201,15 @@
 				$('html').addClass('is-flex-popup-height-issue-detected');
 			}
 			fixVerticalAlign();
-
 			setTimeout(function(){
 				$window.addClass('window-popup--active');
+				options.eventOnLoad();
 			}, animationTime);
 		}
 
 		function moveToCenter() {
 			var relativeY = $(window).height() / 2 - $window.innerHeight() / 2;
-			var minRelativeY = $(window).height() * 0.1;
+			var minRelativeY = 10;
 
 			if (relativeY < minRelativeY) {
 				relativeY = minRelativeY;
