@@ -10,7 +10,10 @@
 				"src/SS6/"
 			]
 		},
-		"files": ["src/SS6/ShopBundle/Component/Translation/functions.php"]
+		"files": [
+			"src/SS6/ShopBundle/Component/Translation/functions.php",
+			"src/SS6/ShopBundle/Component/VarDumper/functions.php"
+		]
 	},
 	"repositories": [
 		{

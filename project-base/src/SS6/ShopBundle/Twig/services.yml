@@ -122,3 +122,8 @@ services:
     class: SS6\ShopBundle\Twig\SeoExtension
     tags:
       - { name: twig.extension }
+
+  ss6.twig.var_dumper_extension:
+    class: SS6\ShopBundle\Twig\VarDumperExtension
+    tags:
+      - { name: twig.extension }
