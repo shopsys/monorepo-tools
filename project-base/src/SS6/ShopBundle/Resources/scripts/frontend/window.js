@@ -139,7 +139,7 @@
 		if (options.buttonContinue) {
 			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonContinue
-				.append(options.textContinue)
+				.append(document.createTextNode(options.textContinue))
 				.addClass(options.cssClassContinue)
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
@@ -155,7 +155,7 @@
 		if (options.buttonCancel) {
 			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonCancel
-				.append(options.textCancel)
+				.append(document.createTextNode(options.textCancel))
 				.addClass(options.cssClassCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
 				.bind('click.windowEventClose', options.eventClose)
