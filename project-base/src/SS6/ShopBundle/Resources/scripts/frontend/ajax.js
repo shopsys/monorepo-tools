@@ -22,7 +22,11 @@
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
 			clearTimeout(loaderOverlayTimeout);
 			$loaderOverlay.remove();
-			$(options.loaderElement).removeClass('in-overlay');
+
+			// If multiple overlays are shown over the same element class should be removed only when no overlay is shown anymore
+			if ($(options.loaderElement).children(".in-overlay__in").length === 0) {
+				$(options.loaderElement).removeClass('in-overlay');
+			}
 		};
 
 		options.error = function (jqXHR) {
