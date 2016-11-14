@@ -119,6 +119,10 @@ class PriceExtension extends Twig_Extension {
 				[$this, 'getCurrencySymbolByCurrencyId'],
 				['is_safe' => ['html']]
 			),
+			new Twig_SimpleFunction(
+				'currencyCode',
+				[$this, 'getCurrencyCodeByDomainId']
+			),
 		];
 	}
 
@@ -243,6 +247,16 @@ class PriceExtension extends Twig_Extension {
 		$locale = $this->localization->getLocale();
 
 		return $this->getCurrencySymbolByDomainIdAndLocale($domainId, $locale);
+	}
+
+	/**
+	 * @param int $domainId
+	 * @return string
+	 */
+	public function getCurrencyCodeByDomainId($domainId) {
+		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($domainId);
+
+		return $currency->getCode();
 	}
 
 	/**
