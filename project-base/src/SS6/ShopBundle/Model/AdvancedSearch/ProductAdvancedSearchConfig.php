@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Model\AdvancedSearch;
 
+use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductAvailabilityFilter;
 use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductCalculatedSellingDeniedFilter;
 use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductCatnumFilter;
 use SS6\ShopBundle\Model\AdvancedSearch\Filter\ProductFlagFilter;
@@ -17,7 +18,8 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig {
 		ProductPartnoFilter $productPartnoFilter,
 		ProductStockFilter $productStockFilter,
 		ProductFlagFilter $productFlagFilter,
-		ProductCalculatedSellingDeniedFilter $productCalculatedSellingDeniedFilter
+		ProductCalculatedSellingDeniedFilter $productCalculatedSellingDeniedFilter,
+		ProductAvailabilityFilter $productAvailabilityFilter
 	) {
 		parent::__construct();
 
@@ -27,6 +29,7 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig {
 		$this->registerFilter($productStockFilter);
 		$this->registerFilter($productFlagFilter);
 		$this->registerFilter($productCalculatedSellingDeniedFilter);
+		$this->registerFilter($productAvailabilityFilter);
 	}
 
 }

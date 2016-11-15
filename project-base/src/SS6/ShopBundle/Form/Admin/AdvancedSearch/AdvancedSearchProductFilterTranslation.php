@@ -13,6 +13,7 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
 		$this->addFilterTranslation('productPartno', t('Partno'));
 		$this->addFilterTranslation('productStock', t('Skladové zásoby'));
 		$this->addFilterTranslation('productCalculatedSellingDenied', t('Vyřazeno z prodeje'));
+		$this->addFilterTranslation('productAvailability', t('Dostupnost'));
 	}
 
 }
