@@ -15,7 +15,7 @@
 		};
 		options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
-		var $loaderOverlay = SS6.loaderOverlay.getLoaderOverlay(options.loaderMessage, options.loaderElement);
+		var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay(options.loaderMessage, options.loaderElement);
 		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {
