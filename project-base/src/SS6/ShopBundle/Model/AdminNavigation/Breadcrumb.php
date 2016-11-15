@@ -7,17 +7,17 @@ use SS6\ShopBundle\Model\AdminNavigation\Menu;
 class Breadcrumb {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuFactory
 	 */
-	private $menu;
+	private $menuFactory;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
 	private $overrdingLastItem;
 
-	public function __construct(Menu $menu) {
-		$this->menu = $menu;
+	public function __construct(MenuFactory $menuFactory) {
+		$this->menuFactory = $menuFactory;
 	}
 
 	/**
@@ -31,7 +31,8 @@ class Breadcrumb {
 	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getItems($route, $routeParameters) {
-		$items = $this->menu->getMenuPath($route, $routeParameters);
+		$menu = $this->menuFactory->createMenuWithVisibleItems();
+		$items = $menu->getMenuPath($route, $routeParameters);
 
 		if ($this->overrdingLastItem !== null) {
 			array_pop($items);

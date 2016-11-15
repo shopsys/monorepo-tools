@@ -16,7 +16,7 @@
 			</div>
 			<ul id="js-setting-menu-links" class="display-none navig__item__sub">
 				{% for item in menu.getSettingsItems %}
-					{% if not (item.superadmin and not is_granted(ROLE_SUPER_ADMIN)) %}
+					{% if (item.visible) %}
 						<li class="navig__item__sub__item">
 							<a href="{{ url(item.route, item.routeParameters) }}" class="navig__item__sub__item__link" title="{{ item.label }}">{{ item.label }}</a>
 						</li>

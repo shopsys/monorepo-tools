@@ -78,7 +78,7 @@ class MenuLoader {
 		if (isset($array['items'])) {
 			$items = $this->loadItems($array['items']);
 		} else {
-			$items = null;
+			$items = [];
 		}
 
 		$item = new MenuItem(
@@ -89,6 +89,7 @@ class MenuLoader {
 			isset($array['visible']) ? $array['visible'] : null,
 			isset($array['superadmin']) ? $array['superadmin'] : null,
 			isset($array['icon']) ? $array['icon'] : null,
+			isset($array['multidomain_only']) ? $array['multidomain_only'] : null,
 			$items
 		);
 

@@ -18,7 +18,7 @@ class MenuItem {
 	private $type;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private $items;
 
@@ -48,6 +48,11 @@ class MenuItem {
 	private $icon;
 
 	/**
+	 * @var bool
+	 */
+	private $multidomainOnly;
+
+	/**
 	 * @param string $label
 	 * @param string|null $type
 	 * @param string|null $route
@@ -55,7 +60,8 @@ class MenuItem {
 	 * @param bool $visible
 	 * @param bool $superadmin
 	 * @param string|null $icon
-	 * @param array|null $items
+	 * @param bool $multidomainOnly
+	 * @param array $items
 	 */
 	public function __construct(
 		$label,
@@ -65,7 +71,8 @@ class MenuItem {
 		$visible = true,
 		$superadmin = false,
 		$icon = null,
-		array $items = null
+		$multidomainOnly = false,
+		array $items = []
 	) {
 		if (isset($type)) {
 			$this->setType($type);
@@ -101,6 +108,7 @@ class MenuItem {
 		}
 
 		$this->items = $items;
+		$this->multidomainOnly = $multidomainOnly;
 	}
 
 	/**
@@ -118,7 +126,7 @@ class MenuItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]|null
+	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getItems() {
 		return $this->items;
@@ -150,6 +158,13 @@ class MenuItem {
 	 */
 	public function isSuperadmin() {
 		return $this->superadmin === true;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isMultidomainOnly() {
+		return $this->multidomainOnly;
 	}
 
 	/**

@@ -42,15 +42,17 @@
 {% endblock %}
 
 {% block customer_domain %}
-	<div class="form-line js-change-price-categories">
-		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
+	{% if isMultidomain() %}
+		<div class="form-line js-change-price-categories">
+			<label class="form-line__label">{{ 'Doména'|trans }}:</label>
 
-		<div class="form-line__side">
-			<div class="form-line__item form-line__item--text">
-				{{ domainIcon(user.domainId) }} {{ getDomainName(user.domainId) }}
+			<div class="form-line__side">
+				<div class="form-line__item form-line__item--text">
+					{{ domainIcon(user.domainId) }} {{ getDomainName(user.domainId) }}
+				</div>
 			</div>
 		</div>
-	</div>
+	{% endif %}
 {% endblock %}
 
 {% block customer_order_list %}

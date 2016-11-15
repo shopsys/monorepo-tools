@@ -18,7 +18,9 @@
 				{{ 'Nastavení'|trans }}
 			</div>
 			{{ form_id(sliderItem|default(null)) }}
-			{% block domain %}{% endblock %}
+			{% block domain %}
+				{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
+			{% endblock %}
 			{{ form_row(form.name, { label: 'Název'|trans, icon: { title: 'Název slouží pouze pro interní použití v rámci administrace'|trans } }) }}
 			{{ form_row(form.link, { label: 'Odkaz'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans}) }}
 			{{ form_row(form.hidden, { label: 'Skrýt'|trans }) }}

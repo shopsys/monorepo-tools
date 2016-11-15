@@ -3,6 +3,7 @@
 namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
 
 use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
 use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use SS6\ShopBundle\Controller\Front\ProductController;
@@ -44,6 +45,11 @@ class UrlsProvider {
 	private $routeCsrfProtector;
 
 	/**
+	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 */
+	private $domain;
+
+	/**
 	 * @var string[]
 	 */
 	private $ignoredRouteNames = [
@@ -67,6 +73,13 @@ class UrlsProvider {
 		'admin_logout',
 		// temporarily not tested until it will be optimized at US-1517
 		'admin_unit_delete',
+	];
+
+	/**
+	 * @var string[]
+	 */
+	private $ignoredRouteNamesForSingledomain = [
+		'admin_domain_list',
 	];
 
 	/**
@@ -175,17 +188,20 @@ class UrlsProvider {
 	 * @param \Symfony\Component\Routing\RouterInterface $router
 	 * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
 	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		PersistentReferenceFacade $persistentReferenceFacade,
 		CurrentDomainRouter $router,
 		CsrfTokenManagerInterface $tokenManager,
-		RouteCsrfProtector $routeCsrfProtector
+		RouteCsrfProtector $routeCsrfProtector,
+		Domain $domain
 	) {
 		$this->persistentReferenceFacade = $persistentReferenceFacade;
 		$this->router = $router;
 		$this->tokenManager = $tokenManager;
 		$this->routeCsrfProtector = $routeCsrfProtector;
+		$this->domain = $domain;
 	}
 
 	/**
@@ -352,7 +368,7 @@ class UrlsProvider {
 			return false;
 		}
 
-		return true;
+		return !in_array($routeName, $this->ignoredRouteNamesForSingledomain);
 	}
 
 	/**

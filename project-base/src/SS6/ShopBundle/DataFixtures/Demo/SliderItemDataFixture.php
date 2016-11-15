@@ -15,6 +15,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	 */
 	public function load(ObjectManager $manager) {
 		$sliderItemData = new SliderItemData();
+		$sliderItemData->domainId = Domain::FIRST_DOMAIN_ID;
 
 		$sliderItemData->name = 'Shopsys';
 		$sliderItemData->link = 'http://www.shopsys.cz/';
@@ -41,8 +42,8 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 		ObjectManager $manager,
 		SliderItemData $sliderItemData
 	) {
-		$sliderItem = new SliderItem($sliderItemData, Domain::FIRST_DOMAIN_ID);
+		$sliderItem = new SliderItem($sliderItemData);
 		$manager->persist($sliderItem);
-		$manager->flush($sliderItem);
+		$manager->flush();
 	}
 }

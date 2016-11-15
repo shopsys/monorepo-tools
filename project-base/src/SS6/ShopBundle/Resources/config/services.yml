@@ -64,12 +64,11 @@ services:
   ss6.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
 
-  ss6.shop.admin_navigation.menu:
-    class: SS6\ShopBundle\Model\AdminNavigation\Menu
-    factory_service: ss6.shop.admin_navigation.menu_loader
-    factory_method: loadFromYaml
+  ss6.shop.admin_navigation.menu_factory:
+    class: SS6\ShopBundle\Model\AdminNavigation\MenuFactory
     arguments:
       - %ss6.admin_navigation.config_filepath%
+      - @security.authorization_checker
 
   ss6.shop.admin_navigation.menu_loader:
     class: SS6\ShopBundle\Model\AdminNavigation\MenuLoader

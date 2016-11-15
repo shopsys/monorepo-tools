@@ -14,7 +14,9 @@
 					<div class="form-line__line">
 						<div class="form-line__label">
 							{{ getDomainName(domain.id) }}
-							{{ domainIcon(domain.id) }}
+							{% if isMultidomain() %}
+								{{ domainIcon(domain.id) }}
+							{% endif %}
 						</div>
 						<div class="form-line__item form-line__item--text">
 							<a href="{{ findUrlByDomainId('front_brand_list', {}, domain.id) }}" target="_blank">

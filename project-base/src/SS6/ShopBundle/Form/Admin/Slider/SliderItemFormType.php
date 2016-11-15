@@ -33,6 +33,7 @@ class SliderItemFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
+			->add('domainId', FormType::DOMAIN, ['required' => true])
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [

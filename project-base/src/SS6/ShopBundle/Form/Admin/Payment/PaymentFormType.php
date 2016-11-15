@@ -57,9 +57,7 @@ class PaymentFormType extends AbstractType {
 				],
 			])
 			->add('domains', FormType::DOMAINS, [
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Musíte vybrat alespoň jednu doménu']),
-				],
+				'required' => false,
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('czkRounding', FormType::YES_NO, ['required' => false])

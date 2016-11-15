@@ -12,7 +12,7 @@
 			{{ form_id(category|default(null)) }}
 			{{ form_row(form.name, { label: 'Název'|trans }) }}
 			{{ form_row(form.parent, { label: 'Nadřazená kategorie'|trans}) }}
-			{{ form_row(form.showOnDomains, { label: 'Zobrazit na doménách'|trans}) }}
+			{{ form_row(form.showOnDomains, { label: 'Zobrazovat na'|trans}) }}
 			{{ form_row(form.heurekaCzFeedCategory, { label: 'Kategorie Heureka.cz'|trans, attr: { class: 'js-autocomplete-selectbox'}}) }}
 			{% block category_urls %}{% endblock %}
 		</div>
@@ -22,14 +22,16 @@
 				{{ 'Popis'|trans }}
 			</div>
 			{% for domainId, descriptionForm in form.descriptions %}
-				<div class="form-line form-line--no-padd">
-					<div class="form-line__group">
-						<span class="form-line__group__image">
-							{{ domainIcon(domainId, 'large') }}
-						</span>
-						<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+				{% if isMultidomain() %}
+					<div class="form-line form-line--no-padd">
+						<div class="form-line__group">
+							<span class="form-line__group__image">
+								{{ domainIcon(domainId, 'large') }}
+							</span>
+							<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+						</div>
 					</div>
-				</div>
+				{% endif %}
 				<div class="form-line">
 					<div class="form-line__line form-line__line--no-space">
 						{{ form_widget(descriptionForm) }}

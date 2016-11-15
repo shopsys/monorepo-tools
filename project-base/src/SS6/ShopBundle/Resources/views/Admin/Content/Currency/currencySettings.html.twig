@@ -3,9 +3,9 @@
 		<div class="form-group__title">
 			{{ 'Nastavení'|trans }}
 		</div>
-		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna eshopu'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen'|trans } }) }}
+		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna administrace'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen'|trans } }) }}
 		{% for item in form.domainDefaultCurrencies %}
-			{{ form_row(item, { label: 'Základní měna domény %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
+			{{ form_row(item, { label: 'Základní měna frontendu %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}
 	</div>
 

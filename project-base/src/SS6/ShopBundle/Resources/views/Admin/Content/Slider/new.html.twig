@@ -2,14 +2,3 @@
 
 {% block title %}- {{ 'Nová stránka slideru'|trans }}{% endblock %}
 {% block h1 %}{{ 'Nová stránka slideru'|trans }}{% endblock %}
-
-{% block domain %}
-	<div class="form-line">
-		<label class="form-line__label">{{ 'Doména'|trans }}:</label>
-		<div class="form-line__side">
-			<div class="form-line__item">
-				<input type="text" value="{{ getDomainName(selectedDomainId) }}" class="input" readonly="readonly" />
-			</div>
-		</div>
-	</div>
-{% endblock %}

@@ -27,14 +27,16 @@
 		<div class="js-input-price-type-manual">
 			<div class="form-line form-line--no-padd">
 				<div class="form-line__line form-line__line--no-space">
-					<div class="form-line__group">
-						<span class="form-line__group__image">
-							{{ domainIcon(domainId, 'large') }}
-						</span>
-						<strong class="form-line__group__name">
-							{{ getDomainName(domainId) }}
-						</strong>
-					</div>
+					{% if isMultidomain() %}
+						<div class="form-line__group">
+							<span class="form-line__group__image">
+								{{ domainIcon(domainId, 'large') }}
+							</span>
+							<strong class="form-line__group__name">
+								{{ getDomainName(domainId) }}
+							</strong>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 			{% for pricingGroup in pricingGroups %}
