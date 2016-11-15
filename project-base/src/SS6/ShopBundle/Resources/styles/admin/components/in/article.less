@@ -1,0 +1,32 @@
+@in-article-gap: 25px;
+@in-article-preview-color: @color-f;
+@in-article-preview-gap: @in-article-gap;
+
+.in-article {
+	ul, ol {
+		margin-bottom: @in-article-gap;
+	}
+
+	p {
+		margin-bottom: @in-article-gap;
+	}
+
+	&__preview {
+		padding: @in-article-preview-gap;
+		margin: @in-article-preview-gap 0;
+
+		background: @in-article-preview-color;
+
+		&__info {
+			display: block;
+			margin-bottom: @in-article-gap;
+
+			font-style: italic;
+			color: @color-inactive;
+		}
+	}
+
+	&__visible {
+		color: @color-primary;
+	}
+}

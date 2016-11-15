@@ -174,4 +174,11 @@ class SuperadminController extends AdminBaseController {
 		]);
 	}
 
+	/**
+	 * @Route("/superadmin/css-documentation/")
+	 */
+	public function cssDocumentationAction() {
+		return $this->render('@SS6Shop/Admin/Content/Superadmin/cssDocumentation.html.twig');
+	}
+
 }
