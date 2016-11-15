@@ -37,7 +37,7 @@
 		};
 
 		loaderOverlayTimeout = setTimeout(function () {
-			SS6.loaderOverlay.showLoaderOverlay(options.loaderElement, $loaderOverlay);
+			SS6.loaderOverlay.showLoaderOverlay($loaderOverlay);
 		}, options.overlayDelay);
 		$.ajax(options);
 	};

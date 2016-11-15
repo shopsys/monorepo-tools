@@ -17,11 +17,15 @@
 			$loaderOverlay.find('.in-overlay__spinner').addClass('in-overlay__spinner--absolute');
 		}
 
+		$loaderOverlay.data('loaderElement', loaderElement);
+
 		return $loaderOverlay;
 	};
 
-	SS6.loaderOverlay.showLoaderOverlay = function (loaderElement, $loaderOverlay) {
-		$(loaderElement)
+	SS6.loaderOverlay.showLoaderOverlay = function ($loaderOverlay) {
+		var $loaderElement = $($loaderOverlay.data('loaderElement'));
+
+		$loaderElement
 			.addClass('in-overlay')
 			.append($loaderOverlay);
 	};
