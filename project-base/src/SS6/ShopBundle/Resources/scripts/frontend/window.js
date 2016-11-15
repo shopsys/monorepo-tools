@@ -67,8 +67,7 @@
 			textContinue: 'Ano',
 			textCancel: 'Ne',
 			urlContinue: '#',
-			wide: false,
-			cssClass: '',
+			cssClass: 'window-popup--standard',
 			cssClassContinue: '',
 			cssClassCancel: '',
 			closeOnBgClick: true,
@@ -84,11 +83,6 @@
 		}
 
 		var $window = $('<div class="window-popup" id="js-window"></div>');
-		if (options.wide) {
-			$window.addClass('window-popup--wide');
-		} else {
-			$window.addClass('window-popup--standard');
-		}
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
 		}
@@ -181,7 +175,7 @@
 		});
 
 		function fixVerticalAlign() {
-			if (!options.wide || options.wide && SS6.responsive.isDesktopVersion()) {
+			if ($window.height() / $(window).height() < 0.75 && SS6.responsive.isDesktopVersion()) {
 				moveToCenter();
 			} else {
 				$window.css({ top: '' });

@@ -23,11 +23,16 @@
 	SS6.addProduct.onSuccess = function (data) {
 		var buttonContinueUrl = $($.parseHTML(data)).filterAllNodes('.js-add-product-url-cart').data('url');
 		var isWide = $($.parseHTML(data)).filterAllNodes('.js-add-product-wide-window').data('wide');
+		if (isWide) {
+			var cssClass = 'window-popup--wide';
+		} else {
+			var cssClass = 'window-popup--standard';
+		}
 
 		if (buttonContinueUrl !== undefined) {
 			SS6.window({
 				content: data,
-				wide: isWide,
+				cssClass: cssClass,
 				buttonContinue: true,
 				textContinue: SS6.translator.trans('Přejít do košíku'),
 				urlContinue: buttonContinueUrl,
@@ -38,7 +43,7 @@
 		} else {
 			SS6.window({
 				content: data,
-				wide: isWide,
+				cssClass: cssClass,
 				buttonCancel: true,
 				textCancel: SS6.translator.trans('Zavřít'),
 				cssClassCancel: 'btn--success'
