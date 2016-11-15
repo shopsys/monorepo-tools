@@ -7,15 +7,15 @@
 	SS6.ajax = function (options) {
 		var loaderOverlayTimeout;
 		var defaults = {
-			loaderElement: 'body',
-			loaderMessage: '',
+			loaderElement: undefined,
+			loaderMessage: undefined,
 			overlayDelay: 200,
 			error: showDefaultError,
 			complete: function () {}
 		};
 		options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
-		var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay(options.loaderMessage, options.loaderElement);
+		var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay(options.loaderElement, options.loaderMessage);
 		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {

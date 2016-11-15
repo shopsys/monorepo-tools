@@ -3,7 +3,14 @@
 	SS6 = window.SS6 || {};
 	SS6.loaderOverlay = SS6.loaderOverlay || {};
 
-	SS6.loaderOverlay.createLoaderOverlay = function (loaderMessage, loaderElement) {
+	SS6.loaderOverlay.createLoaderOverlay = function (loaderElement, loaderMessage) {
+		if (loaderElement === undefined) {
+			loaderElement = 'body';
+		}
+		if (loaderMessage === undefined) {
+			loaderMessage = '';
+		}
+
 		var $loaderOverlay = $($.parseHTML(
 			'<div class="in-overlay__in">' +
 				'<div class="in-overlay__spinner">' +
