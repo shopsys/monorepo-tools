@@ -99,7 +99,10 @@ class SliderController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$sliderItem = $this->sliderItemFacade->create($sliderItemData);
+			$sliderItem = $this->sliderItemFacade->create(
+				$form->getData(),
+				$this->selectedDomain->getId()
+			);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Byla vytvořena stránka slideru <strong><a href="{{ url }}">{{ name }}</a></strong>'),

@@ -5,8 +5,8 @@ namespace SS6\ShopBundle\DataFixtures\Demo;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Slider\SliderItem;
 use SS6\ShopBundle\Model\Slider\SliderItemData;
+use SS6\ShopBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture{
 
@@ -14,6 +14,9 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
+		$sliderItemFacade = $this->get(SliderItemFacade::class);
+		/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade*/
+
 		$sliderItemData = new SliderItemData();
 		$sliderItemData->domainId = Domain::FIRST_DOMAIN_ID;
 
@@ -21,29 +24,16 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 		$sliderItemData->link = 'http://www.shopsys.cz/';
 		$sliderItemData->hidden = false;
 
-		$this->createSliderItem($manager, $sliderItemData);
+		$sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
 
 		$sliderItemData->name = 'Twitter';
 		$sliderItemData->link = 'https://twitter.com/netdevelo_cz';
 
-		$this->createSliderItem($manager, $sliderItemData);
+		$sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
 
 		$sliderItemData->name = 'Pojďte s námi růst';
 		$sliderItemData->link = 'http://www.pojdtesnamirust.cz/';
 
-		$this->createSliderItem($manager, $sliderItemData);
-	}
-
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
-	 */
-	private function createSliderItem(
-		ObjectManager $manager,
-		SliderItemData $sliderItemData
-	) {
-		$sliderItem = new SliderItem($sliderItemData);
-		$manager->persist($sliderItem);
-		$manager->flush();
+		$sliderItemFacade->create($sliderItemData, Domain::FIRST_DOMAIN_ID);
 	}
 }

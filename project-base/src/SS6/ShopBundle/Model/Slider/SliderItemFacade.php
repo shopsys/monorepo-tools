@@ -51,10 +51,11 @@ class SliderItemFacade {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Slider\SliderItem
 	 */
-	public function create(SliderItemData $sliderItemData) {
-		$sliderItem = new SliderItem($sliderItemData);
+	public function create(SliderItemData $sliderItemData, $domainId) {
+		$sliderItem = new SliderItem($sliderItemData, $domainId);
 
 		$this->em->persist($sliderItem);
 		$this->em->flush();
