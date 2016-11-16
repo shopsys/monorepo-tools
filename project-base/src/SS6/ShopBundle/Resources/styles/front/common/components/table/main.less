@@ -2,7 +2,7 @@
 	tr {
 		background: @color-f;
 
-		&:nth-child(2n) {
+		&:nth-child(2n+1) {
 			background: @color-light;
 		}
 	}
@@ -13,6 +13,7 @@
 
 	th {
 		font-weight: bold;
-		text-align: left;
+		background: @color-light;
+		border-bottom: 1px solid @color-border;
 	}
 }

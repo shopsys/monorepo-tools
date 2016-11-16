@@ -1,0 +1,35 @@
+@box-order-detail-table-width: 500px;
+
+.box-order-detail {
+	&__table {
+		width: 100%;
+	}
+
+	&__total {
+		@media @query-lg {
+			.clearfix();
+		}
+
+		&__table {
+			width: 100%;
+
+			@media @query-lg {
+				float: right;
+				width: @box-order-detail-table-width;
+			}
+
+			td, th {
+				text-align: center;
+				padding: 8px 12px;
+			}
+
+			th {
+				font-size: 15px;
+
+				@media @query-lg {
+					text-align: right;
+				}
+			}
+		}
+	}
+}
