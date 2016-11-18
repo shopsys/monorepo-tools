@@ -1,5 +1,6 @@
 @list-images-gap: 20px;
 @list-images-height: 100px;
+@list-images-label-height: 30px;
 
 .list-images {
 	.reset-ul();
@@ -33,9 +34,14 @@
 			display: block;
 			position: relative;
 			height: @list-images-height;
+			text-align: center;
 
 			img {
 				.center-image();
+			}
+
+			&--with-label {
+				height: @list-images-height + @list-images-label-height;
 			}
 		}
 	}
