@@ -70,7 +70,7 @@
 					</div>
 					<div class="box-condition__control">
 						<button id="js-terms-and-conditions-print" class="btn btn--small" type="button">{{ 'Vytisknout'|trans }}</button>
-						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn btn--small" type="button">{{ 'Stáhnout'|trans }}</a>
+						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn btn--small">{{ 'Stáhnout'|trans }}</a>
 					</div>
 				</div>
 			{% endif %}
@@ -87,7 +87,7 @@
 
 	<div class="in-action">
 		<div class="in-action__right">
-			{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--primary in-action__btn in-action__btn--big' } }) }}
+			{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
 		</div>
 
 		<div class="in-action__left">

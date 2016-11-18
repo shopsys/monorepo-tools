@@ -9,30 +9,22 @@
 		border: 1px solid transparent;
 		font-size: 12px;
 
+		@media @query-md {
+			padding: 8px 15px;
+
+			font-size: @font-size;
+		}
+
+		@media @query-xl {
+			padding: 10px 20px;
+		}
+
 		&.active {
 			background: @color-f;
 			border-color:  @color-border;
 			color: @color-base;
 			text-decoration: none;
 			font-weight: bold;
-		}
-	}
-}
-
-@media @query-md {
-	.box-order-type {
-		&__item {
-			padding: 8px 15px;
-
-			font-size: @font-size;
-		}
-	}
-}
-
-@media @query-xl {
-	.box-order-type {
-		&__item {
-			padding: 10px 20px;
 		}
 	}
 }

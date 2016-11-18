@@ -1,14 +1,24 @@
 .box-detail {
+	@media @query-lg {
+		.clearfix();
+	}
+
 	&__image {
 		position: relative;
 		margin-bottom: @margin-gap;
 
+		@media @query-lg {
+			width: 50%;
+			float: left;
+			padding-right: 20px;
+		}
+
 		&__main {
 			padding: 10px;
 			margin-bottom: @margin-gap;
+			text-align: center;
 
 			border: 1px solid @color-border;
-			text-align: center;
 			font-size: 0;
 
 			img {
@@ -20,6 +30,11 @@
 
 	&__info {
 		margin-bottom: @margin-gap;
+
+		@media @query-lg {
+			width: 50%;
+			float: right;
+		}
 
 		&__availability {
 			margin-bottom: @margin-gap;
@@ -35,6 +50,18 @@
 			border-top: 1px solid @color-border;
 			border-bottom: 1px solid @color-border;
 
+			@media @query-md {
+				column-count: 2;
+			}
+
+			@media @query-lg {
+				column-count: 1;
+			}
+
+			@media @query-vl {
+				column-count: 2;
+			}
+
 			dt, dd {
 				margin: 0;
 				padding: 5px 0;
@@ -49,47 +76,6 @@
 				padding-right: 5px;
 
 				font-weight: bold;
-			}
-		}
-	}
-}
-
-@media @query-md {
-	.box-detail {
-		&__info {
-			&__params {
-				column-count: 2;
-			}
-		}
-	}
-}
-
-@media @query-lg {
-	.box-detail {
-		.clearfix();
-
-		&__image {
-			width: 50%;
-			float: left;
-			padding-right: 20px;
-		}
-
-		&__info {
-			width: 50%;
-			float: right;
-
-			&__params {
-				column-count: 1;
-			}
-		}
-	}
-}
-
-@media @query-vl {
-	.box-detail {
-		&__info {
-			&__params {
-				column-count: 2;
 			}
 		}
 	}

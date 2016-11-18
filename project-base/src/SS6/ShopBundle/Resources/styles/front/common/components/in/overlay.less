@@ -1,4 +1,4 @@
-@in-overlay-spinner-size: 32px;
+@in-overlay-spinner-size: 28px;
 
 .in-overlay {
 	position: relative !important;
@@ -10,9 +10,9 @@
 		top: 0px;
 		left: 0px;
 		z-index: 4000;
+		text-align: center;
 
 		background: rgba(255, 255, 255, 0.5);
-		text-align: center;
 
 		&--absolute {
 			position: absolute;
@@ -28,7 +28,6 @@
 		margin-top: -@in-overlay-spinner-size / 2;
 		margin-left: -@in-overlay-spinner-size / 2;
 		line-height: @in-overlay-spinner-size;
-
 		text-align: center;
 
 		&--absolute {
@@ -39,8 +38,23 @@
 			display: inline-block;
 			width: @in-overlay-spinner-size;
 			height: @in-overlay-spinner-size;
+			line-height: @in-overlay-spinner-size;
+			&:extend(.svg);
+			&:extend(.svg:before);
+			.svg-spinner();
+			will-change: transform;
+			opacity: .3;
 
-			background: url("@{path-design}/preloader.gif@{timestamp}") no-repeat;
+			font-size: @in-overlay-spinner-size;
+			animation: spin 2s linear infinite;
+			color: @color-base;
+
+			&:before {
+				display: block;
+				line-height: @in-overlay-spinner-size;
+				height: @in-overlay-spinner-size;
+				width: @in-overlay-spinner-size;
+			}
 		}
 
 		&__message {

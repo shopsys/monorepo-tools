@@ -2,17 +2,15 @@
 	width: 100%;
 	overflow: auto;
 
-	&__in {
-		min-width: 800px;
-	}
-}
-
-@media @query-vl {
-	.in-scroll {
+	@media @query-vl {
 		width: auto;
 		overflow: auto;
+	}
 
-		&__inner {
+	&__in {
+		min-width: 800px;
+
+		@media @query-vl {
 			min-width: 0;
 		}
 	}

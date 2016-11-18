@@ -3,14 +3,11 @@
 
 .cart {
 	display: none;
-}
 
-@media @query-lg {
-	.cart {
+	@media @query-lg {
 		display: inline-block;
 		position: relative;
 		.clearfix();
-
 		text-align: left;
 
 		&__block {
@@ -26,9 +23,9 @@
 		&__icon {
 			width: @cart-icon-width;
 			float: left;
+			text-align: center;
 
 			font-size: 20px;
-			text-align: center;
 		}
 
 		&__info {

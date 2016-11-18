@@ -12,6 +12,11 @@
 		position: absolute;
 		top: 7px;
 		right: 5px;
+
+		@media @query-lg {
+			right: auto;
+			left: 295px;
+		}
 	}
 
 	&--inline {
@@ -42,11 +47,11 @@
 		vertical-align: middle;
 		width: @form-error-size;
 		height: @form-error-size;
+		text-align: center;
 
 		color: @color-alert;
 		font-weight: bold;
 		font-size: 17px;
-		text-align: center;
 
 		.form-error--inline & {
 			width: auto;
@@ -67,10 +72,10 @@
 		padding: 5px;
 		display: none;
 		z-index: 50;
+		text-align: center;
 
 		background: rgba(0,0,0, 0.7);
 		color: @color-f;
-		text-align: center;
 
 		&:after {
 			position: absolute;
@@ -109,16 +114,6 @@
 		li {
 			font-size: 12px;
 			color: @color-f;
-		}
-	}
-}
-
-
-@media @query-lg {
-	.form-error {
-		&--line {
-			right: auto;
-			left: 295px;
 		}
 	}
 }

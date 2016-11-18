@@ -1,23 +1,94 @@
+@list-products-item-padding: 5px;
+@list-products-item-gap: 15px;
+@list-products-item-inner-gap: 10px;
+@list-products-item-image-height: 120px;
+@list-products-item-title-line-height: 18px;
+@list-products-item-description-line-height: 16px;
+
+@list-products-line-count-sm: 2;
+@list-products-line-count-md: 3;
+@list-products-line-count-lg: 2;
+@list-products-line-count-vl: 3;
+
 .list-products {
 	.reset-ul();
-	.clearfix();
-	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
 	margin-bottom: @margin-gap;
+	margin-left: -@list-products-item-gap;
+
+	.is-no-flex & {
+		display: block;
+		.clearfix();
+	}
 
 	&__item {
-		display: block;
-		width: 100%;
+		flex: 0 100%;
+		display: flex;
+		flex-direction: column;
 		margin-bottom: @margin-gap;
+		padding-left: @list-products-item-gap;
+
+		.is-no-flex & {
+			display: block;
+			float: left;
+		}
+
+		@media @query-sm {
+			flex: 0 100%/@list-products-line-count-sm;
+
+			.is-no-flex & {
+				width: 100%/@list-products-line-count-sm;
+			}
+		}
+
+		@media @query-md {
+			flex: 0 100%/@list-products-line-count-md;
+
+			.is-no-flex & {
+				width: 100%/@list-products-line-count-md;
+			}
+		}
+
+		@media @query-lg {
+			flex: 0 100%/@list-products-line-count-lg;
+
+			.is-no-flex & {
+				width: 100%/@list-products-line-count-lg;
+			}
+		}
+
+		@media @query-vl {
+			flex: 0 100%/@list-products-line-count-vl;
+
+			.is-no-flex & {
+				width: 100%/@list-products-line-count-vl;
+			}
+		}
 
 		&__in {
-			padding: 5px;
+			padding: @list-products-item-padding;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+
+			.is-no-flex & {
+				display: block;
+			}
 		}
 
 		&__block {
-			display: block;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
 
 			text-decoration: none;
 			color: @color-base;
+
+			.is-no-flex & {
+				display: block;
+			}
 
 			&:hover {
 				text-decoration: none;
@@ -25,23 +96,30 @@
 		}
 
 		&__title {
+			flex: 1;
 			display: block;
-			.eliminate-lines(18px, 3);
-			margin-bottom: 10px;
+			margin-bottom: @list-products-item-inner-gap;
+			text-align: center;
+			line-height: @list-products-item-title-line-height;
 
 			font-size: 16px;
 			font-weight: normal;
-			text-align: center;
+			color: @color-link;
+			transition: @transition color;
+
+			.is-no-flex & {
+				.eliminate-lines(@list-products-item-title-line-height, 2);
+			}
 
 			.list-products__item__block:hover & {
-				color: @color-primary;
+				color: @color-link-hover;
 			}
 		}
 
 		&__image {
-			height: 120px;
+			height: @list-products-item-image-height;
 			position: relative;
-			margin-bottom: 10px;
+			margin-bottom: @list-products-item-inner-gap;
 
 			img {
 				.center-image();
@@ -50,26 +128,35 @@
 
 		&__info {
 			display: flex;
-			align-items: center;
+			align-items: baseline;
 			flex-wrap: wrap;
 			width: 100%;
-			margin-bottom: 10px;
+			margin-bottom: @list-products-item-inner-gap;
+
+			.is-no-flex & {
+				display: block;
+				.clearfix();
+			}
 
 			&__description {
-				flex: 0 0 100%;
-				.eliminate-lines(16px, 4);
-				margin-bottom: 10px;
+				flex: 0 100%;
+				.eliminate-lines(@list-products-item-description-line-height, 4);
+				margin-bottom: @list-products-item-inner-gap;
 
 				font-size: 12px;
 			}
 
 			&__price {
-				flex: 0 0 50%;
+				flex: 0 100%/2;
 				padding-right: 5px;
+
+				.is-no-flex & {
+					float: left;
+					width: 100%/2;
+				}
 
 				&__item {
 					display: block;
-					margin: 2px 0;
 
 					font-size: 12px;
 					color: @color-price;
@@ -83,47 +170,21 @@
 			}
 
 			&__availability {
-				flex: 0 0 50%;
+				flex: 0 100%/2;
 				padding-left: 5px;
-
 				text-align: right;
+
 				font-size: 12px;
+
+				.is-no-flex & {
+					float: right;
+					width: 100%/2;
+				}
 			}
 		}
 
 		&__action {
 			text-align: center;
-		}
-	}
-}
-
-@media @query-sm {
-	.list-products {
-		margin-left: -15px;
-
-		font-size: 0;
-
-		&__item {
-			display: inline-block;
-			vertical-align: top;
-			width: 100%/2;
-			padding-left: 15px;
-		}
-	}
-}
-
-@media @query-lg {
-	.list-products {
-		&__item {
-			width: 100%/2;
-		}
-	}
-}
-
-@media @query-vl {
-	.list-products {
-		&__item {
-			width: 100%/3;
 		}
 	}
 }

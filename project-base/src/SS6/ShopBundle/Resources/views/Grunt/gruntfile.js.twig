@@ -77,7 +77,7 @@ module.exports = function(grunt) {
 		postcss: {
 			options: {
 				processors: [
-					require('autoprefixer')({browsers: ['last 3 versions', 'ios 6', 'ie 7', 'ie 8', 'ie 9']})
+					require('autoprefixer')({browsers: ['last 3 versions', 'ios 6', 'Safari 7', 'Safari 8', 'ie 7', 'ie 8', 'ie 9']})
 				]
 			},
 			dist: {
@@ -244,10 +244,7 @@ module.exports = function(grunt) {
 			},
 			adminWebfont: {
 				files: ['src/SS6/ShopBundle/Resources/svg/admin/*.svg'],
-				tasks: ['webfont:admin'],
-				options: {
-					livereload: true
-				}
+				tasks: ['webfont:admin']
 			},
 			frontendSprite: {
 				files: ['web/assets/frontend/images/icons/**/*.png'],
@@ -314,7 +311,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
 
 	{% for domain in domains -%}
-		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
+		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}', 'postcss']);
 	{% endfor -%}
 	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
 };

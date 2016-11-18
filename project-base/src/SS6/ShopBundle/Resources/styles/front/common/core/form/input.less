@@ -52,8 +52,13 @@
 	width: auto;
 
 	border: 0;
-
+	background: none;
+	color: @color-base;
 	box-shadow: none;
+
+	&:focus {
+		outline: 0;
+	}
 }
 
 
@@ -74,4 +79,8 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
+}
+
+textarea {
+	resize: vertical;
 }

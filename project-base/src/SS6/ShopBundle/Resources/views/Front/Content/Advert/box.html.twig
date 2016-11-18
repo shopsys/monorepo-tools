@@ -1,11 +1,13 @@
 {% if advert %}
-	{% if advert.type == 'image' %}
-		{% if advert.link == null %}
-			{{ image(advert, { size: 'original' }) }}
-		{% else %}
-			<a href="{{ advert.link }}">{{ image(advert, { size: 'original' }) }}</a>
+	<div class="in-place in-place--{{advert.positionName}}">
+		{% if advert.type == 'image' %}
+			{% if advert.link == null %}
+				{{ image(advert, { size: 'original' }) }}
+			{% else %}
+				<a href="{{ advert.link }}">{{ image(advert, { size: 'original' }) }}</a>
+			{% endif %}
+		{% elseif advert.type == 'code' %}
+			{{ advert.code | raw }}
 		{% endif %}
-	{% elseif advert.type == 'code' %}
-		{{ advert.code | raw }}
-	{% endif %}
+	</div>
 {% endif %}

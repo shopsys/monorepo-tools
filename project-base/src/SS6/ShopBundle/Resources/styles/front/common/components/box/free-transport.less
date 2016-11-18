@@ -4,6 +4,10 @@
 
 	border: 1px solid @color-border;
 
+	@media @query-lg {
+		padding: 10px 20px;
+	}
+
 	strong {
 		color: @color-red;
 	}
@@ -12,11 +16,5 @@
 		strong {
 			color: @color-green;
 		}
-	}
-}
-
-@media @query-lg {
-	.box-free-transport {
-		padding: 10px 20px;
 	}
 }

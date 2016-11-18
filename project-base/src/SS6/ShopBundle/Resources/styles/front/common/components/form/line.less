@@ -13,6 +13,14 @@
 		margin: 0 0 @form-line-label-field-gap-mobile;
 		padding: 0;
 		display: block;
+
+		@media @query-md {
+			float: left;
+			width: @form-line-width-label;
+			padding: 8px @form-line-gap-between 8px 0;
+			margin: 0;
+			line-height: 20px;
+		}
 	}
 
 	dd {
@@ -20,34 +28,17 @@
 		padding: 0;
 		display: block;
 		position: relative;
-	}
 
-	.input {
-		width: 100%;
-	}
-}
-
-@media @query-md {
-	.form-line {
-		dt {
-			float: left;
-			width: @form-line-width-label;
-			padding: 8px @form-line-gap-between 8px 0;
-			margin: 0;
-			line-height: 20px;
-
-		}
-
-		dd {
+		@media @query-md {
 			margin-left: @form-line-width-label + @form-line-gap-between;
 			margin-bottom: 0;
 		}
 	}
-}
 
-@media @query-lg {
-	.form-line {
-		.input {
+	.input {
+		width: 100%;
+
+		@media @query-lg {
 			max-width: @form-line-width-input;
 		}
 	}

@@ -16,17 +16,20 @@
 	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
 	{% if foundCategories|length > 0 %}
-		<div>
-			<ul>
-				{% for foundCategory in foundCategories %}
-					<li>
-						<a href="{{ url('front_product_list', { id: foundCategory.id }) }}">
+		<ul class="list-categories">
+			{% for foundCategory in foundCategories %}
+				<li class="list-categories__item">
+					<a href="{{ url('front_product_list', { id: foundCategory.id }) }}" class="list-categories__item__block">
+						<span class="list-categories__item__image">
+							{{ image(foundCategory, { alt: foundCategory.name }) }}
+						</span>
+						<h3 class="list-categories__item__title">
 							{{ foundCategory.name }}
-						</a>
-					</li>
-				{% endfor %}
-			</ul>
-		</div>
+						</h3>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
 	{% endif %}
 
 	<div class="js-product-list-with-filter">
