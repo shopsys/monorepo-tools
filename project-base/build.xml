@@ -10,12 +10,12 @@
 	<property name="path.build" value="${path.root}/build"/>
 	<property name="path.build.properties.local" value="${path.build}/build.local.properties"/>
 	<property name="path.build.stats" value="${path.build}/stats"/>
+	<property name="path.chromedriver.executable" value="chromedriver"/>
 	<property name="path.codeception.configuration" value="${path.build}/codeception.yml"/>
 	<property name="path.codeception.executable" value ="${path.bin}/codecept"/>
 	<property name="path.composer.executable" value="composer"/>
 	<property name="path.env.test" value="${path.root}/TEST"/>
 	<property name="path.grunt.executable" value="${path.root}/node_modules/.bin/grunt"/>
-	<property name="path.java.executable" value="java"/>
 	<property name="path.npm.executable" value="npm"/>
 	<property name="path.pg_dump.executable" value="pg_dump"/>
 	<property name="path.php.executable" value="php"/>
