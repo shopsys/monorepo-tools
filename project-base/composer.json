@@ -92,7 +92,7 @@
 		"vasek-purchart/console-errors-bundle": "1.0"
 	},
 	"require-dev": {
-		"codeception/codeception": "dev-master#865bfbd",
+		"codeception/codeception": "2.2.3",
 		"shopsys/coding-standards": "1.2.0",
 		"shopsys/phpstorm-inspect": "1.0.4",
 		"symfony/web-profiler-bundle": "2.8.2"
