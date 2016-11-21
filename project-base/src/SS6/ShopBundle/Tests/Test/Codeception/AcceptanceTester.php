@@ -30,6 +30,9 @@ class AcceptanceTester extends Actor {
 	use AcceptanceTesterActions;
 
 	public function switchToLastOpenedWindow() {
+		// workaround for a race condition when windows get enumerated before the new window is opened
+		$this->wait(1);
+
 		$this->executeInSelenium(function (RemoteWebDriver $webdriver) {
 			$handles = $webdriver->getWindowHandles();
 			$lastWindow = end($handles);
