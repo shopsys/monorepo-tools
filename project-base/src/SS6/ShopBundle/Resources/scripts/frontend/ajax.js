@@ -7,22 +7,21 @@
 	SS6.ajax = function (options) {
 		var loaderOverlayTimeout;
 		var defaults = {
-			loaderElement: 'body',
-			loaderMessage: '',
+			loaderElement: undefined,
+			loaderMessage: undefined,
 			overlayDelay: 200,
 			error: showDefaultError,
 			complete: function () {}
 		};
 		options = $.extend(defaults, options);
 		var userCompleteCallback = options.complete;
-		var $loaderOverlay = getLoaderOverlay(options.loaderMessage, options.loaderElement);
+		var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay(options.loaderElement, options.loaderMessage);
 		var userErrorCallback = options.error;
 
 		options.complete = function (jqXHR, textStatus) {
 			userCompleteCallback.apply(this, [jqXHR, textStatus]);
 			clearTimeout(loaderOverlayTimeout);
-			$loaderOverlay.remove();
-			$(options.loaderElement).removeClass('in-overlay');
+			SS6.loaderOverlay.removeLoaderOverlay($loaderOverlay);
 		};
 
 		options.error = function (jqXHR) {
@@ -33,32 +32,9 @@
 		};
 
 		loaderOverlayTimeout = setTimeout(function () {
-			showLoaderOverlay(options.loaderElement, $loaderOverlay);
+			SS6.loaderOverlay.showLoaderOverlay($loaderOverlay);
 		}, options.overlayDelay);
 		$.ajax(options);
-	};
-
-	var getLoaderOverlay = function(loaderMessage, loaderElement) {
-		var $loaderOverlay = $($.parseHTML(
-			'<div class="in-overlay__in">' +
-				'<div class="in-overlay__spinner">' +
-					'<span class="in-overlay__spinner__icon"></span>' +
-					'<span class="in-overlay__spinner__message">' + loaderMessage + '</span>' +
-				'</div>' +
-			'</div>'));
-
-		if (loaderElement !== 'body') {
-			$loaderOverlay.addClass('in-overlay__in--absolute');
-			$loaderOverlay.find('.in-overlay__spinner').addClass('in-overlay__spinner--absolute');
-		}
-
-		return $loaderOverlay;
-	};
-
-	var showLoaderOverlay = function (loaderElement, $loaderOverlay) {
-		$(loaderElement)
-			.addClass('in-overlay')
-			.append($loaderOverlay);
 	};
 
 	var showDefaultError = function () {

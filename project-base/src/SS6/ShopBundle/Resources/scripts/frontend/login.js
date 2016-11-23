@@ -13,6 +13,9 @@
 				data: $(this).serialize(),
 				success: function (data) {
 					if (data.success === true) {
+						var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay('.js-front-login-window');
+						SS6.loaderOverlay.showLoaderOverlay($loaderOverlay);
+
 						document.location = data.urlToRedirect;
 					} else {
 						$('.js-front-login-window-message')
