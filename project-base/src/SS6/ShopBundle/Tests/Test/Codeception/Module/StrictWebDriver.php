@@ -10,6 +10,8 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class StrictWebDriver extends WebDriver {
 
+	const WAIT_AFTER_CLICK_MICROSECONDS = 50000;
+
 	/**
 	 * @param string[] $alternatives
 	 * @return string
@@ -60,6 +62,16 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @see click()
+	 */
+	private function clickAndWait($link, $context = null) {
+		parent::click($link, $context);
+
+		// workaround for race conditions when WebDriver tries to interact with page before click was processed
+		usleep(self::WAIT_AFTER_CLICK_MICROSECONDS);
+	}
+
+	/**
 	 * @param string $text
 	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
 	 */
@@ -73,7 +85,7 @@ class StrictWebDriver extends WebDriver {
 			'.//input[./@type = "submit" or ./@type = "image" or ./@type = "button"][normalize-space(@value)=' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath], $contextSelector);
+		$this->clickAndWait(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
@@ -88,14 +100,14 @@ class StrictWebDriver extends WebDriver {
 			'.//button[./@name = ' . $locator . ']'
 		);
 
-		parent::click(['xpath' => $xpath], $contextSelector);
+		$this->clickAndWait(['xpath' => $xpath], $contextSelector);
 	}
 
 	/**
 	 * @param string $css
 	 */
 	public function clickByCss($css) {
-		parent::click(['css' => $css]);
+		$this->clickAndWait(['css' => $css]);
 	}
 
 	/**
