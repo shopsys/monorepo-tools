@@ -27,6 +27,7 @@ class OrderCest {
 		$orderPage->selectTransport('Česká pošta - balík do ruky');
 		$orderPage->assertPaymentIsNotSelected('Dobírka');
 		$orderPage->selectPayment('Dobírka');
+		$me->waitForAjax();
 		$me->clickByText('Pokračovat v objednávce');
 		$me->clickByText('Zpět na výběr dopravy a platby');
 
@@ -50,6 +51,7 @@ class OrderCest {
 		$orderPage->selectTransport('Česká pošta - balík do ruky');
 		$orderPage->assertPaymentIsNotSelected('Dobírka');
 		$orderPage->selectPayment('Dobírka');
+		$me->waitForAjax();
 		$me->clickByText('Pokračovat v objednávce');
 		$me->amOnPage('/objednavka/');
 
@@ -66,6 +68,7 @@ class OrderCest {
 		$me->clickByText('Objednat');
 		$orderPage->selectTransport('Česká pošta - balík do ruky');
 		$orderPage->selectPayment('Dobírka');
+		$me->waitForAjax();
 		$me->clickByText('Pokračovat v objednávce');
 
 		$orderPage->fillFirstName('Jan');
@@ -109,6 +112,7 @@ class OrderCest {
 
 		$orderPage->selectTransport('Česká pošta - balík do ruky');
 		$orderPage->selectPayment('Dobírka');
+		$me->waitForAjax();
 		$me->clickByText('Pokračovat v objednávce');
 
 		$orderPage->fillPersonalInfo('Karel', 'Novák', 'no-reply@shopsys.com', '123456789');
