@@ -37,7 +37,7 @@ class TopProductRepository {
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
 	public function getAll($domainId) {
-		return $this->getTopProductRepository()->findBy(['domainId' => $domainId]);
+		return $this->getTopProductRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
 	}
 
 	/**
@@ -52,6 +52,7 @@ class TopProductRepository {
 			->join(TopProduct::class, 'tp', Join::WITH, 'tp.product = p')
 			->andWhere('tp.domainId = :domainId')
 			->andWhere('tp.domainId = prv.domainId')
+			->orderBy('tp.position')
 			->setParameter('domainId', $domainId);
 
 		return $queryBuilder->getQuery()->execute();

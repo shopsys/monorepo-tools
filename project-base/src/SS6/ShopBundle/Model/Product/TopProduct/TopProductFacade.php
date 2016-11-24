@@ -64,8 +64,9 @@ class TopProductFacade {
 		$this->em->flush($oldTopProducts);
 
 		$topProducts = [];
+		$position = 1;
 		foreach ($products as $product) {
-			$topProduct = new TopProduct($product, $domainId);
+			$topProduct = new TopProduct($product, $domainId, $position++);
 			$this->em->persist($topProduct);
 			$topProducts[] = $topProduct;
 		}

@@ -39,6 +39,7 @@ class TopProductsFormType extends AbstractType {
 				$builder
 					->create('products', FormType::PRODUCTS, [
 						'required' => false,
+						'sortable' => true,
 					])
 					->addViewTransformer($this->removeDuplicatesTransformer)
 			)

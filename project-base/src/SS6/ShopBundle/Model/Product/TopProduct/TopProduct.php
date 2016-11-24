@@ -29,12 +29,21 @@ class TopProduct {
 	private $domainId;
 
 	/**
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
+	 */
+	private $position;
+
+	/**
 	 * @param \SS6\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
+	 * @param int $position
 	 */
-	public function __construct(Product $product, $domainId) {
+	public function __construct(Product $product, $domainId, $position) {
 		$this->product = $product;
 		$this->domainId = $domainId;
+		$this->position = $position;
 	}
 
 	/**
