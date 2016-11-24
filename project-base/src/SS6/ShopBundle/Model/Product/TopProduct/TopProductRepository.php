@@ -20,9 +20,6 @@ class TopProductRepository {
 	 */
 	private $productRepository;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
-	 */
 	public function __construct(EntityManager $entityManager, ProductRepository $productRepository) {
 		$this->em = $entityManager;
 		$this->productRepository = $productRepository;
@@ -33,39 +30,6 @@ class TopProductRepository {
 	 */
 	private function getTopProductRepository() {
 		return $this->em->getRepository(TopProduct::class);
-	}
-
-	/**
-	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
-	 */
-	public function getById($id) {
-		$topProduct = $this->getTopProductRepository()->find($id);
-
-		if ($topProduct === null) {
-			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException(
-				'TopProduct with ID ' . $id . ' not found.'
-			);
-		}
-
-		return $topProduct;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
-	 */
-	public function getByProductAndDomainId(Product $product, $domainId) {
-		$topProduct = $this->getTopProductRepository()->findOneBy([
-			'product' => $product,
-			'domainId' => $domainId,
-		]);
-
-		if ($topProduct === null) {
-			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException();
-		}
-		return $topProduct;
 	}
 
 	/**
@@ -92,4 +56,5 @@ class TopProductRepository {
 
 		return $queryBuilder->getQuery()->execute();
 	}
+
 }

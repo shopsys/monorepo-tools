@@ -2,13 +2,13 @@
 
 namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
 
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
 use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 
-class TopProductDataFixture extends AbstractReferenceFixture {
+class TopProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
@@ -21,23 +21,32 @@ class TopProductDataFixture extends AbstractReferenceFixture {
 		];
 
 		$domainId = 2;
-		foreach ($topProductReferenceNamesOnDomain2 as $productReferenceName) {
-			$this->createTopProduct($productReferenceName, $domainId);
-		}
+		$this->createTopProducts($topProductReferenceNamesOnDomain2, $domainId);
 	}
 
 	/**
-	 * @param string $productReferenceName
+	 * @param string[] $productReferenceNames
 	 * @param int $domainId
 	 */
-	private function createTopProduct($productReferenceName, $domainId) {
+	private function createTopProducts(array $productReferenceNames, $domainId) {
 		$topProductFacade = $this->get(TopProductFacade::class);
 		/* @var $topProductFacade \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade */
 
-		$topProductData = new TopProductData();
-		$topProductData->product = $this->getReference($productReferenceName);
+		$products = [];
+		foreach ($productReferenceNames as $productReferenceName) {
+			$products[] = $this->getReference($productReferenceName);
+		}
 
-		$topProductFacade->create($topProductData, $domainId);
+		$topProductFacade->saveTopProductsForDomain($domainId, $products);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getDependencies() {
+		return [
+			ProductDataFixture::class,
+		];
 	}
 
 }

@@ -5,5 +5,17 @@
 
 {% block main_content %}
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
-	{{ gridView.render() }}
+
+	{{ form_start(form) }}
+
+		{{ form_errors(form) }}
+		{{ form_row(form.products, { label: 'Produkty'|trans }) }}
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+			{% endblock %}
+		{% endembed %}
+
+	{{ form_end(form) }}
 {% endblock %}
