@@ -305,6 +305,24 @@ class StrictWebDriver extends WebDriver {
 	}
 
 	/**
+	 * @param string $selectCss
+	 * @param string $optionValue
+	 */
+	public function selectOptionByCssAndValue($selectCss, $optionValue) {
+		parent::selectOption(['css' => $selectCss], $optionValue);
+	}
+
+	/**
+	 * @param string $css
+	 * @return int
+	 */
+	public function countVisibleByCss($css) {
+		$elements = parent::matchVisible(['css' => $css]);
+
+		return count($elements);
+	}
+
+	/**
 	 * @deprecated
 	 */
 	public function seeInField($field, $value) {

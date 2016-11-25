@@ -2,28 +2,27 @@
 
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
 
+use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
 use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class AdministratorLoginCest {
 
-	public function testSuccessfulLogin(AcceptanceTester $me) {
+	public function testSuccessfulLogin(AcceptanceTester $me, LoginPage $loginPage) {
 		$me->wantTo('login on admin with valid data');
-		$me->loginAsAdmin('admin', 'admin123');
+		$loginPage->login(LoginPage::ADMIN_USERNAME, LoginPage::ADMIN_PASSWORD);
 		$me->see('Nástěnka');
 	}
 
-	public function testLoginWithInvalidUsername(AcceptanceTester $me) {
+	public function testLoginWithInvalidUsername(AcceptanceTester $me, LoginPage $loginPage) {
 		$me->wantTo('login on admin with nonexistent username');
-		$me->loginAsAdmin('nonexistent username', 'admin123');
-		$me->see('Přihlášení se nepodařilo.');
-		$me->seeCurrentPageEquals('/admin/');
+		$loginPage->login('nonexistent username', LoginPage::ADMIN_PASSWORD);
+		$loginPage->assertLoginFailed();
 	}
 
-	public function testLoginWithInvalidPassword(AcceptanceTester $me) {
+	public function testLoginWithInvalidPassword(AcceptanceTester $me, LoginPage $loginPage) {
 		$me->wantTo('login on admin with invalid password');
-		$me->loginAsAdmin('nonexistent username', 'invalid password');
-		$me->see('Přihlášení se nepodařilo.');
-		$me->seeCurrentPageEquals('/admin/');
+		$loginPage->login(LoginPage::ADMIN_USERNAME, 'invalid password');
+		$loginPage->assertLoginFailed();
 	}
 
 }
