@@ -3,10 +3,6 @@
   "description": "Copyright by Petr Svoboda - ShopSys 6 - www.ShopSys.cz - info@shopsys.cz",
   "private": true,
   "preferGlobal": false,
-  "repository": {
-    "type": "git",
-    "url": "ssh://gitolite@wendy:4010/shopsys6"
-  },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "es6-promise": "^3.1.2",
