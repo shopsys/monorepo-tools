@@ -21,7 +21,7 @@ class AdministratorLoginCest {
 
 	public function testLoginWithInvalidPassword(AcceptanceTester $me) {
 		$me->wantTo('login on admin with invalid password');
-		$me->loginAsAdmin('nonexistent username', 'invalid password');
+		$me->loginAsAdmin('admin', 'invalid password');
 		$me->see('Přihlášení se nepodařilo.');
 		$me->seeCurrentPageEquals('/admin/');
 	}
