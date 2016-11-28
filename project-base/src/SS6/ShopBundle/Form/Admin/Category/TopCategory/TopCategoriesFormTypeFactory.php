@@ -2,7 +2,6 @@
 
 namespace SS6\ShopBundle\Form\Admin\Category\TopCategory;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use SS6\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
@@ -41,17 +40,15 @@ class TopCategoriesFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param int $domainId
+	 * @param string $locale
 	 * @return \SS6\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
 	 */
-	public function create(DomainConfig $domainConfig) {
-		$categoryNamesIndexedByIds = $this->categoryFacade->getNamesIndexedByIdsForDomain(
-			$domainConfig->getId(),
-			$domainConfig->getLocale()
-		);
+	public function create($domainId, $locale) {
+		$categoryPaths = $this->categoryFacade->getFullPathsIndexedByIdsForDomain($domainId, $locale);
 
 		return new TopCategoriesFormType(
-			$categoryNamesIndexedByIds,
+			$categoryPaths,
 			$this->removeDuplicatesTransformer,
 			$this->categoriesIdsToCategoriesTransformer
 		);

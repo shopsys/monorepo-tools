@@ -39,11 +39,11 @@ class TopCategoryController extends AdminBaseController {
 	 * @Route("/category/top-category/list/")
 	 */
 	public function listAction(Request $request) {
-		$domainConfig = $this->selectedDomain->getCurrentSelectedDomain();
+		$domainId = $this->selectedDomain->getId();
 
-		$form = $this->createForm($this->topCategoriesFormTypeFactory->create($domainConfig));
+		$form = $this->createForm($this->topCategoriesFormTypeFactory->create($domainId, $request->getLocale()));
 		$formData = [
-			'categories' => $this->topCategoryFacade->getCategoriesForAll($domainConfig->getId()),
+			'categories' => $this->topCategoryFacade->getCategoriesForAll($domainId),
 		];
 
 		$form->setData($formData);
@@ -52,7 +52,7 @@ class TopCategoryController extends AdminBaseController {
 		if ($form->isValid()) {
 			$categories = $form->getData()['categories'];
 
-			$this->topCategoryFacade->saveTopCategoriesForDomain($domainConfig->getId(), $categories);
+			$this->topCategoryFacade->saveTopCategoriesForDomain($domainId, $categories);
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení zboží na titulce bylo úspěšně změněno.'));
 		}

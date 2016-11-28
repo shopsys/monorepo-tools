@@ -214,8 +214,8 @@ class CategoryFacade {
 	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Category\Category[]
 	 */
-	public function getNamesIndexedByIdsForDomain($domainId, $locale) {
-		return $this->categoryRepository->getNamesIndexedByIdsForDomain($domainId, $locale);
+	public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+		return $this->categoryRepository->getFullPathsIndexedByIdsForDomain($domainId, $locale);
 	}
 
 	/**

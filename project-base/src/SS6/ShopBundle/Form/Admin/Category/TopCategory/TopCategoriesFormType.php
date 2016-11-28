@@ -19,7 +19,7 @@ class TopCategoriesFormType extends AbstractType {
 	/**
 	 * @var string[]
 	 */
-	private $categoryNamesIndexedByIds;
+	private $categoryPaths;
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
@@ -27,16 +27,16 @@ class TopCategoriesFormType extends AbstractType {
 	private $categoriesIdsToCategoriesTransformer;
 
 	/**
-	 * @param string[] $categoryNamesIndexedByIds
+	 * @param string[] $categoryPaths
 	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 * @param \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
 	 */
 	public function __construct(
-		array $categoryNamesIndexedByIds,
+		array $categoryPaths,
 		RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer,
 		CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
 	) {
-		$this->categoryNamesIndexedByIds = $categoryNamesIndexedByIds;
+		$this->categoryPaths = $categoryPaths;
 		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
 		$this->categoriesIdsToCategoriesTransformer = $categoriesIdsToCategoriesTransformer;
 	}
@@ -57,7 +57,7 @@ class TopCategoriesFormType extends AbstractType {
 			->add(
 				$builder
 					->create('categories', FormType::SORTABLE_VALUES, [
-						'labels_by_value' => $this->categoryNamesIndexedByIds,
+						'labels_by_value' => $this->categoryPaths,
 						'required' => false,
 					])
 					->addViewTransformer($this->removeDuplicatesTransformer)
