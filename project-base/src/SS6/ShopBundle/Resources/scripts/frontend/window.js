@@ -175,7 +175,7 @@
 		});
 
 		function fixVerticalAlign() {
-			if ($window.height() / $(window).height() < 0.75 && SS6.responsive.isDesktopVersion()) {
+			if ($window.height() / $(window).height() < 0.9) {
 				moveToCenter();
 			} else {
 				$window.css({ top: '' });
