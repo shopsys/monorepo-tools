@@ -23,10 +23,11 @@ class CartCest {
 		$me->amOnPage('/22-sencor-sle-22f46dm4-hello-kitty/');
 
 		$productDetailPage->addProductIntoCart(3);
-		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
 		$floatingWindowPage->closeFloatingWindow();
+		$cartBoxPage->seeInCartBox('1 položka za 10 497,00 Kč');
 
 		$productDetailPage->addProductIntoCart(3);
+		$floatingWindowPage->closeFloatingWindow();
 		$cartBoxPage->seeInCartBox('1 položka za 20 994,00 Kč');
 
 		$me->amOnPage('/kosik/');
@@ -45,8 +46,8 @@ class CartCest {
 		$me->amOnPage('/televize-audio/');
 		$productListPage->addProductToCartByName('Defender 2.0 SPK-480', 1);
 		$me->see('Do košíku bylo vloženo zboží');
-		$cartBoxPage->seeInCartBox('1 položka');
 		$floatingWindowPage->closeFloatingWindow();
+		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');
 		$cartPage->assertProductPrice('Defender 2.0 SPK-480', '119,00 Kč');
 	}
@@ -55,12 +56,14 @@ class CartCest {
 		CartPage $cartPage,
 		HomepagePage $homepagePage,
 		CartBoxPage $cartBoxPage,
-		AcceptanceTester $me
+		AcceptanceTester $me,
+		FloatingWindowPage $floatingWindowPage
 	) {
 		$me->wantTo('add product to cart from homepage');
 		$me->amOnPage('/');
 		$homepagePage->addTopProductToCartByName('22" Sencor SLE 22F46DM4 HELLO KITTY', 1);
 		$me->see('Do košíku bylo vloženo zboží');
+		$floatingWindowPage->closeFloatingWindow();
 		$cartBoxPage->seeInCartBox('1 položka');
 		$me->amOnPage('/kosik/');
 		$cartPage->assertProductPrice('22" Sencor SLE 22F46DM4 HELLO KITTY', '3 499,00 Kč');
