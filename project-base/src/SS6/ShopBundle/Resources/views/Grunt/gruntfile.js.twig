@@ -2,7 +2,8 @@ module.exports = function(grunt) {
 
 	require('es6-promise').polyfill();
 	require('jit-grunt')(grunt, {
-		sprite: 'grunt-spritesmith'
+		sprite: 'grunt-spritesmith',
+		sprite: 'pngsmith',
 	});
 	require('time-grunt')(grunt);
 
@@ -115,13 +116,11 @@ module.exports = function(grunt) {
 		sprite: {
 			admin: {
 				src: 'web/assets/admin/images/icons/*.png',
-				dest: 'web/assets/admin/images/icons/*.png',
-				destImg: 'web/assets/admin/images/sprites/sprite.png',
-				destCSS: '{{ rootStylesDirectory|raw }}/admin/libs/sprites.less',
+				dest: 'web/assets/admin/images/sprites/sprite.png',
+				destCss: '{{ rootStylesDirectory|raw }}/admin/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
 				algorithm: 'binary-tree',
 				padding: 50,
-				engine: 'pngsmith',
 				cssFormat: 'css',
 				cssVarMap: function (sprite) {
 					sprite.name = 'sprite.sprite-' + sprite.name;
@@ -138,19 +137,20 @@ module.exports = function(grunt) {
 					functions: false,
 					cssClass: function (item) {
 						return '.' + item.name;
+					},
+					cssSelector: function (sprite) {
+						return '.' + sprite.name;
 					}
 				}
 			},
 
 			frontend: {
 				src: 'web/assets/frontend/images/icons/*.png',
-				dest: 'web/assets/frontend/images/icons/*.png',
-				destImg: 'web/assets/frontend/images/sprites/sprite.png',
-				destCSS: '{{ rootStylesDirectory|raw }}/front/common/libs/sprites.less',
+				dest: 'web/assets/frontend/images/sprites/sprite.png',
+				destCss: '{{ rootStylesDirectory|raw }}/front/common/libs/sprites.less',
 				imgPath: '../images/sprites/sprite.png?v=' + (new Date().getTime()),
 				algorithm: 'binary-tree',
 				padding: 50,
-				engine: 'pngsmith',
 				cssFormat: 'css',
 				cssVarMap: function (sprite) {
 					sprite.name = 'sprite.sprite-' + sprite.name;
@@ -167,6 +167,9 @@ module.exports = function(grunt) {
 					functions: false,
 					cssClass: function (item) {
 						return '.' + item.name;
+					},
+					cssSelector: function (sprite) {
+						return '.' + sprite.name;
 					}
 				}
 			}
@@ -178,6 +181,7 @@ module.exports = function(grunt) {
 				dest: 'web/assets/admin/fonts',
 				destCss: 'src/SS6/ShopBundle/Resources/styles/admin/libs/',
 				options: {
+					autoHint: false,
 					font: 'svg',
 					hashes: true,
 					types: 'eot,woff,ttf,svg',
@@ -199,6 +203,7 @@ module.exports = function(grunt) {
 				dest: 'web/assets/frontend/fonts',
 				destCss: 'src/SS6/ShopBundle/Resources/styles/front/common/libs/',
 				options: {
+					autoHint: false,
 					font: 'svg',
 					hashes: true,
 					types: 'eot,woff,ttf,svg',
@@ -244,7 +249,10 @@ module.exports = function(grunt) {
 			},
 			adminWebfont: {
 				files: ['src/SS6/ShopBundle/Resources/svg/admin/*.svg'],
-				tasks: ['webfont:admin']
+				tasks: ['webfont:admin'],
+				options: {
+					livereload: true
+				}
 			},
 			frontendSprite: {
 				files: ['web/assets/frontend/images/icons/**/*.png'],
@@ -302,8 +310,9 @@ module.exports = function(grunt) {
 			}
 		}
 	});
+	grunt.loadNpmTasks('grunt-spritesmith');
 
-	grunt.registerTask('default', ['sprite', 'webfont', 'less', 'postcss', 'legacssy']);
+	grunt.registerTask('default', ["sprite:admin", "sprite:frontend", "webfont", "less", "postcss", "legacssy"]);
 
 	{% for domain in domains -%}
 		grunt.registerTask('frontend{{ domain.id }}', ['webfont:frontend', 'sprite:frontend', 'less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}'], 'postcss');
@@ -311,7 +320,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('admin', ['sprite:admin', 'webfont:admin', 'less:admin', 'legacssy:admin' ]);
 
 	{% for domain in domains -%}
-		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}', 'postcss']);
+		grunt.registerTask('frontendLess{{ domain.id }}', ['less:frontend{{ domain.id }}', 'legacssy:frontend{{ domain.id }}', 'less:wysiwyg{{ domain.id }}']);
 	{% endfor -%}
 	grunt.registerTask('adminLess', ['less:admin', 'legacssy:admin' ]);
 };
