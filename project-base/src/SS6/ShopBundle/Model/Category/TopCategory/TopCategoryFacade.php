@@ -35,6 +35,21 @@ class TopCategoryFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getCategoriesForAll($domainId) {
+		$topCategories = $this->getAll($domainId);
+		$categories = [];
+
+		foreach ($topCategories as $topCategory) {
+			$categories[] = $topCategory->getCategory();
+		}
+
+		return $categories;
+	}
+
+	/**
 	 * @param $domainId
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
 	 */
