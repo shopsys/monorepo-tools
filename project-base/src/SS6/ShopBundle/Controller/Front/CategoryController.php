@@ -6,6 +6,7 @@ use SS6\ShopBundle\Component\Category\CurrentCategoryResolver;
 use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
+use SS6\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController {
@@ -25,14 +26,21 @@ class CategoryController extends FrontBaseController {
 	 */
 	private $currentCategoryResolver;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
+	 */
+	private $topCategoryFacade;
+
 	public function __construct(
 		Domain $domain,
 		CategoryFacade $categoryFacade,
-		CurrentCategoryResolver $currentCategoryResolver
+		CurrentCategoryResolver $currentCategoryResolver,
+		TopCategoryFacade $topCategoryFacade
 	) {
 		$this->domain = $domain;
 		$this->categoryFacade = $categoryFacade;
 		$this->currentCategoryResolver = $currentCategoryResolver;
+		$this->topCategoryFacade = $topCategoryFacade;
 	}
 
 	/**
@@ -78,6 +86,12 @@ class CategoryController extends FrontBaseController {
 			'isFirstLevel' => false,
 			'openCategories' => [],
 			'currentCategory' => null,
+		]);
+	}
+
+	public function topAction() {
+		return $this->render('@SS6Shop/Front/Content/Category/top.html.twig', [
+			'categories' => $this->topCategoryFacade->getCategoriesForAll($this->domain->getId()),
 		]);
 	}
 
