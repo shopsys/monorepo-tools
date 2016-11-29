@@ -9,7 +9,7 @@
 
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
-		{% macro mailTemplate(name, templateForm, variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText, mailTemplate) %}
+		{% macro mailTemplate(name, mailTemplate, templateForm,variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
 			<div class="js-mail-template-toggle-container js-toggle-container form-group wrap-border">
 				<h2 class ="form-group__title">
 						{{ name }}
@@ -94,48 +94,44 @@
 				{% if orderStatus.type == TYPE_NEW %}
 					{{ _self.mailTemplate(
 							orderStatus.name,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId],
 							orderStatusTemplate,
 							orderStatusVariables,
 							[],
 							orderStatusVariablesLabels,
 							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-							'Zasílat potvrzení o přijetí objednávky'|trans,
-							orderStatusMailTemplatesByOrderStatusId[orderStatusId]
+							'Zasílat potvrzení o přijetí objednávky'|trans
 					) }}
 				{% else %}
 					{{ _self.mailTemplate(
 							orderStatus.name,
+							orderStatusMailTemplatesByOrderStatusId[orderStatusId],
 							orderStatusTemplate,
 							orderStatusVariables,
 							[],
 							orderStatusVariablesLabels,
 							'V předmětu lze použít proměnné pouze pro číslo objednávky a datum a čas vytvoření objednávky'|trans,
-							'Zasílat e-mail o změně na tento stav'|trans,
-							orderStatusMailTemplatesByOrderStatusId[orderStatusId]
+							'Zasílat e-mail o změně na tento stav'|trans
 					) }}
 				{% endif %}
 			{% endfor %}
 
 			{{ _self.mailTemplate(
 				'Potvrzení registrace'|trans,
+				registrationMailTemplate,
 				form.registrationTemplate,
 				registrationVariables,
 				[],
-				registrationVariablesLabels,
-				null,
-				null,
-				registrationMailTemplate
+				registrationVariablesLabels
 			) }}
 
 			{{ _self.mailTemplate(
 				'Zaslání zapomenutého hesla'|trans,
+				resetPasswordMailTemplate,
 				form.resetPasswordTemplate,
 				resetPasswordVariables,
 				resetPasswordRequiredVariables,
-				resetPasswordVariablesLabels,
-				null,
-				null,
-				resetPasswordMailTemplate
+				resetPasswordVariablesLabels
 			) }}
 
 			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
