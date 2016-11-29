@@ -3,36 +3,20 @@
 namespace SS6\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProductData;
+use SS6\ShopBundle\Model\Product\Product;
 
 /**
- * @ORM\Table(
- *	name="products_top",
- *	uniqueConstraints={
- *		@ORM\UniqueConstraint(name="product_domain_unique",columns={"product_id", "domain_id"})
- *	},
- *	indexes={
- *		@ORM\Index(columns={"product_id", "domain_id"})
- *	}
- * )
+ * @ORM\Table(name="products_top")
  * @ORM\Entity
  */
 class TopProduct {
-
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 */
-	private $id;
 
 	/**
 	 * @var \SS6\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\Id
 	 */
 	private $product;
 
@@ -40,23 +24,26 @@ class TopProduct {
 	 * @var int
 	 *
 	 * @ORM\Column(type="integer")
+	 * @ORM\Id
 	 */
 	private $domainId;
 
 	/**
-	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
+	 * @var int
+	 *
+	 * @ORM\Column(type="integer")
 	 */
-	public function __construct($domainId, TopProductData $topProductData) {
-		$this->product = $topProductData->product;
-		$this->domainId = $domainId;
-	}
+	private $position;
 
 	/**
-	 * @return int
+	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param int $domainId
+	 * @param int $position
 	 */
-	public function getId() {
-		return $this->id;
+	public function __construct(Product $product, $domainId, $position) {
+		$this->product = $product;
+		$this->domainId = $domainId;
+		$this->position = $position;
 	}
 
 	/**
@@ -64,20 +51,6 @@ class TopProduct {
 	 */
 	public function getProduct() {
 		return $this->product;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getDomainId() {
-		return $this->domainId;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\TopProduct\TopProductData $topProductData
-	 */
-	public function edit(TopProductData $topProductData) {
-		$this->product = $topProductData->product;
 	}
 
 }

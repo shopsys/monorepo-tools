@@ -20,9 +20,6 @@ class TopProductRepository {
 	 */
 	private $productRepository;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
-	 */
 	public function __construct(EntityManager $entityManager, ProductRepository $productRepository) {
 		$this->em = $entityManager;
 		$this->productRepository = $productRepository;
@@ -36,60 +33,29 @@ class TopProductRepository {
 	}
 
 	/**
-	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
-	 */
-	public function getById($id) {
-		$topProduct = $this->getTopProductRepository()->find($id);
-
-		if ($topProduct === null) {
-			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException(
-				'TopProduct with ID ' . $id . ' not found.'
-			);
-		}
-
-		return $topProduct;
-	}
-
-	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct
-	 */
-	public function getByProductAndDomainId(Product $product, $domainId) {
-		$topProduct = $this->getTopProductRepository()->findOneBy([
-			'product' => $product,
-			'domainId' => $domainId,
-		]);
-
-		if ($topProduct === null) {
-			throw new \SS6\ShopBundle\Model\Product\TopProduct\Exception\TopProductNotFoundException();
-		}
-		return $topProduct;
-	}
-
-	/**
 	 * @param int $domainId
 	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
 	public function getAll($domainId) {
-		return $this->getTopProductRepository()->findBy(['domainId' => $domainId]);
+		return $this->getTopProductRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
 	}
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricigGroup
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Product[]
 	 */
-	public function getOfferedProductsForTopProductsOnDomain($domainId, $pricigGroup) {
-		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricigGroup);
+	public function getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup) {
+		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 
 		$queryBuilder
 			->join(TopProduct::class, 'tp', Join::WITH, 'tp.product = p')
-			->andwhere('tp.domainId = :domainId')
-			->andwhere('tp.domainId = prv.domainId')
+			->andWhere('tp.domainId = :domainId')
+			->andWhere('tp.domainId = prv.domainId')
+			->orderBy('tp.position')
 			->setParameter('domainId', $domainId);
 
 		return $queryBuilder->getQuery()->execute();
 	}
+
 }
