@@ -143,6 +143,12 @@
           route: admin_domain_edit
           visible: false
 
+    - label: 'Informace o provozovateli'
+      route: admin_shopinfo_setting
+      items:
+      - label: 'Informace o provozovateli'
+        route: admin_shopinfo_setting
+
     - label: 'Obchodní podmínky'
       route: admin_termsandconditions_setting
       items:
