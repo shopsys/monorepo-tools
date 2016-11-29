@@ -174,10 +174,15 @@
 			}, 200);
 		});
 
+		/**
+		 * Window with big height is fixed on top of viewport, smaller window is centered in viewport
+		 */
 		function fixVerticalAlign() {
-			if ($window.height() / $(window).height() < 0.9) {
+			var windowAndViewportRatioLimitToCenter = 0.9;
+			if ($window.height() / $(window).height() < windowAndViewportRatioLimitToCenter) {
 				moveToCenter();
 			} else {
+				// remove css attribute "top" which is used by function moveToCenter()
 				$window.css({ top: '' });
 			}
 		}
