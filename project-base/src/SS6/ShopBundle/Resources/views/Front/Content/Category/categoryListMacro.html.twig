@@ -1,0 +1,22 @@
+{% macro list(categories, heading) %}
+	{% if categories|length > 0 %}
+		{% if heading is not null %}
+			<h2>{{ heading }}</h2>
+		{% endif %}
+
+		<ul class="list-categories">
+			{% for category in categories %}
+				<li class="list-categories__item">
+					<a href="{{ url('front_product_list', { id: category.id }) }}" class="list-categories__item__block">
+						<span class="list-categories__item__image">
+							{{ image(category, { alt: category.name }) }}
+						</span>
+						<h3 class="list-categories__item__title">
+							{{ category.name }}
+						</h3>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endmacro %}
