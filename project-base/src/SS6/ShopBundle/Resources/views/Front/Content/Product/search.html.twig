@@ -2,6 +2,7 @@
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 {% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% import '@SS6Shop/Front/Content/Category/categoryListMacro.html.twig' as categoryList %}
 
 {% block title %}
 	{{ parent() }}
@@ -15,22 +16,7 @@
 {% block main_content %}
 	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
-	{% if foundCategories|length > 0 %}
-		<ul class="list-categories">
-			{% for foundCategory in foundCategories %}
-				<li class="list-categories__item">
-					<a href="{{ url('front_product_list', { id: foundCategory.id }) }}" class="list-categories__item__block">
-						<span class="list-categories__item__image">
-							{{ image(foundCategory, { alt: foundCategory.name }) }}
-						</span>
-						<h3 class="list-categories__item__title">
-							{{ foundCategory.name }}
-						</h3>
-					</a>
-				</li>
-			{% endfor %}
-		</ul>
-	{% endif %}
+	{{ categoryList.list(foundCategories) }}
 
 	<div class="js-product-list-with-filter">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}

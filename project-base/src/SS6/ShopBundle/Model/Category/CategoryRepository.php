@@ -65,6 +65,28 @@ class CategoryRepository extends NestedTreeRepository {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+		$queryBuilder = $this->getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale);
+
+		$rows = $queryBuilder->select('c.id, IDENTITY(c.parent) AS parentId, ct.name')->getQuery()->getScalarResult();
+
+		$fullPathsById = [];
+		foreach ($rows as $row) {
+			if (array_key_exists($row['parentId'], $fullPathsById)) {
+				$fullPathsById[$row['id']] = $fullPathsById[$row['parentId']] . ' - ' . $row['name'];
+			} else {
+				$fullPathsById[$row['id']] = $row['name'];
+			}
+		}
+
+		return $fullPathsById;
+	}
+
+	/**
 	 * @return int[]
 	 */
 	public function getAllIds() {

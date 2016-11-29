@@ -92,6 +92,8 @@
           visible: false
     - label: 'Zboží na titulní stránce'
       route: admin_topproduct_list
+    - label: 'Rozcestník kategorií'
+      route: admin_topcategory_list
     - label: 'Reklamní systém'
       route: admin_advert_list
       items:

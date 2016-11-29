@@ -42,6 +42,7 @@ class FormType {
 	const RESET = 'reset';
 	const SEARCH = 'search';
 	const SINGLE_CHECKBOX_CHOICE = 'single_checkbox_choice';
+	const SORTABLE_VALUES = 'sortable_values';
 	const SUBMIT = 'submit';
 	const TEXT = 'text';
 	const TEXTAREA = 'textarea';

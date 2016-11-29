@@ -79,6 +79,11 @@ services:
     tags:
       - { name: form.type, alias: single_checkbox_choice }
 
+  ss6.shop.form.sortable_values_type:
+    class: SS6\ShopBundle\Form\SortableValuesType
+    tags:
+      - { name: form.type, alias: sortable_values }
+
   ss6.shop.form.timed_form:
     class: SS6\ShopBundle\Form\TimedFormTypeExtension
     tags:

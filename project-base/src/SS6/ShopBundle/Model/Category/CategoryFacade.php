@@ -210,6 +210,15 @@ class CategoryFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @param string $locale
+	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 */
+	public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+		return $this->categoryRepository->getFullPathsIndexedByIdsForDomain($domainId, $locale);
+	}
+
+	/**
 	 * @param string $locale
 	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */

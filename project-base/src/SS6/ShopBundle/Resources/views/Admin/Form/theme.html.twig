@@ -666,6 +666,62 @@
 	{% endif %}
 {% endblock choice_widget_expanded %}
 
+{%- block sortable_values_widget -%}
+	{% if isSimple|default(false) == false %}
+		<div class="form-line__side">
+			<div class="form-line__item">
+	{% endif %}
+
+	<div class="js-sortable-values-container">
+		{% set item_input_name = full_name ~ '[]' %}
+		{% set full_name = "" %}
+		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' js-sortable-values-input input')|trim}) %}
+		<select {{ block('widget_attributes') }}>
+			<option value="" selected="selected">{{ placeholder }}</option>
+			{% for labelValue, label in labels_by_value %}
+				<option value="{{ labelValue }}"{% if labelValue in value %} disabled="disabled"{% endif %}>
+					{{ label }}
+				</option>
+			{% endfor %}
+		</select>
+
+		<button
+			type="button"
+			class="js-sortable-values-item-add btn-link-style"
+			data-item-template="{{ _self.sortableValuesWidgetItem(item_input_name, '%value%', '%label%')|escape('html_attr') }}"
+		>
+			{{ 'Přidat'|trans }}
+		</button>
+
+		<div class="js-sortable-values-items">
+			{% for valueItem in value %}
+				{{ _self.sortableValuesWidgetItem(item_input_name, valueItem, labels_by_value[valueItem]|default(valueItem)) }}
+			{% endfor %}
+		</div>
+	</div>
+
+	{% if isSimple|default(false) == false %}
+			</div>
+			{{- block('appendix_block') -}}
+		</div>
+	{% else %}
+		{{- block('appendix_block') -}}
+	{% endif %}
+{%- endblock sortable_values_widget -%}
+
+{% macro sortableValuesWidgetItem(inputName, value, label) %}
+	<div class="js-sortable-values-item padding-5">
+		<span class="js-sortable-values-item-handle cursor-move" title="{{ 'Přesunout'|trans }}">
+			<i class="svg svg-move"></i>
+		</span>
+		{{ label }}
+		<span class="js-sortable-values-item-remove cursor-pointer float-right" type="button">
+			<i class="svg svg-delete"></i>
+		</span>
+		<input class="js-sortable-values-item-input" type="hidden" name="{{ inputName }}" value="{{ value }}">
+	</div>
+{% endmacro %}
+
 {% block yes_no_widget %}
 	{% if isSimple|default(false) == false %}
 		<div class="form-line__side">
