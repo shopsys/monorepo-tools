@@ -1,6 +1,13 @@
+@in-message-padding-horizontal: 9px;
+@in-message-padding-vertical: 6px;
+
+@in-message-close-size: 5px;
+@in-message-close-color: #66757B;
+
+// base message settings and elements
 .in-message {
 	display: inline-block;
-	padding: 6px 9px;
+	padding: @in-message-padding-vertical @in-message-padding-horizontal;
 
 	font-style: italic;
 	font-size: 14px;
@@ -10,45 +17,62 @@
 	&__icon {
 		margin-right: 2px;
 		position: relative;
-		top: -2px;
+		top: -1px;
 	}
 
 	&__close {
 		position: absolute;
-		top: 5px;
-		right: 5px;
-		padding: 5px;
+		top: @in-message-close-size;
+		right: @in-message-close-size;
+		padding: @in-message-close-size;
 		display: inline-block;
 		vertical-align: middle;
 
-		color: #66757B;
+		color: @in-message-close-color;
 		cursor: pointer;
 		font-style: normal;
 		font-size: 14px;
 		text-align: center;
 		text-decoration: none;
-
-		.in-message--block & {
-			top: 2px;
-		}
 	}
 
 	&__list {
 		.reset-ul();
 	}
+}
 
-	&--block {
-		display: block;
-		margin-bottom: 10px;
-		position: relative;
-	}
+// Modifications - types
+@in-message-small-padding-horizontal: 6px;
+@in-message-small-padding-vertical: 3px;
 
+@in-message-block-margin-bottom: 10px;
+@in-message-block-padding-for-close: 20px;
+
+.in-message {
 	&--small {
-		padding: 3px 6px;
+		padding: @in-message-small-padding-vertical @in-message-small-padding-horizontal;
 
 		font-size: 12px;
 	}
 
+	&--block {
+		display: block;
+		margin-bottom: @in-message-block-margin-bottom;
+		padding-right: @in-message-block-padding-for-close;
+		position: relative;
+
+		.in-message__close {
+			top: 0;
+		}
+
+		&.in-message--small .in-message__close {
+			top: -4px;
+		}
+	}
+}
+
+// Modifications - colors
+.in-message {
 	&--error {
 		color: @color-message-alert-text;
 		background: @color-message-alert;
@@ -72,15 +96,25 @@
 	&--danger {
 		color: @color-message-alert-text;
 	}
+}
 
+
+// Modifications - special type - pinned
+@in-message-pin-width: 230px;
+@in-message-pin-place-for-close: 25px;
+@in-message-pin-padding: 10px;
+@in-message-pin-position: 5px;
+@in-message-pin-size: 8px;
+
+.in-message {
 	&--pin {
 		position: absolute;
 		top: 100%;
 		left: 0;
-		margin-top: 10px;
-		width: 230px;
+		margin-top: @in-message-pin-position*2;
+		width: @in-message-pin-width;
 		z-index: 99;
-		padding: 10px 25px 10px 10px;
+		padding: @in-message-pin-padding @in-message-pin-place-for-close @in-message-pin-padding @in-message-pin-padding;
 
 		text-align: left;
 		border: 1px solid darken(@color-message-alert, 15%);
@@ -88,10 +122,10 @@
 		&:after {
 			display: block;
 			position: absolute;
-			top: -5px;
-			left: 5px;
-			width: 8px;
-			height: 8px;
+			top: -@in-message-pin-position;
+			left: @in-message-pin-position;
+			width: @in-message-pin-size;
+			height: @in-message-pin-size;
 			content: '';
 
 			border-top: 1px solid darken(@color-message-alert, 15%);

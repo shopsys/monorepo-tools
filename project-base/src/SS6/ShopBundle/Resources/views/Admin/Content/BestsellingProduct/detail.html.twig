@@ -10,7 +10,7 @@
 		<div class="js-form-group">
 			{{ form_errors(form.bestsellingProducts) }}
 
-			<div id="{{ form.bestsellingProducts.vars.id }}" class="wrap-group">
+			<div id="{{ form.bestsellingProducts.vars.id }}">
 				{% for productForm in form.bestsellingProducts %}
 					<div class="form-line js-bestselling-product-container">
 						<label class="form-line__item form-line__item--text form-line__item--fixed-width">{{ loop.index }}</label>

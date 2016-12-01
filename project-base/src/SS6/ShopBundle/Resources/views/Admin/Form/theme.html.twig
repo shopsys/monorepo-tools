@@ -857,7 +857,7 @@
 
 {% block appendix_block %}
 	{% if symbolAfterInput is defined %}
-		<span class="form-line__item form-line__item--text">{{ symbolAfterInput }}</span>
+		<span class="form-line__item form-line__item--text form-line__item--fixed-width-left">{{ symbolAfterInput }}</span>
 	{% endif %}
 	{% if icon is defined %}
 		<i class="svg svg-{{ icon.type|default('info') }} in-icon cursor-help form-line__item form-line__item--text js-tooltip"

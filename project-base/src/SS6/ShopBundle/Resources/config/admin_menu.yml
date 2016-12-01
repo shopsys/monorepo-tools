@@ -257,6 +257,8 @@
           route: admin_superadmin_errors
         - label: 'Nastavení prodeje s/bez DPH'
           route: admin_superadmin_pricing
+        - label: 'Css dokumentace'
+          route: admin_superadmin_cssdocumentation
 
     - label: 'Měřící skripty'
       route: admin_script_list

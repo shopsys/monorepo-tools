@@ -1,3 +1,5 @@
+@list-main-item-gap: 8px;
+
 .list-main {
 	.reset-ul();
 	margin: 0 0 25px;
@@ -6,7 +8,12 @@
 	&__item {
 		display: block;
 		position: relative;
-		padding: 0 5px 3px 15px;
+		padding: 0 5px 0 15px;
+		margin-top: @list-main-item-gap;
+
+		&:first-child {
+			margin-top: 0;
+		}
 
 		&:after {
 			content: '';
@@ -17,9 +24,16 @@
 			top: 6px;
 			left: 3px;
 
-			background: @color-primary;
-
+			background: @color-additional;
 			border-radius: 50%;
 		}
+
+		a {
+			text-decoration: none;
+		}
+	}
+
+	& & {
+		margin-top: @list-main-item-gap;
 	}
 }

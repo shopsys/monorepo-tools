@@ -1,8 +1,10 @@
+@form-group-padding: 15px;
+
 .form-group {
 	position: relative;
 
 	&__title {
-		padding: 15px;
+		padding: @form-group-padding;
 		position: relative;
 		margin: 0;
 
@@ -16,8 +18,8 @@
 		&__click {
 			float: right;
 			cursor: pointer;
-			margin: -15px -15px -15px 0;
-			padding: 15px;
+			margin: -@form-group-padding -@form-group-padding -@form-group-padding 0;
+			padding: @form-group-padding;
 			width: 45px;
 			height: 48px;
 			line-height: 20px;

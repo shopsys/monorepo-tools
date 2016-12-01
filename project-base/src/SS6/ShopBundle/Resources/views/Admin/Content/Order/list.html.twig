@@ -4,26 +4,26 @@
 {% block h1 %}{{ 'Přehled objednávek'|trans }}{% endblock %}
 
 {% block main_content %}
-	<div class="wrap-tab js-tabs">
-		<div class="wrap-tab__heading">
+	<div class="in-tab js-tabs">
+		<div class="in-tab__heading">
 			<a href="#"
-				class="wrap-tab__heading__item js-tabs-button {{ not isAdvancedSearchFormSubmitted ? 'active' }}"
+				class="in-tab__heading__item js-tabs-button {{ not isAdvancedSearchFormSubmitted ? 'active' }}"
 				data-tab-id="quick"
 			>
 				{{ 'Rychlé vyhledávání'|trans }}
 			</a>
 			<a href="#"
-				class="wrap-tab__heading__item js-tabs-button {{ isAdvancedSearchFormSubmitted ? ' active' }}"
+				class="in-tab__heading__item js-tabs-button {{ isAdvancedSearchFormSubmitted ? ' active' }}"
 				data-tab-id="advanced"
 			>
 				{{ 'Rozšířené hledání'|trans }}
 			</a>
 		</div>
-		<div class="wrap-tab__content">
-			<div class="wrap-tab__content__in js-tabs-content" data-tab-id="quick">
+		<div class="in-tab__content">
+			<div class="in-tab__content__in js-tabs-content" data-tab-id="quick">
 				{% include '@SS6Shop/Admin/Content/Order/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 			</div>
-			<div class="wrap-tab__content__in js-tabs-content" data-tab-id="advanced">
+			<div class="in-tab__content__in js-tabs-content" data-tab-id="advanced">
 				{% include '@SS6Shop/Admin/Content/Order/AdvancedSearch/advancedSearch.html.twig'
 					with {advancedSearchForm: advancedSearchForm}
 				%}

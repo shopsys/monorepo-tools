@@ -1,15 +1,19 @@
+@form-choice-line-height: 18px;
+
 .form-choice {
 	display: inline-block;
 	vertical-align: top;
 	padding: 6px 12px 6px 18px;
+	position: relative;
 
 	&__input {
-		position: relative;
-		top: 1px;
+		position: absolute;
+		top: 8px;
+		left: 0;
 		margin-right: 5px;
 	}
 
 	&__label {
-		line-height: 18px;
+		line-height: @form-choice-line-height;
 	}
 }

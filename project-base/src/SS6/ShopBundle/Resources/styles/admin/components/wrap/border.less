@@ -1,10 +1,13 @@
+@wrap-border-gap: @item-gap;
+@wrap-border-inner-gap-small: 15px;
+
 .wrap-border {
-	padding-bottom: 25px;
-	margin-bottom: 25px;
+	padding-bottom: @wrap-border-gap;
+	margin-bottom: @wrap-border-gap;
 
 	border-bottom: 1px solid @color-border-dark;
 
 	&--small {
-		padding-bottom: 15px;
+		padding-bottom: @wrap-border-inner-gap-small;
 	}
 }
