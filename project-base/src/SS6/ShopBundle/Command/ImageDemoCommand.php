@@ -80,20 +80,20 @@ class ImageDemoCommand extends ContainerAwareCommand {
 	 * @param string $dqlUrl
 	 */
 	private function loadDbChanges(OutputInterface $output, $dqlUrl) {
-		$sqls = file_get_contents($dqlUrl);
-		if ($sqls === false) {
+		$fileContents = file_get_contents($dqlUrl);
+		if ($fileContents === false) {
 			$output->writeln('<fg=red>Download of DB changes failed</fg=red>');
 			return;
 		}
-		$sqls = explode(';', $sqls);
-		$sqls = array_map('trim', $sqls);
-		$sqls = array_filter($sqls);
+		$sqlQueries = explode(';', $fileContents);
+		$sqlQueries = array_map('trim', $sqlQueries);
+		$sqlQueries = array_filter($sqlQueries);
 
 		$rsm = new ResultSetMapping();
-		foreach ($sqls as $sql) {
-			$this->em->createNativeQuery($sql, $rsm)->execute();
+		foreach ($sqlQueries as $sqlQuery) {
+			$this->em->createNativeQuery($sqlQuery, $rsm)->execute();
 		}
-		$output->writeln('<fg=green>DB changes were successfully applied (queries: ' . count($sqls) . ')</fg=green>');
+		$output->writeln('<fg=green>DB changes were successfully applied (queries: ' . count($sqlQueries) . ')</fg=green>');
 	}
 
 	/**
