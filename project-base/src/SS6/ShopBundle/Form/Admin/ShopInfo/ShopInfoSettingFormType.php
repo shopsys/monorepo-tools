@@ -28,6 +28,9 @@ class ShopInfoSettingFormType extends AbstractType {
 			->add('email', FormType::TEXT, [
 				'required' => false,
 			])
+			->add('phoneHours', FormType::TEXT, [
+				'required' => false,
+			])
 			->add('save', FormType::SUBMIT);
 	}
 

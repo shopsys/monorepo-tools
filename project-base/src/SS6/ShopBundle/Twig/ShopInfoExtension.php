@@ -38,6 +38,7 @@ class ShopInfoExtension extends \Twig_Extension {
 		return [
 			new Twig_SimpleFunction('getShopInfoPhoneNumber', [$this, 'getPhoneNumber']),
 			new Twig_SimpleFunction('getShopInfoEmail', [$this, 'getEmail']),
+			new Twig_SimpleFunction('getShopInfoPhoneHours', [$this, 'getPhoneHours']),
 		];
 	}
 
@@ -71,5 +72,13 @@ class ShopInfoExtension extends \Twig_Extension {
 	public function getEmail() {
 		$currentDomainId = $this->getDomain()->getId();
 		return $this->shopInfoSettingFacade->getEmail($currentDomainId);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPhoneHours() {
+		$currentDomainId = $this->getDomain()->getId();
+		return $this->shopInfoSettingFacade->getPhoneHours($currentDomainId);
 	}
 }

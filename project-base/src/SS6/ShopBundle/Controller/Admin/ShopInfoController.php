@@ -48,6 +48,7 @@ class ShopInfoController extends AdminBaseController {
 		$shopInfoSettingData = [];
 		$shopInfoSettingData['phoneNumber'] = $this->shopInfoSettingFacade->getPhoneNumber($selectedDomainId);
 		$shopInfoSettingData['email'] = $this->shopInfoSettingFacade->getEmail($selectedDomainId);
+		$shopInfoSettingData['phoneHours'] = $this->shopInfoSettingFacade->getPhoneHours($selectedDomainId);
 
 		$form->setData($shopInfoSettingData);
 		$form->handleRequest($request);
@@ -56,6 +57,7 @@ class ShopInfoController extends AdminBaseController {
 			$shopInfoSettingData = $form->getData();
 			$this->shopInfoSettingFacade->setPhoneNumber($shopInfoSettingData['phoneNumber'], $selectedDomainId);
 			$this->shopInfoSettingFacade->setEmail($shopInfoSettingData['email'], $selectedDomainId);
+			$this->shopInfoSettingFacade->setPhoneHours($shopInfoSettingData['phoneHours'], $selectedDomainId);
 
 			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení e-shopu atributů bylo upraveno'));
 

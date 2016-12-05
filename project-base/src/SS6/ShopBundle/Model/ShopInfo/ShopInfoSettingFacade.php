@@ -8,6 +8,7 @@ class ShopInfoSettingFacade {
 
 	const SHOP_INFO_PHONE_NUMBER = 'shopInfoPhoneNumber';
 	const SHOP_INFO_EMAIL = 'shopInfoEmail';
+	const SHOP_INFO_PHONE_HOURS = 'shopInfoPhoneHours';
 
 	/**
 	 * @var \SS6\ShopBundle\Component\Setting\Setting
@@ -35,6 +36,14 @@ class ShopInfoSettingFacade {
 	}
 
 	/**
+	 * @param int $domainId
+	 * @return string
+	 */
+	public function getPhoneHours($domainId) {
+		return $this->setting->getForDomain(self::SHOP_INFO_PHONE_HOURS, $domainId);
+	}
+
+	/**
 	 * @param string $value
 	 * @param int $domainId
 	 */
@@ -50,4 +59,11 @@ class ShopInfoSettingFacade {
 		$this->setting->setForDomain(self::SHOP_INFO_EMAIL, $value, $domainId);
 	}
 
+	/**
+	 * @param string $value
+	 * @param int $domainId
+	 */
+	public function setPhoneHours($value, $domainId) {
+		$this->setting->setForDomain(self::SHOP_INFO_PHONE_HOURS, $value, $domainId);
+	}
 }
