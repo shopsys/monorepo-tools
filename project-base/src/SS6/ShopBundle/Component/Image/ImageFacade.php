@@ -241,7 +241,7 @@ class ImageFacade {
 	 * @return \SS6\ShopBundle\Component\Image\Image
 	 */
 	public function getImageByObject($imageOrEntity, $type = null) {
-		if ($type === null && $imageOrEntity instanceof Image) {
+		if ($imageOrEntity instanceof Image) {
 			return $imageOrEntity;
 		} else {
 			return $this->getImageByEntity($imageOrEntity, $type);
