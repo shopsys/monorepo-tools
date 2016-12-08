@@ -123,6 +123,11 @@ services:
     tags:
       - { name: twig.extension }
 
+  ss6.twig.shop_info_extension:
+    class: SS6\ShopBundle\Twig\ShopInfoExtension
+    tags:
+      - { name: twig.extension }
+
   ss6.twig.var_dumper_extension:
     class: SS6\ShopBundle\Twig\VarDumperExtension
     tags:

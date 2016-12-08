@@ -11,10 +11,13 @@
 			<div class="contact-us">
 				<span class="contact-us__phone">
 					<i class="svg svg-phone"></i>
-					777 123 456
+					{{ getShopInfoPhoneNumber() }}
 				</span>
 				<span class="contact-us__days">
-					(po-pá, 10:00 - 16:00)
+					{{ getShopInfoPhoneHours() }}
+				</span>
+				<span class="contact-us__email">
+					{{ getShopInfoEmail() }}
 				</span>
 			</div>
 		</div>
@@ -28,7 +31,7 @@
 			</span>
 
 			<span class="btn-tap">
-				<a href="tel:777123456" class="btn-tap__in">
+				<a href="tel:{{ getShopInfoPhoneNumber() }}" class="btn-tap__in">
 					<i class="svg svg-phone"></i>
 				</a>
 			</span>

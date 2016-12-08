@@ -1,0 +1,28 @@
+{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+
+{% block title %}- {{ 'Informace o provozovateli'|trans }}{% endblock %}
+{% block h1 %}{{ 'Informace o provozovateli'|trans }}{% endblock %}
+
+{% block main_content %}
+
+	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+
+	{{ form_start(form) }}
+		<div class="form-group">
+			<div class="form-group__title">
+				{{ 'Zveřejněné údaje'|trans }}
+			</div>
+			{{ form_row(form.phoneNumber, { label: 'Tel. číslo'|trans }) }}
+			{{ form_row(form.email, { label: 'Email'|trans }) }}
+			{{ form_row(form.phoneHours, { label: 'Dostupnost telefonu'|trans }) }}
+		</div>
+
+		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% block fixed_bar_content %}
+				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{% endblock %}
+		{% endembed %}
+
+	{{ form_end(form) }}
+
+{% endblock %}
