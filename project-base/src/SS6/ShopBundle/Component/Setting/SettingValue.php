@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Component\Setting;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use SS6\ShopBundle\Component\DateTimeHelper\DateTimeHelper;
 
 /**
  * @ORM\Table(name="setting_values")
@@ -95,13 +96,7 @@ class SettingValue {
 					return null;
 				}
 
-				$dateTime = DateTime::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
-				if ($dateTime === false) {
-					$message = sprintf('DateTime "%s" is not valid.', var_export($this->value, true));
-					throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
-				}
-
-				return $dateTime;
+				return DateTimeHelper::createFromFormat(self::DATETIME_STORED_FORMAT, $this->value);
 			default:
 				return $this->value;
 		}
