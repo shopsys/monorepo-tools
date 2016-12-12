@@ -47,6 +47,8 @@
 	<property name="path.web.styles.admin" value="${path.web}/assets/admin/styles"/>
 	<property name="path.web.styles.front" value="${path.web}/assets/frontend/styles"/>
 
+	<property name="is-multidomain" value="true" />
+
 	<if>
 		<os family="windows" />
 		<then>
@@ -184,17 +186,25 @@
 	</target>
 
 	<target name="db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures excluding first domain, run ss6:recalculations">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
-			<arg value="--append" />
-			<arg value="--no-interaction" />
-		</exec>
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:recalculations" />
-		</exec>
+		<if>
+			<istrue value="${is-multidomain}" />
+			<then>
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="doctrine:fixtures:load" />
+					<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+					<arg value="--append" />
+					<arg value="--no-interaction" />
+				</exec>
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="ss6:recalculations" />
+				</exec>
+			</then>
+			<else>
+				<echo message="Multidomain demo data creation skipped." />
+			</else>
+		</if>
 	</target>
 
 	<target name="db-fixtures-demo-singledomain" description="Load base and demo data fixtures for first domain, run ss6:recalculations">

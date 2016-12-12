@@ -20,9 +20,6 @@
 	<target name="test-db-demo" depends="test-db-drop,test-db-create,test-db-migrations,test-db-fixtures-demo-singledomain,test-create-domains-data,test-generate-friendly-urls,test-db-fixtures-demo-multidomain,test-replace-domains-urls" description="Rebuild test database and import demo data"/>
 	<target name="test-db-performance" depends="test-db-demo,test-db-fixtures-performance" description="Rebuild test database and import performance demo data"/>
 	<target name="tests" depends="test-db-demo,tests-unit,tests-db,tests-crawler" description="Run unit, database and crawler tests on the new test demo database"/>
-	<target name="tests-crawler" depends="tests-crawler-multidomain" description="Run crawler tests"/>
-	<target name="tests-db" depends="tests-db-multidomain" description="Run database tests"/>
-	<target name="tests-unit" depends="tests-unit-multidomain" description="Run unit tests"/>
 
 	<target name="tests-performance-run" depends="clean,test-db-performance,tests-performance-warmup,tests-performance" description="Run performance tests (clean, test-db-performance, tests-performance-warmup, tests-performance)"/>
 
@@ -472,72 +469,81 @@
 		</exec>
 	</target>
 
-	<target name="tests-crawler-multidomain" description="Run crawler multidomain tests">
-		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Crawler"/>
-			<arg value="--exclude-group"/>
-			<arg value="singledomain"/>
-		</exec>
+	<target name="tests-crawler" description="Run crawler tests">
+		<if>
+			<istrue value="${is-multidomain}" />
+			<then>
+				<exec
+						executable="${path.phpunit.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Crawler"/>
+					<arg value="--exclude-group"/>
+					<arg value="singledomain"/>
+				</exec>
+			</then>
+
+			<else>
+				<exec
+						executable="${path.phpunit.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Crawler"/>
+					<arg value="--exclude-group"/>
+					<arg value="multidomain"/>
+				</exec>
+			</else>
+		</if>
 	</target>
 
-	<target name="tests-crawler-singledomain" description="Run crawler singledomain tests">
-		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Crawler"/>
-			<arg value="--exclude-group"/>
-			<arg value="multidomain"/>
-		</exec>
-	</target>
-
-	<target name="tests-db-multidomain" description="Run database multidomain tests">
-		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Database"/>
-			<arg value="--exclude-group"/>
-			<arg value="singledomain"/>
-		</exec>
-	</target>
-
-	<target name="tests-db-singledomain" description="Run database singledomain tests">
-		<exec
-			executable="${path.phpunit.executable}"
-			logoutput="true"
-			passthru="true"
-			checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Database"/>
-			<arg value="--exclude-group"/>
-			<arg value="multidomain"/>
-		</exec>
+	<target name="tests-db" description="Run database tests">
+		<if>
+			<istrue value="${is-multidomain}" />
+			<then>
+				<exec
+					executable="${path.phpunit.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Database"/>
+					<arg value="--exclude-group"/>
+					<arg value="multidomain"/>
+				</exec>
+			</then>
+			<else>
+				<exec
+					executable="${path.phpunit.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Database"/>
+					<arg value="--exclude-group"/>
+					<arg value="singledomain"/>
+				</exec>
+			</else>
+		</if>
 	</target>
 
 	<target name="tests-performance" description="Run performance tests">
@@ -574,38 +580,42 @@
 		</exec>
 	</target>
 
-	<target name="tests-unit-multidomain" description="Run unit multidomain tests">
-		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Unit"/>
-			<arg value="--exclude-group"/>
-			<arg value="singledomain"/>
-		</exec>
-	</target>
-
-	<target name="tests-unit-singledomain" description="Run unit singledomain tests">
-		<exec
-				executable="${path.phpunit.executable}"
-				logoutput="true"
-				passthru="true"
-				checkreturn="true"
-		>
-			<arg value="--colors=always"/>
-			<arg value="--configuration"/>
-			<arg value="${path.phpunit.configuration}"/>
-			<arg value="--testsuite"/>
-			<arg value="Unit"/>
-			<arg value="--exclude-group"/>
-			<arg value="multidomain"/>
-		</exec>
+	<target name="tests-unit" description="Run unit tests">
+		<if>
+			<istrue value="${is-multidomain}" />
+			<then>
+				<exec
+						executable="${path.phpunit.executable}"
+						logoutput="true"
+						passthru="true"
+						checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Unit"/>
+					<arg value="--exclude-group"/>
+					<arg value="singledomain"/>
+				</exec>
+			</then>
+			<else>
+				<exec
+					executable="${path.phpunit.executable}"
+					logoutput="true"
+					passthru="true"
+					checkreturn="true"
+				>
+					<arg value="--colors=always"/>
+					<arg value="--configuration"/>
+					<arg value="${path.phpunit.configuration}"/>
+					<arg value="--testsuite"/>
+					<arg value="Unit"/>
+					<arg value="--exclude-group"/>
+					<arg value="multidomain"/>
+				</exec>
+			</else>
+		</if>
 	</target>
 
 	<target name="test-create-domains-data" description="Create domains data for new domains in tests database">
@@ -667,19 +677,27 @@
 	</target>
 
 	<target name="test-db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures to test database excluding first domain, run ss6:recalculations">
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="--env=test" />
-			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
-			<arg value="--append" />
-			<arg value="--no-interaction" />
-		</exec>
-		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
-			<arg value="app/console" />
-			<arg value="ss6:recalculations" />
-			<arg value="--env=test" />
-		</exec>
+		<if>
+			<istrue value="${is-multidomain}" />
+			<then>
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="--env=test" />
+					<arg value="doctrine:fixtures:load" />
+					<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+					<arg value="--append" />
+					<arg value="--no-interaction" />
+				</exec>
+				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
+					<arg value="app/console" />
+					<arg value="ss6:recalculations" />
+					<arg value="--env=test" />
+				</exec>
+			</then>
+			<else>
+				<echo message="Multidomain demo data creation skipped." />
+			</else>
+		</if>
 	</target>
 
 	<target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run ss6:recalculations">
