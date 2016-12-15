@@ -42,7 +42,7 @@ class ProductListAdminRepository {
 				Join::WITH,
 				'pmip.product = p.id AND pmip.pricingGroup = :pricingGroupId'
 			)
-			->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
+			->leftJoin('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
 			->setParameters([
 				'locale' => $this->localization->getDefaultLocale(),
 				'pricingGroupId' => $pricingGroupId,
