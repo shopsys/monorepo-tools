@@ -49,6 +49,18 @@ class DateTimeFormatterExtension extends Twig_Extension {
 	}
 
 	/**
+	 * @return array
+	 */
+	public function getFunctions() {
+		return [
+			new \Twig_SimpleFunction(
+				'dateOfCreation',
+				[$this, 'dateOfCreation']
+			),
+		];
+	}
+
+	/**
 	 * @param mixed $dateTime
 	 * @param string|null $locale
 	 * @return string
@@ -111,6 +123,21 @@ class DateTimeFormatterExtension extends Twig_Extension {
 		} else {
 			return new DateTime($value);
 		}
+	}
+
+	/**
+	 * @param int $date
+	 * @return string
+	 */
+	public function dateOfCreation($date) {
+		$startDate = date('Y', strtotime('1-1-' . $date));
+		$endDate = date('Y');
+
+		if ($startDate === $endDate) {
+			return $startDate;
+		}
+
+		return $startDate . ' - ' . $endDate;
 	}
 
 	/**
