@@ -1,8 +1,8 @@
-{% macro list(productDetails) %}
+{% macro list(productDetails, listCssClass) %}
 	{% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 	{% set domain = getDomain() %}
 
-	<ul class="list-products js-product-list">
+	<ul class="list-products js-product-list {{ listCssClass|default('') }}">
 		{% for productDetail in productDetails %}
 			{% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
 

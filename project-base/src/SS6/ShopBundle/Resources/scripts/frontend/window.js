@@ -10,7 +10,6 @@
 	var animationTime = 300;
 	var flexPopupHeightIssueDetectionBoundaryHeight = 45;
 
-
 	var getMainContainer = function() {
 		var $mainContainer = $('#window-main-container');
 		if ($mainContainer.length === 0) {
@@ -30,7 +29,7 @@
 
 	var showOverlay = function () {
 		var $overlay = getOverlay();
-		$('body').append($overlay);
+		$('body').addClass('web--window-activated').append($overlay);
 
 		// timeout 0 to asynchronous run to fix css animation fade
 		setTimeout(function(){
@@ -40,6 +39,7 @@
 
 	var hideOverlay = function () {
 		var $overlay = $('#js-overlay');
+		$('body').removeClass('web--window-activated');
 		$overlay.removeClass('window-popup__overlay--active');
 
 		if ($overlay.length !== 0) {
@@ -67,27 +67,22 @@
 			textContinue: 'Ano',
 			textCancel: 'Ne',
 			urlContinue: '#',
-			wide: false,
-			cssClass: '',
+			cssClass: 'window-popup--standard',
 			cssClassContinue: '',
 			cssClassCancel: '',
 			closeOnBgClick: true,
 			eventClose: function () {},
 			eventContinue: function () {},
-			eventCancel: function () {}
+			eventCancel: function () {},
+			eventOnLoad: function () {}
 		};
-		var options = $.extend(defaults, options);
+		options = $.extend(defaults, options);
 
 		if ($activeWindow !== null) {
 			$activeWindow.trigger('windowFastClose');
 		}
 
-		var $window = $('<div class="window-popup"></div>');
-		if (options.wide) {
-			$window.addClass('window-popup--wide');
-		} else {
-			$window.addClass('window-popup--standard');
-		}
+		var $window = $('<div class="window-popup" id="js-window"></div>');
 		if (options.cssClass !== '') {
 			$window.addClass(options.cssClass);
 		}
@@ -107,12 +102,13 @@
 
 		$window.bind('windowFastClose', function () {
 			$(this).remove();
+			hideOverlay();
 			$activeWindow = null;
 		});
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="' + SS6.translator.trans('Zavřít (Esc)') + '"><i class="svg svg-remove"></i></a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="' + SS6.translator.trans('Zavřít (Esc)') + '"><i class="svg svg-remove-thin"></i></a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -135,9 +131,9 @@
 		}
 
 		if (options.buttonContinue) {
-			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"></a>');
+			var $windowButtonContinue = $('<a href="" class="window-popup__actions__btn window-popup__actions__btn--continue window-button-continue btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonContinue
-				.text(options.textContinue)
+				.append(document.createTextNode(options.textContinue))
 				.addClass(options.cssClassContinue)
 				.attr('href', options.urlContinue)
 				.bind('click.window', options.eventContinue)
@@ -151,9 +147,9 @@
 		}
 
 		if (options.buttonCancel) {
-			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"></a>');
+			var $windowButtonCancel = $('<a href="#" class="window-popup__actions__btn window-popup__actions__btn--cancel window-button-cancel btn"><i class="svg svg-arrow"></i></a>');
 			$windowButtonCancel
-				.text(options.textCancel)
+				.append(document.createTextNode(options.textCancel))
 				.addClass(options.cssClassCancel)
 				.bind('click.windowEventCancel', options.eventCancel)
 				.bind('click.windowEventClose', options.eventClose)
@@ -178,10 +174,15 @@
 			}, 200);
 		});
 
+		/**
+		 * Window with big height is fixed on top of viewport, smaller window is centered in viewport
+		 */
 		function fixVerticalAlign() {
-			if (!options.wide || options.wide && SS6.responsive.isDesktopVersion()) {
+			var windowAndViewportRatioLimitToCenter = 0.9;
+			if ($window.height() / $(window).height() < windowAndViewportRatioLimitToCenter) {
 				moveToCenter();
 			} else {
+				// remove css attribute "top" which is used by function moveToCenter()
 				$window.css({ top: '' });
 			}
 		}
@@ -199,15 +200,15 @@
 				$('html').addClass('is-flex-popup-height-issue-detected');
 			}
 			fixVerticalAlign();
-
 			setTimeout(function(){
 				$window.addClass('window-popup--active');
+				options.eventOnLoad();
 			}, animationTime);
 		}
 
 		function moveToCenter() {
 			var relativeY = $(window).height() / 2 - $window.innerHeight() / 2;
-			var minRelativeY = $(window).height() * 0.1;
+			var minRelativeY = 10;
 
 			if (relativeY < minRelativeY) {
 				relativeY = minRelativeY;
