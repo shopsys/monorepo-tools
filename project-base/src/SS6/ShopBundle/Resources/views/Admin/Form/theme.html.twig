@@ -93,7 +93,7 @@
 	<div class="form-line">
 		<div class="form-line__line form-line__line--no-space">
 			<div class="form-choice">
-				{{ form_widget(form) }}
+				{{ form_widget(form, { inFormChoice: true }) }}
 				{{ form_label(form) }}
 				{{ form_errors(form) }}
 			</div>
@@ -372,8 +372,10 @@
 		{% set class = 'form-tree__item__choice' %}
 	{% elseif inList|default(false) == true %}
 		{% set class = 'form-choice-list__input' %}
-	{% else %}
+	{% elseif inFormChoice|default(false) == true %}
 		{% set class = 'form-choice__input' %}
+	{% else %}
+		{% set class = '' %}
 	{% endif %}
 
 	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ class)|trim}) %}
