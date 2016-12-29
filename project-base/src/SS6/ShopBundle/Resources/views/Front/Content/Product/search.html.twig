@@ -2,7 +2,6 @@
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 {% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
-{% import '@SS6Shop/Front/Content/Category/categoryListMacro.html.twig' as categoryList %}
 
 {% block title %}
 	{{ parent() }}
@@ -16,7 +15,7 @@
 {% block main_content %}
 	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
-	{{ categoryList.list(foundCategories) }}
+	{{ render(controller('SS6ShopBundle:Front/Category:categoryList', {categories: foundCategories})) }}
 
 	<div class="js-product-list-with-filter">
 		{% if paginationResult.results|length > 0 or filterFormSubmited %}

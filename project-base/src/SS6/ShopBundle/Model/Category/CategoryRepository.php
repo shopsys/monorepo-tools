@@ -12,6 +12,7 @@ use SS6\ShopBundle\Component\String\DatabaseSearching;
 use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductCategoryDomain;
+use SS6\ShopBundle\Model\Product\ProductRepository;
 
 class CategoryRepository extends NestedTreeRepository {
 
@@ -23,11 +24,18 @@ class CategoryRepository extends NestedTreeRepository {
 	private $em;
 
 	/**
-	 * @param \Doctrine\ORM\EntityManager $em
+	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
 	 */
-	public function __construct(EntityManager $em) {
+	private $productRepository;
+
+	/**
+	 * @param \Doctrine\ORM\EntityManager $em
+	 * @param \SS6\ShopBundle\Model\Product\ProductRepository
+	 */
+	public function __construct(EntityManager $em, ProductRepository $productRepository) {
 		$this->em = $em;
 		$classMetadata = $this->em->getClassMetadata(Category::class);
+		$this->productRepository = $productRepository;
 		parent::__construct($this->em, $classMetadata);
 	}
 
@@ -315,6 +323,28 @@ class CategoryRepository extends NestedTreeRepository {
 			->setParameter('category', $category);
 
 		return $queryBuilder->getQuery()->execute();
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
+	 */
+	public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
+		$queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
+
+		$queryBuilder->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
+			'pcd.product = p
+			 AND pcd.category = :category
+			 AND pcd.domainId = :domainId'
+		)
+		->select('COUNT(p)')
+		->resetDQLPart('orderBy');
+
+		$queryBuilder->setParameter('category', $category);
+		$queryBuilder->setParameter('domainId', $domainId);
+
+		return $queryBuilder->getQuery()->getSingleScalarResult();
 	}
 
 	/**

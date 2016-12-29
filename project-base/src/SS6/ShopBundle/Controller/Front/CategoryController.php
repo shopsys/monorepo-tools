@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Controller\FrontBaseController;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Model\Category\CategoryFacade;
 use SS6\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
+use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController {
@@ -31,16 +32,23 @@ class CategoryController extends FrontBaseController {
 	 */
 	private $topCategoryFacade;
 
+	/**
+	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 */
+	private $currentCustomer;
+
 	public function __construct(
 		Domain $domain,
 		CategoryFacade $categoryFacade,
 		CurrentCategoryResolver $currentCategoryResolver,
-		TopCategoryFacade $topCategoryFacade
+		TopCategoryFacade $topCategoryFacade,
+		CurrentCustomer $currentCustomer
 	) {
 		$this->domain = $domain;
 		$this->categoryFacade = $categoryFacade;
 		$this->currentCategoryResolver = $currentCategoryResolver;
 		$this->topCategoryFacade = $topCategoryFacade;
+		$this->currentCustomer = $currentCustomer;
 	}
 
 	/**
@@ -92,6 +100,25 @@ class CategoryController extends FrontBaseController {
 	public function topAction() {
 		return $this->render('@SS6Shop/Front/Content/Category/top.html.twig', [
 			'categories' => $this->topCategoryFacade->getCategoriesForAll($this->domain->getId()),
+		]);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 */
+	public function categoryListAction(array $categories) {
+		$pricingGroup = $this->currentCustomer->getPricingGroup();
+		$domainId = $this->domain->getId();
+		$countOfProductsByCategoryId = [];
+
+		foreach ($categories as $category) {
+			$countOfProductsByCategoryId[$category->getId()] = $this->categoryFacade
+				->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+		}
+
+		return $this->render('@SS6Shop/Front/Content/Category/categoryList.html.twig', [
+			'categories' => $categories,
+			'countOfProductsByCategoryId' => $countOfProductsByCategoryId,
 		]);
 	}
 
