@@ -106,7 +106,7 @@ class UserFormType extends AbstractType {
 				'choices_as_values' => true,
 				'choice_label' => 'name',
 				'choice_value' => 'id',
-				'group_by' => 'domainId',
+				'group_by' => $this->scenario === CustomerFormType::SCENARIO_CREATE ? 'domainId' : null,
 			]);
 	}
 
