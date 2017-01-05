@@ -51,6 +51,13 @@
 	],
 	"require": {
 		"php": "^5.6 || ^7.0",
+		"ext-curl": "*",
+		"ext-gd": "*",
+		"ext-intl": "*",
+		"ext-mbstring": "*",
+		"ext-mcrypt": "*",
+		"ext-pdo": "*",
+		"ext-xml": "*",
 		"arvenil/ninja-mutex": "0.4.1",
 		"bmatzner/jquery-bundle": "1.11.1",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
@@ -92,6 +99,8 @@
 		"vasek-purchart/console-errors-bundle": "1.0"
 	},
 	"require-dev": {
+		"ext-pgsql": "*",
+		"ext-zip": "*",
 		"codeception/codeception": "2.2.3",
 		"shopsys/coding-standards": "1.2.2",
 		"shopsys/phpstorm-inspect": "1.0.4",
