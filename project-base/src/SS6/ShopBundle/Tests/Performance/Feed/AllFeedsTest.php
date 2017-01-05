@@ -19,7 +19,7 @@ class AllFeedsTest extends FunctionalTestCase {
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param int $maxDuration
-	 * @dataProvider getFeedGenerationData
+	 * @dataProvider getAllFeedGenerationData
 	 */
 	public function testFeedGeneration(FeedConfig $feedConfig, DomainConfig $domainConfig, $maxDuration) {
 		$feedFacade = $this->getContainer()->get(FeedFacade::class);
@@ -48,19 +48,38 @@ class AllFeedsTest extends FunctionalTestCase {
 	/**
 	 * @return array[]
 	 */
-	public function getFeedGenerationData() {
+	public function getAllFeedGenerationData() {
 		$feedConfigFacade = $this->getContainer()->get(FeedConfigFacade::class);
 		/* @var $feedConfigFacade \SS6\ShopBundle\Model\Feed\FeedConfigFacade */
 		$domain = $this->getContainer()->get(Domain::class);
 		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
 
+		$feedGenerationData = $this->getFeedGenerationData(
+			$feedConfigFacade->getFeedConfigs(),
+			$domain->getAll(),
+			self::MAX_DURATION_FEED_SECONDS
+		);
+		$deliveryFeedGenerationData = $this->getFeedGenerationData(
+			$feedConfigFacade->getDeliveryFeedConfigs(),
+			$domain->getAll(),
+			self::MAX_DURATION_DELIVERY_FEED_SECONDS
+		);
+
+		return array_merge($feedGenerationData, $deliveryFeedGenerationData);
+	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig[] $feedConfigs
+	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param int $maxDuration
+	 * @return array[]
+	 */
+	private function getFeedGenerationData(array $feedConfigs, array $domainConfigs, $maxDuration) {
 		$feedGenerationData = [];
-		foreach ($domain->getAll() as $domainConfig) {
-			foreach ($feedConfigFacade->getFeedConfigs() as $feedConfig) {
-				$feedGenerationData[] = [$feedConfig, $domainConfig, self::MAX_DURATION_FEED_SECONDS];
-			}
-			foreach ($feedConfigFacade->getDeliveryFeedConfigs() as $deliveryFeedConfig) {
-				$feedGenerationData[] = [$deliveryFeedConfig, $domainConfig, self::MAX_DURATION_DELIVERY_FEED_SECONDS];
+		foreach ($domainConfigs as $domainConfig) {
+			foreach ($feedConfigs as $feedConfig) {
+				$dataSetName = sprintf('feed "%s" on domain with ID %d', $feedConfig->getFeedName(), $domainConfig->getId());
+				$feedGenerationData[$dataSetName] = [$feedConfig, $domainConfig, $maxDuration];
 			}
 		}
 
