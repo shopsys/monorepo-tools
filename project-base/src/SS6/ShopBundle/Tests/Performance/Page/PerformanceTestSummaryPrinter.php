@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance;
+namespace SS6\ShopBundle\Tests\Performance\Page;
 
-use SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier;
+use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class PerformanceTestSummaryPrinter {
 
 	/**
-	 * @var \SS6\ShopBundle\Tests\Performance\PerformanceTestSampleQualifier
+	 * @var \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier
 	 */
 	private $performanceTestSampleQualifier;
 
@@ -17,7 +17,7 @@ class PerformanceTestSummaryPrinter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
+	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
 	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
 	 */
 	public function printSummary(
@@ -51,7 +51,7 @@ class PerformanceTestSummaryPrinter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample $performanceTestSample
+	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample $performanceTestSample
 	 * @param \Symfony\Component\Console\Output\ConsoleOutput $consoleOutput
 	 */
 	private function printSample(

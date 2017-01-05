@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Tests\Performance;
+namespace SS6\ShopBundle\Tests\Unit\Tests\Performance\Page;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Tests\Performance\PerformanceResultsCsvExporter;
-use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
+use SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
+use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 /**
  * @UglyTest
@@ -57,7 +57,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[]
+	 * @return \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]
 	 */
 	private function getPerformanceTestSamples() {
 		$performanceTestSamples = [];

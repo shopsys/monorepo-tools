@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance;
+namespace SS6\ShopBundle\Tests\Performance\Page;
 
 class PerformanceResultsCsvExporter {
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
+	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
 	 * @param string $outputFilename
 	 */
 	public function exportJmeterCsvReport(

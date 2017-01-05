@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance;
+namespace SS6\ShopBundle\Tests\Performance\Page;
 
-use SS6\ShopBundle\Tests\Performance\PerformanceTestSample;
+use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceTestSampleQualifier {
 
@@ -45,7 +45,7 @@ class PerformanceTestSampleQualifier {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample $performanceTestSample
+	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample $performanceTestSample
 	 * @return int
 	 */
 	public function getSampleStatus(PerformanceTestSample $performanceTestSample) {
@@ -67,7 +67,7 @@ class PerformanceTestSampleQualifier {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\PerformanceTestSample[] $performanceTestSamples
+	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
 	 * @return int
 	 */
 	public function getOverallStatus(array $performanceTestSamples) {
