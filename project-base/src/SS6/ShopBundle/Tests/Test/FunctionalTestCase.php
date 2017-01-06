@@ -30,7 +30,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @param string $username
 	 * @param string $password
 	 * @param array $kernelOptions
-	 * @return \Symfony\Component\HttpKernel\Client
+	 * @return \Symfony\Bundle\FrameworkBundle\Client
 	 */
 	protected function getClient(
 		$createNew = false,

@@ -26,7 +26,7 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 		$container = $this->getContainer();
 
 		$categoryDataFixture = $container->get(CategoryDataFixture::class);
-		/* @var $categoryDataFixture \SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture */
+		/* @var $categoryDataFixture \SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture */
 		$productDataFixture = $container->get(ProductDataFixture::class);
 		/* @var $productDataFixture \SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture */
 		$userDataFixture = $container->get(UserDataFixture::class);

@@ -20,7 +20,7 @@ class CurrentDomainRouter implements RouterInterface {
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
+	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -69,7 +69,7 @@ class CurrentDomainRouter implements RouterInterface {
 	}
 
 	/**
-	 * @return \Symfony\Bundle\FrameworkBundle\Routing\Router
+	 * @return \SS6\ShopBundle\Component\Router\DomainRouter
 	 */
 	private function getDomainRouter() {
 		return $this->domainRouterFactory->getRouter($this->domain->getid());

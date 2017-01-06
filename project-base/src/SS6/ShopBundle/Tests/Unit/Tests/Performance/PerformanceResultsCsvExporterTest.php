@@ -96,6 +96,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $filename
 	 * @param int $lineIndex
+	 * @return array
 	 */
 	private function getCsvLine($filename, $lineIndex) {
 		$handle = fopen($filename, 'r');
