@@ -41,11 +41,8 @@ class AllFeedsTest extends FunctionalTestCase {
 			)
 		);
 
-		$startTime = microtime(true);
-		$this->generateFeed($feedConfig, $domainConfig);
-		$endTime = microtime(true);
+		$duration = $this->generateFeed($feedConfig, $domainConfig);
 
-		$duration = $endTime - $startTime;
 		$this->assertFeedGenerationDuration($maxDuration, $duration, $consoleOutput);
 	}
 
@@ -118,6 +115,7 @@ class AllFeedsTest extends FunctionalTestCase {
 	/**
 	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return float
 	 */
 	private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig) {
 		$client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
@@ -134,7 +132,11 @@ class AllFeedsTest extends FunctionalTestCase {
 		$uri = $router->generate('admin_feed_generate', $feedGenerationParameters, RouterInterface::RELATIVE_PATH);
 
 		$clientEntityManager->beginTransaction();
+
+		$startTime = microtime(true);
 		$client->request('GET', $uri);
+		$endTime = microtime(true);
+
 		$clientEntityManager->rollback();
 
 		$expectedStatusCode = 302;
@@ -142,6 +144,8 @@ class AllFeedsTest extends FunctionalTestCase {
 		if ($statusCode !== $expectedStatusCode) {
 			$this->fail(sprintf('Admin request on %s failed with status code %d, expected %d.', $uri, $statusCode, $expectedStatusCode));
 		}
+
+		return $endTime - $startTime;
 	}
 
 }
