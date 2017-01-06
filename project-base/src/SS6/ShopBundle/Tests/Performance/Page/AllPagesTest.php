@@ -193,19 +193,19 @@ class AllPagesTest extends FunctionalTestCase {
 		} else {
 			$client = $this->getClient(true);
 		}
-		$em = $client->getContainer()->get(EntityManager::class);
-		/* @var $em \Doctrine\ORM\EntityManager */
+		$clientEntityManager = $client->getContainer()->get(EntityManager::class);
+		/* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
 		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 		$urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
-		$em->beginTransaction();
+		$clientEntityManager->beginTransaction();
 
 		$startTime = microtime(true);
 		$client->request('GET', $urlWithCsrfToken);
 		$endTime = microtime(true);
 
-		$em->rollback();
+		$clientEntityManager->rollback();
 
 		$statusCode = $client->getResponse()->getStatusCode();
 
