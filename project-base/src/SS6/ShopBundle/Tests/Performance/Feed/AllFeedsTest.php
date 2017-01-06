@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Performance\Feed;
 
+use Doctrine\ORM\EntityManager;
 use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
@@ -119,9 +120,12 @@ class AllFeedsTest extends FunctionalTestCase {
 	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
 	private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig) {
+		$client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
+
 		$router = $this->getContainer()->get(CurrentDomainRouter::class);
 		/* @var $router \SS6\ShopBundle\Component\Router\CurrentDomainRouter */
-		$client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
+		$clientEntityManager = $client->getContainer()->get(EntityManager::class);
+		/* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 
 		$feedGenerationParameters = [
 			'feedName' => $feedConfig->getFeedName(),
@@ -129,7 +133,9 @@ class AllFeedsTest extends FunctionalTestCase {
 		];
 		$uri = $router->generate('admin_feed_generate', $feedGenerationParameters, RouterInterface::RELATIVE_PATH);
 
+		$clientEntityManager->beginTransaction();
 		$client->request('GET', $uri);
+		$clientEntityManager->rollback();
 
 		$expectedStatusCode = 302;
 		$statusCode = $client->getResponse()->getStatusCode();
