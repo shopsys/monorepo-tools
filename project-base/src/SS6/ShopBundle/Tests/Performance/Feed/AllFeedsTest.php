@@ -15,6 +15,7 @@ class AllFeedsTest extends FunctionalTestCase {
 
 	const MAX_DURATION_FEED_SECONDS = 180;
 	const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
+	const SUSPICIOUSLY_LOW_DURATION_SECONDS = 5;
 
 	const ADMIN_USERNAME = 'admin';
 	const ADMIN_PASSWORD = 'admin123';
@@ -96,7 +97,12 @@ class AllFeedsTest extends FunctionalTestCase {
 	private function assertFeedGenerationDuration($maxDuration, $realDuration, ConsoleOutput $consoleOutput) {
 		$this->addToAssertionCount(1);
 
-		if ($realDuration <= $maxDuration) {
+		if ($realDuration < self::SUSPICIOUSLY_LOW_DURATION_SECONDS) {
+			$consoleOutput->writeln(
+				sprintf('<fg=yellow>Feed generated in %.2F s, which is suspiciously fast and should be checked.</fg=yellow>', $realDuration)
+			);
+			$this->fail(sprintf('Feed was generated faster than in %d s, which is suspicious and should be checked.', $maxDuration));
+		} elseif ($realDuration <= $maxDuration) {
 			$consoleOutput->writeln(
 				sprintf('<fg=green>Feed generated in %.2F s.</fg=green>', $realDuration)
 			);
