@@ -105,15 +105,18 @@ class CategoryController extends FrontBaseController {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param bool $showProductsCountByCategory
 	 */
-	public function categoryListAction(array $categories) {
+	public function categoryListAction(array $categories, $showProductsCountByCategory = true) {
 		$pricingGroup = $this->currentCustomer->getPricingGroup();
 		$domainId = $this->domain->getId();
 		$countOfProductsByCategoryId = [];
 
-		foreach ($categories as $category) {
-			$countOfProductsByCategoryId[$category->getId()] = $this->categoryFacade
-				->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+		if ($showProductsCountByCategory === true) {
+			foreach ($categories as $category) {
+				$countOfProductsByCategoryId[$category->getId()] = $this->categoryFacade
+					->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+			}
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Category/categoryList.html.twig', [

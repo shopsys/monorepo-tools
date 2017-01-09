@@ -7,7 +7,10 @@
 						{{ image(category, { alt: category.name }) }}
 					</span>
 					<h3 class="list-categories__item__title">
-						{{ category.name }} ({{ countOfProductsByCategoryId[category.id] }})
+						{{ category.name }}
+						{% if countOfProductsByCategoryId is not empty %}
+							({{ countOfProductsByCategoryId[category.id] }})
+						{% endif %}
 					</h3>
 				</a>
 			</li>
