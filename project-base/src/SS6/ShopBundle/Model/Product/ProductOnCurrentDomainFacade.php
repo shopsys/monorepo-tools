@@ -4,6 +4,7 @@ namespace SS6\ShopBundle\Model\Product;
 
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use SS6\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Customer\CurrentCustomer;
 use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
@@ -250,17 +251,13 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param int $categoryId
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @param \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountDataInCategory(
 		$categoryId,
-		array $brandFilterChoices,
-		array $flagFilterChoices,
-		array $parameterFilterChoices,
+		ProductFilterFormType $productFilterFormType,
 		ProductFilterData $productFilterData
 	) {
 		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
@@ -272,9 +269,7 @@ class ProductOnCurrentDomainFacade {
 		return $this->productFilterCountRepository->getProductFilterCountData(
 			$productsQueryBuilder,
 			$this->domain->getLocale(),
-			$brandFilterChoices,
-			$flagFilterChoices,
-			$parameterFilterChoices,
+			$productFilterFormType,
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);
@@ -282,15 +277,13 @@ class ProductOnCurrentDomainFacade {
 
 	/**
 	 * @param string|null $searchText
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
 	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountDataForSearch(
 		$searchText,
-		array $brandFilterChoices,
-		array $flagFilterChoices,
+		ProductFilterFormType $productFilterFormType,
 		ProductFilterData $productFilterData
 	) {
 		$productsQueryBuilder = $this->productRepository->getListableBySearchTextQueryBuilder(
@@ -303,9 +296,7 @@ class ProductOnCurrentDomainFacade {
 		return $this->productFilterCountRepository->getProductFilterCountData(
 			$productsQueryBuilder,
 			$this->domain->getLocale(),
-			$brandFilterChoices,
-			$flagFilterChoices,
-			[],
+			$productFilterFormType,
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);
