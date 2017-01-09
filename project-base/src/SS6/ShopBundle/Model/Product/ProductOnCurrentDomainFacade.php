@@ -263,9 +263,14 @@ class ProductOnCurrentDomainFacade {
 		array $parameterFilterChoices,
 		ProductFilterData $productFilterData
 	) {
-		return $this->productFilterCountRepository->getProductFilterCountDataInCategory(
-			$this->categoryRepository->getById($categoryId),
+		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
 			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup(),
+			$this->categoryRepository->getById($categoryId)
+		);
+
+		return $this->productFilterCountRepository->getProductFilterCountData(
+			$productsQueryBuilder,
 			$this->domain->getLocale(),
 			$brandFilterChoices,
 			$flagFilterChoices,
@@ -288,12 +293,19 @@ class ProductOnCurrentDomainFacade {
 		array $flagFilterChoices,
 		ProductFilterData $productFilterData
 	) {
-		return $this->productFilterCountRepository->getProductFilterCountDataForSearch(
-			$searchText,
+		$productsQueryBuilder = $this->productRepository->getListableBySearchTextQueryBuilder(
 			$this->domain->getId(),
+			$this->currentCustomer->getPricingGroup(),
+			$this->domain->getLocale(),
+			$searchText
+		);
+
+		return $this->productFilterCountRepository->getProductFilterCountData(
+			$productsQueryBuilder,
 			$this->domain->getLocale(),
 			$brandFilterChoices,
 			$flagFilterChoices,
+			[],
 			$productFilterData,
 			$this->currentCustomer->getPricingGroup()
 		);

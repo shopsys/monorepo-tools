@@ -5,7 +5,6 @@ namespace SS6\ShopBundle\Model\Product\Filter;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData;
 use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
@@ -42,8 +41,7 @@ class ProductFilterCountRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param int $domainId
+	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param string $locale
 	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
 	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
@@ -52,9 +50,8 @@ class ProductFilterCountRepository {
 	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
-	public function getProductFilterCountDataInCategory(
-		Category $category,
-		$domainId,
+	public function getProductFilterCountData(
+		QueryBuilder $productsQueryBuilder,
 		$locale,
 		array $brandFilterChoices,
 		array $flagFilterChoices,
@@ -62,12 +59,6 @@ class ProductFilterCountRepository {
 		ProductFilterData $productFilterData,
 		PricingGroup $pricingGroup
 	) {
-		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
-			$domainId,
-			$pricingGroup,
-			$category
-		);
-
 		$productFilterCountData = new ProductFilterCountData();
 		$productFilterCountData->countInStock = $this->getCountInStock(
 			$productsQueryBuilder,
@@ -92,54 +83,6 @@ class ProductFilterCountRepository {
 			$productFilterData,
 			$pricingGroup,
 			$locale
-		);
-
-		return $productFilterCountData;
-	}
-
-	/**
-	 * @param string|null $searchText
-	 * @param int $domainId
-	 * @param string $locale
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
-	 */
-	public function getProductFilterCountDataForSearch(
-		$searchText,
-		$domainId,
-		$locale,
-		array $brandFilterChoices,
-		array $flagFilterChoices,
-		ProductFilterData $productFilterData,
-		PricingGroup $pricingGroup
-	) {
-		$productsQueryBuilder = $this->productRepository->getListableBySearchTextQueryBuilder(
-			$domainId,
-			$pricingGroup,
-			$locale,
-			$searchText
-		);
-
-		$productFilterCountData = new ProductFilterCountData();
-		$productFilterCountData->countInStock = $this->getCountInStock(
-			$productsQueryBuilder,
-			$productFilterData,
-			$pricingGroup
-		);
-		$productFilterCountData->countByBrandId = $this->getCountByBrandId(
-			$productsQueryBuilder,
-			$brandFilterChoices,
-			$productFilterData,
-			$pricingGroup
-		);
-		$productFilterCountData->countByFlagId = $this->getCountByFlagId(
-			$productsQueryBuilder,
-			$flagFilterChoices,
-			$productFilterData,
-			$pricingGroup
 		);
 
 		return $productFilterCountData;
