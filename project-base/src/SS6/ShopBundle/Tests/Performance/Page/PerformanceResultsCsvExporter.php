@@ -2,7 +2,18 @@
 
 namespace SS6\ShopBundle\Tests\Performance\Page;
 
+use SS6\ShopBundle\Tests\Performance\JmeterCsvReporter;
+
 class PerformanceResultsCsvExporter {
+
+	/**
+	 * @var \SS6\ShopBundle\Tests\Performance\JmeterCsvReporter
+	 */
+	private $jmeterCsvReporter;
+
+	public function __construct(JmeterCsvReporter $jmeterCsvReporter) {
+		$this->jmeterCsvReporter = $jmeterCsvReporter;
+	}
 
 	/**
 	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
@@ -14,26 +25,18 @@ class PerformanceResultsCsvExporter {
 	) {
 		$handle = fopen($outputFilename, 'w');
 
-		fputcsv($handle, [
-			'timestamp',
-			'elapsed',
-			'label',
-			'responseCode',
-			'success',
-			'URL',
-			'Variables',
-		]);
+		$this->jmeterCsvReporter->writeHeader($handle);
 
 		foreach ($performanceTestSamples as $performanceTestSample) {
-			fputcsv($handle, [
-				time(),
-				round($performanceTestSample->getDuration()),
+			$this->jmeterCsvReporter->writeLine(
+				$handle,
+				$performanceTestSample->getDuration(),
 				$performanceTestSample->getRouteName(),
 				$performanceTestSample->getStatusCode(),
-				$performanceTestSample->isSuccessful() ? 'true' : 'false',
-				'/' . $performanceTestSample->getUrl(),
-				$performanceTestSample->getQueryCount(),
-			]);
+				$performanceTestSample->isSuccessful(),
+				$performanceTestSample->getUrl(),
+				$performanceTestSample->getQueryCount()
+			);
 		}
 
 		fclose($handle);
