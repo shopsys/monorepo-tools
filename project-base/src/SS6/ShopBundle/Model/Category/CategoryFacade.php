@@ -7,6 +7,7 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Image\ImageFacade;
 use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use SS6\ShopBundle\Model\Category\Category;
 use SS6\ShopBundle\Model\Category\CategoryData;
 use SS6\ShopBundle\Model\Category\CategoryRepository;
 use SS6\ShopBundle\Model\Category\CategoryService;
@@ -381,4 +382,14 @@ class CategoryFacade {
 
 		return $category;
 	}
+
+	/**
+	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param int $domainId
+	 */
+	public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
+		return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+	}
+
 }

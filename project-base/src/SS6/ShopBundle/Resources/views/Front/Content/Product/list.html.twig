@@ -2,7 +2,6 @@
 {% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
 {% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
 {% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
-{% import '@SS6Shop/Front/Content/Category/categoryListMacro.html.twig' as categoryList %}
 
 {% block meta_robots %}
 	{{ paginator.metaRobots(paginationResult) }}
@@ -17,7 +16,9 @@
 		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
 		<h1>{{ category.name }}</h1>
 
-		{{ categoryList.list(visibleChildren, 'Seznam podkategorií'|trans) }}
+		<h2>{{ 'Seznam podkategorií'|trans }}</h2>
+
+		{{ render(controller('SS6ShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
 
 		{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
