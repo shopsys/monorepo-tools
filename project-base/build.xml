@@ -337,6 +337,15 @@
 			passthru="true"
 			checkreturn="true"
 		>
+			<arg value="prune"/>
+		</exec>
+
+		<exec
+			executable="${path.npm.executable}"
+			logoutput="true"
+			passthru="true"
+			checkreturn="true"
+		>
 			<arg value="install"/>
 		</exec>
 	</target>
