@@ -138,7 +138,11 @@ class CategoryRepository extends NestedTreeRepository {
 	 * @return \SS6\ShopBundle\Model\Category\Category|null
 	 */
 	public function findById($categoryId) {
-		return $this->getCategoryRepository()->find($categoryId);
+		return $this->getAllQueryBuilder()
+			->andWhere('c.id = :categoryId')
+			->setParameter('categoryId', $categoryId)
+			->getQuery()
+			->getOneOrNullResult();
 	}
 
 	/**
