@@ -125,7 +125,7 @@ class OrderStatusFacade {
 	 * @return bool
 	 */
 	public function isOrderStatusUsed(OrderStatus $orderStatus) {
-		return $this->orderRepository->getOrdersCountByStatus($orderStatus);
+		return $this->orderRepository->isOrderStatusUsed($orderStatus);
 	}
 
 	/**

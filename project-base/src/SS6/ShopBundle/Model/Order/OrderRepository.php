@@ -92,16 +92,18 @@ class OrderRepository {
 
 	/**
 	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
-	 * @return int
+	 * @return bool
 	 */
-	public function getOrdersCountByStatus(OrderStatus $orderStatus) {
-		$query = $this->em->createQuery('
-			SELECT COUNT(o)
-			FROM ' . Order::class . ' o
-			WHERE o.status = :status')
+	public function isOrderStatusUsed(OrderStatus $orderStatus) {
+		$queryBuilder = $this->em->createQueryBuilder();
+		$queryBuilder
+			->select('o.id')
+			->from(Order::class, 'o')
+			->setMaxResults(1)
+			->where('o.status = :status')
 			->setParameter('status', $orderStatus->getId());
 
-		return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR);
+		return $queryBuilder->getQuery()->getOneOrNullResult(AbstractQuery::HYDRATE_SCALAR) !== null;
 	}
 
 	/**
