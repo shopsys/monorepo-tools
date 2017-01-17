@@ -85,21 +85,17 @@ class JavascriptCompilerService {
 	}
 
 	/**
-	 * @param array $javascripts
+	 * @param string[] $javascripts
+	 * @return string[] URLs of compiled JS files
 	 */
 	public function generateCompiledFiles(array $javascripts) {
+		$this->javascriptLinks = [];
+
 		foreach ($javascripts as $javascript) {
 			$this->process($javascript);
 		}
 
-		$this->javascriptLinks = array_unique($this->javascriptLinks);
-	}
-
-	/**
-	 * @return string[]
-	 */
-	public function getGeneratedLinks() {
-		return $this->javascriptLinks;
+		return array_unique($this->javascriptLinks);
 	}
 
 	/**

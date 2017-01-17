@@ -34,8 +34,7 @@ class JavascriptExtension extends Twig_Extension {
 	public function renderJavascripts($javascripts) {
 		$javascriptsArray = Condition::mixedToArray($javascripts);
 
-		$this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
-		$javascriptLinks = $this->javascriptCompilerService->getGeneratedLinks();
+		$javascriptLinks = $this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
 
 		return $this->getHtmlJavascriptImports($javascriptLinks);
 	}
