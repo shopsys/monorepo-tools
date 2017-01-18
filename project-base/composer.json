@@ -59,7 +59,7 @@
 		"ext-pdo": "*",
 		"ext-xml": "*",
 		"arvenil/ninja-mutex": "0.4.1",
-		"bmatzner/jquery-bundle": "1.11.1",
+		"bmatzner/jquery-bundle": "2.2.2",
 		"bmatzner/jquery-ui-bundle": "1.10.3",
 		"commerceguys/intl": "0.7",
 		"craue/formflow-bundle": "dev-master#d14fcb1",

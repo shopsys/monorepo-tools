@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "53b2130b8e1c4dd9a77db8bcf841f0e4",
-    "content-hash": "bb5e34c8281ec1bf57bd0233d46c9b20",
+    "hash": "99e6dc1972dd2f59976a7b95185ae691",
+    "content-hash": "6f5826d7d421c230b931b99dd936c8f3",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
@@ -111,17 +111,17 @@
         },
         {
             "name": "bmatzner/jquery-bundle",
-            "version": "1.11.1",
+            "version": "2.2.2",
             "target-dir": "Bmatzner/JQueryBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmatzner/BmatznerJQueryBundle.git",
-                "reference": "0987164e37b6674ae715b5b4661863987549158c"
+                "reference": "d3287924e1753b3af24640fe9223070cceb575e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/0987164e37b6674ae715b5b4661863987549158c",
-                "reference": "0987164e37b6674ae715b5b4661863987549158c",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerJQueryBundle/zipball/d3287924e1753b3af24640fe9223070cceb575e0",
+                "reference": "d3287924e1753b3af24640fe9223070cceb575e0",
                 "shasum": ""
             },
             "require": {
@@ -152,7 +152,7 @@
                 "jquery",
                 "symfony"
             ],
-            "time": "2014-05-05 16:17:29"
+            "time": "2016-03-26 19:51:09"
         },
         {
             "name": "bmatzner/jquery-ui-bundle",
