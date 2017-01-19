@@ -330,6 +330,14 @@
 {% endblock %}
 
 {% block grid_value_cell_type_boolean %}
+	{% if value %}
+		{{ 'Ano'|trans }}
+	{% else %}
+		{{ 'Ne'|trans }}
+	{% endif %}
+{% endblock %}
+
+{% block grid_value_cell_id_visible %}
 	<span
 		class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
 		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"

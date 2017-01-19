@@ -21,9 +21,5 @@
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}
-	{% if row.a.visible %}
-		{{ 'Ano'|trans }}
-	{% else %}
-		{{ 'Ne'|trans }}
-	{% endif %}
+	{{ block('grid_value_cell_type_boolean') }}
 {% endblock %}
