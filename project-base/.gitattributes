@@ -1,24 +1,26 @@
-*	-text
+# all files are handled as non-text by default so that no end-of-line normalization is done
+* -text
 
-*.bat	text
-*.css	text
-*.inc	text
-*.ini	text
-*.js	text
-*.json	text
-*.php	text
-*.php3	text
-*.php4	text
-*.php5	text
-*.properties	text
-*.sh	text
-*.tpl	text
-*.twig	text
-*.xml	text
-*.xsd	text
-*.xsl	text
-*.xslt	text
-*.yml	text
+# but the following file extensions will be handled as "text" with line endings normalized to LF
+*.bat text eol=lf
+*.css text eol=lf
+*.inc text eol=lf
+*.ini text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.php text eol=lf
+*.php3 text eol=lf
+*.php4 text eol=lf
+*.php5 text eol=lf
+*.php7 text eol=lf
+*.properties text eol=lf
+*.sh text eol=lf
+*.tpl text eol=lf
+*.twig text eol=lf
+*.xml text eol=lf
+*.xsd text eol=lf
+*.xsl text eol=lf
+*.xslt text eol=lf
+*.yml text eol=lf
 
-composer.json eol=lf
-composer.lock text
+composer.lock text eol=lf
