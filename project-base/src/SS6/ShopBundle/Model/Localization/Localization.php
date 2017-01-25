@@ -60,7 +60,7 @@ class Localization {
 	 * @return string
 	 */
 	public function getDefaultLocale() {
-		return $this->domain->getDomainConfigById(1)->getLocale();
+		return $this->domain->getDomainConfigById(Domain::MAIN_ADMIN_DOMAIN_ID)->getLocale();
 	}
 
 	/**
