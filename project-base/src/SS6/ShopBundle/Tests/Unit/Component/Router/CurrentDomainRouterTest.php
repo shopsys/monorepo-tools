@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelegateRouter() {
-		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'en', 'stylesDirectory');
+		$domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en', 'stylesDirectory');
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 		$domain = new Domain([$domainConfigs], $settingMock);
 		$domain->switchDomainById(1);

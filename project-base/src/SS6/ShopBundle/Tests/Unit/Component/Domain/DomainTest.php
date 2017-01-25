@@ -15,8 +15,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'design1', 'stylesDirectory'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'stylesDirectory'),
 		];
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 
@@ -27,8 +27,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testSwitchDomainByRequest() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'stylesDirectory'),
 		];
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 
@@ -46,13 +46,12 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 		$this->assertSame(1, $domain->getId());
 		$this->assertSame('example.com', $domain->getName());
 		$this->assertSame('cs', $domain->getLocale());
-		$this->assertSame('design1', $domain->getTemplatesDirectory());
 	}
 
 	public function testGetAllIncludingDomainConfigsWithoutDataCreated() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'stylesDirectory'),
 		];
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 
@@ -62,22 +61,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testGetAll() {
-		$domainConfigWithDataCreated = new DomainConfig(
-			1,
-			'http://example.com:8080',
-			'example.com',
-			'cs',
-			'design1',
-			'stylesDirectory'
-		);
-		$domainConfigWithoutDataCreated = new DomainConfig(
-			2,
-			'http://example.org:8080',
-			'example.org',
-			'en',
-			'design2',
-			'stylesDirectory'
-		);
+		$domainConfigWithDataCreated = new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'stylesDirectory');
+		$domainConfigWithoutDataCreated = new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'stylesDirectory');
 		$domainConfigs = [
 			$domainConfigWithDataCreated,
 			$domainConfigWithoutDataCreated,
@@ -101,8 +86,8 @@ class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetDomainConfigById() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'design1', 'stylesDirectory'),
-			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'design2', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs', 'stylesDirectory'),
+			new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en', 'stylesDirectory'),
 		];
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
 

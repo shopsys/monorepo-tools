@@ -63,13 +63,6 @@ class Domain {
 	}
 
 	/**
-	 * @return string
-	 */
-	public function getTemplatesDirectory() {
-		return $this->getCurrentDomainConfig()->getTemplatesDirectory();
-	}
-
-	/**
 	 * @return bool
 	 */
 	public function isHttps() {

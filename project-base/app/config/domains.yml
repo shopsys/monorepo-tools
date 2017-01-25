@@ -2,10 +2,8 @@ domains:
   - id: 1
     name: shopsys6
     locale: cs
-    templates_directory: cz
 
   - id: 2
     name: 2.shopsys6
     locale: en
-    templates_directory: en
     styles_directory: domain2

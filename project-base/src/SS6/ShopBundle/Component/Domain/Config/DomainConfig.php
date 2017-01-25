@@ -29,11 +29,6 @@ class DomainConfig {
 	/**
 	 * @var string
 	 */
-	private $templatesDirectory;
-
-	/**
-	 * @var string
-	 */
 	private $stylesDirectory;
 
 	/**
@@ -41,15 +36,13 @@ class DomainConfig {
 	 * @param string $url
 	 * @param string $name
 	 * @param string $locale
-	 * @param string $templatesDirectory
 	 * @param $stylesDirectory
 	 */
-	public function __construct($id, $url, $name, $locale, $templatesDirectory, $stylesDirectory) {
+	public function __construct($id, $url, $name, $locale, $stylesDirectory) {
 		$this->id = $id;
 		$this->url = $url;
 		$this->name = $name;
 		$this->locale = $locale;
-		$this->templatesDirectory = $templatesDirectory;
 		$this->stylesDirectory = $stylesDirectory;
 	}
 
@@ -79,13 +72,6 @@ class DomainConfig {
 	 */
 	public function getLocale() {
 		return $this->locale;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getTemplatesDirectory() {
-		return $this->templatesDirectory;
 	}
 
 	/**
