@@ -40,11 +40,17 @@ class MenuLoaderTest extends FunctionalTestCase {
 		$menuLoader = $this->getMenuLoaderWithMockedTranslator();
 		$menu = $menuLoader->loadFromArray($testMenu);
 
+		// There should be 2 regular items (sub-items and settings items should be excluded)
 		$this->assertCount(2, $menu->getRegularItems());
+		// First regular item should have 2 sub-items
 		$this->assertCount(2, $menu->getRegularItems()[0]->getItems());
+		// Settings item should be only one instance of MenuItem class
 		$this->assertInstanceOf(MenuItem::class, $menu->getSettingsItem());
+		// First regular item should be of type regular
 		$this->assertSame(MenuItem::TYPE_REGULAR, $menu->getRegularItems()[0]->getType());
+		// Item labels should be translated
 		$this->assertSame('Item 1 translated', $menu->getRegularItems()[0]->getLabel());
+		// Second regular item should have route of item_3 as the settings item should be skipped
 		$this->assertSame('item_3', $menu->getRegularItems()[1]->getRoute());
 	}
 
