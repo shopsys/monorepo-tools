@@ -60,8 +60,8 @@ class LoginController extends AdminBaseController {
 	public function loginAction(Request $request) {
 		$currentDomainId = $this->domain->getId();
 		if ($currentDomainId !== Domain::MAIN_ADMIN_DOMAIN_ID && !$this->isGranted(Roles::ROLE_ADMIN)) {
-			$firstDomainRouter = $this->domainRouterFactory->getRouter(Domain::MAIN_ADMIN_DOMAIN_ID);
-			$redirectTo = $firstDomainRouter->generate(
+			$mainAdminDomainRouter = $this->domainRouterFactory->getRouter(Domain::MAIN_ADMIN_DOMAIN_ID);
+			$redirectTo = $mainAdminDomainRouter->generate(
 				'admin_login_sso',
 				[
 					self::ORIGINAL_DOMAIN_ID_PARAMETER_NAME => $currentDomainId,
