@@ -81,7 +81,7 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 		$uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
 		$uploadedFileUrlPrefix = '/assets/';
 
-		$domainConfig = new DomainConfig(1, 'http://www.example.com', 'example domain', 'en', 'stylesDirectory');
+		$domainConfig = new DomainConfig(1, 'http://www.example.com', 'example domain', 'en');
 
 		$uploadedFileMock = $this->getMock(UploadedFile::class, ['getFilename', 'getEntityName'], [], '', false);
 		$uploadedFileMock->method('getFilename')->willReturn('dummy.txt');

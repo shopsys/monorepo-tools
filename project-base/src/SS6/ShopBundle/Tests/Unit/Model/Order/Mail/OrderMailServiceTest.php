@@ -111,7 +111,7 @@ class OrderMailServiceTest extends FunctionalTestCase {
 			->disableOriginalConstructor()
 			->getMock();
 
-		$domainConfig = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory');
+		$domainConfig = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs');
 		$domain = new Domain([$domainConfig], $settingMock);
 
 		$orderMailService = new OrderMailService(

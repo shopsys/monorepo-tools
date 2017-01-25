@@ -19,7 +19,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateNewDomainsDataNoNewDomain() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),
 		];
 
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
@@ -52,8 +52,8 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateNewDomainsDataOneNewDomain() {
 		$domainConfigs = [
-			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory'),
-			new DomainConfig(2, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory'),
+			new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),
+			new DomainConfig(2, 'http://example.com:8080', 'example', 'cs'),
 		];
 
 		$settingMock = $this->getMock(Setting::class, [], [], '', false);
@@ -98,8 +98,8 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testCreateNewDomainsDataNewLocale() {
-		$domainConfigWithDataCreated = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs', 'stylesDirectory');
-		$domainConfigWithNewLocale = new DomainConfig(2, 'http://example.com:8080', 'example', 'en', 'stylesDirectory');
+		$domainConfigWithDataCreated = new DomainConfig(1, 'http://example.com:8080', 'example', 'cs');
+		$domainConfigWithNewLocale = new DomainConfig(2, 'http://example.com:8080', 'example', 'en');
 		$domainConfigs = [
 			$domainConfigWithDataCreated,
 			$domainConfigWithNewLocale,

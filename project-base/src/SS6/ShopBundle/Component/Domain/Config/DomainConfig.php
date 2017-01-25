@@ -36,9 +36,9 @@ class DomainConfig {
 	 * @param string $url
 	 * @param string $name
 	 * @param string $locale
-	 * @param $stylesDirectory
+	 * @param string $stylesDirectory
 	 */
-	public function __construct($id, $url, $name, $locale, $stylesDirectory) {
+	public function __construct($id, $url, $name, $locale, $stylesDirectory = self::STYLES_DIRECTORY_DEFAULT) {
 		$this->id = $id;
 		$this->url = $url;
 		$this->name = $name;
