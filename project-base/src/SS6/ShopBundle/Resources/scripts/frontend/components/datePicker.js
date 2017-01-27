@@ -4,9 +4,13 @@
 
 	var datePicker = function ($container) {
 		$container.filterAllNodes('.js-date-picker').each(function() {
-			$(this).datepicker({
-				'dateFormat': SS6.constant('\\SS6\\ShopBundle\\Form\\DatePickerType::FORMAT_JS')
-			});
+			// Loads regional settings for current locale
+			var options = $.datepicker.regional[global.locale] || $.datepicker.regional[''];
+
+			// Date format is fixed so that it is understood by back-end
+			options.dateFormat = SS6.constant('\\SS6\\ShopBundle\\Form\\DatePickerType::FORMAT_JS');
+
+			$(this).datepicker(options);
 		});
 	};
 
