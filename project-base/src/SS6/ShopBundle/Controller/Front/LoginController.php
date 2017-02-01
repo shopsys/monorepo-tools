@@ -30,7 +30,7 @@ class LoginController extends FrontBaseController {
 		try {
 			$this->loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
-			$form->addError(new FormError('Byly zadány neplatné přihlašovací údaje'));
+			$form->addError(new FormError(t('Byly zadány neplatné přihlašovací údaje')));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Login/loginForm.html.twig', [

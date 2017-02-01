@@ -231,7 +231,7 @@ class OrderController extends FrontBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid() && $form->getErrors()->count() === 0) {
-			$form->addError(new FormError('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$form->addError(new FormError(t('Prosím zkontrolujte si správnost vyplnění všech údajů')));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
