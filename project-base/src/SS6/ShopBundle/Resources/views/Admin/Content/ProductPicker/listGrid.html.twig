@@ -27,12 +27,12 @@
 	{%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
 		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left"
-			title="" data-original-title="Nelze vybrat zboží, které je hlavní variantou"
+			title="" data-original-title="{{ 'Nelze vybrat zboží, které je hlavní variantou'|trans }}"
 		></i>
 	{% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
 		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left" title=""
-			data-original-title="Nelze vybrat zboží, které je variantou"
+			data-original-title="{{ 'Nelze vybrat zboží, které je variantou'|trans }}"
 		></i>
 	{% elseif isMultiple %}
 		<a

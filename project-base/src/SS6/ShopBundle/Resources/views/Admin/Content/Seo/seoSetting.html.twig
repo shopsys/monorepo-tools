@@ -13,7 +13,7 @@
 				{{ 'Nastavení'|trans }}
 			</div>
 			{{ form_row(form.title, { label: 'Titulek'|trans }) }}
-			{% set infoText = 'Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na "| Můj obchod" a název zboží je "D-Link", bude výsledný titulek u tohoto zboží "D-Link | Můj obchod"' %}
+			{% set infoText = 'Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na "| Můj obchod" a název zboží je "D-Link", bude výsledný titulek u tohoto zboží "D-Link | Můj obchod"'|trans %}
 			{{ form_row(form.titleAddOn, { label: 'Doplněk k titulku'|trans, icon: { title: infoText } }) }}
 			{{ form_row(form.metaDescription, { label: 'Meta description'|trans }) }}
 		</div>
