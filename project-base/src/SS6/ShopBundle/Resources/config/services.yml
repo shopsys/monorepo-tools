@@ -39,6 +39,10 @@ services:
   jms_translation.extractor.file.default_php_extractor:
     alias: ss6.shop.component.translation.php_file_extractor
 
+  # normalize translation messages during extraction
+  jms_translation.extractor_manager:
+    alias: ss6.shop.component.translation.normalizing_extractor_manager
+
   ninja_mutex.adapter:
     class: NinjaMutex\Lock\FlockLock
     arguments:
@@ -312,6 +316,12 @@ services:
     class: SS6\ShopBundle\Component\Sitemap\SitemapListener
     tags:
       - { name: presta.sitemap.listener }
+
+  ss6.shop.component.translation.normalizing_extractor_manager:
+    class: SS6\ShopBundle\Component\Translation\NormalizingExtractorManager
+    arguments:
+      - @jms_translation.extractor.file_extractor
+      - @logger
 
   ss6.shop.component.translation.js_file_extractor:
     class: SS6\ShopBundle\Component\Translation\JsFileExtractor
