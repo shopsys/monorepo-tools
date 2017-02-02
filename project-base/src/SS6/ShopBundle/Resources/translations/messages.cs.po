@@ -78,11 +78,11 @@ msgstr "1 254 Kč"
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:29
 msgid "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
-msgstr "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní.\n\t\tBohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
+msgstr "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
 
 #: Content/Customer/edit.html.twig:25
 msgid "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně. Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
-msgstr "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně.\n\t\t\t\t\t\tPokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
+msgstr "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně. Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
 
 #: Content/Login/loginForm.html.twig:12
 #: Admin/Layout/base.html.twig:61
@@ -436,7 +436,7 @@ msgstr "Cenová skupina"
 
 #: PricingGroupController.php:121
 msgid "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
-msgstr "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou cenovou skupinu místo ní chcete nastavit?"
+msgstr "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
 #: PricingGroupController.php:80
 msgid "Cenová skupina <strong>{{ name }}</strong> byla smazána"
@@ -702,7 +702,7 @@ msgstr "Doprava a platba zdarma"
 
 #: Content/Cart/index.html.twig:122
 msgid "Dopravu i platbu máte <strong>zdarma!</strong>"
-msgstr "\t\t\t\t\t\t\t\t\tDopravu i platbu máte\n\t\t\t\t\t\t\t\t\t<strong>zdarma!</strong>\n\t\t\t\t\t\t\t\t"
+msgstr "Dopravu i platbu máte <strong>zdarma!</strong>"
 
 #: Content/Payment/detail.html.twig:42
 msgid "Dopravy"
@@ -736,7 +736,7 @@ msgstr "Dostupnost"
 
 #: AvailabilityController.php:104
 msgid "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou dostupnost místo ní chcete nastavit?"
-msgstr "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou dostupnost místo ní chcete nastavit?"
+msgstr "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou dostupnost místo ní chcete nastavit?"
 
 #: AvailabilityController.php:70
 msgid "Dostupnost <strong>{{ name }}</strong> byla smazána"
@@ -761,7 +761,7 @@ msgstr "Dosud nemáte žádnou objednávku."
 
 #: Content/Superadmin/cssDocumentation.html.twig:712
 msgid "Drag adn drop na řádky"
-msgstr "Drag adn drop na řádky"
+msgstr "Drag and drop na řádky"
 
 #: Content/Superadmin/cssDocumentation.html.twig:211
 msgid "Druhý typ chybové hlášky"
@@ -777,7 +777,7 @@ msgstr "Důležitou věcí je, že tlačítka, inputy (textové), selecty, texta
 
 #: Content/Superadmin/cssDocumentation.html.twig:64
 msgid "Důležité je nepoužívat jen části komponent (elementy), nýbrž vždy zde musí být mateřská komponenta!"
-msgstr "Důležité je nepoužívat jen části komponent (elementy), nýbrž vždy zde musí být mateřská komponenta! "
+msgstr "Důležité je nepoužívat jen části komponent (elementy), nýbrž vždy zde musí být mateřská komponenta!"
 
 #: Content/Order/edit.html.twig:87
 #: Content/Login/loginForm.html.twig:18
@@ -1132,7 +1132,7 @@ msgstr "Hlavní URL nelze smazat"
 
 #: Content/Product/edit.html.twig:125
 msgid "Hlavní kategorie na doménách :"
-msgstr "Hlavní kategorie na doménách :"
+msgstr "Hlavní kategorie na doménách:"
 
 #: Content/Product/edit.html.twig:140
 msgid "Hlavní kategorie:"
@@ -1153,7 +1153,7 @@ msgstr "Hlavní varianta"
 
 #: Content/Product/createVariant.html.twig:8
 msgid "Hlavní zboží"
-msgstr "Hlavní zboží"
+msgstr "Hlavní varianta"
 
 #: Order/AdvancedSearch/advancedSearch.html.twig:7
 #: Product/AdvancedSearch/advancedSearch.html.twig:7
@@ -1332,7 +1332,7 @@ msgstr "Jazyk"
 
 #: Common/Mailer/settingInfo.html.twig:6
 msgid "Je nastaven master e-mail %masterMail%."
-msgstr "Je nastaven master e-mail %masterMail%. "
+msgstr "Je nastaven master e-mail %masterMail%."
 
 #: Content/Superadmin/cssDocumentation.html.twig:504
 msgid "Jednoduché zobrazení"
@@ -1345,7 +1345,7 @@ msgstr "Jednotka"
 
 #: UnitController.php:67
 msgid "Jednotka \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit novou výchozí jednotku. Jakou jednotku místo ní chcete nastavit?"
-msgstr "Jednotka \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit novou výchozí jednotku.\n\nJakou jednotku místo ní chcete nastavit?"
+msgstr "Jednotka \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit novou výchozí jednotku. Jakou jednotku místo ní chcete nastavit?"
 
 #: UnitController.php:123
 msgid "Jednotka <strong>{{ name }}</strong> byla smazána"
@@ -1429,7 +1429,7 @@ msgstr "Katalog zboží - %brandName%"
 
 #: Content/Product/list.html.twig:11
 msgid "Katalog zboží - %categoryName%"
-msgstr "Katalog zboží -  %categoryName%"
+msgstr "Katalog zboží - %categoryName%"
 
 #: ProductPickerController.php:138
 #: AdvancedSearchProductFilterTranslation.php:10
@@ -1459,7 +1459,7 @@ msgstr "Kategorie Heureka.cz"
 
 #: Content/Product/edit.html.twig:172
 msgid "Kategorie můžete nastavit na kartě hlavního zboží"
-msgstr "Kategorie můžete nastavit na kartě hlavního zboží"
+msgstr "Kategorie můžete nastavit na kartě hlavní varianty"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1324
 msgid "Když chceme info o počtu znaků"
@@ -1608,7 +1608,7 @@ msgstr "Lze kombinovat i s jinýmy obsahy uvnitř, primární použití je ale p
 
 #: Content/CustomerCommunication/orderSubmitted.html.twig:58
 msgid "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu vyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených závorek)."
-msgstr "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit\n\t\t\t\t\t\t\todkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu\n\t\t\t\t\t\t\tvyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených\n\t\t\t\t\t\t\tzávorek)."
+msgstr "Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu vyberete protokol <jiný> a do políčka URL vložíte text \"%orderDetailUrlConstant%\" (včetně složených závorek)."
 
 #: Content/Superadmin/cssDocumentation.html.twig:531
 msgid "Lícovaná první a druhá buňka řádku se zbytkem formulářů"
@@ -1663,7 +1663,7 @@ msgstr "Multidoménové, multijazyčné, inputy s ikonou - základní"
 
 #: Content/Cart/index.html.twig:129
 msgid "Musíte ještě nakoupit zboží za <strong> %price% </strong> abyste měli dopravu i platbu <strong> zdarma. </strong>"
-msgstr "\t\t\t\t\t\t\t\t\tMusíte ještě nakoupit zboží za\n\t\t\t\t\t\t\t\t\t<strong>\n\t\t\t\t\t\t\t\t\t\t%price%\n\t\t\t\t\t\t\t\t\t</strong>\n\t\t\t\t\t\t\t\t\tabyste měli dopravu i platbu\n\t\t\t\t\t\t\t\t\t<strong>\n\t\t\t\t\t\t\t\t\t\tzdarma.\n\t\t\t\t\t\t\t\t\t</strong>\n\t\t\t\t\t\t\t\t"
+msgstr "Musíte ještě nakoupit zboží za <strong> %price% </strong> abyste měli dopravu i platbu <strong> zdarma. </strong>"
 
 #: Content/Payment/detail.html.twig:42
 msgid "Musíte nejdřív nějakou dopravu vytvořit."
@@ -2062,7 +2062,7 @@ msgstr "Nejprve vyberte novou hodnotu"
 
 #: productsPicker.window.js:80
 msgid "Nelze"
-msgstr "Nelze"
+msgstr "Nelze přidat"
 
 #: productsPicker.window.js:77
 msgid "Nelze přiřadit produkt sám sobě"
@@ -2121,7 +2121,7 @@ msgstr "Nepodařilo se odstranit položku z košíku. Nejspíš je již odstran�
 
 #: CartController.php:327
 msgid "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
-msgstr "Nepodařilo se odstranit položku z košíku.\n\t\t\t\t\tZřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
+msgstr "Nepodařilo se odstranit položku z košíku. Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou."
 
 #: Content/BestsellingProduct/list.html.twig:3
 #: Content/BestsellingProduct/list.html.twig:4
@@ -2681,7 +2681,7 @@ msgstr "Popis"
 
 #: Content/Product/edit.html.twig:276
 msgid "Popis můžete nastavit na kartě hlavního zboží."
-msgstr "Popis můžete nastavit na kartě hlavního zboží."
+msgstr "Popis můžete nastavit na kartě hlavní varianty."
 
 #: CustomerController.php:208
 msgid "Poslední objednávka"
@@ -2781,7 +2781,7 @@ msgstr "Prevence dvojtého borderu mezi prvky"
 
 #: FrontBreadcrumbGenerator.php:35
 msgid "Prihlásení"
-msgstr "Prihlásení"
+msgstr "Přihlášení"
 
 #: Content/Product/detail.html.twig:155
 msgid "Priorita řazení"
@@ -2789,7 +2789,7 @@ msgstr "Priorita řazení"
 
 #: PricingGroupController.php:114
 msgid "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
-msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit.\n\nJakou cenovou skupinu místo ní chcete nastavit?"
+msgstr "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
 
 #: UnitController.php:74
 msgid "Pro odstranění jednotky \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?"
@@ -3854,7 +3854,7 @@ msgstr "Tlustá čára mezi zmizela"
 
 #: Content/Error/error.html.twig:38
 msgid "To je nemilé, to je nemilé. A zrovna <strong>\"%status_code% %status_text%\"</strong>, to je jak naschvál!"
-msgstr "To je nemilé, to je nemilé. A zrovna\n\t\t\t\t\t\t<strong>\"%status_code% %status_text%\"</strong>,\n\t\t\t\t\t\tto je jak naschvál!"
+msgstr "To je nemilé, to je nemilé. A zrovna <strong>\"%status_code% %status_text%\"</strong>, to je jak naschvál!"
 
 #: Content/Product/detail.html.twig:94
 msgid "Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href=\"%url%\">zde</a>."
@@ -4079,7 +4079,7 @@ msgstr "Ve feedech se označuje pomocí tagů MAX_CPC_SEARCH. Pokud není uveden
 
 #: Common/Mailer/settingInfo.html.twig:8
 msgid "Ve whitelistu jsou povoleny následující výrazy: %whitelist%."
-msgstr "Ve whitelistu jsou povoleny následující výrazy: %whitelist%. "
+msgstr "Ve whitelistu jsou povoleny následující výrazy: %whitelist%."
 
 #: Content/Superadmin/cssDocumentation.html.twig:390
 msgid "Velikosti: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
@@ -4930,7 +4930,7 @@ msgstr "Základní nastavení"
 
 #: Content/Superadmin/cssDocumentation.html.twig:78
 msgid "Základní premisou kódování v adminu je, že z velmi velké části zde budou s kódem pracovat programátoři. Proto se zde klade větší důraz na helpry -"
-msgstr "Základní premisou kódování v adminu je, že z velmi velké části zde budou s kódem pracovat programátoři. Proto se zde klade větší důraz na helpry - "
+msgstr "Základní premisou kódování v adminu je, že z velmi velké části zde budou s kódem pracovat programátoři. Proto se zde klade větší důraz na helpry -"
 
 #: Content/Superadmin/cssDocumentation.html.twig:81
 msgid "Zápis css vlastností podle priorit"
@@ -5220,11 +5220,11 @@ msgstr "záznamů"
 
 #: Content/Search/autocomplete.html.twig:26
 msgid "{0} Nebyl nalezen žádný produkt | {1} Celkem nalezen 1 produkt | [2,4] Celkem nalezeny %totalProductCount% produkty | [5,Inf] Celkem nalezeno %totalProductCount% produktů"
-msgstr "\t\t\t\t{0} Nebyl nalezen žádný produkt\n\t\t\t\t|\n\t\t\t\t{1} Celkem nalezen 1 produkt\n\t\t\t\t|\n\t\t\t\t[2,4] Celkem nalezeny %totalProductCount% produkty\n\t\t\t\t|\n\t\t\t\t[5,Inf] Celkem nalezeno %totalProductCount% produktů\n\t\t\t"
+msgstr "{0} Nebyl nalezen žádný produkt | {1} Celkem nalezen 1 produkt | [2,4] Celkem nalezeny %totalProductCount% produkty | [5,Inf] Celkem nalezeno %totalProductCount% produktů"
 
 #: Inline/Cart/cartBox.html.twig:11
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> položka za <strong class=\"cart__state\">%priceWithVat%</strong> |[2,4] <strong class=\"cart__state\">%itemsCount%</strong> položky za <strong class=\"cart__state\">%priceWithVat%</strong> |[5,Inf] <strong class=\"cart__state\">%itemsCount%</strong> položek za <strong class=\"cart__state\">%priceWithVat%</strong>"
-msgstr "\t\t\t\t\t\t{1} <strong class=\"cart__state\">%itemsCount%</strong> položka za <strong class=\"cart__state\">%priceWithVat%</strong>\n\t\t\t\t\t\t|[2,4] <strong class=\"cart__state\">%itemsCount%</strong> položky za <strong class=\"cart__state\">%priceWithVat%</strong>\n\t\t\t\t\t\t|[5,Inf] <strong class=\"cart__state\">%itemsCount%</strong> položek za <strong class=\"cart__state\">%priceWithVat%</strong>\n\t\t\t\t\t"
+msgstr "{1} <strong class=\"cart__state\">%itemsCount%</strong> položka za <strong class=\"cart__state\">%priceWithVat%</strong> |[2,4] <strong class=\"cart__state\">%itemsCount%</strong> položky za <strong class=\"cart__state\">%priceWithVat%</strong> |[5,Inf] <strong class=\"cart__state\">%itemsCount%</strong> položek za <strong class=\"cart__state\">%priceWithVat%</strong>"
 
 #: Content/Article/detail.html.twig:12
 msgid "Údaje článku"
@@ -5262,11 +5262,11 @@ msgstr "Článek"
 
 #: ArticleController.php:226
 msgid "Článek \"%name%\" je nastaven pro zobrazení informací o cookies. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
-msgstr "Článek \"%name%\" je nastaven pro zobrazení informací o cookies.\n\t\t\t\tToto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
+msgstr "Článek \"%name%\" je nastaven pro zobrazení informací o cookies. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
 #: ArticleController.php:220
 msgid "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
-msgstr "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek.\n\t\t\t\tToto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
+msgstr "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
 
 #: ArticleController.php:201
 msgid "Článek <strong>{{ name }}</strong> byl smazán"
