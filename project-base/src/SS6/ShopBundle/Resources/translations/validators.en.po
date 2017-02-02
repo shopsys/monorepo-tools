@@ -4,24 +4,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-#: Admin/Product/ProductFormType.php:223
-#: Admin/Product/ProductFormType.php:230
+#: Admin/Product/ProductFormType.php:232
+#: Admin/Product/ProductFormType.php:239
 msgid "Datum zadávejte ve formátu dd.mm.rrrr"
 msgstr ""
 
-msgid "E-mail '{{ value }}' není validní."
-msgstr ""
-
-#: Admin/Administrator/AdministratorFormType.php:62
-#: Admin/Customer/UserFormType.php:85
-#: Front/Customer/UserFormType.php:50
-#: Front/Registration/NewPasswordFormType.php:30
-#: Front/Registration/RegistrationFormType.php:48
+#: Admin/Administrator/AdministratorFormType.php:66
+#: Admin/Customer/UserFormType.php:91
+#: Customer/Password/NewPasswordFormType.php:30
+#: Front/Customer/UserFormType.php:57
+#: Front/Registration/RegistrationFormType.php:53
 msgid "Hesla se neshodují"
-msgstr ""
-
-#: Product/TopProduct/TopProductFormType.php:33
-msgid "Musíte vybrat existující produkt"
 msgstr ""
 
 #: Product/Availability/AvailabilityFormType.php:39
@@ -33,11 +26,11 @@ msgid "Prosím zadejte DPH v platném formátu"
 msgstr ""
 
 #: Admin/Payment/PaymentEditFormType.php:65
-#: Admin/Product/ProductEditFormType.php:225
-#: Admin/Product/ProductFormType.php:198
+#: Admin/Product/ProductEditFormType.php:261
+#: Admin/Product/ProductFormType.php:207
 #: Admin/Transport/TransportEditFormType.php:65
-#: Front/Product/ProductFilterFormType.php:51
-#: Front/Product/ProductFilterFormType.php:63
+#: Front/Product/ProductFilterFormType.php:71
+#: Front/Product/ProductFilterFormType.php:84
 msgid "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 msgstr ""
 
@@ -45,19 +38,19 @@ msgstr ""
 msgid "Prosím zadejte koeficient v platném formátu"
 msgstr ""
 
-#: Admin/Product/ProductFormType.php:138
+#: Admin/Product/ProductFormType.php:148
 msgid "Prosím zadejte číslo"
 msgstr ""
 
-#: ShopBundle/Form/UrlListType.php:93
+#: ShopBundle/Form/UrlListType.php:94
 msgid "Původně vybraná hlavní URL již neexistuje"
 msgstr ""
 
-#: Front/Order/TransportAndPaymentFormType.php:45
+#: Front/Order/TransportAndPaymentFormType.php:48
 msgid "Vyberte prosím dopravu"
 msgstr ""
 
-#: Front/Order/TransportAndPaymentFormType.php:51
+#: Front/Order/TransportAndPaymentFormType.php:56
 msgid "Vyberte prosím platbu"
 msgstr ""
 
