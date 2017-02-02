@@ -60,6 +60,7 @@
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/config" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
 			<arg value="--exclude-dir=admin/plugins" />

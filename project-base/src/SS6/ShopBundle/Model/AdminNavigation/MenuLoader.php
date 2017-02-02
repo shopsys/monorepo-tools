@@ -2,6 +2,8 @@
 
 namespace SS6\ShopBundle\Model\AdminNavigation;
 
+use JMS\TranslationBundle\Annotation\Ignore;
+use SS6\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -14,10 +16,17 @@ class MenuLoader {
 	private $filesystem;
 
 	/**
-	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+	 * @var \SS6\ShopBundle\Component\Translation\Translator
 	 */
-	public function __construct(Filesystem $filesystem) {
+	private $translator;
+
+	/**
+	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
+	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
+	 */
+	public function __construct(Filesystem $filesystem, Translator $translator) {
 		$this->filesystem = $filesystem;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -82,7 +91,8 @@ class MenuLoader {
 		}
 
 		$item = new MenuItem(
-			$array['label'],
+			/** @Ignore Extraction of labels in YAML file is done by \SS6\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor */
+			$this->translator->trans($array['label']),
 			isset($array['type']) ? $array['type'] : null,
 			isset($array['route']) ? $array['route'] : null,
 			isset($array['route_parameters']) ? $array['route_parameters'] : null,
