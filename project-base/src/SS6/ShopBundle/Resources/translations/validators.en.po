@@ -7,7 +7,7 @@ msgstr ""
 #: Admin/Product/ProductFormType.php:232
 #: Admin/Product/ProductFormType.php:239
 msgid "Datum zadávejte ve formátu dd.mm.rrrr"
-msgstr ""
+msgstr "Enter date in DD.MM.YYYY format."
 
 #: Admin/Administrator/AdministratorFormType.php:66
 #: Admin/Customer/UserFormType.php:91
@@ -15,15 +15,15 @@ msgstr ""
 #: Front/Customer/UserFormType.php:57
 #: Front/Registration/RegistrationFormType.php:53
 msgid "Hesla se neshodují"
-msgstr ""
+msgstr "Passwords do not match"
 
 #: Product/Availability/AvailabilityFormType.php:39
 msgid "Počet dní k expedici musí být celé číslo"
-msgstr ""
+msgstr "Number of days to expedite must be whole number."
 
 #: Admin/Vat/VatFormType.php:54
 msgid "Prosím zadejte DPH v platném formátu"
-msgstr ""
+msgstr "Please insert VAT in correct format."
 
 #: Admin/Payment/PaymentEditFormType.php:65
 #: Admin/Product/ProductEditFormType.php:261
@@ -32,29 +32,29 @@ msgstr ""
 #: Front/Product/ProductFilterFormType.php:71
 #: Front/Product/ProductFilterFormType.php:84
 msgid "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
-msgstr ""
+msgstr "Please insert price in correct format (positive number with decimal separator)"
 
 #: Pricing/Group/PricingGroupFormType.php:36
 msgid "Prosím zadejte koeficient v platném formátu"
-msgstr ""
+msgstr "Please insert ratio in correct format "
 
 #: Admin/Product/ProductFormType.php:148
 msgid "Prosím zadejte číslo"
-msgstr ""
+msgstr "Please insert a number"
 
 #: ShopBundle/Form/UrlListType.php:94
 msgid "Původně vybraná hlavní URL již neexistuje"
-msgstr ""
+msgstr "Previously selected main URL dos not exist any more"
 
 #: Front/Order/TransportAndPaymentFormType.php:48
 msgid "Vyberte prosím dopravu"
-msgstr ""
+msgstr "Please choose shipping type"
 
 #: Front/Order/TransportAndPaymentFormType.php:56
 msgid "Vyberte prosím platbu"
-msgstr ""
+msgstr "Please choose payment type"
 
 #: Admin/PromoCode/PromoCodeFormType.php:63
 msgid "Zadejte prosím celé číslo."
-msgstr ""
+msgstr "Please insert whole number."
 
