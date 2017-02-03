@@ -63,6 +63,7 @@
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/config" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Twig" />
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--output-format=po" />

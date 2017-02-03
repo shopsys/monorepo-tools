@@ -285,6 +285,7 @@
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Twig" />
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--exclude-dir=admin" />

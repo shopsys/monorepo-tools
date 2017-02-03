@@ -1189,6 +1189,10 @@ msgstr "Bulk editing done"
 msgid "Hromadné úpravy"
 msgstr "Bulk edit"
 
+#: ProductExtension.php:60
+msgid "ID %productId%"
+msgstr ""
+
 #: Content/Superadmin/cssDocumentation.html.twig:70
 msgid "ID je v CSS element s nejvyžší prioritou a proto se mu vyhneme. Jakmile něco navážeme na ID, přebijeme to pouze něčím s ID nebo pomocí !important. V reálném využití v SS5 se díky tomu musely stejné části na různých místech v eshopu stylovat vícekrát. Pokud využijeme pouze třídy a komponenty, těmto problémům se vyhneme."
 msgstr "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems. "
@@ -2290,6 +2294,10 @@ msgstr "Script name"
 #: Content/Slider/detail.html.twig:24
 msgid "Název slouží pouze pro interní použití v rámci administrace"
 msgstr "Name serves only for internal use within the administration"
+
+#: ProductExtension.php:74
+msgid "Název zboží ve výchozím jazyce není vyplněn"
+msgstr ""
 
 #: MailController.php:90
 msgid "Název zvolené dopravy"
@@ -3973,6 +3981,7 @@ msgstr "Save"
 #: Content/Vat/vatSettings.html.twig:11
 #: Admin/Grid/Grid.html.twig:164
 #: Content/Customer/edit.html.twig:94
+#: FormDetailExtension.php:78
 msgid "Uložit změny"
 msgstr "Save changes"
 
@@ -4119,6 +4128,14 @@ msgstr "Add only to order confirmation page"
 msgid "Vrátit zpět"
 msgstr "Return back"
 
+#: InputPriceLabelExtension.php:39
+msgid "Vstupní cena bez DPH"
+msgstr ""
+
+#: InputPriceLabelExtension.php:42
+msgid "Vstupní cena s DPH"
+msgstr ""
+
 #: ProductType.php:72
 msgid "Vyberte produkt"
 msgstr "Choose product"
@@ -4195,6 +4212,7 @@ msgid "Vytvořeno dne"
 msgstr "Created on"
 
 #: Content/Product/createVariant.html.twig:10
+#: FormDetailExtension.php:76
 msgid "Vytvořit"
 msgstr "Create"
 
@@ -4610,6 +4628,11 @@ msgstr "Product you had in cart is no longer in available. Please check your ord
 #: Content/Product/detail.html.twig:368
 msgid "Zboží.cz"
 msgstr "Zboží.cz"
+
+#: PriceExtension.php:145
+#: PriceExtension.php:159
+msgid "Zdarma"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:131
 msgid "Zde můžete přetáhnout další obsah."
