@@ -32,7 +32,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 				];
 			case 'front_login':
 				return [
-					new BreadcrumbItem(t('Prihlásení')),
+					new BreadcrumbItem(t('Přihlášení')),
 				];
 			case 'front_product_search':
 				return [

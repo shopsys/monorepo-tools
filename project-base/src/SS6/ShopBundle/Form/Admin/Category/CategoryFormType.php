@@ -99,7 +99,8 @@ class CategoryFormType extends AbstractType {
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
 						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Nahraný obrázek je příliš velký ({{ size }} {{ suffix }}). '
+							. 'Maximální velikost obrázku je {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])

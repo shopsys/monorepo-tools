@@ -654,10 +654,6 @@ msgstr ""
 msgid "Vyplňte prosím přihlašovací jméno"
 msgstr ""
 
-#: OrderFormType.php:163
-msgid "Vyplňte prosím příjemní kontaktní osoby"
-msgstr ""
-
 #: UserFormType.php:65
 #: OrderFormType.php:85
 #: UserFormType.php:37
@@ -667,6 +663,7 @@ msgid "Vyplňte prosím příjmení"
 msgstr ""
 
 #: DeliveryAddressFormType.php:72
+#: OrderFormType.php:163
 #: DeliveryAddressFormType.php:74
 #: PersonalInfoFormType.php:154
 msgid "Vyplňte prosím příjmení kontaktní osoby"

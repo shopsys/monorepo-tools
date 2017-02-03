@@ -34,7 +34,7 @@
 			SS6.window({
 				content: SS6.translator.trans('Byli jste úspěšně přihlášeni k odběru našeho newsletteru.'),
 				buttonCancel: true,
-				textCancel: SS6.translator.trans('Zavřit')
+				textCancel: SS6.translator.trans('Zavřít')
 			});
 		}
 	};

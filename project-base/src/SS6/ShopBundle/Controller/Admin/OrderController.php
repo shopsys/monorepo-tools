@@ -230,7 +230,7 @@ class OrderController extends AdminBaseController {
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
 		$grid->addColumn('preview', 'o.id', t('Náhled'), false);
-		$grid->addColumn('number', 'o.number', t('Č. objednávky'), true);
+		$grid->addColumn('number', 'o.number', t('Objednávka č.'), true);
 		$grid->addColumn('created_at', 'o.createdAt', t('Vytvořena'), true);
 		$grid->addColumn('customer_name', 'customerName', t('Zákazník'), true);
 		if ($this->domain->isMultidomain()) {

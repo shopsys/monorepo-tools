@@ -17,7 +17,7 @@ class LoginPage extends AbstractPage {
 		$this->tester->amOnPage('/admin/');
 		$this->tester->fillFieldByName('admin_login_form[username]', $username);
 		$this->tester->fillFieldByName('admin_login_form[password]', $password);
-		$this->tester->clickByText('Přihlásit');
+		$this->tester->clickByText('Přihlásit se');
 	}
 
 	public function assertLoginFailed() {

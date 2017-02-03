@@ -200,7 +200,7 @@ class CustomerController extends AdminBaseController {
 		$grid->addColumn('name', 'name', t('Jméno'), true);
 		$grid->addColumn('city', 'city', t('Město'), true);
 		$grid->addColumn('telephone', 'telephone', t('Telefon'), true);
-		$grid->addColumn('email', 'u.email', t('Email'), true);
+		$grid->addColumn('email', 'u.email', t('E-mail'), true);
 		$grid->addColumn('pricingGroup', 'pricingGroup', t('Cenová skupina'), true);
 		$grid->addColumn('orders_count', 'ordersCount', t('Počet objednávek'), true)->setClassAttribute('text-right');
 		$grid->addColumn('orders_sum_price', 'ordersSumPrice', t('Hodnota objednávek'), true)

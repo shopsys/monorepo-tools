@@ -111,7 +111,7 @@ class MailController extends AdminBaseController {
 		return [
 			RegistrationMailService::VARIABLE_FIRST_NAME => t('Jméno'),
 			RegistrationMailService::VARIABLE_LAST_NAME => t('Příjmení'),
-			RegistrationMailService::VARIABLE_EMAIL => t('Email'),
+			RegistrationMailService::VARIABLE_EMAIL => t('E-mail'),
 			RegistrationMailService::VARIABLE_URL => t('URL adresa e-shopu'),
 			RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Odkaz na stránku s přihlášením'),
 		];
@@ -122,7 +122,7 @@ class MailController extends AdminBaseController {
 	 */
 	private function getResetPasswordVariablesLabels() {
 		return [
-			ResetPasswordMail::VARIABLE_EMAIL => t('Email'),
+			ResetPasswordMail::VARIABLE_EMAIL => t('E-mail'),
 			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => t('URL adresa pro nastavení nového hesla'),
 		];
 	}

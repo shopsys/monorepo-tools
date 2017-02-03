@@ -18,7 +18,7 @@
 				<div id="{{ templateForm.vars.id }}" class="js-mail-template js-toggle-content display-none box-expand__hidden">
 					{{ form_row(templateForm.subject, { label: 'Předmět'|trans}) }}
 					{{ form_row(templateForm.bccEmail, { label: 'Skrytá kopie'|trans}) }}
-					{{ form_row(templateForm.body, { label: 'Text'|trans}) }}
+					{{ form_row(templateForm.body, { label: 'Obsah'|trans}) }}
 					{% if hasUploadedFile(mailTemplate) %}
 						<div class="form-line js-mail-template-attachment">
 							<label class="form-line__label">
