@@ -4107,7 +4107,7 @@ msgstr "Choose article, which will serve as terms and conditions with which the 
 msgid "Vybrat"
 msgstr "Choose"
 
-#: Content/Product/productListMacro.html.twig:56
+#: Content/Product/productListMacro.html.twig:58
 msgid "Vybrat variantu"
 msgstr "Choose variant"
 
@@ -5082,9 +5082,9 @@ msgid "obsahuje"
 msgstr "include"
 
 #: Content/Product/productListMacro.html.twig:29
-#: Content/Product/productListMacro.html.twig:35
-msgid "od"
-msgstr "from"
+#: Content/Product/productListMacro.html.twig:36
+msgid "od %price%"
+msgstr "from %price%"
 
 #: ProductListOrderingModeForBrandFacade.php:31
 #: ProductListOrderingModeForListFacade.php:31

@@ -4107,7 +4107,7 @@ msgstr "Vyberte článek, který bude sloužit jako obchodní podmínky, se kter
 msgid "Vybrat"
 msgstr "Vybrat"
 
-#: Content/Product/productListMacro.html.twig:56
+#: Content/Product/productListMacro.html.twig:58
 msgid "Vybrat variantu"
 msgstr "Vybrat variantu"
 
@@ -5082,9 +5082,9 @@ msgid "obsahuje"
 msgstr "obsahuje"
 
 #: Content/Product/productListMacro.html.twig:29
-#: Content/Product/productListMacro.html.twig:35
-msgid "od"
-msgstr "od"
+#: Content/Product/productListMacro.html.twig:36
+msgid "od %price%"
+msgstr "od %price%"
 
 #: ProductListOrderingModeForBrandFacade.php:31
 #: ProductListOrderingModeForListFacade.php:31
