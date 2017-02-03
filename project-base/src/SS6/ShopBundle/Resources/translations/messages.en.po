@@ -3952,6 +3952,10 @@ msgstr "Save changes in all templates"
 msgid "Umístění"
 msgstr "Location"
 
+#: Order/PromoCode/index.html.twig:7
+msgid "Uplatnit"
+msgstr "Apply"
+
 #: Content/Superadmin/cssDocumentation.html.twig:205
 msgid "Upozorňující hláška"
 msgstr "Warning message"
@@ -4060,10 +4064,6 @@ msgstr "Visibility"
 #: Content/Product/visibility.html.twig:2
 msgid "Viditelnost pro neregistrované zákazníky"
 msgstr "Visibility for unlogged customers"
-
-#: Order/PromoCode/index.html.twig:7
-msgid "Vložit"
-msgstr "Add"
 
 #: Inline/Cart/addProduct.html.twig:8
 #: Inline/Cart/addProduct.html.twig:10
