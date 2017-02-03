@@ -68,6 +68,7 @@
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--output-format=po" />
 
+			<arg value="cs" />
 			<arg value="en" />
 		</exec>
 	</target>
