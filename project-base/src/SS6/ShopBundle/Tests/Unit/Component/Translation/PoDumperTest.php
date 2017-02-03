@@ -17,7 +17,7 @@ class PoDumperTest extends PHPUnit_Framework_TestCase {
 	public function testDump() {
 		$source = new FileSource('filepath', 10, 20);
 
-		$message = new Message("message\t \nid");
+		$message = new Message('message id');
 		$message->setNew(false);
 		$message->setMeaning('meaning');
 		$message->setLocaleString('locale string');
