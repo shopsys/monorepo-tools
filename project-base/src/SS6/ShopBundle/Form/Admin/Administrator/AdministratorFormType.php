@@ -31,13 +31,13 @@ class AdministratorFormType extends AbstractType {
 			->add('username', FormType::TEXT, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím přihlašovací jméno']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Jméno nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Přihlašovací jméno nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('realName', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Jméno nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím celé jméno']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Celé jméno nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('email', FormType::EMAIL, [

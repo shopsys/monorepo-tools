@@ -12,6 +12,10 @@ msgstr "Alias varianty nesmí být delší než {{ limit }} znaků"
 msgid "Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků"
 msgstr "Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků"
 
+#: AdministratorFormType.php:40
+msgid "Celé jméno nesmí být delší než {{ limit }} znaků"
+msgstr "Celé jméno nesmí být delší než {{ limit }} znaků"
+
 #: PaymentEditFormType.php:70
 #: ProductEditFormType.php:270
 #: ProductFormType.php:215
@@ -98,8 +102,6 @@ msgstr "IČ nesmí být delší než {{ limit }} znaků"
 msgid "Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků"
 msgstr "Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků"
 
-#: AdministratorFormType.php:34
-#: AdministratorFormType.php:40
 #: UserFormType.php:60
 #: OrderFormType.php:80
 #: UserFormType.php:32
@@ -385,6 +387,10 @@ msgstr "Prosím zadejte číslo"
 msgid "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 msgstr "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 
+#: AdministratorFormType.php:34
+msgid "Přihlašovací jméno nesmí být delší než {{ limit }} znaků"
+msgstr "Přihlašovací jméno nesmí být delší než {{ limit }} znaků"
+
 #: DeliveryAddressFormType.php:77
 #: OrderFormType.php:168
 #: DeliveryAddressFormType.php:79
@@ -470,6 +476,12 @@ msgstr "Vyplňte prosím PSČ"
 msgid "Vyplňte prosím barvu příznaku"
 msgstr "Vyplňte prosím barvu příznaku"
 
+#: AdministratorFormType.php:39
+#: MailSettingFormType.php:35
+#: ContactFormType.php:32
+msgid "Vyplňte prosím celé jméno"
+msgstr "Vyplňte prosím celé jméno"
+
 #: AdministratorFormType.php:47
 #: UserFormType.php:71
 #: MailSettingFormType.php:29
@@ -497,11 +509,8 @@ msgstr "Vyplňte prosím heslo"
 msgid "Vyplňte prosím jednotkovou cenu s DPH"
 msgstr "Vyplňte prosím jednotkovou cenu s DPH"
 
-#: AdministratorFormType.php:39
 #: UserFormType.php:59
-#: MailSettingFormType.php:35
 #: OrderFormType.php:79
-#: ContactFormType.php:32
 #: UserFormType.php:31
 #: PersonalInfoFormType.php:44
 #: RegistrationFormType.php:25

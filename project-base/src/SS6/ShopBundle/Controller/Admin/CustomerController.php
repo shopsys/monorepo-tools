@@ -197,7 +197,7 @@ class CustomerController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'name', t('Jméno'), true);
+		$grid->addColumn('name', 'name', t('Celé jméno'), true);
 		$grid->addColumn('city', 'city', t('Město'), true);
 		$grid->addColumn('telephone', 'telephone', t('Telefon'), true);
 		$grid->addColumn('email', 'u.email', t('E-mail'), true);

@@ -12,6 +12,10 @@ msgstr "Variant alias cannot be longer then {{ limit }} characters"
 msgid "Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků"
 msgstr "Flag color in must be in valid hexadecimal code e.g. #3333ff"
 
+#: AdministratorFormType.php:40
+msgid "Celé jméno nesmí být delší než {{ limit }} znaků"
+msgstr "Full name cannot be longer then {{ limit }} characters"
+
 #: PaymentEditFormType.php:70
 #: ProductEditFormType.php:270
 #: ProductFormType.php:215
@@ -96,17 +100,15 @@ msgstr "Identification number cannot be longer then {{ limit }} characters"
 #: DeliveryAddressFormType.php:65
 #: PersonalInfoFormType.php:145
 msgid "Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků"
-msgstr "Name of contact person cannot be longer then {{ limit }} characters"
+msgstr "First name of contact person cannot be longer then {{ limit }} characters"
 
-#: AdministratorFormType.php:34
-#: AdministratorFormType.php:40
 #: UserFormType.php:60
 #: OrderFormType.php:80
 #: UserFormType.php:32
 #: PersonalInfoFormType.php:45
 #: RegistrationFormType.php:26
 msgid "Jméno nesmí být delší než {{ limit }} znaků"
-msgstr "Name cannot be longer then {{ limit }} characters"
+msgstr "First name cannot be longer then {{ limit }} characters"
 
 #: ProductFormType.php:125
 msgid "Katalogové číslo nesmí být delší než {{ limit }} znaků"
@@ -142,11 +144,11 @@ msgstr "You have to agree with terms and conditions"
 #: SliderItemFormType.php:55
 #: TransportFormType.php:78
 msgid "Nahraný obrázek je příliš velký ({{ size }} {{ suffix }}). Maximální velikost obrázku je {{ limit }} {{ suffix }}."
-msgstr ""
+msgstr "Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}."
 
 #: MailTemplateFormType.php:66
 msgid "Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). Maximální velikost souboru je {{ limit }} {{ suffix }}."
-msgstr ""
+msgstr "Uploaded file is to large ({{ size }} {{ suffix }}). Maximum size of an file is {{ limit }} {{ suffix }}."
 
 #: VatFormType.php:46
 msgid "Název DPH nesmí být delší než {{ limit }} znaků"
@@ -385,6 +387,10 @@ msgstr "Please enter a number"
 msgid "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 msgstr "E-mail subject cannot be longer than {{ limit }} characters"
 
+#: AdministratorFormType.php:34
+msgid "Přihlašovací jméno nesmí být delší než {{ limit }} znaků"
+msgstr "Username cannot be longer then {{ limit }} characters"
+
 #: DeliveryAddressFormType.php:77
 #: OrderFormType.php:168
 #: DeliveryAddressFormType.php:79
@@ -470,6 +476,12 @@ msgstr "Please enter zip code"
 msgid "Vyplňte prosím barvu příznaku"
 msgstr "Please enter flag color"
 
+#: AdministratorFormType.php:39
+#: MailSettingFormType.php:35
+#: ContactFormType.php:32
+msgid "Vyplňte prosím celé jméno"
+msgstr "Please enter full name"
+
 #: AdministratorFormType.php:47
 #: UserFormType.php:71
 #: MailSettingFormType.php:29
@@ -497,23 +509,20 @@ msgstr "Please enter password"
 msgid "Vyplňte prosím jednotkovou cenu s DPH"
 msgstr "Please enter unit price with VAT"
 
-#: AdministratorFormType.php:39
 #: UserFormType.php:59
-#: MailSettingFormType.php:35
 #: OrderFormType.php:79
-#: ContactFormType.php:32
 #: UserFormType.php:31
 #: PersonalInfoFormType.php:44
 #: RegistrationFormType.php:25
 msgid "Vyplňte prosím jméno"
-msgstr "Please enter name"
+msgstr "Please enter first name"
 
 #: DeliveryAddressFormType.php:59
 #: OrderFormType.php:149
 #: DeliveryAddressFormType.php:60
 #: PersonalInfoFormType.php:140
 msgid "Vyplňte prosím jméno kontaktní osoby"
-msgstr "Please enter name of contact person"
+msgstr "Please enter first name of contact person"
 
 #: PricingGroupFormType.php:38
 msgid "Vyplňte prosím koeficient cenové skupiny"

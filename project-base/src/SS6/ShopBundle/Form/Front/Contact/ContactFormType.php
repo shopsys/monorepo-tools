@@ -29,7 +29,7 @@ class ContactFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím celé jméno']),
 				],
 			])
 			->add('message', FormType::TEXTAREA, [

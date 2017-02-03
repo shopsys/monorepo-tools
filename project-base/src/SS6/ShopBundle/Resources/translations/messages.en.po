@@ -384,6 +384,14 @@ msgstr "Total item price including VAT"
 msgid "Celková výše DPH"
 msgstr "Total amount of VAT"
 
+#: AdministratorController.php:65
+#: CustomerController.php:200
+#: Content/Administrator/detail.html.twig:17
+#: Content/ContactForm/contactForm.html.twig:6
+#: Mail/ContactForm/mail.html.twig:1
+msgid "Celé jméno"
+msgstr "Full name"
+
 #: ProductController.php:365
 #: PaymentGridFactory.php:79
 #: TransportGridFactory.php:79
@@ -1369,15 +1377,11 @@ msgstr "Because status \"%name%\"  is used with other orders also, you have to c
 msgid "Jen zboží skladem"
 msgstr "Products in stock only"
 
-#: AdministratorController.php:65
-#: CustomerController.php:200
 #: MailController.php:112
-#: Content/Administrator/detail.html.twig:17
 #: Content/Customer/detail.html.twig:29
 #: Content/Customer/detail.html.twig:87
 #: Content/Order/edit.html.twig:85
 #: Content/Order/edit.html.twig:131
-#: Content/ContactForm/contactForm.html.twig:6
 #: Content/Customer/edit.html.twig:19
 #: Content/Customer/edit.html.twig:83
 #: Content/Customer/orderDetail.html.twig:35
@@ -1385,11 +1389,10 @@ msgstr "Products in stock only"
 #: Content/Order/step3.html.twig:13
 #: Content/Order/step3.html.twig:48
 #: Content/Registration/register.html.twig:14
-#: Mail/ContactForm/mail.html.twig:1
 #: Mail/Order/billingAddress.html.twig:3
 #: Mail/Order/deliveryAddress.html.twig:3
 msgid "Jméno"
-msgstr "Name"
+msgstr "First name"
 
 #: Content/Product/detail.html.twig:4
 msgid "Karta zboží"
