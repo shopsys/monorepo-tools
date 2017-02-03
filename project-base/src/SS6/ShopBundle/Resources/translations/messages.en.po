@@ -1138,11 +1138,6 @@ msgstr "Main picture"
 msgid "Hlavní varianta"
 msgstr "Main variant"
 
-#: Order/AdvancedSearch/advancedSearch.html.twig:7
-#: Product/AdvancedSearch/advancedSearch.html.twig:7
-msgid "Hledat"
-msgstr "Search"
-
 #: FrontBreadcrumbGenerator.php:39
 msgid "Hledání"
 msgstr "Search"
@@ -4125,7 +4120,9 @@ msgid "Vygenerováno"
 msgstr "Generated"
 
 #: Content/Customer/list.html.twig:19
+#: Order/AdvancedSearch/advancedSearch.html.twig:7
 #: Content/Order/quickSearchFormContent.html.twig:4
+#: Product/AdvancedSearch/advancedSearch.html.twig:7
 #: Content/Product/quickSearchFormContent.html.twig:4
 #: Content/Search/searchBox.html.twig:20
 msgid "Vyhledat"

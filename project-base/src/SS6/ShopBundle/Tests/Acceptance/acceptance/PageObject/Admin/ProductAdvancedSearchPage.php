@@ -20,7 +20,7 @@ class ProductAdvancedSearchPage extends AbstractPage {
 		$this->tester->waitForAjax();
 		$this->tester->fillFieldByCss('.js-advanced-search-rule-value input', $value);
 
-		$this->tester->clickByText('Hledat');
+		$this->tester->clickByText('Vyhledat');
 	}
 
 	/**
