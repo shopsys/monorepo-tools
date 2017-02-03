@@ -2756,10 +2756,6 @@ msgstr "Pořadí bylo uloženo."
 msgid "Pořadí se nepodařilo uložit"
 msgstr "Pořadí se nepodařilo uložit"
 
-#: FrontBreadcrumbGenerator.php:47
-msgid "Prehled značek"
-msgstr "Prehled značek"
-
 #: Content/Superadmin/cssDocumentation.html.twig:1370
 msgid "Prevence dvojtého borderu mezi prvky"
 msgstr "Prevence dvojtého borderu mezi prvky"
@@ -2971,6 +2967,7 @@ msgstr "Přehled zboží"
 msgid "Přehled zboží v košíku"
 msgstr "Přehled zboží v košíku"
 
+#: FrontBreadcrumbGenerator.php:47
 #: BrandBreadcrumbGenerator.php:29
 #: Content/Brand/list.html.twig:3
 #: Content/Brand/list.html.twig:4

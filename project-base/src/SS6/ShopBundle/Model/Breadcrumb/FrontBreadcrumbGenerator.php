@@ -44,7 +44,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 				];
 			case 'front_brand_list':
 				return [
-					new BreadcrumbItem(t('Prehled značek')),
+					new BreadcrumbItem(t('Přehled značek')),
 				];
 			case 'front_error_page':
 				return $this->getBreacrumbItemForErrorPage($routeParameters['code']);

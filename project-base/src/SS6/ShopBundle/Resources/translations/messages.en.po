@@ -2756,10 +2756,6 @@ msgstr "Order saved."
 msgid "Pořadí se nepodařilo uložit"
 msgstr "Order saving failed"
 
-#: FrontBreadcrumbGenerator.php:47
-msgid "Prehled značek"
-msgstr "Brand overview"
-
 #: Content/Superadmin/cssDocumentation.html.twig:1370
 msgid "Prevence dvojtého borderu mezi prvky"
 msgstr "Double border between elements prevention"
@@ -2971,6 +2967,7 @@ msgstr "Products overview"
 msgid "Přehled zboží v košíku"
 msgstr "Products in cart overview"
 
+#: FrontBreadcrumbGenerator.php:47
 #: BrandBreadcrumbGenerator.php:29
 #: Content/Brand/list.html.twig:3
 #: Content/Brand/list.html.twig:4
