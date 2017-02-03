@@ -46,14 +46,14 @@ class OrderItemFormType extends AbstractType {
 			->add('vatPercent', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím sazbu DPH']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
 				],
 				'error_bubbling' => true,
 			])
 			->add('quantity', FormType::INTEGER, [
 				'constraints' => [
 					new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
-					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než 0']),
+					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než {{ compared_value }}']),
 				],
 				'error_bubbling' => true,
 			])

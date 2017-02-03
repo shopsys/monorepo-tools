@@ -102,7 +102,7 @@ class OrderFormType extends AbstractType {
 			->add('companyName', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Název firmy nesmí být delší než {{ limit }} znaků']),
 				],
 			])
 			->add('companyNumber', FormType::TEXT, [

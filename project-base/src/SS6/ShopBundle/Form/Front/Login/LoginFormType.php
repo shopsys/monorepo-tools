@@ -19,7 +19,7 @@ class LoginFormType extends AbstractType {
 		$builder
 			->add('email', FormType::TEXT, [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím email']),
+						new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
 						new Email(),
 					],
 				]

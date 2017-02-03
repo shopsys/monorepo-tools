@@ -48,7 +48,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Název firmy nesmí být delší než {{ limit }} znaků',
 					]),
 				],
 			])

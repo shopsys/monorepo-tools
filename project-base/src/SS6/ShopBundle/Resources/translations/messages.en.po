@@ -637,7 +637,7 @@ msgstr "Complement to title"
 
 #: Content/Seo/seoSetting.html.twig:16
 msgid "Doplněk k titulku bude připojen za všechny titulky na eshopu. Např. pokud nastavíte doplněk na \"| Můj obchod\" a název zboží je \"D-Link\", bude výsledný titulek u tohoto zboží \"D-Link | Můj obchod\""
-msgstr ""
+msgstr "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
 
 #: Content/Payment/detail.html.twig:40
 msgid "Doplňkové informace"
@@ -1055,7 +1055,7 @@ msgstr "Front-end: Listing of products in section, listing of products on specia
 msgid "Google analytics"
 msgstr "Google analytics"
 
-#: AdvertFormType.php:142
+#: AdvertFormType.php:143
 msgid "HTML kód"
 msgstr "HTML code"
 
@@ -1166,7 +1166,7 @@ msgstr "Bulk edit"
 
 #: ProductExtension.php:60
 msgid "ID %productId%"
-msgstr ""
+msgstr "ID %productId%"
 
 #: Content/Superadmin/cssDocumentation.html.twig:70
 msgid "ID je v CSS element s nejvyžší prioritou a proto se mu vyhneme. Jakmile něco navážeme na ID, přebijeme to pouze něčím s ID nebo pomocí !important. V reálném využití v SS5 se díky tomu musely stejné části na různých místech v eshopu stylovat vícekrát. Pokud využijeme pouze třídy a komponenty, těmto problémům se vyhneme."
@@ -2050,11 +2050,11 @@ msgstr "Not possible to assign product to itself"
 
 #: Content/ProductPicker/listGrid.html.twig:30
 msgid "Nelze vybrat zboží, které je hlavní variantou"
-msgstr ""
+msgstr "You cannot choose product that is main variant"
 
 #: Content/ProductPicker/listGrid.html.twig:35
 msgid "Nelze vybrat zboží, které je variantou"
-msgstr ""
+msgstr "You cannot choose product that is variant"
 
 #: ProductController.php:334
 msgid "Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou."
@@ -2268,7 +2268,7 @@ msgstr "Name serves only for internal use within the administration"
 
 #: ProductExtension.php:74
 msgid "Název zboží ve výchozím jazyce není vyplněn"
-msgstr ""
+msgstr "Product name in default language is not entered"
 
 #: MailController.php:90
 msgid "Název zvolené dopravy"
@@ -2307,7 +2307,7 @@ msgstr "Terms and conditions"
 
 #: TermsAndConditionsFacade.php:73
 msgid "Obchodní-podmínky.html"
-msgstr "Obchodní-podmínky.html"
+msgstr "Terms-and-conditions.html"
 
 #: Content/Superadmin/cssDocumentation.html.twig:156
 msgid "Obecné wrap-border"
@@ -2383,7 +2383,7 @@ msgstr "Customer orders"
 msgid "Obrázek"
 msgstr "Picture"
 
-#: AdvertFormType.php:143
+#: AdvertFormType.php:144
 msgid "Obrázek s odkazem"
 msgstr "Picture with link"
 
@@ -3256,13 +3256,9 @@ msgid "SEO"
 msgstr "SEO"
 
 #: Content/Cart/index.html.twig:29
+#: Content/Customer/orderDetail.html.twig:148
 msgid "Sazba DPH"
 msgstr "VAT rate"
-
-#: Content/Order/edit.html.twig:167
-#: Content/Customer/orderDetail.html.twig:148
-msgid "Sazba DPH (%)"
-msgstr "VAT rate (%)"
 
 #: Content/Vat/listGrid.html.twig:28
 #: Content/Vat/listGrid.html.twig:44
@@ -4091,11 +4087,11 @@ msgstr "Return back"
 
 #: InputPriceLabelExtension.php:39
 msgid "Vstupní cena bez DPH"
-msgstr ""
+msgstr "Input price without VAT"
 
 #: InputPriceLabelExtension.php:42
 msgid "Vstupní cena s DPH"
-msgstr ""
+msgstr "Input price with VAT"
 
 #: ProductType.php:72
 msgid "Vyberte produkt"
@@ -4359,6 +4355,10 @@ msgstr "Occurence"
 msgid "Výsledky hledání \"%searchText%\""
 msgstr "Search results for \"%searchText%\""
 
+#: Content/Order/edit.html.twig:167
+msgid "Výše DPH (%)"
+msgstr "VAT rate (%)"
+
 #: Content/Vat/listGrid.html.twig:11
 msgid "Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou."
 msgstr "Rate can't be modified. It is necessary to create new rate, remove existing one and replace it with new one."
@@ -4408,12 +4408,12 @@ msgstr "Wrap-border"
 #: Content/Feed/list.html.twig:4
 #: Content/Feed/list.html.twig:3
 msgid "XML Feedy"
-msgstr "XML Feedy"
+msgstr "XML Feeds"
 
 #: Content/Feed/listDelivery.html.twig:3
 #: Content/Feed/listDelivery.html.twig:4
 msgid "XML dostupnostní feedy"
-msgstr "XML "
+msgstr "XML availability feeds"
 
 #: CartController.php:319
 msgid "Z košíku bylo odstraněno zboží {{ name }}"
@@ -4591,7 +4591,7 @@ msgstr "Zboží.cz"
 #: PriceExtension.php:145
 #: PriceExtension.php:159
 msgid "Zdarma"
-msgstr ""
+msgstr "Free"
 
 #: Admin/Grid/Grid.html.twig:131
 msgid "Zde můžete přetáhnout další obsah."
@@ -4687,7 +4687,7 @@ msgstr "View all results"
 #: Content/Payment/detail.html.twig:23
 #: Content/Transport/detail.html.twig:23
 msgid "Zobrazovat na"
-msgstr "Display to"
+msgstr "Display on"
 
 #: Admin/Grid/Grid.html.twig:220
 #: Inline/Paginator/paginator.html.twig:7

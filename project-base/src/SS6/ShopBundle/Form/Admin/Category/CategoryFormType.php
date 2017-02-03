@@ -60,7 +60,7 @@ class CategoryFormType extends AbstractType {
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 				],
 				'options' => [
 					'required' => false,

@@ -221,7 +221,7 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
 				],
 			])
 			->add('sellingFrom', FormType::DATE_PICKER, [

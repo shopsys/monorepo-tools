@@ -40,7 +40,7 @@ class TransportFormType extends AbstractType {
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 				],
 				'options' => [
 					'required' => false,
@@ -57,7 +57,7 @@ class TransportFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte výši DPH']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
 				],
 			])
 			->add('description', FormType::LOCALIZED, [

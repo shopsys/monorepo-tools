@@ -53,7 +53,7 @@ class VatFormType extends AbstractType {
 				'read_only' => $this->scenario === self::SCENARIO_EDIT,
 				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši dph']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
 				],
 			]);
 	}

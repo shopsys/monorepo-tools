@@ -13,7 +13,7 @@ msgid "Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí b�
 msgstr "Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků"
 
 #: PaymentEditFormType.php:70
-#: ProductEditFormType.php:269
+#: ProductEditFormType.php:270
 #: ProductFormType.php:215
 #: TransportEditFormType.php:70
 #: FreeTransportAndPaymentPriceLimitsFormType.php:84
@@ -112,7 +112,7 @@ msgstr "Jméno nesmí být delší než {{ limit }} znaků"
 msgid "Katalogové číslo nesmí být delší než {{ limit }} znaků"
 msgstr "Katalogové číslo nesmí být delší než {{ limit }} znaků"
 
-#: ProductEditFormType.php:166
+#: ProductEditFormType.php:167
 msgid "Každý parametr může být nastaven pouze jednou"
 msgstr "Každý parametr může být nastaven pouze jednou"
 
@@ -125,20 +125,13 @@ msgid "Kód měny nesmí být delší než {{ limit }} znaků"
 msgstr "Kód měny nesmí být delší než {{ limit }} znaků"
 
 #: OrderItemFormType.php:56
-msgid "Množství musí být větší než 0"
-msgstr "Množství musí být větší než 0"
+#: CartFormType.php:37
+msgid "Množství musí být větší než {{ compared_value }}"
+msgstr "Množství musí být větší než {{ compared_value }}"
 
 #: PersonalInfoFormType.php:242
 msgid "Musíte souhlasit s obchodními podmínkami."
 msgstr "Musíte souhlasit s obchodními podmínkami."
-
-#: CartFormType.php:37
-msgid "Musíte zadat kladné množství"
-msgstr "Musíte zadat kladné množství"
-
-#: CartFormType.php:36
-msgid "Musíte zadat množství"
-msgstr "Musíte zadat množství"
 
 #: AdvertFormType.php:106
 #: CategoryFormType.php:102
@@ -148,12 +141,12 @@ msgstr "Musíte zadat množství"
 #: ProductEditFormType.php:143
 #: SliderItemFormType.php:55
 #: TransportFormType.php:78
-msgid "Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}"
-msgstr "Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}"
+msgid "Nahraný obrázek je příliš velký ({{ size }} {{ suffix }}). Maximální velikost obrázku je {{ limit }} {{ suffix }}."
+msgstr "Nahraný obrázek je příliš velký ({{ size }} {{ suffix }}). Maximální velikost obrázku je {{ limit }} {{ suffix }}."
 
 #: MailTemplateFormType.php:66
-msgid "Nahraný soubor ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}"
-msgstr "Nahraný soubor ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}"
+msgid "Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). Maximální velikost souboru je {{ limit }} {{ suffix }}."
+msgstr "Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). Maximální velikost souboru je {{ limit }} {{ suffix }}."
 
 #: VatFormType.php:46
 msgid "Název DPH nesmí být delší než {{ limit }} znaků"
@@ -165,7 +158,9 @@ msgstr "Název dostupnosti nesmí být delší než {{ limit }} znaků"
 
 #: BillingAddressFormType.php:61
 #: DeliveryAddressFormType.php:51
+#: OrderFormType.php:105
 #: PersonalInfoFormType.php:76
+#: PersonalInfoFormType.php:169
 msgid "Název firmy nesmí být delší než {{ limit }} znaků"
 msgstr "Název firmy nesmí být delší než {{ limit }} znaků"
 
@@ -206,13 +201,6 @@ msgstr "Název produktu nesmí být delší než {{ limit }} znaků"
 msgid "Název příznaku nesmí být delší než {{ limit }} znaků"
 msgstr "Název příznaku nesmí být delší než {{ limit }} znaků"
 
-#: BillingAddressFormType.php:61
-#: DeliveryAddressFormType.php:51
-#: OrderFormType.php:105
-#: PersonalInfoFormType.php:169
-msgid "Název společnosti nesmí být delší než {{ limit }} znaků"
-msgstr "Název společnosti nesmí být delší než {{ limit }} znaků"
-
 #: OrderStatusFormType.php:31
 msgid "Název stavu nesmí být delší než {{ limit }} znaků"
 msgstr "Název stavu nesmí být delší než {{ limit }} znaků"
@@ -246,7 +234,7 @@ msgstr "Obrázek může být pouze ve formátech jpg nebo png"
 msgid "Obrázek může být pouze ve formátech jpg, png nebo gif"
 msgstr "Obrázek může být pouze ve formátech jpg, png nebo gif"
 
-#: SliderItemFormType.php:63
+#: SliderItemFormType.php:64
 msgid "Odkaz musí být validní URL adresa"
 msgstr "Odkaz musí být validní URL adresa"
 
@@ -269,8 +257,8 @@ msgstr "Počet dní k expedici musí být celé číslo"
 msgid "Počet dní k expedici musí být větší nebo roven {{ compared_value }}"
 msgstr "Počet dní k expedici musí být větší nebo roven {{ compared_value }}"
 
-#: MailTemplateFormType.php:92
-#: MailTemplateFormType.php:114
+#: MailTemplateFormType.php:93
+#: MailTemplateFormType.php:115
 msgid "Proměnná {{ needle }} je povinná"
 msgstr "Proměnná {{ needle }} je povinná"
 
@@ -315,7 +303,7 @@ msgstr "Prosím vyberte typ reklamy"
 msgid "Prosím vyberte umístění článku"
 msgstr "Prosím vyberte umístění článku"
 
-#: SliderItemFormType.php:70
+#: SliderItemFormType.php:71
 msgid "Prosím vyberte viditelnost."
 msgstr "Prosím vyberte viditelnost."
 
@@ -328,7 +316,7 @@ msgid "Prosím vyberte výchozí jednotku"
 msgstr "Prosím vyberte výchozí jednotku"
 
 #: PaymentEditFormType.php:67
-#: ProductEditFormType.php:264
+#: ProductEditFormType.php:265
 #: ProductFormType.php:210
 #: TransportEditFormType.php:67
 #: FreeTransportAndPaymentPriceLimitsFormType.php:88
@@ -339,14 +327,7 @@ msgstr "Prosím vyplňte cenu"
 msgid "Prosím vyplňte hodnotu parametru"
 msgstr "Prosím vyplňte hodnotu parametru"
 
-#: CategoryFormType.php:63
-#: PaymentFormType.php:51
-#: SliderItemFormType.php:39
-#: TransportFormType.php:43
-msgid "Prosím vyplňte název"
-msgstr "Prosím vyplňte název"
-
-#: SliderItemFormType.php:62
+#: SliderItemFormType.php:63
 msgid "Prosím vyplňte odkaz"
 msgstr "Prosím vyplňte odkaz"
 
@@ -358,18 +339,12 @@ msgstr "Prosím vyplňte prioritu řazení zboží"
 msgid "Prosím vyplňte typ vstupní ceny"
 msgstr "Prosím vyplňte typ vstupní ceny"
 
-#: PaymentFormType.php:74
-#: ProductFormType.php:224
-#: TransportFormType.php:60
-msgid "Prosím vyplňte výši DPH"
-msgstr "Prosím vyplňte výši DPH"
-
 #: Admin/Vat/VatFormType.php:54
 msgid "Prosím zadejte DPH v platném formátu"
 msgstr "Prosím zadejte DPH v platném formátu"
 
 #: Admin/Payment/PaymentEditFormType.php:65
-#: Admin/Product/ProductEditFormType.php:261
+#: Admin/Product/ProductEditFormType.php:262
 #: Admin/Product/ProductFormType.php:207
 #: Admin/Transport/TransportEditFormType.php:65
 #: Front/Product/ProductFilterFormType.php:71
@@ -381,19 +356,9 @@ msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou �
 msgid "Prosím zadejte koeficient v platném formátu"
 msgstr "Prosím zadejte koeficient v platném formátu"
 
-#: CurrencyFormType.php:61
-msgid "Prosím zadejte kurz měny"
-msgstr "Prosím zadejte kurz měny"
-
 #: ProductFormType.php:151
 msgid "Prosím zadejte množství skladem"
 msgstr "Prosím zadejte množství skladem"
-
-#: CurrencyFormType.php:45
-#: CurrencyFormType.php:52
-#: BrandFormType.php:43
-msgid "Prosím zadejte název"
-msgstr "Prosím zadejte název"
 
 #: CurrencyType.php:46
 msgid "Prosím zadejte platný třímístný kód měny podle standardu ISO 4217 (velkými písmeny)"
@@ -416,7 +381,7 @@ msgstr "Prosím zadejte výchozí výši DPH"
 msgid "Prosím zadejte číslo"
 msgstr "Prosím zadejte číslo"
 
-#: MailTemplateFormType.php:86
+#: MailTemplateFormType.php:87
 msgid "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 msgstr "Předmět e-mailu nesmí být delší než {{ limit }} znaků"
 
@@ -511,14 +476,11 @@ msgstr "Vyplňte prosím barvu příznaku"
 #: OrderFormType.php:91
 #: ContactFormType.php:43
 #: ResetPasswordFormType.php:22
+#: LoginFormType.php:22
 #: PersonalInfoFormType.php:56
 #: RegistrationFormType.php:37
 msgid "Vyplňte prosím e-mail"
 msgstr "Vyplňte prosím e-mail"
-
-#: LoginFormType.php:22
-msgid "Vyplňte prosím email"
-msgstr "Vyplňte prosím email"
 
 #: AdministratorFormType.php:60
 #: UserFormType.php:85
@@ -557,6 +519,14 @@ msgstr "Vyplňte prosím jméno kontaktní osoby"
 msgid "Vyplňte prosím koeficient cenové skupiny"
 msgstr "Vyplňte prosím koeficient cenové skupiny"
 
+#: CurrencyFormType.php:61
+msgid "Vyplňte prosím kurz měny"
+msgstr "Vyplňte prosím kurz měny"
+
+#: CurrencyFormType.php:52
+msgid "Vyplňte prosím kód měny"
+msgstr "Vyplňte prosím kód měny"
+
 #: ScriptFormType.php:35
 msgid "Vyplňte prosím kód skriptu"
 msgstr "Vyplňte prosím kód skriptu"
@@ -570,6 +540,7 @@ msgid "Vyplňte prosím login"
 msgstr "Vyplňte prosím login"
 
 #: OrderItemFormType.php:55
+#: CartFormType.php:36
 msgid "Vyplňte prosím množství"
 msgstr "Vyplňte prosím množství"
 
@@ -582,7 +553,13 @@ msgstr "Vyplňte prosím množství"
 msgid "Vyplňte prosím město"
 msgstr "Vyplňte prosím město"
 
+#: CategoryFormType.php:63
 #: OrderItemFormType.php:29
+#: PaymentFormType.php:51
+#: CurrencyFormType.php:45
+#: BrandFormType.php:43
+#: SliderItemFormType.php:39
+#: TransportFormType.php:43
 msgid "Vyplňte prosím název"
 msgstr "Vyplňte prosím název"
 
@@ -642,7 +619,7 @@ msgstr "Vyplňte prosím platný e-mail"
 msgid "Vyplňte prosím procento slevy."
 msgstr "Vyplňte prosím procento slevy."
 
-#: MailTemplateFormType.php:81
+#: MailTemplateFormType.php:82
 msgid "Vyplňte prosím předmět"
 msgstr "Vyplňte prosím předmět"
 
@@ -669,12 +646,6 @@ msgstr "Vyplňte prosím příjmení"
 msgid "Vyplňte prosím příjmení kontaktní osoby"
 msgstr "Vyplňte prosím příjmení kontaktní osoby"
 
-#: OrderItemFormType.php:49
-#: OrderPaymentFormType.php:55
-#: OrderTransportFormType.php:55
-msgid "Vyplňte prosím sazbu DPH"
-msgstr "Vyplňte prosím sazbu DPH"
-
 #: OrderFormType.php:98
 #: PersonalInfoFormType.php:63
 msgid "Vyplňte prosím telefon"
@@ -684,7 +655,7 @@ msgstr "Vyplňte prosím telefon"
 msgid "Vyplňte prosím text"
 msgstr "Vyplňte prosím text"
 
-#: MailTemplateFormType.php:107
+#: MailTemplateFormType.php:108
 msgid "Vyplňte prosím text emailu"
 msgstr "Vyplňte prosím text emailu"
 
@@ -701,9 +672,15 @@ msgstr "Vyplňte prosím text článku"
 msgid "Vyplňte prosím ulici"
 msgstr "Vyplňte prosím ulici"
 
+#: OrderItemFormType.php:49
+#: OrderPaymentFormType.php:55
+#: OrderTransportFormType.php:55
+#: PaymentFormType.php:74
+#: ProductFormType.php:224
+#: TransportFormType.php:60
 #: VatFormType.php:56
-msgid "Vyplňte prosím výši dph"
-msgstr "Vyplňte prosím výši dph"
+msgid "Vyplňte prosím výši DPH"
+msgstr "Vyplňte prosím výši DPH"
 
 #: OrderStatusFormType.php:30
 msgid "Vyplňte prosím všechny názvy stavu"

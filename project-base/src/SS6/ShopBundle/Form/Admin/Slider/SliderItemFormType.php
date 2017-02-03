@@ -36,7 +36,7 @@ class SliderItemFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 				],
 			])
 			->add('image', FormType::FILE_UPLOAD, [

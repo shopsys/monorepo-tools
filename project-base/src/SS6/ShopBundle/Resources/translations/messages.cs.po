@@ -1055,7 +1055,7 @@ msgstr "Front-end: Výpis produktů v oddělení, výpis akčního zboží"
 msgid "Google analytics"
 msgstr "Google analytics"
 
-#: AdvertFormType.php:142
+#: AdvertFormType.php:143
 msgid "HTML kód"
 msgstr "HTML kód"
 
@@ -2383,7 +2383,7 @@ msgstr "Objednávky zákazníka"
 msgid "Obrázek"
 msgstr "Obrázek"
 
-#: AdvertFormType.php:143
+#: AdvertFormType.php:144
 msgid "Obrázek s odkazem"
 msgstr "Obrázek s odkazem"
 
@@ -3256,13 +3256,9 @@ msgid "SEO"
 msgstr "SEO"
 
 #: Content/Cart/index.html.twig:29
+#: Content/Customer/orderDetail.html.twig:148
 msgid "Sazba DPH"
 msgstr "Sazba DPH"
-
-#: Content/Order/edit.html.twig:167
-#: Content/Customer/orderDetail.html.twig:148
-msgid "Sazba DPH (%)"
-msgstr "Sazba DPH (%)"
 
 #: Content/Vat/listGrid.html.twig:28
 #: Content/Vat/listGrid.html.twig:44
@@ -4358,6 +4354,10 @@ msgstr "Výskyt"
 #: Content/Product/search.html.twig:16
 msgid "Výsledky hledání \"%searchText%\""
 msgstr "Výsledky hledání \"%searchText%\""
+
+#: Content/Order/edit.html.twig:167
+msgid "Výše DPH (%)"
+msgstr "Výše DPH (%)"
 
 #: Content/Vat/listGrid.html.twig:11
 msgid "Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou."

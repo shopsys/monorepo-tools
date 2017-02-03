@@ -40,7 +40,7 @@ class BrandFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte název']),
+					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
 					new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
 				],
 			])
