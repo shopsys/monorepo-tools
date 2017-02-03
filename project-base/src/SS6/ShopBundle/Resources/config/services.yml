@@ -338,6 +338,11 @@ services:
   ss6.shop.component.translation.php_file_extractor_factory:
     class: SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory
 
+  ss6.shop.component.translation.constraint_message_extractor:
+    class: SS6\ShopBundle\Component\Translation\ConstraintMessageExtractor
+    tags:
+      - { name: jms_translation.file_visitor }
+
   ss6.shop.component.translation.admin_menu_yaml_file_extractor:
     class: SS6\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor
     arguments:

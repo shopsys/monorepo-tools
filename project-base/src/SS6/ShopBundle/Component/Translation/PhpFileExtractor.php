@@ -9,15 +9,13 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use PHPParser_Node;
-use PHPParser_Node_Expr_Concat;
 use PHPParser_Node_Expr_FuncCall;
 use PHPParser_Node_Expr_MethodCall;
 use PHPParser_Node_Name;
-use PHPParser_Node_Scalar_String;
 use PHPParser_NodeTraverser;
 use PHPParser_NodeVisitor;
 use SplFileInfo;
-use SS6\ShopBundle\Component\Translation\Exception\InvalidTranslationIdException;
+use SS6\ShopBundle\Component\Translation\PhpParserNodeHelper;
 use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
@@ -113,7 +111,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 			throw new \SS6\ShopBundle\Component\Translation\Exception\MessageIdArgumentNotPresent();
 		}
 
-		return $this->getConcatenatedString($node->args[$messageIdArgumentIndex]->value);
+		return PhpParserNodeHelper::getConcatenatedStringValue($node->args[$messageIdArgumentIndex]->value, $this->file);
 	}
 
 	/**
@@ -125,30 +123,10 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 		$domainArgumentIndex = $this->transMethodSpecifications[$methodName]->getDomainArgumentIndex();
 
 		if ($domainArgumentIndex !== null && isset($node->args[$domainArgumentIndex])) {
-			return $this->getConcatenatedString($node->args[$domainArgumentIndex]->value);
+			return PhpParserNodeHelper::getConcatenatedStringValue($node->args[$domainArgumentIndex]->value, $this->file);
 		} else {
 			return self::DEFAULT_MESSAGE_DOMAIN;
 		}
-	}
-
-	/**
-	 * @param \PHPParser_Node $node
-	 * @return string
-	 */
-	private function getConcatenatedString(PHPParser_Node $node) {
-		if ($node instanceof PHPParser_Node_Scalar_String) {
-			return $node->value;
-		}
-
-		if ($node instanceof PHPParser_Node_Expr_Concat) {
-			return $this->getConcatenatedString($node->left) . $this->getConcatenatedString($node->right);
-		}
-
-		throw new InvalidTranslationIdException(
-			sprintf('Can only extract the message ID or message domain from a scalar or concatenated string,'
-				. ' but got "%s". Please refactor your code to make it extractable (in %s on line %d).',
-			get_class($node), $this->file, $node->getLine())
-		);
 	}
 
 	/**

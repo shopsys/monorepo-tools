@@ -5,7 +5,7 @@ namespace SS6\ShopBundle\Component\Translation\Exception;
 use Exception;
 use SS6\ShopBundle\Component\Translation\Exception\TranslationException;
 
-class InvalidTranslationIdException extends Exception implements TranslationException {
+class StringValueUnextractableException extends Exception implements TranslationException {
 
 	/**
 	 * @param string $message
