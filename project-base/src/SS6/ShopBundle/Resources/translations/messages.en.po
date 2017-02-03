@@ -78,7 +78,7 @@ msgstr "1 254 CZK"
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:29
 msgid "Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní. Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou."
-msgstr "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one. "
+msgstr "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
 
 #: Content/Customer/edit.html.twig:25
 msgid "Abychom předešli možnosti zcizení účtu, je třeba změnu e-mailu řešit individuálně. Pokud se Vám e-mailová adresa změnila, tak nás prosím kontaktujte."
@@ -221,11 +221,11 @@ msgstr "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 
 #: CustomerController.php:145
 msgid "Byl upraven zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified "
+msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 
 #: ArticleController.php:114
 msgid "Byl upraven článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-msgstr "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified "
+msgstr "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
 
 #: AdministratorController.php:175
 msgid "Byl vytvořen administrátor <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
@@ -233,11 +233,11 @@ msgstr "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> crea
 
 #: ScriptController.php:63
 msgid "Byl vytvořen skript <a href=\"{{ url }}\"><strong>{{ name }}</strong></a>"
-msgstr "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created "
+msgstr "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 
 #: CustomerController.php:253
 msgid "Byl vytvořen zákazník <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created "
+msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
 
 #: ArticleController.php:171
 msgid "Byl vytvořen článek <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
@@ -305,7 +305,7 @@ msgstr "You have been successfully registered."
 
 #: BestsellingProductController.php:92
 msgid "Bylo nastaveno nejprodávanější zboží kategorie <strong><a href=\"{{ url }}\">{{ name }}</a></strong>"
-msgstr "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set. "
+msgstr "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
 
 #: CookiesController.php:62
 msgid "Bylo upraveno nastavení informací o cookies."
@@ -321,7 +321,7 @@ msgstr "Product <strong>{{ product|productDisplayName }}</strong> modified"
 
 #: ProductController.php:202
 msgid "Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>"
-msgstr "Product <strong>{{ product|productDisplayName }}</strong> created "
+msgstr "Product <strong>{{ product|productDisplayName }}</strong> created"
 
 #: LoginController.php:33
 #: login.js:22
@@ -330,7 +330,7 @@ msgstr "Invalid login"
 
 #: categoryTree.sorting.js:59
 msgid "Během ukládání došlo k chybě. Pořadí nebylo uloženo."
-msgstr "There was an error while saving. The order isn't saved. "
+msgstr "There was an error while saving. The order isn't saved."
 
 #: Content/Superadmin/cssDocumentation.html.twig:9
 msgid "CSS dokumentace"
@@ -433,7 +433,7 @@ msgstr "Pricing group"
 
 #: PricingGroupController.php:121
 msgid "Cenová skupina \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
-msgstr "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead? "
+msgstr "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 
 #: PricingGroupController.php:80
 msgid "Cenová skupina <strong>{{ name }}</strong> byla smazána"
@@ -537,7 +537,7 @@ msgstr "More bestsellers"
 
 #: MailController.php:88
 msgid "Datum a čas vytvoření objednávky"
-msgstr "Date and time of order creation "
+msgstr "Date and time of order creation"
 
 #: Content/Customer/edit.html.twig:17
 msgid "Datum registrace"
@@ -582,7 +582,7 @@ msgstr "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unit
 
 #: Content/Payment/detail.html.twig:33
 msgid "Do objednávky bude přidána zaokrouhlovací položka s 0% DPH. Používá se pro platbu v hotovosti."
-msgstr "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash. "
+msgstr "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
 
 #: MailController.php:96
 msgid "Dodací adresa"
@@ -729,7 +729,7 @@ msgstr "Availability"
 
 #: AvailabilityController.php:104
 msgid "Dostupnost \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou dostupnost místo ní chcete nastavit?"
-msgstr "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead? "
+msgstr "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
 
 #: AvailabilityController.php:70
 msgid "Dostupnost <strong>{{ name }}</strong> byla smazána"
@@ -762,7 +762,7 @@ msgstr "Second type of error message"
 
 #: ContactFormController.php:51
 msgid "Děkujeme, váš vzkaz byl odeslán."
-msgstr "Thank you, your message has been sent. "
+msgstr "Thank you, your message has been sent."
 
 #: Content/Superadmin/cssDocumentation.html.twig:756
 msgid "Důležitou věcí je, že tlačítka, inputy (textové), selecty, textarea, vše by mělo mít základní třídu. Tzn btn a input. Nedávejte ji tam nebo odebírejte jen v případě, že víte, co děláte!"
@@ -802,7 +802,7 @@ msgstr "EAN"
 #: Content/Administrator/edit.html.twig:3
 #: Content/Administrator/edit.html.twig:4
 msgid "Editace administrátora"
-msgstr "Editing administrator "
+msgstr "Editing administrator"
 
 #: AdministratorController.php:137
 msgid "Editace administrátora - %name%"
@@ -810,13 +810,13 @@ msgstr "Editing administrator - %name%"
 
 #: Resources/config/admin_menu.yml:
 msgid "Editace domény"
-msgstr "Editing domain "
+msgstr "Editing domain"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Transport/edit.html.twig:3
 #: Content/Transport/edit.html.twig:4
 msgid "Editace dopravy"
-msgstr "Editing shipping "
+msgstr "Editing shipping"
 
 #: TransportController.php:140
 msgid "Editace dopravy - %name%"
@@ -834,11 +834,11 @@ msgstr "Editing category - %name%"
 
 #: Resources/config/admin_menu.yml:
 msgid "Editace nejprodávanějšího zboží"
-msgstr "Editing bestseller "
+msgstr "Editing bestseller"
 
 #: Resources/config/admin_menu.yml:
 msgid "Editace objednávky"
-msgstr "Editing order "
+msgstr "Editing order"
 
 #: OrderController.php:151
 msgid "Editace objednávky - č. %number%"
@@ -848,7 +848,7 @@ msgstr "Editing order - Nr. %number%"
 #: Content/Payment/edit.html.twig:3
 #: Content/Payment/edit.html.twig:4
 msgid "Editace platby"
-msgstr "Editing payment "
+msgstr "Editing payment"
 
 #: PaymentController.php:139
 msgid "Editace platby - %name%"
@@ -872,7 +872,7 @@ msgstr "Editing script"
 
 #: Resources/config/admin_menu.yml:
 msgid "Editace stavu objednávek"
-msgstr "Editing order status "
+msgstr "Editing order status"
 
 #: Resources/config/admin_menu.yml:
 msgid "Editace stránky"
@@ -1178,7 +1178,7 @@ msgstr "ID %productId%"
 
 #: Content/Superadmin/cssDocumentation.html.twig:70
 msgid "ID je v CSS element s nejvyžší prioritou a proto se mu vyhneme. Jakmile něco navážeme na ID, přebijeme to pouze něčím s ID nebo pomocí !important. V reálném využití v SS5 se díky tomu musely stejné části na různých místech v eshopu stylovat vícekrát. Pokud využijeme pouze třídy a komponenty, těmto problémům se vyhneme."
-msgstr "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems. "
+msgstr "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems."
 
 #: Content/Superadmin/cssDocumentation.html.twig:104
 msgid "IN - malé komponenty (šipka u linku, hvěždičky hodnocení) malé věci co jsou často někde"
@@ -1226,7 +1226,7 @@ msgstr "Information message"
 
 #: Content/Superadmin/cssDocumentation.html.twig:223
 msgid "Informační hláška - bloková"
-msgstr "Information message - block "
+msgstr "Information message - block"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1299
 msgid "Input"
@@ -1332,7 +1332,7 @@ msgstr "Unit"
 
 #: UnitController.php:67
 msgid "Jednotka \"%name%\" je nastavena jako výchozí. Pro její odstranění musíte zvolit novou výchozí jednotku. Jakou jednotku místo ní chcete nastavit?"
-msgstr "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead? "
+msgstr "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
 
 #: UnitController.php:123
 msgid "Jednotka <strong>{{ name }}</strong> byla smazána"
@@ -1371,7 +1371,7 @@ msgstr "As this is a system which will often use same or similar elements, it is
 
 #: OrderStatusController.php:105
 msgid "Jelikož stav \"%name%\" je používán ještě u některých objednávek, musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? Při této změně stavu nebude odeslán email zákazníkům."
-msgstr "Because status \"%name%\"  is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers. "
+msgstr "Because status \"%name%\"  is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
 
 #: Content/Product/filterFormMacro.html.twig:33
 msgid "Jen zboží skladem"
@@ -1606,7 +1606,7 @@ msgstr "Maximum price per click"
 
 #: Content/Product/detail.html.twig:402
 msgid "Maximální cena za proklik v nabídkách"
-msgstr "Maximum price per click in offers "
+msgstr "Maximum price per click in offers"
 
 #: Front/Layout/header.html.twig:29
 msgid "Menu"
@@ -1671,7 +1671,7 @@ msgstr "Place for input"
 
 #: CurrencyController.php:91
 msgid "Měna <strong>{{ name }}</strong> byla smazána"
-msgstr "Currency <strong>{{ name }}</strong> deleted "
+msgstr "Currency <strong>{{ name }}</strong> deleted"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Currency/list.html.twig:3
@@ -1723,7 +1723,7 @@ msgstr "To hundredths (cents)"
 
 #: Content/Article/list.html.twig:34
 msgid "Na této doméně nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit."
-msgstr "No articles found on this domain. You have to create some first. "
+msgstr "No articles found on this domain. You have to create some first."
 
 #: Content/Category/list.html.twig:80
 msgid "Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén."
@@ -1735,7 +1735,7 @@ msgstr "Offer in feed"
 
 #: Inline/Menu/menu.html.twig:3
 msgid "Nacházíte se v:"
-msgstr "You are in: "
+msgstr "You are in:"
 
 #: Content/Category/detail.html.twig:14
 msgid "Nadřazená kategorie"
@@ -1788,7 +1788,7 @@ msgstr "Contact us"
 
 #: Content/Error/error.html.twig:4
 msgid "Nastala chyba"
-msgstr "Error occurred "
+msgstr "Error occurred"
 
 #: ContactFormController.php:53
 msgid "Nastala chyba při odesílání mailu."
@@ -1851,7 +1851,7 @@ msgstr "E-shop attributes settings modified"
 #: Resources/config/admin_menu.yml:
 #: Content/Mail/setting.html.twig:4
 msgid "Nastavení emailů"
-msgstr "E-mail settings "
+msgstr "E-mail settings"
 
 #: MailController.php:186
 msgid "Nastavení emailů bylo upraveno."
@@ -1919,7 +1919,7 @@ msgstr "Set"
 
 #: ProductFormType.php:180
 msgid "Nastavit alternativní dostupnost"
-msgstr "Set alternative availability "
+msgstr "Set alternative availability"
 
 #: Content/Registration/setNewPassword.html.twig:4
 #: Content/Registration/setNewPassword.html.twig:11
@@ -2291,7 +2291,7 @@ msgstr "Sometimes there is thicker line between some elements than between other
 
 #: Content/Superadmin/cssDocumentation.html.twig:153
 msgid "Obal, který celý blok odsadí a přidá spodní border, vhodné pro odsazení bloků formulářů od sebe"
-msgstr "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart "
+msgstr "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart"
 
 #: Content/Superadmin/cssDocumentation.html.twig:19
 #: Content/Superadmin/cssDocumentation.html.twig:134
@@ -2300,7 +2300,7 @@ msgstr "Wrapping/separating elements"
 
 #: Content/Superadmin/cssDocumentation.html.twig:136
 msgid "Obalující/wrapovací prvky jsou ty, kterýma můžete obalením přidat nějaké vlastnosti okolo vnitřku, např orámování, odsazení, pozadí, případně i nastaví hlavičku celého bloku informací"
-msgstr "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information. "
+msgstr "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information."
 
 #: Resources/config/admin_menu.yml:
 #: Content/TermsAndConditions/setting.html.twig:15
@@ -2459,7 +2459,7 @@ msgstr "Operation failed"
 
 #: massActionConfirm.js:24
 msgid "Opravdu chcete %action% %count% zboží?"
-msgstr "Do you really want to %action% %count% product? "
+msgstr "Do you really want to %action% %count% product?"
 
 #: ParameterGridFactory.php:77
 msgid "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. Tento krok je nevratný!"
@@ -2610,11 +2610,11 @@ msgstr "Continue in order"
 
 #: Content/Superadmin/cssDocumentation.html.twig:715
 msgid "Pokud chceme, aby řádky šlo přesouvat, vložíme ikonku podle ukázky níže. Nesmíme však zapomenout toto napojit na JS."
-msgstr "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS. "
+msgstr "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS."
 
 #: Content/Superadmin/cssDocumentation.html.twig:913
 msgid "Pokud pěkně nakombinujeme 3 komponenty do sebe, získáme skvělý vzhled formulářů. Jedná se o <strong class=\"in-article__visible\">form-group</strong> na titulek, <strong class=\"in-article__visible\">form-line</strong> na formulář a <strong class=\"in-article__visible\">wrap-border</strong> na oddělení bloků informací od sebe."
-msgstr "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information. "
+msgstr "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
 
 #: Content/Superadmin/cssDocumentation.html.twig:534
 msgid "Pokud se prvním TD/TH přidá modifikátor --label, buňka dostane maximální šířku a lícuje s ostatní formulářovou strukturou. Ostatní buňky roztahuje prohlížeč podle potřeb."
@@ -2667,7 +2667,7 @@ msgstr "Description"
 
 #: Content/Product/edit.html.twig:276
 msgid "Popis můžete nastavit na kartě hlavního zboží."
-msgstr "Description can be set on product detail of the main product. "
+msgstr "Description can be set on product detail of the main product."
 
 #: CustomerController.php:208
 msgid "Poslední objednávka"
@@ -2775,15 +2775,15 @@ msgstr "Sorting priority"
 
 #: PricingGroupController.php:114
 msgid "Pro odstranění cenové skupiny \"%name%\" musíte zvolit, která se má všude, kde je aktuálně používaná, nastavit. Jakou cenovou skupinu místo ní chcete nastavit?"
-msgstr "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead? "
+msgstr "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
 
 #: UnitController.php:74
 msgid "Pro odstranění jednotky \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?"
-msgstr "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead? "
+msgstr "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
 
 #: VatController.php:70
 msgid "Pro odstranění sazby \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?"
-msgstr "For deleting rate  \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead? "
+msgstr "For deleting rate  \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
 
 #: Content/Superadmin/cssDocumentation.html.twig:129
 msgid "Pro podsložky složky components platí, že název podsložky se vkládá i do názvu komponenty pro lepší vyhledání, nicméně název souboru komponenty obsahuje jen zbytek názvu třídy"
@@ -2801,7 +2801,7 @@ msgstr "No products found for this brand"
 
 #: Content/Superadmin/cssDocumentation.html.twig:580
 msgid "Pro zobrazení jako u parametrů je třeba přidat oddělovač s ikonkou a zaručit, aby se zrušily v okolí oddělovače paddingy. Vzniká zde více tříd skoro ve všech okolních TD/TH. Lze také jednoduše přidat ikonku s akcí na konec řádku."
-msgstr "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line. "
+msgstr "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
 
 #: VatGridFactory.php:68
 msgid "Procent"
@@ -2813,7 +2813,7 @@ msgstr "Product"
 
 #: ProductController.php:286
 msgid "Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán"
-msgstr "Product <strong>{{ product|productDisplayName }}</strong> deleted "
+msgstr "Product <strong>{{ product|productDisplayName }}</strong> deleted"
 
 #: Content/Product/edit.html.twig:47
 msgid "Produkt je hlavní variantou."
@@ -2833,7 +2833,7 @@ msgstr "Product is excluded from the sale due to sellout"
 
 #: fileUpload.js:79
 msgid "Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu."
-msgstr "Please wait until all files are uploaded and try again. "
+msgstr "Please wait until all files are uploaded and try again."
 
 #: AdministratorController.php:133
 #: AdministratorController.php:202
@@ -2879,7 +2879,7 @@ msgstr "Please follow the instructions"
 
 #: formChangeInfo.js:46
 msgid "Provedli jste změny, nezapomeňte je uložit!"
-msgstr "You have made changes, don't forget to save them! "
+msgstr "You have made changes, don't forget to save them!"
 
 #: Content/Product/list.html.twig:58
 #: Content/Product/list.html.twig:77
@@ -2888,7 +2888,7 @@ msgstr "Make modification"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1131
 msgid "Prvkem, který se někam zarovnává bývá hlavně ikona."
-msgstr "Element which is being aligned is usually icon. "
+msgstr "Element which is being aligned is usually icon."
 
 #: Content/Superadmin/cssDocumentation.html.twig:1034
 msgid "Prvky lze dávat i do více řádků k jednomu labelu"
@@ -2922,77 +2922,77 @@ msgstr "Subject"
 #: Content/Administrator/list.html.twig:3
 #: Content/Administrator/list.html.twig:4
 msgid "Přehled administrátorů"
-msgstr "Administrators overview "
+msgstr "Administrators overview"
 
 #: Content/Availability/list.html.twig:3
 #: Content/Availability/list.html.twig:4
 msgid "Přehled dostupností"
-msgstr "Availabilities overview "
+msgstr "Availabilities overview"
 
 #: Content/Unit/list.html.twig:3
 #: Content/Unit/list.html.twig:4
 msgid "Přehled jednotek"
-msgstr "Units overview "
+msgstr "Units overview"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Order/list.html.twig:3
 #: Content/Order/list.html.twig:4
 msgid "Přehled objednávek"
-msgstr "Orders overview "
+msgstr "Orders overview"
 
 #: Content/Parameter/list.html.twig:3
 #: Content/Parameter/list.html.twig:4
 msgid "Přehled parametrů"
-msgstr "Parameters overview "
+msgstr "Parameters overview"
 
 #: Content/Flag/list.html.twig:3
 #: Content/Flag/list.html.twig:4
 msgid "Přehled příznaků"
-msgstr "Flags overview "
+msgstr "Flags overview"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Script/list.html.twig:3
 #: Content/Script/list.html.twig:4
 msgid "Přehled skriptů"
-msgstr "Scripts overview "
+msgstr "Scripts overview"
 
 #: Content/OrderStatus/list.html.twig:3
 #: Content/OrderStatus/list.html.twig:4
 msgid "Přehled stavů objednávek"
-msgstr "Order statuses overview "
+msgstr "Order statuses overview"
 
 #: Content/Country/list.html.twig:3
 #: Content/Country/list.html.twig:4
 msgid "Přehled států"
-msgstr "Countries overview "
+msgstr "Countries overview"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/list.html.twig:3
 #: Content/Product/list.html.twig:4
 msgid "Přehled zboží"
-msgstr "Products overview "
+msgstr "Products overview"
 
 #: Content/Order/preview.html.twig:1
 msgid "Přehled zboží v košíku"
-msgstr "Products in cart overview "
+msgstr "Products in cart overview"
 
 #: BrandBreadcrumbGenerator.php:29
 #: Content/Brand/list.html.twig:3
 #: Content/Brand/list.html.twig:4
 #: Content/Brand/list.html.twig:9
 msgid "Přehled značek"
-msgstr "Brand overview "
+msgstr "Brand overview"
 
 #: Content/Customer/list.html.twig:3
 #: Content/Customer/list.html.twig:4
 msgid "Přehled zákazníků"
-msgstr "Customers overview "
+msgstr "Customers overview"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/list.html.twig:3
 #: Content/Article/list.html.twig:4
 msgid "Přehled článků"
-msgstr "Articles overview "
+msgstr "Articles overview"
 
 #: addProduct.js:37
 msgid "Přejít do košíku"
@@ -3111,7 +3111,7 @@ msgstr "Login failed."
 #: Content/Product/detail.html.twig:115
 #: Content/Product/edit.html.twig:169
 msgid "Přiřazení do kategorie"
-msgstr "Assign to category "
+msgstr "Assign to category"
 
 #: MailController.php:113
 #: Content/Customer/detail.html.twig:30
@@ -3132,7 +3132,7 @@ msgstr "Surname"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1292
 msgid "Příkladem může být prázdný prostor a za ním ikonka, kterou chceme lícovat s ikonkou vedle inputu."
-msgstr "An example might be empty space with icon behind it, which we want to align with icon next to input. "
+msgstr "An example might be empty space with icon behind it, which we want to align with icon next to input."
 
 #: Content/Mail/template.html.twig:25
 msgid "Příloha"
@@ -3188,11 +3188,11 @@ msgstr "Advertising"
 
 #: AdvertController.php:96
 msgid "Reklama <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> byla upravena"
-msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified "
+msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
 
 #: AdvertController.php:186
 msgid "Reklama <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> byla vytvořena"
-msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created "
+msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
 
 #: AdvertController.php:216
 msgid "Reklama <strong>{{ name }}</strong> byla smazána"
@@ -3242,7 +3242,7 @@ msgstr "Manually"
 #: Content/Product/list.html.twig:21
 #: Content/ProductPicker/list.html.twig:12
 msgid "Rychlé vyhledávání"
-msgstr "Quick search "
+msgstr "Quick search"
 
 #: Content/Superadmin/cssDocumentation.html.twig:179
 msgid "Různé zprávy a flash zprávy, je zde více typových a barevných modifikací. Lze díky tomu vytvářet i kombinace typu a barev"
@@ -3323,7 +3323,7 @@ msgstr "Hide"
 
 #: Content/Advert/detail.html.twig:19
 msgid "Skrýt reklamu"
-msgstr "Hide advertisement "
+msgstr "Hide advertisement"
 
 #: ProductFormType.php:181
 #: Content/Product/detail.html.twig:96
@@ -3407,7 +3407,7 @@ msgstr "Existing icon"
 
 #: Content/Superadmin/cssDocumentation.html.twig:423
 msgid "Speciální chování pro tabulku pro menší zařízení, kdy při zmenšeném okně se zobrazí scrollbar. Pokud se počítá s responsivitou, mělo by toto nastavení být kolem každé tabulky."
-msgstr "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table. "
+msgstr "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table."
 
 #: Content/Superadmin/cssDocumentation.html.twig:458
 msgid "Speciální chování pro velkou tabulku, která se nevleze ani na desktopové verzi do obsahové části."
@@ -3415,7 +3415,7 @@ msgstr "Special behavior for big table, which can't fit even in the desktop vers
 
 #: Content/Superadmin/cssDocumentation.html.twig:501
 msgid "Speciální chování tabulky, která byla vytvořena pro parametry, nicméně, dá se využít i dalšími způsoby."
-msgstr "Special behavior of table, which was created for parameters, but could be used also differently. "
+msgstr "Special behavior of table, which was created for parameters, but could be used also differently."
 
 #: OrderController.php:239
 #: Content/Customer/orderList.html.twig:13
@@ -3613,7 +3613,7 @@ msgstr "This e-mail was sent from the contact form located below the panel of ca
 #: Content/Superadmin/cssDocumentation.html.twig:1389
 #: Content/Superadmin/cssDocumentation.html.twig:1414
 msgid "Tento form-line je obalen"
-msgstr "This form-line is wrapped "
+msgstr "This form-line is wrapped"
 
 #: Content/OrderStatus/listGrid.html.twig:11
 msgid "Tento stav není možné smazat, jelikož je na něj navázána funkčnost - určuje objednávky, které byly úspěšně vyřízeny."
@@ -3629,11 +3629,11 @@ msgstr "This status can't be deleted. This is automatically assigned status to a
 
 #: Content/Superadmin/cssDocumentation.html.twig:995
 msgid "Tento text vám objasní logiku tvoření formuláře."
-msgstr "This text will help you understand the logic of creating a form. "
+msgstr "This text will help you understand the logic of creating a form."
 
 #: Content/Superadmin/cssDocumentation.html.twig:187
 msgid "Text hlášky v základu je úplně bez barev a roztáhnutý pouze do konce textu, potřebuje tedy minimálně určit barevný typ."
-msgstr "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type. "
+msgstr "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type."
 
 #: Content/Superadmin/cssDocumentation.html.twig:546
 msgid "Text nebo input tabulky"
@@ -3758,7 +3758,7 @@ msgstr "Textarea may be across the whole width next to the label"
 #: Content/Superadmin/cssDocumentation.html.twig:1077
 #: Content/Superadmin/cssDocumentation.html.twig:1085
 msgid "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
-msgstr "Textarea spread to the whole width.  In this case it is not necessary to use form-line__item, because the element is across 100 % of width. "
+msgstr "Textarea spread to the whole width.  In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 
 #: Content/Article/detail.html.twig:34
 #: Content/Product/detail.html.twig:296
@@ -3775,7 +3775,7 @@ msgstr "Headline of information block"
 
 #: Content/Superadmin/cssDocumentation.html.twig:903
 msgid "Titulek bloku informací s možnosti tlačítka"
-msgstr "Headline of information block with button possibility "
+msgstr "Headline of information block with button possibility"
 
 #: Content/Superadmin/cssDocumentation.html.twig:894
 msgid "Titulek bloku informací s rozevíráním, je nutno navázat na již hotový JS"
@@ -3873,7 +3873,7 @@ msgstr "This site uses cookies."
 
 #: Front/Layout/layout.html.twig:42
 msgid "Tyto stránky používají cookies. Setrváním na stránkách s tímto souhlasíte."
-msgstr "This site uses cookies. By staying on the site you agree with that. "
+msgstr "This site uses cookies. By staying on the site you agree with that."
 
 #: MailController.php:101
 msgid "URL adresa detailu objednávky"
@@ -4063,7 +4063,7 @@ msgstr "Suitable combination of components"
 #: ProductPickerController.php:139
 #: Content/Product/edit.html.twig:15
 msgid "Viditelnost"
-msgstr "Visibility "
+msgstr "Visibility"
 
 #: Content/Product/visibility.html.twig:2
 msgid "Viditelnost pro neregistrované zákazníky"
@@ -4295,7 +4295,7 @@ msgstr "Your cart"
 
 #: Content/Cart/index.html.twig:168
 msgid "Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href=\"%url%\">vybrat</a>."
-msgstr "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first "
+msgstr "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
 
 #: Inline/Cart/cartBox.html.twig:9
 msgid "Váš nákupní košík je prázdný"
@@ -4445,7 +4445,7 @@ msgstr "Please enter discount code."
 
 #: Content/Availability/listGrid.html.twig:19
 msgid "Zadává se ve dnech. Nula reprezentuje zboží skladem, nevyplněné znamená, že dostupnost je neznámá."
-msgstr "Entered in days. Zero represents products in stock, empty means unknown availability. "
+msgstr "Entered in days. Zero represents products in stock, empty means unknown availability."
 
 #: Admin/Grid/Grid.html.twig:165
 msgid "Zahodit změny"
@@ -4581,7 +4581,7 @@ msgstr "Product in order"
 
 #: Content/Product/detail.html.twig:106
 msgid "Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku."
-msgstr "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart. "
+msgstr "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart."
 
 #: CartWatcherFacade.php:86
 msgid "Zboží, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku."
@@ -4664,7 +4664,7 @@ msgstr "Display input -> input"
 
 #: Content/Superadmin/cssDocumentation.html.twig:821
 msgid "Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze <strong class=\"in-article__visible\">form_widget</strong>. Jaký typ se zobrazí - jestli inputy za sebou, nebo pod sebou - určí attr. Pokud není vyplněn, jsou za sebou, při nastavení <strong class=\"in-article__visible\">inList</strong> na true, se zobrazí pod sebou."
-msgstr "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true. "
+msgstr "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
 
 #: Content/Superadmin/cssDocumentation.html.twig:758
 msgid "Zobrazení základních prvků"
@@ -4819,40 +4819,40 @@ msgstr "Selected product no longer available or doesn't exist."
 
 #: AdministratorController.php:236
 msgid "Zvolený administrátor neexistuje."
-msgstr "Selected administrated doesn't exist. "
+msgstr "Selected administrated doesn't exist."
 
 #: ParameterController.php:60
 msgid "Zvolený parametr neexistuje."
-msgstr "Selected parameter doesn't exist. "
+msgstr "Selected parameter doesn't exist."
 
 #: ProductController.php:292
 msgid "Zvolený produkt neexistuje."
-msgstr "Selected product doesn't exist. "
+msgstr "Selected product doesn't exist."
 
 #: FlagController.php:62
 msgid "Zvolený příznak neexistuje."
-msgstr "Selected flag doesn't exist. "
+msgstr "Selected flag doesn't exist."
 
 #: ScriptController.php:159
 msgid "Zvolený skript neexistuje"
-msgstr "Selected script doesn't exist. "
+msgstr "Selected script doesn't exist."
 
 #: PromoCodeController.php:60
 msgid "Zvolený slevový kupón neexistuje."
-msgstr "Selected discount coupon doesn't exist. "
+msgstr "Selected discount coupon doesn't exist."
 
 #: OrderStatusController.php:91
 #: OrderStatusController.php:128
 msgid "Zvolený stav objednávek neexistuje"
-msgstr "Selected order status doesn't exist. "
+msgstr "Selected order status doesn't exist."
 
 #: CustomerController.php:293
 msgid "Zvolený zákazník neexistuje"
-msgstr "Selected customer doesn't exist. "
+msgstr "Selected customer doesn't exist."
 
 #: ArticleController.php:207
 msgid "Zvolený článek neexistuje."
-msgstr "Selected article doesn't exist. "
+msgstr "Selected article doesn't exist."
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:11
 msgid "Zvolte novou hodnotu"
@@ -5111,7 +5111,7 @@ msgstr "after"
 
 #: AdvertPositionList.php:19
 msgid "pod hlavičkou"
-msgstr "under heading "
+msgstr "under heading"
 
 #: AdvancedSearchOperatorTranslation.php:21
 msgid "používá"

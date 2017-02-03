@@ -356,7 +356,7 @@ msgstr "Please enter price in correct format (positive number with decimal separ
 
 #: Pricing/Group/PricingGroupFormType.php:36
 msgid "Prosím zadejte koeficient v platném formátu"
-msgstr "Please enter ratio in correct format "
+msgstr "Please enter ratio in correct format"
 
 #: ProductFormType.php:151
 msgid "Prosím zadejte množství skladem"
@@ -666,7 +666,7 @@ msgstr "Please enter content"
 
 #: MailTemplateFormType.php:108
 msgid "Vyplňte prosím text emailu"
-msgstr "Please enter e-mail content "
+msgstr "Please enter e-mail content"
 
 #: ArticleFormType.php:68
 msgid "Vyplňte prosím text článku"
