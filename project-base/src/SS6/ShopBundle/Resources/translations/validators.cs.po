@@ -4,53 +4,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 
-#: Admin/Product/ProductFormType.php:146
-#: Admin/Product/ProductFormType.php:153
+#: Admin/Product/ProductFormType.php:232
+#: Admin/Product/ProductFormType.php:239
 msgid "Datum zadávejte ve formátu dd.mm.rrrr"
 msgstr "Datum zadávejte ve formátu dd.mm.rrrr"
 
-msgid "E-mail '{{ value }}' není validní."
-msgstr "E-mail '{{ value }}' není validní."
-
-#: Admin/Administrator/AdministratorFormType.php:61
-#: Admin/Customer/UserFormType.php:89
-#: Front/Customer/UserFormType.php:46
-#: Front/Registration/RegistrationFormType.php:42
+#: Admin/Administrator/AdministratorFormType.php:66
+#: Admin/Customer/UserFormType.php:91
+#: Customer/Password/NewPasswordFormType.php:30
+#: Front/Customer/UserFormType.php:57
+#: Front/Registration/RegistrationFormType.php:53
 msgid "Hesla se neshodují"
 msgstr "Hesla se neshodují"
 
-#: Admin/Vat/VatFormType.php:36
+#: Product/Availability/AvailabilityFormType.php:39
+msgid "Počet dní k expedici musí být celé číslo"
+msgstr "Počet dní k expedici musí být celé číslo"
+
+#: Admin/Vat/VatFormType.php:54
 msgid "Prosím zadejte DPH v platném formátu"
 msgstr "Prosím zadejte DPH v platném formátu"
 
-#: Admin/Payment/PaymentFormType.php:87
-msgid "Prosím zadejte cenu v platném formátu"
-msgstr "Prosím zadejte cenu v platném formátu"
-
-#: Admin/Payment/PaymentFormType.php:78
-#: Admin/Product/ProductEditFormType.php:129
-#: Admin/Product/ProductFormType.php:124
-#: Admin/Transport/TransportFormType.php:65
+#: Admin/Payment/PaymentEditFormType.php:65
+#: Admin/Product/ProductEditFormType.php:261
+#: Admin/Product/ProductFormType.php:207
+#: Admin/Transport/TransportEditFormType.php:65
+#: Front/Product/ProductFilterFormType.php:71
+#: Front/Product/ProductFilterFormType.php:84
 msgid "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 msgstr "Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)"
 
-#: Pricing/Group/PricingGroupFormType.php:35
+#: Pricing/Group/PricingGroupFormType.php:36
 msgid "Prosím zadejte koeficient v platném formátu"
 msgstr "Prosím zadejte koeficient v platném formátu"
 
-#: Admin/Product/ProductFormType.php:157
+#: Admin/Product/ProductFormType.php:148
 msgid "Prosím zadejte číslo"
 msgstr "Prosím zadejte číslo"
 
-#: Front/Order/TransportAndPaymentFormType.php:44
+#: ShopBundle/Form/UrlListType.php:94
+msgid "Původně vybraná hlavní URL již neexistuje"
+msgstr "Původně vybraná hlavní URL již neexistuje"
+
+#: Front/Order/TransportAndPaymentFormType.php:48
 msgid "Vyberte prosím dopravu"
 msgstr "Vyberte prosím dopravu"
 
-#: Front/Order/TransportAndPaymentFormType.php:50
+#: Front/Order/TransportAndPaymentFormType.php:56
 msgid "Vyberte prosím platbu"
 msgstr "Vyberte prosím platbu"
 
-#: Product/TopProduct/TopProductFormType.php:32
-msgid "Zadejte platné ID produktu"
-msgstr "Zadejte platné ID produktu"
+#: Admin/PromoCode/PromoCodeFormType.php:63
+msgid "Zadejte prosím celé číslo."
+msgstr "Zadejte prosím celé číslo."
 
