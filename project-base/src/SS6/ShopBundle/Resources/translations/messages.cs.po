@@ -2295,6 +2295,10 @@ msgstr "Název skriptu"
 msgid "Název slouží pouze pro interní použití v rámci administrace"
 msgstr "Název slouží pouze pro interní použití v rámci administrace"
 
+#: ProductExtension.php:74
+msgid "Název zboží ve výchozím jazyce není vyplněn"
+msgstr "Název zboží ve výchozím jazyce není vyplněn"
+
 #: MailController.php:90
 msgid "Název zvolené dopravy"
 msgstr "Název zvolené dopravy"
@@ -5273,10 +5277,6 @@ msgstr "Čas přihlášení"
 #: Content/Superadmin/cssDocumentation.html.twig:881
 msgid "Často užitečná část, je to hlavička pro různé obsahy informací, hlavně pro formuláře, ale lze použít pro více účelů."
 msgstr "Často užitečná část, je to hlavička pro různé obsahy informací, hlavně pro formuláře, ale lze použít pro více účelů."
-
-#: ProductExtension.php:74
-msgid "Český název zboží není vyplněn"
-msgstr "Český název zboží není vyplněn"
 
 #: Content/Article/detail.html.twig:3
 #: Content/Article/detail.html.twig:4
