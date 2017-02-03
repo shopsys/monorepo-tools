@@ -1140,7 +1140,7 @@ msgstr "Main variant"
 
 #: FrontBreadcrumbGenerator.php:39
 msgid "Hledání"
-msgstr "Search"
+msgstr "Search [noun]"
 
 #: Content/Product/productsWithControls.html.twig:27
 msgid "Hledání neodpovídají žádné produkty"
@@ -2313,13 +2313,13 @@ msgstr "General wrap-border"
 
 #: Content/Cart/index.html.twig:151
 msgid "Objednat"
-msgstr "Order"
+msgstr "Order [verb]"
 
 #: Content/Order/index.html.twig:19
 #: Content/Order/step.html.twig:3
 #: Content/Order/step2.html.twig:4
 msgid "Objednávka"
-msgstr "Order"
+msgstr "Order [noun]"
 
 #: Content/Order/step3.html.twig:4
 msgid "Objednávka - osobní údaje"
@@ -4123,7 +4123,7 @@ msgstr "Generated"
 #: Content/Product/quickSearchFormContent.html.twig:4
 #: Content/Search/searchBox.html.twig:20
 msgid "Vyhledat"
-msgstr "Search"
+msgstr "Search [verb]"
 
 #: Order/AdvancedSearch/ruleForm.html.twig:32
 msgid "Vyhledává se ve všech měnách"
