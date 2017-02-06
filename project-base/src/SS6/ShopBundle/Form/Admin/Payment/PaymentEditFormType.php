@@ -62,12 +62,12 @@ class PaymentEditFormType extends AbstractType {
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,
-					'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+					'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Prosím vyplňte cenu']),
+						new Constraints\NotBlank(['message' => 'Please enter price']),
 						new Constraints\GreaterThanOrEqual([
 							'value' => 0,
-							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+							'message' => 'Price must be greater or equal to {{ compared_value }}',
 						]),
 
 					],

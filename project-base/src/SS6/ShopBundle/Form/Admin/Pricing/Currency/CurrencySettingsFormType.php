@@ -40,7 +40,7 @@ class CurrencySettingsFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí měnu']),
+					new Constraints\NotBlank(['message' => 'Please enter default currency']),
 				],
 			])
 			->add('domainDefaultCurrencies', FormType::COLLECTION, [
@@ -50,7 +50,7 @@ class CurrencySettingsFormType extends AbstractType {
 					'required' => true,
 					'choice_list' => new ObjectChoiceList($this->currencies, 'name', [], null, 'id'),
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí měnu']),
+						new Constraints\NotBlank(['message' => 'Please enter default currency']),
 					],
 				],
 			])

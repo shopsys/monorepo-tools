@@ -8,7 +8,7 @@
 			%
 			{% if row is not null %}
 				<span
-					title="{{ 'Výši sazby nelze upravit. Je třeba vytvořit novou sazbu a starou odstranit s nahrazením za novou.'|trans }}"
+					title="{{ 'Rate can\'t be modified. It is necessary to create new rate, remove existing one and replace it with new one.'|trans }}"
 					class="js-tooltip table-action cursor-help in-action-icons__item"
 					data-toggle="tooltip"
 					data-placement="bottom"
@@ -25,7 +25,7 @@
 		<span class="text-muted">
 			{{ value }}
 			<span
-				title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
+				title="{{ 'VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes.'|trans }}"
 				class="js-tooltip table-action cursor-help"
 				data-toggle="tooltip"
 				data-placement="right"
@@ -41,7 +41,7 @@
 {% block grid_action_cell %}
 	{% if row.vat.markedAsDeleted %}
 		<span
-			title="{{ 'Sazba DPH je označena pro smazání a brzy bude automaticky odstraněna. Přepočet probíhá rychlostí několik set zboží za 5 minut.'|trans }}"
+			title="{{ 'VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes.'|trans }}"
 			class="js-tooltip table-action cursor-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
@@ -50,7 +50,7 @@
 		</span>
 	{% elseif row.asReplacementCount > 0 %}
 		<span
-			title="{{ 'Sazba DPH nemůže být odstraněna, protože právě probíhá přepočet na tuto sazbu DPH.'|trans }}"
+			title="{{ 'VAT rate can\'t be removed because it is being currently used for conversion to this VAT rate'|trans }}"
 			class="js-tooltip table-action cursor-help text-muted"
 			data-toggle="tooltip"
 			data-placement="bottom"
@@ -71,15 +71,15 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné sazby DPH. Nejprve musíte nějakou vytvořit.'|trans }}
+	{{ 'No VAT rate found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'sazby DPH'|trans %}
+	{% set entityName = 'VAT rates'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit sazbu DPH'|trans %}
+	{% set addEntity = 'Create VAT rate'|trans %}
 	{{ parent() }}
 {% endblock %}

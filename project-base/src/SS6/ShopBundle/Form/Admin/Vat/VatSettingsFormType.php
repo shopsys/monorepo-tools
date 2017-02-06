@@ -58,7 +58,7 @@ class VatSettingsFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí výši DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter default VAT']),
 				],
 			])
 			->add('roundingType', FormType::CHOICE, [
@@ -79,9 +79,9 @@ class VatSettingsFormType extends AbstractType {
 	 */
 	private function getRoundingTypesLabels() {
 		return [
-			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('Na setiny (haléře)'),
-			PricingSetting::ROUNDING_TYPE_FIFTIES => t('Na padesátníky'),
-			PricingSetting::ROUNDING_TYPE_INTEGER => t('Na celá čísla (koruny)'),
+			PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('To hundredths (cents)'),
+			PricingSetting::ROUNDING_TYPE_FIFTIES => t('To fifty hundredths (halfs)'),
+			PricingSetting::ROUNDING_TYPE_INTEGER => t('To whole numbers'),
 		];
 	}
 

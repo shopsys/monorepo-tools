@@ -81,11 +81,11 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 					'constraints' => [
 						new Constraints\GreaterThanOrEqual([
 							'value' => 0,
-							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+							'message' => 'Price must be greater or equal to {{ compared_value }}',
 							'groups' => [self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
 						]),
 						new Constraints\NotBlank([
-							'message' => 'Prosím vyplňte cenu',
+							'message' => 'Please enter price',
 							'groups' => [self::VALIDATION_GROUP_PRICE_LIMIT_ENABLED],
 						]),
 					],

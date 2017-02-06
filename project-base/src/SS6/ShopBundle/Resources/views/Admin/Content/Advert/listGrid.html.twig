@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyla nalezena žádná reklama. Nejprve musíte nějakou vytvořit.'|trans }}
+	{{ 'No advertising found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'reklam'|trans %}
+	{% set entityName = 'advertisings'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}
 	{% set value = not value %}
-	<span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"></span>
+	<span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}" title="{{ value ? 'Yes'|trans : 'No'|trans }}"></span>
 {% endblock %}
 
 {% block grid_value_cell_id_positionName %}

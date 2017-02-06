@@ -24,13 +24,7 @@
 	{% if productsPaginationResult.totalCount > 0 %}
 		<li class="search__hint__item search__hint__item--info">
 			{% transchoice productsPaginationResult.totalCount with {'%totalProductCount%': productsPaginationResult.totalCount} %}
-				{0} Nebyl nalezen žádný produkt
-				|
-				{1} Celkem nalezen 1 produkt
-				|
-				[2,4] Celkem nalezeny %totalProductCount% produkty
-				|
-				[5,Inf] Celkem nalezeno %totalProductCount% produktů
+				{0} No product found | {1} 1 product found | [2,Inf] %totalProductCount% product found
 			{% endtranschoice %}
 		</li>
 	{% endif %}
@@ -38,7 +32,7 @@
 	{% if categoriesPaginationResult.totalCount > 0 or productsPaginationResult.totalCount > 0 %}
 		<li class="search__hint__item search__hint__item--info">
 			<a href="{{ searchUrl }}">
-				{{ 'Zobrazit všechny výsledky'|trans }}
+				{{ 'View all results'|trans }}
 			</a>
 		</li>
 	{% endif %}

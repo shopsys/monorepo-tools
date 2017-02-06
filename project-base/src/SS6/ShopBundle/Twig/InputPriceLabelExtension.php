@@ -36,10 +36,10 @@ class InputPriceLabelExtension extends Twig_Extension {
 
 		switch ($inputPriceType) {
 			case PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT:
-				return t('Vstupní cena bez DPH');
+				return t('Input price without VAT');
 
 			case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
-				return t('Vstupní cena s DPH');
+				return t('Input price with VAT');
 
 			default:
 				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(

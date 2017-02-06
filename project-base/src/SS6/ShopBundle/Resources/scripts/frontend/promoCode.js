@@ -33,7 +33,7 @@
 				});
 			} else {
 				SS6.window({
-					content: SS6.translator.trans('Zadejte, prosím, slevový kód.')
+					content: SS6.translator.trans('Please enter discount code.')
 				});
 			}
 		};

@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Nebylo nalezeno žádné zboží.'|trans }}
+	{{ 'No product found.'|trans }}
 {% endblock %}
 
 {% block grid_action_cell_type_edit %}
@@ -15,10 +15,10 @@
 
 {% block grid_value_cell_id_name %}
 	{% if row.p.variantType == VARIANT_TYPE_MAIN %}
-		<span class="in-letter cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Main variant'|trans }}">H</span>
 	{% endif %}
 	{% if row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<span class="in-letter cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">V</span>
 	{% endif %}
 	<a href="{{ url('admin_product_edit', { id: row.p.id }) }}" target="_blank">{{ row.product|productListDisplayName }}</a>
 {% endblock %}
@@ -51,7 +51,7 @@
 		{% endif %}
 	{% endif %}
 	{% if row.p.calculatedSellingDenied %}
-		<span class="in-icon in-icon--denied svg svg-cart" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></span>
+		<span class="in-icon in-icon--denied svg svg-cart" title="{{ 'Product excluded from sale'|trans }}"></span>
 	{% endif %}
 {% endblock %}
 
@@ -60,6 +60,6 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'zboží'|trans %}
+	{% set entityName = 'products'|trans %}
 	{{ parent() }}
 {% endblock %}

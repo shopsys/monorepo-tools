@@ -2,7 +2,7 @@
 	<header class="header">
 		<div class="header__logo">
 			{% block logo %}
-				<a class="logo" href="{{ url('front_homepage') }}" title="{{ 'Internetový obchod'|trans }}"></a>
+				<a class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></a>
 			{% endblock %}
 		</div>
 
@@ -72,17 +72,17 @@
 							</a>
 							<ul class="menu-iconic__sub">
 								<li class="menu-iconic__sub__item">
-									<a href="{{ url('front_customer_edit') }}" class="menu-iconic__sub__item__link">{{ 'Osobní údaje'|trans }}</a>
+									<a href="{{ url('front_customer_edit') }}" class="menu-iconic__sub__item__link">{{ 'Personal data'|trans }}</a>
 								</li>
 								<li class="menu-iconic__sub__item">
-									<a href="{{ url('front_customer_orders') }}" class="menu-iconic__sub__item__link">{{ 'Mé objednávky'|trans }}</a>
+									<a href="{{ url('front_customer_orders') }}" class="menu-iconic__sub__item__link">{{ 'My orders'|trans }}</a>
 								</li>
 							</ul>
 						</li>
 						<li class="menu-iconic__item">
 							<a href="{{ url('front_logout', { _csrf_token: csrf_token('frontend_logout')}) }}" class="menu-iconic__item__link">
 								<span>
-									{{ 'Odhlásit se'|trans }}
+									{{ 'Log out'|trans }}
 								</span>
 							</a>
 						</li>
@@ -95,14 +95,14 @@
 							>
 								<i class="svg svg-user"></i>
 								<span>
-									{{ 'Přihlásit se'|trans }}
+									{{ 'Log in'|trans }}
 								</span>
 							</a>
 						</li>
 						<li class="menu-iconic__item">
 							<a href="{{ url('front_registration_register') }}" class="menu-iconic__item__link">
 								<span>
-									{{ 'Registrace'|trans }}
+									{{ 'Registration'|trans }}
 								</span>
 							</a>
 						</li>

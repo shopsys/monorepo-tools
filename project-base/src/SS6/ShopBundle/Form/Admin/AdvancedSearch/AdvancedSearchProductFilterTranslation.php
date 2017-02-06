@@ -7,14 +7,14 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
 	public function __construct() {
 		parent::__construct();
 
-		$this->addFilterTranslation('productCatnum', t('Katalogové číslo'));
-		$this->addFilterTranslation('productFlag', t('Příznak'));
-		$this->addFilterTranslation('productName', t('Název produktu'));
-		$this->addFilterTranslation('productPartno', t('PartNo (výrobní číslo)'));
-		$this->addFilterTranslation('productStock', t('Skladové zásoby'));
-		$this->addFilterTranslation('productCalculatedSellingDenied', t('Vyřazeno z prodeje'));
-		$this->addFilterTranslation('productAvailability', t('Dostupnost'));
-		$this->addFilterTranslation('productBrand', t('Značka'));
+		$this->addFilterTranslation('productCatnum', t('Catalogue number'));
+		$this->addFilterTranslation('productFlag', t('Flag'));
+		$this->addFilterTranslation('productName', t('Product name'));
+		$this->addFilterTranslation('productPartno', t('PartNo (serial number)'));
+		$this->addFilterTranslation('productStock', t('Stocks'));
+		$this->addFilterTranslation('productCalculatedSellingDenied', t('Excluded from sale'));
+		$this->addFilterTranslation('productAvailability', t('Availability'));
+		$this->addFilterTranslation('productBrand', t('Brand'));
 	}
 
 }

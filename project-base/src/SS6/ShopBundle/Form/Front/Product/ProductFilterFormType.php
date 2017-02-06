@@ -68,11 +68,11 @@ class ProductFilterFormType extends AbstractType {
 				'scale' => $priceScale,
 				'required' => false,
 				'attr' => ['placeholder' => $priceTransformer->transform($this->priceRange->getMinimalPrice())],
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+				'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+						'message' => 'Price must be greater or equal to {{ compared_value }}',
 					]),
 				],
 			])
@@ -81,11 +81,11 @@ class ProductFilterFormType extends AbstractType {
 				'scale' => $priceScale,
 				'required' => false,
 				'attr' => ['placeholder' => $priceTransformer->transform($this->priceRange->getMaximalPrice())],
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+				'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+						'message' => 'Price must be greater or equal to {{ compared_value }}',
 					]),
 				],
 			])

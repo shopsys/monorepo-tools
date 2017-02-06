@@ -28,8 +28,8 @@ class UnitFormType extends AbstractType {
 				'required' => true,
 				'options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím název jednotky ve všech jazycích']),
-						new Constraints\Length(['max' => 10, 'maxMessage' => 'Název jednotky nesmí být delší než {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter unit name in all languages']),
+						new Constraints\Length(['max' => 10, 'maxMessage' => 'Unit name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			]);

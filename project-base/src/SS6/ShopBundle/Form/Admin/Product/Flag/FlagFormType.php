@@ -28,17 +28,17 @@ class FlagFormType extends AbstractType {
 				'required' => true,
 				'options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím název příznaku ve všech jazycích']),
-						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název příznaku nesmí být delší než {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter flag name in all languages']),
+						new Constraints\Length(['max' => 100, 'maxMessage' => 'Flag name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			])
 			->add('rgbColor', FormType::COLOR_PICKER, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím barvu příznaku']),
+					new Constraints\NotBlank(['message' => 'Please enter flag color']),
 					new Constraints\Length([
 						'max' => 7,
-						'maxMessage' => 'Barva příznaku se zadává v hexa kódu, například #3333ff. Nesmí být tedy delší než {{ limit }} znaků',
+						'maxMessage' => 'Flag color in must be in valid hexadecimal code e.g. #3333ff',
 					]),
 				],
 			])

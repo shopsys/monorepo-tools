@@ -220,7 +220,7 @@ class OrderController extends FrontBaseController {
 					$this->sendMail($order);
 				} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 					$this->getFlashMessageSender()->addErrorFlash(
-						t('Nepodařilo se odeslat některé emaily, pro ověření objednávky nás prosím kontaktujte.')
+						t('Unable to send some e-mails, please contact us for order verification.')
 					);
 				}
 
@@ -231,7 +231,7 @@ class OrderController extends FrontBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid() && $form->getErrors()->count() === 0) {
-			$form->addError(new FormError(t('Prosím zkontrolujte si správnost vyplnění všech údajů')));
+			$form->addError(new FormError(t('Please check the correctness of all data filled.')));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
@@ -314,7 +314,7 @@ class OrderController extends FrontBaseController {
 		}
 		if ($transportAndPaymentCheckResult->isPaymentPriceChanged()) {
 			$this->getFlashMessageSender()->addInfoFlashTwig(
-				t('V průběhu objednávkového procesu byla změněna cena platby {{ paymentName }}. Prosím, překontrolujte si objednávku.'),
+				t('The price of payment {{ transportName }} changed during ordering process. Check your order, please.'),
 				[
 					'paymentName' => $orderData->payment->getName(),
 				]

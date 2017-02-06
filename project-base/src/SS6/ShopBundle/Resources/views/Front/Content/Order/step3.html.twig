@@ -1,81 +1,81 @@
 {% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	{{ 'Objednávka - osobní údaje'|trans }}
+	{{ 'Order - personal data'|trans }}
 {% endblock %}
 
 {% block content %}
 	<div class="box-order">
 		<div class="box-order__info">
-			<h2>{{ 'Osobní údaje'|trans }}</h2>
+			<h2>{{ 'Personal data'|trans }}</h2>
 
 			<fieldset>
-				{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
-				{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+				{{ form_row(form.firstName, { label: 'First name'|trans }) }}
+				{{ form_row(form.lastName, { label: 'Surname'|trans }) }}
 				{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-				{{ form_row(form.telephone, { label: 'Telefon'|trans }) }}
+				{{ form_row(form.telephone, { label: 'Telephone'|trans }) }}
 			</fieldset>
 
-			<h2>{{ 'Firemní údaje'|trans }} <span class="heading-addition">{{ '(Pokud nakupuji na firmu)'|trans }}</span></h2>
+			<h2>{{ 'Company data'|trans }} <span class="heading-addition">{{ '(If I buy on the company behalf)'|trans }}</span></h2>
 			<fieldset>
 				{{ form_row(form.companyCustomer, {
 					attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-					label: 'Nakupuji na firmu'|trans})
+					label: 'I buy on company behalf'|trans})
 				}}
 				<div id="js-company-fields">
-					{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
-					{{ form_row(form.companyNumber, { label: 'IČ'|trans }) }}
-					{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans }) }}
+					{{ form_row(form.companyName, { label: 'Company name'|trans }) }}
+					{{ form_row(form.companyNumber, { label: 'Company number'|trans }) }}
+					{{ form_row(form.companyTaxNumber, { label: 'Tax number'|trans }) }}
 				</div>
 			</fieldset>
 
-			<h2>{{ 'Fakturační údaje'|trans }} <span class="heading-addition">{{ '(Tato adresa bude na daňovém dokladu)'|trans }}</span></h2>
+			<h2>{{ 'Billing data'|trans }} <span class="heading-addition">{{ '(This address will be on the tax invoice)'|trans }}</span></h2>
 
 			<fieldset>
-				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
-				{{ form_row(form.city, { label: 'Město'|trans }) }}
-				{{ form_row(form.postcode, { label: 'PSČ'|trans }) }}
-				{{ form_row(form.country, { label: 'Stát'|trans }) }}
+				{{ form_row(form.street, { label: 'Street'|trans }) }}
+				{{ form_row(form.city, { label: 'City'|trans }) }}
+				{{ form_row(form.postcode, { label: 'Postcode'|trans }) }}
+				{{ form_row(form.country, { label: 'Country'|trans }) }}
 			</fieldset>
 
-			<h2>{{ 'Doručovací adresa'|trans }} <span class="heading-addition">{{ '(Na tuto adresu bude zboží doručeno)'|trans }}</span></h2>
+			<h2>{{ 'Shipping address'|trans }} <span class="heading-addition">{{ '(Products will be delivered to this address)'|trans }}</span></h2>
 			<fieldset>
 				{{ form_row(form.deliveryAddressFilled, {
 					attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-					label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
+					label: 'I want to deliver products to different address than the billing one'|trans})
 				}}
 				<div id="js-delivery-address-fields">
-					{{ form_row(form.deliveryFirstName, { label: 'Jméno'|trans }) }}
-					{{ form_row(form.deliveryLastName, { label: 'Příjmení'|trans }) }}
-					{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-					{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans }) }}
-					{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
-					{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-					{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans }) }}
-					{{ form_row(form.deliveryCountry, { label: 'Stát'|trans }) }}
+					{{ form_row(form.deliveryFirstName, { label: 'First name'|trans }) }}
+					{{ form_row(form.deliveryLastName, { label: 'Surname'|trans }) }}
+					{{ form_row(form.deliveryCompanyName, { label: 'Company'|trans }) }}
+					{{ form_row(form.deliveryTelephone, { label: 'Telephone'|trans }) }}
+					{{ form_row(form.deliveryStreet, { label: 'Street'|trans }) }}
+					{{ form_row(form.deliveryCity, { label: 'City'|trans }) }}
+					{{ form_row(form.deliveryPostcode, { label: 'Postcode'|trans }) }}
+					{{ form_row(form.deliveryCountry, { label: 'Country'|trans }) }}
 				<div>
 			</fieldset>
 
-			<h2>{{ 'Poznámka'|trans }}</h2>
+			<h2>{{ 'Note'|trans }}</h2>
 
 			<fieldset>
-				{{ form_row(form.note, { label: 'Napište nám'|trans }) }}
+				{{ form_row(form.note, { label: 'Contact us'|trans }) }}
 			</fieldset>
 
 			{% if termsAndConditionsArticle is not null %}
-				<h2>{{ 'Obchodní podmínky'|trans }}</h2>
+				<h2>{{ 'Terms and conditions'|trans }}</h2>
 				<div class="box-condition">
 					<div class="box-condition__in">
 						<iframe name="js-terms-and-conditions-frame" width="100%" src="{{ url('front_order_terms_and_conditions') }}"></iframe>
 					</div>
 					<div class="box-condition__control">
-						<button id="js-terms-and-conditions-print" class="btn btn--small" type="button">{{ 'Vytisknout'|trans }}</button>
-						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn btn--small">{{ 'Stáhnout'|trans }}</a>
+						<button id="js-terms-and-conditions-print" class="btn btn--small" type="button">{{ 'Print'|trans }}</button>
+						<a href="{{ url('front_order_terms_and_conditions_download') }}" class="btn btn--small">{{ 'Download'|trans }}</a>
 					</div>
 				</div>
 			{% endif %}
-			{{ form_row(form.termsAndConditionsAgreement, { label: 'Souhlasím s obchodními podmínkami'|trans }) }}
-			{{ form_row(form.newsletterSubscription, { label: 'Chci se přihlásit k odběru newsletteru'|trans }) }}
+			{{ form_row(form.termsAndConditionsAgreement, { label: 'I agree with terms and conditons'|trans }) }}
+			{{ form_row(form.newsletterSubscription, { label: 'I want to subscribe to the newsletter'|trans }) }}
 		</div>
 		<div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
 			{{ render(controller('SS6ShopBundle:Front/Order:preview', {
@@ -87,12 +87,12 @@
 
 	<div class="in-action">
 		<div class="in-action__right">
-			{{ form_widget(form.save, { label: 'Dokončit objednávku'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
+			{{ form_widget(form.save, { label: 'Finish the order'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
 		</div>
 
 		<div class="in-action__left">
 			<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
-				{{ 'Zpět na výběr dopravy a platby'|trans }}
+				{{ 'Back to shipping and payment selection'|trans }}
 			</button>
 		</div>
 	</div>

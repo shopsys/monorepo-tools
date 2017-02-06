@@ -51,13 +51,13 @@ class ParameterController extends AdminBaseController {
 			$this->parameterFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Parametr <strong>{{ name }}</strong> byl smazán'),
+				t('Parameter <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený parametr neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected parameter doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_parameter_list');

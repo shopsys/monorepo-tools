@@ -1,16 +1,16 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné příznaky. Nejprve musíte nějaké vytvořit.'|trans }}
+	{{ 'No flags found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'příznaky'|trans %}
+	{% set entityName = 'flags'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit příznak'|trans %}
+	{% set addEntity = 'Create flag'|trans %}
 	{{ parent() }}
 {% endblock %}
 

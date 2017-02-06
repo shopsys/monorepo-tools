@@ -26,10 +26,10 @@ class ProductListOrderingModeForSearchFacade {
 			[
 				ProductListOrderingModeService::ORDER_BY_RELEVANCE => t('relevance'),
 				ProductListOrderingModeService::ORDER_BY_PRIORITY => t('TOP'),
-				ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('abecedně A -> Z'),
-				ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('abecedně Z -> A'),
-				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('od nejlevnějšího'),
-				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => t('od nejdražšího'),
+				ProductListOrderingModeService::ORDER_BY_NAME_ASC => t('alphabetically A -> Z'),
+				ProductListOrderingModeService::ORDER_BY_NAME_DESC => t('alphabetically Z -> A'),
+				ProductListOrderingModeService::ORDER_BY_PRICE_ASC => t('from the cheapest'),
+				ProductListOrderingModeService::ORDER_BY_PRICE_DESC => t('from most expensive'),
 			],
 			ProductListOrderingModeService::ORDER_BY_RELEVANCE,
 			self::COOKIE_NAME

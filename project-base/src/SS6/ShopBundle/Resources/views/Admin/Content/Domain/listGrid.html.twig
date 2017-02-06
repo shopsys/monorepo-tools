@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Doposud nejsou žádné domény.'|trans }}
+	{{ 'No domains so far.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_id_locale %}
@@ -11,6 +11,6 @@
 {% block grid_value_cell_id_icon %}
 	{{ domainIcon(row.id) }}
 	<span class="js-domain-icon-edit-container in-icon in-icon--edit right" data-url="{{ url('admin_domain_edit', { id: row.id }) }}">
-		<i class="svg svg-pencil js-edit-domain-icon" title="{{ 'Upravit'|trans }}"></i>
+		<i class="svg svg-pencil js-edit-domain-icon" title="{{ 'Edit'|trans }}"></i>
 	</span>
 {% endblock %}

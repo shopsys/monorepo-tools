@@ -58,14 +58,14 @@ class ArticleFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název článku']),
+					new Constraints\NotBlank(['message' => 'Please enter article name']),
 				],
 			])
 			->add('hidden', FormType::YES_NO, ['required' => false])
 			->add('text', FormType::WYSIWYG, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím text článku']),
+					new Constraints\NotBlank(['message' => 'Please enter article content']),
 				],
 			])
 			->add('seoTitle', FormType::TEXT, [
@@ -89,9 +89,9 @@ class ArticleFormType extends AbstractType {
 				->add('placement', FormType::CHOICE, [
 					'required' => true,
 					'choices' => $this->articlePlacementLocalizedNamesByName,
-					'placeholder' => t('-- Vyberte umístění článku --'),
+					'placeholder' => t('-- Choose article position --'),
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Prosím vyberte umístění článku']),
+						new Constraints\NotBlank(['message' => 'Please choose article placement']),
 					],
 				]);
 		}

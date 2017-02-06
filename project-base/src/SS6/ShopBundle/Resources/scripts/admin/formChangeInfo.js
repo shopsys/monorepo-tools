@@ -25,7 +25,7 @@
 
 		$(window).on('beforeunload', function() {
 			if (isInfoShown && !isFormSubmitted) {
-				return SS6.translator.trans('Máte neuložené změny!');
+				return SS6.translator.trans('You have unsaved changes!');
 			}
 		});
 	};
@@ -43,7 +43,7 @@
 	};
 
 	SS6.formChangeInfo.showInfo = function () {
-		var textToShow = SS6.translator.trans('Provedli jste změny, nezapomeňte je uložit!');
+		var textToShow = SS6.translator.trans('You have made changes, don\'t forget to save them!');
 		var $fixedBarIn = $('.web__content .window-fixed-bar .window-fixed-bar__in');
 		var $infoDiv = $fixedBarIn.find('#js-form-change-info');
 		if (!isInfoShown) {

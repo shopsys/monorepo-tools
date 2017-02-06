@@ -13,19 +13,19 @@ class AdvancedSearchOperatorTranslation {
 
 	public function __construct() {
 		$this->operatorsTranslations = [
-			AdvancedSearchFilterInterface::OPERATOR_CONTAINS => t('obsahuje'),
-			AdvancedSearchFilterInterface::OPERATOR_NOT_CONTAINS => t('neobsahuje'),
-			AdvancedSearchFilterInterface::OPERATOR_NOT_SET => t('není zadáno'),
-			AdvancedSearchFilterInterface::OPERATOR_IS => t('je'),
-			AdvancedSearchFilterInterface::OPERATOR_IS_NOT => t('není'),
-			AdvancedSearchFilterInterface::OPERATOR_IS_USED => t('používá'),
-			AdvancedSearchFilterInterface::OPERATOR_IS_NOT_USED => t('nepoužívá'),
-			AdvancedSearchFilterInterface::OPERATOR_BEFORE => t('před'),
-			AdvancedSearchFilterInterface::OPERATOR_AFTER => t('po'),
-			AdvancedSearchFilterInterface::OPERATOR_GT => t('větší než'),
-			AdvancedSearchFilterInterface::OPERATOR_LT => t('menší než'),
-			AdvancedSearchFilterInterface::OPERATOR_GTE => t('větší nebo rovno'),
-			AdvancedSearchFilterInterface::OPERATOR_LTE => t('menší nebo rovno'),
+			AdvancedSearchFilterInterface::OPERATOR_CONTAINS => t('include'),
+			AdvancedSearchFilterInterface::OPERATOR_NOT_CONTAINS => t('doesn\'t include'),
+			AdvancedSearchFilterInterface::OPERATOR_NOT_SET => t('not entered'),
+			AdvancedSearchFilterInterface::OPERATOR_IS => t('is'),
+			AdvancedSearchFilterInterface::OPERATOR_IS_NOT => t('not'),
+			AdvancedSearchFilterInterface::OPERATOR_IS_USED => t('uses'),
+			AdvancedSearchFilterInterface::OPERATOR_IS_NOT_USED => t('doesn\'t use'),
+			AdvancedSearchFilterInterface::OPERATOR_BEFORE => t('before'),
+			AdvancedSearchFilterInterface::OPERATOR_AFTER => t('after'),
+			AdvancedSearchFilterInterface::OPERATOR_GT => t('higher than'),
+			AdvancedSearchFilterInterface::OPERATOR_LT => t('lower than'),
+			AdvancedSearchFilterInterface::OPERATOR_GTE => t('higher or equal'),
+			AdvancedSearchFilterInterface::OPERATOR_LTE => t('lower or equal'),
 		];
 	}
 

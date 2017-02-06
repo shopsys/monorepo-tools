@@ -67,7 +67,7 @@ class AvailabilityController extends AdminBaseController {
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Dostupnost <strong>{{ name }}</strong> byla smazána'),
+					t('Availability <strong>{{ name }}</strong> deleted'),
 					[
 						'name' => $fullName,
 					]
@@ -85,7 +85,7 @@ class AvailabilityController extends AdminBaseController {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená dostupnost neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected availatibily doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_availability_list');
@@ -124,14 +124,14 @@ class AvailabilityController extends AdminBaseController {
 				);
 			} else {
 				$message = t(
-					'Opravdu si přejete trvale odstranit dostupnost "%name%"? Nikde není použitá.',
+					'Do you really want to remove availability "%name%" permanently? It is not used anywhere.',
 					['%name%' => $availability->getName()]
 				);
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_availability_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
-			return new Response(t('Zvolená dostupnost neexistuje'));
+			return new Response(t('Selected availability doesn\'t exist'));
 		}
 	}
 
@@ -155,7 +155,7 @@ class AvailabilityController extends AdminBaseController {
 
 			$this->availabilityFacade->setDefaultInStockAvailability($availabilitySettingsFormData['defaultInStockAvailability']);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí dostupnosti pro zboží skladem bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Default availability for the stock settings modified'));
 
 			return $this->redirectToRoute('admin_availability_list');
 		}

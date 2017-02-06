@@ -62,7 +62,7 @@ class AdministratorController extends AdminBaseController {
 		$grid = $this->gridFactory->create('administratorList', $dataSource);
 		$grid->setDefaultOrder('realName');
 
-		$grid->addColumn('realName', 'a.realName', t('Celé jméno'), true);
+		$grid->addColumn('realName', 'a.realName', t('Full name'), true);
 		$grid->addColumn('email', 'a.email', t('E-mail'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
@@ -103,7 +103,7 @@ class AdministratorController extends AdminBaseController {
 				$this->administratorFacade->edit($id, $administratorData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byl upraven administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Administrator <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
 					[
 						'name' => $administratorData->realName,
 						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
@@ -113,14 +113,14 @@ class AdministratorController extends AdminBaseController {
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné'),
+					t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
 					[
 						'name' => $administratorData->username,
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje'),
+					t('Administrator with login name <strong>{{ name }}</strong> already exists'),
 					[
 						'name' => $administratorData->username,
 					]
@@ -130,11 +130,11 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
 		$this->breadcrumb->overrideLastItem(
-			new MenuItem(t('Editace administrátora - %name%', ['%name%' => $administrator->getRealName()]))
+			new MenuItem(t('Editing administrator - %name%', ['%name%' => $administrator->getRealName()]))
 		);
 
 		$lastAdminActivities = $this->administratorActivityFacade->getLastAdministratorActivities(
@@ -172,7 +172,7 @@ class AdministratorController extends AdminBaseController {
 				$administrator = $this->administratorFacade->create($administratorData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byl vytvořen administrátor <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Administrator <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
 					[
 						'name' => $administrator->getRealName(),
 						'url' => $this->generateUrl('admin_administrator_edit', ['id' => $administrator->getId()]),
@@ -182,14 +182,14 @@ class AdministratorController extends AdminBaseController {
 
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Omlouváme se, ale jméno <strong>{{ name }}</strong> je vyhrazeno pro systémovou funkci. Použijte prosím jiné'),
+					t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
 					[
 						'name' => $administratorData->username,
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Administrátor s přihlašovacím jménem <strong>{{ name }}</strong> již existuje'),
+					t('Administrator with login name <strong>{{ name }}</strong> already exists'),
 					[
 						'name' => $administratorData->username,
 					]
@@ -199,7 +199,7 @@ class AdministratorController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Administrator/new.html.twig', [
@@ -218,22 +218,22 @@ class AdministratorController extends AdminBaseController {
 
 			$this->administratorFacade->delete($id);
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Administrátor <strong>{{ name }}</strong> byl smazán.'),
+				t('Administrator <strong>{{ name }}</strong> deleted.'),
 				[
 					'name' => $realName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Nemůžete smazat sami sebe.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('You can\'t delete yourself.'));
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Administrátor <strong>{{ name }}</strong> je jediný a nemůže být smazán.'),
+				t('Administrator <strong>{{ name }}</strong> is the only one and can\'t be deleted.'),
 				[
 					'name' => $this->administratorFacade->getById($id)->getRealName(),
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený administrátor neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected administrated doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_administrator_list');

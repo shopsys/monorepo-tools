@@ -7,12 +7,12 @@ class AdvancedSearchOrderFilterTranslation extends AdvancedSearchFilterTranslati
 	public function __construct() {
 		parent::__construct();
 
-		$this->addFilterTranslation('orderNumber', t('Číslo objednávky'));
-		$this->addFilterTranslation('orderCreatedAt', t('Vytvořeno dne'));
-		$this->addFilterTranslation('orderTotalPriceWithVat', t('Cena s DPH'));
-		$this->addFilterTranslation('orderDomain', t('Doména'));
-		$this->addFilterTranslation('orderStatus', t('Stav objednávky'));
-		$this->addFilterTranslation('orderProduct', t('Zboží v objednávce'));
+		$this->addFilterTranslation('orderNumber', t('Order number'));
+		$this->addFilterTranslation('orderCreatedAt', t('Created on'));
+		$this->addFilterTranslation('orderTotalPriceWithVat', t('Price including VAT'));
+		$this->addFilterTranslation('orderDomain', t('Domain'));
+		$this->addFilterTranslation('orderStatus', t('Status of order'));
+		$this->addFilterTranslation('orderProduct', t('Product in order'));
 	}
 
 }

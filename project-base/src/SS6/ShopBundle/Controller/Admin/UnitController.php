@@ -93,14 +93,14 @@ class UnitController extends AdminBaseController {
 				);
 			} else {
 				$message = t(
-					'Opravdu si přejete trvale odstranit jednotku "%name%"? Nikde není použita.',
+					'Do you really want to remove unit "%name%" permanently? It is not used anywhere.',
 					['%name%' => $unit->getName()]
 				);
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_unit_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
-			return new Response(t('Zvolená jednotka neexistuje'));
+			return new Response(t('Selected unit doesn\'t exist'));
 		}
 	}
 
@@ -120,7 +120,7 @@ class UnitController extends AdminBaseController {
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Jednotka <strong>{{ name }}</strong> byla smazána'),
+					t('Unit <strong>{{ name }}</strong> deleted'),
 					[
 						'name' => $fullName,
 					]
@@ -128,7 +128,7 @@ class UnitController extends AdminBaseController {
 			} else {
 				$newUnit = $this->unitFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Jednotka <strong>{{ name }}</strong> byla smazána a byla nahrazena jednotkou <strong>{{ newName }}</strong>.'),
+					t('Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>'),
 					[
 						'name' => $fullName,
 						'newName' => $newUnit->getName(),
@@ -136,7 +136,7 @@ class UnitController extends AdminBaseController {
 				);
 			}
 		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená jednotka neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected unit doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_unit_list');
@@ -162,7 +162,7 @@ class UnitController extends AdminBaseController {
 
 			$this->unitFacade->setDefaultUnit($unitSettingsFormData['defaultUnit']);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí jednotky bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Default unit settings modified'));
 
 			return $this->redirectToRoute('admin_unit_list');
 		}

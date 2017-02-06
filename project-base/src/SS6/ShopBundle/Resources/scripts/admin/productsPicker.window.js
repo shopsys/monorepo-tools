@@ -49,7 +49,7 @@
 		var originalIconText = $addButton.find('.js-products-picker-icon').text();
 		$addButton
 			.addClass('cursor-auto btn--success').removeClass('btn--plus btn--light')
-			.find('.js-products-picker-label').text(SS6.translator.trans('Přidáno')).end()
+			.find('.js-products-picker-label').text(SS6.translator.trans('Added')).end()
 			.find('.js-products-picker-icon').addClass('svg svg-checked').empty().end()
 			.bind('click.removeProduct', function () {
 				SS6.productsPicker.window.onClickOnAddedButton($addButton, originalLabelText, originalIconText);
@@ -74,10 +74,10 @@
 		$addButton
 			.addClass('cursor-help')
 			.tooltip({
-				title: SS6.translator.trans('Nelze přiřadit produkt sám sobě'),
+				title: SS6.translator.trans('Not possible to assign product to itself'),
 				placement: 'left'
 			})
-			.find('.js-products-picker-label').text(SS6.translator.trans('Nelze'))
+			.find('.js-products-picker-label').text(SS6.translator.trans('Unable to add'))
 			.find('.js-products-picker-icon').removeClass('svg-circle-plus in-icon in-icon--add').addClass('svg-circle-remove in-icon in-icon--denied').end()
 			.click(function () {
 				return false;

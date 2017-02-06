@@ -26,7 +26,7 @@ class OrderItemFormType extends AbstractType {
 		$builder
 			->add('name', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název']),
+					new Constraints\NotBlank(['message' => 'Please enter name']),
 				],
 				'error_bubbling' => true,
 			])
@@ -39,21 +39,21 @@ class OrderItemFormType extends AbstractType {
 			->add('priceWithVat', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jednotkovou cenu s DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),
 				],
 				'error_bubbling' => true,
 			])
 			->add('vatPercent', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
 				],
 				'error_bubbling' => true,
 			])
 			->add('quantity', FormType::INTEGER, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
-					new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než {{ compared_value }}']),
+					new Constraints\NotBlank(['message' => 'Please enter quantity']),
+					new Constraints\GreaterThan(['value' => 0, 'message' => 'Quantity must be greater than {{ compared_value }}']),
 				],
 				'error_bubbling' => true,
 			])

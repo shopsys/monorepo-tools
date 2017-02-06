@@ -40,11 +40,11 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('promoCodeList', $dataSource);
 		$grid->setDefaultOrder('code');
-		$grid->addColumn('code', 'pc.code', t('Kód'), true);
-		$grid->addColumn('percent', 'pc.percent', t('Sleva'), true);
+		$grid->addColumn('code', 'pc.code', t('Code'), true);
+		$grid->addColumn('percent', 'pc.percent', t('Discount'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_promocode_delete', ['id' => 'pc.id'])
-			->setConfirmMessage(t('Opravdu chcete odstranit tento slevový kupón?'));
+			->setConfirmMessage(t('Do you really want to remove this discount coupon?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/PromoCode/listGrid.html.twig');
 

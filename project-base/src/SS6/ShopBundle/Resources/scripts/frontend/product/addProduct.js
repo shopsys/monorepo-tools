@@ -34,7 +34,7 @@
 				content: data,
 				cssClass: cssClass,
 				buttonContinue: true,
-				textContinue: SS6.translator.trans('Přejít do košíku'),
+				textContinue: SS6.translator.trans('Go to cart'),
 				urlContinue: buttonContinueUrl,
 				cssClassContinue: 'btn--success'
 			});
@@ -45,7 +45,7 @@
 				content: data,
 				cssClass: cssClass,
 				buttonCancel: true,
-				textCancel: SS6.translator.trans('Zavřít'),
+				textCancel: SS6.translator.trans('Close'),
 				cssClassCancel: 'btn--success'
 			});
 		}
@@ -55,7 +55,7 @@
 		// on FireFox abort ajax request, but request was probably successful
 		if (jqXHR.status !== 0) {
 			SS6.window({
-				content: SS6.translator.trans('Operace se nezdařila')
+				content: SS6.translator.trans('Operation failed')
 			});
 		}
 	};

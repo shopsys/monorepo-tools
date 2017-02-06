@@ -88,7 +88,7 @@
 			},
 			error: function () {
 				SS6.window({
-					content: SS6.translator.trans('Nastala chyba, zkuste to, prosím, znovu.')
+					content: SS6.translator.trans('Error occurred, try again please.')
 				});
 				$buttons.show();
 				$saving.hide();

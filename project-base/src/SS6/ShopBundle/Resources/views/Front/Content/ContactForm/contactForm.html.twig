@@ -1,14 +1,14 @@
 {{ form_start(form, {attr: {'data-on-submit': 'contactFormAjaxSumbit'}}) }}
-<h2>{{ 'Napište nám'|trans }}</h2>
+<h2>{{ 'Contact us'|trans }}</h2>
 
 {{ form_errors(form) }}
 
-	{{ form_row(form.name, { label: 'Celé jméno'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
+	{{ form_row(form.name, { label: 'Full name'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
 	{{ form_row(form.email, { label: 'E-mail'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
-	{{ form_row(form.message, { label: 'Vzkaz'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
+	{{ form_row(form.message, { label: 'Message'|trans, rowClass: 'form-line-block', errors_attr: { class: 'form-error--line-block' } }) }}
 
 	<div class="text-right">
-		{{ form_widget(form.send, { label: 'Odeslat'|trans }) }}
+		{{ form_widget(form.send, { label: 'Send'|trans }) }}
 	</div>
 
 {{ form_end(form) }}

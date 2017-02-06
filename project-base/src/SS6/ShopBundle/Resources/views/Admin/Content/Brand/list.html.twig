@@ -1,13 +1,13 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Přehled značek'|trans }}{% endblock %}
-{% block h1 %}{{ 'Přehled značek'|trans }}{% endblock %}
+{% block title %}- {{ 'Brand overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Brand overview'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="wrap-bar">
 		<div class="form-group margin-bottom-20">
 			<h2 class="form-group__title">
-				{{ 'Odkaz na přehled značek'|trans }}
+				{{ 'Link to the overview of brands'|trans }}
 			</h2>
 				{% for domain in domains %}
 				<div class="form-line">
@@ -29,7 +29,7 @@
 		</div>
 		<a href="{{ url('admin_brand_new') }}" class="btn btn--plus wrap-bar__btn">
 			<i class="btn__icon">+</i>
-			{{ 'Vytvořit novou značku'|trans }}
+			{{ 'Create new brand'|trans }}
 		</a>
 	</div>
 	{{ gridView.render() }}

@@ -32,9 +32,9 @@
 			$emailInput.val('');
 
 			SS6.window({
-				content: SS6.translator.trans('Byli jste úspěšně přihlášeni k odběru našeho newsletteru.'),
+				content: SS6.translator.trans('You have been successfully subscribed to our newsletter.'),
 				buttonCancel: true,
-				textCancel: SS6.translator.trans('Zavřít')
+				textCancel: SS6.translator.trans('Close')
 			});
 		}
 	};

@@ -5,8 +5,8 @@
 		<button type="button" class="btn-no-style form-input-spinbox__btn form-input-spinbox__btn--minus js-spinbox-minus">-</button>
 	</span>
 	{% if type == 'large' %}
-		{{ form_widget(form.add, {label: 'Vložit do košíku'|trans, attr: {class: 'btn--success  btn--large'}}) }}
+		{{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success  btn--large'}}) }}
 	{% else %}
-		{{ form_widget(form.add, {label: 'Vložit do košíku'|trans, attr: {class: 'btn--success'}}) }}
+		{{ form_widget(form.add, {label: 'Add to cart'|trans, attr: {class: 'btn--success'}}) }}
 	{% endif %}
 {{ form_end(form) }}

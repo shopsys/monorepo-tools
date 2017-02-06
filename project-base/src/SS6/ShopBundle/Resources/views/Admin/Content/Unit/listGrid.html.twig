@@ -1,15 +1,15 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné jednotky. Nejprve musíte nějaké vytvořit.'|trans }}
+	{{ 'No units found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'jednotky'|trans %}
+	{% set entityName = 'units'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit jednotku'|trans %}
+	{% set addEntity = 'Create unit'|trans %}
 	{{ parent() }}
 {% endblock %}

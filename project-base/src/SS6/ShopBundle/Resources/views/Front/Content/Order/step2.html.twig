@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	{{ 'Objednávka'|trans }}
+	{{ 'Order [noun]'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 
 			<div class="box-order__info__item">
 
-				<h2 id="js-label-{{ form.transport.vars.id }}">{{ 'Výběr dopravy'|trans }}</h2>
+				<h2 id="js-label-{{ form.transport.vars.id }}">{{ 'Shipping selection'|trans }}</h2>
 
 				<div class="box-chooser js-form-group">
 					{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
@@ -49,7 +49,7 @@
 							</label>
 						{% else %}
 							{% do form.transport.setRendered %}
-							{{ 'Není z čeho vybírat'|trans }}
+							{{ 'Nothing to choose from'|trans }}
 						{% endfor %}
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 
 			<div class="box-order__info__item">
 
-				<h2 id="js-label-{{ form.payment.vars.id }}">{{ 'Výběr platby'|trans }}</h2>
+				<h2 id="js-label-{{ form.payment.vars.id }}">{{ 'Payment selection'|trans }}</h2>
 
 				<div class="box-chooser box-chooser--smaller js-form-group">
 					{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
@@ -94,7 +94,7 @@
 							</label>
 						{% else %}
 							{% do form.payment.setRendered %}
-							{{ 'Není z čeho vybírat'|trans }}
+							{{ 'Nothing to choose from'|trans }}
 						{% endfor %}
 					</div>
 				</div>
@@ -111,12 +111,12 @@
 
 	<div class="in-action">
 		<div class="in-action__right">
-			{{ form_widget(form.save, { label: 'Pokračovat v objednávce'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
+			{{ form_widget(form.save, { label: 'Continue in order'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
 		</div>
 
 		<div class="in-action__left">
 			<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
-				{{ 'Zpět do košíku'|trans }}
+				{{ 'Back to cart'|trans }}
 			</button>
 		</div>
 	</div>

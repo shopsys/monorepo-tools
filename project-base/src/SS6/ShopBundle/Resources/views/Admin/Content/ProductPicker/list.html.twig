@@ -9,13 +9,13 @@
 					class="{{ isAdvancedSearchFormSubmitted ? 'display-none' : 'active' }} in-tab__heading__item js-tabs-button {{ not isAdvancedSearchFormSubmitted ? 'active' }}"
 					data-tab-id="quick"
 				>
-					{{ 'Rychlé vyhledávání'|trans }}
+					{{ 'Quick search'|trans }}
 				</a>
 				<a href="#"
 					class="{{ isAdvancedSearchFormSubmitted ? 'active' }} in-tab__heading__item js-tabs-button {{ isAdvancedSearchFormSubmitted ? 'active' }}"
 					data-tab-id="advanced"
 				>
-					{{ 'Rozšířené hledání'|trans }}
+					{{ 'Advanced search'|trans }}
 				</a>
 			</div>
 			<div class="in-tab__content">
@@ -47,7 +47,7 @@
 	{% if isMultiple %}
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="#" class="btn" onclick="SS6.productsPicker.close(); return false;">{{ 'Dokončit přiřazování'|trans }}</a>
+				<a href="#" class="btn" onclick="SS6.productsPicker.close(); return false;">{{ 'Finish the assigning'|trans }}</a>
 			{% endblock %}
 		{% endembed %}
 	{% endif %}

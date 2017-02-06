@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-	{{ parent() }} - {{ 'Přihlášení'|trans }}
+	{{ parent() }} - {{ 'Login'|trans }}
 {% endblock %}
 
 {% block main_content %}
@@ -13,30 +13,30 @@
 
 	{{ form_start(form, {attr: {'multipleForm': true}}) }}
 
-		<h1>{{ 'Přihlášení'|trans }}</h1>
+		<h1>{{ 'Login'|trans }}</h1>
 
 		{{ form_row(form.email, {label: 'E-mail'|trans} ) }}
 
-		{{ form_row(form.password, {label: 'Heslo'|trans} ) }}
+		{{ form_row(form.password, {label: 'Password'|trans} ) }}
 
 		{{ form_row(form.rememberMe, {
-			label: 'Zapamatuj si mé přihlášení'|trans,
+			label: 'Remember my login'|trans,
 			icon: {
 				type: 'info',
-				title: 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans
+				title: 'We will remember your login on this computer for 30 days.'|trans
 			}
 		}) }}
 
 		<dl class="form-line">
 			<dt></dt>
 			<dd>
-				{{ form_row(form.login, {label: 'Přihlásit se'|trans}) }}
+				{{ form_row(form.login, {label: 'Log in'|trans}) }}
 			</dd>
 		</dl>
 		<dl class="form-line">
 			<dt></dt>
 			<dd>
-				<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+				<a href="{{ url('front_registration_reset_password') }}">{{ 'Forgot your password?'|trans }}</a>
 			</dd>
 		</dl>
 

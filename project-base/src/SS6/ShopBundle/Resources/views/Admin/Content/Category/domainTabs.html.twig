@@ -2,11 +2,11 @@
 	<div class="in-domain" role="tablist">
 			{% if selectedDomainId == 0 %}
 				<span class="in-domain__item in-domain__item--active">
-					{{ 'Všechny domény'|trans }}
+					{{ 'All domains'|trans }}
 				</span>
 			{% else %}
 				<a class="in-domain__item" href="{{ url('admin_category_list', { domain: 0 }) }}">
-					{{ 'Všechny domény'|trans }}
+					{{ 'All domains'|trans }}
 				</a>
 			{% endif %}
 

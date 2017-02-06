@@ -26,27 +26,27 @@ class ProductMassActionFormType extends AbstractType {
 			->add('selectType', FormType::CHOICE, [
 				'required' => true,
 				'choices' => [
-					ProductMassActionData::SELECT_TYPE_CHECKED => t('Pouze zaškrtnuté zboží'),
-					ProductMassActionData::SELECT_TYPE_ALL_RESULTS => t('Všechny výsledky hledání'),
+					ProductMassActionData::SELECT_TYPE_CHECKED => t('Only checked products'),
+					ProductMassActionData::SELECT_TYPE_ALL_RESULTS => t('All search results'),
 				],
 			])
 			->add('action', FormType::CHOICE, [
 				'required' => true,
 				'choices' => [
-					ProductMassActionData::ACTION_SET => t('Nastavit'),
+					ProductMassActionData::ACTION_SET => t('Set'),
 				],
 			])
 			->add('subject', FormType::CHOICE, [
 				'required' => true,
 				'choices' => [
-					ProductMassActionData::SUBJECT_PRODUCT_HIDDEN => t('Skrývání zboží'),
+					ProductMassActionData::SUBJECT_PRODUCT_HIDDEN => t('Hiding product'),
 				],
 			])
 			->add('value', FormType::CHOICE, [
 				'required' => true,
 				'choices' => [
-					ProductMassActionData::VALUE_PRODUCT_HIDE => t('Skrýt'),
-					ProductMassActionData::VALUE_PRODUCT_SHOW => t('Zobrazit'),
+					ProductMassActionData::VALUE_PRODUCT_HIDE => t('Hide'),
+					ProductMassActionData::VALUE_PRODUCT_SHOW => t('Display'),
 				],
 			])
 			->add('submit', FormType::SUBMIT);

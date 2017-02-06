@@ -128,7 +128,7 @@ class OrderController extends AdminBaseController {
 				$order = $this->orderFacade->edit($id, $orderData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byla upravena objednávka č. <strong><a href="{{ url }}">{{ number }}</a></strong>'),
+					t('Order Nr. <strong><a href="{{ url }}">{{ number }}</a></strong> modified'),
 					[
 						'number' => $order->getNumber(),
 						'url' => $this->generateUrl('admin_order_edit', ['id' => $order->getId()]),
@@ -137,18 +137,18 @@ class OrderController extends AdminBaseController {
 				return $this->redirectToRoute('admin_order_list');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 				$this->getFlashMessageSender()->addErrorFlash(
-					t('Zadaný zákazník nebyl nalezen, prosím překontrolujte zadané údaje')
+					t('Entered customer not found, please check entered data.')
 				);
 			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odeslat aktualizační email'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Unable to send updating e-mail'));
 			}
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace objednávky - č. %number%', ['%number%' => $order->getNumber()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing order - Nr. %number%', ['%number%' => $order->getNumber()])));
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
@@ -229,15 +229,15 @@ class OrderController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('created_at', DataSourceInterface::ORDER_DESC);
 
-		$grid->addColumn('preview', 'o.id', t('Náhled'), false);
-		$grid->addColumn('number', 'o.number', t('Objednávka č.'), true);
-		$grid->addColumn('created_at', 'o.createdAt', t('Vytvořena'), true);
-		$grid->addColumn('customer_name', 'customerName', t('Zákazník'), true);
+		$grid->addColumn('preview', 'o.id', t('Preview'), false);
+		$grid->addColumn('number', 'o.number', t('Order Nr.'), true);
+		$grid->addColumn('created_at', 'o.createdAt', t('Created'), true);
+		$grid->addColumn('customer_name', 'customerName', t('Customer'), true);
 		if ($this->domain->isMultidomain()) {
-			$grid->addColumn('domain_id', 'o.domainId', t('Doména'), true);
+			$grid->addColumn('domain_id', 'o.domainId', t('Domain'), true);
 		}
-		$grid->addColumn('status_name', 'statusName', t('Stav'), true);
-		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Celková cena'), false)
+		$grid->addColumn('status_name', 'statusName', t('Status'), true);
+		$grid->addColumn('total_price', 'o.totalPriceWithVat', t('Total price'), false)
 			->setClassAttribute('text-right text-no-wrap');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
@@ -279,13 +279,13 @@ class OrderController extends AdminBaseController {
 			$this->orderFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Objednávka č. <strong>{{ number }}</strong> byla smazána'),
+				t('Order Nr. <strong>{{ number }}</strong> deleted'),
 				[
 					'number' => $orderNumber,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená objednávka neexistuje'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected order doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_order_list');

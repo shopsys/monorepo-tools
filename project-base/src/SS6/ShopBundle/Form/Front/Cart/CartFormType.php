@@ -33,11 +33,11 @@ class CartFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\All([
 						'constraints' => [
-							new Constraints\NotBlank(['message' => 'Vyplňte prosím množství']),
-							new Constraints\GreaterThan(['value' => 0, 'message' => 'Množství musí být větší než {{ compared_value }}']),
+							new Constraints\NotBlank(['message' => 'Please enter quantity']),
+							new Constraints\GreaterThan(['value' => 0, 'message' => 'Quantity must be greater than {{ compared_value }}']),
 							new Constraints\LessThanOrEqual([
 								'value' => ConstraintValue::INTEGER_MAX_VALUE,
-								'message' => 'Zadejte prosím platné množství',
+								'message' => 'Please enter valid quantity',
 							]),
 						],
 					]),

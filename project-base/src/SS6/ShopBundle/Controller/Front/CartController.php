@@ -123,7 +123,7 @@ class CartController extends FrontBaseController {
 
 		if ($invalidCart) {
 			$this->getFlashMessageSender()->addErrorFlash(
-				t('Prosím zkontrolujte, zda jste správně zadali množství veškerých položek v košíku.')
+				t('Please make sure that you entered right quantity of all items in cart.')
 			);
 		}
 
@@ -194,11 +194,11 @@ class CartController extends FrontBaseController {
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Selected product no longer available or doesn\'t exist.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zadejte prosím platné množství, které chcete vložit do košíku.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Please enter valid quantity you want to add to cart.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zboží se nepodařilo vložit do košíku.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Unable to add product to cart'));
 			}
 		} else {
 			// Form errors list in flash message is temporary solution.
@@ -206,7 +206,7 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Zboží se nepodařilo vložit do košíku:<br/><ul><li>{{ errors|raw }}</li></ul>'),
+				t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),
 				[
 					'errors' => implode('</li><li>', $formErrors),
 				]
@@ -252,11 +252,11 @@ class CartController extends FrontBaseController {
 					'ACCESSORIES_ON_BUY' => ModuleList::ACCESSORIES_ON_BUY,
 				]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zvolené zboží již není v nabídce nebo neexistuje.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Selected product no longer available or doesn\'t exist.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zadejte prosím platné množství, které chcete vložit do košíku.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Please enter valid quantity you want to add to cart.'));
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Zboží se nepodařilo vložit do košíku.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Unable to add product to cart'));
 			}
 		} else {
 			// Form errors list in flash message is temporary solution.
@@ -264,7 +264,7 @@ class CartController extends FrontBaseController {
 			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Zboží se nepodařilo vložit do košíku:<br/><ul><li>{{ errors|raw }}</li></ul>'),
+				t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),
 				[
 					'errors' => implode('</li><li>', $formErrors),
 				]
@@ -282,7 +282,7 @@ class CartController extends FrontBaseController {
 	) {
 		if ($addProductResult->getIsNew()) {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})'),
+				t('Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart'),
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getAddedQuantity(),
@@ -291,7 +291,7 @@ class CartController extends FrontBaseController {
 			);
 		} else {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})'),
+				t('Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})'),
 				[
 					'name' => $addProductResult->getCartItem()->getName(),
 					'quantity' => $addProductResult->getCartItem()->getQuantity(),
@@ -316,16 +316,15 @@ class CartController extends FrontBaseController {
 				$this->cartFacade->deleteCartItem($cartItemId);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Z košíku bylo odstraněno zboží {{ name }}'),
+					t('Product {{ name }} removed from cart'),
 					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Nepodařilo se odstranit položku z košíku. Nejspíš je již odstraněno'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Unable to remove item from cart. The item is probably already removed.'));
 			}
 		} else {
 			$this->getFlashMessageSender()->addErrorFlash(
-				t('Nepodařilo se odstranit položku z košíku.
-					Zřejmě vypršela platnost odkazu pro jeho smazání, proto to vyzkoušejte ještě jednou.'
+				t('Unable to remove item from cart. The link for removing it probably expired, try it again.'
 				)
 			);
 		}

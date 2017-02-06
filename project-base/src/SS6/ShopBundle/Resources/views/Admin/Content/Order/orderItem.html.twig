@@ -8,7 +8,7 @@
 				</a>
 			{% elseif productItem and not productItem.product %}
 				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
-				<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Zboží se nenachází v eshopu.'|trans }}"></i>
+				<i class="svg svg-question js-tooltip" data-toggle="tooltip" data-placement="right" title="{{ 'Product not in e-shop.'|trans }}"></i>
 			{% else %}
 				{{ form_widget(orderItemForm.name, { attr: { class: 'js-order-item-name'}}) }}
 			{% endif %}

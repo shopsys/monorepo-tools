@@ -49,7 +49,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 			$grid->addColumn(
 				'name',
 				'pt.name',
-				t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
+				t('Name %locale%', ['%locale%' => $this->localization->getLanguageName($defaultLocale)]),
 				true
 			);
 			foreach ($locales as $locale) {
@@ -57,7 +57,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 					$grid->addColumn(
 						'name_' . $locale,
 						'pt_' . $locale . '.name',
-						t('Název %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
+						t('Name %locale%', ['%locale%' => $this->localization->getLanguageName($locale)]),
 						true
 					);
 				}
@@ -66,11 +66,11 @@ class ParameterGridFactory implements GridFactoryInterface {
 			$grid->addColumn(
 				'name',
 				'pt.name',
-				t('Název'),
+				t('Name'),
 				true
 			);
 		}
-		$grid->addColumn('visible', 'p.visible', t('Filtrovat podle'), true);
+		$grid->addColumn('visible', 'p.visible', t('Filter by'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_parameter_delete', ['id' => 'p.id'])

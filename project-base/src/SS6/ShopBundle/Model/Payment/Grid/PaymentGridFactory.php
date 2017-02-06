@@ -75,13 +75,13 @@ class PaymentGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('paymentList', $dataSource);
 		$grid->enableDragAndDrop(Payment::class);
 
-		$grid->addColumn('name', 'pt.name', t('Název'));
-		$grid->addColumn('price', 'paymentDetail', t('Cena'));
+		$grid->addColumn('name', 'pt.name', t('Name'));
+		$grid->addColumn('price', 'paymentDetail', t('Price'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_payment_edit', ['id' => 'p.id']);
 		$grid->addDeleteActionColumn('admin_payment_delete', ['id' => 'p.id'])
-			->setConfirmMessage(t('Opravdu chcete odstranit tuto platbu?'));
+			->setConfirmMessage(t('Do you really want to remove this payment?'));
 
 		$grid->setTheme(
 			'@SS6Shop/Admin/Content/Payment/listGrid.html.twig',

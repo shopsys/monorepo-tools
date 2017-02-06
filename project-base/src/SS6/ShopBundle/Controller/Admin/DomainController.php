@@ -87,9 +87,9 @@ class DomainController extends AdminBaseController {
 
 		$grid = $this->gridFactory->create('domainsList', $dataSource);
 
-		$grid->addColumn('name', 'name', t('Název domény'));
-		$grid->addColumn('locale', 'locale', t('Jazyk'));
-		$grid->addColumn('icon', 'icon', t('Ikona'));
+		$grid->addColumn('name', 'name', t('Domain name'));
+		$grid->addColumn('locale', 'locale', t('Language'));
+		$grid->addColumn('icon', 'icon', t('Icon'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Domain/listGrid.html.twig');
 
@@ -127,15 +127,15 @@ class DomainController extends AdminBaseController {
 				}
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byla upravena doména <strong>{{ name }}</strong>'),
+					t('Domain <strong>{{ name }}</strong> modified'),
 					['name' => $domain->getName()]
 				);
 
 				return new JsonResponse(['result' => 'valid']);
 			} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Typ souboru není podporován.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('File type not supported.'));
 			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Nahrání souboru selhalo, zkuste to, prosím, znovu.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('File upload failed, try again please.'));
 			}
 
 		}

@@ -51,13 +51,13 @@ class PromoCodeController extends AdminBaseController {
 			$this->promoCodeFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Slevový kupón <strong>{{ code }}</strong> byl smazán'),
+				t('Discount coupon <strong>{{ code }}</strong> deleted.'),
 				[
 					'code' => $code,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený slevový kupón neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected discount coupon doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_promocode_list');

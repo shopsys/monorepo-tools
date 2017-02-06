@@ -26,7 +26,7 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 		$isBrandDetail = $routeName === 'front_brand_detail';
 
 		$breadcrumbItems[] = new BreadcrumbItem(
-			t('Přehled značek'),
+			t('Brand overview'),
 			$isBrandDetail ? 'front_brand_list' : null
 		);
 

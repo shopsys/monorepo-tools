@@ -30,22 +30,22 @@ class AdministratorFormType extends AbstractType {
 		$builder
 			->add('username', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím přihlašovací jméno']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Přihlašovací jméno nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter username']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Username cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('realName', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím celé jméno']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Celé jméno nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter full name']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Full name cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('email', FormType::EMAIL, [
 				'required' => true,
 				'constraints' => [
-					new Email(['message' => 'Vyplňte prosím platný e-mail']),
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
+					new Email(['message' => 'Please enter valid e-mail']),
+					new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('password', FormType::REPEATED, [
@@ -57,13 +57,13 @@ class AdministratorFormType extends AbstractType {
 				'first_options' => [
 					'constraints' => [
 						new Constraints\NotBlank([
-							'message' => 'Vyplňte prosím heslo',
+							'message' => 'Please enter password',
 							'groups' => [self::SCENARIO_CREATE],
 						]),
-						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
 					],
 				],
-				'invalid_message' => 'Hesla se neshodují',
+				'invalid_message' => 'Passwords do not match',
 			])
 			->add('save', FormType::SUBMIT);
 	}
@@ -77,7 +77,7 @@ class AdministratorFormType extends AbstractType {
 					'field1' => 'username',
 					'field2' => 'password',
 					'errorPath' => 'password',
-					'message' => 'Heslo nesmí být stejné jako přihlašovací jméno',
+					'message' => 'Password cannot be same as username',
 				]),
 			],
 		]);

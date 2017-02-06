@@ -48,9 +48,9 @@ class ContactFormController extends FrontBaseController {
 						'method' => 'POST',
 					]
 				);
-				$message = t('Děkujeme, váš vzkaz byl odeslán.');
+				$message = t('Thank you, your message has been sent.');
 			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
-				$message = t('Nastala chyba při odesílání mailu.');
+				$message = t('Error occurred when sending e-mail.');
 			}
 
 		}

@@ -58,7 +58,7 @@ class FeedController extends AdminBaseController {
 
 			$this->feedFacade->generateFeed($feedConfig, $domainConfig);
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Feed "{{ feedName }}" byl úspěšně vygenerován.'),
+				t('Feed "{{ feedName }}" successfully generated.'),
 				[
 					'feedName' => $feedName,
 				]
@@ -66,7 +66,7 @@ class FeedController extends AdminBaseController {
 
 		} catch (\SS6\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Feed s názvem "{{ feedName }}" nebyl nalezen.'),
+				t('Feed "{{ feedName }}" not found.'),
 				[
 					'feedName' => $feedName,
 				]
@@ -102,10 +102,10 @@ class FeedController extends AdminBaseController {
 		$grid = $this->gridFactory->create('feedsList', $dataSource);
 
 		$grid->addColumn('label', 'feedLabel', t('Feed'));
-		$grid->addColumn('created', 'created', t('Vygenerováno'));
-		$grid->addColumn('url', 'url', t('Url adresa'));
+		$grid->addColumn('created', 'created', t('Generated'));
+		$grid->addColumn('url', 'url', t('Url address'));
 		if ($this->isGranted(Roles::ROLE_SUPER_ADMIN)) {
-			$grid->addColumn('actions', 'actions', t('Akce'))->setClassAttribute('column--superadmin');
+			$grid->addColumn('actions', 'actions', t('Action'))->setClassAttribute('column--superadmin');
 		}
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');

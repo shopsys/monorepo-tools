@@ -64,7 +64,7 @@ class HeurekaController extends AdminBaseController {
 					$selectedDomainId
 				);
 
-				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení bylo upraveno.'));
+				$this->getFlashMessageSender()->addSuccessFlash(t('Settings modified.'));
 			}
 			$formView = $form->createView();
 		}

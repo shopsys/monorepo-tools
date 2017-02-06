@@ -34,7 +34,7 @@ class InputPriceTypeFormType extends AbstractType {
 			->add('type', FormType::CHOICE, [
 				'choices' => $choices,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte typ vstupní ceny']),
+					new Constraints\NotBlank(['message' => 'Please enter input prices']),
 				],
 			])
 			->add('save', FormType::SUBMIT);
@@ -51,8 +51,8 @@ class InputPriceTypeFormType extends AbstractType {
 	 */
 	private function getInputPriceTypesLabels() {
 		return [
-			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Bez DPH'),
-			PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('S DPH'),
+			PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Excluding VAT'),
+			PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('Including VAT'),
 		];
 	}
 

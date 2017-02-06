@@ -1,14 +1,14 @@
 {% extends '@SS6Shop/Admin/Content/Customer/detail.html.twig' %}
 
-{% block title %}- {{ 'Nový zákazník'|trans }}{% endblock %}
-{% block h1 %}{{ 'Nový zákazník'|trans }}{% endblock %}
+{% block title %}- {{ 'New customer'|trans }}{% endblock %}
+{% block h1 %}{{ 'New customer'|trans }}{% endblock %}
 
 {% block customer_domain %}
-	{{ form_row(form.userData.domainId, { label: 'Doména'|trans, attr: {class: 'js-change-price-categories'} }) }}
+	{{ form_row(form.userData.domainId, { label: 'Domain'|trans, attr: {class: 'js-change-price-categories'} }) }}
 {% endblock %}
 
 {% block customer_sendMail %}
 	{{ form_row(form.sendRegistrationMail, {
 		attr: { class: 'js-checkbox-toggle'},
-		label: 'Odeslat mail s potvrzením registrace zákazníkovi'|trans }) }}
+		label: 'Send confirmation e-mail about registration to customer'|trans }) }}
 {% endblock %}

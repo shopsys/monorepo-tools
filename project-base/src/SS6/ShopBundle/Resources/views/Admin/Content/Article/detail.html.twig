@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Článek'|trans }}{% endblock %}
-{% block h1 %}{{ 'Článek'|trans }}{% endblock %}
+{% block title %}- {{ 'Article'|trans }}{% endblock %}
+{% block h1 %}{{ 'Article'|trans }}{% endblock %}
 
 {% block main_content %}
 	{{ form_start(form) }}
@@ -9,19 +9,19 @@
 
 		<div class="form-group wrap-border">
 			<div class="form-group__title">
-				{{ 'Údaje článku'|trans }}
+				{{ 'Article data'|trans }}
 			</div>
 
 			{{ form_id(article|default(null)) }}
 
 			{% block article_domain %}
-				{{ form_row(form.domainId, { label: 'Doména'|trans }) }}
+				{{ form_row(form.domainId, { label: 'Domain'|trans }) }}
 			{% endblock %}
 			{% block article_placement %}{% endblock %}
 
-			{{ form_row(form.name, { label: 'Název'|trans}) }}
-			{{ form_row(form.hidden, { label: 'Skrýt'|trans, newline: true}) }}
-			{{ form_row(form.text, { label: 'Obsah'|trans, newline: true}) }}
+			{{ form_row(form.name, { label: 'Name'|trans}) }}
+			{{ form_row(form.hidden, { label: 'Hide'|trans, newline: true}) }}
+			{{ form_row(form.text, { label: 'Content'|trans, newline: true}) }}
 		</div>
 
 		<div class="form-group">
@@ -31,7 +31,7 @@
 
 			<div class="form-line">
 				<strong class="form-line__label">
-					{{ form_label(form.seoTitle, 'Titulek'|trans) }}
+					{{ form_label(form.seoTitle, 'Headline'|trans) }}
 				</strong>
 
 				<div class="form-line__side js-characters-counter">
@@ -72,7 +72,7 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<a href="{{ url('admin_article_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(article|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

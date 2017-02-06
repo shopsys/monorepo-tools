@@ -1,6 +1,6 @@
 {% if productDetails|length > 0 %}
 	<div class="js-bestselling-products list-products-line">
-		<h2>{{ 'Nejprodávanější zboží'|trans }}</h2>
+		<h2>{{ 'Bestsellers'|trans }}</h2>
 		<ul class="list-products-line__list">
 			{% for productDetail in productDetails %}
 				<li class="list-products-line__item js-bestselling-product{% if (loop.index > maxShownProducts )%} display-none{% endif %}">
@@ -19,7 +19,7 @@
 								{{ productDetail.sellingPrice.priceWithVat|price }}
 							</div>
 							<div class="list-products-line__item__price__item">
-								{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+								{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
 							</div>
 						</div>
 					</a>
@@ -29,7 +29,7 @@
 		{% if productDetails|length > maxShownProducts %}
 			<div class="list-products-line__more js-bestselling-products-load-more-container">
 				<span class="btn js-bestselling-products-load-more">
-					{{ 'Další nejprodávanější'|trans }}
+					{{ 'More bestsellers'|trans }}
 				</span>
 			</div>
 		{% endif %}

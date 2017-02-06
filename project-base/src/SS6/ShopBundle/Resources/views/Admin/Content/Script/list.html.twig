@@ -1,13 +1,13 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Přehled skriptů'|trans }}{% endblock %}
-{% block h1 %}{{ 'Přehled skriptů'|trans }}{% endblock %}
+{% block title %}- {{ 'Scripts overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Scripts overview'|trans }}{% endblock %}
 
 {% block main_content %}
 
-	<div class="in-message in-message--block in-message--danger">{{ 'POZOR - vkládání skriptů na stránky může vážně ohrozit bezpečnost, výkonnost nebo vzhled aplikace!'|trans }}</div>
+	<div class="in-message in-message--block in-message--danger">{{ 'ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app.'|trans }}</div>
 
-	<a href="{{ url('admin_script_new') }}" class="btn">{{ 'Vytvořit nový skript'|trans }}</a>
+	<a href="{{ url('admin_script_new') }}" class="btn">{{ 'Create new script'|trans }}</a>
 
 	{{ gridView.render() }}
 {% endblock %}

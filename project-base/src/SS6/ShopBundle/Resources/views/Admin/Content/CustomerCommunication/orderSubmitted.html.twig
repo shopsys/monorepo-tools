@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Stránka s potvrzením objednávky'|trans }}{% endblock %}
-{% block h1 %}{{ 'Stránka s potvrzením objednávky'|trans }}{% endblock %}
+{% block title %}- {{ 'Order confirmation page'|trans }}{% endblock %}
+{% block h1 %}{{ 'Order confirmation page'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -10,13 +10,13 @@
 	{{ form_start(form) }}
 		<div class="form-group">
 			<div class="form-group__title">
-				{{ 'Nastavení'|trans }}
+				{{ 'Settings'|trans }}
 			</div>
-			{{ form_row(form.content, { label: 'Obsah'|trans}) }}
+			{{ form_row(form.content, { label: 'Content'|trans}) }}
 		</div>
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_widget(form.save, { label: 'Uložit'|trans}) }}
+				{{ form_widget(form.save, { label: 'Save'|trans}) }}
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}
@@ -26,7 +26,7 @@
 			<thead>
 				<tr class="grid-row-titles">
 					<th>
-						{{ 'Použitelné proměnné'|trans }}
+						{{ 'Applicable variables'|trans }}
 					</th>
 					<th>
 					</th>
@@ -37,25 +37,22 @@
 					<td>
 						{{ VARIABLE_TRANSPORT_INSTRUCTIONS }}
 					</td>
-					<td>{{ 'Pokyny k dopravě'|trans }}</td>
+					<td>{{ 'Shipping instructions'|trans }}</td>
 				</tr>
 				<tr class="grid-row-cells">
 					<td>
 						{{ VARIABLE_PAYMENT_INSTRUCTIONS }}
 					</td>
-					<td>{{ 'Pokyny k platbě'|trans }}</td>
+					<td>{{ 'Payment instructions'|trans }}</td>
 				</tr>
 				<tr class="grid-row-cells">
 					<td>
 						{{ VARIABLE_ORDER_DETAIL_URL }}
 					</td>
 					<td>
-						{{ 'URL adresa objednávky'|trans }}
+						{{ 'Order URL address'|trans }}
 						<i class="js-tooltip svg svg-info cursor-help" data-toggle="tooltip" data-placement="right" title="{{
-							'Lze použít při vytváření odkazu takto: myší označíte text, ze kterého chcete vytvořit
-							odkaz, a klepnete na tlačítko Odkaz (vpravo nahoře, ikonka propojených sponek). Ve vyskakovacím menu
-							vyberete protokol <jiný> a do políčka URL vložíte text "%orderDetailUrlConstant%" (včetně složených
-							závorek).'|trans({'%orderDetailUrlConstant%' : VARIABLE_ORDER_DETAIL_URL}) }}"
+							'It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text "%orderDetailUrlConstant%" in the URL field (Including the braces)'|trans({'%orderDetailUrlConstant%' : VARIABLE_ORDER_DETAIL_URL}) }}"
 						></i>
 					</td>
 				</tr>
@@ -63,7 +60,7 @@
 					<td>
 						{{ VARIABLE_NUMBER }}
 					</td>
-					<td>{{ 'Číslo objednávky'|trans }}</td>
+					<td>{{ 'Order number'|trans }}</td>
 				</tr>
 			</tbody>
 		</table>

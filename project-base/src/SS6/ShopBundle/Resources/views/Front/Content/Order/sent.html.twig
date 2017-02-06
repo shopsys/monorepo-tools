@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-	{{ 'Objednávka dokončena'|trans }}
+	{{ 'Order completed'|trans }}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -16,7 +16,7 @@
 	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
 	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageGoogleAnalyticsScript', {order: order})) }}
 
-	<h1>{{ 'Objednávka byla odeslána'|trans }}</h1>
+	<h1>{{ 'Order sent'|trans }}</h1>
 
 	<div class="in-user-text">
 		{{ orderConfirmationText|raw }}
@@ -25,7 +25,7 @@
 	<div class="in-action">
 		<div class="in-action__left">
 			<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
-				{{ 'Zpět do obchodu'|trans }}
+				{{ 'Back to store'|trans }}
 			</a>
 		</div>
 	</div>

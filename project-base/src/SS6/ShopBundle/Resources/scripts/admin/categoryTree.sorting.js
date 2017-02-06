@@ -51,12 +51,12 @@
 					self.$saveButton.addClass('btn--disabled');
 					SS6.formChangeInfo.removeInfo();
 					SS6.window({
-						content: SS6.translator.trans('Pořadí bylo uloženo.')
+						content: SS6.translator.trans('Order saved.')
 					});
 				},
 				error: function () {
 					SS6.window({
-						content: SS6.translator.trans('Během ukládání došlo k chybě. Pořadí nebylo uloženo.')
+						content: SS6.translator.trans('There was an error while saving. The order isn\'t saved.')
 					});
 				}
 			});

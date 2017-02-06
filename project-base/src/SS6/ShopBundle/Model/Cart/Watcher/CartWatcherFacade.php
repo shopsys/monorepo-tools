@@ -83,7 +83,7 @@ class CartWatcherFacade {
 				);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 				$this->flashMessageSender->addErrorFlash(
-					t('Zboží, které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.')
+					t('Product you had in cart is no longer in available. Please check your order.')
 				);
 			}
 

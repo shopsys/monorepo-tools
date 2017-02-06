@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Kategorie'|trans }}{% endblock %}
-{% block h1 %}{{ 'Kategorie'|trans }}{% endblock %}
+{% block title %}- {{ 'Category'|trans }}{% endblock %}
+{% block h1 %}{{ 'Category'|trans }}{% endblock %}
 {% block btn %}
 	<a href="{{ url('admin_category_new') }}" class="btn btn--plus wrap-bar__btn">
 		<i class="btn__icon">+</i>
-		{{ 'Vytvořit novou kategorii'|trans }}
+		{{ 'Create new category'|trans }}
 	</a>
 {% endblock %}
 
@@ -32,10 +32,10 @@
 								href="{{ categoryDeleteUrl }}"
 								onclick="
 									SS6.window({
-										content: '{{ 'Opravdu chcete smazat tuto kategorii?'|trans|e('js') }}',
+										content: '{{ 'Do you really want to delete this category?'|trans|e('js') }}',
 										buttonCancel: true,
 										buttonContinue: true,
-										textContinue: '{{ 'Ano'|trans|e('js') }}',
+										textContinue: '{{ 'Yes'|trans|e('js') }}',
 										urlContinue: '{{ categoryDeleteUrl|e('js') }}'
 									});
 									return false;"
@@ -66,7 +66,7 @@
 					data-category-save-order-url="{{ url('admin_category_saveorder') }}"
 					type="button"
 				>
-					{{ 'Uložit změny v pořadí'|trans }}
+					{{ 'Save changes in order'|trans }}
 				</button>
 			{% endblock %}
 		{% endembed %}
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div>
-			{{ 'Na záložce konkrétní domény není možné upravovat pořadí a zanoření kategorií. Prosím přejděte na kartu kategorie nebo na přehled kategorií všech domén.'|trans }}
+			{{ 'In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains'|trans }}
 		</div>
 	{% endif %}
 {% endblock %}

@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block logo %}
-	<h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Internetový obchod'|trans }}"></h1>
+	<h1 class="logo" href="{{ url('front_homepage') }}" title="{{ 'Online shop'|trans }}"></h1>
 {% endblock %}
 
 {% block main_content %}
@@ -34,7 +34,7 @@
 
 	{% if topProductsDetails is not empty %}
 		<div id="top-products">
-			<h1>{{ 'Akční zboží'|trans }}</h1>
+			<h1>{{ 'Special offers'|trans }}</h1>
 			{{ productList.list(topProductsDetails) }}
 		</div>
 	{% endif %}

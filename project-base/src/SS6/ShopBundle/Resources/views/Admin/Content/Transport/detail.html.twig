@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
-	- {{ 'Doprava'|trans }}
+	- {{ 'Shipping'|trans }}
 {% endblock %}
 
 {% block h1 %}
-	{{ 'Doprava'|trans }}
+	{{ 'Shipping'|trans }}
 {% endblock %}
 
 {% block main_content %}
@@ -15,46 +15,46 @@
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Základní nastavení'|trans }}
+				{{ 'Default settings'|trans }}
 			</div>
 			{{ form_id(transportDetail.transport|default(null)) }}
 
-			{{ form_row(form.transportData.name, { label: 'Název'|trans }) }}
-			{{ form_row(form.transportData.domains, { label: 'Zobrazovat na'|trans }) }}
-			{{ form_row(form.transportData.hidden, { label: 'Skryté'|trans, attr: {class: 'form-line--between'} }) }}
+			{{ form_row(form.transportData.name, { label: 'Name'|trans }) }}
+			{{ form_row(form.transportData.domains, { label: 'Display on'|trans }) }}
+			{{ form_row(form.transportData.hidden, { label: 'Hidden'|trans, attr: {class: 'form-line--between'} }) }}
 		</div>
 
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Ceny'|trans }}
+				{{ 'Prices'|trans }}
 			</div>
-			{{ form_row(form.transportData.vat, { label: 'DPH'|trans }) }}
+			{{ form_row(form.transportData.vat, { label: 'VAT'|trans }) }}
 			{% block transport_base_prices %}{% endblock %}
 		</div>
 
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Popis'|trans }}
+				{{ 'Description'|trans }}
 			</div>
-			{{ form_row(form.transportData.description, { label: 'Popis'|trans }) }}
-			{{ form_row(form.transportData.instructions, { label: 'Pokyny'|trans }) }}
+			{{ form_row(form.transportData.description, { label: 'Description'|trans }) }}
+			{{ form_row(form.transportData.instructions, { label: 'Instructions'|trans }) }}
 		</div>
 
 
 		<div class="form-group">
 			<div class="form-group__title">
-				{{ 'Obrázek'|trans }}
+				{{ 'Picture'|trans }}
 			</div>
 
 			{% block image %}{% endblock %}
-			{{ form_row(form.transportData.image, { label: 'Nahrát obrázek'|trans, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+			{{ form_row(form.transportData.image, { label: 'Upload picture'|trans, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
 		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(transportDetail|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

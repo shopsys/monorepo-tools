@@ -50,7 +50,7 @@ class CustomerPasswordController extends FrontBaseController {
 				$this->customerPasswordFacade->resetPassword($email, $this->domain->getId());
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.'),
+					t('Link to password reset sent to e-mail <strong>{{ email }}</strong>.'),
 					[
 						'email' => $email,
 					]
@@ -78,7 +78,7 @@ class CustomerPasswordController extends FrontBaseController {
 		$hash = $request->query->get('hash');
 
 		if (!$this->customerPasswordFacade->isResetPasswordHashValid($email, $this->domain->getId(), $hash)) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('The link to change your password expired.'));
 			return $this->redirectToRoute('front_homepage');
 		}
 
@@ -105,10 +105,10 @@ class CustomerPasswordController extends FrontBaseController {
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('The link to change your password expired.'));
 			}
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Heslo bylo úspěšně změněno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Password successfully changed'));
 			return $this->redirectToRoute('front_homepage');
 		}
 

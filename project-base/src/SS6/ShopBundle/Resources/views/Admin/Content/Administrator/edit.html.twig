@@ -1,22 +1,22 @@
 {% extends '@SS6Shop/Admin/Content/Administrator/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace administrátora'|trans }} - {{ administrator.realName }}{% endblock %}
-{% block h1 %}{{ 'Editace administrátora'|trans }} - {{ administrator.realName }}{% endblock %}
+{% block title %}- {{ 'Editing administrator'|trans }} - {{ administrator.realName }}{% endblock %}
+{% block h1 %}{{ 'Editing administrator'|trans }} - {{ administrator.realName }}{% endblock %}
 
 {% block admin_log %}
 	{% if lastAdminActivities|length > 0 %}
-		<h2>{{ 'Historie aktivit administrátora'|trans }}</h2>
+		<h2>{{ 'Administrator activities history'|trans }}</h2>
 		<table class="table-main">
 			<thead>
 				<tr>
 					<th>
-						{{ 'Čas přihlášení'|trans }}
+						{{ 'Login time'|trans }}
 					</th>
 					<th>
-						{{ 'Čas poslední akce'|trans }}
+						{{ 'Last action time'|trans }}
 					</th>
 					<th>
-						{{ 'IP adresa'|trans }}
+						{{ 'IP address'|trans }}
 					</th>
 				</tr>
 			</thead>

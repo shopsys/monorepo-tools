@@ -35,7 +35,7 @@
 					{{ gridView.renderBlock('grid_pager') }}
 				{% endif %}
 				{% if grid.dragAndDrop %}
-					<button class="js-drag-and-drop-grid-submit btn btn--disabled" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+					<button class="js-drag-and-drop-grid-submit btn btn--disabled" type="button">{{ 'Save changes in order'|trans }}</button>
 				{% endif %}
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné záznamy.'|trans }}
+	{{ 'No records found.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell %}
@@ -77,7 +77,7 @@
 				</th>
 			{% endfor %}
 			{% if grid.actionColumns is not empty or grid.inlineEdit %}
-				<th class="table-grid__cell table-grid__cell--actions {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">{{ 'Úpravy'|trans }}</ht>
+				<th class="table-grid__cell table-grid__cell--actions {{ grid.actionColumnClassAttribute }}" colspan="{{ grid.actionColumns|length }}">{{ 'Modifications'|trans }}</ht>
 			{% endif  %}
 		</tr>
 	</thead>
@@ -128,7 +128,7 @@
 {% endblock %}
 
 {% block grid_multiple_drag_and_drop_row_holder %}
-	{{ 'Zde můžete přetáhnout další obsah.'|trans }}
+	{{ 'You can drag additional content here.'|trans }}
 {% endblock %}
 
 {% block grid_row %}
@@ -161,15 +161,15 @@
 			<td class="table-grid__cell--actions js-inline-edit-unmatched-inputs">
 				{% if grid.inlineEdit and form is defined %}
 					<span class="js-inline-edit-buttons">
-						<a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Uložit změny'|trans }}"></a>
-						<a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Zahodit změny'|trans }}"> </a>
+						<a href="#" class="js-inline-edit-save in-icon in-icon--save svg svg-checked" title="{{ 'Save changes'|trans }}"></a>
+						<a href="#" class="js-inline-edit-cancel in-icon in-icon--cancel svg svg-delete" title="{{ 'Discard changes'|trans }}"> </a>
 					</span>
 					<span class="js-inline-edit-saving">
 						<span class="svg svg-gear in-icon in-icon--spinner"></span>
 					</span>
 				{% else %}
 					{% if grid.inlineEdit %}
-						<a href="#" class="js-inline-edit-edit svg svg-pencil in-icon in-icon--edit" title="{{ 'Upravit'|trans }}"></a>
+						<a href="#" class="js-inline-edit-edit svg svg-pencil in-icon in-icon--edit" title="{{ 'Edit'|trans }}"></a>
 					{% endif %}
 					{% for actionColumn in grid.actionColumns %}
 						{{ gridView.renderActionCell(actionColumn, row)|raw }}
@@ -206,7 +206,7 @@
 					content: '{{ actionColumn.confirmMessage }}',
 					buttonCancel: true,
 					buttonContinue: true,
-					textContinue: '{{ 'Ano'|trans }}',
+					textContinue: '{{ 'Yes'|trans }}',
 					urlContinue: '{{ actionColumn.targetUrl(row) }}'
 				});
 				return false;"
@@ -217,8 +217,8 @@
 {% block grid_pager_totalcount %}
 	<div class="in-grid-control__item in-grid-control__item--show">
 		<strong>
-			{{ 'Zobrazuji'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
-			{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'z'|trans }} {{ grid.totalCount }}
+			{{ 'Displaying'|trans }} {{ entityName|default('records'|trans)|trim }}
+			{{ grid.paginationResults.fromItem }} - {{ grid.paginationResults.toItem }} {{ 'from'|trans }} {{ grid.totalCount }}
 		</strong>
 	</div>
 {% endblock %}
@@ -288,7 +288,7 @@
 	<div class="in-grid-control__item in-grid-control__item--settings">
 		<span class="in-grid-control__item__go">
 			<span class="in-grid-control__item__go__text">
-				{{ 'Položek na stránku:'|trans }}
+				{{ 'Items per page:'|trans }}
 			</span>
 			<div class="in-grid-control__item__go__block">
 				<select onchange="window.location = '{{ gridView.url({'limit' : '--limit--'}, 'page')|escape('js') }}'.replace('--limit--', this.value);" class="input">
@@ -299,7 +299,7 @@
 			</div>
 		</span>
 		<div class="js-grid-go-to in-grid-control__item__go">
-			<span class="in-grid-control__item__go__text">{{ 'Přejít na stránku:'|trans }}</span>
+			<span class="in-grid-control__item__go__text">{{ 'Go to page:'|trans }}</span>
 			<div class="in-grid-control__item__go__block form-type-and-go">
 				<input
 					type="number"
@@ -331,16 +331,16 @@
 
 {% block grid_value_cell_type_boolean %}
 	{% if value %}
-		{{ 'Ano'|trans }}
+		{{ 'Yes'|trans }}
 	{% else %}
-		{{ 'Ne'|trans }}
+		{{ 'No'|trans }}
 	{% endif %}
 {% endblock %}
 
 {% block grid_value_cell_id_visible %}
 	<span
 		class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
-		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"
+		title="{{ value ? 'Yes'|trans : 'No'|trans }}"
 	></span>
 {% endblock %}
 
@@ -376,7 +376,7 @@
 	<div class="wrap-bar">
 		<a href="#" class="btn btn--plus wrap-bar__btn js-inline-edit-add">
 			<i class="btn__icon">+</i>
-			{{ addEntity|default('Vytvořit záznam'|trans) }}
+			{{ addEntity|default('Create record'|trans) }}
 		</a>
 	</div>
 {% endblock %}

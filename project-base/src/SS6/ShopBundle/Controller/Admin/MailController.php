@@ -84,23 +84,23 @@ class MailController extends AdminBaseController {
 	 */
 	private function getOrderStatusVariablesLabels() {
 		return [
-			OrderMailService::VARIABLE_NUMBER => t('Číslo objednávky'),
-			OrderMailService::VARIABLE_DATE => t('Datum a čas vytvoření objednávky'),
-			OrderMailService::VARIABLE_URL => t('URL adresa e-shopu'),
-			OrderMailService::VARIABLE_TRANSPORT => t('Název zvolené dopravy'),
-			OrderMailService::VARIABLE_PAYMENT => t('Název zvolené platby'),
-			OrderMailService::VARIABLE_TOTAL_PRICE => t('Celková cena za objednávku (s DPH)'),
+			OrderMailService::VARIABLE_NUMBER => t('Order number'),
+			OrderMailService::VARIABLE_DATE => t('Date and time of order creation'),
+			OrderMailService::VARIABLE_URL => t('E-shop URL address'),
+			OrderMailService::VARIABLE_TRANSPORT => t('Chosen shipping name'),
+			OrderMailService::VARIABLE_PAYMENT => t('Chosen payment name'),
+			OrderMailService::VARIABLE_TOTAL_PRICE => t('Total order price (including VAT)'),
 			OrderMailService::VARIABLE_BILLING_ADDRESS => t(
-				'Fakturační adresa - jméno, příjmení, firma, ič, dič a fakt. adresa'
+				'Billing address - name, surname, company, company number, tax number and billing address'
 			),
-			OrderMailService::VARIABLE_DELIVERY_ADDRESS => t('Dodací adresa'),
-			OrderMailService::VARIABLE_NOTE => t('Poznámka'),
+			OrderMailService::VARIABLE_DELIVERY_ADDRESS => t('Delivery address'),
+			OrderMailService::VARIABLE_NOTE => t('Note'),
 			OrderMailService::VARIABLE_PRODUCTS => t(
-				'Seznam zboží v objednávce (název, množství, cena za jednotku s DPH, celková cena za položku s DPH)'
+				'List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)'
 			),
-			OrderMailService::VARIABLE_ORDER_DETAIL_URL => t('URL adresa detailu objednávky'),
-			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => t('Pokyny k dopravě'),
-			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => t('Pokyny k platbě'),
+			OrderMailService::VARIABLE_ORDER_DETAIL_URL => t('Order detail URL address'),
+			OrderMailService::VARIABLE_TRANSPORT_INSTRUCTIONS => t('Shipping instructions'),
+			OrderMailService::VARIABLE_PAYMENT_INSTRUCTIONS => t('Payment instructions'),
 		];
 	}
 
@@ -109,11 +109,11 @@ class MailController extends AdminBaseController {
 	 */
 	private function getRegistrationVariablesLabels() {
 		return [
-			RegistrationMailService::VARIABLE_FIRST_NAME => t('Jméno'),
-			RegistrationMailService::VARIABLE_LAST_NAME => t('Příjmení'),
+			RegistrationMailService::VARIABLE_FIRST_NAME => t('First name'),
+			RegistrationMailService::VARIABLE_LAST_NAME => t('Surname'),
 			RegistrationMailService::VARIABLE_EMAIL => t('E-mail'),
-			RegistrationMailService::VARIABLE_URL => t('URL adresa e-shopu'),
-			RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Odkaz na stránku s přihlášením'),
+			RegistrationMailService::VARIABLE_URL => t('E-shop URL address'),
+			RegistrationMailService::VARIABLE_LOGIN_PAGE => t('Link to the log in page'),
 		];
 	}
 
@@ -123,7 +123,7 @@ class MailController extends AdminBaseController {
 	private function getResetPasswordVariablesLabels() {
 		return [
 			ResetPasswordMail::VARIABLE_EMAIL => t('E-mail'),
-			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => t('URL adresa pro nastavení nového hesla'),
+			ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => t('New password settings URL address'),
 		];
 	}
 
@@ -144,13 +144,13 @@ class MailController extends AdminBaseController {
 				$allMailTemplatesData->domainId
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení šablony e-mailu bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('E-mail templates settings modified'));
 
 			return $this->redirectToRoute('admin_mail_template');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
 		$templateParameters = $this->getTemplateParameters();
@@ -183,7 +183,7 @@ class MailController extends AdminBaseController {
 			$this->mailSettingFacade->setMainAdminMail($mailSettingData['email'], $selectedDomainId);
 			$this->mailSettingFacade->setMainAdminMailName($mailSettingData['name'], $selectedDomainId);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení emailů bylo upraveno.'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('E-mail settings modified.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', [

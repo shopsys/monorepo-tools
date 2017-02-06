@@ -27,16 +27,16 @@ class PricingGroupFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název cenové skupiny']),
+					new Constraints\NotBlank(['message' => 'Please enter pricing group name']),
 				],
 			])
 			->add('coefficient', FormType::NUMBER, [
 				'required' => true,
 				'precision' => 4,
-				'invalid_message' => 'Prosím zadejte koeficient v platném formátu',
+				'invalid_message' => 'Please enter ratio in correct format',
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím koeficient cenové skupiny']),
-					new Constraints\GreaterThan(['value' => 0, 'message' => 'Koeficient musí být větší než 0']),
+					new Constraints\NotBlank(['message' => 'Please enter pricing group coefficient']),
+					new Constraints\GreaterThan(['value' => 0, 'message' => 'Coefficient must be greater than 0']),
 				],
 			]);
 	}

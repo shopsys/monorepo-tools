@@ -99,10 +99,10 @@
 
 				SS6.order.items.refreshCount($collection);
 
-				SS6.window({content: SS6.translator.trans('Zboží bylo uloženo do objednávky')});
+				SS6.window({content: SS6.translator.trans('Product saved in order')});
 			},
 			error: function() {
-				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
+				SS6.window({content: SS6.translator.trans('Unable to add product')});
 			}
 		});
 	};

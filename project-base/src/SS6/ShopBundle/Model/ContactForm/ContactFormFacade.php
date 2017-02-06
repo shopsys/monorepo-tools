@@ -57,7 +57,7 @@ class ContactFormFacade {
 			$this->mailSettingFacade->getMainAdminMail($this->domain->getId()),
 			null,
 			$this->getMailBody($contactFormData),
-			t('Kontaktní formulář'),
+			t('Contact form'),
 			$contactFormData->email,
 			$contactFormData->name
 		);

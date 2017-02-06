@@ -43,7 +43,7 @@ class CurrencyType extends AbstractType {
 			'constraints' => [
 				new Constraints\Choice([
 					'choices' => $choices,
-					'message' => 'Prosím zadejte platný třímístný kód měny podle standardu ISO 4217 (velkými písmeny)',
+					'message' => 'Please enter valid 3-digit currency code according to ISO 4217 standard (uppercase)',
 				]),
 			],
 		]);

@@ -20,7 +20,7 @@
 									{% elseif thumbnailUri is not null %}
 										<img src="{{ thumbnailUri }}" class="js-file-upload-image-thumbnail" />
 									{% endif %}
-									<i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Smazat'|trans }}"></i>
+									<i class="list-images__item__remove svg svg-circle-cross js-file-upload-delete" title="{{ 'Delete'|trans }}"></i>
 
 									<div class="js-file-upload-progress list-images__item__pipe">
 										<div class="js-file-upload-progress-bar list-images__item__pipe__line">
@@ -48,7 +48,7 @@
 						{% endfor %}
 					</ul>
 					<div class="display-none">
-						 <span class="js-file-upload-status in-message in-message--info box-upload__uploading">{{ 'Stav'|trans }}: {{ 'Úspěšně nahráno'|trans }}</span>
+						 <span class="js-file-upload-status in-message in-message--info box-upload__uploading">{{ 'Status'|trans }}: {{ 'Successfully uploaded'|trans }}</span>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,7 @@
 						<i class="svg svg-download"></i>
 					</div>
 					<div class="box-upload__place__drop__title">
-						{{ 'Zde přetáhněte soubor'|trans }}
+						{{ 'Drag file here'|trans }}
 					</div>
 					<div class="box-upload__place__drop__info">
 						{{ infoText|default('') }}
@@ -69,7 +69,7 @@
 					{{ form_widget(form.children.file) }}
 				</div>
 				<div class="js-file-upload-fallback-hide box-upload__place__between">
-					{{ 'nebo'|trans }}
+					{{ 'or'|trans }}
 				</div>
 			</div>
 		</div>

@@ -101,7 +101,7 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'options' => [
 					'constraints' => [
-						new Constraints\Length(['max' => 255, 'maxMessage' => 'Alias varianty nesmí být delší než {{ limit }} znaků']),
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Variant alias cannot be longer then {{ limit }} characters']),
 					],
 				],
 			]);
@@ -111,7 +111,7 @@ class ProductFormType extends AbstractType {
 				'required' => false,
 				'options' => [
 					'constraints' => [
-						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název produktu nesmí být delší než {{ limit }} znaků']),
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Product name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			])
@@ -122,33 +122,33 @@ class ProductFormType extends AbstractType {
 			->add('catnum', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Katalogové číslo nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Catalogue number cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('partno', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Výrobní číslo nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Part number cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('ean', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'EAN cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('brand', FormType::CHOICE, [
 				'required' => false,
 				'choice_list' => new ObjectChoiceList($this->brands, 'name', [], null, 'id'),
-				'placeholder' => t('-- Vyberte značku --'),
+				'placeholder' => t('-- Choose brand --'),
 			])
 			->add('usingStock', FormType::YES_NO, ['required' => false])
 			->add('stockQuantity', FormType::INTEGER, [
 				'required' => true,
-				'invalid_message' => 'Prosím zadejte číslo',
+				'invalid_message' => 'Please enter a number',
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím zadejte množství skladem',
+						'message' => 'Please enter stock quantity',
 						'groups' => self::VALIDATION_GROUP_USING_STOCK,
 					]),
 				],
@@ -158,17 +158,17 @@ class ProductFormType extends AbstractType {
 				'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyberte jednotku',
+						'message' => 'Please choose unit',
 					]),
 				],
 			])
 			->add('availability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => t('-- Vyberte dostupnost --'),
+				'placeholder' => t('-- Choose availability --'),
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyberte dostupnost',
+						'message' => 'Please choose availability',
 						'groups' => self::VALIDATION_GROUP_NOT_USING_STOCK,
 					]),
 				],
@@ -177,14 +177,14 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => false,
 				'choices' => [
-					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => t('Nastavit alternativní dostupnost'),
-					Product::OUT_OF_STOCK_ACTION_HIDE => t('Skrýt zboží'),
-					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => t('Vyřadit z prodeje'),
+					Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY => t('Set alternative availability'),
+					Product::OUT_OF_STOCK_ACTION_HIDE => t('Hide product'),
+					Product::OUT_OF_STOCK_ACTION_EXCLUDE_FROM_SALE => t('Exclude from sale'),
 				],
-				'placeholder' => t('-- Vyberte akci --'),
+				'placeholder' => t('-- Choose action --'),
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyberte akci',
+						'message' => 'Please choose action',
 						'groups' => self::VALIDATION_GROUP_USING_STOCK,
 					]),
 				],
@@ -192,10 +192,10 @@ class ProductFormType extends AbstractType {
 			->add('outOfStockAvailability', FormType::CHOICE, [
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'placeholder' => t('-- Vyberte dostupnost --'),
+				'placeholder' => t('-- Choose availability --'),
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyberte dostupnost',
+						'message' => 'Please choose availability',
 						'groups' => self::VALIDATION_GROUP_USING_STOCK_AND_ALTERNATE_AVAILABILITY,
 					]),
 				],
@@ -204,15 +204,15 @@ class ProductFormType extends AbstractType {
 				'currency' => false,
 				'precision' => 6,
 				'required' => true,
-				'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+				'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyplňte cenu',
+						'message' => 'Please enter price',
 						'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
 					]),
 					new Constraints\GreaterThanOrEqual([
 						'value' => 0,
-						'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+						'message' => 'Price must be greater or equal to {{ compared_value }}',
 						'groups' => self::VALIDATION_GROUP_AUTO_PRICE_CALCULATION,
 					]),
 				],
@@ -221,22 +221,22 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->vats, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
 				],
 			])
 			->add('sellingFrom', FormType::DATE_PICKER, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
+					new Constraints\Date(['message' => 'Enter date in DD.MM.YYYY format']),
 				],
-				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
+				'invalid_message' => 'Enter date in DD.MM.YYYY format',
 			])
 			->add('sellingTo', FormType::DATE_PICKER, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Date(['message' => 'Datum zadávejte ve formátu dd.mm.rrrr']),
+					new Constraints\Date(['message' => 'Enter date in DD.MM.YYYY format']),
 				],
-				'invalid_message' => 'Datum zadávejte ve formátu dd.mm.rrrr',
+				'invalid_message' => 'Enter date in DD.MM.YYYY format',
 			])
 			->add('flags', FormType::CHOICE, [
 				'required' => false,
@@ -248,14 +248,14 @@ class ProductFormType extends AbstractType {
 				'required' => true,
 				'expanded' => true,
 				'choices' => [
-					Product::PRICE_CALCULATION_TYPE_AUTO => t('Automaticky'),
-					Product::PRICE_CALCULATION_TYPE_MANUAL => t('Ručně'),
+					Product::PRICE_CALCULATION_TYPE_AUTO => t('Automatically'),
+					Product::PRICE_CALCULATION_TYPE_MANUAL => t('Manually'),
 				],
 			])
 			->add('orderingPriority', FormType::INTEGER, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte prioritu řazení zboží']),
+					new Constraints\NotBlank(['message' => 'Please enter sorting priority']),
 				],
 			]);
 

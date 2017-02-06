@@ -1,11 +1,11 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Přehled článků'|trans }}{% endblock %}
-{% block h1 %}{{ 'Přehled článků'|trans }}{% endblock %}
+{% block title %}- {{ 'Articles overview'|trans }}{% endblock %}
+{% block h1 %}{{ 'Articles overview'|trans }}{% endblock %}
 
 {% block btn %}
 	<a href="{{ url('admin_article_new') }}" class="btn btn--plus wrap-bar__btn">
-		<i class="btn__icon">+</i>{{ 'Vytvořit nový článek'|trans }}
+		<i class="btn__icon">+</i>{{ 'Create new article'|trans }}
 	</a>
 {% endblock %}
 
@@ -15,23 +15,23 @@
 		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
 
 		{% if articlesCountOnSelectedDomain > 0 %}
-			<h2>{{ 'Články v horním menu'|trans }}</h2>
+			<h2>{{ 'Articles in upper menu'|trans }}</h2>
 			{{ gridViewTop.render() }}
 
-			<h2>{{ 'Články v patičce'|trans }}</h2>
+			<h2>{{ 'Articles in footer'|trans }}</h2>
 			{{ gridViewFooter.render() }}
 
-			<h2>{{ 'Články bez umístění'|trans }}</h2>
+			<h2>{{ 'Articles without positioning'|trans }}</h2>
 			{{ gridViewNone.render() }}
 
 			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 				{% block fixed_bar_content %}
-					<button class="js-multiple-grids-save-all-button btn btn--disabled" data-drag-and-drop-url-save-ordering="{{ url('admin_article_saveordering') }}" type="button">{{ 'Uložit změny v pořadí'|trans }}</button>
+					<button class="js-multiple-grids-save-all-button btn btn--disabled" data-drag-and-drop-url-save-ordering="{{ url('admin_article_saveordering') }}" type="button">{{ 'Save changes in order'|trans }}</button>
 				{% endblock %}
 			{% endembed %}
 		{% else %}
 			<div class="in-message in-message--info">
-				{{ 'Na této doméně nebyly nalezeny žádné články. Nejprve musíte nějaký vytvořit.'|trans }}
+				{{ 'No articles found on this domain. You have to create some first.'|trans }}
 			</div>
 		{% endif %}
 	</div>

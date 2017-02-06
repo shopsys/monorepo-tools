@@ -1,20 +1,20 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}{{ 'Superadmin - Nastavení prodeje s/bez DPH'|trans }}{% endblock %}
-{% block h1 %}{{ 'Superadmin - Nastavení prodeje s/bez DPH'|trans }}{% endblock %}
+{% block title %}{{ 'Superadmin - Sale including/excluding VAT settings'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - Sale including/excluding VAT settings'|trans }}{% endblock %}
 
 {% block main_content %}
 	{{ form_start(form) }}
 		<div class="form-group">
 			<div class="form-group__title">
-				{{ 'Nastavení'|trans }}
+				{{ 'Settings'|trans }}
 			</div>
-			{{ form_row(form.type, { 'label': 'Typ vstupní ceny'|trans }) }}
+			{{ form_row(form.type, { 'label': 'Entry price type'|trans }) }}
 		</div>
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+				{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 			{% endblock %}
 		{% endembed %}
 

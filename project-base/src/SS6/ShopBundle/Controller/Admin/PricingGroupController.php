@@ -77,7 +77,7 @@ class PricingGroupController extends AdminBaseController {
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Cenová skupina <strong>{{ name }}</strong> byla smazána'),
+					t('Pricing group <strong>{{ name }}</strong> deleted'),
 					[
 						'name' => $name,
 					]
@@ -85,8 +85,7 @@ class PricingGroupController extends AdminBaseController {
 			} else {
 				$newPricingGroup = $this->pricingGroupFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Cenová skupina <strong>{{ name }}</strong> byla smazána a byla nahrazena skupinou
-						<strong>{{ newName }}</strong>.'),
+					t('Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>.'),
 					[
 						'name' => $name,
 						'newName' => $newPricingGroup->getName(),
@@ -94,7 +93,7 @@ class PricingGroupController extends AdminBaseController {
 				);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená cenová skupina neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected pricing group doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_pricinggroup_list');
@@ -134,14 +133,14 @@ class PricingGroupController extends AdminBaseController {
 				);
 			} else {
 				$message = t(
-					'Opravdu si přejete trvale odstranit cenovou skupinu "%name%"? Nikde není použita.',
+					'Do you really want to remove pricing group "%name%" permanently? It is not used anywhere.',
 					['%name%' => $pricingGroup->getName()]
 				);
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
-			return new Response(t('Zvolená cenová skupina neexistuje.'));
+			return new Response(t('Selected pricing group doesn\'t exist.'));
 		}
 
 	}
@@ -166,7 +165,7 @@ class PricingGroupController extends AdminBaseController {
 
 			$this->pricingGroupSettingFacade->setDefaultPricingGroup($pricingGroupSettingsFormData['defaultPricingGroup']);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení výchozí cenové skupiny bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Default pricing group settings modified'));
 
 			return $this->redirectToRoute('admin_pricinggroup_list');
 		}

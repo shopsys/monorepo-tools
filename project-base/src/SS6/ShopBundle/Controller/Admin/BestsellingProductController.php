@@ -89,7 +89,7 @@ class BestsellingProductController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Bylo nastaveno nejprodávanější zboží kategorie <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Best-selling products of category <strong><a href="{{ url }}">{{ name }}</a></strong> set.'),
 					[
 						'name' => $category->getName(),
 						'url' => $this->generateUrl(
@@ -102,7 +102,7 @@ class BestsellingProductController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		$this->breadcrumb->overrideLastItem(new MenuItem($category->getName()));

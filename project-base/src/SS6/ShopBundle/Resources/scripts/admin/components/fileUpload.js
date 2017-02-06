@@ -76,7 +76,7 @@
 		var onFormSubmit = function (event) {
 			if (!ready) {
 				SS6.window({
-					content: SS6.translator.trans('Prosím počkejte dokud nebudou nahrány všechny soubory a zkuste to znovu.')
+					content: SS6.translator.trans('Please wait until all files are uploaded and try again.')
 				});
 				event.preventDefault();
 			}
@@ -84,7 +84,7 @@
 
 		var onBeforeUpload = function() {
 			ready = false;
-			updateFileStatus('uploading', SS6.translator.trans('Nahrávám...'));
+			updateFileStatus('uploading', SS6.translator.trans('Uploading...'));
 		};
 
 		var onUploadNewFile = function(id, file) {
@@ -103,7 +103,7 @@
 
 		var onUploadProgress = function(id, percent) {
 			items[id].setProgress(percent);
-			updateFileStatus('uploading', SS6.translator.trans('Nahrávám...'));
+			updateFileStatus('uploading', SS6.translator.trans('Uploading...'));
 		};
 
 		var onUploadSuccess = function(id, data) {
@@ -113,13 +113,13 @@
 				}
 				lastUploadItemId = id;
 				items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
-				updateFileStatus('success', SS6.translator.trans('Úspěšně nahráno'));
+				updateFileStatus('success', SS6.translator.trans('Successfully uploaded'));
 				$status.parent().fadeOut(4000);
 				SS6.formChangeInfo.showInfo();
 			} else {
 				items[id].deleteItem();
 				SS6.window({
-					content: SS6.translator.trans('Při nahrávání souboru došlo k chybě.')
+					content: SS6.translator.trans('Error occurred while uploading file.')
 				});
 			}
 		};
@@ -127,12 +127,12 @@
 		var onUploadError = function(id, message, code) {
 			items[id].deleteItem();
 			if (code === 413) {
-				message = SS6.translator.trans('Soubor je příliš velký');
+				message = SS6.translator.trans('File is too big');
 			} else if (code === 415) {
-				message = SS6.translator.trans('Soubor je v nepodporovaném formátu');
+				message = SS6.translator.trans('File is in unsupported format');
 			}
 			SS6.window({
-				content: SS6.translator.trans('Při nahrávání souboru došlo k chybě: %message%', {'%message%': message })
+				content: SS6.translator.trans('Error occurred while uploading file: %message%', {'%message%': message })
 			});
 		};
 

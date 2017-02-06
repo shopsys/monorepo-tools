@@ -1,9 +1,9 @@
 {% extends '@SS6Shop/Admin/Content/Product/detail.html.twig' %}
 
-{% block title %}- {{ 'Nové zboží'|trans }}{% endblock %}
+{% block title %}- {{ 'New product'|trans }}{% endblock %}
 
 {% block product_header_heading %}
-	<span>{{ 'Nové zboží'|trans }}</span>
+	<span>{{ 'New product'|trans }}</span>
 {% endblock %}
 
 {% block product_calculated_prices %}
@@ -14,7 +14,7 @@
 	</div>
 	<div class="form-line js-input-price-type-auto">
 		<div class="form-line__label">
-			{{ form_label(form.productData.price, 'Základní cena'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
+			{{ form_label(form.productData.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
 		</div>
 		<div class="form-line__side">
 			<div class="form-line__item">

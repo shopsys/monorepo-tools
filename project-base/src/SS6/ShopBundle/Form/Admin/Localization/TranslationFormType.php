@@ -61,7 +61,7 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
 				$builder
 					->create($locale, FormType::TEXTAREA, [
 						'required' => true,
-						'constraints' => new Constraints\NotBlank(['message' => 'Vyplňte prosím překlad']),
+						'constraints' => new Constraints\NotBlank(['message' => 'Please enter translation']),
 					])
 					->addModelTransformer($this)
 			);

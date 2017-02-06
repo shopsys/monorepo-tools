@@ -2,8 +2,8 @@
 
 {% import '@SS6Shop/Admin/Content/Order/orderItem.html.twig' as orderItemMacro %}
 
-{% block title %}{{ 'Objednávka č.'|trans }} {{ order.number }}{% endblock %}
-{% block h1 %}{{ 'Objednávka č.'|trans }} {{ order.number }}{% endblock %}
+{% block title %}{{ 'Order Nr.'|trans }} {{ order.number }}{% endblock %}
+{% block h1 %}{{ 'Order Nr.'|trans }} {{ order.number }}{% endblock %}
 
 {% block main_content %}
 
@@ -13,7 +13,7 @@
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Objednávka č.'|trans }} {{ order.number }}
+					{{ 'Order Nr.'|trans }} {{ order.number }}
 				</div>
 			</div>
 			<fieldset>
@@ -29,7 +29,7 @@
 				</div>
 				{% if isMultidomain() %}
 					<div class="form-line">
-						<label class="form-line__label">{{ 'Doména'|trans }}:</label>
+						<label class="form-line__label">{{ 'Domain'|trans }}:</label>
 						<div class="form-line__side">
 							<div class="form-line__item form-line__item--text">
 								{{ domainIcon(order.domainId) }} {{ getDomainName(order.domainId) }}
@@ -37,14 +37,14 @@
 						</div>
 					</div>
 				{% endif %}
-				{{ form_row(form.orderNumber, { label: 'Číslo objednávky'|trans }) }}
-				{{ form_row(form.status, { label: 'Stav'|trans }) }}
+				{{ form_row(form.orderNumber, { label: 'Order number'|trans }) }}
+				{{ form_row(form.status, { label: 'Status'|trans }) }}
 				<div class="form-line">
-					<label class="form-line__label">{{ 'Zákazník'|trans }}:</label>
+					<label class="form-line__label">{{ 'Customer'|trans }}:</label>
 					<div class="form-line__side">
 						<div class="form-line__item form-line__item--text">
 							{% if order.customer is null%}
-								{{ 'neregistrovaný zákazník'|trans }}
+								{{ 'unregistered customer'|trans }}
 							{% else %}
 								<a href="{{ path('admin_customer_edit', { id: order.customer.id }) }}" target="_blank">
 									{% if order.customer.billingAddress.companyCustomer %}
@@ -60,7 +60,7 @@
 				</div>
 				{% if order.createdAsAdministrator is not null or order.createdAsAdministratorName is not null %}
 					<div class="form-line">
-						<label class="form-line__label">{{ 'Vytvořeno administrátorem'|trans }}:</label>
+						<label class="form-line__label">{{ 'Created by administrator'|trans }}:</label>
 						<div class="form-line__side">
 							<div class="form-line__item form-line__item--text">
 								{% if order.createdAsAdministrator is null%}
@@ -78,64 +78,64 @@
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Osobní údaje'|trans }}
+					{{ 'Personal data'|trans }}
 				</div>
 			</div>
 			<fieldset>
-				{{ form_row(form.firstName, { label: 'Jméno'|trans }) }}
-				{{ form_row(form.lastName, { label: 'Příjmení'|trans }) }}
+				{{ form_row(form.firstName, { label: 'First name'|trans }) }}
+				{{ form_row(form.lastName, { label: 'Surname'|trans }) }}
 				{{ form_row(form.email, { label: 'E-mail'|trans }) }}
-				{{ form_row(form.telephone, { label: 'Telefon'|trans }) }}
+				{{ form_row(form.telephone, { label: 'Telephone'|trans }) }}
 			</fieldset>
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Firemní údaje'|trans }}
+					{{ 'Company data'|trans }}
 				</div>
 			</div>
 			<fieldset>
-				{{ form_row(form.companyName, { label: 'Název firmy'|trans }) }}
-				{{ form_row(form.companyNumber, { label: 'IČ'|trans }) }}
-				{{ form_row(form.companyTaxNumber, { label: 'DIČ'|trans }) }}
+				{{ form_row(form.companyName, { label: 'Company name'|trans }) }}
+				{{ form_row(form.companyNumber, { label: 'Company number'|trans }) }}
+				{{ form_row(form.companyTaxNumber, { label: 'Tax number'|trans }) }}
 			</fieldset>
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Fakturační údaje'|trans }}
+					{{ 'Billing data'|trans }}
 				</div>
 			</div>
 			<fieldset>
-				{{ form_row(form.street, { label: 'Ulice'|trans }) }}
-				{{ form_row(form.city, { label: 'Město'|trans }) }}
-				{{ form_row(form.postcode, { label: 'PSČ'|trans }) }}
-				{{ form_row(form.country, { label: 'Stát'|trans }) }}
+				{{ form_row(form.street, { label: 'Street'|trans }) }}
+				{{ form_row(form.city, { label: 'City'|trans }) }}
+				{{ form_row(form.postcode, { label: 'Postcode'|trans }) }}
+				{{ form_row(form.country, { label: 'Country'|trans }) }}
 			</fieldset>
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Doručovací adresa'|trans }}
+					{{ 'Shipping address'|trans }}
 				</div>
 			</div>
 			<fieldset>
 				{{ form_row(form.deliveryAddressSameAsBillingAddress, {
 					attr: { class: 'js-checkbox-toggle js-checkbox-toggle--inverted', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-					label: 'Doručovací adresa je stejná jako fakturační'|trans})
+					label: 'Shipping address is the same as billing address'|trans})
 				}}
 				<div id="js-delivery-address-fields" class="form-line__js">
-					{{ form_row(form.deliveryFirstName, { label: 'Jméno'|trans }) }}
-					{{ form_row(form.deliveryLastName, { label: 'Příjmení'|trans }) }}
-					{{ form_row(form.deliveryCompanyName, { label: 'Firma'|trans }) }}
-					{{ form_row(form.deliveryTelephone, { label: 'Telefon'|trans }) }}
-					{{ form_row(form.deliveryStreet, { label: 'Ulice'|trans }) }}
-					{{ form_row(form.deliveryCity, { label: 'Město'|trans }) }}
-					{{ form_row(form.deliveryPostcode, { label: 'PSČ'|trans }) }}
-					{{ form_row(form.deliveryCountry, { label: 'Stát'|trans }) }}
+					{{ form_row(form.deliveryFirstName, { label: 'First name'|trans }) }}
+					{{ form_row(form.deliveryLastName, { label: 'Surname'|trans }) }}
+					{{ form_row(form.deliveryCompanyName, { label: 'Company'|trans }) }}
+					{{ form_row(form.deliveryTelephone, { label: 'Telephone'|trans }) }}
+					{{ form_row(form.deliveryStreet, { label: 'Street'|trans }) }}
+					{{ form_row(form.deliveryCity, { label: 'City'|trans }) }}
+					{{ form_row(form.deliveryPostcode, { label: 'Postcode'|trans }) }}
+					{{ form_row(form.deliveryCountry, { label: 'Country'|trans }) }}
 				</div>
 			</fieldset>
 		</div>
@@ -143,15 +143,15 @@
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Poznámka'|trans }}
+					{{ 'Note'|trans }}
 				</div>
 			</div>
 			<fieldset>
-				{{ form_row(form.note, { label: 'Napište nám'|trans, newline: true }) }}
+				{{ form_row(form.note, { label: 'Contact us'|trans, newline: true }) }}
 			</fieldset>
 		</div>
 
-		<h2>{{ 'Položky objednávky'|trans }}</h2>
+		<h2>{{ 'Order items'|trans }}</h2>
 		<fieldset>
 			<div class="table-touch-always">
 				{{ form_errors(form.itemsWithoutTransportAndPayment) }}
@@ -159,14 +159,14 @@
 					<table id="order_form_items" class="table-main">
 						<thead>
 							<tr>
-								<th class="table-col-30">{{ 'Název'|trans }}</th>
-								<th class="table-col-5">{{ 'Katalogové číslo'|trans }}</th>
-								<th class="table-col-15 text-right">{{ 'Jednotková cena s DPH'|trans }}</th>
-								<th class="table-col-10 text-right">{{ 'Množství'|trans }}</th>
-								<th class="table-col-10 text-right">{{ 'Jednotka'|trans }}</th>
-								<th class="table-col-10 text-right">{{ 'Výše DPH (%)'|trans }}</th>
-								<th class="table-col-15 text-right text-no-wrap">{{ 'Celkem s DPH'|trans }}</th>
-								<th class="table-col-15 text-right text-no-wrap">{{ 'Celkem bez DPH'|trans }}</th>
+								<th class="table-col-30">{{ 'Name'|trans }}</th>
+								<th class="table-col-5">{{ 'Catalogue number'|trans }}</th>
+								<th class="table-col-15 text-right">{{ 'Unit price including VAT'|trans }}</th>
+								<th class="table-col-10 text-right">{{ 'Amount'|trans }}</th>
+								<th class="table-col-10 text-right">{{ 'Unit'|trans }}</th>
+								<th class="table-col-10 text-right">{{ 'VAT rate (%)'|trans }}</th>
+								<th class="table-col-15 text-right text-no-wrap">{{ 'Total including VAT'|trans }}</th>
+								<th class="table-col-15 text-right text-no-wrap">{{ 'Total excluding VAT'|trans }}</th>
 								<th ></th>
 							</tr>
 						</thead>
@@ -193,16 +193,16 @@
 								<td colspan="8">
 									<a id="js-order-item-add" href="#" class="btn btn--plus">
 										<i class="btn__icon">+</i>
-										{{ 'Přidat položku'|trans }}
+										{{ 'Add item'|trans }}
 									</a>
 									<a id="js-order-item-add-product" href="#" class="btn btn--plus" data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowMainVariants: false}) }}">
 										<i class="btn__icon">+</i>
-										{{ 'Přidat zboží'|trans }}
+										{{ 'Add product'|trans }}
 									</a>
 								</td>
 							</tr>
 							<tr>
-								<th colspan="5">{{ 'Celkem'|trans }}:</th>
+								<th colspan="5">{{ 'Total'|trans }}:</th>
 								<th class="text-right">{{ order.totalPriceWithVat|priceWithCurrency(order.currency) }}</th>
 								<th class="text-right">{{ order.totalPriceWithoutVat|priceWithCurrency(order.currency) }}</th>
 								<th></th>
@@ -215,8 +215,8 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_order_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+				<a href="{{ url('admin_order_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
+				{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}

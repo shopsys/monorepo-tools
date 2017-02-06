@@ -83,14 +83,14 @@ class VatController extends AdminBaseController {
 				);
 			} else {
 				$message = t(
-					'Opravdu si přejete trvale odstranit sazbu "%name%"? Nikde není použita.',
+					'Do you really want to remove rate "%name%" permanently? It is not used anywhere.',
 					['%name%' => $vat->getName()]
 				);
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			return new Response(t('Zvolené DPH neexistuje'));
+			return new Response(t('Selected VAT doesn\'t exist'));
 		}
 
 	}
@@ -111,7 +111,7 @@ class VatController extends AdminBaseController {
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('DPH <strong>{{ name }}</strong> bylo smazáno'),
+					t('VAT <strong>{{ name }}</strong> deleted'),
 					[
 						'name' => $fullName,
 					]
@@ -119,7 +119,7 @@ class VatController extends AdminBaseController {
 			} else {
 				$newVat = $this->vatFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('DPH <strong>{{ name }}</strong> bylo smazáno a bylo nahrazeno <strong>{{ newName }}</strong>.'),
+					t('VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>.'),
 					[
 						'name' => $fullName,
 						'newName' => $newVat->getName(),
@@ -127,7 +127,7 @@ class VatController extends AdminBaseController {
 			}
 
 		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolené DPH neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected VAT doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_vat_list');
@@ -157,11 +157,11 @@ class VatController extends AdminBaseController {
 				$this->vatFacade->setDefaultVat($vatSettingsFormData['defaultVat']);
 				$this->pricingSetting->setRoundingType($vatSettingsFormData['roundingType']);
 
-				$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení DPH bylo upraveno'));
+				$this->getFlashMessageSender()->addSuccessFlash(t('VAT settings modified'));
 
 				return $this->redirectToRoute('admin_vat_list');
 			} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Neplatné nastavení zaokrouhlování'));
+				$this->getFlashMessageSender()->addErrorFlash(t('Invalid rounding settings'));
 			}
 		}
 

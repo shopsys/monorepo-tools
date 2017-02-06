@@ -60,7 +60,7 @@ class ScriptController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl vytvořen skript <a href="{{ url }}"><strong>{{ name }}</strong></a>'),
+					t('Script <a href="{{ url }}"><strong>{{ name }}</strong></a> created'),
 					[
 						'name' => $script->getName(),
 						'url' => $this->generateUrl('admin_script_edit', ['scriptId' => $script->getId()]),
@@ -99,7 +99,7 @@ class ScriptController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl upraven skript <a href="{{ url }}"><strong>{{ name }}</strong></a>'),
+					t('Script <a href="{{ url }}"><strong>{{ name }}</strong></a> modified'),
 					[
 						'name' => $script->getName(),
 						'url' => $this->generateUrl('admin_script_edit', ['scriptId' => $scriptId]),
@@ -123,8 +123,8 @@ class ScriptController extends AdminBaseController {
 
 		$grid = $this->gridFactory->create('scriptsList', $dataSource);
 
-		$grid->addColumn('name', 's.name', t('Název skriptu'));
-		$grid->addColumn('placement', 's.placement', t('Umístění'));
+		$grid->addColumn('name', 's.name', t('Script name'));
+		$grid->addColumn('placement', 's.placement', t('Location'));
 		$grid->addEditActionColumn('admin_script_edit', ['scriptId' => 's.id']);
 		$grid->addDeleteActionColumn('admin_script_delete', ['scriptId' => 's.id'])
 			->setConfirmMessage('Opravdu chcete odstranit tento skript?');
@@ -150,13 +150,13 @@ class ScriptController extends AdminBaseController {
 			$this->scriptFacade->delete($scriptId);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Skript <strong>{{ name }}</strong> byl smazán'),
+				t('Script <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $script->getName(),
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Script\Exception\ScriptNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený skript neexistuje'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected script doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_script_list');
@@ -176,7 +176,7 @@ class ScriptController extends AdminBaseController {
 
 		if ($form->isValid()) {
 			$this->scriptFacade->setGoogleAnalyticsTrackingId($form->getData()['trackingId'], $domainId);
-			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Kód skriptu Google analytics byl nastaven'));
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Google script code set'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Script/googleAnalytics.html.twig', [
@@ -189,8 +189,8 @@ class ScriptController extends AdminBaseController {
 	 */
 	private function getOrderSentPageScriptVariableLabelsIndexedByVariables() {
 		return [
-			ScriptFacade::VARIABLE_NUMBER => t('Číslo objednávky'),
-			ScriptFacade::VARIABLE_TOTAL_PRICE => t('Celková cena objednávky s DPH'),
+			ScriptFacade::VARIABLE_NUMBER => t('Order number'),
+			ScriptFacade::VARIABLE_TOTAL_PRICE => t('Total order price including VAT'),
 		];
 	}
 

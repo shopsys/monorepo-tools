@@ -2,21 +2,21 @@
 	<li class="box-progress__item {% if step == 1 %}box-progress__item--active{% elseif step > 1 %}box-progress__item--done{% endif %}{% if step == 2 %} box-progress__item--previous-active{% endif %}">
 		<span class="box-progress__item__inner">
 			<span class="box-progress__item__step">1.</span>
-			<span class="box-progress__item__title">{{ 'Košík'|trans }}</span>
+			<span class="box-progress__item__title">{{ 'Cart'|trans }}</span>
 		</span>
 	</li>
 
 	<li class="box-progress__item {% if step == 2 %}box-progress__item--active{% elseif step > 2 %}box-progress__item--done{% endif %}{% if step == 3 %} box-progress__item--previous-active{% endif %}">
 		<span class="box-progress__item__inner">
 			<span class="box-progress__item__step">2.</span>
-			<span class="box-progress__item__title">{{ 'Doprava a platba'|trans }}</span>
+			<span class="box-progress__item__title">{{ 'Shipping and payment'|trans }}</span>
 		</span>
 	</li>
 
 	<li class="box-progress__item {% if step == 3 %}box-progress__item--active{% endif %}">
 		<span class="box-progress__item__inner">
 			<span class="box-progress__item__step">3.</span>
-			<span class="box-progress__item__title">{{ 'Dodací údaje'|trans }}</span>
+			<span class="box-progress__item__title">{{ 'Delivery data'|trans }}</span>
 		</span>
 	</li>
 </ul>

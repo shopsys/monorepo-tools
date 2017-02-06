@@ -86,7 +86,7 @@ class TransportController extends AdminBaseController {
 			$transport = $this->transportEditFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Byla vytvořena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
 				[
 				'name' => $transport->getName(),
 				'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
@@ -96,7 +96,7 @@ class TransportController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', [
@@ -124,7 +124,7 @@ class TransportController extends AdminBaseController {
 			$this->transportEditFacade->edit($transport, $transportEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Byla upravena doprava <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),
 				[
 					'name' => $transport->getName(),
 					'url' => $this->generateUrl('admin_transport_edit', ['id' => $transport->getId()]),
@@ -134,10 +134,10 @@ class TransportController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace dopravy - %name%', ['%name%' => $transport->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
@@ -158,13 +158,13 @@ class TransportController extends AdminBaseController {
 			$this->transportEditFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Doprava <strong>{{ name }}</strong> byla smazána'),
+				t('Shipping <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $transportName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená doprava neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected shipping doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_transportandpayment_list');

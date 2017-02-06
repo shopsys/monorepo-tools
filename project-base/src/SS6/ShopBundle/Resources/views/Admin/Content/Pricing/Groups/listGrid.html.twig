@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné cenové skupiny. Nejprve musíte nějakou vytvořit.'|trans }}
+	{{ 'No pricing groups found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit cenovou skupinu'|trans %}
+	{% set addEntity = 'Create pricing group'|trans %}
 	{{ parent() }}
 {% endblock %}

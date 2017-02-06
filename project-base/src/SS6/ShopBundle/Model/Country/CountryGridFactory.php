@@ -50,7 +50,7 @@ class CountryGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('CountryList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 's.name', t('Název'), true);
+		$grid->addColumn('name', 's.name', t('Name'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->setTheme('@SS6Shop/Admin/Content/Country/listGrid.html.twig');

@@ -76,7 +76,7 @@ class FeedConfigRepository {
 		$feedConfigs = [];
 
 		$feedConfigs[] = new FeedConfig(
-			t('%feedName% - dostupnostní', ['%feedName%' => 'Heureka']),
+			t('%feedName% - availability', ['%feedName%' => 'Heureka']),
 			'heureka_delivery',
 			'@SS6Shop/Feed/heurekaDelivery.xml.twig',
 			$this->heurekaDeliveryItemRepository

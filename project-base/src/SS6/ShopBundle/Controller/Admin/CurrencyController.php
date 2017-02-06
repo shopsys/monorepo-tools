@@ -66,13 +66,13 @@ class CurrencyController extends AdminBaseController {
 		try {
 			$currency = $this->currencyFacade->getById($id);
 			$message = t(
-				'Opravdu si přejete trvale odstranit měnu "%name%"?',
+				'Do you really want to remove currency "%name%" permanently?',
 				['%name%' => $currency->getName()]
 			);
 
 			return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			return new Response(t('Zvolená měna neexistuje.'));
+			return new Response(t('Selected currency doesn\'t exist.'));
 		}
 
 	}
@@ -88,17 +88,17 @@ class CurrencyController extends AdminBaseController {
 			$this->currencyFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Měna <strong>{{ name }}</strong> byla smazána'),
+				t('Currency <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(
-				t('Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky')
+				t('This currency can\'t be deleted, it is set as default or is saved with order.')
 			);
 		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená měna neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected currency doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_currency_list');
@@ -140,7 +140,7 @@ class CurrencyController extends AdminBaseController {
 				);
 			}
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Nastavení měn bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Currency settings modified'));
 
 			return $this->redirectToRoute('admin_currency_list');
 		}

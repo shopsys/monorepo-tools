@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Administrátor'|trans }}{% endblock %}
-{% block h1 %}{{ 'Administrátor'|trans }}{% endblock %}
+{% block title %}- {{ 'Administrator'|trans }}{% endblock %}
+{% block h1 %}{{ 'Administrator'|trans }}{% endblock %}
 
 {% block main_content %}
 	{{ form_start(form) }}
@@ -9,24 +9,24 @@
 
 		<div class="form-group wrap-border">
 			<div class="form-group__title">
-				{{ 'Nastavení'|trans }}
+				{{ 'Settings'|trans }}
 			</div>
 			{{ form_id(administrator|default(null)) }}
 
-			{{ form_row(form.username, { label: 'Přihlašovací jméno'|trans}) }}
-			{{ form_row(form.realName, { label: 'Celé jméno'|trans}) }}
+			{{ form_row(form.username, { label: 'Login name'|trans}) }}
+			{{ form_row(form.realName, { label: 'Full name'|trans}) }}
 			{{ form_row(form.email, { label: 'E-mail'|trans}) }}
-			{{ form_row(form.password.first, { label: 'Heslo'|trans,
+			{{ form_row(form.password.first, { label: 'Password'|trans,
 				icon: {
-					title: 'Heslo musí mít minimálně 6 znaků a nesmí být stejné jako přihlašovací jméno.'|trans} }) }}
-			{{ form_row(form.password.second, { label: 'Heslo znovu'|trans}) }}
+					title: 'Password must be at least six characters and can\'t be the same as login name.'|trans} }) }}
+			{{ form_row(form.password.second, { label: 'Password again'|trans}) }}
 		</div>
 
 		{% block admin_log %}{% endblock %}
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(administrator|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

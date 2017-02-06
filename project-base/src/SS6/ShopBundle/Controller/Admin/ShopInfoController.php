@@ -59,13 +59,13 @@ class ShopInfoController extends AdminBaseController {
 			$this->shopInfoSettingFacade->setEmail($shopInfoSettingData['email'], $selectedDomainId);
 			$this->shopInfoSettingFacade->setPhoneHours($shopInfoSettingData['phoneHours'], $selectedDomainId);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení e-shopu atributů bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('E-shop attributes settings modified'));
 
 			return $this->redirectToRoute('admin_shopinfo_setting');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/ShopInfo/shopInfo.html.twig', [

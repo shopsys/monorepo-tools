@@ -41,7 +41,7 @@ class MailTemplateFormType extends AbstractType {
 				'required' => false,
 				'constraints' => [
 					new Email(),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('subject', FormType::TEXT, [
@@ -79,18 +79,18 @@ class MailTemplateFormType extends AbstractType {
 		$subjectConstraints = [];
 
 		$subjectConstraints[] = new Constraints\NotBlank([
-			'message' => 'Vyplňte prosím předmět',
+			'message' => 'Please enter subject',
 			'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 		]);
 		$subjectConstraints[] = new Constraints\Length([
 			'max' => 255,
-			'maxMessage' => 'Předmět e-mailu nesmí být delší než {{ limit }} znaků',
+			'maxMessage' => 'E-mail subject cannot be longer than {{ limit }} characters',
 		]);
 
 		foreach ($this->mailType->getRequiredSubjectVariables() as $variableName) {
 			$subjectConstraints[] = new Contains([
 				'needle' => $variableName,
-				'message' => 'Proměnná {{ needle }} je povinná',
+				'message' => 'Variable {{ needle }} is required',
 				'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 			]);
 		}
@@ -105,14 +105,14 @@ class MailTemplateFormType extends AbstractType {
 		$bodyConstraints = [];
 
 		$bodyConstraints[] = new Constraints\NotBlank([
-			'message' => 'Vyplňte prosím text emailu',
+			'message' => 'Please enter e-mail content',
 			'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 		]);
 
 		foreach ($this->mailType->getRequiredBodyVariables() as $variableName) {
 			$bodyConstraints[] = new Contains([
 				'needle' => $variableName,
-				'message' => 'Proměnná {{ needle }} je povinná',
+				'message' => 'Variable {{ needle }} is required',
 				'groups' => [self::VALIDATION_GROUP_SEND_MAIL],
 			]);
 		}

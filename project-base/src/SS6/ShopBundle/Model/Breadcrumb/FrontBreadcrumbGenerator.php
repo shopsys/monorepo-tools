@@ -15,36 +15,36 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 		switch ($routeName) {
 			case 'front_customer_edit':
 				return [
-					new BreadcrumbItem(t('Upravit údaje')),
+					new BreadcrumbItem(t('Edit data')),
 				];
 			case 'front_customer_orders':
 				return [
-					new BreadcrumbItem(t('Objednávky')),
+					new BreadcrumbItem(t('Orders')),
 				];
 			case 'front_registration_reset_password':
 				return [
-					new BreadcrumbItem(t('Zapomenuté heslo')),
+					new BreadcrumbItem(t('Forgotten password')),
 				];
 			case 'front_customer_order_detail_registered':
 			case 'front_customer_order_detail_unregistered':
 				return [
-					new BreadcrumbItem(t('Detail objednávky')),
+					new BreadcrumbItem(t('Order detail')),
 				];
 			case 'front_login':
 				return [
-					new BreadcrumbItem(t('Přihlášení')),
+					new BreadcrumbItem(t('Login')),
 				];
 			case 'front_product_search':
 				return [
-					new BreadcrumbItem(t('Hledání')),
+					new BreadcrumbItem(t('Search [noun]')),
 				];
 			case 'front_registration_register':
 				return [
-					new BreadcrumbItem(t('Registrace')),
+					new BreadcrumbItem(t('Registration')),
 				];
 			case 'front_brand_list':
 				return [
-					new BreadcrumbItem(t('Přehled značek')),
+					new BreadcrumbItem(t('Brand overview')),
 				];
 			case 'front_error_page':
 				return $this->getBreacrumbItemForErrorPage($routeParameters['code']);
@@ -77,9 +77,9 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem
 	 */
 	private function getBreacrumbItemForErrorPage($code) {
-		$breadcrumbName = t('Jejda! Nastala chyba');
+		$breadcrumbName = t('Oops! Error occurred');
 		if ($code === '404') {
-			$breadcrumbName = t('Stránka nenalezena');
+			$breadcrumbName = t('Page not found');
 		}
 
 		return [

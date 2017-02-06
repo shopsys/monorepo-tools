@@ -28,8 +28,8 @@ class ParameterFormType extends AbstractType {
 				'required' => false,
 				'options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím název parametru']),
-						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název parametru nesmí být delší než {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter parameter name']),
+						new Constraints\Length(['max' => 100, 'maxMessage' => 'Parameter name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			])

@@ -1,16 +1,16 @@
-<h2>{{ 'Objednávky zákazníka'|trans }}</h2>
+<h2>{{ 'Customer orders'|trans }}</h2>
 
 {% if orders|length == 0 %}
-	{{ 'Zákazník prozatím nemá žádné objednávky.'|trans }}
+	{{ 'Customer has no orders so far.'|trans }}
 {% else %}
 	<table class="table-main">
 		<thead>
 			<tr>
-				<th>{{ 'Číslo objednávky'|trans }}</th>
-				<th>{{ 'Fakturační adresa'|trans }}</th>
-				<th>{{ 'Doručovací adresa'|trans }}</th>
-				<th>{{ 'Celková cena s DPH'|trans }}</th>
-				<th>{{ 'Stav'|trans }}</th>
+				<th>{{ 'Order number'|trans }}</th>
+				<th>{{ 'Billing address'|trans }}</th>
+				<th>{{ 'Shipping address'|trans }}</th>
+				<th>{{ 'Total price including VAT'|trans }}</th>
+				<th>{{ 'Status'|trans }}</th>
 			</tr>
 		</thead>
 		<tbody>

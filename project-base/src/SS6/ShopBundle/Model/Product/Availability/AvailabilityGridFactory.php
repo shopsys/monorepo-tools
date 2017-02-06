@@ -51,8 +51,8 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('availabilityList', $dataSource);
 		$grid->setDefaultOrder('dispatchTime');
 
-		$grid->addColumn('name', 'at.name', t('Název'), true);
-		$grid->addColumn('dispatchTime', 'a.dispatchTime', t('Počet dní k expedici'), true);
+		$grid->addColumn('name', 'at.name', t('Name'), true);
+		$grid->addColumn('dispatchTime', 'a.dispatchTime', t('Number of days to despatch'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_availability_deleteconfirm', ['id' => 'a.id'])
