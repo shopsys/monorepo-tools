@@ -574,7 +574,7 @@ msgstr "Disabled button without cursor"
 
 #: CartController.php:294
 msgid "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> (celkem již {{ quantity|formatNumber }} {{ unitName }})"
-msgstr "Product <strong>{{ name }}</strong> added to the cart (total amount  {{ quantity|formatNumber }} {{ unitName }})"
+msgstr "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
 
 #: CartController.php:285
 msgid "Do košíku bylo vloženo zboží <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }})"
@@ -1358,7 +1358,7 @@ msgstr "Oops! Error occurred."
 
 #: AvailabilityController.php:111
 msgid "Jelikož dostupnost \"%name%\" je používána ještě u některých produktů, musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?"
-msgstr "Because availability \"%name%\"  is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
+msgstr "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
 
 #: Content/Superadmin/cssDocumentation.html.twig:40
 msgid "Jelikož se jedná o systém, který bude často používat stejné či podobné prvky, je vhodné využít typ kódování, který dělí web na komponenty a různě je kombinuje mezi sebou."
@@ -1366,7 +1366,7 @@ msgstr "As this is a system which will often use same or similar elements, it is
 
 #: OrderStatusController.php:105
 msgid "Jelikož stav \"%name%\" je používán ještě u některých objednávek, musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? Při této změně stavu nebude odeslán email zákazníkům."
-msgstr "Because status \"%name%\"  is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
+msgstr "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
 
 #: Content/Product/filterFormMacro.html.twig:33
 msgid "Jen zboží skladem"
@@ -2774,7 +2774,7 @@ msgstr "For deleting unit \"%name%\" you have to choose other one to be set ever
 
 #: VatController.php:70
 msgid "Pro odstranění sazby \"%name% musíte zvolit, která se má všude, kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží - základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?"
-msgstr "For deleting rate  \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
+msgstr "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
 
 #: Content/Superadmin/cssDocumentation.html.twig:129
 msgid "Pro podsložky složky components platí, že název podsložky se vkládá i do názvu komponenty pro lepší vyhledání, nicméně název souboru komponenty obsahuje jen zbytek názvu třídy"
@@ -3023,7 +3023,7 @@ msgstr "Error occurred while uploading file."
 
 #: fileUpload.js:135
 msgid "Při nahrávání souboru došlo k chybě: %message%"
-msgstr "Error occurred while uploading file:  %message%"
+msgstr "Error occurred while uploading file: %message%"
 
 #: Content/Currency/currencySettings.html.twig:6
 msgid "Při změně výchozí měny nedochází k žádnému přepočtu cen"
@@ -3427,7 +3427,7 @@ msgstr "Status of orders <strong>{{ name }}</strong> reserved and can't be delet
 
 #: OrderStatusController.php:76
 msgid "Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán."
-msgstr "Status of orders <strong>{{ oldName }}</strong>  replaced by status <strong>{{ newName }}</strong> and deleted."
+msgstr "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
 
 #: AdvancedSearchOrderFilterTranslation.php:14
 msgid "Stav objednávky"
@@ -3750,7 +3750,7 @@ msgstr "Textarea may be across the whole width next to the label"
 #: Content/Superadmin/cssDocumentation.html.twig:1077
 #: Content/Superadmin/cssDocumentation.html.twig:1085
 msgid "Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku."
-msgstr "Textarea spread to the whole width.  In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
+msgstr "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
 
 #: Content/Article/detail.html.twig:34
 #: Content/Product/detail.html.twig:296
@@ -4263,7 +4263,7 @@ msgstr "Create record"
 
 #: charactersCounter.js:25
 msgid "Využito: %currentLength% znaků. Doporučeno max. %recommendedLength%"
-msgstr "Used: %currentLength%  characters. Recommended max. %recommendedLength%"
+msgstr "Used: %currentLength% characters. Recommended max. %recommendedLength%"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1341
 msgid "Využito: 45 znaků. Doporučeno max. 155"
@@ -4972,7 +4972,7 @@ msgstr "availability"
 
 #: Content/Superadmin/cssDocumentation.html.twig:50
 msgid "dva podtržítka \"__\" značí část komponenty/element"
-msgstr "two underscores \"__\"  represent part of the component/element"
+msgstr "two underscores \"__\" represent part of the component/element"
 
 #: Content/Superadmin/cssDocumentation.html.twig:56
 msgid "dvojté značky jsou přehledné a developerovi intuitivně dojde, jaký smysl má daná třída"
@@ -5234,11 +5234,11 @@ msgstr "Article"
 
 #: ArticleController.php:226
 msgid "Článek \"%name%\" je nastaven pro zobrazení informací o cookies. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
-msgstr "Article \"%name%\"  set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
+msgstr "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
 
 #: ArticleController.php:220
 msgid "Článek \"%name%\" je nastaven pro zobrazení obchodních podmínek. Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?"
-msgstr "Article \"%name%\"  set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
+msgstr "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
 
 #: ArticleController.php:201
 msgid "Článek <strong>{{ name }}</strong> byl smazán"
