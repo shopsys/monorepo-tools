@@ -227,7 +227,7 @@ class ArticleController extends AdminBaseController {
 				['%name%' => $article->getName()]
 			);
 		} else {
-			$message = 'Opravdu chcete odstranit tento článek?';
+			$message = t('Opravdu chcete odstranit tento článek?');
 		}
 
 		return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_article_delete', $id);

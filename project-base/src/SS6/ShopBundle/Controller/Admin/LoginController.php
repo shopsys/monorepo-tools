@@ -86,7 +86,7 @@ class LoginController extends AdminBaseController {
 		try {
 			$this->loginService->checkLoginProcess($request);
 		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
-			$error = 'Přihlášení se nepodařilo.';
+			$error = t('Přihlášení se nepodařilo.');
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Login/loginForm.html.twig', [

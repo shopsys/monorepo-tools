@@ -4,7 +4,7 @@
 		{% set routeParams = getAllRequestParams() %}
 		{% set pageCount = paginationResult.pageCount %}
 		<strong class="in-paging__info">
-			{{ 'Displaying'|trans }} {{ entityName|default('záznamů')|trim }}
+			{{ 'Displaying'|trans }} {{ entityName|default('záznamů'|trans)|trim }}
 			{{ paginationResult.fromItem }} - <span class="js-pagination-to-item">{{ paginationResult.toItem }}</span>
 			{{ 'from'|trans }}
 			<span class="js-paging-total-count">{{ paginationResult.totalCount }}</span>

@@ -8,6 +8,7 @@ use SS6\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\File\File;
@@ -134,7 +135,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 					try {
 						$data['uploadedFiles'][] = $this->fileUpload->upload($file);
 					} catch (\SS6\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
-						$event->getForm()->addError('Nahrání souboru se nezdařilo.');
+						$event->getForm()->addError(new FormError(t('Nahrání souboru se nezdařilo.')));
 					}
 				}
 			}

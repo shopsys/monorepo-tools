@@ -30,10 +30,10 @@
 		$grid.on('click', '.js-inline-edit-cancel', function() {
 			var $formRow = $(this).closest('.js-grid-editing-row');
 			SS6.window({
-				content: 'Opravdu chcete zahodit všechny změny?',
+				content: SS6.translator.trans('Opravdu chcete zahodit všechny změny?'),
 				buttonCancel: true,
 				buttonContinue: true,
-				textContinue: 'Ano',
+				textContinue: SS6.translator.trans('Ano'),
 				eventContinue: function () {
 					SS6.grid.inlineEdit.cancelEdit($formRow);
 				}
@@ -82,7 +82,7 @@
 					$buttons.show();
 					$saving.hide();
 					SS6.window({
-						content: 'Prosím překontrolujte následující informace:<br/><br/>• ' + saveResult.errors.join('<br/>• ')
+						content: SS6.translator.trans('Prosím překontrolujte následující informace:') + '<br/><br/>• ' + saveResult.errors.join('<br/>• ')
 					});
 				}
 			},
