@@ -2944,11 +2944,11 @@ msgstr "Order URL address"
 #: Content/Order/step.html.twig:3
 #: Content/Order/step2.html.twig:4
 msgid "Order [noun]"
-msgstr "Order [noun]"
+msgstr "Order"
 
 #: Content/Cart/index.html.twig:143
 msgid "Order [verb]"
-msgstr "Order [verb]"
+msgstr "Order"
 
 #: Content/Order/sent.html.twig:8
 msgid "Order completed"
@@ -3681,7 +3681,7 @@ msgstr "Scripts overview"
 
 #: FrontBreadcrumbGenerator.php:39
 msgid "Search [noun]"
-msgstr "Search [noun]"
+msgstr "Search"
 
 #: Content/Customer/list.html.twig:19
 #: Order/AdvancedSearch/advancedSearch.html.twig:7
@@ -3690,7 +3690,7 @@ msgstr "Search [noun]"
 #: Content/Product/quickSearchFormContent.html.twig:4
 #: Content/Search/searchBox.html.twig:20
 msgid "Search [verb]"
-msgstr "Search [verb]"
+msgstr "Search"
 
 #: Content/Product/productsWithControls.html.twig:27
 msgid "Search didn't find any products."
