@@ -297,6 +297,7 @@
 			<arg value="--output-format=po" />
 			<arg value="--output-dir=${path.translations.custom}" />
 
+			<arg value="cs" />
 			<arg value="en" />
 		</exec>
 	</target>

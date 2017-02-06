@@ -7,87 +7,87 @@ msgstr ""
 #: Content/Currency/listGrid.html.twig:29
 #: Content/Currency/listGrid.html.twig:45
 msgid "%defaultCurrency% per 1 %currentCurrency%"
-msgstr "%defaultCurrency% per 1 %currentCurrency%"
+msgstr ""
 
 #: Content/Currency/listGrid.html.twig:25
 msgid "%defaultCurrency% per unit"
-msgstr "%defaultCurrency% per unit"
+msgstr ""
 
 #: FeedConfigRepository.php:79
 msgid "%feedName% - availability"
-msgstr "%feedName% - availability"
+msgstr ""
 
 #: Content/Order/step3.html.twig:19
 msgid "(If I buy on the company behalf)"
-msgstr "(If I buy on the company behalf)"
+msgstr ""
 
 #: Content/Order/step3.html.twig:41
 msgid "(Products will be delivered to this address)"
-msgstr "(Products will be delivered to this address)"
+msgstr ""
 
 #: Content/Order/step3.html.twig:32
 msgid "(This address will be on the tax invoice)"
-msgstr "(This address will be on the tax invoice)"
+msgstr ""
 
 #: Content/Mail/setting.html.twig:3
 msgid "- Email settings"
-msgstr "- Email settings"
+msgstr ""
 
 #: Content/Heureka/setting.html.twig:3
 msgid "- Heureka - Ověřeno zákazníky"
-msgstr "- Heureka - Ověřeno zákazníky"
+msgstr ""
 
 #: ProductFormType.php:184
 msgid "-- Choose action --"
-msgstr "-- Choose action --"
+msgstr ""
 
 #: AdvertFormType.php:83
 msgid "-- Choose area --"
-msgstr "-- Choose area --"
+msgstr ""
 
 #: CookiesSettingFormType.php:41
 #: TermsAndConditionsSettingFormType.php:41
 msgid "-- Choose article --"
-msgstr "-- Choose article --"
+msgstr ""
 
 #: ArticleFormType.php:92
 msgid "-- Choose article position --"
-msgstr "-- Choose article position --"
+msgstr ""
 
 #: ProductFormType.php:168
 #: ProductFormType.php:195
 msgid "-- Choose availability --"
-msgstr "-- Choose availability --"
+msgstr ""
 
 #: ProductFormType.php:143
 msgid "-- Choose brand --"
-msgstr "-- Choose brand --"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:786
 msgid "--seo"
-msgstr "--seo"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:784
 msgid "--textarea-big"
-msgstr "--textarea-big"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1119
 #: Content/Superadmin/cssDocumentation.html.twig:1123
 msgid "1 254 CZK"
-msgstr "1 254 CZK"
+msgstr ""
 
 #: Content/Script/list.html.twig:8
 msgid "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
-msgstr "ATTENTION - inserting scripts on the page can seriously endanger the security, performance or design of the app."
+msgstr ""
 
 #: Content/Product/detail.html.twig:426
 #: Content/Product/detail.html.twig:9
 msgid "Accessories"
-msgstr "Accessories"
+msgstr ""
 
 #: ModuleList.php:18
 msgid "Accessories in purchase confirmation box"
-msgstr "Accessories in purchase confirmation box"
+msgstr ""
 
 #: FeedController.php:108
 #: Content/Superadmin/cssDocumentation.html.twig:401
@@ -95,178 +95,178 @@ msgstr "Accessories in purchase confirmation box"
 #: Content/Superadmin/cssDocumentation.html.twig:415
 #: Content/Superadmin/cssDocumentation.html.twig:591
 msgid "Action"
-msgstr "Action"
+msgstr ""
 
 #: Content/Product/detail.html.twig:145
 #: Content/Product/edit.html.twig:82
 msgid "Action after sellout"
-msgstr "Action after sellout"
+msgstr ""
 
 #: Content/Superadmin/modules.html.twig:16
 msgid "Active"
-msgstr "Active"
+msgstr ""
 
 #: Content/ProductPicker/listGrid.html.twig:47
 #: Admin/Form/theme.html.twig:695
 msgid "Add"
-msgstr "Add"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:310
 msgid "Add URL"
-msgstr "Add URL"
+msgstr ""
 
 #: Content/Product/detail.html.twig:284
 msgid "Add another parameter"
-msgstr "Add another parameter"
+msgstr ""
 
 #: Content/Country/listGrid.html.twig:13
 msgid "Add country"
-msgstr "Add country"
+msgstr ""
 
 #: Content/Order/edit.html.twig:196
 msgid "Add item"
-msgstr "Add item"
+msgstr ""
 
 #: Content/Script/detail.html.twig:16
 msgid "Add only to order confirmation page"
-msgstr "Add only to order confirmation page"
+msgstr ""
 
 #: Content/Order/edit.html.twig:200
 #: Admin/Form/theme.html.twig:495
 msgid "Add product"
-msgstr "Add product"
+msgstr ""
 
 #: Order/AdvancedSearch/advancedSearch.html.twig:12
 #: Product/AdvancedSearch/advancedSearch.html.twig:12
 msgid "Add requirement"
-msgstr "Add requirement"
+msgstr ""
 
 #: Content/Product/detail.html.twig:275
 msgid "Add some parameters"
-msgstr "Add some parameters"
+msgstr ""
 
 #: Inline/Cart/addProduct.html.twig:8
 #: Inline/Cart/addProduct.html.twig:10
 msgid "Add to cart"
-msgstr "Add to cart"
+msgstr ""
 
 #: Content/Product/edit.html.twig:48
 msgid "Add variant"
-msgstr "Add variant"
+msgstr ""
 
 #: productsPicker.window.js:52
 msgid "Added"
-msgstr "Added"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:40
 msgid "Additional information"
-msgstr "Additional information"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:66
 #: Content/Customer/edit.html.twig:62
 msgid "Address"
-msgstr "Address"
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:12
 #: Admin/Layout/base.html.twig:61
 #: Admin/Layout/layoutWithPanel.html.twig:31
 msgid "Administration"
-msgstr "Administration"
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:3
 #: Content/Administrator/detail.html.twig:4
 msgid "Administrator"
-msgstr "Administrator"
+msgstr ""
 
 #: AdministratorController.php:175
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: AdministratorController.php:106
 msgid "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Administrator <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: AdministratorController.php:221
 msgid "Administrator <strong>{{ name }}</strong> deleted."
-msgstr "Administrator <strong>{{ name }}</strong> deleted."
+msgstr ""
 
 #: AdministratorController.php:230
 msgid "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
-msgstr "Administrator <strong>{{ name }}</strong> is the only one and can't be deleted."
+msgstr ""
 
 #: Content/Administrator/edit.html.twig:8
 msgid "Administrator activities history"
-msgstr "Administrator activities history"
+msgstr ""
 
 #: AdministratorController.php:123
 #: AdministratorController.php:192
 msgid "Administrator with login name <strong>{{ name }}</strong> already exists"
-msgstr "Administrator with login name <strong>{{ name }}</strong> already exists"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Administrators"
-msgstr "Administrators"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Administrator/list.html.twig:3
 #: Content/Administrator/list.html.twig:4
 msgid "Administrators overview"
-msgstr "Administrators overview"
+msgstr ""
 
 #: Content/Order/list.html.twig:19
 #: Content/Product/list.html.twig:27
 #: Content/ProductPicker/list.html.twig:18
 msgid "Advanced search"
-msgstr "Advanced search"
+msgstr ""
 
 #: ImageController.php:71
 #: Content/Advert/detail.html.twig:3
 #: Content/Advert/detail.html.twig:4
 msgid "Advertising"
-msgstr "Advertising"
+msgstr ""
 
 #: AdvertController.php:186
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
-msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
+msgstr ""
 
 #: AdvertController.php:96
 msgid "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
-msgstr "Advertising <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
+msgstr ""
 
 #: AdvertController.php:216
 msgid "Advertising <strong>{{ name }}</strong> deleted"
-msgstr "Advertising <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Advert/list.html.twig:3
 #: Content/Advert/list.html.twig:4
 msgid "Advertising system"
-msgstr "Advertising system"
+msgstr ""
 
 #: Content/Category/domainTabs.html.twig:5
 #: Content/Category/domainTabs.html.twig:9
 msgid "All domains"
-msgstr "All domains"
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:11
 msgid "All e-mails will be sent only to entered address."
-msgstr "All e-mails will be sent only to entered address."
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:9
 msgid "All e-mails will be sent only to entered addresses."
-msgstr "All e-mails will be sent only to entered addresses."
+msgstr ""
 
 #: Content/Script/listGrid.html.twig:11
 msgid "All pages"
-msgstr "All pages"
+msgstr ""
 
 #: ProductMassActionFormType.php:30
 msgid "All search results"
-msgstr "All search results"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:42
 msgid "Allowed for shipping types"
-msgstr "Allowed for shipping types"
+msgstr ""
 
 #: Content/Order/edit.html.twig:165
 #: Content/Order/preview.html.twig:8
@@ -274,177 +274,177 @@ msgstr "Allowed for shipping types"
 #: Content/Customer/orderDetail.html.twig:147
 #: Mail/Order/products.html.twig:4
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1292
 msgid "An example might be empty space with icon behind it, which we want to align with icon next to input."
-msgstr "An example might be empty space with icon behind it, which we want to align with icon next to input."
+msgstr ""
 
 #: Content/Category/detail.html.twig:14
 msgid "Ancestor category"
-msgstr "Ancestor category"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:161
 msgid "Any content"
-msgstr "Any content"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:170
 msgid "Any content with smaller indent between content and line"
-msgstr "Any content with smaller indent between content and line"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1105
 msgid "Any element on right"
-msgstr "Any element on right"
+msgstr ""
 
 #: Content/CustomerCommunication/orderSubmitted.html.twig:29
 #: Content/Mail/template.html.twig:64
 #: Content/Script/detail.html.twig:29
 msgid "Applicable variables"
-msgstr "Applicable variables"
+msgstr ""
 
 #: Order/PromoCode/index.html.twig:7
 msgid "Apply"
-msgstr "Apply"
+msgstr ""
 
 #: AdvertController.php:147
 #: Content/Advert/detail.html.twig:18
 msgid "Area"
-msgstr "Area"
+msgstr ""
 
 #: Content/Article/detail.html.twig:3
 #: Content/Article/detail.html.twig:4
 msgid "Article"
-msgstr "Article"
+msgstr ""
 
 #: ArticleController.php:225
 msgid "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
-msgstr "Article \"%name%\" set for displaying cookies information. This setting will be lost. Do you really want to delete it?"
+msgstr ""
 
 #: ArticleController.php:220
 msgid "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
-msgstr "Article \"%name%\" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?"
+msgstr ""
 
 #: ArticleController.php:171
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: ArticleController.php:114
 msgid "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Article <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: ArticleController.php:201
 msgid "Article <strong>{{ name }}</strong> deleted"
-msgstr "Article <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Content/Article/detail.html.twig:12
 msgid "Article data"
-msgstr "Article data"
+msgstr ""
 
 #: Content/Article/list.html.twig:21
 msgid "Articles in footer"
-msgstr "Articles in footer"
+msgstr ""
 
 #: Content/Article/list.html.twig:18
 msgid "Articles in upper menu"
-msgstr "Articles in upper menu"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/list.html.twig:3
 #: Content/Article/list.html.twig:4
 msgid "Articles overview"
-msgstr "Articles overview"
+msgstr ""
 
 #: Content/Article/list.html.twig:24
 msgid "Articles without positioning"
-msgstr "Articles without positioning"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:40
 msgid "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
-msgstr "As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other."
+msgstr ""
 
 #: Content/Product/detail.html.twig:115
 #: Content/Product/edit.html.twig:169
 msgid "Assign to category"
-msgstr "Assign to category"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:83
 msgid "At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )"
-msgstr "At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )"
+msgstr ""
 
 #: Content/Mail/template.html.twig:25
 msgid "Attachment"
-msgstr "Attachment"
+msgstr ""
 
 #: Front/Layout/layout.html.twig:10
 msgid "Attention! You are administrator logged in as the customer."
-msgstr "Attention! You are administrator logged in as the customer."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1326
 msgid "Attention, the second variant doesn't have js to work with yet!"
-msgstr "Attention, the second variant doesn't have js to work with yet!"
+msgstr ""
 
 #: ModuleList.php:20
 msgid "Automatic stock calculation"
-msgstr "Automatic stock calculation"
+msgstr ""
 
 #: ProductFormType.php:251
 msgid "Automatically"
-msgstr "Automatically"
+msgstr ""
 
 #: Content/Availability/list.html.twig:3
 #: Content/Availability/list.html.twig:4
 msgid "Availabilities overview"
-msgstr "Availabilities overview"
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:16
 #: Resources/config/admin_menu.yml:
 #: Content/Product/detail.html.twig:151
 #: Content/Product/edit.html.twig:88
 msgid "Availability"
-msgstr "Availability"
+msgstr ""
 
 #: AvailabilityController.php:103
 msgid "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
-msgstr "Availability \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?"
+msgstr ""
 
 #: AvailabilityController.php:70
 msgid "Availability <strong>{{ name }}</strong> deleted"
-msgstr "Availability <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: AvailabilityController.php:78
 msgid "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
-msgstr "Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>"
+msgstr ""
 
 #: Content/Product/detail.html.twig:147
 #: Content/Product/edit.html.twig:84
 msgid "Availability after sellout"
-msgstr "Availability after sellout"
+msgstr ""
 
 #: Content/Product/detail.html.twig:144
 #: Content/Product/edit.html.twig:81
 msgid "Available in stock"
-msgstr "Available in stock"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:45
 msgid "BEM is a style of writing, which defines the rules for writing css"
-msgstr "BEM is a style of writing, which defines the rules for writing css"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:122
 msgid "BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)"
-msgstr "BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)"
+msgstr ""
 
 #: Content/Cart/index.html.twig:149
 #: Content/Cart/index.html.twig:167
 msgid "Back to buying"
-msgstr "Back to buying"
+msgstr ""
 
 #: Content/Order/step2.html.twig:119
 msgid "Back to cart"
-msgstr "Back to cart"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:181
 msgid "Back to orders overview"
-msgstr "Back to orders overview"
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:29
 #: Content/Advert/detail.html.twig:35
@@ -459,93 +459,93 @@ msgstr "Back to orders overview"
 #: Content/Slider/detail.html.twig:39
 #: Content/Transport/detail.html.twig:57
 msgid "Back to overview"
-msgstr "Back to overview"
+msgstr ""
 
 #: Content/Order/step3.html.twig:95
 msgid "Back to shipping and payment selection"
-msgstr "Back to shipping and payment selection"
+msgstr ""
 
 #: Content/Order/sent.html.twig:28
 msgid "Back to store"
-msgstr "Back to store"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:187
 msgid "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type."
-msgstr "Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type."
+msgstr ""
 
 #: Content/Product/edit.html.twig:207
 #: Content/Product/new.html.twig:17
 msgid "Base price"
-msgstr "Base price"
+msgstr ""
 
 #: Content/Payment/edit.html.twig:18
 #: Content/Payment/new.html.twig:19
 #: Content/Transport/edit.html.twig:18
 #: Content/Transport/new.html.twig:19
 msgid "Base price in %currencyCode%"
-msgstr "Base price in %currencyCode%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:986
 msgid "Basic component for forms, extremely big and set in the default form generating. Use this for most cases."
-msgstr "Basic component for forms, extremely big and set in the default form generating. Use this for most cases."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:758
 msgid "Basic elements display"
-msgstr "Basic elements display"
+msgstr ""
 
 #: Content/Currency/currencySettings.html.twig:8
 msgid "Basic frontend currency %domainName%"
-msgstr "Basic frontend currency %domainName%"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:14
 msgid "Basic information"
-msgstr "Basic information"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:347
 msgid "Basic table with one class on table element. Basic look for showing simple data (not forms)."
-msgstr "Basic table with one class on table element. Basic look for showing simple data (not forms)."
+msgstr ""
 
 #: AvailabilityController.php:109
 msgid "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
-msgstr "Because availability \"%name%\" is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?"
+msgstr ""
 
 #: OrderStatusController.php:105
 msgid "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
-msgstr "Because status \"%name%\" is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won't be emails sent to customers."
+msgstr ""
 
 #: BestsellingProductController.php:92
 msgid "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
-msgstr "Best-selling products of category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> set."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/BestsellingProduct/list.html.twig:3
 #: Content/BestsellingProduct/list.html.twig:4
 #: Content/Product/bestsellingProductsList.html.twig:3
 msgid "Bestsellers"
-msgstr "Bestsellers"
+msgstr ""
 
 #: Content/BestsellingProduct/detail.html.twig:3
 #: Content/BestsellingProduct/detail.html.twig:4
 msgid "Bestsellers of the category"
-msgstr "Bestsellers of the category"
+msgstr ""
 
 #: Content/Customer/orderList.html.twig:10
 #: Content/Customer/orderDetail.html.twig:31
 msgid "Billing address"
-msgstr "Billing address"
+msgstr ""
 
 #: MailController.php:93
 msgid "Billing address - name, surname, company, company number, tax number and billing address"
-msgstr "Billing address - name, surname, company, company number, tax number and billing address"
+msgstr ""
 
 #: Content/Order/edit.html.twig:108
 #: Content/Order/step3.html.twig:32
 msgid "Billing data"
-msgstr "Billing data"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:615
 msgid "Bolder line"
-msgstr "Bolder line"
+msgstr ""
 
 #: ImageController.php:72
 #: AdvancedSearchProductFilterTranslation.php:17
@@ -555,19 +555,19 @@ msgstr "Bolder line"
 #: Content/Product/detail.html.twig:104
 #: Content/Product/filterFormMacro.html.twig:85
 msgid "Brand"
-msgstr "Brand"
+msgstr ""
 
 #: BrandController.php:161
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: BrandController.php:88
 msgid "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Brand <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: BrandController.php:192
 msgid "Brand <strong>{{ name }}</strong> deleted"
-msgstr "Brand <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:47
 #: BrandBreadcrumbGenerator.php:29
@@ -575,79 +575,79 @@ msgstr "Brand <strong>{{ name }}</strong> deleted"
 #: Content/Brand/list.html.twig:4
 #: Content/Brand/list.html.twig:9
 msgid "Brand overview"
-msgstr "Brand overview"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Brands"
-msgstr "Brands"
+msgstr ""
 
 #: file_input.js:27
 msgid "Browse"
-msgstr "Browse"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:248
 msgid "Btn"
-msgstr "Btn"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:317
 msgid "Btn-link-style"
-msgstr "Btn-link-style"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:304
 msgid "Btn-no-style"
-msgstr "Btn-no-style"
+msgstr ""
 
 #: Content/Product/list.html.twig:47
 msgid "Bulk edit"
-msgstr "Bulk edit"
+msgstr ""
 
 #: ProductController.php:258
 msgid "Bulk editing done"
-msgstr "Bulk editing done"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:147
 #: Content/Superadmin/cssDocumentation.html.twig:905
 #: Content/Superadmin/cssDocumentation.html.twig:1242
 msgid "Button"
-msgstr "Button"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1229
 msgid "Button after input"
-msgstr "Button after input"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:326
 msgid "Button that looks like link"
-msgstr "Button that looks like link"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:332
 msgid "Button that looks like link with not underlined icon"
-msgstr "Button that looks like link with not underlined icon"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:313
 msgid "Button that looks like text"
-msgstr "Button that looks like text"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:25
 #: Content/Superadmin/cssDocumentation.html.twig:245
 msgid "Buttons"
-msgstr "Buttons"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:659
 msgid "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture."
-msgstr "By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:618
 msgid "By using modifier on the line it is possible to bluish the whole line."
-msgstr "By using modifier on the line it is possible to bluish the whole line."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:9
 msgid "CSS documentation"
-msgstr "CSS documentation"
+msgstr ""
 
 #: Content/Cart/index.html.twig:8
 #: Inline/OrderProgress/index.html.twig:5
 msgid "Cart"
-msgstr "Cart"
+msgstr ""
 
 #: ProductPickerController.php:138
 #: AdvancedSearchProductFilterTranslation.php:10
@@ -656,7 +656,7 @@ msgstr "Cart"
 #: Content/Product/edit.html.twig:55
 #: Content/Product/detail.html.twig:116
 msgid "Catalogue number"
-msgstr "Catalogue number"
+msgstr ""
 
 #: ImageController.php:66
 #: Resources/config/admin_menu.yml:
@@ -666,84 +666,84 @@ msgstr "Catalogue number"
 #: Content/Category/list.html.twig:4
 #: Content/TopCategory/list.html.twig:12
 msgid "Category"
-msgstr "Category"
+msgstr ""
 
 #: CategoryController.php:124
 msgid "Category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Category <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: CategoryController.php:211
 msgid "Category <strong>{{ name }}</strong> deleted"
-msgstr "Category <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Content/Category/detail.html.twig:16
 msgid "Category Heureka.cz"
-msgstr "Category Heureka.cz"
+msgstr ""
 
 #: Content/TopCategory/list.html.twig:3
 #: Content/TopCategory/list.html.twig:4
 msgid "Category guidepost on main page"
-msgstr "Category guidepost on main page"
+msgstr ""
 
 #: CategoryController.php:85
 msgid "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
-msgstr "Category<strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
+msgstr ""
 
 #: Content/Product/list.html.twig:52
 msgid "Change for"
-msgstr "Change for"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:30
 msgid "Changing password"
-msgstr "Changing password"
+msgstr ""
 
 #: Content/Error/error.html.twig:23
 msgid "Check the address correctness"
-msgstr "Check the address correctness"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1267
 msgid "Checkboxes"
-msgstr "Checkboxes"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:819
 msgid "Checkboxes and radio buttons"
-msgstr "Checkboxes and radio buttons"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1261
 msgid "Checkboxes or radiobuttons"
-msgstr "Checkboxes or radiobuttons"
+msgstr ""
 
 #: Content/ProductPicker/listGrid.html.twig:58
 msgid "Choose"
-msgstr "Choose"
+msgstr ""
 
 #: Content/Cookies/setting.html.twig:15
 msgid "Choose article, which will provide information about how this pages uses cookies."
-msgstr "Choose article, which will provide information about how this pages uses cookies."
+msgstr ""
 
 #: Content/TermsAndConditions/setting.html.twig:15
 msgid "Choose article, which will serve as terms and conditions with which the customer has to agree with when creating order."
-msgstr "Choose article, which will serve as terms and conditions with which the customer has to agree with when creating order."
+msgstr ""
 
 #: confirmDelete.js:59
 msgid "Choose new value first"
-msgstr "Choose new value first"
+msgstr ""
 
 #: ProductType.php:72
 msgid "Choose product"
-msgstr "Choose product"
+msgstr ""
 
 #: Content/Product/productListMacro.html.twig:58
 msgid "Choose variant"
-msgstr "Choose variant"
+msgstr ""
 
 #: MailController.php:91
 msgid "Chosen payment name"
-msgstr "Chosen payment name"
+msgstr ""
 
 #: MailController.php:90
 msgid "Chosen shipping name"
-msgstr "Chosen shipping name"
+msgstr ""
 
 #: CustomerController.php:201
 #: Content/Customer/detail.html.twig:70
@@ -759,70 +759,70 @@ msgstr "Chosen shipping name"
 #: Mail/Order/billingAddress.html.twig:9
 #: Mail/Order/deliveryAddress.html.twig:8
 msgid "City"
-msgstr "City"
+msgstr ""
 
 #: Content/Product/filterFormMacro.html.twig:161
 msgid "Clear filter"
-msgstr "Clear filter"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:411
 msgid "Click to go to product section"
-msgstr "Click to go to product section"
+msgstr ""
 
 #: Inline/FlashMessage/messages.html.twig:3
 #: newsletterSubscriptionForm.js:37
 #: addProduct.js:48
 msgid "Close"
-msgstr "Close"
+msgstr ""
 
 #: window.js:94
 #: window.js:111
 msgid "Close (Esc)"
-msgstr "Close (Esc)"
+msgstr ""
 
 #: Content/Product/detail.html.twig:430
 msgid "Close without saving"
-msgstr "Close without saving"
+msgstr ""
 
 #: PromoCodeGridFactory.php:43
 #: CurrencyGridFactory.php:56
 #: Content/Advert/detail.html.twig:21
 #: Content/Script/detail.html.twig:15
 msgid "Code"
-msgstr "Code"
+msgstr ""
 
 #: Content/Heureka/setting.html.twig:11
 msgid "Code of service Heureka - Ověřeno zákazníky"
-msgstr "Code of service Heureka - Ověřeno zákazníky"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:43
 msgid "Coding using BEM"
-msgstr "Coding using BEM"
+msgstr ""
 
 #: PricingGroupGridFactory.php:54
 #: VatGridFactory.php:69
 msgid "Coefficient"
-msgstr "Coefficient"
+msgstr ""
 
 #: FlagGridFactory.php:55
 msgid "Colour"
-msgstr "Colour"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:250
 msgid "Colour modification"
-msgstr "Colour modification"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:191
 msgid "Colouring in-message"
-msgstr "Colouring in-message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:193
 msgid "Colours present event that happened."
-msgstr "Colours present event that happened."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Communication with customer"
-msgstr "Communication with customer"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:57
 #: Content/Customer/detail.html.twig:86
@@ -834,20 +834,20 @@ msgstr "Communication with customer"
 #: Mail/Order/billingAddress.html.twig:5
 #: Mail/Order/deliveryAddress.html.twig:5
 msgid "Company"
-msgstr "Company"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:49
 #: Content/Order/edit.html.twig:95
 #: Content/Customer/edit.html.twig:47
 #: Content/Order/step3.html.twig:19
 msgid "Company data"
-msgstr "Company data"
+msgstr ""
 
 #: Content/Order/edit.html.twig:99
 #: Content/Customer/orderDetail.html.twig:52
 #: Content/Order/step3.html.twig:26
 msgid "Company name"
-msgstr "Company name"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:58
 #: Content/Order/edit.html.twig:100
@@ -856,90 +856,90 @@ msgstr "Company name"
 #: Content/Order/step3.html.twig:27
 #: Mail/Order/billingAddress.html.twig:6
 msgid "Company number"
-msgstr "Company number"
+msgstr ""
 
 #: Content/Seo/seoSetting.html.twig:17
 msgid "Complement to title"
-msgstr "Complement to title"
+msgstr ""
 
 #: Content/Seo/seoSetting.html.twig:16
 msgid "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
-msgstr "Complement to title will be set as suffix to all titles e.g. if complement is set “ | My shop” and product name is “iPhone S7” the result title for this products page will be “iPhone S7 | My shop”."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:998
 msgid "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
-msgstr "Component consists of 5 main elements. First is wrap <strong class=\"in-article__visible\">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class=\"in-article__visible\">form-line__label</strong>. We don't have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class=\"in-article__visible\">form-line__side</strong> and <strong class=\"in-article__visible\">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class=\"in-article__visible\">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width."
+msgstr ""
 
 #: ContactFormFacade.php:60
 msgid "Contact form"
-msgstr "Contact form"
+msgstr ""
 
 #: Content/Order/edit.html.twig:150
 #: Content/ContactForm/contactForm.html.twig:2
 #: Content/Order/step3.html.twig:62
 msgid "Contact us"
-msgstr "Contact us"
+msgstr ""
 
 #: Content/Article/detail.html.twig:24
 #: Content/CustomerCommunication/orderSubmitted.html.twig:15
 #: Content/Mail/template.html.twig:21
 msgid "Content"
-msgstr "Content"
+msgstr ""
 
 #: Content/Order/step2.html.twig:114
 msgid "Continue in order"
-msgstr "Continue in order"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:290
 msgid "Conversion button always over the entire width"
-msgstr "Conversion button always over the entire width"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:273
 msgid "Conversion button big"
-msgstr "Conversion button big"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:279
 msgid "Conversion button medium"
-msgstr "Conversion button medium"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:276
 msgid "Conversion button standard"
-msgstr "Conversion button standard"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:295
 msgid "Conversion button to adding"
-msgstr "Conversion button to adding"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:300
 msgid "Conversion button to adding - small"
-msgstr "Conversion button to adding - small"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:255
 msgid "Conversion button to form validations etc."
-msgstr "Conversion button to form validations etc."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Cookies/setting.html.twig:15
 msgid "Cookies information"
-msgstr "Cookies information"
+msgstr ""
 
 #: Content/Cookies/setting.html.twig:3
 #: Content/Cookies/setting.html.twig:4
 msgid "Cookies information settings"
-msgstr "Cookies information settings"
+msgstr ""
 
 #: CookiesController.php:62
 msgid "Cookies information settings modified."
-msgstr "Cookies information settings modified."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Countries"
-msgstr "Countries"
+msgstr ""
 
 #: Content/Country/list.html.twig:3
 #: Content/Country/list.html.twig:4
 msgid "Countries overview"
-msgstr "Countries overview"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:72
 #: Content/Customer/detail.html.twig:93
@@ -952,265 +952,265 @@ msgstr "Countries overview"
 #: Content/Order/step3.html.twig:38
 #: Content/Order/step3.html.twig:55
 msgid "Country"
-msgstr "Country"
+msgstr ""
 
 #: Content/Product/createVariant.html.twig:10
 #: FormDetailExtension.php:76
 msgid "Create"
-msgstr "Create"
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:83
 msgid "Create VAT rate"
-msgstr "Create VAT rate"
+msgstr ""
 
 #: Content/Availability/listGrid.html.twig:13
 msgid "Create availability"
-msgstr "Create availability"
+msgstr ""
 
 #: Content/Currency/listGrid.html.twig:62
 msgid "Create currency"
-msgstr "Create currency"
+msgstr ""
 
 #: Content/PromoCode/listGrid.html.twig:24
 msgid "Create discount coupon"
-msgstr "Create discount coupon"
+msgstr ""
 
 #: Content/Flag/listGrid.html.twig:13
 msgid "Create flag"
-msgstr "Create flag"
+msgstr ""
 
 #: Content/Administrator/list.html.twig:8
 msgid "Create new administrator"
-msgstr "Create new administrator"
+msgstr ""
 
 #: Content/Advert/list.html.twig:8
 msgid "Create new advertising"
-msgstr "Create new advertising"
+msgstr ""
 
 #: Content/Article/list.html.twig:8
 msgid "Create new article"
-msgstr "Create new article"
+msgstr ""
 
 #: Content/Brand/list.html.twig:32
 msgid "Create new brand"
-msgstr "Create new brand"
+msgstr ""
 
 #: Content/Category/list.html.twig:8
 msgid "Create new category"
-msgstr "Create new category"
+msgstr ""
 
 #: Content/Customer/list.html.twig:9
 msgid "Create new customer"
-msgstr "Create new customer"
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:37
 msgid "Create new order status"
-msgstr "Create new order status"
+msgstr ""
 
 #: Content/Slider/list.html.twig:8
 msgid "Create new page"
-msgstr "Create new page"
+msgstr ""
 
 #: Content/Product/list.html.twig:7
 msgid "Create new product"
-msgstr "Create new product"
+msgstr ""
 
 #: Content/Script/list.html.twig:10
 msgid "Create new script"
-msgstr "Create new script"
+msgstr ""
 
 #: Content/Parameter/listGrid.html.twig:13
 msgid "Create parameter"
-msgstr "Create parameter"
+msgstr ""
 
 #: Content/Payment/list.html.twig:5
 msgid "Create payment"
-msgstr "Create payment"
+msgstr ""
 
 #: Pricing/Groups/listGrid.html.twig:12
 msgid "Create pricing group"
-msgstr "Create pricing group"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:379
 msgid "Create record"
-msgstr "Create record"
+msgstr ""
 
 #: Content/Transport/list.html.twig:5
 msgid "Create shipping"
-msgstr "Create shipping"
+msgstr ""
 
 #: Content/Unit/listGrid.html.twig:13
 msgid "Create unit"
-msgstr "Create unit"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/createVariant.html.twig:3
 #: Content/Product/createVariant.html.twig:4
 #: Content/Product/list.html.twig:10
 msgid "Create variant"
-msgstr "Create variant"
+msgstr ""
 
 #: OrderController.php:234
 msgid "Created"
-msgstr "Created"
+msgstr ""
 
 #: Content/Order/edit.html.twig:63
 msgid "Created by administrator"
-msgstr "Created by administrator"
+msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:11
 msgid "Created on"
-msgstr "Created on"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:22
 #: Content/Customer/orders.html.twig:19
 msgid "Creation date"
-msgstr "Creation date"
+msgstr ""
 
 #: Content/Image/overview.html.twig:30
 msgid "Cropping"
-msgstr "Cropping"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Css documentation"
-msgstr "Css documentation"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Currency/list.html.twig:3
 #: Content/Currency/list.html.twig:4
 msgid "Currencies"
-msgstr "Currencies"
+msgstr ""
 
 #: CurrencyController.php:91
 msgid "Currency <strong>{{ name }}</strong> deleted"
-msgstr "Currency <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: CurrencyController.php:143
 msgid "Currency settings modified"
-msgstr "Currency settings modified"
+msgstr ""
 
 #: Content/Customer/orders.html.twig:20
 msgid "Current status"
-msgstr "Current status"
+msgstr ""
 
 #: OrderController.php:235
 #: Content/Order/edit.html.twig:43
 msgid "Customer"
-msgstr "Customer"
+msgstr ""
 
 #: CustomerController.php:253
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: CustomerController.php:145
 msgid "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Customer <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: CustomerController.php:288
 msgid "Customer <strong>{{ name }}</strong> deleted"
-msgstr "Customer <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:3
 #: Content/Customer/detail.html.twig:4
 msgid "Customer detail"
-msgstr "Customer detail"
+msgstr ""
 
 #: Content/Customer/orderList.html.twig:4
 msgid "Customer has no orders so far."
-msgstr "Customer has no orders so far."
+msgstr ""
 
 #: Content/Customer/orderList.html.twig:1
 msgid "Customer orders"
-msgstr "Customer orders"
+msgstr ""
 
 #: CustomerPasswordController.php:61
 #: CustomerPasswordController.php:100
 msgid "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
-msgstr "Customer with e-mail address <strong>{{ email }}</strong> doesn't exist. <a href=\"{{ registrationLink }}\"> Register</a>"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Customers"
-msgstr "Customers"
+msgstr ""
 
 #: Content/Customer/list.html.twig:3
 #: Content/Customer/list.html.twig:4
 msgid "Customers overview"
-msgstr "Customers overview"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Default/index.html.twig:3
 #: Content/Default/index.html.twig:4
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: MailController.php:88
 msgid "Date and time of order creation"
-msgstr "Date and time of order creation"
+msgstr ""
 
 #: Content/Vat/vatSettings.html.twig:6
 msgid "Default VAT rate"
-msgstr "Default VAT rate"
+msgstr ""
 
 #: Content/Currency/currencySettings.html.twig:6
 msgid "Default administration currency"
-msgstr "Default administration currency"
+msgstr ""
 
 #: AvailabilityController.php:156
 msgid "Default availability for the stock settings modified"
-msgstr "Default availability for the stock settings modified"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:258
 msgid "Default button"
-msgstr "Default button"
+msgstr ""
 
 #: Pricing/Groups/pricingGroupSettings.html.twig:6
 msgid "Default pricing group"
-msgstr "Default pricing group"
+msgstr ""
 
 #: PricingGroupController.php:167
 msgid "Default pricing group settings modified"
-msgstr "Default pricing group settings modified"
+msgstr ""
 
 #: Content/Availability/setting.html.twig:6
 msgid "Default product in stock availability"
-msgstr "Default product in stock availability"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:18
 #: Content/Product/detail.html.twig:67
 #: Content/Transport/detail.html.twig:18
 msgid "Default settings"
-msgstr "Default settings"
+msgstr ""
 
 #: Content/Unit/setting.html.twig:6
 msgid "Default unit"
-msgstr "Default unit"
+msgstr ""
 
 #: UnitController.php:164
 msgid "Default unit settings modified"
-msgstr "Default unit settings modified"
+msgstr ""
 
 #: Content/Unit/setting.html.twig:6
 msgid "Default unit will be used when creating new product"
-msgstr "Default unit will be used when creating new product"
+msgstr ""
 
 #: Grid.php:277
 #: Content/Mail/template.html.twig:34
 #: Content/Product/edit.html.twig:346
 #: Admin/Form/fileuploadFields.html.twig:23
 msgid "Delete"
-msgstr "Delete"
+msgstr ""
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:22
 msgid "Delete and set"
-msgstr "Delete and set"
+msgstr ""
 
 #: MailController.php:96
 msgid "Delivery address"
-msgstr "Delivery address"
+msgstr ""
 
 #: Inline/OrderProgress/index.html.twig:19
 msgid "Delivery data"
-msgstr "Delivery data"
+msgstr ""
 
 #: Content/Brand/detail.html.twig:13
 #: Content/Category/detail.html.twig:22
@@ -1220,187 +1220,187 @@ msgstr "Delivery data"
 #: Content/Transport/detail.html.twig:39
 #: Content/Transport/detail.html.twig:41
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #: Content/Product/edit.html.twig:276
 msgid "Description can be set on product detail of the main product."
-msgstr "Description can be set on product detail of the main product."
+msgstr ""
 
 #: Content/Customer/orders.html.twig:25
 msgid "Detail"
-msgstr "Detail"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:286
 msgid "Disabled button without cursor"
-msgstr "Disabled button without cursor"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:165
 msgid "Discard changes"
-msgstr "Discard changes"
+msgstr ""
 
 #: PromoCodeGridFactory.php:44
 #: Content/Cart/index.html.twig:55
 #: Content/Cart/index.html.twig:82
 msgid "Discount"
-msgstr "Discount"
+msgstr ""
 
 #: Order/PromoCode/index.html.twig:4
 msgid "Discount code"
-msgstr "Discount code"
+msgstr ""
 
 #: PromoCodeController.php:52
 msgid "Discount code added to order"
-msgstr "Discount code added to order"
+msgstr ""
 
 #: PromoCodeController.php:49
 msgid "Discount code invalid. Check it, please."
-msgstr "Discount code invalid. Check it, please."
+msgstr ""
 
 #: PromoCodeController.php:59
 msgid "Discount code removed from order"
-msgstr "Discount code removed from order"
+msgstr ""
 
 #: OrderCreationService.php:250
 #: Content/Order/preview.html.twig:20
 msgid "Discount coupon"
-msgstr "Discount coupon"
+msgstr ""
 
 #: PromoCodeController.php:54
 msgid "Discount coupon <strong>{{ code }}</strong> deleted."
-msgstr "Discount coupon <strong>{{ code }}</strong> deleted."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/PromoCode/list.html.twig:3
 #: Content/PromoCode/list.html.twig:4
 msgid "Discount coupons"
-msgstr "Discount coupons"
+msgstr ""
 
 #: ProductMassActionFormType.php:49
 msgid "Display"
-msgstr "Display"
+msgstr ""
 
 #: Content/Product/detail.html.twig:93
 msgid "Display and availability"
-msgstr "Display and availability"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:577
 msgid "Display input -> input"
-msgstr "Display input -> input"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:821
 msgid "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
-msgstr "Display of inputs like checkboxes and radio buttons is done via <strong class=\"in-article__visible\">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class=\"in-article__visible\">inList</strong> and they are displayed below each other on true."
+msgstr ""
 
 #: Content/Category/detail.html.twig:15
 #: Content/Payment/detail.html.twig:23
 #: Content/Transport/detail.html.twig:23
 msgid "Display on"
-msgstr "Display on"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:220
 #: Inline/Paginator/paginator.html.twig:7
 msgid "Displaying"
-msgstr "Displaying"
+msgstr ""
 
 #: massActionConfirm.js:24
 msgid "Do you really want to %action% %count% product?"
-msgstr "Do you really want to %action% %count% product?"
+msgstr ""
 
 #: Content/Category/list.html.twig:35
 msgid "Do you really want to delete this category?"
-msgstr "Do you really want to delete this category?"
+msgstr ""
 
 #: grid.inlineEdit.js:33
 msgid "Do you really want to discard all changes?"
-msgstr "Do you really want to discard all changes?"
+msgstr ""
 
 #: AvailabilityController.php:124
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
-msgstr "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
+msgstr ""
 
 #: CurrencyController.php:68
 msgid "Do you really want to remove currency \"%name%\" permanently?"
-msgstr "Do you really want to remove currency \"%name%\" permanently?"
+msgstr ""
 
 #: orderItems.js:23
 msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
-msgstr "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
+msgstr ""
 
 #: PricingGroupController.php:134
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
-msgstr "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
+msgstr ""
 
 #: VatController.php:85
 msgid "Do you really want to remove rate \"%name%\" permanently? It is not used anywhere."
-msgstr "Do you really want to remove rate \"%name%\" permanently? It is not used anywhere."
+msgstr ""
 
 #: OrderStatusController.php:120
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
-msgstr "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
+msgstr ""
 
 #: OrderController.php:246
 msgid "Do you really want to remove the order?"
-msgstr "Do you really want to remove the order?"
+msgstr ""
 
 #: AdministratorController.php:71
 msgid "Do you really want to remove this administrator?"
-msgstr "Do you really want to remove this administrator?"
+msgstr ""
 
 #: AdvertController.php:152
 msgid "Do you really want to remove this advert?"
-msgstr "Do you really want to remove this advert?"
+msgstr ""
 
 #: ArticleController.php:230
 msgid "Do you really want to remove this article?"
-msgstr "Do you really want to remove this article?"
+msgstr ""
 
 #: BrandController.php:130
 msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
-msgstr "Do you really want to remove this brand? If it is used anywhere it will be unset."
+msgstr ""
 
 #: CustomerController.php:214
 msgid "Do you really want to remove this customer?"
-msgstr "Do you really want to remove this customer?"
+msgstr ""
 
 #: PromoCodeGridFactory.php:47
 msgid "Do you really want to remove this discount coupon?"
-msgstr "Do you really want to remove this discount coupon?"
+msgstr ""
 
 #: FlagGridFactory.php:60
 msgid "Do you really want to remove this flag?"
-msgstr "Do you really want to remove this flag?"
+msgstr ""
 
 #: SliderController.php:80
 msgid "Do you really want to remove this page?"
-msgstr "Do you really want to remove this page?"
+msgstr ""
 
 #: ParameterGridFactory.php:77
 msgid "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
-msgstr "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
+msgstr ""
 
 #: PaymentGridFactory.php:84
 msgid "Do you really want to remove this payment?"
-msgstr "Do you really want to remove this payment?"
+msgstr ""
 
 #: ProductController.php:372
 msgid "Do you really want to remove this product?"
-msgstr "Do you really want to remove this product?"
+msgstr ""
 
 #: ScriptController.php:130
 msgid "Do you really want to remove this script?"
-msgstr "Do you really want to remove this script?"
+msgstr ""
 
 #: TransportGridFactory.php:84
 msgid "Do you really want to remove this shipping?"
-msgstr "Do you really want to remove this shipping?"
+msgstr ""
 
 #: UnitController.php:94
 msgid "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
-msgstr "Do you really want to remove unit \"%name%\" permanently? It is not used anywhere."
+msgstr ""
 
 #: Inline/Newsletter/subscription.html.twig:5
 msgid "Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter."
-msgstr "Do you want to receive the newest information about our shop? Subscribe to our e-mail newsletter."
+msgstr ""
 
 #: OrderController.php:237
 #: AdvancedSearchOrderFilterTranslation.php:13
@@ -1413,11 +1413,11 @@ msgstr "Do you want to receive the newest information about our shop? Subscribe 
 #: Content/Slider/edit.html.twig:9
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:18
 msgid "Domain"
-msgstr "Domain"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:247
 msgid "Domain %domainName%"
-msgstr "Domain %domainName%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:676
 #: Content/Superadmin/cssDocumentation.html.twig:679
@@ -1426,40 +1426,40 @@ msgstr "Domain %domainName%"
 #: Content/Superadmin/cssDocumentation.html.twig:858
 #: Content/Superadmin/cssDocumentation.html.twig:867
 msgid "Domain 1"
-msgstr "Domain 1"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:696
 #: Content/Superadmin/cssDocumentation.html.twig:699
 msgid "Domain 2"
-msgstr "Domain 2"
+msgstr ""
 
 #: DomainController.php:130
 msgid "Domain <strong>{{ name }}</strong> modified"
-msgstr "Domain <strong>{{ name }}</strong> modified"
+msgstr ""
 
 #: DomainController.php:90
 msgid "Domain name"
-msgstr "Domain name"
+msgstr ""
 
 #: Content/Article/edit.html.twig:9
 msgid "Domain:"
-msgstr "Domain:"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1370
 msgid "Double border between elements prevention"
-msgstr "Double border between elements prevention"
+msgstr ""
 
 #: Content/Order/step3.html.twig:73
 msgid "Download"
-msgstr "Download"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:712
 msgid "Drag and drop on lines"
-msgstr "Drag and drop on lines"
+msgstr ""
 
 #: Admin/Form/fileuploadFields.html.twig:62
 msgid "Drag file here"
-msgstr "Drag file here"
+msgstr ""
 
 #: AdministratorController.php:66
 #: CustomerController.php:203
@@ -1479,368 +1479,368 @@ msgstr "Drag file here"
 #: Content/Registration/resetPassword.html.twig:18
 #: Mail/ContactForm/mail.html.twig:4
 msgid "E-mail"
-msgstr "E-mail"
+msgstr ""
 
 #: Content/Mail/setting.html.twig:15
 msgid "E-mail name"
-msgstr "E-mail name"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Newsletter/index.html.twig:3
 #: Content/Newsletter/index.html.twig:4
 msgid "E-mail newsletter"
-msgstr "E-mail newsletter"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Mail/setting.html.twig:4
 msgid "E-mail settings"
-msgstr "E-mail settings"
+msgstr ""
 
 #: MailController.php:186
 msgid "E-mail settings modified."
-msgstr "E-mail settings modified."
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:1
 msgid "E-mail settings:"
-msgstr "E-mail settings:"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "E-mail templates"
-msgstr "E-mail templates"
+msgstr ""
 
 #: Content/Mail/template.html.twig:3
 #: Content/Mail/template.html.twig:4
 msgid "E-mail templates settings"
-msgstr "E-mail templates settings"
+msgstr ""
 
 #: MailController.php:147
 msgid "E-mail templates settings modified"
-msgstr "E-mail templates settings modified"
+msgstr ""
 
 #: MailController.php:89
 #: MailController.php:115
 msgid "E-shop URL address"
-msgstr "E-shop URL address"
+msgstr ""
 
 #: ShopInfoController.php:62
 msgid "E-shop attributes settings modified"
-msgstr "E-shop attributes settings modified"
+msgstr ""
 
 #: Content/Domain/list.html.twig:4
 msgid "E-shop domains"
-msgstr "E-shop domains"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Domain/list.html.twig:3
 msgid "E-shop identification"
-msgstr "E-shop identification"
+msgstr ""
 
 #: Content/Product/detail.html.twig:79
 #: Content/Product/edit.html.twig:71
 #: Content/Product/detail.html.twig:134
 msgid "EAN"
-msgstr "EAN"
+msgstr ""
 
 #: Grid.php:267
 #: Content/Domain/listGrid.html.twig:14
 #: Admin/Grid/Grid.html.twig:172
 msgid "Edit"
-msgstr "Edit"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:18
 msgid "Edit data"
-msgstr "Edit data"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Administrator/edit.html.twig:3
 #: Content/Administrator/edit.html.twig:4
 msgid "Editing administrator"
-msgstr "Editing administrator"
+msgstr ""
 
 #: AdministratorController.php:137
 msgid "Editing administrator - %name%"
-msgstr "Editing administrator - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Advert/edit.html.twig:3
 #: Content/Advert/edit.html.twig:4
 msgid "Editing advertising"
-msgstr "Editing advertising"
+msgstr ""
 
 #: AdvertController.php:109
 msgid "Editing advertising - %name%"
-msgstr "Editing advertising - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/edit.html.twig:3
 #: Content/Article/edit.html.twig:4
 msgid "Editing article"
-msgstr "Editing article"
+msgstr ""
 
 #: ArticleController.php:127
 msgid "Editing article - %name%"
-msgstr "Editing article - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Editing bestseller"
-msgstr "Editing bestseller"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Brand/edit.html.twig:3
 #: Content/Brand/edit.html.twig:4
 msgid "Editing brand"
-msgstr "Editing brand"
+msgstr ""
 
 #: BrandController.php:101
 msgid "Editing brand - %name%"
-msgstr "Editing brand - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Category/edit.html.twig:3
 #: Content/Category/edit.html.twig:4
 msgid "Editing category"
-msgstr "Editing category"
+msgstr ""
 
 #: CategoryController.php:98
 msgid "Editing category - %name%"
-msgstr "Editing category - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Customer/edit.html.twig:3
 #: Content/Customer/edit.html.twig:5
 msgid "Editing customer"
-msgstr "Editing customer"
+msgstr ""
 
 #: CustomerController.php:163
 msgid "Editing customer - %name%"
-msgstr "Editing customer - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Editing domain"
-msgstr "Editing domain"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Editing order"
-msgstr "Editing order"
+msgstr ""
 
 #: OrderController.php:151
 msgid "Editing order - Nr. %number%"
-msgstr "Editing order - Nr. %number%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Editing order status"
-msgstr "Editing order status"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Editing page"
-msgstr "Editing page"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Payment/edit.html.twig:3
 #: Content/Payment/edit.html.twig:4
 msgid "Editing payment"
-msgstr "Editing payment"
+msgstr ""
 
 #: PaymentController.php:139
 msgid "Editing payment - %name%"
-msgstr "Editing payment - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/edit.html.twig:4
 #: Content/Product/edit.html.twig:8
 msgid "Editing product"
-msgstr "Editing product"
+msgstr ""
 
 #: ProductController.php:166
 msgid "Editing product - %name%"
-msgstr "Editing product - %name%"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Script/edit.html.twig:3
 #: Content/Script/edit.html.twig:4
 msgid "Editing script"
-msgstr "Editing script"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Transport/edit.html.twig:3
 #: Content/Transport/edit.html.twig:4
 msgid "Editing shipping"
-msgstr "Editing shipping"
+msgstr ""
 
 #: TransportController.php:140
 msgid "Editing shipping - %name%"
-msgstr "Editing shipping - %name%"
+msgstr ""
 
 #: Content/Slider/edit.html.twig:3
 #: Content/Slider/edit.html.twig:4
 msgid "Editing slider page"
-msgstr "Editing slider page"
+msgstr ""
 
 #: SliderController.php:161
 msgid "Editing slider page - %name%"
-msgstr "Editing slider page - %name%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1090
 msgid "Element alignment to side"
-msgstr "Element alignment to side"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1131
 msgid "Element which is being aligned is usually icon."
-msgstr "Element which is being aligned is usually icon."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1047
 msgid "Elements can be aligned under label"
-msgstr "Elements can be aligned under label"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1013
 msgid "Elements can be ordered behind each other"
-msgstr "Elements can be ordered behind each other"
+msgstr ""
 
 #: Content/Cart/index.html.twig:157
 msgid "Empty cart"
-msgstr "Empty cart"
+msgstr ""
 
 #: Content/Heureka/setting.html.twig:12
 msgid "Enter 32-digit code which will be sent to server %serverName%"
-msgstr "Enter 32-digit code which will be sent to server %serverName%"
+msgstr ""
 
 #: Inline/Newsletter/subscription.html.twig:11
 msgid "Enter e-mail"
-msgstr "Enter e-mail"
+msgstr ""
 
 #: OrderController.php:140
 msgid "Entered customer not found, please check entered data."
-msgstr "Entered customer not found, please check entered data."
+msgstr ""
 
 #: Content/Availability/listGrid.html.twig:19
 msgid "Entered in days. Zero represents products in stock, empty means unknown availability."
-msgstr "Entered in days. Zero represents products in stock, empty means unknown availability."
+msgstr ""
 
 #: Content/Superadmin/pricing.html.twig:12
 msgid "Entry price type"
-msgstr "Entry price type"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:208
 msgid "Error message"
-msgstr "Error message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:239
 msgid "Error message - block with icon, small"
-msgstr "Error message - block with icon, small"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:226
 msgid "Error message - block with the close button, for closing, the close button can be used only with block error messages"
-msgstr "Error message - block with the close button, for closing, the close button can be used only with block error messages"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Superadmin/errors.html.twig:3
 #: Content/Superadmin/errors.html.twig:4
 #: Content/Superadmin/errors.html.twig:14
 msgid "Error messages"
-msgstr "Error messages"
+msgstr ""
 
 #: Content/Error/error.html.twig:4
 msgid "Error occurred"
-msgstr "Error occurred"
+msgstr ""
 
 #: ContactFormController.php:53
 msgid "Error occurred when sending e-mail."
-msgstr "Error occurred when sending e-mail."
+msgstr ""
 
 #: fileUpload.js:122
 msgid "Error occurred while uploading file."
-msgstr "Error occurred while uploading file."
+msgstr ""
 
 #: fileUpload.js:135
 msgid "Error occurred while uploading file: %message%"
-msgstr "Error occurred while uploading file: %message%"
+msgstr ""
 
 #: grid.inlineEdit.js:91
 #: ajax.js:42
 msgid "Error occurred, try again please."
-msgstr "Error occurred, try again please."
+msgstr ""
 
 #: CurrencyGridFactory.php:57
 msgid "Exchange rate"
-msgstr "Exchange rate"
+msgstr ""
 
 #: ProductFormType.php:182
 #: Content/Product/detail.html.twig:104
 msgid "Exclude from sale"
-msgstr "Exclude from sale"
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:15
 msgid "Excluded from sale"
-msgstr "Excluded from sale"
+msgstr ""
 
 #: InputPriceTypeFormType.php:54
 msgid "Excluding VAT"
-msgstr "Excluding VAT"
+msgstr ""
 
 #: Content/Domain/edit.html.twig:11
 msgid "Existing icon"
-msgstr "Existing icon"
+msgstr ""
 
 #: Content/Newsletter/index.html.twig:8
 msgid "Export email list inCSV format"
-msgstr "Export email list inCSV format"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "External scripts"
-msgstr "External scripts"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:119
 msgid "FORM - form elements, form wraps, structures"
-msgstr "FORM - form elements, form wraps, structures"
+msgstr ""
 
 #: FeedController.php:104
 msgid "Feed"
-msgstr "Feed"
+msgstr ""
 
 #: FeedController.php:69
 msgid "Feed \"{{ feedName }}\" not found."
-msgstr "Feed \"{{ feedName }}\" not found."
+msgstr ""
 
 #: FeedController.php:61
 msgid "Feed \"{{ feedName }}\" successfully generated."
-msgstr "Feed \"{{ feedName }}\" successfully generated."
+msgstr ""
 
 #: fileUpload.js:132
 msgid "File is in unsupported format"
-msgstr "File is in unsupported format"
+msgstr ""
 
 #: fileUpload.js:130
 msgid "File is too big"
-msgstr "File is too big"
+msgstr ""
 
 #: DomainController.php:136
 msgid "File type not supported."
-msgstr "File type not supported."
+msgstr ""
 
 #: FileUploadType.php:138
 msgid "File upload failed"
-msgstr "File upload failed"
+msgstr ""
 
 #: DomainController.php:138
 msgid "File upload failed, try again please."
-msgstr "File upload failed, try again please."
+msgstr ""
 
 #: Content/Mail/template.html.twig:44
 msgid "File will be deleted after saving."
-msgstr "File will be deleted after saving."
+msgstr ""
 
 #: FlagGridFactory.php:56
 #: ParameterGridFactory.php:73
 msgid "Filter by"
-msgstr "Filter by"
+msgstr ""
 
 #: Content/ProductPicker/list.html.twig:50
 msgid "Finish the assigning"
-msgstr "Finish the assigning"
+msgstr ""
 
 #: Content/Order/step3.html.twig:90
 msgid "Finish the order"
-msgstr "Finish the order"
+msgstr ""
 
 #: MailController.php:112
 #: Content/Customer/detail.html.twig:29
@@ -1857,142 +1857,142 @@ msgstr "Finish the order"
 #: Mail/Order/billingAddress.html.twig:3
 #: Mail/Order/deliveryAddress.html.twig:3
 msgid "First name"
-msgstr "First name"
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:11
 msgid "Flag"
-msgstr "Flag"
+msgstr ""
 
 #: FlagController.php:56
 msgid "Flag <strong>{{ name }}</strong> deleted"
-msgstr "Flag <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/detail.html.twig:84
 #: Content/Product/filterFormMacro.html.twig:51
 msgid "Flags"
-msgstr "Flags"
+msgstr ""
 
 #: Content/Flag/list.html.twig:3
 #: Content/Flag/list.html.twig:4
 msgid "Flags overview"
-msgstr "Flags overview"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:86
 msgid "Folders structure"
-msgstr "Folders structure"
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:8
 msgid "Following expressions are allowed in whitelist: %whitelist%."
-msgstr "Following expressions are allowed in whitelist: %whitelist%."
+msgstr ""
 
 #: VatController.php:70
 msgid "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
-msgstr "For deleting rate \"%name%\" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?"
+msgstr ""
 
 #: UnitController.php:73
 msgid "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
-msgstr "For deleting unit \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?"
+msgstr ""
 
 #: PricingGroupController.php:113
 msgid "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
-msgstr "For removing pricing group \"%name%\" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:129
 msgid "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
-msgstr "For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name."
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:39
 #: Content/Login/windowForm.html.twig:39
 msgid "Forgot your password?"
-msgstr "Forgot your password?"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:26
 #: Content/Registration/resetPassword.html.twig:8
 #: Content/Registration/resetPassword.html.twig:12
 msgid "Forgotten password"
-msgstr "Forgotten password"
+msgstr ""
 
 #: Content/Mail/template.html.twig:129
 msgid "Forgotten password sending"
-msgstr "Forgotten password sending"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:31
 #: Content/Superadmin/cssDocumentation.html.twig:755
 msgid "Form structure"
-msgstr "Form structure"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:879
 msgid "Form-group"
-msgstr "Form-group"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:979
 msgid "Form-line"
-msgstr "Form-line"
+msgstr ""
 
 #: PriceExtension.php:145
 #: PriceExtension.php:159
 msgid "Free"
-msgstr "Free"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:4
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:8
 msgid "Free shipping and payment"
-msgstr "Free shipping and payment"
+msgstr ""
 
 #: TransportAndPaymentController.php:78
 msgid "Free shipping and payment settings saved"
-msgstr "Free shipping and payment settings saved"
+msgstr ""
 
 #: ImageController.php:149
 msgid "Front-end: Advertising above footer"
-msgstr "Front-end: Advertising above footer"
+msgstr ""
 
 #: ImageController.php:152
 msgid "Front-end: Advertising in category (above the category name)"
-msgstr "Front-end: Advertising in category (above the category name)"
+msgstr ""
 
 #: ImageController.php:155
 msgid "Front-end: Advertising in the left panel under the category tree"
-msgstr "Front-end: Advertising in the left panel under the category tree"
+msgstr ""
 
 #: ImageController.php:146
 msgid "Front-end: Advertising under heading"
-msgstr "Front-end: Advertising under heading"
+msgstr ""
 
 #: ImageController.php:160
 msgid "Front-end: Brand page"
-msgstr "Front-end: Brand page"
+msgstr ""
 
 #: ImageController.php:141
 msgid "Front-end: Category guidepost"
-msgstr "Front-end: Category guidepost"
+msgstr ""
 
 #: ImageController.php:123
 msgid "Front-end: Listing of products in section, listing of products on special offer"
-msgstr "Front-end: Listing of products in section, listing of products on special offer"
+msgstr ""
 
 #: ImageController.php:117
 msgid "Front-end: Main image in product detail"
-msgstr "Front-end: Main image in product detail"
+msgstr ""
 
 #: ImageController.php:131
 msgid "Front-end: Main page slider"
-msgstr "Front-end: Main page slider"
+msgstr ""
 
 #: ImageController.php:112
 #: ImageController.php:136
 msgid "Front-end: Ordering process"
-msgstr "Front-end: Ordering process"
+msgstr ""
 
 #: ImageController.php:126
 msgid "Front-end: Preview in autocomplete for search, preview in cart during ordering process"
-msgstr "Front-end: Preview in autocomplete for search, preview in cart during ordering process"
+msgstr ""
 
 #: ImageController.php:120
 msgid "Front-end: Thumbnail of images under the main picture in product detail"
-msgstr "Front-end: Thumbnail of images under the main picture in product detail"
+msgstr ""
 
 #: AdministratorController.php:65
 #: CustomerController.php:200
@@ -2000,219 +2000,219 @@ msgstr "Front-end: Thumbnail of images under the main picture in product detail"
 #: Content/ContactForm/contactForm.html.twig:6
 #: Mail/ContactForm/mail.html.twig:1
 msgid "Full name"
-msgstr "Full name"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:156
 msgid "General wrap-border"
-msgstr "General wrap-border"
+msgstr ""
 
 #: Content/Feed/listGrid.html.twig:21
 msgid "Generate"
-msgstr "Generate"
+msgstr ""
 
 #: FeedController.php:105
 msgid "Generated"
-msgstr "Generated"
+msgstr ""
 
 #: addProduct.js:37
 msgid "Go to cart"
-msgstr "Go to cart"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:302
 msgid "Go to page:"
-msgstr "Go to page:"
+msgstr ""
 
 #: Inline/Menu/menu.html.twig:7
 msgid "Go to:"
-msgstr "Go to:"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Script/googleAnalytics.html.twig:3
 #: Content/Script/googleAnalytics.html.twig:4
 msgid "Google analytics"
-msgstr "Google analytics"
+msgstr ""
 
 #: ScriptController.php:179
 msgid "Google script code set"
-msgstr "Google script code set"
+msgstr ""
 
 #: AdvertFormType.php:143
 msgid "HTML code"
-msgstr "HTML code"
+msgstr ""
 
 #: Content/Article/detail.html.twig:34
 #: Content/Product/detail.html.twig:296
 #: Content/Seo/seoSetting.html.twig:15
 #: Content/Superadmin/cssDocumentation.html.twig:146
 msgid "Headline"
-msgstr "Headline"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:888
 #: Content/Superadmin/cssDocumentation.html.twig:920
 #: Content/Superadmin/cssDocumentation.html.twig:950
 msgid "Headline of information block"
-msgstr "Headline of information block"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:903
 msgid "Headline of information block with button possibility"
-msgstr "Headline of information block with button possibility"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:894
 msgid "Headline of information block with possibility to expand, necessary to bind to existing JS"
-msgstr "Headline of information block with possibility to expand, necessary to bind to existing JS"
+msgstr ""
 
 #: Content/Image/overview.html.twig:28
 msgid "Height [px]"
-msgstr "Height [px]"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Heureka/setting.html.twig:4
 msgid "Heureka - Ověřeno zákazníky"
-msgstr "Heureka - Ověřeno zákazníky"
+msgstr ""
 
 #: Content/Heureka/setting.html.twig:13
 msgid "Heureka Widget code"
-msgstr "Heureka Widget code"
+msgstr ""
 
 #: Content/Product/detail.html.twig:362
 msgid "Heureka.cz"
-msgstr "Heureka.cz"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:24
 #: Content/Transport/detail.html.twig:24
 msgid "Hidden"
-msgstr "Hidden"
+msgstr ""
 
 #: Content/Mail/template.html.twig:20
 msgid "Hidden copy"
-msgstr "Hidden copy"
+msgstr ""
 
 #: ProductMassActionFormType.php:48
 #: Content/Article/detail.html.twig:23
 #: Content/Slider/detail.html.twig:26
 msgid "Hide"
-msgstr "Hide"
+msgstr ""
 
 #: Content/Advert/detail.html.twig:19
 msgid "Hide advertisement"
-msgstr "Hide advertisement"
+msgstr ""
 
 #: ProductFormType.php:181
 #: Content/Product/detail.html.twig:96
 msgid "Hide product"
-msgstr "Hide product"
+msgstr ""
 
 #: ProductMassActionFormType.php:42
 msgid "Hiding product"
-msgstr "Hiding product"
+msgstr ""
 
 #: Content/Order/step3.html.twig:77
 msgid "I agree with terms and conditons"
-msgstr "I agree with terms and conditons"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:54
 #: Content/Customer/edit.html.twig:51
 #: Content/Order/step3.html.twig:23
 msgid "I buy on company behalf"
-msgstr "I buy on company behalf"
+msgstr ""
 
 #: Front/Layout/layout.html.twig:54
 msgid "I understand"
-msgstr "I understand"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:83
 #: Content/Customer/edit.html.twig:78
 #: Content/Order/step3.html.twig:45
 msgid "I want to deliver products to different address than the billing one"
-msgstr "I want to deliver products to different address than the billing one"
+msgstr ""
 
 #: Content/Order/step3.html.twig:78
 msgid "I want to subscribe to the newsletter"
-msgstr "I want to subscribe to the newsletter"
+msgstr ""
 
 #: ProductExtension.php:60
 msgid "ID %productId%"
-msgstr "ID %productId%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:70
 msgid "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems."
-msgstr "ID is an element with the highest priority in the CSS and that's why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won't have these problems."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:104
 msgid "IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places"
-msgstr "IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places"
+msgstr ""
 
 #: Content/Administrator/edit.html.twig:19
 msgid "IP address"
-msgstr "IP address"
+msgstr ""
 
 #: DomainController.php:92
 msgid "Icon"
-msgstr "Icon"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:913
 msgid "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
-msgstr "If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class=\"in-article__visible\">form-group</strong> for headline, <strong class=\"in-article__visible\">form-line</strong> for form and <strong class=\"in-article__visible\">wrap-border</strong> for separating blocks of information."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1290
 msgid "If we need something about input size"
-msgstr "If we need something about input size"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1324
 msgid "If we want information about number of characters"
-msgstr "If we want information about number of characters"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:715
 msgid "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS."
-msgstr "If we want to move the lines, we will insert the icon as shown below. Don't forget to connect it to JS."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:534
 msgid "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
-msgstr "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
+msgstr ""
 
 #: Content/Superadmin/modules.html.twig:8
 msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
-msgstr "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:74
 msgid "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
-msgstr "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
+msgstr ""
 
 #: Content/Category/list.html.twig:80
 msgid "In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains"
-msgstr "In a particular domain tab it is not possible to adjust the order and plunge of categories. Please go to the category detail or to overview of categories of all domains"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:320
 msgid "In case we need the tag button to look like link. There is also modification for button with icon on left."
-msgstr "In case we need the tag button to look like link. There is also modification for button with icon on left."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:307
 msgid "In case we need the tag button to look like simple text."
-msgstr "In case we need the tag button to look like simple text."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:182
 msgid "In-message"
-msgstr "In-message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:215
 msgid "In-message types"
-msgstr "In-message types"
+msgstr ""
 
 #: Content/Superadmin/modules.html.twig:17
 msgid "Inactive"
-msgstr "Inactive"
+msgstr ""
 
 #: InputPriceTypeFormType.php:55
 msgid "Including VAT"
-msgstr "Including VAT"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:199
 msgid "Information message"
-msgstr "Information message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:223
 msgid "Information message - block"
-msgstr "Information message - block"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:560
 #: Content/Superadmin/cssDocumentation.html.twig:567
@@ -2222,24 +2222,24 @@ msgstr "Information message - block"
 #: Content/Superadmin/cssDocumentation.html.twig:768
 #: Content/Superadmin/cssDocumentation.html.twig:1299
 msgid "Input"
-msgstr "Input"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:590
 msgid "Input after separator"
-msgstr "Input after separator"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1068
 msgid "Input can be instead of label"
-msgstr "Input can be instead of label"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1337
 #: Content/Superadmin/cssDocumentation.html.twig:1352
 msgid "Input has to have class for left alignment"
-msgstr "Input has to have class for left alignment"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:588
 msgid "Input is here"
-msgstr "Input is here"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:928
 #: Content/Superadmin/cssDocumentation.html.twig:938
@@ -2249,190 +2249,190 @@ msgstr "Input is here"
 #: Content/Superadmin/cssDocumentation.html.twig:1019
 #: Content/Superadmin/cssDocumentation.html.twig:1040
 msgid "Input label"
-msgstr "Input label"
+msgstr ""
 
 #: InputPriceLabelExtension.php:42
 msgid "Input price with VAT"
-msgstr "Input price with VAT"
+msgstr ""
 
 #: InputPriceLabelExtension.php:39
 msgid "Input price without VAT"
-msgstr "Input price without VAT"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1235
 #: Content/Superadmin/cssDocumentation.html.twig:1248
 msgid "Input with button"
-msgstr "Input with button"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1333
 msgid "Input with deduction"
-msgstr "Input with deduction"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:804
 msgid "Input with domain"
-msgstr "Input with domain"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:798
 msgid "Input with flag"
-msgstr "Input with flag"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:812
 msgid "Input with icon"
-msgstr "Input with icon"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1178
 msgid "Input with icon by label"
-msgstr "Input with icon by label"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1164
 msgid "Input with icon on the left side"
-msgstr "Input with icon on the left side"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1150
 msgid "Input with icon on the right side"
-msgstr "Input with icon on the right side"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1137
 msgid "Input with icon simply"
-msgstr "Input with icon simply"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1348
 msgid "Input with major deduction"
-msgstr "Input with major deduction"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1197
 #: Content/Superadmin/cssDocumentation.html.twig:1213
 msgid "Input with postscript what has fixed width"
-msgstr "Input with postscript what has fixed width"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1111
 msgid "Input with prices on the right side next to each other"
-msgstr "Input with prices on the right side next to each other"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1098
 msgid "Input with text on the right"
-msgstr "Input with text on the right"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:44
 #: Content/Transport/detail.html.twig:42
 msgid "Instructions"
-msgstr "Instructions"
+msgstr ""
 
 #: LoginController.php:33
 #: login.js:22
 msgid "Invalid login"
-msgstr "Invalid login"
+msgstr ""
 
 #: VatController.php:164
 msgid "Invalid rounding settings"
-msgstr "Invalid rounding settings"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:756
 msgid "It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don't put it there and remove it only when you understand what you are doing."
-msgstr "It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don't put it there and remove it only when you understand what you are doing."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:64
 msgid "It is important that you don't use just parts of the components (elements), you have to use the parent component."
-msgstr "It is important that you don't use just parts of the components (elements), you have to use the parent component."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:387
 msgid "It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids."
-msgstr "It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:427
 #: Content/Superadmin/cssDocumentation.html.twig:462
 msgid "It is possible to combine it with different contents inside, but the primary use is for tables."
-msgstr "It is possible to combine it with different contents inside, but the primary use is for tables."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1034
 msgid "It is possible to put elements to multiple lines with one label"
-msgstr "It is possible to put elements to multiple lines with one label"
+msgstr ""
 
 #: Content/CustomerCommunication/orderSubmitted.html.twig:55
 msgid "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
-msgstr "It is possible to use this when creating a link: mark the text you want to create the link from with mouse and push the Link button (top right, interconnected staples icon). In the popup menu select the protocol <different> and insert the text \"%orderDetailUrlConstant%\" in the URL field (Including the braces)"
+msgstr ""
 
 #: Content/Product/detail.html.twig:393
 msgid "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
-msgstr "It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed."
+msgstr ""
 
 #: Content/Product/detail.html.twig:406
 msgid "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
-msgstr "It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed."
+msgstr ""
 
 #: Content/Order/preview.html.twig:7
 msgid "Item name"
-msgstr "Item name"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:139
 msgid "Items"
-msgstr "Items"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:291
 msgid "Items per page:"
-msgstr "Items per page:"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:110
 msgid "LIST - DL, UL, OL"
-msgstr "LIST - DL, UL, OL"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:553
 msgid "Label is here"
-msgstr "Label is here"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:543
 msgid "Label or input is here"
-msgstr "Label or input is here"
+msgstr ""
 
 #: DomainController.php:91
 msgid "Language"
-msgstr "Language"
+msgstr ""
 
 #: Content/Administrator/edit.html.twig:16
 msgid "Last action time"
-msgstr "Last action time"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:30
 msgid "Last login"
-msgstr "Last login"
+msgstr ""
 
 #: CustomerController.php:208
 msgid "Last order"
-msgstr "Last order"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:261
 msgid "Light button"
-msgstr "Light button"
+msgstr ""
 
 #: SliderController.php:77
 #: Content/Advert/detail.html.twig:28
 #: Content/Slider/detail.html.twig:25
 msgid "Link"
-msgstr "Link"
+msgstr ""
 
 #: CustomerPasswordController.php:53
 msgid "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
-msgstr "Link to password reset sent to e-mail <strong>{{ email }}</strong>."
+msgstr ""
 
 #: MailController.php:116
 msgid "Link to the log in page"
-msgstr "Link to the log in page"
+msgstr ""
 
 #: Content/Brand/list.html.twig:10
 msgid "Link to the overview of brands"
-msgstr "Link to the overview of brands"
+msgstr ""
 
 #: MailController.php:98
 msgid "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
-msgstr "List of products in order (name, quantity, price per unit including VAT, total price per item including VAT)"
+msgstr ""
 
 #: Content/Product/list.html.twig:19
 msgid "List of subcategories"
-msgstr "List of subcategories"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Lists and nomenclatures"
-msgstr "Lists and nomenclatures"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:144
 #: Content/Superadmin/cssDocumentation.html.twig:159
@@ -2471,41 +2471,41 @@ msgstr "Lists and nomenclatures"
 #: Content/Superadmin/cssDocumentation.html.twig:1375
 #: Content/Superadmin/cssDocumentation.html.twig:1400
 msgid "Live view of the component in white window"
-msgstr "Live view of the component in white window"
+msgstr ""
 
 #: Content/Domain/edit.html.twig:24
 msgid "Loading"
-msgstr "Loading"
+msgstr ""
 
 #: ScriptController.php:127
 #: Content/Article/new.html.twig:7
 msgid "Location"
-msgstr "Location"
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:33
 #: Content/Login/windowForm.html.twig:35
 #: Inline/Newsletter/subscription.html.twig:14
 #: Front/Layout/header.html.twig:98
 msgid "Log in"
-msgstr "Log in"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:9
 msgid "Log in as user"
-msgstr "Log in as user"
+msgstr ""
 
 #: LoginController.php:89
 msgid "Log in failed."
-msgstr "Log in failed."
+msgstr ""
 
 #: Inline/Menu/menu.html.twig:28
 #: Front/Layout/header.html.twig:85
 #: Front/Layout/layout.html.twig:11
 msgid "Log out"
-msgstr "Log out"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:982
 msgid "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
-msgstr "Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:35
 #: Content/Login/loginFailed.html.twig:4
@@ -2514,153 +2514,153 @@ msgstr "Logic of creating the structure is based on the graphics and the fact th
 #: Content/Login/loginForm.html.twig:16
 #: Content/Login/windowForm.html.twig:5
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: Content/Login/loginFailed.html.twig:8
 msgid "Login failed."
-msgstr "Login failed."
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:16
 msgid "Login name"
-msgstr "Login name"
+msgstr ""
 
 #: Content/Administrator/edit.html.twig:13
 msgid "Login time"
-msgstr "Login time"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:292
 msgid "Main URL can't be deleted"
-msgstr "Main URL can't be deleted"
+msgstr ""
 
 #: Content/Mail/setting.html.twig:14
 msgid "Main administrator e-mail"
-msgstr "Main administrator e-mail"
+msgstr ""
 
 #: Content/Product/edit.html.twig:125
 msgid "Main category on domains:"
-msgstr "Main category on domains:"
+msgstr ""
 
 #: Content/Product/edit.html.twig:140
 msgid "Main category:"
-msgstr "Main category:"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/TopProduct/list.html.twig:3
 #: Content/TopProduct/list.html.twig:4
 msgid "Main page products"
-msgstr "Main page products"
+msgstr ""
 
 #: Content/Product/edit.html.twig:344
 msgid "Main picture"
-msgstr "Main picture"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:993
 msgid "Main structure logic"
-msgstr "Main structure logic"
+msgstr ""
 
 #: Content/Product/createVariant.html.twig:8
 #: Content/Product/listGrid.html.twig:18
 #: Content/ProductPicker/listGrid.html.twig:9
 msgid "Main variant"
-msgstr "Main variant"
+msgstr ""
 
 #: Content/Product/list.html.twig:58
 #: Content/Product/list.html.twig:77
 msgid "Make modification"
-msgstr "Make modification"
+msgstr ""
 
 #: ProductFormType.php:252
 msgid "Manually"
-msgstr "Manually"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Marketing"
-msgstr "Marketing"
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:6
 msgid "Master e-mail %masterMail% set"
-msgstr "Master e-mail %masterMail% set"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:531
 msgid "Matching first and second cell of a row with the rest of form"
-msgstr "Matching first and second cell of a row with the rest of form"
+msgstr ""
 
 #: Content/Product/detail.html.twig:365
 #: Content/Product/detail.html.twig:389
 msgid "Maximum price per click"
-msgstr "Maximum price per click"
+msgstr ""
 
 #: Content/Product/detail.html.twig:402
 msgid "Maximum price per click in offers"
-msgstr "Maximum price per click in offers"
+msgstr ""
 
 #: Front/Layout/header.html.twig:29
 msgid "Menu"
-msgstr "Menu"
+msgstr ""
 
 #: Content/ContactForm/contactForm.html.twig:8
 #: Mail/ContactForm/mail.html.twig:7
 msgid "Message"
-msgstr "Message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:22
 #: Content/Superadmin/cssDocumentation.html.twig:176
 msgid "Messages"
-msgstr "Messages"
+msgstr ""
 
 #: Content/Article/detail.html.twig:53
 #: Content/Product/detail.html.twig:329
 #: Content/Seo/seoSetting.html.twig:18
 msgid "Meta description"
-msgstr "Meta description"
+msgstr ""
 
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:21
 msgid "Minimum product price"
-msgstr "Minimum product price"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:165
 msgid "Modification wrap-border--small"
-msgstr "Modification wrap-border--small"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:80
 msgid "Modifications"
-msgstr "Modifications"
+msgstr ""
 
 #: Content/Superadmin/modules.html.twig:15
 msgid "Module name"
-msgstr "Module name"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Modules"
-msgstr "Modules"
+msgstr ""
 
 #: SuperadminController.php:168
 msgid "Modules configuration modified"
-msgstr "Modules configuration modified"
+msgstr ""
 
 #: Content/Product/bestsellingProductsList.html.twig:32
 msgid "More bestsellers"
-msgstr "More bestsellers"
+msgstr ""
 
 #: Front/Layout/layout.html.twig:49
 msgid "More information"
-msgstr "More information"
+msgstr ""
 
 #: Content/Product/edit.html.twig:349
 #: Admin/Form/theme.html.twig:716
 msgid "Move"
-msgstr "Move"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:789
 msgid "Multidomain, multilingual, inputs with ikon - basic"
-msgstr "Multidomain, multilingual, inputs with ikon - basic"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:7
 #: Content/Customer/orders.html.twig:7
 #: Content/Customer/orders.html.twig:10
 #: Front/Layout/header.html.twig:78
 msgid "My orders"
-msgstr "My orders"
+msgstr ""
 
 #: AdvertController.php:145
 #: ArticleController.php:265
@@ -2695,98 +2695,98 @@ msgstr "My orders"
 #: Content/Product/detail.html.twig:155
 #: Mail/Order/products.html.twig:3
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: ParameterGridFactory.php:52
 #: ParameterGridFactory.php:60
 msgid "Name %locale%"
-msgstr "Name %locale%"
+msgstr ""
 
 #: Content/Advert/detail.html.twig:16
 #: Content/Slider/detail.html.twig:24
 msgid "Name serves only for internal use within the administration"
-msgstr "Name serves only for internal use within the administration"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:264
 msgid "Neutral button"
-msgstr "Neutral button"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Payment/new.html.twig:3
 #: Content/Payment/new.html.twig:4
 msgid "New Payment"
-msgstr "New Payment"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Administrator/new.html.twig:3
 #: Content/Administrator/new.html.twig:4
 msgid "New administrator"
-msgstr "New administrator"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Advert/new.html.twig:3
 #: Content/Advert/new.html.twig:4
 msgid "New advertising"
-msgstr "New advertising"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/new.html.twig:3
 #: Content/Article/new.html.twig:4
 msgid "New article"
-msgstr "New article"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Brand/new.html.twig:3
 #: Content/Brand/new.html.twig:4
 msgid "New brand"
-msgstr "New brand"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Category/new.html.twig:3
 #: Content/Category/new.html.twig:4
 msgid "New category"
-msgstr "New category"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Customer/new.html.twig:3
 #: Content/Customer/new.html.twig:4
 msgid "New customer"
-msgstr "New customer"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "New orders status"
-msgstr "New orders status"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "New page"
-msgstr "New page"
+msgstr ""
 
 #: MailController.php:126
 msgid "New password settings URL address"
-msgstr "New password settings URL address"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/new.html.twig:3
 #: Content/Product/new.html.twig:6
 msgid "New product"
-msgstr "New product"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Script/new.html.twig:3
 #: Content/Script/new.html.twig:4
 msgid "New script"
-msgstr "New script"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Transport/new.html.twig:3
 #: Content/Transport/new.html.twig:4
 msgid "New shipping"
-msgstr "New shipping"
+msgstr ""
 
 #: Content/Slider/new.html.twig:3
 #: Content/Slider/new.html.twig:4
 msgid "New slider page"
-msgstr "New slider page"
+msgstr ""
 
 #: YesNoType.php:43
 #: Content/Advert/listGrid.html.twig:18
@@ -2797,225 +2797,225 @@ msgstr "New slider page"
 #: Admin/Grid/Grid.html.twig:336
 #: Admin/Grid/Grid.html.twig:343
 msgid "No"
-msgstr "No"
+msgstr ""
 
 #: Content/Superadmin/listGrid.html.twig:4
 msgid "No URLs so far."
-msgstr "No URLs so far."
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:74
 msgid "No VAT rate found. You have to create some first."
-msgstr "No VAT rate found. You have to create some first."
+msgstr ""
 
 #: Content/Advert/listGrid.html.twig:8
 msgid "No advertising found. You have to create some first."
-msgstr "No advertising found. You have to create some first."
+msgstr ""
 
 #: Content/Article/list.html.twig:34
 msgid "No articles found on this domain. You have to create some first."
-msgstr "No articles found on this domain. You have to create some first."
+msgstr ""
 
 #: Content/Availability/listGrid.html.twig:4
 msgid "No availabilities found. You have to create some first."
-msgstr "No availabilities found. You have to create some first."
+msgstr ""
 
 #: Content/Brand/listGrid.html.twig:8
 msgid "No brands found. You have to create some first."
-msgstr "No brands found. You have to create some first."
+msgstr ""
 
 #: Content/BestsellingProduct/listGrid.html.twig:11
 msgid "No categories found. You have to create some first."
-msgstr "No categories found. You have to create some first."
+msgstr ""
 
 #: Content/Country/listGrid.html.twig:4
 msgid "No countries found. You have to create some first."
-msgstr "No countries found. You have to create some first."
+msgstr ""
 
 #: Content/Currency/listGrid.html.twig:53
 msgid "No currencies found. You have to create some first."
-msgstr "No currencies found. You have to create some first."
+msgstr ""
 
 #: Content/Customer/listGrid.html.twig:20
 msgid "No customers found."
-msgstr "No customers found."
+msgstr ""
 
 #: Content/PromoCode/listGrid.html.twig:4
 msgid "No discount coupons found. You have to create some first."
-msgstr "No discount coupons found. You have to create some first."
+msgstr ""
 
 #: Content/Domain/listGrid.html.twig:4
 msgid "No domains so far."
-msgstr "No domains so far."
+msgstr ""
 
 #: Content/Flag/listGrid.html.twig:4
 msgid "No flags found. You have to create some first."
-msgstr "No flags found. You have to create some first."
+msgstr ""
 
 #: Content/Order/listGrid.html.twig:29
 msgid "No order found."
-msgstr "No order found."
+msgstr ""
 
 #: Content/Customer/orders.html.twig:12
 msgid "No order so far."
-msgstr "No order so far."
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:28
 msgid "No orders status found."
-msgstr "No orders status found."
+msgstr ""
 
 #: Content/Slider/listGrid.html.twig:4
 msgid "No page found."
-msgstr "No page found."
+msgstr ""
 
 #: Content/Parameter/listGrid.html.twig:4
 msgid "No parametrs found. You have to create some first."
-msgstr "No parametrs found. You have to create some first."
+msgstr ""
 
 #: Content/Payment/listGrid.html.twig:12
 msgid "No payments created so far."
-msgstr "No payments created so far."
+msgstr ""
 
 #: Pricing/Groups/listGrid.html.twig:8
 msgid "No pricing groups found. You have to create some first."
-msgstr "No pricing groups found. You have to create some first."
+msgstr ""
 
 #: Content/Product/listGrid.html.twig:4
 #: Content/ProductPicker/listGrid.html.twig:4
 msgid "No product found."
-msgstr "No product found."
+msgstr ""
 
 #: Content/Product/productsWithControls.html.twig:31
 msgid "No products found for this brand"
-msgstr "No products found for this brand"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:51
 msgid "No records found."
-msgstr "No records found."
+msgstr ""
 
 #: Content/Product/productsWithControls.html.twig:25
 msgid "No results matching filter"
-msgstr "No results matching filter"
+msgstr ""
 
 #: Content/Script/listGrid.html.twig:4
 msgid "No scripts so far."
-msgstr "No scripts so far."
+msgstr ""
 
 #: Content/Transport/listGrid.html.twig:12
 msgid "No shipping created so far."
-msgstr "No shipping created so far."
+msgstr ""
 
 #: Content/Translation/listGrid.html.twig:8
 msgid "No translation created so far."
-msgstr "No translation created so far."
+msgstr ""
 
 #: Content/Unit/listGrid.html.twig:4
 msgid "No units found. You have to create some first."
-msgstr "No units found. You have to create some first."
+msgstr ""
 
 #: productsPicker.window.js:77
 msgid "Not possible to assign product to itself"
-msgstr "Not possible to assign product to itself"
+msgstr ""
 
 #: ProductController.php:334
 msgid "Not possible to create variations of products that are already variant or main variant."
-msgstr "Not possible to create variations of products that are already variant or main variant."
+msgstr ""
 
 #: ImageController.php:169
 msgid "Not specified for entity %entityName% and size %sizeName%"
-msgstr "Not specified for entity %entityName% and size %sizeName%"
+msgstr ""
 
 #: ImageController.php:211
 msgid "Not specified for entity %entityName%, type %typeName% and size %sizeName%"
-msgstr "Not specified for entity %entityName%, type %typeName% and size %sizeName%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:68
 msgid "Not using ID and !important for CSS"
-msgstr "Not using ID and !important for CSS"
+msgstr ""
 
 #: MailController.php:97
 #: Content/Order/edit.html.twig:146
 #: Content/Order/step3.html.twig:59
 msgid "Note"
-msgstr "Note"
+msgstr ""
 
 #: Content/Order/step2.html.twig:52
 #: Content/Order/step2.html.twig:97
 msgid "Nothing to choose from"
-msgstr "Nothing to choose from"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:658
 #: Content/Product/filterFormTheme.html.twig:32
 #: Front/Form/theme.html.twig:203
 msgid "Nothing to choose from."
-msgstr "Nothing to choose from."
+msgstr ""
 
 #: AvailabilityGridFactory.php:55
 msgid "Number of days to despatch"
-msgstr "Number of days to despatch"
+msgstr ""
 
 #: Content/Customer/orders.html.twig:21
 msgid "Number of items"
-msgstr "Number of items"
+msgstr ""
 
 #: CustomerController.php:205
 msgid "Number of orders"
-msgstr "Number of orders"
+msgstr ""
 
 #: ModuleList.php:19
 msgid "Number of products in filter"
-msgstr "Number of products in filter"
+msgstr ""
 
 #: Content/Image/overview.html.twig:29
 msgid "Occurence"
-msgstr "Occurence"
+msgstr ""
 
 #: Content/Product/detail.html.twig:372
 msgid "Offer in feed"
-msgstr "Offer in feed"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:881
 msgid "Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes"
-msgstr "Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes"
+msgstr ""
 
 #: Content/Default/index.html.twig:16
 #: Front/Layout/header.html.twig:5
 msgid "Online shop"
-msgstr "Online shop"
+msgstr ""
 
 #: ProductMassActionFormType.php:29
 msgid "Only checked products"
-msgstr "Only checked products"
+msgstr ""
 
 #: Content/Mail/template.html.twig:102
 #: Content/Mail/template.html.twig:113
 msgid "Only variables for order number and date and time of order creation can be used in the object."
-msgstr "Only variables for order number and date and time of order creation can be used in the object."
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:80
 msgid "Oops! Error occurred"
-msgstr "Oops! Error occurred"
+msgstr ""
 
 #: Content/Error/error.html.twig:33
 msgid "Oops! Error occurred."
-msgstr "Oops! Error occurred."
+msgstr ""
 
 #: Admin/Form/theme.html.twig:270
 msgid "Open in a new tab"
-msgstr "Open in a new tab"
+msgstr ""
 
 #: addProduct.js:58
 msgid "Operation failed"
-msgstr "Operation failed"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/ShopInfo/shopInfo.html.twig:3
 #: Content/ShopInfo/shopInfo.html.twig:4
 msgid "Operator information"
-msgstr "Operator information"
+msgstr ""
 
 #: Content/Order/step3.html.twig:4
 msgid "Order - personal data"
-msgstr "Order - personal data"
+msgstr ""
 
 #: OrderController.php:233
 #: Content/Order/edit.html.twig:5
@@ -3023,23 +3023,23 @@ msgstr "Order - personal data"
 #: Content/Order/edit.html.twig:16
 #: Content/Customer/orderDetail.html.twig:10
 msgid "Order Nr."
-msgstr "Order Nr."
+msgstr ""
 
 #: Content/Order/preview.html.twig:2
 msgid "Order Nr. %orderNumber%"
-msgstr "Order Nr. %orderNumber%"
+msgstr ""
 
 #: OrderController.php:131
 msgid "Order Nr. <strong><a href=\"{{ url }}\">{{ number }}</a></strong> modified"
-msgstr "Order Nr. <strong><a href=\"{{ url }}\">{{ number }}</a></strong> modified"
+msgstr ""
 
 #: OrderController.php:282
 msgid "Order Nr. <strong>{{ number }}</strong> deleted"
-msgstr "Order Nr. <strong>{{ number }}</strong> deleted"
+msgstr ""
 
 #: Content/CustomerCommunication/orderSubmitted.html.twig:53
 msgid "Order URL address"
-msgstr "Order URL address"
+msgstr ""
 
 #: Content/Order/index.html.twig:19
 #: Content/Order/step.html.twig:3
@@ -3053,42 +3053,42 @@ msgstr "Order"
 
 #: Content/Order/sent.html.twig:8
 msgid "Order completed"
-msgstr "Order completed"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/CustomerCommunication/orderSubmitted.html.twig:3
 #: Content/CustomerCommunication/orderSubmitted.html.twig:4
 #: Content/Script/listGrid.html.twig:9
 msgid "Order confirmation page"
-msgstr "Order confirmation page"
+msgstr ""
 
 #: CustomerCommunicationController.php:47
 msgid "Order confirmation page content modified"
-msgstr "Order confirmation page content modified"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:31
 msgid "Order detail"
-msgstr "Order detail"
+msgstr ""
 
 #: MailController.php:101
 msgid "Order detail URL address"
-msgstr "Order detail URL address"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:31
 msgid "Order in CZK round to whole crowns"
-msgstr "Order in CZK round to whole crowns"
+msgstr ""
 
 #: Content/Order/edit.html.twig:154
 msgid "Order items"
-msgstr "Order items"
+msgstr ""
 
 #: orderItems.js:116
 msgid "Order must contain at least one item"
-msgstr "Order must contain at least one item"
+msgstr ""
 
 #: CustomerController.php:144
 msgid "Order not found"
-msgstr "Order not found"
+msgstr ""
 
 #: MailController.php:87
 #: ScriptController.php:192
@@ -3098,91 +3098,91 @@ msgstr "Order not found"
 #: Content/Order/edit.html.twig:40
 #: Content/Customer/orders.html.twig:18
 msgid "Order number"
-msgstr "Order number"
+msgstr ""
 
 #: grid.dragAndDrop.js:66
 #: grid.multipleDragAndDrop.js:52
 msgid "Order saved"
-msgstr "Order saved"
+msgstr ""
 
 #: categoryTree.sorting.js:54
 msgid "Order saved."
-msgstr "Order saved."
+msgstr ""
 
 #: grid.dragAndDrop.js:69
 #: grid.multipleDragAndDrop.js:55
 msgid "Order saving failed"
-msgstr "Order saving failed"
+msgstr ""
 
 #: Content/Order/sent.html.twig:19
 msgid "Order sent"
-msgstr "Order sent"
+msgstr ""
 
 #: Content/OrderStatus/list.html.twig:3
 #: Content/OrderStatus/list.html.twig:4
 msgid "Order statuses overview"
-msgstr "Order statuses overview"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:22
 #: Resources/config/admin_menu.yml:
 msgid "Orders"
-msgstr "Orders"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Order/list.html.twig:3
 #: Content/Order/list.html.twig:4
 msgid "Orders overview"
-msgstr "Orders overview"
+msgstr ""
 
 #: CustomerController.php:206
 msgid "Orders value"
-msgstr "Orders value"
+msgstr ""
 
 #: Inline/Cart/afterAddWindow.html.twig:8
 msgid "Our customers who bought this bought also"
-msgstr "Our customers who bought this bought also"
+msgstr ""
 
 #: SliderController.php:182
 msgid "Page <strong>{{ name }}</strong> deleted"
-msgstr "Page <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:82
 msgid "Page not found"
-msgstr "Page not found"
+msgstr ""
 
 #: Content/Error/error.html.twig:14
 #: Content/Error/error.html.twig:29
 msgid "Page not found!"
-msgstr "Page not found!"
+msgstr ""
 
 #: Content/Error/error.html.twig:17
 msgid "Page you are looking for either no longer exists or you entered wrong address."
-msgstr "Page you are looking for either no longer exists or you entered wrong address."
+msgstr ""
 
 #: Content/Product/detail.html.twig:236
 msgid "Parameter"
-msgstr "Parameter"
+msgstr ""
 
 #: ParameterController.php:54
 msgid "Parameter <strong>{{ name }}</strong> deleted"
-msgstr "Parameter <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/detail.html.twig:229
 #: Content/Product/filterFormMacro.html.twig:118
 msgid "Parameters"
-msgstr "Parameters"
+msgstr ""
 
 #: Content/Parameter/list.html.twig:3
 #: Content/Parameter/list.html.twig:4
 msgid "Parameters overview"
-msgstr "Parameters overview"
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:13
 #: Content/Product/detail.html.twig:75
 #: Content/Product/edit.html.twig:63
 msgid "PartNo (serial number)"
-msgstr "PartNo (serial number)"
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:19
 #: Content/Customer/detail.html.twig:41
@@ -3193,7 +3193,7 @@ msgstr "PartNo (serial number)"
 #: Content/Registration/register.html.twig:18
 #: Content/Registration/setNewPassword.html.twig:17
 msgid "Password"
-msgstr "Password"
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:22
 #: Content/Customer/detail.html.twig:42
@@ -3201,20 +3201,20 @@ msgstr "Password"
 #: Content/Registration/register.html.twig:24
 #: Content/Registration/setNewPassword.html.twig:18
 msgid "Password again"
-msgstr "Password again"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:37
 #: Content/Registration/register.html.twig:21
 msgid "Password must be at least six characters and can't be the same as entered e-mail or its part before at sign."
-msgstr "Password must be at least six characters and can't be the same as entered e-mail or its part before at sign."
+msgstr ""
 
 #: Content/Administrator/detail.html.twig:21
 msgid "Password must be at least six characters and can't be the same as login name."
-msgstr "Password must be at least six characters and can't be the same as login name."
+msgstr ""
 
 #: CustomerPasswordController.php:111
 msgid "Password successfully changed"
-msgstr "Password successfully changed"
+msgstr ""
 
 #: ImageController.php:67
 #: Content/Order/preview.html.twig:19
@@ -3222,36 +3222,36 @@ msgstr "Password successfully changed"
 #: Content/Payment/detail.html.twig:8
 #: Content/Customer/orders.html.twig:23
 msgid "Payment"
-msgstr "Payment"
+msgstr ""
 
 #: PaymentController.php:88
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: PaymentController.php:126
 msgid "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Payment <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: PaymentController.php:160
 msgid "Payment <strong>{{ name }}</strong> deleted"
-msgstr "Payment <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: MailController.php:103
 #: Content/CustomerCommunication/orderSubmitted.html.twig:46
 msgid "Payment instructions"
-msgstr "Payment instructions"
+msgstr ""
 
 #: Content/Order/preview.html.twig:43
 msgid "Payment method"
-msgstr "Payment method"
+msgstr ""
 
 #: Content/Order/step2.html.twig:60
 msgid "Payment selection"
-msgstr "Payment selection"
+msgstr ""
 
 #: VatGridFactory.php:68
 msgid "Percent"
-msgstr "Percent"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:26
 #: Content/Order/edit.html.twig:81
@@ -3261,11 +3261,11 @@ msgstr "Percent"
 #: Content/Order/step3.html.twig:10
 #: Front/Layout/header.html.twig:75
 msgid "Personal data"
-msgstr "Personal data"
+msgstr ""
 
 #: Content/ShopInfo/shopInfo.html.twig:17
 msgid "Phone availability"
-msgstr "Phone availability"
+msgstr ""
 
 #: Content/Advert/detail.html.twig:26
 #: Content/Brand/detail.html.twig:19
@@ -3280,33 +3280,33 @@ msgstr "Phone availability"
 #: Content/Transport/edit.html.twig:42
 #: Content/Cart/index.html.twig:26
 msgid "Picture"
-msgstr "Picture"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Image/overview.html.twig:3
 #: Content/Image/overview.html.twig:4
 msgid "Picture size"
-msgstr "Picture size"
+msgstr ""
 
 #: Content/Product/edit.html.twig:355
 msgid "Picture will be deleted after saving."
-msgstr "Picture will be deleted after saving."
+msgstr ""
 
 #: AdvertFormType.php:144
 msgid "Picture with link"
-msgstr "Picture with link"
+msgstr ""
 
 #: Content/Product/detail.html.twig:416
 msgid "Pictures"
-msgstr "Pictures"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1312
 msgid "Place for input"
-msgstr "Place for input"
+msgstr ""
 
 #: grid.inlineEdit.js:85
 msgid "Please check following information:"
-msgstr "Please check following information:"
+msgstr ""
 
 #: AdministratorController.php:133
 #: AdministratorController.php:202
@@ -3340,49 +3340,49 @@ msgstr "Please check following information:"
 #: OrderController.php:234
 #: RegistrationController.php:74
 msgid "Please check the correctness of all data filled."
-msgstr "Please check the correctness of all data filled."
+msgstr ""
 
 #: customizeBundle.js:375
 msgid "Please check the entered values.<br><br>"
-msgstr "Please check the entered values.<br><br>"
+msgstr ""
 
 #: promoCode.js:36
 msgid "Please enter discount code."
-msgstr "Please enter discount code."
+msgstr ""
 
 #: CartController.php:199
 #: CartController.php:257
 msgid "Please enter valid quantity you want to add to cart."
-msgstr "Please enter valid quantity you want to add to cart."
+msgstr ""
 
 #: Content/Error/error.html.twig:40
 msgid "Please excuse this error, we are working on fixing it. If needed, contact us on %mail% or by phone %phone%."
-msgstr "Please excuse this error, we are working on fixing it. If needed, contact us on %mail% or by phone %phone%."
+msgstr ""
 
 #: Content/Error/error.html.twig:20
 msgid "Please follow the instructions"
-msgstr "Please follow the instructions"
+msgstr ""
 
 #: CartController.php:126
 msgid "Please make sure that you entered right quantity of all items in cart."
-msgstr "Please make sure that you entered right quantity of all items in cart."
+msgstr ""
 
 #: fileUpload.js:79
 msgid "Please wait until all files are uploaded and try again."
-msgstr "Please wait until all files are uploaded and try again."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Category/top.html.twig:1
 msgid "Popular categories"
-msgstr "Popular categories"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:202
 msgid "Positive message"
-msgstr "Positive message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:230
 msgid "Positive message - block with smaller space around text and smaller text"
-msgstr "Positive message - block with smaller space around text and smaller text"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:71
 #: Content/Customer/detail.html.twig:92
@@ -3397,28 +3397,28 @@ msgstr "Positive message - block with smaller space around text and smaller text
 #: Mail/Order/billingAddress.html.twig:10
 #: Mail/Order/deliveryAddress.html.twig:9
 msgid "Postcode"
-msgstr "Postcode"
+msgstr ""
 
 #: AdvertController.php:146
 #: OrderController.php:232
 msgid "Preview"
-msgstr "Preview"
+msgstr ""
 
 #: ProductController.php:365
 #: PaymentGridFactory.php:79
 #: TransportGridFactory.php:79
 msgid "Price"
-msgstr "Price"
+msgstr ""
 
 #: Content/Payment/edit.html.twig:12
 #: Content/Product/edit.html.twig:202
 #: Content/Transport/edit.html.twig:12
 msgid "Price excluding VAT"
-msgstr "Price excluding VAT"
+msgstr ""
 
 #: Content/Product/filterFormMacro.html.twig:16
 msgid "Price from"
-msgstr "Price from"
+msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:12
 #: Content/Order/preview.html.twig:9
@@ -3428,301 +3428,301 @@ msgstr "Price from"
 #: Content/Cart/index.html.twig:31
 #: Content/Product/detail.html.twig:157
 msgid "Price including VAT"
-msgstr "Price including VAT"
+msgstr ""
 
 #: Content/Vat/roundingSetting.html.twig:3
 #: Content/Vat/vatSettings.html.twig:7
 msgid "Price including VAT rounding"
-msgstr "Price including VAT rounding"
+msgstr ""
 
 #: Content/Product/filterFormMacro.html.twig:17
 msgid "Price to"
-msgstr "Price to"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:28
 #: Content/Product/detail.html.twig:162
 #: Content/Transport/detail.html.twig:30
 msgid "Prices"
-msgstr "Prices"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Pricing"
-msgstr "Pricing"
+msgstr ""
 
 #: CustomerController.php:204
 #: Content/Customer/detail.html.twig:19
 msgid "Pricing group"
-msgstr "Pricing group"
+msgstr ""
 
 #: PricingGroupController.php:120
 msgid "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
-msgstr "Pricing group \"%name%\" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?"
+msgstr ""
 
 #: PricingGroupController.php:80
 msgid "Pricing group <strong>{{ name }}</strong> deleted"
-msgstr "Pricing group <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: PricingGroupController.php:88
 msgid "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
-msgstr "Pricing group <strong>{{ name }}</strong> deleted and replaced by group <strong>{{ newName }}</strong>."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Pricing/Groups/list.html.twig:3
 #: Pricing/Groups/list.html.twig:4
 msgid "Pricing groups"
-msgstr "Pricing groups"
+msgstr ""
 
 #: SuperadminController.php:99
 msgid "Pricing settings modified"
-msgstr "Pricing settings modified"
+msgstr ""
 
 #: Content/Order/step3.html.twig:72
 msgid "Print"
-msgstr "Print"
+msgstr ""
 
 #: ImageController.php:68
 msgid "Product"
-msgstr "Product"
+msgstr ""
 
 #: CartController.php:285
 msgid "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
-msgstr "Product <strong>{{ name }}</strong> ({{ quantity|formatNumber }} {{ unitName }}) added to the cart"
+msgstr ""
 
 #: CartController.php:294
 msgid "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
-msgstr "Product <strong>{{ name }}</strong> added to the cart (total amount {{ quantity|formatNumber }} {{ unitName }})"
+msgstr ""
 
 #: CartWatcherFacade.php:63
 msgid "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
-msgstr "Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order."
+msgstr ""
 
 #: ProductController.php:202
 msgid "Product <strong>{{ product|productDisplayName }}</strong> created"
-msgstr "Product <strong>{{ product|productDisplayName }}</strong> created"
+msgstr ""
 
 #: ProductController.php:286
 msgid "Product <strong>{{ product|productDisplayName }}</strong> deleted"
-msgstr "Product <strong>{{ product|productDisplayName }}</strong> deleted"
+msgstr ""
 
 #: ProductController.php:153
 msgid "Product <strong>{{ product|productDisplayName }}</strong> modified"
-msgstr "Product <strong>{{ product|productDisplayName }}</strong> modified"
+msgstr ""
 
 #: Content/Product/listByBrand.html.twig:10
 msgid "Product catalogue - %brandName%"
-msgstr "Product catalogue - %brandName%"
+msgstr ""
 
 #: Content/Product/list.html.twig:11
 msgid "Product catalogue - %categoryName%"
-msgstr "Product catalogue - %categoryName%"
+msgstr ""
 
 #: Content/Product/detail.html.twig:4
 msgid "Product detail"
-msgstr "Product detail"
+msgstr ""
 
 #: Content/Product/listGrid.html.twig:54
 #: Content/ProductPicker/listGrid.html.twig:22
 msgid "Product excluded from sale"
-msgstr "Product excluded from sale"
+msgstr ""
 
 #: Content/Product/edit.html.twig:19
 msgid "Product excluded from sale."
-msgstr "Product excluded from sale."
+msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:15
 msgid "Product in order"
-msgstr "Product in order"
+msgstr ""
 
 #: Content/Product/detail.html.twig:7
 msgid "Product information"
-msgstr "Product information"
+msgstr ""
 
 #: Content/Product/edit.html.twig:114
 msgid "Product is excluded from the sale due to sellout"
-msgstr "Product is excluded from the sale due to sellout"
+msgstr ""
 
 #: Content/Product/edit.html.twig:101
 msgid "Product is hidden due to sellout"
-msgstr "Product is hidden due to sellout"
+msgstr ""
 
 #: Content/Product/edit.html.twig:47
 msgid "Product is main variant."
-msgstr "Product is main variant."
+msgstr ""
 
 #: Content/Product/edit.html.twig:32
 msgid "Product is variant"
-msgstr "Product is variant"
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:12
 msgid "Product name"
-msgstr "Product name"
+msgstr ""
 
 #: ProductExtension.php:74
 msgid "Product name in default language is not entered"
-msgstr "Product name in default language is not entered"
+msgstr ""
 
 #: Content/Product/detail.html.twig:61
 msgid "Product no longer on sale"
-msgstr "Product no longer on sale"
+msgstr ""
 
 #: Content/Order/orderItem.html.twig:11
 msgid "Product not in e-shop."
-msgstr "Product not in e-shop."
+msgstr ""
 
 #: orderItems.js:102
 msgid "Product saved in order"
-msgstr "Product saved in order"
+msgstr ""
 
 #: TopCategoryController.php:57
 #: TopProductController.php:57
 msgid "Product settings on the main page successfully changed"
-msgstr "Product settings on the main page successfully changed"
+msgstr ""
 
 #: CartWatcherFacade.php:84
 msgid "Product you had in cart is no longer in available. Please check your order."
-msgstr "Product you had in cart is no longer in available. Please check your order."
+msgstr ""
 
 #: CartController.php:319
 msgid "Product {{ name }} removed from cart"
-msgstr "Product {{ name }} removed from cart"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/TopProduct/list.html.twig:12
 msgid "Products"
-msgstr "Products"
+msgstr ""
 
 #: Content/Product/detail.html.twig:106
 msgid "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart."
-msgstr "Products excluded from sale can't be displayed on lists and can't be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart."
+msgstr ""
 
 #: Content/Order/preview.html.twig:1
 msgid "Products in cart overview"
-msgstr "Products in cart overview"
+msgstr ""
 
 #: Content/Product/filterFormMacro.html.twig:33
 msgid "Products in stock only"
-msgstr "Products in stock only"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Product/list.html.twig:3
 #: Content/Product/list.html.twig:4
 msgid "Products overview"
-msgstr "Products overview"
+msgstr ""
 
 #: Content/Product/detail.html.twig:358
 msgid "Products search engines"
-msgstr "Products search engines"
+msgstr ""
 
 #: Content/ShopInfo/shopInfo.html.twig:13
 msgid "Published data"
-msgstr "Published data"
+msgstr ""
 
 #: Content/Order/list.html.twig:13
 #: Content/Product/list.html.twig:21
 #: Content/ProductPicker/list.html.twig:12
 msgid "Quick search"
-msgstr "Quick search"
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:11
 msgid "Rate can't be modified. It is necessary to create new rate, remove existing one and replace it with new one."
-msgstr "Rate can't be modified. It is necessary to create new rate, remove existing one and replace it with new one."
+msgstr ""
 
 #: Content/Registration/register.html.twig:26
 msgid "Register"
-msgstr "Register"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:38
 msgid "Registered cust."
-msgstr "Registered cust."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Registered customers"
-msgstr "Registered customers"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:43
 #: Content/Registration/register.html.twig:4
 #: Content/Registration/register.html.twig:8
 #: Front/Layout/header.html.twig:105
 msgid "Registration"
-msgstr "Registration"
+msgstr ""
 
 #: Content/Mail/template.html.twig:120
 msgid "Registration confirmation"
-msgstr "Registration confirmation"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:17
 msgid "Registration date"
-msgstr "Registration date"
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:23
 #: Content/Login/windowForm.html.twig:25
 msgid "Remember my login"
-msgstr "Remember my login"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:419
 msgid "Remove"
-msgstr "Remove"
+msgstr ""
 
 #: Order/AdvancedSearch/advancedSearch.html.twig:17
 #: Product/AdvancedSearch/advancedSearch.html.twig:17
 msgid "Reset filter"
-msgstr "Reset filter"
+msgstr ""
 
 #: Content/Registration/resetPassword.html.twig:20
 msgid "Reset password"
-msgstr "Reset password"
+msgstr ""
 
 #: Content/Mail/template.html.twig:40
 #: Content/Product/edit.html.twig:352
 #: Admin/Form/theme.html.twig:282
 msgid "Return back"
-msgstr "Return back"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1255
 msgid "Right button"
-msgstr "Right button"
+msgstr ""
 
 #: OrderCreationService.php:231
 #: Content/Order/preview.html.twig:54
 msgid "Rounding"
-msgstr "Rounding"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:33
 msgid "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
-msgstr "Rounding item with 0 % VAT will be added to your order. It is used for payment in cash."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:656
 msgid "Row grouping"
-msgstr "Row grouping"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/detail.html.twig:29
 #: Content/Product/detail.html.twig:292
 msgid "SEO"
-msgstr "SEO"
+msgstr ""
 
 #: Content/Seo/seoSetting.html.twig:3
 #: Content/Seo/seoSetting.html.twig:4
 msgid "SEO attributes settings"
-msgstr "SEO attributes settings"
+msgstr ""
 
 #: SeoController.php:61
 msgid "SEO attributes settings modified"
-msgstr "SEO attributes settings modified"
+msgstr ""
 
 #: Content/Product/detail.html.twig:166
 msgid "Sale prices calculation"
-msgstr "Sale prices calculation"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Sales including/excluding VAT settings"
-msgstr "Sales including/excluding VAT settings"
+msgstr ""
 
 #: Content/BestsellingProduct/detail.html.twig:25
 #: Content/CustomerCommunication/orderSubmitted.html.twig:19
 #: Content/Script/googleAnalytics.html.twig:16
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: Content/Availability/setting.html.twig:11
 #: Content/Cookies/setting.html.twig:20
@@ -3746,48 +3746,48 @@ msgstr "Save"
 #: Content/Customer/edit.html.twig:93
 #: FormDetailExtension.php:78
 msgid "Save changes"
-msgstr "Save changes"
+msgstr ""
 
 #: Content/Mail/template.html.twig:139
 msgid "Save changes in all templates"
-msgstr "Save changes in all templates"
+msgstr ""
 
 #: Content/Article/list.html.twig:29
 #: Content/Category/list.html.twig:69
 #: Content/TransportAndPayment/list.html.twig:17
 #: Admin/Grid/Grid.html.twig:38
 msgid "Save changes in order"
-msgstr "Save changes in order"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:13
 msgid "Schema"
-msgstr "Schema"
+msgstr ""
 
 #: ScriptController.php:63
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
-msgstr "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> created"
+msgstr ""
 
 #: ScriptController.php:102
 msgid "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
-msgstr "Script <a href=\"{{ url }}\"><strong>{{ name }}</strong></a> modified"
+msgstr ""
 
 #: ScriptController.php:153
 msgid "Script <strong>{{ name }}</strong> deleted"
-msgstr "Script <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: ScriptController.php:126
 msgid "Script name"
-msgstr "Script name"
+msgstr ""
 
 #: Content/Script/detail.html.twig:7
 msgid "Script will be placed at the beginning of the page, after tag <body>."
-msgstr "Script will be placed at the beginning of the page, after tag <body>."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Script/list.html.twig:3
 #: Content/Script/list.html.twig:4
 msgid "Scripts overview"
-msgstr "Scripts overview"
+msgstr ""
 
 #: FrontBreadcrumbGenerator.php:39
 msgid "Search [noun]"
@@ -3804,199 +3804,199 @@ msgstr "Search"
 
 #: Content/Product/productsWithControls.html.twig:27
 msgid "Search didn't find any products."
-msgstr "Search didn't find any products."
+msgstr ""
 
 #: Content/Product/search.html.twig:8
 #: Content/Product/search.html.twig:16
 msgid "Search results for \"%searchText%\""
-msgstr "Search results for \"%searchText%\""
+msgstr ""
 
 #: Content/Search/searchBox.html.twig:9
 msgid "Searching"
-msgstr "Searching"
+msgstr ""
 
 #: Order/AdvancedSearch/ruleForm.html.twig:32
 msgid "Searching in all currecies"
-msgstr "Searching in all currecies"
+msgstr ""
 
 #: Content/Product/quickSearchFormContent.html.twig:7
 msgid "Searching searches in name, catalogue number or product part number. It is possible to use operators * a?."
-msgstr "Searching searches in name, catalogue number or product part number. It is possible to use operators * a?."
+msgstr ""
 
 #: Content/Order/quickSearchFormContent.html.twig:7
 msgid "Searching searches in order number, registered customer email, customer's email in order, customer's surname and company name. It is possible to use operators * a?."
-msgstr "Searching searches in order number, registered customer email, customer's email in order, customer's surname and company name. It is possible to use operators * a?."
+msgstr ""
 
 #: Content/Customer/list.html.twig:22
 msgid "Searching searches in surname, company name, email, telephone. It is possible to use operators * a?."
-msgstr "Searching searches in surname, company name, email, telephone. It is possible to use operators * a?."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:211
 msgid "Second type of error message"
-msgstr "Second type of error message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:770
 #: Content/Superadmin/cssDocumentation.html.twig:771
 msgid "Select"
-msgstr "Select"
+msgstr ""
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:11
 msgid "Select new value"
-msgstr "Select new value"
+msgstr ""
 
 #: VatController.php:93
 msgid "Selected VAT doesn't exist"
-msgstr "Selected VAT doesn't exist"
+msgstr ""
 
 #: VatController.php:130
 msgid "Selected VAT doesn't exist."
-msgstr "Selected VAT doesn't exist."
+msgstr ""
 
 #: AdministratorController.php:236
 msgid "Selected administrated doesn't exist."
-msgstr "Selected administrated doesn't exist."
+msgstr ""
 
 #: AdvertController.php:222
 msgid "Selected advertisement doesn't exist."
-msgstr "Selected advertisement doesn't exist."
+msgstr ""
 
 #: ArticleController.php:207
 msgid "Selected article doesn't exist."
-msgstr "Selected article doesn't exist."
+msgstr ""
 
 #: AvailabilityController.php:132
 msgid "Selected availability doesn't exist"
-msgstr "Selected availability doesn't exist"
+msgstr ""
 
 #: AvailabilityController.php:87
 msgid "Selected availatibily doesn't exist."
-msgstr "Selected availatibily doesn't exist."
+msgstr ""
 
 #: BrandController.php:198
 msgid "Selected brand doesn't exist."
-msgstr "Selected brand doesn't exist."
+msgstr ""
 
 #: CategoryController.php:217
 msgid "Selected category doesn't exist."
-msgstr "Selected category doesn't exist."
+msgstr ""
 
 #: CurrencyController.php:75
 #: CurrencyController.php:101
 msgid "Selected currency doesn't exist."
-msgstr "Selected currency doesn't exist."
+msgstr ""
 
 #: CustomerController.php:294
 msgid "Selected customer doesn't exist."
-msgstr "Selected customer doesn't exist."
+msgstr ""
 
 #: PromoCodeController.php:60
 msgid "Selected discount coupon doesn't exist."
-msgstr "Selected discount coupon doesn't exist."
+msgstr ""
 
 #: FlagController.php:62
 msgid "Selected flag doesn't exist."
-msgstr "Selected flag doesn't exist."
+msgstr ""
 
 #: OrderController.php:288
 msgid "Selected order doesn't exist."
-msgstr "Selected order doesn't exist."
+msgstr ""
 
 #: OrderStatusController.php:91
 #: OrderStatusController.php:128
 msgid "Selected order status doesn't exist."
-msgstr "Selected order status doesn't exist."
+msgstr ""
 
 #: SliderController.php:188
 msgid "Selected page doesn't exist."
-msgstr "Selected page doesn't exist."
+msgstr ""
 
 #: ParameterController.php:60
 msgid "Selected parameter doesn't exist."
-msgstr "Selected parameter doesn't exist."
+msgstr ""
 
 #: PaymentController.php:166
 msgid "Selected payment doesn't exist."
-msgstr "Selected payment doesn't exist."
+msgstr ""
 
 #: PricingGroupController.php:96
 #: PricingGroupController.php:142
 msgid "Selected pricing group doesn't exist."
-msgstr "Selected pricing group doesn't exist."
+msgstr ""
 
 #: ProductController.php:292
 msgid "Selected product doesn't exist."
-msgstr "Selected product doesn't exist."
+msgstr ""
 
 #: CartController.php:197
 #: CartController.php:255
 msgid "Selected product no longer available or doesn't exist."
-msgstr "Selected product no longer available or doesn't exist."
+msgstr ""
 
 #: ScriptController.php:159
 msgid "Selected script doesn't exist."
-msgstr "Selected script doesn't exist."
+msgstr ""
 
 #: TransportController.php:167
 msgid "Selected shipping doesn't exist."
-msgstr "Selected shipping doesn't exist."
+msgstr ""
 
 #: UnitController.php:102
 msgid "Selected unit doesn't exist"
-msgstr "Selected unit doesn't exist"
+msgstr ""
 
 #: UnitController.php:138
 msgid "Selected unit doesn't exist."
-msgstr "Selected unit doesn't exist."
+msgstr ""
 
 #: Content/Product/detail.html.twig:102
 msgid "Selling end date"
-msgstr "Selling end date"
+msgstr ""
 
 #: Content/Product/detail.html.twig:100
 msgid "Selling start date"
-msgstr "Selling start date"
+msgstr ""
 
 #: Content/ContactForm/contactForm.html.twig:11
 msgid "Send"
-msgstr "Send"
+msgstr ""
 
 #: Content/Customer/new.html.twig:13
 msgid "Send confirmation e-mail about registration to customer"
-msgstr "Send confirmation e-mail about registration to customer"
+msgstr ""
 
 #: Content/Mail/template.html.twig:103
 msgid "Send confirmation of order receipt"
-msgstr "Send confirmation of order receipt"
+msgstr ""
 
 #: Content/Mail/template.html.twig:114
 msgid "Send e-mail about change to this status"
-msgstr "Send e-mail about change to this status"
+msgstr ""
 
 #: Common/Mailer/settingInfo.html.twig:3
 msgid "Sending e-mails off, no e-mail will be sent from the app."
-msgstr "Sending e-mails off, no e-mail will be sent from the app."
+msgstr ""
 
 #: Content/Product/detail.html.twig:125
 msgid "Serial number"
-msgstr "Serial number"
+msgstr ""
 
 #: Content/Heureka/setting.html.twig:24
 msgid "Servis Heuréka - Approved by customers doesn't support the language of this domain."
-msgstr "Servis Heuréka - Approved by customers doesn't support the language of this domain."
+msgstr ""
 
 #: ProductMassActionFormType.php:36
 msgid "Set"
-msgstr "Set"
+msgstr ""
 
 #: ProductFormType.php:180
 msgid "Set alternative availability"
-msgstr "Set alternative availability"
+msgstr ""
 
 #: Content/Registration/setNewPassword.html.twig:4
 #: Content/Registration/setNewPassword.html.twig:11
 #: Content/Registration/setNewPassword.html.twig:20
 msgid "Set new password"
-msgstr "Set new password"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Administrator/detail.html.twig:12
@@ -4016,11 +4016,11 @@ msgstr "Set new password"
 #: Content/Vat/vatSettings.html.twig:4
 #: Inline/Menu/menu.html.twig:14
 msgid "Settings"
-msgstr "Settings"
+msgstr ""
 
 #: HeurekaController.php:67
 msgid "Settings modified."
-msgstr "Settings modified."
+msgstr ""
 
 #: ImageController.php:70
 #: Content/Order/preview.html.twig:17
@@ -4028,19 +4028,19 @@ msgstr "Settings modified."
 #: Content/Transport/detail.html.twig:8
 #: Content/Customer/orders.html.twig:22
 msgid "Shipping"
-msgstr "Shipping"
+msgstr ""
 
 #: TransportController.php:89
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: TransportController.php:127
 msgid "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
-msgstr "Shipping <strong><a href=\"{{ url }}\">{{ name }}</a></strong> was modified"
+msgstr ""
 
 #: TransportController.php:161
 msgid "Shipping <strong>{{ name }}</strong> deleted"
-msgstr "Shipping <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:78
 #: Content/Customer/orderList.html.twig:11
@@ -4049,124 +4049,124 @@ msgstr "Shipping <strong>{{ name }}</strong> deleted"
 #: Content/Customer/orderDetail.html.twig:90
 #: Content/Order/step3.html.twig:41
 msgid "Shipping address"
-msgstr "Shipping address"
+msgstr ""
 
 #: Content/Order/edit.html.twig:128
 msgid "Shipping address is the same as billing address"
-msgstr "Shipping address is the same as billing address"
+msgstr ""
 
 #: Inline/OrderProgress/index.html.twig:12
 msgid "Shipping and payment"
-msgstr "Shipping and payment"
+msgstr ""
 
 #: Content/Cart/index.html.twig:122
 msgid "Shipping and payment <strong>for free!</strong>"
-msgstr "Shipping and payment <strong>for free!</strong>"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/TransportAndPayment/list.html.twig:4
 #: Content/TransportAndPayment/list.html.twig:8
 msgid "Shipping and payments"
-msgstr "Shipping and payments"
+msgstr ""
 
 #: MailController.php:102
 #: Content/CustomerCommunication/orderSubmitted.html.twig:40
 msgid "Shipping instructions"
-msgstr "Shipping instructions"
+msgstr ""
 
 #: Content/Order/preview.html.twig:32
 msgid "Shipping method"
-msgstr "Shipping method"
+msgstr ""
 
 #: Content/Order/step2.html.twig:15
 msgid "Shipping selection"
-msgstr "Shipping selection"
+msgstr ""
 
 #: Content/Product/detail.html.twig:204
 #: Content/Product/edit.html.twig:303
 msgid "Short description"
-msgstr "Short description"
+msgstr ""
 
 #: Content/Product/edit.html.twig:308
 msgid "Short description can be set in the main variant."
-msgstr "Short description can be set in the main variant."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1189
 msgid "Short postscripts after input"
-msgstr "Short postscripts after input"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:504
 msgid "Simple view"
-msgstr "Simple view"
+msgstr ""
 
 #: Content/Image/overview.html.twig:26
 msgid "Size name"
-msgstr "Size name"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:390
 msgid "Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
-msgstr "Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Slider on main page."
-msgstr "Slider on main page."
+msgstr ""
 
 #: ImageController.php:69
 #: Content/Slider/detail.html.twig:4
 #: Content/Slider/detail.html.twig:8
 msgid "Slider page"
-msgstr "Slider page"
+msgstr ""
 
 #: SliderController.php:108
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
-msgstr "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> created"
+msgstr ""
 
 #: SliderController.php:146
 msgid "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
-msgstr "Slider page <strong><a href=\"{{ url }}\">{{ name }}</a></strong> modified"
+msgstr ""
 
 #: Content/Slider/list.html.twig:3
 #: Content/Slider/list.html.twig:4
 msgid "Slider pages"
-msgstr "Slider pages"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:282
 msgid "Small conversion button"
-msgstr "Small conversion button"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1092
 msgid "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
-msgstr "Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class=\"in-article__visible\">form-line__item--right</strong> or <strong class=\"in-article__visible\">form-line__item--left</strong>."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1372
 msgid "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
-msgstr "Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class=\"in-article__visible\">form-line__js</strong>."
+msgstr ""
 
 #: Content/Product/detail.html.twig:155
 msgid "Sorting priority"
-msgstr "Sorting priority"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:458
 msgid "Special behavior for big table, which can't fit even in the desktop version to the content part."
-msgstr "Special behavior for big table, which can't fit even in the desktop version to the content part."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:423
 msgid "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table."
-msgstr "Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:501
 msgid "Special behavior of table, which was created for parameters, but could be used also differently."
-msgstr "Special behavior of table, which was created for parameters, but could be used also differently."
+msgstr ""
 
 #: Content/Default/index.html.twig:37
 msgid "Special offers"
-msgstr "Special offers"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Translation/list.html.twig:3
 #: Content/Translation/list.html.twig:4
 msgid "Static texts translations"
-msgstr "Static texts translations"
+msgstr ""
 
 #: OrderController.php:239
 #: Content/Customer/orderList.html.twig:13
@@ -4174,31 +4174,31 @@ msgstr "Static texts translations"
 #: Admin/Form/fileuploadFields.html.twig:51
 #: Content/Customer/orderDetail.html.twig:18
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: AdvancedSearchOrderFilterTranslation.php:14
 msgid "Status of order"
-msgstr "Status of order"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Status of orders"
-msgstr "Status of orders"
+msgstr ""
 
 #: OrderStatusController.php:68
 msgid "Status of orders <strong>{{ name }}</strong> deleted"
-msgstr "Status of orders <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: OrderStatusController.php:85
 msgid "Status of orders <strong>{{ name }}</strong> reserved and can't be deleted"
-msgstr "Status of orders <strong>{{ name }}</strong> reserved and can't be deleted"
+msgstr ""
 
 #: OrderStatusController.php:76
 msgid "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
-msgstr "Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted."
+msgstr ""
 
 #: AdvancedSearchProductFilterTranslation.php:14
 msgid "Stocks"
-msgstr "Stocks"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:69
 #: Content/Customer/detail.html.twig:90
@@ -4213,43 +4213,43 @@ msgstr "Stocks"
 #: Mail/Order/billingAddress.html.twig:8
 #: Mail/Order/deliveryAddress.html.twig:7
 msgid "Street"
-msgstr "Street"
+msgstr ""
 
 #: Content/Mail/template.html.twig:19
 msgid "Subject"
-msgstr "Subject"
+msgstr ""
 
 #: Admin/Form/fileuploadFields.html.twig:51
 #: fileUpload.js:116
 msgid "Successfully uploaded"
-msgstr "Successfully uploaded"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:911
 msgid "Suitable combination of components"
-msgstr "Suitable combination of components"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Superadmin"
-msgstr "Superadmin"
+msgstr ""
 
 #: Content/Superadmin/modules.html.twig:3
 #: Content/Superadmin/modules.html.twig:4
 msgid "Superadmin - Closing modules"
-msgstr "Superadmin - Closing modules"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:3
 #: Content/Superadmin/cssDocumentation.html.twig:4
 msgid "Superadmin - Coder documentation"
-msgstr "Superadmin - Coder documentation"
+msgstr ""
 
 #: Content/Superadmin/pricing.html.twig:3
 #: Content/Superadmin/pricing.html.twig:4
 msgid "Superadmin - Sale including/excluding VAT settings"
-msgstr "Superadmin - Sale including/excluding VAT settings"
+msgstr ""
 
 #: Content/Superadmin/urlsListGrid.html.twig:3
 msgid "Superadmin - URL addresses"
-msgstr "Superadmin - URL addresses"
+msgstr ""
 
 #: MailController.php:113
 #: Content/Customer/detail.html.twig:30
@@ -4266,21 +4266,21 @@ msgstr "Superadmin - URL addresses"
 #: Mail/Order/billingAddress.html.twig:4
 #: Mail/Order/deliveryAddress.html.twig:4
 msgid "Surname"
-msgstr "Surname"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:14
 msgid "System data"
-msgstr "System data"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:113
 msgid "TABLE - tables"
-msgstr "TABLE - tables"
+msgstr ""
 
 #: ProductListOrderingModeForBrandFacade.php:27
 #: ProductListOrderingModeForListFacade.php:27
 #: ProductListOrderingModeForSearchFacade.php:28
 msgid "TOP"
-msgstr "TOP"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:355
 #: Content/Superadmin/cssDocumentation.html.twig:356
@@ -4376,36 +4376,36 @@ msgstr "TOP"
 #: Content/Superadmin/cssDocumentation.html.twig:746
 #: Content/Superadmin/cssDocumentation.html.twig:747
 msgid "Table text"
-msgstr "Table text"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:546
 msgid "Table text or input"
-msgstr "Table text or input"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:385
 msgid "Table-col"
-msgstr "Table-col"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:499
 msgid "Table-form"
-msgstr "Table-form"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:345
 msgid "Table-main"
-msgstr "Table-main"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:421
 msgid "Table-touch"
-msgstr "Table-touch"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:456
 msgid "Table-touch-always"
-msgstr "Table-touch-always"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:28
 #: Content/Superadmin/cssDocumentation.html.twig:339
 msgid "Tables"
-msgstr "Tables"
+msgstr ""
 
 #: Content/Customer/detail.html.twig:59
 #: Content/Order/edit.html.twig:101
@@ -4414,11 +4414,11 @@ msgstr "Tables"
 #: Content/Order/step3.html.twig:28
 #: Mail/Order/billingAddress.html.twig:7
 msgid "Tax number"
-msgstr "Tax number"
+msgstr ""
 
 #: Content/Product/detail.html.twig:8
 msgid "Technical parameters"
-msgstr "Technical parameters"
+msgstr ""
 
 #: CustomerController.php:202
 #: Content/Customer/detail.html.twig:31
@@ -4433,128 +4433,128 @@ msgstr "Technical parameters"
 #: Content/Order/step3.html.twig:51
 #: Mail/Order/deliveryAddress.html.twig:6
 msgid "Telephone"
-msgstr "Telephone"
+msgstr ""
 
 #: Content/ShopInfo/shopInfo.html.twig:15
 msgid "Telephone number"
-msgstr "Telephone number"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/TermsAndConditions/setting.html.twig:15
 #: Content/Order/step3.html.twig:66
 msgid "Terms and conditions"
-msgstr "Terms and conditions"
+msgstr ""
 
 #: Content/TermsAndConditions/setting.html.twig:3
 #: Content/TermsAndConditions/setting.html.twig:4
 msgid "Terms and conditions settings"
-msgstr "Terms and conditions settings"
+msgstr ""
 
 #: TermsAndConditionsController.php:62
 msgid "Terms and conditions settings modified."
-msgstr "Terms and conditions settings modified."
+msgstr ""
 
 #: TermsAndConditionsFacade.php:73
 msgid "Terms-and-conditions.html"
-msgstr "Terms-and-conditions.html"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:562
 msgid "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
-msgstr "Text behind input. To generate the input correctly, it is necessary to write is like <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:556
 msgid "Text behind label"
-msgstr "Text behind label"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:773
 msgid "Textarea"
-msgstr "Textarea"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1074
 msgid "Textarea may be across the whole width"
-msgstr "Textarea may be across the whole width"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1082
 msgid "Textarea may be across the whole width next to the label"
-msgstr "Textarea may be across the whole width next to the label"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:776
 msgid "Textarea size modification"
-msgstr "Textarea size modification"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1077
 #: Content/Superadmin/cssDocumentation.html.twig:1085
 msgid "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
-msgstr "Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width."
+msgstr ""
 
 #: ContactFormController.php:51
 msgid "Thank you, your message has been sent."
-msgstr "Thank you, your message has been sent."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:78
 msgid "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
-msgstr "The basic premis for coding in admin is, that mostly programmers will work with the code. That's why there is a bigger emphasis on helpers -"
+msgstr ""
 
 #: CustomerPasswordController.php:81
 #: CustomerPasswordController.php:108
 msgid "The link to change your password expired."
-msgstr "The link to change your password expired."
+msgstr ""
 
 #: OrderController.php:316
 msgid "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
-msgstr "The price of payment {{ transportName }} changed during ordering process. Check your order, please."
+msgstr ""
 
 #: OrderController.php:308
 msgid "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
-msgstr "The price of shipping {{ transportName }} changed during ordering process. Check your order, please."
+msgstr ""
 
 #: CartWatcherFacade.php:79
 msgid "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
-msgstr "The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:246
 msgid "There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)"
-msgstr "There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:342
 msgid "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
-msgstr "There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That's why there are only those that you will probably want to use."
+msgstr ""
 
 #: CustomerController.php:154
 #: CustomerController.php:262
 #: RegistrationController.php:69
 msgid "There is already a customer with this e-mail in the database"
-msgstr "There is already a customer with this e-mail in the database"
+msgstr ""
 
 #: categoryTree.sorting.js:59
 msgid "There was an error while saving. The order isn't saved."
-msgstr "There was an error while saving. The order isn't saved."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1378
 msgid "Thick line between"
-msgstr "Thick line between"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1403
 msgid "Thick line between disappeared"
-msgstr "Thick line between disappeared"
+msgstr ""
 
 #: Content/Product/productsWithControls.html.twig:29
 msgid "This category contains no products."
-msgstr "This category contains no products."
+msgstr ""
 
 #: CurrencyController.php:98
 #: Content/Currency/listGrid.html.twig:6
 msgid "This currency can't be deleted, it is set as default or is saved with order."
-msgstr "This currency can't be deleted, it is set as default or is saved with order."
+msgstr ""
 
 #: Mail/ContactForm/mail.html.twig:11
 msgid "This e-mail was sent from the contact form located below the panel of categories."
-msgstr "This e-mail was sent from the contact form located below the panel of categories."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1389
 #: Content/Superadmin/cssDocumentation.html.twig:1414
 msgid "This form-line is wrapped"
-msgstr "This form-line is wrapped"
+msgstr ""
 
 #: Content/Product/edit.html.twig:55
 #: Content/Product/edit.html.twig:63
@@ -4565,107 +4565,107 @@ msgstr "This form-line is wrapped"
 #: Content/Product/edit.html.twig:84
 #: Content/Product/edit.html.twig:88
 msgid "This item can be set in product detail of a specific variant"
-msgstr "This item can be set in product detail of a specific variant"
+msgstr ""
 
 #: Content/Product/detail.html.twig:94
 msgid "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
-msgstr "This product is no longer available for purchase. Have a look at similar products <a href=\"%url%\">here</a>."
+msgstr ""
 
 #: Front/Layout/layout.html.twig:45
 msgid "This site uses cookies."
-msgstr "This site uses cookies."
+msgstr ""
 
 #: Front/Layout/layout.html.twig:42
 msgid "This site uses cookies. By staying on the site you agree with that."
-msgstr "This site uses cookies. By staying on the site you agree with that."
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:17
 msgid "This status can't be deleted, because there is a functionality bounded to it - it identifies orders that were not successfully processed."
-msgstr "This status can't be deleted, because there is a functionality bounded to it - it identifies orders that were not successfully processed."
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:11
 msgid "This status can't be deleted, because there is a functionality bounded to it - it identifies orders that were successfully processed."
-msgstr "This status can't be deleted, because there is a functionality bounded to it - it identifies orders that were successfully processed."
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:5
 msgid "This status can't be deleted. This is automatically assigned status to all new orders."
-msgstr "This status can't be deleted. This is automatically assigned status to all new orders."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:990
 msgid "This structure has no place in tables!"
-msgstr "This structure has no place in tables!"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:995
 msgid "This text will help you understand the logic of creating a form."
-msgstr "This text will help you understand the logic of creating a form."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:140
 msgid "Title component with possible button on the right, all separated by border from below"
-msgstr "Title component with possible button on the right, all separated by border from below"
+msgstr ""
 
 #: Content/ConfirmDelete/setNewAndDelete.html.twig:28
 msgid "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
-msgstr "To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:580
 msgid "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
-msgstr "To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line."
+msgstr ""
 
 #: VatSettingsFormType.php:83
 msgid "To fifty hundredths (halfs)"
-msgstr "To fifty hundredths (halfs)"
+msgstr ""
 
 #: VatSettingsFormType.php:82
 msgid "To hundredths (cents)"
-msgstr "To hundredths (cents)"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:24
 msgid "To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us."
-msgstr "To prevent the possibility of account theft, the change of the e-mail address must be dealt with individually. If your e-mail address has changed, please contact us."
+msgstr ""
 
 #: VatSettingsFormType.php:84
 msgid "To whole numbers"
-msgstr "To whole numbers"
+msgstr ""
 
 #: Content/Order/edit.html.twig:205
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #: Content/Order/preview.html.twig:82
 msgid "Total amount of VAT"
-msgstr "Total amount of VAT"
+msgstr ""
 
 #: Content/Order/edit.html.twig:169
 #: Content/Customer/orderDetail.html.twig:150
 msgid "Total excluding VAT"
-msgstr "Total excluding VAT"
+msgstr ""
 
 #: Content/Order/edit.html.twig:168
 #: Content/Order/preview.html.twig:30
 #: Content/Customer/orderDetail.html.twig:149
 msgid "Total including VAT"
-msgstr "Total including VAT"
+msgstr ""
 
 #: Mail/Order/products.html.twig:6
 msgid "Total item price including VAT"
-msgstr "Total item price including VAT"
+msgstr ""
 
 #: MailController.php:92
 msgid "Total order price (including VAT)"
-msgstr "Total order price (including VAT)"
+msgstr ""
 
 #: ScriptController.php:193
 msgid "Total order price including VAT"
-msgstr "Total order price including VAT"
+msgstr ""
 
 #: OrderController.php:240
 msgid "Total price"
-msgstr "Total price"
+msgstr ""
 
 #: Content/Customer/orderDetail.html.twig:172
 #: Content/Order/preview.html.twig:73
 msgid "Total price excluding VAT"
-msgstr "Total price excluding VAT"
+msgstr ""
 
 #: Content/Customer/orderList.html.twig:12
 #: Content/Cart/index.html.twig:106
@@ -4673,36 +4673,36 @@ msgstr "Total price excluding VAT"
 #: Content/Customer/orders.html.twig:24
 #: Content/Order/preview.html.twig:64
 msgid "Total price including VAT"
-msgstr "Total price including VAT"
+msgstr ""
 
 #: Content/Script/googleAnalytics.html.twig:12
 msgid "Tracking ID"
-msgstr "Tracking ID"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Translations"
-msgstr "Translations"
+msgstr ""
 
 #: Content/Error/error.html.twig:24
 msgid "Try using web search"
-msgstr "Try using web search"
+msgstr ""
 
 #: Content/Advert/detail.html.twig:17
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:268
 msgid "Type modificatons"
-msgstr "Type modificatons"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:16
 #: Content/Superadmin/cssDocumentation.html.twig:38
 msgid "Type of coding used and rules"
-msgstr "Type of coding used and rules"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:217
 msgid "Types can be combined with each other and mixed with various colours"
-msgstr "Types can be combined with each other and mixed with various colours"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Article/edit.html.twig:25
@@ -4710,102 +4710,102 @@ msgstr "Types can be combined with each other and mixed with various colours"
 #: Content/Category/edit.html.twig:7
 #: Content/Superadmin/urlsListGrid.html.twig:4
 msgid "URL addresses"
-msgstr "URL addresses"
+msgstr ""
 
 #: Content/Product/edit.html.twig:368
 msgid "URL settings"
-msgstr "URL settings"
+msgstr ""
 
 #: Admin/Form/theme.html.twig:285
 msgid "URL will be deleted after saving."
-msgstr "URL will be deleted after saving."
+msgstr ""
 
 #: Content/Error/error.html.twig:36
 msgid "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
-msgstr "Uh-oh, uh-oh. And specially <strong>\"%status_code% %status_text%\"</strong>, as if it was on purpose!"
+msgstr ""
 
 #: productsPicker.window.js:80
 msgid "Unable to add"
-msgstr "Unable to add"
+msgstr ""
 
 #: orderItems.js:105
 msgid "Unable to add product"
-msgstr "Unable to add product"
+msgstr ""
 
 #: CartController.php:201
 #: CartController.php:259
 msgid "Unable to add product to cart"
-msgstr "Unable to add product to cart"
+msgstr ""
 
 #: CartController.php:209
 #: CartController.php:267
 msgid "Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>"
-msgstr "Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>"
+msgstr ""
 
 #: CartController.php:323
 msgid "Unable to remove item from cart. The item is probably already removed."
-msgstr "Unable to remove item from cart. The item is probably already removed."
+msgstr ""
 
 #: CartController.php:327
 msgid "Unable to remove item from cart. The link for removing it probably expired, try it again."
-msgstr "Unable to remove item from cart. The link for removing it probably expired, try it again."
+msgstr ""
 
 #: OrderController.php:223
 msgid "Unable to send some e-mails, please contact us for order verification."
-msgstr "Unable to send some e-mails, please contact us for order verification."
+msgstr ""
 
 #: OrderController.php:143
 msgid "Unable to send updating e-mail"
-msgstr "Unable to send updating e-mail"
+msgstr ""
 
 #: FileUploadController.php:43
 msgid "Unexpected error occurred, file was not uploaded."
-msgstr "Unexpected error occurred, file was not uploaded."
+msgstr ""
 
 #: Content/Order/edit.html.twig:166
 #: Content/Product/detail.html.twig:139
 msgid "Unit"
-msgstr "Unit"
+msgstr ""
 
 #: UnitController.php:67
 msgid "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
-msgstr "Unit \"%name%\" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?"
+msgstr ""
 
 #: UnitController.php:122
 msgid "Unit <strong>{{ name }}</strong> deleted"
-msgstr "Unit <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: UnitController.php:130
 msgid "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
-msgstr "Unit <strong>{{ name }}</strong> deleted and replaced by unit <strong>{{ newName }}</strong>"
+msgstr ""
 
 #: Content/Order/edit.html.twig:164
 #: Content/Cart/index.html.twig:28
 #: Content/Customer/orderDetail.html.twig:146
 #: Mail/Order/products.html.twig:5
 msgid "Unit price including VAT"
-msgstr "Unit price including VAT"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 msgid "Units"
-msgstr "Units"
+msgstr ""
 
 #: Content/Unit/list.html.twig:3
 #: Content/Unit/list.html.twig:4
 msgid "Units overview"
-msgstr "Units overview"
+msgstr ""
 
 #: Content/Mail/template.html.twig:53
 msgid "Upload attachment"
-msgstr "Upload attachment"
+msgstr ""
 
 #: Content/Domain/edit.html.twig:16
 msgid "Upload icon"
-msgstr "Upload icon"
+msgstr ""
 
 #: Content/Advert/detail.html.twig:30
 msgid "Upload new picture"
-msgstr "Upload new picture"
+msgstr ""
 
 #: Content/Brand/detail.html.twig:22
 #: Content/Category/detail.html.twig:48
@@ -4813,230 +4813,230 @@ msgstr "Upload new picture"
 #: Content/Slider/detail.html.twig:34
 #: Content/Transport/detail.html.twig:52
 msgid "Upload picture"
-msgstr "Upload picture"
+msgstr ""
 
 #: Content/Advert/edit.html.twig:8
 msgid "Uploaded picture"
-msgstr "Uploaded picture"
+msgstr ""
 
 #: fileUpload.js:87
 #: fileUpload.js:106
 msgid "Uploading..."
-msgstr "Uploading..."
+msgstr ""
 
 #: FeedController.php:106
 msgid "Url address"
-msgstr "Url address"
+msgstr ""
 
 #: Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig:20
 msgid "Use"
-msgstr "Use"
+msgstr ""
 
 #: Content/Product/detail.html.twig:142
 #: Content/Product/edit.html.twig:79
 msgid "Use stocks"
-msgstr "Use stocks"
+msgstr ""
 
 #: charactersCounter.js:25
 msgid "Used: %currentLength% characters. Recommended max. %recommendedLength%"
-msgstr "Used: %currentLength% characters. Recommended max. %recommendedLength%"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1341
 msgid "Used: 45 characters. Recommended max. 155"
-msgstr "Used: 45 characters. Recommended max. 155"
+msgstr ""
 
 #: CustomerController.php:171
 msgid "User not found."
-msgstr "User not found."
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:22
 msgid "Username"
-msgstr "Username"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:35
 #: Content/Product/detail.html.twig:167
 #: Content/Transport/detail.html.twig:32
 msgid "VAT"
-msgstr "VAT"
+msgstr ""
 
 #: VatController.php:114
 msgid "VAT <strong>{{ name }}</strong> deleted"
-msgstr "VAT <strong>{{ name }}</strong> deleted"
+msgstr ""
 
 #: VatController.php:122
 msgid "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
-msgstr "VAT <strong>{{ name }}</strong> deleted and replaced by <strong>{{ newName }}</strong>."
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Vat/list.html.twig:3
 #: Content/Vat/list.html.twig:4
 msgid "VAT and rounding"
-msgstr "VAT and rounding"
+msgstr ""
 
 #: Content/Cart/index.html.twig:29
 #: Content/Customer/orderDetail.html.twig:148
 msgid "VAT rate"
-msgstr "VAT rate"
+msgstr ""
 
 #: Content/Order/edit.html.twig:167
 msgid "VAT rate (%)"
-msgstr "VAT rate (%)"
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:53
 msgid "VAT rate can't be removed because it is being currently used for conversion to this VAT rate"
-msgstr "VAT rate can't be removed because it is being currently used for conversion to this VAT rate"
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:28
 #: Content/Vat/listGrid.html.twig:44
 msgid "VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes."
-msgstr "VAT rate is marked for deleting and will be soon automatically removed. Conversion rate is several hundreds of products in 5 minutes."
+msgstr ""
 
 #: Content/Vat/listGrid.html.twig:78
 msgid "VAT rates"
-msgstr "VAT rates"
+msgstr ""
 
 #: VatController.php:160
 msgid "VAT settings modified"
-msgstr "VAT settings modified"
+msgstr ""
 
 #: Content/Product/detail.html.twig:238
 msgid "Value"
-msgstr "Value"
+msgstr ""
 
 #: Content/Product/listGrid.html.twig:21
 #: Content/ProductPicker/listGrid.html.twig:12
 msgid "Variant"
-msgstr "Variant"
+msgstr ""
 
 #: ProductController.php:325
 msgid "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
-msgstr "Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created."
+msgstr ""
 
 #: Content/Product/edit.html.twig:42
 msgid "Variant alias"
-msgstr "Variant alias"
+msgstr ""
 
 #: Content/Product/createVariant.html.twig:9
 #: Content/Product/edit.html.twig:48
 msgid "Variants"
-msgstr "Variants"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:179
 msgid "Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours"
-msgstr "Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours"
+msgstr ""
 
 #: Content/Search/autocomplete.html.twig:35
 msgid "View all results"
-msgstr "View all results"
+msgstr ""
 
 #: Content/Product/list.html.twig:54
 msgid "View more"
-msgstr "View more"
+msgstr ""
 
 #: Content/Product/filterFormMacro.html.twig:162
 msgid "View results"
-msgstr "View results"
+msgstr ""
 
 #: AdvertController.php:144
 #: ProductController.php:366
 #: ProductPickerController.php:139
 #: Content/Product/edit.html.twig:15
 msgid "Visibility"
-msgstr "Visibility"
+msgstr ""
 
 #: Content/Product/visibility.html.twig:2
 msgid "Visibility for unlogged customers"
-msgstr "Visibility for unlogged customers"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:116
 msgid "WINDOW - popup windows, floating windows etc."
-msgstr "WINDOW - popup windows, floating windows etc."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:107
 msgid "WRAP - basic wraps, boxes, independent of content"
-msgstr "WRAP - basic wraps, boxes, independent of content"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:205
 msgid "Warning message"
-msgstr "Warning message"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:235
 msgid "Warning message - block with icon"
-msgstr "Warning message - block with icon"
+msgstr ""
 
 #: AdministratorController.php:116
 #: AdministratorController.php:185
 msgid "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
-msgstr "We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:792
 msgid "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
-msgstr "We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class=\"in-article__visible\">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don't forget to add flag <strong class=\"in-article__visible\">localeFlag(locale)</strong>, domain <strong class=\"in-article__visible\">or icon."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:763
 msgid "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
-msgstr "We will get the display by writing input as <strong class=\"in-article__visible\">form_widget</strong> with parameter <strong class=\"in-article__visible\">isSimple:true</strong>."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:779
 msgid "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
-msgstr "We will get the display either by adding class to element or via <strong class=\"in-article__visible\">form_widget</strong> we add <strong class=\"in-article__visible\">attr class</strong>"
+msgstr ""
 
 #: Content/Login/loginForm.html.twig:26
 #: Content/Login/windowForm.html.twig:28
 msgid "We will remember your login on this computer for 30 days."
-msgstr "We will remember your login on this computer for 30 days."
+msgstr ""
 
 #: Content/Currency/currencySettings.html.twig:6
 msgid "When changing the default currency there is no recalculation of prices"
-msgstr "When changing the default currency there is no recalculation of prices"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1191
 msgid "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
-msgstr "When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that's why we need to set a fixed width so that icons after text are aligned."
+msgstr ""
 
 #: Content/Image/overview.html.twig:27
 msgid "Width [px]"
-msgstr "Width [px]"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:760
 msgid "Without any form structure and modification"
-msgstr "Without any form structure and modification"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:153
 msgid "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart"
-msgstr "Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:138
 msgid "Wrap-bar"
-msgstr "Wrap-bar"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:151
 msgid "Wrap-border"
-msgstr "Wrap-border"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:136
 msgid "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information."
-msgstr "Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information."
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:19
 #: Content/Superadmin/cssDocumentation.html.twig:134
 msgid "Wrapping/separating elements"
-msgstr "Wrapping/separating elements"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:81
 msgid "Writing of css characteristics according to priorities"
-msgstr "Writing of css characteristics according to priorities"
+msgstr ""
 
 #: Resources/config/admin_menu.yml:
 #: Content/Feed/list.html.twig:4
 #: Content/Feed/list.html.twig:3
 msgid "XML Feeds"
-msgstr "XML Feeds"
+msgstr ""
 
 #: Content/Feed/listDelivery.html.twig:3
 #: Content/Feed/listDelivery.html.twig:4
 msgid "XML availability feeds"
-msgstr "XML availability feeds"
+msgstr ""
 
 #: YesNoType.php:42
 #: Content/Advert/listGrid.html.twig:18
@@ -5050,27 +5050,27 @@ msgstr "XML availability feeds"
 #: Admin/Grid/Grid.html.twig:343
 #: grid.inlineEdit.js:36
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: Inline/Menu/menu.html.twig:3
 msgid "You are in:"
-msgstr "You are in:"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:131
 msgid "You can drag additional content here."
-msgstr "You can drag additional content here."
+msgstr ""
 
 #: Content/Article/listGrid.html.twig:8
 msgid "You can drag articles here."
-msgstr "You can drag articles here."
+msgstr ""
 
 #: Content/Product/edit.html.twig:172
 msgid "You can set the categories on product detail of the main variant"
-msgstr "You can set the categories on product detail of the main variant"
+msgstr ""
 
 #: Content/Product/edit.html.twig:185
 msgid "You can set the prices on product detail of specific variant."
-msgstr "You can set the prices on product detail of specific variant."
+msgstr ""
 
 #: Content/Advert/detail.html.twig:30
 #: Content/Brand/detail.html.twig:22
@@ -5080,129 +5080,129 @@ msgstr "You can set the prices on product detail of specific variant."
 #: Content/Slider/detail.html.twig:25
 #: Content/Transport/detail.html.twig:52
 msgid "You can upload following formats: PNG, JPG, GIF"
-msgstr "You can upload following formats: PNG, JPG, GIF"
+msgstr ""
 
 #: AdministratorController.php:227
 msgid "You can't delete yourself."
-msgstr "You can't delete yourself."
+msgstr ""
 
 #: Content/ProductPicker/listGrid.html.twig:30
 msgid "You cannot choose product that is main variant"
-msgstr "You cannot choose product that is main variant"
+msgstr ""
 
 #: Content/ProductPicker/listGrid.html.twig:35
 msgid "You cannot choose product that is variant"
-msgstr "You cannot choose product that is variant"
+msgstr ""
 
 #: RegistrationController.php:65
 msgid "You have been successfully registered."
-msgstr "You have been successfully registered."
+msgstr ""
 
 #: newsletterSubscriptionForm.js:35
 msgid "You have been successfully subscribed to our newsletter."
-msgstr "You have been successfully subscribed to our newsletter."
+msgstr ""
 
 #: formChangeInfo.js:46
 msgid "You have made changes, don't forget to save them!"
-msgstr "You have made changes, don't forget to save them!"
+msgstr ""
 
 #: CustomerController.php:67
 #: CustomerController.php:101
 #: CustomerController.php:135
 msgid "You have to be logged in to enter this page"
-msgstr "You have to be logged in to enter this page"
+msgstr ""
 
 #: Content/Payment/detail.html.twig:42
 msgid "You have to create some shipping first."
-msgstr "You have to create some shipping first."
+msgstr ""
 
 #: formChangeInfo.js:28
 msgid "You have unsaved changes!"
-msgstr "You have unsaved changes!"
+msgstr ""
 
 #: Content/Cart/index.html.twig:128
 msgid "You still have to purchase products for <strong> %price% </strong> for <strong> free </strong> shipping and payment."
-msgstr "You still have to purchase products for <strong> %price% </strong> for <strong> free </strong> shipping and payment."
+msgstr ""
 
 #: Content/Cart/index.html.twig:17
 msgid "Your cart"
-msgstr "Your cart"
+msgstr ""
 
 #: Inline/Cart/cartBox.html.twig:9
 msgid "Your cart is empty"
-msgstr "Your cart is empty"
+msgstr ""
 
 #: Content/Cart/index.html.twig:160
 msgid "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
-msgstr "Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href=\"%url%\">first"
+msgstr ""
 
 #: CustomerController.php:86
 msgid "Your data had been successfully updated"
-msgstr "Your data had been successfully updated"
+msgstr ""
 
 #: Order/PromoCode/index.html.twig:11
 msgid "Your discount"
-msgstr "Your discount"
+msgstr ""
 
 #: Content/Product/detail.html.twig:368
 msgid "Zboží.cz"
-msgstr "Zboží.cz"
+msgstr ""
 
 #: AdvertPositionList.php:20
 msgid "above footer"
-msgstr "above footer"
+msgstr ""
 
 #: Content/Administrator/listGrid.html.twig:8
 msgid "administrators"
-msgstr "administrators"
+msgstr ""
 
 #: Content/Advert/listGrid.html.twig:12
 msgid "advertisings"
-msgstr "advertisings"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:24
 msgid "after"
-msgstr "after"
+msgstr ""
 
 #: ProductListOrderingModeForBrandFacade.php:28
 #: ProductListOrderingModeForListFacade.php:28
 #: ProductListOrderingModeForSearchFacade.php:29
 msgid "alphabetically A -> Z"
-msgstr "alphabetically A -> Z"
+msgstr ""
 
 #: ProductListOrderingModeForBrandFacade.php:29
 #: ProductListOrderingModeForListFacade.php:29
 #: ProductListOrderingModeForSearchFacade.php:30
 msgid "alphabetically Z -> A"
-msgstr "alphabetically Z -> A"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1058
 msgid "and also into more lines"
-msgstr "and also into more lines"
+msgstr ""
 
 #: Content/Article/listGrid.html.twig:12
 msgid "articles"
-msgstr "articles"
+msgstr ""
 
 #: Content/Availability/listGrid.html.twig:8
 msgid "availability"
-msgstr "availability"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:23
 msgid "before"
-msgstr "before"
+msgstr ""
 
 #: Content/Brand/listGrid.html.twig:12
 msgid "brands"
-msgstr "brands"
+msgstr ""
 
 #: Content/BestsellingProduct/listGrid.html.twig:15
 msgid "category"
-msgstr "category"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:1361
 msgid "characters out of 155 possible"
-msgstr "characters out of 155 possible"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:842
 #: Content/Superadmin/cssDocumentation.html.twig:846
@@ -5211,235 +5211,235 @@ msgstr "characters out of 155 possible"
 #: Content/Superadmin/cssDocumentation.html.twig:1278
 #: Content/Superadmin/cssDocumentation.html.twig:1282
 msgid "checkbox in list"
-msgstr "checkbox in list"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:101
 msgid "components - components of content part, subfolders divide components logically apart"
-msgstr "components - components of content part, subfolders divide components logically apart"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:89
 msgid "core - basic settings for elements (css reset, variables, mixins, form elements, headings..)"
-msgstr "core - basic settings for elements (css reset, variables, mixins, form elements, headings..)"
+msgstr ""
 
 #: Content/Country/listGrid.html.twig:8
 msgid "countries"
-msgstr "countries"
+msgstr ""
 
 #: Content/Currency/listGrid.html.twig:57
 msgid "currencies"
-msgstr "currencies"
+msgstr ""
 
 #: Content/Customer/listGrid.html.twig:24
 msgid "customers"
-msgstr "customers"
+msgstr ""
 
 #: Content/Image/overview.html.twig:37
 msgid "default"
-msgstr "default"
+msgstr ""
 
 #: Content/PromoCode/listGrid.html.twig:19
 msgid "discount coupons"
-msgstr "discount coupons"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:17
 msgid "doesn't include"
-msgstr "doesn't include"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:22
 msgid "doesn't use"
-msgstr "doesn't use"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:862
 msgid "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
-msgstr "domain icon only in checkbox list, icon is inserted <strong class=\"in-article__visible\">domainIcon(domainId, \"small\") </strong>"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:871
 msgid "domain icon only in checkbox list, it is possible to add action icon"
-msgstr "domain icon only in checkbox list, it is possible to add action icon"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:56
 msgid "double signs are clear and developer will intuitively know senses of different classes given"
-msgstr "double signs are clear and developer will intuitively know senses of different classes given"
+msgstr ""
 
 #: Content/Product/bestsellingProductsList.html.twig:22
 #: Content/Product/detail.html.twig:79
 msgid "excluding VAT"
-msgstr "excluding VAT"
+msgstr ""
 
 #: Content/Flag/listGrid.html.twig:8
 msgid "flags"
-msgstr "flags"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:221
 #: Inline/Paginator/paginator.html.twig:9
 msgid "from"
-msgstr "from"
+msgstr ""
 
 #: Content/Product/productListMacro.html.twig:29
 #: Content/Product/productListMacro.html.twig:36
 msgid "from %price%"
-msgstr "from %price%"
+msgstr ""
 
 #: ProductListOrderingModeForBrandFacade.php:31
 #: ProductListOrderingModeForListFacade.php:31
 #: ProductListOrderingModeForSearchFacade.php:32
 msgid "from most expensive"
-msgstr "from most expensive"
+msgstr ""
 
 #: ProductListOrderingModeForBrandFacade.php:30
 #: ProductListOrderingModeForListFacade.php:30
 #: ProductListOrderingModeForSearchFacade.php:31
 msgid "from the cheapest"
-msgstr "from the cheapest"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:98
 msgid "helpers - helpers, that have to be loaded last"
-msgstr "helpers - helpers, that have to be loaded last"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:27
 msgid "higher or equal"
-msgstr "higher or equal"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:25
 msgid "higher than"
-msgstr "higher than"
+msgstr ""
 
 #: AdvertPositionList.php:21
 msgid "in category (above the category name)"
-msgstr "in category (above the category name)"
+msgstr ""
 
 #: ArticlePlacementList.php:19
 msgid "in footer"
-msgstr "in footer"
+msgstr ""
 
 #: AdvertPositionList.php:22
 msgid "in left panel (under category tree)"
-msgstr "in left panel (under category tree)"
+msgstr ""
 
 #: ArticlePlacementList.php:18
 msgid "in upper menu"
-msgstr "in upper menu"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:16
 msgid "include"
-msgstr "include"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:19
 msgid "is"
-msgstr "is"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:92
 msgid "layout - settings of layout, heading and footer"
-msgstr "layout - settings of layout, heading and footer"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:95
 msgid "libs - third parties components"
-msgstr "libs - third parties components"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:28
 msgid "lower or equal"
-msgstr "lower or equal"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:26
 msgid "lower than"
-msgstr "lower than"
+msgstr ""
 
 #: Content/Customer/edit.html.twig:37
 msgid "never"
-msgstr "never"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:20
 msgid "not"
-msgstr "not"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:18
 msgid "not entered"
-msgstr "not entered"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:59
 msgid "one dash \"-\" represents separator in multi-word title"
-msgstr "one dash \"-\" represents separator in multi-word title"
+msgstr ""
 
 #: Admin/Form/fileuploadFields.html.twig:72
 msgid "or"
-msgstr "or"
+msgstr ""
 
 #: Content/OrderStatus/listGrid.html.twig:32
 msgid "order statuses"
-msgstr "order statuses"
+msgstr ""
 
 #: Content/Order/listGrid.html.twig:33
 msgid "orders"
-msgstr "orders"
+msgstr ""
 
 #: Content/Parameter/listGrid.html.twig:8
 msgid "parameters"
-msgstr "parameters"
+msgstr ""
 
 #: Content/Product/listGrid.html.twig:63
 #: Content/ProductPicker/listGrid.html.twig:65
 #: Content/Product/productsWithControls.html.twig:6
 msgid "products"
-msgstr "products"
+msgstr ""
 
 #: Admin/Grid/Grid.html.twig:220
 #: Inline/Paginator/paginator.html.twig:7
 msgid "records"
-msgstr "records"
+msgstr ""
 
 #: ProductListOrderingModeForSearchFacade.php:27
 msgid "relevance"
-msgstr "relevance"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:829
 msgid "simple checkbox"
-msgstr "simple checkbox"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:835
 msgid "simple checkbox can be ordered consecutively"
-msgstr "simple checkbox can be ordered consecutively"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:53
 msgid "two dash \"--\" represent modification of component"
-msgstr "two dash \"--\" represent modification of component"
+msgstr ""
 
 #: Content/Superadmin/cssDocumentation.html.twig:50
 msgid "two underscores \"__\" represent part of the component/element"
-msgstr "two underscores \"__\" represent part of the component/element"
+msgstr ""
 
 #: AdvertPositionList.php:19
 msgid "under heading"
-msgstr "under heading"
+msgstr ""
 
 #: Content/Unit/listGrid.html.twig:8
 msgid "units"
-msgstr "units"
+msgstr ""
 
 #: Content/Order/edit.html.twig:47
 msgid "unregistered customer"
-msgstr "unregistered customer"
+msgstr ""
 
 #: AdvancedSearchOperatorTranslation.php:21
 msgid "uses"
-msgstr "uses"
+msgstr ""
 
 #: ArticlePlacementList.php:20
 msgid "without positoning"
-msgstr "without positoning"
+msgstr ""
 
 #: Content/Search/autocomplete.html.twig:26
 msgid "{0} No product found | {1} 1 product found | [2,Inf] %totalProductCount% product found"
-msgstr "{0} No product found | {1} 1 product found | [2,Inf] %totalProductCount% product found"
+msgstr ""
 
 #: Inline/Cart/cartBox.html.twig:11
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
-msgstr "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
+msgstr ""
 
 #: TimedSpamValidationListener.php:42
 msgid "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
-msgstr "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
+msgstr ""
 
 #: productList.AjaxMoreLoader.js:60
 msgid "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"
-msgstr "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"
+msgstr ""
 
