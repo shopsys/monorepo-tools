@@ -68,7 +68,9 @@ class VatController extends AdminBaseController {
 			$vat = $this->vatFacade->getById($id);
 			if ($this->vatFacade->isVatUsed($vat)) {
 				$message = t(
-					'For deleting rate  "%name%" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?',
+					'For deleting rate  "%name%" you have to choose other one to be set everywhere where the existing one is used. '
+					. 'After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. '
+					. 'Which unit you want to set instead?',
 					['%name%' => $vat->getName()]
 				);
 				$remainingVatsList = new ObjectChoiceList($this->vatFacade->getAllExceptId($id), 'name', [], null, 'id');

@@ -111,13 +111,15 @@ class PricingGroupController extends AdminBaseController {
 
 			if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
 				$message = t(
-					'For removing pricing group "%name%" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?',
+					'For removing pricing group "%name%" you have to choose other one to be set everywhere where the existing one is used. '
+					. 'Which pricing group you want to set instead?',
 					['%name%' => $pricingGroup->getName()]
 				);
 
 				if ($this->pricingGroupSettingFacade->isPricingGroupDefault($pricingGroup)) {
 					$message = t(
-						'Pricing group "%name%" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?',
+						'Pricing group "%name%" set as default. For deleting it you have to choose other one to be set everywhere '
+						. 'where the existing one is used. Which pricing group you want to set instead?',
 						['%name%' => $pricingGroup->getName()]
 					);
 				}

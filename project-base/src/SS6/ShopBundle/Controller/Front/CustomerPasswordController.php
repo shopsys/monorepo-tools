@@ -58,7 +58,8 @@ class CustomerPasswordController extends FrontBaseController {
 				return $this->redirectToRoute('front_registration_reset_password');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. <a href="{{ registrationLink }}"> Register</a>'),
+					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. '
+						. '<a href="{{ registrationLink }}"> Register</a>'),
 					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
@@ -96,7 +97,8 @@ class CustomerPasswordController extends FrontBaseController {
 				$this->loginService->loginUser($user, $request);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. <a href="{{ registrationLink }}"> Register</a>'),
+					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. '
+						. '<a href="{{ registrationLink }}"> Register</a>'),
 					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),

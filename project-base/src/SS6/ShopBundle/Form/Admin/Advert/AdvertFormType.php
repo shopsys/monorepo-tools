@@ -103,7 +103,8 @@ class AdvertFormType extends AbstractType {
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
 						'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}.',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 				'constraints' => ($this->imageUploaded ? [] : $imageConstraints),

@@ -101,12 +101,14 @@ class AvailabilityController extends AdminBaseController {
 			if ($this->availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
 				if ($isAvailabilityDefault) {
 					$message = t(
-						'Availability "%name%" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?',
+						'Availability "%name%" set as default. For deleting it you have to choose other one to be set everywhere '
+						. 'where the existing one is used. Which availability you want to set instead?',
 						['%name%' => $availability->getName()]
 					);
 				} else {
 					$message = t(
-						'Because availability "%name%"  is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?',
+						'Because availability "%name%"  is used with other products also, you have to choose a new availability '
+						. 'which will replace the existing one. Which availability you want to set to these products?',
 						['%name%' => $availability->getName()]
 					);
 				}

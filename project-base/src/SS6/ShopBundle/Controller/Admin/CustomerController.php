@@ -259,7 +259,8 @@ class CustomerController extends AdminBaseController {
 
 				return $this->redirectToRoute('admin_customer_list');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-				$form->get('userData')->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
+				$formErrorMessage = t('There is already a customer with this e-mail in the database');
+				$form->get('userData')->get('email')->addError(new FormError($formErrorMessage));
 			}
 		}
 

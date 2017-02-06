@@ -65,12 +65,14 @@ class UnitController extends AdminBaseController {
 			if ($this->unitFacade->isUnitUsed($unit) || $isUnitDefault) {
 				if ($isUnitDefault) {
 					$message = t(
-						'Unit "%name%" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?',
+						'Unit "%name%" set as default. For deleting existing unit you have to choose new default unit. '
+						. 'Which unit you want to set instead?',
 						['%name%' => $unit->getName()]
 					);
 				} else {
 					$message = t(
-						'For deleting unit "%name%" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?',
+						'For deleting unit "%name%" you have to choose other one to be set everywhere where the existing one is used. '
+						. 'Which unit you want to set instead?',
 						['%name%' => $unit->getName()]
 					);
 				}

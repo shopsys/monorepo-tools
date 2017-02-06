@@ -28,7 +28,8 @@ class BestsellingProductFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\UniqueCollection([
 						'allowEmpty' => true,
-						'message' => 'You entered same product twice. In list of bestsellers can be product only once. Please correct it and then save form again.',
+						'message' => 'You entered same product twice. In list of bestsellers can be product only once. '
+							. 'Please correct it and then save form again.',
 					]),
 				],
 			])
