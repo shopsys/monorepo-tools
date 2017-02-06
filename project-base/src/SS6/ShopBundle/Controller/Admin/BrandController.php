@@ -127,7 +127,7 @@ class BrandController extends AdminBaseController {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_brand_edit', ['id' => 'b.id']);
 		$grid->addDeleteActionColumn('admin_brand_delete', ['id' => 'b.id'])
-			->setConfirmMessage('Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude odnastavena.');
+			->setConfirmMessage(t('Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude odnastavena.'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Brand/listGrid.html.twig');
 

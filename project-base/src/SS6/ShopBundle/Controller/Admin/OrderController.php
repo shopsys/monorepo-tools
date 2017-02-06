@@ -243,7 +243,7 @@ class OrderController extends AdminBaseController {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_order_edit', ['id' => 'id']);
 		$grid->addDeleteActionColumn('admin_order_delete', ['id' => 'id'])
-			->setConfirmMessage('Opravdu si přejete objednávku smazat?');
+			->setConfirmMessage(t('Opravdu si přejete objednávku smazat?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');
 

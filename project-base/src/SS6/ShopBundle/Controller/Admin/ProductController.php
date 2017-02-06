@@ -369,7 +369,7 @@ class ProductController extends AdminBaseController {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_product_edit', ['id' => 'p.id']);
 		$grid->addDeleteActionColumn('admin_product_delete', ['id' => 'p.id'])
-			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+			->setConfirmMessage(t('Opravdu chcete odstranit toto zboží?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig', [
 			'VARIANT_TYPE_MAIN' => Product::VARIANT_TYPE_MAIN,

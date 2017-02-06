@@ -127,7 +127,7 @@ class ScriptController extends AdminBaseController {
 		$grid->addColumn('placement', 's.placement', t('Location'));
 		$grid->addEditActionColumn('admin_script_edit', ['scriptId' => 's.id']);
 		$grid->addDeleteActionColumn('admin_script_delete', ['scriptId' => 's.id'])
-			->setConfirmMessage('Opravdu chcete odstranit tento skript?');
+			->setConfirmMessage(t('Opravdu chcete odstranit tento skript?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Script/listGrid.html.twig', [
 			'PLACEMENT_ORDER_SENT_PAGE' => Script::PLACEMENT_ORDER_SENT_PAGE,
