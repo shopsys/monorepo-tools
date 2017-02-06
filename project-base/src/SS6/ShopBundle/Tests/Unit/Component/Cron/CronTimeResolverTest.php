@@ -7,9 +7,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Cron\CronTimeInterface;
 use SS6\ShopBundle\Component\Cron\CronTimeResolver;
 
-/**
- * @UglyTest
- */
 class CronTimeResolverTest extends PHPUnit_Framework_TestCase {
 
 	public function validTimeStringProvider() {

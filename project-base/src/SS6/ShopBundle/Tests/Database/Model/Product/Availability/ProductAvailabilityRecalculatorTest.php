@@ -10,9 +10,6 @@ use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
 use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
 
 	public function testRecalculateOnProductEditNotUsingStock() {

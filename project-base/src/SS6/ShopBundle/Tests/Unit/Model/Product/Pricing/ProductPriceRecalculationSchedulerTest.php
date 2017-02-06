@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-/**
- * @UglyTest
- */
 class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase {
 
 	public function testProductCanBeScheduledForImmediateRecalculation() {

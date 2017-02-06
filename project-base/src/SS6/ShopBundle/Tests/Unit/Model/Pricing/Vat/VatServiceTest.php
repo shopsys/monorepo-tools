@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Model\Pricing\Vat\VatService;
 
-/**
- * @UglyTest
- */
 class VatServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {

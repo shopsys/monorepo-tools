@@ -8,9 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-/**
- * @UglyTest
- */
 class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetRouterRouterNotResolvedException() {

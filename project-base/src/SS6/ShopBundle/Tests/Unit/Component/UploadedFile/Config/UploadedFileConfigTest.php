@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 
-/**
- * @UglyTest
- */
 class UploadedFileConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetEntityName() {

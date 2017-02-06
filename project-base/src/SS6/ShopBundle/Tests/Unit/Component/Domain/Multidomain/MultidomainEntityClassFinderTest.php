@@ -6,9 +6,6 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
 
-/**
- * @UglyTest
- */
 class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetMultidomainEntitiesNames() {

@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
 use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
 use SS6\ShopBundle\Component\Translation\JsFileExtractor;
 
-/**
- * @UglyTest
- */
 class JsFileExtractorTest extends \PHPUnit_Framework_TestCase {
 
 	public function testExtract() {

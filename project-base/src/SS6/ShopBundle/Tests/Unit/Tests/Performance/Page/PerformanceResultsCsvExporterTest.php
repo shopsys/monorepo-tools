@@ -7,9 +7,6 @@ use SS6\ShopBundle\Tests\Performance\JmeterCsvReporter;
 use SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
 use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
-/**
- * @UglyTest
- */
 class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 
 	public function testExportJmeterCsvReportWritesExpectedHeader() {

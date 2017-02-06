@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
 use SS6\ShopBundle\Model\Script\Script;
 use stdClass;
 
-/**
- * @UglyTest
- */
 class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase {
 
 	public function testTransform() {

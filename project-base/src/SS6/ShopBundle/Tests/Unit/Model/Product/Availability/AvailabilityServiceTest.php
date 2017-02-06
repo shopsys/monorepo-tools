@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Product\Availability\Availability;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
 use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
 
-/**
- * @UglyTest
- */
 class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {

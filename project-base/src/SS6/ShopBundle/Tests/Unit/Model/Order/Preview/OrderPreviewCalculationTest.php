@@ -20,9 +20,6 @@ use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class OrderPreviewCalculationTest extends FunctionalTestCase {
 
 	/**

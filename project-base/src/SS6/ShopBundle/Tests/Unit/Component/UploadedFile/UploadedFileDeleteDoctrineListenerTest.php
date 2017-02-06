@@ -13,9 +13,6 @@ use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @UglyTest
- */
 class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase {
 
 	public function testPreRemoveDeleteFile() {

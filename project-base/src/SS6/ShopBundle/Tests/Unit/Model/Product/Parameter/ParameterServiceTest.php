@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Product\Parameter\Parameter;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
 use SS6\ShopBundle\Model\Product\Parameter\ParameterService;
 
-/**
- * @UglyTest
- */
 class ParameterServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {

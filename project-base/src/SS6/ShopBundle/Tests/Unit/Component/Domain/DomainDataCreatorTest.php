@@ -12,9 +12,6 @@ use SS6\ShopBundle\Component\Setting\Setting;
 use SS6\ShopBundle\Component\Setting\SettingValueRepository;
 use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
-/**
- * @UglyTest
- */
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateNewDomainsDataNoNewDomain() {

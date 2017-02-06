@@ -6,9 +6,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
-/**
- * @UglyTest
- */
 class ProductTest extends PHPUnit_Framework_TestCase {
 
 	public function testNoVariant() {

@@ -14,9 +14,6 @@ use SS6\ShopBundle\Model\Transport\TransportDomain;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class OrderTransportAndPaymentTest extends DatabaseTestCase {
 
 	public function testVisibleTransport() {

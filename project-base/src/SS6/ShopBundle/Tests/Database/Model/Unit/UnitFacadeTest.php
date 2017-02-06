@@ -10,9 +10,6 @@ use SS6\ShopBundle\Model\Product\Unit\UnitData;
 use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class UnitFacadeTest extends DatabaseTestCase {
 
 	public function testDeleteByIdAndReplace() {

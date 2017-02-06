@@ -8,9 +8,6 @@ use SS6\ShopBundle\Component\Form\FormTimeProvider;
 use SS6\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-/**
- * @UglyTest
- */
 class FormTimeProviderTest extends PHPUnit_Framework_TestCase {
 
 	public function isFormTimeValidProvider() {

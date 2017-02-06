@@ -8,9 +8,6 @@ use StdClass;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
-/**
- * @UglyTest
- */
 class LoginServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCheckLoginProcessWithRequestError() {

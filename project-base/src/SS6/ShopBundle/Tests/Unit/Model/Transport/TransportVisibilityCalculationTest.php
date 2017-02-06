@@ -10,9 +10,6 @@ use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-/**
- * @UglyTest
- */
 class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsVisibleWhenIndepentlyInvisible() {

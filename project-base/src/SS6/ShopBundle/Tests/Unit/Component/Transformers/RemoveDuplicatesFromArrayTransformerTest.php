@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Tests\Unit\Component\Router;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 
-/**
- * @UglyTest
- */
 class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase {
 
 	public function testReverseTransform() {

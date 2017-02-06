@@ -6,9 +6,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\AdminNavigation\Menu;
 use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
 
-/**
- * @UglyTest
- */
 class MenuTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsRouteMatchingDescendantOfSettings() {

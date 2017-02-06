@@ -6,9 +6,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
-/**
- * @UglyTest
- */
 class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testSetPositionNull() {

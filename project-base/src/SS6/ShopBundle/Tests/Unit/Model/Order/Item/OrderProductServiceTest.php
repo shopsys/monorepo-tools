@@ -10,9 +10,6 @@ use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
-/**
- * @UglyTest
- */
 class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testSubtractOrderProductsFromStockUsingStock() {

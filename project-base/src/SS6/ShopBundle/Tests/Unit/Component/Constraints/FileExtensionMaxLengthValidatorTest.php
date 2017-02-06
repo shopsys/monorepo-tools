@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\Constraints\FileExtensionMaxLengthValidator;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
-/**
- * @UglyTest
- */
 class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTest {
 
 	/**

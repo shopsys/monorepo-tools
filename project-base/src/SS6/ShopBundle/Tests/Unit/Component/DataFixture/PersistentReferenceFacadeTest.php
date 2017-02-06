@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 use SS6\ShopBundle\Model\Product\Product;
 use stdClass;
 
-/**
- * @UglyTest
- */
 class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testPersistReferenceWrongEntity() {

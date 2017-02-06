@@ -8,9 +8,6 @@ use SS6\ShopBundle\Component\Domain\Domain;
 use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
-/**
- * @UglyTest
- */
 class DomainTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetIdNotSet() {

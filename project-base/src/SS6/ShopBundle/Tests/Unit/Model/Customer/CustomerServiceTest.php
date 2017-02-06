@@ -22,9 +22,6 @@ use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 
-/**
- * @UglyTest
- */
 class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {

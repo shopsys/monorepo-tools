@@ -6,9 +6,6 @@ use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslat
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase {
 
 	public function testTranslateFilterName() {

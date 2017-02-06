@@ -8,9 +8,6 @@ use SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
 use SS6\ShopBundle\Component\Setting\SettingValue;
 use stdClass;
 
-/**
- * @UglyTest
- */
 class SettingValueTest extends PHPUnit_Framework_TestCase {
 
 	public function editProvider() {

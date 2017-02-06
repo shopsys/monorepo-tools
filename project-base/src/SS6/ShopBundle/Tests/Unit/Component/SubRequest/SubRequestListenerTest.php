@@ -9,9 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-/**
- * @UglyTest
- */
 class SubRequestListenerTest extends PHPUnit_Framework_TestCase {
 
 	/**

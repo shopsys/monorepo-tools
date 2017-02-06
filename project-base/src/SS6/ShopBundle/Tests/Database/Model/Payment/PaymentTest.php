@@ -11,9 +11,6 @@ use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportEditFacade;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class PaymentTest extends DatabaseTestCase {
 
 	public function testRemoveTransportFromPaymentAfterDelete() {

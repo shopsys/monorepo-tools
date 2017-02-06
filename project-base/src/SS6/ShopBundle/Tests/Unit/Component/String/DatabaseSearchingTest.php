@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Tests\Unit\Component\String;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\String\DatabaseSearching;
 
-/**
- * @UglyTest
- */
 class DatabaseSearchingTest extends PHPUnit_Framework_TestCase {
 
 	public function searchTextProvider() {

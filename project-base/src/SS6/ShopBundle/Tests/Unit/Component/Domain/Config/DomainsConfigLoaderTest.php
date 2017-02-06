@@ -6,9 +6,6 @@ use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
 use SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class DomainsConfigLoaderTest extends FunctionalTestCase {
 
 	public function testLoadDomainConfigsFromYaml() {

@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Product\Flag\Flag;
 use SS6\ShopBundle\Model\Product\Flag\FlagData;
 use SS6\ShopBundle\Model\Product\Flag\FlagService;
 
-/**
- * @UglyTest
- */
 class FlagServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreate() {

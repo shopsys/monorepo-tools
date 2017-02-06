@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 
-/**
- * @UglyTest
- */
 class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 
 	public function testTransform() {

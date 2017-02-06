@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\Router\DomainRouterFactory;
 use SS6\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
-/**
- * @UglyTest
- */
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
 
 	public function testDelegateRouter() {

@@ -16,9 +16,6 @@ use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 
-/**
- * @UglyTest
- */
 class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetManualInputPricesDataWithManualCalculationType() {

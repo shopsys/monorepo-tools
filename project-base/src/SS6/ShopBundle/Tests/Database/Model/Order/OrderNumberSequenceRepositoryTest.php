@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Tests\Database\Model\Order;
 use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class OrderNumberSequenceRepositoryTest extends DatabaseTestCase {
 
 	public function testGetNextNumber() {

@@ -6,9 +6,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 
-/**
- * @UglyTest
- */
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	/**

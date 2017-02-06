@@ -7,9 +7,6 @@ use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
 
 	public function testGetOneRow() {

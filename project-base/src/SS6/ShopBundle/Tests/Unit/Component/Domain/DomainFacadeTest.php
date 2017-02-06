@@ -13,9 +13,6 @@ use SS6\ShopBundle\Model\Pricing\Currency\Currency;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @UglyTest
- */
 class DomainFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testGeDomainConfigsByCurrency() {

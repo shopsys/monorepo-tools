@@ -8,9 +8,6 @@ use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 	public function testCalculateSellingDeniedForProductSellableVariant() {

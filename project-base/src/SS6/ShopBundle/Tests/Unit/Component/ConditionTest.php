@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Tests\Unit\Component;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Condition;
 
-/**
- * @UglyTest
- */
 class ConditionTest extends PHPUnit_Framework_TestCase {
 
 	public function testIfNull() {

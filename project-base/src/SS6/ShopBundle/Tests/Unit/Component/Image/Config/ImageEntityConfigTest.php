@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException;
 use SS6\ShopBundle\Component\Image\Config\ImageEntityConfig;
 use SS6\ShopBundle\Component\Image\Config\ImageSizeConfig;
 
-/**
- * @UglyTest
- */
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetTypeSizes() {

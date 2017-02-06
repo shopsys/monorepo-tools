@@ -4,9 +4,6 @@ namespace SS6\ShopBundle\Tests\Database\Controller;
 
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class HomepageControllerTest extends FunctionalTestCase {
 
 	public function testHomepageHttpStatus200() {

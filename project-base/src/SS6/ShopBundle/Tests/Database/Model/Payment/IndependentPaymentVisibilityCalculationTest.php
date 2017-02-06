@@ -10,9 +10,6 @@ use SS6\ShopBundle\Model\Pricing\Vat\Vat;
 use SS6\ShopBundle\Model\Pricing\Vat\VatData;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 	public function testIsIndependentlyVisible() {

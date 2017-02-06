@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\Image\ImageLocator;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @UglyTest
- */
 class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 
 	/**

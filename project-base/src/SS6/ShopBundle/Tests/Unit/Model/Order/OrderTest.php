@@ -15,9 +15,6 @@ use SS6\ShopBundle\Model\Payment\Payment;
 use SS6\ShopBundle\Model\Payment\PaymentData;
 use SS6\ShopBundle\Model\Pricing\Price;
 
-/**
- * @UglyTest
- */
 class OrderTest extends PHPUnit_Framework_TestCase {
 
 	const DOMAIN_ID = 1;

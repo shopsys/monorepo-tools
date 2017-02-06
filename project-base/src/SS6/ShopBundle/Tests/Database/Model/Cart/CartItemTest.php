@@ -13,9 +13,6 @@ use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class CartItemTest extends DatabaseTestCase {
 
 	public function testIsSimilarItemAs() {

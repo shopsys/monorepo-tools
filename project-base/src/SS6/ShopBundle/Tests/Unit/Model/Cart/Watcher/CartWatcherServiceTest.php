@@ -18,9 +18,6 @@ use SS6\ShopBundle\Model\Product\ProductVisibility;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class CartWatcherServiceTest extends FunctionalTestCase {
 
 	public function testGetModifiedPriceItemsAndUpdatePrices() {

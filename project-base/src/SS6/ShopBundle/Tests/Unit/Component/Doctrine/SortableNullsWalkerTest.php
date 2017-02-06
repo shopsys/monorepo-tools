@@ -7,9 +7,6 @@ use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
 use SS6\ShopBundle\Model\Product\Product;
 use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
 
-/**
- * @UglyTest
- */
 class SortableNullsWalkerTest extends FunctionalTestCase {
 
 	public function testWalkOrderByItemAsc() {

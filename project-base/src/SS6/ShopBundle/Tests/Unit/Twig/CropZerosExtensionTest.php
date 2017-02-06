@@ -5,9 +5,6 @@ namespace SS6\ShopBundle\Tests\Unit\Twig;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Twig\CropZerosExtension;
 
-/**
- * @UglyTest
- */
 class CropZerosExtensionTest extends PHPUnit_Framework_TestCase {
 
 	public function returnValuesProvider() {

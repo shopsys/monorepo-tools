@@ -10,9 +10,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 
-/**
- * @UglyTest
- */
 class FragmentHandlerTest extends PHPUnit_Framework_TestCase {
 
 	public function testRenderNotIgnoreErrorsWithoutDebug() {

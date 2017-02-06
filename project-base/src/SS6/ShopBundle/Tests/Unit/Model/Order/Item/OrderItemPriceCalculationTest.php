@@ -8,9 +8,6 @@ use SS6\ShopBundle\Model\Order\Item\OrderItemData;
 use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use SS6\ShopBundle\Model\Pricing\PriceCalculation;
 
-/**
- * @UglyTest
- */
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testCalculatePriceWithoutVat() {

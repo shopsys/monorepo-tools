@@ -14,9 +14,6 @@ use SS6\ShopBundle\Component\Cron\CronTimeResolver;
 use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
-/**
- * @UglyTest
- */
 class CronFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testRunModuleByModuleId() {

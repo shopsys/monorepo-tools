@@ -19,9 +19,6 @@ use SS6\ShopBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
-/**
- * @UglyTest
- */
 class OrderMailServiceTest extends FunctionalTestCase {
 
 	public function testGetMailTemplateNameByStatus() {

@@ -7,9 +7,6 @@ use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
 use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-/**
- * @UglyTest
- */
 class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
 
 	public function testOnKernelResponseRecalc() {

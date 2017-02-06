@@ -11,9 +11,6 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-/**
- * @UglyTest
- */
 class TranslatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testTransWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage() {

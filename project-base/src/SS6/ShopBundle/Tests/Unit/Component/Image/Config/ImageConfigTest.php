@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\Image\Config\ImageConfigLoader;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @UglyTest
- */
 class ImageConfigTest extends PHPUnit_Framework_TestCase {
 
 	/**

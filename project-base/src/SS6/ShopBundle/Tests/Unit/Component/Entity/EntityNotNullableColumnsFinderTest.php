@@ -7,9 +7,6 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 
-/**
- * @UglyTest
- */
 class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetAllNotNullableColumnNamesIndexedByTableName() {

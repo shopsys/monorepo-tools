@@ -6,9 +6,6 @@ use PHPUnit_Framework_TestCase;
 use SS6\ShopBundle\Model\Pricing\PricingSetting;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 
-/**
- * @UglyTest
- */
 class RoundingTest extends PHPUnit_Framework_TestCase {
 
 	public function roundingProvider() {

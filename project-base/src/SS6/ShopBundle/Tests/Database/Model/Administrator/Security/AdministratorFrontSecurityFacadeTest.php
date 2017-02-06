@@ -9,9 +9,6 @@ use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-/**
- * @UglyTest
- */
 class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase {
 
 	public function testIsAdministratorLoggedNot() {

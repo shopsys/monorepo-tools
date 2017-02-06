@@ -15,9 +15,6 @@ use SS6\ShopBundle\Model\Product\ProductEditFacade;
 use SS6\ShopBundle\Model\Product\ProductRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class ProductRepositoryTest extends DatabaseTestCase{
 
 	public function testVisibleAndNotSellingDeniedProductIsListed() {

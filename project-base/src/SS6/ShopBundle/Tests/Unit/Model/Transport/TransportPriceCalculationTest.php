@@ -15,9 +15,6 @@ use SS6\ShopBundle\Model\Transport\Transport;
 use SS6\ShopBundle\Model\Transport\TransportData;
 use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-/**
- * @UglyTest
- */
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function calculateIndependentPriceProvider() {

@@ -14,9 +14,6 @@ use SS6\ShopBundle\Model\Product\ProductData;
 use SS6\ShopBundle\Model\Product\ProductService;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class ProductServiceTest extends DatabaseTestCase {
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat() {

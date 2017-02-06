@@ -7,9 +7,6 @@ use SS6\ShopBundle\DataFixtures\Base\AdministratorDataFixture;
 use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
 use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
 
-/**
- * @UglyTest
- */
 class AdministratorRepositoryTest extends DatabaseTestCase {
 
 	public function testGetByValidMultidomainLogin() {

@@ -16,9 +16,6 @@ use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use SS6\ShopBundle\Model\Pricing\Price;
 use SS6\ShopBundle\Model\Pricing\Rounding;
 
-/**
- * @UglyTest
- */
 class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetOrderTotalPrice() {

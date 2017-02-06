@@ -8,9 +8,6 @@ use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
 use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
 
-/**
- * @UglyTest
- */
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetReturnsTheSameCartForTheSameCustomer() {

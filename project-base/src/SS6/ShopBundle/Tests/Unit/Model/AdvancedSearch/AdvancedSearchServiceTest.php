@@ -9,9 +9,6 @@ use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
 use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
-/**
- * @UglyTest
- */
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 
 	public function testCreateDefaultRuleFormData() {

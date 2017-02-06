@@ -10,9 +10,6 @@ use SS6\ShopBundle\Component\Image\DirectoryStructureCreator;
 use SS6\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @UglyTest
- */
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {
 
 	public function testMakeImageDirectories() {

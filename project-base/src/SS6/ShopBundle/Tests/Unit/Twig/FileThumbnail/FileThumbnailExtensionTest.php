@@ -8,9 +8,6 @@ use SS6\ShopBundle\Component\FileUpload\FileUpload;
 use SS6\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
 use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
-/**
- * @UglyTest
- */
 class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage() {
