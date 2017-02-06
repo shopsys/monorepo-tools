@@ -1193,6 +1193,7 @@ msgstr "Nastavení výchozí jednotky bylo upraveno"
 msgid "Default unit will be used when creating new product"
 msgstr "Výchozí jednotka bude použita při vytvoření nového produktu"
 
+#: Grid.php:277
 #: Content/Mail/template.html.twig:34
 #: Content/Product/edit.html.twig:346
 #: Admin/Form/fileuploadFields.html.twig:23
@@ -1540,6 +1541,7 @@ msgstr "Identifikace e-shopu"
 msgid "EAN"
 msgstr "EAN"
 
+#: Grid.php:267
 #: Content/Domain/listGrid.html.twig:14
 #: Admin/Grid/Grid.html.twig:172
 msgid "Edit"

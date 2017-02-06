@@ -264,7 +264,7 @@ class Grid {
 	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
 	 */
 	public function addEditActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
-		return $this->addActionColumn(ActionColumn::TYPE_EDIT, t('Upravit'), $route, $bindingRouteParams, $additionalRouteParams);
+		return $this->addActionColumn(ActionColumn::TYPE_EDIT, t('Edit'), $route, $bindingRouteParams, $additionalRouteParams);
 	}
 
 	/**
@@ -274,7 +274,7 @@ class Grid {
 	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
 	 */
 	public function addDeleteActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
-		return $this->addActionColumn(ActionColumn::TYPE_DELETE, t('Smazat'), $route, $bindingRouteParams, $additionalRouteParams);
+		return $this->addActionColumn(ActionColumn::TYPE_DELETE, t('Delete'), $route, $bindingRouteParams, $additionalRouteParams);
 	}
 
 	/**

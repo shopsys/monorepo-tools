@@ -1193,6 +1193,7 @@ msgstr "Default unit settings modified"
 msgid "Default unit will be used when creating new product"
 msgstr "Default unit will be used when creating new product"
 
+#: Grid.php:277
 #: Content/Mail/template.html.twig:34
 #: Content/Product/edit.html.twig:346
 #: Admin/Form/fileuploadFields.html.twig:23
@@ -1540,6 +1541,7 @@ msgstr "E-shop identification"
 msgid "EAN"
 msgstr "EAN"
 
+#: Grid.php:267
 #: Content/Domain/listGrid.html.twig:14
 #: Admin/Grid/Grid.html.twig:172
 msgid "Edit"
