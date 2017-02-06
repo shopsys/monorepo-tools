@@ -60,8 +60,7 @@ class CartWatcherFacade {
 
 		foreach ($modifiedItems as $cartItem) {
 			$this->flashMessageSender->addInfoFlashTwig(
-				t('Byla změněna cena zboží <strong>{{ name }}</strong>'
-				. ', které máte v košíku. Prosím, překontrolujte si objednávku.'),
+				t('Product <strong>{{ name }}</strong> you had in cart is no longer available. Please check your order.'),
 				['name' => $cartItem->getName()]
 			);
 		}
@@ -77,8 +76,7 @@ class CartWatcherFacade {
 			try {
 				$productName = $cartItem->getName();
 				$this->flashMessageSender->addErrorFlashTwig(
-					t('Zboží <strong>{{ name }}</strong>'
-					. ', které jste měli v košíku, již není v nabídce. Prosím, překontrolujte si objednávku.'),
+					t('The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order.'),
 					['name' => $productName]
 				);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {

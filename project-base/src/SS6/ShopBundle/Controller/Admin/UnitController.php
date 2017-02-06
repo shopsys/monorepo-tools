@@ -65,15 +65,12 @@ class UnitController extends AdminBaseController {
 			if ($this->unitFacade->isUnitUsed($unit) || $isUnitDefault) {
 				if ($isUnitDefault) {
 					$message = t(
-						'Jednotka "%name%" je nastavena jako výchozí. '
-						. 'Pro její odstranění musíte zvolit novou výchozí jednotku.' . "\n\n"
-						. 'Jakou jednotku místo ní chcete nastavit?',
+						'Unit "%name%" set as default. For deleting existing unit you have to choose new default unit. Which unit you want to set instead?',
 						['%name%' => $unit->getName()]
 					);
 				} else {
 					$message = t(
-						'Pro odstranění jednotky "%name% musíte zvolit, která se má všude, '
-						. 'kde je aktuálně používaná nastavit. Jakou jednotku místo ní chcete nastavit?',
+						'For deleting unit "%name%" you have to choose other one to be set everywhere where the existing one is used. Which unit you want to set instead?',
 						['%name%' => $unit->getName()]
 					);
 				}

@@ -103,9 +103,7 @@ class OrderStatusController extends AdminBaseController {
 			$orderStatus = $this->orderStatusFacade->getById($id);
 			if ($this->orderStatusFacade->isOrderStatusUsed($orderStatus)) {
 				$message = t(
-					'Jelikož stav "%name%" je používán ještě u některých objednávek, '
-					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
-					. 'Při této změně stavu nebude odeslán email zákazníkům.',
+					'Because status "%name%"  is used with other orders also, you have to choose a new status which will replace the existing one. Which status you want to set to these orders? When changing this, there won\'t be emails sent to customers.',
 					['%name%' => $orderStatus->getName()]
 				);
 				$remainingOrderStatusesList = new ObjectChoiceList($this->orderStatusFacade->getAllExceptId($id), 'name', [], null, 'id');

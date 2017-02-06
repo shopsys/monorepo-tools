@@ -52,8 +52,7 @@ class SliderItemFormType extends AbstractType {
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
 						'mimeTypesMessage' => 'Image can be only in JPG or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek je příliš velký ({{ size }} {{ suffix }}). '
-							. 'Maximální velikost obrázku je {{ limit }} {{ suffix }}.',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])

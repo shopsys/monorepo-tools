@@ -111,16 +111,13 @@ class PricingGroupController extends AdminBaseController {
 
 			if ($this->pricingGroupSettingFacade->isPricingGroupUsed($pricingGroup)) {
 				$message = t(
-					'Pro odstranění cenové skupiny "%name%" musíte zvolit, která se má všude, '
-					. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?',
+					'For removing pricing group "%name%" you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?',
 					['%name%' => $pricingGroup->getName()]
 				);
 
 				if ($this->pricingGroupSettingFacade->isPricingGroupDefault($pricingGroup)) {
 					$message = t(
-						'Cenová skupina "%name%" je nastavena jako výchozí. '
-						. 'Pro její odstranění musíte zvolit, která se má všude, '
-						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou cenovou skupinu místo ní chcete nastavit?',
+						'Pricing group "%name%" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which pricing group you want to set instead?',
 						['%name%' => $pricingGroup->getName()]
 					);
 				}

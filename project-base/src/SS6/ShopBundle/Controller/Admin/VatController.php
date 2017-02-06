@@ -68,9 +68,7 @@ class VatController extends AdminBaseController {
 			$vat = $this->vatFacade->getById($id);
 			if ($this->vatFacade->isVatUsed($vat)) {
 				$message = t(
-					'Pro odstranění sazby "%name% musíte zvolit, která se má všude, '
-					. 'kde je aktuálně používaná nastavit. Po změně sazby DPH dojde k přepočtu cen zboží '
-					. '- základní cena s DPH zůstane zachována. Jakou sazbu místo ní chcete nastavit?',
+					'For deleting rate  "%name%" you have to choose other one to be set everywhere where the existing one is used. After changing the VAT rate products prices will be recalculated - base price with VAT will remain same. Which unit you want to set instead?',
 					['%name%' => $vat->getName()]
 				);
 				$remainingVatsList = new ObjectChoiceList($this->vatFacade->getAllExceptId($id), 'name', [], null, 'id');

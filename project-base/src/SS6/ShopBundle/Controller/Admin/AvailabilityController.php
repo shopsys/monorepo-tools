@@ -75,8 +75,7 @@ class AvailabilityController extends AdminBaseController {
 			} else {
 				$newAvailability = $this->availabilityFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Dostupnost <strong>{{ oldName }}</strong> byla nahrazena dostupností'
-						. ' <strong>{{ newName }}</strong> a byla smazána.'),
+					t('Availability <strong>{{ oldName }}</strong> deleted and replaced by availability <strong>{{ newName }}</strong>'),
 					[
 						'oldName' => $fullName,
 						'newName' => $newAvailability->getName(),
@@ -102,15 +101,12 @@ class AvailabilityController extends AdminBaseController {
 			if ($this->availabilityFacade->isAvailabilityUsed($availability) || $isAvailabilityDefault) {
 				if ($isAvailabilityDefault) {
 					$message = t(
-						'Dostupnost "%name%" je nastavena jako výchozí. '
-						. 'Pro její odstranění musíte zvolit, která se má všude, '
-						. 'kde je aktuálně používaná, nastavit.' . "\n\n" . 'Jakou dostupnost místo ní chcete nastavit?',
+						'Availability "%name%" set as default. For deleting it you have to choose other one to be set everywhere where the existing one is used. Which availability you want to set instead?',
 						['%name%' => $availability->getName()]
 					);
 				} else {
 					$message = t(
-						'Jelikož dostupnost "%name%" je používána ještě u některých produktů, '
-						. 'musíte zvolit, jaká dostupnost bude použita místo ní. Jakou dostupnost chcete těmto produktům nastavit?',
+						'Because availability "%name%"  is used with other products also, you have to choose a new availability which will replace the existing one. Which availability you want to set to these products?',
 						['%name%' => $availability->getName()]
 					);
 				}

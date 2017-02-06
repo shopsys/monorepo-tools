@@ -305,8 +305,7 @@ class OrderController extends FrontBaseController {
 
 		if ($transportAndPaymentCheckResult->isTransportPriceChanged()) {
 			$this->getFlashMessageSender()->addInfoFlashTwig(
-				t('V průběhu objednávkového procesu byla změněna cena dopravy {{ transportName }}. '
-					. 'Prosím, překontrolujte si objednávku.'),
+				t('The price of shipping {{ transportName }} changed during ordering process. Check your order, please.'),
 				[
 					'transportName' => $orderData->transport->getName(),
 				]

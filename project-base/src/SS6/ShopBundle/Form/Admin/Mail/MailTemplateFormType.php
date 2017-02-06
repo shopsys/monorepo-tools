@@ -63,8 +63,7 @@ class MailTemplateFormType extends AbstractType {
 				'file_constraints' => [
 					new Constraints\File([
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný soubor je příliš velký ({{ size }} {{ suffix }}). '
-							. 'Maximální velikost souboru je {{ limit }} {{ suffix }}.',
+						'maxSizeMessage' => 'Uploaded file is to large ({{ size }} {{ suffix }}). Maximum size of an file is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])

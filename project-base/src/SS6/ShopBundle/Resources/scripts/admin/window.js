@@ -91,7 +91,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="Close (Esc)">X</a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window__close js-window-button-close" title="' + SS6.translator.trans('Close (Esc)') + '">X</a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
