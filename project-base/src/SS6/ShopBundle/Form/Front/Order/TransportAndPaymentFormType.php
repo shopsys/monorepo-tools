@@ -93,7 +93,7 @@ class TransportAndPaymentFormType extends AbstractType {
 		}
 
 		if (!$relationExists) {
-			$context->addViolation('Vyberte prosím platnou kombinaci dopravy a platby');
+			$context->addViolation('Please choose a valid combination of transport and payment');
 		}
 	}
 
