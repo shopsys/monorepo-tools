@@ -40,7 +40,7 @@ class FileUploadController extends AdminBaseController {
 			'status' => 'error',
 			'code' => 0,
 			'filename' => '',
-			'message' => t('Došlo k neočekávané chybě, soubor nebyl nahrán.'),
+			'message' => t('Unexpected error occurred, file was not uploaded.'),
 		];
 		$file = $request->files->get('file');
 

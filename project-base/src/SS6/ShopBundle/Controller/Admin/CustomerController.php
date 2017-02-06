@@ -211,7 +211,7 @@ class CustomerController extends AdminBaseController {
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_customer_edit', ['id' => 'id']);
 		$grid->addDeleteActionColumn('admin_customer_delete', ['id' => 'id'])
-			->setConfirmMessage(t('Opravdu chcete odstranit tohoto zákazníka?'));
+			->setConfirmMessage(t('Do you really want to remove this customer?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
 

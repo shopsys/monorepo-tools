@@ -102,6 +102,10 @@ msgstr "Akce"
 msgid "Action after sellout"
 msgstr "Akce při vyprodání"
 
+#: Content/Superadmin/modules.html.twig:16
+msgid "Active"
+msgstr "Aktivní"
+
 #: Content/ProductPicker/listGrid.html.twig:47
 #: Admin/Form/theme.html.twig:695
 msgid "Add"
@@ -577,6 +581,10 @@ msgstr "Přehled značek"
 msgid "Brands"
 msgstr "Značky"
 
+#: file_input.js:27
+msgid "Browse"
+msgstr "Procházet"
+
 #: Content/Superadmin/cssDocumentation.html.twig:248
 msgid "Btn"
 msgstr "Btn"
@@ -761,6 +769,7 @@ msgstr "Vynulovat filtr"
 msgid "Click to go to product section"
 msgstr "Kliknutím přejdete k výběru produktu"
 
+#: Inline/FlashMessage/messages.html.twig:3
 #: newsletterSubscriptionForm.js:37
 #: addProduct.js:48
 msgid "Close"
@@ -1300,6 +1309,10 @@ msgstr "Opravdu chcete %action% %count% zboží?"
 msgid "Do you really want to delete this category?"
 msgstr "Opravdu chcete smazat tuto kategorii?"
 
+#: grid.inlineEdit.js:33
+msgid "Do you really want to discard all changes?"
+msgstr "Opravdu chcete zahodit všechny změny?"
+
 #: AvailabilityController.php:124
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit dostupnost \"%name%\"? Nikde není použitá."
@@ -1307,6 +1320,10 @@ msgstr "Opravdu si přejete trvale odstranit dostupnost \"%name%\"? Nikde není 
 #: CurrencyController.php:68
 msgid "Do you really want to remove currency \"%name%\" permanently?"
 msgstr "Opravdu si přejete trvale odstranit měnu \"%name%\"?"
+
+#: orderItems.js:23
+msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
+msgstr "Opravdu chcete odebrat z objednávky položku \"<i>%itemName%</i>\"?"
 
 #: PricingGroupController.php:134
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
@@ -1320,6 +1337,30 @@ msgstr "Opravdu si přejete trvale odstranit sazbu \"%name%\"? Nikde není použ
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 msgstr "Opravdu si přejete trvale odstranit stav objednávek \"%name%\"? Nikde není použitý."
 
+#: OrderController.php:246
+msgid "Do you really want to remove the order?"
+msgstr "Opravdu si přejete objednávku smazat?"
+
+#: AdministratorController.php:71
+msgid "Do you really want to remove this administrator?"
+msgstr "Opravdu chcete odstranit tohoto administrátora?"
+
+#: AdvertController.php:152
+msgid "Do you really want to remove this advert?"
+msgstr "Opravdu chcete odstranit tuto reklamu?"
+
+#: ArticleController.php:230
+msgid "Do you really want to remove this article?"
+msgstr "Opravdu chcete odstranit tento článek?"
+
+#: BrandController.php:130
+msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
+msgstr "Opravdu chcete odstranit tuto značku? Pokud je někde použita, bude odnastavena."
+
+#: CustomerController.php:214
+msgid "Do you really want to remove this customer?"
+msgstr "Opravdu chcete odstranit tohoto zákazníka?"
+
 #: PromoCodeGridFactory.php:47
 msgid "Do you really want to remove this discount coupon?"
 msgstr "Opravdu chcete odstranit tento slevový kupón?"
@@ -1328,6 +1369,10 @@ msgstr "Opravdu chcete odstranit tento slevový kupón?"
 msgid "Do you really want to remove this flag?"
 msgstr "Opravdu chcete odstranit tento příznak?"
 
+#: SliderController.php:80
+msgid "Do you really want to remove this page?"
+msgstr "Opravdu chcete odstranit tuto stránku?"
+
 #: ParameterGridFactory.php:77
 msgid "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
 msgstr "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k odstranění tohoto parametru u zboží, kde je parametr přiřazen. Tento krok je nevratný!"
@@ -1335,6 +1380,14 @@ msgstr "Opravdu chcete odstranit tento parametr? Smazáním parametru dojde k od
 #: PaymentGridFactory.php:84
 msgid "Do you really want to remove this payment?"
 msgstr "Opravdu chcete odstranit tuto platbu?"
+
+#: ProductController.php:372
+msgid "Do you really want to remove this product?"
+msgstr "Opravdu chcete odstranit toto zboží?"
+
+#: ScriptController.php:130
+msgid "Do you really want to remove this script?"
+msgstr "Opravdu chcete odstranit tento skript?"
 
 #: TransportGridFactory.php:84
 msgid "Do you really want to remove this shipping?"
@@ -1426,6 +1479,10 @@ msgstr "Zde přetáhněte soubor"
 #: Mail/ContactForm/mail.html.twig:4
 msgid "E-mail"
 msgstr "E-mail"
+
+#: Content/Mail/setting.html.twig:15
+msgid "E-mail name"
+msgstr "Jméno k emailu"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Newsletter/index.html.twig:3
@@ -1757,6 +1814,10 @@ msgstr "Soubor je příliš velký"
 #: DomainController.php:136
 msgid "File type not supported."
 msgstr "Typ souboru není podporován."
+
+#: FileUploadType.php:138
+msgid "File upload failed"
+msgstr "Nahrání souboru se nezdařilo."
 
 #: DomainController.php:138
 msgid "File upload failed, try again please."
@@ -2107,6 +2168,10 @@ msgstr "Pokud chceme, aby řádky šlo přesouvat, vložíme ikonku podle ukázk
 msgid "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
 msgstr "Pokud se prvním TD/TH přidá modifikátor --label, buňka dostane maximální šířku a lícuje s ostatní formulářovou strukturou. Ostatní buňky roztahuje prohlížeč podle potřeb."
 
+#: Content/Superadmin/modules.html.twig:8
+msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+msgstr "Pokud chcete, aby se změny projevily všude (na produkci, develu, localhostu apod.), dejte vědět programátorovi, aby změny zavedl do GITu!"
+
 #: Content/Superadmin/cssDocumentation.html.twig:74
 msgid "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
 msgstr "Important se opravdu někdy hodí, avšak jakmile něčemu nastavíme important, přebít to můžeme již jen specifičtějším zápisem s dalším importantem. Important využijeme tedy jen v krajních a logicky odůvodnitelných případech."
@@ -2131,6 +2196,10 @@ msgstr "In-message"
 msgid "In-message types"
 msgstr "Typy in-message"
 
+#: Content/Superadmin/modules.html.twig:17
+msgid "Inactive"
+msgstr "Neaktivní"
+
 #: InputPriceTypeFormType.php:55
 msgid "Including VAT"
 msgstr "S DPH"
@@ -2143,6 +2212,12 @@ msgstr "Informační hláška"
 msgid "Information message - block"
 msgstr "Informační hláška - bloková"
 
+#: Content/Superadmin/cssDocumentation.html.twig:560
+#: Content/Superadmin/cssDocumentation.html.twig:567
+#: Content/Superadmin/cssDocumentation.html.twig:570
+#: Content/Superadmin/cssDocumentation.html.twig:597
+#: Content/Superadmin/cssDocumentation.html.twig:603
+#: Content/Superadmin/cssDocumentation.html.twig:768
 #: Content/Superadmin/cssDocumentation.html.twig:1299
 msgid "Input"
 msgstr "Input"
@@ -2190,6 +2265,18 @@ msgstr "Input s tlačítkem"
 #: Content/Superadmin/cssDocumentation.html.twig:1333
 msgid "Input with deduction"
 msgstr "Input s odpočtem"
+
+#: Content/Superadmin/cssDocumentation.html.twig:804
+msgid "Input with domain"
+msgstr "Input s doménou"
+
+#: Content/Superadmin/cssDocumentation.html.twig:798
+msgid "Input with flag"
+msgstr "Input s vlajkou"
+
+#: Content/Superadmin/cssDocumentation.html.twig:812
+msgid "Input with icon"
+msgstr "Input s ikonou"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1178
 msgid "Input with icon by label"
@@ -2404,6 +2491,10 @@ msgstr "Přihlásit se"
 msgid "Log in as user"
 msgstr "Přihlásit za uživatele"
 
+#: LoginController.php:89
+msgid "Log in failed."
+msgstr "Přihlášení se nepodařilo."
+
 #: Inline/Menu/menu.html.twig:28
 #: Front/Layout/header.html.twig:85
 #: Front/Layout/layout.html.twig:11
@@ -2438,6 +2529,10 @@ msgstr "Čas přihlášení"
 #: Admin/Form/theme.html.twig:292
 msgid "Main URL can't be deleted"
 msgstr "Hlavní URL nelze smazat"
+
+#: Content/Mail/setting.html.twig:14
+msgid "Main administrator e-mail"
+msgstr "Hlavní administrátorský email"
 
 #: Content/Product/edit.html.twig:125
 msgid "Main category on domains:"
@@ -2528,6 +2623,10 @@ msgstr "Modifikace wrap-border--small"
 #: Admin/Grid/Grid.html.twig:80
 msgid "Modifications"
 msgstr "Úpravy"
+
+#: Content/Superadmin/modules.html.twig:15
+msgid "Module name"
+msgstr "Název modulu"
 
 #: Resources/config/admin_menu.yml:
 msgid "Modules"
@@ -2981,6 +3080,10 @@ msgstr "Objednávku v CZK zaokrouhlit na celé koruny"
 msgid "Order items"
 msgstr "Položky objednávky"
 
+#: orderItems.js:116
+msgid "Order must contain at least one item"
+msgstr "Objednávka musí obsahovat alespoň jednu položku"
+
 #: CustomerController.php:144
 msgid "Order not found"
 msgstr "Objednávka nebyla nalezena"
@@ -3198,6 +3301,10 @@ msgstr "Obrázky"
 #: Content/Superadmin/cssDocumentation.html.twig:1312
 msgid "Place for input"
 msgstr "Místo pro input"
+
+#: grid.inlineEdit.js:85
+msgid "Please check following information:"
+msgstr "Prosím překontrolujte následující informace:"
 
 #: AdministratorController.php:133
 #: AdministratorController.php:202
@@ -3611,6 +3718,7 @@ msgstr "Nastavení prodeje s/bez DPH"
 
 #: Content/BestsellingProduct/detail.html.twig:25
 #: Content/CustomerCommunication/orderSubmitted.html.twig:19
+#: Content/Script/googleAnalytics.html.twig:16
 msgid "Save"
 msgstr "Uložit"
 
@@ -4648,6 +4756,10 @@ msgstr "Nepodařilo se odeslat některé emaily, pro ověření objednávky nás
 msgid "Unable to send updating e-mail"
 msgstr "Nepodařilo se odeslat aktualizační email"
 
+#: FileUploadController.php:43
+msgid "Unexpected error occurred, file was not uploaded."
+msgstr "Došlo k neočekávané chybě, soubor nebyl nahrán."
+
 #: Content/Order/edit.html.twig:166
 #: Content/Product/detail.html.twig:139
 msgid "Unit"
@@ -4934,6 +5046,7 @@ msgstr "XML dostupnostní feedy"
 #: Admin/Grid/Grid.html.twig:209
 #: Admin/Grid/Grid.html.twig:334
 #: Admin/Grid/Grid.html.twig:343
+#: grid.inlineEdit.js:36
 msgid "Yes"
 msgstr "Ano"
 
@@ -5268,6 +5381,7 @@ msgid "products"
 msgstr "zboží"
 
 #: Admin/Grid/Grid.html.twig:220
+#: Inline/Paginator/paginator.html.twig:7
 msgid "records"
 msgstr "záznamů"
 
@@ -5318,6 +5432,10 @@ msgstr "{0} Nebyl nalezen žádný produkt | {1} Celkem nalezen 1 produkt | [2,4
 #: Inline/Cart/cartBox.html.twig:11
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
 msgstr "{1} <strong class=\"cart__state\">%itemsCount%</strong> položka za <strong class=\"cart__state\">%priceWithVat%</strong> |[2,4] <strong class=\"cart__state\">%itemsCount%</strong> položky za <strong class=\"cart__state\">%priceWithVat%</strong> |[5,Inf] <strong class=\"cart__state\">%itemsCount%</strong> položek za <strong class=\"cart__state\">%priceWithVat%</strong>"
+
+#: TimedSpamValidationListener.php:42
+msgid "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
+msgstr "{1} Před odesláním formuláře musíte počkat 1 vteřinu. |[2,4] Před odesláním formuláře musíte počkat %seconds% vteřiny. |[5,Inf] Před odesláním formuláře musíte počkat %seconds% vteřin."
 
 #: productList.AjaxMoreLoader.js:60
 msgid "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"

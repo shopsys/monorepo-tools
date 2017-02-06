@@ -5,16 +5,16 @@
 
 {% block main_content %}
 	<div class="in-message in-message--warning margin-bottom-15">
-		{{ 'Pokud chcete, aby se změny projevily všude (na produkci, develu, localhostu apod.), dejte vědět programátorovi, aby změny zavedl do GITu!'|trans }}
+		{{ 'If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!'|trans }}
 	</div>
 
 	{{ form_start(form) }}
 		<table class="table-main">
 			<thead>
 				<tr>
-					<th class="table-col-80">{{ 'Název modulu'|trans }}</th>
-					<th class="table-col-10 text-center">{{ 'Aktivní'|trans }}</th>
-					<th class="table-col-10 text-center">{{ 'Neaktivní'|trans }}</th>
+					<th class="table-col-80">{{ 'Module name'|trans }}</th>
+					<th class="table-col-10 text-center">{{ 'Active'|trans }}</th>
+					<th class="table-col-10 text-center">{{ 'Inactive'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>

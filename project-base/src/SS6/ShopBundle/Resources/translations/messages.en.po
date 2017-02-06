@@ -102,6 +102,10 @@ msgstr "Action"
 msgid "Action after sellout"
 msgstr "Action after sellout"
 
+#: Content/Superadmin/modules.html.twig:16
+msgid "Active"
+msgstr "Active"
+
 #: Content/ProductPicker/listGrid.html.twig:47
 #: Admin/Form/theme.html.twig:695
 msgid "Add"
@@ -577,6 +581,10 @@ msgstr "Brand overview"
 msgid "Brands"
 msgstr "Brands"
 
+#: file_input.js:27
+msgid "Browse"
+msgstr "Browse"
+
 #: Content/Superadmin/cssDocumentation.html.twig:248
 msgid "Btn"
 msgstr "Btn"
@@ -761,6 +769,7 @@ msgstr "Clear filter"
 msgid "Click to go to product section"
 msgstr "Click to go to product section"
 
+#: Inline/FlashMessage/messages.html.twig:3
 #: newsletterSubscriptionForm.js:37
 #: addProduct.js:48
 msgid "Close"
@@ -1300,6 +1309,10 @@ msgstr "Do you really want to %action% %count% product?"
 msgid "Do you really want to delete this category?"
 msgstr "Do you really want to delete this category?"
 
+#: grid.inlineEdit.js:33
+msgid "Do you really want to discard all changes?"
+msgstr "Do you really want to discard all changes?"
+
 #: AvailabilityController.php:124
 msgid "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
 msgstr "Do you really want to remove availability \"%name%\" permanently? It is not used anywhere."
@@ -1307,6 +1320,10 @@ msgstr "Do you really want to remove availability \"%name%\" permanently? It is 
 #: CurrencyController.php:68
 msgid "Do you really want to remove currency \"%name%\" permanently?"
 msgstr "Do you really want to remove currency \"%name%\" permanently?"
+
+#: orderItems.js:23
+msgid "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
+msgstr "Do you really want to remove item \"<i>%itemName%</i>\" from the order?"
 
 #: PricingGroupController.php:134
 msgid "Do you really want to remove pricing group \"%name%\" permanently? It is not used anywhere."
@@ -1320,6 +1337,30 @@ msgstr "Do you really want to remove rate \"%name%\" permanently? It is not used
 msgid "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 msgstr "Do you really want to remove status of orders \"%name%\" permanently? It is not used anywhere."
 
+#: OrderController.php:246
+msgid "Do you really want to remove the order?"
+msgstr "Do you really want to remove the order?"
+
+#: AdministratorController.php:71
+msgid "Do you really want to remove this administrator?"
+msgstr "Do you really want to remove this administrator?"
+
+#: AdvertController.php:152
+msgid "Do you really want to remove this advert?"
+msgstr "Do you really want to remove this advert?"
+
+#: ArticleController.php:230
+msgid "Do you really want to remove this article?"
+msgstr "Do you really want to remove this article?"
+
+#: BrandController.php:130
+msgid "Do you really want to remove this brand? If it is used anywhere it will be unset."
+msgstr "Do you really want to remove this brand? If it is used anywhere it will be unset."
+
+#: CustomerController.php:214
+msgid "Do you really want to remove this customer?"
+msgstr "Do you really want to remove this customer?"
+
 #: PromoCodeGridFactory.php:47
 msgid "Do you really want to remove this discount coupon?"
 msgstr "Do you really want to remove this discount coupon?"
@@ -1328,6 +1369,10 @@ msgstr "Do you really want to remove this discount coupon?"
 msgid "Do you really want to remove this flag?"
 msgstr "Do you really want to remove this flag?"
 
+#: SliderController.php:80
+msgid "Do you really want to remove this page?"
+msgstr "Do you really want to remove this page?"
+
 #: ParameterGridFactory.php:77
 msgid "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
 msgstr "Do you really want to remove this parameter? By deleting this parameter you will remove this parameter from a product where the parameter is assigned. This step is irreversible!"
@@ -1335,6 +1380,14 @@ msgstr "Do you really want to remove this parameter? By deleting this parameter 
 #: PaymentGridFactory.php:84
 msgid "Do you really want to remove this payment?"
 msgstr "Do you really want to remove this payment?"
+
+#: ProductController.php:372
+msgid "Do you really want to remove this product?"
+msgstr "Do you really want to remove this product?"
+
+#: ScriptController.php:130
+msgid "Do you really want to remove this script?"
+msgstr "Do you really want to remove this script?"
 
 #: TransportGridFactory.php:84
 msgid "Do you really want to remove this shipping?"
@@ -1426,6 +1479,10 @@ msgstr "Drag file here"
 #: Mail/ContactForm/mail.html.twig:4
 msgid "E-mail"
 msgstr "E-mail"
+
+#: Content/Mail/setting.html.twig:15
+msgid "E-mail name"
+msgstr "E-mail name"
 
 #: Resources/config/admin_menu.yml:
 #: Content/Newsletter/index.html.twig:3
@@ -1757,6 +1814,10 @@ msgstr "File is too big"
 #: DomainController.php:136
 msgid "File type not supported."
 msgstr "File type not supported."
+
+#: FileUploadType.php:138
+msgid "File upload failed"
+msgstr "File upload failed"
 
 #: DomainController.php:138
 msgid "File upload failed, try again please."
@@ -2107,6 +2168,10 @@ msgstr "If we want to move the lines, we will insert the icon as shown below. Do
 msgid "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
 msgstr "If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed."
 
+#: Content/Superadmin/modules.html.twig:8
+msgid "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+msgstr "If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!"
+
 #: Content/Superadmin/cssDocumentation.html.twig:74
 msgid "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
 msgstr "Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That's why we use the important only in utmost and logically excusable cases."
@@ -2131,6 +2196,10 @@ msgstr "In-message"
 msgid "In-message types"
 msgstr "In-message types"
 
+#: Content/Superadmin/modules.html.twig:17
+msgid "Inactive"
+msgstr "Inactive"
+
 #: InputPriceTypeFormType.php:55
 msgid "Including VAT"
 msgstr "Including VAT"
@@ -2143,6 +2212,12 @@ msgstr "Information message"
 msgid "Information message - block"
 msgstr "Information message - block"
 
+#: Content/Superadmin/cssDocumentation.html.twig:560
+#: Content/Superadmin/cssDocumentation.html.twig:567
+#: Content/Superadmin/cssDocumentation.html.twig:570
+#: Content/Superadmin/cssDocumentation.html.twig:597
+#: Content/Superadmin/cssDocumentation.html.twig:603
+#: Content/Superadmin/cssDocumentation.html.twig:768
 #: Content/Superadmin/cssDocumentation.html.twig:1299
 msgid "Input"
 msgstr "Input"
@@ -2190,6 +2265,18 @@ msgstr "Input with button"
 #: Content/Superadmin/cssDocumentation.html.twig:1333
 msgid "Input with deduction"
 msgstr "Input with deduction"
+
+#: Content/Superadmin/cssDocumentation.html.twig:804
+msgid "Input with domain"
+msgstr "Input with domain"
+
+#: Content/Superadmin/cssDocumentation.html.twig:798
+msgid "Input with flag"
+msgstr "Input with flag"
+
+#: Content/Superadmin/cssDocumentation.html.twig:812
+msgid "Input with icon"
+msgstr "Input with icon"
 
 #: Content/Superadmin/cssDocumentation.html.twig:1178
 msgid "Input with icon by label"
@@ -2404,6 +2491,10 @@ msgstr "Log in"
 msgid "Log in as user"
 msgstr "Log in as user"
 
+#: LoginController.php:89
+msgid "Log in failed."
+msgstr "Log in failed."
+
 #: Inline/Menu/menu.html.twig:28
 #: Front/Layout/header.html.twig:85
 #: Front/Layout/layout.html.twig:11
@@ -2438,6 +2529,10 @@ msgstr "Login time"
 #: Admin/Form/theme.html.twig:292
 msgid "Main URL can't be deleted"
 msgstr "Main URL can't be deleted"
+
+#: Content/Mail/setting.html.twig:14
+msgid "Main administrator e-mail"
+msgstr "Main administrator e-mail"
 
 #: Content/Product/edit.html.twig:125
 msgid "Main category on domains:"
@@ -2528,6 +2623,10 @@ msgstr "Modification wrap-border--small"
 #: Admin/Grid/Grid.html.twig:80
 msgid "Modifications"
 msgstr "Modifications"
+
+#: Content/Superadmin/modules.html.twig:15
+msgid "Module name"
+msgstr "Module name"
 
 #: Resources/config/admin_menu.yml:
 msgid "Modules"
@@ -2981,6 +3080,10 @@ msgstr "Order in CZK round to whole crowns"
 msgid "Order items"
 msgstr "Order items"
 
+#: orderItems.js:116
+msgid "Order must contain at least one item"
+msgstr "Order must contain at least one item"
+
 #: CustomerController.php:144
 msgid "Order not found"
 msgstr "Order not found"
@@ -3198,6 +3301,10 @@ msgstr "Pictures"
 #: Content/Superadmin/cssDocumentation.html.twig:1312
 msgid "Place for input"
 msgstr "Place for input"
+
+#: grid.inlineEdit.js:85
+msgid "Please check following information:"
+msgstr "Please check following information:"
 
 #: AdministratorController.php:133
 #: AdministratorController.php:202
@@ -3611,6 +3718,7 @@ msgstr "Sales including/excluding VAT settings"
 
 #: Content/BestsellingProduct/detail.html.twig:25
 #: Content/CustomerCommunication/orderSubmitted.html.twig:19
+#: Content/Script/googleAnalytics.html.twig:16
 msgid "Save"
 msgstr "Save"
 
@@ -4648,6 +4756,10 @@ msgstr "Unable to send some e-mails, please contact us for order verification."
 msgid "Unable to send updating e-mail"
 msgstr "Unable to send updating e-mail"
 
+#: FileUploadController.php:43
+msgid "Unexpected error occurred, file was not uploaded."
+msgstr "Unexpected error occurred, file was not uploaded."
+
 #: Content/Order/edit.html.twig:166
 #: Content/Product/detail.html.twig:139
 msgid "Unit"
@@ -4934,6 +5046,7 @@ msgstr "XML availability feeds"
 #: Admin/Grid/Grid.html.twig:209
 #: Admin/Grid/Grid.html.twig:334
 #: Admin/Grid/Grid.html.twig:343
+#: grid.inlineEdit.js:36
 msgid "Yes"
 msgstr "Yes"
 
@@ -5268,6 +5381,7 @@ msgid "products"
 msgstr "products"
 
 #: Admin/Grid/Grid.html.twig:220
+#: Inline/Paginator/paginator.html.twig:7
 msgid "records"
 msgstr "records"
 
@@ -5318,6 +5432,10 @@ msgstr "{0} No product found | {1} 1 product found | [2,Inf] %totalProductCount%
 #: Inline/Cart/cartBox.html.twig:11
 msgid "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
 msgstr "{1} <strong class=\"cart__state\">%itemsCount%</strong> item for <strong class=\"cart__state\">%priceWithVat%</strong>|[2,Inf] <strong class=\"cart__state\">%itemsCount%</strong> items for <strong class=\"cart__state\">%priceWithVat%</strong>"
+
+#: TimedSpamValidationListener.php:42
+msgid "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
+msgstr "{1} You must wait 1 second before submitting the form. |[2,Inf] You must wait %seconds% seconds before submitting the form."
 
 #: productList.AjaxMoreLoader.js:60
 msgid "{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products"

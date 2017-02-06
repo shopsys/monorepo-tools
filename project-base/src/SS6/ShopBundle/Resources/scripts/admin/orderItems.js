@@ -20,7 +20,7 @@
 			var itemName = SS6.escape.escapeHtml($itemNameElement.val());
 
 			SS6.window({
-				content: SS6.translator.trans('Opravdu chcete odebrat z objednávky položku "<i>%itemName%</i>"?', {'%itemName%': itemName}),
+				content: SS6.translator.trans('Do you really want to remove item "<i>%itemName%</i>" from the order?', {'%itemName%': itemName}),
 				buttonCancel: true,
 				buttonContinue: true,
 				eventContinue: function () {
@@ -113,7 +113,7 @@
 			$items.find('.js-order-item-remove')
 				.addClass('text-disabled')
 				.tooltip({
-					title: SS6.translator.trans('Objednávka musí obsahovat alespoň jednu položku'),
+					title: SS6.translator.trans('Order must contain at least one item'),
 					placement: 'bottom'
 				});
 		} else {

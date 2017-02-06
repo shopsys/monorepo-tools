@@ -135,7 +135,7 @@ class FileUploadType extends AbstractType implements DataTransformerInterface {
 					try {
 						$data['uploadedFiles'][] = $this->fileUpload->upload($file);
 					} catch (\SS6\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
-						$event->getForm()->addError(new FormError(t('Nahrání souboru se nezdařilo.')));
+						$event->getForm()->addError(new FormError(t('File upload failed')));
 					}
 				}
 			}
