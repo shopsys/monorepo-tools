@@ -37,16 +37,16 @@ class ManualBestsellingProductFacade {
 	/**
 	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $bestsellingProducts
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsIndexedByPosition
 	 */
-	public function edit(Category $category, $domainId, array $bestsellingProducts) {
+	public function edit(Category $category, $domainId, array $productsIndexedByPosition) {
 		$toDelete = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId($category, $domainId);
 		foreach ($toDelete as $item) {
 			$this->em->remove($item);
 		}
 		$this->em->flush();
 
-		foreach ($bestsellingProducts as $position => $product) {
+		foreach ($productsIndexedByPosition as $position => $product) {
 			if ($product !== null) {
 				$manualBestsellingProduct = new ManualBestsellingProduct($domainId, $category, $product, $position);
 				$this->em->persist($manualBestsellingProduct);
@@ -61,7 +61,7 @@ class ManualBestsellingProductFacade {
 	 * @param int $domainId
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
-	public function getBestsellingProductsIndexedByPosition($category, $domainId) {
+	public function getProductsIndexedByPosition($category, $domainId) {
 		$bestsellingProducts = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId(
 			$category,
 			$domainId

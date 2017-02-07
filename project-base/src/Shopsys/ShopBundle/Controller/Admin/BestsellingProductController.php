@@ -74,18 +74,18 @@ class BestsellingProductController extends AdminBaseController {
 		$category = $this->categoryFacade->getById($request->get('categoryId'));
 		$domainId = $request->get('domainId');
 
-		$bestsellingProducts = $this->manualBestsellingProductFacade->getBestsellingProductsIndexedByPosition(
+		$products = $this->manualBestsellingProductFacade->getProductsIndexedByPosition(
 			$category,
 			$domainId
 		);
 
-		$form->setData(['bestsellingProducts' => $bestsellingProducts]);
+		$form->setData(['products' => $products]);
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$formBestsellingProducts = $form->getData()['bestsellingProducts'];
+			$newProducts = $form->getData()['products'];
 
-			$this->manualBestsellingProductFacade->edit($category, $domainId, $formBestsellingProducts);
+			$this->manualBestsellingProductFacade->edit($category, $domainId, $newProducts);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
