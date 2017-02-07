@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-	{{ parent() }} - {{ 'Product catalogue - %categoryName%'|trans({ '%categoryName%' : category.name }) }}
+	{{ parent() }} - {{ category.name }}
 {% endblock %}
 
 {% block main_content %}
