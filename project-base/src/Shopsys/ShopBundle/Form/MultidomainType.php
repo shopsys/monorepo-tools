@@ -2,8 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-use Shopsys\ShopBundle\Component\Condition;
 use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Utils;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -29,8 +29,8 @@ class MultidomainType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		Condition::setArrayDefaultValue($options['options'], 'required', $options['required']);
-		Condition::setArrayDefaultValue($options['options'], 'constraints', []);
+		Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
+		Utils::setArrayDefaultValue($options['options'], 'constraints', []);
 
 		$subOptions = $options['options'];
 		$subOptions['required'] = $options['required'] && $subOptions['required'];

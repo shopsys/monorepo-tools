@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\Image\Config;
 
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 
 class ImageEntityConfig {
 
@@ -122,7 +122,7 @@ class ImageEntityConfig {
 	 * @return bool
 	 */
 	public function isMultiple($type) {
-		$key = Condition::ifNull($type, self::WITHOUT_NAME_KEY);
+		$key = Utils::ifNull($type, self::WITHOUT_NAME_KEY);
 		if (array_key_exists($key, $this->multipleByType)) {
 			return $this->multipleByType[$key];
 		} else {
@@ -136,7 +136,7 @@ class ImageEntityConfig {
 	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
 	 */
 	private function getSizeConfigFromSizeConfigs($sizes, $sizeName) {
-		$key = Condition::ifNull($sizeName, self::WITHOUT_NAME_KEY);
+		$key = Utils::ifNull($sizeName, self::WITHOUT_NAME_KEY);
 		if (array_key_exists($key, $sizes)) {
 			return $sizes[$key];
 		} else {

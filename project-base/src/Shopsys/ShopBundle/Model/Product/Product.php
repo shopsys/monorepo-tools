@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Product\Availability\Availability;
@@ -410,7 +410,7 @@ class Product extends AbstractTranslatableEntity {
 	 * @param string|null $price
 	 */
 	public function setPrice($price) {
-		$this->price = Condition::ifNull($price, 0);
+		$this->price = Utils::ifNull($price, 0);
 	}
 
 	/**

@@ -2,9 +2,9 @@
 
 namespace Shopsys\ShopBundle\Component\Image\Config;
 
-use Shopsys\ShopBundle\Component\Condition;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\ShopBundle\Component\Utils;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -111,7 +111,7 @@ class ImageConfigLoader {
 		$result = [];
 		foreach ($sizesConfig as $sizeConfig) {
 			$sizeName = $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_NAME];
-			$key = Condition::ifNull($sizeName, ImageEntityConfig::WITHOUT_NAME_KEY);
+			$key = Utils::ifNull($sizeName, ImageEntityConfig::WITHOUT_NAME_KEY);
 			if (!array_key_exists($key, $result)) {
 				$result[$key] = new ImageSizeConfig(
 					$sizeName,

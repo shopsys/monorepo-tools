@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component;
 
-class Condition {
+class Utils {
 
 	/**
 	 * @param mixed $testVariable
