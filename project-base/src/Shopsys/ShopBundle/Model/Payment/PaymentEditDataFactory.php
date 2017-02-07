@@ -14,22 +14,15 @@ class PaymentEditDataFactory {
 	private $paymentEditFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceEditFacade
-	 */
-	private $paymentPriceEditFacade;
-
-	/**
 	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	public function __construct(
 		PaymentEditFacade $paymentEditFacade,
-		PaymentPriceEditFacade $paymentPriceEditFacade,
 		VatFacade $vatFacade
 	) {
 		$this->paymentEditFacade = $paymentEditFacade;
-		$this->paymentPriceEditFacade = $paymentPriceEditFacade;
 		$this->vatFacade = $vatFacade;
 	}
 
@@ -53,7 +46,7 @@ class PaymentEditDataFactory {
 		$paymentData->setFromEntity($payment, $this->paymentEditFacade->getPaymentDomainsByPayment($payment));
 		$paymentEditData->paymentData = $paymentData;
 
-		foreach ($this->paymentPriceEditFacade->getAllByPayment($payment) as $paymentPrice) {
+		foreach ($payment->getPrices() as $paymentPrice) {
 			$paymentEditData->prices[$paymentPrice->getCurrency()->getId()] = $paymentPrice->getPrice();
 		}
 
