@@ -7,6 +7,7 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
@@ -153,9 +154,9 @@ class CategoryFacade {
 		foreach ($categoryDomains as $categoryDomain) {
 			$domainId = $categoryDomain->getDomainId();
 
-			$categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
-			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
-			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
+			$categoryDomain->setSeoTitle(Utils::getArrayValue($categoryData->seoTitles, $domainId));
+			$categoryDomain->setSeoMetaDescription(Utils::getArrayValue($categoryData->seoMetaDescriptions, $domainId));
+			$categoryDomain->setDescription(Utils::getArrayValue($categoryData->descriptions, $domainId));
 			$categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
 
 			$toFlush[] = $categoryDomain;

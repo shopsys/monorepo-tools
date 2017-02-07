@@ -25,6 +25,16 @@ class Utils {
 	}
 
 	/**
+	 * @param array $array
+	 * @param string|int $key
+	 * @param mixed $defaultValue
+	 * @return mixed
+	 */
+	public static function getArrayValue($array, $key, $defaultValue = null) {
+		return array_key_exists($key, $array) ? $array[$key] : $defaultValue;
+	}
+
+	/**
 	 * @param mixed $value
 	 * @return array
 	 */
