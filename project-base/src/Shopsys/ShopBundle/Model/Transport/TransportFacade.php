@@ -13,7 +13,7 @@ use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-class TransportEditFacade {
+class TransportFacade {
 
 	/**
 	 * @var \Doctrine\ORM\EntityManager

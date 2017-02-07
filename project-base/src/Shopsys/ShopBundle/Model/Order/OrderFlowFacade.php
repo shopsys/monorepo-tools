@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Model\Order;
 use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class OrderFlowFacade {
 
@@ -15,9 +15,9 @@ class OrderFlowFacade {
 	private $orderFlow;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
@@ -32,24 +32,24 @@ class OrderFlowFacade {
 	/**
 	 * @param \Shopsys\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
 	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentFacade $paymentFacade
-	 * @param \Shopsys\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportFacade $transportFacade
 	 * @param \Shopsys\ShopBundle\Model\Country\CountryFacade $countryFacade
 	 */
 	public function __construct(
 		OrderFlow $orderFlow,
 		PaymentFacade $paymentFacade,
-		TransportEditFacade $transportEditFacade,
+		TransportFacade $transportFacade,
 		CountryFacade $countryFacade
 	) {
 		$this->orderFlow = $orderFlow;
 		$this->paymentFacade = $paymentFacade;
-		$this->transportEditFacade = $transportEditFacade;
+		$this->transportFacade = $transportFacade;
 		$this->countryFacade = $countryFacade;
 	}
 
 	public function resetOrderForm() {
 		$payments = $this->paymentFacade->getVisibleOnCurrentDomain();
-		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
+		$transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
 		$countries = $this->countryFacade->getAllOnCurrentDomain();
 		$this->orderFlow->setFormTypesData($transports, $payments, $countries);
 		$this->orderFlow->reset();

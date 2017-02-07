@@ -21,7 +21,7 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController {
@@ -67,9 +67,9 @@ class OrderController extends AdminBaseController {
 	private $orderItemFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
@@ -90,7 +90,7 @@ class OrderController extends AdminBaseController {
 		OrderFormTypeFactory $orderFormTypeFactory,
 		Breadcrumb $breadcrumb,
 		OrderItemFacade $orderItemFacade,
-		TransportEditFacade $transportEditFacade,
+		TransportFacade $transportFacade,
 		PaymentFacade $paymentFacade,
 		Domain $domain
 	) {
@@ -102,7 +102,7 @@ class OrderController extends AdminBaseController {
 		$this->orderFormTypeFactory = $orderFormTypeFactory;
 		$this->breadcrumb = $breadcrumb;
 		$this->orderItemFacade = $orderItemFacade;
-		$this->transportEditFacade = $transportEditFacade;
+		$this->transportFacade = $transportFacade;
 		$this->paymentFacade = $paymentFacade;
 		$this->domain = $domain;
 	}
@@ -156,10 +156,10 @@ class OrderController extends AdminBaseController {
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
-			'transportPricesWithVatByTransportId' => $this->transportEditFacade->getTransportPricesWithVatIndexedByTransportId(
+			'transportPricesWithVatByTransportId' => $this->transportFacade->getTransportPricesWithVatIndexedByTransportId(
 				$order->getCurrency()
 			),
-			'transportVatPercentsByTransportId' => $this->transportEditFacade->getTransportVatPercentsIndexedByTransportId(),
+			'transportVatPercentsByTransportId' => $this->transportFacade->getTransportVatPercentsIndexedByTransportId(),
 			'paymentPricesWithVatByPaymentId' => $this->paymentFacade->getPaymentPricesWithVatIndexedByPaymentId(
 				$order->getCurrency()
 			),

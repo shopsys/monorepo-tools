@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class OrderFormTypeFactory {
 
@@ -18,9 +18,9 @@ class OrderFormTypeFactory {
 	private $orderStatusFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
@@ -39,13 +39,13 @@ class OrderFormTypeFactory {
 
 	public function __construct(
 		OrderStatusFacade $orderStatusFacade,
-		TransportEditFacade $transportEditFacade,
+		TransportFacade $transportFacade,
 		PaymentFacade $paymentFacade,
 		CountryFacade $countryFacade,
 		SelectedDomain $selectedDomain
 	) {
 		$this->orderStatusFacade = $orderStatusFacade;
-		$this->transportEditFacade = $transportEditFacade;
+		$this->transportFacade = $transportFacade;
 		$this->paymentFacade = $paymentFacade;
 		$this->countryFacade = $countryFacade;
 		$this->selectedDomain = $selectedDomain;
@@ -58,7 +58,7 @@ class OrderFormTypeFactory {
 	public function createForOrder(Order $order) {
 		$orderDomainId = $order->getDomainId();
 		$payments = $this->paymentFacade->getVisibleByDomainId($orderDomainId);
-		$transports = $this->transportEditFacade->getVisibleByDomainId($orderDomainId, $payments);
+		$transports = $this->transportFacade->getVisibleByDomainId($orderDomainId, $payments);
 		$countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
 
 		if (!in_array($order->getPayment(), $payments, true)) {

@@ -12,7 +12,7 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
 use Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory;
 use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController {
@@ -48,12 +48,12 @@ class TransportController extends AdminBaseController {
 	private $transportEditDataFactory;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	public function __construct(
-		TransportEditFacade $transportEditFacade,
+		TransportFacade $transportFacade,
 		TransportGridFactory $transportGridFactory,
 		TransportEditFormTypeFactory $transportEditFormTypeFactory,
 		TransportEditDataFactory $transportEditDataFactory,
@@ -61,7 +61,7 @@ class TransportController extends AdminBaseController {
 		TransportDetailFactory $transportDetailFactory,
 		Breadcrumb $breadcrumb
 	) {
-		$this->transportEditFacade = $transportEditFacade;
+		$this->transportFacade = $transportFacade;
 		$this->transportGridFactory = $transportGridFactory;
 		$this->transportEditFormTypeFactory = $transportEditFormTypeFactory;
 		$this->transportEditDataFactory = $transportEditDataFactory;
@@ -83,7 +83,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$transport = $this->transportEditFacade->create($form->getData());
+			$transport = $this->transportFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
@@ -111,7 +111,7 @@ class TransportController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$transport = $this->transportEditFacade->getById($id);
+		$transport = $this->transportFacade->getById($id);
 		/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 		$form = $this->createForm($this->transportEditFormTypeFactory->create());
 
@@ -121,7 +121,7 @@ class TransportController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->transportEditFacade->edit($transport, $transportEditData);
+			$this->transportFacade->edit($transport, $transportEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Shipping <strong><a href="{{ url }}">{{ name }}</a></strong> was modified'),
@@ -153,9 +153,9 @@ class TransportController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$transportName = $this->transportEditFacade->getById($id)->getName();
+			$transportName = $this->transportFacade->getById($id)->getName();
 
-			$this->transportEditFacade->deleteById($id);
+			$this->transportFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Shipping <strong>{{ name }}</strong> deleted'),

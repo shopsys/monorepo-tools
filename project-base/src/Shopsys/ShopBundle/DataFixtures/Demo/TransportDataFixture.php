@@ -9,7 +9,7 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -72,10 +72,10 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 	 * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 */
 	private function createTransport($referenceName, TransportEditData $transportEditData) {
-		$transportEditFacade = $this->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
+		$transportFacade = $this->get(TransportFacade::class);
+		/* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
 
-		$transport = $transportEditFacade->create($transportEditData);
+		$transport = $transportFacade->create($transportEditData);
 		$this->addReference($referenceName, $transport);
 	}
 
