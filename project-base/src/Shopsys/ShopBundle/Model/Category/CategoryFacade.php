@@ -159,11 +159,7 @@ class CategoryFacade {
 			$categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
 			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
 			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
-			if (in_array($domainId, $categoryData->hiddenOnDomains)) {
-				$categoryDomain->setHidden(true);
-			} else {
-				$categoryDomain->setHidden(false);
-			}
+			$categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
 		}
 	}
 
