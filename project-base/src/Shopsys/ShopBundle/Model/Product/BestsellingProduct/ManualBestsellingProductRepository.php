@@ -27,11 +27,11 @@ class ManualBestsellingProductRepository {
 	}
 
 	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @return \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
 	 */
-	public function getByCategory(Category $category, $domainId) {
+	public function getByCategory($domainId, Category $category) {
 		$queryBuilder = $this->em->createQueryBuilder()
 			->select('bp')
 			->from(ManualBestsellingProduct::class, 'bp', 'bp.position')

@@ -40,7 +40,7 @@ class ManualBestsellingProductFacade {
 	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsIndexedByPosition
 	 */
 	public function edit(Category $category, $domainId, array $productsIndexedByPosition) {
-		$toDelete = $this->manualBestsellingProductRepository->getByCategory($category, $domainId);
+		$toDelete = $this->manualBestsellingProductRepository->getByCategory($domainId, $category);
 		foreach ($toDelete as $item) {
 			$this->em->remove($item);
 		}
@@ -62,10 +62,7 @@ class ManualBestsellingProductFacade {
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getProductsIndexedByPosition($category, $domainId) {
-		$bestsellingProducts = $this->manualBestsellingProductRepository->getByCategory(
-			$category,
-			$domainId
-		);
+		$bestsellingProducts = $this->manualBestsellingProductRepository->getByCategory($domainId, $category);
 
 		$products = [];
 		foreach ($bestsellingProducts as $key => $bestsellingProduct) {
