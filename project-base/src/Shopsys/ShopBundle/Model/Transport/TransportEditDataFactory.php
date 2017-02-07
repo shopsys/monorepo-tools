@@ -14,22 +14,15 @@ class TransportEditDataFactory {
 	private $transportEditFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceEditFacade
-	 */
-	private $transportPriceEditFacade;
-
-	/**
 	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	public function __construct(
 		TransportEditFacade $transportEditFacade,
-		TransportPriceEditFacade $transportPriceEditFacade,
 		VatFacade $vatFacade
 	) {
 		$this->transportEditFacade = $transportEditFacade;
-		$this->transportPriceEditFacade = $transportPriceEditFacade;
 		$this->vatFacade = $vatFacade;
 	}
 
@@ -53,7 +46,7 @@ class TransportEditDataFactory {
 		$transportData->setFromEntity($transport, $this->transportEditFacade->getTransportDomainsByTransport($transport));
 		$transportEditData->transportData = $transportData;
 
-		foreach ($this->transportPriceEditFacade->getAllByTransport($transport) as $transportPrice) {
+		foreach ($transport->getPrices() as $transportPrice) {
 			$transportEditData->prices[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
 		}
 
