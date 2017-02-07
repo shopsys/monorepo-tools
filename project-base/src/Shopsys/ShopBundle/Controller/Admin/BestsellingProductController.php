@@ -55,8 +55,7 @@ class BestsellingProductController extends AdminBaseController {
 
 		$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 
-		$bestsellingProductsInCategories = $this->manualBestsellingProductFacade
-			->getManualBestsellingProductCountsInCategories($domainId);
+		$bestsellingProductsInCategories = $this->manualBestsellingProductFacade->getCountsIndexedByCategoryId($domainId);
 
 		return $this->render('@ShopsysShop/Admin/Content/BestsellingProduct/list.html.twig', [
 			'categoryDetails' => $categoryDetails,

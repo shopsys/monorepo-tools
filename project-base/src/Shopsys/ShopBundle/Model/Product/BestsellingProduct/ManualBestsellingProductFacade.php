@@ -4,8 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Category\Category;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository;
 
 class ManualBestsellingProductFacade {
 
@@ -15,9 +15,9 @@ class ManualBestsellingProductFacade {
 	private $em;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository
 	 */
-	private $bestsellingProductRepository;
+	private $manualBestsellingProductRepository;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
@@ -26,11 +26,11 @@ class ManualBestsellingProductFacade {
 
 	public function __construct(
 		EntityManager $em,
-		BestsellingProductRepository $bestsellingProductRepository,
+		ManualBestsellingProductRepository $manualBestsellingProductRepository,
 		CachedBestsellingProductFacade $cachedBestsellingProductFacade
 	) {
 		$this->em = $em;
-		$this->bestsellingProductRepository = $bestsellingProductRepository;
+		$this->manualBestsellingProductRepository = $manualBestsellingProductRepository;
 		$this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
 	}
 
@@ -40,7 +40,7 @@ class ManualBestsellingProductFacade {
 	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsIndexedByPosition
 	 */
 	public function edit(Category $category, $domainId, array $productsIndexedByPosition) {
-		$toDelete = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId($category, $domainId);
+		$toDelete = $this->manualBestsellingProductRepository->getByCategory($category, $domainId);
 		foreach ($toDelete as $item) {
 			$this->em->remove($item);
 		}
@@ -62,7 +62,7 @@ class ManualBestsellingProductFacade {
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getProductsIndexedByPosition($category, $domainId) {
-		$bestsellingProducts = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId(
+		$bestsellingProducts = $this->manualBestsellingProductRepository->getByCategory(
 			$category,
 			$domainId
 		);
@@ -80,8 +80,8 @@ class ManualBestsellingProductFacade {
 	 * @param int $domainId
 	 * @return int[categoryId]
 	 */
-	public function getManualBestsellingProductCountsInCategories($domainId) {
-		return $this->bestsellingProductRepository->getManualBestsellingProductCountsInCategories($domainId);
+	public function getCountsIndexedByCategoryId($domainId) {
+		return $this->manualBestsellingProductRepository->getCountsIndexedByCategoryId($domainId);
 	}
 
 }
