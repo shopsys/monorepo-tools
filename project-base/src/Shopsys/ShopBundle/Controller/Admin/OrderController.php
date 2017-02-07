@@ -20,7 +20,7 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -72,9 +72,9 @@ class OrderController extends AdminBaseController {
 	private $transportEditFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
@@ -91,7 +91,7 @@ class OrderController extends AdminBaseController {
 		Breadcrumb $breadcrumb,
 		OrderItemFacade $orderItemFacade,
 		TransportEditFacade $transportEditFacade,
-		PaymentEditFacade $paymentEditFacade,
+		PaymentFacade $paymentFacade,
 		Domain $domain
 	) {
 		$this->orderFacade = $orderFacade;
@@ -103,7 +103,7 @@ class OrderController extends AdminBaseController {
 		$this->breadcrumb = $breadcrumb;
 		$this->orderItemFacade = $orderItemFacade;
 		$this->transportEditFacade = $transportEditFacade;
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->domain = $domain;
 	}
 
@@ -160,10 +160,10 @@ class OrderController extends AdminBaseController {
 				$order->getCurrency()
 			),
 			'transportVatPercentsByTransportId' => $this->transportEditFacade->getTransportVatPercentsIndexedByTransportId(),
-			'paymentPricesWithVatByPaymentId' => $this->paymentEditFacade->getPaymentPricesWithVatIndexedByPaymentId(
+			'paymentPricesWithVatByPaymentId' => $this->paymentFacade->getPaymentPricesWithVatIndexedByPaymentId(
 				$order->getCurrency()
 			),
-			'paymentVatPercentsByPaymentId' => $this->paymentEditFacade->getPaymentVatPercentsIndexedByPaymentId(),
+			'paymentVatPercentsByPaymentId' => $this->paymentFacade->getPaymentVatPercentsIndexedByPaymentId(),
 		]);
 	}
 

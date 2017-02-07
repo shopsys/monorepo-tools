@@ -3,15 +3,15 @@
 namespace Shopsys\ShopBundle\Model\Payment;
 
 use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class PaymentEditDataFactory {
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
@@ -19,10 +19,10 @@ class PaymentEditDataFactory {
 	private $vatFacade;
 
 	public function __construct(
-		PaymentEditFacade $paymentEditFacade,
+		PaymentFacade $paymentFacade,
 		VatFacade $vatFacade
 	) {
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->vatFacade = $vatFacade;
 	}
 
@@ -43,7 +43,7 @@ class PaymentEditDataFactory {
 	public function createFromPayment(Payment $payment) {
 		$paymentEditData = new PaymentEditData();
 		$paymentData = new PaymentData();
-		$paymentData->setFromEntity($payment, $this->paymentEditFacade->getPaymentDomainsByPayment($payment));
+		$paymentData->setFromEntity($payment, $this->paymentFacade->getPaymentDomainsByPayment($payment));
 		$paymentEditData->paymentData = $paymentData;
 
 		foreach ($payment->getPrices() as $paymentPrice) {

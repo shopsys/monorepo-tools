@@ -18,7 +18,7 @@ use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
@@ -74,9 +74,9 @@ class OrderController extends FrontBaseController {
 	private $transportAndPaymentWatcherService;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
@@ -126,7 +126,7 @@ class OrderController extends FrontBaseController {
 		PaymentPriceCalculation $paymentPriceCalculation,
 		Domain $domain,
 		TransportEditFacade $transportEditFacade,
-		PaymentEditFacade $paymentEditFacade,
+		PaymentFacade $paymentFacade,
 		CurrencyFacade $currencyFacade,
 		OrderDataMapper $orderDataMapper,
 		OrderFlow $flow,
@@ -144,7 +144,7 @@ class OrderController extends FrontBaseController {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->domain = $domain;
 		$this->transportEditFacade = $transportEditFacade;
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->currencyFacade = $currencyFacade;
 		$this->orderDataMapper = $orderDataMapper;
 		$this->flow = $flow;
@@ -168,7 +168,7 @@ class OrderController extends FrontBaseController {
 			return $this->redirectToRoute('front_cart');
 		}
 
-		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
+		$payments = $this->paymentFacade->getVisibleOnCurrentDomain();
 		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
 		$user = $this->getUser();
 
@@ -274,7 +274,7 @@ class OrderController extends FrontBaseController {
 		if ($paymentId === null) {
 			$payment = null;
 		} else {
-			$payment = $this->paymentEditFacade->getById($paymentId);
+			$payment = $this->paymentFacade->getById($paymentId);
 		}
 
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
@@ -322,7 +322,7 @@ class OrderController extends FrontBaseController {
 	}
 
 	public function saveOrderFormAction() {
-		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
+		$payments = $this->paymentFacade->getVisibleOnCurrentDomain();
 		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
 		$countries = $this->countryFacade->getAllOnCurrentDomain();
 
