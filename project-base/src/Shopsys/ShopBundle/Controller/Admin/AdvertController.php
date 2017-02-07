@@ -14,7 +14,7 @@ use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertEditFacade;
+use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -31,9 +31,9 @@ class AdvertController extends AdminBaseController {
 	private $administratorGridFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertFacade
 	 */
-	private $advertEditFacade;
+	private $advertFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
@@ -56,7 +56,7 @@ class AdvertController extends AdminBaseController {
 	private $gridFactory;
 
 	public function __construct(
-		AdvertEditFacade $advertEditFacade,
+		AdvertFacade $advertFacade,
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		SelectedDomain $selectedDomain,
@@ -64,7 +64,7 @@ class AdvertController extends AdminBaseController {
 		AdvertFormTypeFactory $advertFormTypeFactory,
 		AdvertPositionList $advertPositionList
 	) {
-		$this->advertEditFacade = $advertEditFacade;
+		$this->advertFacade = $advertFacade;
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->selectedDomain = $selectedDomain;
@@ -79,7 +79,7 @@ class AdvertController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$advert = $this->advertEditFacade->getById($id);
+		$advert = $this->advertFacade->getById($id);
 		$form = $this->createForm($this->advertFormTypeFactory->create($advert));
 
 		$advertData = new AdvertData();
@@ -89,7 +89,7 @@ class AdvertController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->advertEditFacade->edit($id, $advertData);
+			$this->advertFacade->edit($id, $advertData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -131,7 +131,7 @@ class AdvertController extends AdminBaseController {
 			$queryBuilder,
 			'a.id',
 			function ($row) {
-				$advert = $this->advertEditFacade->getById($row['a']['id']);
+				$advert = $this->advertFacade->getById($row['a']['id']);
 				$row['advert'] = $advert;
 				return $row;
 			}
@@ -179,7 +179,7 @@ class AdvertController extends AdminBaseController {
 		if ($form->isValid()) {
 			$advertData = $form->getData();
 
-			$advert = $this->advertEditFacade->create($advertData);
+			$advert = $this->advertFacade->create($advertData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -208,9 +208,9 @@ class AdvertController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$fullName = $this->advertEditFacade->getById($id)->getName();
+			$fullName = $this->advertFacade->getById($id)->getName();
 
-			$this->advertEditFacade->delete($id);
+			$this->advertFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Advertising <strong>{{ name }}</strong> deleted'),
