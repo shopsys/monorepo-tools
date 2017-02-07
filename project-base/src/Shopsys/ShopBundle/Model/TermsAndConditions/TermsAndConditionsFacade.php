@@ -5,14 +5,14 @@ namespace Shopsys\ShopBundle\Model\TermsAndConditions;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
 class TermsAndConditionsFacade {
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
 	 */
-	private $articleEditFacade;
+	private $articleFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
@@ -25,11 +25,11 @@ class TermsAndConditionsFacade {
 	private $domain;
 
 	public function __construct(
-		ArticleEditFacade $articleEditFacade,
+		ArticleFacade $articleFacade,
 		Setting $setting,
 		Domain $domain
 	) {
-		$this->articleEditFacade = $articleEditFacade;
+		$this->articleFacade = $articleFacade;
 		$this->setting = $setting;
 		$this->domain = $domain;
 	}
@@ -42,7 +42,7 @@ class TermsAndConditionsFacade {
 		$termsAndConditionsArticleId = $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
 
 		if ($termsAndConditionsArticleId !== null) {
-			return $this->articleEditFacade->findById(
+			return $this->articleFacade->findById(
 				$this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId)
 			);
 		}

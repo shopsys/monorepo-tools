@@ -3,25 +3,25 @@
 namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
-use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleController extends FrontBaseController {
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
 	 */
-	private $articleEditFacade;
+	private $articleFacade;
 
-	public function __construct(ArticleEditFacade $articleEditFacade) {
-		$this->articleEditFacade = $articleEditFacade;
+	public function __construct(ArticleFacade $articleFacade) {
+		$this->articleFacade = $articleFacade;
 	}
 
 	/**
 	 * @param int $id
 	 */
 	public function detailAction($id) {
-		$article = $this->articleEditFacade->getVisibleById($id);
+		$article = $this->articleFacade->getVisibleById($id);
 
 		return $this->render('@ShopsysShop/Front/Content/Article/detail.html.twig', [
 			'article' => $article,
@@ -29,7 +29,7 @@ class ArticleController extends FrontBaseController {
 	}
 
 	public function menuAction() {
-		$articles = $this->articleEditFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
+		$articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
 
 		return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,
@@ -37,7 +37,7 @@ class ArticleController extends FrontBaseController {
 	}
 
 	public function footerAction() {
-		$articles = $this->articleEditFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
+		$articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
 
 		return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [
 			'articles' => $articles,
