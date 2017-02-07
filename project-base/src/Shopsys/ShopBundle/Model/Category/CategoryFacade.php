@@ -112,11 +112,11 @@ class CategoryFacade {
 		$rootCategory = $this->getRootCategory();
 		$category = $this->categoryRepository->getById($categoryId);
 		$this->categoryService->edit($category, $categoryData, $rootCategory);
+		$this->em->flush($category);
 		$this->refreshCategoryDomains($category, $categoryData);
 		$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 		$this->imageFacade->uploadImage($category, $categoryData->image, null);
-		$this->em->flush();
 
 		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation($category);
 
@@ -151,6 +151,7 @@ class CategoryFacade {
 	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
 	 */
 	private function refreshCategoryDomains(Category $category, CategoryData $categoryData) {
+		$toFlush = [];
 		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
 
 		foreach ($categoryDomains as $categoryDomain) {
@@ -160,7 +161,11 @@ class CategoryFacade {
 			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
 			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
 			$categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
+
+			$toFlush[] = $categoryDomain;
 		}
+
+		$this->em->flush($toFlush);
 	}
 
 	/**
