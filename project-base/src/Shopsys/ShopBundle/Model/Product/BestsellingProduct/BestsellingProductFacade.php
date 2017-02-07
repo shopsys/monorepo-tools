@@ -60,12 +60,12 @@ class BestsellingProductFacade {
 			$pricingGroup
 		);
 
-		$manualBestsellingProductsIndexedByPosition = [];
+		$manualProductsIndexedByPosition = [];
 		foreach ($manualBestsellingProducts as $manualBestsellingProduct) {
-			$manualBestsellingProductsIndexedByPosition[$manualBestsellingProduct->getPosition()] = $manualBestsellingProduct->getProduct();
+			$manualProductsIndexedByPosition[$manualBestsellingProduct->getPosition()] = $manualBestsellingProduct->getProduct();
 		}
 
-		$automaticBestsellingProducts = $this->automaticBestsellingProductRepository->getOfferedProductsByCategory(
+		$automaticProducts = $this->automaticBestsellingProductRepository->getOfferedProductsByCategory(
 			$domainId,
 			$category,
 			$pricingGroup,
@@ -73,13 +73,13 @@ class BestsellingProductFacade {
 			self::MAX_RESULTS
 		);
 
-		$combinedBestsellingProducts = $this->bestsellingProductService->combineManualAndAutomaticBestsellingProducts(
-			$manualBestsellingProductsIndexedByPosition,
-			$automaticBestsellingProducts,
+		$combinedProducts = $this->bestsellingProductService->combineManualAndAutomaticProducts(
+			$manualProductsIndexedByPosition,
+			$automaticProducts,
 			self::MAX_RESULTS
 		);
 
-		return $this->productDetailFactory->getDetailsForProducts($combinedBestsellingProducts);
+		return $this->productDetailFactory->getDetailsForProducts($combinedProducts);
 	}
 
 }

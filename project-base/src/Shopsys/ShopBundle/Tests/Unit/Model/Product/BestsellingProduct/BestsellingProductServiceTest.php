@@ -28,32 +28,32 @@ class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 		$product4 = Product::create($productData);
 		$product5 = Product::create($productData);
 
-		$manualBestsellingProductsIndexedByPosition = [
+		$manualProductsIndexedByPosition = [
 			0 => $product1,
 			2 => $product2,
 		];
 
-		$automaticBestsellingProducts = [
+		$automaticProducts = [
 			$product1,
 			$product3,
 			$product4,
 			$product5,
 		];
 
-		$combinedArray = $bestsellingProductService->combineManualAndAutomaticBestsellingProducts(
-			$manualBestsellingProductsIndexedByPosition,
-			$automaticBestsellingProducts,
+		$combinedProducts = $bestsellingProductService->combineManualAndAutomaticProducts(
+			$manualProductsIndexedByPosition,
+			$automaticProducts,
 			$maxResults
 		);
 
-		$combinedArrayExpected = [
+		$combinedProductsExpected = [
 			0 => $product1,
 			1 => $product3,
 			2 => $product2,
 			3 => $product4,
 		];
 
-		$this->assertEquals($combinedArray, $combinedArrayExpected);
+		$this->assertEquals($combinedProducts, $combinedProductsExpected);
 	}
 
 }
