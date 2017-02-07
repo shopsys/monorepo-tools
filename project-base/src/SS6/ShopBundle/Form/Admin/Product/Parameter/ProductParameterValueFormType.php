@@ -38,17 +38,17 @@ class ProductParameterValueFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->parameters, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte parametr']),
+					new Constraints\NotBlank(['message' => 'Please choose parameter']),
 				],
 			])
 			->add('valueText', FormType::LOCALIZED, [
 				'required' => true,
 				'main_constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte hodnotu parametru']),
+					new Constraints\NotBlank(['message' => 'Please enter parameter value']),
 				],
 				'options' => [
 					'constraints' => [
-						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			]);

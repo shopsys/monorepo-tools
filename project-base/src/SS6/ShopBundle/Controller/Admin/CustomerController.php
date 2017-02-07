@@ -142,7 +142,7 @@ class CustomerController extends AdminBaseController {
 				$this->customerFacade->editByAdmin($id, $customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byl upraven zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
 					[
 						'name' => $user->getFullName(),
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
@@ -151,16 +151,16 @@ class CustomerController extends AdminBaseController {
 
 				return $this->redirectToRoute('admin_customer_list');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-				$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
+				$form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
 			}
 
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace zákazníka - %name%', ['%name%' => $user->getFullName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing customer - %name%', ['%name%' => $user->getFullName()])));
 
 		$orders = $this->orderFacade->getCustomerOrderList($user);
 
@@ -197,21 +197,21 @@ class CustomerController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'name', t('Jméno'), true);
-		$grid->addColumn('city', 'city', t('Město'), true);
-		$grid->addColumn('telephone', 'telephone', t('Telefon'), true);
-		$grid->addColumn('email', 'u.email', t('Email'), true);
-		$grid->addColumn('pricingGroup', 'pricingGroup', t('Cenová skupina'), true);
-		$grid->addColumn('orders_count', 'ordersCount', t('Počet objednávek'), true)->setClassAttribute('text-right');
-		$grid->addColumn('orders_sum_price', 'ordersSumPrice', t('Hodnota objednávek'), true)
+		$grid->addColumn('name', 'name', t('Full name'), true);
+		$grid->addColumn('city', 'city', t('City'), true);
+		$grid->addColumn('telephone', 'telephone', t('Telephone'), true);
+		$grid->addColumn('email', 'u.email', t('E-mail'), true);
+		$grid->addColumn('pricingGroup', 'pricingGroup', t('Pricing group'), true);
+		$grid->addColumn('orders_count', 'ordersCount', t('Number of orders'), true)->setClassAttribute('text-right');
+		$grid->addColumn('orders_sum_price', 'ordersSumPrice', t('Orders value'), true)
 			->setClassAttribute('text-right');
-		$grid->addColumn('last_order_at', 'lastOrderAt', t('Poslední objednávka'), true)
+		$grid->addColumn('last_order_at', 'lastOrderAt', t('Last order'), true)
 			->setClassAttribute('text-right');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_customer_edit', ['id' => 'id']);
 		$grid->addDeleteActionColumn('admin_customer_delete', ['id' => 'id'])
-			->setConfirmMessage('Opravdu chcete odstranit tohoto zákazníka?');
+			->setConfirmMessage(t('Do you really want to remove this customer?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
 
@@ -250,7 +250,7 @@ class CustomerController extends AdminBaseController {
 				$user = $this->customerFacade->create($customerData);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Byl vytvořen zákazník <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Customer <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
 					[
 						'name' => $user->getFullName(),
 						'url' => $this->generateUrl('admin_customer_edit', ['id' => $user->getId()]),
@@ -259,12 +259,13 @@ class CustomerController extends AdminBaseController {
 
 				return $this->redirectToRoute('admin_customer_list');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-				$form->get('userData')->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
+				$formErrorMessage = t('There is already a customer with this e-mail in the database');
+				$form->get('userData')->get('email')->addError(new FormError($formErrorMessage));
 			}
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', [
@@ -284,13 +285,13 @@ class CustomerController extends AdminBaseController {
 			$this->customerFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Zákazník <strong>{{ name }}</strong> byl smazán'),
+				t('Customer <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený zákazník neexistuje'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected customer doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_customer_list');

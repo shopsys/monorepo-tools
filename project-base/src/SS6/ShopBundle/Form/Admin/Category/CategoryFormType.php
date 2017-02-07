@@ -60,12 +60,12 @@ class CategoryFormType extends AbstractType {
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+					new Constraints\NotBlank(['message' => 'Please enter name']),
 				],
 				'options' => [
 					'required' => false,
 					'constraints' => [
-						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			])
@@ -97,9 +97,10 @@ class CategoryFormType extends AbstractType {
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
+						'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])

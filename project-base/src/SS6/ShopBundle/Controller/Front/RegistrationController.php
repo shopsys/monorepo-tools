@@ -62,16 +62,16 @@ class RegistrationController extends FrontBaseController {
 
 				$this->loginService->loginUser($user, $request);
 
-				$this->getFlashMessageSender()->addSuccessFlash(t('Byli jste úspěšně zaregistrováni'));
+				$this->getFlashMessageSender()->addSuccessFlash(t('You have been successfully registered.'));
 
 				return $this->redirectToRoute('front_homepage');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
-				$form->get('email')->addError(new FormError(t('V databázi se již nachází zákazník s tímto e-mailem')));
+				$form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
 			}
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', [

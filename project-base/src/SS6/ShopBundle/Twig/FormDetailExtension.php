@@ -73,9 +73,9 @@ class FormDetailExtension extends Twig_Extension {
 
 		if (!array_keys($vars, 'label', true)) {
 			if ($object === null) {
-				$vars['label'] = t('Vytvořit');
+				$vars['label'] = t('Create');
 			} else {
-				$vars['label'] = t('Uložit změny');
+				$vars['label'] = t('Save changes');
 			}
 		}
 

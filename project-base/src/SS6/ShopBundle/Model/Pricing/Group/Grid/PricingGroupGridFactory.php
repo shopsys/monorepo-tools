@@ -50,8 +50,8 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('pricingGroupList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'pg.name', t('Název'), true);
-		$grid->addColumn('coefficient', 'pg.coefficient', t('Koeficient'), true);
+		$grid->addColumn('name', 'pg.name', t('Name'), true);
+		$grid->addColumn('coefficient', 'pg.coefficient', t('Coefficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_pricinggroup_deleteconfirm', ['id' => 'pg.id'])
 			->setAjaxConfirm();

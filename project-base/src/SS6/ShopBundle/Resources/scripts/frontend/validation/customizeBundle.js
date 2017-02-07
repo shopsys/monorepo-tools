@@ -374,7 +374,7 @@
 		SS6.window({
 			content:
 				'<div class="text-left">'
-				+ SS6.translator.trans('Překontrolujte prosím zadané hodnoty.<br><br>')
+				+ SS6.translator.trans('Please check the entered values.<br><br>')
 				+ $formattedFormErrors[0].outerHTML
 				+ '</div>'
 		});

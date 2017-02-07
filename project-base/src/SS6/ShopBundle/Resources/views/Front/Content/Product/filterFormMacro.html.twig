@@ -13,8 +13,8 @@
 		{% endif %}
 
 		<div class="box-filter__price">
-			{{ form_row(filterForm.minimalPrice, {label: 'Cena od'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id), attr: { class: 'js-product-filter-call-change-after-reset'} }) }}
-			{{ form_row(filterForm.maximalPrice, {label: 'Cena do'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id), attr: { class: 'js-product-filter-call-change-after-reset'} }) }}
+			{{ form_row(filterForm.minimalPrice, {label: 'Price from'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id), attr: { class: 'js-product-filter-call-change-after-reset'} }) }}
+			{{ form_row(filterForm.maximalPrice, {label: 'Price to'|trans, symbolAfterInput: currencySymbolByDomainId(getDomain().id), attr: { class: 'js-product-filter-call-change-after-reset'} }) }}
 			<div
 				class="js-range-slider"
 				data-minimum-input-id="{{ filterForm.minimalPrice.vars.id }}"
@@ -30,7 +30,7 @@
 					{{ form_widget(filterForm.inStock) }}
 				</span>
 				<span class="form-choice__label">
-					{{ 'Jen zboží skladem'|trans }}
+					{{ 'Products in stock only'|trans }}
 					{% if productFilterCountData is not null %}
 						<span
 							class="js-product-filter-count"
@@ -48,7 +48,7 @@
 		{% else %}
 			<div class="box-filter__choice">
 				<span class="box-filter__choice__title">
-					{{ 'Příznaky'|trans }}:
+					{{ 'Flags'|trans }}:
 				</span>
 				<div class="box-filter__choice__inputs">
 					<div id="product_filter_form_flags">
@@ -82,7 +82,7 @@
 		{% else %}
 			<div class="box-filter__choice">
 				<span class="box-filter__choice__title">
-					{{ 'Značka'|trans }}:
+					{{ 'Brand'|trans }}:
 				</span>
 				<div class="box-filter__choice__inputs">
 					<div id="product_filter_form_brands">
@@ -115,7 +115,7 @@
 		{% else %}
 			<div class="box-filter__parameters">
 				<span class="box-filter__parameters__title">
-					{{ 'Parametry'|trans }}:
+					{{ 'Parameters'|trans }}:
 				</span>
 				<div id="{{ filterForm.parameters.vars.id }}">
 					{% for parameterId, parameterForm in filterForm.parameters %}
@@ -158,8 +158,8 @@
 
 		<div class="box-filter__action">
 
-			<a class="btn js-product-filter-reset-button" href="{{ resetUrl }}">{{ 'Vynulovat filtr'|trans }}</a>
-			{{ form_widget(filterForm.search, { label: 'Zobrazit výsledky'|trans, attr: {class: 'js-product-filter-show-result-button btn--primary' } }) }}
+			<a class="btn js-product-filter-reset-button" href="{{ resetUrl }}">{{ 'Clear filter'|trans }}</a>
+			{{ form_widget(filterForm.search, { label: 'View results'|trans, attr: {class: 'js-product-filter-show-result-button btn--primary' } }) }}
 		</div>
 
 	{{ form_end(filterForm) }}

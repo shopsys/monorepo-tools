@@ -8,7 +8,7 @@
 			value="{{ routeCsrfToken }}"
 		/>
 		<select name="newId" class="js-confirm-delete-select">
-			<option value="">-- {{ 'Zvolte novou hodnotu'|trans }} --</option>
+			<option value="">-- {{ 'Select new value'|trans }} --</option>
 			{% for preferredView in remainingEntitiesChoiceList.preferredViews %}
 				<option value="{{ preferredView.value }}">{{ preferredView.label }}</option>
 			{% endfor %}
@@ -19,14 +19,13 @@
 
 		<div class="window__actions">
 			<button type="submit" class="btn">
-				{{ 'Smazat a nastavit'|trans }}
+				{{ 'Delete and set'|trans }}
 			</button>
 		</div>
 	</form>
 {% else %}
 	<p>
-		{{ 'Aby bylo možné tuto hodnotu smazat, je třeba nastavit novou, která se použije místo ní.
-		Bohužel není za co nahrazovat, před smazáním musíte nějdřív vytvořit novou.'|trans }}
+		{{ 'To delete this value there has to be selected another one, which will be used instead of the existing one. Unfortunately there is no other value available, you have to create new value before deleting this one.'|trans }}
 	</p>
 {% endif %}
 

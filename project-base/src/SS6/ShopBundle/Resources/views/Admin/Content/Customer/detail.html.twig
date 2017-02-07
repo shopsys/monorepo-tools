@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Karta zákazníka'|trans }}{% endblock %}
-{% block h1 %}{{ 'Karta zákazníka'|trans }}{% endblock %}
+{% block title %}- {{ 'Customer detail'|trans }}{% endblock %}
+{% block h1 %}{{ 'Customer detail'|trans }}{% endblock %}
 
 {% block main_content %}
 
@@ -11,86 +11,86 @@
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Systémové údaje'|trans }}
+					{{ 'System data'|trans }}
 				</div>
 			</div>
 			{{ form_id(user|default(null)) }}
 			{% block customer_domain %}{% endblock %}
-			{{ form_row(form.userData.pricingGroup, { label: 'Cenová skupina'|trans }) }}
+			{{ form_row(form.userData.pricingGroup, { label: 'Pricing group'|trans }) }}
 			{% block customer_created_at %}{% endblock %}
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Osobní údaje'|trans }}
+					{{ 'Personal data'|trans }}
 				</div>
 			</div>
-			{{ form_row(form.userData.firstName, { label: 'Jméno'|trans}) }}
-			{{ form_row(form.userData.lastName, { label: 'Příjmení'|trans}) }}
-			{{ form_row(form.billingAddressData.telephone, { label: 'Telefon'|trans }) }}
-			{{ form_row(form.userData.email, { label: 'Email'|trans }) }}
+			{{ form_row(form.userData.firstName, { label: 'First name'|trans}) }}
+			{{ form_row(form.userData.lastName, { label: 'Surname'|trans}) }}
+			{{ form_row(form.billingAddressData.telephone, { label: 'Telephone'|trans }) }}
+			{{ form_row(form.userData.email, { label: 'E-mail'|trans }) }}
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Registrovaní zák.'|trans }}
+					{{ 'Registered cust.'|trans }}
 				</div>
 			</div>
-			{{ form_row(form.userData.password.first, { label: 'Heslo'|trans}) }}
-			{{ form_row(form.userData.password.second, { label: 'Heslo znovu'|trans}) }}
+			{{ form_row(form.userData.password.first, { label: 'Password'|trans}) }}
+			{{ form_row(form.userData.password.second, { label: 'Password again'|trans}) }}
 			{% block customer_last_login %}{% endblock %}
 		</div>
 
 		<div class="wrap-border" id="customer_form_billingAddressData">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Firemní údaje'|trans }}
+					{{ 'Company data'|trans }}
 				</div>
 			</div>
 			{{ form_row(form.billingAddressData.companyCustomer, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-company-fields' },
-				label: 'Nakupuji na firmu'|trans})
+				label: 'I buy on company behalf'|trans})
 			}}
 			<div id="js-company-fields">
-				{{ form_row(form.billingAddressData.companyName, { label: 'Firma'|trans}) }}
-				{{ form_row(form.billingAddressData.companyNumber, { label: 'IČ'|trans }) }}
-				{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'DIČ'|trans }) }}
+				{{ form_row(form.billingAddressData.companyName, { label: 'Company'|trans}) }}
+				{{ form_row(form.billingAddressData.companyNumber, { label: 'Company number'|trans }) }}
+				{{ form_row(form.billingAddressData.companyTaxNumber, { label: 'Tax number'|trans }) }}
 			</div>
 		</div>
 
 		<div class="wrap-border">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Adresa'|trans }}
+					{{ 'Address'|trans }}
 				</div>
 			</div>
-			{{ form_row(form.billingAddressData.street, { label: 'Ulice'|trans}) }}
-			{{ form_row(form.billingAddressData.city, { label: 'Město'|trans}) }}
-			{{ form_row(form.billingAddressData.postcode, { label: 'PSČ'|trans }) }}
-			{{ form_row(form.billingAddressData.country, { label: 'Stát'|trans }) }}
+			{{ form_row(form.billingAddressData.street, { label: 'Street'|trans}) }}
+			{{ form_row(form.billingAddressData.city, { label: 'City'|trans}) }}
+			{{ form_row(form.billingAddressData.postcode, { label: 'Postcode'|trans }) }}
+			{{ form_row(form.billingAddressData.country, { label: 'Country'|trans }) }}
 		</div>
 
 		<div class="wrap-border" id="customer_form_deliveryAddressData">
 			<div class="form-group">
 				<div class="form-group__title">
-					{{ 'Doručovací adresa'|trans }}
+					{{ 'Shipping address'|trans }}
 				</div>
 			</div>
 			{{ form_row(form.deliveryAddressData.addressFilled, {
 				attr: { class: 'js-checkbox-toggle', 'data-checkbox-toggle-container-id': 'js-delivery-address-fields' },
-				label: 'Zboží chci doručit na jinou adresu než fakturační'|trans})
+				label: 'I want to deliver products to different address than the billing one'|trans})
 			}}
 			<div id="js-delivery-address-fields" class="form-line__js">
-				{{ form_row(form.deliveryAddressData.companyName, { label: 'Firma'|trans}) }}
-				{{ form_row(form.deliveryAddressData.firstName, { label: 'Jméno'|trans}) }}
-				{{ form_row(form.deliveryAddressData.lastName, { label: 'Příjmení'|trans}) }}
-				{{ form_row(form.deliveryAddressData.telephone, { label: 'Telefon'|trans }) }}
-				{{ form_row(form.deliveryAddressData.street, { label: 'Ulice'|trans}) }}
-				{{ form_row(form.deliveryAddressData.city, { label: 'Město'|trans}) }}
-				{{ form_row(form.deliveryAddressData.postcode, { label: 'PSČ'|trans }) }}
-				{{ form_row(form.deliveryAddressData.country, { label: 'Stát'|trans }) }}
+				{{ form_row(form.deliveryAddressData.companyName, { label: 'Company'|trans}) }}
+				{{ form_row(form.deliveryAddressData.firstName, { label: 'First name'|trans}) }}
+				{{ form_row(form.deliveryAddressData.lastName, { label: 'Surname'|trans}) }}
+				{{ form_row(form.deliveryAddressData.telephone, { label: 'Telephone'|trans }) }}
+				{{ form_row(form.deliveryAddressData.street, { label: 'Street'|trans}) }}
+				{{ form_row(form.deliveryAddressData.city, { label: 'City'|trans}) }}
+				{{ form_row(form.deliveryAddressData.postcode, { label: 'Postcode'|trans }) }}
+				{{ form_row(form.deliveryAddressData.country, { label: 'Country'|trans }) }}
 			</div>
 		</div>
 
@@ -100,7 +100,7 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_customer_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<a href="{{ url('admin_customer_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(user|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

@@ -42,15 +42,15 @@ class CurrencyFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte název']),
-					new Constraints\Length(['max' => 50, 'maxMessage' => 'Název nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter name']),
+					new Constraints\Length(['max' => 50, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('code', FormType::CURRENCY, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte název']),
-					new Constraints\Length(['max' => 3, 'maxMessage' => 'Kód měny nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter currency code']),
+					new Constraints\Length(['max' => 3, 'maxMessage' => 'Currency code cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('exchangeRate', FormType::NUMBER, [
@@ -58,7 +58,7 @@ class CurrencyFormType extends AbstractType {
 				'precision' => 6,
 				'read_only' => $this->isRateReadOnly,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte kurz měny']),
+					new Constraints\NotBlank(['message' => 'Please enter currency exchange rate']),
 					new Constraints\GreaterThan(0),
 				],
 			]);

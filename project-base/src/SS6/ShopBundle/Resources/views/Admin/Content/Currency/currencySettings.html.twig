@@ -1,17 +1,17 @@
 {{ form_start(form) }}
 	<div class="wrap-border form-group">
 		<div class="form-group__title">
-			{{ 'Nastavení'|trans }}
+			{{ 'Settings'|trans }}
 		</div>
-		{{ form_row(form.defaultCurrency, { label: 'Výchozí měna administrace'|trans, icon: { title: 'Při změně výchozí měny nedochází k žádnému přepočtu cen'|trans } }) }}
+		{{ form_row(form.defaultCurrency, { label: 'Default administration currency'|trans, icon: { title: 'When changing the default currency there is no recalculation of prices'|trans } }) }}
 		{% for item in form.domainDefaultCurrencies %}
-			{{ form_row(item, { label: 'Základní měna frontendu %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
+			{{ form_row(item, { label: 'Basic frontend currency %domainName%'|trans({'%domainName%': domainNames[item.vars.name]})}) }}
 		{% endfor %}
 	</div>
 
 	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 		{% block fixed_bar_content %}
-			{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 		{% endblock %}
 	{% endembed %}
 {{ form_end(form) }}

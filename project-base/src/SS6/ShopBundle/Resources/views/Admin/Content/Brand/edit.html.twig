@@ -1,16 +1,16 @@
 {% extends '@SS6Shop/Admin/Content/Brand/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace značky'|trans }} - {{ brand.name }}{% endblock %}
-{% block h1 %}{{ 'Editace značky'|trans }} - {{ brand.name }}{% endblock %}
+{% block title %}- {{ 'Editing brand'|trans }} - {{ brand.name }}{% endblock %}
+{% block h1 %}{{ 'Editing brand'|trans }} - {{ brand.name }}{% endblock %}
 
 {% block brand_urls %}
-	{{ form_row(form.urls, { label: 'URL adresy'|trans }) }}
+	{{ form_row(form.urls, { label: 'URL addresses'|trans }) }}
 {% endblock %}
 
 {% block image %}
     <div class="form-line">
         <label class="form-line__label">
-            {{ 'Obrázek'|trans }}:
+            {{ 'Picture'|trans }}:
         </label>
         <div class="form-line__side">
             <div class="form-line__item">

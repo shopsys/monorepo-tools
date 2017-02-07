@@ -244,7 +244,7 @@
 							{{ domainIcon(domainId, 'large') }}
 						</span>
 						<strong class="form-line__box__title__name">
-							{{ 'Doména %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
+							{{ 'Domain %domainName%'|trans({'%domainName%' : getDomainName(domainId)}) }}
 						</strong>
 						{{ form_errors(form.mainOnDomains[domainId]) }}
 					</div>
@@ -267,7 +267,7 @@
 									{{ form_widget(friendlyUrlForm, {attr: {class: 'js-entity-url-list-row-checkbox display-none'}}) }}
 								</span>
 
-								<a href="{{ absoluteUrl }}" title="{{ 'Otevřít v novém panelu'|trans }}" class="js-tooltip text-no-decoration in-icon in-icon--link form-choice-list__item__action form-choice-list__item__action--link" target="_blank" data-toggle="tooltip" data-placement="top">
+								<a href="{{ absoluteUrl }}" title="{{ 'Open in a new tab'|trans }}" class="js-tooltip text-no-decoration in-icon in-icon--link form-choice-list__item__action form-choice-list__item__action--link" target="_blank" data-toggle="tooltip" data-placement="top">
 									<i class="svg svg-forward-page"></i>
 								</a>
 
@@ -279,17 +279,17 @@
 									</span>
 									<span class="js-entity-url-list-row-revert-block display-none">
 										<button class="btn js-entity-url-list-row-revert-block-button" type="button">
-											{{ 'Vrátit zpět'|trans }}
+											{{ 'Return back'|trans }}
 										</button>
 
-										<span title="{{ 'Po uložení bude url smazána'|trans }}"
+										<span title="{{ 'URL will be deleted after saving.'|trans }}"
 											class="js-tooltip cursor-help form-icon" data-toggle="tooltip" data-placement="top">
 											<span class="svg svg-info"></span>
 										</button>
 										</span>
 									</span>
 								</span>
-								<span title="{{ 'Hlavní URL nelze smazat'|trans }}"
+								<span title="{{ 'Main URL can\'t be deleted'|trans }}"
 									class="js-entity-url-list-info-main-delete js-tooltip cursor-help display-none form-choice-list__item__action" data-toggle="tooltip" data-placement="top">
 									<span class="svg svg-info in-icon in-icon--info "></span>
 								</span>
@@ -307,7 +307,7 @@
 		<div class="margin-top-5">
 			<button type="button" class="js-entity-url-list-button-add-url btn btn--plus">
 				<i class="btn__icon">+</i>
-				{{ 'Přidat URL'|trans }}
+				{{ 'Add URL'|trans }}
 			</button>
 		</div>
 	</div>
@@ -408,7 +408,7 @@
 				type="button"
 				data-product-picker-url="{{ url('admin_productpicker_picksingle', {allowMainVariants: allow_main_variants, allowVariants: allow_variants}) }}"
 				class="js-product-picker-create-picker-button btn btn--default"
-				title="{{ 'Kliknutím přejdete k výběru produktu'|trans }}"
+				title="{{ 'Click to go to product section'|trans }}"
 				type="button"
 			>
 				...
@@ -416,7 +416,7 @@
 		</span>
 		{% if enableRemove %}
 			<a href="#" class="js-product-picker-remove-button display-none">
-				{{ 'Odebrat'|trans }}
+				{{ 'Remove'|trans }}
 			</a>
 		{% endif %}
 		{{- form_widget(form, {attr: {class: 'js-product-picker-input'}}) -}}
@@ -477,7 +477,7 @@
 		<table class="table-form margin-bottom-20">
 			<thead class="js-products-picker-header">
 				<tr class="table-form__row">
-					<td class="table-form__cell">{{ 'Název'|trans }}</td>
+					<td class="table-form__cell">{{ 'Name'|trans }}</td>
 					<td class="table-form__cell table-form__cell--actions"></td>
 				</tr>
 			</thead>
@@ -492,7 +492,7 @@
 			{% if labelButtonAdd is defined %}
 				{{ labelButtonAdd }}
 			{% else %}
-				{{ 'Přidat zboží'|trans }}
+				{{ 'Add product'|trans }}
 			{% endif %}
 		</a>
 	</div>
@@ -655,7 +655,7 @@
 					{{ child.vars.label }}
 				</label>
 			{% else %}
-				{{ empty_message|default('Není z čeho vybírat.'|trans) }}
+				{{ empty_message|default('Nothing to choose from.'|trans) }}
 			{% endfor %}
 		</div>
 	{% endspaceless %}
@@ -692,7 +692,7 @@
 			class="js-sortable-values-item-add btn-link-style"
 			data-item-template="{{ _self.sortableValuesWidgetItem(item_input_name, '%value%', '%label%')|escape('html_attr') }}"
 		>
-			{{ 'Přidat'|trans }}
+			{{ 'Add'|trans }}
 		</button>
 
 		<div class="js-sortable-values-items">
@@ -713,7 +713,7 @@
 
 {% macro sortableValuesWidgetItem(inputName, value, label) %}
 	<div class="js-sortable-values-item padding-5">
-		<span class="js-sortable-values-item-handle cursor-move" title="{{ 'Přesunout'|trans }}">
+		<span class="js-sortable-values-item-handle cursor-move" title="{{ 'Move'|trans }}">
 			<i class="svg svg-move"></i>
 		</span>
 		{{ label }}

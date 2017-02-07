@@ -15,9 +15,9 @@ class ArticlePlacementList extends AbstractTranslatedConstantList {
 	 */
 	public function getTranslationsIndexedByValue() {
 		return [
-			self::PLACEMENT_TOP_MENU => t('v horním menu'),
-			self::PLACEMENT_FOOTER => t('v patičce'),
-			self::PLACEMENT_NONE => t('bez umístění'),
+			self::PLACEMENT_TOP_MENU => t('in upper menu'),
+			self::PLACEMENT_FOOTER => t('in footer'),
+			self::PLACEMENT_NONE => t('without positoning'),
 		];
 	}
 

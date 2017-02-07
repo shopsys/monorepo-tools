@@ -1,6 +1,6 @@
 {% if messages %}
 	<div class="in-message in-message--block in-message--{{ type }} js-flash-message">
-		<a href="#" class="in-message__close js-flash-message-close" title="Zavřít">X</a>
+		<a href="#" class="in-message__close js-flash-message-close" title="{{ 'Close'|trans }}">X</a>
 		<ul class="in-message__list">
 			{% for message in messages %}
 				<li class="in-message__list__item">

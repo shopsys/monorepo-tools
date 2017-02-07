@@ -19,7 +19,7 @@
 						document.location = data.urlToRedirect;
 					} else {
 						$('.js-front-login-window-message')
-							.text(SS6.translator.trans('Byly zadány neplatné přihlašovací údaje'))
+							.text(SS6.translator.trans('Invalid login'))
 							.show();
 					}
 				}

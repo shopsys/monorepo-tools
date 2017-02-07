@@ -50,7 +50,7 @@ class CustomerPasswordController extends FrontBaseController {
 				$this->customerPasswordFacade->resetPassword($email, $this->domain->getId());
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Odkaz pro vyresetování hesla byl zaslán na email <strong>{{ email }}</strong>.'),
+					t('Link to password reset sent to e-mail <strong>{{ email }}</strong>.'),
 					[
 						'email' => $email,
 					]
@@ -58,8 +58,8 @@ class CustomerPasswordController extends FrontBaseController {
 				return $this->redirectToRoute('front_registration_reset_password');
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
-						. ' <a href="{{ registrationLink }}">Zaregistrovat</a>'),
+					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. '
+						. '<a href="{{ registrationLink }}"> Register</a>'),
 					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
@@ -78,7 +78,7 @@ class CustomerPasswordController extends FrontBaseController {
 		$hash = $request->query->get('hash');
 
 		if (!$this->customerPasswordFacade->isResetPasswordHashValid($email, $this->domain->getId(), $hash)) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('The link to change your password expired.'));
 			return $this->redirectToRoute('front_homepage');
 		}
 
@@ -97,18 +97,18 @@ class CustomerPasswordController extends FrontBaseController {
 				$this->loginService->loginUser($user, $request);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
-					t('Zákazník s emailovou adresou <strong>{{ email }}</strong> neexistuje.'
-						. ' <a href="{{ registrationLink }}">Zaregistrovat</a>'),
+					t('Customer with e-mail address <strong>{{ email }}</strong> doesn\'t exist. '
+						. '<a href="{{ registrationLink }}"> Register</a>'),
 					[
 						'email' => $ex->getEmail(),
 						'registrationLink' => $this->generateUrl('front_registration_register'),
 					]
 				);
 			} catch (\SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException $ex) {
-				$this->getFlashMessageSender()->addErrorFlash(t('Platnost odkazu pro změnu hesla vypršela.'));
+				$this->getFlashMessageSender()->addErrorFlash(t('The link to change your password expired.'));
 			}
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Heslo bylo úspěšně změněno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Password successfully changed'));
 			return $this->redirectToRoute('front_homepage');
 		}
 

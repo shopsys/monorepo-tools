@@ -6,12 +6,10 @@
 			</span>
 			<div class="cart__info js-cart-info">
 				{% if cart.isEmpty %}
-					{{ 'Váš nákupní košík je prázdný'|trans }}
+					{{ 'Your cart is empty'|trans }}
 				{% else %}
 					{% transchoice cart.itemsCount with { '%itemsCount%': cart.itemsCount, '%priceWithVat%': productsPrice.priceWithVat|price } %}
-						{1} <strong class="cart__state">%itemsCount%</strong> položka za <strong class="cart__state">%priceWithVat%</strong>
-						|[2,4] <strong class="cart__state">%itemsCount%</strong> položky za <strong class="cart__state">%priceWithVat%</strong>
-						|[5,Inf] <strong class="cart__state">%itemsCount%</strong> položek za <strong class="cart__state">%priceWithVat%</strong>
+						{1} <strong class="cart__state">%itemsCount%</strong> item for <strong class="cart__state">%priceWithVat%</strong>|[2,Inf] <strong class="cart__state">%itemsCount%</strong> items for <strong class="cart__state">%priceWithVat%</strong>
 					{% endtranschoice %}
 				{% endif %}
 			</div>

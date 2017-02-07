@@ -4,9 +4,9 @@
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
-{% set descriptionHeadline = 'Informace o produktu'|trans %}
-{% set parametersHeadline = 'Technické parametry'|trans %}
-{% set accessoriesHeadline = 'Příslušenství'|trans %}
+{% set descriptionHeadline = 'Product information'|trans %}
+{% set parametersHeadline = 'Technical parameters'|trans %}
+{% set accessoriesHeadline = 'Accessories'|trans %}
 {% block meta_description %}
 	{{- productDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
@@ -58,7 +58,7 @@
 				{% if productDetail.product.calculatedAvailability %}
 					<div class="box-detail__info__availability">
 						{% if productDetail.product.calculatedSellingDenied %}
-							{{ 'Zboží se již neprodává'|trans }}
+							{{ 'Product no longer on sale'|trans }}
 						{% else %}
 							{{ productDetail.product.calculatedAvailability.name }}
 						{% endif %}
@@ -76,7 +76,7 @@
 									{{ productDetail.sellingPrice.priceWithVat|price }}
 								</div>
 								<div class="box-detail-add__prices__item">
-									{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'bez DPH'|trans }}
+									{{ productDetail.sellingPrice.priceWithoutVat|price }} {{ 'excluding VAT'|trans }}
 								</div>
 								<meta itemprop="priceCurrency"
 									content="{{ currencyCode(domain.id) }}"
@@ -91,7 +91,7 @@
 							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
 						{% else %}
 							<div>
-								{{ 'Toto zboží nadále není možné koupit. Prohlédněte si podobné produkty <a href="%url%">zde</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
+								{{ 'This product is no longer available for purchase. Have a look at similar products <a href="%url%">here</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
 							</div>
 						{% endif %}
 					</div>
@@ -101,7 +101,7 @@
 					<dl class="box-detail__info__params">
 						{% if productDetail.product.brand %}
 							<dt>
-								{{ 'Značka'|trans }}:
+								{{ 'Brand'|trans }}:
 							</dt>
 							<dd>
 								<a href="{{ url('front_brand_detail', { id: productDetail.product.brand.id }) }}">
@@ -113,7 +113,7 @@
 						{% if not productDetail.product.isMainVariant %}
 							{% if productDetail.product.catnum %}
 								<dt>
-									{{ 'Katalogové číslo'|trans }}:
+									{{ 'Catalogue number'|trans }}:
 								</dt>
 								<dd>
 									{{ productDetail.product.catnum }}
@@ -122,7 +122,7 @@
 
 							{% if productDetail.product.partno %}
 								<dt>
-									{{ 'Výrobní číslo'|trans }}:
+									{{ 'Serial number'|trans }}:
 								</dt>
 								<dd>
 									{{ productDetail.product.partno }}
@@ -152,9 +152,9 @@
 				<thead>
 					<tr class="table-variants__row">
 						<th class="table-variants__cell table-variants__cell--image"></th>
-						<th class="table-variants__cell table-variants__cell--name">{{ 'Název'|trans }}</th>
+						<th class="table-variants__cell table-variants__cell--name">{{ 'Name'|trans }}</th>
 						<th class="table-variants__cell table-variants__cell--price">
-							{{ 'Cena s DPH'|trans }}
+							{{ 'Price including VAT'|trans }}
 							{% if productDetail.sellingPrice is not null %}
 								<meta itemprop="priceCurrency"
 									content="{{ currencyCode(domain.id) }}"

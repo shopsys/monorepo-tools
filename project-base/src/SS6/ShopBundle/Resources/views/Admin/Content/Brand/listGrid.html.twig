@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné značky. Nejprve musíte nějaké vytvořit.'|trans }}
+	{{ 'No brands found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'značek'|trans %}
+	{% set entityName = 'brands'|trans %}
 	{{ parent() }}
 {% endblock %}

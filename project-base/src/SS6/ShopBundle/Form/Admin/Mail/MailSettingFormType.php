@@ -26,13 +26,13 @@ class MailSettingFormType extends AbstractType {
 		$builder
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+					new Email(['message' => 'Please enter valid e-mail']),
 				],
 			])
 			->add('name', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+					new Constraints\NotBlank(['message' => 'Please enter full name']),
 				],
 			])
 			->add('save', FormType::SUBMIT);

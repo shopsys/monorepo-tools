@@ -70,7 +70,7 @@ class TermsAndConditionsFacade {
 	 * @return string
 	 */
 	public function getDownloadFilename() {
-		return t('Obchodní-podmínky.html');
+		return t('Terms-and-conditions.html');
 	}
 
 	/**

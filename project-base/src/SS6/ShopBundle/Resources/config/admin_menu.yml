@@ -1,250 +1,250 @@
-- label: 'Nástěnka'
+- label: 'Dashboard'
   route: admin_default_dashboard
   icon: house
 
-- label: 'Objednávky'
+- label: 'Orders'
   route: admin_order_list
   icon: document-copy
   items:
-    - label: 'Přehled objednávek'
+    - label: 'Orders overview'
       route: admin_order_list
       items:
-        - label: 'Editace objednávky'
+        - label: 'Editing order'
           route: admin_order_edit
           visible: false
 
-- label: 'Zákazníci'
+- label: 'Customers'
   route: admin_customer_list
   icon: person-public
   items:
-    - label: 'Registrovaní zákazníci'
+    - label: 'Registered customers'
       route: admin_customer_list
       items:
-        - label: 'Nový zákazník'
+        - label: 'New customer'
           route: admin_customer_new
           visible: false
-        - label: 'Editace zákazníka'
+        - label: 'Editing customer'
           route: admin_customer_edit
           visible: false
 
-- label: 'Zboží'
+- label: 'Products'
   route: admin_product_list
   icon: cart
   items:
-    - label: 'Přehled zboží'
+    - label: 'Products overview'
       route: admin_product_list
       items:
-        - label: 'Nové zboží'
+        - label: 'New product'
           route: admin_product_new
           visible: false
-        - label: 'Editace zboží'
+        - label: 'Editing product'
           route: admin_product_edit
           visible: false
-        - label: 'Vytvořit variantu'
+        - label: 'Create variant'
           route: admin_product_createvariant
           visible: false
-    - label: 'Kategorie'
+    - label: 'Category'
       route: admin_category_list
       items:
-        - label: 'Nová kategorie'
+        - label: 'New category'
           route: admin_category_new
           visible: false
-        - label: 'Editace kategorie'
+        - label: 'Editing category'
           route: admin_category_edit
           visible: false
 
-- label: 'Cenotvorba'
+- label: 'Pricing'
   route: admin_pricinggroup_list
   icon: tag
   items:
-    - label: 'Cenové skupiny'
+    - label: 'Pricing groups'
       route: admin_pricinggroup_list
-    - label: 'DPH a zaokrouhlování'
+    - label: 'VAT and rounding'
       route: admin_vat_list
-    - label: 'Doprava a platba zdarma'
+    - label: 'Free shipping and payment'
       route: admin_transportandpayment_freetransportandpaymentlimit
-    - label: Měny
+    - label: Currencies
       route: admin_currency_list
-    - label: Slevové kupóny
+    - label: Discount coupons
       route: admin_promocode_list
 
 - label: 'Marketing'
   route: admin_article_list
   icon: chart-piece
   items:
-    - label: 'Přehled článků'
+    - label: 'Articles overview'
       route: admin_article_list
       items:
-        - label: 'Nový článek'
+        - label: 'New article'
           route: admin_article_new
           visible: false
-        - label: 'Editace článku'
+        - label: 'Editing article'
           route: admin_article_edit
           visible: false
-    - label: 'Slider na titulce'
+    - label: 'Slider on main page.'
       route: admin_slider_list
       items:
-        - label: 'Nová stránka'
+        - label: 'New page'
           route: admin_slider_new
           visible: false
-        - label: 'Editace stránky'
+        - label: 'Editing page'
           route: admin_slider_edit
           visible: false
-    - label: 'Zboží na titulní stránce'
+    - label: 'Main page products'
       route: admin_topproduct_list
-    - label: 'Rozcestník kategorií'
+    - label: 'Popular categories'
       route: admin_topcategory_list
-    - label: 'Reklamní systém'
+    - label: 'Advertising system'
       route: admin_advert_list
       items:
-        - label: 'Nová reklama'
+        - label: 'New advertising'
           route: admin_advert_new
           visible: false
-        - label: 'Editace reklamy'
+        - label: 'Editing advertising'
           route: admin_advert_edit
           visible: false
-    - label: 'XML Feedy'
+    - label: 'XML Feeds'
       route: admin_feed_list
-    - label: 'Nejprodávanější zboží'
+    - label: 'Bestsellers'
       route: admin_bestsellingproduct_list
       items:
-        - label: 'Editace nejprodávanějšího zboží'
+        - label: 'Editing bestseller'
           route: admin_bestsellingproduct_detail
           visible: false
-    - label: 'Emaily zpravodaje'
+    - label: 'E-mail newsletter'
       route: admin_newsletter_index
 
-- label: 'Administrátoři'
+- label: 'Administrators'
   route: admin_administrator_list
   icon: person-door-man
   items:
-    - label: 'Přehled administrátorů'
+    - label: 'Administrators overview'
       route: admin_administrator_list
       items:
-        - label: 'Nový administrátor'
+        - label: 'New administrator'
           route: admin_administrator_new
           visible: false
-        - label: 'Editace administrátora'
+        - label: 'Editing administrator'
           route: admin_administrator_edit
           visible: false
 
-- label: 'Nastavení'
+- label: 'Settings'
   route: admin_domain_list
   type: settings
   icon: gear
   items:
-    - label: 'Identifikace e-shopu'
+    - label: 'E-shop identification'
       route: admin_domain_list
       multidomain_only: true
       items:
-        - label: 'Identifikace e-shopu'
+        - label: 'E-shop identification'
           route: admin_domain_list
-        - label: 'Editace domény'
+        - label: 'Editing domain'
           route: admin_domain_edit
           visible: false
 
-    - label: 'Informace o provozovateli'
+    - label: 'Operator information'
       route: admin_shopinfo_setting
       items:
-      - label: 'Informace o provozovateli'
+      - label: 'Operator information'
         route: admin_shopinfo_setting
 
-    - label: 'Obchodní podmínky'
+    - label: 'Terms and conditions'
       route: admin_termsandconditions_setting
       items:
-        - label: 'Obchodní podmínky'
+        - label: 'Terms and conditions'
           route: admin_termsandconditions_setting
 
-    - label: 'Informace o cookies'
+    - label: 'Cookies information'
       route: admin_cookies_setting
       items:
-        - label: 'Informace o cookies'
+        - label: 'Cookies information'
           route: admin_cookies_setting
 
-    - label: 'Dopravy a platby'
+    - label: 'Shipping and payments'
       route: admin_transportandpayment_list
       items:
-        - label: 'Dopravy a platby'
+        - label: 'Shipping and payments'
           route: admin_transportandpayment_list
-        - label: 'Nová doprava'
+        - label: 'New shipping'
           route: admin_transport_new
           visible: false
-        - label: 'Editace dopravy'
+        - label: 'Editing shipping'
           route: admin_transport_edit
           visible: false
-        - label: 'Nová platba'
+        - label: 'New Payment'
           route: admin_payment_new
           visible: false
-        - label: 'Editace platby'
+        - label: 'Editing payment'
           route: admin_payment_edit
           visible: false
 
-    - label: 'Komunikace se zákazníkem'
+    - label: 'Communication with customer'
       route: admin_mail_setting
       items:
-        - label: 'Nastavení emailů'
+        - label: 'E-mail settings'
           route: admin_mail_setting
 
-        - label: 'Šablony emailů'
+        - label: 'E-mail templates'
           route: admin_mail_template
 
-        - label: 'Stránka s potvrzením objednávky'
+        - label: 'Order confirmation page'
           route: admin_customercommunication_ordersubmitted
 
-    - label: 'Seznamy a číselníky'
+    - label: 'Lists and nomenclatures'
       route: admin_availability_list
       items:
-        - label: 'Dostupnost'
+        - label: 'Availability'
           route: admin_availability_list
 
-        - label: 'Příznaky'
+        - label: 'Flags'
           route: admin_flag_list
 
-        - label: 'Parametry'
+        - label: 'Parameters'
           route: admin_parameter_list
 
-        - label: 'Stavy objednávek'
+        - label: 'Status of orders'
           route: admin_orderstatus_list
           items:
-            - label: 'Editace stavu objednávek'
+            - label: 'Editing order status'
               route: admin_orderstatus_edit
               visible: false
-            - label: 'Nový stav objednávek'
+            - label: 'New orders status'
               route: admin_orderstatus_new
               visible: false
 
-        - label: 'Značky'
+        - label: 'Brands'
           route: admin_brand_list
           items:
-            - label: 'Editace značky'
+            - label: 'Editing brand'
               route: admin_brand_edit
               visible: false
-            - label: 'Nová značka'
+            - label: 'New brand'
               route: admin_brand_new
               visible: false
 
-        - label: 'Jednotky'
+        - label: 'Units'
           route: admin_unit_list
 
-        - label: 'Státy'
+        - label: 'Countries'
           route: admin_country_list
 
-    - label: 'Překlady'
+    - label: 'Translations'
       route: admin_translation_list
       superadmin: true
       items:
-        - label: 'Překlady konstant'
+        - label: 'Static texts translations'
           route: admin_translation_list
           superadmin: true
 
-        - label: 'URL adresy'
+        - label: 'URL addresses'
           route: admin_superadmin_urls
           superadmin: true
 
-    - label: 'Rozměry obrázků'
+    - label: 'Picture size'
       route: admin_image_overview
       items:
-      - label: 'Rozměry obrázků'
+      - label: 'Picture size'
         route: admin_image_overview
 
     - label: 'SEO'
@@ -257,24 +257,24 @@
       route: admin_superadmin_modules
       superadmin: true
       items:
-        - label: 'Zapínací moduly'
+        - label: 'Modules'
           route: admin_superadmin_modules
-        - label: 'Chybové hlášky'
+        - label: 'Error messages'
           route: admin_superadmin_errors
-        - label: 'Nastavení prodeje s/bez DPH'
+        - label: 'Sales including/excluding VAT settings'
           route: admin_superadmin_pricing
-        - label: 'Css dokumentace'
+        - label: 'Css documentation'
           route: admin_superadmin_cssdocumentation
 
-    - label: 'Měřící skripty'
+    - label: 'External scripts'
       route: admin_script_list
       items:
-      - label: 'Přehled skriptů'
+      - label: 'Scripts overview'
         route: admin_script_list
-      - label: 'Nový skript'
+      - label: 'New script'
         route: admin_script_new
         visible: false
-      - label: 'Editace skriptu'
+      - label: 'Editing script'
         route: admin_script_edit
         visible: false
       - label: 'Google analytics'

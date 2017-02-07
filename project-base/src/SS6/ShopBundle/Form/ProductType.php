@@ -69,7 +69,7 @@ class ProductType extends AbstractType {
 	 */
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {
 		$resolver->setDefaults([
-			'placeholder' => t('Vyberte produkt'),
+			'placeholder' => t('Choose product'),
 			'enableRemove' => false,
 			'required' => true,
 			'allow_main_variants' => true,

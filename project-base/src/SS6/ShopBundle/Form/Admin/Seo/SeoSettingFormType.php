@@ -58,7 +58,7 @@ class SeoSettingFormType extends AbstractType {
 				'constraints' => [
 					new NotInArray([
 						'array' => $this->titlesOnOtherDomains,
-						'message' => 'Stejný titulek už je používán na jiné doméně',
+						'message' => 'Same title is used on another domain',
 					]),
 				],
 			])
@@ -67,7 +67,7 @@ class SeoSettingFormType extends AbstractType {
 				'constraints' => [
 					new NotInArray([
 						'array' => $this->titleAddOnsOnOtherDomains,
-						'message' => 'Stejný doplněk titulku už je používán na jiné doméně',
+						'message' => 'Same title complement is used on another domain',
 					]),
 				],
 			])
@@ -76,7 +76,7 @@ class SeoSettingFormType extends AbstractType {
 				'constraints' => [
 					new NotInArray([
 						'array' => $this->descriptionsOnOtherDomains,
-						'message' => 'Stejný popis už je používán na jiné doméně',
+						'message' => 'Same description is used on another domain',
 					]),
 				],
 			])

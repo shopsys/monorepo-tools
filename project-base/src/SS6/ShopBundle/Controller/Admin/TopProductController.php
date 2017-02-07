@@ -54,7 +54,7 @@ class TopProductController extends AdminBaseController {
 
 			$this->topProductFacade->saveTopProductsForDomain($domainId, $products);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Nastavení zboží na titulce bylo úspěšně změněno.'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Product settings on the main page successfully changed'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/TopProduct/list.html.twig', [

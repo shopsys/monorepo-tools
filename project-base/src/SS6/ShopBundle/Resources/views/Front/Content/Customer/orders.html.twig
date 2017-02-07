@@ -4,24 +4,24 @@
 	<meta name="robots" content="noindex, follow">
 {% endblock %}
 
-{% block title %}{{ parent() }} - {{ 'Mé objednávky'|trans }}{% endblock %}
+{% block title %}{{ parent() }} - {{ 'My orders'|trans }}{% endblock %}
 
 {% block main_content %}
-	<h1>{{ 'Mé objednávky'|trans }}</h1>
+	<h1>{{ 'My orders'|trans }}</h1>
 	{% if orders|length == 0 %}
-		{{ 'Dosud nemáte žádnou objednávku.'|trans }}
+		{{ 'No order so far.'|trans }}
 	{% else %}
 		<div class="in-scroll box-orders">
 			<div class="in-scroll__in">
 				<table class="table-main box-orders__table">
 					<tr>
-						<th>{{ 'Číslo objednávky'|trans }}</th>
-						<th>{{ 'Datum vytvoření'|trans }}</th>
-						<th>{{ 'Aktuální stav'|trans }}</th>
-						<th class="text-right">{{ 'Počet položek'|trans }}</th>
-						<th>{{ 'Doprava'|trans }}</th>
-						<th>{{ 'Platba'|trans }}</th>
-						<th class="text-right">{{ 'Celková cena s DPH'|trans }}</th>
+						<th>{{ 'Order number'|trans }}</th>
+						<th>{{ 'Creation date'|trans }}</th>
+						<th>{{ 'Current status'|trans }}</th>
+						<th class="text-right">{{ 'Number of items'|trans }}</th>
+						<th>{{ 'Shipping'|trans }}</th>
+						<th>{{ 'Payment'|trans }}</th>
+						<th class="text-right">{{ 'Total price including VAT'|trans }}</th>
 						<th class="text-center">{{ 'Detail'|trans }}</th>
 					</tr>
 					{% for order in orders %}

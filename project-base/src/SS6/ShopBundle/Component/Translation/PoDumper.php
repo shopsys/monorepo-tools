@@ -6,7 +6,6 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
-use SS6\ShopBundle\Component\Translation\Translator;
 
 class PoDumper implements DumperInterface {
 
@@ -27,7 +26,7 @@ class PoDumper implements DumperInterface {
 			/* @var $message \JMS\TranslationBundle\Model\Message */
 			$output .= $this->getReferences($message);
 			$output .= sprintf('msgid "%s"' . "\n", $this->escape($message->getId()));
-			if ($message->isNew() && $catalogue->getLocale() !== Translator::SOURCE_LOCALE) {
+			if ($message->isNew()) {
 				$output .= 'msgstr ""' . "\n";
 			} else {
 				$output .= sprintf('msgstr "%s"' . "\n", $this->escape($message->getLocaleString()));

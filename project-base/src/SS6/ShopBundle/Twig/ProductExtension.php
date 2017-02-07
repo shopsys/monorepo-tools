@@ -71,7 +71,7 @@ class ProductExtension extends \Twig_Extension {
 	 */
 	public function getProductListDisplayName(Product $product) {
 		if ($product->getName() === null) {
-			return t('Název zboží ve výchozím jazyce není vyplněn');
+			return t('Product name in default language is not entered');
 		}
 
 		return $product->getName();

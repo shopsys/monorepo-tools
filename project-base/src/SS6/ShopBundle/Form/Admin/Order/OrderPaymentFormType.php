@@ -45,14 +45,14 @@ class OrderPaymentFormType extends AbstractType {
 			->add('priceWithVat', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jednotkovou cenu s DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter unit price with VAT']),
 				],
 				'error_bubbling' => true,
 			])
 			->add('vatPercent', FormType::MONEY, [
 				'currency' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím sazbu DPH']),
+					new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
 				],
 				'error_bubbling' => true,
 			]);

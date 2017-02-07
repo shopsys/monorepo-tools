@@ -17,10 +17,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyli nalezeni žádní zákazníci.'|trans }}
+	{{ 'No customers found.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'zákazníků'|trans %}
+	{% set entityName = 'customers'|trans %}
 	{{ parent() }}
 {% endblock %}

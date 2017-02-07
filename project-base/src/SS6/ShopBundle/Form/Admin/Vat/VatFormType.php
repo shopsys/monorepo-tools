@@ -42,8 +42,8 @@ class VatFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název dph']),
-					new Constraints\Length(['max' => 50, 'maxMessage' => 'Název DPH nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter VAT name']),
+					new Constraints\Length(['max' => 50, 'maxMessage' => 'VAT name cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('percent', FormType::NUMBER, [
@@ -51,9 +51,9 @@ class VatFormType extends AbstractType {
 				'precision' => 4,
 				'disabled' => $this->scenario === self::SCENARIO_EDIT,
 				'read_only' => $this->scenario === self::SCENARIO_EDIT,
-				'invalid_message' => 'Prosím zadejte DPH v platném formátu',
+				'invalid_message' => 'Please enter VAT in correct format.',
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím výši dph']),
+					new Constraints\NotBlank(['message' => 'Please enter VAT rate']),
 				],
 			]);
 	}

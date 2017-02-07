@@ -51,7 +51,7 @@ class AdvertFormType extends AbstractType {
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$imageConstraints = [
 			new Constraints\NotBlank([
-				'message' => 'Vyberte obrázek',
+				'message' => 'Choose image',
 				'groups' => [self::VALIDATION_GROUP_TYPE_IMAGE],
 			]),
 		];
@@ -65,7 +65,7 @@ class AdvertFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Zadejte prosím název reklamní plochy']),
+					new Constraints\NotBlank(['message' => 'Please enter name of advertisment area']),
 				],
 			])
 			->add('type', FormType::CHOICE, [
@@ -74,22 +74,22 @@ class AdvertFormType extends AbstractType {
 				'expanded' => true,
 				'multiple' => false,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte typ reklamy']),
+					new Constraints\NotBlank(['message' => 'Please choose advertisement type']),
 				],
 			])
 			->add('positionName', FormType::CHOICE, [
 				'required' => true,
 				'choices' => $this->advertPositionsLocalizedNamesByName,
-				'placeholder' => t('-- Vyberte plochu --'),
+				'placeholder' => t('-- Choose area --'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte reklamní plochu']),
+					new Constraints\NotBlank(['message' => 'Please choose advertisement area']),
 				],
 			])
 			->add('code', FormType::TEXTAREA, [
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím HTML kód pro reklamní plochu',
+						'message' => 'Please enter HTML code for advertisement area',
 						'groups' => [self::VALIDATION_GROUP_TYPE_CODE],
 					]),
 				],
@@ -101,9 +101,10 @@ class AdvertFormType extends AbstractType {
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
+						'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 				'constraints' => ($this->imageUploaded ? [] : $imageConstraints),
@@ -139,8 +140,8 @@ class AdvertFormType extends AbstractType {
 	 */
 	private function getTypeChoices() {
 		return [
-			Advert::TYPE_CODE => t('HTML kód'),
-			Advert::TYPE_IMAGE => t('Obrázek s odkazem'),
+			Advert::TYPE_CODE => t('HTML code'),
+			Advert::TYPE_IMAGE => t('Picture with link'),
 		];
 	}
 

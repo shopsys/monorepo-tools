@@ -1,14 +1,14 @@
 {{ form_start(form) }}
 	<div class="form-group">
 		<div class="form-group__title">
-			{{ 'Nastavení'|trans }}
+			{{ 'Settings'|trans }}
 		</div>
-		{{ form_row(form.defaultUnit, { label: 'Výchozí jednotka'|trans, icon: { title : 'Výchozí jednotka bude použita při vytvoření nového produktu'|trans } }) }}
+		{{ form_row(form.defaultUnit, { label: 'Default unit'|trans, icon: { title : 'Default unit will be used when creating new product'|trans } }) }}
 	</div>
 
 	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 		{% block fixed_bar_content %}
-			{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+			{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 		{% endblock %}
 	{% endembed %}
 {{ form_end(form) }}

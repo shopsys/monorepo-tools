@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Nejprodávanější zboží kategorie'|trans }} {{ categoryName }}{% endblock %}
-{% block h1 %}{{ 'Nejprodávanější zboží kategorie'|trans }} {{ categoryName }}{% endblock %}
+{% block title %}- {{ 'Bestsellers of the category'|trans }} {{ categoryName }}{% endblock %}
+{% block h1 %}{{ 'Bestsellers of the category'|trans }} {{ categoryName }}{% endblock %}
 
 {% block main_content %}
 	{{ form_start(form) }}
@@ -22,8 +22,8 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_widget(form.save, {label: 'Uložit'|trans}) }}
-				<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				{{ form_widget(form.save, {label: 'Save'|trans}) }}
+				<a href="{{ url('admin_bestsellingproduct_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}

@@ -49,10 +49,10 @@
 			data: data,
 			dataType: 'json',
 			success: function () {
-				SS6.window({content: SS6.translator.trans('Pořadí bylo uloženo')});
+				SS6.window({content: SS6.translator.trans('Order saved')});
 			},
 			error: function () {
-				SS6.window({content: SS6.translator.trans('Pořadí se nepodařilo uložit')});
+				SS6.window({content: SS6.translator.trans('Order saving failed')});
 			}
 		});
 

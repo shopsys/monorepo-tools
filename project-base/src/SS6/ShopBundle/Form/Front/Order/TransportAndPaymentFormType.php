@@ -43,17 +43,17 @@ class TransportAndPaymentFormType extends AbstractType {
 				'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
 				'data_class' => Transport::class,
 				'constraints' => [
-					new Constraints\NotNull(['message' => 'Vyberte prosím dopravu']),
+					new Constraints\NotNull(['message' => 'Please choose shipping type']),
 				],
-				'invalid_message' => 'Vyberte prosím dopravu',
+				'invalid_message' => 'Please choose shipping type',
 			])
 			->add('payment', FormType::SINGLE_CHECKBOX_CHOICE, [
 				'choice_list' => new ObjectChoiceList($this->payments, 'name', [], null, 'id'),
 				'data_class' => Payment::class,
 				'constraints' => [
-					new Constraints\NotNull(['message' => 'Vyberte prosím platbu']),
+					new Constraints\NotNull(['message' => 'Please choose payment type']),
 				],
-				'invalid_message' => 'Vyberte prosím platbu',
+				'invalid_message' => 'Please choose payment type',
 			])
 			->add('save', FormType::SUBMIT);
 	}
@@ -93,7 +93,7 @@ class TransportAndPaymentFormType extends AbstractType {
 		}
 
 		if (!$relationExists) {
-			$context->addViolation('Vyberte prosím platnou kombinaci dopravy a platby');
+			$context->addViolation('Please choose a valid combination of transport and payment');
 		}
 	}
 

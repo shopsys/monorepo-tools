@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Content/Payment/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
-{% block h1 %}{{ 'Editace platby'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
+{% block title %}- {{ 'Editing payment'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
+{% block h1 %}{{ 'Editing payment'|trans }} - {{ paymentDetail.payment.name }}{% endblock %}
 
 {% block payment_base_prices %}
 	<div id="transport_prices">
@@ -9,13 +9,13 @@
 			<div class="form-price-heading__cell form-price-heading__cell--field">
 				{{ inputPriceLabel({ isSimple: true }) }}
 			</div>
-			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena bez DPH'|trans }}</div>
-			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena s DPH'|trans }}</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+			<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
 		</div>
 		{% for currencyId, currency in currencies %}
 			<div class="form-line">
 				<div class="form-line__label">
-					{{ form_label(form.prices[currencyId], 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
+					{{ form_label(form.prices[currencyId], 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}), { isSimple: true } ) }}
 				</div>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -39,7 +39,7 @@
 {% block image %}
 	<div class="form-line">
 		<label class="form-line__label">
-			{{ 'Obrázek'|trans }}:
+			{{ 'Picture'|trans }}:
 		</label>
 		<div class="form-line__side">
 			<div class="form-line__item">

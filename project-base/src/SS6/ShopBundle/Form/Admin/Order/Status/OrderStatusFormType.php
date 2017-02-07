@@ -27,8 +27,8 @@ class OrderStatusFormType extends AbstractType {
 			->add('name', FormType::LOCALIZED, [
 				'options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím všechny názvy stavu']),
-						new Constraints\Length(['max' => 255, 'maxMessage' => 'Název stavu nesmí být delší než {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter all country names']),
+						new Constraints\Length(['max' => 255, 'maxMessage' => 'Status name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			]);

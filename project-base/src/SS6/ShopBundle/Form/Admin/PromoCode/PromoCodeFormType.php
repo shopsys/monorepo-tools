@@ -41,11 +41,11 @@ class PromoCodeFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím kód.',
+						'message' => 'Please enter code',
 					]),
 					new NotInArray([
 						'array' => $this->prohibitedCodes,
-						'message' => 'Slevový kupón s tímto kódem již existuje.',
+						'message' => 'Discount coupon with this code already exists',
 					]),
 				],
 			])
@@ -53,14 +53,14 @@ class PromoCodeFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím procento slevy.',
+						'message' => 'Please enter discount percentage',
 					]),
 					new Constraints\Range([
 						'min' => 0,
 						'max' => 100,
 					]),
 				],
-				'invalid_message' => 'Zadejte prosím celé číslo.',
+				'invalid_message' => 'Please enter whole number.',
 			]);
 	}
 

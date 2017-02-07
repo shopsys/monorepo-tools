@@ -4,19 +4,19 @@
 {% block h1 %}{% endblock %}
 
 {% block main_content %}
-	<div class="in-message in-message--block">{{ 'Skript bude vložen na začátek stránky, za tag <body>.'|trans }} </div>
+	<div class="in-message in-message--block">{{ 'Script will be placed at the beginning of the page, after tag <body>.'|trans }} </div>
 
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
 		{{ form_id(script|default(null)) }}
 
-		{{ form_row(form.name, { label: 'Název'|trans}) }}
-		{{ form_row(form.code, { label: 'Kód'|trans, attr: {class: 'measuring-code-input'} }) }}
-		{{ form_row(form.placement, { label: 'Vložit jen na stránku s potvrzením objednávky'|trans}) }}
+		{{ form_row(form.name, { label: 'Name'|trans}) }}
+		{{ form_row(form.code, { label: 'Code'|trans, attr: {class: 'measuring-code-input'} }) }}
+		{{ form_row(form.placement, { label: 'Add only to order confirmation page'|trans}) }}
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="{{ url('admin_script_list') }}" class="btn-link-style">{{ 'Zpět na přehled'|trans }}</a>
+				<a href="{{ url('admin_script_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(script|default(null), form) }}
 			{% endblock %}
 		{% endembed %}
@@ -26,7 +26,7 @@
 			<thead>
 				<tr>
 					<th>
-						{{ 'Použitelné proměnné'|trans }}
+						{{ 'Applicable variables'|trans }}
 					</th>
 					<th>
 					</th>

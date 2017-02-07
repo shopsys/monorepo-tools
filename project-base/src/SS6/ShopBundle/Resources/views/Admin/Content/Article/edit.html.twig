@@ -1,12 +1,12 @@
 {% extends '@SS6Shop/Admin/Content/Article/detail.html.twig' %}
 
-{% block title %}- {{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
-{% block h1 %}{{ 'Editace článku'|trans }} - {{ article.name }}{% endblock %}
+{% block title %}- {{ 'Editing article'|trans }} - {{ article.name }}{% endblock %}
+{% block h1 %}{{ 'Editing article'|trans }} - {{ article.name }}{% endblock %}
 
 {% block article_domain %}
 	{% if isMultidomain() %}
 		<div class="form-line">
-			<label class="form-line__label">{{ 'Doména:'|trans }}</label>
+			<label class="form-line__label">{{ 'Domain:'|trans }}</label>
 			<div class="form-line__side">
 				<div class="form-line__item">
 					<input
@@ -22,5 +22,5 @@
 {% endblock %}
 
 {% block article_urls %}
-	{{ form_row(form.urls, { label: 'URL adresy'|trans }) }}
+	{{ form_row(form.urls, { label: 'URL addresses'|trans }) }}
 {% endblock %}

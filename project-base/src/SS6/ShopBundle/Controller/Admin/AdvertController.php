@@ -93,7 +93,7 @@ class AdvertController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Reklama <a href="{{ url }}"><strong>{{ name }}</strong></a> byla upravena'),
+					t('Advertising <a href="{{ url }}"><strong>{{ name }}</strong></a> modified'),
 					[
 						'name' => $advert->getName(),
 						'url' => $this->generateUrl('admin_advert_edit', ['id' => $advert->getId()]),
@@ -103,10 +103,10 @@ class AdvertController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace reklamy - %name%', ['%name%' => $advert->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing advertising - %name%', ['%name%' => $advert->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/edit.html.twig', [
 			'form' => $form->createView(),
@@ -141,15 +141,15 @@ class AdvertController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('visible', 'a.hidden', t('Viditelnost'), true)->setClassAttribute('table-col table-col-10');
-		$grid->addColumn('name', 'a.name', t('Název'), true);
-		$grid->addColumn('preview', 'a.id', t('Náhled'), false);
-		$grid->addColumn('positionName', 'a.positionName', t('Plocha'), true);
+		$grid->addColumn('visible', 'a.hidden', t('Visibility'), true)->setClassAttribute('table-col table-col-10');
+		$grid->addColumn('name', 'a.name', t('Name'), true);
+		$grid->addColumn('preview', 'a.id', t('Preview'), false);
+		$grid->addColumn('positionName', 'a.positionName', t('Area'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_advert_edit', ['id' => 'a.id']);
 		$grid->addDeleteActionColumn('admin_advert_delete', ['id' => 'a.id'])
-			->setConfirmMessage('Opravdu chcete odstranit tuto reklamu?');
+			->setConfirmMessage(t('Do you really want to remove this advert?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [
 			'advertPositionsByName' => $this->advertPositionList->getTranslationsIndexedByValue(),
@@ -183,7 +183,7 @@ class AdvertController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Reklama <a href="{{ url }}"><strong>{{ name }}</strong></a> byla vytvořena'),
+					t('Advertising <a href="{{ url }}"><strong>{{ name }}</strong></a> created'),
 					[
 						'name' => $advert->getName(),
 						'url' => $this->generateUrl('admin_advert_edit', ['id' => $advert->getId()]),
@@ -193,7 +193,7 @@ class AdvertController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Advert/new.html.twig', [
@@ -213,13 +213,13 @@ class AdvertController extends AdminBaseController {
 			$this->advertEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Reklama <strong>{{ name }}</strong> byla smazána'),
+				t('Advertising <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolená reklama neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected advertisement doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_advert_list');

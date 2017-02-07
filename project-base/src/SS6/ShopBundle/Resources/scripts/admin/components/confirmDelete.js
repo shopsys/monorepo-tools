@@ -56,7 +56,7 @@
 				$confirmDeleteFormButton
 					.addClass('btn--disabled cursor-help')
 					.tooltip({
-						title: SS6.translator.trans('Nejprve vyberte novou hodnotu'),
+						title: SS6.translator.trans('Choose new value first'),
 						placement: 'right'
 					});
 			}

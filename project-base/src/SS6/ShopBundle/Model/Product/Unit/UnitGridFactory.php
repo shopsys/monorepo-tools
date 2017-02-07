@@ -51,7 +51,7 @@ class UnitGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('unitList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'ut.name', t('Název'), true);
+		$grid->addColumn('name', 'ut.name', t('Name'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])

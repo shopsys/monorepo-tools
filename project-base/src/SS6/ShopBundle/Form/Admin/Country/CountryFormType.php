@@ -27,8 +27,8 @@ class CountryFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název státu']),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'Název státu nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter country name']),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'Country name cannot be longer than {{ limit }} characters']),
 				],
 			]);
 	}

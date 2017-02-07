@@ -134,9 +134,9 @@ class ProductPickerController extends AdminBaseController {
 		$grid->enablePaging();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'pt.name', t('Název'), true);
-		$grid->addColumn('catnum', 'p.catnum', t('Katalogové číslo'), true);
-		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Viditelnost'), true)
+		$grid->addColumn('name', 'pt.name', t('Name'), true);
+		$grid->addColumn('catnum', 'p.catnum', t('Catalogue number'), true);
+		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Visibility'), true)
 			->setClassAttribute('table-col table-col-10 text-center');
 		$grid->addColumn('select', 'p.id', '')->setClassAttribute('table-col table-col-15 text-center');
 

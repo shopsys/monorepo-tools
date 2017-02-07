@@ -5,7 +5,7 @@
 
 {% block title %}
 	{{ parent() }}
-	- {{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}
+	- {{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}
 {% endblock %}
 
 {% block meta_robots %}
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block main_content %}
-	<h1>{{ 'Výsledky hledání "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
+	<h1>{{ 'Search results for "%searchText%"'|trans({ '%searchText%': searchText }) }}</h1>
 
 	{{ render(controller('SS6ShopBundle:Front/Category:categoryList', {categories: foundCategories})) }}
 

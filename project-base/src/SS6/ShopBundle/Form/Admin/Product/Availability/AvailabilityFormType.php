@@ -28,18 +28,18 @@ class AvailabilityFormType extends AbstractType {
 				'required' => true,
 				'options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím název dostupnosti ve všech jazycích']),
-						new Constraints\Length(['max' => 100, 'maxMessage' => 'Název dostupnosti nesmí být delší než {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter availability name in all languages']),
+						new Constraints\Length(['max' => 100, 'maxMessage' => 'Availability name cannot be longer than {{ limit }} characters']),
 					],
 				],
 			])
 			->add('dispatchTime', FormType::NUMBER, [
 				'precision' => 0,
 				'required' => false,
-				'invalid_message' => 'Počet dní k expedici musí být celé číslo',
+				'invalid_message' => 'Number of days to expedite must be whole number.',
 				'constraints' => [
 					new Constraints\GreaterThanOrEqual([
-						'value' => 0, 'message' => 'Počet dní k expedici musí být větší nebo roven {{ compared_value }}',
+						'value' => 0, 'message' => 'Number of days to despatch must be greater or equal to {{ compared_value }}',
 					]),
 				],
 			]);

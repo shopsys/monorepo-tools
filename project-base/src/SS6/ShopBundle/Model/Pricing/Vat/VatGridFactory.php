@@ -64,9 +64,9 @@ class VatGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('vatList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'v.name', t('Název'), true);
-		$grid->addColumn('percent', 'v.percent', t('Procent'), true);
-		$grid->addColumn('coefficient', 'v.percent', t('Koeficient'), true);
+		$grid->addColumn('name', 'v.name', t('Name'), true);
+		$grid->addColumn('percent', 'v.percent', t('Percent'), true);
+		$grid->addColumn('coefficient', 'v.percent', t('Coefficient'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_vat_deleteconfirm', ['id' => 'v.id'])
 			->setAjaxConfirm();

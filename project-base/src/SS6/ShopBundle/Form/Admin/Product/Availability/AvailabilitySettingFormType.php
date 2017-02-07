@@ -40,7 +40,7 @@ class AvailabilitySettingFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte výchozí dostupnost pro zboží skladem']),
+					new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
 				],
 			])
 			->add('save', FormType::SUBMIT);

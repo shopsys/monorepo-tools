@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Zboží na titulní stránce'|trans }}{% endblock %}
-{% block h1 %}{{ 'Zboží na titulní stránce'|trans }}{% endblock %}
+{% block title %}- {{ 'Main page products'|trans }}{% endblock %}
+{% block h1 %}{{ 'Main page products'|trans }}{% endblock %}
 
 {% block main_content %}
 	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
@@ -9,11 +9,11 @@
 	{{ form_start(form) }}
 
 		{{ form_errors(form) }}
-		{{ form_row(form.products, { label: 'Produkty'|trans }) }}
+		{{ form_row(form.products, { label: 'Products'|trans }) }}
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans }) }}
+				{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
 			{% endblock %}
 		{% endembed %}
 

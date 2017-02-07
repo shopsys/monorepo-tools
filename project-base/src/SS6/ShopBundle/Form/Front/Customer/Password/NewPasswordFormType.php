@@ -23,11 +23,11 @@ class NewPasswordFormType extends AbstractType {
 				],
 				'first_options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
-						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter password']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
 					],
 				],
-				'invalid_message' => 'Hesla se neshodují',
+				'invalid_message' => 'Passwords do not match',
 			])
 			->add('submit', FormType::SUBMIT);
 	}

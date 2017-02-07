@@ -1,25 +1,25 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Nebylo nalezeno žádné zboží.'|trans }}
+	{{ 'No product found.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_id_name %}
 	{% if row.p.variantType == VARIANT_TYPE_MAIN %}
-		<span class="in-letter cursor-help js-tooltip" title="{{ 'Hlavní varianta'|trans }}">H</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Main variant'|trans }}">H</span>
 	{% endif %}
 	{% if row.p.variantType == VARIANT_TYPE_VARIANT %}
-		<span class="in-letter cursor-help js-tooltip" title="{{ 'Varianta'|trans }}">V</span>
+		<span class="in-letter cursor-help js-tooltip" title="{{ 'Variant'|trans }}">V</span>
 	{% endif %}
 	{{ row.product|productListDisplayName }}
 {% endblock %}
 
 {% block grid_value_cell_id_calculatedVisibility %}
 	<span class="in-icon svg svg-{{ value ? 'visible in-icon--visible' : 'invisible in-icon--invisible' }}"
-		title="{{ value ? 'Ano'|trans : 'Ne'|trans }}"
+		title="{{ value ? 'Yes'|trans : 'No'|trans }}"
 	></span>
 	{% if row.p.calculatedSellingDenied %}
-		<i class="svg svg-cart in-icon" title="{{ 'Zboží je vyřazeno z prodeje'|trans }}"></i>
+		<i class="svg svg-cart in-icon" title="{{ 'Product excluded from sale'|trans }}"></i>
 	{% endif %}
 {% endblock %}
 
@@ -27,12 +27,12 @@
 	{%- if not allowMainVariants and row.p.variantType == VARIANT_TYPE_MAIN %}
 		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left"
-			title="" data-original-title="{{ 'Nelze vybrat zboží, které je hlavní variantou'|trans }}"
+			title="" data-original-title="{{ 'You cannot choose product that is main variant'|trans }}"
 		></i>
 	{% elseif not allowVariants and row.p.variantType == VARIANT_TYPE_VARIANT %}
 		<i class="in-icon in-icon--info svg svg-info cursor-help js-tooltip"
 			data-toggle="tooltip" data-placement="left" title=""
-			data-original-title="{{ 'Nelze vybrat zboží, které je variantou'|trans }}"
+			data-original-title="{{ 'You cannot choose product that is variant'|trans }}"
 		></i>
 	{% elseif isMultiple %}
 		<a
@@ -44,7 +44,7 @@
 		>
 			<i class="js-products-picker-icon btn__icon">+</i>
 			<span class="js-products-picker-label">
-				{{ 'Přidat'|trans }}
+				{{ 'Add'|trans }}
 			</span>
 		</a>
 	{% else %}
@@ -55,13 +55,13 @@
 		>
 			<i class="js-products-picker-icon btn__icon">+</i>
 			<span class="js-products-picker-label">
-				{{ 'Vybrat'|trans }}
+				{{ 'Choose'|trans }}
 			</span>
 		</a>
 	{% endif %}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'zboží'|trans %}
+	{% set entityName = 'products'|trans %}
 	{{ parent() }}
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block grid_action_cell_type_delete %}
 	{% if notAllowedToDeleteCurrencyIds is defined %}
 		{% if row is not empty and row.c.id in notAllowedToDeleteCurrencyIds %}
-			<span title="{{ 'Tuto měnu nelze smazat, je nastavena jako výchozí nebo je uložena u objednávky'|trans }}"
+			<span title="{{ 'This currency can\'t be deleted, it is set as default or is saved with order.'|trans }}"
 				class="js-tooltip cursor-help in-icon in-icon--info" data-toggle="tooltip" data-placement="bottom"
 			>
 				<i class="svg svg-info"></i>
@@ -22,11 +22,11 @@
 		{{ form_widget(form.exchangeRate) }}
 		<span class="form-edit-block__info">
 			{% if row is null %}
-				<span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 jednotku'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
+				<span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per unit'|trans({'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id)}) }}">
 					<i class="svg svg-question"></i>
 				</span>
 			{% elseif row.c.id != defaultCurrency.id %}
-				<span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+				<span title="" class="js-tooltip cursor-help in-icon" data-toggle="tooltip" data-placement="top" data-original-title="{{ '%defaultCurrency% per 1 %currentCurrency%'|trans({
 					'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
 					'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 				}) }}">
@@ -42,7 +42,7 @@
 		{{ '-' }}
 	{% else %}
 		{{ value|formatNumber }}
-		{{ '%defaultCurrency% za 1 %currentCurrency%'|trans({
+		{{ '%defaultCurrency% per 1 %currentCurrency%'|trans({
 			'%defaultCurrency%': currencySymbolByCurrencyId(defaultCurrency.id),
 			'%currentCurrency%': currencySymbolByCurrencyId(row.c.id)
 		}) }}
@@ -50,15 +50,15 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné měny. Nejprve musíte nějakou vytvořit.'|trans }}
+	{{ 'No currencies found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'měny'|trans %}
+	{% set entityName = 'currencies'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit měnu'|trans %}
+	{% set addEntity = 'Create currency'|trans %}
 	{{ parent() }}
 {% endblock %}

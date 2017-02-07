@@ -53,13 +53,13 @@ class FlagController extends AdminBaseController {
 			$this->flagFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Příznak <strong>{{ name }}</strong> byl smazán'),
+				t('Flag <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený příznak neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected flag doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_flag_list');

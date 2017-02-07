@@ -40,7 +40,7 @@ class PricingGroupSettingsFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím zadejte výchozí cenovou skupinu']),
+					new Constraints\NotBlank(['message' => 'Please enter default pricing group']),
 				],
 			])
 			->add('save', FormType::SUBMIT);

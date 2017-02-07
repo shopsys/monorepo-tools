@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 {% set showHeading = false %}
 
-{% block title %}- {{ 'Karta zboží'|trans }}{% endblock %}
+{% block title %}- {{ 'Product detail'|trans }}{% endblock %}
 {% block h1 %}{% endblock %}
 
 {% block header %}
@@ -42,7 +42,7 @@
 		<div class="wrap-border wrap-border--small">
 			<div class="form-full">
 				<div class="form-full__title">
-					<div class="form-full__title__in">{{ 'Název'|trans }}</div>
+					<div class="form-full__title__in">{{ 'Name'|trans }}</div>
 					<div class="form-full__title__buttons"></div>
 				</div>
 				{% for locale, formName in form.productData.name %}
@@ -64,15 +64,15 @@
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Základní nastavení'|trans }}
+				{{ 'Default settings'|trans }}
 			</div>
 
 			{% block product_catnum %}
-				{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans }) }}
+				{{ form_row(form.productData.catnum, { label: 'Catalogue number'|trans }) }}
 			{% endblock %}
 
 			{% block product_partno %}
-				{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans }) }}
+				{{ form_row(form.productData.partno, { label: 'PartNo (serial number)'|trans }) }}
 			{% endblock %}
 
 			{% block product_ean %}
@@ -81,29 +81,29 @@
 
 			{{ form_id(product|default(null)) }}
 
-			{{ form_row(form.productData.flags, { label: 'Příznaky'|trans}) }}
+			{{ form_row(form.productData.flags, { label: 'Flags'|trans}) }}
 
-			{{ form_row(form.productData.brand, { label: 'Značka'|trans}) }}
+			{{ form_row(form.productData.brand, { label: 'Brand'|trans}) }}
 
 		</div>
 
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Zobrazení a dostupnost'|trans }}
+				{{ 'Display and availability'|trans }}
 			</div>
 
-			{{ form_row(form.productData.hidden, { label: 'Skrýt zboží'|trans }) }}
+			{{ form_row(form.productData.hidden, { label: 'Hide product'|trans }) }}
 
 			{% block product_calculated_hidden_info %}{% endblock %}
 
-			{{ form_row(form.productData.sellingFrom, { label: 'Datum vložení'|trans }) }}
+			{{ form_row(form.productData.sellingFrom, { label: 'Selling start date'|trans }) }}
 
-			{{ form_row(form.productData.sellingTo, { label: 'Datum stažení'|trans }) }}
+			{{ form_row(form.productData.sellingTo, { label: 'Selling end date'|trans }) }}
 
-			{{ form_row(form.productData.sellingDenied, { label: 'Vyřadit z prodeje'|trans,
+			{{ form_row(form.productData.sellingDenied, { label: 'Exclude from sale'|trans,
 				icon: {
-					title: 'Zboží vyřazené z prodeje se nezobrazuje ve výpisech ani nelze vyhledat. Detail tohoto zboží je dostupný přímým přístupem z URL, zboží ale nelze vložit do košíku.'|trans
+					title: 'Products excluded from sale can\'t be displayed on lists and can\'t be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart.'|trans
 				} }) }}
 
 			{% block product_calculated_selling_denied_info %}{% endblock %}
@@ -112,7 +112,7 @@
 
 			{% block product_categories %}
 				<div class="form-line">
-					{{ form_label(form.productData.categoriesByDomainId, 'Přiřazení do kategorie'|trans) }}
+					{{ form_label(form.productData.categoriesByDomainId, 'Assign to category'|trans) }}
 					<div class="form-line__line">
 						{% for domainId, categoriesForm in form.productData.categoriesByDomainId %}
 							<div class="form-line__box">
@@ -136,35 +136,35 @@
 				</div>
 			{% endblock %}
 
-			{{ form_row(form.productData.unit, { label: 'Jednotka'|trans }) }}
+			{{ form_row(form.productData.unit, { label: 'Unit'|trans }) }}
 
 			{% block product_stock_and_availability %}
-				{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans }) }}
+				{{ form_row(form.productData.usingStock, { label: 'Use stocks'|trans }) }}
 				<div class="js-product-using-stock form-line__js">
-					{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans }) }}
-					{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans }) }}
+					{{ form_row(form.productData.stockQuantity, { label: 'Available in stock'|trans }) }}
+					{{ form_row(form.productData.outOfStockAction, { label: 'Action after sellout'|trans }) }}
 					<div class="js-product-using-stock-and-alternate-availability">
-						{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans }) }}
+						{{ form_row(form.productData.outOfStockAvailability, { label: 'Availability after sellout'|trans }) }}
 					</div>
 				</div>
 				<div class="js-product-not-using-stock form-line__js">
-					{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans }) }}
+					{{ form_row(form.productData.availability, { label: 'Availability'|trans }) }}
 				</div>
 			{% endblock %}
 
-			{{ form_row(form.productData.orderingPriority, { label: 'Priorita řazení'|trans }) }}
+			{{ form_row(form.productData.orderingPriority, { label: 'Sorting priority'|trans }) }}
 
 		</div>
 
 		<div class="form-group wrap-border">
 
 			<div class="form-group__title">
-				{{ 'Ceny'|trans }}
+				{{ 'Prices'|trans }}
 			</div>
 
 			{% block product_pricing %}
-				{{ form_row(form.productData.priceCalculationType, { label: 'Výpočet prodejních cen'|trans }) }}
-				{{ form_row(form.productData.vat, { label: 'DPH'|trans }) }}
+				{{ form_row(form.productData.priceCalculationType, { label: 'Sale prices calculation'|trans }) }}
+				{{ form_row(form.productData.vat, { label: 'VAT'|trans }) }}
 
 				{% block product_calculated_prices %}{% endblock %}
 			{% endblock %}
@@ -174,7 +174,7 @@
 		<div class="form-group wrap-border">
 			{% block product_description %}
 				<div class="form-group__title">
-					{{ 'Popis'|trans }}
+					{{ 'Description'|trans }}
 				</div>
 
 				{% for domainId, descriptionForm in form.descriptions %}
@@ -201,7 +201,7 @@
 		<div class="form-group wrap-border">
 			{% block product_short_description %}
 				<div class="form-group__title">
-					{{ 'Krátký popis'|trans }}
+					{{ 'Short description'|trans }}
 				</div>
 
 				{% for domainId, shortDescriptionForm in form.shortDescriptions %}
@@ -226,16 +226,16 @@
 
 		<div class="js-form-group wrap-border form-group">
 			<div class="form-group__title">
-				<span class="js-validation-label">{{ 'Parametry'|trans }}</span>
+				<span class="js-validation-label">{{ 'Parameters'|trans }}</span>
 
 				{{ form_errors(form.parameters) }}
 			</div>
 			<table class="table-form" id="product_edit_form_parameters">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parametr'|trans }}</th>
+						<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parameter'|trans }}</th>
 						<th class="table-form__cell table-form__cell--del"></th>
-						<th class="table-form__cell table-form__cell--del-after">{{ 'Hodnota'|trans }}</th>
+						<th class="table-form__cell table-form__cell--del-after">{{ 'Value'|trans }}</th>
 						<th class="table-form__cell"></th>
 					</tr>
 				</thead>
@@ -272,7 +272,7 @@
 					{% endfor %}
 
 					<tr class="js-parameters-empty-item table-form__row">
-						<td class="table-form__cell" colspan="4">{{ 'Přidejte nějaké parametry'|trans }}</td>
+						<td class="table-form__cell" colspan="4">{{ 'Add some parameters'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -281,7 +281,7 @@
 				<div class="form-line__line form-line__line--no-space">
 					<a href="#" class="js-parameters-item-add btn btn--plus">
 						<i class="btn__icon">+</i>
-						{{ 'Přidat další parametr'|trans }}
+						{{ 'Add another parameter'|trans }}
 					</a>
 				</div>
 			</div>
@@ -293,7 +293,7 @@
 			</div>
 			<div class="form-line">
 				<strong class="form-line__label">
-					{{ 'Titulek'|trans }}:
+					{{ 'Headline'|trans }}:
 				</strong>
 				{% for domainId, seoTitleForm in form.seoTitles %}
 					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
@@ -355,21 +355,21 @@
 
 		<div class="form-group wrap-border">
 			<div class="form-group__title">
-				{{ 'Zbožové vyhledávače'|trans }}
+				{{ 'Products search engines'|trans }}
 			</div>
 			<div class="form-line form-line--no-padd">
 				<div class="form-line__group">
 					<strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
 				</div>
 			</div>
-			{{ form_row(form.heurekaCpcValues, { label: 'Maximální cena za proklik'|trans }) }}
+			{{ form_row(form.heurekaCpcValues, { label: 'Maximum price per click'|trans }) }}
 			<div class="form-line form-line--no-padd">
 				<div class="form-line__group">
 					<strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
 				</div>
 			</div>
 			<div class="form-line">
-				{{ form_label(form.showInZboziFeed, 'Nabízet ve feedu'|trans) }}
+				{{ form_label(form.showInZboziFeed, 'Offer in feed'|trans) }}
 				{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
 					<div class="form-line__side">
 						{% if isMultidomain() %}
@@ -386,11 +386,11 @@
 			</div>
 			<div class="form-line">
 				<div class="form-line__label">
-					{{ 'Maximální cena za proklik'|trans }}:
+					{{ 'Maximum price per click'|trans }}:
 					<i
 						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
 						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC. Pokud není uvedeno, tato informace se do feedu nepřenáší.'|trans }}"
+						title="{{ 'It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
 		 			></i>
 				</div>
 				{{ form_widget(form.zboziCpcValues) }}
@@ -399,11 +399,11 @@
 
 			<div class="form-line">
 				<div class="form-line__label">
-					{{ 'Maximální cena za proklik v nabídkách'|trans }}:
+					{{ 'Maximum price per click in offers'|trans }}:
 					<i
 						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
 						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-						title="{{ 'Ve feedech se označuje pomocí tagů MAX_CPC_SEARCH. Pokud není uvedeno, tato informace se do feedu nepřenáší.'|trans }}"
+						title="{{ 'It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
 		 			></i>
 				</div>
 				{{ form_widget(form.zboziCpcSearchValues) }}
@@ -413,21 +413,21 @@
 
 		<div class="form-group wrap-border">
 			<div class="form-group__title">
-				{{ 'Obrázky'|trans }}
+				{{ 'Pictures'|trans }}
 			</div>
 
 			{% block images %}{% endblock %}
 
-			{{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' }, infoText: 'Můžete nahrávat formáty: PNG, JPG a GIF'|trans }) }}
+			{{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' }, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
 			{{ form_errors(form.imagesToUpload) }}
 			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
 		</div>
 
-		{{ form_row(form.accessories, { label: 'Příslušenství'|trans }) }}
+		{{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Zavřít bez uložení'|trans }}</button>
+				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
 				{{ form_save(product|default(null), form) }}
 			{% endblock %}
 		{% endembed %}

@@ -20,7 +20,7 @@
 			var itemName = SS6.escape.escapeHtml($itemNameElement.val());
 
 			SS6.window({
-				content: 'Opravdu chcete odebrat z objednávky položku "<i>' + itemName + '</i>"?',
+				content: SS6.translator.trans('Do you really want to remove item "<i>%itemName%</i>" from the order?', {'%itemName%': itemName}),
 				buttonCancel: true,
 				buttonContinue: true,
 				eventContinue: function () {
@@ -99,10 +99,10 @@
 
 				SS6.order.items.refreshCount($collection);
 
-				SS6.window({content: SS6.translator.trans('Zboží bylo uloženo do objednávky')});
+				SS6.window({content: SS6.translator.trans('Product saved in order')});
 			},
 			error: function() {
-				SS6.window({content: SS6.translator.trans('Zboží se nepodařilo vložit')});
+				SS6.window({content: SS6.translator.trans('Unable to add product')});
 			}
 		});
 	};
@@ -113,7 +113,7 @@
 			$items.find('.js-order-item-remove')
 				.addClass('text-disabled')
 				.tooltip({
-					title: 'Objednávka musí obsahovat alespoň jednu položku',
+					title: SS6.translator.trans('Order must contain at least one item'),
 					placement: 'bottom'
 				});
 		} else {

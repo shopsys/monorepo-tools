@@ -150,7 +150,7 @@ class ProductController extends AdminBaseController {
 			$this->productEditFacade->edit($id, $form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Bylo upraveno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				t('Product <strong>{{ product|productDisplayName }}</strong> modified'),
 				[
 					'product' => $product,
 				]
@@ -159,11 +159,11 @@ class ProductController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		$this->breadcrumb->overrideLastItem(
-			new MenuItem(t('Editace zboží - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]))
+			new MenuItem(t('Editing product - %name%', ['%name%' => $this->productExtension->getProductDisplayName($product)]))
 		);
 
 		$viewParameters = [
@@ -199,7 +199,7 @@ class ProductController extends AdminBaseController {
 			$product = $this->productEditFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Bylo vytvořeno zboží <strong>{{ product|productDisplayName }}</strong>'),
+				t('Product <strong>{{ product|productDisplayName }}</strong> created'),
 				[
 					'product' => $product,
 				]
@@ -208,7 +208,7 @@ class ProductController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
@@ -255,7 +255,7 @@ class ProductController extends AdminBaseController {
 				array_map('intval', $grid->getSelectedRowIds())
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Hromadná úprava byla provedena'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('Bulk editing done'));
 
 			return $this->redirect($this->getRequest()->headers->get('referer', $this->generateUrl('admin_product_list')));
 		}
@@ -283,13 +283,13 @@ class ProductController extends AdminBaseController {
 			$this->productEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Produkt <strong>{{ product|productDisplayName }}</strong> byl smazán'),
+				t('Product <strong>{{ product|productDisplayName }}</strong> deleted'),
 				[
 					'product' => $product,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený produkt neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected product doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_product_list');
@@ -322,7 +322,7 @@ class ProductController extends AdminBaseController {
 				$newMainVariant = $this->productVariantFacade->createVariant($mainVariant, $formData[VariantFormType::VARIANTS]);
 
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Varianta <strong>{{ productVariant|productDisplayName }}</strong> byla úspěšně vytvořena.'),
+					t('Variant <strong>{{ productVariant|productDisplayName }}</strong> successfully created.'),
 					[
 						'productVariant' => $newMainVariant,
 					]
@@ -331,7 +331,7 @@ class ProductController extends AdminBaseController {
 				return $this->redirectToRoute('admin_product_edit', ['id' => $newMainVariant->getId()]);
 			} catch (\SS6\ShopBundle\Model\Product\Exception\VariantException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(
-					t('Nelze vytvářet varianty ze zboží, které jsou již variantou nebo hlavní variantou.')
+					t('Not possible to create variations of products that are already variant or main variant.')
 				);
 			}
 		}
@@ -361,15 +361,15 @@ class ProductController extends AdminBaseController {
 		$grid->enableSelecting();
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'pt.name', t('Název'), true);
-		$grid->addColumn('price', 'p.price', t('Cena'), true)->setClassAttribute('text-right');
-		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Viditelnost'))
+		$grid->addColumn('name', 'pt.name', t('Name'), true);
+		$grid->addColumn('price', 'p.price', t('Price'), true)->setClassAttribute('text-right');
+		$grid->addColumn('calculatedVisibility', 'p.calculatedVisibility', t('Visibility'))
 			->setClassAttribute('text-center table-col table-col-10');
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_product_edit', ['id' => 'p.id']);
 		$grid->addDeleteActionColumn('admin_product_delete', ['id' => 'p.id'])
-			->setConfirmMessage('Opravdu chcete odstranit toto zboží?');
+			->setConfirmMessage(t('Do you really want to remove this product?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig', [
 			'VARIANT_TYPE_MAIN' => Product::VARIANT_TYPE_MAIN,

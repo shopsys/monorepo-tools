@@ -24,7 +24,7 @@ $.fn.bootstrapFileInput = function() {
     }
 
     // Set the word to be displayed on the button
-    var buttonWord = 'Procházet';
+    var buttonWord = SS6.translator.trans('Browse');
 
     if (typeof $elem.attr('title') != 'undefined') {
       buttonWord = $elem.attr('title');

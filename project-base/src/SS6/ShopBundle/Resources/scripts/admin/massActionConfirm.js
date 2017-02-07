@@ -21,7 +21,7 @@
 						break;
 				}
 				SS6.window({
-					content: SS6.translator.trans('Opravdu chcete %action% %count% zboží?', {'%action%': action, '%count%': count }),
+					content: SS6.translator.trans('Do you really want to %action% %count% product?', {'%action%': action, '%count%': count }),
 					buttonCancel: true,
 					buttonContinue: true,
 					eventContinue: function () {

@@ -65,7 +65,7 @@ class OrderStatusController extends AdminBaseController {
 
 			if ($newId === null) {
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Stav objednávek <strong>{{ name }}</strong> byl smazán'),
+					t('Status of orders <strong>{{ name }}</strong> deleted'),
 					[
 						'name' => $orderStatus->getName(),
 					]
@@ -73,7 +73,7 @@ class OrderStatusController extends AdminBaseController {
 			} else {
 				$newOrderStatus = $this->orderStatusFacade->getById($newId);
 				$this->getFlashMessageSender()->addSuccessFlashTwig(
-					t('Stav objednávek <strong>{{ oldName }}</strong> byl nahrazen stavem <strong>{{ newName }}</strong> a byl smazán.'),
+					t('Status of orders <strong>{{ oldName }}</strong> replaced by status <strong>{{ newName }}</strong> and deleted.'),
 					[
 						'oldName' => $orderStatus->getName(),
 						'newName' => $newOrderStatus->getName(),
@@ -82,13 +82,13 @@ class OrderStatusController extends AdminBaseController {
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
-				t('Stav objednávek <strong>{{ name }}</strong> je rezervovaný a nelze jej smazat'),
+				t('Status of orders <strong>{{ name }}</strong> reserved and can\'t be deleted'),
 				[
 					'name' => $e->getOrderStatus()->getName(),
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený stav objednávek neexistuje'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected order status doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_orderstatus_list');
@@ -103,9 +103,9 @@ class OrderStatusController extends AdminBaseController {
 			$orderStatus = $this->orderStatusFacade->getById($id);
 			if ($this->orderStatusFacade->isOrderStatusUsed($orderStatus)) {
 				$message = t(
-					'Jelikož stav "%name%" je používán ještě u některých objednávek, '
-					. 'musíte zvolit, jaký stav bude použit místo něj. Jaký stav chcete těmto objednávkám nastavit? '
-					. 'Při této změně stavu nebude odeslán email zákazníkům.',
+					'Because status "%name%"  is used with other orders also, you have to choose a new status which will replace '
+					. 'the existing one. Which status you want to set to these orders? When changing this, there won\'t be emails '
+					. 'sent to customers.',
 					['%name%' => $orderStatus->getName()]
 				);
 				$remainingOrderStatusesList = new ObjectChoiceList($this->orderStatusFacade->getAllExceptId($id), 'name', [], null, 'id');
@@ -118,14 +118,14 @@ class OrderStatusController extends AdminBaseController {
 				);
 			} else {
 				$message = t(
-					'Opravdu si přejete trvale odstranit stav objednávek "%name%"? Nikde není použitý.',
+					'Do you really want to remove status of orders "%name%" permanently? It is not used anywhere.',
 					['%name%' => $orderStatus->getName()]
 				);
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
 		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
-			return new Response(t('Zvolený stav objednávek neexistuje'));
+			return new Response(t('Selected order status doesn\'t exist.'));
 		}
 	}
 

@@ -58,7 +58,7 @@
 			var remaining = totalCount - page * pageSize;
 			var loadNextCount = remaining >= pageSize ? pageSize : remaining;
 			var buttonText = SS6.translator.transChoice(
-				'[1,4]Načíst další %loadNextCount% zboží|[5,Inf]Načíst dalších %loadNextCount% zboží',
+				'{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products',
 				loadNextCount,
 				{'%loadNextCount%': loadNextCount}
 			);

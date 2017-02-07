@@ -111,7 +111,7 @@ class ArticleController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl upraven článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Article <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
 					[
 						'name' => $article->getName(),
 						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
@@ -121,10 +121,10 @@ class ArticleController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editace článku - %name%', ['%name%' => $article->getName()])));
+		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing article - %name%', ['%name%' => $article->getName()])));
 
 		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
@@ -168,7 +168,7 @@ class ArticleController extends AdminBaseController {
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
-					t('Byl vytvořen článek <strong><a href="{{ url }}">{{ name }}</a></strong>'),
+					t('Article <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
 					[
 						'name' => $article->getName(),
 						'url' => $this->generateUrl('admin_article_edit', ['id' => $article->getId()]),
@@ -178,7 +178,7 @@ class ArticleController extends AdminBaseController {
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
@@ -198,13 +198,13 @@ class ArticleController extends AdminBaseController {
 			$this->articleEditFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
-				t('Článek <strong>{{ name }}</strong> byl smazán'),
+				t('Article <strong>{{ name }}</strong> deleted'),
 				[
 					'name' => $fullName,
 				]
 			);
 		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
-			$this->getFlashMessageSender()->addErrorFlash(t('Zvolený článek neexistuje.'));
+			$this->getFlashMessageSender()->addErrorFlash(t('Selected article doesn\'t exist.'));
 		}
 
 		return $this->redirectToRoute('admin_article_list');
@@ -218,18 +218,16 @@ class ArticleController extends AdminBaseController {
 		$article = $this->articleEditFacade->getById($id);
 		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
 			$message = t(
-				'Článek "%name%" je nastaven pro zobrazení obchodních podmínek.
-				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
+				'Article "%name%" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?',
 				['%name%' => $article->getName()]
 			);
 		} elseif ($this->cookiesFacade->isArticleUsedAsCookiesInfo($article)) {
 			$message = t(
-				'Článek "%name%" je nastaven pro zobrazení informací o cookies.
-				Toto nastavení bude ztraceno. Opravdu si jej přejete smazat?',
+				'Article "%name%" set for displaying cookies information. This setting will be lost. Do you really want to delete it?',
 				['%name%' => $article->getName()]
 			);
 		} else {
-			$message = 'Opravdu chcete odstranit tento článek?';
+			$message = t('Do you really want to remove this article?');
 		}
 
 		return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_article_delete', $id);
@@ -264,7 +262,7 @@ class ArticleController extends AdminBaseController {
 		$grid = $this->gridFactory->create($gridId, $dataSource);
 		$grid->setDefaultOrder('position');
 
-		$grid->addColumn('name', 'a.name', t('Název'));
+		$grid->addColumn('name', 'a.name', t('Name'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_article_edit', ['id' => 'a.id']);

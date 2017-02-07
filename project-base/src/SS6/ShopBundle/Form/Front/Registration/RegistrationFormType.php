@@ -22,21 +22,21 @@ class RegistrationFormType extends AbstractType {
 		$builder
 			->add('firstName', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Jméno nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter first name']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'First name cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('lastName', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím příjmení']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Příjmení nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter surname']),
+					new Constraints\Length(['max' => 100, 'maxMessage' => 'Surname cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Email(['message' => 'Vyplňte prosím platný e-mail']),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'E-mail nesmí být delší než {{ limit }} znaků']),
+					new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+					new Email(['message' => 'Please enter valid e-mail']),
+					new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
 				],
 			])
 			->add('password', FormType::REPEATED, [
@@ -46,11 +46,11 @@ class RegistrationFormType extends AbstractType {
 				],
 				'first_options' => [
 					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Vyplňte prosím heslo']),
-						new Constraints\Length(['min' => 6, 'minMessage' => 'Heslo musí mít minimálně {{ limit }} znaků']),
+						new Constraints\NotBlank(['message' => 'Please enter password']),
+						new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
 					],
 				],
-				'invalid_message' => 'Hesla se neshodují',
+				'invalid_message' => 'Passwords do not match',
 			])
 			->add('email2', FormType::HONEY_POT)
 			->add('save', FormType::SUBMIT);
@@ -76,13 +76,13 @@ class RegistrationFormType extends AbstractType {
 					'field1' => 'email',
 					'field2' => 'password',
 					'errorPath' => 'password',
-					'message' => 'Heslo nesmí být stejné jako přihlašovací e-mail.',
+					'message' => 'Password cannot be same as e-mail',
 				]),
 				new NotIdenticalToEmailLocalPart([
 					'password' => 'password',
 					'email' => 'email',
 					'errorPath' => 'password',
-					'message' => 'Heslo nesmí být stejné jako část e-mailu před zavináčem.',
+					'message' => 'Password cannot be same as part of e-mail before at sign',
 				]),
 			],
 		]);

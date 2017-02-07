@@ -29,19 +29,19 @@ class ContactFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím jméno']),
+					new Constraints\NotBlank(['message' => 'Please enter full name']),
 				],
 			])
 			->add('message', FormType::TEXTAREA, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím text']),
+					new Constraints\NotBlank(['message' => 'Please enter content']),
 				],
 			])
 			->add('email', FormType::EMAIL, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím e-mail']),
-					new Email(['message' => 'Vyplňte prosím platný e-mail']),
+					new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+					new Email(['message' => 'Please enter valid e-mail']),
 				],
 			])
 			->add('email2', FormType::HONEY_POT)

@@ -57,6 +57,9 @@
 			<arg value="app/console" />
 			<arg value="translation:extract" />
 			<arg value="--bundle=SS6ShopBundle" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Controller" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Form" />
+			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Grid" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
 			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
@@ -68,6 +71,7 @@
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--output-format=po" />
 
+			<arg value="cs" />
 			<arg value="en" />
 		</exec>
 	</target>

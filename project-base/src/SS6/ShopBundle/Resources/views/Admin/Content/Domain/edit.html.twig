@@ -8,12 +8,12 @@
 		<div class="margin-bottom-10">
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Současná ikona'|trans }}:
+					{{ 'Existing icon'|trans }}:
 				</label>
 				{{ domainIcon(domain.id) }}
 			</div>
 
-			{{ form_row(form.icon, { label: 'Nahrát ikonu'|trans}) }}
+			{{ form_row(form.icon, { label: 'Upload icon'|trans}) }}
 		</div>
 		<div class="text-right">
 			{{ form_save(domain|default(null), form) }}
@@ -21,5 +21,5 @@
 	{{ form_end(form) }}
 </div>
 <div class="js-overlay-spinner display-none text-center">
-	<i class="svg svg-gear" title="{{ 'Načítám'|trans }}"></i>
+	<i class="svg svg-gear" title="{{ 'Loading'|trans }}"></i>
 </div>

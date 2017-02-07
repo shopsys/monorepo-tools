@@ -28,9 +28,8 @@ class BestsellingProductFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\UniqueCollection([
 						'allowEmpty' => true,
-						'message' => 'Zadali jste duplicitní zboží. '
-							. 'V seznamu nejprodávanějšího zboží musí být každé zboží jen jedenkrát. '
-							. 'Prosím chybu opravte a poté znovu uložte.',
+						'message' => 'You entered same product twice. In list of bestsellers can be product only once. '
+							. 'Please correct it and then save form again.',
 					]),
 				],
 			])

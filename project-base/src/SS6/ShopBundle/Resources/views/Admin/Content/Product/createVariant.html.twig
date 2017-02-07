@@ -1,12 +1,12 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}- {{ 'Vytvořit variantu'|trans }}{% endblock %}
-{% block h1 %}{{ 'Vytvořit variantu'|trans }}{% endblock %}
+{% block title %}- {{ 'Create variant'|trans }}{% endblock %}
+{% block h1 %}{{ 'Create variant'|trans }}{% endblock %}
 
 {% block main_content %}
 	{{ form_start(form) }}
-		{{ form_row(form.mainVariant, { label: 'Hlavní zboží'|trans }) }}
-		{{ form_row(form.variants, { label: 'Varianty'|trans }) }}
-		{{ form_row(form.save, { label: 'Vytvořit'|trans }) }}
+		{{ form_row(form.mainVariant, { label: 'Main variant'|trans }) }}
+		{{ form_row(form.variants, { label: 'Variants'|trans }) }}
+		{{ form_row(form.save, { label: 'Create'|trans }) }}
 	{{ form_end(form) }}
 {% endblock %}

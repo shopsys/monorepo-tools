@@ -40,7 +40,7 @@ class UnitSettingFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->units, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte výchozí jednotku']),
+					new Constraints\NotBlank(['message' => 'Please choose default unit']),
 				],
 			])
 			->add('save', FormType::SUBMIT);

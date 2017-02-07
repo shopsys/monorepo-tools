@@ -2,7 +2,7 @@
 	{{ form_errors(form) }}
 
 	<div class="box-login">
-		<h3 class="box-login__title">{{ 'Přihlášení'|trans }}</h3>
+		<h3 class="box-login__title">{{ 'Login'|trans }}</h3>
 
 		<div class="js-front-login-window-message in-message in-message--alert display-none"></div>
 
@@ -13,7 +13,7 @@
 
 		<div class="box-login__item">
 			{{ form_errors(form.password) }}
-			{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans}}) }}
+			{{ form_widget(form.password, {attr: {placeholder: 'Password'|trans}}) }}
 		</div>
 
 		<div class="box-login__item box-login__item--checkbox">
@@ -22,21 +22,21 @@
 					{{ form_widget(form.rememberMe) }}
 				</span>
 				<span class="form-choice__label">
-					{{ 'Zapamatuj si mé přihlášení'|trans }}
+					{{ 'Remember my login'|trans }}
 					<i class="svg svg-info in-icon in-icon--info js-tooltip"
 						data-toggle="tooltip" data-placement="right"
-						title="{{ 'Zapamatujeme si vaše přihlášení na tomto počítači po dobu 30 dní.'|trans }}"
+						title="{{ 'We will remember your login on this computer for 30 days.'|trans }}"
 					 ></i>
 				</span>
 			</label>
 		</div>
 
 		<div class="box-login__item box-login__item--submit">
-			{{ form_widget(form.login, {label: 'Přihlásit'|trans}) }}
+			{{ form_widget(form.login, {label: 'Log in'|trans}) }}
 		</div>
 
 		<div class="box-login__item box-login__item--info">
-			<a href="{{ url('front_registration_reset_password') }}">{{ 'Zapomněli jste své heslo?'|trans }}</a>
+			<a href="{{ url('front_registration_reset_password') }}">{{ 'Forgot your password?'|trans }}</a>
 		</div>
 	</div>
 

@@ -48,7 +48,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Company name cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])
@@ -56,12 +56,12 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím jméno kontaktní osoby',
+						'message' => 'Please enter first name of contact person',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Jméno kontaktní osoby nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'First name of contact person cannot be longer then {{ limit }} characters',
 					]),
 				],
 			])
@@ -69,12 +69,12 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím příjmení kontaktní osoby',
+						'message' => 'Please enter surname of contact person',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Příjmení kontaktní osoby nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Surname of contact person cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])
@@ -83,7 +83,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 30,
-						'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])
@@ -91,12 +91,12 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím ulici',
+						'message' => 'Please enter street',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
@@ -105,12 +105,12 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím město',
+						'message' => 'Please enter city',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
@@ -119,12 +119,12 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím PSČ',
+						'message' => 'Please enter zip code',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 					new Constraints\Length([
 						'max' => 30,
-						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS],
 					]),
 				],
@@ -133,7 +133,7 @@ class DeliveryAddressFormType extends AbstractType {
 				'required' => true,
 				'choice_list' => new ObjectChoiceList($this->countries, 'name', [], null, 'id'),
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyberte stát']),
+					new Constraints\NotBlank(['message' => 'Please choose country']),
 				],
 			]);
 	}

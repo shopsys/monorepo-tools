@@ -45,7 +45,7 @@ class BillingAddressFormType extends AbstractType {
 			->add('telephone', FormType::TEXT, [
 				'required' => false,
 				'constraints' => [
-					new Constraints\Length(['max' => 30, 'maxMessage' => 'Telefon nesmí být delší než {{ limit }} znaků']),
+					new Constraints\Length(['max' => 30, 'maxMessage' => 'Telephone number cannot be longer than {{ limit }} characters']),
 				],
 			])
 			->add('companyCustomer', FormType::CHECKBOX, ['required' => false])
@@ -53,12 +53,12 @@ class BillingAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím název firmy',
+						'message' => 'Please enter company name',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název společnosti nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Company name cannot be longer than {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
@@ -67,12 +67,12 @@ class BillingAddressFormType extends AbstractType {
 				'required' => true,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Vyplňte prosím IČ',
+						'message' => 'Please enter identification number',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 					new Constraints\Length([
 						'max' => 50,
-						'maxMessage' => 'IČ nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Identification number cannot be longer then {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
@@ -82,7 +82,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 50,
-						'maxMessage' => 'DIČ nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Tax number cannot be longer than {{ limit }} characters',
 						'groups' => [self::VALIDATION_GROUP_COMPANY_CUSTOMER],
 					]),
 				],
@@ -92,7 +92,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název ulice nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Street name cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])
@@ -101,7 +101,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 100,
-						'maxMessage' => 'Název města nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'City name cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])
@@ -110,7 +110,7 @@ class BillingAddressFormType extends AbstractType {
 				'constraints' => [
 					new Constraints\Length([
 						'max' => 30,
-						'maxMessage' => 'PSČ nesmí být delší než {{ limit }} znaků',
+						'maxMessage' => 'Zip code cannot be longer than {{ limit }} characters',
 					]),
 				],
 			])

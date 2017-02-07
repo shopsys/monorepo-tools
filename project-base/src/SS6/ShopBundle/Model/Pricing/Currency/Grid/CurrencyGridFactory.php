@@ -52,9 +52,9 @@ class CurrencyGridFactory implements GridFactoryInterface {
 
 		$grid = $this->gridFactory->create('currencyList', $dataSource);
 		$grid->setDefaultOrder('name');
-		$grid->addColumn('name', 'c.name', t('Název'), true);
-		$grid->addColumn('code', 'c.code', t('Kód'), true);
-		$grid->addColumn('exchangeRate', 'c.exchangeRate', t('Kurz'), true);
+		$grid->addColumn('name', 'c.name', t('Name'), true);
+		$grid->addColumn('code', 'c.code', t('Code'), true);
+		$grid->addColumn('exchangeRate', 'c.exchangeRate', t('Exchange rate'), true);
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_currency_deleteconfirm', ['id' => 'c.id'])
 			->setAjaxConfirm();

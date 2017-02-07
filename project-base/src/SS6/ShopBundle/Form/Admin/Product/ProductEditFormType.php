@@ -138,9 +138,10 @@ class ProductEditFormType extends AbstractType {
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
+						'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])
@@ -163,7 +164,7 @@ class ProductEditFormType extends AbstractType {
 					'type' => $this->productParameterValueFormTypeFactory->create(),
 					'constraints' => [
 						new UniqueProductParameters([
-							'message' => 'Každý parametr může být nastaven pouze jednou',
+							'message' => 'Each parameter can be used only once',
 						]),
 					],
 					'error_bubbling' => false,
@@ -258,15 +259,15 @@ class ProductEditFormType extends AbstractType {
 					'currency' => false,
 					'precision' => 6,
 					'required' => true,
-					'invalid_message' => 'Prosím zadejte cenu v platném formátu (kladné číslo s desetinnou čárkou nebo tečkou)',
+					'invalid_message' => 'Please enter price in correct format (positive number with decimal separator)',
 					'constraints' => [
 						new Constraints\NotBlank([
-							'message' => 'Prosím vyplňte cenu',
+							'message' => 'Please enter price',
 							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
 						new Constraints\GreaterThanOrEqual([
 							'value' => 0,
-							'message' => 'Cena musí být větší nebo rovna {{ compared_value }}',
+							'message' => 'Price must be greater or equal to {{ compared_value }}',
 							'groups' => [self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION],
 						]),
 					],

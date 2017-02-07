@@ -36,38 +36,39 @@ class SliderItemFormType extends AbstractType {
 			->add('name', FormType::TEXT, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte název']),
+					new Constraints\NotBlank(['message' => 'Please enter name']),
 				],
 			])
 			->add('image', FormType::FILE_UPLOAD, [
 				'required' => $this->scenarioCreate,
 				'constraints' => [
 					new Constraints\NotBlank([
-						'message' => 'Prosím vyberte obrázek',
+						'message' => 'Please choose image',
 						'groups' => 'create',
 					]),
 				],
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg'],
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg nebo png',
+						'mimeTypesMessage' => 'Image can be only in JPG or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])
 			->add('link', FormType::URL, [
 				'required' => true,
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Prosím vyplňte odkaz']),
-					new Constraints\Url(['message' => 'Odkaz musí být validní URL adresa']),
+					new Constraints\NotBlank(['message' => 'Please enter link']),
+					new Constraints\Url(['message' => 'Link must be valid URL address']),
 				],
 			])
 			->add('hidden', FormType::YES_NO, [
 				'required' => false,
 				'constraints' => [
 					new Constraints\NotNull([
-						'message' => 'Prosím vyberte viditelnost.',
+						'message' => 'Please choose visibility',
 					]),
 				],
 			])

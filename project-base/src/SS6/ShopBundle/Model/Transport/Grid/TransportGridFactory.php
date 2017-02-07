@@ -75,13 +75,13 @@ class TransportGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('transportList', $dataSource);
 		$grid->enableDragAndDrop(Transport::class);
 
-		$grid->addColumn('name', 'tt.name', t('Název'));
-		$grid->addColumn('price', 'transportDetail', t('Cena'));
+		$grid->addColumn('name', 'tt.name', t('Name'));
+		$grid->addColumn('price', 'transportDetail', t('Price'));
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addEditActionColumn('admin_transport_edit', ['id' => 't.id']);
 		$grid->addDeleteActionColumn('admin_transport_delete', ['id' => 't.id'])
-			->setConfirmMessage(t('Opravdu chcete odstranit tuto dopravu?'));
+			->setConfirmMessage(t('Do you really want to remove this shipping?'));
 
 		$grid->setTheme(
 			'@SS6Shop/Admin/Content/Transport/listGrid.html.twig',

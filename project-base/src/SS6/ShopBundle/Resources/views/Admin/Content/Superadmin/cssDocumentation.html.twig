@@ -1,382 +1,382 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}{{ 'Superadmin - Kodérská dokumentace'|trans }}{% endblock %}
-{% block h1 %}{{ 'Superadmin - Kodérská dokumentace'|trans }}{% endblock %}
+{% block title %}{{ 'Superadmin - Coder documentation'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - Coder documentation'|trans }}{% endblock %}
 
 {% block main_content %}
 
 	<div class="wrap-bar">
-		<h1 class="wrap-bar__heading">{{ 'CSS dokumentace'|trans }}</h1>
+		<h1 class="wrap-bar__heading">{{ 'CSS documentation'|trans }}</h1>
 	</div>
 
 	<div class="wrap-border">
-		<h2>{{ 'Osnova'|trans }}</h2>
+		<h2>{{ 'Schema'|trans }}</h2>
 		<ul class="list-main margin-bottom-0">
 			<li class="list-main__item">
-				<a href="#coding">{{ 'Použitý typ kódování a pravidla'|trans }}</a>
+				<a href="#coding">{{ 'Type of coding used and rules'|trans }}</a>
 			</li>
 			<li class="list-main__item">
-				<a href="#wraps">{{ 'Obalovací/oddělovací prvky'|trans }}</a>
+				<a href="#wraps">{{ 'Wrapping/separating elements'|trans }}</a>
 			</li>
 			<li class="list-main__item">
-				<a href="#messages">{{ 'Hlášky/zprávy'|trans }}</a>
+				<a href="#messages">{{ 'Messages'|trans }}</a>
 			</li>
 			<li class="list-main__item">
-				<a href="#buttons">{{ 'Tlačítka'|trans }}</a>
+				<a href="#buttons">{{ 'Buttons'|trans }}</a>
 			</li>
 			<li class="list-main__item">
-				<a href="#tables">{{ 'Tabulky'|trans }}</a>
+				<a href="#tables">{{ 'Tables'|trans }}</a>
 			</li>
 			<li class="list-main__item">
-				<a href="#forms">{{ 'Formulářová struktůra'|trans }}</a>
+				<a href="#forms">{{ 'Form structure'|trans }}</a>
 			</li>
 		</ul>
 	</div>
 
 
 	<div class="wrap-border in-article">
-		<h2 id="coding">{{ 'Použitý typ kódování a pravidla'|trans }}</h2>
+		<h2 id="coding">{{ 'Type of coding used and rules'|trans }}</h2>
 		<p>
-			{{ 'Jelikož se jedná o systém, který bude často používat stejné či podobné prvky, je vhodné využít typ kódování, který dělí web na komponenty a různě je kombinuje mezi sebou.'|trans }}
+			{{ 'As this is a system which will often use same or similar elements, it is suitable to use a type of coding that divides web to components and variously combines them with each other.'|trans }}
 		</p>
 
-		<h3>{{ 'Kódování technikou BEM'|trans }}</h3>
+		<h3>{{ 'Coding using BEM'|trans }}</h3>
 		<p>
-			{{ 'BEM je styl zápisu, který určuje pravidla pro zápis css'|trans }}
+			{{ 'BEM is a style of writing, which defines the rules for writing css'|trans }}
 		</p>
 
 		<ul class="list-main">
 			<li class="list-main__item">
-				{{ 'dva podtržítka "__" značí část komponenty/element'|trans }}
+				{{ 'two underscores "__" represent part of the component/element'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'dvě pomlčky "--" značí modifikaci komponenty'|trans }}
+				{{ 'two dash "--" represent modification of component'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'dvojté značky jsou přehledné a developerovi intuitivně dojde, jaký smysl má daná třída'|trans }}
+				{{ 'double signs are clear and developer will intuitively know senses of different classes given'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'jedna pomlčka "-" je oddělovačem ve víceslovném názvu'|trans }}
+				{{ 'one dash "-" represents separator in multi-word title'|trans }}
 			</li>
 		</ul>
 
 		<p class="in-message in-message--error">
-			{{ 'Důležité je nepoužívat jen části komponent (elementy), nýbrž vždy zde musí být mateřská komponenta! '|trans }}
+			{{ 'It is important that you don\'t use just parts of the components (elements), you have to use the parent component. '|trans }}
 		</p>
 
 
-		<h3>{{ 'Nevyužívání ID a !important pro CSS'|trans }}</h3>
+		<h3>{{ 'Not using ID and !important for CSS'|trans }}</h3>
 		<p>
-			{{ 'ID je v CSS element s nejvyžší prioritou a proto se mu vyhneme. Jakmile něco navážeme na ID, přebijeme to pouze něčím s ID nebo pomocí !important. V reálném využití v SS5 se díky tomu musely stejné části na různých místech v eshopu stylovat vícekrát. Pokud využijeme pouze třídy a komponenty, těmto problémům se vyhneme.'|trans }}
-		</p>
-
-		<p>
-			{{ 'Important se opravdu někdy hodí, avšak jakmile něčemu nastavíme important, přebít to můžeme již jen specifičtějším zápisem s dalším importantem. Important využijeme tedy jen v krajních a logicky odůvodnitelných případech.'|trans }}
+			{{ 'ID is an element with the highest priority in the CSS and that\'s why we are going to avoid it. Once we tie something to ID, we can beat it only with ID again or with !important. In real usage of SSS there had to be multiple adjustments of the same parts but on different places. If we use only classes and components we won\'t have these problems.'|trans }}
 		</p>
 
 		<p>
-			{{ 'Základní premisou kódování v adminu je, že z velmi velké části zde budou s kódem pracovat programátoři. Proto se zde klade větší důraz na helpry - '|trans }}
+			{{ 'Important is good sometimes, but once we tie important to something, we can beat it only with more specific write with another important. That\'s why we use the important only in utmost and logically excusable cases.'|trans }}
 		</p>
 
-		<h3>{{ 'Zápis css vlastností podle priorit'|trans }}</h3>
 		<p>
-			{{ 'První píšeme zásadní vlastnosti pro element (position, float, display, width, ... ), jako druhé se píší stylistické věci (font, color, background, ... )'|trans }}
+			{{ 'The basic premis for coding in admin is, that mostly programmers will work with the code. That\'s why there is a bigger emphasis on helpers - '|trans }}
 		</p>
 
-		<h3>{{ 'Struktura složek'|trans }}</h3>
+		<h3>{{ 'Writing of css characteristics according to priorities'|trans }}</h3>
+		<p>
+			{{ 'At first we write underlying characteristics for element (position, float, display, width, ... ), then stylistic ones (font, color, background, ... )'|trans }}
+		</p>
+
+		<h3>{{ 'Folders structure'|trans }}</h3>
 		<ul class="list-main">
 			<li class="list-main__item">
-				{{ 'core - základní nastavení pro prvky (reset css, proměnné, mixiny, formulářové prvky, nadpisy..)'|trans }}
+				{{ 'core - basic settings for elements (css reset, variables, mixins, form elements, headings..)'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'layout - nastavení layoutu, hlavičky a patičky'|trans }}
+				{{ 'layout - settings of layout, heading and footer'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'libs - komponenty třetích stran'|trans }}
+				{{ 'libs - third parties components'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'helpers - helpery, které se musí načítat jako poslední'|trans }}
+				{{ 'helpers - helpers, that have to be loaded last'|trans }}
 			</li>
 			<li class="list-main__item">
-				{{ 'components - komponenty obsahové části, podsložky rozdělují komponenty logicky od sebe'|trans }}
+				{{ 'components - components of content part, subfolders divide components logically apart'|trans }}
 				<ul class="list-main">
 					<li class="list-main__item">
-						{{ 'IN - malé komponenty (šipka u linku, hvěždičky hodnocení) malé věci co jsou často někde'|trans }}
+						{{ 'IN - small components (arrow by link, evaluation asterisks) small things that occur often on more places'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'WRAP - jednoduché obaly, boxy, nezávislé na obsahu'|trans }}
+						{{ 'WRAP - basic wraps, boxes, independent of content'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'LIST - čistě DL nebo UL, OL'|trans }}
+						{{ 'LIST - DL, UL, OL'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'TABLE - tabulky'|trans }}
+						{{ 'TABLE - tables'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'WINDOW - vyskakovací okna, plovoucí okna atd.'|trans }}
+						{{ 'WINDOW - popup windows, floating windows etc.'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'FORM - formulářové prvky, obaly formulářů, struktůry'|trans }}
+						{{ 'FORM - form elements, form wraps, structures'|trans }}
 					</li>
 					<li class="list-main__item">
-						{{ 'BOX - ucelené části stránek - znovu NEPOUŽITELNÉ (např. rozvržení stránky detailu produktu)'|trans }}
+						{{ 'BOX - complete parts of the site - NOT REUSABLE (e.g. product detail page layout)'|trans }}
 					</li>
 				</ul>
 			</li>
 		</ul>
 
 		<p class="in-message in-message--info">
-			{{ 'Pro podsložky složky components platí, že název podsložky se vkládá i do názvu komponenty pro lepší vyhledání, nicméně název souboru komponenty obsahuje jen zbytek názvu třídy'|trans }}
+			{{ 'For subfolders of folder components, the subfolder name is inserted into the component name for better search, but the component filename contains only the rest of the class name.'|trans }}
 		</p>
 	</div>
 
 	<div class="wrap-border in-article">
-		<h2 id="wraps">{{ 'Obalovací/oddělovací prvky'|trans }}</h2>
+		<h2 id="wraps">{{ 'Wrapping/separating elements'|trans }}</h2>
 
-		<p>{{ 'Obalující/wrapovací prvky jsou ty, kterýma můžete obalením přidat nějaké vlastnosti okolo vnitřku, např orámování, odsazení, pozadí, případně i nastaví hlavičku celého bloku informací'|trans }}</p>
+		<p>{{ 'Wrapping elements are those which can add some features around the insides, e.g. framing, indentation, background, or it can set the heading of the whole block of information.'|trans }}</p>
 
 		<h3>{{ 'Wrap-bar'|trans }}</h3>
 		<p>
-			{{ 'Komponenta na titulek s možností tlačítka napravo, celé zespodu odděleno borderem'|trans }}
+			{{ 'Title component with possible button on the right, all separated by border from below'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="wrap-bar">
-				<h2 class="wrap-bar__heading">{{ 'Titulek'|trans }}</h2>
-				<button class="btn wrap-bar__btn" type="button">{{ 'Tlačítko'|trans }}</button>
+				<h2 class="wrap-bar__heading">{{ 'Headline'|trans }}</h2>
+				<button class="btn wrap-bar__btn" type="button">{{ 'Button'|trans }}</button>
 			</div>
 		</div>
 
 		<h3>{{ 'Wrap-border'|trans }}</h3>
 		<p>
-			{{ 'Obal, který celý blok odsadí a přidá spodní border, vhodné pro odsazení bloků formulářů od sebe'|trans }}
+			{{ 'Wrap, which will indent the entire block and add bottom border, suitable for indenting block of forms apart'|trans }}
 		</p>
 
-		<h4>{{ 'Obecné wrap-border'|trans }}</h4>
+		<h4>{{ 'General wrap-border'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="wrap-border">
-				<span>{{ 'Jakýkoliv obsah'|trans }}</span>
+				<span>{{ 'Any content'|trans }}</span>
 			</div>
 		</div>
 
-		<h4>{{ 'Modifikace wrap-border--small'|trans }}</h4>
+		<h4>{{ 'Modification wrap-border--small'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="wrap-border wrap-border--small">
-				<span>{{ 'Jakýkoliv obsah s menším odsazením mezi obsahem a čarou'|trans }}</span>
+				<span>{{ 'Any content with smaller indent between content and line'|trans }}</span>
 			</div>
 		</div>
 	</div>
 
 	<div class="wrap-border in-article">
-		<h2 id="messages">{{ 'Hlášky/zprávy'|trans }}</h2>
+		<h2 id="messages">{{ 'Messages'|trans }}</h2>
 
 		<p>
-			{{ 'Různé zprávy a flash zprávy, je zde více typových a barevných modifikací. Lze díky tomu vytvářet i kombinace typu a barev'|trans }}
+			{{ 'Various messages and flash messages, there is more type and colour modifications. Thanks to this it is possible to create even combinations of types and colours'|trans }}
 		</p>
 
 		<h3>{{ 'In-message'|trans }}</h3>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="in-message">
-				<span>{{ 'Text hlášky v základu je úplně bez barev a roztáhnutý pouze do konce textu, potřebuje tedy minimálně určit barevný typ.'|trans }}</span>
+				<span>{{ 'Base message text is without colours and outstretched only to the end of the text, therefore it needs at least to identify the colour type.'|trans }}</span>
 			</div>
 		</div>
 
-		<h4>{{ 'Barevnost in-message'|trans }}</h4>
+		<h4>{{ 'Colouring in-message'|trans }}</h4>
 		<p>
-			{{ 'Barvy prezentují událost, která se stala.'|trans }}
+			{{ 'Colours present event that happened.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="in-message in-message--info">
-				{{ 'Informační hláška'|trans }}
+				{{ 'Information message'|trans }}
 			</div>
 			<div class="in-message in-message--success">
-				{{ 'Pozitivní hláška'|trans }}
+				{{ 'Positive message'|trans }}
 			</div>
 			<div class="in-message in-message--warning">
-				{{ 'Upozorňující hláška'|trans }}
+				{{ 'Warning message'|trans }}
 			</div>
 			<div class="in-message in-message--error">
-				{{ 'Chybová hláška'|trans }}
+				{{ 'Error message'|trans }}
 			</div>
 			<div class="in-message in-message--danger">
-				{{ 'Druhý typ chybové hlášky'|trans }}
+				{{ 'Second type of error message'|trans }}
 			</div>
 		</div>
 
-		<h4>{{ 'Typy in-message'|trans }}</h4>
+		<h4>{{ 'In-message types'|trans }}</h4>
 		<p>
-			{{ 'Typy se dají kombinovat mezi sebou a míchat s různýma barvama.'|trans }}
+			{{ 'Types can be combined with each other and mixed with various colours'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="in-message in-message--info in-message--block">
-				{{ 'Informační hláška - bloková'|trans }}
+				{{ 'Information message - block'|trans }}
 			</div>
 			<div class="in-message in-message--error in-message--block">
-				{{ 'Chybová hláška - bloková s křížkem, na zavření, křížek se dá použít pouze u blokových'|trans }}
+				{{ 'Error message - block with the close button, for closing, the close button can be used only with block error messages'|trans }}
 				<div class="in-message__close">x</div>
 			</div>
 			<div class="in-message in-message--success in-message--block in-message--small">
-				{{ 'Pozitivní hláška - bloková s menším prostorem okolo textu a menším textem'|trans }}
+				{{ 'Positive message - block with smaller space around text and smaller text'|trans }}
 				<div class="in-message__close">x</div>
 			</div>
 			<div class="in-message in-message--warning in-message--block">
 				<i class="in-message__icon svg svg-warning"></i>
-				{{ 'Upozorňující hláška - bloková s ikonkou'|trans }}
+				{{ 'Warning message - block with icon'|trans }}
 			</div>
 			<div class="in-message in-message--error in-message--block in-message--small">
 				<i class="in-message__icon svg svg-warning"></i>
-				{{ 'Chybová hláška - bloková s ikonkou, malá'|trans }}
+				{{ 'Error message - block with icon, small'|trans }}
 			</div>
 		</div>
 	</div>
 
 	<div class="wrap-border in-article">
-		<h2 id="buttons">{{ 'Tlačítka'|trans }}</h2>
-		<p>{{ 'Tlačítek je více druhů, každý z nich může mít další spoustu modifiací. Tyto modifikace lze kombinovat mezi sebou (barevné s typovými)'|trans }}</p>
+		<h2 id="buttons">{{ 'Buttons'|trans }}</h2>
+		<p>{{ 'There are more types of buttons, each can have a lot of modifications. These modifications can be combined with each other (colour ones with type ones)'|trans }}</p>
 
 		<h3>{{ 'Btn'|trans }}</h3>
 
-		<h4>{{ 'Barevené modifikace'|trans }}</h4>
+		<h4>{{ 'Colour modification'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<a href="#" class="btn">
-				{{ 'Konverzní tlačítko na potvrzování formulářů apod.'|trans }}
+				{{ 'Conversion button to form validations etc.'|trans }}
 			</a>
 			<a href="#" class="btn btn--default">
-				{{ 'Defaultní tlačítko'|trans }}
+				{{ 'Default button'|trans }}
 			</a>
 			<a href="#" class="btn btn--light">
-				{{ 'Světlé tlačítko'|trans }}
+				{{ 'Light button'|trans }}
 			</a>
 			<a href="#" class="btn btn--neutral">
-				{{ 'Neutrální tlačítko'|trans }}
+				{{ 'Neutral button'|trans }}
 			</a>
 		</div>
 
-		<h4>{{ 'Typové modifikace'|trans }}</h4>
+		<h4>{{ 'Type modificatons'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<a href="#" class="btn btn--large">
-				{{ 'Konverzní tlačítko velké'|trans }}
+				{{ 'Conversion button big'|trans }}
 			</a>
 			<a href="#" class="btn">
-				{{ 'Konverzní tlačítko standartní'|trans }}
+				{{ 'Conversion button standard'|trans }}
 			</a>
 			<a href="#" class="btn btn--medium">
-				{{ 'Konverzní tlačítko střední'|trans }}
+				{{ 'Conversion button medium'|trans }}
 			</a>
 			<a href="#" class="btn btn--small">
-				{{ 'Konverzní tlačítko malé'|trans }}
+				{{ 'Small conversion button'|trans }}
 			</a>
 			<br><br>
 			<a href="#" class="btn btn--disabled">
-				{{ 'Disabled tlačítko i bez kurzoru'|trans }}
+				{{ 'Disabled button without cursor'|trans }}
 			</a>
 			<br><br>
 			<a href="#" class="btn btn--block">
-				{{ 'Konverzní tlačítko vždy přes celou šířku'|trans }}
+				{{ 'Conversion button always over the entire width'|trans }}
 			</a>
 			<br><br>
 			<a href="#" class="btn btn--plus">
 				<i class="btn__icon">+</i>
-				{{ 'Konverzní tlačítko pro přidání'|trans }}
+				{{ 'Conversion button to adding'|trans }}
 			</a>
 
 			<a href="#" class="btn btn--small btn--plus">
 				<i class="btn__icon">+</i>
-				{{ 'Konverzní tlačítko pro přidání - malé'|trans }}
+				{{ 'Conversion button to adding - small'|trans }}
 			</a>
 		</div>
 
 		<h3>{{ 'Btn-no-style'|trans }}</h3>
 
 		<p>
-			{{ 'V případě, že potřebujeme, aby tlačíkto (tag button) vypadalo, jako obyčený text.'|trans }}
+			{{ 'In case we need the tag button to look like simple text.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<button href="#" class="btn-no-style" type="button">
-				{{ 'Tlačítko, co vypadá jak text'|trans }}
+				{{ 'Button that looks like text'|trans }}
 			</button>
 		</div>
 
 		<h3>{{ 'Btn-link-style'|trans }}</h3>
 
 		<p>
-			{{ 'V případě, že potřebujeme, aby tlačíkto (tag button) vypadalo, jako odkaz. Je zde i modifikace na tlačítko s ikonkou vlevo.'|trans }}
+			{{ 'In case we need the tag button to look like link. There is also modification for button with icon on left.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<button href="#" class="btn-link-style" type="button">
-				{{ 'Tlačítko, co vypadá jako odkaz'|trans }}
+				{{ 'Button that looks like link'|trans }}
 			</button>
 			<br><br>
 			<button href="#" class="btn-link-style btn-link-style--iconic-l" type="button">
 				<i class="svg svg-pencil"></i>
 				<span>
-					{{ 'Tlačítko, co vypadá jako odkaz s nepodtrženou ikonkou'|trans }}
+					{{ 'Button that looks like link with not underlined icon'|trans }}
 				</span>
 			</button>
 		</div>
 	</div>
 
 	<div class="wrap-border in-article">
-		<h2 id="tables">{{ 'Tabulky'|trans }}</h2>
+		<h2 id="tables">{{ 'Tables'|trans }}</h2>
 
 		<p class="in-message in-message--warning">
-			{{ 'Tabulek je více druhů, není ale důvod vypisovat ty, co systém generuje sám, a nikdo do nich nezasahuje. Proto jsou zde jen ty, co pravděpodobně budete chtít použít.'|trans }}
+			{{ 'There are several types of tables, but it is not necessary to write down those which are generated by system itself and nobody intervenes in them. That\'s why there are only those that you will probably want to use.'|trans }}
 		</p>
 
 		<h3>{{ 'Table-main'|trans }}</h3>
 		<p>
-			{{ 'Obyčejná tabulka s jednou třídou na table elementu. Jednoduchý vzhled pro zobrazení jednoduchých dat (nikoliv formulářů).'|trans }}
+			{{ 'Basic table with one class on table element. Basic look for showing simple data (not forms).'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-main">
 				<thead>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -384,35 +384,35 @@
 
 		<h3>{{ 'Table-col'|trans }}</h3>
 		<p>
-			{{ 'Nejedná se o tabulku, ale o nastavování šířek buňěk v tabulce table-main. Jsou to jednoduché třídy, které udávají procentro šířky, případně pixely. Je to velmi užitečné v gridech.'|trans }}
+			{{ 'It is not about table, but about setting the widths of cells in table-main. They are simple classes that give the width percent, or pixels. It is very useful in grids.'|trans }}
 		</p>
 		<div class="in-message in-message--info">
-			{{ 'Velikosti: 5, 10, 15, 20, 40, 45, 60, 80, 40px'|trans }}
+			{{ 'Sizes: 5, 10, 15, 20, 40, 45, 60, 80, 40px'|trans }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-main">
 				<thead>
 					<tr>
-						<td class="table-col-20">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-col-40">{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td class="table-col-40px">{{ 'Akce'|trans }}</td>
+						<td class="table-col-20">{{ 'Table text'|trans }}</td>
+						<td class="table-col-40">{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td class="table-col-40px">{{ 'Action'|trans }}</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Akce'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Action'|trans }}</td>
 					</tr>
 					<tr>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Text tabulky'|trans }}</td>
-						<td>{{ 'Akce'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Table text'|trans }}</td>
+						<td>{{ 'Action'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -420,32 +420,32 @@
 
 		<h3>{{ 'Table-touch'|trans }}</h3>
 		<p>
-			{{ 'Speciální chování pro tabulku pro menší zařízení, kdy při zmenšeném okně se zobrazí scrollbar. Pokud se počítá s responsivitou, mělo by toto nastavení být kolem každé tabulky.'|trans }}
+			{{ 'Special behavior for table for smaller devices, displaying scrollbar when the window is lessened. If we count with responsivity, this should be set around each table.'|trans }}
 		</p>
 
 		<div class="in-message in-message--info">
-			{{ 'Lze kombinovat i s jinýmy obsahy uvnitř, primární použití je ale pro tabulky.'|trans }}
+			{{ 'It is possible to combine it with different contents inside, but the primary use is for tables.'|trans }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="table-touch">
 				<div class="table-touch__in">
 					<table class="table-main">
 						<thead>
 							<tr>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -455,40 +455,40 @@
 
 		<h3>{{ 'Table-touch-always'|trans }}</h3>
 		<p>
-			{{ 'Speciální chování pro velkou tabulku, která se nevleze ani na desktopové verzi do obsahové části.'|trans }}
+			{{ 'Special behavior for big table, which can\'t fit even in the desktop version to the content part.'|trans }}
 		</p>
 
 		<div class="in-message in-message--info">
-			{{ 'Lze kombinovat i s jinýmy obsahy uvnitř, primární použití je ale pro tabulky.'|trans }}
+			{{ 'It is possible to combine it with different contents inside, but the primary use is for tables.'|trans }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="table-touch-always">
 				<div class="table-touch-always__in">
 					<table class="table-main">
 						<thead>
 							<tr>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
-								<td>{{ 'Text tabulky'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
+								<td>{{ 'Table text'|trans }}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -498,109 +498,109 @@
 
 		<h3>{{ 'Table-form'|trans }}</h3>
 		<p>
-			{{ 'Speciální chování tabulky, která byla vytvořena pro parametry, nicméně, dá se využít i dalšími způsoby.'|trans }}
+			{{ 'Special behavior of table, which was created for parameters, but could be used also differently.'|trans }}
 		</p>
 
-		<h4>{{ 'Jednoduché zobrazení'|trans }}</h4>
+		<h4>{{ 'Simple view'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<h4>{{ 'Lícovaná první a druhá buňka řádku se zbytkem formulářů'|trans }}</h4>
+		<h4>{{ 'Matching first and second cell of a row with the rest of form'|trans }}</h4>
 
 		<p>
-			{{ 'Pokud se prvním TD/TH přidá modifikátor --label, buňka dostane maximální šířku a lícuje s ostatní formulářovou strukturou. Ostatní buňky roztahuje prohlížeč podle potřeb.'|trans }}
+			{{ 'If you add modifier to first TD/TH --label, cell is given maximum width and is aligned with other form-structure. Other cells are expanded by the browser as needed.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
 						<th class="table-form__cell table-form__cell--label">
-							{{ 'Label nebo input je zde'|trans }}
+							{{ 'Label or input is here'|trans }}
 						</th>
 						<th class="table-form__cell">
-							{{ 'Text nebo input tabulky'|trans }}
+							{{ 'Table text or input'|trans }}
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="table-form__row">
 						<td class="table-form__cell table-form__cell--label">
-							{{ 'Label je zde'|trans }}
+							{{ 'Label is here'|trans }}
 						</td>
 						<td class="table-form__cell">
-							{{ 'Text za labelem'|trans }}
+							{{ 'Text behind label'|trans }}
 						</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell table-form__cell--label"><input type="text" class="input" value="Input"></td>
+						<td class="table-form__cell table-form__cell--label"><input type="text" class="input" value="{{ 'Input'|trans }}"></td>
 						<td class="table-form__cell">
-							{{ 'Text za inputem. Aby se generoval input správně, je třeba jej vepsat jako <strong class="in-article__visible">form_widget</strong> s parametrem <strong class="in-article__visible">isSimple:true</strong>'|trans|raw }}
+							{{ 'Text behind input. To generate the input correctly, it is necessary to write is like <strong class="in-article__visible">form_widget</strong> with parameter <strong class="in-article__visible">isSimple:true</strong>'|trans|raw }}
 						</td>
 					</tr>
 					<tr class="table-form__row">
 						<td class="table-form__cell table-form__cell--label">
-							<input type="text" class="input" value="Input">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
 						</td>
 						<td class="table-form__cell">
-							<input type="text" class="input" value="Input">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<h4>{{ 'Zobrazení input -> input'|trans }}</h4>
+		<h4>{{ 'Display input -> input'|trans }}</h4>
 
 		<p>
-			{{ 'Pro zobrazení jako u parametrů je třeba přidat oddělovač s ikonkou a zaručit, aby se zrušily v okolí oddělovače paddingy. Vzniká zde více tříd skoro ve všech okolních TD/TH. Lze také jednoduše přidat ikonku s akcí na konec řádku.'|trans }}
+			{{ 'To display same as with parameters, it is necessary to add separator with icon and make sure to remove paddings around the separator. This raises more classes in almost all surrounding TD/TH. You can also simply add and icon with an action at the end of the line.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell table-form__cell--label table-form__cell--del-before">{{ 'Input je zde'|trans }}</th>
+						<th class="table-form__cell table-form__cell--label table-form__cell--del-before">{{ 'Input is here'|trans }}</th>
 						<th class="table-form__cell table-form__cell--del"></th>
-						<th class="table-form__cell table-form__cell--del-after">{{ 'Input za oddělovačem'|trans }}</th>
-						<th class="table-form__cell table-form__cell--actions">{{ 'Akce'|trans }}</th>
+						<th class="table-form__cell table-form__cell--del-after">{{ 'Input after separator'|trans }}</th>
+						<th class="table-form__cell table-form__cell--actions">{{ 'Action'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="table-form__row">
 						<td class="table-form__cell table-form__cell--label table-form__cell--del-before">
-							<input type="text" class="input" value="input">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
 						</td>
 						<td class="table-form__cell table-form__cell--del">
 							<i class="svg svg-arrow-right"></i>
 						</td>
 						<td class="table-form__cell table-form__cell--del-after">
-							<input type="text" class="input" value="input">
+							<input type="text" class="input" value="{{ 'Input'|trans }}">
 						</td>
 						<th class="table-form__cell text-right">
 							<a href="#" class="table-form__action">
@@ -612,117 +612,117 @@
 			</table>
 		</div>
 
-		<h4>{{ 'Výraznější řádek'|trans }}</h4>
+		<h4>{{ 'Bolder line'|trans }}</h4>
 
 		<p>
-			{{ 'Pomocí modifikátoru na řádku lze zmodrat celý řádek.'|trans }}
+			{{ 'By using modifier on the line it is possible to bluish the whole line.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row table-form__row--group">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<h4>{{ 'Pseudo groupování řádků'|trans }}</h4>
+		<h4>{{ 'Row grouping'|trans }}</h4>
 
 		<p>
-			{{ 'Pomocí modifikátoru na řádku lze zmodrat celý řádek a vytvořit jakoby skupiny řádků s nadpisem a obrázkem.'|trans }}
+			{{ 'By using modifier on the line it is possible to bluish the whole line and create a group of lines with headline and picture.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr class="table-form__row table-form__row--group">
 						<td class="table-form__cell" colspan="3">
 							<div class="table-form__cell__image">
-								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Doména 1'|trans }}">
+								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Domain 1'|trans }}">
 							</div>
 							<div class="table-form__cell__group-name">
-								{{ 'Doména 1'|trans }}
+								{{ 'Domain 1'|trans }}
 							</div>
 						</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row table-form__row--group">
 						<td class="table-form__cell" colspan="3">
 							<div class="table-form__cell__image">
-								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Doména 2'|trans }}">
+								<img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=46%C3%9726&w=46&h=26&txtpad=1" alt="{{ 'Domain 2'|trans }}">
 							</div>
 							<div class="table-form__cell__group-name">
-								{{ 'Doména 2'|trans }}
+								{{ 'Domain 2'|trans }}
 							</div>
 						</td>
 					</tr>
 					<tr class="table-form__row">
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<h4>{{ 'Drag adn drop na řádky'|trans }}</h4>
+		<h4>{{ 'Drag and drop on lines'|trans }}</h4>
 
 		<p>
-			{{ 'Pokud chceme, aby řádky šlo přesouvat, vložíme ikonku podle ukázky níže. Nesmíme však zapomenout toto napojit na JS.'|trans }}
+			{{ 'If we want to move the lines, we will insert the icon as shown below. Don\'t forget to connect it to JS.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<table class="table-form">
 				<thead>
 					<tr class="table-form__row">
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
-						<th class="table-form__cell">{{ 'Text tabulky'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
+						<th class="table-form__cell">{{ 'Table text'|trans }}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -731,20 +731,20 @@
 							<span class="table-form__cell__move">
 								<span class="in-icon in-icon--move svg svg-move"></span>
 							</span>
-							{{ 'Text tabulky'|trans }}
+							{{ 'Table text'|trans }}
 						</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 					<tr class="table-form__row">
 						<td class="table-form__cell">
 							<span class="table-form__cell__move">
 								<span class="in-icon in-icon--move svg svg-move"></span>
 							</span>
-							{{ 'Text tabulky'|trans }}
+							{{ 'Table text'|trans }}
 						</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
-						<td class="table-form__cell">{{ 'Text tabulky'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
+						<td class="table-form__cell">{{ 'Table text'|trans }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -752,20 +752,20 @@
 	</div>
 
 	<div class="wrap-border in-article">
-		<h2 id="forms">{{ 'Formulářová struktůra'|trans }}</h2>
-		<p class="in-message in-message--warning">{{ 'Důležitou věcí je, že tlačítka, inputy (textové), selecty, textarea, vše by mělo mít základní třídu. Tzn btn a input. Nedávejte ji tam nebo odebírejte jen v případě, že víte, co děláte!'|trans }}</p>
+		<h2 id="forms">{{ 'Form structure'|trans }}</h2>
+		<p class="in-message in-message--warning">{{ 'It is important that buttons, inputs (text ones), selects and textarea have basic class, which means btn and input. Don\'t put it there and remove it only when you understand what you are doing.'|trans }}</p>
 
-		<h3>{{ 'Zobrazení základních prvků'|trans }}</h3>
+		<h3>{{ 'Basic elements display'|trans }}</h3>
 
-		<h4>{{ 'Bez jakékoliv formulářové struktury a modifikací'|trans }}</h4>
+		<h4>{{ 'Without any form structure and modification'|trans }}</h4>
 
 		<div class="in-message in-message--info">
-			{{ 'Zobrazeni dosáhnete tak, že input vypíšete jako <strong class="in-article__visible">form_widget</strong> s parametrem <strong class="in-article__visible">isSimple:true</strong>.'|trans|raw }}
+			{{ 'We will get the display by writing input as <strong class="in-article__visible">form_widget</strong> with parameter <strong class="in-article__visible">isSimple:true</strong>.'|trans|raw }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
-			<input type="text" class="input" value="Input">
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
+			<input type="text" class="input" value="{{ 'Input'|trans }}">
 			<select class="input">
 				<option>{{ 'Select'|trans }}</option>
 				<option>{{ 'Select'|trans }}</option>
@@ -773,81 +773,81 @@
 			<textarea class="input">{{ 'Textarea'|trans }}</textarea>
 		</div>
 
-		<h4>{{ 'Modifikace velikostí textarea'|trans }}</h4>
+		<h4>{{ 'Textarea size modification'|trans }}</h4>
 
 		<div class="in-message in-message--info">
-			{{ 'Zobrazení dosáhnem buďto přídáním classy k prvku nebo přes <strong class="in-article__visible">form_widget</strong> přidáme <strong class="in-article__visible">attr class</strong>'|trans|raw }}
+			{{ 'We will get the display either by adding class to element or via <strong class="in-article__visible">form_widget</strong> we add <strong class="in-article__visible">attr class</strong>'|trans|raw }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<textarea class="input input--textarea-big">{{ '--textarea-big'|trans }}</textarea>
 			<br><br>
 			<textarea class="input input--seo">{{ '--seo'|trans }}</textarea>
 		</div>
 
-		<h4>{{ 'Multidoménové, multijazyčné, inputy s ikonou - základní'|trans }}</h4>
+		<h4>{{ 'Multidomain, multilingual, inputs with ikon - basic'|trans }}</h4>
 
 		<div class="in-message in-message--warning">
-			{{ 'Zobrazení dosáhnem přidáním modifikátorů k inputu, ale důležité je obalit input divem s třídou <strong class="in-article__visible">input__wrap</strong>. K této třídě se totiž pozicují obrázky. Tadyta struktura by se měla generovat ze systému sama. V případě nutnosti psaní této struktury ručně je třeba si dávat pozor a nezapomenout dodat i vlajku <strong class="in-article__visible">localeFlag(locale)</strong>, doménu <strong class="in-article__visible">domainIcon(domainId)</strong> nebo ikonku.'|trans|raw }}
+			{{ 'We will get the display by adding modifiers to input, but it is important to wrap input with dive with class <strong class="in-article__visible">input__wrap</strong>. Pictures are positioned to this class. This structure should be generated by the system itself. If manual writing needed it is important to pay attention and don\'t forget to add flag <strong class="in-article__visible">localeFlag(locale)</strong>, domain <strong class="in-article__visible">or icon.'|trans|raw }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="input__wrap">
-				<input type="text" class="input input--flag" value="Input s vlajkou">
+				<input type="text" class="input input--flag" value="{{ 'Input with flag'|trans }}">
 				<div class="input__flag">
-					<img src="https://placehold.it/16x12" alt="{{ 'Doména 1'|trans }}">
+					<img src="https://placehold.it/16x12" alt="{{ 'Domain 1'|trans }}">
 				</div>
 			</div>
 			<div class="input__wrap">
-				<input type="text" class="input input--domain" value="Input s doménou">
+				<input type="text" class="input input--domain" value="{{ 'Input with domain'|trans }}">
 				<div class="input__domain">
 					<span class="in-image in-image--normal">
-						<img src="https://placehold.it/40x18" alt="{{ 'Doména 1'|trans }}">
+						<img src="https://placehold.it/40x18" alt="{{ 'Domain 1'|trans }}">
 					</span>
 				</div>
 			</div>
 			<div class="input__wrap">
-				<input type="text" class="input input--iconic" value="Input s ikonou">
+				<input type="text" class="input input--iconic" value="{{ 'Input with icon'|trans }}">
 				<div class="input__icon">
 					<i class="svg svg-phone"></i>
 				</div>
 			</div>
 		</div>
 
-		<h4>{{ 'Checkboxy a radiobuttony'|trans }}</h4>
+		<h4>{{ 'Checkboxes and radio buttons'|trans }}</h4>
 		<div class="in-message in-message--info">
-			{{ 'Zobrazení inputů, jako jsou chekcboxy a radio buttony, se dělá skrze <strong class="in-article__visible">form_widget</strong>. Jaký typ se zobrazí - jestli inputy za sebou, nebo pod sebou - určí attr. Pokud není vyplněn, jsou za sebou, při nastavení <strong class="in-article__visible">inList</strong> na true, se zobrazí pod sebou.'|trans|raw }}
+			{{ 'Display of inputs like checkboxes and radio buttons is done via <strong class="in-article__visible">form_widget</strong>. The type of displayed inputs - behind each other below each other - is determined by attr. If it is not filled, they are behind each other when setting <strong class="in-article__visible">inList</strong> and they are displayed below each other on true.'|trans|raw }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<label class="form-choice">
 				<input type="checkbox" class="form-choice__input">
 				<span class="form-choice__label">
-					{{ 'jednoduchý checkbox'|trans }}
+					{{ 'simple checkbox'|trans }}
 				</span>
 			</label>
 			<label class="form-choice">
 				<input type="checkbox" class="form-choice__input">
 				<span class="form-choice__label">
-					{{ 'jednoduchý checkbox lze skládat za sebe'|trans }}
+					{{ 'simple checkbox can be ordered consecutively'|trans }}
 				</span>
 			</label>
 			<br><br>
 			<div class="form-choice-list">
 				<label class="form-choice-list__item">
 					<input type="checkbox" class="form-choice-list__input">
-					{{ 'checkbox v seznamu'|trans }}
+					{{ 'checkbox in list'|trans }}
 				</label>
 				<label class="form-choice-list__item">
 					<input type="checkbox" class="form-choice-list__input">
-					{{ 'checkbox v seznamu'|trans }}
+					{{ 'checkbox in list'|trans }}
 				</label>
 				<label class="form-choice-list__item">
 					<input type="checkbox" class="form-choice-list__input">
-					{{ 'checkbox v seznamu'|trans }}
+					{{ 'checkbox in list'|trans }}
 				</label>
 			</div>
 			<br><br>
@@ -855,20 +855,20 @@
 				<label class="form-choice-list__item">
 					<span class="form-choice-list__icon">
 						<span class="in-image in-image--small">
-							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Doména 1'|trans }}">
+							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Domain 1'|trans }}">
 						</span>
 					</span>
 					<input type="checkbox" class="form-choice-list__input">
-					{{ 'ikona domény pouze v checkbox seznamu, ikona se vkládá <strong class="in-article__visible">domainIcon(domainId, "small") </strong>'|trans|raw }}
+					{{ 'domain icon only in checkbox list, icon is inserted <strong class="in-article__visible">domainIcon(domainId, "small") </strong>'|trans|raw }}
 				</label>
 				<label class="form-choice-list__item">
 					<span class="form-choice-list__icon">
 						<span class="in-image in-image--small">
-							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Doména 1'|trans }}">
+							<img src="https://placeholdit.imgix.net/~text?txtsize=5&txt=40%C3%9712&w=40&h=12&txtpad=1" alt="{{ 'Domain 1'|trans }}">
 						</span>
 					</span>
 					<input type="checkbox" class="form-choice-list__input">
-					{{ 'ikona domény pouze v checkbox seznamu, je možno přidat akční ikonu'|trans }}
+					{{ 'domain icon only in checkbox list, it is possible to add action icon'|trans }}
 					<a href="#" class="form-choice-list__item__action form-choice-list__item__action--link text-no-decoration">
 						<i class="svg svg-forward-page"></i>
 					</a>
@@ -878,20 +878,20 @@
 
 		<h3>{{ 'Form-group'|trans }}</h3>
 		<p>
-			{{ 'Často užitečná část, je to hlavička pro různé obsahy informací, hlavně pro formuláře, ale lze použít pro více účelů.'|trans }}
+			{{ 'Often useful part, it is heading for different information contents, mainly for forms, but can be used for more purposes'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-group">
 				<h2 class="form-group__title">
-					{{ 'Titulek bloku informací'|trans }}
+					{{ 'Headline of information block'|trans }}
 				</h2>
 			</div>
 			<br><br>
 			<div class="form-group">
 				<h2 class="form-group__title">
-					{{ 'Titulek bloku informací s rozevíráním, je nutno navázat na již hotový JS'|trans }}
+					{{ 'Headline of information block with possibility to expand, necessary to bind to existing JS'|trans }}
 					<span class="form-group__title__click">
 						+
 					</span>
@@ -900,24 +900,24 @@
 			<br><br>
 			<div class="form-group">
 				<h2 class="form-group__title">
-					{{ 'Titulek bloku informací s možnosti tlačítka'|trans }}
+					{{ 'Headline of information block with button possibility'|trans }}
 					<span class="form-group__title__buttons">
-						<button class="btn btn--small" type="button">Tlačítko</button>
+						<button class="btn btn--small" type="button">{{ 'Button'|trans }}</button>
 					</span>
 				</h2>
 			</div>
 		</div>
 
-		<h4>{{ 'Vhodná kombinace komponent'|trans }}</h4>
+		<h4>{{ 'Suitable combination of components'|trans }}</h4>
 		<div class="in-message in-message--info">
-			{{ 'Pokud pěkně nakombinujeme 3 komponenty do sebe, získáme skvělý vzhled formulářů. Jedná se o <strong class="in-article__visible">form-group</strong> na titulek, <strong class="in-article__visible">form-line</strong> na formulář a <strong class="in-article__visible">wrap-border</strong> na oddělení bloků informací od sebe.'|trans|raw }}
+			{{ 'If we combine 3 components with each other, it will create nice forms design. We are talking about <strong class="in-article__visible">form-group</strong> for headline, <strong class="in-article__visible">form-line</strong> for form and <strong class="in-article__visible">wrap-border</strong> for separating blocks of information.'|trans|raw }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-group wrap-border">
 				<h2 class="form-group__title">
-					{{ 'Titulek bloku informací'|trans }}
+					{{ 'Headline of information block'|trans }}
 					<span class="form-group__title__click">
 						+
 					</span>
@@ -925,7 +925,7 @@
 
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Label inputu'|trans }}
+						{{ 'Input label'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">
@@ -935,7 +935,7 @@
 				</div>
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Label inputu'|trans }}
+						{{ 'Input label'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">
@@ -947,7 +947,7 @@
 
 			<div class="form-group">
 				<h2 class="form-group__title">
-					{{ 'Titulek bloku informací'|trans }}
+					{{ 'Headline of information block'|trans }}
 					<span class="form-group__title__click">
 						+
 					</span>
@@ -955,7 +955,7 @@
 
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Label inputu'|trans }}
+						{{ 'Input label'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">
@@ -965,7 +965,7 @@
 				</div>
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Label inputu'|trans }}
+						{{ 'Input label'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">
@@ -979,44 +979,44 @@
 		<h3>{{ 'Form-line'|trans }}</h3>
 
 		<p>
-			{{ 'Logika tvoření struktury vychází z grafiky a z toho, že měla být struktura responsivní a mohlo se tam poskládat za sebe mnoho různých věcí.'|trans }}
+			{{ 'Logic of creating the structure is based on the graphics and the fact that the structure should be responsive and there is a possibility of putting a lot of different things in a row'|trans }}
 		</p>
 
 		<p class="in-message in-message--error">
-			{{ 'Základní komponenta pro formuláře, ohromně velká a zasazená do defaultního generování formulářů. Pro většinu příápadů použijete toto.'|trans }}
+			{{ 'Basic component for forms, extremely big and set in the default form generating. Use this for most cases.'|trans }}
 		</p>
 
 		<p class="in-message in-message--warning">
-			{{ 'Tato struktůra nemá co dělat v tabulkách!'|trans }}
+			{{ 'This structure has no place in tables!'|trans }}
 		</p>
 
-		<h4>{{ 'Hlavní logika struktury'|trans }}</h4>
+		<h4>{{ 'Main structure logic'|trans }}</h4>
 		<p class="in-message in-message--error">
-			{{ 'Tento text vám objasní logiku tvoření formuláře.'|trans }}
+			{{ 'This text will help you understand the logic of creating a form.'|trans }}
 		</p>
 		<p>
-			{{ 'Komponenta se skládá z 5 hlavních prvků. Prvním je obal <strong class="in-article__visible">form-line</strong>, který dodává formuláři pozadí, odsazení a bordery. Je to vlastně jeden řárek této struktury. V něm je další důležitý prvek, a to <strong class="in-article__visible">form-line__label</strong>. Nemusíme to nutně brát jako label, jedná se hlavně o buďto titulek nebo důležitou část pro celý malý formulářový blok. Nejčastěji je to však label. Další 2 prvky jsou pro zarovnání obsahové části. Je to <strong class="in-article__visible">form-line__side</strong> a <strong class="in-article__visible">form-line__line</strong>. Nachází se za labelem a první z nich zarovnává obsah vedle labelu a nikdy se nedostane pod label. Druhý zabírá celou šířku pod labelem. A to nejdůležitější je <strong class="in-article__visible">form-line__item</strong> což je obal pro cokoliv v obsahové části. Obalit to potřebujeme proto, že prvky by měly být od sebe vždy odsazeny a správně zarovnány. Teprve do těchto prvků se strkají inputy, texty, ikonky a podobně! Tento obal nepotřebují jen prvky, které zabírají 100% šířku.'|trans|raw }}
+			{{ 'Component consists of 5 main elements. First is wrap <strong class="in-article__visible">form-line</strong> which gives background, indentation and borders to the form. It is basically one line of this structure. There is another important element in it <strong class="in-article__visible">form-line__label</strong>. We don\'t have to think about it as label, it is mainly headline or important part for the whole small form block. But most of the times it is label. Another 2 elements serve to align the content part. It is <strong class="in-article__visible">form-line__side</strong> and <strong class="in-article__visible">form-line__line</strong>. They are placed after label and the first one aligns content next to the label and never gets under the label. The second one takes the whole width under label. The most important is <strong class="in-article__visible">form-line__item</strong> which is wrap for anythin in the content area. We need the wrap because elements should always be intent and aligned correctly. Only now we can put inputs, texts, icons etc. into these elements. This wrap is not only for elements which are across the whole 100% width.'|trans|raw }}
 		</p>
 		<strong class="in-article__visible"></strong>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Label inputu'|trans }}
+					{{ 'Input label'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--text">
-						{{ 'Prvky lze dávat za sebe'|trans }}
+						{{ 'Elements can be ordered behind each other'|trans }}
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Label inputu'|trans }}
+					{{ 'Input label'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1031,20 +1031,20 @@
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--text">
-						{{ 'Prvky lze dávat i do více řádků k jednomu labelu'|trans }}
+						{{ 'It is possible to put elements to multiple lines with one label'|trans }}
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Label inputu'|trans }}
+					{{ 'Input label'|trans }}
 				</label>
 				<div class="form-line__line">
 					<div class="form-line__item">
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--text">
-						{{ 'Prvky lze zarovnat pod label'|trans }}
+						{{ 'Elements can be aligned under label'|trans }}
 					</div>
 				</div>
 				<div class="form-line__line">
@@ -1055,7 +1055,7 @@
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--text">
-						{{ 'a také do více řádků'|trans }}
+						{{ 'and also into more lines'|trans }}
 					</div>
 				</div>
 			</div>
@@ -1065,50 +1065,50 @@
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item form-line__item--text">
-						{{ 'Místo labelu může být input'|trans }}
+						{{ 'Input can be instead of label'|trans }}
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Textarea může být i na plnou šířku'|trans }}
+					{{ 'Textarea may be across the whole width'|trans }}
 				</label>
 				<div class="form-line__line">
-					<textarea class="input input--textarea-big">{{ 'Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku.'|trans }}</textarea>
+					<textarea class="input input--textarea-big">{{ 'Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width.'|trans }}</textarea>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Textarea může být i na plnou šířku vedle labelu'|trans }}
+					{{ 'Textarea may be across the whole width next to the label'|trans }}
 				</label>
 				<div class="form-line__side">
-					<textarea class="input input--textarea-big">{{ 'Textarea roztáhnutá na celou šířku. V tomhletom případě nemusíme použít form-line__item, protože je prvek na 100% šířku.'|trans }}</textarea>
+					<textarea class="input input--textarea-big">{{ 'Textarea spread to the whole width. In this case it is not necessary to use form-line__item, because the element is across 100 % of width.'|trans }}</textarea>
 				</div>
 			</div>
 		</div>
 
-		<h4>{{ 'Zarovnání prvku na stranu'|trans }}</h4>
+		<h4>{{ 'Element alignment to side'|trans }}</h4>
 		<p>
-			{{ 'Někdy je potřčeba jeden z prvků zarovnat na pravou/levou stranu. To jde udělat pomocí modifikátoru <strong class="in-article__visible">form-line__item--right</strong> případně <strong class="in-article__visible">form-line__item--left</strong>.'|trans|raw }}
+			{{ 'Sometimes it is necessary to align one of the elements to right/left side. You can do that using modifier <strong class="in-article__visible">form-line__item--right</strong> or <strong class="in-article__visible">form-line__item--left</strong>.'|trans|raw }}
 		</p>
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s textem napravo'|trans }}
+					{{ 'Input with text on the right'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--text form-line__item--right">
-						{{ 'Jakýkoliv prvek vpravo'|trans }}
+						{{ 'Any element on right'|trans }}
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s cenami vpravo vedle sebe'|trans }}
+					{{ 'Input with prices on the right side next to each other'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1116,11 +1116,11 @@
 					</div>
 					<div class="form-line__item form-line__item--right">
 						<div class="form-line__item__price">
-							{{ '1 254 Kč'|trans }}
+							{{ '1 254 CZK'|trans }}
 						</div>
 						<div class="form-line__item__price">
 							<strong>
-								{{ '1 254 Kč'|trans }}
+								{{ '1 254 CZK'|trans }}
 							</strong>
 						</div>
 					</div>
@@ -1128,13 +1128,13 @@
 			</div>
 		</div>
 		<p>
-			{{ 'Prvkem, který se někam zarovnává bývá hlavně ikona.'|trans|raw }}
+			{{ 'Element which is being aligned is usually icon.'|trans|raw }}
 		</p>
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input i ikonou jednoduše'|trans }}
+					{{ 'Input with icon simply'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1147,7 +1147,7 @@
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input i ikonou vpravo'|trans }}
+					{{ 'Input with icon on the right side'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1161,7 +1161,7 @@
 
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input i ikonou vlevo'|trans }}
+					{{ 'Input with icon on the left side'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1175,7 +1175,7 @@
 
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input i ikonou u labelu'|trans }}
+					{{ 'Input with icon by label'|trans }}
 					<i class="svg svg-info in-icon in-icon--info"></i>
 				</label>
 				<div class="form-line__side">
@@ -1186,15 +1186,15 @@
 			</div>
 		</div>
 
-		<h4>{{ 'Krátké dovětky za inputem'|trans }}</h4>
+		<h4>{{ 'Short postscripts after input'|trans }}</h4>
 		<p>
-			{{ 'Když se např. pracuje s cenami, je třeba za inputem uvést měnu. Ty ale mívají různé délky textu, proto je třeba jim vyhradit pevnou šířku, aby v případě ikonky za textem, byly ikony zarovnány.'|trans|raw }}
+			{{ 'When we work for example with currencies, we need to state the currency after the input. Inputs have different text lengths and that\'s why we need to set a fixed width so that icons after text are aligned.'|trans|raw }}
 		</p>
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s dovětkem co má pevnou šířku'|trans }}
+					{{ 'Input with postscript what has fixed width'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1210,7 +1210,7 @@
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s dovětkem co má pevnou šířku'|trans }}
+					{{ 'Input with postscript what has fixed width'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1226,60 +1226,60 @@
 			</div>
 		</div>
 
-		<h4>{{ 'Button za inputem'|trans }}</h4>
+		<h4>{{ 'Button after input'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s tlačítkem'|trans }}
+					{{ 'Input with button'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--btn">
-						<a href="#" class="btn">{{ 'Tlačítko'|trans }}</a>
+						<a href="#" class="btn">{{ 'Button'|trans }}</a>
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s tlačítkem'|trans }}
+					{{ 'Input with button'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
 						<input type="text" class="input">
 					</div>
 					<div class="form-line__item form-line__item--right form-line__item--btn">
-						<a href="#" class="btn">{{ 'Tlačítko napravo'|trans }}</a>
+						<a href="#" class="btn">{{ 'Right button'|trans }}</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<h4>{{ 'Checkboxy či radia'|trans }}</h4>
+		<h4>{{ 'Checkboxes or radiobuttons'|trans }}</h4>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Checkboxy'|trans }}
+					{{ 'Checkboxes'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
 						<div class="form-choice-list">
 							<label class="form-choice-list__item">
 								<input type="checkbox" class="form-choice-list__input">
-								{{ 'checkbox v seznamu'|trans }}
+								{{ 'checkbox in list'|trans }}
 							</label>
 							<label class="form-choice-list__item">
 								<input type="checkbox" class="form-choice-list__input">
-								{{ 'checkbox v seznamu'|trans }}
+								{{ 'checkbox in list'|trans }}
 							</label>
 							<label class="form-choice-list__item">
 								<input type="checkbox" class="form-choice-list__input">
-								{{ 'checkbox v seznamu'|trans }}
+								{{ 'checkbox in list'|trans }}
 							</label>
 						</div>
 					</div>
@@ -1287,13 +1287,13 @@
 			</div>
 		</div>
 
-		<h4>{{ 'Když potřebujeme něco o velikosti inputu'|trans }}</h4>
+		<h4>{{ 'If we need something about input size'|trans }}</h4>
 		<p>
-			{{ 'Příkladem může být prázdný prostor a za ním ikonka, kterou chceme lícovat s ikonkou vedle inputu.'|trans }}
+			{{ 'An example might be empty space with icon behind it, which we want to align with icon next to input.'|trans }}
 		</p>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
 					{{ 'Input'|trans }}
@@ -1309,7 +1309,7 @@
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Místo pro input'|trans }}
+					{{ 'Place for input'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item form-line__item--text form-line__item--input-size">
@@ -1321,35 +1321,35 @@
 			</div>
 		</div>
 
-		<h4>{{ 'Když chceme info o počtu znaků'|trans }}</h4>
+		<h4>{{ 'If we want information about number of characters'|trans }}</h4>
 		<div class="in-message in-message--warning">
-			{{ 'Pozor, druhá varianta prozatím nemá js, které by s ní pracovalo!'|trans }}
+			{{ 'Attention, the second variant doesn\'t have js to work with yet!'|trans }}
 		</div>
 
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s odpočtem'|trans }}
+					{{ 'Input with deduction'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item form-line__item--left">
-						<input type="text" class="input" value="{{ 'Input musí mít třídu na zarovnání vlevo'|trans }}">
+						<input type="text" class="input" value="{{ 'Input has to have class for left alignment'|trans }}">
 					</div>
 					<div class="form-line__count">
 						<div class="form-line__count__desc form-line__appendix" >
-							{{ 'Využito: 45 znaků. Doporučeno max. 155'|trans }}
+							{{ 'Used: 45 characters. Recommended max. 155'|trans }}
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Input s výrazným odpočtem'|trans }}
+					{{ 'Input with major deduction'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item form-line__item--left">
-						<input type="text" class="input" value="{{ 'Input musí mít třídu na zarovnání vlevo'|trans }}">
+						<input type="text" class="input" value="{{ 'Input has to have class for left alignment'|trans }}">
 					</div>
 					<div class="form-line__count">
 						<div class="form-line__count__val">
@@ -1358,7 +1358,7 @@
 							</span>
 						</div>
 						<div class="form-line__count__desc" >
-							{{ 'znaků z 155 možných'|trans }}
+							{{ 'characters out of 155 possible'|trans }}
 						</div>
 					</div>
 				</div>
@@ -1367,15 +1367,15 @@
 
 
 
-		<h4>{{ 'Prevence dvojtého borderu mezi prvky'|trans }}</h4>
+		<h4>{{ 'Double border between elements prevention'|trans }}</h4>
 		<p>
-			{{ 'Někdy se stává, že se mezi prvky objevuje tlustčí čára než jinde. Je to zásadně v případech, kdy nejsou prvky form-line přímo za sebou, ale nějaký z nich je obalen nějakým divem např. kvůli nějakému JS, na skrývání a odkrývání. Takovému divu je třeba přidat třídu <strong class="in-article__visible">form-line__js</strong>.'|trans|raw }}
+			{{ 'Sometimes there is thicker line between some elements than between others. It is mainly in cases when the form-line elements are not directly behind each other, but some of them are covered with some dive, e.g. because of JS, for hiding and revealing. To that kind of dive you need to add class <strong class="in-article__visible">form-line__js</strong>.'|trans|raw }}
 		</p>
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Tlustá čára mezi'|trans }}
+					{{ 'Thick line between'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1386,7 +1386,7 @@
 			<div>
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Tento form-line je obalen'|trans }}
+						{{ 'This form-line is wrapped'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">
@@ -1397,10 +1397,10 @@
 			</div>
 		</div>
 		<div class="in-article__preview">
-			<span class="in-article__preview__info">{{ 'Živý náhled na komponentu v bílém okně'|trans }}</span>
+			<span class="in-article__preview__info">{{ 'Live view of the component in white window'|trans }}</span>
 			<div class="form-line">
 				<label class="form-line__label">
-					{{ 'Tlustá čára mezi zmizela'|trans }}
+					{{ 'Thick line between disappeared'|trans }}
 				</label>
 				<div class="form-line__side">
 					<div class="form-line__item">
@@ -1411,7 +1411,7 @@
 			<div class="form-line__js">
 				<div class="form-line">
 					<label class="form-line__label">
-						{{ 'Tento form-line je obalen'|trans }}
+						{{ 'This form-line is wrapped'|trans }}
 					</label>
 					<div class="form-line__side">
 						<div class="form-line__item">

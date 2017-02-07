@@ -1,15 +1,15 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-    {{ 'Nebyly nalezeny žádné státy. Nejprve musíte nějaké vytvořit.'|trans }}
+    {{ 'No countries found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-    {% set entityName = 'státy'|trans %}
+    {% set entityName = 'countries'|trans %}
     {{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-    {% set addEntity = 'Přidat stát'|trans %}
+    {% set addEntity = 'Add country'|trans %}
     {{ parent() }}
 {% endblock %}

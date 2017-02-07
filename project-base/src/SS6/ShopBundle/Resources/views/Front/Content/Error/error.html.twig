@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
-	{{ 'Nastala chyba'|trans }}: {{ status_text }}
+	{{ 'Error occurred'|trans }}: {{ status_text }}
 {% endblock %}
 
 {% block content %}
@@ -11,35 +11,33 @@
 		<div class="box-error-page">
 			{% if status_code == 404 %}
 				<div class="box-error-page__text">
-					<h1>{{ 'Stránka nenalezena!'|trans }}</h1>
+					<h1>{{ 'Page not found!'|trans }}</h1>
 
 					<p class="box-error-page__text__main">
-						{{ 'Stránka, kterou hledáte buďto již neexistuje, nebo jste zadali špatnou adresu.'|trans }}
+						{{ 'Page you are looking for either no longer exists or you entered wrong address.'|trans }}
 					</p>
 
-					<h2>{{ 'Prosím, pokračujte podle pokynů'|trans }}:</h2>
+					<h2>{{ 'Please follow the instructions'|trans }}:</h2>
 
 					<ul class="list-simple">
-						<li class="list-simple__item">{{ 'Zkontrolujte správnost adresy'|trans }}</li>
-						<li class="list-simple__item">{{ 'Zkuste použít vyhledávání na webu'|trans }}</li>
+						<li class="list-simple__item">{{ 'Check the address correctness'|trans }}</li>
+						<li class="list-simple__item">{{ 'Try using web search'|trans }}</li>
 					</ul>
 				</div>
 
 				<div class="box-error-page__image">
-					<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Stránka nenalezena!'|trans }}">
+					<img src="{{ asset('assets/frontend/images/404.jpg') }}" alt="{{ 'Page not found!'|trans }}">
 				</div>
 			{% else %}
 				<div class="box-error-page__text">
-					<h1>{{ 'Jejda! Nastala chyba.'|trans }}</h1>
+					<h1>{{ 'Oops! Error occurred.'|trans }}</h1>
 
 					<p>
-						{{ 'To je nemilé, to je nemilé. A zrovna
-						<strong>"%status_code% %status_text%"</strong>,
-						to je jak naschvál!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
+						{{ 'Uh-oh, uh-oh. And specially <strong>"%status_code% %status_text%"</strong>, as if it was on purpose!'|trans({ '%status_code%': status_code, '%status_text%': status_text })|raw }}
 					</p>
 
 					<p>
-						{{ 'Omluvte tuto chybu, pracujeme na tom, aby se chyba opravila co nejdříve. Případně nás kontaktujte na %mail% nebo telefonicky %phone%.'|trans({ '%mail%': getShopInfoEmail(), '%phone%': getShopInfoPhoneNumber() }) }}
+						{{ 'Please excuse this error, we are working on fixing it. If needed, contact us on %mail% or by phone %phone%.'|trans({ '%mail%': getShopInfoEmail(), '%phone%': getShopInfoPhoneNumber() }) }}
 					</p>
 				</div>
 			{% endif %}

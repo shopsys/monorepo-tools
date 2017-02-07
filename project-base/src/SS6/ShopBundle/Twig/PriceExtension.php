@@ -142,7 +142,7 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function priceTextFilter($price) {
 		if ($price == 0) {
-			return t('Zdarma');
+			return t('Free');
 		} else {
 			return $this->priceFilter($price);
 		}
@@ -156,7 +156,7 @@ class PriceExtension extends Twig_Extension {
 	 */
 	public function priceTextWithCurrencyByCurrencyIdAndLocaleFilter($price, $currencyId, $locale) {
 		if ($price == 0) {
-			return t('Zdarma');
+			return t('Free');
 		} else {
 			$currency = $this->currencyFacade->getById($currencyId);
 			return $this->formatCurrency($price, $currency, $locale);

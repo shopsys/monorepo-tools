@@ -1,22 +1,22 @@
 {% extends '@SS6Shop/Admin/Content/Product/detail.html.twig' %}
 
 {% block title -%}
-	- {{ 'Editace zboží'|trans }} - {{ product|productDisplayName }}
+	- {{ 'Editing product'|trans }} - {{ product|productDisplayName }}
 {% endblock %}
 
 {% block product_header_heading %}
-	<span>{{ 'Editace zboží'|trans }}: </span>{{ product.name }}
+	<span>{{ 'Editing product'|trans }}: </span>{{ product.name }}
 {% endblock %}
 
 {% block menu_panel_visibilities %}
 	<div class="panel">
 		<div class="panel__in">
 			<div class="panel__in__title">
-				{{ 'Viditelnost'|trans }}
+				{{ 'Visibility'|trans }}
 			</div>
 			{% if productDetail.product.calculatedSellingDenied %}
 				<div class="in-message in-message--warning in-message--small in-message--block">
-					{{ 'Zboží je vyřazeno z prodeje.'|trans }}
+					{{ 'Product excluded from sale.'|trans }}
 				</div>
 			{% endif %}
 			{% include '@SS6Shop/Admin/Content/Product/visibilityItems.html.twig' with {productDetail: productDetail} only %}
@@ -29,7 +29,7 @@
 		<div class="wrap-border">
 			<div class="form-line">
 				<strong class="form-line__label">
-					{{ 'Produkt je variantou'|trans }} :
+					{{ 'Product is variant'|trans }} :
 				</strong>
 				<div class="form-line__side">
 					<div class="form-line__item form-line__item--text">
@@ -39,20 +39,20 @@
 					</div>
 				</div>
 			</div>
-			{{ form_row(form.productData.variantAlias, { label: 'Alias varianty'|trans }) }}
+			{{ form_row(form.productData.variantAlias, { label: 'Variant alias'|trans }) }}
 		</div>
 	{% endif %}
 	{% if product.isMainVariant %}
 		<div class="wrap-border">
-			<strong>{{ 'Produkt je hlavní variantou.'|trans }}</strong>
-			{{ form_row(form.variants, { label: 'Varianty'|trans, labelButtonAdd: 'Přidat variantu'|trans }) }}
+			<strong>{{ 'Product is main variant.'|trans }}</strong>
+			{{ form_row(form.variants, { label: 'Variants'|trans, labelButtonAdd: 'Add variant'|trans }) }}
 		</div>
 	{% endif %}
 {% endblock %}
 
 {% block product_catnum %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.catnum, { label: 'Katalogové číslo'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+		{{ form_row(form.productData.catnum, { label: 'Catalogue number'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -60,7 +60,7 @@
 
 {% block product_partno %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.partno, { label: 'PartNo (výrobní číslo)'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+		{{ form_row(form.productData.partno, { label: 'PartNo (serial number)'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -68,7 +68,7 @@
 
 {% block product_ean %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.ean, { label: 'EAN'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+		{{ form_row(form.productData.ean, { label: 'EAN'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 	{% else %}
 		{{ parent() }}
 	{% endif %}
@@ -76,16 +76,16 @@
 
 {% block product_stock_and_availability %}
 	{% if product.isMainVariant %}
-		{{ form_row(form.productData.usingStock, { label: 'Používat skladové zásoby'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+		{{ form_row(form.productData.usingStock, { label: 'Use stocks'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 		<div class="js-product-using-stock form-line__js">
-			{{ form_row(form.productData.stockQuantity, { label: 'Skladem'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
-			{{ form_row(form.productData.outOfStockAction, { label: 'Akce při vyprodání'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+			{{ form_row(form.productData.stockQuantity, { label: 'Available in stock'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
+			{{ form_row(form.productData.outOfStockAction, { label: 'Action after sellout'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 			<div class="js-product-using-stock-and-alternate-availability">
-				{{ form_row(form.productData.outOfStockAvailability, { label: 'Dostupnost při vyprodání'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+				{{ form_row(form.productData.outOfStockAvailability, { label: 'Availability after sellout'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 			</div>
 		</div>
 		<div class="js-product-not-using-stock form-line__js">
-			{{ form_row(form.productData.availability, { label: 'Dostupnost'|trans, disabledField: { title: 'Tuto položku můžete nastavit na kartě konkrétní varianty'|trans, class: 'form-line__disabled' } }) }}
+			{{ form_row(form.productData.availability, { label: 'Availability'|trans, disabledField: { title: 'This item can be set in product detail of a specific variant'|trans, class: 'form-line__disabled' } }) }}
 		</div>
 	{% else %}
 		{{ parent() }}
@@ -98,7 +98,7 @@
 			<div class="form-line__line form-line__line--no-space">
 				<div class="in-message in-message--warning">
 					<span class="in-message__icon svg svg-warning"></span>
-					{{ 'Produkt je skrytý z důvodu vyprodání'|trans }}
+					{{ 'Product is hidden due to sellout'|trans }}
 				</div>
 			</div>
 		</div>
@@ -111,7 +111,7 @@
 			<div class="form-line__line form-line__line--no-space">
 				<div class="in-message in-message--warning">
 					<span class="in-message__icon svg svg-warning"></span>
-					{{ 'Produkt je vyřazen z prodeje z důvodu vyprodání'|trans }}
+					{{ 'Product is excluded from the sale due to sellout'|trans }}
 				</div>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
 	<div class="form-line">
 
 		{% if productMainCategoriesIndexedByDomainId|length > 1 %}
-			<label class="form-line__label">{{ 'Hlavní kategorie na doménách :' |trans }}</label>
+			<label class="form-line__label">{{ 'Main category on domains:' |trans }}</label>
 		{% endif %}
 
 		{% for domainId, mainCategory in productMainCategoriesIndexedByDomainId %}
@@ -137,7 +137,7 @@
 					{% if productMainCategoriesIndexedByDomainId|length > 1 %}
 						{{ getDomainName(domainId) ~ ' :' }}
 					{% else %}
-						{{ 'Hlavní kategorie:' |trans }}
+						{{ 'Main category:' |trans }}
 					{% endif %}
 				</label>
 
@@ -166,10 +166,10 @@
 	{% if product.isVariant %}
 		{% do form.productData.categoriesByDomainId.setRendered %}
 		<div class="form-line">
-			{{ form_label(form.productData.categoriesByDomainId, 'Přiřazení do kategorie'|trans) }}
+			{{ form_label(form.productData.categoriesByDomainId, 'Assign to category'|trans) }}
 			<div class="form-line__line">
 				<div class="form-line__item">
-					{{ 'Kategorie můžete nastavit na kartě hlavního zboží'|trans }}
+					{{ 'You can set the categories on product detail of the main variant'|trans }}
 				</div>
 			</div>
 		</div>
@@ -182,7 +182,7 @@
 	{% if product.isMainVariant %}
 		<div class="form-line form-line--disabled">
 			<div class="form-line__item form-line__item--text">
-				<strong>{{ 'Ceny můžete nastavit na kartě konkrétní varianty.'|trans }}</strong>
+				<strong>{{ 'You can set the prices on product detail of specific variant.'|trans }}</strong>
 			</div>
 		</div>
 		{% do form.productData.priceCalculationType.setRendered %}
@@ -199,12 +199,12 @@
 		<div class="form-price-heading__cell form-price-heading__cell--field">
 			{{ inputPriceLabel({ isSimple: true }) }}
 		</div>
-		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena bez DPH'|trans }}</div>
-		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Cena s DPH'|trans }}</div>
+		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price excluding VAT'|trans }}</div>
+		<div class="form-price-heading__cell form-price-heading__cell--price">{{ 'Price including VAT'|trans }}</div>
 	</div>
 	<div class="form-line js-input-price-type-auto">
 		<div class="form-line__label">
-			{{ form_label(form.productData.price, 'Základní cena'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
+			{{ form_label(form.productData.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
 		</div>
 		<div class="form-line__side">
 			<div class="form-line__item">
@@ -268,12 +268,12 @@
 
 {% block product_description %}
 	<div class="form-group__title">
-		{{ 'Popis'|trans }}
+		{{ 'Description'|trans }}
 	</div>
 	{% if product.isVariant %}
 		<div class="form-line form-line--disabled">
 			<div class="form-line__item form-line__item--text">
-				<strong>{{ 'Popis můžete nastavit na kartě hlavního zboží.'|trans }}</strong>
+				<strong>{{ 'Description can be set on product detail of the main product.'|trans }}</strong>
 			</div>
 		</div>
 		{% do form.descriptions.setRendered %}
@@ -300,12 +300,12 @@
 
 {% block product_short_description %}
 	<div class="form-group__title">
-		{{ 'Krátký popis'|trans }}
+		{{ 'Short description'|trans }}
 	</div>
 	{% if product.isVariant %}
 		<div class="form-line form-line--disabled">
 			<div class="form-line__item form-line__item--text">
-				<strong>{{ 'Krátký popis se nastavuje u hlavní varianty.'|trans }}</strong>
+				<strong>{{ 'Short description can be set in the main variant.'|trans }}</strong>
 			</div>
 		</div>
 	{% else %}
@@ -341,18 +341,18 @@
 								{{ image(image, {size: 'original', height: '100'}) }}
 							</div>
 							<span class="list-images__item__main">
-								{{ 'Hlavní obrázek'|trans }}
+								{{ 'Main picture'|trans }}
 							</span>
-							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Smazat'|trans }}">
+							<button class="js-product-images-delete-button btn-no-style list-images__item__remove" type="button" title="{{ 'Delete'|trans }}">
 								<i class="svg svg-circle-cross"></i>
 							</button>
-							<span class="js-product-images-image-handle list-images__item__move" title="{{ 'Přesunout'|trans }}">
+							<span class="js-product-images-image-handle list-images__item__move" title="{{ 'Move'|trans }}">
 								<i class="svg svg-move"></i>
 							</span>
-							<button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Vrátit zpět'|trans }}">
+							<button class="btn-no-style js-product-images-delete-revert-button display-none list-images__item__revert" type="button" title="{{ 'Return back'|trans }}">
 								<i class="svg svg-forward-page"></i>
 							</button>
-							<span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Po uložení bude obrázek smazán'|trans }}</span>
+							<span class="list-images__item__overlay js-product-images-image-overlay">{{ 'Picture will be deleted after saving.'|trans }}</span>
 						</div>
 						{# Ignore indices from form definition. Let them reflect new positions. #}
 						{{ form_widget(imageForm, { full_name: form.imagePositions.vars.full_name ~ '[]'}) }}
@@ -365,5 +365,5 @@
 {% endblock %}
 
 {% block product_urls %}
-	{{ form_row(form.urls, { label: 'Nastavení URL'|trans }) }}
+	{{ form_row(form.urls, { label: 'URL settings'|trans }) }}
 {% endblock %}

@@ -1,9 +1,9 @@
 <table>
 	<tr>
-		<th>{% trans into orderLocale %}Název{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Množství{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Cena za jednotku s DPH{% endtrans %}</th>
-		<th>{% trans into orderLocale %}Celková cena za položku s DPH{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Name{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Amount{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Unit price including VAT{% endtrans %}</th>
+		<th>{% trans into orderLocale %}Total item price including VAT{% endtrans %}</th>
 	</tr>
 	{% for item in order.items %}
 		<tr>

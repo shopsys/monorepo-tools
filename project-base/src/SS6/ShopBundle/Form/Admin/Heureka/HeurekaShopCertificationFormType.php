@@ -29,7 +29,7 @@ class HeurekaShopCertificationFormType extends AbstractType {
 					new Constraints\Length([
 						'min' => 32,
 						'max' => 32,
-						'exactMessage' => 'Heureka API klíč musí mít právě {{ limit }} znaků',
+						'exactMessage' => 'Heureka API must be {{ limit }} characters',
 					]),
 				],
 			])

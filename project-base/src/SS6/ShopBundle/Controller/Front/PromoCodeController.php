@@ -46,17 +46,17 @@ class PromoCodeController extends FrontBaseController {
 		} catch (\SS6\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException $ex) {
 			return new JsonResponse([
 				'result' => false,
-				'message' => t('Slevový kód není platný. Prosím, zkontrolujte ho.'),
+				'message' => t('Discount code invalid. Check it, please.'),
 			]);
 		}
-		$this->getFlashMessageSender()->addSuccessFlash(t('Slevový kód byl přidán do objednávky.'));
+		$this->getFlashMessageSender()->addSuccessFlash(t('Discount code added to order'));
 
 		return new JsonResponse(['result' => true]);
 	}
 
 	public function removeAction() {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
-		$this->getFlashMessageSender()->addSuccessFlash(t('Slevový kód byl odebrán z objednávky.'));
+		$this->getFlashMessageSender()->addSuccessFlash(t('Discount code removed from order'));
 
 		return $this->redirectToRoute('front_cart');
 	}

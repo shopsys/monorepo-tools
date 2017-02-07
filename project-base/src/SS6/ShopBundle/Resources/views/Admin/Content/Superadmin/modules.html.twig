@@ -1,20 +1,20 @@
 {% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
 
-{% block title %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
-{% block h1 %}{{ 'Superadmin - Zapínací moduly'|trans }}{% endblock %}
+{% block title %}{{ 'Superadmin - Closing modules'|trans }}{% endblock %}
+{% block h1 %}{{ 'Superadmin - Closing modules'|trans }}{% endblock %}
 
 {% block main_content %}
 	<div class="in-message in-message--warning margin-bottom-15">
-		Pokud chcete, aby se změny projevily všude (na produkci, develu, localhostu apod.), dejte vědět programátorovi, aby změny zavedl do GITu!
+		{{ 'If you want for these changes to manifest everywhere (on production, devel, localhost etc.) instruct a programmer to commit the changes into GIT!'|trans }}
 	</div>
 
 	{{ form_start(form) }}
 		<table class="table-main">
 			<thead>
 				<tr>
-					<th class="table-col-80">Název modulu</th>
-					<th class="table-col-10 text-center">Aktivní</th>
-					<th class="table-col-10 text-center">Neaktivní</th>
+					<th class="table-col-80">{{ 'Module name'|trans }}</th>
+					<th class="table-col-10 text-center">{{ 'Active'|trans }}</th>
+					<th class="table-col-10 text-center">{{ 'Inactive'|trans }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,7 +30,7 @@
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_widget(form.save, { label: 'Uložit změny'|trans}) }}
+				{{ form_widget(form.save, { label: 'Save changes'|trans}) }}
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}

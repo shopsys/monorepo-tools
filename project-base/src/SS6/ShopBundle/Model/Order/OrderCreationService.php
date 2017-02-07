@@ -228,7 +228,7 @@ class OrderCreationService {
 		if ($orderPreview->getRoundingPrice() !== null) {
 			new OrderProduct(
 				$order,
-				t('Zaokrouhlení', [], 'messages', $locale),
+				t('Rounding', [], 'messages', $locale),
 				$orderPreview->getRoundingPrice(),
 				0,
 				1,
@@ -247,7 +247,7 @@ class OrderCreationService {
 	 */
 	private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale, $discountPercent) {
 		$name = sprintf('%s %s - %s',
-			t('Slevový kupón', [], 'messages', $locale),
+			t('Discount coupon', [], 'messages', $locale),
 			$this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),
 			$orderItem->getName()
 		);

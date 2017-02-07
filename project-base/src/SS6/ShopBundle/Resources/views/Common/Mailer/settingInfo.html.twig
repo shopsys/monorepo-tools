@@ -1,13 +1,13 @@
-<strong>{{ 'Nastavení emailů:'|trans }}</strong>
+<strong>{{ 'E-mail settings:'|trans }}</strong>
 {% if isDeliveryDisabled %}
-	{{ 'Odesílání mailů je vypnuto, z aplikace nebude odeslán žádný mail.'|trans }}
+	{{ 'Sending e-mails off, no e-mail will be sent from the app.'|trans }}
 {% endif %}
 {% if mailerMasterEmailAddress is not null and not isDeliveryDisabled %}
-	{{ 'Je nastaven master e-mail %masterMail%. '|trans({'%masterMail%': mailerMasterEmailAddress}) }}
+	{{ 'Master e-mail %masterMail% set '|trans({'%masterMail%': mailerMasterEmailAddress}) }}
 	{% if mailerWhitelistExpessions is not empty %}
-		{{ 'Ve whitelistu jsou povoleny následující výrazy: %whitelist%. '|trans({'%whitelist%': mailerWhitelistExpessions|join(', ')}) }}
-		{{ 'Všechny maily budou doručeny pouze na uvedené adresy.'|trans }}
+		{{ 'Following expressions are allowed in whitelist: %whitelist%. '|trans({'%whitelist%': mailerWhitelistExpessions|join(', ')}) }}
+		{{ 'All e-mails will be sent only to entered addresses.'|trans }}
 	{% else %}
-		{{ 'Všechny maily budou doručeny pouze na uvedenou adresu.'|trans }}
+		{{ 'All e-mails will be sent only to entered address.'|trans }}
 	{% endif %}
 {% endif %}

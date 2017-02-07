@@ -30,9 +30,10 @@ class DomainFormType extends AbstractType {
 				'file_constraints' => [
 					new Constraints\Image([
 						'mimeTypes' => ['image/png', 'image/jpg', 'image/jpeg', 'image/gif'],
-						'mimeTypesMessage' => 'Obrázek může být pouze ve formátech jpg, png nebo gif',
+						'mimeTypesMessage' => 'Image can be only in JPG, GIF or PNG format',
 						'maxSize' => '2M',
-						'maxSizeMessage' => 'Nahraný obrázek ({{ size }} {{ suffix }}) může mít velikost maximálně {{ limit }} {{ suffix }}',
+						'maxSizeMessage' => 'Uploaded image is to large ({{ size }} {{ suffix }}). '
+							. 'Maximum size of an image is {{ limit }} {{ suffix }}.',
 					]),
 				],
 			])

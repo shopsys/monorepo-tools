@@ -8,10 +8,10 @@
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné kategorie. Nejprve musíte nějaké vytvořit.'|trans }}
+	{{ 'No categories found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'kategorie'|trans %}
+	{% set entityName = 'category'|trans %}
 	{{ parent() }}
 {% endblock %}

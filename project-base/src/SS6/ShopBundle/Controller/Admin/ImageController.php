@@ -63,13 +63,13 @@ class ImageController extends AdminBaseController {
 	 */
 	private function getEntityNameTranslation($entityName) {
 		$entityNamesTranslations = [
-			self::ENTITY_NAME_CATEGORY => t('Kategorie'),
-			self::ENTITY_NAME_PAYMENT => t('Platba'),
-			self::ENTITY_NAME_PRODUCT => t('Produkt'),
-			self::ENTITY_NAME_SLIDER_ITEM => t('Stránka slideru'),
-			self::ENTITY_NAME_TRANSPORT => t('Doprava'),
-			self::ENTITY_NAME_ADVERT => t('Reklama'),
-			self::ENTITY_NAME_BRAND => t('Značka'),
+			self::ENTITY_NAME_CATEGORY => t('Category'),
+			self::ENTITY_NAME_PAYMENT => t('Payment'),
+			self::ENTITY_NAME_PRODUCT => t('Product'),
+			self::ENTITY_NAME_SLIDER_ITEM => t('Slider page'),
+			self::ENTITY_NAME_TRANSPORT => t('Shipping'),
+			self::ENTITY_NAME_ADVERT => t('Advertising'),
+			self::ENTITY_NAME_BRAND => t('Brand'),
 		];
 
 		if (array_key_exists($entityName, $entityNamesTranslations)) {
@@ -110,55 +110,55 @@ class ImageController extends AdminBaseController {
 		$imageSizeUsagesTranslations = [
 			self::ENTITY_NAME_PAYMENT => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
-					'Front-end: Objednávkový proces'
+					'Front-end: Ordering process'
 				),
 			],
 			self::ENTITY_NAME_PRODUCT => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
-					'Front-end: Hlavní obrázek na detailu produktu'
+					'Front-end: Main image in product detail'
 				),
 				self::SIZE_NAME_GALLERY_THUMBNAIL => t(
-					'Front-end: Náhledy dalších obrázků pod hlavním obrázkem na detailu produktu'
+					'Front-end: Thumbnail of images under the main picture in product detail'
 				),
 				self::SIZE_NAME_LIST => t(
-					'Front-end: Výpis produktů v oddělení, výpis akčního zboží'
+					'Front-end: Listing of products in section, listing of products on special offer'
 				),
 				self::SIZE_NAME_THUMBNAIL => t(
-					'Front-end: Náhled v našeptávači pro vyhledávání, náhled v košíku během objednávkového procesu'
+					'Front-end: Preview in autocomplete for search, preview in cart during ordering process'
 				),
 			],
 			self::ENTITY_NAME_SLIDER_ITEM => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
-					'Front-end: Slider na hlavní straně'
+					'Front-end: Main page slider'
 				),
 			],
 			self::ENTITY_NAME_TRANSPORT => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
-					'Front-end: Objednávkový proces'
+					'Front-end: Ordering process'
 				),
 			],
 			self::ENTITY_NAME_CATEGORY => [
 			ImageConfig::DEFAULT_SIZE_NAME => t(
-				'Front-end: Rozcestník kategorií'
+				'Front-end: Category guidepost'
 				),
 			],
 			self::ENTITY_NAME_ADVERT => [
 				AdvertPositionList::POSITION_HEADER => t(
-					'Front-end: Reklama pod hlavičkou'
+					'Front-end: Advertising under heading'
 				),
 				AdvertPositionList::POSITION_FOOTER => t(
-					'Front-end: Reklama nad patičkou'
+					'Front-end: Advertising above footer'
 				),
 				AdvertPositionList::POSITION_PRODUCT_LIST => t(
-					'Front-end: Reklama v kategorii (nad názvem kategorie)'
+					'Front-end: Advertising in category (above the category name)'
 				),
 				AdvertPositionList::POSITION_LEFT_SIDEBAR => t(
-					'Front-end: Reklama v levém panelu pod stromem kategorií'
+					'Front-end: Advertising in the left panel under the category tree'
 				),
 			],
 			self::ENTITY_NAME_BRAND => [
 				ImageConfig::DEFAULT_SIZE_NAME => t(
-					'Front-end: Stránka značky'
+					'Front-end: Brand page'
 				),
 			],
 		];
@@ -166,7 +166,7 @@ class ImageController extends AdminBaseController {
 		if (array_key_exists($sizeName, $imageSizeUsagesTranslations[$entityName])) {
 			return $imageSizeUsagesTranslations[$entityName][$sizeName];
 		} else {
-			return t('Není zadáno pro entitu %entityName% a rozměr %sizeName%', [
+			return t('Not specified for entity %entityName% and size %sizeName%', [
 				'%entityName%' => $entityName,
 				'%sizeName%' => $sizeName,
 			]);
@@ -208,7 +208,7 @@ class ImageController extends AdminBaseController {
 	 * @return string
 	 */
 	private function getImageSizeWithTypeUsageTranslation($entityName, $typeName, $sizeName) {
-		return t('Není zadáno pro entitu %entityName%, typ %typeName% a rozměr %sizeName%', [
+		return t('Not specified for entity %entityName%, type %typeName% and size %sizeName%', [
 			'%entityName%' => $entityName,
 			'%typeName%' => $typeName,
 			'%sizeName%' => $sizeName,

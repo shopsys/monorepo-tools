@@ -51,13 +51,13 @@ class FlagGridFactory implements GridFactoryInterface {
 		$grid = $this->gridFactory->create('flagList', $dataSource);
 		$grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'at.name', t('Název'), true);
-		$grid->addColumn('rgbColor', 'a.rgbColor', t('Barva'), true);
-		$grid->addColumn('visible', 'a.visible', t('Filtrovat podle'), true);
+		$grid->addColumn('name', 'at.name', t('Name'), true);
+		$grid->addColumn('rgbColor', 'a.rgbColor', t('Colour'), true);
+		$grid->addColumn('visible', 'a.visible', t('Filter by'), true);
 
 		$grid->setActionColumnClassAttribute('table-col table-col-10');
 		$grid->addDeleteActionColumn('admin_flag_delete', ['id' => 'a.id'])
-			->setConfirmMessage(t('Opravdu chcete odstranit tento příznak?'));
+			->setConfirmMessage(t('Do you really want to remove this flag?'));
 
 		$grid->setTheme('@SS6Shop/Admin/Content/Flag/listGrid.html.twig');
 

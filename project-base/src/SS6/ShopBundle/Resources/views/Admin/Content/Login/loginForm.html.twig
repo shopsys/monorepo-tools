@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Layout/layoutBlank.html.twig' %}
 
 {% block title %}
-	- {{ 'Přihlášení'|trans }}
+	- {{ 'Login'|trans }}
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
 	{{ form_start(form, {attr: {class: 'box-login'}}) }}
 		{{ form_errors(form) }}
 
-		<h1 class="box-login__heading">{{ 'Administrace'|trans }}</h1>
+		<h1 class="box-login__heading">{{ 'Administration'|trans }}</h1>
 
 		{% if error %}
 			<p class="in-message in-message--danger">{{ error }}</p>
@@ -19,18 +19,18 @@
 			<span class="box-login__error">
 				{{ form_errors(form.username) }}
 			</span>
-			{{ form_widget(form.username, {attr: {placeholder: 'Uživatelské jméno'|trans, class: 'box-login__input'}}) }}
+			{{ form_widget(form.username, {attr: {placeholder: 'Username'|trans, class: 'box-login__input'}}) }}
 		</div>
 
 		<div class="box-login__row">
 			<span class="box-login__error">
 				{{ form_errors(form.password) }}
 			</span>
-			{{ form_widget(form.password, {attr: {placeholder: 'Heslo'|trans, class: 'box-login__input'}}) }}
+			{{ form_widget(form.password, {attr: {placeholder: 'Password'|trans, class: 'box-login__input'}}) }}
 		</div>
 
 		<div class="box-login__row box-login__row--btn">
-			{{ form_widget(form.login, {label: 'Přihlásit'|trans, attr: {class: 'btn--block btn--large'}}) }}
+			{{ form_widget(form.login, {label: 'Log in'|trans, attr: {class: 'btn--block btn--large'}}) }}
 		</div>
 
 	{{ form_end(form) }}

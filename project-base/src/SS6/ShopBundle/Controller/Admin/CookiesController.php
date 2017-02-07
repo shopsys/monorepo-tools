@@ -59,12 +59,12 @@ class CookiesController extends AdminBaseController {
 				$selectedDomainId
 			);
 
-			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Bylo upraveno nastavení informací o cookies.'));
+			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Cookies information settings modified.'));
 			return $this->redirectToRoute('admin_cookies_setting');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Cookies/setting.html.twig', [

@@ -26,7 +26,7 @@ class HoneyPotType extends AbstractType {
 		$resolver->setDefaults([
 			'mapped' => false,
 			'required' => false,
-			'constraints' => new Constraints\Blank(['message' => 'Toto pole musí zůstat prázdné']),
+			'constraints' => new Constraints\Blank(['message' => 'This field must be empty']),
 		]);
 	}
 

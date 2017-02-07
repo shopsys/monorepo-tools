@@ -27,12 +27,12 @@ class ScriptFormType extends AbstractType {
 		$builder
 			->add('name', FormType::TEXT, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím název skriptu']),
+					new Constraints\NotBlank(['message' => 'Please enter script name']),
 				],
 			])
 			->add('code', FormType::TEXTAREA, [
 				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Vyplňte prosím kód skriptu']),
+					new Constraints\NotBlank(['message' => 'Please enter script code']),
 				],
 			])
 			->add($builder

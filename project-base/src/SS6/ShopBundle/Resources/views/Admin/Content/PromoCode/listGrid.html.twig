@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'Nebyly nalezeny žádné slevové kupóny. Nejprve musíte nějaký vytvořit.'|trans }}
+	{{ 'No discount coupons found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_edit_id_percent %}
@@ -16,11 +16,11 @@
 {% endblock %}
 
 {% block grid_pager_totalcount %}
-	{% set entityName = 'slevové kupóny'|trans %}
+	{% set entityName = 'discount coupons'|trans %}
 	{{ parent() }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Vytvořit slevový kupón'|trans %}
+	{% set addEntity = 'Create discount coupon'|trans %}
 	{{ parent() }}
 {% endblock %}

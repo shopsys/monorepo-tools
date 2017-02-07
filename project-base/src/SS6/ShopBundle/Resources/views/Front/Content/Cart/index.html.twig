@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-	{{ 'Košík'|trans }}
+	{{ 'Cart'|trans }}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -14,7 +14,7 @@
 {% block main_content %}
 	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
 
-	<h1>{{ 'Váš košík'|trans }}</h1>
+	<h1>{{ 'Your cart'|trans }}</h1>
 
 
 	{% if cart.itemsCount > 0 %}
@@ -23,12 +23,12 @@
 			<table class="table-cart js-cart">
 				<thead>
 					<tr class="table-cart__row">
-						<th class="table-cart__cell table-cart__cell--image">{{ 'Obrázek'|trans }}</th>
-						<th class="table-cart__cell table-cart__cell--name">{{ 'Název'|trans }}</th>
-						<th class="table-cart__cell table-cart__cell--price">{{ 'Cena za jednotku s DPH'|trans }}</th>
-						<th class="table-cart__cell table-cart__cell--price">{{ 'Sazba DPH'|trans }}</th>
-						<th class="table-cart__cell table-cart__cell--amount">{{ 'Množství'|trans }}</th>
-						<th class="table-cart__cell table-cart__cell--price">{{ 'Cena s DPH'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--image">{{ 'Picture'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--name">{{ 'Name'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Unit price including VAT'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'VAT rate'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--amount">{{ 'Amount'|trans }}</th>
+						<th class="table-cart__cell table-cart__cell--price">{{ 'Price including VAT'|trans }}</th>
 						<th class="table-cart__cell table-cart__cell--action">&nbsp;</th>
 					</tr>
 				</thead>
@@ -52,7 +52,7 @@
 									{{ cartItemPrice.totalPrice.priceWithVat|price }}
 									{% if cartItemDiscount is not null %}
 										<div>
-											{{ 'Sleva'|trans }}:
+											{{ 'Discount'|trans }}:
 											{{ cartItemDiscount.priceWithVat|price }}
 										</div>
 									{% endif %}
@@ -79,7 +79,7 @@
 								{{ cartItemPrice.totalPrice.priceWithVat|price }}
 								{% if cartItemDiscount is not null %}
 									<div>
-										{{ 'Sleva'|trans }}:
+										{{ 'Discount'|trans }}:
 										{{ cartItemDiscount.priceWithVat|price }}
 									</div>
 								{% endif %}
@@ -103,7 +103,7 @@
 						<td class="table-cart__cell table-cart__cell--name">&nbsp;</td>
 						<td class="table-cart__cell  table-cart__cell--price">&nbsp;</td>
 						<td class="table-cart__cell table-cart__cell--total-price js-cart-total-price" colspan="2">
-							{{ 'Celková cena s DPH'|trans }}:
+							{{ 'Total price including VAT'|trans }}:
 							<span>
 								{{ productsPrice.priceWithVat|price }}
 							</span>
@@ -120,21 +120,13 @@
 						{% if isPaymentAndTransportFree %}
 							<div class="box-free-transport box-free-transport--done">
 								{% trans %}
-									Dopravu i platbu máte
-									<strong>zdarma!</strong>
+									Shipping and payment <strong>for free!</strong>
 								{% endtrans %}
 							</div>
 						{% else %}
 							<div class="box-free-transport">
 								{% trans with {'%price%': remainingPriceWithVat|price} %}
-									Musíte ještě nakoupit zboží za
-									<strong>
-										%price%
-									</strong>
-									abyste měli dopravu i platbu
-									<strong>
-										zdarma.
-									</strong>
+									You still have to purchase products for <strong> %price% </strong> for <strong> free </strong> shipping and payment.
 								{% endtrans %}
 							</div>
 						{% endif %}
@@ -148,13 +140,13 @@
 			<div class="in-action">
 				{% if cart.itemsCount > 0 %}
 					<div class="in-action__right">
-						{{ form_row(form.submit, { label: 'Objednat'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big'}}) }}
+						{{ form_row(form.submit, { label: 'Order [verb]'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big'}}) }}
 					</div>
 				{% endif %}
 
 				<div class="in-action__left">
 					<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
-						{{ 'Zpět k nákupu'|trans }}
+						{{ 'Back to buying'|trans }}
 					</a>
 				</div>
 			</div>
@@ -162,17 +154,17 @@
 	{% else %}
 		<div class="box-cart-empty">
 			<div class="box-cart-empty__image">
-				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Prázdný nákupní košík'|trans }}">
+				<img src="{{ asset('assets/frontend/images/empty-cart.jpg') }}" alt="{{ 'Empty cart'|trans }}">
 			</div>
 			<div class="box-cart-empty__text">
-				{{ 'Váš nákupní košík je bohužel prázdný. Pro vytvoření objednávky si musíte nejdříve nějaké zboží <a href="%url%">vybrat</a>.'|trans({ '%url%': url('front_homepage') })|raw }}
+				{{ 'Your cart is unfortunately empty. To create order, you have to choose </a> some product <a href="%url%">first'|trans({ '%url%': url('front_homepage') })|raw }}
 			</div>
 		</div>
 
 		<div class="in-action">
 			<div class="in-action__left">
 				<a href="{{url('front_homepage') }}" class="btn in-action__btn">
-					{{ 'Zpět k nákupu'|trans }}
+					{{ 'Back to buying'|trans }}
 				</a>
 			</div>
 		</div>

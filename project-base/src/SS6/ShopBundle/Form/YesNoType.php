@@ -39,8 +39,8 @@ class YesNoType extends AbstractType {
 			'choice_list' => new IndexedChoiceList(
 				[true, false],
 				[
-					t('Ano'),
-					t('Ne'),
+					t('Yes'),
+					t('No'),
 				],
 				['yes', 'no'],
 				['1', '0']

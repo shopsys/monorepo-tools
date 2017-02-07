@@ -38,7 +38,7 @@ class CookiesSettingFormType extends AbstractType {
 				->add('cookiesArticle', FormType::CHOICE, [
 					'required' => false,
 					'choice_list' => new ObjectChoiceList($this->articles, 'name', [], null, 'id'),
-					'placeholder' => t('-- Vyberte článek --'),
+					'placeholder' => t('-- Choose article --'),
 				])
 				->add('save', FormType::SUBMIT);
 	}

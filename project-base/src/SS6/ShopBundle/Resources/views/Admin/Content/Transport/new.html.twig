@@ -1,7 +1,7 @@
 {% extends '@SS6Shop/Admin/Content/Transport/detail.html.twig' %}
 
-{% block title %}- {{ 'Nová doprava'|trans }}{% endblock %}
-{% block h1 %}{{ 'Nová doprava'|trans }}{% endblock %}
+{% block title %}- {{ 'New shipping'|trans }}{% endblock %}
+{% block h1 %}{{ 'New shipping'|trans }}{% endblock %}
 {% block transport_base_prices %}
 	<div id="transport_prices">
 		<table class="table">
@@ -16,7 +16,7 @@
 						<td>
 							{{ form_row(
 								form.prices[currencyId], {
-									label: 'Základní cena v %currencyCode%'|trans({'%currencyCode%': currency.code}),
+									label: 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}),
 									symbolAfterInput: currencySymbolByCurrencyId(currencyId)
 								}
 							) }}

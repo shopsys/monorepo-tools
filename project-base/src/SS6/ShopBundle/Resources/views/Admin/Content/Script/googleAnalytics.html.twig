@@ -9,11 +9,11 @@
 	{{ form_start(form) }}
 		{{ form_errors(form) }}
 
-		{{ form_row(form.trackingId, { label: 'Číslo pro měření'|trans}) }}
+		{{ form_row(form.trackingId, { label: 'Tracking ID'|trans}) }}
 
 		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				{{ form_row(form.save, { label: 'Uložit' }) }}
+				{{ form_row(form.save, { label: 'Save'|trans }) }}
 			{% endblock %}
 		{% endembed %}
 	{{ form_end(form) }}

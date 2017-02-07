@@ -3,7 +3,7 @@
 
 {% if paginationResult.results|length > 0 %}
 	<div class="js-product-list-with-paginator">
-		{% set entityName = 'zboží'|trans %}
+		{% set entityName = 'products'|trans %}
 		{{ paginator.paginatorNavigation(paginationResult, entityName) }}
 
 		{{ productList.list(paginationResult.results) }}
@@ -22,13 +22,13 @@
 {% else %}
 	<div class="in-message in-message--info margin-bottom-20">
 		{% if (filterFormSubmited) %}
-			{{ 'Filtru neodpovídají žádné výsledky'|trans }}
+			{{ 'No results matching filter'|trans }}
 		{% elseif searchText is defined %}
-			{{ 'Hledání neodpovídají žádné produkty'|trans }}
+			{{ 'Search didn\'t find any products.'|trans }}
 		{% elseif category is defined %}
-			{{ 'Tato kategorie neobsahuje žádné produkty'|trans }}
+			{{ 'This category contains no products.'|trans }}
 		{% else %}
-			{{ 'Pro tuto značku nebyly nalezeny žádné produkty'|trans }}
+			{{ 'No products found for this brand'|trans }}
 		{% endif %}
 	</div>
 {% endif %}

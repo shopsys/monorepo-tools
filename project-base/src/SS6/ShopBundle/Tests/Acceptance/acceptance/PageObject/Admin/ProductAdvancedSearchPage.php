@@ -2,6 +2,7 @@
 
 namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin;
 
+use Facebook\WebDriver\WebDriverBy;
 use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductAdvancedSearchPage extends AbstractPage {
@@ -20,7 +21,7 @@ class ProductAdvancedSearchPage extends AbstractPage {
 		$this->tester->waitForAjax();
 		$this->tester->fillFieldByCss('.js-advanced-search-rule-value input', $value);
 
-		$this->tester->clickByText('Hledat');
+		$this->tester->clickByText('Vyhledat', WebDriverBy::cssSelector('#js-advanced-search-rules-box'));
 	}
 
 	/**

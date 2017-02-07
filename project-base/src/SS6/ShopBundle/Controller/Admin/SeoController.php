@@ -58,13 +58,13 @@ class SeoController extends AdminBaseController {
 			$this->seoSettingFacade->setDescriptionMainPage($seoSettingData['metaDescription'], $selectedDomainId);
 			$this->seoSettingFacade->setTitleAddOn($seoSettingData['titleAddOn'], $selectedDomainId);
 
-			$this->getFlashMessageSender()->addSuccessFlash(t('Natavení SEO atributů bylo upraveno'));
+			$this->getFlashMessageSender()->addSuccessFlash(t('SEO attributes settings modified'));
 
 			return $this->redirectToRoute('admin_seo_index');
 		}
 
 		if ($form->isSubmitted() && !$form->isValid()) {
-			$this->getFlashMessageSender()->addErrorFlashTwig(t('Prosím zkontrolujte si správnost vyplnění všech údajů'));
+			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
 		return $this->render('@SS6Shop/Admin/Content/Seo/seoSetting.html.twig', [
