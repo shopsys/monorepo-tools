@@ -7,8 +7,12 @@
 	{{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
+{% block meta_description %}
+	{{- categoryDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
+{% endblock %}
+
 {% block title %}
-	{{ parent() }} - {{ category.name }}
+	{{ parent() }} - {{ categoryDomain.seoTitle|default(category.name) }}
 {% endblock %}
 
 {% block main_content %}
