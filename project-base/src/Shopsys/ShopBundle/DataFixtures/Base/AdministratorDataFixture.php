@@ -18,14 +18,14 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 	public function load(ObjectManager $manager) {
 		$superadminData = new AdministratorData(true);
 		$superadminData->username = 'superadmin';
-		$superadminData->realName = 'netdevelo s.r.o. - superadmin';
+		$superadminData->realName = 'superadmin';
 		$superadminData->email = 'no-reply@netdevelo.cz';
 		$superadminData->password = 'admin123';
 		$this->createAdministrator($superadminData, self::SUPERADMINISTRATOR);
 
 		$administratorData = new AdministratorData();
 		$administratorData->username = 'admin';
-		$administratorData->realName = 'netdevelo s.r.o.';
+		$administratorData->realName = 'admin';
 		$administratorData->password = 'admin123';
 		$administratorData->email = 'no-reply@netdevelo.cz';
 		$this->createAdministrator($administratorData, self::ADMINISTRATOR);
