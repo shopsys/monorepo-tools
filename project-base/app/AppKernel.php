@@ -23,7 +23,7 @@ class AppKernel extends Kernel {
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
-			new Shopsys\AutoServicesBundle\SS6AutoServicesBundle(),
+			new Shopsys\AutoServicesBundle\ShopsysAutoServicesBundle(),
 			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
