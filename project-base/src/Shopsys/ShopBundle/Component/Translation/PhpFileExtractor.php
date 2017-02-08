@@ -14,8 +14,8 @@ use PHPParser_Node_Expr_MethodCall;
 use PHPParser_Node_Name;
 use PHPParser_NodeTraverser;
 use PHPParser_NodeVisitor;
-use SplFileInfo;
 use Shopsys\ShopBundle\Component\Translation\PhpParserNodeHelper;
+use SplFileInfo;
 use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {

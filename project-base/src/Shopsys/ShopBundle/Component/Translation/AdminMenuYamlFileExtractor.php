@@ -6,8 +6,8 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
-use SplFileInfo;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
+use SplFileInfo;
 use Symfony\Component\Yaml\Parser;
 use Twig_Node;
 

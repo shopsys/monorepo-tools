@@ -8,8 +8,8 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use PLUG\JavaScript\JParser;
 use PLUG\JavaScript\JTokenizer;
-use SplFileInfo;
 use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
+use SplFileInfo;
 use Twig_Node;
 
 class JsFileExtractor implements FileVisitorInterface {

@@ -3,9 +3,9 @@
 namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SplFileObject;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
+use SplFileObject;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class NewsletterController extends AdminBaseController {

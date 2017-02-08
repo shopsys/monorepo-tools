@@ -5,8 +5,8 @@ namespace Shopsys\ShopBundle\Component\Translation;
 use PHPParser_Node;
 use PHPParser_Node_Expr_Concat;
 use PHPParser_Node_Scalar_String;
-use SplFileInfo;
 use Shopsys\ShopBundle\Component\Translation\Exception\StringValueUnextractableException;
+use SplFileInfo;
 
 class PhpParserNodeHelper {
 
