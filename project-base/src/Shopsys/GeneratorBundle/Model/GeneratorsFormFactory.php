@@ -90,7 +90,7 @@ class GeneratorsFormFactory {
 	private function getBundleChoices() {
 		$bundleChoices = [];
 		foreach ($this->kernel->getBundles() as $bundle) {
-			if (substr($bundle->getNamespace(), 0, 3) === 'SS6') {
+			if (substr($bundle->getNamespace(), 0, 7) === 'Shopsys') {
 				$bundleChoices[$bundle->getName()] = $bundle->getName();
 			}
 		}
