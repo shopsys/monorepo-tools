@@ -1,4 +1,4 @@
-{% extends '@SS6Generator/base.html.twig' %}
+{% extends '@ShopsysGenerator/base.html.twig' %}
 
 {% block html_body %}
 	<h1>Code Generator</h1>
@@ -20,7 +20,7 @@
 		</div>
 	{% endif %}
 
-	{% form_theme form '@SS6Generator/formTheme.html.twig' %}
+	{% form_theme form '@ShopsysGenerator/formTheme.html.twig' %}
 	{{ form_start(form) }}
 		{{ form_row(form.bundle, { label: 'Generate to bundle' }) }}
 

@@ -29,7 +29,7 @@ class GeneratorController extends Controller {
 			}
 		}
 
-		return $this->render('@SS6Generator/index.html.twig', [
+		return $this->render('@ShopsysGenerator/index.html.twig', [
 			'form' => $form->createView(),
 			'generatorsNames' => $generatorFacade->getGeneratorsNames(),
 			'createdFiles' => $createdFiles,

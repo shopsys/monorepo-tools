@@ -5,7 +5,7 @@ namespace Shopsys\GeneratorBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SS6GeneratorBundle extends Bundle {
+class ShopsysGeneratorBundle extends Bundle {
 
 	public function build(ContainerBuilder $containerBuilder) {
 

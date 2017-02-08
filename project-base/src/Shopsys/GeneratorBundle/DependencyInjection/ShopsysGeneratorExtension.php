@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class SS6GeneratorExtension extends Extension {
+class ShopsysGeneratorExtension extends Extension {
 
 	/**
 	 * {@inheritDoc}

@@ -40,7 +40,7 @@ class AppKernel extends Kernel {
 		if (in_array($this->getEnvironment(), array(Environment::ENVIRONMENT_DEVELOPMENT))) {
 			$bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 			$bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-			$bundles[] = new Shopsys\GeneratorBundle\SS6GeneratorBundle();
+			$bundles[] = new Shopsys\GeneratorBundle\ShopsysGeneratorBundle();
 			$bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
 			$bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
 		}
