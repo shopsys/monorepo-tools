@@ -13,7 +13,7 @@ class GenerateGruntfileCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:generate:gruntfile')
+			->setName('shopsys:generate:gruntfile')
 			->setDescription('Generate Gruntfile.js by domain settings');
 	}
 

@@ -16,7 +16,7 @@ class RecalculationsCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:recalculations')
+			->setName('shopsys:recalculations')
 			->setDescription('Run all recalculations.');
 	}
 

@@ -14,7 +14,7 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:performance-data')
+			->setName('shopsys:performance-data')
 			->setDescription('Import performance data to test db. Demo and base data fixtures must be imported first.');
 	}
 

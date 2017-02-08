@@ -23,7 +23,7 @@ class ImageDemoCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:image:demo')
+			->setName('shopsys:image:demo')
 			->setDescription('Download demo images');
 	}
 

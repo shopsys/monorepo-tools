@@ -11,7 +11,7 @@ class GenerateErrorPagesCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:error-page:generate-all')
+			->setName('shopsys:error-page:generate-all')
 			->setDescription('Generates all error pages for production.');
 	}
 

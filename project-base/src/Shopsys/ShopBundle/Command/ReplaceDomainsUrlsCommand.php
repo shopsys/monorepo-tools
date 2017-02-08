@@ -13,7 +13,7 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:domains-urls:replace')
+			->setName('shopsys:domains-urls:replace')
 			->setDescription('Replace domains urls in database by urls in domains config');
 	}
 

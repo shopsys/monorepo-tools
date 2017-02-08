@@ -13,7 +13,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:create-directories')
+			->setName('shopsys:create-directories')
 			->setDescription('Create application directories for locks, docs, content, images, uploaded files, etc.');
 	}
 

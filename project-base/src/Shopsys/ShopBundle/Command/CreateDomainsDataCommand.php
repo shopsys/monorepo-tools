@@ -14,7 +14,7 @@ class CreateDomainsDataCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:domains-data:create')
+			->setName('shopsys:domains-data:create')
 			->setDescription('Create new domains data');
 	}
 

@@ -22,7 +22,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:translation:replace-source')
+			->setName('shopsys:translation:replace-source')
 			->setDescription('Replace translation sources to translated texts in target locale. To be used after translation:extract.')
 			->setHelp('Translation messages from whole project should be extracted first as this tool depends on dumped references.')
 			->addArgument(self::ARG_TRANSLATIONS_DIR, InputArgument::REQUIRED, 'Directory of extracted translations in .po format')

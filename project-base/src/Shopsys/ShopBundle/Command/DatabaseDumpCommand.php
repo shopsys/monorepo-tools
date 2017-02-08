@@ -18,7 +18,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand {
 	 */
 	protected function configure() {
 		$this
-			->setName('ss6:database:dump')
+			->setName('shopsys:database:dump')
 			->setDescription('Dump database')
 			->addArgument(self::ARG_OUTPUT_FILE, InputArgument::REQUIRED, 'Output SQL file')
 			->addOption(self::OPT_PGDUMP_BIN, null, InputOption::VALUE_OPTIONAL, 'Path to pg_dump binary', 'pg_dump');

@@ -627,7 +627,7 @@
 	<target name="test-create-domains-data" description="Create domains data for new domains in tests database">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:domains-data:create" />
+			<arg value="shopsys:domains-data:create" />
 			<arg value="--env=test" />
 		</exec>
 	</target>
@@ -644,12 +644,12 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:schema:create" />
+			<arg value="shopsys:schema:create" />
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:schema:import-default" />
+			<arg value="shopsys:schema:import-default" />
 		</exec>
 	</target>
 
@@ -657,7 +657,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:schema:drop" />
+			<arg value="shopsys:schema:drop" />
 		</exec>
 	</target>
 
@@ -665,7 +665,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:database:dump" />
+			<arg value="shopsys:database:dump" />
 			<arg value="--pgdump-bin=${path.pg_dump.executable}" />
 			<arg value="${path.test.database.dump}" />
 		</exec>
@@ -682,7 +682,7 @@
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures to test database excluding first domain, run ss6:recalculations">
+	<target name="test-db-fixtures-demo-multidomain" description="Load multidomain demo data fixtures to test database excluding first domain, run shopsys:recalculations">
 		<if>
 			<istrue value="${is-multidomain}" />
 			<then>
@@ -696,7 +696,7 @@
 				</exec>
 				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
-					<arg value="ss6:recalculations" />
+					<arg value="shopsys:recalculations" />
 					<arg value="--env=test" />
 				</exec>
 			</then>
@@ -706,7 +706,7 @@
 		</if>
 	</target>
 
-	<target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run ss6:recalculations">
+	<target name="test-db-fixtures-demo-singledomain" description="Load base and demo data fixtures to test database for first domain, run shopsys:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
@@ -718,21 +718,21 @@
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
-			<arg value="ss6:recalculations" />
+			<arg value="shopsys:recalculations" />
 			<arg value="--env=test" />
 		</exec>
 	</target>
 
-	<target name="test-db-fixtures-performance" description="Import performance data to test db. Demo and base data fixtures must be imported first, run ss6:recalculations">
+	<target name="test-db-fixtures-performance" description="Import performance data to test db. Demo and base data fixtures must be imported first, run shopsys:recalculations">
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:performance-data" />
+			<arg value="shopsys:performance-data" />
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:recalculations" />
+			<arg value="shopsys:recalculations" />
 		</exec>
 	</target>
 
@@ -748,7 +748,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:generate:friendly-url" />
+			<arg value="shopsys:generate:friendly-url" />
 		</exec>
 	</target>
 
@@ -756,7 +756,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="--env=test" />
-			<arg value="ss6:domains-urls:replace" />
+			<arg value="shopsys:domains-urls:replace" />
 		</exec>
 	</target>
 

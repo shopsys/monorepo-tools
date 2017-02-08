@@ -11,7 +11,7 @@ class ImportDefaultDatabaseSchemaCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:schema:import-default')
+			->setName('shopsys:schema:import-default')
 			->setDescription('Import database default schema');
 	}
 

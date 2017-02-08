@@ -11,7 +11,7 @@ class CreateDatabaseSchemaCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:schema:create')
+			->setName('shopsys:schema:create')
 			->setDescription('Create database public schema');
 	}
 

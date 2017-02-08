@@ -19,7 +19,7 @@ class CronCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:cron')
+			->setName('shopsys:cron')
 			->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
 			->addOption(self::OPTION_LIST, null, InputOption::VALUE_NONE, 'List all Service commands')
 			->addOption(self::OPTION_MODULE, null, InputOption::VALUE_OPTIONAL, 'Service ID');
@@ -55,7 +55,7 @@ class CronCommand extends ContainerAwareCommand {
 		});
 
 		foreach ($cronModuleConfigs as $cronModuleConfig) {
-			$output->writeln(sprintf('php app/console ss6:cron --module="%s"', $cronModuleConfig->getModuleId()));
+			$output->writeln(sprintf('php app/console shopsys:cron --module="%s"', $cronModuleConfig->getModuleId()));
 		}
 	}
 

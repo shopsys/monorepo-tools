@@ -11,7 +11,7 @@ class GenerateFriendlyUrlCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:generate:friendly-url')
+			->setName('shopsys:generate:friendly-url')
 			->setDescription('Generate friendly urls for supported entities.');
 	}
 

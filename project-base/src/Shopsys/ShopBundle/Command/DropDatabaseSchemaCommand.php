@@ -11,7 +11,7 @@ class DropDatabaseSchemaCommand extends ContainerAwareCommand {
 
 	protected function configure() {
 		$this
-			->setName('ss6:schema:drop')
+			->setName('shopsys:schema:drop')
 			->setDescription('Drop database public schema');
 	}
 
