@@ -66,7 +66,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 * @return \Symfony\Component\DependencyInjection\ContainerInterface
 	 */
 	protected function getContainer() {
-		return $this->getClient()->getContainer()->get('ss6.auto_services.auto_container');
+		return $this->getClient()->getContainer()->get('shopsys.auto_services.auto_container');
 	}
 
 	/**

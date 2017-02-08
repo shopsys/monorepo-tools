@@ -203,7 +203,7 @@ class CartController extends FrontBaseController {
 		} else {
 			// Form errors list in flash message is temporary solution.
 			// We need to determine couse of error when adding product to cart.
-			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
+			$flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
 				t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),
@@ -261,7 +261,7 @@ class CartController extends FrontBaseController {
 		} else {
 			// Form errors list in flash message is temporary solution.
 			// We need to determine couse of error when adding product to cart.
-			$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
+			$flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
 			$formErrors = $this->errorService->getAllErrorsAsArray($form, $flashMessageBag);
 			$this->getFlashMessageSender()->addErrorFlashTwig(
 				t('Unable to add product to cart:<br/><ul><li>{{ errors|raw }}</li></ul>'),

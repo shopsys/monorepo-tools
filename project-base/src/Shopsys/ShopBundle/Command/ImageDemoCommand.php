@@ -35,12 +35,12 @@ class ImageDemoCommand extends ContainerAwareCommand {
 		$this->filesystem = $this->getContainer()->get('filesystem');
 		$this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-		$archiveUrl = $this->getContainer()->getParameter('ss6.demo_images_archive_url');
-		$dqlUrl = $this->getContainer()->getParameter('ss6.demo_images_dql_url');
+		$archiveUrl = $this->getContainer()->getParameter('shopsys.demo_images_archive_url');
+		$dqlUrl = $this->getContainer()->getParameter('shopsys.demo_images_dql_url');
 		$cachePath = $this->getContainer()->getParameter('kernel.cache_dir');
 		$localArchiveFilepath = $cachePath . '/' . 'demoImages.zip';
-		$imagesPath = $this->getContainer()->getParameter('ss6.image_dir');
-		$domainImagesPath = $this->getContainer()->getParameter('ss6.domain_images_dir');
+		$imagesPath = $this->getContainer()->getParameter('shopsys.image_dir');
+		$domainImagesPath = $this->getContainer()->getParameter('shopsys.domain_images_dir');
 		$unpackedDomainImagesPath = $imagesPath . 'domain';
 
 		if ($this->downloadImages($output, $archiveUrl, $localArchiveFilepath)) {

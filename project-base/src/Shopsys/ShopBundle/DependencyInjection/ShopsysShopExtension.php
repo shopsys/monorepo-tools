@@ -16,8 +16,8 @@ class ShopsysShopExtension extends ConfigurableExtension {
 		$loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 		$loader->load('services.yml');
 
-		$container->setParameter('ss6.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
-		$container->setParameter('ss6.router.friendly_url_router_filepath', $config['router']['friendly_url_router_filepath']);
+		$container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
+		$container->setParameter('shopsys.router.friendly_url_router_filepath', $config['router']['friendly_url_router_filepath']);
 	}
 
 }

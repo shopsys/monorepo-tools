@@ -166,7 +166,7 @@ class CustomerController extends FrontBaseController {
 		try {
 			$this->loginAsUserFacade->loginAsRememberedUser($request);
 		} catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
-			$adminFlashMessageSender = $this->get('ss6.shop.component.flash_message.sender.admin');
+			$adminFlashMessageSender = $this->get('shopsys.shop.component.flash_message.sender.admin');
 			/* @var $adminFlashMessageSender \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender */
 			$adminFlashMessageSender->addErrorFlash(t('User not found.'));
 

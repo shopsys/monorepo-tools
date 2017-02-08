@@ -39,7 +39,7 @@ class NewProductTest extends FunctionalTestCase {
 
 		$em2->rollback();
 
-		$flashMessageBag = $client2->getContainer()->get('ss6.shop.component.flash_message.bag.admin');
+		$flashMessageBag = $client2->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
 		/* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
 		$this->assertSame(302, $client2->getResponse()->getStatusCode());

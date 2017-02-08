@@ -30,10 +30,10 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 */
 	public function process(ContainerBuilder $containerBuilder) {
-		$containerClassListDefinition = $containerBuilder->getDefinition('ss6.auto_services.container_class_list');
+		$containerClassListDefinition = $containerBuilder->getDefinition('shopsys.auto_services.container_class_list');
 		$containerClassList = $containerBuilder->resolveServices($containerClassListDefinition);
 		/* @var $containerClassList \Shopsys\AutoServicesBundle\Compiler\ContainerClassList */
-		$autoServicesCollectorDefinition = $containerBuilder->getDefinition('ss6.auto_services.auto_services_collector');
+		$autoServicesCollectorDefinition = $containerBuilder->getDefinition('shopsys.auto_services.auto_services_collector');
 		$autoServicesCollector = $containerBuilder->resolveServices($autoServicesCollectorDefinition);
 		/* @var $autoServicesCollector \Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector */
 
@@ -110,7 +110,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 */
 	private function replaceDefaultServiceContainer(ContainerBuilder $containerBuilder) {
 		foreach ($containerBuilder->getDefinitions() as $serviceId => $definition) {
-			if ($serviceId !== 'ss6.auto_services.auto_container') {
+			if ($serviceId !== 'shopsys.auto_services.auto_container') {
 				$this->replaceDefaultServiceContainerInDefinition($definition);
 			}
 		}
@@ -125,7 +125,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 				$argumentId = (string)$argument;
 				if ($argumentId === 'service_container') {
 					$newArgument = new Reference(
-						'ss6.auto_services.auto_container',
+						'shopsys.auto_services.auto_container',
 						$argument->getInvalidBehavior(),
 						$argument->isStrict()
 					);

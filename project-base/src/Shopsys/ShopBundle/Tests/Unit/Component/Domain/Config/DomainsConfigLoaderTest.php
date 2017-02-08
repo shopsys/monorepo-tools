@@ -9,8 +9,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 class DomainsConfigLoaderTest extends FunctionalTestCase {
 
 	public function testLoadDomainConfigsFromYaml() {
-		$domainsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_config_filepath');
-		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_urls_config_filepath');
+		$domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
+		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
 		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
 		/* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
 
@@ -26,7 +26,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 	public function testLoadDomainConfigsFromYamlConfigFileNotFound() {
 		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
 		/* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
-		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_urls_config_filepath');
+		$domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
 
 		$this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
 		$domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename', $domainsUrlsConfigFilepath);
@@ -35,7 +35,7 @@ class DomainsConfigLoaderTest extends FunctionalTestCase {
 	public function testLoadDomainConfigsFromYamlUrlsConfigFileNotFound() {
 		$domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
 		/* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
-		$domainsConfigFilepath = $this->getContainer()->getParameter('ss6.domain_config_filepath');
+		$domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
 
 		$this->setExpectedException(\Symfony\Component\Filesystem\Exception\FileNotFoundException::class);
 		$domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, 'nonexistentFilename');

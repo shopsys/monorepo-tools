@@ -9,10 +9,10 @@ security:
 
   providers:
     administrators:
-      id: ss6.shop.administrator.security.administrator_user_provider
+      id: shopsys.shop.administrator.security.administrator_user_provider
 
     user_identities:
-      id: ss6.shop.customer.frontend_user_provider
+      id: shopsys.shop.customer.frontend_user_provider
 
   firewalls:
     # see Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
@@ -30,7 +30,7 @@ security:
         csrf_parameter: "admin_login_form[_token]"
       logout:
         path: admin_logout
-        success_handler: ss6.shop.security.admin_logout_handler
+        success_handler: shopsys.shop.security.admin_logout_handler
         csrf_parameter: _csrf_token
         csrf_token_generator: form.csrf_provider
         csrf_token_id: admin_logout
@@ -46,8 +46,8 @@ security:
         username_parameter: "front_login_form[email]"
         password_parameter: "front_login_form[password]"
         csrf_parameter: "front_login_form[_token]"
-        success_handler: ss6.shop.security.customer_login_handler
-        failure_handler: ss6.shop.security.customer_login_handler
+        success_handler: shopsys.shop.security.customer_login_handler
+        failure_handler: shopsys.shop.security.customer_login_handler
         remember_me: true
       remember_me:
         key: "%secret%"
@@ -57,7 +57,7 @@ security:
         remember_me_parameter: "front_login_form[rememberMe]"
       logout:
         path: front_logout
-        success_handler: ss6.shop.security.front_logout_handler
+        success_handler: shopsys.shop.security.front_logout_handler
         csrf_parameter: _csrf_token
         csrf_token_generator: form.csrf_provider
         csrf_token_id: frontend_logout

@@ -15,7 +15,7 @@ parameters:
 services:
 
   controller_resolver:
-    alias: ss6.shop.component.controller.controller_resolver
+    alias: shopsys.shop.component.controller.controller_resolver
 
   doctrine.orm.default_entity_manager:
     class: %doctrine.orm.entity_manager.class%
@@ -37,172 +37,172 @@ services:
 
   # disable original DefaultPhpFileExtractor
   jms_translation.extractor.file.default_php_extractor:
-    alias: ss6.shop.component.translation.php_file_extractor
+    alias: shopsys.shop.component.translation.php_file_extractor
 
   # normalize translation messages during extraction
   jms_translation.extractor_manager:
-    alias: ss6.shop.component.translation.normalizing_extractor_manager
+    alias: shopsys.shop.component.translation.normalizing_extractor_manager
 
   ninja_mutex.adapter:
     class: NinjaMutex\Lock\FlockLock
     arguments:
       - %kernel.root_dir%/lock
 
-  ss6.doctrine.cache_driver.query_cache:
+  shopsys.doctrine.cache_driver.query_cache:
     class: Doctrine\Common\Cache\ChainCache
     arguments:
       -
-        - @ss6.doctrine.cache_driver.query_cache.array
-        - @ss6.shop.component.doctrine.cache.query.permanent_php_file_cache
+        - @shopsys.doctrine.cache_driver.query_cache.array
+        - @shopsys.shop.component.doctrine.cache.query.permanent_php_file_cache
 
-  ss6.doctrine.cache_driver.query_cache.array:
+  shopsys.doctrine.cache_driver.query_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
 
-  ss6.doctrine.cache_driver.metadata_cache:
+  shopsys.doctrine.cache_driver.metadata_cache:
     class: Doctrine\Common\Cache\ChainCache
     arguments:
       -
-        - @ss6.doctrine.cache_driver.metadata_cache.array
-        - @ss6.shop.component.doctrine.cache.metadata.permanent_php_file_cache
+        - @shopsys.doctrine.cache_driver.metadata_cache.array
+        - @shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache
 
-  ss6.doctrine.cache_driver.metadata_cache.array:
+  shopsys.doctrine.cache_driver.metadata_cache.array:
     class: Doctrine\Common\Cache\ArrayCache
 
-  ss6.shop.admin_navigation.menu_factory:
+  shopsys.shop.admin_navigation.menu_factory:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
     arguments:
-      - %ss6.admin_navigation.config_filepath%
+      - %shopsys.admin_navigation.config_filepath%
       - @security.authorization_checker
 
-  ss6.shop.admin_navigation.menu_loader:
+  shopsys.shop.admin_navigation.menu_loader:
     class: Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
 
-  ss6.shop.administrator.security.administrator_user_provider:
+  shopsys.shop.administrator.security.administrator_user_provider:
     class: Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
 
-  ss6.shop.breadcrumb.front_breadcrumb_resolver:
+  shopsys.shop.breadcrumb.front_breadcrumb_resolver:
     class: Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
-    factory_service: ss6.shop.breadcrumb.front_breadcrumb_resolver_factory
+    factory_service: shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory
     factory_method: create
 
-  ss6.shop.breadcrumb.front_breadcrumb_resolver_factory:
+  shopsys.shop.breadcrumb.front_breadcrumb_resolver_factory:
     class: Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbResolverFactory
 
-  ss6.shop.cart.cart_migration_facade:
+  shopsys.shop.cart.cart_migration_facade:
     class: Shopsys\ShopBundle\Model\Cart\CartMigrationFacade
     tags:
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-  ss6.shop.cart.cart_watcher_facade:
+  shopsys.shop.cart.cart_watcher_facade:
     class: Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
     arguments:
-      - @ss6.shop.component.flash_message.sender.front
+      - @shopsys.shop.component.flash_message.sender.front
 
-  ss6.shop.category.category_visibility_repository:
+  shopsys.shop.category.category_visibility_repository:
     class: Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository
     tags:
       # must be ran before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  ss6.shop.component.form.invert_choice_type_extension:
+  shopsys.shop.component.form.invert_choice_type_extension:
     class: Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension
     tags:
       - { name: form.type_extension, alias: choice }
 
-  ss6.shop.component.controller.controller_resolver:
+  shopsys.shop.component.controller.controller_resolver:
     class: Shopsys\ShopBundle\Component\Controller\ControllerResolver
 
-  ss6.shop.component.cron.config.cron_config:
+  shopsys.shop.component.cron.config.cron_config:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfig
-    factory_service: ss6.shop.component.cron.config.cron_config_factory
+    factory_service: shopsys.shop.component.cron.config.cron_config_factory
     factory_method: create
     arguments:
-      - %ss6.cron_config_filepath%
+      - %shopsys.cron_config_filepath%
 
-  ss6.shop.component.cron.config.cron_config_factory:
+  shopsys.shop.component.cron.config.cron_config_factory:
     class: Shopsys\ShopBundle\Component\Cron\Config\CronConfigFactory
 
-  ss6.shop.component.cron.cron_facade:
+  shopsys.shop.component.cron.cron_facade:
     class: Shopsys\ShopBundle\Component\Cron\CronFacade
     arguments:
       - @monolog.logger.cron
 
-  ss6.shop.component.css.css_facade:
+  shopsys.shop.component.css.css_facade:
       class: Shopsys\ShopBundle\Component\Css\CssFacade
       arguments:
-        - %ss6.css_version_filepath%
+        - %shopsys.css_version_filepath%
 
-  ss6.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
+  shopsys.shop.component.doctrine.cache.metadata.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
       arguments:
-        - %ss6.doctrine.metadata_cache_directory_path%
+        - %shopsys.doctrine.metadata_cache_directory_path%
 
-  ss6.shop.component.doctrine.cache.query.permanent_php_file_cache:
+  shopsys.shop.component.doctrine.cache.query.permanent_php_file_cache:
       class: Shopsys\ShopBundle\Component\Doctrine\Cache\PermanentPhpFileCache
       arguments:
-        - %ss6.doctrine.query_cache_directory_path%
+        - %shopsys.doctrine.query_cache_directory_path%
 
-  ss6.shop.component.doctrine.database_schema_facade:
+  shopsys.shop.component.doctrine.database_schema_facade:
       class: Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade
       arguments:
-        - %ss6.default_db_schema_filepath%
+        - %shopsys.default_db_schema_filepath%
 
-  ss6.shop.component.domain:
+  shopsys.shop.component.domain:
     class: Shopsys\ShopBundle\Component\Domain\Domain
-    factory_service: ss6.shop.component.domain.domain_factory
+    factory_service: shopsys.shop.component.domain.domain_factory
     factory_method: create
     arguments:
-      - %ss6.domain_config_filepath%
-      - %ss6.domain_urls_config_filepath%
+      - %shopsys.domain_config_filepath%
+      - %shopsys.domain_urls_config_filepath%
 
-  ss6.shop.component.domain.domain_aware_security_headers_setter:
+  shopsys.shop.component.domain.domain_aware_security_headers_setter:
     class: Shopsys\ShopBundle\Component\Domain\DomainAwareSecurityHeadersSetter
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.component.domain.domain_facade:
+  shopsys.shop.component.domain.domain_facade:
     class: Shopsys\ShopBundle\Component\Domain\DomainFacade
     arguments:
-      - %ss6.domain_images_dir%
+      - %shopsys.domain_images_dir%
 
-  ss6.shop.component.domain.domain_factory:
+  shopsys.shop.component.domain.domain_factory:
     class: Shopsys\ShopBundle\Component\Domain\DomainFactory
 
-  ss6.shop.component.domain.domain_listener:
+  shopsys.shop.component.domain.domain_listener:
     class: Shopsys\ShopBundle\Component\Domain\DomainListener
     tags:
       - { name: kernel.event_subscriber }
 
-  ss6.shop.component.domain.domain_service:
+  shopsys.shop.component.domain.domain_service:
     class: Shopsys\ShopBundle\Component\Domain\DomainService
     arguments:
       - @monolog.logger
 
-  ss6.shop.component.error.error_pages_facade:
+  shopsys.shop.component.error.error_pages_facade:
     class: Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
     arguments:
-      - %ss6.error_pages_dir%
+      - %shopsys.error_pages_dir%
 
-  ss6.shop.component.error.exception_listener:
+  shopsys.shop.component.error.exception_listener:
     class: Shopsys\ShopBundle\Component\Error\ExceptionListener
     tags:
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  ss6.shop.component.error.reporting.error_reporting_from_last_hour_cron_module:
+  shopsys.shop.component.error.reporting.error_reporting_from_last_hour_cron_module:
     class: Shopsys\ShopBundle\Component\Error\Reporting\ErrorReportingFromLastHourCronModule
     arguments:
       - %email_for_error_reporting%
 
-  ss6.shop.component.error.reporting.log_error_reporting_facade:
+  shopsys.shop.component.error.reporting.log_error_reporting_facade:
     class: Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
     arguments:
       - %kernel.logs_dir%
 
-  ss6.shop.component.file_upload:
+  shopsys.shop.component.file_upload:
     class: Shopsys\ShopBundle\Component\FileUpload\FileUpload
-    arguments: [%kernel.cache_dir%, %ss6.uploaded_file_dir%, %ss6.image_dir%]
+    arguments: [%kernel.cache_dir%, %shopsys.uploaded_file_dir%, %shopsys.image_dir%]
 
-  ss6.shop.component.file_upload.doctrine_listener:
+  shopsys.shop.component.file_upload.doctrine_listener:
     class: Shopsys\ShopBundle\Component\FileUpload\DoctrineListener
     tags:
       - { name: doctrine.event_listener, event: postPersist }
@@ -210,83 +210,83 @@ services:
       - { name: doctrine.event_listener, event: prePersist }
       - { name: doctrine.event_listener, event: preUpdate }
 
-  ss6.shop.component.flash_message.bag.admin:
+  shopsys.shop.component.flash_message.bag.admin:
     class: Shopsys\ShopBundle\Component\FlashMessage\Bag
     arguments: ['admin']
 
-  ss6.shop.component.flash_message.bag.front:
+  shopsys.shop.component.flash_message.bag.front:
     class: Shopsys\ShopBundle\Component\FlashMessage\Bag
     arguments: ['front']
 
-  ss6.shop.component.flash_message.sender.admin:
+  shopsys.shop.component.flash_message.sender.admin:
     class: Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
     arguments:
-      - @ss6.shop.component.flash_message.bag.admin
+      - @shopsys.shop.component.flash_message.bag.admin
 
-  ss6.shop.component.flash_message.sender.front:
+  shopsys.shop.component.flash_message.sender.front:
     class: Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
     arguments:
-      - @ss6.shop.component.flash_message.bag.front
+      - @shopsys.shop.component.flash_message.bag.front
 
-  ss6.shop.component.form.multiple_form_setting:
+  shopsys.shop.component.form.multiple_form_setting:
     class: Shopsys\ShopBundle\Component\Form\MultipleFormSetting
 
-  ss6.shop.component.image.directory_structure_creator:
+  shopsys.shop.component.image.directory_structure_creator:
     class: Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator
     arguments:
-      - %ss6.image_dir%
-      - %ss6.domain_images_dir%
+      - %shopsys.image_dir%
+      - %shopsys.domain_images_dir%
 
-  ss6.shop.component.image.image_config:
+  shopsys.shop.component.image.image_config:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfig
-    factory_service: ss6.shop.component.image.image_config_loader
+    factory_service: shopsys.shop.component.image.image_config_loader
     factory_method: loadFromYaml
     arguments:
-      - %ss6.image_config_filepath%
+      - %shopsys.image_config_filepath%
 
-  ss6.shop.component.image.image_config_loader:
+  shopsys.shop.component.image.image_config_loader:
     class: Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader
 
-  ss6.shop.component.image.image_delete_doctrine_listener:
+  shopsys.shop.component.image.image_delete_doctrine_listener:
     class: Shopsys\ShopBundle\Component\Image\ImageDeleteDoctrineListener
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
-  ss6.shop.component.image.image_facade:
+  shopsys.shop.component.image.image_facade:
     class: Shopsys\ShopBundle\Component\Image\ImageFacade
-    arguments: [%ss6.image_url_prefix%]
+    arguments: [%shopsys.image_url_prefix%]
 
-  ss6.shop.component.image.image_locator:
+  shopsys.shop.component.image.image_locator:
     class: Shopsys\ShopBundle\Component\Image\ImageLocator
-    arguments: [%ss6.image_dir%]
+    arguments: [%shopsys.image_dir%]
 
-  ss6.shop.component.image.processing.image_manager:
+  shopsys.shop.component.image.processing.image_manager:
     class: Intervention\Image\ImageManager
     arguments:
       - [driver: 'gd']
 
-  ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
+  shopsys.shop.component.javascript.compiler.constant.js_constant_compiler_pass:
     class: Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass
 
-  ss6.shop.component.javascript.compiler.js_compiler:
+  shopsys.shop.component.javascript.compiler.js_compiler:
     class: Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler
     arguments:
       -
-        - @ss6.shop.component.javascript.compiler.translator.js_translator_compiler_pass
-        - @ss6.shop.component.javascript.compiler.constant.js_constant_compiler_pass
+        - @shopsys.shop.component.javascript.compiler.translator.js_translator_compiler_pass
+        - @shopsys.shop.component.javascript.compiler.constant.js_constant_compiler_pass
 
-  ss6.shop.component.javascript.compiler.translator.js_translator_compiler_pass:
+  shopsys.shop.component.javascript.compiler.translator.js_translator_compiler_pass:
     class: Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass
 
-  ss6.shop.component.javascript.parser.translator.js_translator_call_parser:
+  shopsys.shop.component.javascript.parser.translator.js_translator_call_parser:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
-    factory_service: ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory
+    factory_service: shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory
     factory_method: create
 
-  ss6.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
+  shopsys.shop.component.javascript.parser.translator.js_translator_call_parser_factory:
     class: Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory
 
-  ss6.shop.component.log.slow_log_facade:
+  shopsys.shop.component.log.slow_log_facade:
     class: Shopsys\ShopBundle\Component\Log\SlowLogFacade
     arguments:
       - @monolog.logger.slow
@@ -294,231 +294,231 @@ services:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.terminate, method: onKernelTerminate }
 
-  ss6.shop.component.request.transactional_master_request_service:
+  shopsys.shop.component.request.transactional_master_request_service:
     class: Shopsys\ShopBundle\Component\Request\TransactionalMasterRequestService
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
-  ss6.shop.component.sitemap.sitemap_dumper_factory:
+  shopsys.shop.component.sitemap.sitemap_dumper_factory:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory
     arguments:
       - @event_dispatcher
 
-  ss6.shop.component.sitemap.sitemap_facade:
+  shopsys.shop.component.sitemap.sitemap_facade:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
     arguments:
-      - %ss6.sitemaps_dir%
-      - %ss6.sitemaps_url_prefix%
+      - %shopsys.sitemaps_dir%
+      - %shopsys.sitemaps_url_prefix%
 
-  ss6.shop.component.sitemap.sitemap_listener:
+  shopsys.shop.component.sitemap.sitemap_listener:
     class: Shopsys\ShopBundle\Component\Sitemap\SitemapListener
     tags:
       - { name: presta.sitemap.listener }
 
-  ss6.shop.component.translation.normalizing_extractor_manager:
+  shopsys.shop.component.translation.normalizing_extractor_manager:
     class: Shopsys\ShopBundle\Component\Translation\NormalizingExtractorManager
     arguments:
       - @jms_translation.extractor.file_extractor
       - @logger
 
-  ss6.shop.component.translation.js_file_extractor:
+  shopsys.shop.component.translation.js_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\JsFileExtractor
     tags:
       - { name: jms_translation.file_visitor }
 
-  ss6.shop.component.translation.php_file_extractor:
+  shopsys.shop.component.translation.php_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
-    factory_service: ss6.shop.component.translation.php_file_extractor_factory
+    factory_service: shopsys.shop.component.translation.php_file_extractor_factory
     factory_method: create
     tags:
       - { name: jms_translation.file_visitor }
 
-  ss6.shop.component.translation.php_file_extractor_factory:
+  shopsys.shop.component.translation.php_file_extractor_factory:
     class: Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory
 
-  ss6.shop.component.translation.constraint_message_extractor:
+  shopsys.shop.component.translation.constraint_message_extractor:
     class: Shopsys\ShopBundle\Component\Translation\ConstraintMessageExtractor
     tags:
       - { name: jms_translation.file_visitor }
 
-  ss6.shop.component.translation.admin_menu_yaml_file_extractor:
+  shopsys.shop.component.translation.admin_menu_yaml_file_extractor:
     class: Shopsys\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor
     arguments:
-      - %ss6.admin_navigation.config_filepath%
+      - %shopsys.admin_navigation.config_filepath%
     tags:
       - { name: jms_translation.file_visitor }
 
-  ss6.shop.component.translation.po_dumper:
+  shopsys.shop.component.translation.po_dumper:
     class: Shopsys\ShopBundle\Component\Translation\PoDumper
     tags:
       - { name: jms_translation.dumper, format: po }
 
-  ss6.shop.component.translation.translator:
+  shopsys.shop.component.translation.translator:
     class: Shopsys\ShopBundle\Component\Translation\Translator
     decorates: translator
     arguments:
-      - @ss6.shop.component.translation.translator.inner
-      - @ss6.shop.component.translation.translator.inner
-      - @ss6.shop.component.translation.identity_translator
+      - @shopsys.shop.component.translation.translator.inner
+      - @shopsys.shop.component.translation.translator.inner
+      - @shopsys.shop.component.translation.identity_translator
 
-  ss6.shop.component.translation.identity_translator:
+  shopsys.shop.component.translation.identity_translator:
     class: Symfony\Component\Translation\IdentityTranslator
 
-  ss6.shop.component.uploaded_file.config.uploaded_file_config:
+  shopsys.shop.component.uploaded_file.config.uploaded_file_config:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
-    factory_service: ss6.shop.component.uploaded_file.config.uploaded_file_config_loader
+    factory_service: shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader
     factory_method: loadFromYaml
     arguments:
-      - %ss6.uploaded_file_config_filepath%
+      - %shopsys.uploaded_file_config_filepath%
 
-  ss6.shop.component.uploaded_file.config.uploaded_file_config_loader:
+  shopsys.shop.component.uploaded_file.config.uploaded_file_config_loader:
     class: Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader
 
-  ss6.shop.component.uploaded_file.uploaded_file_delete_doctrine_listener:
+  shopsys.shop.component.uploaded_file.uploaded_file_delete_doctrine_listener:
     class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileDeleteDoctrineListener
     tags:
       - { name: doctrine.event_listener, event: preRemove }
 
-  ss6.shop.component.uploaded_file.uploaded_file_locator:
+  shopsys.shop.component.uploaded_file.uploaded_file_locator:
     class: Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
     arguments:
-      - %ss6.uploaded_file_dir%
-      - %ss6.uploaded_file_url_prefix%
+      - %shopsys.uploaded_file_dir%
+      - %shopsys.uploaded_file_url_prefix%
 
-  ss6.shop.component.validator.constraints.not_selected_domain_to_show:
+  shopsys.shop.component.validator.constraints.not_selected_domain_to_show:
     class: Shopsys\ShopBundle\Component\Constraints\NotSelectedDomainToShowValidator
     tags:
       - { name: validator.constraint_validator, alias: Shopsys\ShopBundle\Component\Constraints\NotSelectedDomainToShowValidator }
 
-  ss6.shop.component.validator.constraints.unique_slugs_on_domains:
+  shopsys.shop.component.validator.constraints.unique_slugs_on_domains:
     class: Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator
     tags:
       - { name: validator.constraint_validator, alias: Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator }
 
-  ss6.shop.cookies.cookies_facade:
+  shopsys.shop.cookies.cookies_facade:
     class: Shopsys\ShopBundle\Model\Cookies\CookiesFacade
     arguments:
       - %kernel.environment%
 
-  ss6.shop.customer.frontend_user_provider:
+  shopsys.shop.customer.frontend_user_provider:
     class: Shopsys\ShopBundle\Model\Customer\FrontendUserProvider
 
-  ss6.shop.data_fixtures.product_data_fixture_csv_reader:
+  shopsys.shop.data_fixtures.product_data_fixture_csv_reader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader
     arguments:
-      - %ss6.data_fixtures.resource_products_filepath%
+      - %shopsys.data_fixtures.resource_products_filepath%
 
-  ss6.shop.data_fixtures.user_data_fixture_loader:
+  shopsys.shop.data_fixtures.user_data_fixture_loader:
     class: Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader
     arguments:
-      - %ss6.data_fixtures.resource_customers_filepath%
+      - %shopsys.data_fixtures.resource_customers_filepath%
 
-  ss6.shop.feed.category.feed_category_loader_facade:
+  shopsys.shop.feed.category.feed_category_loader_facade:
     class: Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
     arguments:
-      - %ss6.heureka_category_feed_url%
-      - %ss6.heureka_category_feed_backup_filepath%
+      - %shopsys.heureka_category_feed_url%
+      - %shopsys.heureka_category_feed_backup_filepath%
 
-  ss6.shop.feed.feed_config_facade:
+  shopsys.shop.feed.feed_config_facade:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
     arguments:
-      - %ss6.feed_url_prefix%
-      - %ss6.feed_dir%
+      - %shopsys.feed_url_prefix%
+      - %shopsys.feed_dir%
 
-  ss6.shop.feed.feed_config_repository:
+  shopsys.shop.feed.feed_config_repository:
     class: Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
     arguments:
-      - @ss6.shop.feed.heureka.heureka_item_repository
-      - @ss6.shop.feed.heureka.heureka_delivery_item_repository
-      - @ss6.shop.feed.zbozi.zbozi_item_repository
+      - @shopsys.shop.feed.heureka.heureka_item_repository
+      - @shopsys.shop.feed.heureka.heureka_delivery_item_repository
+      - @shopsys.shop.feed.zbozi.zbozi_item_repository
 
-  ss6.shop.feed.heureka.heureka_item_repository:
+  shopsys.shop.feed.heureka.heureka_item_repository:
     class: Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItemRepository
 
-  ss6.shop.feed.heureka.heureka_delivery_item_repository:
+  shopsys.shop.feed.heureka.heureka_delivery_item_repository:
     class: Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository
 
-  ss6.shop.feed.zbozi.zbozi_item_repository:
+  shopsys.shop.feed.zbozi.zbozi_item_repository:
     class: Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemRepository
 
-  ss6.shop.http_foundation.response_listener:
+  shopsys.shop.http_foundation.response_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\ResponseListener
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.http_foundation.sub_request_listener:
+  shopsys.shop.http_foundation.sub_request_listener:
     class: Shopsys\ShopBundle\Component\HttpFoundation\SubRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
       - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
-  ss6.shop.localization.custom_date_time_formatter:
+  shopsys.shop.localization.custom_date_time_formatter:
     class: Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
-    factory_service: ss6.shop.localization.custom_date_time_formatter_factory
+    factory_service: shopsys.shop.localization.custom_date_time_formatter_factory
     factory_method: create
 
-  ss6.shop.localization.custom_date_time_formatter_factory:
+  shopsys.shop.localization.custom_date_time_formatter_factory:
     class: Shopsys\ShopBundle\Model\Localization\CustomDateTimeFormatterFactory
 
-  ss6.shop.localization.locale_listener:
+  shopsys.shop.localization.locale_listener:
     class: Shopsys\ShopBundle\Model\Localization\LocalizationListener
     tags:
       - { name: kernel.event_subscriber }
 
-  ss6.shop.localization.number_format_repository:
+  shopsys.shop.localization.number_format_repository:
     class: CommerceGuys\Intl\NumberFormat\NumberFormatRepository
 
-  ss6.shop.localization.translation.translation_edit_facade:
+  shopsys.shop.localization.translation.translation_edit_facade:
     class: Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
     arguments: [%kernel.root_dir%, %kernel.cache_dir%]
 
-  ss6.shop.mail.mailer_service:
+  shopsys.shop.mail.mailer_service:
     class: Shopsys\ShopBundle\Model\Mail\MailerService
     arguments: [@mailer]
 
-  ss6.shop.order.flow:
+  shopsys.shop.order.flow:
     class: Shopsys\ShopBundle\Form\Front\Order\OrderFlow
     parent: craue.form.flow
 
-  ss6.shop.heureka.heureka_facade:
+  shopsys.shop.heureka.heureka_facade:
     class: Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
     arguments:
       - @logger
 
-  ss6.shop.order.order_transport_and_payment_watcher_service:
+  shopsys.shop.order.order_transport_and_payment_watcher_service:
     class: Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
     arguments:
-      - @ss6.shop.component.flash_message.bag.front
+      - @shopsys.shop.component.flash_message.bag.front
 
-  ss6.shop.pricing.input_price_recalculation_scheduler:
+  shopsys.shop.pricing.input_price_recalculation_scheduler:
     class: Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.product.availability.product_availability_recalculator:
+  shopsys.shop.product.availability.product_availability_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator
     tags:
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  ss6.shop.product.bestselling_product.cache_provider:
+  shopsys.shop.product.bestselling_product.cache_provider:
     class: Doctrine\Common\Cache\FilesystemCache
     arguments:
-      - %ss6.bestselling_product.cache_directory_path%
+      - %shopsys.bestselling_product.cache_directory_path%
 
-  ss6.shop.product.bestselling_product.cached_bestselling_product_facade:
+  shopsys.shop.product.bestselling_product.cached_bestselling_product_facade:
     class: Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
     arguments:
-      - @ss6.shop.product.bestselling_product.cache_provider
+      - @shopsys.shop.product.bestselling_product.cache_provider
 
-  ss6.shop.product.pricing.product_price_recalculator:
+  shopsys.shop.product.pricing.product_price_recalculator:
     class: Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
     tags:
       # must be run before ProductVisibilityFacade
       - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 20 }
 
-  ss6.shop.product.product_visibility_facade:
+  shopsys.shop.product.product_visibility_facade:
     class: Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
     tags:
       # must be ran after CategoryVisibilityRepository and ProductPriceRecalculator
@@ -526,73 +526,73 @@ services:
 
   # Define RedicrectController explicitly to prevent creating it on-the-fly
   # when redirecting (it causes unnecessary container rebuild).
-  ss6.shop.redirect_controller:
+  shopsys.shop.redirect_controller:
     class: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     calls:
       - [setContainer, [@service_container]]
 
-  ss6.shop.router.current_domain_router:
+  shopsys.shop.router.current_domain_router:
     class: Shopsys\ShopBundle\Component\Router\CurrentDomainRouter
     tags:
       - { name: router, priority: 70 }
 
-  ss6.shop.router.domain_router_factory:
+  shopsys.shop.router.domain_router_factory:
     class: Shopsys\ShopBundle\Component\Router\DomainRouterFactory
     arguments: [%router.resource%]
 
-  ss6.shop.router.friendly_url.friendly_url_router_factory:
+  shopsys.shop.router.friendly_url.friendly_url_router_factory:
     class: Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
-    arguments: [%ss6.router.friendly_url_router_filepath%]
+    arguments: [%shopsys.router.friendly_url_router_filepath%]
 
-  ss6.shop.router.localized_router_factory:
+  shopsys.shop.router.localized_router_factory:
     class: Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
-    arguments: [%ss6.router.locale_router_filepaths%]
+    arguments: [%shopsys.router.locale_router_filepaths%]
 
-  ss6.shop.router.security.route_csrf_protector:
+  shopsys.shop.router.security.route_csrf_protector:
     class: Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
     arguments:
       - @annotations.reader
     tags:
       - { name: kernel.event_subscriber }
 
-  ss6.shop.security.admin_logout_handler:
+  shopsys.shop.security.admin_logout_handler:
     class: Shopsys\ShopBundle\Model\Security\AdminLogoutHandler
 
-  ss6.shop.security.administrator_login_facade:
+  shopsys.shop.security.administrator_login_facade:
     class: Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
     arguments:
       - @security.token_storage
       - @event_dispatcher
 
-  ss6.shop.security.customer_login_handler:
+  shopsys.shop.security.customer_login_handler:
     class: Shopsys\ShopBundle\Model\Security\CustomerLoginHandler
 
-  ss6.shop.security.filesystem.filemanager_access:
+  shopsys.shop.security.filesystem.filemanager_access:
     class: Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess
     arguments:
-      - %ss6.filemanager_upload_dir%
+      - %shopsys.filemanager_upload_dir%
 
-  ss6.shop.security.front_logout_handler:
+  shopsys.shop.security.front_logout_handler:
     class: Shopsys\ShopBundle\Model\Security\FrontLogoutHandler
 
-  ss6.shop.security.login_as_user_facade:
+  shopsys.shop.security.login_as_user_facade:
     class: Shopsys\ShopBundle\Model\Security\LoginAsUserFacade
     arguments:
       - @security.token_storage
       - @event_dispatcher
 
-  ss6.shop.security.login_listener:
+  shopsys.shop.security.login_listener:
     class: Shopsys\ShopBundle\Model\Security\LoginListener
     tags:
       - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
 
-  ss6.shop.twig.javascript.javascript_compiler_service:
+  shopsys.shop.twig.javascript.javascript_compiler_service:
     class: Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
     arguments:
-      - %ss6.root_dir%
-      - %ss6.web_dir%
-      - %ss6.javascript_sources_dir%
-      - %ss6.javascript_url_prefix%
+      - %shopsys.root_dir%
+      - %shopsys.web_dir%
+      - %shopsys.javascript_sources_dir%
+      - %shopsys.javascript_url_prefix%
 
   twig.stringloader:
     class: Twig_Loader_String

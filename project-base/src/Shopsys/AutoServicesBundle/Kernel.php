@@ -10,7 +10,7 @@ abstract class Kernel extends BaseKernel {
 	 * {@inheritdoc}
 	 */
 	public function getContainer() {
-		return parent::getContainer()->get('ss6.auto_services.auto_container');
+		return parent::getContainer()->get('shopsys.auto_services.auto_container');
 	}
 
 	protected function initializeContainer() {

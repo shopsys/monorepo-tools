@@ -20,7 +20,7 @@ class DomainHelper extends Module {
 		/* @var $webDriver \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
 		/* @var $symfonyHelper \Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
-		$domain = $symfonyHelper->grabServiceFromContainer('ss6.shop.component.domain');
+		$domain = $symfonyHelper->grabServiceFromContainer('shopsys.shop.component.domain');
 		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
 		$domainConfig = $domain->getDomainConfigById(1);

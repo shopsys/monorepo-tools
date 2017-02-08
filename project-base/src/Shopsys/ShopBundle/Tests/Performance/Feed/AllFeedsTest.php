@@ -57,7 +57,7 @@ class AllFeedsTest extends FunctionalTestCase {
 
 		$performanceResultsCsvExporter->exportJmeterCsvReport(
 			$performanceTestSamples,
-			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-feeds.csv'
+			$this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-feeds.csv'
 		);
 
 		$this->assertSamplesAreSuccessful($performanceTestSamples);

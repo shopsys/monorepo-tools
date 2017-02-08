@@ -77,7 +77,7 @@ class MailerSettingExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getName() {
-		return 'ss6.twig.mailer_setting_extension';
+		return 'shopsys.twig.mailer_setting_extension';
 	}
 
 }

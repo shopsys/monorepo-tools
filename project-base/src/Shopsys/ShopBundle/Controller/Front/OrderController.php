@@ -160,7 +160,7 @@ class OrderController extends FrontBaseController {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function indexAction() {
-		$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
+		$flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
 		/* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
 		$cart = $this->cartFacade->getCartOfCurrentCustomer();

@@ -37,7 +37,7 @@ class ControllerCompilerPass implements CompilerPassInterface {
 				$definition = new Definition($controllerClassName);
 				$serviceId = $this->serviceHelper->convertClassNameToServiceId($controllerClassName);
 				if ($this->isContainerAware($controllerClassName)) {
-					$containerReference = new Reference('ss6.auto_services.auto_container');
+					$containerReference = new Reference('shopsys.auto_services.auto_container');
 					$definition->addMethodCall('setContainer', [$containerReference]);
 				}
 				$containerBuilder->setDefinition($serviceId, $definition);

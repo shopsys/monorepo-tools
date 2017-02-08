@@ -27,7 +27,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 1;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
 		$seekItemId = null;
 		$maxResults = PHP_INT_MAX;
@@ -60,7 +60,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = 0;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
 		$seekItemId = null;
 		$maxResults = PHP_INT_MAX;
@@ -91,7 +91,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData->productData->stockQuantity = null;
 		$productEditFacade->edit($product->getId(), $productEditData);
 
-		$heurekaDeliveryItemRepository = $container->get('ss6.shop.feed.heureka.heureka_delivery_item_repository');
+		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
 		$seekItemId = null;
 		$maxResults = PHP_INT_MAX;

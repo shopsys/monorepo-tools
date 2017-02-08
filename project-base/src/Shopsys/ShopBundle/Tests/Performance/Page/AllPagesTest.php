@@ -58,7 +58,7 @@ class AllPagesTest extends FunctionalTestCase {
 			$urlsProvider->getAdminTestableUrlsProviderData(),
 			self::ADMIN_USERNAME,
 			self::ADMIN_PASSWORD,
-			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-admin.csv'
+			$this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-admin.csv'
 		);
 	}
 
@@ -70,7 +70,7 @@ class AllPagesTest extends FunctionalTestCase {
 			$urlsProvider->getFrontTestableUrlsProviderData(),
 			self::FRONT_USERNAME,
 			self::FRONT_PASSWORD,
-			$this->getContainer()->getParameter('ss6.root_dir') . '/build/stats/performance-tests-front.csv'
+			$this->getContainer()->getParameter('shopsys.root_dir') . '/build/stats/performance-tests-front.csv'
 		);
 	}
 

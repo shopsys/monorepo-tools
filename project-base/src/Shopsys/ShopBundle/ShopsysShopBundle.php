@@ -22,7 +22,7 @@ class ShopsysShopBundle extends Bundle {
 	public function boot() {
 		parent::boot();
 
-		$autoContainer = $this->container->get('ss6.auto_services.auto_container');
+		$autoContainer = $this->container->get('shopsys.auto_services.auto_container');
 		/* @var $autoContainer \Shopsys\AutoServicesBundle\Compiler\AutoContainer */
 		$filemanagerAccess = $autoContainer->get(FilemanagerAccess::class);
 		FilemanagerAccess::injectSelf($filemanagerAccess);
