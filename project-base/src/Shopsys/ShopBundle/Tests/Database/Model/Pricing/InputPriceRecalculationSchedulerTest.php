@@ -16,7 +16,7 @@ use Shopsys\ShopBundle\Model\Product\Availability\Availability;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
@@ -66,8 +66,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
@@ -78,7 +78,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$productEditData->productData->price = $inputPrice;
 		$productEditData->productData->vat = $vat;
 
-		return $productEditFacade->create($productEditData);
+		return $productFacade->create($productEditData);
 	}
 
 	/**

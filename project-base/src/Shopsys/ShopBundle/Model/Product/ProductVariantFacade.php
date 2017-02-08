@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculati
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
@@ -20,9 +20,9 @@ class ProductVariantFacade {
 	private $em;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
@@ -56,7 +56,7 @@ class ProductVariantFacade {
 
 	public function __construct(
 		EntityManager $em,
-		ProductEditFacade $productEditFacade,
+		ProductFacade $productFacade,
 		ProductEditDataFactory $productEditDataFactory,
 		ImageFacade $imageFacade,
 		ProductVariantService $productVariantService,
@@ -65,7 +65,7 @@ class ProductVariantFacade {
 		ProductService $productService
 	) {
 		$this->em = $em;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 		$this->productEditDataFactory = $productEditDataFactory;
 		$this->imageFacade = $imageFacade;
 		$this->productVariantService = $productVariantService;
@@ -90,7 +90,7 @@ class ProductVariantFacade {
 			$toFlush = $mainVariant->getVariants();
 			$toFlush[] = $mainVariant;
 			$this->em->flush($toFlush);
-			$this->productEditFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
+			$this->productFacade->setAdditionalDataAfterCreate($mainVariant, $mainVariantEditData);
 			$this->imageFacade->copyImages($mainProduct, $mainVariant);
 		} catch (\Exception $exception) {
 			$this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();

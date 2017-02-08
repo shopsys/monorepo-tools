@@ -24,7 +24,7 @@ use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 use Shopsys\ShopBundle\Twig\ProductExtension;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,9 +47,9 @@ class ProductController extends AdminBaseController {
 	private $gridFactory;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
@@ -105,7 +105,7 @@ class ProductController extends AdminBaseController {
 		CategoryFacade $categoryFacade,
 		ProductMassActionFacade $productMassActionFacade,
 		GridFactory $gridFactory,
-		ProductEditFacade $productEditFacade,
+		ProductFacade $productFacade,
 		ProductDetailFactory $productDetailFactory,
 		ProductEditFormTypeFactory $productEditFormTypeFactory,
 		ProductEditDataFactory $productEditDataFactory,
@@ -120,7 +120,7 @@ class ProductController extends AdminBaseController {
 		$this->categoryFacade = $categoryFacade;
 		$this->productMassActionFacade = $productMassActionFacade;
 		$this->gridFactory = $gridFactory;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 		$this->productDetailFactory = $productDetailFactory;
 		$this->productEditFormTypeFactory = $productEditFormTypeFactory;
 		$this->productEditDataFactory = $productEditDataFactory;
@@ -138,7 +138,7 @@ class ProductController extends AdminBaseController {
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 */
 	public function editAction(Request $request, $id) {
-		$product = $this->productEditFacade->getById($id);
+		$product = $this->productFacade->getById($id);
 
 		$form = $this->createForm($this->productEditFormTypeFactory->create($product));
 		$productEditData = $this->productEditDataFactory->createFromProduct($product);
@@ -147,7 +147,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->productEditFacade->edit($id, $form->getData());
+			$this->productFacade->edit($id, $form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Product <strong>{{ product|productDisplayName }}</strong> modified'),
@@ -175,7 +175,7 @@ class ProductController extends AdminBaseController {
 		];
 
 		try {
-			$productSellingPricesIndexedByDomainId = $this->productEditFacade->getAllProductSellingPricesIndexedByDomainId($product);
+			$productSellingPricesIndexedByDomainId = $this->productFacade->getAllProductSellingPricesIndexedByDomainId($product);
 			$viewParameters['productSellingPricesIndexedByDomainId'] = $productSellingPricesIndexedByDomainId;
 		} catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
 		}
@@ -196,7 +196,7 @@ class ProductController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$product = $this->productEditFacade->create($form->getData());
+			$product = $this->productFacade->create($form->getData());
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Product <strong>{{ product|productDisplayName }}</strong> created'),
@@ -278,9 +278,9 @@ class ProductController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$product = $this->productEditFacade->getById($id);
+			$product = $this->productFacade->getById($id);
 
-			$this->productEditFacade->delete($id);
+			$this->productFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Product <strong>{{ product|productDisplayName }}</strong> deleted'),
@@ -350,7 +350,7 @@ class ProductController extends AdminBaseController {
 			$queryBuilder,
 			'p.id',
 			function ($row) {
-				$product = $this->productEditFacade->getById($row['p']['id']);
+				$product = $this->productFacade->getById($row['p']['id']);
 				$row['product'] = $product;
 				return $row;
 			}
@@ -384,7 +384,7 @@ class ProductController extends AdminBaseController {
 	 * @param int $productId
 	 */
 	public function visibilityAction($productId) {
-		$product = $this->productEditFacade->getById($productId);
+		$product = $this->productFacade->getById($productId);
 
 		return $this->render('@ShopsysShop/Admin/Content/Product/visibility.html.twig', [
 			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),

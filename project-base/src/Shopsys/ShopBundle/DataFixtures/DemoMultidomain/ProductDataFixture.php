@@ -12,7 +12,7 @@ use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -28,8 +28,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		/* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 		$productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
 		/* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
-		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
 		$onlyForFirstDomain = false;
 		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade, $onlyForFirstDomain);
@@ -37,7 +37,7 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 		$csvRows = $productDataFixtureCsvReader->getProductDataFixtureCsvRows();
 		foreach ($csvRows as $row) {
 			$productCatnum = $productDataFixtureLoader->getCatnumFromRow($row);
-			$product = $productEditFacade->getOneByCatnumExcludeMainVariants($productCatnum);
+			$product = $productFacade->getOneByCatnumExcludeMainVariants($productCatnum);
 			$this->editProduct($product, $row);
 
 			if ($product->isVariant() && $product->getCatnum() === $product->getMainVariant()->getCatnum()) {
@@ -53,14 +53,14 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	private function editProduct(Product $product, array $row) {
 		$productEditDataFactory = $this->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
 		/* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 	}
 
 	/**

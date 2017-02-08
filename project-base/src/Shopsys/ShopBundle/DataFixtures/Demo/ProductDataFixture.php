@@ -10,7 +10,7 @@ use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
@@ -55,10 +55,10 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private function createProduct($referenceName, ProductEditData $productEditData) {
-		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
-		$product = $productEditFacade->create($productEditData);
+		$product = $productFacade->create($productEditData);
 
 		$this->addReference($referenceName, $product);
 
