@@ -31,8 +31,8 @@
 	<property name="path.phpmd.ignored" value="_generated"/>
 	<property name="path.phpmd.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetMD.xml"/>
 	<property name="path.phpstorm.inspect.sh" value="/opt/PhpStorm-145.1616.3/bin/inspect.sh"/>
-	<property name="path.phpstorm.project" value="${path.build}/phpstorm/ShopSys6/"/>
-	<property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys6/.idea/inspectionProfiles/Project_Default.xml"/>
+	<property name="path.phpstorm.project" value="${path.build}/phpstorm/ShopSys/"/>
+	<property name="path.phpstorm.project.inspection-profile" value="${path.build}/phpstorm/ShopSys/.idea/inspectionProfiles/Project_Default.xml"/>
 	<property name="path.phpstorm.system" value="/home/jenkins/.PhpStorm2016.1/system"/>
 	<property name="path.phpstorm-inspect.executable" value="${path.bin}/phpstorm-inspect"/>
 	<property name="path.phpunit.configuration" value="${path.app}/phpunit.xml"/>
