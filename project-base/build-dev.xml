@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys6-dev" default="build-demo-ci">
+<project name="ShopSys Framework (dev)" default="build-demo-ci">
 
 	<target name="build-dev" depends="clean,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,dump-translations-front-and-common,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt,error-pages-generate,checks-diff" description="Build application for development"/>
 	<target name="build-dev-quick" depends="clean,composer-dev,npm,dirs-create,domains-urls-check,assetic,assets,db-migrations,create-domains-data,generate-friendly-urls,replace-domains-urls,grunt" description="Quick build application for development"/>

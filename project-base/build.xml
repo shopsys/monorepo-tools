@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ShopSys6" default="build">
+<project name="ShopSys Framework" default="build">
 
 	<property file="${project.basedir}/build/build.local.properties" />
 
