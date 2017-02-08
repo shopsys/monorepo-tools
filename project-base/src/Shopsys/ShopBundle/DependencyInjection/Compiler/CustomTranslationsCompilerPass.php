@@ -9,7 +9,7 @@ use Symfony\Component\Finder\Finder;
 
 class CustomTranslationsCompilerPass implements CompilerPassInterface {
 
-	const CUSTOM_TRANSLATIONS_DIR = 'src/SS6/ShopBundle/Resources/translations/custom';
+	const CUSTOM_TRANSLATIONS_DIR = 'src/Shopsys/ShopBundle/Resources/translations/custom';
 
 	/**
 	 * @see \Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension::registerTranslatorConfiguration()

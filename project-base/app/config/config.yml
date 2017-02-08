@@ -32,13 +32,13 @@ doctrine:
     mappings:
       SS6ShopBundle:
         type: annotation
-        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Model
+        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Model
         alias: SS6ShopBundle
         prefix: Shopsys\ShopBundle\Model
         is_bundle: false
       SS6ShopBundleComponent:
         type: annotation
-        dir: %kernel.root_dir%/../src/SS6/ShopBundle/Component
+        dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Component
         alias: SS6ShopBundleComponent
         prefix: Shopsys\ShopBundle\Component
         is_bundle: false
@@ -46,7 +46,7 @@ doctrine:
       GroupedScalarHydrator: \Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator
 
 doctrine_migrations:
-    dir_name: "%kernel.root_dir%/../src/SS6/ShopBundle/Migrations"
+    dir_name: "%kernel.root_dir%/../src/Shopsys/ShopBundle/Migrations"
     namespace: Shopsys\ShopBundle\Migrations
     table_name: migrations
     name: Migrations
@@ -129,9 +129,9 @@ prezent_doctrine_translatable:
 ss6_shop:
   router:
     locale_router_filepaths:
-      cs: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_cs.yml
-      en: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_front_en.yml
-    friendly_url_router_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/routing_friendly_url.yml
+      cs: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_cs.yml
+      en: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_front_en.yml
+    friendly_url_router_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/routing_friendly_url.yml
 
 stof_doctrine_extensions:
   orm:

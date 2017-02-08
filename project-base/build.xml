@@ -26,7 +26,7 @@
 	<property name="path.phpcs-fixer.executable" value="${path.bin}/php-cs-fixer"/>
 	<property name="path.phpcs-fixer.configuration" value="${path.build}/phpcs-fixer.php_cs"/>
 	<property name="path.phplint.executable" value="${path.bin}/parallel-lint"/>
-	<property name="path.phplint.ignored" value="${path.src}/SS6/ShopBundle/Tests/Test/Codeception/_generated"/>
+	<property name="path.phplint.ignored" value="${path.src}/Shopsys/ShopBundle/Tests/Test/Codeception/_generated"/>
 	<property name="path.phpmd.executable" value="${path.bin}/phpmd"/>
 	<property name="path.phpmd.ignored" value="_generated"/>
 	<property name="path.phpmd.ruleset" value="${path.vendor}/shopsys/coding-standards/rulesetMD.xml"/>
@@ -40,7 +40,7 @@
 	<property name="path.root" value="."/>
 	<property name="path.src" value="${path.root}/src"/>
 	<property name="path.test.database.dump" value="${path.app}/cache/test-db-dump.sql"/>
-	<property name="path.translations.custom" value="${path.root}/src/SS6/ShopBundle/Resources/translations/custom"/>
+	<property name="path.translations.custom" value="${path.root}/src/Shopsys/ShopBundle/Resources/translations/custom"/>
 	<property name="path.vendor" value="${path.root}/vendor"/>
 	<property name="path.web" value="${path.root}/web"/>
 	<property name="path.web.scripts" value="${path.web}/assets/scripts"/>
@@ -179,7 +179,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
@@ -192,7 +192,7 @@
 				<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 					<arg value="app/console" />
 					<arg value="doctrine:fixtures:load" />
-					<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+					<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
 					<arg value="--append" />
 					<arg value="--no-interaction" />
 				</exec>
@@ -211,8 +211,8 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
@@ -280,15 +280,15 @@
 			<arg value="app/console" />
 			<arg value="translation:extract" />
 			<arg value="--bundle=SS6ShopBundle" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Grid" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Twig" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Twig" />
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--exclude-dir=admin" />

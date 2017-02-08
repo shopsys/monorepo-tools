@@ -1,11 +1,11 @@
 parameters:
-  ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/admin_menu.yml
+  ss6.admin_navigation.config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/admin_menu.yml
   ss6.bestselling_product.cache_directory_path: %kernel.cache_dir%/bestselling_product
-  ss6.cron_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/cron.yml
+  ss6.cron_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/cron.yml
   ss6.css_version_filepath: %ss6.web_dir%/assets/cssVersion
   ss6.data_fixtures.resource_customers_filepath: %ss6.data_fixtures.resources_dir%/demo-data-customers.csv
   ss6.data_fixtures.resource_products_filepath: %ss6.data_fixtures.resources_dir%/demo-data-products.csv
-  ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/DataFixtures/resources
+  ss6.data_fixtures.resources_dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/DataFixtures/resources
   ss6.default_db_schema_filepath: %ss6.resources_dir%/database/schema.sql
   ss6.demo_images_archive_url: https://images.shopsysdemo.com/demoImages.v9.zip
   ss6.demo_images_dql_url: https://images.shopsysdemo.com/demoImagesSql.v7.sql
@@ -23,17 +23,17 @@ parameters:
   ss6.front_design_image_url_prefix: /assets/frontend/images/
   ss6.heureka_category_feed_backup_filepath: %ss6.resources_dir%/feeds/heureka-category-feed-backup.xml
   ss6.heureka_category_feed_url: http://www.heureka.cz/direct/xml-export/shops/heureka-sekce.xml
-  ss6.image_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/images.yml
+  ss6.image_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/images.yml
   ss6.image_dir: %ss6.web_dir%%ss6.image_url_prefix%
   ss6.image_url_prefix: /content/images/
   ss6.javascript_sources_dir: %ss6.resources_dir%/scripts
   ss6.javascript_url_prefix: /assets/scripts/
-  ss6.resources_dir: %kernel.root_dir%/../src/SS6/ShopBundle/Resources
+  ss6.resources_dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources
   ss6.root_dir: %kernel.root_dir%/..
   ss6.sitemaps_dir: %ss6.web_dir%%ss6.sitemaps_url_prefix%
   ss6.sitemaps_url_prefix: /content/sitemaps
-  ss6.styles_dir: src/SS6/ShopBundle/Resources/styles
-  ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/SS6/ShopBundle/Resources/config/uploaded_files.yml
+  ss6.styles_dir: src/Shopsys/ShopBundle/Resources/styles
+  ss6.uploaded_file_config_filepath: %kernel.root_dir%/../src/Shopsys/ShopBundle/Resources/config/uploaded_files.yml
   ss6.uploaded_file_dir: %ss6.web_dir%%ss6.uploaded_file_url_prefix%
   ss6.uploaded_file_url_prefix: /content/uploadedFiles/
   ss6.web_dir: %kernel.root_dir%/../web

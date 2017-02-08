@@ -91,7 +91,7 @@ class TranslationEditFacade {
 	 */
 	private function getResourceFilepath($domain, $locale) {
 		return $this->rootDir
-			. '/../src/SS6/ShopBundle/Resources/translations/custom/'
+			. '/../src/Shopsys/ShopBundle/Resources/translations/custom/'
 			. $domain . '.' . $locale . '.po';
 	}
 

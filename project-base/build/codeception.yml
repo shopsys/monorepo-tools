@@ -1,10 +1,10 @@
 namespace: Shopsys\ShopBundle\Tests\Test\Codeception
 actor: Tester
 paths:
-  tests: ../src/SS6/ShopBundle/Tests/Acceptance
+  tests: ../src/Shopsys/ShopBundle/Tests/Acceptance
   log: ../app/logs/codeception
-  data: ../src/SS6/ShopBundle/Tests/Acceptance/data
-  support: ../src/SS6/ShopBundle/Tests/Test/Codeception
+  data: ../src/Shopsys/ShopBundle/Tests/Acceptance/data
+  support: ../src/Shopsys/ShopBundle/Tests/Test/Codeception
 settings:
   bootstrap: _bootstrap.php
   colors: true

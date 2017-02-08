@@ -28,7 +28,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 			->addArgument(self::ARG_TRANSLATIONS_DIR, InputArgument::REQUIRED, 'Directory of extracted translations in .po format')
 			->addArgument(self::ARG_SOURCE_CODE_DIR, InputArgument::REQUIRED, 'Directory searched for replacements in source code')
 			->addArgument(self::ARG_TARGET_LOCALE, InputArgument::REQUIRED, 'Locale of translations to replace original sources')
-			->addUsage('./src/SS6/ShopBundle/Resources/translations ./src/SS6/ShopBundle en');
+			->addUsage('./src/Shopsys/ShopBundle/Resources/translations ./src/Shopsys/ShopBundle en');
 	}
 
 	/**

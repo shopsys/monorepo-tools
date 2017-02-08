@@ -177,9 +177,9 @@ module.exports = function(grunt) {
 
 		webfont: {
 			admin: {
-				src: 'src/SS6/ShopBundle/Resources/svg/admin/*.svg',
+				src: 'src/Shopsys/ShopBundle/Resources/svg/admin/*.svg',
 				dest: 'web/assets/admin/fonts',
-				destCss: 'src/SS6/ShopBundle/Resources/styles/admin/libs/',
+				destCss: 'src/Shopsys/ShopBundle/Resources/styles/admin/libs/',
 				options: {
 					autoHint: false,
 					font: 'svg',
@@ -199,9 +199,9 @@ module.exports = function(grunt) {
 				}
 			},
 			frontend: {
-				src: 'src/SS6/ShopBundle/Resources/svg/front/*.svg',
+				src: 'src/Shopsys/ShopBundle/Resources/svg/front/*.svg',
 				dest: 'web/assets/frontend/fonts',
-				destCss: 'src/SS6/ShopBundle/Resources/styles/front/common/libs/',
+				destCss: 'src/Shopsys/ShopBundle/Resources/styles/front/common/libs/',
 				options: {
 					autoHint: false,
 					font: 'svg',
@@ -248,7 +248,7 @@ module.exports = function(grunt) {
 				}
 			},
 			adminWebfont: {
-				files: ['src/SS6/ShopBundle/Resources/svg/admin/*.svg'],
+				files: ['src/Shopsys/ShopBundle/Resources/svg/admin/*.svg'],
 				tasks: ['webfont:admin'],
 				options: {
 					livereload: true
@@ -262,7 +262,7 @@ module.exports = function(grunt) {
 				}
 			},
 			frontendWebfont: {
-				files: ['src/SS6/ShopBundle/Resources/svg/front/*.svg'],
+				files: ['src/Shopsys/ShopBundle/Resources/svg/front/*.svg'],
 				tasks: ['webfont:frontend']
 			},
 			{% for domain in domains -%}
@@ -302,7 +302,7 @@ module.exports = function(grunt) {
 				files: ['web/assets/admin/styles/*.css', 'web/assets/frontent/styles/*.css']
 			},
 			twig: {
-				files: ['src/SS6/ShopBundle/Resources/views/**/*.twig'],
+				files: ['src/Shopsys/ShopBundle/Resources/views/**/*.twig'],
 				tasks: [],
 				options: {
 					livereload: true,

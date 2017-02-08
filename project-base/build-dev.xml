@@ -57,16 +57,16 @@
 			<arg value="app/console" />
 			<arg value="translation:extract" />
 			<arg value="--bundle=SS6ShopBundle" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Component/Grid" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Controller" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Form" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Model" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/config" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/views" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Resources/scripts" />
-			<arg value="--dir=${path.src}/SS6/ShopBundle/Twig" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Controller" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Form" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Model" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/config" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/views" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Resources/scripts" />
+			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Twig" />
 			<arg value="--exclude-dir=admin/plugins" />
 			<arg value="--exclude-dir=frontend/plugins" />
 			<arg value="--output-format=po" />
@@ -103,7 +103,7 @@
 
 				<!-- ignore Codeception generated class for running acceptance tests -->
 				<linecontainsregexp>
-					<regexp pattern="^(?!src/SS6/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
+					<regexp pattern="^(?!src/Shopsys/ShopBundle/Tests/Test/Codeception/_generated/AcceptanceTesterActions.php).+$" />
 				</linecontainsregexp>
 			</filterchain>
 		</property>
@@ -676,7 +676,7 @@
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
@@ -690,7 +690,7 @@
 					<arg value="app/console" />
 					<arg value="--env=test" />
 					<arg value="doctrine:fixtures:load" />
-					<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/DemoMultidomain" />
+					<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/DemoMultidomain" />
 					<arg value="--append" />
 					<arg value="--no-interaction" />
 				</exec>
@@ -711,8 +711,8 @@
 			<arg value="app/console" />
 			<arg value="--env=test" />
 			<arg value="doctrine:fixtures:load" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Base" />
-			<arg value="--fixtures=${path.src}/SS6/ShopBundle/DataFixtures/Demo" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Base" />
+			<arg value="--fixtures=${path.src}/Shopsys/ShopBundle/DataFixtures/Demo" />
 			<arg value="--append" />
 			<arg value="--no-interaction" />
 		</exec>
