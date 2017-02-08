@@ -1,13 +1,13 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.targetBlank = SS6.targetBlank || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.targetBlank = Shopsys.targetBlank || {};
 
-	SS6.targetBlank.init = function ($container) {
-		$container.filterAllNodes('a[target="_blank"]').each(SS6.targetBlank.bind);
+	Shopsys.targetBlank.init = function ($container) {
+		$container.filterAllNodes('a[target="_blank"]').each(Shopsys.targetBlank.bind);
 	};
 
-	SS6.targetBlank.bind = function () {
+	Shopsys.targetBlank.bind = function () {
 		$(this).on('click', function() {
 			var href = $(this).attr('href');
 			window.open(href);
@@ -15,6 +15,6 @@
 		});
 	};
 
-	SS6.register.registerCallback(SS6.targetBlank.init);
+	Shopsys.register.registerCallback(Shopsys.targetBlank.init);
 
 })(jQuery);

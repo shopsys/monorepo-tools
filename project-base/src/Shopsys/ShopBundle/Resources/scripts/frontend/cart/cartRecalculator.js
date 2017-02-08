@@ -1,14 +1,14 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.cartRecalculator = SS6.cartRecalculator || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.cartRecalculator = Shopsys.cartRecalculator || {};
 
-	SS6.cartRecalculator.init = function ($container) {
+	Shopsys.cartRecalculator.init = function ($container) {
 		function reloadWithDelay(delay) {
-			SS6.timeout.setTimeoutAndClearPrevious(
+			Shopsys.timeout.setTimeoutAndClearPrevious(
 				'cartRecalculator',
 				function () {
-					SS6.cartRecalculator.reload();
+					Shopsys.cartRecalculator.reload();
 				},
 				delay
 			);
@@ -31,21 +31,21 @@
 				});
 			})
 			.keydown(function (event) {
-				if (event.keyCode === SS6.keyCodes.ENTER) {
+				if (event.keyCode === Shopsys.keyCodes.ENTER) {
 					reloadWithDelay(0);
 					event.preventDefault();
 				}
 			});
 	};
 
-	SS6.cartRecalculator.reload = function () {
+	Shopsys.cartRecalculator.reload = function () {
 		var formData = $('.js-cart-form').serializeArray();
 		formData.push({
-			name: SS6.constant('Shopsys\\ShopBundle\\Controller\\Front\\CartController::RECALCULATE_ONLY_PARAMETER_NAME'),
+			name: Shopsys.constant('Shopsys\\ShopBundle\\Controller\\Front\\CartController::RECALCULATE_ONLY_PARAMETER_NAME'),
 			value: 1
 		});
 
-		SS6.ajax({
+		Shopsys.ajax({
 			overlayDelay: 0, // show loader immediately to avoid clicking during AJAX request
 			loaderElement: '.js-main-content',
 			url: $('.js-cart-form').attr('action'),
@@ -61,12 +61,12 @@
 				$('.js-main-content').replaceWith($mainContent);
 				$('#js-cart-box').replaceWith($cartBox);
 
-				SS6.register.registerNewContent($mainContent);
-				SS6.register.registerNewContent($cartBox);
+				Shopsys.register.registerNewContent($mainContent);
+				Shopsys.register.registerNewContent($cartBox);
 			}
 		});
 	};
 
-	SS6.register.registerCallback(SS6.cartRecalculator.init);
+	Shopsys.register.registerCallback(Shopsys.cartRecalculator.init);
 
 })(jQuery);

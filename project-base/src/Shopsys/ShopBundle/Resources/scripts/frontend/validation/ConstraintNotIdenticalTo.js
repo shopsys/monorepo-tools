@@ -7,8 +7,8 @@
 		this.validate = function(value) {
 
 			var f = FpJsFormValidator;
-			if (SS6.number.parseNumber(this.value) !== null) {
-				var compareValue = SS6.number.parseNumber(value);
+			if (Shopsys.number.parseNumber(this.value) !== null) {
+				var compareValue = Shopsys.number.parseNumber(value);
 			} else {
 				var compareValue = value;
 			}

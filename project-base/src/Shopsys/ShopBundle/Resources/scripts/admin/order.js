@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.order = SS6.order || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.order = Shopsys.order || {};
 
-	SS6.order.OrderPreview = function ($orderPreview) {
+	Shopsys.order.OrderPreview = function ($orderPreview) {
 		var $previewIcon = $orderPreview.find('.js-order-preview-icon');
 		var $previewBox = $orderPreview.find('.js-order-preview-box');
 		var $previewBoxWindow = $previewBox.find('.js-order-preview-box-window');
@@ -38,7 +38,7 @@
 						$previewBox.show();
 						if (!isLoaded && !isLoading) {
 							isLoading = true;
-							SS6.ajax({
+							Shopsys.ajax({
 								loaderElement: null,
 								url: url,
 								success: onLoadPreview
@@ -57,7 +57,7 @@
 		};
 
 		var showInWindow = function () {
-			SS6.window({
+			Shopsys.window({
 				content: $previewBoxWindow.html(),
 				wide: true
 			});
@@ -74,9 +74,9 @@
 		};
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-order-preview').each(function () {
-			var orderPreview = new SS6.order.OrderPreview($(this));
+			var orderPreview = new Shopsys.order.OrderPreview($(this));
 			orderPreview.init();
 		});
 	});

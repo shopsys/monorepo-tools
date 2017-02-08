@@ -1,19 +1,19 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.fixedBar = SS6.fixedBar || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.fixedBar = Shopsys.fixedBar || {};
 
-	SS6.fixedBar.onSymfonyToolbarShow = function () {
+	Shopsys.fixedBar.onSymfonyToolbarShow = function () {
 		$('.window-fixed-bar').addClass('window-fixed-bar--developer-mode');
 	};
 
-	SS6.fixedBar.onSymfonyToolbarHide = function () {
+	Shopsys.fixedBar.onSymfonyToolbarHide = function () {
 		$('.window-fixed-bar').removeClass('window-fixed-bar--developer-mode');
 	};
 
 	$(document).ready(function () {
-		SS6.symfonyToolbarSupport.registerOnToolbarShow(SS6.fixedBar.onSymfonyToolbarShow);
-		SS6.symfonyToolbarSupport.registerOnToolbarHide(SS6.fixedBar.onSymfonyToolbarHide);
+		Shopsys.symfonyToolbarSupport.registerOnToolbarShow(Shopsys.fixedBar.onSymfonyToolbarShow);
+		Shopsys.symfonyToolbarSupport.registerOnToolbarHide(Shopsys.fixedBar.onSymfonyToolbarHide);
 	});
 
 })(jQuery);

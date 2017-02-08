@@ -1,7 +1,7 @@
 /**
  * Classic tabs component that uses HybridTabs component in single tab mode.
  *
- * @see SS6.HybridTabs
+ * @see Shopsys.HybridTabs
  *
  * == Notes ==
  * - There must be at least one "js-tab-button" for each "js-tab-content".
@@ -24,12 +24,12 @@
  */
 
 (function ($) {
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-tabs').each(function () {
-			var hybridTabs = new SS6.hybridTabs.HybridTabs($(this));
-			hybridTabs.init(SS6.hybridTabs.TABS_MODE_SINGLE);
+			var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
+			hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
 		});
 	});
 

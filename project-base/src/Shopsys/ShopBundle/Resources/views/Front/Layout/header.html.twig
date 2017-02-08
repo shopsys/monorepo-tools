@@ -43,7 +43,7 @@
 					</a>
 				{% else %}
 					<a href="{{ url('front_login') }}"
-						onclick="SS6.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+						onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
 						class="btn-tap__in">
 						<i class="svg svg-user"></i>
 					</a>
@@ -90,7 +90,7 @@
 						<li class="menu-iconic__item">
 							<a
 								href="{{ url('front_login') }}"
-								onclick="SS6.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+								onclick="Shopsys.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
 								class="menu-iconic__item__link"
 							>
 								<i class="svg svg-user"></i>

@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.productList = SS6.productList || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.productList = Shopsys.productList || {};
 
-	SS6.register.registerCallback(function () {
+	Shopsys.register.registerCallback(function () {
 		$('.js-product-list-ordering-mode').click(function () {
 			var cookieName = $(this).data('cookie-name');
 			var orderingName = $(this).data('ordering-mode');
@@ -16,9 +16,9 @@
 	});
 
 	$(document).ready(function () {
-		var ajaxMoreLoader = new SS6.productList.AjaxMoreLoader();
+		var ajaxMoreLoader = new Shopsys.productList.AjaxMoreLoader();
 		ajaxMoreLoader.init();
-		var ajaxFilter = new SS6.productList.AjaxFilter(ajaxMoreLoader);
+		var ajaxFilter = new Shopsys.productList.AjaxFilter(ajaxMoreLoader);
 		ajaxFilter.init();
 	});
 

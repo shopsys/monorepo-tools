@@ -47,7 +47,7 @@
 	{% if isMultiple %}
 		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
-				<a href="#" class="btn" onclick="SS6.productsPicker.close(); return false;">{{ 'Finish the assigning'|trans }}</a>
+				<a href="#" class="btn" onclick="Shopsys.productsPicker.close(); return false;">{{ 'Finish the assigning'|trans }}</a>
 			{% endblock %}
 		{% endembed %}
 	{% endif %}

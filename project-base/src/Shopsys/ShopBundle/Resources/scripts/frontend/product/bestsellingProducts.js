@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.bestsellingProducts = SS6.bestsellingProducts || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.bestsellingProducts = Shopsys.bestsellingProducts || {};
 
-	SS6.bestsellingProducts.init = function () {
+	Shopsys.bestsellingProducts.init = function () {
 		$('.js-bestselling-products-load-more').click(function () {
 			var $loadMoreButton = $(this);
 			var $loadMoreItems = $loadMoreButton.closest('.js-bestselling-products').find('.js-bestselling-product');
@@ -13,7 +13,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.bestsellingProducts.init();
+		Shopsys.bestsellingProducts.init();
 	});
 
 })(jQuery);

@@ -1,17 +1,17 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.newsletterSubscriptionForm = SS6.newsletterSubscriptionForm || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.newsletterSubscriptionForm = Shopsys.newsletterSubscriptionForm || {};
 
 	var subscriptionFormSelector = 'form[name="newsletter_subscription_form"]';
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes(subscriptionFormSelector)
-			.bind('ajaxSumbit', SS6.newsletterSubscriptionForm.ajaxSumbit);
+			.bind('ajaxSumbit', Shopsys.newsletterSubscriptionForm.ajaxSumbit);
 	});
 
-	SS6.newsletterSubscriptionForm.ajaxSumbit = function () {
-		SS6.ajax({
+	Shopsys.newsletterSubscriptionForm.ajaxSumbit = function () {
+		Shopsys.ajax({
 			loaderElement: 'body',
 			url: $(this).attr('action'),
 			method: 'post',
@@ -27,14 +27,14 @@
 		var $newContent = $(subscriptionFormSelector);
 		var $emailInput = $newContent.find('input[name="newsletter_subscription_form[email]"]');
 
-		SS6.register.registerNewContent($newContent);
+		Shopsys.register.registerNewContent($newContent);
 		if ($newContent.data('success')) {
 			$emailInput.val('');
 
-			SS6.window({
-				content: SS6.translator.trans('You have been successfully subscribed to our newsletter.'),
+			Shopsys.window({
+				content: Shopsys.translator.trans('You have been successfully subscribed to our newsletter.'),
 				buttonCancel: true,
-				textCancel: SS6.translator.trans('Close')
+				textCancel: Shopsys.translator.trans('Close')
 			});
 		}
 	};

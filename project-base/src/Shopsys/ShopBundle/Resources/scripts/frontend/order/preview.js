@@ -1,15 +1,15 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.orderPreview = SS6.orderPreview || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.orderPreview = Shopsys.orderPreview || {};
 
-	SS6.orderPreview.init = function ($container) {
+	Shopsys.orderPreview.init = function ($container) {
 		$container
 			.filterAllNodes('.js-order-transport-input, .js-order-payment-input')
-				.change(SS6.orderPreview.loadOrderPreview);
+				.change(Shopsys.orderPreview.loadOrderPreview);
 	};
 
-	SS6.orderPreview.loadOrderPreview = function () {
+	Shopsys.orderPreview.loadOrderPreview = function () {
 		var $orderPreview = $('#js-order-preview');
 		var $checkedTransport = $('.js-order-transport-input:checked');
 		var $checkedPayment = $('.js-order-payment-input:checked');
@@ -22,7 +22,7 @@
 			data['paymentId'] = $checkedPayment.data('id');
 		}
 
-		SS6.ajaxPendingCall('SS6.orderPreview.loadOrderPreview', {
+		Shopsys.ajaxPendingCall('Shopsys.orderPreview.loadOrderPreview', {
 			loaderElement: '#js-order-preview',
 			url: $orderPreview.data('url'),
 			type: 'get',
@@ -33,6 +33,6 @@
 		});
 	};
 
-	SS6.register.registerCallback(SS6.orderPreview.init);
+	Shopsys.register.registerCallback(Shopsys.orderPreview.init);
 
 })(jQuery);

@@ -1,14 +1,14 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.checkboxToggle = SS6.checkboxToggle || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.checkboxToggle = Shopsys.checkboxToggle || {};
 
 	var containerIdDataAttribute = 'checkbox-toggle-container-id';
 
-	SS6.checkboxToggle.init = function ($container) {
+	Shopsys.checkboxToggle.init = function ($container) {
 		var $checkboxToggles = $container.filterAllNodes('.js-checkbox-toggle');
 
-		$checkboxToggles.on('change', SS6.checkboxToggle.onChange);
+		$checkboxToggles.on('change', Shopsys.checkboxToggle.onChange);
 
 		$checkboxToggles.each(function () {
 			var $checkboxToggle = $(this);
@@ -27,7 +27,7 @@
 		});
 	};
 
-	SS6.checkboxToggle.onChange = function () {
+	Shopsys.checkboxToggle.onChange = function () {
 		var $checkboxToggle = $(this);
 		var containerId = $checkboxToggle.data(containerIdDataAttribute);
 
@@ -43,6 +43,6 @@
 		}
 	};
 
-	SS6.register.registerCallback(SS6.checkboxToggle.init);
+	Shopsys.register.registerCallback(Shopsys.checkboxToggle.init);
 
 })(jQuery);

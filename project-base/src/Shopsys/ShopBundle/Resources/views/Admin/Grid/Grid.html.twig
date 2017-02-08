@@ -196,13 +196,13 @@
 	<a
 		class="in-icon in-icon--{{ actionColumn.type }} svg svg-{{ icon }} table-action{% if actionColumn.classAttribute %} {{ actionColumn.classAttribute }}{% endif %}{% if actionColumn.ajaxConfirm %} js-ajax-confirm{% endif %}"
 		{% if actionColumn.ajaxConfirm %}
-			data-ajax-confirm-on-open="SS6.createConfirmDelete(this);"
+			data-ajax-confirm-on-open="Shopsys.createConfirmDelete(this);"
 		{% endif %}
 			href="{{ actionColumn.targetUrl(row) }}"
 			title = "{{ actionColumn.title }}"
 		{% if actionColumn.confirmMessage is not empty -%}
 			onclick="
-				SS6.window({
+				Shopsys.window({
 					content: '{{ actionColumn.confirmMessage }}',
 					buttonCancel: true,
 					buttonContinue: true,

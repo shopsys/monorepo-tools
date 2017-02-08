@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.history = SS6.history || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.history = Shopsys.history || {};
 
-	SS6.history.pushReloadState = function (url, title, stateObject) {
+	Shopsys.history.pushReloadState = function (url, title, stateObject) {
 		var currentState = history.state || {};
 		if (!currentState.hasOwnProperty('refreshOnPopstate') || currentState.refreshOnPopstate !== true) {
 			currentState.refreshOnPopstate = true;

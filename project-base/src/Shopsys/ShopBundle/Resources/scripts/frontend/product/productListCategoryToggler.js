@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.categoryDescription = SS6.categoryDescription || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.categoryDescription = Shopsys.categoryDescription || {};
 
-	SS6.categoryDescription.init = function () {
+	Shopsys.categoryDescription.init = function () {
 		var $description = $('.js-category-description');
 		var $loadMoreButton = $('.js-category-description-load-more');
 		var descriptionHeight = $description.height();
@@ -20,7 +20,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.categoryDescription.init();
+		Shopsys.categoryDescription.init();
 	});
 
 })(jQuery);

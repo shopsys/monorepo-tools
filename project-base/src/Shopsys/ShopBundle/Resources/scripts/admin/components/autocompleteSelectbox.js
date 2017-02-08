@@ -1,11 +1,11 @@
 (function($) {
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
 	var autocompleteSelectbox = function ($container) {
 		$container.filterAllNodes('select.js-autocomplete-selectbox').selectize();
 	};
 
-	SS6.register.registerCallback(autocompleteSelectbox);
+	Shopsys.register.registerCallback(autocompleteSelectbox);
 
 })(jQuery);

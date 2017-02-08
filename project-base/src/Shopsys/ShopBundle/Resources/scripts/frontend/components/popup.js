@@ -1,8 +1,8 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-popup-image').magnificPopup({
 			type: 'image'
 		});

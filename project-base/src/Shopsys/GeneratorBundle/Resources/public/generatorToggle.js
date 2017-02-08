@@ -1,11 +1,11 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.generatorToggle = SS6.generatorToggle || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.generatorToggle = Shopsys.generatorToggle || {};
 
 
-	SS6.generatorToggle.init = function () {
-		$('.js-generator-title input[type=checkbox]').on('change', SS6.generatorToggle.onChange);
+	Shopsys.generatorToggle.init = function () {
+		$('.js-generator-title input[type=checkbox]').on('change', Shopsys.generatorToggle.onChange);
 
 		$('.js-generator-title input[type=checkbox]').each(function () {
 			var $container = $(this).closest('.js-generator').find('.js-generator-form');
@@ -18,7 +18,7 @@
 		});
 	};
 
-	SS6.generatorToggle.onChange = function (event) {
+	Shopsys.generatorToggle.onChange = function (event) {
 		var $container = $(this).closest('.js-generator').find('.js-generator-form');
 
 		if ($(this).is(':checked')) {
@@ -29,7 +29,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.generatorToggle.init();
+		Shopsys.generatorToggle.init();
 	});
 
 })(jQuery);

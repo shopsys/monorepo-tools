@@ -1,10 +1,10 @@
 (function ($){
 
-	SS6 = SS6 || {};
-	SS6.categoryTree = SS6.categoryTree || {};
-	SS6.categoryTree.FormItem = SS6.categoryTree.FormItem || {};
+	Shopsys = Shopsys || {};
+	Shopsys.categoryTree = Shopsys.categoryTree || {};
+	Shopsys.categoryTree.FormItem = Shopsys.categoryTree.FormItem || {};
 
-	SS6.categoryTree.FormItem = function ($item, parent) {
+	Shopsys.categoryTree.FormItem = function ($item, parent) {
 		var self = this;
 		self.STATUS_OPENED = 'opened';
 		self.STATUS_CLOSED = 'closed';
@@ -27,7 +27,7 @@
 
 		var initChildren = function () {
 			$childrenContainer.find('> .js-category-tree-form-item').each(function () {
-				var childItem = new SS6.categoryTree.FormItem($(this), self);
+				var childItem = new Shopsys.categoryTree.FormItem($(this), self);
 				childItem.init();
 				self.children.push(childItem);
 			});
@@ -43,7 +43,7 @@
 				}
 
 				if ($checkbox.is(':checked')) {
-					if (self.parent instanceof SS6.categoryTree.FormItem) {
+					if (self.parent instanceof Shopsys.categoryTree.FormItem) {
 						self.parent.open(false);
 					}
 				}
@@ -62,7 +62,7 @@
 			if (!$childrenContainer.is(':animated')) {
 				$childrenContainer.slideDown(animate === true ? 'normal' : 0);
 				setStatus(self.STATUS_OPENED);
-				if (self.parent instanceof SS6.categoryTree.FormItem) {
+				if (self.parent instanceof Shopsys.categoryTree.FormItem) {
 					self.parent.open(animate);
 				}
 			}

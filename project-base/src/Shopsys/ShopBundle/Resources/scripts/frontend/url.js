@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.url = SS6.url || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.url = Shopsys.url || {};
 
-	SS6.url.getBaseUrl = function () {
+	Shopsys.url.getBaseUrl = function () {
 		return document.location.protocol
 			+ '//'
 			+ document.location.host

@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.slickInit = SS6.slickInit || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.slickInit = Shopsys.slickInit || {};
 
-	SS6.slickInit.init = function () {
+	Shopsys.slickInit.init = function () {
 		$('#js-slider-homepage').slick({
 			dots: true,
 			arrows: false,
@@ -13,7 +13,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.slickInit.init();
+		Shopsys.slickInit.init();
 	});
 
 })(jQuery);

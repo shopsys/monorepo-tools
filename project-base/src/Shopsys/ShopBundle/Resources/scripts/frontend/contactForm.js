@@ -1,14 +1,14 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.contactForm = SS6.contactForm || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.contactForm = Shopsys.contactForm || {};
 
-	SS6.register.registerCallback(function ($container) {
-		$container.filterAllNodes('form[name="contact_form"]').bind('contactFormAjaxSumbit', SS6.contactForm.ajaxSumbit);
+	Shopsys.register.registerCallback(function ($container) {
+		$container.filterAllNodes('form[name="contact_form"]').bind('contactFormAjaxSumbit', Shopsys.contactForm.ajaxSumbit);
 	});
 
-	SS6.contactForm.ajaxSumbit = function (event) {
-		SS6.ajax({
+	Shopsys.contactForm.ajaxSumbit = function (event) {
+		Shopsys.ajax({
 			loaderElement: '#js-contact-form-container',
 			url: $(this).attr('action'),
 			method: 'post',
@@ -21,8 +21,8 @@
 
 	var onSuccess = function (data) {
 		$('#js-contact-form-container').html(data['contactFormHtml']);
-		SS6.register.registerNewContent($('#js-contact-form-container'));
-		SS6.window({
+		Shopsys.register.registerNewContent($('#js-contact-form-container'));
+		Shopsys.window({
 			content: data['message']
 		});
 	};

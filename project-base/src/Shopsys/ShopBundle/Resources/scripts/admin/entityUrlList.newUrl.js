@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.entityUrls = SS6.entityUrls || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.entityUrls = Shopsys.entityUrls || {};
 
-	SS6.entityUrls.NewUrl = function ($entityUrls) {
+	Shopsys.entityUrls.NewUrl = function ($entityUrls) {
 		var $buttonAdd = $entityUrls.find('.js-entity-url-list-button-add-url');
 		var $newUrlsContainer = $entityUrls.find('.js-entity-url-list-new-urls');
 		var newUrlsId = $newUrlsContainer.attr('id');
@@ -21,8 +21,8 @@
 
 			$newUrlsContainer.append($newUrl);
 
-			SS6.validation.addNewItemToCollection('#' + newUrlsId, index);
-			SS6.formChangeInfo.showInfo();
+			Shopsys.validation.addNewItemToCollection('#' + newUrlsId, index);
+			Shopsys.formChangeInfo.showInfo();
 		};
 
 		var getNextNewUrlIndex = function () {
@@ -37,15 +37,15 @@
 		var onClickRemoveNewUrl = function () {
 			var $row = $(this).closest('.js-entity-url-list-new-row');
 			var index = $row.data('index');
-			SS6.validation.removeItemFromCollection('#' + newUrlsId, index);
-			SS6.formChangeInfo.showInfo();
+			Shopsys.validation.removeItemFromCollection('#' + newUrlsId, index);
+			Shopsys.formChangeInfo.showInfo();
 			$row.remove();
 		};
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-entity-url-list').each(function () {
-			var entityUrlsNewUrl = new SS6.entityUrls.NewUrl($(this));
+			var entityUrlsNewUrl = new Shopsys.entityUrls.NewUrl($(this));
 			entityUrlsNewUrl.init();
 		});
 	});

@@ -1,6 +1,6 @@
 (function ($) {
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		var $embedOnlyInOrderSentPageCheckbox = $container.filterAllNodes('input[name="script_form[placement]"]');
 
 		if ($embedOnlyInOrderSentPageCheckbox.length > 0) {

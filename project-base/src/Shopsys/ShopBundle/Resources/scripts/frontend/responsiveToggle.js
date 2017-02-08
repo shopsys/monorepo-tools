@@ -7,12 +7,12 @@
 	 4. switch to desktop version reset visibility of data-element from 2.
 	 */
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
 	var activeButtonClass = 'active';
 	var instanceCoutner = 0;
 
-	SS6.ResponsiveToggle = function ($button, $elementToHide, hideOnClickOut) {
+	Shopsys.ResponsiveToggle = function ($button, $elementToHide, hideOnClickOut) {
 		var defaultActive = null;
 		var instanceNumber = instanceCoutner;
 		instanceCoutner++;
@@ -29,7 +29,7 @@
 			}
 
 			$(window).resize(function() {
-				SS6.timeout.setTimeoutAndClearPrevious('ResponsiveToggle.window.resize.' + instanceNumber, onWindowResize, 200);
+				Shopsys.timeout.setTimeoutAndClearPrevious('ResponsiveToggle.window.resize.' + instanceNumber, onWindowResize, 200);
 			});
 		};
 
@@ -53,7 +53,7 @@
 		}
 
 		function onWindowResize() {
-			if (SS6.responsive.isDesktopVersion()) {
+			if (Shopsys.responsive.isDesktopVersion()) {
 				if ($elementToHide.is(':animated')) {
 					$elementToHide.stop(true, true);
 				}
@@ -71,7 +71,7 @@
 			var $elementToHide = $('#' + $button.data('element'));
 			var hideOnClickOut = $button.data('hide-on-click-out');
 
-			var responsiveToggle = new SS6.ResponsiveToggle($button, $elementToHide, hideOnClickOut);
+			var responsiveToggle = new Shopsys.ResponsiveToggle($button, $elementToHide, hideOnClickOut);
 			responsiveToggle.init();
 		});
 

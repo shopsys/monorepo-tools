@@ -1,10 +1,10 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.keyCodes = SS6.keyCodes || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.keyCodes = Shopsys.keyCodes || {};
 
-	SS6.keyCodes.ENTER = 13;
-	SS6.keyCodes.ESCAPE = 27;
-	SS6.keyCodes.BACKSPACE = 8;
+	Shopsys.keyCodes.ENTER = 13;
+	Shopsys.keyCodes.ESCAPE = 27;
+	Shopsys.keyCodes.BACKSPACE = 8;
 
 })(jQuery);

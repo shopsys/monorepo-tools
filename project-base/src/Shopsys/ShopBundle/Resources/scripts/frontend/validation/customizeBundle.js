@@ -1,48 +1,48 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.validation = SS6.validation || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.validation = Shopsys.validation || {};
 
-	SS6.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
+	Shopsys.validation.addNewItemToCollection = function (collectionSelector, itemIndex) {
 		$($(collectionSelector)).jsFormValidator('addPrototype', itemIndex);
-		SS6.formChangeInfo.showInfo();
+		Shopsys.formChangeInfo.showInfo();
 	};
 
-	SS6.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
+	Shopsys.validation.removeItemFromCollection = function (collectionSelector, itemIndex) {
 		if (itemIndex === undefined) {
 			throw Error('ItemIndex is undefined while remove item from collections');
 		}
 		var $collection = $(collectionSelector);
 		$($collection).jsFormValidator('delPrototype', itemIndex);
-		SS6.validation.highlightSubmitButtons($collection.closest('form'));
+		Shopsys.validation.highlightSubmitButtons($collection.closest('form'));
 		$collection.jsFormValidator('validate');
-		SS6.formChangeInfo.showInfo();
+		Shopsys.formChangeInfo.showInfo();
 	};
 
-	SS6.validation.isFormValid = function (form) {
+	Shopsys.validation.isFormValid = function (form) {
 		return $(form).find('.js-validation-errors-message').length === 0;
 	};
 
-	SS6.validation.getErrorListClass = function (elementName) {
+	Shopsys.validation.getErrorListClass = function (elementName) {
 		return elementName.replace(/-/g, '_')
 			.replace('form_error_', 'js-validation-error-list-')
 			.replace('value_to_duplicates_', 'js-validation-error-list-'); // defined in function SymfonyComponentFormExtensionCoreDataTransformerValueToDuplicatesTransformer()
 	};
 
-	SS6.validation.ckeditorValidationInit = function (element) {
+	Shopsys.validation.ckeditorValidationInit = function (element) {
 		$.each(element.children, function(index, childElement) {
-			if (childElement.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+			if (childElement.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 				CKEDITOR.instances[childElement.id].on('change', function() {
 					$(childElement.domNode).jsFormValidator('validate');
 				});
 			}
 			if (Object.keys(childElement.children).length > 0) {
-				SS6.validation.ckeditorValidationInit(childElement);
+				Shopsys.validation.ckeditorValidationInit(childElement);
 			}
 		});
 	};
 
-	SS6.validation.elementBind = function (element) {
+	Shopsys.validation.elementBind = function (element) {
 		if (!element.domNode) {
 			return;
 		}
@@ -78,7 +78,7 @@
 				$(this).closest('.form-input-error').removeClass('form-input-error');
 			})
 			.jsFormValidator({
-				'showErrors': SS6.validation.showErrors
+				'showErrors': Shopsys.validation.showErrors
 			});
 	};
 
@@ -105,9 +105,9 @@
 					element.onValidate.apply(element.domNode, [FpJsFormValidator.getAllErrors(element, {}), event]);
 				}
 			});
-			if (!SS6.validation.isFormValid(this)) {
+			if (!Shopsys.validation.isFormValid(this)) {
 				event.preventDefault();
-				SS6.validation.showFormErrorsWindow(this);
+				Shopsys.validation.showFormErrorsWindow(this);
 			} else if ($(this).data('on-submit') !== undefined) {
 				$(this).trigger($(this).data('on-submit'));
 				event.preventDefault();
@@ -119,7 +119,7 @@
 	FpJsFormValidator._attachElement = FpJsFormValidator.attachElement;
 	FpJsFormValidator.attachElement = function (element) {
 		FpJsFormValidator._attachElement(element);
-		SS6.validation.elementBind(element);
+		Shopsys.validation.elementBind(element);
 	};
 
 	FpJsFormValidator._getElementValue = FpJsFormValidator.getElementValue;
@@ -130,8 +130,8 @@
 		if (i && undefined === value) {
 			value = this.getMappedValue(element);
 		} else if (
-			element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::COLLECTION')
-			|| (Object.keys(element.children).length > 0 && element.type !== SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
+			element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::COLLECTION')
+			|| (Object.keys(element.children).length > 0 && element.type !== Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
 		) {
 			value = {};
 			for (var childName in element.children) {
@@ -150,13 +150,13 @@
 
 	FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
 	FpJsFormValidator.getInputValue = function (element) {
-		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+		if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 			return CKEDITOR.instances[element.id].getData();
 		}
-		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
+		if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
 			return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
 		}
-		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::PRODUCTS')) {
+		if (element.type === Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\FormType::PRODUCTS')) {
 			var value = [];
 			$(element.domNode).find('.js-products-picker-item-input').each(function () {
 				value.push($(this).val());
@@ -186,7 +186,7 @@
 		if (form) {
 			this.attachDefaultEvent(element, form);
 		}
-		SS6.validation.ckeditorValidationInit(element);
+		Shopsys.validation.ckeditorValidationInit(element);
 
 		return element;
 	};
@@ -209,7 +209,7 @@
 	FpJsFormValidator._checkValidationGroups = FpJsFormValidator.checkValidationGroups;
 	FpJsFormValidator.checkValidationGroups = function (needle, haystack) {
 		if (typeof haystack === 'undefined') {
-			haystack = [SS6.constant('Symfony\\Component\\Validator\\Constraint::DEFAULT_GROUP')];
+			haystack = [Shopsys.constant('Symfony\\Component\\Validator\\Constraint::DEFAULT_GROUP')];
 		}
 		return FpJsFormValidator._checkValidationGroups(needle, haystack);
 	};
@@ -217,10 +217,10 @@
 	// determine domElement as the closest ancestor of all children
 	FpJsFormValidator._findDomElement = FpJsFormValidator.findDomElement;
 	FpJsFormValidator.findDomElement = function (model) {
-		return SS6.validation.findDomElementRecursive(model);
+		return Shopsys.validation.findDomElementRecursive(model);
 	};
 
-	SS6.validation.findDomElementRecursive = function (model) {
+	Shopsys.validation.findDomElementRecursive = function (model) {
 		var domElement = FpJsFormValidator._findDomElement(model);
 
 		if (domElement !== null) {
@@ -230,17 +230,17 @@
 		var childDomElements = [];
 		for (var i in model.children) {
 			var child = model.children[i];
-			var childDomElement = SS6.validation.findDomElementRecursive(child);
+			var childDomElement = Shopsys.validation.findDomElementRecursive(child);
 
 			if (childDomElement !== null) {
 				childDomElements.push(childDomElement);
 			}
 		}
 
-		return SS6.validation.findClosestCommonAncestor(childDomElements);
+		return Shopsys.validation.findClosestCommonAncestor(childDomElements);
 	};
 
-	SS6.validation.findClosestCommonAncestor = function (domElements) {
+	Shopsys.validation.findClosestCommonAncestor = function (domElements) {
 		if (domElements.length === 0) {
 			return null;
 		}
@@ -251,7 +251,7 @@
 			var domElement = domElements[i];
 			var $domElementParents = $(domElement).parents();
 
-			var domElementAncestors = SS6.validation.reverseCollectionToArray($domElementParents);
+			var domElementAncestors = Shopsys.validation.reverseCollectionToArray($domElementParents);
 
 			domElementsAncestors.push(domElementAncestors);
 		}
@@ -274,7 +274,7 @@
 		return closestCommonAncestor;
 	};
 
-	SS6.validation.reverseCollectionToArray = function ($collection) {
+	Shopsys.validation.reverseCollectionToArray = function ($collection) {
 		var result = [];
 
 		for (var i = $collection.length - 1; i >= 0; i--) {
@@ -299,11 +299,11 @@
 		};
 	};
 
-	SS6.validation.isExpandedChoiceFormType = function(element, value) {
-		return element.type === SS6.constant('Shopsys\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
+	Shopsys.validation.isExpandedChoiceFormType = function(element, value) {
+		return element.type === Shopsys.constant('Shopsys\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
 	};
 
-	SS6.validation.isExpandedChoiceEmpty = function(value) {
+	Shopsys.validation.isExpandedChoiceEmpty = function(value) {
 		var isEmpty = true;
 
 		$.each(value, function(key, value) {
@@ -319,18 +319,18 @@
 	FpJsFormValidator._isValueEmty = FpJsFormValidator.isValueEmty;
 	FpJsFormValidator.isValueEmty = function (value, element) {
 		if (element instanceof FpJsFormElement) {
-			if (SS6.validation.isExpandedChoiceFormType(element, value)) {
-				return SS6.validation.isExpandedChoiceEmpty(value);
+			if (Shopsys.validation.isExpandedChoiceFormType(element, value)) {
+				return Shopsys.validation.isExpandedChoiceEmpty(value);
 			}
 		}
 
 		return FpJsFormValidator._isValueEmty(value);
 	};
 
-	SS6.validation.showErrors = function (errors, elementName) {
-		var $errorList = SS6.validation.findOrCreateErrorList($(this), elementName);
+	Shopsys.validation.showErrors = function (errors, elementName) {
+		var $errorList = Shopsys.validation.findOrCreateErrorList($(this), elementName);
 		var $errorListUl = $errorList.find('ul:first');
-		var $elementsToHighlight = SS6.validation.findElementsToHighlight($(this));
+		var $elementsToHighlight = Shopsys.validation.findElementsToHighlight($(this));
 
 		var elementErrorClass = 'js-' + elementName;
 		$errorListUl.find('li').remove();
@@ -350,11 +350,11 @@
 			$errorList.hide();
 		}
 
-		SS6.validation.highlightSubmitButtons($(this).closest('form'));
+		Shopsys.validation.highlightSubmitButtons($(this).closest('form'));
 	};
 
-	SS6.validation.findOrCreateErrorList = function ($formInput, elementName) {
-		var errorListClass = SS6.validation.getErrorListClass(elementName);
+	Shopsys.validation.findOrCreateErrorList = function ($formInput, elementName) {
+		var errorListClass = Shopsys.validation.getErrorListClass(elementName);
 		var $errorList = $('.' + errorListClass);
 		if ($errorList.length === 0) {
 			$errorList = $($.parseHTML(
@@ -368,20 +368,20 @@
 		return $errorList;
 	};
 
-	SS6.validation.showFormErrorsWindow = function (container) {
-		var $formattedFormErrors = SS6.validation.getFormattedFormErrors(container);
+	Shopsys.validation.showFormErrorsWindow = function (container) {
+		var $formattedFormErrors = Shopsys.validation.getFormattedFormErrors(container);
 
-		SS6.window({
+		Shopsys.window({
 			content:
 				'<div class="text-left">'
-				+ SS6.translator.trans('Please check the entered values.<br><br>')
+				+ Shopsys.translator.trans('Please check the entered values.<br><br>')
 				+ $formattedFormErrors[0].outerHTML
 				+ '</div>'
 		});
 	};
 
-	SS6.validation.getFormattedFormErrors = function (container) {
-		var errorsByLabel = SS6.validation.getFormErrorsIndexedByLabel(container);
+	Shopsys.validation.getFormattedFormErrors = function (container) {
+		var errorsByLabel = Shopsys.validation.getFormErrorsIndexedByLabel(container);
 		var $formattedFormErrors = $('<ul/>');
 		for (var label in errorsByLabel) {
 			var $errorsUl = $('<ul/>');
@@ -394,7 +394,7 @@
 		return $formattedFormErrors;
 	};
 
-	SS6.validation.getInputIdByErrorList = function($errorList) {
+	Shopsys.validation.getInputIdByErrorList = function($errorList) {
 		var inputIdMatch = $errorList.attr('class').match(/js\-validation\-error\-list\-([^\s]+)/);
 		if (inputIdMatch) {
 			return inputIdMatch[1];
@@ -403,18 +403,18 @@
 		return undefined;
 	};
 
-	SS6.validation.getFormErrorsIndexedByLabel = function (container) {
+	Shopsys.validation.getFormErrorsIndexedByLabel = function (container) {
 		var errorsByLabel = {};
 
 		$(container).find('.js-validation-errors-list li').each(function () {
 			var $errorList = $(this).closest('.js-validation-errors-list');
 			var errorMessage = $(this).text();
-			var inputId = SS6.validation.getInputIdByErrorList($errorList);
+			var inputId = Shopsys.validation.getInputIdByErrorList($errorList);
 
 			if (inputId !== undefined) {
-				var $label = SS6.validation.findLabelByInputId(inputId);
+				var $label = Shopsys.validation.findLabelByInputId(inputId);
 				if ($label.length > 0) {
-					errorsByLabel = SS6.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
+					errorsByLabel = Shopsys.validation.addLabelError(errorsByLabel, $label.text(), errorMessage);
 				}
 			}
 		});
@@ -422,7 +422,7 @@
 		return errorsByLabel;
 	};
 
-	SS6.validation.findLabelByInputId = function (inputId) {
+	Shopsys.validation.findLabelByInputId = function (inputId) {
 		var $label = $('label[for="' + inputId + '"]');
 		var $input = $('#' + inputId);
 
@@ -430,25 +430,25 @@
 			$label = $('#js-label-' + inputId);
 		}
 		if ($label.length === 0) {
-			$label = SS6.validation.getClosestLabel($input, '.js-validation-label');
+			$label = Shopsys.validation.getClosestLabel($input, '.js-validation-label');
 		}
 		if ($label.length === 0) {
-			$label = SS6.validation.getClosestLabel($input, 'label');
+			$label = Shopsys.validation.getClosestLabel($input, 'label');
 		}
 		if ($label.length === 0) {
-			$label = SS6.validation.getClosestLabel($input, '.form-full__title');
+			$label = Shopsys.validation.getClosestLabel($input, '.form-full__title');
 		}
 
 		return $label;
 	};
 
-	SS6.validation.getClosestLabel = function ($input, selector) {
+	Shopsys.validation.getClosestLabel = function ($input, selector) {
 		var $formLine = $input.closest('.form-line:has(' + selector + '), .js-form-group:has(' + selector + '), .form-full:has(' + selector + ')');
 		return $formLine.find(selector).filter(':first');
 	};
 
-	SS6.validation.addLabelError = function(errorsByLabel, labelText, errorMessage) {
-		labelText = SS6.validation.normalizeLabelText(labelText);
+	Shopsys.validation.addLabelError = function(errorsByLabel, labelText, errorMessage) {
+		labelText = Shopsys.validation.normalizeLabelText(labelText);
 
 		if (errorsByLabel[labelText] === undefined) {
 			errorsByLabel[labelText] = [];
@@ -460,7 +460,7 @@
 		return errorsByLabel;
 	};
 
-	SS6.validation.normalizeLabelText = function (labelText) {
+	Shopsys.validation.normalizeLabelText = function (labelText) {
 		return labelText.replace(/^\s*(.*)[\s:\*]*$/, '$1');
 	};
 

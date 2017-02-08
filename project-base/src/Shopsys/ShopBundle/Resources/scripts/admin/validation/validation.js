@@ -1,7 +1,7 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.validation = SS6.validation || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.validation = Shopsys.validation || {};
 
 	$(document).ready(function () {
 		$('.js-no-validate-button').click(function () {
@@ -9,7 +9,7 @@
 		});
 	});
 
-	SS6.validation.forceValidateElement = function ($element) {
+	Shopsys.validation.forceValidateElement = function ($element) {
 		$element.jsFormValidator('validate');
 
 		if ($element.jsFormValidator) {
@@ -22,14 +22,14 @@
 		}
 	};
 
-	SS6.validation.findElementsToHighlight = function ($formInput) {
+	Shopsys.validation.findElementsToHighlight = function ($formInput) {
 		return $formInput.filter('input, select, textarea, .form-line, .table-form');
 	};
 
-	SS6.validation.highlightSubmitButtons = function($form){
+	Shopsys.validation.highlightSubmitButtons = function($form){
 		var $submitButtons = $form.find('.btn[type="submit"]');
 
-		if (SS6.validation.isFormValid($form)) {
+		if (Shopsys.validation.isFormValid($form)) {
 			$submitButtons.removeClass('btn--disabled');
 		} else {
 			$submitButtons.addClass('btn--disabled');
@@ -37,7 +37,7 @@
 	};
 
 	$(document).ready(function () {
-		var $formattedFormErrors = SS6.validation.getFormattedFormErrors(document);
+		var $formattedFormErrors = Shopsys.validation.getFormattedFormErrors(document);
 		$('.js-flash-message.in-message--danger').append($formattedFormErrors);
 	});
 

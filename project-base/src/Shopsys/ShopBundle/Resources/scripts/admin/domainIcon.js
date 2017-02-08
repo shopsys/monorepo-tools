@@ -1,26 +1,26 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.domainIcon = SS6.domainIcon || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.domainIcon = Shopsys.domainIcon || {};
 
 	var domainIcon = function ($container) {
 		$container.filterAllNodes('.js-edit-domain-icon').click(function () {
-			SS6.domainIcon.openDialog($(this));
+			Shopsys.domainIcon.openDialog($(this));
 			return false;
 		});
 		$container.filterAllNodes('#domain_form_save').closest('form').submit(function () {
-			SS6.domainIcon.uploadIcon($(this));
+			Shopsys.domainIcon.uploadIcon($(this));
 			return false;
 		});
 	};
 
-	SS6.register.registerCallback(domainIcon);
+	Shopsys.register.registerCallback(domainIcon);
 
-	SS6.domainIcon.openDialog = function($editDomainIcon) {
-		SS6.ajax({
+	Shopsys.domainIcon.openDialog = function($editDomainIcon) {
+		Shopsys.ajax({
 			url: $editDomainIcon.closest('.js-domain-icon-edit-container').data('url'),
 			success: function (data) {
-				SS6.window({
+				Shopsys.window({
 					content: data,
 					wide: true
 				});
@@ -28,12 +28,12 @@
 		});
 	};
 
-	SS6.domainIcon.uploadIcon = function($form) {
+	Shopsys.domainIcon.uploadIcon = function($form) {
 		var $iconErrorListContainer = $('#js-domain-icon-errors');
 		var $spinner = $('.js-overlay-spinner');
 		$iconErrorListContainer.hide();
 		$spinner.show();
-		SS6.ajax({
+		Shopsys.ajax({
 			url: $form.attr('action'),
 			data: $form.serialize(),
 			type: $form.attr('method'),

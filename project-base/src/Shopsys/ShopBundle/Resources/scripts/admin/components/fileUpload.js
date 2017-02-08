@@ -1,18 +1,18 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.fileUpload = SS6.fileUpload || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.fileUpload = Shopsys.fileUpload || {};
 
 	var fileUpload = function ($container) {
 		$container.filterAllNodes('.js-file-upload').each(function() {
-			var uploader = new SS6.fileUpload.Uploader($(this));
+			var uploader = new Shopsys.fileUpload.Uploader($(this));
 			uploader.init();
 		});
 	};
 
-	SS6.register.registerCallback(fileUpload);
+	Shopsys.register.registerCallback(fileUpload);
 
-	SS6.fileUpload.Uploader = function($uploader) {
+	Shopsys.fileUpload.Uploader = function($uploader) {
 		var self = this;
 		var $uploadedFiles = $uploader.find('.js-file-upload-uploaded-files');
 		var $status = $uploader.find('.js-file-upload-status');
@@ -32,7 +32,7 @@
 
 		var initUploadedFiles = function() {
 			$uploadedFiles.find('.js-file-upload-uploaded-file').each(function () {
-				var fileItem = new SS6.fileUpload.FileItem(self, $(this), true);
+				var fileItem = new Shopsys.fileUpload.FileItem(self, $(this), true);
 				fileItem.init();
 			});
 		};
@@ -52,7 +52,7 @@
 		};
 
 		this.deleteTemporaryFile = function(filename) {
-			SS6.ajax({
+			Shopsys.ajax({
 				url: deleteUrl,
 				type: 'POST',
 				data: {filename: filename},
@@ -75,8 +75,8 @@
 
 		var onFormSubmit = function (event) {
 			if (!ready) {
-				SS6.window({
-					content: SS6.translator.trans('Please wait until all files are uploaded and try again.')
+				Shopsys.window({
+					content: Shopsys.translator.trans('Please wait until all files are uploaded and try again.')
 				});
 				event.preventDefault();
 			}
@@ -84,13 +84,13 @@
 
 		var onBeforeUpload = function() {
 			ready = false;
-			updateFileStatus('uploading', SS6.translator.trans('Uploading...'));
+			updateFileStatus('uploading', Shopsys.translator.trans('Uploading...'));
 		};
 
 		var onUploadNewFile = function(id, file) {
 			var $uploadedfile = createNewUploadedFile();
 			$uploadedfile.show();
-			items[id] = new SS6.fileUpload.FileItem(self, $uploadedfile);
+			items[id] = new Shopsys.fileUpload.FileItem(self, $uploadedfile);
 			items[id].init();
 			items[id].setLabel(file.name, file.size);
 			$uploadedFiles.append($uploadedfile);
@@ -98,12 +98,12 @@
 
 		var onUploadComplete = function() {
 			ready = true;
-			SS6.validation.forceValidateElement($uploader);
+			Shopsys.validation.forceValidateElement($uploader);
 		};
 
 		var onUploadProgress = function(id, percent) {
 			items[id].setProgress(percent);
-			updateFileStatus('uploading', SS6.translator.trans('Uploading...'));
+			updateFileStatus('uploading', Shopsys.translator.trans('Uploading...'));
 		};
 
 		var onUploadSuccess = function(id, data) {
@@ -113,13 +113,13 @@
 				}
 				lastUploadItemId = id;
 				items[id].setAsUploaded(data.filename, data.iconType, data.imageThumbnailUri);
-				updateFileStatus('success', SS6.translator.trans('Successfully uploaded'));
+				updateFileStatus('success', Shopsys.translator.trans('Successfully uploaded'));
 				$status.parent().fadeOut(4000);
-				SS6.formChangeInfo.showInfo();
+				Shopsys.formChangeInfo.showInfo();
 			} else {
 				items[id].deleteItem();
-				SS6.window({
-					content: SS6.translator.trans('Error occurred while uploading file.')
+				Shopsys.window({
+					content: Shopsys.translator.trans('Error occurred while uploading file.')
 				});
 			}
 		};
@@ -127,12 +127,12 @@
 		var onUploadError = function(id, message, code) {
 			items[id].deleteItem();
 			if (code === 413) {
-				message = SS6.translator.trans('File is too big');
+				message = Shopsys.translator.trans('File is too big');
 			} else if (code === 415) {
-				message = SS6.translator.trans('File is in unsupported format');
+				message = Shopsys.translator.trans('File is in unsupported format');
 			}
-			SS6.window({
-				content: SS6.translator.trans('Error occurred while uploading file: %message%', {'%message%': message })
+			Shopsys.window({
+				content: Shopsys.translator.trans('Error occurred while uploading file: %message%', {'%message%': message })
 			});
 		};
 

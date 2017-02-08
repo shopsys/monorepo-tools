@@ -1,16 +1,16 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.register = SS6.register || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.register = Shopsys.register || {};
 
-	SS6.register.CALL_PRIORITY_NORMAL = 500;
-	SS6.register.CALL_PRIORITY_HIGH = 300;
+	Shopsys.register.CALL_PRIORITY_NORMAL = 500;
+	Shopsys.register.CALL_PRIORITY_HIGH = 300;
 
 	var callbackQueue = [];
 
-	SS6.register.registerCallback = function (callback, callPriority) {
+	Shopsys.register.registerCallback = function (callback, callPriority) {
 		if (callPriority === undefined) {
-			callPriority = SS6.register.CALL_PRIORITY_NORMAL;
+			callPriority = Shopsys.register.CALL_PRIORITY_NORMAL;
 		}
 
 		callbackQueue.push({
@@ -19,7 +19,7 @@
 		});
 	};
 
-	SS6.register.registerNewContent = function ($container) {
+	Shopsys.register.registerNewContent = function ($container) {
 		callbackQueue.sort(function (a, b) {
 			return a.callPriority - b.callPriority;
 		});
@@ -30,7 +30,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.register.registerNewContent($('body'));
+		Shopsys.register.registerNewContent($('body'));
 	});
 
 })(jQuery);

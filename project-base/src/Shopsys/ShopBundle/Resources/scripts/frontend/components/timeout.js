@@ -1,7 +1,7 @@
 (function() {
 
-	SS6 = window.SS6 || {};
-	SS6.timeout = window.SS6.timeout || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.timeout = window.Shopsys.timeout || {};
 
 	var timeouts = {};
 
@@ -11,7 +11,7 @@
 	 * @param {int} timeoutMilliseconds
 	 * @returns {void}
 	 */
-	SS6.timeout.setTimeoutAndClearPrevious = function(timeoutName, callback, timeoutMilliseconds) {
+	Shopsys.timeout.setTimeoutAndClearPrevious = function(timeoutName, callback, timeoutMilliseconds) {
 		if (typeof timeoutName !== 'string') {
 			throw 'Timeout must have name!';
 		}

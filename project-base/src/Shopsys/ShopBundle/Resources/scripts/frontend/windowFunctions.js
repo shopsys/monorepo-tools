@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.windowFunctions = SS6.windowFunctions || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.windowFunctions = Shopsys.windowFunctions || {};
 
-	SS6.windowFunctions.close = function () {
+	Shopsys.windowFunctions.close = function () {
 		$('#js-window').trigger('windowFastClose');
 	};
 

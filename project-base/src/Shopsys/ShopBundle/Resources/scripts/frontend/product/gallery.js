@@ -1,10 +1,10 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.responsive = SS6.responsive || {};
-	SS6.productDetail = SS6.productDetail || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.responsive = Shopsys.responsive || {};
+	Shopsys.productDetail = Shopsys.productDetail || {};
 
-	SS6.productDetail.init = function () {
+	Shopsys.productDetail.init = function () {
 		$('.js-gallery-main-image').click(function (event) {
 			var $slides = $('.js-gallery .slick-slide:not(.slick-cloned) .js-gallery-slide-link');
 			$slides.filter(':first').trigger('click', event);
@@ -36,28 +36,28 @@
 			nextArrow: $gallery.filterAllNodes('.js-gallery-next'),
 			responsive: [
 				{
-					breakpoint: SS6.responsive.XS,
+					breakpoint: Shopsys.responsive.XS,
 					settings: {
 						slidesToShow: 3,
 						slidesToScroll: 2
 					}
 				},
 				{
-					breakpoint: SS6.responsive.MD,
+					breakpoint: Shopsys.responsive.MD,
 					settings: {
 						slidesToShow: 4,
 						slidesToScroll: 3
 					}
 				},
 				{
-					breakpoint: SS6.responsive.LG,
+					breakpoint: Shopsys.responsive.LG,
 					settings: {
 						slidesToShow: 3,
 						slidesToScroll: 2
 					}
 				},
 				{
-					breakpoint: SS6.responsive.VL,
+					breakpoint: Shopsys.responsive.VL,
 					settings: {
 						slidesToShow: 4,
 						slidesToScroll: 3
@@ -68,7 +68,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.productDetail.init();
+		Shopsys.productDetail.init();
 	});
 
 })(jQuery);

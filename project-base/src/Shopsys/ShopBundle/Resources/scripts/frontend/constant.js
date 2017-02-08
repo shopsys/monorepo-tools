@@ -1,8 +1,8 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
-	SS6.constant = function (name) {
+	Shopsys.constant = function (name) {
 		// Function call is translated by JS compiler to PHP constant value.
 		// This implementation is left only for IDE auto-completion.
 

@@ -3,8 +3,8 @@
  */
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.window = SS6.window || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.window = Shopsys.window || {};
 
 	var $activeWindow = null;
 	var animationTime = 300;
@@ -58,7 +58,7 @@
 	 * eventContinue (function)
 	 * urlContinue (string)
 	 */
-	SS6.window = function (options) {
+	Shopsys.window = function (options) {
 		var defaults = {
 			content: '',
 			buttonClose: true,
@@ -108,7 +108,7 @@
 
 		$window.append($windowContent);
 		if (options.buttonClose) {
-			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="' + SS6.translator.trans('Close (Esc)') + '"><i class="svg svg-remove-thin"></i></a>');
+			var $windowButtonClose = $('<a href="#" class="window-button-close window-popup__close js-window-button-close" title="' + Shopsys.translator.trans('Close (Esc)') + '"><i class="svg svg-remove-thin"></i></a>');
 			$windowButtonClose
 				.bind('click.window', options.eventClose)
 				.bind('click.windowClose', function () {
@@ -119,7 +119,7 @@
 		}
 
 		$('body').keyup(function (event) {
-			if (event.keyCode === SS6.keyCodes.ESCAPE) {
+			if (event.keyCode === Shopsys.keyCodes.ESCAPE) {
 				$window.trigger('windowClose');
 				return false;
 			}
@@ -164,12 +164,12 @@
 			$window.append($windowActions);
 		}
 
-		SS6.register.registerNewContent($window);
+		Shopsys.register.registerNewContent($window);
 
 		show();
 
 		$(window).resize(function() {
-			SS6.timeout.setTimeoutAndClearPrevious('window.window.resize', function() {
+			Shopsys.timeout.setTimeoutAndClearPrevious('window.window.resize', function() {
 				fixVerticalAlign();
 			}, 200);
 		});

@@ -1,6 +1,6 @@
 (function($) {
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
 	var datePicker = function ($container) {
 		$container.filterAllNodes('.js-date-picker').each(function() {
@@ -8,12 +8,12 @@
 			var options = $.datepicker.regional[global.locale] || $.datepicker.regional[''];
 
 			// Date format is fixed so that it is understood by back-end
-			options.dateFormat = SS6.constant('\\Shopsys\\ShopBundle\\Form\\DatePickerType::FORMAT_JS');
+			options.dateFormat = Shopsys.constant('\\Shopsys\\ShopBundle\\Form\\DatePickerType::FORMAT_JS');
 
 			$(this).datepicker(options);
 		});
 	};
 
-	SS6.register.registerCallback(datePicker);
+	Shopsys.register.registerCallback(datePicker);
 
 })(jQuery);

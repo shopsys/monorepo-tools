@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.fileUpload = SS6.fileUpload || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.fileUpload = Shopsys.fileUpload || {};
 
-	SS6.fileUpload.FileItem = function (uploader, $file, loaded) {
+	Shopsys.fileUpload.FileItem = function (uploader, $file, loaded) {
 		var self = this;
 		var $label = $file.find('.js-file-upload-label');
 		var $deleteButton = $file.find('.js-file-upload-delete');
@@ -32,7 +32,7 @@
 		this.deleteItem = function () {
 			uploader.deleteTemporaryFile($input.val());
 			$file.remove();
-			SS6.validation.forceValidateElement(uploader.$uploader);
+			Shopsys.validation.forceValidateElement(uploader.$uploader);
 		};
 
 		this.setLabel = function (filename, filesize) {

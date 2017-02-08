@@ -1,22 +1,22 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.formChangeInfo = SS6.formChangeInfo || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.formChangeInfo = Shopsys.formChangeInfo || {};
 
 	var isFormSubmitted = false;
 	var isInfoShown = false;
 
-	SS6.formChangeInfo.initContent = function ($container) {
+	Shopsys.formChangeInfo.initContent = function ($container) {
 		$container.filterAllNodes('.web__content form')
-			.change(SS6.formChangeInfo.showInfo)
+			.change(Shopsys.formChangeInfo.showInfo)
 			.each(function() {
 				if ($(this).find('.form-input-error:first, .js-validation-errors-list li:first').length > 0) {
-					SS6.formChangeInfo.showInfo();
+					Shopsys.formChangeInfo.showInfo();
 				}
 			});
 	};
 
-	SS6.formChangeInfo.initDocument = function () {
+	Shopsys.formChangeInfo.initDocument = function () {
 		$(document).on('submit', '.web__content form', function (event) {
 			if (event.isDefaultPrevented() === false) {
 				isFormSubmitted = true;
@@ -25,25 +25,25 @@
 
 		$(window).on('beforeunload', function() {
 			if (isInfoShown && !isFormSubmitted) {
-				return SS6.translator.trans('You have unsaved changes!');
+				return Shopsys.translator.trans('You have unsaved changes!');
 			}
 		});
 	};
 
-	SS6.formChangeInfo.initWysiwygEditors = function () {
+	Shopsys.formChangeInfo.initWysiwygEditors = function () {
 		if (typeof CKEDITOR !== 'undefined') {
 			for (var i in CKEDITOR.instances) {
 				var instance = CKEDITOR.instances[i];
 				if (!instance.formChangeInfoInitilized) {
-					instance.on('change', SS6.formChangeInfo.showInfo);
+					instance.on('change', Shopsys.formChangeInfo.showInfo);
 					instance.formChangeInfoInitilized = true;
 				}
 			}
 		}
 	};
 
-	SS6.formChangeInfo.showInfo = function () {
-		var textToShow = SS6.translator.trans('You have made changes, don\'t forget to save them!');
+	Shopsys.formChangeInfo.showInfo = function () {
+		var textToShow = Shopsys.translator.trans('You have made changes, don\'t forget to save them!');
 		var $fixedBarIn = $('.web__content .window-fixed-bar .window-fixed-bar__in');
 		var $infoDiv = $fixedBarIn.find('#js-form-change-info');
 		if (!isInfoShown) {
@@ -61,18 +61,18 @@
 		}
 	};
 
-	SS6.formChangeInfo.removeInfo = function () {
+	Shopsys.formChangeInfo.removeInfo = function () {
 		$('#js-form-change-info').remove();
 		isInfoShown = false;
 	};
 
-	SS6.register.registerCallback(function ($container) {
-		SS6.formChangeInfo.initContent($container);
-		SS6.formChangeInfo.initWysiwygEditors();
+	Shopsys.register.registerCallback(function ($container) {
+		Shopsys.formChangeInfo.initContent($container);
+		Shopsys.formChangeInfo.initWysiwygEditors();
 	});
 
 	$(document).ready(function () {
-		SS6.formChangeInfo.initDocument();
+		Shopsys.formChangeInfo.initDocument();
 	});
 
 })(jQuery);

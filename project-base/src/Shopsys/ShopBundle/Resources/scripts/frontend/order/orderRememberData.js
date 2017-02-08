@@ -1,31 +1,31 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.orderRememberData = SS6.orderRememberData || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.orderRememberData = Shopsys.orderRememberData || {};
 
-	SS6.orderRememberData.delayedSaveDataTimer = null;
-	SS6.orderRememberData.delayedSaveDataDelay = 200;
+	Shopsys.orderRememberData.delayedSaveDataTimer = null;
+	Shopsys.orderRememberData.delayedSaveDataDelay = 200;
 
-	SS6.orderRememberData.init = function ($container) {
+	Shopsys.orderRememberData.init = function ($container) {
 		$container.filterAllNodes('#js-order-form input, #js-order-form select, #js-order-form textarea')
-			.bind('change.orderRememberData', SS6.orderRememberData.saveData);
+			.bind('change.orderRememberData', Shopsys.orderRememberData.saveData);
 
 		$container.filterAllNodes('#js-order-form input, #js-order-form textarea')
-			.bind('keyup.orderRememberData', SS6.orderRememberData.delayedSaveData);
+			.bind('keyup.orderRememberData', Shopsys.orderRememberData.delayedSaveData);
 	};
 
-	SS6.orderRememberData.delayedSaveData = function() {
+	Shopsys.orderRememberData.delayedSaveData = function() {
 		var $this = $(this);
-		clearTimeout(SS6.orderRememberData.delayedSaveDataTimer);
-		SS6.orderRememberData.delayedSaveDataTimer = setTimeout(function () {
+		clearTimeout(Shopsys.orderRememberData.delayedSaveDataTimer);
+		Shopsys.orderRememberData.delayedSaveDataTimer = setTimeout(function () {
 			$this.trigger('change.orderRememberData');
-		}, SS6.orderRememberData.delayedSaveDataDelay);
+		}, Shopsys.orderRememberData.delayedSaveDataDelay);
 	};
 
-	SS6.orderRememberData.saveData = function() {
-		clearTimeout(SS6.orderRememberData.delayedSaveDataTimer);
+	Shopsys.orderRememberData.saveData = function() {
+		clearTimeout(Shopsys.orderRememberData.delayedSaveDataTimer);
 		var $orderForm = $('#js-order-form');
-		SS6.ajaxPendingCall('SS6.orderRememberData.saveData', {
+		Shopsys.ajaxPendingCall('Shopsys.orderRememberData.saveData', {
 			type: "POST",
 			url: $orderForm.data('ajax-save-url'),
 			data: $orderForm.serialize(),
@@ -33,6 +33,6 @@
 		});
 	};
 
-	SS6.register.registerCallback(SS6.orderRememberData.init);
+	Shopsys.register.registerCallback(Shopsys.orderRememberData.init);
 
 })(jQuery);

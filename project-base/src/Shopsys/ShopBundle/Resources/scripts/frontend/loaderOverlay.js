@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.loaderOverlay = SS6.loaderOverlay || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.loaderOverlay = Shopsys.loaderOverlay || {};
 
-	SS6.loaderOverlay.createLoaderOverlay = function (loaderElement, loaderMessage) {
+	Shopsys.loaderOverlay.createLoaderOverlay = function (loaderElement, loaderMessage) {
 		if (loaderElement === undefined) {
 			loaderElement = 'body';
 		}
@@ -29,7 +29,7 @@
 		return $loaderOverlay;
 	};
 
-	SS6.loaderOverlay.showLoaderOverlay = function ($loaderOverlay) {
+	Shopsys.loaderOverlay.showLoaderOverlay = function ($loaderOverlay) {
 		var $loaderElement = $($loaderOverlay.data('loaderElement'));
 
 		$loaderElement
@@ -37,7 +37,7 @@
 			.append($loaderOverlay);
 	};
 
-	SS6.loaderOverlay.removeLoaderOverlay = function ($loaderOverlay) {
+	Shopsys.loaderOverlay.removeLoaderOverlay = function ($loaderOverlay) {
 		var $loaderElement = $($loaderOverlay.data('loaderElement'));
 
 		$loaderOverlay.remove();

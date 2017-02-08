@@ -1,25 +1,25 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.productsPicker = SS6.productsPicker || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.productsPicker = Shopsys.productsPicker || {};
 
-	SS6.productsPicker.instances = [];
+	Shopsys.productsPicker.instances = [];
 
-	SS6.productsPicker.close = function () {
+	Shopsys.productsPicker.close = function () {
 		$.magnificPopup.close();
 	};
 
-	SS6.productsPicker.init = function ($container) {
+	Shopsys.productsPicker.init = function ($container) {
 		$container.filterAllNodes('.js-products-picker').each(function () {
-			var productsPicker = new SS6.productsPicker.ProductsPicker($(this));
+			var productsPicker = new Shopsys.productsPicker.ProductsPicker($(this));
 			productsPicker.init();
 		});
 	};
 
-	SS6.productsPicker.ProductsPicker = function ($productsPicker) {
+	Shopsys.productsPicker.ProductsPicker = function ($productsPicker) {
 		var self = this;
-		var instanceId = SS6.productsPicker.instances.length;
-		SS6.productsPicker.instances[instanceId] = this;
+		var instanceId = Shopsys.productsPicker.instances.length;
+		Shopsys.productsPicker.instances[instanceId] = this;
 
 		var $header = $productsPicker.find('.js-products-picker-header');
 		var $addButton = $productsPicker.find('.js-products-picker-button-add');
@@ -48,7 +48,7 @@
 			$itemsContainer.append($item);
 			initItem($item);
 			updateHeader();
-			SS6.formChangeInfo.showInfo();
+			Shopsys.formChangeInfo.showInfo();
 		};
 
 		this.removeItemByProductId = function (productId) {
@@ -105,7 +105,7 @@
 			$item.remove();
 			reIndex();
 			updateHeader();
-			SS6.formChangeInfo.showInfo();
+			Shopsys.formChangeInfo.showInfo();
 		};
 
 		var findProductItemIndex = function (productId) {
@@ -120,7 +120,7 @@
 
 		var updateOrdering = function () {
 			reIndex();
-			SS6.formChangeInfo.showInfo();
+			Shopsys.formChangeInfo.showInfo();
 		};
 
 		var updateHeader = function () {
@@ -132,6 +132,6 @@
 		};
 	};
 
-	SS6.register.registerCallback(SS6.productsPicker.init);
+	Shopsys.register.registerCallback(Shopsys.productsPicker.init);
 
 })(jQuery);

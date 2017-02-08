@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.product = SS6.product || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.product = Shopsys.product || {};
 
-	SS6.product.ProductVisibility = function ($productVisibility) {
+	Shopsys.product.ProductVisibility = function ($productVisibility) {
 		var $visibilityIcon = $productVisibility.find('.js-product-visibility-icon');
 		var $visibilityBox = $productVisibility.find('.js-product-visibility-box');
 		var $visibilityBoxWindow = $visibilityBox.find('.js-product-visibility-box-window');
@@ -37,7 +37,7 @@
 						$visibilityBox.show();
 						if (!isLoaded && !isLoading) {
 							isLoading = true;
-							SS6.ajax({
+							Shopsys.ajax({
 								loaderElement: null,
 								url: url,
 								success: onLoadVisibility
@@ -56,7 +56,7 @@
 		};
 
 		var showInWindow = function () {
-			SS6.window({
+			Shopsys.window({
 				content: $visibilityBoxWindow.html()
 			});
 		};
@@ -74,7 +74,7 @@
 
 	$(document).ready(function () {
 		$('.js-product-visibility').each(function () {
-			var productVisibility = new SS6.product.ProductVisibility($(this));
+			var productVisibility = new Shopsys.product.ProductVisibility($(this));
 			productVisibility.init();
 		});
 	});

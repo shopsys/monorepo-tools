@@ -50,7 +50,7 @@
 	{% else %}
 		<a
 			href="#"
-			onclick="SS6.productPicker.onClickSelectProduct('{{ parentInstanceId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
+			onclick="Shopsys.productPicker.onClickSelectProduct('{{ parentInstanceId|e('js') }}', {{ row.p.id|e('js') }}, '{{ row.pt.name|e('js') }}'); return false;"
 			class="btn btn--light btn--plus btn--small"
 		>
 			<i class="js-products-picker-icon btn__icon">+</i>

@@ -1,10 +1,10 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.productList = SS6.productList || {};
-	SS6.productList.AjaxFilter = SS6.productList.AjaxFilter || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.productList = Shopsys.productList || {};
+	Shopsys.productList.AjaxFilter = Shopsys.productList.AjaxFilter || {};
 
-	SS6.productList.AjaxFilter = function (ajaxMoreLoader) {
+	Shopsys.productList.AjaxFilter = function (ajaxMoreLoader) {
 		var $productsWithControls = $('.js-product-list-ajax-filter-products-with-controls');
 		var $productFilterForm = $('form[name="product_filter_form"]');
 		var $showResultsButton = $('.js-product-filter-show-result-button');
@@ -16,7 +16,7 @@
 			$productFilterForm.change(function () {
 				clearTimeout(requestTimer);
 				requestTimer = setTimeout(submitFormWithAjax, requestDelay);
-				SS6.history.pushReloadState(SS6.url.getBaseUrl() + '?' + $productFilterForm.serialize());
+				Shopsys.history.pushReloadState(Shopsys.url.getBaseUrl() + '?' + $productFilterForm.serialize());
 			});
 
 			$showResultsButton.click(function () {
@@ -32,7 +32,7 @@
 				$productFilterForm.find('.js-product-filter-call-change-after-reset').change();
 				clearTimeout(requestTimer);
 				var resetUrl = $(this).attr('href');
-				SS6.history.pushReloadState(resetUrl);
+				Shopsys.history.pushReloadState(resetUrl);
 				submitFormWithAjax();
 				return false;
 			});
@@ -45,7 +45,7 @@
 			$productsWithControls.html($productsHtml.html());
 			$productsWithControls.show();
 			ajaxMoreLoader.reInit();
-			SS6.register.registerNewContent($productsWithControls);
+			Shopsys.register.registerNewContent($productsWithControls);
 		};
 
 		var updateFiltersCounts = function ($wrappedData) {
@@ -86,9 +86,9 @@
 		};
 
 		var submitFormWithAjax = function () {
-			SS6.ajax({
+			Shopsys.ajax({
 				overlayDelay: 0,
-				url: SS6.url.getBaseUrl(),
+				url: Shopsys.url.getBaseUrl(),
 				data: $productFilterForm.serialize(),
 				success: function (data) {
 					var $wrappedData = $($.parseHTML('<div>' + data + '</div>'));

@@ -1,10 +1,10 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.productList = SS6.productList || {};
-	SS6.productList.AjaxMoreLoader = SS6.productList.AjaxMoreLoader || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.productList = Shopsys.productList || {};
+	Shopsys.productList.AjaxMoreLoader = Shopsys.productList.AjaxMoreLoader || {};
 
-	SS6.productList.AjaxMoreLoader = function () {
+	Shopsys.productList.AjaxMoreLoader = function () {
 		var self = this;
 		var $loadMoreButton;
 		var $currentProductList;
@@ -35,7 +35,7 @@
 
 		var onClickLoadMoreButton = function () {
 			$(this).hide();
-			SS6.ajax({
+			Shopsys.ajax({
 				loaderElement: '.js-product-list-with-paginator',
 				type: 'GET',
 				url: document.location,
@@ -49,7 +49,7 @@
 					$paginationToItemSpan.text(paginationToItem);
 					updateLoadMoreButton();
 
-					SS6.register.registerNewContent($nextProducts);
+					Shopsys.register.registerNewContent($nextProducts);
 				}
 			});
 		};
@@ -57,7 +57,7 @@
 		var updateLoadMoreButton = function () {
 			var remaining = totalCount - page * pageSize;
 			var loadNextCount = remaining >= pageSize ? pageSize : remaining;
-			var buttonText = SS6.translator.transChoice(
+			var buttonText = Shopsys.translator.transChoice(
 				'{1}Load next %loadNextCount% product|[2,Inf]Load next %loadNextCount% products',
 				loadNextCount,
 				{'%loadNextCount%': loadNextCount}

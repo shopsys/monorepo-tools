@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.form = SS6.form || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.form = Shopsys.form || {};
 
-	SS6.form.disableDoubleSubmit = function ($container) {
+	Shopsys.form.disableDoubleSubmit = function ($container) {
 		$container.filterAllNodes('form').each(function () {
 			var isFormSubmittingDisabled = false;
 
@@ -21,6 +21,6 @@
 		});
 	};
 
-	SS6.register.registerCallback(SS6.form.disableDoubleSubmit, SS6.register.CALL_PRIORITY_HIGH);
+	Shopsys.register.registerCallback(Shopsys.form.disableDoubleSubmit, Shopsys.register.CALL_PRIORITY_HIGH);
 
 })(jQuery);

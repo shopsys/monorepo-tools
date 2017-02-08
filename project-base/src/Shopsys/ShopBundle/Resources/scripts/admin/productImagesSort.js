@@ -1,17 +1,17 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.productImagesSort = SS6.productImagesSort || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.productImagesSort = Shopsys.productImagesSort || {};
 
-	SS6.productImagesSort.init = function () {
+	Shopsys.productImagesSort.init = function () {
 		$('#js-product-images').sortable({
 			handle: '.js-product-images-image-handle',
-			update: SS6.formChangeInfo.showInfo
+			update: Shopsys.formChangeInfo.showInfo
 		});
 	};
 
 	$(document).ready(function () {
-		SS6.productImagesSort.init();
+		Shopsys.productImagesSort.init();
 	});
 
 })(jQuery);

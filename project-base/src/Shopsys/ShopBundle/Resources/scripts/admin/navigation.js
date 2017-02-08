@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.navigation = SS6.navigation || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.navigation = Shopsys.navigation || {};
 
-	SS6.navigation.init = function ($container) {
+	Shopsys.navigation.init = function ($container) {
 		$container.filterAllNodes('.js-main-navigation').on('mouseenter', 'a:not(#js-navig-item-logout, .js-navig-item-active)', updateNavigationInfo);
 		$container.filterAllNodes('.js-main-navigation').on('mouseleave', 'a:not(#js-navig-item-logout)', updateNavigationInfo);
 	};
@@ -34,6 +34,6 @@
 		$('#js-position-go-to-container').toggle(navigationType === navigationTypes.GOTO);
 	};
 
-	SS6.register.registerCallback(SS6.navigation.init);
+	Shopsys.register.registerCallback(Shopsys.navigation.init);
 
 })(jQuery);

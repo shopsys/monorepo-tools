@@ -1,21 +1,21 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.ajaxConfirm = SS6.ajaxConfirm || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.ajaxConfirm = Shopsys.ajaxConfirm || {};
 
-	SS6.ajaxConfirm.init = function ($container) {
-		$container.filterAllNodes('a.js-ajax-confirm').each(SS6.ajaxConfirm.bind);
+	Shopsys.ajaxConfirm.init = function ($container) {
+		$container.filterAllNodes('a.js-ajax-confirm').each(Shopsys.ajaxConfirm.bind);
 	};
 
-	SS6.ajaxConfirm.bind = function () {
+	Shopsys.ajaxConfirm.bind = function () {
 		$(this)
 			.unbind('click.ajaxConfirm')
 			.bind('click.ajaxConfirm', function () {
-				SS6.ajax({
+				Shopsys.ajax({
 					url: $(this).attr('href'),
 					context: this,
 					success: function(data) {
-						SS6.window({
+						Shopsys.window({
 							content: data
 						});
 						var onOpen = $(this).data('ajax-confirm-on-open');
@@ -29,6 +29,6 @@
 			});
 	};
 
-	SS6.register.registerCallback(SS6.ajaxConfirm.init);
+	Shopsys.register.registerCallback(Shopsys.ajaxConfirm.init);
 
 })(jQuery);

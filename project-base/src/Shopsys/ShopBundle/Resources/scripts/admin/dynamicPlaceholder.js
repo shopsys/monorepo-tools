@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.dynamicPlaceholder = SS6.dynamicPlaceholder || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.dynamicPlaceholder = Shopsys.dynamicPlaceholder || {};
 
-	SS6.dynamicPlaceholder.DynamicPlaceholder = function ($input) {
+	Shopsys.dynamicPlaceholder.DynamicPlaceholder = function ($input) {
 		var self = this;
 		var $sourceInput = $('#' + $input.data('placeholder-source-input-id'));
 
@@ -21,9 +21,9 @@
 		};
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-dynamic-placeholder').each(function () {
-			var dynamicPlaceholder = new SS6.dynamicPlaceholder.DynamicPlaceholder($(this));
+			var dynamicPlaceholder = new Shopsys.dynamicPlaceholder.DynamicPlaceholder($(this));
 			dynamicPlaceholder.init();
 		});
 	});

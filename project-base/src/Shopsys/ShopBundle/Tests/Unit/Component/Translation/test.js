@@ -1,9 +1,9 @@
-SS6.translator.trans('trans test');
+Shopsys.translator.trans('trans test');
 
-SS6.translator.transChoice('transChoice test', 5);
+Shopsys.translator.transChoice('transChoice test', 5);
 
-SS6.translator.trans('trans test with domain', {}, 'testDomain');
+Shopsys.translator.trans('trans test with domain', {}, 'testDomain');
 
-SS6.translator.transChoice('transChoice test with domain', 5, [], 'testDomain');
+Shopsys.translator.transChoice('transChoice test with domain', 5, [], 'testDomain');
 
-SS6.translator.trans('concatenated' + ' ' + 'message');
+Shopsys.translator.trans('concatenated' + ' ' + 'message');

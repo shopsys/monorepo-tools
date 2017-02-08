@@ -1,32 +1,32 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.selectToggle = SS6.selectToggle || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.selectToggle = Shopsys.selectToggle || {};
 
 	var optionClassPrefix = 'js-select-toggle-option-';
 
-	SS6.selectToggle.toggleOptgroupOnControlChange = function($select, $control) {
-		SS6.selectToggle.setOptgroupClassByLabel($select, optionClassPrefix);
+	Shopsys.selectToggle.toggleOptgroupOnControlChange = function($select, $control) {
+		Shopsys.selectToggle.setOptgroupClassByLabel($select, optionClassPrefix);
 
 		$control
 			.bind('change.selectToggle', function () {
-				SS6.selectToggle.showOptionsBySelector($select, '.' + optionClassPrefix + $control.val());
+				Shopsys.selectToggle.showOptionsBySelector($select, '.' + optionClassPrefix + $control.val());
 			})
 			.trigger('change.selectToggle');
 	};
 
-	SS6.selectToggle.showOptionsBySelector = function ($select, optionSelector) {
+	Shopsys.selectToggle.showOptionsBySelector = function ($select, optionSelector) {
 		$select.find('option').each(function () {
 			if ($(this).is(optionSelector)) {
-				SS6.toggleOption.show($(this));
+				Shopsys.toggleOption.show($(this));
 			} else {
-				SS6.toggleOption.hide($(this));
+				Shopsys.toggleOption.hide($(this));
 				$(this).removeAttr('selected')
 			}
 		});
 	};
 
-	SS6.selectToggle.setOptgroupClassByLabel = function ($select, classPrefix) {
+	Shopsys.selectToggle.setOptgroupClassByLabel = function ($select, classPrefix) {
 		$select.find('optgroup').each(function() {
 			var $optgroup = $(this);
 			var optgroupLabel = $optgroup.attr('label');

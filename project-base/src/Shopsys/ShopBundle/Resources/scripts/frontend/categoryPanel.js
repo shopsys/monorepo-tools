@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.categoryPanel = SS6.categoryPanel || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.categoryPanel = Shopsys.categoryPanel || {};
 
-	SS6.categoryPanel.init = function ($container) {
+	Shopsys.categoryPanel.init = function ($container) {
 		$container.filterAllNodes('.js-category-collapse-control')
 			.on('click', onCategoryCollapseControlClick);
 	};
@@ -29,7 +29,7 @@
 	}
 
 	function loadCategoryItemContent($categoryItem, url) {
-		SS6.ajax({
+		Shopsys.ajax({
 			loaderElement: $categoryItem,
 			url: url,
 			dataType: 'html',
@@ -40,11 +40,11 @@
 				$categoryListPlaceholder.replaceWith($categoryList);
 				$categoryList.hide().slideDown('fast');
 
-				SS6.register.registerNewContent($categoryList);
+				Shopsys.register.registerNewContent($categoryList);
 			}
 		});
 	}
 
-	SS6.register.registerCallback(SS6.categoryPanel.init);
+	Shopsys.register.registerCallback(Shopsys.categoryPanel.init);
 
 })(jQuery);

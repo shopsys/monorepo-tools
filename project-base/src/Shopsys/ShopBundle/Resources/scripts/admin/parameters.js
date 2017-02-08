@@ -1,20 +1,20 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.parameters = SS6.parameters || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.parameters = Shopsys.parameters || {};
 
-	SS6.parameters.init = function () {
+	Shopsys.parameters.init = function () {
 		$('.js-parameters').on('click', '.js-parameters-item-remove', function (event) {
 			var $collection = $(this).closest('.js-parameters');
 
 			var $item = $(this).closest('.js-parameters-item');
 			var index = $item.data('index');
-			SS6.validation.removeItemFromCollection('#product_edit_form_parameters', index);
+			Shopsys.validation.removeItemFromCollection('#product_edit_form_parameters', index);
 			$item.remove();
 
-			SS6.formChangeInfo.showInfo();
+			Shopsys.formChangeInfo.showInfo();
 
-			SS6.parameters.refreshCount($collection);
+			Shopsys.parameters.refreshCount($collection);
 
 			event.preventDefault();
 		});
@@ -34,17 +34,17 @@
 
 			$collection.append($item);
 
-			SS6.formChangeInfo.showInfo();
-			SS6.parameters.refreshCount($collection);
-			SS6.validation.addNewItemToCollection('#product_edit_form_parameters', index);
+			Shopsys.formChangeInfo.showInfo();
+			Shopsys.parameters.refreshCount($collection);
+			Shopsys.validation.addNewItemToCollection('#product_edit_form_parameters', index);
 
 			return false;
 		});
 
-		SS6.parameters.refreshCount($('.js-parameters'));
+		Shopsys.parameters.refreshCount($('.js-parameters'));
 	};
 
-	SS6.parameters.refreshCount = function($collection) {
+	Shopsys.parameters.refreshCount = function($collection) {
 		if ($collection.find('.js-parameters-item').length === 0) {
 			$collection.find('.js-parameters-empty-item').show();
 		} else {
@@ -53,7 +53,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.parameters.init();
+		Shopsys.parameters.init();
 	});
 
 })(jQuery);

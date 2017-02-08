@@ -1,25 +1,25 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.login = SS6.login || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.login = Shopsys.login || {};
 
-	SS6.login.init = function () {
+	Shopsys.login.init = function () {
 		$('body').on('submit', '.js-front-login-window', function() {
 			$('.js-front-login-window-message').empty();
-			SS6.ajax({
+			Shopsys.ajax({
 				loaderElement: '.js-front-login-window',
 				type: 'POST',
 				url: $(this).attr('action'),
 				data: $(this).serialize(),
 				success: function (data) {
 					if (data.success === true) {
-						var $loaderOverlay = SS6.loaderOverlay.createLoaderOverlay('.js-front-login-window');
-						SS6.loaderOverlay.showLoaderOverlay($loaderOverlay);
+						var $loaderOverlay = Shopsys.loaderOverlay.createLoaderOverlay('.js-front-login-window');
+						Shopsys.loaderOverlay.showLoaderOverlay($loaderOverlay);
 
 						document.location = data.urlToRedirect;
 					} else {
 						$('.js-front-login-window-message')
-							.text(SS6.translator.trans('Invalid login'))
+							.text(Shopsys.translator.trans('Invalid login'))
 							.show();
 					}
 				}
@@ -32,7 +32,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.login.init();
+		Shopsys.login.init();
 	});
 
 })(jQuery);

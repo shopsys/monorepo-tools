@@ -1,24 +1,24 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.product = SS6.product || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.product = Shopsys.product || {};
 
-	SS6.product.init = function () {
+	Shopsys.product.init = function () {
 		var usingStockSelection = $('#product_edit_form_productData_usingStock input[type="radio"]');
 		var $outOfStockActionSelection = $('select[name="product_edit_form[productData][outOfStockAction]"]');
 
 		usingStockSelection.change(function () {
-			SS6.product.toggleIsUsingStock($(this).val() === '1');
+			Shopsys.product.toggleIsUsingStock($(this).val() === '1');
 		});
 
 		$outOfStockActionSelection.change(function () {
-			SS6.product.toggleIsUsingAlternateAvailability($(this).val() === SS6.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
+			Shopsys.product.toggleIsUsingAlternateAvailability($(this).val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
 		});
 
-		SS6.product.toggleIsUsingStock(usingStockSelection.filter(':checked').val() === '1');
-		SS6.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === SS6.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
+		Shopsys.product.toggleIsUsingStock(usingStockSelection.filter(':checked').val() === '1');
+		Shopsys.product.toggleIsUsingAlternateAvailability($outOfStockActionSelection.val() === Shopsys.constant('\\Shopsys\\ShopBundle\\Model\\Product\\Product::OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY'));
 
-		SS6.product.initializeSideNavigation();
+		Shopsys.product.initializeSideNavigation();
 
 		$('#js-close-without-saving').on('click', function () {
 			window.close();
@@ -26,16 +26,16 @@
 		});
 	};
 
-	SS6.product.toggleIsUsingStock = function (isUsingStock) {
+	Shopsys.product.toggleIsUsingStock = function (isUsingStock) {
 		$('.js-product-using-stock').toggle(isUsingStock);
 		$('.js-product-not-using-stock').toggle(!isUsingStock);
 	};
 
-	SS6.product.toggleIsUsingAlternateAvailability = function (isUsingStockAndAlternateAvailability) {
+	Shopsys.product.toggleIsUsingAlternateAvailability = function (isUsingStockAndAlternateAvailability) {
 		$('.js-product-using-stock-and-alternate-availability').toggle(isUsingStockAndAlternateAvailability);
 	};
 
-	SS6.product.initializeSideNavigation = function () {
+	Shopsys.product.initializeSideNavigation = function () {
 		var $productDetailNavigation = $('.js-product-detail-navigation');
 		var $webContent = $('.web__content');
 
@@ -55,7 +55,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.product.init();
+		Shopsys.product.init();
 	});
 
 })(jQuery);

@@ -20,22 +20,22 @@
  *	</div>
  *
  * === Single tab mode initialization ===
- *	var hybridTabs = new SS6.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(SS6.hybridTabs.TABS_MODE_SINGLE);
+ *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
  *
  * === Multiple tabs mode initialization ===
- *	var hybridTabs = new SS6.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(SS6.hybridTabs.TABS_MODE_MULTIPLE);
+ *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_MULTIPLE);
  */
 
 (function ($) {
-	SS6 = window.SS6 || {};
-	SS6.hybridTabs = SS6.hybridTabs || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.hybridTabs = Shopsys.hybridTabs || {};
 
-	SS6.hybridTabs.TABS_MODE_SINGLE = 'single';
-	SS6.hybridTabs.TABS_MODE_MULTIPLE = 'multiple';
+	Shopsys.hybridTabs.TABS_MODE_SINGLE = 'single';
+	Shopsys.hybridTabs.TABS_MODE_MULTIPLE = 'multiple';
 
-	SS6.hybridTabs.HybridTabs = function ($container) {
+	Shopsys.hybridTabs.HybridTabs = function ($container) {
 		var $tabButtons = $container.find('.js-tabs-button');
 		var $tabContents = $container.find('.js-tabs-content');
 		var tabsMode = null;
@@ -55,14 +55,14 @@
 
 		function fixTabsState() {
 
-			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
+			if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
 				var $activeButtons = $tabButtons.filter('.active');
 				if ($activeButtons.length > 0) {
 					activateOneTabAndDeactivateOther($activeButtons.last().data('tab-id'));
 				} else {
 					activateOneTabAndDeactivateOther($tabButtons.first().data('tab-id'));
 				}
-			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
+			} else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
 				$tabContents.each(function () {
 					var tabId = $(this).data('tab-id');
 					var $tabButton = $tabButtons.filter('[data-tab-id="' + tabId + '"]');
@@ -76,9 +76,9 @@
 		function onClickTabButton() {
 			var tabId = $(this).data('tab-id');
 
-			if (tabsMode === SS6.hybridTabs.TABS_MODE_SINGLE) {
+			if (tabsMode === Shopsys.hybridTabs.TABS_MODE_SINGLE) {
 				activateOneTabAndDeactivateOther(tabId);
-			} else if (tabsMode === SS6.hybridTabs.TABS_MODE_MULTIPLE) {
+			} else if (tabsMode === Shopsys.hybridTabs.TABS_MODE_MULTIPLE) {
 				var isTabActive = $(this).hasClass('active');
 
 				toggleTab(tabId, !isTabActive);

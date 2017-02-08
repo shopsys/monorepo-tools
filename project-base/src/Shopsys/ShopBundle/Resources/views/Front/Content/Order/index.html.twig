@@ -5,7 +5,7 @@
 	<script type="text/javascript">
 		{% for payment in payments %}
 			{% for transport in payment.transports %}
-				SS6.order.addPaymentTransportRelation({{ payment.id }}, {{ transport.id }});
+				Shopsys.order.addPaymentTransportRelation({{ payment.id }}, {{ transport.id }});
 			{% endfor %}
 		{% endfor %}
 	</script>

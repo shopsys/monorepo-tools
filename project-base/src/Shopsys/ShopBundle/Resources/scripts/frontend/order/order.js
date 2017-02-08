@@ -1,49 +1,49 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.order = SS6.order || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.order = Shopsys.order || {};
 
-	SS6.order.paymentTransportRelations = [];
+	Shopsys.order.paymentTransportRelations = [];
 
-	SS6.order.init = function ($container) {
+	Shopsys.order.init = function ($container) {
 		var $transportInputs = $container.filterAllNodes('.js-order-transport-input');
 		var $paymentInputs = $container.filterAllNodes('.js-order-payment-input');
 
-		$transportInputs.change(SS6.order.onTransportChange);
-		$paymentInputs.change(SS6.order.onPaymentChange);
-		SS6.order.updateTransports();
-		SS6.order.updatePayments();
+		$transportInputs.change(Shopsys.order.onTransportChange);
+		$paymentInputs.change(Shopsys.order.onPaymentChange);
+		Shopsys.order.updateTransports();
+		Shopsys.order.updatePayments();
 
-		$transportInputs.change(SS6.order.updateContinueButton);
-		$paymentInputs.change(SS6.order.updateContinueButton);
-		SS6.order.updateContinueButton();
+		$transportInputs.change(Shopsys.order.updateContinueButton);
+		$paymentInputs.change(Shopsys.order.updateContinueButton);
+		Shopsys.order.updateContinueButton();
 	};
 
-	SS6.order.addPaymentTransportRelation = function(paymentId, transportId) {
-		if (SS6.order.paymentTransportRelations[paymentId] === undefined) {
-			SS6.order.paymentTransportRelations[paymentId] = [];
+	Shopsys.order.addPaymentTransportRelation = function(paymentId, transportId) {
+		if (Shopsys.order.paymentTransportRelations[paymentId] === undefined) {
+			Shopsys.order.paymentTransportRelations[paymentId] = [];
 		}
-		SS6.order.paymentTransportRelations[paymentId][transportId] = true;
+		Shopsys.order.paymentTransportRelations[paymentId][transportId] = true;
 	};
 
-	SS6.order.paymentTransportRelationExists = function(paymentId, transportId) {
-		if (SS6.order.paymentTransportRelations[paymentId] !== undefined) {
-			if (SS6.order.paymentTransportRelations[paymentId][transportId] !== undefined) {
-				return SS6.order.paymentTransportRelations[paymentId][transportId];
+	Shopsys.order.paymentTransportRelationExists = function(paymentId, transportId) {
+		if (Shopsys.order.paymentTransportRelations[paymentId] !== undefined) {
+			if (Shopsys.order.paymentTransportRelations[paymentId][transportId] !== undefined) {
+				return Shopsys.order.paymentTransportRelations[paymentId][transportId];
 			}
 		}
 
 		return false;
 	};
 
-	SS6.order.updateTransports = function () {
+	Shopsys.order.updateTransports = function () {
 		var $checkedPayment = $('.js-order-payment-input:checked');
 		if ($checkedPayment.length > 0) {
 			var checkedPaymentId = $checkedPayment.data('id');
 			$('.js-order-transport-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
-				if (SS6.order.paymentTransportRelationExists(checkedPaymentId, id)) {
+				if (Shopsys.order.paymentTransportRelationExists(checkedPaymentId, id)) {
 					$checkbox.prop('disabled', false);
 					$checkbox.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive');
 				} else {
@@ -66,14 +66,14 @@
 		}
 	};
 
-	SS6.order.updatePayments = function () {
+	Shopsys.order.updatePayments = function () {
 		var $checkedTransport = $('.js-order-transport-input:checked');
 		if ($checkedTransport.length > 0) {
 			var checkedTransportId = $checkedTransport.data('id');
 			$('.js-order-payment-input').each(function (i, checkbox) {
 				var $checkbox = $(checkbox);
 				var id = $checkbox.data('id');
-				if (SS6.order.paymentTransportRelationExists(id, checkedTransportId)) {
+				if (Shopsys.order.paymentTransportRelationExists(id, checkedTransportId)) {
 					$checkbox.prop('disabled', false);
 					$checkbox.closest('label.box-chooser__item').removeClass('box-chooser__item--inactive');
 				} else {
@@ -96,7 +96,7 @@
 		}
 	};
 
-	SS6.order.onTransportChange = function () {
+	Shopsys.order.onTransportChange = function () {
 		var $this = $(this);
 		var checked = $this.prop('checked');
 		var checkedId = $this.data('id');
@@ -117,10 +117,10 @@
 			$this.closest('label.box-chooser__item').removeClass('box-chooser__item--active');
 		}
 
-		SS6.order.updatePayments();
+		Shopsys.order.updatePayments();
 	};
 
-	SS6.order.onPaymentChange = function () {
+	Shopsys.order.onPaymentChange = function () {
 		var $this = $(this);
 		var checked = $this.prop('checked');
 		var checkedId = $this.data('id');
@@ -141,10 +141,10 @@
 			$this.closest('label.box-chooser__item').removeClass('box-chooser__item--active');
 		}
 
-		SS6.order.updateTransports();
+		Shopsys.order.updateTransports();
 	};
 
-	SS6.order.updateContinueButton = function () {
+	Shopsys.order.updateContinueButton = function () {
 		var checkedTransport = $('.js-order-transport-input:checked');
 		var checkedPayment = $('.js-order-payment-input:checked');
 
@@ -155,6 +155,6 @@
 		}
 	};
 
-	SS6.register.registerCallback(SS6.order.init);
+	Shopsys.register.registerCallback(Shopsys.order.init);
 
 })(jQuery);

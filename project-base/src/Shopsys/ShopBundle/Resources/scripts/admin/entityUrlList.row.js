@@ -1,9 +1,9 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.entityUrls = SS6.entityUrls || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.entityUrls = Shopsys.entityUrls || {};
 
-	SS6.entityUrls.Row = function ($row) {
+	Shopsys.entityUrls.Row = function ($row) {
 		var $label = $row.find('.js-entity-url-list-row-label');
 		var $checkbox = $row.find('.js-entity-url-list-row-checkbox');
 		var $deleteBlock = $row.find('.js-entity-url-list-row-delete-block');
@@ -17,13 +17,13 @@
 		this.init = function () {
 			$deleteBlockButton.click(function () {
 				markAsDeleted(true);
-				SS6.formChangeInfo.showInfo();
+				Shopsys.formChangeInfo.showInfo();
 				return false;
 			});
 
 			$revertBlockButton.click(function () {
 				markAsDeleted(false);
-				SS6.formChangeInfo.showInfo();
+				Shopsys.formChangeInfo.showInfo();
 				return false;
 			});
 
@@ -61,9 +61,9 @@
 		};
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-entity-url-list-friendly-url').each(function () {
-			var entityUrlsRow = new SS6.entityUrls.Row($(this));
+			var entityUrlsRow = new Shopsys.entityUrls.Row($(this));
 			entityUrlsRow.init();
 		});
 	});

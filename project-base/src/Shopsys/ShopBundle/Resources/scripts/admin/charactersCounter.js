@@ -1,9 +1,9 @@
 (function ($){
 
-	SS6 = window.SS6 || {};
-	SS6.charactersCounter = SS6.charactersCounter || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.charactersCounter = Shopsys.charactersCounter || {};
 
-	SS6.charactersCounter.Counter = function ($counter) {
+	Shopsys.charactersCounter.Counter = function ($counter) {
 		var self = this;
 		var $input = $counter.find('.js-characters-counter-input input, input.js-characters-counter-input, textarea.js-characters-counter-input');
 		var $info = $counter.find('.js-characters-counter-info');
@@ -22,7 +22,7 @@
 			if (currentLength === 0 && placeholder) {
 				currentLength = placeholder.length;
 			}
-			$info.text(SS6.translator.trans(
+			$info.text(Shopsys.translator.trans(
 				'Used: %currentLength% characters. Recommended max. %recommendedLength%',
 				{
 					'%currentLength%': currentLength,
@@ -33,9 +33,9 @@
 
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-characters-counter').each(function () {
-			var instance = new SS6.charactersCounter.Counter($(this));
+			var instance = new Shopsys.charactersCounter.Counter($(this));
 			instance.init();
 		});
 	});

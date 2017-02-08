@@ -1,9 +1,9 @@
 (function ($){
 
-	SS6 = SS6 || {};
-	SS6.mailTemplate = SS6.mailTemplate || {};
+	Shopsys = Shopsys || {};
+	Shopsys.mailTemplate = Shopsys.mailTemplate || {};
 
-	SS6.mailTemplate.AttachmentDelete = function ($attachment) {
+	Shopsys.mailTemplate.AttachmentDelete = function ($attachment) {
 		var $deleteButton = $attachment.find('.js-mail-template-attachment-delete-button');
 		var $revertButton = $attachment.find('.js-mail-template-attachment-delete-revert-button');
 		var $revert = $attachment.find('.js-mail-template-attachment-delete-revert');
@@ -32,9 +32,9 @@
 		}
 	};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-mail-template-attachment').each(function () {
-			var attachmentDelete = new SS6.mailTemplate.AttachmentDelete($(this));
+			var attachmentDelete = new Shopsys.mailTemplate.AttachmentDelete($(this));
 			attachmentDelete.init();
 		});
 	});

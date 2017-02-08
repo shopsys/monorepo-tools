@@ -1,26 +1,26 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.addProduct = SS6.addProduct || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.addProduct = Shopsys.addProduct || {};
 
-	SS6.addProduct.init = function ($container) {
-		$container.filterAllNodes('form.js-add-product').bind('submit.addProductAjaxSubmit', SS6.addProduct.ajaxSubmit);
+	Shopsys.addProduct.init = function ($container) {
+		$container.filterAllNodes('form.js-add-product').bind('submit.addProductAjaxSubmit', Shopsys.addProduct.ajaxSubmit);
 	};
 
-	SS6.addProduct.ajaxSubmit = function (event) {
-		SS6.ajax({
+	Shopsys.addProduct.ajaxSubmit = function (event) {
+		Shopsys.ajax({
 			url: $(this).data('ajax-url'),
 			type: 'POST',
 			data: $(this).serialize(),
 			dataType: 'html',
-			success: SS6.addProduct.onSuccess,
-			error: SS6.addProduct.onError
+			success: Shopsys.addProduct.onSuccess,
+			error: Shopsys.addProduct.onError
 		});
 
 		event.preventDefault();
 	};
 
-	SS6.addProduct.onSuccess = function (data) {
+	Shopsys.addProduct.onSuccess = function (data) {
 		var buttonContinueUrl = $($.parseHTML(data)).filterAllNodes('.js-add-product-url-cart').data('url');
 		var isWide = $($.parseHTML(data)).filterAllNodes('.js-add-product-wide-window').data('wide');
 		if (isWide) {
@@ -30,36 +30,36 @@
 		}
 
 		if (buttonContinueUrl !== undefined) {
-			SS6.window({
+			Shopsys.window({
 				content: data,
 				cssClass: cssClass,
 				buttonContinue: true,
-				textContinue: SS6.translator.trans('Go to cart'),
+				textContinue: Shopsys.translator.trans('Go to cart'),
 				urlContinue: buttonContinueUrl,
 				cssClassContinue: 'btn--success'
 			});
 
 			$('#js-cart-box').trigger('reload');
 		} else {
-			SS6.window({
+			Shopsys.window({
 				content: data,
 				cssClass: cssClass,
 				buttonCancel: true,
-				textCancel: SS6.translator.trans('Close'),
+				textCancel: Shopsys.translator.trans('Close'),
 				cssClassCancel: 'btn--success'
 			});
 		}
 	};
 
-	SS6.addProduct.onError = function (jqXHR) {
+	Shopsys.addProduct.onError = function (jqXHR) {
 		// on FireFox abort ajax request, but request was probably successful
 		if (jqXHR.status !== 0) {
-			SS6.window({
-				content: SS6.translator.trans('Operation failed')
+			Shopsys.window({
+				content: Shopsys.translator.trans('Operation failed')
 			});
 		}
 	};
 
-	SS6.register.registerCallback(SS6.addProduct.init);
+	Shopsys.register.registerCallback(Shopsys.addProduct.init);
 
 })(jQuery);

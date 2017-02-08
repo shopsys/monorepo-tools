@@ -10,7 +10,7 @@
 		this.validate = function(value) {
 
 			var f = FpJsFormValidator;
-			var compareValue = SS6.number.parseNumber(value);
+			var compareValue = Shopsys.number.parseNumber(value);
 
 			if (f.isValueEmty(value) || (compareValue !== null && compareValue >= this.min && compareValue <= this.max)) {
 				return [];

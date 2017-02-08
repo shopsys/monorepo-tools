@@ -1,13 +1,13 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
-	SS6.createConfirmDelete = function (confirmLink) {
-		var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, '#window-main-container .window .js-window-content');
+	Shopsys.createConfirmDelete = function (confirmLink) {
+		var ConfirmDelete = new Shopsys.ConfirmDelete(confirmLink, '#window-main-container .window .js-window-content');
 		ConfirmDelete.init();
 	};
 
-	SS6.ConfirmDelete = function (confirmLink, messageContainerSelector) {
+	Shopsys.ConfirmDelete = function (confirmLink, messageContainerSelector) {
 		var self = this;
 		var $confirmLink = $(confirmLink);
 		var $messageContainer = $(messageContainerSelector);
@@ -27,14 +27,14 @@
 		};
 
 		var canDeleteDirectly = function () {
-			SS6.ajax({
+			Shopsys.ajax({
 				url: $confirmLink.attr('href'),
 				success: function(data) {
 					if ($($.parseHTML(data)).find('.js-confirm-delete-direct-link').length > 0) {
 						document.location = $directDeleteLink.attr('href');
 					} else {
 						$messageContainer.html(data);
-						var ConfirmDelete = new SS6.ConfirmDelete(confirmLink, messageContainerSelector);
+						var ConfirmDelete = new Shopsys.ConfirmDelete(confirmLink, messageContainerSelector);
 						ConfirmDelete.init();
 					}
 				}
@@ -56,7 +56,7 @@
 				$confirmDeleteFormButton
 					.addClass('btn--disabled cursor-help')
 					.tooltip({
-						title: SS6.translator.trans('Choose new value first'),
+						title: Shopsys.translator.trans('Choose new value first'),
 						placement: 'right'
 					});
 			}

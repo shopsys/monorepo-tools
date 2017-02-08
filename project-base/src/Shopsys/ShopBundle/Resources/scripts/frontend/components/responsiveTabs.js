@@ -3,7 +3,7 @@
  * single tab mode (classic tabs) in desktop view and multiple tabs mode
  * (aka. accordion) in mobile view.
  *
- * @see SS6.HybridTabs
+ * @see Shopsys.HybridTabs
  *
  * == Notes ==
  * - There must be at least one "js-tab-button" for each "js-tab-content".
@@ -41,22 +41,22 @@
  */
 
 (function ($) {
-	SS6 = window.SS6 || {};
+	Shopsys = window.Shopsys || {};
 
-	SS6.register.registerCallback(function ($container) {
+	Shopsys.register.registerCallback(function ($container) {
 		$container.filterAllNodes('.js-responsive-tabs').each(function () {
-			var hybridTabs = new SS6.hybridTabs.HybridTabs($(this));
+			var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
 			hybridTabs.init(getHybridTabsModeForCurrentResponsiveMode());
 
-			SS6.responsive.registerOnLayoutChange(function () {
+			Shopsys.responsive.registerOnLayoutChange(function () {
 				hybridTabs.setTabsMode(getHybridTabsModeForCurrentResponsiveMode());
 			});
 
 			function getHybridTabsModeForCurrentResponsiveMode() {
-				if (SS6.responsive.isDesktopVersion()) {
-					return SS6.hybridTabs.TABS_MODE_SINGLE;
+				if (Shopsys.responsive.isDesktopVersion()) {
+					return Shopsys.hybridTabs.TABS_MODE_SINGLE;
 				} else {
-					return SS6.hybridTabs.TABS_MODE_MULTIPLE;
+					return Shopsys.hybridTabs.TABS_MODE_MULTIPLE;
 				}
 			}
 		});

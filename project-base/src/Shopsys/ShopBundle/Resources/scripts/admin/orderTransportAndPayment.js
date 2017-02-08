@@ -1,10 +1,10 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.order = SS6.order || {};
-	SS6.order.transportAndPayment = SS6.order.transportAndPayment || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.order = Shopsys.order || {};
+	Shopsys.order.transportAndPayment = Shopsys.order.transportAndPayment || {};
 
-	SS6.order.transportAndPayment.Prefiller = function () {
+	Shopsys.order.transportAndPayment.Prefiller = function () {
 		var self = this;
 
 		var $transportSelect = $('#order_form_orderTransport_transport');
@@ -34,7 +34,7 @@
 	};
 
 	$(document).ready(function () {
-		var instance = new SS6.order.transportAndPayment.Prefiller();
+		var instance = new Shopsys.order.transportAndPayment.Prefiller();
 		instance.init();
 	});
 

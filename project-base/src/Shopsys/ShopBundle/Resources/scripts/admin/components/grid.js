@@ -1,18 +1,18 @@
 (function ($){
 
-	SS6 = SS6 || {};
-	SS6.grid = SS6.grid || {};
+	Shopsys = Shopsys || {};
+	Shopsys.grid = Shopsys.grid || {};
 
-	SS6.grid.init = function (formElement) {
-		$('.js-grid-go-to').each(SS6.grid.bindGoTo);
+	Shopsys.grid.init = function (formElement) {
+		$('.js-grid-go-to').each(Shopsys.grid.bindGoTo);
 	};
 
-	SS6.grid.bindGoTo = function () {
+	Shopsys.grid.bindGoTo = function () {
 		var $button = $(this).find('.js-grid-go-to-button');
 		var $input = $(this).find('.js-grid-go-to-input');
 
 		$input.bind('keydown.gridGoTo', function (event) {
-			if (event.keyCode == SS6.keyCodes.ENTER) {
+			if (event.keyCode == Shopsys.keyCodes.ENTER) {
 				$button.trigger('click.gridGoTo', event);
 
 				return false;
@@ -26,7 +26,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.grid.init();
+		Shopsys.grid.init();
 	});
 
 })(jQuery);

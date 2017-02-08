@@ -1,25 +1,25 @@
 (function ($){
 
-	SS6 = SS6 || {};
-	SS6.grid = SS6.grid || {};
-	SS6.grid.multipleDragAndDrop = SS6.grid.multipleDragAndDrop || {};
+	Shopsys = Shopsys || {};
+	Shopsys.grid = Shopsys.grid || {};
+	Shopsys.grid.multipleDragAndDrop = Shopsys.grid.multipleDragAndDrop || {};
 
-	SS6.grid.multipleDragAndDrop.init = function () {
-		SS6.grid.multipleDragAndDrop.toggleRowHolders();
-		$('.js-multiple-grids-save-all-button').click(SS6.grid.multipleDragAndDrop.saveOrdering);
+	Shopsys.grid.multipleDragAndDrop.init = function () {
+		Shopsys.grid.multipleDragAndDrop.toggleRowHolders();
+		$('.js-multiple-grids-save-all-button').click(Shopsys.grid.multipleDragAndDrop.saveOrdering);
 		$('.js-multiple-grids-rows-unified').sortable({
 			cursor: 'move',
 			handle: '.cursor-move',
 			items: '.js-grid-row, .js-grid-row-holder',
 			placeholder: 'in-drop-place',
 			revert: 200,
-			change: SS6.grid.multipleDragAndDrop.onUpdate,
-			update: SS6.grid.multipleDragAndDrop.onUpdate
+			change: Shopsys.grid.multipleDragAndDrop.onUpdate,
+			update: Shopsys.grid.multipleDragAndDrop.onUpdate
 		});
 
 	};
 
-	SS6.grid.multipleDragAndDrop.getPositionsIndexedByGridId = function ($grids) {
+	Shopsys.grid.multipleDragAndDrop.getPositionsIndexedByGridId = function ($grids) {
 		var rowIdsIndexedByGridId = {};
 		$.each($grids, function(index, grid) {
 			var $grid = $(grid);
@@ -35,36 +35,36 @@
 		return rowIdsIndexedByGridId;
 	};
 
-	SS6.grid.multipleDragAndDrop.saveOrdering = function (event) {
+	Shopsys.grid.multipleDragAndDrop.saveOrdering = function (event) {
 		var $saveButton = $(event.target);
 		var $grids = $saveButton.closest('.js-multiple-grids-rows-unified').find('.js-grid');
 		var data = {
-			rowIdsByGridId: SS6.grid.multipleDragAndDrop.getPositionsIndexedByGridId($grids)
+			rowIdsByGridId: Shopsys.grid.multipleDragAndDrop.getPositionsIndexedByGridId($grids)
 		};
 
-		SS6.ajax({
+		Shopsys.ajax({
 			loaderElement: '.js-multiple-grids-save-all-button',
 			url: $saveButton.data('drag-and-drop-url-save-ordering'),
 			type: 'POST',
 			data: data,
 			dataType: 'json',
 			success: function () {
-				SS6.window({content: SS6.translator.trans('Order saved')});
+				Shopsys.window({content: Shopsys.translator.trans('Order saved')});
 			},
 			error: function () {
-				SS6.window({content: SS6.translator.trans('Order saving failed')});
+				Shopsys.window({content: Shopsys.translator.trans('Order saving failed')});
 			}
 		});
 
 		$saveButton.addClass('btn--disabled');
 	};
 
-	SS6.grid.multipleDragAndDrop.onUpdate = function (event, ui) {
+	Shopsys.grid.multipleDragAndDrop.onUpdate = function (event, ui) {
 		$('.js-multiple-grids-save-all-button').removeClass('btn--disabled');
-		SS6.grid.multipleDragAndDrop.toggleRowHolders();
+		Shopsys.grid.multipleDragAndDrop.toggleRowHolders();
 	};
 
-	SS6.grid.multipleDragAndDrop.toggleRowHolders = function () {
+	Shopsys.grid.multipleDragAndDrop.toggleRowHolders = function () {
 		 $('.js-multiple-grids-rows-unified .js-grid').each(function() {
 			var gridRowsCount = $(this).find('.js-grid-row:not(.ui-sortable-helper):not(.js-grid-row-holder), .in-drop-place').length;
 			var $rowHolder = $(this).find('.js-grid-row-holder');
@@ -73,7 +73,7 @@
 	};
 
 	$(document).ready(function () {
-		SS6.grid.multipleDragAndDrop.init();
+		Shopsys.grid.multipleDragAndDrop.init();
 	});
 
 })(jQuery);

@@ -1,20 +1,20 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.spinbox = SS6.spinbox || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.spinbox = Shopsys.spinbox || {};
 
-	SS6.spinbox.init = function ($container) {
-		$container.filterAllNodes('.js-spinbox').each(SS6.spinbox.bindSpinbox);
+	Shopsys.spinbox.init = function ($container) {
+		$container.filterAllNodes('.js-spinbox').each(Shopsys.spinbox.bindSpinbox);
 	};
 
-	SS6.spinbox.bindSpinbox = function () {
+	Shopsys.spinbox.bindSpinbox = function () {
 		var $input = $(this).find('input.js-spinbox-input');
 		var $plus = $(this).find('.js-spinbox-plus');
 		var $minus = $(this).find('.js-spinbox-minus');
 
 		$input
-			.bind('spinbox.plus', SS6.spinbox.plus)
-			.bind('spinbox.minus', SS6.spinbox.minus);
+			.bind('spinbox.plus', Shopsys.spinbox.plus)
+			.bind('spinbox.minus', Shopsys.spinbox.minus);
 
 		$plus
 			.bind("mousedown.spinbox",function(e){
@@ -34,7 +34,7 @@
 
 	};
 
-	SS6.spinbox.plus = function() {
+	Shopsys.spinbox.plus = function() {
 		var value = $.trim($(this).val());
 		var max = $(this).data('spinbox-max');
 
@@ -48,7 +48,7 @@
 		}
 	};
 
-	SS6.spinbox.minus = function() {
+	Shopsys.spinbox.minus = function() {
 		var value = $.trim($(this).val());
 		var min = $(this).data('spinbox-min');
 
@@ -83,6 +83,6 @@
 		}
 	};
 
-	SS6.register.registerCallback(SS6.spinbox.init);
+	Shopsys.register.registerCallback(Shopsys.spinbox.init);
 
 })(jQuery);

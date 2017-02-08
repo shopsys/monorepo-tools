@@ -1,14 +1,14 @@
 (function ($) {
 
-	SS6 = SS6 || {};
-	SS6.massAction = SS6.massAction || {};
+	Shopsys = Shopsys || {};
+	Shopsys.massAction = Shopsys.massAction || {};
 
-	SS6.massAction.init = function ($container) {
+	Shopsys.massAction.init = function ($container) {
 		$container.filterAllNodes('#js-mass-action-button').click(function () {
 			$('#js-mass-action').toggleClass('active');
 		});
 	};
 
-	SS6.register.registerCallback(SS6.massAction.init);
+	Shopsys.register.registerCallback(Shopsys.massAction.init);
 
 })(jQuery);

@@ -1,14 +1,14 @@
 (function ($) {
 
-	SS6 = window.SS6 || {};
-	SS6.toggleElement = SS6.toggleElement || {};
+	Shopsys = window.Shopsys || {};
+	Shopsys.toggleElement = Shopsys.toggleElement || {};
 
-	SS6.toggleElement.init = function ($container) {
+	Shopsys.toggleElement.init = function ($container) {
 		$container.filterAllNodes('.js-toggle-container .js-toggle-button')
-			.bind('click', SS6.toggleElement.toggle);
+			.bind('click', Shopsys.toggleElement.toggle);
 	};
 
-	SS6.toggleElement.show = function ($container) {
+	Shopsys.toggleElement.show = function ($container) {
 		var $content = $container.find('.js-toggle-content');
 
 		$container.trigger('showContent.toggleElement');
@@ -18,7 +18,7 @@
 		});
 	};
 
-	SS6.toggleElement.hide = function ($container) {
+	Shopsys.toggleElement.hide = function ($container) {
 		var $content = $container.find('.js-toggle-content');
 
 		$container.trigger('hideContent.toggleElement');
@@ -28,16 +28,16 @@
 		});
 	};
 
-	SS6.toggleElement.toggle = function () {
+	Shopsys.toggleElement.toggle = function () {
 		var $container = $(this).closest('.js-toggle-container');
 		var $content = $container.find('.js-toggle-content');
 		if ($content.hasClass('display-none')) {
-			SS6.toggleElement.show($container);
+			Shopsys.toggleElement.show($container);
 		} else {
-			SS6.toggleElement.hide($container);
+			Shopsys.toggleElement.hide($container);
 		}
 	};
 
-	SS6.register.registerCallback(SS6.toggleElement.init);
+	Shopsys.register.registerCallback(Shopsys.toggleElement.init);
 
 })(jQuery);
