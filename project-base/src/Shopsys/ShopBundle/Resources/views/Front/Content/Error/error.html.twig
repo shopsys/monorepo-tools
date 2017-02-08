@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
 	{{ 'Error occurred'|trans }}: {{ status_text }}
@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="row">
-		{{ render(controller('SS6ShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
+		{{ render(controller('ShopsysShopBundle:Front/Breadcrumb:index', { routeName: getRoute(), routeParameters: getRouteParams() } )) }}
 
 		<div class="box-error-page">
 			{% if status_code == 404 %}

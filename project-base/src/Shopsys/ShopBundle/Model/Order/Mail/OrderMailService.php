@@ -212,7 +212,7 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getBillingAddressHtmlTable(Order $order) {
-		return $this->twig->render('@SS6Shop/Mail/Order/billingAddress.html.twig', [
+		return $this->twig->render('@ShopsysShop/Mail/Order/billingAddress.html.twig', [
 			'order' => $order,
 			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
@@ -223,7 +223,7 @@ class OrderMailService {
 	 * @return string
 	 */
 	private function getDeliveryAddressHtmlTable(Order $order) {
-		return $this->twig->render('@SS6Shop/Mail/Order/deliveryAddress.html.twig', [
+		return $this->twig->render('@ShopsysShop/Mail/Order/deliveryAddress.html.twig', [
 			'order' => $order,
 			'orderLocale' => $this->getDomainLocaleByOrder($order),
 		]);
@@ -236,7 +236,7 @@ class OrderMailService {
 	private function getProductsHtmlTable(Order $order) {
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->twig->render('@SS6Shop/Mail/Order/products.html.twig', [
+		return $this->twig->render('@ShopsysShop/Mail/Order/products.html.twig', [
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
 			'orderLocale' => $this->getDomainLocaleByOrder($order),

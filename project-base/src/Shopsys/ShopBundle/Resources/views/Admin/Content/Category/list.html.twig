@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Category'|trans }}{% endblock %}
 {% block h1 %}{{ 'Category'|trans }}{% endblock %}
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Category:listDomainTabs')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Category:listDomainTabs')) }}
 
 	{% macro categoryTreeItem(categoryDetails, isFirstLevel) %}
 		<ul class="js-category-tree-items {{ isFirstLevel ? 'form-tree__content' : '' }}">
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<button
 					class="btn btn--disabled"

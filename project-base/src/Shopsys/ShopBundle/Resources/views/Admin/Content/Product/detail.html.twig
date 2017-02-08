@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 {% set showHeading = false %}
 
 {% block title %}- {{ 'Product detail'|trans }}{% endblock %}
@@ -425,7 +425,7 @@
 
 		{{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
 				{{ form_save(product|default(null), form) }}

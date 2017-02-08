@@ -56,7 +56,7 @@ class PricingGroupGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_pricinggroup_deleteconfirm', ['id' => 'pg.id'])
 			->setAjaxConfirm();
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Pricing/Groups/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Pricing/Groups/listGrid.html.twig');
 
 		return $grid;
 	}

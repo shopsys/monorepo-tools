@@ -19,7 +19,7 @@ class BrandController extends FrontBaseController {
 	}
 
 	public function listAction() {
-		return $this->render('@SS6Shop/Front/Content/Brand/list.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Brand/list.html.twig', [
 			'brands' => $this->brandFacade->getAll(),
 		]);
 	}

@@ -34,7 +34,7 @@ class PromoCodeController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->promoCodeInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/PromoCode/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/PromoCode/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

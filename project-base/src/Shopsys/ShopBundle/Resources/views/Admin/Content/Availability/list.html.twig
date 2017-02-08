@@ -1,11 +1,11 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Availabilities overview'|trans }}{% endblock %}
 {% block h1 %}{{ 'Availabilities overview'|trans }}{% endblock %}
 
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Availability:setting')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Availability:setting')) }}
 
 	{{ gridView.render() }}
 {% endblock %}

@@ -68,7 +68,7 @@ class ShopInfoController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/ShopInfo/shopInfo.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/ShopInfo/shopInfo.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

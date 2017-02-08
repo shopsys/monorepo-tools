@@ -180,7 +180,7 @@ class ProductController extends AdminBaseController {
 		} catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Product/edit.html.twig', $viewParameters);
+		return $this->render('@ShopsysShop/Admin/Content/Product/edit.html.twig', $viewParameters);
 	}
 
 	/**
@@ -211,7 +211,7 @@ class ProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Product/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Product/new.html.twig', [
 			'form' => $form->createView(),
 			'pricingGroupsIndexedByDomainId' => $this->pricingGroupFacade->getAllIndexedByDomainId(),
 		]);
@@ -262,7 +262,7 @@ class ProductController extends AdminBaseController {
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Product/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Product/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 			'advancedSearchForm' => $advancedSearchForm->createView(),
@@ -302,7 +302,7 @@ class ProductController extends AdminBaseController {
 	public function getRuleFormAction(Request $request) {
 		$ruleForm = $this->advancedSearchFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
-		return $this->render('@SS6Shop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Product/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),
 		]);
 	}
@@ -336,7 +336,7 @@ class ProductController extends AdminBaseController {
 			}
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Product/createVariant.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Product/createVariant.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
@@ -371,7 +371,7 @@ class ProductController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_product_delete', ['id' => 'p.id'])
 			->setConfirmMessage(t('Do you really want to remove this product?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Product/listGrid.html.twig', [
+		$grid->setTheme('@ShopsysShop/Admin/Content/Product/listGrid.html.twig', [
 			'VARIANT_TYPE_MAIN' => Product::VARIANT_TYPE_MAIN,
 			'VARIANT_TYPE_VARIANT' => Product::VARIANT_TYPE_VARIANT,
 		]);
@@ -386,7 +386,7 @@ class ProductController extends AdminBaseController {
 	public function visibilityAction($productId) {
 		$product = $this->productEditFacade->getById($productId);
 
-		return $this->render('@SS6Shop/Admin/Content/Product/visibility.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Product/visibility.html.twig', [
 			'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
 		]);
 	}

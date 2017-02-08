@@ -33,7 +33,7 @@ class GenerateGruntfileCommand extends ContainerAwareCommand {
 		$cssFacade->setCssVersion($cssVersion);
 
 		$output->writeln('Start of generating Gruntfile.js.');
-		$gruntfileContents = $twig->render('@SS6Shop/Grunt/gruntfile.js.twig', [
+		$gruntfileContents = $twig->render('@ShopsysShop/Grunt/gruntfile.js.twig', [
 			'domains' => $domain->getAll(),
 			'rootStylesDirectory' => $this->getContainer()->getParameter('ss6.styles_dir'),
 			'cssVersion' => $cssVersion,

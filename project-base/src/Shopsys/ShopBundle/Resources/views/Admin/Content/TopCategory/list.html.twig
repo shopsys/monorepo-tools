@@ -1,17 +1,17 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Category guidepost on main page'|trans }}{% endblock %}
 {% block h1 %}{{ 'Category guidepost on main page'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
 	{{ form_start(form) }}
 
 	{{ form_errors(form) }}
 	{{ form_row(form.categories, { label: 'Category'|trans }) }}
 
-	{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+	{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 		{% block fixed_bar_content %}
 			{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
 		{% endblock %}

@@ -56,7 +56,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="translation:extract" />
-			<arg value="--bundle=SS6ShopBundle" />
+			<arg value="--bundle=ShopsysShopBundle" />
 			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Controller" />
 			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Form" />
 			<arg value="--dir=${path.src}/Shopsys/ShopBundle/Component/Grid" />
@@ -764,7 +764,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="lint:twig" />
-			<arg value="@SS6ShopBundle" />
+			<arg value="@ShopsysShopBundle" />
 		</exec>
 	</target>
 
@@ -787,7 +787,7 @@
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />
 			<arg value="lint:yaml" />
-			<arg value="@SS6ShopBundle" />
+			<arg value="@ShopsysShopBundle" />
 		</exec>
 		<exec executable="${path.php.executable}" passthru="true" checkreturn="true">
 			<arg value="app/console" />

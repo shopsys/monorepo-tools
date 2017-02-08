@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block meta_robots -%}
 	<meta name="robots" content="noindex, follow">
@@ -13,8 +13,8 @@
 
 {% block main_content %}
 
-	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
-	{{ render(controller('SS6ShopBundle:Front/Script:embedOrderSentPageGoogleAnalyticsScript', {order: order})) }}
+	{{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
+	{{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageGoogleAnalyticsScript', {order: order})) }}
 
 	<h1>{{ 'Order sent'|trans }}</h1>
 

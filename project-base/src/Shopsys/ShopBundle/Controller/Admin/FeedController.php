@@ -108,9 +108,9 @@ class FeedController extends AdminBaseController {
 			$grid->addColumn('actions', 'actions', t('Action'))->setClassAttribute('column--superadmin');
 		}
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Feed/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Feed/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Feed/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Feed/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

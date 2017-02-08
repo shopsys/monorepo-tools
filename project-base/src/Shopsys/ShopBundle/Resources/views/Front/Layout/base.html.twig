@@ -38,7 +38,7 @@
 		{{ js_validator_config() }}
 		{{ init_js_validation() }}
 
-		{{ render(controller('SS6ShopBundle:Admin/Heureka:embedWidget')) }}
+		{{ render(controller('ShopsysShopBundle:Admin/Heureka:embedWidget')) }}
 
 		{% block javascripts %}{% endblock %}
 
@@ -47,8 +47,8 @@
 
 	<body class="web">
 
-		{{ render(controller('SS6ShopBundle:Front/Script:embedAllPagesScripts')) }}
-		{{ render(controller('SS6ShopBundle:Front/Script:embedAllPagesGoogleAnalyticsScript')) }}
+		{{ render(controller('ShopsysShopBundle:Front/Script:embedAllPagesScripts')) }}
+		{{ render(controller('ShopsysShopBundle:Front/Script:embedAllPagesGoogleAnalyticsScript')) }}
 
 		{% block html_body %}{% endblock %}
 

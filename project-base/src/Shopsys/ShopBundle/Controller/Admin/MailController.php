@@ -156,7 +156,7 @@ class MailController extends AdminBaseController {
 		$templateParameters = $this->getTemplateParameters();
 		$templateParameters['form'] = $form->createView();
 
-		return $this->render('@SS6Shop/Admin/Content/Mail/template.html.twig', $templateParameters);
+		return $this->render('@ShopsysShop/Admin/Content/Mail/template.html.twig', $templateParameters);
 	}
 
 	/**
@@ -186,7 +186,7 @@ class MailController extends AdminBaseController {
 			$this->getFlashMessageSender()->addSuccessFlash(t('E-mail settings modified.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Mail/setting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Mail/setting.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/base.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/base.html.twig' %}
 
 {% block html_body %}
 	{% if isMailerSettingUnusual() %}
@@ -16,7 +16,7 @@
 		{% block header %}
 			<header class="web__header">
 				<div class="web__header__in">
-					{{ render(controller('SS6ShopBundle:Admin/Menu:menu', {
+					{{ render(controller('ShopsysShopBundle:Admin/Menu:menu', {
 						route: app.request.get('_route'),
 						parameters: app.request.attributes.get('_route_params')
 					}	)) }}

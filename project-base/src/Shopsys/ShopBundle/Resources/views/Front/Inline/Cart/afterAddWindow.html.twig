@@ -1,5 +1,5 @@
-{{ render(controller('SS6ShopBundle:Front/FlashMessage:index')) }}
-{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{{ render(controller('ShopsysShopBundle:Front/FlashMessage:index')) }}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% if isModuleEnabled(ACCESSORIES_ON_BUY) %}
 	{% if accessoryDetails|length > 0 %}

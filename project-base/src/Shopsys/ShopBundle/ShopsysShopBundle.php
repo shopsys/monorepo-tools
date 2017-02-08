@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SS6ShopBundle extends Bundle {
+class ShopsysShopBundle extends Bundle {
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container

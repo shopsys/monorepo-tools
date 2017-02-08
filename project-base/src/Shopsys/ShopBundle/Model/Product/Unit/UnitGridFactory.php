@@ -57,7 +57,7 @@ class UnitGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])
 			->setAjaxConfirm();
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Unit/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Unit/listGrid.html.twig');
 
 		return $grid;
 	}

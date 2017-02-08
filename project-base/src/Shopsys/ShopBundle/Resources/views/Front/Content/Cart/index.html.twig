@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block meta_robots -%}
 	<meta name="robots" content="noindex, follow">
@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block main_content %}
-	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
+	{% include '@ShopsysShop/Front/Inline/OrderProgress/index.html.twig' with {step: 1} only %}
 
 	<h1>{{ 'Your cart'|trans }}</h1>
 
@@ -133,7 +133,7 @@
 					{% endif %}
 				</div>
 				<div class="box-cart-bottom__promo">
-					{{ render(controller('SS6ShopBundle:Front/PromoCode:index')) }}
+					{{ render(controller('ShopsysShopBundle:Front/PromoCode:index')) }}
 				</div>
 			</div>
 

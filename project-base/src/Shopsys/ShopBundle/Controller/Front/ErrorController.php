@@ -89,7 +89,7 @@ class ErrorController extends FrontBaseController {
 	private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format) {
 		$code = $exception->getStatusCode();
 
-		return $this->render('@SS6Shop/Front/Content/Error/error.' . $format . '.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Error/error.' . $format . '.twig', [
 			'status_code' => $code,
 			'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
 			'exception' => $exception,

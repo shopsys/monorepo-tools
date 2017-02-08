@@ -98,7 +98,7 @@ class PaymentController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Payment/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Payment/new.html.twig', [
 			'form' => $form->createView(),
 			'currencies' => $this->currencyFacade->getAllIndexedById(),
 		]);
@@ -138,7 +138,7 @@ class PaymentController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing payment - %name%', ['%name%' => $payment->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Payment/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Payment/edit.html.twig', [
 			'form' => $form->createView(),
 			'paymentDetail' => $this->paymentDetailFactory->createDetailForPayment($payment),
 			'currencies' => $this->currencyFacade->getAllIndexedById(),
@@ -172,7 +172,7 @@ class PaymentController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->paymentGridFactory->create();
 
-		return $this->render('@SS6Shop/Admin/Content/Payment/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Payment/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

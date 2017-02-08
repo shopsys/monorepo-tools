@@ -57,7 +57,7 @@ class HomepageController extends FrontBaseController {
 			$this->currentCustomer->getPricingGroup()
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Default/index.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Default/index.html.twig', [
 			'sliderItems' => $sliderItems,
 			'topProductsDetails' => $topProductsDetails,
 			'title' => $this->seoSettingFacade->getTitleMainPage($this->domain->getId()),

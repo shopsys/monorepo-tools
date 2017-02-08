@@ -36,7 +36,7 @@ class FlagController extends AdminBaseController {
 
 		$grid = $productInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Flag/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Flag/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

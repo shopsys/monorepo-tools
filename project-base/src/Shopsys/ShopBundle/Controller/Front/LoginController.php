@@ -33,13 +33,13 @@ class LoginController extends FrontBaseController {
 			$form->addError(new FormError(t('Invalid login')));
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Login/loginForm.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Login/loginForm.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
 
 	public function windowFormAction() {
-		return $this->render('@SS6Shop/Front/Content/Login/windowForm.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Login/windowForm.html.twig', [
 			'form' => $this->getLoginForm()->createView(),
 		]);
 	}

@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Slider pages'|trans }}{% endblock %}
 {% block h1 %}{{ 'Slider pages'|trans }}{% endblock %}
@@ -10,6 +10,6 @@
 {% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 	{{ gridView.render() }}
 {% endblock %}

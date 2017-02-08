@@ -89,7 +89,7 @@ class LoginController extends AdminBaseController {
 			$error = t('Log in failed.');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Login/loginForm.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Login/loginForm.html.twig', [
 				'form' => $form->createView(),
 				'error' => $error,
 		]);
@@ -127,7 +127,7 @@ class LoginController extends AdminBaseController {
 		try {
 			$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
 		} catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
-			return $this->render('@SS6Shop/Admin/Content/Login/loginFailed.html.twig');
+			return $this->render('@ShopsysShop/Admin/Content/Login/loginFailed.html.twig');
 		}
 		$redirectTo = ($originalReferer !== null) ? $originalReferer : $this->generateUrl('admin_default_dashboard');
 

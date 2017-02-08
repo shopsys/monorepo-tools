@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}{% endblock %}
 {% block h1 %}{% endblock %}
@@ -14,7 +14,7 @@
 		{{ form_row(form.name, { label: 'Name'|trans}) }}
 		{{ form_row(form.code, { label: 'Code'|trans, attr: {class: 'measuring-code-input'} }) }}
 		{{ form_row(form.placement, { label: 'Add only to order confirmation page'|trans}) }}
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_script_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(script|default(null), form) }}

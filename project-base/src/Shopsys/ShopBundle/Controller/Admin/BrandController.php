@@ -100,7 +100,7 @@ class BrandController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing brand - %name%', ['%name%' => $brand->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Brand/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Brand/edit.html.twig', [
 			'form' => $form->createView(),
 			'brand' => $brand,
 			'domains' => $this->domain->getAll(),
@@ -129,11 +129,11 @@ class BrandController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_brand_delete', ['id' => 'b.id'])
 			->setConfirmMessage(t('Do you really want to remove this brand? If it is used anywhere it will be unset.'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Brand/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Brand/listGrid.html.twig');
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Brand/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Brand/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'domains' => $this->domain->getAll(),
 		]);
@@ -171,7 +171,7 @@ class BrandController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Brand/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Brand/new.html.twig', [
 			'form' => $form->createView(),
 			'domains' => $this->domain->getAll(),
 		]);

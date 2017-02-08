@@ -53,7 +53,7 @@ class CurrencyController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->currencyInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Currency/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Currency/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -145,7 +145,7 @@ class CurrencyController extends AdminBaseController {
 			return $this->redirectToRoute('admin_currency_list');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Currency/currencySettings.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Currency/currencySettings.html.twig', [
 			'form' => $form->createView(),
 			'domainNames' => $domainNames,
 		]);

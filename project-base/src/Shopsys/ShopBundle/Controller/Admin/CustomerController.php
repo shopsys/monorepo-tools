@@ -164,7 +164,7 @@ class CustomerController extends AdminBaseController {
 
 		$orders = $this->orderFacade->getCustomerOrderList($user);
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Customer/edit.html.twig', [
 			'form' => $form->createView(),
 			'user' => $user,
 			'orders' => $orders,
@@ -213,11 +213,11 @@ class CustomerController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_customer_delete', ['id' => 'id'])
 			->setConfirmMessage(t('Do you really want to remove this customer?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Customer/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Customer/listGrid.html.twig');
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Customer/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 		]);
@@ -268,7 +268,7 @@ class CustomerController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Customer/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Customer/new.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

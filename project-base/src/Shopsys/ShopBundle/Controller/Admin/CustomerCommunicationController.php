@@ -49,7 +49,7 @@ class CustomerCommunicationController extends AdminBaseController {
 			return $this->redirectToRoute('admin_customercommunication_ordersubmitted');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/CustomerCommunication/orderSubmitted.html.twig', [
 			'form' => $form->createView(),
 			'VARIABLE_TRANSPORT_INSTRUCTIONS' => OrderFacade::VARIABLE_TRANSPORT_INSTRUCTIONS,
 			'VARIABLE_PAYMENT_INSTRUCTIONS' => OrderFacade::VARIABLE_PAYMENT_INSTRUCTIONS,

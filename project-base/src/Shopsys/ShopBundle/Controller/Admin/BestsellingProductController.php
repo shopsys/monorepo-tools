@@ -58,7 +58,7 @@ class BestsellingProductController extends AdminBaseController {
 		$bestsellingProductsInCategories = $this->bestsellingProductEditFacade
 			->getManualBestsellingProductCountsInCategories($domainId);
 
-		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/BestsellingProduct/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
 			'selectedDomainId' => $domainId,
 			'bestsellingProductsInCategories' => $bestsellingProductsInCategories,
@@ -107,7 +107,7 @@ class BestsellingProductController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem($category->getName()));
 
-		return $this->render('@SS6Shop/Admin/Content/BestsellingProduct/detail.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/BestsellingProduct/detail.html.twig', [
 			'form' => $form->createView(),
 			'categoryName' => $category->getName(),
 		]);

@@ -21,7 +21,7 @@ class MenuController extends AdminBaseController {
 		$menu = $this->menuFactory->createMenuWithVisibleItems();
 		$activePath = $menu->getMenuPath($route, $parameters);
 
-		return $this->render('@SS6Shop/Admin/Inline/Menu/menu.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Inline/Menu/menu.html.twig', [
 			'menu' => $menu,
 			'activePath' => $activePath,
 		]);
@@ -39,7 +39,7 @@ class MenuController extends AdminBaseController {
 			$panelItems = null;
 		}
 
-		return $this->render('@SS6Shop/Admin/Inline/Menu/panel.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Inline/Menu/panel.html.twig', [
 			'items' => $panelItems,
 			'activePath' => $activePath,
 		]);

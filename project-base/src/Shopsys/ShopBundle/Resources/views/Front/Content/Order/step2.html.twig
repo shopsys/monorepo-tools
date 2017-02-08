@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Content/Order/step.html.twig' %}
+{% extends '@ShopsysShop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
 	{{ 'Order [noun]'|trans }}
@@ -102,7 +102,7 @@
 		</div>
 
 		<div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
-			{{ render(controller('SS6ShopBundle:Front/Order:preview', {
+			{{ render(controller('ShopsysShopBundle:Front/Order:preview', {
 				transportId: transport is empty ? null : transport.id,
 				paymentId: payment is empty ? null : payment.id
 			})) }}

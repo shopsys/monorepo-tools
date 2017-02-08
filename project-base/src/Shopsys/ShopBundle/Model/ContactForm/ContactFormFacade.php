@@ -69,7 +69,7 @@ class ContactFormFacade {
 	 * @return string
 	 */
 	private function getMailBody($contactFormData) {
-		return $this->twig->render('@SS6Shop/Mail/ContactForm/mail.html.twig', [
+		return $this->twig->render('@ShopsysShop/Mail/ContactForm/mail.html.twig', [
 			'contactFormData' => $contactFormData,
 		]);
 	}

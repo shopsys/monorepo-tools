@@ -77,7 +77,7 @@ class ParameterGridFactory implements GridFactoryInterface {
 			->setConfirmMessage(t('Do you really want to remove this parameter? By deleting this parameter you will '
 				. 'remove this parameter from a product where the parameter is assigned. This step is irreversible!'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Parameter/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Parameter/listGrid.html.twig');
 
 		return $grid;
 	}

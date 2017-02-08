@@ -84,7 +84,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 			->setConfirmMessage(t('Do you really want to remove this payment?'));
 
 		$grid->setTheme(
-			'@SS6Shop/Admin/Content/Payment/listGrid.html.twig',
+			'@ShopsysShop/Admin/Content/Payment/listGrid.html.twig',
 			['currencyIdForList' => self::CURRENCY_ID_FOR_LIST]
 		);
 

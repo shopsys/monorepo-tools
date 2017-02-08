@@ -23,7 +23,7 @@ class NewsletterController extends AdminBaseController {
 	 * @Route("/newsletter/")
 	 */
 	public function indexAction() {
-		return $this->render('@SS6Shop/Admin/Content/Newsletter/index.html.twig');
+		return $this->render('@ShopsysShop/Admin/Content/Newsletter/index.html.twig');
 	}
 
 	/**

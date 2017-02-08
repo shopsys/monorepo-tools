@@ -1,10 +1,10 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}{{ '- Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
 {% block h1 %}{{ 'Heureka - Ověřeno zákazníky'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
 	{% if form is not null %}
 		{{ form_start(form) }}
@@ -13,7 +13,7 @@
 			{{ form_row(form.heurekaWidgetCode, {label: 'Heureka Widget code'|trans, attr: {class: 'heureka-widget-input'} }) }}
 
 
-			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 				{% block fixed_bar_content %}
 					{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
 				{% endblock %}

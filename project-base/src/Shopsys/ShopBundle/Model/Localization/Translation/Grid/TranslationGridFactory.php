@@ -53,7 +53,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 			);
 		}
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Translation/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Translation/listGrid.html.twig');
 
 		return $grid;
 	}

@@ -70,7 +70,7 @@ class ScriptController extends AdminBaseController {
 			return $this->redirectToRoute('admin_script_list');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Script/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Script/new.html.twig', [
 			'form' => $form->createView(),
 			'scriptVariables' => $scriptVariables,
 		]);
@@ -108,7 +108,7 @@ class ScriptController extends AdminBaseController {
 			return $this->redirectToRoute('admin_script_list');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Script/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Script/edit.html.twig', [
 			'script' => $script,
 			'form' => $form->createView(),
 			'scriptVariables' => $scriptVariables,
@@ -129,12 +129,12 @@ class ScriptController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_script_delete', ['scriptId' => 's.id'])
 			->setConfirmMessage(t('Do you really want to remove this script?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Script/listGrid.html.twig', [
+		$grid->setTheme('@ShopsysShop/Admin/Content/Script/listGrid.html.twig', [
 			'PLACEMENT_ORDER_SENT_PAGE' => Script::PLACEMENT_ORDER_SENT_PAGE,
 			'PLACEMENT_ALL_PAGES' => Script::PLACEMENT_ALL_PAGES,
 		]);
 
-		return $this->render('@SS6Shop/Admin/Content/Script/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Script/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -179,7 +179,7 @@ class ScriptController extends AdminBaseController {
 			$this->getFlashMessageSender()->addSuccessFlashTwig(t('Google script code set'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Script/googleAnalytics.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Script/googleAnalytics.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

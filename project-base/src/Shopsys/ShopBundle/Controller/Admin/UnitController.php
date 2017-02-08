@@ -48,7 +48,7 @@ class UnitController extends AdminBaseController {
 
 		$grid = $unitInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Unit/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Unit/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -166,7 +166,7 @@ class UnitController extends AdminBaseController {
 			return $this->redirectToRoute('admin_unit_list');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Unit/setting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Unit/setting.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

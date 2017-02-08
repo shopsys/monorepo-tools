@@ -70,9 +70,9 @@ class AdministratorController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_administrator_delete', ['id' => 'a.id'])
 			->setConfirmMessage(t('Do you really want to remove this administrator?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Administrator/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Administrator/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Administrator/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -142,7 +142,7 @@ class AdministratorController extends AdminBaseController {
 			self::MAX_ADMINISTRATOR_ACTIVITIES_COUNT
 		);
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Administrator/edit.html.twig', [
 			'form' => $form->createView(),
 			'administrator' => $administrator,
 			'lastAdminActivities' => $lastAdminActivities,
@@ -202,7 +202,7 @@ class AdministratorController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Administrator/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Administrator/new.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

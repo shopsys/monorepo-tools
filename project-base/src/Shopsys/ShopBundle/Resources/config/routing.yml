@@ -1,9 +1,9 @@
 ss6_shop_front:
-  resource: "@SS6ShopBundle/Resources/config/routing_front.yml"
+  resource: "@ShopsysShopBundle/Resources/config/routing_front.yml"
   prefix: /
 
 ss6_shop_admin:
-  resource: "@SS6ShopBundle/Controller/Admin"
+  resource: "@ShopsysShopBundle/Controller/Admin"
   prefix: /admin
   type: annotation
   defaults:

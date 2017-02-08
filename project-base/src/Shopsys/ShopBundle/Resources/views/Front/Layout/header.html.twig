@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="header__middle">
-			{{ render(controller('SS6ShopBundle:Front/Search:box')) }}
+			{{ render(controller('ShopsysShopBundle:Front/Search:box')) }}
 			<div class="contact-us">
 				<span class="contact-us__phone">
 					<i class="svg svg-phone"></i>
@@ -43,7 +43,7 @@
 					</a>
 				{% else %}
 					<a href="{{ url('front_login') }}"
-						onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+						onclick="SS6.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
 						class="btn-tap__in">
 						<i class="svg svg-user"></i>
 					</a>
@@ -52,12 +52,12 @@
 		</div>
 
 		<div class="header__cart">
-			{{ render(controller('SS6ShopBundle:Front/Cart:box')) }}
+			{{ render(controller('ShopsysShopBundle:Front/Cart:box')) }}
 		</div>
 
 		<div class="header__top">
 			<div class="header__top__left">
-				{{ render(controller('SS6ShopBundle:Front/Article:menu')) }}
+				{{ render(controller('ShopsysShopBundle:Front/Article:menu')) }}
 			</div>
 
 			<div class="header__top__right">
@@ -90,7 +90,7 @@
 						<li class="menu-iconic__item">
 							<a
 								href="{{ url('front_login') }}"
-								onclick="SS6.window({ content: '{{ render(controller('SS6ShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
+								onclick="SS6.window({ content: '{{ render(controller('ShopsysShopBundle:Front/Login:windowForm'))|escape('js') }}' }); return false;"
 								class="menu-iconic__item__link"
 							>
 								<i class="svg svg-user"></i>
@@ -112,5 +112,5 @@
 		</div>
 	</header>
 
-	{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_HEADER')})) }}
+	{{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_HEADER')})) }}
 {% endblock %}

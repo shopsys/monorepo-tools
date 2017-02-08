@@ -114,7 +114,7 @@ class ProductController extends FrontBaseController {
 		$variantsDetails = $this->productOnCurrentDomainFacade->getVariantsProductDetailsForProduct($product);
 		$productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $this->domain->getId());
 
-		return $this->render('@SS6Shop/Front/Content/Product/detail.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Product/detail.html.twig', [
 			'productDetail' => $productDetail,
 			'accesoriesDetails' => $accessoriesDetails,
 			'variantsDetails' => $variantsDetails,
@@ -175,11 +175,11 @@ class ProductController extends FrontBaseController {
 		];
 
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/ajaxList.html.twig', $viewParameters);
 		} else {
 			$viewParameters['POSITION_PRODUCT_LIST'] = AdvertPositionList::POSITION_PRODUCT_LIST;
 
-			return $this->render('@SS6Shop/Front/Content/Product/list.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/list.html.twig', $viewParameters);
 		}
 	}
 
@@ -211,9 +211,9 @@ class ProductController extends FrontBaseController {
 		];
 
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/ajaxListByBrand.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/ajaxListByBrand.html.twig', $viewParameters);
 		} else {
-			return $this->render('@SS6Shop/Front/Content/Product/listByBrand.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/listByBrand.html.twig', $viewParameters);
 		}
 	}
 
@@ -268,10 +268,10 @@ class ProductController extends FrontBaseController {
 		];
 
 		if ($request->isXmlHttpRequest()) {
-			return $this->render('@SS6Shop/Front/Content/Product/ajaxSearch.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/ajaxSearch.html.twig', $viewParameters);
 		} else {
 			$viewParameters['foundCategories'] = $this->searchCategories($searchText);
-			return $this->render('@SS6Shop/Front/Content/Product/search.html.twig', $viewParameters);
+			return $this->render('@ShopsysShop/Front/Content/Product/search.html.twig', $viewParameters);
 		}
 	}
 
@@ -318,7 +318,7 @@ class ProductController extends FrontBaseController {
 			$request
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
 			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
 			'activeOrderingMode' => $orderingMode,
 			'cookieName' => $productListOrderingConfig->getCookieName(),
@@ -332,7 +332,7 @@ class ProductController extends FrontBaseController {
 			$request
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
 			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
 			'activeOrderingMode' => $orderingMode,
 			'cookieName' => $productListOrderingConfig->getCookieName(),
@@ -346,7 +346,7 @@ class ProductController extends FrontBaseController {
 			$request
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Product/orderingSetting.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Product/orderingSetting.html.twig', [
 			'orderingModesNames' => $productListOrderingConfig->getSupportedOrderingModesNames(),
 			'activeOrderingMode' => $orderingMode,
 			'cookieName' => $productListOrderingConfig->getCookieName(),

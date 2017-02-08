@@ -69,7 +69,7 @@ class HeurekaController extends AdminBaseController {
 			$formView = $form->createView();
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Heureka/setting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Heureka/setting.html.twig', [
 			'form' => $formView,
 			'serverName' => $this->heurekaFacade->getServerNameByLocale($locale),
 			'selectedDomainConfig' => $selectedDomainConfig,
@@ -83,7 +83,7 @@ class HeurekaController extends AdminBaseController {
 			return new Response('');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Heureka/widget.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Heureka/widget.html.twig', [
 			'widgetCode' => $this->heurekaSetting->getHeurekaShopCertificationWidgetByDomainId($domainId),
 		]);
 	}

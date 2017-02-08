@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
 	- {{ 'Payment'|trans }}
@@ -54,7 +54,7 @@
 		</div>
 
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_transportandpayment_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(paymentDetail|default(null), form) }}

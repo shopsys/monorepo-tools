@@ -234,7 +234,7 @@ class OrderController extends FrontBaseController {
 			$form->addError(new FormError(t('Please check the correctness of all data filled.')));
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Order/index.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Order/index.html.twig', [
 			'form' => $form->createView(),
 			'flow' => $this->flow,
 			'transport' => $transport,
@@ -279,7 +279,7 @@ class OrderController extends FrontBaseController {
 
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
 
-		return $this->render('@SS6Shop/Front/Content/Order/preview.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Order/preview.html.twig', [
 			'orderPreview' => $orderPreview,
 		]);
 	}
@@ -342,7 +342,7 @@ class OrderController extends FrontBaseController {
 			return $this->redirectToRoute('front_cart');
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Order/sent.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Order/sent.html.twig', [
 			'orderConfirmationText' => $this->orderFacade->getOrderConfirmText($orderId),
 			'order' => $this->orderFacade->getById($orderId),
 		]);
@@ -365,7 +365,7 @@ class OrderController extends FrontBaseController {
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	private function getTermsAndConditionsResponse() {
-		return $this->render('@SS6Shop/Front/Content/Order/termsAndConditions.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Order/termsAndConditions.html.twig', [
 			'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
 				$this->domain->getId()
 			),

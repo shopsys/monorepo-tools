@@ -67,7 +67,7 @@ class SeoController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Seo/seoSetting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Seo/seoSetting.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

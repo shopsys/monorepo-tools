@@ -71,7 +71,7 @@ class VatGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_vat_deleteconfirm', ['id' => 'v.id'])
 			->setAjaxConfirm();
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Vat/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Vat/listGrid.html.twig');
 
 		return $grid;
 	}

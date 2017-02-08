@@ -76,7 +76,7 @@ class SuperadminController extends AdminBaseController {
 	 * @Route("/superadmin/errors/")
 	 */
 	public function errorsAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/errors.html.twig');
+		return $this->render('@ShopsysShop/Admin/Content/Superadmin/errors.html.twig');
 	}
 
 	/**
@@ -100,7 +100,7 @@ class SuperadminController extends AdminBaseController {
 			return $this->redirectToRoute('admin_superadmin_pricing');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/pricing.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Superadmin/pricing.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
@@ -118,7 +118,7 @@ class SuperadminController extends AdminBaseController {
 			$grid->addColumn($locale, $locale, $this->localization->getLanguageName($locale));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/urlsListGrid.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Superadmin/urlsListGrid.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -169,7 +169,7 @@ class SuperadminController extends AdminBaseController {
 			return $this->redirectToRoute('admin_superadmin_modules');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/modules.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Superadmin/modules.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
@@ -178,7 +178,7 @@ class SuperadminController extends AdminBaseController {
 	 * @Route("/superadmin/css-documentation/")
 	 */
 	public function cssDocumentationAction() {
-		return $this->render('@SS6Shop/Admin/Content/Superadmin/cssDocumentation.html.twig');
+		return $this->render('@ShopsysShop/Admin/Content/Superadmin/cssDocumentation.html.twig');
 	}
 
 }

@@ -142,7 +142,7 @@ class ProductPickerController extends AdminBaseController {
 
 		$gridViewParameters['VARIANT_TYPE_MAIN'] = Product::VARIANT_TYPE_MAIN;
 		$gridViewParameters['VARIANT_TYPE_VARIANT'] = Product::VARIANT_TYPE_VARIANT;
-		$grid->setTheme('@SS6Shop/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
+		$grid->setTheme('@ShopsysShop/Admin/Content/ProductPicker/listGrid.html.twig', $gridViewParameters);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
@@ -151,7 +151,7 @@ class ProductPickerController extends AdminBaseController {
 		$viewParameters['advancedSearchForm'] = $advancedSearchForm->createView();
 		$viewParameters['isAdvancedSearchFormSubmitted'] = $this->advancedSearchFacade->isAdvancedSearchFormSubmitted($request);
 
-		return $this->render('@SS6Shop/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
+		return $this->render('@ShopsysShop/Admin/Content/ProductPicker/list.html.twig', $viewParameters);
 	}
 
 }

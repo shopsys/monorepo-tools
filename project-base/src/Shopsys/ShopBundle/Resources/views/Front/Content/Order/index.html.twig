@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithoutPanel.html.twig' %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block javascripts %}
 	{{ parent() }}
@@ -23,10 +23,10 @@
 {% endblock %}
 
 {% block main_content %}
-	{% include '@SS6Shop/Front/Inline/OrderProgress/index.html.twig' with {step: flow.getCurrentStepNumber()} only %}
+	{% include '@ShopsysShop/Front/Inline/OrderProgress/index.html.twig' with {step: flow.getCurrentStepNumber()} only %}
 
 	{{ form_start(form, { attr: { id: "js-order-form", 'data-ajax-save-url': url('front_order_save_form') }}) }}
 		{{ form_errors(form) }}
-		{% include '@SS6Shop/Front/Content/Order/step' ~ flow.getCurrentStepNumber() ~ '.html.twig' %}
+		{% include '@ShopsysShop/Front/Content/Order/step' ~ flow.getCurrentStepNumber() ~ '.html.twig' %}
 	{{ form_end(form) }}
 {% endblock %}

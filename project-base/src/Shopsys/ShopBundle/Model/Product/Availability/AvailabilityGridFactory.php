@@ -58,7 +58,7 @@ class AvailabilityGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_availability_deleteconfirm', ['id' => 'a.id'])
 			->setAjaxConfirm();
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Availability/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Availability/listGrid.html.twig');
 
 		return $grid;
 	}

@@ -1,5 +1,5 @@
 {% macro list(productDetails, listCssClass) %}
-	{% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
+	{% import '@ShopsysShop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
 	{% set domain = getDomain() %}
 
 	<ul class="list-products js-product-list {{ listCssClass|default('') }}">
@@ -49,7 +49,7 @@
 
 					<div class="list-products__item__action">
 						{% if not productDetail.product.isMainVariant %}
-							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm',{
+							{{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm',{
 								product: productDetail.product
 							}
 

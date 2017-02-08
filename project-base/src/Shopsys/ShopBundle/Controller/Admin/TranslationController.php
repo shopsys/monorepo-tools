@@ -23,7 +23,7 @@ class TranslationController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->translationInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Translation/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Translation/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

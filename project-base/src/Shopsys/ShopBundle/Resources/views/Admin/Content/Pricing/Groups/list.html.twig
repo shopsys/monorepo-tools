@@ -1,12 +1,12 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Pricing groups'|trans }}{% endblock %}
 {% block h1 %}{{ 'Pricing groups'|trans }}{% endblock %}
 
 {% block main_content %}
-	{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
-	{{ render(controller('SS6ShopBundle:Admin/PricingGroup:settings')) }}
+	{{ render(controller('ShopsysShopBundle:Admin/PricingGroup:settings')) }}
 
 	{{ gridView.render() }}
 {% endblock %}

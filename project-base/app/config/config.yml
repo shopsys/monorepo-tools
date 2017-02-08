@@ -30,16 +30,16 @@ doctrine:
       id: ss6.doctrine.cache_driver.query_cache
     auto_mapping: false
     mappings:
-      SS6ShopBundle:
+      ShopsysShopBundle:
         type: annotation
         dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Model
-        alias: SS6ShopBundle
+        alias: ShopsysShopBundle
         prefix: Shopsys\ShopBundle\Model
         is_bundle: false
-      SS6ShopBundleComponent:
+      ShopsysShopBundleComponent:
         type: annotation
         dir: %kernel.root_dir%/../src/Shopsys/ShopBundle/Component
-        alias: SS6ShopBundleComponent
+        alias: ShopsysShopBundleComponent
         prefix: Shopsys\ShopBundle\Component
         is_bundle: false
     hydrators:
@@ -154,9 +154,9 @@ twig:
   exception_controller: 'Shopsys\ShopBundle\Controller\Front\ErrorController::showAction'
   form:
     resources:
-      - '@SS6Shop/Common/Form/theme.html.twig'
-      - '@SS6Shop/Admin/Form/colorpickerFields.html.twig'
-      - '@SS6Shop/Admin/Form/fileuploadFields.html.twig'
+      - '@ShopsysShop/Common/Form/theme.html.twig'
+      - '@ShopsysShop/Admin/Form/colorpickerFields.html.twig'
+      - '@ShopsysShop/Admin/Form/fileuploadFields.html.twig'
   strict_variables: true
   globals:
     globalMultipleFormSetting: @ss6.shop.component.form.multiple_form_setting

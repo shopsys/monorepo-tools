@@ -60,7 +60,7 @@ class CurrencyGridFactory implements GridFactoryInterface {
 			->setAjaxConfirm();
 
 		$grid->setTheme(
-			'@SS6Shop/Admin/Content/Currency/listGrid.html.twig',
+			'@ShopsysShop/Admin/Content/Currency/listGrid.html.twig',
 			[
 				'defaultCurrency' => $this->currencyFacade->getDefaultCurrency(),
 				'notAllowedToDeleteCurrencyIds' => $this->currencyFacade->getNotAllowedToDeleteCurrencyIds(),

@@ -74,7 +74,7 @@ class RegistrationController extends FrontBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Registration/register.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Registration/register.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

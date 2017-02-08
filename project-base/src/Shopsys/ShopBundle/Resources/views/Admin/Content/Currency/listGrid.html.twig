@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Grid/Grid.html.twig' %}
+{% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_action_cell_type_delete %}
 	{% if notAllowedToDeleteCurrencyIds is defined %}
@@ -18,7 +18,7 @@
 
 {% block grid_value_cell_edit_id_exchangeRate %}
 	<span class="form-edit-block form-edit-block--size-1">
-		{% form_theme form '@SS6Shop/Admin/Form/theme.html.twig' %}
+		{% form_theme form '@ShopsysShop/Admin/Form/theme.html.twig' %}
 		{{ form_widget(form.exchangeRate) }}
 		<span class="form-edit-block__info">
 			{% if row is null %}

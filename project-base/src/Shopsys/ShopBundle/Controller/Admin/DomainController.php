@@ -56,7 +56,7 @@ class DomainController extends AdminBaseController {
 	}
 
 	public function domainTabsAction() {
-		return $this->render('@SS6Shop/Admin/Inline/Domain/tabs.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Inline/Domain/tabs.html.twig', [
 			'domainConfigs' => $this->domain->getAll(),
 			'selectedDomainId' => $this->selectedDomain->getId(),
 		]);
@@ -91,9 +91,9 @@ class DomainController extends AdminBaseController {
 		$grid->addColumn('locale', 'locale', t('Language'));
 		$grid->addColumn('icon', 'icon', t('Icon'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Domain/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Domain/listGrid.html.twig');
 
-		return $this->render('@SS6Shop/Admin/Content/Domain/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Domain/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -148,7 +148,7 @@ class DomainController extends AdminBaseController {
 			]);
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Domain/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Domain/edit.html.twig', [
 			'form' => $form->createView(),
 			'domain' => $domain,
 		]);

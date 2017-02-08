@@ -1,6 +1,6 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
-{% import '@SS6Shop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
-{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysShop/Front/Inline/Product/productFlagsMacro.html.twig' as productFlags %}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% set domain = getDomain() %}
 {% set productDomain = productDetail.productDomainsIndexedByDomainId[domain.id] %}
@@ -88,7 +88,7 @@
 									href="{{ productDetail.product.calculatedSellingDenied ? 'http://schema.org/OutOfStock' : 'http://schema.org/InStock' }}"
 								>
 							</div>
-							{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
+							{{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: productDetail.product, type: 'large'})) }}
 						{% else %}
 							<div>
 								{{ 'This product is no longer available for purchase. Have a look at similar products <a href="%url%">here</a>.'|trans({"%url%": url('front_product_list', { id: productMainCategory })})|raw }}
@@ -195,7 +195,7 @@
 								{{ variantDetail.sellingPrice.priceWithVat|price }}
 							</td>
 							<td class="table-variants__cell table-variants__cell--action">
-								{{ render(controller('SS6ShopBundle:Front/Cart:addProductForm', {product: variantDetail.product})) }}
+								{{ render(controller('ShopsysShopBundle:Front/Cart:addProductForm', {product: variantDetail.product})) }}
 							</td>
 						</tr>
 					{% endfor %}

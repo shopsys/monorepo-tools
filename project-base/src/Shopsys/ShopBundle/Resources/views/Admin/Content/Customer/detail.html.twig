@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Customer detail'|trans }}{% endblock %}
 {% block h1 %}{{ 'Customer detail'|trans }}{% endblock %}
@@ -98,7 +98,7 @@
 
 		{% block customer_order_list %}{% endblock %}
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_customer_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(user|default(null), form) }}

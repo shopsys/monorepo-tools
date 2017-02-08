@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'E-mail templates settings'|trans }}{% endblock %}
 {% block h1 %}{{ 'E-mail templates settings'|trans }}{% endblock %}
@@ -7,7 +7,7 @@
 
 	<div id="js-mail-templates">
 
-		{{ render(controller('SS6ShopBundle:Admin/Domain:domainTabs')) }}
+		{{ render(controller('ShopsysShopBundle:Admin/Domain:domainTabs')) }}
 
 		{% macro mailTemplate(name, mailTemplate, templateForm,variables, requiredVariables, variablesLabels, variablesInfoText, sendMailText) %}
 			<div class="js-mail-template-toggle-container js-toggle-container form-group wrap-border">
@@ -134,7 +134,7 @@
 				resetPasswordVariablesLabels
 			) }}
 
-			{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+			{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 				{% block fixed_bar_content %}
 					{{ form_widget(form.save, { label: 'Save changes in all templates'|trans}) }}
 				{% endblock %}

@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Content/Customer/detail.html.twig' %}
+{% extends '@ShopsysShop/Admin/Content/Customer/detail.html.twig' %}
 
 {% block title %}- {{ 'Editing customer'|trans }} - {{ user.fullName }}{% endblock %}
 {% block h1 %}
@@ -56,5 +56,5 @@
 {% endblock %}
 
 {% block customer_order_list %}
-	{% include '@SS6Shop/Admin/Content/Customer/orderList.html.twig' with {orders: orders} only %}
+	{% include '@ShopsysShop/Admin/Content/Customer/orderList.html.twig' with {orders: orders} only %}
 {% endblock %}

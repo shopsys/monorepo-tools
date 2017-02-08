@@ -70,7 +70,7 @@ class CategoryController extends FrontBaseController {
 			$openCategories = [];
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Category/panel.html.twig', [
 			'lazyLoadedCategoryDetails' => $categoryDetails,
 			'isFirstLevel' => true,
 			'openCategories' => $openCategories,
@@ -89,7 +89,7 @@ class CategoryController extends FrontBaseController {
 			$this->domain->getCurrentDomainConfig()
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Category/panel.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Category/panel.html.twig', [
 			'lazyLoadedCategoryDetails' => $categoryDetails,
 			'isFirstLevel' => false,
 			'openCategories' => [],
@@ -98,7 +98,7 @@ class CategoryController extends FrontBaseController {
 	}
 
 	public function topAction() {
-		return $this->render('@SS6Shop/Front/Content/Category/top.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Category/top.html.twig', [
 			'categories' => $this->topCategoryFacade->getCategoriesForAll($this->domain->getId()),
 		]);
 	}
@@ -119,7 +119,7 @@ class CategoryController extends FrontBaseController {
 			}
 		}
 
-		return $this->render('@SS6Shop/Front/Content/Category/categoryList.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Category/categoryList.html.twig', [
 			'categories' => $categories,
 			'countOfProductsByCategoryId' => $countOfProductsByCategoryId,
 		]);

@@ -33,7 +33,7 @@ class TransportAndPaymentController extends AdminBaseController {
 	 * @Route("/transport-and-payment/list/")
 	 */
 	public function listAction() {
-		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/list.html.twig');
+		return $this->render('@ShopsysShop/Admin/Content/TransportAndPayment/list.html.twig');
 	}
 
 	/**
@@ -84,7 +84,7 @@ class TransportAndPaymentController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlash(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/TransportAndPayment/freeTransportAndPaymentLimitSetting.html.twig', [
 			'form' => $form->createView(),
 			'domain' => $this->domain,
 		]);

@@ -75,7 +75,7 @@ class GeneratorsFormFactory {
 
 		$formBuilder->add('bundle', FormType::CHOICE, [
 			'choices' => $this->getBundleChoices(),
-			'data' => 'SS6ShopBundle',
+			'data' => 'ShopsysShopBundle',
 		]);
 		$formBuilder->add('submit', FormType::SUBMIT);
 

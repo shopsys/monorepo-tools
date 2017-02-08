@@ -36,7 +36,7 @@ class ImageController extends AdminBaseController {
 	public function overviewAction() {
 		$imageEntityConfigs = $this->imageFacade->getAllImageEntityConfigsByClass();
 
-		return $this->render('@SS6Shop/Admin/Content/Image/overview.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Image/overview.html.twig', [
 			'imageEntityConfigs' => $imageEntityConfigs,
 			'entityNames' => $this->getEntityNamesTranslations($imageEntityConfigs),
 			'usagesByEntityAndSizeName' => $this->getImageSizeUsagesTranslations($imageEntityConfigs),

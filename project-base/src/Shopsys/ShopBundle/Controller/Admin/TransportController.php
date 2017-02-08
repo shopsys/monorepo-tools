@@ -99,7 +99,7 @@ class TransportController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Transport/new.html.twig', [
 			'form' => $form->createView(),
 			'currencies' => $this->currencyFacade->getAllIndexedById(),
 		]);
@@ -139,7 +139,7 @@ class TransportController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing shipping - %name%', ['%name%' => $transport->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Transport/edit.html.twig', [
 			'form' => $form->createView(),
 			'transportDetail' => $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport),
 			'currencies' => $this->currencyFacade->getAllIndexedById(),
@@ -173,7 +173,7 @@ class TransportController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->transportGridFactory->create();
 
-		return $this->render('@SS6Shop/Admin/Content/Transport/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Transport/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

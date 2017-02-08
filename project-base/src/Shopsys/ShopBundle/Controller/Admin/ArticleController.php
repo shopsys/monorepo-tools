@@ -126,7 +126,7 @@ class ArticleController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing article - %name%', ['%name%' => $article->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Article/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Article/edit.html.twig', [
 			'form' => $form->createView(),
 			'article' => $article,
 		]);
@@ -141,7 +141,7 @@ class ArticleController extends AdminBaseController {
 		$gridNone = $this->getGrid(ArticlePlacementList::PLACEMENT_NONE);
 		$articlesCountOnSelectedDomain = $this->articleEditFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
 
-		return $this->render('@SS6Shop/Admin/Content/Article/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [
 			'gridViewTop' => $gridTop->createView(),
 			'gridViewFooter' => $gridFooter->createView(),
 			'gridViewNone' => $gridNone->createView(),
@@ -181,7 +181,7 @@ class ArticleController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Article/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Article/new.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
@@ -270,7 +270,7 @@ class ArticleController extends AdminBaseController {
 			->setAjaxConfirm();
 
 		$grid->enableMultipleDragAndDrop();
-		$grid->setTheme('@SS6Shop/Admin/Content/Article/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Article/listGrid.html.twig');
 
 		return $grid;
 	}

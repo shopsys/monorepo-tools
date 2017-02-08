@@ -57,7 +57,7 @@ class TopProductController extends AdminBaseController {
 			$this->getFlashMessageSender()->addSuccessFlash(t('Product settings on the main page successfully changed'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/TopProduct/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/TopProduct/list.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

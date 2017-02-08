@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}- {{ 'Administrator'|trans }}{% endblock %}
 {% block h1 %}{{ 'Administrator'|trans }}{% endblock %}
@@ -24,7 +24,7 @@
 
 		{% block admin_log %}{% endblock %}
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="{{ url('admin_administrator_list') }}" class="btn-link-style">{{ 'Back to overview'|trans }}</a>
 				{{ form_save(administrator|default(null), form) }}

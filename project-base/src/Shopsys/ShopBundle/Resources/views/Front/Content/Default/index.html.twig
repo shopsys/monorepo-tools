@@ -1,5 +1,5 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
-{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block breadcrumb %}
 {% endblock %}
@@ -30,7 +30,7 @@
 		</div>
 	{% endif %}
 
-	{{ render(controller('SS6ShopBundle:Front/Category:top')) }}
+	{{ render(controller('ShopsysShopBundle:Front/Category:top')) }}
 
 	{% if topProductsDetails is not empty %}
 		<div id="top-products">

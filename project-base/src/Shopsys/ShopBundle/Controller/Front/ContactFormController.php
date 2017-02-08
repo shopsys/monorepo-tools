@@ -55,7 +55,7 @@ class ContactFormController extends FrontBaseController {
 
 		}
 
-		$contactFormHtml = $this->renderView('@SS6Shop/Front/Content/ContactForm/contactForm.html.twig', [
+		$contactFormHtml = $this->renderView('@ShopsysShop/Front/Content/ContactForm/contactForm.html.twig', [
 			'form' => $form->createView(),
 		]);
 
@@ -76,7 +76,7 @@ class ContactFormController extends FrontBaseController {
 			]
 		);
 
-		return $this->render('@SS6Shop/Front/Content/ContactForm/contactForm.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/ContactForm/contactForm.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

@@ -34,7 +34,7 @@ class AppKernel extends Kernel {
 			new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 			new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
 			new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
-			new Shopsys\ShopBundle\SS6ShopBundle(), // must be loaded as last, because translations must overwrite other bundles
+			new Shopsys\ShopBundle\ShopsysShopBundle(), // must be loaded as last, because translations must overwrite other bundles
 		);
 
 		if (in_array($this->getEnvironment(), array(Environment::ENVIRONMENT_DEVELOPMENT))) {

@@ -137,7 +137,7 @@ class CartController extends FrontBaseController {
 			$domainId
 		);
 
-		return $this->render('@SS6Shop/Front/Content/Cart/index.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Cart/index.html.twig', [
 			'cart' => $cart,
 			'cartItems' => $cartItems,
 			'cartItemPrices' => $orderPreview->getQuantifiedItemsPrices(),
@@ -153,7 +153,7 @@ class CartController extends FrontBaseController {
 	public function boxAction() {
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 
-		return $this->render('@SS6Shop/Front/Inline/Cart/cartBox.html.twig', [
+		return $this->render('@ShopsysShop/Front/Inline/Cart/cartBox.html.twig', [
 			'cart' => $this->cartFacade->getCartOfCurrentCustomer(),
 			'productsPrice' => $orderPreview->getProductsPrice(),
 		]);
@@ -170,7 +170,7 @@ class CartController extends FrontBaseController {
 			'method' => 'POST',
 		]);
 
-		return $this->render('@SS6Shop/Front/Inline/Cart/addProduct.html.twig', [
+		return $this->render('@ShopsysShop/Front/Inline/Cart/addProduct.html.twig', [
 			'form' => $form->createView(),
 			'product' => $product,
 			'type' => $type,
@@ -247,7 +247,7 @@ class CartController extends FrontBaseController {
 				);
 				$accessoryDetails = $this->productDetailFactory->getDetailsForProducts($accessories);
 
-				return $this->render('@SS6Shop/Front/Inline/Cart/afterAddWindow.html.twig', [
+				return $this->render('@ShopsysShop/Front/Inline/Cart/afterAddWindow.html.twig', [
 					'accessoryDetails' => $accessoryDetails,
 					'ACCESSORIES_ON_BUY' => ModuleList::ACCESSORIES_ON_BUY,
 				]);
@@ -271,7 +271,7 @@ class CartController extends FrontBaseController {
 			);
 		}
 
-		return $this->forward('SS6ShopBundle:Front/FlashMessage:index');
+		return $this->forward('ShopsysShopBundle:Front/FlashMessage:index');
 	}
 
 	/**

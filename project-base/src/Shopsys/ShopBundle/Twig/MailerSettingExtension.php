@@ -66,7 +66,7 @@ class MailerSettingExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function getMailerSettingInfo() {
-		return $this->getTemplatingService()->render('@SS6Shop/Common/Mailer/settingInfo.html.twig', [
+		return $this->getTemplatingService()->render('@ShopsysShop/Common/Mailer/settingInfo.html.twig', [
 			'isDeliveryDisabled' => $this->isDeliveryDisabled,
 			'mailerMasterEmailAddress' => $this->mailerMasterEmailAddress,
 			'mailerWhitelistExpessions' => $this->mailerWhitelistExpessions,

@@ -108,7 +108,7 @@ class AdvertController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing advertising - %name%', ['%name%' => $advert->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Advert/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Advert/edit.html.twig', [
 			'form' => $form->createView(),
 			'advert' => $advert,
 		]);
@@ -151,14 +151,14 @@ class AdvertController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_advert_delete', ['id' => 'a.id'])
 			->setConfirmMessage(t('Do you really want to remove this advert?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Advert/listGrid.html.twig', [
+		$grid->setTheme('@ShopsysShop/Admin/Content/Advert/listGrid.html.twig', [
 			'advertPositionsByName' => $this->advertPositionList->getTranslationsIndexedByValue(),
 			'TYPE_IMAGE' => Advert::TYPE_IMAGE,
 		]);
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Advert/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Advert/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -196,7 +196,7 @@ class AdvertController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Advert/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Advert/new.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

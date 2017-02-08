@@ -1,6 +1,6 @@
 {% macro filterForm(filterForm, actionUrl, resetUrl, searchText, page, productFilterCountData, priceRange) %}
 	{{ form_start(filterForm, { action: actionUrl }) }}
-		{% form_theme filterForm '@SS6Shop/Front/Content/Product/filterFormTheme.html.twig' %}
+		{% form_theme filterForm '@ShopsysShop/Front/Content/Product/filterFormTheme.html.twig' %}
 
 		{% set isSearch = page == 'search' %}
 

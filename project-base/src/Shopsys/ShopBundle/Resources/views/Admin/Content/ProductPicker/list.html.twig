@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWindow.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWindow.html.twig' %}
 
 {% block content %}
 	{{ form_start(quickSearchForm) }}
@@ -20,10 +20,10 @@
 			</div>
 			<div class="in-tab__content">
 				<div class="{{ isAdvancedSearchFormSubmitted ? 'display-none ' : '' }}in-tab__content__in js-tabs-content" data-tab-id="quick">
-					{% include '@SS6Shop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
+					{% include '@ShopsysShop/Admin/Content/Product/quickSearchFormContent.html.twig' with {quickSearchForm: quickSearchForm} %}
 				</div>
 				<div class="in-tab__content__in js-tabs-content" data-tab-id="advanced">
-					{% include '@SS6Shop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
+					{% include '@ShopsysShop/Admin/Content/Product/AdvancedSearch/advancedSearch.html.twig'
 						with {
 							advancedSearchForm: advancedSearchForm,
 							isAdvancedSearchFormSubmitted: isAdvancedSearchFormSubmitted,
@@ -45,7 +45,7 @@
 	{{ form_end(quickSearchForm) }}
 
 	{% if isMultiple %}
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				<a href="#" class="btn" onclick="SS6.productsPicker.close(); return false;">{{ 'Finish the assigning'|trans }}</a>
 			{% endblock %}

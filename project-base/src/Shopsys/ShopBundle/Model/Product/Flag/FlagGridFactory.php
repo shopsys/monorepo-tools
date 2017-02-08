@@ -59,7 +59,7 @@ class FlagGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_flag_delete', ['id' => 'a.id'])
 			->setConfirmMessage(t('Do you really want to remove this flag?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Flag/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Flag/listGrid.html.twig');
 
 		return $grid;
 	}

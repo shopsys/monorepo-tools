@@ -41,13 +41,13 @@ class FeedConfigRepository {
 		$feedConfigs[] = new FeedConfig(
 			'Heureka',
 			'heureka',
-			'@SS6Shop/Feed/heureka.xml.twig',
+			'@ShopsysShop/Feed/heureka.xml.twig',
 			$this->heurekaItemRepository
 		);
 		$feedConfigs[] = new FeedConfig(
 			'Zboží.cz',
 			'zbozi',
-			'@SS6Shop/Feed/zbozi.xml.twig',
+			'@ShopsysShop/Feed/zbozi.xml.twig',
 			$this->zboziItemRepository
 		);
 
@@ -78,7 +78,7 @@ class FeedConfigRepository {
 		$feedConfigs[] = new FeedConfig(
 			t('%feedName% - availability', ['%feedName%' => 'Heureka']),
 			'heureka_delivery',
-			'@SS6Shop/Feed/heurekaDelivery.xml.twig',
+			'@ShopsysShop/Feed/heurekaDelivery.xml.twig',
 			$this->heurekaDeliveryItemRepository
 		);
 

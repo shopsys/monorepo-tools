@@ -1,6 +1,6 @@
 (function ($) {
 
-	SS6ShopBundleComponentConstraintsUniqueProductParameters = function() {
+	ShopsysShopBundleComponentConstraintsUniqueProductParameters = function() {
 		var self = this;
 		this.message = '';
 
@@ -9,7 +9,7 @@
 		 * Should return an error message or an array of messages
 		 */
 		this.validate = function (value) {
-			var uniqueCollectionValidator = new SS6ShopBundleComponentConstraintsUniqueCollection();
+			var uniqueCollectionValidator = new ShopsysShopBundleComponentConstraintsUniqueCollection();
 			uniqueCollectionValidator.message = this.message;
 			uniqueCollectionValidator.fields = new Array('parameter', 'locale');
 			uniqueCollectionValidator.allowEmpty = false;

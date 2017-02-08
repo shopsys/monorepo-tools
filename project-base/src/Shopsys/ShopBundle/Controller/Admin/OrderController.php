@@ -152,7 +152,7 @@ class OrderController extends AdminBaseController {
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->render('@SS6Shop/Admin/Content/Order/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Order/edit.html.twig', [
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItemTotalPricesById' => $orderItemTotalPricesById,
@@ -187,7 +187,7 @@ class OrderController extends AdminBaseController {
 
 		$orderItemTotalPricesById = $this->orderItemPriceCalculation->calculateTotalPricesIndexedById($order->getItems());
 
-		return $this->render('@SS6Shop/Admin/Content/Order/addProduct.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Order/addProduct.html.twig', [
 			'form' => $form->createView(),
 			'order' => $order,
 			'orderItem' => $orderItem,
@@ -245,11 +245,11 @@ class OrderController extends AdminBaseController {
 		$grid->addDeleteActionColumn('admin_order_delete', ['id' => 'id'])
 			->setConfirmMessage(t('Do you really want to remove the order?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/Order/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/Order/listGrid.html.twig');
 
 		$this->administratorGridFacade->restoreAndRememberGridLimit($administrator, $grid);
 
-		return $this->render('@SS6Shop/Admin/Content/Order/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Order/list.html.twig', [
 			'gridView' => $grid->createView(),
 			'quickSearchForm' => $quickSearchForm->createView(),
 			'advancedSearchForm' => $advancedSearchForm->createView(),
@@ -299,7 +299,7 @@ class OrderController extends AdminBaseController {
 	public function getRuleFormAction(Request $request) {
 		$ruleForm = $this->advancedSearchOrderFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
-		return $this->render('@SS6Shop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
 			'rulesForm' => $ruleForm->createView(),
 		]);
 	}
@@ -311,7 +311,7 @@ class OrderController extends AdminBaseController {
 	public function previewAction($id) {
 		$order = $this->orderFacade->getById($id);
 
-		return $this->render('@SS6Shop/Admin/Content/Order/preview.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Order/preview.html.twig', [
 			'order' => $order,
 		]);
 	}

@@ -67,7 +67,7 @@ class TermsAndConditionsController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/TermsAndConditions/setting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/TermsAndConditions/setting.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

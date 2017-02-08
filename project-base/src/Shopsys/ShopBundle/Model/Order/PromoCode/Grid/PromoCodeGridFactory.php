@@ -46,7 +46,7 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 		$grid->addDeleteActionColumn('admin_promocode_delete', ['id' => 'pc.id'])
 			->setConfirmMessage(t('Do you really want to remove this discount coupon?'));
 
-		$grid->setTheme('@SS6Shop/Admin/Content/PromoCode/listGrid.html.twig');
+		$grid->setTheme('@ShopsysShop/Admin/Content/PromoCode/listGrid.html.twig');
 
 		return $grid;
 	}

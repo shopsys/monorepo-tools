@@ -97,7 +97,7 @@ class CategoryController extends AdminBaseController {
 
 		$this->breadcrumb->overrideLastItem(new MenuItem(t('Editing category - %name%', ['%name%' => $category->getName()])));
 
-		return $this->render('@SS6Shop/Admin/Content/Category/edit.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Category/edit.html.twig', [
 			'form' => $form->createView(),
 			'category' => $category,
 		]);
@@ -135,7 +135,7 @@ class CategoryController extends AdminBaseController {
 			$this->getFlashMessageSender()->addErrorFlashTwig(t('Please check the correctness of all data filled.'));
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Category/new.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Category/new.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}
@@ -171,7 +171,7 @@ class CategoryController extends AdminBaseController {
 			$categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Category/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Category/list.html.twig', [
 			'categoryDetails' => $categoryDetails,
 			'isForAllDomains' => ($domainId === self::ALL_DOMAINS),
 		]);
@@ -223,7 +223,7 @@ class CategoryController extends AdminBaseController {
 	public function listDomainTabsAction() {
 		$domainId = $this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
 
-		return $this->render('@SS6Shop/Admin/Content/Category/domainTabs.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Category/domainTabs.html.twig', [
 			'domainConfigs' => $this->domain->getAll(),
 			'selectedDomainId' => $domainId,
 		]);

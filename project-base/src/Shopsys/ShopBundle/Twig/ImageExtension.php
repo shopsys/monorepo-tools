@@ -213,7 +213,7 @@ class ImageExtension extends Twig_Extension {
 		$htmlAttributes = $attributes;
 		unset($htmlAttributes['type'], $htmlAttributes['size']);
 
-		return $this->getTemplatingService()->render('@SS6Shop/Common/image.html.twig', [
+		return $this->getTemplatingService()->render('@ShopsysShop/Common/image.html.twig', [
 			'attr' => $htmlAttributes,
 			'imageCssClass' => $this->getImageCssClass($entityName, $attributes['type'], $attributes['size']),
 		]);

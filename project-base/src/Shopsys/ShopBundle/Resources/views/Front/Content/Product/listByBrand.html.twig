@@ -1,6 +1,6 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
-{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
-{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysShop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block meta_robots %}
 	{{ paginator.metaRobots(paginationResult) }}
@@ -26,8 +26,8 @@
 		</div>
 
 		<div>
-			{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForListByBrand')) }}
-			{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: false } %}
+			{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForListByBrand')) }}
+			{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: false } %}
 		</div>
 
 	</div>

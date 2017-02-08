@@ -84,7 +84,7 @@ class TransportGridFactory implements GridFactoryInterface {
 			->setConfirmMessage(t('Do you really want to remove this shipping?'));
 
 		$grid->setTheme(
-			'@SS6Shop/Admin/Content/Transport/listGrid.html.twig',
+			'@ShopsysShop/Admin/Content/Transport/listGrid.html.twig',
 			['currencyIdForList' => self::CURRENCY_ID_FOR_LIST]
 		);
 

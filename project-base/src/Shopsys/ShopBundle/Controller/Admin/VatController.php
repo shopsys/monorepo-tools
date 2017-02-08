@@ -54,7 +54,7 @@ class VatController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->vatInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Vat/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -165,7 +165,7 @@ class VatController extends AdminBaseController {
 			}
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Vat/vatSettings.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Vat/vatSettings.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

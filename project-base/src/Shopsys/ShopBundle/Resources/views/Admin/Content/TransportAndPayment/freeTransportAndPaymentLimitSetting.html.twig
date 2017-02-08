@@ -1,4 +1,4 @@
-{% extends '@SS6Shop/Admin/Layout/layoutWithPanel.html.twig' %}
+{% extends '@ShopsysShop/Admin/Layout/layoutWithPanel.html.twig' %}
 
 {% block title %}
 	- {{ 'Free shipping and payment'|trans }}
@@ -38,7 +38,7 @@
 			</tbody>
 		</table>
 
-		{% embed '@SS6Shop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
 			{% block fixed_bar_content %}
 				{{ form_widget(form.save, { label: 'Save changes'|trans }) }}
 			{% endblock %}

@@ -1,5 +1,5 @@
-{% extends '@SS6Shop/Front/Layout/base.html.twig' %}
-{% use '@SS6Shop/Front/Layout/header.html.twig' %}
+{% extends '@ShopsysShop/Front/Layout/base.html.twig' %}
+{% use '@ShopsysShop/Front/Layout/header.html.twig' %}
 
 {% block html_body %}
 	{% set adminLoggedAsCustomer = is_granted(constant('Shopsys\\ShopBundle\\Model\\Security\\Roles::ROLE_ADMIN_AS_CUSTOMER')) %}
@@ -31,7 +31,7 @@
 		</div>
 	</div>
 	<div class="web__footer{% if not isCookiesConsentGiven() %} web__footer--with-cookies js-eu-cookies-consent-footer-gap{% endif %}">
-		{% include '@SS6Shop/Front/Layout/footer.html.twig' %}
+		{% include '@ShopsysShop/Front/Layout/footer.html.twig' %}
 	</div>
 	{% if not isCookiesConsentGiven() %}
 		{% set cookiesArticle = findCookiesArticleByDomainId(getDomain().id) %}

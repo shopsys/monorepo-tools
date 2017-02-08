@@ -46,7 +46,7 @@ class AvailabilityController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->availabilityInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Availability/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Availability/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}
@@ -158,7 +158,7 @@ class AvailabilityController extends AdminBaseController {
 			return $this->redirectToRoute('admin_availability_list');
 		}
 
-		return $this->render('@SS6Shop/Admin/Content/Availability/setting.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Availability/setting.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

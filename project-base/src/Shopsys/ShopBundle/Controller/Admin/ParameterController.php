@@ -34,7 +34,7 @@ class ParameterController extends AdminBaseController {
 	public function listAction() {
 		$grid = $this->parameterInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Parameter/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Parameter/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

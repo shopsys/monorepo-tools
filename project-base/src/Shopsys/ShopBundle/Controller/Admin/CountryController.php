@@ -35,7 +35,7 @@ class CountryController extends AdminBaseController {
 
 		$grid = $countryInlineEdit->getGrid();
 
-		return $this->render('@SS6Shop/Admin/Content/Country/list.html.twig', [
+		return $this->render('@ShopsysShop/Admin/Content/Country/list.html.twig', [
 			'gridView' => $grid->createView(),
 		]);
 	}

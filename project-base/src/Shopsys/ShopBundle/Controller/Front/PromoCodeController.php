@@ -31,7 +31,7 @@ class PromoCodeController extends FrontBaseController {
 	}
 
 	public function indexAction() {
-		return $this->render('@SS6Shop/Front/Content/Order/PromoCode/index.html.twig', [
+		return $this->render('@ShopsysShop/Front/Content/Order/PromoCode/index.html.twig', [
 			'validEnteredPromoCode' => $this->currentPromoCodeFacade->getValidEnteredPromoCodeOrNull(),
 		]);
 	}

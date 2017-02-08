@@ -1,7 +1,7 @@
-{% extends '@SS6Shop/Front/Layout/layoutWithPanel.html.twig' %}
-{% import '@SS6Shop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
-{% import '@SS6Shop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
-{% import '@SS6Shop/Front/Content/Product/productListMacro.html.twig' as productList %}
+{% extends '@ShopsysShop/Front/Layout/layoutWithPanel.html.twig' %}
+{% import '@ShopsysShop/Front/Inline/Paginator/paginator.html.twig' as paginator %}
+{% import '@ShopsysShop/Front/Content/Product/filterFormMacro.html.twig' as productFilterForm %}
+{% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block meta_robots %}
 	{{ paginator.metaRobots(paginationResult) }}
@@ -13,14 +13,14 @@
 
 {% block main_content %}
 	<div class="box-list">
-		{{ render(controller('SS6ShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
+		{{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
 		<h1>{{ category.name }}</h1>
 
 		<h2>{{ 'List of subcategories'|trans }}</h2>
 
-		{{ render(controller('SS6ShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
+		{{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
 
-		{{ render(controller('SS6ShopBundle:Front/BestsellingProduct:list', { category: category })) }}
+		{{ render(controller('ShopsysShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
 		<div class="js-product-list-with-filter">
 			{% if paginationResult.results|length > 0 or filterFormSubmited %}
@@ -39,9 +39,9 @@
 
 			<div class="js-product-list-ajax-filter-products-with-controls">
 				<div>
-					{{ render(controller('SS6ShopBundle:Front/Product:selectOrderingModeForList')) }}
+					{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForList')) }}
 				</div>
-				{% include '@SS6Shop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+				{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
 			</div>
 		</div>
 
