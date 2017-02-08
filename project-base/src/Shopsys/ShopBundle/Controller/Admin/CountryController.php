@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\Country\CountryFacade;
-use SS6\ShopBundle\Model\Country\CountryInlineEdit;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Model\Country\CountryInlineEdit;
 
 class CountryController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryInlineEdit
 	 */
 	private $countryInlineEdit;
 

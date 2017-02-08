@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory;
-use SS6\ShopBundle\Model\Cookies\CookiesFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory;
+use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CookiesController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory
 	 */
 	private $cookiesSettingFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cookies\CookiesFacade
+	 * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
 	 */
 	private $cookiesFacade;
 

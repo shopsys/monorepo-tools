@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -13,7 +13,7 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 class ParameterTranslation extends AbstractTranslation {
 
 	/**
-	 * @Prezent\Translatable(targetEntity="SS6\ShopBundle\Model\Product\Parameter\Parameter")
+	 * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\Parameter")
 	 */
 	protected $translatable;
 

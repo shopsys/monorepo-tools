@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use DateTime;
-use SS6\ShopBundle\Component\String\HashGenerator;
-use SS6\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\ShopBundle\Model\Customer\User;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordService {
@@ -17,7 +17,7 @@ class CustomerPasswordService {
 	private $encoderFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\String\HashGenerator
+	 * @var \Shopsys\ShopBundle\Component\String\HashGenerator
 	 */
 	private $hashGenerator;
 
@@ -30,7 +30,7 @@ class CustomerPasswordService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 * @param string $password
 	 */
 	public function changePassword(User $user, $password) {
@@ -40,7 +40,7 @@ class CustomerPasswordService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 */
 	public function resetPassword(User $user) {
 		$hash = $this->hashGenerator->generateHash(self::RESET_PASSWORD_HASH_LENGTH);
@@ -48,7 +48,7 @@ class CustomerPasswordService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 * @param string|null $hash
 	 * @return bool
 	 */
@@ -66,13 +66,13 @@ class CustomerPasswordService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 * @param string|null $hash
 	 * @param string $newPassword
 	 */
 	public function setNewPassword(User $user, $hash, $newPassword) {
 		if (!$this->isResetPasswordHashValid($user, $hash)) {
-			throw new \SS6\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
+			throw new \Shopsys\ShopBundle\Model\Customer\Exception\InvalidResetPasswordHashException();
 		}
 
 		$this->changePassword($user, $newPassword);

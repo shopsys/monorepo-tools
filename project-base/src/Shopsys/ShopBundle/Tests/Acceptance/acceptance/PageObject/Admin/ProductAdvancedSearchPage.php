@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductAdvancedSearchPage extends AbstractPage {
 

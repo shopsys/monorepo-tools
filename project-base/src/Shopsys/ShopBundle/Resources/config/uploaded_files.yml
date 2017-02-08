@@ -1,2 +1,2 @@
 - name: mailTemplate
-  class: SS6\ShopBundle\Model\Mail\MailTemplate
+  class: Shopsys\ShopBundle\Model\Mail\MailTemplate

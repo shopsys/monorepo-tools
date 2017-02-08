@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture {
 
@@ -34,7 +34,7 @@ class OrderStatusDataFixture extends AbstractReferenceFixture {
 
 	/**
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
 	 * @param string|null $referenceName
 	 */

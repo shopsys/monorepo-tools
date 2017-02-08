@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\Payment;
 
 /**
  * @ORM\Table(name="payment_domains")
@@ -12,10 +12,10 @@ use SS6\ShopBundle\Model\Payment\Payment;
 class PaymentDomain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $payment;
@@ -29,7 +29,7 @@ class PaymentDomain {
 	private $domainId;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
 	 */
 	public function __construct(Payment $payment, $domainId) {

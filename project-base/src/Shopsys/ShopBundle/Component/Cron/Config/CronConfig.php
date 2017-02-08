@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Config;
+namespace Shopsys\ShopBundle\Component\Cron\Config;
 
 use DateTimeInterface;
-use SS6\ShopBundle\Component\Cron\CronTimeResolver;
+use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronConfig {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronTimeResolver
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver
 	 */
 	private $cronTimeResolver;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	private $cronModuleConfigs;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronTimeResolver $cronTimeResolver
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronTimeResolver $cronTimeResolver
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
 	 */
 	public function __construct(
 		CronTimeResolver $cronTimeResolver,
@@ -30,7 +30,7 @@ class CronConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function getAll() {
 		return $this->cronModuleConfigs;
@@ -38,7 +38,7 @@ class CronConfig {
 
 	/**
 	 * @param \DateTimeInterface $roundedTime
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function getCronModuleConfigsByTime(DateTimeInterface $roundedTime) {
 		$matchedCronConfigs = [];
@@ -62,7 +62,7 @@ class CronConfig {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($moduleId);
+		throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($moduleId);
 	}
 
 }

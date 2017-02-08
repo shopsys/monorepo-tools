@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle;
+namespace Shopsys\ShopBundle;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
-use SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
+use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\DependencyInjection\Compiler\CustomTranslationsCompilerPass;
+use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -23,7 +23,7 @@ class SS6ShopBundle extends Bundle {
 		parent::boot();
 
 		$autoContainer = $this->container->get('ss6.auto_services.auto_container');
-		/* @var $autoContainer \SS6\AutoServicesBundle\Compiler\AutoContainer */
+		/* @var $autoContainer \Shopsys\AutoServicesBundle\Compiler\AutoContainer */
 		$filemanagerAccess = $autoContainer->get(FilemanagerAccess::class);
 		FilemanagerAccess::injectSelf($filemanagerAccess);
 

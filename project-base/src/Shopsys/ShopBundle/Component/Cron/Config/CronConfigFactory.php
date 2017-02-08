@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Config;
+namespace Shopsys\ShopBundle\Component\Cron\Config;
 
-use SS6\ShopBundle\Component\Cron\Config\CronConfig;
-use SS6\ShopBundle\Component\Cron\Config\CronConfigLoader;
-use SS6\ShopBundle\Component\Cron\CronTimeResolver;
+use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
+use Shopsys\ShopBundle\Component\Cron\Config\CronConfigLoader;
+use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronConfigFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronTimeResolver
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver
 	 */
 	private $cronTimeResolver;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\Config\CronConfigLoader
+	 * @var \Shopsys\ShopBundle\Component\Cron\Config\CronConfigLoader
 	 */
 	private $cronConfigLoader;
 
@@ -25,7 +25,7 @@ class CronConfigFactory {
 
 	/**
 	 * @param string $ymlFilepath
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronConfig
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronConfig
 	 */
 	public function create($ymlFilepath) {
 		$cronModuleConfigs = $this->cronConfigLoader->loadCronModuleConfigsFromYaml($ymlFilepath);

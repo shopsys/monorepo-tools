@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
 class ProductExtension extends \Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
@@ -52,7 +52,7 @@ class ProductExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @return string
 	 */
 	public function getProductDisplayName(Product $product) {
@@ -66,7 +66,7 @@ class ProductExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @return string
 	 */
 	public function getProductListDisplayName(Product $product) {
@@ -78,18 +78,18 @@ class ProductExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \Shopsys\ShopBundle\Model\Category\Category
 	 */
 	public function getProductMainCategory(Product $product, $domainId) {
 		return $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 * @return \Shopsys\ShopBundle\Model\Category\Category|null
 	 */
 	public function findProductMainCategory(Product $product, $domainId) {
 		return $this->categoryFacade->findProductMainCategoryByDomainId($product, $domainId);

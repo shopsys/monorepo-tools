@@ -1,29 +1,29 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
-use SS6\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory;
-use SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType;
+use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory;
+use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ShopInfoController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory
 	 */
 	private $shopInfoSettingFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
 	 */
 	private $shopInfoSettingFacade;
 

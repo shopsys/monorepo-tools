@@ -1,31 +1,31 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace Shopsys\ShopBundle\Model\Cart;
 
-use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
-use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart[]
+	 * @var \Shopsys\ShopBundle\Model\Cart\Cart[]
 	 */
 	private $carts = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItemRepository
+	 * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository
 	 */
 	private $cartItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
+	 * @var \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade
 	 */
 	private $cartWatcherFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
-	 * @param \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
+	 * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
+	 * @param \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
 	 */
 	public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade) {
 		$this->cartItemRepository = $cartItemRepository;
@@ -33,8 +33,8 @@ class CartFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \Shopsys\ShopBundle\Model\Cart\Cart
 	 */
 	public function get(CustomerIdentifier $customerIdentifier) {
 		$customerIdentifierHash = $customerIdentifier->getObjectHash();
@@ -49,8 +49,8 @@ class CartFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \Shopsys\ShopBundle\Model\Cart\Cart
 	 */
 	private function createNewCart(CustomerIdentifier $customerIdentifier) {
 		$cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);

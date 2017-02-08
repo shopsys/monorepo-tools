@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Feed\FeedConfig;
-use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
-use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
-use SS6\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
-use SS6\ShopBundle\Model\Feed\FeedXmlWriter;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
+use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
 use Symfony\Component\Filesystem\Filesystem;
 
 class FeedFacade {
@@ -18,7 +18,7 @@ class FeedFacade {
 	const BATCH_SIZE = 200;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -28,27 +28,27 @@ class FeedFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedXmlWriter
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedXmlWriter
 	 */
 	private $feedXmlWriter;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
 	 */
 	private $feedConfigFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerationConfigFactory
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory
 	 */
 	private $feedGenerationConfigFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerationConfig[]
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
 	 */
 	private $feedGenerationConfigs;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	private $entityManagerFacade;
 
@@ -70,8 +70,8 @@ class FeedFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
-	 * @return \SS6\ShopBundle\Model\Feed\FeedGenerationConfig|null
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig|null
 	 */
 	public function generateFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue) {
 		foreach ($this->feedGenerationConfigs as $key => $feedGenerationConfig) {
@@ -111,8 +111,8 @@ class FeedFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 */
 	public function generateFeed(
 		FeedConfig $feedConfig,
@@ -130,10 +130,10 @@ class FeedFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param int|null $seekItemId
-	 * @return \SS6\ShopBundle\Model\Feed\FeedItemInterface|null
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedItemInterface|null
 	 */
 	private function generateFeedBatch(
 		FeedConfig $feedConfig,
@@ -177,7 +177,7 @@ class FeedFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedGenerationConfig
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig
 	 */
 	public function getFirstFeedGenerationConfig() {
 		return reset($this->feedGenerationConfigs);

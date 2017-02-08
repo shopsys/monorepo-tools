@@ -1,43 +1,43 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Controller\ErrorService;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\DomainFacade;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\ArrayDataSource;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Form\Admin\Domain\DomainFormType;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Controller\ErrorService;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainFacade;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Form\Admin\Domain\DomainFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\DomainFacade
+	 * @var \Shopsys\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private $domainFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Controller\ErrorService
+	 * @var \Shopsys\ShopBundle\Component\Controller\ErrorService
 	 */
 	private $errorService;
 
@@ -132,9 +132,9 @@ class DomainController extends AdminBaseController {
 				);
 
 				return new JsonResponse(['result' => 'valid']);
-			} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('File type not supported.'));
-			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('File upload failed, try again please.'));
 			}
 

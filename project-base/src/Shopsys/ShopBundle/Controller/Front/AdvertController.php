@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Model\Advert\AdvertEditFacade;
 
 class AdvertController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertEditFacade
 	 */
 	private $advertEditFacade;
 

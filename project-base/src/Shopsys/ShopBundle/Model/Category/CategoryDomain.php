@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category;
+namespace Shopsys\ShopBundle\Model\Category;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\Category;
 
 /**
  * @ORM\Table(name="category_domains")
@@ -12,10 +12,10 @@ use SS6\ShopBundle\Model\Category\Category;
 class CategoryDomain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category", inversedBy="domains")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category", inversedBy="domains")
 	 * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $category;
@@ -50,7 +50,7 @@ class CategoryDomain {
 	private $description;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 */
 	public function __construct(Category $category, $domainId) {

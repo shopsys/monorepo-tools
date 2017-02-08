@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace Shopsys\ShopBundle\Model\Pricing;
 
 use Closure;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductService;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class InputPriceRecalculator {
 
@@ -25,32 +25,32 @@ class InputPriceRecalculator {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation
 	 */
 	private $inputPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
 	private $basePriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 

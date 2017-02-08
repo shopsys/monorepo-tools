@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\FileUpload;
+namespace Shopsys\ShopBundle\Component\FileUpload;
 
-use SS6\ShopBundle\Component\String\TransformString;
+use Shopsys\ShopBundle\Component\String\TransformString;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -26,7 +26,7 @@ class FileUpload {
 	private $imageDir;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileNamingConvention
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention
 	 */
 	private $fileNamingConvention;
 
@@ -39,7 +39,7 @@ class FileUpload {
 	 * @param string $temporaryDir
 	 * @param string $uploadedFileDir
 	 * @param string $imageDir
-	 * @param \SS6\ShopBundle\Component\FileUpload\FileNamingConvention $fileNamingConvention
+	 * @param \Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention $fileNamingConvention
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
 	public function __construct(
@@ -61,7 +61,7 @@ class FileUpload {
 	 */
 	public function upload(UploadedFile $file) {
 		if ($file->getError()) {
-			throw new \SS6\ShopBundle\Component\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
+			throw new \Shopsys\ShopBundle\Component\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
 		}
 
 		$temporaryFilename = $this->getTemporaryFilename($file->getClientOriginalName());
@@ -145,7 +145,7 @@ class FileUpload {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
+	 * @param \Shopsys\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
 	 */
 	public function preFlushEntity(EntityFileUploadInterface $entity) {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();
@@ -157,7 +157,7 @@ class FileUpload {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
+	 * @param \Shopsys\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
 	 */
 	public function postFlushEntity(EntityFileUploadInterface $entity) {
 		$filesForUpload = $entity->getTemporaryFilesForUpload();
@@ -180,7 +180,7 @@ class FileUpload {
 				$this->filesystem->rename($sourceFilepath, $targetFilename, true);
 			} catch (\Symfony\Component\Filesystem\Exception\IOException $ex) {
 				$message = 'Failed to rename file from temporary directory to entity';
-				throw new \SS6\ShopBundle\Component\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
+				throw new \Shopsys\ShopBundle\Component\FileUpload\Exception\MoveToEntityFailedException($message, $ex);
 			}
 		}
 	}

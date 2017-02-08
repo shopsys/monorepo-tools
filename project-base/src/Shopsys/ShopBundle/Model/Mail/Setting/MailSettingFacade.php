@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail\Setting;
+namespace Shopsys\ShopBundle\Model\Mail\Setting;
 
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
 class MailSettingFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		Setting $setting

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Unit;
+namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 class UnitData {
 
@@ -17,7 +17,7 @@ class UnitData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
 	 */
 	public function setFromEntity(Unit $unit) {
 		$translations = $unit->getTranslations();

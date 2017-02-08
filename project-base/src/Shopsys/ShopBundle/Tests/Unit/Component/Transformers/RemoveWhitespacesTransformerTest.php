@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 
 class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase {
 

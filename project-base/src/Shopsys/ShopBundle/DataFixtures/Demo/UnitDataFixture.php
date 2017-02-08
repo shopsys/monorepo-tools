@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Product\Unit\UnitData;
-use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture {
 
@@ -22,12 +22,12 @@ class UnitDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 * @param string|null $referenceName
 	 */
 	private function createUnit(UnitData $unitData, $referenceName = null) {
 		$unitFacade = $this->get(UnitFacade::class);
-		/* @var $unitFacade \SS6\ShopBundle\Model\Product\Unit\UnitFacade */
+		/* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
 
 		$unit = $unitFacade->create($unitData);
 		if ($referenceName !== null) {

@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Transport;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Transport;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportData;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
 

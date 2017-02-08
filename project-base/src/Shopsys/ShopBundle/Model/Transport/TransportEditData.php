@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Transport\TransportData;
+use Shopsys\ShopBundle\Model\Transport\TransportData;
 
 class TransportEditData {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportData
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportData
 	 */
 	public $transportData;
 
@@ -17,7 +17,7 @@ class TransportEditData {
 	public $prices;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportData $transportData
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
 	 * @param array $prices
 	 */
 	public function __construct(TransportData $transportData = null, array $prices = []) {

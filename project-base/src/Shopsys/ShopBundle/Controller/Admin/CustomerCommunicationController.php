@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
-use SS6\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFormType;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Payment;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Payment;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
 

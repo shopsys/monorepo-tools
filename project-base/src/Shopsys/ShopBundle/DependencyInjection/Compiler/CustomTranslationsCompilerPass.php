@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DependencyInjection\Compiler;
+namespace Shopsys\ShopBundle\DependencyInjection\Compiler;
 
 use SplFileInfo;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

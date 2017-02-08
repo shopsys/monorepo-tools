@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cookies;
+namespace Shopsys\ShopBundle\Model\Cookies;
 
-use SS6\Environment;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Article\Article;
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\Environment;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Article\Article;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookiesFacade {
@@ -19,17 +19,17 @@ class CookiesFacade {
 	private $environment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -40,9 +40,9 @@ class CookiesFacade {
 
 	/**
 	 * @param string $environment
-	 * @param \SS6\ShopBundle\Model\Article\ArticleEditFacade $articleEditFacade
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Article\ArticleEditFacade $articleEditFacade
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 */
 	public function __construct(
@@ -61,7 +61,7 @@ class CookiesFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Article\Article|null
+	 * @return \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	public function findCookiesArticleByDomainId($domainId) {
 		$cookiesArticleId = $this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId);
@@ -76,7 +76,7 @@ class CookiesFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article|null $cookiesArticle
+	 * @param \Shopsys\ShopBundle\Model\Article\Article|null $cookiesArticle
 	 * @param int $domainId
 	 */
 	public function setCookiesArticleOnDomain($cookiesArticle, $domainId) {
@@ -92,7 +92,7 @@ class CookiesFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article $article
+	 * @param \Shopsys\ShopBundle\Model\Article\Article $article
 	 * @return bool
 	 */
 	public function isArticleUsedAsCookiesInfo(Article $article) {

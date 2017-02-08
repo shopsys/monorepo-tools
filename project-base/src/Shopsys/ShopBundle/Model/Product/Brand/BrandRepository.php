@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
 class BrandRepository {
 
@@ -28,21 +28,21 @@ class BrandRepository {
 
 	/**
 	 * @param int $brandId
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function getById($brandId) {
 		$brand = $this->getBrandRepository()->find($brandId);
 
 		if ($brand === null) {
 			$message = 'Brand with ID ' . $brandId . ' not found.';
-			throw new \SS6\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException($message);
 		}
 
 		return $brand;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public function getAll() {
 		return $this->getBrandRepository()->findBy([], ['name' => 'asc']);

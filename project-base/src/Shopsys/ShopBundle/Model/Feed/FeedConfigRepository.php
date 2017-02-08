@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Model\Feed\FeedConfig;
-use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 
 class FeedConfigRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $heurekaItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $heurekaDeliveryItemRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $zboziItemRepository;
 
@@ -33,7 +33,7 @@ class FeedConfigRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getFeedConfigs() {
 		$feedConfigs = [];
@@ -56,7 +56,7 @@ class FeedConfigRepository {
 
 	/**
 	 * @param string $feedName
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
 	 */
 	public function getFeedConfigByName($feedName) {
 		foreach ($this->getAllFeedConfigs() as $feedConfig) {
@@ -66,11 +66,11 @@ class FeedConfigRepository {
 		}
 
 		$message = 'Feed config with name "' . $feedName . ' not found.';
-		throw new \SS6\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($message);
+		throw new \Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException($message);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getDeliveryFeedConfigs() {
 		$feedConfigs = [];
@@ -86,7 +86,7 @@ class FeedConfigRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getAllFeedConfigs() {
 		return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());

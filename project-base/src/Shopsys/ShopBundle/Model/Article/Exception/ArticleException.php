@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Article\Exception;
+namespace Shopsys\ShopBundle\Model\Article\Exception;
 
 interface ArticleException {
 

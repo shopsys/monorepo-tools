@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Constant;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Constant;
 
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 

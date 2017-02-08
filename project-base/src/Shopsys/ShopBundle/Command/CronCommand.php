@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
 use DateTime;
 use DateTimeImmutable;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronFacade;
-use SS6\ShopBundle\Component\Mutex\MutexFactory;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronFacade;
+use Shopsys\ShopBundle\Component\Mutex\MutexFactory;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -31,9 +31,9 @@ class CronCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$cronFacade = $this->getContainer()->get(CronFacade::class);
-		/* @var $cronFacade \SS6\ShopBundle\Component\Cron\CronFacade */
+		/* @var $cronFacade \Shopsys\ShopBundle\Component\Cron\CronFacade */
 		$mutexFactory = $this->getContainer()->get(MutexFactory::class);
-		/* @var $mutexFactory \SS6\ShopBundle\Component\Mutex\MutexFactory */
+		/* @var $mutexFactory \Shopsys\ShopBundle\Component\Mutex\MutexFactory */
 
 		$optionList = $input->getOption(self::OPTION_LIST);
 		if ($optionList === true) {
@@ -45,7 +45,7 @@ class CronCommand extends ContainerAwareCommand {
 
 	/**
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
 	 */
 	private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade) {
 		$cronModuleConfigs = $cronFacade->getAll();
@@ -61,8 +61,8 @@ class CronCommand extends ContainerAwareCommand {
 
 	/**
 	 * @param \Symfony\Component\Console\Input\InputInterface $input
-	 * @param \SS6\ShopBundle\Component\Cron\CronFacade $cronFacade
-	 * @param \SS6\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
+	 * @param \Shopsys\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
 	 */
 	private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory) {
 		$moduleArgument = $input->getOption(self::OPTION_MODULE);
@@ -79,7 +79,7 @@ class CronCommand extends ContainerAwareCommand {
 			}
 			$mutex->releaseLock();
 		} else {
-			throw new \SS6\ShopBundle\Command\Exception\CronCommandException(
+			throw new \Shopsys\ShopBundle\Command\Exception\CronCommandException(
 				'Cron is locked. Another cron module is already running.'
 			);
 		}

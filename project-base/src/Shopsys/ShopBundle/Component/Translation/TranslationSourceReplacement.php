@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 class TranslationSourceReplacement {
 

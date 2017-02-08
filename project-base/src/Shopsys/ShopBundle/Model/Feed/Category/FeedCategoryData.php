@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category;
+namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 class FeedCategoryData {
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Twig;
+namespace Shopsys\ShopBundle\Tests\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
-use SS6\ShopBundle\Twig\NumberFormatterExtension;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
 class NumberFormatterExtensionTest extends FunctionalTestCase {
 

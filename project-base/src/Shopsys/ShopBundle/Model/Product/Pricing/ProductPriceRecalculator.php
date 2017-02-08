@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductService;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator {
@@ -22,42 +22,42 @@ class ProductPriceRecalculator {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	private $entityManagerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
 	 */
 	private $productCalculatedPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
 	 */
 	private $pricingGroupFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]|null
 	 */
 	private $allPricingGroups;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
 
 	/**
-	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
+	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][0]|null
 	 */
 	private $productRowsIterator;
 
@@ -126,7 +126,7 @@ class ProductPriceRecalculator {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	private function getAllPricingGroups() {
 		if ($this->allPricingGroups === null) {
@@ -137,14 +137,14 @@ class ProductPriceRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	private function recalculateProductPrices(Product $product) {
 		foreach ($this->getAllPricingGroups() as $pricingGroup) {
 			try {
 				$price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 				$priceWithVat = $price->getPriceWithVat();
-			} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $e) {
 				$priceWithVat = null;
 			}
 			$this->productCalculatedPriceRepository->saveCalculatedPrice($product, $pricingGroup, $priceWithVat);

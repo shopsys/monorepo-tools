@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile\Config;
+namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
 
 class UploadedFileEntityConfig {
 

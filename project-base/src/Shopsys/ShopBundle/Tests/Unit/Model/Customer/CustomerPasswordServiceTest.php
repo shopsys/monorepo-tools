@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Customer;
 
 use DateTime;
-use SS6\ShopBundle\Component\String\HashGenerator;
-use SS6\ShopBundle\Model\Customer\CustomerPasswordService;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordServiceTest extends FunctionalTestCase {

@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
 use DirectoryIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
-use SS6\ShopBundle\Component\Translation\TranslationSourceReplacement;
+use Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -61,7 +61,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	/**
 	 * @param \DirectoryIterator $translationsDirectory
 	 * @param string $targetLocale
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function getAllReplacements(DirectoryIterator $translationsDirectory, $targetLocale) {
 		$allReplacements = [];
@@ -89,7 +89,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	/**
 	 * @see \Symfony\Component\Translation\Loader\PoFileLoader::parse
 	 * @param \SplFileInfo $file
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function extractReplacementsFromPoFile(SplFileInfo $file) {
 		$stream = fopen($file->getPathname(), 'r');
@@ -115,7 +115,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 				$item['comments'][] = substr($line, 3);
 			} elseif (substr($line, 0, 7) === 'msgid "') {
 				if (count($item['ids']) > 0) {
-					throw new \SS6\ShopBundle\Command\Exception\TranslationReplaceSourceCommandException(
+					throw new \Shopsys\ShopBundle\Command\Exception\TranslationReplaceSourceCommandException(
 						sprintf('Parse error: Message ID "%s" must be separated from previous IDs by an empty line.', substr($line, 7, -1))
 					);
 				}
@@ -148,7 +148,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 
 	/**
 	 * @see \Symfony\Component\Translation\Loader\PoFileLoader::addMessage
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $translationSourceReplacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $translationSourceReplacements
 	 * @param array $item
 	 */
 	private function parsePoFileItem(array &$translationSourceReplacements, array $item) {
@@ -195,9 +195,9 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function filterReplacementsWithUniqueOldSource(array $replacements, OutputInterface $output) {
 		$oldSourceUsageCounts = [];
@@ -232,9 +232,9 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function filterFilledReplacements(array $replacements, OutputInterface $output) {
 		foreach ($replacements as $index => $replacement) {
@@ -252,9 +252,9 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function filterReplacementsWithUniqueNewSource(array $replacements, OutputInterface $output) {
 		$newSourceUsageCounts = [];
@@ -290,9 +290,9 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
-	 * @return \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[]
+	 * @return \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[]
 	 */
 	private function filterNonEqualReplacements($replacements, $output) {
 		foreach ($replacements as $index => $replacement) {
@@ -310,8 +310,8 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
-	 * @returns \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @returns \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 */
 	private function sortBySourceLengthDesc($replacements) {
 		usort($replacements, function (TranslationSourceReplacement $replacementLeft, TranslationSourceReplacement $replacementRight) {
@@ -347,7 +347,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param string[] $searchedPathNames
 	 * @param \Symfony\Component\Console\Output\OutputInterface $output
 	 */
@@ -386,7 +386,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
 	 * @param string[] $searchedPathNames
 	 * @param string $sourceFilePath
 	 * @return int|null
@@ -432,7 +432,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement[] $replacements
 	 * @param \DirectoryIterator $directory
 	 */
 	private function replaceSourcesInPoFiles(array $replacements, DirectoryIterator $directory) {
@@ -481,7 +481,7 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand {
 
 	/**
 	 * @param string $filePath
-	 * @param \SS6\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
+	 * @param \Shopsys\ShopBundle\Component\Translation\TranslationSourceReplacement $replacement
 	 * @param int|null $realCount
 	 * @param int $expectedCount
 	 * @param bool $isExpectedCountExact

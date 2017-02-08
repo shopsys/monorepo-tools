@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Order;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Order;
 
 use Doctrine\ORM\QueryBuilder;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
-use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
+use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
 

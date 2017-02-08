@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Item\OrderItemData;
-use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
+use Shopsys\ShopBundle\Model\Order\Item\OrderTransportData;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Entity
@@ -16,20 +16,20 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class OrderTransport extends OrderItem {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
 	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $transport;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function __construct(
 		Order $order,
@@ -52,21 +52,21 @@ class OrderTransport extends OrderItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport
 	 */
 	public function getTransport() {
 		return $this->transport;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderTransportData
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderTransportData
 	 */
 	public function edit(OrderItemData $orderTransportData) {
 		if ($orderTransportData instanceof OrderTransportData) {
 			$this->transport = $orderTransportData->transport;
 			parent::edit($orderTransportData);
 		} else {
-			throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+			throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
 				'Instance of ' . OrderTransportData::class . ' is required as argument.'
 			);
 		}

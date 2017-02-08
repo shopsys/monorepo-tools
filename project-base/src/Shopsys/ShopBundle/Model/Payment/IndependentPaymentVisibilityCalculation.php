@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 
 class IndependentPaymentVisibilityCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -26,7 +26,7 @@ class IndependentPaymentVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -49,7 +49,7 @@ class IndependentPaymentVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
 	 * @return bool
 	 */

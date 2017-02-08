@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
-use SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
+use Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase {

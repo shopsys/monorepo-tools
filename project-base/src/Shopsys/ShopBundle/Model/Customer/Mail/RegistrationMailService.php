@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer\Mail;
+namespace Shopsys\ShopBundle\Model\Customer\Mail;
 
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Mail\MessageData;
-use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Mail\MessageData;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
 class RegistrationMailService {
 
@@ -18,12 +18,12 @@ class RegistrationMailService {
 	const VARIABLE_LOGIN_PAGE = '{login_page}';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -33,9 +33,9 @@ class RegistrationMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-	 * @return \SS6\ShopBundle\Model\Mail\MessageData
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @return \Shopsys\ShopBundle\Model\Mail\MessageData
 	 */
 	public function getMessageDataByUser(User $user, MailTemplate $mailTemplate) {
 		return new MessageData(
@@ -50,7 +50,7 @@ class RegistrationMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 * @return array
 	 */
 	private function getVariablesReplacements(User $user) {

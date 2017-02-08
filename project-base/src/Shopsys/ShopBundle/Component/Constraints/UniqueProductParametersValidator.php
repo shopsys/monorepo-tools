@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constraints;
+namespace Shopsys\ShopBundle\Component\Constraints;
 
-use SS6\ShopBundle\Component\Constraints\UniqueProductParameters;
+use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -18,7 +18,7 @@ class UniqueProductParametersValidator extends ConstraintValidator {
 		}
 
 		// Dummy validator, because validator is implemented in JS and
-		// \SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
+		// \Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
 		// throw exception on duplicate parameters
 	}
 

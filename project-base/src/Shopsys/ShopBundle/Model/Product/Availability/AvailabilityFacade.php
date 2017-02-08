@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityRepository;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class AvailabilityFacade {
 
@@ -18,27 +18,27 @@ class AvailabilityFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityRepository
 	 */
 	private $availabilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityService
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService
 	 */
 	private $availabilityService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -60,15 +60,15 @@ class AvailabilityFacade {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getById($availabilityId) {
 		return $this->availabilityRepository->getById($availabilityId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function create(AvailabilityData $availabilityData) {
 		$availability = $this->availabilityService->create($availabilityData);
@@ -80,8 +80,8 @@ class AvailabilityFacade {
 
 	/**
 	 * @param int $availabilityId
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function edit($availabilityId, AvailabilityData $availabilityData) {
 		$availability = $this->availabilityRepository->getById($availabilityId);
@@ -112,7 +112,7 @@ class AvailabilityFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getDefaultInStockAvailability() {
 		$availabilityId = $this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK);
@@ -121,7 +121,7 @@ class AvailabilityFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setDefaultInStockAvailability(Availability $availability) {
 		$this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId());
@@ -129,7 +129,7 @@ class AvailabilityFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	public function getAll() {
 		return $this->availabilityRepository->getAll();
@@ -137,14 +137,14 @@ class AvailabilityFacade {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	public function getAllExceptId($availabilityId) {
 		return $this->availabilityRepository->getAllExceptId($availabilityId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 * @return bool
 	 */
 	public function isAvailabilityUsed(Availability $availability) {
@@ -152,7 +152,7 @@ class AvailabilityFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 * @return bool
 	 */
 	public function isAvailabilityDefault(Availability $availability) {

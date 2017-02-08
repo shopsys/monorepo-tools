@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Config;
+namespace Shopsys\ShopBundle\Component\Domain\Config;
 
 class DomainConfig {
 

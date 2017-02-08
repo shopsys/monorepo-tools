@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
 use Twig_Extension;
 use Twig_SimpleFunction;

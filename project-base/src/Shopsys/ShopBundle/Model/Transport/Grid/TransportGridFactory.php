@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport\Grid;
+namespace Shopsys\ShopBundle\Model\Transport\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class TransportGridFactory implements GridFactoryInterface {
 
@@ -22,22 +22,22 @@ class TransportGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
 	 */
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
 	 */
 	private $transportDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
@@ -56,7 +56,7 @@ class TransportGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->transportRepository->getQueryBuilderForAll()

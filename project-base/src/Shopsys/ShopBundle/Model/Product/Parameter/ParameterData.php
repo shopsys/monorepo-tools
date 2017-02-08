@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 
 class ParameterData {
 
@@ -26,7 +26,7 @@ class ParameterData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
 	 */
 	public function setFromEntity(Parameter $parameter) {
 		$translations = $parameter->getTranslations();

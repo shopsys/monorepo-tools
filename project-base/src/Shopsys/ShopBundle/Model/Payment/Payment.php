@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Component\Gedmo\SortablePosition;
-use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Component\Gedmo\SortablePosition;
+use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="payments")
@@ -30,23 +30,23 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Payment\PaymentTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Payment\PaymentTranslation")
 	 */
 	protected $translations;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPrice[]
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Payment\PaymentPrice", mappedBy="payment", cascade={"persist"})
 	 */
 	private $prices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $vat;
@@ -54,7 +54,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	/**
 	 * @var Collection
 	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\ManyToMany(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
 	 * @ORM\JoinTable(name="payments_transports")
 	 */
 	private $transports;
@@ -89,7 +89,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	private $czkRounding;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function __construct(PaymentData $paymentData) {
 		$this->translations = new ArrayCollection();
@@ -104,7 +104,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
 	 */
 	public function addTransport(Transport $transport) {
 		if (!$this->transports->contains($transport)) {
@@ -118,7 +118,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	public function setTransports(array $transports) {
 		$this->transports->clear();
 		foreach ($transports as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+			/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 			$this->addTransport($transport);
 		}
 	}
@@ -131,7 +131,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setTranslations(PaymentData $paymentData) {
 		foreach ($paymentData->name as $locale => $name) {
@@ -146,7 +146,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	public function edit(PaymentData $paymentData) {
 		$this->vat = $paymentData->vat;
@@ -156,7 +156,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string $price
 	 */
 	public function setPrice(Currency $currency, $price) {
@@ -186,14 +186,14 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/*
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentPrice[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
 	 */
 	public function getPrices() {
 		return $this->prices;
 	}
 
 	/*
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentPrice
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice
 	 */
 	public function getPrice(Currency $currency) {
 		foreach ($this->prices as $price) {
@@ -203,11 +203,11 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 		}
 
 		$message = 'Payment price with currency ID ' . $currency->getId() . ' from payment with ID ' . $this->getId() . 'not found.';
-		throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($message);
+		throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentPriceNotFoundException($message);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getVat() {
 		return $this->vat;
@@ -273,7 +273,7 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentTranslation
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentTranslation
 	 */
 	protected function createTranslation() {
 		return new PaymentTranslation();

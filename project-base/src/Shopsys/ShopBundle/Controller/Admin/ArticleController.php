@@ -1,69 +1,69 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Article\ArticleDataFactory;
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
-use SS6\ShopBundle\Model\Article\ArticlePlacementList;
-use SS6\ShopBundle\Model\Cookies\CookiesFacade;
-use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
+use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
+use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleDataFactory
 	 */
 	private $articleDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory
 	 */
 	private $articleFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+	 * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
 	 */
 	private $termsAndConditionsFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cookies\CookiesFacade
+	 * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
 	 */
 	private $cookiesFacade;
 
@@ -203,7 +203,7 @@ class ArticleController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected article doesn\'t exist.'));
 		}
 
@@ -248,7 +248,7 @@ class ArticleController extends AdminBaseController {
 
 	/**
 	 * @param string $articlePlacement
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	private function getGrid($articlePlacement) {
 		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(

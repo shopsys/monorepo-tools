@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class RoundingTest extends PHPUnit_Framework_TestCase {
 

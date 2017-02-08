@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Listing;
+namespace Shopsys\ShopBundle\Model\Order\Listing;
 
 class OrderListAdminFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository
 	 */
 	private $orderListAdminRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Listing\OrderListAdminRepository $productListAdminRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
+	 * @param \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository $productListAdminRepository
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
 	 */
 	public function __construct(
 		OrderListAdminRepository $orderListAdminRepository

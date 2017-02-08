@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class QuantifiedProductDiscountCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
 	 */
 	private $priceCalulation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
 	 */
 	private $rounding;
 
@@ -28,9 +28,9 @@ class QuantifiedProductDiscountCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice $quantifiedItemPrice
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice $quantifiedItemPrice
 	 * @param float $discountPercent
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateDiscount(QuantifiedItemPrice $quantifiedItemPrice, $discountPercent) {
 		$vat = $quantifiedItemPrice->getVat();
@@ -44,9 +44,9 @@ class QuantifiedProductDiscountCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
 	 * @param float|null $discountPercent
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
 	 */
 	public function calculateDiscounts(array $quantifiedItemsPrices, $discountPercent) {
 		$quantifiedItemsDiscounts = [];

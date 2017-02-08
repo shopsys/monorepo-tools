@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\Exception;
+namespace Shopsys\ShopBundle\Component\Grid\Exception;
 
 use Exception;
 

@@ -1,41 +1,41 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductDeleteResult;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductDeleteResult;
 
 class ProductService {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation
 	 */
 	private $inputPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
 	private $basePriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
@@ -54,8 +54,8 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $productManualInputPrices
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $productManualInputPrices
 	 * @param string $newVatPercent
 	 */
 	public function recalculateInputPriceForNewVatPercent(Product $product, $productManualInputPrices, $newVatPercent) {
@@ -90,8 +90,8 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
 	 */
 	public function edit(Product $product, ProductData $productData) {
 		$product->edit($productData);
@@ -100,7 +100,7 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param string $inputPrice
 	 */
 	public function setInputPrice(Product $product, $inputPrice) {
@@ -109,8 +109,8 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function changeVat(Product $product, Vat $vat) {
 		$product->changeVat($vat);
@@ -118,9 +118,9 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
 	 */
 	public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups) {
 		$productSellingPrices = [];
@@ -135,8 +135,8 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\ProductDeleteResult
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductDeleteResult
 	 */
 	public function delete(Product $product) {
 		if ($product->isMainVariant()) {
@@ -152,7 +152,7 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	public function markProductForVisibilityRecalculation(Product $product) {
 		$product->markForVisibilityRecalculation();
@@ -166,9 +166,9 @@ class ProductService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 * @param int[] $orderedProductIds
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function sortProductsByProductIds(array $products, array $orderedProductIds) {
 		$orderedProductIds = array_values($orderedProductIds);

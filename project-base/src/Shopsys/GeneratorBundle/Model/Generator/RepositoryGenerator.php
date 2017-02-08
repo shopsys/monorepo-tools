@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model\Generator;
+namespace Shopsys\GeneratorBundle\Model\Generator;
 
-use SS6\GeneratorBundle\Model\AbstractGenerator;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\GeneratorBundle\Model\AbstractGenerator;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Validator\Constraints;

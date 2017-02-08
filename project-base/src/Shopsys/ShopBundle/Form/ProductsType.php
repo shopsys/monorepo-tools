@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -13,12 +13,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ProductsType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer
 	 */
 	private $productsIdsToProductsTransformer;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer $productsIdsToProductsTransformer
+	 * @param \Shopsys\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer $productsIdsToProductsTransformer
 	 */
 	public function __construct(ProductsIdsToProductsTransformer $productsIdsToProductsTransformer) {
 		$this->productsIdsToProductsTransformer = $productsIdsToProductsTransformer;

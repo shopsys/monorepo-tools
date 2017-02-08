@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Setting;
+namespace Shopsys\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use SS6\ShopBundle\Component\Setting\SettingValue;
+use Shopsys\ShopBundle\Component\Setting\SettingValue;
 
 class SettingValueRepository {
 
@@ -29,7 +29,7 @@ class SettingValueRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Component\Setting\SettingValue[]
+	 * @return \Shopsys\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	public function getAllByDomainId($domainId) {
 		return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);

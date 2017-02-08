@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Cart;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Cart;
 
-use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\ShopBundle\Model\Cart\Cart;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartTest extends DatabaseTestCase {
 

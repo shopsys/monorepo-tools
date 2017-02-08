@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security;
+namespace Shopsys\ShopBundle\Model\Security;
 
 interface TimelimitLoginInterface {
 

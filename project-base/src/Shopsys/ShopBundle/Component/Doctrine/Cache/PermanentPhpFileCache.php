@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine\Cache;
+namespace Shopsys\ShopBundle\Component\Doctrine\Cache;
 
 use Doctrine\Common\Cache\PhpFileCache;
 
@@ -35,7 +35,7 @@ class PermanentPhpFileCache extends PhpFileCache {
 	protected function doSave($id, $data, $lifeTime = 0) {
 		if ($lifeTime !== 0 && $lifeTime !== null) {
 			$message = self::class . ' does not support $lifetime';
-			throw new \SS6\ShopBundle\Component\Doctrine\Cache\Exception\InvalidArgumentException($message);
+			throw new \Shopsys\ShopBundle\Component\Doctrine\Cache\Exception\InvalidArgumentException($message);
 		}
 
 		$filename = $this->getFilename($id);

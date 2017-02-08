@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class ProductAvailabilityCalculationTest extends FunctionalTestCase {
 

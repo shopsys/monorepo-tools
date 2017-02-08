@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch\Filter;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\String\DatabaseSearching;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\ShopBundle\Component\String\DatabaseSearching;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class ProductPartnoFilter implements AdvancedSearchFilterInterface {
 

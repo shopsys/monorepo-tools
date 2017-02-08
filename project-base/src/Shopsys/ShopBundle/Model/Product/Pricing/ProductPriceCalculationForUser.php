@@ -1,32 +1,32 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUser {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 */
 	private $productPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -43,9 +43,9 @@ class ProductPriceCalculationForUser {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	public function calculatePriceForCurrentUser(Product $product) {
 		return $this->productPriceCalculation->calculatePrice(
@@ -56,10 +56,10 @@ class ProductPriceCalculationForUser {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice
+	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice
 	 */
 	public function calculatePriceForUserAndDomainId(Product $product, $domainId, User $user = null) {
 		if ($user === null) {

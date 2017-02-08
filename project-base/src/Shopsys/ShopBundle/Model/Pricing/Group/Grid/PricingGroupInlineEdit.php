@@ -1,23 +1,23 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Group\Grid;
+namespace Shopsys\ShopBundle\Model\Pricing\Group\Grid;
 
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\FormFactory;
 
 class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
 	 */
 	private $pricingGroupFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -34,7 +34,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($pricingGroupData) {
@@ -45,7 +45,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $pricingGroupId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 */
 	protected function editEntity($pricingGroupId, $pricingGroupData) {
 		$this->pricingGroupFacade->edit($pricingGroupId, $pricingGroupData);
@@ -53,7 +53,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int|null $pricingGroupId
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData
 	 */
 	protected function getFormDataObject($pricingGroupId = null) {
 		$pricingGroupData = new PricingGroupData();
@@ -69,7 +69,7 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType
 	 */
 	protected function getFormType($rowId) {
 		return new PricingGroupFormType();

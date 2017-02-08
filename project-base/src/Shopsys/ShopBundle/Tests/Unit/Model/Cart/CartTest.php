@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Cart;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Cart\Cart;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class CartTest extends PHPUnit_Framework_TestCase {
 

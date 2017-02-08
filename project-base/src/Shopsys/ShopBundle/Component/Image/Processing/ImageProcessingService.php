@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Processing;
+namespace Shopsys\ShopBundle\Component\Image\Processing;
 
 use Intervention\Image\Constraint;
 use Intervention\Image\Image;
 use Intervention\Image\ImageManager;
-use SS6\ShopBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageProcessingService {
@@ -52,12 +52,12 @@ class ImageProcessingService {
 	public function createInterventionImage($filepath) {
 		$extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
 		if (!in_array($extension, $this->supportedImageExtensions)) {
-			throw new \SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
+			throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
 		}
 		try {
 			return $this->imageManager->make($filepath);
 		} catch (\Intervention\Image\Exception\NotReadableException $ex) {
-			throw new \SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath, $ex);
+			throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath, $ex);
 		}
 	}
 
@@ -74,7 +74,7 @@ class ImageProcessingService {
 		} elseif (in_array($extension, $this->supportedImageExtensions)) {
 			$newFilepath .= self::EXTENSION_JPG;
 		} else {
-			throw new \SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
+			throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
 		}
 
 		$image = $this->createInterventionImage($filepath)->save($newFilepath);
@@ -110,7 +110,7 @@ class ImageProcessingService {
 
 	/**
 	 * @param \Intervention\Image\Image $image
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
 	 */
 	public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig) {
 		$this->resize($image, $sizeConfig->getWidth(), $sizeConfig->getHeight(), $sizeConfig->getCrop());

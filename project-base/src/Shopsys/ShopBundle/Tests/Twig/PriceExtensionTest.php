@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Twig;
+namespace Shopsys\ShopBundle\Tests\Twig;
 
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
-use SS6\ShopBundle\Twig\PriceExtension;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Twig\PriceExtension;
 
 class PriceExtensionTest extends FunctionalTestCase {
 
@@ -45,13 +45,13 @@ class PriceExtensionTest extends FunctionalTestCase {
 	 */
 	public function testPriceFilter($input, $domainId, $result) {
 		$currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
-		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+		/* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$localization = $this->getContainer()->get(Localization::class);
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+		/* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
 		$intlCurrencyRepository = $this->getContainer()->get(IntlCurrencyRepository::class);
-		/* @var $intlCurrencyRepository \SS6\ShopBundle\Model\Localization\IntlCurrencyRepository */
+		/* @var $intlCurrencyRepository \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository */
 
 		$numberFormatRepository = $this->getContainer()->get(NumberFormatRepositoryInterface::class);
 		/* @var $numberFormatRepository \CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface */

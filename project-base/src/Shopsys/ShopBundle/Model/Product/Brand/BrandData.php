@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use SS6\ShopBundle\Form\UrlListData;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
 class BrandData {
 
@@ -23,7 +23,7 @@ class BrandData {
 	public $descriptions;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\UrlListData
+	 * @var \Shopsys\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
 
@@ -35,13 +35,13 @@ class BrandData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
 	 */
 	public function setFromEntity(Brand $brand) {
 		$this->name = $brand->getName();
 
 		$translations = $brand->getTranslations();
-		/* @var $translations \SS6\ShopBundle\Model\Product\Brand\BrandTranslation[]  */
+		/* @var $translations \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation[]  */
 
 		$this->descriptions = [];
 		foreach ($translations as $translate) {

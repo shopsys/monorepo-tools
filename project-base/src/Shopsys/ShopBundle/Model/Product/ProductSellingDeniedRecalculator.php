@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
@@ -18,7 +18,7 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	public function calculateSellingDeniedForProduct(Product $product) {
 		$products = $this->getProductsForCalculations($product);
@@ -30,7 +30,7 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 */
 	private function calculate(array $products = []) {
 		$this->calculateIndependent($products);
@@ -39,8 +39,8 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	private function getProductsForCalculations(Product $product) {
 		$products = [$product];
@@ -54,7 +54,7 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 */
 	private function calculateIndependent(array $products) {
 		$qb = $this->em->createQueryBuilder()
@@ -77,7 +77,7 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 */
 	private function propagateMainVariantSellingDeniedToVariants(array $products) {
 		$qb = $this->em->createQueryBuilder()
@@ -102,7 +102,7 @@ class ProductSellingDeniedRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 */
 	private function propagateVariantsSellingDeniedToMainVariant(array $products) {
 		$qb = $this->em->createQueryBuilder()

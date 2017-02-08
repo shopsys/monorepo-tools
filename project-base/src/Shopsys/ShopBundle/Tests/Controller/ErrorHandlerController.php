@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Controller;
+namespace Shopsys\ShopBundle\Tests\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Symfony\Component\HttpFoundation\Response;
 
 class ErrorHandlerController extends FrontBaseController {

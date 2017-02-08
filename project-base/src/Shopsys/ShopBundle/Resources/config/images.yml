@@ -1,6 +1,6 @@
 # Example:
 #- name: product
-#  class: SS6\ShopBundle\Model\Product\Product
+#  class: Shopsys\ShopBundle\Model\Product\Product
 #  types:
 #    - name: gallery
 #      multiple: true
@@ -14,17 +14,17 @@
 #        - { name: detail, width: 200, height: 300, crop: false }
 
 - name: payment
-  class: SS6\ShopBundle\Model\Payment\Payment
+  class: Shopsys\ShopBundle\Model\Payment\Payment
   sizes:
     - { name: ~, width: ~, height: 20, crop: false }
 
 - name: category
-  class: SS6\ShopBundle\Model\Category\Category
+  class: Shopsys\ShopBundle\Model\Category\Category
   sizes:
     - { name: ~, width: 30, height: 30, crop: true }
 
 - name: product
-  class: SS6\ShopBundle\Model\Product\Product
+  class: Shopsys\ShopBundle\Model\Product\Product
   multiple: true
   sizes:
     - { name: ~, width: 550, height: ~, crop: false }
@@ -33,17 +33,17 @@
     - { name: thumbnail, width: 50, height: 40, crop: false }
 
 - name: sliderItem
-  class: SS6\ShopBundle\Model\Slider\SliderItem
+  class: Shopsys\ShopBundle\Model\Slider\SliderItem
   sizes:
     - { name: ~, width: 918, height: 230, crop: true }
 
 - name: transport
-  class: SS6\ShopBundle\Model\Transport\Transport
+  class: Shopsys\ShopBundle\Model\Transport\Transport
   sizes:
     - { name: ~, width: ~, height: 20, crop: false }
 
 - name: noticer
-  class: SS6\ShopBundle\Model\Advert\Advert
+  class: Shopsys\ShopBundle\Model\Advert\Advert
   sizes:
     - { name: header, width: 1160, height: ~, crop: false }
     - { name: footer, width: 1160, height: ~, crop: false }
@@ -51,7 +51,7 @@
     - { name: leftSidebar, width: 220, height: ~, crop: false }
 
 - name: brand
-  class: SS6\ShopBundle\Model\Product\Brand\Brand
+  class: Shopsys\ShopBundle\Model\Product\Brand\Brand
   sizes:
     - { name: ~, width: 300, height: 200, crop: false }
 

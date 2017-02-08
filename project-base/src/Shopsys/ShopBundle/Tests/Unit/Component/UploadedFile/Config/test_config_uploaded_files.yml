@@ -1,2 +1,2 @@
 - name: testEntity
-  class: SS6\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy
+  class: Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy

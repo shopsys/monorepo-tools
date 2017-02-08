@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Script;
+namespace Shopsys\ShopBundle\Model\Script;
 
-use SS6\ShopBundle\Model\Script\Script;
+use Shopsys\ShopBundle\Model\Script\Script;
 
 class ScriptData {
 
@@ -22,7 +22,7 @@ class ScriptData {
 	public $placement;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Script\Script $script
+	 * @param \Shopsys\ShopBundle\Model\Script\Script $script
 	 */
 	public function setFromEntity(Script $script) {
 		$this->name = $script->getName();

@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch\Filter;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 class ProductFlagFilter implements AdvancedSearchFilterInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
 	 */
 	private $flagFacade;
 
@@ -63,7 +63,7 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface {
 		$isNotFlags = [];
 
 		foreach ($rulesData as $index => $ruleData) {
-			/* @var $ruleData \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
+			/* @var $ruleData \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
 			if ($ruleData->operator === self::OPERATOR_IS) {
 				$tableAlias = 'f' . $index;
 				$flagParameter = 'flag' . $index;

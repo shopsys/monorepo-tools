@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Doctrine;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Doctrine;
 
 use Doctrine\ORM\Query;
-use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class SortableNullsWalkerTest extends FunctionalTestCase {
 

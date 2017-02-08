@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
-use SS6\ShopBundle\Model\Article\ArticlePlacementList;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 

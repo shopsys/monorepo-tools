@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
+use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +21,7 @@ class CreateDatabaseSchemaCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
-		/* @var $databaseSchemaFacade \SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
+		/* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 
 		$output->writeln('Initializing database schema');
 		$databaseSchemaFacade->createSchema('public');

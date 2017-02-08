@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Css\CssFacade;
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Css\CssFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,11 +23,11 @@ class GenerateGruntfileCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$twig = $this->getContainer()->get(Twig_Environment::class);
 		/* @var $twig \Twig_Environment */
 		$cssFacade = $this->getContainer()->get(CssFacade::class);
-		/* @var $cssFacade \SS6\ShopBundle\Component\Css\CssFacade */
+		/* @var $cssFacade \Shopsys\ShopBundle\Component\Css\CssFacade */
 
 		$cssVersion = time();
 		$cssFacade->setCssVersion($cssVersion);

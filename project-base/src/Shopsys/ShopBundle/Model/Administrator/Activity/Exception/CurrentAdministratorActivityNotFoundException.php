@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Security\Exception;
+namespace Shopsys\ShopBundle\Model\Administrator\Security\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Administrator\Activity\Exception\AdministratorActivityException;
+use Shopsys\ShopBundle\Model\Administrator\Activity\Exception\AdministratorActivityException;
 
 class CurrentAdministratorActivityNotFoundException extends Exception implements AdministratorActivityException {
 

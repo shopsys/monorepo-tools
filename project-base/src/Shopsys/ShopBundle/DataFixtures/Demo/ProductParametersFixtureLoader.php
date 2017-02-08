@@ -1,29 +1,29 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValueData;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 
 class ProductParametersFixtureLoader {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
 	 */
 	private $parameterFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
 	private $parameters;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
 	 */
 	public function __construct(ParameterFacade $parameterFacade) {
 		$this->parameterFacade = $parameterFacade;
@@ -33,7 +33,7 @@ class ProductParametersFixtureLoader {
 	/**
 	 * @param string $string
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
 	 */
 	public function getProductParameterValuesDataFromString($string, $domainId) {
 		$parameterRows = explode(';', $string);
@@ -115,7 +115,7 @@ class ProductParametersFixtureLoader {
 	 * @param int $domainId
 	 * @param string $serializedParameterNames
 	 * @param string[] $parameterNames
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	private function getParameter($domainId, $serializedParameterNames, array $parameterNames) {
 		if (isset($this->parameters[$serializedParameterNames])) {
@@ -141,7 +141,7 @@ class ProductParametersFixtureLoader {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
 	 * @param array $parameterNames
 	 */
 	private function addEnglishTranslationToParameter(Parameter $parameter, array $parameterNames) {
@@ -155,7 +155,7 @@ class ProductParametersFixtureLoader {
 	/**
 	 * @param string[] $czechParameterNames
 	 * @param string[] $allParameterNames
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	private function findParameterByCzechNamesOrCreateNewByAllNames($czechParameterNames, $allParameterNames) {
 		$parameter = $this->parameterFacade->findParameterByNames($czechParameterNames);

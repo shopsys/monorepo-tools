@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Seo;
+namespace Shopsys\ShopBundle\Model\Seo;
 
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class SeoSettingFacade {
 
@@ -11,7 +11,7 @@ class SeoSettingFacade {
 	const SEO_META_DESCRIPTION_MAIN_PAGE = 'seoMetaDescriptionMainPage';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

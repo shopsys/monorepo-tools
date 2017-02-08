@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
-use SS6\ShopBundle\Component\Grid\Grid;
-use SS6\ShopBundle\Model\Administrator\Administrator;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
+use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
 
 class AdministratorGridService {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
-	 * @return \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit|null
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
+	 * @return \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit|null
 	 */
 	public function rememberGridLimit(Administrator $administrator, Grid $grid) {
 		if (!$grid->isEnabledPaging()) {
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
+			throw new \Shopsys\ShopBundle\Model\Administrator\Exception\RememberGridLimitException($grid->getId());
 		}
 		if ($grid->getLimit() <= 0) {
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
+			throw new \Shopsys\ShopBundle\Model\Administrator\Exception\InvalidGridLimitValueException($grid->getLimit());
 		}
 
 		$gridLimit = $administrator->getGridLimit($grid->getId());
@@ -32,8 +32,8 @@ class AdministratorGridService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
 	 */
 	public function restoreGridLimit(Administrator $administrator, Grid $grid) {
 		$customLimit = $administrator->getLimitByGridId($grid->getId());

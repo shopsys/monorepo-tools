@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserData {
 
@@ -32,7 +32,7 @@ class UserData {
 	public $domainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public $pricingGroup;
 
@@ -42,7 +42,7 @@ class UserData {
 	 * @param string|null $lastName
 	 * @param string|null $email
 	 * @param string|null $password
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup|null $pricingGroup
 	 */
 	public function __construct(
 		$domainId = 1,
@@ -61,7 +61,7 @@ class UserData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 */
 	public function setFromEntity(User $user) {
 		$this->domainId = $user->getDomainId();

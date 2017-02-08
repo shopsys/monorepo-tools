@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Heureka;
+namespace Shopsys\ShopBundle\Model\Heureka;
 
 use Heureka\ShopCertification;
 
@@ -14,7 +14,7 @@ class HeurekaShopCertificationService {
 		try {
 			$this->getLanguageIdByLocale($locale);
 			return true;
-		} catch (\SS6\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException $ex) {
 			return false;
 		}
 	}
@@ -34,7 +34,7 @@ class HeurekaShopCertificationService {
 		}
 
 		$message = 'Locale "' . $locale . '" is not supported.';
-		throw new \SS6\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException($message);
+		throw new \Shopsys\ShopBundle\Model\Heureka\Exception\LocaleNotSupportedException($message);
 	}
 
 	/**

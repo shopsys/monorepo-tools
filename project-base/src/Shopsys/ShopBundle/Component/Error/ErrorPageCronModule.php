@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Error;
+namespace Shopsys\ShopBundle\Component\Error;
 
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Error\ErrorPagesFacade;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class ErrorPageCronModule implements CronModuleInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Error\ErrorPagesFacade
+	 * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
 	 */
 	private $errorPagesFacade;
 

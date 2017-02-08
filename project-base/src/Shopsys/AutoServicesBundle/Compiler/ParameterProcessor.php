@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
 use ReflectionParameter;
-use SS6\AutoServicesBundle\Compiler\ClassConstructorFiller;
-use SS6\AutoServicesBundle\Compiler\ContainerClassList;
-use SS6\AutoServicesBundle\Compiler\ServiceHelper;
+use Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller;
+use Shopsys\AutoServicesBundle\Compiler\ContainerClassList;
+use Shopsys\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class ParameterProcessor {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
 	 */
 	private $classResolver;
 
@@ -25,7 +25,7 @@ class ParameterProcessor {
 	private $containerBuilder;
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ClassConstructorFiller|null
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller|null
 	 */
 	private $classConstructorFilter;
 
@@ -35,7 +35,7 @@ class ParameterProcessor {
 	private $loading;
 
 	/**
-	 * @param \SS6\AutoServicesBundle\Compiler\ServiceHelper $classResolver
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ServiceHelper $classResolver
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 */
 	public function __construct(
@@ -48,7 +48,7 @@ class ParameterProcessor {
 	}
 
 	/**
-	 * @param \SS6\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFilter
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFilter
 	 */
 	public function injectClassConstructorFilter(ClassConstructorFiller $classConstructorFilter) {
 		$this->classConstructorFilter = $classConstructorFilter;
@@ -57,7 +57,7 @@ class ParameterProcessor {
 	/**
 	 * @param \ReflectionParameter $parameter
 	 * @param string $serviceId
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 * @return mixed
 	 */
 	public function getParameterValue(ReflectionParameter $parameter, $serviceId, ContainerClassList $containerClassList) {
@@ -72,7 +72,7 @@ class ParameterProcessor {
 				$message = 'Class ' . $parameter->getDeclaringClass()->getName() . ' (service: ' . $serviceId
 					. '), parameter $' . $parameter->getName();
 
-				throw new \SS6\AutoServicesBundle\Compiler\Exception\CannotResolveParameterException($message);
+				throw new \Shopsys\AutoServicesBundle\Compiler\Exception\CannotResolveParameterException($message);
 			}
 		}
 
@@ -82,7 +82,7 @@ class ParameterProcessor {
 	/**
 	 * @param \ReflectionClass $parameterClass
 	 * @param \ReflectionParameter $parameter
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 * @return \Symfony\Component\DependencyInjection\Reference
 	 */
 	private function processParameterClass(
@@ -94,7 +94,7 @@ class ParameterProcessor {
 
 		try {
 			return new Reference($containerClassList->getServiceIdByClass($class));
-		} catch (\SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $ex) {
+		} catch (\Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $ex) {
 			if ($parameter->isDefaultValueAvailable()) {
 				return $parameter->getDefaultValue();
 			} else {
@@ -105,7 +105,7 @@ class ParameterProcessor {
 
 	/**
 	 * @param string $class
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 * @return string
 	 */
 	private function registerNewService($class, ContainerClassList $containerClassList) {
@@ -116,7 +116,7 @@ class ParameterProcessor {
 			);
 		}
 		if (!$this->classResolver->canBeService($class)) {
-			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($class);
+			throw new \Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($class);
 		}
 		$serviceId = $this->classResolver->convertClassNameToServiceId($class);
 		$this->loading[$class] = true;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail\Setting;
+namespace Shopsys\ShopBundle\Model\Mail\Setting;
 
 class MailSetting {
 

@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image;
+namespace Shopsys\ShopBundle\Component\Image;
 
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use SS6\ShopBundle\Component\Image\Image;
-use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageService {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService
+	 * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
 	 */
 	private $imageProcessingService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+	 * @param \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
 	 */
 	public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload) {
 		$this->imageProcessingService = $imageProcessingService;
@@ -28,7 +28,7 @@ class ImageService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig $imageEntityConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig $imageEntityConfig
 	 * @param int $entityId
 	 * @param array $temporaryFilenames
 	 * @param string|null $type
@@ -38,7 +38,7 @@ class ImageService {
 		if (!$imageEntityConfig->isMultiple($type)) {
 			$message = 'Entity ' . $imageEntityConfig->getEntityClass()
 				. ' is not allowed to have multiple images for type ' . ($type ?: 'NULL');
-			throw new \SS6\ShopBundle\Component\Image\Exception\EntityMultipleImageException($message);
+			throw new \Shopsys\ShopBundle\Component\Image\Exception\EntityMultipleImageException($message);
 		}
 
 		$images = [];
@@ -50,11 +50,11 @@ class ImageService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig $imageEntityConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig $imageEntityConfig
 	 * @param int $entityId
 	 * @param string $temporaryFilename
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\Image\Image
+	 * @return \Shopsys\ShopBundle\Component\Image\Image
 	 */
 	public function createImage(
 		ImageEntityConfig $imageEntityConfig,
@@ -77,7 +77,7 @@ class ImageService {
 	/**
 	 * @param string $entityName
 	 * @param int $entityId
-	 * @param \SS6\ShopBundle\Component\Image\Image[] $images
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[] $images
 	 */
 	public function deleteImages($entityName, $entityId, array $images) {
 		foreach ($images as $image) {
@@ -88,13 +88,13 @@ class ImageService {
 	/**
 	 * @param string $entityName
 	 * @param int $entityId
-	 * @param \SS6\ShopBundle\Component\Image\Image $image
+	 * @param \Shopsys\ShopBundle\Component\Image\Image $image
 	 */
 	private function deleteImage($entityName, $entityId, Image $image) {
 		if ($image->getEntityName() !== $entityName
 			|| $image->getEntityId() !== $entityId
 		) {
-			throw new \SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException(
+			throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException(
 				sprintf(
 					'Entity %s with ID %s does not own image with ID',
 					$entityName,
@@ -106,7 +106,7 @@ class ImageService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagesByPosition
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByPosition
 	 */
 	public function setImagePositions($imagesByPosition) {
 		foreach ($imagesByPosition as $position => $image) {

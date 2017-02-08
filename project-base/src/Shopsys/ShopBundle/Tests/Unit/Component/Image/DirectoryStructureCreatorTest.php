@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Image;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageSizeConfig;
-use SS6\ShopBundle\Component\Image\DirectoryStructureCreator;
-use SS6\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase {

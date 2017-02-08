@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country;
+namespace Shopsys\ShopBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\Country;
 
 class CountryRepository {
 
@@ -28,7 +28,7 @@ class CountryRepository {
 
 	/**
 	 * @param int $countryId
-	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 * @return \Shopsys\ShopBundle\Model\Country\Country|null
 	 */
 	public function findById($countryId) {
 		return $this->getCountryRepository()->find($countryId);
@@ -36,13 +36,13 @@ class CountryRepository {
 
 	/**
 	 * @param int $countryId
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	public function getById($countryId) {
 		$country = $this->findById($countryId);
 
 		if ($country === null) {
-			throw new \SS6\ShopBundle\Model\Country\Exception\CountryNotFoundException('Country with ID ' . $countryId . ' not found.');
+			throw new \Shopsys\ShopBundle\Model\Country\Exception\CountryNotFoundException('Country with ID ' . $countryId . ' not found.');
 		}
 
 		return $country;
@@ -50,7 +50,7 @@ class CountryRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Country\Country[]
+	 * @return \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	public function getAllByDomainId($domainId) {
 		return $this->getCountryRepository()->findBy(['domainId' => $domainId], ['id' => 'asc']);

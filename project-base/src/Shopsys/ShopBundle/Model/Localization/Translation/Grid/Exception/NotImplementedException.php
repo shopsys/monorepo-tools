@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Grid\Exception;
+namespace Shopsys\ShopBundle\Model\Localization\Grid\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Localization\Translation\Grid\Exception\TranslationGridException;
+use Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\TranslationGridException;
 
 class NotImplementedException extends Exception implements TranslationGridException {
 

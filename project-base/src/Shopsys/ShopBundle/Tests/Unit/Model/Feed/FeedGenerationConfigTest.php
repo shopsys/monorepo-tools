@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Feed;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Feed;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase {
 

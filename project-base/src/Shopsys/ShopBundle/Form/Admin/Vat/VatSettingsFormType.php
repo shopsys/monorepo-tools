@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Vat;
+namespace Shopsys\ShopBundle\Form\Admin\Vat;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints;
 class VatSettingsFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
@@ -23,7 +23,7 @@ class VatSettingsFormType extends AbstractType {
 	private $roundingTypes;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 * @param array $roundingTypes
 	 */
 	public function __construct(

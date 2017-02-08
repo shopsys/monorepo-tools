@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace Shopsys\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Cart\CartFactory;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\ShopBundle\Model\Cart\CartFactory;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class CartMigrationFacade {
@@ -17,25 +17,25 @@ class CartMigrationFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartService
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartService
 	 */
 	private $cartService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFactory
 	 */
 	private $cartFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	private $customerIdentifierFactory;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
+	 * @param \Shopsys\ShopBundle\Model\Cart\CartService $cartService
+	 * @param \Shopsys\ShopBundle\Model\Cart\CartFactory $cartFactory
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -50,7 +50,7 @@ class CartMigrationFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function mergeCurrentCartWithCart(Cart $cart) {
 		$customerIdentifier = $this->customerIdentifierFactory->get();

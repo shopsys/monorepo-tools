@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderService {
@@ -18,22 +18,22 @@ class OrderService {
 	const DEFAULT_QUANTITY = 1;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderPriceCalculation
 	 */
 	private $orderPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -50,9 +50,9 @@ class OrderService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @return \SS6\ShopBundle\Model\Order\OrderEditResult
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @return \Shopsys\ShopBundle\Model\Order\OrderEditResult
 	 */
 	public function editOrder(Order $order, OrderData $orderData) {
 		$orderTransportData = $orderData->orderTransport;
@@ -101,10 +101,10 @@ class OrderService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productPrice
-	 * @return \SS6\ShopBundle\Model\Order\Item\OrderProduct
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productPrice
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct
 	 */
 	public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice) {
 		$orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
@@ -127,7 +127,7 @@ class OrderService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 */
 	public function calculateTotalPrice(Order $order) {
 		$orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
@@ -135,7 +135,7 @@ class OrderService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	public function getOrderDetailUrl(Order $order) {

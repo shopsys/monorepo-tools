@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
+use Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
 
 class JsTranslatorCallParserException extends Exception implements JsParserException {
 

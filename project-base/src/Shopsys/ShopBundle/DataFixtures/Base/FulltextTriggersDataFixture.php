@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
-use SS6\ShopBundle\DataFixtures\Base\DomainDbFunctionsDataFixture;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\DomainDbFunctionsDataFixture;
 
 class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface {
 

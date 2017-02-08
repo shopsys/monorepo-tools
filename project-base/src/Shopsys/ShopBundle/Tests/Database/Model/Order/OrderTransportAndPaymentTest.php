@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Order;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Order;
 
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Payment\PaymentDomain;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
-use SS6\ShopBundle\Model\Transport\TransportDomain;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Payment\PaymentDomain;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportData;
+use Shopsys\ShopBundle\Model\Transport\TransportDomain;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase {
 
@@ -36,9 +36,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -66,9 +66,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -96,9 +96,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -120,9 +120,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -150,9 +150,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -180,9 +180,9 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 		$visibleTransports = $transportEditFacade->getVisibleOnCurrentDomain($visiblePayments);
@@ -210,7 +210,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 
@@ -237,7 +237,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 
@@ -264,7 +264,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 
@@ -286,7 +286,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 
@@ -313,7 +313,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 
@@ -340,7 +340,7 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$visiblePayments = $paymentEditFacade->getVisibleOnCurrentDomain();
 

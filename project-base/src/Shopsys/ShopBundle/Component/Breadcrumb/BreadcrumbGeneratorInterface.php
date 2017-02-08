@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Breadcrumb;
+namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
 interface BreadcrumbGeneratorInterface {
 
 	/**
 	 * @param string $routeName
 	 * @param array $routeParameters
-	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
 	 */
 	public function getBreadcrumbItems($routeName, array $routeParameters = []);
 

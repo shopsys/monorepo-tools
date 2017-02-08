@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Feed;
+namespace Shopsys\ShopBundle\Tests\Performance\Feed;
 
-use SS6\ShopBundle\Tests\Performance\JmeterCsvReporter;
+use Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter;
 
 class PerformanceResultsCsvExporter {
 
 	/**
-	 * @var \SS6\ShopBundle\Tests\Performance\JmeterCsvReporter
+	 * @var \Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter
 	 */
 	private $jmeterCsvReporter;
 
@@ -16,7 +16,7 @@ class PerformanceResultsCsvExporter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
 	 * @param string $outputFilename
 	 */
 	public function exportJmeterCsvReport(

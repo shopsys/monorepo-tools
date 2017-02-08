@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Form\UrlListData;
+use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Form\UrlListData;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
@@ -29,17 +29,17 @@ class UrlListType extends AbstractType {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -61,7 +61,7 @@ class UrlListType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		if ($options['route_name'] === null) {
-			throw new \SS6\ShopBundle\Form\Exception\MissingRouteNameException();
+			throw new \Shopsys\ShopBundle\Form\Exception\MissingRouteNameException();
 		}
 
 		$builder->add(self::TO_DELETE, FormType::FORM);
@@ -147,7 +147,7 @@ class UrlListType extends AbstractType {
 	/**
 	 * @param string $routeName
 	 * @param string $entityId
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[domainId][]
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[domainId][]
 	 */
 	private function getFriendlyUrlsIndexedByDomain($routeName, $entityId) {
 		$friendlyUrlsByDomain = [];

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class PriceTest extends PHPUnit_Framework_TestCase {
 

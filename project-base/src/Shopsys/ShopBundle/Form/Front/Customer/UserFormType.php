@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Customer;
+namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use SS6\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

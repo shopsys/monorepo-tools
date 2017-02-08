@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Login;
+namespace Shopsys\ShopBundle\Form\Front\Login;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

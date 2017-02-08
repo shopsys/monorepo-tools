@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Group;
+namespace Shopsys\ShopBundle\Model\Pricing\Group;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class PricingGroupFacade {
 
@@ -19,37 +19,37 @@ class PricingGroupFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
 	 */
 	private $pricingGroupRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
 	 */
 	private $productVisibilityRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository
 	 */
 	private $productCalculatedPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
@@ -75,16 +75,16 @@ class PricingGroupFacade {
 
 	/**
 	 * @param int $pricingGroupId
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getById($pricingGroupId) {
 		return $this->pricingGroupRepository->getById($pricingGroupId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function create(PricingGroupData $pricingGroupData, $domainId) {
 		$pricingGroup = new PricingGroup($pricingGroupData, $domainId);
@@ -104,8 +104,8 @@ class PricingGroupFacade {
 
 	/**
 	 * @param int $pricingGroupId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function edit($pricingGroupId, PricingGroupData $pricingGroupData) {
 		$pricingGroup = $this->pricingGroupRepository->getById($pricingGroupId);
@@ -140,7 +140,7 @@ class PricingGroupFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	public function getAll() {
 		return $this->pricingGroupRepository->getAll();
@@ -149,14 +149,14 @@ class PricingGroupFacade {
 	/**
 	 * @param int $id
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	public function getAllExceptIdByDomainId($id, $domainId) {
 		return $this->pricingGroupRepository->getAllExceptIdByDomainId($id, $domainId);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[domainId][]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[domainId][]
 	 */
 	public function getAllIndexedByDomainId() {
 		foreach ($this->domain->getAll() as $domain) {

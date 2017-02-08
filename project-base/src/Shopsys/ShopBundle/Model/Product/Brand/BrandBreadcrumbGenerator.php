@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 
 class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
 	 */
 	private $brandRepository;
 
@@ -19,7 +19,7 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	/**
 	 * @param string $routeName
 	 * @param array $routeParameters
-	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
 	 */
 	public function getBreadcrumbItems($routeName, array $routeParameters = []) {
 

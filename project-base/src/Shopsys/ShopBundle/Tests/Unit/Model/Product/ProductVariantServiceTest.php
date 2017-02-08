@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductEditData;
-use SS6\ShopBundle\Model\Product\ProductVariantService;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -16,7 +16,7 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
 		$variant = Product::create($productData);
 		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException::class);
 		$productVariantService->checkProductIsNotMainVariant($mainVariant);
 	}
 

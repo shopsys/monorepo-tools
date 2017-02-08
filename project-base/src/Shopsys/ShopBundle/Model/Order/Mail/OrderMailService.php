@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Mail;
+namespace Shopsys\ShopBundle\Model\Order\Mail;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Mail\MessageData;
-use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderService;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
-use SS6\ShopBundle\Twig\PriceExtension;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Mail\MessageData;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderService;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
+use Shopsys\ShopBundle\Twig\PriceExtension;
 use Twig_Environment;
 
 class OrderMailService {
@@ -34,12 +34,12 @@ class OrderMailService {
 	const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -49,27 +49,27 @@ class OrderMailService {
 	private $twig;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\PriceExtension
+	 * @var \Shopsys\ShopBundle\Twig\PriceExtension
 	 */
 	private $priceExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\DateTimeFormatterExtension
+	 * @var \Shopsys\ShopBundle\Twig\DateTimeFormatterExtension
 	 */
 	private $dateTimeFormatterExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
 
@@ -94,9 +94,9 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
-	 * @return \SS6\ShopBundle\Model\Mail\MessageData
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @return \Shopsys\ShopBundle\Model\Mail\MessageData
 	 */
 	public function getMessageDataByOrder(Order $order, MailTemplate $mailTemplate) {
 		return new MessageData(
@@ -112,7 +112,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @return string
 	 */
 	public function getMailTemplateNameByStatus(OrderStatus $orderStatus) {
@@ -120,7 +120,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return array
 	 */
 	private function getVariablesReplacementsForBody(Order $order) {
@@ -152,7 +152,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return array
 	 */
 	private function getVariablesReplacementsForSubject(Order $order) {
@@ -185,7 +185,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param  \SS6\ShopBundle\Model\Order\Order $order
+	 * @param  \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getFormattedPrice(Order $order) {
@@ -197,7 +197,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param  \SS6\ShopBundle\Model\Order\Order $order
+	 * @param  \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getFormattedDateTime(Order $order) {
@@ -208,7 +208,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getBillingAddressHtmlTable(Order $order) {
@@ -219,7 +219,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getDeliveryAddressHtmlTable(Order $order) {
@@ -230,7 +230,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getProductsHtmlTable(Order $order) {
@@ -245,7 +245,7 @@ class OrderMailService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @return string
 	 */
 	private function getDomainLocaleByOrder($order) {

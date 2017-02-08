@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 
 class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
 

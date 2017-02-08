@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Cron;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Cron;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Cron\Config\CronConfig;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronFacade;
-use SS6\ShopBundle\Component\Cron\CronModuleExecutorFactory;
-use SS6\ShopBundle\Component\Cron\CronModuleFacade;
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Cron\CronTimeResolver;
-use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronFacade;
+use Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory;
+use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
+use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase {

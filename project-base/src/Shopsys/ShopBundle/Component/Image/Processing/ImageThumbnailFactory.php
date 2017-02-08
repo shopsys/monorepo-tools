@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Processing;
+namespace Shopsys\ShopBundle\Component\Image\Processing;
 
-use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageThumbnailFactory {
 
@@ -10,12 +10,12 @@ class ImageThumbnailFactory {
 	const THUMBNAIL_HEIGHT = 200;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService
+	 * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
 	 */
 	private $imageProcessingService;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
+	 * @param \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
 	 */
 	public function __construct(ImageProcessingService $imageProcessingService) {
 		$this->imageProcessingService = $imageProcessingService;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine\Cache\Exception;
+namespace Shopsys\ShopBundle\Component\Doctrine\Cache\Exception;
 
 interface DoctrineCacheException {
 

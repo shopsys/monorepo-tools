@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Transport;
+namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Transport\TransportEditData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,18 +12,18 @@ use Symfony\Component\Validator\Constraints;
 class TransportEditFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
 	 */
 	private $transportFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
 	 */
 	private $currencies;
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory $transportFormTypeFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
+	 * @param \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory $transportFormTypeFactory
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
 	 */
 	public function __construct(TransportFormTypeFactory $transportFormTypeFactory, array $currencies) {
 		$this->transportFormTypeFactory = $transportFormTypeFactory;

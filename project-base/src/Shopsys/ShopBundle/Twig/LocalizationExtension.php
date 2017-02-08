@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -15,7 +15,7 @@ class LocalizationExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
@@ -69,7 +69,7 @@ class LocalizationExtension extends \Twig_Extension {
 	private function getTitle($locale) {
 		try {
 			$title = $this->localization->getLanguageName($locale);
-		} catch (\SS6\ShopBundle\Model\Localization\Exception\InvalidLocaleException $e) {
+		} catch (\Shopsys\ShopBundle\Model\Localization\Exception\InvalidLocaleException $e) {
 			$title = '';
 		}
 

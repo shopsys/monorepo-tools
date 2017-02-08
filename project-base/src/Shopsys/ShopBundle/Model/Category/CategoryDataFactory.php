@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category;
+namespace Shopsys\ShopBundle\Model\Category;
 
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryData;
 
 class CategoryDataFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
 	 */
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
@@ -27,8 +27,8 @@ class CategoryDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Model\Category\CategoryData
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Model\Category\CategoryData
 	 */
 	public function createFromCategory(Category $category) {
 		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
@@ -47,7 +47,7 @@ class CategoryDataFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\CategoryData
+	 * @return \Shopsys\ShopBundle\Model\Category\CategoryData
 	 */
 	public function createDefault() {
 		$categoryData = new CategoryData();

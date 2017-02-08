@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 class CurrencyData {
 
@@ -33,7 +33,7 @@ class CurrencyData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setFromEntity(Currency $currency) {
 		$this->name = $currency->getName();

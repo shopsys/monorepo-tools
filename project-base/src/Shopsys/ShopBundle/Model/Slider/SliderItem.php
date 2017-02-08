@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Slider;
+namespace Shopsys\ShopBundle\Model\Slider;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
-use SS6\ShopBundle\Model\Slider\SliderItemData;
+use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 
 /**
  * SliderItem
@@ -58,7 +58,7 @@ class SliderItem implements OrderableEntityInterface {
 	private $hidden;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+	 * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 */
 	public function __construct(SliderItemData $sliderItemData) {
 		$this->domainId = $sliderItemData->domainId;
@@ -68,7 +68,7 @@ class SliderItem implements OrderableEntityInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Slider\SliderItemData $sliderItemData
+	 * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
 	 */
 	public function edit(SliderItemData $sliderItemData) {
 		$this->name = $sliderItemData->name;

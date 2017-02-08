@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Pricing\Group;
+namespace Shopsys\ShopBundle\Form\Admin\Pricing\Group;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Constraints;
 class PricingGroupSettingsFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	private $pricingGroups;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function __construct(array $pricingGroups) {
 		$this->pricingGroups = $pricingGroups;

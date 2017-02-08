@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Config;
+namespace Shopsys\ShopBundle\Component\Cron\Config;
 
-use SS6\ShopBundle\Component\Cron\Config\CronConfigDefinition;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronTimeResolver;
+use Shopsys\ShopBundle\Component\Cron\Config\CronConfigDefinition;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -33,7 +33,7 @@ class CronConfigLoader {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronTimeResolver
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver
 	 */
 	private $cronTimeResolver;
 
@@ -53,7 +53,7 @@ class CronConfigLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function loadCronModuleConfigsFromYaml($filename) {
 		if (!$this->filesystem->exists($filename)) {
@@ -72,7 +72,7 @@ class CronConfigLoader {
 
 	/**
 	 * @param array $processedConfig
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	private function loadCronModuleConfigsFromArray($processedConfig) {
 		$cronModuleConfigs = [];
@@ -86,7 +86,7 @@ class CronConfigLoader {
 
 	/**
 	 * @param array $cronModuleConfigArray
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig
 	 */
 	private function processCronModuleConfigArray(array $cronModuleConfigArray) {
 		$moduleId = $cronModuleConfigArray[CronConfigDefinition::CONFIG_SERVICE];
@@ -94,7 +94,7 @@ class CronConfigLoader {
 		$timeMinutes = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];
 
 		if (!$this->container->has($moduleId)) {
-			throw new \SS6\ShopBundle\Component\Cron\Config\Exception\CronModuleNotFoundException($moduleId);
+			throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\CronModuleNotFoundException($moduleId);
 		}
 		$this->cronTimeResolver->validateTimeString($timeHours, 23, 1);
 		$this->cronTimeResolver->validateTimeString($timeMinutes, 55, 5);

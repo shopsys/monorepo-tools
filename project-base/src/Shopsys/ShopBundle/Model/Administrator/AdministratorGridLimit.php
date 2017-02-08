@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 /**
  * @ORM\Entity
@@ -12,10 +12,10 @@ use SS6\ShopBundle\Model\Administrator\Administrator;
 class AdministratorGridLimit  {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Administrator\Administrator", inversedBy="gridLimits")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Administrator\Administrator", inversedBy="gridLimits")
 	 * @ORM\JoinColumn(name="administrator_id", referencedColumnName="id", nullable=false)
 	 */
 	private $administrator;
@@ -34,7 +34,7 @@ class AdministratorGridLimit  {
 	protected $limit;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param string $gridId
 	 * @param int $limit
 	 */

@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class DomainFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader
 	 */
 	private $domainsConfigLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
-	 * @param \SS6\ShopBundle\Component\Setting\Setting
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	public function __construct(DomainsConfigLoader $domainsConfigLoader, Setting $setting) {
 		$this->domainsConfigLoader = $domainsConfigLoader;
@@ -29,7 +29,7 @@ class DomainFactory {
 	/**
 	 * @param string $domainsConfigFilepath
 	 * @param string $domainsUrlsConfigFilepath
-	 * @return \SS6\ShopBundle\Component\Domain\Domain
+	 * @return \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	public function create($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
 		$domainConfigs = $this->domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);

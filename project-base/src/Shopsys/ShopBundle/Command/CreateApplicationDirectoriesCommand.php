@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
-use SS6\ShopBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
+use Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator as ImageDirectoryStructureCreator;
+use Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator as UploadedFileDirectoryStructureCreator;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -53,7 +53,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand {
 	 */
 	private function createImageDirectories(OutputInterface $output) {
 		$imageDirectoryStructureCreator = $this->getContainer()->get(ImageDirectoryStructureCreator::class);
-		/* @var $imageDirectoryStructureCreator \SS6\ShopBundle\Component\Image\DirectoryStructureCreator */
+		/* @var $imageDirectoryStructureCreator \Shopsys\ShopBundle\Component\Image\DirectoryStructureCreator */
 		$imageDirectoryStructureCreator->makeImageDirectories();
 
 		$output->writeln('<fg=green>Directories for images were successfully created.</fg=green>');
@@ -64,7 +64,7 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand {
 	 */
 	private function createUploadedFileDirectories(OutputInterface $output) {
 		$uploadedFileDirectoryStructureCreator = $this->getContainer()->get(UploadedFileDirectoryStructureCreator::class);
-		/* @var $uploadedFileDirectoryStructureCreator \SS6\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
+		/* @var $uploadedFileDirectoryStructureCreator \Shopsys\ShopBundle\Component\UploadedFile\DirectoryStructureCreator */
 		$uploadedFileDirectoryStructureCreator->makeUploadedFileDirectories();
 
 		$output->writeln('<fg=green>Directories for UploadedFile entities were successfully created.</fg=green>');

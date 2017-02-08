@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Model\Administrator\AdministratorRepository;
-use SS6\ShopBundle\Model\Administrator\AdministratorService;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorService;
 
 class AdministratorFacade {
 
@@ -15,19 +15,19 @@ class AdministratorFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorRepository
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository
 	 */
 	private $administratorRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorService
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorService
 	 */
 	private $administratorService;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorRepository $administratorRepository
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorService $administratorService
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository $administratorRepository
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorService $administratorService
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -40,16 +40,16 @@ class AdministratorFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function create(AdministratorData $administratorData) {
 		if (in_array($administratorData->username, $this->getSuperadminUsernames())) {
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
 		}
 		$administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
 		if ($administratorByUserName !== null) {
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
+			throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException($administratorByUserName->getUsername());
 		}
 		$administrator = new Administrator($administratorData);
 		$administrator->setPassword($this->administratorService->getPasswordHash($administrator, $administratorData->password));
@@ -63,8 +63,8 @@ class AdministratorFacade {
 
 	/**
 	 * @param int $administratorId
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function edit($administratorId, AdministratorData $administratorData) {
 		$administrator = $this->administratorRepository->getById($administratorId);
@@ -95,7 +95,7 @@ class AdministratorFacade {
 
 	/**
 	 * @param int $administratorId
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function getById($administratorId) {
 		return $this->administratorRepository->getById($administratorId);

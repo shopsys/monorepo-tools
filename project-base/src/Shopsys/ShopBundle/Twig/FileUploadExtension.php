@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class FileUploadExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\FileUpload\FileUpload $fileUpload
+	 * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
 	 */
 	public function __construct(FileUpload $fileUpload) {
 		$this->fileUpload = $fileUpload;

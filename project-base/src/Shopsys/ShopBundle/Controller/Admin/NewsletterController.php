@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use SplFileObject;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class NewsletterController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterFacade
+	 * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
 	 */
 	private $newsletterFacade;
 

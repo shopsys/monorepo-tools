@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Symfony\Component\Routing\RouteCollection;
 
 class FriendlyUrlMatcher {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
 	 */
 	private $friendlyUrlRepository;
 
@@ -20,7 +20,7 @@ class FriendlyUrlMatcher {
 	/**
 	 * @param string $pathinfo
 	 * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return array
 	 */
 	public function match($pathinfo, RouteCollection $routeCollection, DomainConfig $domainConfig) {

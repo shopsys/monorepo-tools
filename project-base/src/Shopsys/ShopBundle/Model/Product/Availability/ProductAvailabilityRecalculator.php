@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductAvailabilityRecalculator {
@@ -19,22 +19,22 @@ class ProductAvailabilityRecalculator {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	private $entityManagerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation
 	 */
 	private $productAvailabilityCalculation;
 
 	/**
-	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\SS6\ShopBundle\Model\Product\Product[][0]|null
+	 * @var \Doctrine\ORM\Internal\Hydration\IterableResult|\Shopsys\ShopBundle\Model\Product\Product[][0]|null
 	 */
 	private $productRowsIterator;
 
@@ -89,7 +89,7 @@ class ProductAvailabilityRecalculator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	private function recalculateProductAvailability(Product $product) {
 		$calculatedAvailability = $this->productAvailabilityCalculation->calculateAvailability($product);

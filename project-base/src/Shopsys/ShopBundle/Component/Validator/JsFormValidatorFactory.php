@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Validator;
+namespace Shopsys\ShopBundle\Component\Validator;
 
 use Fp\JsFormValidatorBundle\Factory\JsFormValidatorFactory as BaseJsFormValidatorFactory;
 use Symfony\Component\Validator\Constraints;

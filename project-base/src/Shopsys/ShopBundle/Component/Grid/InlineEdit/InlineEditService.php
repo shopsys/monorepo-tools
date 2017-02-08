@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\InlineEdit;
+namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
-use SS6\ShopBundle\Component\Form\MultipleFormSetting;
-use SS6\ShopBundle\Component\Grid\Grid;
+use Shopsys\ShopBundle\Component\Form\MultipleFormSetting;
+use Shopsys\ShopBundle\Component\Grid\Grid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,14 +22,14 @@ class InlineEditService {
 	private $twigEnvironment;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Form\MultipleFormSetting
+	 * @var \Shopsys\ShopBundle\Component\Form\MultipleFormSetting
 	 */
 	private $multipleFormSettings;
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
 	 * @param \Twig_Environment $twigEnvironment
-	 * @param \SS6\ShopBundle\Component\Form\MultipleFormSetting $multipleFormSetting
+	 * @param \Shopsys\ShopBundle\Component\Form\MultipleFormSetting $multipleFormSetting
 	 */
 	public function __construct(
 		ContainerInterface $container,
@@ -71,7 +71,7 @@ class InlineEditService {
 	public function getRenderedRowHtml($serviceName, $rowId) {
 		$gridInlineEdit = $this->getInlineEditService($serviceName);
 		$grid = $gridInlineEdit->getGrid();
-		/* @var $grid \SS6\ShopBundle\Component\Grid\Grid */
+		/* @var $grid \Shopsys\ShopBundle\Component\Grid\Grid */
 
 		$gridView = $grid->createViewWithOneRow($rowId);
 		$rows = $grid->getRows();
@@ -85,7 +85,7 @@ class InlineEditService {
 
 	/**
 	 * @param string $serviceName
-	 * @return \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface
+	 * @return \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface
 	 */
 	private function getInlineEditService($serviceName) {
 		$gridInlineEdit = $this->container->get($serviceName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
@@ -93,12 +93,12 @@ class InlineEditService {
 		if ($gridInlineEdit instanceof GridInlineEditInterface) {
 			return $gridInlineEdit;
 		} else {
-			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
+			throw new \Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidServiceException($serviceName);
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
+	 * @param \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $gridInlineEditService
 	 * @param mixed $rowId
 	 * @param \Symfony\Component\Form\Form $form
 	 * @return string
@@ -115,7 +115,7 @@ class InlineEditService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
+	 * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
 	 * @param \Symfony\Component\Form\Form $form
 	 * @return array
 	 */

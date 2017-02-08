@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail;
+namespace Shopsys\ShopBundle\Model\Mail;
 
-use SS6\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 
 class MailTemplateData {
 
@@ -66,7 +66,7 @@ class MailTemplateData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplate $mailTemplate
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
 	 */
 	public function setFromEntity(MailTemplate $mailTemplate) {
 		$this->name = $mailTemplate->getName();

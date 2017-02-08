@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Unit;
+namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Product\Unit\Unit;
-use SS6\ShopBundle\Model\Product\Unit\UnitData;
-use SS6\ShopBundle\Model\Product\Unit\UnitRepository;
-use SS6\ShopBundle\Model\Product\Unit\UnitService;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Product\Unit\Unit;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitRepository;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitService;
 
 class UnitFacade {
 
@@ -17,25 +17,25 @@ class UnitFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository
 	 */
 	private $unitRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitService
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitService
 	 */
 	private $unitService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitService $unitService
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitService $unitService
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -51,15 +51,15 @@ class UnitFacade {
 
 	/**
 	 * @param int $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function getById($unitId) {
 		return $this->unitRepository->getById($unitId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function create(UnitData $unitData) {
 		$unit = $this->unitService->create($unitData);
@@ -71,8 +71,8 @@ class UnitFacade {
 
 	/**
 	 * @param int $unitId
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function edit($unitId, UnitData $unitData) {
 		$unit = $this->unitRepository->getById($unitId);
@@ -102,14 +102,14 @@ class UnitFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	public function getAll() {
 		return $this->unitRepository->getAll();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
 	 */
 	public function isUnitUsed(Unit $unit) {
 		return $this->unitRepository->existsProductWithUnit($unit);
@@ -117,7 +117,7 @@ class UnitFacade {
 
 	/**
 	 * @param int $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	public function getAllExceptId($unitId) {
 		return $this->unitRepository->getAllExceptId($unitId);
@@ -131,7 +131,7 @@ class UnitFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function getDefaultUnit() {
 		$defaultUnitId = $this->getDefaultUnitId();
@@ -140,14 +140,14 @@ class UnitFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
 	 */
 	public function setDefaultUnit(Unit $unit) {
 		$this->setting->set(Setting::DEFAULT_UNIT, $unit->getId());
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
 	 * @return bool
 	 */
 	public function isUnitDefault(Unit $unit) {

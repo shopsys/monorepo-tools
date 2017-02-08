@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
 	 */
 	private $brandFacade;
 

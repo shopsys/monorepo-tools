@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class PaymentPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\BasePriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
 	 */
 	private $basePriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
-	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+	 * @param \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation $basePriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
 	 */
 	public function __construct(
 		BasePriceCalculation $basePriceCalculation,
@@ -32,11 +32,11 @@ class PaymentPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculatePrice(
 		Payment $payment,
@@ -52,9 +52,9 @@ class PaymentPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculateIndependentPrice(
 		Payment $payment,
@@ -68,7 +68,7 @@ class PaymentPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -83,9 +83,9 @@ class PaymentPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[paymentId]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price[paymentId]
 	 */
 	public function calculatePricesById(
 		array $payments,

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine;
+namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -50,7 +50,7 @@ class QueryBuilderService {
 	private function getRootAlias(QueryBuilder $queryBuilder) {
 		$rootAliases = $queryBuilder->getRootAliases();
 		if (count($rootAliases) !== self::REQUIRED_ALIASES_COUNT) {
-			throw new \SS6\ShopBundle\Component\Doctrine\Exception\InvalidCountOfAliasesException($rootAliases);
+			throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\InvalidCountOfAliasesException($rootAliases);
 		}
 		$firstAlias = reset($rootAliases);
 

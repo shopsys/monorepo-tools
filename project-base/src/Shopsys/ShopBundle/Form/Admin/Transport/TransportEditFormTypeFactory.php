@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Transport;
+namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
-use SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class TransportEditFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
 	 */
 	private $transportFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
@@ -23,7 +23,7 @@ class TransportEditFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Transport\TransportFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType
 	 */
 	public function create() {
 		$currencies = $this->currencyFacade->getAll();

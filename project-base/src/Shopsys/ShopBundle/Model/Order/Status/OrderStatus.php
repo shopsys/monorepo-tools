@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Status;
+namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation;
 
 /**
  * @ORM\Table(name="order_statuses")
@@ -30,9 +30,9 @@ class OrderStatus extends AbstractTranslatableEntity {
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation")
 	 */
 	protected $translations;
 
@@ -44,7 +44,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	private $type;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 * @param int $type
 	 */
 	public function __construct(OrderStatusData $orderStatusData, $type) {
@@ -69,7 +69,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	private function setTranslations(OrderStatusData $orderStatusData) {
 		foreach ($orderStatusData->name as $locale => $name) {
@@ -78,7 +78,7 @@ class OrderStatus extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatusTranslation
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation
 	 */
 	protected function createTranslation() {
 		return new OrderStatusTranslation();
@@ -103,12 +103,12 @@ class OrderStatus extends AbstractTranslatableEntity {
 		])) {
 			$this->type = $type;
 		} else {
-			throw new \SS6\ShopBundle\Model\Order\Status\Exception\InvalidOrderStatusTypeException($type);
+			throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\InvalidOrderStatusTypeException($type);
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
 	 */
 	public function edit(OrderStatusData $orderStatusData) {
 		$this->setTranslations($orderStatusData);

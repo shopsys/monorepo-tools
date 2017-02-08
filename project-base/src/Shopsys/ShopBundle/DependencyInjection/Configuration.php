@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\DependencyInjection;
+namespace Shopsys\ShopBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

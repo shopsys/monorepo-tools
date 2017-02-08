@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -16,7 +16,7 @@ class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase {
 		$context = new RequestContext();
 
 		$localizedRouterFactory = new LocalizedRouterFactory($localeRoutersConfiguration, $delegatingLoaderMock);
-		$this->setExpectedException(\SS6\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Router\Exception\LocalizedRoutingConfigFileNotFoundException::class);
 		$localizedRouterFactory->getRouter('en', $context);
 	}
 

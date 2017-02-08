@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Multidomain;
+namespace Shopsys\ShopBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 

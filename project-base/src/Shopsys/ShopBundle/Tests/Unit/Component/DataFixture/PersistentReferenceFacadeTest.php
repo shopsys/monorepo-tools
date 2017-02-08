@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\DataFixture;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\DataFixture\PersistentReference;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReference;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
 use stdClass;
 
 class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
@@ -27,7 +27,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
 		$persistentReferenceRepositoryMock->expects($this->never())->method('deleteAll');
 
 		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
-		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException::class);
 		$persistentReferenceFacade->persistReference('referenceName', new stdClass());
 	}
 
@@ -99,7 +99,7 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
 
 		$persistentReferenceFacade = new PersistentReferenceFacade($emMock, $persistentReferenceRepositoryMock);
 
-		$this->setExpectedException(\SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
 		$persistentReferenceFacade->getReference('referenceName');
 	}
 

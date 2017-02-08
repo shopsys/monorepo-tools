@@ -54,7 +54,7 @@
 
 		$collection.find('.js-order-item').each(function () {
 			var indexStr = $(this).data('index').toString();
-			if (indexStr.indexOf(SS6.constant('\\SS6\\ShopBundle\\Model\\Order\\OrderData::NEW_ITEM_PREFIX')) === 0) {
+			if (indexStr.indexOf(SS6.constant('\\Shopsys\\ShopBundle\\Model\\Order\\OrderData::NEW_ITEM_PREFIX')) === 0) {
 				var index = parseInt(indexStr.slice(4));
 				if (index > maxIndex) {
 					maxIndex = index;
@@ -62,7 +62,7 @@
 			}
 		});
 
-		return SS6.constant('\\SS6\\ShopBundle\\Model\\Order\\OrderData::NEW_ITEM_PREFIX') + (maxIndex + 1);
+		return SS6.constant('\\Shopsys\\ShopBundle\\Model\\Order\\OrderData::NEW_ITEM_PREFIX') + (maxIndex + 1);
 	};
 
 	SS6.order.items.addItem = function($collection) {

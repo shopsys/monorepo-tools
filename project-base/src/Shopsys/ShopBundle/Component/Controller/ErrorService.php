@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Controller;
+namespace Shopsys\ShopBundle\Component\Controller;
 
-use SS6\ShopBundle\Component\FlashMessage\Bag;
+use Shopsys\ShopBundle\Component\FlashMessage\Bag;
 use Symfony\Component\Form\Form;
 
 class ErrorService {
 
 	/**
 	 * @param \Symfony\Component\Form\Form $form
-	 * @param \SS6\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
+	 * @param \Shopsys\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
 	 * @return string[]
 	 */
 	public function getAllErrorsAsArray(Form $form, Bag $flashMessageBag) {

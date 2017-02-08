@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Form\Front\Product\ProductFilterFormType;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData;
-use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
-use SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductFilterCountRepository {
 
@@ -22,12 +22,12 @@ class ProductFilterCountRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ProductFilterRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterRepository
 	 */
 	private $productFilterRepository;
 
@@ -44,10 +44,10 @@ class ProductFilterCountRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param string $locale
-	 * @param \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ProductFilterCountData
+	 * @param \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType $productFilterFormType
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterCountData
 	 */
 	public function getProductFilterCountData(
 		QueryBuilder $productsQueryBuilder,
@@ -87,8 +87,8 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return int
 	 */
 	private function getCountInStock(
@@ -116,9 +116,9 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brandFilterChoices
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return int[brandId]
 	 */
 	private function getCountByBrandId(
@@ -169,9 +169,9 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flagFilterChoices
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @return int[flagId]
 	 */
 	private function getCountByFlagId(
@@ -232,9 +232,9 @@ class ProductFilterCountRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData $productFilterData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @return int[parameterId][valueId]
 	 */

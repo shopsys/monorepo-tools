@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository {
 
@@ -46,14 +46,14 @@ class PaymentRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAll() {
 		return $this->getQueryBuilderForAll()->getQuery()->getResult();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAllIncludingDeleted() {
 		return $this->getPaymentRepository()->findAll();
@@ -61,7 +61,7 @@ class PaymentRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Payment|null
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment|null
 	 */
 	public function findById($id) {
 		return $this->getPaymentRepository()->find($id);
@@ -69,19 +69,19 @@ class PaymentRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getById($id) {
 		$payment = $this->findById($id);
 		if ($payment === null) {
-			throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.');
+			throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.');
 		}
 		return $payment;
 	}
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getByIdWithTransports($id) {
 		try {
@@ -90,7 +90,7 @@ class PaymentRepository {
 				->setParameter('id', $id)
 				->getSingleResult();
 		} catch (\Doctrine\ORM\NoResultException $e) {
-			throw new \SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.', $e);
+			throw new \Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException('Payment with ID ' . $id . ' not found.', $e);
 		}
 	}
 
@@ -105,8 +105,8 @@ class PaymentRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAllByTransport(Transport $transport) {
 		return $this->getQueryBuilderForAll()
@@ -118,8 +118,8 @@ class PaymentRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentDomain[]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
 	 */
 	public function getPaymentDomainsByPayment(Payment $payment) {
 		return $this->getPaymentDomainRepository()->findBy(['payment' => $payment]);

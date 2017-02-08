@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Entity\Exception;
+namespace Shopsys\ShopBundle\Component\Entity\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Entity\Exception\EntityException;
+use Shopsys\ShopBundle\Component\Entity\Exception\EntityException;
 
 class UnexpectedTypeException extends Exception implements EntityException {
 

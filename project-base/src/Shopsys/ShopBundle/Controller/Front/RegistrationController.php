@@ -1,35 +1,35 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Form\Front\Registration\RegistrationFormType;
-use SS6\ShopBundle\Model\Customer\CustomerFacade;
-use SS6\ShopBundle\Model\Customer\UserDataFactory;
-use SS6\ShopBundle\Model\Security\LoginService;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Form\Front\Registration\RegistrationFormType;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
+use Shopsys\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
 	 */
 	private $userDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 * @var \Shopsys\ShopBundle\Model\Security\LoginService
 	 */
 	private $loginService;
 
@@ -65,7 +65,7 @@ class RegistrationController extends FrontBaseController {
 				$this->getFlashMessageSender()->addSuccessFlash(t('You have been successfully registered.'));
 
 				return $this->redirectToRoute('front_homepage');
-			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 				$form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
 			}
 		}

@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Module;
+namespace Shopsys\ShopBundle\Model\Module;
 
-use SS6\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
+use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class ModuleList extends AbstractTranslatedConstantList {
 

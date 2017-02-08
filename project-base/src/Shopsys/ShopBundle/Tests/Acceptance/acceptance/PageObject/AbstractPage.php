@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject;
 
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 abstract class AbstractPage {
 
@@ -13,7 +13,7 @@ abstract class AbstractPage {
 	protected $webDriver;
 
 	/**
-	 * @var \SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester
+	 * @var \Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester
 	 */
 	protected $tester;
 

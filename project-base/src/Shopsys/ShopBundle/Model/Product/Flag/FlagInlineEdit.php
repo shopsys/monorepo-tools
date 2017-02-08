@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Flag;
+namespace Shopsys\ShopBundle\Model\Product\Flag;
 
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Product\Flag\FlagFormType;
-use SS6\ShopBundle\Model\Product\Flag\FlagData;
-use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
-use SS6\ShopBundle\Model\Product\Flag\FlagGridFactory;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Product\Flag\FlagFormType;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class FlagInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
 	 */
 	private $flagFacade;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagGridFactory $flagGridFactory
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagFacade $flagFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagGridFactory $flagGridFactory
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade $flagFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
@@ -32,7 +32,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($flagData) {
@@ -43,7 +43,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $flagId
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	protected function editEntity($flagId, $flagData) {
 		$this->flagFacade->edit($flagId, $flagData);
@@ -51,7 +51,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int|null $flagId
-	 * @return \SS6\ShopBundle\Model\Product\Flag\FlagData
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\FlagData
 	 */
 	protected function getFormDataObject($flagId = null) {
 		$flagData = new FlagData();
@@ -67,7 +67,7 @@ class FlagInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Product\Flag\FlagFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\Flag\FlagFormType
 	 */
 	protected function getFormType($rowId) {
 		return new FlagFormType();

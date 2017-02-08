@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class DomainListener implements EventSubscriberInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -24,7 +24,7 @@ class DomainListener implements EventSubscriberInterface {
 		if ($event->isMasterRequest()) {
 			try {
 				$this->domain->getId();
-			} catch (\SS6\ShopBundle\Component\Domain\Exception\NoDomainSelectedException $exception) {
+			} catch (\Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException $exception) {
 				$this->domain->switchDomainByRequest($event->getRequest());
 			}
 		}

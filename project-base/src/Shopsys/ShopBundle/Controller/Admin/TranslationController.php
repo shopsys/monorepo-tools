@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit;
 
 class TranslationController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
 	 */
 	private $translationInlineEdit;
 

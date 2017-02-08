@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Unit;
+namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Product\Unit\UnitData;
-use SS6\ShopBundle\Model\Product\Unit\UnitTranslation;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation;
 
 /**
  * @ORM\Table(name="units")
@@ -25,14 +25,14 @@ class Unit extends AbstractTranslatableEntity {
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\Unit\UnitTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation")
 	 */
 	protected $translations;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 */
 	public function __construct(UnitData $unitData) {
 		$this->translations = new ArrayCollection();
@@ -55,7 +55,7 @@ class Unit extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 */
 	private function setTranslations(UnitData $unitData) {
 		foreach ($unitData->name as $locale => $name) {
@@ -64,14 +64,14 @@ class Unit extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Unit\UnitTranslation
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation
 	 */
 	protected function createTranslation() {
 		return new UnitTranslation();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 */
 	public function edit(UnitData $unitData) {
 		$this->setTranslations($unitData);

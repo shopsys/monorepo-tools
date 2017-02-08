@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Slider\SliderItemData;
-use SS6\ShopBundle\Model\Slider\SliderItemFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Slider\SliderItemData;
+use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
 class SliderItemDataFixture extends AbstractReferenceFixture{
 
@@ -15,7 +15,7 @@ class SliderItemDataFixture extends AbstractReferenceFixture{
 	 */
 	public function load(ObjectManager $manager) {
 		$sliderItemFacade = $this->get(SliderItemFacade::class);
-		/* @var $sliderItemFacade \SS6\ShopBundle\Model\Slider\SliderItemFacade*/
+		/* @var $sliderItemFacade \Shopsys\ShopBundle\Model\Slider\SliderItemFacade*/
 
 		$sliderItemData = new SliderItemData();
 		$sliderItemData->domainId = Domain::FIRST_DOMAIN_ID;

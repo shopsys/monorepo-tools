@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Customer\BillingAddress;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
 

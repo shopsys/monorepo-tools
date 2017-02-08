@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Customer\BillingAddressData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,12 +17,12 @@ class BillingAddressFormType extends AbstractType {
 	const VALIDATION_GROUP_COMPANY_CUSTOMER = 'companyCustomer';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $countries) {
 		$this->countries = $countries;
@@ -128,7 +128,7 @@ class BillingAddressFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$billingAddressData = $form->getData();
-				/* @var $billingAddressData \SS6\ShopBundle\Model\Customer\BillingAddressData */
+				/* @var $billingAddressData \Shopsys\ShopBundle\Model\Customer\BillingAddressData */
 
 				if ($billingAddressData->companyCustomer) {
 					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;

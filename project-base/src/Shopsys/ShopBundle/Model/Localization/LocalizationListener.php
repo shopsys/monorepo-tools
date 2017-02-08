@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization;
+namespace Shopsys\ShopBundle\Model\Localization;
 
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -10,12 +10,12 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocalizationListener implements EventSubscriberInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(Domain $domain) {
 		$this->domain = $domain;

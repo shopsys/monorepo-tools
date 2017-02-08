@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture;
+namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\DataFixture\PersistentReference;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReference;
 
 class PersistentReferenceRepository {
 
@@ -28,7 +28,7 @@ class PersistentReferenceRepository {
 
 	/**
 	 * @param string $referenceName
-	 * @return \SS6\ShopBundle\Component\DataFixture\PersistentReference|null
+	 * @return \Shopsys\ShopBundle\Component\DataFixture\PersistentReference|null
 	 */
 	public function findByReferenceName($referenceName) {
 		return $this->getReferenceRepository()->find(['referenceName' => $referenceName]);
@@ -36,12 +36,12 @@ class PersistentReferenceRepository {
 
 	/**
 	 * @param string $referenceName
-	 * @return \SS6\ShopBundle\Component\DataFixture\PersistentReference
+	 * @return \Shopsys\ShopBundle\Component\DataFixture\PersistentReference
 	 */
 	public function getByReferenceName($referenceName) {
 		$reference = $this->findByReferenceName($referenceName);
 		if ($reference === null) {
-			throw new \SS6\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException($referenceName);
+			throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\PersistentReferenceNotFoundException($referenceName);
 		}
 		return $reference;
 	}

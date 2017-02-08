@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category;
+namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategory;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategory;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 
 class FeedCategoryFacade {
 
@@ -14,7 +14,7 @@ class FeedCategoryFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository
 	 */
 	private $feedCategoryRepository;
 
@@ -27,7 +27,7 @@ class FeedCategoryFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
 	 */
 	public function refreshFeedCategories(array $feedCategoriesData) {
 		$this->deleteOldFeedCategories($feedCategoriesData);
@@ -35,7 +35,7 @@ class FeedCategoryFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData[] $currentFeedCategoriesData
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $currentFeedCategoriesData
 	 */
 	private function deleteOldFeedCategories(array $currentFeedCategoriesData) {
 		$currentExtIds = [];
@@ -48,7 +48,7 @@ class FeedCategoryFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
 	 */
 	private function createOrEditCategories(array $feedCategoriesData) {
 		$feedCategoriesByExtId = $this->feedCategoryRepository->getAllIndexedByExtId();

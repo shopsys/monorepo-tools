@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Form;
+namespace Shopsys\ShopBundle\Component\Form;
 
 class MultipleFormSetting {
 

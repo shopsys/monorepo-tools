@@ -1,23 +1,23 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductVariantService {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	public function checkProductIsNotMainVariant(Product $product) {
 		if ($product->isMainVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException($product->getId());
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyMainVariantException($product->getId());
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $currentVariants
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $currentVariants
 	 */
 	public function refreshProductVariants(Product $mainProduct, array $currentVariants) {
 		$this->unsetRemovedVariants($mainProduct, $currentVariants);
@@ -25,8 +25,8 @@ class ProductVariantService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $currentVariants
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $currentVariants
 	 */
 	private function unsetRemovedVariants(Product $mainProduct, array $currentVariants) {
 		foreach ($mainProduct->getVariants() as $originalVariant) {
@@ -37,8 +37,8 @@ class ProductVariantService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $currentVariants
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $currentVariants
 	 */
 	private function addNewVariants(Product $mainProduct, array $currentVariants) {
 		foreach ($currentVariants as $currentVariant) {
@@ -49,10 +49,10 @@ class ProductVariantService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $mainVariantEditData
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $mainVariantEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function createMainVariant(ProductEditData $mainVariantEditData, Product $mainProduct, array $variants) {
 		$variants[] = $mainProduct;

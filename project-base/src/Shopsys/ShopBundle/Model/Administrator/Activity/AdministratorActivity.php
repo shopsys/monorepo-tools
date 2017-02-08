@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Activity;
+namespace Shopsys\ShopBundle\Model\Administrator\Activity;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 /**
  * @ORM\Table(name="administrator_activities")
@@ -22,9 +22,9 @@ class AdministratorActivity {
 	private $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 *
-	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Administrator\Administrator")
+	 * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Administrator\Administrator")
 	 * @ORM\JoinColumn(nullable=false, name="administrator_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $administrator;
@@ -51,7 +51,7 @@ class AdministratorActivity {
 	private $lastActionTime;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param string $ipAddress
 	 */
 	public function __construct(

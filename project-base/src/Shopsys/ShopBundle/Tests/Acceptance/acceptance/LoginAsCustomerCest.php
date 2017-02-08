@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class LoginAsCustomerCest {
 

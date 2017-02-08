@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 class FileUploadController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
+	 * @var \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension
 	 */
 	private $fileThumbnailExtension;
 
@@ -57,7 +57,7 @@ class FileUploadController extends AdminBaseController {
 				];
 				$actionResult['status'] = 'success';
 				$actionResult['filename'] = $temporaryFilename;
-			} catch (\SS6\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\FileUpload\Exception\FileUploadException $ex) {
 				$actionResult['status'] = 'error';
 				$actionResult['code'] = $ex->getCode();
 				$actionResult['message'] = $ex->getMessage();

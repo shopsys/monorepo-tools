@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Controller;
+namespace Shopsys\ShopBundle\Tests\Database\Controller;
 
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class HomepageControllerTest extends FunctionalTestCase {
 

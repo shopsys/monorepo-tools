@@ -1,39 +1,39 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Order\OrderFormType;
-use SS6\ShopBundle\Model\Country\CountryFacade;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Order\OrderFormType;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 
 class OrderFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
 	 */
 	private $orderStatusFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $transportEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -52,8 +52,8 @@ class OrderFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @return \SS6\ShopBundle\Form\Admin\Order\OrderFormType
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
+	 * @return \Shopsys\ShopBundle\Form\Admin\Order\OrderFormType
 	 */
 	public function createForOrder(Order $order) {
 		$orderDomainId = $order->getDomainId();

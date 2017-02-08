@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

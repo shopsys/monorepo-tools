@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
-use SS6\ShopBundle\Model\Advert\AdvertPositionList;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Module\ModuleFacade;
-use SS6\ShopBundle\Model\Module\ModuleList;
-use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
-use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade;
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade;
-use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
-use SS6\ShopBundle\Twig\RequestExtension;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade;
+use Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\ShopBundle\Twig\RequestExtension;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends FrontBaseController {
@@ -26,52 +26,52 @@ class ProductController extends FrontBaseController {
 	const PRODUCTS_PER_PAGE = 12;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormTypeFactory
 	 */
 	private $productFilterFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
 	 */
 	private $productOnCurrentDomainFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\RequestExtension
+	 * @var \Shopsys\ShopBundle\Twig\RequestExtension
 	 */
 	private $requestExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForListFacade
 	 */
 	private $productListOrderingModeForListFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForBrandFacade
 	 */
 	private $productListOrderingModeForBrandFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeForSearchFacade
 	 */
 	private $productListOrderingModeForSearchFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
 	 */
 	private $moduleFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
 	 */
 	private $brandFacade;
 
@@ -276,8 +276,8 @@ class ProductController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
 	private function createProductFilterFormTypeForCategory(Category $category) {
 		return $this->productFilterFormTypeFactory->createForCategory(
@@ -289,7 +289,7 @@ class ProductController extends FrontBaseController {
 
 	/**
 	 * @param string|null $searchText
-	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
+	 * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
 	private function createProductFilterFormTypeForSearch($searchText) {
 		return $this->productFilterFormTypeFactory->createForSearch(
@@ -301,7 +301,7 @@ class ProductController extends FrontBaseController {
 
 	/**
 	 * @param string|null $searchText
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
 	 */
 	private function searchCategories($searchText) {
 		return $this->categoryFacade->getVisibleByDomainAndSearchText(

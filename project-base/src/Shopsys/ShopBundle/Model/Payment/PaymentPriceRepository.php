@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Payment\PaymentPrice;
+use Shopsys\ShopBundle\Model\Payment\PaymentPrice;
 
 class PaymentPriceRepository {
 
@@ -27,8 +27,8 @@ class PaymentPriceRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
 	 */
 	public function getAllByPayment(Payment $payment) {
 		return $this->getPaymentPriceRepository()->findBy(['payment' => $payment]);

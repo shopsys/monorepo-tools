@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\ConfirmDelete;
+namespace Shopsys\ShopBundle\Component\ConfirmDelete;
 
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 
@@ -14,7 +14,7 @@ class ConfirmDeleteResponseFactory {
 	private $templating;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
 	 */
 	private $routeCsrfProtector;
 

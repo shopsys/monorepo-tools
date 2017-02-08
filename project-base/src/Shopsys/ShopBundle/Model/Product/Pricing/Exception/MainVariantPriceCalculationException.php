@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing\Exception;
+namespace Shopsys\ShopBundle\Model\Product\Pricing\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Product\Pricing\Exception\ProductPricingException;
+use Shopsys\ShopBundle\Model\Product\Pricing\Exception\ProductPricingException;
 
 class MainVariantPriceCalculationException extends Exception implements ProductPricingException {
 

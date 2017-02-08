@@ -1,46 +1,46 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Detail;
+namespace Shopsys\ShopBundle\Model\Product\Detail;
 
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductDetail {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $basePriceForAutoPriceCalculationType;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	private $sellingPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductDomain[]|null
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null
 	 */
 	private $productDomainsIndexedByDomainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null
 	 */
 	private $parameters;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Image[]|null
+	 * @var \Shopsys\ShopBundle\Component\Image\Image[]|null
 	 */
 	private $imagesById;
 
@@ -50,13 +50,13 @@ class ProductDetail {
 	private $sellingPriceLoaded;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $basePriceForAutoPriceCalculationType
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
-	 * @param \SS6\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
-	 * @param \SS6\ShopBundle\Component\Image\Image[imageId]|null $imagesById
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory $productDetailFactory
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $basePriceForAutoPriceCalculationType
+	 * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null $sellingPrice
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductDomain[]|null $productDomainsIndexedByDomainId
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]|null $parameters
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[imageId]|null $imagesById
 	 */
 	public function __construct(
 		Product $product,
@@ -78,14 +78,14 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function getBasePriceForAutoPriceCalculationType() {
 		if ($this->basePriceForAutoPriceCalculationType === null) {
@@ -97,7 +97,7 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPrice|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
 	 */
 	public function getSellingPrice() {
 		if (!$this->sellingPriceLoaded) {
@@ -109,7 +109,7 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[]
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
 	 */
 	public function getProductDomainsIndexedByDomainId() {
 		if ($this->productDomainsIndexedByDomainId === null) {
@@ -120,7 +120,7 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
 	 */
 	public function getParameters() {
 		if ($this->parameters === null) {
@@ -131,7 +131,7 @@ class ProductDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Image[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[]
 	 */
 	public function getImagesIndexedById() {
 		if ($this->imagesById === null) {

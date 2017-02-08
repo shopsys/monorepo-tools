@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PricingService;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\PricingService;
 
 class PricingServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -46,7 +46,7 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 	public function testGetMinimumPriceEmptyArray() {
 		$pricingService = new PricingService();
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
 		$pricingService->getMinimumPriceByPriceWithoutVat([]);
 	}
 
@@ -94,7 +94,7 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase {
 	public function testArePricesDifferentEmptyArray() {
 		$pricingService = new PricingService();
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
 		$pricingService->arePricesDifferent([]);
 	}
 

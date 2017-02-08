@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation\Exception;
+namespace Shopsys\ShopBundle\Component\Translation\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Translation\Exception\TranslationException;
+use Shopsys\ShopBundle\Component\Translation\Exception\TranslationException;
 
 class StringValueUnextractableException extends Exception implements TranslationException {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Exception;
+namespace Shopsys\ShopBundle\Component\Domain\Exception;
 
 interface DomainException {
 

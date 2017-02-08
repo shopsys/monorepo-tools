@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch\Filter;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
-use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 class ProductBrandFilter implements AdvancedSearchFilterInterface{
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
 	 */
 	private $brandFacade;
 
@@ -64,7 +64,7 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface{
 		$isNotBrand = [];
 
 		foreach ($rulesData as $index => $ruleData) {
-			/* @var $ruleData \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
+			/* @var $ruleData \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData */
 			if ($ruleData->operator === self::OPERATOR_NOT_SET) {
 				$queryBuilder->andWhere('p.brand IS NULL');
 			} elseif ($ruleData->operator === self::OPERATOR_IS) {

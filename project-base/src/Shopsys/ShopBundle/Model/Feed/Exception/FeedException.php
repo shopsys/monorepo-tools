@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Exception;
+namespace Shopsys\ShopBundle\Model\Feed\Exception;
 
 interface FeedException {
 

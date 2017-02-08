@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Cron;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Cron;
 
-use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
-use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Form\FriendlyUrlType;
+use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
+use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomainsValidator;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 

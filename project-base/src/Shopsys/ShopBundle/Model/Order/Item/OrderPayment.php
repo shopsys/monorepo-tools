@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Item\OrderItemData;
-use SS6\ShopBundle\Model\Order\Item\OrderPaymentData;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
+use Shopsys\ShopBundle\Model\Order\Item\OrderPaymentData;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Pricing\Price;
 
 /**
  * @ORM\Entity
@@ -16,20 +16,20 @@ use SS6\ShopBundle\Model\Pricing\Price;
 class OrderPayment extends OrderItem {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Payment\Payment")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")
 	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $payment;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 */
 	public function __construct(
 		Order $order,
@@ -52,21 +52,21 @@ class OrderPayment extends OrderItem {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getPayment() {
 		return $this->payment;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderPaymentData
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderPaymentData
 	 */
 	public function edit(OrderItemData $orderPaymentData) {
 		if ($orderPaymentData instanceof OrderPaymentData) {
 			$this->payment = $orderPaymentData->payment;
 			parent::edit($orderPaymentData);
 		} else {
-			throw new \SS6\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
+			throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\InvalidArgumentException(
 				'Instance of ' . OrderPaymentData::class . ' is required as argument.'
 			);
 		}

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
-use SS6\ShopBundle\Component\Grid\ActionColumn;
-use SS6\ShopBundle\Component\Grid\Column;
-use SS6\ShopBundle\Component\Grid\DataSourceInterface;
-use SS6\ShopBundle\Component\Grid\GridView;
-use SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
-use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Component\Grid\ActionColumn;
+use Shopsys\ShopBundle\Component\Grid\Column;
+use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
+use Shopsys\ShopBundle\Component\Grid\GridView;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
+use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -28,12 +28,12 @@ class Grid {
 	private $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Column[columnId]
+	 * @var \Shopsys\ShopBundle\Component\Grid\Column[columnId]
 	 */
 	private $columns = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\ActionColumn[actionColumnId]
+	 * @var \Shopsys\ShopBundle\Component\Grid\ActionColumn[actionColumnId]
 	 */
 	private $actionColumns = [];
 
@@ -108,7 +108,7 @@ class Grid {
 	private $router;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
 	 */
 	private $routeCsrfProtector;
 
@@ -118,7 +118,7 @@ class Grid {
 	private $twig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\DataSourceInterface
+	 * @var \Shopsys\ShopBundle\Component\Grid\DataSourceInterface
 	 */
 	private $dataSource;
 
@@ -128,12 +128,12 @@ class Grid {
 	private $actionColumnClassAttribute = '';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface|null
+	 * @var \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface|null
 	 */
 	private $inlineEditService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService
+	 * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService
 	 */
 	private $gridOrderingService;
 
@@ -143,7 +143,7 @@ class Grid {
 	private $orderingEntityClass;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 * @var \Shopsys\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	private $paginationResults;
 
@@ -169,12 +169,12 @@ class Grid {
 
 	/**
 	 * @param string $id
-	 * @param \SS6\ShopBundle\Component\Grid\DataSourceInterface $dataSource
+	 * @param \Shopsys\ShopBundle\Component\Grid\DataSourceInterface $dataSource
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \Symfony\Component\Routing\Router $router
-	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+	 * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
 	 * @param \Twig_Environment $twig
-	 * @param \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService $gridOrderingService
+	 * @param \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService $gridOrderingService
 	 */
 	public function __construct(
 		$id,
@@ -187,7 +187,7 @@ class Grid {
 	) {
 		if (empty($id)) {
 			$message = 'Grid id cannot be empty.';
-			throw new \SS6\ShopBundle\Component\Grid\Exception\EmptyGridIdException($message);
+			throw new \Shopsys\ShopBundle\Component\Grid\Exception\EmptyGridIdException($message);
 		}
 
 		$this->id = $id;
@@ -215,11 +215,11 @@ class Grid {
 	 * @param string $sourceColumnName
 	 * @param string $title
 	 * @param bool $sortable
-	 * @return \SS6\ShopBundle\Component\Grid\Column
+	 * @return \Shopsys\ShopBundle\Component\Grid\Column
 	 */
 	public function addColumn($id, $sourceColumnName, $title, $sortable = false) {
 		if (array_key_exists($id, $this->columns)) {
-			throw new \SS6\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException(
+			throw new \Shopsys\ShopBundle\Component\Grid\Exception\DuplicateColumnIdException(
 				'Duplicate column id "' . $id . '" in grid "' . $this->id .  '"'
 			);
 		}
@@ -234,7 +234,7 @@ class Grid {
 	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
-	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
 	 */
 	public function addActionColumn(
 		$type,
@@ -261,7 +261,7 @@ class Grid {
 	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
-	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
 	 */
 	public function addEditActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
 		return $this->addActionColumn(ActionColumn::TYPE_EDIT, t('Edit'), $route, $bindingRouteParams, $additionalRouteParams);
@@ -271,14 +271,14 @@ class Grid {
 	 * @param string $route
 	 * @param array $bindingRouteParams
 	 * @param array $additionalRouteParams
-	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn
+	 * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
 	 */
 	public function addDeleteActionColumn($route, array $bindingRouteParams = [], array $additionalRouteParams = []) {
 		return $this->addActionColumn(ActionColumn::TYPE_DELETE, t('Delete'), $route, $bindingRouteParams, $additionalRouteParams);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $inlineEditService
+	 * @param \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface $inlineEditService
 	 */
 	public function setInlineEditService(GridInlineEditInterface $inlineEditService) {
 		$this->inlineEditService = $inlineEditService;
@@ -292,7 +292,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface|null
+	 * @return \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface|null
 	 */
 	public function getInlineEditService() {
 		return $this->inlineEditService;
@@ -323,7 +323,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\GridView
+	 * @return \Shopsys\ShopBundle\Component\Grid\GridView
 	 */
 	public function createView() {
 		$gridView = $this->createViewWithoutRows();
@@ -337,7 +337,7 @@ class Grid {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Component\Grid\GridView
+	 * @return \Shopsys\ShopBundle\Component\Grid\GridView
 	 */
 	public function createViewWithOneRow($rowId) {
 		$gridView = $this->createViewWithoutRows();
@@ -347,7 +347,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\GridView
+	 * @return \Shopsys\ShopBundle\Component\Grid\GridView
 	 */
 	public function createViewWithoutRows() {
 		$this->rows = [];
@@ -399,7 +399,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Column[]
+	 * @return \Shopsys\ShopBundle\Component\Grid\Column[]
 	 */
 	public function getColumns() {
 		return $this->columns;
@@ -413,7 +413,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\ActionColumn[]
+	 * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn[]
 	 */
 	public function getActionColumns() {
 		return $this->actionColumns;
@@ -534,7 +534,7 @@ class Grid {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginationResults() {
 		return $this->paginationResults;

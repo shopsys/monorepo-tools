@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Transport;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Transport;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase {
 

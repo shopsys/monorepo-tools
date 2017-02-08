@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture {
 
@@ -31,12 +31,12 @@ class CurrencyDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 * @param string|null $referenceName
 	 */
 	private function createCurrency(CurrencyData $currencyData, $referenceName = null) {
 		$currencyFacade = $this->get(CurrencyFacade::class);
-		/* @var $currencyFacade \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
+		/* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 
 		$currency = $currencyFacade->create($currencyData);
 		if ($referenceName !== null) {

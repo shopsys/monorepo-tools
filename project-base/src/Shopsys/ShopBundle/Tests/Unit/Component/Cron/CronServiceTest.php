@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Cron;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Cron;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Cron\CronService;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronServiceTest extends PHPUnit_Framework_TestCase {
 

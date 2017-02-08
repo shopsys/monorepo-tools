@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use SplFileInfo;
-use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
 use Symfony\Component\Yaml\Parser;
 use Twig_Node;
 
@@ -21,13 +21,13 @@ class AdminMenuYamlFileExtractor implements FileVisitorInterface {
 	private $adminMenuRealPath;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuLoader
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
 	 */
 	private $menuLoader;
 
 	/**
 	 * @param string $adminMenuFilePath
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuLoader $menuLoader
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader $menuLoader
 	 */
 	public function __construct($adminMenuFilePath, MenuLoader $menuLoader) {
 		$this->adminMenuRealPath = realpath($adminMenuFilePath);

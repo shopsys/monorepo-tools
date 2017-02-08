@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Localization;
+namespace Shopsys\ShopBundle\Component\Localization;
 
 class DateTimeFormatPatternRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Localization\DateTimeFormatPattern[]
+	 * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern[]
 	 */
 	private $dateTimeFormatPatterns;
 
@@ -21,7 +21,7 @@ class DateTimeFormatPatternRepository {
 	 * @param string $locale
 	 * @param int $dateType @link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
 	 * @param int $timeType @link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
-	 * @return \SS6\ShopBundle\Component\Localization\DateTimeFormatPattern|null
+	 * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern|null
 	 */
 	public function findDateTimePattern($locale, $dateType, $timeType) {
 		foreach ($this->dateTimeFormatPatterns as $dateTimePattern) {
@@ -34,7 +34,7 @@ class DateTimeFormatPatternRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Localization\DateTimeFormatPattern $dateTimePattern
+	 * @param \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern $dateTimePattern
 	 * @param string $locale
 	 * @param int|null $dateType
 	 * @param int|null $timeType

@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
 
 class PaymentEditData {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentData
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentData
 	 */
 	public $paymentData;
 
@@ -17,7 +17,7 @@ class PaymentEditData {
 	public $prices;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
 	 * @param array $prices
 	 */
 	public function __construct(PaymentData $paymentData = null, array $prices = []) {

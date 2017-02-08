@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Flag;
+namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Flag\FlagData;
-use SS6\ShopBundle\Model\Product\Flag\FlagRepository;
-use SS6\ShopBundle\Model\Product\Flag\FlagService;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagRepository;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
 class FlagFacade {
 
@@ -15,19 +15,19 @@ class FlagFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagRepository
 	 */
 	private $flagRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagService
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagService
 	 */
 	private $flagService;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagRepository $flagRepository
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagService $flagService
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagRepository $flagRepository
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagService $flagService
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -41,15 +41,15 @@ class FlagFacade {
 
 	/**
 	 * @param int $flagId
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
 	 */
 	public function getById($flagId) {
 		return $this->flagRepository->getById($flagId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
 	 */
 	public function create(FlagData $flagData) {
 		$flag = $this->flagService->create($flagData);
@@ -61,8 +61,8 @@ class FlagFacade {
 
 	/**
 	 * @param int $flagId
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
 	 */
 	public function edit($flagId, FlagData $flagData) {
 		$flag = $this->flagRepository->getById($flagId);
@@ -83,7 +83,7 @@ class FlagFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getAll() {
 		return $this->flagRepository->getAll();

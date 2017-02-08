@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Exception;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
+use Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
 
 class UnsupportedNodeException extends Exception implements JsParserException {
 

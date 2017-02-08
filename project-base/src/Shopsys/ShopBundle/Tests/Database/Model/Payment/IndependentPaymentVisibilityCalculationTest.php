@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Payment;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Payment;
 
-use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Payment\PaymentDomain;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Payment\PaymentDomain;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
@@ -29,7 +29,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$independentPaymentVisibilityCalculation =
 			$this->getContainer()->get(IndependentPaymentVisibilityCalculation::class);
-		/* @var $independentPaymentVisibilityCalculation \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
+		/* @var $independentPaymentVisibilityCalculation \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
 
 		$this->assertTrue($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
 	}
@@ -51,7 +51,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$independentPaymentVisibilityCalculation =
 			$this->getContainer()->get(IndependentPaymentVisibilityCalculation::class);
-		/* @var $independentPaymentVisibilityCalculation \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
+		/* @var $independentPaymentVisibilityCalculation \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
 
 		$this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
 	}
@@ -74,7 +74,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$independentPaymentVisibilityCalculation =
 			$this->getContainer()->get(IndependentPaymentVisibilityCalculation::class);
-		/* @var $independentPaymentVisibilityCalculation \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
+		/* @var $independentPaymentVisibilityCalculation \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
 
 		$this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
 	}
@@ -96,7 +96,7 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
 
 		$independentPaymentVisibilityCalculation =
 			$this->getContainer()->get(IndependentPaymentVisibilityCalculation::class);
-		/* @var $independentPaymentVisibilityCalculation \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
+		/* @var $independentPaymentVisibilityCalculation \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation */
 
 		$this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
 	}

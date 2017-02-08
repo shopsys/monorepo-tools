@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 
 class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase {
 

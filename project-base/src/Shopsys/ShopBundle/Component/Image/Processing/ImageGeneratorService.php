@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Processing;
+namespace Shopsys\ShopBundle\Component\Image\Processing;
 
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Image;
-use SS6\ShopBundle\Component\Image\ImageLocator;
-use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageGeneratorService {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageProcessingService
+	 * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
 	 */
 	private $imageProcessingService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
@@ -35,7 +35,7 @@ class ImageGeneratorService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image $image
+	 * @param \Shopsys\ShopBundle\Component\Image\Image $image
 	 * @param string|null $sizeName
 	 * @return string
 	 */

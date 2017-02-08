@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
 use Doctrine\ORM\Mapping as ORM;
 

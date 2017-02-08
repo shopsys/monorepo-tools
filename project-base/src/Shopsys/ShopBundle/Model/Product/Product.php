@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\ProductCategoryDomain;
+use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
 
 /**
  * Product
@@ -45,9 +45,9 @@ class Product extends AbstractTranslatableEntity {
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\ProductTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\ProductTranslation")
 	 */
 	protected $translations;
 
@@ -94,9 +94,9 @@ class Product extends AbstractTranslatableEntity {
 	private $price;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $vat;
@@ -158,9 +158,9 @@ class Product extends AbstractTranslatableEntity {
 	private $stockQuantity;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Unit\Unit")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Unit\Unit")
 	 * @ORM\JoinColumn(name="unit_id", referencedColumnName="id", nullable=false)
 	 */
 	private $unit;
@@ -173,22 +173,22 @@ class Product extends AbstractTranslatableEntity {
 	private $outOfStockAction;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $availability;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="out_of_stock_availability_id", referencedColumnName="id", nullable=true)
 	 */
 	private $outOfStockAvailability;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Availability\Availability")
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Availability\Availability")
 	 * @ORM\JoinColumn(name="calculated_availability_id", referencedColumnName="id", nullable=false)
 	 */
 	private $calculatedAvailability;
@@ -208,10 +208,10 @@ class Product extends AbstractTranslatableEntity {
 	private $calculatedVisibility;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\ProductCategoryDomain[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[]
 	 *
 	 * @ORM\OneToMany(
-	 *   targetEntity="SS6\ShopBundle\Model\Product\ProductCategoryDomain",
+	 *   targetEntity="Shopsys\ShopBundle\Model\Product\ProductCategoryDomain",
 	 *   mappedBy="product",
 	 *   orphanRemoval=true,
 	 *   cascade={"persist"}
@@ -220,9 +220,9 @@ class Product extends AbstractTranslatableEntity {
 	private $productCategoryDomains;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 *
-	 * @ORM\ManyToMany(targetEntity="SS6\ShopBundle\Model\Product\Flag\Flag")
+	 * @ORM\ManyToMany(targetEntity="Shopsys\ShopBundle\Model\Product\Flag\Flag")
 	 * @ORM\JoinTable(name="product_flags")
 	 */
 	private $flags;
@@ -249,24 +249,24 @@ class Product extends AbstractTranslatableEntity {
 	private $recalculateVisibility;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand|null
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Brand\Brand")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand")
 	 * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
 	 */
 	private $brand;
 
 	/**
-	 * @var \Doctrine\Common\Collections\ArrayCollection|\SS6\ShopBundle\Model\Product\Product[]
+	 * @var \Doctrine\Common\Collections\ArrayCollection|\Shopsys\ShopBundle\Model\Product\Product[]
 	 *
-	 * @ORM\OneToMany(targetEntity="SS6\ShopBundle\Model\Product\Product", mappedBy="mainVariant", cascade={"persist"})
+	 * @ORM\OneToMany(targetEntity="Shopsys\ShopBundle\Model\Product\Product", mappedBy="mainVariant", cascade={"persist"})
 	 */
 	private $variants;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Product|null
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="variants", cascade={"persist"})
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product", inversedBy="variants", cascade={"persist"})
 	 * @ORM\JoinColumn(name="main_variant_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
 	 */
 	private $mainVariant;
@@ -286,8 +286,8 @@ class Product extends AbstractTranslatableEntity {
 	private $orderingPriority;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
-	 * @param \SS6\ShopBundle\Model\Product\Product[]|null $variants
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $variants
 	 */
 	private function __construct(ProductData $productData, array $variants = null) {
 		$this->translations = new ArrayCollection();
@@ -334,24 +334,24 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public static function create(ProductData $productData) {
 		return new self($productData, null);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
-	 * @param \SS6\ShopBundle\Model\Product\ProductData[] $variants
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData[] $variants
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public static function createMainVariant(ProductData $productData, array $variants) {
 		return new self($productData, $variants);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData
 	 */
 	public function edit(ProductData $productData) {
 		$this->vat = $productData->vat;
@@ -389,7 +389,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
 	 */
 	private function editFlags(array $flags) {
 		$this->flags->clear();
@@ -399,7 +399,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function changeVat(Vat $vat) {
 		$this->vat = $vat;
@@ -477,7 +477,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getVat() {
 		return $this->vat;
@@ -540,7 +540,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function getUnit() {
 		return $this->unit;
@@ -554,21 +554,21 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getAvailability() {
 		return $this->availability;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public function getOutOfStockAvailability() {
 		return $this->outOfStockAvailability;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getCalculatedAvailability() {
 		return $this->calculatedAvailability;
@@ -582,7 +582,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setAvailability(Availability $availability) {
 		$this->availability = $availability;
@@ -590,7 +590,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability|null $outOfStockAvailability
 	 */
 	public function setOutOfStockAvailability(Availability $outOfStockAvailability = null) {
 		$this->outOfStockAvailability = $outOfStockAvailability;
@@ -598,7 +598,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $calculatedAvailability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $calculatedAvailability
 	 */
 	public function setCalculatedAvailability(Availability $calculatedAvailability) {
 		$this->calculatedAvailability = $calculatedAvailability;
@@ -606,7 +606,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
 	 * @param int $domainId
 	 */
 	public function setCategories(array $categoriesByDomainId) {
@@ -617,7 +617,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $newCategories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $newCategories
 	 * @param int $domainId
 	 */
 	private function createNewProductCategoryDomains(array $newCategories, $domainId) {
@@ -632,7 +632,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $newCategories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $newCategories
 	 * @param int $domainId
 	 */
 	private function removeOldProductCategoryDomains(array $newCategories, $domainId) {
@@ -647,7 +647,7 @@ class Product extends AbstractTranslatableEntity {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductCategoryDomain[categoryId]
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductCategoryDomain[categoryId]
 	 */
 	private function getProductCategoryDomainsByDomainIdIndexedByCategoryId($domainId) {
 		$productCategoryDomainsByCategoryId = [];
@@ -662,14 +662,14 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlags() {
 		return $this->flags;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category[domainId][]
+	 * @return \Shopsys\ShopBundle\Model\Category\Category[domainId][]
 	 */
 	public function getCategoriesIndexedByDomainId() {
 		$categoriesByDomainId = [];
@@ -689,7 +689,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function getBrand() {
 		return $this->brand;
@@ -736,31 +736,31 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getMainVariant() {
 		if (!$this->isVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
 		}
 
 		return $this->mainVariant;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $variant
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $variant
 	 */
 	public function addVariant(Product $variant) {
 		if (!$this->isMainVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException(
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException(
 				$this->getId(),
 				$variant->getId()
 			);
 		}
 		if ($variant->isMainVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException($variant->getId());
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException($variant->getId());
 		}
 		if ($variant->isVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException($variant->getId());
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException($variant->getId());
 		}
 
 		if (!$this->variants->contains($variant)) {
@@ -770,7 +770,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
 	 */
 	private function addVariants(array $variants) {
 		foreach ($variants as $variant) {
@@ -779,7 +779,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getVariants() {
 		return $this->variants->toArray();
@@ -787,7 +787,7 @@ class Product extends AbstractTranslatableEntity {
 
 	public function unsetMainVariant() {
 		if (!$this->isVariant()) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductIsNotVariantException();
 		}
 		$this->variantType = self::VARIANT_TYPE_NONE;
 		$this->mainVariant->variants->removeElement($this);
@@ -795,7 +795,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainVariant
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
 	 * @SuppressWarnings(PHPMD.UnusedPrivateMethod) method is used but not through $this
 	 */
 	private function setMainVariant(Product $mainVariant) {
@@ -818,7 +818,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductData $productData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
 	 */
 	private function setTranslations(ProductData $productData) {
 		foreach ($productData->name as $locale => $name) {
@@ -830,7 +830,7 @@ class Product extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductTranslation
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductTranslation
 	 */
 	protected function createTranslation() {
 		return new ProductTranslation();

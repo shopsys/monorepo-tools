@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
 	 */
 	private $productVisibilityRepository;
 
@@ -19,7 +19,7 @@ class ProductVisibilityFacade {
 	private $recalcVisibilityForMarked = false;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository $productVisibilityRepository
 	 */
 	public function __construct(ProductVisibilityRepository $productVisibilityRepository) {
 		$this->productVisibilityRepository = $productVisibilityRepository;
@@ -38,7 +38,7 @@ class ProductVisibilityFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 */
 	public function markProductsForRecalculationAffectedByCategory(Category $category) {
 		$this->productVisibilityRepository->markProductsForRecalculationAffectedByCategory($category);

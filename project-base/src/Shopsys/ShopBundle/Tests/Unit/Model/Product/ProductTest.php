@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductTest extends PHPUnit_Framework_TestCase {
 
@@ -46,7 +46,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$productData = new ProductData();
 		$product = Product::create($productData);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsNotVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\ProductIsNotVariantException::class);
 		$product->getMainVariant();
 	}
 
@@ -57,7 +57,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$mainVariant = Product::createMainVariant($productData, [$variant]);
 		Product::createMainVariant($productData, [$variant2]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\ProductIsAlreadyVariantException::class);
 		$mainVariant->addVariant($variant2);
 	}
 
@@ -68,7 +68,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$mainVariant = Product::createMainVariant($productData, [$variant]);
 		$mainVariant2 = Product::createMainVariant($productData, [$variant2]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
 		$mainVariant->addVariant($mainVariant2);
 	}
 
@@ -80,7 +80,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		Product::createMainVariant($productData, [$variant]);
 		Product::createMainVariant($productData, [$variant2]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\VariantCanBeAddedOnlyToMainVariantException::class);
 		$variant2->addVariant($variant3);
 	}
 
@@ -89,7 +89,7 @@ class ProductTest extends PHPUnit_Framework_TestCase {
 		$variant = Product::create($productData);
 		$mainVariant = Product::createMainVariant($productData, [$variant]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
 		$mainVariant->addVariant($mainVariant);
 	}
 

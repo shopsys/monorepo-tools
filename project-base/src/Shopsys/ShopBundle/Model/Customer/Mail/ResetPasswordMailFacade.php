@@ -1,34 +1,34 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer\Mail;
+namespace Shopsys\ShopBundle\Model\Customer\Mail;
 
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Mail\MailerService;
-use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Mail\MailerService;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
 class ResetPasswordMailFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailerService
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailerService
 	 */
 	private $mailer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateFacade
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
 	 */
 	private $mailTemplateFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
 	 */
 	private $resetPasswordMail;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailer
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
-	 * @param \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailer
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade $mailTemplateFacade
+	 * @param \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail $resetPasswordMail
 	 */
 	public function __construct(
 		MailerService $mailer,
@@ -41,7 +41,7 @@ class ResetPasswordMailFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 */
 	public function sendMail(User $user) {
 		$mailTemplate = $this->mailTemplateFacade->get(MailTemplate::RESET_PASSWORD_NAME, $user->getDomainId());

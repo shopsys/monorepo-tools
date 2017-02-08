@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Pricing\Group;
+namespace Shopsys\ShopBundle\Form\Admin\Pricing\Group;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

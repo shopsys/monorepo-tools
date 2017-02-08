@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\ConstantList\Exception;
+namespace Shopsys\ShopBundle\Component\ConstantList\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\ConstantList\Exception\ConstantListException;
+use Shopsys\ShopBundle\Component\ConstantList\Exception\ConstantListException;
 
 class UndefinedTranslationException extends Exception implements ConstantListException {
 

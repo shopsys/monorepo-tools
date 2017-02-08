@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Status;
+namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository {
 
@@ -29,7 +29,7 @@ class OrderStatusRepository {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus|null
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus|null
 	 */
 	public function findById($orderStatusId) {
 		return $this->getOrderStatusRepository()->find($orderStatusId);
@@ -37,42 +37,42 @@ class OrderStatusRepository {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getById($orderStatusId) {
 		$orderStatus = $this->findById($orderStatusId);
 
 		if ($orderStatus === null) {
 			$message = 'Order status with ID ' . $orderStatusId . ' not found.';
-			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
 		}
 
 		return $orderStatus;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getDefault() {
 		$orderStatus = $this->getOrderStatusRepository()->findOneBy(['type' => OrderStatus::TYPE_NEW]);
 
 		if ($orderStatus === null) {
 			$message = 'Default order status not found.';
-			throw new \SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
 		}
 
 		return $orderStatus;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAll() {
 		return $this->getOrderStatusRepository()->findBy([], ['id' => 'asc']);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAllIndexedById() {
 		$orderStatusesIndexedById = [];
@@ -86,7 +86,7 @@ class OrderStatusRepository {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAllExceptId($orderStatusId) {
 		$qb = $this->getOrderStatusRepository()->createQueryBuilder('os')
@@ -97,8 +97,8 @@ class OrderStatusRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
 	 */
 	public function replaceOrderStatus(OrderStatus $oldOrderStatus, OrderStatus $newOrderStatus) {
 		$this->em->createQueryBuilder()

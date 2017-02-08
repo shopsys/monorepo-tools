@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Form\Front\Contact\ContactFormType;
-use SS6\ShopBundle\Model\ContactForm\ContactFormData;
-use SS6\ShopBundle\Model\ContactForm\ContactFormFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Form\Front\Contact\ContactFormType;
+use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
+use Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class ContactFormController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ContactForm\ContactFormFacade
+	 * @var \Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade
 	 */
 	private $contactFormFacade;
 
@@ -49,7 +49,7 @@ class ContactFormController extends FrontBaseController {
 					]
 				);
 				$message = t('Thank you, your message has been sent.');
-			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
 				$message = t('Error occurred when sending e-mail.');
 			}
 

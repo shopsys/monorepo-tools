@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail;
+namespace Shopsys\ShopBundle\Model\Mail;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Mail\MailTemplateData;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 
 /**
  * @ORM\Table(
@@ -71,7 +71,7 @@ class MailTemplate {
 	/**
 	 * @param string $name
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
 	public function __construct($name, $domainId, MailTemplateData $mailTemplateData) {
 		$this->name = $name;
@@ -80,7 +80,7 @@ class MailTemplate {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTemplateData $mailTemplateData
 	 */
 	public function edit(MailTemplateData $mailTemplateData) {
 		$this->bccEmail = $mailTemplateData->bccEmail;

@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Multidomain;
+namespace Shopsys\ShopBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
-use SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
-use SS6\ShopBundle\Component\Setting\SettingValue;
-use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Product\ProductVisibility;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder;
+use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
+use Shopsys\ShopBundle\Component\Setting\SettingValue;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade {
 
@@ -17,12 +17,12 @@ class MultidomainEntityClassFinderFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
+	 * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
 	 */
 	private $multidomainEntityClassFinder;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder
+	 * @var \Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder
 	 */
 	private $entityNotNullableColumnsFinder;
 

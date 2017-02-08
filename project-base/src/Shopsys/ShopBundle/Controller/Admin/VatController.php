@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Vat\VatSettingsFormType;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,22 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 class VatController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatInlineEdit
 	 */
 	private $vatInlineEdit;
 
@@ -89,7 +89,7 @@ class VatController extends AdminBaseController {
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_vat_delete', $id);
 			}
-		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
 			return new Response(t('Selected VAT doesn\'t exist'));
 		}
 
@@ -126,7 +126,7 @@ class VatController extends AdminBaseController {
 					]);
 			}
 
-		} catch (\SS6\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected VAT doesn\'t exist.'));
 		}
 
@@ -160,7 +160,7 @@ class VatController extends AdminBaseController {
 				$this->getFlashMessageSender()->addSuccessFlash(t('VAT settings modified'));
 
 				return $this->redirectToRoute('admin_vat_list');
-			} catch (\SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Invalid rounding settings'));
 			}
 		}

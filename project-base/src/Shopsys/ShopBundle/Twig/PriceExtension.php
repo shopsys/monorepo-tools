@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
 use CommerceGuys\Intl\Currency\CurrencyRepositoryInterface;
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
@@ -19,17 +19,17 @@ class PriceExtension extends Twig_Extension {
 	const MAXIMUM_FRACTION_DIGITS = 10;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
@@ -165,7 +165,7 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @param string $price
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return string
 	 */
 	public function priceWithCurrencyFilter($price, Currency $currency) {
@@ -201,7 +201,7 @@ class PriceExtension extends Twig_Extension {
 
 	/**
 	 * @param string $price
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string|null $locale
 	 * @return string
 	 */

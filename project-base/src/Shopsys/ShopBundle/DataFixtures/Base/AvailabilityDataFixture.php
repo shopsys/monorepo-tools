@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture {
 
@@ -38,12 +38,12 @@ class AvailabilityDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
 	 * @param string|null $referenceName
 	 */
 	private function createAvailability(AvailabilityData $availabilityData, $referenceName = null) {
 		$availabilityFacade = $this->get(AvailabilityFacade::class);
-		/* @var $availabilityFacade \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade */
+		/* @var $availabilityFacade \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade */
 
 		$availability = $availabilityFacade->create($availabilityData);
 		if ($referenceName !== null) {

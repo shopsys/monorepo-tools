@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constraints;
+namespace Shopsys\ShopBundle\Component\Constraints;
 
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class NotSelectedDomainToShowValidator extends ConstraintValidator {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

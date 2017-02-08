@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
-use SS6\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture {
 
@@ -16,12 +16,12 @@ class PaymentDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$paymentEditDataFactory = $this->get(PaymentEditDataFactory::class);
-		/* @var $paymentEditDataFactory \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory */
+		/* @var $paymentEditDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory */
 		$paymentEditFacade = $this->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$currencyEur = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
-		/* @var $currencyEur \SS6\ShopBundle\Model\Pricing\Currency\Currency */
+		/* @var $currencyEur \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
 
 		$payment = $this->getReference(DemoPaymentDataFixture::PAYMENT_CARD);
 		$paymentEditData = $paymentEditDataFactory->createFromPayment($payment);

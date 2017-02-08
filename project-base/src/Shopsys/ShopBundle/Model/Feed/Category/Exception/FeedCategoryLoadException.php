@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category\Exception;
+namespace Shopsys\ShopBundle\Model\Feed\Category\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Feed\Category\Exception\FeedCategoryException;
+use Shopsys\ShopBundle\Model\Feed\Category\Exception\FeedCategoryException;
 
 class FeedCategoryLoadException extends Exception implements FeedCategoryException {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail\Exception;
+namespace Shopsys\ShopBundle\Model\Mail\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Debug;
+use Shopsys\ShopBundle\Component\Debug;
 
 class SendMailFailedException extends Exception implements MailException {
 

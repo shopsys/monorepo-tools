@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Article;
+namespace Shopsys\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
 
@@ -27,7 +27,7 @@ class ArticleRepository {
 
 	/**
 	 * @param string $articleId
-	 * @return \SS6\ShopBundle\Model\Article\Article|null
+	 * @return \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	public function findById($articleId) {
 		return $this->getArticleRepository()->find($articleId);
@@ -78,7 +78,7 @@ class ArticleRepository {
 	/**
 	 * @param int $domainId
 	 * @param string $placement
-	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 * @return \Shopsys\ShopBundle\Model\Article\Article[]
 	 */
 	public function getVisibleArticlesForPlacement($domainId, $placement) {
 		$queryBuilder = $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
@@ -90,20 +90,20 @@ class ArticleRepository {
 
 	/**
 	 * @param int $articleId
-	 * @return \SS6\ShopBundle\Model\Article\Article
+	 * @return \Shopsys\ShopBundle\Model\Article\Article
 	 */
 	public function getById($articleId) {
 		$article = $this->getArticleRepository()->find($articleId);
 		if ($article === null) {
 			$message = 'Article with ID ' . $articleId . ' not found';
-			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
 		return $article;
 	}
 
 	/**
 	 * @param int $articleId
-	 * @return \SS6\ShopBundle\Model\Article\Article
+	 * @return \Shopsys\ShopBundle\Model\Article\Article
 	 */
 	public function getVisibleById($articleId) {
 		$article = $this->getAllVisibleQueryBuilder()
@@ -113,7 +113,7 @@ class ArticleRepository {
 
 		if ($article === null) {
 			$message = 'Article with ID ' . $articleId . ' not found';
-			throw new \SS6\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Article\Exception\ArticleNotFoundException($message);
 		}
 		return $article;
 	}
@@ -130,7 +130,7 @@ class ArticleRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Article\Article[]
+	 * @return \Shopsys\ShopBundle\Model\Article\Article[]
 	 */
 	public function getAllByDomainId($domainId) {
 		return $this->getArticleRepository()->findBy([

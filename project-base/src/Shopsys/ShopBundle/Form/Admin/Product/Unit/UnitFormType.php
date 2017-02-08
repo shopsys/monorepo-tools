@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Unit;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

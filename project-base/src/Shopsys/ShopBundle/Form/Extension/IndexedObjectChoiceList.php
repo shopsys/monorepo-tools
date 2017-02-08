@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Extension;
+namespace Shopsys\ShopBundle\Form\Extension;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\PropertyAccess\PropertyAccess;

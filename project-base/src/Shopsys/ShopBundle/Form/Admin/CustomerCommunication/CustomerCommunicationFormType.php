@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\CustomerCommunication;
+namespace Shopsys\ShopBundle\Form\Admin\CustomerCommunication;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

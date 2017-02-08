@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
-use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
-use SS6\ShopBundle\Model\Product\Unit\UnitInlineEdit;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitSettingFormType;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,17 +16,17 @@ use Symfony\Component\HttpFoundation\Response;
 class UnitController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
 	 */
 	private $unitFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitInlineEdit
 	 */
 	private $unitInlineEdit;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
@@ -98,7 +98,7 @@ class UnitController extends AdminBaseController {
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_unit_delete', $id);
 			}
-		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
 			return new Response(t('Selected unit doesn\'t exist'));
 		}
 	}
@@ -134,7 +134,7 @@ class UnitController extends AdminBaseController {
 					]
 				);
 			}
-		} catch (\SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected unit doesn\'t exist.'));
 		}
 

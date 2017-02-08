@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;

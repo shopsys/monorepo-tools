@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
@@ -15,13 +15,13 @@ class ShopInfoExtension extends \Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
 	 */
 	private $shopInfoSettingFacade;
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 * @param \SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
+	 * @param \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade $shopInfoSettingFacade
 	 */
 	public function __construct(
 		ContainerInterface $container,
@@ -43,7 +43,7 @@ class ShopInfoExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Domain
+	 * @return \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private function getDomain() {
 		// Twig extensions are loaded during assetic:dump command,

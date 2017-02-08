@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Exception;
+namespace Shopsys\ShopBundle\Model\Order\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Order\Exception\OrderException;
+use Shopsys\ShopBundle\Model\Order\Exception\OrderException;
 
 class OrderNumberSequenceNotFoundException extends Exception implements OrderException {
 

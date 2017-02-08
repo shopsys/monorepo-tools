@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use DateTime;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditData;
-use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 
 class ProductDataFixtureLoader {
 
@@ -37,47 +37,47 @@ class ProductDataFixtureLoader {
 	const COLUMN_MAIN_VARIANT_CATNUM = 25;
 
 	/**
-	 * @var \SS6\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader
+	 * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductParametersFixtureLoader
 	 */
 	private $productParametersFixtureLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category[]
+	 * @var \Shopsys\ShopBundle\Model\Category\Category[]
 	 */
 	private $categories;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flags;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	private $brands;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	private $units;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	private $pricingGroups;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
 	 */
 	private $productEditDataFactory;
 
@@ -90,13 +90,13 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
 	 */
 	public function refreshCachedEntities(
 		array $vats,
@@ -119,7 +119,7 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param array $row
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
 	 */
 	public function createProductEditDataFromRowForFirstDomain($row) {
 		$productEditData = $this->productEditDataFactory->createDefault();
@@ -144,7 +144,7 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param array $row
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
@@ -220,7 +220,7 @@ class ProductDataFixtureLoader {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param array $row
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
@@ -274,7 +274,7 @@ class ProductDataFixtureLoader {
 
 	/**
 	 * @param array $row
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 * @param int $domainId
 	 */
 	private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId) {
@@ -296,14 +296,14 @@ class ProductDataFixtureLoader {
 				}
 				break;
 			default:
-				throw new \SS6\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
+				throw new \Shopsys\ShopBundle\Model\Product\Exception\InvalidPriceCalculationTypeException(
 					$row[self::COLUMN_PRICE_CALCULATION_TYPE]
 				);
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData) {
 		foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {

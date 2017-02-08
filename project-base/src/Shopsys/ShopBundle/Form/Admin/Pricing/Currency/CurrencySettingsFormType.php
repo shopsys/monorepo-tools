@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Pricing\Currency;
+namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Constraints;
 class CurrencySettingsFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
 	 */
 	private $currencies;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
 	 */
 	public function __construct(array $currencies) {
 		$this->currencies = $currencies;

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use SS6\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
@@ -16,13 +16,13 @@ class MenuLoader {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\Translator
+	 * @var \Shopsys\ShopBundle\Component\Translation\Translator
 	 */
 	private $translator;
 
 	/**
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
-	 * @param \SS6\ShopBundle\Component\Translation\Translator $translator
+	 * @param \Shopsys\ShopBundle\Component\Translation\Translator $translator
 	 */
 	public function __construct(Filesystem $filesystem, Translator $translator) {
 		$this->filesystem = $filesystem;
@@ -31,7 +31,7 @@ class MenuLoader {
 
 	/**
 	 * @param string $filename
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	public function loadFromYaml($filename) {
 		$yamlParser = new Parser();
@@ -55,7 +55,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	public function loadFromArray(array $array) {
 		$items = $this->loadItems($array);
@@ -66,7 +66,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private function loadItems(array $array) {
 		$items = [];
@@ -81,7 +81,7 @@ class MenuLoader {
 
 	/**
 	 * @param array $array
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
 	 */
 	private function loadItem(array $array) {
 		if (isset($array['items'])) {
@@ -91,7 +91,7 @@ class MenuLoader {
 		}
 
 		$item = new MenuItem(
-			/** @Ignore Extraction of labels in YAML file is done by \SS6\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor */
+			/** @Ignore Extraction of labels in YAML file is done by \Shopsys\ShopBundle\Component\Translation\AdminMenuYamlFileExtractor */
 			$this->translator->trans($array['label']),
 			isset($array['type']) ? $array['type'] : null,
 			isset($array['route']) ? $array['route'] : null,

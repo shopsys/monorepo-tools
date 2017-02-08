@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
-use SS6\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
-use SS6\ShopBundle\Model\Mail\AllMailTemplatesData;
-use SS6\ShopBundle\Model\Mail\DummyMailType;
+use Shopsys\ShopBundle\Form\Admin\Mail\MailTemplateFormType;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\ShopBundle\Model\Mail\AllMailTemplatesData;
+use Shopsys\ShopBundle\Model\Mail\DummyMailType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AllMailTemplatesFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
 	 */
 	private $resetPasswordMail;
 

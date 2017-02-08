@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
-use SS6\ShopBundle\Component\Constraints\Contains;
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Mail\MailTemplateData;
-use SS6\ShopBundle\Model\Mail\MailTypeInterface;
+use Shopsys\ShopBundle\Component\Constraints\Contains;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Component\Transformers\EmptyWysiwygTransformer;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
+use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -20,12 +20,12 @@ class MailTemplateFormType extends AbstractType {
 	const VALIDATION_GROUP_SEND_MAIL = 'sendMail';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailTypeInterface
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailTypeInterface
 	 */
 	private $mailType;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\MailTypeInterface $mailType
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailTypeInterface $mailType
 	 */
 	public function __construct(MailTypeInterface $mailType) {
 		$this->mailType = $mailType;
@@ -131,7 +131,7 @@ class MailTemplateFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$mailTemplateData = $form->getData();
-				/* @var $mailTemplateData \SS6\ShopBundle\Model\Mail\MailTemplateData */
+				/* @var $mailTemplateData \Shopsys\ShopBundle\Model\Mail\MailTemplateData */
 
 				if ($mailTemplateData->sendMail) {
 					$validationGroups[] = self::VALIDATION_GROUP_SEND_MAIL;

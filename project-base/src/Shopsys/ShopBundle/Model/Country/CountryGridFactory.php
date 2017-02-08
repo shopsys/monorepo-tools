@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country;
+namespace Shopsys\ShopBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 
 class CountryGridFactory implements GridFactoryInterface {
 
@@ -16,12 +16,12 @@ class CountryGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -36,7 +36,7 @@ class CountryGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

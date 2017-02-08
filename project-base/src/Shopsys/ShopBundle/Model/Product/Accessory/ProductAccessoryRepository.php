@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Accessory;
+namespace Shopsys\ShopBundle\Model\Product\Accessory;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Doctrine\QueryBuilderService;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductAccessoryRepository {
 
@@ -17,12 +17,12 @@ class ProductAccessoryRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\QueryBuilderService
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\QueryBuilderService
 	 */
 	private $queryBuilderService;
 
@@ -44,11 +44,11 @@ class ProductAccessoryRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $limit
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
 		$queryBuilder = $this->getAllOfferedAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup);
@@ -58,18 +58,18 @@ class ProductAccessoryRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory[]
 	 */
 	public function getAllByProduct(Product $product) {
 		return $this->getProductAccessoryRepository()->findBy(['product' => $product], ['position' => 'asc']);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getAllOfferedAccessoriesByProduct(Product $product, $domainId, PricingGroup $pricingGroup) {
 		return $this->getAllOfferedAccessoriesByProductQueryBuilder($product, $domainId, $pricingGroup)
@@ -78,10 +78,10 @@ class ProductAccessoryRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	private function getAllOfferedAccessoriesByProductQueryBuilder(Product $product, $domainId, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
@@ -99,9 +99,9 @@ class ProductAccessoryRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Product $accessory
-	 * @return \SS6\ShopBundle\Model\Product\Accessory\ProductAccessory|null
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $accessory
+	 * @return \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory|null
 	 */
 	public function findByProductAndAccessory(Product $product, Product $accessory) {
 		return $this->getProductAccessoryRepository()->findOneBy([

@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryData;
-use SS6\ShopBundle\Model\Category\CategoryDomain;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Model\Category\CategoryDomain;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 

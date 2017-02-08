@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Script;
+namespace Shopsys\ShopBundle\Form\Admin\Script;
 
-use SS6\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Script\ScriptData;
+use Shopsys\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Script\ScriptData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

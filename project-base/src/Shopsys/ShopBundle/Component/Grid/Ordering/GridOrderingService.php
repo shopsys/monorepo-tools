@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\Ordering;
+namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
-use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 class GridOrderingService {
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface|null $entity
+	 * @param \Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface|null $entity
 	 * @param int $position
 	 */
 	public function setPosition($entity, $position) {
 		if ($entity instanceof OrderableEntityInterface) {
 			$entity->setPosition($position);
 		} else {
-			throw new \SS6\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException();
+			throw new \Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException();
 		}
 	}
 

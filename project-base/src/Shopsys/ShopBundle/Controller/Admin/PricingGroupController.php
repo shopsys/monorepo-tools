@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
-use SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupSettingsFormType;
+use Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,22 +17,22 @@ use Symfony\Component\HttpFoundation\Response;
 class PricingGroupController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
 	 */
 	private $pricingGroupFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\Grid\PricingGroupInlineEdit
 	 */
 	private $pricingGroupInlineEdit;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
@@ -92,7 +92,7 @@ class PricingGroupController extends AdminBaseController {
 					]
 				);
 			}
-		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected pricing group doesn\'t exist.'));
 		}
 
@@ -138,7 +138,7 @@ class PricingGroupController extends AdminBaseController {
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
 			}
 
-		} catch (\SS6\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
 			return new Response(t('Selected pricing group doesn\'t exist.'));
 		}
 

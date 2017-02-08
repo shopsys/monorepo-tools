@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Category;
+namespace Shopsys\ShopBundle\Form\Admin\Category;
 
-use SS6\ShopBundle\Component\Form\InvertChoiceTypeExtension;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,24 +15,24 @@ use Symfony\Component\Validator\Constraints;
 class CategoryFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category[]
+	 * @var \Shopsys\ShopBundle\Model\Category\Category[]
 	 */
 	private $categories;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory[]
+	 * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[]
 	 */
 	private $heurekaCzFeedCategories;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category|null
+	 * @var \Shopsys\ShopBundle\Model\Category\Category|null
 	 */
 	private $category;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
-	 * @param \SS6\ShopBundle\Model\Category\Category|null $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,

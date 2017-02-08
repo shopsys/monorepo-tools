@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Setting;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Setting;
 
 use DateTime;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
-use SS6\ShopBundle\Component\Setting\SettingValue;
+use Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
+use Shopsys\ShopBundle\Component\Setting\SettingValue;
 use stdClass;
 
 class SettingValueTest extends PHPUnit_Framework_TestCase {

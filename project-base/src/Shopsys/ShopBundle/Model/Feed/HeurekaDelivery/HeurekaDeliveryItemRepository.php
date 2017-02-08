@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
+namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
-use SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory
+	 * @var \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory
 	 */
 	private $heurekaDeliveryItemFactory;
 

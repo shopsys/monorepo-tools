@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Config;
+namespace Shopsys\ShopBundle\Tests\Unit\Config;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\AdminNavigation\Menu;
-use SS6\ShopBundle\Model\AdminNavigation\MenuFactory;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -22,7 +22,7 @@ class AdminNavigationTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem[] $items
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
 	 */
 	private function resolveRoutesRecursive(array $items) {
 		$router = $this->getContainer()->get('router');
@@ -40,7 +40,7 @@ class AdminNavigationTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	private function getMenu() {
 		$authorizationChecker = $this->getMockBuilder(AuthorizationCheckerInterface::class)

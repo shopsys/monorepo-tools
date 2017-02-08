@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Exception;
+namespace Shopsys\ShopBundle\Model\Product\Exception;
 
-use SS6\ShopBundle\Model\Product\Exception\ProductException;
+use Shopsys\ShopBundle\Model\Product\Exception\ProductException;
 
 interface VariantException extends ProductException {
 

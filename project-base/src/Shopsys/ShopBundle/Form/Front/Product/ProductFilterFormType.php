@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Product;
+namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Filter\PriceRange;
-use SS6\ShopBundle\Model\Product\Filter\ProductFilterData;
+use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
+use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,22 +17,22 @@ class ProductFilterFormType extends AbstractType {
 	const NAME = 'product_filter_form';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
 	private $parameterFilterChoices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flagFilterChoices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	private $brandFilterChoices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\PriceRange
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
 	 */
 	private $priceRange;
 
@@ -40,7 +40,7 @@ class ProductFilterFormType extends AbstractType {
 	 * @param array $parameterFilterChoices
 	 * @param array $flagFilterChoices
 	 * @param array $brandFilterChoices
-	 * @param \SS6\ShopBundle\Model\Product\Filter\PriceRange $priceRange
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\PriceRange $priceRange
 	 */
 	public function __construct(
 		array $parameterFilterChoices,
@@ -128,28 +128,28 @@ class ProductFilterFormType extends AbstractType {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
 	public function getParameterFilterChoices() {
 		return $this->parameterFilterChoices;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public function getBrandFilterChoices() {
 		return $this->brandFilterChoices;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoices() {
 		return $this->flagFilterChoices;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Filter\PriceRange
+	 * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
 	 */
 	public function getPriceRange() {
 		return $this->priceRange;

@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile\Config;
+namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
 
 class UploadedFileConfig {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
 	 */
 	private $uploadedFileEntityConfigsByClass;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $uploadedFileEntityConfigsByClass
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[] $uploadedFileEntityConfigsByClass
 	 */
 	public function __construct(array $uploadedFileEntityConfigsByClass) {
 		$this->uploadedFileEntityConfigsByClass = $uploadedFileEntityConfigsByClass;
@@ -26,7 +26,7 @@ class UploadedFileConfig {
 
 	/**
 	 * @param Object $entity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
 	 */
 	public function getUploadedFileEntityConfig($entity) {
 		foreach ($this->uploadedFileEntityConfigsByClass as $className => $entityConfig) {
@@ -35,7 +35,7 @@ class UploadedFileConfig {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException(
+		throw new \Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileEntityConfigNotFoundException(
 			$entity ? get_class($entity) : null
 		);
 	}
@@ -54,7 +54,7 @@ class UploadedFileConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
 	 */
 	public function getAllUploadedFileEntityConfigs() {
 		return $this->uploadedFileEntityConfigsByClass;

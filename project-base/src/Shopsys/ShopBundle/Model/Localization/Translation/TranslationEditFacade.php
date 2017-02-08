@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Translation;
+namespace Shopsys\ShopBundle\Model\Localization\Translation;
 
 use JMS\TranslationBundle\Model\Message as JmsMessage;
 use JMS\TranslationBundle\Model\MessageCatalogue as JmsMessageCatalogue;
-use SS6\ShopBundle\Component\Translation\PoDumper;
-use SS6\ShopBundle\Component\Translation\PoFileLoader;
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Component\Translation\PoDumper;
+use Shopsys\ShopBundle\Component\Translation\PoFileLoader;
+use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\MessageCatalogue;
@@ -30,17 +30,17 @@ class TranslationEditFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\PoFileLoader
+	 * @var \Shopsys\ShopBundle\Component\Translation\PoFileLoader
 	 */
 	private $poFileLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\PoDumper
+	 * @var \Shopsys\ShopBundle\Component\Translation\PoDumper
 	 */
 	private $poDumper;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 

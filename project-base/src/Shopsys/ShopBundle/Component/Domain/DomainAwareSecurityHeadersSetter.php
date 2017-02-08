@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class DomainAwareSecurityHeadersSetter {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

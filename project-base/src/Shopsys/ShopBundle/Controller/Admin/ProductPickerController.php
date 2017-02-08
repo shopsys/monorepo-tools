@@ -1,44 +1,44 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
-use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductPickerController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
 	 */
 	private $administratorGridFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade
 	 */
 	private $advancedSearchFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
 	 */
 	private $productListAdminFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
 	 */
 	private $productEditFacade;
 
@@ -103,7 +103,7 @@ class ProductPickerController extends AdminBaseController {
 	 */
 	private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters) {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
 		$advancedSearchForm = $this->advancedSearchFacade->createAdvancedSearchForm($request);
 		$advancedSearchData = $advancedSearchForm->getData();

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class TransportRepository {
 
@@ -35,7 +35,7 @@ class TransportRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAll() {
 		return $this->getQueryBuilderForAll()->getQuery()->getResult();
@@ -43,7 +43,7 @@ class TransportRepository {
 
 	/**
 	 * @param array $transportIds
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllByIds(array $transportIds) {
 		$dql = sprintf('SELECT t FROM %s t WHERE t.deleted = :deleted AND t.id IN (:trasportIds)', Transport::class);
@@ -55,7 +55,7 @@ class TransportRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllByDomainId($domainId) {
 		$qb = $this->getQueryBuilderForAll()
@@ -77,7 +77,7 @@ class TransportRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function getAllIncludingDeleted() {
 		return $this->getTransportRepository()->findAll();
@@ -85,7 +85,7 @@ class TransportRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Transport\Transport|null
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport|null
 	 */
 	public function findById($id) {
 		return $this->getTransportRepository()->find($id);
@@ -93,19 +93,19 @@ class TransportRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport
 	 */
 	public function getById($id) {
 		$transport = $this->findById($id);
 		if ($transport === null) {
-			throw new \SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException('Transport with ID ' . $id . ' not found.');
+			throw new \Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException('Transport with ID ' . $id . ' not found.');
 		}
 		return $transport;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Transport\TransportDomain[]
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\TransportDomain[]
 	 */
 	public function getTransportDomainsByTransport(Transport $transport) {
 		return $this->getTransportDomainRepository()->findBy(['transport' => $transport]);

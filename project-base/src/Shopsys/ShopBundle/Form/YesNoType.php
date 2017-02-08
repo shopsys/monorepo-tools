@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Transformers\NoopDataTransformer;
-use SS6\ShopBundle\Form\Extension\IndexedChoiceList;
+use Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer;
+use Shopsys\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class YesNoType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\NoopDataTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer
 	 */
 	private $noopDataTransformer;
 

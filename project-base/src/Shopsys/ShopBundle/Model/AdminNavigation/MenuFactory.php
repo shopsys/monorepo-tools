@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MenuFactory {
@@ -19,20 +19,20 @@ class MenuFactory {
 	private $authorizationChecker;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuLoader
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
 	 */
 	private $menuLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
 	 * @param string $configFilepath
 	 * @param \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authorizationChecker
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuLoader $menuLoader
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader $menuLoader
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		$configFilepath,
@@ -47,7 +47,7 @@ class MenuFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\Menu
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
 	 */
 	public function createMenuWithVisibleItems() {
 		$menu = $this->menuLoader->loadFromYaml($this->configFilepath);
@@ -58,8 +58,8 @@ class MenuFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem[] $menuItems
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $menuItems
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	private function filterVisibleRecursive(array $menuItems) {
 		$visibleMenuItems = [];
@@ -86,7 +86,7 @@ class MenuFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
 	 * @return bool
 	 */
 	private function isMenuItemVisible(MenuItem $menuItem) {

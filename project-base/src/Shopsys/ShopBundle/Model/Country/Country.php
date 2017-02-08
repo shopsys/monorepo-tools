@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country;
+namespace Shopsys\ShopBundle\Model\Country;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Model\Country\CountryData;
 
 /**
  * @ORM\Table(name="countries")
@@ -35,7 +35,7 @@ class Country {
 	private $domainId;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
 	 * @param int $domainId
 	 */
 	public function __construct(CountryData $countryData, $domainId) {
@@ -44,7 +44,7 @@ class Country {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
 	 */
 	public function edit(CountryData $countryData) {
 		$this->name = $countryData->name;

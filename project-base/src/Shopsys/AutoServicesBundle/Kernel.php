@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\AutoServicesBundle;
+namespace Shopsys\AutoServicesBundle;
 
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 

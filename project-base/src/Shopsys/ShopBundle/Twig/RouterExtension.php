@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class RouterExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+	 * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
 	 */
 	public function __construct(DomainRouterFactory $domainRouterFactory) {
 		$this->domainRouterFactory = $domainRouterFactory;

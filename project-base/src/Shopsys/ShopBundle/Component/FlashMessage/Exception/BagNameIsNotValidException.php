@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\FlashMessage\Exception;
+namespace Shopsys\ShopBundle\Component\FlashMessage\Exception;
 
 use Exception;
 

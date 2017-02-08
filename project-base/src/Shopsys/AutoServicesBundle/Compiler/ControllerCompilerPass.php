@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
-use SS6\AutoServicesBundle\Compiler\ServiceHelper;
+use Shopsys\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -14,12 +14,12 @@ use Symfony\Component\Finder\SplFileInfo;
 class ControllerCompilerPass implements CompilerPassInterface {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
 	 */
 	private $serviceHelper;
 
 	/**
-	 * @param \SS6\AutoServicesBundle\Compiler\ServiceHelper $serviceHelper
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ServiceHelper $serviceHelper
 	 */
 	public function __construct(ServiceHelper $serviceHelper) {
 		$this->serviceHelper = $serviceHelper;

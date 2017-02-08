@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Component\String\HashGenerator;
-use SS6\ShopBundle\Model\Order\OrderRepository;
+use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\ShopBundle\Model\Order\OrderRepository;
 
 class OrderHashGeneratorRepository {
 
@@ -11,12 +11,12 @@ class OrderHashGeneratorRepository {
 	const MAX_GENERATE_TRIES = 100;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
 	 */
 	private $orderRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\String\HashGenerator
+	 * @var \Shopsys\ShopBundle\Component\String\HashGenerator
 	 */
 	private $hashGenerator;
 
@@ -38,7 +38,7 @@ class OrderHashGeneratorRepository {
 			$order = $this->orderRepository->findByUrlHashIncludingDeletedOrders($hash);
 			$triesCount++;
 			if ($triesCount > self::MAX_GENERATE_TRIES) {
-				throw new \SS6\ShopBundle\Model\Order\Exception\OrderHashGenerateException('Trying generate hash reached the limit.');
+				throw new \Shopsys\ShopBundle\Model\Order\Exception\OrderHashGenerateException('Trying generate hash reached the limit.');
 			}
 		} while ($order !== null);
 		return $hash;

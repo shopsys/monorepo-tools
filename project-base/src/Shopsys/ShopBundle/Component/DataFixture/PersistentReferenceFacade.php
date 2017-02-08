@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture;
+namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 
 class PersistentReferenceFacade {
 
@@ -13,18 +13,18 @@ class PersistentReferenceFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository
 	 */
 	private $persistentReferenceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReference
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReference
 	 */
 	private $persistentReferencesByName = [];
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
 	 */
 	public function __construct(EntityManager $em, PersistentReferenceRepository $persistentReferenceRepository) {
 		$this->em = $em;
@@ -40,7 +40,7 @@ class PersistentReferenceFacade {
 		$entity = $this->em->find($persistentReference->getEntityName(), $persistentReference->getEntityId());
 
 		if ($entity === null) {
-			throw new \SS6\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException($name);
+			throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException($name);
 		}
 
 		return $entity;
@@ -52,7 +52,7 @@ class PersistentReferenceFacade {
 	 */
 	public function persistReference($name, $object) {
 		if (!is_object($object)) {
-			throw new \SS6\ShopBundle\Component\DataFixture\Exception\ObjectRequiredException($object);
+			throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\ObjectRequiredException($object);
 		}
 
 		$entityName = get_class($object);
@@ -61,7 +61,7 @@ class PersistentReferenceFacade {
 			$objectId = $object->getId();
 
 			if ($objectId === null) {
-				throw new \SS6\ShopBundle\Component\DataFixture\Exception\EntityIdIsNotSetException($name, $object);
+				throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\EntityIdIsNotSetException($name, $object);
 			}
 
 			if (array_key_exists($name, $this->persistentReferencesByName)) {
@@ -74,7 +74,7 @@ class PersistentReferenceFacade {
 			$this->em->flush($persistentReference);
 		} else {
 			$message = 'Entity "' . $entityName . '" does not have a method "getId", which is necessary for persistent references.';
-			throw new \SS6\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
+			throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
 		}
 	}
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Performance\Exception;
+namespace Shopsys\ShopBundle\DataFixtures\Performance\Exception;
 
 use Exception;
-use SS6\ShopBundle\DataFixtures\Performance\Exception\PerformanceException;
+use Shopsys\ShopBundle\DataFixtures\Performance\Exception\PerformanceException;
 
 class UndefinedArrayKeyException extends Exception implements PerformanceException {
 

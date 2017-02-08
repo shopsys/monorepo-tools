@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
-use SS6\ShopBundle\Component\Grid\DataSourceInterface;
-use SS6\ShopBundle\Component\Grid\Grid;
-use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
+use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
@@ -23,7 +23,7 @@ class GridFactory {
 	private $router;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
 	 */
 	private $routeCsrfProtector;
 
@@ -33,7 +33,7 @@ class GridFactory {
 	private $twig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService
+	 * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService
 	 */
 	private $gridOrderingService;
 
@@ -53,8 +53,8 @@ class GridFactory {
 
 	/**
 	 * @param string $gridId
-	 * @param \SS6\ShopBundle\Component\Grid\DataSourceInterface $dataSource
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @param \Shopsys\ShopBundle\Component\Grid\DataSourceInterface $dataSource
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create($gridId, DataSourceInterface $dataSource) {
 		return new Grid(

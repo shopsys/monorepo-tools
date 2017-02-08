@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderTotalPrice;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderTotalPrice;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class OrderPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
 	 */
 	private $rounding;
 
@@ -32,8 +32,8 @@ class OrderPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
-	 * @return \SS6\ShopBundle\Model\Order\OrderTotalPrice
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
+	 * @return \Shopsys\ShopBundle\Model\Order\OrderTotalPrice
 	 */
 	public function getOrderTotalPrice(Order $order) {
 		$priceWithVat = 0;
@@ -55,10 +55,10 @@ class OrderPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $orderTotalPrice
-	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $orderTotalPrice
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function calculateOrderRoundingPrice(
 		Payment $payment,

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country;
+namespace Shopsys\ShopBundle\Model\Country;
 
 class CountryData {
 
@@ -17,7 +17,7 @@ class CountryData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country $country
+	 * @param \Shopsys\ShopBundle\Model\Country\Country $country
 	 */
 	public function setFromEntity(Country $country) {
 		$this->name = $country->getName();

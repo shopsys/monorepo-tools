@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat\Exception;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Pricing\Vat\Exception\VatException;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatException;
 
 class VatWithReplacedDeleteException extends Exception implements VatException {
 

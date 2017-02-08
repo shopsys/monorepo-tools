@@ -1,83 +1,83 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Grid\DataSourceInterface;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
-use SS6\ShopBundle\Model\Order\Item\OrderItemFacade;
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Grid\DataSourceInterface;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Order\OrderFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
 	 */
 	private $administratorGridFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderFacade
 	 */
 	private $advancedSearchOrderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
 	 */
 	private $orderItemPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
 	 */
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Order\OrderFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Order\OrderFormTypeFactory
 	 */
 	private $orderFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItemFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemFacade
 	 */
 	private $orderItemFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $transportEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -135,11 +135,11 @@ class OrderController extends AdminBaseController {
 					]
 				);
 				return $this->redirectToRoute('admin_order_list');
-			} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {
 				$this->getFlashMessageSender()->addErrorFlash(
 					t('Entered customer not found, please check entered data.')
 				);
-			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Unable to send updating e-mail'));
 			}
 		}
@@ -201,7 +201,7 @@ class OrderController extends AdminBaseController {
 	 */
 	public function listAction(Request $request) {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
 		$advancedSearchForm = $this->advancedSearchOrderFacade->createAdvancedSearchOrderForm($request);
 		$advancedSearchData = $advancedSearchForm->getData();
@@ -284,7 +284,7 @@ class OrderController extends AdminBaseController {
 					'number' => $orderNumber,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Order\Exception\OrderNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected order doesn\'t exist.'));
 		}
 

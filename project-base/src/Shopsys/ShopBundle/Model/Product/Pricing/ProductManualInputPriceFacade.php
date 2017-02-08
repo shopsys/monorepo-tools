@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductManualInputPriceFacade {
 
@@ -17,17 +17,17 @@ class ProductManualInputPriceFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository
 	 */
 	private $productManualInputPriceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService
 	 */
 	private $productManualInputPriceService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
 	 */
 	private $pricingGroupFacade;
 
@@ -44,8 +44,8 @@ class ProductManualInputPriceFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $inputPrice
 	 */
 	public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice) {
@@ -60,15 +60,15 @@ class ProductManualInputPriceFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
 	 */
 	public function getAllByProduct(Product $product) {
 		return $this->productManualInputPriceRepository->getByProduct($product);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	public function deleteByProduct(Product $product) {
 		$manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);

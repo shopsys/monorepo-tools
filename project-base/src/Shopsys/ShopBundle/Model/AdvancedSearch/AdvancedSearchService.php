@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchService {
 
 	const TEMPLATE_RULE_FORM_KEY = '__template__';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig
 	 */
 	private $advancedSearchConfig;
 
@@ -52,7 +52,7 @@ class AdvancedSearchService {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchData
+	 * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchData
 	 */
 	public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
 		$rulesDataByFilterName = [];

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Translation;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
-use SS6\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer;
+use Shopsys\ShopBundle\Component\Translation\Translator;
 use Symfony\Component\Translation\IdentityTranslator;
 use Symfony\Component\Translation\MessageCatalogue;
 use Symfony\Component\Translation\MessageSelector;

@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\BillingAddressData;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Customer\BillingAddress;
+use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserData;
 
 class UserTest extends PHPUnit_Framework_TestCase {
 

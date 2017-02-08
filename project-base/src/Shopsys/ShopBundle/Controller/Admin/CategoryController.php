@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Category\CategoryDataFactory;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -20,27 +20,27 @@ class CategoryController extends AdminBaseController {
 	const ALL_DOMAINS = 0;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryDataFactory
 	 */
 	private $categoryDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Category\CategoryFormTypeFactory
 	 */
 	private $categoryFormTypeFactory;
 
@@ -158,7 +158,7 @@ class CategoryController extends AdminBaseController {
 		if ($domainId !== self::ALL_DOMAINS) {
 			try {
 				$this->domain->getDomainConfigById($domainId);
-			} catch (\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $ex) {
 				$domainId = self::ALL_DOMAINS;
 			}
 		}
@@ -213,7 +213,7 @@ class CategoryController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected category doesn\'t exist.'));
 		}
 

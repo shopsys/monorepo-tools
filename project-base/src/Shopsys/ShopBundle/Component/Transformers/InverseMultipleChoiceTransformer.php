@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Transformers;
+namespace Shopsys\ShopBundle\Component\Transformers;
 
 use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\DataTransformerInterface;

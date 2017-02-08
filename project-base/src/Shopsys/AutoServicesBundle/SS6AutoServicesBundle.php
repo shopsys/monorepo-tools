@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\AutoServicesBundle;
+namespace Shopsys\AutoServicesBundle;
 
-use SS6\AutoServicesBundle\Compiler\AutowiringCompilerPass;
-use SS6\AutoServicesBundle\Compiler\ClassConstructorFiller;
-use SS6\AutoServicesBundle\Compiler\ControllerCompilerPass;
-use SS6\AutoServicesBundle\Compiler\ParameterProcessor;
-use SS6\AutoServicesBundle\Compiler\ServiceHelper;
+use Shopsys\AutoServicesBundle\Compiler\AutowiringCompilerPass;
+use Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller;
+use Shopsys\AutoServicesBundle\Compiler\ControllerCompilerPass;
+use Shopsys\AutoServicesBundle\Compiler\ParameterProcessor;
+use Shopsys\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

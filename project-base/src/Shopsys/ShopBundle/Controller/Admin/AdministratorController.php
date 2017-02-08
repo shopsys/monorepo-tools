@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
-use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
-use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Administrator\AdministratorFormType;
+use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends AdminBaseController {
@@ -20,22 +20,22 @@ class AdministratorController extends AdminBaseController {
 	const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade
 	 */
 	private $administratorFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
 	 */
 	private $administratorActivityFacade;
 
@@ -111,14 +111,14 @@ class AdministratorController extends AdminBaseController {
 				);
 				return $this->redirectToRoute('admin_administrator_list');
 
-			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
 					[
 						'name' => $administratorData->username,
 					]
 				);
-			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('Administrator with login name <strong>{{ name }}</strong> already exists'),
 					[
@@ -180,14 +180,14 @@ class AdministratorController extends AdminBaseController {
 				);
 				return $this->redirectToRoute('admin_administrator_list');
 
-			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
 					[
 						'name' => $administratorData->username,
 					]
 				);
-			} catch (\SS6\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateUserNameException $ex) {
 				$this->getFlashMessageSender()->addErrorFlashTwig(
 					t('Administrator with login name <strong>{{ name }}</strong> already exists'),
 					[
@@ -223,16 +223,16 @@ class AdministratorController extends AdminBaseController {
 					'name' => $realName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DeletingSelfException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('You can\'t delete yourself.'));
-		} catch (\SS6\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException $ex) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
 				t('Administrator <strong>{{ name }}</strong> is the only one and can\'t be deleted.'),
 				[
 					'name' => $this->administratorFacade->getById($id)->getRealName(),
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected administrated doesn\'t exist.'));
 		}
 

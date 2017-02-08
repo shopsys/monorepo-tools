@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
-use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
+use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class VatDeletionCronModule implements IteratedCronModuleInterface {
@@ -15,7 +15,7 @@ class VatDeletionCronModule implements IteratedCronModuleInterface {
 	private $logger;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 

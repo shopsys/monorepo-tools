@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\String;
+namespace Shopsys\ShopBundle\Component\String;
 
 class HashGenerator {
 
@@ -40,7 +40,7 @@ class HashGenerator {
 	private function getRandomUnsigned16PossiblyOutOfRange($max) {
 		$iv = mcrypt_create_iv(2, MCRYPT_DEV_URANDOM);
 		if ($iv === false) {
-			throw new \SS6\ShopBundle\Component\String\Exception\HashGenerationFailedException();
+			throw new \Shopsys\ShopBundle\Component\String\Exception\HashGenerationFailedException();
 		}
 
 		$unpacked16 = unpack('v', $iv);

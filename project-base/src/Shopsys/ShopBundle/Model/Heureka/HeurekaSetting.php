@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Heureka;
+namespace Shopsys\ShopBundle\Model\Heureka;
 
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class HeurekaSetting {
 
@@ -10,12 +10,12 @@ class HeurekaSetting {
 	const HEUREKA_WIDGET_CODE = 'heurekaWidgetCode';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(Setting $setting) {
 		$this->setting = $setting;

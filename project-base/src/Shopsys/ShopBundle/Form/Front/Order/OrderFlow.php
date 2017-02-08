@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Order;
+namespace Shopsys\ShopBundle\Form\Front\Order;
 
 use Craue\FormFlowBundle\Form\FormFlow;
 use Craue\FormFlowBundle\Form\StepInterface;
-use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use SS6\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
+use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
+use Shopsys\ShopBundle\Form\Front\Order\TransportAndPaymentFormType;
 
 class OrderFlow extends FormFlow {
 	/**
@@ -14,24 +14,24 @@ class OrderFlow extends FormFlow {
 	protected $allowDynamicStepNavigation = true;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	private $payments;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function setFormTypesData(array $transports, array $payments, array $countries) {
 		$this->transports = $transports;

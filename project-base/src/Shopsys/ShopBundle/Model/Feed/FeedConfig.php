@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 
 class FeedConfig {
 
@@ -23,7 +23,7 @@ class FeedConfig {
 	private $templateFilepath;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	private $feedItemRepository;
 
@@ -31,7 +31,7 @@ class FeedConfig {
 	 * @param string $label
 	 * @param string $name
 	 * @param string $templateFilepath
-	 * @param \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface $feedItemRepository
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface $feedItemRepository
 	 */
 	public function __construct(
 		$label,
@@ -60,7 +60,7 @@ class FeedConfig {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedHash
 	 *
 	 * @return string
@@ -77,7 +77,7 @@ class FeedConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
 	 */
 	public function getFeedItemRepository() {
 		return $this->feedItemRepository;

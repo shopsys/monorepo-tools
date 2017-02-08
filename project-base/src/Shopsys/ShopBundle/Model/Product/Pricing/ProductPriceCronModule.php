@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
 class ProductPriceCronModule implements IteratedCronModuleInterface {
@@ -14,7 +14,7 @@ class ProductPriceCronModule implements IteratedCronModuleInterface {
 	private $logger;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator
 	 */
 	private $productPriceRecalculator;
 

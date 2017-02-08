@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\Model\Payment\PaymentEditData;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
 
 class PaymentDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -72,7 +72,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 
 	/**
 	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
 	 * @param array $transportsReferenceNames
 	 */
 	private function createPayment(
@@ -81,7 +81,7 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
 		array $transportsReferenceNames
 	) {
 		$paymentEditFacade = $this->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 
 		$paymentEditData->paymentData->transports = [];
 		foreach ($transportsReferenceNames as $transportReferenceName) {

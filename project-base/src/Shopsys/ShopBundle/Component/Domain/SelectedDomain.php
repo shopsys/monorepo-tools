@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class SelectedDomain {
@@ -10,7 +10,7 @@ class SelectedDomain {
 	const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -20,7 +20,7 @@ class SelectedDomain {
 	private $session;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
 	 */
 	public function __construct(Domain $domain, Session $session) {
@@ -47,7 +47,7 @@ class SelectedDomain {
 		try {
 			$domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);
 			return $this->domain->getDomainConfigById($domainId);
-		} catch (\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $e) {
 			$allDomains = $this->domain->getAll();
 			return reset($allDomains);
 		}

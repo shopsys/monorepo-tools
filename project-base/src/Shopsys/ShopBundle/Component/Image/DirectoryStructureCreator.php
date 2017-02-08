@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image;
+namespace Shopsys\ShopBundle\Component\Image;
 
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
@@ -36,8 +36,8 @@ class DirectoryStructureCreator {
 	/**
 	 * @param string $imageDir
 	 * @param string $domainImageDir
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
-	 * @param \SS6\ShopBundle\Component\Image\ImageLocator $imageLocator
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\ImageLocator $imageLocator
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
 	public function __construct(
@@ -85,7 +85,7 @@ class DirectoryStructureCreator {
 	/**
 	 * @param string $entityName
 	 * @param string|null $type
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
 	 * @return string[]
 	 */
 	private function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs) {

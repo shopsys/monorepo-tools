@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LayoutPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LoginPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LayoutPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LoginPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CustomerLoginCest {
 

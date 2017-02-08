@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Tests\Performance\Page;
+namespace Shopsys\ShopBundle\Tests\Unit\Tests\Performance\Page;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Tests\Performance\JmeterCsvReporter;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
+use Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 
@@ -55,7 +55,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]
 	 */
 	private function getPerformanceTestSamples() {
 		$performanceTestSamples = [];
@@ -108,7 +108,7 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter
 	 */
 	private function createPerformanceResultsCsvExporter() {
 		return new PerformanceResultsCsvExporter(new JmeterCsvReporter());

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Localization;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Localization;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
 
 class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl\Exception;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
 
 class FriendlyUrlRouteNotSupportedException extends Exception implements FriendlyUrlException {
 

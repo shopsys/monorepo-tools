@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category;
+namespace Shopsys\ShopBundle\Model\Category;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -13,7 +13,7 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 class CategoryTranslation extends AbstractTranslation {
 
 	/**
-	 * @Prezent\Translatable(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Category\Category")
 	 */
 	protected $translatable;
 

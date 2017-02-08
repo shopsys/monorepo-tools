@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatGridFactory implements GridFactoryInterface {
 
@@ -18,17 +18,17 @@ class VatGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
 	 */
 	private $priceCalculation;
 
@@ -45,7 +45,7 @@ class VatGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

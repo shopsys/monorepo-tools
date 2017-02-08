@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
-use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class NewsletterController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterFacade
+	 * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
 	 */
 	private $newsletterFacade;
 

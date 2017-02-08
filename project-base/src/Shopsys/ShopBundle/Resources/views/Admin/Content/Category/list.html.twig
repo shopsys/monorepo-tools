@@ -23,10 +23,10 @@
 							<a href="{{ url('admin_category_edit', {id: categoryDetail.category.id}) }}" class="form-tree__item__control">
 								<i class="svg svg-pencil"></i>
 							</a>
-							{% set csrfTokenId = constant('SS6\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_ID_PREFIX') ~ 'admin_category_delete' %}
+							{% set csrfTokenId = constant('Shopsys\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_ID_PREFIX') ~ 'admin_category_delete' %}
 							{% set categoryDeleteUrl = url('admin_category_delete', {
 								id: categoryDetail.category.id,
-								(constant('SS6\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER')): csrf_token(csrfTokenId)
+								(constant('Shopsys\\ShopBundle\\Component\\Router\\Security\\RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER')): csrf_token(csrfTokenId)
 							}) %}
 							<a
 								href="{{ categoryDeleteUrl }}"

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_category_domains")
@@ -13,19 +13,19 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductCategoryDomain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product", inversedBy="productCategoryDomains")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product", inversedBy="productCategoryDomains")
 	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category
+	 * @var \Shopsys\ShopBundle\Model\Category\Category
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category")
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
 	 */
 	private $category;
@@ -39,8 +39,8 @@ class ProductCategoryDomain {
 	private $domainId;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 */
 	public function __construct(Product $product, Category $category, $domainId) {
@@ -50,7 +50,7 @@ class ProductCategoryDomain {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \Shopsys\ShopBundle\Model\Category\Category
 	 */
 	public function getCategory() {
 		return $this->category;

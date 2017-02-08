@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constraints;
+namespace Shopsys\ShopBundle\Component\Constraints;
 
-use SS6\ShopBundle\Component\Constraints\UniqueCollection;
+use Shopsys\ShopBundle\Component\Constraints\UniqueCollection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -45,7 +45,7 @@ class UniqueCollectionValidator extends ConstraintValidator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Constraints\UniqueCollection $constraint
+	 * @param \Shopsys\ShopBundle\Component\Constraints\UniqueCollection $constraint
 	 * @param mixed $value1
 	 * @param mixed $value2
 	 * @return bool

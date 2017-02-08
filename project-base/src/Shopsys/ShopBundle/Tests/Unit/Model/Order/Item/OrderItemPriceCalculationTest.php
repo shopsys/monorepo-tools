@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\OrderItem;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\OrderItem;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Item\OrderItemData;
-use SS6\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
 

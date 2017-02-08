@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception;
+namespace Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConstantCompilerException;
+use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConstantCompilerException;
 
 class ConstantNotFoundException extends Exception implements JsConstantCompilerException {
 

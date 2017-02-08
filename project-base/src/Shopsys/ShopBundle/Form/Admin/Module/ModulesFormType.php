@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Module;
+namespace Shopsys\ShopBundle\Form\Admin\Module;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Module\ModuleList;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Module\ModuleList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -13,7 +13,7 @@ class ModulesFormType extends AbstractType {
 	const MODULES_SUBFORM_NAME = 'modules';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleList
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleList
 	 */
 	private $moduleList;
 

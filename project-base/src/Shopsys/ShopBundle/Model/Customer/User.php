@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\Security\Roles;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -59,15 +59,15 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	private $lastActivity;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\BillingAddress
-	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\BillingAddress")
+	 * @var \Shopsys\ShopBundle\Model\Customer\BillingAddress
+	 * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\BillingAddress")
 	 * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
 	 */
 	private $billingAddress;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
-	 * @ORM\OneToOne(targetEntity="SS6\ShopBundle\Model\Customer\DeliveryAddress")
+	 * @var \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+	 * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\DeliveryAddress")
 	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $deliveryAddress;
@@ -91,8 +91,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	private $domainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup")
 	 * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
 	 */
 	private $pricingGroup;
@@ -110,9 +110,9 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	private $resetPasswordHashValidThrough;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+	 * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
+	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 */
 	public function __construct(
 		UserData $userData,
@@ -130,7 +130,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
+	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
 	 */
 	public function edit(UserData $userData) {
 		$this->firstName = $userData->firstName;
@@ -163,7 +163,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
 	 */
 	public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
 		$this->deliveryAddress = $deliveryAddress;
@@ -255,14 +255,14 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
 	 */
 	public function getBillingAddress() {
 		return $this->billingAddress;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
 	 */
 	public function getDeliveryAddress() {
 		return $this->deliveryAddress;
@@ -283,7 +283,7 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getPricingGroup() {
 		return $this->pricingGroup;

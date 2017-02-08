@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Css\CssFacade;
+use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class WysiwygType extends AbstractTypeExtension {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Css\CssFacade
+	 * @var \Shopsys\ShopBundle\Component\Css\CssFacade
 	 */
 	private $cssFacade;
 

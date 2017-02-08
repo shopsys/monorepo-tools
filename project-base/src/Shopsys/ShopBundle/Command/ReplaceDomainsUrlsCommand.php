@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\DomainUrlService;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainUrlService;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -23,11 +23,11 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$domainUrlService = $this->getContainer()->get(DomainUrlService::class);
-		/* @var $domainUrlService \SS6\ShopBundle\Component\Domain\DomainUrlService */
+		/* @var $domainUrlService \Shopsys\ShopBundle\Component\Domain\DomainUrlService */
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
 		foreach ($domain->getAll() as $domainConfig) {
 			$domainConfigUrl = $domainConfig->getUrl();

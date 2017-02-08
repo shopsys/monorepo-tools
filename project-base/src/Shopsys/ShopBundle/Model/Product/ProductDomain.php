@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_domains")
@@ -13,10 +13,10 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductDomain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $product;
@@ -98,7 +98,7 @@ class ProductDomain {
 	private $zboziCpcSearch;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $domainId
 	 * @param bool $showInZboziFeed
 	 */
@@ -144,7 +144,7 @@ class ProductDomain {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 * @return string
 	 */
 	public function getSeoTitleForHtml(Domain $domain) {
@@ -185,7 +185,7 @@ class ProductDomain {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		return $this->product;

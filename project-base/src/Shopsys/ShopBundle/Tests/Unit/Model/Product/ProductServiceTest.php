@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\InputPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductService;
 
 class ProductServiceTest extends PHPUnit_Framework_TestCase {
 

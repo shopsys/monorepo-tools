@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\GeneratorBundle;
+namespace Shopsys\GeneratorBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

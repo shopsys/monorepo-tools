@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\ErrorService;
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Form\Front\Cart\AddProductFormType;
-use SS6\ShopBundle\Form\Front\Cart\CartFormType;
-use SS6\ShopBundle\Model\Cart\AddProductResult;
-use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Module\ModuleList;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
-use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
+use Shopsys\ShopBundle\Component\Controller\ErrorService;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Form\Front\Cart\AddProductFormType;
+use Shopsys\ShopBundle\Form\Front\Cart\CartFormType;
+use Shopsys\ShopBundle\Model\Cart\AddProductResult;
+use Shopsys\ShopBundle\Model\Cart\CartFacade;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade;
+use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends FrontBaseController {
@@ -25,42 +25,42 @@ class CartController extends FrontBaseController {
 	const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryFacade
 	 */
 	private $productAccessoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
+	 * @var \Shopsys\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade
 	 */
 	private $freeTransportAndPaymentFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
 	private $orderPreviewFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Controller\ErrorService
+	 * @var \Shopsys\ShopBundle\Component\Controller\ErrorService
 	 */
 	private $errorService;
 
@@ -114,7 +114,7 @@ class CartController extends FrontBaseController {
 				if (!$request->get(self::RECALCULATE_ONLY_PARAMETER_NAME, false)) {
 					return $this->redirectToRoute('front_order_index');
 				}
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$invalidCart = true;
 			}
 		} elseif ($form->isSubmitted()) {
@@ -160,7 +160,7 @@ class CartController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param string $type
 	 */
 	public function addProductFormAction(Product $product, $type = 'normal') {
@@ -193,11 +193,11 @@ class CartController extends FrontBaseController {
 				$addProductResult = $this->cartFacade->addProductToCart($formData['productId'], (int)$formData['quantity']);
 
 				$this->sendAddProductResultFlashMessage($addProductResult);
-			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Selected product no longer available or doesn\'t exist.'));
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Please enter valid quantity you want to add to cart.'));
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Unable to add product to cart'));
 			}
 		} else {
@@ -251,11 +251,11 @@ class CartController extends FrontBaseController {
 					'accessoryDetails' => $accessoryDetails,
 					'ACCESSORIES_ON_BUY' => ModuleList::ACCESSORIES_ON_BUY,
 				]);
-			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Selected product no longer available or doesn\'t exist.'));
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Please enter valid quantity you want to add to cart.'));
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\CartException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\CartException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Unable to add product to cart'));
 			}
 		} else {
@@ -275,7 +275,7 @@ class CartController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\AddProductResult $addProductResult
+	 * @param \Shopsys\ShopBundle\Model\Cart\AddProductResult $addProductResult
 	 */
 	private function sendAddProductResultFlashMessage(
 		AddProductResult $addProductResult
@@ -319,7 +319,7 @@ class CartController extends FrontBaseController {
 					t('Product {{ name }} removed from cart'),
 					['name' => $productName]
 				);
-			} catch (\SS6\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException $ex) {
 				$this->getFlashMessageSender()->addErrorFlash(t('Unable to remove item from cart. The item is probably already removed.'));
 			}
 		} else {

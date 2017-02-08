@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\HttpFoundation;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\HttpFoundation;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\HttpFoundation\FragmentHandler;
+use Shopsys\ShopBundle\Component\HttpFoundation\FragmentHandler;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;

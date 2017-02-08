@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Config;
+namespace Shopsys\ShopBundle\Component\Domain\Config;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainsUrlsConfigDefinition;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainsUrlsConfigDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
@@ -24,7 +24,7 @@ class DomainsConfigLoader {
 	/**
 	 * @param string $domainsConfigFilepath
 	 * @param string $domainsUrlsConfigFilepath
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
 		$processedConfig = $this->getProcessedConfig($domainsConfigFilepath, new DomainsConfigDefinition());
@@ -35,7 +35,7 @@ class DomainsConfigLoader {
 		if (!$this->isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)) {
 			$message =
 				'File ' . $domainsUrlsConfigFilepath . ' does not contain urls for all domains listed in ' . $domainsConfigFilepath;
-			throw new \SS6\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
+			throw new \Shopsys\ShopBundle\Component\Domain\Config\Exception\DomainConfigsDoNotMatchException($message);
 		}
 		$processedConfigsWithUrlsByDomainId = $this->addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId);
 
@@ -46,7 +46,7 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param array $processedConfigsByDomainId
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private function loadDomainConfigsFromArray($processedConfigsByDomainId) {
 		$domainConfigs = [];
@@ -60,7 +60,7 @@ class DomainsConfigLoader {
 
 	/**
 	 * @param array $domainConfig
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private function processDomainConfigArray(array $domainConfig) {
 		return new DomainConfig(

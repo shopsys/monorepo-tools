@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile\Config\Exception;
+namespace Shopsys\ShopBundle\Component\UploadedFile\Config\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfigException;
 
 class UploadedFileEntityConfigNotFoundException extends Exception implements UploadedFileConfigException {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Flag;
+namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Flag\Flag;
+use Shopsys\ShopBundle\Model\Product\Flag\Flag;
 
 class FlagRepository {
 
@@ -28,7 +28,7 @@ class FlagRepository {
 
 	/**
 	 * @param int $flagId
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag|null
 	 */
 	public function findById($flagId) {
 		return $this->getFlagRepository()->find($flagId);
@@ -36,20 +36,20 @@ class FlagRepository {
 
 	/**
 	 * @param int $flagId
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
 	 */
 	public function getById($flagId) {
 		$flag = $this->findById($flagId);
 
 		if ($flag === null) {
-			throw new \SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException('Flag with ID ' . $flagId . ' not found.');
+			throw new \Shopsys\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException('Flag with ID ' . $flagId . ' not found.');
 		}
 
 		return $flag;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getAll() {
 		return $this->getFlagRepository()->findBy([], ['id' => 'asc']);

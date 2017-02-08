@@ -1,6 +1,6 @@
 <?php
 
-use SS6\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Component\Translation\Translator;
 
 /**
  * @param string $id

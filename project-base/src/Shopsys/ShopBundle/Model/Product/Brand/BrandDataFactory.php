@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 
 class BrandDataFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -28,8 +28,8 @@ class BrandDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand $brand
-	 * @return \SS6\ShopBundle\Model\Product\Brand\BrandData
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData
 	 */
 	public function createFromBrand(Brand $brand) {
 		$brandData = new BrandData();

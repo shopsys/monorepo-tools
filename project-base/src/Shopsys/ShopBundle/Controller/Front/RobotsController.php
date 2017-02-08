@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Sitemap\SitemapService;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\HttpFoundation\Response;
 
 class RobotsController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapService
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapService
 	 */
 	private $sitemapService;
 

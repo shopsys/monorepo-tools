@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router;
+namespace Shopsys\ShopBundle\Component\Router;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
+use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
@@ -13,17 +13,17 @@ use Symfony\Component\Routing\Router;
 class DomainRouterFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $localizedRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory
 	 */
 	private $friendlyUrlRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -58,14 +58,14 @@ class DomainRouterFactory {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Component\Router\DomainRouter
+	 * @return \Shopsys\ShopBundle\Component\Router\DomainRouter
 	 */
 	public function getRouter($domainId) {
 		if (!array_key_exists($domainId, $this->routersByDomainId)) {
 			try {
 				$domainConfig = $this->domain->getDomainConfigById($domainId);
-			} catch (\SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $exception) {
-				throw new \SS6\ShopBundle\Component\Router\Exception\RouterNotResolvedException('', $exception);
+			} catch (\Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException $exception) {
+				throw new \Shopsys\ShopBundle\Component\Router\Exception\RouterNotResolvedException('', $exception);
 			}
 			$context = $this->getRequestContextByDomainConfig($domainConfig);
 			$basicRouter = $this->getBasicRouter($domainConfig);
@@ -83,7 +83,7 @@ class DomainRouterFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \Symfony\Component\Routing\Router
 	 */
 	private function getBasicRouter(DomainConfig $domainConfig) {
@@ -96,7 +96,7 @@ class DomainRouterFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return \Symfony\Component\Routing\RequestContext
 	 */
 	private function getRequestContextByDomainConfig(DomainConfig $domainConfig) {
@@ -122,8 +122,8 @@ class DomainRouterFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
 	 */
 	public function getFriendlyUrlRouter(DomainConfig $domainConfig) {
 		$context = $this->getRequestContextByDomainConfig($domainConfig);

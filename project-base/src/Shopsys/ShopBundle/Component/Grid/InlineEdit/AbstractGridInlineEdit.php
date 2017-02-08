@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\InlineEdit;
+namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,13 +15,13 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactoryInterface
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface
 	 */
 	private $gridFactory;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Component\Grid\GridFactoryInterface $gridFactory
+	 * @param \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface $gridFactory
 	 */
 	public function __construct(FormFactory $formFactory, GridFactoryInterface $gridFactory) {
 		$this->formFactory = $formFactory;
@@ -54,7 +54,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 				/* @var $error \Symfony\Component\Form\FormError */
 				$formErrors[] = $error->getMessage();
 			}
-			throw new \SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
+			throw new \Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException($formErrors);
 		}
 
 		$formData = $form->getData();
@@ -68,7 +68,7 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function getGrid() {
 		$grid = $this->gridFactory->create();

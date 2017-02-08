@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Customer\CustomerService;
-use SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderRepository;
-use SS6\ShopBundle\Model\Order\OrderService;
+use Shopsys\ShopBundle\Model\Customer\CustomerService;
+use Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderRepository;
+use Shopsys\ShopBundle\Model\Order\OrderService;
 
 class CustomerFacade {
 
@@ -17,37 +17,37 @@ class CustomerFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
 	 */
 	private $orderRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerService
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerService
 	 */
 	private $customerService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade
 	 */
 	private $customerMailFacade;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Order\OrderRepository $orderRepository
-	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \SS6\ShopBundle\Model\Order\OrderService $orderService
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerService $customerService
-	 * @param \SS6\ShopBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderRepository $orderRepository
+	 * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderService $orderService
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerService $customerService
+	 * @param \Shopsys\ShopBundle\Model\Customer\Mail\CustomerMailFacade $customerMailFacade
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -67,15 +67,15 @@ class CustomerFacade {
 
 	/**
 	 * @param int $userId
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function getUserById($userId) {
 		return $this->userRepository->getUserById($userId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserData $userData
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function register(UserData $userData) {
 		$userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->email, $userData->domainId);
@@ -99,8 +99,8 @@ class CustomerFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function create(CustomerData $customerData) {
 		$toFlush = [];
@@ -139,8 +139,8 @@ class CustomerFacade {
 
 	/**
 	 * @param int $userId
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	private function edit($userId, CustomerData $customerData) {
 		$user = $this->userRepository->getUserById($userId);
@@ -169,8 +169,8 @@ class CustomerFacade {
 
 	/**
 	 * @param int $userId
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function editByAdmin($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
@@ -188,8 +188,8 @@ class CustomerFacade {
 
 	/**
 	 * @param int $userId
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerData $customerData
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function editByCustomer($userId, CustomerData $customerData) {
 		$user = $this->edit($userId, $customerData);
@@ -210,8 +210,8 @@ class CustomerFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 */
 	public function amendCustomerDataFromOrder(User $user, Order $order) {
 		$this->edit(

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\MassAction\Exception;
+namespace Shopsys\ShopBundle\Model\Product\MassAction\Exception;
 
 use Exception;
 

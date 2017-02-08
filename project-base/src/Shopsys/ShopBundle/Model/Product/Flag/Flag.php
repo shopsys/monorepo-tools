@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Flag;
+namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Product\Flag\FlagData;
-use SS6\ShopBundle\Model\Product\Flag\FlagTranslation;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation;
 
 /**
  * @ORM\Table(name="flags")
@@ -25,9 +25,9 @@ class Flag extends AbstractTranslatableEntity {
 	protected $id;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\Flag\FlagTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation")
 	 */
 	protected $translations;
 
@@ -46,7 +46,7 @@ class Flag extends AbstractTranslatableEntity {
 	private $visible;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	public function __construct(FlagData $flagData) {
 		$this->translations = new ArrayCollection();
@@ -85,7 +85,7 @@ class Flag extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	private function setTranslations(FlagData $flagData) {
 		foreach ($flagData->name as $locale => $name) {
@@ -94,14 +94,14 @@ class Flag extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Flag\FlagTranslation
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation
 	 */
 	protected function createTranslation() {
 		return new FlagTranslation();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Flag\FlagData $flagData
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
 	 */
 	public function edit(FlagData $flagData) {
 		$this->setTranslations($flagData);

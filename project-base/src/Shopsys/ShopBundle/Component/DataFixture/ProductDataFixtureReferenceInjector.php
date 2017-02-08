@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture;
+namespace Shopsys\ShopBundle\Component\DataFixture;
 
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\FlagDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture as DemoPricingGroupDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\BrandDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\FlagDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\FulltextTriggersDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture as DemoPricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\BrandDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
 class ProductDataFixtureReferenceInjector {
 
 	/**
-	 * @param \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @param bool $onlyForFirstDomain
 	 */
 	public function loadReferences(
@@ -51,7 +51,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getVatReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -64,7 +64,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getAvailabilityReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -76,7 +76,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getCategoryReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -118,7 +118,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getFlagReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -130,7 +130,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getBrandReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -163,7 +163,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getUnitReferences(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -174,7 +174,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getPricingGroupReferencesForFirstDomain(PersistentReferenceFacade $persistentReferenceFacade) {
@@ -186,7 +186,7 @@ class ProductDataFixtureReferenceInjector {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @return string[]
 	 */
 	private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade) {

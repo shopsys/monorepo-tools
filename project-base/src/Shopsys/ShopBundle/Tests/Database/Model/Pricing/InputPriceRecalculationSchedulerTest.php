@@ -1,32 +1,32 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Pricing;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Pricing;
 
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Payment\PaymentEditData;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Pricing\InputPriceRecalculator;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportEditData;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculator;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportEditData;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 
 	public function testOnKernelResponseNoAction() {
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
 		$inputPriceRecalculatorMock = $this->getMockBuilder(InputPriceRecalculator::class)
 			->setMethods(['__construct', 'recalculateToInputPricesWithoutVat', 'recalculateToInputPricesWithVat'])
@@ -57,7 +57,7 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 	/**
 	 * @param string $inputPrice
 	 * @param string $vatPercent
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private function createProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
 		$inputPrice,
@@ -65,9 +65,9 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 	) {
 		$em = $this->getEntityManager();
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
-		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
 
 		$vat = new Vat(new VatData('vat', $vatPercent));
 		$em->persist($vat);
@@ -92,13 +92,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
-		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
+		/* @var $inputPriceRecalculationScheduler \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 
@@ -120,15 +120,15 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$paymentEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
 		$paymentEditData->paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentEditData);
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+		/* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
 
-		$transportEditData = new \SS6\ShopBundle\Model\Transport\TransportEditData();
+		$transportEditData = new \Shopsys\ShopBundle\Model\Transport\TransportEditData();
 		$transportEditData->transportData->name = ['cs' => 'name'];
 		$transportEditData->transportData->description = ['cs' => 'desc'];
 		$transportEditData->prices = [$currency1->getId() => $inputPriceWithVat, $currency2->getId() => $inputPriceWithVat];
 		$transportEditData->transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportEditData);
-		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+		/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 		$em->flush();
 
 		$filterResponseEventMock = $this->getMockBuilder(FilterResponseEvent::class)
@@ -161,13 +161,13 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 		$inputPriceRecalculationScheduler = $this->getContainer()->get(InputPriceRecalculationScheduler::class);
-		/* @var $inputPriceRecalculationScheduler \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
+		/* @var $inputPriceRecalculationScheduler \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler */
 		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \SS6\ShopBundle\Model\Payment\PaymentEditFacade */
+		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -189,14 +189,14 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
 		$paymentEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
 		$paymentEditData->paymentData->vat = $vat;
 		$payment = $paymentEditFacade->create($paymentEditData);
-		/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+		/* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
 
 		$transportEditData = new TransportEditData();
 		$transportEditData->transportData->name = ['cs' => 'name'];
 		$transportEditData->prices = [$currency1->getId() => $inputPriceWithoutVat, $currency2->getId() => $inputPriceWithoutVat];
 		$transportEditData->transportData->vat = $vat;
 		$transport = $transportEditFacade->create($transportEditData);
-		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+		/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 
 		$em->flush();
 

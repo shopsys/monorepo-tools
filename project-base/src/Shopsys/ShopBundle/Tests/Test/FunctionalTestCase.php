@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test;
+namespace Shopsys\ShopBundle\Tests\Test;
 
-use SS6\Environment;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\Environment;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase {
@@ -16,7 +16,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 
 	protected function setUpDomain() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$domain->switchDomainById(1);
 	}
 
@@ -75,7 +75,7 @@ abstract class FunctionalTestCase extends WebTestCase {
 	 */
 	protected function getReference($referenceName) {
 		$persistentReferenceFacade = $this->getContainer()->get(PersistentReferenceFacade::class);
-		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+		/* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 
 		return $persistentReferenceFacade->getReference($referenceName);
 	}

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Component\Grid;
+namespace Shopsys\ShopBundle\Tests\Database\Component\Grid;
 
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class QueryBuilderDataSourceTest extends DatabaseTestCase {
 

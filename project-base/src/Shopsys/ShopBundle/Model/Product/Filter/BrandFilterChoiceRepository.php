@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class BrandFilterChoiceRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -24,9 +24,9 @@ class BrandFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public function getBrandFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category) {
 		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
@@ -40,10 +40,10 @@ class BrandFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @param string|null $searchText
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public function getBrandFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText) {
 		$productsQueryBuilder = $this->productRepository
@@ -54,7 +54,7 @@ class BrandFilterChoiceRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
 		$clonnedProductsQueryBuilder = clone $productsQueryBuilder;

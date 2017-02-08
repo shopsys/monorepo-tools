@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use SS6\ShopBundle\Model\Customer\BillingAddressData;
-use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerFacade;
-use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
-use SS6\ShopBundle\Model\Customer\UserDataFactory;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
+use Shopsys\ShopBundle\Model\Customer\CustomerData;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixture {
 
@@ -20,27 +20,27 @@ class UserDataFixture {
 	const FIRST_PERFORMANCE_USER = 'first_performance_user';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	private $entityManagerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
 	 */
 	private $sqlLoggerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserDataFactory
 	 */
 	private $userDataFactory;
 
@@ -50,7 +50,7 @@ class UserDataFixture {
 	private $faker;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
 	private $persistentReferenceFacade;
 
@@ -97,7 +97,7 @@ class UserDataFixture {
 	/**
 	 * @param int $domainId
 	 * @param int $userNumber
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	private function createCustomerOnDomain($domainId, $userNumber) {
 		$customerData = $this->getRandomCustomerDataByDomainId($domainId, $userNumber);
@@ -108,7 +108,7 @@ class UserDataFixture {
 	/**
 	 * @param int $domainId
 	 * @param int $userNumber
-	 * @return \SS6\ShopBundle\Model\Customer\CustomerData
+	 * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
 	 */
 	private function getRandomCustomerDataByDomainId($domainId, $userNumber) {
 		$customerData = new CustomerData();

@@ -1,42 +1,42 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Preview;
+namespace Shopsys\ShopBundle\Model\Order\Preview;
 
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
 	 */
 	private $quantifiedProductPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation
 	 */
 	private $quantifiedProductDiscountCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderPriceCalculation
 	 */
 	private $orderPriceCalculation;
 
@@ -55,14 +55,14 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
-	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
 	 * @param float|null $promoCodeDiscountPercent
-	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
+	 * @return \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function calculatePreview(
@@ -139,12 +139,12 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	private function calculateRoundingPrice(
 		Payment $payment,
@@ -164,11 +164,11 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $roundingPrice
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private function calculateTotalPrice(
 		Price $productsPrice,
@@ -196,21 +196,21 @@ class OrderPreviewCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
-	 * @param \SS6\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[] $quantifiedItemsPrices
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts) {
 		$finalPrice = new Price(0, 0);
 
 		foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {
-			/* @var $quantifiedItemPrice \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
+			/* @var $quantifiedItemPrice \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice */
 			$finalPrice = $finalPrice->add($quantifiedItemPrice->getTotalPrice());
 		}
 
 		foreach ($quantifiedItemsDiscounts as $discount) {
 			if ($discount !== null) {
-				/* @var $discount \SS6\ShopBundle\Model\Pricing\Price */
+				/* @var $discount \Shopsys\ShopBundle\Model\Pricing\Price */
 				$finalPrice = $finalPrice->subtract($discount);
 			}
 		}

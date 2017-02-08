@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category\Exception;
+namespace Shopsys\ShopBundle\Model\Category\Exception;
 
 interface CategoryException {
 

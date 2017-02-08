@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\BestsellingProduct;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\BestsellingProduct;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
 

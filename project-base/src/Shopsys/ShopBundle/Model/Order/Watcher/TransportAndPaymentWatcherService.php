@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Watcher;
+namespace Shopsys\ShopBundle\Model\Order\Watcher;
 
-use SS6\ShopBundle\Component\FlashMessage\Bag;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Component\FlashMessage\Bag;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class TransportAndPaymentWatcherService {
@@ -19,7 +19,7 @@ class TransportAndPaymentWatcherService {
 	const SESSION_PAYMENT_PRICES = 'payment_prices';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FlashMessage\Bag
+	 * @var \Shopsys\ShopBundle\Component\FlashMessage\Bag
 	 */
 	private $flashMessageBag;
 
@@ -29,20 +29,20 @@ class TransportAndPaymentWatcherService {
 	private $session;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
+	 * @param \Shopsys\ShopBundle\Component\FlashMessage\Bag $flashMessageBag
 	 * @param \Symfony\Component\HttpFoundation\Session\Session $session
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
 	 */
 	public function __construct(
 		Bag $flashMessageBag,
@@ -57,11 +57,11 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @return \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
 	 */
 	public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments) {
 		$transport = $orderData->transport;
@@ -99,9 +99,9 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -131,9 +131,9 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -163,9 +163,9 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
 	 * @return array
 	 */
@@ -190,9 +190,9 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
 	 * @return array
 	 */
@@ -217,10 +217,10 @@ class TransportAndPaymentWatcherService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
 	 * @param int $domainId
 	 */
 	private function rememberTransportAndPayment(

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Heureka\Exception;
+namespace Shopsys\ShopBundle\Model\Heureka\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Heureka\Exception\HeurekaException;
+use Shopsys\ShopBundle\Model\Heureka\Exception\HeurekaException;
 
 class LocaleNotSupportedException extends Exception implements HeurekaException {
 

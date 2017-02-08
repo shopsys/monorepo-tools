@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile\Exception;
+namespace Shopsys\ShopBundle\Component\UploadedFile\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\UploadedFile\Exception\FileException;
+use Shopsys\ShopBundle\Component\UploadedFile\Exception\FileException;
 
 class FileNotFoundException extends Exception implements FileException {
 

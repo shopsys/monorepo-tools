@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Activity;
+namespace Shopsys\ShopBundle\Model\Administrator\Activity;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivity;
-use SS6\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityRepository {
 
@@ -28,7 +28,7 @@ class AdministratorActivityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param int $maxResults
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
@@ -44,22 +44,22 @@ class AdministratorActivityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @return \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivity
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity
 	 */
 	public function getCurrent(Administrator $administrator) {
 		$currentAdministratorActvity = $this->getLastActivitiesQueryBuilder($administrator, 1)->getQuery()->getSingleResult();
 		if ($currentAdministratorActvity === null) {
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\CurrentAdministratorActivityNotFoundException();
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\CurrentAdministratorActivityNotFoundException();
 		}
 
 		return $currentAdministratorActvity;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
 	 * @param int $maxResults
-	 * @return \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
 	 */
 	public function getLastAdministratorActivities(Administrator $administrator, $maxResults) {
 		$lastActivitiesQueryBuilder = $this->getLastActivitiesQueryBuilder($administrator, $maxResults);

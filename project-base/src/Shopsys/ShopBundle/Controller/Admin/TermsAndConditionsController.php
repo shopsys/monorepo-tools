@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory;
-use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory;
+use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TermsAndConditionsController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFormTypeFactory
 	 */
 	private $termsAndConditionsSettingFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+	 * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
 	 */
 	private $termsAndConditionsFacade;
 

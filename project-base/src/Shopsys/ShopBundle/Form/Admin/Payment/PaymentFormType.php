@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Payment;
+namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,18 +13,18 @@ use Symfony\Component\Validator\Constraints;
 class PaymentFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $allTransports;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $allTransports
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $allTransports
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
 	 */
 	public function __construct(array $allTransports, array $vats) {
 		$this->allTransports = $allTransports;

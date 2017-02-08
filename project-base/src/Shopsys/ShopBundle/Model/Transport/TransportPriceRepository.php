@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Transport\TransportPrice;
+use Shopsys\ShopBundle\Model\Transport\TransportPrice;
 
 class TransportPriceRepository {
 
@@ -27,8 +27,8 @@ class TransportPriceRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Transport\TransportPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
 	 */
 	public function getAllByTransport(Transport $transport) {
 		return $this->getTransportPriceRepository()->findBy(['transport' => $transport]);

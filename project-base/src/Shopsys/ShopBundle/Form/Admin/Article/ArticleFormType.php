@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Article;
+namespace Shopsys\ShopBundle\Form\Admin\Article;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Article\Article;
-use SS6\ShopBundle\Model\Article\ArticleData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Article\Article;
+use Shopsys\ShopBundle\Model\Article\ArticleData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -18,18 +18,18 @@ class ArticleFormType extends AbstractType {
 	private $articlePlacementLocalizedNamesByName;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\Article|null
+	 * @var \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	private $article;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\Article|null
+	 * @var \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	private $defaultSeoMetaDescription;
 
 	/**
 	 * @param string[]
-	 * @param \SS6\ShopBundle\Model\Article\Article|null $article
+	 * @param \Shopsys\ShopBundle\Model\Article\Article|null $article
 	 * @param string|null $defaultSeoMetaDescription
 	 */
 	public function __construct(

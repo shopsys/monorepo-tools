@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category;
+namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryData;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData;
 
 /**
  * @ORM\Table(name="feed_categories")
@@ -42,7 +42,7 @@ class FeedCategory {
 	private $fullName;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
 	 */
 	public function __construct(FeedCategoryData $feedCategoryData) {
 		$this->extId = $feedCategoryData->extId;
@@ -51,7 +51,7 @@ class FeedCategory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
 	 */
 	public function edit(FeedCategoryData $feedCategoryData) {
 		$this->name = $feedCategoryData->name;

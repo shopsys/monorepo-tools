@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Customer\CustomerPasswordService;
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
-use SS6\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerPasswordFacade {
 
@@ -15,17 +15,17 @@ class CustomerPasswordFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade
 	 */
 	private $resetPasswordMailFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerPasswordService
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
 	 */
 	private $customerPasswordService;
 
@@ -70,7 +70,7 @@ class CustomerPasswordFacade {
 	 * @param int $domainId
 	 * @param string|null $hash
 	 * @param string $newPassword
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function setNewPassword($email, $domainId, $hash, $newPassword) {
 		$user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);

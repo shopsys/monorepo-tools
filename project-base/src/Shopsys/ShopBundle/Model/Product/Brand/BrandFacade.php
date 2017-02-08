@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
-use SS6\ShopBundle\Model\Product\Brand\BrandRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
 
 class BrandFacade {
 
@@ -18,17 +18,17 @@ class BrandFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
 	 */
 	private $brandRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
@@ -46,15 +46,15 @@ class BrandFacade {
 
 	/**
 	 * @param int $brandId
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function getById($brandId) {
 		return $this->brandRepository->getById($brandId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function create(BrandData $brandData) {
 		$brand = new Brand($brandData);
@@ -75,8 +75,8 @@ class BrandFacade {
 
 	/**
 	 * @param int $brandId
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
 	 */
 	public function edit($brandId, BrandData $brandData) {
 		$brand = $this->brandRepository->getById($brandId);
@@ -106,7 +106,7 @@ class BrandFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public function getAll() {
 		return $this->brandRepository->getAll();

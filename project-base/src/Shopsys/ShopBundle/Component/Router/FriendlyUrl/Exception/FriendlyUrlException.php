@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl\Exception;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception;
 
-use SS6\ShopBundle\Component\Router\Exception\RouterException;
+use Shopsys\ShopBundle\Component\Router\Exception\RouterException;
 
 interface FriendlyUrlException extends RouterException {
 

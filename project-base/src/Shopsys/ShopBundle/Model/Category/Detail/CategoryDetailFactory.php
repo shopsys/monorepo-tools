@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category\Detail;
+namespace Shopsys\ShopBundle\Model\Category\Detail;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class CategoryDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
 	 */
 	private $categoryRepository;
 
@@ -18,8 +18,8 @@ class CategoryDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */
 	public function createDetailsHierarchy(array $categories) {
 		$firstLevelCategories = $this->getFirstLevelCategories($categories);
@@ -37,9 +37,9 @@ class CategoryDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
 	 */
 	public function createLazyLoadedDetails($categories, DomainConfig $domainConfig) {
 		$categoriesWithChildren = $this->categoryRepository->getCategoriesWithVisibleChildren($categories, $domainConfig->getId());
@@ -63,9 +63,9 @@ class CategoryDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Category\Category[parentId] $categoriesByParentId
-	 * @return \SS6\ShopBundle\Model\Category\Detail\CategoryDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[parentId] $categoriesByParentId
+	 * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
 	 */
 	private function getChildrenDetails(Category $category, array $categoriesByParentId) {
 		if (!array_key_exists($category->getId(), $categoriesByParentId)) {
@@ -85,8 +85,8 @@ class CategoryDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
 	 */
 	private function getFirstLevelCategories(array $categories) {
 		$firstLevelCategories = [];
@@ -101,8 +101,8 @@ class CategoryDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
-	 * @return \SS6\ShopBundle\Model\Category\Category[parentId][]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
+	 * @return \Shopsys\ShopBundle\Model\Category\Category[parentId][]
 	 */
 	private function getCategoriesIndexedByParentId(array $categories) {
 		$categoriesIndexedByParentId = [];

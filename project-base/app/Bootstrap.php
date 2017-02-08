@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6;
+namespace Shopsys;
 
-use SS6\Environment;
+use Shopsys\Environment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Console\Input\ArgvInput;

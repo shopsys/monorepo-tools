@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Security\Exception;
+namespace Shopsys\ShopBundle\Model\Administrator\Security\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Administrator\Security\Exception\SecurityException;
+use Shopsys\ShopBundle\Model\Administrator\Security\Exception\SecurityException;
 
 class AdministratorIsNotLoggedException extends Exception implements SecurityException {
 

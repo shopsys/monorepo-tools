@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
 use ReflectionFunctionAbstract;
-use SS6\AutoServicesBundle\Compiler\AutoServicesCollector;
-use SS6\AutoServicesBundle\Compiler\ContainerClassList;
-use SS6\AutoServicesBundle\Compiler\ServiceHelper;
+use Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector;
+use Shopsys\AutoServicesBundle\Compiler\ContainerClassList;
+use Shopsys\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ScopeInterface;
 
 class AutoContainer implements ContainerInterface {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ServiceHelper
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
 	 */
 	private $serviceHelper;
 
@@ -23,12 +23,12 @@ class AutoContainer implements ContainerInterface {
 	protected $container;
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ContainerClassList
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ContainerClassList
 	 */
 	private $containerClassList;
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\AutoServicesCollector
+	 * @var \Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector
 	 */
 	private $autoServiceCollector;
 
@@ -67,7 +67,7 @@ class AutoContainer implements ContainerInterface {
 		try {
 			$classServiceId = $this->containerClassList->getServiceIdByClass($className);
 			return $this->container->get($classServiceId);
-		} catch (\SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $e) {
+		} catch (\Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException $e) {
 			return $this->createServiceByClassName($className);
 		} catch (\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException $e) {
 			// In crawler test kernel boots more times (each call the method getClient()).
@@ -95,7 +95,7 @@ class AutoContainer implements ContainerInterface {
 	 */
 	private function createServiceByClassName($className) {
 		if (!$this->serviceHelper->canBeService($className)) {
-			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($className);
+			throw new \Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($className);
 		}
 
 		$classServiceId = $this->serviceHelper->convertClassNameToServiceId($className);

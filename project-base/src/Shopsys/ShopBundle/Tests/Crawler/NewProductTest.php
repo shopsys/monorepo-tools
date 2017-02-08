@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Crawler;
+namespace Shopsys\ShopBundle\Tests\Crawler;
 
-use SS6\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture;
-use SS6\ShopBundle\Form\Admin\Product\ProductEditFormType;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\DataFixtures\Base\AvailabilityDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture;
+use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\DomCrawler\Form;
 
 class NewProductTest extends FunctionalTestCase {
@@ -40,7 +40,7 @@ class NewProductTest extends FunctionalTestCase {
 		$em2->rollback();
 
 		$flashMessageBag = $client2->getContainer()->get('ss6.shop.component.flash_message.bag.admin');
-		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
+		/* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
 		$this->assertSame(302, $client2->getResponse()->getStatusCode());
 		$this->assertNotEmpty($flashMessageBag->getSuccessMessages());

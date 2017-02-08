@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron;
+namespace Shopsys\ShopBundle\Component\Cron;
 
 class CronService {
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
 	 * @param string[] $scheduledCronModuleIds
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function filterScheduledCronModuleConfigs(array $cronModulesConfigs, array $scheduledCronModuleIds) {
 		foreach ($cronModulesConfigs as $key => $cronModulesConfig) {

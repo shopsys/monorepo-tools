@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\TermsAndConditions;
+namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,12 +11,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TermsAndConditionsSettingFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\Article[]
+	 * @var \Shopsys\ShopBundle\Model\Article\Article[]
 	 */
 	private $articles;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article[] $articles
+	 * @param \Shopsys\ShopBundle\Model\Article\Article[] $articles
 	 */
 	public function __construct(array $articles) {
 		$this->articles = $articles;

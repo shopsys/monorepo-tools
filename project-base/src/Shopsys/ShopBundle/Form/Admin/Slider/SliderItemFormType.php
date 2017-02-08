@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Slider;
+namespace Shopsys\ShopBundle\Form\Admin\Slider;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Slider\SliderItemData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

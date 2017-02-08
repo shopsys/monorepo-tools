@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
-use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory;
-use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
+use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchFacade {
@@ -12,17 +12,17 @@ class AdvancedSearchFacade {
 	const RULES_FORM_NAME = 'as';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory
 	 */
 	private $advancedSearchFormFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchService
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService
 	 */
 	private $advancedSearchService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
 	 */
 	private $productListAdminFacade;
 

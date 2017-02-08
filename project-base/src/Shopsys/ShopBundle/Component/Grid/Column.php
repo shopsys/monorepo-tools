@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
 class Column {
 
@@ -86,7 +86,7 @@ class Column {
 
 	/**
 	 * @param string $class
-	 * @return \SS6\ShopBundle\Component\Grid\Column
+	 * @return \Shopsys\ShopBundle\Component\Grid\Column
 	 */
 	public function setClassAttribute($class) {
 		$this->classAttribute = $class;

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,12 +17,12 @@ class DeliveryAddressFormType extends AbstractType {
 	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $countries) {
 		$this->countries = $countries;
@@ -146,7 +146,7 @@ class DeliveryAddressFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$deliveryAddressData = $form->getData();
-				/* @var $deliveryAddressData \SS6\ShopBundle\Model\Customer\DeliveryAddressData */
+				/* @var $deliveryAddressData \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData */
 
 				if ($deliveryAddressData->addressFilled) {
 					$validationGroups[] = self::VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS;

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail\Exception;
+namespace Shopsys\ShopBundle\Model\Mail\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Mail\Exception\MailException;
+use Shopsys\ShopBundle\Model\Mail\Exception\MailException;
 
 class MailTemplateNotFoundException extends Exception implements MailException {
 

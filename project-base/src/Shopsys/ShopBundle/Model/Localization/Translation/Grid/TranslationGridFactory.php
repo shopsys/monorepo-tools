@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
+namespace Shopsys\ShopBundle\Model\Localization\Translation\Grid;
 
-use SS6\ShopBundle\Component\Grid\ArrayDataSource;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
+use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 
 class TranslationGridFactory implements GridFactoryInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
 	 */
 	private $translationEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
@@ -37,7 +37,7 @@ class TranslationGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$dataSource = new ArrayDataSource($this->translationEditFacade->getAllTranslationsData(), 'id');

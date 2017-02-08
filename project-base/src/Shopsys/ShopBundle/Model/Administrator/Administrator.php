@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Serializable;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridLimit;
-use SS6\ShopBundle\Model\Security\Roles;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
+use Shopsys\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -62,9 +62,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $email;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit[]
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit[]
 	 * @ORM\OneToMany(
-	 *	targetEntity="SS6\ShopBundle\Model\Administrator\AdministratorGridLimit",
+	 *	targetEntity="Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit",
 	 *	mappedBy="administrator",
 	 *	orphanRemoval=true
 	 * )
@@ -98,7 +98,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	private $multidomainLoginTokenExpiration;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function __construct(AdministratorData $administratorData) {
 		$this->email = $administratorData->email;
@@ -114,7 +114,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 */
 	public function edit(AdministratorData $administratorData) {
 		$this->email = $administratorData->email;
@@ -123,7 +123,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit
 	 */
 	public function addGridLimit(AdministratorGridLimit $gridLimit) {
 		if (!$this->gridLimits->contains($gridLimit)) {
@@ -132,7 +132,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit $gridLimit
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit $gridLimit
 	 */
 	public function removeGridLimit(AdministratorGridLimit $gridLimit) {
 		$this->gridLimits->removeElement($gridLimit);
@@ -140,7 +140,7 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
 
 	/**
 	 * @param string $gridId
-	 * @return \SS6\ShopBundle\Model\Administrator\AdministratorGridLimit
+	 * @return \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit
 	 */
 	public function getGridLimit($gridId) {
 		foreach ($this->gridLimits as $gridLimit) {

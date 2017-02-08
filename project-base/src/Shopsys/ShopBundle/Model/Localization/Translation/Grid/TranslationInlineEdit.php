@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Translation\Grid;
+namespace Shopsys\ShopBundle\Model\Localization\Translation\Grid;
 
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Localization\TranslationFormType;
-use SS6\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
-use SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Localization\TranslationFormType;
+use Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactory;
+use Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use Symfony\Component\Form\FormFactory;
 
 class TranslationInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Translation\TranslationEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
 	 */
 	private $translationEditFacade;
 
@@ -30,7 +30,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	 */
 	protected function createEntityAndGetId($translationData) {
 		$message = 'Method "createEntityAndGetId" is not supported in translations.';
-		throw new \SS6\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
+		throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
 	}
 
 	/**
@@ -48,7 +48,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 	protected function getFormDataObject($translationId = null) {
 		if ($translationId === null) {
 			$message = 'Method "getFormDataObject" for new translation is not supported in translations.';
-			throw new \SS6\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
+			throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
 		}
 
 		return $this->translationEditFacade->getTranslationById($translationId);
@@ -56,7 +56,7 @@ class TranslationInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Localization\TranslationFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Localization\TranslationFormType
 	 */
 	protected function getFormType($rowId) {
 		return new TranslationFormType($this->translationEditFacade->getTranslatableLocales());

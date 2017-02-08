@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 
 class PromoCodeFacade {
 
@@ -13,7 +13,7 @@ class PromoCodeFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
 	 */
 	private $promoCodeRepository;
 
@@ -23,8 +23,8 @@ class PromoCodeFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
 	public function create(PromoCodeData $promoCodeData) {
 		$promoCode = new PromoCode($promoCodeData);
@@ -36,8 +36,8 @@ class PromoCodeFacade {
 
 	/**
 	 * @param int $promoCodeId
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
 	public function edit($promoCodeId, PromoCodeData $promoCodeData) {
 		$promoCode = $this->getById($promoCodeId);
@@ -49,7 +49,7 @@ class PromoCodeFacade {
 
 	/**
 	 * @param int $promoCodeId
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
 	public function getById($promoCodeId) {
 		return $this->promoCodeRepository->getById($promoCodeId);
@@ -66,7 +66,7 @@ class PromoCodeFacade {
 
 	/**
 	 * @param string $code
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
 	 */
 	public function findPromoCodeByCode($code) {
 		return $this->promoCodeRepository->findByCode($code);

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture;
+namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\ORM\Mapping as ORM;
 

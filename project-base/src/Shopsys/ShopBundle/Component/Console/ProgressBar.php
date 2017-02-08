@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Console;
+namespace Shopsys\ShopBundle\Component\Console;
 
 use Symfony\Component\Console\Helper\ProgressBar as BaseProgressBar;
 use Symfony\Component\Console\Output\OutputInterface;

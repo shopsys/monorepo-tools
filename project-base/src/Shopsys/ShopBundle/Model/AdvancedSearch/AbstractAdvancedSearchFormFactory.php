@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
+use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation;
+use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class AbstractAdvancedSearchFormFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
 	 */
 	private $advancedSearchConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
+	 * @var \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchFilterTranslation
 	 */
 	private $advancedSearchFilterTranslation;
 
@@ -26,7 +26,7 @@ abstract class AbstractAdvancedSearchFormFactory {
 	private $formFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
+	 * @var \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation
 	 */
 	private $advancedSearchOperatorTranslation;
 
@@ -68,7 +68,7 @@ abstract class AbstractAdvancedSearchFormFactory {
 
 	/**
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
+	 * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
 	 * @return \Symfony\Component\Form\Form
 	 */
 	private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
@@ -91,7 +91,7 @@ abstract class AbstractAdvancedSearchFormFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
+	 * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
 	 * @return string[]
 	 */
 	private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter) {

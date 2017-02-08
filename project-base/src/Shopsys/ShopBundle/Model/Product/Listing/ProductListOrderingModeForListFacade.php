@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Listing;
+namespace Shopsys\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForListFacade {
@@ -10,7 +10,7 @@ class ProductListOrderingModeForListFacade {
 	const COOKIE_NAME = 'productListOrderingMode';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingModeService
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService
 	 */
 	private $productListOrderingModeService;
 
@@ -19,7 +19,7 @@ class ProductListOrderingModeForListFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
+	 * @return \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
 	 */
 	public function getProductListOrderingConfig() {
 		return new ProductListOrderingConfig(

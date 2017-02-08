@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 class AdvancedSearchRuleData {
 

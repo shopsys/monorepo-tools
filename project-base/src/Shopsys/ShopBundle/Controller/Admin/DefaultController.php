@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 
 class DefaultController extends AdminBaseController {
 

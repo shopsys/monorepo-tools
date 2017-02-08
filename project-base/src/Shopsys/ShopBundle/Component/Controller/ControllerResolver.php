@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Controller;
+namespace Shopsys\ShopBundle\Component\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver as SymfonyControllerResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

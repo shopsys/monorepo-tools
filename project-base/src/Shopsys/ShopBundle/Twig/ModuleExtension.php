@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Module\ModuleFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleFacade;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class ModuleExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
 	 */
 	private $moduleFacade;
 

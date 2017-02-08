@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Security;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Security;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
-use SS6\ShopBundle\Model\Administrator\Administrator;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\OrderFlowFacade;
-use SS6\ShopBundle\Model\Security\LoginListener;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
+use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\OrderFlowFacade;
+use Shopsys\ShopBundle\Model\Security\LoginListener;
+use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;

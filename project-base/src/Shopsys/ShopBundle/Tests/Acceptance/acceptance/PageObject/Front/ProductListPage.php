@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class ProductListPage extends AbstractPage {
 
 	/**
-	 * @var \SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
+	 * @var \Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
 	 */
 	private $productListComponent;
 

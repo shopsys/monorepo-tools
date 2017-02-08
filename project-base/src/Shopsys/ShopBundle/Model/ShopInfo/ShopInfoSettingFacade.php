@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\ShopInfo;
+namespace Shopsys\ShopBundle\Model\ShopInfo;
 
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class ShopInfoSettingFacade {
 
@@ -11,7 +11,7 @@ class ShopInfoSettingFacade {
 	const SHOP_INFO_PHONE_HOURS = 'shopInfoPhoneHours';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Setting;
+namespace Shopsys\ShopBundle\Component\Setting;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Setting\SettingValueRepository;
+use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
 class Setting {
 
@@ -26,18 +26,18 @@ class Setting {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\SettingValueRepository
+	 * @var \Shopsys\ShopBundle\Component\Setting\SettingValueRepository
 	 */
 	private $settingValueRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\SettingValue[]
+	 * @var \Shopsys\ShopBundle\Component\Setting\SettingValue[]
 	 */
 	private $values;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Component\Setting\SettingValueRepository $settingValueRepository
+	 * @param \Shopsys\ShopBundle\Component\Setting\SettingValueRepository $settingValueRepository
 	 */
 	public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository) {
 		$this->em = $em;
@@ -59,7 +59,7 @@ class Setting {
 		}
 
 		$message = 'Common setting value with name "' . $key . '" not found.';
-		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+		throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class Setting {
 		}
 
 		$message = 'Setting value with name "' . $key . '" for domain with ID "' . $domainId . '" not found.';
-		throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+		throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Setting {
 			$this->em->flush($settingValue);
 		} else {
 			$message = 'Common setting value with name "' . $key . '" not found.';
-			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 		}
 	}
 
@@ -113,7 +113,7 @@ class Setting {
 			$this->em->flush($settingValue);
 		} else {
 			$message = 'Setting value with name "' . $key . '" for domain ID "' . $domainId . '" not found.';
-			throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException($message);
 		}
 	}
 
@@ -123,7 +123,7 @@ class Setting {
 	private function loadDomainValues($domainId) {
 		if ($domainId === null) {
 			$message = 'Cannot load setting value for null domain ID';
-			throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
+			throw new \Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
 		}
 
 		if (!array_key_exists($domainId, $this->values)) {

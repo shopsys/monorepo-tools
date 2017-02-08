@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Image;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\FileUpload\FileNamingConvention;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use SS6\ShopBundle\Component\Image\Image;
-use SS6\ShopBundle\Component\Image\ImageService;
-use SS6\ShopBundle\Component\Image\Processing\ImageProcessingService;
+use Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\ShopBundle\Component\Image\ImageService;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageServiceTest extends PHPUnit_Framework_TestCase {
@@ -22,7 +22,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
 		$imageService = new ImageService($imageProcessingServiceMock, $this->getFileUpload());
 
-		$this->setExpectedException(\SS6\ShopBundle\Component\Image\Exception\EntityMultipleImageException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Image\Exception\EntityMultipleImageException::class);
 		$imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
 	}
 
@@ -44,7 +44,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertCount(2, $images);
 		foreach ($images as $image) {
-			/* @var $image \SS6\ShopBundle\Component\Image\Image */
+			/* @var $image \Shopsys\ShopBundle\Component\Image\Image */
 			$temporaryFiles = $image->getTemporaryFilesForUpload();
 			$this->assertSame(1, $image->getEntityId());
 			$this->assertSame('entityName', $image->getEntityName());
@@ -71,7 +71,7 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @return \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private function getFileUpload() {
 		$fileNamingConvention = new FileNamingConvention();

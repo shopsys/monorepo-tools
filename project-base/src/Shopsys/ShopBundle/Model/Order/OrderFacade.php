@@ -1,34 +1,34 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
 use Doctrine\ORM\EntityManager;
 use Exception;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
-use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\CustomerFacade;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Heureka\HeurekaFacade;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Order\Item\OrderProductFacade;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderCreationService;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository;
-use SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository;
-use SS6\ShopBundle\Model\Order\OrderService;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade;
+use Shopsys\ShopBundle\Model\Cart\CartFacade;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\ShopBundle\Model\Heureka\HeurekaFacade;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade;
+use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderCreationService;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderHashGeneratorRepository;
+use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
+use Shopsys\ShopBundle\Model\Order\OrderService;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderFacade {
 
@@ -43,102 +43,102 @@ class OrderFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderNumberSequenceRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository
 	 */
 	private $orderNumberSequenceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
 	 */
 	private $orderRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderCreationService
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderCreationService
 	 */
 	private $orderCreationService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
 	 */
 	private $orderStatusRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade
 	 */
 	private $orderMailFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderHashGeneratorRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderHashGeneratorRepository
 	 */
 	private $orderHashGeneratorRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade
 	 */
 	private $administratorFrontSecurityFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 */
 	private $currentPromoCodeFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
 	private $orderPreviewFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderProductFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderProductFacade
 	 */
 	private $orderProductFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Heureka\HeurekaFacade
+	 * @var \Shopsys\ShopBundle\Model\Heureka\HeurekaFacade
 	 */
 	private $heurekaFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -189,10 +189,10 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
 		$orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
@@ -224,8 +224,8 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function createOrderFromFront(OrderData $orderData) {
 		$domainConfig = $this->domain->getDomainConfigById($orderData->domainId);
@@ -255,8 +255,8 @@ class OrderFacade {
 
 	/**
 	 * @param int $orderId
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function edit($orderId, OrderData $orderData) {
 		$order = $this->orderRepository->getById($orderId);
@@ -310,8 +310,8 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 */
 	public function prefillFrontOrderData(FrontOrderData $orderData, User $user) {
 		$order = $this->orderRepository->findLastByUserId($user->getId());
@@ -331,8 +331,8 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return \SS6\ShopBundle\Model\Order\Order[]
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @return \Shopsys\ShopBundle\Model\Order\Order[]
 	 */
 	public function getCustomerOrderList(User $user) {
 		return $this->orderRepository->getCustomerOrderList($user);
@@ -340,7 +340,7 @@ class OrderFacade {
 
 	/**
 	 * @param int $orderId
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function getById($orderId) {
 		return $this->orderRepository->getById($orderId);
@@ -349,7 +349,7 @@ class OrderFacade {
 	/**
 	 * @param string $urlHash
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function getByUrlHashAndDomain($urlHash, $domainId) {
 		return $this->orderRepository->getByUrlHashAndDomain($urlHash, $domainId);
@@ -357,15 +357,15 @@ class OrderFacade {
 
 	/**
 	 * @param string $orderNumber
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return \SS6\ShopBundle\Model\Order\Order
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @return \Shopsys\ShopBundle\Model\Order\Order
 	 */
 	public function getByOrderNumberAndUser($orderNumber, User $user) {
 		return $this->orderRepository->getByOrderNumberAndUser($orderNumber, $user);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+	 * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getOrderListQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {
@@ -376,7 +376,7 @@ class OrderFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
 	 */
 	private function setOrderDataAdministrator(OrderData $orderData) {
 		if ($this->administratorFrontSecurityFacade->isAdministratorLoggedAsCustomer()) {
@@ -384,7 +384,7 @@ class OrderFacade {
 				$currentAdmin = $this->administratorFrontSecurityFacade->getCurrentAdministrator();
 				$orderData->createdAsAdministrator = $currentAdmin;
 				$orderData->createdAsAdministratorName = $currentAdmin->getRealName();
-			} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
+			} catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException $ex) {
 			}
 		}
 	}

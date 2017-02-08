@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct;
-use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class BestsellingProductRepository {
 
@@ -21,7 +21,7 @@ class BestsellingProductRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -34,9 +34,9 @@ class BestsellingProductRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
+	 * @return \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
 	 */
 	public function getManualBestsellingProductsByCategoryAndDomainId(Category $category, $domainId) {
 		$queryBuilder = $this->em->createQueryBuilder()
@@ -52,9 +52,9 @@ class BestsellingProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
 	 */
 	public function getOfferedManualBestsellingProducts($domainId, Category $category, PricingGroup $pricingGroup) {
 		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
@@ -71,11 +71,11 @@ class BestsellingProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param \DateTime $ordersCreatedAtLimit
 	 * @param int $maxResults
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getOfferedAutomaticBestsellingProducts(
 		$domainId,

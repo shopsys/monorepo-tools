@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test;
+namespace Shopsys\ShopBundle\Tests\Test;
 
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 abstract class DatabaseTestCase extends FunctionalTestCase {
 
@@ -15,7 +15,7 @@ abstract class DatabaseTestCase extends FunctionalTestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @return \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	protected function getEntityManagerFacade() {
 		return $this->getContainer()->get(EntityManagerFacade::class);

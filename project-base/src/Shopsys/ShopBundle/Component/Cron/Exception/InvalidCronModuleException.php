@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Exception;
+namespace Shopsys\ShopBundle\Component\Cron\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Cron\Exception\CronException;
+use Shopsys\ShopBundle\Component\Cron\Exception\CronException;
 
 class InvalidCronModuleException extends Exception implements CronException {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Symfony\Component\Routing\Generator\UrlGenerator as BaseUrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Route;
@@ -36,7 +36,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 
 	/**
 	 * @param \Symfony\Component\Routing\RouteCollection $routeCollection
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $routeName
 	 * @param array $parameters
 	 * @param string $referenceType
@@ -67,7 +67,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 				$routeName,
 				$entityId
 			);
-		} catch (\SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlNotFoundException $e) {
 			$message = 'Unable to generate a URL for the named route "' . $routeName . '" as such route does not exist.';
 			throw new \Symfony\Component\Routing\Exception\RouteNotFoundException($message, 0, $e);
 		}
@@ -78,7 +78,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 	/**
 	 * @param string $routeName
 	 * @param \Symfony\Component\Routing\Route $route
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param array $parameters
 	 * @param string $referenceType
 	 * @return string
@@ -110,7 +110,7 @@ class FriendlyUrlGenerator extends BaseUrlGenerator {
 	 * Not supproted method
 	 */
 	public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
-		throw new \SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
+		throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
 	}
 
 }

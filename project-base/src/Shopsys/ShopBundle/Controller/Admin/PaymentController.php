@@ -1,54 +1,54 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
-use SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory;
-use SS6\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
+use Shopsys\ShopBundle\Model\Payment\Grid\PaymentGridFactory;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
 	 */
 	private $paymentEditFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
 	 */
 	private $paymentDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Grid\PaymentGridFactory
+	 * @var \Shopsys\ShopBundle\Model\Payment\Grid\PaymentGridFactory
 	 */
 	private $paymentGridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory
 	 */
 	private $paymentEditDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
@@ -162,7 +162,7 @@ class PaymentController extends AdminBaseController {
 					'name' => $paymentName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Payment\Exception\PaymentNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected payment doesn\'t exist.'));
 		}
 

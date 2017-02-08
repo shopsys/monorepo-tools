@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace Shopsys\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

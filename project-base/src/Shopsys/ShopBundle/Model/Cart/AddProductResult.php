@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace Shopsys\ShopBundle\Model\Cart;
 
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 
 class AddProductResult {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Item\CartItem
+	 * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem
 	 */
 	private $cartItem;
 
@@ -22,7 +22,7 @@ class AddProductResult {
 	private $addedQuantity;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Item\CartItem $cartItem
+	 * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
 	 * @param bool $isNew
 	 * @param int $addedQuantity
 	 */
@@ -33,7 +33,7 @@ class AddProductResult {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem
+	 * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem
 	 */
 	public function getCartItem() {
 		return $this->cartItem;

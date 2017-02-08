@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\GeneratorBundle\Controller;
+namespace Shopsys\GeneratorBundle\Controller;
 
-use SS6\GeneratorBundle\Model\GeneratorFacade;
-use SS6\GeneratorBundle\Model\GeneratorsFormFactory;
+use Shopsys\GeneratorBundle\Model\GeneratorFacade;
+use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,9 +11,9 @@ class GeneratorController extends Controller {
 
 	public function indexAction(Request $request) {
 		$generatorsFormFactory = $this->get(GeneratorsFormFactory::class);
-		/* @var $generatorsFormFactory \SS6\GeneratorBundle\Model\GeneratorsFormFactory */
+		/* @var $generatorsFormFactory \Shopsys\GeneratorBundle\Model\GeneratorsFormFactory */
 		$generatorFacade = $this->get(GeneratorFacade::class);
-		/* @var $generatorFacade \SS6\GeneratorBundle\Model\GeneratorFacade */
+		/* @var $generatorFacade \Shopsys\GeneratorBundle\Model\GeneratorFacade */
 
 		$form = $generatorsFormFactory->createForm();
 		$form->handleRequest($request);
@@ -24,7 +24,7 @@ class GeneratorController extends Controller {
 		if ($form->isValid()) {
 			try {
 				$createdFiles = $generatorFacade->generate($form->getData());
-			} catch (\SS6\GeneratorBundle\Model\Exception\GeneratorTargetFileAlreadyExistsExpception $ex) {
+			} catch (\Shopsys\GeneratorBundle\Model\Exception\GeneratorTargetFileAlreadyExistsExpception $ex) {
 				$errorMessage = $ex->getMessage();
 			}
 		}

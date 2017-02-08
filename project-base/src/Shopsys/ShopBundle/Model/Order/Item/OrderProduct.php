@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Entity
@@ -14,22 +14,22 @@ use SS6\ShopBundle\Model\Product\Product;
 class OrderProduct extends OrderItem {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Product|null
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=true, name="product_id", referencedColumnName="id", onDelete="SET NULL")
 	 */
 	private $product;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 * @param string $name
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
 	 * @param string $vatPercent
 	 * @param int $quantity
 	 * @param string $unitName
 	 * @param string|null $catnum
-	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
 		Order $order,
@@ -52,14 +52,14 @@ class OrderProduct extends OrderItem {
 		);
 
 		if ($product !== null && $product->isMainVariant()) {
-			throw new \SS6\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException();
+			throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\MainVariantCannotBeOrderedException();
 		}
 
 		$this->product = $product;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Product|null
 	 */
 	public function getProduct() {
 		return $this->product;

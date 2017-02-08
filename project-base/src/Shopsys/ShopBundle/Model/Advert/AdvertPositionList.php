@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Advert;
+namespace Shopsys\ShopBundle\Model\Advert;
 
-use SS6\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
+use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class AdvertPositionList extends AbstractTranslatedConstantList {
 

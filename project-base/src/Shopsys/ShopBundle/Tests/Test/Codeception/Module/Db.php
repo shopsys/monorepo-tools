@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception\Module;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception\Module;
 
 use Codeception\Module\Db as BaseDb;
-use SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
-use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
+use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
 class Db extends BaseDb {
 
@@ -22,9 +22,9 @@ class Db extends BaseDb {
 
 	public function cleanup() {
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
-		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
+		/* @var $symfonyHelper \Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
 		$databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);
-		/* @var $databaseSchemaFacade \SS6\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
+		/* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 		$databaseSchemaFacade->dropSchemaIfExists('public');
 		$databaseSchemaFacade->createSchema('public');
 	}

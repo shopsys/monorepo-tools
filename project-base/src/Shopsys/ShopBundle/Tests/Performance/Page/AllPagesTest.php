@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Page;
+namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSamplesAggregator;
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSummaryPrinter;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSamplesAggregator;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSummaryPrinter;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class AllPagesTest extends FunctionalTestCase {
@@ -27,7 +27,7 @@ class AllPagesTest extends FunctionalTestCase {
 	 */
 	public function testAdminPagesWarmup() {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		$this->doWarmupPagesWithProgress(
 			$urlsProvider->getAdminTestableUrlsProviderData(),
@@ -41,7 +41,7 @@ class AllPagesTest extends FunctionalTestCase {
 	 */
 	public function testFrontPagesWarmup() {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		$this->doWarmupPagesWithProgress(
 			$urlsProvider->getFrontTestableUrlsProviderData(),
@@ -52,7 +52,7 @@ class AllPagesTest extends FunctionalTestCase {
 
 	public function testAdminPages() {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		$this->doTestPagesWithProgress(
 			$urlsProvider->getAdminTestableUrlsProviderData(),
@@ -64,7 +64,7 @@ class AllPagesTest extends FunctionalTestCase {
 
 	public function testFrontPages() {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		$this->doTestPagesWithProgress(
 			$urlsProvider->getFrontTestableUrlsProviderData(),
@@ -124,11 +124,11 @@ class AllPagesTest extends FunctionalTestCase {
 		$jmeterOutputFilename
 	) {
 		$performanceTestSummaryPrinter = $this->getContainer()->get(PerformanceTestSummaryPrinter::class);
-		/* @var $performanceTestSummaryPrinter \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSummaryPrinter */
+		/* @var $performanceTestSummaryPrinter \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSummaryPrinter */
 		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
-		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter */
+		/* @var $performanceResultsCsvExporter \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter */
 		$performanceTestSamplesAggregator = $this->getContainer()->get(PerformanceTestSamplesAggregator::class);
-		/* @var $performanceTestSamplesAggregator \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSamplesAggregator */
+		/* @var $performanceTestSamplesAggregator \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSamplesAggregator */
 
 		$consoleOutput = new ConsoleOutput();
 		$consoleOutput->writeln('');
@@ -178,7 +178,7 @@ class AllPagesTest extends FunctionalTestCase {
 	 * @param bool $asLogged
 	 * @param string $username
 	 * @param string $password
-	 * @return \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample
 	 */
 	private function doTestUrl(
 		$routeName,
@@ -196,7 +196,7 @@ class AllPagesTest extends FunctionalTestCase {
 		$clientEntityManager = $client->getContainer()->get(EntityManager::class);
 		/* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 		$urlWithCsrfToken = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		$clientEntityManager->beginTransaction();
@@ -220,13 +220,13 @@ class AllPagesTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
 	 */
 	private function doAssert(
 		array $performanceTestSamples
 	) {
 		$performanceTestSampleQualifier = $this->getContainer()->get(PerformanceTestSampleQualifier::class);
-		/* @var $performanceTestSampleQualifier \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier */
+		/* @var $performanceTestSampleQualifier \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier */
 
 		$overallStatus = $performanceTestSampleQualifier->getOverallStatus($performanceTestSamples);
 

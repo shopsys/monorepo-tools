@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPrice;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductService;
 
 class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
 

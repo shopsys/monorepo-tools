@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component;
+namespace Shopsys\ShopBundle\Tests\Unit\Component;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Condition;
 
 class ConditionTest extends PHPUnit_Framework_TestCase {
 

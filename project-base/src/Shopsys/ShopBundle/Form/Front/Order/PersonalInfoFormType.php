@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Order;
+namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Component\Transformers\InverseTransformer;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Country\Country;
-use SS6\ShopBundle\Model\Order\FrontOrderData;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Component\Transformers\InverseTransformer;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Order\FrontOrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,12 +21,12 @@ class PersonalInfoFormType extends AbstractType {
 	const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $countries) {
 		$this->countries = $countries;
@@ -267,7 +267,7 @@ class PersonalInfoFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$orderData = $form->getData();
-				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
+				/* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
 
 				if ($orderData->companyCustomer) {
 					$validationGroups[] = self::VALIDATION_GROUP_COMPANY_CUSTOMER;

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Filesystem;
+namespace Shopsys\ShopBundle\Model\Security\Filesystem;
 
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
-use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
+use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilemanagerAccess {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess|null
+	 * @var \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess|null
 	 */
 	private static $self;
 
@@ -23,7 +23,7 @@ class FilemanagerAccess {
 	private $elFinderConfigurationReader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Filesystem\FilepathComparator
+	 * @var \Shopsys\ShopBundle\Component\Filesystem\FilepathComparator
 	 */
 	private $filepathComparator;
 
@@ -54,7 +54,7 @@ class FilemanagerAccess {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess $filemanagerAccess
+	 * @param \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess $filemanagerAccess
 	 */
 	public static function injectSelf(FilemanagerAccess $filemanagerAccess) {
 		self::$self = $filemanagerAccess;
@@ -74,7 +74,7 @@ class FilemanagerAccess {
 	 */
 	public static function isPathAccessibleStatic($attr, $path, $data, $volume) {
 		if (self::$self === null) {
-			throw new \SS6\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException();
+			throw new \Shopsys\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException();
 		}
 
 		return self::$self->isPathAccessible($attr, $path, $data, $volume);

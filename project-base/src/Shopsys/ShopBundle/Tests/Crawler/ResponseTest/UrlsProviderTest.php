@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
+namespace Shopsys\ShopBundle\Tests\Crawler\ResponseTest;
 
 use PHPUnit_Framework_TestCase;
 use ReflectionClass;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
-use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 

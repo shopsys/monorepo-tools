@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Script;
+namespace Shopsys\ShopBundle\Model\Script;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Script\ScriptData;
+use Shopsys\ShopBundle\Model\Script\ScriptData;
 
 /**
  * @ORM\Table(name="scripts")
@@ -46,7 +46,7 @@ class Script {
 	private $placement;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
+	 * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
 	 */
 	public function __construct(ScriptData $scriptData) {
 		$this->name = $scriptData->name;
@@ -83,7 +83,7 @@ class Script {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
+	 * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
 	 */
 	public function edit(ScriptData $scriptData) {
 		$this->name = $scriptData->name;

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
 class OrderItemData {
 
@@ -40,7 +40,7 @@ class OrderItemData {
 	public $catnum;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
 	 */
 	public function setFromEntity(OrderItem $orderItem) {
 		$this->name = $orderItem->getName();

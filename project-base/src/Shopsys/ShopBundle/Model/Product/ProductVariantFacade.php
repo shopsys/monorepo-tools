@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
-use SS6\ShopBundle\Model\Product\ProductService;
-use SS6\ShopBundle\Model\Product\ProductVariantService;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantFacade {
 
@@ -20,37 +20,37 @@ class ProductVariantFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
 	 */
 	private $productEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory
 	 */
 	private $productEditDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVariantService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVariantService
 	 */
 	private $productVariantService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
 
@@ -75,9 +75,9 @@ class ProductVariantFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $mainProduct
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $mainProduct
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function createVariant(Product $mainProduct, array $variants) {
 		$this->productVariantService->checkProductIsNotMainVariant($mainProduct);

@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Unit;
+namespace Shopsys\ShopBundle\Model\Product\Unit;
 
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Product\Unit\UnitFormType;
-use SS6\ShopBundle\Model\Product\Unit\UnitData;
-use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
-use SS6\ShopBundle\Model\Product\Unit\UnitGridFactory;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class UnitInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
 	 */
 	private $unitFacade;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitGridFactory $unitGridFactory
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitFacade $unitFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitGridFactory $unitGridFactory
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade $unitFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
@@ -32,7 +32,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($unitData) {
@@ -43,7 +43,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $unitId
-	 * @param \SS6\ShopBundle\Model\Product\Unit\UnitData $unitData
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
 	 */
 	protected function editEntity($unitId, $unitData) {
 		$this->unitFacade->edit($unitId, $unitData);
@@ -51,7 +51,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int|null $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\UnitData
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitData
 	 */
 	protected function getFormDataObject($unitId = null) {
 		$unitData = new UnitData();
@@ -67,7 +67,7 @@ class UnitInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Product\Unit\UnitFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType
 	 */
 	protected function getFormType($rowId) {
 		return new UnitFormType();

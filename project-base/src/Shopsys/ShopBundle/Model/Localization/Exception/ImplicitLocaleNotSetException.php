@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Exception;
+namespace Shopsys\ShopBundle\Model\Localization\Exception;
 
 use Exception;
 use Prezent\Doctrine\TranslatableBundle\EventListener\LocaleListener;
-use SS6\ShopBundle\Model\Localization\TranslatableListener;
+use Shopsys\ShopBundle\Model\Localization\TranslatableListener;
 
 class ImplicitLocaleNotSetException extends Exception implements LocalizationException {
 

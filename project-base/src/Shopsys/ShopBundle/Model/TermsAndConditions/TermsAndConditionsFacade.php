@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Model\TermsAndConditions;
+namespace Shopsys\ShopBundle\Model\TermsAndConditions;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Article\Article;
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Article\Article;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
 
 class TermsAndConditionsFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -36,7 +36,7 @@ class TermsAndConditionsFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Article\Article|null
+	 * @return \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	public function findTermsAndConditionsArticleByDomainId($domainId) {
 		$termsAndConditionsArticleId = $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
@@ -51,7 +51,7 @@ class TermsAndConditionsFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article|null $termsAndConditionsArticle
+	 * @param \Shopsys\ShopBundle\Model\Article\Article|null $termsAndConditionsArticle
 	 * @param int $domainId
 	 */
 	public function setTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId) {
@@ -74,7 +74,7 @@ class TermsAndConditionsFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\Article $article
+	 * @param \Shopsys\ShopBundle\Model\Article\Article $article
 	 * @return bool
 	 */
 	public function isArticleUsedAsTermsAndConditions(Article $article) {

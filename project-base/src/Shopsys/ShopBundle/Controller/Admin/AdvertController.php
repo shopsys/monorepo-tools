@@ -1,57 +1,57 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Advert\Advert;
-use SS6\ShopBundle\Model\Advert\AdvertData;
-use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
-use SS6\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Advert\Advert;
+use Shopsys\ShopBundle\Model\Advert\AdvertData;
+use Shopsys\ShopBundle\Model\Advert\AdvertEditFacade;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
 	 */
 	private $administratorGridFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertEditFacade
 	 */
 	private $advertEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormTypeFactory
 	 */
 	private $advertFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionList
+	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
 	 */
 	private $advertPositionList;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -119,7 +119,7 @@ class AdvertController extends AdminBaseController {
 	 */
 	public function listAction() {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder
@@ -218,7 +218,7 @@ class AdvertController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Advert\Exception\AdvertNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected advertisement doesn\'t exist.'));
 		}
 

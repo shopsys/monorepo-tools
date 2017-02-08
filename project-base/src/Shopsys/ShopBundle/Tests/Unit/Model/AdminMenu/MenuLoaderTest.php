@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\AdminNavigation;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\AdminNavigation;
 
-use SS6\ShopBundle\Component\Translation\Translator;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\AdminNavigation\MenuLoader;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class MenuLoaderTest extends FunctionalTestCase {
 
@@ -74,12 +74,12 @@ class MenuLoaderTest extends FunctionalTestCase {
 
 		$menuLoader = $this->getMenuLoaderWithMockedTranslator();
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\AdminNavigation\Exception\MissingSettingsItemException::class);
 		$menuLoader->loadFromArray($testMenu);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuLoader
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
 	 */
 	private function getMenuLoaderWithMockedTranslator() {
 		$translatorMock = $this->getMockBuilder(Translator::class)

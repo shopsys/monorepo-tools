@@ -1,54 +1,54 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
-use SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory;
-use SS6\ShopBundle\Model\Transport\TransportEditDataFactory;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory;
+use Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory;
+use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
 	 */
 	private $transportEditFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Detail\TransportDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetailFactory
 	 */
 	private $transportDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Grid\TransportGridFactory
+	 * @var \Shopsys\ShopBundle\Model\Transport\Grid\TransportGridFactory
 	 */
 	private $transportGridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory
 	 */
 	private $transportEditDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $transportEditFacade;
 
@@ -112,7 +112,7 @@ class TransportController extends AdminBaseController {
 	 */
 	public function editAction(Request $request, $id) {
 		$transport = $this->transportEditFacade->getById($id);
-		/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+		/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 		$form = $this->createForm($this->transportEditFormTypeFactory->create());
 
 		$transportEditData = $this->transportEditDataFactory->createFromTransport($transport);
@@ -163,7 +163,7 @@ class TransportController extends AdminBaseController {
 					'name' => $transportName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Transport\Exception\TransportNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected shipping doesn\'t exist.'));
 		}
 

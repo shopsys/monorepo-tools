@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Config;
+namespace Shopsys\ShopBundle\Component\Image\Config;
 
-use SS6\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Condition;
 
 class ImageEntityConfig {
 
@@ -24,7 +24,7 @@ class ImageEntityConfig {
 	private $sizeConfigsByType;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
 	 */
 	private $sizeConfigs;
 
@@ -37,7 +37,7 @@ class ImageEntityConfig {
 	 * @param string $entityName
 	 * @param string $entityClass
 	 * @param array $sizeConfigsByType
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
 	 * @param array $multipleByType
 	 */
 	public function __construct($entityName, $entityClass, array $sizeConfigsByType, array $sizeConfigs, array $multipleByType) {
@@ -70,14 +70,14 @@ class ImageEntityConfig {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
 	 */
 	public function getSizeConfigs() {
 		return $this->sizeConfigs;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
 	 */
 	public function getSizeConfigsByTypes() {
 		return $this->sizeConfigsByType;
@@ -85,19 +85,19 @@ class ImageEntityConfig {
 
 	/**
 	 * @param string $type
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
 	 */
 	public function getSizeConfigsByType($type) {
 		if (array_key_exists($type, $this->sizeConfigsByType)) {
 			return $this->sizeConfigsByType[$type];
 		} else {
-			throw new \SS6\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
+			throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
 		}
 	}
 
 	/**
 	 * @param string|null $sizeName
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
 	 */
 	public function getSizeConfig($sizeName) {
 		return $this->getSizeConfigFromSizeConfigs($this->sizeConfigs, $sizeName);
@@ -106,7 +106,7 @@ class ImageEntityConfig {
 	/**
 	 * @param string|null $type
 	 * @param string|null $sizeName
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
 	 */
 	public function getSizeConfigByType($type, $sizeName) {
 		if ($type === null) {
@@ -126,21 +126,21 @@ class ImageEntityConfig {
 		if (array_key_exists($key, $this->multipleByType)) {
 			return $this->multipleByType[$key];
 		} else {
-			throw new \SS6\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
+			throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException($this->entityClass, $type);
 		}
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizes
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizes
 	 * @param string $sizeName
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig
 	 */
 	private function getSizeConfigFromSizeConfigs($sizes, $sizeName) {
 		$key = Condition::ifNull($sizeName, self::WITHOUT_NAME_KEY);
 		if (array_key_exists($key, $sizes)) {
 			return $sizes[$key];
 		} else {
-			throw new \SS6\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException($this->entityClass, $sizeName);
+			throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException($this->entityClass, $sizeName);
 		}
 	}
 

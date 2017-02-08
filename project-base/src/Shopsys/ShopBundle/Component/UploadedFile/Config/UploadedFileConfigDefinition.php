@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile\Config;
+namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

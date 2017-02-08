@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\User;
 
 class CustomerIdentifier {
 
@@ -12,18 +12,18 @@ class CustomerIdentifier {
 	private $cartIdentifier = '';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\User|null
+	 * @var \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	private $user;
 
 	/**
 	 * @param string $cartIdentifier
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
 	 */
 	public function __construct($cartIdentifier, User $user = null) {
 		if ($cartIdentifier === '' && $user === null) {
 			$message = 'Can not be created empty CustomerIdentifier';
-			throw new \SS6\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException($message);
+			throw new \Shopsys\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException($message);
 		}
 
 		$this->user = $user;
@@ -40,7 +40,7 @@ class CustomerIdentifier {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	public function getUser() {
 		return $this->user;

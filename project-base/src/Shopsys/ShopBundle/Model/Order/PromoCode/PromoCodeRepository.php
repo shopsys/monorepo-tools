@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeRepository {
 
@@ -28,7 +28,7 @@ class PromoCodeRepository {
 
 	/**
 	 * @param int $promoCodeId
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
 	 */
 	public function findById($promoCodeId) {
 		return $this->getPromoCodeRepository()->find($promoCodeId);
@@ -36,7 +36,7 @@ class PromoCodeRepository {
 
 	/**
 	 * @param string $code
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode|null
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
 	 */
 	public function findByCode($code) {
 		return $this->getPromoCodeRepository()->findOneBy(['code' => $code]);
@@ -44,13 +44,13 @@ class PromoCodeRepository {
 
 	/**
 	 * @param int $promoCodeId
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
 	 */
 	public function getById($promoCodeId) {
 		$promoCode = $this->findById($promoCodeId);
 
 		if ($promoCode === null) {
-			throw new \SS6\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException(
+			throw new \Shopsys\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeNotFoundException(
 				'Promo code with ID ' . $promoCodeId . ' not found.'
 			);
 		}
@@ -59,7 +59,7 @@ class PromoCodeRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\PromoCode\PromoCode[]
+	 * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode[]
 	 */
 	public function getAll() {
 		$queryBuilder = $this->em->createQueryBuilder();

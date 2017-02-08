@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\InlineEdit;
+namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,7 +20,7 @@ interface GridInlineEditInterface {
 	public function saveForm(Request $request, $rowId);
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function getGrid();
 

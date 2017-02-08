@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Country;
+namespace Shopsys\ShopBundle\Form\Admin\Country;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Country\CountryData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

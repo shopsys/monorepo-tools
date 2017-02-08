@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Component\Doctrine;
+namespace Shopsys\ShopBundle\Tests\Database\Component\Doctrine;
 
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class GroupedScalarHydratorTest extends DatabaseTestCase {
 

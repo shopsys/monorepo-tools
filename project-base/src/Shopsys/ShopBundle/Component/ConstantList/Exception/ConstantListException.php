@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\ConstantList\Exception;
+namespace Shopsys\ShopBundle\Component\ConstantList\Exception;
 
 interface ConstantListException {
 

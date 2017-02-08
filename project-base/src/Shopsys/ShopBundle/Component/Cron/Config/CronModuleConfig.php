@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Config;
+namespace Shopsys\ShopBundle\Component\Cron\Config;
 
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Cron\CronTimeInterface;
-use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
+use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
 class CronModuleConfig implements CronTimeInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronModuleInterface
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronModuleInterface
 	 */
 	private $cronModuleService;
 
@@ -30,7 +30,7 @@ class CronModuleConfig implements CronTimeInterface {
 
 	// @codingStandardsIgnoreStart
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
 	 * @param string $moduleId
 	 * @param string $timeHours
 	 * @param string $timeMinutes
@@ -41,7 +41,7 @@ class CronModuleConfig implements CronTimeInterface {
 			!$cronModuleService instanceof CronModuleInterface
 			&& !$cronModuleService instanceof IteratedCronModuleInterface
 		) {
-			throw new \SS6\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);
+			throw new \Shopsys\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);
 		}
 		$this->cronModuleService = $cronModuleService;
 		$this->moduleId = $moduleId;
@@ -50,7 +50,7 @@ class CronModuleConfig implements CronTimeInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface
+	 * @return \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
 	 */
 	public function getCronModuleService() {
 		return $this->cronModuleService;

@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Image;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Image;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageConfigDefinition;
-use SS6\ShopBundle\Component\Image\Config\ImageConfigLoader;
-use SS6\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfigDefinition;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getBaseImageConfig() {
@@ -115,19 +115,19 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase {
 				'NonexistentName',
 				null,
 				null,
-				\SS6\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException::class,
+				\Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException::class,
 			],
 			[
 				'Name_1',
 				'NonexistentTypeName',
 				null,
-				\SS6\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException::class,
+				\Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException::class,
 			],
 			[
 				'Name_1',
 				null,
 				'NonexistentSizeName',
-				\SS6\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException::class,
+				\Shopsys\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException::class,
 			],
 		];
 	}

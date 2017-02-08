@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;

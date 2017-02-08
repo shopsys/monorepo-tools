@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country;
+namespace Shopsys\ShopBundle\Model\Country;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Domain;
 
 class CountryFacade {
 
@@ -13,19 +13,19 @@ class CountryFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryRepository
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryRepository
 	 */
 	private $countryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Country\CountryRepository $countryRepository
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryRepository $countryRepository
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -39,16 +39,16 @@ class CountryFacade {
 
 	/**
 	 * @param int $countryId
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	public function getById($countryId) {
 		return $this->countryRepository->getById($countryId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	public function create(CountryData $countryData, $domainId) {
 		$country = new Country($countryData, $domainId);
@@ -60,8 +60,8 @@ class CountryFacade {
 
 	/**
 	 * @param int $countryId
-	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	public function edit($countryId, CountryData $countryData) {
 		$country = $this->countryRepository->getById($countryId);
@@ -73,14 +73,14 @@ class CountryFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Country\Country[]
+	 * @return \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	public function getAllByDomainId($domainId) {
 		return $this->countryRepository->getAllByDomainId($domainId);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Country\Country[]
+	 * @return \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	public function getAllOnCurrentDomain() {
 		return $this->countryRepository->getAllByDomainId($this->domain->getId());

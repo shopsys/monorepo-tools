@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverKeys;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class ProductFilterPage extends AbstractPage {
 

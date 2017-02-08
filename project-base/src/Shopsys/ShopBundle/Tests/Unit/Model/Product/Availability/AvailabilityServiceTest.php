@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Availability;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityService;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 
 class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
 

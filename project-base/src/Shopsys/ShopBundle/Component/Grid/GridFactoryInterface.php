@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
 interface GridFactoryInterface {
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create();
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\AdminNavigation;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\AdminNavigation;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\AdminNavigation\Menu;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 
 class MenuTest extends PHPUnit_Framework_TestCase {
 

@@ -1,29 +1,29 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Product\Accessory\ProductAccessory;
-use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductDomain;
-use SS6\ShopBundle\Model\Product\ProductEditData;
-use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use SS6\ShopBundle\Model\Product\ProductService;
-use SS6\ShopBundle\Model\Product\ProductVisibility;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
+use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductDomain;
+use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Product\ProductVisibility;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductEditFacade {
 
@@ -33,82 +33,82 @@ class ProductEditFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
 	 */
 	private $productVisibilityFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
 	private $parameterRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
 	 */
 	private $pricingGroupRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceFacade
 	 */
 	private $productManualInputPriceFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductHiddenRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
 	 */
 	private $productHiddenRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
 	 */
 	private $productSellingDeniedRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
 	private $productAccessoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVariantService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVariantService
 	 */
 	private $productVariantService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\AvailabilityFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
 	 */
 	private $availabilityFacade;
 
@@ -152,15 +152,15 @@ class ProductEditFacade {
 
 	/**
 	 * @param int $productId
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getById($productId) {
 		return $this->productRepository->getById($productId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function create(ProductEditData $productEditData) {
 		$product = Product::create($productEditData->productData);
@@ -179,8 +179,8 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData) {
 		// Persist of ProductCategoryDomain requires known primary key of Product
@@ -207,8 +207,8 @@ class ProductEditFacade {
 
 	/**
 	 * @param int $productId
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function edit($productId, ProductEditData $productEditData) {
 		$product = $this->productRepository->getById($productId);
@@ -256,8 +256,8 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
 	 */
 	private function saveParameters(Product $product, array $productParameterValuesData) {
 		// Doctrine runs INSERTs before DELETEs in UnitOfWork. In case of UNIQUE constraint
@@ -287,8 +287,8 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 */
 	private function createProductDomains(Product $product, array $domains) {
 		$toFlush = [];
@@ -302,8 +302,8 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
@@ -349,8 +349,8 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
 	 */
 	public function getAllProductSellingPricesIndexedByDomainId(Product $product) {
 		return $this->productService->getProductSellingPricesIndexedByDomainIdAndPricingGroupId(
@@ -360,7 +360,7 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param string[] $manualInputPrices
 	 */
 	private function refreshProductManualInputPrices(Product $product, array $manualInputPrices) {
@@ -374,7 +374,7 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	private function createProductVisibilities(Product $product) {
 		$toFlush = [];
@@ -390,7 +390,7 @@ class ProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $accessories
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
 	 */
 	private function refreshProductAccessories(Product $product, array $accessories) {
 		$oldProductAccessories = $this->productAccessoryRepository->getAllByProduct($product);
@@ -410,7 +410,7 @@ class ProductEditFacade {
 
 	/**
 	 * @param string $productCatnum
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getOneByCatnumExcludeMainVariants($productCatnum) {
 		return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);

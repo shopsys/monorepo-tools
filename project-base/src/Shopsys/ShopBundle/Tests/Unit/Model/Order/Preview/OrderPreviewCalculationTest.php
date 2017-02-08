@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Order;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Order;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use SS6\ShopBundle\Model\Order\OrderPriceCalculation;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
-use SS6\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice;
+use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\ShopBundle\Model\Order\OrderPriceCalculation;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductDiscountCalculation;
+use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase {
 
@@ -27,7 +27,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 	 */
 	public function testCalculatePreviewWithTransportAndPayment() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
 		$paymentPrice = new Price(100, 120);
@@ -110,7 +110,7 @@ class OrderPreviewCalculationTest extends FunctionalTestCase {
 	 */
 	public function testCalculatePreviewWithoutTransportAndPayment() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		$vat = new Vat(new VatData('vatName', 20));
 
 		$unitPrice = new Price(1000, 1200);

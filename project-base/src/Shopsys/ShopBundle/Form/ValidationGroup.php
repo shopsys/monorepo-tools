@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
 class ValidationGroup {
 

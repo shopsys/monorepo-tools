@@ -1,39 +1,39 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Category\CurrentCategoryResolver;
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Component\Category\CurrentCategoryResolver;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Category\CurrentCategoryResolver
+	 * @var \Shopsys\ShopBundle\Component\Category\CurrentCategoryResolver
 	 */
 	private $currentCategoryResolver;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
 	 */
 	private $topCategoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
@@ -104,7 +104,7 @@ class CategoryController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
 	 * @param bool $showProductsCountByCategory
 	 */
 	public function categoryListAction(array $categories, $showProductsCountByCategory = true) {

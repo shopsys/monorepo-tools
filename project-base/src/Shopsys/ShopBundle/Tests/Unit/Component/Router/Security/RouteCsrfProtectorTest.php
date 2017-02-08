@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router\Security;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router\Security;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
-use SS6\ShopBundle\Tests\Unit\Component\Router\Security\DummyController;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Tests\Unit\Component\Router\Security\DummyController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\Security\Csrf\CsrfToken;

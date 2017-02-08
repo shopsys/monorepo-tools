@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator\Security;
+namespace Shopsys\ShopBundle\Model\Administrator\Security;
 
-use SS6\ShopBundle\Model\Administrator\Security\AdministratorUserProvider;
-use SS6\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider;
+use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
@@ -21,7 +21,7 @@ class AdministratorFrontSecurityFacade {
 	private $session;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorUserProvider
 	 */
 	private $administratorUserProvider;
 
@@ -53,7 +53,7 @@ class AdministratorFrontSecurityFacade {
 	public function isAdministratorLogged() {
 		try {
 			$token = $this->getAdministratorToken();
-		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $e) {
+		} catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $e) {
 			return false;
 		}
 
@@ -76,14 +76,14 @@ class AdministratorFrontSecurityFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function getCurrentAdministrator() {
 		if ($this->isAdministratorLogged()) {
 			return $this->getAdministratorToken()->getUser();
 		} else {
 			$message = 'Administrator is not logged.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\AdministratorIsNotLoggedException($message);
 		}
 	}
 
@@ -95,13 +95,13 @@ class AdministratorFrontSecurityFacade {
 		$serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
 		if ($serializedToken === null) {
 			$message = 'Token not found.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
 		}
 
 		$token = unserialize($serializedToken);
 		if (!$token instanceof TokenInterface) {
 			$message = 'Token has invalid interface.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
 		}
 		$this->refreshUserInToken($token);
 
@@ -117,17 +117,17 @@ class AdministratorFrontSecurityFacade {
 		$user = $token->getUser();
 		if (!$user instanceof UserInterface) {
 			$message = 'User in token must implement UserInterface.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
 		}
 
 		try {
 			$freshUser = $this->administratorUserProvider->refreshUser($user);
 		} catch (\Symfony\Component\Security\Core\Exception\UnsupportedUserException $e) {
 			$message = 'AdministratorUserProvider does not support user in this token.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
 		} catch (\Symfony\Component\Security\Core\Exception\UsernameNotFoundException $e) {
 			$message = 'Username not found.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message, $e);
 		}
 
 		$token->setUser($freshUser);

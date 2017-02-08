@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constraints;
+namespace Shopsys\ShopBundle\Component\Constraints;
 
-use SS6\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Component\Constraints\Email;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 

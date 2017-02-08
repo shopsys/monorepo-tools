@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Category;
+namespace Shopsys\ShopBundle\Component\Category;
 
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CurrentCategoryResolver {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
 	 */
 	private $productEditFacade;
 
@@ -29,7 +29,7 @@ class CurrentCategoryResolver {
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\Category|null
+	 * @return \Shopsys\ShopBundle\Model\Category\Category|null
 	 */
 	public function findCurrentCategoryByRequest(Request $request, $domainId) {
 		$routeName = $request->get('_route');

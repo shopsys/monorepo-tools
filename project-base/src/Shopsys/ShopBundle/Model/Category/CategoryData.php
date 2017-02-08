@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category;
+namespace Shopsys\ShopBundle\Model\Category;
 
-use SS6\ShopBundle\Form\UrlListData;
-use SS6\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Form\UrlListData;
+use Shopsys\ShopBundle\Model\Category\Category;
 
 class CategoryData {
 
@@ -18,7 +18,7 @@ class CategoryData {
 	public $descriptions;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category|null
+	 * @var \Shopsys\ShopBundle\Model\Category\Category|null
 	 */
 	public $parent;
 
@@ -28,12 +28,12 @@ class CategoryData {
 	public $hiddenOnDomains;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
 	 */
 	public $heurekaCzFeedCategory;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\UrlListData
+	 * @var \Shopsys\ShopBundle\Form\UrlListData
 	 */
 	public $urls;
 
@@ -51,8 +51,8 @@ class CategoryData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Category\CategoryDomain[] $categoryDomains
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\CategoryDomain[] $categoryDomains
 	 */
 	public function setFromEntity(Category $category, array $categoryDomains) {
 		$translations = $category->getTranslations();

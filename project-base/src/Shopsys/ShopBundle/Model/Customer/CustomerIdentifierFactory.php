@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class CustomerIdentifierFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
@@ -24,7 +24,7 @@ class CustomerIdentifierFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
+	 * @return \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	public function get() {
 		$cartIdentifier = $this->session->getId();
@@ -42,7 +42,7 @@ class CustomerIdentifierFactory {
 
 	/**
 	 * @param string $cartIdentifier
-	 * @return \SS6\ShopBundle\Model\Customer\CustomerIdentifier
+	 * @return \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier
 	 */
 	public function getOnlyWithCartIdentifier($cartIdentifier) {
 		$customerIdentifier = new CustomerIdentifier($cartIdentifier, null);

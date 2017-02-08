@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Product;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Product;
 
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductService;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductServiceTest extends DatabaseTestCase {
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat() {
 		$productService = $this->getContainer()->get(ProductService::class);
-		/* @var $productService \SS6\ShopBundle\Model\Product\ProductService */
+		/* @var $productService \Shopsys\ShopBundle\Model\Product\ProductService */
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
 
@@ -45,9 +45,9 @@ class ProductServiceTest extends DatabaseTestCase {
 
 	public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithVat() {
 		$productService = $this->getContainer()->get(ProductService::class);
-		/* @var $productService \SS6\ShopBundle\Model\Product\ProductService */
+		/* @var $productService \Shopsys\ShopBundle\Model\Product\ProductService */
 		$setting = $this->getContainer()->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
 		$setting->set(PricingSetting::INPUT_PRICE_TYPE, PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
 

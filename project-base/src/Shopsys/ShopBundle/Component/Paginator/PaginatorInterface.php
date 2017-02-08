@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Paginator;
+namespace Shopsys\ShopBundle\Component\Paginator;
 
 interface PaginatorInterface {
 	public function getResult($page, $pageSize);

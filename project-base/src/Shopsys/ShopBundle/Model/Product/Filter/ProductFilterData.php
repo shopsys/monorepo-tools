@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 class ProductFilterData {
 
@@ -15,7 +15,7 @@ class ProductFilterData {
 	public $maximalPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]
 	 */
 	public $parameters = [];
 
@@ -25,12 +25,12 @@ class ProductFilterData {
 	public $inStock;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public $flags = [];
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	public $brands = [];
 

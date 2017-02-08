@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Article;
+namespace Shopsys\ShopBundle\Model\Article;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use SS6\ShopBundle\Component\Gedmo\SortablePosition;
-use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\ShopBundle\Component\Gedmo\SortablePosition;
+use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 /**
  * @ORM\Table(name="articles")
@@ -82,7 +82,7 @@ class Article implements OrderableEntityInterface {
 	private $hidden;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
+	 * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function __construct(ArticleData $articleData) {
 		$this->domainId = $articleData->domainId;
@@ -96,7 +96,7 @@ class Article implements OrderableEntityInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
+	 * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
 	 */
 	public function edit(ArticleData $articleData) {
 		$this->name = $articleData->name;

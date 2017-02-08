@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCompiler;
@@ -24,7 +24,7 @@ class FriendlyUrlRouterFactory {
 	private $routeCompiler;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
 	 */
 	private $friendlyUrlRepository;
 
@@ -46,9 +46,9 @@ class FriendlyUrlRouterFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param \Symfony\Component\Routing\RequestContext $context
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
 	 */
 	public function createRouter(DomainConfig $domainConfig, RequestContext $context) {
 		return new FriendlyUrlRouter(

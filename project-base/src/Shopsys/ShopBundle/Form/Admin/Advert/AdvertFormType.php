@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Advert;
+namespace Shopsys\ShopBundle\Form\Admin\Advert;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Advert\Advert;
-use SS6\ShopBundle\Model\Advert\AdvertData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Advert\Advert;
+use Shopsys\ShopBundle\Model\Advert\AdvertData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -123,7 +123,7 @@ class AdvertFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$advertData = $form->getData();
-				/* @var $advertData \SS6\ShopBundle\Model\Advert\AdvertData */
+				/* @var $advertData \Shopsys\ShopBundle\Model\Advert\AdvertData */
 
 				if ($advertData->type === Advert::TYPE_CODE) {
 					$validationGroups[] = self::VALIDATION_GROUP_TYPE_CODE;

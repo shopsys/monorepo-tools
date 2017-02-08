@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Brand;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Brand;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints;
 class BrandFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand|null
 	 */
 	private $brand;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand|null $brand
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand|null $brand
 	 */
 	public function __construct(Brand $brand = null) {
 		$this->brand = $brand;

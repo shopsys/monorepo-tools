@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="transport_prices")
@@ -13,19 +13,19 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class TransportPrice {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport", inversedBy="prices")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport", inversedBy="prices")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $transport;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Currency\Currency")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Currency\Currency")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $currency;
@@ -38,8 +38,8 @@ class TransportPrice {
 	private $price;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param string $price
 	 */
 	public function __construct(Transport $transport, Currency $currency, $price) {
@@ -49,14 +49,14 @@ class TransportPrice {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function getCurrency() {
 		return $this->currency;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport
 	 */
 	public function getTransport() {
 		return $this->transport;

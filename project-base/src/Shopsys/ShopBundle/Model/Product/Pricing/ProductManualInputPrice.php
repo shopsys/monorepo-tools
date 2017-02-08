@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_manual_input_prices")
@@ -13,19 +13,19 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductManualInputPrice {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Group\PricingGroup")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup")
 	 * @ORM\JoinColumn(nullable=false, name="pricing_group_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $pricingGroup;
@@ -38,8 +38,8 @@ class ProductManualInputPrice {
 	private $inputPrice;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $inputPrice
 	 */
 	public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice) {
@@ -49,14 +49,14 @@ class ProductManualInputPrice {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Group\PricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
 	 */
 	public function getPricingGroup() {
 		return $this->pricingGroup;

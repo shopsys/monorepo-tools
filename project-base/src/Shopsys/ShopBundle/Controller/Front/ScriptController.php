@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Response;
 
 class ScriptController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Script\ScriptFacade
+	 * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
 	 */
 	private $scriptFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -45,7 +45,7 @@ class ScriptController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 */
 	public function embedOrderSentPageScriptsAction(Order $order) {
 		return $this->render('@SS6Shop/Front/Inline/MeasuringScript/scripts.html.twig', [
@@ -54,7 +54,7 @@ class ScriptController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 */
 	public function embedOrderSentPageGoogleAnalyticsScriptAction(Order $order) {
 		if (!$this->scriptFacade->isGoogleAnalyticsActivated($this->domain->getId())) {

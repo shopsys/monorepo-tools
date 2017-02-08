@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail;
+namespace Shopsys\ShopBundle\Model\Mail;
 
 class MessageData {
 

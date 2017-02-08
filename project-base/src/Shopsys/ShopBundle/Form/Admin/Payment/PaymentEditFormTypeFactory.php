@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Payment;
+namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class PaymentEditFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
 	 */
 	private $paymentFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
@@ -23,7 +23,7 @@ class PaymentEditFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Payment\PaymentFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
 	 */
 	public function create() {
 		$currencies = $this->currencyFacade->getAll();

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 
@@ -42,7 +42,7 @@ interface AdvancedSearchFilterInterface {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param \SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $rulesData
+	 * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $rulesData
 	 */
 	public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData);
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Model\AdminNavigation\Menu;
-use SS6\ShopBundle\Model\AdminNavigation\MenuFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 
 class MenuController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuFactory
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
 	 */
 	private $menuFactory;
 

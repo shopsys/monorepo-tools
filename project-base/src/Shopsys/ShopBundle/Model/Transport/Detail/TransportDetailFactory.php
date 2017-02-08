@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport\Detail;
+namespace Shopsys\ShopBundle\Model\Transport\Detail;
 
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
-use SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation
 	 */
 	private $transportVisibilityCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
-	 * @param \SS6\ShopBundle\Model\Transport\TransportVisibilityCalculation $transportVisibilityCalculation
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation $transportPriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation $transportVisibilityCalculation
 	 */
 	public function __construct(
 		TransportPriceCalculation $transportPriceCalculation,
@@ -31,8 +31,8 @@ class TransportDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetail
 	 */
 	public function createDetailForTransportWithIndependentPrices(Transport $transport) {
 		return new TransportDetail(
@@ -42,8 +42,8 @@ class TransportDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @return \SS6\ShopBundle\Model\Transport\Detail\TransportDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @return \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetail[]
 	 */
 	public function createDetailsForTransportsWithIndependentPrices(array $transports) {
 		$details = [];
@@ -59,8 +59,8 @@ class TransportDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private function getIndependentPrices(Transport $transport) {
 		$prices = [];

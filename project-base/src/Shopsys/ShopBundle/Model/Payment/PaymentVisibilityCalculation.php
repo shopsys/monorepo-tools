@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
-use SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation;
 
 class PaymentVisibilityCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 	 */
 	private $independentPaymentVisibilityCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 	 */
 	private $independentTransportVisibilityCalculation;
 
@@ -25,8 +25,8 @@ class PaymentVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function filterVisible(array $payments, $domainId) {
 		$visiblePayments = [];
@@ -40,7 +40,7 @@ class PaymentVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -53,13 +53,13 @@ class PaymentVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param int $domainId
 	 * @return bool
 	 */
 	private function hasIndependentlyVisibleTransport(Payment $payment, $domainId) {
 		foreach ($payment->getTransports() as $transport) {
-			/* @var $transport \SS6\ShopBundle\Model\Transport\Transport */
+			/* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
 			if ($this->independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId)) {
 				return true;
 			}

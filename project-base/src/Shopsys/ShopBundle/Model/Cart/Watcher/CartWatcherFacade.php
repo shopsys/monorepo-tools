@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart\Watcher;
+namespace Shopsys\ShopBundle\Model\Cart\Watcher;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\FlashMessage\FlashMessageSender;
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender;
+use Shopsys\ShopBundle\Model\Cart\Cart;
+use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 
 class CartWatcherFacade {
 
@@ -16,17 +16,17 @@ class CartWatcherFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService
+	 * @var \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService
 	 */
 	private $cartWatcherService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FlashMessage\FlashMessageSender
+	 * @var \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
 	 */
 	private $flashMessageSender;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
@@ -43,7 +43,7 @@ class CartWatcherFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
 	 */
 	public function checkCartModifications(Cart $cart) {
 		$this->checkNotListableItems($cart);
@@ -53,7 +53,7 @@ class CartWatcherFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function checkModifiedPrices(Cart $cart) {
 		$modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
@@ -67,7 +67,7 @@ class CartWatcherFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cart\Cart $cart
+	 * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
 	 */
 	private function checkNotListableItems(Cart $cart) {
 		$notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
@@ -79,7 +79,7 @@ class CartWatcherFacade {
 					t('The price of the product <strong>{{ name }}</strong> you have in cart has changed. Please, check your order.'),
 					['name' => $productName]
 				);
-			} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 				$this->flashMessageSender->addErrorFlash(
 					t('Product you had in cart is no longer in available. Please check your order.')
 				);

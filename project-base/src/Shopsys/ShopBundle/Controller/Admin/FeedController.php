@@ -1,36 +1,36 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Grid\ArrayDataSource;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
-use SS6\ShopBundle\Model\Feed\FeedFacade;
-use SS6\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\ShopBundle\Model\Feed\FeedFacade;
+use Shopsys\ShopBundle\Model\Security\Roles;
 
 class FeedController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
 	 */
 	private $feedFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
 	 */
 	private $feedConfigFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -64,7 +64,7 @@ class FeedController extends AdminBaseController {
 				]
 			);
 
-		} catch (\SS6\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
 				t('Feed "{{ feedName }}" not found.'),
 				[

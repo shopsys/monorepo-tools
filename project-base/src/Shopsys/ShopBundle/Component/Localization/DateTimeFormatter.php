@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Localization;
+namespace Shopsys\ShopBundle\Component\Localization;
 
 use DateTime;
 use IntlDateFormatter;
@@ -8,7 +8,7 @@ use IntlDateFormatter;
 class DateTimeFormatter {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Localization\DateTimeFormatPatternRepository
+	 * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPatternRepository
 	 */
 	private $customDateTimeFormatPatternRepository;
 

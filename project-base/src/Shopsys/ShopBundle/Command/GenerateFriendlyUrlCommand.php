@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +17,7 @@ class GenerateFriendlyUrlCommand extends ContainerAwareCommand {
 
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$friendlyUrlGeneratorFacade = $this->getContainer()->get(FriendlyUrlGeneratorFacade::class);
-		/* @var $friendlyUrlGeneratorFacade \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade */
+		/* @var $friendlyUrlGeneratorFacade \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade */
 
 		$output->writeln('<fg=green>Start of generating missing friendly urls from routing_friendly_url.yml file.</fg=green>');
 

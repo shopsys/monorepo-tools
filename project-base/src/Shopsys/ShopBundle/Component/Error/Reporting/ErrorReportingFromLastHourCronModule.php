@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Error\Reporting;
+namespace Shopsys\ShopBundle\Component\Error\Reporting;
 
 use DateTime;
-use SS6\Environment;
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Mail\MailerService;
-use SS6\ShopBundle\Model\Mail\MessageData;
+use Shopsys\Environment;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Mail\MailerService;
+use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Symfony\Bridge\Monolog\Logger;
 
 class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
@@ -30,25 +30,25 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	private $emailForErrorReporting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
+	 * @var \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade
 	 */
 	private $logErrorReportingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailerService
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailerService
 	 */
 	private $mailerService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
 	 * @param string|null $emailForErrorReporting
-	 * @param \SS6\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
-	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailerService
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Component\Error\Reporting\LogErrorReportingFacade $logErrorReportingFacade
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailerService
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		$emailForErrorReporting,
@@ -83,7 +83,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 			try {
 				$this->mailerService->send($messageData);
 				$this->logger->addInfo('Errors were reported');
-			} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 				$this->logger->addCritical('Error reporting failed: ' . $e->getMessage(), $e->getFailedRecipients());
 			}
 		} else {
@@ -92,7 +92,7 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Mail\MessageData
+	 * @return \Shopsys\ShopBundle\Model\Mail\MessageData
 	 */
 	private function createErrorReportingMessageData() {
 		$logsTail = $this->logErrorReportingFacade->getLogsTail(self::ROTATED_LOG_NAME);

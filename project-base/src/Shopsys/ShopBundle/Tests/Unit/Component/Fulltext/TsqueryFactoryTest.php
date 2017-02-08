@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Fulltext;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Fulltext;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Fulltext\TsqueryFactory;
+use Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory;
 
 class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
 

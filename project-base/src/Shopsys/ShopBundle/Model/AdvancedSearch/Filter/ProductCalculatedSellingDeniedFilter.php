@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch\Filter;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
+use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class ProductCalculatedSellingDeniedFilter implements AdvancedSearchFilterInterface {
 

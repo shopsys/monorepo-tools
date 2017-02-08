@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\AdvancedSearch;
+namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 
 class AdvancedSearchFilterTranslation {
 
@@ -31,6 +31,6 @@ class AdvancedSearchFilterTranslation {
 		}
 
 		$message = 'Filter "' . $filterName . '" translation not found.';
-		throw new \SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
+		throw new \Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
 	}
 }

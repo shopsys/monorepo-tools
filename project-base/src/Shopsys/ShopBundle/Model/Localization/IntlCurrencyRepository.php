@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization;
+namespace Shopsys\ShopBundle\Model\Localization;
 
 use CommerceGuys\Intl\Currency\CurrencyRepository as BaseCurrencyRepository;
 
@@ -171,7 +171,7 @@ class IntlCurrencyRepository extends BaseCurrencyRepository {
 	 */
 	public function get($currencyCode, $locale = null, $fallbackLocale = null) {
 		if (!$this->isSupportedCurrency($currencyCode)) {
-			throw new \SS6\ShopBundle\Model\Localization\Exception\UnsupportedCurrencyException($currencyCode);
+			throw new \Shopsys\ShopBundle\Model\Localization\Exception\UnsupportedCurrencyException($currencyCode);
 		}
 
 		$intlCurrency = parent::get($currencyCode, $locale, $fallbackLocale);

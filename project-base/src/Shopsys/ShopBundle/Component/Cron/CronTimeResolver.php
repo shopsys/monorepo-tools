@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron;
+namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeInterface;
-use SS6\ShopBundle\Component\Cron\CronTimeInterface;
+use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 
 class CronTimeResolver {
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronTimeInterface $cronTime
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronTimeInterface $cronTime
 	 * @param \DateTimeInterface $dateTime
 	 * @return bool
 	 */
@@ -62,7 +62,7 @@ class CronTimeResolver {
 				$timeNumber !== '*'
 				&& !(is_numeric($timeNumber) && $timeNumber <= $maxValue && $timeNumber % $divisibleBy === 0)
 			) {
-				throw new \SS6\ShopBundle\Component\Cron\Config\Exception\InvalidTimeFormatException($timeValue, $maxValue, $divisibleBy);
+				throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\InvalidTimeFormatException($timeValue, $maxValue, $divisibleBy);
 			}
 		}
 	}

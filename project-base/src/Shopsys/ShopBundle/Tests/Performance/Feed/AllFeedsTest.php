@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Feed;
+namespace Shopsys\ShopBundle\Tests\Performance\Feed;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Model\Feed\FeedConfig;
-use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
-use SS6\ShopBundle\Tests\Performance\Feed\PerformanceResultsCsvExporter;
-use SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
+use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceResultsCsvExporter;
+use Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -26,7 +26,7 @@ class AllFeedsTest extends FunctionalTestCase {
 
 	public function testAllFeedsGeneration() {
 		$performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
-		/* @var $performanceResultsCsvExporter \SS6\ShopBundle\Tests\Performance\Feed\PerformanceResultsCsvExporter */
+		/* @var $performanceResultsCsvExporter \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceResultsCsvExporter */
 		$consoleOutput = new ConsoleOutput();
 
 		$consoleOutput->writeln('');
@@ -36,8 +36,8 @@ class AllFeedsTest extends FunctionalTestCase {
 		$allFeedGenerationData = $this->getAllFeedGenerationData();
 		foreach ($allFeedGenerationData as $feedGenerationData) {
 			list($feedConfig, $domainConfig, $maxDuration) = $feedGenerationData;
-			/* @var $feedConfig \SS6\ShopBundle\Model\Feed\FeedConfig */
-			/* @var $domainConfig \SS6\ShopBundle\Component\Domain\Config\DomainConfig */
+			/* @var $feedConfig \Shopsys\ShopBundle\Model\Feed\FeedConfig */
+			/* @var $domainConfig \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig */
 
 			$consoleOutput->writeln(
 				sprintf(
@@ -64,10 +64,10 @@ class AllFeedsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param int $maxDuration
-	 * @return \SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
 	 */
 	private function doTestFeedGeneration(FeedConfig $feedConfig, DomainConfig $domainConfig, $maxDuration) {
 		$performanceTestSample = $this->generateFeed($feedConfig, $domainConfig);
@@ -81,9 +81,9 @@ class AllFeedsTest extends FunctionalTestCase {
 	 */
 	public function getAllFeedGenerationData() {
 		$feedConfigFacade = $this->getContainer()->get(FeedConfigFacade::class);
-		/* @var $feedConfigFacade \SS6\ShopBundle\Model\Feed\FeedConfigFacade */
+		/* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
 		$feedGenerationData = $this->getFeedGenerationData(
 			$feedConfigFacade->getFeedConfigs(),
@@ -100,8 +100,8 @@ class AllFeedsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig[] $feedConfigs
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig[] $feedConfigs
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 * @param int $maxDuration
 	 * @return array[]
 	 */
@@ -117,7 +117,7 @@ class AllFeedsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample $performanceTestSample
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample $performanceTestSample
 	 * @param int $maxDuration
 	 * @param float $realDuration
 	 */
@@ -140,15 +140,15 @@ class AllFeedsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
 	 */
 	private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig) {
 		$client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
 
 		$router = $this->getContainer()->get(CurrentDomainRouter::class);
-		/* @var $router \SS6\ShopBundle\Component\Router\CurrentDomainRouter */
+		/* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
 		$clientEntityManager = $client->getContainer()->get(EntityManager::class);
 		/* @var $clientEntityManager \Doctrine\ORM\EntityManager */
 
@@ -181,7 +181,7 @@ class AllFeedsTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
 	 */
 	private function assertSamplesAreSuccessful(array $performanceTestSamples) {
 		$failMessages = [];

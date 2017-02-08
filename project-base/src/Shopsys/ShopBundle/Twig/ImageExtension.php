@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -26,32 +26,32 @@ class ImageExtension extends Twig_Extension {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
 	 * @param string $frontDesignImageUrlPrefix
 	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Component\Image\ImageLocator $imageLocator
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
-	 * @param \SS6\ShopBundle\Component\Image\ImageFacade $imageFacade
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Image\ImageLocator $imageLocator
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageConfig $imageConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
 	 */
 	public function __construct(
 		$frontDesignImageUrlPrefix,
@@ -93,14 +93,14 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
+	 * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $type
 	 * @return bool
 	 */
 	public function imageExists($imageOrEntity, $type = null) {
 		try {
 			$image = $this->imageFacade->getImageByObject($imageOrEntity, $type);
-		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			return false;
 		}
 
@@ -108,7 +108,7 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
+	 * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $sizeName
 	 * @param string|null $type
 	 * @return string
@@ -116,7 +116,7 @@ class ImageExtension extends Twig_Extension {
 	public function getImageUrl($imageOrEntity, $sizeName = null, $type = null) {
 		try {
 			return $this->imageFacade->getImageUrl($this->domain->getCurrentDomainConfig(), $imageOrEntity, $sizeName, $type);
-		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			return $this->getEmptyImageUrl();
 		}
 	}
@@ -124,14 +124,14 @@ class ImageExtension extends Twig_Extension {
 	/**
 	 * @param Object $entity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\Image\Image[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[]
 	 */
 	public function getImages($entity, $type = null) {
 		return $this->imageFacade->getImagesByEntityIndexedById($entity, $type);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
+	 * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param array $attributes
 	 * @return string
 	 */
@@ -142,7 +142,7 @@ class ImageExtension extends Twig_Extension {
 			$image = $this->imageFacade->getImageByObject($imageOrEntity, $attributes['type']);
 			$entityName = $image->getEntityName();
 			$attributes['src'] = $this->getImageUrl($image, $attributes['size'], $attributes['type']);
-		} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 			$entityName = 'noimage';
 			$attributes['src'] = $this->getEmptyImageUrl();
 		}
@@ -171,7 +171,7 @@ class ImageExtension extends Twig_Extension {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image $image
+	 * @param \Shopsys\ShopBundle\Component\Image\Image $image
 	 * @param string|null $sizeName
 	 * @return string
 	 */

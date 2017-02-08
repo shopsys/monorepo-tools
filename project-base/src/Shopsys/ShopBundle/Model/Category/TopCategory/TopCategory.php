@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category\TopCategory;
+namespace Shopsys\ShopBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\Category;
 
 /**
  * @ORM\Table(name="categories_top")
@@ -12,9 +12,9 @@ use SS6\ShopBundle\Model\Category\Category;
 class TopCategory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category
+	 * @var \Shopsys\ShopBundle\Model\Category\Category
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Category\Category")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Category\Category")
 	 * @ORM\JoinColumn(nullable=false, name="category_id", referencedColumnName="id", onDelete="CASCADE")
 	 * @ORM\Id
 	 */
@@ -36,7 +36,7 @@ class TopCategory {
 	private $position;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
 	 * @param int $position
 	 */
@@ -47,7 +47,7 @@ class TopCategory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \Shopsys\ShopBundle\Model\Category\Category
 	 */
 	public function getCategory() {
 		return $this->category;

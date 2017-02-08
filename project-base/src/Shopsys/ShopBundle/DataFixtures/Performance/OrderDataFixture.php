@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Doctrine\ORM\EntityManager;
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\Console\ProgressBar;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture;
-use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
-use SS6\ShopBundle\Model\Customer\CustomerFacade;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Component\Console\ProgressBar;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture as PerformanceProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture as PerformanceUserDataFixture;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture {
@@ -49,12 +49,12 @@ class OrderDataFixture {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\EntityManagerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade
 	 */
 	private $entityManagerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
 	 */
 	private $sqlLoggerFacade;
 
@@ -64,27 +64,27 @@ class OrderDataFixture {
 	private $faker;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
 	private $persistentReferenceFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
 	 */
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
 	private $orderPreviewFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
 	 */
 	private $productEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerFacade;
 
@@ -163,8 +163,8 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return \SS6\ShopBundle\Model\Order\OrderData
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @return \Shopsys\ShopBundle\Model\Order\OrderData
 	 */
 	private function createOrderData(User $user = null) {
 		$orderData = new OrderData();
@@ -218,7 +218,7 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
 	 */
 	private function createQuantifiedProducts() {
 		$quantifiedProducts = [];
@@ -238,7 +238,7 @@ class OrderDataFixture {
 		$firstPerformaceProduct = $this->persistentReferenceFacade->getReference(
 			PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
 		);
-		/* @var $firstPerformaceProduct \SS6\ShopBundle\Model\Product\Product */
+		/* @var $firstPerformaceProduct \Shopsys\ShopBundle\Model\Product\Product */
 
 		$qb = $this->em->createQueryBuilder()
 			->select('p.id')
@@ -263,7 +263,7 @@ class OrderDataFixture {
 		$firstPerformaceUser = $this->persistentReferenceFacade->getReference(
 			PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
 		);
-		/* @var $firstPerformaceUser \SS6\ShopBundle\Model\Customer\User */
+		/* @var $firstPerformaceUser \Shopsys\ShopBundle\Model\Customer\User */
 
 		$qb = $this->em->createQueryBuilder()
 			->select('u.id')
@@ -277,7 +277,7 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	private function getRandomUserOrNull() {
 		$shouldBeRegisteredUser = $this->faker->boolean(self::PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS);
@@ -291,7 +291,7 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport
 	 */
 	private function getRandomTransport() {
 		$randomTransportReferenceName = $this->faker->randomElement([
@@ -304,7 +304,7 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	private function getRandomPayment() {
 		$randomPaymentReferenceName = $this->faker->randomElement([
@@ -317,7 +317,7 @@ class OrderDataFixture {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	private function getRandomCountryFromFirstDomain() {
 		$randomPaymentReferenceName = $this->faker->randomElement([

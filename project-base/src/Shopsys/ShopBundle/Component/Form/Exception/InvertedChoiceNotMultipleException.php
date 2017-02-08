@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Form\Exception;
+namespace Shopsys\ShopBundle\Component\Form\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Form\Exception\FormException;
+use Shopsys\ShopBundle\Component\Form\Exception\FormException;
 
 class InvertedChoiceNotMultipleException extends Exception implements FormException {
 

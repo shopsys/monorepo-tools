@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Transformers;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Transformers;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category\TopCategory;
+namespace Shopsys\ShopBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\TopCategory\TopCategoryRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryRepository;
 
 class TopCategoryFacade {
 
@@ -14,7 +14,7 @@ class TopCategoryFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\TopCategory\TopCategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryRepository
 	 */
 	private $topCategoryRepository;
 
@@ -28,7 +28,7 @@ class TopCategoryFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\TopCategory\TopCategory[]
+	 * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
 	 */
 	public function getAll($domainId) {
 		return $this->topCategoryRepository->getAll($domainId);
@@ -36,7 +36,7 @@ class TopCategoryFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\Category[]
+	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
 	 */
 	public function getCategoriesForAll($domainId) {
 		$topCategories = $this->getAll($domainId);
@@ -51,7 +51,7 @@ class TopCategoryFacade {
 
 	/**
 	 * @param $domainId
-	 * @param \SS6\ShopBundle\Model\Category\Category[] $categories
+	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
 	 */
 	public function saveTopCategoriesForDomain($domainId, array $categories) {
 		$oldTopCategories = $this->topCategoryRepository->getAll($domainId);

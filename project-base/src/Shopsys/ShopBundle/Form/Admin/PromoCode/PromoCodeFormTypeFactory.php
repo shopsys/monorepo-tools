@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\PromoCode;
+namespace Shopsys\ShopBundle\Form\Admin\PromoCode;
 
-use SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
+use Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
 
 class PromoCodeFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
 	 */
 	private $promoCodeRepository;
 
@@ -18,15 +18,15 @@ class PromoCodeFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
 	 */
 	public function create() {
 		return new PromoCodeFormType($this->getAllPromoCodes());
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
-	 * @return \SS6\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
+	 * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
 	 */
 	public function createForPromoCode(PromoCode $promoCode) {
 		return new PromoCodeFormType($this->getAllPromoCodesExceptEdited($promoCode));
@@ -45,7 +45,7 @@ class PromoCodeFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCode $editedPromoCode
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $editedPromoCode
 	 * @return string[]
 	 */
 	private function getAllPromoCodesExceptEdited(PromoCode $editedPromoCode) {

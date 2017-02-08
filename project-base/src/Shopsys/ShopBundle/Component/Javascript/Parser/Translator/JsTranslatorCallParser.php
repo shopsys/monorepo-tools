@@ -1,37 +1,37 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
 
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\JNodeBase;
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
-use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
-use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
+use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
+use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsTranslatorCallParser {
 
 	const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+	 * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
 	 */
 	private $jsFunctionCallParser;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser
+	 * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser
 	 */
 	private $jsStringParser;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\TransMethodSpecification[]
+	 * @var \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[]
 	 */
 	private $transMethodSpecifications;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
-	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
-	 * @param \SS6\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
+	 * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
+	 * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
+	 * @param \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
 	 */
 	public function __construct(
 		JsFunctionCallParser $jsFunctionCallParser,
@@ -50,7 +50,7 @@ class JsTranslatorCallParser {
 
 	/**
 	 * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
-	 * @return \SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall[]
+	 * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall[]
 	 */
 	public function parse(JProgramNode $node) {
 		$jsTranslatorCalls = [];
@@ -97,8 +97,8 @@ class JsTranslatorCallParser {
 	private function getMessageId(JNodeBase $messageIdArgumentNode) {
 		try {
 			$messageId = $this->jsStringParser->getConcatenatedString($messageIdArgumentNode);
-		} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
-			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
+		} catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
+			throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 				'Cannot parse message ID ' . (string)$messageIdArgumentNode
 					. ' at line ' . $messageIdArgumentNode->get_line_num()
 					. ', column ' . $messageIdArgumentNode->get_col_num(),
@@ -121,8 +121,8 @@ class JsTranslatorCallParser {
 		if ($domainArgumentIndex !== null && isset($argumentNodes[$domainArgumentIndex])) {
 			try {
 				$domain = $this->jsStringParser->getConcatenatedString($argumentNodes[$domainArgumentIndex]);
-			} catch (\SS6\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
-				throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
+			} catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
+				throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 					'Cannot parse domain ' . (string)$argumentNodes[$domainArgumentIndex]
 						. ' at line ' . $argumentNodes[$domainArgumentIndex]->get_line_num()
 						. ', column ' . $argumentNodes[$domainArgumentIndex]->get_col_num(),
@@ -146,7 +146,7 @@ class JsTranslatorCallParser {
 
 		$argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
 		if (!isset($argumentNodes[$messageIdArgumentIndex])) {
-			throw new \SS6\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
+			throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\Exception\JsTranslatorCallParserException(
 				'Message ID argument not specified at line ' . $callExprNode->get_line_num()
 					. ', column ' . $callExprNode->get_col_num()
 			);

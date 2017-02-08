@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
 use Closure;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
 class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 
@@ -37,7 +37,7 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
 	 * @param int $page
 	 * @param string|null $orderSourceColumnName
 	 * @param string $orderDirection
-	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC) {
 		$originalPaginationResult = parent::getPaginatedRows($limit, $page, $orderSourceColumnName, $orderDirection);

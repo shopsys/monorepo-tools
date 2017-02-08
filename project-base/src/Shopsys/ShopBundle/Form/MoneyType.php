@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 

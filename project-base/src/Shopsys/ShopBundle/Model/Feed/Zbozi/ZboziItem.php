@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Zbozi;
+namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
 
-use SS6\ShopBundle\Model\Feed\FeedItemInterface;
+use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
 class ZboziItem implements FeedItemInterface {
 

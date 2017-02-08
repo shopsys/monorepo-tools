@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Crawler;
+namespace Shopsys\ShopBundle\Tests\Crawler;
 
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdminAccessRightsTest extends FunctionalTestCase {
 

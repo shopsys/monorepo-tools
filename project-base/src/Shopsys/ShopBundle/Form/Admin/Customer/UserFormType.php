@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use SS6\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\ShopBundle\Component\Constraints\NotIdenticalToEmailLocalPart;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Customer\UserData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,19 +20,19 @@ class UserFormType extends AbstractType {
 	private $scenario;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	private $pricingGroups;
 
 	/**
 	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
+	 * @param \Shopsys\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
 	 */
 	public function __construct($scenario, $selectedDomain = null, $pricingGroups = null) {
 		$this->scenario = $scenario;

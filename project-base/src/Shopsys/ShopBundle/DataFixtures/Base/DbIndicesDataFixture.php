@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
-use SS6\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 
 class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface {
 
@@ -14,7 +14,7 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
 	 */
 	public function load(ObjectManager $manager) {
 		$localization = $this->get(Localization::class);
-		/* @var $localization \SS6\ShopBundle\Model\Localization\Localization */
+		/* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
 		foreach ($localization->getAllLocales() as $locale) {
 			$domainCollation = $localization->getCollationByLocale($locale);
 			$this->executeNativeQuery('CREATE INDEX product_translations_name_' . $locale . '_idx

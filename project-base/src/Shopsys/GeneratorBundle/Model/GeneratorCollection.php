@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\AbstractGenerator;
-use SS6\GeneratorBundle\Model\GeneratorInterface;
+use Shopsys\GeneratorBundle\Model\AbstractGenerator;
+use Shopsys\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
 class GeneratorCollection {
 
 	/**
-	 * @var \SS6\GeneratorBundle\Model\GeneratorInterface[]
+	 * @var \Shopsys\GeneratorBundle\Model\GeneratorInterface[]
 	 */
 	private $generatorsByName;
 
@@ -33,11 +33,11 @@ class GeneratorCollection {
 	}
 
 	/**
-	 * @param \SS6\GeneratorBundle\Model\GeneratorInterface $generator
+	 * @param \Shopsys\GeneratorBundle\Model\GeneratorInterface $generator
 	 */
 	public function addGenerator(GeneratorInterface $generator) {
 		if ($this->has($generator->getName())) {
-			throw new \SS6\GeneratorBundle\Model\Exception\DuplicateGeneratorNameException($generator->getName());
+			throw new \Shopsys\GeneratorBundle\Model\Exception\DuplicateGeneratorNameException($generator->getName());
 		}
 		if ($generator instanceof AbstractGenerator) {
 			$generator->setTwig($this->getTwig());
@@ -54,7 +54,7 @@ class GeneratorCollection {
 	}
 
 	/**
-	 * @return \SS6\GeneratorBundle\Model\GeneratorInterface[]
+	 * @return \Shopsys\GeneratorBundle\Model\GeneratorInterface[]
 	 */
 	public function getGenerators() {
 		return $this->generatorsByName;

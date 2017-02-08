@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Zbozi;
+namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
 
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\ProductDomain;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\ProductDomain;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ZboziItemRepository implements FeedItemRepositoryInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Zbozi\ZboziItemFactory
+	 * @var \Shopsys\ShopBundle\Model\Feed\Zbozi\ZboziItemFactory
 	 */
 	private $zboziItemFactory;
 

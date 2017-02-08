@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Brand;
+namespace Shopsys\ShopBundle\Model\Product\Brand;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
-use SS6\ShopBundle\Model\Localization\AbstractTranslatableEntity;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 
 /**
  * @ORM\Table(name="brands")
@@ -31,14 +31,14 @@ class Brand extends AbstractTranslatableEntity {
 	private $name;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandTranslation[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation[]
 	 *
-	 * @Prezent\Translations(targetEntity="SS6\ShopBundle\Model\Product\Brand\BrandTranslation")
+	 * @Prezent\Translations(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation")
 	 */
 	protected $translations;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
 	 */
 	public function __construct(BrandData $brandData) {
 		$this->name = $brandData->name;
@@ -61,7 +61,7 @@ class Brand extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
 	 */
 	public function edit(BrandData $brandData) {
 		$this->name = $brandData->name;
@@ -69,18 +69,18 @@ class Brand extends AbstractTranslatableEntity {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Brand\BrandData $brandData
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
 	 */
 	private function setTranslations(BrandData $brandData) {
 		foreach ($brandData->descriptions as $locale => $description) {
 			$brandTranslation = $this->translation($locale);
-			/* @var $brandTranslation \SS6\ShopBundle\Model\Product\Brand\BrandTranslation */
+			/* @var $brandTranslation \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation */
 			$brandTranslation->setDescription($description);
 		}
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Brand\BrandTranslation
+	 * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation
 	 */
 	protected function createTranslation() {
 		return new BrandTranslation();

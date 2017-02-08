@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\GeneratorInterface;
+use Shopsys\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 
 abstract class AbstractGenerator implements GeneratorInterface {
@@ -27,7 +27,7 @@ abstract class AbstractGenerator implements GeneratorInterface {
 	 */
 	protected function renderFile($template, $target, array $parameters) {
 		if (file_exists($target)) {
-			throw new \SS6\GeneratorBundle\Model\Exception\GeneratorTargetFileAlreadyExistsExpception($target);
+			throw new \Shopsys\GeneratorBundle\Model\Exception\GeneratorTargetFileAlreadyExistsExpception($target);
 		}
 		if (!is_dir(dirname($target))) {
 			mkdir(dirname($target), 0777, true);

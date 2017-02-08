@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
 class FrontOrderData extends OrderData {
 

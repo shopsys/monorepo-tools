@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\TopProduct;
+namespace Shopsys\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository;
+use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 
 class TopProductFacade {
 
@@ -15,12 +15,12 @@ class TopProductFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository
 	 */
 	private $topProductRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
@@ -36,7 +36,7 @@ class TopProductFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
+	 * @return \Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
 	public function getAll($domainId) {
 		return $this->topProductRepository->getAll($domainId);
@@ -44,8 +44,8 @@ class TopProductFacade {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAllOfferedProductDetails($domainId, $pricingGroup) {
 		$products = $this->topProductRepository->getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup);
@@ -54,7 +54,7 @@ class TopProductFacade {
 
 	/**
 	 * @param $domainId
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
 	 */
 	public function saveTopProductsForDomain($domainId, array $products) {
 		$oldTopProducts = $this->topProductRepository->getAll($domainId);

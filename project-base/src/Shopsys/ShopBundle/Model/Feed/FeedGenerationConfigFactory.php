@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Feed\FeedConfigFacade;
-use SS6\ShopBundle\Model\Feed\FeedGenerationConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
+use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade
 	 */
 	private $feedConfigFacade;
 
@@ -24,7 +24,7 @@ class FeedGenerationConfigFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedGenerationConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
 	 */
 	public function createAll() {
 		$feedGenerationConfigs = [];

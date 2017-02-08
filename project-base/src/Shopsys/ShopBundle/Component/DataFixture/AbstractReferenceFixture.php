@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture;
+namespace Shopsys\ShopBundle\Component\DataFixture;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -15,7 +15,7 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
 	protected $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
 	private $persistentReferenceFacade;
 

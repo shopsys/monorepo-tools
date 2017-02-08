@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\Country;
 
 /**
  * @ORM\Table(name="delivery_addresses")
@@ -70,14 +70,14 @@ class DeliveryAddress {
 	private $telephone;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country|null
-	 * @ORM\ManyToOne(targetEntity="\SS6\ShopBundle\Model\Country\Country")
+	 * @var \Shopsys\ShopBundle\Model\Country\Country|null
+	 * @ORM\ManyToOne(targetEntity="\Shopsys\ShopBundle\Model\Country\Country")
 	 * @ORM\JoinColumn(name="country_id", referencedColumnName="id", nullable=true)
 	 */
 	private $country;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
 	public function __construct(DeliveryAddressData $deliveryAddressData) {
 		$this->street = $deliveryAddressData->street;
@@ -91,7 +91,7 @@ class DeliveryAddress {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
+	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
 	 */
 	public function edit(DeliveryAddressData $deliveryAddressData) {
 		$this->street = $deliveryAddressData->street;
@@ -154,7 +154,7 @@ class DeliveryAddress {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Country\Country|null
+	 * @return \Shopsys\ShopBundle\Model\Country\Country|null
 	 */
 	public function getCountry() {
 		return $this->country;

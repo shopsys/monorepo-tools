@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Javascript\Compiler\Constant;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Javascript\Compiler\Constant;
 
 class Testclass {
 

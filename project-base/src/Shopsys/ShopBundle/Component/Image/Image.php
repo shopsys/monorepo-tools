@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image;
+namespace Shopsys\ShopBundle\Component\Image;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Component\FileUpload\EntityFileUploadInterface;
-use SS6\ShopBundle\Component\FileUpload\FileForUpload;
-use SS6\ShopBundle\Component\FileUpload\FileNamingConvention;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\FileUpload\EntityFileUploadInterface;
+use Shopsys\ShopBundle\Component\FileUpload\FileForUpload;
+use Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 
 /**
  * @ORM\Table(name="images", indexes={@ORM\Index(columns={"entity_name", "entity_id", "type"})})
@@ -87,7 +87,7 @@ class Image implements EntityFileUploadInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\FileUpload\FileForUpload[]
+	 * @return \Shopsys\ShopBundle\Component\FileUpload\FileForUpload[]
 	 */
 	public function getTemporaryFilesForUpload() {
 		$files = [];
@@ -111,7 +111,7 @@ class Image implements EntityFileUploadInterface {
 		if ($key === self::UPLOAD_KEY) {
 			$this->extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
 		} else {
-			throw new \SS6\ShopBundle\Component\FileUpload\Exception\InvalidFileKeyException($key);
+			throw new \Shopsys\ShopBundle\Component\FileUpload\Exception\InvalidFileKeyException($key);
 		}
 	}
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Unit;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Unit;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Constraints;
 class UnitSettingFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	private $units;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
 	 */
 	public function __construct(array $units) {
 		$this->units = $units;

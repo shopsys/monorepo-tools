@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category;
+namespace Shopsys\ShopBundle\Model\Feed\Category;
 
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade;
-use SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryFacade;
+use Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
 
 class FeedCategoryLoaderFacade {
 
@@ -18,20 +18,20 @@ class FeedCategoryLoaderFacade {
 	private $heurekaCategoryFeedBackupFilepath;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryFacade
 	 */
 	private $feedCategoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader
+	 * @var \Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader
 	 */
 	private $heurekaFeedCategoryLoader;
 
 	/**
 	 * @param string $heurekaCategoryFeedUrl
 	 * @param string $heurekaCategoryFeedBackupFilepath
-	 * @param \SS6\ShopBundle\Model\Feed\Category\FeedCategoryFacade $feedCategoryFacade
-	 * @param \SS6\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader $heurekaFeedCategoryLoader
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryFacade $feedCategoryFacade
+	 * @param \Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader $heurekaFeedCategoryLoader
 	 */
 	public function __construct(
 		$heurekaCategoryFeedUrl,

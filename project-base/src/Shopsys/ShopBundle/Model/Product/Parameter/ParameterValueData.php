@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
 
 class ParameterValueData {
 
@@ -26,7 +26,7 @@ class ParameterValueData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $parameterValue
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue $parameterValue
 	 */
 	public function setFromEntity(ParameterValue $parameterValue) {
 		$this->text = $parameterValue->getText();

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\String;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\String;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\String\TransformString;
+use Shopsys\ShopBundle\Component\String\TransformString;
 
 class TransformStringTest extends PHPUnit_Framework_TestCase {
 

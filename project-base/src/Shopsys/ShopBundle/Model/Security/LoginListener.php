@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security;
+namespace Shopsys\ShopBundle\Model\Security;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
-use SS6\ShopBundle\Model\Administrator\Administrator;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\OrderFlowFacade;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
+use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\OrderFlowFacade;
+use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListener {
@@ -20,12 +20,12 @@ class LoginListener {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFlowFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade
 	 */
 	private $orderFlowFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivityFacade
 	 */
 	private $administratorActivityFacade;
 

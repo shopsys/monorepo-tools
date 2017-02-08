@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Payment;
+namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,18 +12,18 @@ use Symfony\Component\Validator\Constraints;
 class PaymentEditFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
 	 */
 	private $paymentFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
 	 */
 	private $currencies;
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory $paymentFormTypeFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
+	 * @param \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory $paymentFormTypeFactory
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
 	 */
 	public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, array $currencies) {
 		$this->paymentFormTypeFactory = $paymentFormTypeFactory;

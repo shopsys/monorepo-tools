@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class ProductPrice extends Price {
 
@@ -12,7 +12,7 @@ class ProductPrice extends Price {
 	private $priceFrom;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
 	 * @param bool $priceFrom
 	 */
 	public function __construct(Price $price, $priceFrom) {

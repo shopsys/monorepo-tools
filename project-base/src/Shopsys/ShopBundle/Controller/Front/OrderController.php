@@ -1,29 +1,29 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
-use SS6\ShopBundle\Form\Front\Order\OrderFlow;
-use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Country\CountryFacade;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Newsletter\NewsletterFacade;
-use SS6\ShopBundle\Model\Order\FrontOrderData;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailFacade;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderDataMapper;
-use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreview;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
-use SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportPriceCalculation;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\HttpFoundation\DownloadFileResponse;
+use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
+use Shopsys\ShopBundle\Model\Cart\CartFacade;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
+use Shopsys\ShopBundle\Model\Order\FrontOrderData;
+use Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderDataMapper;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,67 +34,67 @@ class OrderController extends FrontBaseController {
 	const SESSION_CREATED_ORDER = 'created_order_id';
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Front\Order\OrderFlow
+	 * @var \Shopsys\ShopBundle\Form\Front\Order\OrderFlow
 	 */
 	private $flow;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Mail\OrderMailFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailFacade
 	 */
 	private $orderMailFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderDataMapper
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderDataMapper
 	 */
 	private $orderDataMapper;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
 	 */
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory
+	 * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory
 	 */
 	private $orderPreviewFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
+	 * @var \Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService
 	 */
 	private $transportAndPaymentWatcherService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $transportEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
 	 */
 	private $transportPriceCalculation;
 
@@ -104,17 +104,17 @@ class OrderController extends FrontBaseController {
 	private $session;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
+	 * @var \Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade
 	 */
 	private $termsAndConditionsFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterFacade
+	 * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
 	 */
 	private $newsletterFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
 
@@ -161,7 +161,7 @@ class OrderController extends FrontBaseController {
 	 */
 	public function indexAction() {
 		$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
-		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
+		/* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
 		$cart = $this->cartFacade->getCartOfCurrentCustomer();
 		if ($cart->isEmpty()) {
@@ -218,7 +218,7 @@ class OrderController extends FrontBaseController {
 
 				try {
 					$this->sendMail($order);
-				} catch (\SS6\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
+				} catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $e) {
 					$this->getFlashMessageSender()->addErrorFlash(
 						t('Unable to send some e-mails, please contact us for order verification.')
 					);
@@ -285,10 +285,10 @@ class OrderController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
-	 * @param \SS6\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
 	 */
 	private function checkTransportAndPaymentChanges(
 		OrderData $orderData,
@@ -373,7 +373,7 @@ class OrderController extends FrontBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Order $order
+	 * @param \Shopsys\ShopBundle\Model\Order\Order $order
 	 */
 	private function sendMail($order) {
 		$mailTemplate = $this->orderMailFacade->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());

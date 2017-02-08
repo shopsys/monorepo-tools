@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Twig\FileThumbnail;
+namespace Shopsys\ShopBundle\Twig\FileThumbnail;
 
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
-use SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
+use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
@@ -19,12 +19,12 @@ class FileThumbnailExtension extends Twig_Extension {
 	private $iconsByExtension;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageThumbnailFactory
+	 * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory
 	 */
 	private $imageThumbnailFactory;
 
@@ -65,19 +65,19 @@ class FileThumbnailExtension extends Twig_Extension {
 
 	/**
 	 * @param string $filepath
-	 * @return \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+	 * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
 	 */
 	public function getFileThumbnailInfo($filepath) {
 		try {
 			return $this->getImageThumbnailInfo($filepath);
-		} catch (\SS6\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
+		} catch (\Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException $ex) {
 			return new FileThumbnailInfo($this->getIconTypeByFilename($filepath));
 		}
 	}
 
 	/**
 	 * @param string $temporaryFilename
-	 * @return \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+	 * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
 	 */
 	public function getFileThumbnailInfoByTemporaryFilename($temporaryFilename) {
 		$filepath = $this->fileUpload->getTemporaryFilepath($temporaryFilename);
@@ -87,7 +87,7 @@ class FileThumbnailExtension extends Twig_Extension {
 
 	/**
 	 * @param string $filepath
-	 * @return \SS6\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
+	 * @return \Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo
 	 */
 	private function getImageThumbnailInfo($filepath) {
 		$image = $this->imageThumbnailFactory->getImageThumbnail($filepath);

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Flag;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Flag;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Flag\Flag;
-use SS6\ShopBundle\Model\Product\Flag\FlagData;
-use SS6\ShopBundle\Model\Product\Flag\FlagService;
+use Shopsys\ShopBundle\Model\Product\Flag\Flag;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
 class FlagServiceTest extends PHPUnit_Framework_TestCase {
 

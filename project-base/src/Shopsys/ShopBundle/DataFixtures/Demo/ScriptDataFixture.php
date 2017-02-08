@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Script\Script;
-use SS6\ShopBundle\Model\Script\ScriptData;
-use SS6\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Script\Script;
+use Shopsys\ShopBundle\Model\Script\ScriptData;
+use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 
 class ScriptDataFixture extends AbstractReferenceFixture {
 
@@ -29,11 +29,11 @@ class ScriptDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Script\ScriptData $scriptData
+	 * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
 	 */
 	private function createScript(ScriptData $scriptData) {
 		$scriptFacade = $this->get(ScriptFacade::class);
-		/* @var $scriptFacade \SS6\ShopBundle\Model\Script\ScriptFacade */
+		/* @var $scriptFacade \Shopsys\ShopBundle\Model\Script\ScriptFacade */
 		$scriptFacade->create($scriptData);
 	}
 }

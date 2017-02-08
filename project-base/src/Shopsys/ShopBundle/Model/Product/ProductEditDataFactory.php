@@ -1,56 +1,56 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
-use SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductDataFactory;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
+use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductDataFactory;
 
 class ProductEditDataFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
 	private $parameterRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductDataFactory
 	 */
 	private $productDataFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
 	 */
 	private $productInputPriceFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
 	 */
 	private $friendlyUrlFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
 	 */
 	private $productAccessoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
@@ -75,7 +75,7 @@ class ProductEditDataFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
 	 */
 	public function createDefault() {
 		$productEditData = new ProductEditData();
@@ -103,8 +103,8 @@ class ProductEditDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\ProductEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
 	 */
 	public function createFromProduct(Product $product) {
 		$productEditData = $this->createDefault();
@@ -113,7 +113,7 @@ class ProductEditDataFactory {
 		$productEditData->parameters = $this->getParametersData($product);
 		try {
 			$productEditData->manualInputPrices = $this->productInputPriceFacade->getManualInputPricesData($product);
-		} catch (\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
 			$productEditData->manualInputPrices = null;
 		}
 		$productEditData->accessories = $this->getAccessoriesData($product);
@@ -126,8 +126,8 @@ class ProductEditDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Product[position]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[position]
 	 */
 	private function getAccessoriesData(Product $product) {
 		$productAccessories = [];
@@ -140,7 +140,7 @@ class ProductEditDataFactory {
 
 	/**
 	 * @param Product $product
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
 	 */
 	private function getParametersData(Product $product) {
 		$productParameterValuesData = [];
@@ -155,8 +155,8 @@ class ProductEditDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\ProductEditData $productEditData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
 	 */
 	private function setMultidomainData(Product $product, ProductEditData $productEditData) {
 		$productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearchOrder;
+namespace Shopsys\ShopBundle\Model\AdvancedSearchOrder;
 
-use SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
-use SS6\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
-use SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
+use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService;
+use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade {
@@ -13,22 +13,22 @@ class AdvancedSearchOrderFacade {
 	const RULES_FORM_NAME = 'as';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchFormFactory
 	 */
 	private $orderAdvancedSearchFormFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
+	 * @var \Shopsys\ShopBundle\Model\AdvancedSearchOrder\AdvancedSearchOrderService
 	 */
 	private $advancedSearchOrderService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade
 	 */
 	private $productListAdminFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Listing\OrderListAdminFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade
 	 */
 	private $orderListAdminFacade;
 

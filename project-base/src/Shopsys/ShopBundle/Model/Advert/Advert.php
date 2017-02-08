@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Advert;
+namespace Shopsys\ShopBundle\Model\Advert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -72,7 +72,7 @@ class Advert {
 	private $hidden;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Advert\AdvertData $advert
+	 * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advert
 	 */
 	public function __construct(AdvertData $advert) {
 		$this->domainId = $advert->domainId;
@@ -85,7 +85,7 @@ class Advert {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Advert\AdvertData $advert
+	 * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advert
 	 */
 	public function edit(AdvertData $advert) {
 		$this->domainId = $advert->domainId;

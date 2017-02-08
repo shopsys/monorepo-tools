@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Model\Payment;
+namespace Shopsys\ShopBundle\Tests\Database\Model\Payment;
 
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportData;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase {
 
@@ -27,7 +27,7 @@ class PaymentTest extends DatabaseTestCase {
 		$em->flush();
 
 		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 		$transportEditFacade->deleteById($transport->getId());
 
 		$this->assertFalse($payment->getTransports()->contains($transport));

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception\Exception;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception\Exception;
 
 use Exception;
 

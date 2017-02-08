@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Model\ContactForm;
+namespace Shopsys\ShopBundle\Model\ContactForm;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\ContactForm\ContactFormData;
-use SS6\ShopBundle\Model\Mail\MailerService;
-use SS6\ShopBundle\Model\Mail\MessageData;
-use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\ContactForm\ContactFormData;
+use Shopsys\ShopBundle\Model\Mail\MailerService;
+use Shopsys\ShopBundle\Model\Mail\MessageData;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use Twig_Environment;
 
 class ContactFormFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade
 	 */
 	private $mailSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailerService
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailerService
 	 */
 	private $mailerService;
 
@@ -32,9 +32,9 @@ class ContactFormFacade {
 	private $twig;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Mail\MailerService $mailerService
+	 * @param \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade $mailSettingFacade
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Mail\MailerService $mailerService
 	 * @param \Twig_Environment $twig
 	 */
 	public function __construct(
@@ -50,7 +50,7 @@ class ContactFormFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
+	 * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
 	 */
 	public function sendMail(ContactFormData $contactFormData) {
 		$messageData = new MessageData(
@@ -65,7 +65,7 @@ class ContactFormFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
+	 * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
 	 * @return string
 	 */
 	private function getMailBody($contactFormData) {

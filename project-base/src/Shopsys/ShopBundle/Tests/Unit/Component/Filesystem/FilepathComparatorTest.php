@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Filesystem;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Filesystem;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException;
-use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
+use Shopsys\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException;
+use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilepathComparatorTest extends PHPUnit_Framework_TestCase {
 

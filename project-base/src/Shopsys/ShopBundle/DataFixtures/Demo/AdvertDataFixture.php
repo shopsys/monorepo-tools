@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Advert\Advert;
-use SS6\ShopBundle\Model\Advert\AdvertData;
-use SS6\ShopBundle\Model\Advert\AdvertEditFacade;
-use SS6\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Advert\Advert;
+use Shopsys\ShopBundle\Model\Advert\AdvertData;
+use Shopsys\ShopBundle\Model\Advert\AdvertEditFacade;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
 class AdvertDataFixture extends AbstractReferenceFixture {
 
@@ -29,11 +29,11 @@ class AdvertDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Advert\AdvertData $advertData
+	 * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
 	 */
 	private function createAdvert(AdvertData $advertData) {
 		$advertEditFacade = $this->get(AdvertEditFacade::class);
-		/* @var $advertEditFacade \SS6\ShopBundle\Model\Advert\AdvertEditFacade */
+		/* @var $advertEditFacade \Shopsys\ShopBundle\Model\Advert\AdvertEditFacade */
 		$advertEditFacade->create($advertData);
 	}
 }

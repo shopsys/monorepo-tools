@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\ShopInfo;
+namespace Shopsys\ShopBundle\Form\Admin\ShopInfo;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class ShopInfoSettingFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade
 	 */
 	private $shopInfoSettingFacade;
 
@@ -34,7 +34,7 @@ class ShopInfoSettingFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType
 	 */
 	public function create() {
 		return new ShopInfoSettingFormType();

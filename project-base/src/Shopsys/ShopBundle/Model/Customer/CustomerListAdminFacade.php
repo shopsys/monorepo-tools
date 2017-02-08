@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerListAdminFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
@@ -18,7 +18,7 @@ class CustomerListAdminFacade {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+	 * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getCustomerListQueryBuilderByQuickSearchData(

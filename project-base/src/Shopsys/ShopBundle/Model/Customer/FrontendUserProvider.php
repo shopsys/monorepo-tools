@@ -1,30 +1,30 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use DateTime;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Security\TimelimitLoginInterface;
-use SS6\ShopBundle\Model\Security\UniqueLoginInterface;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
+use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class FrontendUserProvider implements UserProviderInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\UserRepository
+	 * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
 	 */
 	private $userRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\UserRepository $userRepository
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Customer\UserRepository $userRepository
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(UserRepository $userRepository, Domain $domain) {
 		$this->userRepository = $userRepository;
@@ -33,14 +33,14 @@ class FrontendUserProvider implements UserProviderInterface {
 
 	/**
 	 * @param string $email
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function loadUserByUsername($email) {
 		$user = $this->userRepository->findUserByEmailAndDomain(mb_strtolower($email), $this->domain->getId());
 
 		if ($user === null) {
 			$message = sprintf(
-				'Unable to find an active SS6\ShopBundle\Model\Customer\User object identified by email "%s".', $email
+				'Unable to find an active Shopsys\ShopBundle\Model\Customer\User object identified by email "%s".', $email
 			);
 			throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
 		}
@@ -50,7 +50,7 @@ class FrontendUserProvider implements UserProviderInterface {
 
 	/**
 	 * @param UserInterface $user
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function refreshUser(UserInterface $user) {
 		$class = get_class($user);

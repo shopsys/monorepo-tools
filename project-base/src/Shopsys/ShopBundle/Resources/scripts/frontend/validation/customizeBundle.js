@@ -31,7 +31,7 @@
 
 	SS6.validation.ckeditorValidationInit = function (element) {
 		$.each(element.children, function(index, childElement) {
-			if (childElement.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+			if (childElement.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 				CKEDITOR.instances[childElement.id].on('change', function() {
 					$(childElement.domNode).jsFormValidator('validate');
 				});
@@ -130,8 +130,8 @@
 		if (i && undefined === value) {
 			value = this.getMappedValue(element);
 		} else if (
-			element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::COLLECTION')
-			|| (Object.keys(element.children).length > 0 && element.type !== SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
+			element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::COLLECTION')
+			|| (Object.keys(element.children).length > 0 && element.type !== SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD'))
 		) {
 			value = {};
 			for (var childName in element.children) {
@@ -150,13 +150,13 @@
 
 	FpJsFormValidator._getInputValue = FpJsFormValidator.getInputValue;
 	FpJsFormValidator.getInputValue = function (element) {
-		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::WYSIWYG')) {
+		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::WYSIWYG')) {
 			return CKEDITOR.instances[element.id].getData();
 		}
-		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
+		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::FILE_UPLOAD')) {
 			return $(element.domNode).find('.js-file-upload-uploaded-file').toArray();
 		}
-		if (element.type === SS6.constant('\\SS6\\ShopBundle\\Form\\FormType::PRODUCTS')) {
+		if (element.type === SS6.constant('\\Shopsys\\ShopBundle\\Form\\FormType::PRODUCTS')) {
 			var value = [];
 			$(element.domNode).find('.js-products-picker-item-input').each(function () {
 				value.push($(this).val());
@@ -300,7 +300,7 @@
 	};
 
 	SS6.validation.isExpandedChoiceFormType = function(element, value) {
-		return element.type === SS6.constant('SS6\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
+		return element.type === SS6.constant('Shopsys\\ShopBundle\\Form\\FormType::CHOICE') && !$.isArray(value);
 	};
 
 	SS6.validation.isExpandedChoiceEmpty = function(value) {

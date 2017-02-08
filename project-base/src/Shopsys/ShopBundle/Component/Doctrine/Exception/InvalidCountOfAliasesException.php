@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine\Exception;
+namespace Shopsys\ShopBundle\Component\Doctrine\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Debug;
+use Shopsys\ShopBundle\Component\Debug;
 
 class InvalidCountOfAliasesException extends Exception {
 

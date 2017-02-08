@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\DomainService;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainService;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\DomainService
+	 * @var \Shopsys\ShopBundle\Component\Domain\DomainService
 	 */
 	private $domainService;
 
@@ -37,7 +37,7 @@ class DomainFacade {
 	private $domainImagesDirectory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
@@ -58,8 +58,8 @@ class DomainFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getDomainConfigsByCurrency(Currency $currency) {
 		$domainConfigs = [];

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\GeneratorCollectionFactory;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
+use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -14,7 +14,7 @@ class GeneratorsFormFactory {
 	const GENERATOR_FORM_ENABLE_POSTFIX = '_enable';
 
 	/**
-	 * @var \SS6\GeneratorBundle\Model\GeneratorCollection
+	 * @var \Shopsys\GeneratorBundle\Model\GeneratorCollection
 	 */
 	private $generatorCollection;
 

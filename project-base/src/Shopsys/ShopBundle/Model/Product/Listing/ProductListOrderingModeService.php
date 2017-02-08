@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Listing;
+namespace Shopsys\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeService {
@@ -16,7 +16,7 @@ class ProductListOrderingModeService {
 
 	/**
 	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
+	 * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig $productListOrderingConfig
 	 * @return string
 	 */
 	public function getOrderingModeFromRequest(

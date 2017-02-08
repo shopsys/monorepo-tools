@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Feed\FeedConfig;
-use SS6\ShopBundle\Model\Feed\FeedConfigRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
 
 class FeedConfigFacade {
 
@@ -20,20 +20,20 @@ class FeedConfigFacade {
 	private $feedDir;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedConfigRepository
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository
 	 */
 	private $feedConfigRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
 	 * @param string $feedUrlPrefix
 	 * @param string $feedDir
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfigRepository $feedConfigRepository
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfigRepository $feedConfigRepository
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(
 		$feedUrlPrefix,
@@ -48,7 +48,7 @@ class FeedConfigFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getFeedConfigs() {
 		return $this->feedConfigRepository->getFeedConfigs();
@@ -56,29 +56,29 @@ class FeedConfigFacade {
 
 	/**
 	 * @param string $feedName
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
 	 */
 	public function getFeedConfigByName($feedName) {
 		return $this->feedConfigRepository->getFeedConfigByName($feedName);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getDeliveryFeedConfigs() {
 		return $this->feedConfigRepository->getDeliveryFeedConfigs();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
 	 */
 	public function getAllFeedConfigs() {
 		return $this->feedConfigRepository->getAllFeedConfigs();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig) {
@@ -87,8 +87,8 @@ class FeedConfigFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {

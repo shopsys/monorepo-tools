@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Breadcrumb;
+namespace Shopsys\ShopBundle\Model\Breadcrumb;
 
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
 
 /**
- * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem
+ * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
  */
 class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
@@ -55,7 +55,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver $frontBreadcrumbResolver
+	 * @param \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver $frontBreadcrumbResolver
 	 */
 	public function registerAll(BreadcrumbResolver $frontBreadcrumbResolver) {
 		$frontBreadcrumbResolver->registerGenerator('front_customer_edit', $this);
@@ -74,7 +74,7 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
 	/**
 	 * @param string $code
-	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem
+	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
 	 */
 	private function getBreacrumbItemForErrorPage($code) {
 		$breadcrumbName = t('Oops! Error occurred');

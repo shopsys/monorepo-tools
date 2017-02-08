@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron;
+namespace Shopsys\ShopBundle\Component\Cron;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronModuleRepository;
-use SS6\ShopBundle\Component\Cron\CronService;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronModuleRepository;
+use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronModuleFacade {
 
@@ -15,12 +15,12 @@ class CronModuleFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronModuleRepository
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronModuleRepository
 	 */
 	private $cronModuleRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronService
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronService
 	 */
 	private $cronService;
 
@@ -35,7 +35,7 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
 	 */
 	public function scheduleModules(array $cronModulesConfigs) {
 		foreach ($cronModulesConfigs as $cronModuleConfig) {
@@ -46,8 +46,8 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function getOnlyScheduledCronModuleConfigs(array $cronModulesConfigs) {
 		$scheduledCronModuleIds = $this->cronModuleRepository->getAllScheduledCronModuleIds();
@@ -56,7 +56,7 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 */
 	public function unscheduleModule(CronModuleConfig $cronModuleConfig) {
 		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
@@ -65,7 +65,7 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 */
 	public function suspendModule(CronModuleConfig $cronModuleConfig) {
 		$cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
@@ -74,7 +74,7 @@ class CronModuleFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 * @return bool
 	 */
 	public function isModuleSuspended(CronModuleConfig $cronModuleConfig) {

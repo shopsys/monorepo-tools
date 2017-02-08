@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\System;
+namespace Shopsys\ShopBundle\Component\System;
 
 class System {
 

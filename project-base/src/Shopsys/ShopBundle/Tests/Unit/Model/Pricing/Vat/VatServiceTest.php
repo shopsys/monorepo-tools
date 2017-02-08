@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing\Vat;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Pricing\Vat\VatService;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 
 class VatServiceTest extends PHPUnit_Framework_TestCase {
 

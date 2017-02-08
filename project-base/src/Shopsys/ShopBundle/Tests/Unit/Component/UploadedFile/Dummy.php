@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile;
 
 class Dummy {
 

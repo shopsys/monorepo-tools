@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Form\Admin\Order\OrderItemFormType;
-use SS6\ShopBundle\Form\Admin\Order\OrderTransportFormType;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Country\Country;
-use SS6\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Form\Admin\Order\OrderItemFormType;
+use Shopsys\ShopBundle\Form\Admin\Order\OrderTransportFormType;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Order\OrderData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,22 +21,22 @@ class OrderFormType extends AbstractType {
 	const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	private $allOrderStatuses;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	private $payments;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
@@ -44,7 +44,7 @@ class OrderFormType extends AbstractType {
 	 * @param array $allOrderStatuses
 	 * @param array $transports
 	 * @param array $payments
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $allOrderStatuses, array $transports, array $payments, array $countries) {
 		$this->allOrderStatuses = $allOrderStatuses;
@@ -261,7 +261,7 @@ class OrderFormType extends AbstractType {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 
 				$orderData = $form->getData();
-				/* @var $data \SS6\ShopBundle\Model\Order\OrderData */
+				/* @var $data \Shopsys\ShopBundle\Model\Order\OrderData */
 
 				if (!$orderData->deliveryAddressSameAsBillingAddress) {
 					$validationGroups[] = self::VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS;

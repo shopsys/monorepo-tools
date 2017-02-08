@@ -1,105 +1,105 @@
 services:
   ss6.shop.form.categories:
-    class: SS6\ShopBundle\Form\CategoriesType
+    class: Shopsys\ShopBundle\Form\CategoriesType
     tags:
       - { name: form.type, alias: categories }
 
   ss6.shop.form.collection:
-    class: SS6\ShopBundle\Form\CollectionType
+    class: Shopsys\ShopBundle\Form\CollectionType
     tags:
       - { name: form.type_extension, alias: collection }
 
   ss6.shop.form.color_picker:
-    class: SS6\ShopBundle\Form\ColorPickerType
+    class: Shopsys\ShopBundle\Form\ColorPickerType
     tags:
       - { name: form.type, alias: color_picker }
 
   ss6.shop.form.currency:
-    class: SS6\ShopBundle\Form\CurrencyType
+    class: Shopsys\ShopBundle\Form\CurrencyType
     tags:
       - { name: form.type, alias: currency }
 
   ss6.shop.form.date_picker:
-    class: SS6\ShopBundle\Form\DatePickerType
+    class: Shopsys\ShopBundle\Form\DatePickerType
     tags:
       - { name: form.type, alias: date_picker }
 
   ss6.shop.form.domains:
-    class: SS6\ShopBundle\Form\DomainsType
+    class: Shopsys\ShopBundle\Form\DomainsType
     tags:
       - { name: form.type, alias: domains }
 
   ss6.shop.form.domain:
-    class: SS6\ShopBundle\Form\DomainType
+    class: Shopsys\ShopBundle\Form\DomainType
     tags:
       - { name: form.type, alias: domain }
 
   ss6.shop.form.file_upload:
-    class: SS6\ShopBundle\Form\FileUploadType
+    class: Shopsys\ShopBundle\Form\FileUploadType
     tags:
       - { name: form.type, alias: file_upload }
 
   ss6.shop.form.friendly_url:
-    class: SS6\ShopBundle\Form\FriendlyUrlType
+    class: Shopsys\ShopBundle\Form\FriendlyUrlType
     tags:
       - { name: form.type, alias: friendly_url }
 
   ss6.shop.form.honey_pot:
-    class: SS6\ShopBundle\Form\HoneyPotType
+    class: Shopsys\ShopBundle\Form\HoneyPotType
     tags:
       - { name: form.type, alias: honey_pot }
 
   ss6.shop.form.locale.text:
-    class: SS6\ShopBundle\Form\Locale\LocalizedType
+    class: Shopsys\ShopBundle\Form\Locale\LocalizedType
     tags:
       - { name: form.type, alias: localized }
 
   ss6.shop.form.money:
-    class: SS6\ShopBundle\Form\MoneyType
+    class: Shopsys\ShopBundle\Form\MoneyType
     tags:
       - { name: form.type_extension, alias: money }
 
   ss6.shop.form.multidomain:
-    class: SS6\ShopBundle\Form\MultidomainType
+    class: Shopsys\ShopBundle\Form\MultidomainType
     tags:
       - { name: form.type, alias: multidomain }
 
   ss6.shop.form.product:
-    class: SS6\ShopBundle\Form\ProductType
+    class: Shopsys\ShopBundle\Form\ProductType
     tags:
       - { name: form.type, alias: product }
 
   ss6.shop.form.products:
-    class: SS6\ShopBundle\Form\ProductsType
+    class: Shopsys\ShopBundle\Form\ProductsType
     tags:
       - { name: form.type, alias: products }
 
   ss6.shop.form.single_checkbox_choice_type:
-    class: SS6\ShopBundle\Form\SingleCheckboxChoiceType
+    class: Shopsys\ShopBundle\Form\SingleCheckboxChoiceType
     tags:
       - { name: form.type, alias: single_checkbox_choice }
 
   ss6.shop.form.sortable_values_type:
-    class: SS6\ShopBundle\Form\SortableValuesType
+    class: Shopsys\ShopBundle\Form\SortableValuesType
     tags:
       - { name: form.type, alias: sortable_values }
 
   ss6.shop.form.timed_form:
-    class: SS6\ShopBundle\Form\TimedFormTypeExtension
+    class: Shopsys\ShopBundle\Form\TimedFormTypeExtension
     tags:
       - { name: form.type_extension, alias: form }
 
   ss6.shop.form.url_list:
-    class: SS6\ShopBundle\Form\UrlListType
+    class: Shopsys\ShopBundle\Form\UrlListType
     tags:
       - { name: form.type, alias: url_list }
 
   ss6.shop.form.wysiwyg:
-    class: SS6\ShopBundle\Form\WysiwygType
+    class: Shopsys\ShopBundle\Form\WysiwygType
     tags:
       - { name: form.type_extension, alias: ckeditor }
 
   ss6.shop.form.yes_no:
-    class: SS6\ShopBundle\Form\YesNoType
+    class: Shopsys\ShopBundle\Form\YesNoType
     tags:
       - { name: form.type, alias: yes_no }

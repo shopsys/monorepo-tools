@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class SearchController extends FrontBaseController {
@@ -13,12 +13,12 @@ class SearchController extends FrontBaseController {
 	const AUTOCOMPLETE_PRODUCT_LIMIT = 5;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade
 	 */
 	private $productOnCurrentDomainFacade;
 

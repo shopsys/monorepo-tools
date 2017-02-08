@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Newsletter;
+namespace Shopsys\ShopBundle\Model\Newsletter;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Newsletter\NewsletterRepository;
-use SS6\ShopBundle\Model\Newsletter\NewsletterSubscriber;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
 class NewsletterFacade {
 
@@ -14,7 +14,7 @@ class NewsletterFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Newsletter\NewsletterRepository
+	 * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository
 	 */
 	private $newsletterRepository;
 

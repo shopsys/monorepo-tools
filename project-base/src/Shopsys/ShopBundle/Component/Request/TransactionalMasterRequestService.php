@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Request;
+namespace Shopsys\ShopBundle\Component\Request;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;

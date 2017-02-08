@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch\Exception;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchException;
+use Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchException;
 
 class AdvancedSearchFilterAlreadyExistsException extends Exception implements AdvancedSearchException {
 

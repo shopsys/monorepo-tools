@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
+namespace Shopsys\ShopBundle\Tests\Crawler\ResponseTest;
 
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector;
-use SS6\ShopBundle\Controller\Front\ProductController;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
-use SS6\ShopBundle\Form\Front\Product\ProductFilterFormType;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
+use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
+use Shopsys\ShopBundle\Controller\Front\ProductController;
+use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\UnitDataFixture as BaseUnitDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
+use Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -25,12 +25,12 @@ class UrlsProvider {
 	const EXPECTED_STATUS_CODE_KEY = 'expectedStatusCode';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
 	private $persistentReferenceFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\CurrentDomainRouter
+	 * @var \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter
 	 */
 	private $router;
 
@@ -40,12 +40,12 @@ class UrlsProvider {
 	private $tokenManager;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector
+	 * @var \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector
 	 */
 	private $routeCsrfProtector;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -184,11 +184,11 @@ class UrlsProvider {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
+	 * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
 	 * @param \Symfony\Component\Routing\RouterInterface $router
 	 * @param \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $tokenManager
-	 * @param \SS6\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector $routeCsrfProtector
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 */
 	public function __construct(
 		PersistentReferenceFacade $persistentReferenceFacade,

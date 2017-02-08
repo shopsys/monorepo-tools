@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Country\Country;
-use SS6\ShopBundle\Model\Country\CountryData;
-use SS6\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
 
 class CountryDataFixture extends AbstractReferenceFixture {
 
@@ -29,14 +29,14 @@ class CountryDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\CountryData $countryData
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryData $countryData
 	 * @param int $domainId
 	 * @param string $referenceName
-	 * @return \SS6\ShopBundle\Model\Country\Country
+	 * @return \Shopsys\ShopBundle\Model\Country\Country
 	 */
 	private function createCountry(CountryData $countryData, $domainId, $referenceName) {
 		$countryFacade = $this->get(CountryFacade::class);
-		/* @var $countryFacade \SS6\ShopBundle\Model\Country\CountryFacade */
+		/* @var $countryFacade \Shopsys\ShopBundle\Model\Country\CountryFacade */
 
 		$country = $countryFacade->create($countryData, $domainId);
 		$this->addReference($referenceName, $country);

@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\FileUpload\FileForUpload;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
+use Shopsys\ShopBundle\Component\FileUpload\FileForUpload;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 
 class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -31,7 +31,7 @@ class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
 		$uploadedFile = $uploadedFileService->createUploadedFile($uploadedFileEntityConfig, $entityId, $temporaryFilenames);
 		$filesForUpload = $uploadedFile->getTemporaryFilesForUpload();
 		$fileForUpload = array_pop($filesForUpload);
-		/* @var $fileForUpload \SS6\ShopBundle\Component\FileUpload\FileForUpload */
+		/* @var $fileForUpload \Shopsys\ShopBundle\Component\FileUpload\FileForUpload */
 
 		$this->assertSame($entityId, $uploadedFile->getEntityId());
 		$this->assertSame($entityName, $uploadedFile->getEntityName());

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Twig\Exception;
+namespace Shopsys\ShopBundle\Twig\Exception;
 
 use Exception;
 use InvalidArgumentException as BaseInvalidArgumentException;
-use SS6\ShopBundle\Twig\Exception\TwigException;
+use Shopsys\ShopBundle\Twig\Exception\TwigException;
 
 class InvalidArgumentException extends BaseInvalidArgumentException implements TwigException {
 

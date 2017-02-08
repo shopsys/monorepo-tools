@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception\Helper;
 
 use AppKernel;
 use Codeception\Configuration;
 use Codeception\Module;
 use Codeception\TestInterface;
-use SS6\Environment;
+use Shopsys\Environment;
 
 class SymfonyHelper extends Module {
 

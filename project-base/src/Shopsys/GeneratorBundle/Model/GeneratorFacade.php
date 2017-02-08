@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\GeneratorCollectionFactory;
-use SS6\GeneratorBundle\Model\GeneratorsFormFactory;
+use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
+use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class GeneratorFacade {
 
 	/**
-	 * @var \SS6\GeneratorBundle\Model\GeneratorCollection
+	 * @var \Shopsys\GeneratorBundle\Model\GeneratorCollection
 	 */
 	private $generatorCollection;
 

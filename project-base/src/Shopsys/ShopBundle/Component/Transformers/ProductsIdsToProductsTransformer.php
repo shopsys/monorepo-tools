@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Transformers;
+namespace Shopsys\ShopBundle\Component\Transformers;
 
 use IteratorAggregate;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductsIdsToProductsTransformer implements DataTransformerInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -18,7 +18,7 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[]|null $products
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $products
 	 * @return int[]
 	 */
 	public function transform($products) {
@@ -35,7 +35,7 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface {
 
 	/**
 	 * @param int[] $productsIds
-	 * @return \SS6\ShopBundle\Model\Product\Product[]|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]|null
 	 */
 	public function reverseTransform($productsIds) {
 		$products = [];
@@ -44,7 +44,7 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface {
 			foreach ($productsIds as $productId) {
 				try {
 					$products[] = $this->productRepository->getById($productId);
-				} catch (\SS6\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
+				} catch (\Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException $e) {
 					throw new \Symfony\Component\Form\Exception\TransformationFailedException('Product not found', null, $e);
 				}
 			}

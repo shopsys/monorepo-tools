@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
-use SS6\ShopBundle\Model\Pricing\Vat\VatService;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class VatFacade {
 
@@ -17,31 +17,31 @@ class VatFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository
 	 */
 	private $vatRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatService
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatService
 	 */
 	private $vatService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
 	/**
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatService $vatService
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatService $vatService
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler $productPriceRecalculationScheduler
 	 */
 	public function __construct(
 		EntityManager $em,
@@ -59,22 +59,22 @@ class VatFacade {
 
 	/**
 	 * @param int $vatId
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getById($vatId) {
 		return $this->vatRepository->getById($vatId);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAll() {
 		return $this->vatRepository->getAll();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function create(VatData $vatData) {
 		$vat = $this->vatService->create($vatData);
@@ -86,8 +86,8 @@ class VatFacade {
 
 	/**
 	 * @param int $vatId
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function edit($vatId, VatData $vatData) {
 		$vat = $this->vatRepository->getById($vatId);
@@ -108,11 +108,11 @@ class VatFacade {
 		$newVat = $newVatId ? $this->vatRepository->getById($newVatId) : null;
 
 		if ($oldVat->isMarkedAsDeleted()) {
-			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatMarkedAsDeletedDeleteException();
+			throw new \Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatMarkedAsDeletedDeleteException();
 		}
 
 		if ($this->vatRepository->existsVatToBeReplacedWith($oldVat)) {
-			throw new \SS6\ShopBundle\Model\Pricing\Vat\Exception\VatWithReplacedDeleteException();
+			throw new \Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatWithReplacedDeleteException();
 		}
 
 		if ($newVat !== null) {
@@ -146,7 +146,7 @@ class VatFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getDefaultVat() {
 		$defaultVatId = $this->setting->get(Vat::SETTING_DEFAULT_VAT);
@@ -155,14 +155,14 @@ class VatFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function setDefaultVat(Vat $vat) {
 		$this->setting->set(Vat::SETTING_DEFAULT_VAT, $vat->getId());
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return bool
 	 */
 	public function isVatUsed(Vat $vat) {
@@ -173,7 +173,7 @@ class VatFacade {
 
 	/**
 	 * @param int $vatId
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	public function getAllExceptId($vatId) {
 		return $this->vatRepository->getAllExceptId($vatId);

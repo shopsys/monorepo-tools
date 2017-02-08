@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Status;
+namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\Mapping as ORM;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
@@ -13,7 +13,7 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
 class OrderStatusTranslation extends AbstractTranslation {
 
 	/**
-	 * @Prezent\Translatable(targetEntity="SS6\ShopBundle\Model\Order\Status\OrderStatus")
+	 * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Order\Status\OrderStatus")
 	 */
 	protected $translatable;
 

@@ -1,23 +1,23 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Grid\InlineEdit\InlineEditService;
-use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\InlineEditService;
+use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class GridController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\InlineEdit\InlineEditService
+	 * @var \Shopsys\ShopBundle\Component\Grid\InlineEdit\InlineEditService
 	 */
 	private $inlineEditService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingFacade
+	 * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingFacade
 	 */
 	private $gridOrderingFacade;
 
@@ -55,7 +55,7 @@ class GridController extends AdminBaseController {
 
 			$responseData['success'] = true;
 			$responseData['rowHtml'] = $this->inlineEditService->getRenderedRowHtml($request->get('serviceName'), $rowId);
-		} catch (\SS6\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
+		} catch (\Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception\InvalidFormDataException $e) {
 			$responseData['success'] = false;
 			// reset array keys for array representation in JSON, otherwise it could be treated as an object
 			$responseData['errors'] = array_values(array_unique($e->getFormErrors()));

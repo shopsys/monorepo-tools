@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractNativeFixture;
-use SS6\ShopBundle\Component\System\System;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
+use Shopsys\ShopBundle\Component\System\System;
 
 class DbCollationsDataFixture extends AbstractNativeFixture {
 
@@ -13,7 +13,7 @@ class DbCollationsDataFixture extends AbstractNativeFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$system = $this->get(System::class);
-		/* @var $system \SS6\ShopBundle\Component\System\System */
+		/* @var $system \Shopsys\ShopBundle\Component\System\System */
 
 		if ($system->isWindows()) {
 			$this->executeNativeQuery('CREATE COLLATION "cs_CZ" (LOCALE="Czech")');

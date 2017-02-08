@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Flag\Flag;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Flag\Flag;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class FlagFilterChoiceRepository {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -24,10 +24,10 @@ class FlagFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, $locale, Category $category) {
 		$productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
@@ -41,10 +41,10 @@ class FlagFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
 	 * @param string|null $searchText
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	public function getFlagFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText) {
 		$productsQueryBuilder = $this->productRepository
@@ -56,7 +56,7 @@ class FlagFilterChoiceRepository {
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
 	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private function getVisibleFlagsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, $locale) {
 		$clonnedProductsQueryBuilder = clone $productsQueryBuilder;

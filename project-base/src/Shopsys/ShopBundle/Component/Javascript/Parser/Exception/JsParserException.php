@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Exception;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Exception;
 
 interface JsParserException {
 

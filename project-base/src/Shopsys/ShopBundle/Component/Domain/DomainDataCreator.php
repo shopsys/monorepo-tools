@@ -1,30 +1,30 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValueRepository;
-use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
+use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreator {
 
 	const TEMPLATE_DOMAIN_ID = 1;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\SettingValueRepository
+	 * @var \Shopsys\ShopBundle\Component\Setting\SettingValueRepository
 	 */
 	private $settingValueRepository;
 
@@ -34,12 +34,12 @@ class DomainDataCreator {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator
+	 * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator
 	 */
 	private $multidomainEntityDataCreator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator
+	 * @var \Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator
 	 */
 	private $translatableEntityDataCreator;
 
@@ -68,7 +68,7 @@ class DomainDataCreator {
 			$domainId = $domainConfig->getId();
 			try {
 				$this->setting->getForDomain(Setting::DOMAIN_DATA_CREATED, $domainId);
-			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
 				$this->settingValueRepository->copyAllMultidomainSettings(self::TEMPLATE_DOMAIN_ID, $domainId);
 				$this->setting->clearCache();
 				$this->multidomainEntityDataCreator->copyAllMultidomainDataForNewDomain(self::TEMPLATE_DOMAIN_ID, $domainId);

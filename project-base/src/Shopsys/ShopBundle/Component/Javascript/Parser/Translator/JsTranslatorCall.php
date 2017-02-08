@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
 
 use PLUG\JavaScript\JNodes\JNodeBase;
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;

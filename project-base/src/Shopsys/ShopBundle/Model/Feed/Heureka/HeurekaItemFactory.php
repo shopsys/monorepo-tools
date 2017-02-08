@@ -1,36 +1,36 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Heureka;
+namespace Shopsys\ShopBundle\Model\Feed\Heureka;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Feed\FeedItemFactoryInterface;
-use SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem;
-use SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Feed\FeedItemFactoryInterface;
+use Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem;
+use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class HeurekaItemFactory implements FeedItemFactoryInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
 	 */
 	private $productPriceCalculationForUser;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade
 	 */
 	private $productCollectionFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
-	 * @param \SS6\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
-	 * @param \SS6\ShopBundle\Model\Category\CategoryFacade $categoryFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculationForUser
+	 * @param \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade $productCollectionFacade
+	 * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
 	 */
 	public function __construct(
 		ProductPriceCalculationForUser $productPriceCalculationForUser,
@@ -43,9 +43,9 @@ class HeurekaItemFactory implements FeedItemFactoryInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
 	 */
 	public function createItems(array $products, DomainConfig $domainConfig) {
 		$productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
@@ -102,8 +102,8 @@ class HeurekaItemFactory implements FeedItemFactoryInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string|null
 	 */
 	private function getProductCategorytext(Product $product, DomainConfig $domainConfig) {

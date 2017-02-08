@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints;
 class ProductParameterValueFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
 	private $parameters;
 

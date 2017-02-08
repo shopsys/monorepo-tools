@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\AutoServicesBundle\DependencyInjection;
+namespace Shopsys\AutoServicesBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\Unit\UnitFacade;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductDataFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade
 	 */
 	private $productInputPriceFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\UnitFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
 	 */
 	private $unitFacade;
 
@@ -35,7 +35,7 @@ class ProductDataFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductData
 	 */
 	public function createDefault() {
 		$productData = new ProductData();
@@ -47,8 +47,8 @@ class ProductDataFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @return \SS6\ShopBundle\Model\Product\ProductData
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductData
 	 */
 	public function createFromProduct(Product $product) {
 		$productData = $this->createDefault();

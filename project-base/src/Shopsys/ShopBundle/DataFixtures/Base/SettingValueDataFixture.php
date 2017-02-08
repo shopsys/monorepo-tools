@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValue;
-use SS6\ShopBundle\Component\String\HashGenerator;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ArticleDataFixture;
-use SS6\ShopBundle\Model\Mail\Setting\MailSetting;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\SettingValue;
+use Shopsys\ShopBundle\Component\String\HashGenerator;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ArticleDataFixture;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -26,22 +26,22 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 	 */
 	public function load(ObjectManager $manager) {
 		$vat = $this->getReference(VatDataFixture::VAT_HIGH);
-		/* @var $vat \SS6\ShopBundle\Model\Pricing\Vat\Vat */
+		/* @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
 		$pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
-		/* @var $pricingGroup2 \SS6\ShopBundle\Model\Pricing\Group\PricingGroup */
+		/* @var $pricingGroup2 \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup */
 		$defaultCurrency = $this->getReference(CurrencyDataFixture::CURRENCY_CZK);
-		/* @var $defaultCurrency \SS6\ShopBundle\Model\Pricing\Currency\Currency */
+		/* @var $defaultCurrency \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
 		$defaultInStockAvailability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
-		/* @var $defaultInStockAvailability \SS6\ShopBundle\Model\Product\Availability\Availability */
+		/* @var $defaultInStockAvailability \Shopsys\ShopBundle\Model\Product\Availability\Availability */
 		$termsAndConditions = $this->getReference(ArticleDataFixture::TERMS_AND_CONDITIONS);
-		/* @var $termsAndConditions \SS6\ShopBundle\Model\Article\Article */
+		/* @var $termsAndConditions \Shopsys\ShopBundle\Model\Article\Article */
 
 		$cookies = $this->getReference(ArticleDataFixture::COOKIES);
-		/* @var $cookies \SS6\ShopBundle\Model\Article\Article */
+		/* @var $cookies \Shopsys\ShopBundle\Model\Article\Article */
 		$hashGenerator = $this->get(HashGenerator::class);
-		/* @var $hashGenerator \SS6\ShopBundle\Component\String\HashGenerator */
+		/* @var $hashGenerator \Shopsys\ShopBundle\Component\String\HashGenerator */
 		$defaultUnit = $this->getReference(UnitDataFixture::PCS);
-		/* @var $defaultUnit \SS6\ShopBundle\Model\Product\Unit\Unit */
+		/* @var $defaultUnit \Shopsys\ShopBundle\Model\Product\Unit\Unit */
 
 		$orderSentTextCs = '
 			<p>
@@ -82,7 +82,7 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
 
 	private function clearSettingCache() {
 		$setting = $this->get(Setting::class);
-		/* @var $setting \SS6\ShopBundle\Component\Setting\Setting */
+		/* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
 		$setting->clearCache();
 	}

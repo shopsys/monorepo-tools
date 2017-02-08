@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Localization\Translation\Grid\Exception;
+namespace Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception;
 
-use SS6\ShopBundle\Model\Localization\Exception\LocalizationException;
+use Shopsys\ShopBundle\Model\Localization\Exception\LocalizationException;
 
 interface TranslationGridException extends LocalizationException {
 

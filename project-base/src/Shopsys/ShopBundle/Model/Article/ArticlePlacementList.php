@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Article;
+namespace Shopsys\ShopBundle\Model\Article;
 
-use SS6\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
+use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class ArticlePlacementList extends AbstractTranslatedConstantList {
 

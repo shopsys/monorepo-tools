@@ -1,52 +1,52 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Product\Brand\Brand;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
-use SS6\ShopBundle\Model\Product\Brand\BrandDataFactory;
-use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Product\Brand\BrandFormType;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Product\Brand\Brand;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class BrandController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
 	 */
 	private $administratorGridFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
 	 */
 	private $brandFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandDataFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory
 	 */
 	private $brandDataFactory;
 
@@ -112,7 +112,7 @@ class BrandController extends AdminBaseController {
 	 */
 	public function listAction() {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
 		$queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
 		$queryBuilder->select('b')->from(Brand::class, 'b');
@@ -194,7 +194,7 @@ class BrandController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Brand\Exception\BrandNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected brand doesn\'t exist.'));
 		}
 

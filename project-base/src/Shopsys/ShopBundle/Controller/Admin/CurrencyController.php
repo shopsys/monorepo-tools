@@ -1,37 +1,37 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Pricing\Currency\CurrencySettingsFormType;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit
 	 */
 	private $currencyInlineEdit;
 
@@ -71,7 +71,7 @@ class CurrencyController extends AdminBaseController {
 			);
 
 			return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_currency_delete', $id);
-		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
 			return new Response(t('Selected currency doesn\'t exist.'));
 		}
 
@@ -93,11 +93,11 @@ class CurrencyController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\DeletingNotAllowedToDeleteCurrencyException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(
 				t('This currency can\'t be deleted, it is set as default or is saved with order.')
 			);
-		} catch (\SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected currency doesn\'t exist.'));
 		}
 

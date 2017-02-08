@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\TransportAndPayment;
+namespace Shopsys\ShopBundle\Form\Admin\TransportAndPayment;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -18,12 +18,12 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
 	const VALIDATION_GROUP_PRICE_LIMIT_ENABLED = 'priceLimitEnabled';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domains;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 */
 	public function __construct(array $domains) {
 		$this->domains = $domains;

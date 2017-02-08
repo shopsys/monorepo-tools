@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Router\DomainRouter;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
+use Shopsys\ShopBundle\Component\Router\DomainRouter;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -19,7 +19,7 @@ class DomainRouterTest extends PHPUnit_Framework_TestCase {
 			->getMock();
 
 		$domainRouter = new DomainRouter($context, $basicRouterMock, $localizedRouterMock, $friendlyUrlRouterMock);
-		$this->setExpectedException(\SS6\ShopBundle\Component\Router\Exception\NotSupportedException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Router\Exception\NotSupportedException::class);
 		$domainRouter->setContext($context);
 	}
 

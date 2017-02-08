@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {

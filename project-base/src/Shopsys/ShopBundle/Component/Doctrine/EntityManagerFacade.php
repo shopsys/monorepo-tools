@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine;
+namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class EntityManagerFacade {
 
@@ -13,7 +13,7 @@ class EntityManagerFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

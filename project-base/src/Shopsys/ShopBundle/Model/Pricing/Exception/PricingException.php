@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Exception;
+namespace Shopsys\ShopBundle\Model\Pricing\Exception;
 
 interface PricingException {
 

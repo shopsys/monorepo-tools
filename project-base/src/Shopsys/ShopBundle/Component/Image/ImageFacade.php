@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image;
+namespace Shopsys\ShopBundle\Component\Image;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Image;
-use SS6\ShopBundle\Component\Image\ImageLocator;
-use SS6\ShopBundle\Component\Image\ImageRepository;
-use SS6\ShopBundle\Component\Image\ImageService;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Image\ImageRepository;
+use Shopsys\ShopBundle\Component\Image\ImageService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFacade {
@@ -20,17 +20,17 @@ class ImageFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageRepository
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageRepository
 	 */
 	private $imageRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageService
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageService
 	 */
 	private $imageService;
 
@@ -40,12 +40,12 @@ class ImageFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
@@ -105,7 +105,7 @@ class ImageFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image[] $imagesByPosition
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByPosition
 	 */
 	public function saveImagePositions($imagesByPosition) {
 		$this->imageService->setImagePositions($imagesByPosition);
@@ -132,7 +132,7 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
-	 * @param \SS6\ShopBundle\Component\Image\Image[] $images
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[] $images
 	 */
 	public function deleteImages($entity, array $images) {
 		$entityName = $this->imageConfig->getEntityName($entity);
@@ -149,7 +149,7 @@ class ImageFacade {
 	/**
 	 * @param object $entity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\Image\Image
+	 * @return \Shopsys\ShopBundle\Component\Image\Image
 	 */
 	public function getImageByEntity($entity, $type) {
 		return $this->imageRepository->getImageByEntity(
@@ -162,7 +162,7 @@ class ImageFacade {
 	/**
 	 * @param object $entity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\Image\Image[imageId]
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[imageId]
 	 */
 	public function getImagesByEntityIndexedById($entity, $type) {
 		return $this->imageRepository->getImagesByEntityIndexedById(
@@ -174,7 +174,7 @@ class ImageFacade {
 
 	/**
 	 * @param object $entity
-	 * @return \SS6\ShopBundle\Component\Image\Image[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[]
 	 */
 	public function getAllImagesByEntity($entity) {
 		return $this->imageRepository->getAllImagesByEntity(
@@ -184,7 +184,7 @@ class ImageFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image $image
+	 * @param \Shopsys\ShopBundle\Component\Image\Image $image
 	 */
 	public function deleteImageFiles(Image $image) {
 		$entityName = $image->getEntityName();
@@ -207,19 +207,19 @@ class ImageFacade {
 		}
 
 		$message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
-		throw new \SS6\ShopBundle\Component\Image\Exception\EntityIdentifierException($message);
+		throw new \Shopsys\ShopBundle\Component\Image\Exception\EntityIdentifierException($message);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
 	 */
 	public function getAllImageEntityConfigsByClass() {
 		return $this->imageConfig->getAllImageEntityConfigsByClass();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $sizeName
 	 * @param string|null $type
 	 * @return string
@@ -232,13 +232,13 @@ class ImageFacade {
 				. $this->imageLocator->getRelativeImageFilepath($image, $sizeName);
 		}
 
-		throw new \SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException();
+		throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image|Object $imageOrEntity
+	 * @param \Shopsys\ShopBundle\Component\Image\Image|Object $imageOrEntity
 	 * @param string|null $type
-	 * @return \SS6\ShopBundle\Component\Image\Image
+	 * @return \Shopsys\ShopBundle\Component\Image\Image
 	 */
 	public function getImageByObject($imageOrEntity, $type = null) {
 		if ($imageOrEntity instanceof Image) {
@@ -250,7 +250,7 @@ class ImageFacade {
 
 	/**
 	 * @param int $imageId
-	 * @return \SS6\ShopBundle\Component\Image\Image
+	 * @return \Shopsys\ShopBundle\Component\Image\Image
 	 */
 	public function getById($imageId) {
 		return $this->imageRepository->getById($imageId);

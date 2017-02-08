@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade;
 
 class FeedCategoryDataFixture extends AbstractReferenceFixture {
 
@@ -13,11 +13,11 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$feedCategoryLoaderFacade = $this->get(FeedCategoryLoaderFacade::class);
-		/* @var $feedCategoryLoaderFacade \SS6\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade */
+		/* @var $feedCategoryLoaderFacade \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade */
 
 		try {
 			$feedCategoryLoaderFacade->download();
-		} catch (\SS6\ShopBundle\Model\Feed\Category\Exception\FeedCategoryLoadException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Feed\Category\Exception\FeedCategoryLoadException $ex) {
 			$feedCategoryLoaderFacade->loadFromBackupFile();
 		}
 	}

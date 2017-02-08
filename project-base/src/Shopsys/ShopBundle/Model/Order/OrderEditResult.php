@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
 class OrderEditResult {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	private $orderItemsToCreate;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	private $orderItemsToDelete;
 
@@ -20,8 +20,8 @@ class OrderEditResult {
 	private $statusChanged;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $orderItemsToCreate
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $orderItemsToDelete
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] $orderItemsToCreate
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] $orderItemsToDelete
 	 * @param $statusChanged
 	 */
 	public function __construct(array $orderItemsToCreate, array $orderItemsToDelete, $statusChanged) {
@@ -31,14 +31,14 @@ class OrderEditResult {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	public function getOrderItemsToCreate() {
 		return $this->orderItemsToCreate;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\OrderItem[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
 	 */
 	public function getOrderItemsToDelete() {
 		return $this->orderItemsToDelete;

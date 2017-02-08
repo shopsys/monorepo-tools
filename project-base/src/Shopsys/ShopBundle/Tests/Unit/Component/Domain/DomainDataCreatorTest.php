@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Domain;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Domain;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\DomainDataCreator;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Component\Setting\SettingValueRepository;
-use SS6\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
+use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 
@@ -61,7 +61,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 				if ($domainId === 1) {
 					return true;
 				}
-				throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+				throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
 			});
 
 		$domain = new Domain($domainConfigs, $settingMock);
@@ -110,7 +110,7 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
 				if ($domainId === 1) {
 					return true;
 				}
-				throw new \SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
+				throw new \Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException();
 			});
 
 		$domainMock = $this->getMock(Domain::class, [], [], '', false);

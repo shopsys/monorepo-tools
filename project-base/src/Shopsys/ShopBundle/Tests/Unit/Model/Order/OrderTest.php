@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Order;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Order;
 
 use DateTime;
 use DateTimeInterface;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Country\Country;
-use SS6\ShopBundle\Model\Country\CountryData;
-use SS6\ShopBundle\Model\Order\Item\OrderPayment;
-use SS6\ShopBundle\Model\Order\Item\OrderProduct;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class OrderTest extends PHPUnit_Framework_TestCase {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
-use SS6\ShopBundle\Model\Category\CategoryData;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
+use Shopsys\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -132,13 +132,13 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\CategoryData $categoryData
+	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
 	 * @param string|null $referenceName
-	 * @return \SS6\ShopBundle\Model\Category\Category
+	 * @return \Shopsys\ShopBundle\Model\Category\Category
 	 */
 	private function createCategory(CategoryData $categoryData, $referenceName = null) {
 		$categoryFacade = $this->get(CategoryFacade::class);
-		/* @var $categoryFacade \SS6\ShopBundle\Model\Category\CategoryFacade */
+		/* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
 
 		$category = $categoryFacade->create($categoryData);
 		if ($referenceName !== null) {

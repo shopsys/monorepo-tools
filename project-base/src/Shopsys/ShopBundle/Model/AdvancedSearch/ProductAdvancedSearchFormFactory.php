@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
-use SS6\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
+use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslation;
+use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTranslation;
+use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory {

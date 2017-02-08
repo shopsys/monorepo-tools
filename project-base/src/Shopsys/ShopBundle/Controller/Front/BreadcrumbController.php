@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 
 class BreadcrumbController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
+	 * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
 	 */
 	private $breadcrumbResolver;
 

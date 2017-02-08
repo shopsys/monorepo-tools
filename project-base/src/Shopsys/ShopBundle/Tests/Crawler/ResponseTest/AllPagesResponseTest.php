@@ -1,21 +1,21 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Crawler\ResponseTest;
+namespace Shopsys\ShopBundle\Tests\Crawler\ResponseTest;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AllPagesResponseTest extends DatabaseTestCase {
 
 	public function adminTestableUrlsProvider() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		return $urlsProvider->getAdminTestableUrlsProviderData();
 	}
@@ -28,7 +28,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 */
 	public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		$this->getClient(false, 'superadmin', 'admin123')->request('GET', $url);
@@ -49,12 +49,12 @@ class AllPagesResponseTest extends DatabaseTestCase {
 
 	public function frontTestableUrlsProvider() {
 		$domain = $this->getContainer()->get(Domain::class);
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 		// DataProvider is called before setUp() - domain is not set
 		$domain->switchDomainById(1);
 
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
 		return $urlsProvider->getFrontTestableUrlsProviderData();
 	}
@@ -68,7 +68,7 @@ class AllPagesResponseTest extends DatabaseTestCase {
 	 */
 	public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged) {
 		$urlsProvider = $this->getContainer()->get(UrlsProvider::class);
-		/* @var $urlsProvider \SS6\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
+		/* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 		$url = $urlsProvider->replaceCsrfTokensInUrl($url);
 
 		if ($asLogged) {

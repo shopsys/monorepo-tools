@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
@@ -35,7 +35,7 @@ class ProductData {
 	public $price;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
 	public $vat;
 
@@ -70,7 +70,7 @@ class ProductData {
 	public $stockQuantity;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit|null
 	 */
 	public $unit;
 
@@ -80,12 +80,12 @@ class ProductData {
 	public $outOfStockAction;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $availability;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public $outOfStockAvailability;
 
@@ -95,7 +95,7 @@ class ProductData {
 	public $flags;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Category[domainId][]
+	 * @var \Shopsys\ShopBundle\Model\Category\Category[domainId][]
 	 */
 	public $categoriesByDomainId;
 
@@ -105,7 +105,7 @@ class ProductData {
 	public $priceCalculationType;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand|null
 	 */
 	public $brand;
 

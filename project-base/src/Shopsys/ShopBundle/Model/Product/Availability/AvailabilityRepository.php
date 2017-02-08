@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
-use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class AvailabilityRepository {
 
@@ -32,7 +32,7 @@ class AvailabilityRepository {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
 	 */
 	public function findById($availabilityId) {
 		return $this->getAvailabilityRepository()->find($availabilityId);
@@ -40,21 +40,21 @@ class AvailabilityRepository {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
 	 */
 	public function getById($availabilityId) {
 		$availability = $this->findById($availabilityId);
 
 		if ($availability === null) {
 			$message = 'Availability with ID ' . $availabilityId . ' not found.';
-			throw new \SS6\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException($message);
 		}
 
 		return $availability;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	public function getAll() {
 		$queryBuilder = $this->em->createQueryBuilder();
@@ -70,7 +70,7 @@ class AvailabilityRepository {
 
 	/**
 	 * @param int $availabilityId
-	 * @return \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	public function getAllExceptId($availabilityId) {
 		$qb = $this->getAvailabilityRepository()->createQueryBuilder('a')
@@ -81,7 +81,7 @@ class AvailabilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 * @return bool
 	 */
 	public function isAvailabilityUsed(Availability $availability) {
@@ -97,8 +97,8 @@ class AvailabilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $oldAvailability
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $newAvailability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $oldAvailability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $newAvailability
 	 */
 	public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability) {
 		$this->em->createQueryBuilder()

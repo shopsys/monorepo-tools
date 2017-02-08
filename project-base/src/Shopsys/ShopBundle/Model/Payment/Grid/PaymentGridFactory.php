@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Grid;
+namespace Shopsys\ShopBundle\Model\Payment\Grid;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderWithRowManipulatorDataSource;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 
 class PaymentGridFactory implements GridFactoryInterface {
 
@@ -22,22 +22,22 @@ class PaymentGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory
 	 */
 	private $paymentDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
@@ -56,7 +56,7 @@ class PaymentGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->paymentRepository->getQueryBuilderForAll()

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Cart;
+namespace Shopsys\ShopBundle\Form\Front\Cart;
 
-use SS6\ShopBundle\Component\Constraints\ConstraintValue;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Constraints\ConstraintValue;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,11 +12,11 @@ use Symfony\Component\Validator\Constraints;
 class CartFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\Cart
+	 * @var \Shopsys\ShopBundle\Model\Cart\Cart
 	 */
 	private $cart;
 
-	public function __construct(\SS6\ShopBundle\Model\Cart\Cart $cart) {
+	public function __construct(\Shopsys\ShopBundle\Model\Cart\Cart $cart) {
 		$this->cart = $cart;
 	}
 

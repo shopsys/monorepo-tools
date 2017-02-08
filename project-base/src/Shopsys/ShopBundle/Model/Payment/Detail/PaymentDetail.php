@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Detail;
+namespace Shopsys\ShopBundle\Model\Payment\Detail;
 
-use SS6\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\Payment;
 
 class PaymentDetail {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	private $payment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price[currencyId]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
 	private $basePrices;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
 	 */
 	public function __construct(Payment $payment, array $basePrices) {
 		$this->payment = $payment;
@@ -26,14 +26,14 @@ class PaymentDetail {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getPayment() {
 		return $this->payment;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[currencyId]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
 	 */
 	public function getBasePrices() {
 		return $this->basePrices;

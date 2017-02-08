@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Unit;
+namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\Unit\Unit;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Unit\Unit;
 
 class UnitRepository {
 
@@ -30,7 +30,7 @@ class UnitRepository {
 
 	/**
 	 * @param int $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit|null
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit|null
 	 */
 	public function findById($unitId) {
 		return $this->getUnitRepository()->find($unitId);
@@ -38,13 +38,13 @@ class UnitRepository {
 
 	/**
 	 * @param int $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
 	 */
 	public function getById($unitId) {
 		$unit = $this->findById($unitId);
 
 		if ($unit === null) {
-			throw new \SS6\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException('Unit with ID ' . $unitId . ' not found.');
+			throw new \Shopsys\ShopBundle\Model\Product\Unit\Exception\UnitNotFoundException('Unit with ID ' . $unitId . ' not found.');
 		}
 
 		return $unit;
@@ -61,7 +61,7 @@ class UnitRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	public function getAll() {
 		return $this->getAllQueryBuilder()->getQuery()->execute();
@@ -69,7 +69,7 @@ class UnitRepository {
 
 	/**
 	 * @param int $unitId
-	 * @return \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	public function getAllExceptId($unitId) {
 		return $this->getAllQueryBuilder()
@@ -78,7 +78,7 @@ class UnitRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $unit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
 	 * @return bool
 	 */
 	public function existsProductWithUnit(Unit $unit) {
@@ -91,8 +91,8 @@ class UnitRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $oldUnit
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit $newUnit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $oldUnit
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $newUnit
 	 */
 	public function replaceUnit(Unit $oldUnit, Unit $newUnit) {
 		$this->em->createQueryBuilder()

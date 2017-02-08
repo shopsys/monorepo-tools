@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Listing;
+namespace Shopsys\ShopBundle\Model\Product\Listing;
 
 class ProductListOrderingConfig {
 

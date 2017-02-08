@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Model\Product\Availability;
 
 class AvailabilityData {
 
@@ -24,7 +24,7 @@ class AvailabilityData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability $availability
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
 	 */
 	public function setFromEntity(Availability $availability) {
 		$this->dispatchTime = $availability->getDispatchTime();

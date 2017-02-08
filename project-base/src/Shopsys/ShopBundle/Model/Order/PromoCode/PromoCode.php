@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,7 +34,7 @@ class PromoCode {
 	private $percent;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
 	 */
 	public function __construct(PromoCodeData $promoCodeData) {
 		$this->code = $promoCodeData->code;
@@ -42,7 +42,7 @@ class PromoCode {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
 	 */
 	public function edit(PromoCodeData $promoCodeData) {
 		$this->code = $promoCodeData->code;

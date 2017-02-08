@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
 interface DataSourceInterface {
 
@@ -12,7 +12,7 @@ interface DataSourceInterface {
 	 * @param int $page
 	 * @param string|null $orderSourceColumnName
 	 * @param string $orderDirection
-	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getPaginatedRows(
 		$limit = null,

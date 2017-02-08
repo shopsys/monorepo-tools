@@ -1,45 +1,45 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Slider\SliderItem;
-use SS6\ShopBundle\Model\Slider\SliderItemData;
-use SS6\ShopBundle\Model\Slider\SliderItemFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Slider\SliderItem;
+use Shopsys\ShopBundle\Model\Slider\SliderItemData;
+use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
 	 */
 	private $sliderItemFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Slider\SliderItemFacade
+	 * @var \Shopsys\ShopBundle\Model\Slider\SliderItemFacade
 	 */
 	private $sliderItemFacade;
 
@@ -184,7 +184,7 @@ class SliderController extends AdminBaseController {
 					'name' => $name,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Slider\Exception\SliderItemNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected page doesn\'t exist.'));
 		}
 

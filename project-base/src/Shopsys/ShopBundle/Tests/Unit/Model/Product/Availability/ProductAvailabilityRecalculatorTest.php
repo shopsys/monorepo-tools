@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Availability;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Availability;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Doctrine\EntityManagerFacade;
-use SS6\ShopBundle\Model\Product\Availability\Availability;
-use SS6\ShopBundle\Model\Product\Availability\AvailabilityData;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
+use Shopsys\ShopBundle\Model\Product\Availability\Availability;
+use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityCalculation;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
 

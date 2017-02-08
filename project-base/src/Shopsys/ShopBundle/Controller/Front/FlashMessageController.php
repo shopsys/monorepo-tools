@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 
 class FlashMessageController extends FrontBaseController {
 
 	public function indexAction() {
 		$flashMessageBag = $this->get('ss6.shop.component.flash_message.bag.front');
-		/* @var $flashMessageBag \SS6\ShopBundle\Component\FlashMessage\Bag */
+		/* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
 		return $this->render('@SS6Shop/Front/Inline/FlashMessage/index.html.twig', [
 			'errorMessages' => $flashMessageBag->getErrorMessages(),

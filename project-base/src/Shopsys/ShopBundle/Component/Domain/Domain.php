@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain;
+namespace Shopsys\ShopBundle\Component\Domain;
 
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
 class Domain {
@@ -11,23 +11,23 @@ class Domain {
 	const MAIN_ADMIN_DOMAIN_ID = 1;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig|null
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig|null
 	 */
 	private $currentDomainConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domainConfigs;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-	 * @param \SS6\ShopBundle\Component\Setting\Setting $setting
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 */
 	public function __construct(array $domainConfigs, Setting $setting) {
 		$this->domainConfigs = $domainConfigs;
@@ -70,7 +70,7 @@ class Domain {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAll() {
 		$domainConfigsWithDataCreated = [];
@@ -79,7 +79,7 @@ class Domain {
 			try {
 				$this->setting->getForDomain(Setting::DOMAIN_DATA_CREATED, $domainId);
 				$domainConfigsWithDataCreated[] = $domainConfig;
-			} catch (\SS6\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\Setting\Exception\SettingValueNotFoundException $ex) {
 			}
 		}
 
@@ -99,7 +99,7 @@ class Domain {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	public function getAllIncludingDomainConfigsWithoutDataCreated() {
 		return $this->domainConfigs;
@@ -107,7 +107,7 @@ class Domain {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getDomainConfigById($domainId) {
 		foreach ($this->domainConfigs as $domainConfig) {
@@ -116,7 +116,7 @@ class Domain {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\Domain\Exception\InvalidDomainIdException();
+		throw new \Shopsys\ShopBundle\Component\Domain\Exception\InvalidDomainIdException();
 	}
 
 	/**
@@ -139,15 +139,15 @@ class Domain {
 			}
 		}
 
-		throw new \SS6\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException($url);
+		throw new \Shopsys\ShopBundle\Component\Domain\Exception\UnableToResolveDomainException($url);
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getCurrentDomainConfig() {
 		if ($this->currentDomainConfig === null) {
-			throw new \SS6\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
+			throw new \Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
 		}
 
 		return $this->currentDomainConfig;

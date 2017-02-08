@@ -1,38 +1,38 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Product;
+namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository;
-use SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
-use SS6\ShopBundle\Model\Product\Filter\PriceRangeRepository;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository;
+use Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
+use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
+use Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository;
 
 class ProductFilterFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
 	 */
 	private $parameterFilterChoiceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository
 	 */
 	private $flagFilterChoiceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\BrandFilterChoiceRepository
 	 */
 	private $brandFilterChoiceRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\PriceRangeRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository
 	 */
 	private $priceRangeRepository;
 
@@ -53,8 +53,8 @@ class ProductFilterFormTypeFactory {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
 	public function createForCategory($domainId, $locale, Category $category) {
 		$pricingGroup = $this->currentCustomer->getPricingGroup();
@@ -73,7 +73,7 @@ class ProductFilterFormTypeFactory {
 	 * @param int $domainId
 	 * @param string $locale
 	 * @param string|null $searchText
-	 * @return \SS6\ShopBundle\Form\Front\Product\ProductFilterFormType
+	 * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
 	 */
 	public function createForSearch($domainId, $locale, $searchText) {
 		$parameterFilterChoices = [];

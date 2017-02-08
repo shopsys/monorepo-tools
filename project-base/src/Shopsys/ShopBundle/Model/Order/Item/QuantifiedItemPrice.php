@@ -1,31 +1,31 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class QuantifiedItemPrice {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private $unitPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private $totalPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	private $vat;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $unitPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $unitPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $totalPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 */
 	public function __construct(
 		Price $unitPrice,
@@ -38,21 +38,21 @@ class QuantifiedItemPrice {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function getUnitPrice() {
 		return $this->unitPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function getTotalPrice() {
 		return $this->totalPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 */
 	public function getVat() {
 		return $this->vat;

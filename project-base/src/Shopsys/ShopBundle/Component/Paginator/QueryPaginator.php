@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Paginator;
+namespace Shopsys\ShopBundle\Component\Paginator;
 
 use Doctrine\DBAL\SQLParserUtils;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Component\Doctrine\SortableNullsWalker;
+use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {
 
@@ -32,7 +32,7 @@ class QueryPaginator implements PaginatorInterface {
 	/**
 	 * @param int $page
 	 * @param int $pageSize
-	 * @return \SS6\ShopBundle\Component\Paginator\PaginationResult
+	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
 	 */
 	public function getResult($page = 1, $pageSize = null) {
 		$queryBuilder = clone $this->queryBuilder;

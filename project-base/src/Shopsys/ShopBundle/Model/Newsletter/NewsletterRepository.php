@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Newsletter;
+namespace Shopsys\ShopBundle\Model\Newsletter;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Newsletter\NewsletterSubscriber;
+use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
 class NewsletterRepository {
 

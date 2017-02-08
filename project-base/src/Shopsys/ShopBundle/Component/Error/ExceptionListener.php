@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Error;
+namespace Shopsys\ShopBundle\Component\Error;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 

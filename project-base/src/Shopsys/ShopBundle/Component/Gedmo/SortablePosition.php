@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Gedmo;
+namespace Shopsys\ShopBundle\Component\Gedmo;
 
 class SortablePosition {
 

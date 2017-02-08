@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -17,7 +17,7 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 	 */
 	public function load(ObjectManager $manager) {
 		$bestsellingProductEditFacade = $this->get(BestsellingProductEditFacade::class);
-		/* @var $bestsellingProductEditFacade \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
+		/* @var $bestsellingProductEditFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
 
 		$bestsellingProductEditFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Order\Item\OrderTransportData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Order\Item\OrderTransportData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints;
 class OrderTransportFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
 	 */
 	public function __construct(array $transports) {
 		$this->transports = $transports;

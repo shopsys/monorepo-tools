@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\TopProduct;
+namespace Shopsys\ShopBundle\Model\Product\TopProduct;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProduct;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct;
 
 class TopProductRepository {
 
@@ -16,7 +16,7 @@ class TopProductRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -34,7 +34,7 @@ class TopProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\TopProduct\TopProduct[]
+	 * @return \Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct[]
 	 */
 	public function getAll($domainId) {
 		return $this->getTopProductRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
@@ -42,8 +42,8 @@ class TopProductRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup) {
 		$queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);

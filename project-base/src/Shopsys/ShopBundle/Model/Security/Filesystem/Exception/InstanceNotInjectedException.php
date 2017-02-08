@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Filesystem\Exception;
+namespace Shopsys\ShopBundle\Model\Security\Filesystem\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Security\Filesystem\Exception\FilesystemException;
+use Shopsys\ShopBundle\Model\Security\Filesystem\Exception\FilesystemException;
 
 class InstanceNotInjectedException extends Exception implements FilesystemException {
 

@@ -1,56 +1,56 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace Shopsys\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
-use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class ProductEditFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
 	 */
 	private $productParameterValueFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 */
 	private $productFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
 	 */
 	private $pricingGroupFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Seo\SeoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
 	 */
 	private $seoSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
 	private $removeDuplicatesFromArrayTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
 	 */
 	private $imagesIdsToImagesTransformer;
 
@@ -75,8 +75,8 @@ class ProductEditFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
-	 * @return \SS6\ShopBundle\Form\Admin\Product\ProductFormType
+	 * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\ProductFormType
 	 */
 	public function create(Product $product = null) {
 		if ($product !== null) {

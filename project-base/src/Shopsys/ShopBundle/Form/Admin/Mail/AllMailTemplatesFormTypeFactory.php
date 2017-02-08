@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Mail;
+namespace Shopsys\ShopBundle\Form\Admin\Mail;
 
-use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
+use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 
 class AllMailTemplatesFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
 	 */
 	private $resetPasswordMail;
 
@@ -17,7 +17,7 @@ class AllMailTemplatesFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType
 	 */
 	public function create() {
 		return new AllMailTemplatesFormType(

@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart\Item;
+namespace Shopsys\ShopBundle\Model\Cart\Item;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartItemRepository {
 
@@ -28,8 +28,8 @@ class CartItemRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
-	 * @return \SS6\ShopBundle\Model\Cart\Item\CartItem[]
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
+	 * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
 	 */
 	public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
 		$criteria = [];

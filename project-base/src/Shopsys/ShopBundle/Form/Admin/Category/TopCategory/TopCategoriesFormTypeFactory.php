@@ -1,33 +1,33 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Category\TopCategory;
+namespace Shopsys\ShopBundle\Form\Admin\Category\TopCategory;
 
-use SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class TopCategoriesFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
 	private $removeDuplicatesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
 	 */
 	private $categoriesIdsToCategoriesTransformer;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\CategoryFacade $categoryFacade
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
-	 * @param \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
+	 * @param \Shopsys\ShopBundle\Model\Category\CategoryFacade $categoryFacade
+	 * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+	 * @param \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
 	 */
 	public function __construct(
 		CategoryFacade $categoryFacade,
@@ -42,7 +42,7 @@ class TopCategoriesFormTypeFactory {
 	/**
 	 * @param int $domainId
 	 * @param string $locale
-	 * @return \SS6\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
 	 */
 	public function create($domainId, $locale) {
 		$categoryPaths = $this->categoryFacade->getFullPathsIndexedByIdsForDomain($domainId, $locale);

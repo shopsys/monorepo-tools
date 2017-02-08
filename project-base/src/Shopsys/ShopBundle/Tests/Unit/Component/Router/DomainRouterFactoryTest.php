@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouterFactory;
+use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;

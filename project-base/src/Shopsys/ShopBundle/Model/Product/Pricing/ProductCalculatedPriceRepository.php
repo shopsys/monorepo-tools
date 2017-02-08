@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductCalculatedPriceRepository {
 
@@ -30,10 +30,10 @@ class ProductCalculatedPriceRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string|null $priceWithVat
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
 	 */
 	public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
 		$productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
@@ -52,7 +52,7 @@ class ProductCalculatedPriceRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 */
 	public function createProductCalculatedPricesForPricingGroup(PricingGroup $pricingGroup) {
 		$query = $this->em->createNativeQuery('INSERT INTO product_calculated_prices (product_id, pricing_group_id, price_with_vat)

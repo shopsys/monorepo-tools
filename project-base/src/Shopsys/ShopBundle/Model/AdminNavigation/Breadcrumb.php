@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdminNavigation;
+namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
-use SS6\ShopBundle\Model\AdminNavigation\Menu;
+use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 
 class Breadcrumb {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuFactory
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
 	 */
 	private $menuFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\MenuItem|null
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem|null
 	 */
 	private $overrdingLastItem;
 
@@ -21,14 +21,14 @@ class Breadcrumb {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
+	 * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
 	 */
 	public function overrideLastItem(MenuItem $menuItem) {
 		$this->overrdingLastItem = $menuItem;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\AdminNavigation\MenuItem[]
+	 * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
 	 */
 	public function getItems($route, $routeParameters) {
 		$menu = $this->menuFactory->createMenuWithVisibleItems();

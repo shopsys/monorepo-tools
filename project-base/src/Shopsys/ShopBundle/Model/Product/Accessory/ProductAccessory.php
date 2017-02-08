@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Accessory;
+namespace Shopsys\ShopBundle\Model\Product\Accessory;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_accessories")
@@ -12,16 +12,16 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductAccessory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 * @ORM\Id
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="accessory_product_id", referencedColumnName="id", onDelete="CASCADE")
 	 * @ORM\Id
 	 */
@@ -35,8 +35,8 @@ class ProductAccessory {
 	private $position;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Product $accessory
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $accessory
 	 * @param int $position
 	 */
 	public function __construct(Product $product, Product $accessory, $position) {
@@ -46,14 +46,14 @@ class ProductAccessory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getAccessory() {
 		return $this->accessory;

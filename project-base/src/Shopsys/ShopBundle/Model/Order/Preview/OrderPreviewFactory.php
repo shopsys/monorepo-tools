@@ -1,47 +1,47 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Preview;
+namespace Shopsys\ShopBundle\Model\Order\Preview;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Cart\CartFacade;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
-use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Cart\CartFacade;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation;
+use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class OrderPreviewFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
+	 * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
 	 */
 	private $orderPreviewCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFacade
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFacade
 	 */
 	private $cartFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 */
 	private $currentPromoCodeFacade;
 
@@ -62,9 +62,9 @@ class OrderPreviewFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
-	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment|null $payment
+	 * @return \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function createForCurrentUser(Transport $transport = null, Payment $payment = null) {
 		$currency = $this->currencyFacade->getDomainDefaultCurrencyByDomainId($this->domain->getId());
@@ -86,14 +86,14 @@ class OrderPreviewFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
-	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
-	 * @param \SS6\ShopBundle\Model\Customer\User|null $user
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[] $quantifiedProducts
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
 	 * @param float|null $promoCodeDiscountPercent
-	 * @return \SS6\ShopBundle\Model\Order\Preview\OrderPreview
+	 * @return \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview
 	 */
 	public function create(
 		Currency $currency,

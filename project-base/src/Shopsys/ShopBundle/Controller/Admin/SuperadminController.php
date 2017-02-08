@@ -1,56 +1,56 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Grid\ArrayDataSource;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Router\LocalizedRouterFactory;
-use SS6\ShopBundle\Form\Admin\Module\ModulesFormType;
-use SS6\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Module\ModuleFacade;
-use SS6\ShopBundle\Model\Module\ModuleList;
-use SS6\ShopBundle\Model\Pricing\DelayedPricingSetting;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Grid\ArrayDataSource;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory;
+use Shopsys\ShopBundle\Form\Admin\Module\ModulesFormType;
+use Shopsys\ShopBundle\Form\Admin\Superadmin\InputPriceTypeFormType;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Module\ModuleFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\ShopBundle\Model\Pricing\DelayedPricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
 class SuperadminController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleList
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleList
 	 */
 	private $moduleList;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
 	 */
 	private $moduleFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\LocalizedRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
 	 */
 	private $localizedRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\DelayedPricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\DelayedPricingSetting
 	 */
 	private $delayedPricingSetting;
 

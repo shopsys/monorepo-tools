@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\TopProduct;
+namespace Shopsys\ShopBundle\Form\Admin\Product\TopProduct;
 
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
 
 class TopProductsFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
 	private $removeDuplicatesTransformer;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+	 * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
 	 */
 	public function __construct(RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer) {
 		$this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType
 	 */
 	public function create() {
 		return new TopProductsFormType($this->removeDuplicatesTransformer);

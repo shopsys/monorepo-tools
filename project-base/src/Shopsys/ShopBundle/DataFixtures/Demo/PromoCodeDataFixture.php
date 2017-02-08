@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeData;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class PromoCodeDataFixture extends AbstractReferenceFixture {
 
@@ -14,7 +14,7 @@ class PromoCodeDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$promoCodeFacade = $this->get(PromoCodeFacade::class);
-		/* @var $promoCodeFacade \SS6\ShopBundle\Model\Order\PromoCode\PromoCodeFacade */
+		/* @var $promoCodeFacade \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade */
 		$promoCodeFacade->create(new PromoCodeData('test', 10.0));
 	}
 }

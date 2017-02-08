@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Base;
+namespace Shopsys\ShopBundle\DataFixtures\Base;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Administrator\AdministratorData;
-use SS6\ShopBundle\Model\Administrator\AdministratorFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture {
 
@@ -32,12 +32,12 @@ class AdministratorDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorData $administratorData
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
 	 * @param string|null $referenceName
 	 */
 	private function createAdministrator(AdministratorData $administratorData, $referenceName = null) {
 		$administratorFacade = $this->get(AdministratorFacade::class);
-		/* @var $administratorFacade \SS6\ShopBundle\Model\Administrator\AdministratorFacade */
+		/* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
 
 		$administrator = $administratorFacade->create($administratorData);
 		if ($referenceName !== null) {

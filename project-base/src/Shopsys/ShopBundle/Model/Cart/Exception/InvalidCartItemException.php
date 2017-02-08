@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart\Exception;
+namespace Shopsys\ShopBundle\Model\Cart\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Cart\Exception\CartException;
+use Shopsys\ShopBundle\Model\Cart\Exception\CartException;
 
 class InvalidCartItemException extends Exception implements CartException {
 

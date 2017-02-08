@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl\Exception;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
 class ReachMaxUrlUniqueResolveAttemptException extends Exception implements FriendlyUrlException {
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param int $attempt
 	 * @param \Exception|null $previous
 	 */

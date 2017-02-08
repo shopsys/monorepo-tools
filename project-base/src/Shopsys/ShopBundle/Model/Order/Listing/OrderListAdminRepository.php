@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Listing;
+namespace Shopsys\ShopBundle\Model\Order\Listing;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Order\Order;
 
 class OrderListAdminRepository {
 
@@ -16,7 +16,7 @@ class OrderListAdminRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 

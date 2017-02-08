@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Listing;
+namespace Shopsys\ShopBundle\Model\Product\Listing;
 
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
 class ProductListAdminFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository
 	 */
 	private $productListAdminRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository $productListAdminRepository
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade $pricingGroupSettingFacade
 	 */
 	public function __construct(
 		ProductListAdminRepository $productListAdminRepository,
@@ -44,7 +44,7 @@ class ProductListAdminFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+	 * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {

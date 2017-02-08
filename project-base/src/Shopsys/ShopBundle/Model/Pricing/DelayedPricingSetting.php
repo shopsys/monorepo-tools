@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace Shopsys\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
 
 class DelayedPricingSetting {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler
 	 */
 	private $inputPriceRecalculationScheduler;
 
@@ -29,7 +29,7 @@ class DelayedPricingSetting {
 	 */
 	public function scheduleSetInputPriceType($inputPriceType) {
 		if (!in_array($inputPriceType, $this->pricingSetting->getInputPriceTypes())) {
-			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException('Unknow input price type');
+			throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException('Unknow input price type');
 		}
 
 		$currentInputPriceType = $this->pricingSetting->getInputPriceType();

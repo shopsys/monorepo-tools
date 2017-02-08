@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Form\Admin\AdvancedSearch;
+namespace Shopsys\ShopBundle\Tests\Unit\Form\Admin\AdvancedSearch;
 
-use SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation;
-use SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation;
+use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase {
 
 	public function testTranslateFilterName() {
 		$advancedSearchConfig = $this->getContainer()->get(OrderAdvancedSearchConfig::class);
-		/* @var $advancedSearchConfig \SS6\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
+		/* @var $advancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */
 		$advancedSearchOrderFilterTranslation = $this->getContainer()->get(AdvancedSearchOrderFilterTranslation::class);
 		// @codingStandardsIgnoreStart
-		/* @var $advancedSearchOrderFilterTranslation \SS6\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation */
+		/* @var $advancedSearchOrderFilterTranslation \Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTranslation */
 		// @codingStandardsIgnoreEnd
 
 		foreach ($advancedSearchConfig->getAllFilters() as $filter) {
@@ -24,7 +24,7 @@ class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase {
 	public function testTranslateFilterNameNotFoundException() {
 		$advancedSearchTranslator = new AdvancedSearchOrderFilterTranslation();
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
 		$advancedSearchTranslator->translateFilterName('nonexistingFilterName');
 	}
 

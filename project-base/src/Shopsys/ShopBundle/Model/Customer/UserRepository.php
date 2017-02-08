@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Customer;
+namespace Shopsys\ShopBundle\Model\Customer;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\String\DatabaseSearching;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Component\String\DatabaseSearching;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserRepository {
 
@@ -33,7 +33,7 @@ class UserRepository {
 	/**
 	 * @param string $email
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	public function findUserByEmailAndDomain($email, $domainId) {
 		return $this->getUserRepository()->findOneBy([
@@ -45,13 +45,13 @@ class UserRepository {
 	/**
 	 * @param string $email
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	public function getUserByEmailAndDomain($email, $domainId) {
 		$user = $this->findUserByEmailAndDomain($email, $domainId);
 
 		if ($user === null) {
-			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException(
+			throw new \Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundByEmailAndDomainException(
 				$email,
 				$domainId
 			);
@@ -62,19 +62,19 @@ class UserRepository {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Customer\User
+	 * @return \Shopsys\ShopBundle\Model\Customer\User
 	 */
 	public function getUserById($id) {
 		$user = $this->findById($id);
 		if ($user === null) {
-			throw new \SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException($id);
+			throw new \Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException($id);
 		}
 		return $user;
 	}
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	public function findById($id) {
 		return $this->getUserRepository()->find($id);
@@ -83,7 +83,7 @@ class UserRepository {
 	/**
 	 * @param int $id
 	 * @param string $loginToken
-	 * @return \SS6\ShopBundle\Model\Customer\User|null
+	 * @return \Shopsys\ShopBundle\Model\Customer\User|null
 	 */
 	public function findByIdAndLoginToken($id, $loginToken) {
 		return $this->getUserRepository()->findOneBy([
@@ -94,7 +94,7 @@ class UserRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
+	 * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
 	 * @return \Doctrine\ORM\QueryBuilder
 	 */
 	public function getCustomerListQueryBuilderByQuickSearchData(
@@ -145,8 +145,8 @@ class UserRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $oldPricingGroup
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $newPricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $oldPricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $newPricingGroup
 	 */
 	public function replaceUsersPricingGroup(PricingGroup $oldPricingGroup, PricingGroup $newPricingGroup) {
 		$this->em->createQueryBuilder()

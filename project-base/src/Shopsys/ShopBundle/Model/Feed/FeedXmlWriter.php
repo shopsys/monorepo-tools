@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Twig_Environment;
 use Twig_Template;
 
@@ -18,7 +18,7 @@ class FeedXmlWriter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */
@@ -29,7 +29,7 @@ class FeedXmlWriter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */
@@ -40,8 +40,8 @@ class FeedXmlWriter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedItemInterface[] $items
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedItemInterface[] $items
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $feedTemplatePath
 	 * @param string $targetFilepath
 	 */
@@ -77,7 +77,7 @@ class FeedXmlWriter {
 			return $twigTemplate->renderBlock($name, $templateParameters);
 		}
 
-		throw new \SS6\ShopBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
+		throw new \Shopsys\ShopBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
 	}
 
 }

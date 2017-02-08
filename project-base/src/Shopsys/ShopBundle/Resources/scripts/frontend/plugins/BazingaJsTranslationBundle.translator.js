@@ -589,7 +589,7 @@ var Translator = (function(document, undefined) {
         },
 
         /**
-         * Custom method for SS6\ShopBundle
+         * Custom method for Shopsys\ShopBundle
          *
          * @param {String} message  The message id
          * @param {Number} number   The number to use to find the indice of the message

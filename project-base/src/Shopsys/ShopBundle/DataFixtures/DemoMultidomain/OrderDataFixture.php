@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\SettingValueDataFixture;
-use SS6\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserRepository;
-use SS6\ShopBundle\Model\Order\Item\QuantifiedProduct;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\OrderStatusDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\OrderDataFixture as DemoOrderDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
+use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\CountryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PaymentDataFixture;
+use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\SettingValueDataFixture;
+use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\TransportDataFixture;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserRepository;
+use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
@@ -34,7 +34,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 */
 	public function load(ObjectManager $manager) {
 		$userRepository = $this->get(UserRepository::class);
-		/* @var $userRepository \SS6\ShopBundle\Model\Customer\UserRepository */
+		/* @var $userRepository \Shopsys\ShopBundle\Model\Customer\UserRepository */
 
 		$orderData = new OrderData();
 		$orderData->transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
@@ -144,9 +144,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
 	 * @param array $products
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 */
 	private function createOrder(
 		OrderData $orderData,
@@ -154,9 +154,9 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		User $user = null
 	) {
 		$orderFacade = $this->get(OrderFacade::class);
-		/* @var $orderFacade \SS6\ShopBundle\Model\Order\OrderFacade */
+		/* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
 		$orderPreviewFactory = $this->get(OrderPreviewFactory::class);
-		/* @var $orderPreviewFactory \SS6\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
+		/* @var $orderPreviewFactory \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory */
 
 		$quantifiedProducts = [];
 		foreach ($products as $productReferenceName => $quantity) {
@@ -174,7 +174,7 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
 		);
 
 		$order = $orderFacade->createOrder($orderData, $orderPreview, $user);
-		/* @var $order \SS6\ShopBundle\Model\Order\Order */
+		/* @var $order \Shopsys\ShopBundle\Model\Order\Order */
 
 		$referenceName = DemoOrderDataFixture::ORDER_PREFIX . $order->getId();
 		$this->addReference($referenceName, $order);

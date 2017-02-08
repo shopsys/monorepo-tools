@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Config\Exception;
+namespace Shopsys\ShopBundle\Component\Image\Config\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Image\Config\Exception\ImageConfigException;
+use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageConfigException;
 
 class ImageEntityConfigNotFoundException extends Exception implements ImageConfigException {
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\HttpFoundation\Exception;
+namespace Shopsys\ShopBundle\Component\HttpFoundation\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\HttpFoundation\Exception\HttpFoundationException;
+use Shopsys\ShopBundle\Component\HttpFoundation\Exception\HttpFoundationException;
 
 class TooManyRedirectResponsesException extends Exception implements HttpFoundationException {
 

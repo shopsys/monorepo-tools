@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 
 class BestsellingProductController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
 	 */
 	private $cachedBestsellingProductFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 

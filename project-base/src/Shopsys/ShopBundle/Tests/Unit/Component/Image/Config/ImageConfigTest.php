@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Image\Config;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Image\Config;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageConfigDefinition;
-use SS6\ShopBundle\Component\Image\Config\ImageConfigLoader;
+use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfigDefinition;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigTest extends PHPUnit_Framework_TestCase {
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getBaseImageConfig() {

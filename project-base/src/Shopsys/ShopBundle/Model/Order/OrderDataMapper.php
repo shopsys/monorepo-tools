@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Model\Order\FrontOrderData;
-use SS6\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\FrontOrderData;
+use Shopsys\ShopBundle\Model\Order\OrderData;
 
 class OrderDataMapper {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\FrontOrderData $frontOrderData
-	 * @return \SS6\ShopBundle\Model\Order\OrderData
+	 * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
+	 * @return \Shopsys\ShopBundle\Model\Order\OrderData
 	 */
 	public function getOrderDataFromFrontOrderData(FrontOrderData $frontOrderData) {
 		$orderData = new OrderData();

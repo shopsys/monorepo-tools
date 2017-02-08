@@ -15,12 +15,12 @@
 
 		$advertForm.jsFormValidator({
 			'groups': function () {
-				var groups = [SS6.constant('\\SS6\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
+				var groups = [SS6.constant('\\Shopsys\\ShopBundle\\Form\\ValidationGroup::VALIDATION_GROUP_DEFAULT')];
 
-				if ($('input[name="advert[type]"]:checked').val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Advert\\Advert::TYPE_CODE')) {
-					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_CODE'));
-				} else if ($('input[name="advert[type]"]:checked').val() === SS6.constant('\\SS6\\ShopBundle\\Model\\Advert\\Advert::TYPE_IMAGE')) {
-					groups.push(SS6.constant('\\SS6\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_IMAGE'));
+				if ($('input[name="advert[type]"]:checked').val() === SS6.constant('\\Shopsys\\ShopBundle\\Model\\Advert\\Advert::TYPE_CODE')) {
+					groups.push(SS6.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_CODE'));
+				} else if ($('input[name="advert[type]"]:checked').val() === SS6.constant('\\Shopsys\\ShopBundle\\Model\\Advert\\Advert::TYPE_IMAGE')) {
+					groups.push(SS6.constant('\\Shopsys\\ShopBundle\\Form\\Admin\\Advert\\AdvertFormType::VALIDATION_GROUP_TYPE_IMAGE'));
 				}
 				return groups;
 			}

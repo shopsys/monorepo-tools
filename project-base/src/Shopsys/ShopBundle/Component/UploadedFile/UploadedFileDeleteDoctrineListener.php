@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListener {
@@ -16,7 +16,7 @@ class UploadedFileDeleteDoctrineListener {
 	private $container;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
 	private $uploadedFileConfig;
 
@@ -31,7 +31,7 @@ class UploadedFileDeleteDoctrineListener {
 	/**
 	 * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
 	 *
-	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFileFacade
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
 	 */
 	private function getUploadedFileFacade() {
 		return $this->container->get(UploadedFileFacade::class);

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 
 class BestsellingProductEditFacade {
 
@@ -15,12 +15,12 @@ class BestsellingProductEditFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository
 	 */
 	private $bestsellingProductRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
 	 */
 	private $cachedBestsellingProductFacade;
 
@@ -35,9 +35,9 @@ class BestsellingProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $bestsellingProducts
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $bestsellingProducts
 	 */
 	public function edit(Category $category, $domainId, array $bestsellingProducts) {
 		$toDelete = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId($category, $domainId);
@@ -57,9 +57,9 @@ class BestsellingProductEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	public function getBestsellingProductsIndexedByPosition($category, $domainId) {
 		$bestsellingProducts = $this->bestsellingProductRepository->getManualBestsellingProductsByCategoryAndDomainId(

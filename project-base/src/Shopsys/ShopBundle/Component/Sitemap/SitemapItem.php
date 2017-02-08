@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sitemap;
+namespace Shopsys\ShopBundle\Component\Sitemap;
 
 class SitemapItem {
 

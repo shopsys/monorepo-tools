@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Flag;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Flag;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Flag\FlagData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

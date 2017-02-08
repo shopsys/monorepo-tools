@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Exception;
+namespace Shopsys\ShopBundle\Component\Image\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Image\Exception\ImageException;
+use Shopsys\ShopBundle\Component\Image\Exception\ImageException;
 
 class ImageNotFoundException extends Exception implements ImageException {
 

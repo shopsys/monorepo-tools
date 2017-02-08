@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace Shopsys\ShopBundle\Component;
 
 use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader as SensioAnnotatedRouteControllerLoader;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Order;
+namespace Shopsys\ShopBundle\Form\Admin\Order;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Order\Item\OrderItemData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

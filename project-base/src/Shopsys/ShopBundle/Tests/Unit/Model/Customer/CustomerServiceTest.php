@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Customer;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Customer;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Country\Country;
-use SS6\ShopBundle\Model\Country\CountryData;
-use SS6\ShopBundle\Model\Customer\BillingAddress;
-use SS6\ShopBundle\Model\Customer\BillingAddressData;
-use SS6\ShopBundle\Model\Customer\CustomerPasswordService;
-use SS6\ShopBundle\Model\Customer\CustomerService;
-use SS6\ShopBundle\Model\Customer\DeliveryAddress;
-use SS6\ShopBundle\Model\Customer\DeliveryAddressData;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\Order\Order;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportData;
+use Shopsys\ShopBundle\Model\Country\Country;
+use Shopsys\ShopBundle\Model\Country\CountryData;
+use Shopsys\ShopBundle\Model\Customer\BillingAddress;
+use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
+use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
+use Shopsys\ShopBundle\Model\Customer\CustomerService;
+use Shopsys\ShopBundle\Model\Customer\DeliveryAddress;
+use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Order\Order;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportData;
 
 class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -110,7 +110,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$userData2->email = 'no-reply@netdevelo.cz';
 		$userData2->password = 'pa55w0rd';
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
 		$customerService->create(
 			$userData2,
 			$billingAddress2,
@@ -146,7 +146,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 		$userData2->email = 'NO-reply@netdevelo.cz';
 		$userData2->password = 'pa55w0rd';
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException::class);
 		$customerService->create(
 			$userData2,
 			$billingAddress2,
@@ -317,7 +317,7 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Customer\CustomerService
+	 * @return \Shopsys\ShopBundle\Model\Customer\CustomerService
 	 */
 	private function getCustomerService() {
 		$customerPasswordServiceMock = $this->getMock(CustomerPasswordService::class, [], [], '', false);
@@ -326,8 +326,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
-	 * @return \SS6\ShopBundle\Model\Customer\BillingAddress
+	 * @param \Shopsys\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
+	 * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
 	 */
 	private function createBillingAddress(BillingAddressData $billingAddressData = null) {
 		if ($billingAddressData === null) {
@@ -338,8 +338,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
-	 * @return \SS6\ShopBundle\Model\Customer\DeliveryAddress
+	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
+	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress
 	 */
 	private function createDeliveryAddress(DeliveryAddressData $deliveryAddressData = null) {
 		if ($deliveryAddressData === null) {

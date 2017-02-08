@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Performance;
+namespace Shopsys\ShopBundle\DataFixtures\Performance;
 
 use Faker\Generator as Faker;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryData;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryData;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture {
 
 	const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Doctrine\SqlLoggerFacade
+	 * @var \Shopsys\ShopBundle\Component\Doctrine\SqlLoggerFacade
 	 */
 	private $sqlLoggerFacade;
 
@@ -39,7 +39,7 @@ class CategoryDataFixture {
 	private $categoriesCreated;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade
+	 * @var \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade
 	 */
 	private $persistentReferenceFacade;
 
@@ -65,7 +65,7 @@ class CategoryDataFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
 	 * @param int $categoryLevel
 	 */
 	private function recursivelyCreateCategoryTree($parentCategory, $categoryLevel = 0) {
@@ -83,8 +83,8 @@ class CategoryDataFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $parentCategory
-	 * @return \SS6\ShopBundle\Model\Category\CategoryData
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
+	 * @return \Shopsys\ShopBundle\Model\Category\CategoryData
 	 */
 	private function getRandomCategoryDataByParentCategory(Category $parentCategory) {
 		$categoryData = new CategoryData();

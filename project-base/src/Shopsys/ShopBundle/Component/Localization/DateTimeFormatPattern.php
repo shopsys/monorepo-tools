@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Localization;
+namespace Shopsys\ShopBundle\Component\Localization;
 
 class DateTimeFormatPattern {
 

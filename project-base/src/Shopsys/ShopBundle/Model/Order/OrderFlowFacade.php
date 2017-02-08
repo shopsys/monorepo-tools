@@ -1,39 +1,39 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order;
+namespace Shopsys\ShopBundle\Model\Order;
 
-use SS6\ShopBundle\Form\Front\Order\OrderFlow;
-use SS6\ShopBundle\Model\Country\CountryFacade;
-use SS6\ShopBundle\Model\Payment\PaymentEditFacade;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Form\Front\Order\OrderFlow;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 
 class OrderFlowFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Front\Order\OrderFlow
+	 * @var \Shopsys\ShopBundle\Form\Front\Order\OrderFlow
 	 */
 	private $orderFlow;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
 	 */
 	private $transportEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
 	 */
 	private $paymentEditFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
-	 * @param \SS6\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
-	 * @param \SS6\ShopBundle\Model\Country\CountryFacade $countryFacade
+	 * @param \Shopsys\ShopBundle\Form\Front\Order\OrderFlow $orderFlow
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade $paymentEditFacade
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportEditFacade $transportEditFacade
+	 * @param \Shopsys\ShopBundle\Model\Country\CountryFacade $countryFacade
 	 */
 	public function __construct(
 		OrderFlow $orderFlow,

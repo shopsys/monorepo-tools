@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace Shopsys\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Form\CategoriesType;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Form\CategoriesType;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,48 +22,48 @@ class ProductFormType extends AbstractType {
 	const VALIDATION_GROUP_NOT_USING_STOCK = 'notUsingStock';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
 	 */
 	private $vats;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\Brand[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
 	 */
 	private $brands;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\Flag[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
 	 */
 	private $flags;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Unit\Unit[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
 	 */
 	private $units;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Product|null
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domainConfigs;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat[] $vats
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-	 * @param \SS6\ShopBundle\Model\Product\Brand\Brand[] $brands
-	 * @param \SS6\ShopBundle\Model\Product\Flag\Flag[] $flags
-	 * @param \SS6\ShopBundle\Model\Product\Unit\Unit[] $units
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
+	 * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
+	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+	 * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
 		array $vats,
@@ -279,7 +279,7 @@ class ProductFormType extends AbstractType {
 			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 				$productData = $form->getData();
-				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+				/* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
 
 				if ($productData->usingStock) {
 					$validationGroups[] = self::VALIDATION_GROUP_USING_STOCK;
@@ -301,7 +301,7 @@ class ProductFormType extends AbstractType {
 
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
 		$irrelevantFields = [];

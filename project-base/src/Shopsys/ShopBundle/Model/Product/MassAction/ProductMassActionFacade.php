@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\MassAction;
+namespace Shopsys\ShopBundle\Model\Product\MassAction;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductMassActionFacade {
 
@@ -15,17 +15,17 @@ class ProductMassActionFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionRepository
 	 */
 	private $productMassActionRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
 	 */
 	private $productVisibilityFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductHiddenRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
 	 */
 	private $productHiddenRecalculator;
 
@@ -42,7 +42,7 @@ class ProductMassActionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionData $productMassActionData
+	 * @param \Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionData $productMassActionData
 	 * @param \Doctrine\ORM\QueryBuilder $selectQueryBuilder
 	 * @param int[] $checkedProductIds
 	 */
@@ -70,7 +70,7 @@ class ProductMassActionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\MassAction\ProductMassActionData $productMassActionData
+	 * @param \Shopsys\ShopBundle\Model\Product\MassAction\ProductMassActionData $productMassActionData
 	 * @param \Doctrine\ORM\QueryBuilder $selectQueryBuilder
 	 * @param int[] $checkedProductIds
 	 * @return int[]
@@ -96,7 +96,7 @@ class ProductMassActionFacade {
 		} elseif ($productMassActionData->selectType === ProductMassActionData::SELECT_TYPE_CHECKED) {
 			$selectedProductIds = $checkedProductIds;
 		} else {
-			throw new \SS6\ShopBundle\Model\Product\MassAction\Exception\UnsupportedSelectionType($productMassActionData->selectType);
+			throw new \Shopsys\ShopBundle\Model\Product\MassAction\Exception\UnsupportedSelectionType($productMassActionData->selectType);
 		}
 
 		return $selectedProductIds;

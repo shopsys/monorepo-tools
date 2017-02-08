@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\FileUpload;
+namespace Shopsys\ShopBundle\Component\FileUpload;
 
 class FileNamingConvention {
 
@@ -20,7 +20,7 @@ class FileNamingConvention {
 			return $originalFilename;
 		} else {
 			$message = 'Naming convention ' . $namingConventionType . ' cannot by resolved to filename';
-			throw new \SS6\ShopBundle\Component\FileUpload\Exception\UnresolvedNamingConventionException($message);
+			throw new \Shopsys\ShopBundle\Component\FileUpload\Exception\UnresolvedNamingConventionException($message);
 		}
 	}
 }

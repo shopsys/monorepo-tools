@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Migrations;
+namespace Shopsys\ShopBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
-use SS6\ShopBundle\Component\Migration\MultidomainMigrationTrait;
+use Shopsys\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
 class Version20160828201247 extends AbstractMigration {
 

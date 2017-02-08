@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher;
 use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -23,17 +23,17 @@ class FriendlyUrlRouter implements RouterInterface {
 	private $delegatingLoader;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator
 	 */
 	private $friendlyUrlGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher
 	 */
 	private $friendlyUrlMatcher;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private $domainConfig;
 
@@ -50,9 +50,9 @@ class FriendlyUrlRouter implements RouterInterface {
 	/**
 	 * @param \Symfony\Component\Routing\RequestContext $context
 	 * @param \Symfony\Component\Config\Loader\DelegatingLoader $delegatingLoader
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGenerator $friendlyUrlGenerator
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlMatcher $friendlyUrlMatcher
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $friendlyUrlRouterResourceFilepath
 	 */
 	public function __construct(
@@ -110,7 +110,7 @@ class FriendlyUrlRouter implements RouterInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param array $parameters
 	 * @param string $referenceType
 	 * @return string

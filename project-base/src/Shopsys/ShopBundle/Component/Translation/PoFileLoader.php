@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Translation\Loader\PoFileLoader as BasePoFileLoader;

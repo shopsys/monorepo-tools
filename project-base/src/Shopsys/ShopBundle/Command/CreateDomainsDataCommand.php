@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\DomainDataCreator;
-use SS6\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
+use Shopsys\ShopBundle\Component\Domain\DomainDataCreator;
+use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,17 +35,17 @@ class CreateDomainsDataCommand extends ContainerAwareCommand {
 		$output->writeln('Start of creating new domains data.');
 
 		$domainDbFunctionsFacade = $this->getContainer()->get(DomainDbFunctionsFacade::class);
-		/* @var $domainDbFunctionsFacade \SS6\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
+		/* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
 		$domainDbFunctionsFacade->createDomainDbFunctions();
 
 		$domainDataCreator = $this->getContainer()->get(DomainDataCreator::class);
-		/* @var $domainDataCreator \SS6\ShopBundle\Component\Domain\DomainDataCreator */
+		/* @var $domainDataCreator \Shopsys\ShopBundle\Component\Domain\DomainDataCreator */
 		$domainsCreated = $domainDataCreator->createNewDomainsData();
 
 		$output->writeln('<fg=green>New domains created: ' . $domainsCreated . '.</fg=green>');
 
 		$multidomainEntityClassFinderFacade = $this->getContainer()->get(MultidomainEntityClassFinderFacade::class);
-		/* @var $multidomainEntityClassFinderFacade \SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
+		/* @var $multidomainEntityClassFinderFacade \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade */
 
 		$multidomainEntitiesNames = $multidomainEntityClassFinderFacade->getMultidomainEntitiesNames();
 		$output->writeln('<fg=green>Multidomain entities found:</fg=green>');

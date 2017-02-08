@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\ConstantList;
+namespace Shopsys\ShopBundle\Component\ConstantList;
 
 interface TranslatedConstantListInterface {
 

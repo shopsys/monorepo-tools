@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Transformers;
+namespace Shopsys\ShopBundle\Component\Transformers;
 
-use SS6\ShopBundle\Model\Script\Script;
+use Shopsys\ShopBundle\Model\Script\Script;
 use Symfony\Component\Form\DataTransformerInterface;
 
 class ScriptPlacementToBooleanTransformer implements DataTransformerInterface {

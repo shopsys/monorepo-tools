@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\Ordering;
+namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 
 class GridOrderingFacade {
 
@@ -13,7 +13,7 @@ class GridOrderingFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService
+	 * @var \Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService
 	 */
 	private $gridOrderingService;
 
@@ -47,7 +47,7 @@ class GridOrderingFacade {
 		if (array_key_exists(OrderableEntityInterface::class, $interfaces)) {
 			return $this->em->getRepository($entityClass);
 		} else {
-			throw new \SS6\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException();
+			throw new \Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException();
 		}
 	}
 

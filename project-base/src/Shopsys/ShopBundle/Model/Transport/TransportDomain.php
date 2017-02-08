@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 /**
  * @ORM\Table(name="transport_domains")
@@ -12,10 +12,10 @@ use SS6\ShopBundle\Model\Transport\Transport;
 class TransportDomain {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Transport\Transport")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
 	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $transport;
@@ -29,7 +29,7 @@ class TransportDomain {
 	private $domainId;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
 	 * @param int $domainId
 	 */
 	public function __construct(Transport $transport, $domainId) {

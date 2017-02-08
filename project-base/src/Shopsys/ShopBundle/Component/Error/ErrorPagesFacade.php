@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Error;
+namespace Shopsys\ShopBundle\Component\Error;
 
 use AppKernel;
-use SS6\Environment;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\Environment;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,12 +23,12 @@ class ErrorPagesFacade {
 	private $errorPagesDir;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -39,8 +39,8 @@ class ErrorPagesFacade {
 
 	/**
 	 * @param string $errorPagesDir
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Component\Router\DomainRouterFactory $domainRouterFactory
 	 * @param \Symfony\Component\Filesystem\Filesystem $filesystem
 	 */
 	public function __construct(

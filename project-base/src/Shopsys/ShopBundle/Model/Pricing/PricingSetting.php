@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace Shopsys\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class PricingSetting {
 
@@ -22,12 +22,12 @@ class PricingSetting {
 	const ROUNDING_TYPE_INTEGER = 3;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler
 	 */
 	private $productPriceRecalculationScheduler;
 
@@ -69,7 +69,7 @@ class PricingSetting {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 */
 	public function setDefaultCurrency(Currency $currency) {
 		$currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);
@@ -77,7 +77,7 @@ class PricingSetting {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @param int $domainId
 	 */
 	public function setDomainDefaultCurrency(Currency $currency, $domainId) {
@@ -89,7 +89,7 @@ class PricingSetting {
 	 */
 	public function setRoundingType($roundingType) {
 		if (!in_array($roundingType, $this->getRoundingTypes())) {
-			throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
+			throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidRoundingTypeException(
 				sprintf('Rounding type %s is not valid', $roundingType)
 			);
 		}

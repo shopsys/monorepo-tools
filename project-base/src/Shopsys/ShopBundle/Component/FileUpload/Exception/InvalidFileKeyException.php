@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\FileUpload\Exception;
+namespace Shopsys\ShopBundle\Component\FileUpload\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Debug;
+use Shopsys\ShopBundle\Component\Debug;
 
 class InvalidFileKeyException extends Exception implements FileUploadException {
 

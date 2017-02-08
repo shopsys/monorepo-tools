@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class InputPriceLabelExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PricingSetting
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
 	 */
 	private $pricingSetting;
 
@@ -42,7 +42,7 @@ class InputPriceLabelExtension extends Twig_Extension {
 				return t('Input price with VAT');
 
 			default:
-				throw new \SS6\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
+				throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
 					'Invalid input price type: ' . $inputPriceType);
 		}
 	}

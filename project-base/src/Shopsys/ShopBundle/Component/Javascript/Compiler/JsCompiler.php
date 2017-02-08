@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Compiler;
+namespace Shopsys\ShopBundle\Component\Javascript\Compiler;
 
 use PLUG\JavaScript\JParser;
 use PLUG\JavaScript\JTokenizer;
@@ -8,12 +8,12 @@ use PLUG\JavaScript\JTokenizer;
 class JsCompiler {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
+	 * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
 	 */
 	private $compilerPasses;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[] $compilerPasses
+	 * @param \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[] $compilerPasses
 	 */
 	public function __construct(array $compilerPasses) {
 		$this->compilerPasses = $compilerPasses;

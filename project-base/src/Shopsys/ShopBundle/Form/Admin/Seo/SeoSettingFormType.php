@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Seo;
+namespace Shopsys\ShopBundle\Form\Admin\Seo;
 
-use SS6\ShopBundle\Component\Constraints\NotInArray;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Constraints\NotInArray;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

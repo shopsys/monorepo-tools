@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture {
 
@@ -25,7 +25,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
 	 * @param int $domainId
 	 * @param string $referenceName
 	 */
@@ -35,7 +35,7 @@ class PricingGroupDataFixture extends AbstractReferenceFixture {
 		$referenceName
 	) {
 		$pricingGroupFacade = $this->get(PricingGroupFacade::class);
-		/* @var $pricingGroupFacade \SS6\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+		/* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
 		$pricingGroup = $pricingGroupFacade->create($pricingGroupData, $domainId);
 		$this->addReference($referenceName, $pricingGroup);

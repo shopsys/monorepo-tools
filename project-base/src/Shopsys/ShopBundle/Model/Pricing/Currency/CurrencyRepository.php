@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 class CurrencyRepository {
 
@@ -28,7 +28,7 @@ class CurrencyRepository {
 
 	/**
 	 * @param int $currencyId
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency|null
 	 */
 	public function findById($currencyId) {
 		return $this->getCurrencyRepository()->find($currencyId);
@@ -36,7 +36,7 @@ class CurrencyRepository {
 
 	/**
 	 * @param string $code
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency|null
 	 */
 	public function findByCode($code) {
 		return $this->getCurrencyRepository()->findOneBy([
@@ -46,21 +46,21 @@ class CurrencyRepository {
 
 	/**
 	 * @param int $currencyId
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function getById($currencyId) {
 		$currency = $this->findById($currencyId);
 
 		if ($currency === null) {
 			$message = 'Currency with ID ' . $currencyId . ' not found.';
-			throw new \SS6\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException($message);
 		}
 
 		return $currency;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency[]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
 	 */
 	public function getAll() {
 		return $this->getCurrencyRepository()->findAll();

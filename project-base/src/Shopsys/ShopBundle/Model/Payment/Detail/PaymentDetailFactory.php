@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment\Detail;
+namespace Shopsys\ShopBundle\Model\Payment\Detail;
 
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
 class PaymentDetailFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
 	 */
 	public function __construct(PaymentPriceCalculation $paymentPriceCalculation) {
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @return \SS6\ShopBundle\Model\Payment\Detail\PaymentDetail
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail
 	 */
 	public function createDetailForPayment(Payment $payment) {
 		return new PaymentDetail(
@@ -31,8 +31,8 @@ class PaymentDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @return \SS6\ShopBundle\Model\Payment\Detail\PaymentDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail[]
 	 */
 	public function createDetailsForPayments(array $payments) {
 		$details = [];
@@ -45,8 +45,8 @@ class PaymentDetailFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private function getIndependentPrices(Payment $payment) {
 		$prices = [];

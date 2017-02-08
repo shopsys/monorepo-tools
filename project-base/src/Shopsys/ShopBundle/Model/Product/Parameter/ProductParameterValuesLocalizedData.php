@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 class ProductParameterValuesLocalizedData {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	public $parameter;
 

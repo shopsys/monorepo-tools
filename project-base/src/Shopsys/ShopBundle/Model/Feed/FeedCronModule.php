@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Feed\FeedFacade;
+use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class FeedCronModule implements IteratedCronModuleInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
 	 */
 	private $feedFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedGenerationConfig|null
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig|null
 	 */
 	private $feedGenerationConfigToContinue;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Setting\Setting
+	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
 	 */
 	private $setting;
 

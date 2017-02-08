@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\MassAction;
+namespace Shopsys\ShopBundle\Model\Product\MassAction;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductMassActionRepository {
 

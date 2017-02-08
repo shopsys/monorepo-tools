@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
-use SS6\ShopBundle\Component\Translation\PhpFileExtractor;
-use SS6\ShopBundle\Component\Translation\TransMethodSpecification;
+use Shopsys\ShopBundle\Component\Translation\PhpFileExtractor;
+use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class PhpFileExtractorFactory {
 
@@ -18,7 +18,7 @@ class PhpFileExtractorFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Translation\PhpFileExtractor
+	 * @return \Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
 	 */
 	public function create() {
 		$transMethodSpecifications = [

@@ -1,1 +1,1 @@
-var x = SS6.constant('SS6\\ShopBundle\\Tests\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::BAR');
+var x = SS6.constant('Shopsys\\ShopBundle\\Tests\\Unit\\Component\\Javascript\\Compiler\\Constant\\Testclass::BAR');

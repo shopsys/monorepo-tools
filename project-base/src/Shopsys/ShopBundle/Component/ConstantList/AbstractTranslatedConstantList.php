@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\ConstantList;
+namespace Shopsys\ShopBundle\Component\ConstantList;
 
-use SS6\ShopBundle\Component\ConstantList\TranslatedConstantListInterface;
+use Shopsys\ShopBundle\Component\ConstantList\TranslatedConstantListInterface;
 
 abstract class AbstractTranslatedConstantList implements TranslatedConstantListInterface {
 
@@ -19,7 +19,7 @@ abstract class AbstractTranslatedConstantList implements TranslatedConstantListI
 	public function getTranslation($constant) {
 		$translations = $this->getTranslationsIndexedByValue();
 		if (!array_key_exists($constant, $translations)) {
-			throw new \SS6\ShopBundle\Component\ConstantList\Exception\UndefinedTranslationException($constant);
+			throw new \Shopsys\ShopBundle\Component\ConstantList\Exception\UndefinedTranslationException($constant);
 		}
 
 		return $translations[$constant];

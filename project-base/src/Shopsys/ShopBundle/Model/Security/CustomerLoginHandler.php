@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security;
+namespace Shopsys\ShopBundle\Model\Security;
 
-use SS6\ShopBundle\Component\Router\CurrentDomainRouter;
+use Shopsys\ShopBundle\Component\Router\CurrentDomainRouter;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
 	private $router;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\CurrentDomainRouter $router
+	 * @param \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter $router
 	 */
 	public function __construct(CurrentDomainRouter $router) {
 		$this->router = $router;

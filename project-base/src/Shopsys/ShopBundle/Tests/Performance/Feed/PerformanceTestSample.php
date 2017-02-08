@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Feed;
+namespace Shopsys\ShopBundle\Tests\Performance\Feed;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Model\Feed\FeedConfig;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 
 class PerformanceTestSample {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedConfig
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedConfig
 	 */
 	private $feedConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	private $domainConfig;
 
@@ -43,8 +43,8 @@ class PerformanceTestSample {
 	private $failMessages = [];
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Feed\FeedConfig $feedConfig
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Feed\FeedConfig $feedConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param $generationUri
 	 * @param $duration
 	 * @param $statusCode
@@ -78,14 +78,14 @@ class PerformanceTestSample {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\FeedConfig
+	 * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
 	 */
 	public function getFeedConfig() {
 		return $this->feedConfig;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Config\DomainConfig
+	 * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
 	 */
 	public function getDomainConfig() {
 		return $this->domainConfig;

@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Parameter;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterService;
+use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterServiceTest extends PHPUnit_Framework_TestCase {
 

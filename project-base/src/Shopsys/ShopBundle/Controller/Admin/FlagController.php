@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Model\Product\Flag\FlagFacade;
-use SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
+use Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit;
 
 class FlagController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
 	 */
 	private $flagFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Flag\FlagInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit
 	 */
 	private $flagInlineEdit;
 
@@ -58,7 +58,7 @@ class FlagController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Flag\Exception\FlagNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected flag doesn\'t exist.'));
 		}
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Base\VatDataFixture;
-use SS6\ShopBundle\Model\Transport\TransportEditData;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
+use Shopsys\ShopBundle\Model\Transport\TransportEditData;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -69,11 +69,11 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
 
 	/**
 	 * @param string $referenceName
-	 * @param \SS6\ShopBundle\Model\Transport\TransportEditData $transportEditData
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
 	 */
 	private function createTransport($referenceName, TransportEditData $transportEditData) {
 		$transportEditFacade = $this->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$transport = $transportEditFacade->create($transportEditData);
 		$this->addReference($referenceName, $transport);

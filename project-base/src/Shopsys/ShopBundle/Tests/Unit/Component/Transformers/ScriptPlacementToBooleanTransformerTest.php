@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Transformers;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Transformers;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
-use SS6\ShopBundle\Model\Script\Script;
+use Shopsys\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransformer;
+use Shopsys\ShopBundle\Model\Script\Script;
 use stdClass;
 
 class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase {

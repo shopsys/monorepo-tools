@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Payment;
+namespace Shopsys\ShopBundle\Form\Admin\Payment;
 
-use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
+use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
 	 */
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository
 	 */
 	private $vatRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportRepository $transportRepository
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportRepository $transportRepository
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
 	 */
 	public function __construct(
 		TransportRepository $transportRepository,
@@ -30,7 +30,7 @@ class PaymentFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Payment\PaymentFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
 	 */
 	public function create() {
 		$allTransports = $this->transportRepository->getAll();

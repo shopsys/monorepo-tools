@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Config;
+namespace Shopsys\ShopBundle\Component\Image\Config;
 
 class ImageSizeConfig {
 

@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Form\Admin\Login\LoginFormType;
-use SS6\ShopBundle\Model\Security\AdministratorLoginFacade;
-use SS6\ShopBundle\Model\Security\LoginService;
-use SS6\ShopBundle\Model\Security\Roles;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Form\Admin\Login\LoginFormType;
+use Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade;
+use Shopsys\ShopBundle\Model\Security\LoginService;
+use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -20,22 +20,22 @@ class LoginController extends AdminBaseController {
 	const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\LoginService
+	 * @var \Shopsys\ShopBundle\Model\Security\LoginService
 	 */
 	private $loginService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\AdministratorLoginFacade
+	 * @var \Shopsys\ShopBundle\Model\Security\AdministratorLoginFacade
 	 */
 	private $administratorLoginFacade;
 
@@ -85,7 +85,7 @@ class LoginController extends AdminBaseController {
 
 		try {
 			$this->loginService->checkLoginProcess($request);
-		} catch (\SS6\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
+		} catch (\Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException $e) {
 			$error = t('Log in failed.');
 		}
 
@@ -102,7 +102,7 @@ class LoginController extends AdminBaseController {
 	 */
 	public function ssoAction(Request $request, $originalDomainId) {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 		$multidomainToken = $this->administratorLoginFacade->generateMultidomainLoginTokenWithExpiration($administrator);
 		$originalDomainRouter = $this->domainRouterFactory->getRouter((int)$originalDomainId);
 		$redirectTo = $originalDomainRouter->generate(
@@ -126,7 +126,7 @@ class LoginController extends AdminBaseController {
 		$originalReferer = $request->get(self::ORIGINAL_REFERER_PARAMETER_NAME);
 		try {
 			$this->administratorLoginFacade->loginByMultidomainToken($request, $multidomainLoginToken);
-		} catch (\SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $ex) {
 			return $this->render('@SS6Shop/Admin/Content/Login/loginFailed.html.twig');
 		}
 		$redirectTo = ($originalReferer !== null) ? $originalReferer : $this->generateUrl('admin_default_dashboard');

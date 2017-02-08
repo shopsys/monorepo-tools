@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sitemap;
+namespace Shopsys\ShopBundle\Component\Sitemap;
 
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Service\AbstractGenerator;
 use Presta\SitemapBundle\Service\SitemapListenerInterface;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use SS6\ShopBundle\Component\Sitemap\SitemapFacade;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapFacade;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements SitemapListenerInterface {
@@ -21,22 +21,22 @@ class SitemapListener implements SitemapListenerInterface {
 	const PRIORITY_ARTICLES = 0.5;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapFacade
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
 	 */
 	private $sitemapFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
 	 */
 	private $friendlyUrlService;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -75,9 +75,9 @@ class SitemapListener implements SitemapListenerInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Sitemap\SitemapItem[] $sitemapItems
+	 * @param \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[] $sitemapItems
 	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $section
 	 * @param int $elementPriority
 	 */
@@ -97,7 +97,7 @@ class SitemapListener implements SitemapListenerInterface {
 
 	/**
 	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $section
 	 * @param int $elementPriority
 	 */

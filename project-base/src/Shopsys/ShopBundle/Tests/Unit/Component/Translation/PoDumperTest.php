@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Translation;
 
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Translation\MessageIdNormalizer;
-use SS6\ShopBundle\Component\Translation\PoDumper;
+use Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer;
+use Shopsys\ShopBundle\Component\Translation\PoDumper;
 
 class PoDumperTest extends PHPUnit_Framework_TestCase {
 

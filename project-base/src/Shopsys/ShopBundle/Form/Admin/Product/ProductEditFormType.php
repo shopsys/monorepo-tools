@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product;
+namespace Shopsys\ShopBundle\Form\Admin\Product;
 
-use SS6\ShopBundle\Component\Constraints\UniqueProductParameters;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
-use SS6\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
-use SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\ValidationGroup;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Product\ProductFormTypeFactory;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\ValidationGroup;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,27 +26,27 @@ class ProductEditFormType extends AbstractType {
 	const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Image[]
+	 * @var \Shopsys\ShopBundle\Component\Image\Image[]
 	 */
 	private $images;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
 	 */
 	private $productParameterValueFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
 	 */
 	private $productFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
 	 */
 	private $pricingGroups;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
 	 */
 	private $domains;
 
@@ -56,29 +56,29 @@ class ProductEditFormType extends AbstractType {
 	private $metaDescriptionsIndexedByDomainId;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product|null
+	 * @var \Shopsys\ShopBundle\Model\Product\Product|null
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
 	private $removeDuplicatesTransformer;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\ImagesIdsToImagesTransformer
 	 */
 	private $imagesIdsToImagesTransformer;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Image[] $images
-	 * @param \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
-	 * @param \SS6\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+	 * @param \Shopsys\ShopBundle\Component\Image\Image[] $images
+	 * @param \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory $productParameterValueFormTypeFactory
+	 * @param \Shopsys\ShopBundle\Form\Admin\Product\ProductFormTypeFactory
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
 	 * @param string[] $metaDescriptionsIndexedByDomainId
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
-	 * @param \SS6\ShopBundle\Model\Product\Product|null $product
+	 * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+	 * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
 	 */
 	public function __construct(
 		array $images,
@@ -296,7 +296,7 @@ class ProductEditFormType extends AbstractType {
 			'validation_groups' => function (FormInterface $form) {
 				$validationGroups = [ValidationGroup::VALIDATION_GROUP_DEFAULT];
 				$productData = $form->getData()->productData;
-				/* @var $productData \SS6\ShopBundle\Model\Product\ProductData */
+				/* @var $productData \Shopsys\ShopBundle\Model\Product\ProductData */
 
 				if ($productData->priceCalculationType === Product::PRICE_CALCULATION_TYPE_MANUAL) {
 					$validationGroups[] = self::VALIDATION_GROUP_MANUAL_PRICE_CALCULATION;
@@ -308,7 +308,7 @@ class ProductEditFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	private function getTitlePlaceholder(DomainConfig $domainConfig) {
@@ -320,7 +320,7 @@ class ProductEditFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string
 	 */
 	private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {
@@ -329,7 +329,7 @@ class ProductEditFormType extends AbstractType {
 
 	/**
 	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
 		if ($product->isMainVariant()) {

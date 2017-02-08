@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Availability;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Availability;
 
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\Validator\Constraints;
 class AvailabilitySettingFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\Availability[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
 	 */
 	private $availabilities;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
 	 */
 	public function __construct(array $availabilities) {
 		$this->availabilities = $availabilities;

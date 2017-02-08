@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Database\Component\Domain\Multidomain;
+namespace Shopsys\ShopBundle\Tests\Database\Component\Domain\Multidomain;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
-use SS6\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
-use SS6\ShopBundle\Component\Sql\SqlQuoter;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
+use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator;
+use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
 

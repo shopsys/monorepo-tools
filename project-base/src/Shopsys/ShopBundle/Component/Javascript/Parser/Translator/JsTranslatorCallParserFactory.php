@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Javascript\Parser\Translator;
+namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
 
-use SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
-use SS6\ShopBundle\Component\Javascript\Parser\JsStringParser;
-use SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
-use SS6\ShopBundle\Component\Translation\TransMethodSpecification;
+use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
+use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
+use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
+use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory {
 
@@ -13,18 +13,18 @@ class JsTranslatorCallParserFactory {
 	const METHOD_NAME_TRANS_CHOICE = 'SS6.translator.transChoice';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
+	 * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser
 	 */
 	private $jsFunctionCallParser;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser
+	 * @var \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser
 	 */
 	private $jsStringParser;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
-	 * @param \SS6\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
+	 * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser $jsFunctionCallParser
+	 * @param \Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser $jsStringParser
 	 */
 	public function __construct(
 		JsFunctionCallParser $jsFunctionCallParser,
@@ -35,7 +35,7 @@ class JsTranslatorCallParserFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
+	 * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
 	 */
 	public function create() {
 		$transMethodSpecifications = [

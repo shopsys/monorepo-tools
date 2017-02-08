@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model\Exception;
+namespace Shopsys\GeneratorBundle\Model\Exception;
 
 interface GeneratorException {
 

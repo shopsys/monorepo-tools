@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterData;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
 	 */
 	private $parameterFacade;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterGridFactory $parameterGridFactory
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterGridFactory $parameterGridFactory
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
@@ -31,7 +31,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 		parent::__construct($formFactory, $parameterGridFactory);
 	}
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($parameterData) {
@@ -42,7 +42,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $parameterId
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
 	 */
 	protected function editEntity($parameterId, $parameterData) {
 		$this->parameterFacade->edit($parameterId, $parameterData);
@@ -50,7 +50,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int|null $parameterId
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterData
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData
 	 */
 	protected function getFormDataObject($parameterId = null) {
 		$parameterData = new ParameterData();
@@ -66,7 +66,7 @@ class ParameterInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ParameterFormType
 	 */
 	protected function getFormType($rowId) {
 		return new ParameterFormType();

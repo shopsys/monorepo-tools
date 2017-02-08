@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Component\UploadedFile;
 
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileService {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
@@ -18,10 +18,10 @@ class UploadedFileService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig $uploadedFileEntityConfig
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig $uploadedFileEntityConfig
 	 * @param int $entityId
 	 * @param string[] $temporaryFilenames
-	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
 	public function createUploadedFile(
 		UploadedFileEntityConfig $uploadedFileEntityConfig,

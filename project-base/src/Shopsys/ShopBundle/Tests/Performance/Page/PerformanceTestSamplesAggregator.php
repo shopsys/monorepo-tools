@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Page;
+namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
-use SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
+use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceTestSamplesAggregator {
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
-	 * @return \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
+	 * @return \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]
 	 */
 	public function getPerformanceTestSamplesAggregatedByUrl(
 		array $performanceTestSamples
@@ -25,7 +25,7 @@ class PerformanceTestSamplesAggregator {
 			$worstStatusCode = null;
 
 			foreach ($performanceTestSamplesOfUrl as $performanceTestSample) {
-				/* @var $performanceTestSample \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample */
+				/* @var $performanceTestSample \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample */
 
 				$samplesCount++;
 				$totalDuration += $performanceTestSample->getDuration();
@@ -57,7 +57,7 @@ class PerformanceTestSamplesAggregator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Tests\Performance\Page\PerformanceTestSample[][] $performanceTestSamples
+	 * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[][] $performanceTestSamples
 	 */
 	private function getPerformanceTestSamplesGroupedByUrl(array $performanceTestSamples) {
 		$performanceTestSamplesGroupedByUrl = [];

@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Translation;
 
 use JMS\TranslationBundle\Annotation\Ignore;
-use SS6\ShopBundle\Component\Translation\Translator;
+use Shopsys\ShopBundle\Component\Translation\Translator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 
 class Controller extends BaseController {
 
 	public function indexAction() {
 		$translator = $this->get(Translator::class);
-		/* @var $translator \SS6\ShopBundle\Component\Translation\Translator */
+		/* @var $translator \Shopsys\ShopBundle\Component\Translation\Translator */
 
 		$translator->trans('trans test');
 		$translator->transChoice('transChoice test', 5);

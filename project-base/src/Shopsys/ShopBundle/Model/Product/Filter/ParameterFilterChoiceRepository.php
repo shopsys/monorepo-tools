@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
-use SS6\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice;
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Doctrine\GroupedScalarHydrator;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice;
+use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ParameterFilterChoiceRepository {
 
@@ -21,7 +21,7 @@ class ParameterFilterChoiceRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -35,10 +35,10 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param string $locale
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
 	public function getParameterFilterChoicesInCategory(
 		$domainId,
@@ -82,7 +82,7 @@ class ParameterFilterChoiceRepository {
 	/**
 	 * @param array $rows
 	 * @param string $locale
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
 	 */
 	private function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale) {
 		$parameterIds = [];
@@ -103,7 +103,7 @@ class ParameterFilterChoiceRepository {
 
 		$parametersIndexedById = [];
 		foreach ($parameters as $parameter) {
-			/* @var $parameter \SS6\ShopBundle\Model\Product\Parameter\Parameter */
+			/* @var $parameter \Shopsys\ShopBundle\Model\Product\Parameter\Parameter */
 			$parametersIndexedById[$parameter->getId()] = $parameter;
 		}
 
@@ -112,7 +112,7 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param array $rows
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[][]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]
 	 */
 	private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows) {
 		$parameterIdsByValueId = [];
@@ -136,7 +136,7 @@ class ParameterFilterChoiceRepository {
 
 	/**
 	 * @param array $rows
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
 	 */
 	private function getParameterValuesIndexedByIdOrderedByText(array $rows) {
 		$valueIds = [];
@@ -157,7 +157,7 @@ class ParameterFilterChoiceRepository {
 
 		$valuesIndexedById = [];
 		foreach ($values as $value) {
-			/* @var $value \SS6\ShopBundle\Model\Product\Parameter\ParameterValue */
+			/* @var $value \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue */
 			$valuesIndexedById[$value->getId()] = $value;
 		}
 

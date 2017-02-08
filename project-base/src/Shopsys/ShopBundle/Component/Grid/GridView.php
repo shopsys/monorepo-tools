@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid;
+namespace Shopsys\ShopBundle\Component\Grid;
 
-use SS6\ShopBundle\Component\Grid\Grid;
+use Shopsys\ShopBundle\Component\Grid\Grid;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
@@ -11,7 +11,7 @@ use Twig_Environment;
 class GridView {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\Grid
+	 * @var \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	private $grid;
 
@@ -46,7 +46,7 @@ class GridView {
 	private $twig;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
+	 * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 * @param \Symfony\Component\Routing\Router $router
 	 * @param \Twig_Environment $twig
@@ -111,7 +111,7 @@ class GridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Column $column
+	 * @param \Shopsys\ShopBundle\Component\Grid\Column $column
 	 * @param array|null $row
 	 * @param \Symfony\Component\Form\FormView
 	 */
@@ -151,7 +151,7 @@ class GridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\ActionColumn $actionColumn
+	 * @param \Shopsys\ShopBundle\Component\Grid\ActionColumn $actionColumn
 	 * @param array $row
 	 */
 	public function renderActionCell(ActionColumn $actionColumn, array $row) {
@@ -168,7 +168,7 @@ class GridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Column $column
+	 * @param \Shopsys\ShopBundle\Component\Grid\Column $column
 	 */
 	public function renderTitleCell(Column $column) {
 		$posibleBlocks = [
@@ -259,7 +259,7 @@ class GridView {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Grid\Column $column
+	 * @param \Shopsys\ShopBundle\Component\Grid\Column $column
 	 * @param array $row
 	 * @return mixed
 	 */

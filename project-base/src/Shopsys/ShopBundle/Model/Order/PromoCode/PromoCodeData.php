@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeData {
 
@@ -26,7 +26,7 @@ class PromoCodeData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
+	 * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
 	 */
 	public function setFromEntity(PromoCode $promoCode) {
 		$this->code = $promoCode->getCode();

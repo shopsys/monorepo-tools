@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Component\UploadedFile;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileLocator {
 
@@ -27,7 +27,7 @@ class UploadedFileLocator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
 	public function getRelativeUploadedFileFilepath(UploadedFile $uploadedFile) {
@@ -35,7 +35,7 @@ class UploadedFileLocator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
 	public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
@@ -43,8 +43,8 @@ class UploadedFileLocator {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
 	public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
@@ -54,11 +54,11 @@ class UploadedFileLocator {
 			. $this->getRelativeUploadedFileFilepath($uploadedFile);
 		}
 
-		throw new \SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException();
+		throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return bool
 	 */
 	public function fileExists(UploadedFile $uploadedFile) {

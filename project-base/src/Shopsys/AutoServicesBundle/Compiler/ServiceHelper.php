@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 class ServiceHelper {
 

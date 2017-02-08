@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\QuickSearch;
+namespace Shopsys\ShopBundle\Form\Admin\QuickSearch;
 
 class QuickSearchFormData {
 

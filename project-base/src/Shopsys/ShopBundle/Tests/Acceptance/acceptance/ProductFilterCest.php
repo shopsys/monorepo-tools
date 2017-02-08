@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductFilterPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductFilterPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class ProductFilterCest {
 

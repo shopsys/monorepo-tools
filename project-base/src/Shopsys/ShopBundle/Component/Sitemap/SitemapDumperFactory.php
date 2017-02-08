@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sitemap;
+namespace Shopsys\ShopBundle\Component\Sitemap;
 
 use Presta\SitemapBundle\Service\Dumper;
-use SS6\ShopBundle\Component\Sitemap\SitemapService;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -22,7 +22,7 @@ class SitemapDumperFactory {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapService
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapService
 	 */
 	private $sitemapService;
 

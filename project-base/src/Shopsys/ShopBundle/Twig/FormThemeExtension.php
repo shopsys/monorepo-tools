@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_SimpleFunction;
@@ -41,7 +41,7 @@ class FormThemeExtension extends \Twig_Extension {
 	 * @return string
 	 */
 	public function getDefaultFormTheme() {
-		if (mb_stripos($this->request->get('_controller'), 'SS6\ShopBundle\Controller\Admin') === 0) {
+		if (mb_stripos($this->request->get('_controller'), 'Shopsys\ShopBundle\Controller\Admin') === 0) {
 			return self::ADMIN_THEME;
 		} else {
 			return self::FRONT_THEME;

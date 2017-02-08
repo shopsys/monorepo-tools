@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Form;
+namespace Shopsys\ShopBundle\Tests\Unit\Form;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class YesNoTypeTest extends FunctionalTestCase {

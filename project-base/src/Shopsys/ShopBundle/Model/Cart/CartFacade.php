@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Cart;
+namespace Shopsys\ShopBundle\Model\Cart;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Cart\CartFactory;
-use SS6\ShopBundle\Model\Cart\CartService;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory;
-use SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Cart\CartFactory;
+use Shopsys\ShopBundle\Model\Cart\CartService;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
+use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade {
 
@@ -20,44 +20,44 @@ class CartFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartService
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartService
 	 */
 	private $cartService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cart\CartFactory
+	 * @var \Shopsys\ShopBundle\Model\Cart\CartFactory
 	 */
 	private $cartFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory
 	 */
 	private $customerIdentifierFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Model\Cart\CartService $cartService
-	 * @param \SS6\ShopBundle\Model\Cart\CartFactory $cartFactory
-	 * @param \SS6\ShopBundle\Model\Product\ProductRepository $productRepository
-	 * @param \SS6\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
-	 * @param \SS6\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
+	 * @param \Shopsys\ShopBundle\Model\Cart\CartService $cartService
+	 * @param \Shopsys\ShopBundle\Model\Cart\CartFactory $cartFactory
+	 * @param \Shopsys\ShopBundle\Model\Product\ProductRepository $productRepository
+	 * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory $customerIdentifierFactory
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Customer\CurrentCustomer $currentCustomer
 	 */
 	private $currentPromoCodeFacade;
 
@@ -84,7 +84,7 @@ class CartFacade {
 	/**
 	 * @param int $productId
 	 * @param int $quantity
-	 * @return \SS6\ShopBundle\Model\Cart\AddProductResult
+	 * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
 	 */
 	public function addProductToCart($productId, $quantity) {
 		$product = $this->productRepository->getSellableById(
@@ -95,7 +95,7 @@ class CartFacade {
 		$customerIdentifier = $this->customerIdentifierFactory->get();
 		$cart = $this->cartFactory->get($customerIdentifier);
 		$result = $this->cartService->addProductToCart($cart, $customerIdentifier, $product, $quantity);
-		/* @var $result \SS6\ShopBundle\Model\Cart\AddProductResult */
+		/* @var $result \Shopsys\ShopBundle\Model\Cart\AddProductResult */
 
 		$this->em->persist($result->getCartItem());
 		$this->em->flush();
@@ -139,7 +139,7 @@ class CartFacade {
 
 	/**
 	 * @param int $cartItemId
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProductByCartItemId($cartItemId) {
 		$cart = $this->getCartOfCurrentCustomer();
@@ -151,7 +151,7 @@ class CartFacade {
 		$this->currentPromoCodeFacade->removeEnteredPromoCode();
 	}
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\Cart
+	 * @return \Shopsys\ShopBundle\Model\Cart\Cart
 	 */
 	public function getCartOfCurrentCustomer() {
 		$customerIdentifier = $this->customerIdentifierFactory->get();
@@ -160,7 +160,7 @@ class CartFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
 	 */
 	public function getQuantifiedProductsOfCurrentCustomer() {
 		$cart = $this->getCartOfCurrentCustomer();

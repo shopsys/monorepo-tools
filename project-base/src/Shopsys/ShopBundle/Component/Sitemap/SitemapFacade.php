@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sitemap;
+namespace Shopsys\ShopBundle\Component\Sitemap;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory;
-use SS6\ShopBundle\Component\Sitemap\SitemapRepository;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapRepository;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class SitemapFacade {
 
@@ -21,22 +21,22 @@ class SitemapFacade {
 	private $sitemapsUrlPrefix;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapDumperFactory
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory
 	 */
 	private $domainSitemapDumperFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapRepository
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapRepository
 	 */
 	private $sitemapRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
@@ -70,8 +70,8 @@ class SitemapFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig) {
 		$pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
@@ -80,16 +80,16 @@ class SitemapFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
 		return $this->sitemapRepository->getSitemapItemsForVisibleCategories($domainConfig);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Sitemap\SitemapItem[]
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
 	 */
 	public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
 		return $this->sitemapRepository->getSitemapItemsForArticlesOnDomain($domainConfig);

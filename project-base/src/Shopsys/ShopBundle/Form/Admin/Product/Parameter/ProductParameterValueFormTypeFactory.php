@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Product\Parameter;
+namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
-use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 
 class ProductParameterValueFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
 	private $parameterRepository;
 
@@ -18,7 +18,7 @@ class ProductParameterValueFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
 	 */
 	public function create() {
 		$parameters = $this->parameterRepository->getAll();

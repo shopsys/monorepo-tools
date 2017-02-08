@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Cart;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Cart;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Cart\CartFactory;
-use SS6\ShopBundle\Model\Cart\Item\CartItemRepository;
-use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Cart\CartFactory;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
+use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactoryTest extends PHPUnit_Framework_TestCase {
 
@@ -38,7 +38,7 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\CartFactory
+	 * @return \Shopsys\ShopBundle\Model\Cart\CartFactory
 	 */
 	private function getCartFactory() {
 		$cartItemRepository = $this->getMockBuilder(CartItemRepository::class)

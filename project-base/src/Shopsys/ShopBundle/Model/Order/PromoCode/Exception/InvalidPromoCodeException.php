@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode\Exception;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeException;
+use Shopsys\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeException;
 
 class InvalidPromoCodeException extends Exception implements PromoCodeException {
 

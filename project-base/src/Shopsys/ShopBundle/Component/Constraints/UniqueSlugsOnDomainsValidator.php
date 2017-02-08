@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Constraints;
+namespace Shopsys\ShopBundle\Component\Constraints;
 
-use SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Form\FriendlyUrlType;
+use Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -42,7 +42,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 
 	/**
 	 * @param array $values
-	 * @param \SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
+	 * @param \Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
 	 */
 	private function validateDuplication(array $values, UniqueSlugsOnDomains $constraint) {
 		$slugCountsOnDomain = $this->getSlugCountsOnDomain($values);
@@ -63,7 +63,7 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
 
 	/**
 	 * @param array $values
-	 * @param \SS6\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
+	 * @param \Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
 	 */
 	private function validateExists($values, UniqueSlugsOnDomains $constraint) {
 		foreach ($values as $urlData) {

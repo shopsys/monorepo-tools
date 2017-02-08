@@ -1,61 +1,61 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
-use SS6\ShopBundle\Form\Admin\Mail\MailSettingFormType;
-use SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService;
-use SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
-use SS6\ShopBundle\Model\Mail\MailTemplate;
-use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
-use SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
-use SS6\ShopBundle\Model\Order\Status\OrderStatus;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\Mail\MailSettingFormType;
+use Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService;
+use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
+use Shopsys\ShopBundle\Model\Mail\MailTemplate;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;
+use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory
 	 */
 	private $allMailTemplatesFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\RegistrationMailService
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\RegistrationMailService
 	 */
 	private $registrationMailService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
 	 */
 	private $resetPasswordMail;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateFacade
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
 	 */
 	private $mailTemplateFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\Setting\MailSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade
 	 */
 	private $mailSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Mail\OrderMailService
+	 * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService
 	 */
 	private $orderMailService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
 	 */
 	private $orderStatusFacade;
 

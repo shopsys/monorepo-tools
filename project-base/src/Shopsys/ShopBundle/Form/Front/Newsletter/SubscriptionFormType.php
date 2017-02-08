@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Newsletter;
+namespace Shopsys\ShopBundle\Form\Front\Newsletter;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\TimedFormTypeExtension;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

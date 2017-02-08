@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Performance\Page;
+namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 class PerformanceTestSample {
 

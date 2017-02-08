@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
-use SS6\ShopBundle\DataFixtures\Performance\OrderDataFixture;
-use SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture;
-use SS6\ShopBundle\DataFixtures\Performance\UserDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -26,13 +26,13 @@ class PerformanceDataCommand extends ContainerAwareCommand {
 		$container = $this->getContainer();
 
 		$categoryDataFixture = $container->get(CategoryDataFixture::class);
-		/* @var $categoryDataFixture \SS6\ShopBundle\DataFixtures\Performance\CategoryDataFixture */
+		/* @var $categoryDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\CategoryDataFixture */
 		$productDataFixture = $container->get(ProductDataFixture::class);
-		/* @var $productDataFixture \SS6\ShopBundle\DataFixtures\Performance\ProductDataFixture */
+		/* @var $productDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\ProductDataFixture */
 		$userDataFixture = $container->get(UserDataFixture::class);
-		/* @var $userDataFixture \SS6\ShopBundle\DataFixtures\Performance\UserDataFixture */
+		/* @var $userDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\UserDataFixture */
 		$orderDataFixture = $container->get(OrderDataFixture::class);
-		/* @var $orderDataFixture \SS6\ShopBundle\DataFixtures\Performance\OrderDataFixture */
+		/* @var $orderDataFixture \Shopsys\ShopBundle\DataFixtures\Performance\OrderDataFixture */
 
 		$output->writeln('<fg=green>loading ' . CategoryDataFixture::class . '</fg=green>');
 		$categoryDataFixture->load();

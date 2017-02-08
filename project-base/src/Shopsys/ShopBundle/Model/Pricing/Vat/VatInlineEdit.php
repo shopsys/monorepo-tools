@@ -1,25 +1,25 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
-use SS6\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
-use SS6\ShopBundle\Form\Admin\Vat\VatFormType;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatGridFactory;
+use Shopsys\ShopBundle\Component\Grid\InlineEdit\AbstractGridInlineEdit;
+use Shopsys\ShopBundle\Form\Admin\Vat\VatFormType;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatGridFactory;
 use Symfony\Component\Form\FormFactory;
 
 class VatInlineEdit extends AbstractGridInlineEdit {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\VatFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
 	 */
 	private $vatFacade;
 
 	/**
 	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatGridFactory $vatGridFactory
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatFacade $vatFacade
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatGridFactory $vatGridFactory
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade $vatFacade
 	 */
 	public function __construct(
 		FormFactory $formFactory,
@@ -32,7 +32,7 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 * @return int
 	 */
 	protected function createEntityAndGetId($vatData) {
@@ -43,7 +43,7 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $vatId
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 */
 	protected function editEntity($vatId, $vatData) {
 		$this->vatFacade->edit($vatId, $vatData);
@@ -51,7 +51,7 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int|null $vatId
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\VatData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\VatData
 	 */
 	protected function getFormDataObject($vatId = null) {
 		$vatData = new VatData();
@@ -67,7 +67,7 @@ class VatInlineEdit extends AbstractGridInlineEdit {
 
 	/**
 	 * @param int $rowId
-	 * @return \SS6\ShopBundle\Form\Admin\Vat\VatFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Vat\VatFormType
 	 */
 	protected function getFormType($rowId) {
 		return new VatFormType($rowId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT);

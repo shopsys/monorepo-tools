@@ -1,31 +1,31 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Component\Router\DomainRouterFactory;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Controller\Admin\LoginController;
-use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
-use SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
-use SS6\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridFacade;
-use SS6\ShopBundle\Model\AdminNavigation\Breadcrumb;
-use SS6\ShopBundle\Model\AdminNavigation\MenuItem;
-use SS6\ShopBundle\Model\Customer\CustomerData;
-use SS6\ShopBundle\Model\Customer\CustomerFacade;
-use SS6\ShopBundle\Model\Customer\CustomerListAdminFacade;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Customer\UserData;
-use SS6\ShopBundle\Model\Order\OrderFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
-use SS6\ShopBundle\Model\Security\LoginAsUserFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Controller\Admin\LoginController;
+use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
+use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormType;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
+use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
+use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
+use Shopsys\ShopBundle\Model\Customer\CustomerData;
+use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
+use Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Customer\UserData;
+use Shopsys\ShopBundle\Model\Order\OrderFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
+use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -35,62 +35,62 @@ class CustomerController extends AdminBaseController {
 	const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
 	 */
 	private $pricingGroupSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerListAdminFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerListAdminFacade
 	 */
 	private $customerListAdminFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CustomerFacade
+	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
 	 */
 	private $customerFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormTypeFactory
 	 */
 	private $customerFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\AdminNavigation\Breadcrumb
+	 * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
 	 */
 	private $breadcrumb;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridFacade
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
 	 */
 	private $administratorGridFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderFacade
 	 */
 	private $orderFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Security\LoginAsUserFacade
+	 * @var \Shopsys\ShopBundle\Model\Security\LoginAsUserFacade
 	 */
 	private $loginAsUserFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\DomainRouterFactory
+	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
 	 */
 	private $domainRouterFactory;
 
@@ -150,7 +150,7 @@ class CustomerController extends AdminBaseController {
 				);
 
 				return $this->redirectToRoute('admin_customer_list');
-			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 				$form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
 			}
 
@@ -179,7 +179,7 @@ class CustomerController extends AdminBaseController {
 	 */
 	public function listAction(Request $request) {
 		$administrator = $this->getUser();
-		/* @var $administrator \SS6\ShopBundle\Model\Administrator\Administrator */
+		/* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
 		$quickSearchForm = $this->createForm(new QuickSearchFormType());
 		$quickSearchForm->setData(new QuickSearchFormData());
@@ -258,7 +258,7 @@ class CustomerController extends AdminBaseController {
 				);
 
 				return $this->redirectToRoute('admin_customer_list');
-			} catch (\SS6\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
+			} catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
 				$formErrorMessage = t('There is already a customer with this e-mail in the database');
 				$form->get('userData')->get('email')->addError(new FormError($formErrorMessage));
 			}
@@ -290,7 +290,7 @@ class CustomerController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected customer doesn\'t exist.'));
 		}
 
@@ -309,7 +309,7 @@ class CustomerController extends AdminBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
 	 * @return string
 	 */
 	private function getSsoLoginAsUserUrl(User $user) {

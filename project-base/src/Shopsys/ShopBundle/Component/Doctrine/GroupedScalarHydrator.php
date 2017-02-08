@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine;
+namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\Internal\Hydration\AbstractHydrator;
 

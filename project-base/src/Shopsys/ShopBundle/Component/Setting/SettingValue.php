@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Setting;
+namespace Shopsys\ShopBundle\Component\Setting;
 
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Component\DateTimeHelper\DateTimeHelper;
+use Shopsys\ShopBundle\Component\DateTimeHelper\DateTimeHelper;
 
 /**
  * @ORM\Table(name="setting_values")
@@ -146,7 +146,7 @@ class SettingValue {
 
 		$message = 'Setting value type of "' . gettype($value) . '" is unsupported.'
 			. ' Supported is \DateTime, string, integer, float, boolean or null.';
-		throw new \SS6\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
+		throw new \Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
 	}
 
 }

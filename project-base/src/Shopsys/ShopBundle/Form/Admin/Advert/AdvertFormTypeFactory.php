@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Advert;
+namespace Shopsys\ShopBundle\Form\Admin\Advert;
 
-use SS6\ShopBundle\Model\Advert\Advert;
-use SS6\ShopBundle\Model\Advert\AdvertPositionList;
-use SS6\ShopBundle\Twig\ImageExtension;
+use Shopsys\ShopBundle\Model\Advert\Advert;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Twig\ImageExtension;
 
 class AdvertFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Advert\AdvertPositionList
+	 * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
 	 */
 	private $advertPositionList;
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\ImageExtension
+	 * @var \Shopsys\ShopBundle\Twig\ImageExtension
 	 */
 	private $imageExtension;
 
@@ -27,8 +27,8 @@ class AdvertFormTypeFactory {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Advert\Advert $advert
-	 * @return \SS6\ShopBundle\Form\Admin\Advert\AdvertFormType
+	 * @param \Shopsys\ShopBundle\Model\Advert\Advert $advert
+	 * @return \Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType
 	 */
 	public function create(Advert $advert = null) {
 		$imageExists = false;

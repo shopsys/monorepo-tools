@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Newsletter;
+namespace Shopsys\ShopBundle\Model\Newsletter;
 
 use Doctrine\ORM\Mapping as ORM;
 

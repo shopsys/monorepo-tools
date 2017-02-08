@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Model\Advert\AdvertPositionList;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
 class ImageController extends AdminBaseController {
 
@@ -22,7 +22,7 @@ class ImageController extends AdminBaseController {
 	const SIZE_NAME_THUMBNAIL = 'thumbnail';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
@@ -45,13 +45,13 @@ class ImageController extends AdminBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
 	 * @return string[]
 	 */
 	private function getEntityNamesTranslations(array $imageEntityConfigs) {
 		$names = [];
 		foreach ($imageEntityConfigs as $imageEntityConfig) {
-			/* @var $imageEntityConfig \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig */
+			/* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
 			$names[$imageEntityConfig->getEntityName()] = $this->getEntityNameTranslation($imageEntityConfig->getEntityName());
 		}
 		return $names;
@@ -80,13 +80,13 @@ class ImageController extends AdminBaseController {
 	}
 
 	/**
-	 * @param @param \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
+	 * @param @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
 	 * @return string[]
 	 */
 	private function getImageSizeUsagesTranslations(array $imageEntityConfigs) {
 		$usages = [];
 		foreach ($imageEntityConfigs as $imageEntityConfig) {
-			/* @var $imageEntityConfig \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig */
+			/* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
 			foreach ($imageEntityConfig->getSizeConfigs() as $imageSizeConfig) {
 				$entityName = $imageEntityConfig->getEntityName();
 				$sizeName = $imageSizeConfig->getName();
@@ -174,16 +174,16 @@ class ImageController extends AdminBaseController {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
+	 * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
 	 * @return string[]
 	 */
 	private function getImageSizeWithTypeUsagesTranslations(array $imageEntityConfigs) {
 		$usages = [];
 		foreach ($imageEntityConfigs as $imageEntityConfig) {
-			/* @var $imageEntityConfig \SS6\ShopBundle\Component\Image\Config\ImageEntityConfig */
+			/* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
 			foreach ($imageEntityConfig->getSizeConfigsByTypes() as $typeName => $imageSizeConfigs) {
 				foreach ($imageSizeConfigs as $imageSizeConfig) {
-					/* @var $imageSizeConfig \SS6\ShopBundle\Component\Image\Config\ImageSizeConfig */
+					/* @var $imageSizeConfig \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig */
 					$entityName = $imageEntityConfig->getEntityName();
 					$sizeName = $imageSizeConfig->getName();
 					if ($sizeName === null) {

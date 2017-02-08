@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 
 class TransportVisibilityCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 	 */
 	private $independentTransportVisibilityCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
 	 */
 	private $independentPaymentVisibilityCalculation;
 
@@ -25,8 +25,8 @@ class TransportVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $allPaymentsOnDomain
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $allPaymentsOnDomain
 	 * @param int $domainId
 	 * @return bool
 	 */
@@ -39,14 +39,14 @@ class TransportVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
 	 * @param int $domainId
 	 * @return bool
 	 */
 	private function existsIndependentlyVisiblePaymentWithTransport(array $payments, Transport $transport, $domainId) {
 		foreach ($payments as $payment) {
-			/* @var $payment \SS6\ShopBundle\Model\Payment\Payment */
+			/* @var $payment \Shopsys\ShopBundle\Model\Payment\Payment */
 			if ($this->independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId)) {
 				if ($payment->getTransports()->contains($transport)) {
 					return true;
@@ -58,10 +58,10 @@ class TransportVisibilityCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[] $transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	public function filterVisible(array $transports, array $visiblePaymentsOnDomain, $domainId) {
 		$visibleTransports = [];

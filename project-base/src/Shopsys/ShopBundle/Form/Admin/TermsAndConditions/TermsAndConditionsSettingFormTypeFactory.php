@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\TermsAndConditions;
+namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
 
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
 
 class TermsAndConditionsSettingFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 

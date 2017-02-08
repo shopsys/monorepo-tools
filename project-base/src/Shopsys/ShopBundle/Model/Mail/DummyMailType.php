@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Mail;
+namespace Shopsys\ShopBundle\Model\Mail;
 
-use SS6\ShopBundle\Model\Mail\MailTypeInterface;
+use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 
 class DummyMailType implements MailTypeInterface {
 

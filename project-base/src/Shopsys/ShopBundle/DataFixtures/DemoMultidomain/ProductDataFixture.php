@@ -1,18 +1,18 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
-use SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
-use SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductEditData;
-use SS6\ShopBundle\Model\Product\ProductEditDataFactory;
-use SS6\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
+use Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader;
+use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductEditData;
+use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
+use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -21,15 +21,15 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	 */
 	public function load(ObjectManager $manager) {
 		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
-		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		/* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 		$referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
-		/* @var $referenceInjector \SS6\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
+		/* @var $referenceInjector \Shopsys\ShopBundle\Component\DataFixture\ProductDataFixtureReferenceInjector */
 		$persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
-		/* @var $persistentReferenceFacade \SS6\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
+		/* @var $persistentReferenceFacade \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade */
 		$productDataFixtureCsvReader = $this->get(ProductDataFixtureCsvReader::class);
-		/* @var $productDataFixtureCsvReader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
+		/* @var $productDataFixtureCsvReader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureCsvReader */
 		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
 
 		$onlyForFirstDomain = false;
 		$referenceInjector->loadReferences($productDataFixtureLoader, $persistentReferenceFacade, $onlyForFirstDomain);
@@ -47,16 +47,16 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param array $row
 	 */
 	private function editProduct(Product $product, array $row) {
 		$productEditDataFactory = $this->get(ProductEditDataFactory::class);
-		/* @var $productEditDataFactory \SS6\ShopBundle\Model\Product\ProductEditDataFactory */
+		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \SS6\ShopBundle\Model\Product\ProductEditFacade */
+		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
 		$productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
-		/* @var $productDataFixtureLoader \SS6\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
+		/* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
 
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);

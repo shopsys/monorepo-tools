@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Annotation\Ignore;
@@ -15,7 +15,7 @@ use PHPParser_Node_Name;
 use PHPParser_NodeTraverser;
 use PHPParser_NodeVisitor;
 use SplFileInfo;
-use SS6\ShopBundle\Component\Translation\PhpParserNodeHelper;
+use Shopsys\ShopBundle\Component\Translation\PhpParserNodeHelper;
 use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
@@ -43,7 +43,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 	private $file;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Translation\TransMethodSpecification[]
+	 * @var \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[]
 	 */
 	private $transMethodSpecifications;
 
@@ -54,7 +54,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 
 	/**
 	 * @param \Doctrine\Common\Annotations\DocParser $docParser
-	 * @param \SS6\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
+	 * @param \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
 	 */
 	public function __construct(DocParser $docParser, array $transMethodSpecifications) {
 		$this->docParser = $docParser;
@@ -108,7 +108,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 		$messageIdArgumentIndex = $this->transMethodSpecifications[$methodName]->getMessageIdArgumentIndex();
 
 		if (!isset($node->args[$messageIdArgumentIndex])) {
-			throw new \SS6\ShopBundle\Component\Translation\Exception\MessageIdArgumentNotPresent();
+			throw new \Shopsys\ShopBundle\Component\Translation\Exception\MessageIdArgumentNotPresent();
 		}
 
 		return PhpParserNodeHelper::getConcatenatedStringValue($node->args[$messageIdArgumentIndex]->value, $this->file);
@@ -137,7 +137,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 		if ($node instanceof PHPParser_Node_Expr_MethodCall || $node instanceof PHPParser_Node_Expr_FuncCall) {
 			try {
 				$methodName = $this->getNormalizedMethodName($this->getNodeName($node));
-			} catch (\SS6\ShopBundle\Component\Translation\Exception\ExtractionException $ex) {
+			} catch (\Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException $ex) {
 				return false;
 			}
 
@@ -211,7 +211,7 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
 		} elseif ($node instanceof PHPParser_Node_Expr_FuncCall && $node->name instanceof PHPParser_Node_Name) {
 			return (string)$node->name;
 		} else {
-			throw new \SS6\ShopBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
+			throw new \Shopsys\ShopBundle\Component\Translation\Exception\ExtractionException('Unable to resolve node name');
 		}
 	}
 

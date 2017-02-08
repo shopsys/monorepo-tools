@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Exception;
+namespace Shopsys\ShopBundle\Model\Product\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Product\Exception\VariantException;
+use Shopsys\ShopBundle\Model\Product\Exception\VariantException;
 
 class VariantCanBeAddedOnlyToMainVariantException extends Exception implements VariantException {
 

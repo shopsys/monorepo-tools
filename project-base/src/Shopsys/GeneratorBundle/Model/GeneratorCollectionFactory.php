@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\GeneratorBundle\Model;
+namespace Shopsys\GeneratorBundle\Model;
 
-use SS6\GeneratorBundle\Model\Generator\RepositoryGenerator;
-use SS6\GeneratorBundle\Model\GeneratorCollection;
+use Shopsys\GeneratorBundle\Model\Generator\RepositoryGenerator;
+use Shopsys\GeneratorBundle\Model\GeneratorCollection;
 
 class GeneratorCollectionFactory {
 
 	/**
-	 * @var \SS6\GeneratorBundle\Model\Generator\RepositoryGenerator
+	 * @var \Shopsys\GeneratorBundle\Model\Generator\RepositoryGenerator
 	 */
 	private $repositoryGenerator;
 
@@ -23,7 +23,7 @@ class GeneratorCollectionFactory {
 	}
 
 	/**
-	 * @return \SS6\GeneratorBundle\Model\GeneratorCollection
+	 * @return \Shopsys\GeneratorBundle\Model\GeneratorCollection
 	 */
 	public function create() {
 		$generatorCollection = new GeneratorCollection($this->skeletonDirs);

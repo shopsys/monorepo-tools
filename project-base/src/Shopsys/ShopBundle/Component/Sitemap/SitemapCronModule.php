@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sitemap;
+namespace Shopsys\ShopBundle\Component\Sitemap;
 
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Component\Sitemap\SitemapFacade;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Component\Sitemap\SitemapFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class SitemapCronModule implements CronModuleInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sitemap\SitemapFacade
+	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
 	 */
 	private $sitemapFacade;
 

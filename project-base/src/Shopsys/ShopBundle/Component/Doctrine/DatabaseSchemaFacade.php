@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine;
+namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 
@@ -50,7 +50,7 @@ class DatabaseSchemaFacade {
 			fclose($handle);
 		} else {
 			$message = 'Failed to open file ' . $this->defaultSchemaFilepath . ' with default database schema.';
-			throw new \SS6\ShopBundle\Component\Doctrine\Exception\DefaultSchemaImportException($message);
+			throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\DefaultSchemaImportException($message);
 		}
 	}
 

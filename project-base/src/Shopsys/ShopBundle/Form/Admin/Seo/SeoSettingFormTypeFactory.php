@@ -1,26 +1,26 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Seo;
+namespace Shopsys\ShopBundle\Form\Admin\Seo;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormType;
-use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class SeoSettingFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Seo\SeoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
 	 */
 	private $seoSettingFacade;
 
@@ -35,7 +35,7 @@ class SeoSettingFormTypeFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Form\Admin\Seo\SeoSettingFormType
+	 * @return \Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType
 	 */
 	public function create() {
 		return new SeoSettingFormType(

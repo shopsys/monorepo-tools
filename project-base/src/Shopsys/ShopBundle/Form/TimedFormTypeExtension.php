@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Form\FormTimeProvider;
-use SS6\ShopBundle\Component\Form\TimedSpamValidationListener;
+use Shopsys\ShopBundle\Component\Form\FormTimeProvider;
+use Shopsys\ShopBundle\Component\Form\TimedSpamValidationListener;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -17,12 +17,12 @@ class TimedFormTypeExtension extends AbstractTypeExtension {
 	const OPTION_MINIMUM_SECONDS = 'timed_spam_minimum_seconds';
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Form\FormTimeProvider
+	 * @var \Shopsys\ShopBundle\Component\Form\FormTimeProvider
 	 */
 	private $formTimeProvider;
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
+	 * @param \Shopsys\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
 	 */
 	public function __construct(FormTimeProvider $formTimeProvider) {
 		$this->formTimeProvider = $formTimeProvider;

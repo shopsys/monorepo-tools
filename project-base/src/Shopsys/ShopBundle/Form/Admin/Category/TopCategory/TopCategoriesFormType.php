@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Category\TopCategory;
+namespace Shopsys\ShopBundle\Form\Admin\Category\TopCategory;
 
-use SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
-use SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
-use SS6\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer;
+use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
+use Shopsys\ShopBundle\Form\FormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class TopCategoriesFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
 	 */
 	private $removeDuplicatesTransformer;
 
@@ -22,14 +22,14 @@ class TopCategoriesFormType extends AbstractType {
 	private $categoryPaths;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer
 	 */
 	private $categoriesIdsToCategoriesTransformer;
 
 	/**
 	 * @param string[] $categoryPaths
-	 * @param \SS6\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
-	 * @param \SS6\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
+	 * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
+	 * @param \Shopsys\ShopBundle\Component\Transformers\CategoriesIdsToCategoriesTransformer $categoriesIdsToCategoriesTransformer
 	 */
 	public function __construct(
 		array $categoryPaths,

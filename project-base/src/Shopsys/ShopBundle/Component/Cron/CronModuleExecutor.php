@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron;
+namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
 
@@ -24,7 +24,7 @@ class CronModuleExecutor {
 
 	//@codingStandardsIgnoreStart
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronModuleInterface|\SS6\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface $cronModuleService
 	 * @param bool $suspended
 	 * @return string
 	 */

@@ -5,7 +5,7 @@
 	"version": "6.0.0-dev",
 	"autoload": {
 		"psr-4": {
-			"SS6\\": [
+			"Shopsys\\": [
 				"app/",
 				"src/SS6/"
 			]
@@ -110,12 +110,12 @@
 		"post-install-cmd": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"SS6\\Environment::checkEnvironment"
+			"Shopsys\\Environment::checkEnvironment"
 		],
 		"post-update-cmd": [
 			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
 			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-			"SS6\\Environment::checkEnvironment"
+			"Shopsys\\Environment::checkEnvironment"
 		]
 	},
 	"config": {

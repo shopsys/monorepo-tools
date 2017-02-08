@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace Shopsys\ShopBundle\Model\Pricing;
 
 class Price {
 
@@ -51,8 +51,8 @@ class Price {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $priceToAdd
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToAdd
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function add(Price $priceToAdd) {
 		return new self(
@@ -63,8 +63,8 @@ class Price {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $priceToSubtract
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToSubtract
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function subtract(Price $priceToSubtract) {
 		return new self(

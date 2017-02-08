@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Administrator;
+namespace Shopsys\ShopBundle\Form\Admin\Administrator;
 
-use SS6\ShopBundle\Component\Constraints\Email;
-use SS6\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Administrator\AdministratorData;
+use Shopsys\ShopBundle\Component\Constraints\Email;
+use Shopsys\ShopBundle\Component\Constraints\FieldsAreNotIdentical;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

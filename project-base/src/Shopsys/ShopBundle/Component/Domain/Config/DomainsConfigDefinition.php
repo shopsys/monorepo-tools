@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Domain\Config;
+namespace Shopsys\ShopBundle\Component\Domain\Config;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 

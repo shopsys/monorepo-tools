@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
-use SS6\AutoServicesBundle\Compiler\AutoServicesCollector;
-use SS6\AutoServicesBundle\Compiler\ClassConstructorFiller;
-use SS6\AutoServicesBundle\Compiler\ContainerClassList;
+use Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector;
+use Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller;
+use Shopsys\AutoServicesBundle\Compiler\ContainerClassList;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,12 +15,12 @@ use Symfony\Component\DependencyInjection\Reference;
 class AutowiringCompilerPass implements CompilerPassInterface {
 
 	/**
-	 * @var \SS6\AutoServicesBundle\Compiler\ClassConstructorFiller
+	 * @var \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller
 	 */
 	private $classConstructorFiller;
 
 	/**
-	 * @param \SS6\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFiller
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFiller
 	 */
 	public function __construct(ClassConstructorFiller $classConstructorFiller) {
 		$this->classConstructorFiller = $classConstructorFiller;
@@ -32,10 +32,10 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	public function process(ContainerBuilder $containerBuilder) {
 		$containerClassListDefinition = $containerBuilder->getDefinition('ss6.auto_services.container_class_list');
 		$containerClassList = $containerBuilder->resolveServices($containerClassListDefinition);
-		/* @var $containerClassList \SS6\AutoServicesBundle\Compiler\ContainerClassList */
+		/* @var $containerClassList \Shopsys\AutoServicesBundle\Compiler\ContainerClassList */
 		$autoServicesCollectorDefinition = $containerBuilder->getDefinition('ss6.auto_services.auto_services_collector');
 		$autoServicesCollector = $containerBuilder->resolveServices($autoServicesCollectorDefinition);
-		/* @var $autoServicesCollector \SS6\AutoServicesBundle\Compiler\AutoServicesCollector */
+		/* @var $autoServicesCollector \Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector */
 
 		$containerClassList->clean();
 		$this->fillContainerClassListFromContainerBuilder($containerBuilder, $containerClassList);
@@ -47,7 +47,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
 	private function fillContainerClassListFromContainerBuilder(
 		ContainerBuilder $containerBuilder,
@@ -62,7 +62,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
 	private function autowireContainerBuilderDefinitions(
 		ContainerBuilder $containerBuilder,
@@ -84,8 +84,8 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 
 	/**
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
-	 * @param \SS6\AutoServicesBundle\Compiler\AutoServicesCollector $autoServicesCollector
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\AutoServicesCollector $autoServicesCollector
 	 */
 	private function processAutoServicesCollectorData(
 		ContainerBuilder $containerBuilder,
@@ -139,7 +139,7 @@ class AutowiringCompilerPass implements CompilerPassInterface {
 	 * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
 	 * @param string $serviceId
 	 * @param \Symfony\Component\DependencyInjection\Definition $definition
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
 	private function autowireClassDefinition(
 		ContainerBuilder $containerBuilder,

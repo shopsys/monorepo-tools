@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\PromoCode\Grid;
+namespace Shopsys\ShopBundle\Model\Order\PromoCode\Grid;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\GridFactoryInterface;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Model\Order\PromoCode\PromoCode;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeGridFactory implements GridFactoryInterface {
 
@@ -16,7 +16,7 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
@@ -29,7 +29,7 @@ class PromoCodeGridFactory implements GridFactoryInterface {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Grid\Grid
+	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	public function create() {
 		$queryBuilder = $this->em->createQueryBuilder();

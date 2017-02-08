@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron\Config\Exception;
+namespace Shopsys\ShopBundle\Component\Cron\Config\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
+use Shopsys\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
 
 class CronModuleConfigNotFoundException extends Exception implements CronConfigException {
 

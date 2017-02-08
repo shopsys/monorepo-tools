@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
-use SS6\ShopBundle\Model\Product\Brand\BrandData;
-use SS6\ShopBundle\Model\Product\Brand\BrandFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -41,7 +41,7 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
 	 */
 	public function load(ObjectManager $manager) {
 		$brandFacade = $this->get(BrandFacade::class);
-		/* @var $brandFacade \SS6\ShopBundle\Model\Product\Brand\BrandFacade */
+		/* @var $brandFacade \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade */
 
 		$brandData = new BrandData();
 

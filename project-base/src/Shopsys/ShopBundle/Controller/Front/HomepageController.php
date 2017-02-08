@@ -1,38 +1,38 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Front;
+namespace Shopsys\ShopBundle\Controller\Front;
 
-use SS6\ShopBundle\Component\Controller\FrontBaseController;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
-use SS6\ShopBundle\Model\Seo\SeoSettingFacade;
-use SS6\ShopBundle\Model\Slider\SliderItemFacade;
+use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
+use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
+use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
 class HomepageController extends FrontBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Customer\CurrentCustomer
+	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
 	 */
 	private $currentCustomer;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
 	 */
 	private $topProductFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Seo\SeoSettingFacade
+	 * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
 	 */
 	private $seoSettingFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Slider\SliderItemFacade
+	 * @var \Shopsys\ShopBundle\Model\Slider\SliderItemFacade
 	 */
 	private $sliderItemFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 

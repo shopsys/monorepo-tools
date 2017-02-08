@@ -1,28 +1,28 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Customer;
+namespace Shopsys\ShopBundle\Form\Admin\Customer;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Customer\CustomerFormType;
-use SS6\ShopBundle\Model\Country\CountryFacade;
-use SS6\ShopBundle\Model\Customer\User;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType;
+use Shopsys\ShopBundle\Model\Country\CountryFacade;
+use Shopsys\ShopBundle\Model\Customer\User;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
 class CustomerFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
 	 */
 	private $pricingGroupRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\CountryFacade
+	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
 	 */
 	private $countryFacade;
 
@@ -38,8 +38,8 @@ class CustomerFormTypeFactory {
 
 	/**
 	 * @param string $scenario
-	 * @param \SS6\ShopBundle\Model\Customer\User $user
-	 * @return \SS6\ShopBundle\Form\Admin\Customer\CustomerFormType
+	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
+	 * @return \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType
 	 */
 	public function create($scenario, User $user = null) {
 		if ($scenario === CustomerFormType::SCENARIO_EDIT) {

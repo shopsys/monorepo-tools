@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Parameter;
+namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Product\Parameter\Parameter;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterValue;
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(name="product_parameter_values")
@@ -14,36 +14,36 @@ use SS6\ShopBundle\Model\Product\Product;
 class ProductParameterValue {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Product")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
 	 * @ORM\JoinColumn(nullable=false, name="product_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $product;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Parameter\Parameter")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\Parameter")
 	 * @ORM\JoinColumn(nullable=false, name="parameter_id", referencedColumnName="id", onDelete="CASCADE")
 	 */
 	private $parameter;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue
 	 *
 	 * @ORM\Id
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Product\Parameter\ParameterValue")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue")
 	 * @ORM\JoinColumn(name="value_id", referencedColumnName="id", nullable=false)
 	 */
 	private $value;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\Parameter $parameter
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue $value
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue $value
 	 */
 	public function __construct(
 		Product $product,
@@ -56,21 +56,21 @@ class ProductParameterValue {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	public function getProduct() {
 		return $this->product;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\Parameter
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
 	 */
 	public function getParameter() {
 		return $this->parameter;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue
 	 */
 	public function getValue() {
 		return $this->value;

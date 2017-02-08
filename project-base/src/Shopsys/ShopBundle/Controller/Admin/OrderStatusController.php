@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusFacade;
+use Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,17 +15,17 @@ use Symfony\Component\HttpFoundation\Response;
 class OrderStatusController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
+	 * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
 	 */
 	private $confirmDeleteResponseFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\Grid\OrderStatusInlineEdit
 	 */
 	private $orderStatusInlineEdit;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusFacade
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
 	 */
 	private $orderStatusFacade;
 
@@ -80,14 +80,14 @@ class OrderStatusController extends AdminBaseController {
 					]
 				);
 			}
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
+		} catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusDeletionForbiddenException $e) {
 			$this->getFlashMessageSender()->addErrorFlashTwig(
 				t('Status of orders <strong>{{ name }}</strong> reserved and can\'t be deleted'),
 				[
 					'name' => $e->getOrderStatus()->getName(),
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected order status doesn\'t exist.'));
 		}
 
@@ -124,7 +124,7 @@ class OrderStatusController extends AdminBaseController {
 
 				return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_orderstatus_delete', $id);
 			}
-		} catch (\SS6\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException $ex) {
 			return new Response(t('Selected order status doesn\'t exist.'));
 		}
 	}

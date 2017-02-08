@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Form\Front;
+namespace Shopsys\ShopBundle\Tests\Unit\Form\Front;
 
-use SS6\ShopBundle\DataFixtures\Demo\CountryDataFixture;
-use SS6\ShopBundle\Form\Front\Order\PersonalInfoFormType;
-use SS6\ShopBundle\Tests\Test\DatabaseTestCase;
+use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
+use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
+use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class PersonalInfoFormTypeTest extends DatabaseTestCase {
@@ -46,7 +46,7 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase {
 	 */
 	private function getPersonalInfoFormData($termsAndConditionsAgreement) {
 		$country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
-		/* @var $country \SS6\ShopBundle\Model\Country\Country */
+		/* @var $country \Shopsys\ShopBundle\Model\Country\Country */
 
 		$personalInfoFormData = [];
 		$personalInfoFormData['firstName'] = 'test';

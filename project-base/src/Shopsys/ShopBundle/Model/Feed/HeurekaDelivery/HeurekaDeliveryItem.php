@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\HeurekaDelivery;
+namespace Shopsys\ShopBundle\Model\Feed\HeurekaDelivery;
 
-use SS6\ShopBundle\Model\Feed\FeedItemInterface;
+use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
 class HeurekaDeliveryItem implements FeedItemInterface {
 

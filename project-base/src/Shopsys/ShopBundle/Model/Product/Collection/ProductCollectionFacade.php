@@ -1,57 +1,57 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Collection;
+namespace Shopsys\ShopBundle\Model\Product\Collection;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Image\ImageRepository;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use SS6\ShopBundle\Model\Product\Collection\ProductCollectionService;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterRepository;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Image\ImageRepository;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductCollectionFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Collection\ProductCollectionService
+	 * @var \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService
 	 */
 	private $productCollectionService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageRepository
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageRepository
 	 */
 	private $imageRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository
 	 */
 	private $friendlyUrlRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
 	 */
 	private $friendlyUrlService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
 	 */
 	private $parameterRepository;
 
@@ -76,8 +76,8 @@ class ProductCollectionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string|null $sizeName
 	 * @return string[productId]
 	 */
@@ -89,7 +89,7 @@ class ProductCollectionFacade {
 			} else {
 				try {
 					$imagesUrlsByProductId[$productId] = $this->imageFacade->getImageUrl($domainConfig, $image, $sizeName);
-				} catch (\SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
+				} catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
 					$imagesUrlsByProductId[$productId] = null;
 				}
 			}
@@ -99,8 +99,8 @@ class ProductCollectionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @return \SS6\ShopBundle\Component\Image\Image[productId]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
 	 */
 	private function getMainImagesIndexedByProductId(array $products) {
 		$productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
@@ -110,9 +110,9 @@ class ProductCollectionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Component\Image\Image[productId]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
 	 */
 	public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
 		$mainFriendlyUrlsByProductId = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
@@ -130,9 +130,9 @@ class ProductCollectionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \SS6\ShopBundle\Model\Product\ProductDomain[productId]
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[productId]
 	 */
 	public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig) {
 		return $this->productRepository->getProductDomainsByProductsAndDomainConfigIndexedByProductId(
@@ -142,8 +142,8 @@ class ProductCollectionFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $products
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @return string[productId][paramName]
 	 */
 	public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig) {

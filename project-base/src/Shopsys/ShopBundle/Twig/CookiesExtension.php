@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Model\Cookies\CookiesFacade;
+use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Twig_SimpleFunction;
 
 class CookiesExtension extends \Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Cookies\CookiesFacade
+	 * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
 	 */
 	private $cookiesFacade;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Cookies\CookiesFacade $cookiesFacade
+	 * @param \Shopsys\ShopBundle\Model\Cookies\CookiesFacade $cookiesFacade
 	 */
 	public function __construct(CookiesFacade $cookiesFacade) {
 		$this->cookiesFacade = $cookiesFacade;
@@ -45,7 +45,7 @@ class CookiesExtension extends \Twig_Extension {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Article\Article|null
+	 * @return \Shopsys\ShopBundle\Model\Article\Article|null
 	 */
 	public function findCookiesArticleByDomainId($domainId) {
 		return $this->cookiesFacade->findCookiesArticleByDomainId($domainId);

@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Module\ModuleFacade;
-use SS6\ShopBundle\Model\Module\ModuleList;
-use SS6\ShopBundle\Model\Order\Item\OrderProductService;
-use SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
-use SS6\ShopBundle\Model\Product\ProductHiddenRecalculator;
-use SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
-use SS6\ShopBundle\Model\Product\ProductService;
-use SS6\ShopBundle\Model\Product\ProductVisibilityFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleFacade;
+use Shopsys\ShopBundle\Model\Module\ModuleList;
+use Shopsys\ShopBundle\Model\Order\Item\OrderProductService;
+use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
+use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
+use Shopsys\ShopBundle\Model\Product\ProductService;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class OrderProductFacade {
 
@@ -20,37 +20,37 @@ class OrderProductFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductHiddenRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator
 	 */
 	private $productHiddenRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator
 	 */
 	private $productSellingDeniedRecalculator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
+	 * @var \Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler
 	 */
 	private $productAvailabilityRecalculationScheduler;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductVisibilityFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
 	 */
 	private $productVisibilityFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\OrderProductService
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\OrderProductService
 	 */
 	private $orderProductService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Module\ModuleFacade
+	 * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
 	 */
 	private $moduleFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductService
 	 */
 	private $productService;
 
@@ -75,7 +75,7 @@ class OrderProductFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
 	public function subtractOrderProductsFromStock(array $orderProducts) {
 		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
@@ -86,7 +86,7 @@ class OrderProductFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
 	public function addOrderProductsToStock(array $orderProducts) {
 		if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
@@ -97,7 +97,7 @@ class OrderProductFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
 	 */
 	private function runRecalculationsAfterStockQuantityChange(array $orderProducts) {
 		$relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);

@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Sql;
+namespace Shopsys\ShopBundle\Component\Sql;
 
 use Doctrine\ORM\EntityManager;
 

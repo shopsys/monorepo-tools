@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Filter;
+namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterData;
-use SS6\ShopBundle\Model\Product\Parameter\ProductParameterValue;
+use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
+use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 
 class ParameterFilterRepository {
 
 	/**
 	 * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
 	 */
 	public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters) {
 		$parameterIndex = 1;
 		$valueIndex = 1;
 
 		foreach ($parameters as $parameterFilterData) {
-			/* @var $parameterFilterData \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData */
+			/* @var $parameterFilterData \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData */
 
 			if (count($parameterFilterData->values) === 0) {
 				continue;
@@ -41,7 +41,7 @@ class ParameterFilterRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData $parameterFilterData
 	 * @param \Doctrine\ORM\EntityManager $em
 	 * @param int $parameterIndex
 	 * @param int $valueIndex
@@ -81,7 +81,7 @@ class ParameterFilterRepository {
 	 * Generates:
 	 * ppv.value = :parameterValueM OR ppv.value = :parameterValueN OR ...
 	 *
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[] $parameterValues
 	 * @param \Doctrine\ORM\QueryBuilder $parameterQueryBuilder
 	 * @param string $ppvAlias
 	 * @param int $valueIndex

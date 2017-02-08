@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionMethod;
-use SS6\AutoServicesBundle\Compiler\ContainerClassList;
-use SS6\AutoServicesBundle\Compiler\ParameterProcessor;
+use Shopsys\AutoServicesBundle\Compiler\ContainerClassList;
+use Shopsys\AutoServicesBundle\Compiler\ParameterProcessor;
 use Symfony\Component\DependencyInjection\Definition;
 
 class ClassConstructorFiller {
@@ -23,7 +23,7 @@ class ClassConstructorFiller {
 	 * @param \ReflectionMethod|null $constructor
 	 * @param string $serviceId
 	 * @param \Symfony\Component\DependencyInjection\Definition $definition
-	 * @param \SS6\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
+	 * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
 	 */
 	public function autowireParams($constructor, $serviceId, Definition $definition, ContainerClassList $containerClassList) {
 		$explicitlyDefinedArguments = $definition->getArguments();

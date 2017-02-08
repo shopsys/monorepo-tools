@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Router\FriendlyUrl;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\DemoMultidomain;
+namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
-use SS6\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
-use SS6\ShopBundle\Model\Transport\TransportEditData;
-use SS6\ShopBundle\Model\Transport\TransportEditDataFactory;
-use SS6\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\DataFixtures\Base\CurrencyDataFixture;
+use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture as DemoTransportDataFixture;
+use Shopsys\ShopBundle\Model\Transport\TransportEditData;
+use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
+use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture {
 
@@ -17,12 +17,12 @@ class TransportDataFixture extends AbstractReferenceFixture {
 	 */
 	public function load(ObjectManager $manager) {
 		$transportEditDataFactory = $this->get(TransportEditDataFactory::class);
-		/* @var $transportEditDataFactory \SS6\ShopBundle\Model\Transport\TransportEditDataFactory */
+		/* @var $transportEditDataFactory \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory */
 		$transportEditFacade = $this->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \SS6\ShopBundle\Model\Transport\TransportEditFacade */
+		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
 
 		$currencyEur = $this->getReference(CurrencyDataFixture::CURRENCY_EUR);
-		/* @var $currencyEur \SS6\ShopBundle\Model\Pricing\Currency\Currency */
+		/* @var $currencyEur \Shopsys\ShopBundle\Model\Pricing\Currency\Currency */
 
 		$transport = $this->getReference(DemoTransportDataFixture::TRANSPORT_CZECH_POST);
 		$transportEditData = $transportEditDataFactory->createFromTransport($transport);

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\UploadedFile;
+namespace Shopsys\ShopBundle\Component\UploadedFile;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFile;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository;
-use SS6\ShopBundle\Component\UploadedFile\UploadedFileService;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileRepository;
+use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileFacade {
@@ -19,17 +19,17 @@ class UploadedFileFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
 	 */
 	private $uploadedFileConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileRepository
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileRepository
 	 */
 	private $uploadedFileRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileService
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService
 	 */
 	private $uploadedFileService;
 
@@ -39,7 +39,7 @@ class UploadedFileFacade {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\UploadedFile\UploadedFileLocator
+	 * @var \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator
 	 */
 	private $uploadedFileLocator;
 
@@ -100,7 +100,7 @@ class UploadedFileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 */
 	public function deleteFileFromFilesystem(UploadedFile $uploadedFile) {
 		$filepath = $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
@@ -109,7 +109,7 @@ class UploadedFileFacade {
 
 	/**
 	 * @param object $entity
-	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
 	public function getUploadedFileByEntity($entity) {
 		return $this->uploadedFileRepository->getUploadedFileByEntity(
@@ -130,12 +130,12 @@ class UploadedFileFacade {
 		}
 
 		$message = 'Entity "' . get_class($entity) . '" has not set primary key or primary key is compound."';
-		throw new \SS6\ShopBundle\Component\UploadedFile\Exception\EntityIdentifierException($message);
+		throw new \Shopsys\ShopBundle\Component\UploadedFile\Exception\EntityIdentifierException($message);
 	}
 
 	/**
 	 * @param int $uploadedFileId
-	 * @return \SS6\ShopBundle\Component\UploadedFile\UploadedFile
+	 * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
 	 */
 	public function getById($uploadedFileId) {
 		return $this->uploadedFileRepository->getById($uploadedFileId);
@@ -148,7 +148,7 @@ class UploadedFileFacade {
 	public function hasUploadedFile($entity) {
 		try {
 			$uploadedFile = $this->getUploadedFileByEntity($entity);
-		} catch (\SS6\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
+		} catch (\Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
 			return false;
 		}
 
@@ -156,7 +156,7 @@ class UploadedFileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
 	public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
@@ -164,8 +164,8 @@ class UploadedFileFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param \SS6\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
 	 * @return string
 	 */
 	public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {

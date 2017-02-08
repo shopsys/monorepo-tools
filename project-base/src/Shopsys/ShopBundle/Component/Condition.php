@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component;
+namespace Shopsys\ShopBundle\Component;
 
 class Condition {
 

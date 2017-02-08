@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Paginator;
+namespace Shopsys\ShopBundle\Component\Paginator;
 
 class PaginationResult {
 

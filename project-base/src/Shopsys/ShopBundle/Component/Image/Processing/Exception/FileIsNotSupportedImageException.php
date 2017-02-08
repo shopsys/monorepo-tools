@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Processing\Exception;
+namespace Shopsys\ShopBundle\Component\Image\Processing\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Image\Processing\Exception\ImageProcessingException;
+use Shopsys\ShopBundle\Component\Image\Processing\Exception\ImageProcessingException;
 
 class FileIsNotSupportedImageException extends Exception implements ImageProcessingException {
 

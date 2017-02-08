@@ -1,60 +1,60 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Preview;
+namespace Shopsys\ShopBundle\Model\Order\Preview;
 
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class OrderPreview {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
 	 */
 	private $quantifiedProducts;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
+	 * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
 	private $quantifiedItemsPrices;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
 	 */
 	private $quantifiedItemsDiscounts;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport|null
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport|null
 	 */
 	private $transport;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $transportPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment|null
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment|null
 	 */
 	private $payment;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $paymentPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private $totalPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	private $productsPrice;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	private $roundingPrice;
 
@@ -64,16 +64,16 @@ class OrderPreview {
 	private $promoCodeDiscountPercent;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
-	 * @param \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
-	 * @param \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $productsPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price $totalPrice
-	 * @param \SS6\ShopBundle\Model\Transport\Transport|null $transport
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $transportPrice
-	 * @param \SS6\ShopBundle\Model\Payment\Payment|null $payment
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $paymentPrice
-	 * @param \SS6\ShopBundle\Model\Pricing\Price|null $roundingPrice
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex] $quantifiedProducts
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex] $quantifiedItemsPrices
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex] $quantifiedItemsDiscounts
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $productsPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price $totalPrice
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport|null $transport
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $transportPrice
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment|null $payment
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $paymentPrice
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Price|null $roundingPrice
 	 * @param float|null $promoCodeDiscountPercent
 	 */
 	public function __construct(
@@ -103,70 +103,70 @@ class OrderPreview {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
 	 */
 	public function getQuantifiedProducts() {
 		return $this->quantifiedProducts;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
+	 * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
 	 */
 	public function getQuantifiedItemsPrices() {
 		return $this->quantifiedItemsPrices;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
 	 */
 	public function getQuantifiedItemsDiscounts() {
 		return $this->quantifiedItemsDiscounts;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Transport\Transport|null
+	 * @return \Shopsys\ShopBundle\Model\Transport\Transport|null
 	 */
 	public function getTransport() {
 		return $this->transport;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getTransportPrice() {
 		return $this->transportPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment|null
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment|null
 	 */
 	public function getPayment() {
 		return $this->payment;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getPaymentPrice() {
 		return $this->paymentPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function getTotalPrice() {
 		return $this->totalPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function getProductsPrice() {
 		return $this->productsPrice;
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Price|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
 	 */
 	public function getRoundingPrice() {
 		return $this->roundingPrice;

@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartBoxPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\FloatingWindowPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\HomepagePage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductDetailPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartBoxPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\CartPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\FloatingWindowPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\HomepagePage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductDetailPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest {
 

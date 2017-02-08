@@ -68,7 +68,7 @@
 	};
 
 	SS6.advancedSearch.updateValueByOperator = function ($rulesContainer, $rule, operator) {
-		$rule.find('.js-advanced-search-rule-value').toggle(operator !== SS6.constant('\\SS6\\ShopBundle\\Model\\AdvancedSearch\\AdvancedSearchFilterInterface::OPERATOR_NOT_SET'));
+		$rule.find('.js-advanced-search-rule-value').toggle(operator !== SS6.constant('\\Shopsys\\ShopBundle\\Model\\AdvancedSearch\\AdvancedSearchFilterInterface::OPERATOR_NOT_SET'));
 	};
 
 	SS6.register.registerCallback(function ($container) {

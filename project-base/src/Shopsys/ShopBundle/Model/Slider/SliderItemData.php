@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Slider;
+namespace Shopsys\ShopBundle\Model\Slider;
 
 class SliderItemData {
 
@@ -51,7 +51,7 @@ class SliderItemData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Slider\SliderItem $sliderItem
+	 * @param \Shopsys\ShopBundle\Model\Slider\SliderItem $sliderItem
 	 */
 	public function setFromEntity(SliderItem $sliderItem) {
 		$this->name = $sliderItem->getName();

@@ -1,20 +1,20 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Payment;
+namespace Shopsys\ShopBundle\Model\Payment;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Payment\PaymentData;
-use SS6\ShopBundle\Model\Payment\PaymentDomain;
-use SS6\ShopBundle\Model\Payment\PaymentEditData;
-use SS6\ShopBundle\Model\Payment\PaymentPriceCalculation;
-use SS6\ShopBundle\Model\Payment\PaymentRepository;
-use SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Transport\TransportRepository;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Payment\PaymentData;
+use Shopsys\ShopBundle\Model\Payment\PaymentDomain;
+use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
+use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
+use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
+use Shopsys\ShopBundle\Model\Payment\PaymentVisibilityCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentEditFacade {
 
@@ -24,37 +24,37 @@ class PaymentEditFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentRepository
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
 	 */
 	private $paymentRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportRepository
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
 	 */
 	private $transportRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentVisibilityCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentVisibilityCalculation
 	 */
 	private $paymentVisibilityCalculation;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private $imageFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
 	 */
 	private $currencyFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\PaymentPriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
 	 */
 	private $paymentPriceCalculation;
 
@@ -79,8 +79,8 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function create(PaymentEditData $paymentEditData) {
 		$payment = new Payment($paymentEditData->paymentData);
@@ -94,8 +94,8 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
 	 */
 	public function edit(Payment $payment, PaymentEditData $paymentEditData) {
 		$payment->edit($paymentEditData->paymentData);
@@ -107,7 +107,7 @@ class PaymentEditFacade {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getById($id) {
 		return $this->paymentRepository->getById($id);
@@ -115,15 +115,15 @@ class PaymentEditFacade {
 
 	/**
 	 * @param int $id
-	 * @return \SS6\ShopBundle\Model\Payment\Payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment
 	 */
 	public function getByIdWithTransports($id) {
 		return $this->paymentRepository->getByIdWithTransports($id);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @return \SS6\ShopBundle\Model\Payment\PaymentDomain[]
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
 	 */
 	public function getPaymentDomainsByPayment(Payment $payment) {
 		return $this->paymentRepository->getPaymentDomainsByPayment($payment);
@@ -140,8 +140,8 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
-	 * @param \SS6\ShopBundle\Model\Payment\PaymentData $paymentData
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
 	 */
 	private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
 		$transports = $this->transportRepository->getAllByIds($paymentData->transports);
@@ -151,7 +151,7 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisibleOnCurrentDomain() {
 		return $this->getVisibleByDomainId($this->domain->getId());
@@ -159,7 +159,7 @@ class PaymentEditFacade {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getVisibleByDomainId($domainId) {
 		$allPayments = $this->paymentRepository->getAllWithTransports();
@@ -168,7 +168,7 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param array $domainIds
 	 */
 	private function createPaymentDomains(Payment $payment, array $domainIds) {
@@ -180,7 +180,7 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 */
 	private function deletePaymentDomainsByPayment(Payment $payment) {
 		$paymentDomains = $this->getPaymentDomainsByPayment($payment);
@@ -191,7 +191,7 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Payment\Payment $payment
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
 	 * @param string[currencyId] $prices
 	 */
 	private function updatePaymentPrices(Payment $payment, $prices) {
@@ -202,14 +202,14 @@ class PaymentEditFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	public function getAllIncludingDeleted() {
 		return $this->paymentRepository->getAllIncludingDeleted();
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
 	 * @return string [paymentId]
 	 */
 	public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency) {

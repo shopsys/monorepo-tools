@@ -1,7 +1,7 @@
 (function ($) {
 
 	SS6 = window.SS6 || {};
-	var cookieName = SS6.constant('\\SS6\\ShopBundle\\Model\\Cookies\\CookiesFacade::EU_COOKIES_COOKIE_CONSENT_NAME');
+	var cookieName = SS6.constant('\\Shopsys\\ShopBundle\\Model\\Cookies\\CookiesFacade::EU_COOKIES_COOKIE_CONSENT_NAME');
 	var tenYears = 10 * 365;
 
 	$(document).ready(function () {

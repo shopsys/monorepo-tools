@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Security\Exception;
+namespace Shopsys\ShopBundle\Model\Security\Exception;
 
 use Exception;
-use SS6\ShopBundle\Model\Security\Exception\SecurityException;
+use Shopsys\ShopBundle\Model\Security\Exception\SecurityException;
 
 class LoginAsRememberedUserException extends Exception implements SecurityException {
 

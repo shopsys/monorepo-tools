@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler;
+namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
 
@@ -65,11 +65,11 @@ class ContainerClassList {
 		$this->load();
 
 		if (!$this->hasClass($class)) {
-			throw new \SS6\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($class);
+			throw new \Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($class);
 		}
 		$serviceIds = array_unique($this->serviceIdsByClass[$class]);
 		if (count($serviceIds) !== 1) {
-			throw new \SS6\AutoServicesBundle\Compiler\Exception\MultipleServicesOfClassException($class, $serviceIds);
+			throw new \Shopsys\AutoServicesBundle\Compiler\Exception\MultipleServicesOfClassException($class, $serviceIds);
 		}
 
 		return array_pop($serviceIds);

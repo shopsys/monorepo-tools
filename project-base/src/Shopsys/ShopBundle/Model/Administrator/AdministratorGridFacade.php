@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Component\Grid\Grid;
-use SS6\ShopBundle\Model\Administrator\Administrator;
-use SS6\ShopBundle\Model\Administrator\AdministratorGridService;
+use Shopsys\ShopBundle\Component\Grid\Grid;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\AdministratorGridService;
 
 class AdministratorGridFacade {
 
@@ -15,12 +15,12 @@ class AdministratorGridFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Administrator\AdministratorGridService
+	 * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridService
 	 */
 	private $administratorGridService;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\AdministratorGridService $administratorGridService
+	 * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridService $administratorGridService
 	 */
 	public function __construct(EntityManager $em, AdministratorGridService $administratorGridService) {
 		$this->em = $em;
@@ -28,8 +28,8 @@ class AdministratorGridFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
-	 * @param \SS6\ShopBundle\Component\Grid\Grid $grid
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid
 	 */
 	public function restoreAndRememberGridLimit(Administrator $administrator, Grid $grid) {
 		$this->administratorGridService->restoreGridLimit($administrator, $grid);

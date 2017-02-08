@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Paginator;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Paginator;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Paginator\PaginationResult;
+use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
 class PaginationResultTest extends PHPUnit_Framework_TestCase {
 

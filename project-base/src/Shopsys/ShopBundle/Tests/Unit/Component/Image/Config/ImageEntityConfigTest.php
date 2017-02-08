@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Image\Config;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Image\Config;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException;
-use SS6\ShopBundle\Component\Image\Config\ImageEntityConfig;
-use SS6\ShopBundle\Component\Image\Config\ImageSizeConfig;
+use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundException;
+use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
+use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
 

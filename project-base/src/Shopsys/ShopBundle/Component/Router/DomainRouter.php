@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router;
+namespace Shopsys\ShopBundle\Component\Router;
 
 use Psr\Log\LoggerInterface;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Cmf\Component\Routing\ChainRouter;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
@@ -17,7 +17,7 @@ class DomainRouter extends ChainRouter {
 	private $freeze = false;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
+	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
 	 */
 	private $friendlyUrlRouter;
 
@@ -39,7 +39,7 @@ class DomainRouter extends ChainRouter {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param array $parameters
 	 * @param string $referenceType
 	 * @return string
@@ -51,7 +51,7 @@ class DomainRouter extends ChainRouter {
 	public function setContext(RequestContext $context) {
 		if ($this->freeze) {
 			$message = 'Set context is not supported in chain DomainRouter';
-			throw new \SS6\ShopBundle\Component\Router\Exception\NotSupportedException($message);
+			throw new \Shopsys\ShopBundle\Component\Router\Exception\NotSupportedException($message);
 		}
 
 		parent::setContext($context);

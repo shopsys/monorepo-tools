@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\AutoServicesBundle\Compiler\Exception;
+namespace Shopsys\AutoServicesBundle\Compiler\Exception;
 
 interface CompilerException {
 

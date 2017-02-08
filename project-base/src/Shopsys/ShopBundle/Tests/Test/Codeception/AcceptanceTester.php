@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception;
 
 use Codeception\Actor;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
-use SS6\ShopBundle\Tests\Test\Codeception\_generated\AcceptanceTesterActions;
+use Shopsys\ShopBundle\Tests\Test\Codeception\_generated\AcceptanceTesterActions;
 
 /**
  * Inherited Methods

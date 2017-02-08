@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Order;
+namespace Shopsys\ShopBundle\Form\Front\Order;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Order\OrderData;
-use SS6\ShopBundle\Model\Payment\Payment;
-use SS6\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Order\OrderData;
+use Shopsys\ShopBundle\Model\Payment\Payment;
+use Shopsys\ShopBundle\Model\Transport\Transport;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,18 +15,18 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 
 class TransportAndPaymentFormType extends AbstractType {
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\Transport[]
+	 * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
 	 */
 	private $transports;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Payment\Payment[]
+	 * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
 	 */
 	private $payments;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport[]$transports
-	 * @param \SS6\ShopBundle\Model\Payment\Payment[] $payments
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport[]$transports
+	 * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
 	 */
 	public function __construct(array $transports, array $payments) {
 		$this->transports = $transports;
@@ -78,7 +78,7 @@ class TransportAndPaymentFormType extends AbstractType {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\OrderData $orderData
+	 * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
 	 * @param \Symfony\Component\Validator\ExecutionContextInterface $context
 	 */
 	public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context) {

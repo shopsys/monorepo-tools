@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,7 +46,7 @@ class Currency {
 	private $exchangeRate;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 */
 	public function __construct(CurrencyData $currencyData) {
 		$this->name = $currencyData->name;
@@ -97,7 +97,7 @@ class Currency {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 */
 	public function edit(CurrencyData $currencyData) {
 		$this->name = $currencyData->name;

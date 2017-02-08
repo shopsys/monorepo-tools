@@ -1,29 +1,29 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
-use SS6\ShopBundle\Model\Order\Item\OrderItem;
-use SS6\ShopBundle\Model\Pricing\Price;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
+use Shopsys\ShopBundle\Model\Pricing\Price;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class OrderItemPriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\PriceCalculation
+	 * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
 	 */
 	private $priceCalculation;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
 	 */
 	public function __construct(PriceCalculation $priceCalculation) {
 		$this->priceCalculation = $priceCalculation;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
 	 * @return string
 	 */
 	public function calculatePriceWithoutVat(OrderItemData $orderItemData) {
@@ -34,8 +34,8 @@ class OrderItemPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem $orderItem
-	 * @return \SS6\ShopBundle\Model\Pricing\Price
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price
 	 */
 	public function calculateTotalPrice(OrderItem $orderItem) {
 		$vat = new Vat(new VatData('orderItemVat', $orderItem->getVatPercent()));
@@ -48,8 +48,8 @@ class OrderItemPriceCalculation {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Item\OrderItem[] $orderItems
-	 * @return \SS6\ShopBundle\Model\Pricing\Price[]
+	 * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] $orderItems
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
 	 */
 	public function calculateTotalPricesIndexedById($orderItems) {
 		$prices = [];
@@ -57,7 +57,7 @@ class OrderItemPriceCalculation {
 		foreach ($orderItems as $orderItem) {
 			if ($orderItem->getId() === null) {
 				$message = 'OrderItem must have ID filled';
-				throw new \SS6\ShopBundle\Model\Order\Item\Exception\OrderItemHasNoIdException($message);
+				throw new \Shopsys\ShopBundle\Model\Order\Item\Exception\OrderItemHasNoIdException($message);
 			}
 			$prices[$orderItem->getId()] = $this->calculateTotalPrice($orderItem);
 		}

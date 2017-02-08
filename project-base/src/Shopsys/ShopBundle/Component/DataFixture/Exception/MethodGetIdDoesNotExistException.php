@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\DataFixture\Exception;
+namespace Shopsys\ShopBundle\Component\DataFixture\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
+use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
 class MethodGetIdDoesNotExistException extends Exception implements DataFixtureException {
 

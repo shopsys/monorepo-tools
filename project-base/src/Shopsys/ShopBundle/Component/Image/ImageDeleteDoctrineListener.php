@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image;
+namespace Shopsys\ShopBundle\Component\Image;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use SS6\ShopBundle\Component\FileUpload\FileUpload;
-use SS6\ShopBundle\Component\Image\Config\ImageConfig;
-use SS6\ShopBundle\Component\Image\Image;
-use SS6\ShopBundle\Component\Image\ImageFacade;
-use SS6\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
+use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
+use Shopsys\ShopBundle\Component\Image\Image;
+use Shopsys\ShopBundle\Component\Image\ImageFacade;
+use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -25,17 +25,17 @@ class ImageDeleteDoctrineListener {
 	private $filesystem;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Config\ImageConfig
+	 * @var \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
 	 */
 	private $imageConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\FileUpload\FileUpload
+	 * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
 	 */
 	private $fileUpload;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageLocator
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageLocator
 	 */
 	private $imageLocator;
 
@@ -56,7 +56,7 @@ class ImageDeleteDoctrineListener {
 	/**
 	 * Prevent ServiceCircularReferenceException (DoctrineListener cannot be dependent on the EntityManager)
 	 *
-	 * @return \SS6\ShopBundle\Component\Image\ImageFacade
+	 * @return \Shopsys\ShopBundle\Component\Image\ImageFacade
 	 */
 	private function getImageFacade() {
 		return $this->container->get(ImageFacade::class);
@@ -78,7 +78,7 @@ class ImageDeleteDoctrineListener {
 	/**
 	 * @param object $entity
 	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \SS6\ShopBundle\Component\Image\ImageFacade $imageFacade
+	 * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
 	 */
 	private function deleteEntityImages($entity, EntityManager $em) {
 		$images = $this->getImageFacade()->getAllImagesByEntity($entity);

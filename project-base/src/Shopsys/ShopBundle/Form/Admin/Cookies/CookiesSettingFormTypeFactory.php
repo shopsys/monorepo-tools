@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Cookies;
+namespace Shopsys\ShopBundle\Form\Admin\Cookies;
 
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
 
 class CookiesSettingFormTypeFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
 	 */
 	private $articleEditFacade;
 

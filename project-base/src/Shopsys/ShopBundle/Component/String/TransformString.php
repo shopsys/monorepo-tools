@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\String;
+namespace Shopsys\ShopBundle\Component\String;
 
 class TransformString {
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\BestsellingProduct;
+namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 use DateTime;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
-use SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
-use SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService;
+use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 
 class BestsellingProductFacade {
 
@@ -16,17 +16,17 @@ class BestsellingProductFacade {
 	const MAX_SHOW_RESULTS = 3;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductRepository
 	 */
 	private $bestsellingProductRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Detail\ProductDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory
 	 */
 	private $productDetailFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService
+	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductService
 	 */
 	private $bestsellingProductService;
 
@@ -42,9 +42,9 @@ class BestsellingProductFacade {
 
 	/**
 	 * @param int $domainId
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @return \SS6\ShopBundle\Model\Product\Detail\ProductDetail[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
 	 */
 	public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup) {
 		$bestsellingProducts = $this->bestsellingProductRepository->getOfferedManualBestsellingProducts(

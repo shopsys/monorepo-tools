@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing\Vat;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Setting\Setting;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatFacade;
-use SS6\ShopBundle\Model\Pricing\Vat\VatRepository;
-use SS6\ShopBundle\Model\Pricing\Vat\VatService;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
+use Shopsys\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use stdClass;
 
 class VatFacadeTest extends PHPUnit_Framework_TestCase {

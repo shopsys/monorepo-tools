@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Status;
+namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Mail\MailTemplateFacade;
-use SS6\ShopBundle\Model\Order\Mail\OrderMailService;
-use SS6\ShopBundle\Model\Order\OrderRepository;
-use SS6\ShopBundle\Model\Order\OrderService;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusData;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusRepository;
-use SS6\ShopBundle\Model\Order\Status\OrderStatusService;
+use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
+use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
+use Shopsys\ShopBundle\Model\Order\OrderRepository;
+use Shopsys\ShopBundle\Model\Order\OrderService;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
+use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
 
 class OrderStatusFacade {
 
@@ -19,27 +19,27 @@ class OrderStatusFacade {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository
 	 */
 	private $orderStatusRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\Status\OrderStatusService
+	 * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusService
 	 */
 	private $orderStatusService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderRepository
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderRepository
 	 */
 	private $orderRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Order\OrderService
+	 * @var \Shopsys\ShopBundle\Model\Order\OrderService
 	 */
 	private $orderService;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Mail\MailTemplateFacade
+	 * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateFacade
 	 */
 	private $mailTemplateFacade;
 
@@ -60,8 +60,8 @@ class OrderStatusFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusFormData
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function create(OrderStatusData $orderStatusFormData) {
 		$orderStatus = new OrderStatus($orderStatusFormData, OrderStatus::TYPE_IN_PROGRESS);
@@ -77,8 +77,8 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function edit($orderStatusId, OrderStatusData $orderStatusData) {
 		$orderStatus = $this->orderStatusRepository->getById($orderStatusId);
@@ -106,7 +106,7 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
 	 */
 	public function getById($orderStatusId) {
 		return $this->orderStatusRepository->getById($orderStatusId);
@@ -114,14 +114,14 @@ class OrderStatusFacade {
 
 	/**
 	 * @param int $orderStatusId
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAllExceptId($orderStatusId) {
 		return $this->orderStatusRepository->getAllExceptId($orderStatusId);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
+	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
 	 * @return bool
 	 */
 	public function isOrderStatusUsed(OrderStatus $orderStatus) {
@@ -129,14 +129,14 @@ class OrderStatusFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAll() {
 		return $this->orderStatusRepository->getAll();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Order\Status\OrderStatus[]
+	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
 	 */
 	public function getAllIndexedById() {
 		return $this->orderStatusRepository->getAllIndexedById();

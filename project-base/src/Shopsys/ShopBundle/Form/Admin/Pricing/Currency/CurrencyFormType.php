@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Admin\Pricing\Currency;
+namespace Shopsys\ShopBundle\Form\Admin\Pricing\Currency;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;

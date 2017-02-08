@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception\Helper;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception\Helper;
 
 use Codeception\Module;
 use Codeception\TestInterface;
-use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
-use SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module {
 
@@ -17,11 +17,11 @@ class DomainHelper extends Module {
 	public function _before(TestInterface $test) {
 	// @codingStandardsIgnoreEnd
 		$webDriver = $this->getModule(StrictWebDriver::class);
-		/* @var $webDriver \SS6\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
+		/* @var $webDriver \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
 		$symfonyHelper = $this->getModule(SymfonyHelper::class);
-		/* @var $symfonyHelper \SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
+		/* @var $symfonyHelper \Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
 		$domain = $symfonyHelper->grabServiceFromContainer('ss6.shop.component.domain');
-		/* @var $domain \SS6\ShopBundle\Component\Domain\Domain */
+		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
 		$domainConfig = $domain->getDomainConfigById(1);
 

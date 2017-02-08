@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Test\Codeception\Module;
+namespace Shopsys\ShopBundle\Tests\Test\Codeception\Module;
 
 use Codeception\Module\WebDriver;
 use Codeception\Util\Locator;
@@ -33,7 +33,7 @@ class StrictWebDriver extends WebDriver {
 		if (!is_array($selector) && !$selector instanceof WebDriverBy) {
 			$message = 'Using match() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
-			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+			throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 		}
 		return parent::match($page, $selector, $throwMalformed);
 	}
@@ -45,7 +45,7 @@ class StrictWebDriver extends WebDriver {
 		if (!is_array($selector) && !$selector instanceof WebDriverElement) {
 			$message = 'Using findFields() with fuzzy locator is slow. '
 				. 'You should implement new method with strict locator. See ' . self::class;
-			throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+			throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 		}
 		return parent::findFields($selector);
 	}
@@ -58,7 +58,7 @@ class StrictWebDriver extends WebDriver {
 			'clickBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -126,7 +126,7 @@ class StrictWebDriver extends WebDriver {
 			'fillFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -181,7 +181,7 @@ class StrictWebDriver extends WebDriver {
 			'seeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -225,7 +225,7 @@ class StrictWebDriver extends WebDriver {
 			'dontSeeCheckboxIsCheckedBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -269,7 +269,7 @@ class StrictWebDriver extends WebDriver {
 			'checkOptionBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -330,7 +330,7 @@ class StrictWebDriver extends WebDriver {
 			'seeInFieldBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**
@@ -369,7 +369,7 @@ class StrictWebDriver extends WebDriver {
 			'pressKeysBy*',
 		];
 		$message = $this->getDeprecatedMethodExceptionMessage($strictAlternatives);
-		throw new \SS6\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
+		throw new \Shopsys\ShopBundle\Tests\Test\Codeception\Exception\DeprecatedMethodException($message);
 	}
 
 	/**

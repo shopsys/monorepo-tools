@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Doctrine\Cache\Exception;
+namespace Shopsys\ShopBundle\Component\Doctrine\Cache\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Doctrine\Cache\Exception\DoctrineCacheException;
+use Shopsys\ShopBundle\Component\Doctrine\Cache\Exception\DoctrineCacheException;
 
 class InvalidArgumentException extends Exception implements DoctrineCacheException {
 

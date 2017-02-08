@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\DataFixtures\Demo;
+namespace Shopsys\ShopBundle\DataFixtures\Demo;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use SS6\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Article\ArticleData;
-use SS6\ShopBundle\Model\Article\ArticleEditFacade;
-use SS6\ShopBundle\Model\Article\ArticlePlacementList;
+use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Article\ArticleData;
+use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleDataFixture extends AbstractReferenceFixture {
 
@@ -51,12 +51,12 @@ class ArticleDataFixture extends AbstractReferenceFixture {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Article\ArticleData $articleData
+	 * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
 	 * @param string|null $referenceName
 	 */
 	private function createArticle(ArticleData $articleData, $referenceName = null) {
 		$articleEditFacade = $this->get(ArticleEditFacade::class);
-		/* @var $articleEditFacade \SS6\ShopBundle\Model\Article\ArticleEditFacade */
+		/* @var $articleEditFacade \Shopsys\ShopBundle\Model\Article\ArticleEditFacade */
 
 		$article = $articleEditFacade->create($articleData);
 		if ($referenceName !== null) {

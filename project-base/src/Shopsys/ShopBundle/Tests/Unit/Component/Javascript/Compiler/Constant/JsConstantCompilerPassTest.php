@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Javascript\Compiler\Constant;
+namespace Shopsys\ShopBundle\Tests\Unit\Javascript\Compiler\Constant;
 
-use SS6\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
-use SS6\ShopBundle\Component\Javascript\Compiler\JsCompiler;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\JsConstantCompilerPass;
+use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase {
 
@@ -27,7 +27,7 @@ EOD;
 	}
 
 	public function testProcessConstantNotFoundException() {
-		$this->setExpectedException(\SS6\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
 
 		$jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 

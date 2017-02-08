@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Grid\Ordering;
+namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Grid\Ordering\GridOrderingService;
-use SS6\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
+use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
+use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
 
@@ -12,7 +12,7 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
 		$gridOrderingService = new GridOrderingService();
 		$entity = null;
 
-		$this->setExpectedException(\SS6\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
 		$gridOrderingService->setPosition($entity, 0);
 	}
 
@@ -20,7 +20,7 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
 		$gridOrderingService = new GridOrderingService();
 		$entity = new \StdClass();
 
-		$this->setExpectedException(\SS6\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException::class);
 		$gridOrderingService->setPosition($entity, 0);
 	}
 

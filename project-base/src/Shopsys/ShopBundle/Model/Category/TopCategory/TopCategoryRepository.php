@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Category\TopCategory;
+namespace Shopsys\ShopBundle\Model\Category\TopCategory;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryRepository;
-use SS6\ShopBundle\Model\Category\TopCategory\TopCategory;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory;
 
 class TopCategoryRepository {
 
@@ -15,7 +15,7 @@ class TopCategoryRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
 	 */
 	private $categoryRepository;
 
@@ -33,7 +33,7 @@ class TopCategoryRepository {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Category\TopCategory\TopCategory[]
+	 * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
 	 */
 	public function getAll($domainId) {
 		return $this->getTopCategoryRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);

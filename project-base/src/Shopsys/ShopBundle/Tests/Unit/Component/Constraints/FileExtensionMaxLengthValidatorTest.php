@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Cron;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Cron;
 
-use SS6\ShopBundle\Component\Constraints\FileExtensionMaxLength;
-use SS6\ShopBundle\Component\Constraints\FileExtensionMaxLengthValidator;
+use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLength;
+use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLengthValidator;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 

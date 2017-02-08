@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Twig\Javascript;
+namespace Shopsys\ShopBundle\Twig\Javascript;
 
-use SS6\ShopBundle\Component\Condition;
-use SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService;
+use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension {
 
 	/**
-	 * @var \SS6\ShopBundle\Twig\Javascript\JavascriptCompilerService
+	 * @var \Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
 	 */
 	private $javascriptCompilerService;
 

@@ -1,19 +1,19 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Image\Processing;
+namespace Shopsys\ShopBundle\Component\Image\Processing;
 
-use SS6\ShopBundle\Component\Image\ImageRepository;
-use SS6\ShopBundle\Component\Image\Processing\ImageGeneratorService;
+use Shopsys\ShopBundle\Component\Image\ImageRepository;
+use Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorService;
 
 class ImageGeneratorFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\ImageRepository
+	 * @var \Shopsys\ShopBundle\Component\Image\ImageRepository
 	 */
 	private $imageRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Image\Processing\ImageGeneratorService
+	 * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorService
 	 */
 	private $imageGeneratorService;
 
@@ -37,12 +37,12 @@ class ImageGeneratorFacade {
 
 		if ($image->getEntityName() !== $entityName) {
 			$message = 'Image (ID = ' . $imageId . ') does not have entity name "' . $entityName . '"';
-			throw new \SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException($message);
 		}
 
 		if ($image->getType() !== $type) {
 			$message = 'Image (ID = ' . $imageId . ') does not have type "' . $type . '"';
-			throw new \SS6\ShopBundle\Component\Image\Exception\ImageNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException($message);
 		}
 
 		return $this->imageGeneratorService->generateImageSizeAndGetFilepath($image, $sizeName);

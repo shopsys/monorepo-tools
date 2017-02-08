@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
+use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -15,12 +15,12 @@ class CategoriesType extends AbstractType {
 	const OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID = 'muted_not_visible_on_domain_id';
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\Detail\CategoryDetailFactory
+	 * @var \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory
 	 */
 	private $categoryDetailFactory;
 

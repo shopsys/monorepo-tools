@@ -1,11 +1,11 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Security\Filesystem;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Security\Filesystem;
 
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Component\Filesystem\FilepathComparator;
-use SS6\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
+use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
+use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 
 class FilemanagerAccessTest extends PHPUnit_Framework_TestCase {
 
@@ -87,7 +87,7 @@ class FilemanagerAccessTest extends PHPUnit_Framework_TestCase {
 
 	public function testIsPathAccessibleStaticException() {
 		FilemanagerAccess::detachSelf();
-		$this->setExpectedException(\SS6\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException::class);
 		FilemanagerAccess::isPathAccessibleStatic('read', __DIR__, null, null);
 	}
 }

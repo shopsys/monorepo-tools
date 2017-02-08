@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing;
+namespace Shopsys\ShopBundle\Model\Pricing;
 
-use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class PriceCalculation {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Rounding
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Rounding
 	 */
 	private $rounding;
 
@@ -18,7 +18,7 @@ class PriceCalculation {
 
 	/**
 	 * @param string $priceWithVat
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
 	 * @return string
 	 */
 	public function getVatAmountByPriceWithVat($priceWithVat, Vat $vat) {
@@ -38,7 +38,7 @@ class PriceCalculation {
 
 	/**
 	 * @param string $priceWithoutVat
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
 	 * @return string
 	 */
 	public function applyVatPercent($priceWithoutVat, Vat $vat) {

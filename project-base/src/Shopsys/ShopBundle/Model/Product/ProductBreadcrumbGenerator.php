@@ -1,33 +1,33 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Category\CategoryFacade;
-use SS6\ShopBundle\Model\Category\CategoryRepository;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Category\CategoryFacade;
+use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryRepository
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
 	 */
 	private $categoryRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryFacade
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
 	 */
 	private $categoryFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -64,8 +64,8 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
-	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
+	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
 	 */
 	private function getCategoryBreadcrumbItems(Category $category) {
 		$categoriesInPath = $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain(

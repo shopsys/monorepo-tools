@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Cron;
+namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeInterface;
-use SS6\ShopBundle\Component\Cron\Config\CronConfig;
-use SS6\ShopBundle\Component\Cron\Config\CronModuleConfig;
-use SS6\ShopBundle\Component\Cron\CronModuleExecutor;
-use SS6\ShopBundle\Component\Cron\CronModuleExecutorFactory;
-use SS6\ShopBundle\Component\Cron\CronModuleFacade;
+use Shopsys\ShopBundle\Component\Cron\Config\CronConfig;
+use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
+use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
+use Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory;
+use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class CronFacade {
@@ -20,17 +20,17 @@ class CronFacade {
 	private $logger;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\Config\CronConfig
+	 * @var \Shopsys\ShopBundle\Component\Cron\Config\CronConfig
 	 */
 	private $cronConfig;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronModuleFacade
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronModuleFacade
 	 */
 	private $cronModuleFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Cron\CronModuleExecutorFactory
+	 * @var \Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory
 	 */
 	private $cronModuleExecutorFactory;
 
@@ -63,8 +63,8 @@ class CronFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
 	 */
 	private function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs) {
 		$this->logger->addInfo('====== Start of cron ======');
@@ -90,8 +90,8 @@ class CronFacade {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
-	 * @param \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
+	 * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
+	 * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
 	 */
 	private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig) {
 		$this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
@@ -114,7 +114,7 @@ class CronFacade {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Cron\Config\CronModuleConfig[]
+	 * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
 	 */
 	public function getAll() {
 		return $this->cronConfig->getAll();

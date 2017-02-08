@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Cart;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Cart;
 
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\CartService;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Model\Cart\Cart;
+use Shopsys\ShopBundle\Model\Cart\CartService;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartServiceTest extends FunctionalTestCase {
 
@@ -23,7 +23,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartItems = [];
 		$cart = new Cart($cartItems);
 
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
+		$this->setExpectedException('Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
 	}
 
@@ -36,7 +36,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartItems = [];
 		$cart = new Cart($cartItems);
 
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
+		$this->setExpectedException('Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
 	}
 
@@ -49,7 +49,7 @@ class CartServiceTest extends FunctionalTestCase {
 		$cartItems = [];
 		$cart = new Cart($cartItems);
 
-		$this->setExpectedException('SS6\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
+		$this->setExpectedException('Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException');
 		$cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
 	}
 
@@ -162,7 +162,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private function createProduct() {
 		$price = 100;
@@ -178,7 +178,7 @@ class CartServiceTest extends FunctionalTestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Cart\CartService
+	 * @return \Shopsys\ShopBundle\Model\Cart\CartService
 	 */
 	private function getCartService() {
 		return $this->getContainer()->get(CartService::class);

@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Model\Localization\IntlCurrencyRepository;
-use SS6\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
@@ -11,12 +11,12 @@ use Symfony\Component\Validator\Constraints;
 class CurrencyType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\IntlCurrencyRepository
+	 * @var \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository
 	 */
 	private $intlCurrencyRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 

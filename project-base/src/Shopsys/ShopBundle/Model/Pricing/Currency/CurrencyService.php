@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Currency;
+namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyData;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function create(CurrencyData $currencyData) {
 		return new Currency($currencyData);
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency $currency
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
 	 * @param bool $isDefaultCurrency
-	 * @return \SS6\ShopBundle\Model\Pricing\Currency\Currency
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
 	 */
 	public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency) {
 		$currency->edit($currencyData);
@@ -36,9 +36,9 @@ class CurrencyService {
 
 	/**
 	 * @param int $defaultCurrencyId
-	 * @param \SS6\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
-	 * @param \SS6\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
-	 * @param \SS6\ShopBundle\Component\Domain\Domain $domain
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currenciesUsedInOrders
+	 * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
+	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 * @return int[]
 	 */
 	public function getNotAllowedToDeleteCurrencyIds(

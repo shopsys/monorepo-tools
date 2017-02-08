@@ -1,14 +1,14 @@
 <?php
 
-namespace SS6\ShopBundle\Model\AdvancedSearch;
+namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
-use SS6\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderCreateDateFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderDomainFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderNumberFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
+use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig {
 

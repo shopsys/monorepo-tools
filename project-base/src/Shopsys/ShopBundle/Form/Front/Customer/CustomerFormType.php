@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Customer;
+namespace Shopsys\ShopBundle\Form\Front\Customer;
 
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Form\Front\Customer\UserFormType;
-use SS6\ShopBundle\Model\Customer\CustomerData;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Form\Front\Customer\UserFormType;
+use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -12,12 +12,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CustomerFormType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Country\Country[]
+	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
 	 */
 	private $countries;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Country\Country[] $countries
+	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
 	 */
 	public function __construct(array $countries) {
 		$this->countries = $countries;

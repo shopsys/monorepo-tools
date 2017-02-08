@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Migration;
+namespace Shopsys\ShopBundle\Component\Migration;
 
 use PDO;
-use SS6\ShopBundle\Component\Setting\Setting;
+use Shopsys\ShopBundle\Component\Setting\Setting;
 
 /**
  * This trait can be used in classes

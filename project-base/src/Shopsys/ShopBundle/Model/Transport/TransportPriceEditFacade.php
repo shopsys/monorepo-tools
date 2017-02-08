@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Transport;
+namespace Shopsys\ShopBundle\Model\Transport;
 
-use SS6\ShopBundle\Model\Transport\Transport;
-use SS6\ShopBundle\Model\Transport\TransportPriceRepository;
+use Shopsys\ShopBundle\Model\Transport\Transport;
+use Shopsys\ShopBundle\Model\Transport\TransportPriceRepository;
 
 class TransportPriceEditFacade {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Transport\TransportPriceRepository
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceRepository
 	 */
 	private $transportPriceRepository;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\TransportPriceRepository $transportPriceRepository
+	 * @param \Shopsys\ShopBundle\Model\Transport\TransportPriceRepository $transportPriceRepository
 	 */
 	public function __construct(TransportPriceRepository $transportPriceRepository) {
 		$this->transportPriceRepository = $transportPriceRepository;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Transport\Transport $transport
-	 * @return \SS6\ShopBundle\Model\Transport\TransportPrice[]
+	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+	 * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
 	 */
 	public function getAllByTransport(Transport $transport) {
 		return $this->transportPriceRepository->getAllByTransport($transport);

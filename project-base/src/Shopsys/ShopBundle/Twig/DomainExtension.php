@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Domain\DomainFacade;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Domain\DomainFacade;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
@@ -44,7 +44,7 @@ class DomainExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\Domain
+	 * @return \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	public function getDomain() {
 		// Twig extensions are loaded during assetic:dump command,
@@ -53,7 +53,7 @@ class DomainExtension extends \Twig_Extension {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Domain\DomainFacade
+	 * @return \Shopsys\ShopBundle\Component\Domain\DomainFacade
 	 */
 	private function getDomainFacade() {
 		// Twig extensions are loaded during assetic:dump command,

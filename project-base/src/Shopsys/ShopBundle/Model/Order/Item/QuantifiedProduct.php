@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Order\Item;
+namespace Shopsys\ShopBundle\Model\Order\Item;
 
-use SS6\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\Product;
 
 class QuantifiedProduct {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Product
+	 * @var \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private $product;
 
@@ -17,7 +17,7 @@ class QuantifiedProduct {
 	private $quantity;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
 	 * @param int $quantity
 	 */
 	public function __construct(Product $product, $quantity) {
@@ -26,7 +26,7 @@ class QuantifiedProduct {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Product\Product $product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product $product
 	 */
 	public function getProduct() {
 		return $this->product;

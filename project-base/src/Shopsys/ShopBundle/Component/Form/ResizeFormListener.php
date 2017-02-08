@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Form;
+namespace Shopsys\ShopBundle\Component\Form;
 
 use ArrayAccess;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

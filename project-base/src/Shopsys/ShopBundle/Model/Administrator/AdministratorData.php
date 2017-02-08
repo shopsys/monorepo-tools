@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 class AdministratorData {
 
@@ -45,7 +45,7 @@ class AdministratorData {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Administrator\Administrator $administrator
+	 * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
 	 */
 	public function setFromEntity(Administrator $administrator) {
 		$this->email = $administrator->getEmail();

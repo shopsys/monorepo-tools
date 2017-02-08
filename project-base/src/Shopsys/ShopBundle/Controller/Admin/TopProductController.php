@@ -1,27 +1,27 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory;
-use SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory;
+use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class TopProductController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\TopProduct\TopProductFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
 	 */
 	private $topProductFacade;
 	/**
-	 * @var \SS6\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory
+	 * @var \Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory
 	 */
 	private $topProductsFormTypeFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -64,7 +64,7 @@ class TopProductController extends AdminBaseController {
 
 	/**
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\Product[]
+	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
 	private function getProductsForDomain($domainId) {
 		$topProducts = $this->topProductFacade->getAll($domainId);

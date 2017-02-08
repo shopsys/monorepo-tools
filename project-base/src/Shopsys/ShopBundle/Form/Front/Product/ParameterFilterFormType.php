@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Form\Front\Product;
+namespace Shopsys\ShopBundle\Form\Front\Product;
 
-use SS6\ShopBundle\Form\Extension\IndexedObjectChoiceList;
-use SS6\ShopBundle\Form\FormType;
-use SS6\ShopBundle\Model\Product\Filter\ParameterFilterData;
+use Shopsys\ShopBundle\Form\Extension\IndexedObjectChoiceList;
+use Shopsys\ShopBundle\Form\FormType;
+use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -13,12 +13,12 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ParameterFilterFormType extends AbstractType implements DataTransformerInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
+	 * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
 	 */
 	private $parameterChoicesIndexedByParameterId;
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
 	 */
 	public function __construct(array $parameterFilterChoices) {
 		$this->parameterChoicesIndexedByParameterId = [];
@@ -69,8 +69,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null $value
-	 * @return \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null
+	 * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null $value
+	 * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null
 	 */
 	public function reverseTransform($value) {
 		if ($value === null) {
@@ -93,8 +93,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null $value
-	 * @return \SS6\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null
+	 * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null $value
+	 * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null
 	 */
 	public function transform($value) {
 		if ($value === null) {

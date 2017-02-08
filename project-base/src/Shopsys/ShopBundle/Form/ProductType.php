@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Form;
+namespace Shopsys\ShopBundle\Form;
 
-use SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
+use Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class ProductType extends AbstractType {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Transformers\ProductIdToProductTransformer
+	 * @var \Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer
 	 */
 	private $productIdToProductTransformer;
 
@@ -45,7 +45,7 @@ class ProductType extends AbstractType {
 
 		$product = $form->getData();
 		if ($product !== null) {
-			/* @var $product \SS6\ShopBundle\Model\Product\Product */
+			/* @var $product \Shopsys\ShopBundle\Model\Product\Product */
 			$view->vars['productName'] = $product->getName();
 		}
 	}

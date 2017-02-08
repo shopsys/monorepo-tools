@@ -1,16 +1,16 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Router\FriendlyUrl;
+namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-use SS6\ShopBundle\Component\Domain\Config\DomainConfig;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
-use SS6\ShopBundle\Component\String\TransformString;
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
+use Shopsys\ShopBundle\Component\String\TransformString;
 
 class FriendlyUrlService {
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
@@ -22,7 +22,7 @@ class FriendlyUrlService {
 	 * @param string $routeName
 	 * @param int $entityId
 	 * @param string[locale] $namesByLocale
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
 	 */
 	public function createFriendlyUrls($routeName, $entityId, $namesByLocale) {
 		$friendlyUrls = [];
@@ -46,10 +46,10 @@ class FriendlyUrlService {
 
 	/**
 	 * @param int $attempt
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @param string $entityName
 	 * @param array|null $matchedRouteData
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResult
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlUniqueResult
 	 */
 	public function getFriendlyUrlUniqueResult(
 		$attempt,
@@ -84,7 +84,7 @@ class FriendlyUrlService {
 	 * @param string $entityName
 	 * @param int $domainId
 	 * @param int|null $indexPostfix
-	 * @return \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
+	 * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl|null
 	 */
 	public function createFriendlyUrlIfValid(
 		$routeName,
@@ -106,7 +106,7 @@ class FriendlyUrlService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
+	 * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
 	 * @return string
 	 */
 	public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl) {
@@ -116,7 +116,7 @@ class FriendlyUrlService {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
 	 * @param string $slug
 	 * @return string
 	 */

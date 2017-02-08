@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Pricing\Vat;
+namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Doctrine\ORM\Mapping as ORM;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 /**
  * @ORM\Table(name="vats")
@@ -37,9 +37,9 @@ class Vat {
 	private $percent;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
 	 *
-	 * @ORM\ManyToOne(targetEntity="SS6\ShopBundle\Model\Pricing\Vat\Vat")
+	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Vat\Vat")
 	 * @ORM\JoinColumn(nullable=true)
 	 */
 	private $replaceWith;
@@ -71,21 +71,21 @@ class Vat {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Pricing\Vat\Vat|null
+	 * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
 	 */
 	public function getReplaceWith() {
 		return $this->replaceWith;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\VatData $vatData
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
 	 */
 	public function edit(VatData $vatData) {
 		$this->name = $vatData->name;
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Vat\Vat $newVat
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $newVat
 	 */
 	public function markForDeletion(Vat $newVat) {
 		$this->replaceWith = $newVat;

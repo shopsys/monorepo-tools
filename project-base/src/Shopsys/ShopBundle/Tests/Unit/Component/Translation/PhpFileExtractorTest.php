@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Component\Translation;
+namespace Shopsys\ShopBundle\Tests\Unit\Component\Translation;
 
 use Doctrine\Common\Annotations\DocParser;
 use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
-use SS6\ShopBundle\Component\Translation\PhpFileExtractorFactory;
+use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
 
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase {
 

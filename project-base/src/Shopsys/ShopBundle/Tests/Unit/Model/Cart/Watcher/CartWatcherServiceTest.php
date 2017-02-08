@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Cart\Watcher;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Cart\Watcher;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
-use SS6\ShopBundle\Model\Cart\Cart;
-use SS6\ShopBundle\Model\Cart\Item\CartItem;
-use SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService;
-use SS6\ShopBundle\Model\Customer\CurrentCustomer;
-use SS6\ShopBundle\Model\Customer\CustomerIdentifier;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductVisibility;
-use SS6\ShopBundle\Model\Product\ProductVisibilityRepository;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\DataFixtures\Base\PricingGroupDataFixture;
+use Shopsys\ShopBundle\Model\Cart\Cart;
+use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
+use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService;
+use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
+use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductVisibility;
+use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase {
 
@@ -32,14 +32,14 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$productMock = Product::create($productData1);
 
 		$productPriceCalculationForUser = $this->getContainer()->get(ProductPriceCalculationForUser::class);
-		/* @var $productPriceCalculationForUser \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
+		/* @var $productPriceCalculationForUser \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser */
 		$productPrice = $productPriceCalculationForUser->calculatePriceForCurrentUser($productMock);
 		$cartItem = new CartItem($customerIdentifier, $productMock, 1, $productPrice->getPriceWithVat());
 		$cartItems = [$cartItem];
 		$cart = new Cart($cartItems);
 
 		$cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
-		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
+		/* @var $cartWatcherService \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
 		$modifiedItems1 = $cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 		$this->assertEmpty($modifiedItems1);
@@ -77,7 +77,7 @@ class CartWatcherServiceTest extends FunctionalTestCase {
 		$cart = new Cart($cartItems);
 
 		$cartWatcherService = $this->getContainer()->get(CartWatcherService::class);
-		/* @var $cartWatcherService \SS6\ShopBundle\Model\Cart\Watcher\CartWatcherService */
+		/* @var $cartWatcherService \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService */
 
 		$notListableItems = $cartWatcherService->getNotListableItems($cart, $currentCustomerMock);
 		$this->assertCount(1, $notListableItems);

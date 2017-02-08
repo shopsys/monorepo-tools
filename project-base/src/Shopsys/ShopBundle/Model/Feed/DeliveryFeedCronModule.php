@@ -1,15 +1,15 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed;
+namespace Shopsys\ShopBundle\Model\Feed;
 
-use SS6\ShopBundle\Component\Cron\CronModuleInterface;
-use SS6\ShopBundle\Model\Feed\FeedFacade;
+use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
+use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
 class DeliveryFeedCronModule implements CronModuleInterface {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Feed\FeedFacade
+	 * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
 	 */
 	private $feedFacade;
 

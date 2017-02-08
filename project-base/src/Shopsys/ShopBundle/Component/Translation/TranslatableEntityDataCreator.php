@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Component\Translation;
+namespace Shopsys\ShopBundle\Component\Translation;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Prezent\Doctrine\Translatable\TranslationInterface;
-use SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
-use SS6\ShopBundle\Component\Sql\SqlQuoter;
+use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
+use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
 class TranslatableEntityDataCreator {
 
@@ -16,12 +16,12 @@ class TranslatableEntityDataCreator {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder
+	 * @var \Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder
 	 */
 	private $entityNotNullableColumnsFinder;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Sql\SqlQuoter
+	 * @var \Shopsys\ShopBundle\Component\Sql\SqlQuoter
 	 */
 	private $sqlQuoter;
 

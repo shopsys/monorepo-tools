@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Administrator;
+namespace Shopsys\ShopBundle\Model\Administrator;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Administrator\Administrator;
+use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 class AdministratorRepository {
 
@@ -28,7 +28,7 @@ class AdministratorRepository {
 
 	/**
 	 * @param int $administratorId
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator|null
 	 */
 	public function findById($administratorId) {
 		return $this->getAdministratorRepository()->find($administratorId);
@@ -36,13 +36,13 @@ class AdministratorRepository {
 
 	/**
 	 * @param int $administratorId
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function getById($administratorId) {
 		$administrator = $this->getAdministratorRepository()->find($administratorId);
 		if ($administrator === null) {
 			$message = 'Administrator with ID ' . $administratorId . ' not found.';
-			throw new \SS6\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorNotFoundException($message);
 		}
 
 		return $administrator;
@@ -50,7 +50,7 @@ class AdministratorRepository {
 
 	/**
 	 * @param string $multidomainLoginToken
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
 	 */
 	public function getByValidMultidomainLoginToken($multidomainLoginToken) {
 		$queryBuilder = $this->getAdministratorRepository()
@@ -61,7 +61,7 @@ class AdministratorRepository {
 		$administrator = $queryBuilder->getQuery()->getOneOrNullResult();
 		if ($administrator === null) {
 			$message = 'Administrator with valid multidomain login token ' . $multidomainLoginToken . ' not found.';
-			throw new \SS6\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
+			throw new \Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException($message);
 		}
 
 		return $administrator;
@@ -69,7 +69,7 @@ class AdministratorRepository {
 
 	/**
 	 * @param string $administratorUserName
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator|null
 	 */
 	public function findByUserName($administratorUserName) {
 		return $this->getAdministratorRepository()->findOneBy(['username' => $administratorUserName]);
@@ -97,7 +97,7 @@ class AdministratorRepository {
 	/**
 	 * @param int $id
 	 * @param string $loginToken
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator|null
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator|null
 	 */
 	public function findByIdAndLoginToken($id, $loginToken) {
 		return $this->getAdministratorRepository()->findOneBy([
@@ -107,7 +107,7 @@ class AdministratorRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Administrator\Administrator[]
+	 * @return \Shopsys\ShopBundle\Model\Administrator\Administrator[]
 	 */
 	public function getAllSuperadmins() {
 		return $this->getAdministratorRepository()->findBy(['superadmin' => true]);

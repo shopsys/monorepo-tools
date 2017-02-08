@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Country\Exception;
+namespace Shopsys\ShopBundle\Model\Country\Exception;
 
 interface CountryException {
 

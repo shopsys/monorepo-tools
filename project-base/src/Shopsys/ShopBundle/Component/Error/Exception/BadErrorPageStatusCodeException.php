@@ -3,7 +3,7 @@
 namespace ShopBundle\Component\Error\Exception;
 
 use Exception;
-use SS6\ShopBundle\Component\Error\Exception\ErrorException;
+use Shopsys\ShopBundle\Component\Error\Exception\ErrorException;
 
 class BadErrorPageStatusCodeException extends Exception implements ErrorException {
 

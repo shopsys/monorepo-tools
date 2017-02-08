@@ -1,22 +1,22 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterFacade;
-use SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
+use Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
 
 class ParameterController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
 	 */
 	private $parameterFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
+	 * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit
 	 */
 	private $parameterInlineEdit;
 
@@ -56,7 +56,7 @@ class ParameterController extends AdminBaseController {
 					'name' => $fullName,
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Product\Parameter\Exception\ParameterNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected parameter doesn\'t exist.'));
 		}
 

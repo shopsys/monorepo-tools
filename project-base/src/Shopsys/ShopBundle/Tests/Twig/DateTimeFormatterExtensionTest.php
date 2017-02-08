@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Twig;
+namespace Shopsys\ShopBundle\Tests\Twig;
 
 use DateTime;
-use SS6\ShopBundle\Component\Localization\DateTimeFormatter;
-use SS6\ShopBundle\Model\Localization\Localization;
-use SS6\ShopBundle\Tests\Test\FunctionalTestCase;
-use SS6\ShopBundle\Twig\DateTimeFormatterExtension;
+use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
+use Shopsys\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
+use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 
 class DateTimeFormatterExtensionTest extends FunctionalTestCase {
 
@@ -32,7 +32,7 @@ class DateTimeFormatterExtensionTest extends FunctionalTestCase {
 			->willReturn($locale);
 
 		$dateTimeFormatter = $this->getContainer()->get(DateTimeFormatter::class);
-		/* @var $dateTimeFormatter \SS6\ShopBundle\Component\Localization\DateTimeFormatter */
+		/* @var $dateTimeFormatter \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter */
 
 		$dateTimeFormatterExtension = new DateTimeFormatterExtension($dateTimeFormatter, $localizationMock);
 

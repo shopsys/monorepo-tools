@@ -1,38 +1,38 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Breadcrumb;
+namespace Shopsys\ShopBundle\Model\Breadcrumb;
 
-use SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
-use SS6\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
-use SS6\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator;
-use SS6\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
-use SS6\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator;
-use SS6\ShopBundle\Model\Product\ProductBreadcrumbGenerator;
+use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
+use Shopsys\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
+use Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator;
+use Shopsys\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
+use Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator;
+use Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator;
 
 class FrontBreadcrumbResolverFactory {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator
+	 * @var \Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator
 	 */
 	private $frontBreadcrumbGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleBreadcrumbGenerator;
 	 */
 	private $articleBreadcrumbGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
+	 * @var \Shopsys\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
 	 */
 	private $categoryBreadcrumbGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductBreadcrumbGenerator
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator
 	 */
 	private $productBreadcrumbGenerator;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator
+	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator
 	 */
 	private $brandBreadcrumbGenearator;
 
@@ -51,7 +51,7 @@ class FrontBreadcrumbResolverFactory {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
+	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
 	 */
 	public function create() {
 		$frontBreadcrumbResolver = new BreadcrumbResolver();

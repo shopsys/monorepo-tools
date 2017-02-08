@@ -1,7 +1,7 @@
 <?php
 
-use SS6\AutoServicesBundle\Kernel;
-use SS6\Environment;
+use Shopsys\AutoServicesBundle\Kernel;
+use Shopsys\Environment;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel {
@@ -23,7 +23,7 @@ class AppKernel extends Kernel {
 			new RaulFraile\Bundle\LadybugBundle\RaulFraileLadybugBundle(),
 			new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 			new ShopSys\MigrationBundle\ShopSysMigrationBundle(),
-			new SS6\AutoServicesBundle\SS6AutoServicesBundle(),
+			new Shopsys\AutoServicesBundle\SS6AutoServicesBundle(),
 			new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new Symfony\Bundle\AsseticBundle\AsseticBundle(),
 			new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -34,13 +34,13 @@ class AppKernel extends Kernel {
 			new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
 			new VasekPurchart\ConsoleErrorsBundle\ConsoleErrorsBundle(),
 			new Ivory\CKEditorBundle\IvoryCKEditorBundle(), // has to be loaded after FrameworkBundle and TwigBundle
-			new SS6\ShopBundle\SS6ShopBundle(), // must be loaded as last, because translations must overwrite other bundles
+			new Shopsys\ShopBundle\SS6ShopBundle(), // must be loaded as last, because translations must overwrite other bundles
 		);
 
 		if (in_array($this->getEnvironment(), array(Environment::ENVIRONMENT_DEVELOPMENT))) {
 			$bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 			$bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-			$bundles[] = new SS6\GeneratorBundle\SS6GeneratorBundle();
+			$bundles[] = new Shopsys\GeneratorBundle\SS6GeneratorBundle();
 			$bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
 			$bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
 		}

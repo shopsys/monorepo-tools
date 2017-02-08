@@ -1,8 +1,8 @@
 <?php
 
-namespace SS6\ShopBundle\Command;
+namespace Shopsys\ShopBundle\Command;
 
-use SS6\ShopBundle\Component\Error\ErrorPagesFacade;
+use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -21,7 +21,7 @@ class GenerateErrorPagesCommand extends ContainerAwareCommand {
 	 */
 	protected function execute(InputInterface $input, OutputInterface $output) {
 		$errorPagesFacade = $this->getContainer()->get(ErrorPagesFacade::class);
-		/* @var $errorPagesFacade \SS6\ShopBundle\Component\Error\ErrorPagesFacade */
+		/* @var $errorPagesFacade \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade */
 
 		$errorPagesFacade->generateAllErrorPagesForProduction();
 	}

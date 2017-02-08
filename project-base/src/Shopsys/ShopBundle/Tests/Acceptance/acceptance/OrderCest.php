@@ -1,13 +1,13 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Acceptance\acceptance;
+namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Script\ScriptFacade;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\OrderPage;
-use SS6\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
-use SS6\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
-use SS6\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\OrderPage;
+use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
+use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
+use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
 class OrderCest {
 
@@ -94,7 +94,7 @@ class OrderCest {
 
 	/**
 	 * @param string $trackingId
-	 * @param \SS6\ShopBundle\Model\Script\ScriptFacade $scriptFacade
+	 * @param \Shopsys\ShopBundle\Model\Script\ScriptFacade $scriptFacade
 	 */
 	private function setGoogleAnalyticsTrackingId($trackingId, ScriptFacade $scriptFacade) {
 		$scriptFacade->setGoogleAnalyticsTrackingId($trackingId, Domain::FIRST_DOMAIN_ID);

@@ -1,17 +1,17 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product;
+namespace Shopsys\ShopBundle\Model\Product;
 
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\Query\ResultSetMapping;
-use SS6\ShopBundle\Component\Domain\Domain;
-use SS6\ShopBundle\Model\Category\Category;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductVisibility;
+use Shopsys\ShopBundle\Component\Domain\Domain;
+use Shopsys\ShopBundle\Model\Category\Category;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
 class ProductVisibilityRepository {
 
@@ -21,17 +21,17 @@ class ProductVisibilityRepository {
 	private $em;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\Domain
+	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
 	 */
 	private $domain;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
 	 */
 	private $pricingGroupRepository;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Product\ProductRepository
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
 	 */
 	private $productRepository;
 
@@ -59,7 +59,7 @@ class ProductVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Category\Category $category
+	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
 	 */
 	public function markProductsForRecalculationAffectedByCategory(Category $category) {
 		$affectedProductsDql = $this->em->createQueryBuilder()
@@ -105,7 +105,7 @@ class ProductVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $domainId
 	 */
 	public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId) {
@@ -127,10 +127,10 @@ class ProductVisibilityRepository {
 	}
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $product
-	 * @param \SS6\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
+	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
 	 * @param int $domainId
-	 * @return \SS6\ShopBundle\Model\Product\ProductVisibility
+	 * @return \Shopsys\ShopBundle\Model\Product\ProductVisibility
 	 */
 	public function getProductVisibility(
 		Product $product,
@@ -143,7 +143,7 @@ class ProductVisibilityRepository {
 			'domainId' => $domainId,
 		]);
 		if ($productVisibility === null) {
-			throw new \SS6\ShopBundle\Model\Product\Exception\ProductVisibilityNotFoundException();
+			throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductVisibilityNotFoundException();
 		}
 
 		return $productVisibility;

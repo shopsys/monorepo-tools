@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Feed\Category;
+namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 use Doctrine\ORM\EntityManager;
-use SS6\ShopBundle\Model\Feed\Category\FeedCategory;
+use Shopsys\ShopBundle\Model\Feed\Category\FeedCategory;
 
 class FeedCategoryRepository {
 
@@ -25,7 +25,7 @@ class FeedCategoryRepository {
 
 	/**
 	 * @param int $extId
-	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory|null
+	 * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
 	 */
 	public function findByExtId($extId) {
 		return $this->getFeedCategoryRepository()->findOneBy([
@@ -47,14 +47,14 @@ class FeedCategoryRepository {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory[extId]
+	 * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[extId]
 	 */
 	public function getAllIndexedByExtId() {
 		return $this->getFeedCategoryRepository()->createQueryBuilder('fc', 'fc.extId')->getQuery()->execute();
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Feed\Category\FeedCategory[]
+	 * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[]
 	 */
 	public function getAllHeurekaCz() {
 		return $this->getFeedCategoryRepository()->findBy([], ['fullName' => 'asc']);

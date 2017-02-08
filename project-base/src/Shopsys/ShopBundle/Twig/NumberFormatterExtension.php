@@ -1,10 +1,10 @@
 <?php
 
-namespace SS6\ShopBundle\Twig;
+namespace Shopsys\ShopBundle\Twig;
 
 use CommerceGuys\Intl\Formatter\NumberFormatter;
 use CommerceGuys\Intl\NumberFormat\NumberFormatRepositoryInterface;
-use SS6\ShopBundle\Model\Localization\Localization;
+use Shopsys\ShopBundle\Model\Localization\Localization;
 use Twig_Extension;
 
 class NumberFormatterExtension extends Twig_Extension {
@@ -13,7 +13,7 @@ class NumberFormatterExtension extends Twig_Extension {
 	const MAXIMUM_FRACTION_DIGITS = 10;
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Localization\Localization
+	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
 	 */
 	private $localization;
 

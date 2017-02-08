@@ -1,6 +1,6 @@
 <?php
 
-namespace SS6\ShopBundle\Migrations;
+namespace Shopsys\ShopBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;

@@ -1,24 +1,24 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Product\Pricing;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Product\Pricing;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Pricing\BasePriceCalculation;
-use SS6\ShopBundle\Model\Pricing\Currency\Currency;
-use SS6\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroup;
-use SS6\ShopBundle\Model\Pricing\Group\PricingGroupData;
-use SS6\ShopBundle\Model\Pricing\PriceCalculation;
-use SS6\ShopBundle\Model\Pricing\PricingService;
-use SS6\ShopBundle\Model\Pricing\PricingSetting;
-use SS6\ShopBundle\Model\Pricing\Rounding;
-use SS6\ShopBundle\Model\Pricing\Vat\Vat;
-use SS6\ShopBundle\Model\Pricing\Vat\VatData;
-use SS6\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
-use SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
-use SS6\ShopBundle\Model\Product\Product;
-use SS6\ShopBundle\Model\Product\ProductData;
-use SS6\ShopBundle\Model\Product\ProductRepository;
+use Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
+use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
+use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
+use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
+use Shopsys\ShopBundle\Model\Pricing\PricingService;
+use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
+use Shopsys\ShopBundle\Model\Pricing\Rounding;
+use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
+use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
+use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
+use Shopsys\ShopBundle\Model\Product\Product;
+use Shopsys\ShopBundle\Model\Product\ProductData;
+use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
@@ -45,8 +45,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 
 	/**
 	 * @param int $inputPriceType
-	 * @param \SS6\ShopBundle\Model\Product\Product[] $variants
-	 * @return \SS6\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
+	 * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	private function getProductPriceCalculationWithInputPriceTypeAndVariants($inputPriceType, $variants) {
@@ -113,7 +113,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @param string $inputPrice
 	 * @param string $vatPercent
-	 * @return \SS6\ShopBundle\Model\Product\Product
+	 * @return \Shopsys\ShopBundle\Model\Product\Product
 	 */
 	private function getProductWithInputPriceAndVatPercentAndAutoCalculationPriceType(
 		$inputPrice,
@@ -199,7 +199,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$product = Product::createMainVariant(new ProductData(), $variants);
 
 		$productPrice = $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
-		/* @var $productPrice \SS6\ShopBundle\Model\Product\Pricing\ProductPrice */
+		/* @var $productPrice \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice */
 
 		$this->assertSame(round($expectedPriceWithVat, 6), round($productPrice->getPriceWithVat(), 6));
 		$this->assertSame($expectedFrom, $productPrice->isPriceFrom());
@@ -216,7 +216,7 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase {
 		$variant = Product::create(new ProductData());
 		$product = Product::createMainVariant(new ProductData(), [$variant]);
 
-		$this->setExpectedException(\SS6\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
+		$this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException::class);
 
 		$productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
 	}

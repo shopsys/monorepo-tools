@@ -1,9 +1,9 @@
 <?php
 
-namespace SS6\ShopBundle\Tests\Unit\Model\Security;
+namespace Shopsys\ShopBundle\Tests\Unit\Model\Security;
 
 use PHPUnit_Framework_TestCase;
-use SS6\ShopBundle\Model\Security\LoginService;
+use Shopsys\ShopBundle\Model\Security\LoginService;
 use StdClass;
 use Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -21,7 +21,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(true));
 		$requestMock->attributes->expects($this->once())->method('get')->will($this->returnValue(new StdClass()));
 
-		$this->setExpectedException('SS6\ShopBundle\Model\Security\Exception\LoginFailedException');
+		$this->setExpectedException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
 		$loginService->checkLoginProcess($requestMock);
 	}
 
@@ -40,7 +40,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 		$requestMock->attributes->expects($this->once())->method('has')->will($this->returnValue(false));
 		$requestMock->attributes->expects($this->never())->method('get');
 
-		$this->setExpectedException('SS6\ShopBundle\Model\Security\Exception\LoginFailedException');
+		$this->setExpectedException('Shopsys\ShopBundle\Model\Security\Exception\LoginFailedException');
 		$loginService->checkLoginProcess($requestMock);
 	}
 
@@ -63,7 +63,7 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase {
 	}
 
 	/**
-	 * @return \SS6\ShopBundle\Model\Security\LoginService
+	 * @return \Shopsys\ShopBundle\Model\Security\LoginService
 	 */
 	private function getLoginService() {
 		$tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);

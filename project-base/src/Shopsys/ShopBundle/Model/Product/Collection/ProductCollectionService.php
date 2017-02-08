@@ -1,12 +1,12 @@
 <?php
 
-namespace SS6\ShopBundle\Model\Product\Collection;
+namespace Shopsys\ShopBundle\Model\Product\Collection;
 
 class ProductCollectionService {
 
 	/**
-	 * @param \SS6\ShopBundle\Model\Product\Product $products
-	 * @param \SS6\ShopBundle\Component\Image\Image $imagesByProductId
+	 * @param \Shopsys\ShopBundle\Model\Product\Product $products
+	 * @param \Shopsys\ShopBundle\Component\Image\Image $imagesByProductId
 	 * @return array
 	 */
 	public function getImagesIndexedByProductId(array $products, array $imagesByProductId) {

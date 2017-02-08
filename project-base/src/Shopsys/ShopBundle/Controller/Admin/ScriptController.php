@@ -1,33 +1,33 @@
 <?php
 
-namespace SS6\ShopBundle\Controller\Admin;
+namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use SS6\ShopBundle\Component\Controller\AdminBaseController;
-use SS6\ShopBundle\Component\Domain\SelectedDomain;
-use SS6\ShopBundle\Component\Grid\GridFactory;
-use SS6\ShopBundle\Component\Grid\QueryBuilderDataSource;
-use SS6\ShopBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
-use SS6\ShopBundle\Form\Admin\Script\ScriptFormType;
-use SS6\ShopBundle\Model\Script\Script;
-use SS6\ShopBundle\Model\Script\ScriptData;
-use SS6\ShopBundle\Model\Script\ScriptFacade;
+use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
+use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
+use Shopsys\ShopBundle\Component\Grid\GridFactory;
+use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
+use Shopsys\ShopBundle\Form\Admin\Script\GoogleAnalyticsScriptFormType;
+use Shopsys\ShopBundle\Form\Admin\Script\ScriptFormType;
+use Shopsys\ShopBundle\Model\Script\Script;
+use Shopsys\ShopBundle\Model\Script\ScriptData;
+use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ScriptController extends AdminBaseController {
 
 	/**
-	 * @var \SS6\ShopBundle\Model\Script\ScriptFacade
+	 * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
 	 */
 	private $scriptFacade;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Grid\GridFactory
+	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
 	 */
 	private $gridFactory;
 
 	/**
-	 * @var \SS6\ShopBundle\Component\Domain\SelectedDomain
+	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
 	 */
 	private $selectedDomain;
 
@@ -155,7 +155,7 @@ class ScriptController extends AdminBaseController {
 					'name' => $script->getName(),
 				]
 			);
-		} catch (\SS6\ShopBundle\Model\Script\Exception\ScriptNotFoundException $ex) {
+		} catch (\Shopsys\ShopBundle\Model\Script\Exception\ScriptNotFoundException $ex) {
 			$this->getFlashMessageSender()->addErrorFlash(t('Selected script doesn\'t exist.'));
 		}
 
