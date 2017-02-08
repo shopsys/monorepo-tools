@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface {
 	 */
 	public function getConfigTreeBuilder() {
 		$treeBuilder = new TreeBuilder();
-		$rootNode = $treeBuilder->root('ss6_shop');
+		$rootNode = $treeBuilder->root('shopsys_shop');
 
 		$rootNode
 			->children()

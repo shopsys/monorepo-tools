@@ -1,4 +1,4 @@
-ss6_shop:
+shopsys_shop:
   resource: "@ShopsysShopBundle/Resources/config/routing.yml"
   prefix: /
   

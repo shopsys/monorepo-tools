@@ -1,4 +1,4 @@
-ss6_shop_tests:
+shopsys_shop_tests:
   resource: "@ShopsysShopBundle/Tests/Controller"
   prefix: /test
   type: annotation
