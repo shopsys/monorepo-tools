@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eaa3f5e38b485ab474dae8c4904959e3",
-    "content-hash": "2350c7ca576fc294252705cdf6ba2b9e",
+    "hash": "c45d9e6b3977ed92d200d3dbe335923a",
+    "content-hash": "5b856e0ec2ed30fb2005b98de4396a67",
     "packages": [
         {
             "name": "arvenil/ninja-mutex",
