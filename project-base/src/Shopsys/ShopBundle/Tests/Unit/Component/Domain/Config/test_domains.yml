@@ -1,14 +1,14 @@
 domains:
   - id: 1
-    name: shopsys6
+    name: shopsys
     locale: cs
 
   - id: 2
-    name: 2.shopsys6
+    name: 2.shopsys
     locale: en
     styles_directory: domain2
 
   - id: 3
-    name: 2.shopsys6
+    name: 2.shopsys
     locale: en
     styles_directory: domain2
