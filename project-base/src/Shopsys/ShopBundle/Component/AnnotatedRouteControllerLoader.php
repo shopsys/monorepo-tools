@@ -19,6 +19,6 @@ class AnnotatedRouteControllerLoader extends SensioAnnotatedRouteControllerLoade
 	protected function getDefaultRouteName(\ReflectionClass $class, \ReflectionMethod $method) {
 		$routeName = parent::getDefaultRouteName($class, $method);
 
-		return preg_replace('/^ss6_shop_/', '', $routeName);
+		return preg_replace('/^shopsys_shop_/', '', $routeName);
 	}
 }
