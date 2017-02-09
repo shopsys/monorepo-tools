@@ -135,6 +135,8 @@ class CategoryFacade {
 			$domainId = $domainConfig->getId();
 			$categoryDomain = new CategoryDomain($category, $domainId);
 
+			$categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
+			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
 			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
 
 			$this->em->persist($categoryDomain);
@@ -154,6 +156,8 @@ class CategoryFacade {
 		foreach ($categoryDomains as $categoryDomain) {
 			$domainId = $categoryDomain->getDomainId();
 
+			$categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
+			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
 			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
 			if (in_array($domainId, $categoryData->hiddenOnDomains)) {
 				$categoryDomain->setHidden(true);

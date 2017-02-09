@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\Category;
 
+use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Form\InvertChoiceTypeExtension;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\Category\Category;
@@ -25,6 +26,16 @@ class CategoryFormType extends AbstractType {
 	private $heurekaCzFeedCategories;
 
 	/**
+	 * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
+	 */
+	private $domains;
+
+	/**
+	 * @var string[]
+	 */
+	private $metaDescriptionsIndexedByDomainId;
+
+	/**
 	 * @var \Shopsys\ShopBundle\Model\Category\Category|null
 	 */
 	private $category;
@@ -32,15 +43,21 @@ class CategoryFormType extends AbstractType {
 	/**
 	 * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
 	 * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[] $heurekaCzFeedCategories
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
+	 * @param string[] $metaDescriptionsIndexedByDomainId
 	 * @param \Shopsys\ShopBundle\Model\Category\Category|null $category
 	 */
 	public function __construct(
 		array $categories,
 		array $heurekaCzFeedCategories,
+		array $domains,
+		array $metaDescriptionsIndexedByDomainId,
 		Category $category = null
 	) {
 		$this->categories = $categories;
 		$this->heurekaCzFeedCategories = $heurekaCzFeedCategories;
+		$this->domains = $domains;
+		$this->metaDescriptionsIndexedByDomainId = $metaDescriptionsIndexedByDomainId;
 		$this->category = $category;
 	}
 
@@ -57,6 +74,21 @@ class CategoryFormType extends AbstractType {
 	 * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
+		$seoTitlesOptionsByDomainId = [];
+		$seoMetaDescriptionsOptionsByDomainId = [];
+		foreach ($this->domains as $domainConfig) {
+			$seoTitlesOptionsByDomainId[$domainConfig->getId()] = [
+				'attr' => [
+					'placeholder' => $this->getTitlePlaceholder($domainConfig),
+				],
+			];
+			$seoMetaDescriptionsOptionsByDomainId[$domainConfig->getId()] = [
+				'attr' => [
+					'placeholder' => $this->getMetaDescriptionPlaceholder($domainConfig),
+				],
+			];
+		}
+
 		$builder
 			->add('name', FormType::LOCALIZED, [
 				'main_constraints' => [
@@ -68,6 +100,16 @@ class CategoryFormType extends AbstractType {
 						new Constraints\Length(['max' => 255, 'maxMessage' => 'Name cannot be longer than {{ limit }} characters']),
 					],
 				],
+			])
+			->add('seoTitles', FormType::MULTIDOMAIN, [
+				'type' => FormType::TEXT,
+				'required' => false,
+				'optionsByDomainId' => $seoTitlesOptionsByDomainId,
+			])
+			->add('seoMetaDescriptions', FormType::MULTIDOMAIN, [
+				'type' => FormType::TEXTAREA,
+				'required' => false,
+				'optionsByDomainId' => $seoMetaDescriptionsOptionsByDomainId,
 			])
 			->add('descriptions', FormType::MULTIDOMAIN, [
 				'type' => FormType::WYSIWYG,
@@ -115,6 +157,26 @@ class CategoryFormType extends AbstractType {
 			'data_class' => CategoryData::class,
 			'attr' => ['novalidate' => 'novalidate'],
 		]);
+	}
+
+	/**
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return string
+	 */
+	private function getTitlePlaceholder(DomainConfig $domainConfig) {
+		if ($this->category === null) {
+			return '';
+		} else {
+			return $this->category->getName($domainConfig->getLocale());
+		}
+	}
+
+	/**
+	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+	 * @return string
+	 */
+	private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {
+		return $this->metaDescriptionsIndexedByDomainId[$domainConfig->getId()];
 	}
 
 }

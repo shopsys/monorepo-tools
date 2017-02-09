@@ -13,6 +13,16 @@ class CategoryData {
 	public $name;
 
 	/**
+	 * @var string[]|null[]
+	 */
+	public $seoTitles;
+
+	/**
+	 * @var string[]|null[]
+	 */
+	public $seoMetaDescriptions;
+
+	/**
 	 * @var string[]
 	 */
 	public $descriptions;
@@ -44,6 +54,8 @@ class CategoryData {
 
 	public function __construct() {
 		$this->name = [];
+		$this->seoTitles = [];
+		$this->seoMetaDescriptions = [];
 		$this->descriptions = [];
 		$this->hiddenOnDomains = [];
 		$this->urls = new UrlListData();
@@ -63,15 +75,21 @@ class CategoryData {
 		$this->name = $names;
 		$this->parent = $category->getParent();
 		$this->heurekaCzFeedCategory = $category->getHeurekaCzFeedCategory();
+		$seoTitles = [];
+		$seoMetaDescriptions = [];
 		$descriptions = [];
 		$hiddenOnDomains = [];
 		foreach ($categoryDomains as $categoryDomain) {
+			$seoTitles[$categoryDomain->getDomainId()] = $categoryDomain->getSeoTitle();
+			$seoMetaDescriptions[$categoryDomain->getDomainId()] = $categoryDomain->getSeoMetaDescription();
 			$descriptions[$categoryDomain->getDomainId()] = $categoryDomain->getDescription();
 			if ($categoryDomain->isHidden()) {
 				$hiddenOnDomains[] = $categoryDomain->getDomainId();
 			}
 		}
 		$this->hiddenOnDomains = $hiddenOnDomains;
+		$this->seoTitles = $seoTitles;
+		$this->seoMetaDescriptions = $seoMetaDescriptions;
 		$this->descriptions = $descriptions;
 	}
 
