@@ -94,7 +94,8 @@ class CategoryFacade {
 		$category = $this->categoryService->create($categoryData, $rootCategory);
 		$this->em->persist($category);
 		$this->em->flush($category);
-		$this->createCategoryDomains($category, $categoryData, $this->domain->getAll());
+		$this->createCategoryDomains($category, $this->domain->getAll());
+		$this->refreshCategoryDomains($category, $categoryData);
 		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
 		$this->imageFacade->uploadImage($category, $categoryData->image, null);
 
@@ -125,19 +126,14 @@ class CategoryFacade {
 
 	/**
 	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
 	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
 	 */
-	private function createCategoryDomains(Category $category, CategoryData $categoryData, array $domainConfigs) {
+	private function createCategoryDomains(Category $category, array $domainConfigs) {
 		$toFlush = [];
 
 		foreach ($domainConfigs as $domainConfig) {
 			$domainId = $domainConfig->getId();
 			$categoryDomain = new CategoryDomain($category, $domainId);
-
-			$categoryDomain->setSeoTitle($categoryData->seoTitles[$domainId]);
-			$categoryDomain->setSeoMetaDescription($categoryData->seoMetaDescriptions[$domainId]);
-			$categoryDomain->setDescription($categoryData->descriptions[$domainId]);
 
 			$this->em->persist($categoryDomain);
 			$toFlush[] = $categoryDomain;
