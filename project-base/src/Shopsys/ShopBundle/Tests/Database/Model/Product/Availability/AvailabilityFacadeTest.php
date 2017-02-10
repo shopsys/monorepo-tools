@@ -7,7 +7,7 @@ use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AvailabilityFacadeTest extends DatabaseTestCase {
@@ -18,8 +18,8 @@ class AvailabilityFacadeTest extends DatabaseTestCase {
 		/* @var $availabilityFacade \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade */
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
 		$availabilityToDelete = $availabilityFacade->create(new AvailabilityData(['cs' => 'name']));
 		$availabilityToReplaceWith = $this->getReference(AvailabilityDataFixture::IN_STOCK);
@@ -32,7 +32,7 @@ class AvailabilityFacadeTest extends DatabaseTestCase {
 		$productEditData->productData->availability = $availabilityToDelete;
 		$productEditData->productData->outOfStockAvailability = $availabilityToDelete;
 
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 
 		$availabilityFacade->deleteById($availabilityToDelete->getId(), $availabilityToReplaceWith->getId());
 

@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
 class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -17,8 +17,8 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
 	public function load(ObjectManager $manager) {
 		$productEditDataFactory = $this->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $this->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $product \Shopsys\ShopBundle\Model\Product\Product */
 
@@ -27,7 +27,7 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '24'),
 			$this->getReference(ProductDataFixture::PRODUCT_PREFIX . '13'),
 		];
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 	}
 
 	/**

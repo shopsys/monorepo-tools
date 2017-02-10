@@ -4,7 +4,7 @@ namespace Shopsys\ShopBundle\Tests\Database\Model\Product;
 
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -14,8 +14,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
 		/* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
@@ -30,7 +30,7 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
 		$variant1ProductEditData->productData->sellingDenied = true;
-		$productEditFacade->edit($variant1->getId(), $variant1ProductEditData);
+		$productFacade->edit($variant1->getId(), $variant1ProductEditData);
 
 		$productSellingDeniedRecalculator->calculateSellingDeniedForProduct($variant1);
 
@@ -49,8 +49,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
 		/* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
@@ -65,13 +65,13 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 		$variant1ProductEditData = $productEditDataFactory->createFromProduct($variant1);
 		$variant1ProductEditData->productData->sellingDenied = true;
-		$productEditFacade->edit($variant1->getId(), $variant1ProductEditData);
+		$productFacade->edit($variant1->getId(), $variant1ProductEditData);
 		$variant2ProductEditData = $productEditDataFactory->createFromProduct($variant2);
 		$variant2ProductEditData->productData->sellingDenied = true;
-		$productEditFacade->edit($variant2->getId(), $variant2ProductEditData);
+		$productFacade->edit($variant2->getId(), $variant2ProductEditData);
 		$variant3ProductEditData = $productEditDataFactory->createFromProduct($variant3);
 		$variant3ProductEditData->productData->sellingDenied = true;
-		$productEditFacade->edit($variant3->getId(), $variant3ProductEditData);
+		$productFacade->edit($variant3->getId(), $variant3ProductEditData);
 
 		$productSellingDeniedRecalculator->calculateSellingDeniedForProduct($mainVariant);
 
@@ -90,8 +90,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
 		/* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
@@ -106,7 +106,7 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
 
 		$mainVariantProductEditData = $productEditDataFactory->createFromProduct($mainVariant);
 		$mainVariantProductEditData->productData->sellingDenied = true;
-		$productEditFacade->edit($mainVariant->getId(), $mainVariantProductEditData);
+		$productFacade->edit($mainVariant->getId(), $mainVariantProductEditData);
 
 		$productSellingDeniedRecalculator->calculateSellingDeniedForProduct($mainVariant);
 

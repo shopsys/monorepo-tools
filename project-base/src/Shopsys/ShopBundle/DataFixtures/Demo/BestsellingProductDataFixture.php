@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
-use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
@@ -16,10 +16,10 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
 	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
 	 */
 	public function load(ObjectManager $manager) {
-		$bestsellingProductEditFacade = $this->get(BestsellingProductEditFacade::class);
-		/* @var $bestsellingProductEditFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductEditFacade */
+		$manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
+		/* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
-		$bestsellingProductEditFacade->edit(
+		$manualBestsellingProductFacade->edit(
 			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
 			Domain::FIRST_DOMAIN_ID,
 			[

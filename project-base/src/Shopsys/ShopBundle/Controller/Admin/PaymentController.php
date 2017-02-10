@@ -11,7 +11,7 @@ use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use Shopsys\ShopBundle\Model\Payment\Grid\PaymentGridFactory;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -43,9 +43,9 @@ class PaymentController extends AdminBaseController {
 	private $paymentEditDataFactory;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
@@ -56,7 +56,7 @@ class PaymentController extends AdminBaseController {
 		PaymentEditFormTypeFactory $paymentEditFormTypeFactory,
 		PaymentEditDataFactory $paymentEditDataFactory,
 		CurrencyFacade $currencyFacade,
-		PaymentEditFacade $paymentEditFacade,
+		PaymentFacade $paymentFacade,
 		PaymentDetailFactory $paymentDetailFactory,
 		PaymentGridFactory $paymentGridFactory,
 		Breadcrumb $breadcrumb
@@ -64,7 +64,7 @@ class PaymentController extends AdminBaseController {
 		$this->paymentEditFormTypeFactory = $paymentEditFormTypeFactory;
 		$this->paymentEditDataFactory = $paymentEditDataFactory;
 		$this->currencyFacade = $currencyFacade;
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->paymentDetailFactory = $paymentDetailFactory;
 		$this->paymentGridFactory = $paymentGridFactory;
 		$this->breadcrumb = $breadcrumb;
@@ -82,7 +82,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$payment = $this->paymentEditFacade->create($paymentEditData);
+			$payment = $this->paymentFacade->create($paymentEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Payment <strong><a href="{{ url }}">{{ name }}</a></strong> created'),
@@ -110,7 +110,7 @@ class PaymentController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$payment = $this->paymentEditFacade->getByIdWithTransports($id);
+		$payment = $this->paymentFacade->getByIdWithTransports($id);
 
 		$form = $this->createForm($this->paymentEditFormTypeFactory->create());
 
@@ -120,7 +120,7 @@ class PaymentController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->paymentEditFacade->edit($payment, $paymentEditData);
+			$this->paymentFacade->edit($payment, $paymentEditData);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Payment <strong><a href="{{ url }}">{{ name }}</a></strong> modified'),
@@ -152,9 +152,9 @@ class PaymentController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$paymentName = $this->paymentEditFacade->getById($id)->getName();
+			$paymentName = $this->paymentFacade->getById($id)->getName();
 
-			$this->paymentEditFacade->deleteById($id);
+			$this->paymentFacade->deleteById($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Payment <strong>{{ name }}</strong> deleted'),

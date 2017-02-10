@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\DataFixtures\DemoMultidomain;
 use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Article\ArticleData;
-use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleDataFixture extends AbstractReferenceFixture {
@@ -53,10 +53,10 @@ class ArticleDataFixture extends AbstractReferenceFixture {
 	 * @param string|null $referenceName
 	 */
 	private function createArticle(ArticleData $articleData, $referenceName = null) {
-		$articleEditFacade = $this->get(ArticleEditFacade::class);
-		/* @var $articleEditFacade \Shopsys\ShopBundle\Model\Article\ArticleEditFacade */
+		$articleFacade = $this->get(ArticleFacade::class);
+		/* @var $articleFacade \Shopsys\ShopBundle\Model\Article\ArticleFacade */
 
-		$article = $articleEditFacade->create($articleData);
+		$article = $articleFacade->create($articleData);
 		if ($referenceName !== null) {
 			$this->addReference($referenceName, $article);
 		}

@@ -22,7 +22,7 @@ use Shopsys\ShopBundle\Model\Order\OrderData;
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class OrderDataFixture {
@@ -79,9 +79,9 @@ class OrderDataFixture {
 	private $orderPreviewFactory;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
@@ -96,7 +96,7 @@ class OrderDataFixture {
 		PersistentReferenceFacade $persistentReferenceFacade,
 		OrderFacade $orderFacade,
 		OrderPreviewFactory $orderPreviewFactory,
-		ProductEditFacade $productEditFacade,
+		ProductFacade $productFacade,
 		CustomerFacade $customerFacade
 	) {
 		$this->performanceProductIds = [];
@@ -107,7 +107,7 @@ class OrderDataFixture {
 		$this->persistentReferenceFacade = $persistentReferenceFacade;
 		$this->orderFacade = $orderFacade;
 		$this->orderPreviewFactory = $orderPreviewFactory;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 		$this->customerFacade = $customerFacade;
 	}
 
@@ -225,7 +225,7 @@ class OrderDataFixture {
 
 		$randomProductIds = $this->getRandomPerformanceProductIds(self::PRODUCTS_PER_ORDER_COUNT);
 		foreach ($randomProductIds as $randomProductId) {
-			$product = $this->productEditFacade->getById($randomProductId);
+			$product = $this->productFacade->getById($randomProductId);
 			$quantity = $this->faker->numberBetween(1, 10);
 
 			$quantifiedProducts[] = new QuantifiedProduct($product, $quantity);

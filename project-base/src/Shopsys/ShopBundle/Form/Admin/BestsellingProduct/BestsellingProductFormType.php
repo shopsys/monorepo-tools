@@ -23,7 +23,7 @@ class BestsellingProductFormType extends AbstractType {
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
 		$builder
-			->add('bestsellingProducts', FormType::FORM, [
+			->add('products', FormType::FORM, [
 				'error_bubbling' => true,
 				'constraints' => [
 					new Constraints\UniqueCollection([
@@ -36,7 +36,7 @@ class BestsellingProductFormType extends AbstractType {
 			->add('save', FormType::SUBMIT);
 
 		for ($i = 0; $i < 10; $i++) {
-			$builder->get('bestsellingProducts')
+			$builder->get('products')
 				->add($i, FormType::PRODUCT, [
 					'required' => false,
 					'placeholder' => null,

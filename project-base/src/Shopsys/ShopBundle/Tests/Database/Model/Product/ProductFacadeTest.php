@@ -11,10 +11,10 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductEditFacadeTest extends DatabaseTestCase {
+class ProductFacadeTest extends DatabaseTestCase {
 
 	/**
 	 * @dataProvider getTestHandleOutOfStockStateDataProvider
@@ -40,17 +40,17 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 
 		$productEditData = new ProductEditData($productData);
 
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
-		$product = $productEditFacade->create($productEditData);
+		$product = $productFacade->create($productEditData);
 
 		$entityManagerFacade = $this->getEntityManagerFacade();
 		/* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
 
 		$entityManagerFacade->clear();
 
-		$productFromDb = $productEditFacade->getById($product->getId());
+		$productFromDb = $productFacade->getById($product->getId());
 
 		$this->assertSame($productFromDb->getCalculatedHidden(), $calculatedHidden);
 		$this->assertSame($calculatedSellingDenied, $productFromDb->getCalculatedSellingDenied());
@@ -115,8 +115,8 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 	public function testEditMarkProductForVisibilityRecalculation() {
 		$product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
 		/* @var $product \Shopsys\ShopBundle\Model\Product\Product */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
 
@@ -125,7 +125,7 @@ class ProductEditFacadeTest extends DatabaseTestCase {
 		$reflectionPropertyRecalculateVisibility->setAccessible(true);
 		$reflectionPropertyRecalculateVisibility->setValue($product, false);
 
-		$productEditFacade->edit($product->getId(), $productEditDataFactory->createFromProduct($product));
+		$productFacade->edit($product->getId(), $productEditDataFactory->createFromProduct($product));
 
 		$this->assertSame(true, $reflectionPropertyRecalculateVisibility->getValue($product));
 	}

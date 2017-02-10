@@ -8,10 +8,10 @@
 		{{ form_errors(form) }}
 
 		<div class="js-form-group">
-			{{ form_errors(form.bestsellingProducts) }}
+			{{ form_errors(form.products) }}
 
-			<div id="{{ form.bestsellingProducts.vars.id }}">
-				{% for productForm in form.bestsellingProducts %}
+			<div id="{{ form.products.vars.id }}">
+				{% for productForm in form.products %}
 					<div class="form-line js-bestselling-product-container">
 						<label class="form-line__item form-line__item--text form-line__item--fixed-width">{{ loop.index }}</label>
 						{{ form_widget(productForm) }}

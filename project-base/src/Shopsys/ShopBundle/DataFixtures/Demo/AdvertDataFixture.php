@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertData;
-use Shopsys\ShopBundle\Model\Advert\AdvertEditFacade;
+use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
 class AdvertDataFixture extends AbstractReferenceFixture {
@@ -32,8 +32,8 @@ class AdvertDataFixture extends AbstractReferenceFixture {
 	 * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
 	 */
 	private function createAdvert(AdvertData $advertData) {
-		$advertEditFacade = $this->get(AdvertEditFacade::class);
-		/* @var $advertEditFacade \Shopsys\ShopBundle\Model\Advert\AdvertEditFacade */
-		$advertEditFacade->create($advertData);
+		$advertFacade = $this->get(AdvertFacade::class);
+		/* @var $advertFacade \Shopsys\ShopBundle\Model\Advert\AdvertFacade */
+		$advertFacade->create($advertData);
 	}
 }

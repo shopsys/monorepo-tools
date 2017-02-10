@@ -6,11 +6,11 @@ use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\TransportDataFixture;
 use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class VatFacadeTest extends DatabaseTestCase {
@@ -19,14 +19,14 @@ class VatFacadeTest extends DatabaseTestCase {
 		$em = $this->getEntityManager();
 		$vatFacade = $this->getContainer()->get(VatFacade::class);
 		/* @var $vatFacade \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade */
-		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
+		$transportFacade = $this->getContainer()->get(TransportFacade::class);
+		/* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
 		$transportEditDataFactory = $this->getContainer()->get(TransportEditDataFactory::class);
 		/* @var $transportEditDataFactory \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory */
 		$paymentEditDataFactory = $this->getContainer()->get(PaymentEditDataFactory::class);
 		/* @var $paymentEditDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory */
-		$paymentEditFacade = $this->getContainer()->get(PaymentEditFacade::class);
-		/* @var $paymentEditFacade \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade */
+		$paymentFacade = $this->getContainer()->get(PaymentFacade::class);
+		/* @var $paymentFacade \Shopsys\ShopBundle\Model\Payment\PaymentFacade */
 
 		$vatToDelete = $vatFacade->create(new VatData('name', 10));
 		$vatToReplaceWith = $this->getReference(VatDataFixture::VAT_HIGH);
@@ -39,10 +39,10 @@ class VatFacadeTest extends DatabaseTestCase {
 		$paymentEditData = $paymentEditDataFactory->createFromPayment($payment);
 
 		$transportEditData->transportData->vat = $vatToDelete;
-		$transportEditFacade->edit($transport, $transportEditData);
+		$transportFacade->edit($transport, $transportEditData);
 
 		$paymentEditData->paymentData->vat = $vatToDelete;
-		$paymentEditFacade->edit($payment, $paymentEditData);
+		$paymentFacade->edit($payment, $paymentEditData);
 
 		$vatFacade->deleteById($vatToDelete, $vatToReplaceWith);
 

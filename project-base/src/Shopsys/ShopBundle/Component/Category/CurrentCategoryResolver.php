@@ -3,7 +3,7 @@
 namespace Shopsys\ShopBundle\Component\Category;
 
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class CurrentCategoryResolver {
@@ -14,16 +14,16 @@ class CurrentCategoryResolver {
 	private $categoryFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	public function __construct(
 		CategoryFacade $categoryFacade,
-		ProductEditFacade $productEditFacade
+		ProductFacade $productFacade
 	) {
 		$this->categoryFacade = $categoryFacade;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 	}
 
 	/**
@@ -41,7 +41,7 @@ class CurrentCategoryResolver {
 			return $currentCategory;
 		} elseif ($routeName === 'front_product_detail') {
 			$productId = $request->get('id');
-			$product = $this->productEditFacade->getById($productId);
+			$product = $this->productFacade->getById($productId);
 			$currentCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainId);
 
 			return $currentCategory;

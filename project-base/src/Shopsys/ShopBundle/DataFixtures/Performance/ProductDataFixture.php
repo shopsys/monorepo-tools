@@ -18,7 +18,7 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculati
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -40,9 +40,9 @@ class ProductDataFixture {
 	private $entityManagerFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader
@@ -117,7 +117,7 @@ class ProductDataFixture {
 	public function __construct(
 		EntityManager $em,
 		EntityManagerFacade $entityManagerFacade,
-		ProductEditFacade $productEditFacade,
+		ProductFacade $productFacade,
 		ProductDataFixtureLoader $productDataFixtureLoader,
 		SqlLoggerFacade $sqlLoggerFacade,
 		ProductVariantFacade $productVariantFacade,
@@ -131,7 +131,7 @@ class ProductDataFixture {
 	) {
 		$this->em = $em;
 		$this->entityManagerFacade = $entityManagerFacade;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 		$this->productDataFixtureLoader = $productDataFixtureLoader;
 		$this->sqlLoggerFacade = $sqlLoggerFacade;
 		$this->productVariantFacade = $productVariantFacade;
@@ -178,7 +178,7 @@ class ProductDataFixture {
 			$this->productDataFixtureLoader->updateProductEditDataFromCsvRowForSecondDomain($productEditData, $row);
 			$this->makeProductEditDataUnique($productEditData);
 			$this->setRandomPerformanceCategoriesToProductEditData($productEditData);
-			$product = $this->productEditFacade->create($productEditData);
+			$product = $this->productFacade->create($productEditData);
 
 			if ($this->countImported === 0) {
 				$this->persistentReferenceFacade->persistReference(self::FIRST_PERFORMANCE_PRODUCT, $product);

@@ -8,7 +8,7 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportData;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase {
@@ -26,9 +26,9 @@ class PaymentTest extends DatabaseTestCase {
 		$em->persist($payment);
 		$em->flush();
 
-		$transportEditFacade = $this->getContainer()->get(TransportEditFacade::class);
-		/* @var $transportEditFacade \Shopsys\ShopBundle\Model\Transport\TransportEditFacade */
-		$transportEditFacade->deleteById($transport->getId());
+		$transportFacade = $this->getContainer()->get(TransportFacade::class);
+		/* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
+		$transportFacade->deleteById($transport->getId());
 
 		$this->assertFalse($payment->getTransports()->contains($transport));
 	}

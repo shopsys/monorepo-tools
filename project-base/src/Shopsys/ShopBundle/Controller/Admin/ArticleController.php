@@ -13,7 +13,7 @@ use Shopsys\ShopBundle\Form\Admin\Article\ArticleFormTypeFactory;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\Article\ArticleDataFactory;
-use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
@@ -28,9 +28,9 @@ class ArticleController extends AdminBaseController {
 	private $breadcrumb;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
 	 */
-	private $articleEditFacade;
+	private $articleFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Article\ArticleDataFactory
@@ -68,7 +68,7 @@ class ArticleController extends AdminBaseController {
 	private $cookiesFacade;
 
 	public function __construct(
-		ArticleEditFacade $articleEditFacade,
+		ArticleFacade $articleFacade,
 		ArticleDataFactory $articleDataFactory,
 		ArticleFormTypeFactory $articleFormTypeFactory,
 		GridFactory $gridFactory,
@@ -78,7 +78,7 @@ class ArticleController extends AdminBaseController {
 		TermsAndConditionsFacade $termsAndConditionsFacade,
 		CookiesFacade $cookiesFacade
 	) {
-		$this->articleEditFacade = $articleEditFacade;
+		$this->articleFacade = $articleFacade;
 		$this->articleDataFactory = $articleDataFactory;
 		$this->articleFormTypeFactory = $articleFormTypeFactory;
 		$this->gridFactory = $gridFactory;
@@ -95,7 +95,7 @@ class ArticleController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function editAction(Request $request, $id) {
-		$article = $this->articleEditFacade->getById($id);
+		$article = $this->articleFacade->getById($id);
 		$form = $this->createForm($this->articleFormTypeFactory->create(
 			$this->selectedDomain->getId(),
 			$article
@@ -107,7 +107,7 @@ class ArticleController extends AdminBaseController {
 		$form->handleRequest($request);
 
 		if ($form->isValid()) {
-			$this->articleEditFacade->edit($id, $articleData);
+			$this->articleFacade->edit($id, $articleData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -139,7 +139,7 @@ class ArticleController extends AdminBaseController {
 		$gridTop = $this->getGrid(ArticlePlacementList::PLACEMENT_TOP_MENU);
 		$gridFooter = $this->getGrid(ArticlePlacementList::PLACEMENT_FOOTER);
 		$gridNone = $this->getGrid(ArticlePlacementList::PLACEMENT_NONE);
-		$articlesCountOnSelectedDomain = $this->articleEditFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
+		$articlesCountOnSelectedDomain = $this->articleFacade->getAllArticlesCountByDomainId($this->selectedDomain->getId());
 
 		return $this->render('@ShopsysShop/Admin/Content/Article/list.html.twig', [
 			'gridViewTop' => $gridTop->createView(),
@@ -164,7 +164,7 @@ class ArticleController extends AdminBaseController {
 		if ($form->isValid()) {
 			$articleData = $form->getData();
 
-			$article = $this->articleEditFacade->create($articleData);
+			$article = $this->articleFacade->create($articleData);
 
 			$this->getFlashMessageSender()
 				->addSuccessFlashTwig(
@@ -193,9 +193,9 @@ class ArticleController extends AdminBaseController {
 	 */
 	public function deleteAction($id) {
 		try {
-			$fullName = $this->articleEditFacade->getById($id)->getName();
+			$fullName = $this->articleFacade->getById($id)->getName();
 
-			$this->articleEditFacade->delete($id);
+			$this->articleFacade->delete($id);
 
 			$this->getFlashMessageSender()->addSuccessFlashTwig(
 				t('Article <strong>{{ name }}</strong> deleted'),
@@ -215,7 +215,7 @@ class ArticleController extends AdminBaseController {
 	 * @param int $id
 	 */
 	public function deleteConfirmAction($id) {
-		$article = $this->articleEditFacade->getById($id);
+		$article = $this->articleFacade->getById($id);
 		if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
 			$message = t(
 				'Article "%name%" set for displaying terms and conditions. This setting will be lost. Do you really want to delete it?',
@@ -239,7 +239,7 @@ class ArticleController extends AdminBaseController {
 	 * @return \Symfony\Component\HttpFoundation\JsonResponse
 	 */
 	public function saveOrderingAction(Request $request) {
-		$this->articleEditFacade->saveOrdering($request->get('rowIdsByGridId'));
+		$this->articleFacade->saveOrdering($request->get('rowIdsByGridId'));
 
 		$responseData = ['success' => true];
 
@@ -251,7 +251,7 @@ class ArticleController extends AdminBaseController {
 	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
 	 */
 	private function getGrid($articlePlacement) {
-		$queryBuilder = $this->articleEditFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
+		$queryBuilder = $this->articleFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
 			$this->selectedDomain->getId(),
 			$articlePlacement
 		);

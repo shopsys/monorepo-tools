@@ -12,7 +12,7 @@ use Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFacade;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductPickerController extends AdminBaseController {
@@ -38,22 +38,22 @@ class ProductPickerController extends AdminBaseController {
 	private $productListAdminFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Product\ProductFacade
 	 */
-	private $productEditFacade;
+	private $productFacade;
 
 	public function __construct(
 		AdministratorGridFacade $administratorGridFacade,
 		GridFactory $gridFactory,
 		ProductListAdminFacade $productListAdminFacade,
 		AdvancedSearchFacade $advancedSearchFacade,
-		ProductEditFacade $productEditFacade
+		ProductFacade $productFacade
 	) {
 		$this->administratorGridFacade = $administratorGridFacade;
 		$this->gridFactory = $gridFactory;
 		$this->productListAdminFacade = $productListAdminFacade;
 		$this->advancedSearchFacade = $advancedSearchFacade;
-		$this->productEditFacade = $productEditFacade;
+		$this->productFacade = $productFacade;
 	}
 
 	/**
@@ -124,7 +124,7 @@ class ProductPickerController extends AdminBaseController {
 			$queryBuilder,
 			'p.id',
 			function ($row) {
-				$product = $this->productEditFacade->getById($row['p']['id']);
+				$product = $this->productFacade->getById($row['p']['id']);
 				$row['product'] = $product;
 				return $row;
 			}

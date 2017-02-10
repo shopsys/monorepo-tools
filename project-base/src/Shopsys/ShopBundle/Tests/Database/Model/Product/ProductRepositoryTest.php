@@ -11,7 +11,7 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
@@ -170,12 +170,12 @@ class ProductRepositoryTest extends DatabaseTestCase{
 	private function setProductOrderingPriority(Product $product, $priority) {
 		$productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $this->getContainer()->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $this->getContainer()->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->orderingPriority = $priority;
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 	}
 
 	/**

@@ -5,7 +5,7 @@ namespace Shopsys\ShopBundle\Tests\Database\Model\Feed\HeurekaDelivery;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
-use Shopsys\ShopBundle\Model\Product\ProductEditFacade;
+use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
@@ -14,8 +14,8 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $container->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $container->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$domain = $container->get(Domain::class);
 		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
@@ -25,7 +25,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = true;
 		$productEditData->productData->stockQuantity = 1;
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 
 		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
@@ -47,8 +47,8 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $container->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $container->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$domain = $container->get(Domain::class);
 		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
@@ -58,7 +58,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = true;
 		$productEditData->productData->stockQuantity = 0;
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 
 		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */
@@ -78,8 +78,8 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$container = $this->getContainer();
 		$productEditDataFactory = $container->get(ProductEditDataFactory::class);
 		/* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
-		$productEditFacade = $container->get(ProductEditFacade::class);
-		/* @var $productEditFacade \Shopsys\ShopBundle\Model\Product\ProductEditFacade */
+		$productFacade = $container->get(ProductFacade::class);
+		/* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 		$domain = $container->get(Domain::class);
 		/* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 
@@ -89,7 +89,7 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
 		$productEditData = $productEditDataFactory->createFromProduct($product);
 		$productEditData->productData->usingStock = false;
 		$productEditData->productData->stockQuantity = null;
-		$productEditFacade->edit($product->getId(), $productEditData);
+		$productFacade->edit($product->getId(), $productEditData);
 
 		$heurekaDeliveryItemRepository = $container->get('shopsys.shop.feed.heureka.heureka_delivery_item_repository');
 		/* @var $heurekaDeliveryItemRepository \Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemRepository */

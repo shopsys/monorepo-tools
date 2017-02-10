@@ -6,7 +6,7 @@ use Shopsys\Environment;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Article\Article;
-use Shopsys\ShopBundle\Model\Article\ArticleEditFacade;
+use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookiesFacade {
@@ -19,9 +19,9 @@ class CookiesFacade {
 	private $environment;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Article\ArticleEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
 	 */
-	private $articleEditFacade;
+	private $articleFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
@@ -40,20 +40,20 @@ class CookiesFacade {
 
 	/**
 	 * @param string $environment
-	 * @param \Shopsys\ShopBundle\Model\Article\ArticleEditFacade $articleEditFacade
+	 * @param \Shopsys\ShopBundle\Model\Article\ArticleFacade $articleFacade
 	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
 	 * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
 	 * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
 	 */
 	public function __construct(
 		$environment,
-		ArticleEditFacade $articleEditFacade,
+		ArticleFacade $articleFacade,
 		Setting $setting,
 		Domain $domain,
 		RequestStack $requestStack
 	) {
 		$this->environment = $environment;
-		$this->articleEditFacade = $articleEditFacade;
+		$this->articleFacade = $articleFacade;
 		$this->setting = $setting;
 		$this->domain = $domain;
 		$this->requestStack = $requestStack;
@@ -67,7 +67,7 @@ class CookiesFacade {
 		$cookiesArticleId = $this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId);
 
 		if ($cookiesArticleId !== null) {
-			return $this->articleEditFacade->findById(
+			return $this->articleFacade->findById(
 				$this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId)
 			);
 		}

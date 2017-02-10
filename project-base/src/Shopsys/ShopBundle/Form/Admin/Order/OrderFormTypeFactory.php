@@ -7,8 +7,8 @@ use Shopsys\ShopBundle\Form\Admin\Order\OrderFormType;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class OrderFormTypeFactory {
 
@@ -18,14 +18,14 @@ class OrderFormTypeFactory {
 	private $orderStatusFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
@@ -39,14 +39,14 @@ class OrderFormTypeFactory {
 
 	public function __construct(
 		OrderStatusFacade $orderStatusFacade,
-		TransportEditFacade $transportEditFacade,
-		PaymentEditFacade $paymentEditFacade,
+		TransportFacade $transportFacade,
+		PaymentFacade $paymentFacade,
 		CountryFacade $countryFacade,
 		SelectedDomain $selectedDomain
 	) {
 		$this->orderStatusFacade = $orderStatusFacade;
-		$this->transportEditFacade = $transportEditFacade;
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->transportFacade = $transportFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->countryFacade = $countryFacade;
 		$this->selectedDomain = $selectedDomain;
 	}
@@ -57,8 +57,8 @@ class OrderFormTypeFactory {
 	 */
 	public function createForOrder(Order $order) {
 		$orderDomainId = $order->getDomainId();
-		$payments = $this->paymentEditFacade->getVisibleByDomainId($orderDomainId);
-		$transports = $this->transportEditFacade->getVisibleByDomainId($orderDomainId, $payments);
+		$payments = $this->paymentFacade->getVisibleByDomainId($orderDomainId);
+		$transports = $this->transportFacade->getVisibleByDomainId($orderDomainId, $payments);
 		$countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
 
 		if (!in_array($order->getPayment(), $payments, true)) {

@@ -18,11 +18,11 @@ use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreview;
 use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 use Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentWatcherService;
-use Shopsys\ShopBundle\Model\Payment\PaymentEditFacade;
+use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
-use Shopsys\ShopBundle\Model\Transport\TransportEditFacade;
+use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,9 +74,9 @@ class OrderController extends FrontBaseController {
 	private $transportAndPaymentWatcherService;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
 	 */
-	private $paymentEditFacade;
+	private $paymentFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
@@ -89,9 +89,9 @@ class OrderController extends FrontBaseController {
 	private $currencyFacade;
 
 	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportEditFacade
+	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
 	 */
-	private $transportEditFacade;
+	private $transportFacade;
 
 	/**
 	 * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
@@ -125,8 +125,8 @@ class OrderController extends FrontBaseController {
 		TransportPriceCalculation $transportPriceCalculation,
 		PaymentPriceCalculation $paymentPriceCalculation,
 		Domain $domain,
-		TransportEditFacade $transportEditFacade,
-		PaymentEditFacade $paymentEditFacade,
+		TransportFacade $transportFacade,
+		PaymentFacade $paymentFacade,
 		CurrencyFacade $currencyFacade,
 		OrderDataMapper $orderDataMapper,
 		OrderFlow $flow,
@@ -143,8 +143,8 @@ class OrderController extends FrontBaseController {
 		$this->transportPriceCalculation = $transportPriceCalculation;
 		$this->paymentPriceCalculation = $paymentPriceCalculation;
 		$this->domain = $domain;
-		$this->transportEditFacade = $transportEditFacade;
-		$this->paymentEditFacade = $paymentEditFacade;
+		$this->transportFacade = $transportFacade;
+		$this->paymentFacade = $paymentFacade;
 		$this->currencyFacade = $currencyFacade;
 		$this->orderDataMapper = $orderDataMapper;
 		$this->flow = $flow;
@@ -168,8 +168,8 @@ class OrderController extends FrontBaseController {
 			return $this->redirectToRoute('front_cart');
 		}
 
-		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
-		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
+		$payments = $this->paymentFacade->getVisibleOnCurrentDomain();
+		$transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
 		$user = $this->getUser();
 
 		$frontOrderFormData = new FrontOrderData();
@@ -268,13 +268,13 @@ class OrderController extends FrontBaseController {
 		if ($transportId === null) {
 			$transport = null;
 		} else {
-			$transport = $this->transportEditFacade->getById($transportId);
+			$transport = $this->transportFacade->getById($transportId);
 		}
 
 		if ($paymentId === null) {
 			$payment = null;
 		} else {
-			$payment = $this->paymentEditFacade->getById($paymentId);
+			$payment = $this->paymentFacade->getById($paymentId);
 		}
 
 		$orderPreview = $this->orderPreviewFactory->createForCurrentUser($transport, $payment);
@@ -322,8 +322,8 @@ class OrderController extends FrontBaseController {
 	}
 
 	public function saveOrderFormAction() {
-		$payments = $this->paymentEditFacade->getVisibleOnCurrentDomain();
-		$transports = $this->transportEditFacade->getVisibleOnCurrentDomain($payments);
+		$payments = $this->paymentFacade->getVisibleOnCurrentDomain();
+		$transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
 		$countries = $this->countryFacade->getAllOnCurrentDomain();
 
 		$this->flow->setFormTypesData($transports, $payments, $countries);

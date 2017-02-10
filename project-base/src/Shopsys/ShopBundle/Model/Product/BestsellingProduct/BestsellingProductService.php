@@ -5,66 +5,67 @@ namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 class BestsellingProductService {
 
 	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualBestsellingProductsIndexedByPosition
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticBestsellingProducts
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProducts
 	 * @param int $maxResults
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
-	public function combineManualAndAutomaticBestsellingProducts(
-		array $manualBestsellingProductsIndexedByPosition,
-		array $automaticBestsellingProducts,
+	public function combineManualAndAutomaticProducts(
+		array $manualProductsIndexedByPosition,
+		array $automaticProducts,
 		$maxResults
 	) {
-		$automaticBestsellingProductsWithoutDuplicates = $this->getAutomaticBestsellingProductsExcludingManual(
-			$automaticBestsellingProducts,
-			$manualBestsellingProductsIndexedByPosition
+		$automaticProductsExcludingManual = $this->getAutomaticProductsExcludingManual(
+			$automaticProducts,
+			$manualProductsIndexedByPosition
 		);
-		$combinedBestsellingProducts = $this->getCombinedBestsellingProducts(
-			$manualBestsellingProductsIndexedByPosition,
-			$automaticBestsellingProductsWithoutDuplicates,
+		$combinedProducts = $this->getCombinedProducts(
+			$manualProductsIndexedByPosition,
+			$automaticProductsExcludingManual,
 			$maxResults
 		);
-		return $combinedBestsellingProducts;
+		return $combinedProducts;
 	}
 
 	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticBestsellingProducts
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualBestsellingProducts
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProducts
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProducts
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
-	private function getAutomaticBestsellingProductsExcludingManual(
-		array $automaticBestsellingProducts,
-		array $manualBestsellingProducts
+	private function getAutomaticProductsExcludingManual(
+		array $automaticProducts,
+		array $manualProducts
 	) {
-		foreach ($manualBestsellingProducts as $manualBestsellingProduct) {
-			$automaticBestsellingProductIndex = array_search($manualBestsellingProduct, $automaticBestsellingProducts, true);
-			if ($automaticBestsellingProductIndex !== false) {
-				unset($automaticBestsellingProducts[$automaticBestsellingProductIndex]);
+		foreach ($manualProducts as $manualProduct) {
+			$automaticProductKey = array_search($manualProduct, $automaticProducts, true);
+			if ($automaticProductKey !== false) {
+				unset($automaticProducts[$automaticProductKey]);
 			}
 		}
-		return $automaticBestsellingProducts;
+
+		return $automaticProducts;
 	}
 
 	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualBestsellingProductsIndexedByPosition
-	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticBestsellingProductsWithoutDuplicates
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition
+	 * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProductsExcludingManual
 	 * @param int $maxResults
 	 * @return \Shopsys\ShopBundle\Model\Product\Product[]
 	 */
-	private function getCombinedBestsellingProducts(
-		array $manualBestsellingProductsIndexedByPosition,
-		array $automaticBestsellingProductsWithoutDuplicates,
+	private function getCombinedProducts(
+		array $manualProductsIndexedByPosition,
+		array $automaticProductsExcludingManual,
 		$maxResults
 	) {
-		$combinedBestsellingProducts = [];
+		$combinedProducts = [];
 		for ($position = 0; $position < $maxResults; $position++) {
-			if (array_key_exists($position, $manualBestsellingProductsIndexedByPosition)) {
-				$combinedBestsellingProducts[] = $manualBestsellingProductsIndexedByPosition[$position];
-			} elseif (count($automaticBestsellingProductsWithoutDuplicates) > 0) {
-				$combinedBestsellingProducts[] = array_shift($automaticBestsellingProductsWithoutDuplicates);
+			if (array_key_exists($position, $manualProductsIndexedByPosition)) {
+				$combinedProducts[] = $manualProductsIndexedByPosition[$position];
+			} elseif (count($automaticProductsExcludingManual) > 0) {
+				$combinedProducts[] = array_shift($automaticProductsExcludingManual);
 			}
 		}
-		return $combinedBestsellingProducts;
+		return $combinedProducts;
 	}
 
 }
