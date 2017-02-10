@@ -1,123 +1,123 @@
 {% extends '@ShopsysShop/Front/Content/Order/step.html.twig' %}
 
 {% block h1 %}
-	{{ 'Order [noun]'|trans }}
+    {{ 'Order [noun]'|trans }}
 {% endblock %}
 
 {% block content %}
 
-	<div class="box-order">
+    <div class="box-order">
 
-		<div id="{{ form.vars.id }}" class="box-order__info">
+        <div id="{{ form.vars.id }}" class="box-order__info">
 
-			<div class="box-order__info__item">
+            <div class="box-order__info__item">
 
-				<h2 id="js-label-{{ form.transport.vars.id }}">{{ 'Shipping selection'|trans }}</h2>
+                <h2 id="js-label-{{ form.transport.vars.id }}">{{ 'Shipping selection'|trans }}</h2>
 
-				<div class="box-chooser js-form-group">
-					{{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
+                <div class="box-chooser js-form-group">
+                    {{ form_errors(form.transport, { errors_attr: {class: 'form-error--inline'} }) }}
 
-					<div id="{{ form.transport.vars.id }}">
-						{% for child in form.transport %}
-							{% set choice = form.transport.vars.choices[child.vars.name] %}
-							{% set transportPrice = transportsPrices[choice.data.id] %}
-							<label class="box-chooser__item">
-								<span class="box-chooser__item__check">
-									{{ form_widget(child, { attr: { class: 'js-order-transport-input', 'data-id': choice.data.id} }) }}
-								</span>
+                    <div id="{{ form.transport.vars.id }}">
+                        {% for child in form.transport %}
+                            {% set choice = form.transport.vars.choices[child.vars.name] %}
+                            {% set transportPrice = transportsPrices[choice.data.id] %}
+                            <label class="box-chooser__item">
+                                <span class="box-chooser__item__check">
+                                    {{ form_widget(child, { attr: { class: 'js-order-transport-input', 'data-id': choice.data.id} }) }}
+                                </span>
 
-								<span class="box-chooser__item__image">
-									{% if imageExists(choice.data) %}
-										{{ image(choice.data) }}
-									{% endif %}
-								</span>
+                                <span class="box-chooser__item__image">
+                                    {% if imageExists(choice.data) %}
+                                        {{ image(choice.data) }}
+                                    {% endif %}
+                                </span>
 
-								<span class="box-chooser__item__title">
-									<strong class="box-chooser__item__title__name">
-										{{ choice.data.name }}
-									</strong>
-									{% if choice.data.description %}
-										<span class="box-chooser__item__title__description">
-											- {{ choice.data.description }}
-										</span>
-									{% endif %}
-								</span>
+                                <span class="box-chooser__item__title">
+                                    <strong class="box-chooser__item__title__name">
+                                        {{ choice.data.name }}
+                                    </strong>
+                                    {% if choice.data.description %}
+                                        <span class="box-chooser__item__title__description">
+                                            - {{ choice.data.description }}
+                                        </span>
+                                    {% endif %}
+                                </span>
 
-								<span class="box-chooser__item__price">
-									{{ transportPrice.priceWithVat|priceText }}
-								</span>
-							</label>
-						{% else %}
-							{% do form.transport.setRendered %}
-							{{ 'Nothing to choose from'|trans }}
-						{% endfor %}
-					</div>
-				</div>
-			</div>
+                                <span class="box-chooser__item__price">
+                                    {{ transportPrice.priceWithVat|priceText }}
+                                </span>
+                            </label>
+                        {% else %}
+                            {% do form.transport.setRendered %}
+                            {{ 'Nothing to choose from'|trans }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
 
-			<div class="box-order__info__item">
+            <div class="box-order__info__item">
 
-				<h2 id="js-label-{{ form.payment.vars.id }}">{{ 'Payment selection'|trans }}</h2>
+                <h2 id="js-label-{{ form.payment.vars.id }}">{{ 'Payment selection'|trans }}</h2>
 
-				<div class="box-chooser box-chooser--smaller js-form-group">
-					{{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
+                <div class="box-chooser box-chooser--smaller js-form-group">
+                    {{ form_errors(form.payment, { errors_attr: {class: 'form-error--inline'} }) }}
 
-					<div id="{{ form.payment.vars.id }}">
-						{% for child in form.payment %}
-							{% set choice = form.payment.vars.choices[child.vars.name] %}
-							{% set paymentPrice = paymentsPrices[choice.data.id] %}
-							<label class="box-chooser__item">
-								<span class="box-chooser__item__check">
-									{{ form_widget(child, { attr: { class: 'js-order-payment-input', 'data-id': choice.data.id} }) }}
-								</span>
+                    <div id="{{ form.payment.vars.id }}">
+                        {% for child in form.payment %}
+                            {% set choice = form.payment.vars.choices[child.vars.name] %}
+                            {% set paymentPrice = paymentsPrices[choice.data.id] %}
+                            <label class="box-chooser__item">
+                                <span class="box-chooser__item__check">
+                                    {{ form_widget(child, { attr: { class: 'js-order-payment-input', 'data-id': choice.data.id} }) }}
+                                </span>
 
-								<span class="box-chooser__item__image">
-									{% if imageExists(choice.data) %}
-										{{ image(choice.data) }}
-									{% endif %}
-								</span>
+                                <span class="box-chooser__item__image">
+                                    {% if imageExists(choice.data) %}
+                                        {{ image(choice.data) }}
+                                    {% endif %}
+                                </span>
 
-								<span class="box-chooser__item__title">
-									<strong class="box-chooser__title__name">
-										{{ choice.data.name }}
-									</strong>
-									{% if choice.data.description %}
-										<span class="box-chooser__item__title__description">
-											- {{ choice.data.description }}
-										</span>
-									{% endif %}
-								</span>
+                                <span class="box-chooser__item__title">
+                                    <strong class="box-chooser__title__name">
+                                        {{ choice.data.name }}
+                                    </strong>
+                                    {% if choice.data.description %}
+                                        <span class="box-chooser__item__title__description">
+                                            - {{ choice.data.description }}
+                                        </span>
+                                    {% endif %}
+                                </span>
 
-								<span class="box-chooser__item__price">
-									{{ paymentPrice.priceWithVat|priceText }}
-								</span>
-							</label>
-						{% else %}
-							{% do form.payment.setRendered %}
-							{{ 'Nothing to choose from'|trans }}
-						{% endfor %}
-					</div>
-				</div>
-			</div>
-		</div>
+                                <span class="box-chooser__item__price">
+                                    {{ paymentPrice.priceWithVat|priceText }}
+                                </span>
+                            </label>
+                        {% else %}
+                            {% do form.payment.setRendered %}
+                            {{ 'Nothing to choose from'|trans }}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
-			{{ render(controller('ShopsysShopBundle:Front/Order:preview', {
-				transportId: transport is empty ? null : transport.id,
-				paymentId: payment is empty ? null : payment.id
-			})) }}
-		</div>
-	</div>
+        <div id="js-order-preview" class="box-order__cart" data-url="{{ url('front_order_preview') }}">
+            {{ render(controller('ShopsysShopBundle:Front/Order:preview', {
+                transportId: transport is empty ? null : transport.id,
+                paymentId: payment is empty ? null : payment.id
+            })) }}
+        </div>
+    </div>
 
-	<div class="in-action">
-		<div class="in-action__right">
-			{{ form_widget(form.save, { label: 'Continue in order'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
-		</div>
+    <div class="in-action">
+        <div class="in-action__right">
+            {{ form_widget(form.save, { label: 'Continue in order'|trans, attr: { class: 'btn btn--success in-action__btn in-action__btn--big' } }) }}
+        </div>
 
-		<div class="in-action__left">
-			<button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
-				{{ 'Back to cart'|trans }}
-			</button>
-		</div>
-	</div>
+        <div class="in-action__left">
+            <button type="submit" name="{{ flow.getFormTransitionKey() }}" value="back" class="btn in-action__btn js-no-validate-button">
+                {{ 'Back to cart'|trans }}
+            </button>
+        </div>
+    </div>
 {% endblock %}

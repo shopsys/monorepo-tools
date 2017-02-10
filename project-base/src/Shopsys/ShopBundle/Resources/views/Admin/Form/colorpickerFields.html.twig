@@ -1,6 +1,6 @@
 {% block color_picker_widget %}
-	{% spaceless %}
-		{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-color-picker input')|trim)}) %}
-		<input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
-	{% endspaceless %}
+    {% spaceless %}
+        {% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-color-picker input')|trim)}) %}
+        <input type="text" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
 {% endblock color_picker_widget %}

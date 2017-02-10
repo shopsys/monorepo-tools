@@ -1,11 +1,11 @@
 {% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block meta_robots -%}
-	<meta name="robots" content="noindex, follow">
+    <meta name="robots" content="noindex, follow">
 {% endblock %}
 
 {% block title %}
-	{{ 'Order completed'|trans }}
+    {{ 'Order completed'|trans }}
 {% endblock %}
 
 {% block breadcrumb %}
@@ -13,21 +13,21 @@
 
 {% block main_content %}
 
-	{{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
-	{{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageGoogleAnalyticsScript', {order: order})) }}
+    {{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageScripts', {order: order})) }}
+    {{ render(controller('ShopsysShopBundle:Front/Script:embedOrderSentPageGoogleAnalyticsScript', {order: order})) }}
 
-	<h1>{{ 'Order sent'|trans }}</h1>
+    <h1>{{ 'Order sent'|trans }}</h1>
 
-	<div class="in-user-text">
-		{{ orderConfirmationText|raw }}
-	</div>
+    <div class="in-user-text">
+        {{ orderConfirmationText|raw }}
+    </div>
 
-	<div class="in-action">
-		<div class="in-action__left">
-			<a href="{{ url('front_homepage') }}" class="btn in-action__btn">
-				{{ 'Back to store'|trans }}
-			</a>
-		</div>
-	</div>
+    <div class="in-action">
+        <div class="in-action__left">
+            <a href="{{ url('front_homepage') }}" class="btn in-action__btn">
+                {{ 'Back to store'|trans }}
+            </a>
+        </div>
+    </div>
 
 {% endblock %}

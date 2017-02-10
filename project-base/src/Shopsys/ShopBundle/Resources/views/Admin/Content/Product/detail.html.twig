@@ -5,439 +5,439 @@
 {% block h1 %}{% endblock %}
 
 {% block header %}
-	<header class="web__header">
-		<div class="web__header__in web__header__in--small">
-			<div class="top-info">
-				<div class="top-info__logo">
-					<span class="sprite sprite-logo"></span>
-				</div>
-				<div class="top-info__text">
-					<h1 class="top-info__text__title">{% block product_header_heading %}{% endblock %}</h1>
-				</div>
-			</div>
-		</div>
-	</header>
+    <header class="web__header">
+        <div class="web__header__in web__header__in--small">
+            <div class="top-info">
+                <div class="top-info__logo">
+                    <span class="sprite sprite-logo"></span>
+                </div>
+                <div class="top-info__text">
+                    <h1 class="top-info__text__title">{% block product_header_heading %}{% endblock %}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock %}
 
 {% block menu_panel %}
-	<div class="panel">
-		<ul class="anchor-menu js-product-detail-navigation"></ul>
-	</div>
-	{% block menu_panel_visibilities %}{% endblock %}
+    <div class="panel">
+        <ul class="anchor-menu js-product-detail-navigation"></ul>
+    </div>
+    {% block menu_panel_visibilities %}{% endblock %}
 {% endblock %}
 
 {% block breadcrumb %}{% endblock %}
 
 {% block main_content %}
-	{% if isMultidomain() %}
-		{% set cssClassOnMultidomainInputs = 'input--domain' %}
-	{% else %}
-		{% set cssClassOnMultidomainInputs = '' %}
-	{% endif %}
+    {% if isMultidomain() %}
+        {% set cssClassOnMultidomainInputs = 'input--domain' %}
+    {% else %}
+        {% set cssClassOnMultidomainInputs = '' %}
+    {% endif %}
 
-	{{ form_start(form) }}
-		<div id="product_edit_form_productData"></div>
-		{{ form_errors(form) }}
+    {{ form_start(form) }}
+        <div id="product_edit_form_productData"></div>
+        {{ form_errors(form) }}
 
-		<div class="wrap-border wrap-border--small">
-			<div class="form-full">
-				<div class="form-full__title">
-					<div class="form-full__title__in">{{ 'Name'|trans }}</div>
-					<div class="form-full__title__buttons"></div>
-				</div>
-				{% for locale, formName in form.productData.name %}
-					<div class="form-full__field">
-						<div class="input__wrap">
-							{{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
-							<span class="input__flag">
-								{{ localeFlag(locale) }}
-							</span>
-						</div>
-						{{ form_errors(formName) }}
-					</div>
-				{% endfor %}
-			</div>
-		</div>
+        <div class="wrap-border wrap-border--small">
+            <div class="form-full">
+                <div class="form-full__title">
+                    <div class="form-full__title__in">{{ 'Name'|trans }}</div>
+                    <div class="form-full__title__buttons"></div>
+                </div>
+                {% for locale, formName in form.productData.name %}
+                    <div class="form-full__field">
+                        <div class="input__wrap">
+                            {{ form_widget(formName, { attr: { class: 'input--flag form-full__field__input'} }) }}
+                            <span class="input__flag">
+                                {{ localeFlag(locale) }}
+                            </span>
+                        </div>
+                        {{ form_errors(formName) }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
-		{% block product_variants %}{% endblock %}
+        {% block product_variants %}{% endblock %}
 
-		<div class="form-group wrap-border">
+        <div class="form-group wrap-border">
 
-			<div class="form-group__title">
-				{{ 'Default settings'|trans }}
-			</div>
+            <div class="form-group__title">
+                {{ 'Default settings'|trans }}
+            </div>
 
-			{% block product_catnum %}
-				{{ form_row(form.productData.catnum, { label: 'Catalogue number'|trans }) }}
-			{% endblock %}
+            {% block product_catnum %}
+                {{ form_row(form.productData.catnum, { label: 'Catalogue number'|trans }) }}
+            {% endblock %}
 
-			{% block product_partno %}
-				{{ form_row(form.productData.partno, { label: 'PartNo (serial number)'|trans }) }}
-			{% endblock %}
+            {% block product_partno %}
+                {{ form_row(form.productData.partno, { label: 'PartNo (serial number)'|trans }) }}
+            {% endblock %}
 
-			{% block product_ean %}
-				{{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
-			{% endblock %}
+            {% block product_ean %}
+                {{ form_row(form.productData.ean, { label: 'EAN'|trans }) }}
+            {% endblock %}
 
-			{{ form_id(product|default(null)) }}
+            {{ form_id(product|default(null)) }}
 
-			{{ form_row(form.productData.flags, { label: 'Flags'|trans}) }}
+            {{ form_row(form.productData.flags, { label: 'Flags'|trans}) }}
 
-			{{ form_row(form.productData.brand, { label: 'Brand'|trans}) }}
+            {{ form_row(form.productData.brand, { label: 'Brand'|trans}) }}
 
-		</div>
+        </div>
 
-		<div class="form-group wrap-border">
+        <div class="form-group wrap-border">
 
-			<div class="form-group__title">
-				{{ 'Display and availability'|trans }}
-			</div>
+            <div class="form-group__title">
+                {{ 'Display and availability'|trans }}
+            </div>
 
-			{{ form_row(form.productData.hidden, { label: 'Hide product'|trans }) }}
+            {{ form_row(form.productData.hidden, { label: 'Hide product'|trans }) }}
 
-			{% block product_calculated_hidden_info %}{% endblock %}
+            {% block product_calculated_hidden_info %}{% endblock %}
 
-			{{ form_row(form.productData.sellingFrom, { label: 'Selling start date'|trans }) }}
+            {{ form_row(form.productData.sellingFrom, { label: 'Selling start date'|trans }) }}
 
-			{{ form_row(form.productData.sellingTo, { label: 'Selling end date'|trans }) }}
+            {{ form_row(form.productData.sellingTo, { label: 'Selling end date'|trans }) }}
 
-			{{ form_row(form.productData.sellingDenied, { label: 'Exclude from sale'|trans,
-				icon: {
-					title: 'Products excluded from sale can\'t be displayed on lists and can\'t be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart.'|trans
-				} }) }}
+            {{ form_row(form.productData.sellingDenied, { label: 'Exclude from sale'|trans,
+                icon: {
+                    title: 'Products excluded from sale can\'t be displayed on lists and can\'t be searched. Product detail is available by direct access from the URL, but it is not possible to add product to cart.'|trans
+                } }) }}
 
-			{% block product_calculated_selling_denied_info %}{% endblock %}
+            {% block product_calculated_selling_denied_info %}{% endblock %}
 
-			{% block product_main_categories %}{% endblock %}
+            {% block product_main_categories %}{% endblock %}
 
-			{% block product_categories %}
-				<div class="form-line">
-					{{ form_label(form.productData.categoriesByDomainId, 'Assign to category'|trans) }}
-					<div class="form-line__line">
-						{% for domainId, categoriesForm in form.productData.categoriesByDomainId %}
-							<div class="form-line__box">
-								{% if isMultidomain() %}
-									<div class="form-line__group form-line__box__title">
-										<span class="form-line__group__image">
-											<span class="in-image in-image--large">
-												<span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
-											</span>
-										</span>
-										<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-									</div>
-								{% endif %}
-								<div{% if isMultidomain() %} class="form-line__box__content"{% endif %}>
-									{{ form_widget(categoriesForm) }}
-									{{ form_errors(categoriesForm) }}
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				</div>
-			{% endblock %}
+            {% block product_categories %}
+                <div class="form-line">
+                    {{ form_label(form.productData.categoriesByDomainId, 'Assign to category'|trans) }}
+                    <div class="form-line__line">
+                        {% for domainId, categoriesForm in form.productData.categoriesByDomainId %}
+                            <div class="form-line__box">
+                                {% if isMultidomain() %}
+                                    <div class="form-line__group form-line__box__title">
+                                        <span class="form-line__group__image">
+                                            <span class="in-image in-image--large">
+                                                <span class="in-image__in in-image__in--{{ domainId }}" title="{{ getDomainName(domainId) }}">{{ domainId }}</span>
+                                            </span>
+                                        </span>
+                                        <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+                                    </div>
+                                {% endif %}
+                                <div{% if isMultidomain() %} class="form-line__box__content"{% endif %}>
+                                    {{ form_widget(categoriesForm) }}
+                                    {{ form_errors(categoriesForm) }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endblock %}
 
-			{{ form_row(form.productData.unit, { label: 'Unit'|trans }) }}
+            {{ form_row(form.productData.unit, { label: 'Unit'|trans }) }}
 
-			{% block product_stock_and_availability %}
-				{{ form_row(form.productData.usingStock, { label: 'Use stocks'|trans }) }}
-				<div class="js-product-using-stock form-line__js">
-					{{ form_row(form.productData.stockQuantity, { label: 'Available in stock'|trans }) }}
-					{{ form_row(form.productData.outOfStockAction, { label: 'Action after sellout'|trans }) }}
-					<div class="js-product-using-stock-and-alternate-availability">
-						{{ form_row(form.productData.outOfStockAvailability, { label: 'Availability after sellout'|trans }) }}
-					</div>
-				</div>
-				<div class="js-product-not-using-stock form-line__js">
-					{{ form_row(form.productData.availability, { label: 'Availability'|trans }) }}
-				</div>
-			{% endblock %}
+            {% block product_stock_and_availability %}
+                {{ form_row(form.productData.usingStock, { label: 'Use stocks'|trans }) }}
+                <div class="js-product-using-stock form-line__js">
+                    {{ form_row(form.productData.stockQuantity, { label: 'Available in stock'|trans }) }}
+                    {{ form_row(form.productData.outOfStockAction, { label: 'Action after sellout'|trans }) }}
+                    <div class="js-product-using-stock-and-alternate-availability">
+                        {{ form_row(form.productData.outOfStockAvailability, { label: 'Availability after sellout'|trans }) }}
+                    </div>
+                </div>
+                <div class="js-product-not-using-stock form-line__js">
+                    {{ form_row(form.productData.availability, { label: 'Availability'|trans }) }}
+                </div>
+            {% endblock %}
 
-			{{ form_row(form.productData.orderingPriority, { label: 'Sorting priority'|trans }) }}
+            {{ form_row(form.productData.orderingPriority, { label: 'Sorting priority'|trans }) }}
 
-		</div>
+        </div>
 
-		<div class="form-group wrap-border">
+        <div class="form-group wrap-border">
 
-			<div class="form-group__title">
-				{{ 'Prices'|trans }}
-			</div>
+            <div class="form-group__title">
+                {{ 'Prices'|trans }}
+            </div>
 
-			{% block product_pricing %}
-				{{ form_row(form.productData.priceCalculationType, { label: 'Sale prices calculation'|trans }) }}
-				{{ form_row(form.productData.vat, { label: 'VAT'|trans }) }}
+            {% block product_pricing %}
+                {{ form_row(form.productData.priceCalculationType, { label: 'Sale prices calculation'|trans }) }}
+                {{ form_row(form.productData.vat, { label: 'VAT'|trans }) }}
 
-				{% block product_calculated_prices %}{% endblock %}
-			{% endblock %}
+                {% block product_calculated_prices %}{% endblock %}
+            {% endblock %}
 
-		</div>
+        </div>
 
-		<div class="form-group wrap-border">
-			{% block product_description %}
-				<div class="form-group__title">
-					{{ 'Description'|trans }}
-				</div>
+        <div class="form-group wrap-border">
+            {% block product_description %}
+                <div class="form-group__title">
+                    {{ 'Description'|trans }}
+                </div>
 
-				{% for domainId, descriptionForm in form.descriptions %}
-					{% if isMultidomain() %}
-						<div class="form-line form-line--no-padd">
-							<div class="form-line__group">
-								<span class="form-line__group__image">
-									{{ domainIcon(domainId, 'large') }}
-								</span>
-								<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-							</div>
-						</div>
-					{% endif %}
-					<div class="form-line">
-						<div class="form-line__line form-line__line--no-space">
-							{{ form_widget(descriptionForm) }}
-						</div>
-					</div>
+                {% for domainId, descriptionForm in form.descriptions %}
+                    {% if isMultidomain() %}
+                        <div class="form-line form-line--no-padd">
+                            <div class="form-line__group">
+                                <span class="form-line__group__image">
+                                    {{ domainIcon(domainId, 'large') }}
+                                </span>
+                                <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="form-line">
+                        <div class="form-line__line form-line__line--no-space">
+                            {{ form_widget(descriptionForm) }}
+                        </div>
+                    </div>
 
-				{% endfor %}
-			{% endblock %}
-		</div>
+                {% endfor %}
+            {% endblock %}
+        </div>
 
-		<div class="form-group wrap-border">
-			{% block product_short_description %}
-				<div class="form-group__title">
-					{{ 'Short description'|trans }}
-				</div>
+        <div class="form-group wrap-border">
+            {% block product_short_description %}
+                <div class="form-group__title">
+                    {{ 'Short description'|trans }}
+                </div>
 
-				{% for domainId, shortDescriptionForm in form.shortDescriptions %}
-					{% if isMultidomain() %}
-						<div class="form-line form-line--no-padd">
-							<div class="form-line__group">
-								<span class="form-line__group__image">
-									{{ domainIcon(domainId, 'large') }}
-								</span>
-							<strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
-							</div>
-						</div>
-					{% endif %}
-					<div class="form-line">
-						<div class="form-line__line form-line__line--no-space">
-							{{ form_widget(shortDescriptionForm) }}
-						</div>
-					</div>
-				{% endfor %}
-			{% endblock %}
-		</div>
+                {% for domainId, shortDescriptionForm in form.shortDescriptions %}
+                    {% if isMultidomain() %}
+                        <div class="form-line form-line--no-padd">
+                            <div class="form-line__group">
+                                <span class="form-line__group__image">
+                                    {{ domainIcon(domainId, 'large') }}
+                                </span>
+                            <strong class="form-line__group__name">{{ getDomainName(domainId) }}</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="form-line">
+                        <div class="form-line__line form-line__line--no-space">
+                            {{ form_widget(shortDescriptionForm) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endblock %}
+        </div>
 
-		<div class="js-form-group wrap-border form-group">
-			<div class="form-group__title">
-				<span class="js-validation-label">{{ 'Parameters'|trans }}</span>
+        <div class="js-form-group wrap-border form-group">
+            <div class="form-group__title">
+                <span class="js-validation-label">{{ 'Parameters'|trans }}</span>
 
-				{{ form_errors(form.parameters) }}
-			</div>
-			<table class="table-form" id="product_edit_form_parameters">
-				<thead>
-					<tr class="table-form__row">
-						<th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parameter'|trans }}</th>
-						<th class="table-form__cell table-form__cell--del"></th>
-						<th class="table-form__cell table-form__cell--del-after">{{ 'Value'|trans }}</th>
-						<th class="table-form__cell"></th>
-					</tr>
-				</thead>
-				<tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
-					{% macro parameterRow(parameter, index) %}
-						<tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
-							<td class="table-form__cell table-form__cell--del-before">
-								{{ form_widget(parameter.parameter, { isSimple: true} ) }}
-							</td>
-							<td class="table-form__cell table-form__cell--del">
-								<span class="svg svg-arrow-right"></span>
-							</td>
-							<td class="table-form__cell  table-form__cell--del-after">
-								{% for locale, valueTextLocaleForm in parameter.valueText %}
-									<div class="input__wrap">
-										{{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
-										<span class="input__flag">
-											{{ localeFlag(locale) }}
-										</span>
-										{{ form_errors(valueTextLocaleForm, { errors_attr: { class: 'table-form__cell__error' } } ) }}
-									</div>
-								{% endfor %}
-							</td>
-							<td class="table-form__cell text-right">
-								<a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
-							</td>
-						</tr>
-					{% endmacro %}
+                {{ form_errors(form.parameters) }}
+            </div>
+            <table class="table-form" id="product_edit_form_parameters">
+                <thead>
+                    <tr class="table-form__row">
+                        <th class="table-form__cell table-form__cell--del-before table-form__cell--label">{{ 'Parameter'|trans }}</th>
+                        <th class="table-form__cell table-form__cell--del"></th>
+                        <th class="table-form__cell table-form__cell--del-after">{{ 'Value'|trans }}</th>
+                        <th class="table-form__cell"></th>
+                    </tr>
+                </thead>
+                <tbody class="js-parameters" data-prototype="{{ _self.parameterRow(form.parameters.vars.prototype)|escape }}" data-index="{{ form.parameters|length }}">
+                    {% macro parameterRow(parameter, index) %}
+                        <tr class="js-parameters-item js-form-group table-form__row" data-index="{{ index }}">
+                            <td class="table-form__cell table-form__cell--del-before">
+                                {{ form_widget(parameter.parameter, { isSimple: true} ) }}
+                            </td>
+                            <td class="table-form__cell table-form__cell--del">
+                                <span class="svg svg-arrow-right"></span>
+                            </td>
+                            <td class="table-form__cell  table-form__cell--del-after">
+                                {% for locale, valueTextLocaleForm in parameter.valueText %}
+                                    <div class="input__wrap">
+                                        {{ form_widget(valueTextLocaleForm, { attr: { class: 'input--flag'} })  }}
+                                        <span class="input__flag">
+                                            {{ localeFlag(locale) }}
+                                        </span>
+                                        {{ form_errors(valueTextLocaleForm, { errors_attr: { class: 'table-form__cell__error' } } ) }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                            <td class="table-form__cell text-right">
+                                <a href="#" class="js-parameters-item-remove table-form__action"><i class="svg svg-circle-cross"></i></a>
+                            </td>
+                        </tr>
+                    {% endmacro %}
 
-					{% for key, parameter in form.parameters %}
-						{{ _self.parameterRow(parameter, key) }}
-					{% else %}
-						{% do form.parameters.setRendered %}
-					{% endfor %}
+                    {% for key, parameter in form.parameters %}
+                        {{ _self.parameterRow(parameter, key) }}
+                    {% else %}
+                        {% do form.parameters.setRendered %}
+                    {% endfor %}
 
-					<tr class="js-parameters-empty-item table-form__row">
-						<td class="table-form__cell" colspan="4">{{ 'Add some parameters'|trans }}</td>
-					</tr>
-				</tbody>
-			</table>
+                    <tr class="js-parameters-empty-item table-form__row">
+                        <td class="table-form__cell" colspan="4">{{ 'Add some parameters'|trans }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-			<div class="form-line form-line--no-top-border">
-				<div class="form-line__line form-line__line--no-space">
-					<a href="#" class="js-parameters-item-add btn btn--plus">
-						<i class="btn__icon">+</i>
-						{{ 'Add another parameter'|trans }}
-					</a>
-				</div>
-			</div>
-		</div>
+            <div class="form-line form-line--no-top-border">
+                <div class="form-line__line form-line__line--no-space">
+                    <a href="#" class="js-parameters-item-add btn btn--plus">
+                        <i class="btn__icon">+</i>
+                        {{ 'Add another parameter'|trans }}
+                    </a>
+                </div>
+            </div>
+        </div>
 
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'SEO'|trans }}
-			</div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'SEO'|trans }}
+            </div>
 
-			<div class="form-line">
-				<strong class="form-line__label">
-					{{ 'Headline'|trans }}:
-				</strong>
-				{% for domainId, seoTitleForm in form.seoTitles %}
-					<div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
-						<div class="form-line__item form-line__item--left">
-							<div class="input__wrap">
-								{{ form_widget(seoTitleForm, {
-									multidomain: true,
-									domainId: domainId,
-									attr: {
-										class: 'js-dynamic-placeholder js-characters-counter-input ' ~ cssClassOnMultidomainInputs,
-										'data-placeholder-source-input-id': 'product_edit_form_productData_name_' ~ seoTitleForm.vars.domainConfig.locale
-									}
-								}) }}
-								{% if isMultidomain() %}
-									<span class="input__domain">
-										{{ domainIcon(domainId) }}
-									</span>
-								{% endif %}
-							</div>
-						</div>
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ 'Headline'|trans }}:
+                </strong>
+                {% for domainId, seoTitleForm in form.seoTitles %}
+                    <div class="form-line__side {% if not loop.first %}mt5{% endif %} js-characters-counter">
+                        <div class="form-line__item form-line__item--left">
+                            <div class="input__wrap">
+                                {{ form_widget(seoTitleForm, {
+                                    multidomain: true,
+                                    domainId: domainId,
+                                    attr: {
+                                        class: 'js-dynamic-placeholder js-characters-counter-input ' ~ cssClassOnMultidomainInputs,
+                                        'data-placeholder-source-input-id': 'product_edit_form_productData_name_' ~ seoTitleForm.vars.domainConfig.locale
+                                    }
+                                }) }}
+                                {% if isMultidomain() %}
+                                    <span class="input__domain">
+                                        {{ domainIcon(domainId) }}
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
 
-						<div class="form-line__count">
-							<span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></span>
-						</div>
-						{{ form_errors(seoTitleForm) }}
-					</div>
-				{% endfor %}
-			</div>
+                        <div class="form-line__count">
+                            <span class="form-line__count__desc js-characters-counter-info" data-recommended-length="60"></span>
+                        </div>
+                        {{ form_errors(seoTitleForm) }}
+                    </div>
+                {% endfor %}
+            </div>
 
-			<div class="form-line">
-				<strong class="form-line__label">
-					{{ 'Meta description'|trans }}:
-				</strong>
+            <div class="form-line">
+                <strong class="form-line__label">
+                    {{ 'Meta description'|trans }}:
+                </strong>
 
-				{% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
-					<div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
-						<div class="form-line__item form-line__item--left">
-							<span class="input__wrap">
-								{{ form_widget(seoMetaDescriptionForm, {
-									multidomain: true, 
-									domainId: domainId,
-									attr: {
-										class: 'js-characters-counter-input input--seo ' ~ cssClassOnMultidomainInputs
-									}
-								}) }}
-								{% if isMultidomain() %}
-									<span class="input__domain">
-										{{ domainIcon(domainId) }}
-									</span>
-								{% endif %}
-							</span>
-						</div>
+                {% for domainId, seoMetaDescriptionForm in form.seoMetaDescriptions %}
+                    <div class="form-line__side {% if not loop.first %}margin-top-5{% endif %} js-characters-counter">
+                        <div class="form-line__item form-line__item--left">
+                            <span class="input__wrap">
+                                {{ form_widget(seoMetaDescriptionForm, {
+                                    multidomain: true, 
+                                    domainId: domainId,
+                                    attr: {
+                                        class: 'js-characters-counter-input input--seo ' ~ cssClassOnMultidomainInputs
+                                    }
+                                }) }}
+                                {% if isMultidomain() %}
+                                    <span class="input__domain">
+                                        {{ domainIcon(domainId) }}
+                                    </span>
+                                {% endif %}
+                            </span>
+                        </div>
 
-						<div class="form-line__count">
-							<div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
-						</div>
-					</div>
-					{{ form_errors(seoMetaDescriptionForm) }}
-				{% endfor %}
-			</div>
+                        <div class="form-line__count">
+                            <div class="form-line__count__desc js-characters-counter-info" data-recommended-length="155"></div>
+                        </div>
+                    </div>
+                    {{ form_errors(seoMetaDescriptionForm) }}
+                {% endfor %}
+            </div>
 
-			{% block product_urls %}{% endblock %}
-		</div>
+            {% block product_urls %}{% endblock %}
+        </div>
 
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Products search engines'|trans }}
-			</div>
-			<div class="form-line form-line--no-padd">
-				<div class="form-line__group">
-					<strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
-				</div>
-			</div>
-			{{ form_row(form.heurekaCpcValues, { label: 'Maximum price per click'|trans }) }}
-			<div class="form-line form-line--no-padd">
-				<div class="form-line__group">
-					<strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
-				</div>
-			</div>
-			<div class="form-line">
-				{{ form_label(form.showInZboziFeed, 'Offer in feed'|trans) }}
-				{% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
-					<div class="form-line__side">
-						{% if isMultidomain() %}
-							<div class="form-line__item">
-								{{ domainIcon(domainId, 'long-bordered') }}
-							</div>
-						{% endif %}
-						<div class="form-line__item">
-							{{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
-							{{ form_errors(showInZboziFeedForm) }}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			<div class="form-line">
-				<div class="form-line__label">
-					{{ 'Maximum price per click'|trans }}:
-					<i
-						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-						title="{{ 'It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-		 			></i>
-				</div>
-				{{ form_widget(form.zboziCpcValues) }}
-				{{ form_errors(form.zboziCpcValues) }}
-			</div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Products search engines'|trans }}
+            </div>
+            <div class="form-line form-line--no-padd">
+                <div class="form-line__group">
+                    <strong class="form-line__group__name">{{ 'Heureka.cz'|trans }}</strong>
+                </div>
+            </div>
+            {{ form_row(form.heurekaCpcValues, { label: 'Maximum price per click'|trans }) }}
+            <div class="form-line form-line--no-padd">
+                <div class="form-line__group">
+                    <strong class="form-line__group__name">{{ 'Zboží.cz'|trans }}</strong>
+                </div>
+            </div>
+            <div class="form-line">
+                {{ form_label(form.showInZboziFeed, 'Offer in feed'|trans) }}
+                {% for domainId, showInZboziFeedForm in form.showInZboziFeed %}
+                    <div class="form-line__side">
+                        {% if isMultidomain() %}
+                            <div class="form-line__item">
+                                {{ domainIcon(domainId, 'long-bordered') }}
+                            </div>
+                        {% endif %}
+                        <div class="form-line__item">
+                            {{ form_widget(showInZboziFeedForm, { isSimple: true }) }}
+                            {{ form_errors(showInZboziFeedForm) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="form-line">
+                <div class="form-line__label">
+                    {{ 'Maximum price per click'|trans }}:
+                    <i
+                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+                        title="{{ 'It is signed with MAX_CPC tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
+         			></i>
+                </div>
+                {{ form_widget(form.zboziCpcValues) }}
+                {{ form_errors(form.zboziCpcValues) }}
+            </div>
 
-			<div class="form-line">
-				<div class="form-line__label">
-					{{ 'Maximum price per click in offers'|trans }}:
-					<i
-						class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
-						data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
-						title="{{ 'It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
-		 			></i>
-				</div>
-				{{ form_widget(form.zboziCpcSearchValues) }}
-				{{ form_errors(form.zboziCpcSearchValues) }}
-			</div>
-		</div>
+            <div class="form-line">
+                <div class="form-line__label">
+                    {{ 'Maximum price per click in offers'|trans }}:
+                    <i
+                        class="svg svg-info in-icon in-icon--info cursor-help form-line__item form-line__item--text js-tooltip"
+                        data-toggle="tooltip" data-placement="{{ icon.placement|default('right') }}"
+                        title="{{ 'It is signed with MAX_CPC_SEARCH tags in feeds. If not mentioned, this information is not transmitted to the feed.'|trans }}"
+         			></i>
+                </div>
+                {{ form_widget(form.zboziCpcSearchValues) }}
+                {{ form_errors(form.zboziCpcSearchValues) }}
+            </div>
+        </div>
 
-		<div class="form-group wrap-border">
-			<div class="form-group__title">
-				{{ 'Pictures'|trans }}
-			</div>
+        <div class="form-group wrap-border">
+            <div class="form-group__title">
+                {{ 'Pictures'|trans }}
+            </div>
 
-			{% block images %}{% endblock %}
+            {% block images %}{% endblock %}
 
-			{{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' }, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
-			{{ form_errors(form.imagesToUpload) }}
-			{{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
-		</div>
+            {{ form_widget(form.imagesToUpload, { attr: { class: 'box-upload--bordered' }, infoText: 'You can upload following formats: PNG, JPG, GIF'|trans }) }}
+            {{ form_errors(form.imagesToUpload) }}
+            {{ form_widget(form.imagesToDelete, { attr: { style: 'display: none;' } }) }}
+        </div>
 
-		{{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
+        {{ form_row(form.accessories, { label: 'Accessories'|trans }) }}
 
-		{% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
-			{% block fixed_bar_content %}
-				<button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
-				{{ form_save(product|default(null), form) }}
-			{% endblock %}
-		{% endembed %}
+        {% embed '@ShopsysShop/Admin/Inline/FixedBar/fixedBar.html.twig' %}
+            {% block fixed_bar_content %}
+                <button id="js-close-without-saving" type="button" class="btn-link-style">{{ 'Close without saving'|trans }}</button>
+                {{ form_save(product|default(null), form) }}
+            {% endblock %}
+        {% endembed %}
 
-	{{ form_end(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}

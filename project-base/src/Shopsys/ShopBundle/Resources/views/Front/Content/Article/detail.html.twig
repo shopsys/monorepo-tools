@@ -1,17 +1,17 @@
 {% extends '@ShopsysShop/Front/Layout/layoutWithoutPanel.html.twig' %}
 
 {% block title %}
-	{{- article.seoTitle|default(article.name) -}}
+    {{- article.seoTitle|default(article.name) -}}
 {% endblock %}
 
 {% block meta_description %}
-	{{- article.seoMetaDescription|default(getSeoMetaDescription()) -}}
+    {{- article.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
 
 {% block main_content %}
-	<h1>{{ article.name }}</h1>
+    <h1>{{ article.name }}</h1>
 
-	<div class="in-user-text">
-		{{ article.text|raw }}
-	</div>
+    <div class="in-user-text">
+        {{ article.text|raw }}
+    </div>
 {% endblock %}

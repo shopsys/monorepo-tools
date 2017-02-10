@@ -4,61 +4,61 @@
 {% import '@ShopsysShop/Front/Content/Product/productListMacro.html.twig' as productList %}
 
 {% block meta_robots %}
-	{{ paginator.metaRobots(paginationResult) }}
+    {{ paginator.metaRobots(paginationResult) }}
 {% endblock %}
 
 {% block meta_description %}
-	{{- categoryDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
+    {{- categoryDomain.seoMetaDescription|default(getSeoMetaDescription()) -}}
 {% endblock %}
 
 {% block title %}
-	{{ parent() }} - {{ categoryDomain.seoTitle|default(category.name) }}
+    {{ parent() }} - {{ categoryDomain.seoTitle|default(category.name) }}
 {% endblock %}
 
 {% block main_content %}
-	<div class="box-list">
-		{{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
-		<h1>{{ category.name }}</h1>
+    <div class="box-list">
+        {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : POSITION_PRODUCT_LIST})) }}
+        <h1>{{ category.name }}</h1>
 
-		<h2>{{ 'List of subcategories'|trans }}</h2>
+        <h2>{{ 'List of subcategories'|trans }}</h2>
 
-		{{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
+        {{ render(controller('ShopsysShopBundle:Front/Category:categoryList', {categories: visibleChildren})) }}
 
-		{{ render(controller('ShopsysShopBundle:Front/BestsellingProduct:list', { category: category })) }}
+        {{ render(controller('ShopsysShopBundle:Front/BestsellingProduct:list', { category: category })) }}
 
-		<div class="js-product-list-with-filter">
-			{% if paginationResult.results|length > 0 or filterFormSubmited %}
-				<div class="box-filter js-product-filter">
-					{{ productFilterForm.filterForm(
-						filterForm,
-						url('front_product_list', { id: category.id }),
-						url('front_product_list', { id: category.id }),
-						null,
-						'product_list',
-						productFilterCountData,
-						priceRange
-					) }}
-				</div>
-			{% endif %}
+        <div class="js-product-list-with-filter">
+            {% if paginationResult.results|length > 0 or filterFormSubmited %}
+                <div class="box-filter js-product-filter">
+                    {{ productFilterForm.filterForm(
+                        filterForm,
+                        url('front_product_list', { id: category.id }),
+                        url('front_product_list', { id: category.id }),
+                        null,
+                        'product_list',
+                        productFilterCountData,
+                        priceRange
+                    ) }}
+                </div>
+            {% endif %}
 
-			<div class="js-product-list-ajax-filter-products-with-controls">
-				<div>
-					{{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForList')) }}
-				</div>
-				{% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
-			</div>
-		</div>
+            <div class="js-product-list-ajax-filter-products-with-controls">
+                <div>
+                    {{ render(controller('ShopsysShopBundle:Front/Product:selectOrderingModeForList')) }}
+                </div>
+                {% include '@ShopsysShop/Front/Content/Product/productsWithControls.html.twig' with {paginationResult: paginationResult, filterFormSubmited: filterFormSubmited} %}
+            </div>
+        </div>
 
-		<div class="box-list__description">
-			<div class="js-category-description box-list__description__text in-user-text">
-				{{ categoryDomain.description|raw }}
-			</div>
-			<div class="box-list__description__more">
-				<span class="js-category-description-load-more link-style box-list__description__more__btn">
-					{{ 'View more'|trans }}
-				</span>
-			</div>
-		</div>
-	</div>
+        <div class="box-list__description">
+            <div class="js-category-description box-list__description__text in-user-text">
+                {{ categoryDomain.description|raw }}
+            </div>
+            <div class="box-list__description__more">
+                <span class="js-category-description-load-more link-style box-list__description__more__btn">
+                    {{ 'View more'|trans }}
+                </span>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

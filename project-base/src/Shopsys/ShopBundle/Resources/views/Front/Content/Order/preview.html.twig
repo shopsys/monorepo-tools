@@ -1,90 +1,90 @@
 <h2>{{ 'Products in cart overview'|trans }}</h2>
 <table class="table-cart-preview">
-	<tbody>
+    <tbody>
 
-		{% for quantifiedProductKey, quantifiedProduct in orderPreview.quantifiedProducts %}
-			{% set quantifiedProductPrice = orderPreview.quantifiedItemsPrices[quantifiedProductKey] %}
-			{% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
-			<tr class="table-cart-preview__row">
-				<td class="table-cart-preview__cell">
-					<strong>{{ quantifiedProduct.quantity|formatNumber }} {{ quantifiedProduct.product.unit.name }}</strong>
-					{{ quantifiedProduct.product.name }}
-				</td>
-				<td class="table-cart-preview__cell table-cart-preview__cell--price">
-					{{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
-				</td>
-			</tr>
-			{% if quantifiedProductDiscount is not null %}
-				<tr>
-					<td class="table-cart-preview__cell">
-						{{ 'Discount coupon'|trans }} {{ (-orderPreview.promoCodeDiscountPercent)|formatPercent }}
-					</td>
-					<td class="table-cart-preview__cell table-cart-preview__cell--price">
-						{{ (-quantifiedProductDiscount.priceWithVat)|price }}
-					</td>
-				</tr>
-			{% endif %}
-		{% endfor %}
+        {% for quantifiedProductKey, quantifiedProduct in orderPreview.quantifiedProducts %}
+            {% set quantifiedProductPrice = orderPreview.quantifiedItemsPrices[quantifiedProductKey] %}
+            {% set quantifiedProductDiscount = orderPreview.quantifiedItemsDiscounts[quantifiedProductKey] %}
+            <tr class="table-cart-preview__row">
+                <td class="table-cart-preview__cell">
+                    <strong>{{ quantifiedProduct.quantity|formatNumber }} {{ quantifiedProduct.product.unit.name }}</strong>
+                    {{ quantifiedProduct.product.name }}
+                </td>
+                <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                    {{ quantifiedProductPrice.totalPrice.priceWithVat|price }}
+                </td>
+            </tr>
+            {% if quantifiedProductDiscount is not null %}
+                <tr>
+                    <td class="table-cart-preview__cell">
+                        {{ 'Discount coupon'|trans }} {{ (-orderPreview.promoCodeDiscountPercent)|formatPercent }}
+                    </td>
+                    <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                        {{ (-quantifiedProductDiscount.priceWithVat)|price }}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
 
-		{% if orderPreview.transport is not empty %}
-			<tr class="table-cart-preview__row">
-				<td class="table-cart-preview__cell">
-					{{ 'Shipping method'|trans }}: {{ orderPreview.transport.name }}
-				</td>
-				<td class="table-cart-preview__cell table-cart-preview__cell--price">
-					{{ orderPreview.transportPrice.priceWithVat|priceText }}
-				</td>
-			</tr>
-		{% endif %}
+        {% if orderPreview.transport is not empty %}
+            <tr class="table-cart-preview__row">
+                <td class="table-cart-preview__cell">
+                    {{ 'Shipping method'|trans }}: {{ orderPreview.transport.name }}
+                </td>
+                <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                    {{ orderPreview.transportPrice.priceWithVat|priceText }}
+                </td>
+            </tr>
+        {% endif %}
 
-		{% if orderPreview.payment is not empty %}
-			<tr class="table-cart-preview__row">
-				<td class="table-cart-preview__cell">
-					{{ 'Payment method'|trans }}: {{ orderPreview.payment.name }}
-				</td>
-				<td class="table-cart-preview__cell table-cart-preview__cell--price">
-					{{ orderPreview.paymentPrice.priceWithVat|priceText }}
-				</td>
-			</tr>
-		{% endif %}
+        {% if orderPreview.payment is not empty %}
+            <tr class="table-cart-preview__row">
+                <td class="table-cart-preview__cell">
+                    {{ 'Payment method'|trans }}: {{ orderPreview.payment.name }}
+                </td>
+                <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                    {{ orderPreview.paymentPrice.priceWithVat|priceText }}
+                </td>
+            </tr>
+        {% endif %}
 
-		{% if orderPreview.roundingPrice is not empty %}
-			<tr class="table-cart-preview__row">
-				<td class="table-cart-preview__cell">
-					{{ 'Rounding'|trans }}:
-				</td>
-				<td class="table-cart-preview__cell table-cart-preview__cell--price">
-					{{ orderPreview.roundingPrice.priceWithVat|price }}
-				</td>
-			</tr>
-		{% endif %}
+        {% if orderPreview.roundingPrice is not empty %}
+            <tr class="table-cart-preview__row">
+                <td class="table-cart-preview__cell">
+                    {{ 'Rounding'|trans }}:
+                </td>
+                <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                    {{ orderPreview.roundingPrice.priceWithVat|price }}
+                </td>
+            </tr>
+        {% endif %}
 
-		<tr class="table-cart-preview__row table-cart-preview__row--total table-cart-preview__row--important">
-			<td class="table-cart-preview__cell">
-				{{ 'Total price including VAT'|trans }}:
-			</td>
-			<td class="table-cart-preview__cell table-cart-preview__cell--price">
-				{{ orderPreview.totalPrice.priceWithVat|price }}
-			</td>
-		</tr>
+        <tr class="table-cart-preview__row table-cart-preview__row--total table-cart-preview__row--important">
+            <td class="table-cart-preview__cell">
+                {{ 'Total price including VAT'|trans }}:
+            </td>
+            <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                {{ orderPreview.totalPrice.priceWithVat|price }}
+            </td>
+        </tr>
 
-		<tr class="table-cart-preview__row table-cart-preview__row--total">
-			<td class="table-cart-preview__cell">
-				{{ 'Total price excluding VAT'|trans }}:
-			</td>
-			<td class="table-cart-preview__cell table-cart-preview__cell--price">
-				{{ orderPreview.totalPrice.priceWithoutVat|price }}
-			</td>
-		</tr>
+        <tr class="table-cart-preview__row table-cart-preview__row--total">
+            <td class="table-cart-preview__cell">
+                {{ 'Total price excluding VAT'|trans }}:
+            </td>
+            <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                {{ orderPreview.totalPrice.priceWithoutVat|price }}
+            </td>
+        </tr>
 
-		<tr class="table-cart-preview__row table-cart-preview__row--total">
-			<td class="table-cart-preview__cell">
-				{{ 'Total amount of VAT'|trans }}:
-			</td>
-			<td class="table-cart-preview__cell table-cart-preview__cell--price">
-				{{ orderPreview.totalPrice.vatAmount|price }}
-			</td>
-		</tr>
+        <tr class="table-cart-preview__row table-cart-preview__row--total">
+            <td class="table-cart-preview__cell">
+                {{ 'Total amount of VAT'|trans }}:
+            </td>
+            <td class="table-cart-preview__cell table-cart-preview__cell--price">
+                {{ orderPreview.totalPrice.vatAmount|price }}
+            </td>
+        </tr>
 
-	</tbody>
+    </tbody>
 </table>

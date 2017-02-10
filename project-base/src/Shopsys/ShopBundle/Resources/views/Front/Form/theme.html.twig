@@ -1,279 +1,279 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block form_start %}
-	{%- if attr.multipleForm is defined -%}
-		{% if attr.multipleForm %}
-			{{ globalMultipleFormSetting.currentFormIsMultiple() }}
-		{% else %}
-			{{ globalMultipleFormSetting.currentFormIsNotMultiple() }}
-		{% endif %}
-	{%- endif -%}
-	{% set attr = attr|merge({'role': attr.role|default('form')}) %}
-	{% set method = method|upper %}
-	{%- if method in ["GET", "POST"] -%}
-		{% set form_method = method %}
-	{%- else -%}
-		{% set form_method = "POST" %}
-	{%- endif -%}
-	<form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
-		{%- for attrname, attrvalue in attr -%}
-			{{- " " -}}
-			{%- if attrname is sameas('multipleForm') -%}
-			{%- else -%}
-				{{- attrname }}="{{ attrvalue }}"
-			{%- endif -%}
-		{%- endfor -%}
-		{% if multipart %} enctype="multipart/form-data"{% endif %}>
-	{%- if form_method != method -%}
-		<input type="hidden" name="_method" value="{{ method }}" />
-	{%- endif -%}
+    {%- if attr.multipleForm is defined -%}
+        {% if attr.multipleForm %}
+            {{ globalMultipleFormSetting.currentFormIsMultiple() }}
+        {% else %}
+            {{ globalMultipleFormSetting.currentFormIsNotMultiple() }}
+        {% endif %}
+    {%- endif -%}
+    {% set attr = attr|merge({'role': attr.role|default('form')}) %}
+    {% set method = method|upper %}
+    {%- if method in ["GET", "POST"] -%}
+        {% set form_method = method %}
+    {%- else -%}
+        {% set form_method = "POST" %}
+    {%- endif -%}
+    <form name="{{ form.vars.name }}" method="{{ form_method|lower }}" action="{{ action }}"
+        {%- for attrname, attrvalue in attr -%}
+            {{- " " -}}
+            {%- if attrname is sameas('multipleForm') -%}
+            {%- else -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endfor -%}
+        {% if multipart %} enctype="multipart/form-data"{% endif %}>
+    {%- if form_method != method -%}
+        <input type="hidden" name="_method" value="{{ method }}" />
+    {%- endif -%}
 {% endblock form_start %}
 
 {% block form_end %}
-	{{ parent('form_end') }}
-	{{ globalMultipleFormSetting.reset() }}
+    {{ parent('form_end') }}
+    {{ globalMultipleFormSetting.reset() }}
 {% endblock form_end %}
 
 {% block form_row %}
-	<dl class="{{ rowClass|default('form-line') }}">
-		<dt>
-			{{ form_label(form, label) }}
-			{{ block('icon') }}
-		</dt>
-		<dd>
-			{{ form_widget(form) }}
-			{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
-			{{ form_errors(form, { errors_attr: errors_attr } ) }}
-		</dd>
-	</dl>
+    <dl class="{{ rowClass|default('form-line') }}">
+        <dt>
+            {{ form_label(form, label) }}
+            {{ block('icon') }}
+        </dt>
+        <dd>
+            {{ form_widget(form) }}
+            {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
+            {{ form_errors(form, { errors_attr: errors_attr } ) }}
+        </dd>
+    </dl>
 {% endblock form_row %}
 
 {% block checkbox_row %}
-	<dl class="{{ rowClass|default('form-line') }}">
-		<dt></dt>
-		<dd>
-			<div class="form-choice">
-				<div class="form-choice__input">
-					{{ form_widget(form) }}
-				</div>
-				<div class="form-choice__label">
-					{{ form_label(form) }}
-					{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--choice'))}) %}
-					{{ form_errors(form, { errors_attr: errors_attr } ) }}
-					{{ block('icon') }}
-				</div>
-			</div>
-		</dd>
-	</dl>
+    <dl class="{{ rowClass|default('form-line') }}">
+        <dt></dt>
+        <dd>
+            <div class="form-choice">
+                <div class="form-choice__input">
+                    {{ form_widget(form) }}
+                </div>
+                <div class="form-choice__label">
+                    {{ form_label(form) }}
+                    {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--choice'))}) %}
+                    {{ form_errors(form, { errors_attr: errors_attr } ) }}
+                    {{ block('icon') }}
+                </div>
+            </div>
+        </dd>
+    </dl>
 {% endblock checkbox_row %}
 
 {% block textarea_row -%}
-	<dl class="{{ rowClass|default('form-line') }}">
-		<dt>
-			{{ form_label(form, label) }}
-		</dt>
-		<dd>
-			{{- form_widget(form) -}}
-			{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
-			{{ form_errors(form, { errors_attr: errors_attr } ) }}
-		</dd>
-	</dl>
+    <dl class="{{ rowClass|default('form-line') }}">
+        <dt>
+            {{ form_label(form, label) }}
+        </dt>
+        <dd>
+            {{- form_widget(form) -}}
+            {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default('form-error--line'))}) %}
+            {{ form_errors(form, { errors_attr: errors_attr } ) }}
+        </dd>
+    </dl>
 {%- endblock textarea_row %}
 
 {% block form_label %}
-	{% spaceless %}
-		{% if label is not sameas(false) %}
-			{% if not compound %}
-				{% set label_attr = label_attr|merge({'for': id}) %}
-			{% endif %}
-			{% if required %}
-				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-			{% endif %}
-			{% if label is empty %}
-				{% set label = name|humanize %}
-			{% endif %}
-			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-				{{ label }}
-				{% if not withoutColon|default(false) %}:{% endif %}
-				{% if required %}<span class="form-input-required">*</span>{% endif %}
-			</label>
-		{% endif %}
-	{% endspaceless %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                {{ label }}
+                {% if not withoutColon|default(false) %}:{% endif %}
+                {% if required %}<span class="form-input-required">*</span>{% endif %}
+            </label>
+        {% endif %}
+    {% endspaceless %}
 {% endblock form_label %}
 
 {% block checkbox_label %}
-	{% spaceless %}
-		{% set withoutColon = true %}
-		{{ block('form_label') }}
-	{% endspaceless %}
+    {% spaceless %}
+        {% set withoutColon = true %}
+        {{ block('form_label') }}
+    {% endspaceless %}
 {% endblock checkbox_label %}
 
 {% block form_errors %}
-	{% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
-	{% spaceless %}
-		<span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
-			{% if form.parent %}
-				<span class="form-error__icon">
-					<i class="svg svg-warning"></i>
-				</span>
-			{% endif %}
-			<ul class="{{ form.parent ? 'form-error__list' : 'in-message__list' }}">
-				{% if errors|length > 0 %}
-					{% for error in errors %}
-						<li>{{ error.message }}</li>
-					{% endfor %}
-				{% endif %}
-			</ul>
-		</span>
-	{% endspaceless %}
+    {% set errors_attr = errors_attr|default({})|merge({'class': (errors_attr.class|default(''))}) %}
+    {% spaceless %}
+        <span class="js-validation-errors-list js-validation-error-list-{{ form.vars.id }} {{ form.parent ? 'form-error' : 'in-message' }} {{ errors_attr.class }} {{ errors|length > 0 ? '' : 'display-none' }}">
+            {% if form.parent %}
+                <span class="form-error__icon">
+                    <i class="svg svg-warning"></i>
+                </span>
+            {% endif %}
+            <ul class="{{ form.parent ? 'form-error__list' : 'in-message__list' }}">
+                {% if errors|length > 0 %}
+                    {% for error in errors %}
+                        <li>{{ error.message }}</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </span>
+    {% endspaceless %}
 {% endblock form_errors %}
 
 {% block form_widget_simple %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
-	{{ parent('form_widget_simple') }}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
+    {{ parent('form_widget_simple') }}
 {% endblock form_widget_simple %}
 
 {% block textarea_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input input--textarea')|trim}) %}
-	{% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
-	{{ parent('textarea_widget') }}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' input input--textarea')|trim}) %}
+    {% set attr = attr|merge({'rows': (attr.rows|default('8'))}) %}
+    {{ parent('textarea_widget') }}
 {% endblock textarea_widget %}
 
 {% block button_widget %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn')|trim}) %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' btn')|trim}) %}
 
-	{%- if label is empty -%}
-		{%- if label_format is not empty -%}
-			{% set label = label_format|replace({
-				'%name%': name,
-				'%id%': id,
-			}) %}
-		{%- else -%}
-			{% set label = name|humanize %}
-		{%- endif -%}
-	{%- endif -%}
-	<button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label }}</button>
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label }}</button>
 {% endblock button_widget %}
 
 {% block choice_widget_collapsed -%}
-	{% if required and placeholder is none and not placeholder_in_choices and not multiple -%}
-		{% set required = false %}
-	{% endif %}
-	{% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
-	<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-		{% if placeholder is not none -%}
-			<option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder }}</option>
-		{%- endif %}
-		{%- if preferred_choices|length > 0 -%}
-			{% set options = preferred_choices %}
-			{{- block('choice_widget_options') -}}
-			{% if choices|length > 0 and separator is not none -%}
-				<option disabled="disabled">{{ separator }}</option>
-			{%- endif %}
-		{%- endif -%}
-		{% set options = choices -%}
-		{{- block('choice_widget_options') -}}
-	</select>
+    {% if required and placeholder is none and not placeholder_in_choices and not multiple -%}
+        {% set required = false %}
+    {% endif %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' input')|trim}) %}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+        {% if placeholder is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ placeholder }}</option>
+        {%- endif %}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('choice_widget_options') -}}
+            {% if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif %}
+        {%- endif -%}
+        {% set options = choices -%}
+        {{- block('choice_widget_options') -}}
+    </select>
 {%- endblock choice_widget_collapsed %}
 
 {% block choice_widget_options -%}
-	{% for group_label, choice in options %}
-		{%- if choice is iterable -%}
-			<optgroup label="{{ group_label }}">
-				{% set options = choice %}
-				{{- block('choice_widget_options') -}}
-			</optgroup>
-		{%- else -%}
-			<option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
-		{%- endif -%}
-	{% endfor %}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ group_label }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
+        {%- endif -%}
+    {% endfor %}
 {%- endblock choice_widget_options %}
 
 {% block choice_widget_expanded %}
-	{% spaceless %}
-			<div {{ block('widget_container_attributes') }}>
-			{% for child in form %}
-				<div class="radio checkbox">
-					<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-						{{ form_widget(child) }}
-						{{ child.vars.label }}
-					</label>
-				</div>
-			{% else %}
-				{{ empty_message|default('Nothing to choose from.'|trans) }}
-			{% endfor %}
-			</div>
-	{% endspaceless %}
+    {% spaceless %}
+            <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                <div class="radio checkbox">
+                    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                        {{ form_widget(child) }}
+                        {{ child.vars.label }}
+                    </label>
+                </div>
+            {% else %}
+                {{ empty_message|default('Nothing to choose from.'|trans) }}
+            {% endfor %}
+            </div>
+    {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
 {% block widget_attributes -%}
-	{%- if globalMultipleFormSetting.currentFormMultiple -%}
-		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
-		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
-	{%- else -%}
-		{{- " " -}}
-		id="{{ id }}"
-	{%- endif -%}
-	{{- " " -}}
-	name="{{ full_name }}"
-	{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
-	{%- if read_only %} readonly="readonly"{% endif -%}
-	{%- if disabled %} disabled="disabled"{% endif -%}
-	{%- if required %} required="required"{% endif -%}
-	{%- for attrname, attrvalue in attr -%}
-		{{- " " -}}
-		{%- if attrname in ['placeholder', 'title'] -%}
-			{{- attrname }}="{{ attrvalue }}"
-		{%- elseif attrvalue is sameas(true) -%}
-			{{- attrname }}="{{ attrname }}"
-		{%- elseif attrvalue is not sameas(false) -%}
-			{{- attrname }}="{{ attrvalue }}"
-		{%- endif -%}
-	{%- endfor -%}
+    {%- if globalMultipleFormSetting.currentFormMultiple -%}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
+        {%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+    {%- else -%}
+        {{- " " -}}
+        id="{{ id }}"
+    {%- endif -%}
+    {{- " " -}}
+    name="{{ full_name }}"
+    {%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+    {%- if read_only %} readonly="readonly"{% endif -%}
+    {%- if disabled %} disabled="disabled"{% endif -%}
+    {%- if required %} required="required"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- elseif attrvalue is sameas(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not sameas(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
 {%- endblock widget_attributes %}
 
 {% block button_attributes -%}
-	{%- if globalMultipleFormSetting.currentFormMultiple -%}
-		{% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
-		{%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
-	{%- else -%}
-		{{- " " -}}
-		id="{{ id }}"
-	{%- endif -%}
-	{{- " " -}}
-	name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif -%}
-	{%- for attrname, attrvalue in attr -%}
-		{{- " " -}}
-		{%- if attrname in ['placeholder', 'title'] -%}
-			{{- attrname }}="{{ attrvalue }}"
-		{%- elseif attrvalue is sameas(true) -%}
-			{{- attrname }}="{{ attrname }}"
-		{%- elseif attrvalue is not sameas(false) -%}
-			{{- attrname }}="{{ attrvalue }}"
-		{%- endif -%}
-	{%- endfor -%}
+    {%- if globalMultipleFormSetting.currentFormMultiple -%}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' id__' ~ id)|trim}) %}
+        {%- if htmlId|default(false) %} id="{{ htmlId }}"{% endif -%}
+    {%- else -%}
+        {{- " " -}}
+        id="{{ id }}"
+    {%- endif -%}
+    {{- " " -}}
+    name="{{ full_name }}"{% if disabled %} disabled="disabled"{% endif -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- elseif attrvalue is sameas(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not sameas(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
 {%- endblock button_attributes %}
 
 {% block honey_pot_row %}
-	{{ formHoneyPotCheckPasswordAlreadyRendered(form) }}
-	{{ form_row(form, {rowClass: 'js-honey ' ~ rowClass|default('')}) }}
+    {{ formHoneyPotCheckPasswordAlreadyRendered(form) }}
+    {{ form_row(form, {rowClass: 'js-honey ' ~ rowClass|default('')}) }}
 {% endblock honey_pot_row %}
 
 {% block date_picker_widget %}
-	{% spaceless %}
-		{% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker')|trim)}) %}
-		{{- block('form_widget') -}}
-	{% endspaceless %}
+    {% spaceless %}
+        {% set attr = attr|merge({'class': ((attr.class|default('') ~ ' js-date-picker')|trim)}) %}
+        {{- block('form_widget') -}}
+    {% endspaceless %}
 {% endblock date_picker_widget %}
 
 {% block icon %}
-	{% spaceless %}
-		{% if icon is defined %}
-			<i class="{{ icon.format|default('svg') }} {{ icon.format|default('svg') }}-{{ icon.type|default('info') }} {{ icon.class|default('') }}"
-				data-toggle="tooltip"
-				data-placement="{{ icon.data.placement|default('right') }}"
-				title="{{ icon.title }}">
-			</i>
-		{% endif %}
-	{% endspaceless %}
+    {% spaceless %}
+        {% if icon is defined %}
+            <i class="{{ icon.format|default('svg') }} {{ icon.format|default('svg') }}-{{ icon.type|default('info') }} {{ icon.class|default('') }}"
+                data-toggle="tooltip"
+                data-placement="{{ icon.data.placement|default('right') }}"
+                title="{{ icon.title }}">
+            </i>
+        {% endif %}
+    {% endspaceless %}
 {% endblock %}

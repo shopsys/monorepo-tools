@@ -1,12 +1,12 @@
 <div class="box-order-type">
-	{% for orderingMode, orderingModeName in orderingModesNames %}
-		<a
-			href="#"
-			class="box-order-type__item js-product-list-ordering-mode {{ activeOrderingMode == orderingMode ? 'active' }}"
-			data-cookie-name="{{ cookieName }}"
-			data-ordering-mode="{{ orderingMode }}"
-		>
-			{{ orderingModeName }}
-		</a>
-	{% endfor %}
+    {% for orderingMode, orderingModeName in orderingModesNames %}
+        <a
+            href="#"
+            class="box-order-type__item js-product-list-ordering-mode {{ activeOrderingMode == orderingMode ? 'active' }}"
+            data-cookie-name="{{ cookieName }}"
+            data-ordering-mode="{{ orderingMode }}"
+        >
+            {{ orderingModeName }}
+        </a>
+    {% endfor %}
 </div>

@@ -1,12 +1,12 @@
 {{ message }}
 
 <div class="window__actions">
-	<a href="{{ url(route, routeParams) }}" class="window-button-continue button btn js-confirm-delete-direct-link">{{ 'Yes'|trans }}</a>
-	<a
-		class="window-button-close btn"
-		href="#"
-		onclick="$(this).closest('.window').trigger('windowClose'); return false;"
-	>
-		{{ 'No'|trans }}
-	</a>
+    <a href="{{ url(route, routeParams) }}" class="window-button-continue button btn js-confirm-delete-direct-link">{{ 'Yes'|trans }}</a>
+    <a
+        class="window-button-close btn"
+        href="#"
+        onclick="$(this).closest('.window').trigger('windowClose'); return false;"
+    >
+        {{ 'No'|trans }}
+    </a>
 </div>

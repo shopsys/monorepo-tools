@@ -3,64 +3,64 @@
 {% block title %}- {{ 'New product'|trans }}{% endblock %}
 
 {% block product_header_heading %}
-	<span>{{ 'New product'|trans }}</span>
+    <span>{{ 'New product'|trans }}</span>
 {% endblock %}
 
 {% block product_calculated_prices %}
-	<div class="form-price-heading">
-		<div class="form-price-heading__cell form-price-heading__cell--field">
-			{{ inputPriceLabel({ isSimple: true }) }}
-		</div>
-	</div>
-	<div class="form-line js-input-price-type-auto">
-		<div class="form-line__label">
-			{{ form_label(form.productData.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
-		</div>
-		<div class="form-line__side">
-			<div class="form-line__item">
-				{{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
-			</div>
-			{{ form_errors(form.productData.price) }}
-		</div>
-	</div>
-	{% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
-		<div class="js-input-price-type-manual">
-			<div class="form-line form-line--no-padd">
-				<div class="form-line__line form-line__line--no-space">
-					{% if isMultidomain() %}
-						<div class="form-line__group">
-							<span class="form-line__group__image">
-								{{ domainIcon(domainId, 'large') }}
-							</span>
-							<strong class="form-line__group__name">
-								{{ getDomainName(domainId) }}
-							</strong>
-						</div>
-					{% endif %}
-				</div>
-			</div>
-			{% for pricingGroup in pricingGroups %}
-				<div class="form-line">
-					<div class="form-line__label">
-						{{ form_label(form.manualInputPrices[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
-					</div>
-					<div class="form-line__side">
-						<div class="form-line__item js-input-price-type-manual">
-							{{ form_widget(form.manualInputPrices[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
-						</div>
-						<div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
-					</div>
-					{{ form_errors(form.manualInputPrices[pricingGroup.id]) }}
-				</div>
-			{% endfor %}
-		</div>
-	{% endfor %}
+    <div class="form-price-heading">
+        <div class="form-price-heading__cell form-price-heading__cell--field">
+            {{ inputPriceLabel({ isSimple: true }) }}
+        </div>
+    </div>
+    <div class="form-line js-input-price-type-auto">
+        <div class="form-line__label">
+            {{ form_label(form.productData.price, 'Base price'|trans, { isSimple: true, compulsoryClass: 'form-line__compulsory' } ) }}
+        </div>
+        <div class="form-line__side">
+            <div class="form-line__item">
+                {{ form_widget(form.productData.price, { symbolAfterInput: currencySymbolDefault() }) }}
+            </div>
+            {{ form_errors(form.productData.price) }}
+        </div>
+    </div>
+    {% for domainId, pricingGroups in pricingGroupsIndexedByDomainId %}
+        <div class="js-input-price-type-manual">
+            <div class="form-line form-line--no-padd">
+                <div class="form-line__line form-line__line--no-space">
+                    {% if isMultidomain() %}
+                        <div class="form-line__group">
+                            <span class="form-line__group__image">
+                                {{ domainIcon(domainId, 'large') }}
+                            </span>
+                            <strong class="form-line__group__name">
+                                {{ getDomainName(domainId) }}
+                            </strong>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% for pricingGroup in pricingGroups %}
+                <div class="form-line">
+                    <div class="form-line__label">
+                        {{ form_label(form.manualInputPrices[pricingGroup.id], pricingGroup.name, { isSimple: true, compulsoryClass: 'form-line__compulsory' }) }}
+                    </div>
+                    <div class="form-line__side">
+                        <div class="form-line__item js-input-price-type-manual">
+                            {{ form_widget(form.manualInputPrices[pricingGroup.id], { symbolAfterInput: currencySymbolByDomainId(domainId) }) }}
+                        </div>
+                        <div class="form-line__item form-line__item--input-size js-input-price-type-auto">&nbsp;</div>
+                    </div>
+                    {{ form_errors(form.manualInputPrices[pricingGroup.id]) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock %}
 
 {% block product_urls %}
-	{% do form.urls.setRendered %}
+    {% do form.urls.setRendered %}
 {% endblock %}
 
 {% block images %}
-	{% do form.imagePositions.setRendered %}
+    {% do form.imagePositions.setRendered %}
 {% endblock %}

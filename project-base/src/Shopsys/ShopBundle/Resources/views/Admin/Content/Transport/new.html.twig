@@ -3,27 +3,27 @@
 {% block title %}- {{ 'New shipping'|trans }}{% endblock %}
 {% block h1 %}{{ 'New shipping'|trans }}{% endblock %}
 {% block transport_base_prices %}
-	<div id="transport_prices">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>{{ inputPriceLabel() }}</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for currencyId, currency in currencies %}
-					<tr>
-						<td>
-							{{ form_row(
-								form.prices[currencyId], {
-									label: 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}),
-									symbolAfterInput: currencySymbolByCurrencyId(currencyId)
-								}
-							) }}
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+    <div id="transport_prices">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{{ inputPriceLabel() }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currencyId, currency in currencies %}
+                    <tr>
+                        <td>
+                            {{ form_row(
+                                form.prices[currencyId], {
+                                    label: 'Base price in %currencyCode%'|trans({'%currencyCode%': currency.code}),
+                                    symbolAfterInput: currencySymbolByCurrencyId(currencyId)
+                                }
+                            ) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

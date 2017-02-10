@@ -1,25 +1,25 @@
 <div class="footer">
-	<div class="web__line web__line--grey clearfix">
-		<div class="web__container">
-			{{ render(controller('ShopsysShopBundle:Front/Newsletter:subscription')) }}
-		</div>
-	</div>
-	<div class="web__line web__line--split">
-		<div class="web__container footer__top">
-			{{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_FOOTER')})) }}
-		</div>
-	</div>
-	<div class="web__line">
-		<footer class="web__container footer__bottom">
-			<div class="footer__bottom__copyright">
-				&copy; {{ dateOfCreation(2003) }} - <a href="http://www.shopsys.com">ShopSys</a>
-			</div>
+    <div class="web__line web__line--grey clearfix">
+        <div class="web__container">
+            {{ render(controller('ShopsysShopBundle:Front/Newsletter:subscription')) }}
+        </div>
+    </div>
+    <div class="web__line web__line--split">
+        <div class="web__container footer__top">
+            {{ render(controller('ShopsysShopBundle:Front/Advert:box',{'positionName' : constant('Shopsys\\ShopBundle\\Model\\Advert\\AdvertPositionList::POSITION_FOOTER')})) }}
+        </div>
+    </div>
+    <div class="web__line">
+        <footer class="web__container footer__bottom">
+            <div class="footer__bottom__copyright">
+                &copy; {{ dateOfCreation(2003) }} - <a href="http://www.shopsys.com">ShopSys</a>
+            </div>
 
-			<div class="footer__bottom__articles">
-				{{ getShopInfoPhoneNumber() }}
-				{{ getShopInfoEmail() }}
-				{{ render(controller('ShopsysShopBundle:Front/Article:footer')) }}
-			</div>
-		</footer>
-	</div>
+            <div class="footer__bottom__articles">
+                {{ getShopInfoPhoneNumber() }}
+                {{ getShopInfoEmail() }}
+                {{ render(controller('ShopsysShopBundle:Front/Article:footer')) }}
+            </div>
+        </footer>
+    </div>
 </div>

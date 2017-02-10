@@ -5,26 +5,26 @@
 
 {% block main_content %}
 
-	{% set codes = [404, 500] %}
-	{% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
+    {% set codes = [404, 500] %}
+    {% set formats = ['html', 'css', 'js', 'json', 'txt', 'xml'] %}
 
-	<table class="table-main">
-		<thead>
-			<tr>
-				<td>{{ 'Error messages'|trans }}</td>
-			</tr>
-		</thead>
-		<tbody>
-			{% for format in formats %}
-				{% for code in codes %}
-					<tr>
-						<td>
-							<a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a>
-						</td>
-					</tr>
-				{% endfor %}
-			{% endfor %}
-		</tbody>
-	</table>
+    <table class="table-main">
+        <thead>
+            <tr>
+                <td>{{ 'Error messages'|trans }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for format in formats %}
+                {% for code in codes %}
+                    <tr>
+                        <td>
+                            <a href="{{ url('front_error_page_format', { code: code, _format: format }) }}" target="_blank">{{ format }} - {{ code }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

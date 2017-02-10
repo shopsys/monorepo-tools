@@ -1,23 +1,23 @@
 {% extends 'form_div_layout.html.twig' %}
 
 {% block form_row %}
-	<div class="form-line">
-		{{ form_label(form, label) }}
-		{{ form_widget(form) }}
-		{{ form_errors(form) }}
-	</div>
+    <div class="form-line">
+        {{ form_label(form, label) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
 {% endblock form_row %}
 
 {% block checkbox_row %}
-	<div class="form-line">
-		{{ form_widget(form) }}
-		{{ form_label(form, label) }}
-		{{ form_errors(form) }}
-	</div>
+    <div class="form-line">
+        {{ form_widget(form) }}
+        {{ form_label(form, label) }}
+        {{ form_errors(form) }}
+    </div>
 {% endblock checkbox_row %}
 
 {% block form_errors %}
-	{% if errors|length > 0 -%}
+    {% if errors|length > 0 -%}
     <ul class ="form-errors">
         {%- for error in errors -%}
             <li>{{ error.message }}</li>
@@ -27,24 +27,24 @@
 {% endblock form_errors %}
 
 {% block form_label %}
-	{% spaceless %}
-		{% if label is not sameas(false) %}
-			{% if not compound %}
-				{% set label_attr = label_attr|merge({'for': id}) %}
-			{% endif %}
-			{% if required %}
-				{% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-			{% endif %}
-			{% if label is empty %}
-				{% set label = name|humanize %}
-			{% endif %}
-			<label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-				{% if raw is not defined %}
-					{{ label|trans({}, translation_domain) }}{% if not withoutColon|default(false) %}:{% endif %}
-				{% else %}
-					{{ label|raw }}{% if not withoutColon|default(false) %}:{% endif %}
-				{% endif %}
-			</label>
-		{% endif %}
-	{% endspaceless %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+                {% if raw is not defined %}
+                    {{ label|trans({}, translation_domain) }}{% if not withoutColon|default(false) %}:{% endif %}
+                {% else %}
+                    {{ label|raw }}{% if not withoutColon|default(false) %}:{% endif %}
+                {% endif %}
+            </label>
+        {% endif %}
+    {% endspaceless %}
 {% endblock form_label %}

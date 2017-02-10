@@ -1,21 +1,21 @@
 {% if domainConfigs|length > 1 %}
-	<div class="in-domain" role="tablist">
-		{% for domainConfig in domainConfigs %}
-			{% if domainConfig.id == selectedDomainId %}
-				<span class="in-domain__item in-domain__item--active">
-					{{ domainIcon(domainConfig.id) }}
-					<span class="in-domain__item__name">
-						{{ domainConfig.name }}
-					</span>
-				</span>
-			{% else %}
-				<a class="in-domain__item" href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
-					{{ domainIcon(domainConfig.id) }}
-					<span class="in-domain__item__name">
-						{{ domainConfig.name }}
-					</span>
-				</a>
-			{% endif %}
-		{% endfor %}
-	</div>
+    <div class="in-domain" role="tablist">
+        {% for domainConfig in domainConfigs %}
+            {% if domainConfig.id == selectedDomainId %}
+                <span class="in-domain__item in-domain__item--active">
+                    {{ domainIcon(domainConfig.id) }}
+                    <span class="in-domain__item__name">
+                        {{ domainConfig.name }}
+                    </span>
+                </span>
+            {% else %}
+                <a class="in-domain__item" href="{{ url('admin_domain_selectdomain', {id: domainConfig.id}) }}">
+                    {{ domainIcon(domainConfig.id) }}
+                    <span class="in-domain__item__name">
+                        {{ domainConfig.name }}
+                    </span>
+                </a>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endif %}

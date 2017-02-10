@@ -1,13 +1,13 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_no_data %}
-	{{ 'No scripts so far.'|trans }}
+    {{ 'No scripts so far.'|trans }}
 {% endblock %}
 
 {% block grid_value_cell_id_placement %}
-	{% if value == PLACEMENT_ORDER_SENT_PAGE %}
-		{{ 'Order confirmation page'|trans }}
-	{% elseif value == PLACEMENT_ALL_PAGES %}
-		{{ 'All pages'|trans }}
-	{% endif %}
+    {% if value == PLACEMENT_ORDER_SENT_PAGE %}
+        {{ 'Order confirmation page'|trans }}
+    {% elseif value == PLACEMENT_ALL_PAGES %}
+        {{ 'All pages'|trans }}
+    {% endif %}
 {% endblock %}

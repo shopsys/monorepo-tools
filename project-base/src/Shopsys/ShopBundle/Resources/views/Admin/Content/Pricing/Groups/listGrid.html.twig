@@ -1,14 +1,14 @@
 {% extends '@ShopsysShop/Admin/Grid/Grid.html.twig' %}
 
 {% block grid_value_cell_id_coefficient %}
-	{{ value|formatNumber }}
+    {{ value|formatNumber }}
 {% endblock %}
 
 {% block grid_no_data %}
-	{{ 'No pricing groups found. You have to create some first.'|trans }}
+    {{ 'No pricing groups found. You have to create some first.'|trans }}
 {% endblock %}
 
 {% block grid_inline_edit_add_button %}
-	{% set addEntity = 'Create pricing group'|trans %}
-	{{ parent() }}
+    {% set addEntity = 'Create pricing group'|trans %}
+    {{ parent() }}
 {% endblock %}

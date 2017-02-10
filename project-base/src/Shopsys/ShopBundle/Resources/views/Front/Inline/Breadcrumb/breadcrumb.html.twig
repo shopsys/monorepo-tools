@@ -1,19 +1,19 @@
 {% if breadcrumbItems is not null %}
-	<div class="box-breadcrumb">
-		<a href="{{ url('front_homepage') }}" class="box-breadcrumb__item box-breadcrumb__item--icon">
-			<i class="svg svg-home"></i>
-		</a>
-		{% for breadcrumbItem in breadcrumbItems %}
-			<span class="box-breadcrumb__item box-breadcrumb__item--separator"> > </span>
-			{% if breadcrumbItem.routeName is not null %}
-				<a href="{{ url(breadcrumbItem.routeName, breadcrumbItem.routeParameters) }}" class="box-breadcrumb__item">
-					{{- breadcrumbItem.name -}}
-				</a>
-			{% else %}
-				<span class='box-breadcrumb__item'>
-					{{- breadcrumbItem.name -}}
-				</span>
-			{% endif %}
-		{% endfor %}
-	</div>
+    <div class="box-breadcrumb">
+        <a href="{{ url('front_homepage') }}" class="box-breadcrumb__item box-breadcrumb__item--icon">
+            <i class="svg svg-home"></i>
+        </a>
+        {% for breadcrumbItem in breadcrumbItems %}
+            <span class="box-breadcrumb__item box-breadcrumb__item--separator"> > </span>
+            {% if breadcrumbItem.routeName is not null %}
+                <a href="{{ url(breadcrumbItem.routeName, breadcrumbItem.routeParameters) }}" class="box-breadcrumb__item">
+                    {{- breadcrumbItem.name -}}
+                </a>
+            {% else %}
+                <span class='box-breadcrumb__item'>
+                    {{- breadcrumbItem.name -}}
+                </span>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endif %}
