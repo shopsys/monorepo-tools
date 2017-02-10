@@ -46,7 +46,11 @@ class RegistrationPage extends AbstractPage
      */
     private function seeErrorForField($fieldClass, $text)
     {
+        // Error message might be in popup - wait for animation
+        $this->tester->wait(1);
+        // Error message might be in fancy title - hover over field
         $this->tester->moveMouseOverByCss($fieldClass);
+
         $this->tester->see($text);
     }
 }
