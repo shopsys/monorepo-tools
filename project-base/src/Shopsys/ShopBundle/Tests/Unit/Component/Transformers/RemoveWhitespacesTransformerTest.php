@@ -12,7 +12,7 @@ class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase {
             ['value' => 'foo bar', 'expected' => 'foobar'],
             ['value' => 'FooBar', 'expected' => 'FooBar'],
             ['value' => '  foo  bar  ', 'expected' => 'foobar'],
-            ['value' => 'foo	', 'expected' => 'foo'],
+            ['value' => "foo\t", 'expected' => 'foo'],
             ['value' => "fo\no", 'expected' => 'foo'],
             ['value' => null, 'expected' => null],
         ];

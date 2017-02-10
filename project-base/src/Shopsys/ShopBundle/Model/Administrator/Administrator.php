@@ -64,9 +64,9 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit[]
      * @ORM\OneToMany(
-     *	targetEntity="Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit",
-     *	mappedBy="administrator",
-     *	orphanRemoval=true
+     *     targetEntity="Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit",
+     *     mappedBy="administrator",
+     *     orphanRemoval=true
      * )
      */
     private $gridLimits;

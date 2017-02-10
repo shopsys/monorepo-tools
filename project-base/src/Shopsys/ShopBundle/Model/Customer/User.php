@@ -12,13 +12,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Table(
- *   name="users",
- *   uniqueConstraints={
- *		@ORM\UniqueConstraint(name="email_domain", columns={"email", "domain_id"})
- *   },
- *   indexes={
- *     @ORM\Index(columns={"email"})
- *   }
+ *     name="users",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="email_domain", columns={"email", "domain_id"})
+ *     },
+ *     indexes={
+ *         @ORM\Index(columns={"email"})
+ *     }
  * )
  * @ORM\Entity
  *

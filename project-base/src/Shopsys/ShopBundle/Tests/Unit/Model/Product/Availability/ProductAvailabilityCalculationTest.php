@@ -44,10 +44,10 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
         $availabilityFacadeMock->expects($this->any())->method('getDefaultInStockAvailability')
             ->will($this->returnValue($defaultInStockAvailability));
 
-        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class,	[],	[], '',	false);
-        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class,	[],	[], '',	false);
-        $entityManagerMock = $this->getMock(EntityManager::class,	[],	[], '',	false);
-        $productRepositoryMock = $this->getMock(ProductRepository::class,	[],	[], '',	false);
+        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class, [], [], '', false);
+        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class, [], [], '', false);
+        $entityManagerMock = $this->getMock(EntityManager::class, [], [], '', false);
+        $productRepositoryMock = $this->getMock(ProductRepository::class, [], [], '', false);
 
         $productAvailabilityCalculation = new ProductAvailabilityCalculation(
             $availabilityFacadeMock,
@@ -131,11 +131,11 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
         $mainVariant = Product::createMainVariant(new ProductData(), $variants);
 
         $availabilityFacadeMock = $this->getMock(AvailabilityFacade::class, [], [], '', false);
-        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class,	[],	[], '',	false);
-        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class,	[],	[], '',	false);
-        $entityManagerMock = $this->getMock(EntityManager::class,	[],	[], '',	false);
+        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class, [], [], '', false);
+        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class, [], [], '', false);
+        $entityManagerMock = $this->getMock(EntityManager::class, [], [], '', false);
 
-        $productRepositoryMock = $this->getMock(ProductRepository::class,	[],	[], '',	false);
+        $productRepositoryMock = $this->getMock(ProductRepository::class, [], [], '', false);
         $productRepositoryMock
             ->expects($this->atLeastOnce())
             ->method('getAtLeastSomewhereSellableVariantsByMainVariant')
@@ -173,11 +173,11 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase {
             ->expects($this->any())
             ->method('getDefaultInStockAvailability')
             ->willReturn($defaultInStockAvailability);
-        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class,	[],	[], '',	false);
-        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class,	[],	[], '',	false);
-        $entityManagerMock = $this->getMock(EntityManager::class,	[],	[], '',	false);
+        $productSellingDeniedRecalculatorMock = $this->getMock(ProductSellingDeniedRecalculator::class, [], [], '', false);
+        $productVisibilityFacadeMock = $this->getMock(ProductVisibilityFacade::class, [], [], '', false);
+        $entityManagerMock = $this->getMock(EntityManager::class, [], [], '', false);
 
-        $productRepositoryMock = $this->getMock(ProductRepository::class,	[],	[], '',	false);
+        $productRepositoryMock = $this->getMock(ProductRepository::class, [], [], '', false);
         $productRepositoryMock
             ->expects($this->atLeastOnce())
             ->method('getAtLeastSomewhereSellableVariantsByMainVariant')

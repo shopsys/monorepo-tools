@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(
- *   name="friendly_urls",
- *   indexes={
- *		@ORM\Index(columns={"route_name", "entity_id"})
- *   }
+ *     name="friendly_urls",
+ *     indexes={
+ *         @ORM\Index(columns={"route_name", "entity_id"})
+ *     }
  * )
  * @ORM\Entity
  */

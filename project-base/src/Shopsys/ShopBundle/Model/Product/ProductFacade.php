@@ -119,7 +119,7 @@ class ProductFacade {
         ParameterRepository $parameterRepository,
         Domain $domain,
         ProductService $productService,
-        ImageFacade	$imageFacade,
+        ImageFacade $imageFacade,
         ProductPriceRecalculationScheduler $productPriceRecalculationScheduler,
         PricingGroupRepository $pricingGroupRepository,
         ProductManualInputPriceFacade $productManualInputPriceFacade,

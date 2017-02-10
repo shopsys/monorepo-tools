@@ -64,7 +64,7 @@ class PaymentFacade {
         TransportRepository $transportRepository,
         PaymentVisibilityCalculation $paymentVisibilityCalculation,
         Domain $domain,
-        ImageFacade	$imageFacade,
+        ImageFacade $imageFacade,
         CurrencyFacade $currencyFacade,
         PaymentPriceCalculation $paymentPriceCalculation
     ) {

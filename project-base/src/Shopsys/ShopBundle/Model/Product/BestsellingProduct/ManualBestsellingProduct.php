@@ -8,11 +8,11 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 /**
  * @ORM\Table(
- *	name="products_manual_bestselling",
- *	uniqueConstraints={
- *		@ORM\UniqueConstraint(columns={"product_id", "category_id", "domain_id"}),
- *		@ORM\UniqueConstraint(columns={"position", "category_id", "domain_id"})
- *	}
+ *     name="products_manual_bestselling",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(columns={"product_id", "category_id", "domain_id"}),
+ *         @ORM\UniqueConstraint(columns={"position", "category_id", "domain_id"})
+ *     }
  * )
  * @ORM\Entity
  */

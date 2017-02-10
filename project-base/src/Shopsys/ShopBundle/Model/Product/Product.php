@@ -16,11 +16,11 @@ use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
  * Product
  *
  * @ORM\Table(
- *		name="products",
- *		indexes={
- *			@ORM\Index(columns={"variant_type"})
- *		}
- *	)
+ *     name="products",
+ *     indexes={
+ *         @ORM\Index(columns={"variant_type"})
+ *     }
+ * )
  * @ORM\Entity
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */

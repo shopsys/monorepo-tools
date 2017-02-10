@@ -7,10 +7,10 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 
 /**
  * @ORM\Table(
- *	name="mail_templates",
- *	uniqueConstraints={
- *		@ORM\UniqueConstraint(name="name_domain", columns={"name", "domain_id"})
- *	}
+ *     name="mail_templates",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="name_domain", columns={"name", "domain_id"})
+ *     }
  * )
  * @ORM\Entity
  */

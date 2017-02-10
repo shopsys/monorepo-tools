@@ -32,7 +32,7 @@ class SliderItemFacade {
     public function __construct(
         EntityManager $em,
         SliderItemRepository $sliderItemRepository,
-        ImageFacade	$imageFacade,
+        ImageFacade $imageFacade,
         Domain $domain
     ) {
         $this->em = $em;

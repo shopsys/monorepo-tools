@@ -78,7 +78,7 @@ class ProductParametersFixtureLoader {
 
         $isSecondDomain = $domainId === 2;
         $existsEnglishLocale = array_key_exists('en', $parameterNames);
-        if ($isSecondDomain	&& $existsEnglishLocale	&& $parameter->getName('en') !== $parameterNames['en']) {
+        if ($isSecondDomain && $existsEnglishLocale && $parameter->getName('en') !== $parameterNames['en']) {
             $this->addEnglishTranslationToParameter($parameter, $parameterNames);
         }
 
