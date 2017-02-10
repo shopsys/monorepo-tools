@@ -57,13 +57,11 @@
 
         $domNode
             .bind('blur change', function (event) {
-                if (this.jsFormValidator && isJsFileUpload === true) {
+                if (this.jsFormValidator) {
                     event.preventDefault();
-                } else {
-                    $(this).jsFormValidator('validate');
 
-                    if (this.jsFormValidator) {
-                        event.preventDefault();
+                    if (isJsFileUpload !== true) {
+                        this.jsFormValidator.validate();
 
                         var parent = this.jsFormValidator.parent;
                         while (parent) {
