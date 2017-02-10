@@ -335,21 +335,18 @@
         var errorSourceClass = 'js-error-source-id-' + sourceId;
         $errorListUl.find('li.' + errorSourceClass).remove();
 
-        if (errors.length > 0) {
-            $elementsToHighlight.addClass('form-input-error');
-            $.each(errors, function (key, message) {
-                $errorListUl.append(
-                    $('<li/>')
-                        .addClass('js-validation-errors-message')
-                        .addClass(errorSourceClass)
-                        .text(message)
-                );
-            });
-            $errorList.show();
-        } else if ($errorListUl.find('li').length === 0) {
-            $elementsToHighlight.removeClass('form-input-error');
-            $errorList.hide();
-        }
+        $.each(errors, function (key, message) {
+            $errorListUl.append(
+                $('<li/>')
+                    .addClass('js-validation-errors-message')
+                    .addClass(errorSourceClass)
+                    .text(message)
+            );
+        });
+
+        var hasErrors = $errorListUl.find('li').length > 0;
+        $elementsToHighlight.toggleClass('form-input-error', hasErrors);
+        $errorList.toggle(hasErrors);
 
         Shopsys.validation.highlightSubmitButtons($(this).closest('form'));
     };
