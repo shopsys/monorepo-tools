@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct;
 
 class TopProductRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

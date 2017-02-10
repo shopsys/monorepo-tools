@@ -8,7 +8,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class ImageConfigDefinition implements ConfigurationInterface
 {
-
     const CONFIG_CLASS = 'class';
     const CONFIG_ENTITY_NAME = 'name';
     const CONFIG_MULTIPLE = 'multiple';

@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
 class PromoCodeController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
      */

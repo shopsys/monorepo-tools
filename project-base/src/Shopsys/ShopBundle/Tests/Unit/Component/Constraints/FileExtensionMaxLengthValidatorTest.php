@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTes
 
 class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTest
 {
-
     /**
      * @inheritdoc
      */

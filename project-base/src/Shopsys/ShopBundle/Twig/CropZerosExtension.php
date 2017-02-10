@@ -7,7 +7,6 @@ use Twig_SimpleFilter;
 
 class CropZerosExtension extends Twig_Extension
 {
-
     /**
      * @return array
      */

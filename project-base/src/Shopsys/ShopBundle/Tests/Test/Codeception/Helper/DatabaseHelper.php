@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db;
 
 class DatabaseHelper extends Module
 {
-
     // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}

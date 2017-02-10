@@ -7,7 +7,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class InverseMultipleChoiceTransformer implements DataTransformerInterface
 {
-
     /**
      * @var \Symfony\Component\Form\ChoiceList\ChoiceListInterface
      */

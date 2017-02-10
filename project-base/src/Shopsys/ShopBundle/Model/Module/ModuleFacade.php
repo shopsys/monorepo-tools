@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class ModuleFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
 class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener
 {
-
     /**
      * @inheritDoc
      */

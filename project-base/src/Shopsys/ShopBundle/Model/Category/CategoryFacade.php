@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class CategoryFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

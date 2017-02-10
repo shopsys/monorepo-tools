@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 
 class OrderStatusMailTemplateService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService
      */

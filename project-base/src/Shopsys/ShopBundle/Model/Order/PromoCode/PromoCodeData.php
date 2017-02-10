@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeData
 {
-
     /**
      * @var string|null
      */

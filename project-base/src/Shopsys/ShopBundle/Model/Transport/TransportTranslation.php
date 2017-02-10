@@ -12,7 +12,6 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  */
 class TransportTranslation extends AbstractTranslation
 {
-
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")
      */

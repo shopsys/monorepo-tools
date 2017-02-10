@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
 class Db extends BaseDb
 {
-
     // @codingStandardsIgnoreStart
     /**
      * Revert database to the original state

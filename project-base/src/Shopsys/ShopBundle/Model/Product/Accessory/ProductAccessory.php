@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ProductAccessory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Product\Product")

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Utils;
 
 class UtilsTest extends PHPUnit_Framework_TestCase
 {
-
     public function testIfNull() {
         $this->assertTrue(Utils::ifNull(null, true));
         $this->assertFalse(Utils::ifNull(false, true));

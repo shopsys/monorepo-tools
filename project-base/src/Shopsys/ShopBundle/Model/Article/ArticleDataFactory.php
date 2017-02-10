@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade;
 
 class ArticleDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */

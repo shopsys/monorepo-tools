@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\String;
 
 class DatabaseSearching
 {
-
     /**
      * @param string $string
      * @return string

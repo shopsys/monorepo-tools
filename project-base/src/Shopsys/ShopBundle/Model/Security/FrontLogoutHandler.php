@@ -10,7 +10,6 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class FrontLogoutHandler implements LogoutSuccessHandlerInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade
      */

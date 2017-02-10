@@ -6,7 +6,6 @@ use Exception;
 
 class EntityParseException extends Exception implements ImageConfigException
 {
-
     /**
      * @var string
      */

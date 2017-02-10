@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Pricing\Exception\ProductPricingException;
 
 class MainVariantPriceCalculationException extends Exception implements ProductPricingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Translation\Translator;
 
 class JsTranslatorCompilerPass implements JsCompilerPassInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */

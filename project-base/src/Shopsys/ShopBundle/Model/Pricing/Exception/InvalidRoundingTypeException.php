@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidRoundingTypeException extends Exception implements PricingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

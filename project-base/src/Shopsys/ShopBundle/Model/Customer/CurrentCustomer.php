@@ -7,7 +7,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class CurrentCustomer
 {
-
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */

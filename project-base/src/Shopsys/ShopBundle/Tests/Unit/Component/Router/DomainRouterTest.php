@@ -10,7 +10,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouterTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetRouter() {
         $context = new RequestContext();
         $basicRouterMock = $this->getMockBuilder(RouterInterface::class)->getMockForAbstractClass();

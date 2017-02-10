@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class ArticleFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade
      */

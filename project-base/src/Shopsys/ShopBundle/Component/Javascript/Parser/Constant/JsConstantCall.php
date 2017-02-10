@@ -6,7 +6,6 @@ use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
 class JsConstantCall
 {
-
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */

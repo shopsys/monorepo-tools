@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Administrator\AdministratorFacade;
 
 class AdministratorDataFixture extends AbstractReferenceFixture
 {
-
     const SUPERADMINISTRATOR = 'administrator_superadministrator';
     const ADMINISTRATOR = 'administrator_administrator';
 

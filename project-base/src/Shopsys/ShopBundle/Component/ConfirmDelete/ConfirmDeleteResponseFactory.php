@@ -8,7 +8,6 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 
 class ConfirmDeleteResponseFactory
 {
-
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface
      */

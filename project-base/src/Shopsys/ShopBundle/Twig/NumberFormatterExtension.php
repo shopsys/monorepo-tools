@@ -9,7 +9,6 @@ use Twig_Extension;
 
 class NumberFormatterExtension extends Twig_Extension
 {
-
     const MINIMUM_FRACTION_DIGITS = 0;
     const MAXIMUM_FRACTION_DIGITS = 10;
 

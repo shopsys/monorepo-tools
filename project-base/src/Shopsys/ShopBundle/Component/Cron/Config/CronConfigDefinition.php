@@ -8,7 +8,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class CronConfigDefinition implements ConfigurationInterface
 {
-
     const CONFIG_SERVICE = 'service';
     const CONFIG_TIME = 'time';
     const CONFIG_TIME_HOURS = 'hours';

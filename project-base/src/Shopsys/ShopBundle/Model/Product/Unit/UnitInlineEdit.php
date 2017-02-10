@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class UnitInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
      */

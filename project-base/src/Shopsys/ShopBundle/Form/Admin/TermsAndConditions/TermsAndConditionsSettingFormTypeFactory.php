@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
 class TermsAndConditionsSettingFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
      */

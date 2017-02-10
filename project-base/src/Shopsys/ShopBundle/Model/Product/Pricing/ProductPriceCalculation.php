@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 class ProductParameterValueData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */

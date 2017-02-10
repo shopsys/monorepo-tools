@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Heureka\Exception\HeurekaException;
 
 class LocaleNotSupportedException extends Exception implements HeurekaException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

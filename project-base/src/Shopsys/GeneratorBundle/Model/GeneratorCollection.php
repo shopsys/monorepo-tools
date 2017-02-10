@@ -9,7 +9,6 @@ use Twig_Loader_Filesystem;
 
 class GeneratorCollection
 {
-
     /**
      * @var \Shopsys\GeneratorBundle\Model\GeneratorInterface[]
      */

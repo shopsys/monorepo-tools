@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Translation\Exception\TranslationException;
 
 class MessageIdArgumentNotPresent extends Exception implements TranslationException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

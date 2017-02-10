@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class PaymentEditDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade
      */

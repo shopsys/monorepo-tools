@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateFriendlyUrls() {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),

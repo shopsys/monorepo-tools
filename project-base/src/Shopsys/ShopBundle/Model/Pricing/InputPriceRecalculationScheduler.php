@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationScheduler
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculator
      */

@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class FlagInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
      */

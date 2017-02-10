@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
 class BrandRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

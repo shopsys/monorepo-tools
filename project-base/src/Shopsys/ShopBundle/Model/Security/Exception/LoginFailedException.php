@@ -6,7 +6,6 @@ use Exception;
 
 class LoginFailedException extends Exception implements SecurityException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

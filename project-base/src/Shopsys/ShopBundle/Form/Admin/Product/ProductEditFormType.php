@@ -22,7 +22,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductEditFormType extends AbstractType
 {
-
     const INTENTION = 'product_edit_type';
     const VALIDATION_GROUP_MANUAL_PRICE_CALCULATION = 'manualPriceCalculation';
 

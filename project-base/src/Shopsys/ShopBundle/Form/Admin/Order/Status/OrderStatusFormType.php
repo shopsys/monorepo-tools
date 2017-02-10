@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderStatusFormType extends AbstractType
 {
-
     /**
      * @return string
      */

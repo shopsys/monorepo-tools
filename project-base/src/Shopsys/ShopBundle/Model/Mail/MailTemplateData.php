@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 
 class MailTemplateData
 {
-
     /**
      * @var string|null
      */

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class InputPriceLabelExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
      */

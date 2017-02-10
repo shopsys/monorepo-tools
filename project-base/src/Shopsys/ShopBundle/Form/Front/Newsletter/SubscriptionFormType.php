@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class SubscriptionFormType extends AbstractType
 {
-
     /**
      * @return string
      */

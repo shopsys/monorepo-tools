@@ -10,7 +10,6 @@ use Symfony\Component\Yaml\Parser;
 
 class MenuLoader
 {
-
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Mail;
 
 class MessageData
 {
-
     /**
      * @var string
      */

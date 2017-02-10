@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 class CronService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
      * @param string[] $scheduledCronModuleIds

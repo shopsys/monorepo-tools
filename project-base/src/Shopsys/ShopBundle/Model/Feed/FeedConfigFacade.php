@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
 
 class FeedConfigFacade
 {
-
     /**
      * @var string
      */

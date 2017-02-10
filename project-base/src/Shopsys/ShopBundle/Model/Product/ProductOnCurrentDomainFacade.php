@@ -17,7 +17,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductOnCurrentDomainFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

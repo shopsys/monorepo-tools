@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
  */
 class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
-
     public function getBreadcrumbItems($routeName, array $routeParameters = []) {
         switch ($routeName) {
             case 'front_customer_edit':

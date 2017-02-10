@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductStockFilter;
 
 class ProductAdvancedSearchConfig extends AdvancedSearchConfig
 {
-
     public function __construct(
         ProductCatnumFilter $productCatnumFilter,
         ProductNameFilter $productNameFilter,

@@ -11,7 +11,6 @@ use ZipArchive;
 
 class ImageDemoCommand extends ContainerAwareCommand
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

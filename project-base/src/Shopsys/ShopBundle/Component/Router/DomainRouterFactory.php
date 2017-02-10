@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Router;
 
 class DomainRouterFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory
      */

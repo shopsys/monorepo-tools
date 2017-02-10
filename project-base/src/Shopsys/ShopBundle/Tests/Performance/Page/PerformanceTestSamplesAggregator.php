@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceTestSamplesAggregator
 {
-
     /**
      * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
      * @return \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[]

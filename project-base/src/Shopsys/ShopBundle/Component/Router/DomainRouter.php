@@ -11,7 +11,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouter extends ChainRouter
 {
-
     /**
      * @var bool
      */

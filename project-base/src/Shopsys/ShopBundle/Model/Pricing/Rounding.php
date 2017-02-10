@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing;
 
 class Rounding
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
      */

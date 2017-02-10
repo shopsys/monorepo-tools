@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PromoCodeController extends FrontBaseController
 {
-
     const PROMO_CODE_PARAMETER = 'code';
 
     /**

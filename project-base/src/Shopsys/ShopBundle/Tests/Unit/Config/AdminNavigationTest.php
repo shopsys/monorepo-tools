@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AdminNavigationTest extends FunctionalTestCase
 {
-
     public function testHasSettingsItem() {
         $this->assertInstanceOf(MenuItem::class, $this->getMenu()->getSettingsItem());
     }

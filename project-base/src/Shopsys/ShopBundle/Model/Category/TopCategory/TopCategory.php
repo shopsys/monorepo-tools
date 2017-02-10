@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Category\Category;
  */
 class TopCategory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\Category
      *

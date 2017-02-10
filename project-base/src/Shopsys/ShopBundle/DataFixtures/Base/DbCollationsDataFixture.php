@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\System\System;
 
 class DbCollationsDataFixture extends AbstractNativeFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

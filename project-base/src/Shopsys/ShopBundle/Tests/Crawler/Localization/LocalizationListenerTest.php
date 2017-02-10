@@ -10,7 +10,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizationListenerTest extends DatabaseTestCase
 {
-
     public function testProductDetailLocaleCs() {
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */

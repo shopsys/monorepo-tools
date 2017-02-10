@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\OrderRepository;
 
 class OrderHashGeneratorRepository
 {
-
     const HASH_LENGTH = 50;
     const MAX_GENERATE_TRIES = 100;
 

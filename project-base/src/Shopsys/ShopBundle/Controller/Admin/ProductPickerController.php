@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductPickerController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade
      */

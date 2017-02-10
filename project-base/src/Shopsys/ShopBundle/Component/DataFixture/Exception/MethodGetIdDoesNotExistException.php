@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
 class MethodGetIdDoesNotExistException extends Exception implements DataFixtureException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\Config\Exception\UploadedFileConfi
 
 class UploadedFileConfigurationParseException extends Exception implements UploadedFileConfigException
 {
-
     /**
      * @var string
      */

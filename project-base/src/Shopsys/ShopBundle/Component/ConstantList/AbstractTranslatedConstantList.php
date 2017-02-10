@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\ConstantList\TranslatedConstantListInterface;
 
 abstract class AbstractTranslatedConstantList implements TranslatedConstantListInterface
 {
-
     /**
      * @return string
      */

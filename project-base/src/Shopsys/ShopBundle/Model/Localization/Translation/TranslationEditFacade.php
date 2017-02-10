@@ -14,7 +14,6 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 class TranslationEditFacade
 {
-
     /**
      * @var string
      */

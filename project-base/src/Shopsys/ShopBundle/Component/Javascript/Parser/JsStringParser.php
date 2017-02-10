@@ -7,7 +7,6 @@ use PLUG\JavaScript\JNodes\JNodeBase;
 
 class JsStringParser
 {
-
     /**
      * @param \PLUG\JavaScript\JNodes\JNodeBase $node
      * @return string

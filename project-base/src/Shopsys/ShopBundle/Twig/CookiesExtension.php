@@ -7,7 +7,6 @@ use Twig_SimpleFunction;
 
 class CookiesExtension extends \Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade
      */

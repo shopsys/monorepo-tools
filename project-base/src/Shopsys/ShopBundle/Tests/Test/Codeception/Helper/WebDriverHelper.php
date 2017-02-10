@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class WebDriverHelper extends Module
 {
-
     /**
      * @return \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver
      */

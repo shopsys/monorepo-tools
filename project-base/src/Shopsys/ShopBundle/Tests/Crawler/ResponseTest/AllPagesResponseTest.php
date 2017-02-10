@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AllPagesResponseTest extends DatabaseTestCase
 {
-
     public function adminTestableUrlsProvider() {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */

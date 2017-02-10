@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Module\ModuleList;
 
 class EnabledModuleDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

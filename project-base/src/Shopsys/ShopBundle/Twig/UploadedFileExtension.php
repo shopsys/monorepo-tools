@@ -10,7 +10,6 @@ use Twig_SimpleFunction;
 
 class UploadedFileExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

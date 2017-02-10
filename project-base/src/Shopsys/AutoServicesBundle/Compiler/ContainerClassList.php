@@ -6,7 +6,6 @@ use ReflectionClass;
 
 class ContainerClassList
 {
-
     /**
      * @var string
      */

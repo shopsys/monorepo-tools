@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContactFormController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade
      */

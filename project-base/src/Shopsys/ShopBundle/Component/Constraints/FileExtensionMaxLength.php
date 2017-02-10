@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class FileExtensionMaxLength extends Constraint
 {
-
     /**
      * @var string
      */

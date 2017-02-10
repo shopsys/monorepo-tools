@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
 class CustomerFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
      */

@@ -10,7 +10,6 @@ use Symfony\Component\Yaml\Parser;
 
 class UploadedFileConfigLoader
 {
-
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */

@@ -6,7 +6,6 @@ use Doctrine\Common\Util\Debug as DoctrineDebug;
 
 class Debug
 {
-
     /**
      * @param mixed $var
      * @return string

@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class DomainListener implements EventSubscriberInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

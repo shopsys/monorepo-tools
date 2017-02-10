@@ -8,7 +8,6 @@ use Twig_Template;
 
 class FeedXmlWriter
 {
-
     /**
      * @var \Twig_Environment
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\String\TransformString;
 
 class TransformStringTest extends PHPUnit_Framework_TestCase
 {
-
     public function safeFilenameProvider() {
         return [
             [

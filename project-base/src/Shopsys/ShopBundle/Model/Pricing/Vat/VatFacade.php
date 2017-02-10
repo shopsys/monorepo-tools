@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class VatFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

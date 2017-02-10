@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class Email extends Constraint
 {
-
     /**
      * @var string
      */

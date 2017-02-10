@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 
 class AdvancedSearchFilterTranslation
 {
-
     /**
      * @var string[filterName]
      */

@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 class EntityNotNullableColumnsFinder
 {
-
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
      * @return string[tableName][]

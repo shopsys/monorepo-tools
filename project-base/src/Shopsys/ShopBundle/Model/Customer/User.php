@@ -26,7 +26,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -338,7 +337,6 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
      * @inheritDoc
      */
     public function eraseCredentials() {
-
     }
 
     /**

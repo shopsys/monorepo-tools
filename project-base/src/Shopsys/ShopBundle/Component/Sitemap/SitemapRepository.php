@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class SitemapRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

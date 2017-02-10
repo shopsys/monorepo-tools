@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatException;
 
 class VatMarkedAsDeletedDeleteException extends Exception implements VatException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

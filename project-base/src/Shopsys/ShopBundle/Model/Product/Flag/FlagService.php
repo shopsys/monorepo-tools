@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 
 class FlagService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag

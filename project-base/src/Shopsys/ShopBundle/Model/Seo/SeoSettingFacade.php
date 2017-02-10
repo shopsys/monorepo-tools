@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class SeoSettingFacade
 {
-
     const SEO_TITLE_MAIN_PAGE = 'seoTitleMainPage';
     const SEO_TITLE_ADD_ON = 'seoTitleAddOn';
     const SEO_META_DESCRIPTION_MAIN_PAGE = 'seoMetaDescriptionMainPage';

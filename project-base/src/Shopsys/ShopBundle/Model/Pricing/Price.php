@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing;
 
 class Price
 {
-
     /**
      * @var string
      */

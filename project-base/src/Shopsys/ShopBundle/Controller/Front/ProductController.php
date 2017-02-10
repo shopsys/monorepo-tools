@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends FrontBaseController
 {
-
     const SEARCH_TEXT_PARAMETER = 'q';
     const PAGE_QUERY_PARAMETER = 'page';
     const PRODUCTS_PER_PAGE = 12;

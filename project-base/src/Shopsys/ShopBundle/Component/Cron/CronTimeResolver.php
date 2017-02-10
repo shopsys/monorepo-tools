@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 
 class CronTimeResolver
 {
-
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\CronTimeInterface $cronTime
      * @param \DateTimeInterface $dateTime

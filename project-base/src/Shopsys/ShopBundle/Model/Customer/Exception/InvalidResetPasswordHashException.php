@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidResetPasswordHashException extends Exception implements CustomerException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

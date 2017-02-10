@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class DomainsType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

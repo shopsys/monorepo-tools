@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 
 interface FeedItemRepositoryInterface
 {
-
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int|null $seekItemId

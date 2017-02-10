@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class Bag
 {
-
     const MAIN_KEY = 'messages';
 
     const KEY_ERROR = 'error';

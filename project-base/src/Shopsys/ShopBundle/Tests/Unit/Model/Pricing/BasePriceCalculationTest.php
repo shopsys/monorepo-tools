@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function calculateBasePriceProvider() {
         return [
             [

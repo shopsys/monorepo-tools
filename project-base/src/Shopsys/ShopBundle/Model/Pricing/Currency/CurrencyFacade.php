@@ -17,7 +17,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class CurrencyFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

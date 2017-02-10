@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Fulltext;
 
 class TsqueryFactory
 {
-
     /**
      * @param string|null $searchText
      * @return string

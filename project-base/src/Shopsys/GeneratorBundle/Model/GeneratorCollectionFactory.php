@@ -7,7 +7,6 @@ use Shopsys\GeneratorBundle\Model\GeneratorCollection;
 
 class GeneratorCollectionFactory
 {
-
     /**
      * @var \Shopsys\GeneratorBundle\Model\Generator\RepositoryGenerator
      */

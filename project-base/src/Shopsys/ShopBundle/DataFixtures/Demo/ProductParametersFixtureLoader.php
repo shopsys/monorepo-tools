@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 
 class ProductParametersFixtureLoader
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
      */

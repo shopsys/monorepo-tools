@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Mail;
 
 class AllMailTemplatesData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailTemplateData[]
      */

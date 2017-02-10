@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class QuantifiedProduct
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      */

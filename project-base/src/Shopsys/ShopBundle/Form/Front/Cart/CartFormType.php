@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CartFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Cart
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Article\Article;
 
 class ArticleData
 {
-
     /**
      * @var string|null
      */

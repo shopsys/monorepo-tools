@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

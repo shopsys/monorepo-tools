@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints;
 
 class HeurekaShopCertificationFormType extends AbstractType
 {
-
     /**
      * @return string
      */

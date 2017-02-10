@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TransportAndPaymentController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

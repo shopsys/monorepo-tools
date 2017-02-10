@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class PersonalInfoFormTypeTest extends DatabaseTestCase
 {
-
     /**
      * @return array
      */

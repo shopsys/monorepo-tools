@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 
 class DomainDbFunctionsDataFixture extends AbstractNativeFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

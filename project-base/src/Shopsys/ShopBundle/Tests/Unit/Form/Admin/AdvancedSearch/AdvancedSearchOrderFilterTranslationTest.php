@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdvancedSearchOrderFilterTranslationTest extends FunctionalTestCase
 {
-
     public function testTranslateFilterName() {
         $advancedSearchConfig = $this->getContainer()->get(OrderAdvancedSearchConfig::class);
         /* @var $advancedSearchConfig \Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig */

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
 class ProductListAdminFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository
      */

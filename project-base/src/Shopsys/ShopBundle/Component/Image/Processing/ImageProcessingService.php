@@ -10,7 +10,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageProcessingService
 {
-
     const EXTENSION_JPEG = 'jpeg';
     const EXTENSION_JPG = 'jpg';
     const EXTENSION_PNG = 'png';

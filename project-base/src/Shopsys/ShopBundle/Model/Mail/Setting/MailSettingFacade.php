@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
 class MailSettingFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Setting\Setting
      */

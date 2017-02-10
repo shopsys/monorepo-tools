@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
 {
-
     public function testIsIndependentlyVisible() {
         $em = $this->getEntityManager();
 

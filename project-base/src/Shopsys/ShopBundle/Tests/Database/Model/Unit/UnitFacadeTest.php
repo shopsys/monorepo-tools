@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class UnitFacadeTest extends DatabaseTestCase
 {
-
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();
         $unitFacade = $this->getContainer()->get(UnitFacade::class);

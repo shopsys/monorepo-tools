@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
 class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage() {
         $temporaryFilename = 'filename.jpg';
 

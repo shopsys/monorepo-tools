@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ProductData
 {
-
     /**
      * @var array
      */

@@ -12,7 +12,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

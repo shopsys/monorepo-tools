@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class BrandFilterChoiceRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

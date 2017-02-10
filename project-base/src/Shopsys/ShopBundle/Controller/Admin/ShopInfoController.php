@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ShopInfoController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory
      */

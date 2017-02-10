@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryData;
 
 class CategoryDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
      */

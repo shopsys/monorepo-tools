@@ -6,7 +6,6 @@ use Exception;
 
 class NotSupportedException extends Exception implements RouterException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

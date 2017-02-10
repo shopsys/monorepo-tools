@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyException;
 
 class DeletingNotAllowedToDeleteCurrencyException extends Exception implements CurrencyException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

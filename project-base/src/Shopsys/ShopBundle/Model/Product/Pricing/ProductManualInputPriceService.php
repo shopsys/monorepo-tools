@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductManualInputPriceService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup

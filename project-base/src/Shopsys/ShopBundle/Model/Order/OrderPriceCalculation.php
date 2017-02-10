@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class OrderPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
      */

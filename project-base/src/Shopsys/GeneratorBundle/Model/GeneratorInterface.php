@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 interface GeneratorInterface
 {
-
     /**
      * @return string
      */

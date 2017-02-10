@@ -7,7 +7,6 @@ use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
 class CannotResolveParameterException extends Exception implements CompilerException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

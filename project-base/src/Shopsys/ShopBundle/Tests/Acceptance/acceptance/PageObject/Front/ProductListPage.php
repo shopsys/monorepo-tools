@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class ProductListPage extends AbstractPage
 {
-
     /**
      * @var \Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent
      */

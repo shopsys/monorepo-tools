@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class FileUploadController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
      */

@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreate() {
         $parameterService = new ParameterService();
 

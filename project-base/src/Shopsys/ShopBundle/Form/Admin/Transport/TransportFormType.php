@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class TransportFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
      */

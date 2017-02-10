@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class MenuLoaderTest extends FunctionalTestCase
 {
-
     public function testLoadFromArray() {
         $testMenu = [
             [

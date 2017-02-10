@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
 class FriendlyUrlUniqueResult
 {
-
     /**
      * @var bool
      */

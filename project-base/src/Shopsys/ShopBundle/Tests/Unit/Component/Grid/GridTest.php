@@ -16,7 +16,6 @@ use Twig_Environment;
 
 class GridTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetParametersFromRequest() {
         $getParameters = [
             Grid::GET_PARAMETER => [

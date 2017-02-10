@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class CustomerCommunicationFormType extends AbstractType
 {
-
     /**
      * @return string
      */

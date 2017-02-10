@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\ConstantList\Exception\ConstantListException;
 
 class UndefinedTranslationException extends Exception implements ConstantListException
 {
-
     /**
      * @param string $constant
      * @param \Exception|null $previous

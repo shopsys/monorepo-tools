@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class FreeTransportAndPaymentFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
      */

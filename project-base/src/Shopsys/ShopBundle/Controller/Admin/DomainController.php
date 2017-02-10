@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DomainController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

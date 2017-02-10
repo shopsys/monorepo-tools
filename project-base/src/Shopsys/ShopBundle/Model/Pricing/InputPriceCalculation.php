@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing;
 
 class InputPriceCalculation
 {
-
     /**
      * @param int $inputPriceType
      * @param string $basePriceWithVat

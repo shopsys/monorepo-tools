@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class CartTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetItemsCountZero() {
         $cartItems = [];
         $cart = new Cart($cartItems);

@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CartController extends FrontBaseController
 {
-
     const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
 
     const RECALCULATE_ONLY_PARAMETER_NAME = 'recalculateOnly';

@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EnabledModule
 {
-
     /**
      * @var string
      *

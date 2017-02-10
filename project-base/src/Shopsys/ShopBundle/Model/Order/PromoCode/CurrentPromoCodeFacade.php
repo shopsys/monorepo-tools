@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacade
 {
-
     const PROMO_CODE_SESSION_KEY = 'promoCode';
 
     /**

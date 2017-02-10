@@ -4,7 +4,6 @@ namespace Shopsys\AutoServicesBundle\Compiler;
 
 class ServiceHelper
 {
-
     /**
      * @param string $className
      * @return bool

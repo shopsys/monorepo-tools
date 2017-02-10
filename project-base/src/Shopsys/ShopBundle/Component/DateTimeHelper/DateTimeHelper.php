@@ -6,7 +6,6 @@ use DateTime;
 
 class DateTimeHelper
 {
-
     /**
      * @return \DateTime
      */

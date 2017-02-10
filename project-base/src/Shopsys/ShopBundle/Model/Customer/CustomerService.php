@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Order\Order;
 
 class CustomerService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService
      */
@@ -73,7 +72,6 @@ class CustomerService
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
      */
     public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData) {
-
         if ($deliveryAddressData->addressFilled) {
             $deliveryAddress = new DeliveryAddress($deliveryAddressData);
         } else {
@@ -91,7 +89,6 @@ class CustomerService
      */
     public function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData,
         DeliveryAddress $deliveryAddress = null) {
-
         if ($deliveryAddressData->addressFilled) {
             if ($deliveryAddress instanceof DeliveryAddress) {
                 $deliveryAddress->edit($deliveryAddressData);

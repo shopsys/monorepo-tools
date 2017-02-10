@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchException;
 
 class AdvancedSearchFilterAlreadyExistsException extends Exception implements AdvancedSearchException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

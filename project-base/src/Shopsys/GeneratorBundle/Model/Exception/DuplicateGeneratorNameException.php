@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateGeneratorNameException extends Exception implements GeneratorException
 {
-
     /**
      * @param string $name
      * @param \Exception|null $previous

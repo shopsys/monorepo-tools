@@ -7,7 +7,6 @@ use Twig_SimpleFunction;
 
 class FormThemeExtension extends \Twig_Extension
 {
-
     const ADMIN_THEME = '@ShopsysShop/Admin/Form/theme.html.twig';
     const FRONT_THEME = '@ShopsysShop/Front/Form/theme.html.twig';
 

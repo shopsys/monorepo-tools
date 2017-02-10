@@ -14,7 +14,6 @@ use Traversable;
  */
 class ResizeFormListener implements EventSubscriberInterface
 {
-
     /**
      * @var string
      */

@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ErrorPageCronModule implements CronModuleInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade
      */
@@ -22,7 +21,6 @@ class ErrorPageCronModule implements CronModuleInterface
      * @inheritdoc
      */
     public function setLogger(Logger $logger) {
-
     }
 
     public function run() {

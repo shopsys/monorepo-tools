@@ -32,7 +32,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CustomerController extends AdminBaseController
 {
-
     const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 
     /**

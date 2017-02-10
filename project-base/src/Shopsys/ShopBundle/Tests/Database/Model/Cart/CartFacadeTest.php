@@ -19,7 +19,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartFacadeTest extends DatabaseTestCase
 {
-
     public function testAddProductToCartAddsItemsOnlyToCurrentCart() {
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');
         $anotherCustomerIdentifier = new CustomerIdentifier('anotherSecretSessionHash');

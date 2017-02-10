@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class OrderItemFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

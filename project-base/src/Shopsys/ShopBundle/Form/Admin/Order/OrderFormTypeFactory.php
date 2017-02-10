@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class OrderFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade
      */

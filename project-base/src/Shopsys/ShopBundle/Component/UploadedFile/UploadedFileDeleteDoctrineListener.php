@@ -10,7 +10,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListener
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

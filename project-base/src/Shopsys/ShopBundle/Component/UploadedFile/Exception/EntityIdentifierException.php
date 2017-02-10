@@ -6,7 +6,6 @@ use Exception;
 
 class EntityIdentifierException extends Exception implements FileException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

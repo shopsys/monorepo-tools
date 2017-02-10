@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Article\ArticleRepository;
 
 class ArticleFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

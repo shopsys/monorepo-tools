@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransform
 
 class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testReverseTransform() {
         $array = ['a', 'b', 'a'];
 

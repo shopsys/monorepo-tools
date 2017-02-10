@@ -8,7 +8,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class DomainsConfigDefinition implements ConfigurationInterface
 {
-
     const CONFIG_DOMAINS = 'domains';
     const CONFIG_ID = 'id';
     const CONFIG_NAME = 'name';

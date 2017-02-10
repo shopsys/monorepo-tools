@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class ProductSellingDeniedRecalculator
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

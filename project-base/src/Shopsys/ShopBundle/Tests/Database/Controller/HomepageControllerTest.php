@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class HomepageControllerTest extends FunctionalTestCase
 {
-
     public function testHomepageHttpStatus200() {
         $client = $this->getClient();
 

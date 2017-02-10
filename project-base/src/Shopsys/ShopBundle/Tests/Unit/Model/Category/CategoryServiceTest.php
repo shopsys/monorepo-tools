@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryService;
 
 class CategoryServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateSetRoot() {
         $categoryData = new CategoryData();
         $rootCategory = new Category($categoryData);

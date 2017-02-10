@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
  */
 trait MultidomainMigrationTrait
 {
-
     /**
      * @return int[]
      */

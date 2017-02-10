@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Unit;
 
 class UnitData
 {
-
     /**
      * @var string[]
      */

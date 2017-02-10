@@ -13,7 +13,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

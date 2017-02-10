@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class ShopsysAutoServicesExtension extends Extension
 {
-
     /**
      * {@inheritDoc}
      */

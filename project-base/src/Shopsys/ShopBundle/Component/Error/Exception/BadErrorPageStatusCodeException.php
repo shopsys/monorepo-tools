@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Error\Exception\ErrorException;
 
 class BadErrorPageStatusCodeException extends Exception implements ErrorException
 {
-
     /**
      * @param string $url
      * @param int $expectedStatusCode

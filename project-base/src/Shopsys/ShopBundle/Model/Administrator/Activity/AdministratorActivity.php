@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Administrator\Administrator;
  */
 class AdministratorActivity
 {
-
     /**
      * @var int
      *

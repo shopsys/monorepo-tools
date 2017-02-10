@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class OrderStatusController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */

@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdministratorController extends AdminBaseController
 {
-
     const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 
     /**

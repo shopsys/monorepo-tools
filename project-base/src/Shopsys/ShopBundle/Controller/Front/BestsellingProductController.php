@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProduct
 
 class BestsellingProductController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
      */

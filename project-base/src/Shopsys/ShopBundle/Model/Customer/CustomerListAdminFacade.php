@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerListAdminFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
      */

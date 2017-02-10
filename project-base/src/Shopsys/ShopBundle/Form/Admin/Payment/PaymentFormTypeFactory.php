@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
      */

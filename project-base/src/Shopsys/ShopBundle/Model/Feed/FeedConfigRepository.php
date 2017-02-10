@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 
 class FeedConfigRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
      */

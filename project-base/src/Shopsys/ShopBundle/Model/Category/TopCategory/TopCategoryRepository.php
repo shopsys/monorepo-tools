@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory;
 
 class TopCategoryRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

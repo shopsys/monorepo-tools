@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Route;
 
 class FriendlyUrlGeneratorFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

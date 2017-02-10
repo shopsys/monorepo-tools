@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
 
 class ParameterValueData
 {
-
     /**
      * @var string|null
      */

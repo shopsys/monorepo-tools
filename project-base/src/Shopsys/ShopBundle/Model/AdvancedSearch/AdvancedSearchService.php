@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchService
 {
-
     const TEMPLATE_RULE_FORM_KEY = '__template__';
 
     /**

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class PaymentEditFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
      */

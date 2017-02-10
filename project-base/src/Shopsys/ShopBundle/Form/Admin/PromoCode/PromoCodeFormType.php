@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class PromoCodeFormType extends AbstractType
 {
-
     /**
      * @var string[]
      */

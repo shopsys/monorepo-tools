@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class OrderPreviewFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation
      */

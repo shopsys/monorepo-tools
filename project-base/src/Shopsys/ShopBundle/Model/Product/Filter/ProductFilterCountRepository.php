@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductFilterCountRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

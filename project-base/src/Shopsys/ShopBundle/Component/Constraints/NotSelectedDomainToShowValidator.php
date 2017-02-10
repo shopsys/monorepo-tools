@@ -8,7 +8,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class NotSelectedDomainToShowValidator extends ConstraintValidator
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

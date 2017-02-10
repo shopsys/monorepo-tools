@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class ShopsysGeneratorExtension extends Extension
 {
-
     /**
      * {@inheritDoc}
      */

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class PricingGroupSettingsFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
      */

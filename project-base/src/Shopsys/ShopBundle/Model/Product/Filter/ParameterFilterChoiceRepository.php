@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ParameterFilterChoiceRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

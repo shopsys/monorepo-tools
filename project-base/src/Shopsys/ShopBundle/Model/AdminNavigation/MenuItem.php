@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
 class MenuItem
 {
-
     const TYPE_REGULAR = 'regular';
     const TYPE_SETTINGS = 'settings';
 

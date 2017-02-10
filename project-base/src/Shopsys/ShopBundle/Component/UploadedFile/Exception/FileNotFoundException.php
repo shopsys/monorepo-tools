@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\Exception\FileException;
 
 class FileNotFoundException extends Exception implements FileException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

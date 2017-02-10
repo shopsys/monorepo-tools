@@ -31,7 +31,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class OrderController extends FrontBaseController
 {
-
     const SESSION_CREATED_ORDER = 'created_order_id';
 
     /**

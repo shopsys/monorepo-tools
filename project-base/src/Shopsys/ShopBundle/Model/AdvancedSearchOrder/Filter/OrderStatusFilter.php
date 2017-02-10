@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
-
     private $orderStatusRepository;
 
     public function __construct(OrderStatusRepository $orderStatusRepository) {

@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class NewsletterSubscriber
 {
-
     /**
      * @var string
      * @ORM\Column(type="string", length=255)

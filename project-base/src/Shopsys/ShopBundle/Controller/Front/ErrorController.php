@@ -17,7 +17,6 @@ use Tracy\Debugger;
 
 class ErrorController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Error\ExceptionController
      */

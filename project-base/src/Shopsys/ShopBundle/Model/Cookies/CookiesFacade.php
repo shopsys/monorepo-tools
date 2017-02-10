@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class CookiesFacade
 {
-
     const EU_COOKIES_COOKIE_CONSENT_NAME = 'eu-cookies';
 
     /**

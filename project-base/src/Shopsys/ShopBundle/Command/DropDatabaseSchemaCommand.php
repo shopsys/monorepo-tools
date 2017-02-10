@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DropDatabaseSchemaCommand extends ContainerAwareCommand
 {
-
     protected function configure() {
         $this
             ->setName('shopsys:schema:drop')

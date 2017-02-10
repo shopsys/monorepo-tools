@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class LoginPage extends AbstractPage
 {
-
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
 

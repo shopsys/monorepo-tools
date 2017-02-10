@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation;
  */
 class OrderStatus extends AbstractTranslatableEntity
 {
-
     const TYPE_NEW = 1;
     const TYPE_IN_PROGRESS = 2;
     const TYPE_DONE = 3;

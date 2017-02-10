@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ProductVisibilityMidnightCronModule implements CronModuleInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
      */
@@ -22,7 +21,6 @@ class ProductVisibilityMidnightCronModule implements CronModuleInterface
      * @inheritdoc
      */
     public function setLogger(Logger $logger) {
-
     }
 
     public function run() {

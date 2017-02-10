@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class IndependentTransportVisibilityCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository
      */

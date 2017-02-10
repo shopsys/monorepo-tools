@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TermsAndConditionsSettingFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Article\Article[]
      */

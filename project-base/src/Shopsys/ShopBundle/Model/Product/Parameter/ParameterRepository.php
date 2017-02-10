@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ParameterRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

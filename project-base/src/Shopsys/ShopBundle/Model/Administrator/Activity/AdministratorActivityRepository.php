@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
 class AdministratorActivityRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

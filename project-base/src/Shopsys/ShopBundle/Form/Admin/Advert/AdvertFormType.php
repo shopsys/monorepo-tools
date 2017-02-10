@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints;
 
 class AdvertFormType extends AbstractType
 {
-
     const VALIDATION_GROUP_TYPE_IMAGE = 'typeImage';
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';
 

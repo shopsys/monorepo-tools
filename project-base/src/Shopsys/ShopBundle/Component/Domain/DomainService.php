@@ -8,7 +8,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DomainService
 {
-
     const DOMAIN_ICON_WIDTH = 48;
     const DOMAIN_ICON_HEIGHT = 33;
     const DOMAIN_ICON_CROP = false;

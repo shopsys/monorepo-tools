@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidOrderingModeException extends Exception implements ProductException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

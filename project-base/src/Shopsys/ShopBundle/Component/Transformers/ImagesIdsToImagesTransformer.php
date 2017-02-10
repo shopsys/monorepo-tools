@@ -8,7 +8,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ImagesIdsToImagesTransformer implements DataTransformerInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
      */

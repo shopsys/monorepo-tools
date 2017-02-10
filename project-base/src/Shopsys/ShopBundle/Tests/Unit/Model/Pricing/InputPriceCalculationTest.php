@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider getInputPriceDataProvider
      */

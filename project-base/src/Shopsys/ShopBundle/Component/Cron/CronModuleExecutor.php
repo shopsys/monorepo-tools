@@ -6,7 +6,6 @@ use DateTimeImmutable;
 
 class CronModuleExecutor
 {
-
     const RUN_STATUS_OK = 'ok';
     const RUN_STATUS_TIMEOUT = 'timeout';
     const RUN_STATUS_SUSPENDED = 'suspended';

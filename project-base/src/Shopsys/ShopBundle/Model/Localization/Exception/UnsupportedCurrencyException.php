@@ -6,7 +6,6 @@ use Exception;
 
 class UnsupportedCurrencyException extends Exception implements LocalizationException
 {
-
     /**
      * @param string $currencyCode
      * @param \Exception|null $previous

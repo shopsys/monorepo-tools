@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
 
 class UnitService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit

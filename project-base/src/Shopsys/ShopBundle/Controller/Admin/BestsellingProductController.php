@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BestsellingProductController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

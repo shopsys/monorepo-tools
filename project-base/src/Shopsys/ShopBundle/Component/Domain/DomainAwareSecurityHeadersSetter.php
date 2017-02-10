@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class DomainAwareSecurityHeadersSetter
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 
 class Localization
 {
-
     const DEFAULT_COLLATION = 'en_US';
 
     /**

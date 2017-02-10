@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
 class HeurekaDeliveryItem implements FeedItemInterface
 {
-
     /**
      * @var int
      */

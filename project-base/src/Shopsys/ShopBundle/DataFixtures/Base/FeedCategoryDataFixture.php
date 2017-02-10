@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade;
 
 class FeedCategoryDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

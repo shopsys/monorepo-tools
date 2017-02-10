@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Css;
 
 class CssFacade
 {
-
     /**
      * @var string
      */

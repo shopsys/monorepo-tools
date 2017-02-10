@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductDetail
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      */

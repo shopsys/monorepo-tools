@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactoryTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetReturnsTheSameCartForTheSameCustomer() {
         $cartFactory = $this->getCartFactory();
 

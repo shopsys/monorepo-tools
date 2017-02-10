@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Debug;
 
 class InvalidFileKeyException extends Exception implements FileUploadException
 {
-
     /**
      * @param mixed $key
      * @param \Exception|null $previous

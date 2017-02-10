@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 {
-
     public function testIsAdministratorLoggedNot() {
         $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
         /* @var $administratorFrontSecurityFacade \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */

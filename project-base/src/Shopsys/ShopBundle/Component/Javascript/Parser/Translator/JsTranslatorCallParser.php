@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsTranslatorCallParser
 {
-
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**

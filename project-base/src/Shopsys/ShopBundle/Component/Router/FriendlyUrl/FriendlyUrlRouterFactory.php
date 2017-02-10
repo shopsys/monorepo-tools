@@ -13,7 +13,6 @@ use Symfony\Component\Routing\RouteCompiler;
 
 class FriendlyUrlRouterFactory
 {
-
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
      */

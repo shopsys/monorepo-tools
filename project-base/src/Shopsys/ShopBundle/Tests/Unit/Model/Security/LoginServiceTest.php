@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class LoginServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCheckLoginProcessWithRequestError() {
         $loginService = $this->getLoginService();
 

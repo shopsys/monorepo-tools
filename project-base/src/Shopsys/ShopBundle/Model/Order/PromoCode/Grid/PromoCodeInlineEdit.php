@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class PromoCodeInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade
      */

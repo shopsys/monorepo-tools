@@ -9,7 +9,6 @@ use Doctrine\ORM\Query\SqlWalker;
 
 class CollateFunction extends FunctionNode
 {
-
     /**
      * @var \Doctrine\ORM\Query\AST\Node
      */

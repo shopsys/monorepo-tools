@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct
 
 class ManualBestsellingProductFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

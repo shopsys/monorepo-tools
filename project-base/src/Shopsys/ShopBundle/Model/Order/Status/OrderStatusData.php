@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusData
 {
-
     /**
      * @var string[]
      */

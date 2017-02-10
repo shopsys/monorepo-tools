@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class DomainFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader
      */

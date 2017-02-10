@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SingleCheckboxChoiceType extends AbstractType
 {
-
     public function getParent() {
         return 'choice';
     }

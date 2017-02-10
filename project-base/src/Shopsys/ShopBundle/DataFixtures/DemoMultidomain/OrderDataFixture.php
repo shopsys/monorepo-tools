@@ -27,7 +27,6 @@ use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
  */
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      *

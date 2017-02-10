@@ -7,7 +7,6 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class AdministratorService
 {
-
     /**
      * @var \Symfony\Component\Security\Core\Encoder\EncoderFactory
      */

@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class VatSettingsFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]
      */

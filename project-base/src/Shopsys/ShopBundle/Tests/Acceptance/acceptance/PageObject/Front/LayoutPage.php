@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class LayoutPage extends AbstractPage
 {
-
     /**
      * @param string $email
      * @param string $password

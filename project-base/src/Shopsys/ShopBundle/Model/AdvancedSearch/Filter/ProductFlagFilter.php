@@ -12,7 +12,6 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
 class ProductFlagFilter implements AdvancedSearchFilterInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
      */

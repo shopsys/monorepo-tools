@@ -13,7 +13,6 @@ use Twig_Node;
 
 class AdminMenuYamlFileExtractor implements FileVisitorInterface
 {
-
     const ADMIN_MENU_ITEM_LABEL_DOMAIN = 'messages';
 
     /**
@@ -55,7 +54,6 @@ class AdminMenuYamlFileExtractor implements FileVisitorInterface
      * @param array $ast
      */
     public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast) {
-
     }
 
     /**
@@ -64,7 +62,6 @@ class AdminMenuYamlFileExtractor implements FileVisitorInterface
      * @param \Twig_Node $node
      */
     public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $node) {
-
     }
 
     /**

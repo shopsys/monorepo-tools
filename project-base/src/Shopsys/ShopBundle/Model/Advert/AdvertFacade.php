@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Advert\AdvertRepository;
 
 class AdvertFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

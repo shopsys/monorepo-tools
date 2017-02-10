@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CartCest
 {
-
     public function testAddingSameProductToCartMakesSum(
         CartPage $cartPage,
         ProductDetailPage $productDetailPage,

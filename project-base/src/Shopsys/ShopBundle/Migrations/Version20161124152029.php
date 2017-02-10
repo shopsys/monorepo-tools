@@ -7,7 +7,6 @@ use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 
 class Version20161124152029 extends AbstractMigration
 {
-
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */

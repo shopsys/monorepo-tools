@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class LocalizationListener implements EventSubscriberInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

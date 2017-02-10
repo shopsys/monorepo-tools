@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements SitemapListenerInterface
 {
-
     const PRIORITY_HOMEPAGE = 1;
     const PRIORITY_CATEGORIES = 0.8;
     const PRIORITY_PRODUCTS = 0.7;

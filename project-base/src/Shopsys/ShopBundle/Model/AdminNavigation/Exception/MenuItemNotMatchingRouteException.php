@@ -6,7 +6,6 @@ use Exception;
 
 class MenuItemNotMatchingRouteException extends Exception implements MenuException
 {
-
     /**
      * @param string $route
      * @param array|null $parameters

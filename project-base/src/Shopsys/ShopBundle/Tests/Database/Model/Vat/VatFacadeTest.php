@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class VatFacadeTest extends DatabaseTestCase
 {
-
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();
         $vatFacade = $this->getContainer()->get(VatFacade::class);

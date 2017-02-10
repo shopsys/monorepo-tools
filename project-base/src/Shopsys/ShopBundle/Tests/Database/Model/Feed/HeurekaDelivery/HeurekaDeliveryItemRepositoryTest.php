@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 {
-
     public function testGetItemsWithProductInStock() {
         $container = $this->getContainer();
         $productEditDataFactory = $container->get(ProductEditDataFactory::class);

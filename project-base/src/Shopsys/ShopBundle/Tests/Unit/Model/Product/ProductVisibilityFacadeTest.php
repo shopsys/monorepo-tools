@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testOnKernelResponseRecalc() {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
         $productVisibilityRepositoryMock

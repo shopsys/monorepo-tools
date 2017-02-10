@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
 
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testExtractController() {
         $fileName = 'Controller.php';
 

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Debug;
 
 class InvalidGridLimitValueException extends Exception implements AdministratorException
 {
-
     /**
      * @var mixed
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class GeneratorTargetFileAlreadyExistsExpception extends Exception implements GeneratorException
 {
-
     /**
      * @param string $filepath
      * @param \Exception|null $previous

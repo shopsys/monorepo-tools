@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 
 class DomainDbFunctionsFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class CurrencyDataFixture extends AbstractReferenceFixture
 {
-
     const CURRENCY_CZK = 'currency_czk';
     const CURRENCY_EUR = 'currency_eur';
 
@@ -18,7 +17,6 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-
         $currencyData = new CurrencyData();
 
         $currencyData->name = 'Česká koruna';

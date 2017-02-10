@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
 
 class CustomDateTimeFormatterFactory
 {
-
     /**
      * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
      */

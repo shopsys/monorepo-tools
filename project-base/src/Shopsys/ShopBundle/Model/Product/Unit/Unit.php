@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation;
  */
 class Unit extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

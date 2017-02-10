@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
  */
 abstract class OrderItem
 {
-
     /**
      * @var int
      *

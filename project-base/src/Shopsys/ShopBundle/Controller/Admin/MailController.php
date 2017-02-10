@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MailController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory
      */

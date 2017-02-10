@@ -6,7 +6,6 @@ use Exception;
 
 class RememberGridLimitException extends Exception implements AdministratorException
 {
-
     /**
      * @var string
      */

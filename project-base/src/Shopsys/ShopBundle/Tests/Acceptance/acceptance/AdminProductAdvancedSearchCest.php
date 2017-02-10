@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class AdminProductAdvancedSearchCest
 {
-
     public function testSearchByCatnum(
         AcceptanceTester $me,
         LoginPage $loginPage,

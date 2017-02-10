@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Customer\User;
 
 class CustomerIdentifier
 {
-
     /**
      * @var string
      */

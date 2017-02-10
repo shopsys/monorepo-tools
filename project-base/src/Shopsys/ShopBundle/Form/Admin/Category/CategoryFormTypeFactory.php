@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class CategoryFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
      */

@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ProductParameterValue
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      *

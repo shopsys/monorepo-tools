@@ -11,7 +11,6 @@ use Twig_Environment;
 
 class GenerateGruntfileCommand extends ContainerAwareCommand
 {
-
     protected function configure() {
         $this
             ->setName('shopsys:generate:gruntfile')

@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShopsysShopBundle extends Bundle
 {
-
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */

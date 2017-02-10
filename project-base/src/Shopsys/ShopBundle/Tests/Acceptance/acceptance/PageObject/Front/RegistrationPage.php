@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class RegistrationPage extends AbstractPage
 {
-
     /**
      * @param string $firstName
      * @param string $lastName

@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints;
 
 class RepositoryGenerator extends AbstractGenerator
 {
-
     /**
      * {@inheritdoc}
      */

@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class SubRequestListenerTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @param bool $redirect
      * @param bool $send

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Country\Country;
 
 class BillingAddressData
 {
-
     /**
      * @var string|null
      */

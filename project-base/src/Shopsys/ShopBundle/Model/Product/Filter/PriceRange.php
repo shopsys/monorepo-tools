@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 class PriceRange
 {
-
     /**
      * @var string
      */

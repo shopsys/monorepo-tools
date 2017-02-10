@@ -12,7 +12,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueSlugsOnDomainsValidator extends ConstraintValidator
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

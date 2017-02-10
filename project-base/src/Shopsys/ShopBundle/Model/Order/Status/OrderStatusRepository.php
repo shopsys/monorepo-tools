@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

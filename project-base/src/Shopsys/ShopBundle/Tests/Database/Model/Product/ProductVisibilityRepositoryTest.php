@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductVisibilityRepositoryTest extends DatabaseTestCase
 {
-
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
      */

@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
  */
 class Vat
 {
-
     const SETTING_DEFAULT_VAT = 'defaultVatId';
 
     /**

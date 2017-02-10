@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Security\Exception\SecurityException;
 
 class LoginAsRememberedUserException extends Exception implements SecurityException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

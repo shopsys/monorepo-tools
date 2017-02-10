@@ -11,7 +11,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class UnableToResolveDomainException extends Exception implements DomainException
 {
-
     /**
      * @param string $url
      * @param \Exception|null $previous

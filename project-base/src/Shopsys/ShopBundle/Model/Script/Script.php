@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Script\ScriptData;
  */
 class Script
 {
-
     const PLACEMENT_ORDER_SENT_PAGE = 'placementOrderSentPage';
     const PLACEMENT_ALL_PAGES = 'placementAllPages';
     const GOOGLE_ANALYTICS_TRACKING_ID_SETTING_NAME = 'googleAnalyticsTrackingId';

@@ -16,7 +16,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class AllFeedsTest extends FunctionalTestCase
 {
-
     const MAX_DURATION_FEED_SECONDS = 180;
     const MAX_DURATION_DELIVERY_FEED_SECONDS = 20;
     const SUSPICIOUSLY_LOW_DURATION_SECONDS = 5;

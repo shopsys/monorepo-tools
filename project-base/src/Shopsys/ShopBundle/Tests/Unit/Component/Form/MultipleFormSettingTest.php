@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Form\MultipleFormSetting;
 
 class MultipleFormSettingTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCurrentFormIsMultiple() {
         $multipleFormSetting = new MultipleFormSetting();
         $multipleFormSetting->currentFormIsMultiple();

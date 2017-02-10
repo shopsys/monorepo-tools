@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Pricing\Group;
 
 class PricingGroupData
 {
-
     /**
      * @var string|null
      */

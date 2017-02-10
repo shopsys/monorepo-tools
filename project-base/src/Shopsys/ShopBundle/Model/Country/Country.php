@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Country\CountryData;
  */
 class Country
 {
-
     /**
      * @var int
      *

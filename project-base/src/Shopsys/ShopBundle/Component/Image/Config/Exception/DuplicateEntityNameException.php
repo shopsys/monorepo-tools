@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateEntityNameException extends Exception implements ImageConfigException
 {
-
     /**
      * @var string
      */

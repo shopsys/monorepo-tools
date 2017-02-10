@@ -13,7 +13,6 @@ use Symfony\Component\Routing\RouteCompiler;
 
 class FriendlyUrlGenerator extends BaseUrlGenerator
 {
-
     /**
      * @var \Symfony\Component\Routing\RouteCompiler
      */

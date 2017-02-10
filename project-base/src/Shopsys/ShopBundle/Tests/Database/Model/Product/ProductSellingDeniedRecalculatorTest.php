@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
 {
-
     public function testCalculateSellingDeniedForProductSellableVariant() {
         $em = $this->getEntityManager();
         $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);

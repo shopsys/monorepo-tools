@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 
 class MailTemplateDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

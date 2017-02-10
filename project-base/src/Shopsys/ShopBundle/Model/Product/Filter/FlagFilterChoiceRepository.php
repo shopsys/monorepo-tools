@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class FlagFilterChoiceRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

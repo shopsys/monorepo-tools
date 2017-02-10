@@ -13,7 +13,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AllMailTemplatesFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
      */

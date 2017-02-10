@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class VatRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

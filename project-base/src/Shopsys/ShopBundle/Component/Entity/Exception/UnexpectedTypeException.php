@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Entity\Exception\EntityException;
 
 class UnexpectedTypeException extends Exception implements EntityException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -12,7 +12,6 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  */
 class ProductTranslation extends AbstractTranslation
 {
-
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Product")
      */

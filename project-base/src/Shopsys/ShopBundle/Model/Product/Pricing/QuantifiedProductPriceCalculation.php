@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class QuantifiedProductPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */

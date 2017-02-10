@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter;
 
 class PerformanceResultsCsvExporter
 {
-
     /**
      * @var \Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter
      */

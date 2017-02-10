@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ScriptController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
      */

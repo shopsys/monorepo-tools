@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
 
 class AdministratorGridService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      * @param \Shopsys\ShopBundle\Component\Grid\Grid $grid

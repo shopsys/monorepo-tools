@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CustomerPasswordController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordFacade
      */

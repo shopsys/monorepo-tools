@@ -20,7 +20,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase
 {
-
     public function testGetModifiedPriceItemsAndUpdatePrices() {
         $customerIdentifier = new CustomerIdentifier('randomString');
 

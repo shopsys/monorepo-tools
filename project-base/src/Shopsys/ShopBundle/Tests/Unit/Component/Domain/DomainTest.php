@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DomainTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetIdNotSet() {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),

@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 class OrderRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

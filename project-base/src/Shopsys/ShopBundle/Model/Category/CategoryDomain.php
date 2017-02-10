@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Category\Category;
  */
 class CategoryDomain
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      *

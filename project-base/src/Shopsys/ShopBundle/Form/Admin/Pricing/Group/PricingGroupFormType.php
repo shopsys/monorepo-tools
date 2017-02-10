@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class PricingGroupFormType extends AbstractType
 {
-
     /**
      * @return string
      */

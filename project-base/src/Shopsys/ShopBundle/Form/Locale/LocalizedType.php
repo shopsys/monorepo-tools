@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class LocalizedType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Localization
      */

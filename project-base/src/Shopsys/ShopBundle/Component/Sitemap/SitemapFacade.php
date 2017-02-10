@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class SitemapFacade
 {
-
     /**
      * @var string
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidDomainIdException extends Exception implements DomainException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

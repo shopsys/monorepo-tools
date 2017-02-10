@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
      */

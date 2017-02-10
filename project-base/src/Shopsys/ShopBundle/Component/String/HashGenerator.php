@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\String;
 
 class HashGenerator
 {
-
     private $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
 
     /**

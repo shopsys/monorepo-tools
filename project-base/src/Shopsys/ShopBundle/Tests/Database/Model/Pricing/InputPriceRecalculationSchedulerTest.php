@@ -24,7 +24,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 {
-
     public function testOnKernelResponseNoAction() {
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */

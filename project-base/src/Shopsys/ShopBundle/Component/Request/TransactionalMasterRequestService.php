@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class TransactionalMasterRequestService
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

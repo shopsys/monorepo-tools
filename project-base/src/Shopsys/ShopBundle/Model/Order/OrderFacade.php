@@ -32,7 +32,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderFacade
 {
-
     const VARIABLE_NUMBER = '{number}';
     const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';
     const VARIABLE_PAYMENT_INSTRUCTIONS = '{payment_instructions}';

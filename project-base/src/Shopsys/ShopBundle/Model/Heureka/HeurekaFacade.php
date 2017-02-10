@@ -10,7 +10,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class HeurekaFacade
 {
-
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */

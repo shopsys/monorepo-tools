@@ -9,7 +9,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CurrentDomainRouter implements RouterInterface
 {
-
     /**
      * @var \Symfony\Component\Routing\RequestContext
      */

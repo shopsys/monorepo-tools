@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

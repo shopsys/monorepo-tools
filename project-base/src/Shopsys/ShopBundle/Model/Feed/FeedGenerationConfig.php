@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 class FeedGenerationConfig
 {
-
     /**
      * @var string|null
      */

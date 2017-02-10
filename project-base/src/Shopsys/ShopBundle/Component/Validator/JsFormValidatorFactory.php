@@ -7,7 +7,6 @@ use Symfony\Component\Validator\Constraints;
 
 class JsFormValidatorFactory extends BaseJsFormValidatorFactory
 {
-
     /**
      * @param array $constraints
      * @return array

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class InputPriceTypeFormType extends AbstractType
 {
-
     /**
      * @return string
      */

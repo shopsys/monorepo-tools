@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Mail\Exception\MailException;
 
 class MailTemplateNotFoundException extends Exception implements MailException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 class CurrencyRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

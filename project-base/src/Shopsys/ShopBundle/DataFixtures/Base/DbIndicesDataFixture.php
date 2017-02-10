@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 
 class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

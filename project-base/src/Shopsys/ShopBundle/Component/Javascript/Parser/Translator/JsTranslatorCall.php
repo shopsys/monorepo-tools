@@ -7,7 +7,6 @@ use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
 class JsTranslatorCall
 {
-
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */

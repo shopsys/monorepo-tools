@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Country\Country;
 
 class CountryRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

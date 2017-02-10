@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class ModuleExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade
      */

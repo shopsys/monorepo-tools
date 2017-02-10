@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  */
 class TransportPrice
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport
      *

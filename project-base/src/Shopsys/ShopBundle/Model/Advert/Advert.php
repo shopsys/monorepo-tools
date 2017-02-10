@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Advert
 {
-
     const TYPE_IMAGE = 'image';
     const TYPE_CODE = 'code';
 

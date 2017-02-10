@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
      */

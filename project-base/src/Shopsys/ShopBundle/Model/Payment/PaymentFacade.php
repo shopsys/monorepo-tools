@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class PaymentFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

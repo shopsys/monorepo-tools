@@ -20,7 +20,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
  */
 class Order
 {
-
     /**
      * @var int
      *

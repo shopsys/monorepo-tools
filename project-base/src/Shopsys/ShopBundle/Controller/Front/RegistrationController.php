@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RegistrationController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
      */

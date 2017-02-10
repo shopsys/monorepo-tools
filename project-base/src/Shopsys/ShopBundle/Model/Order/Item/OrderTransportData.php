@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderTransport;
 
 class OrderTransportData extends OrderItemData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport
      */

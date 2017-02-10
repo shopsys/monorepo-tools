@@ -14,7 +14,6 @@ use Twig_Node;
 
 class JsFileExtractor implements FileVisitorInterface
 {
-
     /**
      * @var \SplFileInfo
      */
@@ -68,7 +67,6 @@ class JsFileExtractor implements FileVisitorInterface
      * @param array $ast
      */
     public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast) {
-
     }
 
     /**
@@ -77,7 +75,6 @@ class JsFileExtractor implements FileVisitorInterface
      * @param \Twig_Node $node
      */
     public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $node) {
-
     }
 
     /**

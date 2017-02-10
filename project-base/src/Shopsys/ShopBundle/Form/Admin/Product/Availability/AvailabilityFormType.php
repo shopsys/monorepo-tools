@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class AvailabilityFormType extends AbstractType
 {
-
     /**
      * @return string
      */

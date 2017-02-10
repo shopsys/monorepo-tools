@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade
      */

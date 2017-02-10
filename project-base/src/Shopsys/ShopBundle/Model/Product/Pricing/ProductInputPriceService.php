@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductInputPriceService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation
      */

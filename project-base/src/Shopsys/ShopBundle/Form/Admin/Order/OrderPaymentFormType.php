@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderPaymentFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment[]
      */

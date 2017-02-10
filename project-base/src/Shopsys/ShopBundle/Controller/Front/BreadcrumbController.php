@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 
 class BreadcrumbController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
      */

@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ProductCalculatedPrice
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      *

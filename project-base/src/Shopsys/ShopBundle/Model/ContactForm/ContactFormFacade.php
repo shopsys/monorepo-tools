@@ -11,7 +11,6 @@ use Twig_Environment;
 
 class ContactFormFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade
      */

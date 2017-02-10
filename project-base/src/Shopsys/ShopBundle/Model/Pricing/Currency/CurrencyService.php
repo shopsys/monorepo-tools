@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class CurrencyService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency

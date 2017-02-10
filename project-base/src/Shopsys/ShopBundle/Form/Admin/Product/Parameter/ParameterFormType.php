@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ParameterFormType extends AbstractType
 {
-
     /**
      * @return string
      */

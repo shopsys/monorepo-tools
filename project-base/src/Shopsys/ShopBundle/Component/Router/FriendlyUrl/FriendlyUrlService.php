@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\String\TransformString;
 
 class FriendlyUrlService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

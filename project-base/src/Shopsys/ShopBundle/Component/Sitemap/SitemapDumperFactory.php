@@ -9,7 +9,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class SitemapDumperFactory
 {
-
     const MAX_ITEMS_IN_FILE = 50000;
 
     /**

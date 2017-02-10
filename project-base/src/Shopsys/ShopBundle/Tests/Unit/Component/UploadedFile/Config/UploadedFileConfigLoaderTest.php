@@ -9,7 +9,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase
 {
-
     public function testLoadFromYaml() {
         $configurationFilapath = __DIR__ . '/test_config_uploaded_files.yml';
         $filesystem = new Filesystem();

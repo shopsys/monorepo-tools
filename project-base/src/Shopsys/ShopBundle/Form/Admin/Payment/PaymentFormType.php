@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class PaymentFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
      */
@@ -45,7 +44,6 @@ class PaymentFormType extends AbstractType
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-
         $builder
             ->add('name', FormType::LOCALIZED, [
                 'main_constraints' => [

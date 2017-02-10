@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ProductPriceCronModule implements IteratedCronModuleInterface
 {
-
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
@@ -31,11 +30,9 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
     }
 
     public function sleep() {
-
     }
 
     public function wakeUp() {
-
     }
 
     /**

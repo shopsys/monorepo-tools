@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testFilterScheduledCronModuleConfigs() {
         $cronModuleMock = $this->getMockForAbstractClass(CronModuleInterface::class);
 

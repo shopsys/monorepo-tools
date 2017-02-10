@@ -12,7 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class MultidomainType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

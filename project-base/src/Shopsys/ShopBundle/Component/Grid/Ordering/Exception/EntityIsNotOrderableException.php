@@ -6,7 +6,6 @@ use Exception;
 
 class EntityIsNotOrderableException extends Exception implements OrderingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

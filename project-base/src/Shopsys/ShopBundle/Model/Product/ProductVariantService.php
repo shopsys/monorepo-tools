@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductVariantService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */

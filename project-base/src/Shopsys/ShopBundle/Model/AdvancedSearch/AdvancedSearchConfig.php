@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class AdvancedSearchConfig
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]
      */

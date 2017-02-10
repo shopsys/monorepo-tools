@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class ModuleList extends AbstractTranslatedConstantList
 {
-
     const ACCESSORIES_ON_BUY = 'accessoriesOnBuy';
     const PRODUCT_FILTER_COUNTS = 'productFilterCounts';
     const PRODUCT_STOCK_CALCULATIONS = 'productStockCalculations';

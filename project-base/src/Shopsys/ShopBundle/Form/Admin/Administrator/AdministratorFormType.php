@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints;
 
 class AdministratorFormType extends AbstractType
 {
-
     const SCENARIO_CREATE = 'create';
     const SCENARIO_EDIT = 'edit';
 

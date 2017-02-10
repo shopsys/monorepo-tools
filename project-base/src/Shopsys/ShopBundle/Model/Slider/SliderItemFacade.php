@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Slider\SliderItemRepository;
 
 class SliderItemFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidItemTypeException extends Exception implements MenuException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

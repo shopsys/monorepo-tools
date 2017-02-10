@@ -7,7 +7,6 @@ use PLUG\JavaScript\JTokenizer;
 
 class JsCompiler
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
      */

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TermsAndConditionsController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
      */

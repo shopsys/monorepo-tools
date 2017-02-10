@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Flag;
 
 class FlagData
 {
-
     /**
      * @var string[]
      */

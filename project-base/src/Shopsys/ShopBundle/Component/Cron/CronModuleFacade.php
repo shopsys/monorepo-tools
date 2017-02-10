@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Cron\CronService;
 
 class CronModuleFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

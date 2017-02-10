@@ -12,7 +12,6 @@ use Symfony\Component\DependencyInjection\ScopeInterface;
 
 class AutoContainer implements ContainerInterface
 {
-
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
      */

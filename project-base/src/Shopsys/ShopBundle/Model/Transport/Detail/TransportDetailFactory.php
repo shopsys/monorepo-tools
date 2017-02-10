@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportDetailFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation
      */

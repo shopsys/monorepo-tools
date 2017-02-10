@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Router;
 
 class ActionColumn
 {
-
     const TYPE_DELETE = 'delete';
     const TYPE_EDIT = 'edit';
 

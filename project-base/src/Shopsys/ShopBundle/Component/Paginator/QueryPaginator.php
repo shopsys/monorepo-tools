@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface
 {
-
     /**
      * @var \Doctrine\ORM\QueryBuilder
      */

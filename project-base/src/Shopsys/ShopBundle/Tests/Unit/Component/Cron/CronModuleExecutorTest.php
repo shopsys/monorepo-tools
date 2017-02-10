@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
 class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testRunModuleSuspendAfterTimeout() {
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('sleep');

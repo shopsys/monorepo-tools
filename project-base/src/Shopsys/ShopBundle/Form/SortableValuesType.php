@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SortableValuesType extends AbstractType
 {
-
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */

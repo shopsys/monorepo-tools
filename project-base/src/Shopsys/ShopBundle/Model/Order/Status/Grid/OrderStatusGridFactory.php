@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

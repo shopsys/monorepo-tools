@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Command\Exception\CommandException;
 
 class CronCommandException extends Exception implements CommandException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

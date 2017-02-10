@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException;
 
 class UserNotFoundByEmailAndDomainException extends UserNotFoundException
 {
-
     /**
      * @var string
      */

@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 class NormalizingExtractorManager extends ExtractorManager
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer
      */

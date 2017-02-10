@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\String;
 
 class TransformString
 {
-
     /**
      * @param string $string
      * @return string

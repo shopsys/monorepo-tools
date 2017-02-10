@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
 class FlagFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

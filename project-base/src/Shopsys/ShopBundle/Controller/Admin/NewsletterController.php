@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class NewsletterController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
      */

@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory
 {
-
     public function __construct(
         ProductAdvancedSearchConfig $productAdvancedSearchConfig,
         AdvancedSearchProductFilterTranslation $advancedSearchProductFilterTranslation,

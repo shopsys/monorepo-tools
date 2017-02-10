@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
 {
-
     public function isSameFeedAndDomainProvider() {
         return [
             [new FeedGenerationConfig('feedName', 1), true],

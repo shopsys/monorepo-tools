@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\OrderData;
 
 class OrderDataMapper
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
      * @return \Shopsys\ShopBundle\Model\Order\OrderData

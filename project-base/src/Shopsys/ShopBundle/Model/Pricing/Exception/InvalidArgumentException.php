@@ -7,7 +7,6 @@ use InvalidArgumentException as BaseInvalidArgumentException;
 
 class InvalidArgumentException extends BaseInvalidArgumentException implements PricingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ShopInfoSettingFormType extends AbstractType
 {
-
     /**
      * @return string
      */

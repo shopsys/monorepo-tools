@@ -7,7 +7,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class ContainsValidator extends ConstraintValidator
 {
-
     /**
      * @param string $value
      * @param \Symfony\Component\Validator\Constraint $constraint

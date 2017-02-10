@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProductMassActionFormType extends AbstractType
 {
-
     /**
      * @return string
      */

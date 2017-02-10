@@ -8,7 +8,6 @@ use Symfony\Component\Routing\Router;
 
 class LocalizedRouterFactory
 {
-
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
      */

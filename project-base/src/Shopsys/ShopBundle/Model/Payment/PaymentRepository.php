@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class PaymentRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class OrderProductTest extends PHPUnit_Framework_TestCase
 {
-
     public function testEditWithProduct() {
         $orderMock = $this->getMock(Order::class, [], [], '', false);
         $productMock = $this->getMock(Product::class, [], [], '', false);

@@ -9,7 +9,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateErrorPagesCommand extends ContainerAwareCommand
 {
-
     protected function configure() {
         $this
             ->setName('shopsys:error-page:generate-all')

@@ -6,7 +6,6 @@ use Exception;
 
 class EntityMultipleImageException extends Exception implements ImageException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

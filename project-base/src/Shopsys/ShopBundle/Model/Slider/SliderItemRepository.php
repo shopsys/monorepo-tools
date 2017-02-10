@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Slider\SliderItem;
 
 class SliderItemRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

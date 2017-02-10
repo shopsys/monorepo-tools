@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class HeurekaItemFactory implements FeedItemFactoryInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */

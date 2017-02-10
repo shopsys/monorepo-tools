@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 
 class AvailabilityService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability

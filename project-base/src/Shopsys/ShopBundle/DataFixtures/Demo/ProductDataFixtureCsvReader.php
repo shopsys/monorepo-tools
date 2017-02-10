@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\String\TransformString;
 
 class ProductDataFixtureCsvReader
 {
-
     /**
      * @var string
      */

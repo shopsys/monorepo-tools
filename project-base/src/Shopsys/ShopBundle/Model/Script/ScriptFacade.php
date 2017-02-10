@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Script\ScriptRepository;
 
 class ScriptFacade
 {
-
     const VARIABLE_NUMBER = '{number}';
     const VARIABLE_TOTAL_PRICE = '{total_price}';
 

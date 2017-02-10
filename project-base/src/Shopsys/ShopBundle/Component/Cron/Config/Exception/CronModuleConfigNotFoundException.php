@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
 
 class CronModuleConfigNotFoundException extends Exception implements CronConfigException
 {
-
     /**
      * @param string $moduleId
      * @param \Exception $previous

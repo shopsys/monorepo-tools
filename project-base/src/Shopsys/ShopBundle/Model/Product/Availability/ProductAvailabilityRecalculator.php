@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductAvailabilityRecalculator
 {
-
     const BATCH_SIZE = 100;
 
     /**

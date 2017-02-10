@@ -14,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TranslationReplaceSourceCommand extends ContainerAwareCommand
 {
-
     const ARG_TRANSLATIONS_DIR = 'translationsDir';
     const ARG_SOURCE_CODE_DIR = 'sourceCodeDir';
     const ARG_TARGET_LOCALE = 'targetLocale';

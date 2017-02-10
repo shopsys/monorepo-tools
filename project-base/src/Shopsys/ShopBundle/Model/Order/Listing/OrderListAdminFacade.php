@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\Listing;
 
 class OrderListAdminFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository
      */

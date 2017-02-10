@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 interface FeedItemInterface
 {
-
     /**
      * @return int
      */

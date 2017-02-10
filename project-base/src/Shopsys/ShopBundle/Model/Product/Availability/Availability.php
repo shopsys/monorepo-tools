@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation;
  */
 class Availability extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

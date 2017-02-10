@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class PaymentPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
      */

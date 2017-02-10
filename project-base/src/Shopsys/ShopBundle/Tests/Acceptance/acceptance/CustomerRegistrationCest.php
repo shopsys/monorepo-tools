@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CustomerRegistrationCest
 {
-
     public function testSuccessfulRegistration(RegistrationPage $registrationPage, AcceptanceTester $me) {
         $me->wantTo('successfully register new customer');
         $me->amOnPage('/');

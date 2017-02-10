@@ -9,7 +9,6 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordService
 {
-
     const RESET_PASSWORD_HASH_LENGTH = 50;
 
     /**

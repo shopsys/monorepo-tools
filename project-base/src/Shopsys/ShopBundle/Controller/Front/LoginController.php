@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Security\LoginService
      */

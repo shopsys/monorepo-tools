@@ -6,7 +6,6 @@ use Exception;
 
 class UnsupportedModuleException extends Exception implements ModuleException
 {
-
     /**
      * @param string $moduleName
      * @param \Exception|null $previous

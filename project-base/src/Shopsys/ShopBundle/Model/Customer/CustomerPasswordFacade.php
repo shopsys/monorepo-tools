@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
 class CustomerPasswordFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

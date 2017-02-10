@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Image\Exception\ImageException;
 
 class ImageNotFoundException extends Exception implements ImageException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
 class SlowLogFacade
 {
-
     const REQUEST_TIME_LIMIT_SECONDS = 2;
 
     /**

@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetEnteredPromoCode() {
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);

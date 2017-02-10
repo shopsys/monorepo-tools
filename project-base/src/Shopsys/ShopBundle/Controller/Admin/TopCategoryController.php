@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TopCategoryController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
 class PaymentDetailFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation
      */

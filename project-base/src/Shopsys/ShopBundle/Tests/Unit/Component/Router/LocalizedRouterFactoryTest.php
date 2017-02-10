@@ -10,7 +10,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetRouterRouterNotResolvedException() {
         $localeRoutersConfiguration = [];
         $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);

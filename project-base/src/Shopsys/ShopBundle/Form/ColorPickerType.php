@@ -6,7 +6,6 @@ use Symfony\Component\Form\AbstractType;
 
 class ColorPickerType extends AbstractType
 {
-
     public function getParent() {
         return 'text';
     }

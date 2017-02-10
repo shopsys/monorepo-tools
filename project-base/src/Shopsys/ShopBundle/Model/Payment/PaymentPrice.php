@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
  */
 class PaymentPrice
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment
      *

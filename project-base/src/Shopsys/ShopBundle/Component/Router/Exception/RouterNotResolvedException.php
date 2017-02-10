@@ -6,7 +6,6 @@ use Exception;
 
 class RouterNotResolvedException extends Exception implements RouterException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

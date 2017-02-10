@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class TransportData
 {
-
     /**
      * @var string[]
      */

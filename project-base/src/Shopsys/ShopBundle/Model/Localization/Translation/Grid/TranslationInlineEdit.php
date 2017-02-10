@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormFactory;
 
 class TranslationInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade
      */

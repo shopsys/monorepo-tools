@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService
      */

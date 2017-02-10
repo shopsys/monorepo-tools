@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class ParameterInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
      */

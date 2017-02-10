@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Slider;
 
 class SliderItemData
 {
-
     /**
      * @var string|null
      */

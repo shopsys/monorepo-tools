@@ -6,7 +6,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class NoopDataTransformer implements DataTransformerInterface
 {
-
     /**
      * {@inheritDoc}
      */

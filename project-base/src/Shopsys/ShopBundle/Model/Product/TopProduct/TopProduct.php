@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class TopProduct
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      *

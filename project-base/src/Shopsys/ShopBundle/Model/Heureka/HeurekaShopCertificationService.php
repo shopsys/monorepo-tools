@@ -6,7 +6,6 @@ use Heureka\ShopCertification;
 
 class HeurekaShopCertificationService
 {
-
     /**
      * @param string $locale
      * @return bool

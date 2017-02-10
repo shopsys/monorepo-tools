@@ -14,7 +14,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
 {
-
     /**
      * @var \Symfony\Component\Routing\RouterInterface
      */

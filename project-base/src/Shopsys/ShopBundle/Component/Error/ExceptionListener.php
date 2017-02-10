@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
 class ExceptionListener
 {
-
     /**
      * @var \Exception|null
      */

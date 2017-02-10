@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints;
 
 class NewPasswordFormType extends AbstractType
 {
-
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

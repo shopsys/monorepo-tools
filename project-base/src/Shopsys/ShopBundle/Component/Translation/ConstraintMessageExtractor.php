@@ -33,7 +33,6 @@ use Twig_Node;
  */
 class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
 {
-
     const CONSTRAINT_MESSAGE_DOMAIN = 'validators';
 
     /**

@@ -31,7 +31,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
      */

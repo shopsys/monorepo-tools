@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class FriendlyUrlToGenerateRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

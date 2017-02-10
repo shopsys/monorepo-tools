@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class ProductStockFilter implements AdvancedSearchFilterInterface
 {
-
     /**
      * {@inheritdoc}
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
 class BestsellingProductService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $automaticProducts

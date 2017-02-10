@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
 class ZboziItem implements FeedItemInterface
 {
-
     /**
      * @var int
      */

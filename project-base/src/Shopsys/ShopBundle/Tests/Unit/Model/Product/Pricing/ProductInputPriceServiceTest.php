@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetManualInputPricesDataWithManualCalculationType() {
         $productData = new ProductData();
         $productData->vat = new Vat(new VatData('VatName', '10.0'));

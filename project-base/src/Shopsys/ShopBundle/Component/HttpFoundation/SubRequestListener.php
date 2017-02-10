@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class SubRequestListener
 {
-
     /**
      * @var \Symfony\Component\HttpFoundation\RedirectResponse
      */

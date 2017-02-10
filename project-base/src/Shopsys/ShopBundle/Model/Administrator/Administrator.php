@@ -24,7 +24,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Administrator implements UserInterface, Serializable, UniqueLoginInterface, TimelimitLoginInterface
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -315,7 +314,6 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      * @inheritDoc
      */
     public function eraseCredentials() {
-
     }
 
     /**

@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
 class NumberFormatterExtensionTest extends FunctionalTestCase
 {
-
     const NBSP = "\xc2\xa0";
 
     public function formatNumberDataProvider() {

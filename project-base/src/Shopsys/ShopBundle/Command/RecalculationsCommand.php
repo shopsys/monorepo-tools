@@ -14,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculationsCommand extends ContainerAwareCommand
 {
-
     protected function configure() {
         $this
             ->setName('shopsys:recalculations')

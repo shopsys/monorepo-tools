@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
      */

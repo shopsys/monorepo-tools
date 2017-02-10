@@ -10,7 +10,6 @@ use Twig_Environment;
 
 class GridView
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\Grid
      */

@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     const PREFIX = 'category_';
 
     const ELECTRONICS = 'electronics';
@@ -32,7 +31,6 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function load(ObjectManager $manager) {
-
         $categoryData = new CategoryData();
 
         $categoryData->name = ['cs' => 'Elektro'];

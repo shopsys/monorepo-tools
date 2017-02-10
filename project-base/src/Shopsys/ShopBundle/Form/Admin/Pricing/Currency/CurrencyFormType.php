@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CurrencyFormType extends AbstractType
 {
-
     const EXCHANGE_RATE_IS_READ_ONLY = true;
     const EXCHANGE_RATE_IS_NOT_READ_ONLY = false;
 

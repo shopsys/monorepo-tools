@@ -9,7 +9,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class VatDeletionCronModule implements IteratedCronModuleInterface
 {
-
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
@@ -43,7 +42,6 @@ class VatDeletionCronModule implements IteratedCronModuleInterface
     }
 
     public function wakeUp() {
-
     }
 
     /**

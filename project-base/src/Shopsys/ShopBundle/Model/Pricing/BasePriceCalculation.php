@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class BasePriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
      */

@@ -7,7 +7,6 @@ use JMS\TranslationBundle\Model\MessageCatalogue;
 
 class MessageIdNormalizer
 {
-
     /**
      * @param string $messageId
      * @return string

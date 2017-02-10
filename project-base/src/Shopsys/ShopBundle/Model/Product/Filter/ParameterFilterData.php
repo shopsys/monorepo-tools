@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 
 class ParameterFilterData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */

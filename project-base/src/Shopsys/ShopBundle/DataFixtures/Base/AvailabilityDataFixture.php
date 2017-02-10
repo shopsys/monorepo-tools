@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 
 class AvailabilityDataFixture extends AbstractReferenceFixture
 {
-
     const IN_STOCK = 'availability_in_stock';
     const ON_REQUEST = 'availability_on_request';
     const OUT_OF_STOCK = 'availability_out_of_stock';

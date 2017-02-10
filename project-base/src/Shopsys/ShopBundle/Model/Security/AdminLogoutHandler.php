@@ -10,7 +10,6 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class AdminLogoutHandler implements LogoutSuccessHandlerInterface
 {
-
     /**
      * @var \Symfony\Component\Routing\Router
      */

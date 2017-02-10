@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductMassActionRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

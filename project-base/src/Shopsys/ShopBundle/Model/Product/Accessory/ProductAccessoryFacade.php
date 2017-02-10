@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductAccessoryFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository
      */

@@ -7,7 +7,6 @@ use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
 class MultipleServicesOfClassException extends Exception implements CompilerException
 {
-
     /**
      * @param string $className
      * @param string[] $serviceIds

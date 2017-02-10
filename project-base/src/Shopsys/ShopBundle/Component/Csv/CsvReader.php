@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Csv;
 
 class CsvReader
 {
-
     /**
      * @param string $filename
      * @return array

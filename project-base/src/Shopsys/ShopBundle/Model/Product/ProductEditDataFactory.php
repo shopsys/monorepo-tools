@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Product\ProductDataFactory;
 
 class ProductEditDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

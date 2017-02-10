@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductCalculatedPriceRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

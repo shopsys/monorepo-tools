@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Country;
 
 class CountryData
 {
-
     /**
      * @var string
      */

@@ -12,7 +12,6 @@ use Twig_Environment;
 
 class GridFactory
 {
-
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */

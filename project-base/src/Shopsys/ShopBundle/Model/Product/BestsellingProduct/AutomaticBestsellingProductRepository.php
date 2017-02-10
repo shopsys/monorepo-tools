@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class AutomaticBestsellingProductRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

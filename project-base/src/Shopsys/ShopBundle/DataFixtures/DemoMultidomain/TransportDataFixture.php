@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

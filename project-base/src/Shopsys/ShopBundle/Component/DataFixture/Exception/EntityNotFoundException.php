@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
 class EntityNotFoundException extends Exception implements DataFixtureException
 {
-
     /**
      * @param string $referenceName
      * @param \Exception|null $previous

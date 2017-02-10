@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 
 class IndependentPaymentVisibilityCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentRepository
      */

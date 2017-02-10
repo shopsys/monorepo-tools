@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 
 class DoctrineListener
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
      */

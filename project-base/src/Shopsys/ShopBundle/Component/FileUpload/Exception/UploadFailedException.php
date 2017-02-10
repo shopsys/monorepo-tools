@@ -6,7 +6,6 @@ use Exception;
 
 class UploadFailedException extends Exception implements FileUploadException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

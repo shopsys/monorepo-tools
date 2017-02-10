@@ -14,7 +14,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageDeleteDoctrineListener
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

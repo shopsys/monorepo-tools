@@ -7,7 +7,6 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 class PerformanceTestSummaryPrinter
 {
-
     /**
      * @var \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier
      */

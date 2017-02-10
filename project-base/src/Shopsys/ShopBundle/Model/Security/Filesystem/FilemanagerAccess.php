@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilemanagerAccess
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess|null
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
 class BreadcrumbItem
 {
-
     /**
      * @var string
      */

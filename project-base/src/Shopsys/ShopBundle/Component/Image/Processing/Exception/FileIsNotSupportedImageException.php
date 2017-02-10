@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Image\Processing\Exception\ImageProcessingExcep
 
 class FileIsNotSupportedImageException extends Exception implements ImageProcessingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

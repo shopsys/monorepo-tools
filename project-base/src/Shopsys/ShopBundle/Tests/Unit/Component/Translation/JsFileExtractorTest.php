@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Component\Translation\JsFileExtractor;
 
 class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testExtract() {
         $fileName = 'test.js';
 

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 
 class PaymentVisibilityCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation
      */

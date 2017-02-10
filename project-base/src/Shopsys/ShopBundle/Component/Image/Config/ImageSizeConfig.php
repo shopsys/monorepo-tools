@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Image\Config;
 
 class ImageSizeConfig
 {
-
     /**
      * @var string|null
      */

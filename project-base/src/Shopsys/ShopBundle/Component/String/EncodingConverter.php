@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\String;
 
 class EncodingConverter
 {
-
     /**
      * @param string $stringCp1250
      * @return string

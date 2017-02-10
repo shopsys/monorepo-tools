@@ -7,7 +7,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class DomainsUrlsConfigDefinition implements ConfigurationInterface
 {
-
     const CONFIG_DOMAINS_URLS = 'domains_urls';
     const CONFIG_ID = 'id';
     const CONFIG_URL = 'url';

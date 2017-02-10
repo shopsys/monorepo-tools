@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateUserNameException extends Exception implements AdministratorException
 {
-
     /**
      * @var string
      */

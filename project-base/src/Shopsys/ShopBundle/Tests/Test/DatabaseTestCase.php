@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 abstract class DatabaseTestCase extends FunctionalTestCase
 {
-
     /**
      * @return \Doctrine\ORM\EntityManager
      */

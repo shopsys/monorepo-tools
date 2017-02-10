@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductDetailFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */

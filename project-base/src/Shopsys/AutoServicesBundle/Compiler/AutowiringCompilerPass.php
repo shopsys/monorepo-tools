@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class AutowiringCompilerPass implements CompilerPassInterface
 {
-
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller
      */

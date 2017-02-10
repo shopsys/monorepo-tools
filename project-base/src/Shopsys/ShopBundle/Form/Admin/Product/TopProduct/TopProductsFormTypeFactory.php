@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
 
 class TopProductsFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer
      */

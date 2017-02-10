@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class OrderPreviewCalculationTest extends FunctionalTestCase
 {
-
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */

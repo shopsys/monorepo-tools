@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ArticleFormType extends AbstractType
 {
-
     /**
      * @var string[]
      */

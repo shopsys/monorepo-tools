@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryRepository;
 
 class TopCategoryFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

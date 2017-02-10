@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinder
 
 class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetMultidomainEntitiesNames() {
         $classMetadataMock1 = $this->getMock(ClassMetadata::class, [], [], '', false);
         $classMetadataMock1

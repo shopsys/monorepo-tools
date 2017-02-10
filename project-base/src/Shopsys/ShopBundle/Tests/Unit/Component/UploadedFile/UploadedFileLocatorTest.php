@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 
 class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testFileExists() {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';

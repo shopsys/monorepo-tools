@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Image\Image;
 
 class ImageConfig
 {
-
     const ORIGINAL_SIZE_NAME = 'original';
     const DEFAULT_SIZE_NAME = 'default';
 

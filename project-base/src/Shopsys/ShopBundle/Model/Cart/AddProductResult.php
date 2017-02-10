@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 
 class AddProductResult
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem
      */

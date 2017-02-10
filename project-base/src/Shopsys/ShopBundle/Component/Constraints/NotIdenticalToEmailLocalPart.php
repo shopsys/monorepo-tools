@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraint;
 
 class NotIdenticalToEmailLocalPart extends Constraint
 {
-
     public $password;
 
     public $email;

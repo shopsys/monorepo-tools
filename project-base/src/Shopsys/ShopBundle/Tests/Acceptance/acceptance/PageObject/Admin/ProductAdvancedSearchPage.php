@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductAdvancedSearchPage extends AbstractPage
 {
-
     const SEARCH_SUBJECT_CATNUM = 'productCatnum';
 
     /**

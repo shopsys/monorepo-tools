@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 
 class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
      */
@@ -23,7 +22,6 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
     public function getBreadcrumbItems($routeName, array $routeParameters = []) {
-
         $isBrandDetail = $routeName === 'front_brand_detail';
 
         $breadcrumbItems[] = new BreadcrumbItem(

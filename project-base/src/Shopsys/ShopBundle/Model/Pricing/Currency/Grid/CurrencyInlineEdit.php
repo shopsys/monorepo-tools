@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormFactory;
 
 class CurrencyInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade
      */

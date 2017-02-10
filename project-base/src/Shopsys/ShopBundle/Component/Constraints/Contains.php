@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class Contains extends Constraint
 {
-
     public $message = 'Field must contain {{ needle }}.';
     public $needle = null;
 

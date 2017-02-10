@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Category\Category;
 
 class LazyLoadedCategoryDetail
 {
-
     /**
      * @var \Closure
      */

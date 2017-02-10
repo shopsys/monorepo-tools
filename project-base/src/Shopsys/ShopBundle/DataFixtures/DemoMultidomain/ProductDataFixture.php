@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
 class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class BestsellingProductFormType extends AbstractType
 {
-
     /**
      * @return string
      */

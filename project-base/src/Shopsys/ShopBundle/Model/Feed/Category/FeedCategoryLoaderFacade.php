@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\Category\HeurekaFeedCategoryLoader;
 
 class FeedCategoryLoaderFacade
 {
-
     /**
      * @var string
      */

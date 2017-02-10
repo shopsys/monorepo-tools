@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Twig\FileThumbnail;
 
 class FileThumbnailInfo
 {
-
     /**
      * @var string|null
      */

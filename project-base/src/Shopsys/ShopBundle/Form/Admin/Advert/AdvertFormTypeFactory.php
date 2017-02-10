@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Twig\ImageExtension;
 
 class AdvertFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList
      */

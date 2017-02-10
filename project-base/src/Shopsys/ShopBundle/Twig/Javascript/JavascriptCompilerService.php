@@ -10,7 +10,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class JavascriptCompilerService
 {
-
     const NOT_COMPILED_FOLDER = '/plugins/';
 
     /**

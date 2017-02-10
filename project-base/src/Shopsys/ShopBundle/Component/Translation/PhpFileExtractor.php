@@ -20,7 +20,6 @@ use Twig_Node;
 
 class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
 {
-
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 
     /**

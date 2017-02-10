@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 
 class UnitGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

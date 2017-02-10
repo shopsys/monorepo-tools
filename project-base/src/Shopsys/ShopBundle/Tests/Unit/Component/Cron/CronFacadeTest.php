@@ -16,7 +16,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testRunModuleByModuleId() {
         $moduleId = 'moduleId';
         $cronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);

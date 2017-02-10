@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Setting\SettingValue;
 
 class SettingValueRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

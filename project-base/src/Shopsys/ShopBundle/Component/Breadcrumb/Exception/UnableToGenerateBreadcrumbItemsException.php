@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Breadcrumb\Exception\BreadcrumbException;
 
 class UnableToGenerateBreadcrumbItemsException extends Exception implements BreadcrumbException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

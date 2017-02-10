@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Module\ModuleList;
 
 class EnabledModuleRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

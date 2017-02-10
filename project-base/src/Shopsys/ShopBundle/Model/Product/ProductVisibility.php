@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ProductVisibility
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product
      *

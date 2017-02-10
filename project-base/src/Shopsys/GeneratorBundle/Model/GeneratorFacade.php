@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class GeneratorFacade
 {
-
     /**
      * @var \Shopsys\GeneratorBundle\Model\GeneratorCollection
      */

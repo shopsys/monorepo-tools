@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Model\Product\ProductService;
 
 class ProductInputPriceFacade
 {
-
     const BATCH_SIZE = 50;
 
     /**

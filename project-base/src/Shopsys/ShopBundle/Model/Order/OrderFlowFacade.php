@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class OrderFlowFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Front\Order\OrderFlow
      */

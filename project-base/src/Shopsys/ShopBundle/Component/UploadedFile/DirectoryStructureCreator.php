@@ -8,7 +8,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DirectoryStructureCreator
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
      */

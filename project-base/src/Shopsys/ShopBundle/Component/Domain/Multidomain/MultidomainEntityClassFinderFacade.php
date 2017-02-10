@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
 class MultidomainEntityClassFinderFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 
 class CountryFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

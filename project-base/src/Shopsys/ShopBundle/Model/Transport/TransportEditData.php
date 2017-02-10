@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportData;
 
 class TransportEditData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportData
      */

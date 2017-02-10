@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductListAdminRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

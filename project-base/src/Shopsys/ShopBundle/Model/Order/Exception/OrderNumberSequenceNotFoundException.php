@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\Exception\OrderException;
 
 class OrderNumberSequenceNotFoundException extends Exception implements OrderException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Order\Order;
 
 class HeurekaShopCertificationFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Product\ProductDeleteResult;
 
 class ProductService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
      */

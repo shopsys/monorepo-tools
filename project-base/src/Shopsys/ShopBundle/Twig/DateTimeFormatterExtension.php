@@ -10,7 +10,6 @@ use Twig_Extension;
 
 class DateTimeFormatterExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
      */

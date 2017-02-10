@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductManualInputPriceRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

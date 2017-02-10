@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 
 class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

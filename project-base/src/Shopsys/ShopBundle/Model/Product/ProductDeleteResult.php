@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductDeleteResult
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product[]
      */

@@ -9,7 +9,6 @@ use Twig_SimpleFunction;
 
 class ProductExtension extends \Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
      */

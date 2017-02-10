@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class TransportEditFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory
      */

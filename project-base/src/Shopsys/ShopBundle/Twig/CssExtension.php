@@ -7,7 +7,6 @@ use Twig_SimpleFunction;
 
 class CssExtension extends \Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade
      */

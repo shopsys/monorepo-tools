@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Order\Order;
 
 class OrderListAdminRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

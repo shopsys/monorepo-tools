@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
 class TransportPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation
      */

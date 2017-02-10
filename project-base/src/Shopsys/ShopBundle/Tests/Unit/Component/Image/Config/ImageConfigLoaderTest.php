@@ -14,7 +14,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
 {
-
     public function testLoadFromArrayDuplicateEntityName() {
         $inputConfig = [
             [

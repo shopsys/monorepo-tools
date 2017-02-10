@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 
 class MailTemplateRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

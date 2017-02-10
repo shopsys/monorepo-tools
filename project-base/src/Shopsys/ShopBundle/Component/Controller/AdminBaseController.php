@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AdminBaseController extends Controller
 {
-
     /**
      * @return \Shopsys\ShopBundle\Component\FlashMessage\FlashMessageSender
      */

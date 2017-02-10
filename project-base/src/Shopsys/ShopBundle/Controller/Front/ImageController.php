@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ImageController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorFacade
      */

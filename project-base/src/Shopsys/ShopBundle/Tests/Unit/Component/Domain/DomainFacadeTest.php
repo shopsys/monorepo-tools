@@ -15,7 +15,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DomainFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGeDomainConfigsByCurrency() {
         $testDomainConfigs = [
             1 => new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),

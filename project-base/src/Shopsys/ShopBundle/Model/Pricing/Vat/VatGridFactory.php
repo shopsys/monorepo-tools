@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

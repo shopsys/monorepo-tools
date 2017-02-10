@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CustomerIdentifierFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
      */

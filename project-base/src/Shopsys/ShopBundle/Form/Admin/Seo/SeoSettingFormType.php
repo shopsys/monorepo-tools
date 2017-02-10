@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SeoSettingFormType extends AbstractType
 {
-
     /**
      * @var string[]
      */

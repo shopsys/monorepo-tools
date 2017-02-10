@@ -7,7 +7,6 @@ use Doctrine\ORM\QueryBuilder;
 
 class QueryBuilderService
 {
-
     const REQUIRED_ALIASES_COUNT = 1;
 
     /**

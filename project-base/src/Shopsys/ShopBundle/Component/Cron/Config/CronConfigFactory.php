@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronConfigFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver
      */

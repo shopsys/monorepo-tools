@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Listing;
 
 class ProductListOrderingConfig
 {
-
     /**
      * @var string[orderingMode]
      */

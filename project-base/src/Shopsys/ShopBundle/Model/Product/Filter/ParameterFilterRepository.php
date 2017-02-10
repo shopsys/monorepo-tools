@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 
 class ParameterFilterRepository
 {
-
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters

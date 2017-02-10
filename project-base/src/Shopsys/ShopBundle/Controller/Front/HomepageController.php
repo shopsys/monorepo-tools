@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
 class HomepageController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
      */

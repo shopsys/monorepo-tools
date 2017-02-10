@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CookiesSettingFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Article\Article[]
      */

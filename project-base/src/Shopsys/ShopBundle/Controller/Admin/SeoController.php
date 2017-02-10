@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SeoController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormTypeFactory
      */

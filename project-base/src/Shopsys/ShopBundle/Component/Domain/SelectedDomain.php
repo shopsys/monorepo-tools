@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class SelectedDomain
 {
-
     const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 
     /**

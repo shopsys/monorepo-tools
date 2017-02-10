@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchFacade
 {
-
     const RULES_FORM_NAME = 'as';
 
     /**

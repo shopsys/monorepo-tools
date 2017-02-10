@@ -10,7 +10,6 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class StrictWebDriver extends WebDriver
 {
-
     const WAIT_AFTER_CLICK_MICROSECONDS = 50000;
 
     /**
@@ -199,7 +198,6 @@ class StrictWebDriver extends WebDriver
      * @param string $label
      */
     public function seeCheckboxIsCheckedByLabel($label) {
-
         /*
          * XPath explanation:
          *
@@ -243,7 +241,6 @@ class StrictWebDriver extends WebDriver
      * @param string $label
      */
     public function dontSeeCheckboxIsCheckedByLabel($label) {
-
         /*
          * XPath explanation:
          *
@@ -287,7 +284,6 @@ class StrictWebDriver extends WebDriver
      * @param string $label
      */
     public function checkOptionByLabel($label) {
-
         /*
          * XPath explanation:
          *

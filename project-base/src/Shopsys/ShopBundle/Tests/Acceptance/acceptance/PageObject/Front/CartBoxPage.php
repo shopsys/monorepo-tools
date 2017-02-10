@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class CartBoxPage extends AbstractPage
 {
-
     /**
      * @param string $text
      */

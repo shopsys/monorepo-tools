@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CustomerCommunicationController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
      */

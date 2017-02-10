@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

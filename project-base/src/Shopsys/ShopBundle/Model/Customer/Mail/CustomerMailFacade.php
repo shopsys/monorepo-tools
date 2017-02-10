@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
 class CustomerMailFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService
      */

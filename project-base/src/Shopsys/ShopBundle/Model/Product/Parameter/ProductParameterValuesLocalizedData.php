@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 class ProductParameterValuesLocalizedData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */

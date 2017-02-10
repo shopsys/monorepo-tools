@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetOrderTotalPrice() {
         $orderItems = [
             $this->getMock(OrderProduct::class, [], [], '', false),

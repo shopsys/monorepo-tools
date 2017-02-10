@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateSuperadminNameException extends Exception implements AdministratorException
 {
-
     /**
      * @var string
      */

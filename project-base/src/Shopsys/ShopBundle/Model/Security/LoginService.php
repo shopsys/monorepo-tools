@@ -13,7 +13,6 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class LoginService
 {
-
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */

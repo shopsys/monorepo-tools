@@ -12,7 +12,6 @@ use stdClass;
 
 class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testPersistReferenceWrongEntity() {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])

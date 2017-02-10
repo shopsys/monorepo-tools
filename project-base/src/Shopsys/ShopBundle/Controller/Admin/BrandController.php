@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BrandController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

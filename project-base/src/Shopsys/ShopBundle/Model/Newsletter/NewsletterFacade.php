@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
 class NewsletterFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

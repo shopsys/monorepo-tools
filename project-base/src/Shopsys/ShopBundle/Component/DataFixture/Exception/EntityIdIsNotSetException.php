@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
 class EntityIdIsNotSetException extends Exception implements DataFixtureException
 {
-
     /**
      * @param string $referenceName
      * @param object $object

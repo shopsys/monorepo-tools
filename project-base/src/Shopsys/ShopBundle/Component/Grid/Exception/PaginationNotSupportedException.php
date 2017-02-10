@@ -6,7 +6,6 @@ use Exception;
 
 class PaginationNotSupportedException extends Exception implements GridException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class FlagFormType extends AbstractType
 {
-
     /**
      * @return string
      */

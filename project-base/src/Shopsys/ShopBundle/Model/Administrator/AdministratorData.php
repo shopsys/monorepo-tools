@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Administrator;
 
 class AdministratorData
 {
-
     /**
      * @var bool
      */

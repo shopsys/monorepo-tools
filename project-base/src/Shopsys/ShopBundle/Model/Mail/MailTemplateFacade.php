@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class MailTemplateFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

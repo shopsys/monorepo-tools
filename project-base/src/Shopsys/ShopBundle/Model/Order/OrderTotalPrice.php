@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order;
 
 class OrderTotalPrice
 {
-
     /**
      * @var string
      */

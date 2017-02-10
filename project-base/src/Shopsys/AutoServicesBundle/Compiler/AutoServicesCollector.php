@@ -6,7 +6,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class AutoServicesCollector
 {
-
     const CONFIG_FILENAME = 'autoServices.json';
 
     /**

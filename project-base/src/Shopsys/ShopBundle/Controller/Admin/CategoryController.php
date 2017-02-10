@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class CategoryController extends AdminBaseController
 {
-
     const ALL_DOMAINS = 0;
 
     /**

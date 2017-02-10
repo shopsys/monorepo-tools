@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class ProductHiddenRecalculator
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

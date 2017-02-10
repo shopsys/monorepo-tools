@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class QuantifiedProductDiscountCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
      */

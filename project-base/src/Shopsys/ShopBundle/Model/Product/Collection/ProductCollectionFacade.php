@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductCollectionFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService
      */

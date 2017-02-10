@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
 class ImageThumbnailFactory
 {
-
     const THUMBNAIL_WIDTH = 140;
     const THUMBNAIL_HEIGHT = 200;
 

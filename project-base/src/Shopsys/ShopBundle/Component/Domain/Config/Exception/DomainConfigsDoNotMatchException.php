@@ -6,7 +6,6 @@ use Exception;
 
 class DomainConfigsDoNotMatchException extends Exception implements DomainConfigException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

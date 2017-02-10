@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class ProductFilterCest
 {
-
     public function testAllProductFilters(
         AcceptanceTester $me,
         ProductFilterPage $productFilterPage,

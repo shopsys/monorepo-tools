@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
 class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
 {
-
     /**
      * @var callable
      */

@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints;
 
 class UserFormType extends AbstractType
 {
-
     /**
      * @var string
      */

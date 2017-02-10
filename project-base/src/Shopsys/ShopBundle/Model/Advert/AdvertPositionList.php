@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class AdvertPositionList extends AbstractTranslatedConstantList
 {
-
     const POSITION_HEADER = 'header';
     const POSITION_FOOTER = 'footer';
     const POSITION_PRODUCT_LIST = 'productList';

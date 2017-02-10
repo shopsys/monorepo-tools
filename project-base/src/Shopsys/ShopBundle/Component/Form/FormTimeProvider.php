@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class FormTimeProvider
 {
-
     /**
      * @var \Symfony\Component\HttpFoundation\Session\Session
      */

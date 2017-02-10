@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class SeoSettingFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

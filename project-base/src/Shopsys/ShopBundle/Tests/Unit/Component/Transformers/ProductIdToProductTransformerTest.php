@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testTransform() {
         $productId = 1;
         $product = $this->getMockBuilder(Product::class)

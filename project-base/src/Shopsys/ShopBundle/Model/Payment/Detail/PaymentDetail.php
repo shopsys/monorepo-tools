@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
 
 class PaymentDetail
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment
      */

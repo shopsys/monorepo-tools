@@ -10,7 +10,6 @@ use Shopsys\Environment;
 
 class SymfonyHelper extends Module
 {
-
     /**
      * @var \Symfony\Component\HttpKernel\Kernel
      */

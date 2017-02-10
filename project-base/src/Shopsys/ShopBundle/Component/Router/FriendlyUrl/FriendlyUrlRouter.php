@@ -12,7 +12,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FriendlyUrlRouter implements RouterInterface
 {
-
     /**
      * @var \Symfony\Component\Routing\RequestContext
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Cron\Config\Exception\CronConfigException;
 
 class InvalidTimeFormatException extends Exception implements CronConfigException
 {
-
     /**
      * @param string $timeString
      * @param int $maxValue

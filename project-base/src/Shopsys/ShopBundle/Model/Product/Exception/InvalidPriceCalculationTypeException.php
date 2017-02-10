@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidPriceCalculationTypeException extends Exception implements ProductException
 {
-
     /**
      * @param string $priceCalculationType
      * @param \Exception|null $previous

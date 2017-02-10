@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GeneratorController extends Controller
 {
-
     public function indexAction(Request $request) {
         $generatorsFormFactory = $this->get(GeneratorsFormFactory::class);
         /* @var $generatorsFormFactory \Shopsys\GeneratorBundle\Model\GeneratorsFormFactory */

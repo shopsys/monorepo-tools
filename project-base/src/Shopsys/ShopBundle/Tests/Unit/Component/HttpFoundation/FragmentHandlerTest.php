@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 
 class FragmentHandlerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testRenderNotIgnoreErrorsWithoutDebug() {
         $rendererMock = $this->getMock(FragmentRendererInterface::class);
         $rendererMock->expects($this->once())->method('getName')->will($this->returnValue('rendererName'));

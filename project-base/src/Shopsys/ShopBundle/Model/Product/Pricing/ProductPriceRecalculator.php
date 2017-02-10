@@ -14,7 +14,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductPriceRecalculator
 {
-
     const BATCH_SIZE = 100;
 
     /**

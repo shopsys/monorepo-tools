@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData;
  */
 class FeedCategory
 {
-
     /**
      * @var int
      *

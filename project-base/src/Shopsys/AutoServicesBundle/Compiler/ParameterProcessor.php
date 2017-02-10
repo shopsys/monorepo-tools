@@ -14,7 +14,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ParameterProcessor
 {
-
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
      */

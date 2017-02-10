@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 
 class DummyMailType implements MailTypeInterface
 {
-
     /**
      * @return string[]
      */

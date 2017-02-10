@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 interface CronTimeInterface
 {
-
     /**
      * @return string
      */

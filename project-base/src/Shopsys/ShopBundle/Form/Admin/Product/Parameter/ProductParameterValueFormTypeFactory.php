@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 
 class ProductParameterValueFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Exception\VariantException;
 
 class MainVariantCannotBeVariantException extends Exception implements VariantException
 {
-
     /**
      * @param int $productId
      * @param \Exception|null $previous

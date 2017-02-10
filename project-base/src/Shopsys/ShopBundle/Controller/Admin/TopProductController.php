@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TopProductController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade
      */

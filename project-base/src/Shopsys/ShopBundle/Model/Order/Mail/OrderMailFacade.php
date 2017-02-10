@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
 class OrderMailFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService
      */

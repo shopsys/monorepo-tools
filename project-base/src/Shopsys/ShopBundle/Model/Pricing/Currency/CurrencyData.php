@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
 class CurrencyData
 {
-
     /**
      * @var string
      */

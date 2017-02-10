@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\System;
 
 class System
 {
-
     /**
      * @return bool
      */

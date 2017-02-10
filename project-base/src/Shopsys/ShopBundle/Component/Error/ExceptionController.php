@@ -6,7 +6,6 @@ use Symfony\Bundle\TwigBundle\Controller\ExceptionController as BaseController;
 
 class ExceptionController extends BaseController
 {
-
     /**
      * @var bool
      */

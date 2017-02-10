@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Product\Collection;
 
 class ProductCollectionService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $products
      * @param \Shopsys\ShopBundle\Component\Image\Image $imagesByProductId

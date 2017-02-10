@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class AvailabilityInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
      */

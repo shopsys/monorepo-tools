@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 {
-
     public function testCopyAllMultidomainDataForNewDomainCopiesTestRow() {
         $em = $this->getContainer()->get(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */

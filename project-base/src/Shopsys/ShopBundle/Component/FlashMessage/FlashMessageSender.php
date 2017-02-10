@@ -6,7 +6,6 @@ use Twig_Environment;
 
 class FlashMessageSender
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\FlashMessage\Bag
      */

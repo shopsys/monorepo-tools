@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
 
 class ParameterService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter

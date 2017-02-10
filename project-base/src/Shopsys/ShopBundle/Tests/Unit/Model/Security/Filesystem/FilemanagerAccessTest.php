@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 
 class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
 {
-
     public function isPathAccessibleProvider() {
         return [
             [

@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  */
 class OrderTransport extends OrderItem
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport
      *

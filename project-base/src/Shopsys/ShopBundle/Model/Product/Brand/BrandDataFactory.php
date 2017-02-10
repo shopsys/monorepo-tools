@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 
 class BrandDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
      */

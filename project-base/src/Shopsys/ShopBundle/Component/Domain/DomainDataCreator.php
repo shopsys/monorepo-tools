@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreator
 {
-
     const TEMPLATE_DOMAIN_ID = 1;
 
     /**

@@ -9,7 +9,6 @@ use stdClass;
 
 class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testTransform() {
         $allPagesPlacement = Script::PLACEMENT_ALL_PAGES;
         $orderPagePlacement = Script::PLACEMENT_ORDER_SENT_PAGE;

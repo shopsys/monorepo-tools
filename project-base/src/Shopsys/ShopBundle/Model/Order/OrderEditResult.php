@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order;
 
 class OrderEditResult
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]
      */

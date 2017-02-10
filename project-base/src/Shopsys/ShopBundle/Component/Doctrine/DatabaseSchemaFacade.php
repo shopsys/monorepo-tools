@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class DatabaseSchemaFacade
 {
-
     /**
      * @var string
      */

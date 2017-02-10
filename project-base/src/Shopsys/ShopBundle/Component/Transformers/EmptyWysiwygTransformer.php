@@ -6,7 +6,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class EmptyWysiwygTransformer implements DataTransformerInterface
 {
-
     /**
      * @param mixed $value
      * @return mixed

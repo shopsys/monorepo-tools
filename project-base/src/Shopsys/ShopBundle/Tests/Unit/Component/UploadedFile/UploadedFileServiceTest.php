@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 
 class UploadedFileServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateUploadedFile() {
         $temporaryFilename = 'temporaryFilename.tmp';
         $temporaryFilenames = [$temporaryFilename];

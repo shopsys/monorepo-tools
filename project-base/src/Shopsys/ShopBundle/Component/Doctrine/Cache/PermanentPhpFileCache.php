@@ -6,7 +6,6 @@ use Doctrine\Common\Cache\PhpFileCache;
 
 class PermanentPhpFileCache extends PhpFileCache
 {
-
     /**
      * {@inheritdoc}
      */

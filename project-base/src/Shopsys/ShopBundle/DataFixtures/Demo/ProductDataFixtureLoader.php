@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 
 class ProductDataFixtureLoader
 {
-
     const COLUMN_NAME_CS = 0;
     const COLUMN_NAME_EN = 1;
     const COLUMN_CATNUM = 2;

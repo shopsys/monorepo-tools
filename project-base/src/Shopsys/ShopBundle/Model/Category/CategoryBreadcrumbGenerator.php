@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
 class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
      */

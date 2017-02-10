@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Advert\Advert;
 
 class AdvertData
 {
-
     /**
      * @var string|null
      */

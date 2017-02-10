@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
-
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client
      */

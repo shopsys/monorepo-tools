@@ -26,7 +26,6 @@ use Shopsys\ShopBundle\Model\Product\Search\ProductSearchRepository;
  */
 class ProductRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

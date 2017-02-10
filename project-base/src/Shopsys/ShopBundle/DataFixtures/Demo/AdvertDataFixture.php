@@ -11,12 +11,10 @@ use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
 class AdvertDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-
         $advertData = new AdvertData();
         $advertData->domainId = 1;
         $advertData->name = 'Demo advert';

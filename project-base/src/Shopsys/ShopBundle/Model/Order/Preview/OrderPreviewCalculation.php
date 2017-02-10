@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class OrderPreviewCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation
      */

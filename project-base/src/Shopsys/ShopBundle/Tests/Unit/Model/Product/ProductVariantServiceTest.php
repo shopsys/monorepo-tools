@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
 class ProductVariantServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCheckProductIsNotMainVariantException() {
         $productVariantService = new ProductVariantService();
         $productData = new ProductData();

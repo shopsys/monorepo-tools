@@ -12,7 +12,6 @@ use Symfony\Component\Form\FormFactory;
 
 class CountryInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
      */

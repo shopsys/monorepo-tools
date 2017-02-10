@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class OrderItemPriceCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation
      */

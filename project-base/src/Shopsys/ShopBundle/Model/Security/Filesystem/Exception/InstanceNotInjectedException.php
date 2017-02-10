@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Security\Filesystem\Exception\FilesystemException;
 
 class InstanceNotInjectedException extends Exception implements FilesystemException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

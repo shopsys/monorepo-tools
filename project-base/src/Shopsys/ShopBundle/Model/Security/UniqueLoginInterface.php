@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Security;
 
 interface UniqueLoginInterface
 {
-
     /**
      * @return string
      */

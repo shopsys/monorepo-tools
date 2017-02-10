@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraint;
 
 class FieldsAreNotIdentical extends Constraint
 {
-
     public $field1;
 
     public $field2;

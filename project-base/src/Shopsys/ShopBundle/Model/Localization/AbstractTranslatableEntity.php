@@ -7,7 +7,6 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
 abstract class AbstractTranslatableEntity extends AbstractTranslatable
 {
-
     /**
      * @Prezent\CurrentLocale
      */

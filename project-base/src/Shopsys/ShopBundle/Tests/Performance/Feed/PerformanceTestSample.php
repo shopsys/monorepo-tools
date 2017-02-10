@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 
 class PerformanceTestSample
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedConfig
      */

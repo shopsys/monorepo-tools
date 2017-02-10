@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ErrorHandlerController extends FrontBaseController
 {
-
     /**
      * @Route("/error-handler/notice")
      */

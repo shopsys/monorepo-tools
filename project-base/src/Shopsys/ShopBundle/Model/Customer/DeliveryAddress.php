@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Country\Country;
  */
 class DeliveryAddress
 {
-
     /**
      * @var int
      *

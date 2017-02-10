@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 class MultidomainEntityClassFinder
 {
-
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $allClassesMetadata
      * @param string[] $ignoredEntitiesNames

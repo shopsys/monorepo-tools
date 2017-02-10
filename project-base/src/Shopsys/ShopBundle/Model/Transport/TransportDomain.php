@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  */
 class TransportDomain
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport
      *

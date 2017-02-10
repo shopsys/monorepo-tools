@@ -7,7 +7,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CategoryDomainNotFoundException extends NotFoundHttpException implements CategoryException
 {
-
     /**
      * @param int $categoryId
      * @param int $domainId

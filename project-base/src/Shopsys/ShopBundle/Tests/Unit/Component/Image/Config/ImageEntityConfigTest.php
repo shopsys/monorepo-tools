@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetTypeSizes() {
         $types = [
             'TypeName_1' => [

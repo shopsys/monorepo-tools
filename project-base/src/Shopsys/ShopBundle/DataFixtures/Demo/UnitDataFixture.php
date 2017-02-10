@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class UnitDataFixture extends AbstractReferenceFixture
 {
-
     const M3 = 'unit_m3';
 
     /**

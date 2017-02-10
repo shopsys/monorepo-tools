@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Paginator\QueryPaginator;
 
 class QueryBuilderDataSource implements DataSourceInterface
 {
-
     /**
      * @var \Doctrine\ORM\QueryBuilder
      */

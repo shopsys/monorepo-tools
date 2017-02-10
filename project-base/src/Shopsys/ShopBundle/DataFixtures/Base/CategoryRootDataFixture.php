@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryDomain;
 
 class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     const ROOT = 'category_root';
 
     /**

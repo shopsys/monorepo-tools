@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductMassActionFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

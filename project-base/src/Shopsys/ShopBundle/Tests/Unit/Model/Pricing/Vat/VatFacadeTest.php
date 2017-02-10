@@ -14,7 +14,6 @@ use stdClass;
 
 class VatFacadeTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetDefaultVat() {
         $expected = new stdClass();
         $emMock = $this->getMock(EntityManager::class, [], [], '', false);

@@ -9,7 +9,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueCollectionValidator extends ConstraintValidator
 {
-
     /**
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint

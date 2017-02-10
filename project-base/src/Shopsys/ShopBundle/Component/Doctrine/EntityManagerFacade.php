@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class EntityManagerFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

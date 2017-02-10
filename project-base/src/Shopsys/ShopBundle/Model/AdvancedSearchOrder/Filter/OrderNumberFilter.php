@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderNumberFilter implements AdvancedSearchFilterInterface
 {
-
     /**
      * {@inheritdoc}
      */

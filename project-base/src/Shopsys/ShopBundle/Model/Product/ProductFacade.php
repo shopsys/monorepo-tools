@@ -27,7 +27,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

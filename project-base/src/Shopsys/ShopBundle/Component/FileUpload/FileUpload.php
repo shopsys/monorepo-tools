@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUpload
 {
-
     const TEMPORARY_DIRECTORY = 'fileUploads';
 
     /**

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
 {
-
     /**
      * {@inheritdoc}
      */

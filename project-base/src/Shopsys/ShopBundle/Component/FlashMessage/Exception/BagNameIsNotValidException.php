@@ -6,7 +6,6 @@ use Exception;
 
 class BagNameIsNotValidException extends Exception implements FlashMessageException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

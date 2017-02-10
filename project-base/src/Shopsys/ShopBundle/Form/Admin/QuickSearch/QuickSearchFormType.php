@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class QuickSearchFormType extends AbstractType
 {
-
     /**
      * @return string
      */

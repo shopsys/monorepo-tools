@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 
 class TopProductFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

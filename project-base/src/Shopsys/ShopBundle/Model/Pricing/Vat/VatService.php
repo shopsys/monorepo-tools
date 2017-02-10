@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class VatService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat

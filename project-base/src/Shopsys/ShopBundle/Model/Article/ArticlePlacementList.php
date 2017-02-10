@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
 class ArticlePlacementList extends AbstractTranslatedConstantList
 {
-
     const PLACEMENT_TOP_MENU = 'topMenu';
     const PLACEMENT_FOOTER = 'footer';
     const PLACEMENT_NONE = 'none';

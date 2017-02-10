@@ -8,7 +8,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductsIdsToProductsTransformer implements DataTransformerInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

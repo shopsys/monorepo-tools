@@ -10,7 +10,6 @@ use Twig_SimpleFunction;
 
 class ProductVisibilityExtension extends \Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
      */

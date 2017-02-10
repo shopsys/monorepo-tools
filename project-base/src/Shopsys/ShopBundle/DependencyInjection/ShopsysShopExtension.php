@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 class ShopsysShopExtension extends ConfigurableExtension
 {
-
     /**
      * {@inheritDoc}
      */

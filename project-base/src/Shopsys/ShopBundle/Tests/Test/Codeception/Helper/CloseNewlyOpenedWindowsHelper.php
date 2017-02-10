@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class CloseNewlyOpenedWindowsHelper extends Module
 {
-
     // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}

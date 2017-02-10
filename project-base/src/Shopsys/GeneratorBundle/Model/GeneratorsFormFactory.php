@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class GeneratorsFormFactory
 {
-
     const GENERATOR_FORM_ENABLE_POSTFIX = '_enable';
 
     /**

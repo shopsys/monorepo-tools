@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function calculatePriceProvider() {
         return [
             [

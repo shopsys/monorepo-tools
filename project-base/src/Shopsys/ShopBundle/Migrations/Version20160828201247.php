@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
 class Version20160828201247 extends AbstractMigration
 {
-
     use MultidomainMigrationTrait;
 
     /**

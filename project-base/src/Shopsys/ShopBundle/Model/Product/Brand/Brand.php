@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
  */
 class Brand extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaymentController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory
      */

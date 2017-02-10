@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Order\Item;
 
 class OrderItemData
 {
-
     /**
      * @var string
      */

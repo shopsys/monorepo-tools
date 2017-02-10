@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
 class ImageController extends AdminBaseController
 {
-
     const ENTITY_NAME_PAYMENT = 'payment';
     const ENTITY_NAME_PRODUCT = 'product';
     const ENTITY_NAME_SLIDER_ITEM = 'sliderItem';

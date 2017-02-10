@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
 
 class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

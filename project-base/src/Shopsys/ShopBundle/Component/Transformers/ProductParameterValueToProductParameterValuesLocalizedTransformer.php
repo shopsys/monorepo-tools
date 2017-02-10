@@ -9,7 +9,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface
 {
-
     /**
      * @param mixed $normData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]

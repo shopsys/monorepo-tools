@@ -9,7 +9,6 @@ use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
 
 class PoDumper implements DumperInterface
 {
-
     /**
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      * @param string $domain

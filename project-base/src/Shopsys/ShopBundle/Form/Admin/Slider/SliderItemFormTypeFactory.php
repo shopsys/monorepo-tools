@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType;
 
 class SliderItemFormTypeFactory
 {
-
     /**
      * @param bool $scenarioCreate
      * @return \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType

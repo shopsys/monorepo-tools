@@ -11,7 +11,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 {
-
     protected function configure() {
         $this
             ->setName('shopsys:create-directories')

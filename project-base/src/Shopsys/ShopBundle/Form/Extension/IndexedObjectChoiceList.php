@@ -8,7 +8,6 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 class IndexedObjectChoiceList extends ObjectChoiceList
 {
-
     /**
      * @var string
      */

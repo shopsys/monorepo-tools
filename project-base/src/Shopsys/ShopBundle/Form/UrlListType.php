@@ -19,7 +19,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UrlListType extends AbstractType
 {
-
     const TO_DELETE = 'toDelete';
     const MAIN_ON_DOMAINS = 'mainOnDomains';
     const NEW_URLS = 'newUrls';

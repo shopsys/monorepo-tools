@@ -13,7 +13,6 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CollectionType extends AbstractTypeExtension
 {
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

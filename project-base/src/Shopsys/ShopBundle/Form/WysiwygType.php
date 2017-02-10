@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class WysiwygType extends AbstractTypeExtension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade
      */

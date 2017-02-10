@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
 class TranslatableEntityDataCreator
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

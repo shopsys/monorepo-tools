@@ -9,7 +9,6 @@ use Traversable;
 
 class NotInArrayValidator extends ConstraintValidator
 {
-
     /**
      * @param string $value
      * @param \Symfony\Component\Validator\Constraint $constraint

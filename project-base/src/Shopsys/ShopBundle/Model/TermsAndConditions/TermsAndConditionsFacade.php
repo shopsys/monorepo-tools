@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
 class TermsAndConditionsFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
      */

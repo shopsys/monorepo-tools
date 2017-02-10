@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 
 class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase
 {
-
     public function transformValuesProvider() {
         return [
             ['value' => 'foo bar', 'expected' => 'foobar'],

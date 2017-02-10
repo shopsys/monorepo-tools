@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class ProductListComponent extends AbstractPage
 {
-
     /**
      * @param string $productName
      * @param int $quantity

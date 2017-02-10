@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints;
 
 class DomainFormType extends AbstractType
 {
-
     const DOMAIN_ICON = 'icon';
 
     /**

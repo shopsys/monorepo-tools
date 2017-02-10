@@ -17,7 +17,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 {
-
     public function testFilterByMinimalPrice() {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TV);
 

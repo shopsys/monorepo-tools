@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
 class CategoryDataFixture
 {
-
     const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 
     /**

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Flag\Flag;
 
 class FlagRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

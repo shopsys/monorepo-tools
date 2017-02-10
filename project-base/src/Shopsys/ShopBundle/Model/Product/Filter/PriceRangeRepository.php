@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class PriceRangeRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

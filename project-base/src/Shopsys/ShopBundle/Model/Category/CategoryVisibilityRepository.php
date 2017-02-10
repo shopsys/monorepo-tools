@@ -10,7 +10,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class CategoryVisibilityRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

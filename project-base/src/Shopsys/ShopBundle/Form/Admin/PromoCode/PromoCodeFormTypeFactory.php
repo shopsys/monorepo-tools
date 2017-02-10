@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
 
 class PromoCodeFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository
      */

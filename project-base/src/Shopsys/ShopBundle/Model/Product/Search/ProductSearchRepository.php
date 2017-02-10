@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 
 class ProductSearchRepository
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Localization;
 
 class DateTimeFormatPattern
 {
-
     /**
      * @var string
      */

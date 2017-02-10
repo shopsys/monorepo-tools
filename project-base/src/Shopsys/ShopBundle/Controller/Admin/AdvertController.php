@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvertController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

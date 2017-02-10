@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase
 {
-
     public function testExportJmeterCsvReportWritesExpectedHeader() {
         $outputFilename = $this->getTemporaryFilename();
 

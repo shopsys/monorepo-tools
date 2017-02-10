@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
 class VatDataFixture extends AbstractReferenceFixture
 {
-
     const VAT_ZERO = 'vat_zero';
     const VAT_SECOND_LOW = 'vat_second_low';
     const VAT_LOW = 'vat_low';
@@ -19,7 +18,6 @@ class VatDataFixture extends AbstractReferenceFixture
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
-
         $vatData = new VatData();
 
         $vatData->name = 'Nulová sazba';

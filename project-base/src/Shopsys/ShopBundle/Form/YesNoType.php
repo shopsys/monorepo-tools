@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class YesNoType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer
      */

@@ -18,7 +18,6 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderFormType extends AbstractType
 {
-
     const VALIDATION_GROUP_DELIVERY_ADDRESS_SAME_AS_BILLING_ADDRESS = 'deliveryAddressSameAsBillingAddress';
 
     /**

@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ZboziItemFactory implements FeedItemFactoryInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */

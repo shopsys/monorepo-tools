@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
 class BrandData
 {
-
     /**
      * @var string
      */

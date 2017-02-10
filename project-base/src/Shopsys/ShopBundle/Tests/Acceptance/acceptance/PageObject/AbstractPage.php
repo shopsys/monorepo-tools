@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 abstract class AbstractPage
 {
-
     /**
      * @var \Facebook\WebDriver\WebDriver
      */

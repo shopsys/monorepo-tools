@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductListOrderingModeForBrandFacade
 {
-
     const COOKIE_NAME = 'productListOrderingModeForBrand';
 
     /**

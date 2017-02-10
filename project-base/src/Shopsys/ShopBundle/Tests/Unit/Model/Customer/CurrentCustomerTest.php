@@ -15,7 +15,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CurrentCustomerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup() {
         $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 

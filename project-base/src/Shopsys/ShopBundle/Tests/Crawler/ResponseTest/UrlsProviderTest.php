@@ -14,7 +14,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProviderTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetFrontTestableUrlsProviderData() {
         $routeCollection = [
             'baz' => new Route('baz'),

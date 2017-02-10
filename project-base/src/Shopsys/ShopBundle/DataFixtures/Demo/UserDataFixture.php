@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

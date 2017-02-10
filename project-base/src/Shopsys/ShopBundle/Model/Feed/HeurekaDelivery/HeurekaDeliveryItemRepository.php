@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

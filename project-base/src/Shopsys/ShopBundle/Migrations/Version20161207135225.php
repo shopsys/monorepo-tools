@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
 class Version20161207135225 extends AbstractMigration
 {
-
     use MultidomainMigrationTrait;
 
     /**
@@ -40,6 +39,5 @@ class Version20161207135225 extends AbstractMigration
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
     public function down(Schema $schema) {
-
     }
 }

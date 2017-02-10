@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
 class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
 {
-
     const VARIABLE_EMAIL = '{email}';
     const VARIABLE_NEW_PASSWORD_URL = '{new_password_url}';
 

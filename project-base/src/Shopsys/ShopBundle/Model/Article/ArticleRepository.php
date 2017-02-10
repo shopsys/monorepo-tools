@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class ArticleRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Twig\PriceExtension;
 
 class PriceExtensionTest extends FunctionalTestCase
 {
-
     const NBSP = "\xc2\xa0";
 
     public function priceFilterDataProvider() {

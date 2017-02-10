@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Cart\Exception\CartException;
 
 class InvalidCartItemException extends Exception implements CartException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -10,7 +10,6 @@ use stdClass;
 
 class SettingValueTest extends PHPUnit_Framework_TestCase
 {
-
     public function editProvider() {
         return [
             ['string'],

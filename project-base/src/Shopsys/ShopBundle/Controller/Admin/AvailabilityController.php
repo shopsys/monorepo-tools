@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AvailabilityController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */

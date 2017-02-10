@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class CartItem
 {
-
     /**
      * @var int
      *

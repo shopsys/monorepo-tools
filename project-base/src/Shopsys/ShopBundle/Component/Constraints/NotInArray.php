@@ -9,7 +9,6 @@ use Symfony\Component\Validator\Constraint;
  */
 class NotInArray extends Constraint
 {
-
     /**
      * @var string
      */

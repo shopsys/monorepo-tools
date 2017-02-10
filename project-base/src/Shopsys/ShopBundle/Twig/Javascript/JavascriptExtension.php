@@ -9,7 +9,6 @@ use Twig_SimpleFunction;
 
 class JavascriptExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService
      */

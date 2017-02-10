@@ -13,7 +13,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ErrorReportingFromLastHourCronModule implements CronModuleInterface
 {
-
     const REPORT_ERRORS_FOR_LAST_SECONDS = 3600 + 300;
     const ROTATED_LOG_NAME = Environment::ENVIRONMENT_PRODUCTION;
 

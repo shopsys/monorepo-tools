@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
 abstract class Kernel extends BaseKernel
 {
-
     /**
      * {@inheritdoc}
      */

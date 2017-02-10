@@ -20,7 +20,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  */
 class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
 {
-
     /**
      * @var int
      *

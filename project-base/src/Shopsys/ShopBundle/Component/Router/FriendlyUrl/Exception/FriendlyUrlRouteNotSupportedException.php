@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlExcepti
 
 class FriendlyUrlRouteNotSupportedException extends Exception implements FriendlyUrlException
 {
-
     /**
      * @param string $routeName
      */

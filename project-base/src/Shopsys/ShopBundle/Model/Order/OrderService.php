@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class OrderService
 {
-
     const DEFAULT_QUANTITY = 1;
 
     /**

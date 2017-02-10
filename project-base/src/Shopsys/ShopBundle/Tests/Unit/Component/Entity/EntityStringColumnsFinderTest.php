@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Entity\EntityStringColumnsFinder;
 
 class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetAllStringColumnNamesIndexedByTableName() {
         $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);
         $classMetadataInfoMock

@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class RequestExtension extends Twig_Extension
 {
-
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack
      */

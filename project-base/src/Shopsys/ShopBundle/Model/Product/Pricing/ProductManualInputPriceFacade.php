@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductManualInputPriceFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -8,7 +8,6 @@ use Symfony\Component\Translation\MessageCatalogue;
 
 class PoFileLoader extends BasePoFileLoader
 {
-
     /**
      * @param string $resource
      * @param string $locale

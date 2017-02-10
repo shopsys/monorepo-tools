@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AvailabilityFacadeTest extends DatabaseTestCase
 {
-
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();
         $availabilityFacade = $this->getContainer()->get(AvailabilityFacade::class);

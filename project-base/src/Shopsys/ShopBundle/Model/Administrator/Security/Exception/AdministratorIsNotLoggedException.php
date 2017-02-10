@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Administrator\Security\Exception\SecurityException;
 
 class AdministratorIsNotLoggedException extends Exception implements SecurityException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

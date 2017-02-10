@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
 class ArrayDataSource implements DataSourceInterface
 {
-
     /**
      * @var array
      */

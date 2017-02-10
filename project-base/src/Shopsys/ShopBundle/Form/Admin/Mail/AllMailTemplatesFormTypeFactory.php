@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 
 class AllMailTemplatesFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
      */

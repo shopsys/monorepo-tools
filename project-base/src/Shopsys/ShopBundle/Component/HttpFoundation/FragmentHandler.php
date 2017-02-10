@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler;
 
 class FragmentHandler extends LazyLoadingFragmentHandler
 {
-
     /**
      * Copy-pasted & edited from Symfony\Component\HttpKernel\Fragment\FragmentHandler::deliver().
      *

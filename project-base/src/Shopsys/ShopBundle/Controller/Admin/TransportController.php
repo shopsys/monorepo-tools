@@ -17,7 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class TransportController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory
      */

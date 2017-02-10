@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function testIsVisibleWhenIndepentlyInvisible() {
         $domainId = 1;
         $transportMock = $this->getMock(Transport::class, [], [], '', false);

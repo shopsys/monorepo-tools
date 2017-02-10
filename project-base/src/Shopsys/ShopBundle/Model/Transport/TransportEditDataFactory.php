@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportEditDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
      */

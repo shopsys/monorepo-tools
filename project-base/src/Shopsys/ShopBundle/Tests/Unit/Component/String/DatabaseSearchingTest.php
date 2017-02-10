@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 
 class DatabaseSearchingTest extends PHPUnit_Framework_TestCase
 {
-
     public function searchTextProvider() {
         return [
             ['searchText' => 'foo bar', 'querySearchStringQuery' => 'foo bar'],

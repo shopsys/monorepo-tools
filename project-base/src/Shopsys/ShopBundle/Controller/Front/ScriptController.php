@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ScriptController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade
      */

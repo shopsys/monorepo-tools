@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class AvailabilitySettingFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
      */

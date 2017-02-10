@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 class CustomerData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserData
      */

@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CountryFormType extends AbstractType
 {
-
     /**
      * @return string
      */

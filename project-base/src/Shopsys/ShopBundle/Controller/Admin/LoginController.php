@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class LoginController extends AdminBaseController
 {
-
     const MULTIDOMAIN_LOGIN_TOKEN_PARAMETER_NAME = 'multidomainLoginToken';
     const ORIGINAL_DOMAIN_ID_PARAMETER_NAME = 'originalDomainId';
     const ORIGINAL_REFERER_PARAMETER_NAME = 'originalReferer';

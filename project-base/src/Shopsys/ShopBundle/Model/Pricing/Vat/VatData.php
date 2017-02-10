@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class VatData
 {
-
     /**
      * @var string|null
      */

@@ -7,7 +7,6 @@ use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
 class ServiceClassNotFoundException extends Exception implements CompilerException
 {
-
     /**
      * @param string $className
      * @param \Exception|null $previous

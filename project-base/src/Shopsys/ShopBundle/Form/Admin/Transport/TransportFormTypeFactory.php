@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
 
 class TransportFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository
      */

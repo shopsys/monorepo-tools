@@ -10,7 +10,6 @@ use Twig_SimpleFunction;
 
 class DomainExtension extends \Twig_Extension
 {
-
     /**
      * @var string
      */

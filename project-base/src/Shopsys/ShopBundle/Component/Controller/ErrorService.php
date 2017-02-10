@@ -7,7 +7,6 @@ use Symfony\Component\Form\Form;
 
 class ErrorService
 {
-
     /**
      * @param \Symfony\Component\Form\Form $form
      * @param \Shopsys\ShopBundle\Component\FlashMessage\Bag $flashMessageBag

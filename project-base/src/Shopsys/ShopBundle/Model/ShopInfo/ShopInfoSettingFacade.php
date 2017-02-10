@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class ShopInfoSettingFacade
 {
-
     const SHOP_INFO_PHONE_NUMBER = 'shopInfoPhoneNumber';
     const SHOP_INFO_EMAIL = 'shopInfoEmail';
     const SHOP_INFO_PHONE_HOURS = 'shopInfoPhoneHours';

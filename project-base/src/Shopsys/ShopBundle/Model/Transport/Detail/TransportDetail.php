@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class TransportDetail
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport
      */

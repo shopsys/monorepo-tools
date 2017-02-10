@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     const TRANSPORT_CZECH_POST = 'transport_cp';
     const TRANSPORT_PPL = 'transport_ppl';
     const TRANSPORT_PERSONAL = 'transport_personal';

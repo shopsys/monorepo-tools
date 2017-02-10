@@ -12,7 +12,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ParameterFilterFormType extends AbstractType implements DataTransformerInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
      */

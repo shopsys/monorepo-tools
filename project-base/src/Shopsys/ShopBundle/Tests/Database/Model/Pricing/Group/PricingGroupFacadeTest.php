@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PricingGroupFacadeTest extends DatabaseTestCase
 {
-
     public function testCreate() {
         $em = $this->getEntityManager();
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');

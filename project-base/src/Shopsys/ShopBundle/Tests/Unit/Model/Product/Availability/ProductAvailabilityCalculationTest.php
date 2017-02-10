@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class ProductAvailabilityCalculationTest extends FunctionalTestCase
 {
-
     /**
      * @dataProvider getTestCalculateAvailabilityData
      */

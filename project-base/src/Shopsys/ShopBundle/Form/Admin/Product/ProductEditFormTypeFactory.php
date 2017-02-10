@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
 class ProductEditFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory
      */

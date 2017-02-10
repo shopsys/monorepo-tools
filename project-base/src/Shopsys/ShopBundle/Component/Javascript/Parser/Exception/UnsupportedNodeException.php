@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
 
 class UnsupportedNodeException extends Exception implements JsParserException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

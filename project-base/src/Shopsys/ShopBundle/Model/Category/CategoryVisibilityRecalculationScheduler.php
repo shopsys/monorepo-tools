@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class CategoryVisibilityRecalculationScheduler
 {
-
     /**
      * @var bool
      */

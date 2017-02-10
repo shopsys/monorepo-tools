@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
 class AdvancedSearchOperatorTranslation
 {
-
     /**
      * @var string[operator]
      */

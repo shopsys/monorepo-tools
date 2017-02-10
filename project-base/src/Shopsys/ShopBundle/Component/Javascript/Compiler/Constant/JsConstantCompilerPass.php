@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser
 
 class JsConstantCompilerPass implements JsCompilerPassInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser
      */

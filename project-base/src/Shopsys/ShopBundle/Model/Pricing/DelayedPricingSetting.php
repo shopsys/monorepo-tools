@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculationScheduler;
 
 class DelayedPricingSetting
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting
      */

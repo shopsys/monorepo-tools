@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class PhpFileExtractorFactory
 {
-
     /**
      * @var \Doctrine\Common\Annotations\DocParser
      */

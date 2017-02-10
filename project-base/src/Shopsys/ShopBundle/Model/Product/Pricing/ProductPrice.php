@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class ProductPrice extends Price
 {
-
     /**
      * @var bool
      */

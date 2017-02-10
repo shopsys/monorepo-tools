@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class ProductAvailabilityCronModule implements IteratedCronModuleInterface
 {
-
     /**
      * @var \Symfony\Bridge\Monolog\Logger
      */
@@ -31,11 +30,9 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
     }
 
     public function sleep() {
-
     }
 
     public function wakeUp() {
-
     }
 
     /**

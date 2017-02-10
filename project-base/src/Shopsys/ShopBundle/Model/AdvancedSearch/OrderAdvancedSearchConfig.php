@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig
 {
-
     public function __construct(
         OrderNumberFilter $orderNumberFilter,
         OrderCreateDateFilter $orderCreateDateFilter,

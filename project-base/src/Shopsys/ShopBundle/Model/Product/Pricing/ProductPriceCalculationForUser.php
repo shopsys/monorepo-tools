@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUser
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
      */

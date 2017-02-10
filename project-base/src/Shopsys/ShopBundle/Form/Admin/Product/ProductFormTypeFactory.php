@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
 class ProductFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository
      */

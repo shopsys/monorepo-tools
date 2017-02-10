@@ -6,7 +6,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class RemoveDuplicatesFromArrayTransformer implements DataTransformerInterface
 {
-
     /**
      * @param mixed $values
      * @return mixed

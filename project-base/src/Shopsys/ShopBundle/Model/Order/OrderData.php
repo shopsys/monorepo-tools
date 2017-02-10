@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Order\Order;
  */
 class OrderData
 {
-
     const NEW_ITEM_PREFIX = 'new_';
 
     /**

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
 class FriendlyUrlRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

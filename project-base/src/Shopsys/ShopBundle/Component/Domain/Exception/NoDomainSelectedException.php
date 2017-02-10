@@ -6,7 +6,6 @@ use Exception;
 
 class NoDomainSelectedException extends Exception implements DomainException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

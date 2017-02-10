@@ -6,7 +6,6 @@ use Exception;
 
 class HashGenerationFailedException extends Exception implements StringException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

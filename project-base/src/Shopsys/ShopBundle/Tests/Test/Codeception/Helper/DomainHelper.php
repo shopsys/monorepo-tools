@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class DomainHelper extends Module
 {
-
     // @codingStandardsIgnoreStart
     /**
      * {@inheritDoc}

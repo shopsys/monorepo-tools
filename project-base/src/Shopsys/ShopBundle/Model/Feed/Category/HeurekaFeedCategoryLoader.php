@@ -7,7 +7,6 @@ use SimpleXMLElement;
 
 class HeurekaFeedCategoryLoader
 {
-
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[]
      */

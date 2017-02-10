@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
 class TransportGridFactory implements GridFactoryInterface
 {
-
     const CURRENCY_ID_FOR_LIST = 1;
 
     /**

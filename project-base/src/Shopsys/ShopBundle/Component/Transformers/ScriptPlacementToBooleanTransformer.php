@@ -7,7 +7,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class ScriptPlacementToBooleanTransformer implements DataTransformerInterface
 {
-
     /**
      * @param string|null $scriptPlacement
      * @return bool|null

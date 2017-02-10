@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 class PerformanceTestSample
 {
-
     /**
      * @var string
      */

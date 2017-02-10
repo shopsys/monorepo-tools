@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Image\Image;
 
 class ImageRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

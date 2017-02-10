@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

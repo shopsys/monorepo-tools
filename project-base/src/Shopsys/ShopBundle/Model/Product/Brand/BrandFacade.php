@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
 
 class BrandFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

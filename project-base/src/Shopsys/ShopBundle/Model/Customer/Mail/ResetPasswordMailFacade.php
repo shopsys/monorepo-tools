@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
 class ResetPasswordMailFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService
      */

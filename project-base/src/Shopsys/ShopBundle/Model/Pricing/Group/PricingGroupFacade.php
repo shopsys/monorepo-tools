@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class PricingGroupFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceRecalculationScheduler
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

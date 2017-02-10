@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 
 class MenuController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
      */

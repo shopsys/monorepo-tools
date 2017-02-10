@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Localization\TranslatableListener;
 
 class ImplicitLocaleNotSetException extends Exception implements LocalizationException
 {
-
     /**
      * @param object $entity
      * @param mixed $entityId

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConsta
 
 class ConstantNotFoundException extends Exception implements JsConstantCompilerException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

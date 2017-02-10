@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ScriptFormType extends AbstractType
 {
-
     /**
      * @return string
      */

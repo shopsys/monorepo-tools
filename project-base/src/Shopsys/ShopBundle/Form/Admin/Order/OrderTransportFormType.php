@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class OrderTransportFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport[]
      */

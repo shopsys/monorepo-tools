@@ -7,7 +7,6 @@ use Twig_Environment;
 
 abstract class AbstractGenerator implements GeneratorInterface
 {
-
     /**
      * @var \Twig_Environment
      */

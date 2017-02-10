@@ -11,7 +11,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProductType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer
      */

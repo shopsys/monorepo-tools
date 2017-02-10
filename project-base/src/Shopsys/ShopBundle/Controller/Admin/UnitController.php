@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UnitController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade
      */

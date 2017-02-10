@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
 class QuantifiedItemPrice
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Price
      */

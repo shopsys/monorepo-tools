@@ -6,7 +6,6 @@ use Exception;
 
 class OrderItemHasNoIdException extends Exception implements OrderItemException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

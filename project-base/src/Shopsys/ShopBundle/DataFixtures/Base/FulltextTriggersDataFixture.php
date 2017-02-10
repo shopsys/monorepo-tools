@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\DataFixtures\Base\DomainDbFunctionsDataFixture;
 
 class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

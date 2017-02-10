@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Customer\UserData;
 
 class UserTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetFullNameReturnsLastnameAndFirstnameForUser() {
         $userData = new UserData(1, 'Firstname', 'Lastname');
         $billingAddressData = new BillingAddressData();

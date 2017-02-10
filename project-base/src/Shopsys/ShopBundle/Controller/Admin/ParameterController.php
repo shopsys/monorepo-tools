@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
 
 class ParameterController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade
      */

@@ -21,7 +21,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderFacadeTest extends DatabaseTestCase
 {
-
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */

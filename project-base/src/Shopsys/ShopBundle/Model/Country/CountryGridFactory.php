@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 
 class CountryGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidServiceException extends Exception implements InlineEditException
 {
-
     /**
      * @var string
      */

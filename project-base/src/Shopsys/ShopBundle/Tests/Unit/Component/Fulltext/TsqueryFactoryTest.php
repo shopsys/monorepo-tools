@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory;
 
 class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider getIsValidSearchTextData
      */

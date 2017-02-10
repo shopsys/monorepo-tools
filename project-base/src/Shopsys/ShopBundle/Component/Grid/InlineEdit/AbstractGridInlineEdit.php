@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractGridInlineEdit implements GridInlineEditInterface
 {
-
     /**
      * @var \Symfony\Component\Form\FormFactory
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Tests\Performance;
 
 class JmeterCsvReporter
 {
-
     /**
      * @param resource $handle
      */

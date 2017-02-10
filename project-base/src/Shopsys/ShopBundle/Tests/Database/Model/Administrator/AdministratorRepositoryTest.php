@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AdministratorRepositoryTest extends DatabaseTestCase
 {
-
     public function testGetByValidMultidomainLogin() {
         $validMultidomainLoginToken = 'validMultidomainLoginToken';
         $multidomainLoginTokenExpiration = new DateTime('+60 seconds');

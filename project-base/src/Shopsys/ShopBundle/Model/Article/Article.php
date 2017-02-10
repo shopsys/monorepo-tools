@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
  */
 class Article implements OrderableEntityInterface
 {
-
     /**
      * @var int
      *

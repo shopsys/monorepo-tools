@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HeurekaController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
      */

@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class ClassConstructorFiller
 {
-
     /**
      * @var ParameterProcessor
      */

@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\ProductService;
 
 class CachedBestsellingProductFacade
 {
-
     const LIFETIME = 43200; // 12h
 
     /**

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class AdminAccessRightsTest extends FunctionalTestCase
 {
-
     public function adminAccessDeniedProvider() {
         return [
             ['admin/superadmin/modules/'],

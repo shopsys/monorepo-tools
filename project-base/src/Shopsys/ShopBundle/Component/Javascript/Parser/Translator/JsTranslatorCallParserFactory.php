@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
 class JsTranslatorCallParserFactory
 {
-
     const METHOD_NAME_TRANS = 'Shopsys.translator.trans';
     const METHOD_NAME_TRANS_CHOICE = 'Shopsys.translator.transChoice';
 

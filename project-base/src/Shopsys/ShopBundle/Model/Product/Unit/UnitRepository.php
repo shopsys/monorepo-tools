@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\Unit;
 
 class UnitRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityRepository
      */

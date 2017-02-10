@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateTypeNameException extends Exception implements ImageConfigException
 {
-
     /**
      * @var string|null
      */

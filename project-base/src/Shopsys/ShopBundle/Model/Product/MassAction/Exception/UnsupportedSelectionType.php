@@ -6,7 +6,6 @@ use Exception;
 
 class UnsupportedSelectionType extends Exception implements MassActionException
 {
-
     /**
      * @param string $selectionType
      * @param \Exception|null $previous

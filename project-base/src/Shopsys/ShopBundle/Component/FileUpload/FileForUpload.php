@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\FileUpload;
 
 class FileForUpload
 {
-
     /**
      * @var string
      */

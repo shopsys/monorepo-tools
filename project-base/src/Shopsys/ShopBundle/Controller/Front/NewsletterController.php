@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NewsletterController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade
      */

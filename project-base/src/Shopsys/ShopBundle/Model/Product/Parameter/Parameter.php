@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation;
  */
 class Parameter extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

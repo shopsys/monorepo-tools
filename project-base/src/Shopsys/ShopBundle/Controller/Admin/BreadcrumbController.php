@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 
 class BreadcrumbController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

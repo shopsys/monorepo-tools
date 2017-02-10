@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class ManualBestsellingProduct
 {
-
     /**
      * @var int
      *

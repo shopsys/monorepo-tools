@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class ProductAvailabilityCalculation
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
      */

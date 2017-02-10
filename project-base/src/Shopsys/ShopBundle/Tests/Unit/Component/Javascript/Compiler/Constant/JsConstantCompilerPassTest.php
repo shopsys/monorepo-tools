@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase
 {
-
     public function testProcess() {
         $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 

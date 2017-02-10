@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
 class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     const APPLE = 'brand_apple';
     const CANON = 'brand_canon';
     const LG = 'brand_lg';

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Form\Exception\FormException;
 
 class InvertedChoiceNotMultipleException extends Exception implements FormException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

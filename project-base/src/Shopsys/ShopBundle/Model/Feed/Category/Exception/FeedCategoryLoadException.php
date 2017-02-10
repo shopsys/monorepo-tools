@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\Category\Exception\FeedCategoryException;
 
 class FeedCategoryLoadException extends Exception implements FeedCategoryException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

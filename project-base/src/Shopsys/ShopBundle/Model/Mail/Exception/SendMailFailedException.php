@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Debug;
 
 class SendMailFailedException extends Exception implements MailException
 {
-
     /**
      * @var array
      */

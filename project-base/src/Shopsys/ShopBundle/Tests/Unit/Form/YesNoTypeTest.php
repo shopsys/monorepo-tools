@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 class YesNoTypeTest extends FunctionalTestCase
 {
-
     public function testGetDataReturnsTrue() {
         $form = $this->getForm();
 

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class DomainsConfigLoaderTest extends FunctionalTestCase
 {
-
     public function testLoadDomainConfigsFromYaml() {
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');

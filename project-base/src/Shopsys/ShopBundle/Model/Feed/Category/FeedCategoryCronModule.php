@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class FeedCategoryCronModule implements CronModuleInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade
      */
@@ -25,7 +24,6 @@ class FeedCategoryCronModule implements CronModuleInterface
      * @inheritdoc
      */
     public function setLogger(Logger $logger) {
-
     }
 
     public function run() {

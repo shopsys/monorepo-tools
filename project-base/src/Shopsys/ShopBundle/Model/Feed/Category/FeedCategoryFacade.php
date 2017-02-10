@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 
 class FeedCategoryFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

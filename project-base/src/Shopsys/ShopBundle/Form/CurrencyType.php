@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CurrencyType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository
      */

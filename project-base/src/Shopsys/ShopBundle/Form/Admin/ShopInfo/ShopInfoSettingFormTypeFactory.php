@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
 class ShopInfoSettingFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

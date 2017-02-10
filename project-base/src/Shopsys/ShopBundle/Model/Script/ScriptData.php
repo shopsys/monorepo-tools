@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Script\Script;
 
 class ScriptData
 {
-
     /**
      * @var string|null
      */

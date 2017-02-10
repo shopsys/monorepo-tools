@@ -19,7 +19,6 @@ use Symfony\Component\Routing\RequestContext;
 
 class SuperadminController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Module\ModuleList
      */

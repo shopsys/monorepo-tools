@@ -11,7 +11,6 @@ use Symfony\Component\Yaml\Parser;
 
 class ImageConfigLoader
 {
-
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */

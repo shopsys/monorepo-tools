@@ -8,7 +8,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class EmailValidator extends ConstraintValidator
 {
-
     /**
      * @inheritdoc
      */

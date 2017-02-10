@@ -6,7 +6,6 @@ use Exception;
 
 class CannotParseDateTimeException extends Exception
 {
-
     /**
      * @param string $locale
      * @param string $time

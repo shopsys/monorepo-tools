@@ -14,7 +14,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ErrorPagesFacade
 {
-
     const PAGE_STATUS_CODE_404 = Response::HTTP_NOT_FOUND;
     const PAGE_STATUS_CODE_500 = Response::HTTP_INTERNAL_SERVER_ERROR;
 

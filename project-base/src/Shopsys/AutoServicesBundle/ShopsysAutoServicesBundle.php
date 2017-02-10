@@ -13,7 +13,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShopsysAutoServicesBundle extends Bundle
 {
-
     public function build(ContainerBuilder $containerBuilder) {
         $serviceHelper = new ServiceHelper();
         $parameterProcessor = new ParameterProcessor($serviceHelper, $containerBuilder);

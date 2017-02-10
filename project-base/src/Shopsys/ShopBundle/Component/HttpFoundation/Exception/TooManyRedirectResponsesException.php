@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\HttpFoundation\Exception\HttpFoundationExceptio
 
 class TooManyRedirectResponsesException extends Exception implements HttpFoundationException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Form;
 
 class FormType
 {
-
     const BIRTHDAY = 'birthday';
     const BUTTON = 'button';
     const CATEGORIES = 'categories';

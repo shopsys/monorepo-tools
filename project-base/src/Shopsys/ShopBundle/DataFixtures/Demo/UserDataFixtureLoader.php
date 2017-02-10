@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 
 class UserDataFixtureLoader
 {
-
     const COLUMN_FIRSTNAME = 0;
     const COLUMN_LASTNAME = 1;
     const COLUMN_EMAIL = 2;

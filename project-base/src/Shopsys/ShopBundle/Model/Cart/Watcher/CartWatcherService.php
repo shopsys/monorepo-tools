@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 
 class CartWatcherService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser
      */

@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Translation;
 
 class TranslationSourceReplacement
 {
-
     /**
      * @var string
      */

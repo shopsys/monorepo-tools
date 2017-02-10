@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Category\Category;
 
 class CategoryDetail
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\Category
      */

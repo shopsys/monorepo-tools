@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 
 class Menu
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */

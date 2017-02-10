@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
 class JsConstantCallParser
 {
-
     const FUNCTION_NAME = 'Shopsys.constant';
     const NAME_ARGUMENT_INDEX = 0;
 

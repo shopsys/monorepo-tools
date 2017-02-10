@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTes
 
 class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
 {
-
     /**
      * @inheritdoc
      */

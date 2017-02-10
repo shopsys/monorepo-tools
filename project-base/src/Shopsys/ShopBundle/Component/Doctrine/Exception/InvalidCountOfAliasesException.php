@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Debug;
 
 class InvalidCountOfAliasesException extends Exception
 {
-
     /**
      * @param array|null $rootAliases
      * @param \Exception|null $previous

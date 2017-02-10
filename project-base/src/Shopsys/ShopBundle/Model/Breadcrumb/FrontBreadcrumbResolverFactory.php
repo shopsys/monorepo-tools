@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator;
 
 class FrontBreadcrumbResolverFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator
      */

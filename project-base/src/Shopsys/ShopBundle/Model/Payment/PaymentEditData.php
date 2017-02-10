@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Payment\PaymentData;
 
 class PaymentEditData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentData
      */

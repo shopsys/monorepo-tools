@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\ConstantList;
 
 interface TranslatedConstantListInterface
 {
-
     /**
      * @return string[]
      */

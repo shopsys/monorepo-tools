@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 
 class DefaultController extends AdminBaseController
 {
-
     /**
      * @Route("/dashboard/")
      */

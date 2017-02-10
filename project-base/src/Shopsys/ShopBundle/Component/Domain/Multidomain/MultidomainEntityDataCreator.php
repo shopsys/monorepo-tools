@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
 class MultidomainEntityDataCreator
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade
      */

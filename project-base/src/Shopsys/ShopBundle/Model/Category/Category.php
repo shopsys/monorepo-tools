@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
  */
 class Category extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

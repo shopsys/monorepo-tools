@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\DataFixtures\Performance\Exception\PerformanceException;
 
 class UndefinedArrayKeyException extends Exception implements PerformanceException
 {
-
     /**
      * @param string|int $key
      * @param \Exception|null $previous

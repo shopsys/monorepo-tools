@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
 class CustomerLoginCest
 {
-
     public function testLoginAsCustomerFromMainPage(
         LoginPage $loginPage,
         AcceptanceTester $me,

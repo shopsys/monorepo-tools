@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormEvents;
 
 class TimedSpamValidationListener implements EventSubscriberInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Form\FormTimeProvider
      */

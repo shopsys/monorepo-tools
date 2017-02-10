@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
 class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreateNewDomainsDataNoNewDomain() {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),

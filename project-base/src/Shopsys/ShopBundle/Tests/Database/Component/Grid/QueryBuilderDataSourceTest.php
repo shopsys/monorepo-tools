@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class QueryBuilderDataSourceTest extends DatabaseTestCase
 {
-
     public function testGetOneRow() {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */

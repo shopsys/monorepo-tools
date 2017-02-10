@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\DataFixture\PersistentReference;
 
 class PersistentReferenceRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

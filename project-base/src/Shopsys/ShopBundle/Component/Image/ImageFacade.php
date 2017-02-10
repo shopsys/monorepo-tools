@@ -14,7 +14,6 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

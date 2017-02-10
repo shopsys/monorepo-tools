@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Form\UrlListData;
 
 class FriendlyUrlFacade
 {
-
     const MAX_URL_UNIQUE_RESOLVE_ATTEMPT = 100;
 
     /**

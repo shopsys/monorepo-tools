@@ -7,7 +7,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class Translator implements TranslatorInterface, TranslatorBagInterface
 {
-
     const DEFAULT_DOMAIN = 'messages';
     const NOT_TRANSLATED_PREFIX = '##';
     const SOURCE_LOCALE = 'en';

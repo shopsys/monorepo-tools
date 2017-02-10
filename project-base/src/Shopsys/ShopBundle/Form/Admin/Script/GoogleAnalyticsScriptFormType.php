@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class GoogleAnalyticsScriptFormType extends AbstractType
 {
-
     /**
      * @return string
      */

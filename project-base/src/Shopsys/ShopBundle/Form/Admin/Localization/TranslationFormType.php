@@ -12,7 +12,6 @@ use Symfony\Component\Validator\Constraints;
 
 class TranslationFormType extends AbstractType implements DataTransformerInterface
 {
-
     /**
      * @var string[]
      */

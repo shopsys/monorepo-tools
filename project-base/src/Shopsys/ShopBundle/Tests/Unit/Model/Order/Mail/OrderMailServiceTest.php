@@ -21,7 +21,6 @@ use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase
 {
-
     public function testGetMailTemplateNameByStatus() {
         $routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
         $routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');

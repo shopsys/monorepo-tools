@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderNumberSequenceDataFixture extends AbstractReferenceFixture
 {
-
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */

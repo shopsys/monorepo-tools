@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 
 class Breadcrumb
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory
      */

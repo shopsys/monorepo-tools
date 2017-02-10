@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 class FeedCategoryData
 {
-
     /**
      * @var int
      */

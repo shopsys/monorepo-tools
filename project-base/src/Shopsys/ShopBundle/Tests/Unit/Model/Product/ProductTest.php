@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductTest extends PHPUnit_Framework_TestCase
 {
-
     public function testNoVariant() {
         $productData = new ProductData();
         $product = Product::create($productData);

@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit;
 
 class FlagController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade
      */

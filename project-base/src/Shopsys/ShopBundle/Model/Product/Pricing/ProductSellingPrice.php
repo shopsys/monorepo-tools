@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class ProductSellingPrice
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
      */

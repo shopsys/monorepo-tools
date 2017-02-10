@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class VatInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
      */

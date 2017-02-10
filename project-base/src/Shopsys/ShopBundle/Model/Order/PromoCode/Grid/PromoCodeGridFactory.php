@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
 class PromoCodeGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

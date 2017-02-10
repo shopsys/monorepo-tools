@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Product\Product;
  */
 class OrderProduct extends OrderItem
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product|null
      *

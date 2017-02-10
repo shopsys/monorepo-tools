@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CurrencyController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */

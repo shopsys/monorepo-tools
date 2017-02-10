@@ -9,7 +9,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class FeedCronModule implements IteratedCronModuleInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade
      */
@@ -34,7 +33,6 @@ class FeedCronModule implements IteratedCronModuleInterface
      * @inheritdoc
      */
     public function setLogger(Logger $logger) {
-
     }
 
     /**

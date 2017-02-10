@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusDeletionForbiddenException extends Exception implements OrderStatusException
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
      */

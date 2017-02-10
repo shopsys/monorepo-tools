@@ -10,7 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DatabaseDumpCommand extends ContainerAwareCommand
 {
-
     const ARG_OUTPUT_FILE = 'outputFile';
     const OPT_PGDUMP_BIN = 'pgdump-bin';
 

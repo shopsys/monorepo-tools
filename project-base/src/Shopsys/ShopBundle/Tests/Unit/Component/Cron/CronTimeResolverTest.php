@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
 class CronTimeResolverTest extends PHPUnit_Framework_TestCase
 {
-
     public function validTimeStringProvider() {
         return [
             ['*', 1, 1],

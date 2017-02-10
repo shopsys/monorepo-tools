@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
  */
 class OrderPayment extends OrderItem
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment
      *

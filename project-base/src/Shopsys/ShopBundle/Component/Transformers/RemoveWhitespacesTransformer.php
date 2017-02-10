@@ -6,7 +6,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 
 class RemoveWhitespacesTransformer implements DataTransformerInterface
 {
-
     /**
      * @param string|null $value
      * @return string|null

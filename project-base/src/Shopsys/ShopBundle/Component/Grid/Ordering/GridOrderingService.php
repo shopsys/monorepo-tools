@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 class GridOrderingService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface|null $entity
      * @param int $position

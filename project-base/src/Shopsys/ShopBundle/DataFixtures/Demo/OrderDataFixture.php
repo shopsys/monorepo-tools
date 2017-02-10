@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
  */
 class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
 {
-
     const ORDER_PREFIX = 'order_';
 
     /**

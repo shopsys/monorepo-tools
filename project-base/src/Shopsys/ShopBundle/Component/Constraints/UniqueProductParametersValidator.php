@@ -8,7 +8,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class UniqueProductParametersValidator extends ConstraintValidator
 {
-
     /**
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint

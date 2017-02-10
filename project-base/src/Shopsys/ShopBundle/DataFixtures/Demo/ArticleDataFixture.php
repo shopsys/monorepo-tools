@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleDataFixture extends AbstractReferenceFixture
 {
-
     const TERMS_AND_CONDITIONS = 'article_terms_and_conditions_1';
     const COOKIES = 'article_cookies_1';
 

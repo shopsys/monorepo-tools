@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 
 class OrderStatusDataFixture extends AbstractReferenceFixture
 {
-
     const ORDER_STATUS_NEW = 'order_status_new';
     const ORDER_STATUS_IN_PROGRESS = 'order_status_in_progress';
     const ORDER_STATUS_DONE = 'order_status_done';

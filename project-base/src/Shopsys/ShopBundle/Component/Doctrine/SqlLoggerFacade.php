@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class SqlLoggerFacade
 {
-
     /**
      * @var \Doctrine\DBAL\Logging\SQLLogger|null
      */

@@ -9,7 +9,6 @@ use Twig_SimpleFunction;
 
 class SeoExtension extends \Twig_Extension
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

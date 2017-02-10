@@ -7,7 +7,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
 class ControllerResolver extends SymfonyControllerResolver
 {
-
     /**
      * {@inheritDoc}
      */

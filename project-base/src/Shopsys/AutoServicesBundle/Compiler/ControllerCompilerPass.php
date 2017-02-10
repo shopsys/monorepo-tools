@@ -13,7 +13,6 @@ use Symfony\Component\Finder\SplFileInfo;
 
 class ControllerCompilerPass implements CompilerPassInterface
 {
-
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper
      */

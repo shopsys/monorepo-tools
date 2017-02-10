@@ -6,7 +6,6 @@ use Exception;
 
 class DuplicateEmailException extends Exception implements CustomerException
 {
-
     /**
      * @var string
      */

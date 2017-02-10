@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PricingGroupController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class UserData
 {
-
     /**
      * @var string|null
      */

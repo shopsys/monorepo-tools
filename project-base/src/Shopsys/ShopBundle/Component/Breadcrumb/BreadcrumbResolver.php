@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
 class BreadcrumbResolver
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[routeName]
      */

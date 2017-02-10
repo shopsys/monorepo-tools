@@ -13,7 +13,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslatorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testTransWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage() {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();

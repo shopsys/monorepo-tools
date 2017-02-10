@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Feed\Exception\FeedException;
 
 class FeedConfigNotFoundException extends Exception implements FeedException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

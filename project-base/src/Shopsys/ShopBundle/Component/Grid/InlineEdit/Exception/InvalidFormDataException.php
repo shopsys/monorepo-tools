@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidFormDataException extends Exception implements InlineEditException
 {
-
     /**
      * @var array
      */

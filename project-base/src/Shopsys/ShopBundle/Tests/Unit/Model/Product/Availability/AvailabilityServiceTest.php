@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 
 class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCreate() {
         $availabilityService = new AvailabilityService();
 

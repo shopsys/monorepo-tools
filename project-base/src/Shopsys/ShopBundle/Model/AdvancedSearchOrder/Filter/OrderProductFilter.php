@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
 
 class OrderProductFilter implements AdvancedSearchFilterInterface
 {
-
     /**
      * {@inheritdoc}
      */

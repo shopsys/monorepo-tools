@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
 class DomainUrlService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Entity\EntityStringColumnsFinder
      */

@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class FrontendUserProvider implements UserProviderInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserRepository
      */

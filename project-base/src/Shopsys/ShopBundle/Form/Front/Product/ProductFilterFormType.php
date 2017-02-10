@@ -14,7 +14,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ProductFilterFormType extends AbstractType
 {
-
     const NAME = 'product_filter_form';
 
     /**

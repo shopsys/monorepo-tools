@@ -7,7 +7,6 @@ use NinjaMutex\Mutex;
 
 class MutexFactory
 {
-
     const MUTEX_CRON_NAME = 'cron';
 
     /**

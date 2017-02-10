@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Administrator\Administrator;
  */
 class AdministratorGridLimit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\Administrator
      *

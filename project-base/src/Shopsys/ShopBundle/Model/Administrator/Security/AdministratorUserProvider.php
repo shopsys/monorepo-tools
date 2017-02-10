@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class AdministratorUserProvider implements UserProviderInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository
      */

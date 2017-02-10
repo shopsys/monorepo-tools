@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Country\CountryInlineEdit;
 
 class CountryController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
      */

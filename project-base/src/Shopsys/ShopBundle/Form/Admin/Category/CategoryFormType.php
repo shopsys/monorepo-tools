@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints;
 
 class CategoryFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\Category[]
      */

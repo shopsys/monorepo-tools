@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class FileUploadExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload
      */

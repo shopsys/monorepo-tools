@@ -18,7 +18,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function calculateIndependentPriceProvider() {
         return [
             [

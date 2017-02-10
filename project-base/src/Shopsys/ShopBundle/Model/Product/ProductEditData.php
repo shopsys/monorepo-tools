@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductEditData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductData
      */

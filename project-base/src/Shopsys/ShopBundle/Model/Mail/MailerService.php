@@ -9,7 +9,6 @@ use Swift_Message;
 
 class MailerService
 {
-
     /**
      * @var \Swift_Mailer
      */

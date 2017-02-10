@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ManualBestsellingProductRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

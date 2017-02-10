@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Twig\Exception\TwigException;
 
 class InvalidArgumentException extends BaseInvalidArgumentException implements TwigException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

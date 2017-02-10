@@ -10,7 +10,6 @@ use Twig_SimpleFunction;
 
 class FileThumbnailExtension extends Twig_Extension
 {
-
     const DEFAULT_ICON_TYPE = 'all';
     const IMAGE_THUMBNAIL_QUALITY = 80;
 

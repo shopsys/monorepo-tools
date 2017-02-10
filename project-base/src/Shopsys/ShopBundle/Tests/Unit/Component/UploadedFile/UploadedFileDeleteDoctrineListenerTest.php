@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testPreRemoveDeleteFile() {
         $uploadedFile = new UploadedFile('entityName', 1, 'dummy.txt');
 

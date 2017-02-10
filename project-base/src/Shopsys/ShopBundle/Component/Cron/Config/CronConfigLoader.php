@@ -12,7 +12,6 @@ use Symfony\Component\Yaml\Parser;
 
 class CronConfigLoader
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

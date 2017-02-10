@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

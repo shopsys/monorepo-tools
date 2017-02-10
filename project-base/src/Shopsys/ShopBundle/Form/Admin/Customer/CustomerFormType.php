@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CustomerFormType extends AbstractType
 {
-
     const SCENARIO_CREATE = 'create';
     const SCENARIO_EDIT = 'edit';
 

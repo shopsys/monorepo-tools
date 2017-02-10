@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Slider\SliderItemData;
  */
 class SliderItem implements OrderableEntityInterface
 {
-
     /**
      * @var int
      * @ORM\Column(type="integer")

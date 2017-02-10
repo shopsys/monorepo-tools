@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
 class SettingTest extends PHPUnit_Framework_TestCase
 {
-
     public function testSet() {
         $settingValueArray = [
             [SettingValue::DOMAIN_ID_COMMON, []],

@@ -6,7 +6,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ResponseListener
 {
-
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */

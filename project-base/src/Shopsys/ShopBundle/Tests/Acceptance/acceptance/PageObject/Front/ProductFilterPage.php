@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
 class ProductFilterPage extends AbstractPage
 {
-
     // Product filter waits for more requests before evaluation
     const PRE_EVALUATION_WAIT = 2;
 

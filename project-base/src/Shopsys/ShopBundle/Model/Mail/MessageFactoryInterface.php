@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Model\Mail;
 
 interface MessageFactoryInterface
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $template
      * @param mixed $data

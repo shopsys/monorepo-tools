@@ -19,7 +19,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProvider
 {
-
     const SEARCH_KEYWORD = 'a';
     const ROUTE_NAME_KEY = 'routeName';
     const ROUTE_PARAMETERS_KEY = 'routeParameters';

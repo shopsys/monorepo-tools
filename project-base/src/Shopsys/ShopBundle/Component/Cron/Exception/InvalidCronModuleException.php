@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Cron\Exception\CronException;
 
 class InvalidCronModuleException extends Exception implements CronException
 {
-
     /**
      * @param string $moduleId
      * @param \Exception|null $previous

@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Component\Translation\PoDumper;
 
 class PoDumperTest extends PHPUnit_Framework_TestCase
 {
-
     public function testDump() {
         $source = new FileSource('filepath', 10, 20);
 

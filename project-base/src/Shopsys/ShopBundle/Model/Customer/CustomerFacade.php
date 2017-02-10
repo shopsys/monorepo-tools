@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Order\OrderService;
 
 class CustomerFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

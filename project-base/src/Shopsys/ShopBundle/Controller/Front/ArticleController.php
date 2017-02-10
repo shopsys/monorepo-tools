@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
 class ArticleController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade
      */

@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
 class PricingGroupRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

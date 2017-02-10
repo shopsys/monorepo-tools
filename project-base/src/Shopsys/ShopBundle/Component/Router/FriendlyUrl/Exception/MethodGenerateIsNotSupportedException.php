@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlExcepti
 
 class MethodGenerateIsNotSupportedException extends Exception implements FriendlyUrlException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

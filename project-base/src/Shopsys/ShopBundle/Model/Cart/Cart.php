@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 
 class Cart
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
      */

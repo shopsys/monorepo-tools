@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class UnitSettingFormType extends AbstractType
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
      */

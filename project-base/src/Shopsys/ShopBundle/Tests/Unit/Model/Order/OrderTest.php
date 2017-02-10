@@ -17,7 +17,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class OrderTest extends PHPUnit_Framework_TestCase
 {
-
     const DOMAIN_ID = 1;
 
     public function testGetProductItems() {

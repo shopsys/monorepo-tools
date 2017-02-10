@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
 class RegistrationMailService
 {
-
     const VARIABLE_FIRST_NAME = '{first_name}';
     const VARIABLE_LAST_NAME = '{last_name}';
     const VARIABLE_EMAIL = '{email}';

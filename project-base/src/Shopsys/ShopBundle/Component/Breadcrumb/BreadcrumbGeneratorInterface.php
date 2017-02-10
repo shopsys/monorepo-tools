@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
 interface BreadcrumbGeneratorInterface
 {
-
     /**
      * @param string $routeName
      * @param array $routeParameters

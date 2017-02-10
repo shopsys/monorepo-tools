@@ -18,7 +18,6 @@ use Twig_Environment;
 
 class OrderMailService
 {
-
     const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
     const VARIABLE_NUMBER = '{number}';
     const VARIABLE_DATE = '{date}';

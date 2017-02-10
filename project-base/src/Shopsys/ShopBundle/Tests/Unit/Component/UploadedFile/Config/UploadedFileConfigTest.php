@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 
 class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
 {
-
     public function testGetEntityName() {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
 
 class CronModuleExecutorFactory
 {
-
     /**
      * @param int $secondsTimeout
      * @return \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor

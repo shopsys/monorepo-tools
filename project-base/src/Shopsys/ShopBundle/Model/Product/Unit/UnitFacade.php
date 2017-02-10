@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitService;
 
 class UnitFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

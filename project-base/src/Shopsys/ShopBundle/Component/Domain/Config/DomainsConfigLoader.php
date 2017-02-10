@@ -10,7 +10,6 @@ use Symfony\Component\Yaml\Parser;
 
 class DomainsConfigLoader
 {
-
     /**
      * @var \Symfony\Component\Filesystem\Filesystem
      */

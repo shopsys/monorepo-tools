@@ -8,7 +8,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository
      */

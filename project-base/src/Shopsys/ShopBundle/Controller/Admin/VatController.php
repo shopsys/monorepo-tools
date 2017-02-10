@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class VatController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory
      */

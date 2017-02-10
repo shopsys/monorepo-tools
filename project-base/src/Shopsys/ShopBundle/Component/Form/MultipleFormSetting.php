@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Form;
 
 class MultipleFormSetting
 {
-
     const DEFAULT_MULTIPLE = false;
 
     /**

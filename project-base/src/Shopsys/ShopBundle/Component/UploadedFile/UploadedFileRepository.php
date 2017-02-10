@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
 class UploadedFileRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CurrentCategoryResolver
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade
      */

@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
 class UserDataFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */

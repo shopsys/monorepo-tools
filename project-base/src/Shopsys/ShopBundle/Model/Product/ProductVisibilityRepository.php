@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
 class ProductVisibilityRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

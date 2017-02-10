@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
  */
 class PaymentDomain
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment
      *

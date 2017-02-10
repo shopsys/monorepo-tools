@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb
      */

@@ -6,7 +6,6 @@ use Exception;
 
 class InvalidLocaleException extends Exception implements LocalizationException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
 class CronModuleConfig implements CronTimeInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Cron\CronModuleInterface
      */

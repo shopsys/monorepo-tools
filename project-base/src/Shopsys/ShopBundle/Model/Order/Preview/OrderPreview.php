@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 
 class OrderPreview
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
      */

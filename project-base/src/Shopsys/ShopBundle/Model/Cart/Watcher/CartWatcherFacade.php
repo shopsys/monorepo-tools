@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 
 class CartWatcherFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

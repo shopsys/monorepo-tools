@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class AdvertRepository
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

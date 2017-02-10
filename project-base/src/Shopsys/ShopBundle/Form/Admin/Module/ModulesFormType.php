@@ -10,7 +10,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ModulesFormType extends AbstractType
 {
-
     const MODULES_SUBFORM_NAME = 'modules';
 
     /**

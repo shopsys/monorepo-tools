@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
 class PerformanceTestSampleQualifier
 {
-
     const STATUS_OK = 0;
     const STATUS_WARNING = 1;
     const STATUS_CRITICAL = 2;

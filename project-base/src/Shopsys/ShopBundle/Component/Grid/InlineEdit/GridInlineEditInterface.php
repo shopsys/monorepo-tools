@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface GridInlineEditInterface
 {
-
     /**
      * @param mixed $rowId
      * @return \Symfony\Component\Form\Form

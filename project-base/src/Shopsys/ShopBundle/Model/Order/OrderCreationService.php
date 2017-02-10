@@ -22,7 +22,6 @@ use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
 class OrderCreationService
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation
      */

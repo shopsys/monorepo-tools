@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository;
 
 class ProductFilterFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository
      */

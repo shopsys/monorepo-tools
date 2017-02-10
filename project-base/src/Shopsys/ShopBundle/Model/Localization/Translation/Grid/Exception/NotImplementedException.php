@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\Translation
 
 class NotImplementedException extends Exception implements TranslationGridException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

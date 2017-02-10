@@ -11,9 +11,7 @@ use Symfony\Component\DomCrawler\Form;
 
 class NewProductTest extends FunctionalTestCase
 {
-
     public function createOrEditProductProvider() {
-
         return [['admin/product/new/'], ['admin/product/edit/1']];
     }
 

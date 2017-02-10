@@ -18,7 +18,6 @@ use Twig_Environment;
  */
 class Grid
 {
-
     const GET_PARAMETER = 'g';
     const DEFAULT_VIEW_THEME = '@ShopsysShop/Admin/Grid/Grid.html.twig';
     const DEFAULT_LIMIT = 30;

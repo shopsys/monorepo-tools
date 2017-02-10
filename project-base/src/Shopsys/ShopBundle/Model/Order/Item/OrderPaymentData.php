@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
 
 class OrderPaymentData extends OrderItemData
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment
      */

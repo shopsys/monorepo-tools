@@ -10,7 +10,6 @@ use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function testCalculatePriceWithoutVat() {
         $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);

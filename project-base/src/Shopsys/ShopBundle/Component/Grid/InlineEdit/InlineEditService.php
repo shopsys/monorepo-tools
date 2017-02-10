@@ -11,7 +11,6 @@ use Twig_Environment;
 
 class InlineEditService
 {
-
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface
      */

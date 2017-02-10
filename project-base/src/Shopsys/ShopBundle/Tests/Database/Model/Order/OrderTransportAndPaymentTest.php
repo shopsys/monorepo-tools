@@ -16,7 +16,6 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase
 {
-
     public function testVisibleTransport() {
         $em = $this->getEntityManager();
 

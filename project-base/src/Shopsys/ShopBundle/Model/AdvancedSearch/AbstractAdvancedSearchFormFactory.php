@@ -10,7 +10,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class AbstractAdvancedSearchFormFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig
      */

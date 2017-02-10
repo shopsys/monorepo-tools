@@ -9,7 +9,6 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
 class CartMigrationFacade
 {
-
     const SESSION_PREVIOUS_CART_IDENTIFIER = 'previous_id';
 
     /**

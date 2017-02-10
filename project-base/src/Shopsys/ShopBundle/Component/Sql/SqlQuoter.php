@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 
 class SqlQuoter
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

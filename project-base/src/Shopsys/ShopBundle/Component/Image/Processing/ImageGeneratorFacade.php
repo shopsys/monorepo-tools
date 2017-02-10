@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorService;
 
 class ImageGeneratorFacade
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Image\ImageRepository
      */

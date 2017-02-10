@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
  */
 class Image implements EntityFileUploadInterface
 {
-
     const UPLOAD_KEY = 'image';
 
     /**

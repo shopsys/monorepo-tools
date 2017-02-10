@@ -13,7 +13,6 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
 
 class OrderStatusFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

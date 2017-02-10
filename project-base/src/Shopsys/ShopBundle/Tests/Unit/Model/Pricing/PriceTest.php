@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 
 class PriceTest extends PHPUnit_Framework_TestCase
 {
-
     public function testAdd() {
         $price = new Price(2, 3);
         $priceToAdd = new Price(10, 15);

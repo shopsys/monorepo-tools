@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 
 interface FeedItemFactoryInterface
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig

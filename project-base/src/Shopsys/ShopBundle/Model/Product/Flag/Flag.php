@@ -15,7 +15,6 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation;
  */
 class Flag extends AbstractTranslatableEntity
 {
-
     /**
      * @var int
      *

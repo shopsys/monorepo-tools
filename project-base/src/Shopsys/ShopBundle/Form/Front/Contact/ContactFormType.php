@@ -13,7 +13,6 @@ use Symfony\Component\Validator\Constraints;
 
 class ContactFormType extends AbstractType
 {
-
     /**
      * @return string
      */

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 
 class GridOrderingFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

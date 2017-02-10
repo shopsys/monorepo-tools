@@ -26,7 +26,6 @@ use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
  */
 class Product extends AbstractTranslatableEntity
 {
-
     const PRICE_CALCULATION_TYPE_AUTO = 'auto';
     const PRICE_CALCULATION_TYPE_MANUAL = 'manual';
     const OUT_OF_STOCK_ACTION_SET_ALTERNATE_AVAILABILITY = 'setAlternateAvailability';

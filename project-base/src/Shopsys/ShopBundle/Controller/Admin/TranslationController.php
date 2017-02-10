@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
 
 class TranslationController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit
      */

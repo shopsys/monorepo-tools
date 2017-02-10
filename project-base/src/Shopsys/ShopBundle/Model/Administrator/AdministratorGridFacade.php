@@ -9,7 +9,6 @@ use Shopsys\ShopBundle\Model\Administrator\AdministratorGridService;
 
 class AdministratorGridFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager;
      */

@@ -6,7 +6,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 interface CronModuleInterface
 {
-
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger
      */

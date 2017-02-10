@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 
 class PromoCodeFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

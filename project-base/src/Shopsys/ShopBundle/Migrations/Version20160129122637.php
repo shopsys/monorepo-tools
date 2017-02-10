@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class Version20160129122637 extends AbstractMigration
 {
-
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
@@ -41,6 +40,5 @@ class Version20160129122637 extends AbstractMigration
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
     public function down(Schema $schema) {
-
     }
 }

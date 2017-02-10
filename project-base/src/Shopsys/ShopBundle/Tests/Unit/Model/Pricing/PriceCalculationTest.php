@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-
     public function applyVatPercentProvider() {
         return [
             [

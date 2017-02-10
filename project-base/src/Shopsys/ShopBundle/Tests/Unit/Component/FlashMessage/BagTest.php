@@ -6,7 +6,6 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class BagTest extends FunctionalTestCase
 {
-
     public function testAddFrontVsAdmin() {
         $flashMessageAdmin = $this->getContainer()->get('shopsys.shop.component.flash_message.bag.admin');
         /* @var $flashMessageAdmin \Shopsys\ShopBundle\Component\FlashMessage\Bag */

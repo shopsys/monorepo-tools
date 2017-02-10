@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
 class PricingSetting
 {
-
     const INPUT_PRICE_TYPE = 'inputPriceType';
     const ROUNDING_TYPE = 'roundingType';
     const DEFAULT_CURRENCY = 'defaultCurrencyId';

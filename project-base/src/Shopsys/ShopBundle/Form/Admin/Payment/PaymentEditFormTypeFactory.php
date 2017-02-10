@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
 class PaymentEditFormTypeFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory
      */

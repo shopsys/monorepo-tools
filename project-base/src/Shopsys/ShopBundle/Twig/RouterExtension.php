@@ -8,7 +8,6 @@ use Twig_SimpleFunction;
 
 class RouterExtension extends Twig_Extension
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
      */

@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Security\Roles;
 
 class FeedController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain
      */

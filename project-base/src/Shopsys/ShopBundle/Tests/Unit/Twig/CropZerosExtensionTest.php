@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Twig\CropZerosExtension;
 
 class CropZerosExtensionTest extends PHPUnit_Framework_TestCase
 {
-
     public function returnValuesProvider() {
         return [
             ['input' => '12', 'return' => '12'],

@@ -6,7 +6,6 @@ use Exception;
 
 class DirectoryDoesNotExistException extends Exception implements FilesystemException
 {
-
     /**
      * @param string $path
      * @param \Exception|null $previous

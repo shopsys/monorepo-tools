@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
  */
 class ParameterValue
 {
-
     /**
      * @var int
      *

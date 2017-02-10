@@ -10,7 +10,6 @@ use SplFileInfo;
 
 class PhpParserNodeHelper
 {
-
     /**
      * @param \PHPParser_Node $node
      * @param \SplFileInfo $fileInfo

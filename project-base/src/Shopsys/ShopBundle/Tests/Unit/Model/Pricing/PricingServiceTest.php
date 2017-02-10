@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Pricing\PricingService;
 
 class PricingServiceTest extends PHPUnit_Framework_TestCase
 {
-
     /**
      * @dataProvider getMinimumPriceProvider
      */

@@ -11,7 +11,6 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class DomainListenerTest extends PHPUnit_Framework_TestCase
 {
-
     public function testOnKernelRequestWithoutMasterRequest() {
         $eventMock = $this->getMockBuilder(GetResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest'])

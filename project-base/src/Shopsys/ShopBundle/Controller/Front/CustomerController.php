@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CustomerController extends FrontBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade
      */

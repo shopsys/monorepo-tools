@@ -6,7 +6,6 @@ use DateTime;
 
 class LogErrorReportingFacade
 {
-
     const MAX_FILE_TAIL_LENGTH = 8000;
 
     /**

@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints;
 
 class HoneyPotType extends AbstractType
 {
-
     /**
      * @return string
      */

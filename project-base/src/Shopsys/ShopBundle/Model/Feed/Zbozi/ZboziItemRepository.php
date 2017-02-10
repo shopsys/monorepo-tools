@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ZboziItemRepository implements FeedItemRepositoryInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository
      */

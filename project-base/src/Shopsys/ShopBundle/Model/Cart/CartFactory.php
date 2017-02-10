@@ -8,7 +8,6 @@ use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
 class CartFactory
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Cart[]
      */

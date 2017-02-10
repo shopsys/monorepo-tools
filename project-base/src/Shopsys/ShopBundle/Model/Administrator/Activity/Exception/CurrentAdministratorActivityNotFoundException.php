@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Administrator\Activity\Exception\AdministratorActiv
 
 class CurrentAdministratorActivityNotFoundException extends Exception implements AdministratorActivityException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

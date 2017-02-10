@@ -13,7 +13,6 @@ use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
 {
-
     public function testSubRequest() {
         $annotationReader = new AnnotationReader();
         $tokenManagerMock = $this->getMock(CsrfTokenManager::class, [], [], '', false);

@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class AdvancedSearchOrderFacade
 {
-
     const RULES_FORM_NAME = 'as';
 
     /**

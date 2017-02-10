@@ -7,7 +7,6 @@ use IntlDateFormatter;
 
 class DateTimeFormatter
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPatternRepository
      */

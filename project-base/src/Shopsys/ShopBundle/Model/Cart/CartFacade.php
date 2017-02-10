@@ -14,7 +14,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class CartFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

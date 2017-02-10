@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints;
 
 class SliderItemFormType extends AbstractType
 {
-
     /**
      * @var bool
      */

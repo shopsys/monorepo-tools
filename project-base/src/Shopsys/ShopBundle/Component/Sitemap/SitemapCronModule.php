@@ -8,7 +8,6 @@ use Symfony\Bridge\Monolog\Logger;
 
 class SitemapCronModule implements CronModuleInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
      */
@@ -22,7 +21,6 @@ class SitemapCronModule implements CronModuleInterface
      * @inheritdoc
      */
     public function setLogger(Logger $logger) {
-
     }
 
     public function run() {

@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Category\CategoryData;
 
 class CategoryService
 {
-
     /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      * @param \Shopsys\ShopBundle\Model\Category\Category $rootCategory

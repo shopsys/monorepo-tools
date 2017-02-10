@@ -6,7 +6,6 @@ use Doctrine\ORM\QueryBuilder;
 
 interface AdvancedSearchFilterInterface
 {
-
     const OPERATOR_CONTAINS = 'contains';
     const OPERATOR_NOT_CONTAINS = 'notContains';
     const OPERATOR_NOT_SET = 'notSet';

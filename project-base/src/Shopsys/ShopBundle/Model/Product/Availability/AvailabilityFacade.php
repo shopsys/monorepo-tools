@@ -12,7 +12,6 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class AvailabilityFacade
 {
-
     /**
      * @var \Doctrine\ORM\EntityManager
      */

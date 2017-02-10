@@ -11,7 +11,6 @@ use Symfony\Component\Form\FormFactory;
 
 class PricingGroupInlineEdit extends AbstractGridInlineEdit
 {
-
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade
      */

@@ -11,7 +11,6 @@ use Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 
 class TranslationGridFactory implements GridFactoryInterface
 {
-
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
      */

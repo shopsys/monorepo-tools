@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\Exception\PromoCodeException;
 
 class InvalidPromoCodeException extends Exception implements PromoCodeException
 {
-
     /**
      * @param string $invalidPromoCode
      * @param \Exception|null $previous

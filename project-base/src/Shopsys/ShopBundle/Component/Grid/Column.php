@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Grid;
 
 class Column
 {
-
     /**
      * @var string
      */

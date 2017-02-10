@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SliderController extends AdminBaseController
 {
-
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory
      */

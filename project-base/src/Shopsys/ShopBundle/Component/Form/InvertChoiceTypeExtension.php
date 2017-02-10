@@ -9,7 +9,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InvertChoiceTypeExtension extends AbstractTypeExtension
 {
-
     const INVERT_OPTION = 'invert';
 
     /**

@@ -6,7 +6,6 @@ use Exception;
 
 class SettingValueNotFoundException extends Exception implements SettingException
 {
-
     /**
      * @param string $message
      * @param \Exception|null $previous

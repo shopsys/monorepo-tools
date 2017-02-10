@@ -4,7 +4,6 @@ namespace Shopsys\ShopBundle\Component\Paginator;
 
 class PaginationResult
 {
-
     /**
      * @var int
      */

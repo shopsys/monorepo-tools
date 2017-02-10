@@ -7,7 +7,6 @@ use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageConfigException;
 
 class ImageSizeNotFoundException extends Exception implements ImageConfigException
 {
-
     /**
      * @var string
      */
