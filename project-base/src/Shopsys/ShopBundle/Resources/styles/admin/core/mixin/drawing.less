@@ -1,54 +1,54 @@
 .after-content(@width, @height, @bg: transparent, @content: '' , @left: 0, @top: 0) {
-	position: relative;
+    position: relative;
 
-	&:after {
-		content: @content;
-		position: absolute;
-		top: @top;
-		left: @left;
-		display: block;
-		width: @width;
-		height: @height;
-		background: @bg;
-	}
+    &:after {
+        content: @content;
+        position: absolute;
+        top: @top;
+        left: @left;
+        display: block;
+        width: @width;
+        height: @height;
+        background: @bg;
+    }
 }
 
 .draw-arrow-right(@size, @bg, @pos-x, @pos-y) {
-	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
+    .after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
-	&:after {
-		border-left: @size solid @bg;
-		border-bottom: @size solid transparent;
-		border-top: @size solid transparent;
-	}
+    &:after {
+        border-left: @size solid @bg;
+        border-bottom: @size solid transparent;
+        border-top: @size solid transparent;
+    }
 }
 
 .draw-arrow-left(@size, @bg, @pos-x, @pos-y) {
-	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
+    .after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
-	&:after {
-		border-right: @size solid @bg;
-		border-bottom: @size solid transparent;
-		border-top: @size solid transparent;
-	}
+    &:after {
+        border-right: @size solid @bg;
+        border-bottom: @size solid transparent;
+        border-top: @size solid transparent;
+    }
 }
 
 .draw-arrow-top(@size, @bg, @pos-x, @pos-y) {
-	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
+    .after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
-	&:after {
-		border-bottom: @size solid @bg;
-		border-left: @size solid transparent;
-		border-right: @size solid transparent;
-	}
+    &:after {
+        border-bottom: @size solid @bg;
+        border-left: @size solid transparent;
+        border-right: @size solid transparent;
+    }
 }
 
 .draw-arrow-bottom(@size, @bg, @pos-x, @pos-y) {
-	.after-content(0, 0, transparent, '', @pos-x, @pos-y);
+    .after-content(0, 0, transparent, '', @pos-x, @pos-y);
 
-	&:after {
-		border-top: @size solid @bg;
-		border-left: @size solid transparent;
-		border-right: @size solid transparent;
-	}
+    &:after {
+        border-top: @size solid @bg;
+        border-left: @size solid transparent;
+        border-right: @size solid transparent;
+    }
 }

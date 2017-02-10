@@ -1,82 +1,82 @@
 @header-cart-width: 38px;
 
 .header {
-	padding-bottom: 10px;
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
+    padding-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 
-	@media @query-lg {
-		padding-bottom: 20px;
-	}
+    @media @query-lg {
+        padding-bottom: 20px;
+    }
 
-	&__logo {
-		width: 100%;
-		padding: 10px;
+    &__logo {
+        width: 100%;
+        padding: 10px;
 
-		@media @query-lg {
-			flex: 1;
-			order: 1;
-			width: auto;
-			padding-right: 20px;
-		}
-	}
+        @media @query-lg {
+            flex: 1;
+            order: 1;
+            width: auto;
+            padding-right: 20px;
+        }
+    }
 
-	&__middle {
-		width: 100%;
-		margin: 10px 0;
-		order: 2;
+    &__middle {
+        width: 100%;
+        margin: 10px 0;
+        order: 2;
 
-		@media @query-lg {
-			order: 2;
-			width: 280px;
-			margin: 0;
-		}
+        @media @query-lg {
+            order: 2;
+            width: 280px;
+            margin: 0;
+        }
 
-		@media @query-vl {
-			width: 440px;
-		}
-	}
+        @media @query-vl {
+            width: 440px;
+        }
+    }
 
-	&__cart {
-		width: @header-cart-width;
+    &__cart {
+        width: @header-cart-width;
 
-		@media @query-lg {
-			padding-left: 20px;
-			flex: 1;
-			order: 3;
-			text-align: right;
-		}
-	}
+        @media @query-lg {
+            padding-left: 20px;
+            flex: 1;
+            order: 3;
+            text-align: right;
+        }
+    }
 
-	&__top {
-		display: none;
+    &__top {
+        display: none;
 
-		@media @query-lg {
-			order: -1;
-			display: flex;
-			align-items: center;
-			width: 100%;
-			margin-bottom: 10px;
+        @media @query-lg {
+            order: -1;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
 
-			&__left {
-				flex: 1;
-			}
+            &__left {
+                flex: 1;
+            }
 
-			&__right {
-				flex: 1;
-			}
-		}
-	}
+            &__right {
+                flex: 1;
+            }
+        }
+    }
 
-	&__mobile {
-		width: 80%;
-		width: calc(~"100% - @{header-cart-width}");
-		text-align: right;
+    &__mobile {
+        width: 80%;
+        width: calc(~"100% - @{header-cart-width}");
+        text-align: right;
 
-		@media @query-lg {
-			display: none;
-		}
-	}
+        @media @query-lg {
+            display: none;
+        }
+    }
 }

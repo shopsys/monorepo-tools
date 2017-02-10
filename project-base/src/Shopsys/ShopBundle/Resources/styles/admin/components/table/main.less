@@ -1,48 +1,48 @@
 .table-main {
-	width: 100%;
-	border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 
-	thead {
-		background: @bg-primary;
-		color: @color-f;
-		font-weight: bold;
-	}
+    thead {
+        background: @bg-primary;
+        color: @color-f;
+        font-weight: bold;
+    }
 
-	tbody, tfoot {
-		background: @color-f;
-		border: 1px solid @color-border;
-	}
+    tbody, tfoot {
+        background: @color-f;
+        border: 1px solid @color-border;
+    }
 
-	tr {
-		border-bottom: 1px solid @color-border;
-	}
+    tr {
+        border-bottom: 1px solid @color-border;
+    }
 
-	tbody {
-		tr {
-			background: @color-f;
+    tbody {
+        tr {
+            background: @color-f;
 
-			&:hover {
-				background: darken(@color-f, 2%);
-			}
+            &:hover {
+                background: darken(@color-f, 2%);
+            }
 
-			&:nth-child(2n) {
-				background: @bg-stripe;
+            &:nth-child(2n) {
+                background: @bg-stripe;
 
-				&:hover {
-					background: darken(@bg-stripe, 2%);
-				}
-			}
-		}
-	}
+                &:hover {
+                    background: darken(@bg-stripe, 2%);
+                }
+            }
+        }
+    }
 
-	td, th {
-		padding: 6px 17px;
-	}
+    td, th {
+        padding: 6px 17px;
+    }
 
-	thead {
-		td, th {
-			padding-top: 14px;
-			padding-bottom: 14px;
-		}
-	}
+    thead {
+        td, th {
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
+    }
 }

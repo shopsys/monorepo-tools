@@ -4,23 +4,23 @@
 @list-simple-item-margin: 3px;
 
 .list-simple {
-	.reset-ul();
+    .reset-ul();
 
-	&__item {
-		position: relative;
-		padding-left: @list-simple-dot-space;
-		line-height: @list-simple-line-height;
-		margin-bottom: @list-simple-item-margin;
+    &__item {
+        position: relative;
+        padding-left: @list-simple-dot-space;
+        line-height: @list-simple-line-height;
+        margin-bottom: @list-simple-item-margin;
 
-		&:after {
-			position: absolute;
-			top: @list-simple-line-height/2 - @list-simple-dot-size/2;
-			left: 0;
-			width: @list-simple-dot-size;
-			height: @list-simple-dot-size;
-			content: '';
+        &:after {
+            position: absolute;
+            top: @list-simple-line-height/2 - @list-simple-dot-size/2;
+            left: 0;
+            width: @list-simple-dot-size;
+            height: @list-simple-dot-size;
+            content: '';
 
-			background: @color-add;
-		}
-	}
+            background: @color-add;
+        }
+    }
 }

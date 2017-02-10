@@ -1,83 +1,83 @@
 .box-mass-action {
-	&__click {
-		display: inline-block;
-		padding: 0 12px;
-		height: 32px;
-		line-height: 32px;
-		margin: 0 15px;
-		position: relative;
-		top: 1px;
-		z-index: 2;
+    &__click {
+        display: inline-block;
+        padding: 0 12px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0 15px;
+        position: relative;
+        top: 1px;
+        z-index: 2;
 
-		background: @color-f;
-		border: 1px solid @color-border-dark;
-		cursor: pointer;
+        background: @color-f;
+        border: 1px solid @color-border-dark;
+        cursor: pointer;
 
-		border-radius: 5px;
+        border-radius: 5px;
 
-		.active & {
-			border-bottom-color: @color-f;
+        .active & {
+            border-bottom-color: @color-f;
 
-			border-radius: 5px 5px 0 0;
-		}
+            border-radius: 5px 5px 0 0;
+        }
 
-		&__icon {
-			margin-left: 5px;
-			position: relative;
-			top: -1px;
+        &__icon {
+            margin-left: 5px;
+            position: relative;
+            top: -1px;
 
-			font-size: 10px;
-			color: @color-primary;
+            font-size: 10px;
+            color: @color-primary;
 
-			.active & {
-				transform: rotate(180deg);
-			}
-		}
-	}
+            .active & {
+                transform: rotate(180deg);
+            }
+        }
+    }
 
-	&__content {
-		display: none;
-		position: relative;
-		z-index: 1;
-		padding: 15px;
+    &__content {
+        display: none;
+        position: relative;
+        z-index: 1;
+        padding: 15px;
 
-		border: 1px solid @color-border-dark;
-		background: @color-f;
+        border: 1px solid @color-border-dark;
+        background: @color-f;
 
-		.active & {
-			display: block;
-		}
-	}
+        .active & {
+            display: block;
+        }
+    }
 
-	&__title {
-		display: inline-block;
-		line-height: 32px;
-		margin-right: 5px;
+    &__title {
+        display: inline-block;
+        line-height: 32px;
+        margin-right: 5px;
 
-		font-weight: bold;
-	}
+        font-weight: bold;
+    }
 
-	&__filter {
-		margin-top: 15px;
+    &__filter {
+        margin-top: 15px;
 
-		&__line {
-			margin: 5px -5px;
-			display: flex;
+        &__line {
+            margin: 5px -5px;
+            display: flex;
 
-			&--submit {
-				text-align: right;
-			}
+            &--submit {
+                text-align: right;
+            }
 
-			&__item {
-				flex: 1;
-				padding: 0 5px;
+            &__item {
+                flex: 1;
+                padding: 0 5px;
 
-				select, input {
-					width: 100%;
-				}
-			}
-		}
-	}
+                select, input {
+                    width: 100%;
+                }
+            }
+        }
+    }
 
 
 }

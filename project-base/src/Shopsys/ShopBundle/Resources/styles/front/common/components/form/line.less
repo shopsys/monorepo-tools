@@ -5,41 +5,41 @@
 @form-line-label-field-gap-mobile: 5px;
 
 .form-line {
-	position: relative;
-	margin: 0 0 @form-line-margin-bottom;
-	padding: 0;
+    position: relative;
+    margin: 0 0 @form-line-margin-bottom;
+    padding: 0;
 
-	dt {
-		margin: 0 0 @form-line-label-field-gap-mobile;
-		padding: 0;
-		display: block;
+    dt {
+        margin: 0 0 @form-line-label-field-gap-mobile;
+        padding: 0;
+        display: block;
 
-		@media @query-md {
-			float: left;
-			width: @form-line-width-label;
-			padding: 8px @form-line-gap-between 8px 0;
-			margin: 0;
-			line-height: 20px;
-		}
-	}
+        @media @query-md {
+            float: left;
+            width: @form-line-width-label;
+            padding: 8px @form-line-gap-between 8px 0;
+            margin: 0;
+            line-height: 20px;
+        }
+    }
 
-	dd {
-		margin: 0 0 @form-line-label-field-gap-mobile;
-		padding: 0;
-		display: block;
-		position: relative;
+    dd {
+        margin: 0 0 @form-line-label-field-gap-mobile;
+        padding: 0;
+        display: block;
+        position: relative;
 
-		@media @query-md {
-			margin-left: @form-line-width-label + @form-line-gap-between;
-			margin-bottom: 0;
-		}
-	}
+        @media @query-md {
+            margin-left: @form-line-width-label + @form-line-gap-between;
+            margin-bottom: 0;
+        }
+    }
 
-	.input {
-		width: 100%;
+    .input {
+        width: 100%;
 
-		@media @query-lg {
-			max-width: @form-line-width-input;
-		}
-	}
+        @media @query-lg {
+            max-width: @form-line-width-input;
+        }
+    }
 }

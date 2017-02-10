@@ -3,43 +3,43 @@
 @form-choice-list-item-gap-inside: 5px;
 
 .form-choice-list {
-	display: inline-block;
-	vertical-align: top;
-	padding-top: @form-choice-list-space-around;
-	padding-bottom: @form-choice-list-space-around;
+    display: inline-block;
+    vertical-align: top;
+    padding-top: @form-choice-list-space-around;
+    padding-bottom: @form-choice-list-space-around;
 
-	&__item {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		padding: @form-choice-list-item-space-around 0;
+    &__item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: @form-choice-list-item-space-around 0;
 
-		&__action {
-			display: inline-block;
-			margin-left: @form-choice-list-item-gap-inside;
+        &__action {
+            display: inline-block;
+            margin-left: @form-choice-list-item-gap-inside;
 
-			&--link {
-				position: relative;
-				top: -1px;
-				margin-left: 2*@form-choice-list-item-gap-inside;
-			}
-		}
-	}
+            &--link {
+                position: relative;
+                top: -1px;
+                margin-left: 2*@form-choice-list-item-gap-inside;
+            }
+        }
+    }
 
-	&__input {
-		margin-right: @form-choice-list-item-gap-inside;
-	}
+    &__input {
+        margin-right: @form-choice-list-item-gap-inside;
+    }
 
-	&__icon {
-		display: inline-block;
-		margin-right: @form-choice-list-item-gap-inside;
-		width: 40px;
-		height: 12px;
-		float: none;
-		position: relative;
+    &__icon {
+        display: inline-block;
+        margin-right: @form-choice-list-item-gap-inside;
+        width: 40px;
+        height: 12px;
+        float: none;
+        position: relative;
 
-		img {
-			.center-image();
-		}
-	}
+        img {
+            .center-image();
+        }
+    }
 }

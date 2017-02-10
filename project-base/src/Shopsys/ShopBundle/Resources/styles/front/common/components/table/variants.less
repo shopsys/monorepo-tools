@@ -8,119 +8,119 @@
 @table-variants-image-gap: 10px;
 
 .table-variants {
-	margin-bottom: @margin-gap;
+    margin-bottom: @margin-gap;
 
-	&__cell {
-		&__image {
-			display: inline-block;
-			position: relative;
+    &__cell {
+        &__image {
+            display: inline-block;
+            position: relative;
 
-			img {
-				.center-image();
-			}
-		}
-	}
+            img {
+                .center-image();
+            }
+        }
+    }
 }
 
 // mobile/tablet version
 @media @query-tablet {
-	.table-variants {
-		width: 100%;
-		display: block;
+    .table-variants {
+        width: 100%;
+        display: block;
 
-		tbody {
-			display: flex;
-			flex-wrap: wrap;
-			margin-left: -@table-variants-item-gap-mobile;
+        tbody {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -@table-variants-item-gap-mobile;
 
-			@media @query-mobile-xs-nested {
-				margin-left: 0;
-			}
-		}
+            @media @query-mobile-xs-nested {
+                margin-left: 0;
+            }
+        }
 
-		thead {
-			display: none;
-		}
+        thead {
+            display: none;
+        }
 
-		&__row {
-			margin-bottom: @table-variants-item-gap-mobile;
-			padding: @table-variants-item-padding;
-			position: relative;
-			display: block;
+        &__row {
+            margin-bottom: @table-variants-item-gap-mobile;
+            padding: @table-variants-item-padding;
+            position: relative;
+            display: block;
 
-			border: 1px solid @color-border;
+            border: 1px solid @color-border;
 
-			tbody & {
-				flex: 0 calc( ~"100% / 2 - @{table-variants-item-gap-mobile}" );
-				margin-left: @table-variants-item-gap-mobile;
+            tbody & {
+                flex: 0 calc( ~"100% / 2 - @{table-variants-item-gap-mobile}" );
+                margin-left: @table-variants-item-gap-mobile;
 
-				@media @query-mobile-xs-nested {
-					flex: 0 100%;
-					margin-left: 0;
-				}
-			}
-		}
+                @media @query-mobile-xs-nested {
+                    flex: 0 100%;
+                    margin-left: 0;
+                }
+            }
+        }
 
-		&__cell {
-			display: block;
-			padding-left: @table-variants-image-width-mobile + @table-variants-image-gap;
+        &__cell {
+            display: block;
+            padding-left: @table-variants-image-width-mobile + @table-variants-image-gap;
 
-			&--image {
-				float: left;
-				width: @table-variants-image-width-mobile;
-				padding-left: 0;
-			}
+            &--image {
+                float: left;
+                width: @table-variants-image-width-mobile;
+                padding-left: 0;
+            }
 
-			&--action {
-				clear: both;
-				padding-left: 0;
-			}
+            &--action {
+                clear: both;
+                padding-left: 0;
+            }
 
-			&__image {
-				height: @table-variants-image-height-mobile;
-				width: @table-variants-image-width-mobile;
-			}
-		}
-	}
+            &__image {
+                height: @table-variants-image-height-mobile;
+                width: @table-variants-image-width-mobile;
+            }
+        }
+    }
 }
 
 // desktop version
 @media @query-lg {
-	.table-variants {
-		width: 100%;
+    .table-variants {
+        width: 100%;
 
-		&__cell {
-			padding: @table-variants-item-padding;
-			text-align: left;
+        &__cell {
+            padding: @table-variants-item-padding;
+            text-align: left;
 
-			font-size: 12px;
-			border-bottom: 1px solid @color-border;
+            font-size: 12px;
+            border-bottom: 1px solid @color-border;
 
-			&--image {
-				width: @table-cart-image-width + @table-variants-item-padding*2;
-			}
+            &--image {
+                width: @table-cart-image-width + @table-variants-item-padding*2;
+            }
 
-			&--price {
-				text-align: right;
-			}
+            &--price {
+                text-align: right;
+            }
 
-			&--action {
-				width: 240px;
-				text-align: right;
-			}
+            &--action {
+                width: 240px;
+                text-align: right;
+            }
 
-			&__image {
-				height: @table-variants-image-height;
-				width: @table-variants-image-width;
-			}
+            &__image {
+                height: @table-variants-image-height;
+                width: @table-variants-image-width;
+            }
 
-			thead & {
-				font-weight: bold;
-			}
+            thead & {
+                font-weight: bold;
+            }
 
-			tfoot & {
-				border-bottom: 0;
-			}
-		}
-	}
+            tfoot & {
+                border-bottom: 0;
+            }
+        }
+    }
 }

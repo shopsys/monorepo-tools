@@ -1,28 +1,28 @@
 .in-sort-arrows {
-	position: relative;
-	display: block;
+    position: relative;
+    display: block;
 
-	text-decoration: none;
+    text-decoration: none;
 
-	&__link {
-		display: inline-block;
+    &__link {
+        display: inline-block;
 
-		text-decoration: underline;
+        text-decoration: underline;
 
-		.in-sort-arrows:hover & {
-			text-decoration: none;
-		}
-	}
+        .in-sort-arrows:hover & {
+            text-decoration: none;
+        }
+    }
 
-	&__item {
-		display: inline-block;
-		width: 10px;
+    &__item {
+        display: inline-block;
+        width: 10px;
 
-		&--up {
-			.draw-arrow-top(5px, @color-f, 5px, -8px);
-		}
-		&--down {
-			.draw-arrow-bottom(5px, @color-f, 5px, -6px);
-		}
-	}
+        &--up {
+            .draw-arrow-top(5px, @color-f, 5px, -8px);
+        }
+        &--down {
+            .draw-arrow-bottom(5px, @color-f, 5px, -6px);
+        }
+    }
 }

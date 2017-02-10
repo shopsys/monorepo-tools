@@ -9,78 +9,78 @@
 @input-disabled-background: #eff1f2;
 
 .input {
-	width: @input-width;
-	max-width: 100%;
-	height: @input-height;
-	line-height: @input-height - 2;
-	padding: 0 @input-padding-horizontal;
+    width: @input-width;
+    max-width: 100%;
+    height: @input-height;
+    line-height: @input-height - 2;
+    padding: 0 @input-padding-horizontal;
 
-	border: 1px solid @input-border-color;
-	color: @color-base;
-	background: @input-background;
+    border: 1px solid @input-border-color;
+    color: @color-base;
+    background: @input-background;
 
-	&--textarea {
-		height: @input-textarea-height;
-		line-height: 20px;
-		padding-top: 5px;
-		padding-bottom: 5px;
-	}
+    &--textarea {
+        height: @input-textarea-height;
+        line-height: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 
-	&:focus {
-		outline: 0;
-	}
+    &:focus {
+        outline: 0;
+    }
 
-	.form-input-error & ,
-	&.form-input-error {
-		padding-right: 25px;
+    .form-input-error & ,
+    &.form-input-error {
+        padding-right: 25px;
 
-		border-color: @input-error-border-color;
-		box-shadow: none;
+        border-color: @input-error-border-color;
+        box-shadow: none;
 
-		&:focus {
-			border-color: @input-error-border-color;
-		}
-	}
+        &:focus {
+            border-color: @input-error-border-color;
+        }
+    }
 
-	.form-input-disabled &,
-	&.form-input-disabled {
-		background: @input-disabled-background;
-	}
+    .form-input-disabled &,
+    &.form-input-disabled {
+        background: @input-disabled-background;
+    }
 }
 
 .input-no-style {
-	width: auto;
+    width: auto;
 
-	border: 0;
-	background: none;
-	color: @color-base;
-	box-shadow: none;
+    border: 0;
+    background: none;
+    color: @color-base;
+    box-shadow: none;
 
-	&:focus {
-		outline: 0;
-	}
+    &:focus {
+        outline: 0;
+    }
 }
 
 
 input[type="date"]::-webkit-input-placeholder,
 input[type="timedate"]::-webkit-input-placeholder {
-	visibility: hidden !important;
+    visibility: hidden !important;
 }
 
 input[type='number'] {
-	-moz-appearance:textfield;
+    -moz-appearance:textfield;
 }
 
 input[type='checkbox'], input[type='radio'] {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 textarea {
-	resize: vertical;
+    resize: vertical;
 }

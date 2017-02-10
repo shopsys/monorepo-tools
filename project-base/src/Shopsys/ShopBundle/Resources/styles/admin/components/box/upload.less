@@ -1,84 +1,84 @@
 .box-upload {
-	background: @color-f;
-	clear: both;
+    background: @color-f;
+    clear: both;
 
-	&--bordered {
-		padding: 10px 15px;
+    &--bordered {
+        padding: 10px 15px;
 
-		border: 1px solid @color-border-dark;
-		border-top: none;
-	}
+        border: 1px solid @color-border-dark;
+        border-top: none;
+    }
 
-	&__uploading {
-		margin: 0 3px;
-	}
+    &__uploading {
+        margin: 0 3px;
+    }
 
-	&__place {
-		position: relative;
+    &__place {
+        position: relative;
 
-		border: 3px solid @color-f;
-		background: @bg-upload;
-		font-size: 0;
+        border: 3px solid @color-f;
+        background: @bg-upload;
+        font-size: 0;
 
-		&:after {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-			left: 70%;
-			width: 0;
-			height: 100%;
-			content: '';
+        &:after {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 70%;
+            width: 0;
+            height: 100%;
+            content: '';
 
-			border-left: 1px solid @color-f;
-		}
+            border-left: 1px solid @color-f;
+        }
 
-		&__drop {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 30px;
-			width: 70%;
+        &__drop {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 30px;
+            width: 70%;
 
-			text-align: center;
-			font-size: 16px;
-			color: @color-action;
+            text-align: center;
+            font-size: 16px;
+            color: @color-action;
 
-			&__icon {
-				margin-bottom: 10px;
+            &__icon {
+                margin-bottom: 10px;
 
-				font-size: 26px;
-			}
+                font-size: 26px;
+            }
 
-			&__title {
-				font-size: 22px;
-			}
-		}
+            &__title {
+                font-size: 22px;
+            }
+        }
 
-		&__button {
-			display: inline-block;
-			vertical-align: middle;
-			padding: 30px;
-			width: 30%;
+        &__button {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 30px;
+            width: 30%;
 
-			text-align: center;
-		}
+            text-align: center;
+        }
 
-		&__between {
-			position: absolute;
-			top: 50%;
-			left: 70%;
-			height: 22px;
-			line-height: 22px;
-			width: 44px;
-			margin: -11px 0 0 -22px;
-			z-index: 2;
+        &__between {
+            position: absolute;
+            top: 50%;
+            left: 70%;
+            height: 22px;
+            line-height: 22px;
+            width: 44px;
+            margin: -11px 0 0 -22px;
+            z-index: 2;
 
-			text-align: center;
-			border: 1px solid @color-f;
-			background: @bg-upload;
-			color: @color-action;
-			font-weight: bold;
-			font-size: 12px;
-			text-transform: uppercase;
-		}
-	}
+            text-align: center;
+            border: 1px solid @color-f;
+            background: @bg-upload;
+            color: @color-action;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
 }

@@ -2,122 +2,122 @@
 @search-form-height: @input-height;
 
 .search {
-	position: relative;
+    position: relative;
 
-	&__form {
-		display: flex;
+    &__form {
+        display: flex;
 
-		.is-no-flex & {
-			display: block;
-			.clearfix();
-		}
+        .is-no-flex & {
+            display: block;
+            .clearfix();
+        }
 
-		&__input {
-			flex: 1;
-			position: relative;
+        &__input {
+            flex: 1;
+            position: relative;
 
-			.is-no-flex & {
-				float: left;
-				width: ~"calc(100% - @{search-button-width})";
-			}
+            .is-no-flex & {
+                float: left;
+                width: ~"calc(100% - @{search-button-width})";
+            }
 
-			.input {
-				padding-left: 30px;
-				width: 100%;
-			}
-		}
+            .input {
+                padding-left: 30px;
+                width: 100%;
+            }
+        }
 
-		&__button {
-			flex: 0 @search-button-width;
-			height: @search-form-height;
-			line-height: @search-form-height;
-			padding: 0;
+        &__button {
+            flex: 0 @search-button-width;
+            height: @search-form-height;
+            line-height: @search-form-height;
+            padding: 0;
 
-			.is-no-flex & {
-				width: @search-button-width;
-			}
-		}
+            .is-no-flex & {
+                width: @search-button-width;
+            }
+        }
 
-		&__icon {
-			position: absolute;
-			top: 9px;
-			left: 10px;
-			transition: @transition color;
+        &__icon {
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            transition: @transition color;
 
-			color: @color-inactive;
+            color: @color-inactive;
 
-			.search__input:focus + & {
-				color: @color-primary;
-			}
-		}
-	}
+            .search__input:focus + & {
+                color: @color-primary;
+            }
+        }
+    }
 
 
-	&__hint {
-		.reset-ul();
-		position: absolute;
-		top: 34px;
-		left: 0;
-		width: 100%;
-		z-index: 10;
+    &__hint {
+        .reset-ul();
+        position: absolute;
+        top: 34px;
+        left: 0;
+        width: 100%;
+        z-index: 10;
 
-		border: 1px solid @color-border;
-		border-top: 0px;
-		background: @color-f;
-		border-radius: 0 0 @radius @radius;
+        border: 1px solid @color-border;
+        border-top: 0px;
+        background: @color-f;
+        border-radius: 0 0 @radius @radius;
 
-		&__item {
-			border-top: 1px dashed @color-border;
+        &__item {
+            border-top: 1px dashed @color-border;
 
-			&__link {
-				display: flex;
-				align-items: center;
-				width: 100%;
-				padding: 10px;
-				.clearfix();
+            &__link {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                padding: 10px;
+                .clearfix();
 
-				text-decoration: none;
+                text-decoration: none;
 
-				&:hover {
-					text-decoration: none;
-				}
-			}
+                &:hover {
+                    text-decoration: none;
+                }
+            }
 
-			&--info {
-				padding: 10px 0;
-				text-align: center;
+            &--info {
+                padding: 10px 0;
+                text-align: center;
 
-				font-size: 12px;
-				border: none;
-			}
+                font-size: 12px;
+                border: none;
+            }
 
-			&:last-child {
-				border-radius: 0 0 @radius @radius;
-			}
-		}
+            &:last-child {
+                border-radius: 0 0 @radius @radius;
+            }
+        }
 
-		&__image {
-			position: relative;
-			height: 30px;
-			flex: 0 30px;
+        &__image {
+            position: relative;
+            height: 30px;
+            flex: 0 30px;
 
-			img {
-				.center-image();
-			}
+            img {
+                .center-image();
+            }
 
-			.svg {
-				position: relative;
-				top: -2px;
-				margin-bottom: -2px;
+            .svg {
+                position: relative;
+                top: -2px;
+                margin-bottom: -2px;
 
-				font-size: 20px;
-				color: @color-base;
-			}
-		}
+                font-size: 20px;
+                color: @color-base;
+            }
+        }
 
-		&__name {
-			padding-left: 10px;
-			flex: 1;
-		}
-	}
+        &__name {
+            padding-left: 10px;
+            flex: 1;
+        }
+    }
 }

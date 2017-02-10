@@ -1,185 +1,185 @@
 .form-tree {
-	width: 440px;
-	max-width: 100%;
+    width: 440px;
+    max-width: 100%;
 
-	border: 1px solid @color-border;
+    border: 1px solid @color-border;
 
-	&__title {
-		display: block;
-		padding: 5px;
-		line-height: 20px;
+    &__title {
+        display: block;
+        padding: 5px;
+        line-height: 20px;
 
-		cursor: pointer;
+        cursor: pointer;
 
-		.form-tree--open & {
-			border-bottom: 1px dashed @color-border;
-		}
+        .form-tree--open & {
+            border-bottom: 1px dashed @color-border;
+        }
 
-		&__image {
-			display: inline-block;
-			width: 40px;
-			height: 12px;
-			margin-right: 5px;
-			position: relative;
-			top: 1px;
+        &__image {
+            display: inline-block;
+            width: 40px;
+            height: 12px;
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
 
-			img {
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				text-align: center;
-				max-width: 100%;
-				max-height: 100%;
-			}
-		}
+            img {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                text-align: center;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
 
-		&__name {
-			color: @color-link;
-			text-decoration: underline;
+        &__name {
+            color: @color-link;
+            text-decoration: underline;
 
-			.form-tree__title:hover & {
-				color: @color-link-hover;
-			}
-		}
+            .form-tree__title:hover & {
+                color: @color-link-hover;
+            }
+        }
 
-		&__arrow {
-			float: right;
-			height: 24px;
-			width: 24px;
-			position: relative;
-			top: -2px;
+        &__arrow {
+            float: right;
+            height: 24px;
+            width: 24px;
+            position: relative;
+            top: -2px;
 
-			background: @bg-input-icon;
+            background: @bg-input-icon;
 
-			&:after {
-				content: '';
-				display: block;
-				width: 0;
-				height: 0;
-				position: absolute;
-				top: 9px;
-				left: 7px;
+            &:after {
+                content: '';
+                display: block;
+                width: 0;
+                height: 0;
+                position: absolute;
+                top: 9px;
+                left: 7px;
 
-				border-bottom: 5px solid @color-primary;
-				border-left: 5px solid transparent;
-				border-right: 5px solid transparent;
-			}
+                border-bottom: 5px solid @color-primary;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+            }
 
-			.form-tree--open & {
+            .form-tree--open & {
 
-				&:after {
-					top: 10px;
+                &:after {
+                    top: 10px;
 
-					border-top: 5px solid @color-primary;
-					border-bottom: 0;
-				}
-			}
-		}
-	}
+                    border-top: 5px solid @color-primary;
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
 
-	&__content {
-		display: none;
-		.reset-ul();
-		padding: 5px 0 5px 10px;
+    &__content {
+        display: none;
+        .reset-ul();
+        padding: 5px 0 5px 10px;
 
-		.form-tree--open & {
-			display: block;
-		}
-	}
+        .form-tree--open & {
+            display: block;
+        }
+    }
 
-	&__placeholder {
-		margin-right: 5px;
+    &__placeholder {
+        margin-right: 5px;
 
-		outline: 1px dotted @color-red;
-		outline-offset: -1px;
-	}
+        outline: 1px dotted @color-red;
+        outline-offset: -1px;
+    }
 
-	&__item {
-		display: block;
-		position: relative;
+    &__item {
+        display: block;
+        position: relative;
 
-		background: @color-f;
+        background: @color-f;
 
-		&--muted {
-			color: @color-a;
-		}
+        &--muted {
+            color: @color-a;
+        }
 
-		&__click {
-			padding: 4px 0;
+        &__click {
+            padding: 4px 0;
 
-			&--active {
-				font-weight: bold;
-			}
-		}
+            &--active {
+                font-weight: bold;
+            }
+        }
 
-		&__drag {
-			padding: 4px 0 4px 5px;
-			margin-right: 5px;
-			margin-left: -5px;
+        &__drag {
+            padding: 4px 0 4px 5px;
+            margin-right: 5px;
+            margin-left: -5px;
 
-			cursor: move;
+            cursor: move;
 
-			&:hover {
-				outline: 1px dotted @color-border;
-				outline-offset: -1px;
-			}
-		}
+            &:hover {
+                outline: 1px dotted @color-border;
+                outline-offset: -1px;
+            }
+        }
 
-		&__name {
-			display: block;
+        &__name {
+            display: block;
 
-			&--link {
-				color: @color-link;
-				text-decoration: underline;
-				display: inline;
+            &--link {
+                color: @color-link;
+                text-decoration: underline;
+                display: inline;
 
-				.form-tree__item__click:hover & {
-					color: @color-link-hover;
-				}
-			}
+                .form-tree__item__click:hover & {
+                    color: @color-link-hover;
+                }
+            }
 
-			.form-tree--dragable & {
-				padding-left: 10px;
-				padding-right: 40px;
-			}
-		}
+            .form-tree--dragable & {
+                padding-left: 10px;
+                padding-right: 40px;
+            }
+        }
 
-		&__icon {
-			margin-right: 5px;
-			float: left;
+        &__icon {
+            margin-right: 5px;
+            float: left;
 
-			&--level {
-				margin-top: 5px;
-			}
-		}
+            &--level {
+                margin-top: 5px;
+            }
+        }
 
-		&__controls {
-			position: absolute;
-			top: 3px;
-			right: 0;
-			padding-right: 6px;
-		}
+        &__controls {
+            position: absolute;
+            top: 3px;
+            right: 0;
+            padding-right: 6px;
+        }
 
-		&__control {
-			padding: 0 2px;
+        &__control {
+            padding: 0 2px;
 
-			text-decoration: none;
-			color: @color-action;
-			font-size: 13px;
-		}
+            text-decoration: none;
+            color: @color-action;
+            font-size: 13px;
+        }
 
-		&__choice {
-			float: left;
-			margin-right: 5px;
-			position: relative;
-			top: 1px;
-		}
+        &__choice {
+            float: left;
+            margin-right: 5px;
+            position: relative;
+            top: 1px;
+        }
 
-		ul {
-			.reset-ul();
-			padding-left: 20px;
-		}
-	}
+        ul {
+            .reset-ul();
+            padding-left: 20px;
+        }
+    }
 }

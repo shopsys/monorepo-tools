@@ -1,79 +1,79 @@
 .table-grid {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 25px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
 
-	thead {
-		background: @bg-primary;
-		color: @color-f;
-		font-weight: bold;
-	}
+    thead {
+        background: @bg-primary;
+        color: @color-f;
+        font-weight: bold;
+    }
 
-	tbody {
-		background: @color-f;
-		border: 1px solid @color-border;
-	}
+    tbody {
+        background: @color-f;
+        border: 1px solid @color-border;
+    }
 
-	&__row {
-		border-bottom: 1px solid @color-border;
+    &__row {
+        border-bottom: 1px solid @color-border;
 
-		&--edit {
-			background: @bg-edit;
-		}
+        &--edit {
+            background: @bg-edit;
+        }
 
-		&:nth-child(2n) {
-			tbody & {
-				background: @bg-stripe;
-			}
-		}
-	}
+        &:nth-child(2n) {
+            tbody & {
+                background: @bg-stripe;
+            }
+        }
+    }
 
-	&__cell {
-		padding: 6px;
-		height: 40px;
+    &__cell {
+        padding: 6px;
+        height: 40px;
 
-		text-align: left;
+        text-align: left;
 
-		&:first-child {
-			padding-left: 17px;
-		}
+        &:first-child {
+            padding-left: 17px;
+        }
 
-		&:last-child {
-			padding-left: 17px;
-		}
+        &:last-child {
+            padding-left: 17px;
+        }
 
-		&--choice {
-			width: 40px;
-		}
+        &--choice {
+            width: 40px;
+        }
 
-		&--move {
-			width: 40px;
-			padding-left: 17px;
-			padding-right: 17px;
-		}
+        &--move {
+            width: 40px;
+            padding-left: 17px;
+            padding-right: 17px;
+        }
 
-		&--actions {
-			width: 90px;
-			padding-left: 17px;
-			padding-right: 17px;
+        &--actions {
+            width: 90px;
+            padding-left: 17px;
+            padding-right: 17px;
 
-			text-align: right;
+            text-align: right;
 
-			a, span {
-				width: 18px;
+            a, span {
+                width: 18px;
 
-				text-align: center;
-			}
-		}
+                text-align: center;
+            }
+        }
 
-		thead & {
-			padding-top: 14px;
-			padding-bottom: 14px;
+        thead & {
+            padding-top: 14px;
+            padding-bottom: 14px;
 
-			a {
-				color: @color-f;
-				text-decoration: none;
-			}
-		}
-	}
+            a {
+                color: @color-f;
+                text-decoration: none;
+            }
+        }
+    }
 }

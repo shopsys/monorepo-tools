@@ -1,140 +1,140 @@
 .table-form {
-	width: 100%;
-	border-collapse: collapse;
+    width: 100%;
+    border-collapse: collapse;
 
-	thead {
-		background: @bg-table;
-		color: @color-base;
-		font-weight: bold;
-		border: 1px solid @color-border-darker;
-	}
+    thead {
+        background: @bg-table;
+        color: @color-base;
+        font-weight: bold;
+        border: 1px solid @color-border-darker;
+    }
 
-	tbody {
-		background: @color-f;
-		border: 1px solid @color-border-darker;
-	}
+    tbody {
+        background: @color-f;
+        border: 1px solid @color-border-darker;
+    }
 
-	&__wrap {
-		padding-top: 4px;
-		position: relative;
-	}
+    &__wrap {
+        padding-top: 4px;
+        position: relative;
+    }
 
-	&__row {
-		border-bottom: 1px solid @color-border;
-		background: @color-f;
+    &__row {
+        border-bottom: 1px solid @color-border;
+        background: @color-f;
 
-		&--group {
-			background: @bg-info;
-		}
+        &--group {
+            background: @bg-info;
+        }
 
-		thead & {
-			background: @bg-table;
-		}
-	}
+        thead & {
+            background: @bg-table;
+        }
+    }
 
-	&__cell {
-		padding: 6px 17px;
-		height: 46px;
+    &__cell {
+        padding: 6px 17px;
+        height: 46px;
 
-		text-align: left;
+        text-align: left;
 
-		.ui-sortable-helper & {
-			width: 100%;
-			display: table-row;
-		}
+        .ui-sortable-helper & {
+            width: 100%;
+            display: table-row;
+        }
 
-		&--label {
-			width: 229px;
+        &--label {
+            width: 229px;
 
-			font-weight: bold;
-		}
+            font-weight: bold;
+        }
 
-		&--field {
+        &--field {
 
-		}
+        }
 
-		&--actions {
-			width: 45px;
+        &--actions {
+            width: 45px;
 
-			text-align: center;
+            text-align: center;
 
-			a {
-				font-size: 20px;
-				color: @color-hint;
-				&:hover {
-					color: @color-base;
-				}
-			}
-		}
+            a {
+                font-size: 20px;
+                color: @color-hint;
+                &:hover {
+                    color: @color-base;
+                }
+            }
+        }
 
-		&--del {
-			width: 40px;
-			padding: 0;
+        &--del {
+            width: 40px;
+            padding: 0;
 
-			text-align: center;
-		}
+            text-align: center;
+        }
 
-		&--del-before {
-			padding-right: 0;
-		}
+        &--del-before {
+            padding-right: 0;
+        }
 
-		&--del-after {
-			padding-left: 0;
-		}
+        &--del-after {
+            padding-left: 0;
+        }
 
-		thead & {
-			padding-top: 14px;
-			padding-bottom: 14px;
-		}
+        thead & {
+            padding-top: 14px;
+            padding-bottom: 14px;
+        }
 
-		&__image {
-			float: left;
-			width: 46px;
-			height: 26px;
-			position: relative;
-			margin-right: 5px;
+        &__image {
+            float: left;
+            width: 46px;
+            height: 26px;
+            position: relative;
+            margin-right: 5px;
 
-			text-align: center;
-			background: @color-f;
+            text-align: center;
+            background: @color-f;
 
-			img {
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				right: 0;
-				left: 0;
-				width: auto;
-				height: auto;
-				max-width: 100%;
-				max-height: 100%;
-				margin: auto;
-			}
-		}
+            img {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+                margin: auto;
+            }
+        }
 
-		&__group-name {
-			line-height: 26px;
+        &__group-name {
+            line-height: 26px;
 
-			font-weight: bold;
-		}
+            font-weight: bold;
+        }
 
-		&__move {
-			float: left;
-			margin-right: 5px;
-			position: relative;
-			top: -1px;
-			margin-bottom: -1px;
-		}
+        &__move {
+            float: left;
+            margin-right: 5px;
+            position: relative;
+            top: -1px;
+            margin-bottom: -1px;
+        }
 
-		&__error {
-			top: 4px;
-			left: -28px;
-			position: absolute;
-		}
-	}
+        &__error {
+            top: 4px;
+            left: -28px;
+            position: absolute;
+        }
+    }
 
-	&__action {
-		text-decoration: none;
-		color: @color-action;
-		font-size: 22px;
-	}
+    &__action {
+        text-decoration: none;
+        color: @color-action;
+        font-size: 22px;
+    }
 }

@@ -1,61 +1,61 @@
 .in-paging {
-	.reset-ul();
+    .reset-ul();
 
-	text-align: center;
+    text-align: center;
 
-	&__item {
-		display: inline-block;
-		vertical-align: top;
-		margin: 0 1px;
+    &__item {
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 1px;
 
-		a, strong, span {
-			display: inline-block;
-			vertical-align: middle;
-			height: 30px;
-			line-height: 30px;
-			padding: 0 5px;
+        a, strong, span {
+            display: inline-block;
+            vertical-align: middle;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 5px;
 
-			text-align: center;
-			font-weight: bold;
-			text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
 
-			&:hover {
-				color: @color-base;
-				background: @color-f;
-			}
-		}
+            &:hover {
+                color: @color-base;
+                background: @color-f;
+            }
+        }
 
-		a, strong {
-			min-width: 30px;
+        a, strong {
+            min-width: 30px;
 
-			border: 1px solid @color-border-dark;
-		}
+            border: 1px solid @color-border-dark;
+        }
 
-		strong {
-			cursor: auto;
-			background: @color-f;
-		}
+        strong {
+            cursor: auto;
+            background: @color-f;
+        }
 
-		&--next {
-			font-size: 10px;
+        &--next {
+            font-size: 10px;
 
-			transform: rotate(-90deg);
+            transform: rotate(-90deg);
 
-			i {
-				position: relative;
-				top: -2px;
-			}
-		}
+            i {
+                position: relative;
+                top: -2px;
+            }
+        }
 
-		&--prev {
-			font-size: 10px;
+        &--prev {
+            font-size: 10px;
 
-			transform: rotate(90deg);
+            transform: rotate(90deg);
 
-			i {
-				position: relative;
-				top: -2px;
-			}
-		}
-	}
+            i {
+                position: relative;
+                top: -2px;
+            }
+        }
+    }
 }

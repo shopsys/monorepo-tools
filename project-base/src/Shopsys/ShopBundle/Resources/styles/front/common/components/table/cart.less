@@ -3,173 +3,173 @@
 @table-cart-image-gap: 10px;
 
 .table-cart {
-	margin-bottom: @margin-gap;
+    margin-bottom: @margin-gap;
 
-	&__cell {
-		&--action {
-			a {
-				display: inline-block;
-				padding: 5px;
+    &__cell {
+        &--action {
+            a {
+                display: inline-block;
+                padding: 5px;
 
-				text-decoration: none;
-				color: @color-inactive;
-				font-size: 10px;
+                text-decoration: none;
+                color: @color-inactive;
+                font-size: 10px;
 
-				&:hover {
-					color: @color-red;
-				}
-			}
-		}
+                &:hover {
+                    color: @color-red;
+                }
+            }
+        }
 
-		&__image {
-			display: inline-block;
-			position: relative;
-			height: @table-cart-image-height;
-			width: @table-cart-image-width;
+        &__image {
+            display: inline-block;
+            position: relative;
+            height: @table-cart-image-height;
+            width: @table-cart-image-width;
 
-			img {
-				.center-image();
-			}
-		}
-	}
+            img {
+                .center-image();
+            }
+        }
+    }
 }
 
 @media @query-tablet {
-	.table-cart {
-		width: 100%;
-		display: block;
+    .table-cart {
+        width: 100%;
+        display: block;
 
-		tbody, tfoot {
-			display: block;
-		}
+        tbody, tfoot {
+            display: block;
+        }
 
-		thead {
-			display: none;
-		}
+        thead {
+            display: none;
+        }
 
-		&__row {
-			display: block;
-			margin-bottom: 5px;
-			padding: 5px;
-			position: relative;
+        &__row {
+            display: block;
+            margin-bottom: 5px;
+            padding: 5px;
+            position: relative;
 
-			border: 1px solid @color-border;
+            border: 1px solid @color-border;
 
-			tfoot & {
-				border: 0;
-			}
-		}
+            tfoot & {
+                border: 0;
+            }
+        }
 
-		&__cell {
-			display: block;
+        &__cell {
+            display: block;
 
-			tfoot & {
-				display: none;
-			}
+            tfoot & {
+                display: none;
+            }
 
-			&--image {
-				float: left;
-				width: 40px;
-			}
+            &--image {
+                float: left;
+                width: 40px;
+            }
 
-			&--name {
-				padding-left: @table-cart-image-width + @table-cart-image-gap;
-				padding-right: 20px;
-			}
+            &--name {
+                padding-left: @table-cart-image-width + @table-cart-image-gap;
+                padding-right: 20px;
+            }
 
-			&--price {
-				display: none;
-			}
+            &--price {
+                display: none;
+            }
 
-			&--amount {
-				padding-left: @table-cart-image-width + @table-cart-image-gap;
-				padding-top: 10px;
-			}
+            &--amount {
+                padding-left: @table-cart-image-width + @table-cart-image-gap;
+                padding-top: 10px;
+            }
 
-			&--action {
-				position: absolute;
-				top: 0;
-				right: 0;
-			}
+            &--action {
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
 
-			&--total-price {
-				tfoot & {
-					display: block;
-					text-align: center;
+            &--total-price {
+                tfoot & {
+                    display: block;
+                    text-align: center;
 
-					font-weight: bold;
+                    font-weight: bold;
 
-					span {
-						font-size: 14px;
-						color: @color-price-main;
-					}
-				}
-			}
+                    span {
+                        font-size: 14px;
+                        color: @color-price-main;
+                    }
+                }
+            }
 
-			&__price-mobile {
-				margin-top: 5px;
+            &__price-mobile {
+                margin-top: 5px;
 
-				font-weight: bold;
-			}
-		}
-	}
+                font-weight: bold;
+            }
+        }
+    }
 }
 
 @media @query-lg {
-	.table-cart {
-		width: 100%;
+    .table-cart {
+        width: 100%;
 
-		&__cell {
-			padding: 5px;
-			text-align: left;
+        &__cell {
+            padding: 5px;
+            text-align: left;
 
-			font-size: 12px;
-			border-bottom: 1px solid @color-border;
+            font-size: 12px;
+            border-bottom: 1px solid @color-border;
 
-			thead & {
-				font-weight: bold;
-			}
+            thead & {
+                font-weight: bold;
+            }
 
-			tfoot & {
-				border-bottom: 0;
-			}
+            tfoot & {
+                border-bottom: 0;
+            }
 
-			&--image {
-				width: @table-cart-image-width + @table-cart-image-gap;
-			}
+            &--image {
+                width: @table-cart-image-width + @table-cart-image-gap;
+            }
 
-			&--amount {
-				width: 15%;
-				text-align: right;
-			}
+            &--amount {
+                width: 15%;
+                text-align: right;
+            }
 
-			&--price {
-				width: 14%;
-				text-align: right;
-			}
+            &--price {
+                width: 14%;
+                text-align: right;
+            }
 
-			&--action {
-				width: 20px;
-				text-align: right;
-			}
+            &--action {
+                width: 20px;
+                text-align: right;
+            }
 
-			&--total-price {
-				text-align: right;
+            &--total-price {
+                text-align: right;
 
-				font-weight: bold;
+                font-weight: bold;
 
-				span {
-					display: inline-block;
-					margin-left: 5px;
+                span {
+                    display: inline-block;
+                    margin-left: 5px;
 
-					color: @color-price-main;
-					font-size: 16px;
-				}
-			}
+                    color: @color-price-main;
+                    font-size: 16px;
+                }
+            }
 
-			&__price-mobile {
-				display: none;
-			}
-		}
-	}
+            &__price-mobile {
+                display: none;
+            }
+        }
+    }
 }

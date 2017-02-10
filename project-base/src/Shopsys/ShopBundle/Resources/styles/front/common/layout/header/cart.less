@@ -2,35 +2,35 @@
 @cart-icon-gap: 10px;
 
 .cart {
-	display: none;
+    display: none;
 
-	@media @query-lg {
-		display: inline-block;
-		position: relative;
-		.clearfix();
-		text-align: left;
+    @media @query-lg {
+        display: inline-block;
+        position: relative;
+        .clearfix();
+        text-align: left;
 
-		&__block {
-			display: block;
+        &__block {
+            display: block;
 
-			text-decoration: none;
+            text-decoration: none;
 
-			&:hover {
-				text-decoration: none;
-			}
-		}
+            &:hover {
+                text-decoration: none;
+            }
+        }
 
-		&__icon {
-			width: @cart-icon-width;
-			float: left;
-			text-align: center;
+        &__icon {
+            width: @cart-icon-width;
+            float: left;
+            text-align: center;
 
-			font-size: 20px;
-		}
+            font-size: 20px;
+        }
 
-		&__info {
-			margin-left: @cart-icon-width + @cart-icon-gap;
-			max-width: 90px;
-		}
-	}
+        &__info {
+            margin-left: @cart-icon-width + @cart-icon-gap;
+            max-width: 90px;
+        }
+    }
 }

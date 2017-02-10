@@ -1,87 +1,87 @@
 .in-tab {
-	&__head {
-		display: none;
+    &__head {
+        display: none;
 
-		@media @query-lg {
-			display: block;
-			margin-bottom: -1px;
-			position: relative;
-			z-index: 2;
-			.clearfix();
+        @media @query-lg {
+            display: block;
+            margin-bottom: -1px;
+            position: relative;
+            z-index: 2;
+            .clearfix();
 
-			&__item {
-				float: left;
-				padding: 8px 15px;
+            &__item {
+                float: left;
+                padding: 8px 15px;
 
-				border: 1px solid transparent;
-				border-bottom: 0;
+                border: 1px solid transparent;
+                border-bottom: 0;
 
-				@media @query-xl {
-					padding: 10px 20px;
-				}
+                @media @query-xl {
+                    padding: 10px 20px;
+                }
 
-				&.active {
-					background: @color-f;
-					border-color:  @color-border;
-					color: @color-base;
-					text-decoration: none;
-					font-weight: bold;
-				}
-			}
-		}
-	}
+                &.active {
+                    background: @color-f;
+                    border-color:  @color-border;
+                    color: @color-base;
+                    text-decoration: none;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
 
-	&__content {
-		&__title {
-			display: block;
-			padding: 10px 40px 10px 10px;
-			margin-bottom: 10px;
-			position: relative;
+    &__content {
+        &__title {
+            display: block;
+            padding: 10px 40px 10px 10px;
+            margin-bottom: 10px;
+            position: relative;
 
-			text-decoration: none;
-			border: 1px solid @color-border;
-			color: @color-base;
-			font-weight: bold;
+            text-decoration: none;
+            border: 1px solid @color-border;
+            color: @color-base;
+            font-weight: bold;
 
 
-			@media @query-lg {
-				display: none;
-			}
+            @media @query-lg {
+                display: none;
+            }
 
-			.svg {
-				position: absolute;
-				top: 13px;
-				right: 10px;
+            .svg {
+                position: absolute;
+                top: 13px;
+                right: 10px;
 
-				font-size: 10px;
-			}
+                font-size: 10px;
+            }
 
-			&.active {
-				color: @color-primary;
+            &.active {
+                color: @color-primary;
 
-				.svg {
-					transform: rotate(180deg);
-				}
-			}
-		}
+                .svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
 
-		&__item {
-			display: none;
+        &__item {
+            display: none;
 
-			@media @query-lg {
-				padding: 15px;
+            @media @query-lg {
+                padding: 15px;
 
-				border: 1px solid @color-border;
-			}
+                border: 1px solid @color-border;
+            }
 
-			@media @query-xl {
-				padding: 20px;
-			}
+            @media @query-xl {
+                padding: 20px;
+            }
 
-			&.active {
-				display: block;
-				margin-bottom: 10px;
-			}
-		}
-	}
+            &.active {
+                display: block;
+                margin-bottom: 10px;
+            }
+        }
+    }
 }

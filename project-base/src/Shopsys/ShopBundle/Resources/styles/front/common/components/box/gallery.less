@@ -3,80 +3,80 @@
 @box-gallery-arrow-size: 20px;
 
 .box-gallery {
-	height: @box-gallery-item-height;
-	position: relative;
-	margin-bottom: @margin-gap;
+    height: @box-gallery-item-height;
+    position: relative;
+    margin-bottom: @margin-gap;
 
-	.slick-list {
-		overflow: hidden;
-	}
+    .slick-list {
+        overflow: hidden;
+    }
 
-	&__item {
-		float: left;
-		width: 100%/2;
-		padding: 0 @box-gallery-item-gap/2;
-		box-sizing: content-box;
+    &__item {
+        float: left;
+        width: 100%/2;
+        padding: 0 @box-gallery-item-gap/2;
+        box-sizing: content-box;
 
-		@media @query-xs {
-			width: 100%/3;
-		}
+        @media @query-xs {
+            width: 100%/3;
+        }
 
-		@media @query-md {
-			width: 100%/4;
-		}
+        @media @query-md {
+            width: 100%/4;
+        }
 
-		@media @query-lg {
-			width: 100%/3;
-		}
+        @media @query-lg {
+            width: 100%/3;
+        }
 
-		@media @query-vl {
-			width: 100%/4;
-		}
+        @media @query-vl {
+            width: 100%/4;
+        }
 
-		&__link {
-			display: block;
-			width: 100%;
-			height: @box-gallery-item-height;
-			position: relative;
+        &__link {
+            display: block;
+            width: 100%;
+            height: @box-gallery-item-height;
+            position: relative;
 
-			border: 1px solid @color-border;
-		}
+            border: 1px solid @color-border;
+        }
 
-		img {
-			.center-image();
-		}
-	}
+        img {
+            .center-image();
+        }
+    }
 
-	&__arrow {
-		float: left;
-		line-height: @box-gallery-arrow-size;
-		width: @box-gallery-arrow-size;
-		height: @box-gallery-arrow-size;
-		margin-top: @box-gallery-item-height/2 - @box-gallery-arrow-size/2;
+    &__arrow {
+        float: left;
+        line-height: @box-gallery-arrow-size;
+        width: @box-gallery-arrow-size;
+        height: @box-gallery-arrow-size;
+        margin-top: @box-gallery-item-height/2 - @box-gallery-arrow-size/2;
 
-		cursor: pointer;
-		color: @color-border;
+        cursor: pointer;
+        color: @color-border;
 
-		&--prev {
-			position: relative;
-			top: 3px;
-			transform: rotate(90deg);
-		}
+        &--prev {
+            position: relative;
+            top: 3px;
+            transform: rotate(90deg);
+        }
 
-		&--next {
-			position: relative;
-			top: -3px;
-			transform: rotate(-90deg);
-		}
+        &--next {
+            position: relative;
+            top: -3px;
+            transform: rotate(-90deg);
+        }
 
-		&.slick-disabled {
-			color: lighten(@color-border, 10%);
-			cursor: default;
-		}
-	}
+        &.slick-disabled {
+            color: lighten(@color-border, 10%);
+            cursor: default;
+        }
+    }
 
-	&__in {
-		float: left;
-		width: calc(~"100% - @{box-gallery-arrow-size}*2");
-	}
+    &__in {
+        float: left;
+        width: calc(~"100% - @{box-gallery-arrow-size}*2");
+    }
 }

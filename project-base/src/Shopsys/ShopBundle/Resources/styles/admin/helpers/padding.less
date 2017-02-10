@@ -4,13 +4,13 @@
 @padding-unit: 'px';
 
 .padding {
-	.padding-generator(@padding-minimum, @padding-stepper, @padding-maximum);
+    .padding-generator(@padding-minimum, @padding-stepper, @padding-maximum);
 
-	@media @query-tablet {
-		.padding-generator(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 1));
-	}
+    @media @query-tablet {
+        .padding-generator(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 1));
+    }
 
-	@media @query-mobile {
-		.padding-generator(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 2));
-	}
+    @media @query-mobile {
+        .padding-generator(@padding-minimum, @padding-stepper, @padding-maximum, extract(@postfixes, 2));
+    }
 }

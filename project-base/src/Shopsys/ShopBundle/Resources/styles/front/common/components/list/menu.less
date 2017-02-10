@@ -3,170 +3,170 @@
 
 // global settings
 .list-menu {
-	&__item {
-		&__link {
-			position: relative;
-		}
+    &__item {
+        &__link {
+            position: relative;
+        }
 
-		&__control {
-			position: absolute;
-			top: 50%;
-			right: 0;
-			margin-top: -@list-menu-arrow-size/2;
-			height: @list-menu-arrow-size;
-			line-height: @list-menu-arrow-size;
-			width: @list-menu-arrow-size;
-			text-align: center;
+        &__control {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            margin-top: -@list-menu-arrow-size/2;
+            height: @list-menu-arrow-size;
+            line-height: @list-menu-arrow-size;
+            width: @list-menu-arrow-size;
+            text-align: center;
 
-			font-size: 11px;
+            font-size: 11px;
 
-			&:before {
-				will-change: transform;
-				display: block;
+            &:before {
+                will-change: transform;
+                display: block;
 
-				transition: @transition-type 200ms transform;
-			}
+                transition: @transition-type 200ms transform;
+            }
 
-			&.open:before {
-				transform: rotateX(180deg);
-			}
-		}
-	}
+            &.open:before {
+                transform: rotateX(180deg);
+            }
+        }
+    }
 }
 
 // mobile + tablet version
 @media @query-tablet {
-	@list-menu-mobile-bg: @color-primary;
-	@list-menu-mobile-border-color: lighten(@list-menu-mobile-bg, 5%);
+    @list-menu-mobile-bg: @color-primary;
+    @list-menu-mobile-border-color: lighten(@list-menu-mobile-bg, 5%);
 
-	.list-menu {
-		.reset-ul();
+    .list-menu {
+        .reset-ul();
 
-		background: @list-menu-mobile-bg;
+        background: @list-menu-mobile-bg;
 
-		&--root {
-			display: none;
-			position: absolute;
-			top: 95px;
-			left: 0;
-			right: 0;
-			z-index: 5000;
-		}
+        &--root {
+            display: none;
+            position: absolute;
+            top: 95px;
+            left: 0;
+            right: 0;
+            z-index: 5000;
+        }
 
-		&__item {
-			display: block;
+        &__item {
+            display: block;
 
-			border-top: 1px solid @list-menu-mobile-border-color;
+            border-top: 1px solid @list-menu-mobile-border-color;
 
-			&:first-child {
-				border-top: 0;
-			}
+            &:first-child {
+                border-top: 0;
+            }
 
-			&__link {
-				display: block;
-				padding: 10px @list-menu-padding-right 10px 20px;
+            &__link {
+                display: block;
+                padding: 10px @list-menu-padding-right 10px 20px;
 
-				color: @color-f;
-				text-decoration: none;
+                color: @color-f;
+                text-decoration: none;
 
-				&:hover {
-					background: @list-menu-mobile-border-color;
-					color: @color-f;
-				}
+                &:hover {
+                    background: @list-menu-mobile-border-color;
+                    color: @color-f;
+                }
 
-				font-size: 11px;
+                font-size: 11px;
 
-				&--level-1 {
-					font-size: 12px;
-				}
+                &--level-1 {
+                    font-size: 12px;
+                }
 
-				&--level-2 {
-					padding-left: 40px;
-				}
+                &--level-2 {
+                    padding-left: 40px;
+                }
 
-				&--level-3 {
-					padding-left: 50px;
-				}
+                &--level-3 {
+                    padding-left: 50px;
+                }
 
-				&--level-4 {
-					padding-left: 60px;
-				}
+                &--level-4 {
+                    padding-left: 60px;
+                }
 
-				&.current {
-					background: @list-menu-mobile-border-color;
-					font-weight: bold;
-				}
-			}
-		}
+                &.current {
+                    background: @list-menu-mobile-border-color;
+                    font-weight: bold;
+                }
+            }
+        }
 
-		& & {
-			margin-bottom: 0;
+        & & {
+            margin-bottom: 0;
 
-			border-top: 1px solid @list-menu-mobile-border-color;
-		}
-	}
+            border-top: 1px solid @list-menu-mobile-border-color;
+        }
+    }
 }
 
 // desktop version
 @media @query-lg {
-	.list-menu {
-		.reset-ul();
-		margin-bottom: @margin-gap;
+    .list-menu {
+        .reset-ul();
+        margin-bottom: @margin-gap;
 
-		&__item {
-			display: block;
+        &__item {
+            display: block;
 
-			border-top: 1px solid @color-border;
-			background: @color-light;
+            border-top: 1px solid @color-border;
+            background: @color-light;
 
-			&:first-child {
-				border-top: 0;
-			}
+            &:first-child {
+                border-top: 0;
+            }
 
-			&__link {
-				display: block;
-				padding: 8px @list-menu-padding-right 8px 50px;
+            &__link {
+                display: block;
+                padding: 8px @list-menu-padding-right 8px 50px;
 
-				text-decoration: none;
-				font-size: 11px;
+                text-decoration: none;
+                font-size: 11px;
 
-				&--level-1 {
-					padding-left: 10px;
+                &--level-1 {
+                    padding-left: 10px;
 
-					font-size: 12px;
-				}
+                    font-size: 12px;
+                }
 
-				&--level-2 {
-					padding-left: 20px;
-				}
+                &--level-2 {
+                    padding-left: 20px;
+                }
 
-				&--level-3 {
-					padding-left: 30px;
-				}
+                &--level-3 {
+                    padding-left: 30px;
+                }
 
-				&--level-4 {
-					padding-left: 40px;
-				}
+                &--level-4 {
+                    padding-left: 40px;
+                }
 
-				&.current {
-					color: @color-base;
-					font-weight: bold;
-				}
-			}
+                &.current {
+                    color: @color-base;
+                    font-weight: bold;
+                }
+            }
 
-			&__control {
-				color: @color-a;
+            &__control {
+                color: @color-a;
 
-				&:hover {
-					color: @color-link-hover;
-				}
-			}
-		}
+                &:hover {
+                    color: @color-link-hover;
+                }
+            }
+        }
 
-		& & {
-			margin-bottom: 0;
+        & & {
+            margin-bottom: 0;
 
-			border-top: 1px solid @color-border;
-		}
-	}
+            border-top: 1px solid @color-border;
+        }
+    }
 }

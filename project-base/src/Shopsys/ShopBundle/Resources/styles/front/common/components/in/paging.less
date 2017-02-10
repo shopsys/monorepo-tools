@@ -1,79 +1,79 @@
 @in-paging-size: 24px;
 
 .in-paging {
-	margin-bottom: @margin-gap;
+    margin-bottom: @margin-gap;
 
-	@media @query-md {
-		display: flex;
-		align-items: center;
-	}
+    @media @query-md {
+        display: flex;
+        align-items: center;
+    }
 
-	&__info {
-		display: none;
+    &__info {
+        display: none;
 
-		@media @query-md {
-			display: block;
-			flex: 1;
-		}
-	}
+        @media @query-md {
+            display: block;
+            flex: 1;
+        }
+    }
 
-	&__control {
-		flex: 3;
-		text-align: center;
+    &__control {
+        flex: 3;
+        text-align: center;
 
-		font-size: 0;
+        font-size: 0;
 
-		@media @query-md {
-			flex: 3;
-		}
+        @media @query-md {
+            flex: 3;
+        }
 
-		&__item {
-			display: inline-block;
-			vertical-align: middle;
-			min-width: @in-paging-size;
-			height: @in-paging-size;
-			line-height: @in-paging-size;
-			margin: 0 1px;
-			text-align: center;
+        &__item {
+            display: inline-block;
+            vertical-align: middle;
+            min-width: @in-paging-size;
+            height: @in-paging-size;
+            line-height: @in-paging-size;
+            margin: 0 1px;
+            text-align: center;
 
-			font-size: @font-size;
+            font-size: @font-size;
 
-			&--num {
-				text-decoration: none;
-				background: @color-light;
-				color: @color-base;
+            &--num {
+                text-decoration: none;
+                background: @color-light;
+                color: @color-base;
 
-				&:hover {
-					background: darken(@color-light, 5%);
-				}
+                &:hover {
+                    background: darken(@color-light, 5%);
+                }
 
-				&--active {
-					background: @color-primary;
-					color: @color-f;
+                &--active {
+                    background: @color-primary;
+                    color: @color-f;
 
-					&:hover {
-						background: @color-primary;
-					}
-				}
-			}
+                    &:hover {
+                        background: @color-primary;
+                    }
+                }
+            }
 
-			&--arrow {
-				text-decoration: none;
-				background: @color-light;
-				color: @color-base;
+            &--arrow {
+                text-decoration: none;
+                background: @color-light;
+                color: @color-base;
 
-				&:hover {
-					background: darken(@color-light, 5%);
-				}
+                &:hover {
+                    background: darken(@color-light, 5%);
+                }
 
-				&--inactive {
-					color: @color-a;
+                &--inactive {
+                    color: @color-a;
 
-					&:hover {
-						background: @color-light;
-					}
-				}
-			}
-		}
-	}
+                    &:hover {
+                        background: @color-light;
+                    }
+                }
+            }
+        }
+    }
 }
