@@ -27,7 +27,7 @@
                 placeholder: 'js-category-tree-placeholder form-tree__placeholder',
                 toleranceElement: '> .js-category-tree-item-line',
                 forcePlaceholderSize: true,
-                helper:	'clone',
+                helper: 'clone',
                 opacity: 0.6,
                 revert: 100,
                 change: self.onChange

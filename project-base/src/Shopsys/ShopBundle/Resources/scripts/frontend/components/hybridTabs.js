@@ -11,21 +11,21 @@
  *
  * == Examples ==
  * === HTML mark-up ===
- *	<div id="container">
- *		<a href="#" class="js-tab-button" data-tab-id="content-a"></a>
- *		<a href="#" class="js-tab-button" data-tab-id="content-b"></a>
+ * <div id="container">
+ *     <a href="#" class="js-tab-button" data-tab-id="content-a"></a>
+ *     <a href="#" class="js-tab-button" data-tab-id="content-b"></a>
  *
- *		<div class="js-tab-content" data-tab-id="content-a"></div>
- *		<div class="js-tab-content" data-tab-id="content-b"></div>
- *	</div>
+ *     <div class="js-tab-content" data-tab-id="content-a"></div>
+ *     <div class="js-tab-content" data-tab-id="content-b"></div>
+ * </div>
  *
  * === Single tab mode initialization ===
- *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
+ * var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ * hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
  *
  * === Multiple tabs mode initialization ===
- *	var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
- *	hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_MULTIPLE);
+ * var hybridTabs = new Shopsys.hybridTabs.HybridTabs($('#container'));
+ * hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_MULTIPLE);
  */
 
 (function ($) {

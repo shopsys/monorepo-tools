@@ -12,28 +12,28 @@
  *
  * == Example ==
  * === HTML mark-up ===
- *	<div class="js-responsive-tabs">
- *		<a href="#" class="js-tab-button desktop-button" data-tab-id="content-a"></a>
- *		<a href="#" class="js-tab-button desktop-button" data-tab-id="content-b"></a>
+ * <div class="js-responsive-tabs">
+ *     <a href="#" class="js-tab-button desktop-button" data-tab-id="content-a"></a>
+ *     <a href="#" class="js-tab-button desktop-button" data-tab-id="content-b"></a>
  *
- *		<a href="#" class="js-tab-button mobile-button" data-tab-id="content-a"></a>
- *		<div class="js-tab-content" data-tab-id="content-a"></div>
+ *     <a href="#" class="js-tab-button mobile-button" data-tab-id="content-a"></a>
+ *     <div class="js-tab-content" data-tab-id="content-a"></div>
  *
- *		<a href="#" class="js-tab-button mobile-button" data-tab-id="content-b"></a>
- *		<div class="js-tab-content" data-tab-id="content-b"></div>
- *	</div>
+ *     <a href="#" class="js-tab-button mobile-button" data-tab-id="content-b"></a>
+ *     <div class="js-tab-content" data-tab-id="content-b"></div>
+ * </div>
  *
  * === LESS ===
- *	@media @query-lg {
- *		.desktop-button {
- *			display: none;
- *		}
- *	}
- *	@media @query-xl {
- *		.mobile-button {
- *			display: none;
- *		}
- *	}
+ * @media @query-lg {
+ *     .desktop-button {
+ *         display: none;
+ *     }
+ * }
+ * @media @query-xl {
+ *     .mobile-button {
+ *         display: none;
+ *     }
+ * }
  *
  * === JavaScript ===
  * There is no need to initialize the component in JavaScript.
