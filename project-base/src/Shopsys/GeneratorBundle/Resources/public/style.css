@@ -1,127 +1,127 @@
 body {
-	line-height: 20px;
-	font-size: 14px;
-	font-family: 'Open Sans',Arial,Helvetica,sans-serif;
-	color: #333;
-	background: #eee;
-	margin: 30px;
+    line-height: 20px;
+    font-size: 14px;
+    font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+    color: #333;
+    background: #eee;
+    margin: 30px;
 }
 
 .form-line {
-	margin: 15px 0px;
+    margin: 15px 0px;
 }
 
 input:not([type=checkbox]) {
-	display: inline-block;
-	height: 25px;
-	padding: 6px 12px;
-	font-size: 16px;
-	line-height: 1.4;
-	color: #333;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+    display: inline-block;
+    height: 25px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 select {
-	display: inline-block;
-	height: 40px;
-	padding: 6px 12px;
-	font-size: 16px;
-	line-height: 1.4;
-	color: #333;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+    display: inline-block;
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 button {
-	display: inline-block;
-	padding: 0 15px;
-	height: 34px;
-	line-height: 34px;
-	color: #fff;
-	background: #138ee4;
-	border: 1px solid #138ee4;
-	cursor: pointer;
-	font-size: 14px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-	margin: 10px 0px;
+    display: inline-block;
+    padding: 0 15px;
+    height: 34px;
+    line-height: 34px;
+    color: #fff;
+    background: #138ee4;
+    border: 1px solid #138ee4;
+    cursor: pointer;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 10px 0px;
 }
 
 .generator-title .form-line {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .generator-title {
-	background: #138ee4;
-	color: #fff;
-	font-size: 20px;
-	padding: 7px;
-	margin: 10px 0px 0px 0px;
+    background: #138ee4;
+    color: #fff;
+    font-size: 20px;
+    padding: 7px;
+    margin: 10px 0px 0px 0px;
 }
 
 .generator-title label {
-	display: block;
-	cursor: pointer;
-	margin: -7px;
-	padding: 7px;
+    display: block;
+    cursor: pointer;
+    margin: -7px;
+    padding: 7px;
 }
 
 .generator-title input[type=checkbox] {
-	float: left;
-	margin-right: 10px;
-	position: relative;
-	top: 7px;
+    float: left;
+    margin-right: 10px;
+    position: relative;
+    top: 7px;
 }
 
 .generator-form {
-	border-right: 1px solid #138ee4;
-	border-bottom: 1px solid #138ee4;
-	border-left: 1px solid #138ee4;
-	padding: 8px;
-	margin: 0px;
+    border-right: 1px solid #138ee4;
+    border-bottom: 1px solid #138ee4;
+    border-left: 1px solid #138ee4;
+    padding: 8px;
+    margin: 0px;
 }
 
 .generator-form label {
-	display: inline-block;
-	min-width: 250px;
+    display: inline-block;
+    min-width: 250px;
 }
 
 .message-error {
-	border: 1px solid #e4b9b9;
-	background-color: #f2dede;
-	padding: 20px;
-	margin: 20px 0;
-	font-size: 14px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+    border: 1px solid #e4b9b9;
+    background-color: #f2dede;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .message-success {
-	border: 1px solid #c1e2b3;
-	background-color: #dff0d8;
-	padding: 20px;
-	margin: 20px 0;
-	font-size: 14px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+    border: 1px solid #c1e2b3;
+    background-color: #dff0d8;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 14px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .message-success ul {
-	margin: 0;
+    margin: 0;
 }
 
 .form-errors {
-	list-style-type: none;
-	display: inline-block;
+    list-style-type: none;
+    display: inline-block;
 }
 
 .form-errors li {
-	color: red;
+    color: red;
 }
