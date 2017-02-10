@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase {
+class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetRouterRouterNotResolvedException() {
         $localeRoutersConfiguration = [];

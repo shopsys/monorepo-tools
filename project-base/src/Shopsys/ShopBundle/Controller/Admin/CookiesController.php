@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\Cookies\CookiesSettingFormTypeFactory;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class CookiesController extends AdminBaseController {
+class CookiesController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain

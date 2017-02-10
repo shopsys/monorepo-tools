@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Twig_SimpleFunction;
 
-class ProductVisibilityExtension extends \Twig_Extension {
+class ProductVisibilityExtension extends \Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository

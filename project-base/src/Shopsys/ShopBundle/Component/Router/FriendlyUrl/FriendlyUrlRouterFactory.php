@@ -11,7 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCompiler;
 
-class FriendlyUrlRouterFactory {
+class FriendlyUrlRouterFactory
+{
 
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader

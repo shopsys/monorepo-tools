@@ -6,7 +6,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler;
 
-class FragmentHandler extends LazyLoadingFragmentHandler {
+class FragmentHandler extends LazyLoadingFragmentHandler
+{
 
     /**
      * Copy-pasted & edited from Symfony\Component\HttpKernel\Fragment\FragmentHandler::deliver().

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use SplFileObject;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class NewsletterController extends AdminBaseController {
+class NewsletterController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade

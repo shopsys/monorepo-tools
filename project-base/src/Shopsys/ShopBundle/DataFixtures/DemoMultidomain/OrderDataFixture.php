@@ -25,7 +25,8 @@ use Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewFactory;
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassLength)
  */
-class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class OrderDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

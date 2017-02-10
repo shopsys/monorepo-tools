@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
 
-class OrderStatusFacade {
+class OrderStatusFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Item;
 
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class QuantifiedProduct {
+class QuantifiedProduct
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

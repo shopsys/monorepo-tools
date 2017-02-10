@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Customer\CustomerData;
 use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 
-class UserDataFixtureLoader {
+class UserDataFixtureLoader
+{
 
     const COLUMN_FIRSTNAME = 0;
     const COLUMN_LASTNAME = 1;

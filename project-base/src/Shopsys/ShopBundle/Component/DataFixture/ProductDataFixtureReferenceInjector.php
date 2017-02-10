@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader;
 use Shopsys\ShopBundle\DataFixtures\Demo\UnitDataFixture as DemoUnitDataFixture;
 use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture as MultidomainPricingGroupDataFixture;
 
-class ProductDataFixtureReferenceInjector {
+class ProductDataFixtureReferenceInjector
+{
 
     /**
      * @param \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader $productDataFixtureLoader

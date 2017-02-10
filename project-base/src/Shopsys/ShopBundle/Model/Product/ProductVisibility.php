@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="product_visibilities")
  * @ORM\Entity
  */
-class ProductVisibility {
+class ProductVisibility
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

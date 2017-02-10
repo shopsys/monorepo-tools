@@ -8,7 +8,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Order\Order;
 
-class OrderListAdminRepository {
+class OrderListAdminRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

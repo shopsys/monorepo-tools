@@ -6,7 +6,8 @@ use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class ProductListComponent extends AbstractPage {
+class ProductListComponent extends AbstractPage
+{
 
     /**
      * @param string $productName

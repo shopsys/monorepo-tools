@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductListAdminRepository {
+class ProductListAdminRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

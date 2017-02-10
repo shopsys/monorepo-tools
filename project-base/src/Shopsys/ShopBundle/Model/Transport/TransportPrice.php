@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="transport_prices")
  * @ORM\Entity
  */
-class TransportPrice {
+class TransportPrice
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport

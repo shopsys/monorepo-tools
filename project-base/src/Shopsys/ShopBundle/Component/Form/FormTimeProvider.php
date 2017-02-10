@@ -6,7 +6,8 @@ use DateTime;
 use Shopsys\ShopBundle\Form\TimedFormTypeExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class FormTimeProvider {
+class FormTimeProvider
+{
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\Session

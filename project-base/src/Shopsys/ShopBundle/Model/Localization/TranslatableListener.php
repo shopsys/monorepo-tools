@@ -8,7 +8,8 @@ use Metadata\MetadataFactory;
 use Prezent\Doctrine\Translatable\EventListener\TranslatableListener as PrezentTranslatableListener;
 use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
 
-class TranslatableListener extends PrezentTranslatableListener {
+class TranslatableListener extends PrezentTranslatableListener
+{
 
     public function __construct(MetadataFactory $factory) {
         parent::__construct($factory);

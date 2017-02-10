@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListC
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class ProductListPage extends AbstractPage {
+class ProductListPage extends AbstractPage
+{
 
     /**
      * @var \Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListComponent

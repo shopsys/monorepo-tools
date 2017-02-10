@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 use DateTimeImmutable;
 
-class CronModuleExecutor {
+class CronModuleExecutor
+{
 
     const RUN_STATUS_OK = 'ok';
     const RUN_STATUS_TIMEOUT = 'timeout';

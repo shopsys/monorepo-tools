@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Country\CountryGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class CountryInlineEdit extends AbstractGridInlineEdit {
+class CountryInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Country\CountryFacade

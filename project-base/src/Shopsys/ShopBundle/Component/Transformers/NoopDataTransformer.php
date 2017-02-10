@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Transformers;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class NoopDataTransformer implements DataTransformerInterface {
+class NoopDataTransformer implements DataTransformerInterface
+{
 
     /**
      * {@inheritDoc}

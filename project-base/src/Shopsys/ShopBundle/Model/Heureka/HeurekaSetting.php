@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Heureka;
 
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class HeurekaSetting {
+class HeurekaSetting
+{
 
     const HEUREKA_API_KEY = 'heurekaApiKey';
     const HEUREKA_WIDGET_CODE = 'heurekaWidgetCode';

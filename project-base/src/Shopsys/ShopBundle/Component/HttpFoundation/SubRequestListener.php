@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class SubRequestListener {
+class SubRequestListener
+{
 
     /**
      * @var \Symfony\Component\HttpFoundation\RedirectResponse

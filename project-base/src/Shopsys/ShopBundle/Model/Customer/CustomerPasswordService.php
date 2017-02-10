@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\String\HashGenerator;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
-class CustomerPasswordService {
+class CustomerPasswordService
+{
 
     const RESET_PASSWORD_HASH_LENGTH = 50;
 

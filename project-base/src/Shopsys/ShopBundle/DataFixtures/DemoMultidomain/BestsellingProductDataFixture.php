@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture as DemoCategoryData
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture as DemoProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
 
-class BestsellingProductDataFixture extends AbstractReferenceFixture {
+class BestsellingProductDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

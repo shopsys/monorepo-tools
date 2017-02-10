@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
 use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
-class PaymentFormTypeFactory {
+class PaymentFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportRepository

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfigFactory;
 use Shopsys\ShopBundle\Model\Feed\FeedXmlWriter;
 use Symfony\Component\Filesystem\Filesystem;
 
-class FeedFacade {
+class FeedFacade
+{
 
     const TEMPORARY_FILENAME_SUFFIX = '.tmp';
     const BATCH_SIZE = 200;

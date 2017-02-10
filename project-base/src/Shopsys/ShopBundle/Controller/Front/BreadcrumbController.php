@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 
-class BreadcrumbController extends FrontBaseController {
+class BreadcrumbController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver

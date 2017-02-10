@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 
-class QueryBuilderService {
+class QueryBuilderService
+{
 
     const REQUIRED_ALIASES_COUNT = 1;
 

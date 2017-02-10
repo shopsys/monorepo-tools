@@ -20,7 +20,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class OrderPreviewCalculationTest extends FunctionalTestCase {
+class OrderPreviewCalculationTest extends FunctionalTestCase
+{
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

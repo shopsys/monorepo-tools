@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\ContactForm;
 
-class ContactFormData {
+class ContactFormData
+{
 
     /**
      * @var string

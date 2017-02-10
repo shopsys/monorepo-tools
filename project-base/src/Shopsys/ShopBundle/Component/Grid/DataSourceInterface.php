@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Grid;
 
-interface DataSourceInterface {
+interface DataSourceInterface
+{
 
     const ORDER_ASC = 'asc';
     const ORDER_DESC = 'desc';

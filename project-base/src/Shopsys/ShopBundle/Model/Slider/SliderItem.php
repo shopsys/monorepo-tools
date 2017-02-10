@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Slider\SliderItemData;
  * @ORM\Table(name="slider_items")
  * @ORM\Entity
  */
-class SliderItem implements OrderableEntityInterface {
+class SliderItem implements OrderableEntityInterface
+{
 
     /**
      * @var int

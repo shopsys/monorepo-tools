@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class CartService {
+class CartService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser

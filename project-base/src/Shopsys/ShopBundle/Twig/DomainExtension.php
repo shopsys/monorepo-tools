@@ -8,7 +8,8 @@ use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
-class DomainExtension extends \Twig_Extension {
+class DomainExtension extends \Twig_Extension
+{
 
     /**
      * @var string

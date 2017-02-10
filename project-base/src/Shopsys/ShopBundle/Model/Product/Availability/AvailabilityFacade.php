@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class AvailabilityFacade {
+class AvailabilityFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

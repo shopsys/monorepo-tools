@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchService;
 use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
-class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase {
+class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreateDefaultRuleFormData() {
         $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);

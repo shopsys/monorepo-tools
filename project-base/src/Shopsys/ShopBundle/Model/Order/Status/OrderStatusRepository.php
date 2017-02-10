@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
-class OrderStatusRepository {
+class OrderStatusRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

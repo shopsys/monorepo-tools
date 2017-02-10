@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
 use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
-class GridOrderingService {
+class GridOrderingService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface|null $entity

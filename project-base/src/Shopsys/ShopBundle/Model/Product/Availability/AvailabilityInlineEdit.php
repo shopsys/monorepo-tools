@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class AvailabilityInlineEdit extends AbstractGridInlineEdit {
+class AvailabilityInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade

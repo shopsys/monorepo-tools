@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Customer\UserData;
 use Shopsys\ShopBundle\Model\Order\Order;
 
-class CustomerService {
+class CustomerService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerPasswordService

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\ShopInfo;
 
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class ShopInfoSettingFacade {
+class ShopInfoSettingFacade
+{
 
     const SHOP_INFO_PHONE_NUMBER = 'shopInfoPhoneNumber';
     const SHOP_INFO_EMAIL = 'shopInfoEmail';

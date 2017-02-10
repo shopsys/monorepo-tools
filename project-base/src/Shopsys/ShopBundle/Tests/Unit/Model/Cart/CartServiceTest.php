@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class CartServiceTest extends FunctionalTestCase {
+class CartServiceTest extends FunctionalTestCase
+{
 
     public function testCannotAddProductFloatQuantityToCart() {
         $cartService = $this->getCartService();

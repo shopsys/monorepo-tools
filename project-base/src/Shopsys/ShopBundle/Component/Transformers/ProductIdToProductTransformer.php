@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class ProductIdToProductTransformer implements DataTransformerInterface {
+class ProductIdToProductTransformer implements DataTransformerInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

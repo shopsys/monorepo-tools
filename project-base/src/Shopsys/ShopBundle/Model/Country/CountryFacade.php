@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Country;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 
-class CountryFacade {
+class CountryFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

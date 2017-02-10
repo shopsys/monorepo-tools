@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\DataFixture;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\DataFixture\PersistentReference;
 
-class PersistentReferenceRepository {
+class PersistentReferenceRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

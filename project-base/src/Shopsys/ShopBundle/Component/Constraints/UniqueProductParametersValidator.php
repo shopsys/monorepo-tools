@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Constraints\UniqueProductParameters;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueProductParametersValidator extends ConstraintValidator {
+class UniqueProductParametersValidator extends ConstraintValidator
+{
 
     /**
      * @param array $values

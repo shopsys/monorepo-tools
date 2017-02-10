@@ -6,7 +6,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class MailerSettingExtension extends Twig_Extension {
+class MailerSettingExtension extends Twig_Extension
+{
 
     /**
      * @var ContainerInterface

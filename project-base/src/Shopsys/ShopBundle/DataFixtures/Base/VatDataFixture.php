@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
-class VatDataFixture extends AbstractReferenceFixture {
+class VatDataFixture extends AbstractReferenceFixture
+{
 
     const VAT_ZERO = 'vat_zero';
     const VAT_SECOND_LOW = 'vat_second_low';

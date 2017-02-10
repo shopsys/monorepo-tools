@@ -6,7 +6,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class RequestExtension extends Twig_Extension {
+class RequestExtension extends Twig_Extension
+{
 
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack

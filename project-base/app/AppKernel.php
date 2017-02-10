@@ -4,7 +4,8 @@ use Shopsys\AutoServicesBundle\Kernel;
 use Shopsys\Environment;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-class AppKernel extends Kernel {
+class AppKernel extends Kernel
+{
 
     public function registerBundles() {
         $bundles = array(

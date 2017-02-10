@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertRepository;
 
-class AdvertFacade {
+class AdvertFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

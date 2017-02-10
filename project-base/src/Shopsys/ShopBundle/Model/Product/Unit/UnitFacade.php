@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitData;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitRepository;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitService;
 
-class UnitFacade {
+class UnitFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

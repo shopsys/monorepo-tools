@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportData;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase {
+class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function calculateIndependentPriceProvider() {
         return [

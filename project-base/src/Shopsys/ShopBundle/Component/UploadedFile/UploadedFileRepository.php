@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\UploadedFile;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
-class UploadedFileRepository {
+class UploadedFileRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

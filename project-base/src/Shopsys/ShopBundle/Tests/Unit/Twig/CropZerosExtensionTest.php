@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Twig;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Twig\CropZerosExtension;
 
-class CropZerosExtensionTest extends PHPUnit_Framework_TestCase {
+class CropZerosExtensionTest extends PHPUnit_Framework_TestCase
+{
 
     public function returnValuesProvider() {
         return [

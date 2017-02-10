@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Symfony\Component\Routing\RouteCollection;
 
-class FriendlyUrlMatcher {
+class FriendlyUrlMatcher
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository

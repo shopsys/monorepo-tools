@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Localization;
 use Prezent\Doctrine\Translatable\Annotation as Prezent;
 use Prezent\Doctrine\Translatable\Entity\AbstractTranslatable;
 
-abstract class AbstractTranslatableEntity extends AbstractTranslatable {
+abstract class AbstractTranslatableEntity extends AbstractTranslatable
+{
 
     /**
      * @Prezent\CurrentLocale

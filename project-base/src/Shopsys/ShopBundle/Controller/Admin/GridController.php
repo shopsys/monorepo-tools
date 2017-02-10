@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class GridController extends AdminBaseController {
+class GridController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\InlineEdit\InlineEditService

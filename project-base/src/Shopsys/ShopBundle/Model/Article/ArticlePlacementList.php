@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Article;
 
 use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
-class ArticlePlacementList extends AbstractTranslatedConstantList {
+class ArticlePlacementList extends AbstractTranslatedConstantList
+{
 
     const PLACEMENT_TOP_MENU = 'topMenu';
     const PLACEMENT_FOOTER = 'footer';

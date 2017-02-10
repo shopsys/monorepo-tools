@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ShopInfoSettingFormType extends AbstractType {
+class ShopInfoSettingFormType extends AbstractType
+{
 
     /**
      * @return string

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterInlineEdit;
 
-class ParameterController extends AdminBaseController {
+class ParameterController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade

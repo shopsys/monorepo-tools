@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig;
 use Shopsys\ShopBundle\Component\Cron\CronModuleRepository;
 use Shopsys\ShopBundle\Component\Cron\CronService;
 
-class CronModuleFacade {
+class CronModuleFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

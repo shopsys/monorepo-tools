@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
-class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest {
+class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
+{
 
     /**
      * @inheritdoc

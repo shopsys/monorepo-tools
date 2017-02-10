@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
-class PriceCalculationTest extends PHPUnit_Framework_TestCase {
+class PriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function applyVatPercentProvider() {
         return [

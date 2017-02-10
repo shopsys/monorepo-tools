@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductAvailabilityRecalculatorTest extends DatabaseTestCase {
+class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
+{
 
     public function testRecalculateOnProductEditNotUsingStock() {
         $productFacade = $this->getContainer()->get(ProductFacade::class);

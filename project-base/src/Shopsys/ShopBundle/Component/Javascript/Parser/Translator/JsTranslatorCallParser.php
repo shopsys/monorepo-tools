@@ -9,7 +9,8 @@ use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
-class JsTranslatorCallParser {
+class JsTranslatorCallParser
+{
 
     const DEFAULT_MESSAGE_DOMAIN = 'messages';
 

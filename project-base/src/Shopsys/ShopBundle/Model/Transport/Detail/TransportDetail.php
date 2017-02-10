@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Transport\Detail;
 
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
-class TransportDetail {
+class TransportDetail
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport

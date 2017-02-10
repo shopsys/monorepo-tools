@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
 
-class OrderStatusServiceTest extends PHPUnit_Framework_TestCase {
+class OrderStatusServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function checkForDeleteProvider() {
         return [

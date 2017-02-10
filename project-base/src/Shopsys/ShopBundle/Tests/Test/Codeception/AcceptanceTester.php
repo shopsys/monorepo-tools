@@ -22,7 +22,8 @@ use Shopsys\ShopBundle\Tests\Test\Codeception\_generated\AcceptanceTesterActions
  *
  * @SuppressWarnings(PHPMD)
  */
-class AcceptanceTester extends Actor {
+class AcceptanceTester extends Actor
+{
 
     const DEFAULT_AJAX_TIMEOUT_SEC = 10;
     const WAIT_TIMEOUT_SEC = 10;

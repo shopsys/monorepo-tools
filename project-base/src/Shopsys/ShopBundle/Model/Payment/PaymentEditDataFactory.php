@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Payment\PaymentEditData;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 
-class PaymentEditDataFactory {
+class PaymentEditDataFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentFacade

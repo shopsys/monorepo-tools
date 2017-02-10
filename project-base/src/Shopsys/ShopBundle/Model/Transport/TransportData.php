@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Transport;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
-class TransportData {
+class TransportData
+{
 
     /**
      * @var string[]

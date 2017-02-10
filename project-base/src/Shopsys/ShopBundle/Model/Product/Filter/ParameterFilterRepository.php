@@ -7,7 +7,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 
-class ParameterFilterRepository {
+class ParameterFilterRepository
+{
 
     /**
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Seo;
 
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class SeoSettingFacade {
+class SeoSettingFacade
+{
 
     const SEO_TITLE_MAIN_PAGE = 'seoTitleMainPage';
     const SEO_TITLE_ADD_ON = 'seoTitleAddOn';

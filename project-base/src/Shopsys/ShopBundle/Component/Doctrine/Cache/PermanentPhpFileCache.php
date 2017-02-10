@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine\Cache;
 
 use Doctrine\Common\Cache\PhpFileCache;
 
-class PermanentPhpFileCache extends PhpFileCache {
+class PermanentPhpFileCache extends PhpFileCache
+{
 
     /**
      * {@inheritdoc}

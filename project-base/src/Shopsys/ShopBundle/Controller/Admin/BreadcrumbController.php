@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 
-class BreadcrumbController extends AdminBaseController {
+class BreadcrumbController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

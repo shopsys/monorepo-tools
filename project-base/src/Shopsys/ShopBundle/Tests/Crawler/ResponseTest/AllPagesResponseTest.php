@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class AllPagesResponseTest extends DatabaseTestCase {
+class AllPagesResponseTest extends DatabaseTestCase
+{
 
     public function adminTestableUrlsProvider() {
         $domain = $this->getContainer()->get(Domain::class);

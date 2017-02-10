@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ProductVisibilityFacade {
+class ProductVisibilityFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository

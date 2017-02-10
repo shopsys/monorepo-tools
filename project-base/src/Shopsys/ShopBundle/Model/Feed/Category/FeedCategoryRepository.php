@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Category;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategory;
 
-class FeedCategoryRepository {
+class FeedCategoryRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

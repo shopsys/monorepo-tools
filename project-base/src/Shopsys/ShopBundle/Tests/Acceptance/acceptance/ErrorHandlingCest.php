@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class ErrorHandlingCest {
+class ErrorHandlingCest
+{
 
     public function testDisplayNotice(AcceptanceTester $me) {
         $me->wantTo('display notice error page');

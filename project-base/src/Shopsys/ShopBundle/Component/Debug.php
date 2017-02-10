@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component;
 
 use Doctrine\Common\Util\Debug as DoctrineDebug;
 
-class Debug {
+class Debug
+{
 
     /**
      * @param mixed $var

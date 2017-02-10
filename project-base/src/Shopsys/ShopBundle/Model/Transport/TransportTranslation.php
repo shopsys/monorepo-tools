@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  * @ORM\Table(name="transport_translations")
  * @ORM\Entity
  */
-class TransportTranslation extends AbstractTranslation {
+class TransportTranslation extends AbstractTranslation
+{
 
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Transport\Transport")

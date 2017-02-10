@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  * @ORM\Table(name="order_status_translations")
  * @ORM\Entity
  */
-class OrderStatusTranslation extends AbstractTranslation {
+class OrderStatusTranslation extends AbstractTranslation
+{
 
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Order\Status\OrderStatus")

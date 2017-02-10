@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use Shopsys\ShopBundle\Component\Sitemap\SitemapFacade;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class SitemapListener implements SitemapListenerInterface {
+class SitemapListener implements SitemapListenerInterface
+{
 
     const PRIORITY_HOMEPAGE = 1;
     const PRIORITY_CATEGORIES = 0.8;

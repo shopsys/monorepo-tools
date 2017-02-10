@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdminNavigation\Exception;
 
 use Exception;
 
-class InvalidItemTypeException extends Exception implements MenuException {
+class InvalidItemTypeException extends Exception implements MenuException
+{
 
     /**
      * @param string $message

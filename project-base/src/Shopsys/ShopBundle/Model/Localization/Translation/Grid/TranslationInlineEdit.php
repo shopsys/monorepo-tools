@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationGridFactor
 use Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade;
 use Symfony\Component\Form\FormFactory;
 
-class TranslationInlineEdit extends AbstractGridInlineEdit {
+class TranslationInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Translation\TranslationEditFacade

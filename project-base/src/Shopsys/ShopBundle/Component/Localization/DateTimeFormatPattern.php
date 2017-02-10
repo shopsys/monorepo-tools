@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Localization;
 
-class DateTimeFormatPattern {
+class DateTimeFormatPattern
+{
 
     /**
      * @var string

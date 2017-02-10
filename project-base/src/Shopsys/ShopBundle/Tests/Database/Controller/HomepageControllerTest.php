@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Database\Controller;
 
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class HomepageControllerTest extends FunctionalTestCase {
+class HomepageControllerTest extends FunctionalTestCase
+{
 
     public function testHomepageHttpStatus200() {
         $client = $this->getClient();

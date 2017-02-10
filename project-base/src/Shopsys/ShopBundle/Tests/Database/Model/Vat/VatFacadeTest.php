@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class VatFacadeTest extends DatabaseTestCase {
+class VatFacadeTest extends DatabaseTestCase
+{
 
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();

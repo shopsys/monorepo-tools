@@ -6,7 +6,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 
-class ProductSearchRepository {
+class ProductSearchRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory

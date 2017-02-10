@@ -24,7 +24,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class User implements UserInterface, TimelimitLoginInterface, Serializable {
+class User implements UserInterface, TimelimitLoginInterface, Serializable
+{
 
     /**
      * @ORM\Column(type="integer")

@@ -6,7 +6,8 @@ use Doctrine\Common\Annotations\DocParser;
 use Shopsys\ShopBundle\Component\Translation\PhpFileExtractor;
 use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
-class PhpFileExtractorFactory {
+class PhpFileExtractorFactory
+{
 
     /**
      * @var \Doctrine\Common\Annotations\DocParser

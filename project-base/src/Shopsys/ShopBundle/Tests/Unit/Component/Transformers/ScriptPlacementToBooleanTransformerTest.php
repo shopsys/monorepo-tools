@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Transformers\ScriptPlacementToBooleanTransforme
 use Shopsys\ShopBundle\Model\Script\Script;
 use stdClass;
 
-class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase {
+class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testTransform() {
         $allPagesPlacement = Script::PLACEMENT_ALL_PAGES;

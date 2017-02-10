@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageDeleteDoctrineListener {
+class ImageDeleteDoctrineListener
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

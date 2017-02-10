@@ -13,7 +13,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AvailabilityController extends AdminBaseController {
+class AvailabilityController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory

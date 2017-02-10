@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItemFactory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface {
+class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

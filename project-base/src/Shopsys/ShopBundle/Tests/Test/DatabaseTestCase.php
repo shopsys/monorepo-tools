@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Test;
 use Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-abstract class DatabaseTestCase extends FunctionalTestCase {
+abstract class DatabaseTestCase extends FunctionalTestCase
+{
 
     /**
      * @return \Doctrine\ORM\EntityManager

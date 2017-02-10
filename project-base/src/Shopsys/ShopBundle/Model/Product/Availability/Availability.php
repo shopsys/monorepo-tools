@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation;
  * @ORM\Table(name="availabilities")
  * @ORM\Entity
  */
-class Availability extends AbstractTranslatableEntity {
+class Availability extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

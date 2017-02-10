@@ -9,7 +9,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer;
 use Shopsys\ShopBundle\Component\Translation\PoDumper;
 
-class PoDumperTest extends PHPUnit_Framework_TestCase {
+class PoDumperTest extends PHPUnit_Framework_TestCase
+{
 
     public function testDump() {
         $source = new FileSource('filepath', 10, 20);

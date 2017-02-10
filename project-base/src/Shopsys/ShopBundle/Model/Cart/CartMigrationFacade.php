@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Cart\CartFactory;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 
-class CartMigrationFacade {
+class CartMigrationFacade
+{
 
     const SESSION_PREVIOUS_CART_IDENTIFIER = 'previous_id';
 

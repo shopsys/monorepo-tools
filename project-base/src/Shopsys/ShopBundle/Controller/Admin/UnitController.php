@@ -13,7 +13,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class UnitController extends AdminBaseController {
+class UnitController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade

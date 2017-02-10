@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 use Shopsys\ShopBundle\Component\Cron\CronModuleExecutor;
 
-class CronModuleExecutorFactory {
+class CronModuleExecutorFactory
+{
 
     /**
      * @param int $secondsTimeout

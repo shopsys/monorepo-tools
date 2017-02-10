@@ -4,7 +4,8 @@ namespace Shopsys\AutoServicesBundle\Compiler;
 
 use Symfony\Component\Filesystem\Filesystem;
 
-class AutoServicesCollector {
+class AutoServicesCollector
+{
 
     const CONFIG_FILENAME = 'autoServices.json';
 

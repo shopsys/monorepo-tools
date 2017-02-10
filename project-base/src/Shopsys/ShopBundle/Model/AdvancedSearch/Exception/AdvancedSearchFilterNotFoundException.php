@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchException;
 
-class AdvancedSearchFilterNotFoundException extends Exception implements AdvancedSearchException {
+class AdvancedSearchFilterNotFoundException extends Exception implements AdvancedSearchException
+{
 
     /**
      * @param string $message

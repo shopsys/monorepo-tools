@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException;
 use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
-class FilepathComparatorTest extends PHPUnit_Framework_TestCase {
+class FilepathComparatorTest extends PHPUnit_Framework_TestCase
+{
 
     public function testIsPathWithinDirectoryThrowsExceptionWithNonExistentDirectoryPath() {
         $filepathComparator = new FilepathComparator();

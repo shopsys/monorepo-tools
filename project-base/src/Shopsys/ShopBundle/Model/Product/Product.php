@@ -24,7 +24,8 @@ use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
  * @ORM\Entity
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class Product extends AbstractTranslatableEntity {
+class Product extends AbstractTranslatableEntity
+{
 
     const PRICE_CALCULATION_TYPE_AUTO = 'auto';
     const PRICE_CALCULATION_TYPE_MANUAL = 'manual';

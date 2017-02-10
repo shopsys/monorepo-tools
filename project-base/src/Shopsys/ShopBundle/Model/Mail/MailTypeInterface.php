@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Mail;
 
-interface MailTypeInterface {
+interface MailTypeInterface
+{
 
     /**
      * @return string[]

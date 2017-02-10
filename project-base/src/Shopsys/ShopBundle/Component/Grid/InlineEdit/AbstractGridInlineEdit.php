@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class AbstractGridInlineEdit implements GridInlineEditInterface {
+abstract class AbstractGridInlineEdit implements GridInlineEditInterface
+{
 
     /**
      * @var \Symfony\Component\Form\FormFactory

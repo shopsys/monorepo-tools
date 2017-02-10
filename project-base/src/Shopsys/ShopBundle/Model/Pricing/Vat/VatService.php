@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
-class VatService {
+class VatService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData

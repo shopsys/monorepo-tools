@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class GridFactory {
+class GridFactory
+{
 
     /**
      * @var \Symfony\Component\HttpFoundation\RequestStack

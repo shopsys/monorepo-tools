@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Pricing;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class InputPriceRecalculationScheduler {
+class InputPriceRecalculationScheduler
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceRecalculator

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailInfo;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class FileThumbnailExtension extends Twig_Extension {
+class FileThumbnailExtension extends Twig_Extension
+{
 
     const DEFAULT_ICON_TYPE = 'all';
     const IMAGE_THUMBNAIL_QUALITY = 80;

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="products_top")
  * @ORM\Entity
  */
-class TopProduct {
+class TopProduct
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

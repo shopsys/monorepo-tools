@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class UniqueCollection extends Constraint {
+class UniqueCollection extends Constraint
+{
 
     public $message = 'Values are duplicate.';
     public $fields = null;

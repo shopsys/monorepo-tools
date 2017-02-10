@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product;
 use Shopsys\ShopBundle\Form\UrlListData;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class ProductEditData {
+class ProductEditData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductData

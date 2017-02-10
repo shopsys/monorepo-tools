@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * )
  * @ORM\Entity
  */
-class ManualBestsellingProduct {
+class ManualBestsellingProduct
+{
 
     /**
      * @var int

@@ -7,7 +7,8 @@ use Symfony\Component\Form\FormView;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class FormDetailExtension extends Twig_Extension {
+class FormDetailExtension extends Twig_Extension
+{
 
     /**
      * @var ContainerInterface

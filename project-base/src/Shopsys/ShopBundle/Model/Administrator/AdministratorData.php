@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Administrator;
 
-class AdministratorData {
+class AdministratorData
+{
 
     /**
      * @var bool

@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 
-class ProductInputPriceFacade {
+class ProductInputPriceFacade
+{
 
     const BATCH_SIZE = 50;
 

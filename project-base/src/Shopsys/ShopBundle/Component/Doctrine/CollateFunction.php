@@ -7,7 +7,8 @@ use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 
-class CollateFunction extends FunctionNode {
+class CollateFunction extends FunctionNode
+{
 
     /**
      * @var \Doctrine\ORM\Query\AST\Node

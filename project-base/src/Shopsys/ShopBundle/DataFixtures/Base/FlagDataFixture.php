@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 
-class FlagDataFixture extends AbstractReferenceFixture {
+class FlagDataFixture extends AbstractReferenceFixture
+{
 
     const NEW_PRODUCT = 'flag_new_product';
     const TOP_PRODUCT = 'flag_top_product';

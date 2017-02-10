@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 
-class UploadedFileConfigTest extends PHPUnit_Framework_TestCase {
+class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetEntityName() {
         $entity = new Dummy();

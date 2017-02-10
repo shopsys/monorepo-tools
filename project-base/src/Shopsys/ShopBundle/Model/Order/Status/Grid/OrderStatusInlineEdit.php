@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\Form\FormFactory;
 
-class OrderStatusInlineEdit extends AbstractGridInlineEdit {
+class OrderStatusInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade

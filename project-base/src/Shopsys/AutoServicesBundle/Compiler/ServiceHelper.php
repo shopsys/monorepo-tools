@@ -2,7 +2,8 @@
 
 namespace Shopsys\AutoServicesBundle\Compiler;
 
-class ServiceHelper {
+class ServiceHelper
+{
 
     /**
      * @param string $className

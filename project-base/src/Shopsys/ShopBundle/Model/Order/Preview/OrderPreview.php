@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
-class OrderPreview {
+class OrderPreview
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]

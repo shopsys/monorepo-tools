@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdminNavigation\Exception;
 
 use Exception;
 
-class MenuItemNotMatchingRouteException extends Exception implements MenuException {
+class MenuItemNotMatchingRouteException extends Exception implements MenuException
+{
 
     /**
      * @param string $route

@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class CurrencySettingsFormType extends AbstractType {
+class CurrencySettingsFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]

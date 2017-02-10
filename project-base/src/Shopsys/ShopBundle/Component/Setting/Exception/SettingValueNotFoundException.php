@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Setting\Exception;
 
 use Exception;
 
-class SettingValueNotFoundException extends Exception implements SettingException {
+class SettingValueNotFoundException extends Exception implements SettingException
+{
 
     /**
      * @param string $message

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Security\Exception;
 
 use Exception;
 
-class LoginFailedException extends Exception implements SecurityException {
+class LoginFailedException extends Exception implements SecurityException
+{
 
     /**
      * @param string $message

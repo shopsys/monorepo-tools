@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class SitemapDumperFactory {
+class SitemapDumperFactory
+{
 
     const MAX_ITEMS_IN_FILE = 50000;
 

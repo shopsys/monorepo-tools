@@ -7,7 +7,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade;
 use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
-class MultidomainEntityDataCreator {
+class MultidomainEntityDataCreator
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityClassFinderFacade

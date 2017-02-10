@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
-class OrderItemPriceCalculation {
+class OrderItemPriceCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation

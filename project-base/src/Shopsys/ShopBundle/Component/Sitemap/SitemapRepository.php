@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class SitemapRepository {
+class SitemapRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

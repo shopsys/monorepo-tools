@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct;
 
-class TopProductRepository {
+class TopProductRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

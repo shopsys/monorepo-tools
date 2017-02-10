@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageTypeNotFoundExcepti
 use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 
-class ImageEntityConfigTest extends PHPUnit_Framework_TestCase {
+class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetTypeSizes() {
         $types = [

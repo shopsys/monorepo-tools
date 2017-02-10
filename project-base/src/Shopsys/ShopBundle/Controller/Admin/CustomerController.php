@@ -30,7 +30,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class CustomerController extends AdminBaseController {
+class CustomerController extends AdminBaseController
+{
 
     const LOGIN_AS_TOKEN_ID_PREFIX = 'loginAs';
 

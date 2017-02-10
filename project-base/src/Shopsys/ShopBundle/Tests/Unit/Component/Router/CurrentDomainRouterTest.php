@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
-class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase {
+class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase
+{
 
     public function testDelegateRouter() {
         $domainConfigs = new DomainConfig(1, 'http://example.com:8080', 'example', 'en');

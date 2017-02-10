@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Performance\Feed;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 
-class PerformanceTestSample {
+class PerformanceTestSample
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedConfig

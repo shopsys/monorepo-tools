@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Payment\Detail;
 
 use Shopsys\ShopBundle\Model\Payment\Payment;
 
-class PaymentDetail {
+class PaymentDetail
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment

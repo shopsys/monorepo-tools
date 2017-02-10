@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ContactFormController extends FrontBaseController {
+class ContactFormController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\ContactForm\ContactFormFacade

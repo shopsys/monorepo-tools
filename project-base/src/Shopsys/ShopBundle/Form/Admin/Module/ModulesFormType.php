@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ModulesFormType extends AbstractType {
+class ModulesFormType extends AbstractType
+{
 
     const MODULES_SUBFORM_NAME = 'modules';
 

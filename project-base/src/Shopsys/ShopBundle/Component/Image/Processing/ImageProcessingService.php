@@ -8,7 +8,8 @@ use Intervention\Image\ImageManager;
 use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageProcessingService {
+class ImageProcessingService
+{
 
     const EXTENSION_JPEG = 'jpeg';
     const EXTENSION_JPG = 'jpg';

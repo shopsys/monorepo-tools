@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
-class ProductVariantServiceTest extends PHPUnit_Framework_TestCase {
+class ProductVariantServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCheckProductIsNotMainVariantException() {
         $productVariantService = new ProductVariantService();

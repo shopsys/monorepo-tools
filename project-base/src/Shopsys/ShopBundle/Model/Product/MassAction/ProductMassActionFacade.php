@@ -7,7 +7,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\Product\ProductHiddenRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
-class ProductMassActionFacade {
+class ProductMassActionFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

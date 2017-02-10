@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class NewPasswordFormType extends AbstractType {
+class NewPasswordFormType extends AbstractType
+{
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder

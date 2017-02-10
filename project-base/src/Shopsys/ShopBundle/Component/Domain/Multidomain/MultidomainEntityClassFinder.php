@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Domain\Multidomain;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 
-class MultidomainEntityClassFinder {
+class MultidomainEntityClassFinder
+{
 
     /**
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $allClassesMetadata

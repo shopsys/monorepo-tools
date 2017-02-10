@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Twig\Exception\TwigException;
 use Shopsys\ShopBundle\Twig\HoneyPotExtension;
 use Twig_Error;
 
-class HoneyPotRenderedBeforePasswordException extends Twig_Error implements TwigException {
+class HoneyPotRenderedBeforePasswordException extends Twig_Error implements TwigException
+{
 
     /**
      * @param \Exception|null $previous

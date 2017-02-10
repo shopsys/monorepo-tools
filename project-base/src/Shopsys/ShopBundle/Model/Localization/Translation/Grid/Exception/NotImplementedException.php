@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Localization\Grid\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\Localization\Translation\Grid\Exception\TranslationGridException;
 
-class NotImplementedException extends Exception implements TranslationGridException {
+class NotImplementedException extends Exception implements TranslationGridException
+{
 
     /**
      * @param string $message

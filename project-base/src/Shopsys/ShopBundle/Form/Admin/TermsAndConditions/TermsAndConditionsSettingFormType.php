@@ -8,7 +8,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TermsAndConditionsSettingFormType extends AbstractType {
+class TermsAndConditionsSettingFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Article\Article[]

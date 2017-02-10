@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Setting\Exception;
 
 use Exception;
 
-class InvalidArgumentException extends Exception implements SettingException {
+class InvalidArgumentException extends Exception implements SettingException
+{
 
     /**
      * @param string $message

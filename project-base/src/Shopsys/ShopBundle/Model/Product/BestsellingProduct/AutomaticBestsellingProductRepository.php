@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class AutomaticBestsellingProductRepository {
+class AutomaticBestsellingProductRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Twig;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class VarDumperExtension extends Twig_Extension{
+class VarDumperExtension extends Twig_Extension
+{
 
     /**
      * @return array

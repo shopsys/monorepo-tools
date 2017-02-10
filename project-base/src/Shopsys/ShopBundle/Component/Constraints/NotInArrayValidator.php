@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Traversable;
 
-class NotInArrayValidator extends ConstraintValidator {
+class NotInArrayValidator extends ConstraintValidator
+{
 
     /**
      * @param string $value

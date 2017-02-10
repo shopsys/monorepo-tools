@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
  * @ORM\Table(name="images", indexes={@ORM\Index(columns={"entity_name", "entity_id", "type"})})
  * @ORM\Entity
  */
-class Image implements EntityFileUploadInterface {
+class Image implements EntityFileUploadInterface
+{
 
     const UPLOAD_KEY = 'image';
 

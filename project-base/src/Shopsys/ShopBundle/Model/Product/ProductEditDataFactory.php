@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductInputPriceFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductDataFactory;
 
-class ProductEditDataFactory {
+class ProductEditDataFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

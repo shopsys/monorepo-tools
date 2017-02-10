@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Collection;
 
-class ProductCollectionService {
+class ProductCollectionService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $products

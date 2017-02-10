@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 use Shopsys\ShopBundle\Model\Customer\DeliveryAddressData;
 use Shopsys\ShopBundle\Model\Customer\UserDataFactory;
 
-class UserDataFixture {
+class UserDataFixture
+{
 
     const USERS_ON_EACH_DOMAIN = 100;
     const FIRST_PERFORMANCE_USER = 'first_performance_user';

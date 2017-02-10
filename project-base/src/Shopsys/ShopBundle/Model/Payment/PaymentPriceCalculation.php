@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
-class PaymentPriceCalculation {
+class PaymentPriceCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation

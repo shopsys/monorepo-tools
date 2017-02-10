@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Image\Config\Exception;
 
 use Exception;
 
-class EntityParseException extends Exception implements ImageConfigException {
+class EntityParseException extends Exception implements ImageConfigException
+{
 
     /**
      * @var string

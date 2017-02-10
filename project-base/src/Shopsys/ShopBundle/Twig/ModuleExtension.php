@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Module\ModuleFacade;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class ModuleExtension extends Twig_Extension {
+class ModuleExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Module\ModuleFacade

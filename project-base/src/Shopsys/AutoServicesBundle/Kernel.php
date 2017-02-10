@@ -4,7 +4,8 @@ namespace Shopsys\AutoServicesBundle;
 
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 
-abstract class Kernel extends BaseKernel {
+abstract class Kernel extends BaseKernel
+{
 
     /**
      * {@inheritdoc}

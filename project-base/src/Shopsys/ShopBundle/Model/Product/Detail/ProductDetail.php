@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductDetail {
+class ProductDetail
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-class NotIdenticalToEmailLocalPart extends Constraint {
+class NotIdenticalToEmailLocalPart extends Constraint
+{
 
     public $password;
 

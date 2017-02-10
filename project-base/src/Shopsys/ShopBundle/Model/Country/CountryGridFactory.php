@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Grid\GridFactory;
 use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 
-class CountryGridFactory implements GridFactoryInterface {
+class CountryGridFactory implements GridFactoryInterface
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

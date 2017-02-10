@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductCalculatedPriceRepository {
+class ProductCalculatedPriceRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

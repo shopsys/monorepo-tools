@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Routing\RouterInterface;
 
-class LocalizationListenerTest extends DatabaseTestCase {
+class LocalizationListenerTest extends DatabaseTestCase
+{
 
     public function testProductDetailLocaleCs() {
         $router = $this->getContainer()->get(CurrentDomainRouter::class);

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class OrderProductTest extends PHPUnit_Framework_TestCase {
+class OrderProductTest extends PHPUnit_Framework_TestCase
+{
 
     public function testEditWithProduct() {
         $orderMock = $this->getMock(Order::class, [], [], '', false);

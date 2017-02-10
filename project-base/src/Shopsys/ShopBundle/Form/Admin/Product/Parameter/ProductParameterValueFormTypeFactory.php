@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Product\Parameter;
 
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 
-class ProductParameterValueFormTypeFactory {
+class ProductParameterValueFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository

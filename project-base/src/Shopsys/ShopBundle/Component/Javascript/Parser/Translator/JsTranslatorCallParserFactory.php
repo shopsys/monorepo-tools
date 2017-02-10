@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser;
 use Shopsys\ShopBundle\Component\Translation\TransMethodSpecification;
 
-class JsTranslatorCallParserFactory {
+class JsTranslatorCallParserFactory
+{
 
     const METHOD_NAME_TRANS = 'Shopsys.translator.trans';
     const METHOD_NAME_TRANS_CHOICE = 'Shopsys.translator.transChoice';

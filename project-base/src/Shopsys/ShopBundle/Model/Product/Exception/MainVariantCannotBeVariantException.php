@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\Product\Exception\VariantException;
 
-class MainVariantCannotBeVariantException extends Exception implements VariantException {
+class MainVariantCannotBeVariantException extends Exception implements VariantException
+{
 
     /**
      * @param int $productId

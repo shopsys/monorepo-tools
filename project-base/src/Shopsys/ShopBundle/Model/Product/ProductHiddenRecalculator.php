@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
-class ProductHiddenRecalculator {
+class ProductHiddenRecalculator
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

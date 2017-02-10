@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Customer\Exception;
 
-interface CustomerException {
+interface CustomerException
+{
 
 }

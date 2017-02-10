@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class OrderStatusFormType extends AbstractType {
+class OrderStatusFormType extends AbstractType
+{
 
     /**
      * @return string

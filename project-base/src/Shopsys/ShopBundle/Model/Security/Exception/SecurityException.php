@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Security\Exception;
 
-interface SecurityException {
+interface SecurityException
+{
 
 }

@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 /**
  * @ORM\Entity
  */
-class OrderPayment extends OrderItem {
+class OrderPayment extends OrderItem
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment

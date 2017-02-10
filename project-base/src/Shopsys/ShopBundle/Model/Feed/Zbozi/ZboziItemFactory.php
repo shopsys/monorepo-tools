@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ZboziItemFactory implements FeedItemFactoryInterface {
+class ZboziItemFactory implements FeedItemFactoryInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser

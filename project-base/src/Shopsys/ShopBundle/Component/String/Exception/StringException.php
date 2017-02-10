@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\String\Exception;
 
-interface StringException {
+interface StringException
+{
 
 }

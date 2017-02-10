@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Pricing;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductManualInputPriceService {
+class ProductManualInputPriceService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product

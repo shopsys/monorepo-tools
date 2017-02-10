@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductFacadeTest extends DatabaseTestCase {
+class ProductFacadeTest extends DatabaseTestCase
+{
 
     /**
      * @dataProvider getTestHandleOutOfStockStateDataProvider

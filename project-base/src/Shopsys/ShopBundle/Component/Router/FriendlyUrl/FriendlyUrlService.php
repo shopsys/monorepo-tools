@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\ShopBundle\Component\String\TransformString;
 
-class FriendlyUrlService {
+class FriendlyUrlService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

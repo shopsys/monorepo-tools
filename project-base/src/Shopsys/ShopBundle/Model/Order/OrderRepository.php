@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
-class OrderRepository {
+class OrderRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -11,7 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class ImageExtension extends Twig_Extension {
+class ImageExtension extends Twig_Extension
+{
 
     const NOIMAGE_FILENAME = 'noimage.jpg';
 

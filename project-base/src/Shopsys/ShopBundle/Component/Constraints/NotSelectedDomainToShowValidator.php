@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class NotSelectedDomainToShowValidator extends ConstraintValidator {
+class NotSelectedDomainToShowValidator extends ConstraintValidator
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

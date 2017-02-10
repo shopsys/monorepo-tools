@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Feed\Category;
 
-class FeedCategoryData {
+class FeedCategoryData
+{
 
     /**
      * @var int

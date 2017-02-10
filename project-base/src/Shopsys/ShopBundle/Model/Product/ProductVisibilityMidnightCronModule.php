@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductVisibilityMidnightCronModule implements CronModuleInterface {
+class ProductVisibilityMidnightCronModule implements CronModuleInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade

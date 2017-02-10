@@ -8,7 +8,8 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
 
-class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase {
+class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
+{
 
     public function testExtractController() {
         $fileName = 'Controller.php';

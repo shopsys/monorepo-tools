@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 
-class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase {
+class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetAllNotNullableColumnNamesIndexedByTableName() {
         $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);

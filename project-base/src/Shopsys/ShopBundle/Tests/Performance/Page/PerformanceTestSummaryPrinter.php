@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Performance\Page;
 use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class PerformanceTestSummaryPrinter {
+class PerformanceTestSummaryPrinter
+{
 
     /**
      * @var \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSampleQualifier

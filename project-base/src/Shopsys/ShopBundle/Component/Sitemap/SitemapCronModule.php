@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Sitemap\SitemapFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class SitemapCronModule implements CronModuleInterface {
+class SitemapCronModule implements CronModuleInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade

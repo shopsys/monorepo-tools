@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Item;
 
-class OrderItemData {
+class OrderItemData
+{
 
     /**
      * @var string

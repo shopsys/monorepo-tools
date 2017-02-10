@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
-class CustomerMailFacade {
+class CustomerMailFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService

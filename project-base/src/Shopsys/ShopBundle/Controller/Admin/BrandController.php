@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandDataFactory;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class BrandController extends AdminBaseController {
+class BrandController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

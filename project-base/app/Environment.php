@@ -5,7 +5,8 @@ namespace Shopsys;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 
-class Environment {
+class Environment
+{
     const ENVIRONMENT_PRODUCTION = 'prod';
     const ENVIRONMENT_DEVELOPMENT = 'dev';
     const ENVIRONMENT_TEST = 'test';

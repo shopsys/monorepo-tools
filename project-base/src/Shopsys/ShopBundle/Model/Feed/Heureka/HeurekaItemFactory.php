@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionFacade;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class HeurekaItemFactory implements FeedItemFactoryInterface {
+class HeurekaItemFactory implements FeedItemFactoryInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser

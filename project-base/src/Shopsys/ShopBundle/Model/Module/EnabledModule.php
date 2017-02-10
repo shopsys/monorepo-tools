@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="enabled_modules")
  * @ORM\Entity
  */
-class EnabledModule {
+class EnabledModule
+{
 
     /**
      * @var string

@@ -12,7 +12,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class TranslationReplaceSourceCommand extends ContainerAwareCommand {
+class TranslationReplaceSourceCommand extends ContainerAwareCommand
+{
 
     const ARG_TRANSLATIONS_DIR = 'translationsDir';
     const ARG_SOURCE_CODE_DIR = 'sourceCodeDir';

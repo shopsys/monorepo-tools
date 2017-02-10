@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-abstract class FunctionalTestCase extends WebTestCase {
+abstract class FunctionalTestCase extends WebTestCase
+{
 
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Client

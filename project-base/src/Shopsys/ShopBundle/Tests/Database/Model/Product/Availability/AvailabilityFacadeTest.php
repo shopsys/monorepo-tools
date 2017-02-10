@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class AvailabilityFacadeTest extends DatabaseTestCase {
+class AvailabilityFacadeTest extends DatabaseTestCase
+{
 
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();

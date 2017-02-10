@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="product_calculated_prices")
  * @ORM\Entity
  */
-class ProductCalculatedPrice {
+class ProductCalculatedPrice
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

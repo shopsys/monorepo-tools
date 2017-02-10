@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagInlineEdit;
 
-class FlagController extends AdminBaseController {
+class FlagController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade

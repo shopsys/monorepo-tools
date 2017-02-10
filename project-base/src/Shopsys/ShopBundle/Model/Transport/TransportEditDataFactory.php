@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
-class TransportEditDataFactory {
+class TransportEditDataFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade

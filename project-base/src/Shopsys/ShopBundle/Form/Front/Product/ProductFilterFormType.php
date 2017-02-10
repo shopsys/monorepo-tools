@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class ProductFilterFormType extends AbstractType {
+class ProductFilterFormType extends AbstractType
+{
 
     const NAME = 'product_filter_form';
 

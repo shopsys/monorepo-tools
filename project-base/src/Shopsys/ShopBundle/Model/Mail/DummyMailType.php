@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Mail;
 
 use Shopsys\ShopBundle\Model\Mail\MailTypeInterface;
 
-class DummyMailType implements MailTypeInterface {
+class DummyMailType implements MailTypeInterface
+{
 
     /**
      * @return string[]

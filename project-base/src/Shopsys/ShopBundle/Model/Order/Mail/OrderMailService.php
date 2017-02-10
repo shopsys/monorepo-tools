@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 use Shopsys\ShopBundle\Twig\PriceExtension;
 use Twig_Environment;
 
-class OrderMailService {
+class OrderMailService
+{
 
     const MAIL_TEMPLATE_NAME_PREFIX = 'order_status_';
     const VARIABLE_NUMBER = '{number}';

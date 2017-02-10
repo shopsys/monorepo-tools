@@ -8,7 +8,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 
-class QueryPaginator implements PaginatorInterface {
+class QueryPaginator implements PaginatorInterface
+{
 
     /**
      * @var \Doctrine\ORM\QueryBuilder

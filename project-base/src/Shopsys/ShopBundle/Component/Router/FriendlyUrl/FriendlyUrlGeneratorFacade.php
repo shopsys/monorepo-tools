@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Routing\Route;
 
-class FriendlyUrlGeneratorFacade {
+class FriendlyUrlGeneratorFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

@@ -24,7 +24,8 @@ use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class OrderController extends AdminBaseController {
+class OrderController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

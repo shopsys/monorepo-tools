@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\FileUpload\Exception;
 
 use Exception;
 
-class UnresolvedNamingConventionException extends Exception implements FileUploadException {
+class UnresolvedNamingConventionException extends Exception implements FileUploadException
+{
 
     /**
      * @param string $message

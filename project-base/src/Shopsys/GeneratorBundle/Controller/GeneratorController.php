@@ -7,7 +7,8 @@ use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class GeneratorController extends Controller {
+class GeneratorController extends Controller
+{
 
     public function indexAction(Request $request) {
         $generatorsFormFactory = $this->get(GeneratorsFormFactory::class);

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\TermsAndConditions;
 
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
-class TermsAndConditionsSettingFormTypeFactory {
+class TermsAndConditionsSettingFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade

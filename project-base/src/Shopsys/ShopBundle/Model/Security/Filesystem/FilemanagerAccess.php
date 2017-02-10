@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Security\Filesystem;
 use FM\ElfinderBundle\Configuration\ElFinderConfigurationReader;
 use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
-class FilemanagerAccess {
+class FilemanagerAccess
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess|null

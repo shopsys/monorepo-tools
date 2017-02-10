@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class FileExtensionMaxLength extends Constraint {
+class FileExtensionMaxLength extends Constraint
+{
 
     /**
      * @var string

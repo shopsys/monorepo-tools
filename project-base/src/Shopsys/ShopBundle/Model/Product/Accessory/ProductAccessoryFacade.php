@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Accessory;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductAccessoryFacade {
+class ProductAccessoryFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessoryRepository

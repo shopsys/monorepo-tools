@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
  * @ORM\Entity
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class Order {
+class Order
+{
 
     /**
      * @var int

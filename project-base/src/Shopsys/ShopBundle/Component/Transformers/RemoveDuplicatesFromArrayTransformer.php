@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Transformers;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class RemoveDuplicatesFromArrayTransformer implements DataTransformerInterface {
+class RemoveDuplicatesFromArrayTransformer implements DataTransformerInterface
+{
 
     /**
      * @param mixed $values

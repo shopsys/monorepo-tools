@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusData;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class OrderStatusFacadeTest extends DatabaseTestCase {
+class OrderStatusFacadeTest extends DatabaseTestCase
+{
 
     public function testDeleteByIdAndReplace() {
         $em = $this->getEntityManager();

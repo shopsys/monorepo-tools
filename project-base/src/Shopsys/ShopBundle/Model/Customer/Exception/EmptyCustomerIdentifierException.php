@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Customer\Exception;
 
 use Exception;
 
-class EmptyCustomerIdentifierException extends Exception implements CustomerException {
+class EmptyCustomerIdentifierException extends Exception implements CustomerException
+{
 
     /**
      * @param string $message

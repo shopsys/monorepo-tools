@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class UrlsProviderTest extends PHPUnit_Framework_TestCase {
+class UrlsProviderTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetFrontTestableUrlsProviderData() {
         $routeCollection = [

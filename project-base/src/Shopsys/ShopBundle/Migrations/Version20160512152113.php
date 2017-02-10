@@ -6,7 +6,8 @@ use Doctrine\DBAL\Schema\Schema;
 use ShopSys\MigrationBundle\Component\Doctrine\Migrations\AbstractMigration;
 use Shopsys\ShopBundle\Component\Migration\MultidomainMigrationTrait;
 
-class Version20160512152113 extends AbstractMigration {
+class Version20160512152113 extends AbstractMigration
+{
 
     use MultidomainMigrationTrait;
 

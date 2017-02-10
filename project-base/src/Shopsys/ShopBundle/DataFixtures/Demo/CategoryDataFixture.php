@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\DataFixtures\Base\CategoryRootDataFixture;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class CategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     const PREFIX = 'category_';
 

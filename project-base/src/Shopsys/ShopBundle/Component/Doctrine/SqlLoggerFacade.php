@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 
-class SqlLoggerFacade {
+class SqlLoggerFacade
+{
 
     /**
      * @var \Doctrine\DBAL\Logging\SQLLogger|null

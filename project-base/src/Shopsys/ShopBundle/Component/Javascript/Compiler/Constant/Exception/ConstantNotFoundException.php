@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\JsConstantCompilerException;
 
-class ConstantNotFoundException extends Exception implements JsConstantCompilerException {
+class ConstantNotFoundException extends Exception implements JsConstantCompilerException
+{
 
     /**
      * @param string $message

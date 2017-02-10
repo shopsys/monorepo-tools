@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-class OrderPreviewCalculation {
+class OrderPreviewCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\QuantifiedProductPriceCalculation

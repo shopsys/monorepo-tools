@@ -4,7 +4,8 @@ namespace Shopsys\AutoServicesBundle\Compiler;
 
 use ReflectionClass;
 
-class ContainerClassList {
+class ContainerClassList
+{
 
     /**
      * @var string

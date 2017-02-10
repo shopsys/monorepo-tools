@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterRepository;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
-class NewsletterFacade {
+class NewsletterFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

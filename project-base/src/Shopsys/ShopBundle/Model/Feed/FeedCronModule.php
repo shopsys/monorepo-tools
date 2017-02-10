@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class FeedCronModule implements IteratedCronModuleInterface {
+class FeedCronModule implements IteratedCronModuleInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Feed\FeedFacade

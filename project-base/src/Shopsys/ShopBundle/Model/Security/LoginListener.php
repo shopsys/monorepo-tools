@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Security\TimelimitLoginInterface;
 use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class LoginListener {
+class LoginListener
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

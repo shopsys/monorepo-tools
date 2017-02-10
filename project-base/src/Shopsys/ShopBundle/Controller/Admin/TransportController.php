@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TransportController extends AdminBaseController {
+class TransportController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportEditFormTypeFactory

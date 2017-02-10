@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Exception;
 
 use Exception;
 
-class OrderHashGenerateException extends Exception implements OrderException {
+class OrderHashGenerateException extends Exception implements OrderException
+{
 
     /**
      * @param string $message

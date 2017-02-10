@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Javascript\Parser\Exception\JsParserException;
 
-class JsTranslatorCallParserException extends Exception implements JsParserException {
+class JsTranslatorCallParserException extends Exception implements JsParserException
+{
 
     /**
      * @param string $message

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch\Filter;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class ProductCalculatedSellingDeniedFilter implements AdvancedSearchFilterInterface {
+class ProductCalculatedSellingDeniedFilter implements AdvancedSearchFilterInterface
+{
 
     /**
      * {@inheritdoc}

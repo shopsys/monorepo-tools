@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Grid\CurrencyInlineEdit;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CurrencyController extends AdminBaseController {
+class CurrencyController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\ConfirmDelete\ConfirmDeleteResponseFactory

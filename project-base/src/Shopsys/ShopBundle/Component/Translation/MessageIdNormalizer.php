@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Translation;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 
-class MessageIdNormalizer {
+class MessageIdNormalizer
+{
 
     /**
      * @param string $messageId

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Listing;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductListOrderingModeService {
+class ProductListOrderingModeService
+{
 
     const ORDER_BY_RELEVANCE = 'relevance';
     const ORDER_BY_NAME_ASC = 'name_asc';

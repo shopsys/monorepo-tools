@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="promo_codes")
  * @ORM\Entity
  */
-class PromoCode {
+class PromoCode
+{
 
     /**
      * @var int

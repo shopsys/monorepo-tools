@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
-class Domain {
+class Domain
+{
 
     const FIRST_DOMAIN_ID = 1;
     const MAIN_ADMIN_DOMAIN_ID = 1;

@@ -13,7 +13,8 @@ use Twig_Extension;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
-class PriceExtension extends Twig_Extension {
+class PriceExtension extends Twig_Extension
+{
 
     const MINIMUM_FRACTION_DIGITS = 2;
     const MAXIMUM_FRACTION_DIGITS = 10;

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\String;
 
-class TransformString {
+class TransformString
+{
 
     /**
      * @param string $string

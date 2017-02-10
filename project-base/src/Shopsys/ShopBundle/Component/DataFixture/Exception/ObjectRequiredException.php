@@ -7,7 +7,8 @@ use InvalidArgumentException;
 use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 use Shopsys\ShopBundle\Component\Debug;
 
-class ObjectRequiredException extends InvalidArgumentException implements DataFixtureException {
+class ObjectRequiredException extends InvalidArgumentException implements DataFixtureException
+{
 
     /**
      * @param mixed $given

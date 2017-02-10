@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\Form\FormFactory;
 
-class PromoCodeInlineEdit extends AbstractGridInlineEdit {
+class PromoCodeInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade

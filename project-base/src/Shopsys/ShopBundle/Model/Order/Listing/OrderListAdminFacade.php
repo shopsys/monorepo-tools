@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Listing;
 
-class OrderListAdminFacade {
+class OrderListAdminFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminRepository

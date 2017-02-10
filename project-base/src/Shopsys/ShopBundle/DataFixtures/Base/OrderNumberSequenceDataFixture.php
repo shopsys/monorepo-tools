@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Order\OrderNumberSequence;
 use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
-class OrderNumberSequenceDataFixture extends AbstractReferenceFixture {
+class OrderNumberSequenceDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

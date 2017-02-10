@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdministratorController extends AdminBaseController {
+class AdministratorController extends AdminBaseController
+{
 
     const MAX_ADMINISTRATOR_ACTIVITIES_COUNT = 10;
 

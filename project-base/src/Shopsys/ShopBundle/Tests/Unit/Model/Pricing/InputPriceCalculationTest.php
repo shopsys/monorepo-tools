@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
-class InputPriceCalculationTest extends PHPUnit_Framework_TestCase {
+class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @dataProvider getInputPriceDataProvider

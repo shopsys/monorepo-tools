@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
-class ProductAvailabilityCalculation {
+class ProductAvailabilityCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade

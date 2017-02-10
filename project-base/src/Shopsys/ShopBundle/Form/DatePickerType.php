@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DatePickerType extends AbstractType {
+class DatePickerType extends AbstractType
+{
 
     const FORMAT_PHP = 'dd.MM.yyyy';
     const FORMAT_JS = 'dd.mm.yy';

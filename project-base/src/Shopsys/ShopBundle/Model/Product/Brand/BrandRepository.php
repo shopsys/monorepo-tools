@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Brand;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 
-class BrandRepository {
+class BrandRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

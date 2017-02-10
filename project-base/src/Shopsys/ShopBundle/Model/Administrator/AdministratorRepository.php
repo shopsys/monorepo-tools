@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Administrator;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
-class AdministratorRepository {
+class AdministratorRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

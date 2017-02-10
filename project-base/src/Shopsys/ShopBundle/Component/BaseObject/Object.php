@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\BaseObject;
 
 use IteratorAggregate;
 
-abstract class Object implements IteratorAggregate {
+abstract class Object implements IteratorAggregate
+{
 
     public function __call($name, $arguments) {
         $message = 'Cannot call method ' . get_class($this) . '::' . $name . '()';

@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Form\Front\Newsletter\SubscriptionFormType;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class NewsletterController extends FrontBaseController {
+class NewsletterController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Newsletter\NewsletterFacade

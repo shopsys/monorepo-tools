@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRepository;
 use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Shopsys\ShopBundle\Form\UrlListData;
 
-class FriendlyUrlFacade {
+class FriendlyUrlFacade
+{
 
     const MAX_URL_UNIQUE_RESOLVE_ATTEMPT = 100;
 

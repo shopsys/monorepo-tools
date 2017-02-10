@@ -10,7 +10,8 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ParameterFilterFormType extends AbstractType implements DataTransformerInterface {
+class ParameterFilterFormType extends AbstractType implements DataTransformerInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]

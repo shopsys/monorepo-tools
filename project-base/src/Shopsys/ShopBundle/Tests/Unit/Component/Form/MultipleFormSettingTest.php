@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Form;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Form\MultipleFormSetting;
 
-class MultipleFormSettingTest extends PHPUnit_Framework_TestCase {
+class MultipleFormSettingTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCurrentFormIsMultiple() {
         $multipleFormSetting = new MultipleFormSetting();

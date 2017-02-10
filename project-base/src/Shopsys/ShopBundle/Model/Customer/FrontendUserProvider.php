@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class FrontendUserProvider implements UserProviderInterface {
+class FrontendUserProvider implements UserProviderInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserRepository

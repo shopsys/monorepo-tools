@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Category\Detail;
 
 use Shopsys\ShopBundle\Model\Category\Category;
 
-class CategoryDetail {
+class CategoryDetail
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\Category

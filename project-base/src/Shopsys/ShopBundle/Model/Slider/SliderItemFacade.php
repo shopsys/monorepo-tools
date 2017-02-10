@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Slider\SliderItemRepository;
 
-class SliderItemFacade {
+class SliderItemFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

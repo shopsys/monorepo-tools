@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\DateTimeHelper;
 
 use DateTime;
 
-class DateTimeHelper {
+class DateTimeHelper
+{
 
     /**
      * @return \DateTime

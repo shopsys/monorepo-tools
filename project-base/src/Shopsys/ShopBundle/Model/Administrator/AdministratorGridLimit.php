@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Administrator\Administrator;
  * @ORM\Entity
  * @ORM\Table(name="administrator_grid_limits")
  */
-class AdministratorGridLimit  {
+class AdministratorGridLimit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\Administrator

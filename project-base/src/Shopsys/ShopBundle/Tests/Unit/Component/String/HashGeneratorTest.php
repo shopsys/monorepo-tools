@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\String;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\String\HashGenerator;
 
-class HashGeneratorTest extends PHPUnit_Framework_TestCase {
+class HashGeneratorTest extends PHPUnit_Framework_TestCase
+{
 
     public function hashLengthProvider() {
         return [

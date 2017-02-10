@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class ParameterInlineEdit extends AbstractGridInlineEdit {
+class ParameterInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade

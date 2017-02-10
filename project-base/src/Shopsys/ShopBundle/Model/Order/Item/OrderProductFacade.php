@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
-class OrderProductFacade {
+class OrderProductFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

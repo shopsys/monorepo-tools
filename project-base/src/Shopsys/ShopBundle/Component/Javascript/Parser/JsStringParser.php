@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser;
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\JNodeBase;
 
-class JsStringParser {
+class JsStringParser
+{
 
     /**
      * @param \PLUG\JavaScript\JNodes\JNodeBase $node

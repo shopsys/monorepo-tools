@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase {
+class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
+{
 
     public function testCalculateSellingDeniedForProductSellableVariant() {
         $em = $this->getEntityManager();

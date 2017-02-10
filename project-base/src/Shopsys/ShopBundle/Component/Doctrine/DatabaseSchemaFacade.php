@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine;
 
 use Doctrine\ORM\EntityManager;
 
-class DatabaseSchemaFacade {
+class DatabaseSchemaFacade
+{
 
     /**
      * @var string

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
 
-class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

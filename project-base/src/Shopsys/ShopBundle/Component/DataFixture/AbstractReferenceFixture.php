@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAwareInterface {
+abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAwareInterface
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

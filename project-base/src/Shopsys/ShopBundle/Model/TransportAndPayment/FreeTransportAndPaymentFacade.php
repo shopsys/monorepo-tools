@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\TransportAndPayment;
 
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
-class FreeTransportAndPaymentFacade {
+class FreeTransportAndPaymentFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting

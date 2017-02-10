@@ -7,7 +7,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;
 
-class CustomTranslationsCompilerPass implements CompilerPassInterface {
+class CustomTranslationsCompilerPass implements CompilerPassInterface
+{
 
     const CUSTOM_TRANSLATIONS_DIR = 'src/Shopsys/ShopBundle/Resources/translations/custom';
 

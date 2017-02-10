@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Database\Model\Order;
 use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class OrderNumberSequenceRepositoryTest extends DatabaseTestCase {
+class OrderNumberSequenceRepositoryTest extends DatabaseTestCase
+{
 
     public function testGetNextNumber() {
         $orderNumberSequenceRepository = $this->getContainer()->get(OrderNumberSequenceRepository::class);

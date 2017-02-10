@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\Exception;
 
 use Exception;
 
-class InvalidPriceCalculationTypeException extends Exception implements ProductException {
+class InvalidPriceCalculationTypeException extends Exception implements ProductException
+{
 
     /**
      * @param string $priceCalculationType

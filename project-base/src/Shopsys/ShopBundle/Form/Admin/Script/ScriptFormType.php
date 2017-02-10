@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class ScriptFormType extends AbstractType {
+class ScriptFormType extends AbstractType
+{
 
     /**
      * @return string

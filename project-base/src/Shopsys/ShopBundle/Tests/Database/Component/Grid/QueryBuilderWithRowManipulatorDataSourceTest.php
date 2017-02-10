@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase {
+class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase
+{
 
     public function testGetOneRow() {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');

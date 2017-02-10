@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Administrator;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
-class AdministratorService {
+class AdministratorService
+{
 
     /**
      * @var \Symfony\Component\Security\Core\Encoder\EncoderFactory

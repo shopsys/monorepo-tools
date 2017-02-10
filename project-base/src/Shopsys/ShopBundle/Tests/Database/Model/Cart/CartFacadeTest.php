@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class CartFacadeTest extends DatabaseTestCase {
+class CartFacadeTest extends DatabaseTestCase
+{
 
     public function testAddProductToCartAddsItemsOnlyToCurrentCart() {
         $customerIdentifier = new CustomerIdentifier('secretSessionHash');

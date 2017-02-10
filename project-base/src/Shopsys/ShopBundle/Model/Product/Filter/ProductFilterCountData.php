@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Filter;
 
-class ProductFilterCountData {
+class ProductFilterCountData
+{
 
     /**
      * @var int

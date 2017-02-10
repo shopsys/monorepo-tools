@@ -8,7 +8,8 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
 
-class UploadedFileConfigLoader {
+class UploadedFileConfigLoader
+{
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem

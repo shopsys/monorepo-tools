@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Payment;
 use Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
-class PaymentEditFormTypeFactory {
+class PaymentEditFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory

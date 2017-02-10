@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception;
 
 use Exception;
 
-class InvalidServiceException extends Exception implements InlineEditException {
+class InvalidServiceException extends Exception implements InlineEditException
+{
 
     /**
      * @var string

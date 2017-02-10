@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation;
  * @ORM\Table(name="units")
  * @ORM\Entity
  */
-class Unit extends AbstractTranslatableEntity {
+class Unit extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

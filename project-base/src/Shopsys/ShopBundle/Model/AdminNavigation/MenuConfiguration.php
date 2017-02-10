@@ -6,7 +6,8 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class MenuConfiguration implements ConfigurationInterface {
+class MenuConfiguration implements ConfigurationInterface
+{
 
     public function getConfigTreeBuilder() {
         $treeBuilder = new TreeBuilder();

@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
-class ParameterFacade {
+class ParameterFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

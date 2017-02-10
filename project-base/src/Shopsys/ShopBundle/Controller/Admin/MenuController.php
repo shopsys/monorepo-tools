@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory;
 
-class MenuController extends AdminBaseController {
+class MenuController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory

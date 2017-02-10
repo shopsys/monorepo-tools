@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class WysiwygType extends AbstractTypeExtension {
+class WysiwygType extends AbstractTypeExtension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade

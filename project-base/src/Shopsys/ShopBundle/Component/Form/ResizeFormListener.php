@@ -12,7 +12,8 @@ use Traversable;
 /**
  * Symfony's ResizeFormListener modified to properly handle collections with view transformers.
  */
-class ResizeFormListener implements EventSubscriberInterface {
+class ResizeFormListener implements EventSubscriberInterface
+{
 
     /**
      * @var string

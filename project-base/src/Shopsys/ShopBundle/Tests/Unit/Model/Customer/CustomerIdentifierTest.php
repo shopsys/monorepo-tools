@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Shopsys\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException;
 
-class CustomerIdentifierTest extends PHPUnit_Framework_TestCase {
+class CustomerIdentifierTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCannotCreateIdentifierForEmptyCartIdentifierAndNullUser() {
         $cartIdentifier = '';

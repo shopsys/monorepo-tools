@@ -8,7 +8,8 @@ use PHPParser_Node_Scalar_String;
 use Shopsys\ShopBundle\Component\Translation\Exception\StringValueUnextractableException;
 use SplFileInfo;
 
-class PhpParserNodeHelper {
+class PhpParserNodeHelper
+{
 
     /**
      * @param \PHPParser_Node $node

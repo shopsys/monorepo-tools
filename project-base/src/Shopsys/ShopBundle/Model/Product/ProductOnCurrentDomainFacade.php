@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductOnCurrentDomainFacade {
+class ProductOnCurrentDomainFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

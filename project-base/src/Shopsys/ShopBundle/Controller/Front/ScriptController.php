@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Response;
 
-class ScriptController extends FrontBaseController {
+class ScriptController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade

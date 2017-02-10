@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-class ProductParameterValuesLocalizedData {
+class ProductParameterValuesLocalizedData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter

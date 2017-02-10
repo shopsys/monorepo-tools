@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class GeneratorsFormFactory {
+class GeneratorsFormFactory
+{
 
     const GENERATOR_FORM_ENABLE_POSTFIX = '_enable';
 

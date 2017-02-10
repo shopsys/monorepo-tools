@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormTypeFact
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TopCategoryController extends AdminBaseController {
+class TopCategoryController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade

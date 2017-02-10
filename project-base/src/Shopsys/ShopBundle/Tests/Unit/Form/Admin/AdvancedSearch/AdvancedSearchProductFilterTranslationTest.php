@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchProductFilterTran
 use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase {
+class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
+{
 
     public function testTranslateFilterName() {
         $advancedSearchConfig = $this->getContainer()->get(ProductAdvancedSearchConfig::class);

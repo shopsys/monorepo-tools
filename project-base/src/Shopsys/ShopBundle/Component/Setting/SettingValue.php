@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\DateTimeHelper\DateTimeHelper;
  * @ORM\Table(name="setting_values")
  * @ORM\Entity
  */
-class SettingValue {
+class SettingValue
+{
     const DATETIME_STORED_FORMAT = DateTime::ISO8601;
 
     const TYPE_STRING = 'string';

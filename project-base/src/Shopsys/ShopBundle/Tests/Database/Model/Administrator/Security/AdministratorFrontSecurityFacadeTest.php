@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase {
+class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
+{
 
     public function testIsAdministratorLoggedNot() {
         $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);

@@ -6,7 +6,8 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Newsletter\NewsletterSubscriber;
 
-class NewsletterRepository {
+class NewsletterRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

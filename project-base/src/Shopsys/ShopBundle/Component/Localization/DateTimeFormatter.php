@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Localization;
 use DateTime;
 use IntlDateFormatter;
 
-class DateTimeFormatter {
+class DateTimeFormatter
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPatternRepository

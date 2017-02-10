@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Constraints\Email;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class EmailValidator extends ConstraintValidator {
+class EmailValidator extends ConstraintValidator
+{
 
     /**
      * @inheritdoc

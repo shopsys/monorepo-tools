@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
 use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 
-class Breadcrumb {
+class Breadcrumb
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuFactory

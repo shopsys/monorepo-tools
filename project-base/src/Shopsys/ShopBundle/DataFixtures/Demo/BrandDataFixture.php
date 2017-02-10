@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\DataFixtures\Base\SettingValueDataFixture;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
-class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class BrandDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     const APPLE = 'brand_apple';
     const CANON = 'brand_canon';

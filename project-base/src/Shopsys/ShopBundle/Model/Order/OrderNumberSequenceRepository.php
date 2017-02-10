@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Order;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityManager;
 
-class OrderNumberSequenceRepository {
+class OrderNumberSequenceRepository
+{
     const ID = 1;
 
     /**

@@ -10,7 +10,8 @@ use Shopsys\AutoServicesBundle\Compiler\ServiceHelper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ScopeInterface;
 
-class AutoContainer implements ContainerInterface {
+class AutoContainer implements ContainerInterface
+{
 
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper

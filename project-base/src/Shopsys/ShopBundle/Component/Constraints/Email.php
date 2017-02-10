@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class Email extends Constraint {
+class Email extends Constraint
+{
 
     /**
      * @var string

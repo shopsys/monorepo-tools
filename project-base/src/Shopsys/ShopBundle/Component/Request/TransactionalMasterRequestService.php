@@ -7,7 +7,8 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-class TransactionalMasterRequestService {
+class TransactionalMasterRequestService
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

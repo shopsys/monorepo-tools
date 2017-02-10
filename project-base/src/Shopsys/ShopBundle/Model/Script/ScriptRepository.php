@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Script;
 
 use Doctrine\ORM\EntityManager;
 
-class ScriptRepository {
+class ScriptRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

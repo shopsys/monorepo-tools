@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductFilte
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class ProductFilterCest {
+class ProductFilterCest
+{
 
     public function testAllProductFilters(
         AcceptanceTester $me,

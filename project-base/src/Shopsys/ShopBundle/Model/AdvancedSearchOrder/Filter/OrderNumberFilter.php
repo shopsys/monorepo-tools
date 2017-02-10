@@ -6,7 +6,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class OrderNumberFilter implements AdvancedSearchFilterInterface {
+class OrderNumberFilter implements AdvancedSearchFilterInterface
+{
 
     /**
      * {@inheritdoc}

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Advert;
 
 use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
-class AdvertPositionList extends AbstractTranslatedConstantList {
+class AdvertPositionList extends AbstractTranslatedConstantList
+{
 
     const POSITION_HEADER = 'header';
     const POSITION_FOOTER = 'footer';

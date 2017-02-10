@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class HoneyPotType extends AbstractType {
+class HoneyPotType extends AbstractType
+{
 
     /**
      * @return string

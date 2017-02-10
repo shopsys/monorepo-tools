@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Item\Exception;
 
 use Exception;
 
-class MainVariantCannotBeOrderedException extends Exception implements OrderItemException {
+class MainVariantCannotBeOrderedException extends Exception implements OrderItemException
+{
 
     /**
      * @param string $message

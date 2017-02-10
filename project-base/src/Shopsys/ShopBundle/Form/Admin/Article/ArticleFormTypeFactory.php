@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class ArticleFormTypeFactory {
+class ArticleFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Seo\SeoSettingFacade

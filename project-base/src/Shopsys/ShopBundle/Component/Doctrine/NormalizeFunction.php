@@ -7,7 +7,8 @@ use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 
-class NormalizeFunction extends FunctionNode {
+class NormalizeFunction extends FunctionNode
+{
 
     const FUNCTION_NORMALIZE = 'normalize';
 

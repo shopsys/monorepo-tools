@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Twig_Environment;
 use Twig_Template;
 
-class FeedXmlWriter {
+class FeedXmlWriter
+{
 
     /**
      * @var \Twig_Environment

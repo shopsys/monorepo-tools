@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class MenuFactory {
+class MenuFactory
+{
 
     /**
      * @var string

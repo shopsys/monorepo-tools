@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Constraints\FileExtensionMaxLengthValidator;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Tests\Constraints\AbstractConstraintValidatorTest;
 
-class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTest {
+class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTest
+{
 
     /**
      * @inheritdoc

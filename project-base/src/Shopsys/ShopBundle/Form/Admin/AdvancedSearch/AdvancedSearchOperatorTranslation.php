@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class AdvancedSearchOperatorTranslation {
+class AdvancedSearchOperatorTranslation
+{
 
     /**
      * @var string[operator]

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 
-interface FeedItemFactoryInterface {
+interface FeedItemFactoryInterface
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products

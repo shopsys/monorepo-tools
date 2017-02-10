@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
-class SeoExtension extends \Twig_Extension {
+class SeoExtension extends \Twig_Extension
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

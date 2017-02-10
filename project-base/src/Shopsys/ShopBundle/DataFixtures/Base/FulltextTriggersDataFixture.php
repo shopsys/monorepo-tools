@@ -7,7 +7,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
 use Shopsys\ShopBundle\DataFixtures\Base\DomainDbFunctionsDataFixture;
 
-class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface {
+class FulltextTriggersDataFixture extends AbstractNativeFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

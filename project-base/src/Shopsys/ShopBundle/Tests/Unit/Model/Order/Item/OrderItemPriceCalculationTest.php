@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 
-class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase {
+class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCalculatePriceWithoutVat() {
         $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);

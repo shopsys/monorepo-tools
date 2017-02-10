@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CategoriesType extends AbstractType {
+class CategoriesType extends AbstractType
+{
 
     const OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID = 'muted_not_visible_on_domain_id';
 

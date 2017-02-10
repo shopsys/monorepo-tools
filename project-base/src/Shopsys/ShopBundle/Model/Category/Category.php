@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Localization\AbstractTranslatableEntity;
  * @ORM\Table(name="categories")
  * @ORM\Entity
  */
-class Category extends AbstractTranslatableEntity {
+class Category extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

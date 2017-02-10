@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Script\ScriptData;
  * @ORM\Table(name="scripts")
  * @ORM\Entity
  */
-class Script {
+class Script
+{
 
     const PLACEMENT_ORDER_SENT_PAGE = 'placementOrderSentPage';
     const PLACEMENT_ALL_PAGES = 'placementAllPages';

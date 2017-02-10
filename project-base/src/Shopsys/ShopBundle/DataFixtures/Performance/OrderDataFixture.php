@@ -25,7 +25,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class OrderDataFixture {
+class OrderDataFixture
+{
 
     const ORDERS_COUNT = 50000;
     const PRODUCTS_PER_ORDER_COUNT = 6;

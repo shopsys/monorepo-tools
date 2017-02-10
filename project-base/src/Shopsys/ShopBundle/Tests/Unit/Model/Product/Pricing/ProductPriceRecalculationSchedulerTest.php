@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase {
+class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testProductCanBeScheduledForImmediateRecalculation() {
         $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);

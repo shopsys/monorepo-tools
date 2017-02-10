@@ -16,7 +16,8 @@ use Twig_Environment;
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class Grid {
+class Grid
+{
 
     const GET_PARAMETER = 'g';
     const DEFAULT_VIEW_THEME = '@ShopsysShop/Admin/Grid/Grid.html.twig';

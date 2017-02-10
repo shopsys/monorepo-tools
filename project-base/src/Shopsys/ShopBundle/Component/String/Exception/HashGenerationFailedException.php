@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\String\Exception;
 
 use Exception;
 
-class HashGenerationFailedException extends Exception implements StringException {
+class HashGenerationFailedException extends Exception implements StringException
+{
 
     /**
      * @param string $message

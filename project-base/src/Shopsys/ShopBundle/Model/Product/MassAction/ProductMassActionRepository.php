@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\MassAction;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductMassActionRepository {
+class ProductMassActionRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

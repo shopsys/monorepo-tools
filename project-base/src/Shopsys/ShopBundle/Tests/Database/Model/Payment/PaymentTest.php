@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportData;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class PaymentTest extends DatabaseTestCase {
+class PaymentTest extends DatabaseTestCase
+{
 
     public function testRemoveTransportFromPaymentAfterDelete() {
         $em = $this->getEntityManager();

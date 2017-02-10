@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOperatorTranslati
 use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase {
+class AdvancedSearchOperatorTranslationTest extends FunctionalTestCase
+{
 
     public function testTranslateOperator() {
         $productAdvancedSearchConfig = $this->getContainer()->get(ProductAdvancedSearchConfig::class);

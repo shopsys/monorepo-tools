@@ -11,7 +11,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-class ControllerCompilerPass implements CompilerPassInterface {
+class ControllerCompilerPass implements CompilerPassInterface
+{
 
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ServiceHelper

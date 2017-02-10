@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class CookiesFacade {
+class CookiesFacade
+{
 
     const EU_COOKIES_COOKIE_CONSENT_NAME = 'eu-cookies';
 

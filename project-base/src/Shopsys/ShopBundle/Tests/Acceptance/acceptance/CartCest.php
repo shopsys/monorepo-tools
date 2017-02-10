@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductDetai
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class CartCest {
+class CartCest
+{
 
     public function testAddingSameProductToCartMakesSum(
         CartPage $cartPage,

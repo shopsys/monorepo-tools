@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DomainService {
+class DomainService
+{
 
     const DOMAIN_ICON_WIDTH = 48;
     const DOMAIN_ICON_HEIGHT = 33;

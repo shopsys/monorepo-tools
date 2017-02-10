@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 
-class CurrencyService {
+class CurrencyService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData

@@ -17,7 +17,8 @@ require_once __DIR__ . '/../app/Environment.php';
 
 setlocale(LC_CTYPE, 'en_US.utf8');
 
-class Bootstrap {
+class Bootstrap
+{
     private $environment;
     private $console;
 

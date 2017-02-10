@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
-class SuperadminController extends AdminBaseController {
+class SuperadminController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Module\ModuleList

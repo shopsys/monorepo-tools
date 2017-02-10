@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ManualBestsellingProductRepository {
+class ManualBestsellingProductRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
-class CurrencyGridFactory implements GridFactoryInterface {
+class CurrencyGridFactory implements GridFactoryInterface
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

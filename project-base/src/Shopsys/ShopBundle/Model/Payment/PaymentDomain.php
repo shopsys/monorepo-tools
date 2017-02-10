@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
  * @ORM\Table(name="payment_domains")
  * @ORM\Entity
  */
-class PaymentDomain {
+class PaymentDomain
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
-class PricingSetting {
+class PricingSetting
+{
 
     const INPUT_PRICE_TYPE = 'inputPriceType';
     const ROUNDING_TYPE = 'roundingType';

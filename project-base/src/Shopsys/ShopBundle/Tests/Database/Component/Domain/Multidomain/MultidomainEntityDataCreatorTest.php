@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Domain\Multidomain\MultidomainEntityDataCreator
 use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class MultidomainEntityDataCreatorTest extends DatabaseTestCase {
+class MultidomainEntityDataCreatorTest extends DatabaseTestCase
+{
 
     public function testCopyAllMultidomainDataForNewDomainCopiesTestRow() {
         $em = $this->getContainer()->get(EntityManager::class);

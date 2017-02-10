@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
-class InputPriceRecalculator {
+class InputPriceRecalculator
+{
 
     const BATCH_SIZE = 500;
 

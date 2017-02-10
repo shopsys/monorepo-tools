@@ -6,7 +6,8 @@ use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface;
 use Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser;
 
-class JsConstantCompilerPass implements JsCompilerPassInterface {
+class JsConstantCompilerPass implements JsCompilerPassInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCallParser

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Twig;
 use Shopsys\ShopBundle\Model\Cookies\CookiesFacade;
 use Twig_SimpleFunction;
 
-class CookiesExtension extends \Twig_Extension {
+class CookiesExtension extends \Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cookies\CookiesFacade

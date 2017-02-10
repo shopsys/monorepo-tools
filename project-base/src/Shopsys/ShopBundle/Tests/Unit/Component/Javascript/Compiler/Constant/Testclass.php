@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Tests\Unit\Component\Javascript\Compiler\Constant;
 
-class Testclass {
+class Testclass
+{
 
     const FOO = 'bar';
 

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Mutex;
 use NinjaMutex\Lock\LockInterface;
 use NinjaMutex\Mutex;
 
-class MutexFactory {
+class MutexFactory
+{
 
     const MUTEX_CRON_NAME = 'cron';
 

@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class CartFormType extends AbstractType {
+class CartFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Cart

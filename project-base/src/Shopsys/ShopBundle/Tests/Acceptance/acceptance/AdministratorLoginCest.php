@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class AdministratorLoginCest {
+class AdministratorLoginCest
+{
 
     public function testSuccessfulLogin(AcceptanceTester $me, LoginPage $loginPage) {
         $me->wantTo('login on admin with valid data');

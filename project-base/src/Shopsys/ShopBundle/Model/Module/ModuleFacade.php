@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Module;
 
 use Doctrine\ORM\EntityManager;
 
-class ModuleFacade {
+class ModuleFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

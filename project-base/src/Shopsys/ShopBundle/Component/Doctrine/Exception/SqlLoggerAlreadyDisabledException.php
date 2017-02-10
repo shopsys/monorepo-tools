@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine\Exception;
 
 use Exception;
 
-class SqlLoggerAlreadyDisabledException extends Exception {
+class SqlLoggerAlreadyDisabledException extends Exception
+{
 
     /**
      * @param string $message

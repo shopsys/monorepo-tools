@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
-class VatRepository {
+class VatRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -22,7 +22,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class InputPriceRecalculationSchedulerTest extends DatabaseTestCase {
+class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
+{
 
     public function testOnKernelResponseNoAction() {
         $setting = $this->getContainer()->get(Setting::class);

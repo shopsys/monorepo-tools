@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class SubscriptionFormType extends AbstractType {
+class SubscriptionFormType extends AbstractType
+{
 
     /**
      * @return string

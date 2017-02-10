@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Product\MassAction\Exception;
 
-interface MassActionException {
+interface MassActionException
+{
 
 }

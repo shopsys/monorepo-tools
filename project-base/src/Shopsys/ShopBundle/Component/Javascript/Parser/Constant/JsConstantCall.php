@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser\Constant;
 
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
-class JsConstantCall {
+class JsConstantCall
+{
 
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode

@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class BrandFormType extends AbstractType {
+class BrandFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand|null

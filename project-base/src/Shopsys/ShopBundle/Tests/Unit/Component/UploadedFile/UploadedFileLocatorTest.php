@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 
-class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase {
+class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
+{
 
     public function testFileExists() {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';

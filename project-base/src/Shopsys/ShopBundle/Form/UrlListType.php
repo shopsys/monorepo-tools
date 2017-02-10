@@ -17,7 +17,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UrlListType extends AbstractType {
+class UrlListType extends AbstractType
+{
 
     const TO_DELETE = 'toDelete';
     const MAIN_ON_DOMAINS = 'mainOnDomains';

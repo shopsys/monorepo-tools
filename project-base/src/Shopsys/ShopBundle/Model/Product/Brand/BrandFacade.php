@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandRepository;
 
-class BrandFacade {
+class BrandFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductDetailFactory {
+class ProductDetailFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Shopsys\ShopBundle\Model\Order\Item\OrderPayment;
 
-class OrderPaymentData extends OrderItemData {
+class OrderPaymentData extends OrderItemData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment

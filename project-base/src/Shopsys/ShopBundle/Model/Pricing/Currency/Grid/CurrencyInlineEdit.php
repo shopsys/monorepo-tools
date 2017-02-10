@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\Form\FormFactory;
 
-class CurrencyInlineEdit extends AbstractGridInlineEdit {
+class CurrencyInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade

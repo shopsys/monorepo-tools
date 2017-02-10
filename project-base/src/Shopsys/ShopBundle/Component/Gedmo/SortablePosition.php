@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Gedmo;
 
-class SortablePosition {
+class SortablePosition
+{
 
     const LAST_POSITION = -1;
 }

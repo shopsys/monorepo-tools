@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Availability;
 
-class AvailabilityData {
+class AvailabilityData
+{
 
     /**
      * @var string[]

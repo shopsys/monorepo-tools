@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
-class RoundingTest extends PHPUnit_Framework_TestCase {
+class RoundingTest extends PHPUnit_Framework_TestCase
+{
 
     public function roundingProvider() {
         return [

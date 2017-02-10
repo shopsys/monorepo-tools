@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Administrator\AdministratorData;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorService;
 
-class AdministratorFacade {
+class AdministratorFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

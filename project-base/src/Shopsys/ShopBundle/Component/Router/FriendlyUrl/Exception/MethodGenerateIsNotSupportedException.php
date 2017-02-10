@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
 
-class MethodGenerateIsNotSupportedException extends Exception implements FriendlyUrlException {
+class MethodGenerateIsNotSupportedException extends Exception implements FriendlyUrlException
+{
 
     /**
      * @param string $message

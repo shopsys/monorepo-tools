@@ -6,7 +6,8 @@ use Codeception\Module\Db as BaseDb;
 use Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
-class Db extends BaseDb {
+class Db extends BaseDb
+{
 
     // @codingStandardsIgnoreStart
     /**

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Twig;
 use Shopsys\ShopBundle\Component\Css\CssFacade;
 use Twig_SimpleFunction;
 
-class CssExtension extends \Twig_Extension {
+class CssExtension extends \Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Css\CssFacade

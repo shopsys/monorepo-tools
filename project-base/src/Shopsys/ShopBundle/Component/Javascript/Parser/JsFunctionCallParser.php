@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser;
 use PLUG\JavaScript\JLexBase; // JLexBase contains J_* constants
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
-class JsFunctionCallParser {
+class JsFunctionCallParser
+{
 
     /**
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode

@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation;
  * @ORM\Table(name="parameter_titles")
  * @ORM\Entity
  */
-class Parameter extends AbstractTranslatableEntity {
+class Parameter extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

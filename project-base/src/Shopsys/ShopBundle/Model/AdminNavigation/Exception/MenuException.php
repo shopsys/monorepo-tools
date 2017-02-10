@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\AdminNavigation\Exception;
 
-interface MenuException {
+interface MenuException
+{
 
 }

@@ -4,7 +4,8 @@ namespace Shopsys\GeneratorBundle\Model\Exception;
 
 use Exception;
 
-class GeneratorTargetFileAlreadyExistsExpception extends Exception implements GeneratorException {
+class GeneratorTargetFileAlreadyExistsExpception extends Exception implements GeneratorException
+{
 
     /**
      * @param string $filepath

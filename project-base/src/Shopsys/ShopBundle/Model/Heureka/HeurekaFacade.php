@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Heureka\HeurekaShopCertificationFactory;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Symfony\Bridge\Monolog\Logger;
 
-class HeurekaFacade {
+class HeurekaFacade
+{
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\Exception;
 
 use Exception;
 
-class InvalidOrderingModeException extends Exception implements ProductException {
+class InvalidOrderingModeException extends Exception implements ProductException
+{
 
     /**
      * @param string $message

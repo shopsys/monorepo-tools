@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-class CurrentCustomerTest extends PHPUnit_Framework_TestCase {
+class CurrentCustomerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup() {
         $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);

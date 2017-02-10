@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ProductPriceRecalculator {
+class ProductPriceRecalculator
+{
 
     const BATCH_SIZE = 100;
 

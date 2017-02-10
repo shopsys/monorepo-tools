@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
-class NumberFormatterExtensionTest extends FunctionalTestCase {
+class NumberFormatterExtensionTest extends FunctionalTestCase
+{
 
     const NBSP = "\xc2\xa0";
 

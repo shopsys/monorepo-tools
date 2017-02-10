@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\String\TransformString;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class FileUpload {
+class FileUpload
+{
 
     const TEMPORARY_DIRECTORY = 'fileUploads';
 

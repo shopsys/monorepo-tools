@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 
-class AdvancedSearchFilterTranslation {
+class AdvancedSearchFilterTranslation
+{
 
     /**
      * @var string[filterName]

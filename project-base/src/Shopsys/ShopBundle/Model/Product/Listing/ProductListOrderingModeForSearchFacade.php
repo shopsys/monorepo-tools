@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Listing;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingModeService;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductListOrderingModeForSearchFacade {
+class ProductListOrderingModeForSearchFacade
+{
 
     const COOKIE_NAME = 'productSearchOrderingMode';
 

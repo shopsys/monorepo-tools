@@ -13,7 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity
  */
-class FriendlyUrl {
+class FriendlyUrl
+{
 
     /**
      * @var string

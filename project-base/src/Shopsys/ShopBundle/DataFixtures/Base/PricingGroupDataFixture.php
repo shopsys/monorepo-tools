@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
-class PricingGroupDataFixture extends AbstractReferenceFixture {
+class PricingGroupDataFixture extends AbstractReferenceFixture
+{
 
     const ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
     const PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Pricing\Exception;
 use Exception;
 use InvalidArgumentException as BaseInvalidArgumentException;
 
-class InvalidArgumentException extends BaseInvalidArgumentException implements PricingException {
+class InvalidArgumentException extends BaseInvalidArgumentException implements PricingException
+{
 
     /**
      * @param string $message

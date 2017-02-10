@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportDomain;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class OrderTransportAndPaymentTest extends DatabaseTestCase {
+class OrderTransportAndPaymentTest extends DatabaseTestCase
+{
 
     public function testVisibleTransport() {
         $em = $this->getEntityManager();

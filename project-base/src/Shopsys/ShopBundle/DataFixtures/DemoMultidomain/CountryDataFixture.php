@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Country\Country;
 use Shopsys\ShopBundle\Model\Country\CountryData;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 
-class CountryDataFixture extends AbstractReferenceFixture {
+class CountryDataFixture extends AbstractReferenceFixture
+{
 
     const COUNTRY_CZECH_REPUBLIC_2 = 'country_czech_republic_2';
     const COUNTRY_SLOVAKIA_2 = 'country_slovakia_2';

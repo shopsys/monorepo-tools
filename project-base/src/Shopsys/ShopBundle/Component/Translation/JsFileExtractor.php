@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallPa
 use SplFileInfo;
 use Twig_Node;
 
-class JsFileExtractor implements FileVisitorInterface {
+class JsFileExtractor implements FileVisitorInterface
+{
 
     /**
      * @var \SplFileInfo

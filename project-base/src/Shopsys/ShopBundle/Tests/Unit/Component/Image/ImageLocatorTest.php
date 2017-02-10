@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Image\ImageLocator;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageLocatorTest extends PHPUnit_Framework_TestCase {
+class ImageLocatorTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase {
+class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function testIsVisibleWhenIndepentlyInvisible() {
         $domainId = 1;

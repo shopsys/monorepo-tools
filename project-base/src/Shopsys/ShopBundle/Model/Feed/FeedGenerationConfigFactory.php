@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
-class FeedGenerationConfigFactory {
+class FeedGenerationConfigFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

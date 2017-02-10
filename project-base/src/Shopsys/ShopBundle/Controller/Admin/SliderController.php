@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class SliderController extends AdminBaseController {
+class SliderController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormTypeFactory

@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class CategoryFacade {
+class CategoryFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

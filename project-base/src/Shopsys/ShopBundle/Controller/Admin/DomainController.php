@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Form\Admin\Domain\DomainFormType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class DomainController extends AdminBaseController {
+class DomainController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

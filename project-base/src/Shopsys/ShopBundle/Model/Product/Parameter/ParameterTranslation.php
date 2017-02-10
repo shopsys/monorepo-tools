@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  * @ORM\Table(name="parameter_translations")
  * @ORM\Entity
  */
-class ParameterTranslation extends AbstractTranslation {
+class ParameterTranslation extends AbstractTranslation
+{
 
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\Parameter")

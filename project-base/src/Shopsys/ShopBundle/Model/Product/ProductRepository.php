@@ -24,7 +24,8 @@ use Shopsys\ShopBundle\Model\Product\Search\ProductSearchRepository;
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class ProductRepository {
+class ProductRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Availability;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductAvailabilityRecalculationScheduler {
+class ProductAvailabilityRecalculationScheduler
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

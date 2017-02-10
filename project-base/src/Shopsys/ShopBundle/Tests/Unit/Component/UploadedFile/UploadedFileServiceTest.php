@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 
-class UploadedFileServiceTest extends PHPUnit_Framework_TestCase {
+class UploadedFileServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreateUploadedFile() {
         $temporaryFilename = 'temporaryFilename.tmp';

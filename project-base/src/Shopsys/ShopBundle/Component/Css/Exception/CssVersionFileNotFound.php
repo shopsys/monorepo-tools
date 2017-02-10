@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Css\Exception;
 
 use Exception;
 
-class CssVersionFileNotFound extends Exception {
+class CssVersionFileNotFound extends Exception
+{
 
     /**
      * @param string $message

@@ -7,7 +7,8 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-abstract class AbstractNativeFixture extends AbstractFixture implements ContainerAwareInterface {
+abstract class AbstractNativeFixture extends AbstractFixture implements ContainerAwareInterface
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

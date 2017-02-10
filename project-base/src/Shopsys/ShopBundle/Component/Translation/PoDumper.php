@@ -7,7 +7,8 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Dumper\DumperInterface;
 
-class PoDumper implements DumperInterface {
+class PoDumper implements DumperInterface
+{
 
     /**
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 
-class VatFacade {
+class VatFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

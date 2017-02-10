@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
-class PaymentFacade {
+class PaymentFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

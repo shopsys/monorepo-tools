@@ -8,7 +8,8 @@ use Codeception\Module;
 use Codeception\TestInterface;
 use Shopsys\Environment;
 
-class SymfonyHelper extends Module {
+class SymfonyHelper extends Module
+{
 
     /**
      * @var \Symfony\Component\HttpKernel\Kernel

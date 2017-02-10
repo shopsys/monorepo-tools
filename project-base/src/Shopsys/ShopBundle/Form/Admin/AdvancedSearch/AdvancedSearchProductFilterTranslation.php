@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\AdvancedSearch;
 
-class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTranslation {
+class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTranslation
+{
 
     public function __construct() {
         parent::__construct();

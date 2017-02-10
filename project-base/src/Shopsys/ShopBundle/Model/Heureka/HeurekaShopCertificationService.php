@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Heureka;
 
 use Heureka\ShopCertification;
 
-class HeurekaShopCertificationService {
+class HeurekaShopCertificationService
+{
 
     /**
      * @param string $locale

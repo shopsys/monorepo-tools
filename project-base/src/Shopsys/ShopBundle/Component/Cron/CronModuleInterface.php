@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Cron;
 
 use Symfony\Bridge\Monolog\Logger;
 
-interface CronModuleInterface {
+interface CronModuleInterface
+{
 
     /**
      * @param \Symfony\Bridge\Monolog\Logger $logger

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Extension;
 
 use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceList;
 
-class IndexedChoiceList extends ChoiceList {
+class IndexedChoiceList extends ChoiceList
+{
 
     /**
      * @var array

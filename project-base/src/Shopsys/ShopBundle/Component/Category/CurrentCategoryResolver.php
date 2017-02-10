@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class CurrentCategoryResolver {
+class CurrentCategoryResolver
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade

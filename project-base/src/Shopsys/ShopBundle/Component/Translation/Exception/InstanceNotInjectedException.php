@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Translation\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Translation\Exception\TranslationException;
 
-class InstanceNotInjectedException extends Exception implements TranslationException {
+class InstanceNotInjectedException extends Exception implements TranslationException
+{
 
     /**
      * @param string $message

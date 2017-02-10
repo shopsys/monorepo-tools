@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
-class DomainListenerTest extends PHPUnit_Framework_TestCase {
+class DomainListenerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testOnKernelRequestWithoutMasterRequest() {
         $eventMock = $this->getMockBuilder(GetResponseEvent::class)

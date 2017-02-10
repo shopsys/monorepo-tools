@@ -31,7 +31,8 @@ use Twig_Node;
  *         'minMessage' => 'Actually, every option ending with "message" will be extracted',
  *     ])
  */
-class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_NodeVisitor {
+class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
+{
 
     const CONSTRAINT_MESSAGE_DOMAIN = 'validators';
 

@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class TransportEditFormType extends AbstractType {
+class TransportEditFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory

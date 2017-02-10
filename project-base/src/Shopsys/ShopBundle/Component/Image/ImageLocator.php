@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Image;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\Image;
 
-class ImageLocator {
+class ImageLocator
+{
 
     /**
      * @var string

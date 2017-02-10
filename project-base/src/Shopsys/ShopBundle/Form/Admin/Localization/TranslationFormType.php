@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class TranslationFormType extends AbstractType implements DataTransformerInterface {
+class TranslationFormType extends AbstractType implements DataTransformerInterface
+{
 
     /**
      * @var string[]

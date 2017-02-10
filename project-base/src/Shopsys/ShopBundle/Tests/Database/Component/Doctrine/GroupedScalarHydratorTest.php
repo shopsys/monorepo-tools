@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Item\OrderItem;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class GroupedScalarHydratorTest extends DatabaseTestCase {
+class GroupedScalarHydratorTest extends DatabaseTestCase
+{
 
     public function testHydrateAllData() {
         $qb = $this->getEntityManager()->createQueryBuilder()

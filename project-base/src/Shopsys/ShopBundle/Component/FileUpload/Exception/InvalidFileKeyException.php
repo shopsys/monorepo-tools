@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\FileUpload\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Debug;
 
-class InvalidFileKeyException extends Exception implements FileUploadException {
+class InvalidFileKeyException extends Exception implements FileUploadException
+{
 
     /**
      * @param mixed $key

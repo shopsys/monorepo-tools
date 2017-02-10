@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
-class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase {
+class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetOrderTotalPrice() {
         $orderItems = [

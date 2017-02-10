@@ -6,7 +6,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
-class IndexedObjectChoiceList extends ObjectChoiceList {
+class IndexedObjectChoiceList extends ObjectChoiceList
+{
 
     /**
      * @var string

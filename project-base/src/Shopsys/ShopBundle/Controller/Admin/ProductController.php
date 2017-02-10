@@ -29,7 +29,8 @@ use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 use Shopsys\ShopBundle\Twig\ProductExtension;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductController extends AdminBaseController {
+class ProductController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade

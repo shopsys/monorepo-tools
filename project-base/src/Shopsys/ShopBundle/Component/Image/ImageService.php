@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig;
 use Shopsys\ShopBundle\Component\Image\Image;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 
-class ImageService {
+class ImageService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService

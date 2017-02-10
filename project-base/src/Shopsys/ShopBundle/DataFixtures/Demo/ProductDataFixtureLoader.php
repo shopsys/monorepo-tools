@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 
-class ProductDataFixtureLoader {
+class ProductDataFixtureLoader
+{
 
     const COLUMN_NAME_CS = 0;
     const COLUMN_NAME_EN = 1;

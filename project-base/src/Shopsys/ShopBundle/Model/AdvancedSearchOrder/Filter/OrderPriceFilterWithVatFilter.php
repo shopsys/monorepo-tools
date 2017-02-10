@@ -6,7 +6,8 @@ use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface {
+class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
+{
 
     /**
      * {@inheritdoc}

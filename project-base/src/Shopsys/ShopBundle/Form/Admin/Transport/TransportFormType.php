@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class TransportFormType extends AbstractType {
+class TransportFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[]

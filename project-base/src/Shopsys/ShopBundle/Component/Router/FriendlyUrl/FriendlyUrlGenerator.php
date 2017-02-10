@@ -11,7 +11,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouteCompiler;
 
-class FriendlyUrlGenerator extends BaseUrlGenerator {
+class FriendlyUrlGenerator extends BaseUrlGenerator
+{
 
     /**
      * @var \Symfony\Component\Routing\RouteCompiler

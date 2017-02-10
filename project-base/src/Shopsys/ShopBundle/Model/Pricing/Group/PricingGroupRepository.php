@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
-class PricingGroupRepository {
+class PricingGroupRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

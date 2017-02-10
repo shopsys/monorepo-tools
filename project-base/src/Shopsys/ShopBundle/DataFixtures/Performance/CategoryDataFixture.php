@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture {
+class CategoryDataFixture
+{
 
     const FIRST_PERFORMANCE_CATEGORY = 'first_performance_category';
 

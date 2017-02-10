@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine\Exception;
 
 use Exception;
 
-class DefaultSchemaImportException extends Exception {
+class DefaultSchemaImportException extends Exception
+{
 
     /**
      * @param string $message

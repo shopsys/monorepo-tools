@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class ProductData {
+class ProductData
+{
 
     /**
      * @var array

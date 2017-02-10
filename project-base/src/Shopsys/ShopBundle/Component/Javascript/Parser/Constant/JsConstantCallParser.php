@@ -9,7 +9,8 @@ use PLUG\JavaScript\JNodes\nonterminal\JProgramNode;
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsFunctionCallParser;
 use Shopsys\ShopBundle\Component\Javascript\Parser\JsStringParser;
 
-class JsConstantCallParser {
+class JsConstantCallParser
+{
 
     const FUNCTION_NAME = 'Shopsys.constant';
     const NAME_ARGUMENT_INDEX = 0;

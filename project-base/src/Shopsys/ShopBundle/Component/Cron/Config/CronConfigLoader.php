@@ -10,7 +10,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
 
-class CronConfigLoader {
+class CronConfigLoader
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

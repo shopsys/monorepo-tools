@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Country;
 
-class CountryData {
+class CountryData
+{
 
     /**
      * @var string

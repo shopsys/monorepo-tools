@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class UserFormType extends AbstractType {
+class UserFormType extends AbstractType
+{
 
     /**
      * @var string

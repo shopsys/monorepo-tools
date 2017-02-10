@@ -19,7 +19,8 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class OrderFacadeTest extends DatabaseTestCase {
+class OrderFacadeTest extends DatabaseTestCase
+{
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)

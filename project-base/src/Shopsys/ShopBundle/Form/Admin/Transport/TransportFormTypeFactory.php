@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Transport;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository;
 
-class TransportFormTypeFactory {
+class TransportFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository

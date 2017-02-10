@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * @ORM\DiscriminatorMap({"payment" = "OrderPayment", "product" = "OrderProduct", "transport" = "OrderTransport"})
  */
-abstract class OrderItem {
+abstract class OrderItem
+{
 
     /**
      * @var int

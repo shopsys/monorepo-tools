@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductDeleteResult {
+class ProductDeleteResult
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product[]

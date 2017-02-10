@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Script\ScriptRepository;
 
-class ScriptFacade {
+class ScriptFacade
+{
 
     const VARIABLE_NUMBER = '{number}';
     const VARIABLE_TOTAL_PRICE = '{total_price}';

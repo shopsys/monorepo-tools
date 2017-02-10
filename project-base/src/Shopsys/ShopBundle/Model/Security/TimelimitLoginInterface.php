@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Security;
 
-interface TimelimitLoginInterface {
+interface TimelimitLoginInterface
+{
 
     /**
      * @return \DateTime

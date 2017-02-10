@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Image\Config;
 
 use Shopsys\ShopBundle\Component\Image\Image;
 
-class ImageConfig {
+class ImageConfig
+{
 
     const ORIGINAL_SIZE_NAME = 'original';
     const DEFAULT_SIZE_NAME = 'default';

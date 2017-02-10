@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Administrator\Exception;
 
 use Exception;
 
-class DuplicateSuperadminNameException extends Exception implements AdministratorException {
+class DuplicateSuperadminNameException extends Exception implements AdministratorException
+{
 
     /**
      * @var string

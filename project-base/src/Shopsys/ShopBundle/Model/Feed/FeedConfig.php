@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Feed;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface;
 
-class FeedConfig {
+class FeedConfig
+{
 
     /**
      * @var string

@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
-class OrderFlowFacade {
+class OrderFlowFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Front\Order\OrderFlow

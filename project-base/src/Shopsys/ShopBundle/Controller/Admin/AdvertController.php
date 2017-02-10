@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdvertController extends AdminBaseController {
+class AdvertController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Payment;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
-class PaymentData {
+class PaymentData
+{
 
     /**
      * @var string[]

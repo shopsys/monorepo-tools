@@ -7,7 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DropDatabaseSchemaCommand extends ContainerAwareCommand {
+class DropDatabaseSchemaCommand extends ContainerAwareCommand
+{
 
     protected function configure() {
         $this

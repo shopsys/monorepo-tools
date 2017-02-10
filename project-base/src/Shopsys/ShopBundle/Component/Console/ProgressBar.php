@@ -8,7 +8,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * ProgressBar with advanced placeholders for displaying speed etc.
  */
-class ProgressBar extends BaseProgressBar {
+class ProgressBar extends BaseProgressBar
+{
 
     /**
      * @var float

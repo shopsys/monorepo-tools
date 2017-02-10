@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\DataFixture\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\DataFixture\Exception\DataFixtureException;
 
-class PersistentReferenceNotFoundException extends Exception implements DataFixtureException {
+class PersistentReferenceNotFoundException extends Exception implements DataFixtureException
+{
 
     /**
      * @param string $referenceName

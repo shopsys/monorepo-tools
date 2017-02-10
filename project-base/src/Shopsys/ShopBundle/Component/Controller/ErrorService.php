@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Controller;
 use Shopsys\ShopBundle\Component\FlashMessage\Bag;
 use Symfony\Component\Form\Form;
 
-class ErrorService {
+class ErrorService
+{
 
     /**
      * @param \Symfony\Component\Form\Form $form

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Error\Reporting;
 
 use DateTime;
 
-class LogErrorReportingFacade {
+class LogErrorReportingFacade
+{
 
     const MAX_FILE_TAIL_LENGTH = 8000;
 

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSummaryPrinter;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class AllPagesTest extends FunctionalTestCase {
+class AllPagesTest extends FunctionalTestCase
+{
 
     const PASSES = 5;
 

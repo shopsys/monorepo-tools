@@ -6,7 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit;
 
-class TranslationController extends AdminBaseController {
+class TranslationController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Translation\Grid\TranslationInlineEdit

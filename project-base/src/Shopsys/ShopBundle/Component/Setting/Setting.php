@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Setting;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
-class Setting {
+class Setting
+{
 
     const ORDER_SUBMITTED_SETTING_NAME = 'orderSubmittedText';
     const DEFAULT_PRICING_GROUP = 'defaultPricingGroupId';

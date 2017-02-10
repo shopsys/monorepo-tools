@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryService;
 
-class CategoryServiceTest extends PHPUnit_Framework_TestCase {
+class CategoryServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreateSetRoot() {
         $categoryData = new CategoryData();

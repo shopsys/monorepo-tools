@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Article\ArticleData;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
-class ArticleDataFixture extends AbstractReferenceFixture {
+class ArticleDataFixture extends AbstractReferenceFixture
+{
 
     const TERMS_AND_CONDITIONS_2 = 'article_terms_and_conditions_2';
     const COOKIES_2 = 'article_cookies_2';

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Crawler;
 
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class AdminAccessRightsTest extends FunctionalTestCase {
+class AdminAccessRightsTest extends FunctionalTestCase
+{
 
     public function adminAccessDeniedProvider() {
         return [

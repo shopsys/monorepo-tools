@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\Form\Exception;
 
-interface FormException {
+interface FormException
+{
 
 }

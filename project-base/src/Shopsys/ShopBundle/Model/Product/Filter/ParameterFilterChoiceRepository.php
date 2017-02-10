@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ParameterFilterChoiceRepository {
+class ParameterFilterChoiceRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 
-class AdvertController extends FrontBaseController {
+class AdvertController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Advert\AdvertFacade

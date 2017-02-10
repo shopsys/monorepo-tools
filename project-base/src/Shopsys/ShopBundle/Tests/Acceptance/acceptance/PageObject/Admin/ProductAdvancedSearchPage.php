@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin;
 use Facebook\WebDriver\WebDriverBy;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class ProductAdvancedSearchPage extends AbstractPage {
+class ProductAdvancedSearchPage extends AbstractPage
+{
 
     const SEARCH_SUBJECT_CATNUM = 'productCatnum';
 

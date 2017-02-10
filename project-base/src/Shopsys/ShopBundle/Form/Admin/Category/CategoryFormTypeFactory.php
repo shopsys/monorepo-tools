@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryRepository;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class CategoryFormTypeFactory {
+class CategoryFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository

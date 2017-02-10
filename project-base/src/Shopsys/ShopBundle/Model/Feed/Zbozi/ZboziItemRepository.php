@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\ProductDomain;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ZboziItemRepository implements FeedItemRepositoryInterface {
+class ZboziItemRepository implements FeedItemRepositoryInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

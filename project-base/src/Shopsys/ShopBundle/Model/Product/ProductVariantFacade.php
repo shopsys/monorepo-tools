@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Model\Product\ProductVariantService;
 
-class ProductVariantFacade {
+class ProductVariantFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

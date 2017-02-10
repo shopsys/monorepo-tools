@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Module\Exception;
 
 use Exception;
 
-class UnsupportedModuleException extends Exception implements ModuleException {
+class UnsupportedModuleException extends Exception implements ModuleException
+{
 
     /**
      * @param string $moduleName

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductPriceCronModule implements IteratedCronModuleInterface {
+class ProductPriceCronModule implements IteratedCronModuleInterface
+{
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger

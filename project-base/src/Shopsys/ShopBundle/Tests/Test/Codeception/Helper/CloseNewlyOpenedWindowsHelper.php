@@ -8,7 +8,8 @@ use Facebook\WebDriver\Remote\DriverCommand;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class CloseNewlyOpenedWindowsHelper extends Module {
+class CloseNewlyOpenedWindowsHelper extends Module
+{
 
     // @codingStandardsIgnoreStart
     /**

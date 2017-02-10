@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
-class CustomerPasswordServiceTest extends FunctionalTestCase {
+class CustomerPasswordServiceTest extends FunctionalTestCase
+{
 
     public function isResetPasswordHashValidProvider() {
         return [

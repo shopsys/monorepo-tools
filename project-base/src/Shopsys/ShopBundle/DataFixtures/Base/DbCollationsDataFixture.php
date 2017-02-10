@@ -6,7 +6,8 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Shopsys\ShopBundle\Component\DataFixture\AbstractNativeFixture;
 use Shopsys\ShopBundle\Component\System\System;
 
-class DbCollationsDataFixture extends AbstractNativeFixture {
+class DbCollationsDataFixture extends AbstractNativeFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

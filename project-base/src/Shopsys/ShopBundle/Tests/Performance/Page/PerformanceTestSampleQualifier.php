@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
-class PerformanceTestSampleQualifier {
+class PerformanceTestSampleQualifier
+{
 
     const STATUS_OK = 0;
     const STATUS_WARNING = 1;

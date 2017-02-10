@@ -15,7 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class LoginListenerTest extends PHPUnit_Framework_TestCase {
+class LoginListenerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testOnSecurityInteractiveLoginUnique() {
         $emMock = $this->getMockBuilder(EntityManager::class)

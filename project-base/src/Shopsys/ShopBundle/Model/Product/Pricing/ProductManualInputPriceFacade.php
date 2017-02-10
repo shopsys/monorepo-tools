@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceRepository;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPriceService;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductManualInputPriceFacade {
+class ProductManualInputPriceFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

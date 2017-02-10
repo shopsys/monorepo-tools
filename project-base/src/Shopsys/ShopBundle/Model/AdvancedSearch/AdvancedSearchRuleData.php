@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
-class AdvancedSearchRuleData {
+class AdvancedSearchRuleData
+{
 
     /**
      * @var string|null

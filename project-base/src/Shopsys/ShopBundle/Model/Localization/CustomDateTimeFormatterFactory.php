@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern;
 use Shopsys\ShopBundle\Component\Localization\DateTimeFormatPatternRepository;
 use Shopsys\ShopBundle\Component\Localization\DateTimeFormatter;
 
-class CustomDateTimeFormatterFactory {
+class CustomDateTimeFormatterFactory
+{
 
     /**
      * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter

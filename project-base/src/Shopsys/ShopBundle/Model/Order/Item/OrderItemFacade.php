@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\OrderService;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class OrderItemFacade {
+class OrderItemFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

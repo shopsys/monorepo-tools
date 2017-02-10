@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid\InlineEdit\Exception;
 
 use Exception;
 
-class InvalidFormDataException extends Exception implements InlineEditException {
+class InvalidFormDataException extends Exception implements InlineEditException
+{
 
     /**
      * @var array

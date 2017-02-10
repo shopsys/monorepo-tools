@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Availability;
 use Shopsys\ShopBundle\Model\Product\Availability\Availability;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 
-class AvailabilityService {
+class AvailabilityService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData

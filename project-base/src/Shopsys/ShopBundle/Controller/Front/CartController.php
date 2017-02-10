@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\TransportAndPayment\FreeTransportAndPaymentFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class CartController extends FrontBaseController {
+class CartController extends FrontBaseController
+{
 
     const AFTER_ADD_WINDOW_ACCESORIES_LIMIT = 3;
 

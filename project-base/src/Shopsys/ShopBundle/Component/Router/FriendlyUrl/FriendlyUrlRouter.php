@@ -10,7 +10,8 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class FriendlyUrlRouter implements RouterInterface {
+class FriendlyUrlRouter implements RouterInterface
+{
 
     /**
      * @var \Symfony\Component\Routing\RequestContext

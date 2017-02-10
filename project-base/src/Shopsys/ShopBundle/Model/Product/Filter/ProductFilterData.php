@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Filter;
 
-class ProductFilterData {
+class ProductFilterData
+{
 
     /**
      * @var string

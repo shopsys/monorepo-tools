@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageThumbnailFactory;
 use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
-class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase {
+class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage() {
         $temporaryFilename = 'filename.jpg';

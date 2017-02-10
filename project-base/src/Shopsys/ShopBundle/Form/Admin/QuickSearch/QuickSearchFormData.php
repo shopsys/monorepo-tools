@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form\Admin\QuickSearch;
 
-class QuickSearchFormData {
+class QuickSearchFormData
+{
 
     /**
      * @var string|null

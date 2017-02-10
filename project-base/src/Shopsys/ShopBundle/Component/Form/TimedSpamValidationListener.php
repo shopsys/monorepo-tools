@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class TimedSpamValidationListener implements EventSubscriberInterface {
+class TimedSpamValidationListener implements EventSubscriberInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Form\FormTimeProvider

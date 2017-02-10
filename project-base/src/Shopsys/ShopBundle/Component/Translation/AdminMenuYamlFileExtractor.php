@@ -11,7 +11,8 @@ use SplFileInfo;
 use Symfony\Component\Yaml\Parser;
 use Twig_Node;
 
-class AdminMenuYamlFileExtractor implements FileVisitorInterface {
+class AdminMenuYamlFileExtractor implements FileVisitorInterface
+{
 
     const ADMIN_MENU_ITEM_LABEL_DOMAIN = 'messages';
 

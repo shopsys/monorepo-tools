@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\Unit\Unit;
 
-class UnitRepository {
+class UnitRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

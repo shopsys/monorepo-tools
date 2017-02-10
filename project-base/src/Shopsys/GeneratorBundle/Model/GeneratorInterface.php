@@ -5,7 +5,8 @@ namespace Shopsys\GeneratorBundle\Model;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
-interface GeneratorInterface {
+interface GeneratorInterface
+{
 
     /**
      * @return string

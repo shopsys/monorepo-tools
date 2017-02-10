@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase {
+class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
+{
 
     public function testGetItemsWithProductInStock() {
         $container = $this->getContainer();

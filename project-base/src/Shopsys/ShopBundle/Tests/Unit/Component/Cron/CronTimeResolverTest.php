@@ -7,7 +7,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
-class CronTimeResolverTest extends PHPUnit_Framework_TestCase {
+class CronTimeResolverTest extends PHPUnit_Framework_TestCase
+{
 
     public function validTimeStringProvider() {
         return [

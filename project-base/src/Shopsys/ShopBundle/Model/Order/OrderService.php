@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class OrderService {
+class OrderService
+{
 
     const DEFAULT_QUANTITY = 1;
 

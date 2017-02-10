@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class UnitInlineEdit extends AbstractGridInlineEdit {
+class UnitInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade

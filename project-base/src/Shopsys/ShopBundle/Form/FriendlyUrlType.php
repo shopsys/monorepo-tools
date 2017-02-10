@@ -6,7 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints;
 
-class FriendlyUrlType extends AbstractType {
+class FriendlyUrlType extends AbstractType
+{
 
     const FIELD_DOMAIN = 'domain';
     const FIELD_SLUG = 'slug';

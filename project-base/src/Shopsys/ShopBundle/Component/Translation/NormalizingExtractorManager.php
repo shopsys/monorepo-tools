@@ -6,7 +6,8 @@ use JMS\TranslationBundle\Translation\Extractor\FileExtractor;
 use JMS\TranslationBundle\Translation\ExtractorManager;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
-class NormalizingExtractorManager extends ExtractorManager {
+class NormalizingExtractorManager extends ExtractorManager
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer

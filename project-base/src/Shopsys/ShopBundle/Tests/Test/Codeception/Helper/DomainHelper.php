@@ -7,7 +7,8 @@ use Codeception\TestInterface;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class DomainHelper extends Module {
+class DomainHelper extends Module
+{
 
     // @codingStandardsIgnoreStart
     /**

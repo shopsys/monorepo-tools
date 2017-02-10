@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Category\Detail;
 use Closure;
 use Shopsys\ShopBundle\Model\Category\Category;
 
-class LazyLoadedCategoryDetail {
+class LazyLoadedCategoryDetail
+{
 
     /**
      * @var \Closure

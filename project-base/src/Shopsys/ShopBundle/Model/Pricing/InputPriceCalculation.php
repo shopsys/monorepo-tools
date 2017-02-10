@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing;
 
-class InputPriceCalculation {
+class InputPriceCalculation
+{
 
     /**
      * @param int $inputPriceType

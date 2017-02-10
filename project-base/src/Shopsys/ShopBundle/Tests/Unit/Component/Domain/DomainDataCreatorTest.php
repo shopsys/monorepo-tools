@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
-class DomainDataCreatorTest extends PHPUnit_Framework_TestCase {
+class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreateNewDomainsDataNoNewDomain() {
         $domainConfigs = [

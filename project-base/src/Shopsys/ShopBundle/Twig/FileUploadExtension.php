@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\FileUpload\FileUpload;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class FileUploadExtension extends Twig_Extension {
+class FileUploadExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload

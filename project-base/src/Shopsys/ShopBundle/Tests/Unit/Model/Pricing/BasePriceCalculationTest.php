@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
-class BasePriceCalculationTest extends PHPUnit_Framework_TestCase {
+class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function calculateBasePriceProvider() {
         return [

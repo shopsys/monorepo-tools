@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
-class AdminLogoutHandler implements LogoutSuccessHandlerInterface {
+class AdminLogoutHandler implements LogoutSuccessHandlerInterface
+{
 
     /**
      * @var \Symfony\Component\Routing\Router

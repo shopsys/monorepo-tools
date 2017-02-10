@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Mail\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Debug;
 
-class SendMailFailedException extends Exception implements MailException {
+class SendMailFailedException extends Exception implements MailException
+{
 
     /**
      * @var array

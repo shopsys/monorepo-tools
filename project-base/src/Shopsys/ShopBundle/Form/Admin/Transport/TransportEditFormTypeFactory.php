@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Transport;
 use Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
-class TransportEditFormTypeFactory {
+class TransportEditFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormTypeFactory

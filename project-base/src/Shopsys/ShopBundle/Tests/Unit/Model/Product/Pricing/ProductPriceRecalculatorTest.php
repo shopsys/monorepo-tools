@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 
-class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase {
+class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase
+{
 
     public function testRunImmediatelyRecalculations() {
         $productMock = $this->getMock(Product::class, null, [], '', false);

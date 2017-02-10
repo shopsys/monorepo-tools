@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class FriendlyUrlToGenerateRepository {
+class FriendlyUrlToGenerateRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

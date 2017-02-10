@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Domain;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class SelectedDomain {
+class SelectedDomain
+{
 
     const SESSION_SELECTED_DOMAIN = 'selected_domain_id';
 

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Filesystem;
 
-class FilepathComparator {
+class FilepathComparator
+{
 
     /**
      * @param string $path

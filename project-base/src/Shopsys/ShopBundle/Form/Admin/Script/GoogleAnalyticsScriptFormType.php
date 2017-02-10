@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class GoogleAnalyticsScriptFormType extends AbstractType {
+class GoogleAnalyticsScriptFormType extends AbstractType
+{
 
     /**
      * @return string

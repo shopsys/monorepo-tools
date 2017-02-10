@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Payment;
 
 use Shopsys\ShopBundle\Model\Payment\PaymentData;
 
-class PaymentEditData {
+class PaymentEditData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentData

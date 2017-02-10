@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
-class RegistrationMailService {
+class RegistrationMailService
+{
 
     const VARIABLE_FIRST_NAME = '{first_name}';
     const VARIABLE_LAST_NAME = '{last_name}';

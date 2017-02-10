@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Brand\Brand;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class BrandFilterChoiceRepository {
+class BrandFilterChoiceRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

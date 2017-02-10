@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Model\Pricing;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 
-class PriceTest extends PHPUnit_Framework_TestCase {
+class PriceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testAdd() {
         $price = new Price(2, 3);

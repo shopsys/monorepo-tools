@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData;
 use Symfony\Component\Form\FormFactoryInterface;
 
-abstract class AbstractAdvancedSearchFormFactory {
+abstract class AbstractAdvancedSearchFormFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchConfig

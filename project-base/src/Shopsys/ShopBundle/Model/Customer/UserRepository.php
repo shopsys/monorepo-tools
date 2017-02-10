@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
-class UserRepository {
+class UserRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

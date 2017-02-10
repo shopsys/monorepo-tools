@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallPa
 use Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParserFactory;
 use Shopsys\ShopBundle\Component\Translation\Translator;
 
-class JsTranslatorCompilerPass implements JsCompilerPassInterface {
+class JsTranslatorCompilerPass implements JsCompilerPassInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser

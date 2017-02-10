@@ -6,7 +6,8 @@ use Symfony\Component\Form\FormView;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class HoneyPotExtension extends Twig_Extension {
+class HoneyPotExtension extends Twig_Extension
+{
 
     const PASSWORD_FIELD_NAME = 'password';
 

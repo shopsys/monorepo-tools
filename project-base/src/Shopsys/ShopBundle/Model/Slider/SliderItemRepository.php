@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Slider;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Slider\SliderItem;
 
-class SliderItemRepository {
+class SliderItemRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

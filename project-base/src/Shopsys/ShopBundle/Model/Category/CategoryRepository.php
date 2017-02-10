@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductCategoryDomain;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class CategoryRepository extends NestedTreeRepository {
+class CategoryRepository extends NestedTreeRepository
+{
 
     const MOVE_DOWN_TO_BOTTOM = true;
 

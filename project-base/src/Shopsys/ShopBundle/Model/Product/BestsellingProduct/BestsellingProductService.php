@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\BestsellingProduct;
 
-class BestsellingProductService {
+class BestsellingProductService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $manualProductsIndexedByPosition

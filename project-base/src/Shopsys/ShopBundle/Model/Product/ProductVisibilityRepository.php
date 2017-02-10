@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
-class ProductVisibilityRepository {
+class ProductVisibilityRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

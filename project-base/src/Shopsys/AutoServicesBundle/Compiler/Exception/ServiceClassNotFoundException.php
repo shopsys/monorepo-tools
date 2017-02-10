@@ -5,7 +5,8 @@ namespace Shopsys\AutoServicesBundle\Compiler\Exception;
 use Exception;
 use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
-class ServiceClassNotFoundException extends Exception implements CompilerException {
+class ServiceClassNotFoundException extends Exception implements CompilerException
+{
 
     /**
      * @param string $className

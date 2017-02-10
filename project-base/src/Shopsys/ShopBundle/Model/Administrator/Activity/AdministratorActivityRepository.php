@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 
-class AdministratorActivityRepository {
+class AdministratorActivityRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -20,7 +20,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Twig\NumberFormatterExtension;
 
-class OrderCreationService {
+class OrderCreationService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItemPriceCalculation

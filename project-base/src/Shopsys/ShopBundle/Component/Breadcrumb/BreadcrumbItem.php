@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
-class BreadcrumbItem {
+class BreadcrumbItem
+{
 
     /**
      * @var string

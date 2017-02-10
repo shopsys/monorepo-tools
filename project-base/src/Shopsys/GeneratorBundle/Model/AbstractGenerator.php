@@ -5,7 +5,8 @@ namespace Shopsys\GeneratorBundle\Model;
 use Shopsys\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 
-abstract class AbstractGenerator implements GeneratorInterface {
+abstract class AbstractGenerator implements GeneratorInterface
+{
 
     /**
      * @var \Twig_Environment

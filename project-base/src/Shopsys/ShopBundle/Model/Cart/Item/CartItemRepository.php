@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
-class CartItemRepository {
+class CartItemRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

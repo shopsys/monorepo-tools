@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Debug;
 
-class InvalidCountOfAliasesException extends Exception {
+class InvalidCountOfAliasesException extends Exception
+{
 
     /**
      * @param array|null $rootAliases

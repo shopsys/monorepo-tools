@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormTypeFactory;
 use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TopProductController extends AdminBaseController {
+class TopProductController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade

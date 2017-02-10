@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Filter\FlagFilterChoiceRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository;
 use Shopsys\ShopBundle\Model\Product\Filter\PriceRangeRepository;
 
-class ProductFilterFormTypeFactory {
+class ProductFilterFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoiceRepository

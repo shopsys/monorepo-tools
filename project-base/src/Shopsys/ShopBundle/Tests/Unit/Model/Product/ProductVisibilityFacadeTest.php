@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase {
+class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testOnKernelResponseRecalc() {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);

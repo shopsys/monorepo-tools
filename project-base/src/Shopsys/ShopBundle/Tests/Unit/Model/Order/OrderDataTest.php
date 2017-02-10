@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Order\Item\OrderItemData;
 use Shopsys\ShopBundle\Model\Order\OrderData;
 
-class OrderDataTest extends PHPUnit_Framework_TestCase {
+class OrderDataTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetNewItemsWithoutTransportAndPayment() {
         $orderData = new OrderData();

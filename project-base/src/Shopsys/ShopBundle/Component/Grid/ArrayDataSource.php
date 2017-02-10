@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid;
 
 use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
-class ArrayDataSource implements DataSourceInterface {
+class ArrayDataSource implements DataSourceInterface
+{
 
     /**
      * @var array

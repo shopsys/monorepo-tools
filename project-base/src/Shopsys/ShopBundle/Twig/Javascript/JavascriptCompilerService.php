@@ -8,7 +8,8 @@ use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-class JavascriptCompilerService {
+class JavascriptCompilerService
+{
 
     const NOT_COMPILED_FOLDER = '/plugins/';
 

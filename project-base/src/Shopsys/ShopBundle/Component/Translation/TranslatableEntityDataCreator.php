@@ -8,7 +8,8 @@ use Prezent\Doctrine\Translatable\TranslationInterface;
 use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 use Shopsys\ShopBundle\Component\Sql\SqlQuoter;
 
-class TranslatableEntityDataCreator {
+class TranslatableEntityDataCreator
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

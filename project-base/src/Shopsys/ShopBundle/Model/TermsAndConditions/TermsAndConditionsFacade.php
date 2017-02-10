@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Article\Article;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
-class TermsAndConditionsFacade {
+class TermsAndConditionsFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade

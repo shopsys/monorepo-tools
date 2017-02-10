@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateRepository;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusMailTemplateService;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
-class MailTemplateFacade {
+class MailTemplateFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

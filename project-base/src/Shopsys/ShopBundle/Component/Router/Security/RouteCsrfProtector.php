@@ -11,7 +11,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class RouteCsrfProtector implements EventSubscriberInterface {
+class RouteCsrfProtector implements EventSubscriberInterface
+{
 
     const CSRF_TOKEN_REQUEST_PARAMETER = 'routeCsrfToken';
     const CSRF_TOKEN_ID_PREFIX = 'route_';

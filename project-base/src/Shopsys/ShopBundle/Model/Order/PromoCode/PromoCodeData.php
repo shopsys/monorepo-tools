@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
-class PromoCodeData {
+class PromoCodeData
+{
 
     /**
      * @var string|null

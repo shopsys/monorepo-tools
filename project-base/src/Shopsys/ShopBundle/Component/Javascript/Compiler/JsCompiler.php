@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Compiler;
 use PLUG\JavaScript\JParser;
 use PLUG\JavaScript\JTokenizer;
 
-class JsCompiler {
+class JsCompiler
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]

@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
-class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase {
+class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
+{
 
     public function calculateIndependentPriceProvider() {
         return [

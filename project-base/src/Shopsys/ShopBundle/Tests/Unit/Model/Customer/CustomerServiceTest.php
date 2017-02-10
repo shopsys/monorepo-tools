@@ -22,7 +22,8 @@ use Shopsys\ShopBundle\Model\Payment\PaymentData;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportData;
 
-class CustomerServiceTest extends PHPUnit_Framework_TestCase {
+class CustomerServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreate() {
         $customerService = $this->getCustomerService();

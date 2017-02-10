@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class UploadedFileExtension extends Twig_Extension {
+class UploadedFileExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 use Shopsys\ShopBundle\Model\Order\PromoCode\Grid\PromoCodeInlineEdit;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 
-class PromoCodeController extends AdminBaseController {
+class PromoCodeController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade

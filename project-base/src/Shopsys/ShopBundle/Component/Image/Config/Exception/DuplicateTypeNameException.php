@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Image\Config\Exception;
 
 use Exception;
 
-class DuplicateTypeNameException extends Exception implements ImageConfigException {
+class DuplicateTypeNameException extends Exception implements ImageConfigException
+{
 
     /**
      * @var string|null

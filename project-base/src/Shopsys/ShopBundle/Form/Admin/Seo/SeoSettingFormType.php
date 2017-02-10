@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SeoSettingFormType extends AbstractType {
+class SeoSettingFormType extends AbstractType
+{
 
     /**
      * @var string[]

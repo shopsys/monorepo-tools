@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Cart;
 
 use Shopsys\ShopBundle\Model\Cart\Item\CartItem;
 
-class Cart {
+class Cart
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]

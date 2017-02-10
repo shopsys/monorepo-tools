@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Administrator\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Debug;
 
-class InvalidGridLimitValueException extends Exception implements AdministratorException {
+class InvalidGridLimitValueException extends Exception implements AdministratorException
+{
 
     /**
      * @var mixed

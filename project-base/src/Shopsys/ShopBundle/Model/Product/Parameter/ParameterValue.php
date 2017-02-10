@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
  * @ORM\Table(name="parameter_values")
  * @ORM\Entity
  */
-class ParameterValue {
+class ParameterValue
+{
 
     /**
      * @var int

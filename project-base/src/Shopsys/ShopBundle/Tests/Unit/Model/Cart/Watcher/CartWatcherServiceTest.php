@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class CartWatcherServiceTest extends FunctionalTestCase {
+class CartWatcherServiceTest extends FunctionalTestCase
+{
 
     public function testGetModifiedPriceItemsAndUpdatePrices() {
         $customerIdentifier = new CustomerIdentifier('randomString');

@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class PaymentController extends AdminBaseController {
+class PaymentController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Payment\PaymentEditFormTypeFactory

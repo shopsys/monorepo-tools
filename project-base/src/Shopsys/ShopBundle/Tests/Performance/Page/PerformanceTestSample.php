@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
-class PerformanceTestSample {
+class PerformanceTestSample
+{
 
     /**
      * @var string

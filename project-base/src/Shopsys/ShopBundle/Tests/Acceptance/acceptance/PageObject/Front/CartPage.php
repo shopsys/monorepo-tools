@@ -6,7 +6,8 @@ use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverKeys;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class CartPage extends AbstractPage {
+class CartPage extends AbstractPage
+{
 
     /**
      * @param string $productName

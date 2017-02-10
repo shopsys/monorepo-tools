@@ -20,7 +20,8 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductVisibilityRepositoryTest extends DatabaseTestCase {
+class ProductVisibilityRepositoryTest extends DatabaseTestCase
+{
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData

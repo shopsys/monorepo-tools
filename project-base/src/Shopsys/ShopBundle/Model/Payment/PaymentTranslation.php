@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  * @ORM\Table(name="payment_translations")
  * @ORM\Entity
  */
-class PaymentTranslation extends AbstractTranslation {
+class PaymentTranslation extends AbstractTranslation
+{
 
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Payment\Payment")

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportData;
 use Shopsys\ShopBundle\Model\Transport\TransportDomain;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase {
+class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
+{
 
     public function testIsIndependentlyVisible() {
         $em = $this->getEntityManager();

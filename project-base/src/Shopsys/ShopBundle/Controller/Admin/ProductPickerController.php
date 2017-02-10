@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductPickerController extends AdminBaseController {
+class ProductPickerController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorGridFacade

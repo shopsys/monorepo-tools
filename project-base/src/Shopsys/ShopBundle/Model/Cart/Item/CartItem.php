@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="cart_items")
  * @ORM\Entity
  */
-class CartItem {
+class CartItem
+{
 
     /**
      * @var int

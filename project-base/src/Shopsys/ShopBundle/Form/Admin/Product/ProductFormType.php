@@ -14,7 +14,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class ProductFormType extends AbstractType {
+class ProductFormType extends AbstractType
+{
 
     const VALIDATION_GROUP_AUTO_PRICE_CALCULATION = 'autoPriceCalculation';
     const VALIDATION_GROUP_USING_STOCK = 'usingStock';

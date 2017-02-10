@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
-class ImageController extends AdminBaseController {
+class ImageController extends AdminBaseController
+{
 
     const ENTITY_NAME_PAYMENT = 'payment';
     const ENTITY_NAME_PRODUCT = 'product';

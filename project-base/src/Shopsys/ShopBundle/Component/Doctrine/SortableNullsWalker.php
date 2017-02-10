@@ -8,7 +8,8 @@ use Doctrine\ORM\Query\SqlWalker;
  * Allows ORDER BY using NULLS FIRST | LAST
  * Inspired by https://github.com/beberlei/DoctrineExtensions/blob/master/lib/DoctrineExtensions/Query/SortableNullsWalker.php
  */
-class SortableNullsWalker extends SqlWalker {
+class SortableNullsWalker extends SqlWalker
+{
 
     const NULLS_FIRST = 'NULLS FIRST';
     const NULLS_LAST = 'NULLS LAST';

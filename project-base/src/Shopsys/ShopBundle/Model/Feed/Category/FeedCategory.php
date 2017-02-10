@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData;
  * @ORM\Table(name="feed_categories")
  * @ORM\Entity
  */
-class FeedCategory {
+class FeedCategory
+{
 
     /**
      * @var int

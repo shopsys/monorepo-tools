@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="payments")
  * @ORM\Entity
  */
-class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface {
+class Payment extends AbstractTranslatableEntity implements OrderableEntityInterface
+{
 
     /**
      * @var int

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 
-class ProductAvailabilityFilter implements AdvancedSearchFilterInterface{
+class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade

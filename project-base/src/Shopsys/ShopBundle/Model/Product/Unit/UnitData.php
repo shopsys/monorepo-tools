@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Unit;
 
-class UnitData {
+class UnitData
+{
 
     /**
      * @var string[]

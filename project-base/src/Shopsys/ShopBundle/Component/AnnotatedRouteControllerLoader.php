@@ -7,7 +7,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Routing\AnnotatedRouteControllerLoader as
 /**
  * AnnotatedRouteControllerLoader
  */
-class AnnotatedRouteControllerLoader extends SensioAnnotatedRouteControllerLoader {
+class AnnotatedRouteControllerLoader extends SensioAnnotatedRouteControllerLoader
+{
     /**
      * Makes the default route name shorter by removing some obvious parts.
      *

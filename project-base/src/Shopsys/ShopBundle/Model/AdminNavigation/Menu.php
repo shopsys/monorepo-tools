@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdminNavigation;
 
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 
-class Menu {
+class Menu
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Controller\Front;
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandFacade;
 
-class BrandController extends FrontBaseController {
+class BrandController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade

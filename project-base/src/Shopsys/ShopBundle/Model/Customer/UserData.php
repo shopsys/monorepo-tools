@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 
-class UserData {
+class UserData
+{
 
     /**
      * @var string|null

@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 
-class FragmentHandlerTest extends PHPUnit_Framework_TestCase {
+class FragmentHandlerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testRenderNotIgnoreErrorsWithoutDebug() {
         $rendererMock = $this->getMock(FragmentRendererInterface::class);

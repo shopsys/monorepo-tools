@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
  * @ORM\Table(name="articles")
  * @ORM\Entity
  */
-class Article implements OrderableEntityInterface {
+class Article implements OrderableEntityInterface
+{
 
     /**
      * @var int

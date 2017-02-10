@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryDomain;
 
-class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class CategoryRootDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     const ROOT = 'category_root';
 

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Flag\Flag;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class FlagFilterChoiceRepository {
+class FlagFilterChoiceRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

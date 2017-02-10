@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Doctrine\ORM\EntityManager;
 
-class ProductSellingDeniedRecalculator {
+class ProductSellingDeniedRecalculator
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

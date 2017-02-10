@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Payment\PaymentData;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 
-class OrderTest extends PHPUnit_Framework_TestCase {
+class OrderTest extends PHPUnit_Framework_TestCase
+{
 
     const DOMAIN_ID = 1;
 

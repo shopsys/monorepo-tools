@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
-class GridOrderingServiceTest extends PHPUnit_Framework_TestCase {
+class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testSetPositionNull() {
         $gridOrderingService = new GridOrderingService();

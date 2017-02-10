@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Cookies;
 
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 
-class CookiesSettingFormTypeFactory {
+class CookiesSettingFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade

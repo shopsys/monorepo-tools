@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Slider;
 
 use Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType;
 
-class SliderItemFormTypeFactory {
+class SliderItemFormTypeFactory
+{
 
     /**
      * @param bool $scenarioCreate

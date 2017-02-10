@@ -14,7 +14,8 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PricingGroupController extends AdminBaseController {
+class PricingGroupController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade

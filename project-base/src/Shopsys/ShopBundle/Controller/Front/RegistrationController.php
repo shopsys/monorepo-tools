@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Security\LoginService;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
-class RegistrationController extends FrontBaseController {
+class RegistrationController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade

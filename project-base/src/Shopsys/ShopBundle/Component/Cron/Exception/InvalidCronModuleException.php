@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Cron\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Cron\Exception\CronException;
 
-class InvalidCronModuleException extends Exception implements CronException {
+class InvalidCronModuleException extends Exception implements CronException
+{
 
     /**
      * @param string $moduleId

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Error\ErrorPagesFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class ErrorPageCronModule implements CronModuleInterface {
+class ErrorPageCronModule implements CronModuleInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Error\ErrorPagesFacade

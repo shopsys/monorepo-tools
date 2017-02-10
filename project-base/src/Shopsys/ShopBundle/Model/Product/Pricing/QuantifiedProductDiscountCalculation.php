@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
-class QuantifiedProductDiscountCalculation {
+class QuantifiedProductDiscountCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PriceCalculation

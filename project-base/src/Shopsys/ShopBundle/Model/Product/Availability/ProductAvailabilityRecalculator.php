@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculati
 use Shopsys\ShopBundle\Model\Product\Product;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ProductAvailabilityRecalculator {
+class ProductAvailabilityRecalculator
+{
 
     const BATCH_SIZE = 100;
 

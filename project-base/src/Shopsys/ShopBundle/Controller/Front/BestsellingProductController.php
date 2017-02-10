@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductFacade;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 
-class BestsellingProductController extends FrontBaseController {
+class BestsellingProductController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade

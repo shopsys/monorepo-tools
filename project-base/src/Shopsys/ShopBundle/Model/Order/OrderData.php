@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Order\Order;
 /**
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  */
-class OrderData {
+class OrderData
+{
 
     const NEW_ITEM_PREFIX = 'new_';
 

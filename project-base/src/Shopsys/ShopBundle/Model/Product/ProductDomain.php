@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="product_domains")
  * @ORM\Entity
  */
-class ProductDomain {
+class ProductDomain
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

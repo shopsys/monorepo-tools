@@ -6,7 +6,8 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\Translation\Loader\PoFileLoader as BasePoFileLoader;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class PoFileLoader extends BasePoFileLoader {
+class PoFileLoader extends BasePoFileLoader
+{
 
     /**
      * @param string $resource

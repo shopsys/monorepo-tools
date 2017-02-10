@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component;
 
-class Utils {
+class Utils
+{
 
     /**
      * @param mixed $testVariable

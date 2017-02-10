@@ -7,7 +7,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 use Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess;
 
-class FilemanagerAccessTest extends PHPUnit_Framework_TestCase {
+class FilemanagerAccessTest extends PHPUnit_Framework_TestCase
+{
 
     public function isPathAccessibleProvider() {
         return [

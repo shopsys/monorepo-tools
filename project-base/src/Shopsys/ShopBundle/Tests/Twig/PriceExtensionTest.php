@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\PriceExtension;
 
-class PriceExtensionTest extends FunctionalTestCase {
+class PriceExtensionTest extends FunctionalTestCase
+{
 
     const NBSP = "\xc2\xa0";
 

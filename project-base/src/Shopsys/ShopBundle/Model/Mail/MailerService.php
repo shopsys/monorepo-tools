@@ -7,7 +7,8 @@ use Swift_Attachment;
 use Swift_Mailer;
 use Swift_Message;
 
-class MailerService {
+class MailerService
+{
 
     /**
      * @var \Swift_Mailer

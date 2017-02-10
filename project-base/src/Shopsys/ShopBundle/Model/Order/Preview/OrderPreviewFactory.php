@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
-class OrderPreviewFactory {
+class OrderPreviewFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Preview\OrderPreviewCalculation

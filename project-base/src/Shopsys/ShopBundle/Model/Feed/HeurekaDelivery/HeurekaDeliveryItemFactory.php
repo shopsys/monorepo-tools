@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedItemFactoryInterface;
 use Shopsys\ShopBundle\Model\Feed\HeurekaDelivery\HeurekaDeliveryItem;
 
-class HeurekaDeliveryItemFactory implements FeedItemFactoryInterface {
+class HeurekaDeliveryItemFactory implements FeedItemFactoryInterface
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products

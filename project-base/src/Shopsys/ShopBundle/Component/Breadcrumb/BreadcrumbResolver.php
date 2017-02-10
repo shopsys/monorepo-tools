@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Breadcrumb;
 
-class BreadcrumbResolver {
+class BreadcrumbResolver
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface[routeName]

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
 use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase {
+class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
+{
 
     public function testLoadFromArrayDuplicateEntityName() {
         $inputConfig = [

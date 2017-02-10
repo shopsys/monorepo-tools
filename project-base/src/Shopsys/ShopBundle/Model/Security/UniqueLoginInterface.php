@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Security;
 
-interface UniqueLoginInterface {
+interface UniqueLoginInterface
+{
 
     /**
      * @return string

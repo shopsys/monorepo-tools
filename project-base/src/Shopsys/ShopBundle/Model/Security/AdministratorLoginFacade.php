@@ -14,7 +14,8 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class AdministratorLoginFacade {
+class AdministratorLoginFacade
+{
 
     const MULTIDOMAIN_LOGIN_TOKEN_LENGTH = 50;
     const MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS = 10;

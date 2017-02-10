@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductFilterCountRepository {
+class ProductFilterCountRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

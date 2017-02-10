@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class BestsellingProductController extends AdminBaseController {
+class BestsellingProductController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Symfony\Component\HttpFoundation\Request;
 
-class CategoryController extends FrontBaseController {
+class CategoryController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade

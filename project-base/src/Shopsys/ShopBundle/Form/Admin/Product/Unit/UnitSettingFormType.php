@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class UnitSettingFormType extends AbstractType {
+class UnitSettingFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Unit\Unit[]

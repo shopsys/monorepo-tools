@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Form\Admin\AdvancedSearch\AdvancedSearchOrderFilterTransl
 use Shopsys\ShopBundle\Model\AdvancedSearch\OrderAdvancedSearchConfig;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class OrderAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory {
+class OrderAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory
+{
 
     public function __construct(
         OrderAdvancedSearchConfig $orderAdvancedSearchConfig,

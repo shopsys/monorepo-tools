@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\AdminNavigation\Menu;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 
-class MenuTest extends PHPUnit_Framework_TestCase {
+class MenuTest extends PHPUnit_Framework_TestCase
+{
 
     public function testIsRouteMatchingDescendantOfSettings() {
         $itemChild = new MenuItem('label 1', MenuItem::TYPE_REGULAR, 'route 1', null, true, false, null, false, []);

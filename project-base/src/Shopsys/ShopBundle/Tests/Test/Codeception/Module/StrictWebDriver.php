@@ -8,7 +8,8 @@ use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
 use Symfony\Component\DomCrawler\Crawler;
 
-class StrictWebDriver extends WebDriver {
+class StrictWebDriver extends WebDriver
+{
 
     const WAIT_AFTER_CLICK_MICROSECONDS = 50000;
 

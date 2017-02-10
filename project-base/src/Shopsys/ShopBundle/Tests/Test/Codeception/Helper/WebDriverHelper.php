@@ -6,7 +6,8 @@ use Codeception\Module;
 use Codeception\Util\Uri;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver;
 
-class WebDriverHelper extends Module {
+class WebDriverHelper extends Module
+{
 
     /**
      * @return \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver

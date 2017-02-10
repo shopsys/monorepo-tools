@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Translation;
 
-class TransMethodSpecification {
+class TransMethodSpecification
+{
 
     /**
      * @var string

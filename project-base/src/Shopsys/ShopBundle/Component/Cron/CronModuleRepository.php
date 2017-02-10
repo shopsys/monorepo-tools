@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Cron;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Cron\CronModule;
 
-class CronModuleRepository {
+class CronModuleRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -12,7 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class RecalculationsCommand extends ContainerAwareCommand {
+class RecalculationsCommand extends ContainerAwareCommand
+{
 
     protected function configure() {
         $this

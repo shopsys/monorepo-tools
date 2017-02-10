@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransform
 use Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
-class TopCategoriesFormTypeFactory {
+class TopCategoriesFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer

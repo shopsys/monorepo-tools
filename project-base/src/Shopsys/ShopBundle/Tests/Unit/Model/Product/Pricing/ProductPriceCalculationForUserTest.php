@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase {
+class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCalculatePriceByUserAndDomainIdWithUser() {
         $product = $this->getMock(Product::class, [], [], '', false);

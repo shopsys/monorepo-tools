@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Heureka\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\Heureka\Exception\HeurekaException;
 
-class LocaleNotSupportedException extends Exception implements HeurekaException {
+class LocaleNotSupportedException extends Exception implements HeurekaException
+{
 
     /**
      * @param string $message

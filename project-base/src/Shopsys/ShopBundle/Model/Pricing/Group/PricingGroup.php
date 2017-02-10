@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="pricing_groups")
  * @ORM\Entity
  */
-class PricingGroup {
+class PricingGroup
+{
 
     /**
      * @var int

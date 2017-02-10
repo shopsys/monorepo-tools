@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Exception;
 
-interface PricingException {
+interface PricingException
+{
 
 }

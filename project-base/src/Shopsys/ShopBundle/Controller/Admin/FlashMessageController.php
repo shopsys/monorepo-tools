@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 
-class FlashMessageController extends AdminBaseController {
+class FlashMessageController extends AdminBaseController
+{
 
     public function indexAction() {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.admin');

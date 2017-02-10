@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class SortableNullsWalkerTest extends FunctionalTestCase {
+class SortableNullsWalkerTest extends FunctionalTestCase
+{
 
     public function testWalkOrderByItemAsc() {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryBreadcrumbGenerator;
 use Shopsys\ShopBundle\Model\Product\Brand\BrandBreadcrumbGenerator;
 use Shopsys\ShopBundle\Model\Product\ProductBreadcrumbGenerator;
 
-class FrontBreadcrumbResolverFactory {
+class FrontBreadcrumbResolverFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Breadcrumb\FrontBreadcrumbGenerator

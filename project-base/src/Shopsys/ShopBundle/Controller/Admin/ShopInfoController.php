@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory;
 use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class ShopInfoController extends AdminBaseController {
+class ShopInfoController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormTypeFactory

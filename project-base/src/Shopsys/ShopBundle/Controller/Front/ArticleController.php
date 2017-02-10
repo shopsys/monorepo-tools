@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 use Shopsys\ShopBundle\Model\Article\ArticleFacade;
 use Shopsys\ShopBundle\Model\Article\ArticlePlacementList;
 
-class ArticleController extends FrontBaseController {
+class ArticleController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Article\ArticleFacade

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\FileUpload;
 
-interface EntityFileUploadInterface {
+interface EntityFileUploadInterface
+{
 
     /**
      * @return \Shopsys\ShopBundle\Component\FileUpload\FileForUpload[]

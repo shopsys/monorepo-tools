@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
 use stdClass;
 
-class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase {
+class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testPersistReferenceWrongEntity() {
         $emMock = $this->getMockBuilder(EntityManager::class)

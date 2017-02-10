@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\ConstantList\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\ConstantList\Exception\ConstantListException;
 
-class UndefinedTranslationException extends Exception implements ConstantListException {
+class UndefinedTranslationException extends Exception implements ConstantListException
+{
 
     /**
      * @param string $constant

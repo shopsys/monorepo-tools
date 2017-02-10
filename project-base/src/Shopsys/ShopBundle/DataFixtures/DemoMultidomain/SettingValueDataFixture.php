@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\DataFixtures\DemoMultidomain\PricingGroupDataFixture;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

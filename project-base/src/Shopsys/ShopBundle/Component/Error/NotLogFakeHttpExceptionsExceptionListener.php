@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Error;
 
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
 
-class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener {
+class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener
+{
 
     /**
      * @inheritDoc

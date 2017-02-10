@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData;
 use Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade;
 
-class CurrencyDataFixture extends AbstractReferenceFixture {
+class CurrencyDataFixture extends AbstractReferenceFixture
+{
 
     const CURRENCY_CZK = 'currency_czk';
     const CURRENCY_EUR = 'currency_eur';

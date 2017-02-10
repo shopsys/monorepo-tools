@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase {
+class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
+{
 
     public function testIsIndependentlyVisible() {
         $em = $this->getEntityManager();

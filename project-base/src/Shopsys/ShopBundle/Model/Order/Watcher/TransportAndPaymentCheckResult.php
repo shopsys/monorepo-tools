@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Watcher;
 
-class TransportAndPaymentCheckResult {
+class TransportAndPaymentCheckResult
+{
 
     /**
      * @var bool

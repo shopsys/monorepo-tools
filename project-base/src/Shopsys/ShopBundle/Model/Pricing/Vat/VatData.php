@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Pricing\Vat;
 
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
-class VatData {
+class VatData
+{
 
     /**
      * @var string|null

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Customer\CustomerIdentifierFactory;
 use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class CartFacade {
+class CartFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

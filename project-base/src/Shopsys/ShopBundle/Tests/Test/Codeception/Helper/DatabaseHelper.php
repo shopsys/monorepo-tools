@@ -7,7 +7,8 @@ use Doctrine\DBAL\Connection;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db;
 
-class DatabaseHelper extends Module {
+class DatabaseHelper extends Module
+{
 
     // @codingStandardsIgnoreStart
     /**

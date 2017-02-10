@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 use Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter;
 
-class PerformanceResultsCsvExporter {
+class PerformanceResultsCsvExporter
+{
 
     /**
      * @var \Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter

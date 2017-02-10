@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Filter\PriceRange;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class PriceRangeRepository {
+class PriceRangeRepository
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\ProductRepository

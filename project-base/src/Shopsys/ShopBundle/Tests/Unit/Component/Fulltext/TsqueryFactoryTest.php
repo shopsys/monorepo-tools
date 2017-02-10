@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Fulltext;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Fulltext\TsqueryFactory;
 
-class TsqueryFactoryTest extends PHPUnit_Framework_TestCase {
+class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @dataProvider getIsValidSearchTextData

@@ -30,7 +30,8 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\CurrentPromoCodeFacade;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
-class OrderFacade {
+class OrderFacade
+{
 
     const VARIABLE_NUMBER = '{number}';
     const VARIABLE_ORDER_DETAIL_URL = '{order_detail_url}';

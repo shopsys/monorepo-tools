@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException;
 use Shopsys\ShopBundle\Component\Setting\SettingValue;
 use stdClass;
 
-class SettingValueTest extends PHPUnit_Framework_TestCase {
+class SettingValueTest extends PHPUnit_Framework_TestCase
+{
 
     public function editProvider() {
         return [

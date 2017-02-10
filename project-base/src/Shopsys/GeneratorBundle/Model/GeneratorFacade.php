@@ -6,7 +6,8 @@ use Shopsys\GeneratorBundle\Model\GeneratorCollectionFactory;
 use Shopsys\GeneratorBundle\Model\GeneratorsFormFactory;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class GeneratorFacade {
+class GeneratorFacade
+{
 
     /**
      * @var \Shopsys\GeneratorBundle\Model\GeneratorCollection

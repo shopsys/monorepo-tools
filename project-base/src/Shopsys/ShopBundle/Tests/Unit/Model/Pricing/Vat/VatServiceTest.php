@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 
-class VatServiceTest extends PHPUnit_Framework_TestCase {
+class VatServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreate() {
         $vatService = new VatService();

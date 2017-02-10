@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Script\Script;
 use Shopsys\ShopBundle\Model\Script\ScriptData;
 use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 
-class ScriptDataFixture extends AbstractReferenceFixture {
+class ScriptDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

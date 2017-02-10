@@ -6,7 +6,8 @@ use JMS\TranslationBundle\Annotation\Ignore;
 use Shopsys\ShopBundle\Component\Translation\Translator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as BaseController;
 
-class Controller extends BaseController {
+class Controller extends BaseController
+{
 
     public function indexAction() {
         $translator = $this->get(Translator::class);

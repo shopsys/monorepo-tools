@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
-class PricingGroupSettingFacade {
+class PricingGroupSettingFacade
+{
 
     public function __construct(
         PricingGroupRepository $pricingGroupRepository,

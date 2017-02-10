@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Advert;
 
 use Doctrine\ORM\EntityManager;
 
-class AdvertRepository {
+class AdvertRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

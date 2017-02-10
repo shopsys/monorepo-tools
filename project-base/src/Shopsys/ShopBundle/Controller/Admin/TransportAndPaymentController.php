@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\TransportAndPayment\FreeTransportAndPaymentPri
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\HttpFoundation\Request;
 
-class TransportAndPaymentController extends AdminBaseController {
+class TransportAndPaymentController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
 /**
  * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
  */
-class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
+class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
+{
 
     public function getBreadcrumbItems($routeName, array $routeParameters = []) {
         switch ($routeName) {

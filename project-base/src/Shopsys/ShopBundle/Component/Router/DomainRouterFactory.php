@@ -10,7 +10,8 @@ use Symfony\Component\Config\Loader\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
-class DomainRouterFactory {
+class DomainRouterFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Router\LocalizedRouterFactory

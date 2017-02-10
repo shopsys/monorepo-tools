@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Domain;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class DomainAwareSecurityHeadersSetter {
+class DomainAwareSecurityHeadersSetter
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

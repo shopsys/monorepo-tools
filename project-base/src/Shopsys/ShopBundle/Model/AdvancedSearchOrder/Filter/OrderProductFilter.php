@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 use Shopsys\ShopBundle\Model\Order\Item\OrderProduct;
 
-class OrderProductFilter implements AdvancedSearchFilterInterface {
+class OrderProductFilter implements AdvancedSearchFilterInterface
+{
 
     /**
      * {@inheritdoc}

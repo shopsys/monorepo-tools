@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusRepository;
 
-class OrderMailFacade {
+class OrderMailFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService

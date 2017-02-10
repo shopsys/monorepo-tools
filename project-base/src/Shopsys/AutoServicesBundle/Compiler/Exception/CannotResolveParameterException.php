@@ -5,7 +5,8 @@ namespace Shopsys\AutoServicesBundle\Compiler\Exception;
 use Exception;
 use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
-class CannotResolveParameterException extends Exception implements CompilerException {
+class CannotResolveParameterException extends Exception implements CompilerException
+{
 
     /**
      * @param string $message

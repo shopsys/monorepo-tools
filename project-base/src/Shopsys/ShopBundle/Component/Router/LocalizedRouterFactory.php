@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Router;
 
-class LocalizedRouterFactory {
+class LocalizedRouterFactory
+{
 
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader

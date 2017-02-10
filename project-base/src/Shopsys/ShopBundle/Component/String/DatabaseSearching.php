@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\String;
 
-class DatabaseSearching {
+class DatabaseSearching
+{
 
     /**
      * @param string $string

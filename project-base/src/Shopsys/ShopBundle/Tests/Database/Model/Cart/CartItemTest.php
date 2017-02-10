@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class CartItemTest extends DatabaseTestCase {
+class CartItemTest extends DatabaseTestCase
+{
 
     public function testIsSimilarItemAs() {
         $em = $this->getEntityManager();

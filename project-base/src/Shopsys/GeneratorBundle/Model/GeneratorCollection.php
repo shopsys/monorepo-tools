@@ -7,7 +7,8 @@ use Shopsys\GeneratorBundle\Model\GeneratorInterface;
 use Twig_Environment;
 use Twig_Loader_Filesystem;
 
-class GeneratorCollection {
+class GeneratorCollection
+{
 
     /**
      * @var \Shopsys\GeneratorBundle\Model\GeneratorInterface[]

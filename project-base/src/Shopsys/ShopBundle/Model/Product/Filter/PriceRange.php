@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Filter;
 
-class PriceRange {
+class PriceRange
+{
 
     /**
      * @var string

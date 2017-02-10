@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Form;
 
-class UrlListData {
+class UrlListData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]

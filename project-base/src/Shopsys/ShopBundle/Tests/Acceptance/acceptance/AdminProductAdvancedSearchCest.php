@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\ProductAdvancedSearchPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class AdminProductAdvancedSearchCest {
+class AdminProductAdvancedSearchCest
+{
 
     public function testSearchByCatnum(
         AcceptanceTester $me,

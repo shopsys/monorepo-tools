@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DomainFacade {
+class DomainFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

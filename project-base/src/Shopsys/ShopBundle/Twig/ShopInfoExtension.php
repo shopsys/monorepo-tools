@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
-class ShopInfoExtension extends \Twig_Extension {
+class ShopInfoExtension extends \Twig_Extension
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

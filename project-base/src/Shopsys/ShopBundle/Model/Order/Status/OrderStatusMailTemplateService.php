@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
 use Shopsys\ShopBundle\Model\Order\Mail\OrderMailService;
 
-class OrderStatusMailTemplateService {
+class OrderStatusMailTemplateService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
-class OrderEditResult {
+class OrderEditResult
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Item\OrderItem[]

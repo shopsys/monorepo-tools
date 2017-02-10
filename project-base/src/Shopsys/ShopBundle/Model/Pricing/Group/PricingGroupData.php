@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing\Group;
 
-class PricingGroupData {
+class PricingGroupData
+{
 
     /**
      * @var string|null

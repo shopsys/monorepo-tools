@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfigLoader;
 use Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 use Symfony\Component\Filesystem\Filesystem;
 
-class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase {
+class UploadedFileConfigLoaderTest extends PHPUnit_Framework_TestCase
+{
 
     public function testLoadFromYaml() {
         $configurationFilapath = __DIR__ . '/test_config_uploaded_files.yml';

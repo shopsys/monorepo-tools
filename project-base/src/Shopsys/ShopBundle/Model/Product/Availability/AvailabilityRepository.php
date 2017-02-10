@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 use Shopsys\ShopBundle\Model\Product\Availability\Availability;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class AvailabilityRepository {
+class AvailabilityRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

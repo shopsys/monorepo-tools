@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Tests\Performance\JmeterCsvReporter;
 use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceResultsCsvExporter;
 use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
-class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase {
+class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase
+{
 
     public function testExportJmeterCsvReportWritesExpectedHeader() {
         $outputFilename = $this->getTemporaryFilename();

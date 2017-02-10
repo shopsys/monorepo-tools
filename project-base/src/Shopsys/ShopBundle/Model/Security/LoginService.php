@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-class LoginService {
+class LoginService
+{
 
     /**
      * @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage

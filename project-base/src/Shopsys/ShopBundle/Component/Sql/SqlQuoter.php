@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Sql;
 
 use Doctrine\ORM\EntityManager;
 
-class SqlQuoter {
+class SqlQuoter
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

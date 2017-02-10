@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductRepository;
 
-class TopProductFacade {
+class TopProductFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

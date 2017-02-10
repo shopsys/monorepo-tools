@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
  * @ORM\Table(name="transport_domains")
  * @ORM\Entity
  */
-class TransportDomain {
+class TransportDomain
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport

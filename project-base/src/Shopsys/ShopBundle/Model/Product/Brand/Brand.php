@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Brand\BrandData;
  * @ORM\Table(name="brands")
  * @ORM\Entity
  */
-class Brand extends AbstractTranslatableEntity {
+class Brand extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

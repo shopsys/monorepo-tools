@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class YesNoType extends AbstractType {
+class YesNoType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer

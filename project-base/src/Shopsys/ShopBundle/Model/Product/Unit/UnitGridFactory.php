@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 
-class UnitGridFactory implements GridFactoryInterface {
+class UnitGridFactory implements GridFactoryInterface
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

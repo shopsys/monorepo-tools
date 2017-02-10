@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Mail\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\Mail\Exception\MailException;
 
-class MailTemplateNotFoundException extends Exception implements MailException {
+class MailTemplateNotFoundException extends Exception implements MailException
+{
 
     /**
      * @param string $message

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\TermsAndConditions\TermsAndConditionsSettingFo
 use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class TermsAndConditionsController extends AdminBaseController {
+class TermsAndConditionsController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\Listing\OrderListAdminFacade;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdvancedSearchOrderFacade {
+class AdvancedSearchOrderFacade
+{
 
     const RULES_FORM_NAME = 'as';
 

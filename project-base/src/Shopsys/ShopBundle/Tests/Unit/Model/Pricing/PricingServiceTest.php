@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\PricingService;
 
-class PricingServiceTest extends PHPUnit_Framework_TestCase {
+class PricingServiceTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @dataProvider getMinimumPriceProvider

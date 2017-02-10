@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Advert\Exception;
 
-interface AdvertException {
+interface AdvertException
+{
 
 }

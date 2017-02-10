@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 
-class CategoryDetailFactory {
+class CategoryDetailFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository

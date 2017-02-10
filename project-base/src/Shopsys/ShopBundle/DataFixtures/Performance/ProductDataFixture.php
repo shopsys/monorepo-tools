@@ -22,7 +22,8 @@ use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class ProductDataFixture {
+class ProductDataFixture
+{
 
     const PRODUCTS = 40000;
     const BATCH_SIZE = 1000;

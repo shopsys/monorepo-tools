@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class FlagInlineEdit extends AbstractGridInlineEdit {
+class FlagInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade

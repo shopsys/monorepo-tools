@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Component\Router\Security\RouteCsrfProtector;
 use Symfony\Component\Routing\Router;
 
-class ActionColumn {
+class ActionColumn
+{
 
     const TYPE_DELETE = 'delete';
     const TYPE_EDIT = 'edit';

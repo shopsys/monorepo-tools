@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\CountryDataFixture;
 use Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader;
 use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 
-class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

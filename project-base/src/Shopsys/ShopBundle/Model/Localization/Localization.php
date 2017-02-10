@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Localization;
 
 use Shopsys\ShopBundle\Component\Domain\Domain;
 
-class Localization {
+class Localization
+{
 
     const DEFAULT_COLLATION = 'en_US';
 

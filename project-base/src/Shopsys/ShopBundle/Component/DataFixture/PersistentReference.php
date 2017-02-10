@@ -10,7 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="persistent_references")
  * @ORM\Entity
  */
-class PersistentReference {
+class PersistentReference
+{
 
     /**
      * @var string

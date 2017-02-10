@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Form\FriendlyUrlType;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueSlugsOnDomainsValidator extends ConstraintValidator {
+class UniqueSlugsOnDomainsValidator extends ConstraintValidator
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

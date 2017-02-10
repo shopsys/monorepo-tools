@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\DataFixtures\Base\AdministratorDataFixture;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class AdministratorRepositoryTest extends DatabaseTestCase {
+class AdministratorRepositoryTest extends DatabaseTestCase
+{
 
     public function testGetByValidMultidomainLogin() {
         $validMultidomainLoginToken = 'validMultidomainLoginToken';

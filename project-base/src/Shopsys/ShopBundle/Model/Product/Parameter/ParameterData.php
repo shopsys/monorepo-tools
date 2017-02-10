@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
 use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 
-class ParameterData {
+class ParameterData
+{
 
     /**
      * @var string[]

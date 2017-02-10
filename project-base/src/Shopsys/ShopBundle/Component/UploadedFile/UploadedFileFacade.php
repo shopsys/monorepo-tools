@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileRepository;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileService;
 use Symfony\Component\Filesystem\Filesystem;
 
-class UploadedFileFacade {
+class UploadedFileFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

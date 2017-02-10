@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Cron\Config;
 use DateTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 
-class CronConfig {
+class CronConfig
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Cron\CronTimeResolver

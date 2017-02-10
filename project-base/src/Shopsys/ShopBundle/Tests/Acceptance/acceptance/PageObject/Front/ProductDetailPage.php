@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 use Facebook\WebDriver\WebDriverBy;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class ProductDetailPage extends AbstractPage {
+class ProductDetailPage extends AbstractPage
+{
 
     const PRODUCT_DETAIL_QUANTITY_INPUT = '.js-product-detail-main-add-to-cart-wrapper input[name="add_product_form[quantity]"]';
     const PRODUCT_DETAIL_MAIN_WRAPPER = '.js-product-detail-main-add-to-cart-wrapper';

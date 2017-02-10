@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Model\Module\ModuleFacade;
 use Shopsys\ShopBundle\Model\Module\ModuleList;
 
-class EnabledModuleDataFixture extends AbstractReferenceFixture {
+class EnabledModuleDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

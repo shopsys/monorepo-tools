@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Article;
 
 use Doctrine\ORM\EntityManager;
 
-class ArticleRepository {
+class ArticleRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

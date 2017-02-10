@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProductMassActionFormType extends AbstractType {
+class ProductMassActionFormType extends AbstractType
+{
 
     /**
      * @return string

@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 /**
  * @ORM\Entity
  */
-class OrderProduct extends OrderItem {
+class OrderProduct extends OrderItem
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product|null

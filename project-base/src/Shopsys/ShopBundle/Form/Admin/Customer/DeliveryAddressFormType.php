@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class DeliveryAddressFormType extends AbstractType {
+class DeliveryAddressFormType extends AbstractType
+{
 
     const VALIDATION_GROUP_DIFFERENT_DELIVERY_ADDRESS = 'differentDeliveryAddress';
 

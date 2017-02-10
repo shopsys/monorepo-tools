@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Admin\LoginPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class LoginAsCustomerCest {
+class LoginAsCustomerCest
+{
 
     public function testLoginAsCustomer(AcceptanceTester $me, LoginPage $loginPage) {
         $me->wantTo('login as a customer from admin');

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit;
 
-class AdministratorGridService {
+class AdministratorGridService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator

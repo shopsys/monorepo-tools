@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Controller\Front;
 
 use Shopsys\ShopBundle\Component\Controller\FrontBaseController;
 
-class FlashMessageController extends FrontBaseController {
+class FlashMessageController extends FrontBaseController
+{
 
     public function indexAction() {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');

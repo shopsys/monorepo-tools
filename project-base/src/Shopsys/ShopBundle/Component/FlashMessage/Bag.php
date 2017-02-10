@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\FlashMessage;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class Bag {
+class Bag
+{
 
     const MAIN_KEY = 'messages';
 

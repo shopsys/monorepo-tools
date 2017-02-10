@@ -29,7 +29,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class OrderController extends FrontBaseController {
+class OrderController extends FrontBaseController
+{
 
     const SESSION_CREATED_ORDER = 'created_order_id';
 

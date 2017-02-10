@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleExecutorFactory;
 use Shopsys\ShopBundle\Component\Cron\CronModuleFacade;
 use Symfony\Bridge\Monolog\Logger;
 
-class CronFacade {
+class CronFacade
+{
 
     const TIMEOUT_SECONDS = 4 * 60;
 

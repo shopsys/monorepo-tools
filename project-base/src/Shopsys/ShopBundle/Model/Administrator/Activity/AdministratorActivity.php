@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Administrator\Administrator;
  * @ORM\Table(name="administrator_activities")
  * @ORM\Entity
  */
-class AdministratorActivity {
+class AdministratorActivity
+{
 
     /**
      * @var int

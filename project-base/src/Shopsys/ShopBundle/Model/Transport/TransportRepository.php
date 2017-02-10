@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Transport\Transport;
 
-class TransportRepository {
+class TransportRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

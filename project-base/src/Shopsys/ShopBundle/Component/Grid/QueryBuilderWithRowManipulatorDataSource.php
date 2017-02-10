@@ -6,7 +6,8 @@ use Closure;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
-class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource {
+class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
+{
 
     /**
      * @var callable

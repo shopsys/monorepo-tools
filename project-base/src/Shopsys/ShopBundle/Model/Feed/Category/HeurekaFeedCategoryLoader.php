@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Category;
 use Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData;
 use SimpleXMLElement;
 
-class HeurekaFeedCategoryLoader {
+class HeurekaFeedCategoryLoader
+{
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[]

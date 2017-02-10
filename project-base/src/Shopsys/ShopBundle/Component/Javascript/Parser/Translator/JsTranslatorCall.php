@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Javascript\Parser\Translator;
 use PLUG\JavaScript\JNodes\JNodeBase;
 use PLUG\JavaScript\JNodes\nonterminal\JCallExprNode;
 
-class JsTranslatorCall {
+class JsTranslatorCall
+{
 
     /**
      * @var \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode

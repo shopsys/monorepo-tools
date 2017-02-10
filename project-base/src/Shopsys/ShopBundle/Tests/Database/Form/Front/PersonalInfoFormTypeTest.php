@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Form\Front\Order\PersonalInfoFormType;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class PersonalInfoFormTypeTest extends DatabaseTestCase {
+class PersonalInfoFormTypeTest extends DatabaseTestCase
+{
 
     /**
      * @return array

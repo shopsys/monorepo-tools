@@ -20,7 +20,8 @@ use Shopsys\ShopBundle\Model\TermsAndConditions\TermsAndConditionsFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class ArticleController extends AdminBaseController {
+class ArticleController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdminNavigation\Breadcrumb

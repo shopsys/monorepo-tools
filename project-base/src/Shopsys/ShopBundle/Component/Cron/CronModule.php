@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="cron_modules")
  * @ORM\Entity
  */
-class CronModule {
+class CronModule
+{
 
     /**
      * @var string

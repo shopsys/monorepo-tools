@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductServic
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository;
 use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 
-class BestsellingProductFacade {
+class BestsellingProductFacade
+{
 
     const MAX_RESULTS = 10;
     const ORDERS_CREATED_AT_LIMIT = '-1 month';

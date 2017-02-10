@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Customer\User;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
-class CustomerFormTypeFactory {
+class CustomerFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain

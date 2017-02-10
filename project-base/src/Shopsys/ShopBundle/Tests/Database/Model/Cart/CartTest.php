@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class CartTest extends DatabaseTestCase {
+class CartTest extends DatabaseTestCase
+{
 
     public function testRemoveItem() {
         $em = $this->getEntityManager();

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Listing;
 
-class ProductListOrderingConfig {
+class ProductListOrderingConfig
+{
 
     /**
      * @var string[orderingMode]

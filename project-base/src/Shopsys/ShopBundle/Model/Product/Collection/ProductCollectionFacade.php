@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductCollectionFacade {
+class ProductCollectionFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Collection\ProductCollectionService

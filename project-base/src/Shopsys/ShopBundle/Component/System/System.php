@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\System;
 
-class System {
+class System
+{
 
     /**
      * @return bool

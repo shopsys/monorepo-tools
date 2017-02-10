@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\DataFixtures\Base\VatDataFixture;
 use Shopsys\ShopBundle\Model\Transport\TransportEditData;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
-class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class TransportDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     const TRANSPORT_CZECH_POST = 'transport_cp';
     const TRANSPORT_PPL = 'transport_ppl';

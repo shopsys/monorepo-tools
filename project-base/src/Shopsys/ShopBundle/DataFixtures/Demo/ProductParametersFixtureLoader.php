@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade;
 use Shopsys\ShopBundle\Model\Product\Parameter\ParameterValueData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 
-class ProductParametersFixtureLoader {
+class ProductParametersFixtureLoader
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade

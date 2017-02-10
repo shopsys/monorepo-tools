@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
-class OrderTotalPrice {
+class OrderTotalPrice
+{
 
     /**
      * @var string

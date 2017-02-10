@@ -10,7 +10,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * See {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
  */
-class Configuration implements ConfigurationInterface {
+class Configuration implements ConfigurationInterface
+{
 
     /**
      * {@inheritDoc}

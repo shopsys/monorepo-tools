@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\Product\ProductEditFormType;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\DomCrawler\Form;
 
-class NewProductTest extends FunctionalTestCase {
+class NewProductTest extends FunctionalTestCase
+{
 
     public function createOrEditProductProvider() {
 

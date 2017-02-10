@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Payment\Exception;
 
-interface PaymentException {
+interface PaymentException
+{
 
 }

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Payment\Detail;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation;
 
-class PaymentDetailFactory {
+class PaymentDetailFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation

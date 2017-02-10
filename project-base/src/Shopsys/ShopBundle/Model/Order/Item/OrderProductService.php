@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order\Item;
 
-class OrderProductService {
+class OrderProductService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts

@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculator;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class PricingGroupFacadeTest extends DatabaseTestCase {
+class PricingGroupFacadeTest extends DatabaseTestCase
+{
 
     public function testCreate() {
         $em = $this->getEntityManager();

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class DomainRouterTest extends PHPUnit_Framework_TestCase {
+class DomainRouterTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetRouter() {
         $context = new RequestContext();

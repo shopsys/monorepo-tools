@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\Availability;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData;
 use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 
-class AvailabilityServiceTest extends PHPUnit_Framework_TestCase {
+class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreate() {
         $availabilityService = new AvailabilityService();

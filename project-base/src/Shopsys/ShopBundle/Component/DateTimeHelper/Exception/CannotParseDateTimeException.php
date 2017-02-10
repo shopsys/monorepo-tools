@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\DateTimeHelper\Exception;
 
 use Exception;
 
-class CannotParseDateTimeException extends Exception {
+class CannotParseDateTimeException extends Exception
+{
 
     /**
      * @param string $locale

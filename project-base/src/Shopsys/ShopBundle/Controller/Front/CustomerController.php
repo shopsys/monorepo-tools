@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Security\LoginAsUserFacade;
 use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerController extends FrontBaseController {
+class CustomerController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CustomerFacade

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class DomainsConfigDefinition implements ConfigurationInterface {
+class DomainsConfigDefinition implements ConfigurationInterface
+{
 
     const CONFIG_DOMAINS = 'domains';
     const CONFIG_ID = 'id';

@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class DomainFormType extends AbstractType {
+class DomainFormType extends AbstractType
+{
 
     const DOMAIN_ICON = 'icon';
 

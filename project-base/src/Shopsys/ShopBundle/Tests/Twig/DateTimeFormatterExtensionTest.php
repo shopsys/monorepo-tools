@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 
-class DateTimeFormatterExtensionTest extends FunctionalTestCase {
+class DateTimeFormatterExtensionTest extends FunctionalTestCase
+{
 
     public function formatDateDataProvider() {
         return [

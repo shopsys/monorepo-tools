@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductInputPriceService {
+class ProductInputPriceService
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\InputPriceCalculation

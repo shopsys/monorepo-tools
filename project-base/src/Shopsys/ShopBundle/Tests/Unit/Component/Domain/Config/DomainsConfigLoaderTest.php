@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class DomainsConfigLoaderTest extends FunctionalTestCase {
+class DomainsConfigLoaderTest extends FunctionalTestCase
+{
 
     public function testLoadDomainConfigsFromYaml() {
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');

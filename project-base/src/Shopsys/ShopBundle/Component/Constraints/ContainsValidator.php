@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class ContainsValidator extends ConstraintValidator {
+class ContainsValidator extends ConstraintValidator
+{
 
     /**
      * @param string $value

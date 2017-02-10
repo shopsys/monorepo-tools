@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class JavascriptExtension extends Twig_Extension {
+class JavascriptExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService

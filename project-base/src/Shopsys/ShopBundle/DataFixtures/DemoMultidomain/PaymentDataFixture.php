@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\PaymentDataFixture as DemoPaymentDataFi
 use Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 
-class PaymentDataFixture extends AbstractReferenceFixture {
+class PaymentDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

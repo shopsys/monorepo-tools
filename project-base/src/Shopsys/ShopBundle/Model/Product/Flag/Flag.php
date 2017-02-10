@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation;
  * @ORM\Table(name="flags")
  * @ORM\Entity
  */
-class Flag extends AbstractTranslatableEntity {
+class Flag extends AbstractTranslatableEntity
+{
 
     /**
      * @var int

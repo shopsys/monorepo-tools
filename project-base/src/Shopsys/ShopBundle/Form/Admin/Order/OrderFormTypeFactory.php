@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Shopsys\ShopBundle\Model\Payment\PaymentFacade;
 use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
-class OrderFormTypeFactory {
+class OrderFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade

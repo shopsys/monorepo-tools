@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
-class CartFactory {
+class CartFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Cart\Cart[]

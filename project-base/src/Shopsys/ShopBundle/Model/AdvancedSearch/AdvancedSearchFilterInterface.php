@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Doctrine\ORM\QueryBuilder;
 
-interface AdvancedSearchFilterInterface {
+interface AdvancedSearchFilterInterface
+{
 
     const OPERATOR_CONTAINS = 'contains';
     const OPERATOR_NOT_CONTAINS = 'notContains';

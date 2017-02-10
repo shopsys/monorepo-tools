@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Paginator;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
-class PaginationResultTest extends PHPUnit_Framework_TestCase {
+class PaginationResultTest extends PHPUnit_Framework_TestCase
+{
 
     public function getTestPageCountData() {
         return [

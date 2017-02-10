@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Security\UniqueLoginInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
-class AdministratorUserProvider implements UserProviderInterface {
+class AdministratorUserProvider implements UserProviderInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Administrator\AdministratorRepository

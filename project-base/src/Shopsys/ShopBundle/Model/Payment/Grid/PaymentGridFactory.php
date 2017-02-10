@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetailFactory;
 use Shopsys\ShopBundle\Model\Payment\Payment;
 use Shopsys\ShopBundle\Model\Payment\PaymentRepository;
 
-class PaymentGridFactory implements GridFactoryInterface {
+class PaymentGridFactory implements GridFactoryInterface
+{
 
     const CURRENCY_ID_FOR_LIST = 1;
 

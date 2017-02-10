@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Mail;
 
-interface MessageFactoryInterface {
+interface MessageFactoryInterface
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $template

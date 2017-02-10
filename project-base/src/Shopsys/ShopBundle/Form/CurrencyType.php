@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class CurrencyType extends AbstractType {
+class CurrencyType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository

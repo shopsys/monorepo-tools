@@ -6,7 +6,8 @@ use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class ProductTest extends PHPUnit_Framework_TestCase {
+class ProductTest extends PHPUnit_Framework_TestCase
+{
 
     public function testNoVariant() {
         $productData = new ProductData();

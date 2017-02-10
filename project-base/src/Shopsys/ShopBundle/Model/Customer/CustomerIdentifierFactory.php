@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class CustomerIdentifierFactory {
+class CustomerIdentifierFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer

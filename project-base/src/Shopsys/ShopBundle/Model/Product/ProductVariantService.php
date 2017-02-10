@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product;
 
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductVariantService {
+class ProductVariantService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product

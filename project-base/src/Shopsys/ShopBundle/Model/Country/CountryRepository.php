@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Country;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Country\Country;
 
-class CountryRepository {
+class CountryRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

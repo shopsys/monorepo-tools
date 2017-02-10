@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Model\Localization;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Model\Localization\IntlCurrencyRepository;
 
-class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase {
+class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @dataProvider getSupportedCurrencyCodes

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Grid\Ordering\GridOrderingService;
 
-class GridOrderingFacade {
+class GridOrderingFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Form\Admin\CustomerCommunication\CustomerCommunicationFor
 use Shopsys\ShopBundle\Model\Order\OrderFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class CustomerCommunicationController extends AdminBaseController {
+class CustomerCommunicationController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain

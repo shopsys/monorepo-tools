@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Transport;
 
 use Shopsys\ShopBundle\Model\Payment\IndependentPaymentVisibilityCalculation;
 
-class TransportVisibilityCalculation {
+class TransportVisibilityCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\IndependentTransportVisibilityCalculation

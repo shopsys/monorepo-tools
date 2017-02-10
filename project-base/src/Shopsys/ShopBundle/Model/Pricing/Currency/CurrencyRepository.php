@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Pricing\Currency;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 
-class CurrencyRepository {
+class CurrencyRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

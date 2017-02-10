@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Component\Image\ImageService;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageServiceTest extends PHPUnit_Framework_TestCase {
+class ImageServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetUploadedImagesException() {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => false]);

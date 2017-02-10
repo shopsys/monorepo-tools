@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 
-class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase {
+class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase
+{
 
     public function transformValuesProvider() {
         return [

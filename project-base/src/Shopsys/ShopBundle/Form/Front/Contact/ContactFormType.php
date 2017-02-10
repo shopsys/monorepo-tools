@@ -11,7 +11,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class ContactFormType extends AbstractType {
+class ContactFormType extends AbstractType
+{
 
     /**
      * @return string

@@ -8,7 +8,8 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Parser;
 
-class MenuLoader {
+class MenuLoader
+{
 
     /**
      * @var \Symfony\Component\Filesystem\Filesystem

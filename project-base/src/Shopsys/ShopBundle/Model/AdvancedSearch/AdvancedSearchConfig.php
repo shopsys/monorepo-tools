@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 
 use Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface;
 
-class AdvancedSearchConfig {
+class AdvancedSearchConfig
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface[]

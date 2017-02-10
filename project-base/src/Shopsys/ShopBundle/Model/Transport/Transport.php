@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportData;
  * @ORM\Table(name="transports")
  * @ORM\Entity
  */
-class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface {
+class Transport extends AbstractTranslatableEntity implements OrderableEntityInterface
+{
 
     /**
      * @var int

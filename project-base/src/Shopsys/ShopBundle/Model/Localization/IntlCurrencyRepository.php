@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Localization;
 
 use CommerceGuys\Intl\Currency\CurrencyRepository as BaseCurrencyRepository;
 
-class IntlCurrencyRepository extends BaseCurrencyRepository {
+class IntlCurrencyRepository extends BaseCurrencyRepository
+{
 
     const SUPPORTED_CURRENCY_CODES = [
         'AED',

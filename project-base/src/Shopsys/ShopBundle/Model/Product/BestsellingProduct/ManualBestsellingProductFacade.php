@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade;
 use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductRepository;
 
-class ManualBestsellingProductFacade {
+class ManualBestsellingProductFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

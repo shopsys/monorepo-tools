@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Transformers;
 use Symfony\Component\Form\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class InverseMultipleChoiceTransformer implements DataTransformerInterface {
+class InverseMultipleChoiceTransformer implements DataTransformerInterface
+{
 
     /**
      * @var \Symfony\Component\Form\ChoiceList\ChoiceListInterface

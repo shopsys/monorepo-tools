@@ -12,7 +12,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class AdvertFormType extends AbstractType {
+class AdvertFormType extends AbstractType
+{
 
     const VALIDATION_GROUP_TYPE_IMAGE = 'typeImage';
     const VALIDATION_GROUP_TYPE_CODE = 'typeCode';

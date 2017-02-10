@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Grid\GridFactoryInterface;
 use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
-class PromoCodeGridFactory implements GridFactoryInterface {
+class PromoCodeGridFactory implements GridFactoryInterface
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

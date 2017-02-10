@@ -17,7 +17,8 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
-class UrlsProvider {
+class UrlsProvider
+{
 
     const SEARCH_KEYWORD = 'a';
     const ROUTE_NAME_KEY = 'routeName';

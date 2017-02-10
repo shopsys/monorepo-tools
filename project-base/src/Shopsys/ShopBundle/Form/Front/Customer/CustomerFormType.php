@@ -9,7 +9,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CustomerFormType extends AbstractType {
+class CustomerFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Country\Country[]

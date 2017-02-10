@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase {
+class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetEnteredPromoCode() {
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));

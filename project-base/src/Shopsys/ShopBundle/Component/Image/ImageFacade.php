@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Image\ImageRepository;
 use Shopsys\ShopBundle\Component\Image\ImageService;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageFacade {
+class ImageFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

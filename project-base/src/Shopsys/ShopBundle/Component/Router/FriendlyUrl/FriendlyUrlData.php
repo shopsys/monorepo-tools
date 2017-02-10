@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
-class FriendlyUrlData {
+class FriendlyUrlData
+{
 
     /**
      * @var int

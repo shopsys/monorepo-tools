@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Order;
 
-class FrontOrderData extends OrderData {
+class FrontOrderData extends OrderData
+{
 
     /**
      * @var bool

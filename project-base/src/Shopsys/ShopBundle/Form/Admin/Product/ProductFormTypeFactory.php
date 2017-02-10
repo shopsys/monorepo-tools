@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\Unit\UnitFacade;
 
-class ProductFormTypeFactory {
+class ProductFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository

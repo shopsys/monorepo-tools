@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductPriceCalculation {
+class ProductPriceCalculation
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\BasePriceCalculation

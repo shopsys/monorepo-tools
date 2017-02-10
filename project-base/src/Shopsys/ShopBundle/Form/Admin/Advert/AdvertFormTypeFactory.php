@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Advert\Advert;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 use Shopsys\ShopBundle\Twig\ImageExtension;
 
-class AdvertFormTypeFactory {
+class AdvertFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Advert\AdvertPositionList

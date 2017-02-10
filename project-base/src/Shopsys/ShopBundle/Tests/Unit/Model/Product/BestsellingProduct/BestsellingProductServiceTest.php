@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\BestsellingProductServic
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase {
+class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCombineManualAndAutomaticBestsellingProducts() {
         $bestsellingProductService = new BestsellingProductService();

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeFacade;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class PromoCodeController extends FrontBaseController {
+class PromoCodeController extends FrontBaseController
+{
 
     const PROMO_CODE_PARAMETER = 'code';
 

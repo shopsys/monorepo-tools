@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixture;
 use Shopsys\ShopBundle\Model\Product\ProductEditDataFactory;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 
-class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

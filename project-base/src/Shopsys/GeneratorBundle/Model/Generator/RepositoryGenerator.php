@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\Validator\Constraints;
 
-class RepositoryGenerator extends AbstractGenerator {
+class RepositoryGenerator extends AbstractGenerator
+{
 
     /**
      * {@inheritdoc}

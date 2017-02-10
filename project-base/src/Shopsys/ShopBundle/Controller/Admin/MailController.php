@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatusFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class MailController extends AdminBaseController {
+class MailController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormTypeFactory

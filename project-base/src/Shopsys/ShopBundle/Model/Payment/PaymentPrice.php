@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
  * @ORM\Table(name="payment_prices")
  * @ORM\Entity
  */
-class PaymentPrice {
+class PaymentPrice
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Payment\Payment

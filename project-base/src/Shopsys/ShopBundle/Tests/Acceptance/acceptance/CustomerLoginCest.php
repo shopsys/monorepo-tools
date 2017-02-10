@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LayoutPage;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\LoginPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class CustomerLoginCest {
+class CustomerLoginCest
+{
 
     public function testLoginAsCustomerFromMainPage(
         LoginPage $loginPage,

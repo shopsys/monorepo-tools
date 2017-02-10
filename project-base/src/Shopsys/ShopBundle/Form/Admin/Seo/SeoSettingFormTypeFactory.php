@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class SeoSettingFormTypeFactory {
+class SeoSettingFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

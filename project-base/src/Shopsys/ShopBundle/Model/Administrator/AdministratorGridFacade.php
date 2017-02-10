@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Grid\Grid;
 use Shopsys\ShopBundle\Model\Administrator\Administrator;
 use Shopsys\ShopBundle\Model\Administrator\AdministratorGridService;
 
-class AdministratorGridFacade {
+class AdministratorGridFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager;

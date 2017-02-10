@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class RouterExtension extends Twig_Extension {
+class RouterExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory

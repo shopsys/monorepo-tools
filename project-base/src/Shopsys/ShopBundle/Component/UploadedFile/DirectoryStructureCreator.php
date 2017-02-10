@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DirectoryStructureCreator {
+class DirectoryStructureCreator
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig

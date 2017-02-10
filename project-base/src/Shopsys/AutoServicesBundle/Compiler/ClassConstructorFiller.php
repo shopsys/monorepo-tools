@@ -7,7 +7,8 @@ use Shopsys\AutoServicesBundle\Compiler\ContainerClassList;
 use Shopsys\AutoServicesBundle\Compiler\ParameterProcessor;
 use Symfony\Component\DependencyInjection\Definition;
 
-class ClassConstructorFiller {
+class ClassConstructorFiller
+{
 
     /**
      * @var ParameterProcessor

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase {
+class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreateFriendlyUrls() {
         $domainConfigs = [

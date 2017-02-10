@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Csv\CsvReader;
 use Shopsys\ShopBundle\Component\String\EncodingConverter;
 use Shopsys\ShopBundle\Component\String\TransformString;
 
-class ProductDataFixtureCsvReader {
+class ProductDataFixtureCsvReader
+{
 
     /**
      * @var string

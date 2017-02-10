@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver as SymfonyControllerResolver;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
-class ControllerResolver extends SymfonyControllerResolver {
+class ControllerResolver extends SymfonyControllerResolver
+{
 
     /**
      * {@inheritDoc}

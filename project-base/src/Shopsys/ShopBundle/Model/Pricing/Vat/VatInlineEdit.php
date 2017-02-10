@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade;
 use Shopsys\ShopBundle\Model\Pricing\Vat\VatGridFactory;
 use Symfony\Component\Form\FormFactory;
 
-class VatInlineEdit extends AbstractGridInlineEdit {
+class VatInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade

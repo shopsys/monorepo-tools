@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component\Router;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 
-class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase {
+class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testReverseTransform() {
         $array = ['a', 'b', 'a'];

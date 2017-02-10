@@ -12,7 +12,8 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class ShopsysAutoServicesExtension extends Extension {
+class ShopsysAutoServicesExtension extends Extension
+{
 
     /**
      * {@inheritDoc}

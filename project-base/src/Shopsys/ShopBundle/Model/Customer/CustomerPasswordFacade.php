@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Customer\CustomerPasswordService;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMailFacade;
 use Shopsys\ShopBundle\Model\Customer\UserRepository;
 
-class CustomerPasswordFacade {
+class CustomerPasswordFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

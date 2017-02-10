@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Order\Order;
 use Shopsys\ShopBundle\Model\Order\OrderRepository;
 use Shopsys\ShopBundle\Model\Order\OrderService;
 
-class CustomerFacade {
+class CustomerFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

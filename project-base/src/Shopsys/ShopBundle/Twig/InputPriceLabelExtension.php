@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Twig_Extension;
 use Twig_SimpleFunction;
 
-class InputPriceLabelExtension extends Twig_Extension {
+class InputPriceLabelExtension extends Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\PricingSetting

@@ -4,7 +4,8 @@ namespace Shopsys\GeneratorBundle\Model\Exception;
 
 use Exception;
 
-class DuplicateGeneratorNameException extends Exception implements GeneratorException {
+class DuplicateGeneratorNameException extends Exception implements GeneratorException
+{
 
     /**
      * @param string $name

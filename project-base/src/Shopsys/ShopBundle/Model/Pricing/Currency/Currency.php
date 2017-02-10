@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="currencies")
  * @ORM\Entity
  */
-class Currency {
+class Currency
+{
 
     const CODE_CZK = 'CZK';
     const CODE_EUR = 'EUR';

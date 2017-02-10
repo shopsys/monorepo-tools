@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Category\Exception;
 use Shopsys\ShopBundle\Model\Category\Exception\CategoryException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class CategoryDomainNotFoundException extends NotFoundHttpException implements CategoryException {
+class CategoryDomainNotFoundException extends NotFoundHttpException implements CategoryException
+{
 
     /**
      * @param int $categoryId

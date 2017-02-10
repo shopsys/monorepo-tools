@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Zbozi;
 
 use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
-class ZboziItem implements FeedItemInterface {
+class ZboziItem implements FeedItemInterface
+{
 
     /**
      * @var int

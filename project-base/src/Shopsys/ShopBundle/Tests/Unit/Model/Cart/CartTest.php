@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class CartTest extends PHPUnit_Framework_TestCase {
+class CartTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetItemsCountZero() {
         $cartItems = [];

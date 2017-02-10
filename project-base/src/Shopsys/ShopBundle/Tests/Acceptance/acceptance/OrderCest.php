@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\ProductListP
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 use Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper;
 
-class OrderCest {
+class OrderCest
+{
 
     public function testFormRemembersPaymentAndTransportWhenClickingBack(
         ProductListPage $productListPage,

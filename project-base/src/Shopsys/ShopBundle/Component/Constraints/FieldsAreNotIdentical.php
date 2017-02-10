@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
-class FieldsAreNotIdentical extends Constraint {
+class FieldsAreNotIdentical extends Constraint
+{
 
     public $field1;
 

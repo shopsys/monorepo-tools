@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="adverts")
  * @ORM\Entity
  */
-class Advert {
+class Advert
+{
 
     const TYPE_IMAGE = 'image';
     const TYPE_CODE = 'code';

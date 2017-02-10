@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
-class TransportDetailFactory {
+class TransportDetailFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation

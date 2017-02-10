@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Transport\TransportPrice;
 use Shopsys\ShopBundle\Model\Transport\TransportRepository;
 
-class CurrencyFacade {
+class CurrencyFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

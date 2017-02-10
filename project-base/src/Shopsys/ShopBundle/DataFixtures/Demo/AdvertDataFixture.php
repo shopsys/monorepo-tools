@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Advert\AdvertData;
 use Shopsys\ShopBundle\Model\Advert\AdvertFacade;
 use Shopsys\ShopBundle\Model\Advert\AdvertPositionList;
 
-class AdvertDataFixture extends AbstractReferenceFixture {
+class AdvertDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

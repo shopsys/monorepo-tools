@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 use Shopsys\ShopBundle\Model\Country\CountryFacade;
 use Shopsys\ShopBundle\Model\Country\CountryInlineEdit;
 
-class CountryController extends AdminBaseController {
+class CountryController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Country\CountryFacade

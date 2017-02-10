@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\UploadedFile;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 use Shopsys\ShopBundle\Component\UploadedFile\UploadedFile;
 
-class UploadedFileLocator {
+class UploadedFileLocator
+{
 
     /**
      * @var string

@@ -10,7 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CreateDomainsDataCommand extends ContainerAwareCommand {
+class CreateDomainsDataCommand extends ContainerAwareCommand
+{
 
     protected function configure() {
         $this

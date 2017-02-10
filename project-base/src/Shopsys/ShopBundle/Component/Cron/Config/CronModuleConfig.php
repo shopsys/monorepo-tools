@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\CronModuleInterface;
 use Shopsys\ShopBundle\Component\Cron\CronTimeInterface;
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
-class CronModuleConfig implements CronTimeInterface {
+class CronModuleConfig implements CronTimeInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Cron\CronModuleInterface

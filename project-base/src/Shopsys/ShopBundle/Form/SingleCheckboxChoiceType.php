@@ -7,7 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SingleCheckboxChoiceType extends AbstractType {
+class SingleCheckboxChoiceType extends AbstractType
+{
 
     public function getParent() {
         return 'choice';

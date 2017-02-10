@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Mail\MailerService;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Mail\MailTemplateFacade;
 
-class ResetPasswordMailFacade {
+class ResetPasswordMailFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\MailerService

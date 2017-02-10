@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Pricing;
 
-class PricingService {
+class PricingService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $prices

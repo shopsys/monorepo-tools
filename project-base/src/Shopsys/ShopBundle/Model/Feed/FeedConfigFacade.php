@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Feed\FeedConfig;
 use Shopsys\ShopBundle\Model\Feed\FeedConfigRepository;
 
-class FeedConfigFacade {
+class FeedConfigFacade
+{
 
     /**
      * @var string

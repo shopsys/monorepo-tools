@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\AdvancedSearch;
 use Doctrine\ORM\QueryBuilder;
 use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
-class AdvancedSearchService {
+class AdvancedSearchService
+{
 
     const TEMPLATE_RULE_FORM_KEY = '__template__';
 

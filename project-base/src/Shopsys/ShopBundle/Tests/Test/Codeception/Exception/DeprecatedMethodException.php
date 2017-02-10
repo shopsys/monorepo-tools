@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Test\Codeception\Exception;
 
 use Exception;
 
-class DeprecatedMethodException extends Exception {
+class DeprecatedMethodException extends Exception
+{
 
     /**
      * @param string $message

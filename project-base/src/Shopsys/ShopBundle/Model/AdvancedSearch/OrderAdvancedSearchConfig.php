@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderPriceFilterWithVatF
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderProductFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
 
-class OrderAdvancedSearchConfig extends AdvancedSearchConfig {
+class OrderAdvancedSearchConfig extends AdvancedSearchConfig
+{
 
     public function __construct(
         OrderNumberFilter $orderNumberFilter,

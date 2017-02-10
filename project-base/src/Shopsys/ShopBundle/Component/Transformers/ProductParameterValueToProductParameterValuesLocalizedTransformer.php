@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData;
 use Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface {
+class ProductParameterValueToProductParameterValuesLocalizedTransformer implements DataTransformerInterface
+{
 
     /**
      * @param mixed $normData

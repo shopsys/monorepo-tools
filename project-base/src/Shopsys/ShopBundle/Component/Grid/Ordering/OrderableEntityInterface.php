@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Grid\Ordering;
 
-interface OrderableEntityInterface {
+interface OrderableEntityInterface
+{
 
     /**
      * @param int $position

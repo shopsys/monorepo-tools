@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class FileExtensionMaxLengthValidator extends ConstraintValidator {
+class FileExtensionMaxLengthValidator extends ConstraintValidator
+{
 
     /**
      * @param string $value

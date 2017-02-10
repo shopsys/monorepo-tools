@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Security\Roles;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 
-class LoginController extends FrontBaseController {
+class LoginController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Security\LoginService

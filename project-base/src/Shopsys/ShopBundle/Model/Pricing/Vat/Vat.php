@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
  * @ORM\Table(name="vats")
  * @ORM\Entity
  */
-class Vat {
+class Vat
+{
 
     const SETTING_DEFAULT_VAT = 'defaultVatId';
 

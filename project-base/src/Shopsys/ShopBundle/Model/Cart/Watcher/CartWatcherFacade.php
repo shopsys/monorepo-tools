@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Cart\Cart;
 use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherService;
 use Shopsys\ShopBundle\Model\Customer\CurrentCustomer;
 
-class CartWatcherFacade {
+class CartWatcherFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

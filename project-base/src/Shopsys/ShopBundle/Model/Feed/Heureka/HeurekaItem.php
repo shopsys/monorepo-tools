@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Heureka;
 
 use Shopsys\ShopBundle\Model\Feed\FeedItemInterface;
 
-class HeurekaItem implements FeedItemInterface {
+class HeurekaItem implements FeedItemInterface
+{
 
     /**
      * @var int

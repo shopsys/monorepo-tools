@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase {
+class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetManualInputPricesDataWithManualCalculationType() {
         $productData = new ProductData();

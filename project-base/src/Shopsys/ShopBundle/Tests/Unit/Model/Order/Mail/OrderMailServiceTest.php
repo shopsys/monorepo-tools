@@ -19,7 +19,8 @@ use Shopsys\ShopBundle\Twig\PriceExtension;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
 
-class OrderMailServiceTest extends FunctionalTestCase {
+class OrderMailServiceTest extends FunctionalTestCase
+{
 
     public function testGetMailTemplateNameByStatus() {
         $routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();

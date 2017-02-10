@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductNameFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductPartnoFilter;
 use Shopsys\ShopBundle\Model\AdvancedSearch\Filter\ProductStockFilter;
 
-class ProductAdvancedSearchConfig extends AdvancedSearchConfig {
+class ProductAdvancedSearchConfig extends AdvancedSearchConfig
+{
 
     public function __construct(
         ProductCatnumFilter $productCatnumFilter,

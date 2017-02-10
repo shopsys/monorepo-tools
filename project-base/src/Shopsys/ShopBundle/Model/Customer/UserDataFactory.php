@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
-class UserDataFactory {
+class UserDataFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade

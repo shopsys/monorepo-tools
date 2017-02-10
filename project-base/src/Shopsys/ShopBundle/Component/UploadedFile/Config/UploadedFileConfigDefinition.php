@@ -6,7 +6,8 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class UploadedFileConfigDefinition implements ConfigurationInterface {
+class UploadedFileConfigDefinition implements ConfigurationInterface
+{
 
     const CONFIG_CLASS = 'class';
     const CONFIG_ENTITY_NAME = 'name';

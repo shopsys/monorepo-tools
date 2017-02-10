@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Product\TopProduct;
 use Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer;
 use Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType;
 
-class TopProductsFormTypeFactory {
+class TopProductsFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer

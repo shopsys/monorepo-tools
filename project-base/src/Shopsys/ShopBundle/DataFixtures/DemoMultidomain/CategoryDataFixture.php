@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryData;
 use Shopsys\ShopBundle\Model\Category\CategoryDataFactory;
 use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 
-class CategoryDataFixture extends AbstractReferenceFixture {
+class CategoryDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

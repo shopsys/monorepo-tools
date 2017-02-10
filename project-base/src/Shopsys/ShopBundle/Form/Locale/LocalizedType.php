@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class LocalizedType extends AbstractType {
+class LocalizedType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Localization\Localization

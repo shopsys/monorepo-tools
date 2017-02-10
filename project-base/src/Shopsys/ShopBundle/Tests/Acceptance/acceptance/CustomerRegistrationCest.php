@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance;
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front\RegistrationPage;
 use Shopsys\ShopBundle\Tests\Test\Codeception\AcceptanceTester;
 
-class CustomerRegistrationCest {
+class CustomerRegistrationCest
+{
 
     public function testSuccessfulRegistration(RegistrationPage $registrationPage, AcceptanceTester $me) {
         $me->wantTo('successfully register new customer');

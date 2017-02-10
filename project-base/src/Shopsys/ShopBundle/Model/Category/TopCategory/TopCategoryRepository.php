@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory;
 
-class TopCategoryRepository {
+class TopCategoryRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityRepository

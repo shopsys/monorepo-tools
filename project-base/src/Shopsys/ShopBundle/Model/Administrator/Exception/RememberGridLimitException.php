@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Administrator\Exception;
 
 use Exception;
 
-class RememberGridLimitException extends Exception implements AdministratorException {
+class RememberGridLimitException extends Exception implements AdministratorException
+{
 
     /**
      * @var string

@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Product\ProductEditData;
 use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductVariantFacade;
 
-class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class ProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     const PRODUCT_PREFIX = 'product_';
 

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculati
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase {
+class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
+{
 
     public function testRunImmediatelyRecalculations() {
         $productMock = $this->getMock(Product::class, null, [], '', false);

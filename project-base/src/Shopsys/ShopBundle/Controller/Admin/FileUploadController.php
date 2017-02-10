@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class FileUploadController extends AdminBaseController {
+class FileUploadController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\FileUpload\FileUpload

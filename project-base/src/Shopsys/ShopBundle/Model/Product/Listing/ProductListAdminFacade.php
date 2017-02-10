@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository;
 
-class ProductListAdminFacade {
+class ProductListAdminFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminRepository

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Twig;
 use Twig_Extension;
 use Twig_SimpleFilter;
 
-class CropZerosExtension extends Twig_Extension {
+class CropZerosExtension extends Twig_Extension
+{
 
     /**
      * @return array

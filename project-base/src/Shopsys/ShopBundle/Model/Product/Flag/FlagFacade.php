@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagRepository;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
-class FlagFacade {
+class FlagFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

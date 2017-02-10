@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\Pricing;
 
 use Shopsys\ShopBundle\Model\Pricing\Price;
 
-class ProductPrice extends Price {
+class ProductPrice extends Price
+{
 
     /**
      * @var bool

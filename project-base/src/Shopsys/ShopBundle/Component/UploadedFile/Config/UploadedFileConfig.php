@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\UploadedFile\Config;
 
-class UploadedFileConfig {
+class UploadedFileConfig
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]

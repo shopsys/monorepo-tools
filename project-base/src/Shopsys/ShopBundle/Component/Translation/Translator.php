@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Translation;
 use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class Translator implements TranslatorInterface, TranslatorBagInterface {
+class Translator implements TranslatorInterface, TranslatorBagInterface
+{
 
     const DEFAULT_DOMAIN = 'messages';
     const NOT_TRANSLATED_PREFIX = '##';

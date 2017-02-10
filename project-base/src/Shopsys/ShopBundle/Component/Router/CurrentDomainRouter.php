@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Router\DomainRouterFactory;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
-class CurrentDomainRouter implements RouterInterface {
+class CurrentDomainRouter implements RouterInterface
+{
 
     /**
      * @var \Symfony\Component\Routing\RequestContext

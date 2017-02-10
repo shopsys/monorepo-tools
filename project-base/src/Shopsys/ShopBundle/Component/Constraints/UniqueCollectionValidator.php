@@ -7,7 +7,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class UniqueCollectionValidator extends ConstraintValidator {
+class UniqueCollectionValidator extends ConstraintValidator
+{
 
     /**
      * @param array $values

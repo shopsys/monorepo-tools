@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
-class ProductExtension extends \Twig_Extension {
+class ProductExtension extends \Twig_Extension
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryFacade

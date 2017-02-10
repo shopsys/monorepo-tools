@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\Router\Exception;
 
-interface RouterException {
+interface RouterException
+{
 
 }

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Symfony\Component\HttpFoundation\Request;
 
-class DomainTest extends PHPUnit_Framework_TestCase {
+class DomainTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetIdNotSet() {
         $domainConfigs = [

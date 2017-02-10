@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculator;
 use Symfony\Bridge\Monolog\Logger;
 
-class ProductAvailabilityCronModule implements IteratedCronModuleInterface {
+class ProductAvailabilityCronModule implements IteratedCronModuleInterface
+{
 
     /**
      * @var \Symfony\Bridge\Monolog\Logger

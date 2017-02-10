@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Image\Config;
 
 use Shopsys\ShopBundle\Component\Utils;
 
-class ImageEntityConfig {
+class ImageEntityConfig
+{
 
     const WITHOUT_NAME_KEY = '__NULL__';
 

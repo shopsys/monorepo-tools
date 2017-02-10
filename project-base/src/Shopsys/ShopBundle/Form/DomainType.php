@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DomainType extends AbstractType {
+class DomainType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

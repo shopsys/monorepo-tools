@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\FileUpload\FileNamingConvention;
  * @ORM\Table(name="uploaded_files", indexes={@ORM\Index(columns={"entity_name", "entity_id"})})
  * @ORM\Entity
  */
-class UploadedFile implements EntityFileUploadInterface {
+class UploadedFile implements EntityFileUploadInterface
+{
 
     const UPLOAD_KEY = 'uploadedFile';
 

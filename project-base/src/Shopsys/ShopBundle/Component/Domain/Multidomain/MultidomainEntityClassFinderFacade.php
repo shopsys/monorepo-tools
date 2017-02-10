@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Setting\SettingValue;
 use Shopsys\ShopBundle\Model\Mail\MailTemplate;
 use Shopsys\ShopBundle\Model\Product\ProductVisibility;
 
-class MultidomainEntityClassFinderFacade {
+class MultidomainEntityClassFinderFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

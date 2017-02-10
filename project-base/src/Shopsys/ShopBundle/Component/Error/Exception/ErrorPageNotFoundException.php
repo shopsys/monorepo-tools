@@ -5,7 +5,8 @@ namespace ShopBundle\Component\Error\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Error\Exception\ErrorException;
 
-class ErrorPageNotFoundException extends Exception implements ErrorException {
+class ErrorPageNotFoundException extends Exception implements ErrorException
+{
 
     /**
      * @param int $domainId

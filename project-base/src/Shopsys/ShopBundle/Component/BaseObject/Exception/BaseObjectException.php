@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\BaseObject\Exception;
 
 use Exception;
 
-class BaseObjectException extends Exception {
+class BaseObjectException extends Exception
+{
 
     /**
      * @param string $message

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Transformers;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class EmptyWysiwygTransformer implements DataTransformerInterface {
+class EmptyWysiwygTransformer implements DataTransformerInterface
+{
 
     /**
      * @param mixed $value

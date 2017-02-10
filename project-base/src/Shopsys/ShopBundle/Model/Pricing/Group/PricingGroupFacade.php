@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPriceRepository;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository;
 
-class PricingGroupFacade {
+class PricingGroupFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

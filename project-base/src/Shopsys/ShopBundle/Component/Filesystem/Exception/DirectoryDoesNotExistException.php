@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Filesystem\Exception;
 
 use Exception;
 
-class DirectoryDoesNotExistException extends Exception implements FilesystemException {
+class DirectoryDoesNotExistException extends Exception implements FilesystemException
+{
 
     /**
      * @param string $path

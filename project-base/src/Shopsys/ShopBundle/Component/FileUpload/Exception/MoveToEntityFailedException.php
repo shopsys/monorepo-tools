@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\FileUpload\Exception;
 
 use Exception;
 
-class MoveToEntityFailedException extends Exception implements FileUploadException {
+class MoveToEntityFailedException extends Exception implements FileUploadException
+{
 
     /**
      * @param string $message

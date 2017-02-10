@@ -13,7 +13,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class RegistrationFormType extends AbstractType {
+class RegistrationFormType extends AbstractType
+{
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options

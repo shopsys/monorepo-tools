@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Model\Customer\User;
 
-class CustomerIdentifier {
+class CustomerIdentifier
+{
 
     /**
      * @var string

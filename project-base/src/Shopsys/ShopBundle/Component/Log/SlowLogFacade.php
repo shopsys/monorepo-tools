@@ -6,7 +6,8 @@ use Symfony\Bridge\Monolog\Logger;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
-class SlowLogFacade {
+class SlowLogFacade
+{
 
     const REQUEST_TIME_LIMIT_SECONDS = 2;
 

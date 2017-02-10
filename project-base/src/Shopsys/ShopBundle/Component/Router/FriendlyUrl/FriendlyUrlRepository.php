@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
-class FriendlyUrlRepository {
+class FriendlyUrlRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

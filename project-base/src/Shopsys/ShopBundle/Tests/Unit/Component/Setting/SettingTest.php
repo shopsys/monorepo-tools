@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Component\Setting\SettingValue;
 use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
-class SettingTest extends PHPUnit_Framework_TestCase {
+class SettingTest extends PHPUnit_Framework_TestCase
+{
 
     public function testSet() {
         $settingValueArray = [

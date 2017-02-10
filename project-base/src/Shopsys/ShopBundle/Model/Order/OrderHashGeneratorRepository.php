@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Order;
 use Shopsys\ShopBundle\Component\String\HashGenerator;
 use Shopsys\ShopBundle\Model\Order\OrderRepository;
 
-class OrderHashGeneratorRepository {
+class OrderHashGeneratorRepository
+{
 
     const HASH_LENGTH = 50;
     const MAX_GENERATE_TRIES = 100;

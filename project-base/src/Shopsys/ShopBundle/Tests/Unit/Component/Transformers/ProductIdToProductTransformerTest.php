@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase {
+class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testTransform() {
         $productId = 1;

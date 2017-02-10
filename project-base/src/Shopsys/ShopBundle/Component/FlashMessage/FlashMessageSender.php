@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\FlashMessage;
 
 use Twig_Environment;
 
-class FlashMessageSender {
+class FlashMessageSender
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\FlashMessage\Bag

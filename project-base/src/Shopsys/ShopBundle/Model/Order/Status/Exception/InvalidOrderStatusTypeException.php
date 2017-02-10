@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Status\Exception;
 
 use Exception;
 
-class InvalidOrderStatusTypeException extends Exception implements OrderStatusException {
+class InvalidOrderStatusTypeException extends Exception implements OrderStatusException
+{
 
     /**
      * @var int

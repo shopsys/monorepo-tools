@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  * @ORM\Table(name="flag_translations")
  * @ORM\Entity
  */
-class FlagTranslation extends AbstractTranslation {
+class FlagTranslation extends AbstractTranslation
+{
 
     /**
      * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Flag\Flag")

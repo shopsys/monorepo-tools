@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Slider\SliderItemData;
 use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
-class SliderItemDataFixture extends AbstractReferenceFixture{
+class SliderItemDataFixture extends AbstractReferenceFixture
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

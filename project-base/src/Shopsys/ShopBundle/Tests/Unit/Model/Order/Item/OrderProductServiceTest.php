@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 
-class OrderProductServiceTest extends PHPUnit_Framework_TestCase {
+class OrderProductServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testSubtractOrderProductsFromStockUsingStock() {
         $productStockQuantity = 15;

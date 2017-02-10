@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository;
 use Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade;
 use Shopsys\ShopBundle\Model\Customer\CustomerIdentifier;
 
-class CartFactoryTest extends PHPUnit_Framework_TestCase {
+class CartFactoryTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetReturnsTheSameCartForTheSameCustomer() {
         $cartFactory = $this->getCartFactory();

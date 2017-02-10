@@ -8,7 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class HeurekaShopCertificationFormType extends AbstractType {
+class HeurekaShopCertificationFormType extends AbstractType
+{
 
     /**
      * @return string

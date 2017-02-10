@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\String;
 
-class EncodingConverter {
+class EncodingConverter
+{
 
     /**
      * @param string $stringCp1250

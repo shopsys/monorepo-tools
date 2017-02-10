@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProductType extends AbstractType {
+class ProductType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Transformers\ProductIdToProductTransformer

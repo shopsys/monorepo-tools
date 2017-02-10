@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType {
+class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
+{
 
     const DOMAINS_SUBFORM_NAME = 'priceLimits';
     const FIELD_ENABLED = 'enabled';

@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Error;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 
-class ExceptionListener {
+class ExceptionListener
+{
 
     /**
      * @var \Exception|null

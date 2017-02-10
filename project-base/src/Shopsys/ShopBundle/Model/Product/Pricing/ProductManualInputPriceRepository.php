@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductManualInputPriceRepository {
+class ProductManualInputPriceRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

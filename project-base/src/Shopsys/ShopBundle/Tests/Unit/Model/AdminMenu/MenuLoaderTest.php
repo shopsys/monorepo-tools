@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\AdminNavigation\MenuItem;
 use Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class MenuLoaderTest extends FunctionalTestCase {
+class MenuLoaderTest extends FunctionalTestCase
+{
 
     public function testLoadFromArray() {
         $testMenu = [

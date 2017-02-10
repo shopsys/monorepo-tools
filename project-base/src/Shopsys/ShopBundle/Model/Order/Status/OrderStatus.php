@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation;
  * @ORM\Table(name="order_statuses")
  * @ORM\Entity
  */
-class OrderStatus extends AbstractTranslatableEntity {
+class OrderStatus extends AbstractTranslatableEntity
+{
 
     const TYPE_NEW = 1;
     const TYPE_IN_PROGRESS = 2;

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Form\FormType;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class YesNoTypeTest extends FunctionalTestCase {
+class YesNoTypeTest extends FunctionalTestCase
+{
 
     public function testGetDataReturnsTrue() {
         $form = $this->getForm();

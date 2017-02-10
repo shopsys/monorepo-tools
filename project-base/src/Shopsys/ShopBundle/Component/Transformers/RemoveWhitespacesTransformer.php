@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Transformers;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-class RemoveWhitespacesTransformer implements DataTransformerInterface {
+class RemoveWhitespacesTransformer implements DataTransformerInterface
+{
 
     /**
      * @param string|null $value

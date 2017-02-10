@@ -6,7 +6,8 @@ use Exception;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlException;
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
-class ReachMaxUrlUniqueResolveAttemptException extends Exception implements FriendlyUrlException {
+class ReachMaxUrlUniqueResolveAttemptException extends Exception implements FriendlyUrlException
+{
 
     /**
      * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl

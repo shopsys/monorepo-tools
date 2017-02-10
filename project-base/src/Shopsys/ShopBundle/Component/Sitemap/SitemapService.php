@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Sitemap;
 
-class SitemapService {
+class SitemapService
+{
 
     /**
      * @param int $domainId

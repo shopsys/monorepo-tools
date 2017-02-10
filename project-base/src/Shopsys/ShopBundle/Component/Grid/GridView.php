@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Router;
 use Twig_Environment;
 
-class GridView {
+class GridView
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Grid\Grid

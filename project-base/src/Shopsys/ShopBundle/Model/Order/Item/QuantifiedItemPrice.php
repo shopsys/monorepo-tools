@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Order\Item;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 
-class QuantifiedItemPrice {
+class QuantifiedItemPrice
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Price

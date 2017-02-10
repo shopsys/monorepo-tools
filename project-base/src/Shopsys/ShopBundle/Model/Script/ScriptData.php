@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Script;
 
 use Shopsys\ShopBundle\Model\Script\Script;
 
-class ScriptData {
+class ScriptData
+{
 
     /**
      * @var string|null

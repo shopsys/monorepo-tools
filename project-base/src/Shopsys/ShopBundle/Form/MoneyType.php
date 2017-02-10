@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Transformers\RemoveWhitespacesTransformer;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class MoneyType extends AbstractTypeExtension {
+class MoneyType extends AbstractTypeExtension
+{
 
     /**
      * {@inheritdoc}

@@ -8,7 +8,8 @@ use Doctrine\ORM\Query\Expr\Join;
 use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ParameterRepository {
+class ParameterRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

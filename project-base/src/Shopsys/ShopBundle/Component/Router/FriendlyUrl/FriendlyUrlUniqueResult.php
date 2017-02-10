@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Router\FriendlyUrl;
 
 use Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl;
 
-class FriendlyUrlUniqueResult {
+class FriendlyUrlUniqueResult
+{
 
     /**
      * @var bool

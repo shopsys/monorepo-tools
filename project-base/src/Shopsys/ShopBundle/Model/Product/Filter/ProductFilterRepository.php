@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\Filter\ProductFilterData;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice;
 use Shopsys\ShopBundle\Model\Product\Product;
 
-class ProductFilterRepository {
+class ProductFilterRepository
+{
 
     const DAYS_FOR_STOCK_FILTER = 0;
 

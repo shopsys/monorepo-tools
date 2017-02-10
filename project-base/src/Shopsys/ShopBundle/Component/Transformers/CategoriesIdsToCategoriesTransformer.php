@@ -6,7 +6,8 @@ use IteratorAggregate;
 use Shopsys\ShopBundle\Model\Category\CategoryRepository;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface {
+class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository

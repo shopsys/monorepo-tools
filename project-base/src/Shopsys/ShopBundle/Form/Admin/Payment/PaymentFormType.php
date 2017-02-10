@@ -10,7 +10,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class PaymentFormType extends AbstractType {
+class PaymentFormType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport[]

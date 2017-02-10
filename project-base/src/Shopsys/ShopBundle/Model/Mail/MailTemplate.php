@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Mail\MailTemplateData;
  * )
  * @ORM\Entity
  */
-class MailTemplate {
+class MailTemplate
+{
 
     const REGISTRATION_CONFIRM_NAME = 'registration_confirm';
     const RESET_PASSWORD_NAME = 'reset_password';

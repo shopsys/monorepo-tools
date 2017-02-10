@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Domain;
 use Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class DomainFactory {
+class DomainFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader

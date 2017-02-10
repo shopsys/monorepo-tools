@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Sitemap\SitemapService;
 use Symfony\Component\HttpFoundation\Response;
 
-class RobotsController extends FrontBaseController {
+class RobotsController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Translation;
 
-class TranslationSourceReplacement {
+class TranslationSourceReplacement
+{
 
     /**
      * @var string

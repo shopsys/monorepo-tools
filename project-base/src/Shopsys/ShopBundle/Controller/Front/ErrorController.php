@@ -15,7 +15,8 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
 use Tracy\BlueScreen;
 use Tracy\Debugger;
 
-class ErrorController extends FrontBaseController {
+class ErrorController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Error\ExceptionController

@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Model\Product\ProductFacade;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductRepositoryTest extends DatabaseTestCase{
+class ProductRepositoryTest extends DatabaseTestCase
+{
 
     public function testVisibleAndNotSellingDeniedProductIsListed() {
         $this->getAllListableQueryBuilderTest(1, true);

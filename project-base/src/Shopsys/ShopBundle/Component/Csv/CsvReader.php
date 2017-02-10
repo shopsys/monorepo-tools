@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Csv;
 
-class CsvReader {
+class CsvReader
+{
 
     /**
      * @param string $filename

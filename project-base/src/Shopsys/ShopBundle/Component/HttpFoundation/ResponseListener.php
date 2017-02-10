@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\HttpFoundation;
 
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class ResponseListener {
+class ResponseListener
+{
 
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event

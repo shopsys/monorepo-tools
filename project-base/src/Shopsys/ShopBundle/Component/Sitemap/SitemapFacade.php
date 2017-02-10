@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Sitemap\SitemapDumperFactory;
 use Shopsys\ShopBundle\Component\Sitemap\SitemapRepository;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade;
 
-class SitemapFacade {
+class SitemapFacade
+{
 
     /**
      * @var string

@@ -8,7 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DatabaseDumpCommand extends ContainerAwareCommand {
+class DatabaseDumpCommand extends ContainerAwareCommand
+{
 
     const ARG_OUTPUT_FILE = 'outputFile';
     const OPT_PGDUMP_BIN = 'pgdump-bin';

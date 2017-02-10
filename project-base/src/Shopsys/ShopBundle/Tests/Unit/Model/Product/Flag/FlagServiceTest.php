@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\Flag;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagData;
 use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
-class FlagServiceTest extends PHPUnit_Framework_TestCase {
+class FlagServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testCreate() {
         $flagService = new FlagService();

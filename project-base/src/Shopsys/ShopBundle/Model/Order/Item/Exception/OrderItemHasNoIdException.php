@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Item\Exception;
 
 use Exception;
 
-class OrderItemHasNoIdException extends Exception implements OrderItemException {
+class OrderItemHasNoIdException extends Exception implements OrderItemException
+{
 
     /**
      * @param string $message

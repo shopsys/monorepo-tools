@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Feed\FeedConfigFacade;
 use Shopsys\ShopBundle\Model\Feed\FeedFacade;
 use Shopsys\ShopBundle\Model\Security\Roles;
 
-class FeedController extends AdminBaseController {
+class FeedController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

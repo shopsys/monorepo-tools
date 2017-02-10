@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\Front;
 
 use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
-class CartBoxPage extends AbstractPage {
+class CartBoxPage extends AbstractPage
+{
 
     /**
      * @param string $text

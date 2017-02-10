@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Shopsys\ShopBundle\Model\Pricing\Vat\Vat;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class SettingValueDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

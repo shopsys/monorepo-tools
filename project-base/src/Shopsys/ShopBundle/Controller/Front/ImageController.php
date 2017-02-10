@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorFacade;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class ImageController extends FrontBaseController {
+class ImageController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Image\Processing\ImageGeneratorFacade

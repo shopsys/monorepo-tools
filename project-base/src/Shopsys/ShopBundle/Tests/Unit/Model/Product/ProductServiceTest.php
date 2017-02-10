@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 
-class ProductServiceTest extends PHPUnit_Framework_TestCase {
+class ProductServiceTest extends PHPUnit_Framework_TestCase
+{
 
     public function testEditSchedulesPriceRecalculation() {
         $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)

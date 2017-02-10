@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\FlashMessage\Exception;
 
 use Exception;
 
-class BagNameIsNotValidException extends Exception implements FlashMessageException {
+class BagNameIsNotValidException extends Exception implements FlashMessageException
+{
 
     /**
      * @param string $message

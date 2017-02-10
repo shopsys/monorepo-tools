@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Feed\Category\Exception;
 use Exception;
 use Shopsys\ShopBundle\Model\Feed\Category\Exception\FeedCategoryException;
 
-class FeedCategoryLoadException extends Exception implements FeedCategoryException {
+class FeedCategoryLoadException extends Exception implements FeedCategoryException
+{
 
     /**
      * @param string $message

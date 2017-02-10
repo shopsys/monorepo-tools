@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Tests\Performance\Page;
 
 use Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample;
 
-class PerformanceTestSamplesAggregator {
+class PerformanceTestSamplesAggregator
+{
 
     /**
      * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples

@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\DataFixture\AbstractReferenceFixture;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade;
 
-class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
+class TopCategoryDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface
+{
 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager

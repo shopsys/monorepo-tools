@@ -9,7 +9,8 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Twig_Environment;
 
-class InlineEditService {
+class InlineEditService
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

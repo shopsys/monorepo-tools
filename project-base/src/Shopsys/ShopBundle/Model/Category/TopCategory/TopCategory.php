@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\Category;
  * @ORM\Table(name="categories_top")
  * @ORM\Entity
  */
-class TopCategory {
+class TopCategory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Category\Category

@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Mail\Setting;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSetting;
 
-class MailSettingFacade {
+class MailSettingFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Setting\Setting

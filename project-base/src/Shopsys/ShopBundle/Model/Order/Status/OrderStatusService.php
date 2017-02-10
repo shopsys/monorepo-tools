@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Order\Status;
 
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
-class OrderStatusService {
+class OrderStatusService
+{
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Accessory\ProductAccessory;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductAccessoryRepository {
+class ProductAccessoryRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

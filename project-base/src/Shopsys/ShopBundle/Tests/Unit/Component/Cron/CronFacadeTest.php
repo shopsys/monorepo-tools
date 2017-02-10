@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Component\Cron\CronTimeResolver;
 use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 use Symfony\Bridge\Monolog\Logger;
 
-class CronFacadeTest extends PHPUnit_Framework_TestCase {
+class CronFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testRunModuleByModuleId() {
         $moduleId = 'moduleId';

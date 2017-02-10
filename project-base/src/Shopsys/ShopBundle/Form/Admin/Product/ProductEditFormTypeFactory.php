@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 
-class ProductEditFormTypeFactory {
+class ProductEditFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormTypeFactory

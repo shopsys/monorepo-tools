@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Twig\FileThumbnail;
 
-class FileThumbnailInfo {
+class FileThumbnailInfo
+{
 
     /**
      * @var string|null

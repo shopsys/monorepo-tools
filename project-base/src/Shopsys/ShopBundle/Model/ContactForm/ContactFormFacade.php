@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Mail\MessageData;
 use Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade;
 use Twig_Environment;
 
-class ContactFormFacade {
+class ContactFormFacade
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Mail\Setting\MailSettingFacade

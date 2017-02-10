@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Customer;
 
 use Shopsys\ShopBundle\Model\Country\Country;
 
-class BillingAddressData {
+class BillingAddressData
+{
 
     /**
      * @var string|null

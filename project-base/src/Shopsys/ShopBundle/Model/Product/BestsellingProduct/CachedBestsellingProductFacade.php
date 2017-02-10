@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Product\Detail\ProductDetailFactory;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 
-class CachedBestsellingProductFacade {
+class CachedBestsellingProductFacade
+{
 
     const LIFETIME = 43200; // 12h
 

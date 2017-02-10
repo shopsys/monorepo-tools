@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryFacade;
 use Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class SearchController extends FrontBaseController {
+class SearchController extends FrontBaseController
+{
 
     const AUTOCOMPLETE_CATEGORY_LIMIT = 3;
     const AUTOCOMPLETE_PRODUCT_LIMIT = 5;

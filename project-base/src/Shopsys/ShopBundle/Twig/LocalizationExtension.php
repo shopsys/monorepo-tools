@@ -7,7 +7,8 @@ use Symfony\Component\Asset\Packages;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
-class LocalizationExtension extends \Twig_Extension {
+class LocalizationExtension extends \Twig_Extension
+{
 
     /**
      * @var \Symfony\Component\DependencyInjection\ContainerInterface

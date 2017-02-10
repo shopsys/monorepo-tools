@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageConfigLoader;
 use stdClass;
 use Symfony\Component\Filesystem\Filesystem;
 
-class ImageConfigTest extends PHPUnit_Framework_TestCase {
+class ImageConfigTest extends PHPUnit_Framework_TestCase
+{
 
     /**
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig

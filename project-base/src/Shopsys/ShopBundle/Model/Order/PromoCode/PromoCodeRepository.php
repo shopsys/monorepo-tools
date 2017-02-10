@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Order\PromoCode;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode;
 
-class PromoCodeRepository {
+class PromoCodeRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 use Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceRecalculationScheduler;
 use stdClass;
 
-class VatFacadeTest extends PHPUnit_Framework_TestCase {
+class VatFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGetDefaultVat() {
         $expected = new stdClass();

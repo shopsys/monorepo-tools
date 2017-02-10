@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Form\Admin\Mail;
 use Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType;
 use Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail;
 
-class AllMailTemplatesFormTypeFactory {
+class AllMailTemplatesFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail

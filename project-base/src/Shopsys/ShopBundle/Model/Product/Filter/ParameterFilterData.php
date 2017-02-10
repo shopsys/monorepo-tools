@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Product\Filter;
 
 use Shopsys\ShopBundle\Model\Product\Parameter\Parameter;
 
-class ParameterFilterData {
+class ParameterFilterData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter

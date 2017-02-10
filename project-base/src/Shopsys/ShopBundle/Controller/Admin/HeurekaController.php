@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Heureka\HeurekaSetting;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class HeurekaController extends AdminBaseController {
+class HeurekaController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain

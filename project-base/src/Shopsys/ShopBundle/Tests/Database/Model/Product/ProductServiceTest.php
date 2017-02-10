@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 use Shopsys\ShopBundle\Model\Product\ProductService;
 use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
-class ProductServiceTest extends DatabaseTestCase {
+class ProductServiceTest extends DatabaseTestCase
+{
 
     public function testRecalculateInputPriceForNewVatPercentWithInputPriceWithoutVat() {
         $productService = $this->getContainer()->get(ProductService::class);

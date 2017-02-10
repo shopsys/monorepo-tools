@@ -8,7 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
-class FrontLogoutHandler implements LogoutSuccessHandlerInterface {
+class FrontLogoutHandler implements LogoutSuccessHandlerInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade

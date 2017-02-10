@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\ProductAvailabilityRecalculati
 use Shopsys\ShopBundle\Model\Product\Product;
 use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
-class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_TestCase {
+class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
+{
 
     public function testScheduleRecalculateAvailabilityForProduct() {
         $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);

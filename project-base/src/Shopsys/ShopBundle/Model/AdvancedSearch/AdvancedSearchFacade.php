@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchFormFactory;
 use Shopsys\ShopBundle\Model\Product\Listing\ProductListAdminFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class AdvancedSearchFacade {
+class AdvancedSearchFacade
+{
 
     const RULES_FORM_NAME = 'as';
 

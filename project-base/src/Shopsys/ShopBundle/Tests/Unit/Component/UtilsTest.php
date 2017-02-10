@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Tests\Unit\Component;
 use PHPUnit_Framework_TestCase;
 use Shopsys\ShopBundle\Component\Utils;
 
-class UtilsTest extends PHPUnit_Framework_TestCase {
+class UtilsTest extends PHPUnit_Framework_TestCase
+{
 
     public function testIfNull() {
         $this->assertTrue(Utils::ifNull(null, true));

@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Domain\SelectedDomain;
 use Shopsys\ShopBundle\Model\ShopInfo\ShopInfoSettingFacade;
 
-class ShopInfoSettingFormTypeFactory {
+class ShopInfoSettingFormTypeFactory
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

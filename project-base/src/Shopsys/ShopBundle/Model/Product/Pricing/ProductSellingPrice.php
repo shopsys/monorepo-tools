@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Pricing;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup;
 use Shopsys\ShopBundle\Model\Pricing\Price;
 
-class ProductSellingPrice {
+class ProductSellingPrice
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup

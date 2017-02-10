@@ -2,6 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component\Domain\Config\Exception;
 
-interface DomainConfigException {
+interface DomainConfigException
+{
 
 }

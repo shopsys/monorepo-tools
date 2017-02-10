@@ -15,7 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class CategoryController extends AdminBaseController {
+class CategoryController extends AdminBaseController
+{
 
     const ALL_DOMAINS = 0;
 

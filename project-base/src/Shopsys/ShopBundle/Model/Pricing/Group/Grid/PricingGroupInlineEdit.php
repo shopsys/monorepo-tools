@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData;
 use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 use Symfony\Component\Form\FormFactory;
 
-class PricingGroupInlineEdit extends AbstractGridInlineEdit {
+class PricingGroupInlineEdit extends AbstractGridInlineEdit
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade

@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator;
 use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class ProductAvailabilityCalculationTest extends FunctionalTestCase {
+class ProductAvailabilityCalculationTest extends FunctionalTestCase
+{
 
     /**
      * @dataProvider getTestCalculateAvailabilityData

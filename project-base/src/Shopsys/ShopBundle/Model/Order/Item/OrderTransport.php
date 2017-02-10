@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Transport\Transport;
 /**
  * @ORM\Entity
  */
-class OrderTransport extends OrderItem {
+class OrderTransport extends OrderItem
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Transport\Transport

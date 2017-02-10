@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Currency\Currency;
 use Shopsys\ShopBundle\Model\Pricing\PricingSetting;
 use Symfony\Component\Filesystem\Filesystem;
 
-class DomainFacadeTest extends PHPUnit_Framework_TestCase {
+class DomainFacadeTest extends PHPUnit_Framework_TestCase
+{
 
     public function testGeDomainConfigsByCurrency() {
         $testDomainConfigs = [

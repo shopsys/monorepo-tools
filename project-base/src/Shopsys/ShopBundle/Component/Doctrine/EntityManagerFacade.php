@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Doctrine;
 use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Component\Setting\Setting;
 
-class EntityManagerFacade {
+class EntityManagerFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

@@ -12,7 +12,8 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\MessageCatalogue;
 
-class TranslationEditFacade {
+class TranslationEditFacade
+{
 
     /**
      * @var string

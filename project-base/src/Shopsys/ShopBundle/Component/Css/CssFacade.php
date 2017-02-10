@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Css;
 
-class CssFacade {
+class CssFacade
+{
 
     /**
      * @var string

@@ -7,7 +7,8 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class NotInArray extends Constraint {
+class NotInArray extends Constraint
+{
 
     /**
      * @var string

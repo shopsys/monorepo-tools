@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Grid\QueryBuilderDataSource;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
-class OrderStatusGridFactory implements GridFactoryInterface {
+class OrderStatusGridFactory implements GridFactoryInterface
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

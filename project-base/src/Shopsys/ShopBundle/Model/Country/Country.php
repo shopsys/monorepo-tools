@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Country\CountryData;
  * @ORM\Table(name="countries")
  * @ORM\Entity
  */
-class Country {
+class Country
+{
 
     /**
      * @var int

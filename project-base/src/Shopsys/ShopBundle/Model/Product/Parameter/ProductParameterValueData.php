@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\Parameter;
 
-class ProductParameterValueData {
+class ProductParameterValueData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null

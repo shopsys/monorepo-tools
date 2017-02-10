@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid\InlineEdit;
 
 use Symfony\Component\HttpFoundation\Request;
 
-interface GridInlineEditInterface {
+interface GridInlineEditInterface
+{
 
     /**
      * @param mixed $rowId

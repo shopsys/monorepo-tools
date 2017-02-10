@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Domain\Config\Exception;
 
 use Exception;
 
-class DomainConfigsDoNotMatchException extends Exception implements DomainConfigException {
+class DomainConfigsDoNotMatchException extends Exception implements DomainConfigException
+{
 
     /**
      * @param string $message

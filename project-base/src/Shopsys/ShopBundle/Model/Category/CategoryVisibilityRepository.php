@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
-class CategoryVisibilityRepository {
+class CategoryVisibilityRepository
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

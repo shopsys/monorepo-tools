@@ -6,7 +6,8 @@ use IteratorAggregate;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Symfony\Component\Form\DataTransformerInterface;
 
-class ImagesIdsToImagesTransformer implements DataTransformerInterface {
+class ImagesIdsToImagesTransformer implements DataTransformerInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Image\ImageFacade

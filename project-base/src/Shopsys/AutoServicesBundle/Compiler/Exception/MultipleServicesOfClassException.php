@@ -5,7 +5,8 @@ namespace Shopsys\AutoServicesBundle\Compiler\Exception;
 use Exception;
 use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
-class MultipleServicesOfClassException extends Exception implements CompilerException {
+class MultipleServicesOfClassException extends Exception implements CompilerException
+{
 
     /**
      * @param string $className

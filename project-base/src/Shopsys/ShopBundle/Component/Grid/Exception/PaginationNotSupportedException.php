@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Component\Grid\Exception;
 
 use Exception;
 
-class PaginationNotSupportedException extends Exception implements GridException {
+class PaginationNotSupportedException extends Exception implements GridException
+{
 
     /**
      * @param string $message

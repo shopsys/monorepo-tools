@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 use Shopsys\ShopBundle\Component\Translation\TranslatableEntityDataCreator;
 
-class DomainDataCreator {
+class DomainDataCreator
+{
 
     const TEMPLATE_DOMAIN_ID = 1;
 

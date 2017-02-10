@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Component\Fulltext;
 
-class TsqueryFactory {
+class TsqueryFactory
+{
 
     /**
      * @param string|null $searchText

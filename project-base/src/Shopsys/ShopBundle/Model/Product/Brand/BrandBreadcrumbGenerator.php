@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Model\Product\Brand;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface;
 use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 
-class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
+class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository

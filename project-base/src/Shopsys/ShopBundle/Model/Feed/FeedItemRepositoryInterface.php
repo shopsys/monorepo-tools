@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Feed;
 
 use Shopsys\ShopBundle\Component\Domain\Config\DomainConfig;
 
-interface FeedItemRepositoryInterface {
+interface FeedItemRepositoryInterface
+{
 
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig

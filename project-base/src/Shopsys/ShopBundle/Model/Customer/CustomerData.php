@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Customer;
 
-class CustomerData {
+class CustomerData
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\UserData

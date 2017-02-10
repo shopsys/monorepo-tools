@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Script\ScriptData;
 use Shopsys\ShopBundle\Model\Script\ScriptFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class ScriptController extends AdminBaseController {
+class ScriptController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Script\ScriptFacade

@@ -6,7 +6,8 @@ use Doctrine\ORM\EntityManager;
 use Shopsys\ShopBundle\Model\Category\Category;
 use Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryRepository;
 
-class TopCategoryFacade {
+class TopCategoryFacade
+{
 
     /**
      * @var \Doctrine\ORM\EntityManager

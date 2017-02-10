@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Form\Extension\IndexedChoiceList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class DomainsType extends AbstractType {
+class DomainsType extends AbstractType
+{
 
     /**
      * @var \Shopsys\ShopBundle\Component\Domain\Domain

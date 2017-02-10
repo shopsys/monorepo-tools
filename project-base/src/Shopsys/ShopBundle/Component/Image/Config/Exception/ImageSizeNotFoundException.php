@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Image\Config\Exception;
 use Exception;
 use Shopsys\ShopBundle\Component\Image\Config\Exception\ImageConfigException;
 
-class ImageSizeNotFoundException extends Exception implements ImageConfigException {
+class ImageSizeNotFoundException extends Exception implements ImageConfigException
+{
 
     /**
      * @var string

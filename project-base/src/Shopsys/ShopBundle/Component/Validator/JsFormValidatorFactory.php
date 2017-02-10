@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Component\Validator;
 use Fp\JsFormValidatorBundle\Factory\JsFormValidatorFactory as BaseJsFormValidatorFactory;
 use Symfony\Component\Validator\Constraints;
 
-class JsFormValidatorFactory extends BaseJsFormValidatorFactory {
+class JsFormValidatorFactory extends BaseJsFormValidatorFactory
+{
 
     /**
      * @param array $constraints

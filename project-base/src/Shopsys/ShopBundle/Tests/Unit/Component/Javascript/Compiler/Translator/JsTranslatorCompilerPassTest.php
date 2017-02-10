@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompiler;
 use Shopsys\ShopBundle\Component\Javascript\Compiler\Translator\JsTranslatorCompilerPass;
 use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
-class JsTranslatorCompilerPassTest extends FunctionalTestCase {
+class JsTranslatorCompilerPassTest extends FunctionalTestCase
+{
 
     public function testProcess() {
         $translator = $this->getContainer()->get('translator');

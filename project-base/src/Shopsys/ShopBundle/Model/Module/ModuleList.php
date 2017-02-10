@@ -4,7 +4,8 @@ namespace Shopsys\ShopBundle\Model\Module;
 
 use Shopsys\ShopBundle\Component\ConstantList\AbstractTranslatedConstantList;
 
-class ModuleList extends AbstractTranslatedConstantList {
+class ModuleList extends AbstractTranslatedConstantList
+{
 
     const ACCESSORIES_ON_BUY = 'accessoriesOnBuy';
     const PRODUCT_FILTER_COUNTS = 'productFilterCounts';

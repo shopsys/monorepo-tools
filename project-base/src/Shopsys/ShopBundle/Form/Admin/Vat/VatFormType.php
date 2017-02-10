@@ -9,7 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
-class VatFormType extends AbstractType {
+class VatFormType extends AbstractType
+{
 
     const SCENARIO_CREATE = 1;
     const SCENARIO_EDIT = 2;

@@ -2,7 +2,8 @@
 
 namespace Shopsys\ShopBundle\Model\Product\MassAction;
 
-class ProductMassActionData {
+class ProductMassActionData
+{
 
     const SELECT_TYPE_CHECKED = 'selectTypeChecked';
     const SELECT_TYPE_ALL_RESULTS = 'selectTypeAllResults';

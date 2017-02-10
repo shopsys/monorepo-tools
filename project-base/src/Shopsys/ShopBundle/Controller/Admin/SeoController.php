@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormTypeFactory;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Symfony\Component\HttpFoundation\Request;
 
-class SeoController extends AdminBaseController {
+class SeoController extends AdminBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormTypeFactory

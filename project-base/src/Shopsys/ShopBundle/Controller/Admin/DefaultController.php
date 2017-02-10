@@ -5,7 +5,8 @@ namespace Shopsys\ShopBundle\Controller\Admin;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 
-class DefaultController extends AdminBaseController {
+class DefaultController extends AdminBaseController
+{
 
     /**
      * @Route("/dashboard/")

@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
  * @ORM\Table(name="product_parameter_values")
  * @ORM\Entity
  */
-class ProductParameterValue {
+class ProductParameterValue
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Product\Product

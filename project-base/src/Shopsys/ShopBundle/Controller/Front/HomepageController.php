@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade;
 use Shopsys\ShopBundle\Model\Seo\SeoSettingFacade;
 use Shopsys\ShopBundle\Model\Slider\SliderItemFacade;
 
-class HomepageController extends FrontBaseController {
+class HomepageController extends FrontBaseController
+{
 
     /**
      * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer

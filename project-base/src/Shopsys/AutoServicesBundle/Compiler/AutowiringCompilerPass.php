@@ -12,7 +12,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AutowiringCompilerPass implements CompilerPassInterface {
+class AutowiringCompilerPass implements CompilerPassInterface
+{
 
     /**
      * @var \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller
