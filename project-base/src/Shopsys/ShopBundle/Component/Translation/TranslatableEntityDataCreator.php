@@ -42,7 +42,8 @@ class TranslatableEntityDataCreator
      * @param string $templateLocale
      * @param string $newLocale
      */
-    public function copyAllTranslatableDataForNewLocale($templateLocale, $newLocale) {
+    public function copyAllTranslatableDataForNewLocale($templateLocale, $newLocale)
+    {
         $notNullableColumns = $this->entityNotNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName(
             $this->getAllTranslatableEntitiesMetadata()
         );
@@ -58,7 +59,8 @@ class TranslatableEntityDataCreator
     /**
      * @return \Doctrine\ORM\Mapping\ClassMetadata[]
      */
-    private function getAllTranslatableEntitiesMetadata() {
+    private function getAllTranslatableEntitiesMetadata()
+    {
         $translatableEntitiesMetadata = [];
         $allClassesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
         foreach ($allClassesMetadata as $classMetadata) {
@@ -77,7 +79,8 @@ class TranslatableEntityDataCreator
      * @param string $tableName
      * @param string[] $columnNames
      */
-    private function copyTranslatableDataForNewLocale($templateLocale, $newLocale, $tableName, array $columnNames) {
+    private function copyTranslatableDataForNewLocale($templateLocale, $newLocale, $tableName, array $columnNames)
+    {
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);

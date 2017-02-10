@@ -35,7 +35,8 @@ class OrderPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @return \Shopsys\ShopBundle\Model\Order\OrderTotalPrice
      */
-    public function getOrderTotalPrice(Order $order) {
+    public function getOrderTotalPrice(Order $order)
+    {
         $priceWithVat = 0;
         $priceWithoutVat = 0;
         $productPriceWithVat = 0;

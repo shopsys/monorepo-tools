@@ -25,7 +25,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
      */
-    private function getDefaultProductEditData() {
+    private function getDefaultProductEditData()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS);
 
         $em = $this->getEntityManager();
@@ -46,7 +47,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         return $productEditData;
     }
 
-    public function testIsVisibleOnAnyDomainWhenHidden() {
+    public function testIsVisibleOnAnyDomainWhenHidden()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -81,7 +83,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productVisibility1->isVisible());
     }
 
-    public function testIsVisibleOnAnyDomainWhenNotHidden() {
+    public function testIsVisibleOnAnyDomainWhenNotHidden()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -115,7 +118,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertTrue($productVisibility1->isVisible());
     }
 
-    public function testIsVisibleOnAnyDomainWhenSellingInFuture() {
+    public function testIsVisibleOnAnyDomainWhenSellingInFuture()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -145,7 +149,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productAgain->isVisible());
     }
 
-    public function testIsVisibleOnAnyDomainWhenSellingInPast() {
+    public function testIsVisibleOnAnyDomainWhenSellingInPast()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -175,7 +180,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productAgain->isVisible());
     }
 
-    public function testIsVisibleOnAnyDomainWhenSellingNow() {
+    public function testIsVisibleOnAnyDomainWhenSellingNow()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -208,7 +214,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertTrue($productAgain->isVisible());
     }
 
-    public function testIsNotVisibleWhenZeroOrNullPrice() {
+    public function testIsNotVisibleWhenZeroOrNullPrice()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -241,7 +248,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($product2Again->isVisible());
     }
 
-    public function testIsVisibleWithFilledName() {
+    public function testIsVisibleWithFilledName()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -271,7 +279,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertTrue($productVisibility->isVisible());
     }
 
-    public function testIsNotVisibleWithEmptyName() {
+    public function testIsNotVisibleWithEmptyName()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -301,7 +310,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productVisibility->isVisible());
     }
 
-    public function testIsVisibleInVisibileCategory() {
+    public function testIsVisibleInVisibileCategory()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -333,7 +343,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertTrue($productVisibility->isVisible());
     }
 
-    public function testIsNotVisibleInHiddenCategory() {
+    public function testIsNotVisibleInHiddenCategory()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -362,7 +373,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productVisibility->isVisible());
     }
 
-    public function testIsNotVisibleWhenZeroManualPrice() {
+    public function testIsNotVisibleWhenZeroManualPrice()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -404,7 +416,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productVisibility->isVisible());
     }
 
-    public function testIsNotVisibleWhenNullManualPrice() {
+    public function testIsNotVisibleWhenNullManualPrice()
+    {
         $em = $this->getEntityManager();
         $entityManagerFacade = $this->getEntityManagerFacade();
         /* @var $entityManagerFacade \Shopsys\ShopBundle\Component\Doctrine\EntityManagerFacade */
@@ -445,7 +458,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($productVisibility->isVisible());
     }
 
-    public function testRefreshProductsVisibilityVisibleVariants() {
+    public function testRefreshProductsVisibilityVisibleVariants()
+    {
         $em = $this->getEntityManager();
         $productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
         /* @var $productVisibilityRepository \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository */
@@ -480,7 +494,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertTrue($mainVariant->isVisible());
     }
 
-    public function testRefreshProductsVisibilityNotVisibleVariants() {
+    public function testRefreshProductsVisibilityNotVisibleVariants()
+    {
         $em = $this->getEntityManager();
         $productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
         /* @var $productVisibilityRepository \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository */
@@ -523,7 +538,8 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($mainVariant->isVisible());
     }
 
-    public function testRefreshProductsVisibilityNotVisibleMainVariant() {
+    public function testRefreshProductsVisibilityNotVisibleMainVariant()
+    {
         $em = $this->getEntityManager();
         $productVisibilityRepository = $this->getContainer()->get(ProductVisibilityRepository::class);
         /* @var $productVisibilityRepository \Shopsys\ShopBundle\Model\Product\ProductVisibilityRepository */

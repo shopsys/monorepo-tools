@@ -37,7 +37,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     /**
      * @return string[]
      */
-    public function getBodyVariables() {
+    public function getBodyVariables()
+    {
         return [
             self::VARIABLE_EMAIL,
             self::VARIABLE_NEW_PASSWORD_URL,
@@ -47,14 +48,16 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     /**
      * @return string[]
      */
-    public function getSubjectVariables() {
+    public function getSubjectVariables()
+    {
         return $this->getBodyVariables();
     }
 
     /**
      * @return string[]
      */
-    public function getRequiredBodyVariables() {
+    public function getRequiredBodyVariables()
+    {
         return [
             self::VARIABLE_NEW_PASSWORD_URL,
         ];
@@ -63,7 +66,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     /**
      * @return string[]
      */
-    public function getRequiredSubjectVariables() {
+    public function getRequiredSubjectVariables()
+    {
         return [];
     }
 
@@ -72,7 +76,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Model\Mail\MessageData
      */
-    public function createMessage(MailTemplate $template, $user) {
+    public function createMessage(MailTemplate $template, $user)
+    {
         return new MessageData(
             $user->getEmail(),
             $template->getBccEmail(),
@@ -89,7 +94,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return string[variableName]
      */
-    private function getBodyVariablesValues(User $user) {
+    private function getBodyVariablesValues(User $user)
+    {
         return [
             self::VARIABLE_EMAIL => $user->getEmail(),
             self::VARIABLE_NEW_PASSWORD_URL => $this->getVariableNewPasswordUrl($user),
@@ -100,7 +106,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return string
      */
-    private function getVariableNewPasswordUrl(User $user) {
+    private function getVariableNewPasswordUrl(User $user)
+    {
         $router = $this->domainRouterFactory->getRouter($user->getDomainId());
 
         $routeParameters = [
@@ -115,7 +122,8 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return string[variableName]
      */
-    private function getSubjectVariablesValues(User $user) {
+    private function getSubjectVariablesValues(User $user)
+    {
         return $this->getBodyVariablesValues($user);
     }
 }

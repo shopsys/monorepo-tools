@@ -33,7 +33,8 @@ class ProductDataFixtureCsvReader
     /**
      * @return array
      */
-    public function getProductDataFixtureCsvRows() {
+    public function getProductDataFixtureCsvRows()
+    {
         $rawRowsWithHeader = $this->csvReader->getRowsFromCsv($this->path);
         $rawRows = array_slice($rawRowsWithHeader, 1);
         $rows = array_map(function ($rawRow) {
@@ -47,7 +48,8 @@ class ProductDataFixtureCsvReader
      * @param array $rawRow
      * @return array mixed
      */
-    private function prepareRawRow($rawRow) {
+    private function prepareRawRow($rawRow)
+    {
         $row = array_map([TransformString::class, 'emptyToNull'], $rawRow);
 
         return EncodingConverter::cp1250ToUtf8($row);

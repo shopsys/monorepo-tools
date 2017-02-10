@@ -53,7 +53,8 @@ class BestsellingProductFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
      */
-    public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup) {
+    public function getAllOfferedProductDetails($domainId, Category $category, PricingGroup $pricingGroup)
+    {
         $manualBestsellingProducts = $this->manualBestsellingProductRepository->getOfferedByCategory(
             $domainId,
             $category,

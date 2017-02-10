@@ -30,7 +30,8 @@ class PromoCodeController extends FrontBaseController
         $this->promoCodeFacade = $promoCodeFacade;
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         return $this->render('@ShopsysShop/Front/Content/Order/PromoCode/index.html.twig', [
             'validEnteredPromoCode' => $this->currentPromoCodeFacade->getValidEnteredPromoCodeOrNull(),
         ]);
@@ -39,7 +40,8 @@ class PromoCodeController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function applyAction(Request $request) {
+    public function applyAction(Request $request)
+    {
         $promoCode = $request->get(self::PROMO_CODE_PARAMETER);
         try {
             $this->currentPromoCodeFacade->setEnteredPromoCode($promoCode);
@@ -54,7 +56,8 @@ class PromoCodeController extends FrontBaseController
         return new JsonResponse(['result' => true]);
     }
 
-    public function removeAction() {
+    public function removeAction()
+    {
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
         $this->getFlashMessageSender()->addSuccessFlash(t('Discount code removed from order'));
 

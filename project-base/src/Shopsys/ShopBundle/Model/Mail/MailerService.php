@@ -17,14 +17,16 @@ class MailerService
     /**
      * @param Swift_Mailer $mailer
      */
-    public function __construct(Swift_Mailer $mailer) {
+    public function __construct(Swift_Mailer $mailer)
+    {
         $this->mailer = $mailer;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Mail\MessageData $messageData
      */
-    public function send(MessageData $messageData) {
+    public function send(MessageData $messageData)
+    {
         $message = $this->getMessageWithReplacedVariables($messageData);
         $failedRecipients = [];
         $successSend = $this->mailer->send($message, $failedRecipients);
@@ -37,7 +39,8 @@ class MailerService
      * @param \Shopsys\ShopBundle\Model\Mail\MessageData $messageData
      * @return \Swift_Message
      */
-    private function getMessageWithReplacedVariables(MessageData $messageData) {
+    private function getMessageWithReplacedVariables(MessageData $messageData)
+    {
         $toEmail = $messageData->toEmail;
         $body = $this->replaceVariables(
             $messageData->body,
@@ -73,7 +76,8 @@ class MailerService
      * @param array $variablesKeysAndValues
      * @return string
      */
-    private function replaceVariables($string, $variablesKeysAndValues) {
+    private function replaceVariables($string, $variablesKeysAndValues)
+    {
         return strtr($string, $variablesKeysAndValues);
     }
 }

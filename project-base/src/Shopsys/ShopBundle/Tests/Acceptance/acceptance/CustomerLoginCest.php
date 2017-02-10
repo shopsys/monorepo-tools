@@ -38,7 +38,8 @@ class CustomerLoginCest
         $me->seeCurrentPageEquals('/');
     }
 
-    public function testLoginAsCustomerFromLoginPage(LoginPage $loginPage, AcceptanceTester $me) {
+    public function testLoginAsCustomerFromLoginPage(LoginPage $loginPage, AcceptanceTester $me)
+    {
         $me->wantTo('login as a customer from login page');
         $me->amOnPage('/prihlaseni/');
         $loginPage->login('no-reply@netdevelo.cz', 'user123');

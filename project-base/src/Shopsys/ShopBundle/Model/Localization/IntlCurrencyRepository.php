@@ -169,7 +169,8 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
     /**
      * {@inheritDoc}
      */
-    public function get($currencyCode, $locale = null, $fallbackLocale = null) {
+    public function get($currencyCode, $locale = null, $fallbackLocale = null)
+    {
         if (!$this->isSupportedCurrency($currencyCode)) {
             throw new \Shopsys\ShopBundle\Model\Localization\Exception\UnsupportedCurrencyException($currencyCode);
         }
@@ -183,7 +184,8 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
      * {@inheritDoc}
      * @return \CommerceGuys\Intl\Currency\CurrencyInterface[]
      */
-    public function getAll($locale = null, $fallbackLocale = null) {
+    public function getAll($locale = null, $fallbackLocale = null)
+    {
         $intlCurrencies = parent::getAll($locale, $fallbackLocale);
         /* @var $intlCurrencies \CommerceGuys\Intl\Currency\CurrencyInterface[] */
 
@@ -201,7 +203,8 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
      * @param string $currencyCode
      * @return bool
      */
-    public function isSupportedCurrency($currencyCode) {
+    public function isSupportedCurrency($currencyCode)
+    {
         return in_array($currencyCode, self::SUPPORTED_CURRENCY_CODES, true);
     }
 }

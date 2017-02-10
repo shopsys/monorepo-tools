@@ -14,14 +14,16 @@ class ProductExtension extends \Twig_Extension
      */
     private $categoryFacade;
 
-    public function __construct(CategoryFacade $categoryFacade) {
+    public function __construct(CategoryFacade $categoryFacade)
+    {
         $this->categoryFacade = $categoryFacade;
     }
 
     /**
      * @return array
      */
-    public function getFilters() {
+    public function getFilters()
+    {
         return [
             new Twig_SimpleFilter('productDisplayName', [$this, 'getProductDisplayName']),
             new Twig_SimpleFilter('productListDisplayName', [$this, 'getProductListDisplayName']),
@@ -31,7 +33,8 @@ class ProductExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction(
                 'productMainCategory',
@@ -47,7 +50,8 @@ class ProductExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'product';
     }
 
@@ -55,7 +59,8 @@ class ProductExtension extends \Twig_Extension
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return string
      */
-    public function getProductDisplayName(Product $product) {
+    public function getProductDisplayName(Product $product)
+    {
         if ($product->getName() === null) {
             return t('ID %productId%', [
                 '%productId%' => $product->getId(),
@@ -69,7 +74,8 @@ class ProductExtension extends \Twig_Extension
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return string
      */
-    public function getProductListDisplayName(Product $product) {
+    public function getProductListDisplayName(Product $product)
+    {
         if ($product->getName() === null) {
             return t('Product name in default language is not entered');
         }
@@ -82,7 +88,8 @@ class ProductExtension extends \Twig_Extension
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getProductMainCategory(Product $product, $domainId) {
+    public function getProductMainCategory(Product $product, $domainId)
+    {
         return $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainId);
     }
 
@@ -91,7 +98,8 @@ class ProductExtension extends \Twig_Extension
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function findProductMainCategory(Product $product, $domainId) {
+    public function findProductMainCategory(Product $product, $domainId)
+    {
         return $this->categoryFacade->findProductMainCategoryByDomainId($product, $domainId);
     }
 }

@@ -15,7 +15,8 @@ class ProductPrice extends Price
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $price
      * @param bool $priceFrom
      */
-    public function __construct(Price $price, $priceFrom) {
+    public function __construct(Price $price, $priceFrom)
+    {
         $this->priceFrom = $priceFrom;
         parent::__construct($price->getPriceWithoutVat(), $price->getPriceWithVat());
     }
@@ -23,7 +24,8 @@ class ProductPrice extends Price
     /**
      * @return bool
      */
-    public function isPriceFrom() {
+    public function isPriceFrom()
+    {
         return $this->priceFrom;
     }
 }

@@ -25,7 +25,8 @@ class PaymentEditFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormTypeFactory $paymentFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[] $currencies
      */
-    public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, array $currencies) {
+    public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, array $currencies)
+    {
         $this->paymentFormTypeFactory = $paymentFormTypeFactory;
         $this->currencies = $currencies;
     }
@@ -33,7 +34,8 @@ class PaymentEditFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'payment_edit_form';
     }
 
@@ -41,7 +43,8 @@ class PaymentEditFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('paymentData', $this->paymentFormTypeFactory->create())
             ->add($this->getPricesBuilder($builder))
@@ -52,7 +55,8 @@ class PaymentEditFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @return \Symfony\Component\Form\FormBuilderInterface
      */
-    private function getPricesBuilder(FormBuilderInterface $builder) {
+    private function getPricesBuilder(FormBuilderInterface $builder)
+    {
         $pricesBuilder = $builder->create('prices', null, [
             'compound' => true,
         ]);
@@ -80,7 +84,8 @@ class PaymentEditFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => PaymentEditData::class,
             'attr' => ['novalidate' => 'novalidate'],

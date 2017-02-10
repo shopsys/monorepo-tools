@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Twig\DateTimeFormatterExtension;
 
 class DateTimeFormatterExtensionTest extends FunctionalTestCase
 {
-    public function formatDateDataProvider() {
+    public function formatDateDataProvider()
+    {
         return [
             ['input' => new DateTime('2015-04-08'), 'locale' => 'cs', 'result' => '8. 4. 2015'],
             ['input' => '2015-04-08', 'locale' => 'cs', 'result' => '8. 4. 2015'],
@@ -23,7 +24,8 @@ class DateTimeFormatterExtensionTest extends FunctionalTestCase
     /**
      * @dataProvider formatDateDataProvider
      */
-    public function testFormatDate($input, $locale, $result) {
+    public function testFormatDate($input, $locale, $result)
+    {
         $localizationMock = $this->getMockBuilder(Localization::class)
             ->disableOriginalConstructor()
             ->setMethods(['getLocale'])

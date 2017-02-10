@@ -15,7 +15,8 @@ class CategoryDataFixture extends AbstractReferenceFixture
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $this->editCategoryOnDomain2(
             DemoCategoryDataFixture::ELECTRONICS,
             'Electronics',
@@ -112,7 +113,8 @@ class CategoryDataFixture extends AbstractReferenceFixture
      * @param string|null $nameEn
      * @param string|null $descriptionDomain2
      */
-    private function editCategoryOnDomain2($referenceName, $nameEn, $descriptionDomain2) {
+    private function editCategoryOnDomain2($referenceName, $nameEn, $descriptionDomain2)
+    {
         $categoryFacade = $this->get(CategoryFacade::class);
         /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
         $categoryDataFactory = $this->get(CategoryDataFactory::class);

@@ -69,7 +69,8 @@ class CustomerFacade
      * @param int $userId
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function getUserById($userId) {
+    public function getUserById($userId)
+    {
         return $this->userRepository->getUserById($userId);
     }
 
@@ -77,7 +78,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function register(UserData $userData) {
+    public function register(UserData $userData)
+    {
         $userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain($userData->email, $userData->domainId);
 
         $billingAddress = new BillingAddress(new BillingAddressData());
@@ -102,7 +104,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function create(CustomerData $customerData) {
+    public function create(CustomerData $customerData)
+    {
         $toFlush = [];
         $billingAddress = new BillingAddress($customerData->billingAddressData);
         $this->em->persist($billingAddress);
@@ -142,7 +145,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    private function edit($userId, CustomerData $customerData) {
+    private function edit($userId, CustomerData $customerData)
+    {
         $user = $this->userRepository->getUserById($userId);
 
         $this->customerService->edit($user, $customerData->userData);
@@ -172,7 +176,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function editByAdmin($userId, CustomerData $customerData) {
+    public function editByAdmin($userId, CustomerData $customerData)
+    {
         $user = $this->edit($userId, $customerData);
 
         $userByEmailAndDomain = $this->userRepository->findUserByEmailAndDomain(
@@ -191,7 +196,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerData $customerData
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function editByCustomer($userId, CustomerData $customerData) {
+    public function editByCustomer($userId, CustomerData $customerData)
+    {
         $user = $this->edit($userId, $customerData);
 
         $this->em->flush();
@@ -202,7 +208,8 @@ class CustomerFacade
     /**
      * @param int $userId
      */
-    public function delete($userId) {
+    public function delete($userId)
+    {
         $user = $this->userRepository->getUserById($userId);
 
         $this->em->remove($user);
@@ -213,7 +220,8 @@ class CustomerFacade
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function amendCustomerDataFromOrder(User $user, Order $order) {
+    public function amendCustomerDataFromOrder(User $user, Order $order)
+    {
         $this->edit(
             $user->getId(),
             $this->customerService->getAmendedCustomerDataByOrder($user, $order)

@@ -14,7 +14,8 @@ class PaymentDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $paymentEditDataFactory = $this->get(PaymentEditDataFactory::class);
         /* @var $paymentEditDataFactory \Shopsys\ShopBundle\Model\Payment\PaymentEditDataFactory */
         $paymentFacade = $this->get(PaymentFacade::class);

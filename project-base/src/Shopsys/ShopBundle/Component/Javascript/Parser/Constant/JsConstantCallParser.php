@@ -40,7 +40,8 @@ class JsConstantCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
      * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\JsConstantCall[]
      */
-    public function parse(JProgramNode $node) {
+    public function parse(JProgramNode $node)
+    {
         $jsConstantCalls = [];
 
         $callExprNodes = $node->get_nodes_by_symbol(J_CALL_EXPR);
@@ -64,7 +65,8 @@ class JsConstantCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return bool
      */
-    private function isConstantFunctionCall(JCallExprNode $callExprNode) {
+    private function isConstantFunctionCall(JCallExprNode $callExprNode)
+    {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 
         return $functionName === self::FUNCTION_NAME;
@@ -74,7 +76,8 @@ class JsConstantCallParser
      * @param \PLUG\JavaScript\JNodes\JNodeBase $constantNameArgumentNode
      * @return string
      */
-    private function getConstantName(JNodeBase $constantNameArgumentNode) {
+    private function getConstantName(JNodeBase $constantNameArgumentNode)
+    {
         try {
             $constantName = $this->jsStringParser->getConcatenatedString($constantNameArgumentNode);
         } catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
@@ -93,7 +96,8 @@ class JsConstantCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return \PLUG\JavaScript\JNodes\JNodeBase
      */
-    private function getConstantNameArgumentNode(JCallExprNode $callExprNode) {
+    private function getConstantNameArgumentNode(JCallExprNode $callExprNode)
+    {
         $argumentNodes = $this->jsFunctionCallParser->getArgumentNodes($callExprNode);
         if (!isset($argumentNodes[self::NAME_ARGUMENT_INDEX])) {
             throw new \Shopsys\ShopBundle\Component\Javascript\Parser\Constant\Exception\JsConstantCallParserException(

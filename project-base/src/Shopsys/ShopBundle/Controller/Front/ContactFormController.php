@@ -16,14 +16,16 @@ class ContactFormController extends FrontBaseController
      */
     private $contactFormFacade;
 
-    public function __construct(ContactFormFacade $contactFormFacade) {
+    public function __construct(ContactFormFacade $contactFormFacade)
+    {
         $this->contactFormFacade = $contactFormFacade;
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function sendAction(Request $request) {
+    public function sendAction(Request $request)
+    {
         $form = $this->createForm(
             new ContactFormType(),
             new ContactFormData(),
@@ -66,7 +68,8 @@ class ContactFormController extends FrontBaseController
 
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         $form = $this->createForm(
             new ContactFormType(),
             new ContactFormData(),

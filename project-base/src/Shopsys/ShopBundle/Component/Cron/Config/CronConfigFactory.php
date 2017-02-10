@@ -18,7 +18,8 @@ class CronConfigFactory
      */
     private $cronConfigLoader;
 
-    public function __construct(CronTimeResolver $cronTimeResolver, CronConfigLoader $cronConfigLoader) {
+    public function __construct(CronTimeResolver $cronTimeResolver, CronConfigLoader $cronConfigLoader)
+    {
         $this->cronConfigLoader = $cronConfigLoader;
         $this->cronTimeResolver = $cronTimeResolver;
     }
@@ -27,7 +28,8 @@ class CronConfigFactory
      * @param string $ymlFilepath
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronConfig
      */
-    public function create($ymlFilepath) {
+    public function create($ymlFilepath)
+    {
         $cronModuleConfigs = $this->cronConfigLoader->loadCronModuleConfigsFromYaml($ymlFilepath);
 
         return new CronConfig($this->cronTimeResolver, $cronModuleConfigs);

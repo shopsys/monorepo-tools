@@ -13,14 +13,16 @@ class LoginPage extends AbstractPage
      * @param string $username
      * @param string $password
      */
-    public function login($username, $password) {
+    public function login($username, $password)
+    {
         $this->tester->amOnPage('/admin/');
         $this->tester->fillFieldByName('admin_login_form[username]', $username);
         $this->tester->fillFieldByName('admin_login_form[password]', $password);
         $this->tester->clickByText('Přihlásit se');
     }
 
-    public function assertLoginFailed() {
+    public function assertLoginFailed()
+    {
         $this->tester->see('Přihlášení se nepodařilo.');
         $this->tester->seeCurrentPageEquals('/admin/');
     }

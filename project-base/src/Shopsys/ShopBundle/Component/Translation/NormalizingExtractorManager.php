@@ -18,7 +18,8 @@ class NormalizingExtractorManager extends ExtractorManager
      * @param \Symfony\Component\HttpKernel\Log\LoggerInterface $logger
      * @param \Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer $messageIdNormalizer
      */
-    public function __construct(FileExtractor $extractor, LoggerInterface $logger, MessageIdNormalizer $messageIdNormalizer) {
+    public function __construct(FileExtractor $extractor, LoggerInterface $logger, MessageIdNormalizer $messageIdNormalizer)
+    {
         parent::__construct($extractor, $logger);
         $this->messageIdNormalizer = $messageIdNormalizer;
     }
@@ -26,7 +27,8 @@ class NormalizingExtractorManager extends ExtractorManager
     /**
      * @inheritdoc
      */
-    public function extract() {
+    public function extract()
+    {
         return $this->messageIdNormalizer->getNormalizedCatalogue(parent::extract());
     }
 }

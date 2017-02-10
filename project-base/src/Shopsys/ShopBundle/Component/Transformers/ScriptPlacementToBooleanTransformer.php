@@ -11,7 +11,8 @@ class ScriptPlacementToBooleanTransformer implements DataTransformerInterface
      * @param string|null $scriptPlacement
      * @return bool|null
      */
-    public function transform($scriptPlacement) {
+    public function transform($scriptPlacement)
+    {
         if ($scriptPlacement === Script::PLACEMENT_ORDER_SENT_PAGE) {
             return true;
         } elseif ($scriptPlacement === Script::PLACEMENT_ALL_PAGES) {
@@ -23,7 +24,8 @@ class ScriptPlacementToBooleanTransformer implements DataTransformerInterface
      * @param bool $scriptHasOrderPlacement
      * @return string
      */
-    public function reverseTransform($scriptHasOrderPlacement) {
+    public function reverseTransform($scriptHasOrderPlacement)
+    {
         if (!is_bool($scriptHasOrderPlacement)) {
             $message = 'Expected boolean, got "' . gettype($scriptHasOrderPlacement) . '".';
             throw new \Symfony\Component\Form\Exception\TransformationFailedException($message);

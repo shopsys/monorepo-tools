@@ -61,7 +61,8 @@ class SettingValue
      * @param \DateTime|string|int|float|bool|null $value
      * @param int $domainId
      */
-    public function __construct($name, $value, $domainId) {
+    public function __construct($name, $value, $domainId)
+    {
         $this->name = $name;
         $this->setValue($value);
         $this->domainId = $domainId;
@@ -70,21 +71,24 @@ class SettingValue
     /**
      * @param \DateTime|string|int|float|bool|null $value
      */
-    public function edit($value) {
+    public function edit($value)
+    {
         $this->setValue($value);
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return \DateTime|string|int|float|bool|null
      */
-    public function getValue() {
+    public function getValue()
+    {
         switch ($this->type) {
             case self::TYPE_INTEGER:
                 return (int)$this->value;
@@ -106,14 +110,16 @@ class SettingValue
     /**
      * @return int|null
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @param \DateTime|string|int|float|bool|null $value
      */
-    private function setValue($value) {
+    private function setValue($value)
+    {
         $this->type = $this->getValueType($value);
         if ($this->type === self::TYPE_BOOLEAN) {
             $this->value = $value === true ? self::BOOLEAN_TRUE : self::BOOLEAN_FALSE;
@@ -130,7 +136,8 @@ class SettingValue
      * @param \DateTime|string|int|float|bool|null $value
      * @return string
      */
-    private function getValueType($value) {
+    private function getValueType($value)
+    {
         if (is_int($value)) {
             return self::TYPE_INTEGER;
         } elseif (is_float($value)) {

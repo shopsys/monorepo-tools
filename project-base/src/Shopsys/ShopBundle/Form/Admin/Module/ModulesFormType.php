@@ -17,14 +17,16 @@ class ModulesFormType extends AbstractType
      */
     private $moduleList;
 
-    public function __construct(ModuleList $moduleList) {
+    public function __construct(ModuleList $moduleList)
+    {
         $this->moduleList = $moduleList;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'modules_form';
     }
 
@@ -32,7 +34,8 @@ class ModulesFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add(self::MODULES_SUBFORM_NAME, FormType::FORM)
             ->add('save', FormType::SUBMIT);
@@ -45,7 +48,8 @@ class ModulesFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

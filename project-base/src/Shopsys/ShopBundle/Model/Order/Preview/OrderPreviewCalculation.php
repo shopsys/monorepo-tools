@@ -200,7 +200,8 @@ class OrderPreviewCalculation
      * @param \Shopsys\ShopBundle\Model\Pricing\Price[] $quantifiedItemsDiscounts
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts) {
+    private function getProductsPrice(array $quantifiedItemsPrices, array $quantifiedItemsDiscounts)
+    {
         $finalPrice = new Price(0, 0);
 
         foreach ($quantifiedItemsPrices as $quantifiedItemPrice) {

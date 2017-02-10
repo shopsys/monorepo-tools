@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
 {
-    public function testRecalculateOnProductEditNotUsingStock() {
+    public function testRecalculateOnProductEditNotUsingStock()
+    {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
@@ -38,7 +39,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
         $this->assertSame($this->getReference(AvailabilityDataFixture::ON_REQUEST), $productFromDb->getCalculatedAvailability());
     }
 
-    public function testRecalculateOnProductEditUsingStockInStock() {
+    public function testRecalculateOnProductEditUsingStockInStock()
+    {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
@@ -68,7 +70,8 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
         $this->assertSame($availabilityFacade->getDefaultInStockAvailability(), $productFromDb->getCalculatedAvailability());
     }
 
-    public function testRecalculateOnProductEditUsingStockOutOfStock() {
+    public function testRecalculateOnProductEditUsingStockOutOfStock()
+    {
         $productFacade = $this->getContainer()->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
         $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);

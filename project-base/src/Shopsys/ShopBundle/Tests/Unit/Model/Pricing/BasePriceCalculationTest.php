@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function calculateBasePriceProvider() {
+    public function calculateBasePriceProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -66,7 +67,8 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round($basePriceVatAmount, 6), round($basePrice->getVatAmount(), 6));
     }
 
-    public function applyCoefficientProvider() {
+    public function applyCoefficientProvider()
+    {
         return [
             [
                 'priceWithVat' => '100',

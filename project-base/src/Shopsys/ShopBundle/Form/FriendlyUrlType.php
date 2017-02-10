@@ -17,7 +17,8 @@ class FriendlyUrlType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add(self::FIELD_DOMAIN, FormType::DOMAIN, [
             'displayUrl' => true,
             'required' => true,
@@ -34,14 +35,16 @@ class FriendlyUrlType extends AbstractType
     /**
      * @inheritdoc
      */
-    public function getParent() {
+    public function getParent()
+    {
         return FormType::FORM;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return FormType::FRIENDLY_URL;
     }
 }

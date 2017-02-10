@@ -19,7 +19,8 @@ class RegistrationFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('firstName', FormType::TEXT, [
                 'constraints' => [
@@ -60,14 +61,16 @@ class RegistrationFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'registration_form';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => UserData::class,
             'attr' => ['novalidate' => 'novalidate'],

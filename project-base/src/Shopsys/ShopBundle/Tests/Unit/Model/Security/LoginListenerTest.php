@@ -17,7 +17,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class LoginListenerTest extends PHPUnit_Framework_TestCase
 {
-    public function testOnSecurityInteractiveLoginUnique() {
+    public function testOnSecurityInteractiveLoginUnique()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()
@@ -47,7 +48,8 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
         $loginListener->onSecurityInteractiveLogin($eventMock);
     }
 
-    public function testOnSecurityInteractiveLoginTimelimit() {
+    public function testOnSecurityInteractiveLoginTimelimit()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()
@@ -77,7 +79,8 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
         $loginListener->onSecurityInteractiveLogin($eventMock);
     }
 
-    public function testOnSecurityInteractiveLoginResetOrderForm() {
+    public function testOnSecurityInteractiveLoginResetOrderForm()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()
@@ -110,7 +113,8 @@ class LoginListenerTest extends PHPUnit_Framework_TestCase
         $loginListener->onSecurityInteractiveLogin($eventMock);
     }
 
-    public function testOnSecurityInteractiveLoginAdministrator() {
+    public function testOnSecurityInteractiveLoginAdministrator()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()

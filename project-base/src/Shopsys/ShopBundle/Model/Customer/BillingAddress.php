@@ -86,7 +86,8 @@ class BillingAddress
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
      */
-    public function __construct(BillingAddressData $billingAddressData) {
+    public function __construct(BillingAddressData $billingAddressData)
+    {
         $this->street = $billingAddressData->street;
         $this->city = $billingAddressData->city;
         $this->postcode = $billingAddressData->postcode;
@@ -103,7 +104,8 @@ class BillingAddress
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\BillingAddressData $billingAddressData
      */
-    public function edit(BillingAddressData $billingAddressData) {
+    public function edit(BillingAddressData $billingAddressData)
+    {
         $this->street = $billingAddressData->street;
         $this->city = $billingAddressData->city;
         $this->postcode = $billingAddressData->postcode;
@@ -124,63 +126,72 @@ class BillingAddress
     /**
      * @return bool
      */
-    public function isCompanyCustomer() {
+    public function isCompanyCustomer()
+    {
         return $this->companyCustomer;
     }
 
     /**
      * @return string|null
      */
-    public function getCompanyName() {
+    public function getCompanyName()
+    {
         return $this->companyName;
     }
 
     /**
      * @return string|null
      */
-    public function getCompanyNumber() {
+    public function getCompanyNumber()
+    {
         return $this->companyNumber;
     }
 
     /**
      * @return string|null
      */
-    public function getCompanyTaxNumber() {
+    public function getCompanyTaxNumber()
+    {
         return $this->companyTaxNumber;
     }
 
     /**
      * @return string|null
      */
-    public function getStreet() {
+    public function getStreet()
+    {
         return $this->street;
     }
 
     /**
      * @return string|null
      */
-    public function getCity() {
+    public function getCity()
+    {
         return $this->city;
     }
 
     /**
      * @return string|null
      */
-    public function getPostcode() {
+    public function getPostcode()
+    {
         return $this->postcode;
     }
 
     /**
      * @return string|null
      */
-    public function getTelephone() {
+    public function getTelephone()
+    {
         return $this->telephone;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Country\Country|null
      */
-    public function getCountry() {
+    public function getCountry()
+    {
         return $this->country;
     }
 }

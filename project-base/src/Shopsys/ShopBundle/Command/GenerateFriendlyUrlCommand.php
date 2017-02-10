@@ -9,13 +9,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class GenerateFriendlyUrlCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:generate:friendly-url')
             ->setDescription('Generate friendly urls for supported entities.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $friendlyUrlGeneratorFacade = $this->getContainer()->get(FriendlyUrlGeneratorFacade::class);
         /* @var $friendlyUrlGeneratorFacade \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlGeneratorFacade */
 

@@ -14,7 +14,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class UrlsProviderTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetFrontTestableUrlsProviderData() {
+    public function testGetFrontTestableUrlsProviderData()
+    {
         $routeCollection = [
             'baz' => new Route('baz'),
             'front_foo' => new Route('foo'),
@@ -62,7 +63,8 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($providerData[1][3]);
     }
 
-    public function testGetAdminTestableUrlsProviderData() {
+    public function testGetAdminTestableUrlsProviderData()
+    {
         $routeCollection = [
             'baz' => new Route('baz'),
             'front_foo' => new Route('foo'),
@@ -94,7 +96,8 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($providerData[0][3]);
     }
 
-    public function testGetFrontTestableUrlsProviderDataStatusCode() {
+    public function testGetFrontTestableUrlsProviderDataStatusCode()
+    {
         $routeCollection = [
             'front_foo' => new Route('foo'),
             'front_delete' => new Route('foo/delete/'),
@@ -129,7 +132,8 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(302, $providerData[1][2]);
     }
 
-    public function testGetAdminTestableUrlsProviderDataStatusCode() {
+    public function testGetAdminTestableUrlsProviderDataStatusCode()
+    {
         $routeCollection = [
             'admin_bar' => new Route('bar'),
         ];
@@ -162,7 +166,8 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(302, $providerData[0][2]);
     }
 
-    public function testGetTestableRoutes() {
+    public function testGetTestableRoutes()
+    {
         $routeCollection = [
             'front_testable' => new Route('testable'),
             'front_ignored' => new Route('ignored'),
@@ -212,7 +217,8 @@ class UrlsProviderTest extends PHPUnit_Framework_TestCase
         $this->assertSame('admin/testable', $adminProviderData[0][1]);
     }
 
-    public function testGetRouteParameters() {
+    public function testGetRouteParameters()
+    {
         $routeCollection = [
             'front_foo' => new Route('foo/{barId}/{id}/{bazId}', ['barId' => 3]),
         ];

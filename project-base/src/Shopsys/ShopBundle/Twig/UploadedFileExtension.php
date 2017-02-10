@@ -38,7 +38,8 @@ class UploadedFileExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('hasUploadedFile', [$this, 'hasUploadedFile']),
             new Twig_SimpleFunction('uploadedFileUrl', [$this, 'getUploadedFileUrl']),
@@ -51,7 +52,8 @@ class UploadedFileExtension extends Twig_Extension
      * @param Object $entity
      * @return bool
      */
-    public function hasUploadedFile($entity) {
+    public function hasUploadedFile($entity)
+    {
         return $this->uploadedFileFacade->hasUploadedFile($entity);
     }
 
@@ -59,7 +61,8 @@ class UploadedFileExtension extends Twig_Extension
      * @param Object $entity
      * @return string
      */
-    public function getUploadedFileUrl($entity) {
+    public function getUploadedFileUrl($entity)
+    {
         $uploadedFile = $this->getUploadedFileByEntity($entity);
 
         return $this->uploadedFileFacade->getUploadedFileUrl($this->domain->getCurrentDomainConfig(), $uploadedFile);
@@ -69,7 +72,8 @@ class UploadedFileExtension extends Twig_Extension
      * @param Object $entity
      * @return string
      */
-    public function getUploadedFilePreviewHtml($entity) {
+    public function getUploadedFilePreviewHtml($entity)
+    {
         $uploadedFile = $this->getUploadedFileByEntity($entity);
         $filepath = $this->uploadedFileFacade->getAbsoluteUploadedFileFilepath($uploadedFile);
         $fileThumbnailInfo = $this->fileThumbnailExtension->getFileThumbnailInfo($filepath);
@@ -94,14 +98,16 @@ class UploadedFileExtension extends Twig_Extension
      * @param Object $entity
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
      */
-    public function getUploadedFileByEntity($entity) {
+    public function getUploadedFileByEntity($entity)
+    {
         return $this->uploadedFileFacade->getUploadedFileByEntity($entity);
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'file_extension';
     }
 }

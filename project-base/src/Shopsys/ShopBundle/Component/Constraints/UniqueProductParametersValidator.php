@@ -12,7 +12,8 @@ class UniqueProductParametersValidator extends ConstraintValidator
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($values, Constraint $constraint) {
+    public function validate($values, Constraint $constraint)
+    {
         if (!$constraint instanceof UniqueProductParameters) {
             throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
         }

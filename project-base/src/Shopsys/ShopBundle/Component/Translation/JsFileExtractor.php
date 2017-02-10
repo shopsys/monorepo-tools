@@ -29,7 +29,8 @@ class JsFileExtractor implements FileVisitorInterface
      */
     private $jsTranslatorCallParser;
 
-    public function __construct(JsTranslatorCallParser $jsTranslatorCallParser) {
+    public function __construct(JsTranslatorCallParser $jsTranslatorCallParser)
+    {
         $this->jsTranslatorCallParser = $jsTranslatorCallParser;
     }
 
@@ -37,7 +38,8 @@ class JsFileExtractor implements FileVisitorInterface
      * @param \SplFileInfo $file
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      */
-    public function visitFile(SplFileInfo $file, MessageCatalogue $catalogue) {
+    public function visitFile(SplFileInfo $file, MessageCatalogue $catalogue)
+    {
         if ('.js' !== substr($file, -3)) {
             return;
         }
@@ -66,7 +68,8 @@ class JsFileExtractor implements FileVisitorInterface
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      * @param array $ast
      */
-    public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast) {
+    public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast)
+    {
     }
 
     /**
@@ -74,13 +77,15 @@ class JsFileExtractor implements FileVisitorInterface
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      * @param \Twig_Node $node
      */
-    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $node) {
+    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $node)
+    {
     }
 
     /**
      * @param string $contents
      */
-    private function parseFile($contents) {
+    private function parseFile($contents)
+    {
         $node = JParser::parse_string($contents, true, JParser::class, JTokenizer::class);
 
         $jsTranslatorCalls = $this->jsTranslatorCallParser->parse($node);

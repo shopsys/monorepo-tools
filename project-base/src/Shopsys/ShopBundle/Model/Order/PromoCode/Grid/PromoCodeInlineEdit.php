@@ -42,7 +42,8 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      * @return int
      */
-    protected function createEntityAndGetId($promoCodeData) {
+    protected function createEntityAndGetId($promoCodeData)
+    {
         $promoCode = $this->promoCodeFacade->create($promoCodeData);
 
         return $promoCode->getId();
@@ -52,7 +53,8 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      * @param int $promoCodeId
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      */
-    protected function editEntity($promoCodeId, $promoCodeData) {
+    protected function editEntity($promoCodeId, $promoCodeData)
+    {
         $this->promoCodeFacade->edit($promoCodeId, $promoCodeData);
     }
 
@@ -60,7 +62,8 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      * @param int|null $promoCodeId
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData
      */
-    protected function getFormDataObject($promoCodeId = null) {
+    protected function getFormDataObject($promoCodeId = null)
+    {
         $promoCodeData = new PromoCodeData();
 
         if ($promoCodeId !== null) {
@@ -76,7 +79,8 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
      * @param int $promoCodeId
      * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
      */
-    protected function getFormType($promoCodeId) {
+    protected function getFormType($promoCodeId)
+    {
         if ($promoCodeId !== null) {
             $promoCode = $this->promoCodeFacade->getById($promoCodeId);
 

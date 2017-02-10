@@ -50,7 +50,8 @@ class FeedConfigFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getFeedConfigs() {
+    public function getFeedConfigs()
+    {
         return $this->feedConfigRepository->getFeedConfigs();
     }
 
@@ -58,21 +59,24 @@ class FeedConfigFacade
      * @param string $feedName
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
      */
-    public function getFeedConfigByName($feedName) {
+    public function getFeedConfigByName($feedName)
+    {
         return $this->feedConfigRepository->getFeedConfigByName($feedName);
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getDeliveryFeedConfigs() {
+    public function getDeliveryFeedConfigs()
+    {
         return $this->feedConfigRepository->getDeliveryFeedConfigs();
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getAllFeedConfigs() {
+    public function getAllFeedConfigs()
+    {
         return $this->feedConfigRepository->getAllFeedConfigs();
     }
 
@@ -81,7 +85,8 @@ class FeedConfigFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig) {
+    public function getFeedUrl(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    {
         $feedHash = $this->setting->get(Setting::FEED_HASH);
         return $domainConfig->getUrl() . $this->feedUrlPrefix . $feedConfig->getFeedFilename($domainConfig, $feedHash);
     }
@@ -91,7 +96,8 @@ class FeedConfigFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig) {
+    public function getFeedFilepath(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    {
         $feedHash = $this->setting->get(Setting::FEED_HASH);
         return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
     }

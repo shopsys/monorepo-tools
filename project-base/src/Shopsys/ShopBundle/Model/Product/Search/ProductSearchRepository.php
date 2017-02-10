@@ -13,7 +13,8 @@ class ProductSearchRepository
      */
     private $tsqueryFactory;
 
-    public function __construct(TsqueryFactory $tsqueryFactory) {
+    public function __construct(TsqueryFactory $tsqueryFactory)
+    {
         $this->tsqueryFactory = $tsqueryFactory;
     }
 
@@ -21,7 +22,8 @@ class ProductSearchRepository
      * @param \Doctrine\ORM\QueryBuilder $productQueryBuilder
      * @param string|null $searchText
      */
-    public function filterBySearchText(QueryBuilder $productQueryBuilder, $searchText) {
+    public function filterBySearchText(QueryBuilder $productQueryBuilder, $searchText)
+    {
         if ($this->tsqueryFactory->isValidSearchText($searchText)) {
             $productQueryBuilder
                 ->andWhere('TSQUERY(pd.fulltextTsvector, :fulltextQuery) = TRUE')
@@ -38,7 +40,8 @@ class ProductSearchRepository
      * @param \Doctrine\ORM\QueryBuilder $productQueryBuilder
      * @param string|null $searchText
      */
-    public function addRelevance(QueryBuilder $productQueryBuilder, $searchText) {
+    public function addRelevance(QueryBuilder $productQueryBuilder, $searchText)
+    {
         $productQueryBuilder->addSelect('
             CASE
                 WHEN (

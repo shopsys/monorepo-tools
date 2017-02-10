@@ -13,7 +13,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase
 {
-    public function testRemoveTransportFromPaymentAfterDelete() {
+    public function testRemoveTransportFromPaymentAfterDelete()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));

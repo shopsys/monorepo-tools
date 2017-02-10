@@ -13,7 +13,8 @@ class Version20160902125810 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         foreach ($this->getAllDomainIds() as $domainId) {
             $this->sql('INSERT INTO setting_values (name, domain_id, value, type) VALUES
                 (\'heurekaApiKey\', :domainId, null, \'string\');
@@ -24,6 +25,7 @@ class Version20160902125810 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

@@ -25,7 +25,8 @@ class TimedSpamValidationListener implements EventSubscriberInterface
      * @param \Shopsys\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
      * @param array $options
      */
-    public function __construct(FormTimeProvider $formTimeProvider, array $options) {
+    public function __construct(FormTimeProvider $formTimeProvider, array $options)
+    {
         $this->formTimeProvider = $formTimeProvider;
         $this->options = $options;
     }
@@ -33,7 +34,8 @@ class TimedSpamValidationListener implements EventSubscriberInterface
     /**
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function preSubmit(FormEvent $event) {
+    public function preSubmit(FormEvent $event)
+    {
         $form = $event->getForm();
         if ($form->isRoot() &&
             $form->getConfig()->getOption('compound') &&
@@ -55,7 +57,8 @@ class TimedSpamValidationListener implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents()
+    {
         return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
         ];

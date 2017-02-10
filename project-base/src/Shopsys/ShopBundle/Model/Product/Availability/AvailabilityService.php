@@ -11,7 +11,8 @@ class AvailabilityService
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function create(AvailabilityData $availabilityData) {
+    public function create(AvailabilityData $availabilityData)
+    {
         return new Availability($availabilityData);
     }
 
@@ -20,7 +21,8 @@ class AvailabilityService
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function edit(Availability $availability, AvailabilityData $availabilityData) {
+    public function edit(Availability $availability, AvailabilityData $availabilityData)
+    {
         $availability->edit($availabilityData);
 
         return $availability;

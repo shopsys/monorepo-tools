@@ -17,14 +17,16 @@ class ProductParameterValueFormType extends AbstractType
      */
     private $parameters;
 
-    public function __construct(array $parameters) {
+    public function __construct(array $parameters)
+    {
         $this->parameters = $parameters;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'product_parameter_value_form';
     }
 
@@ -32,7 +34,8 @@ class ProductParameterValueFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('parameter', FormType::CHOICE, [
                 'required' => true,
@@ -57,7 +60,8 @@ class ProductParameterValueFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'data_class' => ProductParameterValuesLocalizedData::class,

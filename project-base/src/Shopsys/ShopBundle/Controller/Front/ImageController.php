@@ -14,11 +14,13 @@ class ImageController extends FrontBaseController
      */
     private $imageGeneratorFacade;
 
-    public function __construct(ImageGeneratorFacade $imageGeneratorFacade) {
+    public function __construct(ImageGeneratorFacade $imageGeneratorFacade)
+    {
         $this->imageGeneratorFacade = $imageGeneratorFacade;
     }
 
-    public function getImageAction($entityName, $type, $sizeName, $imageId) {
+    public function getImageAction($entityName, $type, $sizeName, $imageId)
+    {
         if ($sizeName === ImageConfig::DEFAULT_SIZE_NAME) {
             $sizeName = null;
         }

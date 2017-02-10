@@ -11,7 +11,8 @@ class DbCollationsDataFixture extends AbstractNativeFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $system = $this->get(System::class);
         /* @var $system \Shopsys\ShopBundle\Component\System\System */
 

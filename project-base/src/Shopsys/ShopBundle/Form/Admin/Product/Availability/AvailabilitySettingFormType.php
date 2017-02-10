@@ -19,14 +19,16 @@ class AvailabilitySettingFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
      */
-    public function __construct(array $availabilities) {
+    public function __construct(array $availabilities)
+    {
         $this->availabilities = $availabilities;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'availability_setting_form';
     }
 
@@ -34,7 +36,8 @@ class AvailabilitySettingFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('defaultInStockAvailability', FormType::CHOICE, [
                 'required' => true,
@@ -46,7 +49,8 @@ class AvailabilitySettingFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

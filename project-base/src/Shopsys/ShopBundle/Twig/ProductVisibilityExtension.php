@@ -43,7 +43,8 @@ class ProductVisibilityExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('isVisibleForDefaultPricingGroup', [$this, 'isVisibleForDefaultPricingGroupOnDomain']),
             new Twig_SimpleFunction(
@@ -55,7 +56,8 @@ class ProductVisibilityExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'product_visibility';
     }
 
@@ -64,7 +66,8 @@ class ProductVisibilityExtension extends \Twig_Extension
      * @param int $domainId
      * @return bool
      */
-    public function isVisibleForDefaultPricingGroupOnDomain(Product $product, $domainId) {
+    public function isVisibleForDefaultPricingGroupOnDomain(Product $product, $domainId)
+    {
         $pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
         $productVisibility = $this->productVisibilityRepository->getProductVisibility($product, $pricingGroup, $domainId);
 
@@ -75,7 +78,8 @@ class ProductVisibilityExtension extends \Twig_Extension
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return bool
      */
-    public function isVisibleForDefaultPricingGroupOnEachDomain(Product $product) {
+    public function isVisibleForDefaultPricingGroupOnEachDomain(Product $product)
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             if (!$this->isVisibleForDefaultPricingGroupOnDomain($product, $domainConfig->getId())) {
                 return false;

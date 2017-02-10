@@ -13,7 +13,8 @@ class RepositoryGenerator extends AbstractGenerator
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder) {
+    public function buildForm(FormBuilderInterface $builder)
+    {
         $builder
             ->add('entityNamespace', FormType::TEXT, [
                 'constraints' => [
@@ -30,7 +31,8 @@ class RepositoryGenerator extends AbstractGenerator
     /**
      * {@inheritdoc}
      */
-    public function generate(BundleInterface $bundle, array $formData) {
+    public function generate(BundleInterface $bundle, array $formData)
+    {
         $entityNamespace = $formData['entityNamespace'];
         $entityName = $formData['entityName'];
         $targetFilepath = $bundle->getPath() . '/Model/' . $entityNamespace . '/' . $entityName . 'Repository.php';
@@ -45,7 +47,8 @@ class RepositoryGenerator extends AbstractGenerator
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'repository';
     }
 }

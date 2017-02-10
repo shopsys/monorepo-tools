@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Unit\Component\UploadedFile\Dummy;
 
 class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetEntityName() {
+    public function testGetEntityName()
+    {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [
             Dummy::class => new UploadedFileEntityConfig('entityName', Dummy::class),
@@ -19,7 +20,8 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame('entityName', $uploadedFileConfig->getEntityName($entity));
     }
 
-    public function testGetEntityNameNotFoundException() {
+    public function testGetEntityNameNotFoundException()
+    {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [];
         $uploadedFileConfig = new UploadedFileConfig($fileEntityConfigsByClass);
@@ -30,7 +32,8 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $uploadedFileConfig->getEntityName($entity);
     }
 
-    public function testGetAllUploadedFileEntityConfigs() {
+    public function testGetAllUploadedFileEntityConfigs()
+    {
         $fileEntityConfigsByClass = [
             Dummy::class => new UploadedFileEntityConfig('entityName', Dummy::class),
         ];
@@ -39,7 +42,8 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame($fileEntityConfigsByClass, $uploadedFileConfig->getAllUploadedFileEntityConfigs());
     }
 
-    public function testGetUploadedFileEntityConfig() {
+    public function testGetUploadedFileEntityConfig()
+    {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [];
         $uploadedFileConfig = new UploadedFileConfig($fileEntityConfigsByClass);
@@ -50,7 +54,8 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $uploadedFileConfig->getUploadedFileEntityConfig($entity);
     }
 
-    public function testHasUploadedFileEntityConfig() {
+    public function testHasUploadedFileEntityConfig()
+    {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [
             Dummy::class => new UploadedFileEntityConfig('entityName', Dummy::class),
@@ -60,7 +65,8 @@ class UploadedFileConfigTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($uploadedFileConfig->hasUploadedFileEntityConfig($entity));
     }
 
-    public function testHasNotUploadedFileEntityConfig() {
+    public function testHasNotUploadedFileEntityConfig()
+    {
         $entity = new Dummy();
         $fileEntityConfigsByClass = [];
         $uploadedFileConfig = new UploadedFileConfig($fileEntityConfigsByClass);

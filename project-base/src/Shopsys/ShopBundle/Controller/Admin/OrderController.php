@@ -113,7 +113,8 @@ class OrderController extends AdminBaseController
      * @param int $id
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $order = $this->orderFacade->getById($id);
         $form = $this->createForm($this->orderFormTypeFactory->createForOrder($order));
 
@@ -172,7 +173,8 @@ class OrderController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $orderId
      */
-    public function addProductAction(Request $request, $orderId) {
+    public function addProductAction(Request $request, $orderId)
+    {
         $productId = $request->get('productId');
 
         $orderItem = $this->orderItemFacade->createOrderProductInOrder($orderId, $productId);
@@ -199,7 +201,8 @@ class OrderController extends AdminBaseController
      * @Route("/order/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
@@ -261,7 +264,8 @@ class OrderController extends AdminBaseController
      * @param array $row
      * @return array
      */
-    private function addOrderEntityToDataSource(array $row) {
+    private function addOrderEntityToDataSource(array $row)
+    {
         $row['order'] = $this->orderFacade->getById($row['id']);
 
         return $row;
@@ -272,7 +276,8 @@ class OrderController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $orderNumber = $this->orderFacade->getById($id)->getNumber();
 
@@ -296,7 +301,8 @@ class OrderController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getRuleFormAction(Request $request) {
+    public function getRuleFormAction(Request $request)
+    {
         $ruleForm = $this->advancedSearchOrderFacade->createRuleForm($request->get('filterName'), $request->get('newIndex'));
 
         return $this->render('@ShopsysShop/Admin/Content/Order/AdvancedSearch/ruleForm.html.twig', [
@@ -308,7 +314,8 @@ class OrderController extends AdminBaseController
      * @Route("/order/preview/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function previewAction($id) {
+    public function previewAction($id)
+    {
         $order = $this->orderFacade->getById($id);
 
         return $this->render('@ShopsysShop/Admin/Content/Order/preview.html.twig', [

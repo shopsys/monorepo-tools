@@ -16,7 +16,8 @@ class FlagDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $flagData = new FlagData();
 
         $flagData->name = ['cs' => 'Novinka', 'en' => 'New'];
@@ -39,7 +40,8 @@ class FlagDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @param string|null $referenceName
      */
-    private function createFlag(FlagData $flagData, $referenceName = null) {
+    private function createFlag(FlagData $flagData, $referenceName = null)
+    {
         $flagFacade = $this->get(FlagFacade::class);
         /* @var $flagFacade \Shopsys\ShopBundle\Model\Product\Flag\FlagFacade */
 

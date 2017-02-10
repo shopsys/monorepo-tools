@@ -16,7 +16,8 @@ class OrderTransportData extends OrderItemData
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderTransport
      */
-    public function setFromEntity(OrderItem $orderTransport) {
+    public function setFromEntity(OrderItem $orderTransport)
+    {
         if ($orderTransport instanceof OrderTransport) {
             $this->transport = $orderTransport->getTransport();
             parent::setFromEntity($orderTransport);

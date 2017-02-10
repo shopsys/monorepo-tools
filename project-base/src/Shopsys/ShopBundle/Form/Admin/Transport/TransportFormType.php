@@ -20,14 +20,16 @@ class TransportFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
      */
-    public function __construct(array $vats) {
+    public function __construct(array $vats)
+    {
         $this->vats = $vats;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'transport_form';
     }
 
@@ -36,7 +38,8 @@ class TransportFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::LOCALIZED, [
                 'main_constraints' => [
@@ -85,7 +88,8 @@ class TransportFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => TransportData::class,
             'attr' => ['novalidate' => 'novalidate'],

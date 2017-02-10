@@ -48,7 +48,8 @@ class Script
     /**
      * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
      */
-    public function __construct(ScriptData $scriptData) {
+    public function __construct(ScriptData $scriptData)
+    {
         $this->name = $scriptData->name;
         $this->code = $scriptData->code;
         $this->placement = $scriptData->placement;
@@ -57,35 +58,40 @@ class Script
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getPlacement() {
+    public function getPlacement()
+    {
         return $this->placement;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Script\ScriptData $scriptData
      */
-    public function edit(ScriptData $scriptData) {
+    public function edit(ScriptData $scriptData)
+    {
         $this->name = $scriptData->name;
         $this->code = $scriptData->code;
         $this->placement = $scriptData->placement;

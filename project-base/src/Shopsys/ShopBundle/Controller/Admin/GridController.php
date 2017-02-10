@@ -33,7 +33,8 @@ class GridController extends AdminBaseController
      * @Route("/_grid/get-form/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function getFormAction(Request $request) {
+    public function getFormAction(Request $request)
+    {
         $renderedFormRow = $this->inlineEditService->getRenderedFormRow(
             $request->get('serviceName'),
             json_decode($request->get('rowId'))
@@ -46,7 +47,8 @@ class GridController extends AdminBaseController
      * @Route("/_grid/save-form/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function saveFormAction(Request $request) {
+    public function saveFormAction(Request $request)
+    {
         $responseData = [];
         $rowId = json_decode($request->get('rowId'));
 
@@ -68,7 +70,8 @@ class GridController extends AdminBaseController
      * @Route("/_grid/save-ordering/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function saveOrderingAction(Request $request) {
+    public function saveOrderingAction(Request $request)
+    {
         $this->gridOrderingFacade->saveOrdering(
             $request->get('entityClass'),
             array_map('json_decode', $request->get('rowIds'))

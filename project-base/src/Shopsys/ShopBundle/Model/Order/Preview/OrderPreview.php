@@ -105,77 +105,88 @@ class OrderPreview
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[quantifiedProductIndex]
      */
-    public function getQuantifiedProducts() {
+    public function getQuantifiedProducts()
+    {
         return $this->quantifiedProducts;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
      */
-    public function getQuantifiedItemsPrices() {
+    public function getQuantifiedItemsPrices()
+    {
         return $this->quantifiedItemsPrices;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price[quantifiedItemIndex]
      */
-    public function getQuantifiedItemsDiscounts() {
+    public function getQuantifiedItemsDiscounts()
+    {
         return $this->quantifiedItemsDiscounts;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport|null
      */
-    public function getTransport() {
+    public function getTransport()
+    {
         return $this->transport;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
      */
-    public function getTransportPrice() {
+    public function getTransportPrice()
+    {
         return $this->transportPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment|null
      */
-    public function getPayment() {
+    public function getPayment()
+    {
         return $this->payment;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
      */
-    public function getPaymentPrice() {
+    public function getPaymentPrice()
+    {
         return $this->paymentPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getTotalPrice() {
+    public function getTotalPrice()
+    {
         return $this->totalPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getProductsPrice() {
+    public function getProductsPrice()
+    {
         return $this->productsPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price|null
      */
-    public function getRoundingPrice() {
+    public function getRoundingPrice()
+    {
         return $this->roundingPrice;
     }
 
     /**
      * @return float|null
      */
-    public function getPromoCodeDiscountPercent() {
+    public function getPromoCodeDiscountPercent()
+    {
         return $this->promoCodeDiscountPercent;
     }
 }

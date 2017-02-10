@@ -42,7 +42,8 @@ class OrderItemData
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
      */
-    public function setFromEntity(OrderItem $orderItem) {
+    public function setFromEntity(OrderItem $orderItem)
+    {
         $this->name = $orderItem->getName();
         $this->priceWithVat = $orderItem->getPriceWithVat();
         $this->priceWithoutVat = $orderItem->getPriceWithoutVat();

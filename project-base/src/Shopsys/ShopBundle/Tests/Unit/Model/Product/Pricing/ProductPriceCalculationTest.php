@@ -22,7 +22,8 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function calculatePriceProvider() {
+    public function calculatePriceProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -49,7 +50,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculation
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function getProductPriceCalculationWithInputPriceTypeAndVariants($inputPriceType, $variants) {
+    private function getProductPriceCalculationWithInputPriceTypeAndVariants($inputPriceType, $variants)
+    {
         $pricingSettingMock = $this->getMockBuilder(PricingSetting::class)
             ->setMethods(['getInputPriceType', 'getRoundingType', 'getDomainDefaultCurrencyIdByDomainId'])
             ->disableOriginalConstructor()
@@ -158,7 +160,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round($priceWithVat, 6), round($productPrice->getPriceWithVat(), 6));
     }
 
-    public function calculatePriceMainVariantProvider() {
+    public function calculatePriceMainVariantProvider()
+    {
         $vatPercent = 10;
 
         return [
@@ -205,7 +208,8 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedFrom, $productPrice->isPriceFrom());
     }
 
-    public function testCalculatePriceOfMainVariantWithoutAnySellableVariants() {
+    public function testCalculatePriceOfMainVariantWithoutAnySellableVariants()
+    {
         $productPriceCalculation = $this->getProductPriceCalculationWithInputPriceTypeAndVariants(
             PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
             []

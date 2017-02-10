@@ -59,7 +59,8 @@ class QuantifiedProductPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice
      */
-    public function calculatePrice(QuantifiedProduct $quantifiedProduct, $domainId, User $user = null) {
+    public function calculatePrice(QuantifiedProduct $quantifiedProduct, $domainId, User $user = null)
+    {
         $product = $quantifiedProduct->getProduct();
         if (!$product instanceof Product) {
             $message = 'Object "' . get_class($product) . '" is not valid for QuantifiedProductPriceCalculation.';
@@ -89,21 +90,24 @@ class QuantifiedProductPriceCalculation
     /**
      * @return string
      */
-    private function getTotalPriceWithoutVat() {
+    private function getTotalPriceWithoutVat()
+    {
         return $this->getTotalPriceWithVat() - $this->getTotalPriceVatAmount();
     }
 
     /**
      * @return string
      */
-    private function getTotalPriceWithVat() {
+    private function getTotalPriceWithVat()
+    {
         return $this->productPrice->getPriceWithVat() * $this->quantifiedProduct->getQuantity();
     }
 
     /**
      * @return string
      */
-    private function getTotalPriceVatAmount() {
+    private function getTotalPriceVatAmount()
+    {
         $vatPercent = $this->product->getVat()->getPercent();
 
         return $this->rounding->roundVatAmount(
@@ -117,7 +121,8 @@ class QuantifiedProductPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedItemPrice[quantifiedItemIndex]
      */
-    public function calculatePrices(array $quantifiedProducts, $domainId, User $user = null) {
+    public function calculatePrices(array $quantifiedProducts, $domainId, User $user = null)
+    {
         $quantifiedItemsPrices = [];
         foreach ($quantifiedProducts as $index => $quantifiedProduct) {
             $quantifiedItemsPrices[$index] = $this->calculatePrice($quantifiedProduct, $domainId, $user);

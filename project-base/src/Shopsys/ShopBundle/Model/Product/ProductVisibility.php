@@ -61,7 +61,8 @@ class ProductVisibility
         $this->visible = false;
     }
 
-    public function isVisible() {
+    public function isVisible()
+    {
         return $this->visible;
     }
 }

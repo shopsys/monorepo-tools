@@ -15,7 +15,8 @@ class PhpParserNodeHelper
      * @param \SplFileInfo $fileInfo
      * @return string
      */
-    public static function getConcatenatedStringValue(PHPParser_Node $node, SplFileInfo $fileInfo) {
+    public static function getConcatenatedStringValue(PHPParser_Node $node, SplFileInfo $fileInfo)
+    {
         if ($node instanceof PHPParser_Node_Scalar_String) {
             return $node->value;
         }

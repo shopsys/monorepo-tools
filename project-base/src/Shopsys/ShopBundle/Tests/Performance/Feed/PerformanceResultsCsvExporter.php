@@ -11,7 +11,8 @@ class PerformanceResultsCsvExporter
      */
     private $jmeterCsvReporter;
 
-    public function __construct(JmeterCsvReporter $jmeterCsvReporter) {
+    public function __construct(JmeterCsvReporter $jmeterCsvReporter)
+    {
         $this->jmeterCsvReporter = $jmeterCsvReporter;
     }
 

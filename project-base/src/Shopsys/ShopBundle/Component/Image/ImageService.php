@@ -22,7 +22,8 @@ class ImageService
     /**
      * @param \Shopsys\ShopBundle\Component\Image\Processing\ImageProcessingService $imageProcessingService
      */
-    public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload) {
+    public function __construct(ImageProcessingService $imageProcessingService, FileUpload $fileUpload)
+    {
         $this->imageProcessingService = $imageProcessingService;
         $this->fileUpload = $fileUpload;
     }
@@ -34,7 +35,8 @@ class ImageService
      * @param string|null $type
      * @return
      */
-    public function getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type) {
+    public function getUploadedImages(ImageEntityConfig $imageEntityConfig, $entityId, array $temporaryFilenames, $type)
+    {
         if (!$imageEntityConfig->isMultiple($type)) {
             $message = 'Entity ' . $imageEntityConfig->getEntityClass()
                 . ' is not allowed to have multiple images for type ' . ($type ?: 'NULL');
@@ -79,7 +81,8 @@ class ImageService
      * @param int $entityId
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $images
      */
-    public function deleteImages($entityName, $entityId, array $images) {
+    public function deleteImages($entityName, $entityId, array $images)
+    {
         foreach ($images as $image) {
             $this->deleteImage($entityName, $entityId, $image);
         }
@@ -90,7 +93,8 @@ class ImageService
      * @param int $entityId
      * @param \Shopsys\ShopBundle\Component\Image\Image $image
      */
-    private function deleteImage($entityName, $entityId, Image $image) {
+    private function deleteImage($entityName, $entityId, Image $image)
+    {
         if ($image->getEntityName() !== $entityName
             || $image->getEntityId() !== $entityId
         ) {
@@ -108,7 +112,8 @@ class ImageService
     /**
      * @param \Shopsys\ShopBundle\Component\Image\Image[] $imagesByPosition
      */
-    public function setImagePositions($imagesByPosition) {
+    public function setImagePositions($imagesByPosition)
+    {
         foreach ($imagesByPosition as $position => $image) {
             $image->setPosition($position);
         }

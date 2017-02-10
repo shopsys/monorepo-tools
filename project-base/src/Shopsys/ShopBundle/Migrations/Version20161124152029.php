@@ -10,7 +10,8 @@ class Version20161124152029 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $this->sql('DROP INDEX "product_domain_unique"');
         $this->sql('DROP INDEX "idx_da6be6944584665a"');
         $this->sql('DROP INDEX "idx_da6be6944584665a115f0ee5"');
@@ -24,6 +25,7 @@ class Version20161124152029 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

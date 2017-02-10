@@ -42,7 +42,8 @@ class PaymentPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function __construct(Payment $payment, Currency $currency, $price) {
+    public function __construct(Payment $payment, Currency $currency, $price)
+    {
         $this->payment = $payment;
         $this->currency = $currency;
         $this->price = $price;
@@ -51,28 +52,32 @@ class PaymentPrice
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->currency;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function getPayment() {
+    public function getPayment()
+    {
         return $this->payment;
     }
 
     /**
      * @return string
      */
-    public function getPrice() {
+    public function getPrice()
+    {
         return $this->price;
     }
 
     /**
      * @param string $price
      */
-    public function setPrice($price) {
+    public function setPrice($price)
+    {
         $this->price = $price;
     }
 }

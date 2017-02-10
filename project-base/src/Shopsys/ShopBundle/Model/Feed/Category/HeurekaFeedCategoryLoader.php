@@ -10,7 +10,8 @@ class HeurekaFeedCategoryLoader
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[]
      */
-    public function load($heurekaCategoryFeedUrlOrFilePath) {
+    public function load($heurekaCategoryFeedUrlOrFilePath)
+    {
         $feedCategoriesData = [];
 
         try {

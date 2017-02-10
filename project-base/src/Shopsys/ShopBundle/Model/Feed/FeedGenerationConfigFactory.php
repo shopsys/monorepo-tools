@@ -18,7 +18,8 @@ class FeedGenerationConfigFactory
      */
     private $feedConfigFacade;
 
-    public function __construct(Domain $domain, FeedConfigFacade $feedConfigFacade) {
+    public function __construct(Domain $domain, FeedConfigFacade $feedConfigFacade)
+    {
         $this->domain = $domain;
         $this->feedConfigFacade = $feedConfigFacade;
     }
@@ -26,7 +27,8 @@ class FeedGenerationConfigFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig[]
      */
-    public function createAll() {
+    public function createAll()
+    {
         $feedGenerationConfigs = [];
         foreach ($this->feedConfigFacade->getFeedConfigs() as $feedConfig) {
             foreach ($this->domain->getAll() as $domainConfig) {

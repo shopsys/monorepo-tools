@@ -26,14 +26,16 @@ class ImageController extends AdminBaseController
      */
     private $imageFacade;
 
-    public function __construct(ImageFacade $imageFacade) {
+    public function __construct(ImageFacade $imageFacade)
+    {
         $this->imageFacade = $imageFacade;
     }
 
     /**
      * @Route("/image/overview/")
      */
-    public function overviewAction() {
+    public function overviewAction()
+    {
         $imageEntityConfigs = $this->imageFacade->getAllImageEntityConfigsByClass();
 
         return $this->render('@ShopsysShop/Admin/Content/Image/overview.html.twig', [
@@ -48,7 +50,8 @@ class ImageController extends AdminBaseController
      * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
      * @return string[]
      */
-    private function getEntityNamesTranslations(array $imageEntityConfigs) {
+    private function getEntityNamesTranslations(array $imageEntityConfigs)
+    {
         $names = [];
         foreach ($imageEntityConfigs as $imageEntityConfig) {
             /* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
@@ -61,7 +64,8 @@ class ImageController extends AdminBaseController
      * @param string $entityName
      * @return string
      */
-    private function getEntityNameTranslation($entityName) {
+    private function getEntityNameTranslation($entityName)
+    {
         $entityNamesTranslations = [
             self::ENTITY_NAME_CATEGORY => t('Category'),
             self::ENTITY_NAME_PAYMENT => t('Payment'),
@@ -83,7 +87,8 @@ class ImageController extends AdminBaseController
      * @param @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
      * @return string[]
      */
-    private function getImageSizeUsagesTranslations(array $imageEntityConfigs) {
+    private function getImageSizeUsagesTranslations(array $imageEntityConfigs)
+    {
         $usages = [];
         foreach ($imageEntityConfigs as $imageEntityConfig) {
             /* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
@@ -106,7 +111,8 @@ class ImageController extends AdminBaseController
      * @return string
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function getImageSizeUsageTranslation($entityName, $sizeName) {
+    private function getImageSizeUsageTranslation($entityName, $sizeName)
+    {
         $imageSizeUsagesTranslations = [
             self::ENTITY_NAME_PAYMENT => [
                 ImageConfig::DEFAULT_SIZE_NAME => t(
@@ -177,7 +183,8 @@ class ImageController extends AdminBaseController
      * @param \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[] $imageEntityConfigs
      * @return string[]
      */
-    private function getImageSizeWithTypeUsagesTranslations(array $imageEntityConfigs) {
+    private function getImageSizeWithTypeUsagesTranslations(array $imageEntityConfigs)
+    {
         $usages = [];
         foreach ($imageEntityConfigs as $imageEntityConfig) {
             /* @var $imageEntityConfig \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig */
@@ -207,7 +214,8 @@ class ImageController extends AdminBaseController
      * @param string $sizeName
      * @return string
      */
-    private function getImageSizeWithTypeUsageTranslation($entityName, $typeName, $sizeName) {
+    private function getImageSizeWithTypeUsageTranslation($entityName, $typeName, $sizeName)
+    {
         return t('Not specified for entity %entityName%, type %typeName% and size %sizeName%', [
             '%entityName%' => $entityName,
             '%typeName%' => $typeName,

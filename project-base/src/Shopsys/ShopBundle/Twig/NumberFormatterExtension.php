@@ -33,7 +33,8 @@ class NumberFormatterExtension extends Twig_Extension
     /**
      * @return \Twig_SimpleFilter[]
      */
-    public function getFilters() {
+    public function getFilters()
+    {
         return [
             new \Twig_SimpleFilter(
                 'formatNumber',
@@ -55,7 +56,8 @@ class NumberFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    public function formatNumber($number, $locale = null) {
+    public function formatNumber($number, $locale = null)
+    {
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
         $numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
@@ -69,7 +71,8 @@ class NumberFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    public function formatDecimalNumber($number, $minimumFractionDigits, $locale = null) {
+    public function formatDecimalNumber($number, $minimumFractionDigits, $locale = null)
+    {
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::DECIMAL);
         $numberFormatter->setMinimumFractionDigits($minimumFractionDigits);
@@ -83,7 +86,8 @@ class NumberFormatterExtension extends Twig_Extension
      * @param string|null $locale
      * @return string
      */
-    public function formatPercent($number, $locale = null) {
+    public function formatPercent($number, $locale = null)
+    {
         $numberFormat = $this->numberFormatRepository->get($this->getLocale($locale));
         $numberFormatter = new NumberFormatter($numberFormat, NumberFormatter::PERCENT);
         $numberFormatter->setMinimumFractionDigits(self::MINIMUM_FRACTION_DIGITS);
@@ -95,7 +99,8 @@ class NumberFormatterExtension extends Twig_Extension
     /**
      * @param string|null $locale
      */
-    private function getLocale($locale = null) {
+    private function getLocale($locale = null)
+    {
         if ($locale === null) {
             $locale = $this->localization->getLocale();
         }
@@ -106,7 +111,8 @@ class NumberFormatterExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'number_formatter_extension';
     }
 }

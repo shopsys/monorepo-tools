@@ -53,7 +53,8 @@ class FrontBreadcrumbResolverFactory
     /**
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver
      */
-    public function create() {
+    public function create()
+    {
         $frontBreadcrumbResolver = new BreadcrumbResolver();
         $frontBreadcrumbResolver->registerGenerator('front_article_detail', $this->articleBreadcrumbGenerator);
         $frontBreadcrumbResolver->registerGenerator('front_product_list', $this->categoryBreadcrumbGenerator);

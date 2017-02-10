@@ -22,21 +22,24 @@ class OrderRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getOrderRepository() {
+    private function getOrderRepository()
+    {
         return $this->em->getRepository(Order::class);
     }
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function createOrderQueryBuilder() {
+    private function createOrderQueryBuilder()
+    {
         return $this->em->createQueryBuilder()
             ->select('o')
             ->from(Order::class, 'o')
@@ -47,7 +50,8 @@ class OrderRepository
      * @param int $userId
      * @return \Shopsys\ShopBundle\Model\Order\Order[]
      */
-    public function getOrdersByUserId($userId) {
+    public function getOrdersByUserId($userId)
+    {
         return $this->createOrderQueryBuilder()
             ->andWhere('o.customer = :customer')->setParameter(':customer', $userId)
             ->getQuery()->getResult();
@@ -57,7 +61,8 @@ class OrderRepository
      * @param int $userId
      * @return \Shopsys\ShopBundle\Model\Order\Order|null
      */
-    public function findLastByUserId($userId) {
+    public function findLastByUserId($userId)
+    {
         return $this->createOrderQueryBuilder()
             ->andWhere('o.customer = :customer')->setParameter(':customer', $userId)
             ->orderBy('o.createdAt', 'DESC')
@@ -69,7 +74,8 @@ class OrderRepository
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Order\Order|null
      */
-    public function findById($id) {
+    public function findById($id)
+    {
         return $this->createOrderQueryBuilder()
             ->andWhere('o.id = :orderId')->setParameter(':orderId', $id)
             ->setMaxResults(1)
@@ -80,7 +86,8 @@ class OrderRepository
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getById($id) {
+    public function getById($id)
+    {
         $order = $this->findById($id);
 
         if ($order === null) {
@@ -94,7 +101,8 @@ class OrderRepository
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return bool
      */
-    public function isOrderStatusUsed(OrderStatus $orderStatus) {
+    public function isOrderStatusUsed(OrderStatus $orderStatus)
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('o.id')
@@ -159,7 +167,8 @@ class OrderRepository
      * @param \Shopsys\ShopBundle\Model\Customer\User
      * @return \Shopsys\ShopBundle\Model\Order\Order[]
      */
-    public function getCustomerOrderList(User $user) {
+    public function getCustomerOrderList(User $user)
+    {
         return $this->createOrderQueryBuilder()
             ->select('o, oi, os, ost, c')
             ->join('o.items', 'oi')
@@ -177,7 +186,8 @@ class OrderRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getByUrlHashAndDomain($urlHash, $domainId) {
+    public function getByUrlHashAndDomain($urlHash, $domainId)
+    {
         $order = $this->createOrderQueryBuilder()
             ->andWhere('o.urlHash = :urlHash')->setParameter(':urlHash', $urlHash)
             ->andWhere('o.domainId = :domainId')->setParameter(':domainId', $domainId)
@@ -196,7 +206,8 @@ class OrderRepository
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getByOrderNumberAndUser($orderNumber, User $user) {
+    public function getByOrderNumberAndUser($orderNumber, User $user)
+    {
         $order = $this->createOrderQueryBuilder()
             ->andWhere('o.number = :number')->setParameter(':number', $orderNumber)
             ->andWhere('o.customer = :customer')->setParameter(':customer', $user)
@@ -215,14 +226,16 @@ class OrderRepository
      * @param string $urlHash
      * @return \Shopsys\ShopBundle\Model\Order\Order|null
      */
-    public function findByUrlHashIncludingDeletedOrders($urlHash) {
+    public function findByUrlHashIncludingDeletedOrders($urlHash)
+    {
         return $this->getOrderRepository()->findOneBy(['urlHash' => $urlHash]);
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency[]
      */
-    public function getCurrenciesUsedInOrders() {
+    public function getCurrenciesUsedInOrders()
+    {
         return $this->em->createQueryBuilder()
             ->select('c')
             ->from(Currency::class, 'c')

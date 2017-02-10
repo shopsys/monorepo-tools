@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Twig\CropZerosExtension;
 
 class CropZerosExtensionTest extends PHPUnit_Framework_TestCase
 {
-    public function returnValuesProvider() {
+    public function returnValuesProvider()
+    {
         return [
             ['input' => '12', 'return' => '12'],
             ['input' => '12.00', 'return' => '12'],
@@ -21,7 +22,8 @@ class CropZerosExtensionTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider returnValuesProvider
      */
-    public function testReturnValues($input, $return) {
+    public function testReturnValues($input, $return)
+    {
         $this->assertSame($return, (new CropZerosExtension())->cropZeros($input));
     }
 }

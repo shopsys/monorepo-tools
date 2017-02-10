@@ -69,7 +69,8 @@ class CategoryController extends AdminBaseController
      * @Route("/category/edit/{id}", requirements={"id" = "\d+"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $category = $this->categoryFacade->getById($id);
         $form = $this->createForm($this->categoryFormTypeFactory->createForCategory($category));
 
@@ -107,7 +108,8 @@ class CategoryController extends AdminBaseController
      * @Route("/category/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->categoryFormTypeFactory->create());
 
         $categoryData = $this->categoryDataFactory->createDefault();
@@ -144,7 +146,8 @@ class CategoryController extends AdminBaseController
      * @Route("/category/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
         if (count($this->domain->getAll()) > 1) {
             if ($request->query->has('domain')) {
                 $domainId = (int)$request->query->get('domain');
@@ -181,7 +184,8 @@ class CategoryController extends AdminBaseController
      * @Route("/category/save-order/", methods={"post"})
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function saveOrderAction(Request $request) {
+    public function saveOrderAction(Request $request)
+    {
         $categoriesOrderingData = $request->get('categoriesOrderingData');
 
         $parentIdByCategoryId = [];
@@ -201,7 +205,8 @@ class CategoryController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->categoryFacade->getById($id)->getName();
 
@@ -220,7 +225,8 @@ class CategoryController extends AdminBaseController
         return $this->redirectToRoute('admin_category_list');
     }
 
-    public function listDomainTabsAction() {
+    public function listDomainTabsAction()
+    {
         $domainId = $this->session->get('categories_selected_domain_id', self::ALL_DOMAINS);
 
         return $this->render('@ShopsysShop/Admin/Content/Category/domainTabs.html.twig', [

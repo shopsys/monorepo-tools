@@ -17,21 +17,24 @@ class OrderNumberSequenceRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getOrderNumberSequenceRepository() {
+    private function getOrderNumberSequenceRepository()
+    {
         return $this->em->getRepository(OrderNumberSequence::class);
     }
 
     /**
      * @return string
      */
-    public function getNextNumber() {
+    public function getNextNumber()
+    {
         try {
             $this->em->beginTransaction();
 

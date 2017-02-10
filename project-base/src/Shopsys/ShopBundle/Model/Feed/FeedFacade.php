@@ -73,7 +73,8 @@ class FeedFacade
      * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfigToContinue
      * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig|null
      */
-    public function generateFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue) {
+    public function generateFeedsIteratively(FeedGenerationConfig $feedGenerationConfigToContinue)
+    {
         foreach ($this->feedGenerationConfigs as $key => $feedGenerationConfig) {
             if ($feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToContinue)) {
                 $feedConfig = $this->feedConfigFacade->getFeedConfigByName($feedGenerationConfig->getFeedName());
@@ -102,7 +103,8 @@ class FeedFacade
         return null;
     }
 
-    public function generateDeliveryFeeds() {
+    public function generateDeliveryFeeds()
+    {
         foreach ($this->feedConfigFacade->getDeliveryFeedConfigs() as $feedConfig) {
             foreach ($this->domain->getAll() as $domainConfig) {
                 $this->generateFeed($feedConfig, $domainConfig);
@@ -179,7 +181,8 @@ class FeedFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig
      */
-    public function getFirstFeedGenerationConfig() {
+    public function getFirstFeedGenerationConfig()
+    {
         return reset($this->feedGenerationConfigs);
     }
 }

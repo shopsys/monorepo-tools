@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Component\Setting\Setting;
 
 class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreateFriendlyUrls() {
+    public function testCreateFriendlyUrls()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),
             new DomainConfig(2, 'http://example.com', 'example.com', 'en'),
@@ -41,7 +42,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetFriendlyUrlUniqueResultNewUnique() {
+    public function testGetFriendlyUrlUniqueResultNewUnique()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
@@ -64,7 +66,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($friendlyUrl, $friendlyUrlUniqueResult->getFriendlyUrlForPersist());
     }
 
-    public function testGetFriendlyUrlUniqueResultOldUnique() {
+    public function testGetFriendlyUrlUniqueResultOldUnique()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
@@ -90,7 +93,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $this->assertNull($friendlyUrlUniqueResult->getFriendlyUrlForPersist());
     }
 
-    public function testGetFriendlyUrlUniqueResultNotUnique() {
+    public function testGetFriendlyUrlUniqueResultNotUnique()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com', 'example.com', 'en'),
         ];
@@ -120,7 +124,8 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame('name-4/', $friendlyUrlForPersist->getSlug());
     }
 
-    public function testGetAbsoluteUrlByFriendlyUrl() {
+    public function testGetAbsoluteUrlByFriendlyUrl()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.cz', 'example.cz', 'cs'),
         ];

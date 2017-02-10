@@ -11,7 +11,8 @@ class PersistentReferenceNotFoundException extends Exception implements DataFixt
      * @param string $referenceName
      * @param \Exception|null $previous
      */
-    public function __construct($referenceName, Exception $previous = null) {
+    public function __construct($referenceName, Exception $previous = null)
+    {
         parent::__construct('Data fixture reference "' . $referenceName . '" not found', 0, $previous);
     }
 }

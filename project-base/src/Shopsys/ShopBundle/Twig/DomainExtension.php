@@ -25,7 +25,8 @@ class DomainExtension extends \Twig_Extension
      */
     private $assetPackages;
 
-    public function __construct($domainImagesUrlPrefix, ContainerInterface $container, Packages $assetPackages) {
+    public function __construct($domainImagesUrlPrefix, ContainerInterface $container, Packages $assetPackages)
+    {
         $this->domainImagesUrlPrefix = $domainImagesUrlPrefix;
         $this->container = $container;
         $this->assetPackages = $assetPackages;
@@ -34,7 +35,8 @@ class DomainExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('getDomain', [$this, 'getDomain']),
             new Twig_SimpleFunction('getDomainName', [$this, 'getDomainNameById']),
@@ -46,7 +48,8 @@ class DomainExtension extends \Twig_Extension
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    public function getDomain() {
+    public function getDomain()
+    {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on Domain service
         return $this->container->get(Domain::class);
@@ -55,7 +58,8 @@ class DomainExtension extends \Twig_Extension
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\DomainFacade
      */
-    private function getDomainFacade() {
+    private function getDomainFacade()
+    {
         // Twig extensions are loaded during assetic:dump command,
         // so they cannot be dependent on DomainFacade service
         return $this->container->get(DomainFacade::class);
@@ -64,7 +68,8 @@ class DomainExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'domain';
     }
 
@@ -72,7 +77,8 @@ class DomainExtension extends \Twig_Extension
      * @param int $domainId
      * @return string
      */
-    public function getDomainNameById($domainId) {
+    public function getDomainNameById($domainId)
+    {
         return $this->getDomain()->getDomainConfigById($domainId)->getName();
     }
 
@@ -80,7 +86,8 @@ class DomainExtension extends \Twig_Extension
      * @param int $domainId
      * @return string
      */
-    public function getDomainIconHtml($domainId, $size = 'normal') {
+    public function getDomainIconHtml($domainId, $size = 'normal')
+    {
         $domainName = $this->getDomain()->getDomainConfigById($domainId)->getName();
         if ($this->getDomainFacade()->existsDomainIcon($domainId)) {
             $src = $this->assetPackages->getUrl(sprintf('%s/%u.png', $this->domainImagesUrlPrefix, $domainId));
@@ -110,7 +117,8 @@ class DomainExtension extends \Twig_Extension
     /**
      * @return bool
      */
-    public function isMultidomain() {
+    public function isMultidomain()
+    {
         return $this->getDomain()->isMultidomain();
     }
 }

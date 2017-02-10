@@ -38,7 +38,8 @@ class MultidomainEntityDataCreator
      * @param int $templateDomainId
      * @param int $newDomainId
      */
-    public function copyAllMultidomainDataForNewDomain($templateDomainId, $newDomainId) {
+    public function copyAllMultidomainDataForNewDomain($templateDomainId, $newDomainId)
+    {
         $columnNamesIndexedByTableName = $this->multidomainEntityClassFinderFacade
             ->getAllNotNullableColumnNamesIndexedByTableName();
         foreach ($columnNamesIndexedByTableName as $tableName => $columnNames) {
@@ -61,7 +62,8 @@ class MultidomainEntityDataCreator
      * @param string $tableName
      * @param string[] $columnNames
      */
-    private function copyMultidomainDataForNewDomain($templateDomainId, $newDomainId, $tableName, array $columnNames) {
+    private function copyMultidomainDataForNewDomain($templateDomainId, $newDomainId, $tableName, array $columnNames)
+    {
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);

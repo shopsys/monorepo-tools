@@ -11,14 +11,16 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'orderTotalPriceWithVat';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_GT,
             self::OPERATOR_LT,
@@ -31,21 +33,24 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return FormType::NUMBER;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         return [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         foreach ($rulesData as $index => $ruleData) {
             $dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
             if ($dqlOperator === null || $ruleData->value == '' || $ruleData->value === null) {
@@ -62,7 +67,8 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getContainsDqlOperator($operator) {
+    private function getContainsDqlOperator($operator)
+    {
         switch ($operator) {
             case self::OPERATOR_GT:
                 return '>';

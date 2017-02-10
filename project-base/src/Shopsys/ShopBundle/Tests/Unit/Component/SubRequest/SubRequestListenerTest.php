@@ -16,7 +16,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
      * @param bool $send
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getResponseMock($redirect = false, $send = false) {
+    public function getResponseMock($redirect = false, $send = false)
+    {
         $responseMock = $this->getMockBuilder(Response::class)
             ->setMethods(['isRedirection', 'send'])
             ->getMock();
@@ -26,7 +27,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         return $responseMock;
     }
 
-    public function testOnKernelResponseOneMasterResponse() {
+    public function testOnKernelResponseOneMasterResponse()
+    {
         $eventMock = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest'])
             ->disableOriginalConstructor()
@@ -37,7 +39,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestListener->onKernelResponse($eventMock);
     }
 
-    public function testOnKernelResponseManyRedirectResponses() {
+    public function testOnKernelResponseManyRedirectResponses()
+    {
         $eventMock1 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
@@ -67,7 +70,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestListener->onKernelResponse($eventMock3);
     }
 
-    public function testOnKernelResponse() {
+    public function testOnKernelResponse()
+    {
         $eventMock1 = $this->getMockBuilder(FilterResponseEvent::class)
             ->setMethods(['__construct', 'isMasterRequest', 'getResponse'])
             ->disableOriginalConstructor()
@@ -94,7 +98,8 @@ class SubRequestListenerTest extends PHPUnit_Framework_TestCase
         $subRequestListener->onKernelResponse($eventMock3);
     }
 
-    public function testOnKernelController() {
+    public function testOnKernelController()
+    {
         $masterRequestMock = $this->getMockBuilder(Request::class)
             ->setMethods(['getMethod'])
             ->getMock();

@@ -44,7 +44,8 @@ class TopCategoriesFormTypeFactory
      * @param string $locale
      * @return \Shopsys\ShopBundle\Form\Admin\Category\TopCategory\TopCategoriesFormType
      */
-    public function create($domainId, $locale) {
+    public function create($domainId, $locale)
+    {
         $categoryPaths = $this->categoryFacade->getFullPathsIndexedByIdsForDomain($domainId, $locale);
 
         return new TopCategoriesFormType(

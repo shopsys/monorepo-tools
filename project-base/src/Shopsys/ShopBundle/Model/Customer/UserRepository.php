@@ -19,14 +19,16 @@ class UserRepository
     /**
      * @param \Doctrine\ORM\EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager) {
+    public function __construct(EntityManager $entityManager)
+    {
         $this->em = $entityManager;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUserRepository() {
+    private function getUserRepository()
+    {
         return $this->em->getRepository(User::class);
     }
 
@@ -35,7 +37,8 @@ class UserRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function findUserByEmailAndDomain($email, $domainId) {
+    public function findUserByEmailAndDomain($email, $domainId)
+    {
         return $this->getUserRepository()->findOneBy([
             'email' => mb_strtolower($email),
             'domainId' => $domainId,
@@ -47,7 +50,8 @@ class UserRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function getUserByEmailAndDomain($email, $domainId) {
+    public function getUserByEmailAndDomain($email, $domainId)
+    {
         $user = $this->findUserByEmailAndDomain($email, $domainId);
 
         if ($user === null) {
@@ -64,7 +68,8 @@ class UserRepository
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function getUserById($id) {
+    public function getUserById($id)
+    {
         $user = $this->findById($id);
         if ($user === null) {
             throw new \Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException($id);
@@ -76,7 +81,8 @@ class UserRepository
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function findById($id) {
+    public function findById($id)
+    {
         return $this->getUserRepository()->find($id);
     }
 
@@ -85,7 +91,8 @@ class UserRepository
      * @param string $loginToken
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function findByIdAndLoginToken($id, $loginToken) {
+    public function findByIdAndLoginToken($id, $loginToken)
+    {
         return $this->getUserRepository()->findOneBy([
             'id' => $id,
             'loginToken' => $loginToken,
@@ -148,7 +155,8 @@ class UserRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $oldPricingGroup
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $newPricingGroup
      */
-    public function replaceUsersPricingGroup(PricingGroup $oldPricingGroup, PricingGroup $newPricingGroup) {
+    public function replaceUsersPricingGroup(PricingGroup $oldPricingGroup, PricingGroup $newPricingGroup)
+    {
         $this->em->createQueryBuilder()
             ->update(User::class, 'u')
             ->set('u.pricingGroup', ':newPricingGroup')->setParameter('newPricingGroup', $newPricingGroup)

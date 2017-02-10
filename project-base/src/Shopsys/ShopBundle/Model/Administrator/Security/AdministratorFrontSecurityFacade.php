@@ -50,7 +50,8 @@ class AdministratorFrontSecurityFacade
     /**
      * @return bool
      */
-    public function isAdministratorLogged() {
+    public function isAdministratorLogged()
+    {
         try {
             $token = $this->getAdministratorToken();
         } catch (\Shopsys\ShopBundle\Model\Administrator\Security\Exception\InvalidTokenException $e) {
@@ -67,7 +68,8 @@ class AdministratorFrontSecurityFacade
     /**
      * @return bool
      */
-    public function isAdministratorLoggedAsCustomer() {
+    public function isAdministratorLoggedAsCustomer()
+    {
         try {
             return $this->authorizationChecker->isGranted(Roles::ROLE_ADMIN_AS_CUSTOMER);
         } catch (\Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException $e) {
@@ -78,7 +80,8 @@ class AdministratorFrontSecurityFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function getCurrentAdministrator() {
+    public function getCurrentAdministrator()
+    {
         if ($this->isAdministratorLogged()) {
             return $this->getAdministratorToken()->getUser();
         } else {
@@ -91,7 +94,8 @@ class AdministratorFrontSecurityFacade
      * @return \Symfony\Component\Security\Core\Authentication\Token\TokenInterface
      * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
      */
-    private function getAdministratorToken() {
+    private function getAdministratorToken()
+    {
         $serializedToken = $this->session->get('_security_' . self::ADMINISTRATION_CONTEXT);
         if ($serializedToken === null) {
             $message = 'Token not found.';
@@ -113,7 +117,8 @@ class AdministratorFrontSecurityFacade
      * @see \Symfony\Component\Security\Http\Firewall\ContextListener::handle()
      * @see \Symfony\Component\Security\Core\Authentication\Token\AbstractToken::setUser()
      */
-    private function refreshUserInToken(TokenInterface $token) {
+    private function refreshUserInToken(TokenInterface $token)
+    {
         $user = $token->getUser();
         if (!$user instanceof UserInterface) {
             $message = 'User in token must implement UserInterface.';

@@ -17,7 +17,8 @@ class PricingGroupData
     /**
      * @param string|null $name
      */
-    public function __construct($name = null, $coefficient = 1) {
+    public function __construct($name = null, $coefficient = 1)
+    {
         $this->name = $name;
         $this->coefficient = $coefficient;
     }
@@ -25,7 +26,8 @@ class PricingGroupData
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
-    public function setFromEntity(PricingGroup $pricingGroup) {
+    public function setFromEntity(PricingGroup $pricingGroup)
+    {
         $this->name = $pricingGroup->getName();
         $this->coefficient = $pricingGroup->getCoefficient();
     }

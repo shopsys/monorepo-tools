@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Filesystem\FilepathComparator;
 
 class FilepathComparatorTest extends PHPUnit_Framework_TestCase
 {
-    public function testIsPathWithinDirectoryThrowsExceptionWithNonExistentDirectoryPath() {
+    public function testIsPathWithinDirectoryThrowsExceptionWithNonExistentDirectoryPath()
+    {
         $filepathComparator = new FilepathComparator();
 
         $path = 'anyPath';
@@ -18,7 +19,8 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
         $filepathComparator->isPathWithinDirectory($path, $nonExistentPath);
     }
 
-    public function testIsPathWithinAnotherExistingPathReturnsTrueForFileInsideDirectory() {
+    public function testIsPathWithinAnotherExistingPathReturnsTrueForFileInsideDirectory()
+    {
         $filepathComparator = new FilepathComparator();
 
         $path = $this->getResourcePath('dir/fileInside');
@@ -27,7 +29,8 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filepathComparator->isPathWithinDirectory($path, $directoryPath));
     }
 
-    public function testIsPathWithinAnotherExistingPathReturnsFalseForFileOutsideDirectory() {
+    public function testIsPathWithinAnotherExistingPathReturnsFalseForFileOutsideDirectory()
+    {
         $filepathComparator = new FilepathComparator();
 
         $path = $this->getResourcePath('fileOutside');
@@ -36,7 +39,8 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($filepathComparator->isPathWithinDirectory($path, $directoryPath));
     }
 
-    public function testIsPathWithinAnotherExistingPathReturnsTrueForDirectorySelf() {
+    public function testIsPathWithinAnotherExistingPathReturnsTrueForDirectorySelf()
+    {
         $filepathComparator = new FilepathComparator();
 
         $path = $this->getResourcePath('dir');
@@ -45,7 +49,8 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($filepathComparator->isPathWithinDirectory($path, $directoryPath));
     }
 
-    public function testIsPathWithinAnotherExistingPathReturnsTrueForNonExistentFileInsideDirectory() {
+    public function testIsPathWithinAnotherExistingPathReturnsTrueForNonExistentFileInsideDirectory()
+    {
         $filepathComparator = new FilepathComparator();
 
         $path = $this->getResourcePath('dir/nonexistentFileInside');
@@ -58,7 +63,8 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
      * @param string $relativePath
      * @return string
      */
-    private function getResourcePath($relativePath) {
+    private function getResourcePath($relativePath)
+    {
         return __DIR__ . '/Resources/' . $relativePath;
     }
 }

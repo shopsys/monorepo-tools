@@ -22,7 +22,8 @@ class PriceRangeRepository
      */
     private $queryBuilderService;
 
-    public function __construct(ProductRepository $productRepository, QueryBuilderService $queryBuilderService) {
+    public function __construct(ProductRepository $productRepository, QueryBuilderService $queryBuilderService)
+    {
         $this->productRepository = $productRepository;
         $this->queryBuilderService = $queryBuilderService;
     }
@@ -33,7 +34,8 @@ class PriceRangeRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
      */
-    public function getPriceRangeInCategory($domainId, PricingGroup $pricingGroup, Category $category) {
+    public function getPriceRangeInCategory($domainId, PricingGroup $pricingGroup, Category $category)
+    {
         $productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
             $domainId,
             $pricingGroup,
@@ -50,7 +52,8 @@ class PriceRangeRepository
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
      */
-    public function getPriceRangeForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText) {
+    public function getPriceRangeForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText)
+    {
         $productsQueryBuilder = $this->productRepository
             ->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
@@ -62,7 +65,8 @@ class PriceRangeRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
      */
-    private function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup) {
+    private function getPriceRangeByProductsQueryBuilder(QueryBuilder $productsQueryBuilder, PricingGroup $pricingGroup)
+    {
         $queryBuilder = clone $productsQueryBuilder;
 
         $this->queryBuilderService

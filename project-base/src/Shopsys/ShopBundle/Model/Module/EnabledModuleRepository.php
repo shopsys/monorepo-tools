@@ -28,7 +28,8 @@ class EnabledModuleRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getEnabledModuleRepository() {
+    private function getEnabledModuleRepository()
+    {
         return $this->em->getRepository(EnabledModule::class);
     }
 
@@ -36,7 +37,8 @@ class EnabledModuleRepository
      * @param string $moduleName
      * @return \Shopsys\ShopBundle\Model\Module\EnabledModule|null
      */
-    public function findByName($moduleName) {
+    public function findByName($moduleName)
+    {
         if (!in_array($moduleName, $this->moduleList->getValues(), true)) {
             throw new \Shopsys\ShopBundle\Model\Module\Exception\UnsupportedModuleException($moduleName);
         }

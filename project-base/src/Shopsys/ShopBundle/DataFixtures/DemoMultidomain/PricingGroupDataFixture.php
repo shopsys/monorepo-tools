@@ -12,7 +12,8 @@ class PricingGroupDataFixture extends AbstractReferenceFixture
     const ORDINARY_DOMAIN_2 = 'pricing_group_ordinary_domain_2';
     const VIP_DOMAIN_2 = 'pricing_group_vip_domain_2';
 
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $pricingGroupData = new PricingGroupData();
 
         $pricingGroupData->name = 'Ordinary customer';

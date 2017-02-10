@@ -194,7 +194,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null) {
+    public function createOrder(OrderData $orderData, OrderPreview $orderPreview, User $user = null)
+    {
         $orderNumber = $this->orderNumberSequenceRepository->getNextNumber();
         $orderUrlHash = $this->orderHashGeneratorRepository->getUniqueHash();
         $toFlush = [];
@@ -227,7 +228,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function createOrderFromFront(OrderData $orderData) {
+    public function createOrderFromFront(OrderData $orderData)
+    {
         $domainConfig = $this->domain->getDomainConfigById($orderData->domainId);
         $locale = $domainConfig->getLocale();
 
@@ -258,7 +260,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function edit($orderId, OrderData $orderData) {
+    public function edit($orderId, OrderData $orderData)
+    {
         $order = $this->orderRepository->getById($orderId);
         $originalOrderStatus = $order->getStatus();
         $orderEditResult = $this->orderService->editOrder($order, $orderData);
@@ -294,7 +297,8 @@ class OrderFacade
      * @param int $orderId
      * @return string
      */
-    public function getOrderConfirmText($orderId) {
+    public function getOrderConfirmText($orderId)
+    {
         $order = $this->getById($orderId);
         $orderDetailUrl = $this->orderService->getOrderDetailUrl($order);
         $confirmTextTemplate = $this->setting->getForDomain(Setting::ORDER_SUBMITTED_SETTING_NAME, $order->getDomainId());
@@ -313,7 +317,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $orderData
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    public function prefillFrontOrderData(FrontOrderData $orderData, User $user) {
+    public function prefillFrontOrderData(FrontOrderData $orderData, User $user)
+    {
         $order = $this->orderRepository->findLastByUserId($user->getId());
         $this->orderCreationService->prefillFrontFormData($orderData, $user, $order);
     }
@@ -321,7 +326,8 @@ class OrderFacade
     /**
      * @param int $orderId
      */
-    public function deleteById($orderId) {
+    public function deleteById($orderId)
+    {
         $order = $this->orderRepository->getById($orderId);
         if ($order->getStatus()->getType() !== OrderStatus::TYPE_CANCELED) {
             $this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
@@ -334,7 +340,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Model\Order\Order[]
      */
-    public function getCustomerOrderList(User $user) {
+    public function getCustomerOrderList(User $user)
+    {
         return $this->orderRepository->getCustomerOrderList($user);
     }
 
@@ -342,7 +349,8 @@ class OrderFacade
      * @param int $orderId
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getById($orderId) {
+    public function getById($orderId)
+    {
         return $this->orderRepository->getById($orderId);
     }
 
@@ -351,7 +359,8 @@ class OrderFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getByUrlHashAndDomain($urlHash, $domainId) {
+    public function getByUrlHashAndDomain($urlHash, $domainId)
+    {
         return $this->orderRepository->getByUrlHashAndDomain($urlHash, $domainId);
     }
 
@@ -360,7 +369,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getByOrderNumberAndUser($orderNumber, User $user) {
+    public function getByOrderNumberAndUser($orderNumber, User $user)
+    {
         return $this->orderRepository->getByOrderNumberAndUser($orderNumber, $user);
     }
 
@@ -368,7 +378,8 @@ class OrderFacade
      * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderListQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {
+    public function getOrderListQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData)
+    {
         return $this->orderRepository->getOrderListQueryBuilderByQuickSearchData(
             $this->localization->getDefaultLocale(),
             $quickSearchData
@@ -378,7 +389,8 @@ class OrderFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      */
-    private function setOrderDataAdministrator(OrderData $orderData) {
+    private function setOrderDataAdministrator(OrderData $orderData)
+    {
         if ($this->administratorFrontSecurityFacade->isAdministratorLoggedAsCustomer()) {
             try {
                 $currentAdmin = $this->administratorFrontSecurityFacade->getCurrentAdministrator();

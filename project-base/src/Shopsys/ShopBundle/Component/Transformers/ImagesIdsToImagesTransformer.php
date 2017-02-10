@@ -13,7 +13,8 @@ class ImagesIdsToImagesTransformer implements DataTransformerInterface
      */
     private $imageFacade;
 
-    public function __construct(ImageFacade $imageRepository) {
+    public function __construct(ImageFacade $imageRepository)
+    {
         $this->imageFacade = $imageRepository;
     }
 
@@ -21,7 +22,8 @@ class ImagesIdsToImagesTransformer implements DataTransformerInterface
      * @param \Shopsys\ShopBundle\Component\Image\Image[]|null $images
      * @return int[]
      */
-    public function transform($images) {
+    public function transform($images)
+    {
         $imagesIds = [];
 
         if (is_array($images) || $images instanceof IteratorAggregate) {
@@ -37,7 +39,8 @@ class ImagesIdsToImagesTransformer implements DataTransformerInterface
      * @param int[] $imagesIds
      * @return \Shopsys\ShopBundle\Component\Image\Image[]|null
      */
-    public function reverseTransform($imagesIds) {
+    public function reverseTransform($imagesIds)
+    {
         $images = [];
 
         if (is_array($imagesIds)) {

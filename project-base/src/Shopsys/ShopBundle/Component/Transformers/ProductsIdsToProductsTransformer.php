@@ -13,7 +13,8 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
      */
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository) {
+    public function __construct(ProductRepository $productRepository)
+    {
         $this->productRepository = $productRepository;
     }
 
@@ -21,7 +22,8 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
      * @param \Shopsys\ShopBundle\Model\Product\Product[]|null $products
      * @return int[]
      */
-    public function transform($products) {
+    public function transform($products)
+    {
         $productsIds = [];
 
         if (is_array($products) || $products instanceof IteratorAggregate) {
@@ -37,7 +39,8 @@ class ProductsIdsToProductsTransformer implements DataTransformerInterface
      * @param int[] $productsIds
      * @return \Shopsys\ShopBundle\Model\Product\Product[]|null
      */
-    public function reverseTransform($productsIds) {
+    public function reverseTransform($productsIds)
+    {
         $products = [];
 
         if (is_array($productsIds)) {

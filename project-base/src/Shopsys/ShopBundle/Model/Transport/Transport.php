@@ -74,7 +74,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
      */
-    public function __construct(TransportData $transportData) {
+    public function __construct(TransportData $transportData)
+    {
         $this->translations = new ArrayCollection();
         $this->vat = $transportData->vat;
         $this->hidden = $transportData->hidden;
@@ -87,7 +88,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
      */
-    public function edit(TransportData $transportData) {
+    public function edit(TransportData $transportData)
+    {
         $this->vat = $transportData->vat;
         $this->hidden = $transportData->hidden;
         $this->setTranslations($transportData);
@@ -96,7 +98,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
      */
-    private function setTranslations(TransportData $transportData) {
+    private function setTranslations(TransportData $transportData)
+    {
         foreach ($transportData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -111,7 +114,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -119,7 +123,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
@@ -127,7 +132,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @param string|null $locale
      * @return string|null
      */
-    public function getDescription($locale = null) {
+    public function getDescription($locale = null)
+    {
         return $this->translation($locale)->getDescription();
     }
 
@@ -135,21 +141,24 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @param string|null $locale
      * @return string|null
      */
-    public function getInstructions($locale = null) {
+    public function getInstructions($locale = null)
+    {
         return $this->translation($locale)->getInstructions();
     }
 
     /*
      * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice[]
      */
-    public function getPrices() {
+    public function getPrices()
+    {
         return $this->prices;
     }
 
     /*
      * @return \Shopsys\ShopBundle\Model\Transport\TransportPrice
      */
-    public function getPrice(Currency $currency) {
+    public function getPrice(Currency $currency)
+    {
         foreach ($this->prices as $price) {
             if ($price->getCurrency() === $currency) {
                 return $price;
@@ -165,7 +174,8 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function setPrice(Currency $currency, $price) {
+    public function setPrice(Currency $currency, $price)
+    {
         foreach ($this->prices as $transportInputPrice) {
             if ($transportInputPrice->getCurrency() === $currency) {
                 $transportInputPrice->setPrice($price);
@@ -179,49 +189,56 @@ class Transport extends AbstractTranslatableEntity implements OrderableEntityInt
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function getVat() {
+    public function getVat()
+    {
         return $this->vat;
     }
 
     /**
      * @return bool
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 
     /**
      * @return bool
      */
-    public function isDeleted() {
+    public function isDeleted()
+    {
         return $this->deleted;
     }
 
     /**
      * @param bool $deleted
      */
-    public function markAsDeleted() {
+    public function markAsDeleted()
+    {
         $this->deleted = true;
     }
 
     /**
      * @return int|null
      */
-    public function getPosition() {
+    public function getPosition()
+    {
         return $this->position;
     }
 
     /**
      * @param int $position
      */
-    public function setPosition($position) {
+    public function setPosition($position)
+    {
         $this->position = $position;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\TransportTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new TransportTranslation();
     }
 }

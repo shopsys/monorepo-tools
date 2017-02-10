@@ -13,7 +13,8 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
      * @param mixed $normData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValuesLocalizedData[]
      */
-    public function transform($normData) {
+    public function transform($normData)
+    {
         if ($normData === null) {
             return null;
         }
@@ -48,7 +49,8 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
      * @param mixed $viewData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
-    public function reverseTransform($viewData) {
+    public function reverseTransform($viewData)
+    {
         if (is_array($viewData)) {
             $normData = [];
 

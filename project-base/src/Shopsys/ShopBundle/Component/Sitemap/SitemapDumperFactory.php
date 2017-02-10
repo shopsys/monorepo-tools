@@ -40,7 +40,8 @@ class SitemapDumperFactory
      * @param int $domainId
      * @return \Presta\SitemapBundle\Service\Dumper
      */
-    public function createForDomain($domainId) {
+    public function createForDomain($domainId)
+    {
         return new Dumper(
             $this->eventDispatcher,
             $this->filesystem,

@@ -6,11 +6,13 @@ use Symfony\Component\Form\AbstractType;
 
 class ColorPickerType extends AbstractType
 {
-    public function getParent() {
+    public function getParent()
+    {
         return 'text';
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'color_picker';
     }
 }

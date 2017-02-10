@@ -20,7 +20,8 @@ class CustomerService
      */
     private $customerPasswordService;
 
-    public function __construct(CustomerPasswordService $customerPasswordService) {
+    public function __construct(CustomerPasswordService $customerPasswordService)
+    {
         $this->customerPasswordService = $customerPasswordService;
     }
 
@@ -59,7 +60,8 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @param \Shopsys\ShopBundle\Model\Customer\UserData
      */
-    public function edit(User $user, UserData $userData) {
+    public function edit(User $user, UserData $userData)
+    {
         $user->edit($userData);
 
         if ($userData->password !== null) {
@@ -71,7 +73,8 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
      */
-    public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData) {
+    public function createDeliveryAddress(DeliveryAddressData $deliveryAddressData)
+    {
         if ($deliveryAddressData->addressFilled) {
             $deliveryAddress = new DeliveryAddress($deliveryAddressData);
         } else {
@@ -109,7 +112,8 @@ class CustomerService
      * @param string $email
      * @param \Shopsys\ShopBundle\Model\Customer\User|null $userByEmail
      */
-    public function changeEmail(User $user, $email, User $userByEmail = null) {
+    public function changeEmail(User $user, $email, User $userByEmail = null)
+    {
         if ($email !== null) {
             $email = mb_strtolower($email);
         }
@@ -128,7 +132,8 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
      */
-    public function getAmendedCustomerDataByOrder(User $user, Order $order) {
+    public function getAmendedCustomerDataByOrder(User $user, Order $order)
+    {
         $billingAddress = $user->getBillingAddress();
         $deliveryAddress = $user->getDeliveryAddress();
 
@@ -148,7 +153,8 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
      * @return \Shopsys\ShopBundle\Model\Customer\BillingAddressData
      */
-    private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress) {
+    private function getAmendedBillingAddressDataByOrder(Order $order, BillingAddress $billingAddress)
+    {
         $billingAddressData = new BillingAddressData();
         $billingAddressData->setFromEntity($billingAddress);
 
@@ -175,7 +181,8 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData
      */
-    private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null) {
+    private function getAmendedDeliveryAddressDataByOrder(Order $order, DeliveryAddress $deliveryAddress = null)
+    {
         $deliveryAddressData = new DeliveryAddressData();
 
         if ($deliveryAddress === null) {

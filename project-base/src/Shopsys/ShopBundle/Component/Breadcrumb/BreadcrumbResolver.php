@@ -9,7 +9,8 @@ class BreadcrumbResolver
      */
     private $breadcrumbGeneratorsByRouteName;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->breadcrumbGeneratorsByRouteName = [];
     }
 
@@ -17,7 +18,8 @@ class BreadcrumbResolver
      * @param string $routeName
      * @param \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbGeneratorInterface $breadcrumbGenerator
      */
-    public function registerGenerator($routeName, BreadcrumbGeneratorInterface $breadcrumbGenerator) {
+    public function registerGenerator($routeName, BreadcrumbGeneratorInterface $breadcrumbGenerator)
+    {
         $this->breadcrumbGeneratorsByRouteName[$routeName] = $breadcrumbGenerator;
     }
 
@@ -26,7 +28,8 @@ class BreadcrumbResolver
      * @param array $routeParameters
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
-    public function resolveBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function resolveBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         if (!$this->hasGeneratorForRoute($routeName)) {
             throw new \Shopsys\ShopBundle\Component\Breadcrumb\Exception\BreadcrumbGeneratorNotFoundException($routeName);
         }
@@ -44,7 +47,8 @@ class BreadcrumbResolver
      * @param string $routeName
      * @return bool
      */
-    public function hasGeneratorForRoute($routeName) {
+    public function hasGeneratorForRoute($routeName)
+    {
         return array_key_exists($routeName, $this->breadcrumbGeneratorsByRouteName);
     }
 }

@@ -16,7 +16,8 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
      * @param string $entityClassOrName
      * @param \Exception|null $previous
      */
-    public function __construct($entityClassOrName, Exception $previous = null) {
+    public function __construct($entityClassOrName, Exception $previous = null)
+    {
         $this->entityClassOrName = $entityClassOrName;
 
         parent::__construct('Not found image config for entity "' . $entityClassOrName . '".', 0, $previous);
@@ -25,7 +26,8 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
     /**
      * @return string
      */
-    public function getEntityClassOrName() {
+    public function getEntityClassOrName()
+    {
         return $this->entityClassOrName;
     }
 }

@@ -14,7 +14,8 @@ class AdvertPositionList extends AbstractTranslatedConstantList
     /**
      * @inheritdoc
      */
-    public function getTranslationsIndexedByValue() {
+    public function getTranslationsIndexedByValue()
+    {
         return [
             self::POSITION_HEADER => t('under heading'),
             self::POSITION_FOOTER => t('above footer'),

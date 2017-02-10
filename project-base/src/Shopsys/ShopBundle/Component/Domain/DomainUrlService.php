@@ -38,7 +38,8 @@ class DomainUrlService
      * @param string $domainConfigUrl
      * @param string $domainSettingUrl
      */
-    public function replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl) {
+    public function replaceUrlInStringColumns($domainConfigUrl, $domainSettingUrl)
+    {
         $stringColumnNames = $this->getAllStringColumnNamesIndexedByTableName();
         foreach ($stringColumnNames as $tableName => $columnNames) {
             $urlReplacementSql = $this->getUrlReplacementSql($tableName, $columnNames, $domainSettingUrl, $domainConfigUrl);
@@ -50,7 +51,8 @@ class DomainUrlService
     /**
      * @return string[tableName][]
      */
-    private function getAllStringColumnNamesIndexedByTableName() {
+    private function getAllStringColumnNamesIndexedByTableName()
+    {
         $classesMetadata = $this->em->getMetadataFactory()->getAllMetadata();
 
         return $this->entityStringColumnsFinder->getAllStringColumnNamesIndexedByTableName($classesMetadata);
@@ -63,7 +65,8 @@ class DomainUrlService
      * @param string $domainConfigUrl
      * @return string
      */
-    private function getUrlReplacementSql($tableName, array $columnNames, $domainSettingUrl, $domainConfigUrl) {
+    private function getUrlReplacementSql($tableName, array $columnNames, $domainSettingUrl, $domainConfigUrl)
+    {
         $sqlParts = [];
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);

@@ -17,7 +17,8 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $orderStatusData = new OrderStatusData();
         $orderStatusData->name = ['cs' => 'Nová', 'en' => 'New'];
         $this->createOrderStatus($manager, $orderStatusData, OrderStatus::TYPE_NEW, self::ORDER_STATUS_NEW);

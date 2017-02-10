@@ -20,14 +20,16 @@ class OrderTransportFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
      */
-    public function __construct(array $transports) {
+    public function __construct(array $transports)
+    {
         $this->transports = $transports;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'order_transport_form';
     }
 
@@ -35,7 +37,8 @@ class OrderTransportFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('transport', FormType::CHOICE, [
                 'required' => true,
@@ -58,7 +61,8 @@ class OrderTransportFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => OrderTransportData::class,
             'attr' => ['novalidate' => 'novalidate'],

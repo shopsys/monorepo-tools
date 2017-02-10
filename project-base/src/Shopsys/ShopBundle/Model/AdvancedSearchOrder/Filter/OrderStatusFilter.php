@@ -11,21 +11,24 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
 {
     private $orderStatusRepository;
 
-    public function __construct(OrderStatusRepository $orderStatusRepository) {
+    public function __construct(OrderStatusRepository $orderStatusRepository)
+    {
         $this->orderStatusRepository = $orderStatusRepository;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'orderStatus';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_IS,
             self::OPERATOR_IS_NOT,
@@ -35,14 +38,16 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return FormType::CHOICE;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         $orderStatusChoices = [];
         foreach ($this->orderStatusRepository->getAll() as $orderStatus) {
             /* @var $orderStatus \Shopsys\ShopBundle\Model\Order\Status\OrderStatus */
@@ -59,7 +64,8 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         foreach ($rulesData as $index => $ruleData) {
             $dqlOperator = $this->getContainsDqlOperator($ruleData->operator);
             $searchValue = $ruleData->value;
@@ -73,7 +79,8 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getContainsDqlOperator($operator) {
+    private function getContainsDqlOperator($operator)
+    {
         switch ($operator) {
             case self::OPERATOR_IS:
                 return '=';

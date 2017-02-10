@@ -44,7 +44,8 @@ class Vat
      */
     private $replaceWith;
 
-    public function __construct(VatData $vatData) {
+    public function __construct(VatData $vatData)
+    {
         $this->name = $vatData->name;
         $this->percent = $vatData->percent;
     }
@@ -52,46 +53,53 @@ class Vat
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getPercent() {
+    public function getPercent()
+    {
         return $this->percent;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat|null
      */
-    public function getReplaceWith() {
+    public function getReplaceWith()
+    {
         return $this->replaceWith;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      */
-    public function edit(VatData $vatData) {
+    public function edit(VatData $vatData)
+    {
         $this->name = $vatData->name;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $newVat
      */
-    public function markForDeletion(Vat $newVat) {
+    public function markForDeletion(Vat $newVat)
+    {
         $this->replaceWith = $newVat;
     }
 
-    public function isMarkedAsDeleted() {
+    public function isMarkedAsDeleted()
+    {
         return $this->replaceWith !== null;
     }
 }

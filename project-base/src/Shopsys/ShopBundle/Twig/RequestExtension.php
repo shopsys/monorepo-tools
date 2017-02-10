@@ -16,14 +16,16 @@ class RequestExtension extends Twig_Extension
     /**
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack) {
+    public function __construct(RequestStack $requestStack)
+    {
         $this->requestStack = $requestStack;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction(
                 'getAllRequestParams',
@@ -43,7 +45,8 @@ class RequestExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getAllRequestParams() {
+    public function getAllRequestParams()
+    {
         return array_merge(
             $this->getParamsFromRequest(),
             $this->getRouteParams()
@@ -53,28 +56,32 @@ class RequestExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getRoute() {
+    public function getRoute()
+    {
         return $this->requestStack->getMasterRequest()->attributes->get('_route');
     }
 
     /**
      * @return array
      */
-    private function getParamsFromRequest() {
+    private function getParamsFromRequest()
+    {
         return $this->requestStack->getMasterRequest()->query->all();
     }
 
     /**
      * @return array
      */
-    public function getRouteParams() {
+    public function getRouteParams()
+    {
         return $this->requestStack->getMasterRequest()->attributes->get('_route_params');
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'request_extension';
     }
 }

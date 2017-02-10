@@ -7,14 +7,16 @@ class System
     /**
      * @return bool
      */
-    public function isWindows() {
+    public function isWindows()
+    {
         return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
     }
 
     /**
      * @return bool
      */
-    public function isMac() {
+    public function isMac()
+    {
         return stripos(PHP_OS, 'darwin') === 0;
     }
 }

@@ -19,14 +19,16 @@ class AvailabilityRepository
     /**
      * @param \Doctrine\ORM\EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager) {
+    public function __construct(EntityManager $entityManager)
+    {
         $this->em = $entityManager;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getAvailabilityRepository() {
+    private function getAvailabilityRepository()
+    {
         return $this->em->getRepository(Availability::class);
     }
 
@@ -34,7 +36,8 @@ class AvailabilityRepository
      * @param int $availabilityId
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability|null
      */
-    public function findById($availabilityId) {
+    public function findById($availabilityId)
+    {
         return $this->getAvailabilityRepository()->find($availabilityId);
     }
 
@@ -42,7 +45,8 @@ class AvailabilityRepository
      * @param int $availabilityId
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function getById($availabilityId) {
+    public function getById($availabilityId)
+    {
         $availability = $this->findById($availabilityId);
 
         if ($availability === null) {
@@ -56,7 +60,8 @@ class AvailabilityRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('a')
@@ -72,7 +77,8 @@ class AvailabilityRepository
      * @param int $availabilityId
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
      */
-    public function getAllExceptId($availabilityId) {
+    public function getAllExceptId($availabilityId)
+    {
         $qb = $this->getAvailabilityRepository()->createQueryBuilder('a')
             ->where('a.id != :id')
             ->setParameter('id', $availabilityId);
@@ -84,7 +90,8 @@ class AvailabilityRepository
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
-    public function isAvailabilityUsed(Availability $availability) {
+    public function isAvailabilityUsed(Availability $availability)
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('p.id')
@@ -100,7 +107,8 @@ class AvailabilityRepository
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $oldAvailability
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $newAvailability
      */
-    public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability) {
+    public function replaceAvailability(Availability $oldAvailability, Availability $newAvailability)
+    {
         $this->em->createQueryBuilder()
             ->update(Product::class, 'p')
             ->set('p.availability', ':newAvailability')->setParameter('newAvailability', $newAvailability)

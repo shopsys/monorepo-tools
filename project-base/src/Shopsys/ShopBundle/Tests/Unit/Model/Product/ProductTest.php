@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductTest extends PHPUnit_Framework_TestCase
 {
-    public function testNoVariant() {
+    public function testNoVariant()
+    {
         $productData = new ProductData();
         $product = Product::create($productData);
 
@@ -16,7 +17,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($product->isMainVariant());
     }
 
-    public function testIsVariant() {
+    public function testIsVariant()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         Product::createMainVariant($productData, [$variant]);
@@ -25,7 +27,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($variant->isMainVariant());
     }
 
-    public function testIsMainVariant() {
+    public function testIsMainVariant()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);
@@ -34,7 +37,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($mainVariant->isMainVariant());
     }
 
-    public function testGetMainVariant() {
+    public function testGetMainVariant()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);
@@ -42,7 +46,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->assertSame($mainVariant, $variant->getMainVariant());
     }
 
-    public function testGetMainVariantException() {
+    public function testGetMainVariantException()
+    {
         $productData = new ProductData();
         $product = Product::create($productData);
 
@@ -50,7 +55,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $product->getMainVariant();
     }
 
-    public function testCreateVariantFromVariantException() {
+    public function testCreateVariantFromVariantException()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $variant2 = Product::create($productData);
@@ -61,7 +67,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $mainVariant->addVariant($variant2);
     }
 
-    public function testCreateVariantFromMainVariantException() {
+    public function testCreateVariantFromMainVariantException()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $variant2 = Product::create($productData);
@@ -72,7 +79,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $mainVariant->addVariant($mainVariant2);
     }
 
-    public function testCreateMainVariantFromVariantException() {
+    public function testCreateMainVariantFromVariantException()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $variant2 = Product::create($productData);
@@ -84,7 +92,8 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $variant2->addVariant($variant3);
     }
 
-    public function testAddSelfAsVariantException() {
+    public function testAddSelfAsVariantException()
+    {
         $productData = new ProductData();
         $variant = Product::create($productData);
         $mainVariant = Product::createMainVariant($productData, [$variant]);

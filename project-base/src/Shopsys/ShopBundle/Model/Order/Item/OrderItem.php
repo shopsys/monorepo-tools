@@ -113,77 +113,88 @@ abstract class OrderItem
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Order
      */
-    public function getOrder() {
+    public function getOrder()
+    {
         return $this->order;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getPriceWithoutVat() {
+    public function getPriceWithoutVat()
+    {
         return $this->priceWithoutVat;
     }
 
     /**
      * @return string
      */
-    public function getPriceWithVat() {
+    public function getPriceWithVat()
+    {
         return $this->priceWithVat;
     }
 
     /**
      * @return string
      */
-    public function getVatPercent() {
+    public function getVatPercent()
+    {
         return $this->vatPercent;
     }
 
     /**
      * @return int
      */
-    public function getQuantity() {
+    public function getQuantity()
+    {
         return $this->quantity;
     }
 
     /**
      * @return string|null
      */
-    public function getUnitName() {
+    public function getUnitName()
+    {
         return $this->unitName;
     }
 
     /**
      * @return string|null
      */
-    public function getCatnum() {
+    public function getCatnum()
+    {
         return $this->catnum;
     }
 
     /**
      * @return string
      */
-    public function getTotalPriceWithVat() {
+    public function getTotalPriceWithVat()
+    {
         return $this->priceWithVat * $this->quantity;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
      */
-    public function edit(OrderItemData $orderItemData) {
+    public function edit(OrderItemData $orderItemData)
+    {
         $this->name = $orderItemData->name;
         $this->priceWithoutVat = $orderItemData->priceWithoutVat;
         $this->priceWithVat = $orderItemData->priceWithVat;

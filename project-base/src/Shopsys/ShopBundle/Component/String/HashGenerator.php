@@ -10,7 +10,8 @@ class HashGenerator
      * @param int $length
      * @return string
      */
-    public function generateHash($length) {
+    public function generateHash($length)
+    {
         $numberOfChars = strlen($this->characters);
 
         $hash = '';
@@ -25,7 +26,8 @@ class HashGenerator
     /**
      * @param int $max
      */
-    private function getRandomUnsigned16($max) {
+    private function getRandomUnsigned16($max)
+    {
         do {
             $result = $this->getRandomUnsigned16PossiblyOutOfRange($max);
         } while ($result > $max);
@@ -37,7 +39,8 @@ class HashGenerator
      * @param int $max
      * @return int
      */
-    private function getRandomUnsigned16PossiblyOutOfRange($max) {
+    private function getRandomUnsigned16PossiblyOutOfRange($max)
+    {
         $iv = mcrypt_create_iv(2, MCRYPT_DEV_URANDOM);
         if ($iv === false) {
             throw new \Shopsys\ShopBundle\Component\String\Exception\HashGenerationFailedException();
@@ -56,7 +59,8 @@ class HashGenerator
      * @param int $number
      * @return int
      */
-    private function getNumberOfBits($number) {
+    private function getNumberOfBits($number)
+    {
         $numberOfBits = 0;
 
         while ($number > 0) {
@@ -71,7 +75,8 @@ class HashGenerator
      * @param int $numberOfOnes
      * @return int
      */
-    private function getBitMask($numberOfOnes) {
+    private function getBitMask($numberOfOnes)
+    {
         return (1 << $numberOfOnes) - 1;
     }
 }

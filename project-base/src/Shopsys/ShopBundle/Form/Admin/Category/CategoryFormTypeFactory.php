@@ -46,7 +46,8 @@ class CategoryFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType
      */
-    public function create() {
+    public function create()
+    {
         $categories = $this->categoryRepository->getAll();
         $heurekaCzFeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
         $domains = $this->domain->getAll();
@@ -64,7 +65,8 @@ class CategoryFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Form\Admin\Category\CategoryFormType
      */
-    public function createForCategory(Category $category) {
+    public function createForCategory(Category $category)
+    {
         $categories = $this->categoryRepository->getAllWithoutBranch($category);
         $heurekaCzFeedCategories = $this->feedCategoryRepository->getAllHeurekaCz();
         $domains = $this->domain->getAll();

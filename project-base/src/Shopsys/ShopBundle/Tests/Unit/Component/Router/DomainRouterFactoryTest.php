@@ -16,7 +16,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DomainRouterFactoryTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetRouter() {
+    public function testGetRouter()
+    {
         $domainConfig = new DomainConfig(3, 'http://example.com:8080', 'example', 'en');
         $settingMock = $this->getMock(Setting::class, [], [], '', false);
         $domain = new Domain([$domainConfig], $settingMock);

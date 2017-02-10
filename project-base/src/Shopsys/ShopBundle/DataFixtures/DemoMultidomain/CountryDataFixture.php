@@ -16,7 +16,8 @@ class CountryDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $domainId = 2;
         $countryData = new CountryData();
         $countryData->name = 'Czech republic';
@@ -34,7 +35,8 @@ class CountryDataFixture extends AbstractReferenceFixture
      * @param string $referenceName
      * @return \Shopsys\ShopBundle\Model\Country\Country
      */
-    private function createCountry(CountryData $countryData, $domainId, $referenceName) {
+    private function createCountry(CountryData $countryData, $domainId, $referenceName)
+    {
         $countryFacade = $this->get(CountryFacade::class);
         /* @var $countryFacade \Shopsys\ShopBundle\Model\Country\CountryFacade */
 

@@ -34,7 +34,8 @@ class Unit extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      */
-    public function __construct(UnitData $unitData) {
+    public function __construct(UnitData $unitData)
+    {
         $this->translations = new ArrayCollection();
         $this->setTranslations($unitData);
     }
@@ -42,7 +43,8 @@ class Unit extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -50,14 +52,16 @@ class Unit extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      */
-    private function setTranslations(UnitData $unitData) {
+    private function setTranslations(UnitData $unitData)
+    {
         foreach ($unitData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -66,14 +70,16 @@ class Unit extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new UnitTranslation();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      */
-    public function edit(UnitData $unitData) {
+    public function edit(UnitData $unitData)
+    {
         $this->setTranslations($unitData);
     }
 }

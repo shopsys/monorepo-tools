@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Entity\EntityNotNullableColumnsFinder;
 
 class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetAllNotNullableColumnNamesIndexedByTableName() {
+    public function testGetAllNotNullableColumnNamesIndexedByTableName()
+    {
         $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);
         $classMetadataInfoMock
             ->method('getTableName')
@@ -62,7 +63,8 @@ class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $actualResult);
     }
 
-    public function testGetAllNotNullableColumnNamesIndexedByTableNameException() {
+    public function testGetAllNotNullableColumnNamesIndexedByTableNameException()
+    {
         $classMetadataMock = $this->getMock(ClassMetadata::class);
         $this->setExpectedException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
 

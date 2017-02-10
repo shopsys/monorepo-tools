@@ -32,7 +32,8 @@ class PaymentFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
      */
-    public function create() {
+    public function create()
+    {
         $allTransports = $this->transportRepository->getAll();
         $vats = $this->vatRepository->getAll();
 

@@ -24,7 +24,8 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
 {
-    public function testOnKernelResponseNoAction() {
+    public function testOnKernelResponseNoAction()
+    {
         $setting = $this->getContainer()->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
@@ -47,7 +48,8 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $inputPriceRecalculationScheduler->onKernelResponse($filterResponseEventMock);
     }
 
-    public function inputPricesTestDataProvider() {
+    public function inputPricesTestDataProvider()
+    {
         return [
             ['inputPriceWithoutVat' => '100', 'inputPriceWithVat' => '121', 'vatPercent' => '21'],
             ['inputPriceWithoutVat' => '17261.983471', 'inputPriceWithVat' => '20887', 'vatPercent' => '21'],

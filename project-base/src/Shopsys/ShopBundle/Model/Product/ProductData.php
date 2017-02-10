@@ -119,7 +119,8 @@ class ProductData
      */
     public $orderingPriority;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->name = [];
         $this->price = 0;
         $this->sellingDenied = false;

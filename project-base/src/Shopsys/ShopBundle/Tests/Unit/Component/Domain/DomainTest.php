@@ -10,7 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DomainTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetIdNotSet() {
+    public function testGetIdNotSet()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
@@ -22,7 +23,8 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $domain->getId();
     }
 
-    public function testSwitchDomainByRequest() {
+    public function testSwitchDomainByRequest()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
@@ -45,7 +47,8 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $this->assertSame('cs', $domain->getLocale());
     }
 
-    public function testGetAllIncludingDomainConfigsWithoutDataCreated() {
+    public function testGetAllIncludingDomainConfigsWithoutDataCreated()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),
@@ -57,7 +60,8 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $this->assertSame($domainConfigs, $domain->getAllIncludingDomainConfigsWithoutDataCreated());
     }
 
-    public function testGetAll() {
+    public function testGetAll()
+    {
         $domainConfigWithDataCreated = new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs');
         $domainConfigWithoutDataCreated = new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en');
         $domainConfigs = [
@@ -81,7 +85,8 @@ class DomainTest extends PHPUnit_Framework_TestCase
         $this->assertSame([$domainConfigWithDataCreated], $domain->getAll());
     }
 
-    public function testGetDomainConfigById() {
+    public function testGetDomainConfigById()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.com:8080', 'example.com', 'cs'),
             new DomainConfig(2, 'http://example.org:8080', 'example.org', 'en'),

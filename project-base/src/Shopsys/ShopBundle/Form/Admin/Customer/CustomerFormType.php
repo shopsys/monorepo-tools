@@ -39,7 +39,8 @@ class CustomerFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
      */
-    public function __construct($scenario, array $countries, $selectedDomain = null, $pricingGroups = null) {
+    public function __construct($scenario, array $countries, $selectedDomain = null, $pricingGroups = null)
+    {
         $this->scenario = $scenario;
         $this->countries = $countries;
         $this->selectedDomain = $selectedDomain;
@@ -49,7 +50,8 @@ class CustomerFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'customer_form';
     }
 
@@ -57,7 +59,8 @@ class CustomerFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('userData', new UserFormType($this->scenario, $this->selectedDomain, $this->pricingGroups))
             ->add('billingAddressData', new BillingAddressFormType($this->countries))
@@ -69,7 +72,8 @@ class CustomerFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => CustomerData::class,
             'attr' => ['novalidate' => 'novalidate'],

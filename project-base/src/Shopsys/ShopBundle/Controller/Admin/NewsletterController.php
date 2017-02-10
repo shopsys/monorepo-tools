@@ -15,21 +15,24 @@ class NewsletterController extends AdminBaseController
      */
     private $newsletterFacade;
 
-    public function __construct(NewsletterFacade $newsletterFacade) {
+    public function __construct(NewsletterFacade $newsletterFacade)
+    {
         $this->newsletterFacade = $newsletterFacade;
     }
 
     /**
      * @Route("/newsletter/")
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         return $this->render('@ShopsysShop/Admin/Content/Newsletter/index.html.twig');
     }
 
     /**
      * @Route("/newsletter/export-csv/")
      */
-    public function exportAction() {
+    public function exportAction()
+    {
         $response = new StreamedResponse();
         $response->headers->set('Content-Type', 'text/csv; charset=utf-8');
         $response->headers->set('Content-Disposition', 'attachment; filename="emails.csv"');
@@ -40,7 +43,8 @@ class NewsletterController extends AdminBaseController
         return $response;
     }
 
-    private function streamCsvExport() {
+    private function streamCsvExport()
+    {
         $output = new SplFileObject('php://output', 'w+');
 
         $emailsDataIterator = $this->newsletterFacade->getAllEmailsDataIterator();

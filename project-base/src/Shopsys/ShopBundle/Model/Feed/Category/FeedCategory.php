@@ -44,7 +44,8 @@ class FeedCategory
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
      */
-    public function __construct(FeedCategoryData $feedCategoryData) {
+    public function __construct(FeedCategoryData $feedCategoryData)
+    {
         $this->extId = $feedCategoryData->extId;
         $this->name = $feedCategoryData->name;
         $this->fullName = $feedCategoryData->fullName;
@@ -53,7 +54,8 @@ class FeedCategory
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData $feedCategoryData
      */
-    public function edit(FeedCategoryData $feedCategoryData) {
+    public function edit(FeedCategoryData $feedCategoryData)
+    {
         $this->name = $feedCategoryData->name;
         $this->fullName = $feedCategoryData->fullName;
     }
@@ -61,21 +63,24 @@ class FeedCategory
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getFullName() {
+    public function getFullName()
+    {
         return $this->fullName;
     }
 }

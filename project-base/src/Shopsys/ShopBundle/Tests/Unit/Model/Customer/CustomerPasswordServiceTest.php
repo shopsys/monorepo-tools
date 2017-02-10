@@ -11,7 +11,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactory;
 
 class CustomerPasswordServiceTest extends FunctionalTestCase
 {
-    public function isResetPasswordHashValidProvider() {
+    public function isResetPasswordHashValidProvider()
+    {
         return [
             [
                 'resetPasswordHash' => 'validHash',

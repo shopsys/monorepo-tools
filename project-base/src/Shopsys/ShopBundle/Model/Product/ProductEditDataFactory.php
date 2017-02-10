@@ -77,7 +77,8 @@ class ProductEditDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $productEditData = new ProductEditData();
         $productEditData->productData = $this->productDataFactory->createDefault();
 
@@ -106,7 +107,8 @@ class ProductEditDataFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
      */
-    public function createFromProduct(Product $product) {
+    public function createFromProduct(Product $product)
+    {
         $productEditData = $this->createDefault();
 
         $productEditData->productData = $this->productDataFactory->createFromProduct($product);
@@ -129,7 +131,8 @@ class ProductEditDataFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Product[position]
      */
-    private function getAccessoriesData(Product $product) {
+    private function getAccessoriesData(Product $product)
+    {
         $productAccessories = [];
         foreach ($this->productAccessoryRepository->getAllByProduct($product) as $productAccessory) {
             $productAccessories[$productAccessory->getPosition()] = $productAccessory->getAccessory();
@@ -142,7 +145,8 @@ class ProductEditDataFactory
      * @param Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
-    private function getParametersData(Product $product) {
+    private function getParametersData(Product $product)
+    {
         $productParameterValuesData = [];
         $productParameterValues = $this->parameterRepository->getProductParameterValuesByProduct($product);
         foreach ($productParameterValues as $productParameterValue) {
@@ -158,7 +162,8 @@ class ProductEditDataFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    private function setMultidomainData(Product $product, ProductEditData $productEditData) {
+    private function setMultidomainData(Product $product, ProductEditData $productEditData)
+    {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
         foreach ($productDomains as $productDomain) {
             $domainId = $productDomain->getDomainId();
@@ -180,7 +185,8 @@ class ProductEditDataFactory
     /**
      * @return array
      */
-    private function getNullForAllDomains() {
+    private function getNullForAllDomains()
+    {
         $nullForAllDomains = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $nullForAllDomains[$domainConfig->getId()] = null;

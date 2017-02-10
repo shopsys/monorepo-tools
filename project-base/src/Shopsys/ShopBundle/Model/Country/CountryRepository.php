@@ -15,14 +15,16 @@ class CountryRepository
     /**
      * @param \Doctrine\ORM\EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager) {
+    public function __construct(EntityManager $entityManager)
+    {
         $this->em = $entityManager;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCountryRepository() {
+    private function getCountryRepository()
+    {
         return $this->em->getRepository(Country::class);
     }
 
@@ -30,7 +32,8 @@ class CountryRepository
      * @param int $countryId
      * @return \Shopsys\ShopBundle\Model\Country\Country|null
      */
-    public function findById($countryId) {
+    public function findById($countryId)
+    {
         return $this->getCountryRepository()->find($countryId);
     }
 
@@ -38,7 +41,8 @@ class CountryRepository
      * @param int $countryId
      * @return \Shopsys\ShopBundle\Model\Country\Country
      */
-    public function getById($countryId) {
+    public function getById($countryId)
+    {
         $country = $this->findById($countryId);
 
         if ($country === null) {
@@ -52,7 +56,8 @@ class CountryRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Country\Country[]
      */
-    public function getAllByDomainId($domainId) {
+    public function getAllByDomainId($domainId)
+    {
         return $this->getCountryRepository()->findBy(['domainId' => $domainId], ['id' => 'asc']);
     }
 }

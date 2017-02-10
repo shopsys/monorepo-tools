@@ -13,14 +13,16 @@ class NewsletterRepository
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getNewsletterSubscriberRepository() {
+    private function getNewsletterSubscriberRepository()
+    {
         return $this->em->getRepository(NewsletterSubscriber::class);
     }
 
@@ -28,14 +30,16 @@ class NewsletterRepository
      * @param string $email
      * @return bool
      */
-    public function existsSubscribedEmail($email) {
+    public function existsSubscribedEmail($email)
+    {
         return $this->getNewsletterSubscriberRepository()->find($email) !== null;
     }
 
     /**
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult|string[][0]['email']
      */
-    public function getAllEmailsDataIterator() {
+    public function getAllEmailsDataIterator()
+    {
         $query = $this->getNewsletterSubscriberRepository()
             ->createQueryBuilder('ns')
             ->select('ns.email')

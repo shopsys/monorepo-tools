@@ -17,7 +17,8 @@ class InvalidQuantityException extends Exception implements CartException
      * @param string $message
      * @param \Exception|null $previous
      */
-    public function __construct($invalidValue, $message = '', Exception $previous = null) {
+    public function __construct($invalidValue, $message = '', Exception $previous = null)
+    {
         $this->invalidValue = $invalidValue;
         parent::__construct($message, 0, $previous);
     }
@@ -25,7 +26,8 @@ class InvalidQuantityException extends Exception implements CartException
     /**
      * @return mixed
      */
-    public function getInvalidValue() {
+    public function getInvalidValue()
+    {
         return $this->invalidValue;
     }
 }

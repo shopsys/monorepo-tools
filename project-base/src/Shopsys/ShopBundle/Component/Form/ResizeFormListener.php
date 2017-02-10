@@ -63,7 +63,8 @@ class ResizeFormListener implements EventSubscriberInterface
     /**
      * @return array
      */
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents()
+    {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
@@ -79,7 +80,8 @@ class ResizeFormListener implements EventSubscriberInterface
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function preSetData(FormEvent $event) {
+    public function preSetData(FormEvent $event)
+    {
         $data = $event->getData();
 
         if ($data === null) {
@@ -100,7 +102,8 @@ class ResizeFormListener implements EventSubscriberInterface
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function postSetData(FormEvent $event) {
+    public function postSetData(FormEvent $event)
+    {
         $form = $event->getForm();
         $viewData = $form->getViewData();
 
@@ -134,7 +137,8 @@ class ResizeFormListener implements EventSubscriberInterface
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function preSubmit(FormEvent $event) {
+    public function preSubmit(FormEvent $event)
+    {
         $form = $event->getForm();
         $data = $event->getData();
 
@@ -180,7 +184,8 @@ class ResizeFormListener implements EventSubscriberInterface
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function onSubmit(FormEvent $event) {
+    public function onSubmit(FormEvent $event)
+    {
         $form = $event->getForm();
         $normData = $event->getData();
         $previousViewData = $form->getViewData();
@@ -228,7 +233,8 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param mixed $previousViewData
      * @return mixed
      */
-    private function removeEmptyChildrenFromFormAndData(FormInterface $form, $viewData, $previousViewData) {
+    private function removeEmptyChildrenFromFormAndData(FormInterface $form, $viewData, $previousViewData)
+    {
         foreach ($form as $name => $child) {
             $isNew = !isset($previousViewData[$name]);
 
@@ -248,7 +254,8 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param \Symfony\Component\Form\FormInterface $form
      * @return mixed
      */
-    private function removeDataItemsNotPresentInForm($viewData, FormInterface $form) {
+    private function removeDataItemsNotPresentInForm($viewData, FormInterface $form)
+    {
         $toDelete = [];
 
         foreach ($viewData as $name => $child) {
@@ -271,7 +278,8 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param mixed $value
      * @return mixed
      */
-    private function normToView(FormInterface $form, $value) {
+    private function normToView(FormInterface $form, $value)
+    {
         // Scalar values should  be converted to strings to
         // facilitate differentiation between empty ("") and zero (0).
         // Only do this for simple forms, as the resulting value in
@@ -295,7 +303,8 @@ class ResizeFormListener implements EventSubscriberInterface
      * @param string $value
      * @return mixed
      */
-    private function viewToNorm(FormInterface $form, $value) {
+    private function viewToNorm(FormInterface $form, $value)
+    {
         $transformers = $form->getConfig()->getViewTransformers();
 
         if (!$transformers) {

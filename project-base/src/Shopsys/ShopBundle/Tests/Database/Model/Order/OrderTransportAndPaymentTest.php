@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class OrderTransportAndPaymentTest extends DatabaseTestCase
 {
-    public function testVisibleTransport() {
+    public function testVisibleTransport()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -46,7 +47,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertContains($transport, $visibleTransports);
     }
 
-    public function testVisibleTransportHiddenTransport() {
+    public function testVisibleTransportHiddenTransport()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -76,7 +78,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($transport, $visibleTransports);
     }
 
-    public function testVisibleTransportHiddenPayment() {
+    public function testVisibleTransportHiddenPayment()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -106,7 +109,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($transport, $visibleTransports);
     }
 
-    public function testVisibleTransportNoPayment() {
+    public function testVisibleTransportNoPayment()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -130,7 +134,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($transport, $visibleTransports);
     }
 
-    public function testVisibleTransportOnDifferentDomain() {
+    public function testVisibleTransportOnDifferentDomain()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -160,7 +165,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($transport, $visibleTransports);
     }
 
-    public function testVisibleTransportPaymentOnDifferentDomain() {
+    public function testVisibleTransportPaymentOnDifferentDomain()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -190,7 +196,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($transport, $visibleTransports);
     }
 
-    public function testVisiblePayment() {
+    public function testVisiblePayment()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -217,7 +224,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertContains($payment, $visiblePayments);
     }
 
-    public function testVisiblePaymentHiddenTransport() {
+    public function testVisiblePaymentHiddenTransport()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -244,7 +252,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($payment, $visiblePayments);
     }
 
-    public function testVisiblePaymentHiddenPayment() {
+    public function testVisiblePaymentHiddenPayment()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -271,7 +280,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($payment, $visiblePayments);
     }
 
-    public function testVisiblePaymentNoTransport() {
+    public function testVisiblePaymentNoTransport()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -293,7 +303,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($payment, $visiblePayments);
     }
 
-    public function testVisiblePaymentOnDifferentDomain() {
+    public function testVisiblePaymentOnDifferentDomain()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));
@@ -320,7 +331,8 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
         $this->assertNotContains($payment, $visiblePayments);
     }
 
-    public function testVisiblePaymentTransportOnDifferentDomain() {
+    public function testVisiblePaymentTransportOnDifferentDomain()
+    {
         $em = $this->getEntityManager();
 
         $vat = new Vat(new VatData('vat', 21));

@@ -81,7 +81,8 @@ class ProductOnCurrentDomainFacade
      * @param int $productId
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail
      */
-    public function getVisibleProductDetailById($productId) {
+    public function getVisibleProductDetailById($productId)
+    {
         $product = $this->productRepository->getVisible(
             $productId,
             $this->domain->getId(),
@@ -95,7 +96,8 @@ class ProductOnCurrentDomainFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
      */
-    public function getAccessoriesProductDetailsForProduct(Product $product) {
+    public function getAccessoriesProductDetailsForProduct(Product $product)
+    {
         $accessories = $this->productAccessoryRepository->getAllOfferedAccessoriesByProduct(
             $product,
             $this->domain->getId(),
@@ -109,7 +111,8 @@ class ProductOnCurrentDomainFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
      */
-    public function getVariantsProductDetailsForProduct(Product $product) {
+    public function getVariantsProductDetailsForProduct(Product $product)
+    {
         $variants = $this->productRepository->getAllSellableVariantsByMainVariant(
             $product,
             $this->domain->getId(),
@@ -230,7 +233,8 @@ class ProductOnCurrentDomainFacade
      * @param int $limit
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
-    public function getSearchAutocompleteProducts($searchText, $limit) {
+    public function getSearchAutocompleteProducts($searchText, $limit)
+    {
         $emptyProductFilterData = new ProductFilterData();
 
         $page = 1;

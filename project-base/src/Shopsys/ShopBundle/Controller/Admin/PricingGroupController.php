@@ -52,7 +52,8 @@ class PricingGroupController extends AdminBaseController
      * @Route("/pricing/group/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->pricingGroupInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Pricing/Groups/list.html.twig', [
@@ -66,7 +67,8 @@ class PricingGroupController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $newId = $request->get('newId');
         $newId = $newId !== null ? (int)$newId : null;
 
@@ -103,7 +105,8 @@ class PricingGroupController extends AdminBaseController
      * @Route("/pricing/group/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $pricingGroup = $this->pricingGroupFacade->getById($id);
             $remainingPricingGroups = $this->pricingGroupFacade->getAllExceptIdByDomainId($id, $pricingGroup->getDomainId());
@@ -147,7 +150,8 @@ class PricingGroupController extends AdminBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingsAction(Request $request) {
+    public function settingsAction(Request $request)
+    {
         $pricingGroups = $this->pricingGroupSettingFacade->getPricingGroupsBySelectedDomainId();
         $form = $this->createForm(new PricingGroupSettingsFormType($pricingGroups));
 

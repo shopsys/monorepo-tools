@@ -100,7 +100,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      */
-    public function __construct(AdministratorData $administratorData) {
+    public function __construct(AdministratorData $administratorData)
+    {
         $this->email = $administratorData->email;
         $this->realName = $administratorData->realName;
         $this->username = $administratorData->username;
@@ -116,7 +117,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      */
-    public function edit(AdministratorData $administratorData) {
+    public function edit(AdministratorData $administratorData)
+    {
         $this->email = $administratorData->email;
         $this->realName = $administratorData->realName;
         $this->username = $administratorData->username;
@@ -125,7 +127,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit
      */
-    public function addGridLimit(AdministratorGridLimit $gridLimit) {
+    public function addGridLimit(AdministratorGridLimit $gridLimit)
+    {
         if (!$this->gridLimits->contains($gridLimit)) {
             $this->gridLimits->add($gridLimit);
         }
@@ -134,7 +137,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit $gridLimit
      */
-    public function removeGridLimit(AdministratorGridLimit $gridLimit) {
+    public function removeGridLimit(AdministratorGridLimit $gridLimit)
+    {
         $this->gridLimits->removeElement($gridLimit);
     }
 
@@ -142,7 +146,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      * @param string $gridId
      * @return \Shopsys\ShopBundle\Model\Administrator\AdministratorGridLimit
      */
-    public function getGridLimit($gridId) {
+    public function getGridLimit($gridId)
+    {
         foreach ($this->gridLimits as $gridLimit) {
             if ($gridLimit->getGridId() === $gridId) {
                 return $gridLimit;
@@ -155,7 +160,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
      * @param string $gridId
      * @return int|null
      */
-    public function getLimitByGridId($gridId) {
+    public function getLimitByGridId($gridId)
+    {
         $gridLimit = $this->getGridLimit($gridId);
         if ($gridLimit !== null) {
             return $gridLimit->getLimit();
@@ -166,105 +172,120 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->username;
     }
 
     /**
      * @return string
      */
-    public function getRealName() {
+    public function getRealName()
+    {
         return $this->realName;
     }
 
     /**
      * @return string
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
      * @return string
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
     /**
      * @return string
      */
-    public function getLoginToken() {
+    public function getLoginToken()
+    {
         return $this->loginToken;
     }
 
     /**
      * @return \DateTime
      */
-    public function getLastActivity() {
+    public function getLastActivity()
+    {
         return $this->lastActivity;
     }
 
     /**
      * @return bool
      */
-    public function isSuperadmin() {
+    public function isSuperadmin()
+    {
         return $this->superadmin;
     }
 
     /**
      * @param bool $superadmin
      */
-    public function setSuperadmin($superadmin) {
+    public function setSuperadmin($superadmin)
+    {
         $this->superadmin = $superadmin;
     }
 
     /**
      * @param string $username
      */
-    public function setUsername($username) {
+    public function setUsername($username)
+    {
         $this->username = $username;
     }
 
     /**
      * @param string $realName
      */
-    public function setRealname($realName) {
+    public function setRealname($realName)
+    {
         $this->realName = $realName;
     }
 
     /**
      * @param string $password
      */
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
     }
 
     /**
      * @param string $email
      */
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
     /**
      * @param string $loginToken
      */
-    public function setLoginToken($loginToken) {
+    public function setLoginToken($loginToken)
+    {
         $this->loginToken = $loginToken;
     }
 
     /**
      * @param \DateTime $lastActivity
      */
-    public function setLastActivity($lastActivity) {
+    public function setLastActivity($lastActivity)
+    {
         $this->lastActivity = $lastActivity;
     }
 
@@ -283,7 +304,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @inheritDoc
      */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize([
             $this->id,
             $this->username,
@@ -297,7 +319,8 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @inheritDoc
      */
-    public function unserialize($serialized) {
+    public function unserialize($serialized)
+    {
         list(
             $this->id,
             $this->username,
@@ -313,13 +336,15 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @inheritDoc
      */
-    public function eraseCredentials() {
+    public function eraseCredentials()
+    {
     }
 
     /**
      * @inheritDoc
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         if ($this->superadmin) {
             return [Roles::ROLE_SUPER_ADMIN];
         }
@@ -329,21 +354,24 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     /**
      * @inheritDoc
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         return null; // bcrypt include salt in password hash
     }
 
     /**
      * @inheritDoc
      */
-    public function isMultidomainLogin() {
+    public function isMultidomainLogin()
+    {
         return $this->multidomainLogin;
     }
 
     /**
      * @inheritDoc
      */
-    public function setMultidomainLogin($multidomainLogin) {
+    public function setMultidomainLogin($multidomainLogin)
+    {
         $this->multidomainLogin = $multidomainLogin;
     }
 }

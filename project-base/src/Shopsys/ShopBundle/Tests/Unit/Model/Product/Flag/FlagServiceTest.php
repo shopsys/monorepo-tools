@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Flag\FlagService;
 
 class FlagServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreate() {
+    public function testCreate()
+    {
         $flagService = new FlagService();
 
         $flagDataOriginal = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');
@@ -21,7 +22,8 @@ class FlagServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($flagDataOriginal, $flagDataNew);
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $flagService = new FlagService();
 
         $flagDataOld = new FlagData(['cs' => 'flagNameCs', 'en' => 'flagNameEn'], '#336699');

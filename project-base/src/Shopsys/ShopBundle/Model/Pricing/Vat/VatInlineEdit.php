@@ -35,7 +35,8 @@ class VatInlineEdit extends AbstractGridInlineEdit
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @return int
      */
-    protected function createEntityAndGetId($vatData) {
+    protected function createEntityAndGetId($vatData)
+    {
         $vat = $this->vatFacade->create($vatData);
 
         return $vat->getId();
@@ -45,7 +46,8 @@ class VatInlineEdit extends AbstractGridInlineEdit
      * @param int $vatId
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      */
-    protected function editEntity($vatId, $vatData) {
+    protected function editEntity($vatId, $vatData)
+    {
         $this->vatFacade->edit($vatId, $vatData);
     }
 
@@ -53,7 +55,8 @@ class VatInlineEdit extends AbstractGridInlineEdit
      * @param int|null $vatId
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\VatData
      */
-    protected function getFormDataObject($vatId = null) {
+    protected function getFormDataObject($vatId = null)
+    {
         $vatData = new VatData();
 
         if ($vatId !== null) {
@@ -69,7 +72,8 @@ class VatInlineEdit extends AbstractGridInlineEdit
      * @param int $rowId
      * @return \Shopsys\ShopBundle\Form\Admin\Vat\VatFormType
      */
-    protected function getFormType($rowId) {
+    protected function getFormType($rowId)
+    {
         return new VatFormType($rowId === null ? VatFormType::SCENARIO_CREATE : VatFormType::SCENARIO_EDIT);
     }
 }

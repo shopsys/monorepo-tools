@@ -24,7 +24,8 @@ class FrontLogoutHandler implements LogoutSuccessHandlerInterface
      * @param \Symfony\Component\Routing\Router $router
      * @param \Shopsys\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
      */
-    public function __construct(Router $router, OrderFlowFacade $orderFlowFacade) {
+    public function __construct(Router $router, OrderFlowFacade $orderFlowFacade)
+    {
         $this->router = $router;
         $this->orderFlowFacade = $orderFlowFacade;
     }
@@ -33,7 +34,8 @@ class FrontLogoutHandler implements LogoutSuccessHandlerInterface
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onLogoutSuccess(Request $request) {
+    public function onLogoutSuccess(Request $request)
+    {
         $this->orderFlowFacade->resetOrderForm();
         $url = $this->router->generate('front_homepage');
         $request->getSession()->migrate();

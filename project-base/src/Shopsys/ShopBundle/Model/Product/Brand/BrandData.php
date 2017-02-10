@@ -27,7 +27,8 @@ class BrandData
      */
     public $urls;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->name = '';
         $this->image = [];
         $this->descriptions = [];
@@ -37,7 +38,8 @@ class BrandData
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
      */
-    public function setFromEntity(Brand $brand) {
+    public function setFromEntity(Brand $brand)
+    {
         $this->name = $brand->getName();
 
         $translations = $brand->getTranslations();

@@ -16,7 +16,8 @@ use Symfony\Bridge\Monolog\Logger;
 
 class CronFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testRunModuleByModuleId() {
+    public function testRunModuleByModuleId()
+    {
         $moduleId = 'moduleId';
         $cronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('run');
@@ -35,7 +36,8 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
         $cronFacade->runModuleByModuleId($moduleId);
     }
 
-    public function testRunIterableModuleByModuleId() {
+    public function testRunIterableModuleByModuleId()
+    {
         $moduleId = 'moduleId';
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('setLogger');
@@ -61,7 +63,8 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
         $cronFacade->runModuleByModuleId($moduleId);
     }
 
-    public function testScheduleModulesByTime() {
+    public function testScheduleModulesByTime()
+    {
         $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
         $scheduledCronModuleConfig = new CronModuleConfig($scheduledCronModuleServiceMock, 'scheduled', '', '');
 
@@ -91,7 +94,8 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
         $cronFacade->scheduleModulesByTime(new DateTime());
     }
 
-    public function testRunScheduledModules() {
+    public function testRunScheduledModules()
+    {
         $scheduledCronModuleServiceMock = $this->getMockForAbstractClass(CronModuleInterface::class);
         $scheduledCronModuleServiceMock->expects($this->once())->method('run');
         $scheduledCronModuleConfig = new CronModuleConfig($scheduledCronModuleServiceMock, 'scheduled', '', '');

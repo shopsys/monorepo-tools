@@ -10,7 +10,8 @@ class SliderItemFormTypeFactory
      * @param bool $scenarioCreate
      * @return \Shopsys\ShopBundle\Form\Admin\Slider\SliderItemFormType
      */
-    public function create($scenarioCreate = false) {
+    public function create($scenarioCreate = false)
+    {
         return new SliderItemFormType($scenarioCreate);
     }
 }

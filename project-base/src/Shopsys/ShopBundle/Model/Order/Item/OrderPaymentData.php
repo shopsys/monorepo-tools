@@ -16,7 +16,8 @@ class OrderPaymentData extends OrderItemData
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderPayment
      */
-    public function setFromEntity(OrderItem $orderPayment) {
+    public function setFromEntity(OrderItem $orderPayment)
+    {
         if ($orderPayment instanceof OrderPayment) {
             $this->payment = $orderPayment->getPayment();
             parent::setFromEntity($orderPayment);

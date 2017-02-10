@@ -17,23 +17,28 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductRepositoryTest extends DatabaseTestCase
 {
-    public function testVisibleAndNotSellingDeniedProductIsListed() {
+    public function testVisibleAndNotSellingDeniedProductIsListed()
+    {
         $this->getAllListableQueryBuilderTest(1, true);
     }
 
-    public function testVisibleAndSellingDeniedProductIsNotListed() {
+    public function testVisibleAndSellingDeniedProductIsNotListed()
+    {
         $this->getAllListableQueryBuilderTest(6, false);
     }
 
-    public function testProductVariantIsNotListed() {
+    public function testProductVariantIsNotListed()
+    {
         $this->getAllListableQueryBuilderTest(53, false);
     }
 
-    public function testProductMainVariantIsListed() {
+    public function testProductMainVariantIsListed()
+    {
         $this->getAllListableQueryBuilderTest(148, true);
     }
 
-    private function getAllListableQueryBuilderTest($productReferenceId, $isExpectedInResult) {
+    private function getAllListableQueryBuilderTest($productReferenceId, $isExpectedInResult)
+    {
         $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -53,23 +58,28 @@ class ProductRepositoryTest extends DatabaseTestCase
         $this->assertSame(in_array($product, $result, true), $isExpectedInResult);
     }
 
-    public function testVisibleAndNotSellingDeniedProductIsSellable() {
+    public function testVisibleAndNotSellingDeniedProductIsSellable()
+    {
         $this->getAllSellableQueryBuilderTest(1, true);
     }
 
-    public function testVisibleAndSellingDeniedProductIsNotSellable() {
+    public function testVisibleAndSellingDeniedProductIsNotSellable()
+    {
         $this->getAllSellableQueryBuilderTest(6, false);
     }
 
-    public function testProductVariantIsSellable() {
+    public function testProductVariantIsSellable()
+    {
         $this->getAllSellableQueryBuilderTest(53, true);
     }
 
-    public function testProductMainVariantIsNotSellable() {
+    public function testProductMainVariantIsNotSellable()
+    {
         $this->getAllSellableQueryBuilderTest(148, false);
     }
 
-    private function getAllSellableQueryBuilderTest($productReferenceId, $isExpectedInResult) {
+    private function getAllSellableQueryBuilderTest($productReferenceId, $isExpectedInResult)
+    {
         $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -89,23 +99,28 @@ class ProductRepositoryTest extends DatabaseTestCase
         $this->assertSame(in_array($product, $result, true), $isExpectedInResult);
     }
 
-    public function testVisibleAndNotSellingDeniedProductIsOfferred() {
+    public function testVisibleAndNotSellingDeniedProductIsOfferred()
+    {
         $this->getAllOfferedQueryBuilderTest(1, true);
     }
 
-    public function testVisibleAndSellingDeniedProductIsNotOfferred() {
+    public function testVisibleAndSellingDeniedProductIsNotOfferred()
+    {
         $this->getAllOfferedQueryBuilderTest(6, false);
     }
 
-    public function testProductVariantIsOfferred() {
+    public function testProductVariantIsOfferred()
+    {
         $this->getAllOfferedQueryBuilderTest(53, true);
     }
 
-    public function testProductMainVariantIsOfferred() {
+    public function testProductMainVariantIsOfferred()
+    {
         $this->getAllOfferedQueryBuilderTest(69, true);
     }
 
-    private function getAllOfferedQueryBuilderTest($productReferenceId, $isExpectedInResult) {
+    private function getAllOfferedQueryBuilderTest($productReferenceId, $isExpectedInResult)
+    {
         $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -125,7 +140,8 @@ class ProductRepositoryTest extends DatabaseTestCase
         $this->assertSame(in_array($product, $result, true), $isExpectedInResult);
     }
 
-    public function testOrderingByProductPriorityInCategory() {
+    public function testOrderingByProductPriorityInCategory()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::FOOD);
         /* @var $category \Shopsys\ShopBundle\DataFixtures\Demo\CategoryDataFixture */
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 70);
@@ -145,7 +161,8 @@ class ProductRepositoryTest extends DatabaseTestCase
         $this->assertSame($product1, $results[1]);
     }
 
-    public function testOrderingByProductPriorityInSearch() {
+    public function testOrderingByProductPriorityInSearch()
+    {
         $product1 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 1);
         $product2 = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . 45);
 
@@ -167,7 +184,8 @@ class ProductRepositoryTest extends DatabaseTestCase
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param int $priority
      */
-    private function setProductOrderingPriority(Product $product, $priority) {
+    private function setProductOrderingPriority(Product $product, $priority)
+    {
         $productEditDataFactory = $this->getContainer()->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
         $productFacade = $this->getContainer()->get(ProductFacade::class);
@@ -182,7 +200,8 @@ class ProductRepositoryTest extends DatabaseTestCase
      * @param string $searchText
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    private function getProductsForSearchOrderedByPriority($searchText) {
+    private function getProductsForSearchOrderedByPriority($searchText)
+    {
         $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -206,7 +225,8 @@ class ProductRepositoryTest extends DatabaseTestCase
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    private function getProductsInCategoryOrderedByPriority(Category $category) {
+    private function getProductsInCategoryOrderedByPriority(Category $category)
+    {
         $productRepository = $this->getContainer()->get(ProductRepository::class);
         /* @var $productRepository \Shopsys\ShopBundle\Model\Product\ProductRepository */
         $pricingGroup = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);

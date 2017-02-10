@@ -114,70 +114,80 @@ class MenuItem
     /**
      * @return string
      */
-    public function getLabel() {
+    public function getLabel()
+    {
         return $this->label;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
-    public function getItems() {
+    public function getItems()
+    {
         return $this->items;
     }
 
     /**
      * @return string|null
      */
-    public function getRoute() {
+    public function getRoute()
+    {
         return $this->route;
     }
 
     /**
      * @return array|null
      */
-    public function getRouteParameters() {
+    public function getRouteParameters()
+    {
         return $this->routeParameters;
     }
 
     /**
      * @return bool
      */
-    public function isVisible() {
+    public function isVisible()
+    {
         return $this->visible === true;
     }
 
     /**
      * @return bool
      */
-    public function isSuperadmin() {
+    public function isSuperadmin()
+    {
         return $this->superadmin === true;
     }
 
     /**
      * @return bool
      */
-    public function isMultidomainOnly() {
+    public function isMultidomainOnly()
+    {
         return $this->multidomainOnly;
     }
 
     /**
      * @return string|null
      */
-    public function getIcon() {
+    public function getIcon()
+    {
         return $this->icon;
     }
 
     /**
      * @param string $type
      */
-    private function setType($type) {
+    private function setType($type)
+    {
         if (!in_array($type, $this->getTypes())) {
             throw new \Shopsys\ShopBundle\Model\AdminNavigation\Exception\InvalidItemTypeException(
                 $type . ' is not a valid item type. Supported types are: ' . implode(', ', $this->getTypes()) . '.'
@@ -189,7 +199,8 @@ class MenuItem
     /**
      * @return array
      */
-    private function getTypes() {
+    private function getTypes()
+    {
         return [
             self::TYPE_REGULAR,
             self::TYPE_SETTINGS,

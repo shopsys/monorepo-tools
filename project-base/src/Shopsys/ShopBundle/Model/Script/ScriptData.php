@@ -24,7 +24,8 @@ class ScriptData
     /**
      * @param \Shopsys\ShopBundle\Model\Script\Script $script
      */
-    public function setFromEntity(Script $script) {
+    public function setFromEntity(Script $script)
+    {
         $this->name = $script->getName();
         $this->code = $script->getCode();
         $this->placement = $script->getPlacement();

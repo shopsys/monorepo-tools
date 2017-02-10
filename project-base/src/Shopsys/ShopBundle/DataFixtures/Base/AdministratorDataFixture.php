@@ -15,7 +15,8 @@ class AdministratorDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $superadminData = new AdministratorData(true);
         $superadminData->username = 'superadmin';
         $superadminData->realName = 'superadmin';
@@ -35,7 +36,8 @@ class AdministratorDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      * @param string|null $referenceName
      */
-    private function createAdministrator(AdministratorData $administratorData, $referenceName = null) {
+    private function createAdministrator(AdministratorData $administratorData, $referenceName = null)
+    {
         $administratorFacade = $this->get(AdministratorFacade::class);
         /* @var $administratorFacade \Shopsys\ShopBundle\Model\Administrator\AdministratorFacade */
 

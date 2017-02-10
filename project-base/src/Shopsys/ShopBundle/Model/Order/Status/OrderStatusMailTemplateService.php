@@ -16,7 +16,8 @@ class OrderStatusMailTemplateService
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Mail\OrderMailService $orderMailService
      */
-    public function __construct(OrderMailService $orderMailService) {
+    public function __construct(OrderMailService $orderMailService)
+    {
         $this->orderMailService = $orderMailService;
     }
 
@@ -25,7 +26,8 @@ class OrderStatusMailTemplateService
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
      * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate|null
      */
-    private function getMailTemplateByOrderStatus(array $mailTemplates, OrderStatus $orderStatus) {
+    private function getMailTemplateByOrderStatus(array $mailTemplates, OrderStatus $orderStatus)
+    {
         foreach ($mailTemplates as $mailTemplate) {
             if ($mailTemplate->getName() === $this->orderMailService->getMailTemplateNameByStatus($orderStatus)) {
                 return $mailTemplate;
@@ -40,7 +42,8 @@ class OrderStatusMailTemplateService
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate[] $mailTemplates
      * @return \Shopsys\ShopBundle\Model\Mail\MailTemplateData[]
      */
-    public function getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates) {
+    public function getOrderStatusMailTemplatesData(array $orderStatuses, array $mailTemplates)
+    {
         $orderStatusMailTemplatesData = [];
         foreach ($orderStatuses as $orderStatus) {
             $orderStatusMailTemplateData = new MailTemplateData();
@@ -62,7 +65,8 @@ class OrderStatusMailTemplateService
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate[] $mailTemplates
      * @return \Shopsys\ShopBundle\Model\Mail\MailTemplate[]
      */
-    public function getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(array $orderStatuses, array $mailTemplates) {
+    public function getFilteredOrderStatusMailTemplatesIndexedByOrderStatusId(array $orderStatuses, array $mailTemplates)
+    {
         $orderStatusMailTemplates = [];
         foreach ($orderStatuses as $orderStatus) {
             $orderStatusMailTemplates[$orderStatus->getId()] = $this->getMailTemplateByOrderStatus($mailTemplates, $orderStatus);

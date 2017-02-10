@@ -27,23 +27,27 @@ class InputPriceRecalculationScheduler
      */
     private $recalculateInputPricesWithVat;
 
-    public function __construct(InputPriceRecalculator $inputPriceRecalculator, Setting $setting) {
+    public function __construct(InputPriceRecalculator $inputPriceRecalculator, Setting $setting)
+    {
         $this->inputPriceRecalculator = $inputPriceRecalculator;
         $this->setting = $setting;
     }
 
-    public function scheduleSetInputPricesWithoutVat() {
+    public function scheduleSetInputPricesWithoutVat()
+    {
         $this->recalculateInputPricesWithoutVat = true;
     }
 
-    public function scheduleSetInputPricesWithVat() {
+    public function scheduleSetInputPricesWithVat()
+    {
         $this->recalculateInputPricesWithVat = true;
     }
 
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         if (!$event->isMasterRequest()) {
             return;
         }

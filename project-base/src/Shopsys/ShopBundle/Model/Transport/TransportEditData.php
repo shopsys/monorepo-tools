@@ -20,7 +20,8 @@ class TransportEditData
      * @param \Shopsys\ShopBundle\Model\Transport\TransportData $transportData
      * @param array $prices
      */
-    public function __construct(TransportData $transportData = null, array $prices = []) {
+    public function __construct(TransportData $transportData = null, array $prices = [])
+    {
         if ($transportData !== null) {
             $this->transportData = $transportData;
         } else {

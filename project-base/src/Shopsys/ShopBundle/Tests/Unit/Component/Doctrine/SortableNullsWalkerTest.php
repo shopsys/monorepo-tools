@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class SortableNullsWalkerTest extends FunctionalTestCase
 {
-    public function testWalkOrderByItemAsc() {
+    public function testWalkOrderByItemAsc()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
         $queryBuilder = $em->createQueryBuilder();
@@ -26,7 +27,8 @@ class SortableNullsWalkerTest extends FunctionalTestCase
         $this->assertStringEndsWith('ASC NULLS FIRST', $query->getSQL());
     }
 
-    public function testWalkOrderByItemDesc() {
+    public function testWalkOrderByItemDesc()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
         $queryBuilder = $em->createQueryBuilder();
@@ -43,7 +45,8 @@ class SortableNullsWalkerTest extends FunctionalTestCase
         $this->assertStringEndsWith('DESC NULLS LAST', $query->getSQL());
     }
 
-    public function testWalkOrderByItemWithoutOrdering() {
+    public function testWalkOrderByItemWithoutOrdering()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
         $queryBuilder = $em->createQueryBuilder();

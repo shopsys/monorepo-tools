@@ -12,14 +12,16 @@ class ArticleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository) {
+    public function __construct(ArticleRepository $articleRepository)
+    {
         $this->articleRepository = $articleRepository;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function getBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         $article = $this->articleRepository->getById($routeParameters['id']);
 
         return [

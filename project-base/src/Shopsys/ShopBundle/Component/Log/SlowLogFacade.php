@@ -20,7 +20,8 @@ class SlowLogFacade
      */
     private $startTime;
 
-    public function __construct(Logger $logger) {
+    public function __construct(Logger $logger)
+    {
         $this->logger = $logger;
         $this->startTime = 0;
     }
@@ -28,7 +29,8 @@ class SlowLogFacade
     /**
      * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event) {
+    public function onKernelRequest(GetResponseEvent $event)
+    {
         if ($event->isMasterRequest()) {
             $this->startTime = microtime(true);
         }
@@ -37,7 +39,8 @@ class SlowLogFacade
     /**
      * @param \Symfony\Component\HttpKernel\Event\PostResponseEvent $event
      */
-    public function onKernelTerminate(PostResponseEvent $event) {
+    public function onKernelTerminate(PostResponseEvent $event)
+    {
         $requestTime = $this->getRequestTime();
         if ($requestTime > self::REQUEST_TIME_LIMIT_SECONDS) {
             $requestUri = $event->getRequest()->getRequestUri();
@@ -51,7 +54,8 @@ class SlowLogFacade
     /**
      * @return float
      */
-    private function getRequestTime() {
+    private function getRequestTime()
+    {
         return microtime(true) - $this->startTime;
     }
 }

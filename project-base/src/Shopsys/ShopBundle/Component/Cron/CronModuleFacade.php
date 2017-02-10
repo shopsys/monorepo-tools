@@ -37,7 +37,8 @@ class CronModuleFacade
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
      */
-    public function scheduleModules(array $cronModulesConfigs) {
+    public function scheduleModules(array $cronModulesConfigs)
+    {
         foreach ($cronModulesConfigs as $cronModuleConfig) {
             $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
             $cronModule->schedule();
@@ -49,7 +50,8 @@ class CronModuleFacade
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModulesConfigs
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    public function getOnlyScheduledCronModuleConfigs(array $cronModulesConfigs) {
+    public function getOnlyScheduledCronModuleConfigs(array $cronModulesConfigs)
+    {
         $scheduledCronModuleIds = $this->cronModuleRepository->getAllScheduledCronModuleIds();
 
         return $this->cronService->filterScheduledCronModuleConfigs($cronModulesConfigs, $scheduledCronModuleIds);
@@ -58,7 +60,8 @@ class CronModuleFacade
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      */
-    public function unscheduleModule(CronModuleConfig $cronModuleConfig) {
+    public function unscheduleModule(CronModuleConfig $cronModuleConfig)
+    {
         $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
         $cronModule->unschedule();
         $this->em->flush($cronModule);
@@ -67,7 +70,8 @@ class CronModuleFacade
     /**
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      */
-    public function suspendModule(CronModuleConfig $cronModuleConfig) {
+    public function suspendModule(CronModuleConfig $cronModuleConfig)
+    {
         $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
         $cronModule->suspend();
         $this->em->flush($cronModule);
@@ -77,7 +81,8 @@ class CronModuleFacade
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      * @return bool
      */
-    public function isModuleSuspended(CronModuleConfig $cronModuleConfig) {
+    public function isModuleSuspended(CronModuleConfig $cronModuleConfig)
+    {
         $cronModule = $this->cronModuleRepository->getCronModuleByCronModuleId($cronModuleConfig->getModuleId());
 
         return $cronModule->isSuspended();

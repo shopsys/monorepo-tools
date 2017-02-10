@@ -42,7 +42,8 @@ class LoginListener
     /**
      * @param \Symfony\Component\Security\Http\Event\InteractiveLoginEvent $event
      */
-    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event) {
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
+    {
         $token = $event->getAuthenticationToken();
         $user = $token->getUser();
 

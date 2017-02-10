@@ -37,7 +37,8 @@ class JsTranslatorCallParserFactory
     /**
      * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCallParser
      */
-    public function create() {
+    public function create()
+    {
         $transMethodSpecifications = [
             new TransMethodSpecification(self::METHOD_NAME_TRANS, 0, 2),
             new TransMethodSpecification(self::METHOD_NAME_TRANS_CHOICE, 0, 3),

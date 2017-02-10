@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\String\DatabaseSearching;
 
 class DatabaseSearchingTest extends PHPUnit_Framework_TestCase
 {
-    public function searchTextProvider() {
+    public function searchTextProvider()
+    {
         return [
             ['searchText' => 'foo bar', 'querySearchStringQuery' => 'foo bar'],
             ['searchText' => 'FooBar', 'querySearchStringQuery' => 'FooBar'],
@@ -21,7 +22,8 @@ class DatabaseSearchingTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider searchTextProvider
      */
-    public function testSafeFilename($searchText, $querySearchStringQuery) {
+    public function testSafeFilename($searchText, $querySearchStringQuery)
+    {
         $this->assertSame($querySearchStringQuery, DatabaseSearching::getLikeSearchString($searchText));
     }
 }

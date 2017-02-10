@@ -35,7 +35,8 @@ class CronModuleConfig implements CronTimeInterface
      * @param string $timeHours
      * @param string $timeMinutes
      */
-    public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes) {
+    public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes)
+    {
         // @codingStandardsIgnoreEnd
         if (
             !$cronModuleService instanceof CronModuleInterface
@@ -52,28 +53,32 @@ class CronModuleConfig implements CronTimeInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Cron\CronModuleInterface|\Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface
      */
-    public function getCronModuleService() {
+    public function getCronModuleService()
+    {
         return $this->cronModuleService;
     }
 
     /**
      * @return string
      */
-    public function getModuleId() {
+    public function getModuleId()
+    {
         return $this->moduleId;
     }
 
     /**
      * @return string
      */
-    public function getTimeMinutes() {
+    public function getTimeMinutes()
+    {
         return $this->timeMinutes;
     }
 
     /**
      * @return string
      */
-    public function getTimeHours() {
+    public function getTimeHours()
+    {
         return $this->timeHours;
     }
 }

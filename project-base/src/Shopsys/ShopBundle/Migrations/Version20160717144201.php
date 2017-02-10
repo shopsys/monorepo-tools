@@ -10,7 +10,8 @@ class Version20160717144201 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $this->sql('ALTER TABLE slider_items ADD hidden BOOLEAN NOT NULL DEFAULT FALSE;');
         $this->sql('ALTER TABLE slider_items ALTER hidden DROP DEFAULT;');
     }
@@ -18,6 +19,7 @@ class Version20160717144201 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

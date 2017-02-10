@@ -12,11 +12,13 @@ class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTes
     /**
      * @inheritdoc
      */
-    protected function createValidator() {
+    protected function createValidator()
+    {
         return new FileExtensionMaxLengthValidator();
     }
 
-    public function testValidateValidLength() {
+    public function testValidateValidLength()
+    {
         $file = new File(__DIR__ . '/' . 'non-existent.file', false);
 
         $constraint = new FileExtensionMaxLength([
@@ -28,7 +30,8 @@ class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTes
         $this->assertNoViolation();
     }
 
-    public function testValidateInvalidLength() {
+    public function testValidateInvalidLength()
+    {
         $file = new File(__DIR__ . '/' . 'non-existent.file', false);
 
         $constraint = new FileExtensionMaxLength([

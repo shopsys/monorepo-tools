@@ -29,7 +29,8 @@ class TransportAndPaymentFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Model\Transport\Transport[]$transports
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
      */
-    public function __construct(array $transports, array $payments) {
+    public function __construct(array $transports, array $payments)
+    {
         $this->transports = $transports;
         $this->payments = $payments;
     }
@@ -38,7 +39,8 @@ class TransportAndPaymentFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('transport', FormType::SINGLE_CHECKBOX_CHOICE, [
                 'choice_list' => new ObjectChoiceList($this->transports, 'name', [], null, 'id'),
@@ -62,14 +64,16 @@ class TransportAndPaymentFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'transport_and_payment_form';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'constraints' => [
@@ -82,7 +86,8 @@ class TransportAndPaymentFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @param \Symfony\Component\Validator\ExecutionContextInterface $context
      */
-    public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context) {
+    public function validateTransportPaymentRelation(OrderData $orderData, ExecutionContextInterface $context)
+    {
         $payment = $orderData->payment;
         $transport = $orderData->transport;
 

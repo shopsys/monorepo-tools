@@ -13,14 +13,16 @@ class PhpFileExtractorFactory
      */
     private $docParser;
 
-    public function __construct(DocParser $docParser) {
+    public function __construct(DocParser $docParser)
+    {
         $this->docParser = $docParser;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Component\Translation\PhpFileExtractor
      */
-    public function create() {
+    public function create()
+    {
         $transMethodSpecifications = [
             new TransMethodSpecification('trans', 0, 2),
             new TransMethodSpecification('transChoice', 0, 3),

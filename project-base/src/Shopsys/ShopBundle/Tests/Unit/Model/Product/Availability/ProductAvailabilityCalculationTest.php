@@ -62,7 +62,8 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
         $this->assertSame($expectedCalculatedAvailability, $calculatedAvailability);
     }
 
-    public function getTestCalculateAvailabilityData() {
+    public function getTestCalculateAvailabilityData()
+    {
         return [
             [
                 'usingStock' => false,
@@ -112,7 +113,8 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
         ];
     }
 
-    public function testCalculateAvailabilityMainVariant() {
+    public function testCalculateAvailabilityMainVariant()
+    {
         $productData = new ProductData();
 
         $productData->availability = $this->getReference(AvailabilityDataFixture::IN_STOCK);
@@ -160,7 +162,8 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
         $this->assertSame($variant1->getCalculatedAvailability(), $mainVariantCalculatedAvailability);
     }
 
-    public function testCalculateAvailabilityMainVariantWithNoSellableVariants() {
+    public function testCalculateAvailabilityMainVariantWithNoSellableVariants()
+    {
         $productData = new ProductData();
         $productData->availability = $this->getReference(AvailabilityDataFixture::ON_REQUEST);
         $variant = Product::create($productData);

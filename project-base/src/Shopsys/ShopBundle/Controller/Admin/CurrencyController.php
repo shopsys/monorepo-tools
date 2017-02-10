@@ -50,7 +50,8 @@ class CurrencyController extends AdminBaseController
     /**
      * @Route("/currency/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->currencyInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Currency/list.html.twig', [
@@ -62,7 +63,8 @@ class CurrencyController extends AdminBaseController
      * @Route("/currency/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $currency = $this->currencyFacade->getById($id);
             $message = t(
@@ -82,7 +84,8 @@ class CurrencyController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->currencyFacade->getById($id)->getName();
             $this->currencyFacade->deleteById($id);
@@ -107,7 +110,8 @@ class CurrencyController extends AdminBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingsAction(Request $request) {
+    public function settingsAction(Request $request)
+    {
         $currencies = $this->currencyFacade->getAll();
         $form = $this->createForm(new CurrencySettingsFormType($currencies));
 

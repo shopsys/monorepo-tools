@@ -87,7 +87,8 @@ class DeliveryAddressData
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
-    public function setFromEntity(DeliveryAddress $deliveryAddress = null) {
+    public function setFromEntity(DeliveryAddress $deliveryAddress = null)
+    {
         if ($deliveryAddress !== null) {
             $this->addressFilled = true;
             $this->companyName = $deliveryAddress->getCompanyName();

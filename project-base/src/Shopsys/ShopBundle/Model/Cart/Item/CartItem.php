@@ -80,7 +80,8 @@ class CartItem
     /**
      * @param int $newQuantity
      */
-    public function changeQuantity($newQuantity) {
+    public function changeQuantity($newQuantity)
+    {
         if (filter_var($newQuantity, FILTER_VALIDATE_INT) === false || $newQuantity <= 0) {
             throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException($newQuantity);
         }
@@ -91,14 +92,16 @@ class CartItem
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         if ($this->product === null) {
             throw new \Shopsys\ShopBundle\Model\Product\Exception\ProductNotFoundException();
         }
@@ -110,28 +113,32 @@ class CartItem
      * @param string|null $locale
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->getProduct()->getName($locale);
     }
 
     /**
      * @return int
      */
-    public function getQuantity() {
+    public function getQuantity()
+    {
         return $this->quantity;
     }
 
     /**
      * @return string|null
      */
-    public function getWatchedPrice() {
+    public function getWatchedPrice()
+    {
         return $this->watchedPrice;
     }
 
     /**
      * @param string|null $watchedPrice
      */
-    public function setWatchedPrice($watchedPrice) {
+    public function setWatchedPrice($watchedPrice)
+    {
         $this->watchedPrice = $watchedPrice;
     }
 
@@ -139,14 +146,16 @@ class CartItem
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
      * @return bool
      */
-    public function isSimilarItemAs(CartItem $cartItem) {
+    public function isSimilarItemAs(CartItem $cartItem)
+    {
         return $this->getProduct()->getId() === $cartItem->getProduct()->getId();
     }
 
     /**
      * @return string
      */
-    public function getCartIdentifier() {
+    public function getCartIdentifier()
+    {
         return $this->cartIdentifier;
     }
 }

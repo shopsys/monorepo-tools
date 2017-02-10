@@ -20,14 +20,16 @@ class PromoCodeFormType extends AbstractType
     /**
      * @param string[] $prohibitedCodes
      */
-    public function __construct(array $prohibitedCodes) {
+    public function __construct(array $prohibitedCodes)
+    {
         $this->prohibitedCodes = $prohibitedCodes;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'promo_code_form';
     }
 
@@ -35,7 +37,8 @@ class PromoCodeFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('code', FormType::TEXT, [
                 'required' => true,
@@ -64,7 +67,8 @@ class PromoCodeFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => PromoCodeData::class,
             'attr' => ['novalidate' => 'novalidate'],

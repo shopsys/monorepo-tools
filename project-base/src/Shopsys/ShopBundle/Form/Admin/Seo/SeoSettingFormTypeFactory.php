@@ -37,7 +37,8 @@ class SeoSettingFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Seo\SeoSettingFormType
      */
-    public function create() {
+    public function create()
+    {
         return new SeoSettingFormType(
             $this->getTitlesOnOtherDomains(),
             $this->getTitleAddOnsOnOtherDomains(),
@@ -48,7 +49,8 @@ class SeoSettingFormTypeFactory
     /**
      * @return string[]
      */
-    private function getTitlesOnOtherDomains() {
+    private function getTitlesOnOtherDomains()
+    {
         $titles = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $title = $this->seoSettingFacade->getTitleMainPage($domainConfig->getId());
@@ -63,7 +65,8 @@ class SeoSettingFormTypeFactory
     /**
      * @return string[]
      */
-    private function getTitleAddOnsOnOtherDomains() {
+    private function getTitleAddOnsOnOtherDomains()
+    {
         $titlesAddOns = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $titlesAddOn = $this->seoSettingFacade->getTitleAddOn($domainConfig->getId());
@@ -78,7 +81,8 @@ class SeoSettingFormTypeFactory
     /**
      * @return string[]
      */
-    private function getDescriptionsOnOtherDomains() {
+    private function getDescriptionsOnOtherDomains()
+    {
         $descriptions = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $description = $this->seoSettingFacade->getDescriptionMainPage($domainConfig->getId());

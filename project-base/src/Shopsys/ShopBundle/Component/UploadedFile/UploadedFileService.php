@@ -13,7 +13,8 @@ class UploadedFileService
      */
     private $fileUpload;
 
-    public function __construct(FileUpload $fileUpload) {
+    public function __construct(FileUpload $fileUpload)
+    {
         $this->fileUpload = $fileUpload;
     }
 

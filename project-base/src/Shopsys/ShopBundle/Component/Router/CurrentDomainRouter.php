@@ -24,7 +24,8 @@ class CurrentDomainRouter implements RouterInterface
      */
     private $domainRouterFactory;
 
-    public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory) {
+    public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory)
+    {
         $this->domain = $domain;
         $this->domainRouterFactory = $domainRouterFactory;
     }
@@ -32,21 +33,24 @@ class CurrentDomainRouter implements RouterInterface
     /**
      * @return \Symfony\Component\Routing\RequestContext
      */
-    public function getContext() {
+    public function getContext()
+    {
         return $this->context;
     }
 
     /**
      * @param \Symfony\Component\Routing\RequestContext $context
      */
-    public function setContext(RequestContext $context) {
+    public function setContext(RequestContext $context)
+    {
         $this->context = $context;
     }
 
     /**
      * @return \Symfony\Component\Routing\RouteCollection
      */
-    public function getRouteCollection() {
+    public function getRouteCollection()
+    {
         return $this->getDomainRouter()->getRouteCollection();
     }
 
@@ -56,7 +60,8 @@ class CurrentDomainRouter implements RouterInterface
      * @param bool $referenceType
      * @return string
      */
-    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
+    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
         return $this->getDomainRouter()->generate($routeName, $parameters, $referenceType);
     }
 
@@ -64,14 +69,16 @@ class CurrentDomainRouter implements RouterInterface
      * @param string $pathinfo
      * @return array
      */
-    public function match($pathinfo) {
+    public function match($pathinfo)
+    {
         return $this->getDomainRouter()->match($pathinfo);
     }
 
     /**
      * @return \Shopsys\ShopBundle\Component\Router\DomainRouter
      */
-    private function getDomainRouter() {
+    private function getDomainRouter()
+    {
         return $this->domainRouterFactory->getRouter($this->domain->getid());
     }
 }

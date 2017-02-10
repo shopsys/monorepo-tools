@@ -84,7 +84,8 @@ class Article implements OrderableEntityInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
      */
-    public function __construct(ArticleData $articleData) {
+    public function __construct(ArticleData $articleData)
+    {
         $this->domainId = $articleData->domainId;
         $this->name = $articleData->name;
         $this->text = $articleData->text;
@@ -98,7 +99,8 @@ class Article implements OrderableEntityInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
      */
-    public function edit(ArticleData $articleData) {
+    public function edit(ArticleData $articleData)
+    {
         $this->name = $articleData->name;
         $this->text = $articleData->text;
         $this->seoTitle = $articleData->seoTitle;
@@ -110,70 +112,80 @@ class Article implements OrderableEntityInterface
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return string|null
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string|null
      */
-    public function getText() {
+    public function getText()
+    {
         return $this->text;
     }
 
     /**
      * @return string|null
      */
-    public function getSeoTitle() {
+    public function getSeoTitle()
+    {
         return $this->seoTitle;
     }
 
     /**
      * @return string|null
      */
-    public function getSeoMetaDescription() {
+    public function getSeoMetaDescription()
+    {
         return $this->seoMetaDescription;
     }
 
     /**
      * @return string
      */
-    public function getPlacement() {
+    public function getPlacement()
+    {
         return $this->placement;
     }
 
     /**
      * @param int $position
      */
-    public function setPosition($position) {
+    public function setPosition($position)
+    {
         $this->position = $position;
     }
 
     /**
      * @param string $placement
      */
-    public function setPlacement($placement) {
+    public function setPlacement($placement)
+    {
         $this->placement = $placement;
     }
 
     /**
      * @return bool $visible
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 }

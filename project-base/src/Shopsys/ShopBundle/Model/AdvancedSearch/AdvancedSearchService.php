@@ -14,7 +14,8 @@ class AdvancedSearchService
      */
     private $advancedSearchConfig;
 
-    public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig) {
+    public function __construct(ProductAdvancedSearchConfig $advancedSearchConfig)
+    {
         $this->advancedSearchConfig = $advancedSearchConfig;
     }
 
@@ -22,7 +23,8 @@ class AdvancedSearchService
      * @param array|null $requestData
      * @return array
      */
-    public function getRulesFormViewDataByRequestData(array $requestData = null) {
+    public function getRulesFormViewDataByRequestData(array $requestData = null)
+    {
         if ($requestData === null) {
             $searchRulesViewData = [];
         } else {
@@ -42,7 +44,8 @@ class AdvancedSearchService
      * @param string $filterName
      * @return array
      */
-    public function createDefaultRuleFormViewData($filterName) {
+    public function createDefaultRuleFormViewData($filterName)
+    {
         return [
             'subject' => $filterName,
             'operator' => null,
@@ -54,7 +57,8 @@ class AdvancedSearchService
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchRuleData[] $advancedSearchData
      */
-    public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData) {
+    public function extendQueryBuilderByAdvancedSearchData(QueryBuilder $queryBuilder, array $advancedSearchData)
+    {
         $rulesDataByFilterName = [];
         foreach ($advancedSearchData as $key => $ruleData) {
             if ($key === self::TEMPLATE_RULE_FORM_KEY || $ruleData->operator === null) {

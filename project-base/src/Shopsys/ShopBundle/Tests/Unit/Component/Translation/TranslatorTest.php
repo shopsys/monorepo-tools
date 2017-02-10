@@ -13,7 +13,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class TranslatorTest extends PHPUnit_Framework_TestCase
 {
-    public function testTransWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage() {
+    public function testTransWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -49,7 +50,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('normalized source message parameter value', $translatedMessage);
     }
 
-    public function testTransWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage() {
+    public function testTransWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -99,7 +101,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('translated message parameter value', $translatedMessage);
     }
 
-    public function testTransWithSourceLocaleAsDefaultLocaleReturnsSourceMessage() {
+    public function testTransWithSourceLocaleAsDefaultLocaleReturnsSourceMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -136,7 +139,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('normalized source message parameter value', $translatedMessage);
     }
 
-    public function testTransWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
+    public function testTransWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -179,7 +183,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('##source message parameter value', $translatedMessage);
     }
 
-    public function testTransWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage() {
+    public function testTransWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -229,7 +234,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('translated message parameter value', $translatedMessage);
     }
 
-    public function testTransChoiceWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage() {
+    public function testTransChoiceWithNotTranslatedMessageAndSourceLocaleReturnsSourceMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -266,7 +272,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('normalized source message parameter value', $translatedMessage);
     }
 
-    public function testTransChoiceWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage() {
+    public function testTransChoiceWithTranslatedMessageAndSourceLocaleReturnsTranslatedMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -318,7 +325,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('translated message parameter value', $translatedMessage);
     }
 
-    public function testTransChoiceWithSourceLocaleAsDefaultLocaleReturnsSourceMessage() {
+    public function testTransChoiceWithSourceLocaleAsDefaultLocaleReturnsSourceMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -356,7 +364,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('normalized source message parameter value', $translatedMessage);
     }
 
-    public function testTransChoiceWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes() {
+    public function testTransChoiceWithNotTranslatedMessageAndNonSourceLocaleReturnsSourceMessageWithHashes()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 
@@ -401,7 +410,8 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
         $this->assertSame('##source message parameter value', $translatedMessage);
     }
 
-    public function testTransChoiceWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage() {
+    public function testTransChoiceWithTranslatedMessageAndNonSourceLocaleReturnsTranslatedMessage()
+    {
         $originalTranslatorMock = $this->getMockBuilder(TranslatorInterface::class)
             ->getMock();
 

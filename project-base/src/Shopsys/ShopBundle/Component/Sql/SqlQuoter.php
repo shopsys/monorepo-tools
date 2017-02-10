@@ -11,7 +11,8 @@ class SqlQuoter
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
@@ -19,7 +20,8 @@ class SqlQuoter
      * @param string[] $identifiers
      * @return string[]
      */
-    public function quoteIdentifiers(array $identifiers) {
+    public function quoteIdentifiers(array $identifiers)
+    {
         return array_map(
             function ($identifier) {
                 return $this->quoteIdentifier($identifier);
@@ -32,7 +34,8 @@ class SqlQuoter
      * @param string $identifier
      * @return string
      */
-    public function quoteIdentifier($identifier) {
+    public function quoteIdentifier($identifier)
+    {
         return $this->em->getConnection()->quoteIdentifier($identifier);
     }
 
@@ -41,7 +44,8 @@ class SqlQuoter
      * @param string|null $type
      * @return string
      */
-    public function quote($input, $type = null) {
+    public function quote($input, $type = null)
+    {
         return $this->em->getConnection()->quote($input, $type);
     }
 }

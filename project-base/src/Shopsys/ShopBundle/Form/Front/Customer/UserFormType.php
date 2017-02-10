@@ -16,7 +16,8 @@ class UserFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'user_form';
     }
 
@@ -24,7 +25,8 @@ class UserFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('firstName', FormType::TEXT, [
                 'constraints' => [
@@ -61,7 +63,8 @@ class UserFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => UserData::class,
             'attr' => ['novalidate' => 'novalidate'],

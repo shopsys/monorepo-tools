@@ -58,7 +58,8 @@ class FriendlyUrl
      * @param int $domainId
      * @param string $slug
      */
-    public function __construct($routeName, $entityId, $domainId, $slug) {
+    public function __construct($routeName, $entityId, $domainId, $slug)
+    {
         $this->routeName = $routeName;
         $this->entityId = $entityId;
         $this->domainId = $domainId;
@@ -69,42 +70,48 @@ class FriendlyUrl
     /**
      * @return string
      */
-    public function getRouteName() {
+    public function getRouteName()
+    {
         return $this->routeName;
     }
 
     /**
      * @return int
      */
-    public function getEntityId() {
+    public function getEntityId()
+    {
         return $this->entityId;
     }
 
     /**
      * @return string
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return string
      */
-    public function getSlug() {
+    public function getSlug()
+    {
         return $this->slug;
     }
 
     /**
      * @return bool
      */
-    public function isMain() {
+    public function isMain()
+    {
         return $this->main;
     }
 
     /**
      * @param bool $main
      */
-    public function setMain($main) {
+    public function setMain($main)
+    {
         $this->main = $main;
     }
 }

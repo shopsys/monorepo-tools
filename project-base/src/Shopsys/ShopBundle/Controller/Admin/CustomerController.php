@@ -127,7 +127,8 @@ class CustomerController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $user = $this->customerFacade->getUserById($id);
         $form = $this->createForm($this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_EDIT, $user));
 
@@ -177,7 +178,8 @@ class CustomerController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
@@ -227,7 +229,8 @@ class CustomerController extends AdminBaseController
      * @Route("/customer/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm(
             $this->customerFormTypeFactory->create(CustomerFormType::SCENARIO_CREATE),
             null,
@@ -278,7 +281,8 @@ class CustomerController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->customerFacade->getUserById($id)->getFullName();
 
@@ -301,7 +305,8 @@ class CustomerController extends AdminBaseController
      * @Route("/customer/login-as-user/{userId}/", requirements={"id" = "\d+"})
      * @param int $userId
      */
-    public function loginAsUserAction($userId) {
+    public function loginAsUserAction($userId)
+    {
         $user = $this->customerFacade->getUserById($userId);
         $this->loginAsUserFacade->rememberLoginAsUser($user);
 
@@ -312,7 +317,8 @@ class CustomerController extends AdminBaseController
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return string
      */
-    private function getSsoLoginAsUserUrl(User $user) {
+    private function getSsoLoginAsUserUrl(User $user)
+    {
         $customerDomainRouter = $this->domainRouterFactory->getRouter($user->getDomainId());
         $loginAsUserUrl = $customerDomainRouter->generate(
             'admin_customer_loginasuser',

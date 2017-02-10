@@ -42,7 +42,8 @@ class OrderStatusController extends AdminBaseController
     /**
      * @Route("/order-status/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->orderStatusInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/OrderStatus/list.html.twig', [
@@ -56,7 +57,8 @@ class OrderStatusController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $newId = $request->get('newId');
 
         try {
@@ -98,7 +100,8 @@ class OrderStatusController extends AdminBaseController
      * @Route("/order-status/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $orderStatus = $this->orderStatusFacade->getById($id);
             if ($this->orderStatusFacade->isOrderStatusUsed($orderStatus)) {

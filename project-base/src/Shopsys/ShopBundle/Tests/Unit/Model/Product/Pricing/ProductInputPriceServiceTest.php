@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetManualInputPricesDataWithManualCalculationType() {
+    public function testGetManualInputPricesDataWithManualCalculationType()
+    {
         $productData = new ProductData();
         $productData->vat = new Vat(new VatData('VatName', '10.0'));
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
@@ -54,7 +55,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame('2000', $manualInputPricesData[$pricingGroups[1]->getId()]);
     }
 
-    public function testGetManualInputPricesDataWithAutoCalculationType() {
+    public function testGetManualInputPricesDataWithAutoCalculationType()
+    {
         $productData = new ProductData();
         $productData->vat = new Vat(new VatData('VatName', '10.0'));
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;
@@ -98,7 +100,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame('2000', (string)$manualInputPricesData[$pricingGroups[1]->getId()]);
     }
 
-    public function testGetInputPriceWithManualCalculationType() {
+    public function testGetInputPriceWithManualCalculationType()
+    {
         $productData = new ProductData();
         $productData->vat = new Vat(new VatData('VatName', '10.0'));
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_MANUAL;
@@ -139,7 +142,8 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame('2000', (string)$inputPrice);
     }
 
-    public function testGetInputPriceWithAutoCalculationType() {
+    public function testGetInputPriceWithAutoCalculationType()
+    {
         $productData = new ProductData();
         $productData->vat = new Vat(new VatData('VatName', '10.0'));
         $productData->priceCalculationType = Product::PRICE_CALCULATION_TYPE_AUTO;

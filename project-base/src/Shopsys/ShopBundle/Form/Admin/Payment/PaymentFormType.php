@@ -26,7 +26,8 @@ class PaymentFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $allTransports
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat[] $vats
      */
-    public function __construct(array $allTransports, array $vats) {
+    public function __construct(array $allTransports, array $vats)
+    {
         $this->allTransports = $allTransports;
         $this->vats = $vats;
     }
@@ -34,7 +35,8 @@ class PaymentFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'payment_form';
     }
 
@@ -43,7 +45,8 @@ class PaymentFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::LOCALIZED, [
                 'main_constraints' => [
@@ -98,7 +101,8 @@ class PaymentFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => PaymentData::class,
             'attr' => ['novalidate' => 'novalidate'],

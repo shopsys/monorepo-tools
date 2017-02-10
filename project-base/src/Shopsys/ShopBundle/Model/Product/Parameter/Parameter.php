@@ -41,7 +41,8 @@ class Parameter extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      */
-    public function __construct(ParameterData $parameterData) {
+    public function __construct(ParameterData $parameterData)
+    {
         $this->translations = new ArrayCollection();
         $this->setTranslations($parameterData);
         $this->visible = $parameterData->visible;
@@ -50,7 +51,8 @@ class Parameter extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -58,21 +60,24 @@ class Parameter extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @return bool
      */
-    public function isVisible() {
+    public function isVisible()
+    {
         return $this->visible;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      */
-    private function setTranslations(ParameterData $parameterData) {
+    private function setTranslations(ParameterData $parameterData)
+    {
         foreach ($parameterData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -81,14 +86,16 @@ class Parameter extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new ParameterTranslation();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      */
-    public function edit(ParameterData $parameterData) {
+    public function edit(ParameterData $parameterData)
+    {
         $this->setTranslations($parameterData);
         $this->visible = $parameterData->visible;
     }

@@ -28,7 +28,8 @@ class AutoServicesCollector
      */
     private $classesByServiceId;
 
-    public function __construct($cacheDir, $containerClass, Filesystem $filesystem) {
+    public function __construct($cacheDir, $containerClass, Filesystem $filesystem)
+    {
         $this->cacheDir = $cacheDir;
         $this->containerClass = $containerClass;
         $this->filesystem = $filesystem;
@@ -37,14 +38,16 @@ class AutoServicesCollector
     /**
      * @return string
      */
-    private function getConfigFilepath() {
+    private function getConfigFilepath()
+    {
         return $this->cacheDir . '/' . self::CONFIG_FILENAME;
     }
 
     /**
      * @return string[][]
      */
-    public function getServicesClassesIndexedByServiceId() {
+    public function getServicesClassesIndexedByServiceId()
+    {
         $this->load();
         return $this->classesByServiceId;
     }
@@ -53,7 +56,8 @@ class AutoServicesCollector
      * @param string $serviceId
      * @param string $className
      */
-    public function addService($serviceId, $className) {
+    public function addService($serviceId, $className)
+    {
         $this->load();
         $this->classesByServiceId[$serviceId] = $className;
         $this->flush();
@@ -63,22 +67,26 @@ class AutoServicesCollector
     /**
      * @param string[] $classesByServiceId
      */
-    public function setServices(array $classesByServiceId) {
+    public function setServices(array $classesByServiceId)
+    {
         $this->classesByServiceId = $classesByServiceId;
         $this->flush();
     }
 
-    private function invalidateContainer() {
+    private function invalidateContainer()
+    {
         $containerClassFilepath = $this->cacheDir . '/' . $this->containerClass . '.php';
         $this->filesystem->remove($containerClassFilepath);
     }
 
-    private function flush() {
+    private function flush()
+    {
         $jsonConfig = json_encode($this->classesByServiceId, JSON_PRETTY_PRINT);
         file_put_contents($this->getConfigFilepath(), $jsonConfig);
     }
 
-    private function load() {
+    private function load()
+    {
         if ($this->classesByServiceId === null) {
             if (file_exists($this->getConfigFilepath())) {
                 $jsonConfig = file_get_contents($this->getConfigFilepath());

@@ -40,7 +40,8 @@ class ShopInfoController extends AdminBaseController
     /**
      * @Route("/shop-info/setting/")
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
 
         $form = $this->createForm(new ShopInfoSettingFormType());

@@ -10,7 +10,8 @@ class Version20161013090245 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $this->sql('ALTER TABLE delivery_addresses ADD first_name VARCHAR(100) DEFAULT NULL');
         $this->sql('ALTER TABLE delivery_addresses ADD last_name VARCHAR(100) DEFAULT NULL');
         $this->sql('UPDATE delivery_addresses
@@ -31,6 +32,7 @@ class Version20161013090245 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

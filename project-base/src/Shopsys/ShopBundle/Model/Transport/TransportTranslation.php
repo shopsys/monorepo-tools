@@ -41,42 +41,48 @@ class TransportTranslation extends AbstractTranslation
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @return string
      */
-    public function getInstructions() {
+    public function getInstructions()
+    {
         return $this->instructions;
     }
 
     /**
      * @param string $name
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
     /**
      * @param string $description
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
     /**
      * @param string $instructions
      */
-    public function setInstructions($instructions) {
+    public function setInstructions($instructions)
+    {
         $this->instructions = $instructions;
     }
 }

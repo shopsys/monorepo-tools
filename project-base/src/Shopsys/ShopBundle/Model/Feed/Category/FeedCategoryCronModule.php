@@ -16,17 +16,20 @@ class FeedCategoryCronModule implements CronModuleInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade FeedCategoryDownloadFacade
      */
-    public function __construct(FeedCategoryLoaderFacade $feedCategoryLoaderFacade) {
+    public function __construct(FeedCategoryLoaderFacade $feedCategoryLoaderFacade)
+    {
         $this->feedCategoryLoaderFacade = $feedCategoryLoaderFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
-    public function run() {
+    public function run()
+    {
         $this->feedCategoryLoaderFacade->download();
     }
 }

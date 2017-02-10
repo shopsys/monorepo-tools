@@ -13,7 +13,8 @@ class UniqueCollectionValidator extends ConstraintValidator
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($values, Constraint $constraint) {
+    public function validate($values, Constraint $constraint)
+    {
         if (!$constraint instanceof UniqueCollection) {
             throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueCollection::class);
         }
@@ -50,7 +51,8 @@ class UniqueCollectionValidator extends ConstraintValidator
      * @param mixed $value2
      * @return bool
      */
-    private function areValuesEqual(UniqueCollection $constraint, $value1, $value2) {
+    private function areValuesEqual(UniqueCollection $constraint, $value1, $value2)
+    {
         if ($constraint->allowEmpty) {
             if ($value1 === null || $value2 === null) {
                 return false;
@@ -70,7 +72,8 @@ class UniqueCollectionValidator extends ConstraintValidator
      * @param mixed $value2
      * @return bool
      */
-    private function areValuesEqualInFields(array $fields, $value1, $value2) {
+    private function areValuesEqualInFields(array $fields, $value1, $value2)
+    {
         foreach ($fields as $field) {
             $fieldValue1 = $this->getFieldValue($value1, $field);
             $fieldValue2 = $this->getFieldValue($value2, $field);
@@ -88,7 +91,8 @@ class UniqueCollectionValidator extends ConstraintValidator
      * @param string $field
      * @return mixed
      */
-    private function getFieldValue($value, $field) {
+    private function getFieldValue($value, $field)
+    {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
 
         return $propertyAccessor->getValue($value, $field);

@@ -31,14 +31,16 @@ class CategoryDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
-    public function getChildren() {
+    public function getChildren()
+    {
         return $this->children;
     }
 }

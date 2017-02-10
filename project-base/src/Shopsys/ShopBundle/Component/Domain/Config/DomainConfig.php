@@ -38,7 +38,8 @@ class DomainConfig
      * @param string $locale
      * @param string $stylesDirectory
      */
-    public function __construct($id, $url, $name, $locale, $stylesDirectory = self::STYLES_DIRECTORY_DEFAULT) {
+    public function __construct($id, $url, $name, $locale, $stylesDirectory = self::STYLES_DIRECTORY_DEFAULT)
+    {
         $this->id = $id;
         $this->url = $url;
         $this->name = $name;
@@ -49,42 +50,48 @@ class DomainConfig
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getLocale() {
+    public function getLocale()
+    {
         return $this->locale;
     }
 
     /**
      * @return string
      */
-    public function getStylesDirectory() {
+    public function getStylesDirectory()
+    {
         return $this->stylesDirectory;
     }
 
     /**
      * @return bool
      */
-    public function isHttps() {
+    public function isHttps()
+    {
         return strpos($this->url, 'https://') === 0;
     }
 }

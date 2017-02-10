@@ -13,7 +13,8 @@ class ProductMassActionFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'mass_action_form';
     }
 
@@ -21,7 +22,8 @@ class ProductMassActionFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('selectType', FormType::CHOICE, [
                 'required' => true,
@@ -55,7 +57,8 @@ class ProductMassActionFormType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'data_class' => ProductMassActionData::class,

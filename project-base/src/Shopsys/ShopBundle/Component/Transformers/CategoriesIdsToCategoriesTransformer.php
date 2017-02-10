@@ -13,7 +13,8 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
      */
     private $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository) {
+    public function __construct(CategoryRepository $categoryRepository)
+    {
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -21,7 +22,8 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
      * @param \Shopsys\ShopBundle\Model\Category\Category[]|null $categories
      * @return int[]
      */
-    public function transform($categories) {
+    public function transform($categories)
+    {
         $categoriesIds = [];
 
         if (is_array($categories) || $categories instanceof IteratorAggregate) {
@@ -37,7 +39,8 @@ class CategoriesIdsToCategoriesTransformer implements DataTransformerInterface
      * @param int[] $categoriesIds
      * @return \Shopsys\ShopBundle\Model\Category\Category[]|null
      */
-    public function reverseTransform($categoriesIds) {
+    public function reverseTransform($categoriesIds)
+    {
         $categories = [];
 
         if (is_array($categoriesIds)) {

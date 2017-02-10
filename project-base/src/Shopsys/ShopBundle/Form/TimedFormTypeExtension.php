@@ -24,14 +24,16 @@ class TimedFormTypeExtension extends AbstractTypeExtension
     /**
      * @param \Shopsys\ShopBundle\Component\Form\FormTimeProvider $formTimeProvider
      */
-    public function __construct(FormTimeProvider $formTimeProvider) {
+    public function __construct(FormTimeProvider $formTimeProvider)
+    {
         $this->formTimeProvider = $formTimeProvider;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         if (!$options[self::OPTION_ENABLED]) {
             return;
         }
@@ -47,7 +49,8 @@ class TimedFormTypeExtension extends AbstractTypeExtension
      * @param \Symfony\Component\Form\FormInterface $form
      * @param array $options
      */
-    public function finishView(FormView $view, FormInterface $form, array $options) {
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
         if ($options[self::OPTION_ENABLED] && !$view->parent && $options['compound']) {
             $this->formTimeProvider->generateFormTime($form->getName());
         }
@@ -56,7 +59,8 @@ class TimedFormTypeExtension extends AbstractTypeExtension
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             self::OPTION_ENABLED => false,
             self::OPTION_MINIMUM_SECONDS => self::MINIMUM_FORM_FILLING_SECONDS,
@@ -66,7 +70,8 @@ class TimedFormTypeExtension extends AbstractTypeExtension
     /**
      * @return string
      */
-    public function getExtendedType() {
+    public function getExtendedType()
+    {
         return 'form';
     }
 }

@@ -29,7 +29,8 @@ class FeedCategoryFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
      */
-    public function refreshFeedCategories(array $feedCategoriesData) {
+    public function refreshFeedCategories(array $feedCategoriesData)
+    {
         $this->deleteOldFeedCategories($feedCategoriesData);
         $this->createOrEditCategories($feedCategoriesData);
     }
@@ -37,7 +38,8 @@ class FeedCategoryFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $currentFeedCategoriesData
      */
-    private function deleteOldFeedCategories(array $currentFeedCategoriesData) {
+    private function deleteOldFeedCategories(array $currentFeedCategoriesData)
+    {
         $currentExtIds = [];
 
         foreach ($currentFeedCategoriesData as $currentFeedCategoryData) {
@@ -50,7 +52,8 @@ class FeedCategoryFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryData[] $feedCategoriesData
      */
-    private function createOrEditCategories(array $feedCategoriesData) {
+    private function createOrEditCategories(array $feedCategoriesData)
+    {
         $feedCategoriesByExtId = $this->feedCategoryRepository->getAllIndexedByExtId();
 
         foreach ($feedCategoriesData as $feedCategoryData) {

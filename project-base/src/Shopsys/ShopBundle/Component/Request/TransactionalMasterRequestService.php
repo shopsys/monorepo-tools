@@ -19,7 +19,8 @@ class TransactionalMasterRequestService
      */
     private $inTransaction;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->inTransaction = false;
         $this->em = $em;
     }
@@ -27,7 +28,8 @@ class TransactionalMasterRequestService
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelRequest(GetResponseEvent $event) {
+    public function onKernelRequest(GetResponseEvent $event)
+    {
         if ($event->isMasterRequest() && !$this->inTransaction) {
             $this->em->beginTransaction();
             $this->inTransaction = true;
@@ -37,7 +39,8 @@ class TransactionalMasterRequestService
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         if ($event->isMasterRequest() && $this->inTransaction) {
             $this->em->commit();
             $this->inTransaction = false;
@@ -47,7 +50,8 @@ class TransactionalMasterRequestService
     /**
      * @param \Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent $event
      */
-    public function onKernelException(GetResponseForExceptionEvent $event) {
+    public function onKernelException(GetResponseForExceptionEvent $event)
+    {
         if ($event->isMasterRequest() && $this->inTransaction) {
             $this->em->rollback();
             $this->inTransaction = false;

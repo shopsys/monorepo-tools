@@ -21,7 +21,8 @@ class DomainFactory
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader $domainsConfigLoader
      * @param \Shopsys\ShopBundle\Component\Setting\Setting
      */
-    public function __construct(DomainsConfigLoader $domainsConfigLoader, Setting $setting) {
+    public function __construct(DomainsConfigLoader $domainsConfigLoader, Setting $setting)
+    {
         $this->domainsConfigLoader = $domainsConfigLoader;
         $this->setting = $setting;
     }
@@ -31,7 +32,8 @@ class DomainFactory
      * @param string $domainsUrlsConfigFilepath
      * @return \Shopsys\ShopBundle\Component\Domain\Domain
      */
-    public function create($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
+    public function create($domainsConfigFilepath, $domainsUrlsConfigFilepath)
+    {
         $domainConfigs = $this->domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
         $domain = new Domain($domainConfigs, $this->setting);
 

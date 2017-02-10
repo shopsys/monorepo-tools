@@ -81,7 +81,8 @@ class ProductCollectionFacade
      * @param string|null $sizeName
      * @return string[productId]
      */
-    public function getImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null) {
+    public function getImagesUrlsIndexedByProductId(array $products, DomainConfig $domainConfig, $sizeName = null)
+    {
         $imagesUrlsByProductId = [];
         foreach ($this->getMainImagesIndexedByProductId($products) as $productId => $image) {
             if ($image === null) {
@@ -102,7 +103,8 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
      */
-    private function getMainImagesIndexedByProductId(array $products) {
+    private function getMainImagesIndexedByProductId(array $products)
+    {
         $productEntityName = $this->imageConfig->getImageEntityConfigByClass(Product::class)->getEntityName();
         $imagesByProductId = $this->imageRepository->getMainImagesByEntitiesIndexedByEntityId($products, $productEntityName);
 
@@ -114,7 +116,8 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Image\Image[productId]
      */
-    public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig) {
+    public function getAbsoluteUrlsIndexedByProductId(array $products, DomainConfig $domainConfig)
+    {
         $mainFriendlyUrlsByProductId = $this->friendlyUrlRepository->getMainFriendlyUrlsByEntitiesIndexedByEntityId(
             $products,
             'front_product_detail',
@@ -134,7 +137,8 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[productId]
      */
-    public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig) {
+    public function getProductDomainsIndexedByProductId(array $products, DomainConfig $domainConfig)
+    {
         return $this->productRepository->getProductDomainsByProductsAndDomainConfigIndexedByProductId(
             $products,
             $domainConfig
@@ -146,7 +150,8 @@ class ProductCollectionFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[productId][paramName]
      */
-    public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig) {
+    public function getProductParameterValuesIndexedByProductIdAndParameterName(array $products, DomainConfig $domainConfig)
+    {
         $locale = $domainConfig->getLocale();
 
         return $this->parameterRepository->getParameterValuesIndexedByProductIdAndParameterNameForProducts($products, $locale);

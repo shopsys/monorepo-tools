@@ -16,14 +16,16 @@ class DoctrineListener
     /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
-    public function __construct(FileUpload $fileUpload) {
+    public function __construct(FileUpload $fileUpload)
+    {
         $this->fileUpload = $fileUpload;
     }
 
     /**
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
      */
-    public function prePersist(LifecycleEventArgs $args) {
+    public function prePersist(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         if ($entity instanceof EntityFileUploadInterface) {
             $this->fileUpload->preFlushEntity($entity);
@@ -33,7 +35,8 @@ class DoctrineListener
     /**
      * @param \Doctrine\ORM\Event\PreUpdateEventArgs $args
      */
-    public function preUpdate(PreUpdateEventArgs $args) {
+    public function preUpdate(PreUpdateEventArgs $args)
+    {
         $entity = $args->getEntity();
         if ($entity instanceof EntityFileUploadInterface) {
             $this->fileUpload->preFlushEntity($entity);
@@ -43,7 +46,8 @@ class DoctrineListener
     /**
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args) {
+    public function postPersist(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         if ($entity instanceof EntityFileUploadInterface) {
             $this->fileUpload->postFlushEntity($entity);
@@ -53,7 +57,8 @@ class DoctrineListener
     /**
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
      */
-    public function postUpdate(LifecycleEventArgs $args) {
+    public function postUpdate(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         if ($entity instanceof EntityFileUploadInterface) {
             $this->fileUpload->postFlushEntity($entity);

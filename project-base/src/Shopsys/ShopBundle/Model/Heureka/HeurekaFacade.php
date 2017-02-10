@@ -51,7 +51,8 @@ class HeurekaFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function sendOrderInfo(Order $order) {
+    public function sendOrderInfo(Order $order)
+    {
         try {
             $heurekaShopCertification = $this->heurekaShopCertificationFactory->create($order);
             $heurekaShopCertification->logOrder();
@@ -66,7 +67,8 @@ class HeurekaFacade
      * @param int $domainId
      * @return bool
      */
-    public function isHeurekaShopCertificationActivated($domainId) {
+    public function isHeurekaShopCertificationActivated($domainId)
+    {
         return $this->heurekaSetting->isHeurekaShopCertificationActivated($domainId);
     }
 
@@ -74,7 +76,8 @@ class HeurekaFacade
      * @param int $domainId
      * @return bool
      */
-    public function isHeurekaWidgetActivated($domainId) {
+    public function isHeurekaWidgetActivated($domainId)
+    {
         return $this->heurekaSetting->isHeurekaWidgetActivated($domainId);
     }
 
@@ -82,7 +85,8 @@ class HeurekaFacade
      * @param string $locale
      * @return bool
      */
-    public function isDomainLocaleSupported($locale) {
+    public function isDomainLocaleSupported($locale)
+    {
         return $this->heurekaShopCertificationService->isDomainLocaleSupported($locale);
     }
 
@@ -90,7 +94,8 @@ class HeurekaFacade
      * @param string $locale
      * @return string|null
      */
-    public function getServerNameByLocale($locale) {
+    public function getServerNameByLocale($locale)
+    {
         return $this->heurekaShopCertificationService->getServerNameByLocale($locale);
     }
 
@@ -98,7 +103,8 @@ class HeurekaFacade
      * @param \Exception $ex
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    private function logError(Exception $ex, Order $order) {
+    private function logError(Exception $ex, Order $order)
+    {
         $message = 'Sending order (ID = "' . $order->getId() . '") to Heureka failed - ' . get_class($ex) . ': ' . $ex->getMessage();
         $this->logger->error($message, ['exceptionFullInfo' => (string)$ex]);
     }

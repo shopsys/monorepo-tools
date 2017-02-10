@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportVisibilityCalculation;
 
 class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function testIsVisibleWhenIndepentlyInvisible() {
+    public function testIsVisibleWhenIndepentlyInvisible()
+    {
         $domainId = 1;
         $transportMock = $this->getMock(Transport::class, [], [], '', false);
 
@@ -35,7 +36,8 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [], $domainId));
     }
 
-    public function testIsVisibleWithHiddenPayment() {
+    public function testIsVisibleWithHiddenPayment()
+    {
         $domainId = 1;
         $transportMock = $this->getMock(Transport::class, [], [], '', false);
         $paymentMock = $this->getMock(Payment::class, [], [], '', false);
@@ -64,7 +66,8 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
     }
 
-    public function testIsVisibleWithoutPayment() {
+    public function testIsVisibleWithoutPayment()
+    {
         $domainId = 1;
         $transportMock = $this->getMock(Transport::class, [], [], '', false);
         $paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
@@ -94,7 +97,8 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
     }
 
-    public function testIsVisibleWithVisiblePayment() {
+    public function testIsVisibleWithVisiblePayment()
+    {
         $domainId = 1;
         $transportMock = $this->getMock(Transport::class, [], [], '', false);
         $paymentMock = $this->getMock(Payment::class, ['getTransports'], [], '', false);
@@ -124,7 +128,8 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($transportVisibilityCalculation->isVisible($transportMock, [$paymentMock], $domainId));
     }
 
-    public function testFilterVisible() {
+    public function testFilterVisible()
+    {
         $domainId = 1;
         $transportHiddenMock = $this->getMock(Transport::class, [], [], '', false);
         $transportVisibleMock = $this->getMock(Transport::class, [], [], '', false);

@@ -15,7 +15,8 @@ abstract class AbstractGenerator implements GeneratorInterface
     /**
      * @param \Twig_Environment $twig
      */
-    public function setTwig(Twig_Environment $twig) {
+    public function setTwig(Twig_Environment $twig)
+    {
         $this->twig = $twig;
     }
 
@@ -25,7 +26,8 @@ abstract class AbstractGenerator implements GeneratorInterface
      * @param array $parameters
      * @return bool
      */
-    protected function renderFile($template, $target, array $parameters) {
+    protected function renderFile($template, $target, array $parameters)
+    {
         if (file_exists($target)) {
             throw new \Shopsys\GeneratorBundle\Model\Exception\GeneratorTargetFileAlreadyExistsExpception($target);
         }

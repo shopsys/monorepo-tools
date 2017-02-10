@@ -47,7 +47,8 @@ class OrderStatus extends AbstractTranslatableEntity
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
      * @param int $type
      */
-    public function __construct(OrderStatusData $orderStatusData, $type) {
+    public function __construct(OrderStatusData $orderStatusData, $type)
+    {
         $this->translations = new ArrayCollection();
         $this->setType($type);
         $this->setTranslations($orderStatusData);
@@ -56,7 +57,8 @@ class OrderStatus extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -64,14 +66,16 @@ class OrderStatus extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
      */
-    private function setTranslations(OrderStatusData $orderStatusData) {
+    private function setTranslations(OrderStatusData $orderStatusData)
+    {
         foreach ($orderStatusData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -80,21 +84,24 @@ class OrderStatus extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatusTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new OrderStatusTranslation();
     }
 
     /**
      * @return int
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @param int $type
      */
-    private function setType($type) {
+    private function setType($type)
+    {
         if (in_array($type, [
             self::TYPE_NEW,
             self::TYPE_IN_PROGRESS,
@@ -110,7 +117,8 @@ class OrderStatus extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
      */
-    public function edit(OrderStatusData $orderStatusData) {
+    public function edit(OrderStatusData $orderStatusData)
+    {
         $this->setTranslations($orderStatusData);
     }
 }

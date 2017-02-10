@@ -13,7 +13,8 @@ class SliderItemDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $sliderItemFacade = $this->get(SliderItemFacade::class);
         /* @var $sliderItemFacade \Shopsys\ShopBundle\Model\Slider\SliderItemFacade*/
 

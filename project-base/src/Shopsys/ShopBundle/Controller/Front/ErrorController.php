@@ -52,7 +52,8 @@ class ErrorController extends FrontBaseController
     /**
      * @param int $code
      */
-    public function errorPageAction($code) {
+    public function errorPageAction($code)
+    {
         $this->exceptionController->setDebug(false);
         $this->exceptionController->setShowErrorPagePrototype();
 
@@ -86,7 +87,8 @@ class ErrorController extends FrontBaseController
      * @param string $format
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format) {
+    private function createErrorPagePrototypeResponse(FlattenException $exception, DebugLoggerInterface $logger, $format)
+    {
         $code = $exception->getStatusCode();
 
         return $this->render('@ShopsysShop/Front/Content/Error/error.' . $format . '.twig', [
@@ -101,7 +103,8 @@ class ErrorController extends FrontBaseController
      * @param int $statusCode
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function createErrorPageResponse($statusCode) {
+    private function createErrorPageResponse($statusCode)
+    {
         $errorPageStatusCode = $this->errorPagesFacade->getErrorPageStatusCodeByStatusCode($statusCode);
         $errorPageContent = $this->errorPagesFacade->getErrorPageContentByDomainIdAndStatusCode(
             $this->domain->getId(),
@@ -117,7 +120,8 @@ class ErrorController extends FrontBaseController
      * @param \Symfony\Component\HttpKernel\Log\DebugLoggerInterface $logger
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function createExceptionResponse(Request $request, FlattenException $exception, DebugLoggerInterface $logger) {
+    private function createExceptionResponse(Request $request, FlattenException $exception, DebugLoggerInterface $logger)
+    {
         $lastException = $this->exceptionListener->getLastException();
         if ($lastException !== null) {
             return $this->getPrettyExceptionResponse($lastException);
@@ -130,7 +134,8 @@ class ErrorController extends FrontBaseController
      * @param \Exception $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function getPrettyExceptionResponse(Exception $exception) {
+    private function getPrettyExceptionResponse(Exception $exception)
+    {
         Debugger::$time = time();
         $blueScreen = new BlueScreen();
         $blueScreen->info = [

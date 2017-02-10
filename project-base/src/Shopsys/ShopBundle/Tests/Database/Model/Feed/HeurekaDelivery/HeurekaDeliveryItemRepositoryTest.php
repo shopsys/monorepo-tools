@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
 {
-    public function testGetItemsWithProductInStock() {
+    public function testGetItemsWithProductInStock()
+    {
         $container = $this->getContainer();
         $productEditDataFactory = $container->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
@@ -43,7 +44,8 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         $this->fail('Sellable product using stock in stock must be in XML heureka delivery feed.');
     }
 
-    public function testGetItemsWithProductOutOfStock() {
+    public function testGetItemsWithProductOutOfStock()
+    {
         $container = $this->getContainer();
         $productEditDataFactory = $container->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
@@ -74,7 +76,8 @@ class HeurekaDeliveryItemRepositoryTest extends DatabaseTestCase
         }
     }
 
-    public function testGetItemsWithProductWithoutStock() {
+    public function testGetItemsWithProductWithoutStock()
+    {
         $container = $this->getContainer();
         $productEditDataFactory = $container->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */

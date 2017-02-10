@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class DomainsConfigLoaderTest extends FunctionalTestCase
 {
-    public function testLoadDomainConfigsFromYaml() {
+    public function testLoadDomainConfigsFromYaml()
+    {
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
         $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
@@ -23,7 +24,8 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         }
     }
 
-    public function testLoadDomainConfigsFromYamlConfigFileNotFound() {
+    public function testLoadDomainConfigsFromYamlConfigFileNotFound()
+    {
         $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsUrlsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_urls_config_filepath');
@@ -32,7 +34,8 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         $domainsConfigLoader->loadDomainConfigsFromYaml('nonexistentFilename', $domainsUrlsConfigFilepath);
     }
 
-    public function testLoadDomainConfigsFromYamlUrlsConfigFileNotFound() {
+    public function testLoadDomainConfigsFromYamlUrlsConfigFileNotFound()
+    {
         $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsConfigFilepath = $this->getContainer()->getParameter('shopsys.domain_config_filepath');
@@ -41,7 +44,8 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
         $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, 'nonexistentFilename');
     }
 
-    public function testLoadDomainConfigsFromYamlDomainConfigsDoNotMatchException() {
+    public function testLoadDomainConfigsFromYamlDomainConfigsDoNotMatchException()
+    {
         $domainsConfigLoader = $this->getContainer()->get(DomainsConfigLoader::class);
         /* @var $domainsConfigLoader \Shopsys\ShopBundle\Component\Domain\Config\DomainsConfigLoader */
         $domainsConfigFilepath = __DIR__ . '/test_domains.yml';

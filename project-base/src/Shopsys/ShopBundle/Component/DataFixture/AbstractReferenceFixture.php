@@ -22,7 +22,8 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    public function setContainer(ContainerInterface $container = null) {
+    public function setContainer(ContainerInterface $container = null)
+    {
         $this->container = $container;
         $this->persistentReferenceFacade = $this->get(PersistentReferenceFacade::class);
     }
@@ -31,7 +32,8 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
      * @param string $serviceId
      * @return mixed
      */
-    protected function get($serviceId) {
+    protected function get($serviceId)
+    {
         return $this->container->get($serviceId);
     }
 
@@ -40,7 +42,8 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
      * @param object $object
      * @param bool $persistent
      */
-    public function addReference($name, $object, $persistent = true) {
+    public function addReference($name, $object, $persistent = true)
+    {
         if ($persistent) {
             $this->persistentReferenceFacade->persistReference($name, $object);
         }
@@ -51,7 +54,8 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
      * @param object $object
      * @param bool $persistent
      */
-    public function setReference($name, $object, $persistent = true) {
+    public function setReference($name, $object, $persistent = true)
+    {
         if ($persistent) {
             $this->persistentReferenceFacade->persistReference($name, $object);
         }
@@ -61,7 +65,8 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
      * @param string $name
      * @return object
      */
-    public function getReference($name) {
+    public function getReference($name)
+    {
         return $this->persistentReferenceFacade->getReference($name);
     }
 }

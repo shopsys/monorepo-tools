@@ -132,7 +132,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
      */
-    public function edit(UserData $userData) {
+    public function edit(UserData $userData)
+    {
         $this->firstName = $userData->firstName;
         $this->lastName = $userData->lastName;
         $this->pricingGroup = $userData->pricingGroup;
@@ -141,14 +142,16 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @param string $email
      */
-    public function changeEmail($email) {
+    public function changeEmail($email)
+    {
         $this->email = $email;
     }
 
     /**
      * @param string $password
      */
-    public function changePassword($password) {
+    public function changePassword($password)
+    {
         $this->password = $password;
         $this->resetPasswordHash = null;
         $this->resetPasswordHashValidThrough = null;
@@ -157,7 +160,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @param string $hash
      */
-    public function setResetPasswordHash($hash) {
+    public function setResetPasswordHash($hash)
+    {
         $this->resetPasswordHash = $hash;
         $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
     }
@@ -165,88 +169,101 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      */
-    public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
+    public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null)
+    {
         $this->deliveryAddress = $deliveryAddress;
     }
 
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->firstName;
     }
 
     /**
      * @return DateTime
      */
-    public function getLastActivity() {
+    public function getLastActivity()
+    {
         return $this->lastActivity;
     }
 
     /**
      * @param DateTime $lastActivity
      */
-    public function setLastActivity($lastActivity) {
+    public function setLastActivity($lastActivity)
+    {
         $this->lastActivity = $lastActivity;
     }
 
-    public function onLogin() {
+    public function onLogin()
+    {
         $this->lastLogin = new DateTime();
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @param int $domainId
      */
-    public function setDomainId($domainId) {
+    public function setDomainId($domainId)
+    {
         $this->domainId = $domainId;
     }
 
     /**
      * @return string
      */
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->lastName;
     }
 
     /**
      * @return string
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
      * @return string
      */
-    public function getUsername() {
+    public function getUsername()
+    {
         return $this->email;
     }
 
     /**
      * @return string
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
     /**
      * @return string
      */
-    public function getFullName() {
+    public function getFullName()
+    {
         if ($this->billingAddress->isCompanyCustomer()) {
             return $this->billingAddress->getCompanyName();
         }
@@ -257,56 +274,64 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
      */
-    public function getBillingAddress() {
+    public function getBillingAddress()
+    {
         return $this->billingAddress;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
      */
-    public function getDeliveryAddress() {
+    public function getDeliveryAddress()
+    {
         return $this->deliveryAddress;
     }
 
     /**
      * @return \DateTime
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->createdAt;
     }
 
     /**
      * @return \DateTime|null
      */
-    public function getLastLogin() {
+    public function getLastLogin()
+    {
         return $this->lastLogin;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
      */
-    public function getPricingGroup() {
+    public function getPricingGroup()
+    {
         return $this->pricingGroup;
     }
 
     /**
      * @return string|null
      */
-    public function getResetPasswordHash() {
+    public function getResetPasswordHash()
+    {
         return $this->resetPasswordHash;
     }
 
     /**
      * @return \DateTime|null
      */
-    public function getResetPasswordHashValidThrough() {
+    public function getResetPasswordHashValidThrough()
+    {
         return $this->resetPasswordHashValidThrough;
     }
 
     /**
      * @inheritDoc
      */
-    public function serialize() {
+    public function serialize()
+    {
         return serialize([
             $this->id,
             $this->email,
@@ -321,7 +346,8 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @inheritDoc
      */
-    public function unserialize($serialized) {
+    public function unserialize($serialized)
+    {
         list(
             $this->id,
             $this->email,
@@ -336,20 +362,23 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     /**
      * @inheritDoc
      */
-    public function eraseCredentials() {
+    public function eraseCredentials()
+    {
     }
 
     /**
      * @inheritDoc
      */
-    public function getRoles() {
+    public function getRoles()
+    {
         return [Roles::ROLE_CUSTOMER];
     }
 
     /**
      * @inheritDoc
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         return null; // bcrypt include salt in password hash
     }
 }

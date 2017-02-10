@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\String\HashGenerator;
 
 class HashGeneratorTest extends PHPUnit_Framework_TestCase
 {
-    public function hashLengthProvider() {
+    public function hashLengthProvider()
+    {
         return [
             [1],
             [13],
@@ -18,7 +19,8 @@ class HashGeneratorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider hashLengthProvider
      */
-    public function testGenerateHash($length) {
+    public function testGenerateHash($length)
+    {
         $hashGererator = new HashGenerator();
 
         $hash = $hashGererator->generateHash($length);

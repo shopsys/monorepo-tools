@@ -31,7 +31,8 @@ class FlagController extends AdminBaseController
     /**
      * @Route("/product/flag/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $productInlineEdit = $this->flagInlineEdit;
 
         $grid = $productInlineEdit->getGrid();
@@ -46,7 +47,8 @@ class FlagController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->flagFacade->getById($id)->getName();
 

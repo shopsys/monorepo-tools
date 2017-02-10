@@ -18,7 +18,8 @@ class CartService
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductPriceCalculationForUser $productPriceCalculation
      */
-    public function __construct(ProductPriceCalculationForUser $productPriceCalculation) {
+    public function __construct(ProductPriceCalculationForUser $productPriceCalculation)
+    {
         $this->productPriceCalculation = $productPriceCalculation;
     }
 
@@ -29,7 +30,8 @@ class CartService
      * @param int $quantity
      * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
      */
-    public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity) {
+    public function addProductToCart(Cart $cart, CustomerIdentifier $customerIdentifier, Product $product, $quantity)
+    {
         if (!is_int($quantity) || $quantity <= 0) {
             throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidQuantityException($quantity);
         }
@@ -51,7 +53,8 @@ class CartService
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      * @param array $quantities CartItem.id => quantity
      */
-    public function changeQuantities(Cart $cart, array $quantities) {
+    public function changeQuantities(Cart $cart, array $quantities)
+    {
         foreach ($cart->getItems() as $cartItem) {
             if (array_key_exists($cartItem->getId(), $quantities)) {
                 $cartItem->changeQuantity($quantities[$cartItem->getId()]);
@@ -64,7 +67,8 @@ class CartService
      * @param int $cartItemId
      * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem
      */
-    public function getCartItemById(Cart $cart, $cartItemId) {
+    public function getCartItemById(Cart $cart, $cartItemId)
+    {
         foreach ($cart->getItems() as $cartItem) {
             if ($cartItem->getId() === $cartItemId) {
                 return $cartItem;
@@ -77,7 +81,8 @@ class CartService
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      */
-    public function cleanCart(Cart $cart) {
+    public function cleanCart(Cart $cart)
+    {
         $cart->clean();
     }
 
@@ -86,7 +91,8 @@ class CartService
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $mergedCart
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      */
-    public function mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier) {
+    public function mergeCarts(Cart $resultingCart, Cart $mergedCart, CustomerIdentifier $customerIdentifier)
+    {
         foreach ($mergedCart->getItems() as $cartItem) {
             $similarCartItem = $this->findSimilarCartItemByCartItem($resultingCart, $cartItem);
             if ($similarCartItem instanceof CartItem) {
@@ -108,7 +114,8 @@ class CartService
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $cartItem
      * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem|null
      */
-    private function findSimilarCartItemByCartItem(Cart $cart, CartItem $cartItem) {
+    private function findSimilarCartItemByCartItem(Cart $cart, CartItem $cartItem)
+    {
         foreach ($cart->getItems() as $similarCartItem) {
             if ($similarCartItem->isSimilarItemAs($cartItem)) {
                 return $similarCartItem;
@@ -122,7 +129,8 @@ class CartService
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
      */
-    public function getQuantifiedProducts(Cart $cart) {
+    public function getQuantifiedProducts(Cart $cart)
+    {
         $quantifiedProducts = [];
         foreach ($cart->getItems() as $cartItem) {
             $quantifiedProducts[$cartItem->getId()] = new QuantifiedProduct($cartItem->getProduct(), $cartItem->getQuantity());

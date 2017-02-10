@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatusService;
 
 class OrderStatusServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function checkForDeleteProvider() {
+    public function checkForDeleteProvider()
+    {
         return [
             ['type' => OrderStatus::TYPE_NEW, 'expectedException' => OrderStatusDeletionForbiddenException::class],
             ['type' => OrderStatus::TYPE_IN_PROGRESS, 'expectedException' => null],
@@ -22,7 +23,8 @@ class OrderStatusServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider checkForDeleteProvider
      */
-    public function testCheckForDelete($statusType, $expectedException = null) {
+    public function testCheckForDelete($statusType, $expectedException = null)
+    {
         $orderStatusService = new OrderStatusService();
         $orderStatus = new OrderStatus(
             new OrderStatusData(['en' => 'orderStatusName']),

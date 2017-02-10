@@ -18,27 +18,32 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
      */
     private $productPriceRecalculator;
 
-    public function __construct(ProductPriceRecalculator $productPriceRecalculator) {
+    public function __construct(ProductPriceRecalculator $productPriceRecalculator)
+    {
         $this->productPriceRecalculator = $productPriceRecalculator;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
         $this->logger = $logger;
     }
 
-    public function sleep() {
+    public function sleep()
+    {
     }
 
-    public function wakeUp() {
+    public function wakeUp()
+    {
     }
 
     /**
      * @inheritdoc
      */
-    public function iterate() {
+    public function iterate()
+    {
         if ($this->productPriceRecalculator->runBatchOfScheduledDelayedRecalculations()) {
             $this->logger->debug('Batch is recalculated.');
             return true;

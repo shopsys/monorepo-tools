@@ -46,7 +46,8 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function getBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         $product = $this->productRepository->getById($routeParameters['id']);
 
         $productMainCategory = $this->categoryRepository->getProductMainCategoryOnDomain(
@@ -67,7 +68,8 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
-    private function getCategoryBreadcrumbItems(Category $category) {
+    private function getCategoryBreadcrumbItems(Category $category)
+    {
         $categoriesInPath = $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain(
             $category,
             $this->domain->getId()

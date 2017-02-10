@@ -16,7 +16,8 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     /**
      * {@inheritDoc}
      */
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:database:dump')
             ->setDescription('Dump database')
@@ -28,7 +29,8 @@ class DatabaseDumpCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $connection = $this->getContainer()->get('doctrine.dbal.default_connection');
         /* @var $connection \Doctrine\DBAL\Connection */
 
@@ -81,7 +83,8 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     /**
      * @return array
      */
-    private function getDescriptorSpec() {
+    private function getDescriptorSpec()
+    {
         return [
             0 => ['pipe', 'r'], // stdin
             1 => ['pipe', 'w'], // stdout

@@ -11,7 +11,8 @@ class NumberFormatterExtensionTest extends FunctionalTestCase
 {
     const NBSP = "\xc2\xa0";
 
-    public function formatNumberDataProvider() {
+    public function formatNumberDataProvider()
+    {
         return [
             ['input' => '12', 'locale' => 'cs', 'result' => '12'],
             ['input' => '12.00', 'locale' => 'cs', 'result' => '12'],
@@ -34,7 +35,8 @@ class NumberFormatterExtensionTest extends FunctionalTestCase
     /**
      * @dataProvider formatNumberDataProvider
      */
-    public function testFormatNumber($input, $locale, $result) {
+    public function testFormatNumber($input, $locale, $result)
+    {
         $localizationMock = $this->getMockBuilder(Localization::class)
             ->disableOriginalConstructor()
             ->setMethods(['getLocale'])

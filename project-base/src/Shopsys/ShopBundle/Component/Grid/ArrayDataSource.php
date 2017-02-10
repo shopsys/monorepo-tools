@@ -20,7 +20,8 @@ class ArrayDataSource implements DataSourceInterface
      * @param array $data
      * @param string $rowIdSourceColumnName
      */
-    public function __construct(array $data, $rowIdSourceColumnName = null) {
+    public function __construct(array $data, $rowIdSourceColumnName = null)
+    {
         $this->data = $data;
         $this->rowIdSourceColumnName = $rowIdSourceColumnName;
     }
@@ -28,7 +29,8 @@ class ArrayDataSource implements DataSourceInterface
     /**
      * @return string
      */
-    public function getRowIdSourceColumnName() {
+    public function getRowIdSourceColumnName()
+    {
         return $this->rowIdSourceColumnName;
     }
 
@@ -36,7 +38,8 @@ class ArrayDataSource implements DataSourceInterface
      * @param string $rowId
      * @return mixed
      */
-    public function getOneRow($rowId) {
+    public function getOneRow($rowId)
+    {
         if ($this->rowIdSourceColumnName === null) {
             return $this->data[$rowId];
         } else {
@@ -55,7 +58,8 @@ class ArrayDataSource implements DataSourceInterface
      * @param string $orderDirection
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
-    public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC) {
+    public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC)
+    {
         if ($limit !== null) {
             $message = 'Pagination not supported in ArrayDataSource';
             throw new \Shopsys\ShopBundle\Component\Grid\Exception\PaginationNotSupportedException($message);
@@ -72,7 +76,8 @@ class ArrayDataSource implements DataSourceInterface
     /**
      * @return int
      */
-    public function getTotalRowsCount() {
+    public function getTotalRowsCount()
+    {
         return count($this->data);
     }
 }

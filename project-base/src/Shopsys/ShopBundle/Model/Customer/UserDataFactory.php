@@ -14,14 +14,16 @@ class UserDataFactory
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade $pricingGroupSettingFacade
      */
-    public function __construct(PricingGroupSettingFacade $pricingGroupSettingFacade) {
+    public function __construct(PricingGroupSettingFacade $pricingGroupSettingFacade)
+    {
         $this->pricingGroupSettingFacade = $pricingGroupSettingFacade;
     }
 
     /**
      * @param int $domainId
      */
-    public function createDefault($domainId) {
+    public function createDefault($domainId)
+    {
         $userData = new UserData();
         $userData->pricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainId);
 

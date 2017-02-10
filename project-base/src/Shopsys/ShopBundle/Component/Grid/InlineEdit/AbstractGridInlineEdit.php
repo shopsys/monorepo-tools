@@ -23,7 +23,8 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
      * @param \Symfony\Component\Form\FormFactory $formFactory
      * @param \Shopsys\ShopBundle\Component\Grid\GridFactoryInterface $gridFactory
      */
-    public function __construct(FormFactory $formFactory, GridFactoryInterface $gridFactory) {
+    public function __construct(FormFactory $formFactory, GridFactoryInterface $gridFactory)
+    {
         $this->formFactory = $formFactory;
         $this->gridFactory = $gridFactory;
     }
@@ -32,7 +33,8 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
      * @param mixed $rowId
      * @return \Symfony\Component\Form\Form
      */
-    public function getForm($rowId) {
+    public function getForm($rowId)
+    {
         return $this->formFactory->create(
             $this->getFormType($rowId),
             $this->getFormDataObject($rowId)
@@ -44,7 +46,8 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
      * @param mixed $rowId
      * @return int
      */
-    public function saveForm(Request $request, $rowId) {
+    public function saveForm(Request $request, $rowId)
+    {
         $form = $this->getForm($rowId);
         $form->handleRequest($request);
 
@@ -70,7 +73,8 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function getGrid() {
+    public function getGrid()
+    {
         $grid = $this->gridFactory->create();
         $grid->setInlineEditService($this);
 
@@ -80,14 +84,16 @@ abstract class AbstractGridInlineEdit implements GridInlineEditInterface
     /**
      * @return bool
      */
-    public function canAddNewRow() {
+    public function canAddNewRow()
+    {
         return true;
     }
 
     /**
      * @return string
      */
-    public function getServiceName() {
+    public function getServiceName()
+    {
         return get_called_class();
     }
 

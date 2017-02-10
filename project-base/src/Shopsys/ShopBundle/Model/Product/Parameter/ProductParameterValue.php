@@ -58,21 +58,24 @@ class ProductParameterValue
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function getParameter() {
+    public function getParameter()
+    {
         return $this->parameter;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue
      */
-    public function getValue() {
+    public function getValue()
+    {
         return $this->value;
     }
 }

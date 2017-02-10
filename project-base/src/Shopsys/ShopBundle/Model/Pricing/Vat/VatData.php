@@ -20,7 +20,8 @@ class VatData
      * @param string|null $name
      * @param string|null $percent
      */
-    public function __construct($name = null, $percent = null) {
+    public function __construct($name = null, $percent = null)
+    {
         $this->name = $name;
         $this->percent = $percent;
     }
@@ -28,7 +29,8 @@ class VatData
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
      */
-    public function setFromEntity(Vat $vat) {
+    public function setFromEntity(Vat $vat)
+    {
         $this->name = $vat->getName();
         $this->percent = $vat->getPercent();
     }

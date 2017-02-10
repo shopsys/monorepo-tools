@@ -27,7 +27,8 @@ class GeneratorCollection
     /**
      * @param string[] $skeletonDirs
      */
-    public function __construct(array $skeletonDirs) {
+    public function __construct(array $skeletonDirs)
+    {
         $this->generatorsByName = [];
         $this->skeletonDirs = $skeletonDirs;
     }
@@ -35,7 +36,8 @@ class GeneratorCollection
     /**
      * @param \Shopsys\GeneratorBundle\Model\GeneratorInterface $generator
      */
-    public function addGenerator(GeneratorInterface $generator) {
+    public function addGenerator(GeneratorInterface $generator)
+    {
         if ($this->has($generator->getName())) {
             throw new \Shopsys\GeneratorBundle\Model\Exception\DuplicateGeneratorNameException($generator->getName());
         }
@@ -49,21 +51,24 @@ class GeneratorCollection
      * @param string $generatorName
      * @return bool
      */
-    public function has($generatorName) {
+    public function has($generatorName)
+    {
         return array_key_exists($generatorName, $this->generatorsByName);
     }
 
     /**
      * @return \Shopsys\GeneratorBundle\Model\GeneratorInterface[]
      */
-    public function getGenerators() {
+    public function getGenerators()
+    {
         return $this->generatorsByName;
     }
 
     /**
      * @return \Twig_Environment
      */
-    private function getTwig() {
+    private function getTwig()
+    {
         if ($this->twig === null) {
             $this->twig = new Twig_Environment(
                 new Twig_Loader_Filesystem($this->skeletonDirs),

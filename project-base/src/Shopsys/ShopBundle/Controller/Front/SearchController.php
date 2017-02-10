@@ -30,7 +30,8 @@ class SearchController extends FrontBaseController
         $this->productOnCurrentDomainFacade = $productOnCurrentDomainFacade;
     }
 
-    public function autocompleteAction(Request $request) {
+    public function autocompleteAction(Request $request)
+    {
         $searchText = $request->get('searchText');
         $searchUrl = $this->generateUrl('front_product_search', [ProductController::SEARCH_TEXT_PARAMETER => $searchText]);
 
@@ -47,7 +48,8 @@ class SearchController extends FrontBaseController
         ]);
     }
 
-    public function boxAction(Request $request) {
+    public function boxAction(Request $request)
+    {
         $searchText = $request->query->get(ProductController::SEARCH_TEXT_PARAMETER);
 
         return $this->render('@ShopsysShop/Front/Content/Search/searchBox.html.twig', [

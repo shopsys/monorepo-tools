@@ -14,7 +14,8 @@ class InputPriceTypeFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'input_price_type_form';
     }
 
@@ -22,7 +23,8 @@ class InputPriceTypeFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $inputPriceTypesLabels = $this->getInputPriceTypesLabels();
 
         $choices = [];
@@ -40,7 +42,8 @@ class InputPriceTypeFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);
@@ -49,7 +52,8 @@ class InputPriceTypeFormType extends AbstractType
     /**
      * @return array
      */
-    private function getInputPriceTypesLabels() {
+    private function getInputPriceTypesLabels()
+    {
         return [
             PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT => t('Excluding VAT'),
             PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('Including VAT'),

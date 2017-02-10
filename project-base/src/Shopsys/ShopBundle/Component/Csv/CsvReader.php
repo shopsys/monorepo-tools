@@ -8,7 +8,8 @@ class CsvReader
      * @param string $filename
      * @return array
      */
-    public function getRowsFromCsv($filename, $delimiter = ';') {
+    public function getRowsFromCsv($filename, $delimiter = ';')
+    {
         if (!file_exists($filename) || !is_readable($filename)) {
             throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException();
         }

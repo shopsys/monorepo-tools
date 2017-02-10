@@ -31,7 +31,8 @@ class AdvertFormType extends AbstractType
      * @param bool $imageUploaded
      * @param array $advertPositionsLocalizedNamesByName
      */
-    public function __construct($imageUploaded, array $advertPositionsLocalizedNamesByName) {
+    public function __construct($imageUploaded, array $advertPositionsLocalizedNamesByName)
+    {
         $this->imageUploaded = $imageUploaded;
         $this->advertPositionsLocalizedNamesByName = $advertPositionsLocalizedNamesByName;
     }
@@ -39,7 +40,8 @@ class AdvertFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'advert_form';
     }
 
@@ -48,7 +50,8 @@ class AdvertFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $imageConstraints = [
             new Constraints\NotBlank([
                 'message' => 'Choose image',
@@ -115,7 +118,8 @@ class AdvertFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => AdvertData::class,
             'attr' => ['novalidate' => 'novalidate'],
@@ -138,7 +142,8 @@ class AdvertFormType extends AbstractType
     /**
      * @return string[]
      */
-    private function getTypeChoices() {
+    private function getTypeChoices()
+    {
         return [
             Advert::TYPE_CODE => t('HTML code'),
             Advert::TYPE_IMAGE => t('Picture with link'),

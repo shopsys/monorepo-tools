@@ -17,14 +17,16 @@ class UnitRepository
     /**
      * @param \Doctrine\ORM\EntityManager $entityManager
      */
-    public function __construct(EntityManager $entityManager) {
+    public function __construct(EntityManager $entityManager)
+    {
         $this->em = $entityManager;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUnitRepository() {
+    private function getUnitRepository()
+    {
         return $this->em->getRepository(Unit::class);
     }
 
@@ -32,7 +34,8 @@ class UnitRepository
      * @param int $unitId
      * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit|null
      */
-    public function findById($unitId) {
+    public function findById($unitId)
+    {
         return $this->getUnitRepository()->find($unitId);
     }
 
@@ -40,7 +43,8 @@ class UnitRepository
      * @param int $unitId
      * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
      */
-    public function getById($unitId) {
+    public function getById($unitId)
+    {
         $unit = $this->findById($unitId);
 
         if ($unit === null) {
@@ -53,7 +57,8 @@ class UnitRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllQueryBuilder() {
+    private function getAllQueryBuilder()
+    {
         return $this->em->createQueryBuilder()
             ->select('u')
             ->from(Unit::class, 'u')
@@ -63,7 +68,8 @@ class UnitRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->getAllQueryBuilder()->getQuery()->execute();
     }
 
@@ -71,7 +77,8 @@ class UnitRepository
      * @param int $unitId
      * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
      */
-    public function getAllExceptId($unitId) {
+    public function getAllExceptId($unitId)
+    {
         return $this->getAllQueryBuilder()
             ->where('u.id != :id')->setParameter('id', $unitId)
             ->getQuery()->execute();
@@ -81,7 +88,8 @@ class UnitRepository
      * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
      * @return bool
      */
-    public function existsProductWithUnit(Unit $unit) {
+    public function existsProductWithUnit(Unit $unit)
+    {
         $qb = $this->em->createQueryBuilder()
             ->select('COUNT(p)')
             ->from(Product::class, 'p')
@@ -94,7 +102,8 @@ class UnitRepository
      * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $oldUnit
      * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $newUnit
      */
-    public function replaceUnit(Unit $oldUnit, Unit $newUnit) {
+    public function replaceUnit(Unit $oldUnit, Unit $newUnit)
+    {
         $this->em->createQueryBuilder()
             ->update(Product::class, 'p')
             ->set('p.unit', ':newUnit')->setParameter('newUnit', $newUnit)

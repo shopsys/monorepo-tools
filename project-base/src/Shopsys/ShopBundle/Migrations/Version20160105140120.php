@@ -10,7 +10,8 @@ class Version20160105140120 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $sql = 'ALTER TABLE order_status_translations
             ALTER name SET NOT NULL;';
         $this->sql($sql);
@@ -19,6 +20,7 @@ class Version20160105140120 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

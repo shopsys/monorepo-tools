@@ -16,7 +16,8 @@ class LogErrorReportingFacade
     /**
      * @param string $logsDir
      */
-    public function __construct($logsDir) {
+    public function __construct($logsDir)
+    {
         $this->logsDir = $logsDir;
     }
 
@@ -27,7 +28,8 @@ class LogErrorReportingFacade
      * @param string $rotatedLogName
      * @return bool
      */
-    public function existsLogEntryFromDateTime(DateTime $from, $rotatedLogName) {
+    public function existsLogEntryFromDateTime(DateTime $from, $rotatedLogName)
+    {
         $logFilepath = $this->getLogFilepathByDate($from, $rotatedLogName);
         if (file_exists($logFilepath) && filemtime($logFilepath) >= $from->getTimestamp()) {
             return true;
@@ -48,7 +50,8 @@ class LogErrorReportingFacade
      * @param string $rotatedLogName
      * @return bool|string
      */
-    public function getLogsTail($rotatedLogName) {
+    public function getLogsTail($rotatedLogName)
+    {
         $today = new DateTime();
         $todayLogFilepath = $this->getLogFilepathByDate($today, $rotatedLogName);
         $logTail = $this->getLogFileTail($todayLogFilepath);
@@ -66,7 +69,8 @@ class LogErrorReportingFacade
      * @param string $filepath
      * @return bool|string
      */
-    private function getLogFileTail($filepath) {
+    private function getLogFileTail($filepath)
+    {
         if (!file_exists($filepath)) {
             return false;
         }
@@ -86,7 +90,8 @@ class LogErrorReportingFacade
      * @param string $rotatedLogName
      * @return string
      */
-    private function getLogFilepathByDate(DateTime $date, $rotatedLogName) {
+    private function getLogFilepathByDate(DateTime $date, $rotatedLogName)
+    {
         return
             $this->logsDir . '/'
             . $rotatedLogName
@@ -99,7 +104,8 @@ class LogErrorReportingFacade
      * @param string $string
      * @return string
      */
-    private function stripFirstLine($string) {
+    private function stripFirstLine($string)
+    {
         return substr($string, strpos($string, "\n") + 1);
     }
 }

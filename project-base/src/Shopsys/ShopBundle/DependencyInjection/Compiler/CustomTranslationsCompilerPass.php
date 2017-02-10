@@ -16,7 +16,8 @@ class CustomTranslationsCompilerPass implements CompilerPassInterface
      *
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container) {
+    public function process(ContainerBuilder $container)
+    {
         $customTranslationsDir = $container->getParameter('kernel.root_dir') . '/../' . self::CUSTOM_TRANSLATIONS_DIR;
         $translator = $container->findDefinition('translator.default');
 

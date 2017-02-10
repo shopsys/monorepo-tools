@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class QueryBuilderDataSourceTest extends DatabaseTestCase
 {
-    public function testGetOneRow() {
+    public function testGetOneRow()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -25,7 +26,8 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase
         $this->assertArrayHasKey('p', $row);
     }
 
-    public function testGetTotalRowsCount() {
+    public function testGetTotalRowsCount()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -43,7 +45,8 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase
         $this->assertSame(10, $count);
     }
 
-    public function testGetRows() {
+    public function testGetRows()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -64,7 +67,8 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase
         }
     }
 
-    public function testGetRowsInAscOrder() {
+    public function testGetRowsInAscOrder()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -88,7 +92,8 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase
         }
     }
 
-    public function testGetRowsInDescOrder() {
+    public function testGetRowsInDescOrder()
+    {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 

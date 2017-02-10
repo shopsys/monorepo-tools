@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 {
-    public function testIsIndependentlyVisible() {
+    public function testIsIndependentlyVisible()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -34,7 +35,8 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $this->assertTrue($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
 
-    public function testIsIndependentlyVisibleEmptyName() {
+    public function testIsIndependentlyVisibleEmptyName()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -56,7 +58,8 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
 
-    public function testIsIndependentlyVisibleNotOnDomain() {
+    public function testIsIndependentlyVisibleNotOnDomain()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -74,7 +77,8 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
 
-    public function testIsIndependentlyVisibleHidden() {
+    public function testIsIndependentlyVisibleHidden()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;

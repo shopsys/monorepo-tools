@@ -22,7 +22,8 @@ class OrderListAdminFacade
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderListQueryBuilder() {
+    public function getOrderListQueryBuilder()
+    {
         return $this->orderListAdminRepository->getOrderListQueryBuilder();
     }
 
@@ -30,7 +31,8 @@ class OrderListAdminFacade
      * @param array $searchData
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getQueryBuilderByExtendSearchData(array $searchData = null) {
+    public function getQueryBuilderByExtendSearchData(array $searchData = null)
+    {
         $queryBuilder = $this->getOrderListQueryBuilder();
         $this->orderListAdminRepository->extendQueryBuilderByExtendSearchData($queryBuilder, $searchData);
 

@@ -14,7 +14,8 @@ class FormDetailExtension extends Twig_Extension
      */
     private $container;
 
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
     }
 
@@ -24,14 +25,16 @@ class FormDetailExtension extends Twig_Extension
      *
      * @return \Symfony\Bundle\TwigBundle\TwigEngine
      */
-    private function getTemplatingService() {
+    private function getTemplatingService()
+    {
         return $this->container->get('templating');
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('form_id', [$this, 'formId'], ['is_safe' => ['html']]),
             new Twig_SimpleFunction('form_save', [$this, 'formSave'], ['is_safe' => ['html']]),
@@ -42,7 +45,8 @@ class FormDetailExtension extends Twig_Extension
      * @param mixed $object
      * @return string
      */
-    public function formId($object) {
+    public function formId($object)
+    {
         if ($object === null) {
             return '';
         } else {
@@ -68,7 +72,8 @@ class FormDetailExtension extends Twig_Extension
      * @param array $vars
      * @return string
      */
-    public function formSave($object, FormView $formView, array $vars = []) {
+    public function formSave($object, FormView $formView, array $vars = [])
+    {
         $template = '{{ form_widget(form.save, vars) }}';
 
         if (!array_keys($vars, 'label', true)) {
@@ -88,7 +93,8 @@ class FormDetailExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'shopsys.twig.form_detail_extension';
     }
 }

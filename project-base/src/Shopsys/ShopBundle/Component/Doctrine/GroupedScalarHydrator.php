@@ -11,7 +11,8 @@ class GroupedScalarHydrator extends AbstractHydrator
     /**
      * {@inheritdoc}
      */
-    protected function hydrateAllData() {
+    protected function hydrateAllData()
+    {
         $result = [];
 
         while ($data = $this->_stmt->fetch(\PDO::FETCH_ASSOC)) {
@@ -24,7 +25,8 @@ class GroupedScalarHydrator extends AbstractHydrator
     /**
      * {@inheritdoc}
      */
-    protected function hydrateRowData(array $data, array &$result) {
+    protected function hydrateRowData(array $data, array &$result)
+    {
         $rowData = $this->gatherGroupedScalarRowData($data);
         $result[] = $rowData;
     }
@@ -36,7 +38,8 @@ class GroupedScalarHydrator extends AbstractHydrator
      * @param array $data
      * @return array
      */
-    private function gatherGroupedScalarRowData(&$data) {
+    private function gatherGroupedScalarRowData(&$data)
+    {
         $rowData = [];
 
         foreach ($data as $key => $value) {

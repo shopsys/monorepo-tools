@@ -42,7 +42,8 @@ class ProductManualInputPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $inputPrice
      */
-    public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice) {
+    public function __construct(Product $product, PricingGroup $pricingGroup, $inputPrice)
+    {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
         $this->inputPrice = $inputPrice;
@@ -51,28 +52,32 @@ class ProductManualInputPrice
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
      */
-    public function getPricingGroup() {
+    public function getPricingGroup()
+    {
         return $this->pricingGroup;
     }
 
     /**
      * @return string
      */
-    public function getInputPrice() {
+    public function getInputPrice()
+    {
         return $this->inputPrice;
     }
 
     /**
      * @param string $inputPrice
      */
-    public function setInputPrice($inputPrice) {
+    public function setInputPrice($inputPrice)
+    {
         $this->inputPrice = $inputPrice;
     }
 }

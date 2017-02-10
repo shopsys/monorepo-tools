@@ -11,14 +11,16 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'productPartno';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_CONTAINS,
             self::OPERATOR_NOT_CONTAINS,
@@ -29,21 +31,24 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return 'text';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         return [];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         foreach ($rulesData as $index => $ruleData) {
             if ($ruleData->operator === self::OPERATOR_NOT_SET) {
                 $queryBuilder->andWhere('p.partno IS NULL');
@@ -66,7 +71,8 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface
      * @param string $operator
      * @return string
      */
-    private function getContainsDqlOperator($operator) {
+    private function getContainsDqlOperator($operator)
+    {
         switch ($operator) {
             case self::OPERATOR_CONTAINS:
                 return 'LIKE';

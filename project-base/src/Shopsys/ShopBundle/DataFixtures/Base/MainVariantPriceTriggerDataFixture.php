@@ -10,7 +10,8 @@ class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_main_variant_price_recalculation_by_product_visibility() RETURNS trigger AS $$
                 BEGIN

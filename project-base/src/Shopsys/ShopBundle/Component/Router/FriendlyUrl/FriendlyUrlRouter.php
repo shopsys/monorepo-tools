@@ -74,21 +74,24 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function getContext() {
+    public function getContext()
+    {
         return $this->context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setContext(RequestContext $context) {
+    public function setContext(RequestContext $context)
+    {
         $this->context = $context;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRouteCollection() {
+    public function getRouteCollection()
+    {
         if ($this->collection === null) {
             $this->collection = $this->delegatingLoader->load($this->friendlyUrlRouterResourceFilepath);
         }
@@ -99,7 +102,8 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
+    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
         return $this->friendlyUrlGenerator->generateFromRouteCollection(
             $this->getRouteCollection(),
             $this->domainConfig,
@@ -115,7 +119,8 @@ class FriendlyUrlRouter implements RouterInterface
      * @param string $referenceType
      * @return string
      */
-    public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
+    public function generateByFriendlyUrl(FriendlyUrl $friendlyUrl, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
         return $this->friendlyUrlGenerator->getGeneratedUrl(
             $friendlyUrl->getRouteName(),
             $this->getRouteCollection()->get($friendlyUrl->getRouteName()),
@@ -128,7 +133,8 @@ class FriendlyUrlRouter implements RouterInterface
     /**
      * {@inheritdoc}
      */
-    public function match($pathinfo) {
+    public function match($pathinfo)
+    {
         return $this->friendlyUrlMatcher->match($pathinfo, $this->getRouteCollection(), $this->domainConfig);
     }
 }

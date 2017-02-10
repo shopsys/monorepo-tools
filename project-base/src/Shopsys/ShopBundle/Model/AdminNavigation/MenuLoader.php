@@ -24,7 +24,8 @@ class MenuLoader
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      * @param \Shopsys\ShopBundle\Component\Translation\Translator $translator
      */
-    public function __construct(Filesystem $filesystem, Translator $translator) {
+    public function __construct(Filesystem $filesystem, Translator $translator)
+    {
         $this->filesystem = $filesystem;
         $this->translator = $translator;
     }
@@ -33,7 +34,8 @@ class MenuLoader
      * @param string $filename
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
      */
-    public function loadFromYaml($filename) {
+    public function loadFromYaml($filename)
+    {
         $yamlParser = new Parser();
 
         if (!$this->filesystem->exists($filename)) {
@@ -57,7 +59,8 @@ class MenuLoader
      * @param array $array
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
      */
-    public function loadFromArray(array $array) {
+    public function loadFromArray(array $array)
+    {
         $items = $this->loadItems($array);
         $menu = new Menu($items);
 
@@ -68,7 +71,8 @@ class MenuLoader
      * @param array $array
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
-    private function loadItems(array $array) {
+    private function loadItems(array $array)
+    {
         $items = [];
 
         foreach ($array as $arrayItem) {
@@ -83,7 +87,8 @@ class MenuLoader
      * @param array $array
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem
      */
-    private function loadItem(array $array) {
+    private function loadItem(array $array)
+    {
         if (isset($array['items'])) {
             $items = $this->loadItems($array['items']);
         } else {

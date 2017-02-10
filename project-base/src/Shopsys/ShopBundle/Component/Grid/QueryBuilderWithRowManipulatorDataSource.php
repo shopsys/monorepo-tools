@@ -18,7 +18,8 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
      * @param string $rowIdSourceColumnName
      * @param \Closure $manipulateRowCallback
      */
-    public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName, Closure $manipulateRowCallback) {
+    public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName, Closure $manipulateRowCallback)
+    {
         parent::__construct($queryBuilder, $rowIdSourceColumnName);
         $this->manipulateRowCallback = $manipulateRowCallback;
     }
@@ -27,7 +28,8 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
      * @param int $rowId
      * @return array
      */
-    public function getOneRow($rowId) {
+    public function getOneRow($rowId)
+    {
         $row = parent::getOneRow($rowId);
         return call_user_func($this->manipulateRowCallback, $row);
     }
@@ -39,7 +41,8 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
      * @param string $orderDirection
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
-    public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC) {
+    public function getPaginatedRows($limit = null, $page = 1, $orderSourceColumnName = null, $orderDirection = self::ORDER_ASC)
+    {
         $originalPaginationResult = parent::getPaginatedRows($limit, $page, $orderSourceColumnName, $orderDirection);
         $results = array_map($this->manipulateRowCallback, $originalPaginationResult->getResults());
         return new PaginationResult(

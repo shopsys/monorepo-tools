@@ -47,7 +47,8 @@ class HeurekaItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
      */
-    public function createItems(array $products, DomainConfig $domainConfig) {
+    public function createItems(array $products, DomainConfig $domainConfig)
+    {
         $productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
             $products,
             $domainConfig
@@ -106,7 +107,8 @@ class HeurekaItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string|null
      */
-    private function getProductCategorytext(Product $product, DomainConfig $domainConfig) {
+    private function getProductCategorytext(Product $product, DomainConfig $domainConfig)
+    {
         $productMainCategory = $this->categoryFacade->getProductMainCategoryByDomainId($product, $domainConfig->getId());
         $feedCategory = $productMainCategory->getHeurekaCzFeedCategory();
 

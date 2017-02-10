@@ -59,7 +59,8 @@ class OrderCest
         $orderPage->assertPaymentIsSelected('Dobírka');
     }
 
-    public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me) {
+    public function testFormRemembersFirstName(ProductListPage $productListPage, OrderPage $orderPage, AcceptanceTester $me)
+    {
         $me->wantTo('have my first name remebered by order');
 
         $me->amOnPage('/televize-audio/');
@@ -96,7 +97,8 @@ class OrderCest
      * @param string $trackingId
      * @param \Shopsys\ShopBundle\Model\Script\ScriptFacade $scriptFacade
      */
-    private function setGoogleAnalyticsTrackingId($trackingId, ScriptFacade $scriptFacade) {
+    private function setGoogleAnalyticsTrackingId($trackingId, ScriptFacade $scriptFacade)
+    {
         $scriptFacade->setGoogleAnalyticsTrackingId($trackingId, Domain::FIRST_DOMAIN_ID);
     }
 

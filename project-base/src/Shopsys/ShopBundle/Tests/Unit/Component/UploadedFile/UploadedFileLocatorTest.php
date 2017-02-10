@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\UploadedFile\UploadedFileLocator;
 
 class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
 {
-    public function testFileExists() {
+    public function testFileExists()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';
 
@@ -21,7 +22,8 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($uploadedFileLocator->fileExists($uploadedFileMock));
     }
 
-    public function testFileNotExists() {
+    public function testFileNotExists()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
         $uploadedFileUrlPrefix = '';
 
@@ -33,7 +35,8 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($uploadedFileLocator->fileExists($uploadedFileMock));
     }
 
-    public function testGetAbsoluteFilePath() {
+    public function testGetAbsoluteFilePath()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';
 
@@ -44,7 +47,8 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetAbsoluteUploadedFileFilepath() {
+    public function testGetAbsoluteUploadedFileFilepath()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '';
 
@@ -59,7 +63,8 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetRelativeUploadedFileFilepath() {
+    public function testGetRelativeUploadedFileFilepath()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData';
         $uploadedFileUrlPrefix = '';
 
@@ -74,7 +79,8 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testGetUploadedFileUrl() {
+    public function testGetUploadedFileUrl()
+    {
         $uploadedFileDir = __DIR__ . '/UploadedFileLocatorData/';
         $uploadedFileUrlPrefix = '/assets/';
 

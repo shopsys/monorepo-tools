@@ -11,7 +11,8 @@ class VatService
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function create(VatData $vatData) {
+    public function create(VatData $vatData)
+    {
         return new Vat($vatData);
     }
 
@@ -20,7 +21,8 @@ class VatService
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function edit(Vat $vat, VatData $vatData) {
+    public function edit(Vat $vat, VatData $vatData)
+    {
         $vat->edit($vatData);
 
         return $vat;
@@ -32,7 +34,8 @@ class VatService
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $newVat
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function getNewDefaultVat(Vat $defaultVat, Vat $vatToDelete, Vat $newVat) {
+    public function getNewDefaultVat(Vat $defaultVat, Vat $vatToDelete, Vat $newVat)
+    {
         if ($defaultVat->getId() === $vatToDelete->getId()) {
             return $newVat;
         }

@@ -14,7 +14,8 @@ class DomainHelper extends Module
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _before(TestInterface $test) {
+    public function _before(TestInterface $test)
+    {
     // @codingStandardsIgnoreEnd
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */

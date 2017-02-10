@@ -39,7 +39,8 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $brandFacade = $this->get(BrandFacade::class);
         /* @var $brandFacade \Shopsys\ShopBundle\Model\Product\Brand\BrandFacade */
 
@@ -59,7 +60,8 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @return string[]
      */
-    private function getBrandNamesIndexedByBrandConstants() {
+    private function getBrandNamesIndexedByBrandConstants()
+    {
         return [
             self::APPLE => 'Apple',
             self::CANON => 'Canon',
@@ -91,7 +93,8 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             SettingValueDataFixture::class,
         ];

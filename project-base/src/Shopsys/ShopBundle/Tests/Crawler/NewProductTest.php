@@ -11,14 +11,16 @@ use Symfony\Component\DomCrawler\Form;
 
 class NewProductTest extends FunctionalTestCase
 {
-    public function createOrEditProductProvider() {
+    public function createOrEditProductProvider()
+    {
         return [['admin/product/new/'], ['admin/product/edit/1']];
     }
 
     /**
      * @dataProvider createOrEditProductProvider
      */
-    public function testCreateOrEditProduct($relativeUrl) {
+    public function testCreateOrEditProduct($relativeUrl)
+    {
         $client1 = $this->getClient(false, 'admin', 'admin123');
         $crawler = $client1->request('GET', $relativeUrl);
 
@@ -49,7 +51,8 @@ class NewProductTest extends FunctionalTestCase
     /**
      * @param \Symfony\Component\DomCrawler\Form $form
      */
-    private function fillForm(Form $form) {
+    private function fillForm(Form $form)
+    {
         $form['product_edit_form[productData][name][cs]'] = 'testProduct';
         $form['product_edit_form[productData][catnum]'] = '123456';
         $form['product_edit_form[productData][partno]'] = '123456';
@@ -68,7 +71,8 @@ class NewProductTest extends FunctionalTestCase
      * @param \Symfony\Component\DomCrawler\Form $form
      * @param string $csrfToken
      */
-    private function setFormCsrfToken(Form $form, $csrfToken) {
+    private function setFormCsrfToken(Form $form, $csrfToken)
+    {
         $form['product_edit_form[_token]'] = $csrfToken;
     }
 }

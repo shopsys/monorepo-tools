@@ -19,7 +19,8 @@ class TopCategoryRepository
      */
     private $categoryRepository;
 
-    public function __construct(EntityManager $entityManager, CategoryRepository $categoryRepository) {
+    public function __construct(EntityManager $entityManager, CategoryRepository $categoryRepository)
+    {
         $this->em = $entityManager;
         $this->categoryRepository = $categoryRepository;
     }
@@ -27,7 +28,8 @@ class TopCategoryRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getTopCategoryRepository() {
+    private function getTopCategoryRepository()
+    {
         return $this->em->getRepository(TopCategory::class);
     }
 
@@ -35,7 +37,8 @@ class TopCategoryRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategory[]
      */
-    public function getAll($domainId) {
+    public function getAll($domainId)
+    {
         return $this->getTopCategoryRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
     }
 }

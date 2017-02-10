@@ -10,7 +10,8 @@ class RemoveWhitespacesTransformer implements DataTransformerInterface
      * @param string|null $value
      * @return string|null
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         return $value;
     }
 
@@ -18,7 +19,8 @@ class RemoveWhitespacesTransformer implements DataTransformerInterface
      * @param string|null $value
      * @return string|null
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         return $value === null ? null : preg_replace('/\s/', '', $value);
     }
 }

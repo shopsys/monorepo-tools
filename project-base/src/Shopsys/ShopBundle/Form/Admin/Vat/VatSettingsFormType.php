@@ -37,7 +37,8 @@ class VatSettingsFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'vat_settings_form';
     }
 
@@ -45,7 +46,8 @@ class VatSettingsFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $roundingTypesLabels = $this->getRoundingTypesLabels();
 
         $roundingTypesChoices = [];
@@ -68,7 +70,8 @@ class VatSettingsFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);
@@ -77,7 +80,8 @@ class VatSettingsFormType extends AbstractType
     /**
      * @return array
      */
-    private function getRoundingTypesLabels() {
+    private function getRoundingTypesLabels()
+    {
         return [
             PricingSetting::ROUNDING_TYPE_HUNDREDTHS => t('To hundredths (cents)'),
             PricingSetting::ROUNDING_TYPE_FIFTIES => t('To fifty hundredths (halfs)'),

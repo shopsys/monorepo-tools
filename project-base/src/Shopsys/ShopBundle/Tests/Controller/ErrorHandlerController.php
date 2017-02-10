@@ -11,7 +11,8 @@ class ErrorHandlerController extends FrontBaseController
     /**
      * @Route("/error-handler/notice")
      */
-    public function noticeAction() {
+    public function noticeAction()
+    {
         $undefined[42];
 
         return new Response('');

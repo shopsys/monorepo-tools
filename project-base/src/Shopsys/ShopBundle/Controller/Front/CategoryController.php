@@ -54,7 +54,8 @@ class CategoryController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function panelAction(Request $request) {
+    public function panelAction(Request $request)
+    {
         $categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
             $this->categoryFacade->getRootCategory(),
             $this->domain->getCurrentDomainConfig()
@@ -81,7 +82,8 @@ class CategoryController extends FrontBaseController
     /**
      * @param int $parentCategoryId
      */
-    public function branchAction($parentCategoryId) {
+    public function branchAction($parentCategoryId)
+    {
         $parentCategory = $this->categoryFacade->getById($parentCategoryId);
 
         $categoryDetails = $this->categoryFacade->getVisibleLazyLoadedCategoryDetailsForParent(
@@ -97,7 +99,8 @@ class CategoryController extends FrontBaseController
         ]);
     }
 
-    public function topAction() {
+    public function topAction()
+    {
         return $this->render('@ShopsysShop/Front/Content/Category/top.html.twig', [
             'categories' => $this->topCategoryFacade->getCategoriesForAll($this->domain->getId()),
         ]);
@@ -107,7 +110,8 @@ class CategoryController extends FrontBaseController
      * @param \Shopsys\ShopBundle\Model\Category\Category[] $categories
      * @param bool $showProductsCountByCategory
      */
-    public function categoryListAction(array $categories, $showProductsCountByCategory = true) {
+    public function categoryListAction(array $categories, $showProductsCountByCategory = true)
+    {
         $pricingGroup = $this->currentCustomer->getPricingGroup();
         $domainId = $this->domain->getId();
         $countOfProductsByCategoryId = [];

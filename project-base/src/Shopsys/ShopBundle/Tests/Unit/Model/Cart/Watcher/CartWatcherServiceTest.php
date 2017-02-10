@@ -20,7 +20,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartWatcherServiceTest extends FunctionalTestCase
 {
-    public function testGetModifiedPriceItemsAndUpdatePrices() {
+    public function testGetModifiedPriceItemsAndUpdatePrices()
+    {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $vat = new Vat(new VatData('vat', 21));
@@ -57,7 +58,8 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $this->assertEmpty($modifiedItems3);
     }
 
-    public function testGetNotListableItemsWithItemWithoutProduct() {
+    public function testGetNotListableItemsWithItemWithoutProduct()
+    {
         $cartItemMock = $this->getMockBuilder(CartItem::class)
             ->disableOriginalConstructor()
             ->setMethods(null)
@@ -83,7 +85,8 @@ class CartWatcherServiceTest extends FunctionalTestCase
         $this->assertCount(1, $notListableItems);
     }
 
-    public function testGetNotListableItemsWithVisibleButNotSellableProduct() {
+    public function testGetNotListableItemsWithVisibleButNotSellableProduct()
+    {
         $productData = new ProductData();
         $productData->name = [];
         $productData->price = 100;

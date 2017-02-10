@@ -20,7 +20,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
         $referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
@@ -54,7 +55,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    private function createProduct($referenceName, ProductEditData $productEditData) {
+    private function createProduct($referenceName, ProductEditData $productEditData)
+    {
         $productFacade = $this->get(ProductFacade::class);
         /* @var $productFacade \Shopsys\ShopBundle\Model\Product\ProductFacade */
 
@@ -69,7 +71,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\ShopBundle\Model\Product\Product[catnum] $productsByCatnum
      * @param int $productNo
      */
-    private function createVariants(array $productsByCatnum, $productNo) {
+    private function createVariants(array $productsByCatnum, $productNo)
+    {
         $loaderService = $this->get(ProductDataFixtureLoader::class);
         /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
         $productVariantFacade = $this->get(ProductVariantFacade::class);
@@ -98,7 +101,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return ProductDataFixtureReferenceInjector::getDependenciesForFirstDomain();
     }
 }

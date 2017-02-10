@@ -55,7 +55,8 @@ class CronConfigLoader
      * @param string $filename
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    public function loadCronModuleConfigsFromYaml($filename) {
+    public function loadCronModuleConfigsFromYaml($filename)
+    {
         if (!$this->filesystem->exists($filename)) {
             throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException(
                 'File ' . $filename . ' does not exist'
@@ -74,7 +75,8 @@ class CronConfigLoader
      * @param array $processedConfig
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    private function loadCronModuleConfigsFromArray($processedConfig) {
+    private function loadCronModuleConfigsFromArray($processedConfig)
+    {
         $cronModuleConfigs = [];
 
         foreach ($processedConfig as $cronModuleConfigArray) {
@@ -88,7 +90,8 @@ class CronConfigLoader
      * @param array $cronModuleConfigArray
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig
      */
-    private function processCronModuleConfigArray(array $cronModuleConfigArray) {
+    private function processCronModuleConfigArray(array $cronModuleConfigArray)
+    {
         $moduleId = $cronModuleConfigArray[CronConfigDefinition::CONFIG_SERVICE];
         $timeHours = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_HOURS];
         $timeMinutes = $cronModuleConfigArray[CronConfigDefinition::CONFIG_TIME][CronConfigDefinition::CONFIG_TIME_MINUTES];

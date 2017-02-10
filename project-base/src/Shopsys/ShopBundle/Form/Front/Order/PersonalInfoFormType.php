@@ -28,7 +28,8 @@ class PersonalInfoFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function __construct(array $countries) {
+    public function __construct(array $countries)
+    {
         $this->countries = $countries;
     }
 
@@ -37,7 +38,8 @@ class PersonalInfoFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('firstName', FormType::TEXT, [
                 'constraints' => [
@@ -252,14 +254,16 @@ class PersonalInfoFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'order_personal_info_form';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => FrontOrderData::class,
             'attr' => ['novalidate' => 'novalidate'],

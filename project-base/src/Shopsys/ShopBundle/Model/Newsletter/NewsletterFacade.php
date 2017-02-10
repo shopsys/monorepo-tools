@@ -29,7 +29,8 @@ class NewsletterFacade
     /**
      * @param string $email
      */
-    public function addSubscribedEmail($email) {
+    public function addSubscribedEmail($email)
+    {
         if (!$this->newsletterRepository->existsSubscribedEmail($email)) {
             $newsletterSubscriber = new NewsletterSubscriber($email);
             $this->em->persist($newsletterSubscriber);
@@ -40,7 +41,8 @@ class NewsletterFacade
     /**
      * @return \Doctrine\ORM\Internal\Hydration\IterableResult|string[][0]['email']
      */
-    public function getAllEmailsDataIterator() {
+    public function getAllEmailsDataIterator()
+    {
         return $this->newsletterRepository->getAllEmailsDataIterator();
     }
 }

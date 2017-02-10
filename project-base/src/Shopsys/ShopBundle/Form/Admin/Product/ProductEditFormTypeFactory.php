@@ -78,7 +78,8 @@ class ProductEditFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
      * @return \Shopsys\ShopBundle\Form\Admin\Product\ProductFormType
      */
-    public function create(Product $product = null) {
+    public function create(Product $product = null)
+    {
         if ($product !== null) {
             $images = $this->imageFacade->getImagesByEntityIndexedById($product, null);
         } else {

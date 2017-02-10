@@ -105,7 +105,8 @@ class ProductEditFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'product_edit_form';
     }
 
@@ -114,7 +115,8 @@ class ProductEditFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $seoTitlesOptionsByDomainId = [];
         $seoMetaDescriptionsOptionsByDomainId = [];
         foreach ($this->domains as $domainConfig) {
@@ -288,7 +290,8 @@ class ProductEditFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => ProductEditData::class,
             'attr' => ['novalidate' => 'novalidate'],
@@ -311,7 +314,8 @@ class ProductEditFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    private function getTitlePlaceholder(DomainConfig $domainConfig) {
+    private function getTitlePlaceholder(DomainConfig $domainConfig)
+    {
         if ($this->product === null) {
             return '';
         } else {
@@ -323,7 +327,8 @@ class ProductEditFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string
      */
-    private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {
+    private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig)
+    {
         return $this->metaDescriptionsIndexedByDomainId[$domainConfig->getId()];
     }
 
@@ -331,7 +336,8 @@ class ProductEditFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
+    private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
+    {
         if ($product->isMainVariant()) {
             $builder->get('manualInputPrices')->setDisabled(true);
         }

@@ -32,7 +32,8 @@ class ConfirmDeleteResponseFactory
      * @param mixed $entityId
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createDeleteResponse($message, $route, $entityId) {
+    public function createDeleteResponse($message, $route, $entityId)
+    {
         return $this->templating->renderResponse('@ShopsysShop/Admin/Content/ConfirmDelete/directDelete.html.twig', [
             'message' => $message,
             'route' => $route,
@@ -50,7 +51,8 @@ class ConfirmDeleteResponseFactory
      * @param \Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface $remainingEntitiesChoiceList
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createSetNewAndDeleteResponse($message, $route, $entityId, ChoiceListInterface $remainingEntitiesChoiceList) {
+    public function createSetNewAndDeleteResponse($message, $route, $entityId, ChoiceListInterface $remainingEntitiesChoiceList)
+    {
         return $this->templating->renderResponse('@ShopsysShop/Admin/Content/ConfirmDelete/setNewAndDelete.html.twig', [
             'message' => $message,
             'route' => $route,

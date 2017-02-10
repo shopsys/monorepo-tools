@@ -24,14 +24,16 @@ class BillingAddressFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function __construct(array $countries) {
+    public function __construct(array $countries)
+    {
         $this->countries = $countries;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'billing_address_form';
     }
 
@@ -40,7 +42,8 @@ class BillingAddressFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('telephone', FormType::TEXT, [
                 'required' => false,
@@ -111,7 +114,8 @@ class BillingAddressFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => BillingAddressData::class,
             'attr' => ['novalidate' => 'novalidate'],

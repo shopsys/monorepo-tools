@@ -19,7 +19,8 @@ class NotInArray extends Constraint
      */
     public $array = [];
 
-    public function getRequiredOptions() {
+    public function getRequiredOptions()
+    {
         return [
             'array',
         ];

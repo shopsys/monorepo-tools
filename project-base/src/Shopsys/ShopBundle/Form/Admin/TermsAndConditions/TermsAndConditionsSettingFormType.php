@@ -18,14 +18,16 @@ class TermsAndConditionsSettingFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Article\Article[] $articles
      */
-    public function __construct(array $articles) {
+    public function __construct(array $articles)
+    {
         $this->articles = $articles;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'terms_and_conditions_setting_form';
     }
 
@@ -33,7 +35,8 @@ class TermsAndConditionsSettingFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
             $builder
                 ->add('termsAndConditionsArticle', FormType::CHOICE, [
                     'required' => false,
@@ -43,7 +46,8 @@ class TermsAndConditionsSettingFormType extends AbstractType
                 ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

@@ -22,7 +22,8 @@ class Bootstrap
     private $environment;
     private $console;
 
-    public function __construct($console = false, $environment = null) {
+    public function __construct($console = false, $environment = null)
+    {
         if ($environment === null) {
             $this->environment = Environment::getEnvironment($console);
         } else {
@@ -31,7 +32,8 @@ class Bootstrap
         $this->console = (bool)$console;
     }
 
-    public function run() {
+    public function run()
+    {
         $this->configurePhp();
 
         if (Environment::isEnvironmentDebug($this->environment)) {
@@ -59,12 +61,14 @@ class Bootstrap
         }
     }
 
-    private function configurePhp() {
+    private function configurePhp()
+    {
         error_reporting(E_ALL);
         ini_set('display_errors', 0);
     }
 
-    private function initDoctrine() {
+    private function initDoctrine()
+    {
         if ($this->environment === Environment::ENVIRONMENT_DEVELOPMENT) {
             $dirs = array(__DIR__ . '/../vendor/doctrine/orm/lib/');
             \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);

@@ -9,28 +9,32 @@ class DummyMailType implements MailTypeInterface
     /**
      * @return string[]
      */
-    public function getBodyVariables() {
+    public function getBodyVariables()
+    {
         return [];
     }
 
     /**
      * @return string[]
      */
-    public function getSubjectVariables() {
+    public function getSubjectVariables()
+    {
         return [];
     }
 
     /**
      * @return string[]
      */
-    public function getRequiredBodyVariables() {
+    public function getRequiredBodyVariables()
+    {
         return [];
     }
 
     /**
      * @return string[]
      */
-    public function getRequiredSubjectVariables() {
+    public function getRequiredSubjectVariables()
+    {
         return [];
     }
 }

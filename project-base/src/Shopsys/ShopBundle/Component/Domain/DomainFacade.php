@@ -61,7 +61,8 @@ class DomainFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
      */
-    public function getDomainConfigsByCurrency(Currency $currency) {
+    public function getDomainConfigsByCurrency(Currency $currency)
+    {
         $domainConfigs = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainCurrencyId = $this->pricingSetting->getDomainDefaultCurrencyIdByDomainId($domainConfig->getId());
@@ -77,7 +78,8 @@ class DomainFacade
      * @param int $domainId
      * @param string $iconName
      */
-    public function editIcon($domainId, $iconName) {
+    public function editIcon($domainId, $iconName)
+    {
         $temporaryFilepath = $this->fileUpload->getTemporaryFilePath($iconName);
         $this->domainService->convertToDomainIconFormatAndSave($domainId, $temporaryFilepath, $this->domainImagesDirectory);
     }
@@ -86,7 +88,8 @@ class DomainFacade
      * @param int $domainId
      * @return bool
      */
-    public function existsDomainIcon($domainId) {
+    public function existsDomainIcon($domainId)
+    {
         return $this->filesystem->exists($this->domainImagesDirectory . '/' . $domainId . '.png');
     }
 }

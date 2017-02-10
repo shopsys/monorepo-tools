@@ -12,7 +12,8 @@ class ProductAccessoryFacade
      */
     private $productAccessoryRepository;
 
-    public function __construct(ProductAccessoryRepository $productAccessoryRepository) {
+    public function __construct(ProductAccessoryRepository $productAccessoryRepository)
+    {
         $this->productAccessoryRepository = $productAccessoryRepository;
     }
 
@@ -23,7 +24,8 @@ class ProductAccessoryFacade
      * @param int $limit
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
+    public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit)
+    {
         return $this->productAccessoryRepository->getTopOfferedAccessories($product, $domainId, $pricingGroup, $limit);
     }
 }

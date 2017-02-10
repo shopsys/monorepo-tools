@@ -39,7 +39,8 @@ class TermsAndConditionsController extends AdminBaseController
     /**
      * @Route("/terms-and-conditions/setting/")
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
         $termsAndConditionsArticle = $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId($selectedDomainId);
 

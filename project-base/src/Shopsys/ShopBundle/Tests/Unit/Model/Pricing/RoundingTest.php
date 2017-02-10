@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class RoundingTest extends PHPUnit_Framework_TestCase
 {
-    public function roundingProvider() {
+    public function roundingProvider()
+    {
         return [
             [
                 'unroundedPrice' => '0',
@@ -73,7 +74,8 @@ class RoundingTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round($expectedAsVatAmount, 6), round($rounding->roundVatAmount($unroundedPrice), 6));
     }
 
-    public function roundingPriceWithVatProvider() {
+    public function roundingPriceWithVatProvider()
+    {
         return [
             [
                 'roundingType' => PricingSetting::ROUNDING_TYPE_INTEGER,

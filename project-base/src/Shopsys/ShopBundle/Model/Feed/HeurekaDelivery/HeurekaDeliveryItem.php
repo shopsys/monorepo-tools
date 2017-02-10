@@ -20,7 +20,8 @@ class HeurekaDeliveryItem implements FeedItemInterface
      * @param int $itemId
      * @param int $stockQuantity
      */
-    public function __construct($itemId, $stockQuantity) {
+    public function __construct($itemId, $stockQuantity)
+    {
         $this->itemId = $itemId;
         $this->stockQuantity = $stockQuantity;
     }
@@ -28,14 +29,16 @@ class HeurekaDeliveryItem implements FeedItemInterface
     /**
      * @return int
      */
-    public function getItemId() {
+    public function getItemId()
+    {
         return $this->itemId;
     }
 
     /**
      * @return int
      */
-    public function getStockQuantity() {
+    public function getStockQuantity()
+    {
         return $this->stockQuantity;
     }
 }

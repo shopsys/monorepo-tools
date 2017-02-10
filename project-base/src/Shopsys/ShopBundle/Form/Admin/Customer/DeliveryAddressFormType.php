@@ -24,14 +24,16 @@ class DeliveryAddressFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function __construct(array $countries) {
+    public function __construct(array $countries)
+    {
         $this->countries = $countries;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'delivery_address_form';
     }
 
@@ -40,7 +42,8 @@ class DeliveryAddressFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('addressFilled', FormType::CHECKBOX, ['required' => false])
             ->add('companyName', FormType::TEXT, [
@@ -138,7 +141,8 @@ class DeliveryAddressFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => DeliveryAddressData::class,
             'attr' => ['novalidate' => 'novalidate'],

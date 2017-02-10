@@ -62,7 +62,8 @@ class AdministratorLoginFacade
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      * @return string
      */
-    public function generateMultidomainLoginTokenWithExpiration(Administrator $administrator) {
+    public function generateMultidomainLoginTokenWithExpiration(Administrator $administrator)
+    {
         $multidomainLoginToken = $this->hashGenerator->generateHash(self::MULTIDOMAIN_LOGIN_TOKEN_LENGTH);
         $multidomainLoginTokenExpirationDateTime = new DateTime('+' . self::MULTIDOMAIN_LOGIN_TOKEN_VALID_SECONDS . 'seconds');
         $administrator->setMultidomainLoginTokenWithExpiration($multidomainLoginToken, $multidomainLoginTokenExpirationDateTime);
@@ -75,7 +76,8 @@ class AdministratorLoginFacade
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $multidomainLoginToken
      */
-    public function loginByMultidomainToken(Request $request, $multidomainLoginToken) {
+    public function loginByMultidomainToken(Request $request, $multidomainLoginToken)
+    {
         $administrator = $this->administratorRepository->getByValidMultidomainLoginToken($multidomainLoginToken);
         $administrator->setMultidomainLogin(true);
         $password = '';
@@ -87,7 +89,8 @@ class AdministratorLoginFacade
         $this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
     }
 
-    public function invalidateCurrentAdministratorLoginToken() {
+    public function invalidateCurrentAdministratorLoginToken()
+    {
         $token = $this->tokenStorage->getToken();
         if ($token !== null) {
             $currentAdministrator = $token->getUser();

@@ -27,7 +27,8 @@ class RegistrationMailService
      */
     private $domainRouterFactory;
 
-    public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory) {
+    public function __construct(Setting $setting, DomainRouterFactory $domainRouterFactory)
+    {
         $this->setting = $setting;
         $this->domainRouterFactory = $domainRouterFactory;
     }
@@ -37,7 +38,8 @@ class RegistrationMailService
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
      * @return \Shopsys\ShopBundle\Model\Mail\MessageData
      */
-    public function getMessageDataByUser(User $user, MailTemplate $mailTemplate) {
+    public function getMessageDataByUser(User $user, MailTemplate $mailTemplate)
+    {
         return new MessageData(
             $user->getEmail(),
             $mailTemplate->getBccEmail(),
@@ -53,7 +55,8 @@ class RegistrationMailService
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return array
      */
-    private function getVariablesReplacements(User $user) {
+    private function getVariablesReplacements(User $user)
+    {
         $router = $this->domainRouterFactory->getRouter($user->getDomainId());
 
         return [
@@ -68,7 +71,8 @@ class RegistrationMailService
     /**
      * @return array
      */
-    public function getTemplateVariables() {
+    public function getTemplateVariables()
+    {
         return [
             self::VARIABLE_FIRST_NAME,
             self::VARIABLE_LAST_NAME,

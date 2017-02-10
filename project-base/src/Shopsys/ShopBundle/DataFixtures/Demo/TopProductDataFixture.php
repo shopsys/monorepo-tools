@@ -14,7 +14,8 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $topProductReferenceNames = [
             ProductDataFixture::PRODUCT_PREFIX . '1',
             ProductDataFixture::PRODUCT_PREFIX . '17',
@@ -27,7 +28,8 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     /**
      * @param string[] $productReferenceNames
      */
-    private function createTopProducts(array $productReferenceNames) {
+    private function createTopProducts(array $productReferenceNames)
+    {
         $topProductFacade = $this->get(TopProductFacade::class);
         /* @var $topProductFacade \Shopsys\ShopBundle\Model\Product\TopProduct\TopProductFacade */
 
@@ -42,7 +44,8 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             ProductDataFixture::class,
         ];

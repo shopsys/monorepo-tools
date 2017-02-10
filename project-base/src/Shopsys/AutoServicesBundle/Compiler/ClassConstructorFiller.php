@@ -14,7 +14,8 @@ class ClassConstructorFiller
      */
     private $parameterProcessor;
 
-    public function __construct(ParameterProcessor $parameterProcessor) {
+    public function __construct(ParameterProcessor $parameterProcessor)
+    {
         $this->parameterProcessor = $parameterProcessor;
         $this->parameterProcessor->injectClassConstructorFilter($this);
     }
@@ -25,7 +26,8 @@ class ClassConstructorFiller
      * @param \Symfony\Component\DependencyInjection\Definition $definition
      * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
      */
-    public function autowireParams($constructor, $serviceId, Definition $definition, ContainerClassList $containerClassList) {
+    public function autowireParams($constructor, $serviceId, Definition $definition, ContainerClassList $containerClassList)
+    {
         $explicitlyDefinedArguments = $definition->getArguments();
         $allArguments = [];
 

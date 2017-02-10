@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class MultidomainEntityDataCreatorTest extends DatabaseTestCase
 {
-    public function testCopyAllMultidomainDataForNewDomainCopiesTestRow() {
+    public function testCopyAllMultidomainDataForNewDomainCopiesTestRow()
+    {
         $em = $this->getContainer()->get(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -66,7 +67,8 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
         $this->assertSame($expectedResults, $results);
     }
 
-    public function testCopyAllMultidomainDataForNewDomainWithDomainIdDoesNotThrowDriverException() {
+    public function testCopyAllMultidomainDataForNewDomainWithDomainIdDoesNotThrowDriverException()
+    {
         $em = $this->getContainer()->get(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
 

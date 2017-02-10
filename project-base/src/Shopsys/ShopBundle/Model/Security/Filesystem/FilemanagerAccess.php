@@ -45,7 +45,8 @@ class FilemanagerAccess
      * @param $volume
      * @return bool|null
      */
-    public function isPathAccessible($attr, $path, $data, $volume) {
+    public function isPathAccessible($attr, $path, $data, $volume)
+    {
         if (!$this->filepathComparator->isPathWithinDirectory($path, $this->filemanagerUploadDir)) {
             return false;
         }
@@ -56,11 +57,13 @@ class FilemanagerAccess
     /**
      * @param \Shopsys\ShopBundle\Model\Security\Filesystem\FilemanagerAccess $filemanagerAccess
      */
-    public static function injectSelf(FilemanagerAccess $filemanagerAccess) {
+    public static function injectSelf(FilemanagerAccess $filemanagerAccess)
+    {
         self::$self = $filemanagerAccess;
     }
 
-    public static function detachSelf() {
+    public static function detachSelf()
+    {
         self::$self = null;
     }
 
@@ -72,7 +75,8 @@ class FilemanagerAccess
      * @param $volume
      * @return bool|null
      */
-    public static function isPathAccessibleStatic($attr, $path, $data, $volume) {
+    public static function isPathAccessibleStatic($attr, $path, $data, $volume)
+    {
         if (self::$self === null) {
             throw new \Shopsys\ShopBundle\Model\Security\Filesystem\Exception\InstanceNotInjectedException();
         }

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Translation\PhpFileExtractorFactory;
 
 class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testExtractController() {
+    public function testExtractController()
+    {
         $fileName = 'Controller.php';
 
         $catalogue = $this->extract(__DIR__ . '/' . $fileName);
@@ -52,12 +53,14 @@ class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $catalogue);
     }
 
-    private function getExtractor() {
+    private function getExtractor()
+    {
         $phpFileExtractorFactory = new PhpFileExtractorFactory($this->getDocParser());
         return $phpFileExtractorFactory->create();
     }
 
-    private function extract($filename) {
+    private function extract($filename)
+    {
         if (!is_file($filename)) {
             throw new \RuntimeException(sprintf('The file "%s" does not exist.', $filename));
         }
@@ -75,7 +78,8 @@ class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
         return $catalogue;
     }
 
-    private function getDocParser() {
+    private function getDocParser()
+    {
         $docParser = new DocParser();
         $docParser->setImports([
             'desc' => 'JMS\TranslationBundle\Annotation\Desc',

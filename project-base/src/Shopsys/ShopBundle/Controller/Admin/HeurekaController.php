@@ -28,7 +28,8 @@ class HeurekaController extends AdminBaseController
      */
     private $heurekaFacade;
 
-    public function __construct(SelectedDomain $selectedDomain, HeurekaSetting $heurekaSetting, HeurekaFacade $heurekaFacade) {
+    public function __construct(SelectedDomain $selectedDomain, HeurekaSetting $heurekaSetting, HeurekaFacade $heurekaFacade)
+    {
         $this->selectedDomain = $selectedDomain;
         $this->heurekaSetting = $heurekaSetting;
         $this->heurekaFacade = $heurekaFacade;
@@ -38,7 +39,8 @@ class HeurekaController extends AdminBaseController
      * @Route("/heureka/setting/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
         $selectedDomainConfig = $this->selectedDomain->getCurrentSelectedDomain();
         $locale = $selectedDomainConfig->getLocale();
@@ -76,7 +78,8 @@ class HeurekaController extends AdminBaseController
         ]);
     }
 
-    public function embedWidgetAction() {
+    public function embedWidgetAction()
+    {
         $domainId = $this->selectedDomain->getId();
 
         if (!$this->heurekaFacade->isHeurekaWidgetActivated($domainId)) {

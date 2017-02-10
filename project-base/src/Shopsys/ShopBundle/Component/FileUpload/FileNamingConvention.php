@@ -13,7 +13,8 @@ class FileNamingConvention
      * @param int|null $entityId
      * @return string
      */
-    public function getFilenameByNamingConvention($namingConventionType, $originalFilename, $entityId = null) {
+    public function getFilenameByNamingConvention($namingConventionType, $originalFilename, $entityId = null)
+    {
         if ($namingConventionType === self::TYPE_ID && is_int($entityId)) {
             return $entityId . '.' . pathinfo($originalFilename, PATHINFO_EXTENSION);
         } elseif ($namingConventionType === self::TYPE_ORIGINAL_NAME) {

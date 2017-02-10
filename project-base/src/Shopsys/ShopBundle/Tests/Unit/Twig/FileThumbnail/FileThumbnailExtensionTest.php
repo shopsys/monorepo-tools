@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Twig\FileThumbnail\FileThumbnailExtension;
 
 class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage() {
+    public function testGetFileThumbnailInfoByTemporaryFilenameBrokenImage()
+    {
         $temporaryFilename = 'filename.jpg';
 
         $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilepath'], [], '', false);
@@ -27,7 +28,8 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
         $this->assertNull($fileThumbnailInfo->getImageUri());
     }
 
-    public function testGetFileThumbnailInfoByTemporaryFilenameImage() {
+    public function testGetFileThumbnailInfoByTemporaryFilenameImage()
+    {
         $temporaryFilename = 'filename.jpg';
         $encodedData = 'encodedData';
 
@@ -48,7 +50,8 @@ class FileThumbnailExtensionTest extends PHPUnit_Framework_TestCase
         $this->assertSame($encodedData, $fileThumbnailInfo->getImageUri());
     }
 
-    public function testGetFileThumbnailInfoByTemporaryFilenameImageDocument() {
+    public function testGetFileThumbnailInfoByTemporaryFilenameImageDocument()
+    {
         $temporaryFilename = 'filename.doc';
 
         $fileUploadMock = $this->getMock(FileUpload::class, ['getTemporaryFilepath'], [], '', false);

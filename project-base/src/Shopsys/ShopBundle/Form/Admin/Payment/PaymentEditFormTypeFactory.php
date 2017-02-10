@@ -17,7 +17,8 @@ class PaymentEditFormTypeFactory
      */
     private $currencyFacade;
 
-    public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, CurrencyFacade $currencyFacade) {
+    public function __construct(PaymentFormTypeFactory $paymentFormTypeFactory, CurrencyFacade $currencyFacade)
+    {
         $this->paymentFormTypeFactory = $paymentFormTypeFactory;
         $this->currencyFacade = $currencyFacade;
     }
@@ -25,7 +26,8 @@ class PaymentEditFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Payment\PaymentFormType
      */
-    public function create() {
+    public function create()
+    {
         $currencies = $this->currencyFacade->getAll();
 
         return new PaymentEditFormType($this->paymentFormTypeFactory, $currencies);

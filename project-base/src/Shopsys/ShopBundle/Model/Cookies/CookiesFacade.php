@@ -63,7 +63,8 @@ class CookiesFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Article\Article|null
      */
-    public function findCookiesArticleByDomainId($domainId) {
+    public function findCookiesArticleByDomainId($domainId)
+    {
         $cookiesArticleId = $this->setting->getForDomain(Setting::COOKIES_ARTICLE_ID, $domainId);
 
         if ($cookiesArticleId !== null) {
@@ -79,7 +80,8 @@ class CookiesFacade
      * @param \Shopsys\ShopBundle\Model\Article\Article|null $cookiesArticle
      * @param int $domainId
      */
-    public function setCookiesArticleOnDomain($cookiesArticle, $domainId) {
+    public function setCookiesArticleOnDomain($cookiesArticle, $domainId)
+    {
         $cookiesArticleId = null;
         if ($cookiesArticle !== null) {
             $cookiesArticleId = $cookiesArticle->getId();
@@ -95,7 +97,8 @@ class CookiesFacade
      * @param \Shopsys\ShopBundle\Model\Article\Article $article
      * @return bool
      */
-    public function isArticleUsedAsCookiesInfo(Article $article) {
+    public function isArticleUsedAsCookiesInfo(Article $article)
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             if ($this->findCookiesArticleByDomainId($domainConfig->getId()) === $article) {
                 return true;
@@ -108,7 +111,8 @@ class CookiesFacade
     /**
      * @return bool
      */
-    public function isCookiesConsentGiven() {
+    public function isCookiesConsentGiven()
+    {
         // Cookie fixed bar overlays some elements in viewport and mouseover fails on these elements in acceptance tests.
         if ($this->environment === Environment::ENVIRONMENT_TEST) {
             return true;

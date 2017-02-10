@@ -14,7 +14,8 @@ class OrderItemFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'order_item_form';
     }
 
@@ -22,7 +23,8 @@ class OrderItemFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::TEXT, [
                 'constraints' => [
@@ -65,7 +67,8 @@ class OrderItemFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => OrderItemData::class,
             'attr' => ['novalidate' => 'novalidate'],

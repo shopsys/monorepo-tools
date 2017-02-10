@@ -16,7 +16,8 @@ class DuplicateEntityNameException extends Exception implements UploadedFileConf
      * @param string $entityName
      * @param \Exception|null $previous
      */
-    public function __construct($entityName, Exception $previous = null) {
+    public function __construct($entityName, Exception $previous = null)
+    {
         $this->entityName = $entityName;
 
         $message = sprintf('UploadedFile entity name "%s" is not unique.', $this->entityName);
@@ -26,7 +27,8 @@ class DuplicateEntityNameException extends Exception implements UploadedFileConf
     /**
      * @return string
      */
-    public function getEntityName() {
+    public function getEntityName()
+    {
         return $this->entityName;
     }
 }

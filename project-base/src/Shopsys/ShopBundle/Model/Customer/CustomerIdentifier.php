@@ -20,7 +20,8 @@ class CustomerIdentifier
      * @param string $cartIdentifier
      * @param \Shopsys\ShopBundle\Model\Customer\User|null $user
      */
-    public function __construct($cartIdentifier, User $user = null) {
+    public function __construct($cartIdentifier, User $user = null)
+    {
         if ($cartIdentifier === '' && $user === null) {
             $message = 'Can not be created empty CustomerIdentifier';
             throw new \Shopsys\ShopBundle\Model\Customer\Exception\EmptyCustomerIdentifierException($message);
@@ -35,21 +36,24 @@ class CustomerIdentifier
     /**
      * @return string
      */
-    public function getCartIdentifier() {
+    public function getCartIdentifier()
+    {
         return $this->cartIdentifier;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function getUser() {
+    public function getUser()
+    {
         return $this->user;
     }
 
     /**
      * @return string
      */
-    public function getObjectHash() {
+    public function getObjectHash()
+    {
         if ($this->user instanceof User) {
             $userId = $this->user->getId();
         } else {

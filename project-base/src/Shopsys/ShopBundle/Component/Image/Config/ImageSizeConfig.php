@@ -30,35 +30,40 @@ class ImageSizeConfig
      * @param int $height
      * @param bool $crop
      */
-    public function __construct($name, $width, $height, $crop) {
+    public function __construct($name, $width, $height, $crop)
+    {
         $this->name = $name;
         $this->width = $width;
         $this->height = $height;
         $this->crop = $crop;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return int
      */
-    public function getWidth() {
+    public function getWidth()
+    {
         return $this->width;
     }
 
     /**
      * @return int
      */
-    public function getHeight() {
+    public function getHeight()
+    {
         return $this->height;
     }
 
     /**
      * @return int
      */
-    public function getCrop() {
+    public function getCrop()
+    {
         return $this->crop;
     }
 }

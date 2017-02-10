@@ -22,14 +22,16 @@ class AutowiringCompilerPass implements CompilerPassInterface
     /**
      * @param \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFiller
      */
-    public function __construct(ClassConstructorFiller $classConstructorFiller) {
+    public function __construct(ClassConstructorFiller $classConstructorFiller)
+    {
         $this->classConstructorFiller = $classConstructorFiller;
     }
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    public function process(ContainerBuilder $containerBuilder) {
+    public function process(ContainerBuilder $containerBuilder)
+    {
         $containerClassListDefinition = $containerBuilder->getDefinition('shopsys.auto_services.container_class_list');
         $containerClassList = $containerBuilder->resolveServices($containerClassListDefinition);
         /* @var $containerClassList \Shopsys\AutoServicesBundle\Compiler\ContainerClassList */
@@ -108,7 +110,8 @@ class AutowiringCompilerPass implements CompilerPassInterface
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    private function replaceDefaultServiceContainer(ContainerBuilder $containerBuilder) {
+    private function replaceDefaultServiceContainer(ContainerBuilder $containerBuilder)
+    {
         foreach ($containerBuilder->getDefinitions() as $serviceId => $definition) {
             if ($serviceId !== 'shopsys.auto_services.auto_container') {
                 $this->replaceDefaultServiceContainerInDefinition($definition);
@@ -119,7 +122,8 @@ class AutowiringCompilerPass implements CompilerPassInterface
     /**
      * @param \Symfony\Component\DependencyInjection\Definition $definition
      */
-    private function replaceDefaultServiceContainerInDefinition(Definition $definition) {
+    private function replaceDefaultServiceContainerInDefinition(Definition $definition)
+    {
         foreach ($definition->getArguments() as $argumentIndex => $argument) {
             if ($argument instanceof Reference) {
                 $argumentId = (string)$argument;
@@ -161,7 +165,8 @@ class AutowiringCompilerPass implements CompilerPassInterface
      * @param \ReflectionClass $reflectionClass
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    private function watchServiceClassForChanges(ReflectionClass $reflectionClass, ContainerBuilder $containerBuilder) {
+    private function watchServiceClassForChanges(ReflectionClass $reflectionClass, ContainerBuilder $containerBuilder)
+    {
         do {
             $containerBuilder->addResource(new FileResource($reflectionClass->getFileName()));
         } while ($reflectionClass = $reflectionClass->getParentClass());

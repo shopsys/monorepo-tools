@@ -9,7 +9,8 @@ class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener
     /**
      * @inheritDoc
      */
-    protected function logException(\Exception $exception, $message) {
+    protected function logException(\Exception $exception, $message)
+    {
         if (!$exception instanceof \Shopsys\ShopBundle\Component\Error\Exception\FakeHttpException) {
             parent::logException($exception, $message);
         }

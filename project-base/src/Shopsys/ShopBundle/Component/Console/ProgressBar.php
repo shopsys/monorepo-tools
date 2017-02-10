@@ -24,7 +24,8 @@ class ProgressBar extends BaseProgressBar
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param int $max
      */
-    public function __construct(OutputInterface $output, $max = 0) {
+    public function __construct(OutputInterface $output, $max = 0)
+    {
         parent::__construct($output, $max);
 
         $this->microtimeAtLastDisplay = microtime(true);
@@ -33,7 +34,8 @@ class ProgressBar extends BaseProgressBar
         $this->initializeCustomPlaceholderFormatters();
     }
 
-    private function initializeCustomPlaceholderFormatters() {
+    private function initializeCustomPlaceholderFormatters()
+    {
         $this->setPlaceholderFormatterDefinition('speed', function () {
             $microtimeSinceLastDisplay = microtime(true) - $this->microtimeAtLastDisplay;
             $progressSinceLastDisplay = $this->getProgress() - $this->progressAtLastDisplay;
@@ -78,7 +80,8 @@ class ProgressBar extends BaseProgressBar
         });
     }
 
-    public function display() {
+    public function display()
+    {
         parent::display();
 
         $this->microtimeAtLastDisplay = microtime(true);
@@ -89,7 +92,8 @@ class ProgressBar extends BaseProgressBar
      * @param int $timeInSeconds
      * @return string
      */
-    private function formatTimeHms($timeInSeconds) {
+    private function formatTimeHms($timeInSeconds)
+    {
         return sprintf(
             '%dh %02dm %02ds',
             floor($timeInSeconds / 3600),

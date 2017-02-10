@@ -35,7 +35,8 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
      * @return int
      */
-    protected function createEntityAndGetId($orderStatusData) {
+    protected function createEntityAndGetId($orderStatusData)
+    {
         $orderStatus = $this->orderStatusFacade->create($orderStatusData);
 
         return $orderStatus->getId();
@@ -45,7 +46,8 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
      * @param int $orderStatusId
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData $orderStatusData
      */
-    protected function editEntity($orderStatusId, $orderStatusData) {
+    protected function editEntity($orderStatusId, $orderStatusData)
+    {
         $this->orderStatusFacade->edit($orderStatusId, $orderStatusData);
     }
 
@@ -53,7 +55,8 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
      * @param int $orderStatusId
      * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatusData
      */
-    protected function getFormDataObject($orderStatusId = null) {
+    protected function getFormDataObject($orderStatusId = null)
+    {
         $orderStatusData = new OrderStatusData();
 
         if ($orderStatusId !== null) {
@@ -69,7 +72,8 @@ class OrderStatusInlineEdit extends AbstractGridInlineEdit
      * @param int $rowId
      * @return \Shopsys\ShopBundle\Form\Admin\Order\Status\OrderStatusFormType
      */
-    protected function getFormType($rowId) {
+    protected function getFormType($rowId)
+    {
         return new OrderStatusFormType();
     }
 }

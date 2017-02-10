@@ -14,14 +14,16 @@ class JavascriptExtension extends Twig_Extension
      */
     private $javascriptCompilerService;
 
-    public function __construct(JavascriptCompilerService $javascriptCompilerService) {
+    public function __construct(JavascriptCompilerService $javascriptCompilerService)
+    {
         $this->javascriptCompilerService = $javascriptCompilerService;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('importJavascripts', [$this, 'renderJavascripts'], ['is_safe' => ['html']]),
         ];
@@ -31,7 +33,8 @@ class JavascriptExtension extends Twig_Extension
      * @param string|array $javascripts
      * @return string
      */
-    public function renderJavascripts($javascripts) {
+    public function renderJavascripts($javascripts)
+    {
         $javascriptsArray = Utils::mixedToArray($javascripts);
 
         $javascriptLinks = $this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
@@ -43,7 +46,8 @@ class JavascriptExtension extends Twig_Extension
      * @param array $javascriptLinks
      * @return string
      */
-    private function getHtmlJavascriptImports(array $javascriptLinks) {
+    private function getHtmlJavascriptImports(array $javascriptLinks)
+    {
         $html = '';
         foreach ($javascriptLinks as $javascriptLink) {
             $html .= "\n" . '<script type="text/javascript" src="' . htmlspecialchars($javascriptLink, ENT_QUOTES) . '"></script>';
@@ -55,7 +59,8 @@ class JavascriptExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'javascript_extension';
     }
 }

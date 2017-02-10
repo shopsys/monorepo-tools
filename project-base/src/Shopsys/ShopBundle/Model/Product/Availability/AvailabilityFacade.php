@@ -62,7 +62,8 @@ class AvailabilityFacade
      * @param int $availabilityId
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function getById($availabilityId) {
+    public function getById($availabilityId)
+    {
         return $this->availabilityRepository->getById($availabilityId);
     }
 
@@ -70,7 +71,8 @@ class AvailabilityFacade
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function create(AvailabilityData $availabilityData) {
+    public function create(AvailabilityData $availabilityData)
+    {
         $availability = $this->availabilityService->create($availabilityData);
         $this->em->persist($availability);
         $this->em->flush();
@@ -83,7 +85,8 @@ class AvailabilityFacade
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function edit($availabilityId, AvailabilityData $availabilityData) {
+    public function edit($availabilityId, AvailabilityData $availabilityData)
+    {
         $availability = $this->availabilityRepository->getById($availabilityId);
         $this->availabilityService->edit($availability, $availabilityData);
         $this->em->flush();
@@ -95,7 +98,8 @@ class AvailabilityFacade
      * @param int $availabilityId
      * @param int|null $newAvailabilityId
      */
-    public function deleteById($availabilityId, $newAvailabilityId = null) {
+    public function deleteById($availabilityId, $newAvailabilityId = null)
+    {
         $availability = $this->availabilityRepository->getById($availabilityId);
 
         if ($newAvailabilityId !== null) {
@@ -114,7 +118,8 @@ class AvailabilityFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function getDefaultInStockAvailability() {
+    public function getDefaultInStockAvailability()
+    {
         $availabilityId = $this->setting->get(Setting::DEFAULT_AVAILABILITY_IN_STOCK);
 
         return $this->getById($availabilityId);
@@ -123,7 +128,8 @@ class AvailabilityFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
      */
-    public function setDefaultInStockAvailability(Availability $availability) {
+    public function setDefaultInStockAvailability(Availability $availability)
+    {
         $this->setting->set(Setting::DEFAULT_AVAILABILITY_IN_STOCK, $availability->getId());
         $this->productAvailabilityRecalculationScheduler->scheduleAllProductsForDelayedRecalculation();
     }
@@ -131,7 +137,8 @@ class AvailabilityFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->availabilityRepository->getAll();
     }
 
@@ -139,7 +146,8 @@ class AvailabilityFacade
      * @param int $availabilityId
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
      */
-    public function getAllExceptId($availabilityId) {
+    public function getAllExceptId($availabilityId)
+    {
         return $this->availabilityRepository->getAllExceptId($availabilityId);
     }
 
@@ -147,7 +155,8 @@ class AvailabilityFacade
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
-    public function isAvailabilityUsed(Availability $availability) {
+    public function isAvailabilityUsed(Availability $availability)
+    {
         return $this->availabilityRepository->isAvailabilityUsed($availability);
     }
 
@@ -155,7 +164,8 @@ class AvailabilityFacade
      * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability $availability
      * @return bool
      */
-    public function isAvailabilityDefault(Availability $availability) {
+    public function isAvailabilityDefault(Availability $availability)
+    {
         return $this->getDefaultInStockAvailability() === $availability;
     }
 }

@@ -82,7 +82,8 @@ class ProductPriceRecalculator
     /**
      * @return bool
      */
-    public function runBatchOfScheduledDelayedRecalculations() {
+    public function runBatchOfScheduledDelayedRecalculations()
+    {
         if ($this->productRowsIterator === null) {
             $this->productRowsIterator = $this->productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation();
         }
@@ -103,7 +104,8 @@ class ProductPriceRecalculator
         return true;
     }
 
-    public function runAllScheduledRecalculations() {
+    public function runAllScheduledRecalculations()
+    {
         $this->runImmediateRecalculations();
 
         $this->productRowsIterator = null;
@@ -112,7 +114,8 @@ class ProductPriceRecalculator
         // @codingStandardsIgnoreEnd
     }
 
-    public function runImmediateRecalculations() {
+    public function runImmediateRecalculations()
+    {
         $products = $this->productPriceRecalculationScheduler->getProductsForImmediateRecalculation();
         foreach ($products as $product) {
             $this->recalculateProductPrices($product);
@@ -121,14 +124,16 @@ class ProductPriceRecalculator
         $this->clearCache();
     }
 
-    private function clearCache() {
+    private function clearCache()
+    {
         $this->allPricingGroups = null;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
      */
-    private function getAllPricingGroups() {
+    private function getAllPricingGroups()
+    {
         if ($this->allPricingGroups === null) {
             $this->allPricingGroups = $this->pricingGroupFacade->getAll();
         }
@@ -139,7 +144,8 @@ class ProductPriceRecalculator
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    private function recalculateProductPrices(Product $product) {
+    private function recalculateProductPrices(Product $product)
+    {
         foreach ($this->getAllPricingGroups() as $pricingGroup) {
             try {
                 $price = $this->productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
@@ -157,7 +163,8 @@ class ProductPriceRecalculator
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         if ($event->isMasterRequest()) {
             $this->runImmediateRecalculations();
         }

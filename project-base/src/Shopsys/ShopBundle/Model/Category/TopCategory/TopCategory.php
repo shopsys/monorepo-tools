@@ -40,7 +40,8 @@ class TopCategory
      * @param int $domainId
      * @param int $position
      */
-    public function __construct(Category $category, $domainId, $position) {
+    public function __construct(Category $category, $domainId, $position)
+    {
         $this->category = $category;
         $this->domainId = $domainId;
         $this->position = $position;
@@ -49,7 +50,8 @@ class TopCategory
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 }

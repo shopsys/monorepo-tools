@@ -29,7 +29,8 @@ class TransportEditDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $transportEditData = new TransportEditData();
         $transportEditData->transportData->vat = $this->vatFacade->getDefaultVat();
 
@@ -40,7 +41,8 @@ class TransportEditDataFactory
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
      */
-    public function createFromTransport(Transport $transport) {
+    public function createFromTransport(Transport $transport)
+    {
         $transportEditData = new TransportEditData();
         $transportData = new TransportData();
         $transportData->setFromEntity($transport, $this->transportFacade->getTransportDomainsByTransport($transport));

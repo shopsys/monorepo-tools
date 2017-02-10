@@ -11,7 +11,8 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $feedCategoryLoaderFacade = $this->get(FeedCategoryLoaderFacade::class);
         /* @var $feedCategoryLoaderFacade \Shopsys\ShopBundle\Model\Feed\Category\FeedCategoryLoaderFacade */
 

@@ -38,7 +38,8 @@ class TopProductController extends AdminBaseController
     /**
      * @Route("/product/top-product/list/")
      */
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
         $form = $this->createForm($this->topProductsFormTypeFactory->create());
 
         $domainId = $this->selectedDomain->getId();
@@ -66,7 +67,8 @@ class TopProductController extends AdminBaseController
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    private function getProductsForDomain($domainId) {
+    private function getProductsForDomain($domainId)
+    {
         $topProducts = $this->topProductFacade->getAll($domainId);
         $products = [];
 

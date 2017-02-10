@@ -38,7 +38,8 @@ class TopProductFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Product\TopProduct\TopProduct[]
      */
-    public function getAll($domainId) {
+    public function getAll($domainId)
+    {
         return $this->topProductRepository->getAll($domainId);
     }
 
@@ -47,7 +48,8 @@ class TopProductFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
      */
-    public function getAllOfferedProductDetails($domainId, $pricingGroup) {
+    public function getAllOfferedProductDetails($domainId, $pricingGroup)
+    {
         $products = $this->topProductRepository->getOfferedProductsForTopProductsOnDomain($domainId, $pricingGroup);
         return $this->productDetailFactory->getDetailsForProducts($products);
     }
@@ -56,7 +58,8 @@ class TopProductFacade
      * @param $domainId
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      */
-    public function saveTopProductsForDomain($domainId, array $products) {
+    public function saveTopProductsForDomain($domainId, array $products)
+    {
         $oldTopProducts = $this->topProductRepository->getAll($domainId);
         foreach ($oldTopProducts as $oldTopProduct) {
             $this->em->remove($oldTopProduct);

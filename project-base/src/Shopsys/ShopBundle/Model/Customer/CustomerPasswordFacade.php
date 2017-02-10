@@ -45,7 +45,8 @@ class CustomerPasswordFacade
      * @param string $email
      * @param int $domainId
      */
-    public function resetPassword($email, $domainId) {
+    public function resetPassword($email, $domainId)
+    {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
         $this->customerPasswordService->resetPassword($user);
@@ -59,7 +60,8 @@ class CustomerPasswordFacade
      * @param string|null $hash
      * @return bool
      */
-    public function isResetPasswordHashValid($email, $domainId, $hash) {
+    public function isResetPasswordHashValid($email, $domainId, $hash)
+    {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
         return $this->customerPasswordService->isResetPasswordHashValid($user, $hash);
@@ -72,7 +74,8 @@ class CustomerPasswordFacade
      * @param string $newPassword
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    public function setNewPassword($email, $domainId, $hash, $newPassword) {
+    public function setNewPassword($email, $domainId, $hash, $newPassword)
+    {
         $user = $this->userRepository->getUserByEmailAndDomain($email, $domainId);
 
         $this->customerPasswordService->setNewPassword($user, $hash, $newPassword);

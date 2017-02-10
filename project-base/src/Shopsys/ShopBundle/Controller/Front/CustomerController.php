@@ -62,7 +62,8 @@ class CustomerController extends FrontBaseController
         $this->countryFacade = $countryFacade;
     }
 
-    public function editAction(Request $request) {
+    public function editAction(Request $request)
+    {
         if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
             $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
             return $this->redirectToRoute('front_login');
@@ -96,7 +97,8 @@ class CustomerController extends FrontBaseController
         ]);
     }
 
-    public function ordersAction() {
+    public function ordersAction()
+    {
         if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
             $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
             return $this->redirectToRoute('front_login');
@@ -114,14 +116,16 @@ class CustomerController extends FrontBaseController
     /**
      * @param string $orderNumber
      */
-    public function orderDetailRegisteredAction($orderNumber) {
+    public function orderDetailRegisteredAction($orderNumber)
+    {
         return $this->orderDetailAction(null, $orderNumber);
     }
 
     /**
      * @param string $urlHash
      */
-    public function orderDetailUnregisteredAction($urlHash) {
+    public function orderDetailUnregisteredAction($urlHash)
+    {
         return $this->orderDetailAction($urlHash, null);
     }
 
@@ -129,7 +133,8 @@ class CustomerController extends FrontBaseController
      * @param string $urlHash
      * @param string $orderNumber
      */
-    private function orderDetailAction($urlHash = null, $orderNumber = null) {
+    private function orderDetailAction($urlHash = null, $orderNumber = null)
+    {
         if ($orderNumber !== null) {
             if (!$this->isGranted(Roles::ROLE_CUSTOMER)) {
                 $this->getFlashMessageSender()->addErrorFlash(t('You have to be logged in to enter this page'));
@@ -162,7 +167,8 @@ class CustomerController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function loginAsRememberedUserAction(Request $request) {
+    public function loginAsRememberedUserAction(Request $request)
+    {
         try {
             $this->loginAsUserFacade->loginAsRememberedUser($request);
         } catch (\Shopsys\ShopBundle\Model\Customer\Exception\UserNotFoundException $e) {

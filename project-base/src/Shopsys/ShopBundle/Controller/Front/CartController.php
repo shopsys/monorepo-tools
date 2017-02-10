@@ -88,7 +88,8 @@ class CartController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request)
+    {
         $cart = $this->cartFacade->getCartOfCurrentCustomer();
 
         if ($cart->isEmpty()) {
@@ -150,7 +151,8 @@ class CartController extends FrontBaseController
         ]);
     }
 
-    public function boxAction() {
+    public function boxAction()
+    {
         $orderPreview = $this->orderPreviewFactory->createForCurrentUser();
 
         return $this->render('@ShopsysShop/Front/Inline/Cart/cartBox.html.twig', [
@@ -163,7 +165,8 @@ class CartController extends FrontBaseController
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param string $type
      */
-    public function addProductFormAction(Product $product, $type = 'normal') {
+    public function addProductFormAction(Product $product, $type = 'normal')
+    {
         $formData = ['productId' => $product->getId()];
         $form = $this->createForm(new AddProductFormType(), $formData, [
             'action' => $this->generateUrl('front_cart_add_product'),
@@ -180,7 +183,8 @@ class CartController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function addProductAction(Request $request) {
+    public function addProductAction(Request $request)
+    {
         $form = $this->createForm(new AddProductFormType(), null, [
             'method' => 'POST',
         ]);
@@ -225,7 +229,8 @@ class CartController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function addProductAjaxAction(Request $request) {
+    public function addProductAjaxAction(Request $request)
+    {
         $form = $this->createForm(new AddProductFormType(), null, [
             'method' => 'POST',
         ]);
@@ -305,7 +310,8 @@ class CartController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $cartItemId
      */
-    public function deleteAction(Request $request, $cartItemId) {
+    public function deleteAction(Request $request, $cartItemId)
+    {
         $cartItemId = (int)$cartItemId;
         $token = $request->query->get('_token');
 

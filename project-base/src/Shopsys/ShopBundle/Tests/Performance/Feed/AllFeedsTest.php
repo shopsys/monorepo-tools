@@ -24,7 +24,8 @@ class AllFeedsTest extends FunctionalTestCase
     const ADMIN_USERNAME = 'admin';
     const ADMIN_PASSWORD = 'admin123';
 
-    public function testAllFeedsGeneration() {
+    public function testAllFeedsGeneration()
+    {
         $performanceResultsCsvExporter = $this->getContainer()->get(PerformanceResultsCsvExporter::class);
         /* @var $performanceResultsCsvExporter \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceResultsCsvExporter */
         $consoleOutput = new ConsoleOutput();
@@ -69,7 +70,8 @@ class AllFeedsTest extends FunctionalTestCase
      * @param int $maxDuration
      * @return \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
      */
-    private function doTestFeedGeneration(FeedConfig $feedConfig, DomainConfig $domainConfig, $maxDuration) {
+    private function doTestFeedGeneration(FeedConfig $feedConfig, DomainConfig $domainConfig, $maxDuration)
+    {
         $performanceTestSample = $this->generateFeed($feedConfig, $domainConfig);
         $this->setPerformanceTestSampleMessage($performanceTestSample, $maxDuration, $performanceTestSample->getDuration());
 
@@ -79,7 +81,8 @@ class AllFeedsTest extends FunctionalTestCase
     /**
      * @return array[]
      */
-    public function getAllFeedGenerationData() {
+    public function getAllFeedGenerationData()
+    {
         $feedConfigFacade = $this->getContainer()->get(FeedConfigFacade::class);
         /* @var $feedConfigFacade \Shopsys\ShopBundle\Model\Feed\FeedConfigFacade */
         $domain = $this->getContainer()->get(Domain::class);
@@ -105,7 +108,8 @@ class AllFeedsTest extends FunctionalTestCase
      * @param int $maxDuration
      * @return array[]
      */
-    private function getFeedGenerationData(array $feedConfigs, array $domainConfigs, $maxDuration) {
+    private function getFeedGenerationData(array $feedConfigs, array $domainConfigs, $maxDuration)
+    {
         $feedGenerationData = [];
         foreach ($domainConfigs as $domainConfig) {
             foreach ($feedConfigs as $feedConfig) {
@@ -121,7 +125,8 @@ class AllFeedsTest extends FunctionalTestCase
      * @param int $maxDuration
      * @param float $realDuration
      */
-    private function setPerformanceTestSampleMessage(PerformanceTestSample $performanceTestSample, $maxDuration, $realDuration) {
+    private function setPerformanceTestSampleMessage(PerformanceTestSample $performanceTestSample, $maxDuration, $realDuration)
+    {
         $minDuration = self::SUSPICIOUSLY_LOW_DURATION_SECONDS;
 
         if ($realDuration < $minDuration) {
@@ -144,7 +149,8 @@ class AllFeedsTest extends FunctionalTestCase
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample
      */
-    private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig) {
+    private function generateFeed(FeedConfig $feedConfig, DomainConfig $domainConfig)
+    {
         $client = $this->getClient(true, self::ADMIN_USERNAME, self::ADMIN_PASSWORD);
 
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
@@ -183,7 +189,8 @@ class AllFeedsTest extends FunctionalTestCase
     /**
      * @param \Shopsys\ShopBundle\Tests\Performance\Feed\PerformanceTestSample[] $performanceTestSamples
      */
-    private function assertSamplesAreSuccessful(array $performanceTestSamples) {
+    private function assertSamplesAreSuccessful(array $performanceTestSamples)
+    {
         $failMessages = [];
 
         foreach ($performanceTestSamples as $performanceTestSample) {

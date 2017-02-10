@@ -61,7 +61,8 @@ class ProductPickerController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $jsInstanceId
      */
-    public function pickMultipleAction(Request $request, $jsInstanceId) {
+    public function pickMultipleAction(Request $request, $jsInstanceId)
+    {
         return $this->getPickerResponse(
             $request,
             [
@@ -81,7 +82,8 @@ class ProductPickerController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string $parentInstanceId
      */
-    public function pickSingleAction(Request $request, $parentInstanceId) {
+    public function pickSingleAction(Request $request, $parentInstanceId)
+    {
         return $this->getPickerResponse(
             $request,
             [
@@ -101,7 +103,8 @@ class ProductPickerController extends AdminBaseController
      * @param array $viewParameters
      * @param array $gridViewParameters
      */
-    private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters) {
+    private function getPickerResponse(Request $request, array $viewParameters, array $gridViewParameters)
+    {
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 

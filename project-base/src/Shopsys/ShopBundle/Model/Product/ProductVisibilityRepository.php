@@ -50,7 +50,8 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    public function refreshProductsVisibility($onlyMarkedProducts = false) {
+    public function refreshProductsVisibility($onlyMarkedProducts = false)
+    {
         $this->calculateIndependentVisibility($onlyMarkedProducts);
         $this->hideVariantsWithInvisibleMainVariant($onlyMarkedProducts);
         $this->hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts);
@@ -61,7 +62,8 @@ class ProductVisibilityRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      */
-    public function markProductsForRecalculationAffectedByCategory(Category $category) {
+    public function markProductsForRecalculationAffectedByCategory(Category $category)
+    {
         $affectedProductsDql = $this->em->createQueryBuilder()
             ->select('IDENTITY(pcd.product)')
             ->from(ProductCategoryDomain::class, 'pcd')
@@ -84,7 +86,8 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function refreshGlobalProductVisibility($onlyMarkedProducts) {
+    private function refreshGlobalProductVisibility($onlyMarkedProducts)
+    {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsWhereClause = ' WHERE p.recalculate_visibility = TRUE';
         } else {
@@ -108,7 +111,8 @@ class ProductVisibilityRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
      */
-    public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId) {
+    public function createAndRefreshProductVisibilitiesForPricingGroup(PricingGroup $pricingGroup, $domainId)
+    {
         $query = $this->em->createNativeQuery('INSERT INTO product_visibilities (product_id, pricing_group_id, domain_id, visible)
             SELECT id, :pricingGroupId, :domainId, :calculatedVisibility FROM products', new ResultSetMapping());
         $query->execute([
@@ -122,7 +126,8 @@ class ProductVisibilityRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductVisibilityRepository() {
+    private function getProductVisibilityRepository()
+    {
         return $this->em->getRepository(ProductVisibility::class);
     }
 
@@ -149,7 +154,8 @@ class ProductVisibilityRepository
         return $productVisibility;
     }
 
-    private function markAllProductsVisibilityAsRecalculated() {
+    private function markAllProductsVisibilityAsRecalculated()
+    {
         $this->em->createNativeQuery(
             'UPDATE products SET recalculate_visibility = FALSE WHERE recalculate_visibility = TRUE',
             new ResultSetMapping()
@@ -160,7 +166,8 @@ class ProductVisibilityRepository
      * @param bool $onlyMarkedProducts
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function calculateIndependentVisibility($onlyMarkedProducts) {
+    private function calculateIndependentVisibility($onlyMarkedProducts)
+    {
         $now = new DateTime();
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
@@ -232,7 +239,8 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function hideVariantsWithInvisibleMainVariant($onlyMarkedProducts) {
+    private function hideVariantsWithInvisibleMainVariant($onlyMarkedProducts)
+    {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
         } else {
@@ -264,7 +272,8 @@ class ProductVisibilityRepository
     /**
      * @param bool $onlyMarkedProducts
      */
-    private function hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts) {
+    private function hideMainVariantsWithoutVisibleVariants($onlyMarkedProducts)
+    {
         if ($onlyMarkedProducts) {
             $onlyMarkedProductsCondition = ' AND p.recalculate_visibility = TRUE';
         } else {

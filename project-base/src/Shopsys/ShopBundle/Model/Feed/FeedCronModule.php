@@ -24,7 +24,8 @@ class FeedCronModule implements IteratedCronModuleInterface
      */
     private $setting;
 
-    public function __construct(FeedFacade $feedFacade, Setting $setting) {
+    public function __construct(FeedFacade $feedFacade, Setting $setting)
+    {
         $this->feedFacade = $feedFacade;
         $this->setting = $setting;
     }
@@ -32,13 +33,15 @@ class FeedCronModule implements IteratedCronModuleInterface
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
     /**
      * @inheritdoc
      */
-    public function iterate() {
+    public function iterate()
+    {
         if ($this->feedGenerationConfigToContinue === null) {
             $this->feedGenerationConfigToContinue = $this->feedFacade->getFirstFeedGenerationConfig();
         }
@@ -50,7 +53,8 @@ class FeedCronModule implements IteratedCronModuleInterface
     /**
      * @inheritdoc
      */
-    public function sleep() {
+    public function sleep()
+    {
         $this->setting->set(
             Setting::FEED_NAME_TO_CONTINUE,
             $this->feedGenerationConfigToContinue->getFeedName()
@@ -68,7 +72,8 @@ class FeedCronModule implements IteratedCronModuleInterface
     /**
      * @inheritdoc
      */
-    public function wakeUp() {
+    public function wakeUp()
+    {
         $this->feedGenerationConfigToContinue = new FeedGenerationConfig(
             $this->setting->get(Setting::FEED_NAME_TO_CONTINUE),
             $this->setting->get(Setting::FEED_DOMAIN_ID_TO_CONTINUE),

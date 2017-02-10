@@ -23,7 +23,8 @@ class ProductListAdminRepository
      */
     private $localization;
 
-    public function __construct(EntityManager $em, Localization $localization) {
+    public function __construct(EntityManager $em, Localization $localization)
+    {
         $this->em = $em;
         $this->localization = $localization;
     }
@@ -31,7 +32,8 @@ class ProductListAdminRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getProductListQueryBuilder($pricingGroupId) {
+    public function getProductListQueryBuilder($pricingGroupId)
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('p, pt, COALESCE(pmip.inputPrice, p.price) AS priceForProductList')

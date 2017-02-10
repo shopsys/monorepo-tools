@@ -9,11 +9,13 @@ abstract class Kernel extends BaseKernel
     /**
      * {@inheritdoc}
      */
-    public function getContainer() {
+    public function getContainer()
+    {
         return parent::getContainer()->get('shopsys.auto_services.auto_container');
     }
 
-    protected function initializeContainer() {
+    protected function initializeContainer()
+    {
         if ($this->isContainerClassAlreadyLoaded()) {
             $this->initializeContainerWithoutRebuilding();
         } else {
@@ -21,7 +23,8 @@ abstract class Kernel extends BaseKernel
         }
     }
 
-    private function initializeContainerWithoutRebuilding() {
+    private function initializeContainerWithoutRebuilding()
+    {
         $class = $this->getContainerClass();
         $this->container = new $class();
         $this->container->set('kernel', $this);
@@ -30,7 +33,8 @@ abstract class Kernel extends BaseKernel
     /**
      * @return bool
      */
-    private function isContainerClassAlreadyLoaded() {
+    private function isContainerClassAlreadyLoaded()
+    {
         $class = $this->getContainerClass();
         return class_exists($class, false);
     }

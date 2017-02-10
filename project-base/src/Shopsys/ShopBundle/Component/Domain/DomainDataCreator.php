@@ -62,7 +62,8 @@ class DomainDataCreator
     /**
      * @return int
      */
-    public function createNewDomainsData() {
+    public function createNewDomainsData()
+    {
         $newDomainsCount = 0;
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
             $domainId = $domainConfig->getId();
@@ -90,7 +91,8 @@ class DomainDataCreator
      * @param string $locale
      * @return bool
      */
-    private function isNewLocale($locale) {
+    private function isNewLocale($locale)
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             if ($domainConfig->getLocale() === $locale) {
                 return false;
@@ -103,7 +105,8 @@ class DomainDataCreator
     /**
      * @return string
      */
-    private function getTemplateLocale() {
+    private function getTemplateLocale()
+    {
         return $this->domain->getDomainConfigById(self::TEMPLATE_DOMAIN_ID)->getLocale();
     }
 }

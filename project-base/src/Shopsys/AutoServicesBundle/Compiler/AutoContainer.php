@@ -44,7 +44,8 @@ class AutoContainer implements ContainerInterface
         $this->autoServiceCollector = $autoServiceCollector;
     }
 
-    public function get($serviceId, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE) {
+    public function get($serviceId, $invalidBehavior = self::EXCEPTION_ON_INVALID_REFERENCE)
+    {
         if ($this->serviceHelper->isServiceId($serviceId) && $this->container->has($serviceId)) {
             return $this->container->get($serviceId, $invalidBehavior);
         }
@@ -63,7 +64,8 @@ class AutoContainer implements ContainerInterface
      * @param string $className
      * @return object
      */
-    private function getServiceByClassName($className) {
+    private function getServiceByClassName($className)
+    {
         try {
             $classServiceId = $this->containerClassList->getServiceIdByClass($className);
             return $this->container->get($classServiceId);
@@ -83,7 +85,8 @@ class AutoContainer implements ContainerInterface
      * @param object $service
      * @param string $className
      */
-    private function registerServiceToContainer($serviceId, $service, $className) {
+    private function registerServiceToContainer($serviceId, $service, $className)
+    {
         $this->container->set($serviceId, $service);
         $this->autoServiceCollector->addService($serviceId, $className);
         $this->containerClassList->addClass($serviceId, $className);
@@ -93,7 +96,8 @@ class AutoContainer implements ContainerInterface
      * @param string $className
      * @return object
      */
-    private function createServiceByClassName($className) {
+    private function createServiceByClassName($className)
+    {
         if (!$this->serviceHelper->canBeService($className)) {
             throw new \Shopsys\AutoServicesBundle\Compiler\Exception\ServiceClassNotFoundException($className);
         }
@@ -117,7 +121,8 @@ class AutoContainer implements ContainerInterface
      * @param \ReflectionFunctionAbstract $constructor
      * @return array
      */
-    private function getConstructorArguments(ReflectionFunctionAbstract $constructor) {
+    private function getConstructorArguments(ReflectionFunctionAbstract $constructor)
+    {
         $arguments = [];
         foreach ($constructor->getParameters() as $parameter) {
             /* @var $parameter \ReflectionParameter */
@@ -131,19 +136,23 @@ class AutoContainer implements ContainerInterface
         return $arguments;
     }
 
-    public function addScope(ScopeInterface $scope) {
+    public function addScope(ScopeInterface $scope)
+    {
         $this->container->addScope($scope);
     }
 
-    public function enterScope($name) {
+    public function enterScope($name)
+    {
         $this->container->enterScope($name);
     }
 
-    public function getParameter($name) {
+    public function getParameter($name)
+    {
         return $this->container->getParameter($name);
     }
 
-    public function has($id) {
+    public function has($id)
+    {
         try {
             $this->get($id, self::EXCEPTION_ON_INVALID_REFERENCE);
             return true;
@@ -152,34 +161,41 @@ class AutoContainer implements ContainerInterface
         }
     }
 
-    public function hasParameter($name) {
+    public function hasParameter($name)
+    {
         return $this->container->hasParameter($name);
     }
 
-    public function hasScope($name) {
+    public function hasScope($name)
+    {
         return $this->container->hasScope($name);
     }
 
-    public function isScopeActive($name) {
+    public function isScopeActive($name)
+    {
         return $this->container->isScopeActive($name);
     }
 
-    public function leaveScope($name) {
+    public function leaveScope($name)
+    {
         $this->container->leaveScope($name);
     }
 
-    public function set($id, $service, $scope = self::SCOPE_CONTAINER) {
+    public function set($id, $service, $scope = self::SCOPE_CONTAINER)
+    {
         $this->container->set($id, $service, $scope);
     }
 
-    public function setParameter($name, $value) {
+    public function setParameter($name, $value)
+    {
         $this->container->setParameter($name, $value);
     }
 
     /**
      * @return \Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
      */
-    public function getParameterBag() {
+    public function getParameterBag()
+    {
         return $this->container->getParameterBag();
     }
 }

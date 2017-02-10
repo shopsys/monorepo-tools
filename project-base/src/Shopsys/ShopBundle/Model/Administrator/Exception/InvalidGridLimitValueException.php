@@ -16,14 +16,16 @@ class InvalidGridLimitValueException extends Exception implements AdministratorE
      * @param mixed $limit
      * @param \Exception|null $previous
      */
-    public function __construct($limit, Exception $previous = null) {
+    public function __construct($limit, Exception $previous = null)
+    {
         parent::__construct('Administrator grid limit value ' . Debug::export($limit) . ' is invalid', 0, $previous);
     }
 
     /**
      * @return mixed
      */
-    public function getLimit() {
+    public function getLimit()
+    {
         return $this->limit;
     }
 }

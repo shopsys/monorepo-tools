@@ -42,7 +42,8 @@ class TransportPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function __construct(Transport $transport, Currency $currency, $price) {
+    public function __construct(Transport $transport, Currency $currency, $price)
+    {
         $this->transport = $transport;
         $this->currency = $currency;
         $this->price = $price;
@@ -51,28 +52,32 @@ class TransportPrice
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->currency;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    public function getTransport() {
+    public function getTransport()
+    {
         return $this->transport;
     }
 
     /**
      * @return string
      */
-    public function getPrice() {
+    public function getPrice()
+    {
         return $this->price;
     }
 
     /**
      * @param string $price
      */
-    public function setPrice($price) {
+    public function setPrice($price)
+    {
         $this->price = $price;
     }
 }

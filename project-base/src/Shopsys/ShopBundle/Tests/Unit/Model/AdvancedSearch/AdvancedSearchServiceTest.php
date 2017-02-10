@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\AdvancedSearch\ProductAdvancedSearchConfig;
 
 class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreateDefaultRuleFormData() {
+    public function testCreateDefaultRuleFormData()
+    {
         $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
         $filterName = 'filterName';
 
@@ -24,7 +25,8 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($filterName, $defaultRuleFormData['subject']);
     }
 
-    public function testGetRulesFormDataByRequestDataDefault() {
+    public function testGetRulesFormDataByRequestDataDefault()
+    {
         $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
 
         $advancedSearchService = new AdvancedSearchService($advancedSearchConfigMock);
@@ -39,7 +41,8 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testGetRulesFormDataByRequestData() {
+    public function testGetRulesFormDataByRequestData()
+    {
         $advancedSearchConfigMock = $this->getMock(ProductAdvancedSearchConfig::class, null, [], '', false);
 
         $requestData = [
@@ -62,7 +65,8 @@ class AdvancedSearchServiceTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testExtendQueryBuilderByAdvancedSearchData() {
+    public function testExtendQueryBuilderByAdvancedSearchData()
+    {
         $ruleData = new AdvancedSearchRuleData('testSubject', 'testOperator', 'testValue');
 
         $advancedSearchData = [

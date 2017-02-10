@@ -58,7 +58,8 @@ class PaymentGridFactory implements GridFactoryInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function create() {
+    public function create()
+    {
         $queryBuilder = $this->paymentRepository->getQueryBuilderForAll()
             ->addSelect('pt')
             ->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')

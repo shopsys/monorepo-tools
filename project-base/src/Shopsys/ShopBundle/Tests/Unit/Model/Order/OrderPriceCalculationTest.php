@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Pricing\Rounding;
 
 class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetOrderTotalPrice() {
+    public function testGetOrderTotalPrice()
+    {
         $orderItems = [
             $this->getMock(OrderProduct::class, [], [], '', false),
             $this->getMock(OrderProduct::class, [], [], '', false),
@@ -56,7 +57,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(3200, $orderTotalPrice->getProductPriceWithVat());
     }
 
-    public function testCalculateOrderRoundingPriceForOtherCurrency() {
+    public function testCalculateOrderRoundingPriceForOtherCurrency()
+    {
         $paymentData = new PaymentData();
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);
@@ -73,7 +75,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertNull($roundingPrice);
     }
 
-    public function testCalculateOrderRoundingPriceForCzkWithoutRounding() {
+    public function testCalculateOrderRoundingPriceForCzkWithoutRounding()
+    {
         $paymentData = new PaymentData();
         $paymentData->czkRounding = false;
         $payment = new Payment($paymentData);
@@ -90,7 +93,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertNull($roundingPrice);
     }
 
-    public function testCalculateOrderRoundingPriceDown() {
+    public function testCalculateOrderRoundingPriceDown()
+    {
         $paymentData = new PaymentData();
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);
@@ -111,7 +115,8 @@ class OrderPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame('-0.3', (string)$roundingPrice);
     }
 
-    public function testCalculateOrderRoundingPriceUp() {
+    public function testCalculateOrderRoundingPriceUp()
+    {
         $paymentData = new PaymentData();
         $paymentData->czkRounding = true;
         $payment = new Payment($paymentData);

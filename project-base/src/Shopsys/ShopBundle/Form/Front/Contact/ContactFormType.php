@@ -16,7 +16,8 @@ class ContactFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'contact_form';
     }
 
@@ -24,7 +25,8 @@ class ContactFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::TEXT, [
                 'required' => true,
@@ -48,7 +50,8 @@ class ContactFormType extends AbstractType
             ->add('send', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => ContactFormData::class,
             'attr' => ['novalidate' => 'novalidate'],

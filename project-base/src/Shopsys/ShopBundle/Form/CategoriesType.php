@@ -37,7 +37,8 @@ class CategoriesType extends AbstractType
      * @param \Symfony\Component\Form\FormInterface $form
      * @param array $options
      */
-    public function buildView(FormView $view, FormInterface $form, array $options) {
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
         $view->vars['categoryDetails'] = $this->categoryDetailFactory->createDetailsHierarchy($options['choice_list']->getChoices());
         if (isset($options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID])) {
             $view->vars['mutedNotVisibleOnDomainId'] = $options[self::OPTION_MUTED_NOT_VISIBLE_ON_DOMAIN_ID];
@@ -47,7 +48,8 @@ class CategoriesType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $categories = $this->categoryFacade->getAll();
 
         $resolver->setDefaults([
@@ -68,14 +70,16 @@ class CategoriesType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'choice';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'categories';
     }
 }

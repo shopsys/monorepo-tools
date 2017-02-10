@@ -14,14 +14,16 @@ class ArticleRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getArticleRepository() {
+    private function getArticleRepository()
+    {
         return $this->em->getRepository(Article::class);
     }
 
@@ -29,7 +31,8 @@ class ArticleRepository
      * @param string $articleId
      * @return \Shopsys\ShopBundle\Model\Article\Article|null
      */
-    public function findById($articleId) {
+    public function findById($articleId)
+    {
         return $this->getArticleRepository()->find($articleId);
     }
 
@@ -38,7 +41,8 @@ class ArticleRepository
      * @param string $placement
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement) {
+    public function getOrderedArticlesByDomainIdAndPlacementQueryBuilder($domainId, $placement)
+    {
         return $this->getArticlesByDomainIdQueryBuilder($domainId)
             ->andWhere('a.placement = :placement')->setParameter('placement', $placement)
             ->orderBy('a.position, a.id');
@@ -48,7 +52,8 @@ class ArticleRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getArticlesByDomainIdQueryBuilder($domainId) {
+    private function getArticlesByDomainIdQueryBuilder($domainId)
+    {
         return $this->em->createQueryBuilder()
             ->select('a')
             ->from(Article::class, 'a')
@@ -59,7 +64,8 @@ class ArticleRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getVisibleArticlesByDomainIdQueryBuilder($domainId) {
+    public function getVisibleArticlesByDomainIdQueryBuilder($domainId)
+    {
         return $this->getAllVisibleQueryBuilder()
             ->andWhere('a.domainId = :domainId')
             ->setParameter('domainId', $domainId);
@@ -69,7 +75,8 @@ class ArticleRepository
      * @param $domainId
      * @return int
      */
-    public function getAllArticlesCountByDomainId($domainId) {
+    public function getAllArticlesCountByDomainId($domainId)
+    {
         return (int)($this->getArticlesByDomainIdQueryBuilder($domainId)
             ->select('COUNT(a)')
             ->getQuery()->getSingleScalarResult());
@@ -80,7 +87,8 @@ class ArticleRepository
      * @param string $placement
      * @return \Shopsys\ShopBundle\Model\Article\Article[]
      */
-    public function getVisibleArticlesForPlacement($domainId, $placement) {
+    public function getVisibleArticlesForPlacement($domainId, $placement)
+    {
         $queryBuilder = $this->getVisibleArticlesByDomainIdQueryBuilder($domainId)
             ->andWhere('a.placement = :placement')->setParameter('placement', $placement)
             ->orderBy('a.position, a.id');
@@ -92,7 +100,8 @@ class ArticleRepository
      * @param int $articleId
      * @return \Shopsys\ShopBundle\Model\Article\Article
      */
-    public function getById($articleId) {
+    public function getById($articleId)
+    {
         $article = $this->getArticleRepository()->find($articleId);
         if ($article === null) {
             $message = 'Article with ID ' . $articleId . ' not found';
@@ -105,7 +114,8 @@ class ArticleRepository
      * @param int $articleId
      * @return \Shopsys\ShopBundle\Model\Article\Article
      */
-    public function getVisibleById($articleId) {
+    public function getVisibleById($articleId)
+    {
         $article = $this->getAllVisibleQueryBuilder()
             ->andWhere('a.id = :articleId')
             ->setParameter('articleId', $articleId)
@@ -121,7 +131,8 @@ class ArticleRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllVisibleQueryBuilder() {
+    private function getAllVisibleQueryBuilder()
+    {
         return $this->em->createQueryBuilder()
             ->select('a')
             ->from(Article::class, 'a')
@@ -132,7 +143,8 @@ class ArticleRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Article\Article[]
      */
-    public function getAllByDomainId($domainId) {
+    public function getAllByDomainId($domainId)
+    {
         return $this->getArticleRepository()->findBy([
             'domainId' => $domainId,
         ]);

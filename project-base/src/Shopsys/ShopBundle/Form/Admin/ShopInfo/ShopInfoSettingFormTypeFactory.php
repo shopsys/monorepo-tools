@@ -36,7 +36,8 @@ class ShopInfoSettingFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\ShopInfo\ShopInfoSettingFormType
      */
-    public function create() {
+    public function create()
+    {
         return new ShopInfoSettingFormType();
     }
 }

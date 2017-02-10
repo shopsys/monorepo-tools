@@ -20,7 +20,8 @@ class ParameterValueData
      * @param string|null $text
      * @param string|null $locale
      */
-    public function __construct($text = null, $locale = null) {
+    public function __construct($text = null, $locale = null)
+    {
         $this->text = $text;
         $this->locale = $locale;
     }
@@ -28,7 +29,8 @@ class ParameterValueData
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue $parameterValue
      */
-    public function setFromEntity(ParameterValue $parameterValue) {
+    public function setFromEntity(ParameterValue $parameterValue)
+    {
         $this->text = $parameterValue->getText();
         $this->locale = $parameterValue->getLocale();
     }

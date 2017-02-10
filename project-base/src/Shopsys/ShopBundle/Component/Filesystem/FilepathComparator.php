@@ -9,7 +9,8 @@ class FilepathComparator
      * @param string $directoryPath
      * @return bool
      */
-    public function isPathWithinDirectory($path, $directoryPath) {
+    public function isPathWithinDirectory($path, $directoryPath)
+    {
         $directoryPathRealpath = realpath($directoryPath);
         if ($directoryPathRealpath === false) {
             throw new \Shopsys\ShopBundle\Component\Filesystem\Exception\DirectoryDoesNotExistException(
@@ -25,7 +26,8 @@ class FilepathComparator
      * @param string $directoryRealpath
      * @return bool
      */
-    private function isPathWithinDirectoryRealpathRecursive($path, $directoryRealpath) {
+    private function isPathWithinDirectoryRealpathRecursive($path, $directoryRealpath)
+    {
         if (realpath($path) === $directoryRealpath) {
             return true;
         }
@@ -41,7 +43,8 @@ class FilepathComparator
      * @param string $path
      * @return bool
      */
-    private function hasAncestorPath($path) {
+    private function hasAncestorPath($path)
+    {
         return dirname($path) !== $path;
     }
 }

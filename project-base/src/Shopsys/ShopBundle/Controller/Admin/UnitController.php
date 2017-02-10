@@ -43,7 +43,8 @@ class UnitController extends AdminBaseController
     /**
      * @Route("/product/unit/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $unitInlineEdit = $this->unitInlineEdit;
 
         $grid = $unitInlineEdit->getGrid();
@@ -57,7 +58,8 @@ class UnitController extends AdminBaseController
      * @Route("/unit/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $unit = $this->unitFacade->getById($id);
             $isUnitDefault = $this->unitFacade->isUnitDefault($unit);
@@ -109,7 +111,8 @@ class UnitController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $newId = $request->get('newId');
 
         try {
@@ -145,7 +148,8 @@ class UnitController extends AdminBaseController
      * @Route("/product/unit/setting/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $units = $this->unitFacade->getAll();
         $form = $this->createForm(new UnitSettingFormType($units));
 

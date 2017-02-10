@@ -44,7 +44,8 @@ class HeurekaShopCertificationFactory
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @return \Heureka\ShopCertification
      */
-    public function create(Order $order) {
+    public function create(Order $order)
+    {
         $domainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
         $languageId = $this->heurekaShopCertificationService->getLanguageIdByLocale($domainConfig->getLocale());

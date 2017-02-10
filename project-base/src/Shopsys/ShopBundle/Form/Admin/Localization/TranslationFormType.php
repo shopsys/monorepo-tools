@@ -20,7 +20,8 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
     /**
      * @param string[] $locales
      */
-    public function __construct(array $locales) {
+    public function __construct(array $locales)
+    {
         $this->locales = $locales;
     }
 
@@ -28,7 +29,8 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      * @param string $value
      * @return string
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         if (preg_match('/^' . preg_quote(Translator::NOT_TRANSLATED_PREFIX) . '/u', $value)) {
             return '';
         }
@@ -40,14 +42,16 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      * @param string $value
      * @return string
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         return $value;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'translation_form';
     }
 
@@ -55,7 +59,8 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         foreach ($this->locales as $locale) {
             $builder->add(
                 $builder
@@ -71,7 +76,8 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

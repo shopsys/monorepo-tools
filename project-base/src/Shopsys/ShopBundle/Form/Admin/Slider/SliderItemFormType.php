@@ -19,11 +19,13 @@ class SliderItemFormType extends AbstractType
     /**
      * @param bool $scenarioCreate
      */
-    public function __construct($scenarioCreate = false) {
+    public function __construct($scenarioCreate = false)
+    {
         $this->scenarioCreate = $scenarioCreate;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'slider_item_form';
     }
 
@@ -31,7 +33,8 @@ class SliderItemFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::TEXT, [
                 'required' => true,
@@ -79,7 +82,8 @@ class SliderItemFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $validationGroups = $this->scenarioCreate ? ['Default', 'create'] : ['Default'];
 
         $resolver->setDefaults([

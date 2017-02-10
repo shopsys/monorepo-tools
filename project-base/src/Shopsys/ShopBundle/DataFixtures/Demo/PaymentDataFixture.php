@@ -20,7 +20,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $paymentEditData = new PaymentEditData();
         $paymentEditData->paymentData->name = [
             'cs' => 'Kreditní kartou',
@@ -95,7 +96,8 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             TransportDataFixture::class,
             VatDataFixture::class,

@@ -65,11 +65,13 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface
     /**
      * @inheritDoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
         $this->logger = $logger;
     }
 
-    public function run() {
+    public function run()
+    {
         if ($this->emailForErrorReporting === null) {
             $this->logger->addInfo('Email for error reporting is not set');
             return;
@@ -94,7 +96,8 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface
     /**
      * @return \Shopsys\ShopBundle\Model\Mail\MessageData
      */
-    private function createErrorReportingMessageData() {
+    private function createErrorReportingMessageData()
+    {
         $logsTail = $this->logErrorReportingFacade->getLogsTail(self::ROTATED_LOG_NAME);
 
         $subject = 'Error reporting from ' . $this->getEshopIdentifier();
@@ -116,7 +119,8 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface
     /**
      * @return string
      */
-    private function getEshopIdentifier() {
+    private function getEshopIdentifier()
+    {
         $domainId = 1;
         return $this->setting->getForDomain(Setting::BASE_URL, $domainId);
     }

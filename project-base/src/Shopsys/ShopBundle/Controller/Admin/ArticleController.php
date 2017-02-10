@@ -94,7 +94,8 @@ class ArticleController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $article = $this->articleFacade->getById($id);
         $form = $this->createForm($this->articleFormTypeFactory->create(
             $this->selectedDomain->getId(),
@@ -135,7 +136,8 @@ class ArticleController extends AdminBaseController
     /**
      * @Route("/article/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $gridTop = $this->getGrid(ArticlePlacementList::PLACEMENT_TOP_MENU);
         $gridFooter = $this->getGrid(ArticlePlacementList::PLACEMENT_FOOTER);
         $gridNone = $this->getGrid(ArticlePlacementList::PLACEMENT_NONE);
@@ -153,7 +155,8 @@ class ArticleController extends AdminBaseController
      * @Route("/article/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->articleFormTypeFactory->create($this->selectedDomain->getId()));
 
         $articleData = $this->articleDataFactory->createDefault();
@@ -191,7 +194,8 @@ class ArticleController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->articleFacade->getById($id)->getName();
 
@@ -214,7 +218,8 @@ class ArticleController extends AdminBaseController
      * @Route("/article/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         $article = $this->articleFacade->getById($id);
         if ($this->termsAndConditionsFacade->isArticleUsedAsTermsAndConditions($article)) {
             $message = t(
@@ -238,7 +243,8 @@ class ArticleController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function saveOrderingAction(Request $request) {
+    public function saveOrderingAction(Request $request)
+    {
         $this->articleFacade->saveOrdering($request->get('rowIdsByGridId'));
 
         $responseData = ['success' => true];
@@ -250,7 +256,8 @@ class ArticleController extends AdminBaseController
      * @param string $articlePlacement
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    private function getGrid($articlePlacement) {
+    private function getGrid($articlePlacement)
+    {
         $queryBuilder = $this->articleFacade->getOrderedArticlesByDomainIdAndPlacementQueryBuilder(
             $this->selectedDomain->getId(),
             $articlePlacement

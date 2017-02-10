@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Model\Pricing\PriceCalculation;
 
 class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function testCalculatePriceWithoutVat() {
+    public function testCalculatePriceWithoutVat()
+    {
         $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(100);
 
@@ -24,7 +25,8 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round(1000 - 100, 6), round($priceWithoutVat, 6));
     }
 
-    public function testCalculateTotalPrice() {
+    public function testCalculateTotalPrice()
+    {
         $priceCalculationMock = $this->getMock(PriceCalculation::class, ['getVatAmountByPriceWithVat'], [], '', false);
         $priceCalculationMock->expects($this->once())->method('getVatAmountByPriceWithVat')->willReturn(10);
 

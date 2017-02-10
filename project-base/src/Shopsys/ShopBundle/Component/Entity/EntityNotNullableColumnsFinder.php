@@ -10,7 +10,8 @@ class EntityNotNullableColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
      * @return string[tableName][]
      */
-    public function getAllNotNullableColumnNamesIndexedByTableName(array $classesMetadata) {
+    public function getAllNotNullableColumnNamesIndexedByTableName(array $classesMetadata)
+    {
         $notNullableColumnNamesIndexedByTableName = [];
         foreach ($classesMetadata as $classMetadata) {
             if (!($classMetadata instanceof ClassMetadataInfo)) {
@@ -31,7 +32,8 @@ class EntityNotNullableColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadataInfo $classMetadataInfo
      * @return string[]
      */
-    private function getNotNullableFieldColumnNames(ClassMetadataInfo $classMetadataInfo) {
+    private function getNotNullableFieldColumnNames(ClassMetadataInfo $classMetadataInfo)
+    {
         $notNullableFieldNames = [];
         foreach ($classMetadataInfo->getFieldNames() as $fieldName) {
             if (!$classMetadataInfo->isNullable($fieldName)) {
@@ -46,7 +48,8 @@ class EntityNotNullableColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadataInfo $classMetadataInfo
      * @return string[]
      */
-    private function getNotNullableAssociationColumnNames(ClassMetadataInfo $classMetadataInfo) {
+    private function getNotNullableAssociationColumnNames(ClassMetadataInfo $classMetadataInfo)
+    {
         $notNullableAssociationNames = [];
         foreach ($classMetadataInfo->getAssociationMappings() as $associationMapping) {
             if ($associationMapping['joinColumns'][0]['nullable'] === false) {

@@ -15,7 +15,8 @@ class CloseNewlyOpenedWindowsHelper extends Module
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _after(TestInterface $test) {
+    public function _after(TestInterface $test)
+    {
         // @codingStandardsIgnoreEnd
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
@@ -26,7 +27,8 @@ class CloseNewlyOpenedWindowsHelper extends Module
     /**
      * @param \RemoteWebDriver $webDriver
      */
-    private function closeNewlyOpenedWindows(RemoteWebDriver $webDriver) {
+    private function closeNewlyOpenedWindows(RemoteWebDriver $webDriver)
+    {
         $handles = $webDriver->getWindowHandles();
         $firstHandle = array_shift($handles);
         foreach ($handles as $handle) {

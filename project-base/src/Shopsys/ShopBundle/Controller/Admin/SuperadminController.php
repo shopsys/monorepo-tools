@@ -75,14 +75,16 @@ class SuperadminController extends AdminBaseController
     /**
      * @Route("/superadmin/errors/")
      */
-    public function errorsAction() {
+    public function errorsAction()
+    {
         return $this->render('@ShopsysShop/Admin/Content/Superadmin/errors.html.twig');
     }
 
     /**
      * @Route("/superadmin/pricing/")
      */
-    public function pricingAction(Request $request) {
+    public function pricingAction(Request $request)
+    {
         $form = $this->createForm(new InputPriceTypeFormType());
 
         $pricingSettingData = [];
@@ -108,7 +110,8 @@ class SuperadminController extends AdminBaseController
     /**
      * @Route("/superadmin/urls/")
      */
-    public function urlsAction() {
+    public function urlsAction()
+    {
         $allLocales = $this->localization->getAllLocales();
         $dataSource = new ArrayDataSource($this->loadDataForUrls($allLocales));
 
@@ -127,7 +130,8 @@ class SuperadminController extends AdminBaseController
      * @param array $locales
      * @return array
      */
-    private function loadDataForUrls(array $locales) {
+    private function loadDataForUrls(array $locales)
+    {
         $data = [];
         $requestContext = new RequestContext();
         foreach ($locales as $locale) {
@@ -147,7 +151,8 @@ class SuperadminController extends AdminBaseController
     /**
      * @Route("/superadmin/modules/")
      */
-    public function modulesAction(Request $request) {
+    public function modulesAction(Request $request)
+    {
         $form = $this->createForm(new ModulesFormType($this->moduleList));
 
         $formData = [];
@@ -177,7 +182,8 @@ class SuperadminController extends AdminBaseController
     /**
      * @Route("/superadmin/css-documentation/")
      */
-    public function cssDocumentationAction() {
+    public function cssDocumentationAction()
+    {
         return $this->render('@ShopsysShop/Admin/Content/Superadmin/cssDocumentation.html.twig');
     }
 }

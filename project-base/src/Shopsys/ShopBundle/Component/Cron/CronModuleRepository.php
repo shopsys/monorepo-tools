@@ -12,14 +12,16 @@ class CronModuleRepository
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCronModuleRepository() {
+    private function getCronModuleRepository()
+    {
         return $this->em->getRepository(CronModule::class);
     }
 
@@ -27,7 +29,8 @@ class CronModuleRepository
      * @param string $moduleId
      * @return \Shopsys\ShopBundle\Component\Cron\CronModule
      */
-    public function getCronModuleByCronModuleId($moduleId) {
+    public function getCronModuleByCronModuleId($moduleId)
+    {
         $cronModule = $this->getCronModuleRepository()->find($moduleId);
         if ($cronModule === null) {
             $cronModule = new CronModule($moduleId);
@@ -41,7 +44,8 @@ class CronModuleRepository
     /**
      * @return string[]
      */
-    public function getAllScheduledCronModuleIds() {
+    public function getAllScheduledCronModuleIds()
+    {
         $query = $this->em->createQuery('SELECT cm.moduleId FROM ' . CronModule::class . ' cm WHERE cm.scheduled = TRUE');
 
         return array_map('array_pop', $query->getScalarResult());

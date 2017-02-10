@@ -14,7 +14,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
 {
-    public function testLoadFromArrayDuplicateEntityName() {
+    public function testLoadFromArrayDuplicateEntityName()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_ENTITY_NAME => 'Name_1',
@@ -45,7 +46,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(DuplicateEntityNameException::class, $previousException);
     }
 
-    public function testLoadFromArrayDuplicateEntityClass() {
+    public function testLoadFromArrayDuplicateEntityClass()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
@@ -76,7 +78,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(DuplicateEntityNameException::class, $previousException);
     }
 
-    public function testLoadFromArrayDuplicateNullSizeName() {
+    public function testLoadFromArrayDuplicateNullSizeName()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
@@ -113,7 +116,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(DuplicateSizeNameException::class, $previousException);
     }
 
-    public function testLoadFromArrayDuplicateTypeName() {
+    public function testLoadFromArrayDuplicateTypeName()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
@@ -147,7 +151,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(DuplicateTypeNameException::class, $previousException);
     }
 
-    public function testLoadFromArray() {
+    public function testLoadFromArray()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
@@ -202,7 +207,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(true, $imageSize->getCrop());
     }
 
-    public function testLoadFromArrayOriginalSize() {
+    public function testLoadFromArrayOriginalSize()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',
@@ -227,7 +233,8 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($imageSize->getCrop());
     }
 
-    public function testLoadFromArrayExistsOriginalSize() {
+    public function testLoadFromArrayExistsOriginalSize()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => 'Class_1',

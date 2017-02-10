@@ -12,7 +12,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $this->createProductCatnumTrigger();
         $this->createProductPartnoTrigger();
         $this->createProductTranslationNameTrigger();
@@ -23,7 +24,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         $this->createProductDomainFulltextTriggerOnProductDomain();
     }
 
-    private function createProductCatnumTrigger() {
+    private function createProductCatnumTrigger()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_product_catnum_tsvector() RETURNS trigger AS $$
                 BEGIN
@@ -42,7 +44,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductPartnoTrigger() {
+    private function createProductPartnoTrigger()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_product_partno_tsvector() RETURNS trigger AS $$
                 BEGIN
@@ -61,7 +64,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductTranslationNameTrigger() {
+    private function createProductTranslationNameTrigger()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_product_translation_name_tsvector() RETURNS trigger AS $$
                 BEGIN
@@ -80,7 +84,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainDescriptionTrigger() {
+    private function createProductDomainDescriptionTrigger()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_product_domain_description_tsvector() RETURNS trigger AS $$
                 BEGIN
@@ -99,7 +104,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProduct() {
+    private function createProductDomainFulltextTriggerOnProduct()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product() RETURNS trigger AS $$
                 BEGIN
@@ -132,7 +138,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProductTranslation() {
+    private function createProductDomainFulltextTriggerOnProductTranslation()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION update_product_domain_fulltext_tsvector_by_product_translation() RETURNS trigger AS $$
                 BEGIN
@@ -165,7 +172,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
         ');
     }
 
-    private function createProductDomainFulltextTriggerOnProductDomain() {
+    private function createProductDomainFulltextTriggerOnProductDomain()
+    {
         $this->executeNativeQuery('
             CREATE OR REPLACE FUNCTION set_product_domain_fulltext_tsvector() RETURNS trigger AS $$
                 BEGIN
@@ -202,7 +210,8 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             DomainDbFunctionsDataFixture::class,
         ];

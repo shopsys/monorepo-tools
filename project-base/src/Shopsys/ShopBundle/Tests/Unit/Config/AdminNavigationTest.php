@@ -13,18 +13,21 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AdminNavigationTest extends FunctionalTestCase
 {
-    public function testHasSettingsItem() {
+    public function testHasSettingsItem()
+    {
         $this->assertInstanceOf(MenuItem::class, $this->getMenu()->getSettingsItem());
     }
 
-    public function testResolveRoutes() {
+    public function testResolveRoutes()
+    {
         $this->resolveRoutesRecursive($this->getMenu()->getItems());
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $items
      */
-    private function resolveRoutesRecursive(array $items) {
+    private function resolveRoutesRecursive(array $items)
+    {
         $router = $this->getContainer()->get('router');
         /* @var $router \Symfony\Bundle\FrameworkBundle\Routing\Router */
 
@@ -42,7 +45,8 @@ class AdminNavigationTest extends FunctionalTestCase
     /**
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
      */
-    private function getMenu() {
+    private function getMenu()
+    {
         $authorizationChecker = $this->getMockBuilder(AuthorizationCheckerInterface::class)
             ->setMethods(['isGranted'])
             ->getMockForAbstractClass();

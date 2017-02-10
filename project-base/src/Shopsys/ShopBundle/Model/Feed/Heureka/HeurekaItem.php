@@ -119,91 +119,104 @@ class HeurekaItem implements FeedItemInterface
     /**
      * @return int
      */
-    public function getItemId() {
+    public function getItemId()
+    {
         return $this->itemId;
     }
 
     /**
      * @return string
      */
-    public function getProductName() {
+    public function getProductName()
+    {
         return $this->productName;
     }
 
     /**
      * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @return string
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * @return string|null
      */
-    public function getImgUrl() {
+    public function getImgUrl()
+    {
         return $this->imgUrl;
     }
 
     /**
      * @return string
      */
-    public function getPriceVat() {
+    public function getPriceVat()
+    {
         return $this->priceVat;
     }
 
     /**
      * @return string|null
      */
-    public function getEan() {
+    public function getEan()
+    {
         return $this->ean;
     }
 
     /**
      * @return int|null
      */
-    public function getDeliveryDate() {
+    public function getDeliveryDate()
+    {
         return $this->deliveryDate;
     }
 
     /**
      * @return string|null
      */
-    public function getManufacturer() {
+    public function getManufacturer()
+    {
         return $this->manufacturer;
     }
 
     /**
      * @return string|null
      */
-    public function getCategoryText() {
+    public function getCategoryText()
+    {
         return $this->categoryText;
     }
 
     /**
      * @return string[paramName]
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
     }
 
     /**
      * @return string|null
      */
-    public function getCpc() {
+    public function getCpc()
+    {
         return $this->cpc;
     }
 
     /**
      * @return int|null
      */
-    public function getGroupId() {
+    public function getGroupId()
+    {
         return $this->groupId;
     }
 }

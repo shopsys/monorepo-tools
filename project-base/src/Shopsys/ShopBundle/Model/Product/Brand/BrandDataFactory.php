@@ -31,7 +31,8 @@ class BrandDataFactory
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand $brand
      * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandData
      */
-    public function createFromBrand(Brand $brand) {
+    public function createFromBrand(Brand $brand)
+    {
         $brandData = new BrandData();
         $brandData->setFromEntity($brand);
 

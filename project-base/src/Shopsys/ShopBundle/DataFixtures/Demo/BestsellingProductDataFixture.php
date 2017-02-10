@@ -15,7 +15,8 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
         /* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
@@ -33,7 +34,8 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture implements 
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             ProductDataFixture::class,
             CategoryDataFixture::class,

@@ -30,7 +30,8 @@ class GeneratorFacade
      * @param array $formData
      * @return string[]
      */
-    public function generate(array $formData) {
+    public function generate(array $formData)
+    {
         $bundle = $this->kernel->getBundle($formData['bundle']);
         $filepaths = [];
         foreach ($this->generatorCollection->getGenerators() as $generator) {
@@ -46,7 +47,8 @@ class GeneratorFacade
     /**
      * @return string[]
      */
-    public function getGeneratorsNames() {
+    public function getGeneratorsNames()
+    {
         $names = [];
         foreach ($this->generatorCollection->getGenerators() as $generator) {
             $names[] = $generator->getName();

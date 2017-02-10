@@ -37,7 +37,8 @@ class ArticleDataFactory
      * @param \Shopsys\ShopBundle\Model\Article\Article $article
      * @return \Shopsys\ShopBundle\Model\Article\ArticleData
      */
-    public function createFromArticle(Article $article) {
+    public function createFromArticle(Article $article)
+    {
         $articleData = new ArticleData();
         $articleData->setFromEntity($article);
 
@@ -56,7 +57,8 @@ class ArticleDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Article\ArticleData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $articleData = new ArticleData();
         $articleData->domainId = $this->selectedDomain->getId();
 

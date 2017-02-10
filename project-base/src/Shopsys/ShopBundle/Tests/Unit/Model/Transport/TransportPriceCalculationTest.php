@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportPriceCalculation;
 
 class TransportPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function calculateIndependentPriceProvider() {
+    public function calculateIndependentPriceProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,

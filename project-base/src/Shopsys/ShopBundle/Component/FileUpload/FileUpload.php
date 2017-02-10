@@ -59,7 +59,8 @@ class FileUpload
     /**
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
-    public function upload(UploadedFile $file) {
+    public function upload(UploadedFile $file)
+    {
         if ($file->getError()) {
             throw new \Shopsys\ShopBundle\Component\FileUpload\Exception\UploadFailedException($file->getErrorMessage(), $file->getError());
         }
@@ -74,7 +75,8 @@ class FileUpload
      * @param string $filename
      * @return bool
      */
-    public function tryDeleteTemporaryFile($filename) {
+    public function tryDeleteTemporaryFile($filename)
+    {
         if (!empty($filename)) {
             $filepath = $this->getTemporaryFilepath($filename);
             try {
@@ -90,7 +92,8 @@ class FileUpload
      * @param string $filename
      * @return string
      */
-    private function getTemporaryFilename($filename) {
+    private function getTemporaryFilename($filename)
+    {
         return TransformString::safeFilename(uniqid() . '__' . $filename);
     }
 
@@ -98,14 +101,16 @@ class FileUpload
      * @param string $temporaryFilename
      * @return string
      */
-    public function getTemporaryFilepath($temporaryFilename) {
+    public function getTemporaryFilepath($temporaryFilename)
+    {
         return $this->getTemporaryDirectory() . '/' . TransformString::safeFilename($temporaryFilename);
     }
 
     /**
      * @return string
      */
-    public function getTemporaryDirectory() {
+    public function getTemporaryDirectory()
+    {
         return $this->temporaryDir . '/' . self::TEMPORARY_DIRECTORY;
     }
 
@@ -115,7 +120,8 @@ class FileUpload
      * @param string|null $targetDirectory
      * @return string
      */
-    public function getUploadDirectory($isImage, $category, $targetDirectory) {
+    public function getUploadDirectory($isImage, $category, $targetDirectory)
+    {
         return ($isImage ? $this->imageDir : $this->uploadedFileDir)
             . $category
             . ($targetDirectory !== null ? '/' . $targetDirectory : '');
@@ -128,7 +134,8 @@ class FileUpload
      * @param string|null $targetDirectory
      * @return string
      */
-    private function getTargetFilepath($filename, $isImage, $category, $targetDirectory) {
+    private function getTargetFilepath($filename, $isImage, $category, $targetDirectory)
+    {
         return $this->getUploadDirectory($isImage, $category, $targetDirectory) . '/' . $filename;
     }
 
@@ -136,7 +143,8 @@ class FileUpload
      * @param string $temporaryFilename
      * @return string
      */
-    public function getOriginalFilenameByTemporary($temporaryFilename) {
+    public function getOriginalFilenameByTemporary($temporaryFilename)
+    {
         $matches = [];
         if ($temporaryFilename && preg_match('/^.+?__(.+)$/', $temporaryFilename, $matches)) {
             return $matches[1];
@@ -147,7 +155,8 @@ class FileUpload
     /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
      */
-    public function preFlushEntity(EntityFileUploadInterface $entity) {
+    public function preFlushEntity(EntityFileUploadInterface $entity)
+    {
         $filesForUpload = $entity->getTemporaryFilesForUpload();
         foreach ($filesForUpload as $key => $fileForUpload) {
             /* @var $fileForUpload FileForUpload */
@@ -159,7 +168,8 @@ class FileUpload
     /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\EntityFileUploadInterface $entity
      */
-    public function postFlushEntity(EntityFileUploadInterface $entity) {
+    public function postFlushEntity(EntityFileUploadInterface $entity)
+    {
         $filesForUpload = $entity->getTemporaryFilesForUpload();
         foreach ($filesForUpload as $fileForUpload) {
             /* @var $fileForUpload FileForUpload */

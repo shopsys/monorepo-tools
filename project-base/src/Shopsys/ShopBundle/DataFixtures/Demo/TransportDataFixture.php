@@ -20,7 +20,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $transportEditData = new TransportEditData();
         $transportEditData->transportData->name = [
             'cs' => 'Česká pošta - balík do ruky',
@@ -71,7 +72,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
      * @param string $referenceName
      * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
      */
-    private function createTransport($referenceName, TransportEditData $transportEditData) {
+    private function createTransport($referenceName, TransportEditData $transportEditData)
+    {
         $transportFacade = $this->get(TransportFacade::class);
         /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
 
@@ -82,7 +84,8 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             VatDataFixture::class,
             CurrencyDataFixture::class,

@@ -13,7 +13,8 @@ class ProductIdToProductTransformer implements DataTransformerInterface
      */
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository) {
+    public function __construct(ProductRepository $productRepository)
+    {
         $this->productRepository = $productRepository;
     }
 
@@ -21,7 +22,8 @@ class ProductIdToProductTransformer implements DataTransformerInterface
      * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
      * @return int|null
      */
-    public function transform($product) {
+    public function transform($product)
+    {
         if ($product instanceof Product) {
             return $product->getId();
         }
@@ -32,7 +34,8 @@ class ProductIdToProductTransformer implements DataTransformerInterface
      * @param int $productId
      * @return \Shopsys\ShopBundle\Model\Product\Product|null
      */
-    public function reverseTransform($productId) {
+    public function reverseTransform($productId)
+    {
         if (empty($productId)) {
             return null;
         }

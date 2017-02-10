@@ -27,7 +27,8 @@ class CartFactory
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItemRepository $cartItemRepository
      * @param \Shopsys\ShopBundle\Model\Cart\Watcher\CartWatcherFacade $cartWatcherFacade
      */
-    public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade) {
+    public function __construct(CartItemRepository $cartItemRepository, CartWatcherFacade $cartWatcherFacade)
+    {
         $this->cartItemRepository = $cartItemRepository;
         $this->cartWatcherFacade = $cartWatcherFacade;
     }
@@ -36,7 +37,8 @@ class CartFactory
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \Shopsys\ShopBundle\Model\Cart\Cart
      */
-    public function get(CustomerIdentifier $customerIdentifier) {
+    public function get(CustomerIdentifier $customerIdentifier)
+    {
         $customerIdentifierHash = $customerIdentifier->getObjectHash();
         if (!array_key_exists($customerIdentifierHash, $this->carts)) {
             $this->carts[$customerIdentifierHash] = $this->createNewCart($customerIdentifier);
@@ -52,7 +54,8 @@ class CartFactory
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \Shopsys\ShopBundle\Model\Cart\Cart
      */
-    private function createNewCart(CustomerIdentifier $customerIdentifier) {
+    private function createNewCart(CustomerIdentifier $customerIdentifier)
+    {
         $cartItems = $this->cartItemRepository->getAllByCustomerIdentifier($customerIdentifier);
 
         return new Cart($cartItems);

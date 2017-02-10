@@ -13,7 +13,8 @@ class ProductListComponent extends AbstractPage
      * @param int $quantity
      * @param \Facebook\WebDriver\WebDriverElement $context
      */
-    public function addProductToCartByName($productName, $quantity, WebDriverElement $context) {
+    public function addProductToCartByName($productName, $quantity, WebDriverElement $context)
+    {
         $productItemElement = $this->findProductListItemByName($productName, $context);
 
         $quantityElement = $productItemElement->findElement(WebDriverBy::name('add_product_form[quantity]'));
@@ -30,7 +31,8 @@ class ProductListComponent extends AbstractPage
      * @param \Facebook\WebDriver\WebDriverElement $context
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function findProductListItemByName($productName, WebDriverElement $context) {
+    private function findProductListItemByName($productName, WebDriverElement $context)
+    {
         $productItems = $context->findElements(WebDriverBy::cssSelector('.js-list-products-item'));
 
         foreach ($productItems as $item) {

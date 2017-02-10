@@ -29,7 +29,8 @@ class ImageConfigLoader
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */
-    public function __construct(Filesystem $filesystem) {
+    public function __construct(Filesystem $filesystem)
+    {
         $this->filesystem = $filesystem;
     }
 
@@ -37,7 +38,8 @@ class ImageConfigLoader
      * @param string $filename
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
      */
-    public function loadFromYaml($filename) {
+    public function loadFromYaml($filename)
+    {
         $yamlParser = new Parser();
 
         if (!$this->filesystem->exists($filename)) {
@@ -63,7 +65,8 @@ class ImageConfigLoader
      * @param array $outputConfig
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageEntityConfig[]
      */
-    public function loadFromArray($outputConfig) {
+    public function loadFromArray($outputConfig)
+    {
         $this->foundEntityConfigs = [];
         $this->foundEntityNames = [];
 
@@ -84,7 +87,8 @@ class ImageConfigLoader
     /**
      * @param array $entityConfig
      */
-    private function processEntityConfig($entityConfig) {
+    private function processEntityConfig($entityConfig)
+    {
         $entityClass = $entityConfig[ImageConfigDefinition::CONFIG_CLASS];
         $entityName = $entityConfig[ImageConfigDefinition::CONFIG_ENTITY_NAME];
 
@@ -107,7 +111,8 @@ class ImageConfigLoader
      * @param array $sizesConfig
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[]
      */
-    private function prepareSizes($sizesConfig) {
+    private function prepareSizes($sizesConfig)
+    {
         $result = [];
         foreach ($sizesConfig as $sizeConfig) {
             $sizeName = $sizeConfig[ImageConfigDefinition::CONFIG_SIZE_NAME];
@@ -134,7 +139,8 @@ class ImageConfigLoader
      * @param array $typesConfig
      * @return array
      */
-    private function prepareTypes($typesConfig) {
+    private function prepareTypes($typesConfig)
+    {
         $result = [];
         foreach ($typesConfig as $typeConfig) {
             $typeName = $typeConfig[ImageConfigDefinition::CONFIG_TYPE_NAME];
@@ -152,7 +158,8 @@ class ImageConfigLoader
      * @param array $entityConfig
      * @return array
      */
-    private function getMultipleByType(array $entityConfig) {
+    private function getMultipleByType(array $entityConfig)
+    {
         $multipleByType = [];
         $multipleByType[ImageEntityConfig::WITHOUT_NAME_KEY] = $entityConfig[ImageConfigDefinition::CONFIG_MULTIPLE];
         foreach ($entityConfig[ImageConfigDefinition::CONFIG_TYPES] as $typeConfig) {

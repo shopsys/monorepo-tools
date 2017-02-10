@@ -63,7 +63,8 @@ class UploadedFileFacade
      * @param object $entity
      * @param array|null $temporaryFilenames
      */
-    public function uploadFile($entity, $temporaryFilenames) {
+    public function uploadFile($entity, $temporaryFilenames)
+    {
         if ($temporaryFilenames !== null && count($temporaryFilenames) > 0) {
             $entitiesForFlush = [];
             $uploadedFileEntityConfig = $this->uploadedFileConfig->getUploadedFileEntityConfig($entity);
@@ -93,7 +94,8 @@ class UploadedFileFacade
     /**
      * @param object $entity
      */
-    public function deleteUploadedFileByEntity($entity) {
+    public function deleteUploadedFileByEntity($entity)
+    {
         $uploadedFile = $this->getUploadedFileByEntity($entity);
         $this->em->remove($uploadedFile);
         $this->em->flush();
@@ -102,7 +104,8 @@ class UploadedFileFacade
     /**
      * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
      */
-    public function deleteFileFromFilesystem(UploadedFile $uploadedFile) {
+    public function deleteFileFromFilesystem(UploadedFile $uploadedFile)
+    {
         $filepath = $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
         $this->filesystem->remove($filepath);
     }
@@ -111,7 +114,8 @@ class UploadedFileFacade
      * @param object $entity
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
      */
-    public function getUploadedFileByEntity($entity) {
+    public function getUploadedFileByEntity($entity)
+    {
         return $this->uploadedFileRepository->getUploadedFileByEntity(
             $this->uploadedFileConfig->getEntityName($entity),
             $this->getEntityId($entity)
@@ -122,7 +126,8 @@ class UploadedFileFacade
      * @param object $entity
      * @return int
      */
-    private function getEntityId($entity) {
+    private function getEntityId($entity)
+    {
         $entityMetadata = $this->em->getClassMetadata(get_class($entity));
         $identifier = $entityMetadata->getIdentifierValues($entity);
         if (count($identifier) === 1) {
@@ -137,7 +142,8 @@ class UploadedFileFacade
      * @param int $uploadedFileId
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
      */
-    public function getById($uploadedFileId) {
+    public function getById($uploadedFileId)
+    {
         return $this->uploadedFileRepository->getById($uploadedFileId);
     }
 
@@ -145,7 +151,8 @@ class UploadedFileFacade
      * @param Object $entity
      * @return bool
      */
-    public function hasUploadedFile($entity) {
+    public function hasUploadedFile($entity)
+    {
         try {
             $uploadedFile = $this->getUploadedFileByEntity($entity);
         } catch (\Shopsys\ShopBundle\Component\UploadedFile\Exception\FileNotFoundException $e) {
@@ -159,7 +166,8 @@ class UploadedFileFacade
      * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
-    public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile) {
+    public function getAbsoluteUploadedFileFilepath(UploadedFile $uploadedFile)
+    {
         return $this->uploadedFileLocator->getAbsoluteUploadedFileFilepath($uploadedFile);
     }
 
@@ -168,7 +176,8 @@ class UploadedFileFacade
      * @param \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile $uploadedFile
      * @return string
      */
-    public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
+    public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile)
+    {
         return $this->uploadedFileLocator->getUploadedFileUrl($domainConfig, $uploadedFile);
     }
 }

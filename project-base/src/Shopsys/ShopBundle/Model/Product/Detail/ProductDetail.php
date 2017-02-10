@@ -80,14 +80,16 @@ class ProductDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getBasePriceForAutoPriceCalculationType() {
+    public function getBasePriceForAutoPriceCalculationType()
+    {
         if ($this->basePriceForAutoPriceCalculationType === null) {
             $this->basePriceForAutoPriceCalculationType = $this->productDetailFactory
                 ->getBasePriceForAutoPriceCalculationType($this->product);
@@ -99,7 +101,8 @@ class ProductDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
      */
-    public function getSellingPrice() {
+    public function getSellingPrice()
+    {
         if (!$this->sellingPriceLoaded) {
             $this->sellingPrice = $this->productDetailFactory->getSellingPrice($this->product);
             $this->sellingPriceLoaded = true;
@@ -111,7 +114,8 @@ class ProductDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
      */
-    public function getProductDomainsIndexedByDomainId() {
+    public function getProductDomainsIndexedByDomainId()
+    {
         if ($this->productDomainsIndexedByDomainId === null) {
             $this->productDomainsIndexedByDomainId = $this->productDetailFactory->getProductDomainsIndexedByDomainId($this->product);
         }
@@ -122,7 +126,8 @@ class ProductDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getParameters() {
+    public function getParameters()
+    {
         if ($this->parameters === null) {
             $this->parameters = $this->productDetailFactory->getParameters($this->product);
         }
@@ -133,7 +138,8 @@ class ProductDetail
     /**
      * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
-    public function getImagesIndexedById() {
+    public function getImagesIndexedById()
+    {
         if ($this->imagesById === null) {
             $this->imagesById = $this->productDetailFactory->getImagesIndexedById($this->product);
         }
@@ -144,7 +150,8 @@ class ProductDetail
     /**
      * @return bool
      */
-    public function hasContentForDetailBox() {
+    public function hasContentForDetailBox()
+    {
         if ($this->product->isMainVariant()) {
             if ($this->product->getBrand() !== null) {
                 return true;

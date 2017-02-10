@@ -61,42 +61,48 @@ class PerformanceTestSample
     /**
      * @return string
      */
-    public function getRouteName() {
+    public function getRouteName()
+    {
         return $this->routeName;
     }
 
     /**
      * @return string
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * @return float
      */
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->duration;
     }
 
     /**
      * @return int
      */
-    public function getQueryCount() {
+    public function getQueryCount()
+    {
         return $this->queryCount;
     }
 
     /**
      * @return int
      */
-    public function getStatusCode() {
+    public function getStatusCode()
+    {
         return $this->statusCode;
     }
 
     /**
      * @return bool
      */
-    public function isSuccessful() {
+    public function isSuccessful()
+    {
         return $this->isSuccessful;
     }
 }

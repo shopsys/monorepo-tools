@@ -8,7 +8,8 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class MenuConfiguration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder() {
+    public function getConfigTreeBuilder()
+    {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('menu');
 
@@ -17,7 +18,8 @@ class MenuConfiguration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function buildItemsNode(NodeDefinition $node) {
+    private function buildItemsNode(NodeDefinition $node)
+    {
         return $node
             ->addDefaultsIfNotSet()
             ->children()
@@ -65,7 +67,8 @@ class MenuConfiguration implements ConfigurationInterface
      * @param string $name
      * @return \Symfony\Component\Config\Definition\NodeInterface
      */
-    private function getItemsNode($name) {
+    private function getItemsNode($name)
+    {
         $treeBuilder = new TreeBuilder();
         $definition = $treeBuilder->root($name);
 

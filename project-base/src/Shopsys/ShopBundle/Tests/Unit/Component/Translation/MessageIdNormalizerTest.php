@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Component\Translation\MessageIdNormalizer;
 
 class MessageIdNormalizerTest extends PHPUnit_Framework_TestCase
 {
-    public function normalizeMessageIdProvider() {
+    public function normalizeMessageIdProvider()
+    {
         return [
             ['Příliš žluťoučký kůň úpěl ďábelské ódy.', 'Příliš žluťoučký kůň úpěl ďábelské ódy.'],
             [' foo ', 'foo'],
@@ -23,14 +24,16 @@ class MessageIdNormalizerTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider normalizeMessageIdProvider
      */
-    public function testNormalizeMessageId($messageId, $expectedMesssageId) {
+    public function testNormalizeMessageId($messageId, $expectedMesssageId)
+    {
         $messageIdNormalizer = new MessageIdNormalizer();
         $normalizedMessageId = $messageIdNormalizer->normalizeMessageId($messageId);
 
         $this->assertSame($expectedMesssageId, $normalizedMessageId);
     }
 
-    public function testGetNormalizedCatalogue() {
+    public function testGetNormalizedCatalogue()
+    {
         $messageIdNormalizer = new MessageIdNormalizer();
 
         $source = new FileSource('filepath', 10, 20);
@@ -59,7 +62,8 @@ class MessageIdNormalizerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($message->getSourceString(), $normalizedMessage->getSourceString());
     }
 
-    public function testGetNormalizedCatalogueInvalidMessageIdArgumentException() {
+    public function testGetNormalizedCatalogueInvalidMessageIdArgumentException()
+    {
         $messageIdNormalizer = new MessageIdNormalizer();
 
         $source = new FileSource('filepath', 10, 20);

@@ -84,7 +84,8 @@ class ParameterFilterChoiceRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
      */
-    private function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale) {
+    private function getVisibleParametersIndexedByIdOrderedByName(array $rows, $locale)
+    {
         $parameterIds = [];
         foreach ($rows as $row) {
             $parameterIds[$row['pp']['id']] = $row['pp']['id'];
@@ -114,7 +115,8 @@ class ParameterFilterChoiceRepository
      * @param array $rows
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]
      */
-    private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows) {
+    private function getParameterValuesIndexedByParameterIdOrderedByValueText(array $rows)
+    {
         $parameterIdsByValueId = [];
         foreach ($rows as $row) {
             $valueId = $row['pv']['id'];
@@ -138,7 +140,8 @@ class ParameterFilterChoiceRepository
      * @param array $rows
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private function getParameterValuesIndexedByIdOrderedByText(array $rows) {
+    private function getParameterValuesIndexedByIdOrderedByText(array $rows)
+    {
         $valueIds = [];
         foreach ($rows as $row) {
             $valueId = $row['pv']['id'];

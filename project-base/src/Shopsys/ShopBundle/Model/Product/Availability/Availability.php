@@ -41,7 +41,8 @@ class Availability extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
-    public function __construct(AvailabilityData $availabilityData) {
+    public function __construct(AvailabilityData $availabilityData)
+    {
         $this->translations = new ArrayCollection();
         $this->setTranslations($availabilityData);
         $this->dispatchTime = $availabilityData->dispatchTime;
@@ -50,7 +51,8 @@ class Availability extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -58,14 +60,16 @@ class Availability extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
-    private function setTranslations(AvailabilityData $availabilityData) {
+    private function setTranslations(AvailabilityData $availabilityData)
+    {
         foreach ($availabilityData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -74,14 +78,16 @@ class Availability extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new AvailabilityTranslation();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      */
-    public function edit(AvailabilityData $availabilityData) {
+    public function edit(AvailabilityData $availabilityData)
+    {
         $this->setTranslations($availabilityData);
         $this->dispatchTime = $availabilityData->dispatchTime;
     }
@@ -89,7 +95,8 @@ class Availability extends AbstractTranslatableEntity
     /**
      * @return int|null
      */
-    public function getDispatchTime() {
+    public function getDispatchTime()
+    {
         return $this->dispatchTime;
     }
 }

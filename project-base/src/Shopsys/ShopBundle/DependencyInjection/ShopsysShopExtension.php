@@ -12,7 +12,8 @@ class ShopsysShopExtension extends ConfigurableExtension
     /**
      * {@inheritDoc}
      */
-    protected function loadInternal(array $config, ContainerBuilder $container) {
+    protected function loadInternal(array $config, ContainerBuilder $container)
+    {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 

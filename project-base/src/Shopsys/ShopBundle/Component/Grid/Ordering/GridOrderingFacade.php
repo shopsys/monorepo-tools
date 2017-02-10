@@ -17,7 +17,8 @@ class GridOrderingFacade
      */
     private $gridOrderingService;
 
-    public function __construct(EntityManager $em, GridOrderingService $gridOrderingService) {
+    public function __construct(EntityManager $em, GridOrderingService $gridOrderingService)
+    {
         $this->em = $em;
         $this->gridOrderingService = $gridOrderingService;
     }
@@ -26,7 +27,8 @@ class GridOrderingFacade
      * @param string $entityClass
      * @param array $rowIds
      */
-    public function saveOrdering($entityClass, array $rowIds) {
+    public function saveOrdering($entityClass, array $rowIds)
+    {
         $entityRepository = $this->getEntityRepository($entityClass);
         $position = 0;
 
@@ -42,7 +44,8 @@ class GridOrderingFacade
      * @param string $entityClass
      * @return mixed
      */
-    private function getEntityRepository($entityClass) {
+    private function getEntityRepository($entityClass)
+    {
         $interfaces = class_implements($entityClass);
         if (array_key_exists(OrderableEntityInterface::class, $interfaces)) {
             return $this->em->getRepository($entityClass);

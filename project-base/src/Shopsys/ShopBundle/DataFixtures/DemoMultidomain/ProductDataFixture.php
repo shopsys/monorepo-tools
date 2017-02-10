@@ -19,7 +19,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $productDataFixtureLoader = $this->get(ProductDataFixtureLoader::class);
         /* @var $productDataFixtureLoader \Shopsys\ShopBundle\DataFixtures\Demo\ProductDataFixtureLoader */
         $referenceInjector = $this->get(ProductDataFixtureReferenceInjector::class);
@@ -50,7 +51,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param array $row
      */
-    private function editProduct(Product $product, array $row) {
+    private function editProduct(Product $product, array $row)
+    {
         $productEditDataFactory = $this->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
         $productFacade = $this->get(ProductFacade::class);
@@ -66,7 +68,8 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return ProductDataFixtureReferenceInjector::getDependenciesForMultidomain();
     }
 }

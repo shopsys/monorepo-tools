@@ -28,7 +28,8 @@ class MailerSettingExtension extends Twig_Extension
      */
     private $mailerWhitelistExpessions;
 
-    public function __construct(ContainerInterface $container) {
+    public function __construct(ContainerInterface $container)
+    {
         $this->container = $container;
         $this->isDeliveryDisabled = $this->container->getParameter('mailer_disable_delivery');
         $this->mailerMasterEmailAddress = $this->container->getParameter('mailer_master_email_address');
@@ -41,14 +42,16 @@ class MailerSettingExtension extends Twig_Extension
      *
      * @return \Symfony\Bundle\TwigBundle\TwigEngine
      */
-    private function getTemplatingService() {
+    private function getTemplatingService()
+    {
         return $this->container->get('templating');
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('isMailerSettingUnusual', [$this, 'isMailerSettingUnusual']),
             new Twig_SimpleFunction('getMailerSettingInfo', [$this, 'getMailerSettingInfo'], ['is_safe' => ['html']]),
@@ -58,14 +61,16 @@ class MailerSettingExtension extends Twig_Extension
     /**
      * @return bool
      */
-    public function isMailerSettingUnusual() {
+    public function isMailerSettingUnusual()
+    {
         return $this->isDeliveryDisabled || (!$this->isDeliveryDisabled && $this->mailerMasterEmailAddress !== null);
     }
 
     /**
      * @return string
      */
-    public function getMailerSettingInfo() {
+    public function getMailerSettingInfo()
+    {
         return $this->getTemplatingService()->render('@ShopsysShop/Common/Mailer/settingInfo.html.twig', [
             'isDeliveryDisabled' => $this->isDeliveryDisabled,
             'mailerMasterEmailAddress' => $this->mailerMasterEmailAddress,
@@ -76,7 +81,8 @@ class MailerSettingExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'shopsys.twig.mailer_setting_extension';
     }
 }

@@ -11,18 +11,21 @@ class HoneyPotType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'text';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'honey_pot';
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'mapped' => false,
             'required' => false,

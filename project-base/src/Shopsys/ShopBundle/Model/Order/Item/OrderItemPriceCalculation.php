@@ -18,7 +18,8 @@ class OrderItemPriceCalculation
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
      */
-    public function __construct(PriceCalculation $priceCalculation) {
+    public function __construct(PriceCalculation $priceCalculation)
+    {
         $this->priceCalculation = $priceCalculation;
     }
 
@@ -26,7 +27,8 @@ class OrderItemPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderItemData
      * @return string
      */
-    public function calculatePriceWithoutVat(OrderItemData $orderItemData) {
+    public function calculatePriceWithoutVat(OrderItemData $orderItemData)
+    {
         $vat = new Vat(new VatData('orderItemVat', $orderItemData->vatPercent));
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($orderItemData->priceWithVat, $vat);
 
@@ -37,7 +39,8 @@ class OrderItemPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem $orderItem
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function calculateTotalPrice(OrderItem $orderItem) {
+    public function calculateTotalPrice(OrderItem $orderItem)
+    {
         $vat = new Vat(new VatData('orderItemVat', $orderItem->getVatPercent()));
 
         $totalPriceWithVat = $orderItem->getPriceWithVat() * $orderItem->getQuantity();
@@ -51,7 +54,8 @@ class OrderItemPriceCalculation
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItem[] $orderItems
      * @return \Shopsys\ShopBundle\Model\Pricing\Price[]
      */
-    public function calculateTotalPricesIndexedById($orderItems) {
+    public function calculateTotalPricesIndexedById($orderItems)
+    {
         $prices = [];
 
         foreach ($orderItems as $orderItem) {

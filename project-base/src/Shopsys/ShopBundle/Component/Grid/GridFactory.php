@@ -56,7 +56,8 @@ class GridFactory
      * @param \Shopsys\ShopBundle\Component\Grid\DataSourceInterface $dataSource
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function create($gridId, DataSourceInterface $dataSource) {
+    public function create($gridId, DataSourceInterface $dataSource)
+    {
         return new Grid(
             $gridId,
             $dataSource,

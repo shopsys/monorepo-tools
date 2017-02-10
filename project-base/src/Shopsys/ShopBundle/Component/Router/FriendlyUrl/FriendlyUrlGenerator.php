@@ -83,7 +83,8 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
      * @param string $referenceType
      * @return string
      */
-    public function getGeneratedUrl($routeName, Route $route, FriendlyUrl $friendlyUrl, array $parameters, $referenceType) {
+    public function getGeneratedUrl($routeName, Route $route, FriendlyUrl $friendlyUrl, array $parameters, $referenceType)
+    {
         $compiledRoute = $this->routeCompiler->compile($route);
 
         $tokens = [
@@ -109,7 +110,8 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
     /**
      * Not supproted method
      */
-    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
+    public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
         throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
     }
 }

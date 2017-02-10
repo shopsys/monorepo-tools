@@ -35,7 +35,8 @@ class FeedConfigRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getFeedConfigs() {
+    public function getFeedConfigs()
+    {
         $feedConfigs = [];
 
         $feedConfigs[] = new FeedConfig(
@@ -58,7 +59,8 @@ class FeedConfigRepository
      * @param string $feedName
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
      */
-    public function getFeedConfigByName($feedName) {
+    public function getFeedConfigByName($feedName)
+    {
         foreach ($this->getAllFeedConfigs() as $feedConfig) {
             if ($feedConfig->getFeedName() === $feedName) {
                 return $feedConfig;
@@ -72,7 +74,8 @@ class FeedConfigRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getDeliveryFeedConfigs() {
+    public function getDeliveryFeedConfigs()
+    {
         $feedConfigs = [];
 
         $feedConfigs[] = new FeedConfig(
@@ -88,7 +91,8 @@ class FeedConfigRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig[]
      */
-    public function getAllFeedConfigs() {
+    public function getAllFeedConfigs()
+    {
         return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());
     }
 }

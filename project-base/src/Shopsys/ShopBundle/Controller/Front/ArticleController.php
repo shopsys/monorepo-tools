@@ -13,14 +13,16 @@ class ArticleController extends FrontBaseController
      */
     private $articleFacade;
 
-    public function __construct(ArticleFacade $articleFacade) {
+    public function __construct(ArticleFacade $articleFacade)
+    {
         $this->articleFacade = $articleFacade;
     }
 
     /**
      * @param int $id
      */
-    public function detailAction($id) {
+    public function detailAction($id)
+    {
         $article = $this->articleFacade->getVisibleById($id);
 
         return $this->render('@ShopsysShop/Front/Content/Article/detail.html.twig', [
@@ -28,7 +30,8 @@ class ArticleController extends FrontBaseController
         ]);
     }
 
-    public function menuAction() {
+    public function menuAction()
+    {
         $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_TOP_MENU);
 
         return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [
@@ -36,7 +39,8 @@ class ArticleController extends FrontBaseController
         ]);
     }
 
-    public function footerAction() {
+    public function footerAction()
+    {
         $articles = $this->articleFacade->getVisibleArticlesForPlacementOnCurrentDomain(ArticlePlacementList::PLACEMENT_FOOTER);
 
         return $this->render('@ShopsysShop/Front/Content/Article/menu.html.twig', [

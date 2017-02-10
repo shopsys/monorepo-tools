@@ -13,7 +13,8 @@ use Symfony\Component\Security\Csrf\CsrfTokenManager;
 
 class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
 {
-    public function testSubRequest() {
+    public function testSubRequest()
+    {
         $annotationReader = new AnnotationReader();
         $tokenManagerMock = $this->getMock(CsrfTokenManager::class, [], [], '', false);
 
@@ -28,7 +29,8 @@ class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
         $routeCsrfProtector->onKernelController($eventMock);
     }
 
-    public function testRequestWithoutProtection() {
+    public function testRequestWithoutProtection()
+    {
         $annotationReader = new AnnotationReader();
         $tokenManagerMock = $this->getMock(CsrfTokenManager::class, [], [], '', false);
 
@@ -47,7 +49,8 @@ class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
         $routeCsrfProtector->onKernelController($eventMock);
     }
 
-    public function testRequestWithProtection() {
+    public function testRequestWithProtection()
+    {
         $validCsrfToken = 'validCsrfToken';
         $request = new Request([
             RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER => $validCsrfToken,
@@ -77,7 +80,8 @@ class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
         $routeCsrfProtector->onKernelController($eventMock);
     }
 
-    public function testRequestWithProtectionWithoutCsrfToken() {
+    public function testRequestWithProtectionWithoutCsrfToken()
+    {
         $request = new Request();
         $annotationReader = new AnnotationReader();
         $tokenManagerMock = $this->getMock(CsrfTokenManager::class, [], [], '', false);
@@ -99,7 +103,8 @@ class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
         $routeCsrfProtector->onKernelController($eventMock);
     }
 
-    public function testRequestWithProtectionWithInvalidCsrfToken() {
+    public function testRequestWithProtectionWithInvalidCsrfToken()
+    {
         $invalidCsrfToken = 'invalidCsrfToken';
         $request = new Request([
             RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER => $invalidCsrfToken,

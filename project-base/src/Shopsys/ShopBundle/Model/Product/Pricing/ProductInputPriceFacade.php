@@ -101,7 +101,8 @@ class ProductInputPriceFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return string|null
      */
-    public function getInputPrice(Product $product) {
+    public function getInputPrice(Product $product)
+    {
         $inputPriceType = $this->pricingSetting->getInputPriceType();
         $defaultCurrency = $this->currencyFacade->getDefaultCurrency();
         $manualInputPricesInDefaultCurrency = $this->productManualInputPriceRepository->getByProductAndDomainConfigs(
@@ -116,7 +117,8 @@ class ProductInputPriceFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return string[pricingGroupId]
      */
-    public function getManualInputPricesData(Product $product) {
+    public function getManualInputPricesData(Product $product)
+    {
         $pricingGroups = $this->pricingGroupFacade->getAll();
         $inputPriceType = $this->pricingSetting->getInputPriceType();
         $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
@@ -132,7 +134,8 @@ class ProductInputPriceFacade
     /**
      * @return bool
      */
-    public function replaceBatchVatAndRecalculateInputPrices() {
+    public function replaceBatchVatAndRecalculateInputPrices()
+    {
         if ($this->productRowsIterator === null) {
             $this->productRowsIterator = $this->productRepository->getProductIteratorForReplaceVat();
         }

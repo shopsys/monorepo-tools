@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Cron\IteratedCronModuleInterface;
 
 class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
 {
-    public function testRunModuleSuspendAfterTimeout() {
+    public function testRunModuleSuspendAfterTimeout()
+    {
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('sleep');
         $cronModuleServiceMock->method('iterate')->willReturnCallback(function () {
@@ -23,7 +24,8 @@ class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRunModuleAfterTimeout() {
+    public function testRunModuleAfterTimeout()
+    {
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->never())->method('iterate');
 
@@ -35,7 +37,8 @@ class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRunModule() {
+    public function testRunModule()
+    {
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->never())->method('wakeUp');
         $cronModuleServiceMock->expects($this->once())->method('iterate')->willReturn(false);
@@ -47,7 +50,8 @@ class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testRunSuspendedModule() {
+    public function testRunSuspendedModule()
+    {
         $cronModuleServiceMock = $this->getMockForAbstractClass(IteratedCronModuleInterface::class);
         $cronModuleServiceMock->expects($this->once())->method('wakeUp');
         $cronModuleServiceMock->method('iterate')->willReturn(false);

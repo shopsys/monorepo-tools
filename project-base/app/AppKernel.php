@@ -6,7 +6,8 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
-    public function registerBundles() {
+    public function registerBundles()
+    {
         $bundles = array(
             new Bmatzner\JQueryBundle\BmatznerJQueryBundle(),
             new Bmatzner\JQueryUIBundle\BmatznerJQueryUIBundle(),
@@ -48,7 +49,8 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader) {
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
         foreach ($this->getConfigs() as $filename) {
             if (file_exists($filename) && is_readable($filename)) {
                 $loader->load($filename);
@@ -59,7 +61,8 @@ class AppKernel extends Kernel
     /**
      * @return string[]
      */
-    private function getConfigs() {
+    private function getConfigs()
+    {
         $configs = [
             __DIR__ . '/config/parameters_common.yml',
             __DIR__ . '/config/parameters.yml',

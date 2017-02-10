@@ -27,7 +27,8 @@ class AllMailTemplatesFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'all_mail_templates_form';
     }
 
@@ -35,7 +36,8 @@ class AllMailTemplatesFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('registrationTemplate', new MailTemplateFormType(new DummyMailType()))
             ->add('resetPasswordTemplate', new MailTemplateFormType($this->resetPasswordMail))
@@ -49,7 +51,8 @@ class AllMailTemplatesFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'data_class' => AllMailTemplatesData::class,

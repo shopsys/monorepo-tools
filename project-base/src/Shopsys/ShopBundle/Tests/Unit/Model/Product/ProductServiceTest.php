@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Model\Product\ProductService;
 
 class ProductServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testEditSchedulesPriceRecalculation() {
+    public function testEditSchedulesPriceRecalculation()
+    {
         $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -48,7 +49,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->edit($product, $productData);
     }
 
-    public function testSetInputPriceSchedulesPriceRecalculation() {
+    public function testSetInputPriceSchedulesPriceRecalculation()
+    {
         $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -80,7 +82,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->setInputPrice($product, 100);
     }
 
-    public function testChangeVatSchedulesPriceRecalculation() {
+    public function testChangeVatSchedulesPriceRecalculation()
+    {
         $productPriceCalculationMock = $this->getMockBuilder(ProductPriceCalculation::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -115,7 +118,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->changeVat($product, $vat);
     }
 
-    public function testDeleteNotVariant() {
+    public function testDeleteNotVariant()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -136,7 +140,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEmpty($productService->delete($product)->getProductsForRecalculations());
     }
 
-    public function testDeleteVariant() {
+    public function testDeleteVariant()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -158,7 +163,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame([$mainVariant], $productService->delete($variant)->getProductsForRecalculations());
     }
 
-    public function testDeleteMainVariant() {
+    public function testDeleteMainVariant()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -181,7 +187,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($variant->isVariant());
     }
 
-    public function testMarkProductForVisibilityRecalculation() {
+    public function testMarkProductForVisibilityRecalculation()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -210,7 +217,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->markProductForVisibilityRecalculation($productMock);
     }
 
-    public function testMarkProductForVisibilityRecalculationMainVariant() {
+    public function testMarkProductForVisibilityRecalculationMainVariant()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -243,7 +251,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->markProductForVisibilityRecalculation($mainVariantMock);
     }
 
-    public function testMarkProductForVisibilityRecalculationVariant() {
+    public function testMarkProductForVisibilityRecalculationVariant()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);
@@ -276,7 +285,8 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $productService->markProductForVisibilityRecalculation($variantMock);
     }
 
-    public function testSortingProducts() {
+    public function testSortingProducts()
+    {
         $productPriceCalculationMock = $this->getMock(ProductPriceCalculation::class, null, [], '', false);
         $inputPriceCalculationMock = $this->getMock(InputPriceCalculation::class, null, [], '', false);
         $basePriceCalculationMock = $this->getMock(BasePriceCalculation::class, null, [], '', false);

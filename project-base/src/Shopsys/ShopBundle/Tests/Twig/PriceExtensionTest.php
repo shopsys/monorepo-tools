@@ -14,7 +14,8 @@ class PriceExtensionTest extends FunctionalTestCase
 {
     const NBSP = "\xc2\xa0";
 
-    public function priceFilterDataProvider() {
+    public function priceFilterDataProvider()
+    {
         return [
             ['input' => '12', 'domainId' => 1, 'result' => '12,00' . self::NBSP . 'Kč'],
             ['input' => '12.00', 'domainId' => 1, 'result' => '12,00' . self::NBSP . 'Kč'],
@@ -43,7 +44,8 @@ class PriceExtensionTest extends FunctionalTestCase
     /**
      * @dataProvider priceFilterDataProvider
      */
-    public function testPriceFilter($input, $domainId, $result) {
+    public function testPriceFilter($input, $domainId, $result)
+    {
         $currencyFacade = $this->getContainer()->get(CurrencyFacade::class);
         /* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
         $domain = $this->getContainer()->get(Domain::class);

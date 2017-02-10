@@ -6,7 +6,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class HomepageControllerTest extends FunctionalTestCase
 {
-    public function testHomepageHttpStatus200() {
+    public function testHomepageHttpStatus200()
+    {
         $client = $this->getClient();
 
         $client->request('GET', '/');
@@ -15,7 +16,8 @@ class HomepageControllerTest extends FunctionalTestCase
         $this->assertSame(200, $code);
     }
 
-    public function testHomepageHasBodyEnd() {
+    public function testHomepageHasBodyEnd()
+    {
         $client = $this->getClient();
 
         $client->request('GET', '/');

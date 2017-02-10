@@ -15,7 +15,8 @@ class PaymentDetailFactory
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentPriceCalculation $paymentPriceCalculation
      */
-    public function __construct(PaymentPriceCalculation $paymentPriceCalculation) {
+    public function __construct(PaymentPriceCalculation $paymentPriceCalculation)
+    {
         $this->paymentPriceCalculation = $paymentPriceCalculation;
     }
 
@@ -23,7 +24,8 @@ class PaymentDetailFactory
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail
      */
-    public function createDetailForPayment(Payment $payment) {
+    public function createDetailForPayment(Payment $payment)
+    {
         return new PaymentDetail(
             $payment,
             $this->getIndependentPrices($payment)
@@ -34,7 +36,8 @@ class PaymentDetailFactory
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
      * @return \Shopsys\ShopBundle\Model\Payment\Detail\PaymentDetail[]
      */
-    public function createDetailsForPayments(array $payments) {
+    public function createDetailsForPayments(array $payments)
+    {
         $details = [];
 
         foreach ($payments as $payment) {
@@ -48,7 +51,8 @@ class PaymentDetailFactory
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    private function getIndependentPrices(Payment $payment) {
+    private function getIndependentPrices(Payment $payment)
+    {
         $prices = [];
         foreach ($payment->getPrices() as $paymentInputPrice) {
             $currency = $paymentInputPrice->getCurrency();

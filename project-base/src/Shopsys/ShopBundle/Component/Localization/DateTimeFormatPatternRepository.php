@@ -9,11 +9,13 @@ class DateTimeFormatPatternRepository
      */
     private $dateTimeFormatPatterns;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->dateTimeFormatPatterns = [];
     }
 
-    public function add(DateTimeFormatPattern $dateTimePattern) {
+    public function add(DateTimeFormatPattern $dateTimePattern)
+    {
         $this->dateTimeFormatPatterns[] = $dateTimePattern;
     }
 
@@ -23,7 +25,8 @@ class DateTimeFormatPatternRepository
      * @param int $timeType @link http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatPattern|null
      */
-    public function findDateTimePattern($locale, $dateType, $timeType) {
+    public function findDateTimePattern($locale, $dateType, $timeType)
+    {
         foreach ($this->dateTimeFormatPatterns as $dateTimePattern) {
             if ($this->isMatching($dateTimePattern, $locale, $dateType, $timeType)) {
                 return $dateTimePattern;
@@ -40,7 +43,8 @@ class DateTimeFormatPatternRepository
      * @param int|null $timeType
      * @return bool
      */
-    private function isMatching(DateTimeFormatPattern $dateTimePattern, $locale, $dateType, $timeType) {
+    private function isMatching(DateTimeFormatPattern $dateTimePattern, $locale, $dateType, $timeType)
+    {
         if ($dateTimePattern->getLocale() !== $locale) {
             return false;
         }

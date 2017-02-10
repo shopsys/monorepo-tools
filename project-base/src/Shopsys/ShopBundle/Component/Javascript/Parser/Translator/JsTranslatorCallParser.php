@@ -52,7 +52,8 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
      * @return \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall[]
      */
-    public function parse(JProgramNode $node) {
+    public function parse(JProgramNode $node)
+    {
         $jsTranslatorCalls = [];
 
         $callExprNodes = $node->get_nodes_by_symbol(J_CALL_EXPR);
@@ -78,7 +79,8 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return bool
      */
-    private function isTransFunctionCall(JCallExprNode $callExprNode) {
+    private function isTransFunctionCall(JCallExprNode $callExprNode)
+    {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
 
         if ($functionName !== null) {
@@ -94,7 +96,8 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\JNodeBase $messageIdArgumentNode
      * @return string
      */
-    private function getMessageId(JNodeBase $messageIdArgumentNode) {
+    private function getMessageId(JNodeBase $messageIdArgumentNode)
+    {
         try {
             $messageId = $this->jsStringParser->getConcatenatedString($messageIdArgumentNode);
         } catch (\Shopsys\ShopBundle\Component\Javascript\Parser\Exception\UnsupportedNodeException $ex) {
@@ -113,7 +116,8 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return string
      */
-    private function getDomain(JCallExprNode $callExprNode) {
+    private function getDomain(JCallExprNode $callExprNode)
+    {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
         $domainArgumentIndex = $this->transMethodSpecifications[$functionName]->getDomainArgumentIndex();
 
@@ -140,7 +144,8 @@ class JsTranslatorCallParser
      * @param \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode $callExprNode
      * @return \PLUG\JavaScript\JNodes\JNodeBase
      */
-    private function getMessageIdArgumentNode(JCallExprNode $callExprNode) {
+    private function getMessageIdArgumentNode(JCallExprNode $callExprNode)
+    {
         $functionName = $this->jsFunctionCallParser->getFunctionName($callExprNode);
         $messageIdArgumentIndex = $this->transMethodSpecifications[$functionName]->getMessageIdArgumentIndex();
 

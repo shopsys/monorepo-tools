@@ -12,14 +12,16 @@ class AllMailTemplatesFormTypeFactory
      */
     private $resetPasswordMail;
 
-    public function __construct(ResetPasswordMail $resetPasswordMail) {
+    public function __construct(ResetPasswordMail $resetPasswordMail)
+    {
         $this->resetPasswordMail = $resetPasswordMail;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Mail\AllMailTemplatesFormType
      */
-    public function create() {
+    public function create()
+    {
         return new AllMailTemplatesFormType(
             $this->resetPasswordMail
         );

@@ -83,7 +83,8 @@ class PaymentData
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentDomain[] $paymentDomains
      */
-    public function setFromEntity(Payment $payment, array $paymentDomains) {
+    public function setFromEntity(Payment $payment, array $paymentDomains)
+    {
         $this->vat = $payment->getVat();
         $this->hidden = $payment->isHidden();
         $this->czkRounding = $payment->isCzkRounding();

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Entity\EntityStringColumnsFinder;
 
 class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetAllStringColumnNamesIndexedByTableName() {
+    public function testGetAllStringColumnNamesIndexedByTableName()
+    {
         $classMetadataInfoMock = $this->getMock(ClassMetadataInfo::class, [], [], '', false);
         $classMetadataInfoMock
             ->method('getTableName')
@@ -50,7 +51,8 @@ class EntityStringColumnsFinderTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $actualResult);
     }
 
-    public function testGetAllStringColumnNamesIndexedByTableNameException() {
+    public function testGetAllStringColumnNamesIndexedByTableNameException()
+    {
         $classMetadataMock = $this->getMock(ClassMetadata::class);
         $this->setExpectedException(\Shopsys\ShopBundle\Component\Entity\Exception\UnexpectedTypeException::class);
 

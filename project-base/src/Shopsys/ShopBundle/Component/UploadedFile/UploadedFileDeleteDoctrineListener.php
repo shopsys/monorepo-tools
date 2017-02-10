@@ -33,14 +33,16 @@ class UploadedFileDeleteDoctrineListener
      *
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFileFacade
      */
-    private function getUploadedFileFacade() {
+    private function getUploadedFileFacade()
+    {
         return $this->container->get(UploadedFileFacade::class);
     }
 
     /**
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
      */
-    public function preRemove(LifecycleEventArgs $args) {
+    public function preRemove(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
 
         if ($this->uploadedFileConfig->hasUploadedFileEntityConfig($entity)) {

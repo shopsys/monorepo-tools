@@ -18,7 +18,8 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
      */
-    public function setContainer(ContainerInterface $container = null) {
+    public function setContainer(ContainerInterface $container = null)
+    {
         $this->container = $container;
     }
 
@@ -26,7 +27,8 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
      * @param string $serviceId
      * @return mixed
      */
-    protected function get($serviceId) {
+    protected function get($serviceId)
+    {
         return $this->container->get($serviceId);
     }
 
@@ -35,7 +37,8 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
      * @param arra
      * @return mixed
      */
-    protected function executeNativeQuery($sql, array $parameters = null) {
+    protected function executeNativeQuery($sql, array $parameters = null)
+    {
         $em = $this->container->get('doctrine.orm.entity_manager');
         /* @var $em \Doctrine\ORM\EntityManager */
 

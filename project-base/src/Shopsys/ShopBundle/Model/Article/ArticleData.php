@@ -47,7 +47,8 @@ class ArticleData
      */
     public $hidden;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->urls = new UrlListData();
         $this->hidden = false;
     }
@@ -55,7 +56,8 @@ class ArticleData
     /**
      * @param \Shopsys\ShopBundle\Model\Article\Article $article
      */
-    public function setFromEntity(Article $article) {
+    public function setFromEntity(Article $article)
+    {
         $this->name = $article->getName();
         $this->text = $article->getText();
         $this->seoTitle = $article->getSeoTitle();

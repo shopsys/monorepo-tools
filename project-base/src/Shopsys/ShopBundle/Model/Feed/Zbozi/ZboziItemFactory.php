@@ -46,7 +46,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Model\Feed\Heureka\HeurekaItem[]
      */
-    public function createItems(array $products, DomainConfig $domainConfig) {
+    public function createItems(array $products, DomainConfig $domainConfig)
+    {
         $productDomainsByProductId = $this->productCollectionFacade->getProductDomainsIndexedByProductId(
             $products,
             $domainConfig
@@ -88,7 +89,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string|null
      */
-    private function getProductCategoryText(Product $product, DomainConfig $domainConfig) {
+    private function getProductCategoryText(Product $product, DomainConfig $domainConfig)
+    {
         $pathFromRootCategoryToMainCategory = $this->categoryFacade->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(
             $product,
             $domainConfig
@@ -101,7 +103,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return string|null
      */
-    private function getProductManufacturer(Product $product) {
+    private function getProductManufacturer(Product $product)
+    {
         $manufacturer = null;
         if ($product->getBrand() !== null) {
             $manufacturer = $product->getBrand()->getName();
@@ -115,7 +118,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @return string[productId][paramName] $paramsByProductId
      * @return string[paramName]
      */
-    private function getProductParams(Product $product, $paramsByProductId) {
+    private function getProductParams(Product $product, $paramsByProductId)
+    {
         if (array_key_exists($product->getId(), $paramsByProductId)) {
             $params = $paramsByProductId[$product->getId()];
         } else {
@@ -129,7 +133,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return int
      */
-    private function getProductDeliveryDate(Product $product) {
+    private function getProductDeliveryDate(Product $product)
+    {
         if ($product->getCalculatedAvailability()->getDispatchTime() === null) {
             $deliveryDate = -1;
         } else {
@@ -144,7 +149,8 @@ class ZboziItemFactory implements FeedItemFactoryInterface
      * @param int
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice
      */
-    private function getProductPrice(Product $product, $domainId) {
+    private function getProductPrice(Product $product, $domainId)
+    {
         return $this->productPriceCalculationForUser->calculatePriceForUserAndDomainId(
             $product,
             $domainId,

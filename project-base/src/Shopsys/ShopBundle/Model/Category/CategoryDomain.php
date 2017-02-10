@@ -67,7 +67,8 @@ class CategoryDomain
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param int $domainId
      */
-    public function __construct(Category $category, $domainId) {
+    public function __construct(Category $category, $domainId)
+    {
         $this->category = $category;
         $this->domainId = $domainId;
         $this->hidden = false;
@@ -77,70 +78,80 @@ class CategoryDomain
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return null|string
      */
-    public function getSeoTitle() {
+    public function getSeoTitle()
+    {
         return $this->seoTitle;
     }
 
     /**
      * @return null|string
      */
-    public function getSeoMetaDescription() {
+    public function getSeoMetaDescription()
+    {
         return $this->seoMetaDescription;
     }
 
     /**
      * @return string|null
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @return bool
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 
     /**
      * @param string|null $seoTitle
      */
-    public function setSeoTitle($seoTitle) {
+    public function setSeoTitle($seoTitle)
+    {
         $this->seoTitle = $seoTitle;
     }
 
     /**
      * @param string|null $seoMetaDescription
      */
-    public function setSeoMetaDescription($seoMetaDescription) {
+    public function setSeoMetaDescription($seoMetaDescription)
+    {
         $this->seoMetaDescription = $seoMetaDescription;
     }
 
     /**
      * @param bool $hidden
      */
-    public function setHidden($hidden) {
+    public function setHidden($hidden)
+    {
         $this->hidden = $hidden;
     }
 
     /**
      * @param string $description
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
     /**
      * @return bool
      */
-    public function isVisible() {
+    public function isVisible()
+    {
         return $this->visible;
     }
 }

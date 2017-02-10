@@ -14,7 +14,8 @@ class UploadedFileConfigDefinition implements ConfigurationInterface
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
      */
-    public function getConfigTreeBuilder() {
+    public function getConfigTreeBuilder()
+    {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('entity_files');
 
@@ -27,7 +28,8 @@ class UploadedFileConfigDefinition implements ConfigurationInterface
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function buildItemsNode(ArrayNodeDefinition $node) {
+    private function buildItemsNode(ArrayNodeDefinition $node)
+    {
         return $node
             ->addDefaultsIfNotSet()
             ->children()

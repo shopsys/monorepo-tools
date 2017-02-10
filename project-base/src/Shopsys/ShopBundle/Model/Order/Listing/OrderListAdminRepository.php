@@ -20,7 +20,8 @@ class OrderListAdminRepository
      */
     private $localization;
 
-    public function __construct(EntityManager $em, Localization $localization) {
+    public function __construct(EntityManager $em, Localization $localization)
+    {
         $this->em = $em;
         $this->localization = $localization;
     }
@@ -28,7 +29,8 @@ class OrderListAdminRepository
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getOrderListQueryBuilder() {
+    public function getOrderListQueryBuilder()
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('
                 o.id,

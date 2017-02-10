@@ -12,7 +12,8 @@ use stdClass;
 
 class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testPersistReferenceWrongEntity() {
+    public function testPersistReferenceWrongEntity()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()
@@ -31,7 +32,8 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $persistentReferenceFacade->persistReference('referenceName', new stdClass());
     }
 
-    public function testPersistReference() {
+    public function testPersistReference()
+    {
         $emMock = $this->getMockBuilder(EntityManager::class)
             ->setMethods(['__construct', 'persist', 'flush'])
             ->disableOriginalConstructor()
@@ -55,7 +57,8 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $persistentReferenceFacade->persistReference('referenceName', $productMock);
     }
 
-    public function testGetReference() {
+    public function testGetReference()
+    {
         $persistentReference = new PersistentReference('referenceName', 'entityName', 'entityId');
         $expectedObject = new stdClass();
 
@@ -79,7 +82,8 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedObject, $persistentReferenceFacade->getReference('referenceName'));
     }
 
-    public function testGetReferenceNotFound() {
+    public function testGetReferenceNotFound()
+    {
         $persistentReference = new PersistentReference('referenceName', 'entityName', 'entityId');
 
         $emMock = $this->getMockBuilder(EntityManager::class)

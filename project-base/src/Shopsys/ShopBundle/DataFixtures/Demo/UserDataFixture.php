@@ -16,7 +16,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $customerFacade = $this->get(CustomerFacade::class);
         /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
         $loaderService = $this->get(UserDataFixtureLoader::class);
@@ -38,7 +39,8 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             SettingValueDataFixture::class,
             CountryDataFixture::class,

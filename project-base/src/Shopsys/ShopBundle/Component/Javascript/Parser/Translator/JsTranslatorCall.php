@@ -55,35 +55,40 @@ class JsTranslatorCall
     /**
      * @return \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */
-    public function getCallExprNode() {
+    public function getCallExprNode()
+    {
         return $this->callExprNode;
     }
 
     /**
      * @return \PLUG\JavaScript\JNodes\JNodeBase
      */
-    public function getMessageIdArgumentNode() {
+    public function getMessageIdArgumentNode()
+    {
         return $this->messageIdArgumentNode;
     }
 
     /**
      * @return string
      */
-    public function getMessageId() {
+    public function getMessageId()
+    {
         return $this->messageId;
     }
 
     /**
      * @return string
      */
-    public function getDomain() {
+    public function getDomain()
+    {
         return $this->domain;
     }
 
     /**
      * @return string
      */
-    public function getFunctionName() {
+    public function getFunctionName()
+    {
         return $this->functionName;
     }
 }

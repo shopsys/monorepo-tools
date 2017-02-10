@@ -104,7 +104,8 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param bool $filterByStock
      */
-    public function filterByStock(QueryBuilder $productsQueryBuilder, $filterByStock) {
+    public function filterByStock(QueryBuilder $productsQueryBuilder, $filterByStock)
+    {
         if ($filterByStock) {
             $this->queryBuilderService->addOrExtendJoin(
                 $productsQueryBuilder,
@@ -122,7 +123,8 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag[] $flags
      */
-    private function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags) {
+    private function filterByFlags(QueryBuilder $productsQueryBuilder, array $flags)
+    {
         $flagsCount = count($flags);
         if ($flagsCount !== 0) {
             $flagsQueryBuilder = $this->getFlagsQueryBuilder($flags, $productsQueryBuilder->getEntityManager());
@@ -138,7 +140,8 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\ShopBundle\Model\Product\Brand\Brand[] $brands
      */
-    private function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands) {
+    private function filterByBrands(QueryBuilder $productsQueryBuilder, array $brands)
+    {
         $brandsCount = count($brands);
         if ($brandsCount !== 0) {
             $brandsQueryBuilder = $this->getBrandsQueryBuilder($brands, $productsQueryBuilder->getEntityManager());
@@ -155,7 +158,8 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\EntityManager $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getFlagsQueryBuilder(array $flags, EntityManager $em) {
+    private function getFlagsQueryBuilder(array $flags, EntityManager $em)
+    {
         $flagsQueryBuilder = $em->createQueryBuilder();
 
         $flagsQueryBuilder
@@ -173,7 +177,8 @@ class ProductFilterRepository
      * @param \Doctrine\ORM\EntityManager $em
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getBrandsQueryBuilder(array $brands, EntityManager $em) {
+    private function getBrandsQueryBuilder(array $brands, EntityManager $em)
+    {
         $brandsQueryBuilder = $em->createQueryBuilder();
 
         $brandsQueryBuilder

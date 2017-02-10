@@ -19,7 +19,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
 {
-    public function testCalculatePriceByUserAndDomainIdWithUser() {
+    public function testCalculatePriceByUserAndDomainIdWithUser()
+    {
         $product = $this->getMock(Product::class, [], [], '', false);
         $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
         $billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
@@ -47,7 +48,8 @@ class ProductPriceCalculationForUserTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedProductPrice, $productPrice);
     }
 
-    public function testCalculatePriceByUserAndDomainIdWithoutUser() {
+    public function testCalculatePriceByUserAndDomainIdWithoutUser()
+    {
         $domainId = 1;
         $product = $this->getMock(Product::class, [], [], '', false);
         $pricingGroup = new PricingGroup(new PricingGroupData('name', 1), $domainId);

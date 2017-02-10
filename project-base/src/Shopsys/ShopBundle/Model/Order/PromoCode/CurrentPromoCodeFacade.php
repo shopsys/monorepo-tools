@@ -19,7 +19,8 @@ class CurrentPromoCodeFacade
      */
     private $promoCodeFacade;
 
-    public function __construct(PromoCodeFacade $promoCodeFacade, SessionInterface $session) {
+    public function __construct(PromoCodeFacade $promoCodeFacade, SessionInterface $session)
+    {
         $this->promoCodeFacade = $promoCodeFacade;
         $this->session = $session;
     }
@@ -27,7 +28,8 @@ class CurrentPromoCodeFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
      */
-    public function getValidEnteredPromoCodeOrNull() {
+    public function getValidEnteredPromoCodeOrNull()
+    {
         $enteredCode = $this->session->get(self::PROMO_CODE_SESSION_KEY);
 
         return $this->promoCodeFacade->findPromoCodeByCode($enteredCode);
@@ -36,7 +38,8 @@ class CurrentPromoCodeFacade
     /**
      * @param string $enteredCode
      */
-    public function setEnteredPromoCode($enteredCode) {
+    public function setEnteredPromoCode($enteredCode)
+    {
         $promoCode = $this->promoCodeFacade->findPromoCodeByCode($enteredCode);
         if ($promoCode === null) {
             throw new \Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException($enteredCode);
@@ -45,7 +48,8 @@ class CurrentPromoCodeFacade
         }
     }
 
-    public function removeEnteredPromoCode() {
+    public function removeEnteredPromoCode()
+    {
         $this->session->remove(self::PROMO_CODE_SESSION_KEY);
     }
 }

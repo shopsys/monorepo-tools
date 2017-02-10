@@ -8,7 +8,8 @@ class TransformString
      * @param string $string
      * @return string
      */
-    public static function safeFilename($string) {
+    public static function safeFilename($string)
+    {
         $string = preg_replace('~[^-\\.\\pL0-9_]+~u', '_', $string);
         $string = preg_replace('~[\\.]{2,}~u', '.', $string);
         $string = trim($string, '_');
@@ -23,7 +24,8 @@ class TransformString
      * @param string $value
      * @return string|null
      */
-    public static function emptyToNull($value) {
+    public static function emptyToNull($value)
+    {
         return $value === '' ? null : $value;
     }
 
@@ -32,7 +34,8 @@ class TransformString
      * @return string
      * @link http://php.vrana.cz/vytvoreni-pratelskeho-url.php
      */
-    public static function stringToFriendlyUrlSlug($string) {
+    public static function stringToFriendlyUrlSlug($string)
+    {
         $slug = $string;
         $slug = preg_replace('~[^\\pL0-9_]+~u', '-', $slug);
         $slug = trim($slug, '-');
@@ -47,7 +50,8 @@ class TransformString
      * @param string $string
      * @return string
      */
-    private static function toAscii($string) {
+    private static function toAscii($string)
+    {
         return iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $string);
     }
 }

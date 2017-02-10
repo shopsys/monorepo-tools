@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Setting\SettingValueRepository;
 
 class SettingTest extends PHPUnit_Framework_TestCase
 {
-    public function testSet() {
+    public function testSet()
+    {
         $settingValueArray = [
             [SettingValue::DOMAIN_ID_COMMON, []],
             [1, [new SettingValue('key', 'value', 1)]],
@@ -40,7 +41,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->setForDomain('key2', 'value', 1);
     }
 
-    public function testSetNotFoundException() {
+    public function testSetNotFoundException()
+    {
         $settingValueArray = [
             [SettingValue::DOMAIN_ID_COMMON, []],
             [1, [new SettingValue('key', 'value', 1)]],
@@ -65,7 +67,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->setForDomain('key2', 'value', 1);
     }
 
-    public function testSetInvalidArgumentException() {
+    public function testSetInvalidArgumentException()
+    {
         $entityManagerMock = $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->setMethods(['flush', 'persist'])
@@ -83,7 +86,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->setForDomain('key2', 'value', null);
     }
 
-    public function testGetNotFoundException() {
+    public function testGetNotFoundException()
+    {
         $settingValueArray = [new SettingValue('key', 'value', 1)];
 
         $entityManagerMock = $this->getMockBuilder(EntityManager::class)
@@ -105,7 +109,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->getForDomain('key2', 1);
     }
 
-    public function testGetValues() {
+    public function testGetValues()
+    {
         $settingValueArrayByDomainIdMap = [
             [SettingValue::DOMAIN_ID_COMMON, [new SettingValue('key', 'valueCommon', SettingValue::DOMAIN_ID_COMMON)]],
             [1, [new SettingValue('key', 'value', 1)]],
@@ -136,7 +141,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $this->assertSame('newValueCommon', $setting->get('key'));
     }
 
-    public function testSetValueNewDomain() {
+    public function testSetValueNewDomain()
+    {
         $settingValueArrayByDomainIdMap = [
             [SettingValue::DOMAIN_ID_COMMON, [new SettingValue('key', 'valueCommon', SettingValue::DOMAIN_ID_COMMON)]],
             [1, [new SettingValue('key', 'value', 1)]],
@@ -158,7 +164,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $this->assertSame('value', $setting->getForDomain('key', 1));
     }
 
-    public function testCannotSetNonexistentCommonValue() {
+    public function testCannotSetNonexistentCommonValue()
+    {
         $entityManagerMock = $this->createDummyEntityManagerMock();
 
         $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
@@ -173,7 +180,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->set('nonexistentKey', 'anyValue');
     }
 
-    public function testCannotSetNonexistentValueForDomain() {
+    public function testCannotSetNonexistentValueForDomain()
+    {
         $entityManagerMock = $this->createDummyEntityManagerMock();
 
         $settingValueRepositoryMock = $this->getMock(SettingValueRepository::class, [], [], '', false);
@@ -188,7 +196,8 @@ class SettingTest extends PHPUnit_Framework_TestCase
         $setting->setForDomain('nonexistentKey', 'anyValue', 1);
     }
 
-    private function createDummyEntityManagerMock() {
+    private function createDummyEntityManagerMock()
+    {
         return $this->getMockBuilder(EntityManager::class)
             ->disableOriginalConstructor()
             ->getMock();

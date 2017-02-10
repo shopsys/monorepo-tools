@@ -16,7 +16,8 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function getBaseImageConfig() {
+    private function getBaseImageConfig()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => stdClass::class,
@@ -71,21 +72,24 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
         return new ImageConfig($imageEntityConfigByClass);
     }
 
-    public function testGetEntityName() {
+    public function testGetEntityName()
+    {
         $imageConfig = $this->getBaseImageConfig();
         $entity = new stdClass();
 
         $this->assertSame('Name_1', $imageConfig->getEntityName($entity));
     }
 
-    public function testGetEntityNameNotFound() {
+    public function testGetEntityNameNotFound()
+    {
         $imageConfig = $this->getBaseImageConfig();
 
         $this->setExpectedException(ImageEntityConfigNotFoundException::class);
         $imageConfig->getEntityName($this);
     }
 
-    public function testGetImageSizeConfigByEntity() {
+    public function testGetImageSizeConfigByEntity()
+    {
         $imageConfig = $this->getBaseImageConfig();
         $entity = new stdClass();
 
@@ -102,7 +106,8 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame('SizeName_0_1', $imageSizeConfig3->getName());
     }
 
-    public function testGetImageSizeConfigByEntityName() {
+    public function testGetImageSizeConfigByEntityName()
+    {
         $imageConfig = $this->getBaseImageConfig();
         $entityName = 'Name_1';
 
@@ -119,7 +124,8 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame('SizeName_0_1', $imageSizeConfig3->getName());
     }
 
-    public function tesGetImageEntityConfig() {
+    public function tesGetImageEntityConfig()
+    {
         $imageConfig = $this->getBaseImageConfig();
         $entity = new stdClass();
 
@@ -127,7 +133,8 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame('Name_1', $imageEntityConfig->getEntityName());
     }
 
-    public function tesGetImageEntityConfigNotFound() {
+    public function tesGetImageEntityConfigNotFound()
+    {
         $imageConfig = $this->getBaseImageConfig();
 
         $this->setExpectedException(ImageEntityConfigNotFoundException::class);

@@ -58,7 +58,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $productManualInputPrices
      * @param string $newVatPercent
      */
-    public function recalculateInputPriceForNewVatPercent(Product $product, $productManualInputPrices, $newVatPercent) {
+    public function recalculateInputPriceForNewVatPercent(Product $product, $productManualInputPrices, $newVatPercent)
+    {
         $inputPriceType = $this->pricingSetting->getInputPriceType();
 
         foreach ($productManualInputPrices as $productManualInputPrice) {
@@ -93,7 +94,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\ProductData $productData
      */
-    public function edit(Product $product, ProductData $productData) {
+    public function edit(Product $product, ProductData $productData)
+    {
         $product->edit($productData);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
         $this->markProductForVisibilityRecalculation($product);
@@ -103,7 +105,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param string $inputPrice
      */
-    public function setInputPrice(Product $product, $inputPrice) {
+    public function setInputPrice(Product $product, $inputPrice)
+    {
         $product->setPrice($inputPrice);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
     }
@@ -112,7 +115,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
      */
-    public function changeVat(Product $product, Vat $vat) {
+    public function changeVat(Product $product, Vat $vat)
+    {
         $product->changeVat($vat);
         $this->productPriceRecalculationScheduler->scheduleProductForImmediateRecalculation($product);
     }
@@ -122,7 +126,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
      */
-    public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups) {
+    public function getProductSellingPricesIndexedByDomainIdAndPricingGroupId(Product $product, array $pricingGroups)
+    {
         $productSellingPrices = [];
         foreach ($pricingGroups as $pricingGroup) {
             $productSellingPrices[$pricingGroup->getDomainId()][$pricingGroup->getId()] = new ProductSellingPrice(
@@ -138,7 +143,8 @@ class ProductService
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\ProductDeleteResult
      */
-    public function delete(Product $product) {
+    public function delete(Product $product)
+    {
         if ($product->isMainVariant()) {
             foreach ($product->getVariants() as $variantProduct) {
                 $variantProduct->unsetMainVariant();
@@ -154,7 +160,8 @@ class ProductService
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    public function markProductForVisibilityRecalculation(Product $product) {
+    public function markProductForVisibilityRecalculation(Product $product)
+    {
         $product->markForVisibilityRecalculation();
         if ($product->isMainVariant()) {
             foreach ($product->getVariants() as $variant) {
@@ -170,7 +177,8 @@ class ProductService
      * @param int[] $orderedProductIds
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    public function sortProductsByProductIds(array $products, array $orderedProductIds) {
+    public function sortProductsByProductIds(array $products, array $orderedProductIds)
+    {
         $orderedProductIds = array_values($orderedProductIds);
 
         usort($products, function (Product $product1, Product $product2) use ($orderedProductIds) {

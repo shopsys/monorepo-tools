@@ -9,14 +9,16 @@ abstract class AbstractTranslatedConstantList implements TranslatedConstantListI
     /**
      * @return string
      */
-    public function getValues() {
+    public function getValues()
+    {
         return array_keys($this->getTranslationsIndexedByValue());
     }
 
     /**
      * @param string $constant
      */
-    public function getTranslation($constant) {
+    public function getTranslation($constant)
+    {
         $translations = $this->getTranslationsIndexedByValue();
         if (!array_key_exists($constant, $translations)) {
             throw new \Shopsys\ShopBundle\Component\ConstantList\Exception\UndefinedTranslationException($constant);

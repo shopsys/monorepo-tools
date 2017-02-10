@@ -31,14 +31,16 @@ class JsConstantCall
     /**
      * @return \PLUG\JavaScript\JNodes\nonterminal\JCallExprNode
      */
-    public function getCallExprNode() {
+    public function getCallExprNode()
+    {
         return $this->callExprNode;
     }
 
     /**
      * @return string
      */
-    public function getConstantName() {
+    public function getConstantName()
+    {
         return $this->constantName;
     }
 }

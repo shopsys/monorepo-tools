@@ -22,7 +22,8 @@ class BasePriceCalculation
      * @param \Shopsys\ShopBundle\Model\Pricing\PriceCalculation $priceCalculation
      * @param \Shopsys\ShopBundle\Model\Pricing\Rounding $rounding
      */
-    public function __construct(PriceCalculation $priceCalculation, Rounding $rounding) {
+    public function __construct(PriceCalculation $priceCalculation, Rounding $rounding)
+    {
         $this->priceCalculation = $priceCalculation;
         $this->rounding = $rounding;
     }
@@ -33,7 +34,8 @@ class BasePriceCalculation
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\Vat $vat
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function calculateBasePrice($inputPrice, $inputPriceType, Vat $vat) {
+    public function calculateBasePrice($inputPrice, $inputPriceType, Vat $vat)
+    {
         $basePriceWithVat = $this->getBasePriceWithVat($inputPrice, $inputPriceType, $vat);
         $vatAmount = $this->priceCalculation->getVatAmountByPriceWithVat($basePriceWithVat, $vat);
         $basePriceWithoutVat = $this->rounding->roundPriceWithoutVat($basePriceWithVat - $vatAmount);
@@ -47,7 +49,8 @@ class BasePriceCalculation
      * @param string[] $coefficients
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function applyCoefficients(Price $price, Vat $vat, $coefficients) {
+    public function applyCoefficients(Price $price, Vat $vat, $coefficients)
+    {
         $priceWithVatBeforeRounding = $price->getPriceWithVat();
         foreach ($coefficients as $coefficient) {
             $priceWithVatBeforeRounding *= $coefficient;
@@ -65,7 +68,8 @@ class BasePriceCalculation
      * @param Vat $vat
      * @return string
      */
-    private function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat) {
+    private function getBasePriceWithVat($inputPrice, $inputPriceType, Vat $vat)
+    {
         switch ($inputPriceType) {
             case PricingSetting::INPUT_PRICE_TYPE_WITH_VAT:
                 return $this->rounding->roundPriceWithVat($inputPrice);

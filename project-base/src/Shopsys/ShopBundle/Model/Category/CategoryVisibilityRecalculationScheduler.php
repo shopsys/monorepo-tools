@@ -17,26 +17,30 @@ class CategoryVisibilityRecalculationScheduler
      */
     private $productVisibilityFacade;
 
-    public function __construct(ProductVisibilityFacade $productVisibilityFacade) {
+    public function __construct(ProductVisibilityFacade $productVisibilityFacade)
+    {
         $this->productVisibilityFacade = $productVisibilityFacade;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      */
-    public function scheduleRecalculation(Category $category) {
+    public function scheduleRecalculation(Category $category)
+    {
         $this->recalculate = true;
         $this->productVisibilityFacade->markProductsForRecalculationAffectedByCategory($category);
     }
 
-    public function scheduleRecalculationWithoutDependencies() {
+    public function scheduleRecalculationWithoutDependencies()
+    {
         $this->recalculate = true;
     }
 
     /**
      * @return bool
      */
-    public function isRecalculationScheduled() {
+    public function isRecalculationScheduled()
+    {
         return $this->recalculate;
     }
 }

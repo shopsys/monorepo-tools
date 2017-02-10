@@ -12,7 +12,8 @@ class DateTimeFormatter
      */
     private $customDateTimeFormatPatternRepository;
 
-    public function __construct(DateTimeFormatPatternRepository $customDateTimeFormatPatternRepository) {
+    public function __construct(DateTimeFormatPatternRepository $customDateTimeFormatPatternRepository)
+    {
         $this->customDateTimeFormatPatternRepository = $customDateTimeFormatPatternRepository;
     }
 
@@ -22,7 +23,8 @@ class DateTimeFormatter
      * @param int $timeType @see http://php.net/manual/en/class.intldateformatter.php#intl.intldateformatter-constants
      * @param string $locale
      */
-    public function format(DateTime $value, $dateType, $timeType, $locale) {
+    public function format(DateTime $value, $dateType, $timeType, $locale)
+    {
         $intlDateFormatter = new IntlDateFormatter(
             $locale,
             $dateType,
@@ -40,7 +42,8 @@ class DateTimeFormatter
      * @param int|null $dateType
      * @param int|null $timeType
      */
-    private function getCustomPattern($locale, $dateType, $timeType) {
+    private function getCustomPattern($locale, $dateType, $timeType)
+    {
         $dateTimePattern = $this->customDateTimeFormatPatternRepository->findDateTimePattern($locale, $dateType, $timeType);
         if ($dateTimePattern !== null) {
             $pattern = $dateTimePattern->getPattern();

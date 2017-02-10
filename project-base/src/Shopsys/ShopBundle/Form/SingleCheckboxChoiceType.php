@@ -9,18 +9,21 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SingleCheckboxChoiceType extends AbstractType
 {
-    public function getParent() {
+    public function getParent()
+    {
         return 'choice';
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'single_checkbox_choice';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'multiple' => false,
             'expanded' => true,
@@ -31,7 +34,8 @@ class SingleCheckboxChoiceType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         parent::buildForm($builder, $options);
 
         foreach ($builder->all() as $i => $child) {

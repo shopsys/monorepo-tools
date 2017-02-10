@@ -78,7 +78,8 @@ class AdvertController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $advert = $this->advertFacade->getById($id);
         $form = $this->createForm($this->advertFormTypeFactory->create($advert));
 
@@ -117,7 +118,8 @@ class AdvertController extends AdminBaseController
     /**
      * @Route("/advert/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $administrator = $this->getUser();
         /* @var $administrator \Shopsys\ShopBundle\Model\Administrator\Administrator */
 
@@ -167,7 +169,8 @@ class AdvertController extends AdminBaseController
      * @Route("/advert/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->advertFormTypeFactory->create());
 
         $advertData = new AdvertData();
@@ -206,7 +209,8 @@ class AdvertController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->advertFacade->getById($id)->getName();
 

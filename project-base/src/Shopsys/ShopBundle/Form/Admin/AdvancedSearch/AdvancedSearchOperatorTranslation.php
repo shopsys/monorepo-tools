@@ -11,7 +11,8 @@ class AdvancedSearchOperatorTranslation
      */
     private $operatorsTranslations;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->operatorsTranslations = [
             AdvancedSearchFilterInterface::OPERATOR_CONTAINS => t('include'),
             AdvancedSearchFilterInterface::OPERATOR_NOT_CONTAINS => t('doesn\'t include'),
@@ -33,7 +34,8 @@ class AdvancedSearchOperatorTranslation
      * @param string $operator
      * @return string
      */
-    public function translateOperator($operator) {
+    public function translateOperator($operator)
+    {
         if (array_key_exists($operator, $this->operatorsTranslations)) {
             return $this->operatorsTranslations[$operator];
         }

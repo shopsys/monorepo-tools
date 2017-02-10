@@ -19,14 +19,16 @@ class CustomerFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function __construct(array $countries) {
+    public function __construct(array $countries)
+    {
         $this->countries = $countries;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'customer_form';
     }
 
@@ -34,7 +36,8 @@ class CustomerFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('userData', new UserFormType())
             ->add('billingAddressData', new BillingAddressFormType($this->countries))
@@ -42,7 +45,8 @@ class CustomerFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => CustomerData::class,
             'attr' => ['novalidate' => 'novalidate'],

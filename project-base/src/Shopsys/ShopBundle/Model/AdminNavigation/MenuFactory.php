@@ -49,7 +49,8 @@ class MenuFactory
     /**
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\Menu
      */
-    public function createMenuWithVisibleItems() {
+    public function createMenuWithVisibleItems()
+    {
         $menu = $this->menuLoader->loadFromYaml($this->configFilepath);
 
         $visibleMenuItems = $this->filterVisibleRecursive($menu->getItems());
@@ -61,7 +62,8 @@ class MenuFactory
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[] $menuItems
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem[]
      */
-    private function filterVisibleRecursive(array $menuItems) {
+    private function filterVisibleRecursive(array $menuItems)
+    {
         $visibleMenuItems = [];
 
         foreach ($menuItems as $menuItem) {
@@ -89,7 +91,8 @@ class MenuFactory
      * @param \Shopsys\ShopBundle\Model\AdminNavigation\MenuItem $menuItem
      * @return bool
      */
-    private function isMenuItemVisible(MenuItem $menuItem) {
+    private function isMenuItemVisible(MenuItem $menuItem)
+    {
         if ($menuItem->isSuperadmin() && !$this->authorizationChecker->isGranted(Roles::ROLE_SUPER_ADMIN)) {
             return false;
         }

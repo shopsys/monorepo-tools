@@ -14,7 +14,8 @@ class FriendlyUrlService
      */
     private $domain;
 
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
@@ -24,7 +25,8 @@ class FriendlyUrlService
      * @param string[locale] $namesByLocale
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl[]
      */
-    public function createFriendlyUrls($routeName, $entityId, $namesByLocale) {
+    public function createFriendlyUrls($routeName, $entityId, $namesByLocale)
+    {
         $friendlyUrls = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             if (array_key_exists($domainConfig->getLocale(), $namesByLocale)) {
@@ -109,7 +111,8 @@ class FriendlyUrlService
      * @param \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrl $friendlyUrl
      * @return string
      */
-    public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl) {
+    public function getAbsoluteUrlByFriendlyUrl(FriendlyUrl $friendlyUrl)
+    {
         $domainConfig = $this->domain->getDomainConfigById($friendlyUrl->getDomainId());
 
         return $domainConfig->getUrl() . '/' . $friendlyUrl->getSlug();
@@ -120,7 +123,8 @@ class FriendlyUrlService
      * @param string $slug
      * @return string
      */
-    public function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug) {
+    public function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug)
+    {
         return $domainConfig->getUrl() . '/' . $slug;
     }
 }

@@ -90,7 +90,8 @@ class Category extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */
-    public function __construct(CategoryData $categoryData) {
+    public function __construct(CategoryData $categoryData)
+    {
         $this->setParent($categoryData->parent);
         $this->translations = new ArrayCollection();
         $this->setTranslations($categoryData);
@@ -100,7 +101,8 @@ class Category extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */
-    public function edit(CategoryData $categoryData) {
+    public function edit(CategoryData $categoryData)
+    {
         $this->setParent($categoryData->parent);
         $this->setTranslations($categoryData);
         $this->heurekaCzFeedCategory = $categoryData->heurekaCzFeedCategory;
@@ -109,14 +111,16 @@ class Category extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Category\Category|null $parent
      */
-    public function setParent(Category $parent = null) {
+    public function setParent(Category $parent = null)
+    {
         $this->parent = $parent;
     }
 
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -124,14 +128,16 @@ class Category extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @return string[locale]
      */
-    public function getNames() {
+    public function getNames()
+    {
         $names = [];
         foreach ($this->translations as $translation) {
             $names[$translation->getLocale()] = $translation->getName();
@@ -143,35 +149,40 @@ class Category extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function getParent() {
+    public function getParent()
+    {
         return $this->parent;
     }
 
     /**
      * @return int
      */
-    public function getLevel() {
+    public function getLevel()
+    {
         return $this->level;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getChildren() {
+    public function getChildren()
+    {
         return $this->children;
     }
 
     /**
      * @return int
      */
-    public function getLft() {
+    public function getLft()
+    {
         return $this->lft;
     }
 
     /**
      * @return int
      */
-    public function getRgt() {
+    public function getRgt()
+    {
         return $this->rgt;
     }
 
@@ -179,7 +190,8 @@ class Category extends AbstractTranslatableEntity
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\CategoryDomain
      */
-    public function getCategoryDomain($domainId) {
+    public function getCategoryDomain($domainId)
+    {
         foreach ($this->domains as $categoryDomain) {
             if ($categoryDomain->getDomainId() === $domainId) {
                 return $categoryDomain;
@@ -192,14 +204,16 @@ class Category extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
      */
-    public function getHeurekaCzFeedCategory() {
+    public function getHeurekaCzFeedCategory()
+    {
         return $this->heurekaCzFeedCategory;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */
-    private function setTranslations(CategoryData $categoryData) {
+    private function setTranslations(CategoryData $categoryData)
+    {
         foreach ($categoryData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -208,7 +222,8 @@ class Category extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Category\CategoryTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new CategoryTranslation();
     }
 }

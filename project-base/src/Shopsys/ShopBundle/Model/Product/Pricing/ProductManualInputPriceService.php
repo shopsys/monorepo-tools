@@ -14,7 +14,8 @@ class ProductManualInputPriceService
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice $productManualInputPrice
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice
      */
-    public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice) {
+    public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice, $productManualInputPrice)
+    {
         if ($productManualInputPrice === null) {
             $productManualInputPrice = new ProductManualInputPrice($product, $pricingGroup, $inputPrice);
         } else {

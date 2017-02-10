@@ -19,7 +19,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
 {
     const DOMAIN_ID = 1;
 
-    public function testGetProductItems() {
+    public function testGetProductItems()
+    {
         $payment = new Payment(new PaymentData());
         $orderData = new OrderData();
         $paymentPrice = new Price(0, 0);
@@ -36,7 +37,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $this->assertContainsOnlyInstancesOf(OrderProduct::class, $productItems);
     }
 
-    public function testGetProductItemsCount() {
+    public function testGetProductItemsCount()
+    {
         $payment = new Payment(new PaymentData());
         $paymentItemPrice = new Price(0, 0);
         $orderData = new OrderData();
@@ -50,7 +52,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, $order->getProductItemsCount());
     }
 
-    public function testOrderWithDeliveryAddressSameAsBillingAddress() {
+    public function testOrderWithDeliveryAddressSameAsBillingAddress()
+    {
         $orderData = new OrderData();
         $country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 
@@ -76,7 +79,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $this->assertSame($country, $order->getDeliveryCountry());
     }
 
-    public function testOrderWithoutDeliveryAddressSameAsBillingAddress() {
+    public function testOrderWithoutDeliveryAddressSameAsBillingAddress()
+    {
         $orderData = new OrderData();
         $country = new Country(new CountryData('Slovenská republika'), self::DOMAIN_ID);
 
@@ -110,7 +114,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $this->assertSame($country, $order->getDeliveryCountry());
     }
 
-    public function testOrderCreatedWithEmptyCreatedAtIsCreatedNow() {
+    public function testOrderCreatedWithEmptyCreatedAtIsCreatedNow()
+    {
         $orderData = new OrderData();
         $user = null;
 
@@ -120,7 +125,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $this->assertDateTimeIsCloseTo(new DateTime(), $order->getCreatedAt(), 5);
     }
 
-    public function testOrderCanBeCreatedWithSpecificCreatedAt() {
+    public function testOrderCanBeCreatedWithSpecificCreatedAt()
+    {
         $orderData = new OrderData();
         $user = null;
 
@@ -136,7 +142,8 @@ class OrderTest extends PHPUnit_Framework_TestCase
      * @param \DateTimeInterface $actual
      * @param int $deltaInSeconds
      */
-    private function assertDateTimeIsCloseTo(DateTimeInterface $expected, DateTimeInterface $actual, $deltaInSeconds) {
+    private function assertDateTimeIsCloseTo(DateTimeInterface $expected, DateTimeInterface $actual, $deltaInSeconds)
+    {
         $diffInSeconds = $expected->getTimestamp() - $actual->getTimestamp();
 
         if (abs($diffInSeconds) > $deltaInSeconds) {

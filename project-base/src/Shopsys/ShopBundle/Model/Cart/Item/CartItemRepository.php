@@ -16,14 +16,16 @@ class CartItemRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCartItemRepository() {
+    private function getCartItemRepository()
+    {
         return $this->em->getRepository(CartItem::class);
     }
 
@@ -31,7 +33,8 @@ class CartItemRepository
      * @param \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier $customerIdentifier
      * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
      */
-    public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier) {
+    public function getAllByCustomerIdentifier(CustomerIdentifier $customerIdentifier)
+    {
         $criteria = [];
         if ($customerIdentifier->getUser() !== null) {
             $criteria['user'] = $customerIdentifier->getUser()->getId();

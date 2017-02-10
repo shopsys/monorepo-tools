@@ -11,14 +11,16 @@ class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getInputPriceDataProvider
      */
-    public function testGetInputPrice($inputPriceType, $priceWithVat, $vatPercent, $expectedResult) {
+    public function testGetInputPrice($inputPriceType, $priceWithVat, $vatPercent, $expectedResult)
+    {
         $inputPriceCalculation = new InputPriceCalculation();
         $actualInputPrice = $inputPriceCalculation->getInputPrice($inputPriceType, $priceWithVat, $vatPercent);
 
         $this->assertEquals(round($expectedResult, 6), round($actualInputPrice, 6));
     }
 
-    public function getInputPriceDataProvider() {
+    public function getInputPriceDataProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,

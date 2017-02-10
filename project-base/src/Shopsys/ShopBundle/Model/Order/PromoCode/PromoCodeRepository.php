@@ -15,14 +15,16 @@ class PromoCodeRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getPromoCodeRepository() {
+    private function getPromoCodeRepository()
+    {
         return $this->em->getRepository(PromoCode::class);
     }
 
@@ -30,7 +32,8 @@ class PromoCodeRepository
      * @param int $promoCodeId
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
      */
-    public function findById($promoCodeId) {
+    public function findById($promoCodeId)
+    {
         return $this->getPromoCodeRepository()->find($promoCodeId);
     }
 
@@ -38,7 +41,8 @@ class PromoCodeRepository
      * @param string $code
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode|null
      */
-    public function findByCode($code) {
+    public function findByCode($code)
+    {
         return $this->getPromoCodeRepository()->findOneBy(['code' => $code]);
     }
 
@@ -46,7 +50,8 @@ class PromoCodeRepository
      * @param int $promoCodeId
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode
      */
-    public function getById($promoCodeId) {
+    public function getById($promoCodeId)
+    {
         $promoCode = $this->findById($promoCodeId);
 
         if ($promoCode === null) {
@@ -61,7 +66,8 @@ class PromoCodeRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('pc')

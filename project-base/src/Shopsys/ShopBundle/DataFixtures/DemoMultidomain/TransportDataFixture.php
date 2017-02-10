@@ -15,7 +15,8 @@ class TransportDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $transportEditDataFactory = $this->get(TransportEditDataFactory::class);
         /* @var $transportEditDataFactory \Shopsys\ShopBundle\Model\Transport\TransportEditDataFactory */
         $transportFacade = $this->get(TransportFacade::class);

@@ -37,21 +37,24 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
-    public function __construct(FileUpload $fileUpload) {
+    public function __construct(FileUpload $fileUpload)
+    {
         $this->fileUpload = $fileUpload;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'file_upload';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'error_bubbling' => false,
             'compound' => true,
@@ -64,7 +67,8 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      * @param array $value
      * @return string
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         return $value['uploadedFiles'];
     }
 
@@ -72,7 +76,8 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      * @param string $value
      * @return array
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         return [
             'uploadedFiles' => (array)$value,
             'file' => null,
@@ -83,7 +88,8 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $this->required = $options['required'];
         $this->constraints = array_merge(
             [
@@ -113,7 +119,8 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
      * @param string|null $uploadedFiles
      * @param \Symfony\Component\Validator\ExecutionContextInterface $context
      */
-    public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context) {
+    public function validateUploadedFiles($uploadedFiles, ExecutionContextInterface $context)
+    {
         if ($this->required || count($uploadedFiles) > 0) {
             foreach ($uploadedFiles as $uploadedFile) {
                 $filepath = $this->fileUpload->getTemporaryFilepath($uploadedFile);
@@ -126,7 +133,8 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
     /**
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function onPreSubmit(FormEvent $event) {
+    public function onPreSubmit(FormEvent $event)
+    {
         $data = $event->getData();
         if (is_array($data) && array_key_exists('file', $data) && is_array($data['file'])) {
             $fallbackFiles = $data['file'];

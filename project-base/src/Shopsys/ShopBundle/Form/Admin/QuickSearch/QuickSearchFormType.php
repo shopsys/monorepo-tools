@@ -12,7 +12,8 @@ class QuickSearchFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'quick_search_form';
     }
 
@@ -20,7 +21,8 @@ class QuickSearchFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->setMethod('GET')
             ->add('text', FormType::TEXT, [
@@ -29,7 +31,8 @@ class QuickSearchFormType extends AbstractType
             ->add('submit', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'csrf_protection' => false,

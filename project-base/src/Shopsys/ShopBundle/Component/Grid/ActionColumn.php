@@ -91,28 +91,32 @@ class ActionColumn
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @return string
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
     /**
      * @return string|null
      */
-    public function getClassAttribute() {
+    public function getClassAttribute()
+    {
         return $this->classAttributte;
     }
 
     /**
      * @return string|null
      */
-    public function getConfirmMessage() {
+    public function getConfirmMessage()
+    {
         return $this->confirmMessage;
     }
 
@@ -120,7 +124,8 @@ class ActionColumn
      * @param string $classAttribute
      * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
      */
-    public function setClassAttribute($classAttribute) {
+    public function setClassAttribute($classAttribute)
+    {
         $this->classAttributte = $classAttribute;
 
         return $this;
@@ -130,7 +135,8 @@ class ActionColumn
      * @param string $confirmMessage
      * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
      */
-    public function setConfirmMessage($confirmMessage) {
+    public function setConfirmMessage($confirmMessage)
+    {
         $this->confirmMessage = $confirmMessage;
 
         return $this;
@@ -139,7 +145,8 @@ class ActionColumn
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\ActionColumn
      */
-    public function setAjaxConfirm() {
+    public function setAjaxConfirm()
+    {
         $this->isAjaxConfirm = true;
 
         return $this;
@@ -148,7 +155,8 @@ class ActionColumn
     /**
      * @return bool
      */
-    public function isAjaxConfirm() {
+    public function isAjaxConfirm()
+    {
         return $this->isAjaxConfirm;
     }
 
@@ -156,7 +164,8 @@ class ActionColumn
      * @param array $row
      * @return string
      */
-    public function getTargetUrl(array $row) {
+    public function getTargetUrl(array $row)
+    {
         $parameters = $this->additionalRouteParams;
 
         foreach ($this->bindingRouteParams as $key => $sourceColumnName) {

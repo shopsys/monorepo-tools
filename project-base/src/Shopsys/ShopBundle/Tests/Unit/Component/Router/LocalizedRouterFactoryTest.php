@@ -10,7 +10,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetRouterRouterNotResolvedException() {
+    public function testGetRouterRouterNotResolvedException()
+    {
         $localeRoutersConfiguration = [];
         $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);
         $context = new RequestContext();
@@ -20,7 +21,8 @@ class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
         $localizedRouterFactory->getRouter('en', $context);
     }
 
-    public function testGetRouter() {
+    public function testGetRouter()
+    {
         $localeRoutersConfiguration = ['en' => 'pathToResource', 'cs' => 'pathToAnotherResource'];
         $delegatingLoaderMock = $this->getMock(DelegatingLoader::class, [], [], '', false);
         $context1 = new RequestContext();

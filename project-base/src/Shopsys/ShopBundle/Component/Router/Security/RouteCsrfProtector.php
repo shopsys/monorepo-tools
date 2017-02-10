@@ -26,7 +26,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
      */
     private $tokenManager;
 
-    public function __construct(Reader $annotationReader, CsrfTokenManagerInterface $tokenManager) {
+    public function __construct(Reader $annotationReader, CsrfTokenManagerInterface $tokenManager)
+    {
         $this->annotationReader = $annotationReader;
         $this->tokenManager = $tokenManager;
     }
@@ -34,7 +35,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
     /**
      * @return string[]
      */
-    public static function getSubscribedEvents() {
+    public static function getSubscribedEvents()
+    {
         return [
             KernelEvents::CONTROLLER => 'onKernelController',
         ];
@@ -43,7 +45,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
      */
-    public function onKernelController(FilterControllerEvent $event) {
+    public function onKernelController(FilterControllerEvent $event)
+    {
         if ($this->isProtected($event)) {
             $request = $event->getRequest();
             $csrfToken = $request->get(self::CSRF_TOKEN_REQUEST_PARAMETER);
@@ -59,7 +62,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param string $routeName
      * @return string
      */
-    public function getCsrfTokenId($routeName) {
+    public function getCsrfTokenId($routeName)
+    {
         return self::CSRF_TOKEN_ID_PREFIX . $routeName;
     }
 
@@ -67,7 +71,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param string $routeName
      * @return string
      */
-    public function getCsrfTokenByRoute($routeName) {
+    public function getCsrfTokenByRoute($routeName)
+    {
         return $this->tokenManager->getToken($this->getCsrfTokenId($routeName))->getValue();
     }
 
@@ -76,7 +81,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param string $csrfToken
      * @return bool
      */
-    private function isCsrfTokenValid($routeName, $csrfToken) {
+    private function isCsrfTokenValid($routeName, $csrfToken)
+    {
         $token = new CsrfToken($this->getCsrfTokenId($routeName), $csrfToken);
 
         return $this->tokenManager->isTokenValid($token);
@@ -86,7 +92,8 @@ class RouteCsrfProtector implements EventSubscriberInterface
      * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event
      * @return bool
      */
-    private function isProtected(FilterControllerEvent $event) {
+    private function isProtected(FilterControllerEvent $event)
+    {
         if (!$event->isMasterRequest()) {
             return false;
         }

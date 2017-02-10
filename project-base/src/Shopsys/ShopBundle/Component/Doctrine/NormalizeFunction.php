@@ -19,7 +19,8 @@ class NormalizeFunction extends FunctionNode
     /**
      * @param \Doctrine\ORM\Query\Parser $parser
      */
-    public function parse(Parser $parser) {
+    public function parse(Parser $parser)
+    {
         $parser->match(Lexer::T_IDENTIFIER);
         $parser->match(Lexer::T_OPEN_PARENTHESIS);
         $this->stringExpression = $parser->StringExpression();
@@ -30,7 +31,8 @@ class NormalizeFunction extends FunctionNode
      * @param \Doctrine\ORM\Query\SqlWalker $sqlWalker
      * @return string
      */
-    public function getSql(SqlWalker $sqlWalker) {
+    public function getSql(SqlWalker $sqlWalker)
+    {
         return self::FUNCTION_NORMALIZE . '(' . $this->stringExpression->dispatch($sqlWalker) . ')';
     }
 }

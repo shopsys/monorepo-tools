@@ -45,7 +45,8 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      */
-    public function checkCartModifications(Cart $cart) {
+    public function checkCartModifications(Cart $cart)
+    {
         $this->checkNotListableItems($cart);
         $this->checkModifiedPrices($cart);
 
@@ -55,7 +56,8 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      */
-    private function checkModifiedPrices(Cart $cart) {
+    private function checkModifiedPrices(Cart $cart)
+    {
         $modifiedItems = $this->cartWatcherService->getModifiedPriceItemsAndUpdatePrices($cart);
 
         foreach ($modifiedItems as $cartItem) {
@@ -69,7 +71,8 @@ class CartWatcherFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      */
-    private function checkNotListableItems(Cart $cart) {
+    private function checkNotListableItems(Cart $cart)
+    {
         $notVisibleItems = $this->cartWatcherService->getNotListableItems($cart, $this->currentCustomer);
 
         foreach ($notVisibleItems as $cartItem) {

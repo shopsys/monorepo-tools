@@ -9,7 +9,8 @@ use stdClass;
 
 class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
 {
-    public function testTransform() {
+    public function testTransform()
+    {
         $allPagesPlacement = Script::PLACEMENT_ALL_PAGES;
         $orderPagePlacement = Script::PLACEMENT_ORDER_SENT_PAGE;
         $transformer = new ScriptPlacementToBooleanTransformer();
@@ -21,7 +22,8 @@ class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider reverseTransformDataProvider
      */
-    public function testReverseTransform($scriptHasOrderPlacement, $scriptPlacement) {
+    public function testReverseTransform($scriptHasOrderPlacement, $scriptPlacement)
+    {
         $transformer = new ScriptPlacementToBooleanTransformer();
 
         $this->assertSame($scriptPlacement, $transformer->reverseTransform($scriptHasOrderPlacement));
@@ -30,21 +32,24 @@ class ScriptPlacementToBooleanTransformerTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider reverseTransformExceptionDataProvider
      */
-    public function testReverseTransformException($param) {
+    public function testReverseTransformException($param)
+    {
         $transformer = new ScriptPlacementToBooleanTransformer();
 
         $this->setExpectedException(\Symfony\Component\Form\Exception\TransformationFailedException::class);
         $transformer->reverseTransform($param);
     }
 
-    public function reverseTransformDataProvider() {
+    public function reverseTransformDataProvider()
+    {
         return [
             [true, Script::PLACEMENT_ORDER_SENT_PAGE],
             [false, Script::PLACEMENT_ALL_PAGES],
         ];
     }
 
-    public function reverseTransformExceptionDataProvider() {
+    public function reverseTransformExceptionDataProvider()
+    {
         return [
             ['string'],
             [456],

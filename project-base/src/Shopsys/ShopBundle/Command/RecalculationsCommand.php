@@ -14,7 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RecalculationsCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:recalculations')
             ->setDescription('Run all recalculations.');
@@ -24,7 +25,8 @@ class RecalculationsCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $categoryVisibilityRepository = $this->getContainer()->get(CategoryVisibilityRepository::class);
         /* @var $categoryVisibilityRepository \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRepository */
         $productHiddenRecalculator = $this->getContainer()->get(ProductHiddenRecalculator::class);

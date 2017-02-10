@@ -32,7 +32,8 @@ class ImageGeneratorFacade
      * @param string|null $sizeName
      * @return string
      */
-    public function generateImageAndGetFilepath($entityName, $imageId, $type, $sizeName) {
+    public function generateImageAndGetFilepath($entityName, $imageId, $type, $sizeName)
+    {
         $image = $this->imageRepository->getById($imageId);
 
         if ($image->getEntityName() !== $entityName) {

@@ -59,7 +59,8 @@ class PerformanceTestSamplesAggregator
     /**
      * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[][] $performanceTestSamples
      */
-    private function getPerformanceTestSamplesGroupedByUrl(array $performanceTestSamples) {
+    private function getPerformanceTestSamplesGroupedByUrl(array $performanceTestSamples)
+    {
         $performanceTestSamplesGroupedByUrl = [];
 
         foreach ($performanceTestSamples as $performanceTestSample) {

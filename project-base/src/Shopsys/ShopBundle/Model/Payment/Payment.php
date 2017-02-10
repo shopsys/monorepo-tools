@@ -91,7 +91,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      */
-    public function __construct(PaymentData $paymentData) {
+    public function __construct(PaymentData $paymentData)
+    {
         $this->translations = new ArrayCollection();
         $this->vat = $paymentData->vat;
         $this->transports = new ArrayCollection();
@@ -106,7 +107,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      */
-    public function addTransport(Transport $transport) {
+    public function addTransport(Transport $transport)
+    {
         if (!$this->transports->contains($transport)) {
             $this->transports->add($transport);
         }
@@ -115,7 +117,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param array $transports
      */
-    public function setTransports(array $transports) {
+    public function setTransports(array $transports)
+    {
         $this->transports->clear();
         foreach ($transports as $transport) {
             /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
@@ -126,14 +129,16 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTransports() {
+    public function getTransports()
+    {
         return $this->transports;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      */
-    private function setTranslations(PaymentData $paymentData) {
+    private function setTranslations(PaymentData $paymentData)
+    {
         foreach ($paymentData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -148,7 +153,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      */
-    public function edit(PaymentData $paymentData) {
+    public function edit(PaymentData $paymentData)
+    {
         $this->vat = $paymentData->vat;
         $this->hidden = $paymentData->hidden;
         $this->czkRounding = $paymentData->czkRounding;
@@ -159,7 +165,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @param string $price
      */
-    public function setPrice(Currency $currency, $price) {
+    public function setPrice(Currency $currency, $price)
+    {
         foreach ($this->prices as $paymentInputPrice) {
             if ($paymentInputPrice->getCurrency() === $currency) {
                 $paymentInputPrice->setPrice($price);
@@ -173,7 +180,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -181,21 +189,24 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /*
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice[]
      */
-    public function getPrices() {
+    public function getPrices()
+    {
         return $this->prices;
     }
 
     /*
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentPrice
      */
-    public function getPrice(Currency $currency) {
+    public function getPrice(Currency $currency)
+    {
         foreach ($this->prices as $price) {
             if ($price->getCurrency() === $currency) {
                 return $price;
@@ -209,7 +220,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function getVat() {
+    public function getVat()
+    {
         return $this->vat;
     }
 
@@ -217,7 +229,8 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @param string|null $locale
      * @return string|null
      */
-    public function getDescription($locale = null) {
+    public function getDescription($locale = null)
+    {
         return $this->translation($locale)->getDescription();
     }
 
@@ -225,28 +238,32 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
      * @param string|null $locale
      * @return string|null
      */
-    public function getInstructions($locale = null) {
+    public function getInstructions($locale = null)
+    {
         return $this->translation($locale)->getInstructions();
     }
 
     /**
      * @return bool
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 
     /**
      * @return bool
      */
-    public function isDeleted() {
+    public function isDeleted()
+    {
         return $this->deleted;
     }
 
     /**
      * @param bool $deleted
      */
-    public function markAsDeleted() {
+    public function markAsDeleted()
+    {
         $this->deleted = true;
         $this->transports->clear();
     }
@@ -254,28 +271,32 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     /**
      * @return int|null
      */
-    public function getPosition() {
+    public function getPosition()
+    {
         return $this->position;
     }
 
     /**
      * @param int $position
      */
-    public function setPosition($position) {
+    public function setPosition($position)
+    {
         $this->position = $position;
     }
 
     /**
      * @return bool
      */
-    public function isCzkRounding() {
+    public function isCzkRounding()
+    {
         return $this->czkRounding;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new PaymentTranslation();
     }
 }

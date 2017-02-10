@@ -14,13 +14,15 @@ class Db extends BaseDb
      *
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _afterSuite() {
+    public function _afterSuite()
+    {
     // @codingStandardsIgnoreEnd
         $this->cleanup();
         $this->loadDump();
     }
 
-    public function cleanup() {
+    public function cleanup()
+    {
         $symfonyHelper = $this->getModule(SymfonyHelper::class);
         /* @var $symfonyHelper \Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper */
         $databaseSchemaFacade = $symfonyHelper->grabServiceFromContainer(DatabaseSchemaFacade::class);

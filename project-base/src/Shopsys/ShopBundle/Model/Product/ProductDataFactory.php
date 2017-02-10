@@ -37,7 +37,8 @@ class ProductDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Product\ProductData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $productData = new ProductData();
 
         $productData->vat = $this->vatFacade->getDefaultVat();
@@ -50,7 +51,8 @@ class ProductDataFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\ProductData
      */
-    public function createFromProduct(Product $product) {
+    public function createFromProduct(Product $product)
+    {
         $productData = $this->createDefault();
 
         $translations = $product->getTranslations();

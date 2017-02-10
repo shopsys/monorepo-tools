@@ -13,17 +13,20 @@ class ProductVisibilityMidnightCronModule implements CronModuleInterface
      */
     private $productVisibilityFacade;
 
-    public function __construct(ProductVisibilityFacade $productVisibilityFacade) {
+    public function __construct(ProductVisibilityFacade $productVisibilityFacade)
+    {
         $this->productVisibilityFacade = $productVisibilityFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
-    public function run() {
+    public function run()
+    {
         $this->productVisibilityFacade->refreshProductsVisibility();
     }
 }

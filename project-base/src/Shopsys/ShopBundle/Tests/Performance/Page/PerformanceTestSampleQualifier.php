@@ -20,7 +20,8 @@ class PerformanceTestSampleQualifier
      * @param float $duration
      * @return int
      */
-    public function getStatusForDuration($duration) {
+    public function getStatusForDuration($duration)
+    {
         if ($duration >= self::DURATION_CRITICAL) {
             return self::STATUS_CRITICAL;
         } elseif ($duration >= self::DURATION_WARNING) {
@@ -34,7 +35,8 @@ class PerformanceTestSampleQualifier
      * @param int $queryCount
      * @return int
      */
-    public function getStatusForQueryCount($queryCount) {
+    public function getStatusForQueryCount($queryCount)
+    {
         if ($queryCount >= self::QUERY_COUNT_CRITICAL) {
             return self::STATUS_CRITICAL;
         } elseif ($queryCount >= self::QUERY_COUNT_WARNING) {
@@ -48,7 +50,8 @@ class PerformanceTestSampleQualifier
      * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample $performanceTestSample
      * @return int
      */
-    public function getSampleStatus(PerformanceTestSample $performanceTestSample) {
+    public function getSampleStatus(PerformanceTestSample $performanceTestSample)
+    {
         $overallStatus = self::STATUS_OK;
 
         if ($this->getStatusForDuration($performanceTestSample->getDuration()) > $overallStatus) {
@@ -70,7 +73,8 @@ class PerformanceTestSampleQualifier
      * @param \Shopsys\ShopBundle\Tests\Performance\Page\PerformanceTestSample[] $performanceTestSamples
      * @return int
      */
-    public function getOverallStatus(array $performanceTestSamples) {
+    public function getOverallStatus(array $performanceTestSamples)
+    {
         $allStatuses = [self::STATUS_OK];
 
         foreach ($performanceTestSamples as $performanceTestSample) {

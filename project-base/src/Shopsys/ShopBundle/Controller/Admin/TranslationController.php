@@ -13,14 +13,16 @@ class TranslationController extends AdminBaseController
      */
     private $translationInlineEdit;
 
-    public function __construct(TranslationInlineEdit $translationInlineEdit) {
+    public function __construct(TranslationInlineEdit $translationInlineEdit)
+    {
         $this->translationInlineEdit = $translationInlineEdit;
     }
 
     /**
      * @Route("/translation/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->translationInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Translation/list.html.twig', [

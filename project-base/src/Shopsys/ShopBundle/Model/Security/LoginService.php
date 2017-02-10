@@ -35,7 +35,8 @@ class LoginService
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return bool
      */
-    public function checkLoginProcess(Request $request) {
+    public function checkLoginProcess(Request $request)
+    {
         $error = null;
 
         if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
@@ -57,7 +58,8 @@ class LoginService
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function loginUser(User $user, Request $request) {
+    public function loginUser(User $user, Request $request)
+    {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'frontend', $user->getRoles());
         $this->tokenStorage->setToken($token);
 

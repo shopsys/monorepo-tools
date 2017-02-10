@@ -16,7 +16,8 @@ class CronConfigDefinition implements ConfigurationInterface
     /**
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder
      */
-    public function getConfigTreeBuilder() {
+    public function getConfigTreeBuilder()
+    {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('cron');
 
@@ -29,7 +30,8 @@ class CronConfigDefinition implements ConfigurationInterface
      * @param \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition $node
      * @return \Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition
      */
-    private function buildItemsNode(ArrayNodeDefinition $node) {
+    private function buildItemsNode(ArrayNodeDefinition $node)
+    {
         return $node
             ->addDefaultsIfNotSet()
             ->children()

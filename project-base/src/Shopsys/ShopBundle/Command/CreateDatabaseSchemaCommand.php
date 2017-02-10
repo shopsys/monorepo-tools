@@ -9,7 +9,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDatabaseSchemaCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:schema:create')
             ->setDescription('Create database public schema');
@@ -19,7 +20,8 @@ class CreateDatabaseSchemaCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $databaseSchemaFacade = $this->getContainer()->get(DatabaseSchemaFacade::class);
         /* @var $databaseSchemaFacade \Shopsys\ShopBundle\Component\Doctrine\DatabaseSchemaFacade */
 

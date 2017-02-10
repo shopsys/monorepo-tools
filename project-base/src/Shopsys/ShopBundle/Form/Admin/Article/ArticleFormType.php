@@ -45,7 +45,8 @@ class ArticleFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'article_form';
     }
 
@@ -53,7 +54,8 @@ class ArticleFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('name', FormType::TEXT, [
                 'required' => true,
@@ -97,7 +99,8 @@ class ArticleFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => ArticleData::class,
             'attr' => ['novalidate' => 'novalidate'],

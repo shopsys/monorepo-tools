@@ -16,14 +16,16 @@ class SettingValueRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getSettingValueRepository() {
+    private function getSettingValueRepository()
+    {
         return $this->em->getRepository(SettingValue::class);
     }
 
@@ -31,7 +33,8 @@ class SettingValueRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Component\Setting\SettingValue[]
      */
-    public function getAllByDomainId($domainId) {
+    public function getAllByDomainId($domainId)
+    {
         return $this->getSettingValueRepository()->findBy(['domainId' => $domainId]);
     }
 
@@ -39,7 +42,8 @@ class SettingValueRepository
      * @param int $fromDomainId
      * @param int $toDomainId
      */
-    public function copyAllMultidomainSettings($fromDomainId, $toDomainId) {
+    public function copyAllMultidomainSettings($fromDomainId, $toDomainId)
+    {
         $query = $this->em->createNativeQuery('
             INSERT INTO setting_values (name, value, type, domain_id)
             SELECT name, value, type, :toDomainId

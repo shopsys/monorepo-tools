@@ -11,7 +11,8 @@ class CronModuleConfigNotFoundException extends Exception implements CronConfigE
      * @param string $moduleId
      * @param \Exception $previous
      */
-    public function __construct($moduleId, Exception $previous = null) {
+    public function __construct($moduleId, Exception $previous = null)
+    {
         parent::__construct('Cron module config with module ID "' . $moduleId . '" not found.', 0, $previous);
     }
 }

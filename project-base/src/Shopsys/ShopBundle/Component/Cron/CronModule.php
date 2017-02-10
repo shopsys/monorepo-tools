@@ -35,7 +35,8 @@ class CronModule
     /**
      * @param string $moduleId
      */
-    public function __construct($moduleId) {
+    public function __construct($moduleId)
+    {
         $this->moduleId = $moduleId;
         $this->scheduled = false;
         $this->suspended = false;
@@ -44,34 +45,40 @@ class CronModule
     /**
      * @return string
      */
-    public function getModuleId() {
+    public function getModuleId()
+    {
         return $this->moduleId;
     }
 
     /**
      * @return bool
      */
-    public function isScheduled() {
+    public function isScheduled()
+    {
         return $this->scheduled;
     }
 
     /**
      * @return bool
      */
-    public function isSuspended() {
+    public function isSuspended()
+    {
         return $this->suspended;
     }
 
-    public function schedule() {
+    public function schedule()
+    {
         $this->scheduled = true;
     }
 
-    public function unschedule() {
+    public function unschedule()
+    {
         $this->scheduled = false;
         $this->suspended = false;
     }
 
-    public function suspend() {
+    public function suspend()
+    {
         $this->suspended = true;
     }
 }

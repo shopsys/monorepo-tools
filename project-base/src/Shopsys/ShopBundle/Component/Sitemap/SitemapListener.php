@@ -55,7 +55,8 @@ class SitemapListener implements SitemapListenerInterface
     /**
      * @param \Presta\SitemapBundle\Event\SitemapPopulateEvent $event
      */
-    public function populateSitemap(SitemapPopulateEvent $event) {
+    public function populateSitemap(SitemapPopulateEvent $event)
+    {
         $section = $event->getSection();
         $domainId = (int)$section;
 

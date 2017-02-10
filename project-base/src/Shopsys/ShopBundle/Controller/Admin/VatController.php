@@ -51,7 +51,8 @@ class VatController extends AdminBaseController
     /**
      * @Route("/vat/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->vatInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Vat/list.html.twig', [
@@ -63,7 +64,8 @@ class VatController extends AdminBaseController
      * @Route("/vat/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $vat = $this->vatFacade->getById($id);
             if ($this->vatFacade->isVatUsed($vat)) {
@@ -101,7 +103,8 @@ class VatController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $newId = $request->get('newId');
 
         try {
@@ -136,7 +139,8 @@ class VatController extends AdminBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingsAction(Request $request) {
+    public function settingsAction(Request $request)
+    {
         $vats = $this->vatFacade->getAll();
         $form = $this->createForm(new VatSettingsFormType(
             $vats,

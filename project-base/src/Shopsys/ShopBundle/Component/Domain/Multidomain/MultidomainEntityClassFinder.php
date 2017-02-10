@@ -37,7 +37,8 @@ class MultidomainEntityClassFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadata $classMetadata
      * @return bool
      */
-    private function isMultidomainEntity(ClassMetadata $classMetadata) {
+    private function isMultidomainEntity(ClassMetadata $classMetadata)
+    {
         $identifierFieldNames = $classMetadata->getIdentifierFieldNames();
 
         return count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames);

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
 {
-    public function testScheduleRecalculateAvailabilityForProduct() {
+    public function testScheduleRecalculateAvailabilityForProduct()
+    {
         $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
         $productMock = $this->getMock(Product::class, null, [], '', false);
 
@@ -21,7 +22,8 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
         $this->assertSame($productMock, array_pop($products));
     }
 
-    public function testCleanImmediatelyRecalculationSchedule() {
+    public function testCleanImmediatelyRecalculationSchedule()
+    {
         $productRepositoryMock = $this->getMock(ProductRepository::class, null, [], '', false);
         $productMock = $this->getMock(Product::class, null, [], '', false);
 
@@ -33,7 +35,8 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
         $this->assertCount(0, $products);
     }
 
-    public function testScheduleRecalculateAvailabilityForAllProducts() {
+    public function testScheduleRecalculateAvailabilityForAllProducts()
+    {
         $productMock = $this->getMock(Product::class, null, [], '', false);
         $productsIterator = [$productMock];
         $productRepositoryMock = $this->getMock(

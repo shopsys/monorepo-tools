@@ -43,7 +43,8 @@ class CustomerMailFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    public function sendRegistrationMail(User $user) {
+    public function sendRegistrationMail(User $user)
+    {
         $mailTemplate = $this->mailTemplateFacade->get(MailTemplate::REGISTRATION_CONFIRM_NAME, $user->getDomainId());
         $messageData = $this->registrationMailService->getMessageDataByUser($user, $mailTemplate);
         $messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);

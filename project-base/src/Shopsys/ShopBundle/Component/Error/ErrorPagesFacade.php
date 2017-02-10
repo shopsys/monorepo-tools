@@ -55,7 +55,8 @@ class ErrorPagesFacade
         $this->filesystem = $filesystem;
     }
 
-    public function generateAllErrorPagesForProduction() {
+    public function generateAllErrorPagesForProduction()
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_404);
             $this->generateAndSaveErrorPage($domainConfig->getId(), self::PAGE_STATUS_CODE_500);
@@ -67,7 +68,8 @@ class ErrorPagesFacade
      * @param int $statusCode
      * @return string
      */
-    public function getErrorPageContentByDomainIdAndStatusCode($domainId, $statusCode) {
+    public function getErrorPageContentByDomainIdAndStatusCode($domainId, $statusCode)
+    {
         $errorPageContent = file_get_contents($this->getErrorPageFilename($domainId, $statusCode));
         if ($errorPageContent === false) {
             throw new \ShopBundle\Component\Error\Exception\ErrorPageNotFoundException($domainId, $statusCode);
@@ -80,7 +82,8 @@ class ErrorPagesFacade
      * @param int $statusCode
      * @return int
      */
-    public function getErrorPageStatusCodeByStatusCode($statusCode) {
+    public function getErrorPageStatusCodeByStatusCode($statusCode)
+    {
         if ($statusCode === Response::HTTP_NOT_FOUND || $statusCode === Response::HTTP_FORBIDDEN) {
             return self::PAGE_STATUS_CODE_404;
         } else {
@@ -92,7 +95,8 @@ class ErrorPagesFacade
      * @param int $domainId
      * @param int $statusCode
      */
-    private function generateAndSaveErrorPage($domainId, $statusCode) {
+    private function generateAndSaveErrorPage($domainId, $statusCode)
+    {
         $domainRouter = $this->domainRouterFactory->getRouter($domainId);
         $errorPageUrl = $domainRouter->generate(
             'front_error_page_format',
@@ -116,7 +120,8 @@ class ErrorPagesFacade
      * @param int $statusCode
      * @return string
      */
-    private function getErrorPageFilename($domainId, $statusCode) {
+    private function getErrorPageFilename($domainId, $statusCode)
+    {
         return $this->errorPagesDir . $statusCode . '_ ' . $domainId . '.html';
     }
 
@@ -125,7 +130,8 @@ class ErrorPagesFacade
      * @param int $expectedStatusCode
      * @return string
      */
-    private function getUrlContent($errorPageUrl, $expectedStatusCode) {
+    private function getUrlContent($errorPageUrl, $expectedStatusCode)
+    {
         $errorPageKernel = new AppKernel(Environment::ENVIRONMENT_PRODUCTION, false);
 
         $errorPageFakeRequest = Request::create($errorPageUrl);

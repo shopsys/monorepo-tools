@@ -50,7 +50,8 @@ class FriendlyUrlRouterFactory
      * @param \Symfony\Component\Routing\RequestContext $context
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlRouter
      */
-    public function createRouter(DomainConfig $domainConfig, RequestContext $context) {
+    public function createRouter(DomainConfig $domainConfig, RequestContext $context)
+    {
         return new FriendlyUrlRouter(
             $context,
             $this->delegatingLoader,

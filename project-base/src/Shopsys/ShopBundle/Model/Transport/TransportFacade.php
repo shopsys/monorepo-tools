@@ -79,7 +79,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    public function create(TransportEditData $transportEditData) {
+    public function create(TransportEditData $transportEditData)
+    {
         $transport = new Transport($transportEditData->transportData);
         $this->em->persist($transport);
         $this->em->flush();
@@ -95,7 +96,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @param \Shopsys\ShopBundle\Model\Transport\TransportEditData $transportEditData
      */
-    public function edit(Transport $transport, TransportEditData $transportEditData) {
+    public function edit(Transport $transport, TransportEditData $transportEditData)
+    {
         $transport->edit($transportEditData->transportData);
 
         $this->updateTransportPrices($transport, $transportEditData->prices);
@@ -109,14 +111,16 @@ class TransportFacade
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    public function getById($id) {
+    public function getById($id)
+    {
         return $this->transportRepository->getById($id);
     }
 
     /**
      * @param int $id
      */
-    public function deleteById($id) {
+    public function deleteById($id)
+    {
         $transport = $this->getById($id);
         $transport->markAsDeleted();
         $paymentsByTransport = $this->paymentRepository->getAllByTransport($transport);
@@ -132,7 +136,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @param array $domainIds
      */
-    private function createTransportDomains(Transport $transport, array $domainIds) {
+    private function createTransportDomains(Transport $transport, array $domainIds)
+    {
         foreach ($domainIds as $domainId) {
             $transportDomain = new TransportDomain($transport, $domainId);
             $this->em->persist($transportDomain);
@@ -143,7 +148,8 @@ class TransportFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      */
-    private function deleteTransportDomainsByTransport(Transport $transport) {
+    private function deleteTransportDomainsByTransport(Transport $transport)
+    {
         $transportDomains = $this->getTransportDomainsByTransport($transport);
         foreach ($transportDomains as $transportDomain) {
             $this->em->remove($transportDomain);
@@ -155,7 +161,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePayments
      * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
      */
-    public function getVisibleOnCurrentDomain(array $visiblePayments) {
+    public function getVisibleOnCurrentDomain(array $visiblePayments)
+    {
         return $this->getVisibleByDomainId($this->domain->getId(), $visiblePayments);
     }
 
@@ -164,7 +171,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $visiblePaymentsOnDomain
      * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
      */
-    public function getVisibleByDomainId($domainId, $visiblePaymentsOnDomain) {
+    public function getVisibleByDomainId($domainId, $visiblePaymentsOnDomain)
+    {
         $transports = $this->transportRepository->getAllByDomainId($domainId);
 
         return $this->transportVisibilityCalculation->filterVisible($transports, $visiblePaymentsOnDomain, $domainId);
@@ -174,7 +182,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @return \Shopsys\ShopBundle\Model\Transport\TransportDomain[]
      */
-    public function getTransportDomainsByTransport(Transport $transport) {
+    public function getTransportDomainsByTransport(Transport $transport)
+    {
         return $this->transportRepository->getTransportDomainsByTransport($transport);
     }
 
@@ -182,7 +191,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @param string[currencyId] $prices
      */
-    private function updateTransportPrices(Transport $transport, $prices) {
+    private function updateTransportPrices(Transport $transport, $prices)
+    {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $prices[$currency->getId()];
             $transport->setPrice($currency, $price);
@@ -192,7 +202,8 @@ class TransportFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport[]
      */
-    public function getAllIncludingDeleted() {
+    public function getAllIncludingDeleted()
+    {
         return $this->transportRepository->getAllIncludingDeleted();
     }
 
@@ -200,7 +211,8 @@ class TransportFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @return string [transportId]
      */
-    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency) {
+    public function getTransportPricesWithVatIndexedByTransportId(Currency $currency)
+    {
         $transportPricesWithVatByTransportId = [];
         $transports = $this->getAllIncludingDeleted();
         foreach ($transports as $transport) {
@@ -214,7 +226,8 @@ class TransportFacade
     /**
      * @return string[transportId]
      */
-    public function getTransportVatPercentsIndexedByTransportId() {
+    public function getTransportVatPercentsIndexedByTransportId()
+    {
         $transportVatPercentsByTransportId = [];
         $transports = $this->getAllIncludingDeleted();
         foreach ($transports as $transport) {

@@ -60,7 +60,8 @@ class SliderItem implements OrderableEntityInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
      */
-    public function __construct(SliderItemData $sliderItemData) {
+    public function __construct(SliderItemData $sliderItemData)
+    {
         $this->domainId = $sliderItemData->domainId;
         $this->name = $sliderItemData->name;
         $this->link = $sliderItemData->link;
@@ -70,7 +71,8 @@ class SliderItem implements OrderableEntityInterface
     /**
      * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
      */
-    public function edit(SliderItemData $sliderItemData) {
+    public function edit(SliderItemData $sliderItemData)
+    {
         $this->name = $sliderItemData->name;
         $this->link = $sliderItemData->link;
         $this->hidden = $sliderItemData->hidden;
@@ -79,49 +81,56 @@ class SliderItem implements OrderableEntityInterface
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getLink() {
+    public function getLink()
+    {
         return $this->link;
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return int|null
      */
-    public function getPosition() {
+    public function getPosition()
+    {
         return $this->position;
     }
 
     /**
      * @param int $position
      */
-    public function setPosition($position) {
+    public function setPosition($position)
+    {
         $this->position = $position;
     }
 
     /**
      * @return bool
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 }

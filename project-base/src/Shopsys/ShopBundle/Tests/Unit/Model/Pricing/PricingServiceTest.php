@@ -11,13 +11,15 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getMinimumPriceProvider
      */
-    public function testGetMinimumPrice(array $prices, $minimumPrice) {
+    public function testGetMinimumPrice(array $prices, $minimumPrice)
+    {
         $pricingService = new PricingService();
 
         $this->assertEquals($minimumPrice, $pricingService->getMinimumPriceByPriceWithoutVat($prices));
     }
 
-    public function getMinimumPriceProvider() {
+    public function getMinimumPriceProvider()
+    {
         return [
             [
                 'prices' => [
@@ -43,7 +45,8 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testGetMinimumPriceEmptyArray() {
+    public function testGetMinimumPriceEmptyArray()
+    {
         $pricingService = new PricingService();
 
         $this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
@@ -53,13 +56,15 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getArePricesDifferentProvider
      */
-    public function testArePricesDifferent(array $prices, $arePricesDifferent) {
+    public function testArePricesDifferent(array $prices, $arePricesDifferent)
+    {
         $pricingService = new PricingService();
 
         $this->assertSame($arePricesDifferent, $pricingService->arePricesDifferent($prices));
     }
 
-    public function getArePricesDifferentProvider() {
+    public function getArePricesDifferentProvider()
+    {
         return [
             [
                 'prices' => [
@@ -91,7 +96,8 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function testArePricesDifferentEmptyArray() {
+    public function testArePricesDifferentEmptyArray()
+    {
         $pricingService = new PricingService();
 
         $this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);

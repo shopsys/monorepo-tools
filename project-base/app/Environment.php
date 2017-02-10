@@ -18,7 +18,8 @@ class Environment
     /**
      * @param \Composer\Script\Event $event
      */
-    public static function checkEnvironment(Event $event) {
+    public static function checkEnvironment(Event $event)
+    {
         $io = $event->getIO();
         /* @var $io \Composer\IO\IOInterface */
         if ($io->isInteractive() && self::getEnvironmentSetting(false) === null) {
@@ -35,7 +36,8 @@ class Environment
      * @param bool $console
      * @return string
      */
-    public static function getEnvironment($console) {
+    public static function getEnvironment($console)
+    {
         $environmentSetting = self::getEnvironmentSetting($console);
         return $environmentSetting ?: self::ENVIRONMENT_PRODUCTION;
     }
@@ -43,21 +45,24 @@ class Environment
     /**
      * @param string $environment
      */
-    public static function isEnvironmentDebug($environment) {
+    public static function isEnvironmentDebug($environment)
+    {
         return $environment === self::ENVIRONMENT_DEVELOPMENT;
     }
 
     /**
      * @param \Composer\IO\IOInterface $io
      */
-    public static function printEnvironmentInfo(IOInterface $io) {
+    public static function printEnvironmentInfo(IOInterface $io)
+    {
         $io->write("\nEnvironment is <info>" . self::getEnvironment(false) . "</info>\n");
     }
 
     /**
      * @param string $filepath
      */
-    private static function createFile($filepath) {
+    private static function createFile($filepath)
+    {
         $file = fopen($filepath, 'w');
         fclose($file);
     }
@@ -65,7 +70,8 @@ class Environment
     /**
      * @return string
      */
-    private static function getRootDir() {
+    private static function getRootDir()
+    {
         return __DIR__ . '/..';
     }
 
@@ -73,7 +79,8 @@ class Environment
      * @param bool $ignoreTestFile
      * @return string|null
      */
-    private static function getEnvironmentSetting($ignoreTestFile) {
+    private static function getEnvironmentSetting($ignoreTestFile)
+    {
         if (!$ignoreTestFile && is_file(self::getRootDir() . '/' . self::FILE_TEST)) {
             return self::ENVIRONMENT_TEST;
         } elseif (is_file(self::getRootDir() . '/' . self::FILE_DEVELOPMENT)) {

@@ -12,7 +12,8 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      */
     private $brandRepository;
 
-    public function __construct(BrandRepository $brandRepository) {
+    public function __construct(BrandRepository $brandRepository)
+    {
         $this->brandRepository = $brandRepository;
     }
 
@@ -21,7 +22,8 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @param array $routeParameters
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
-    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function getBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         $isBrandDetail = $routeName === 'front_brand_detail';
 
         $breadcrumbItems[] = new BreadcrumbItem(

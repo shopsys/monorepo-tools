@@ -23,7 +23,8 @@ class Price
      * @param string $priceWithoutVat
      * @param string $priceWithVat
      */
-    public function __construct($priceWithoutVat, $priceWithVat) {
+    public function __construct($priceWithoutVat, $priceWithVat)
+    {
         $this->priceWithoutVat = $priceWithoutVat;
         $this->priceWithVat = $priceWithVat;
         $this->vatAmount = $priceWithVat - $priceWithoutVat;
@@ -32,21 +33,24 @@ class Price
     /**
      * @return string
      */
-    public function getPriceWithoutVat() {
+    public function getPriceWithoutVat()
+    {
         return $this->priceWithoutVat;
     }
 
     /**
      * @return string
      */
-    public function getPriceWithVat() {
+    public function getPriceWithVat()
+    {
         return $this->priceWithVat;
     }
 
     /**
      * @return string
      */
-    public function getVatAmount() {
+    public function getVatAmount()
+    {
         return $this->vatAmount;
     }
 
@@ -54,7 +58,8 @@ class Price
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToAdd
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function add(Price $priceToAdd) {
+    public function add(Price $priceToAdd)
+    {
         return new self(
             $this->priceWithoutVat + $priceToAdd->getPriceWithoutVat(),
             $this->priceWithVat + $priceToAdd->getPriceWithVat(),
@@ -66,7 +71,8 @@ class Price
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $priceToSubtract
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function subtract(Price $priceToSubtract) {
+    public function subtract(Price $priceToSubtract)
+    {
         return new self(
             $this->priceWithoutVat - $priceToSubtract->getPriceWithoutVat(),
             $this->priceWithVat - $priceToSubtract->getPriceWithVat(),

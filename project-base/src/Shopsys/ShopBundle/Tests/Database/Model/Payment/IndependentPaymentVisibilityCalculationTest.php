@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
 {
-    public function testIsIndependentlyVisible() {
+    public function testIsIndependentlyVisible()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -34,7 +35,8 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
         $this->assertTrue($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
     }
 
-    public function testIsIndependentlyVisibleEmptyName() {
+    public function testIsIndependentlyVisibleEmptyName()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -56,7 +58,8 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
         $this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
     }
 
-    public function testIsIndependentlyVisibleNotOnDomain() {
+    public function testIsIndependentlyVisibleNotOnDomain()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;
@@ -79,7 +82,8 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
         $this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
     }
 
-    public function testIsIndependentlyVisibleHidden() {
+    public function testIsIndependentlyVisibleHidden()
+    {
         $em = $this->getEntityManager();
 
         $domainId = 1;

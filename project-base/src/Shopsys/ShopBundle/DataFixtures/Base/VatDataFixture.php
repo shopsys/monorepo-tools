@@ -17,7 +17,8 @@ class VatDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $vatData = new VatData();
 
         $vatData->name = 'Nulová sazba';
@@ -41,7 +42,8 @@ class VatDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatData $vatData
      * @param string|null $referenceName
      */
-    private function createVat(VatData $vatData, $referenceName = null) {
+    private function createVat(VatData $vatData, $referenceName = null)
+    {
         $vatFacade = $this->get(VatFacade::class);
         /* @var $vatFacade \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade */
 

@@ -28,13 +28,15 @@ class ScriptController extends FrontBaseController
         $this->domain = $domain;
     }
 
-    public function embedAllPagesScriptsAction() {
+    public function embedAllPagesScriptsAction()
+    {
         return $this->render('@ShopsysShop/Front/Inline/MeasuringScript/scripts.html.twig', [
             'scriptsCodes' => $this->scriptFacade->getAllPagesScriptCodes(),
         ]);
     }
 
-    public function embedAllPagesGoogleAnalyticsScriptAction() {
+    public function embedAllPagesGoogleAnalyticsScriptAction()
+    {
         if (!$this->scriptFacade->isGoogleAnalyticsActivated($this->domain->getId())) {
             return new Response('');
         }
@@ -47,7 +49,8 @@ class ScriptController extends FrontBaseController
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function embedOrderSentPageScriptsAction(Order $order) {
+    public function embedOrderSentPageScriptsAction(Order $order)
+    {
         return $this->render('@ShopsysShop/Front/Inline/MeasuringScript/scripts.html.twig', [
             'scriptsCodes' => $this->scriptFacade->getOrderSentPageScriptCodesWithReplacedVariables($order),
         ]);
@@ -56,7 +59,8 @@ class ScriptController extends FrontBaseController
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function embedOrderSentPageGoogleAnalyticsScriptAction(Order $order) {
+    public function embedOrderSentPageGoogleAnalyticsScriptAction(Order $order)
+    {
         if (!$this->scriptFacade->isGoogleAnalyticsActivated($this->domain->getId())) {
             return new Response('');
         }

@@ -13,7 +13,8 @@ class ParameterFilterRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[] $parameters
      */
-    public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters) {
+    public function filterByParameters(QueryBuilder $productsQueryBuilder, array $parameters)
+    {
         $parameterIndex = 1;
         $valueIndex = 1;
 

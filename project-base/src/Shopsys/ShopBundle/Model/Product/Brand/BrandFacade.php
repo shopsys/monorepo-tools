@@ -48,7 +48,8 @@ class BrandFacade
      * @param int $brandId
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
      */
-    public function getById($brandId) {
+    public function getById($brandId)
+    {
         return $this->brandRepository->getById($brandId);
     }
 
@@ -56,7 +57,8 @@ class BrandFacade
      * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
      */
-    public function create(BrandData $brandData) {
+    public function create(BrandData $brandData)
+    {
         $brand = new Brand($brandData);
         $this->em->persist($brand);
         $this->em->flush();
@@ -78,7 +80,8 @@ class BrandFacade
      * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand
      */
-    public function edit($brandId, BrandData $brandData) {
+    public function edit($brandId, BrandData $brandData)
+    {
         $brand = $this->brandRepository->getById($brandId);
         $brand->edit($brandData);
         $this->imageFacade->uploadImage($brand, $brandData->image, null);
@@ -99,7 +102,8 @@ class BrandFacade
     /**
      * @param int $brandId
      */
-    public function deleteById($brandId) {
+    public function deleteById($brandId)
+    {
         $brand = $this->brandRepository->getById($brandId);
         $this->em->remove($brand);
         $this->em->flush();
@@ -108,7 +112,8 @@ class BrandFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->brandRepository->getAll();
     }
 }

@@ -52,7 +52,8 @@ class CartMigrationFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Cart $cart
      */
-    private function mergeCurrentCartWithCart(Cart $cart) {
+    private function mergeCurrentCartWithCart(Cart $cart)
+    {
         $customerIdentifier = $this->customerIdentifierFactory->get();
         $currentCart = $this->cartFactory->get($customerIdentifier);
         $this->cartService->mergeCarts($currentCart, $cart, $customerIdentifier);
@@ -71,7 +72,8 @@ class CartMigrationFacade
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $filterControllerEvent
      */
-    public function onKernelController(FilterControllerEvent $filterControllerEvent) {
+    public function onKernelController(FilterControllerEvent $filterControllerEvent)
+    {
         $session = $filterControllerEvent->getRequest()->getSession();
 
         $previousCartIdentifier = $session->get(self::SESSION_PREVIOUS_CART_IDENTIFIER);

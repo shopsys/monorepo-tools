@@ -11,14 +11,16 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AdministratorFrontSecurityFacadeTest extends DatabaseTestCase
 {
-    public function testIsAdministratorLoggedNot() {
+    public function testIsAdministratorLoggedNot()
+    {
         $administratorFrontSecurityFacade = $this->getContainer()->get(AdministratorFrontSecurityFacade::class);
         /* @var $administratorFrontSecurityFacade \Shopsys\ShopBundle\Model\Administrator\Security\AdministratorFrontSecurityFacade */
 
         $this->assertFalse($administratorFrontSecurityFacade->isAdministratorLogged());
     }
 
-    public function testIsAdministratorLogged() {
+    public function testIsAdministratorLogged()
+    {
         $container = $this->getContainer();
         /* @var $container \Symfony\Component\DependencyInjection\ContainerInterface */
         $session = $container->get(SessionInterface::class);

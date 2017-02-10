@@ -41,28 +41,32 @@ class ProductTranslation extends AbstractTranslation
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @param string $name
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
     /**
      * @return string|null
      */
-    public function getVariantAlias() {
+    public function getVariantAlias()
+    {
         return $this->variantAlias;
     }
 
     /**
      * @param string|null $variantAlias
      */
-    public function setVariantAlias($variantAlias) {
+    public function setVariantAlias($variantAlias)
+    {
         $this->variantAlias = $variantAlias;
     }
 }

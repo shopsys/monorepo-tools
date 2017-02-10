@@ -66,70 +66,80 @@ class PerformanceTestSample
     /**
      * @param string $message
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
     }
 
     /**
      * @param string $failMessage
      */
-    public function addFailMessage($failMessage) {
+    public function addFailMessage($failMessage)
+    {
         $this->failMessages[] = $failMessage;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedConfig
      */
-    public function getFeedConfig() {
+    public function getFeedConfig()
+    {
         return $this->feedConfig;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    public function getDomainConfig() {
+    public function getDomainConfig()
+    {
         return $this->domainConfig;
     }
 
     /**
      * @return string
      */
-    public function getGenerationUri() {
+    public function getGenerationUri()
+    {
         return $this->generationUri;
     }
 
     /**
      * @return float
      */
-    public function getDuration() {
+    public function getDuration()
+    {
         return $this->duration;
     }
 
     /**
      * @return int
      */
-    public function getStatusCode() {
+    public function getStatusCode()
+    {
         return $this->statusCode;
     }
 
     /**
      * @return string|null
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 
     /**
      * @return string[]
      */
-    public function getFailMessages() {
+    public function getFailMessages()
+    {
         return $this->failMessages;
     }
 
     /**
      * @return bool
      */
-    public function isSuccessful() {
+    public function isSuccessful()
+    {
         return count($this->failMessages) === 0;
     }
 }

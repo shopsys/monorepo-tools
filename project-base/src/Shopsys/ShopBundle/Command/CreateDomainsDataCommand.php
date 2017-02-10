@@ -12,7 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDomainsDataCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:domains-data:create')
             ->setDescription('Create new domains data');
@@ -22,7 +23,8 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $em = $this->getContainer()->get(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
 
@@ -31,7 +33,8 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
         });
     }
 
-    private function doExecute(OutputInterface $output) {
+    private function doExecute(OutputInterface $output)
+    {
         $output->writeln('Start of creating new domains data.');
 
         $domainDbFunctionsFacade = $this->getContainer()->get(DomainDbFunctionsFacade::class);

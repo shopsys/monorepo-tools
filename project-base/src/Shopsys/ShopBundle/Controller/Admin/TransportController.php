@@ -74,7 +74,8 @@ class TransportController extends AdminBaseController
      * @Route("/transport/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->transportEditFormTypeFactory->create());
 
         $transportEditData = $this->transportEditDataFactory->createDefault();
@@ -110,7 +111,8 @@ class TransportController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $transport = $this->transportFacade->getById($id);
         /* @var $transport \Shopsys\ShopBundle\Model\Transport\Transport */
         $form = $this->createForm($this->transportEditFormTypeFactory->create());
@@ -151,7 +153,8 @@ class TransportController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $transportName = $this->transportFacade->getById($id)->getName();
 
@@ -170,7 +173,8 @@ class TransportController extends AdminBaseController
         return $this->redirectToRoute('admin_transportandpayment_list');
     }
 
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->transportGridFactory->create();
 
         return $this->render('@ShopsysShop/Admin/Content/Transport/list.html.twig', [

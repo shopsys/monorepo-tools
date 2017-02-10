@@ -15,7 +15,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartItemTest extends DatabaseTestCase
 {
-    public function testIsSimilarItemAs() {
+    public function testIsSimilarItemAs()
+    {
         $em = $this->getEntityManager();
 
         $customerIdentifier = new CustomerIdentifier('randomString');

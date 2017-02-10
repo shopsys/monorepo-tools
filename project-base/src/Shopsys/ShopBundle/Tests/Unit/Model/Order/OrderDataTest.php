@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Model\Order\OrderData;
 
 class OrderDataTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetNewItemsWithoutTransportAndPayment() {
+    public function testGetNewItemsWithoutTransportAndPayment()
+    {
         $orderData = new OrderData();
         $newOrderItemData = new OrderItemData();
         $oldOrderItemData = new OrderItemData();

@@ -42,7 +42,8 @@ class DomainService
      * @param string $filepath
      * @param string $domainImagesDirectory
      */
-    public function convertToDomainIconFormatAndSave($domainId, $filepath, $domainImagesDirectory) {
+    public function convertToDomainIconFormatAndSave($domainId, $filepath, $domainImagesDirectory)
+    {
         $newTemporaryFilepath = pathinfo($filepath, PATHINFO_DIRNAME)
             . '/'
             . $domainId

@@ -17,7 +17,8 @@ class DomainsConfigLoader
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */
-    public function __construct(Filesystem $filesystem) {
+    public function __construct(Filesystem $filesystem)
+    {
         $this->filesystem = $filesystem;
     }
 
@@ -26,7 +27,8 @@ class DomainsConfigLoader
      * @param string $domainsUrlsConfigFilepath
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
      */
-    public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath) {
+    public function loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath)
+    {
         $processedConfig = $this->getProcessedConfig($domainsConfigFilepath, new DomainsConfigDefinition());
         $processedUrlsConfig = $this->getProcessedConfig($domainsUrlsConfigFilepath, new DomainsUrlsConfigDefinition());
         $domainConfigsByDomainId = $processedConfig[DomainsConfigDefinition::CONFIG_DOMAINS];
@@ -48,7 +50,8 @@ class DomainsConfigLoader
      * @param array $processedConfigsByDomainId
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
      */
-    private function loadDomainConfigsFromArray($processedConfigsByDomainId) {
+    private function loadDomainConfigsFromArray($processedConfigsByDomainId)
+    {
         $domainConfigs = [];
 
         foreach ($processedConfigsByDomainId as $domainConfigArray) {
@@ -62,7 +65,8 @@ class DomainsConfigLoader
      * @param array $domainConfig
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    private function processDomainConfigArray(array $domainConfig) {
+    private function processDomainConfigArray(array $domainConfig)
+    {
         return new DomainConfig(
             $domainConfig[DomainsConfigDefinition::CONFIG_ID],
             $domainConfig[DomainsUrlsConfigDefinition::CONFIG_URL],
@@ -77,7 +81,8 @@ class DomainsConfigLoader
      * @param array $domainUrlsConfigsByDomainId
      * @return array
      */
-    private function addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId) {
+    private function addUrlsToProccessedConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
+    {
         foreach ($domainConfigsByDomainId as $domainId => $domainConfigArray) {
             $domainConfigArray[DomainsUrlsConfigDefinition::CONFIG_URL] =
                 $domainUrlsConfigsByDomainId[$domainId][DomainsUrlsConfigDefinition::CONFIG_URL];
@@ -92,7 +97,8 @@ class DomainsConfigLoader
      * @param \Symfony\Component\Config\Definition\ConfigurationInterface $configDefinition
      * @return array
      */
-    private function getProcessedConfig($filepath, ConfigurationInterface $configDefinition) {
+    private function getProcessedConfig($filepath, ConfigurationInterface $configDefinition)
+    {
         $yamlParser = new Parser();
         $processor = new Processor();
 
@@ -112,7 +118,8 @@ class DomainsConfigLoader
      * @param array $domainUrlsConfigsByDomainId
      * @return bool
      */
-    private function isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId) {
+    private function isConfigMatchingUrlsConfig($domainConfigsByDomainId, $domainUrlsConfigsByDomainId)
+    {
         foreach (array_keys($domainConfigsByDomainId) as $domainId) {
             if (!array_key_exists($domainId, $domainUrlsConfigsByDomainId)) {
                 return false;

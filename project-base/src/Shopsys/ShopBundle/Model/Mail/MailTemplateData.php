@@ -68,7 +68,8 @@ class MailTemplateData
     /**
      * @param \Shopsys\ShopBundle\Model\Mail\MailTemplate $mailTemplate
      */
-    public function setFromEntity(MailTemplate $mailTemplate) {
+    public function setFromEntity(MailTemplate $mailTemplate)
+    {
         $this->name = $mailTemplate->getName();
         $this->bccEmail = $mailTemplate->getBccEmail();
         $this->subject = $mailTemplate->getSubject();

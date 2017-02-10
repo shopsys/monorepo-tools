@@ -20,7 +20,8 @@ class MultidomainType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
@@ -28,7 +29,8 @@ class MultidomainType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
         Utils::setArrayDefaultValue($options['options'], 'constraints', []);
 
@@ -49,7 +51,8 @@ class MultidomainType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'compound' => true,
             'options' => [],
@@ -61,7 +64,8 @@ class MultidomainType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'multidomain';
     }
 
@@ -70,7 +74,8 @@ class MultidomainType extends AbstractType
      * @param \Symfony\Component\Form\FormInterface $form
      * @param array $options
      */
-    public function finishView(FormView $view, FormInterface $form, array $options) {
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
         parent::finishView($view, $form, $options);
 
         foreach ($view->children as $domainId => $child) {

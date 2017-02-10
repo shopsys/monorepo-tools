@@ -16,7 +16,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class CartTest extends DatabaseTestCase
 {
-    public function testRemoveItem() {
+    public function testRemoveItem()
+    {
         $em = $this->getEntityManager();
 
         $customerIdentifier = new CustomerIdentifier('randomString');

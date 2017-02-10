@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig;
 
 class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
 {
-    public function isSameFeedAndDomainProvider() {
+    public function isSameFeedAndDomainProvider()
+    {
         return [
             [new FeedGenerationConfig('feedName', 1), true],
             [new FeedGenerationConfig('feedName2', 1), false],
@@ -19,7 +20,8 @@ class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider isSameFeedAndDomainProvider
      */
-    public function testIsSameFeedAndDomain($feedGenerationConfigToComapareWith, $expectedResult) {
+    public function testIsSameFeedAndDomain($feedGenerationConfigToComapareWith, $expectedResult)
+    {
         $feedGenerationConfig = new FeedGenerationConfig('feedName', 1);
 
         $this->assertSame($expectedResult, $feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToComapareWith));

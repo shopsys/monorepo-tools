@@ -11,7 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ReplaceDomainsUrlsCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:domains-urls:replace')
             ->setDescription('Replace domains urls in database by urls in domains config');
@@ -21,7 +22,8 @@ class ReplaceDomainsUrlsCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $domainUrlService = $this->getContainer()->get(DomainUrlService::class);

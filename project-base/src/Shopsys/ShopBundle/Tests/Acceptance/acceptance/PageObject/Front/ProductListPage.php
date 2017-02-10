@@ -28,7 +28,8 @@ class ProductListPage extends AbstractPage
      * @param string $productName
      * @param int $quantity
      */
-    public function addProductToCartByName($productName, $quantity = 1) {
+    public function addProductToCartByName($productName, $quantity = 1)
+    {
         $context = $this->getProductListCompomentContext();
 
         $this->productListComponent->addProductToCartByName($productName, $quantity, $context);
@@ -37,7 +38,8 @@ class ProductListPage extends AbstractPage
     /**
      * @param int $expectedCount
      */
-    public function assertProductsTotalCount($expectedCount) {
+    public function assertProductsTotalCount($expectedCount)
+    {
         $totalCountElement = $this->getProductListCompomentContext()
             ->findElement(WebDriverBy::cssSelector('.js-paging-total-count'));
         $actualCount = (int)trim($totalCountElement->getText());
@@ -51,7 +53,8 @@ class ProductListPage extends AbstractPage
     /**
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function getProductListCompomentContext() {
+    private function getProductListCompomentContext()
+    {
         return $this->webDriver->findElement(WebDriverBy::cssSelector('.web__main__content'));
     }
 }

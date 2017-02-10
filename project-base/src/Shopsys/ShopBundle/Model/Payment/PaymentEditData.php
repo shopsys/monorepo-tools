@@ -20,7 +20,8 @@ class PaymentEditData
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      * @param array $prices
      */
-    public function __construct(PaymentData $paymentData = null, array $prices = []) {
+    public function __construct(PaymentData $paymentData = null, array $prices = [])
+    {
         if ($paymentData !== null) {
             $this->paymentData = $paymentData;
         } else {

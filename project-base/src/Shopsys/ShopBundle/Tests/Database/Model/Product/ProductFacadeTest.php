@@ -59,7 +59,8 @@ class ProductFacadeTest extends DatabaseTestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function getTestHandleOutOfStockStateDataProvider() {
+    public function getTestHandleOutOfStockStateDataProvider()
+    {
         return [
             [
                 'hidden' => true,
@@ -112,7 +113,8 @@ class ProductFacadeTest extends DatabaseTestCase
         ];
     }
 
-    public function testEditMarkProductForVisibilityRecalculation() {
+    public function testEditMarkProductForVisibilityRecalculation()
+    {
         $product = $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '1');
         /* @var $product \Shopsys\ShopBundle\Model\Product\Product */
         $productFacade = $this->getContainer()->get(ProductFacade::class);

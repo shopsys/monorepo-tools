@@ -14,7 +14,8 @@ use stdClass;
 
 class VatFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetDefaultVat() {
+    public function testGetDefaultVat()
+    {
         $expected = new stdClass();
         $emMock = $this->getMock(EntityManager::class, [], [], '', false);
         $vatService = new VatService();
@@ -54,7 +55,8 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expected, $vatFacade->getDefaultVat());
     }
 
-    public function testSetDefaultVat() {
+    public function testSetDefaultVat()
+    {
         $emMock = $this->getMock(EntityManager::class, [], [], '', false);
         $vatService = new VatService();
         $vatRepositoryMock = $this->getMock(VatRepository::class, [], [], '', false);

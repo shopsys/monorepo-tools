@@ -42,7 +42,8 @@ class ProductCalculatedPrice
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string|null $priceWithVat
      */
-    public function __construct(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
+    public function __construct(Product $product, PricingGroup $pricingGroup, $priceWithVat)
+    {
         $this->product = $product;
         $this->pricingGroup = $pricingGroup;
         $this->priceWithVat = $priceWithVat;
@@ -51,21 +52,24 @@ class ProductCalculatedPrice
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
      */
-    public function getPricingGroup() {
+    public function getPricingGroup()
+    {
         return $this->pricingGroup;
     }
 
     /**
      * @param string|null $priceWithVat
      */
-    public function setPriceWithVat($priceWithVat) {
+    public function setPriceWithVat($priceWithVat)
+    {
         $this->priceWithVat = $priceWithVat;
     }
 }

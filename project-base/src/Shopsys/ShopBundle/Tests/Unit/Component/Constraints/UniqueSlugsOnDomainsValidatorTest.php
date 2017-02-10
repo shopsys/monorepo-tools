@@ -17,7 +17,8 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
     /**
      * @inheritdoc
      */
-    protected function createValidator() {
+    protected function createValidator()
+    {
         $domainConfigs = [
             new DomainConfig(1, 'http://example.cz', 'name1', 'cs'),
             new DomainConfig(2, 'http://example.com', 'name2', 'en'),
@@ -41,7 +42,8 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
         return new UniqueSlugsOnDomainsValidator($domain, $domainRouterFactoryMock);
     }
 
-    public function testValidateSameSlugsOnDifferentDomains() {
+    public function testValidateSameSlugsOnDifferentDomains()
+    {
         $values = [
             [
                 FriendlyUrlType::FIELD_DOMAIN => 1,
@@ -58,7 +60,8 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
         $this->assertNoViolation();
     }
 
-    public function testValidateDuplicateSlugsOnSameDomain() {
+    public function testValidateDuplicateSlugsOnSameDomain()
+    {
         $values = [
             [
                 FriendlyUrlType::FIELD_DOMAIN => 1,
@@ -79,7 +82,8 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
             ->assertRaised();
     }
 
-    public function testValidateExistingSlug() {
+    public function testValidateExistingSlug()
+    {
         $values = [
             [
                 FriendlyUrlType::FIELD_DOMAIN => 1,

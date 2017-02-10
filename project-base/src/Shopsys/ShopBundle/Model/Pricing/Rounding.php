@@ -12,7 +12,8 @@ class Rounding
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\PricingSetting $pricingSetting
      */
-    public function __construct(PricingSetting $pricingSetting) {
+    public function __construct(PricingSetting $pricingSetting)
+    {
         $this->pricingSetting = $pricingSetting;
     }
 
@@ -20,7 +21,8 @@ class Rounding
      * @param string $priceWithVat
      * @return string
      */
-    public function roundPriceWithVat($priceWithVat) {
+    public function roundPriceWithVat($priceWithVat)
+    {
         $roundingType = $this->pricingSetting->getRoundingType();
 
         switch ($roundingType) {
@@ -49,7 +51,8 @@ class Rounding
      * @param string $priceWithoutVat
      * @return string
      */
-    public function roundPriceWithoutVat($priceWithoutVat) {
+    public function roundPriceWithoutVat($priceWithoutVat)
+    {
         return round($priceWithoutVat, 2);
     }
 
@@ -57,7 +60,8 @@ class Rounding
      * @param string $vatAmount
      * @return string
      */
-    public function roundVatAmount($vatAmount) {
+    public function roundVatAmount($vatAmount)
+    {
         return round($vatAmount, 2);
     }
 }

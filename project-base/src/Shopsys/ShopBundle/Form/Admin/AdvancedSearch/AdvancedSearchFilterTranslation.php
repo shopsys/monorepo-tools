@@ -9,7 +9,8 @@ class AdvancedSearchFilterTranslation
      */
     private $filtersTranslations;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->filtersTranslations = [];
     }
 
@@ -17,7 +18,8 @@ class AdvancedSearchFilterTranslation
      * @param string $filterName
      * @param string $filterTranslation
      */
-    public function addFilterTranslation($filterName, $filterTranslation) {
+    public function addFilterTranslation($filterName, $filterTranslation)
+    {
         $this->filtersTranslations[$filterName] = $filterTranslation;
     }
 
@@ -25,7 +27,8 @@ class AdvancedSearchFilterTranslation
      * @param string $filterName
      * @return string
      */
-    public function translateFilterName($filterName) {
+    public function translateFilterName($filterName)
+    {
         if (array_key_exists($filterName, $this->filtersTranslations)) {
             return $this->filtersTranslations[$filterName];
         }

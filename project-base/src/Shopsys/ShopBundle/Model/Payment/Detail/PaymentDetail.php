@@ -20,7 +20,8 @@ class PaymentDetail
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param \Shopsys\ShopBundle\Model\Pricing\Price[currencyId] $basePrices
      */
-    public function __construct(Payment $payment, array $basePrices) {
+    public function __construct(Payment $payment, array $basePrices)
+    {
         $this->payment = $payment;
         $this->basePrices = $basePrices;
     }
@@ -28,14 +29,16 @@ class PaymentDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function getPayment() {
+    public function getPayment()
+    {
         return $this->payment;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
      */
-    public function getBasePrices() {
+    public function getBasePrices()
+    {
         return $this->basePrices;
     }
 }

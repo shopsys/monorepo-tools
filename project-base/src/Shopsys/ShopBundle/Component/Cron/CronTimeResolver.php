@@ -12,7 +12,8 @@ class CronTimeResolver
      * @param \DateTimeInterface $dateTime
      * @return bool
      */
-    public function isValidAtTime(CronTimeInterface $cronTime, DateTimeInterface $dateTime) {
+    public function isValidAtTime(CronTimeInterface $cronTime, DateTimeInterface $dateTime)
+    {
         $hour = (int)$dateTime->format('G');
         $minute = (int)$dateTime->format('i');
 
@@ -26,7 +27,8 @@ class CronTimeResolver
      * @param string $timeString
      * @return bool
      */
-    private function isMatchWithTimeString($value, $timeString) {
+    private function isMatchWithTimeString($value, $timeString)
+    {
         $timeValues = explode(',', $timeString);
         $matches = null;
         foreach ($timeValues as $timeValue) {
@@ -47,7 +49,8 @@ class CronTimeResolver
      * @param int $maxValue
      * @param int $divisibleBy
      */
-    public function validateTimeString($timeString, $maxValue, $divisibleBy) {
+    public function validateTimeString($timeString, $maxValue, $divisibleBy)
+    {
         $timeValues = explode(',', $timeString);
         $matches = null;
         foreach ($timeValues as $timeValue) {

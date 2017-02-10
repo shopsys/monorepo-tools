@@ -39,7 +39,8 @@ class SeoController extends AdminBaseController
     /**
      * @Route("/seo/")
      */
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
 
         $form = $this->createForm($this->seoSettingFormTypeFactory->create());

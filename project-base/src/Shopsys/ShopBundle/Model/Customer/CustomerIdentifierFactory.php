@@ -18,7 +18,8 @@ class CustomerIdentifierFactory
      */
     private $session;
 
-    public function __construct(CurrentCustomer $currentCustomer, Session $session) {
+    public function __construct(CurrentCustomer $currentCustomer, Session $session)
+    {
         $this->currentCustomer = $currentCustomer;
         $this->session = $session;
     }
@@ -26,7 +27,8 @@ class CustomerIdentifierFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier
      */
-    public function get() {
+    public function get()
+    {
         $cartIdentifier = $this->session->getId();
 
         // when session is not started, returning empty string is behaviour of session_id()
@@ -44,7 +46,8 @@ class CustomerIdentifierFactory
      * @param string $cartIdentifier
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerIdentifier
      */
-    public function getOnlyWithCartIdentifier($cartIdentifier) {
+    public function getOnlyWithCartIdentifier($cartIdentifier)
+    {
         $customerIdentifier = new CustomerIdentifier($cartIdentifier, null);
 
         return $customerIdentifier;

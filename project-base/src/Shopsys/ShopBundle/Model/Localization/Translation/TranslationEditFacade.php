@@ -64,7 +64,8 @@ class TranslationEditFacade
      * @param string $translationId
      * @param array $translation
      */
-    public function saveTranslation($translationId, $translation) {
+    public function saveTranslation($translationId, $translation)
+    {
         foreach ($this->getTranslatableLocales() as $locale) {
             if (array_key_exists($locale, $translation)) {
                 $catalogue = $this->loadCatalogueFromFile(Translator::DEFAULT_DOMAIN, $locale);
@@ -78,7 +79,8 @@ class TranslationEditFacade
         $this->invalidateTranslationCache();
     }
 
-    private function invalidateTranslationCache() {
+    private function invalidateTranslationCache()
+    {
         $finder = new Finder();
         $finder->in($this->cacheDir . '/translations');
         $this->filesystem->remove($finder->files());
@@ -89,7 +91,8 @@ class TranslationEditFacade
      * @param string $locale
      * @return string
      */
-    private function getResourceFilepath($domain, $locale) {
+    private function getResourceFilepath($domain, $locale)
+    {
         return $this->rootDir
             . '/../src/Shopsys/ShopBundle/Resources/translations/custom/'
             . $domain . '.' . $locale . '.po';
@@ -100,7 +103,8 @@ class TranslationEditFacade
      * @param string $locale
      * @return \Symfony\Component\Translation\MessageCatalogue
      */
-    private function loadCatalogueFromFile($domain, $locale) {
+    private function loadCatalogueFromFile($domain, $locale)
+    {
         $filename = $this->getResourceFilepath($domain, $locale);
 
         if (file_exists($filename)) {
@@ -117,7 +121,8 @@ class TranslationEditFacade
      * @param string $domain
      * @param string $locale
      */
-    private function dumpCatalogToFile(MessageCatalogue $catalogue, $domain, $locale) {
+    private function dumpCatalogToFile(MessageCatalogue $catalogue, $domain, $locale)
+    {
         $jmsMessageCatalogue = new JmsMessageCatalogue();
         $jmsMessageCatalogue->setLocale($locale);
         foreach ($catalogue->all($domain) as $key => $translation) {
@@ -137,7 +142,8 @@ class TranslationEditFacade
      * @param string $translationId
      * @return string[locale]
      */
-    public function getTranslationById($translationId) {
+    public function getTranslationById($translationId)
+    {
         $translationsData = $this->getAllTranslationsData();
 
         $translationData = [];
@@ -155,7 +161,8 @@ class TranslationEditFacade
     /**
      * @return string[translationId][locale]
      */
-    public function getAllTranslationsData() {
+    public function getAllTranslationsData()
+    {
         $catalogues = [];
         foreach ($this->getTranslatableLocales() as $locale) {
             $catalogues[$locale] = $this->loadCatalogueFromFile(Translator::DEFAULT_DOMAIN, $locale);
@@ -176,7 +183,8 @@ class TranslationEditFacade
     /**
      * @return string[]
      */
-    public function getTranslatableLocales() {
+    public function getTranslatableLocales()
+    {
         $translatableLocales = [];
         foreach ($this->localization->getAllLocales() as $locale) {
             if ($locale !== Translator::SOURCE_LOCALE) {

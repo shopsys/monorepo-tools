@@ -56,7 +56,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \Doctrine\Common\Annotations\DocParser $docParser
      * @param \Shopsys\ShopBundle\Component\Translation\TransMethodSpecification[] $transMethodSpecifications
      */
-    public function __construct(DocParser $docParser, array $transMethodSpecifications) {
+    public function __construct(DocParser $docParser, array $transMethodSpecifications)
+    {
         $this->docParser = $docParser;
         $this->traverser = new PHPParser_NodeTraverser();
         $this->traverser->addVisitor($this);
@@ -73,7 +74,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      * @param array $ast
      */
-    public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast) {
+    public function visitPhpFile(SplFileInfo $file, MessageCatalogue $catalogue, array $ast)
+    {
         $this->file = $file;
         $this->catalogue = $catalogue;
         $this->traverser->traverse($ast);
@@ -82,7 +84,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     /**
      * @param \PHPParser_Node $node
      */
-    public function enterNode(PHPParser_Node $node) {
+    public function enterNode(PHPParser_Node $node)
+    {
         if ($this->isTransMethodOrFuncCall($node)) {
             if (!$this->isIgnored($node)) {
                 /* @var $node \PHPParser_Node_Expr */
@@ -103,7 +106,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
      * @return string
      */
-    private function getMessageId($node) {
+    private function getMessageId($node)
+    {
         $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
         $messageIdArgumentIndex = $this->transMethodSpecifications[$methodName]->getMessageIdArgumentIndex();
 
@@ -118,7 +122,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node_Expr_MethodCall|\PHPParser_Node_Expr_FuncCall $node
      * @return string
      */
-    private function getDomain($node) {
+    private function getDomain($node)
+    {
         $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
         $domainArgumentIndex = $this->transMethodSpecifications[$methodName]->getDomainArgumentIndex();
 
@@ -133,7 +138,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node $node
      * @return bool
      */
-    private function isTransMethodOrFuncCall(PHPParser_Node $node) {
+    private function isTransMethodOrFuncCall(PHPParser_Node $node)
+    {
         if ($node instanceof PHPParser_Node_Expr_MethodCall || $node instanceof PHPParser_Node_Expr_FuncCall) {
             try {
                 $methodName = $this->getNormalizedMethodName($this->getNodeName($node));
@@ -153,7 +159,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node $node
      * @return bool
      */
-    private function isIgnored(PHPParser_Node $node) {
+    private function isIgnored(PHPParser_Node $node)
+    {
         foreach ($this->getAnnotations($node) as $annotation) {
             if ($annotation instanceof Ignore) {
                 return true;
@@ -167,7 +174,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node $node
      * @return \Doctrine\Common\Annotations\Annotation[]
      */
-    private function getAnnotations(PHPParser_Node $node) {
+    private function getAnnotations(PHPParser_Node $node)
+    {
         $docComment = $this->getDocComment($node);
 
         if ($docComment !== null) {
@@ -181,7 +189,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node $node
      * @return \PHPParser_Comment_Doc|null
      */
-    private function getDocComment(PHPParser_Node $node) {
+    private function getDocComment(PHPParser_Node $node)
+    {
         $docComment = $node->getDocComment();
 
         if ($docComment === null) {
@@ -197,7 +206,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param string $methodName
      * @return string
      */
-    private function getNormalizedMethodName($methodName) {
+    private function getNormalizedMethodName($methodName)
+    {
         return mb_strtolower($methodName);
     }
 
@@ -205,7 +215,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \PHPParser_Node $node
      * @return string
      */
-    private function getNodeName(PHPParser_Node $node) {
+    private function getNodeName(PHPParser_Node $node)
+    {
         if ($node instanceof PHPParser_Node_Expr_MethodCall) {
             return $node->name;
         } elseif ($node instanceof PHPParser_Node_Expr_FuncCall && $node->name instanceof PHPParser_Node_Name) {
@@ -218,21 +229,24 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     /**
      * @param array $nodes
      */
-    public function beforeTraverse(array $nodes) {
+    public function beforeTraverse(array $nodes)
+    {
         return null;
     }
 
     /**
      * @param \PHPParser_Node $node
      */
-    public function leaveNode(PHPParser_Node $node) {
+    public function leaveNode(PHPParser_Node $node)
+    {
         return null;
     }
 
     /**
      * @param array $nodes
      */
-    public function afterTraverse(array $nodes) {
+    public function afterTraverse(array $nodes)
+    {
         return null;
     }
 
@@ -240,7 +254,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \SplFileInfo $file
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      */
-    public function visitFile(SplFileInfo $file, MessageCatalogue $catalogue) {
+    public function visitFile(SplFileInfo $file, MessageCatalogue $catalogue)
+    {
         return null;
     }
 
@@ -249,7 +264,8 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
      * @param \JMS\TranslationBundle\Model\MessageCatalogue $catalogue
      * @param \Twig_Node $ast
      */
-    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $ast) {
+    public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $ast)
+    {
         return null;
     }
 }

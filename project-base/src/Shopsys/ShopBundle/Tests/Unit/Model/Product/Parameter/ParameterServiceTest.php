@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Parameter\ParameterService;
 
 class ParameterServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreate() {
+    public function testCreate()
+    {
         $parameterService = new ParameterService();
 
         $parameterDataOriginal = new ParameterData(['cs' => 'parameterName']);
@@ -21,7 +22,8 @@ class ParameterServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($parameterDataOriginal, $parameterDataNew);
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $parameterService = new ParameterService();
 
         $parameterDataOld = new ParameterData(['cs' => 'oldParameterName']);

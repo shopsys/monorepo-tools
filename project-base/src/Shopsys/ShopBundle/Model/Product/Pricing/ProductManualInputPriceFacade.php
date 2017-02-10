@@ -48,7 +48,8 @@ class ProductManualInputPriceFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param string $inputPrice
      */
-    public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice) {
+    public function refresh(Product $product, PricingGroup $pricingGroup, $inputPrice)
+    {
         $manualInputPrice = $this->productManualInputPriceRepository->findByProductAndPricingGroup($product, $pricingGroup);
         $refreshedProductManualInputPrice = $this->productManualInputPriceService->refresh(
             $product,
@@ -63,14 +64,16 @@ class ProductManualInputPriceFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[]
      */
-    public function getAllByProduct(Product $product) {
+    public function getAllByProduct(Product $product)
+    {
         return $this->productManualInputPriceRepository->getByProduct($product);
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    public function deleteByProduct(Product $product) {
+    public function deleteByProduct(Product $product)
+    {
         $manualInputPrices = $this->productManualInputPriceRepository->getByProduct($product);
         foreach ($manualInputPrices as $manualInputPrice) {
             $this->em->remove($manualInputPrice);

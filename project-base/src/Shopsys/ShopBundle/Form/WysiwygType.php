@@ -13,14 +13,16 @@ class WysiwygType extends AbstractTypeExtension
      */
     private $cssFacade;
 
-    public function __construct(CssFacade $cssFacade) {
+    public function __construct(CssFacade $cssFacade)
+    {
         $this->cssFacade = $cssFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $cssVersion = $this->cssFacade->getCssVersion();
 
         $resolver->setDefaults([
@@ -35,7 +37,8 @@ class WysiwygType extends AbstractTypeExtension
     /**
      * @return string
      */
-    public function getExtendedType() {
+    public function getExtendedType()
+    {
         return 'ckeditor';
     }
 }

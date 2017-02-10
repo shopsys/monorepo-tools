@@ -112,7 +112,8 @@ class UrlsProvider
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function getRouteParameters(Route $route, $routeName) {
+    private function getRouteParameters(Route $route, $routeName)
+    {
         switch ($routeName) {
             case 'admin_category_edit':
                 // category ID 1 is special root category, therefore we use ID 2
@@ -207,7 +208,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    public function getAdminTestableUrlsProviderData() {
+    public function getAdminTestableUrlsProviderData()
+    {
         $urls = [];
         foreach ($this->getAdminTestableRoutesData() as $adminTestableRouteData) {
             $routeName = $adminTestableRouteData[self::ROUTE_NAME_KEY];
@@ -226,7 +228,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    public function getFrontTestableUrlsProviderData() {
+    public function getFrontTestableUrlsProviderData()
+    {
         $urls = [];
         foreach ($this->getFrontTestableRoutesData() as $frontTestableRouteData) {
             $routeName = $frontTestableRouteData[self::ROUTE_NAME_KEY];
@@ -245,7 +248,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getAdminTestableRoutesData() {
+    private function getAdminTestableRoutesData()
+    {
         $routesData = [];
         foreach ($this->router->getRouteCollection() as $routeName => $route) {
             if ($this->isTestableRoute($route, $routeName) && $this->isAdminRouteName($routeName)) {
@@ -267,7 +271,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getFrontTestableRoutesData() {
+    private function getFrontTestableRoutesData()
+    {
         $routesData = [];
         foreach ($this->router->getRouteCollection() as $routeName => $route) {
             if ($this->isTestableRoute($route, $routeName) && $this->isFrontRouteName($routeName)) {
@@ -298,7 +303,8 @@ class UrlsProvider
      * @param array $routeParameters
      * @return array
      */
-    private function addRouteCsrfParameter($routeName, $routeParameters) {
+    private function addRouteCsrfParameter($routeName, $routeParameters)
+    {
         if (preg_match('@_delete$@', $routeName)) {
             $routeParameters[RouteCsrfProtector::CSRF_TOKEN_REQUEST_PARAMETER] =
                 '{'
@@ -316,7 +322,8 @@ class UrlsProvider
      * @param string $url
      * @return string
      */
-    public function replaceCsrfTokensInUrl($url) {
+    public function replaceCsrfTokensInUrl($url)
+    {
         return preg_replace_callback(
             '@\%7B([^%]+)\%7D@',
             function ($matches) {
@@ -330,7 +337,8 @@ class UrlsProvider
      * @param \Symfony\Component\Routing\Route $route
      * @return string[]
      */
-    private function getRouteParametersNames(Route $route) {
+    private function getRouteParametersNames(Route $route)
+    {
         $matches = [];
         preg_match_all('/\{([^\}]+)\}/', $route->getPath(), $matches);
 
@@ -341,7 +349,8 @@ class UrlsProvider
      * @param string $routeName
      * @return bool
      */
-    private function isAdminRouteName($routeName) {
+    private function isAdminRouteName($routeName)
+    {
         return strpos($routeName, 'admin_') === 0;
     }
 
@@ -349,7 +358,8 @@ class UrlsProvider
      * @param string $routeName
      * @return string
      */
-    private function isFrontRouteName($routeName) {
+    private function isFrontRouteName($routeName)
+    {
         return strpos($routeName, 'front_') === 0;
     }
 
@@ -358,7 +368,8 @@ class UrlsProvider
      * @param string $routeName
      * @return bool
      */
-    private function isTestableRoute(Route $route, $routeName) {
+    private function isTestableRoute(Route $route, $routeName)
+    {
         if (in_array($routeName, $this->ignoredRouteNames)
             || count($route->getMethods()) > 0 && !in_array('GET', $route->getMethods())
             || strpos($route->getPath(), '/_') === 0
@@ -376,7 +387,8 @@ class UrlsProvider
      * @param string $routeName
      * @return int
      */
-    private function getExpectedStatusCode(Route $route, $routeName) {
+    private function getExpectedStatusCode(Route $route, $routeName)
+    {
         if (array_key_exists($routeName, $this->expectedStatusCodesByRouteName)) {
             return $this->expectedStatusCodesByRouteName[$routeName];
         } elseif (strpos($route->getPath(), '/delete/') !== false) {
@@ -389,7 +401,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductListInCategoryWith500ProductsRouteData() {
+    private function getProductListInCategoryWith500ProductsRouteData()
+    {
         $productListRouteParameters = [
             'id' => 8,
         ];
@@ -404,7 +417,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductListWithFilteringInCategoryWith500ProductsRouteData() {
+    private function getProductListWithFilteringInCategoryWith500ProductsRouteData()
+    {
         $routeData = $this->getProductListInCategoryWith500ProductsRouteData();
 
         $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
@@ -420,7 +434,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductListInCategoryWith7600ProductsRouteData() {
+    private function getProductListInCategoryWith7600ProductsRouteData()
+    {
         $productListRouteParameters = [
             'id' => 3,
         ];
@@ -435,7 +450,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductListWithFilteringInCategoryWith7600ProductsRouteData() {
+    private function getProductListWithFilteringInCategoryWith7600ProductsRouteData()
+    {
         $routeData = $this->getProductListInCategoryWith7600ProductsRouteData();
 
         $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
@@ -452,7 +468,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductListInCategoryWith13600ProductsRouteData() {
+    private function getProductListInCategoryWith13600ProductsRouteData()
+    {
         $productListRouteParameters = [
             'id' => 11,
         ];
@@ -467,7 +484,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getProductWithListFilteringInCategoryWith13600ProductsRouteData() {
+    private function getProductWithListFilteringInCategoryWith13600ProductsRouteData()
+    {
         $routeData = $this->getProductListInCategoryWith13600ProductsRouteData();
 
         $routeData[self::ROUTE_PARAMETERS_KEY][ProductFilterFormType::NAME] = [
@@ -481,7 +499,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getSearchFilteringRouteData() {
+    private function getSearchFilteringRouteData()
+    {
         $productSearchFilterData = [
             'inStock' => '1',
             'flags' => ['2'],
@@ -502,7 +521,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getSuperadminEditRouteData() {
+    private function getSuperadminEditRouteData()
+    {
         return [
             self::ROUTE_NAME_KEY => 'admin_administrator_edit',
             self::ROUTE_PARAMETERS_KEY => ['id' => 1],
@@ -513,7 +533,8 @@ class UrlsProvider
     /**
      * @return array
      */
-    private function getMainVarinatDetailRouteData() {
+    private function getMainVarinatDetailRouteData()
+    {
         return [
             self::ROUTE_NAME_KEY => 'front_product_detail',
             self::ROUTE_PARAMETERS_KEY => ['id' => 150],

@@ -13,17 +13,20 @@ class ErrorPageCronModule implements CronModuleInterface
      */
     private $errorPagesFacade;
 
-    public function __construct(ErrorPagesFacade $errorPagesFacade) {
+    public function __construct(ErrorPagesFacade $errorPagesFacade)
+    {
         $this->errorPagesFacade = $errorPagesFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
-    public function run() {
+    public function run()
+    {
         $this->errorPagesFacade->generateAllErrorPagesForProduction();
     }
 }

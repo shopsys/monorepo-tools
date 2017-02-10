@@ -20,21 +20,24 @@ class ProductsType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Transformers\ProductsIdsToProductsTransformer $productsIdsToProductsTransformer
      */
-    public function __construct(ProductsIdsToProductsTransformer $productsIdsToProductsTransformer) {
+    public function __construct(ProductsIdsToProductsTransformer $productsIdsToProductsTransformer)
+    {
         $this->productsIdsToProductsTransformer = $productsIdsToProductsTransformer;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->addModelTransformer($this->productsIdsToProductsTransformer);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options) {
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
         $view->vars['products'] = $form->getData();
         $view->vars['main_product'] = $options['main_product'];
         $view->vars['sortable'] = $options['sortable'];
@@ -45,7 +48,8 @@ class ProductsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'type' => FormType::HIDDEN,
             'allow_add' => true,
@@ -62,14 +66,16 @@ class ProductsType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'collection';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'products';
     }
 }

@@ -13,17 +13,20 @@ class SitemapCronModule implements CronModuleInterface
      */
     private $sitemapFacade;
 
-    public function __construct(SitemapFacade $sitemapFacade) {
+    public function __construct(SitemapFacade $sitemapFacade)
+    {
         $this->sitemapFacade = $sitemapFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
-    public function run() {
+    public function run()
+    {
         $this->sitemapFacade->generateForAllDomains();
     }
 }

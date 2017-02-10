@@ -29,7 +29,8 @@ class PaymentEditDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentEditData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $paymentEditData = new PaymentEditData();
         $paymentEditData->paymentData->vat = $this->vatFacade->getDefaultVat();
 
@@ -40,7 +41,8 @@ class PaymentEditDataFactory
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentEditData
      */
-    public function createFromPayment(Payment $payment) {
+    public function createFromPayment(Payment $payment)
+    {
         $paymentEditData = new PaymentEditData();
         $paymentData = new PaymentData();
         $paymentData->setFromEntity($payment, $this->paymentFacade->getPaymentDomainsByPayment($payment));

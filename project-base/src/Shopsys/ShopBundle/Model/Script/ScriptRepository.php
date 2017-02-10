@@ -14,21 +14,24 @@ class ScriptRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getScriptRepository() {
+    private function getScriptRepository()
+    {
         return $this->em->getRepository(Script::class);
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Script\Script
      */
-    public function getById($scriptId) {
+    public function getById($scriptId)
+    {
         $script = $this->getScriptRepository()->find($scriptId);
 
         if ($script === null) {
@@ -41,14 +44,16 @@ class ScriptRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Script\Script[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->getScriptRepository()->findAll();
     }
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getAllQueryBuilder() {
+    public function getAllQueryBuilder()
+    {
         return $this->getScriptRepository()->createQueryBuilder('s');
     }
 
@@ -56,7 +61,8 @@ class ScriptRepository
      * @param string $placement
      * @return \Shopsys\ShopBundle\Model\Script\Script[]
      */
-    public function getScriptsByPlacement($placement) {
+    public function getScriptsByPlacement($placement)
+    {
         return $this->getScriptRepository()->findBy(['placement' => $placement]);
     }
 }

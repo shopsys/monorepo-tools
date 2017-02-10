@@ -45,21 +45,24 @@ class LazyLoadedCategoryDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 
     /**
      * @return bool
      */
-    public function hasChildren() {
+    public function hasChildren()
+    {
         return $this->hasChildren;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
      */
-    public function getChildren() {
+    public function getChildren()
+    {
         if ($this->children === null) {
             $this->children = call_user_func($this->lazyLoadChildrenCallback);
         }

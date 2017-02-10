@@ -12,7 +12,8 @@ class SortableValuesType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'type' => FormType::HIDDEN,
             'allow_add' => true,
@@ -26,21 +27,24 @@ class SortableValuesType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'collection';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'sortable_values';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options) {
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
         $view->vars['labels_by_value'] = $options['labels_by_value'];
         $view->vars['placeholder'] = $options['placeholder'];
     }

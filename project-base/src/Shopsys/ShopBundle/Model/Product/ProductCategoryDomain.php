@@ -43,7 +43,8 @@ class ProductCategoryDomain
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param int $domainId
      */
-    public function __construct(Product $product, Category $category, $domainId) {
+    public function __construct(Product $product, Category $category, $domainId)
+    {
         $this->product = $product;
         $this->category = $category;
         $this->domainId = $domainId;
@@ -52,14 +53,16 @@ class ProductCategoryDomain
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getCategory() {
+    public function getCategory()
+    {
         return $this->category;
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 }

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class MenuLoaderTest extends FunctionalTestCase
 {
-    public function testLoadFromArray() {
+    public function testLoadFromArray()
+    {
         $testMenu = [
             [
                 'label' => 'Item 1',
@@ -51,7 +52,8 @@ class MenuLoaderTest extends FunctionalTestCase
         $this->assertSame('item_3', $menu->getRegularItems()[1]->getRoute());
     }
 
-    public function testLoadFromArrayMissingSettingsItem() {
+    public function testLoadFromArrayMissingSettingsItem()
+    {
         $testMenu = [
             [
                 'label' => 'Item 1',
@@ -81,7 +83,8 @@ class MenuLoaderTest extends FunctionalTestCase
     /**
      * @return \Shopsys\ShopBundle\Model\AdminNavigation\MenuLoader
      */
-    private function getMenuLoaderWithMockedTranslator() {
+    private function getMenuLoaderWithMockedTranslator()
+    {
         $translatorMock = $this->getMockBuilder(Translator::class)
             ->disableOriginalConstructor()
             ->setMethods(['trans'])

@@ -40,7 +40,8 @@ class TopProduct
      * @param int $domainId
      * @param int $position
      */
-    public function __construct(Product $product, $domainId, $position) {
+    public function __construct(Product $product, $domainId, $position)
+    {
         $this->product = $product;
         $this->domainId = $domainId;
         $this->position = $position;
@@ -49,7 +50,8 @@ class TopProduct
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 }

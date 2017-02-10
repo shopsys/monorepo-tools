@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
 {
-    public function testRunImmediatelyRecalculations() {
+    public function testRunImmediatelyRecalculations()
+    {
         $productMock = $this->getMock(Product::class, null, [], '', false);
 
         $emMock = $this->getMock(EntityManager::class, ['clear', 'flush'], [], '', false);
@@ -49,7 +50,8 @@ class ProductAvailabilityRecalculatorTest extends PHPUnit_Framework_TestCase
         $productAvailabilityRecalculator->runImmediateRecalculations();
     }
 
-    public function testRecalculateAvailabilityForVariant() {
+    public function testRecalculateAvailabilityForVariant()
+    {
         $variantMock = $this->getMock(Product::class, ['isVariant', 'getMainVariant', 'setCalculatedAvailability'], [], '', false);
         $mainVariantMock = $this->getMock(Product::class, ['setCalculatedAvailability'], [], '', false);
         $variantMock

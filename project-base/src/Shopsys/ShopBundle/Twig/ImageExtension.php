@@ -75,14 +75,16 @@ class ImageExtension extends Twig_Extension
      *
      * @return \Symfony\Bundle\TwigBundle\TwigEngine
      */
-    private function getTemplatingService() {
+    private function getTemplatingService()
+    {
         return $this->container->get('templating');
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('imageExists', [$this, 'imageExists']),
             new Twig_SimpleFunction('imageUrl', [$this, 'getImageUrl']),
@@ -97,7 +99,8 @@ class ImageExtension extends Twig_Extension
      * @param string|null $type
      * @return bool
      */
-    public function imageExists($imageOrEntity, $type = null) {
+    public function imageExists($imageOrEntity, $type = null)
+    {
         try {
             $image = $this->imageFacade->getImageByObject($imageOrEntity, $type);
         } catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
@@ -113,7 +116,8 @@ class ImageExtension extends Twig_Extension
      * @param string|null $type
      * @return string
      */
-    public function getImageUrl($imageOrEntity, $sizeName = null, $type = null) {
+    public function getImageUrl($imageOrEntity, $sizeName = null, $type = null)
+    {
         try {
             return $this->imageFacade->getImageUrl($this->domain->getCurrentDomainConfig(), $imageOrEntity, $sizeName, $type);
         } catch (\Shopsys\ShopBundle\Component\Image\Exception\ImageNotFoundException $e) {
@@ -126,7 +130,8 @@ class ImageExtension extends Twig_Extension
      * @param string|null $type
      * @return \Shopsys\ShopBundle\Component\Image\Image[]
      */
-    public function getImages($entity, $type = null) {
+    public function getImages($entity, $type = null)
+    {
         return $this->imageFacade->getImagesByEntityIndexedById($entity, $type);
     }
 
@@ -135,7 +140,8 @@ class ImageExtension extends Twig_Extension
      * @param array $attributes
      * @return string
      */
-    public function getImageHtml($imageOrEntity, array $attributes = []) {
+    public function getImageHtml($imageOrEntity, array $attributes = [])
+    {
         $this->preventDefault($attributes);
 
         try {
@@ -154,7 +160,8 @@ class ImageExtension extends Twig_Extension
      * @param array $attributes
      * @return string
      */
-    public function getNoimageHtml(array $attributes = []) {
+    public function getNoimageHtml(array $attributes = [])
+    {
         $this->preventDefault($attributes);
 
         $entityName = 'noimage';
@@ -166,7 +173,8 @@ class ImageExtension extends Twig_Extension
     /**
      * @return string
      */
-    private function getEmptyImageUrl() {
+    private function getEmptyImageUrl()
+    {
         return $this->domain->getUrl() . $this->frontDesignImageUrlPrefix . self::NOIMAGE_FILENAME;
     }
 
@@ -175,7 +183,8 @@ class ImageExtension extends Twig_Extension
      * @param string|null $sizeName
      * @return string
      */
-    private function getImageCssClass($entityName, $type, $sizeName) {
+    private function getImageCssClass($entityName, $type, $sizeName)
+    {
         $allClassParts = [
             'image',
             $entityName,
@@ -190,14 +199,16 @@ class ImageExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'image_extension';
     }
 
     /**
      * @param array $attributes
      */
-    private function preventDefault(array &$attributes) {
+    private function preventDefault(array &$attributes)
+    {
         Utils::setArrayDefaultValue($attributes, 'type');
         Utils::setArrayDefaultValue($attributes, 'size');
         Utils::setArrayDefaultValue($attributes, 'alt', '');
@@ -209,7 +220,8 @@ class ImageExtension extends Twig_Extension
      * @param $entityName
      * @return string
      */
-    private function getImageHtmlByEntityName(array $attributes, $entityName) {
+    private function getImageHtmlByEntityName(array $attributes, $entityName)
+    {
         $htmlAttributes = $attributes;
         unset($htmlAttributes['type'], $htmlAttributes['size']);
 

@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetEnteredPromoCode() {
+    public function testGetEnteredPromoCode()
+    {
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
@@ -27,7 +28,8 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $this->assertSame($validPromoCode, $currentPromoCodeFacade->getValidEnteredPromoCodeOrNull());
     }
 
-    public function testGetEnteredPromoCodeInvalid() {
+    public function testGetEnteredPromoCodeInvalid()
+    {
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->atLeastOnce())->method('get')->willReturn($validPromoCode->getCode());
@@ -41,7 +43,8 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $this->assertNull($currentPromoCodeFacade->getValidEnteredPromoCodeOrNull());
     }
 
-    public function testSetEnteredPromoCode() {
+    public function testSetEnteredPromoCode()
+    {
         $enteredCode = 'validCode';
         $validPromoCode = new PromoCode(new PromoCodeData('validCode', 10.0));
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
@@ -59,7 +62,8 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
     }
 
-    public function testSetEnteredPromoCodeInvalid() {
+    public function testSetEnteredPromoCodeInvalid()
+    {
         $enteredCode = 'invalidCode';
         $sessionMock = $this->getMockForAbstractClass(SessionInterface::class, ['get']);
         $sessionMock->expects($this->never())->method('set');

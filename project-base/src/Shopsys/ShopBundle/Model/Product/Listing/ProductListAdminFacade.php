@@ -33,7 +33,8 @@ class ProductListAdminFacade
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getProductListQueryBuilder() {
+    public function getProductListQueryBuilder()
+    {
         /**
          * temporary solution -
          * when product price type calculation is set to manual, price for first domain is shown in admin product list
@@ -47,7 +48,8 @@ class ProductListAdminFacade
      * @param \Shopsys\ShopBundle\Form\Admin\QuickSearch\QuickSearchFormData $quickSearchData
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData) {
+    public function getQueryBuilderByQuickSearchData(QuickSearchFormData $quickSearchData)
+    {
         $queryBuilder = $this->getProductListQueryBuilder();
         $this->productListAdminRepository->extendQueryBuilderByQuickSearchData($queryBuilder, $quickSearchData);
 

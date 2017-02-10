@@ -21,7 +21,8 @@ class ManualBestsellingProductRepository
      */
     private $productRepository;
 
-    public function __construct(EntityManager $entityManager, ProductRepository $productRepository) {
+    public function __construct(EntityManager $entityManager, ProductRepository $productRepository)
+    {
         $this->em = $entityManager;
         $this->productRepository = $productRepository;
     }
@@ -31,7 +32,8 @@ class ManualBestsellingProductRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
      */
-    public function getByCategory($domainId, Category $category) {
+    public function getByCategory($domainId, Category $category)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('bp')
             ->from(ManualBestsellingProduct::class, 'bp', 'bp.position')
@@ -49,7 +51,8 @@ class ManualBestsellingProductRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct[]
      */
-    public function getOfferedByCategory($domainId, Category $category, PricingGroup $pricingGroup) {
+    public function getOfferedByCategory($domainId, Category $category, PricingGroup $pricingGroup)
+    {
         $queryBuilder = $this->productRepository->getAllOfferedQueryBuilder($domainId, $pricingGroup);
 
         $queryBuilder
@@ -66,7 +69,8 @@ class ManualBestsellingProductRepository
      * @param int $domainId
      * @return int[categoryId]
      */
-    public function getCountsIndexedByCategoryId($domainId) {
+    public function getCountsIndexedByCategoryId($domainId)
+    {
         $queryBuilder = $this->em->createQueryBuilder();
 
         $queryBuilder

@@ -14,14 +14,16 @@ class OrderStatusData
     /**
      * @param string[] $name
      */
-    public function __construct(array $name = []) {
+    public function __construct(array $name = [])
+    {
         $this->name = $name;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
      */
-    public function setFromEntity(OrderStatus $orderStatus) {
+    public function setFromEntity(OrderStatus $orderStatus)
+    {
         $translations = $orderStatus->getTranslations();
         $names = [];
         foreach ($translations as $translate) {

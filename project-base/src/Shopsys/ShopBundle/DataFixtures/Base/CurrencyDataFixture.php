@@ -16,7 +16,8 @@ class CurrencyDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $currencyData = new CurrencyData();
 
         $currencyData->name = 'Česká koruna';
@@ -33,7 +34,8 @@ class CurrencyDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @param string|null $referenceName
      */
-    private function createCurrency(CurrencyData $currencyData, $referenceName = null) {
+    private function createCurrency(CurrencyData $currencyData, $referenceName = null)
+    {
         $currencyFacade = $this->get(CurrencyFacade::class);
         /* @var $currencyFacade \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyFacade */
 

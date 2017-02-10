@@ -30,7 +30,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $categoryData = new CategoryData();
 
         $categoryData->name = ['cs' => 'Elektro'];
@@ -135,7 +136,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
      * @param string|null $referenceName
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    private function createCategory(CategoryData $categoryData, $referenceName = null) {
+    private function createCategory(CategoryData $categoryData, $referenceName = null)
+    {
         $categoryFacade = $this->get(CategoryFacade::class);
         /* @var $categoryFacade \Shopsys\ShopBundle\Model\Category\CategoryFacade */
 
@@ -150,7 +152,8 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             CategoryRootDataFixture::class,
         ];

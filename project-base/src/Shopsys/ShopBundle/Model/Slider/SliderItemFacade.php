@@ -45,7 +45,8 @@ class SliderItemFacade
      * @param int $sliderItemId
      * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
      */
-    public function getById($sliderItemId) {
+    public function getById($sliderItemId)
+    {
         return $this->sliderItemRepository->getById($sliderItemId);
     }
 
@@ -54,7 +55,8 @@ class SliderItemFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
      */
-    public function create(SliderItemData $sliderItemData, $domainId) {
+    public function create(SliderItemData $sliderItemData, $domainId)
+    {
         $sliderItem = new SliderItem($sliderItemData, $domainId);
 
         $this->em->persist($sliderItem);
@@ -69,7 +71,8 @@ class SliderItemFacade
      * @param \Shopsys\ShopBundle\Model\Slider\SliderItemData $sliderItemData
      * @return \Shopsys\ShopBundle\Model\Slider\SliderItem
      */
-    public function edit($sliderItemId, SliderItemData $sliderItemData) {
+    public function edit($sliderItemId, SliderItemData $sliderItemData)
+    {
         $sliderItem = $this->sliderItemRepository->getById($sliderItemId);
         $sliderItem->edit($sliderItemData);
 
@@ -82,7 +85,8 @@ class SliderItemFacade
     /**
      * @param int $sliderItemId
      */
-    public function delete($sliderItemId) {
+    public function delete($sliderItemId)
+    {
         $sliderItem = $this->sliderItemRepository->getById($sliderItemId);
 
         $this->em->remove($sliderItem);
@@ -92,7 +96,8 @@ class SliderItemFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Slider\SliderItem[]
      */
-    public function getAllVisibleOnCurrentDomain() {
+    public function getAllVisibleOnCurrentDomain()
+    {
         return $this->sliderItemRepository->getAllVisibleByDomainId($this->domain->getId());
     }
 }

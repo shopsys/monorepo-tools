@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\ProductRepository;
 
 class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
 {
-    public function testTransform() {
+    public function testTransform()
+    {
         $productId = 1;
         $product = $this->getMockBuilder(Product::class)
             ->setMethods(['getId'])
@@ -24,7 +25,8 @@ class ProductIdToProductTransformerTest extends PHPUnit_Framework_TestCase
         $this->assertNull($productIdToProductTransformer->transform(null));
     }
 
-    public function testReverseTransform() {
+    public function testReverseTransform()
+    {
         $productId = 1;
         $product = $this->getMockBuilder(Product::class, [], [], '', false);
 

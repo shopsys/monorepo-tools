@@ -28,7 +28,8 @@ class CurrentCustomer
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
      */
-    public function getPricingGroup() {
+    public function getPricingGroup()
+    {
         $user = $this->findCurrentUser();
         if ($user === null) {
             return $this->pricingGroupSettingFacade->getDefaultPricingGroupByCurrentDomain();
@@ -40,7 +41,8 @@ class CurrentCustomer
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    public function findCurrentUser() {
+    public function findCurrentUser()
+    {
         $token = $this->tokenStorage->getToken();
         if ($token === null) {
             return null;

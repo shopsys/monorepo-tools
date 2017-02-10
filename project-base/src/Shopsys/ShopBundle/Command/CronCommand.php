@@ -17,7 +17,8 @@ class CronCommand extends ContainerAwareCommand
     const OPTION_MODULE = 'module';
     const OPTION_LIST = 'list';
 
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:cron')
             ->setDescription('Runs background jobs. Should be executed periodically by system CRON every 5 minutes.')
@@ -29,7 +30,8 @@ class CronCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $cronFacade = $this->getContainer()->get(CronFacade::class);
         /* @var $cronFacade \Shopsys\ShopBundle\Component\Cron\CronFacade */
         $mutexFactory = $this->getContainer()->get(MutexFactory::class);
@@ -47,7 +49,8 @@ class CronCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
      */
-    private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade) {
+    private function listAllCronModulesSortedByModuleId(OutputInterface $output, CronFacade $cronFacade)
+    {
         $cronModuleConfigs = $cronFacade->getAll();
 
         uasort($cronModuleConfigs, function (CronModuleConfig $cronModuleConfigA, CronModuleConfig $cronModuleConfigB) {
@@ -64,7 +67,8 @@ class CronCommand extends ContainerAwareCommand
      * @param \Shopsys\ShopBundle\Component\Cron\CronFacade $cronFacade
      * @param \Shopsys\ShopBundle\Component\Mutex\MutexFactory $mutexFactory
      */
-    private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory) {
+    private function runCron(InputInterface $input, CronFacade $cronFacade, MutexFactory $mutexFactory)
+    {
         $moduleArgument = $input->getOption(self::OPTION_MODULE);
         if ($moduleArgument === null) {
             $cronFacade->scheduleModulesByTime($this->getCurrentRoundedTime());
@@ -88,7 +92,8 @@ class CronCommand extends ContainerAwareCommand
     /**
      * @return \DateTimeImmutable
      */
-    private function getCurrentRoundedTime() {
+    private function getCurrentRoundedTime()
+    {
         $time = new DateTime(null);
         $time->modify('-' . $time->format('s') . ' sec');
         $time->modify('-' . ($time->format('i') % 5) . ' min');

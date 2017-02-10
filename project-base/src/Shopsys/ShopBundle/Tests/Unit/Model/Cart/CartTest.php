@@ -13,13 +13,15 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class CartTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetItemsCountZero() {
+    public function testGetItemsCountZero()
+    {
         $cartItems = [];
         $cart = new Cart($cartItems);
         $this->assertSame(0, $cart->getItemsCount());
     }
 
-    public function testGetItemsCount() {
+    public function testGetItemsCount()
+    {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $vat = new Vat(new VatData('vat', 21));
@@ -43,7 +45,8 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertSame(2, $cart->getItemsCount());
     }
 
-    public function testIsEmpty() {
+    public function testIsEmpty()
+    {
         $cartItems = [];
 
         $cart = new Cart($cartItems);
@@ -51,7 +54,8 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($cart->isEmpty());
     }
 
-    public function testIsNotEmpty() {
+    public function testIsNotEmpty()
+    {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $price = 100;
@@ -69,7 +73,8 @@ class CartTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($cart->IsEmpty());
     }
 
-    public function testClean() {
+    public function testClean()
+    {
         $customerIdentifier = new CustomerIdentifier('randomString');
 
         $vat = new Vat(new VatData('vat', 21));

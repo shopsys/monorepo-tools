@@ -13,7 +13,8 @@ class RegistrationPage extends AbstractPage
      * @param string $firstPassword
      * @param string $secondPassword
      */
-    public function register($firstName, $lastName, $email, $firstPassword, $secondPassword) {
+    public function register($firstName, $lastName, $email, $firstPassword, $secondPassword)
+    {
         $this->tester->fillFieldByName('registration_form[firstName]', $firstName);
         $this->tester->fillFieldByName('registration_form[lastName]', $lastName);
         $this->tester->fillFieldByName('registration_form[email]', $email);
@@ -26,7 +27,8 @@ class RegistrationPage extends AbstractPage
     /**
      * @param string $text
      */
-    public function seeEmailError($text) {
+    public function seeEmailError($text)
+    {
         $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_email');
         $this->tester->see($text);
     }
@@ -34,7 +36,8 @@ class RegistrationPage extends AbstractPage
     /**
      * @param string $text
      */
-    public function seePasswordError($text) {
+    public function seePasswordError($text)
+    {
         $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_password_first');
         $this->tester->see($text);
     }

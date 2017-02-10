@@ -57,7 +57,8 @@ class CategoryDataFixture
         $this->persistentReferenceFacade = $persistentReferenceFacade;
     }
 
-    public function load() {
+    public function load()
+    {
         $rootCategory = $this->categoryFacade->getRootCategory();
         $this->sqlLoggerFacade->temporarilyDisableLogging();
         $this->recursivelyCreateCategoryTree($rootCategory);
@@ -68,7 +69,8 @@ class CategoryDataFixture
      * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
      * @param int $categoryLevel
      */
-    private function recursivelyCreateCategoryTree($parentCategory, $categoryLevel = 0) {
+    private function recursivelyCreateCategoryTree($parentCategory, $categoryLevel = 0)
+    {
         for ($i = 0; $i < $this->categoriesCountsByLevel[$categoryLevel]; $i++) {
             $categoryData = $this->getRandomCategoryDataByParentCategory($parentCategory);
             $newCategory = $this->categoryFacade->create($categoryData);
@@ -86,7 +88,8 @@ class CategoryDataFixture
      * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
      * @return \Shopsys\ShopBundle\Model\Category\CategoryData
      */
-    private function getRandomCategoryDataByParentCategory(Category $parentCategory) {
+    private function getRandomCategoryDataByParentCategory(Category $parentCategory)
+    {
         $categoryData = new CategoryData();
         $categoryName = $this->faker->word . ' #' . $this->categoriesCreated;
         $categoryData->name = ['cs' => $categoryName, 'en' => $categoryName];

@@ -12,7 +12,8 @@ class CustomDateTimeFormatterFactory
     /**
      * @return \Shopsys\ShopBundle\Component\Localization\DateTimeFormatter
      */
-    public function create() {
+    public function create()
+    {
         $customDateTimeFormatPatternRepository = new DateTimeFormatPatternRepository();
         $customDateTimeFormatPatternRepository->add(
             new DateTimeFormatPattern('y-MM-dd', 'en', IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE)

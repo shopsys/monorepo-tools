@@ -46,7 +46,8 @@ class InlineEditService
      * @param mixed $rowId
      * @return string
      */
-    public function getRenderedFormRow($serviceName, $rowId) {
+    public function getRenderedFormRow($serviceName, $rowId)
+    {
         $gridInlineEdit = $this->getInlineEditService($serviceName);
         $form = $gridInlineEdit->getForm($rowId);
 
@@ -59,7 +60,8 @@ class InlineEditService
      * @param mixed $rowId
      * @return mixed
      */
-    public function saveFormData($serviceName, Request $request, $rowId) {
+    public function saveFormData($serviceName, Request $request, $rowId)
+    {
         $gridInlineEdit = $this->getInlineEditService($serviceName);
         return $gridInlineEdit->saveForm($request, $rowId);
     }
@@ -68,7 +70,8 @@ class InlineEditService
      * @param string $serviceName
      * @param mixed $rowId
      */
-    public function getRenderedRowHtml($serviceName, $rowId) {
+    public function getRenderedRowHtml($serviceName, $rowId)
+    {
         $gridInlineEdit = $this->getInlineEditService($serviceName);
         $grid = $gridInlineEdit->getGrid();
         /* @var $grid \Shopsys\ShopBundle\Component\Grid\Grid */
@@ -87,7 +90,8 @@ class InlineEditService
      * @param string $serviceName
      * @return \Shopsys\ShopBundle\Component\Grid\InlineEdit\GridInlineEditInterface
      */
-    private function getInlineEditService($serviceName) {
+    private function getInlineEditService($serviceName)
+    {
         $gridInlineEdit = $this->container->get($serviceName, ContainerInterface::NULL_ON_INVALID_REFERENCE);
 
         if ($gridInlineEdit instanceof GridInlineEditInterface) {
@@ -103,7 +107,8 @@ class InlineEditService
      * @param \Symfony\Component\Form\Form $form
      * @return string
      */
-    private function renderFormAsRow(GridInlineEditInterface $gridInlineEditService, $rowId, Form $form) {
+    private function renderFormAsRow(GridInlineEditInterface $gridInlineEditService, $rowId, Form $form)
+    {
         $grid = $gridInlineEditService->getGrid();
         if ($rowId === null) {
             $gridView = $grid->createViewWithoutRows();
@@ -119,7 +124,8 @@ class InlineEditService
      * @param \Symfony\Component\Form\Form $form
      * @return array
      */
-    private function getFormRowTemplateParameters(Grid $grid, Form $form) {
+    private function getFormRowTemplateParameters(Grid $grid, Form $form)
+    {
         $formView = $form->createView();
         $rows = $grid->getRows();
 

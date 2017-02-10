@@ -12,14 +12,16 @@ class UploadedFileRepository
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getUploadedFileRepository() {
+    private function getUploadedFileRepository()
+    {
         return $this->em->getRepository(UploadedFile::class);
     }
 
@@ -28,7 +30,8 @@ class UploadedFileRepository
      * @param int $entityId
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile|null
      */
-    public function findUploadedFileByEntity($entityName, $entityId) {
+    public function findUploadedFileByEntity($entityName, $entityId)
+    {
         return $this->getUploadedFileRepository()->findOneBy([
             'entityName' => $entityName,
             'entityId' => $entityId,
@@ -40,7 +43,8 @@ class UploadedFileRepository
      * @param int $entityId
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
      */
-    public function getUploadedFileByEntity($entityName, $entityId) {
+    public function getUploadedFileByEntity($entityName, $entityId)
+    {
         $uploadedFile = $this->findUploadedFileByEntity($entityName, $entityId);
         if ($uploadedFile === null) {
             $message = 'UploadedFile not found for entity "' . $entityName . '" with ID ' . $entityId;
@@ -54,7 +58,8 @@ class UploadedFileRepository
      * @param int $uploadedFileId
      * @return \Shopsys\ShopBundle\Component\UploadedFile\UploadedFile
      */
-    public function getById($uploadedFileId) {
+    public function getById($uploadedFileId)
+    {
         $uploadedFile = $this->getUploadedFileRepository()->find($uploadedFileId);
 
         if ($uploadedFile === null) {

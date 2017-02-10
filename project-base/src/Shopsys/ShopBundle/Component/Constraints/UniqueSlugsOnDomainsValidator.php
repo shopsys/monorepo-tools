@@ -22,7 +22,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      */
     private $domainRouterFactory;
 
-    public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory) {
+    public function __construct(Domain $domain, DomainRouterFactory $domainRouterFactory)
+    {
         $this->domain = $domain;
         $this->domainRouterFactory = $domainRouterFactory;
     }
@@ -31,7 +32,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($values, Constraint $constraint) {
+    public function validate($values, Constraint $constraint)
+    {
         if (!$constraint instanceof UniqueSlugsOnDomains) {
             throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, UniqueSlugsOnDomains::class);
         }
@@ -44,7 +46,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      * @param array $values
      * @param \Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
      */
-    private function validateDuplication(array $values, UniqueSlugsOnDomains $constraint) {
+    private function validateDuplication(array $values, UniqueSlugsOnDomains $constraint)
+    {
         $slugCountsOnDomain = $this->getSlugCountsOnDomain($values);
         foreach ($slugCountsOnDomain as $domainId => $countBySlug) {
             $domainConfig = $this->domain->getDomainConfigById($domainId);
@@ -65,7 +68,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      * @param array $values
      * @param \Shopsys\ShopBundle\Component\Constraints\UniqueSlugsOnDomains $constraint
      */
-    private function validateExists($values, UniqueSlugsOnDomains $constraint) {
+    private function validateExists($values, UniqueSlugsOnDomains $constraint)
+    {
         foreach ($values as $urlData) {
             $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];
             $domainConfig = $this->domain->getDomainConfigById($domainId);
@@ -91,7 +95,8 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
      * @param array $values
      * @return int[domainId][slug]
      */
-    private function getSlugCountsOnDomain(array $values) {
+    private function getSlugCountsOnDomain(array $values)
+    {
         $slugCountsOnDomain = [];
         foreach ($values as $urlData) {
             $domainId = $urlData[FriendlyUrlType::FIELD_DOMAIN];

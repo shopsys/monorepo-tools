@@ -12,7 +12,8 @@ class PerformanceTestSummaryPrinter
      */
     private $performanceTestSampleQualifier;
 
-    public function __construct(PerformanceTestSampleQualifier $performanceTestSampleQualifier) {
+    public function __construct(PerformanceTestSampleQualifier $performanceTestSampleQualifier)
+    {
         $this->performanceTestSampleQualifier = $performanceTestSampleQualifier;
     }
 
@@ -83,7 +84,8 @@ class PerformanceTestSummaryPrinter
      * @param float $duration
      * @return string
      */
-    private function getFormatterTagForDuration($duration) {
+    private function getFormatterTagForDuration($duration)
+    {
         $status = $this->performanceTestSampleQualifier->getStatusForDuration($duration);
         return 'fg=' . $this->getStatusConsoleTextColor($status);
     }
@@ -92,7 +94,8 @@ class PerformanceTestSummaryPrinter
      * @param int $queryCount
      * @return string
      */
-    private function getFormatterTagForQueryCount($queryCount) {
+    private function getFormatterTagForQueryCount($queryCount)
+    {
         $status = $this->performanceTestSampleQualifier->getStatusForQueryCount($queryCount);
         return 'fg=' . $this->getStatusConsoleTextColor($status);
     }
@@ -100,7 +103,8 @@ class PerformanceTestSummaryPrinter
     /**
      * @return string
      */
-    private function getFormatterTagForError() {
+    private function getFormatterTagForError()
+    {
         return 'fg=' . $this->getStatusConsoleTextColor(PerformanceTestSampleQualifier::STATUS_CRITICAL);
     }
 
@@ -108,7 +112,8 @@ class PerformanceTestSummaryPrinter
      * @param int $status
      * @return string
      */
-    private function getStatusConsoleTextColor($status) {
+    private function getStatusConsoleTextColor($status)
+    {
         switch ($status) {
             case PerformanceTestSampleQualifier::STATUS_OK:
                 return 'green';

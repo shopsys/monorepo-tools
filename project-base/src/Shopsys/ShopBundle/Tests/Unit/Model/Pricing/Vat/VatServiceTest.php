@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatService;
 
 class VatServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreate() {
+    public function testCreate()
+    {
         $vatService = new VatService();
 
         $vatDataOriginal = new VatData('vatName', '21.00');
@@ -21,7 +22,8 @@ class VatServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($vatDataOriginal, $vatDataNew);
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $vatService = new VatService();
 
         $vatDataOld = new VatData('oldVatName', '21.00');

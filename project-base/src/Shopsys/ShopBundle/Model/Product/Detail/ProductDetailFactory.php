@@ -70,7 +70,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail
      */
-    public function getDetailForProduct(Product $product) {
+    public function getDetailForProduct(Product $product)
+    {
         return new ProductDetail($product, $this);
     }
 
@@ -78,7 +79,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $products
      * @return \Shopsys\ShopBundle\Model\Product\Detail\ProductDetail[]
      */
-    public function getDetailsForProducts(array $products) {
+    public function getDetailsForProducts(array $products)
+    {
         $details = [];
 
         foreach ($products as $product) {
@@ -92,7 +94,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getBasePriceForAutoPriceCalculationType(Product $product) {
+    public function getBasePriceForAutoPriceCalculationType(Product $product)
+    {
         return $this->basePriceCalculation->calculateBasePrice(
             $product->getPrice(),
             $this->pricingSetting->getInputPriceType(),
@@ -104,7 +107,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductPrice|null
      */
-    public function getSellingPrice(Product $product) {
+    public function getSellingPrice(Product $product)
+    {
         try {
             $productPrice = $this->productPriceCalculationForUser->calculatePriceForCurrentUser($product);
         } catch (\Shopsys\ShopBundle\Model\Product\Pricing\Exception\MainVariantPriceCalculationException $ex) {
@@ -117,7 +121,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getParameters(Product $product) {
+    public function getParameters(Product $product)
+    {
         $locale = $this->localization->getLocale();
 
         $productParameterValues = $this->parameterRepository->getProductParameterValuesByProductSortedByName($product, $locale);
@@ -137,7 +142,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Component\Image\Image[imageId]
      */
-    public function getImagesIndexedById(Product $product) {
+    public function getImagesIndexedById(Product $product)
+    {
         return $this->imageFacade->getImagesByEntityIndexedById($product, null);
     }
 
@@ -145,7 +151,8 @@ class ProductDetailFactory
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\ProductDomain[]
      */
-    public function getProductDomainsIndexedByDomainId(Product $product) {
+    public function getProductDomainsIndexedByDomainId(Product $product)
+    {
         return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
     }
 }

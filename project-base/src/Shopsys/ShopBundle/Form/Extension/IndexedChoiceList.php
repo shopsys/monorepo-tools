@@ -45,7 +45,8 @@ class IndexedChoiceList extends ChoiceList
     /**
      * {@inheritdoc}
      */
-    protected function createIndex($choice) {
+    protected function createIndex($choice)
+    {
         $key = array_search($choice, $this->originalChoices, true);
 
         return $this->customIndices[$key];
@@ -54,7 +55,8 @@ class IndexedChoiceList extends ChoiceList
     /**
      * {@inheritdoc}
      */
-    protected function createValue($choice) {
+    protected function createValue($choice)
+    {
         $key = array_search($choice, $this->originalChoices, true);
 
         return $this->customValues[$key];

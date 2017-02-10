@@ -39,7 +39,8 @@ class Setting
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Component\Setting\SettingValueRepository $settingValueRepository
      */
-    public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository) {
+    public function __construct(EntityManager $em, SettingValueRepository $settingValueRepository)
+    {
         $this->em = $em;
         $this->settingValueRepository = $settingValueRepository;
         $this->clearCache();
@@ -49,7 +50,8 @@ class Setting
      * @param string $key
      * @return \DateTime|string|int|float|bool|null
      */
-    public function get($key) {
+    public function get($key)
+    {
         $this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
 
         if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
@@ -67,7 +69,8 @@ class Setting
      * @param int $domainId
      * @return \DateTime|string|int|float|bool|null
      */
-    public function getForDomain($key, $domainId) {
+    public function getForDomain($key, $domainId)
+    {
         $this->loadDomainValues($domainId);
 
         if (array_key_exists($key, $this->values[$domainId])) {
@@ -84,7 +87,8 @@ class Setting
      * @param string $key
      * @param \DateTime|string|int|float|bool|null $value
      */
-    public function set($key, $value) {
+    public function set($key, $value)
+    {
         $this->loadDomainValues(SettingValue::DOMAIN_ID_COMMON);
 
         if (array_key_exists($key, $this->values[SettingValue::DOMAIN_ID_COMMON])) {
@@ -103,7 +107,8 @@ class Setting
      * @param \DateTime|string|int|float|bool|null $value
      * @param int $domainId
      */
-    public function setForDomain($key, $value, $domainId) {
+    public function setForDomain($key, $value, $domainId)
+    {
         $this->loadDomainValues($domainId);
 
         if (array_key_exists($key, $this->values[$domainId])) {
@@ -120,7 +125,8 @@ class Setting
     /**
      * @param int $domainId
      */
-    private function loadDomainValues($domainId) {
+    private function loadDomainValues($domainId)
+    {
         if ($domainId === null) {
             $message = 'Cannot load setting value for null domain ID';
             throw new \Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
@@ -135,7 +141,8 @@ class Setting
         }
     }
 
-    public function clearCache() {
+    public function clearCache()
+    {
         $this->values = [];
     }
 }

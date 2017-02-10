@@ -11,11 +11,13 @@ class CookiesSettingFormTypeFactory
      */
     private $articleFacade;
 
-    public function __construct(ArticleFacade $articleFacade) {
+    public function __construct(ArticleFacade $articleFacade)
+    {
         $this->articleFacade = $articleFacade;
     }
 
-    public function createForDomain($domainId) {
+    public function createForDomain($domainId)
+    {
         $articles = $this->articleFacade->getAllByDomainId($domainId);
 
         return new CookiesSettingFormType($articles);

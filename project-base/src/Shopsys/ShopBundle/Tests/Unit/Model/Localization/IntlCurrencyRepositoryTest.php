@@ -10,7 +10,8 @@ class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getSupportedCurrencyCodes
      */
-    public function testGetSupportedCurrencies($currencyCode) {
+    public function testGetSupportedCurrencies($currencyCode)
+    {
         $intlCurrencyRepository = new IntlCurrencyRepository();
         $intlCurrencyRepository->get($currencyCode);
     }
@@ -18,7 +19,8 @@ class IntlCurrencyRepositoryTest extends PHPUnit_Framework_TestCase
     /**
      * @return string[][]
      */
-    public function getSupportedCurrencyCodes() {
+    public function getSupportedCurrencyCodes()
+    {
         $data = [];
         foreach (IntlCurrencyRepository::SUPPORTED_CURRENCY_CODES as $currencyCode) {
             $data[] = ['currencyCode' => $currencyCode];

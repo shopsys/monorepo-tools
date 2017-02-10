@@ -35,7 +35,8 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      * @return int
      */
-    protected function createEntityAndGetId($unitData) {
+    protected function createEntityAndGetId($unitData)
+    {
         $unit = $this->unitFacade->create($unitData);
 
         return $unit->getId();
@@ -45,7 +46,8 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      * @param int $unitId
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      */
-    protected function editEntity($unitId, $unitData) {
+    protected function editEntity($unitId, $unitData)
+    {
         $this->unitFacade->edit($unitId, $unitData);
     }
 
@@ -53,7 +55,8 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      * @param int|null $unitId
      * @return \Shopsys\ShopBundle\Model\Product\Unit\UnitData
      */
-    protected function getFormDataObject($unitId = null) {
+    protected function getFormDataObject($unitId = null)
+    {
         $unitData = new UnitData();
 
         if ($unitId !== null) {
@@ -69,7 +72,8 @@ class UnitInlineEdit extends AbstractGridInlineEdit
      * @param int $rowId
      * @return \Shopsys\ShopBundle\Form\Admin\Product\Unit\UnitFormType
      */
-    protected function getFormType($rowId) {
+    protected function getFormType($rowId)
+    {
         return new UnitFormType();
     }
 }

@@ -27,7 +27,8 @@ class AllMailTemplatesData
     /**
      * @return \Shopsys\ShopBundle\Model\Mail\MailTemplateData[]
      */
-    public function getAllTemplates() {
+    public function getAllTemplates()
+    {
         $allTemplates = $this->orderStatusTemplates;
         $allTemplates[] = $this->registrationTemplate;
         $allTemplates[] = $this->resetPasswordTemplate;

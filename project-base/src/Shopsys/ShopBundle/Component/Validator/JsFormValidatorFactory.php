@@ -11,7 +11,8 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
      * @param array $constraints
      * @return array
      */
-    protected function parseConstraints(array $constraints) {
+    protected function parseConstraints(array $constraints)
+    {
         $result = parent::parseConstraints($constraints);
 
         foreach ($result as $items) {

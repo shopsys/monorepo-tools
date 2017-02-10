@@ -52,7 +52,8 @@ class ContactFormFacade
     /**
      * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
      */
-    public function sendMail(ContactFormData $contactFormData) {
+    public function sendMail(ContactFormData $contactFormData)
+    {
         $messageData = new MessageData(
             $this->mailSettingFacade->getMainAdminMail($this->domain->getId()),
             null,
@@ -68,7 +69,8 @@ class ContactFormFacade
      * @param \Shopsys\ShopBundle\Model\ContactForm\ContactFormData $contactFormData
      * @return string
      */
-    private function getMailBody($contactFormData) {
+    private function getMailBody($contactFormData)
+    {
         return $this->twig->render('@ShopsysShop/Mail/ContactForm/mail.html.twig', [
             'contactFormData' => $contactFormData,
         ]);

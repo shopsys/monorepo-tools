@@ -19,14 +19,16 @@ class PricingGroupSettingsFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
      */
-    public function __construct(array $pricingGroups) {
+    public function __construct(array $pricingGroups)
+    {
         $this->pricingGroups = $pricingGroups;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'pricing_group_settings_form';
     }
 
@@ -34,7 +36,8 @@ class PricingGroupSettingsFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('defaultPricingGroup', FormType::CHOICE, [
                 'required' => true,
@@ -46,7 +49,8 @@ class PricingGroupSettingsFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

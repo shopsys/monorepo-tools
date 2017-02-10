@@ -17,7 +17,8 @@ class CountryDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $this->addCzechCountryReference($manager);
         $this->loadSlovakCountry();
     }
@@ -25,12 +26,14 @@ class CountryDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    private function addCzechCountryReference(ObjectManager $manager) {
+    private function addCzechCountryReference(ObjectManager $manager)
+    {
         $country = $manager->getRepository(Country::class)->findOneBy(['domainId' => Domain::FIRST_DOMAIN_ID]);
         $this->addReference(self::COUNTRY_CZECH_REPUBLIC_1, $country);
     }
 
-    private function loadSlovakCountry() {
+    private function loadSlovakCountry()
+    {
         $domainId = 1;
         $countryData = new CountryData();
         $countryData->name = 'Slovenská republika';
@@ -43,7 +46,8 @@ class CountryDataFixture extends AbstractReferenceFixture
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Country\Country
      */
-    private function createCountry(CountryData $countryData, $domainId) {
+    private function createCountry(CountryData $countryData, $domainId)
+    {
         $countryFacade = $this->get(CountryFacade::class);
         /* @var $countryFacade \Shopsys\ShopBundle\Model\Country\CountryFacade */
 

@@ -30,7 +30,8 @@ class CategoryDataFactory
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Category\CategoryData
      */
-    public function createFromCategory(Category $category) {
+    public function createFromCategory(Category $category)
+    {
         $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
 
         $categoryData = new CategoryData();
@@ -49,7 +50,8 @@ class CategoryDataFactory
     /**
      * @return \Shopsys\ShopBundle\Model\Category\CategoryData
      */
-    public function createDefault() {
+    public function createDefault()
+    {
         $categoryData = new CategoryData();
 
         return $categoryData;

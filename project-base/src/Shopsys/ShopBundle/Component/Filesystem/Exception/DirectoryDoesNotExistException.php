@@ -10,7 +10,8 @@ class DirectoryDoesNotExistException extends Exception implements FilesystemExce
      * @param string $path
      * @param \Exception|null $previous
      */
-    public function __construct($path, Exception $previous = null) {
+    public function __construct($path, Exception $previous = null)
+    {
         $message = sprintf('Path "%s" must exist.', $path);
 
         parent::__construct($message, 0, $previous);

@@ -24,7 +24,8 @@ class VatDeletionCronModule implements IteratedCronModuleInterface
      */
     private $productInputPriceFacade;
 
-    public function __construct(VatFacade $vatFacade, ProductInputPriceFacade $productInputPriceFacade) {
+    public function __construct(VatFacade $vatFacade, ProductInputPriceFacade $productInputPriceFacade)
+    {
         $this->vatFacade = $vatFacade;
         $this->productInputPriceFacade = $productInputPriceFacade;
     }
@@ -32,22 +33,26 @@ class VatDeletionCronModule implements IteratedCronModuleInterface
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
         $this->logger = $logger;
     }
 
-    public function sleep() {
+    public function sleep()
+    {
         $deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
         $this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
     }
 
-    public function wakeUp() {
+    public function wakeUp()
+    {
     }
 
     /**
      * @inheritdoc
      */
-    public function iterate() {
+    public function iterate()
+    {
         $batchResult = $this->productInputPriceFacade->replaceBatchVatAndRecalculateInputPrices();
 
         if ($batchResult) {

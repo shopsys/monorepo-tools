@@ -32,7 +32,8 @@ class TransportAndPaymentController extends AdminBaseController
     /**
      * @Route("/transport-and-payment/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         return $this->render('@ShopsysShop/Admin/Content/TransportAndPayment/list.html.twig');
     }
 
@@ -41,7 +42,8 @@ class TransportAndPaymentController extends AdminBaseController
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function freeTransportAndPaymentLimitAction(Request $request) {
+    public function freeTransportAndPaymentLimitAction(Request $request)
+    {
         $form = $this->createForm(new FreeTransportAndPaymentPriceLimitsFormType($this->domain->getAll()));
 
         $formData = [];

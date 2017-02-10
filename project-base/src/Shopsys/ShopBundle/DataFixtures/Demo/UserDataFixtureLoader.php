@@ -61,7 +61,8 @@ class UserDataFixtureLoader
      * @param \Shopsys\ShopBundle\Component\Csv\CsvReader $csvReader
      * @param \Shopsys\ShopBundle\Model\Customer\UserDataFactory $userDataFactory
      */
-    public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory) {
+    public function __construct($path, CsvReader $csvReader, UserDataFactory $userDataFactory)
+    {
         $this->path = $path;
         $this->csvReader = $csvReader;
         $this->userDataFactory = $userDataFactory;
@@ -70,7 +71,8 @@ class UserDataFixtureLoader
     /**
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function injectReferences(array $countries) {
+    public function injectReferences(array $countries)
+    {
         $this->countries = $countries;
     }
 
@@ -78,7 +80,8 @@ class UserDataFixtureLoader
      * @param int $domainId
      * @return  \Shopsys\ShopBundle\Model\Customer\CustomerData[]
      */
-    public function getCustomersDataByDomainId($domainId) {
+    public function getCustomersDataByDomainId($domainId)
+    {
         $rows = $this->csvReader->getRowsFromCsv($this->path);
         $filteredRows = $this->filterRowsByDomainId($rows, $domainId);
 
@@ -96,7 +99,8 @@ class UserDataFixtureLoader
      * @param int $domainId
      * @return array
      */
-    private function filterRowsByDomainId(array $rows, $domainId) {
+    private function filterRowsByDomainId(array $rows, $domainId)
+    {
         $filteredRows = [];
         $rowId = 0;
         foreach ($rows as $row) {
@@ -121,7 +125,8 @@ class UserDataFixtureLoader
      * @param array $row
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
      */
-    private function getCustomerDataFromCsvRow(array $row) {
+    private function getCustomerDataFromCsvRow(array $row)
+    {
         $customerData = new CustomerData();
         $domainId = (int)$row[self::COLUMN_DOMAIN_ID];
         $userData = $this->userDataFactory->createDefault($domainId);
@@ -168,7 +173,8 @@ class UserDataFixtureLoader
      * @param string $countryName
      * @return \Shopsys\ShopBundle\Model\Country\Country
      */
-    private function getCountryByName($countryName) {
+    private function getCountryByName($countryName)
+    {
         foreach ($this->countries as $country) {
             if ($country->getName() === $countryName) {
                 return $country;

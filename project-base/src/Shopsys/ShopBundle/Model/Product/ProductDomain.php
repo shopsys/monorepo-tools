@@ -102,7 +102,8 @@ class ProductDomain
      * @param int $domainId
      * @param bool $showInZboziFeed
      */
-    public function __construct(Product $product, $domainId, $showInZboziFeed = true) {
+    public function __construct(Product $product, $domainId, $showInZboziFeed = true)
+    {
         $this->product = $product;
         $this->domainId = $domainId;
         $this->showInZboziFeed = $showInZboziFeed;
@@ -111,35 +112,40 @@ class ProductDomain
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return string|null
      */
-    public function getSeoTitle() {
+    public function getSeoTitle()
+    {
         return $this->seoTitle;
     }
 
     /**
      * @return string|null
      */
-    public function getSeoMetaDescription() {
+    public function getSeoMetaDescription()
+    {
         return $this->seoMetaDescription;
     }
 
     /**
      * @param string|null $seoTitle
      */
-    public function setSeoTitle($seoTitle) {
+    public function setSeoTitle($seoTitle)
+    {
         $this->seoTitle = $seoTitle;
     }
 
     /**
      * @param string|null $seoMetaDescription
      */
-    public function setSeoMetaDescription($seoMetaDescription) {
+    public function setSeoMetaDescription($seoMetaDescription)
+    {
         $this->seoMetaDescription = $seoMetaDescription;
     }
 
@@ -147,7 +153,8 @@ class ProductDomain
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      * @return string
      */
-    public function getSeoTitleForHtml(Domain $domain) {
+    public function getSeoTitleForHtml(Domain $domain)
+    {
         $seoTitle = $this->getSeoTitle();
         if ($seoTitle === null) {
             return $this->product->getName($domain->getLocale());
@@ -159,91 +166,104 @@ class ProductDomain
     /**
      * @return string|null
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * @return string|null
      */
-    public function getShortDescription() {
+    public function getShortDescription()
+    {
         return $this->shortDescription;
     }
 
     /**
      * @param string|null $description
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
     /**
      * @param string|null $shortDescription
      */
-    public function setShortDescription($shortDescription) {
+    public function setShortDescription($shortDescription)
+    {
         $this->shortDescription = $shortDescription;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return string|null
      */
-    public function getHeurekaCpc() {
+    public function getHeurekaCpc()
+    {
         return $this->heurekaCpc;
     }
 
     /**
      * @param string|null $heurekaCpc
      */
-    public function setHeurekaCpc($heurekaCpc) {
+    public function setHeurekaCpc($heurekaCpc)
+    {
         $this->heurekaCpc = $heurekaCpc;
     }
 
     /**
      * @return bool
      */
-    public function getShowInZboziFeed() {
+    public function getShowInZboziFeed()
+    {
         return $this->showInZboziFeed;
     }
 
     /**
      * @param bool $showInZboziFeed
      */
-    public function setShowInZboziFeed($showInZboziFeed) {
+    public function setShowInZboziFeed($showInZboziFeed)
+    {
         $this->showInZboziFeed = $showInZboziFeed;
     }
 
     /**
      * @return string|null
      */
-    public function getZboziCpc() {
+    public function getZboziCpc()
+    {
         return $this->zboziCpc;
     }
 
     /**
      * @param string|null $zboziCpc
      */
-    public function setZboziCpc($zboziCpc) {
+    public function setZboziCpc($zboziCpc)
+    {
         $this->zboziCpc = $zboziCpc;
     }
 
     /**
      * @return string|null
      */
-    public function getZboziCpcSearch() {
+    public function getZboziCpcSearch()
+    {
         return $this->zboziCpcSearch;
     }
 
     /**
      * @param string|null $zboziCpcSearch
      */
-    public function setZboziCpcSearch($zboziCpcSearch) {
+    public function setZboziCpcSearch($zboziCpcSearch)
+    {
         $this->zboziCpcSearch = $zboziCpcSearch;
     }
 }

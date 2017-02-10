@@ -20,18 +20,21 @@ class ProductHiddenRecalculator
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    public function calculateHiddenForProduct(Product $product) {
+    public function calculateHiddenForProduct(Product $product)
+    {
         $this->executeQuery($product);
     }
 
-    public function calculateHiddenForAll() {
+    public function calculateHiddenForAll()
+    {
         $this->executeQuery();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product|null $product
      */
-    private function executeQuery(Product $product = null) {
+    private function executeQuery(Product $product = null)
+    {
         $qb = $this->em->createQueryBuilder()
             ->update(Product::class, 'p')
             ->set('p.calculatedHidden', '

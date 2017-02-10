@@ -12,7 +12,8 @@ use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 
 class FragmentHandlerTest extends PHPUnit_Framework_TestCase
 {
-    public function testRenderNotIgnoreErrorsWithoutDebug() {
+    public function testRenderNotIgnoreErrorsWithoutDebug()
+    {
         $rendererMock = $this->getMock(FragmentRendererInterface::class);
         $rendererMock->expects($this->once())->method('getName')->will($this->returnValue('rendererName'));
         $rendererMock->expects($this->atLeastOnce())
@@ -40,7 +41,8 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $fragmentHandler->render('uri', 'rendererName', []);
     }
 
-    public function testDeliveryRedirect() {
+    public function testDeliveryRedirect()
+    {
         $response = new Response('', 301);
 
         $rendererMock = $this->getMock(FragmentRendererInterface::class);
@@ -59,7 +61,8 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $this->assertSame('', $fragmentHandler->render('uri', 'rendererName', []));
     }
 
-    public function testNotDeliveryErrorResponse() {
+    public function testNotDeliveryErrorResponse()
+    {
         $response = new Response('', 500);
 
         $rendererMock = $this->getMock(FragmentRendererInterface::class);

@@ -23,19 +23,22 @@ class SelectedDomain
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      * @param \Symfony\Component\HttpFoundation\Session\Session $session
      */
-    public function __construct(Domain $domain, Session $session) {
+    public function __construct(Domain $domain, Session $session)
+    {
         $this->domain = $domain;
         $this->session = $session;
     }
 
-    public function getId() {
+    public function getId()
+    {
         return $this->getCurrentSelectedDomain()->getId();
     }
 
     /**
      * @param int $domainId
      */
-    public function setId($domainId) {
+    public function setId($domainId)
+    {
         $domainConfig = $this->domain->getDomainConfigById($domainId);
         $this->session->set(self::SESSION_SELECTED_DOMAIN, $domainConfig->getId());
     }
@@ -43,7 +46,8 @@ class SelectedDomain
     /**
      * @return Config\DomainConfig
      */
-    public function getCurrentSelectedDomain() {
+    public function getCurrentSelectedDomain()
+    {
         try {
             $domainId = $this->session->get(self::SESSION_SELECTED_DOMAIN);
             return $this->domain->getDomainConfigById($domainId);

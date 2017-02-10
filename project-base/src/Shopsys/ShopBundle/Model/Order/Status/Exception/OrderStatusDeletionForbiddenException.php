@@ -16,7 +16,8 @@ class OrderStatusDeletionForbiddenException extends Exception implements OrderSt
      * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $orderStatus
      * @param \Exception|null $previous
      */
-    public function __construct(OrderStatus $orderStatus, Exception $previous = null) {
+    public function __construct(OrderStatus $orderStatus, Exception $previous = null)
+    {
         $this->orderStatus = $orderStatus;
         parent::__construct('Deletion of order status ID = ' . $orderStatus->getId() . ' is forbidden', 0, $previous);
     }
@@ -24,7 +25,8 @@ class OrderStatusDeletionForbiddenException extends Exception implements OrderSt
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
      */
-    public function getOrderStatus() {
+    public function getOrderStatus()
+    {
         return $this->orderStatus;
     }
 }

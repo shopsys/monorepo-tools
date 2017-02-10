@@ -14,21 +14,24 @@ class Cart
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem[] $cartItems
      */
-    public function __construct(array $cartItems) {
+    public function __construct(array $cartItems)
+    {
         $this->cartItems = $cartItems;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Cart\Item\CartItem $item
      */
-    public function addItem(CartItem $item) {
+    public function addItem(CartItem $item)
+    {
         $this->cartItems[] = $item;
     }
 
     /**
      * @param int $cartItemId
      */
-    public function removeItemById($cartItemId) {
+    public function removeItemById($cartItemId)
+    {
         foreach ($this->cartItems as $key => $cartItem) {
             if ($cartItem->getId() === $cartItemId) {
                 unset($this->cartItems[$key]);
@@ -39,28 +42,32 @@ class Cart
         throw new \Shopsys\ShopBundle\Model\Cart\Exception\InvalidCartItemException($message);
     }
 
-    public function clean() {
+    public function clean()
+    {
         $this->cartItems = [];
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Cart\Item\CartItem[]
      */
-    public function getItems() {
+    public function getItems()
+    {
         return $this->cartItems;
     }
 
     /**
      * @return int
      */
-    public function getItemsCount() {
+    public function getItemsCount()
+    {
         return count($this->getItems());
     }
 
     /**
      * @return bool
      */
-    public function isEmpty() {
+    public function isEmpty()
+    {
         return $this->getItemsCount() === 0;
     }
 }

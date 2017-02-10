@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
 {
-    public function testCalculateSellingDeniedForProductSellableVariant() {
+    public function testCalculateSellingDeniedForProductSellableVariant()
+    {
         $em = $this->getEntityManager();
         $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
@@ -45,7 +46,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         $this->assertFalse($mainVariant->getCalculatedSellingDenied());
     }
 
-    public function testCalculateSellingDeniedForProductNotSellableVariants() {
+    public function testCalculateSellingDeniedForProductNotSellableVariants()
+    {
         $em = $this->getEntityManager();
         $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */
@@ -86,7 +88,8 @@ class ProductSellingDeniedRecalculatorTest extends DatabaseTestCase
         $this->assertTrue($mainVariant->getCalculatedSellingDenied());
     }
 
-    public function testCalculateSellingDeniedForProductNotSellableMainVariant() {
+    public function testCalculateSellingDeniedForProductNotSellableMainVariant()
+    {
         $em = $this->getEntityManager();
         $productSellingDeniedRecalculator = $this->getContainer()->get(ProductSellingDeniedRecalculator::class);
         /* @var $productSellingDeniedRecalculator \Shopsys\ShopBundle\Model\Product\ProductSellingDeniedRecalculator */

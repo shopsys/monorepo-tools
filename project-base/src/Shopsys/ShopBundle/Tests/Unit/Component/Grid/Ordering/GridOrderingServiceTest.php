@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Component\Grid\Ordering\OrderableEntityInterface;
 
 class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testSetPositionNull() {
+    public function testSetPositionNull()
+    {
         $gridOrderingService = new GridOrderingService();
         $entity = null;
 
@@ -16,7 +17,8 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
         $gridOrderingService->setPosition($entity, 0);
     }
 
-    public function testSetPositionWrongEntity() {
+    public function testSetPositionWrongEntity()
+    {
         $gridOrderingService = new GridOrderingService();
         $entity = new \StdClass();
 
@@ -24,7 +26,8 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
         $gridOrderingService->setPosition($entity, 0);
     }
 
-    public function testSetPosition() {
+    public function testSetPosition()
+    {
         $gridOrderingService = new GridOrderingService();
         $position = 1;
         $entityMock = $this->getMockBuilder(OrderableEntityInterface::class)

@@ -24,7 +24,8 @@ class ProductListOrderingConfig
      * @param string $defaultOrderingMode
      * @param string $cookieName
      */
-    public function __construct($supportedOrderingModesNames, $defaultOrderingMode, $cookieName) {
+    public function __construct($supportedOrderingModesNames, $defaultOrderingMode, $cookieName)
+    {
         $this->supportedOrderingModesNames = $supportedOrderingModesNames;
         $this->defaultOrderingMode = $defaultOrderingMode;
         $this->cookieName = $cookieName;
@@ -33,21 +34,24 @@ class ProductListOrderingConfig
     /**
      * @return string[orderingMode]
      */
-    public function getSupportedOrderingModesNames() {
+    public function getSupportedOrderingModesNames()
+    {
         return $this->supportedOrderingModesNames;
     }
 
     /**
      * @return string
      */
-    public function getCookieName() {
+    public function getCookieName()
+    {
         return $this->cookieName;
     }
 
     /**
      * @return string
      */
-    public function getDefaultOrderingMode() {
+    public function getDefaultOrderingMode()
+    {
         return $this->defaultOrderingMode;
     }
 }

@@ -13,7 +13,8 @@ class ArticlePlacementList extends AbstractTranslatedConstantList
     /**
      * @inheritdoc
      */
-    public function getTranslationsIndexedByValue() {
+    public function getTranslationsIndexedByValue()
+    {
         return [
             self::PLACEMENT_TOP_MENU => t('in upper menu'),
             self::PLACEMENT_FOOTER => t('in footer'),

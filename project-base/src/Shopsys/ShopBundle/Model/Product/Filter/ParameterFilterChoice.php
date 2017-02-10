@@ -31,14 +31,16 @@ class ParameterFilterChoice
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function getParameter() {
+    public function getParameter()
+    {
         return $this->parameter;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
      */
-    public function getValues() {
+    public function getValues()
+    {
         return $this->values;
     }
 }

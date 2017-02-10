@@ -67,14 +67,16 @@ class LoginAsUserFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    public function rememberLoginAsUser(User $user) {
+    public function rememberLoginAsUser(User $user)
+    {
         $this->session->set(self::SESSION_LOGIN_AS, serialize($user));
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function loginAsRememberedUser(Request $request) {
+    public function loginAsRememberedUser(Request $request)
+    {
         if (!$this->administratorFrontSecurityFacade->isAdministratorLogged()) {
             throw new \Shopsys\ShopBundle\Model\Security\Exception\LoginAsRememberedUserException('Access denied');
         }

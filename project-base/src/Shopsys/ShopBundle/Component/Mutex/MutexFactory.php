@@ -19,7 +19,8 @@ class MutexFactory
      */
     private $mutexesByName;
 
-    public function __construct(LockInterface $lock) {
+    public function __construct(LockInterface $lock)
+    {
         $this->lock = $lock;
         $this->mutexesByName = [];
     }
@@ -27,7 +28,8 @@ class MutexFactory
     /**
      * @return \NinjaMutex\Mutex
      */
-    public function getCronMutex() {
+    public function getCronMutex()
+    {
         if (!array_key_exists(self::MUTEX_CRON_NAME, $this->mutexesByName)) {
             $this->mutexesByName[self::MUTEX_CRON_NAME] = new Mutex(self::MUTEX_CRON_NAME, $this->lock);
         }

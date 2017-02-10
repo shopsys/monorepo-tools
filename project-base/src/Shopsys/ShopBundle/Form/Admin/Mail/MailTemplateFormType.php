@@ -27,7 +27,8 @@ class MailTemplateFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Mail\MailTypeInterface $mailType
      */
-    public function __construct(MailTypeInterface $mailType) {
+    public function __construct(MailTypeInterface $mailType)
+    {
         $this->mailType = $mailType;
     }
 
@@ -35,7 +36,8 @@ class MailTemplateFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('bccEmail', FormType::EMAIL, [
                 'required' => false,
@@ -75,7 +77,8 @@ class MailTemplateFormType extends AbstractType
     /**
      * @return \Symfony\Component\Validator\Constraint[]
      */
-    private function getSubjectConstraints() {
+    private function getSubjectConstraints()
+    {
         $subjectConstraints = [];
 
         $subjectConstraints[] = new Constraints\NotBlank([
@@ -101,7 +104,8 @@ class MailTemplateFormType extends AbstractType
     /**
      * @return \Symfony\Component\Validator\Constraint[]
      */
-    private function getBodyConstraints() {
+    private function getBodyConstraints()
+    {
         $bodyConstraints = [];
 
         $bodyConstraints[] = new Constraints\NotBlank([
@@ -123,7 +127,8 @@ class MailTemplateFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => MailTemplateData::class,
             'attr' => ['novalidate' => 'novalidate'],
@@ -145,7 +150,8 @@ class MailTemplateFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'mail_template_form';
     }
 }

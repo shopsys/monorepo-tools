@@ -22,7 +22,8 @@ class FriendlyUrlToGenerateRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
@@ -31,7 +32,8 @@ class FriendlyUrlToGenerateRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    public function getArticleData($routeName, DomainConfig $domainConfig) {
+    public function getArticleData($routeName, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('a.id, a.name')
             ->distinct()
@@ -49,7 +51,8 @@ class FriendlyUrlToGenerateRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    public function getProductDetailData($routeName, DomainConfig $domainConfig) {
+    public function getProductDetailData($routeName, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('p.id, pt.name')
             ->distinct()
@@ -69,7 +72,8 @@ class FriendlyUrlToGenerateRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    public function getProductListData($routeName, DomainConfig $domainConfig) {
+    public function getProductListData($routeName, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('c.id, ct.name')
             ->distinct()
@@ -89,7 +93,8 @@ class FriendlyUrlToGenerateRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return array
      */
-    public function getBrandDetailData($routeName, DomainConfig $domainConfig) {
+    public function getBrandDetailData($routeName, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('b.id, b.name')
             ->distinct()
@@ -106,7 +111,8 @@ class FriendlyUrlToGenerateRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    private function createFriendlyUrlsData(QueryBuilder $queryBuilder) {
+    private function createFriendlyUrlsData(QueryBuilder $queryBuilder)
+    {
         $scalarData = $queryBuilder->getQuery()->getScalarResult();
         $friendlyUrlsData = [];
 

@@ -39,7 +39,8 @@ class PricingGroupGridFactory implements GridFactoryInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function create() {
+    public function create()
+    {
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder
             ->select('pg')

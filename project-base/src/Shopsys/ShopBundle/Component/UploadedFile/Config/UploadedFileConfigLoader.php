@@ -28,7 +28,8 @@ class UploadedFileConfigLoader
     /**
      * @param \Symfony\Component\Filesystem\Filesystem $filesystem
      */
-    public function __construct(Filesystem $filesystem) {
+    public function __construct(Filesystem $filesystem)
+    {
         $this->filesystem = $filesystem;
     }
 
@@ -36,7 +37,8 @@ class UploadedFileConfigLoader
      * @param string $filename
      * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileConfig
      */
-    public function loadFromYaml($filename) {
+    public function loadFromYaml($filename)
+    {
         $yamlParser = new Parser();
 
         if (!$this->filesystem->exists($filename)) {
@@ -59,7 +61,8 @@ class UploadedFileConfigLoader
      * @param array $outputConfig
      * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig[]
      */
-    private function loadFileEntityConfigsFromArray($outputConfig) {
+    private function loadFileEntityConfigsFromArray($outputConfig)
+    {
         $this->uploadedFileEntityConfigsByClass = [];
         $this->entityNamesByEntityNames = [];
 
@@ -81,7 +84,8 @@ class UploadedFileConfigLoader
      * @param array $entityConfig
      * @return \Shopsys\ShopBundle\Component\UploadedFile\Config\UploadedFileEntityConfig
      */
-    private function processEntityConfig($entityConfig) {
+    private function processEntityConfig($entityConfig)
+    {
         $entityClass = $entityConfig[UploadedFileConfigDefinition::CONFIG_CLASS];
         $entityName = $entityConfig[UploadedFileConfigDefinition::CONFIG_ENTITY_NAME];
 

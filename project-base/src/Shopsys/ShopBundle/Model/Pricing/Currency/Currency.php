@@ -48,7 +48,8 @@ class Currency
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      */
-    public function __construct(CurrencyData $currencyData) {
+    public function __construct(CurrencyData $currencyData)
+    {
         $this->name = $currencyData->name;
         $this->code = $currencyData->code;
         $this->exchangeRate = $currencyData->exchangeRate;
@@ -57,49 +58,56 @@ class Currency
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return string
      */
-    public function getExchangeRate() {
+    public function getExchangeRate()
+    {
         return $this->exchangeRate;
     }
 
     /**
      * @return string
      */
-    public function getReversedExchangeRate() {
+    public function getReversedExchangeRate()
+    {
         return 1 / $this->exchangeRate;
     }
 
     /**
      * @param string $exchangeRate
      */
-    public function setExchangeRate($exchangeRate) {
+    public function setExchangeRate($exchangeRate)
+    {
         $this->exchangeRate = $exchangeRate;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      */
-    public function edit(CurrencyData $currencyData) {
+    public function edit(CurrencyData $currencyData)
+    {
         $this->name = $currencyData->name;
         $this->code = $currencyData->code;
     }

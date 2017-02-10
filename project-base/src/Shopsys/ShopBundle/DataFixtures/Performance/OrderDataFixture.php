@@ -114,7 +114,8 @@ class OrderDataFixture
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function load(OutputInterface $output) {
+    public function load(OutputInterface $output)
+    {
         // Sql logging during mass data import makes memory leak
         $this->sqlLoggerFacade->temporarilyDisableLogging();
 
@@ -144,7 +145,8 @@ class OrderDataFixture
         $this->sqlLoggerFacade->reenableLogging();
     }
 
-    private function createOrder() {
+    private function createOrder()
+    {
         $user = $this->getRandomUserOrNull();
         $orderData = $this->createOrderData($user);
         $quantifiedProducts = $this->createQuantifiedProducts();
@@ -166,7 +168,8 @@ class OrderDataFixture
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Model\Order\OrderData
      */
-    private function createOrderData(User $user = null) {
+    private function createOrderData(User $user = null)
+    {
         $orderData = new OrderData();
 
         if ($user !== null) {
@@ -220,7 +223,8 @@ class OrderDataFixture
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[]
      */
-    private function createQuantifiedProducts() {
+    private function createQuantifiedProducts()
+    {
         $quantifiedProducts = [];
 
         $randomProductIds = $this->getRandomPerformanceProductIds(self::PRODUCTS_PER_ORDER_COUNT);
@@ -234,7 +238,8 @@ class OrderDataFixture
         return $quantifiedProducts;
     }
 
-    private function loadPerformanceProductIds() {
+    private function loadPerformanceProductIds()
+    {
         $firstPerformaceProduct = $this->persistentReferenceFacade->getReference(
             PerformanceProductDataFixture::FIRST_PERFORMANCE_PRODUCT
         );
@@ -255,11 +260,13 @@ class OrderDataFixture
      * @param int $count
      * @return int[]
      */
-    private function getRandomPerformanceProductIds($count) {
+    private function getRandomPerformanceProductIds($count)
+    {
         return $this->faker->randomElements($this->performanceProductIds, $count);
     }
 
-    private function loadPerformanceUserIdsOnFirstDomain() {
+    private function loadPerformanceUserIdsOnFirstDomain()
+    {
         $firstPerformaceUser = $this->persistentReferenceFacade->getReference(
             PerformanceUserDataFixture::FIRST_PERFORMANCE_USER
         );
@@ -279,7 +286,8 @@ class OrderDataFixture
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\User|null
      */
-    private function getRandomUserOrNull() {
+    private function getRandomUserOrNull()
+    {
         $shouldBeRegisteredUser = $this->faker->boolean(self::PERCENTAGE_OF_ORDERS_BY_REGISTERED_USERS);
 
         if ($shouldBeRegisteredUser) {
@@ -293,7 +301,8 @@ class OrderDataFixture
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    private function getRandomTransport() {
+    private function getRandomTransport()
+    {
         $randomTransportReferenceName = $this->faker->randomElement([
             TransportDataFixture::TRANSPORT_CZECH_POST,
             TransportDataFixture::TRANSPORT_PPL,
@@ -306,7 +315,8 @@ class OrderDataFixture
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    private function getRandomPayment() {
+    private function getRandomPayment()
+    {
         $randomPaymentReferenceName = $this->faker->randomElement([
             PaymentDataFixture::PAYMENT_CARD,
             PaymentDataFixture::PAYMENT_CASH_ON_DELIVERY,
@@ -319,7 +329,8 @@ class OrderDataFixture
     /**
      * @return \Shopsys\ShopBundle\Model\Country\Country
      */
-    private function getRandomCountryFromFirstDomain() {
+    private function getRandomCountryFromFirstDomain()
+    {
         $randomPaymentReferenceName = $this->faker->randomElement([
             CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1,
             CountryDataFixture::COUNTRY_SLOVAKIA_1,

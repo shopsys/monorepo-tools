@@ -12,7 +12,8 @@ class NotIdenticalToEmailLocalPartValidator extends ConstraintValidator
      * @param array $values
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($values, Constraint $constraint) {
+    public function validate($values, Constraint $constraint)
+    {
         if (!$constraint instanceof NotIdenticalToEmailLocalPart) {
             throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, NotIdenticalToEmailLocalPart::class);
         }

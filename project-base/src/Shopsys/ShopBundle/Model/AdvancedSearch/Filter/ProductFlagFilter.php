@@ -17,21 +17,24 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
      */
     private $flagFacade;
 
-    public function __construct(FlagFacade $flagFacade) {
+    public function __construct(FlagFacade $flagFacade)
+    {
         $this->flagFacade = $flagFacade;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'productFlag';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_IS,
             self::OPERATOR_IS_NOT,
@@ -41,14 +44,16 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return FormType::CHOICE;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         return [
             'expanded' => false,
             'multiple' => false,
@@ -59,7 +64,8 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         $isNotFlags = [];
 
         foreach ($rulesData as $index => $ruleData) {

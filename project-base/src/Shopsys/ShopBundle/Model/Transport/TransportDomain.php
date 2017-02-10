@@ -32,7 +32,8 @@ class TransportDomain
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @param int $domainId
      */
-    public function __construct(Transport $transport, $domainId) {
+    public function __construct(Transport $transport, $domainId)
+    {
         $this->transport = $transport;
         $this->domainId = $domainId;
     }
@@ -40,7 +41,8 @@ class TransportDomain
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 }

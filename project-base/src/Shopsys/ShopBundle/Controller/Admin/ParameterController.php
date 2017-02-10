@@ -31,7 +31,8 @@ class ParameterController extends AdminBaseController
     /**
      * @Route("/product/parameter/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->parameterInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Parameter/list.html.twig', [
@@ -44,7 +45,8 @@ class ParameterController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $fullName = $this->parameterFacade->getById($id)->getName();
 

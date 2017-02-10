@@ -32,7 +32,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
      *
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $userRepository = $this->get(UserRepository::class);
         /* @var $userRepository \Shopsys\ShopBundle\Model\Customer\UserRepository */
 
@@ -183,7 +184,8 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
     /**
      * @inheritDoc
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             CountryDataFixture::class,
             PaymentDataFixture::class,

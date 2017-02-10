@@ -13,7 +13,8 @@ class FragmentHandler extends LazyLoadingFragmentHandler
      *
      * {@inheritdoc}
      */
-    protected function deliver(Response $response) {
+    protected function deliver(Response $response)
+    {
         // Redirect response in fragment is OK, because SubRequestListener will do the redirection
         // when handling the master request.
         if (!$response->isSuccessful() && !$response->isRedirection()) {
@@ -34,7 +35,8 @@ class FragmentHandler extends LazyLoadingFragmentHandler
     /**
      * {@inheritdoc}
      */
-    public function render($uri, $renderer = 'inline', array $options = []) {
+    public function render($uri, $renderer = 'inline', array $options = [])
+    {
         if (!isset($options['ignore_errors'])) {
             $options['ignore_errors'] = false;
         }

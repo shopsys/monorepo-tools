@@ -102,7 +102,8 @@ class ProductController extends FrontBaseController
     /**
      * @param int $id
      */
-    public function detailAction($id) {
+    public function detailAction($id)
+    {
         $productDetail = $this->productOnCurrentDomainFacade->getVisibleProductDetailById($id);
         $product = $productDetail->getProduct();
 
@@ -126,7 +127,8 @@ class ProductController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function listByCategoryAction(Request $request, $id) {
+    public function listByCategoryAction(Request $request, $id)
+    {
         $category = $this->categoryFacade->getVisibleOnDomainById($this->domain->getId(), $id);
 
         $requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
@@ -187,7 +189,8 @@ class ProductController extends FrontBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function listByBrandAction(Request $request, $id) {
+    public function listByBrandAction(Request $request, $id)
+    {
         $requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
         if (!$this->isRequestPageValid($requestPage)) {
             return $this->redirectToRoute('front_brand_detail', $this->getRequestParametersWithoutPage());
@@ -220,7 +223,8 @@ class ProductController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function searchAction(Request $request) {
+    public function searchAction(Request $request)
+    {
         $searchText = $request->query->get(self::SEARCH_TEXT_PARAMETER);
 
         $requestPage = $request->get(self::PAGE_QUERY_PARAMETER);
@@ -279,7 +283,8 @@ class ProductController extends FrontBaseController
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
      */
-    private function createProductFilterFormTypeForCategory(Category $category) {
+    private function createProductFilterFormTypeForCategory(Category $category)
+    {
         return $this->productFilterFormTypeFactory->createForCategory(
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -291,7 +296,8 @@ class ProductController extends FrontBaseController
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
      */
-    private function createProductFilterFormTypeForSearch($searchText) {
+    private function createProductFilterFormTypeForSearch($searchText)
+    {
         return $this->productFilterFormTypeFactory->createForSearch(
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -303,7 +309,8 @@ class ProductController extends FrontBaseController
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    private function searchCategories($searchText) {
+    private function searchCategories($searchText)
+    {
         return $this->categoryFacade->getVisibleByDomainAndSearchText(
             $this->domain->getId(),
             $this->domain->getLocale(),
@@ -311,7 +318,8 @@ class ProductController extends FrontBaseController
         );
     }
 
-    public function selectOrderingModeForListAction(Request $request) {
+    public function selectOrderingModeForListAction(Request $request)
+    {
         $productListOrderingConfig = $this->productListOrderingModeForListFacade->getProductListOrderingConfig();
 
         $orderingMode = $this->productListOrderingModeForListFacade->getOrderingModeFromRequest(
@@ -325,7 +333,8 @@ class ProductController extends FrontBaseController
         ]);
     }
 
-    public function selectOrderingModeForListByBrandAction(Request $request) {
+    public function selectOrderingModeForListByBrandAction(Request $request)
+    {
         $productListOrderingConfig = $this->productListOrderingModeForBrandFacade->getProductListOrderingConfig();
 
         $orderingMode = $this->productListOrderingModeForBrandFacade->getOrderingModeFromRequest(
@@ -339,7 +348,8 @@ class ProductController extends FrontBaseController
         ]);
     }
 
-    public function selectOrderingModeForSearchAction(Request $request) {
+    public function selectOrderingModeForSearchAction(Request $request)
+    {
         $productListOrderingConfig = $this->productListOrderingModeForSearchFacade->getProductListOrderingConfig();
 
         $orderingMode = $this->productListOrderingModeForSearchFacade->getOrderingModeFromRequest(
@@ -357,14 +367,16 @@ class ProductController extends FrontBaseController
      * @param string|null $page
      * @return bool
      */
-    private function isRequestPageValid($page) {
+    private function isRequestPageValid($page)
+    {
         return $page === null || (preg_match('@^([2-9]|[1-9][0-9]+)$@', $page));
     }
 
     /**
      * @return array
      */
-    private function getRequestParametersWithoutPage() {
+    private function getRequestParametersWithoutPage()
+    {
         $parameters = $this->requestExtension->getAllRequestParams();
         unset($parameters[self::PAGE_QUERY_PARAMETER]);
         return $parameters;

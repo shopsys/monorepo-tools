@@ -18,7 +18,8 @@ class UploadedFileEntityConfig
      * @param string $entityName
      * @param string $entityClass
      */
-    public function __construct($entityName, $entityClass) {
+    public function __construct($entityName, $entityClass)
+    {
         $this->entityName = $entityName;
         $this->entityClass = $entityClass;
     }
@@ -26,14 +27,16 @@ class UploadedFileEntityConfig
     /**
      * @return string
      */
-    public function getEntityName() {
+    public function getEntityName()
+    {
         return $this->entityName;
     }
 
     /**
      * @return string
      */
-    public function getEntityClass() {
+    public function getEntityClass()
+    {
         return $this->entityClass;
     }
 }

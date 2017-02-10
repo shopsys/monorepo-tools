@@ -15,7 +15,8 @@ class Version20160512152113 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $this->sql(
             'CREATE TABLE countries (
                 id SERIAL NOT NULL,
@@ -72,7 +73,8 @@ class Version20160512152113 extends AbstractMigration
      * @param int $domainId
      * @return string
      */
-    private function getDefaultCountryNameByDomainId($domainId) {
+    private function getDefaultCountryNameByDomainId($domainId)
+    {
         $domainLocale = $this->getDomainLocale($domainId);
 
         return $domainLocale === 'en' ? 'Czech republic' : 'Česká republika';
@@ -81,6 +83,7 @@ class Version20160512152113 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

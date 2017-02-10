@@ -16,7 +16,8 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
      * @return \Shopsys\ShopBundle\Component\Image\Config\ImageConfig
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function getBaseImageConfig() {
+    private function getBaseImageConfig()
+    {
         $inputConfig = [
             [
                 ImageConfigDefinition::CONFIG_CLASS => stdClass::class,
@@ -71,7 +72,8 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
         return new ImageConfig($imageEntityConfigByClass);
     }
 
-    public function getRelativeImagePathProvider() {
+    public function getRelativeImagePathProvider()
+    {
         return [
             [
                 'Name_1',
@@ -103,13 +105,15 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getRelativeImagePathProvider
      */
-    public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath) {
+    public function testGetRelativeImagePath($entityName, $type, $sizeName, $expectedPath)
+    {
         $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
 
         $this->assertSame($expectedPath, $imageLocator->getRelativeImagePath($entityName, $type, $sizeName));
     }
 
-    public function getRelativeImagePathExceptionProvider() {
+    public function getRelativeImagePathExceptionProvider()
+    {
         return [
             [
                 'NonexistentName',
@@ -135,7 +139,8 @@ class ImageLocatorTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getRelativeImagePathExceptionProvider
      */
-    public function testGetRelativeImagePathException($entityName, $type, $sizeName, $exceptionClass) {
+    public function testGetRelativeImagePathException($entityName, $type, $sizeName, $exceptionClass)
+    {
         $imageLocator = new ImageLocator('imageDir', $this->getBaseImageConfig());
 
         $this->setExpectedException($exceptionClass);

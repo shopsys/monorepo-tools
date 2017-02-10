@@ -43,7 +43,8 @@ class AdministratorFacade
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function create(AdministratorData $administratorData) {
+    public function create(AdministratorData $administratorData)
+    {
         if (in_array($administratorData->username, $this->getSuperadminUsernames())) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException($administratorData->username);
         }
@@ -66,7 +67,8 @@ class AdministratorFacade
      * @param \Shopsys\ShopBundle\Model\Administrator\AdministratorData $administratorData
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function edit($administratorId, AdministratorData $administratorData) {
+    public function edit($administratorId, AdministratorData $administratorData)
+    {
         $administrator = $this->administratorRepository->getById($administratorId);
         $administratorByUserName = $this->administratorRepository->findByUserName($administratorData->username);
         $superadminUsernames = $this->getSuperadminUsernames();
@@ -85,7 +87,8 @@ class AdministratorFacade
     /**
      * @param int $administratorId
      */
-    public function delete($administratorId) {
+    public function delete($administratorId)
+    {
         $administrator = $this->administratorRepository->getById($administratorId);
         $adminCountExcludingSuperadmin = $this->administratorRepository->getCountExcludingSuperadmin();
         $this->administratorService->delete($administrator, $adminCountExcludingSuperadmin);
@@ -97,21 +100,24 @@ class AdministratorFacade
      * @param int $administratorId
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function getById($administratorId) {
+    public function getById($administratorId)
+    {
         return $this->administratorRepository->getById($administratorId);
     }
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getAllListableQueryBuilder() {
+    public function getAllListableQueryBuilder()
+    {
         return $this->administratorRepository->getAllListableQueryBuilder();
     }
 
     /**
      * @return string[]
      */
-    public function getSuperadminUsernames() {
+    public function getSuperadminUsernames()
+    {
         $superadmins = $this->administratorRepository->getAllSuperadmins();
         $superadminUsernames = [];
         foreach ($superadmins as $superadmin) {

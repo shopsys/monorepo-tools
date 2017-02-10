@@ -13,14 +13,16 @@ class ModuleExtension extends Twig_Extension
      */
     private $moduleFacade;
 
-    public function __construct(ModuleFacade $moduleFacade) {
+    public function __construct(ModuleFacade $moduleFacade)
+    {
         $this->moduleFacade = $moduleFacade;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('isModuleEnabled', [$this, 'isModuleEnabled']),
         ];
@@ -30,14 +32,16 @@ class ModuleExtension extends Twig_Extension
      * @param int $moduleName
      * @return string
      */
-    public function isModuleEnabled($moduleName) {
+    public function isModuleEnabled($moduleName)
+    {
         return $this->moduleFacade->isEnabled($moduleName);
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'module';
     }
 }

@@ -10,7 +10,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class GroupedScalarHydratorTest extends DatabaseTestCase
 {
-    public function testHydrateAllData() {
+    public function testHydrateAllData()
+    {
         $qb = $this->getEntityManager()->createQueryBuilder()
             ->select('o, oi')
             ->from(Order::class, 'o')

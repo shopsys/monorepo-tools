@@ -10,7 +10,8 @@ class CronModuleExecutorFactory
      * @param int $secondsTimeout
      * @return \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor
      */
-    public function create($secondsTimeout) {
+    public function create($secondsTimeout)
+    {
         return new CronModuleExecutor($secondsTimeout);
     }
 }

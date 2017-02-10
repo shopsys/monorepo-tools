@@ -25,7 +25,8 @@ class ProductParametersFixtureLoader
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterFacade $parameterFacade
      */
-    public function __construct(ParameterFacade $parameterFacade) {
+    public function __construct(ParameterFacade $parameterFacade)
+    {
         $this->parameterFacade = $parameterFacade;
         $this->parameters = [];
     }
@@ -35,7 +36,8 @@ class ProductParametersFixtureLoader
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[]
      */
-    public function getProductParameterValuesDataFromString($string, $domainId) {
+    public function getProductParameterValuesDataFromString($string, $domainId)
+    {
         $parameterRows = explode(';', $string);
         $productParameterValuesDataCollection = new ArrayCollection();
         foreach ($parameterRows as $parameterRow) {
@@ -57,7 +59,8 @@ class ProductParametersFixtureLoader
         return $productParameterValuesDataCollection->toArray();
     }
 
-    public function clearCache() {
+    public function clearCache()
+    {
         $this->parameters = [];
     }
 
@@ -100,7 +103,8 @@ class ProductParametersFixtureLoader
      * @param string $serializedString
      * @return string[locale]
      */
-    private function deserializeLocalizedValues($serializedString) {
+    private function deserializeLocalizedValues($serializedString)
+    {
         $array = [];
         $items = explode(',', $serializedString);
         foreach ($items as $item) {
@@ -117,7 +121,8 @@ class ProductParametersFixtureLoader
      * @param string[] $parameterNames
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    private function getParameter($domainId, $serializedParameterNames, array $parameterNames) {
+    private function getParameter($domainId, $serializedParameterNames, array $parameterNames)
+    {
         if (isset($this->parameters[$serializedParameterNames])) {
             return $this->parameters[$serializedParameterNames];
         }
@@ -134,7 +139,8 @@ class ProductParametersFixtureLoader
      * @param string[] $parameterNames
      * @return string[]
      */
-    private function getCzechParameterNamesFromCsvParameterNames($parameterNames) {
+    private function getCzechParameterNamesFromCsvParameterNames($parameterNames)
+    {
         return [
             'cs' => $parameterNames['cs'],
         ];
@@ -144,7 +150,8 @@ class ProductParametersFixtureLoader
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
      * @param array $parameterNames
      */
-    private function addEnglishTranslationToParameter(Parameter $parameter, array $parameterNames) {
+    private function addEnglishTranslationToParameter(Parameter $parameter, array $parameterNames)
+    {
         $parameterData = new ParameterData();
         $parameterData->setFromEntity($parameter);
         $parameterData->name['en'] = $parameterNames['en'];
@@ -157,7 +164,8 @@ class ProductParametersFixtureLoader
      * @param string[] $allParameterNames
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    private function findParameterByCzechNamesOrCreateNewByAllNames($czechParameterNames, $allParameterNames) {
+    private function findParameterByCzechNamesOrCreateNewByAllNames($czechParameterNames, $allParameterNames)
+    {
         $parameter = $this->parameterFacade->findParameterByNames($czechParameterNames);
 
         if ($parameter === null) {

@@ -12,14 +12,16 @@ class AdvertController extends FrontBaseController
      */
     private $advertFacade;
 
-    public function __construct(AdvertFacade $advertFacade) {
+    public function __construct(AdvertFacade $advertFacade)
+    {
         $this->advertFacade = $advertFacade;
     }
 
     /**
      * @param string $positionName
      */
-    public function boxAction($positionName) {
+    public function boxAction($positionName)
+    {
         $advert = $this->advertFacade->findRandomAdvertByPositionOnCurrentDomain($positionName);
 
         return $this->render('@ShopsysShop/Front/Content/Advert/box.html.twig', [

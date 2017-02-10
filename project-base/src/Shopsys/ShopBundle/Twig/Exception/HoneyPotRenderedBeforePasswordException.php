@@ -13,7 +13,8 @@ class HoneyPotRenderedBeforePasswordException extends Twig_Error implements Twig
     /**
      * @param \Exception|null $previous
      */
-    public function __construct(Exception $previous = null) {
+    public function __construct(Exception $previous = null)
+    {
         $message = sprintf(
             '%s was rendered before password field.'
             . ' Render honeypot after password field to overcome issues when Firefox prefills input'

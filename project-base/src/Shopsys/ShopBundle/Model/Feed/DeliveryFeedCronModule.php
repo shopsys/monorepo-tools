@@ -13,17 +13,20 @@ class DeliveryFeedCronModule implements CronModuleInterface
      */
     private $feedFacade;
 
-    public function __construct(FeedFacade $feedFacade) {
+    public function __construct(FeedFacade $feedFacade)
+    {
         $this->feedFacade = $feedFacade;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
     }
 
-    public function run() {
+    public function run()
+    {
         $this->feedFacade->generateDeliveryFeeds();
     }
 }

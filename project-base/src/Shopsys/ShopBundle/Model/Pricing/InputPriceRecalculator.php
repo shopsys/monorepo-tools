@@ -72,18 +72,21 @@ class InputPriceRecalculator
         $this->pricingSetting = $pricingSetting;
     }
 
-    public function recalculateToInputPricesWithoutVat() {
+    public function recalculateToInputPricesWithoutVat()
+    {
         $this->recalculateInputPriceForNewType(PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT);
     }
 
-    public function recalculateToInputPricesWithVat() {
+    public function recalculateToInputPricesWithVat()
+    {
         $this->recalculateInputPriceForNewType(PricingSetting::INPUT_PRICE_TYPE_WITH_VAT);
     }
 
     /**
      * @param string $newInputPriceType
      */
-    private function recalculateInputPriceForNewType($newInputPriceType) {
+    private function recalculateInputPriceForNewType($newInputPriceType)
+    {
         $this->recalculateProductsInputPriceForNewType($newInputPriceType);
         $this->recalculateTransportsInputPriceForNewType($newInputPriceType);
         $this->recalculatePaymentsInputPriceForNewType($newInputPriceType);
@@ -92,7 +95,8 @@ class InputPriceRecalculator
     /**
      * @param string $toInputPriceType
      */
-    private function recalculateProductsInputPriceForNewType($toInputPriceType) {
+    private function recalculateProductsInputPriceForNewType($toInputPriceType)
+    {
         $query = $this->em->createQueryBuilder()
             ->select('p')
             ->from(Product::class, 'p')
@@ -118,7 +122,8 @@ class InputPriceRecalculator
     /**
      * @param string $toInputPriceType
      */
-    private function recalculatePaymentsInputPriceForNewType($toInputPriceType) {
+    private function recalculatePaymentsInputPriceForNewType($toInputPriceType)
+    {
         $query = $this->em->createQueryBuilder()
             ->select('p')
             ->from(Payment::class, 'p')
@@ -145,7 +150,8 @@ class InputPriceRecalculator
     /**
      * @param string $toInputPriceType
      */
-    private function recalculateTransportsInputPriceForNewType($toInputPriceType) {
+    private function recalculateTransportsInputPriceForNewType($toInputPriceType)
+    {
         $query = $this->em->createQueryBuilder()
             ->select('t')
             ->from(Transport::class, 't')
@@ -173,7 +179,8 @@ class InputPriceRecalculator
      * @param \Doctrine\ORM\Query $query
      * @param \Closure $callback
      */
-    private function batchProcessQuery(Query $query, Closure $callback) {
+    private function batchProcessQuery(Query $query, Closure $callback)
+    {
         $iteration = 0;
 
         foreach ($query->iterate() as $row) {

@@ -121,7 +121,8 @@ class ProductDataFixtureLoader
      * @param array $row
      * @return \Shopsys\ShopBundle\Model\Product\ProductEditData
      */
-    public function createProductEditDataFromRowForFirstDomain($row) {
+    public function createProductEditDataFromRowForFirstDomain($row)
+    {
         $productEditData = $this->productEditDataFactory->createDefault();
         $this->updateProductEditDataFromCsvRowForFirstDomain($productEditData, $row);
 
@@ -132,7 +133,8 @@ class ProductDataFixtureLoader
      * @param array $rows
      * @return string[mainVariantRowId][]
      */
-    public function getVariantCatnumsIndexedByMainVariantCatnum($rows) {
+    public function getVariantCatnumsIndexedByMainVariantCatnum($rows)
+    {
         $variantCatnumsByMainVariantCatnum = [];
         foreach ($rows as $row) {
             if ($row[self::COLUMN_MAIN_VARIANT_CATNUM] !== null && $row[self::COLUMN_CATNUM] !== null) {
@@ -148,7 +150,8 @@ class ProductDataFixtureLoader
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    private function updateProductEditDataFromCsvRowForFirstDomain(ProductEditData $productEditData, array $row) {
+    private function updateProductEditDataFromCsvRowForFirstDomain(ProductEditData $productEditData, array $row)
+    {
         $domainId = 1;
         $locale = 'cs';
         $productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_CS];
@@ -215,7 +218,8 @@ class ProductDataFixtureLoader
      * @param array $row
      * @return string
      */
-    public function getCatnumFromRow($row) {
+    public function getCatnumFromRow($row)
+    {
         return $row[self::COLUMN_CATNUM];
     }
 
@@ -224,7 +228,8 @@ class ProductDataFixtureLoader
      * @param array $row
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row) {
+    public function updateProductEditDataFromCsvRowForSecondDomain(ProductEditData $productEditData, array $row)
+    {
         $domainId = 2;
         $locale = 'en';
         $productEditData->productData->name[$locale] = $row[self::COLUMN_NAME_EN];
@@ -244,7 +249,8 @@ class ProductDataFixtureLoader
      * @param string $string
      * @return string[pricingGroup]
      */
-    private function getProductManualPricesIndexedByPricingGroupFromString($string) {
+    private function getProductManualPricesIndexedByPricingGroupFromString($string)
+    {
         $productManualPrices = [];
         $rowData = explode(';', $string);
         foreach ($rowData as $pricingGroupAndPrice) {
@@ -260,7 +266,8 @@ class ProductDataFixtureLoader
      * @param array $valuesByKey
      * @return string[]
      */
-    private function getValuesByKeyString($keyString, array $valuesByKey) {
+    private function getValuesByKeyString($keyString, array $valuesByKey)
+    {
         $values = [];
         if (!empty($keyString)) {
             $keys = explode(';', $keyString);
@@ -277,7 +284,8 @@ class ProductDataFixtureLoader
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
-    private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId) {
+    private function setProductDataPricesFromCsv(array $row, ProductEditData $productEditData, $domainId)
+    {
         switch ($row[self::COLUMN_PRICE_CALCULATION_TYPE]) {
             case 'auto':
                 $productEditData->productData->price = $row[self::COLUMN_MAIN_PRICE];
@@ -305,7 +313,8 @@ class ProductDataFixtureLoader
     /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData) {
+    private function createDefaultManualPriceForAllPricingGroups(ProductEditData $productEditData)
+    {
         foreach ($this->pricingGroups as $pricingGroupReferenceName => $pricingGroup) {
             if (!array_key_exists($pricingGroup->getId(), $productEditData->manualInputPrices)) {
                 $productEditData->manualInputPrices[$pricingGroup->getId()] = null;

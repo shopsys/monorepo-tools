@@ -15,7 +15,8 @@ class EntityParseException extends Exception implements ImageConfigException
      * @param string $entityClass
      * @param \Exception|null $previous
      */
-    public function __construct($entityClass, Exception $previous = null) {
+    public function __construct($entityClass, Exception $previous = null)
+    {
         $this->entityClass = $entityClass;
 
         $message = sprintf('Parsing of config entity class "%s" failed.', $this->entityClass);
@@ -25,7 +26,8 @@ class EntityParseException extends Exception implements ImageConfigException
     /**
      * @return string
      */
-    public function getEntityClass() {
+    public function getEntityClass()
+    {
         return $this->entityClass;
     }
 }

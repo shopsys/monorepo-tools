@@ -24,7 +24,8 @@ class ContactFormData
      * @param string $message
      * @param string $email
      */
-    public function __construct($name = null, $message = null, $email = null) {
+    public function __construct($name = null, $message = null, $email = null)
+    {
         $this->name = $name;
         $this->message = $message;
         $this->email = $email;

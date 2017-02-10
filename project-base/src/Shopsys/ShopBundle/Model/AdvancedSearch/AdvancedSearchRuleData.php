@@ -24,7 +24,8 @@ class AdvancedSearchRuleData
      * @param string|null $operator
      * @param mixed $value
      */
-    public function __construct($subject = null, $operator = null, $value = null) {
+    public function __construct($subject = null, $operator = null, $value = null)
+    {
         $this->subject = $subject;
         $this->operator = $operator;
         $this->value = $value;

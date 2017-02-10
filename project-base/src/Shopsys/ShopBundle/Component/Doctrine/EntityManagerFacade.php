@@ -17,7 +17,8 @@ class EntityManagerFacade
      */
     private $setting;
 
-    public function __construct(EntityManager $em, Setting $setting) {
+    public function __construct(EntityManager $em, Setting $setting)
+    {
         $this->em = $em;
         $this->setting = $setting;
     }
@@ -26,7 +27,8 @@ class EntityManagerFacade
      * This method should be called instead of EntityManager::clear()
      * because it clears entites cached in application too.
      */
-    public function clear() {
+    public function clear()
+    {
         $this->em->clear();
         $this->setting->clearCache();
     }

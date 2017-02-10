@@ -45,12 +45,14 @@ class FeedCategoryLoaderFacade
         $this->heurekaFeedCategoryLoader = $heurekaFeedCategoryLoader;
     }
 
-    public function download() {
+    public function download()
+    {
         $feedCategoriesData = $this->heurekaFeedCategoryLoader->load($this->heurekaCategoryFeedUrl);
         $this->feedCategoryFacade->refreshFeedCategories($feedCategoriesData);
     }
 
-    public function loadFromBackupFile() {
+    public function loadFromBackupFile()
+    {
         $feedCategoriesData = $this->heurekaFeedCategoryLoader->load($this->heurekaCategoryFeedBackupFilepath);
         $this->feedCategoryFacade->refreshFeedCategories($feedCategoriesData);
     }

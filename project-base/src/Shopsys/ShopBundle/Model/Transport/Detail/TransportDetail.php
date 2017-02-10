@@ -31,14 +31,16 @@ class TransportDetail
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    public function getTransport() {
+    public function getTransport()
+    {
         return $this->transport;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price[currencyId]
      */
-    public function getBasePrices() {
+    public function getBasePrices()
+    {
         return $this->basePrices;
     }
 }

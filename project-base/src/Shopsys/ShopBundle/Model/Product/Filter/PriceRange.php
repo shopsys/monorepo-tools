@@ -18,7 +18,8 @@ class PriceRange
      * @param string|null $minimalPrice
      * @param string|null $maximalPrice
      */
-    public function __construct($minimalPrice, $maximalPrice) {
+    public function __construct($minimalPrice, $maximalPrice)
+    {
         $this->minimalPrice = $minimalPrice === null ? '0' : $minimalPrice;
         $this->maximalPrice = $maximalPrice === null ? '0' : $maximalPrice;
     }
@@ -26,14 +27,16 @@ class PriceRange
     /**
      * @return string
      */
-    public function getMinimalPrice() {
+    public function getMinimalPrice()
+    {
         return $this->minimalPrice;
     }
 
     /**
      * @return string
      */
-    public function getMaximalPrice() {
+    public function getMaximalPrice()
+    {
         return $this->maximalPrice;
     }
 }

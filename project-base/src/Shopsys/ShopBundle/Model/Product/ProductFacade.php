@@ -154,7 +154,8 @@ class ProductFacade
      * @param int $productId
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getById($productId) {
+    public function getById($productId)
+    {
         return $this->productRepository->getById($productId);
     }
 
@@ -162,7 +163,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function create(ProductEditData $productEditData) {
+    public function create(ProductEditData $productEditData)
+    {
         $product = Product::create($productEditData->productData);
 
         if ($product->isUsingStock()) {
@@ -182,7 +184,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData) {
+    public function setAdditionalDataAfterCreate(Product $product, ProductEditData $productEditData)
+    {
         // Persist of ProductCategoryDomain requires known primary key of Product
         // @see https://github.com/doctrine/doctrine2/issues/4869
         $product->setCategories($productEditData->productData->categoriesByDomainId);
@@ -210,7 +213,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function edit($productId, ProductEditData $productEditData) {
+    public function edit($productId, ProductEditData $productEditData)
+    {
         $product = $this->productRepository->getById($productId);
 
         $this->productService->edit($product, $productEditData->productData);
@@ -242,7 +246,8 @@ class ProductFacade
     /**
      * @param int $productId
      */
-    public function delete($productId) {
+    public function delete($productId)
+    {
         $product = $this->productRepository->getById($productId);
         $productDeleteResult = $this->productService->delete($product);
         $productsForRecalculations = $productDeleteResult->getProductsForRecalculations();
@@ -259,7 +264,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValueData[] $productParameterValuesData
      */
-    private function saveParameters(Product $product, array $productParameterValuesData) {
+    private function saveParameters(Product $product, array $productParameterValuesData)
+    {
         // Doctrine runs INSERTs before DELETEs in UnitOfWork. In case of UNIQUE constraint
         // in database, this leads in trying to insert duplicate entry.
         // That's why it's necessary to do remove and flush first.
@@ -290,7 +296,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
      */
-    private function createProductDomains(Product $product, array $domains) {
+    private function createProductDomains(Product $product, array $domains)
+    {
         $toFlush = [];
         foreach ($domains as $domain) {
             $productDomain = new ProductDomain($product, $domain->getId());
@@ -305,7 +312,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    private function refreshProductDomains(Product $product, ProductEditData $productEditData) {
+    private function refreshProductDomains(Product $product, ProductEditData $productEditData)
+    {
         $productDomains = $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
         $seoTitles = $productEditData->seoTitles;
         $seoMetaDescriptions = $productEditData->seoMetaDescriptions;
@@ -352,7 +360,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductSellingPrice[]
      */
-    public function getAllProductSellingPricesIndexedByDomainId(Product $product) {
+    public function getAllProductSellingPricesIndexedByDomainId(Product $product)
+    {
         return $this->productService->getProductSellingPricesIndexedByDomainIdAndPricingGroupId(
             $product,
             $this->pricingGroupRepository->getAll()
@@ -363,7 +372,8 @@ class ProductFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @param string[] $manualInputPrices
      */
-    private function refreshProductManualInputPrices(Product $product, array $manualInputPrices) {
+    private function refreshProductManualInputPrices(Product $product, array $manualInputPrices)
+    {
         if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
             foreach ($this->pricingGroupRepository->getAll() as $pricingGroup) {
                 $this->productManualInputPriceFacade->refresh($product, $pricingGroup, $manualInputPrices[$pricingGroup->getId()]);
@@ -376,7 +386,8 @@ class ProductFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    private function createProductVisibilities(Product $product) {
+    private function createProductVisibilities(Product $product)
+    {
         $toFlush = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $domainId = $domainConfig->getId();
@@ -392,7 +403,8 @@ class ProductFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $accessories
      */
-    private function refreshProductAccessories(Product $product, array $accessories) {
+    private function refreshProductAccessories(Product $product, array $accessories)
+    {
         $oldProductAccessories = $this->productAccessoryRepository->getAllByProduct($product);
         foreach ($oldProductAccessories as $oldProductAccessory) {
             $this->em->remove($oldProductAccessory);
@@ -412,7 +424,8 @@ class ProductFacade
      * @param string $productCatnum
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getOneByCatnumExcludeMainVariants($productCatnum) {
+    public function getOneByCatnumExcludeMainVariants($productCatnum)
+    {
         return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
     }
 }

@@ -45,7 +45,8 @@ class FriendlyUrlGeneratorFacade
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function generateUrlsForSupportedEntities(OutputInterface $output) {
+    public function generateUrlsForSupportedEntities(OutputInterface $output)
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             $output->writeln(' Start of generating friendly urls for domain ' . $domainConfig->getUrl() . '');
 
@@ -64,7 +65,8 @@ class FriendlyUrlGeneratorFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
-    private function generateUrlsByDomainConfig(OutputInterface $output, DomainConfig $domainConfig) {
+    private function generateUrlsByDomainConfig(OutputInterface $output, DomainConfig $domainConfig)
+    {
         $totalCountOfCreatedUrls = 0;
         $friendlyUrlRouter = $this->domainRouterFactory->getFriendlyUrlRouter($domainConfig);
 
@@ -88,7 +90,8 @@ class FriendlyUrlGeneratorFacade
      * @param string $routeName
      * @return int
      */
-    private function generateUrlsByRoute(DomainConfig $domainConfig, $routeName) {
+    private function generateUrlsByRoute(DomainConfig $domainConfig, $routeName)
+    {
         $countOfCreatedUrls = 0;
 
         foreach ($this->getFriendlyUrlsDataByRouteName($routeName, $domainConfig) as $friendlyUrlData) {
@@ -109,7 +112,8 @@ class FriendlyUrlGeneratorFacade
      * @param DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlData[]
      */
-    private function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig) {
+    private function getFriendlyUrlsDataByRouteName($routeName, DomainConfig $domainConfig)
+    {
         switch ($routeName) {
             case 'front_article_detail':
                 return $this->friendlyUrlToGenerateRepository->getArticleData($routeName, $domainConfig);

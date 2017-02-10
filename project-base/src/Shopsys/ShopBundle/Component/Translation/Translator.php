@@ -54,7 +54,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * for logging purposes.
      * {@inheritdoc}
      */
-    public function trans($id, array $parameters = [], $domain = null, $locale = null) {
+    public function trans($id, array $parameters = [], $domain = null, $locale = null)
+    {
         $normalizedId = $this->messageIdNormalizer->normalizeMessageId($id);
         $resolvedLocale = $this->resolveLocale($locale);
         $resolvedDomain = $this->resolveDomain($domain);
@@ -84,7 +85,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * for logging purposes.
      * {@inheritdoc}
      */
-    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
+    public function transChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
+    {
         $normalizedId = $this->messageIdNormalizer->normalizeMessageId($id);
         $resolvedLocale = $this->resolveLocale($locale);
         $resolvedDomain = $this->resolveDomain($domain);
@@ -112,7 +114,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $locale
      * @return string|null
      */
-    private function resolveLocale($locale) {
+    private function resolveLocale($locale)
+    {
         if ($locale === null) {
             return $this->getLocale();
         }
@@ -124,7 +127,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $domain
      * @return string
      */
-    private function resolveDomain($domain) {
+    private function resolveDomain($domain)
+    {
         if ($domain === null) {
             return self::DEFAULT_DOMAIN;
         }
@@ -135,14 +139,16 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * {@inheritDoc}
      */
-    public function getLocale() {
+    public function getLocale()
+    {
         return $this->originalTranslator->getLocale();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setLocale($locale) {
+    public function setLocale($locale)
+    {
         $this->originalTranslator->setLocale($locale);
         $this->identityTranslator->setLocale($locale);
     }
@@ -150,14 +156,16 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
     /**
      * {@inheritDoc}
      */
-    public function getCatalogue($locale = null) {
+    public function getCatalogue($locale = null)
+    {
         return $this->originalTranslatorBag->getCatalogue($locale);
     }
 
     /**
      * @param \Shopsys\ShopBundle\Component\Translation\Translator $translator
      */
-    public static function injectSelf(Translator $translator) {
+    public static function injectSelf(Translator $translator)
+    {
         self::$self = $translator;
     }
 
@@ -168,7 +176,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $locale
      * @return string
      */
-    public static function staticTrans($id, array $parameters = [], $domain = null, $locale = null) {
+    public static function staticTrans($id, array $parameters = [], $domain = null, $locale = null)
+    {
         if (self::$self === null) {
             throw new \Shopsys\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
         }
@@ -184,7 +193,8 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
      * @param string|null $locale
      * @return string
      */
-    public static function staticTransChoice($id, $number, array $parameters = [], $domain = null, $locale = null) {
+    public static function staticTransChoice($id, $number, array $parameters = [], $domain = null, $locale = null)
+    {
         if (self::$self === null) {
             throw new \Shopsys\ShopBundle\Component\Translation\Exception\InstanceNotInjectedException();
         }

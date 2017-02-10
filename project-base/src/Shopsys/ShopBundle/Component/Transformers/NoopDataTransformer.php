@@ -9,14 +9,16 @@ class NoopDataTransformer implements DataTransformerInterface
     /**
      * {@inheritDoc}
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         return $value;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         return $value;
     }
 }

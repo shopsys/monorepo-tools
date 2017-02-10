@@ -13,14 +13,16 @@ class PromoCodeFormTypeFactory
      */
     private $promoCodeRepository;
 
-    public function __construct(PromoCodeRepository $promoCodeRepository) {
+    public function __construct(PromoCodeRepository $promoCodeRepository)
+    {
         $this->promoCodeRepository = $promoCodeRepository;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
      */
-    public function create() {
+    public function create()
+    {
         return new PromoCodeFormType($this->getAllPromoCodes());
     }
 
@@ -28,14 +30,16 @@ class PromoCodeFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $promoCode
      * @return \Shopsys\ShopBundle\Form\Admin\PromoCode\PromoCodeFormType
      */
-    public function createForPromoCode(PromoCode $promoCode) {
+    public function createForPromoCode(PromoCode $promoCode)
+    {
         return new PromoCodeFormType($this->getAllPromoCodesExceptEdited($promoCode));
     }
 
     /**
      * @return string[]
      */
-    private function getAllPromoCodes() {
+    private function getAllPromoCodes()
+    {
         $allPromoCodes = [];
         foreach ($this->promoCodeRepository->getAll() as $promoCode) {
             $allPromoCodes[$promoCode->getId()] = $promoCode->getCode();
@@ -48,7 +52,8 @@ class PromoCodeFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCode $editedPromoCode
      * @return string[]
      */
-    private function getAllPromoCodesExceptEdited(PromoCode $editedPromoCode) {
+    private function getAllPromoCodesExceptEdited(PromoCode $editedPromoCode)
+    {
         $existingPromoCodes = $this->getAllPromoCodes();
         unset($existingPromoCodes[$editedPromoCode->getId()]);
 

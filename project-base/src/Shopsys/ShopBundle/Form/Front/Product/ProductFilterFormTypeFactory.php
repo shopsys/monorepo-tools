@@ -56,7 +56,8 @@ class ProductFilterFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
      */
-    public function createForCategory($domainId, $locale, Category $category) {
+    public function createForCategory($domainId, $locale, Category $category)
+    {
         $pricingGroup = $this->currentCustomer->getPricingGroup();
         $parameterFilterChoices = $this->parameterFilterChoiceRepository
             ->getParameterFilterChoicesInCategory($domainId, $pricingGroup, $locale, $category);
@@ -75,7 +76,8 @@ class ProductFilterFormTypeFactory
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Form\Front\Product\ProductFilterFormType
      */
-    public function createForSearch($domainId, $locale, $searchText) {
+    public function createForSearch($domainId, $locale, $searchText)
+    {
         $parameterFilterChoices = [];
         $pricingGroup = $this->currentCustomer->getPricingGroup();
         $flagFilterChoices = $this->flagFilterChoiceRepository

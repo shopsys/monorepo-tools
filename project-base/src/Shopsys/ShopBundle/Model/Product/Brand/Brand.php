@@ -40,7 +40,8 @@ class Brand extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
      */
-    public function __construct(BrandData $brandData) {
+    public function __construct(BrandData $brandData)
+    {
         $this->name = $brandData->name;
         $this->translations = new ArrayCollection();
         $this->setTranslations($brandData);
@@ -49,21 +50,24 @@ class Brand extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
      */
-    public function edit(BrandData $brandData) {
+    public function edit(BrandData $brandData)
+    {
         $this->name = $brandData->name;
         $this->setTranslations($brandData);
     }
@@ -71,7 +75,8 @@ class Brand extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Brand\BrandData $brandData
      */
-    private function setTranslations(BrandData $brandData) {
+    private function setTranslations(BrandData $brandData)
+    {
         foreach ($brandData->descriptions as $locale => $description) {
             $brandTranslation = $this->translation($locale);
             /* @var $brandTranslation \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation */
@@ -82,7 +87,8 @@ class Brand extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Brand\BrandTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new BrandTranslation();
     }
 
@@ -90,7 +96,8 @@ class Brand extends AbstractTranslatableEntity
      * @param string $locale
      * @return string
      */
-    public function getDescription($locale = null) {
+    public function getDescription($locale = null)
+    {
         return $this->translation($locale)->getDescription();
     }
 }

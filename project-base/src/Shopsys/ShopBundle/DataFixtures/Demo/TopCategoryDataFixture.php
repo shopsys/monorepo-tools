@@ -13,7 +13,8 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $topCategoryFacade = $this->get(TopCategoryFacade::class);
         /* @var $topCategoryFacade \Shopsys\ShopBundle\Model\Category\TopCategory\TopCategoryFacade */
 
@@ -29,7 +30,8 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             CategoryDataFixture::class,
         ];

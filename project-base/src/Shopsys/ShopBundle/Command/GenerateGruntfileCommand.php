@@ -11,7 +11,8 @@ use Twig_Environment;
 
 class GenerateGruntfileCommand extends ContainerAwareCommand
 {
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:generate:gruntfile')
             ->setDescription('Generate Gruntfile.js by domain settings');
@@ -21,7 +22,8 @@ class GenerateGruntfileCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $twig = $this->getContainer()->get(Twig_Environment::class);

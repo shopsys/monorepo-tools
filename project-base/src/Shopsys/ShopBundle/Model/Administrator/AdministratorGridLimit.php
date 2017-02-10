@@ -38,7 +38,8 @@ class AdministratorGridLimit
      * @param string $gridId
      * @param int $limit
      */
-    public function __construct(Administrator $administrator, $gridId, $limit) {
+    public function __construct(Administrator $administrator, $gridId, $limit)
+    {
         $this->administrator = $administrator;
         $this->gridId = $gridId;
         $this->limit = $limit;
@@ -47,21 +48,24 @@ class AdministratorGridLimit
     /**
      * @return string
      */
-    public function getGridId() {
+    public function getGridId()
+    {
         return $this->gridId;
     }
 
     /**
      * @return int
      */
-    public function getLimit() {
+    public function getLimit()
+    {
         return $this->limit;
     }
 
     /**
      * @param int $limit
      */
-    public function setLimit($limit) {
+    public function setLimit($limit)
+    {
         $this->limit = $limit;
     }
 }

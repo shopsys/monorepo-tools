@@ -24,7 +24,8 @@ use Shopsys\ShopBundle\Model\Transport\TransportData;
 
 class CustomerServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreate() {
+    public function testCreate()
+    {
         $customerService = $this->getCustomerService();
 
         $billingAddress = $this->createBillingAddress();
@@ -46,7 +47,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(User::class, $user);
     }
 
-    public function testCreateNotDuplicateEmail() {
+    public function testCreateNotDuplicateEmail()
+    {
         $customerService = $this->getCustomerService();
 
         $billingAddress1 = $this->createBillingAddress();
@@ -83,7 +85,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(User::class, $user2);
     }
 
-    public function testCreateDuplicateEmail() {
+    public function testCreateDuplicateEmail()
+    {
         $customerService = $this->getCustomerService();
 
         $billingAddress1 = $this->createBillingAddress();
@@ -119,7 +122,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCreateDuplicateEmailCaseInsentitive() {
+    public function testCreateDuplicateEmailCaseInsentitive()
+    {
         $customerService = $this->getCustomerService();
 
         $billingAddress1 = $this->createBillingAddress();
@@ -160,7 +164,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function testGetAmendedCustomerDataByOrderWithoutChanges() {
+    public function testGetAmendedCustomerDataByOrderWithoutChanges()
+    {
         $customerService = $this->getCustomerService();
 
         $userData = new UserData();
@@ -241,7 +246,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function testGetAmendedCustomerDataByOrder() {
+    public function testGetAmendedCustomerDataByOrder()
+    {
         $customerService = $this->getCustomerService();
 
         $billingCountry = new Country(new CountryData('Česká republika'), self::DOMAIN_ID);
@@ -319,7 +325,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerService
      */
-    private function getCustomerService() {
+    private function getCustomerService()
+    {
         $customerPasswordServiceMock = $this->getMock(CustomerPasswordService::class, [], [], '', false);
 
         return new CustomerService($customerPasswordServiceMock);
@@ -329,7 +336,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
      * @param \Shopsys\ShopBundle\Model\Customer\BillingAddressData|null $billingAddressData
      * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
      */
-    private function createBillingAddress(BillingAddressData $billingAddressData = null) {
+    private function createBillingAddress(BillingAddressData $billingAddressData = null)
+    {
         if ($billingAddressData === null) {
             $billingAddressData = new BillingAddressData();
         }
@@ -341,7 +349,8 @@ class CustomerServiceTest extends PHPUnit_Framework_TestCase
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData|null $deliveryAddressData
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress
      */
-    private function createDeliveryAddress(DeliveryAddressData $deliveryAddressData = null) {
+    private function createDeliveryAddress(DeliveryAddressData $deliveryAddressData = null)
+    {
         if ($deliveryAddressData === null) {
             $deliveryAddressData = new DeliveryAddressData();
         }

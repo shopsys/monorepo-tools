@@ -50,7 +50,8 @@ class BestsellingProductController extends AdminBaseController
      * @Route("/product/bestselling-product/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction(Request $request) {
+    public function listAction(Request $request)
+    {
         $domainId = $this->selectedDomain->getId();
 
         $categoryDetails = $this->categoryFacade->getVisibleCategoryDetailsForDomain($domainId, $request->getLocale());
@@ -67,7 +68,8 @@ class BestsellingProductController extends AdminBaseController
     /**
      * @Route("/product/bestselling-product/detail/")
      */
-    public function detailAction(Request $request) {
+    public function detailAction(Request $request)
+    {
         $form = $this->createForm(new BestsellingProductFormType());
 
         $category = $this->categoryFacade->getById($request->get('categoryId'));

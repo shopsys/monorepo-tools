@@ -61,7 +61,8 @@ class SliderController extends AdminBaseController
      * @Route("/slider/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction() {
+    public function listAction()
+    {
         $queryBuilder = $this->getDoctrine()->getManager()->createQueryBuilder();
         $queryBuilder
             ->select('s')
@@ -90,7 +91,8 @@ class SliderController extends AdminBaseController
      * @Route("/slider/item/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->sliderItemFormTypeFactory->create(true));
         $sliderItemData = new SliderItemData();
         $sliderItemData->domainId = $this->selectedDomain->getId();
@@ -130,7 +132,8 @@ class SliderController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $sliderItem = $this->sliderItemFacade->getById($id);
         $form = $this->createForm($this->sliderItemFormTypeFactory->create());
         $sliderItemData = new SliderItemData();
@@ -172,7 +175,8 @@ class SliderController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $name = $this->sliderItemFacade->getById($id)->getName();
 

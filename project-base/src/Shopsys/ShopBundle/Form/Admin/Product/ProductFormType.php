@@ -86,7 +86,8 @@ class ProductFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'product_form';
     }
 
@@ -95,7 +96,8 @@ class ProductFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         if ($this->product !== null && $this->product->isVariant()) {
             $builder->add('variantAlias', FormType::LOCALIZED, [
                 'required' => false,
@@ -272,7 +274,8 @@ class ProductFormType extends AbstractType
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => ProductData::class,
             'attr' => ['novalidate' => 'novalidate'],
@@ -303,7 +306,8 @@ class ProductFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      */
-    private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product) {
+    private function disableIrrelevantFields(FormBuilderInterface $builder, Product $product)
+    {
         $irrelevantFields = [];
         if ($product->isMainVariant()) {
             $irrelevantFields = [

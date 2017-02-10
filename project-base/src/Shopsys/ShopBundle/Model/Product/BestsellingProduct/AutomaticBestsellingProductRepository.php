@@ -18,7 +18,8 @@ class AutomaticBestsellingProductRepository
      */
     private $productRepository;
 
-    public function __construct(ProductRepository $productRepository) {
+    public function __construct(ProductRepository $productRepository)
+    {
         $this->productRepository = $productRepository;
     }
 

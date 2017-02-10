@@ -14,14 +14,16 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritDoc}
      */
-    public function getExtendedType() {
+    public function getExtendedType()
+    {
         return 'choice';
     }
 
     /**
      * {@inheritDoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         parent::buildForm($builder, $options);
 
         if ($options[self::INVERT_OPTION] && !$options['multiple']) {
@@ -38,7 +40,8 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritDoc}
      */
-    public function configureOptions(OptionsResolver $resolver) {
+    public function configureOptions(OptionsResolver $resolver)
+    {
         parent::configureOptions($resolver);
 
         $resolver->setDefault(self::INVERT_OPTION, false);

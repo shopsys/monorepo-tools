@@ -16,7 +16,8 @@ use Twig_Environment;
 
 class GridTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetParametersFromRequest() {
+    public function testGetParametersFromRequest()
+    {
         $getParameters = [
             Grid::GET_PARAMETER => [
                 'gridId' => [
@@ -54,7 +55,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertSame('desc', $grid->getOrderDirection());
     }
 
-    public function testAddColumn() {
+    public function testAddColumn()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -97,7 +99,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertSame('', $column2->getClassAttribute());
     }
 
-    public function testAddColumnDuplicateId() {
+    public function testAddColumnDuplicateId()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -123,7 +126,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $grid->addColumn('columnId1', 'sourceColumnName2', 'title2');
     }
 
-    public function testEnablePaging() {
+    public function testEnablePaging()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -147,7 +151,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($grid->isEnabledPaging());
     }
 
-    public function testEnablePagingDefaultDisable() {
+    public function testEnablePagingDefaultDisable()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -170,7 +175,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($grid->isEnabledPaging());
     }
 
-    public function testSetDefaultOrder() {
+    public function testSetDefaultOrder()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -198,7 +204,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertSame('columnId2', $grid->getOrderSourceColumnNameWithDirection());
     }
 
-    public function testSetDefaultOrderWithRequest() {
+    public function testSetDefaultOrderWithRequest()
+    {
         $getParameters = [
             Grid::GET_PARAMETER => [
                 'gridId' => [
@@ -231,7 +238,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertSame('-request', $grid->getOrderSourceColumnNameWithDirection());
     }
 
-    public function testCreateView() {
+    public function testCreateView()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -261,7 +269,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(GridView::class, $gridView);
     }
 
-    public function testCreateViewWithPaging() {
+    public function testCreateViewWithPaging()
+    {
         $request = new Request();
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -292,7 +301,8 @@ class GridTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf(GridView::class, $gridView);
     }
 
-    public function testEnableDragAndDrop() {
+    public function testEnableDragAndDrop()
+    {
         $entityClass = 'Path\To\Entity\Class';
 
         $request = new Request();

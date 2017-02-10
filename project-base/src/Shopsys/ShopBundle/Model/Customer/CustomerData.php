@@ -51,7 +51,8 @@ class CustomerData
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    public function setFromEntity(User $user) {
+    public function setFromEntity(User $user)
+    {
         $this->userData->setFromEntity($user);
         $this->billingAddressData->setFromEntity($user->getBillingAddress());
         $this->deliveryAddressData->setFromEntity($user->getDeliveryAddress());

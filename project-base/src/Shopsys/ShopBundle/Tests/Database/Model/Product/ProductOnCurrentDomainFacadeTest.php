@@ -17,7 +17,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
 {
-    public function testFilterByMinimalPrice() {
+    public function testFilterByMinimalPrice()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TV);
 
         $productFilterData = new ProductFilterData();
@@ -27,7 +28,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(22, $paginationResult->getResults());
     }
 
-    public function testFilterByMaximalPrice() {
+    public function testFilterByMaximalPrice()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::TV);
 
         $productFilterData = new ProductFilterData();
@@ -37,7 +39,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(22, $paginationResult->getResults());
     }
 
-    public function testFilterByStockAvailability() {
+    public function testFilterByStockAvailability()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHONES);
 
         $productFilterData = new ProductFilterData();
@@ -47,7 +50,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(2, $paginationResult->getResults());
     }
 
-    public function testFilterByFlag() {
+    public function testFilterByFlag()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $flagTopProduct = $this->getReference(FlagDataFixture::TOP_PRODUCT);
@@ -58,7 +62,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(2, $paginationResult->getResults());
     }
 
-    public function testFilterByFlagsReturnsProductsWithAnyOfUsedFlags() {
+    public function testFilterByFlagsReturnsProductsWithAnyOfUsedFlags()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::BOOKS);
 
         $flagTopProduct = $this->getReference(FlagDataFixture::TOP_PRODUCT);
@@ -70,7 +75,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(5, $paginationResult->getResults());
     }
 
-    public function testFilterByBrand() {
+    public function testFilterByBrand()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $brandCanon = $this->getReference(BrandDataFixture::CANON);
@@ -81,7 +87,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(6, $paginationResult->getResults());
     }
 
-    public function testFilterByBrandsReturnsProductsWithAnyOfUsedBrands() {
+    public function testFilterByBrandsReturnsProductsWithAnyOfUsedBrands()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $brandHp = $this->getReference(BrandDataFixture::HP);
@@ -93,7 +100,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(8, $paginationResult->getResults());
     }
 
-    public function testFilterByParameter() {
+    public function testFilterByParameter()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
@@ -108,7 +116,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(3, $paginationResult->getResults());
     }
 
-    public function testFilterByParametersUsesOrWithinTheSameParameter() {
+    public function testFilterByParametersUsesOrWithinTheSameParameter()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $parameterFilterData = $this->createParameterFilterData(
@@ -125,7 +134,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
         $this->assertCount(10, $paginationResult->getResults());
     }
 
-    public function testFilterByParametersUsesAndWithinDistinctParameters() {
+    public function testFilterByParametersUsesAndWithinDistinctParameters()
+    {
         $category = $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PRINTERS);
 
         $parameterFilterData1 = $this->createParameterFilterData(
@@ -148,7 +158,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      * @param array $valuesTextsByLocales
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData
      */
-    private function createParameterFilterData(array $namesByLocale, array $valuesTextsByLocales) {
+    private function createParameterFilterData(array $namesByLocale, array $valuesTextsByLocales)
+    {
         $parameterRepository = $this->getContainer()->get(ParameterRepository::class);
         /* @var $parameterRepository \Shopsys\ShopBundle\Model\Product\Parameter\ParameterRepository */
 
@@ -166,7 +177,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      * @param array[] $valuesTextsByLocales
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[]
      */
-    private function getParameterValuesByLocalesAndTexts(array $valuesTextsByLocales) {
+    private function getParameterValuesByLocalesAndTexts(array $valuesTextsByLocales)
+    {
         $em = $this->getContainer()->get(EntityManager::class);
         /* @var $em \Doctrine\ORM\EntityManager */
         $parameterValues = [];
@@ -188,7 +200,8 @@ class ProductOnCurrentDomainFacadeTest extends DatabaseTestCase
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
-    private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category) {
+    private function getPaginationResultInCategory(ProductFilterData $productFilterData, Category $category)
+    {
         $productOnCurrentDomainFacade = $this->getContainer()->get(ProductOnCurrentDomainFacade::class);
         /* @var $productOnCurrentDomainFacade \Shopsys\ShopBundle\Model\Product\ProductOnCurrentDomainFacade */
         $page = 1;

@@ -17,14 +17,16 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
      */
     private $availabilityFacade;
 
-    public function __construct(AvailabilityFacade $availabilityFacade) {
+    public function __construct(AvailabilityFacade $availabilityFacade)
+    {
         $this->availabilityFacade = $availabilityFacade;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_IS,
             self::OPERATOR_IS_NOT,
@@ -34,14 +36,16 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'productAvailability';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         return [
             'expanded' => false,
             'multiple' => false,
@@ -52,14 +56,16 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return FormType::CHOICE;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         $isNotAvailabilities = [];
 
         foreach ($rulesData as $index => $ruleData) {

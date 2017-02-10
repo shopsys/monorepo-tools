@@ -16,7 +16,8 @@ class QueryBuilderService
      * @param string $condition
      * @return \Doctrine\ORM\QueryBuilder $queryBuilder
      */
-    public function addOrExtendJoin(QueryBuilder $queryBuilder, $class, $alias, $condition) {
+    public function addOrExtendJoin(QueryBuilder $queryBuilder, $class, $alias, $condition)
+    {
         $rootAlias = $this->getRootAlias($queryBuilder);
 
         $joinAlreadyUsed = false;
@@ -47,7 +48,8 @@ class QueryBuilderService
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return string
      */
-    private function getRootAlias(QueryBuilder $queryBuilder) {
+    private function getRootAlias(QueryBuilder $queryBuilder)
+    {
         $rootAliases = $queryBuilder->getRootAliases();
         if (count($rootAliases) !== self::REQUIRED_ALIASES_COUNT) {
             throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\InvalidCountOfAliasesException($rootAliases);

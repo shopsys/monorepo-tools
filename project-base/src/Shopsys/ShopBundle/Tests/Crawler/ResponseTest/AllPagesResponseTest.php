@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class AllPagesResponseTest extends DatabaseTestCase
 {
-    public function adminTestableUrlsProvider() {
+    public function adminTestableUrlsProvider()
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
@@ -26,7 +27,8 @@ class AllPagesResponseTest extends DatabaseTestCase
      * @param int $expectedStatusCode
      * @dataProvider adminTestableUrlsProvider
      */
-    public function testAdminPages($testedRouteName, $url, $expectedStatusCode) {
+    public function testAdminPages($testedRouteName, $url, $expectedStatusCode)
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
         $url = $urlsProvider->replaceCsrfTokensInUrl($url);
@@ -47,7 +49,8 @@ class AllPagesResponseTest extends DatabaseTestCase
         );
     }
 
-    public function frontTestableUrlsProvider() {
+    public function frontTestableUrlsProvider()
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         // DataProvider is called before setUp() - domain is not set
@@ -66,7 +69,8 @@ class AllPagesResponseTest extends DatabaseTestCase
      * @param bool $asLogged
      * @dataProvider frontTestableUrlsProvider
      */
-    public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged) {
+    public function testFrontPages($testedRouteName, $url, $expectedStatusCode, $asLogged)
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
         $url = $urlsProvider->replaceCsrfTokensInUrl($url);

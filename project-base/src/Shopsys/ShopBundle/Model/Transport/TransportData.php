@@ -69,7 +69,8 @@ class TransportData
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @param \Shopsys\ShopBundle\Model\Transport\TransportDomain[] $transportDomains
      */
-    public function setFromEntity(Transport $transport, array $transportDomains) {
+    public function setFromEntity(Transport $transport, array $transportDomains)
+    {
         $translations = $transport->getTranslations();
         $names = [];
         $desctiptions = [];

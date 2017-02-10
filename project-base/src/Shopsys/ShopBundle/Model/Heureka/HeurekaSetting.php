@@ -17,7 +17,8 @@ class HeurekaSetting
     /**
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      */
-    public function __construct(Setting $setting) {
+    public function __construct(Setting $setting)
+    {
         $this->setting = $setting;
     }
 
@@ -25,7 +26,8 @@ class HeurekaSetting
      * @param int $domainId
      * @return string
      */
-    public function getApiKeyByDomainId($domainId) {
+    public function getApiKeyByDomainId($domainId)
+    {
         return $this->setting->getForDomain(self::HEUREKA_API_KEY, $domainId);
     }
 
@@ -33,7 +35,8 @@ class HeurekaSetting
      * @param int $domainId
      * @return string
      */
-    public function getHeurekaShopCertificationWidgetByDomainId($domainId) {
+    public function getHeurekaShopCertificationWidgetByDomainId($domainId)
+    {
         return $this->setting->getForDomain(self::HEUREKA_WIDGET_CODE, $domainId);
     }
 
@@ -41,7 +44,8 @@ class HeurekaSetting
      * @param string $apiKey
      * @param int $domainId
      */
-    public function setApiKeyForDomain($apiKey, $domainId) {
+    public function setApiKeyForDomain($apiKey, $domainId)
+    {
         $this->setting->setForDomain(self::HEUREKA_API_KEY, $apiKey, $domainId);
     }
 
@@ -49,7 +53,8 @@ class HeurekaSetting
      * @param string $heurekaWidgetCode
      * @param int $domainId
      */
-    public function setHeurekaShopCertificationWidgetForDomain($heurekaWidgetCode, $domainId) {
+    public function setHeurekaShopCertificationWidgetForDomain($heurekaWidgetCode, $domainId)
+    {
         $this->setting->setForDomain(self::HEUREKA_WIDGET_CODE, $heurekaWidgetCode, $domainId);
     }
 
@@ -57,7 +62,8 @@ class HeurekaSetting
      * @param int $domainId
      * @return bool
      */
-    public function isHeurekaShopCertificationActivated($domainId) {
+    public function isHeurekaShopCertificationActivated($domainId)
+    {
         return !empty($this->setting->getForDomain(self::HEUREKA_API_KEY, $domainId));
     }
 
@@ -65,7 +71,8 @@ class HeurekaSetting
      * @param int $domainId
      * @return bool
      */
-    public function isHeurekaWidgetActivated($domainId) {
+    public function isHeurekaWidgetActivated($domainId)
+    {
         return !empty($this->setting->getForDomain(self::HEUREKA_WIDGET_CODE, $domainId));
     }
 }

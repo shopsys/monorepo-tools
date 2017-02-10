@@ -50,7 +50,8 @@ class HomepageController extends FrontBaseController
         $this->domain = $domain;
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         $sliderItems = $this->sliderItemFacade->getAllVisibleOnCurrentDomain();
         $topProductsDetails = $this->topProductFacade->getAllOfferedProductDetails(
             $this->domain->getId(),

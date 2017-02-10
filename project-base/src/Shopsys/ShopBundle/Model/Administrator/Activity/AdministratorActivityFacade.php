@@ -49,7 +49,8 @@ class AdministratorActivityFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      */
-    public function updateCurrentActivityLastActionTime(Administrator $administrator) {
+    public function updateCurrentActivityLastActionTime(Administrator $administrator)
+    {
         $currentAdministratorActivity = $this->administratorActivityRepository->getCurrent($administrator);
         $currentAdministratorActivity->updateLastActionTime();
         $this->em->flush();
@@ -60,7 +61,8 @@ class AdministratorActivityFacade
      * @param int $maxResults
      * @return \Shopsys\ShopBundle\Model\Administrator\Activity\AdministratorActivity[]
      */
-    public function getLastAdministratorActivities(Administrator $administrator, $maxResults) {
+    public function getLastAdministratorActivities(Administrator $administrator, $maxResults)
+    {
         return $this->administratorActivityRepository->getLastAdministratorActivities($administrator, $maxResults);
     }
 }

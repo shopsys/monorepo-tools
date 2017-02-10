@@ -22,7 +22,8 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
     /**
      * @param \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter $router
      */
-    public function __construct(CurrentDomainRouter $router) {
+    public function __construct(CurrentDomainRouter $router)
+    {
         $this->router = $router;
     }
 
@@ -31,7 +32,8 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
      * @param \Symfony\Component\Security\Core\Authentication\Token\TokenInterface $token
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token)
+    {
         $referer = $request->headers->get('referer');
         if ($request->isXmlHttpRequest()) {
             $responseData = [
@@ -51,7 +53,8 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
      * @param \Symfony\Component\Security\Core\Exception\AuthenticationException $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function onAuthenticationFailure(Request $request, AuthenticationException $exception) {
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
         if ($request->isXmlHttpRequest()) {
             $responseData = [
                 'success' => false,

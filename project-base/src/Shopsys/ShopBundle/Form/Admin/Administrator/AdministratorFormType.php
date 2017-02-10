@@ -18,15 +18,18 @@ class AdministratorFormType extends AbstractType
 
     private $scenario;
 
-    public function __construct($scenario) {
+    public function __construct($scenario)
+    {
         $this->scenario = $scenario;
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'administrator_form';
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('username', FormType::TEXT, [
                 'constraints' => [
@@ -68,7 +71,8 @@ class AdministratorFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => AdministratorData::class,
             'attr' => ['novalidate' => 'novalidate'],

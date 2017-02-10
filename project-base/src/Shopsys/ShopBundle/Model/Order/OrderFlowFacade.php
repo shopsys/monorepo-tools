@@ -47,7 +47,8 @@ class OrderFlowFacade
         $this->countryFacade = $countryFacade;
     }
 
-    public function resetOrderForm() {
+    public function resetOrderForm()
+    {
         $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
         $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
         $countries = $this->countryFacade->getAllOnCurrentDomain();

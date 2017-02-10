@@ -82,7 +82,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function create(PaymentEditData $paymentEditData) {
+    public function create(PaymentEditData $paymentEditData)
+    {
         $payment = new Payment($paymentEditData->paymentData);
         $this->em->persist($payment);
         $this->em->flush();
@@ -97,7 +98,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentEditData $paymentEditData
      */
-    public function edit(Payment $payment, PaymentEditData $paymentEditData) {
+    public function edit(Payment $payment, PaymentEditData $paymentEditData)
+    {
         $payment->edit($paymentEditData->paymentData);
         $this->updatePaymentPrices($payment, $paymentEditData->prices);
         $this->deletePaymentDomainsByPayment($payment);
@@ -109,7 +111,8 @@ class PaymentFacade
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function getById($id) {
+    public function getById($id)
+    {
         return $this->paymentRepository->getById($id);
     }
 
@@ -117,7 +120,8 @@ class PaymentFacade
      * @param int $id
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function getByIdWithTransports($id) {
+    public function getByIdWithTransports($id)
+    {
         return $this->paymentRepository->getByIdWithTransports($id);
     }
 
@@ -125,14 +129,16 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @return \Shopsys\ShopBundle\Model\Payment\PaymentDomain[]
      */
-    public function getPaymentDomainsByPayment(Payment $payment) {
+    public function getPaymentDomainsByPayment(Payment $payment)
+    {
         return $this->paymentRepository->getPaymentDomainsByPayment($payment);
     }
 
     /**
      * @param int $id
      */
-    public function deleteById($id) {
+    public function deleteById($id)
+    {
         $payment = $this->getById($id);
         $payment->markAsDeleted();
         $this->deletePaymentDomainsByPayment($payment);
@@ -143,7 +149,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param \Shopsys\ShopBundle\Model\Payment\PaymentData $paymentData
      */
-    private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData) {
+    private function setAddionalDataAndFlush(Payment $payment, PaymentData $paymentData)
+    {
         $transports = $this->transportRepository->getAllByIds($paymentData->transports);
         $payment->setTransports($transports);
         $this->imageFacade->uploadImage($payment, $paymentData->image, null);
@@ -153,7 +160,8 @@ class PaymentFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
-    public function getVisibleOnCurrentDomain() {
+    public function getVisibleOnCurrentDomain()
+    {
         return $this->getVisibleByDomainId($this->domain->getId());
     }
 
@@ -161,7 +169,8 @@ class PaymentFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
-    public function getVisibleByDomainId($domainId) {
+    public function getVisibleByDomainId($domainId)
+    {
         $allPayments = $this->paymentRepository->getAllWithTransports();
 
         return $this->paymentVisibilityCalculation->filterVisible($allPayments, $domainId);
@@ -171,7 +180,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param array $domainIds
      */
-    private function createPaymentDomains(Payment $payment, array $domainIds) {
+    private function createPaymentDomains(Payment $payment, array $domainIds)
+    {
         foreach ($domainIds as $domainId) {
             $paymentDomain = new PaymentDomain($payment, $domainId);
             $this->em->persist($paymentDomain);
@@ -182,7 +192,8 @@ class PaymentFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      */
-    private function deletePaymentDomainsByPayment(Payment $payment) {
+    private function deletePaymentDomainsByPayment(Payment $payment)
+    {
         $paymentDomains = $this->getPaymentDomainsByPayment($payment);
         foreach ($paymentDomains as $paymentDomain) {
             $this->em->remove($paymentDomain);
@@ -194,7 +205,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param string[currencyId] $prices
      */
-    private function updatePaymentPrices(Payment $payment, $prices) {
+    private function updatePaymentPrices(Payment $payment, $prices)
+    {
         foreach ($this->currencyFacade->getAll() as $currency) {
             $price = $prices[$currency->getId()];
             $payment->setPrice($currency, $price);
@@ -204,7 +216,8 @@ class PaymentFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment[]
      */
-    public function getAllIncludingDeleted() {
+    public function getAllIncludingDeleted()
+    {
         return $this->paymentRepository->getAllIncludingDeleted();
     }
 
@@ -212,7 +225,8 @@ class PaymentFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      * @return string [paymentId]
      */
-    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency) {
+    public function getPaymentPricesWithVatIndexedByPaymentId(Currency $currency)
+    {
         $paymentPricesWithVatByPaymentId = [];
         $payments = $this->getAllIncludingDeleted();
         foreach ($payments as $payment) {
@@ -226,7 +240,8 @@ class PaymentFacade
     /**
      * @return string[paymentId]
      */
-    public function getPaymentVatPercentsIndexedByPaymentId() {
+    public function getPaymentVatPercentsIndexedByPaymentId()
+    {
         $paymentVatPercentsByPaymentId = [];
         $payments = $this->getAllIncludingDeleted();
         foreach ($payments as $payment) {

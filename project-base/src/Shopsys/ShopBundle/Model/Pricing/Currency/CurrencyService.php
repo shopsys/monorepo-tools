@@ -13,7 +13,8 @@ class CurrencyService
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\CurrencyData $currencyData
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
      */
-    public function create(CurrencyData $currencyData) {
+    public function create(CurrencyData $currencyData)
+    {
         return new Currency($currencyData);
     }
 
@@ -23,7 +24,8 @@ class CurrencyService
      * @param bool $isDefaultCurrency
      * @return \Shopsys\ShopBundle\Model\Pricing\Currency\Currency
      */
-    public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency) {
+    public function edit(Currency $currency, CurrencyData $currencyData, $isDefaultCurrency)
+    {
         $currency->edit($currencyData);
         if ($isDefaultCurrency) {
             $currency->setExchangeRate(Currency::DEFAULT_EXCHANGE_RATE);

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Product\Availability\AvailabilityService;
 
 class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreate() {
+    public function testCreate()
+    {
         $availabilityService = new AvailabilityService();
 
         $availabilityDataOriginal = new AvailabilityData(['cs' => 'availabilityNameCs', 'en' => 'availabilityNameEn']);
@@ -21,7 +22,8 @@ class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($availabilityDataOriginal, $availabilityDataNew);
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $availabilityService = new AvailabilityService();
 
         $availabilityDataOld = new AvailabilityData(['cs' => 'availabilityNameCs', 'en' => 'availabilityNameEn']);

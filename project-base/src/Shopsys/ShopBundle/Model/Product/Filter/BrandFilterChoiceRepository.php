@@ -28,7 +28,8 @@ class BrandFilterChoiceRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
-    public function getBrandFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category) {
+    public function getBrandFilterChoicesInCategory($domainId, PricingGroup $pricingGroup, Category $category)
+    {
         $productsQueryBuilder = $this->productRepository->getListableInCategoryQueryBuilder(
             $domainId,
             $pricingGroup,
@@ -45,7 +46,8 @@ class BrandFilterChoiceRepository
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
-    public function getBrandFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText) {
+    public function getBrandFilterChoicesForSearch($domainId, PricingGroup $pricingGroup, $locale, $searchText)
+    {
         $productsQueryBuilder = $this->productRepository
             ->getListableBySearchTextQueryBuilder($domainId, $pricingGroup, $locale, $searchText);
 
@@ -56,7 +58,8 @@ class BrandFilterChoiceRepository
      * @param \Doctrine\ORM\QueryBuilder $productsQueryBuilder
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
-    private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder) {
+    private function getBrandsByProductsQueryBuilder(QueryBuilder $productsQueryBuilder)
+    {
         $clonnedProductsQueryBuilder = clone $productsQueryBuilder;
 
         $clonnedProductsQueryBuilder

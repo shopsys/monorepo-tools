@@ -12,7 +12,8 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $localization = $this->get(Localization::class);
         /* @var $localization \Shopsys\ShopBundle\Model\Localization\Localization */
         foreach ($localization->getAllLocales() as $locale) {
@@ -37,7 +38,8 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
             ON users (NORMALIZE(email))');
     }
 
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             DbFunctionsDataFixture::class,
         ];

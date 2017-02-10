@@ -54,7 +54,8 @@ class DirectoryStructureCreator
         $this->filesysytem = $filesystem;
     }
 
-    public function makeImageDirectories() {
+    public function makeImageDirectories()
+    {
         $imageEntityConfigs = $this->imageConfig->getAllImageEntityConfigsByClass();
         $directories = [];
         foreach ($imageEntityConfigs as $imageEntityConfig) {
@@ -88,7 +89,8 @@ class DirectoryStructureCreator
      * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig[] $sizeConfigs
      * @return string[]
      */
-    private function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs) {
+    private function getTargetDirectoriesFromSizeConfigs($entityName, $type, array $sizeConfigs)
+    {
         $directories = [];
         foreach ($sizeConfigs as $sizeConfig) {
             $relativePath = $this->imageLocator->getRelativeImagePath($entityName, $type, $sizeConfig->getName());

@@ -72,7 +72,8 @@ class ProductInputPriceService
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
      * @return string|null
      */
-    public function getInputPrice(Product $product, $inputPriceType, array $manualInputPricesInDefaultCurrency) {
+    public function getInputPrice(Product $product, $inputPriceType, array $manualInputPricesInDefaultCurrency)
+    {
         if ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_AUTO) {
             return $product->getPrice();
         } elseif ($product->getPriceCalculationType() === Product::PRICE_CALCULATION_TYPE_MANUAL) {
@@ -98,7 +99,8 @@ class ProductInputPriceService
      * @param \Shopsys\ShopBundle\Model\Product\Pricing\ProductManualInputPrice[] $manualInputPricesInDefaultCurrency
      * @return string|null
      */
-    private function getMaxSellingPriceWithVatInDefaultCurrency(Product $product, array $manualInputPricesInDefaultCurrency) {
+    private function getMaxSellingPriceWithVatInDefaultCurrency(Product $product, array $manualInputPricesInDefaultCurrency)
+    {
         $maxSellingPriceWithVatInDefaultCurrency = null;
         foreach ($manualInputPricesInDefaultCurrency as $manualInputPrice) {
             $pricingGroup = $manualInputPrice->getPricingGroup();

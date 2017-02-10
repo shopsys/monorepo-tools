@@ -82,7 +82,8 @@ class CategoryFacade
      * @param int $categoryId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getById($categoryId) {
+    public function getById($categoryId)
+    {
         return $this->categoryRepository->getById($categoryId);
     }
 
@@ -90,7 +91,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function create(CategoryData $categoryData) {
+    public function create(CategoryData $categoryData)
+    {
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryService->create($categoryData, $rootCategory);
         $this->em->persist($category);
@@ -110,7 +112,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function edit($categoryId, CategoryData $categoryData) {
+    public function edit($categoryId, CategoryData $categoryData)
+    {
         $rootCategory = $this->getRootCategory();
         $category = $this->categoryRepository->getById($categoryId);
         $this->categoryService->edit($category, $categoryData, $rootCategory);
@@ -129,7 +132,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      */
-    private function createCategoryDomains(Category $category, array $domainConfigs) {
+    private function createCategoryDomains(Category $category, array $domainConfigs)
+    {
         $toFlush = [];
 
         foreach ($domainConfigs as $domainConfig) {
@@ -147,7 +151,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
      */
-    private function refreshCategoryDomains(Category $category, CategoryData $categoryData) {
+    private function refreshCategoryDomains(Category $category, CategoryData $categoryData)
+    {
         $toFlush = [];
         $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
 
@@ -168,7 +173,8 @@ class CategoryFacade
     /**
      * @param int $categoryId
      */
-    public function deleteById($categoryId) {
+    public function deleteById($categoryId)
+    {
         $category = $this->categoryRepository->getById($categoryId);
         $this->categoryService->setChildrenAsSiblings($category);
         // Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
@@ -182,7 +188,8 @@ class CategoryFacade
     /**
      * @param int[] $parentIdByCategoryId
      */
-    public function editOrdering($parentIdByCategoryId) {
+    public function editOrdering($parentIdByCategoryId)
+    {
         // eager-load all categories into identity map
         $this->categoryRepository->getAll();
 
@@ -208,7 +215,8 @@ class CategoryFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->categoryRepository->getAll();
     }
 
@@ -217,7 +225,8 @@ class CategoryFacade
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+    public function getFullPathsIndexedByIdsForDomain($domainId, $locale)
+    {
         return $this->categoryRepository->getFullPathsIndexedByIdsForDomain($domainId, $locale);
     }
 
@@ -225,7 +234,8 @@ class CategoryFacade
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
-    public function getAllCategoryDetails($locale) {
+    public function getAllCategoryDetails($locale)
+    {
         $categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
         $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
 
@@ -237,7 +247,8 @@ class CategoryFacade
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
-    public function getVisibleCategoryDetailsForDomain($domainId, $locale) {
+    public function getVisibleCategoryDetailsForDomain($domainId, $locale)
+    {
         $categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
 
         $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
@@ -250,7 +261,8 @@ class CategoryFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
+    public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId)
+    {
         return $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain($category, $domainId);
     }
 
@@ -259,7 +271,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
      */
-    public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
+    public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig)
+    {
         $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
 
         $categoryDetails = $this->categoryDetailFactory->createLazyLoadedDetails($categories, $domainConfig);
@@ -273,7 +286,8 @@ class CategoryFacade
      * @param string $searchText
      * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
      */
-    public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText) {
+    public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText)
+    {
         $categories = $this->categoryRepository->getVisibleByDomainIdAndSearchText(
             $domainId,
             $locale,
@@ -288,7 +302,8 @@ class CategoryFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
+    public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId)
+    {
         return $this->categoryRepository->getAllVisibleChildrenByCategoryAndDomainId($category, $domainId);
     }
 
@@ -296,7 +311,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAllWithoutBranch(Category $category) {
+    public function getAllWithoutBranch(Category $category)
+    {
         return $this->categoryRepository->getAllWithoutBranch($category);
     }
 
@@ -305,7 +321,8 @@ class CategoryFacade
      * @param int $limit
      * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
      */
-    public function getSearchAutocompleteCategories($searchText, $limit) {
+    public function getSearchAutocompleteCategories($searchText, $limit)
+    {
         $page = 1;
 
         $paginationResult = $this->categoryRepository->getPaginationResultForSearchVisible(
@@ -323,7 +340,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Category\Category[domainId]
      */
-    public function getProductMainCategoriesIndexedByDomainId(Product $product) {
+    public function getProductMainCategoriesIndexedByDomainId(Product $product)
+    {
         $mainCategoriesIndexedByDomainId = [];
         foreach ($this->domain->getAll() as $domainConfig) {
             $mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository->findProductMainCategoryOnDomain(
@@ -340,7 +358,8 @@ class CategoryFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getProductMainCategoryByDomainId(Product $product, $domainId) {
+    public function getProductMainCategoryByDomainId(Product $product, $domainId)
+    {
         return $this->categoryRepository->getProductMainCategoryOnDomain($product, $domainId);
     }
 
@@ -349,7 +368,8 @@ class CategoryFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function findProductMainCategoryByDomainId(Product $product, $domainId) {
+    public function findProductMainCategoryByDomainId(Product $product, $domainId)
+    {
         return $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainId);
     }
 
@@ -358,14 +378,16 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[]
      */
-    public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+    public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig)
+    {
         return $this->categoryRepository->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain($product, $domainConfig);
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getRootCategory() {
+    public function getRootCategory()
+    {
         return $this->categoryRepository->getRootCategory();
     }
 
@@ -374,7 +396,8 @@ class CategoryFacade
      * @param int $categoryId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getVisibleOnDomainById($domainId, $categoryId) {
+    public function getVisibleOnDomainById($domainId, $categoryId)
+    {
         $category = $this->getById($categoryId);
         $categoryDomain = $category->getCategoryDomain($domainId);
         if (!$categoryDomain->isVisible()) {
@@ -390,7 +413,8 @@ class CategoryFacade
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
      */
-    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
+    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId)
+    {
         return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
     }
 }

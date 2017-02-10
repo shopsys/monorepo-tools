@@ -20,7 +20,8 @@ class SymfonyHelper extends Module
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initialize() {
+    public function _initialize()
+    {
     // @codingStandardsIgnoreEnd
         $projectDir = Configuration::projectDir();
 
@@ -38,7 +39,8 @@ class SymfonyHelper extends Module
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _before(TestInterface $test) {
+    public function _before(TestInterface $test)
+    {
     // @codingStandardsIgnoreEnd
         $this->kernel->boot();
     }
@@ -47,7 +49,8 @@ class SymfonyHelper extends Module
      * @param string $serviceId
      * @return object
      */
-    public function grabServiceFromContainer($serviceId) {
+    public function grabServiceFromContainer($serviceId)
+    {
         return $this->kernel->getContainer()->get($serviceId);
     }
 }

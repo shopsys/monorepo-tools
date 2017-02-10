@@ -13,14 +13,16 @@ class ProductFilterPage extends AbstractPage
     // Product filter waits for more requests before evaluation
     const PRE_EVALUATION_WAIT = 2;
 
-    public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester) {
+    public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester)
+    {
         parent::__construct($strictWebDriver, $tester);
     }
 
     /**
      * @param string $price
      */
-    public function setMinimalPrice($price) {
+    public function setMinimalPrice($price)
+    {
         $this->tester->fillFieldByCss('#product_filter_form_minimalPrice', $price . WebDriverKeys::ENTER);
         $this->waitForFilter();
     }
@@ -28,7 +30,8 @@ class ProductFilterPage extends AbstractPage
     /**
      * @param string $price
      */
-    public function setMaximalPrice($price) {
+    public function setMaximalPrice($price)
+    {
         $this->tester->fillFieldByCss('#product_filter_form_maximalPrice', $price . WebDriverKeys::ENTER);
         $this->waitForFilter();
     }
@@ -36,7 +39,8 @@ class ProductFilterPage extends AbstractPage
     /**
      * @param string $label
      */
-    public function filterByBrand($label) {
+    public function filterByBrand($label)
+    {
         $this->tester->checkOptionByLabel($label);
         $this->waitForFilter();
     }
@@ -45,14 +49,16 @@ class ProductFilterPage extends AbstractPage
      * @param string $parameterLabel
      * @param string $valueLabel
      */
-    public function filterByParameter($parameterLabel, $valueLabel) {
+    public function filterByParameter($parameterLabel, $valueLabel)
+    {
         $parameterElement = $this->findParameterElementByLabel($parameterLabel);
         $labelElement = $this->getLabelElementByParameterValueText($parameterElement, $valueLabel);
         $labelElement->click();
         $this->waitForFilter();
     }
 
-    private function waitForFilter() {
+    private function waitForFilter()
+    {
         $this->tester->wait(self::PRE_EVALUATION_WAIT);
         $this->tester->waitForAjax();
     }
@@ -61,7 +67,8 @@ class ProductFilterPage extends AbstractPage
      * @param string $parameterLabel
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function findParameterElementByLabel($parameterLabel) {
+    private function findParameterElementByLabel($parameterLabel)
+    {
         $parameterItems = $this->webDriver->findElements(
             WebDriverBy::cssSelector('#product_filter_form_parameters .js-product-filter-parameter')
         );
@@ -87,7 +94,8 @@ class ProductFilterPage extends AbstractPage
      * @param string $parameterValueText
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function getLabelElementByParameterValueText($parameterElement, $parameterValueText) {
+    private function getLabelElementByParameterValueText($parameterElement, $parameterValueText)
+    {
         $labelElements = $parameterElement->findElements(WebDriverBy::cssSelector('.js-product-filter-parameter-value'));
 
         foreach ($labelElements as $labelElement) {

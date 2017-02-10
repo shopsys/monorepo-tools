@@ -11,7 +11,8 @@ class ParameterService
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function create(ParameterData $parameterData) {
+    public function create(ParameterData $parameterData)
+    {
         return new Parameter($parameterData);
     }
 
@@ -20,7 +21,8 @@ class ParameterService
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function edit(Parameter $parameter, ParameterData $parameterData) {
+    public function edit(Parameter $parameter, ParameterData $parameterData)
+    {
         $parameter->edit($parameterData);
 
         return $parameter;

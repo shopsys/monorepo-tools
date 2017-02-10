@@ -18,7 +18,8 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $availabilityData = new AvailabilityData();
         $availabilityData->name = ['cs' => 'Připravujeme', 'en' => 'Preparing'];
         $availabilityData->dispatchTime = 14;
@@ -41,7 +42,8 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
      * @param string|null $referenceName
      */
-    private function createAvailability(AvailabilityData $availabilityData, $referenceName = null) {
+    private function createAvailability(AvailabilityData $availabilityData, $referenceName = null)
+    {
         $availabilityFacade = $this->get(AvailabilityFacade::class);
         /* @var $availabilityFacade \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade */
 

@@ -49,12 +49,14 @@ class CronFacade
     /**
      * @param \DateTimeInterface $roundedTime
      */
-    public function scheduleModulesByTime(DateTimeInterface $roundedTime) {
+    public function scheduleModulesByTime(DateTimeInterface $roundedTime)
+    {
         $cronModulesConfigsToSchedule = $this->cronConfig->getCronModuleConfigsByTime($roundedTime);
         $this->cronModuleFacade->scheduleModules($cronModulesConfigsToSchedule);
     }
 
-    public function runScheduledModules() {
+    public function runScheduledModules()
+    {
         $cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
 
         $cronModuleConfigs = $this->cronConfig->getAll();
@@ -66,7 +68,8 @@ class CronFacade
      * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[] $cronModuleConfigs
      */
-    private function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs) {
+    private function runModules(CronModuleExecutor $cronModuleExecutor, array $cronModuleConfigs)
+    {
         $this->logger->addInfo('====== Start of cron ======');
 
         foreach ($cronModuleConfigs as $cronModuleConfig) {
@@ -82,7 +85,8 @@ class CronFacade
     /**
      * @param string $moduleId
      */
-    public function runModuleByModuleId($moduleId) {
+    public function runModuleByModuleId($moduleId)
+    {
         $cronModuleConfig = $this->cronConfig->getCronModuleConfigByModuleId($moduleId);
 
         $cronModuleExecutor = $this->cronModuleExecutorFactory->create(self::TIMEOUT_SECONDS);
@@ -93,7 +97,8 @@ class CronFacade
      * @param \Shopsys\ShopBundle\Component\Cron\CronModuleExecutor $cronModuleExecutor
      * @param \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig $cronModuleConfig
      */
-    private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig) {
+    private function runModule(CronModuleExecutor $cronModuleExecutor, CronModuleConfig $cronModuleConfig)
+    {
         $this->logger->addInfo('Start of ' . $cronModuleConfig->getModuleId());
         $cronModuleService = $cronModuleConfig->getCronModuleService();
         $cronModuleService->setLogger($this->logger);
@@ -116,7 +121,8 @@ class CronFacade
     /**
      * @return \Shopsys\ShopBundle\Component\Cron\Config\CronModuleConfig[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->cronConfig->getAll();
     }
 }

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig;
 
 class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetTypeSizes() {
+    public function testGetTypeSizes()
+    {
         $types = [
             'TypeName_1' => [
                 'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
@@ -27,7 +28,8 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame($types['TypeName_1'], $typeSizes);
     }
 
-    public function testGetTypeSizesNotFound() {
+    public function testGetTypeSizesNotFound()
+    {
         $types = [
             'TypeName_1' => [
                 'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),
@@ -45,7 +47,8 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
         $imageEntityConfig->getSizeConfigsByType('TypeName_3');
     }
 
-    public function testGetTypeSize() {
+    public function testGetTypeSize()
+    {
         $types = [
             'TypeName_1' => [
                 'SizeName_1_1' => new ImageSizeConfig('SizeName_1_1', null, null, false),

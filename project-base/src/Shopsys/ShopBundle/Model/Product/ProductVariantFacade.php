@@ -79,7 +79,8 @@ class ProductVariantFacade
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $variants
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function createVariant(Product $mainProduct, array $variants) {
+    public function createVariant(Product $mainProduct, array $variants)
+    {
         $this->productVariantService->checkProductIsNotMainVariant($mainProduct);
 
         $mainVariantEditData = $this->productEditDataFactory->createFromProduct($mainProduct);

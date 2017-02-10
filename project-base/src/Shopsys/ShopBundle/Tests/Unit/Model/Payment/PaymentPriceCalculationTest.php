@@ -18,7 +18,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function calculateIndependentPriceProvider() {
+    public function calculateIndependentPriceProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,
@@ -37,7 +38,8 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function calculatePriceProvider() {
+    public function calculatePriceProvider()
+    {
         return [
             [
                 'inputPriceType' => PricingSetting::INPUT_PRICE_TYPE_WITHOUT_VAT,

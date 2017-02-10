@@ -87,7 +87,8 @@ class BillingAddressData
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
      */
-    public function setFromEntity(BillingAddress $billingAddress) {
+    public function setFromEntity(BillingAddress $billingAddress)
+    {
         $this->telephone = $billingAddress->getTelephone();
         $this->companyCustomer = $billingAddress->isCompanyCustomer();
         $this->companyName = $billingAddress->getCompanyName();

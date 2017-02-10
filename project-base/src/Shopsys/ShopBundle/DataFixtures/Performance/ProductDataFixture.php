@@ -149,7 +149,8 @@ class ProductDataFixture
     /**
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    public function load(OutputInterface $output) {
+    public function load(OutputInterface $output)
+    {
         // Sql logging during mass data import makes memory leak
         $this->sqlLoggerFacade->temporarilyDisableLogging();
 
@@ -209,7 +210,8 @@ class ProductDataFixture
     /**
      * @param string[catnum][] $variantCatnumsByMainVariantCatnum
      */
-    private function createVariants(array $variantCatnumsByMainVariantCatnum) {
+    private function createVariants(array $variantCatnumsByMainVariantCatnum)
+    {
         $uniqueIndex = $this->getUniqueIndex();
 
         foreach ($variantCatnumsByMainVariantCatnum as $mainVariantCatnum => $variantsCatnums) {
@@ -230,7 +232,8 @@ class ProductDataFixture
      * @param string $catnum
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    private function getProductByCatnum($catnum) {
+    private function getProductByCatnum($catnum)
+    {
         if (!array_key_exists($catnum, $this->productsByCatnum)) {
             $query = $this->em->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.catnum = :catnum')
                 ->setParameter('catnum', $catnum);
@@ -243,7 +246,8 @@ class ProductDataFixture
     /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    private function makeProductEditDataUnique(ProductEditData $productEditData) {
+    private function makeProductEditDataUnique(ProductEditData $productEditData)
+    {
         $matches = [];
         $uniqueIndex = $this->getUniqueIndex();
 
@@ -265,18 +269,21 @@ class ProductDataFixture
     /**
      * @return string
      */
-    private function getUniqueIndex() {
+    private function getUniqueIndex()
+    {
         return ' #' . $this->demoDataIterationCounter;
     }
 
-    private function clearResources() {
+    private function clearResources()
+    {
         $this->productAvailabilityRecalculationScheduler->cleanScheduleForImmediateRecalculation();
         $this->productPriceRecalculationScheduler->cleanScheduleForImmediateRecalculation();
         $this->entityManagerFacade->clear();
         gc_collect_cycles();
     }
 
-    private function cleanAndLoadReferences() {
+    private function cleanAndLoadReferences()
+    {
         $this->clearResources();
         $this->batchStartMicrotime = microtime(true);
         $this->productsByCatnum = [];
@@ -292,7 +299,8 @@ class ProductDataFixture
     /**
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      */
-    private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData) {
+    private function setRandomPerformanceCategoriesToProductEditData(ProductEditData $productEditData)
+    {
         $this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 1);
         $this->cleanPerformanceCategoriesFromProductEditDataByDomainId($productEditData, 2);
         $this->addRandomPerformanceCategoriesToProductEditDataByDomainId($productEditData, 1);
@@ -303,7 +311,8 @@ class ProductDataFixture
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
-    private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
+    private function cleanPerformanceCategoriesFromProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
+    {
         foreach ($productEditData->productData->categoriesByDomainId[$domainId] as $key => $category) {
             if ($this->isPerformanceCategory($category)) {
                 unset($productEditData->productData->categoriesByDomainId[$domainId][$key]);
@@ -315,7 +324,8 @@ class ProductDataFixture
      * @param \Shopsys\ShopBundle\Model\Product\ProductEditData $productEditData
      * @param int $domainId
      */
-    private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId) {
+    private function addRandomPerformanceCategoriesToProductEditDataByDomainId(ProductEditData $productEditData, $domainId)
+    {
         $performanceCategoryIds = $this->getPerformanceCategoryIds();
         $randomPerformanceCategoryIds = $this->faker->randomElements(
             $performanceCategoryIds,
@@ -333,7 +343,8 @@ class ProductDataFixture
     /**
      * @return int[]
      */
-    private function getPerformanceCategoryIds() {
+    private function getPerformanceCategoryIds()
+    {
         $allCategoryIds = $this->categoryRepository->getAllIds();
         $firstPerformanceCategory = $this->persistentReferenceFacade->getReference(
             CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
@@ -347,7 +358,8 @@ class ProductDataFixture
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return bool
      */
-    private function isPerformanceCategory(Category $category) {
+    private function isPerformanceCategory(Category $category)
+    {
         $firstPerformanceCategory = $this->persistentReferenceFacade->getReference(
             CategoryDataFixture::FIRST_PERFORMANCE_CATEGORY
         );
@@ -360,7 +372,8 @@ class ProductDataFixture
      * @param array $array
      * @param string|int $key
      */
-    private function setArrayPointerByKey(array &$array, $key) {
+    private function setArrayPointerByKey(array &$array, $key)
+    {
         reset($array);
         while (key($array) !== $key) {
             if (each($array) === false) {

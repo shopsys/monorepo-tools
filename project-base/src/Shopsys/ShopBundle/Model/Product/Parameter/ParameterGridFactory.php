@@ -39,7 +39,8 @@ class ParameterGridFactory implements GridFactoryInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function create() {
+    public function create()
+    {
         $locales = $this->localization->getAllLocales();
         $defaultLocale = $this->localization->getDefaultLocale();
         $grid = $this->gridFactory->create('parameterList', $this->getParametersDataSource());
@@ -86,7 +87,8 @@ class ParameterGridFactory implements GridFactoryInterface
      * @param array $locales
      * @return QueryBuilderDataSource
      */
-    private function getParametersDataSource() {
+    private function getParametersDataSource()
+    {
         $locales = $this->localization->getAllLocales();
         $queryBuilder = $this->em->createQueryBuilder();
         $queryBuilder

@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Model\Product\ProductData;
 
 class OrderProductServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testSubtractOrderProductsFromStockUsingStock() {
+    public function testSubtractOrderProductsFromStockUsingStock()
+    {
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
@@ -32,7 +33,8 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($productStockQuantity - $orderProductQuantity, $product->getStockQuantity());
     }
 
-    public function testSubtractOrderProductsFromStockNotUsingStock() {
+    public function testSubtractOrderProductsFromStockNotUsingStock()
+    {
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
@@ -52,7 +54,8 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($productStockQuantity, $product->getStockQuantity());
     }
 
-    public function testAddOrderProductsToStockUsingStock() {
+    public function testAddOrderProductsToStockUsingStock()
+    {
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 
@@ -72,7 +75,8 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($productStockQuantity + $orderProductQuantity, $product->getStockQuantity());
     }
 
-    public function testAddOrderProductsToStockNotUsingStock() {
+    public function testAddOrderProductsToStockNotUsingStock()
+    {
         $productStockQuantity = 15;
         $orderProductQuantity = 10;
 

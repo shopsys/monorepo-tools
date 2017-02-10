@@ -10,7 +10,8 @@ class VarDumperExtension extends Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction(
                 'd',
@@ -24,11 +25,13 @@ class VarDumperExtension extends Twig_Extension
      *
      * @SuppressWarnings(PHPMD.ShortMethodName)
      */
-    public function d($var) {
+    public function d($var)
+    {
         d($var);
     }
 
-    public function getName() {
+    public function getName()
+    {
         return 'var_dumper_extension';
     }
 }

@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Model\Pricing\Vat\VatData;
 
 class PriceCalculationTest extends PHPUnit_Framework_TestCase
 {
-    public function applyVatPercentProvider() {
+    public function applyVatPercentProvider()
+    {
         return [
             [
                 'priceWithoutVat' => '0',
@@ -61,7 +62,8 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round($expectedPriceWithVat, 6), round($actualPriceWithVat, 6));
     }
 
-    public function getVatAmountByPriceWithVatProvider() {
+    public function getVatAmountByPriceWithVatProvider()
+    {
         return [
             [
                 'priceWithVat' => '0',

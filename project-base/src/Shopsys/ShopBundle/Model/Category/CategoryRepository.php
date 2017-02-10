@@ -32,7 +32,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Model\Product\ProductRepository
      */
-    public function __construct(EntityManager $em, ProductRepository $productRepository) {
+    public function __construct(EntityManager $em, ProductRepository $productRepository)
+    {
         $this->em = $em;
         $classMetadata = $this->em->getClassMetadata(Category::class);
         $this->productRepository = $productRepository;
@@ -42,21 +43,24 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCategoryRepository() {
+    private function getCategoryRepository()
+    {
         return $this->em->getRepository(Category::class);
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getCategoryDomainRepository() {
+    private function getCategoryDomainRepository()
+    {
         return $this->em->getRepository(CategoryDomain::class);
     }
 
     /**
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getAllQueryBuilder() {
+    private function getAllQueryBuilder()
+    {
         return $this->getCategoryRepository()
             ->createQueryBuilder('c')
             ->where('c.parent IS NOT NULL')
@@ -66,7 +70,8 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->getAllQueryBuilder()
             ->getQuery()
             ->getResult();
@@ -77,7 +82,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+    public function getFullPathsIndexedByIdsForDomain($domainId, $locale)
+    {
         $queryBuilder = $this->getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale);
 
         $rows = $queryBuilder->select('c.id, IDENTITY(c.parent) AS parentId, ct.name')->getQuery()->getScalarResult();
@@ -97,7 +103,8 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return int[]
      */
-    public function getAllIds() {
+    public function getAllIds()
+    {
         $result = $this->getAllQueryBuilder()
             ->select('c.id')
             ->getQuery()
@@ -109,7 +116,8 @@ class CategoryRepository extends NestedTreeRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getRootCategory() {
+    public function getRootCategory()
+    {
         $rootCategory = $this->getCategoryRepository()->findOneBy(['parent' => null]);
 
         if ($rootCategory === null) {
@@ -124,7 +132,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category $categoryBranch
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAllWithoutBranch(Category $categoryBranch) {
+    public function getAllWithoutBranch(Category $categoryBranch)
+    {
         return $this->getAllQueryBuilder()
             ->andWhere('c.lft < :branchLft OR c.rgt > :branchRgt')
             ->setParameter('branchLft', $categoryBranch->getLft())
@@ -137,7 +146,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $categoryId
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function findById($categoryId) {
+    public function findById($categoryId)
+    {
         return $this->getAllQueryBuilder()
             ->andWhere('c.id = :categoryId')
             ->setParameter('categoryId', $categoryId)
@@ -149,7 +159,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $categoryId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getById($categoryId) {
+    public function getById($categoryId)
+    {
         $category = $this->findById($categoryId);
 
         if ($category === null) {
@@ -164,7 +175,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getPreOrderTreeTraversalForAllCategories($locale) {
+    public function getPreOrderTreeTraversalForAllCategories($locale)
+    {
         $queryBuilder = $this->getAllQueryBuilder();
         $this->addTranslation($queryBuilder, $locale);
 
@@ -180,7 +192,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale) {
+    public function getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale)
+    {
         $queryBuilder = $this->getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale);
 
         $queryBuilder->andWhere('cd.visible = TRUE');
@@ -193,7 +206,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param string $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale) {
+    private function getPreOrderTreeTraversalForAllCategoriesByDomainQueryBuilder($domainId, $locale)
+    {
         $queryBuilder = $this->getAllQueryBuilder();
         $this->addTranslation($queryBuilder, $locale);
 
@@ -212,7 +226,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getTranslatedVisibleSubcategoriesByDomain(Category $parentCategory, DomainConfig $domainConfig) {
+    public function getTranslatedVisibleSubcategoriesByDomain(Category $parentCategory, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId());
         $this->addTranslation($queryBuilder, $domainConfig->getLocale());
 
@@ -227,7 +242,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Doctrine\ORM\QueryBuilder $categoriesQueryBuilder
      * @param string $locale
      */
-    private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale) {
+    private function addTranslation(QueryBuilder $categoriesQueryBuilder, $locale)
+    {
         $categoriesQueryBuilder
             ->addSelect('ct')
             ->join('c.translations', 'ct', Join::WITH, 'ct.locale = :locale')
@@ -238,7 +254,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @return \Shopsys\ShopBundle\Model\Category\CategoryDomain[]
      */
-    public function getCategoryDomainsByCategory(Category $category) {
+    public function getCategoryDomainsByCategory(Category $category)
+    {
         return $this->getCategoryDomainRepository()->findBy([
             'category' => $category,
         ]);
@@ -273,7 +290,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param string|null $searchText
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getVisibleByDomainIdAndSearchText($domainId, $locale, $searchText) {
+    public function getVisibleByDomainIdAndSearchText($domainId, $locale, $searchText)
+    {
         $queryBuilder = $this->getVisibleByDomainIdAndSearchTextQueryBuilder(
             $domainId,
             $locale,
@@ -305,7 +323,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getAllVisibleByDomainIdQueryBuilder($domainId) {
+    public function getAllVisibleByDomainIdQueryBuilder($domainId)
+    {
         $queryBuilder = $this->getAllQueryBuilder()
             ->join(CategoryDomain::class, 'cd', Join::WITH, 'cd.category = c.id')
             ->andWhere('cd.domainId = :domainId')
@@ -321,7 +340,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
+    public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId)
+    {
         $queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
             ->andWhere('c.parent = :category')
             ->setParameter('category', $category);
@@ -334,7 +354,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @param int $domainId
      */
-    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
+    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId)
+    {
         $queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
 
         $queryBuilder->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
@@ -355,7 +376,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param string|null $searchText
      */
-    private function filterBySearchText(QueryBuilder $queryBuilder, $searchText) {
+    private function filterBySearchText(QueryBuilder $queryBuilder, $searchText)
+    {
         $queryBuilder->andWhere(
             'NORMALIZE(ct.name) LIKE NORMALIZE(:searchText)'
         );
@@ -367,7 +389,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function findProductMainCategoryOnDomain(Product $product, $domainId) {
+    public function findProductMainCategoryOnDomain(Product $product, $domainId)
+    {
         $qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
             ->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
                 'pcd.product = :product
@@ -390,7 +413,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category
      */
-    public function getProductMainCategoryOnDomain(Product $product, $domainId) {
+    public function getProductMainCategoryOnDomain(Product $product, $domainId)
+    {
         $productMainCategory = $this->findProductMainCategoryOnDomain($product, $domainId);
         if ($productMainCategory === null) {
             throw new \Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException();
@@ -404,7 +428,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
+    public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId)
+    {
         $qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
             ->andWhere('c.lft <= :lft')->setParameter('lft', $category->getLft())
             ->andWhere('c.rgt >= :rgt')->setParameter('rgt', $category->getRgt())
@@ -418,7 +443,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param  \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return string[]
      */
-    public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+    public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->getAllQueryBuilder();
         $domainId = $domainConfig->getId();
         $locale = $domainConfig->getLocale();
@@ -439,7 +465,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int[] $categoryIds
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getCategoriesByIds(array $categoryIds) {
+    public function getCategoriesByIds(array $categoryIds)
+    {
         $queryBuilder = $this->getAllQueryBuilder();
         $queryBuilder
             ->andWhere('c.id IN (:categoryIds)')
@@ -453,7 +480,8 @@ class CategoryRepository extends NestedTreeRepository
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category[]
      */
-    public function getCategoriesWithVisibleChildren(array $categories, $domainId) {
+    public function getCategoriesWithVisibleChildren(array $categories, $domainId)
+    {
         $queryBuilder = $this->getAllVisibleByDomainIdQueryBuilder($domainId);
 
         $queryBuilder

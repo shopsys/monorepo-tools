@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\Paginator\PaginationResult;
 
 class PaginationResultTest extends PHPUnit_Framework_TestCase
 {
-    public function getTestPageCountData() {
+    public function getTestPageCountData()
+    {
         return [
             [1, 10, 40, [], 4],
             [1, 10, 41, [], 5],
@@ -24,7 +25,8 @@ class PaginationResultTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTestPageCountData
      */
-    public function testGetPageCount($page, $pageSize, $totalCount, $results, $expectedPageCount) {
+    public function testGetPageCount($page, $pageSize, $totalCount, $results, $expectedPageCount)
+    {
         $paginationResult = new PaginationResult($page, $pageSize, $totalCount, $results);
 
         $this->assertSame($expectedPageCount, $paginationResult->getPageCount());

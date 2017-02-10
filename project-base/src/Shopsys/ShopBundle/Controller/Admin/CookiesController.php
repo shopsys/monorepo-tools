@@ -39,7 +39,8 @@ class CookiesController extends AdminBaseController
     /**
      * @Route("/cookies/setting/")
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
         $cookiesArticle = $this->cookiesFacade->findCookiesArticleByDomainId($selectedDomainId);
 

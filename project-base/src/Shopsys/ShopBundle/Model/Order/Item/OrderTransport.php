@@ -54,14 +54,16 @@ class OrderTransport extends OrderItem
     /**
      * @return \Shopsys\ShopBundle\Model\Transport\Transport
      */
-    public function getTransport() {
+    public function getTransport()
+    {
         return $this->transport;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderTransportData
      */
-    public function edit(OrderItemData $orderTransportData) {
+    public function edit(OrderItemData $orderTransportData)
+    {
         if ($orderTransportData instanceof OrderTransportData) {
             $this->transport = $orderTransportData->transport;
             parent::edit($orderTransportData);

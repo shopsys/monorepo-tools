@@ -14,7 +14,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class CartServiceTest extends FunctionalTestCase
 {
-    public function testCannotAddProductFloatQuantityToCart() {
+    public function testCannotAddProductFloatQuantityToCart()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -27,7 +28,8 @@ class CartServiceTest extends FunctionalTestCase
         $cartService->addProductToCart($cart, $customerIdentifier, $product, 1.1);
     }
 
-    public function testCannotAddProductZeroQuantityToCart() {
+    public function testCannotAddProductZeroQuantityToCart()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -40,7 +42,8 @@ class CartServiceTest extends FunctionalTestCase
         $cartService->addProductToCart($cart, $customerIdentifier, $product, 0);
     }
 
-    public function testCannotAddProductNegativeQuantityToCart() {
+    public function testCannotAddProductNegativeQuantityToCart()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -53,7 +56,8 @@ class CartServiceTest extends FunctionalTestCase
         $cartService->addProductToCart($cart, $customerIdentifier, $product, -10);
     }
 
-    public function testAddProductToCartMarksAddedProductAsNew() {
+    public function testAddProductToCartMarksAddedProductAsNew()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -68,7 +72,8 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertTrue($result->getIsNew());
     }
 
-    public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew() {
+    public function testAddProductToCartMarksRepeatedlyAddedProductAsNotNew()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -84,7 +89,8 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertFalse($result->getIsNew());
     }
 
-    public function testAddProductResultContainsAddedProductQuantity() {
+    public function testAddProductResultContainsAddedProductQuantity()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -99,7 +105,8 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertSame($quantity, $result->getAddedQuantity());
     }
 
-    public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity() {
+    public function testAddProductResultDoesNotContainPreviouslyAddedProductQuantity()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -115,7 +122,8 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertSame($quantity, $result->getAddedQuantity());
     }
 
-    public function testCleanCartMakesCartEmpty() {
+    public function testCleanCartMakesCartEmpty()
+    {
         $cartService = $this->getCartService();
         $product = $this->createProduct();
 
@@ -130,7 +138,8 @@ class CartServiceTest extends FunctionalTestCase
         $this->assertTrue($cart->isEmpty());
     }
 
-    public function testMergeCartsReturnsCartWithSummedProducts() {
+    public function testMergeCartsReturnsCartWithSummedProducts()
+    {
         $cartService = $this->getCartService();
 
         $product1 = $this->createProduct();
@@ -164,7 +173,8 @@ class CartServiceTest extends FunctionalTestCase
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    private function createProduct() {
+    private function createProduct()
+    {
         $price = 100;
         $vat = new Vat(new VatData('vat', 21));
 
@@ -180,7 +190,8 @@ class CartServiceTest extends FunctionalTestCase
     /**
      * @return \Shopsys\ShopBundle\Model\Cart\CartService
      */
-    private function getCartService() {
+    private function getCartService()
+    {
         return $this->getContainer()->get(CartService::class);
     }
 }

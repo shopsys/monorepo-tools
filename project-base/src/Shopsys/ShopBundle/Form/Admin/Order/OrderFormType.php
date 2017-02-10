@@ -46,7 +46,8 @@ class OrderFormType extends AbstractType
      * @param array $payments
      * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
      */
-    public function __construct(array $allOrderStatuses, array $transports, array $payments, array $countries) {
+    public function __construct(array $allOrderStatuses, array $transports, array $payments, array $countries)
+    {
         $this->allOrderStatuses = $allOrderStatuses;
         $this->transports = $transports;
         $this->payments = $payments;
@@ -56,7 +57,8 @@ class OrderFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'order_form';
     }
 
@@ -65,7 +67,8 @@ class OrderFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('orderNumber', FormType::TEXT, ['read_only' => true])
             ->add('status', FormType::CHOICE, [
@@ -253,7 +256,8 @@ class OrderFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => OrderData::class,
             'attr' => ['novalidate' => 'novalidate'],

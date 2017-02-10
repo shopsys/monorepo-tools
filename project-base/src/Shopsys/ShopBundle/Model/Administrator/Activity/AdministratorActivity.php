@@ -64,28 +64,32 @@ class AdministratorActivity
         $this->lastActionTime = new DateTime();
     }
 
-    public function updateLastActionTime() {
+    public function updateLastActionTime()
+    {
         $this->lastActionTime = new DateTime();
     }
 
     /**
      * @return string
      */
-    public function getIpAddress() {
+    public function getIpAddress()
+    {
         return $this->ipAddress;
     }
 
     /**
      * @return \DateTime
      */
-    public function getLoginTime() {
+    public function getLoginTime()
+    {
         return $this->loginTime;
     }
 
     /**
      * @return \DateTime
      */
-    public function getLastActionTime() {
+    public function getLastActionTime()
+    {
         return $this->lastActionTime;
     }
 }

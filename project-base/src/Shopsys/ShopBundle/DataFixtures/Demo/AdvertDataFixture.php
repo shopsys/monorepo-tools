@@ -14,7 +14,8 @@ class AdvertDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $advertData = new AdvertData();
         $advertData->domainId = 1;
         $advertData->name = 'Demo advert';
@@ -30,7 +31,8 @@ class AdvertDataFixture extends AbstractReferenceFixture
     /**
      * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advertData
      */
-    private function createAdvert(AdvertData $advertData) {
+    private function createAdvert(AdvertData $advertData)
+    {
         $advertFacade = $this->get(AdvertFacade::class);
         /* @var $advertFacade \Shopsys\ShopBundle\Model\Advert\AdvertFacade */
         $advertFacade->create($advertData);

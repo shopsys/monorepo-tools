@@ -18,7 +18,8 @@ class LocalizedType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Localization\Localization $localization
      */
-    public function __construct(Localization $localization) {
+    public function __construct(Localization $localization)
+    {
         $this->localization = $localization;
     }
 
@@ -26,7 +27,8 @@ class LocalizedType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
         Utils::setArrayDefaultValue($options['options'], 'constraints', []);
 
@@ -53,7 +55,8 @@ class LocalizedType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'compound' => true,
             'options' => [],
@@ -65,7 +68,8 @@ class LocalizedType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'localized';
     }
 }

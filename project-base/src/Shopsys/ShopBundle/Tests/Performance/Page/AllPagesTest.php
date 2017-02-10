@@ -25,7 +25,8 @@ class AllPagesTest extends FunctionalTestCase
     /**
      * @group warmup
      */
-    public function testAdminPagesWarmup() {
+    public function testAdminPagesWarmup()
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
@@ -39,7 +40,8 @@ class AllPagesTest extends FunctionalTestCase
     /**
      * @group warmup
      */
-    public function testFrontPagesWarmup() {
+    public function testFrontPagesWarmup()
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
@@ -50,7 +52,8 @@ class AllPagesTest extends FunctionalTestCase
         );
     }
 
-    public function testAdminPages() {
+    public function testAdminPages()
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 
@@ -62,7 +65,8 @@ class AllPagesTest extends FunctionalTestCase
         );
     }
 
-    public function testFrontPages() {
+    public function testFrontPages()
+    {
         $urlsProvider = $this->getContainer()->get(UrlsProvider::class);
         /* @var $urlsProvider \Shopsys\ShopBundle\Tests\Crawler\ResponseTest\UrlsProvider */
 

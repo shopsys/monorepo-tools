@@ -58,7 +58,8 @@ class TransportGridFactory implements GridFactoryInterface
     /**
      * @return \Shopsys\ShopBundle\Component\Grid\Grid
      */
-    public function create() {
+    public function create()
+    {
         $queryBuilder = $this->transportRepository->getQueryBuilderForAll()
             ->addSelect('tt')
             ->join('t.translations', 'tt', Join::WITH, 'tt.locale = :locale')

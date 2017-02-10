@@ -55,7 +55,8 @@ class OrderFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @return \Shopsys\ShopBundle\Form\Admin\Order\OrderFormType
      */
-    public function createForOrder(Order $order) {
+    public function createForOrder(Order $order)
+    {
         $orderDomainId = $order->getDomainId();
         $payments = $this->paymentFacade->getVisibleByDomainId($orderDomainId);
         $transports = $this->transportFacade->getVisibleByDomainId($orderDomainId, $payments);

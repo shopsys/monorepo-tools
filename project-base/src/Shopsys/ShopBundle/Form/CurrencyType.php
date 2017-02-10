@@ -31,7 +31,8 @@ class CurrencyType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $intlCurrencies = $this->intlCurrencyRepository->getAll($this->localization->getLocale());
 
         $choices = [];
@@ -52,14 +53,16 @@ class CurrencyType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'text';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'currency';
     }
 }

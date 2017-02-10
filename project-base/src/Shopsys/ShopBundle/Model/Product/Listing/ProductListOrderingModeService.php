@@ -35,7 +35,8 @@ class ProductListOrderingModeService
     /**
      * @return string[]
      */
-    private function getSupportedOrderingModes(ProductListOrderingConfig $productListOrderingConfig) {
+    private function getSupportedOrderingModes(ProductListOrderingConfig $productListOrderingConfig)
+    {
         return array_keys($productListOrderingConfig->getSupportedOrderingModesNames());
     }
 }

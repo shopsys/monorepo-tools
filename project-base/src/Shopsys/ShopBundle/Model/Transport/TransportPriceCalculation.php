@@ -72,7 +72,8 @@ class TransportPriceCalculation
      * @param int $domainId
      * @return bool
      */
-    private function isFree(Price $productsPrice, $domainId) {
+    private function isFree(Price $productsPrice, $domainId)
+    {
         $freeTransportAndPaymentPriceLimit = $this->pricingSetting->getFreeTransportAndPaymentPriceLimit($domainId);
 
         if ($freeTransportAndPaymentPriceLimit === null) {

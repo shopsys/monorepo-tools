@@ -15,14 +15,16 @@ class TopProductsFormTypeFactory
     /**
      * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
      */
-    public function __construct(RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer) {
+    public function __construct(RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer)
+    {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Product\TopProduct\TopProductsFormType
      */
-    public function create() {
+    public function create()
+    {
         return new TopProductsFormType($this->removeDuplicatesTransformer);
     }
 }

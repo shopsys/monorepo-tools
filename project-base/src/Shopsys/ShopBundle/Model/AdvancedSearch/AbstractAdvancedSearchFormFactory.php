@@ -47,7 +47,8 @@ abstract class AbstractAdvancedSearchFormFactory
      * @param array $rulesViewData
      * @return \Symfony\Component\Form\Form
      */
-    public function createRulesForm($name, $rulesViewData) {
+    public function createRulesForm($name, $rulesViewData)
+    {
         $options = [
             'csrf_protection' => false,
             'attr' => ['novalidate' => 'novalidate'],
@@ -71,7 +72,8 @@ abstract class AbstractAdvancedSearchFormFactory
      * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $ruleFilter
      * @return \Symfony\Component\Form\Form
      */
-    private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter) {
+    private function createRuleFormBuilder($name, AdvancedSearchFilterInterface $ruleFilter)
+    {
         $filterFormBuilder = $this->formFactory->createNamedBuilder($name, 'form', null, [
             'data_class' => AdvancedSearchRuleData::class,
         ])
@@ -94,7 +96,8 @@ abstract class AbstractAdvancedSearchFormFactory
      * @param \Shopsys\ShopBundle\Model\AdvancedSearch\AdvancedSearchFilterInterface $filter
      * @return string[]
      */
-    private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter) {
+    private function getFilterOperatorChoices(AdvancedSearchFilterInterface $filter)
+    {
         $choices = [];
         foreach ($filter->getAllowedOperators() as $operator) {
             $choices[$operator] = $this->advancedSearchOperatorTranslation->translateOperator($operator);
@@ -106,7 +109,8 @@ abstract class AbstractAdvancedSearchFormFactory
     /**
      * @return string[]
      */
-    private function getSubjectChoices() {
+    private function getSubjectChoices()
+    {
         $choices = [];
         foreach ($this->advancedSearchConfig->getAllFilters() as $filter) {
             $choices[$filter->getName()] = $this->advancedSearchFilterTranslation->translateFilterName($filter->getName());

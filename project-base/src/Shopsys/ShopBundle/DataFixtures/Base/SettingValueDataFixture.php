@@ -24,7 +24,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $vat = $this->getReference(VatDataFixture::VAT_HIGH);
         /* @var $vat \Shopsys\ShopBundle\Model\Pricing\Vat\Vat */
         $pricingGroup1 = $this->getReference(PricingGroupDataFixture::ORDINARY_DOMAIN_1);
@@ -80,7 +81,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
         $this->clearSettingCache();
     }
 
-    private function clearSettingCache() {
+    private function clearSettingCache()
+    {
         $setting = $this->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
 
@@ -90,7 +92,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             ArticleDataFixture::class,
             AvailabilityDataFixture::class,

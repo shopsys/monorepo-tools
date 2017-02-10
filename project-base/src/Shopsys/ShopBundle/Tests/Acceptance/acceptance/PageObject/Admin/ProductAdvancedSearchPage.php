@@ -13,7 +13,8 @@ class ProductAdvancedSearchPage extends AbstractPage
      * @param string $searchSubject
      * @param string $value
      */
-    public function search($searchSubject, $value) {
+    public function search($searchSubject, $value)
+    {
         $this->tester->amOnPage('/admin/product/list/');
 
         $this->tester->clickByText('Rozšířené hledání');
@@ -27,14 +28,16 @@ class ProductAdvancedSearchPage extends AbstractPage
     /**
      * @param string $productName
      */
-    public function assertFoundProductByName($productName) {
+    public function assertFoundProductByName($productName)
+    {
         $this->tester->seeInCss($productName, '.js-grid-column-name');
     }
 
     /**
      * @param int $expectedCount
      */
-    public function assertFoundProductCount($expectedCount) {
+    public function assertFoundProductCount($expectedCount)
+    {
         $foundProductCount = $this->tester->countVisibleByCss('tbody .table-grid__row');
 
         if ($foundProductCount !== $expectedCount) {

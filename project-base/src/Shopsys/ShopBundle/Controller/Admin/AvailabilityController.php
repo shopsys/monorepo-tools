@@ -43,7 +43,8 @@ class AvailabilityController extends AdminBaseController
     /**
      * @Route("/product/availability/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->availabilityInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/Availability/list.html.twig', [
@@ -57,7 +58,8 @@ class AvailabilityController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $newId = $request->get('newId');
 
         try {
@@ -94,7 +96,8 @@ class AvailabilityController extends AdminBaseController
      * @Route("/product/availability/delete-confirm/{id}", requirements={"id" = "\d+"})
      * @param int $id
      */
-    public function deleteConfirmAction($id) {
+    public function deleteConfirmAction($id)
+    {
         try {
             $availability = $this->availabilityFacade->getById($id);
             $isAvailabilityDefault = $this->availabilityFacade->isAvailabilityDefault($availability);
@@ -137,7 +140,8 @@ class AvailabilityController extends AdminBaseController
      * @Route("/product/availability/setting/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $availabilities = $this->availabilityFacade->getAll();
         $form = $this->createForm(new AvailabilitySettingFormType($availabilities));
 

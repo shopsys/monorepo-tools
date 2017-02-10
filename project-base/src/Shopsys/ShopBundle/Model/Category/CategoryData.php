@@ -52,7 +52,8 @@ class CategoryData
      */
     public $image;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->name = [];
         $this->seoTitles = [];
         $this->seoMetaDescriptions = [];
@@ -66,7 +67,8 @@ class CategoryData
      * @param \Shopsys\ShopBundle\Model\Category\Category $category
      * @param \Shopsys\ShopBundle\Model\Category\CategoryDomain[] $categoryDomains
      */
-    public function setFromEntity(Category $category, array $categoryDomains) {
+    public function setFromEntity(Category $category, array $categoryDomains)
+    {
         $translations = $category->getTranslations();
         $names = [];
         foreach ($translations as $translate) {

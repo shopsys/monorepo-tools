@@ -24,7 +24,8 @@ class OrderTotalPrice
      * @param string $priceWithoutVat
      * @param string $productPriceWithVat
      */
-    public function __construct($priceWithVat, $priceWithoutVat, $productPriceWithVat) {
+    public function __construct($priceWithVat, $priceWithoutVat, $productPriceWithVat)
+    {
         $this->priceWithVat = $priceWithVat;
         $this->priceWithoutVat = $priceWithoutVat;
         $this->productPriceWithVat = $productPriceWithVat;
@@ -33,21 +34,24 @@ class OrderTotalPrice
     /**
      * @return string
      */
-    public function getPriceWithVat() {
+    public function getPriceWithVat()
+    {
         return $this->priceWithVat;
     }
 
     /**
      * @return string
      */
-    public function getPriceWithoutVat() {
+    public function getPriceWithoutVat()
+    {
         return $this->priceWithoutVat;
     }
 
     /**
      * @return string
      */
-    public function getProductPriceWithVat() {
+    public function getProductPriceWithVat()
+    {
         return $this->productPriceWithVat;
     }
 }

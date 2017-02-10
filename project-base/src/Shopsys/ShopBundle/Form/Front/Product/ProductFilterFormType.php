@@ -58,7 +58,8 @@ class ProductFilterFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $priceScale = 2;
         $priceTransformer = new MoneyToLocalizedStringTransformer($priceScale, false);
 
@@ -111,14 +112,16 @@ class ProductFilterFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return self::NAME;
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
             'data_class' => ProductFilterData::class,
@@ -130,28 +133,32 @@ class ProductFilterFormType extends AbstractType
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[]
      */
-    public function getParameterFilterChoices() {
+    public function getParameterFilterChoices()
+    {
         return $this->parameterFilterChoices;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
-    public function getBrandFilterChoices() {
+    public function getBrandFilterChoices()
+    {
         return $this->brandFilterChoices;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
      */
-    public function getFlagFilterChoices() {
+    public function getFlagFilterChoices()
+    {
         return $this->flagFilterChoices;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Filter\PriceRange
      */
-    public function getPriceRange() {
+    public function getPriceRange()
+    {
         return $this->priceRange;
     }
 }

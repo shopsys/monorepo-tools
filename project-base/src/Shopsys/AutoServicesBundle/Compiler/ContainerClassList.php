@@ -16,11 +16,13 @@ class ContainerClassList
      */
     private $serviceIdsByClass;
 
-    public function __construct($cacheDir) {
+    public function __construct($cacheDir)
+    {
         $this->cacheFilepath = $cacheDir . '/servicesByClass.json';
     }
 
-    public function load() {
+    public function load()
+    {
         if ($this->serviceIdsByClass === null) {
             if (file_exists($this->cacheFilepath)) {
                 $json = file_get_contents($this->cacheFilepath);
@@ -33,14 +35,16 @@ class ContainerClassList
         }
     }
 
-    public function clean() {
+    public function clean()
+    {
         $this->serviceIdsByClass = [];
         if (file_exists($this->cacheFilepath)) {
             unlink($this->cacheFilepath);
         }
     }
 
-    public function save() {
+    public function save()
+    {
         if ($this->serviceIdsByClass !== null) {
             foreach ($this->serviceIdsByClass as $class => $serviceIds) {
                 $this->serviceIdsByClass[$class] = array_unique($this->serviceIdsByClass[$class]);
@@ -52,7 +56,8 @@ class ContainerClassList
     /**
      * @return string[]
      */
-    public function getServicesIdsIndexedByClass() {
+    public function getServicesIdsIndexedByClass()
+    {
         $this->load();
         return $this->serviceIdsByClass;
     }
@@ -61,7 +66,8 @@ class ContainerClassList
      * @param string $class
      * @return string
      */
-    public function getServiceIdByClass($class) {
+    public function getServiceIdByClass($class)
+    {
         $this->load();
 
         if (!$this->hasClass($class)) {
@@ -79,7 +85,8 @@ class ContainerClassList
      * @param string $class
      * @return bool
      */
-    public function hasClass($class) {
+    public function hasClass($class)
+    {
         $this->load();
         return array_key_exists($class, $this->serviceIdsByClass);
     }
@@ -88,7 +95,8 @@ class ContainerClassList
      * @param string $serviceId
      * @param string $class
      */
-    public function addClass($serviceId, $class) {
+    public function addClass($serviceId, $class)
+    {
         $this->load();
 
         if (empty($class) || !is_string($class) || !$this->classOrInterfaceExists($class)) {
@@ -117,7 +125,8 @@ class ContainerClassList
      * @param string $classOrInterfaceName
      * @return bool
      */
-    private function classOrInterfaceExists($classOrInterfaceName) {
+    private function classOrInterfaceExists($classOrInterfaceName)
+    {
         return class_exists($classOrInterfaceName) || interface_exists($classOrInterfaceName);
     }
 }

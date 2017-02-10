@@ -17,7 +17,8 @@ abstract class AbstractPage
      */
     protected $tester;
 
-    public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester) {
+    public function __construct(StrictWebDriver $strictWebDriver, AcceptanceTester $tester)
+    {
         $this->webDriver = $strictWebDriver->webDriver;
         $this->tester = $tester;
     }

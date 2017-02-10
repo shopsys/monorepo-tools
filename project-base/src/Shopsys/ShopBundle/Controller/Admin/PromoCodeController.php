@@ -31,7 +31,8 @@ class PromoCodeController extends AdminBaseController
     /**
      * @Route("/promo-code/list")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->promoCodeInlineEdit->getGrid();
 
         return $this->render('@ShopsysShop/Admin/Content/PromoCode/list.html.twig', [
@@ -44,7 +45,8 @@ class PromoCodeController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $code = $this->promoCodeFacade->getById($id)->getCode();
 

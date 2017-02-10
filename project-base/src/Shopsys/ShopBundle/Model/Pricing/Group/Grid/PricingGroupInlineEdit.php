@@ -37,7 +37,8 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      * @return int
      */
-    protected function createEntityAndGetId($pricingGroupData) {
+    protected function createEntityAndGetId($pricingGroupData)
+    {
         $pricingGroup = $this->pricingGroupFacade->create($pricingGroupData, $this->selectedDomain->getId());
 
         return $pricingGroup->getId();
@@ -47,7 +48,8 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      * @param int $pricingGroupId
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
      */
-    protected function editEntity($pricingGroupId, $pricingGroupData) {
+    protected function editEntity($pricingGroupId, $pricingGroupData)
+    {
         $this->pricingGroupFacade->edit($pricingGroupId, $pricingGroupData);
     }
 
@@ -55,7 +57,8 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      * @param int|null $pricingGroupId
      * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData
      */
-    protected function getFormDataObject($pricingGroupId = null) {
+    protected function getFormDataObject($pricingGroupId = null)
+    {
         $pricingGroupData = new PricingGroupData();
 
         if ($pricingGroupId !== null) {
@@ -71,7 +74,8 @@ class PricingGroupInlineEdit extends AbstractGridInlineEdit
      * @param int $rowId
      * @return \Shopsys\ShopBundle\Form\Admin\Pricing\Group\PricingGroupFormType
      */
-    protected function getFormType($rowId) {
+    protected function getFormType($rowId)
+    {
         return new PricingGroupFormType();
     }
 }

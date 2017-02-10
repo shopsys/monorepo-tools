@@ -10,7 +10,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIsValidSearchTextData
      */
-    public function testIsValidSearchText($searchText, $expectedResult) {
+    public function testIsValidSearchText($searchText, $expectedResult)
+    {
         $tsqueryFactory = new TsqueryFactory();
 
         $result = $tsqueryFactory->isValidSearchText($searchText);
@@ -18,7 +19,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    public function getIsValidSearchTextData() {
+    public function getIsValidSearchTextData()
+    {
         return [
             [null, false],
             ['', false],
@@ -39,7 +41,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTsqueryWithAndConditionsData
      */
-    public function testGetTsqueryWithAndConditions($searchText, $expectedResult) {
+    public function testGetTsqueryWithAndConditions($searchText, $expectedResult)
+    {
         $tsqueryFactory = new TsqueryFactory();
 
         $result = $tsqueryFactory->getTsqueryWithAndConditions($searchText);
@@ -47,7 +50,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    public function getTsqueryWithAndConditionsData() {
+    public function getTsqueryWithAndConditionsData()
+    {
         return [
             [null, ''],
             ['', ''],
@@ -68,7 +72,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTsqueryWithAndConditionsAndPrefixMatchForLastWordData
      */
-    public function testGetTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText, $expectedResult) {
+    public function testGetTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText, $expectedResult)
+    {
         $tsqueryFactory = new TsqueryFactory();
 
         $result = $tsqueryFactory->getTsqueryWithAndConditionsAndPrefixMatchForLastWord($searchText);
@@ -76,7 +81,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    public function getTsqueryWithAndConditionsAndPrefixMatchForLastWordData() {
+    public function getTsqueryWithAndConditionsAndPrefixMatchForLastWordData()
+    {
         return [
             [null, ''],
             ['', ''],
@@ -97,7 +103,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTsqueryWithOrConditionsData
      */
-    public function testGetTsqueryWithOrConditions($searchText, $expectedResult) {
+    public function testGetTsqueryWithOrConditions($searchText, $expectedResult)
+    {
         $tsqueryFactory = new TsqueryFactory();
 
         $result = $tsqueryFactory->getTsqueryWithOrConditions($searchText);
@@ -105,7 +112,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    public function getTsqueryWithOrConditionsData() {
+    public function getTsqueryWithOrConditionsData()
+    {
         return [
             [null, ''],
             ['', ''],
@@ -126,7 +134,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider getTsqueryWithOrConditionsAndPrefixMatchForLastWordData
      */
-    public function testGetTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText, $expectedResult) {
+    public function testGetTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText, $expectedResult)
+    {
         $tsqueryFactory = new TsqueryFactory();
 
         $result = $tsqueryFactory->getTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText);
@@ -134,7 +143,8 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedResult, $result);
     }
 
-    public function getTsqueryWithOrConditionsAndPrefixMatchForLastWordData() {
+    public function getTsqueryWithOrConditionsAndPrefixMatchForLastWordData()
+    {
         return [
             [null, ''],
             ['', ''],

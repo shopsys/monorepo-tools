@@ -24,7 +24,8 @@ class OrderFacadeTest extends DatabaseTestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function testCreate() {
+    public function testCreate()
+    {
         $cartFacade = $this->getContainer()->get(CartFacade::class);
         /* @var $cartFacade \Shopsys\ShopBundle\Model\Cart\CartFacade */
         $cartService = $this->getContainer()->get(CartService::class);
@@ -115,7 +116,8 @@ class OrderFacadeTest extends DatabaseTestCase
         $this->assertCount(3, $orderFromDb->getItems());
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $orderFacade = $this->getContainer()->get(OrderFacade::class);
         /* @var $orderFacade \Shopsys\ShopBundle\Model\Order\OrderFacade */
         $orderRepository = $this->getContainer()->get(OrderRepository::class);

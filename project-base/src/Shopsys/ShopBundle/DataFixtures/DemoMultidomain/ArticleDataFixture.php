@@ -16,7 +16,8 @@ class ArticleDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         // @codingStandardsIgnoreStart
         $articleData = new ArticleData();
 
@@ -52,7 +53,8 @@ class ArticleDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Article\ArticleData $articleData
      * @param string|null $referenceName
      */
-    private function createArticle(ArticleData $articleData, $referenceName = null) {
+    private function createArticle(ArticleData $articleData, $referenceName = null)
+    {
         $articleFacade = $this->get(ArticleFacade::class);
         /* @var $articleFacade \Shopsys\ShopBundle\Model\Article\ArticleFacade */
 

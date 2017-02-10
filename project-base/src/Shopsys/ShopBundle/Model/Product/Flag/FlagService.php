@@ -11,7 +11,8 @@ class FlagService
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
      */
-    public function create(FlagData $flagData) {
+    public function create(FlagData $flagData)
+    {
         return new Flag($flagData);
     }
 
@@ -20,7 +21,8 @@ class FlagService
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
      */
-    public function edit(Flag $flag, FlagData $flagData) {
+    public function edit(Flag $flag, FlagData $flagData)
+    {
         $flag->edit($flagData);
 
         return $flag;

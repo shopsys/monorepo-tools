@@ -10,7 +10,8 @@ class Version20160601124500 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function up(Schema $schema) {
+    public function up(Schema $schema)
+    {
         $this->sql('CREATE TABLE brand_translations (
             id SERIAL NOT NULL, translatable_id INT NOT NULL, 
             description TEXT DEFAULT NULL, 
@@ -27,6 +28,7 @@ class Version20160601124500 extends AbstractMigration
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      */
-    public function down(Schema $schema) {
+    public function down(Schema $schema)
+    {
     }
 }

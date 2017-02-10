@@ -11,7 +11,8 @@ class CustomerCommunicationFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'customer_communication_form';
     }
 
@@ -19,7 +20,8 @@ class CustomerCommunicationFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('content', FormType::WYSIWYG, ['required' => false])
             ->add('save', FormType::SUBMIT);

@@ -24,7 +24,8 @@ class LocalizationExtension extends \Twig_Extension
      */
     private $assetPackages;
 
-    public function __construct(ContainerInterface $container, Packages $assetPackages) {
+    public function __construct(ContainerInterface $container, Packages $assetPackages)
+    {
         $this->container = $container;
         $this->assetPackages = $assetPackages;
 
@@ -36,7 +37,8 @@ class LocalizationExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('localeFlag', [$this, 'getLocaleFlagHtml'], ['is_safe' => ['html']]),
         ];
@@ -46,7 +48,8 @@ class LocalizationExtension extends \Twig_Extension
      * @param string $locale
      * @return string
      */
-    public function getLocaleFlagHtml($locale, $showTitle = true) {
+    public function getLocaleFlagHtml($locale, $showTitle = true)
+    {
         $src = $this->assetPackages->getUrl('assets/admin/images/flags/' . $locale . '.png');
 
         if ($showTitle) {
@@ -66,7 +69,8 @@ class LocalizationExtension extends \Twig_Extension
      * @param string $locale
      * @return string
      */
-    private function getTitle($locale) {
+    private function getTitle($locale)
+    {
         try {
             $title = $this->localization->getLanguageName($locale);
         } catch (\Shopsys\ShopBundle\Model\Localization\Exception\InvalidLocaleException $e) {
@@ -79,7 +83,8 @@ class LocalizationExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'localization';
     }
 }

@@ -15,14 +15,16 @@ class CookiesExtension extends \Twig_Extension
     /**
      * @param \Shopsys\ShopBundle\Model\Cookies\CookiesFacade $cookiesFacade
      */
-    public function __construct(CookiesFacade $cookiesFacade) {
+    public function __construct(CookiesFacade $cookiesFacade)
+    {
         $this->cookiesFacade = $cookiesFacade;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('isCookiesConsentGiven', [$this, 'isCookiesConsentGiven']),
             new Twig_SimpleFunction('findCookiesArticleByDomainId', [$this, 'findCookiesArticleByDomainId']),
@@ -32,14 +34,16 @@ class CookiesExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'cookies';
     }
 
     /**
      * @return bool
      */
-    public function isCookiesConsentGiven() {
+    public function isCookiesConsentGiven()
+    {
         return $this->cookiesFacade->isCookiesConsentGiven();
     }
 
@@ -47,7 +51,8 @@ class CookiesExtension extends \Twig_Extension
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Article\Article|null
      */
-    public function findCookiesArticleByDomainId($domainId) {
+    public function findCookiesArticleByDomainId($domainId)
+    {
         return $this->cookiesFacade->findCookiesArticleByDomainId($domainId);
     }
 }

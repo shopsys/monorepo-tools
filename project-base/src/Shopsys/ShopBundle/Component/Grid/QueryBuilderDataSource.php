@@ -23,7 +23,8 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param string $rowIdSourceColumnName
      */
-    public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName) {
+    public function __construct(QueryBuilder $queryBuilder, $rowIdSourceColumnName)
+    {
         $this->queryBuilder = $queryBuilder;
         $this->rowIdSourceColumnName = $rowIdSourceColumnName;
     }
@@ -58,7 +59,8 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param int $rowId
      * @return array
      */
-    public function getOneRow($rowId) {
+    public function getOneRow($rowId)
+    {
         $queryBuilder = clone $this->queryBuilder;
         $this->prepareQueryWithOneRow($queryBuilder, $rowId);
 
@@ -68,7 +70,8 @@ class QueryBuilderDataSource implements DataSourceInterface
     /**
      * @return int
      */
-    public function getTotalRowsCount() {
+    public function getTotalRowsCount()
+    {
         $queryPaginator = new QueryPaginator($this->queryBuilder, GroupedScalarHydrator::HYDRATION_MODE);
         return $queryPaginator->getTotalCount();
     }
@@ -78,7 +81,8 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param string $orderSourceColumnName
      * @param string $orderDirection
      */
-    private function addQueryOrder(QueryBuilder $queryBuilder, $orderSourceColumnName, $orderDirection) {
+    private function addQueryOrder(QueryBuilder $queryBuilder, $orderSourceColumnName, $orderDirection)
+    {
         $queryBuilder->orderBy($orderSourceColumnName, $orderDirection);
     }
 
@@ -86,7 +90,8 @@ class QueryBuilderDataSource implements DataSourceInterface
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @param int $rowId
      */
-    private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId) {
+    private function prepareQueryWithOneRow(QueryBuilder $queryBuilder, $rowId)
+    {
         $queryBuilder
             ->andWhere($this->rowIdSourceColumnName . ' = :rowId')
             ->setParameter('rowId', $rowId)
@@ -98,7 +103,8 @@ class QueryBuilderDataSource implements DataSourceInterface
     /**
      * @return string
      */
-    public function getRowIdSourceColumnName() {
+    public function getRowIdSourceColumnName()
+    {
         return $this->rowIdSourceColumnName;
     }
 }

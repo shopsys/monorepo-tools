@@ -14,14 +14,16 @@ class NewsletterController extends FrontBaseController
      */
     private $newsletterFacade;
 
-    public function __construct(NewsletterFacade $newsletterFacade) {
+    public function __construct(NewsletterFacade $newsletterFacade)
+    {
         $this->newsletterFacade = $newsletterFacade;
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function subscribeEmailAction(Request $request) {
+    public function subscribeEmailAction(Request $request)
+    {
         $form = $this->createSubscriptionForm();
         $form->handleRequest($request);
 
@@ -36,7 +38,8 @@ class NewsletterController extends FrontBaseController
         ]);
     }
 
-    public function subscriptionAction() {
+    public function subscriptionAction()
+    {
         $form = $this->createSubscriptionForm();
 
         return $this->render('@ShopsysShop/Front/Inline/Newsletter/subscription.html.twig', [
@@ -48,7 +51,8 @@ class NewsletterController extends FrontBaseController
     /**
      * @return \Symfony\Component\Form\Form
      */
-    private function createSubscriptionForm() {
+    private function createSubscriptionForm()
+    {
         $formOptions = ['action' => $this->generateUrl('front_newsletter_send')];
         return $this->createForm(new SubscriptionFormType(), null, $formOptions);
     }

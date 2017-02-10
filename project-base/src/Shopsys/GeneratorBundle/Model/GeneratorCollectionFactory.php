@@ -17,7 +17,8 @@ class GeneratorCollectionFactory
      */
     private $skeletonDirs;
 
-    public function __construct(array $skeletonDirs, RepositoryGenerator $repositoryGenerator) {
+    public function __construct(array $skeletonDirs, RepositoryGenerator $repositoryGenerator)
+    {
         $this->skeletonDirs = $skeletonDirs;
         $this->repositoryGenerator = $repositoryGenerator;
     }
@@ -25,7 +26,8 @@ class GeneratorCollectionFactory
     /**
      * @return \Shopsys\GeneratorBundle\Model\GeneratorCollection
      */
-    public function create() {
+    public function create()
+    {
         $generatorCollection = new GeneratorCollection($this->skeletonDirs);
         $generatorCollection->addGenerator($this->repositoryGenerator);
 

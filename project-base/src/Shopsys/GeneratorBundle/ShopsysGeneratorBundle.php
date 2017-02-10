@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShopsysGeneratorBundle extends Bundle
 {
-    public function build(ContainerBuilder $containerBuilder) {
+    public function build(ContainerBuilder $containerBuilder)
+    {
     }
 }

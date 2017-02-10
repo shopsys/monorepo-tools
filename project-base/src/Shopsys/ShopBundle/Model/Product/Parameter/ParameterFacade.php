@@ -43,7 +43,8 @@ class ParameterFacade
      * @param int $parameterId
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function getById($parameterId) {
+    public function getById($parameterId)
+    {
         return $this->parameterRepository->getById($parameterId);
     }
 
@@ -51,7 +52,8 @@ class ParameterFacade
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function create(ParameterData $parameterData) {
+    public function create(ParameterData $parameterData)
+    {
         $parameter = $this->parameterService->create($parameterData);
         $this->em->persist($parameter);
         $this->em->flush($parameter);
@@ -63,7 +65,8 @@ class ParameterFacade
      * @param string[locale] $namesByLocale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */
-    public function findParameterByNames(array $namesByLocale) {
+    public function findParameterByNames(array $namesByLocale)
+    {
         return $this->parameterRepository->findParameterByNames($namesByLocale);
     }
 
@@ -72,7 +75,8 @@ class ParameterFacade
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterData $parameterData
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function edit($parameterId, ParameterData $parameterData) {
+    public function edit($parameterId, ParameterData $parameterData)
+    {
         $parameter = $this->parameterRepository->getById($parameterId);
         $this->parameterService->edit($parameter, $parameterData);
         $this->em->flush();
@@ -83,7 +87,8 @@ class ParameterFacade
     /**
      * @param int $parameterId
      */
-    public function deleteById($parameterId) {
+    public function deleteById($parameterId)
+    {
         $parameter = $this->parameterRepository->getById($parameterId);
 
         $this->em->remove($parameter);

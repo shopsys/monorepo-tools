@@ -30,7 +30,8 @@ class IndependentPaymentVisibilityCalculation
      * @param int $domainId
      * @return bool
      */
-    public function isIndependentlyVisible(Payment $payment, $domainId) {
+    public function isIndependentlyVisible(Payment $payment, $domainId)
+    {
         $locale = $this->domain->getDomainConfigById($domainId)->getLocale();
 
         if (strlen($payment->getName($locale)) === 0) {
@@ -53,7 +54,8 @@ class IndependentPaymentVisibilityCalculation
      * @param int $domainId
      * @return bool
      */
-    private function isOnDomain(Payment $payment, $domainId) {
+    private function isOnDomain(Payment $payment, $domainId)
+    {
         $paymentDomains = $this->paymentRepository->getPaymentDomainsByPayment($payment);
         foreach ($paymentDomains as $paymentDomain) {
             if ($paymentDomain->getDomainId() === $domainId) {

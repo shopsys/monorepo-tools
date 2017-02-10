@@ -18,27 +18,32 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
      */
     private $productAvailabilityRecalculator;
 
-    public function __construct(ProductAvailabilityRecalculator $productAvailabilityRecalculator) {
+    public function __construct(ProductAvailabilityRecalculator $productAvailabilityRecalculator)
+    {
         $this->productAvailabilityRecalculator = $productAvailabilityRecalculator;
     }
 
     /**
      * @inheritdoc
      */
-    public function setLogger(Logger $logger) {
+    public function setLogger(Logger $logger)
+    {
         $this->logger = $logger;
     }
 
-    public function sleep() {
+    public function sleep()
+    {
     }
 
-    public function wakeUp() {
+    public function wakeUp()
+    {
     }
 
     /**
      * @inheritdoc
      */
-    public function iterate() {
+    public function iterate()
+    {
         if ($this->productAvailabilityRecalculator->runBatchOfScheduledDelayedRecalculations()) {
             $this->logger->debug('Batch is recalculated.');
             return true;

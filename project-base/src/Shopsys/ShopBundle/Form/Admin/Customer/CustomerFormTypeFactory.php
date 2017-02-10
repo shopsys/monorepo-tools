@@ -41,7 +41,8 @@ class CustomerFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType
      */
-    public function create($scenario, User $user = null) {
+    public function create($scenario, User $user = null)
+    {
         if ($scenario === CustomerFormType::SCENARIO_EDIT) {
             $allPricingGroups = $this->pricingGroupRepository->getPricingGroupsByDomainId($user->getDomainId());
         } else {

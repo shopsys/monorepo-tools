@@ -29,7 +29,8 @@ class Domain
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
      * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
      */
-    public function __construct(array $domainConfigs, Setting $setting) {
+    public function __construct(array $domainConfigs, Setting $setting)
+    {
         $this->domainConfigs = $domainConfigs;
         $this->setting = $setting;
     }
@@ -37,42 +38,48 @@ class Domain
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->getCurrentDomainConfig()->getId();
     }
 
     /**
      * @return string
      */
-    public function getLocale() {
+    public function getLocale()
+    {
         return $this->getCurrentDomainConfig()->getLocale();
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->getCurrentDomainConfig()->getName();
     }
 
     /**
      * @return string
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->getCurrentDomainConfig()->getUrl();
     }
 
     /**
      * @return bool
      */
-    public function isHttps() {
+    public function isHttps()
+    {
         return $this->getCurrentDomainConfig()->isHttps();
     }
 
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         $domainConfigsWithDataCreated = [];
         foreach ($this->domainConfigs as $domainConfig) {
             $domainId = $domainConfig->getId();
@@ -89,7 +96,8 @@ class Domain
     /**
      * @return int[]
      */
-    public function getAllIds() {
+    public function getAllIds()
+    {
         $ids = [];
         foreach ($this->getAll() as $domainConfig) {
             $ids[] = $domainConfig->getId();
@@ -101,7 +109,8 @@ class Domain
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[]
      */
-    public function getAllIncludingDomainConfigsWithoutDataCreated() {
+    public function getAllIncludingDomainConfigsWithoutDataCreated()
+    {
         return $this->domainConfigs;
     }
 
@@ -109,7 +118,8 @@ class Domain
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    public function getDomainConfigById($domainId) {
+    public function getDomainConfigById($domainId)
+    {
         foreach ($this->domainConfigs as $domainConfig) {
             if ($domainId === $domainConfig->getId()) {
                 return $domainConfig;
@@ -122,14 +132,16 @@ class Domain
     /**
      * @param int $domainId
      */
-    public function switchDomainById($domainId) {
+    public function switchDomainById($domainId)
+    {
         $this->currentDomainConfig = $this->getDomainConfigById($domainId);
     }
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function switchDomainByRequest(Request $request) {
+    public function switchDomainByRequest(Request $request)
+    {
         $url = $request->getUriForPath('');
 
         foreach ($this->domainConfigs as $domainConfig) {
@@ -145,7 +157,8 @@ class Domain
     /**
      * @return \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig
      */
-    public function getCurrentDomainConfig() {
+    public function getCurrentDomainConfig()
+    {
         if ($this->currentDomainConfig === null) {
             throw new \Shopsys\ShopBundle\Component\Domain\Exception\NoDomainSelectedException();
         }
@@ -156,7 +169,8 @@ class Domain
     /**
      * @return bool
      */
-    public function isMultidomain() {
+    public function isMultidomain()
+    {
         return count($this->getAll()) > 1;
     }
 }

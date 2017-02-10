@@ -12,7 +12,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @param int $quantity
      */
-    public function assertProductQuantity($productName, $quantity) {
+    public function assertProductQuantity($productName, $quantity)
+    {
         $quantityField = $this->getQuantityFieldByProductName($productName);
         $this->tester->seeInFieldByElement($quantity, $quantityField);
     }
@@ -21,7 +22,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @param string $formattedPriceWithCurrency
      */
-    public function assertProductPrice($productName, $formattedPriceWithCurrency) {
+    public function assertProductPrice($productName, $formattedPriceWithCurrency)
+    {
         $productPriceCell = $this->getProductPriceCellByName($productName);
         $this->tester->seeInElement($formattedPriceWithCurrency, $productPriceCell);
     }
@@ -29,7 +31,8 @@ class CartPage extends AbstractPage
     /**
      * @param string $formattedPriceWithCurrency
      */
-    public function assertTotalPriceWithVat($formattedPriceWithCurrency) {
+    public function assertTotalPriceWithVat($formattedPriceWithCurrency)
+    {
         $orderPriceCell = $this->getTotalProductsPriceCell();
         $this->tester->seeInElement('Celková cena s DPH: ' . $formattedPriceWithCurrency, $orderPriceCell);
     }
@@ -38,7 +41,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @param int $quantity
      */
-    public function changeProductQuantity($productName, $quantity) {
+    public function changeProductQuantity($productName, $quantity)
+    {
         $quantityField = $this->getQuantityFieldByProductName($productName);
         $this->tester->fillFieldByElement($quantityField, $quantity);
         $this->tester->pressKeysByElement($quantityField, WebDriverKeys::ENTER);
@@ -48,7 +52,8 @@ class CartPage extends AbstractPage
     /**
      * @param string $productName
      */
-    public function removeProductFromCart($productName) {
+    public function removeProductFromCart($productName)
+    {
         $row = $this->findProductRowInCartByName($productName);
         $removingButton = $row->findElement(WebDriverBy::cssSelector('.js-cart-item-remove-button'));
         $this->tester->clickByElement($removingButton);
@@ -57,14 +62,16 @@ class CartPage extends AbstractPage
     /**
      * @param string $productName
      */
-    public function assertProductIsInCartByName($productName) {
+    public function assertProductIsInCartByName($productName)
+    {
         $this->tester->see($productName, WebDriverBy::cssSelector('.js-cart-item-name'));
     }
 
     /**
      * @param string $productName
      */
-    public function assertProductIsNotInCartByName($productName) {
+    public function assertProductIsNotInCartByName($productName)
+    {
         $this->tester->dontSee($productName, WebDriverBy::cssSelector('.js-cart-item-name'));
     }
 
@@ -72,7 +79,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function getQuantityFieldByProductName($productName) {
+    private function getQuantityFieldByProductName($productName)
+    {
         $row = $this->findProductRowInCartByName($productName);
 
         return $row->findElement(WebDriverBy::cssSelector('input[name^="cart_form[quantities]"]'));
@@ -82,7 +90,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function findProductRowInCartByName($productName) {
+    private function findProductRowInCartByName($productName)
+    {
         $rows = $this->webDriver->findElements(WebDriverBy::cssSelector('.js-cart-item'));
 
         foreach ($rows as $row) {
@@ -105,7 +114,8 @@ class CartPage extends AbstractPage
      * @param string $productName
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function getProductPriceCellByName($productName) {
+    private function getProductPriceCellByName($productName)
+    {
         $row = $this->findProductRowInCartByName($productName);
 
         return $row->findElement(WebDriverBy::cssSelector('.js-cart-item-total-price'));
@@ -114,7 +124,8 @@ class CartPage extends AbstractPage
     /**
      * @return \Facebook\WebDriver\WebDriverElement
      */
-    private function getTotalProductsPriceCell() {
+    private function getTotalProductsPriceCell()
+    {
         return $this->webDriver->findElement(WebDriverBy::cssSelector('.js-cart-total-price'));
     }
 }

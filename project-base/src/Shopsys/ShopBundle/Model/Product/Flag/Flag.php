@@ -48,7 +48,8 @@ class Flag extends AbstractTranslatableEntity
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      */
-    public function __construct(FlagData $flagData) {
+    public function __construct(FlagData $flagData)
+    {
         $this->translations = new ArrayCollection();
         $this->setTranslations($flagData);
         $this->rgbColor = $flagData->rgbColor;
@@ -58,7 +59,8 @@ class Flag extends AbstractTranslatableEntity
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -66,28 +68,32 @@ class Flag extends AbstractTranslatableEntity
      * @param string|null $locale
      * @return string
      */
-    public function getName($locale = null) {
+    public function getName($locale = null)
+    {
         return $this->translation($locale)->getName();
     }
 
     /**
      * @return string
      */
-    public function getRgbColor() {
+    public function getRgbColor()
+    {
         return $this->rgbColor;
     }
 
     /**
      * @return bool
      */
-    public function isVisible() {
+    public function isVisible()
+    {
         return $this->visible;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      */
-    private function setTranslations(FlagData $flagData) {
+    private function setTranslations(FlagData $flagData)
+    {
         foreach ($flagData->name as $locale => $name) {
             $this->translation($locale)->setName($name);
         }
@@ -96,14 +102,16 @@ class Flag extends AbstractTranslatableEntity
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Flag\FlagTranslation
      */
-    protected function createTranslation() {
+    protected function createTranslation()
+    {
         return new FlagTranslation();
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      */
-    public function edit(FlagData $flagData) {
+    public function edit(FlagData $flagData)
+    {
         $this->setTranslations($flagData);
         $this->rgbColor = $flagData->rgbColor;
         $this->visible = $flagData->visible;

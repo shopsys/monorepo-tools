@@ -18,7 +18,8 @@ class FileThumbnailInfo
      * @param string|null $iconType
      * @param string|null $imageUri
      */
-    public function __construct($iconType, $imageUri = null) {
+    public function __construct($iconType, $imageUri = null)
+    {
         $this->iconType = $iconType;
         $this->imageUri = $imageUri;
     }
@@ -26,14 +27,16 @@ class FileThumbnailInfo
     /**
      * @return string|null
      */
-    public function getIconType() {
+    public function getIconType()
+    {
         return $this->iconType;
     }
 
     /**
      * @return string|null
      */
-    public function getImageUri() {
+    public function getImageUri()
+    {
         return $this->imageUri;
     }
 }

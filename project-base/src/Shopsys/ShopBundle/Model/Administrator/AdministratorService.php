@@ -30,7 +30,8 @@ class AdministratorService
      * @param string $password
      * @return string
      */
-    public function getPasswordHash(Administrator $administrator, $password) {
+    public function getPasswordHash(Administrator $administrator, $password)
+    {
         $encoder = $this->encoderFactory->getEncoder($administrator);
         $passwordHash = $encoder->encodePassword($password, $administrator->getSalt());
 
@@ -41,7 +42,8 @@ class AdministratorService
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      * @param int $adminCountExcludingSuperadmin
      */
-    public function delete(Administrator $administrator, $adminCountExcludingSuperadmin) {
+    public function delete(Administrator $administrator, $adminCountExcludingSuperadmin)
+    {
         if ($adminCountExcludingSuperadmin === 1) {
             throw new \Shopsys\ShopBundle\Model\Administrator\Exception\DeletingLastAdministratorException();
         }

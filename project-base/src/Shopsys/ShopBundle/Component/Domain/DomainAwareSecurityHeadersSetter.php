@@ -12,14 +12,16 @@ class DomainAwareSecurityHeadersSetter
      */
     private $domain;
 
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         if (!$event->isMasterRequest()) {
             return;
         }

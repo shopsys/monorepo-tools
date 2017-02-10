@@ -11,7 +11,8 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver;
  */
 class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 {
-    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function getBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         switch ($routeName) {
             case 'front_customer_edit':
                 return [
@@ -57,7 +58,8 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * @param \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbResolver $frontBreadcrumbResolver
      */
-    public function registerAll(BreadcrumbResolver $frontBreadcrumbResolver) {
+    public function registerAll(BreadcrumbResolver $frontBreadcrumbResolver)
+    {
         $frontBreadcrumbResolver->registerGenerator('front_customer_edit', $this);
         $frontBreadcrumbResolver->registerGenerator('front_customer_orders', $this);
         $frontBreadcrumbResolver->registerGenerator('front_registration_reset_password', $this);
@@ -76,7 +78,8 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
      * @param string $code
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem
      */
-    private function getBreacrumbItemForErrorPage($code) {
+    private function getBreacrumbItemForErrorPage($code)
+    {
         $breadcrumbName = t('Oops! Error occurred');
         if ($code === '404') {
             $breadcrumbName = t('Page not found');

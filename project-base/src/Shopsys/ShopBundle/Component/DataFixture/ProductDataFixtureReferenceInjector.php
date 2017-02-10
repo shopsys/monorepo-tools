@@ -54,7 +54,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getVatReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getVatReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'high' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_HIGH),
             'low' => $persistentReferenceFacade->getReference(VatDataFixture::VAT_LOW),
@@ -67,7 +68,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getAvailabilityReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getAvailabilityReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'in-stock' => $persistentReferenceFacade->getReference(AvailabilityDataFixture::IN_STOCK),
             'out-of-stock' => $persistentReferenceFacade->getReference(AvailabilityDataFixture::OUT_OF_STOCK),
@@ -79,7 +81,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getCategoryReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getCategoryReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             CategoryDataFixture::ELECTRONICS => $persistentReferenceFacade->getReference(
                 CategoryDataFixture::PREFIX . CategoryDataFixture::ELECTRONICS
@@ -121,7 +124,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getFlagReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getFlagReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'action' => $persistentReferenceFacade->getReference(FlagDataFixture::ACTION_PRODUCT),
             'new' => $persistentReferenceFacade->getReference(FlagDataFixture::NEW_PRODUCT),
@@ -133,7 +137,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getBrandReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getBrandReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'apple' => $persistentReferenceFacade->getReference(BrandDataFixture::APPLE),
             'canon' => $persistentReferenceFacade->getReference(BrandDataFixture::CANON),
@@ -166,7 +171,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getUnitReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getUnitReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'pcs' => $persistentReferenceFacade->getReference(BaseUnitDataFixture::PCS),
             'm3' => $persistentReferenceFacade->getReference(DemoUnitDataFixture::M3),
@@ -177,7 +183,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getPricingGroupReferencesForFirstDomain(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getPricingGroupReferencesForFirstDomain(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1),
             'partner_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::PARTNER_DOMAIN_1),
@@ -189,7 +196,8 @@ class ProductDataFixtureReferenceInjector
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceFacade $persistentReferenceFacade
      * @return string[]
      */
-    private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade) {
+    private function getPricingGroupReferences(PersistentReferenceFacade $persistentReferenceFacade)
+    {
         return [
             'ordinary_domain_1' => $persistentReferenceFacade->getReference(DemoPricingGroupDataFixture::ORDINARY_DOMAIN_1),
             'ordinary_domain_2' => $persistentReferenceFacade->getReference(MultidomainPricingGroupDataFixture::ORDINARY_DOMAIN_2),
@@ -202,7 +210,8 @@ class ProductDataFixtureReferenceInjector
     /**
      * @return string[]
      */
-    public static function getDependenciesForFirstDomain() {
+    public static function getDependenciesForFirstDomain()
+    {
         return [
             FulltextTriggersDataFixture::class,
             VatDataFixture::class,
@@ -218,7 +227,8 @@ class ProductDataFixtureReferenceInjector
     /**
      * @return string[]
      */
-    public static function getDependenciesForMultidomain() {
+    public static function getDependenciesForMultidomain()
+    {
         return [
             MultidomainPricingGroupDataFixture::class,
         ];

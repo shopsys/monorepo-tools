@@ -25,7 +25,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function testCalculatePreviewWithTransportAndPayment() {
+    public function testCalculatePreviewWithTransportAndPayment()
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));
@@ -108,7 +109,8 @@ class OrderPreviewCalculationTest extends FunctionalTestCase
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function testCalculatePreviewWithoutTransportAndPayment() {
+    public function testCalculatePreviewWithoutTransportAndPayment()
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
         $vat = new Vat(new VatData('vatName', 20));

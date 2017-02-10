@@ -43,7 +43,8 @@ class FlagFacade
      * @param int $flagId
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
      */
-    public function getById($flagId) {
+    public function getById($flagId)
+    {
         return $this->flagRepository->getById($flagId);
     }
 
@@ -51,7 +52,8 @@ class FlagFacade
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
      */
-    public function create(FlagData $flagData) {
+    public function create(FlagData $flagData)
+    {
         $flag = $this->flagService->create($flagData);
         $this->em->persist($flag);
         $this->em->flush();
@@ -64,7 +66,8 @@ class FlagFacade
      * @param \Shopsys\ShopBundle\Model\Product\Flag\FlagData $flagData
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag
      */
-    public function edit($flagId, FlagData $flagData) {
+    public function edit($flagId, FlagData $flagData)
+    {
         $flag = $this->flagRepository->getById($flagId);
         $this->flagService->edit($flag, $flagData);
         $this->em->flush();
@@ -75,7 +78,8 @@ class FlagFacade
     /**
      * @param int $flagId
      */
-    public function deleteById($flagId) {
+    public function deleteById($flagId)
+    {
         $flag = $this->flagRepository->getById($flagId);
 
         $this->em->remove($flag);
@@ -85,7 +89,8 @@ class FlagFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Flag\Flag[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->flagRepository->getAll();
     }
 }

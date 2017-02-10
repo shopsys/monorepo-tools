@@ -22,7 +22,8 @@ class UserNotFoundByEmailAndDomainException extends UserNotFoundException
      * @param int $domainId
      * @param \Exception|null $previous
      */
-    public function __construct($email, $domainId, Exception $previous = null) {
+    public function __construct($email, $domainId, Exception $previous = null)
+    {
         parent::__construct('User with email "' . $email . '" on domain "' . $domainId . '" not found.', $previous);
 
         $this->email = $email;
@@ -32,14 +33,16 @@ class UserNotFoundByEmailAndDomainException extends UserNotFoundException
     /**
      * @return string
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 }

@@ -14,7 +14,8 @@ class UnitDataFixture extends AbstractReferenceFixture
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $unitData = new UnitData();
 
         $unitData->name = ['cs' => 'ks', 'en' => 'pcs'];
@@ -25,7 +26,8 @@ class UnitDataFixture extends AbstractReferenceFixture
      * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
      * @param string|null $referenceName
      */
-    private function createUnit(UnitData $unitData, $referenceName = null) {
+    private function createUnit(UnitData $unitData, $referenceName = null)
+    {
         $unitFacade = $this->get(UnitFacade::class);
         /* @var $unitFacade \Shopsys\ShopBundle\Model\Product\Unit\UnitFacade */
 

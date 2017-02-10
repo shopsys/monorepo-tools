@@ -34,7 +34,8 @@ class TransportDetailFactory
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @return \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetail
      */
-    public function createDetailForTransportWithIndependentPrices(Transport $transport) {
+    public function createDetailForTransportWithIndependentPrices(Transport $transport)
+    {
         return new TransportDetail(
             $transport,
             $this->getIndependentPrices($transport)
@@ -45,7 +46,8 @@ class TransportDetailFactory
      * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $transports
      * @return \Shopsys\ShopBundle\Model\Transport\Detail\TransportDetail[]
      */
-    public function createDetailsForTransportsWithIndependentPrices(array $transports) {
+    public function createDetailsForTransportsWithIndependentPrices(array $transports)
+    {
         $details = [];
 
         foreach ($transports as $transport) {
@@ -62,7 +64,8 @@ class TransportDetailFactory
      * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    private function getIndependentPrices(Transport $transport) {
+    private function getIndependentPrices(Transport $transport)
+    {
         $prices = [];
         foreach ($transport->getPrices() as $transportInputPrice) {
             $currency = $transportInputPrice->getCurrency();

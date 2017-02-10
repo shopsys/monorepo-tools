@@ -10,7 +10,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class LoginServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCheckLoginProcessWithRequestError() {
+    public function testCheckLoginProcessWithRequestError()
+    {
         $loginService = $this->getLoginService();
 
         $requestMock = $this->getMock('\Symfony\Component\HttpFoundation\Request');
@@ -25,7 +26,8 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
         $loginService->checkLoginProcess($requestMock);
     }
 
-    public function testCheckLoginProcessWithSessionError() {
+    public function testCheckLoginProcessWithSessionError()
+    {
         $loginService = $this->getLoginService();
 
         $sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -44,7 +46,8 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
         $loginService->checkLoginProcess($requestMock);
     }
 
-    public function testCheckLoginProcessWithoutSessionError() {
+    public function testCheckLoginProcessWithoutSessionError()
+    {
         $loginService = $this->getLoginService();
 
         $sessionMock = $this->getMock('\Symfony\Component\HttpFoundation\Session\SessionInterface');
@@ -65,7 +68,8 @@ class LoginServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @return \Shopsys\ShopBundle\Model\Security\LoginService
      */
-    private function getLoginService() {
+    private function getLoginService()
+    {
         $tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
         $traceableEventDispatcherMock = $this->getMock(TraceableEventDispatcher::class, [], [], '', false);
 

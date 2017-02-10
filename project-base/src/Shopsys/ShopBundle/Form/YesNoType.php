@@ -24,7 +24,8 @@ class YesNoType extends AbstractType
     /**
      * {@inheritDoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         parent::buildForm($builder, $options);
 
         // workaround for ChoiceType issue: https://github.com/symfony/symfony/issues/15573
@@ -34,7 +35,8 @@ class YesNoType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'choice_list' => new IndexedChoiceList(
                 [true, false],
@@ -54,14 +56,16 @@ class YesNoType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'choice';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'yes_no';
     }
 }

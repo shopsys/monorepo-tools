@@ -15,7 +15,8 @@ class DuplicateTypeNameException extends Exception implements ImageConfigExcepti
      * @param string|null $typeName
      * @param \Exception|null $previous
      */
-    public function __construct($typeName = null, Exception $previous = null) {
+    public function __construct($typeName = null, Exception $previous = null)
+    {
         $this->typeName = $typeName;
 
         if ($this->typeName === null) {
@@ -29,7 +30,8 @@ class DuplicateTypeNameException extends Exception implements ImageConfigExcepti
     /**
      * @return string|null
      */
-    public function getTypeName() {
+    public function getTypeName()
+    {
         return $this->typeName;
     }
 }

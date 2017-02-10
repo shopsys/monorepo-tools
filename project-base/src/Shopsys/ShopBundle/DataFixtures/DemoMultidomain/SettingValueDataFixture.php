@@ -17,7 +17,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $setting = $this->get(Setting::class);
         /* @var $setting \Shopsys\ShopBundle\Component\Setting\Setting */
         $setting->clearCache();
@@ -61,7 +62,8 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             ArticleDataFixture::class,
             PricingGroupDataFixture::class,

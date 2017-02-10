@@ -18,14 +18,16 @@ class DomainType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
     /**
      * @inheritdoc
      */
-    public function buildView(FormView $view, FormInterface $form, array $options) {
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
         $view->vars['domainConfigs'] = $this->domain->getAll();
         $view->vars['displayUrl'] = $options['displayUrl'];
     }
@@ -33,7 +35,8 @@ class DomainType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'displayUrl' => false,
         ]);
@@ -42,14 +45,16 @@ class DomainType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'integer';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'domain';
     }
 }

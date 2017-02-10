@@ -17,7 +17,8 @@ class TransportEditFormTypeFactory
      */
     private $currencyFacade;
 
-    public function __construct(TransportFormTypeFactory $transportFormTypeFactory, CurrencyFacade $currencyFacade) {
+    public function __construct(TransportFormTypeFactory $transportFormTypeFactory, CurrencyFacade $currencyFacade)
+    {
         $this->transportFormTypeFactory = $transportFormTypeFactory;
         $this->currencyFacade = $currencyFacade;
     }
@@ -25,7 +26,8 @@ class TransportEditFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType
      */
-    public function create() {
+    public function create()
+    {
         $currencies = $this->currencyFacade->getAll();
 
         return new TransportEditFormType($this->transportFormTypeFactory, $currencies);

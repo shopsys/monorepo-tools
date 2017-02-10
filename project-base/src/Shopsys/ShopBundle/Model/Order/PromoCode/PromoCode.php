@@ -36,7 +36,8 @@ class PromoCode
     /**
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      */
-    public function __construct(PromoCodeData $promoCodeData) {
+    public function __construct(PromoCodeData $promoCodeData)
+    {
         $this->code = $promoCodeData->code;
         $this->percent = $promoCodeData->percent;
     }
@@ -44,7 +45,8 @@ class PromoCode
     /**
      * @param \Shopsys\ShopBundle\Model\Order\PromoCode\PromoCodeData $promoCodeData
      */
-    public function edit(PromoCodeData $promoCodeData) {
+    public function edit(PromoCodeData $promoCodeData)
+    {
         $this->code = $promoCodeData->code;
         $this->percent = $promoCodeData->percent;
     }
@@ -52,21 +54,24 @@ class PromoCode
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return float
      */
-    public function getPercent() {
+    public function getPercent()
+    {
         return $this->percent;
     }
 }

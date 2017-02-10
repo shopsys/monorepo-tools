@@ -18,7 +18,8 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $rootCategory = new Category(new CategoryData());
         $manager->persist($rootCategory);
         $manager->flush($rootCategory);
@@ -33,7 +34,8 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             SettingValueDataFixture::class,
         ];

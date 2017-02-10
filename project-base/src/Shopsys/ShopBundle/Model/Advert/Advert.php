@@ -74,7 +74,8 @@ class Advert
     /**
      * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advert
      */
-    public function __construct(AdvertData $advert) {
+    public function __construct(AdvertData $advert)
+    {
         $this->domainId = $advert->domainId;
         $this->name = $advert->name;
         $this->type = $advert->type;
@@ -87,7 +88,8 @@ class Advert
     /**
      * @param \Shopsys\ShopBundle\Model\Advert\AdvertData $advert
      */
-    public function edit(AdvertData $advert) {
+    public function edit(AdvertData $advert)
+    {
         $this->domainId = $advert->domainId;
         $this->name = $advert->name;
         $this->type = $advert->type;
@@ -100,56 +102,64 @@ class Advert
     /**
      * @return int
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return string|null
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * @return string|null
      */
-    public function getLink() {
+    public function getLink()
+    {
         return $this->link;
     }
 
     /**
      * @return string|null
      */
-    public function getCode() {
+    public function getCode()
+    {
         return $this->code;
     }
 
     /**
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * @return bool
      */
-    public function isHidden() {
+    public function isHidden()
+    {
         return $this->hidden;
     }
 
     /**
      * @return string|null
      */
-    public function getPositionName() {
+    public function getPositionName()
+    {
         return $this->positionName;
     }
 }

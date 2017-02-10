@@ -17,14 +17,16 @@ class DomainsType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $ids = [];
         $labels = [];
         $values = [];
@@ -44,14 +46,16 @@ class DomainsType extends AbstractType
     /**
      * @return string
      */
-    public function getParent() {
+    public function getParent()
+    {
         return 'choice';
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'domains';
     }
 }

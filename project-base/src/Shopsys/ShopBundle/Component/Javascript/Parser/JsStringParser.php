@@ -11,7 +11,8 @@ class JsStringParser
      * @param \PLUG\JavaScript\JNodes\JNodeBase $node
      * @return string
      */
-    public function getConcatenatedString(JNodeBase $node) {
+    public function getConcatenatedString(JNodeBase $node)
+    {
         if ($node->scalar_symbol() === J_STRING_LITERAL) {
             return $this->parseStringLiteral((string)$node);
         }
@@ -42,7 +43,8 @@ class JsStringParser
      * @param string $stringLiteral
      * @return string
      */
-    private function parseStringLiteral($stringLiteral) {
+    private function parseStringLiteral($stringLiteral)
+    {
         return json_decode($this->normalizeStringLiteral($stringLiteral));
     }
 
@@ -50,7 +52,8 @@ class JsStringParser
      * @param string $stringLiteral
      * @return string
      */
-    private function normalizeStringLiteral($stringLiteral) {
+    private function normalizeStringLiteral($stringLiteral)
+    {
         $matches = [];
         if (preg_match('/^"(.*)"$/', $stringLiteral, $matches)) {
             $doubleQuotesEscaped = $matches[1];

@@ -14,14 +14,16 @@ class TransportFormTypeFactory
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Vat\VatRepository $vatRepository
      */
-    public function __construct(VatRepository $vatRepository) {
+    public function __construct(VatRepository $vatRepository)
+    {
         $this->vatRepository = $vatRepository;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Transport\TransportFormType
      */
-    public function create() {
+    public function create()
+    {
         $vats = $this->vatRepository->getAll();
 
         return new TransportFormType($vats);

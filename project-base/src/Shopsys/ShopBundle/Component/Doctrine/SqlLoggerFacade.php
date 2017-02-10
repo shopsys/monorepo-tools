@@ -24,12 +24,14 @@ class SqlLoggerFacade
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
         $this->isLoggerTemporarilyDisabled = false;
     }
 
-    public function temporarilyDisableLogging() {
+    public function temporarilyDisableLogging()
+    {
         if ($this->isLoggerTemporarilyDisabled) {
             $message = 'Trying to disable already disabled SQL logger.';
             throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\SqlLoggerAlreadyDisabledException($message);
@@ -39,7 +41,8 @@ class SqlLoggerFacade
         $this->isLoggerTemporarilyDisabled = true;
     }
 
-    public function reenableLogging() {
+    public function reenableLogging()
+    {
         if (!$this->isLoggerTemporarilyDisabled) {
             $message = 'Trying to reenable already enabled SQL logger.';
             throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\SqlLoggerAlreadyEnabledException($message);

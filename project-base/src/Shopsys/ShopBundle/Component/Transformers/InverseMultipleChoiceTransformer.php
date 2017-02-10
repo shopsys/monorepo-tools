@@ -15,14 +15,16 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
     /**
      * @param \Symfony\Component\Form\ChoiceList\ChoiceListInterface $choiceList
      */
-    public function __construct(ChoiceListInterface $choiceList) {
+    public function __construct(ChoiceListInterface $choiceList)
+    {
         $this->choiceList = $choiceList;
     }
 
     /**
      * {@inheritDoc}
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         if (!is_array($value)) {
             return null;
         }
@@ -33,7 +35,8 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
     /**
      * {@inheritDoc}
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         if (!is_array($value)) {
             return null;
         }
@@ -45,7 +48,8 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
      * @param array $inputValues
      * @param array $allChoices
      */
-    private function getInvertedValues(array $inputValues, array $allChoices) {
+    private function getInvertedValues(array $inputValues, array $allChoices)
+    {
         $outputValues = [];
 
         foreach ($allChoices as $choice) {

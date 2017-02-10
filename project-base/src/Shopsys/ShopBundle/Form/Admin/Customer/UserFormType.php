@@ -34,7 +34,8 @@ class UserFormType extends AbstractType
      * @param \Shopsys\ShopBundle\Component\Domain\SelectedDomain $selectedDomain
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]|null $pricingGroups
      */
-    public function __construct($scenario, $selectedDomain = null, $pricingGroups = null) {
+    public function __construct($scenario, $selectedDomain = null, $pricingGroups = null)
+    {
         $this->scenario = $scenario;
         $this->selectedDomain = $selectedDomain;
         $this->pricingGroups = $pricingGroups;
@@ -43,7 +44,8 @@ class UserFormType extends AbstractType
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'user_form';
     }
 
@@ -52,7 +54,8 @@ class UserFormType extends AbstractType
      * @param array $options
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('firstName', FormType::TEXT, [
                 'constraints' => [
@@ -110,7 +113,8 @@ class UserFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => UserData::class,
             'attr' => ['novalidate' => 'novalidate'],

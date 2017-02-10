@@ -20,14 +20,16 @@ class OrderPaymentFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Transport\Transport[] $payments
      */
-    public function __construct(array $payments) {
+    public function __construct(array $payments)
+    {
         $this->payments = $payments;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'order_payment_form';
     }
 
@@ -35,7 +37,8 @@ class OrderPaymentFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('payment', FormType::CHOICE, [
                 'required' => true,
@@ -58,7 +61,8 @@ class OrderPaymentFormType extends AbstractType
             ]);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'data_class' => OrderPaymentData::class,
             'attr' => ['novalidate' => 'novalidate'],

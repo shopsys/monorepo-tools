@@ -10,7 +10,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class LocalizationListenerTest extends DatabaseTestCase
 {
-    public function testProductDetailLocaleCs() {
+    public function testProductDetailLocaleCs()
+    {
         $router = $this->getContainer()->get(CurrentDomainRouter::class);
         /* @var $router \Shopsys\ShopBundle\Component\Router\CurrentDomainRouter */
         $productUrl = $router->generate('front_product_detail', ['id' => 3], RouterInterface::RELATIVE_PATH);
@@ -27,7 +28,8 @@ class LocalizationListenerTest extends DatabaseTestCase
     /**
      * @group multidomain
      */
-    public function testProductDetailLocaleEn() {
+    public function testProductDetailLocaleEn()
+    {
         $domain = $this->getContainer()->get(Domain::class);
         /* @var $domain \Shopsys\ShopBundle\Component\Domain\Domain */
 

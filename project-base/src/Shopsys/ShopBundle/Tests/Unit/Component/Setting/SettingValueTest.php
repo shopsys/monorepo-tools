@@ -10,7 +10,8 @@ use stdClass;
 
 class SettingValueTest extends PHPUnit_Framework_TestCase
 {
-    public function editProvider() {
+    public function editProvider()
+    {
         return [
             ['string'],
             [0],
@@ -21,7 +22,8 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    public function editExceptionProvider() {
+    public function editExceptionProvider()
+    {
         return [
             [[]],
             [new stdClass()],
@@ -31,7 +33,8 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider editProvider
      */
-    public function testEdit($value) {
+    public function testEdit($value)
+    {
         $settingValue = new SettingValue('name', $value, 1);
         $this->assertSame($value, $settingValue->getValue());
     }
@@ -39,12 +42,14 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider editExceptionProvider
      */
-    public function testEditException($value) {
+    public function testEditException($value)
+    {
         $this->setExpectedException(InvalidArgumentException::class);
         new SettingValue('name', $value, 1);
     }
 
-    public function testStoreDatetime() {
+    public function testStoreDatetime()
+    {
         $value = new DateTime();
         $settingValue = new SettingValue('name', $value, 1);
         $this->assertEquals($value, $settingValue->getValue());

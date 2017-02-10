@@ -86,7 +86,8 @@ class CartFacade
      * @param int $quantity
      * @return \Shopsys\ShopBundle\Model\Cart\AddProductResult
      */
-    public function addProductToCart($productId, $quantity) {
+    public function addProductToCart($productId, $quantity)
+    {
         $product = $this->productRepository->getSellableById(
             $productId,
             $this->domain->getId(),
@@ -106,7 +107,8 @@ class CartFacade
     /**
      * @param array $quantities CartItem.id => quantity
      */
-    public function changeQuantities(array $quantities) {
+    public function changeQuantities(array $quantities)
+    {
         $cart = $this->getCartOfCurrentCustomer();
         $this->cartService->changeQuantities($cart, $quantities);
         $this->em->flush();
@@ -115,7 +117,8 @@ class CartFacade
     /**
      * @param int $cartItemId
      */
-    public function deleteCartItem($cartItemId) {
+    public function deleteCartItem($cartItemId)
+    {
         $cart = $this->getCartOfCurrentCustomer();
         $cartItemToDelete = $this->cartService->getCartItemById($cart, $cartItemId);
         $cart->removeItemById($cartItemId);
@@ -123,7 +126,8 @@ class CartFacade
         $this->em->flush();
     }
 
-    public function cleanCart() {
+    public function cleanCart()
+    {
         $cart = $this->getCartOfCurrentCustomer();
         $cartItemsToDelete = $cart->getItems();
         $this->cartService->cleanCart($cart);
@@ -141,19 +145,22 @@ class CartFacade
      * @param int $cartItemId
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProductByCartItemId($cartItemId) {
+    public function getProductByCartItemId($cartItemId)
+    {
         $cart = $this->getCartOfCurrentCustomer();
 
         return $this->cartService->getCartItemById($cart, $cartItemId)->getProduct();
     }
 
-    public function cleanAdditionalData() {
+    public function cleanAdditionalData()
+    {
         $this->currentPromoCodeFacade->removeEnteredPromoCode();
     }
     /**
      * @return \Shopsys\ShopBundle\Model\Cart\Cart
      */
-    public function getCartOfCurrentCustomer() {
+    public function getCartOfCurrentCustomer()
+    {
         $customerIdentifier = $this->customerIdentifierFactory->get();
 
         return $this->cartFactory->get($customerIdentifier);
@@ -162,7 +169,8 @@ class CartFacade
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Item\QuantifiedProduct[cartItemId]
      */
-    public function getQuantifiedProductsOfCurrentCustomer() {
+    public function getQuantifiedProductsOfCurrentCustomer()
+    {
         $cart = $this->getCartOfCurrentCustomer();
 
         return $this->cartService->getQuantifiedProducts($cart);

@@ -20,7 +20,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterChoice[] $parameterFilterChoices
      */
-    public function __construct(array $parameterFilterChoices) {
+    public function __construct(array $parameterFilterChoices)
+    {
         $this->parameterChoicesIndexedByParameterId = [];
         foreach ($parameterFilterChoices as $parameterChoice) {
             $this->parameterChoicesIndexedByParameterId[$parameterChoice->getParameter()->getId()] = $parameterChoice;
@@ -31,7 +32,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         foreach ($this->parameterChoicesIndexedByParameterId as $parameterId => $parameterFilterChoice) {
             $builder
                 ->add($parameterId, FormType::CHOICE, [
@@ -55,14 +57,16 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'parameter_filter_form';
     }
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);
@@ -72,7 +76,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null $value
      * @return \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null
      */
-    public function reverseTransform($value) {
+    public function reverseTransform($value)
+    {
         if ($value === null) {
             return null;
         }
@@ -96,7 +101,8 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
      * @param \Shopsys\ShopBundle\Model\Product\Filter\ParameterFilterData[]|null $value
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue[][]|null
      */
-    public function transform($value) {
+    public function transform($value)
+    {
         if ($value === null) {
             return null;
         }

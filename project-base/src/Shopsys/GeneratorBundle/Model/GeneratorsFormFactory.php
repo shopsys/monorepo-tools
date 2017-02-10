@@ -41,7 +41,8 @@ class GeneratorsFormFactory
     /**
      * $return \Symfony\Component\Form\Form
      */
-    public function createForm() {
+    public function createForm()
+    {
         $formBuilder = $this->formFactory->createNamedBuilder(
             'generators',
             FormType::FORM,
@@ -87,7 +88,8 @@ class GeneratorsFormFactory
     /**
      * @return string[]
      */
-    private function getBundleChoices() {
+    private function getBundleChoices()
+    {
         $bundleChoices = [];
         foreach ($this->kernel->getBundles() as $bundle) {
             if (substr($bundle->getNamespace(), 0, 7) === 'Shopsys') {

@@ -28,7 +28,8 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
     /**
      * @param array $translationData
      */
-    protected function createEntityAndGetId($translationData) {
+    protected function createEntityAndGetId($translationData)
+    {
         $message = 'Method "createEntityAndGetId" is not supported in translations.';
         throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
     }
@@ -37,7 +38,8 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
      * @param string $translationId
      * @param array $translationData
      */
-    protected function editEntity($translationId, $translationData) {
+    protected function editEntity($translationId, $translationData)
+    {
         $this->translationEditFacade->saveTranslation($translationId, $translationData);
     }
 
@@ -45,7 +47,8 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
      * @param string $translationId
      * @return array
      */
-    protected function getFormDataObject($translationId = null) {
+    protected function getFormDataObject($translationId = null)
+    {
         if ($translationId === null) {
             $message = 'Method "getFormDataObject" for new translation is not supported in translations.';
             throw new \Shopsys\ShopBundle\Model\Localization\Grid\Exception\NotImplementedException($message);
@@ -58,14 +61,16 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
      * @param int $rowId
      * @return \Shopsys\ShopBundle\Form\Admin\Localization\TranslationFormType
      */
-    protected function getFormType($rowId) {
+    protected function getFormType($rowId)
+    {
         return new TranslationFormType($this->translationEditFacade->getTranslatableLocales());
     }
 
     /**
      * @return bool
      */
-    public function canAddNewRow() {
+    public function canAddNewRow()
+    {
         return false;
     }
 }

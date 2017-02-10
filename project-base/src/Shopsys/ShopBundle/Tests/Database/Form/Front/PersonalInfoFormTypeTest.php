@@ -12,7 +12,8 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
     /**
      * @return array
      */
-    public function getTermsAndConditionsAgreementIsMandatoryData() {
+    public function getTermsAndConditionsAgreementIsMandatoryData()
+    {
         return [
             [$this->getPersonalInfoFormData(true), true],
             [$this->getPersonalInfoFormData(false), false],
@@ -24,7 +25,8 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      * @param $isExpectedValid
      * @dataProvider getTermsAndConditionsAgreementIsMandatoryData
      */
-    public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid) {
+    public function testTermsAndConditionsAgreementIsMandatory(array $personalInfoFormData, $isExpectedValid)
+    {
         $formFactory = $this->getContainer()->get(FormFactoryInterface::class);
         /* @var $formFactory \Symfony\Component\Form\FormFactoryInterface */
 
@@ -44,7 +46,8 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
      * @param bool $termsAndConditionsAgreement
      * @return array
      */
-    private function getPersonalInfoFormData($termsAndConditionsAgreement) {
+    private function getPersonalInfoFormData($termsAndConditionsAgreement)
+    {
         $country = $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);
         /* @var $country \Shopsys\ShopBundle\Model\Country\Country */
 

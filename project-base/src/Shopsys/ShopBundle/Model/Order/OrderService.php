@@ -54,7 +54,8 @@ class OrderService
      * @param \Shopsys\ShopBundle\Model\Order\OrderData $orderData
      * @return \Shopsys\ShopBundle\Model\Order\OrderEditResult
      */
-    public function editOrder(Order $order, OrderData $orderData) {
+    public function editOrder(Order $order, OrderData $orderData)
+    {
         $orderTransportData = $orderData->orderTransport;
         $orderTransportData->priceWithoutVat = $this->orderItemPriceCalculation->calculatePriceWithoutVat($orderTransportData);
         $orderPaymentData = $orderData->orderPayment;
@@ -106,7 +107,8 @@ class OrderService
      * @param \Shopsys\ShopBundle\Model\Pricing\Price $productPrice
      * @return \Shopsys\ShopBundle\Model\Order\Item\OrderProduct
      */
-    public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice) {
+    public function createOrderProductInOrder(Order $order, Product $product, Price $productPrice)
+    {
         $orderDomainConfig = $this->domain->getDomainConfigById($order->getDomainId());
 
         $orderProduct = new OrderProduct(
@@ -129,7 +131,8 @@ class OrderService
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function calculateTotalPrice(Order $order) {
+    public function calculateTotalPrice(Order $order)
+    {
         $orderTotalPrice = $this->orderPriceCalculation->getOrderTotalPrice($order);
         $order->setTotalPrice($orderTotalPrice);
     }
@@ -138,7 +141,8 @@ class OrderService
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @return string
      */
-    public function getOrderDetailUrl(Order $order) {
+    public function getOrderDetailUrl(Order $order)
+    {
         return $this->domainRouterFactory->getRouter($order->getDomainId())->generate(
             'front_customer_order_detail_unregistered',
             ['urlHash' => $order->getUrlHash()],

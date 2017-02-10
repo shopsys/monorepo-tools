@@ -26,7 +26,8 @@ class CurrencyData
      * @param string|null $code
      * @param string $exchangeRate
      */
-    public function __construct($name = null, $code = null, $exchangeRate = Currency::DEFAULT_EXCHANGE_RATE) {
+    public function __construct($name = null, $code = null, $exchangeRate = Currency::DEFAULT_EXCHANGE_RATE)
+    {
         $this->name = $name;
         $this->code = $code;
         $this->exchangeRate = $exchangeRate;
@@ -35,7 +36,8 @@ class CurrencyData
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Currency\Currency $currency
      */
-    public function setFromEntity(Currency $currency) {
+    public function setFromEntity(Currency $currency)
+    {
         $this->name = $currency->getName();
         $this->code = $currency->getCode();
         $this->exchangeRate = $currency->getExchangeRate();

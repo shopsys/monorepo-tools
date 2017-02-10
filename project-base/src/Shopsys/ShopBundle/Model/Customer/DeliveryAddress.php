@@ -79,7 +79,8 @@ class DeliveryAddress
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      */
-    public function __construct(DeliveryAddressData $deliveryAddressData) {
+    public function __construct(DeliveryAddressData $deliveryAddressData)
+    {
         $this->street = $deliveryAddressData->street;
         $this->city = $deliveryAddressData->city;
         $this->postcode = $deliveryAddressData->postcode;
@@ -93,7 +94,8 @@ class DeliveryAddress
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddressData $deliveryAddressData
      */
-    public function edit(DeliveryAddressData $deliveryAddressData) {
+    public function edit(DeliveryAddressData $deliveryAddressData)
+    {
         $this->street = $deliveryAddressData->street;
         $this->city = $deliveryAddressData->city;
         $this->postcode = $deliveryAddressData->postcode;
@@ -107,56 +109,64 @@ class DeliveryAddress
     /**
      * @return string|null
      */
-    public function getCompanyName() {
+    public function getCompanyName()
+    {
         return $this->companyName;
     }
 
     /**
      * @return string|null
      */
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->firstName;
     }
 
     /**
      * @return string|null
      */
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->lastName;
     }
 
     /**
      * @return string|null
      */
-    public function getStreet() {
+    public function getStreet()
+    {
         return $this->street;
     }
 
     /**
      * @return string|null
      */
-    public function getCity() {
+    public function getCity()
+    {
         return $this->city;
     }
 
     /**
      * @return string|null
      */
-    public function getPostcode() {
+    public function getPostcode()
+    {
         return $this->postcode;
     }
 
     /**
      * @return string|null
      */
-    public function getTelephone() {
+    public function getTelephone()
+    {
         return $this->telephone;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Country\Country|null
      */
-    public function getCountry() {
+    public function getCountry()
+    {
         return $this->country;
     }
 }

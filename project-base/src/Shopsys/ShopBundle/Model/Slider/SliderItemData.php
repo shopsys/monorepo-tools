@@ -53,7 +53,8 @@ class SliderItemData
     /**
      * @param \Shopsys\ShopBundle\Model\Slider\SliderItem $sliderItem
      */
-    public function setFromEntity(SliderItem $sliderItem) {
+    public function setFromEntity(SliderItem $sliderItem)
+    {
         $this->name = $sliderItem->getName();
         $this->link = $sliderItem->getLink();
         $this->hidden = $sliderItem->isHidden();

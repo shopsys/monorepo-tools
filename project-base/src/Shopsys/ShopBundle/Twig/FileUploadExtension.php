@@ -16,14 +16,16 @@ class FileUploadExtension extends Twig_Extension
     /**
      * @param \Shopsys\ShopBundle\Component\FileUpload\FileUpload $fileUpload
      */
-    public function __construct(FileUpload $fileUpload) {
+    public function __construct(FileUpload $fileUpload)
+    {
         $this->fileUpload = $fileUpload;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('getLabelByTemporaryFilename', [$this, 'getLabelByTemporaryFilename']),
         ];
@@ -33,7 +35,8 @@ class FileUploadExtension extends Twig_Extension
      * @param string $temporaryFilename
      * @return string
      */
-    public function getLabelByTemporaryFilename($temporaryFilename) {
+    public function getLabelByTemporaryFilename($temporaryFilename)
+    {
         $filename = $this->fileUpload->getOriginalFilenameByTemporary($temporaryFilename);
         $filepath = ($this->fileUpload->getTemporaryDirectory() . '/' . $temporaryFilename);
         if (file_exists($filepath) && is_file($filepath) && is_writable($filepath)) {
@@ -46,7 +49,8 @@ class FileUploadExtension extends Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'fileupload_extension';
     }
 }

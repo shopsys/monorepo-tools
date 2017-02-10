@@ -126,7 +126,7 @@ class ProductFilterCountRepository
         array $brandFilterChoices,
         ProductFilterData $productFilterData,
         PricingGroup $pricingGroup
-        ) {
+    ) {
         if (count($brandFilterChoices) === 0) {
             return [];
         }

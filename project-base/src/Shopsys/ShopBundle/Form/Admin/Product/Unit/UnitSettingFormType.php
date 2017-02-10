@@ -19,14 +19,16 @@ class UnitSettingFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit[] $units
      */
-    public function __construct(array $units) {
+    public function __construct(array $units)
+    {
         $this->units = $units;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'unit_setting_form';
     }
 
@@ -34,7 +36,8 @@ class UnitSettingFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add('defaultUnit', FormType::CHOICE, [
                 'required' => true,
@@ -46,7 +49,8 @@ class UnitSettingFormType extends AbstractType
             ->add('save', FormType::SUBMIT);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

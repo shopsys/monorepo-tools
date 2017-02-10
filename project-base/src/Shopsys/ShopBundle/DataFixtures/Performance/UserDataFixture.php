@@ -72,7 +72,8 @@ class UserDataFixture
         $this->persistentReferenceFacade = $persistentReferenceFacade;
     }
 
-    public function load() {
+    public function load()
+    {
         // Sql logging during mass data import makes memory leak
         $this->sqlLoggerFacade->temporarilyDisableLogging();
 
@@ -99,7 +100,8 @@ class UserDataFixture
      * @param int $userNumber
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    private function createCustomerOnDomain($domainId, $userNumber) {
+    private function createCustomerOnDomain($domainId, $userNumber)
+    {
         $customerData = $this->getRandomCustomerDataByDomainId($domainId, $userNumber);
 
         return $this->customerEditFacade->create($customerData);
@@ -110,7 +112,8 @@ class UserDataFixture
      * @param int $userNumber
      * @return \Shopsys\ShopBundle\Model\Customer\CustomerData
      */
-    private function getRandomCustomerDataByDomainId($domainId, $userNumber) {
+    private function getRandomCustomerDataByDomainId($domainId, $userNumber)
+    {
         $customerData = new CustomerData();
 
         $country = $this->persistentReferenceFacade->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_1);

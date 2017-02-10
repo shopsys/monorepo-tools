@@ -16,11 +16,13 @@ class LoginController extends FrontBaseController
      */
     private $loginService;
 
-    public function __construct(LoginService $loginService) {
+    public function __construct(LoginService $loginService)
+    {
         $this->loginService = $loginService;
     }
 
-    public function loginAction(Request $request) {
+    public function loginAction(Request $request)
+    {
         if ($this->isGranted(Roles::ROLE_CUSTOMER)) {
             return $this->redirectToRoute('front_homepage');
         }
@@ -38,7 +40,8 @@ class LoginController extends FrontBaseController
         ]);
     }
 
-    public function windowFormAction() {
+    public function windowFormAction()
+    {
         return $this->render('@ShopsysShop/Front/Content/Login/windowForm.html.twig', [
             'form' => $this->getLoginForm()->createView(),
         ]);
@@ -47,7 +50,8 @@ class LoginController extends FrontBaseController
     /**
      * @return \Symfony\Component\Form\Form
      */
-    private function getLoginForm() {
+    private function getLoginForm()
+    {
         return $this->createForm(new LoginFormType(), null, [
             'action' => $this->generateUrl('front_login_check'),
             'method' => 'POST',

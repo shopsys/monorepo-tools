@@ -38,7 +38,8 @@ class TermsAndConditionsFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Article\Article|null
      */
-    public function findTermsAndConditionsArticleByDomainId($domainId) {
+    public function findTermsAndConditionsArticleByDomainId($domainId)
+    {
         $termsAndConditionsArticleId = $this->setting->getForDomain(Setting::TERMS_AND_CONDITIONS_ARTICLE_ID, $domainId);
 
         if ($termsAndConditionsArticleId !== null) {
@@ -54,7 +55,8 @@ class TermsAndConditionsFacade
      * @param \Shopsys\ShopBundle\Model\Article\Article|null $termsAndConditionsArticle
      * @param int $domainId
      */
-    public function setTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId) {
+    public function setTermsAndConditionsArticleOnDomain($termsAndConditionsArticle, $domainId)
+    {
         $termsAndConditionsArticleId = null;
         if ($termsAndConditionsArticle !== null) {
             $termsAndConditionsArticleId = $termsAndConditionsArticle->getId();
@@ -69,7 +71,8 @@ class TermsAndConditionsFacade
     /**
      * @return string
      */
-    public function getDownloadFilename() {
+    public function getDownloadFilename()
+    {
         return t('Terms-and-conditions.html');
     }
 
@@ -77,7 +80,8 @@ class TermsAndConditionsFacade
      * @param \Shopsys\ShopBundle\Model\Article\Article $article
      * @return bool
      */
-    public function isArticleUsedAsTermsAndConditions(Article $article) {
+    public function isArticleUsedAsTermsAndConditions(Article $article)
+    {
         foreach ($this->domain->getAll() as $domainConfig) {
             if ($this->findTermsAndConditionsArticleByDomainId($domainConfig->getId()) === $article) {
                 return true;

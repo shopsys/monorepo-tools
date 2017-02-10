@@ -35,7 +35,8 @@ class FileUploadController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function uploadAction(Request $request) {
+    public function uploadAction(Request $request)
+    {
         $actionResult = [
             'status' => 'error',
             'code' => 0,
@@ -72,7 +73,8 @@ class FileUploadController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function deleteTemporaryFileAction(Request $request) {
+    public function deleteTemporaryFileAction(Request $request)
+    {
         $filename = $request->get('filename');
         $actionResult = $this->fileUpload->tryDeleteTemporaryFile($filename);
 

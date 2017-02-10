@@ -28,7 +28,8 @@ class ModuleFacade
      * @param string $moduleName
      * @return bool
      */
-    public function isEnabled($moduleName) {
+    public function isEnabled($moduleName)
+    {
         $enabledModule = $this->enabledModuleRepository->findByName($moduleName);
 
         return $enabledModule !== null;
@@ -38,7 +39,8 @@ class ModuleFacade
      * @param string $moduleName
      * @param bool $isEnabled
      */
-    public function setEnabled($moduleName, $isEnabled) {
+    public function setEnabled($moduleName, $isEnabled)
+    {
         $enabledModule = $this->enabledModuleRepository->findByName($moduleName);
 
         if ($enabledModule === null && $isEnabled) {

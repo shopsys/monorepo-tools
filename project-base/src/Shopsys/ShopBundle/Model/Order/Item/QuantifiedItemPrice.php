@@ -40,21 +40,24 @@ class QuantifiedItemPrice
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getUnitPrice() {
+    public function getUnitPrice()
+    {
         return $this->unitPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Price
      */
-    public function getTotalPrice() {
+    public function getTotalPrice()
+    {
         return $this->totalPrice;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Pricing\Vat\Vat
      */
-    public function getVat() {
+    public function getVat()
+    {
         return $this->vat;
     }
 }

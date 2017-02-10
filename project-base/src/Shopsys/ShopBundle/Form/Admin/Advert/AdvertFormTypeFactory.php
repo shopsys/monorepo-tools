@@ -30,7 +30,8 @@ class AdvertFormTypeFactory
      * @param \Shopsys\ShopBundle\Model\Advert\Advert $advert
      * @return \Shopsys\ShopBundle\Form\Admin\Advert\AdvertFormType
      */
-    public function create(Advert $advert = null) {
+    public function create(Advert $advert = null)
+    {
         $imageExists = false;
         if ($advert !== null) {
             $imageExists = $this->imageExtension->imageExists($advert);

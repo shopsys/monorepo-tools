@@ -12,14 +12,16 @@ class CssExtension extends \Twig_Extension
      */
     private $cssFacade;
 
-    public function __construct(CssFacade $cssFacade) {
+    public function __construct(CssFacade $cssFacade)
+    {
         $this->cssFacade = $cssFacade;
     }
 
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('getCssVersion', [$this, 'getCssVersion']),
         ];
@@ -28,14 +30,16 @@ class CssExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'css';
     }
 
     /**
      * @return string
      */
-    public function getCssVersion() {
+    public function getCssVersion()
+    {
         return $this->cssFacade->getCssVersion();
     }
 }

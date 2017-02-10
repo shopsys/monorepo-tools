@@ -61,14 +61,16 @@ class OrderProduct extends OrderItem
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product|null
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return bool
      */
-    public function hasProduct() {
+    public function hasProduct()
+    {
         return $this->product !== null;
     }
 }

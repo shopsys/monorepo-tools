@@ -54,7 +54,8 @@ class ProductAvailabilityCalculation
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    public function calculateAvailability(Product $product) {
+    public function calculateAvailability(Product $product)
+    {
         if ($product->isMainVariant()) {
             return $this->calculateMainVariantAvailability($product);
         }
@@ -75,7 +76,8 @@ class ProductAvailabilityCalculation
      * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
      * @return \Shopsys\ShopBundle\Model\Product\Availability\Availability
      */
-    private function calculateMainVariantAvailability(Product $mainVariant) {
+    private function calculateMainVariantAvailability(Product $mainVariant)
+    {
         $atLeastSomewhereSellableVariants = $this->getAtLeastSomewhereSellableVariantsByMainVariant($mainVariant);
         if (count($atLeastSomewhereSellableVariants) === 0) {
             return $this->availabilityFacade->getDefaultInStockAvailability();
@@ -99,7 +101,8 @@ class ProductAvailabilityCalculation
      * @param \Shopsys\ShopBundle\Model\Product\Product $mainVariant
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    private function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant) {
+    private function getAtLeastSomewhereSellableVariantsByMainVariant(Product $mainVariant)
+    {
         $allVariants = $mainVariant->getVariants();
         foreach ($allVariants as $variant) {
             $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($variant);

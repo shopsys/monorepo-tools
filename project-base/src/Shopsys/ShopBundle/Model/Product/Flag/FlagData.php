@@ -24,7 +24,8 @@ class FlagData
      * @param string $rgbColor
      * @param bool $visible
      */
-    public function __construct(array $name = [], $rgbColor = null, $visible = false) {
+    public function __construct(array $name = [], $rgbColor = null, $visible = false)
+    {
         $this->name = $name;
         $this->rgbColor = $rgbColor;
         $this->visible = $visible;
@@ -33,7 +34,8 @@ class FlagData
     /**
      * @param \Shopsys\ShopBundle\Model\Product\Flag\Flag $flag
      */
-    public function setFromEntity(Flag $flag) {
+    public function setFromEntity(Flag $flag)
+    {
         $translations = $flag->getTranslations();
         $names = [];
         foreach ($translations as $translate) {

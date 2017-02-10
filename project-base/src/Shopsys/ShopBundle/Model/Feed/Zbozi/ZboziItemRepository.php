@@ -39,7 +39,8 @@ class ZboziItemRepository implements FeedItemRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults) {
+    public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults)
+    {
         $defaultPricingGroup = $this->pricingGroupSettingFacade->getDefaultPricingGroupByDomainId($domainConfig->getId());
         $queryBuilder = $this->productRepository->getAllSellableQueryBuilder($domainConfig->getId(), $defaultPricingGroup);
         $this->productRepository->addTranslation($queryBuilder, $domainConfig->getLocale());

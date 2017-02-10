@@ -21,14 +21,16 @@ class ControllerCompilerPass implements CompilerPassInterface
     /**
      * @param \Shopsys\AutoServicesBundle\Compiler\ServiceHelper $serviceHelper
      */
-    public function __construct(ServiceHelper $serviceHelper) {
+    public function __construct(ServiceHelper $serviceHelper)
+    {
         $this->serviceHelper = $serviceHelper;
     }
 
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $containerBuilder
      */
-    public function process(ContainerBuilder $containerBuilder) {
+    public function process(ContainerBuilder $containerBuilder)
+    {
         $srcRealpath = realpath($containerBuilder->getParameter('kernel.root_dir') . '/../src');
 
         foreach ($this->getAllControllerFiles($srcRealpath) as $controllerFile) {
@@ -49,7 +51,8 @@ class ControllerCompilerPass implements CompilerPassInterface
      * @param string $srcPath
      * @return \Symfony\Component\Finder\SplFileInfo[]
      */
-    private function getAllControllerFiles($srcPath) {
+    private function getAllControllerFiles($srcPath)
+    {
         $finder = new Finder();
 
         return $finder
@@ -62,7 +65,8 @@ class ControllerCompilerPass implements CompilerPassInterface
      * @param \Symfony\Component\Finder\SplFileInfo $controllerFile
      * @return string
      */
-    private function getControllerClassName($srcRealPath, SplFileInfo $controllerFile) {
+    private function getControllerClassName($srcRealPath, SplFileInfo $controllerFile)
+    {
         $controllerRelativePathFromSrc = substr(realpath($controllerFile->getPath()), strlen($srcRealPath) + 1);
         $controllerNamespace = str_replace('/', '\\', $controllerRelativePathFromSrc);
 
@@ -73,7 +77,8 @@ class ControllerCompilerPass implements CompilerPassInterface
      * @param string $className
      * @return bool
      */
-    public function isContainerAware($className) {
+    public function isContainerAware($className)
+    {
         $interfaces = class_implements($className);
 
         return array_key_exists(ContainerAwareInterface::class, $interfaces);

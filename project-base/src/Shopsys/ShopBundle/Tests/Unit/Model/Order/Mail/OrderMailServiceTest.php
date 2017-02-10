@@ -21,7 +21,8 @@ use Twig_Environment;
 
 class OrderMailServiceTest extends FunctionalTestCase
 {
-    public function testGetMailTemplateNameByStatus() {
+    public function testGetMailTemplateNameByStatus()
+    {
         $routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
         $routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');
 
@@ -80,7 +81,8 @@ class OrderMailServiceTest extends FunctionalTestCase
         $this->assertNotSame($mailTempleteName1, $mailTempleteName2);
     }
 
-    public function testGetMessageByOrder() {
+    public function testGetMessageByOrder()
+    {
         $routerMock = $this->getMockBuilder(RouterInterface::class)->setMethods(['generate'])->getMockForAbstractClass();
         $routerMock->expects($this->any())->method('generate')->willReturn('generatedUrl');
 

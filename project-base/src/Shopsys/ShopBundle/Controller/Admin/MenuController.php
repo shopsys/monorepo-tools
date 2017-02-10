@@ -13,11 +13,13 @@ class MenuController extends AdminBaseController
      */
     private $menuFactory;
 
-    public function __construct(MenuFactory $menuFactory) {
+    public function __construct(MenuFactory $menuFactory)
+    {
         $this->menuFactory = $menuFactory;
     }
 
-    public function menuAction($route, array $parameters = null) {
+    public function menuAction($route, array $parameters = null)
+    {
         $menu = $this->menuFactory->createMenuWithVisibleItems();
         $activePath = $menu->getMenuPath($route, $parameters);
 
@@ -27,7 +29,8 @@ class MenuController extends AdminBaseController
         ]);
     }
 
-    public function panelAction($route, array $parameters = null) {
+    public function panelAction($route, array $parameters = null)
+    {
         $menu = $this->menuFactory->createMenuWithVisibleItems();
         $activePath = $menu->getMenuPath($route, $parameters);
 

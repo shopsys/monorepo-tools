@@ -10,7 +10,8 @@ class EntityStringColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadata[] $classesMetadata
      * @return string[tableName][]
      */
-    public function getAllStringColumnNamesIndexedByTableName(array $classesMetadata) {
+    public function getAllStringColumnNamesIndexedByTableName(array $classesMetadata)
+    {
         $stringColumnNamesIndexedByTableName = [];
         foreach ($classesMetadata as $classMetadata) {
             if (!($classMetadata instanceof ClassMetadataInfo)) {
@@ -30,7 +31,8 @@ class EntityStringColumnsFinder
      * @param \Doctrine\ORM\Mapping\ClassMetadataInfo $classMetadataInfo
      * @return string[]
      */
-    private function getStringColumnNames(ClassMetadataInfo $classMetadataInfo) {
+    private function getStringColumnNames(ClassMetadataInfo $classMetadataInfo)
+    {
         $stringColumnNames = [];
         foreach ($classMetadataInfo->getFieldNames() as $fieldName) {
             if (in_array($classMetadataInfo->getTypeOfField($fieldName), $this->getDoctrineStringTypes(), true)) {
@@ -44,7 +46,8 @@ class EntityStringColumnsFinder
     /**
      * @return string[]
      */
-    private function getDoctrineStringTypes() {
+    private function getDoctrineStringTypes()
+    {
         return [
             'text',
             'string',

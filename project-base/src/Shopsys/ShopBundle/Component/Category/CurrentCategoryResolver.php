@@ -31,7 +31,8 @@ class CurrentCategoryResolver
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Category\Category|null
      */
-    public function findCurrentCategoryByRequest(Request $request, $domainId) {
+    public function findCurrentCategoryByRequest(Request $request, $domainId)
+    {
         $routeName = $request->get('_route');
 
         if ($routeName === 'front_product_list') {

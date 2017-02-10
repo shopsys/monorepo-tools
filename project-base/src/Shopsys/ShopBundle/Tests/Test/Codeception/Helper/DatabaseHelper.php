@@ -14,7 +14,8 @@ class DatabaseHelper extends Module
      * {@inheritDoc}
      * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
-    public function _initialize() {
+    public function _initialize()
+    {
     // @codingStandardsIgnoreEnd
         $dbModule = $this->getModule(Db::class);
         /* @var $dbModule \Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db */
@@ -34,7 +35,8 @@ class DatabaseHelper extends Module
      * @param \Doctrine\DBAL\Connection $connection
      * @return string
      */
-    private function getConnectionDsn(Connection $connection) {
+    private function getConnectionDsn(Connection $connection)
+    {
         $connectionParams = $connection->getParams();
 
         $dsnParams = [];

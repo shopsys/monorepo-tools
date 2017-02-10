@@ -39,7 +39,8 @@ class ManualBestsellingProductFacade
      * @param int $domainId
      * @param \Shopsys\ShopBundle\Model\Product\Product[] $productsIndexedByPosition
      */
-    public function edit(Category $category, $domainId, array $productsIndexedByPosition) {
+    public function edit(Category $category, $domainId, array $productsIndexedByPosition)
+    {
         $toDelete = $this->manualBestsellingProductRepository->getByCategory($domainId, $category);
         foreach ($toDelete as $item) {
             $this->em->remove($item);
@@ -61,7 +62,8 @@ class ManualBestsellingProductFacade
      * @param int $domainId
      * @return \Shopsys\ShopBundle\Model\Product\Product[]
      */
-    public function getProductsIndexedByPosition($category, $domainId) {
+    public function getProductsIndexedByPosition($category, $domainId)
+    {
         $bestsellingProducts = $this->manualBestsellingProductRepository->getByCategory($domainId, $category);
 
         $products = [];
@@ -77,7 +79,8 @@ class ManualBestsellingProductFacade
      * @param int $domainId
      * @return int[categoryId]
      */
-    public function getCountsIndexedByCategoryId($domainId) {
+    public function getCountsIndexedByCategoryId($domainId)
+    {
         return $this->manualBestsellingProductRepository->getCountsIndexedByCategoryId($domainId);
     }
 }

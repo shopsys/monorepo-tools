@@ -19,7 +19,8 @@ class UrlListData
      */
     public $newUrls;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->toDelete = [];
         $this->mainOnDomains = [];
         $this->newUrls = [];

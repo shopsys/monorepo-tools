@@ -54,14 +54,16 @@ class OrderPayment extends OrderItem
     /**
      * @return \Shopsys\ShopBundle\Model\Payment\Payment
      */
-    public function getPayment() {
+    public function getPayment()
+    {
         return $this->payment;
     }
 
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderItemData $orderPaymentData
      */
-    public function edit(OrderItemData $orderPaymentData) {
+    public function edit(OrderItemData $orderPaymentData)
+    {
         if ($orderPaymentData instanceof OrderPaymentData) {
             $this->payment = $orderPaymentData->payment;
             parent::edit($orderPaymentData);

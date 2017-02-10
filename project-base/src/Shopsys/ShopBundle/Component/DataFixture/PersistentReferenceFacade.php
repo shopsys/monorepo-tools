@@ -26,7 +26,8 @@ class PersistentReferenceFacade
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Component\DataFixture\PersistentReferenceRepository $persistentReferenceRepository
      */
-    public function __construct(EntityManager $em, PersistentReferenceRepository $persistentReferenceRepository) {
+    public function __construct(EntityManager $em, PersistentReferenceRepository $persistentReferenceRepository)
+    {
         $this->em = $em;
         $this->persistentReferenceRepository = $persistentReferenceRepository;
     }
@@ -35,7 +36,8 @@ class PersistentReferenceFacade
      * @param string $name
      * @return object
      */
-    public function getReference($name) {
+    public function getReference($name)
+    {
         $persistentReference = $this->persistentReferenceRepository->getByReferenceName($name);
         $entity = $this->em->find($persistentReference->getEntityName(), $persistentReference->getEntityId());
 
@@ -50,7 +52,8 @@ class PersistentReferenceFacade
      * @param string $name
      * @param object $object
      */
-    public function persistReference($name, $object) {
+    public function persistReference($name, $object)
+    {
         if (!is_object($object)) {
             throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\ObjectRequiredException($object);
         }

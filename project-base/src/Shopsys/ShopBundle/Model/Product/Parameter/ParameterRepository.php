@@ -24,21 +24,24 @@ class ParameterRepository
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getParameterRepository() {
+    private function getParameterRepository()
+    {
         return $this->em->getRepository(Parameter::class);
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getParameterValueRepository() {
+    private function getParameterValueRepository()
+    {
         return $this->em->getRepository(ParameterValue::class);
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductParameterValueRepository() {
+    private function getProductParameterValueRepository()
+    {
         return $this->em->getRepository(ProductParameterValue::class);
     }
 
@@ -46,7 +49,8 @@ class ParameterRepository
      * @param int $parameterId
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */
-    public function findById($parameterId) {
+    public function findById($parameterId)
+    {
         return $this->getParameterRepository()->find($parameterId);
     }
 
@@ -54,7 +58,8 @@ class ParameterRepository
      * @param int $parameterId
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter
      */
-    public function getById($parameterId) {
+    public function getById($parameterId)
+    {
         $parameter = $this->findById($parameterId);
 
         if ($parameter === null) {
@@ -68,7 +73,8 @@ class ParameterRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter[]
      */
-    public function getAll() {
+    public function getAll()
+    {
         return $this->getParameterRepository()->findBy([], ['id' => 'asc']);
     }
 
@@ -77,7 +83,8 @@ class ParameterRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ParameterValue
      */
-    public function findOrCreateParameterValueByValueTextAndLocale($valueText, $locale) {
+    public function findOrCreateParameterValueByValueTextAndLocale($valueText, $locale)
+    {
         $parameterValue = $this->getParameterValueRepository()->findOneBy([
             'text' => $valueText,
             'locale' => $locale,
@@ -98,7 +105,8 @@ class ParameterRepository
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getProductParameterValuesByProductQueryBuilder(Product $product) {
+    private function getProductParameterValuesByProductQueryBuilder(Product $product)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('ppv')
             ->from(ProductParameterValue::class, 'ppv')
@@ -113,7 +121,8 @@ class ParameterRepository
      * @param string $locale
      * @return \Doctrine\ORM\QueryBuilder
      */
-    private function getProductParameterValuesByProductSortedByNameQueryBuilder(Product $product, $locale) {
+    private function getProductParameterValuesByProductSortedByNameQueryBuilder(Product $product, $locale)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('ppv')
             ->from(ProductParameterValue::class, 'ppv')
@@ -134,7 +143,8 @@ class ParameterRepository
      * @param \Shopsys\ShopBundle\Model\Product\Product $product
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getProductParameterValuesByProduct(Product $product) {
+    public function getProductParameterValuesByProduct(Product $product)
+    {
         $queryBuilder = $this->getProductParameterValuesByProductQueryBuilder($product);
 
         return $queryBuilder->getQuery()->execute();
@@ -145,7 +155,8 @@ class ParameterRepository
      * @param string $locale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getProductParameterValuesByProductSortedByName(Product $product, $locale) {
+    public function getProductParameterValuesByProductSortedByName(Product $product, $locale)
+    {
         $queryBuilder = $this->getProductParameterValuesByProductSortedByNameQueryBuilder($product, $locale);
 
         return $queryBuilder->getQuery()->execute();
@@ -156,7 +167,8 @@ class ParameterRepository
      * @param string $locale
      * @return string[productId][paramName]
      */
-    public function getParameterValuesIndexedByProductIdAndParameterNameForProducts(array $products, $locale) {
+    public function getParameterValuesIndexedByProductIdAndParameterNameForProducts(array $products, $locale)
+    {
         $queryBuilder = $this->em->createQueryBuilder()
             ->select('IDENTITY(ppv.product) as productId', 'pt.name', 'pv.text')
             ->from(ProductParameterValue::class, 'ppv')
@@ -180,7 +192,8 @@ class ParameterRepository
      * @param \Shopsys\ShopBundle\Model\Product\Parameter\Parameter $parameter
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\ProductParameterValue[]
      */
-    public function getProductParameterValuesByParameter(Parameter $parameter) {
+    public function getProductParameterValuesByParameter(Parameter $parameter)
+    {
         return $this->getProductParameterValueRepository()->findBy([
             'parameter' => $parameter,
         ]);
@@ -190,7 +203,8 @@ class ParameterRepository
      * @param string[locale] $namesByLocale
      * @return \Shopsys\ShopBundle\Model\Product\Parameter\Parameter|null
      */
-    public function findParameterByNames(array $namesByLocale) {
+    public function findParameterByNames(array $namesByLocale)
+    {
         $queryBuilder = $this->getParameterRepository()->createQueryBuilder('p');
         $index = 0;
         foreach ($namesByLocale as $locale => $name) {
@@ -217,7 +231,8 @@ class ParameterRepository
      * @param array $productIdsAndParameterNamesAndValues
      * @return string[productId][paramName]
      */
-    private function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues) {
+    private function getParameterValuesIndexedByProductIdAndParameterName(array $productIdsAndParameterNamesAndValues)
+    {
         $productParameterValuesIndexedByProductIdAndParameterName = [];
         foreach ($productIdsAndParameterNamesAndValues as $productIdAndParameterNameAndValue) {
             $parameterName = $productIdAndParameterNameAndValue['name'];

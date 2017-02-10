@@ -21,7 +21,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      */
     private $filesystem;
 
-    protected function configure() {
+    protected function configure()
+    {
         $this
             ->setName('shopsys:image:demo')
             ->setDescription('Download demo images');
@@ -31,7 +32,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
-    protected function execute(InputInterface $input, OutputInterface $output) {
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
         $this->filesystem = $this->getContainer()->get('filesystem');
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
@@ -59,7 +61,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param string $localArchiveFilepath
      * @return bool
      */
-    private function unpackImages(OutputInterface $output, $imagesPath, $localArchiveFilepath) {
+    private function unpackImages(OutputInterface $output, $imagesPath, $localArchiveFilepath)
+    {
         $zipArchive = new ZipArchive();
 
         $result = $zipArchive->open($localArchiveFilepath);
@@ -79,7 +82,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param string $dqlUrl
      */
-    private function loadDbChanges(OutputInterface $output, $dqlUrl) {
+    private function loadDbChanges(OutputInterface $output, $dqlUrl)
+    {
         $fileContents = file_get_contents($dqlUrl);
         if ($fileContents === false) {
             $output->writeln('<fg=red>Download of DB changes failed</fg=red>');
@@ -102,7 +106,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param string $localArchiveFilepath
      * @return bool
      */
-    private function downloadImages(OutputInterface $output, $archiveUrl, $localArchiveFilepath) {
+    private function downloadImages(OutputInterface $output, $archiveUrl, $localArchiveFilepath)
+    {
         $output->writeln('Start downloading demo images');
 
         try {
@@ -122,7 +127,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      * @param string[] $pathsToRemove
      */
-    private function cleanUp(OutputInterface $output, $pathsToRemove) {
+    private function cleanUp(OutputInterface $output, $pathsToRemove)
+    {
         try {
             $this->filesystem->remove($pathsToRemove);
         } catch (Exception $e) {
@@ -135,7 +141,8 @@ class ImageDemoCommand extends ContainerAwareCommand
      * @param string $origin
      * @param string $target
      */
-    private function moveFiles($origin, $target) {
+    private function moveFiles($origin, $target)
+    {
         $files = scandir($origin);
         foreach ($files as $file) {
             $filepath = $origin . '/' . $file;

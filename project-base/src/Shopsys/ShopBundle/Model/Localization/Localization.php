@@ -45,28 +45,32 @@ class Localization
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Domain $domain
      */
-    public function __construct(Domain $domain) {
+    public function __construct(Domain $domain)
+    {
         $this->domain = $domain;
     }
 
     /**
      * @return string
      */
-    public function getLocale() {
+    public function getLocale()
+    {
         return $this->domain->getLocale();
     }
 
     /**
      * @return string
      */
-    public function getDefaultLocale() {
+    public function getDefaultLocale()
+    {
         return $this->domain->getDomainConfigById(Domain::MAIN_ADMIN_DOMAIN_ID)->getLocale();
     }
 
     /**
      * @return array
      */
-    public function getAllLocales() {
+    public function getAllLocales()
+    {
         if ($this->allLocales === null) {
             $this->allLocales = [];
             foreach ($this->domain->getAll() as $domainConfig) {
@@ -81,7 +85,8 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getLanguageName($locale) {
+    public function getLanguageName($locale)
+    {
         if (!array_key_exists($locale, $this->languageNamesByLocale)) {
             throw new \Shopsys\ShopBundle\Model\Localization\Exception\InvalidLocaleException(
                 sprintf('Locale "%s" is not valid', $locale)
@@ -95,7 +100,8 @@ class Localization
      * @param string $locale
      * @return string
      */
-    public function getCollationByLocale($locale) {
+    public function getCollationByLocale($locale)
+    {
         if (array_key_exists($locale, $this->collationsByLocale)) {
             return $this->collationsByLocale[$locale];
         } else {

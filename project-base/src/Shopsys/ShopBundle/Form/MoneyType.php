@@ -11,14 +11,16 @@ class MoneyType extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->addViewTransformer(new RemoveWhitespacesTransformer());
     }
 
     /**
      * @return string
      */
-    public function getExtendedType() {
+    public function getExtendedType()
+    {
         return 'money';
     }
 }

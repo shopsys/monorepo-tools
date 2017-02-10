@@ -55,7 +55,8 @@ class AdministratorController extends AdminBaseController
      * @Route("/administrator/list/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function listAction() {
+    public function listAction()
+    {
         $queryBuilder = $this->administratorFacade->getAllListableQueryBuilder();
         $dataSource = new QueryBuilderDataSource($queryBuilder, 'a.id');
 
@@ -83,7 +84,8 @@ class AdministratorController extends AdminBaseController
      * @param int $id
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $administrator = $this->administratorFacade->getById($id);
         if ($administrator->isSuperadmin()) {
             $message = 'Superadmin cannot be edited.';
@@ -153,7 +155,8 @@ class AdministratorController extends AdminBaseController
      * @Route("/administrator/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm(
             new AdministratorFormType(AdministratorFormType::SCENARIO_CREATE),
             null,
@@ -212,7 +215,8 @@ class AdministratorController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $realName = $this->administratorFacade->getById($id)->getRealName();
 

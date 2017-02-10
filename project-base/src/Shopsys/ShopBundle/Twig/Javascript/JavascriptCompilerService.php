@@ -88,7 +88,8 @@ class JavascriptCompilerService
      * @param string[] $javascripts
      * @return string[] URLs of compiled JS files
      */
-    public function generateCompiledFiles(array $javascripts) {
+    public function generateCompiledFiles(array $javascripts)
+    {
         $this->javascriptLinks = [];
 
         foreach ($javascripts as $javascript) {
@@ -101,7 +102,8 @@ class JavascriptCompilerService
     /**
      * @param string $javascript
      */
-    private function process($javascript) {
+    private function process($javascript)
+    {
         if ($this->tryToProcessJavascriptFile($javascript)) {
             return;
         }
@@ -117,7 +119,8 @@ class JavascriptCompilerService
      * @param string $javascript
      * @return bool
      */
-    private function tryToProcessJavascriptFile($javascript) {
+    private function tryToProcessJavascriptFile($javascript)
+    {
         $sourcePath = $this->jsSourcePath . '/' . $javascript;
         $relativeTargetPath = $this->getRelativeTargetPath($javascript);
 
@@ -141,7 +144,8 @@ class JavascriptCompilerService
      * @param string $timestamp
      * @return string
      */
-    private function getPathWithTimestamp($relativePath, $timestamp) {
+    private function getPathWithTimestamp($relativePath, $timestamp)
+    {
         $version = '-v' . $timestamp;
 
         return substr_replace($relativePath, $version, strrpos($relativePath, '.'), 0);
@@ -151,7 +155,8 @@ class JavascriptCompilerService
      * @param string $javascript
      * @return string
      */
-    private function getRelativeTargetPath($javascript) {
+    private function getRelativeTargetPath($javascript)
+    {
         $relavitveTargetPath = null;
         if (strpos($javascript, 'admin/') === 0 || strpos($javascript, 'frontend/') === 0) {
             $relavitveTargetPath = substr($this->jsUrlPrefix, 1) . $javascript;
@@ -169,7 +174,8 @@ class JavascriptCompilerService
      * @param string $sourceFilename
      * @param string $relativeTargetPath
      */
-    private function compileJavascriptFile($sourceFilename, $relativeTargetPath) {
+    private function compileJavascriptFile($sourceFilename, $relativeTargetPath)
+    {
         $compiledFilename = $this->webPath . '/' . $relativeTargetPath;
 
         if (!$this->isCompiledFileFresh($compiledFilename, $sourceFilename)) {
@@ -191,7 +197,8 @@ class JavascriptCompilerService
      * @param string $sourceFilename
      * @return bool
      */
-    private function isCompiledFileFresh($compiledFilename, $sourceFilename) {
+    private function isCompiledFileFresh($compiledFilename, $sourceFilename)
+    {
         if (is_file($compiledFilename) && parse_url($sourceFilename, PHP_URL_HOST) === null) {
             $isCompiledFileFresh = filemtime($sourceFilename) < filemtime($compiledFilename);
         } else {
@@ -204,7 +211,8 @@ class JavascriptCompilerService
      * @param string $directoryMask
      * @return bool
      */
-    private function tryToProcessJavascriptDirectoryMask($directoryMask) {
+    private function tryToProcessJavascriptDirectoryMask($directoryMask)
+    {
         $parts = explode('/', $directoryMask);
         $mask = array_pop($parts);
         $path = implode('/', $parts);
@@ -223,7 +231,8 @@ class JavascriptCompilerService
      * @param string $filenameMask
      * @return bool
      */
-    private function processJavascriptByMask($path, $filenameMask) {
+    private function processJavascriptByMask($path, $filenameMask)
+    {
         $filesystemPath = $this->jsSourcePath . '/' . $path;
 
         if (is_dir($filesystemPath)) {
@@ -241,14 +250,16 @@ class JavascriptCompilerService
      * @param string $filenameMask
      * @return bool
      */
-    private function isMaskValid($filenameMask) {
+    private function isMaskValid($filenameMask)
+    {
         return $filenameMask === '' || strpos($filenameMask, '*') !== false;
     }
 
     /**
      * @param string $javascriptUrl
      */
-    private function processExternalJavascript($javascriptUrl) {
+    private function processExternalJavascript($javascriptUrl)
+    {
         $this->javascriptLinks[] = $this->assetPackages->getUrl($javascriptUrl);
     }
 }

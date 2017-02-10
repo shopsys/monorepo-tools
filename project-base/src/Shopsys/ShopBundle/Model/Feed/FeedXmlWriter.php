@@ -13,7 +13,8 @@ class FeedXmlWriter
      */
     private $twig;
 
-    public function __construct(Twig_Environment $twig) {
+    public function __construct(Twig_Environment $twig)
+    {
         $this->twig = $twig;
     }
 
@@ -22,7 +23,8 @@ class FeedXmlWriter
      * @param string $feedTemplatePath
      * @param string $targetFilepath
      */
-    public function writeBegin(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
+    public function writeBegin(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
+    {
         $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'begin', ['domainConfig' => $domainConfig]);
         file_put_contents($targetFilepath, $renderedBlock);
@@ -33,7 +35,8 @@ class FeedXmlWriter
      * @param string $feedTemplatePath
      * @param string $targetFilepath
      */
-    public function writeEnd(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
+    public function writeEnd(DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
+    {
         $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
         $renderedBlock = $this->getRenderedBlock($twigTemplate, 'end', ['domainConfig' => $domainConfig]);
         file_put_contents($targetFilepath, $renderedBlock, FILE_APPEND);
@@ -45,7 +48,8 @@ class FeedXmlWriter
      * @param string $feedTemplatePath
      * @param string $targetFilepath
      */
-    public function writeItems(array $items, DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath) {
+    public function writeItems(array $items, DomainConfig $domainConfig, $feedTemplatePath, $targetFilepath)
+    {
         $twigTemplate = $this->twig->loadTemplate($feedTemplatePath);
 
         $renderedContent = '';
@@ -68,7 +72,8 @@ class FeedXmlWriter
      * @param string $name
      * @param array $parameters
      */
-    private function getRenderedBlock(Twig_Template $twigTemplate, $name, array $parameters = []) {
+    private function getRenderedBlock(Twig_Template $twigTemplate, $name, array $parameters = [])
+    {
         if ($twigTemplate->hasBlock($name)) {
             $templateParameters = array_merge(
                 $this->twig->getGlobals(),

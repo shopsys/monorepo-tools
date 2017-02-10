@@ -13,7 +13,8 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImageServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetUploadedImagesException() {
+    public function testGetUploadedImagesException()
+    {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => false]);
 
         $imageProcessingServiceMock = $this->getMockBuilder(ImageProcessingService::class)
@@ -26,7 +27,8 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
         $imageService->getUploadedImages($imageEntityConfig, 1, [], 'type');
     }
 
-    public function testGetUploadedImages() {
+    public function testGetUploadedImages()
+    {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
         $filenames = ['filename1.jpg', 'filename2.png'];
 
@@ -52,7 +54,8 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCreateImage() {
+    public function testCreateImage()
+    {
         $imageEntityConfig = new ImageEntityConfig('entityName', 'entityClass', [], [], ['type' => true]);
         $filename = 'filename.jpg';
 
@@ -73,7 +76,8 @@ class ImageServiceTest extends PHPUnit_Framework_TestCase
     /**
      * @return \Shopsys\ShopBundle\Component\FileUpload\FileUpload
      */
-    private function getFileUpload() {
+    private function getFileUpload()
+    {
         $fileNamingConvention = new FileNamingConvention();
         $filesystem = new Filesystem();
 

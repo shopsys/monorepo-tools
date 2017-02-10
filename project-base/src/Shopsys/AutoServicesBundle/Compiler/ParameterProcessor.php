@@ -50,7 +50,8 @@ class ParameterProcessor
     /**
      * @param \Shopsys\AutoServicesBundle\Compiler\ClassConstructorFiller $classConstructorFilter
      */
-    public function injectClassConstructorFilter(ClassConstructorFiller $classConstructorFilter) {
+    public function injectClassConstructorFilter(ClassConstructorFiller $classConstructorFilter)
+    {
         $this->classConstructorFilter = $classConstructorFilter;
     }
 
@@ -60,7 +61,8 @@ class ParameterProcessor
      * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
      * @return mixed
      */
-    public function getParameterValue(ReflectionParameter $parameter, $serviceId, ContainerClassList $containerClassList) {
+    public function getParameterValue(ReflectionParameter $parameter, $serviceId, ContainerClassList $containerClassList)
+    {
         $parameterClass = $parameter->getClass();
 
         if ($parameterClass) {
@@ -108,7 +110,8 @@ class ParameterProcessor
      * @param \Shopsys\AutoServicesBundle\Compiler\ContainerClassList $containerClassList
      * @return string
      */
-    private function registerNewService($class, ContainerClassList $containerClassList) {
+    private function registerNewService($class, ContainerClassList $containerClassList)
+    {
         if (isset($this->loading[$class])) {
             throw new \Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException(
                 $class,
@@ -137,7 +140,8 @@ class ParameterProcessor
     /**
      * @param \ReflectionClass $reflectionClass
      */
-    private function watchServiceClassForChanges(ReflectionClass $reflectionClass) {
+    private function watchServiceClassForChanges(ReflectionClass $reflectionClass)
+    {
         do {
             $this->containerBuilder->addResource(new FileResource($reflectionClass->getFileName()));
         } while ($reflectionClass = $reflectionClass->getParentClass());

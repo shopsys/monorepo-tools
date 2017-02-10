@@ -14,7 +14,8 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
     /**
      * @param \Doctrine\Common\Persistence\ObjectManager $manager
      */
-    public function load(ObjectManager $manager) {
+    public function load(ObjectManager $manager)
+    {
         $productEditDataFactory = $this->get(ProductEditDataFactory::class);
         /* @var $productEditDataFactory \Shopsys\ShopBundle\Model\Product\ProductEditDataFactory */
         $productFacade = $this->get(ProductFacade::class);
@@ -33,7 +34,8 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
     /**
      * {@inheritDoc}
      */
-    public function getDependencies() {
+    public function getDependencies()
+    {
         return [
             ProductDataFixture::class,
         ];

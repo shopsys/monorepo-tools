@@ -17,14 +17,16 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
      */
     private $brandFacade;
 
-    public function __construct(BrandFacade $brandFacade) {
+    public function __construct(BrandFacade $brandFacade)
+    {
         $this->brandFacade = $brandFacade;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAllowedOperators() {
+    public function getAllowedOperators()
+    {
         return [
             self::OPERATOR_IS,
             self::OPERATOR_IS_NOT,
@@ -35,14 +37,16 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getName() {
+    public function getName()
+    {
         return 'productBrand';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getValueFormOptions() {
+    public function getValueFormOptions()
+    {
         return [
             'expanded' => false,
             'multiple' => false,
@@ -53,14 +57,16 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
     /**
      * {@inheritdoc}
      */
-    public function getValueFormType() {
+    public function getValueFormType()
+    {
         return FormType::CHOICE;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData) {
+    public function extendQueryBuilder(QueryBuilder $queryBuilder, $rulesData)
+    {
         $isNotBrand = [];
 
         foreach ($rulesData as $index => $ruleData) {

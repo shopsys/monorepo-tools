@@ -8,7 +8,8 @@ use Shopsys\ShopBundle\Tests\Test\FunctionalTestCase;
 
 class JsConstantCompilerPassTest extends FunctionalTestCase
 {
-    public function testProcess() {
+    public function testProcess()
+    {
         $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);
 
         $jsCompiler = new JsCompiler([
@@ -26,7 +27,8 @@ EOD;
         $this->assertSame($expectedResult, $result);
     }
 
-    public function testProcessConstantNotFoundException() {
+    public function testProcessConstantNotFoundException()
+    {
         $this->setExpectedException(\Shopsys\ShopBundle\Component\Javascript\Compiler\Constant\Exception\ConstantNotFoundException::class);
 
         $jsConstantCompilerPass = $this->getContainer()->get(JsConstantCompilerPass::class);

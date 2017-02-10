@@ -48,7 +48,8 @@ class AdvancedSearchOrderFacade
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\Form\Form
      */
-    public function createAdvancedSearchOrderForm(Request $request) {
+    public function createAdvancedSearchOrderForm(Request $request)
+    {
         $rulesData = (array)$request->get(self::RULES_FORM_NAME, null, true);
         $rulesFormData = $this->advancedSearchOrderService->getRulesFormViewDataByRequestData($rulesData);
 
@@ -59,7 +60,8 @@ class AdvancedSearchOrderFacade
      * @param string $filterName
      * @return \Symfony\Component\Form\Form
      */
-    public function createRuleForm($filterName, $index) {
+    public function createRuleForm($filterName, $index)
+    {
         $rulesData = [
             $index => $this->advancedSearchOrderService->createDefaultRuleFormViewData($filterName),
         ];
@@ -71,7 +73,8 @@ class AdvancedSearchOrderFacade
      * @param array $advancedSearchOrderData
      * @return \Doctrine\ORM\QueryBuilder
      */
-    public function getQueryBuilderByAdvancedSearchOrderData($advancedSearchOrderData) {
+    public function getQueryBuilderByAdvancedSearchOrderData($advancedSearchOrderData)
+    {
         $queryBuilder = $this->orderListAdminFacade->getOrderListQueryBuilder();
         $this->advancedSearchOrderService->extendQueryBuilderByAdvancedSearchOrderData($queryBuilder, $advancedSearchOrderData);
 
@@ -82,7 +85,8 @@ class AdvancedSearchOrderFacade
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return bool
      */
-    public function isAdvancedSearchOrderFormSubmitted(Request $request) {
+    public function isAdvancedSearchOrderFormSubmitted(Request $request)
+    {
         $rulesData = $request->get(self::RULES_FORM_NAME);
 
         return $rulesData !== null;

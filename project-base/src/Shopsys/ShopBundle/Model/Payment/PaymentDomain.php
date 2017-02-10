@@ -32,7 +32,8 @@ class PaymentDomain
      * @param \Shopsys\ShopBundle\Model\Payment\Payment $payment
      * @param int $domainId
      */
-    public function __construct(Payment $payment, $domainId) {
+    public function __construct(Payment $payment, $domainId)
+    {
         $this->payment = $payment;
         $this->domainId = $domainId;
     }
@@ -40,7 +41,8 @@ class PaymentDomain
     /**
      * @return int
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 }

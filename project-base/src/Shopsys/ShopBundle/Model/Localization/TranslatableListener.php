@@ -10,7 +10,8 @@ use Prezent\Doctrine\Translatable\Mapping\TranslatableMetadata;
 
 class TranslatableListener extends PrezentTranslatableListener
 {
-    public function __construct(MetadataFactory $factory) {
+    public function __construct(MetadataFactory $factory)
+    {
         parent::__construct($factory);
 
         // set default locale to NULL
@@ -18,7 +19,8 @@ class TranslatableListener extends PrezentTranslatableListener
         $this->setCurrentLocale(null);
     }
 
-    public function getSubscribedEvents() {
+    public function getSubscribedEvents()
+    {
         return [
             Events::loadClassMetadata,
             Events::postLoad,
@@ -29,7 +31,8 @@ class TranslatableListener extends PrezentTranslatableListener
     /**
      * @param LifecycleEventArgs $args
      */
-    public function postPersist(LifecycleEventArgs $args) {
+    public function postPersist(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
         $metadata = $this->getTranslatableMetadata(get_class($entity));
         if ($metadata instanceof TranslatableMetadata) {

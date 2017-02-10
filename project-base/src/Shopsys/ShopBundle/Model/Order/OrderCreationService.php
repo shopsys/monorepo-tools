@@ -80,7 +80,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null) {
+    public function prefillFrontFormData(FrontOrderData $frontOrderData, User $user, Order $order = null)
+    {
         if ($order instanceof Order) {
             $this->prefillTransportAndPaymentFromOrder($frontOrderData, $order);
         }
@@ -91,7 +92,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    private function prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order) {
+    private function prefillTransportAndPaymentFromOrder(FrontOrderData $frontOrderData, Order $order)
+    {
         $frontOrderData->transport = $order->getTransport();
         $frontOrderData->payment = $order->getPayment();
     }
@@ -100,7 +102,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    private function prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user) {
+    private function prefillFrontFormDataFromCustomer(FrontOrderData $frontOrderData, User $user)
+    {
         $frontOrderData->firstName = $user->getFirstName();
         $frontOrderData->lastName = $user->getLastName();
         $frontOrderData->email = $user->getEmail();
@@ -132,7 +135,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
      */
-    public function fillOrderItems(Order $order, OrderPreview $orderPreview) {
+    public function fillOrderItems(Order $order, OrderPreview $orderPreview)
+    {
         $locale = $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
 
         $this->fillOrderProducts($order, $orderPreview, $locale);
@@ -145,7 +149,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
-    private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale) {
+    private function fillOrderTransportAndPayment(Order $order, OrderPreview $orderPreview, $locale)
+    {
         $payment = $order->getPayment();
         $paymentPrice = $this->paymentPriceCalculation->calculatePrice(
             $payment,
@@ -186,7 +191,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
-    private function fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale) {
+    private function fillOrderProducts(Order $order, OrderPreview $orderPreview, $locale)
+    {
         $quantifiedItemPrices = $orderPreview->getQuantifiedItemsPrices();
         $quantifiedItemDiscounts = $orderPreview->getQuantifiedItemsDiscounts();
 
@@ -224,7 +230,8 @@ class OrderCreationService
      * @param \Shopsys\ShopBundle\Model\Order\Preview\OrderPreview $orderPreview
      * @param string $locale
      */
-    private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale) {
+    private function fillOrderRounding(Order $order, OrderPreview $orderPreview, $locale)
+    {
         if ($orderPreview->getRoundingPrice() !== null) {
             new OrderProduct(
                 $order,
@@ -245,7 +252,8 @@ class OrderCreationService
      * @param string $locale
      * @param float $discountPercent
      */
-    private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale, $discountPercent) {
+    private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale, $discountPercent)
+    {
         $name = sprintf('%s %s - %s',
             t('Discount coupon', [], 'messages', $locale),
             $this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),

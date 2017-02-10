@@ -25,14 +25,16 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domains
      */
-    public function __construct(array $domains) {
+    public function __construct(array $domains)
+    {
         $this->domains = $domains;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'free_transport_and_payment_price_limits_form';
     }
 
@@ -40,7 +42,8 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add($this->getPriceLimitsBuilder($builder))
             ->add('save', FormType::SUBMIT);
@@ -50,7 +53,8 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @return \Symfony\Component\Form\FormBuilderInterface
      */
-    private function getPriceLimitsBuilder(FormBuilderInterface $builder) {
+    private function getPriceLimitsBuilder(FormBuilderInterface $builder)
+    {
         $formBuilderForDomains = $builder->create(self::DOMAINS_SUBFORM_NAME, null, ['compound' => true]);
 
         foreach ($this->domains as $domainConfig) {
@@ -97,7 +101,8 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
         return $formBuilderForDomains;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

@@ -45,7 +45,8 @@ class SitemapRepository
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
      */
-    public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig, PricingGroup $pricingGroup) {
+    public function getSitemapItemsForVisibleProducts(DomainConfig $domainConfig, PricingGroup $pricingGroup)
+    {
         $queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainConfig->getId(), $pricingGroup);
         $queryBuilder
             ->select('fu.slug')
@@ -65,7 +66,8 @@ class SitemapRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
      */
-    public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig) {
+    public function getSitemapItemsForVisibleCategories(DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->categoryRepository->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId());
         $queryBuilder
             ->select('fu.slug')
@@ -85,7 +87,8 @@ class SitemapRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
      */
-    public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
+    public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig)
+    {
         $queryBuilder = $this->articleRepository->getVisibleArticlesByDomainIdQueryBuilder($domainConfig->getId());
         $queryBuilder
             ->select('fu.slug')
@@ -105,7 +108,8 @@ class SitemapRepository
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[]
      */
-    private function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder) {
+    private function getSitemapItemsFromQueryBuilderWithSlugField(QueryBuilder $queryBuilder)
+    {
         $rows = $queryBuilder->getQuery()->execute(null, AbstractQuery::HYDRATE_SCALAR);
         $sitemapItems = [];
         foreach ($rows as $row) {

@@ -9,7 +9,8 @@ use Shopsys\ShopBundle\Model\Category\CategoryService;
 
 class CategoryServiceTest extends PHPUnit_Framework_TestCase
 {
-    public function testCreateSetRoot() {
+    public function testCreateSetRoot()
+    {
         $categoryData = new CategoryData();
         $rootCategory = new Category($categoryData);
 
@@ -19,7 +20,8 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($rootCategory, $category->getParent());
     }
 
-    public function testCreate() {
+    public function testCreate()
+    {
         $rootCategory = new Category(new CategoryData());
         $parentCategory = new Category(new CategoryData());
         $categoryData = new CategoryData();
@@ -31,7 +33,8 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($parentCategory, $category->getParent());
     }
 
-    public function testEditSetRoot() {
+    public function testEditSetRoot()
+    {
         $categoryData = new CategoryData();
         $rootCategory = new Category($categoryData);
         $category = new Category(new CategoryData());
@@ -42,7 +45,8 @@ class CategoryServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($rootCategory, $category->getParent());
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $rootCategory = new Category(new CategoryData());
         $parentCategory = new Category(new CategoryData());
         $categoryData = new CategoryData();

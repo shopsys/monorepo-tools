@@ -11,7 +11,8 @@ class OrderDataMapper
      * @param \Shopsys\ShopBundle\Model\Order\FrontOrderData $frontOrderData
      * @return \Shopsys\ShopBundle\Model\Order\OrderData
      */
-    public function getOrderDataFromFrontOrderData(FrontOrderData $frontOrderData) {
+    public function getOrderDataFromFrontOrderData(FrontOrderData $frontOrderData)
+    {
         $orderData = new OrderData();
         $orderData->transport = $frontOrderData->transport;
         $orderData->payment = $frontOrderData->payment;

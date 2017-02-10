@@ -11,14 +11,16 @@ class WebDriverHelper extends Module
     /**
      * @return \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver
      */
-    private function getWebDriver() {
+    private function getWebDriver()
+    {
         return $this->getModule(StrictWebDriver::class);
     }
 
     /**
      * @param string $page
      */
-    public function seeCurrentPageEquals($page) {
+    public function seeCurrentPageEquals($page)
+    {
         $expectedUrl = Uri::appendPath($this->getWebDriver()->_getUrl(), $page);
         $currentUrl = $this->getWebDriver()->webDriver->getCurrentURL();
 

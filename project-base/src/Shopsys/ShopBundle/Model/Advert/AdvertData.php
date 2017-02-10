@@ -76,7 +76,8 @@ class AdvertData
     /**
      * @param \Shopsys\ShopBundle\Model\Advert\Advert $advert
      */
-    public function setFromEntity(Advert $advert) {
+    public function setFromEntity(Advert $advert)
+    {
         $this->name = $advert->getName();
         $this->type = $advert->getType();
         $this->code = $advert->getCode();

@@ -48,14 +48,16 @@ class FeedConfig
     /**
      * @return string
      */
-    public function getLabel() {
+    public function getLabel()
+    {
         return $this->label;
     }
 
     /**
      * @return string
      */
-    public function getFeedName() {
+    public function getFeedName()
+    {
         return $this->name;
     }
 
@@ -65,21 +67,24 @@ class FeedConfig
      *
      * @return string
      */
-    public function getFeedFilename(DomainConfig $domainConfig, $feedHash) {
+    public function getFeedFilename(DomainConfig $domainConfig, $feedHash)
+    {
         return $feedHash . '_' . $this->name . '_' . $domainConfig->getId() . '.xml';
     }
 
     /**
      * @return string
      */
-    public function getTemplateFilepath() {
+    public function getTemplateFilepath()
+    {
         return $this->templateFilepath;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\FeedItemRepositoryInterface
      */
-    public function getFeedItemRepository() {
+    public function getFeedItemRepository()
+    {
         return $this->feedItemRepository;
     }
 }

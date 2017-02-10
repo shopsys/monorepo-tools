@@ -183,7 +183,8 @@ class OrderData
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    public function setFromEntity(Order $order) {
+    public function setFromEntity(Order $order)
+    {
         $this->orderNumber = $order->getNumber();
         $this->status = $order->getStatus();
         $this->firstName = $order->getFirstName();
@@ -230,7 +231,8 @@ class OrderData
     /**
      * @return \Shopsys\ShopBundle\Model\Order\Item\OrderItemData[]
      */
-    public function getNewItemsWithoutTransportAndPayment() {
+    public function getNewItemsWithoutTransportAndPayment()
+    {
         $newItemsWithoutTransportAndPayment = [];
         foreach ($this->itemsWithoutTransportAndPayment as $index => $item) {
             if (strpos($index, self::NEW_ITEM_PREFIX) === 0) {

@@ -9,7 +9,8 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
 {
-    public function testOnKernelResponseRecalc() {
+    public function testOnKernelResponseRecalc()
+    {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
         $productVisibilityRepositoryMock
             ->expects($this->once())
@@ -29,7 +30,8 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
         $productVisibilityFacade->onKernelResponse($eventMock);
     }
 
-    public function testOnKernelResponseNoRecalc() {
+    public function testOnKernelResponseNoRecalc()
+    {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
         $productVisibilityRepositoryMock->expects($this->never())->method('refreshProductsVisibility');
 
@@ -45,7 +47,8 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
         $productVisibilityFacade->onKernelResponse($eventMock);
     }
 
-    public function testRefreshProductsVisibility() {
+    public function testRefreshProductsVisibility()
+    {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
         $productVisibilityRepositoryMock->expects($this->once())->method('refreshProductsVisibility');
 
@@ -53,7 +56,8 @@ class ProductVisibilityFacadeTest extends PHPUnit_Framework_TestCase
         $productVisibilityFacade->refreshProductsVisibility();
     }
 
-    public function testRefreshProductsVisibilityForMarked() {
+    public function testRefreshProductsVisibilityForMarked()
+    {
         $productVisibilityRepositoryMock = $this->getMock(ProductVisibilityRepository::class, [], [], '', false);
         $productVisibilityRepositoryMock
             ->expects($this->once())

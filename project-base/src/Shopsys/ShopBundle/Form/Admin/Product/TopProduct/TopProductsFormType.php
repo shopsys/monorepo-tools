@@ -18,14 +18,16 @@ class TopProductsFormType extends AbstractType
     /**
      * @param \Shopsys\ShopBundle\Component\Transformers\RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer
      */
-    public function __construct(RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer) {
+    public function __construct(RemoveDuplicatesFromArrayTransformer $removeDuplicatesTransformer)
+    {
         $this->removeDuplicatesTransformer = $removeDuplicatesTransformer;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'top_products_form';
     }
 
@@ -33,7 +35,8 @@ class TopProductsFormType extends AbstractType
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options) {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder
             ->add(
                 $builder
@@ -49,7 +52,8 @@ class TopProductsFormType extends AbstractType
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
         $resolver->setDefaults([
             'attr' => ['novalidate' => 'novalidate'],
         ]);

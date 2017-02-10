@@ -18,7 +18,8 @@ class CronModuleExecutor
     /**
      * @param int $secondsTimeout
      */
-    public function __construct($secondsTimeout) {
+    public function __construct($secondsTimeout)
+    {
         $this->canRunTo = new DateTimeImmutable('+' . $secondsTimeout . ' sec');
     }
 
@@ -28,7 +29,8 @@ class CronModuleExecutor
      * @param bool $suspended
      * @return string
      */
-    public function runModule($cronModuleService, $suspended) {
+    public function runModule($cronModuleService, $suspended)
+    {
         //@codingStandardsIgnoreStop
         if (!$this->canRun()) {
             return self::RUN_STATUS_TIMEOUT;
@@ -58,7 +60,8 @@ class CronModuleExecutor
     /**
      * @return bool
      */
-    public function canRun() {
+    public function canRun()
+    {
         return $this->canRunTo > new DateTimeImmutable();
     }
 

@@ -36,7 +36,8 @@ class AdministratorData
      * @param string|null $password
      * @param string|null $email
      */
-    public function __construct($superadmin = false, $username = null, $realName = null, $password = null, $email = null) {
+    public function __construct($superadmin = false, $username = null, $realName = null, $password = null, $email = null)
+    {
         $this->username = $username;
         $this->realName = $realName;
         $this->password = $password;
@@ -47,7 +48,8 @@ class AdministratorData
     /**
      * @param \Shopsys\ShopBundle\Model\Administrator\Administrator $administrator
      */
-    public function setFromEntity(Administrator $administrator) {
+    public function setFromEntity(Administrator $administrator)
+    {
         $this->email = $administrator->getEmail();
         $this->realName = $administrator->getRealName();
         $this->username = $administrator->getUsername();

@@ -30,7 +30,8 @@ class CountryController extends AdminBaseController
     /**
      * @Route("/country/list/")
      */
-    public function listAction() {
+    public function listAction()
+    {
         $countryInlineEdit = $this->countryInlineEdit;
 
         $grid = $countryInlineEdit->getGrid();

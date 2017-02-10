@@ -13,13 +13,15 @@ class ShopsysShopBundle extends Bundle
     /**
      * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
      */
-    public function build(ContainerBuilder $container) {
+    public function build(ContainerBuilder $container)
+    {
         parent::build($container);
 
         $container->addCompilerPass(new CustomTranslationsCompilerPass());
     }
 
-    public function boot() {
+    public function boot()
+    {
         parent::boot();
 
         $autoContainer = $this->container->get('shopsys.auto_services.auto_container');

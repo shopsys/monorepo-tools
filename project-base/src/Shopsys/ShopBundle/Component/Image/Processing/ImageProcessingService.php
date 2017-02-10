@@ -49,7 +49,8 @@ class ImageProcessingService
      * @param string $filepath
      * @return \Intervention\Image\Image
      */
-    public function createInterventionImage($filepath) {
+    public function createInterventionImage($filepath)
+    {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
         if (!in_array($extension, $this->supportedImageExtensions)) {
             throw new \Shopsys\ShopBundle\Component\Image\Processing\Exception\FileIsNotSupportedImageException($filepath);
@@ -65,7 +66,8 @@ class ImageProcessingService
      * @param string $filepath
      * @return string
      */
-    public function convertToShopFormatAndGetNewFilename($filepath) {
+    public function convertToShopFormatAndGetNewFilename($filepath)
+    {
         $extension = strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
         $newFilepath = pathinfo($filepath, PATHINFO_DIRNAME) . '/' . pathinfo($filepath, PATHINFO_FILENAME) . '.';
 
@@ -92,7 +94,8 @@ class ImageProcessingService
      * @param bool $crop
      * @return \Intervention\Image\Image
      */
-    public function resize(Image $image, $width, $height, $crop = false) {
+    public function resize(Image $image, $width, $height, $crop = false)
+    {
         if ($crop) {
             $image->fit($width, $height, function (Constraint $constraint) {
                 $constraint->aspectRatio();
@@ -112,14 +115,16 @@ class ImageProcessingService
      * @param \Intervention\Image\Image $image
      * @param \Shopsys\ShopBundle\Component\Image\Config\ImageSizeConfig $sizeConfig
      */
-    public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig) {
+    public function resizeBySizeConfig(Image $image, ImageSizeConfig $sizeConfig)
+    {
         $this->resize($image, $sizeConfig->getWidth(), $sizeConfig->getHeight(), $sizeConfig->getCrop());
     }
 
     /**
      * @return string[]
      */
-    public function getSupportedImageExtensions() {
+    public function getSupportedImageExtensions()
+    {
         return $this->supportedImageExtensions;
     }
 }

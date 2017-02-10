@@ -159,7 +159,8 @@ class OrderController extends FrontBaseController
     /**
      * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $flashMessageBag = $this->get('shopsys.shop.component.flash_message.bag.front');
         /* @var $flashMessageBag \Shopsys\ShopBundle\Component\FlashMessage\Bag */
 
@@ -261,7 +262,8 @@ class OrderController extends FrontBaseController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function previewAction(Request $request) {
+    public function previewAction(Request $request)
+    {
         $transportId = $request->get('transportId');
         $paymentId = $request->get('paymentId');
 
@@ -321,7 +323,8 @@ class OrderController extends FrontBaseController
         }
     }
 
-    public function saveOrderFormAction() {
+    public function saveOrderFormAction()
+    {
         $payments = $this->paymentFacade->getVisibleOnCurrentDomain();
         $transports = $this->transportFacade->getVisibleOnCurrentDomain($payments);
         $countries = $this->countryFacade->getAllOnCurrentDomain();
@@ -334,7 +337,8 @@ class OrderController extends FrontBaseController
         return new Response();
     }
 
-    public function sentAction() {
+    public function sentAction()
+    {
         $orderId = $this->session->get(self::SESSION_CREATED_ORDER, null);
         $this->session->remove(self::SESSION_CREATED_ORDER);
 
@@ -348,11 +352,13 @@ class OrderController extends FrontBaseController
         ]);
     }
 
-    public function termsAndConditionsAction() {
+    public function termsAndConditionsAction()
+    {
         return $this->getTermsAndConditionsResponse();
     }
 
-    public function termsAndConditionsDownloadAction() {
+    public function termsAndConditionsDownloadAction()
+    {
         $response = $this->getTermsAndConditionsResponse();
 
         return new DownloadFileResponse(
@@ -364,7 +370,8 @@ class OrderController extends FrontBaseController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function getTermsAndConditionsResponse() {
+    private function getTermsAndConditionsResponse()
+    {
         return $this->render('@ShopsysShop/Front/Content/Order/termsAndConditions.html.twig', [
             'termsAndConditionsArticle' => $this->termsAndConditionsFacade->findTermsAndConditionsArticleByDomainId(
                 $this->domain->getId()
@@ -375,7 +382,8 @@ class OrderController extends FrontBaseController
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Order $order
      */
-    private function sendMail($order) {
+    private function sendMail($order)
+    {
         $mailTemplate = $this->orderMailFacade->getMailTemplateByStatusAndDomainId($order->getStatus(), $order->getDomainId());
         if ($mailTemplate->isSendMail()) {
             $this->orderMailFacade->sendEmail($order);

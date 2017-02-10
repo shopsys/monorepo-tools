@@ -14,14 +14,16 @@ class ProductListOrderingModeForSearchFacade
      */
     private $productListOrderingModeService;
 
-    public function __construct(ProductListOrderingModeService $productListOrderingModeService) {
+    public function __construct(ProductListOrderingModeService $productListOrderingModeService)
+    {
         $this->productListOrderingModeService = $productListOrderingModeService;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Listing\ProductListOrderingConfig
      */
-    public function getProductListOrderingConfig() {
+    public function getProductListOrderingConfig()
+    {
         return new ProductListOrderingConfig(
             [
                 ProductListOrderingModeService::ORDER_BY_RELEVANCE => t('relevance'),
@@ -40,7 +42,8 @@ class ProductListOrderingModeForSearchFacade
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return string
      */
-    public function getOrderingModeFromRequest(Request $request) {
+    public function getOrderingModeFromRequest(Request $request)
+    {
         return $this->productListOrderingModeService->getOrderingModeFromRequest(
             $request,
             $this->getProductListOrderingConfig()

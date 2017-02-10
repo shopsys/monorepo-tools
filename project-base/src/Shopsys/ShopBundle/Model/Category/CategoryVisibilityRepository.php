@@ -35,7 +35,8 @@ class CategoryVisibilityRepository
         $this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
     }
 
-    public function refreshCategoriesVisibility() {
+    public function refreshCategoriesVisibility()
+    {
         $domains = $this->domain->getAll();
         foreach ($domains as $domainConfig) {
             $this->refreshCategoriesVisibilityOnDomain($domainConfig);
@@ -45,7 +46,8 @@ class CategoryVisibilityRepository
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
-    private function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig) {
+    private function refreshCategoriesVisibilityOnDomain(DomainConfig $domainConfig)
+    {
         $this->setRootCategoryVisibleOnDomain($domainConfig);
 
         $maxLevel = $this->getMaxLevelOnDomain($domainConfig);
@@ -58,7 +60,8 @@ class CategoryVisibilityRepository
     /**
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      */
-    private function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig) {
+    private function setRootCategoryVisibleOnDomain(DomainConfig $domainConfig)
+    {
         $this->em->getConnection()->executeUpdate('UPDATE category_domains AS cd
                 SET visible = TRUE
 
@@ -77,7 +80,8 @@ class CategoryVisibilityRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @return int
      */
-    private function getMaxLevelOnDomain(DomainConfig $domainConfig) {
+    private function getMaxLevelOnDomain(DomainConfig $domainConfig)
+    {
         return $this->em->getConnection()->fetchColumn('SELECT MAX(c.level)
             FROM categories c
             JOIN category_domains cd ON cd.category_id = c.id AND cd.domain_id = :domainId
@@ -92,7 +96,8 @@ class CategoryVisibilityRepository
      * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
      * @param int $level
      */
-    private function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level) {
+    private function refreshCategoriesVisibilityOnDomainAndLevel(DomainConfig $domainConfig, $level)
+    {
         $this->em->getConnection()->executeUpdate('UPDATE category_domains AS cd
                 SET visible = (
                         cd.hidden = FALSE
@@ -120,7 +125,8 @@ class CategoryVisibilityRepository
     /**
      * @param \Symfony\Component\HttpKernel\Event\FilterResponseEvent $event
      */
-    public function onKernelResponse(FilterResponseEvent $event) {
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
         if (!$event->isMasterRequest()) {
             return;
         }

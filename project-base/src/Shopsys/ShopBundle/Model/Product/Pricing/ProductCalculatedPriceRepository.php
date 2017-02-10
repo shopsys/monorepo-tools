@@ -18,14 +18,16 @@ class ProductCalculatedPriceRepository
     /**
      * @param \Doctrine\ORM\EntityManager $em
      */
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getProductCalculatedPriceRepository() {
+    private function getProductCalculatedPriceRepository()
+    {
         return $this->em->getRepository(ProductCalculatedPrice::class);
     }
 
@@ -35,7 +37,8 @@ class ProductCalculatedPriceRepository
      * @param string|null $priceWithVat
      * @return \Shopsys\ShopBundle\Model\Product\Pricing\ProductCalculatedPrice
      */
-    public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat) {
+    public function saveCalculatedPrice(Product $product, PricingGroup $pricingGroup, $priceWithVat)
+    {
         $productCalculatedPrice = $this->getProductCalculatedPriceRepository()->find([
             'product' => $product->getId(),
             'pricingGroup' => $pricingGroup->getId(),
@@ -54,7 +57,8 @@ class ProductCalculatedPriceRepository
     /**
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      */
-    public function createProductCalculatedPricesForPricingGroup(PricingGroup $pricingGroup) {
+    public function createProductCalculatedPricesForPricingGroup(PricingGroup $pricingGroup)
+    {
         $query = $this->em->createNativeQuery('INSERT INTO product_calculated_prices (product_id, pricing_group_id, price_with_vat)
             SELECT id, :pricingGroupId, :priceWithVat FROM products', new ResultSetMapping());
         $query->execute([

@@ -9,7 +9,8 @@ class PermanentPhpFileCache extends PhpFileCache
     /**
      * {@inheritdoc}
      */
-    protected function doFetch($id) {
+    protected function doFetch($id)
+    {
         $fileName = $this->getFilename($id);
 
         // note: error suppression is still faster than `file_exists`, `is_file` and `is_readable`
@@ -23,7 +24,8 @@ class PermanentPhpFileCache extends PhpFileCache
     /**
      * {@inheritdoc}
      */
-    protected function doContains($id) {
+    protected function doContains($id)
+    {
         $value = $this->doFetch($id);
 
         return $value !== false;
@@ -32,7 +34,8 @@ class PermanentPhpFileCache extends PhpFileCache
     /**
      * {@inheritdoc}
      */
-    protected function doSave($id, $data, $lifeTime = 0) {
+    protected function doSave($id, $data, $lifeTime = 0)
+    {
         if ($lifeTime !== 0 && $lifeTime !== null) {
             $message = self::class . ' does not support $lifetime';
             throw new \Shopsys\ShopBundle\Component\Doctrine\Cache\Exception\InvalidArgumentException($message);

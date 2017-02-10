@@ -58,14 +58,16 @@ class ImageDeleteDoctrineListener
      *
      * @return \Shopsys\ShopBundle\Component\Image\ImageFacade
      */
-    private function getImageFacade() {
+    private function getImageFacade()
+    {
         return $this->container->get(ImageFacade::class);
     }
 
     /**
      * @param \Doctrine\ORM\Event\LifecycleEventArgs $args
      */
-    public function preRemove(LifecycleEventArgs $args) {
+    public function preRemove(LifecycleEventArgs $args)
+    {
         $entity = $args->getEntity();
 
         if ($this->imageConfig->hasImageConfig($entity)) {
@@ -80,7 +82,8 @@ class ImageDeleteDoctrineListener
      * @param \Doctrine\ORM\EntityManager $em
      * @param \Shopsys\ShopBundle\Component\Image\ImageFacade $imageFacade
      */
-    private function deleteEntityImages($entity, EntityManager $em) {
+    private function deleteEntityImages($entity, EntityManager $em)
+    {
         $images = $this->getImageFacade()->getAllImagesByEntity($entity);
         if (count($images) > 0) {
             foreach ($images as $entity) {

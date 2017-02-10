@@ -13,7 +13,8 @@ class ProductDetailPage extends AbstractPage
     /**
      * @param int $quantity
      */
-    public function addProductIntoCart($quantity = 1) {
+    public function addProductIntoCart($quantity = 1)
+    {
         $this->tester->fillFieldByCss(
             self::PRODUCT_DETAIL_QUANTITY_INPUT,
             $quantity

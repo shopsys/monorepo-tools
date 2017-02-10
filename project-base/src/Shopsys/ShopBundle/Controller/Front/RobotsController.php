@@ -27,7 +27,8 @@ class RobotsController extends FrontBaseController
         $this->sitemapService = $sitemapService;
     }
 
-    public function indexAction() {
+    public function indexAction()
+    {
         $sitemapsUrlPrefix = $this->get('service_container')->getParameter('shopsys.sitemaps_url_prefix');
         $sitemapFilePrefix = $this->sitemapService->getSitemapFilePrefixForDomain($this->domain->getId());
 

@@ -10,7 +10,8 @@ class LayoutPage extends AbstractPage
      * @param string $email
      * @param string $password
      */
-    public function openLoginPopup() {
+    public function openLoginPopup()
+    {
         $this->tester->clickByText('Přihlásit se');
         $this->tester->wait(1); // wait for Shopsys.window to show
     }

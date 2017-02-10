@@ -31,7 +31,8 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
     /**
      * @param \PLUG\JavaScript\JNodes\nonterminal\JProgramNode $node
      */
-    public function process(JProgramNode $node) {
+    public function process(JProgramNode $node)
+    {
         $jsTranslatorsCalls = $this->jsTranslatorCallParser->parse($node);
 
         foreach ($jsTranslatorsCalls as $jsTranslatorsCall) {
@@ -53,7 +54,8 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
      * @param \Shopsys\ShopBundle\Component\Javascript\Parser\Translator\JsTranslatorCall $jsTranslatorsCall
      * @return string
      */
-    private function translate($jsTranslatorsCall) {
+    private function translate($jsTranslatorsCall)
+    {
         $locale = $this->translator->getLocale();
         $catalogue = $this->translator->getCatalogue($locale);
         $messageId = $jsTranslatorsCall->getMessageId();
@@ -72,7 +74,8 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
      * @param string $messageId
      * @return string
      */
-    private function markAsNotTranslated($messageId) {
+    private function markAsNotTranslated($messageId)
+    {
         $pluralizationParts = explode('|', $messageId);
         $markedMessages = [];
         foreach ($pluralizationParts as $part) {

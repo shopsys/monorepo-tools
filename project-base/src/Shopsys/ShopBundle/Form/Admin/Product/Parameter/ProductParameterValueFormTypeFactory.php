@@ -20,7 +20,8 @@ class ProductParameterValueFormTypeFactory
     /**
      * @return \Shopsys\ShopBundle\Form\Admin\Product\Parameter\ProductParameterValueFormType
      */
-    public function create() {
+    public function create()
+    {
         $parameters = $this->parameterRepository->getAll();
 
         return new ProductParameterValueFormType($parameters);

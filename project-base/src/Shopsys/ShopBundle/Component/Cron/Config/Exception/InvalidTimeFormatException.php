@@ -13,7 +13,8 @@ class InvalidTimeFormatException extends Exception implements CronConfigExceptio
      * @param int $divisibleBy
      * @param \Exception $previous
      */
-    public function __construct($timeString, $maxValue, $divisibleBy, Exception $previous = null) {
+    public function __construct($timeString, $maxValue, $divisibleBy, Exception $previous = null)
+    {
         parent::__construct(
             'Time configuration "' . $timeString . '" is invalid. '
             . 'Must by divisible by ' . $divisibleBy . ' and less or equal than ' . $maxValue,

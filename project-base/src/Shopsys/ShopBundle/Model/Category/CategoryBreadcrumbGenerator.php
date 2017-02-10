@@ -30,7 +30,8 @@ class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
     /**
      * {@inheritDoc}
      */
-    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    public function getBreadcrumbItems($routeName, array $routeParameters = [])
+    {
         $category = $this->categoryRepository->getById($routeParameters['id']);
 
         $categoriesInPath = $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain(

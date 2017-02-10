@@ -14,7 +14,8 @@ class PoFileLoader extends BasePoFileLoader
      * @param string $domain
      * @return \Symfony\Component\Translation\MessageCatalogue
      */
-    public function load($resource, $locale, $domain = 'messages') {
+    public function load($resource, $locale, $domain = 'messages')
+    {
         $catalogue = $this->loadIncludingEmpty($resource, $locale, $domain);
 
         $messages = $catalogue->all($domain);
@@ -39,7 +40,8 @@ class PoFileLoader extends BasePoFileLoader
      * @param string $domain
      * @return \Symfony\Component\Translation\MessageCatalogue
      */
-    public function loadIncludingEmpty($resource, $locale, $domain = 'messages') {
+    public function loadIncludingEmpty($resource, $locale, $domain = 'messages')
+    {
         $catalogue = parent::load($resource, $locale, $domain);
 
         return $catalogue;

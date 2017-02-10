@@ -39,7 +39,8 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[]
      */
-    public function getMultidomainEntitiesNames() {
+    public function getMultidomainEntitiesNames()
+    {
         return $this->multidomainEntityClassFinder->getMultidomainEntitiesNames(
             $this->em->getMetadataFactory()->getAllMetadata(),
             $this->getIgnoredEntitiesNames(),
@@ -50,7 +51,8 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[tableName][]
      */
-    public function getAllNotNullableColumnNamesIndexedByTableName() {
+    public function getAllNotNullableColumnNamesIndexedByTableName()
+    {
         $multidomainClassesMetadata = [];
         foreach ($this->getMultidomainEntitiesNames() as $multidomainEntityName) {
             $multidomainClassesMetadata[] = $this->em->getMetadataFactory()->getMetadataFor($multidomainEntityName);
@@ -62,7 +64,8 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[]
      */
-    private function getIgnoredEntitiesNames() {
+    private function getIgnoredEntitiesNames()
+    {
         return [
             SettingValue::class,
             ProductVisibility::class,
@@ -72,7 +75,8 @@ class MultidomainEntityClassFinderFacade
     /**
      * @return string[]
      */
-    private function getManualMultidomainEntitiesNames() {
+    private function getManualMultidomainEntitiesNames()
+    {
         return [
             MailTemplate::class,
         ];

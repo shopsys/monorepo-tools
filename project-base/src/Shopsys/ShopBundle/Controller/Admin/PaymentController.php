@@ -74,7 +74,8 @@ class PaymentController extends AdminBaseController
      * @Route("/payment/new/")
      * @param \Symfony\Component\HttpFoundation\Request $request
      */
-    public function newAction(Request $request) {
+    public function newAction(Request $request)
+    {
         $form = $this->createForm($this->paymentEditFormTypeFactory->create());
         $paymentEditData = $this->paymentEditDataFactory->createDefault();
 
@@ -109,7 +110,8 @@ class PaymentController extends AdminBaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param int $id
      */
-    public function editAction(Request $request, $id) {
+    public function editAction(Request $request, $id)
+    {
         $payment = $this->paymentFacade->getByIdWithTransports($id);
 
         $form = $this->createForm($this->paymentEditFormTypeFactory->create());
@@ -150,7 +152,8 @@ class PaymentController extends AdminBaseController
      * @CsrfProtection
      * @param int $id
      */
-    public function deleteAction($id) {
+    public function deleteAction($id)
+    {
         try {
             $paymentName = $this->paymentFacade->getById($id)->getName();
 
@@ -169,7 +172,8 @@ class PaymentController extends AdminBaseController
         return $this->redirectToRoute('admin_transportandpayment_list');
     }
 
-    public function listAction() {
+    public function listAction()
+    {
         $grid = $this->paymentGridFactory->create();
 
         return $this->render('@ShopsysShop/Admin/Content/Payment/list.html.twig', [

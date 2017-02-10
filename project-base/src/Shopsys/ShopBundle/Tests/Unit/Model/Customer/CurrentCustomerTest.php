@@ -15,7 +15,8 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class CurrentCustomerTest extends PHPUnit_Framework_TestCase
 {
-    public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup() {
+    public function testGetPricingGroupForUnregisteredCustomerReturnsDefaultPricingGroup()
+    {
         $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
 
         $tokenStorageMock = $this->getMock(TokenStorage::class, [], [], '', false);
@@ -27,7 +28,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
         $this->assertSame($expectedPricingGroup, $pricingGroup);
     }
 
-    public function testGetPricingGroupForRegisteredCustomerReturnsHisPricingGroup() {
+    public function testGetPricingGroupForRegisteredCustomerReturnsHisPricingGroup()
+    {
         $expectedPricingGroup = new PricingGroup(new PricingGroupData('name', 1), 1);
         $user = $this->getUserWithPricingGroup($expectedPricingGroup);
 
@@ -44,7 +46,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $defaultPricingGroup
      * @return \PHPUnit_Framework_MockObject_MockObject|\Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupSettingFacade
      */
-    private function getPricingGroupSettingFacadeMockReturningDefaultPricingGroup(PricingGroup $defaultPricingGroup) {
+    private function getPricingGroupSettingFacadeMockReturningDefaultPricingGroup(PricingGroup $defaultPricingGroup)
+    {
         $pricingGroupSettingFacadeMock = $this->getMockBuilder(PricingGroupSettingFacade::class)
             ->setMethods(['getDefaultPricingGroupByCurrentDomain'])
             ->disableOriginalConstructor()
@@ -61,7 +64,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
      * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
      * @return \Shopsys\ShopBundle\Model\Customer\User
      */
-    private function getUserWithPricingGroup(PricingGroup $pricingGroup) {
+    private function getUserWithPricingGroup(PricingGroup $pricingGroup)
+    {
         $billingAddress = $this->getMock(BillingAddress::class, [], [], '', false);
         $userData = new UserData();
         $userData->pricingGroup = $pricingGroup;
@@ -73,7 +77,8 @@ class CurrentCustomerTest extends PHPUnit_Framework_TestCase
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      * @return \PHPUnit_Framework_MockObject_MockObject|\Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
-    private function getTokenStorageMockForUser(User $user) {
+    private function getTokenStorageMockForUser(User $user)
+    {
         $tokenMock = $this->getMockBuilder(TokenInterface::class)
             ->setMethods(['getUser'])
             ->getMockForAbstractClass();

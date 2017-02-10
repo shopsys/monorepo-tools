@@ -63,7 +63,8 @@ class UserData
     /**
      * @param \Shopsys\ShopBundle\Model\Customer\User $user
      */
-    public function setFromEntity(User $user) {
+    public function setFromEntity(User $user)
+    {
         $this->domainId = $user->getDomainId();
         $this->firstName = $user->getFirstName();
         $this->lastName = $user->getLastName();

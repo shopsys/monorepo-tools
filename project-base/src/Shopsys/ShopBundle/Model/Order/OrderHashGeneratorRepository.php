@@ -31,7 +31,8 @@ class OrderHashGeneratorRepository
     /**
      * @return string
      */
-    public function getUniqueHash() {
+    public function getUniqueHash()
+    {
         $triesCount = 0;
         do {
             $hash = $this->hashGenerator->generateHash(self::HASH_LENGTH);

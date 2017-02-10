@@ -82,7 +82,8 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getOrderStatusVariablesLabels() {
+    private function getOrderStatusVariablesLabels()
+    {
         return [
             OrderMailService::VARIABLE_NUMBER => t('Order number'),
             OrderMailService::VARIABLE_DATE => t('Date and time of order creation'),
@@ -107,7 +108,8 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getRegistrationVariablesLabels() {
+    private function getRegistrationVariablesLabels()
+    {
         return [
             RegistrationMailService::VARIABLE_FIRST_NAME => t('First name'),
             RegistrationMailService::VARIABLE_LAST_NAME => t('Surname'),
@@ -120,7 +122,8 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getResetPasswordVariablesLabels() {
+    private function getResetPasswordVariablesLabels()
+    {
         return [
             ResetPasswordMail::VARIABLE_EMAIL => t('E-mail'),
             ResetPasswordMail::VARIABLE_NEW_PASSWORD_URL => t('New password settings URL address'),
@@ -130,7 +133,8 @@ class MailController extends AdminBaseController
     /**
      * @Route("/mail/template/")
      */
-    public function templateAction(Request $request) {
+    public function templateAction(Request $request)
+    {
         $form = $this->createForm($this->allMailTemplatesFormTypeFactory->create());
 
         $allMailTemplatesData = $this->mailTemplateFacade->getAllMailTemplatesDataByDomainId($this->selectedDomain->getId());
@@ -162,7 +166,8 @@ class MailController extends AdminBaseController
     /**
      * @Route("/mail/setting/")
      */
-    public function settingAction(Request $request) {
+    public function settingAction(Request $request)
+    {
         $selectedDomainId = $this->selectedDomain->getId();
 
         $form = $this->createForm(new MailSettingFormType());
@@ -194,7 +199,8 @@ class MailController extends AdminBaseController
     /**
      * @return array
      */
-    private function getTemplateParameters() {
+    private function getTemplateParameters()
+    {
         $orderStatusesTemplateVariables = $this->orderMailService->getTemplateVariables();
         $registrationTemplateVariables = $this->registrationMailService->getTemplateVariables();
         $resetPasswordTemplateVariables = array_unique(array_merge(

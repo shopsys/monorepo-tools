@@ -39,7 +39,8 @@ class ProductAccessory
      * @param \Shopsys\ShopBundle\Model\Product\Product $accessory
      * @param int $position
      */
-    public function __construct(Product $product, Product $accessory, $position) {
+    public function __construct(Product $product, Product $accessory, $position)
+    {
         $this->product = $product;
         $this->accessory = $accessory;
         $this->position = $position;
@@ -48,21 +49,24 @@ class ProductAccessory
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getProduct() {
+    public function getProduct()
+    {
         return $this->product;
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Product\Product
      */
-    public function getAccessory() {
+    public function getAccessory()
+    {
         return $this->accessory;
     }
 
     /**
      * @return int
      */
-    public function getPosition() {
+    public function getPosition()
+    {
         return $this->position;
     }
 }

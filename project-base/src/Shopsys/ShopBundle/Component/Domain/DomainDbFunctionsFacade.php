@@ -18,17 +18,20 @@ class DomainDbFunctionsFacade
      */
     private $domain;
 
-    public function __construct(EntityManager $em, Domain $domain) {
+    public function __construct(EntityManager $em, Domain $domain)
+    {
         $this->em = $em;
         $this->domain = $domain;
     }
 
-    public function createDomainDbFunctions() {
+    public function createDomainDbFunctions()
+    {
         $this->createDomainIdsByLocaleFunction();
         $this->createLocaleByDomainIdFunction();
     }
 
-    private function createDomainIdsByLocaleFunction() {
+    private function createDomainIdsByLocaleFunction()
+    {
         $domainsIdsByLocale = [];
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
             $domainsIdsByLocale[$domainConfig->getLocale()][] = $domainConfig->getId();
@@ -59,7 +62,8 @@ class DomainDbFunctionsFacade
         return $query->execute();
     }
 
-    private function createLocaleByDomainIdFunction() {
+    private function createLocaleByDomainIdFunction()
+    {
         $localeByDomainIdSqlClauses = [];
         foreach ($this->domain->getAllIncludingDomainConfigsWithoutDataCreated() as $domainConfig) {
             $localeByDomainIdSqlClauses[] =

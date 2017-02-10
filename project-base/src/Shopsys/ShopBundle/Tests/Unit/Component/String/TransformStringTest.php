@@ -7,7 +7,8 @@ use Shopsys\ShopBundle\Component\String\TransformString;
 
 class TransformStringTest extends PHPUnit_Framework_TestCase
 {
-    public function safeFilenameProvider() {
+    public function safeFilenameProvider()
+    {
         return [
             [
                 'actual' => 'ěščřžýáíé.dat',
@@ -47,11 +48,13 @@ class TransformStringTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider safeFilenameProvider
      */
-    public function testSafeFilename($actual, $expected) {
+    public function testSafeFilename($actual, $expected)
+    {
         $this->assertSame($expected, TransformString::safeFilename($actual));
     }
 
-    public function stringToFriendlyUrlSlugProvider() {
+    public function stringToFriendlyUrlSlugProvider()
+    {
         return [
             [
                 'actual' => 'ěščřžýáíé foo',
@@ -87,7 +90,8 @@ class TransformStringTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider stringToFriendlyUrlSlugProvider
      */
-    public function testStringToFriendlyUrlSlug($actual, $expected) {
+    public function testStringToFriendlyUrlSlug($actual, $expected)
+    {
         $this->assertSame($expected, TransformString::stringToFriendlyUrlSlug($actual));
     }
 }

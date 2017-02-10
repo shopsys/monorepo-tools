@@ -37,7 +37,8 @@ class CustomerPasswordController extends FrontBaseController
         $this->loginService = $loginService;
     }
 
-    public function resetPasswordAction(Request $request) {
+    public function resetPasswordAction(Request $request)
+    {
         $form = $this->createForm(new ResetPasswordFormType());
 
         $form->handleRequest($request);
@@ -73,7 +74,8 @@ class CustomerPasswordController extends FrontBaseController
         ]);
     }
 
-    public function setNewPasswordAction(Request $request) {
+    public function setNewPasswordAction(Request $request)
+    {
         $email = $request->query->get('email');
         $hash = $request->query->get('hash');
 

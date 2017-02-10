@@ -24,7 +24,8 @@ class FeedGenerationConfig
      * @param string|null $domainId
      * @param int|null $feedItemId
      */
-    public function __construct($feedName, $domainId, $feedItemId = null) {
+    public function __construct($feedName, $domainId, $feedItemId = null)
+    {
         $this->feedName = $feedName;
         $this->domainId = $domainId;
         $this->feedItemId = $feedItemId;
@@ -33,21 +34,24 @@ class FeedGenerationConfig
     /**
      * @return string|null
      */
-    public function getFeedName() {
+    public function getFeedName()
+    {
         return $this->feedName;
     }
 
     /**
      * @return int|null
      */
-    public function getDomainId() {
+    public function getDomainId()
+    {
         return $this->domainId;
     }
 
     /**
      * @return int|null
      */
-    public function getFeedItemId() {
+    public function getFeedItemId()
+    {
         return $this->feedItemId;
     }
 
@@ -55,7 +59,8 @@ class FeedGenerationConfig
      * @param \Shopsys\ShopBundle\Model\Feed\FeedGenerationConfig $feedGenerationConfig
      * @return bool
      */
-    public function isSameFeedAndDomain(FeedGenerationConfig $feedGenerationConfig) {
+    public function isSameFeedAndDomain(FeedGenerationConfig $feedGenerationConfig)
+    {
         return $this->feedName === $feedGenerationConfig->feedName && $this->domainId === $feedGenerationConfig->domainId;
     }
 }

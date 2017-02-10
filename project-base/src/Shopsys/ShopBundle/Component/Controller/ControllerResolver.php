@@ -10,7 +10,8 @@ class ControllerResolver extends SymfonyControllerResolver
     /**
      * {@inheritDoc}
      */
-    protected function createController($controller) {
+    protected function createController($controller)
+    {
         if (false === strpos($controller, '::')) {
             $count = substr_count($controller, ':');
             if (2 == $count) {

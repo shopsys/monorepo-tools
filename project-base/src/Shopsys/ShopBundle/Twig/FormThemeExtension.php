@@ -23,7 +23,8 @@ class FormThemeExtension extends \Twig_Extension
     /**
      * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
      */
-    public function __construct(RequestStack $requestStack) {
+    public function __construct(RequestStack $requestStack)
+    {
         $this->requestStack = $requestStack;
         $this->request = $this->requestStack->getMasterRequest();
     }
@@ -31,7 +32,8 @@ class FormThemeExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions() {
+    public function getFunctions()
+    {
         return [
             new Twig_SimpleFunction('getDefaultFormTheme', [$this, 'getDefaultFormTheme']),
         ];
@@ -40,7 +42,8 @@ class FormThemeExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getDefaultFormTheme() {
+    public function getDefaultFormTheme()
+    {
         if (mb_stripos($this->request->get('_controller'), 'Shopsys\ShopBundle\Controller\Admin') === 0) {
             return self::ADMIN_THEME;
         } else {
@@ -51,7 +54,8 @@ class FormThemeExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return 'form_theme';
     }
 }

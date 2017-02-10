@@ -63,7 +63,8 @@ class TransportAndPaymentWatcherService
      * @param \Shopsys\ShopBundle\Model\Payment\Payment[] $payments
      * @return \Shopsys\ShopBundle\Model\Order\Watcher\TransportAndPaymentCheckResult
      */
-    public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments) {
+    public function checkTransportAndPayment(OrderData $orderData, OrderPreview $orderPreview, $transports, $payments)
+    {
         $transport = $orderData->transport;
         $payment = $orderData->payment;
 
@@ -249,7 +250,8 @@ class TransportAndPaymentWatcherService
     /**
      * @return array
      */
-    private function getRememberedTransportAndPayment() {
+    private function getRememberedTransportAndPayment()
+    {
         return $this->session->get(self::SESSION_ROOT, [
             self::SESSION_TRANSPORT_PRICES => [],
             self::SESSION_PAYMENT_PRICES => [],
@@ -259,14 +261,16 @@ class TransportAndPaymentWatcherService
     /**
      * @return array
      */
-    private function getRememberedTransportPrices() {
+    private function getRememberedTransportPrices()
+    {
         return $this->getRememberedTransportAndPayment()[self::SESSION_TRANSPORT_PRICES];
     }
 
     /**
      * @return array
      */
-    private function getRememberedPaymentPrices() {
+    private function getRememberedPaymentPrices()
+    {
         return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
     }
 }

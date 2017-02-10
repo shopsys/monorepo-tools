@@ -77,7 +77,8 @@ class OrderProductFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
-    public function subtractOrderProductsFromStock(array $orderProducts) {
+    public function subtractOrderProductsFromStock(array $orderProducts)
+    {
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
             $this->orderProductService->subtractOrderProductsFromStock($orderProducts);
             $this->em->flush();
@@ -88,7 +89,8 @@ class OrderProductFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
-    public function addOrderProductsToStock(array $orderProducts) {
+    public function addOrderProductsToStock(array $orderProducts)
+    {
         if ($this->moduleFacade->isEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS)) {
             $this->orderProductService->returnOrderProductsToStock($orderProducts);
             $this->em->flush();
@@ -99,7 +101,8 @@ class OrderProductFacade
     /**
      * @param \Shopsys\ShopBundle\Model\Order\Item\OrderProduct[] $orderProducts
      */
-    private function runRecalculationsAfterStockQuantityChange(array $orderProducts) {
+    private function runRecalculationsAfterStockQuantityChange(array $orderProducts)
+    {
         $relevantProducts = $this->orderProductService->getProductsUsingStockFromOrderProducts($orderProducts);
         foreach ($relevantProducts as $relevantProduct) {
             $this->productSellingDeniedRecalculator->calculateSellingDeniedForProduct($relevantProduct);

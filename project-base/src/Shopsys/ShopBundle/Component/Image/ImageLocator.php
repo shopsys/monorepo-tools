@@ -17,7 +17,8 @@ class ImageLocator
      */
     private $imageConfig;
 
-    public function __construct($imageDir, ImageConfig $imageConfig) {
+    public function __construct($imageDir, ImageConfig $imageConfig)
+    {
         $this->imageDir = $imageDir;
         $this->imageConfig = $imageConfig;
     }
@@ -27,7 +28,8 @@ class ImageLocator
      * @param string|null $sizeName
      * @return string
      */
-    public function getRelativeImageFilepath(Image $image, $sizeName) {
+    public function getRelativeImageFilepath(Image $image, $sizeName)
+    {
         $path = $this->getRelativeImagePath($image->getEntityName(), $image->getType(), $sizeName);
 
         return $path . $image->getFilename();
@@ -38,7 +40,8 @@ class ImageLocator
      * @param string|null $sizeName
      * @return string
      */
-    public function getAbsoluteImageFilepath(Image $image, $sizeName) {
+    public function getAbsoluteImageFilepath(Image $image, $sizeName)
+    {
         $relativePath = $this->getRelativeImageFilepath($image, $sizeName);
 
         return $this->imageDir . $relativePath;
@@ -48,7 +51,8 @@ class ImageLocator
      * @param \Shopsys\ShopBundle\Component\Image\Image $image
      * @return bool
      */
-    public function imageExists(Image $image) {
+    public function imageExists(Image $image)
+    {
         $imageFilepath = $this->getAbsoluteImageFilepath($image, ImageConfig::ORIGINAL_SIZE_NAME);
 
         return is_file($imageFilepath) && is_readable($imageFilepath);
@@ -60,7 +64,8 @@ class ImageLocator
      * @param string|null $sizeName
      * @return string
      */
-    public function getRelativeImagePath($entityName, $type, $sizeName) {
+    public function getRelativeImagePath($entityName, $type, $sizeName)
+    {
         $this->imageConfig->assertImageSizeConfigByEntityNameExists($entityName, $type, $sizeName);
         $pathParts = [$entityName];
 

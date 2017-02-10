@@ -12,7 +12,8 @@ use Shopsys\ShopBundle\Component\Translation\JsFileExtractor;
 
 class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
 {
-    public function testExtract() {
+    public function testExtract()
+    {
         $fileName = 'test.js';
 
         $catalogue = $this->extract(__DIR__ . '/' . $fileName);
@@ -42,7 +43,8 @@ class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $catalogue);
     }
 
-    private function extract($filename) {
+    private function extract($filename)
+    {
         if (!is_file($filename)) {
             throw new \RuntimeException(sprintf('The file "%s" does not exist.', $filename));
         }
@@ -56,7 +58,8 @@ class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
         return $catalogue;
     }
 
-    private function getExtractor() {
+    private function getExtractor()
+    {
         $jsFunctionCallParser = new JsFunctionCallParser();
         $jsStringParser = new JsStringParser();
         $jsTranslatorCallParserFactory = new JsTranslatorCallParserFactory(

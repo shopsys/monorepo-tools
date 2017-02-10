@@ -12,7 +12,8 @@ class MultipleServicesOfClassException extends Exception implements CompilerExce
      * @param string[] $serviceIds
      * @param \Exception|null $previous
      */
-    public function __construct($className, $serviceIds, Exception $previous = null) {
+    public function __construct($className, $serviceIds, Exception $previous = null)
+    {
         $serviceNames = implode(', ', $serviceIds);
         $message = 'Multiple services of ' . $className . ' defined (' . $serviceNames . ')';
         parent::__construct($message, 0, $previous);

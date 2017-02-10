@@ -12,14 +12,16 @@ class FeedCategoryRepository
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
     /**
      * @return \Doctrine\ORM\EntityRepository
      */
-    private function getFeedCategoryRepository() {
+    private function getFeedCategoryRepository()
+    {
         return $this->em->getRepository(FeedCategory::class);
     }
 
@@ -27,7 +29,8 @@ class FeedCategoryRepository
      * @param int $extId
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory|null
      */
-    public function findByExtId($extId) {
+    public function findByExtId($extId)
+    {
         return $this->getFeedCategoryRepository()->findOneBy([
             'extId' => $extId,
         ]);
@@ -36,7 +39,8 @@ class FeedCategoryRepository
     /**
      * @param int[] $extIds
      */
-    public function deleteAllExceptExtIds(array $extIds) {
+    public function deleteAllExceptExtIds(array $extIds)
+    {
         $qb = $this->em->createQueryBuilder();
 
         $qb->delete(FeedCategory::class, 'fc')
@@ -49,14 +53,16 @@ class FeedCategoryRepository
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[extId]
      */
-    public function getAllIndexedByExtId() {
+    public function getAllIndexedByExtId()
+    {
         return $this->getFeedCategoryRepository()->createQueryBuilder('fc', 'fc.extId')->getQuery()->execute();
     }
 
     /**
      * @return \Shopsys\ShopBundle\Model\Feed\Category\FeedCategory[]
      */
-    public function getAllHeurekaCz() {
+    public function getAllHeurekaCz()
+    {
         return $this->getFeedCategoryRepository()->findBy([], ['fullName' => 'asc']);
     }
 }

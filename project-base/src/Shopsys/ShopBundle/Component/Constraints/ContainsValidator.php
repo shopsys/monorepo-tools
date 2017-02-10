@@ -11,7 +11,8 @@ class ContainsValidator extends ConstraintValidator
      * @param string $value
      * @param \Symfony\Component\Validator\Constraint $constraint
      */
-    public function validate($value, Constraint $constraint) {
+    public function validate($value, Constraint $constraint)
+    {
         if (!$constraint instanceof Contains) {
             throw new \Symfony\Component\Validator\Exception\UnexpectedTypeException($constraint, Contains::class);
         }

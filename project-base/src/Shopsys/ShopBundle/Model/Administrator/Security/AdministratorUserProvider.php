@@ -35,7 +35,8 @@ class AdministratorUserProvider implements UserProviderInterface
      * @param string $username The username
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function loadUserByUsername($username) {
+    public function loadUserByUsername($username)
+    {
         $administrator = $this->administratorRepository->findByUserName($username);
 
         if ($administrator === null) {
@@ -52,7 +53,8 @@ class AdministratorUserProvider implements UserProviderInterface
      * @param \Symfony\Component\Security\Core\User\UserInterface $administrator
      * @return \Shopsys\ShopBundle\Model\Administrator\Administrator
      */
-    public function refreshUser(UserInterface $administrator) {
+    public function refreshUser(UserInterface $administrator)
+    {
         $class = get_class($administrator);
         if (!$this->supportsClass($class)) {
             $message = sprintf('Instances of "%s" are not supported.', $class);
@@ -92,7 +94,8 @@ class AdministratorUserProvider implements UserProviderInterface
      * @param string $class
      * @return bool
      */
-    public function supportsClass($class) {
+    public function supportsClass($class)
+    {
         return Administrator::class === $class || is_subclass_of($class, Administrator::class);
     }
 }
