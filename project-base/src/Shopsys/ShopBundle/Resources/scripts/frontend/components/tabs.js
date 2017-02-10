@@ -24,13 +24,13 @@
  */
 
 (function ($) {
-	Shopsys = window.Shopsys || {};
+    Shopsys = window.Shopsys || {};
 
-	Shopsys.register.registerCallback(function ($container) {
-		$container.filterAllNodes('.js-tabs').each(function () {
-			var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
-			hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
-		});
-	});
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-tabs').each(function () {
+            var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
+            hybridTabs.init(Shopsys.hybridTabs.TABS_MODE_SINGLE);
+        });
+    });
 
 })(jQuery);

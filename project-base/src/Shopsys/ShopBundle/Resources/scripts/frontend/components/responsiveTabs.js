@@ -41,25 +41,25 @@
  */
 
 (function ($) {
-	Shopsys = window.Shopsys || {};
+    Shopsys = window.Shopsys || {};
 
-	Shopsys.register.registerCallback(function ($container) {
-		$container.filterAllNodes('.js-responsive-tabs').each(function () {
-			var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
-			hybridTabs.init(getHybridTabsModeForCurrentResponsiveMode());
+    Shopsys.register.registerCallback(function ($container) {
+        $container.filterAllNodes('.js-responsive-tabs').each(function () {
+            var hybridTabs = new Shopsys.hybridTabs.HybridTabs($(this));
+            hybridTabs.init(getHybridTabsModeForCurrentResponsiveMode());
 
-			Shopsys.responsive.registerOnLayoutChange(function () {
-				hybridTabs.setTabsMode(getHybridTabsModeForCurrentResponsiveMode());
-			});
+            Shopsys.responsive.registerOnLayoutChange(function () {
+                hybridTabs.setTabsMode(getHybridTabsModeForCurrentResponsiveMode());
+            });
 
-			function getHybridTabsModeForCurrentResponsiveMode() {
-				if (Shopsys.responsive.isDesktopVersion()) {
-					return Shopsys.hybridTabs.TABS_MODE_SINGLE;
-				} else {
-					return Shopsys.hybridTabs.TABS_MODE_MULTIPLE;
-				}
-			}
-		});
-	});
+            function getHybridTabsModeForCurrentResponsiveMode() {
+                if (Shopsys.responsive.isDesktopVersion()) {
+                    return Shopsys.hybridTabs.TABS_MODE_SINGLE;
+                } else {
+                    return Shopsys.hybridTabs.TABS_MODE_MULTIPLE;
+                }
+            }
+        });
+    });
 
 })(jQuery);

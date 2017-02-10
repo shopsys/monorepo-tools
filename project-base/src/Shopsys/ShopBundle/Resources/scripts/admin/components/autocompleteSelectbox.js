@@ -1,11 +1,11 @@
 (function($) {
 
-	Shopsys = window.Shopsys || {};
+    Shopsys = window.Shopsys || {};
 
-	var autocompleteSelectbox = function ($container) {
-		$container.filterAllNodes('select.js-autocomplete-selectbox').selectize();
-	};
+    var autocompleteSelectbox = function ($container) {
+        $container.filterAllNodes('select.js-autocomplete-selectbox').selectize();
+    };
 
-	Shopsys.register.registerCallback(autocompleteSelectbox);
+    Shopsys.register.registerCallback(autocompleteSelectbox);
 
 })(jQuery);
