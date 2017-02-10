@@ -142,6 +142,7 @@
 			<arg value="--standard=${path.phpcs.ruleset}"/>
 			<arg value="--extensions=php"/>
 			<arg value="--encoding=utf-8"/>
+			<arg value="--tab-width=4"/>
 			<arg value="--ignore=${path.phpcs.ignored}"/>
 			<arg value="--no-patch"/>
 			<arg path="${path.src}"/>
@@ -163,6 +164,7 @@
 					<arg value="--standard=${path.phpcs.ruleset}"/>
 					<arg value="--extensions=php"/>
 					<arg value="--encoding=utf-8"/>
+					<arg value="--tab-width=4"/>
 					<arg value="--ignore=${path.phpcs.ignored}"/>
 					<arg value="--no-patch"/>
 					<arg line="${diff.files.phpcs}"/>
@@ -181,6 +183,7 @@
 			<arg value="--standard=${path.phpcs.ruleset}"/>
 			<arg value="--extensions=php"/>
 			<arg value="--encoding=utf-8"/>
+			<arg value="--tab-width=4"/>
 			<arg value="-sp"/>
 			<arg value="--ignore=${path.phpcs.ignored}"/>
 			<arg path="${path.src}"/>
@@ -202,6 +205,7 @@
 					<arg value="--standard=${path.phpcs.ruleset}"/>
 					<arg value="--extensions=php"/>
 					<arg value="--encoding=utf-8"/>
+					<arg value="--tab-width=4"/>
 					<arg value="-sp"/>
 					<arg value="--ignore=${path.phpcs.ignored}"/>
 					<arg line="${diff.files.phpcs}"/>
