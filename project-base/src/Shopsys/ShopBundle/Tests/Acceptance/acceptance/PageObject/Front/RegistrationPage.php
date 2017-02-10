@@ -29,8 +29,7 @@ class RegistrationPage extends AbstractPage
      */
     public function seeEmailError($text)
     {
-        $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_email');
-        $this->tester->see($text);
+        $this->seeErrorForField('.js-validation-error-list-registration_form_email', $text);
     }
 
     /**
@@ -38,7 +37,16 @@ class RegistrationPage extends AbstractPage
      */
     public function seePasswordError($text)
     {
-        $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_password_first');
+        $this->seeErrorForField('.js-validation-error-list-registration_form_password_first', $text);
+    }
+
+    /**
+     * @param $fieldClass $text
+     * @param string $text
+     */
+    private function seeErrorForField($fieldClass, $text)
+    {
+        $this->tester->moveMouseOverByCss($fieldClass);
         $this->tester->see($text);
     }
 }
