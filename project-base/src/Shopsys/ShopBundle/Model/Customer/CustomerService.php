@@ -90,8 +90,11 @@ class CustomerService
      * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
      * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
      */
-    public function editDeliveryAddress(User $user, DeliveryAddressData $deliveryAddressData,
-        DeliveryAddress $deliveryAddress = null) {
+    public function editDeliveryAddress(
+        User $user,
+        DeliveryAddressData $deliveryAddressData,
+        DeliveryAddress $deliveryAddress = null
+    ) {
         if ($deliveryAddressData->addressFilled) {
             if ($deliveryAddress instanceof DeliveryAddress) {
                 $deliveryAddress->edit($deliveryAddressData);

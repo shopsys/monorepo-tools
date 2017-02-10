@@ -124,7 +124,6 @@ class SliderController extends AdminBaseController
             'form' => $form->createView(),
             'selectedDomainId' => $this->selectedDomain->getId(),
         ]);
-
     }
 
     /**
@@ -193,6 +192,5 @@ class SliderController extends AdminBaseController
         }
 
         return $this->redirectToRoute('admin_slider_list');
-
     }
 }

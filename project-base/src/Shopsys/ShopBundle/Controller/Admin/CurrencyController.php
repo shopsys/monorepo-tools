@@ -76,7 +76,6 @@ class CurrencyController extends AdminBaseController
         } catch (\Shopsys\ShopBundle\Model\Pricing\Currency\Exception\CurrencyNotFoundException $ex) {
             return new Response(t('Selected currency doesn\'t exist.'));
         }
-
     }
 
     /**

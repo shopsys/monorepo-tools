@@ -50,7 +50,8 @@ class Version20160512152113 extends AbstractMigration
                 [
                     'countryName' => $this->getDefaultCountryNameByDomainId($domainId),
                     'domainId' => $domainId,
-                ]);
+                ]
+            );
             $countryId = $this->connection->lastInsertId(self::COUNTRIES_SEQUENCE_NAME);
             $this->sql(
                 'UPDATE orders SET country_id = :countryId WHERE domain_id = :domainId',
@@ -65,7 +66,8 @@ class Version20160512152113 extends AbstractMigration
         $this->sql('ALTER TABLE orders ADD delivery_country_id INT DEFAULT NULL');
         $this->sql(
             'ALTER TABLE orders ADD CONSTRAINT FK_E52FFDEEE76AA954 FOREIGN KEY (delivery_country_id)
-            REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+            REFERENCES countries (id) NOT DEFERRABLE INITIALLY IMMEDIATE'
+        );
         $this->sql('CREATE INDEX IDX_E52FFDEEE76AA954 ON orders (delivery_country_id)');
     }
 

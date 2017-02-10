@@ -55,7 +55,8 @@ class ProductManualInputPriceFacade
             $product,
             $pricingGroup,
             $inputPrice,
-            $manualInputPrice);
+            $manualInputPrice
+        );
         $this->em->persist($refreshedProductManualInputPrice);
         $this->em->flush($refreshedProductManualInputPrice);
     }

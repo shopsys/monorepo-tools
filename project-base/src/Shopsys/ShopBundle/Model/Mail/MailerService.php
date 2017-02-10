@@ -44,10 +44,12 @@ class MailerService
         $toEmail = $messageData->toEmail;
         $body = $this->replaceVariables(
             $messageData->body,
-            $messageData->variablesReplacementsForBody);
+            $messageData->variablesReplacementsForBody
+        );
         $subject = $this->replaceVariables(
             $messageData->subject,
-            $messageData->variablesReplacementsForSubject);
+            $messageData->variablesReplacementsForSubject
+        );
         $fromEmail = $messageData->fromEmail;
         $fromName = $messageData->fromName;
 

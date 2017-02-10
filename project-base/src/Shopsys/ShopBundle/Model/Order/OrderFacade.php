@@ -245,8 +245,7 @@ class OrderFacade
         if ($user instanceof User) {
             $this->customerFacade->amendCustomerDataFromOrder($user, $order);
         }
-        if (
-            $this->heurekaFacade->isHeurekaShopCertificationActivated($orderData->domainId) &&
+        if ($this->heurekaFacade->isHeurekaShopCertificationActivated($orderData->domainId) &&
             $this->heurekaFacade->isDomainLocaleSupported($locale)
         ) {
             $this->heurekaFacade->sendOrderInfo($order);
@@ -286,7 +285,6 @@ class OrderFacade
             if ($orderData->status->getType() === OrderStatus::TYPE_CANCELED) {
                 $this->orderProductFacade->addOrderProductsToStock($order->getProductItems());
             }
-
         }
 
         return $order;

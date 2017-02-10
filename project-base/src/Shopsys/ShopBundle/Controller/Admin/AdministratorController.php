@@ -112,7 +112,6 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
                 return $this->redirectToRoute('admin_administrator_list');
-
             } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
                 $this->getFlashMessageSender()->addErrorFlashTwig(
                     t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
@@ -128,7 +127,6 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
             }
-
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
@@ -182,7 +180,6 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
                 return $this->redirectToRoute('admin_administrator_list');
-
             } catch (\Shopsys\ShopBundle\Model\Administrator\Exception\DuplicateSuperadminNameException $ex) {
                 $this->getFlashMessageSender()->addErrorFlashTwig(
                     t('We are sorry, but name <strong>{{ name }}</strong> is reserved for system function. Use another one please.'),
@@ -198,7 +195,6 @@ class AdministratorController extends AdminBaseController
                     ]
                 );
             }
-
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

@@ -18,20 +18,18 @@ class AddProductFormType extends AbstractType
     {
         $builder
             ->add('productId', FormType::HIDDEN, [
-                    'constraints' => [
-                        new Constraints\GreaterThan(0),
-                        new Constraints\Regex(['pattern' => '/^\d+$/']),
-                    ],
-                ]
-            )
+                'constraints' => [
+                    new Constraints\GreaterThan(0),
+                    new Constraints\Regex(['pattern' => '/^\d+$/']),
+                ],
+            ])
             ->add('quantity', FormType::TEXT, [
-                    'data' => 1,
-                    'constraints' => [
-                        new Constraints\GreaterThan(0),
-                        new Constraints\Regex(['pattern' => '/^\d+$/']),
-                    ],
-                ]
-            )
+                'data' => 1,
+                'constraints' => [
+                    new Constraints\GreaterThan(0),
+                    new Constraints\Regex(['pattern' => '/^\d+$/']),
+                ],
+            ])
             ->add('add', FormType::SUBMIT);
     }
 

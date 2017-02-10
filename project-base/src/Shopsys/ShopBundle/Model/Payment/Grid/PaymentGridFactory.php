@@ -65,7 +65,8 @@ class PaymentGridFactory implements GridFactoryInterface
             ->join('p.translations', 'pt', Join::WITH, 'pt.locale = :locale')
             ->setParameter('locale', $this->localization->getDefaultLocale());
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
-            $queryBuilder, 'p.id',
+            $queryBuilder,
+            'p.id',
             function ($row) {
                 $payment = $this->paymentRepository->findById($row['p']['id']);
                 $row['paymentDetail'] = $this->paymentDetailFactory->createDetailForPayment($payment);

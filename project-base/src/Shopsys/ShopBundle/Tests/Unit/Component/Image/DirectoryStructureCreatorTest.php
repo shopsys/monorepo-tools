@@ -23,14 +23,14 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase
                 [],
                 ['sizeName1_1' => new ImageSizeConfig('sizeName1_1', null, null, false)],
                 []
-                ),
+            ),
             new ImageEntityConfig(
                 'entityName2',
                 'entityClass2',
                 ['type' => ['sizeName2_1' => new ImageSizeConfig('sizeName2_1', null, null, false)]],
                 [],
                 []
-                ),
+            ),
         ];
         $imageConfig = new ImageConfig($imageEntityConfigByClass);
         $imageLocator = new ImageLocator($imageDir, $imageConfig);

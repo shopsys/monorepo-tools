@@ -30,11 +30,11 @@ class NotInArrayValidator extends ConstraintValidator
 
         if (in_array($value, $constraint->array)) {
             $this->context->addViolation(
-                $constraint->message, [
+                $constraint->message,
+                [
                     '{{ array }}' => implode(', ', $constraint->array),
                 ]
             );
         }
-
     }
 }

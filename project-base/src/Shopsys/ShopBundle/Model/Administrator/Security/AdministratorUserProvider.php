@@ -41,7 +41,8 @@ class AdministratorUserProvider implements UserProviderInterface
 
         if ($administrator === null) {
             $message = sprintf(
-                'Unable to find an active admin Shopsys\ShopBundle\Model\Administrator\Administrator object identified by "%s".', $username
+                'Unable to find an active admin Shopsys\ShopBundle\Model\Administrator\Administrator object identified by "%s".',
+                $username
             );
             throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
         }

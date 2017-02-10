@@ -45,7 +45,8 @@ class InputPriceLabelExtension extends Twig_Extension
 
             default:
                 throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException(
-                    'Invalid input price type: ' . $inputPriceType);
+                    'Invalid input price type: ' . $inputPriceType
+                );
         }
     }
 

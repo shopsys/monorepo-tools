@@ -144,8 +144,8 @@ class ImageController extends AdminBaseController
                 ),
             ],
             self::ENTITY_NAME_CATEGORY => [
-            ImageConfig::DEFAULT_SIZE_NAME => t(
-                'Front-end: Category guidepost'
+                ImageConfig::DEFAULT_SIZE_NAME => t(
+                    'Front-end: Category guidepost'
                 ),
             ],
             self::ENTITY_NAME_ADVERT => [

@@ -126,8 +126,7 @@ class CategoryFormType extends AbstractType
                     InvertChoiceTypeExtension::INVERT_OPTION => true,
                     'property_path' => 'hiddenOnDomains',
                     'required' => false,
-                ])
-            )
+                ]))
             ->add('heurekaCzFeedCategory', FormType::CHOICE, [
                 'required' => false,
                 'choice_list' => new ObjectChoiceList($this->heurekaCzFeedCategories, 'name', [], null, 'id'),

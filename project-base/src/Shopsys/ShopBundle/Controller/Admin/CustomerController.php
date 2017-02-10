@@ -154,7 +154,6 @@ class CustomerController extends AdminBaseController
             } catch (\Shopsys\ShopBundle\Model\Customer\Exception\DuplicateEmailException $e) {
                 $form->get('email')->addError(new FormError(t('There is already a customer with this e-mail in the database')));
             }
-
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {

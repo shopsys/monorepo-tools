@@ -19,18 +19,16 @@ class LoginFormType extends AbstractType
     {
         $builder
             ->add('email', FormType::TEXT, [
-                    'constraints' => [
-                        new Constraints\NotBlank(['message' => 'Please enter e-mail']),
-                        new Email(),
-                    ],
-                ]
-            )
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+                    new Email(),
+                ],
+            ])
             ->add('password', FormType::PASSWORD, [
-                    'constraints' => [
-                        new Constraints\NotBlank(['message' => 'Please enter password']),
-                    ],
-                ]
-            )
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter password']),
+                ],
+            ])
             ->add('rememberMe', FormType::CHECKBOX, [
                 'required' => false,
             ])

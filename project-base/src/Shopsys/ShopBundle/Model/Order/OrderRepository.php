@@ -154,8 +154,7 @@ class OrderRepository
                         NORMALIZE(o.companyName) LIKE NORMALIZE(:text)
                         OR
                         NORMALIZE(u.email) LIKE NORMALIZE(:text)
-                    )'
-                );
+                    )');
             $querySearchText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
             $queryBuilder->setParameter('text', $querySearchText);
         }

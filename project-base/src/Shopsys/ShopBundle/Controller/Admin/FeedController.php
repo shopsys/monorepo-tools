@@ -64,7 +64,6 @@ class FeedController extends AdminBaseController
                     'feedName' => $feedName,
                 ]
             );
-
         } catch (\Shopsys\ShopBundle\Model\Feed\Exception\FeedConfigNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlashTwig(
                 t('Feed "{{ feedName }}" not found.'),

@@ -26,9 +26,13 @@ class PhpParserNodeHelper
         }
 
         throw new StringValueUnextractableException(
-            sprintf('Can only extract the message ID or message domain from a scalar or concatenated string,'
+            sprintf(
+                'Can only extract the message ID or message domain from a scalar or concatenated string,'
                 . ' but got "%s". Please refactor your code to make it extractable (in %s on line %d).',
-            get_class($node), $fileInfo, $node->getLine())
+                get_class($node),
+                $fileInfo,
+                $node->getLine()
+            )
         );
     }
 }

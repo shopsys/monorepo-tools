@@ -48,7 +48,8 @@ class ProductVisibilityExtension extends \Twig_Extension
         return [
             new Twig_SimpleFunction('isVisibleForDefaultPricingGroup', [$this, 'isVisibleForDefaultPricingGroupOnDomain']),
             new Twig_SimpleFunction(
-                'isVisibleForDefaultPricingGroupOnEachDomain', [$this, 'isVisibleForDefaultPricingGroupOnEachDomain']
+                'isVisibleForDefaultPricingGroupOnEachDomain',
+                [$this, 'isVisibleForDefaultPricingGroupOnEachDomain']
             ),
         ];
     }

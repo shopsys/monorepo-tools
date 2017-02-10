@@ -151,7 +151,6 @@ class OrderMailService
             self::VARIABLE_TRANSPORT_INSTRUCTIONS => $transportInstructions,
             self::VARIABLE_PAYMENT_INSTRUCTIONS => $paymentInstructions,
         ];
-
     }
 
     /**
@@ -164,7 +163,6 @@ class OrderMailService
             self::VARIABLE_NUMBER => $order->getNumber(),
             self::VARIABLE_DATE => $this->getFormattedDateTime($order),
         ];
-
     }
 
     /**
@@ -251,7 +249,6 @@ class OrderMailService
             'orderItemTotalPricesById' => $orderItemTotalPricesById,
             'orderLocale' => $this->getDomainLocaleByOrder($order),
         ]);
-
     }
 
     /**

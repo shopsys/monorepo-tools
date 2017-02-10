@@ -140,11 +140,9 @@ class PricingGroupController extends AdminBaseController
                 );
                 return $this->confirmDeleteResponseFactory->createDeleteResponse($message, 'admin_pricinggroup_delete', $id);
             }
-
         } catch (\Shopsys\ShopBundle\Model\Pricing\Group\Exception\PricingGroupNotFoundException $ex) {
             return new Response(t('Selected pricing group doesn\'t exist.'));
         }
-
     }
 
     /**
@@ -176,6 +174,5 @@ class PricingGroupController extends AdminBaseController
         return $this->render('@ShopsysShop/Admin/Content/Pricing/Groups/pricingGroupSettings.html.twig', [
             'form' => $form->createView(),
         ]);
-
     }
 }

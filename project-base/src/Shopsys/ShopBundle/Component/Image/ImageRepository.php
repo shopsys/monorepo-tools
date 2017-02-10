@@ -33,7 +33,8 @@ class ImageRepository
      */
     public function findImageByEntity($entityName, $entityId, $type)
     {
-        $image = $this->getImageRepository()->findOneBy([
+        $image = $this->getImageRepository()->findOneBy(
+            [
                 'entityName' => $entityName,
                 'entityId' => $entityId,
                 'type' => $type,
@@ -97,10 +98,9 @@ class ImageRepository
     public function getAllImagesByEntity($entityName, $entityId)
     {
         return $this->getImageRepository()->findBy([
-                'entityName' => $entityName,
-                'entityId' => $entityId,
-            ]
-        );
+            'entityName' => $entityName,
+            'entityId' => $entityId,
+        ]);
     }
 
     /**

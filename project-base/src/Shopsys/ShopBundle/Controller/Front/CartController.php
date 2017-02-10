@@ -330,8 +330,7 @@ class CartController extends FrontBaseController
             }
         } else {
             $this->getFlashMessageSender()->addErrorFlash(
-                t('Unable to remove item from cart. The link for removing it probably expired, try it again.'
-                )
+                t('Unable to remove item from cart. The link for removing it probably expired, try it again.')
             );
         }
 

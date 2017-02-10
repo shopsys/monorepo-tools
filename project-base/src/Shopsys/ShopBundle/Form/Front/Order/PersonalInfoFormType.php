@@ -133,8 +133,7 @@ class PersonalInfoFormType extends AbstractType
                     'required' => false,
                     'property_path' => 'deliveryAddressSameAsBillingAddress',
                 ])
-                ->addModelTransformer(new InverseTransformer())
-            )
+                ->addModelTransformer(new InverseTransformer()))
             ->add('deliveryFirstName', FormType::TEXT, [
                 'required' => true,
                 'constraints' => [

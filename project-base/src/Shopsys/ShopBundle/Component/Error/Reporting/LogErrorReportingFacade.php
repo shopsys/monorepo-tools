@@ -23,7 +23,6 @@ class LogErrorReportingFacade
 
     /**
      * Works only for DateTime in today and yesterday!
-     
      * @param \DateTime $from
      * @param string $rotatedLogName
      * @return bool

@@ -32,8 +32,7 @@ class CronTimeResolver
         $timeValues = explode(',', $timeString);
         $matches = null;
         foreach ($timeValues as $timeValue) {
-            if (
-                $timeValue === '*'
+            if ($timeValue === '*'
                 || $timeValue === (string)$value
                 || preg_match('@^\*/(\d+)$@', $timeValue, $matches) && $value % $matches[1] === 0 // syntax */[int]
             ) {
@@ -61,8 +60,7 @@ class CronTimeResolver
                 $timeNumber = $timeValue;
             }
 
-            if (
-                $timeNumber !== '*'
+            if ($timeNumber !== '*'
                 && !(is_numeric($timeNumber) && $timeNumber <= $maxValue && $timeNumber % $divisibleBy === 0)
             ) {
                 throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\InvalidTimeFormatException($timeValue, $maxValue, $divisibleBy);

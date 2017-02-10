@@ -220,7 +220,6 @@ class CurrencyFacade
         }
 
         return $currenciesIndexedById;
-
     }
 
     /**

@@ -171,8 +171,7 @@ class ProductEditFormType extends AbstractType
                     ],
                     'error_bubbling' => false,
                 ])
-                ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer())
-            )
+                ->addViewTransformer(new ProductParameterValueToProductParameterValuesLocalizedTransformer()))
             ->add('manualInputPrices', FormType::FORM, [
                 'compound' => true,
             ])

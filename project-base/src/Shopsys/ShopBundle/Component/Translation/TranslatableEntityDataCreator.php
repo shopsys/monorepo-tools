@@ -84,7 +84,8 @@ class TranslatableEntityDataCreator
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);
-        $query = $this->em->createNativeQuery('
+        $query = $this->em->createNativeQuery(
+            '
             INSERT INTO ' . $quotedTableName . ' (locale, ' . $quotedColumnNamesSql . ')
             SELECT :newLocale, ' . $quotedColumnNamesSql . '
             FROM ' . $quotedTableName . '

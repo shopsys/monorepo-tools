@@ -142,8 +142,7 @@ class UserRepository
                         NORMALIZE(ba.companyName) LIKE NORMALIZE(:text)
                         OR
                         NORMALIZE(ba.telephone) LIKE :text
-                    )'
-                );
+                    )');
             $querySerachText = '%' . DatabaseSearching::getLikeSearchString($quickSearchData->text) . '%';
             $queryBuilder->setParameter('text', $querySerachText);
         }

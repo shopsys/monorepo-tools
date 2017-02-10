@@ -50,7 +50,10 @@ class SitemapRepository
         $queryBuilder = $this->productRepository->getAllVisibleQueryBuilder($domainConfig->getId(), $pricingGroup);
         $queryBuilder
             ->select('fu.slug')
-            ->join(FriendlyUrl::class, 'fu', Join::WITH,
+            ->join(
+                FriendlyUrl::class,
+                'fu',
+                Join::WITH,
                 'fu.routeName = :productDetailRouteName
                 AND fu.entityId = p.id
                 AND fu.domainId = :domainId
@@ -71,7 +74,10 @@ class SitemapRepository
         $queryBuilder = $this->categoryRepository->getAllVisibleByDomainIdQueryBuilder($domainConfig->getId());
         $queryBuilder
             ->select('fu.slug')
-            ->join(FriendlyUrl::class, 'fu', Join::WITH,
+            ->join(
+                FriendlyUrl::class,
+                'fu',
+                Join::WITH,
                 'fu.routeName = :productListRouteName
                 AND fu.entityId = c.id
                 AND fu.domainId = :domainId
@@ -92,7 +98,10 @@ class SitemapRepository
         $queryBuilder = $this->articleRepository->getVisibleArticlesByDomainIdQueryBuilder($domainConfig->getId());
         $queryBuilder
             ->select('fu.slug')
-            ->join(FriendlyUrl::class, 'fu', Join::WITH,
+            ->join(
+                FriendlyUrl::class,
+                'fu',
+                Join::WITH,
                 'fu.routeName = :articleDetailRouteName
                 AND fu.entityId = a.id
                 AND fu.domainId = :domainId

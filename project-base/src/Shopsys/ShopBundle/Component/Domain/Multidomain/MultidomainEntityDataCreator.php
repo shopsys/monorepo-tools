@@ -67,7 +67,8 @@ class MultidomainEntityDataCreator
         $quotedColumnNames = $this->sqlQuoter->quoteIdentifiers($columnNames);
         $quotedColumnNamesSql = implode(', ', $quotedColumnNames);
         $quotedTableName = $this->sqlQuoter->quoteIdentifier($tableName);
-        $query = $this->em->createNativeQuery('
+        $query = $this->em->createNativeQuery(
+            '
             INSERT INTO ' . $quotedTableName . ' (domain_id, ' . $quotedColumnNamesSql . ')
             SELECT :newDomainId, ' . $quotedColumnNamesSql . '
             FROM ' . $quotedTableName . '

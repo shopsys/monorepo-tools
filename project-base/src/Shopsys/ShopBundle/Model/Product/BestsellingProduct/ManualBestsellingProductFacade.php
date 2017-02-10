@@ -69,7 +69,6 @@ class ManualBestsellingProductFacade
         $products = [];
         foreach ($bestsellingProducts as $key => $bestsellingProduct) {
             $products[$key] = $bestsellingProduct->getProduct();
-
         }
 
         return $products;

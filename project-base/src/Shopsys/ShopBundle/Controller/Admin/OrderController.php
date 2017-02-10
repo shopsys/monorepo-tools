@@ -222,7 +222,8 @@ class OrderController extends AdminBaseController
         }
 
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
-            $queryBuilder, 'o.id',
+            $queryBuilder,
+            'o.id',
             function ($row) {
                 return $this->addOrderEntityToDataSource($row);
             }

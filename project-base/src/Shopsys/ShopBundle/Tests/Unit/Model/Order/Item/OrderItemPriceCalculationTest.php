@@ -33,7 +33,12 @@ class OrderItemPriceCalculationTest extends PHPUnit_Framework_TestCase
         $orderItemPriceCalculation = new OrderItemPriceCalculation($priceCalculationMock);
 
         $orderItem = $this->getMockForAbstractClass(
-            OrderItem::class, [], '', false, true, true,
+            OrderItem::class,
+            [],
+            '',
+            false,
+            true,
+            true,
             ['getPriceWithVat', 'getQuantity', 'getVatPercent']
         );
         $orderItem->expects($this->once())->method('getPriceWithVat')->willReturn(100);

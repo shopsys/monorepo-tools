@@ -42,7 +42,8 @@ class FrontendUserProvider implements UserProviderInterface
 
         if ($user === null) {
             $message = sprintf(
-                'Unable to find an active Shopsys\ShopBundle\Model\Customer\User object identified by email "%s".', $email
+                'Unable to find an active Shopsys\ShopBundle\Model\Customer\User object identified by email "%s".',
+                $email
             );
             throw new \Symfony\Component\Security\Core\Exception\UsernameNotFoundException($message, 0);
         }

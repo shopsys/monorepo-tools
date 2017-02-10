@@ -116,7 +116,6 @@ class ProductFilterRepository
             $productsQueryBuilder->andWhere('a.dispatchTime = :dispatchTime');
             $productsQueryBuilder->setParameter('dispatchTime', self::DAYS_FOR_STOCK_FILTER);
         }
-
     }
 
     /**

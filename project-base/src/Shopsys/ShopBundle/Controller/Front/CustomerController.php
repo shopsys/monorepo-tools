@@ -160,7 +160,6 @@ class CustomerController extends FrontBaseController
             'order' => $order,
             'orderItemTotalPricesById' => $orderItemTotalPricesById,
         ]);
-
     }
 
     /**

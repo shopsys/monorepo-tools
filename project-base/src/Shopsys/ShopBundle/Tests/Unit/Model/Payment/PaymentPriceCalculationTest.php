@@ -148,6 +148,5 @@ class PaymentPriceCalculationTest extends PHPUnit_Framework_TestCase
             $this->assertSame(round($priceWithoutVat, 6), round($price->getPriceWithoutVat(), 6));
             $this->assertSame(round($priceWithVat, 6), round($price->getPriceWithVat(), 6));
         }
-
     }
 }

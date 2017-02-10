@@ -94,7 +94,8 @@ class ProductVisibilityRepository
             $onlyMarkedProductsWhereClause = '';
         }
 
-        $query = $this->em->createNativeQuery('
+        $query = $this->em->createNativeQuery(
+            '
             UPDATE products AS p
             SET calculated_visibility = (p.calculated_hidden = FALSE) AND EXISTS(
                     SELECT 1
@@ -103,7 +104,8 @@ class ProductVisibilityRepository
                         AND pv.visible = TRUE
                 )
             ' . $onlyMarkedProductsWhereClause,
-            new ResultSetMapping());
+            new ResultSetMapping()
+        );
         $query->execute();
     }
 

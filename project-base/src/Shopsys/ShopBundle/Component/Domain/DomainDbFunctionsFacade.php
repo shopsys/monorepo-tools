@@ -46,7 +46,8 @@ class DomainDbFunctionsFacade
             $domainIdsByLocaleSqlClauses[] = $sql;
         }
 
-        $query = $this->em->createNativeQuery('
+        $query = $this->em->createNativeQuery(
+            '
             CREATE OR REPLACE FUNCTION get_domain_ids_by_locale(locale text) RETURNS SETOF integer AS $$
             BEGIN
                 CASE
@@ -71,7 +72,8 @@ class DomainDbFunctionsFacade
                 . ' THEN RETURN \'' . $domainConfig->getLocale() . '\';';
         }
 
-        $query = $this->em->createNativeQuery('
+        $query = $this->em->createNativeQuery(
+            '
             CREATE OR REPLACE FUNCTION get_domain_locale(domain_id integer) RETURNS text AS $$
             BEGIN
                 CASE

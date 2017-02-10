@@ -66,7 +66,6 @@ class QueryPaginator implements PaginatorInterface
         $results = $query->execute(null, $this->hydrationMode);
 
         return new PaginationResult($page, $pageSize, $totalCount, $results);
-
     }
 
     /**

@@ -59,7 +59,6 @@ class AdministratorFacade
         $this->em->flush();
 
         return $administrator;
-
     }
 
     /**

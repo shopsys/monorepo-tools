@@ -254,7 +254,8 @@ class OrderCreationService
      */
     private function addOrderItemDiscount(OrderItem $orderItem, Price $discount, $locale, $discountPercent)
     {
-        $name = sprintf('%s %s - %s',
+        $name = sprintf(
+            '%s %s - %s',
             t('Discount coupon', [], 'messages', $locale),
             $this->numberFormatterExtension->formatPercent(-$discountPercent, $locale),
             $orderItem->getName()

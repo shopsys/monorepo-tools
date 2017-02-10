@@ -94,7 +94,6 @@ class VatController extends AdminBaseController
         } catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
             return new Response(t('Selected VAT doesn\'t exist'));
         }
-
     }
 
     /**
@@ -126,9 +125,9 @@ class VatController extends AdminBaseController
                     [
                         'name' => $fullName,
                         'newName' => $newVat->getName(),
-                    ]);
+                    ]
+                );
             }
-
         } catch (\Shopsys\ShopBundle\Model\Pricing\Vat\Exception\VatNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected VAT doesn\'t exist.'));
         }

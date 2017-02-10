@@ -141,7 +141,6 @@ class DomainController extends AdminBaseController
             } catch (\Shopsys\ShopBundle\Component\FileUpload\Exception\MoveToFolderFailedException $ex) {
                 $this->getFlashMessageSender()->addErrorFlash(t('File upload failed, try again please.'));
             }
-
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
@@ -156,7 +155,6 @@ class DomainController extends AdminBaseController
             'form' => $form->createView(),
             'domain' => $domain,
         ]);
-
     }
 
     private function loadData()

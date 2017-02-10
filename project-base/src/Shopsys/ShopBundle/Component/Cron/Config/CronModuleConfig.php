@@ -38,8 +38,7 @@ class CronModuleConfig implements CronTimeInterface
     public function __construct($cronModuleService, $moduleId, $timeHours, $timeMinutes)
     {
         // @codingStandardsIgnoreEnd
-        if (
-            !$cronModuleService instanceof CronModuleInterface
+        if (!$cronModuleService instanceof CronModuleInterface
             && !$cronModuleService instanceof IteratedCronModuleInterface
         ) {
             throw new \Shopsys\ShopBundle\Component\Cron\Exception\InvalidCronModuleException($moduleId);

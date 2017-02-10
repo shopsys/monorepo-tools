@@ -84,7 +84,6 @@ class AvailabilityController extends AdminBaseController
                     ]
                 );
             }
-
         } catch (\Shopsys\ShopBundle\Model\Product\Availability\Exception\AvailabilityNotFoundException $ex) {
             $this->getFlashMessageSender()->addErrorFlash(t('Selected availatibily doesn\'t exist.'));
         }

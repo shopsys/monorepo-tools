@@ -305,7 +305,6 @@ class ProductFacade
             $toFlush[] = $productDomain;
         }
         $this->em->flush($toFlush);
-
     }
 
     /**

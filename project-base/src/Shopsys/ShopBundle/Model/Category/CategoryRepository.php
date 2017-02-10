@@ -358,7 +358,10 @@ class CategoryRepository extends NestedTreeRepository
     {
         $queryBuilder = $this->productRepository->getAllListableQueryBuilder($domainId, $pricingGroup);
 
-        $queryBuilder->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
+        $queryBuilder->join(
+            ProductCategoryDomain::class,
+            'pcd',
+            Join::WITH,
             'pcd.product = p
              AND pcd.category = :category
              AND pcd.domainId = :domainId'
@@ -392,7 +395,10 @@ class CategoryRepository extends NestedTreeRepository
     public function findProductMainCategoryOnDomain(Product $product, $domainId)
     {
         $qb = $this->getAllVisibleByDomainIdQueryBuilder($domainId)
-            ->join(ProductCategoryDomain::class, 'pcd', Join::WITH,
+            ->join(
+                ProductCategoryDomain::class,
+                'pcd',
+                Join::WITH,
                 'pcd.product = :product
                     AND pcd.category = c
                     AND pcd.domainId = :domainId'

@@ -97,7 +97,8 @@ class FriendlyUrlRepository
         ];
 
         return $this->getFriendlyUrlRepository()->findBy(
-            $criteria, [
+            $criteria,
+            [
                 'domainId' => 'ASC',
                 'slug' => 'ASC',
             ]

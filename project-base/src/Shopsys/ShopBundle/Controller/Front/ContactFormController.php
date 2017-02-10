@@ -54,7 +54,6 @@ class ContactFormController extends FrontBaseController
             } catch (\Shopsys\ShopBundle\Model\Mail\Exception\SendMailFailedException $ex) {
                 $message = t('Error occurred when sending e-mail.');
             }
-
         }
 
         $contactFormHtml = $this->renderView('@ShopsysShop/Front/Content/ContactForm/contactForm.html.twig', [
@@ -65,7 +64,6 @@ class ContactFormController extends FrontBaseController
             'contactFormHtml' => $contactFormHtml,
             'message' => $message,
         ]);
-
     }
 
     public function indexAction()

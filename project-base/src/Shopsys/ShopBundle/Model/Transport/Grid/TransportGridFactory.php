@@ -65,7 +65,8 @@ class TransportGridFactory implements GridFactoryInterface
             ->join('t.translations', 'tt', Join::WITH, 'tt.locale = :locale')
             ->setParameter('locale', $this->localization->getDefaultLocale());
         $dataSource = new QueryBuilderWithRowManipulatorDataSource(
-            $queryBuilder, 't.id',
+            $queryBuilder,
+            't.id',
             function ($row) {
                 $transport = $this->transportRepository->findById($row['t']['id']);
                 $row['transportDetail'] = $this->transportDetailFactory->createDetailForTransportWithIndependentPrices($transport);
