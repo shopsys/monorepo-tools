@@ -54,7 +54,8 @@ class ProductAvailabilityRecalculator
     {
         $this->productRowsIterator = null;
         // @codingStandardsIgnoreStart
-        while ($this->runBatchOfScheduledDelayedRecalculations()) {};
+        while ($this->runBatchOfScheduledDelayedRecalculations()) {
+        };
         // @codingStandardsIgnoreEnd
     }
 

@@ -6,5 +6,4 @@ use Exception;
 
 class EditingSuperadminException extends Exception implements AdministratorException
 {
-
 }

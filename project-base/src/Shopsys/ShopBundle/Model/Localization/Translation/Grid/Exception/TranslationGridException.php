@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Localization\Exception\LocalizationException;
 
 interface TranslationGridException extends LocalizationException
 {
-
 }

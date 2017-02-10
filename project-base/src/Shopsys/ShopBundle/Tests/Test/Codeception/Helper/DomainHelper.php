@@ -16,7 +16,7 @@ class DomainHelper extends Module
      */
     public function _before(TestInterface $test)
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $webDriver = $this->getModule(StrictWebDriver::class);
         /* @var $webDriver \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);

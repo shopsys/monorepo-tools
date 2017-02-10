@@ -100,5 +100,4 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
             VatDataFixture::class,
         ];
     }
-
 }

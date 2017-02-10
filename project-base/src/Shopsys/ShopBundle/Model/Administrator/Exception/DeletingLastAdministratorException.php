@@ -6,5 +6,4 @@ use Exception;
 
 class DeletingLastAdministratorException extends Exception implements AdministratorException
 {
-
 }

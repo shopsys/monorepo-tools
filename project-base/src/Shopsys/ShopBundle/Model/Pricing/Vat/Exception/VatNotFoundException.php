@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class VatNotFoundException extends NotFoundHttpException implements VatException
 {
-
 }

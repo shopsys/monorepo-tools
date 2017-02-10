@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Security\Exception\SecurityException;
 
 interface FilesystemException extends SecurityException
 {
-
 }

@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Product\Exception\ProductException;
 
 interface UnitException extends ProductException
 {
-
 }

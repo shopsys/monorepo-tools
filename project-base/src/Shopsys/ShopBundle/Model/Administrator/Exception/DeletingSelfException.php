@@ -6,5 +6,4 @@ use Exception;
 
 class DeletingSelfException extends Exception implements AdministratorException
 {
-
 }

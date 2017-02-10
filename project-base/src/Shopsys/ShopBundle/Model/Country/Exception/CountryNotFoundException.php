@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CountryNotFoundException extends NotFoundHttpException implements CountryException
 {
-
 }

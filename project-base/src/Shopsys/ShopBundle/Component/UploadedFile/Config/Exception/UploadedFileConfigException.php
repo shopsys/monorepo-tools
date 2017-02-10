@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Component\UploadedFile\Exception\FileException;
 
 interface UploadedFileConfigException extends FileException
 {
-
 }

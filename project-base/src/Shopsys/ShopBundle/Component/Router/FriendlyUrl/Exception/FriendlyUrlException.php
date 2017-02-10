@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Component\Router\Exception\RouterException;
 
 interface FriendlyUrlException extends RouterException
 {
-
 }

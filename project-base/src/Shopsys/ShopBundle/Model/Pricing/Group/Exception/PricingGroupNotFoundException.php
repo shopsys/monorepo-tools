@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PricingGroupNotFoundException extends NotFoundHttpException implements PricingGroupException
 {
-
 }

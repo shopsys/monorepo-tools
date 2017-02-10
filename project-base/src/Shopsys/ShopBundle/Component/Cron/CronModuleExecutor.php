@@ -64,5 +64,4 @@ class CronModuleExecutor
     {
         return $this->canRunTo > new DateTimeImmutable();
     }
-
 }

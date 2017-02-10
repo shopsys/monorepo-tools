@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FriendlyUrlNotFoundException extends NotFoundHttpException implements FriendlyUrlException
 {
-
 }

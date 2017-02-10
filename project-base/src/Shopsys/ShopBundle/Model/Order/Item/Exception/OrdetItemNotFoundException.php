@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class OrdetItemNotFoundException extends NotFoundHttpException implements OrderException
 {
-
 }

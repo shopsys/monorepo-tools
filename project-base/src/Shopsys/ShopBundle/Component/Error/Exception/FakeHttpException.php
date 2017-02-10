@@ -7,5 +7,4 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class FakeHttpException extends HttpException implements ErrorException
 {
-
 }

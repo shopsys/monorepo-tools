@@ -7,5 +7,4 @@ use Shopsys\AutoServicesBundle\Compiler\Exception\CompilerException;
 
 class ServiceNotFoundException extends Exception implements CompilerException
 {
-
 }

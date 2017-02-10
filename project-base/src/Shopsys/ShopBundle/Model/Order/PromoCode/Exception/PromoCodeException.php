@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Order\Exception\OrderException;
 
 interface PromoCodeException extends OrderException
 {
-
 }

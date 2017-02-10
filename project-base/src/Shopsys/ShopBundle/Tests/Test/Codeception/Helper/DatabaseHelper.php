@@ -16,7 +16,7 @@ class DatabaseHelper extends Module
      */
     public function _initialize()
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $dbModule = $this->getModule(Db::class);
         /* @var $dbModule \Shopsys\ShopBundle\Tests\Test\Codeception\Module\Db */
         $symfonyHelper = $this->getModule(SymfonyHelper::class);

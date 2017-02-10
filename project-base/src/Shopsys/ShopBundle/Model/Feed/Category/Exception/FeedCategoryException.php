@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Feed\Exception\FeedException;
 
 interface FeedCategoryException extends FeedException
 {
-
 }

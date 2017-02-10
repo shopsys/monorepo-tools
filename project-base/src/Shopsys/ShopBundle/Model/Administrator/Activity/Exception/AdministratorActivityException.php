@@ -6,5 +6,4 @@ use Shopsys\ShopBundle\Model\Administrator\Exception\AdministratorException;
 
 interface AdministratorActivityException extends AdministratorException
 {
-
 }

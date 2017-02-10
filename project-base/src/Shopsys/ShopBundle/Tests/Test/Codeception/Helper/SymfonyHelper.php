@@ -22,7 +22,7 @@ class SymfonyHelper extends Module
      */
     public function _initialize()
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $projectDir = Configuration::projectDir();
 
         require_once $projectDir . '/../app/bootstrap.php.cache';
@@ -41,7 +41,7 @@ class SymfonyHelper extends Module
      */
     public function _before(TestInterface $test)
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $this->kernel->boot();
     }
 

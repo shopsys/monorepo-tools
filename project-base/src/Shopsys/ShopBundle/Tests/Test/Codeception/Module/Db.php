@@ -16,7 +16,7 @@ class Db extends BaseDb
      */
     public function _afterSuite()
     {
-    // @codingStandardsIgnoreEnd
+        // @codingStandardsIgnoreEnd
         $this->cleanup();
         $this->loadDump();
     }
