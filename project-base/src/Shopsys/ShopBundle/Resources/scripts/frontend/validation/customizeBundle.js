@@ -42,6 +42,24 @@
         });
     };
 
+    /**
+     * Delayed validation on blur event
+     *
+     * We customized JS validation to validate form elements on blur event.
+     * The standard validation that is done on submit event validates all form elements recursively (from root
+     * to children elements).
+     * On blur event, we want to validate the blurred element itself and all its ancestral elements (because
+     * constraints of ancestral elements can validate children data).
+     * However, if user leaves one element and focuses on a sibling element in short time we do not want to run
+     * validation on thier common ancestral elements because user presumably did not finish filling-in
+     * the ancestral form yet.
+     * Therefore we delay the validation on blur event and if user focuses another element in short time
+     * we suppress the validation of common ancestral elements. So the validation happens after user leaves
+     * the whole form (or sub-form).
+     *
+     * This prevents from showing "passwords are not the same" error when user fills-in the first password
+     * and focuses the second password field (before even starting to fill-in the second password field).
+     */
     Shopsys.validation.elementBind = function (element) {
         if (!element.domNode) {
             return;
@@ -61,23 +79,47 @@
                     event.preventDefault();
 
                     if (isJsFileUpload !== true) {
-                        this.jsFormValidator.validate();
-
-                        var parent = this.jsFormValidator.parent;
-                        while (parent) {
-                            parent.validate();
-
-                            parent = parent.parent;
-                        }
+                        Shopsys.validation.validateWithParentsDelayed(this.jsFormValidator);
                     }
                 }
             })
             .focus(function () {
+                if (this.jsFormValidator) {
+                    Shopsys.validation.removeDelayedValidationWithParents(this.jsFormValidator);
+                }
+
                 $(this).closest('.form-input-error').removeClass('form-input-error');
             })
             .jsFormValidator({
                 'showErrors': Shopsys.validation.showErrors
             });
+    };
+
+    var delayedValidators = {};
+
+    var executeDelayedValidators = function () {
+        var validators = delayedValidators;
+        delayedValidators = {};
+
+        $.each(validators, function() {
+            this.validate();
+        });
+    };
+
+    Shopsys.validation.validateWithParentsDelayed = function (jsFormValidator) {
+        do {
+            delayedValidators[jsFormValidator.id] = jsFormValidator;
+            jsFormValidator = jsFormValidator.parent;
+        } while (jsFormValidator);
+
+        Shopsys.timeout.setTimeoutAndClearPrevious('Shopsys.validation.validateWithParentsDelayed', executeDelayedValidators, 100);
+    };
+
+    Shopsys.validation.removeDelayedValidationWithParents = function (jsFormValidator) {
+        do {
+            delete delayedValidators[jsFormValidator.id];
+            jsFormValidator = jsFormValidator.parent;
+        } while (jsFormValidator);
     };
 
     FpJsFormValidator.customizeMethods._submitForm = FpJsFormValidator.customizeMethods.submitForm;
