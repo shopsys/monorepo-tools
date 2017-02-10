@@ -9,9 +9,9 @@
 $phingPhpFilepath = dirname(__FILE__) . '/vendor/phing/phing/bin/phing.php';
 
 if (!file_exists($phingPhpFilepath)) {
-	echo "Error: $phingPhpFilepath not found.\n";
-	echo "Please run: composer install\n";
-	exit(1);
+    echo "Error: $phingPhpFilepath not found.\n";
+    echo "Please run: composer install\n";
+    exit(1);
 }
 
 // turn off html errors
