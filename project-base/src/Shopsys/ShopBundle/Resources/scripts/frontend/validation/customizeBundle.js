@@ -333,7 +333,7 @@
         var $elementsToHighlight = Shopsys.validation.findElementsToHighlight($(this));
 
         var errorSourceClass = 'js-error-source-id-' + sourceId;
-        $errorListUl.find('li').remove();
+        $errorListUl.find('li.' + errorSourceClass).remove();
 
         if (errors.length > 0) {
             $elementsToHighlight.addClass('form-input-error');
