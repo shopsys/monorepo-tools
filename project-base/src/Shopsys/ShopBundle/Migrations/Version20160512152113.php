@@ -14,6 +14,7 @@ class Version20160512152113 extends AbstractMigration
 
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function up(Schema $schema)
     {
