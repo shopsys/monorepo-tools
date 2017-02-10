@@ -72,5 +72,4 @@ class PromoCodeFacade
     public function findPromoCodeByCode($code) {
         return $this->promoCodeRepository->findByCode($code);
     }
-
 }

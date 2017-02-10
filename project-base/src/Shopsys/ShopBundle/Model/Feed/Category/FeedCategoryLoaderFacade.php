@@ -55,5 +55,4 @@ class FeedCategoryLoaderFacade
         $feedCategoriesData = $this->heurekaFeedCategoryLoader->load($this->heurekaCategoryFeedBackupFilepath);
         $this->feedCategoryFacade->refreshFeedCategories($feedCategoriesData);
     }
-
 }

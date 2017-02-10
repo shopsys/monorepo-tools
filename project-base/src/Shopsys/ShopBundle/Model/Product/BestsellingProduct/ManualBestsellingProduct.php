@@ -105,5 +105,4 @@ class ManualBestsellingProduct
     public function getPosition() {
         return $this->position;
     }
-
 }

@@ -145,5 +145,4 @@ class AdvertFormType extends AbstractType
             Advert::TYPE_IMAGE => t('Picture with link'),
         ];
     }
-
 }

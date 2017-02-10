@@ -28,5 +28,4 @@ class DomainHelper extends Module
 
         $webDriver->_reconfigure(['url' => $domainConfig->getUrl()]);
     }
-
 }

@@ -34,5 +34,4 @@ class AllMailTemplatesData
         $allTemplates[] = $this->resetPasswordTemplate;
         return $allTemplates;
     }
-
 }

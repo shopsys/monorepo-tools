@@ -17,5 +17,4 @@ class DummyController
     public function withProtectionAction() {
 
     }
-
 }

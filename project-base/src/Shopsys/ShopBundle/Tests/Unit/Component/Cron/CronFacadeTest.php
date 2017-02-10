@@ -121,5 +121,4 @@ class CronFacadeTest extends PHPUnit_Framework_TestCase
         $cronFacade = new CronFacade($loggerMock, $cronConfig, $cronModuleFacadeMock, $cronModuleExecutorFactory);
         $cronFacade->runScheduledModules();
     }
-
 }

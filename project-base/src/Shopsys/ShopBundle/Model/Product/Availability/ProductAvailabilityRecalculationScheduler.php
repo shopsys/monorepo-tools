@@ -53,5 +53,4 @@ class ProductAvailabilityRecalculationScheduler
     public function cleanScheduleForImmediateRecalculation() {
         $this->products = [];
     }
-
 }

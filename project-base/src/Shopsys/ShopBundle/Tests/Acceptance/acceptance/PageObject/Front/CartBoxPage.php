@@ -13,5 +13,4 @@ class CartBoxPage extends AbstractPage
     public function seeInCartBox($text) {
         $this->tester->seeInCss($text, '.js-cart-info');
     }
-
 }

@@ -40,5 +40,4 @@ class ProductSellingPrice
     public function getSellingPrice() {
         return $this->sellingPrice;
     }
-
 }

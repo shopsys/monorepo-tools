@@ -22,5 +22,4 @@ class UniqueProductParametersValidator extends ConstraintValidator
         // \Shopsys\ShopBundle\Component\Transformers\ProductParameterValueToProductParameterValuesLocalizedTransformer
         // throw exception on duplicate parameters
     }
-
 }

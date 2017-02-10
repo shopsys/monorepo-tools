@@ -76,5 +76,4 @@ class ArrayDataSource implements DataSourceInterface
     public function getTotalRowsCount() {
         return count($this->data);
     }
-
 }

@@ -125,5 +125,4 @@ class CategoryController extends FrontBaseController
             'countOfProductsByCategoryId' => $countOfProductsByCategoryId,
         ]);
     }
-
 }

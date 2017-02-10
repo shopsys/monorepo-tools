@@ -35,5 +35,4 @@ class TopCategoryDataFixture extends AbstractReferenceFixture implements Depende
             CategoryDataFixture::class,
         ];
     }
-
 }

@@ -72,5 +72,4 @@ class OrderItemFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

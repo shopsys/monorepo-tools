@@ -28,5 +28,4 @@ class ErrorPageCronModule implements CronModuleInterface
     public function run() {
         $this->errorPagesFacade->generateAllErrorPagesForProduction();
     }
-
 }

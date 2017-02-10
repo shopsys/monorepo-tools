@@ -112,5 +112,4 @@ class BestsellingProductController extends AdminBaseController
             'categoryName' => $category->getName(),
         ]);
     }
-
 }

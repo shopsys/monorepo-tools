@@ -26,5 +26,4 @@ class ParameterService
 
         return $parameter;
     }
-
 }

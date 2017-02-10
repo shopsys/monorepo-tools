@@ -50,5 +50,4 @@ class ProductAvailabilityCronModule implements IteratedCronModuleInterface
             return false;
         }
     }
-
 }

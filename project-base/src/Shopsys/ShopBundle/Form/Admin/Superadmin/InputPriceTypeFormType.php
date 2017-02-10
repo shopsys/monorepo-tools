@@ -56,5 +56,4 @@ class InputPriceTypeFormType extends AbstractType
             PricingSetting::INPUT_PRICE_TYPE_WITH_VAT => t('Including VAT'),
         ];
     }
-
 }

@@ -18,5 +18,4 @@ class Contains extends Constraint
             'needle',
         ];
     }
-
 }

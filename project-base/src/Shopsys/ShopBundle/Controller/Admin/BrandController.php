@@ -201,5 +201,4 @@ class BrandController extends AdminBaseController
 
         return $this->redirectToRoute('admin_brand_list');
     }
-
 }

@@ -15,5 +15,4 @@ class GeneratorTargetFileAlreadyExistsExpception extends Exception implements Ge
         $message = 'File "' . $filepath . '" already exists';
         parent::__construct($message, 0, $previous);
     }
-
 }

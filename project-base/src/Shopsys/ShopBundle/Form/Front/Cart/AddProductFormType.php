@@ -51,5 +51,4 @@ class AddProductFormType extends AbstractType
             'csrf_protection' => false, // CSRF is not necessary (and can be annoying) in this form
         ]);
     }
-
 }

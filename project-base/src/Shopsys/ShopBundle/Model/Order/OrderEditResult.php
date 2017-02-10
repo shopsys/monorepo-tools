@@ -51,5 +51,4 @@ class OrderEditResult
     public function isStatusChanged() {
         return $this->statusChanged;
     }
-
 }

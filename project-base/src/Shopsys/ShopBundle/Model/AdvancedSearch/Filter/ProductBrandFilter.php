@@ -85,5 +85,4 @@ class ProductBrandFilter implements AdvancedSearchFilterInterface
             $queryBuilder->setParameter('isNotBrand', $isNotBrand);
         }
     }
-
 }

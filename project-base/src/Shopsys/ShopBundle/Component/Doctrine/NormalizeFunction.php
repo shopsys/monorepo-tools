@@ -34,5 +34,4 @@ class NormalizeFunction extends FunctionNode
     public function getSql(SqlWalker $sqlWalker) {
         return self::FUNCTION_NORMALIZE . '(' . $this->stringExpression->dispatch($sqlWalker) . ')';
     }
-
 }

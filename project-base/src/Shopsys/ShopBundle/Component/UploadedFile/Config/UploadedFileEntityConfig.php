@@ -37,5 +37,4 @@ class UploadedFileEntityConfig
     public function getEntityClass() {
         return $this->entityClass;
     }
-
 }

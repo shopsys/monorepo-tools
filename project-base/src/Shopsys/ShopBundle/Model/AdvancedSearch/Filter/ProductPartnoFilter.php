@@ -75,5 +75,4 @@ class ProductPartnoFilter implements AdvancedSearchFilterInterface
                 return 'NOT LIKE';
         }
     }
-
 }

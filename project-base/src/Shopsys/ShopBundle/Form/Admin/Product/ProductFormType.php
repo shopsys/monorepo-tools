@@ -330,5 +330,4 @@ class ProductFormType extends AbstractType
             $builder->get($irrelevantField)->setDisabled(true);
         }
     }
-
 }

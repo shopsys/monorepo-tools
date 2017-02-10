@@ -36,5 +36,4 @@ abstract class AbstractGenerator implements GeneratorInterface
 
         return is_int(file_put_contents($target, $this->twig->render($this->getName() . '/' . $template, $parameters)));
     }
-
 }

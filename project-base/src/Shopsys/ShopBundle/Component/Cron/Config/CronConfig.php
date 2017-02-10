@@ -65,5 +65,4 @@ class CronConfig
 
         throw new \Shopsys\ShopBundle\Component\Cron\Config\Exception\CronModuleConfigNotFoundException($moduleId);
     }
-
 }

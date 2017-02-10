@@ -49,5 +49,4 @@ class DomainFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

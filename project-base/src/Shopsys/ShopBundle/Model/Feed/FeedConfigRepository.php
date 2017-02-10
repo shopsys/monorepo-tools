@@ -92,5 +92,4 @@ class FeedConfigRepository
     public function getAllFeedConfigs() {
         return array_merge($this->getFeedConfigs(), $this->getDeliveryFeedConfigs());
     }
-
 }

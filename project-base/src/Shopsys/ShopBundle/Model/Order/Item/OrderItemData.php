@@ -52,5 +52,4 @@ class OrderItemData
         $this->unitName = $orderItem->getUnitName();
         $this->catnum = $orderItem->getCatnum();
     }
-
 }

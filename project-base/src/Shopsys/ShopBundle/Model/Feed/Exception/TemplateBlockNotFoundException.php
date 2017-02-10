@@ -17,5 +17,4 @@ class TemplateBlockNotFoundException extends Exception implements FeedException
         $message = sprintf('Block "%s" does not exist in template "%s".', $blockName, $templateName);
         parent::__construct($message, 0, $previous);
     }
-
 }

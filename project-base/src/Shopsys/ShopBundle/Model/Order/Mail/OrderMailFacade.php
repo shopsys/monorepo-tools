@@ -69,5 +69,4 @@ class OrderMailFacade
 
         return $this->mailTemplateFacade->get($templateName, $domainId);
     }
-
 }

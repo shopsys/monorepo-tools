@@ -79,5 +79,4 @@ class FragmentHandlerTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\RuntimeException::class);
         $fragmentHandler->render('uri', 'rendererName', []);
     }
-
 }

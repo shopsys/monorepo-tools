@@ -18,5 +18,4 @@ class ErrorPageNotFoundException extends Exception implements ErrorException
 
         parent::__construct($message, 0, $previous);
     }
-
 }

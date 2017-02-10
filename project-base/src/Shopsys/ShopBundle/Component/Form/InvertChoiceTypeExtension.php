@@ -47,5 +47,4 @@ class InvertChoiceTypeExtension extends AbstractTypeExtension
             self::INVERT_OPTION => 'bool',
         ]);
     }
-
 }

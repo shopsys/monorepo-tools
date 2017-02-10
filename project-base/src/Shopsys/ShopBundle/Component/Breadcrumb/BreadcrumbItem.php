@@ -51,5 +51,4 @@ class BreadcrumbItem
     public function getRouteParameters() {
         return $this->routeParameters;
     }
-
 }

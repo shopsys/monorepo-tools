@@ -139,5 +139,4 @@ class BillingAddressFormType extends AbstractType
             },
         ]);
     }
-
 }

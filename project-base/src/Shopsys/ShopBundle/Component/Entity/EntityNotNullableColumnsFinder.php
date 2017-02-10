@@ -57,5 +57,4 @@ class EntityNotNullableColumnsFinder
 
         return $notNullableAssociationNames;
     }
-
 }

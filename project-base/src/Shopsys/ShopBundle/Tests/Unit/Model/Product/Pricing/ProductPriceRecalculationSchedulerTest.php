@@ -56,5 +56,4 @@ class ProductPriceRecalculationSchedulerTest extends PHPUnit_Framework_TestCase
         $this->assertCount(0, $productPriceRecalculationScheduler->getProductsForImmediateRecalculation());
         $this->assertSame($productsIterator, $productPriceRecalculationScheduler->getProductsIteratorForDelayedRecalculation());
     }
-
 }

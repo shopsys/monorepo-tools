@@ -26,5 +26,4 @@ class GenerateErrorPagesCommand extends ContainerAwareCommand
 
         $errorPagesFacade->generateAllErrorPagesForProduction();
     }
-
 }

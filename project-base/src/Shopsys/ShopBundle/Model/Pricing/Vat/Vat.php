@@ -95,5 +95,4 @@ class Vat
     public function isMarkedAsDeleted() {
         return $this->replaceWith !== null;
     }
-
 }

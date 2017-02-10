@@ -34,5 +34,4 @@ class ProductFilterData
      * @var \Shopsys\ShopBundle\Model\Product\Brand\Brand[]
      */
     public $brands = [];
-
 }

@@ -15,5 +15,4 @@ class UndefinedTranslationException extends Exception implements ConstantListExc
     public function __construct($constant, Exception $previous = null) {
         parent::__construct('Undefined constant translation "' . $constant . '"', 0, $previous);
     }
-
 }

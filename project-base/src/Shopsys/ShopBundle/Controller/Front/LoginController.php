@@ -54,5 +54,4 @@ class LoginController extends FrontBaseController
             'method' => 'POST',
         ]);
     }
-
 }

@@ -121,5 +121,4 @@ class AdministratorFacade
 
         return $superadminUsernames;
     }
-
 }

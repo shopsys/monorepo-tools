@@ -286,5 +286,4 @@ class ProductFilterCountRepository
 
         return $countByParameterIdAndValueId;
     }
-
 }

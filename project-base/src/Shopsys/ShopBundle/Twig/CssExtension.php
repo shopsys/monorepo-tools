@@ -39,5 +39,4 @@ class CssExtension extends \Twig_Extension
     public function getCssVersion() {
         return $this->cssFacade->getCssVersion();
     }
-
 }

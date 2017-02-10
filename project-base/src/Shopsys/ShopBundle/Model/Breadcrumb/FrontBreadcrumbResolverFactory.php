@@ -65,5 +65,4 @@ class FrontBreadcrumbResolverFactory
 
         return $frontBreadcrumbResolver;
     }
-
 }

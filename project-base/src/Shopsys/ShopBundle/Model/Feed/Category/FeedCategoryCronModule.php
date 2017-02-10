@@ -31,5 +31,4 @@ class FeedCategoryCronModule implements CronModuleInterface
     public function run() {
         $this->feedCategoryLoaderFacade->download();
     }
-
 }

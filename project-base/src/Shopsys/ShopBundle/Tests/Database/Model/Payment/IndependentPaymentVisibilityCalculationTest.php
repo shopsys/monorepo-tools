@@ -101,5 +101,4 @@ class IndependentPaymentVisibilityCalculationTest extends DatabaseTestCase
 
         $this->assertFalse($independentPaymentVisibilityCalculation->isIndependentlyVisible($payment, $domainId));
     }
-
 }

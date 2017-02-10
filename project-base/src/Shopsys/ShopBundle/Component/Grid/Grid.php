@@ -726,5 +726,4 @@ class Grid
     public function isMultipleDragAndDrop() {
         return $this->multipleDragAndDrop;
     }
-
 }

@@ -76,5 +76,4 @@ class PricingGroupSettingFacade
     public function isPricingGroupDefault(PricingGroup $pricingGroup) {
         return $pricingGroup === $this->getDefaultPricingGroupBySelectedDomain();
     }
-
 }

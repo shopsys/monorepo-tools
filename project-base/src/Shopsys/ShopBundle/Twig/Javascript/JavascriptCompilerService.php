@@ -252,5 +252,4 @@ class JavascriptCompilerService
     private function processExternalJavascript($javascriptUrl) {
         $this->javascriptLinks[] = $this->assetPackages->getUrl($javascriptUrl);
     }
-
 }

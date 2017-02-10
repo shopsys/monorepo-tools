@@ -103,5 +103,4 @@ class DeliveryAddressData
             $this->addressFilled = false;
         }
     }
-
 }

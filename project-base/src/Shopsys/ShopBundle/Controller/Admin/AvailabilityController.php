@@ -163,5 +163,4 @@ class AvailabilityController extends AdminBaseController
             'form' => $form->createView(),
         ]);
     }
-
 }

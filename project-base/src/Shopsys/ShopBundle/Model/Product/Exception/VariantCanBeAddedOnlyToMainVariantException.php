@@ -17,5 +17,4 @@ class VariantCanBeAddedOnlyToMainVariantException extends Exception implements V
         $message = 'Product with ID ' . $productId . ' is not main variant for add variant ID ' . $variantId . '.';
         parent::__construct($message, 0, $previous);
     }
-
 }

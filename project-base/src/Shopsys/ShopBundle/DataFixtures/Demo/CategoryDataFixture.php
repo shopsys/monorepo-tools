@@ -157,5 +157,4 @@ class CategoryDataFixture extends AbstractReferenceFixture implements DependentF
             CategoryRootDataFixture::class,
         ];
     }
-
 }

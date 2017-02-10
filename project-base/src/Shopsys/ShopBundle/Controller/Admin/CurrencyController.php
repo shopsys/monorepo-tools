@@ -151,5 +151,4 @@ class CurrencyController extends AdminBaseController
             'domainNames' => $domainNames,
         ]);
     }
-
 }

@@ -37,5 +37,4 @@ class UploadedFileConfigDefinition implements ConfigurationInterface
                 ->end()
             ->end();
     }
-
 }

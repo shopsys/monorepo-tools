@@ -124,5 +124,4 @@ class FriendlyUrlService
     public function getAbsoluteUrlByDomainConfigAndSlug(DomainConfig $domainConfig, $slug) {
         return $domainConfig->getUrl() . '/' . $slug;
     }
-
 }

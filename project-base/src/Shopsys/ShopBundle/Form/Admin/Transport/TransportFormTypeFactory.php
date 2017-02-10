@@ -27,5 +27,4 @@ class TransportFormTypeFactory
 
         return new TransportFormType($vats);
     }
-
 }

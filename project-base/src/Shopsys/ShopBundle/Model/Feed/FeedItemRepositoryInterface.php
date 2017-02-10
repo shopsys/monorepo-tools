@@ -14,5 +14,4 @@ interface FeedItemRepositoryInterface
      * @return \Shopsys\ShopBundle\Model\Feed\FeedItemInterface[]
      */
     public function getItems(DomainConfig $domainConfig, $seekItemId, $maxResults);
-
 }

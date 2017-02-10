@@ -43,5 +43,4 @@ class CurrentDomainRouterTest extends PHPUnit_Framework_TestCase
         $this->assertSame($matchResult, $currentDomainRouter->match($pathInfo));
         $this->assertSame($getRouteCollectionResult, $currentDomainRouter->getRouteCollection());
     }
-
 }

@@ -125,5 +125,4 @@ class PaymentRepository
     public function getPaymentDomainsByPayment(Payment $payment) {
         return $this->getPaymentDomainRepository()->findBy(['payment' => $payment]);
     }
-
 }

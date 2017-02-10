@@ -49,5 +49,4 @@ class CookiesSettingFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

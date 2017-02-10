@@ -43,5 +43,4 @@ abstract class AbstractNativeFixture extends AbstractFixture implements Containe
         $nativeQuery = $em->createNativeQuery($sql, new ResultSetMapping());
         return $nativeQuery->execute($parameters);
     }
-
 }

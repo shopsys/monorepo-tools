@@ -247,5 +247,4 @@ class ProductDomain
     public function setZboziCpcSearch($zboziCpcSearch) {
         $this->zboziCpcSearch = $zboziCpcSearch;
     }
-
 }

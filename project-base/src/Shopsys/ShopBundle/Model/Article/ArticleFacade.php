@@ -169,5 +169,4 @@ class ArticleFacade
     public function getAllByDomainId($domainId) {
         return $this->articleRepository->getAllByDomainId($domainId);
     }
-
 }

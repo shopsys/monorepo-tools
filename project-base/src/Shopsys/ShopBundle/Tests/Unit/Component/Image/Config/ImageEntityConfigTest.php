@@ -71,5 +71,4 @@ class ImageEntityConfigTest extends PHPUnit_Framework_TestCase
         $type2Size1 = $imageEntityConfig->getSizeConfigByType('TypeName_2', null);
         $this->assertSame($types['TypeName_2'][ImageEntityConfig::WITHOUT_NAME_KEY], $type2Size1);
     }
-
 }

@@ -52,5 +52,4 @@ class PricingGroupSettingsFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

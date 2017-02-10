@@ -87,5 +87,4 @@ class FrontendUserProvider implements UserProviderInterface
     public function supportsClass($class) {
         return User::class === $class || is_subclass_of($class, User::class);
     }
-
 }

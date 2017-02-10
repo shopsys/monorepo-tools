@@ -81,5 +81,4 @@ class ProductFlagFilter implements AdvancedSearchFilterInterface
             $queryBuilder->setParameter('isNotFlags', $isNotFlags);
         }
     }
-
 }

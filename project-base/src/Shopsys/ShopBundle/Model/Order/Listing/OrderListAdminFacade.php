@@ -37,5 +37,4 @@ class OrderListAdminFacade
 
         return $queryBuilder;
     }
-
 }

@@ -144,5 +144,4 @@ class ErrorPagesFacade
 
         return $errorPageResponse->getContent();
     }
-
 }

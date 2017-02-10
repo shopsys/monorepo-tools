@@ -26,5 +26,4 @@ class RemoveWhitespacesTransformerTest extends PHPUnit_Framework_TestCase
         $transformer = new RemoveWhitespacesTransformer();
         $this->assertSame($expected, $transformer->reverseTransform($value));
     }
-
 }

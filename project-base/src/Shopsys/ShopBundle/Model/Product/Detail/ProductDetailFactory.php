@@ -149,5 +149,4 @@ class ProductDetailFactory
     public function getProductDomainsIndexedByDomainId(Product $product) {
         return $this->productRepository->getProductDomainsByProductIndexedByDomainId($product);
     }
-
 }

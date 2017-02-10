@@ -178,5 +178,4 @@ class TransportController extends AdminBaseController
             'gridView' => $grid->createView(),
         ]);
     }
-
 }

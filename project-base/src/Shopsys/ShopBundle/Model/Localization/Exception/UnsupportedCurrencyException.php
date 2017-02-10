@@ -15,5 +15,4 @@ class UnsupportedCurrencyException extends Exception implements LocalizationExce
         $message = sprintf('Currency code %s is not supported', $currencyCode);
         parent::__construct($message, 0, $previous);
     }
-
 }

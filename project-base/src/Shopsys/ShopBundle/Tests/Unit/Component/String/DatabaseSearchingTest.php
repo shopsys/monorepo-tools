@@ -25,5 +25,4 @@ class DatabaseSearchingTest extends PHPUnit_Framework_TestCase
     public function testSafeFilename($searchText, $querySearchStringQuery) {
         $this->assertSame($querySearchStringQuery, DatabaseSearching::getLikeSearchString($searchText));
     }
-
 }

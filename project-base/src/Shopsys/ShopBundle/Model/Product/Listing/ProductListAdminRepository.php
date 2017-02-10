@@ -73,5 +73,4 @@ class ProductListAdminRepository
             $queryBuilder->setParameter('text', $querySerachText);
         }
     }
-
 }

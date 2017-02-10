@@ -89,5 +89,4 @@ class AdministratorActivity
     public function getLastActionTime() {
         return $this->lastActionTime;
     }
-
 }

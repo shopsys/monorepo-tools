@@ -28,5 +28,4 @@ class ImportDefaultDatabaseSchemaCommand extends ContainerAwareCommand
         $databaseSchemaFacade->importDefaultSchema();
         $output->writeln('Default database schema imported successfully!');
     }
-
 }

@@ -100,5 +100,4 @@ class PerformanceTestSample
     public function isSuccessful() {
         return $this->isSuccessful;
     }
-
 }

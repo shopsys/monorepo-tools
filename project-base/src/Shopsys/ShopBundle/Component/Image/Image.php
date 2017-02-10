@@ -180,5 +180,4 @@ class Image implements EntityFileUploadInterface
     public function getModifiedAt() {
         return $this->modifiedAt;
     }
-
 }

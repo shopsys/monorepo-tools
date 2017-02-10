@@ -74,5 +74,4 @@ class BrandFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

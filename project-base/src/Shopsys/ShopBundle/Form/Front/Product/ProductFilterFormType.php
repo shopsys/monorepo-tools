@@ -155,5 +155,4 @@ class ProductFilterFormType extends AbstractType
     public function getPriceRange() {
         return $this->priceRange;
     }
-
 }

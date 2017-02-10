@@ -103,5 +103,4 @@ class PaymentDataFixture extends AbstractReferenceFixture implements DependentFi
             CurrencyDataFixture::class,
         ];
     }
-
 }

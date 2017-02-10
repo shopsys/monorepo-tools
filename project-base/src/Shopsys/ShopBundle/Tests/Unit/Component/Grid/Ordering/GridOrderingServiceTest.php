@@ -35,5 +35,4 @@ class GridOrderingServiceTest extends PHPUnit_Framework_TestCase
 
         $gridOrderingService->setPosition($entityMock, $position);
     }
-
 }

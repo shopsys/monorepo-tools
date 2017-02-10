@@ -97,5 +97,4 @@ class AdministratorLoginFacade
             $this->em->flush($currentAdministrator);
         }
     }
-
 }

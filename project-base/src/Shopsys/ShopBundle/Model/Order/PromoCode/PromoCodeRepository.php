@@ -70,5 +70,4 @@ class PromoCodeRepository
 
         return $queryBuilder->getQuery()->execute();
     }
-
 }

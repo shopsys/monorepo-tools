@@ -30,5 +30,4 @@ abstract class AbstractTranslatedConstantList implements TranslatedConstantListI
      * @return string[string]
      */
     abstract public function getTranslationsIndexedByValue();
-
 }

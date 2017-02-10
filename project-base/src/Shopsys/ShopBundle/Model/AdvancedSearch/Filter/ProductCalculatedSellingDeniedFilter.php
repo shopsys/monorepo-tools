@@ -51,5 +51,4 @@ class ProductCalculatedSellingDeniedFilter implements AdvancedSearchFilterInterf
                 ->setParameter($parameterName, $sellingDenied);
         }
     }
-
 }

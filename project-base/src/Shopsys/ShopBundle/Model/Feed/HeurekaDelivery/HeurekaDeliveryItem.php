@@ -39,5 +39,4 @@ class HeurekaDeliveryItem implements FeedItemInterface
     public function getStockQuantity() {
         return $this->stockQuantity;
     }
-
 }

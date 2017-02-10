@@ -394,5 +394,4 @@ class CategoryFacade
     public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
         return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
     }
-
 }

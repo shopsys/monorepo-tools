@@ -60,5 +60,4 @@ class UploadedFileConfig
     public function getAllUploadedFileEntityConfigs() {
         return $this->uploadedFileEntityConfigsByClass;
     }
-
 }

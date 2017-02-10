@@ -102,5 +102,4 @@ class CronConfigLoader
 
         return new CronModuleConfig($this->container->get($moduleId), $moduleId, $timeHours, $timeMinutes);
     }
-
 }

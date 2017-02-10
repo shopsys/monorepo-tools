@@ -98,5 +98,4 @@ class PricingServiceTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Model\Pricing\Exception\InvalidArgumentException::class);
         $pricingService->arePricesDifferent([]);
     }
-
 }

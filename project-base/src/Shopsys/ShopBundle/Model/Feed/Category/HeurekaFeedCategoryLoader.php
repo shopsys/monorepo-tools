@@ -33,5 +33,4 @@ class HeurekaFeedCategoryLoader
 
         return $feedCategoriesData;
     }
-
 }

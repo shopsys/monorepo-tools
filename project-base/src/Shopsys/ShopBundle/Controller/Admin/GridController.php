@@ -78,5 +78,4 @@ class GridController extends AdminBaseController
 
         return new JsonResponse($responseData);
     }
-
 }

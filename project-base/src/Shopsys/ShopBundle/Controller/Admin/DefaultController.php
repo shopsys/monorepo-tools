@@ -14,5 +14,4 @@ class DefaultController extends AdminBaseController
     public function dashboardAction() {
         return $this->render('@ShopsysShop/Admin/Content/Default/index.html.twig');
     }
-
 }

@@ -49,5 +49,4 @@ class SitemapDumperFactory
             self::MAX_ITEMS_IN_FILE
         );
     }
-
 }

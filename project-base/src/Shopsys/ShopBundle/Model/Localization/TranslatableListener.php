@@ -43,5 +43,4 @@ class TranslatableListener extends PrezentTranslatableListener
             }
         }
     }
-
 }

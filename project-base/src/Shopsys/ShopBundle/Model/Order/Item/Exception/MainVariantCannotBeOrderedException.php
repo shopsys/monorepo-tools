@@ -14,5 +14,4 @@ class MainVariantCannotBeOrderedException extends Exception implements OrderItem
     public function __construct($message = '', Exception $previous = null) {
         parent::__construct($message, 0, $previous);
     }
-
 }

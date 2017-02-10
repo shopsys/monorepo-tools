@@ -60,5 +60,4 @@ class FeedCategoryRepository
     public function getAllHeurekaCz() {
         return $this->getFeedCategoryRepository()->findBy([], ['fullName' => 'asc']);
     }
-
 }

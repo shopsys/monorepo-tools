@@ -836,5 +836,4 @@ class Product extends AbstractTranslatableEntity
     protected function createTranslation() {
         return new ProductTranslation();
     }
-
 }

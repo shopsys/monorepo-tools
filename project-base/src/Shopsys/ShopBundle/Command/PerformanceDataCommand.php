@@ -44,5 +44,4 @@ class PerformanceDataCommand extends ContainerAwareCommand
         $output->writeln('<fg=green>loading ' . OrderDataFixture::class . '</fg=green>');
         $orderDataFixture->load($output);
     }
-
 }

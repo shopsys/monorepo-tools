@@ -25,5 +25,4 @@ class BestsellingProductDataFixture extends AbstractReferenceFixture
             [$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
         );
     }
-
 }

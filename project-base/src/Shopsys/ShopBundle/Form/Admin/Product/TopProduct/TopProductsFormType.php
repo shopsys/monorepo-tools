@@ -55,5 +55,4 @@ class TopProductsFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

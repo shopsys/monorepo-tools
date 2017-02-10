@@ -224,5 +224,4 @@ class ProductDataFixtureReferenceInjector
             MultidomainPricingGroupDataFixture::class,
         ];
     }
-
 }

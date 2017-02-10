@@ -64,5 +64,4 @@ class ProductParameterValueFormType extends AbstractType
             'data_class' => ProductParameterValuesLocalizedData::class,
         ]);
     }
-
 }

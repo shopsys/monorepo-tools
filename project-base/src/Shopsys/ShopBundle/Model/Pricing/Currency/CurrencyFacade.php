@@ -229,5 +229,4 @@ class CurrencyFacade
 
         $this->em->flush($toFlush);
     }
-
 }

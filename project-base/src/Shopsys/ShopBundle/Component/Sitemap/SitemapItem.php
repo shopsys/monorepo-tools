@@ -9,5 +9,4 @@ class SitemapItem
      * @var string
      */
     public $slug;
-
 }

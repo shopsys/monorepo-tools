@@ -48,5 +48,4 @@ class JsConstantCompilerPass implements JsCompilerPassInterface
             $callExprNode->terminate(json_encode($constantValue));
         }
     }
-
 }

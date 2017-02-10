@@ -754,5 +754,4 @@ class ProductRepository
 
         return $product;
     }
-
 }

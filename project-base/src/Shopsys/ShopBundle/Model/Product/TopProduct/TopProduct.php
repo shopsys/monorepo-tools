@@ -53,5 +53,4 @@ class TopProduct
     public function getProduct() {
         return $this->product;
     }
-
 }

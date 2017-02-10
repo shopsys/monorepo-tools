@@ -40,5 +40,4 @@ class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return $breadcrumbItems;
     }
-
 }

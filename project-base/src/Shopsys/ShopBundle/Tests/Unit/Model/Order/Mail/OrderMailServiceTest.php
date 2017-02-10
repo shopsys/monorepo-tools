@@ -136,5 +136,4 @@ class OrderMailServiceTest extends FunctionalTestCase
         $this->assertSame($mailTemplate->getSubject(), $messageData->subject);
         $this->assertSame($mailTemplate->getBody(), $messageData->body);
     }
-
 }

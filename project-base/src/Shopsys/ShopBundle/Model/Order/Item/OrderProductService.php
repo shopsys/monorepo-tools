@@ -55,5 +55,4 @@ class OrderProductService
 
         return $orderProductsUsingStock;
     }
-
 }

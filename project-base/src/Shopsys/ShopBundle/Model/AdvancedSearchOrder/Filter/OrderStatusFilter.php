@@ -82,5 +82,4 @@ class OrderStatusFilter implements AdvancedSearchFilterInterface
                 return '!=';
         }
     }
-
 }

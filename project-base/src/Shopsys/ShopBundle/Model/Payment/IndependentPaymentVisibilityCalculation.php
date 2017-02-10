@@ -64,5 +64,4 @@ class IndependentPaymentVisibilityCalculation
 
         return false;
     }
-
 }

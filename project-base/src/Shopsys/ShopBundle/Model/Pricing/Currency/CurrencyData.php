@@ -41,5 +41,4 @@ class CurrencyData
         $this->code = $currency->getCode();
         $this->exchangeRate = $currency->getExchangeRate();
     }
-
 }

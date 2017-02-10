@@ -80,5 +80,4 @@ class PerformanceTestSampleQualifier
 
         return max($allStatuses);
     }
-
 }

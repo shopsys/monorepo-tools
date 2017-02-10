@@ -203,5 +203,4 @@ class AllFeedsTest extends FunctionalTestCase
             $this->fail(implode("\n", $failMessages));
         }
     }
-
 }

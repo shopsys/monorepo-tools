@@ -17,5 +17,4 @@ class MenuItemNotMatchingRouteException extends Exception implements MenuExcepti
             . 'Maybe you forgot to add it to "admin_menu.yml".';
         parent::__construct($message, 0, $previous);
     }
-
 }

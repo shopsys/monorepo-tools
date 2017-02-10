@@ -219,5 +219,4 @@ class InputPriceRecalculationSchedulerTest extends DatabaseTestCase
         $this->assertSame(round($inputPriceWithVat, 6), round($payment->getPrice($currency1)->getPrice(), 6));
         $this->assertSame(round($inputPriceWithVat, 6), round($transport->getPrice($currency1)->getPrice(), 6));
     }
-
 }

@@ -53,5 +53,4 @@ class SelectedDomain
             return reset($allDomains);
         }
     }
-
 }

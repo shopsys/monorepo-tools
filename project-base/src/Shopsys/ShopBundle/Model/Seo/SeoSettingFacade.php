@@ -80,5 +80,4 @@ class SeoSettingFacade
     public function setTitleAddOn($value, $domainId) {
         $this->setting->setForDomain(self::SEO_TITLE_ADD_ON, $value, $domainId);
     }
-
 }

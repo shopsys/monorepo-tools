@@ -20,5 +20,4 @@ class NoopDataTransformer implements DataTransformerInterface
     public function transform($value) {
         return $value;
     }
-
 }

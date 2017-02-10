@@ -24,5 +24,4 @@ class BadErrorPageStatusCodeException extends Exception implements ErrorExceptio
 
         parent::__construct($message, 0, $previous);
     }
-
 }

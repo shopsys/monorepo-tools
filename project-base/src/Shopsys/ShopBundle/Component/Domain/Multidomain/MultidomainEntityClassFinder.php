@@ -43,5 +43,4 @@ class MultidomainEntityClassFinder
 
         return count($identifierFieldNames) > 1 && in_array('domainId', $identifierFieldNames);
     }
-
 }

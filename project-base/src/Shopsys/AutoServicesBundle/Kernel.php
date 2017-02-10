@@ -35,5 +35,4 @@ abstract class Kernel extends BaseKernel
         $class = $this->getContainerClass();
         return class_exists($class, false);
     }
-
 }

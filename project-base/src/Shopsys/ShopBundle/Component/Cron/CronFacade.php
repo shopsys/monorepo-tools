@@ -120,5 +120,4 @@ class CronFacade
     public function getAll() {
         return $this->cronConfig->getAll();
     }
-
 }

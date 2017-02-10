@@ -169,5 +169,4 @@ class DomainController extends AdminBaseController
 
         return $data;
     }
-
 }

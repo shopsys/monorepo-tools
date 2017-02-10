@@ -220,5 +220,4 @@ class ZboziItem implements FeedItemInterface
     public function getCpcSearch() {
         return $this->cpcSearch;
     }
-
 }

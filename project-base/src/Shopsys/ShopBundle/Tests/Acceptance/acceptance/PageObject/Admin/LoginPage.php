@@ -25,5 +25,4 @@ class LoginPage extends AbstractPage
         $this->tester->see('Přihlášení se nepodařilo.');
         $this->tester->seeCurrentPageEquals('/admin/');
     }
-
 }

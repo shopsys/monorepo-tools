@@ -79,5 +79,4 @@ class RegistrationController extends FrontBaseController
             'form' => $form->createView(),
         ]);
     }
-
 }

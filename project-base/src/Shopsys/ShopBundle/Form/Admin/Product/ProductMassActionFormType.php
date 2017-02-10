@@ -62,5 +62,4 @@ class ProductMassActionFormType extends AbstractType
             'data_class' => ProductMassActionData::class,
         ]);
     }
-
 }

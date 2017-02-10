@@ -108,5 +108,4 @@ class TransportPriceCalculation
 
         return $transportsPrices;
     }
-
 }

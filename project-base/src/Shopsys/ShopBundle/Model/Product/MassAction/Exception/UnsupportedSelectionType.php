@@ -14,5 +14,4 @@ class UnsupportedSelectionType extends Exception implements MassActionException
     public function __construct($selectionType, Exception $previous = null) {
         parent::__construct(sprintf('Selection type "%s" is not supported', $selectionType), 0, $previous);
     }
-
 }

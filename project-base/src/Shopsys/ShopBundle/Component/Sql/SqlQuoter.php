@@ -45,5 +45,4 @@ class SqlQuoter
     public function quote($input, $type = null) {
         return $this->em->getConnection()->quote($input, $type);
     }
-
 }

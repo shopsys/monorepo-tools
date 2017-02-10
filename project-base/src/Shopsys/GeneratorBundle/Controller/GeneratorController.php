@@ -37,5 +37,4 @@ class GeneratorController extends Controller
             'errorMessage' => $errorMessage,
         ]);
     }
-
 }

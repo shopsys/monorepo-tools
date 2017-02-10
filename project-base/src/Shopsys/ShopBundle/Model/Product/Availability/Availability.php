@@ -93,5 +93,4 @@ class Availability extends AbstractTranslatableEntity
     public function getDispatchTime() {
         return $this->dispatchTime;
     }
-
 }

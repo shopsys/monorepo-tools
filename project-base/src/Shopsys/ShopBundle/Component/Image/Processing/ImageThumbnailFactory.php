@@ -32,5 +32,4 @@ class ImageThumbnailFactory
 
         return $image;
     }
-
 }

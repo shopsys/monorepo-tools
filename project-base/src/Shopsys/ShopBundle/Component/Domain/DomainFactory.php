@@ -43,5 +43,4 @@ class DomainFactory
 
         return $domain;
     }
-
 }

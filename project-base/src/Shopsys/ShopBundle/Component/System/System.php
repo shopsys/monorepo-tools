@@ -18,5 +18,4 @@ class System
     public function isMac() {
         return stripos(PHP_OS, 'darwin') === 0;
     }
-
 }

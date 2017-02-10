@@ -144,5 +144,4 @@ class ImageEntityConfig
             throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageSizeNotFoundException($this->entityClass, $sizeName);
         }
     }
-
 }

@@ -51,5 +51,4 @@ class UploadedFileDeleteDoctrineListener
             $this->getUploadedFileFacade()->deleteFileFromFilesystem($entity);
         }
     }
-
 }

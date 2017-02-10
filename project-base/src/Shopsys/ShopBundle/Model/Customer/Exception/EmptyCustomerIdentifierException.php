@@ -14,5 +14,4 @@ class EmptyCustomerIdentifierException extends Exception implements CustomerExce
     public function __construct($message = '', Exception $previous = null) {
         parent::__construct($message, 0, $previous);
     }
-
 }

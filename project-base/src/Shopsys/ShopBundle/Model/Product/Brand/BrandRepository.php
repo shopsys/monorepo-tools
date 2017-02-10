@@ -48,5 +48,4 @@ class BrandRepository
     public function getAll() {
         return $this->getBrandRepository()->findBy([], ['name' => 'asc']);
     }
-
 }

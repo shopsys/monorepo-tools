@@ -159,5 +159,4 @@ class ProductDetail
 
         return false;
     }
-
 }

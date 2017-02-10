@@ -58,5 +58,4 @@ class TranslationGridFactory implements GridFactoryInterface
 
         return $grid;
     }
-
 }

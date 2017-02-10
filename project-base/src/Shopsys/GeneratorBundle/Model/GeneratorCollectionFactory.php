@@ -32,5 +32,4 @@ class GeneratorCollectionFactory
 
         return $generatorCollection;
     }
-
 }

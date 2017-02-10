@@ -44,5 +44,4 @@ class PaymentDomain
     public function getDomainId() {
         return $this->domainId;
     }
-
 }

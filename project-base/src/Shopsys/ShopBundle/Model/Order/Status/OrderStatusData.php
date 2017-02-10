@@ -30,5 +30,4 @@ class OrderStatusData
         }
         $this->name = $names;
     }
-
 }

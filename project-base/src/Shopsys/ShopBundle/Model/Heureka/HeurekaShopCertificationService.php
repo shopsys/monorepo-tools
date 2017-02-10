@@ -49,5 +49,4 @@ class HeurekaShopCertificationService
             return 'Heureka.sk';
         }
     }
-
 }

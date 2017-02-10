@@ -15,5 +15,4 @@ class EntityNotFoundException extends Exception implements DataFixtureException
     public function __construct($referenceName, Exception $previous = null) {
         parent::__construct('Entity from reference  "' . $referenceName . '" not found.', 0, $previous);
     }
-
 }

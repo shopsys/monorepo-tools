@@ -16,5 +16,4 @@ class MainVariantCannotBeVariantException extends Exception implements VariantEx
         $message = 'Product with ID ' . $productId . ' is already main variant.';
         parent::__construct($message, 0, $previous);
     }
-
 }

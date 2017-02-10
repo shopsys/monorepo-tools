@@ -104,5 +104,4 @@ class ArticleFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

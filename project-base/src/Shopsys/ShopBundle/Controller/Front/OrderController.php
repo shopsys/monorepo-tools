@@ -382,5 +382,4 @@ class OrderController extends FrontBaseController
             $this->orderMailFacade->sendEmail($order);
         }
     }
-
 }

@@ -56,5 +56,4 @@ class ProductAvailabilityRecalculationSchedulerTest extends PHPUnit_Framework_Te
         $this->assertCount(0, $productAvailabilityRecalculationScheduler->getProductsForImmediateRecalculation());
         $this->assertSame($productsIterator, $productAvailabilityRecalculationScheduler->getProductsIteratorForDelayedRecalculation());
     }
-
 }

@@ -96,5 +96,4 @@ class FeedConfigFacade
         $feedHash = $this->setting->get(Setting::FEED_HASH);
         return $this->feedDir . $feedConfig->getFeedFilename($domainConfig, $feedHash);
     }
-
 }

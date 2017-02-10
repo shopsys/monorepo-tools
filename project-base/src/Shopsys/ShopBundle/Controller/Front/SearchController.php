@@ -56,5 +56,4 @@ class SearchController extends FrontBaseController
             'SEARCH_TEXT_PARAMETER' => ProductController::SEARCH_TEXT_PARAMETER,
         ]);
     }
-
 }

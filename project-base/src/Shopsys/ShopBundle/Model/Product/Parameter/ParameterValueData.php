@@ -33,5 +33,4 @@ class ParameterValueData
         $this->text = $parameterValue->getText();
         $this->locale = $parameterValue->getLocale();
     }
-
 }

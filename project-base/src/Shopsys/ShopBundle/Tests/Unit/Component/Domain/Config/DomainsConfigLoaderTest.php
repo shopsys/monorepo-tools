@@ -52,5 +52,4 @@ class DomainsConfigLoaderTest extends FunctionalTestCase
 
         $domainsConfigLoader->loadDomainConfigsFromYaml($domainsConfigFilepath, $domainsUrlsConfigFilepath);
     }
-
 }

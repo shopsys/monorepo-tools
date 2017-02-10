@@ -241,5 +241,4 @@ class OrderData
 
         return $newItemsWithoutTransportAndPayment;
     }
-
 }

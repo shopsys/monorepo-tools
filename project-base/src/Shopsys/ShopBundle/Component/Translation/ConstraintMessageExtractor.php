@@ -148,5 +148,4 @@ class ConstraintMessageExtractor implements FileVisitorInterface, PHPParser_Node
     public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $ast) {
         return null;
     }
-
 }

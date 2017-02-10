@@ -57,5 +57,4 @@ class CustomerData
         $this->billingAddressData->setFromEntity($user->getBillingAddress());
         $this->deliveryAddressData->setFromEntity($user->getDeliveryAddress());
     }
-
 }

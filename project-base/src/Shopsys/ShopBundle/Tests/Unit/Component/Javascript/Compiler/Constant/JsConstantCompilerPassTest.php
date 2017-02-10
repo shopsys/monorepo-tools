@@ -39,5 +39,4 @@ EOD;
         $content = file_get_contents(__DIR__ . '/testBar.js');
         $jsCompiler->compile($content);
     }
-
 }

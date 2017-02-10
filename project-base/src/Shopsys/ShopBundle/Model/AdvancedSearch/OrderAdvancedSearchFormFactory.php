@@ -23,5 +23,4 @@ class OrderAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory
             $advancedSearchOperatorTranslation
         );
     }
-
 }

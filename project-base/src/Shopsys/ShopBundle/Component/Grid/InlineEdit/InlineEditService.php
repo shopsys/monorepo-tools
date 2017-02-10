@@ -131,5 +131,4 @@ class InlineEditService
             'form' => $formView,
         ];
     }
-
 }

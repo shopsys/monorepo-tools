@@ -110,5 +110,4 @@ class NumberFormatterExtension extends Twig_Extension
     public function getName() {
         return 'number_formatter_extension';
     }
-
 }

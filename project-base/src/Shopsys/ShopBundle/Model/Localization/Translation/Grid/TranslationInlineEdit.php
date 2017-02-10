@@ -69,5 +69,4 @@ class TranslationInlineEdit extends AbstractGridInlineEdit
     public function canAddNewRow() {
         return false;
     }
-
 }

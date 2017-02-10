@@ -30,5 +30,4 @@ class MenuTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse($menu->isRouteMatchingDescendantOfSettings('route 1', null));
     }
-
 }

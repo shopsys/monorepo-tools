@@ -37,5 +37,4 @@ class NotInArrayValidator extends ConstraintValidator
         }
 
     }
-
 }

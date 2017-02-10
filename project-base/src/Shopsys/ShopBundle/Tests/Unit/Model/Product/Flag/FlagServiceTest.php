@@ -36,5 +36,4 @@ class FlagServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($flagDataEdit, $flagDataNew);
     }
-
 }

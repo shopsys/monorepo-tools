@@ -37,5 +37,4 @@ class ControllerResolver extends SymfonyControllerResolver
 
         return [$controller, $method];
     }
-
 }

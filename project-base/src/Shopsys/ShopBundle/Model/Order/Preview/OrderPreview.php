@@ -179,5 +179,4 @@ class OrderPreview
     public function getPromoCodeDiscountPercent() {
         return $this->promoCodeDiscountPercent;
     }
-
 }

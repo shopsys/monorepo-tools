@@ -15,5 +15,4 @@ class DuplicateGeneratorNameException extends Exception implements GeneratorExce
         $message = 'Generator with name "' . $name . '" already exists';
         parent::__construct($message, 0, $previous);
     }
-
 }

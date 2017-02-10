@@ -52,5 +52,4 @@ class OrderStatusDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $orderStatus);
         }
     }
-
 }

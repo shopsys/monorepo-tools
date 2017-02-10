@@ -38,5 +38,4 @@ class ParameterTranslation extends AbstractTranslation
     public function setName($name) {
         $this->name = $name;
     }
-
 }

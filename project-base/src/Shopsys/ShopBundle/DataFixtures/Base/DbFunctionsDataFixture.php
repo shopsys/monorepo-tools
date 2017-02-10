@@ -29,5 +29,4 @@ class DbFunctionsDataFixture extends AbstractNativeFixture
             $$
             LANGUAGE SQL IMMUTABLE');
     }
-
 }

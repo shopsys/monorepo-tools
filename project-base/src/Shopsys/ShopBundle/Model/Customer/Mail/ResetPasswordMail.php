@@ -119,5 +119,4 @@ class ResetPasswordMail implements MailTypeInterface, MessageFactoryInterface
     private function getSubjectVariablesValues(User $user) {
         return $this->getBodyVariablesValues($user);
     }
-
 }

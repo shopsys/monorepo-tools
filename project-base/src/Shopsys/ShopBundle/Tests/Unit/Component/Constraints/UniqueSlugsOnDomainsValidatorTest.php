@@ -96,5 +96,4 @@ class UniqueSlugsOnDomainsValidatorTest extends AbstractConstraintValidatorTest
             ->setParameter('{{ url }}', 'http://example.cz/existing-url/')
             ->assertRaised();
     }
-
 }

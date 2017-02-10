@@ -23,5 +23,4 @@ class ProductCollectionService
 
         return $imagesOrNullByProductId;
     }
-
 }

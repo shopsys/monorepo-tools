@@ -112,5 +112,4 @@ class BrandFacade
     public function getAll() {
         return $this->brandRepository->getAll();
     }
-
 }

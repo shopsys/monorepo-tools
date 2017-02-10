@@ -31,5 +31,4 @@ class PhpParserNodeHelper
             get_class($node), $fileInfo, $node->getLine())
         );
     }
-
 }

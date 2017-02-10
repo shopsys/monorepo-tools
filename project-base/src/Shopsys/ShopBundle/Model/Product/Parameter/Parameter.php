@@ -93,5 +93,4 @@ class Parameter extends AbstractTranslatableEntity
         $this->setTranslations($parameterData);
         $this->visible = $parameterData->visible;
     }
-
 }

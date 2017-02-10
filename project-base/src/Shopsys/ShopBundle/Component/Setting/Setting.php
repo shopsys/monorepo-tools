@@ -139,5 +139,4 @@ class Setting
     public function clearCache() {
         $this->values = [];
     }
-
 }

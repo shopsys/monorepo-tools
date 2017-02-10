@@ -21,5 +21,4 @@ class OrderNumberSequenceRepositoryTest extends DatabaseTestCase
 
         $this->assertSame(count($numbers), count($uniqueNumbers));
     }
-
 }

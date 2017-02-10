@@ -73,5 +73,4 @@ class OrderCreateDateFilter implements AdvancedSearchFilterInterface
             }
         }
     }
-
 }

@@ -43,5 +43,4 @@ class ProductAdvancedSearchPage extends AbstractPage
             throw new \PHPUnit_Framework_ExpectationFailedException($message);
         }
     }
-
 }

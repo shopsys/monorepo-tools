@@ -58,5 +58,4 @@ class CustomerIdentifier
         }
         return 'session:' . $this->cartIdentifier . ';userId:' . $userId . ';';
     }
-
 }

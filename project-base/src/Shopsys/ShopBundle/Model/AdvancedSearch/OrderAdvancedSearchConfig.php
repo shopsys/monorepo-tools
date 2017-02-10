@@ -33,5 +33,4 @@ class OrderAdvancedSearchConfig extends AdvancedSearchConfig
         }
         $this->registerFilter($orderProductFilter);
     }
-
 }

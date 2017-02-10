@@ -192,5 +192,4 @@ class OrderDataFixture extends AbstractReferenceFixture implements DependentFixt
             SettingValueDataFixture::class,
         ];
     }
-
 }

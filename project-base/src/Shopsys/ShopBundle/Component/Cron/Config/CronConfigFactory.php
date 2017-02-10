@@ -33,5 +33,4 @@ class CronConfigFactory
 
         return new CronConfig($this->cronTimeResolver, $cronModuleConfigs);
     }
-
 }

@@ -122,5 +122,4 @@ class DomainsConfigLoader
 
         return true;
     }
-
 }

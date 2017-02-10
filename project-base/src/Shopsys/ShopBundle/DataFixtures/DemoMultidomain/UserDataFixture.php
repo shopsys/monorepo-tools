@@ -42,5 +42,4 @@ class UserDataFixture extends AbstractReferenceFixture implements DependentFixtu
             CountryDataFixture::class,
         ];
     }
-
 }

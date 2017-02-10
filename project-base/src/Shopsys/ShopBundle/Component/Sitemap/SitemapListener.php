@@ -113,5 +113,4 @@ class SitemapListener implements SitemapListenerInterface
         $urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
         $generator->addUrl($urlConcrete, $section);
     }
-
 }

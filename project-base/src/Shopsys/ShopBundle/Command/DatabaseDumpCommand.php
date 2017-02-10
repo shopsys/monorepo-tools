@@ -89,5 +89,4 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             2 => ['pipe', 'w'], // stderr
         ];
     }
-
 }

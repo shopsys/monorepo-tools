@@ -39,5 +39,4 @@ class PaymentFormTypeFactory
 
         return new PaymentFormType($allTransports, $vats);
     }
-
 }

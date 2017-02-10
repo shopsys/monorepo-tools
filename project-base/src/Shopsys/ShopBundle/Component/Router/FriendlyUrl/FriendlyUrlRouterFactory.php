@@ -61,5 +61,4 @@ class FriendlyUrlRouterFactory
             $this->friendlyUrlRouterResourceFilepath
         );
     }
-
 }

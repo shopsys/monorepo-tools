@@ -17,5 +17,4 @@ class ErrorHandlerController extends FrontBaseController
 
         return new Response('');
     }
-
 }

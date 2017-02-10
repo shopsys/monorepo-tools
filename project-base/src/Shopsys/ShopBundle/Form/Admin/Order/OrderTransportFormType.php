@@ -65,5 +65,4 @@ class OrderTransportFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

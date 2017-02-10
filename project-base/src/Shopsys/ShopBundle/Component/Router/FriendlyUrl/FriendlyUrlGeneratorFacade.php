@@ -127,5 +127,4 @@ class FriendlyUrlGeneratorFacade
 
         throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\FriendlyUrlRouteNotSupportedException($routeName);
     }
-
 }

@@ -61,5 +61,4 @@ class GroupedScalarHydrator extends AbstractHydrator
 
         return $rowData;
     }
-
 }

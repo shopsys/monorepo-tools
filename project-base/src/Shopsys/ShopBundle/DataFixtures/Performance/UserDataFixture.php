@@ -152,5 +152,4 @@ class UserDataFixture
 
         return $customerData;
     }
-
 }

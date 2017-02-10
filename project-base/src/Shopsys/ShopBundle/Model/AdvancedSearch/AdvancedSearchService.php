@@ -69,5 +69,4 @@ class AdvancedSearchService
             $filter->extendQueryBuilder($queryBuilder, $rulesData);
         }
     }
-
 }

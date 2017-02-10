@@ -521,5 +521,4 @@ class UrlsProvider
             self::EXPECTED_STATUS_CODE_KEY => 200,
         ];
     }
-
 }

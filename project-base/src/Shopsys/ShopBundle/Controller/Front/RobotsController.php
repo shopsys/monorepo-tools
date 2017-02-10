@@ -45,5 +45,4 @@ class RobotsController extends FrontBaseController
             $response
         );
     }
-
 }

@@ -72,5 +72,4 @@ class OrderNumberFilter implements AdvancedSearchFilterInterface
                 return 'NOT LIKE';
         }
     }
-
 }

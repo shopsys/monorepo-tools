@@ -56,5 +56,4 @@ class DomainFacadeTest extends PHPUnit_Framework_TestCase
         $this->assertContains($testDomainConfigs[1], $domainConfigs);
         $this->assertContains($testDomainConfigs[3], $domainConfigs);
     }
-
 }

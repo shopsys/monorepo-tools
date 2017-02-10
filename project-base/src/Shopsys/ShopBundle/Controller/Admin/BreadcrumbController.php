@@ -28,5 +28,4 @@ class BreadcrumbController extends AdminBaseController
             'items' => $items,
         ]);
     }
-
 }

@@ -54,5 +54,4 @@ class ProductListAdminFacade
 
         return $queryBuilder;
     }
-
 }

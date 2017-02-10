@@ -124,5 +124,4 @@ class OrderCest
 
         $me->see('Objednávka byla odeslána');
     }
-
 }

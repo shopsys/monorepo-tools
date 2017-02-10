@@ -33,5 +33,4 @@ class MainVariantPriceTriggerDataFixture extends AbstractNativeFixture
             EXECUTE PROCEDURE set_main_variant_price_recalculation_by_product_visibility();
         ');
     }
-
 }

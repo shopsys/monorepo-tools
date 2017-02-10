@@ -134,5 +134,4 @@ class FriendlyUrlServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('http://example.cz/slug/', $absoluteUrl);
     }
-
 }

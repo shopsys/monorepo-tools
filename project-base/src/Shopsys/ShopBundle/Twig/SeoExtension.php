@@ -73,5 +73,4 @@ class SeoExtension extends \Twig_Extension
         $currentDomainId = $this->getDomain()->getId();
         return $this->seoSettingFacade->getDescriptionMainPage($currentDomainId);
     }
-
 }

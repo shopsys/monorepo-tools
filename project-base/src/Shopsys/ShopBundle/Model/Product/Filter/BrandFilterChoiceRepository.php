@@ -79,5 +79,4 @@ class BrandFilterChoiceRepository
 
         return $brandsQueryBuilder->getQuery()->execute();
     }
-
 }

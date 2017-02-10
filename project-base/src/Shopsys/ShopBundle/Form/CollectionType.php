@@ -55,5 +55,4 @@ class CollectionType extends AbstractTypeExtension
             }
         }
     }
-
 }

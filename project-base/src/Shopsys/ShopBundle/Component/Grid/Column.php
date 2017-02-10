@@ -101,5 +101,4 @@ class Column
     public function getOrderSourceColumnName() {
         return $this->orderSourceColmunName;
     }
-
 }

@@ -44,5 +44,4 @@ class JsFunctionCallParser
 
         return $argumentNodes;
     }
-
 }

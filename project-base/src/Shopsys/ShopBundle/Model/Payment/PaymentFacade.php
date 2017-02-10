@@ -236,5 +236,4 @@ class PaymentFacade
 
         return $paymentVatPercentsByPaymentId;
     }
-
 }

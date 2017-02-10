@@ -72,5 +72,4 @@ class ProductParameterValueToProductParameterValuesLocalizedTransformer implemen
 
         throw new \Symfony\Component\Form\Exception\TransformationFailedException('Invalid value');
     }
-
 }

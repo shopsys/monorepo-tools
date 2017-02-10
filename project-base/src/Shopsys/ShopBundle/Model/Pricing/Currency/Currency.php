@@ -104,5 +104,4 @@ class Currency
         $this->name = $currencyData->name;
         $this->code = $currencyData->code;
     }
-
 }

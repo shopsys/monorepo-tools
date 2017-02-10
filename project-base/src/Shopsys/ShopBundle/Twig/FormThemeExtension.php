@@ -55,5 +55,4 @@ class FormThemeExtension extends \Twig_Extension
     public function getName() {
         return 'form_theme';
     }
-
 }

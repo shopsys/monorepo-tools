@@ -11,5 +11,4 @@ interface BreadcrumbGeneratorInterface
      * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
      */
     public function getBreadcrumbItems($routeName, array $routeParameters = []);
-
 }

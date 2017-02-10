@@ -29,5 +29,4 @@ class UploadedFileEntityConfigNotFoundException extends Exception implements Upl
     public function getEntityClassOrName() {
         return $this->entityClassOrName;
     }
-
 }

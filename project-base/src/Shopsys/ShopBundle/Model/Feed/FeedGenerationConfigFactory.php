@@ -40,5 +40,4 @@ class FeedGenerationConfigFactory
 
         return $feedGenerationConfigs;
     }
-
 }

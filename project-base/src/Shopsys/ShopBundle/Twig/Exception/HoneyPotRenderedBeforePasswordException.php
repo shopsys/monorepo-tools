@@ -26,5 +26,4 @@ class HoneyPotRenderedBeforePasswordException extends Twig_Error implements Twig
         // let the parent exception guess lineno and filename
         parent::__construct($message, -1, null, $previous);
     }
-
 }

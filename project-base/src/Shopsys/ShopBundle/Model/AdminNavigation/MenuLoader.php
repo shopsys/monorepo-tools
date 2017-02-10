@@ -106,5 +106,4 @@ class MenuLoader
 
         return $item;
     }
-
 }

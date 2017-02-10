@@ -19,5 +19,4 @@ class EnabledModuleDataFixture extends AbstractReferenceFixture
         $moduleFacade->setEnabled(ModuleList::PRODUCT_FILTER_COUNTS, true);
         $moduleFacade->setEnabled(ModuleList::PRODUCT_STOCK_CALCULATIONS, true);
     }
-
 }

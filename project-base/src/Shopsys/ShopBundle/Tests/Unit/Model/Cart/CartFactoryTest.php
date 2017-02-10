@@ -56,5 +56,4 @@ class CartFactoryTest extends PHPUnit_Framework_TestCase
 
         return new CartFactory($cartItemRepository, $cartWatcherFacade);
     }
-
 }

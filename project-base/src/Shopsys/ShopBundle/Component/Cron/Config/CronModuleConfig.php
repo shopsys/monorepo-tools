@@ -77,5 +77,4 @@ class CronModuleConfig implements CronTimeInterface
     public function getTimeHours() {
         return $this->timeHours;
     }
-
 }

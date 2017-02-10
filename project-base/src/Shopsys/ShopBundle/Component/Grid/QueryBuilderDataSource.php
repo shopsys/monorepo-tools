@@ -102,5 +102,4 @@ class QueryBuilderDataSource implements DataSourceInterface
     public function getRowIdSourceColumnName() {
         return $this->rowIdSourceColumnName;
     }
-
 }

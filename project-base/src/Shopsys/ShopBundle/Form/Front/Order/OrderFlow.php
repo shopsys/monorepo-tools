@@ -169,5 +169,4 @@ class OrderFlow extends FormFlow
         $requestParameters[$step->getFormType()->getName()] = $stepData;
         $request->replace($requestParameters);
     }
-
 }

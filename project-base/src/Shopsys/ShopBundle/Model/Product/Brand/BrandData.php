@@ -49,5 +49,4 @@ class BrandData
             $this->descriptions[$translate->getLocale()] = $translate->getDescription();
         }
     }
-
 }

@@ -42,5 +42,4 @@ class Breadcrumb
 
         return $items;
     }
-
 }

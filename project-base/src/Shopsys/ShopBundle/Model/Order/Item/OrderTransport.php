@@ -72,5 +72,4 @@ class OrderTransport extends OrderItem
             );
         }
     }
-
 }

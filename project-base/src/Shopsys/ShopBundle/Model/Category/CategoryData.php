@@ -93,5 +93,4 @@ class CategoryData
         $this->seoMetaDescriptions = $seoMetaDescriptions;
         $this->descriptions = $descriptions;
     }
-
 }

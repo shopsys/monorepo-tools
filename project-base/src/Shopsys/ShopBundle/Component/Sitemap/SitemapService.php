@@ -12,5 +12,4 @@ class SitemapService
     public function getSitemapFilePrefixForDomain($domainId) {
         return 'domain_' . $domainId . '_sitemap';
     }
-
 }

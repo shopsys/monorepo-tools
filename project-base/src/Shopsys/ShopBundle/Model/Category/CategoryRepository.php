@@ -464,5 +464,4 @@ class CategoryRepository extends NestedTreeRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
-
 }

@@ -25,5 +25,4 @@ class WebDriverHelper extends Module
 
         $this->assertSame($expectedUrl, $currentUrl);
     }
-
 }

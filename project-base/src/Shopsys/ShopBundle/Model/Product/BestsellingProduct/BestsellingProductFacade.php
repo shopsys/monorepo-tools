@@ -82,5 +82,4 @@ class BestsellingProductFacade
 
         return $this->productDetailFactory->getDetailsForProducts($combinedProducts);
     }
-
 }

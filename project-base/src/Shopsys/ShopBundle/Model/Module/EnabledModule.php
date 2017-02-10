@@ -32,5 +32,4 @@ class EnabledModule
     public function getName() {
         return $this->name;
     }
-
 }

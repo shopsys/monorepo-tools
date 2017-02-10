@@ -13,5 +13,4 @@ interface CronModuleInterface
     public function setLogger(Logger $logger);
 
     public function run();
-
 }

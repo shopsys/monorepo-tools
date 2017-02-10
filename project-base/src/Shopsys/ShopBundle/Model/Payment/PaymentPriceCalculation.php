@@ -106,5 +106,4 @@ class PaymentPriceCalculation
 
         return $paymentsPrices;
     }
-
 }

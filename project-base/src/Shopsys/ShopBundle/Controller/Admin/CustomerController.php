@@ -335,5 +335,4 @@ class CustomerController extends AdminBaseController
 
         return $ssoLoginAsUserUrl;
     }
-
 }

@@ -222,5 +222,4 @@ class CustomerFacade
 
         $this->em->flush();
     }
-
 }

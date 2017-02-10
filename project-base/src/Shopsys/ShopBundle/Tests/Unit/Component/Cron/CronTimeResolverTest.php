@@ -85,5 +85,4 @@ class CronTimeResolverTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($isValid, $cronTimeResolver->isValidAtTime($cronTimeMock, new DateTime($dateTimeString)));
     }
-
 }

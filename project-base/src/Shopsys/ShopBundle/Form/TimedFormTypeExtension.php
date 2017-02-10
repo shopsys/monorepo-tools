@@ -70,5 +70,4 @@ class TimedFormTypeExtension extends AbstractTypeExtension
     public function getExtendedType() {
         return 'form';
     }
-
 }

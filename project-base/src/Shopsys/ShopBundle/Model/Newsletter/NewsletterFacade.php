@@ -44,5 +44,4 @@ class NewsletterFacade
     public function getAllEmailsDataIterator() {
         return $this->newsletterRepository->getAllEmailsDataIterator();
     }
-
 }

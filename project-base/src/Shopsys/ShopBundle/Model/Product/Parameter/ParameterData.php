@@ -38,5 +38,4 @@ class ParameterData
         $this->name = $names;
         $this->visible = $parameter->isVisible();
     }
-
 }

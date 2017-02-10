@@ -75,5 +75,4 @@ class ProductCatnumFilter implements AdvancedSearchFilterInterface
                 return 'NOT LIKE';
         }
     }
-
 }

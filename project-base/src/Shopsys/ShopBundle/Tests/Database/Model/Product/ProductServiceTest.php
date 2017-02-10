@@ -70,5 +70,4 @@ class ProductServiceTest extends DatabaseTestCase
         $this->assertSame('1000', (string)$product->getPrice());
         $this->assertSame('1000', (string)$productManualInputPrice->getInputPrice());
     }
-
 }

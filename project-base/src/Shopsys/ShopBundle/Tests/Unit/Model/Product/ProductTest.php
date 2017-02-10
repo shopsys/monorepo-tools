@@ -93,5 +93,4 @@ class ProductTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Model\Product\Exception\MainVariantCannotBeVariantException::class);
         $mainVariant->addVariant($mainVariant);
     }
-
 }

@@ -28,5 +28,4 @@ class CreateDatabaseSchemaCommand extends ContainerAwareCommand
         $databaseSchemaFacade->createSchema('public');
         $output->writeln('Database schema created successfully!');
     }
-
 }

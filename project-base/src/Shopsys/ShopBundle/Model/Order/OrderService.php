@@ -146,5 +146,4 @@ class OrderService
             UrlGeneratorInterface::ABSOLUTE_URL
         );
     }
-
 }

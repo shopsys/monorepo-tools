@@ -155,5 +155,4 @@ class JsTranslatorCallParser
 
         return $argumentNodes[$messageIdArgumentIndex];
     }
-
 }

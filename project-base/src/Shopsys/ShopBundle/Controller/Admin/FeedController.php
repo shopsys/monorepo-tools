@@ -115,5 +115,4 @@ class FeedController extends AdminBaseController
             'gridView' => $grid->createView(),
         ]);
     }
-
 }

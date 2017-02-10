@@ -30,5 +30,4 @@ trait MultidomainMigrationTrait
             ->sql('SELECT get_domain_locale(:domainId)', ['domainId' => $domainId])
             ->fetchColumn();
     }
-
 }

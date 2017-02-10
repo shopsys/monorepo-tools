@@ -123,5 +123,4 @@ class ImageProcessingService
     public function getSupportedImageExtensions() {
         return $this->supportedImageExtensions;
     }
-
 }

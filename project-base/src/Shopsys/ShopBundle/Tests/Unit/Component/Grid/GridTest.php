@@ -320,5 +320,4 @@ class GridTest extends PHPUnit_Framework_TestCase
         $grid->enableDragAndDrop($entityClass);
         $this->assertTrue($grid->isDragAndDrop());
     }
-
 }

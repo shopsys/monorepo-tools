@@ -78,5 +78,4 @@ class ProductManualInputPriceFacade
         }
         $this->em->flush($manualInputPrices);
     }
-
 }

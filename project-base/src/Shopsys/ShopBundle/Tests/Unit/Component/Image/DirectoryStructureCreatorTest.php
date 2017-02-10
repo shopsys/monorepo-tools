@@ -55,5 +55,4 @@ class DirectoryStructureCreatorTest extends PHPUnit_Framework_TestCase
         $creator = new DirectoryStructureCreator($imageDir, $domainImageDir, $imageConfig, $imageLocator, $filesystemMock);
         $creator->makeImageDirectories();
     }
-
 }

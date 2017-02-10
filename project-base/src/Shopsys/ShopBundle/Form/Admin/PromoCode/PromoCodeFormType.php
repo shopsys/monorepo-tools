@@ -71,5 +71,4 @@ class PromoCodeFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

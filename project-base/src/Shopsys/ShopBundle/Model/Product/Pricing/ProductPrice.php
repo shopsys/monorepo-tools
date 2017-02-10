@@ -27,5 +27,4 @@ class ProductPrice extends Price
     public function isPriceFrom() {
         return $this->priceFrom;
     }
-
 }

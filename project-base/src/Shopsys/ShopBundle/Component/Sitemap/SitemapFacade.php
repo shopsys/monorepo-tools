@@ -95,5 +95,4 @@ class SitemapFacade
     public function getSitemapItemsForArticlesOnDomain(DomainConfig $domainConfig) {
         return $this->sitemapRepository->getSitemapItemsForArticlesOnDomain($domainConfig);
     }
-
 }

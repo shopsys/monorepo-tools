@@ -181,5 +181,4 @@ class SuperadminController extends AdminBaseController
     public function cssDocumentationAction() {
         return $this->render('@ShopsysShop/Admin/Content/Superadmin/cssDocumentation.html.twig');
     }
-
 }

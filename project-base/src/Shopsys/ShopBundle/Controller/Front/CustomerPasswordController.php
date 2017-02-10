@@ -117,5 +117,4 @@ class CustomerPasswordController extends FrontBaseController
             'form' => $form->createView(),
         ]);
     }
-
 }

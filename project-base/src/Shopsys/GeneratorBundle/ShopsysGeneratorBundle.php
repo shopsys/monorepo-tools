@@ -11,5 +11,4 @@ class ShopsysGeneratorBundle extends Bundle
     public function build(ContainerBuilder $containerBuilder) {
 
     }
-
 }

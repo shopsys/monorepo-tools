@@ -13,5 +13,4 @@ class DownloadFileResponse extends Response
         $this->headers->set('Content-type', 'text/html');
         $this->headers->set('Content-Disposition', 'attachment; filename=' . $filename);
     }
-
 }

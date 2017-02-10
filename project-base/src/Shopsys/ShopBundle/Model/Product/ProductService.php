@@ -183,5 +183,4 @@ class ProductService
 
         return $products;
     }
-
 }

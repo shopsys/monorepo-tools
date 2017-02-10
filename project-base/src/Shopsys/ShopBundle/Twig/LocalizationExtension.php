@@ -83,5 +83,4 @@ class LocalizationExtension extends \Twig_Extension
     public function getName() {
         return 'localization';
     }
-
 }

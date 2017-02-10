@@ -98,5 +98,4 @@ class JsFileExtractor implements FileVisitorInterface
             $this->catalogue->add($message);
         }
     }
-
 }

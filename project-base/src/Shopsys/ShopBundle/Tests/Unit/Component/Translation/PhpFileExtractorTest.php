@@ -87,5 +87,4 @@ class PhpFileExtractorTest extends \PHPUnit_Framework_TestCase
 
         return $docParser;
     }
-
 }

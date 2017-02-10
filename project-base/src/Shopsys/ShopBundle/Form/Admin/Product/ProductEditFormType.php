@@ -340,5 +340,4 @@ class ProductEditFormType extends AbstractType
             $builder->get('descriptions')->setDisabled(true);
         }
     }
-
 }

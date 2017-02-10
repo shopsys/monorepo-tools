@@ -51,5 +51,4 @@ class ModuleFacade
 
         $this->em->flush();
     }
-
 }

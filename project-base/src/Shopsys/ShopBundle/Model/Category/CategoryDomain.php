@@ -144,5 +144,4 @@ class CategoryDomain
     public function isVisible() {
         return $this->visible;
     }
-
 }

@@ -79,5 +79,4 @@ class CategoriesType extends AbstractType
     public function getName() {
         return 'categories';
     }
-
 }

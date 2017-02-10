@@ -25,5 +25,4 @@ class AdministratorLoginCest
         $loginPage->login(LoginPage::ADMIN_USERNAME, 'invalid password');
         $loginPage->assertLoginFailed();
     }
-
 }

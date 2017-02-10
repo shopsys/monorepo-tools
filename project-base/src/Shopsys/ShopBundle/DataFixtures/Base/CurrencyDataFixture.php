@@ -44,5 +44,4 @@ class CurrencyDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $currency);
         }
     }
-
 }

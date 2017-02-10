@@ -89,5 +89,4 @@ class FlagFacade
     public function getAll() {
         return $this->flagRepository->getAll();
     }
-
 }

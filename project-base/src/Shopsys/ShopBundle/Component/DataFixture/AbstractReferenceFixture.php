@@ -65,5 +65,4 @@ abstract class AbstractReferenceFixture implements FixtureInterface, ContainerAw
     public function getReference($name) {
         return $this->persistentReferenceFacade->getReference($name);
     }
-
 }

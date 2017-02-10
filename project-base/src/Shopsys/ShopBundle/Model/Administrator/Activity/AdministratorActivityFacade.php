@@ -64,5 +64,4 @@ class AdministratorActivityFacade
     public function getLastAdministratorActivities(Administrator $administrator, $maxResults) {
         return $this->administratorActivityRepository->getLastAdministratorActivities($administrator, $maxResults);
     }
-
 }

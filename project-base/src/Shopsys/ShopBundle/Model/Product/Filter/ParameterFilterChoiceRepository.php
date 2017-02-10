@@ -164,5 +164,4 @@ class ParameterFilterChoiceRepository
 
         return $valuesIndexedById;
     }
-
 }

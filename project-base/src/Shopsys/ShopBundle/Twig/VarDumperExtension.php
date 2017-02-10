@@ -32,5 +32,4 @@ class VarDumperExtension extends Twig_Extension
     public function getName() {
         return 'var_dumper_extension';
     }
-
 }

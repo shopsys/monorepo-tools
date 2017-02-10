@@ -17,5 +17,4 @@ class DomainDbFunctionsDataFixture extends AbstractNativeFixture
         /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
         $domainDbFunctionsFacade->createDomainDbFunctions();
     }
-
 }

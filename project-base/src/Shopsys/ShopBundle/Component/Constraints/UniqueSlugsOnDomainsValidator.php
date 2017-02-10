@@ -109,5 +109,4 @@ class UniqueSlugsOnDomainsValidator extends ConstraintValidator
 
         return $slugCountsOnDomain;
     }
-
 }

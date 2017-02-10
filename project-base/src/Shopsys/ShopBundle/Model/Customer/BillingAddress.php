@@ -184,5 +184,4 @@ class BillingAddress
     public function getCountry() {
         return $this->country;
     }
-
 }

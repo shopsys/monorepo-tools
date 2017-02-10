@@ -50,5 +50,4 @@ class ResetPasswordMailFacade
         $messageData->attachmentsFilepaths = $this->mailTemplateFacade->getMailTemplateAttachmentsFilepaths($mailTemplate);
         $this->mailer->send($messageData);
     }
-
 }

@@ -94,5 +94,4 @@ class Brand extends AbstractTranslatableEntity
     public function getDescription($locale = null) {
         return $this->translation($locale)->getDescription();
     }
-
 }

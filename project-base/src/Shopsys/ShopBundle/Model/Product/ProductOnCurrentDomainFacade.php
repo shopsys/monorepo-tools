@@ -302,5 +302,4 @@ class ProductOnCurrentDomainFacade
             $this->currentCustomer->getPricingGroup()
         );
     }
-
 }

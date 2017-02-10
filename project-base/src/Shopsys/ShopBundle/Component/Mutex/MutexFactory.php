@@ -35,5 +35,4 @@ class MutexFactory
 
         return $this->mutexesByName[self::MUTEX_CRON_NAME];
     }
-
 }

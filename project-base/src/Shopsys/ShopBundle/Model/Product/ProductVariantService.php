@@ -60,5 +60,4 @@ class ProductVariantService
 
         return Product::createMainVariant($mainVariantEditData->productData, $variants);
     }
-
 }

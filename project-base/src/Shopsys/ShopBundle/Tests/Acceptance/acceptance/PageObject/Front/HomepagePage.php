@@ -41,5 +41,4 @@ class HomepagePage extends AbstractPage
     private function getTopProductsContext() {
         return $this->webDriver->findElement(WebDriverBy::cssSelector('#top-products'));
     }
-
 }

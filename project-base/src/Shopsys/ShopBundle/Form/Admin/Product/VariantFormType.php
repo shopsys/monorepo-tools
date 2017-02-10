@@ -54,5 +54,4 @@ class VariantFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

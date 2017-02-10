@@ -71,5 +71,4 @@ class UserData
         $this->email = $user->getEmail();
         $this->pricingGroup = $user->getPricingGroup();
     }
-
 }

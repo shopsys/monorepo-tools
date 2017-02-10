@@ -94,5 +94,4 @@ class UniqueCollectionValidator extends ConstraintValidator
 
         return $propertyAccessor->getValue($value, $field);
     }
-
 }

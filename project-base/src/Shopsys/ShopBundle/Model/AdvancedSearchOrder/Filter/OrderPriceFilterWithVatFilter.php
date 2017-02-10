@@ -78,5 +78,4 @@ class OrderPriceFilterWithVatFilter implements AdvancedSearchFilterInterface
         }
         return null;
     }
-
 }

@@ -27,5 +27,4 @@ class OrderTransportData extends OrderItemData
             );
         }
     }
-
 }

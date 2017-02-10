@@ -105,5 +105,4 @@ class JsConstantCallParser
 
         return $argumentNodes[self::NAME_ARGUMENT_INDEX];
     }
-
 }

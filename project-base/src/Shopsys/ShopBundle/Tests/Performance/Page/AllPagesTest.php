@@ -242,5 +242,4 @@ class AllPagesTest extends FunctionalTestCase
                 return;
         }
     }
-
 }

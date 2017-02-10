@@ -55,5 +55,4 @@ class LocalizedRouterFactory
 
         return $this->routersByLocaleAndHost[$locale][$context->getHost()];
     }
-
 }

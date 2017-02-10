@@ -73,5 +73,4 @@ class NewProductTest extends FunctionalTestCase
     private function setFormCsrfToken(Form $form, $csrfToken) {
         $form['product_edit_form[_token]'] = $csrfToken;
     }
-
 }

@@ -46,5 +46,4 @@ class YesNoTypeTest extends FunctionalTestCase
 
         return $formFactory->create(FormType::YES_NO);
     }
-
 }

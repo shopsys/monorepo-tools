@@ -29,5 +29,4 @@ class SortableNullsWalker extends SqlWalker
 
         return $sql;
     }
-
 }

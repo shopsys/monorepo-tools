@@ -56,5 +56,4 @@ class DateTimeFormatPatternRepository
 
         return true;
     }
-
 }

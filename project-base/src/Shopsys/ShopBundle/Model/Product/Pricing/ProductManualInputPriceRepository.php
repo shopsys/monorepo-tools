@@ -71,5 +71,4 @@ class ProductManualInputPriceRepository
             'pricingGroup' => $pricingGroup,
         ]);
     }
-
 }

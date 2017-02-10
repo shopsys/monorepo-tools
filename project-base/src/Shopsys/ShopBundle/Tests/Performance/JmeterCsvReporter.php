@@ -40,5 +40,4 @@ class JmeterCsvReporter
             $queryCount,
         ]);
     }
-
 }

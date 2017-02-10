@@ -63,5 +63,4 @@ class ProductCalculatedPriceRepository
             'priceWithVat' => null,
         ]);
     }
-
 }

@@ -56,5 +56,4 @@ class CronModuleExecutorTest extends PHPUnit_Framework_TestCase
         $cronModuleExecutor = new CronModuleExecutor(1);
         $cronModuleExecutor->runModule($cronModuleServiceMock, true);
     }
-
 }

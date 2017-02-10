@@ -58,5 +58,4 @@ class AutomaticBestsellingProductRepository
 
         return $queryBuilder->getQuery()->execute();
     }
-
 }

@@ -79,5 +79,4 @@ class FileUploadController extends AdminBaseController
 
         return new JsonResponse($actionResult);
     }
-
 }

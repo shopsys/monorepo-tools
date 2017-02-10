@@ -98,5 +98,4 @@ class DirectoryStructureCreator
 
         return $directories;
     }
-
 }

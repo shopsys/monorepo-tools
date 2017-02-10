@@ -13,5 +13,4 @@ class UniqueCollection extends Constraint
     public $message = 'Values are duplicate.';
     public $fields = null;
     public $allowEmpty = false;
-
 }

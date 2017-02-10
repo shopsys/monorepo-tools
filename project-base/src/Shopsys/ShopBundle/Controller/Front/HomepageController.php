@@ -65,5 +65,4 @@ class HomepageController extends FrontBaseController
             'metaDescription' => $this->seoSettingFacade->getDescriptionMainPage($this->domain->getId()),
         ]);
     }
-
 }

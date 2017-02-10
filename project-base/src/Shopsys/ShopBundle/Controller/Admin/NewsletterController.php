@@ -51,5 +51,4 @@ class NewsletterController extends AdminBaseController
             $output->fputcsv($fields, ';');
         }
     }
-
 }

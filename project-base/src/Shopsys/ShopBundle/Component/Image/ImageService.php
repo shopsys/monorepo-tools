@@ -114,5 +114,4 @@ class ImageService
             $image->setPosition($position);
         }
     }
-
 }

@@ -99,5 +99,4 @@ class CategoryDataFixture
 
         return $categoryData;
     }
-
 }

@@ -114,5 +114,4 @@ class DomainExtension extends \Twig_Extension
     public function isMultidomain() {
         return $this->getDomain()->isMultidomain();
     }
-
 }

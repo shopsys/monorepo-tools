@@ -42,5 +42,4 @@ class TransportDetail
     public function getBasePrices() {
         return $this->basePrices;
     }
-
 }

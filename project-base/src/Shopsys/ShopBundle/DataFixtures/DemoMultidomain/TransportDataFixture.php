@@ -46,5 +46,4 @@ class TransportDataFixture extends AbstractReferenceFixture
         $transportEditData->prices[$currencyEur->getId()] = 0;
         $transportFacade->edit($transport, $transportEditData);
     }
-
 }

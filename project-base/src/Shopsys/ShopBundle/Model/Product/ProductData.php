@@ -132,5 +132,4 @@ class ProductData
         $this->variantAlias = [];
         $this->orderingPriority = 0;
     }
-
 }

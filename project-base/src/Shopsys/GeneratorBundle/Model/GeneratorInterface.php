@@ -24,5 +24,4 @@ interface GeneratorInterface
      * @return string
      */
     public function generate(BundleInterface $bundle, array $formData);
-
 }

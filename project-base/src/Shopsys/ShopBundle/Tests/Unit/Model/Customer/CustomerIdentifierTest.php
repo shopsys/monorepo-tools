@@ -16,5 +16,4 @@ class CustomerIdentifierTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(EmptyCustomerIdentifierException::class);
         new CustomerIdentifier($cartIdentifier, $user);
     }
-
 }

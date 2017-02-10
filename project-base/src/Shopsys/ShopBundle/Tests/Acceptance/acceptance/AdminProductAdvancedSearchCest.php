@@ -22,5 +22,4 @@ class AdminProductAdvancedSearchCest
         $productAdvancedSearchPage->assertFoundProductByName('Aquila Aquagym Pramenitá voda neperlivá');
         $productAdvancedSearchPage->assertFoundProductCount(1);
     }
-
 }

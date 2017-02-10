@@ -68,5 +68,4 @@ class SettingValueDataFixture extends AbstractReferenceFixture implements Depend
             PricingGroupDataFixture::class,
         ];
     }
-
 }

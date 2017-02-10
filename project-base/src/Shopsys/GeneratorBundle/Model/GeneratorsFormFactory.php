@@ -98,5 +98,4 @@ class GeneratorsFormFactory
 
         return $bundleChoices;
     }
-
 }

@@ -71,5 +71,4 @@ class Country
     public function getDomainId() {
         return $this->domainId;
     }
-
 }

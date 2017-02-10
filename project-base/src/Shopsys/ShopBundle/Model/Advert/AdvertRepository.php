@@ -78,5 +78,4 @@ class AdvertRepository
         }
         return $advert;
     }
-
 }

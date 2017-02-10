@@ -26,5 +26,4 @@ class TopProductsFormTypeFactory
     public function create() {
         return new TopProductsFormType($this->removeDuplicatesTransformer);
     }
-
 }

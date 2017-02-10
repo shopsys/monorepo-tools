@@ -128,5 +128,4 @@ class Bag
             $this->session->getFlashBag()->add($this->getFullbagName($key), $message);
         }
     }
-
 }

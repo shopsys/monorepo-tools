@@ -39,5 +39,4 @@ class DbCollationsDataFixture extends AbstractNativeFixture
             $this->executeNativeQuery('CREATE COLLATION "sk_SK" (LOCALE="sk_SK.utf8")');
         }
     }
-
 }

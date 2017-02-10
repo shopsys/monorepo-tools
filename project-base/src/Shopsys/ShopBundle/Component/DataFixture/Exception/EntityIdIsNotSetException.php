@@ -19,5 +19,4 @@ class EntityIdIsNotSetException extends Exception implements DataFixtureExceptio
 
         parent::__construct($message, 0, $previous);
     }
-
 }

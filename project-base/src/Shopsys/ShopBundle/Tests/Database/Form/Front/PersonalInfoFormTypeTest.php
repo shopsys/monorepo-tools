@@ -63,5 +63,4 @@ class PersonalInfoFormTypeTest extends DatabaseTestCase
 
         return $personalInfoFormData;
     }
-
 }

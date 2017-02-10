@@ -90,5 +90,4 @@ class TransportAndPaymentController extends AdminBaseController
             'domain' => $this->domain,
         ]);
     }
-
 }

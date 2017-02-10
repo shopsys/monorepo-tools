@@ -43,5 +43,4 @@ class ImageTypeNotFoundException extends Exception implements ImageConfigExcepti
     public function getImageType() {
         return $this->imageType;
     }
-
 }

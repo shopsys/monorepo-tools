@@ -30,5 +30,4 @@ class BreadcrumbController extends FrontBaseController
             'breadcrumbItems' => $breadcrumbItems,
         ]);
     }
-
 }

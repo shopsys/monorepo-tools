@@ -36,5 +36,4 @@ class AvailabilityServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($availabilityDataEdit, $availabilityDataNew);
     }
-
 }

@@ -36,5 +36,4 @@ class InputPriceCalculation
     private function getInputPriceWithoutVat($basePriceWithVat, $vatPercent) {
         return 100 * $basePriceWithVat / (100 + $vatPercent);
     }
-
 }

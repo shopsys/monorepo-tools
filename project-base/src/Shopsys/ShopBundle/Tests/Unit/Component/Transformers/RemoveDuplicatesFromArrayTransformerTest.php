@@ -28,5 +28,4 @@ class RemoveDuplicatesFromArrayTransformerTest extends PHPUnit_Framework_TestCas
         $transformer = new RemoveDuplicatesFromArrayTransformer();
         $this->assertSame(['0', 0, null, false], $transformer->reverseTransform($array));
     }
-
 }

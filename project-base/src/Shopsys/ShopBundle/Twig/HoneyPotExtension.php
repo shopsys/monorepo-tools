@@ -70,5 +70,4 @@ class HoneyPotExtension extends Twig_Extension
 
         return false;
     }
-
 }

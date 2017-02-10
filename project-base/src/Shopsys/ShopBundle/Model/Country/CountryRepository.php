@@ -56,5 +56,4 @@ class CountryRepository
     public function getAllByDomainId($domainId) {
         return $this->getCountryRepository()->findBy(['domainId' => $domainId], ['id' => 'asc']);
     }
-
 }

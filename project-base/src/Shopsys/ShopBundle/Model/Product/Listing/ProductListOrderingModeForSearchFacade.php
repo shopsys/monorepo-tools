@@ -47,5 +47,4 @@ class ProductListOrderingModeForSearchFacade
             $this->getProductListOrderingConfig()
         );
     }
-
 }

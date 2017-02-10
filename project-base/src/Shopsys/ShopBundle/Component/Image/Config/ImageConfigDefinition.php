@@ -74,5 +74,4 @@ class ImageConfigDefinition implements ConfigurationInterface
                 ->end()
             ->end();
     }
-
 }

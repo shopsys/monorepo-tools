@@ -44,5 +44,4 @@ class FileExtensionMaxLengthValidatorTest extends AbstractConstraintValidatorTes
             ->setParameter('{{ limit }}', 3)
             ->assertRaised();
     }
-
 }

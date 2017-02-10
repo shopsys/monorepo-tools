@@ -14,5 +14,4 @@ class FriendlyUrlData
      * @var string
      */
     public $name;
-
 }

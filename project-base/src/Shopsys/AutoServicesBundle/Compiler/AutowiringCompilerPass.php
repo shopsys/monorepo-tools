@@ -167,5 +167,4 @@ class AutowiringCompilerPass implements CompilerPassInterface
             $containerBuilder->addResource(new FileResource($reflectionClass->getFileName()));
         } while ($reflectionClass = $reflectionClass->getParentClass());
     }
-
 }

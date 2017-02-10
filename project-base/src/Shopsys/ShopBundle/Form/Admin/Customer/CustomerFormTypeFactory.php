@@ -53,5 +53,4 @@ class CustomerFormTypeFactory
 
         return new CustomerFormType($scenario, $countries, $this->selectedDomain, $allPricingGroups);
     }
-
 }

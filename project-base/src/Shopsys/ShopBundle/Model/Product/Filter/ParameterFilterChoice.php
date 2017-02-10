@@ -42,5 +42,4 @@ class ParameterFilterChoice
     public function getValues() {
         return $this->values;
     }
-
 }

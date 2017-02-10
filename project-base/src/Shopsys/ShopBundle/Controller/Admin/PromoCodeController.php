@@ -63,5 +63,4 @@ class PromoCodeController extends AdminBaseController
 
         return $this->redirectToRoute('admin_promocode_list');
     }
-
 }

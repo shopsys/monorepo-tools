@@ -34,5 +34,4 @@ class CustomTranslationsCompilerPass implements CompilerPassInterface
             $translator->addMethodCall('addResource', [$format, (string)$file, $locale, $domain]);
         }
     }
-
 }

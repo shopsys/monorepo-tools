@@ -103,5 +103,4 @@ class AdvertFacade
         $this->em->remove($advert);
         $this->em->flush();
     }
-
 }

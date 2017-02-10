@@ -60,5 +60,4 @@ class ScriptRepository
     public function getScriptsByPlacement($placement) {
         return $this->getScriptRepository()->findBy(['placement' => $placement]);
     }
-
 }

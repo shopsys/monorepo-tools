@@ -63,5 +63,4 @@ class ProductCategoryDomain
     public function getDomainId() {
         return $this->domainId;
     }
-
 }

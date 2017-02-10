@@ -281,5 +281,4 @@ class PersonalInfoFormType extends AbstractType
             },
         ]);
     }
-
 }

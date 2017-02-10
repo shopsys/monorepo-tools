@@ -29,5 +29,4 @@ class ImageEntityConfigNotFoundException extends Exception implements ImageConfi
     public function getEntityClassOrName() {
         return $this->entityClassOrName;
     }
-
 }

@@ -102,5 +102,4 @@ class ProductMassActionFacade
 
         return $selectedProductIds;
     }
-
 }

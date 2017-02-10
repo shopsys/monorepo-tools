@@ -44,5 +44,4 @@ class CollateFunction extends FunctionNode
             $sqlWalker->getConnection()->quoteIdentifier($this->collation)
         );
     }
-
 }

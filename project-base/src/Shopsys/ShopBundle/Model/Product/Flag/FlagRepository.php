@@ -55,5 +55,4 @@ class FlagRepository
     public function getAll() {
         return $this->getFlagRepository()->findBy([], ['id' => 'asc']);
     }
-
 }

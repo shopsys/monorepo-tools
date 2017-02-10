@@ -53,5 +53,4 @@ class ProductDataFixtureCsvReader
 
         return EncodingConverter::cp1250ToUtf8($row);
     }
-
 }

@@ -78,5 +78,4 @@ class PersistentReferenceFacade
             throw new \Shopsys\ShopBundle\Component\DataFixture\Exception\MethodGetIdDoesNotExistException($message);
         }
     }
-
 }

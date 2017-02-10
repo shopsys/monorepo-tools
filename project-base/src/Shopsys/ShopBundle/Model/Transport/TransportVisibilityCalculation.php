@@ -75,5 +75,4 @@ class TransportVisibilityCalculation
 
         return $visibleTransports;
     }
-
 }

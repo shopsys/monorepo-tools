@@ -58,5 +58,4 @@ class CartFactory
 
         return new Cart($cartItems);
     }
-
 }

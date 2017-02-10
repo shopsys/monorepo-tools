@@ -48,5 +48,4 @@ class ImageGeneratorFacade
 
         return $this->imageGeneratorService->generateImageSizeAndGetFilepath($image, $sizeName);
     }
-
 }

@@ -55,5 +55,4 @@ class SlowLogFacade
     private function getRequestTime() {
         return microtime(true) - $this->startTime;
     }
-
 }

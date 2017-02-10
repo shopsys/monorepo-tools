@@ -29,5 +29,4 @@ class Db extends BaseDb
         $databaseSchemaFacade->dropSchemaIfExists('public');
         $databaseSchemaFacade->createSchema('public');
     }
-
 }

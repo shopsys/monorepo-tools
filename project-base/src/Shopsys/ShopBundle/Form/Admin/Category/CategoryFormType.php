@@ -179,5 +179,4 @@ class CategoryFormType extends AbstractType
     private function getMetaDescriptionPlaceholder(DomainConfig $domainConfig) {
         return $this->metaDescriptionsIndexedByDomainId[$domainConfig->getId()];
     }
-
 }

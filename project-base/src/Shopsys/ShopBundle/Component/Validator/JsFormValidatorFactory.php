@@ -25,5 +25,4 @@ class JsFormValidatorFactory extends BaseJsFormValidatorFactory
 
         return $result;
     }
-
 }

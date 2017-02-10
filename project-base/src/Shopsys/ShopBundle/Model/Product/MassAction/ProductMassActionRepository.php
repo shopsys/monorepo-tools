@@ -32,5 +32,4 @@ class ProductMassActionRepository
 
         $updateQueryBuilder->getQuery()->execute();
     }
-
 }

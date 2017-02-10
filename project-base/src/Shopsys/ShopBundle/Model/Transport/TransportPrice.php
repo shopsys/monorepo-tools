@@ -76,5 +76,4 @@ class TransportPrice
     public function setPrice($price) {
         $this->price = $price;
     }
-
 }

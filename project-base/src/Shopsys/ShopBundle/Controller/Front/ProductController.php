@@ -370,5 +370,4 @@ class ProductController extends FrontBaseController
         unset($parameters[self::PAGE_QUERY_PARAMETER]);
         return $parameters;
     }
-
 }

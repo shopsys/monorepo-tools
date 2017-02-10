@@ -88,5 +88,4 @@ class VatFacadeTest extends PHPUnit_Framework_TestCase
         );
         $vatFacade->setDefaultVat($vatMock);
     }
-
 }

@@ -416,5 +416,4 @@ class ProductFacade
     public function getOneByCatnumExcludeMainVariants($productCatnum) {
         return $this->productRepository->getOneByCatnumExcludeMainVariants($productCatnum);
     }
-
 }

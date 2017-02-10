@@ -15,5 +15,4 @@ class NotLogFakeHttpExceptionsExceptionListener extends ExceptionListener
             parent::logException($exception, $message);
         }
     }
-
 }

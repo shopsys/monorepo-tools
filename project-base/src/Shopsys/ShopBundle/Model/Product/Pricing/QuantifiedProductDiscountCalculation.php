@@ -61,5 +61,4 @@ class QuantifiedProductDiscountCalculation
 
         return $quantifiedItemsDiscounts;
     }
-
 }

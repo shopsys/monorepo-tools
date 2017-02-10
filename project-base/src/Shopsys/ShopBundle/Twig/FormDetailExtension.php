@@ -92,5 +92,4 @@ class FormDetailExtension extends Twig_Extension
     public function getName() {
         return 'shopsys.twig.form_detail_extension';
     }
-
 }

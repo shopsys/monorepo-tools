@@ -229,5 +229,4 @@ class CategoryController extends AdminBaseController
             'selectedDomainId' => $domainId,
         ]);
     }
-
 }

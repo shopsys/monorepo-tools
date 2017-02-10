@@ -45,5 +45,4 @@ class FilepathComparator
     private function hasAncestorPath($path) {
         return dirname($path) !== $path;
     }
-
 }

@@ -31,5 +31,4 @@ class NewsletterSubscriber
     public function getEmail() {
         return $this->email;
     }
-
 }

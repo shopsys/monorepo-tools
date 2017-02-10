@@ -35,5 +35,4 @@ class CsvReader
 
         return $rows;
     }
-
 }

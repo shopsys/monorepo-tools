@@ -66,5 +66,4 @@ class CustomerLoginHandler implements AuthenticationSuccessHandlerInterface, Aut
             return new RedirectResponse($this->router->generate('front_login'));
         }
     }
-
 }

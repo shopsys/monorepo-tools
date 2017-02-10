@@ -30,5 +30,4 @@ class HoneyPotType extends AbstractType
             'constraints' => new Constraints\Blank(['message' => 'This field must be empty']),
         ]);
     }
-
 }

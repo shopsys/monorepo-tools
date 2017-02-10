@@ -64,5 +64,4 @@ class Cart
     public function isEmpty() {
         return $this->getItemsCount() === 0;
     }
-
 }

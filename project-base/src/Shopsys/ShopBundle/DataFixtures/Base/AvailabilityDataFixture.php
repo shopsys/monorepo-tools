@@ -51,5 +51,4 @@ class AvailabilityDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $availability);
         }
     }
-
 }

@@ -108,5 +108,4 @@ class FileThumbnailExtension extends Twig_Extension
 
         return self::DEFAULT_ICON_TYPE;
     }
-
 }

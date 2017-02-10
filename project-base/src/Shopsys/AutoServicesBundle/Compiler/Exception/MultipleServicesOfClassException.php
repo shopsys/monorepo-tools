@@ -18,5 +18,4 @@ class MultipleServicesOfClassException extends Exception implements CompilerExce
         $message = 'Multiple services of ' . $className . ' defined (' . $serviceNames . ')';
         parent::__construct($message, 0, $previous);
     }
-
 }

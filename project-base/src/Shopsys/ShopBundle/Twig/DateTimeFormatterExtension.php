@@ -147,5 +147,4 @@ class DateTimeFormatterExtension extends Twig_Extension
     public function getName() {
         return 'date_formatter_extension';
     }
-
 }

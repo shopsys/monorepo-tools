@@ -192,5 +192,4 @@ class Translator implements TranslatorInterface, TranslatorBagInterface
 
         return self::$self->transChoice($id, $number, $parameters, $domain, $locale);
     }
-
 }

@@ -30,5 +30,4 @@ class NormalizingExtractorManager extends ExtractorManager
     public function extract() {
         return $this->messageIdNormalizer->getNormalizedCatalogue(parent::extract());
     }
-
 }

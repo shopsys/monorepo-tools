@@ -152,5 +152,4 @@ class TsqueryFactoryTest extends PHPUnit_Framework_TestCase
             ['a:* b', 'a | b:*'],
         ];
     }
-
 }

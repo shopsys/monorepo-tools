@@ -45,5 +45,4 @@ class PoFileLoader extends BasePoFileLoader
 
         return $catalogue;
     }
-
 }

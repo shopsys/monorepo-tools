@@ -90,5 +90,4 @@ class DomainFacade
     public function existsDomainIcon($domainId) {
         return $this->filesystem->exists($this->domainImagesDirectory . '/' . $domainId . '.png');
     }
-
 }

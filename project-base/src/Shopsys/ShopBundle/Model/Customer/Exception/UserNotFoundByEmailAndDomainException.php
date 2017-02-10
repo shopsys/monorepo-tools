@@ -43,5 +43,4 @@ class UserNotFoundByEmailAndDomainException extends UserNotFoundException
     public function getDomainId() {
         return $this->domainId;
     }
-
 }

@@ -120,5 +120,4 @@ class TranslationSourceReplacement
 
         return count($parts) > 1 && is_numeric($parts[1]) ? (int)$parts[1] : null;
     }
-
 }

@@ -76,5 +76,4 @@ class ProductParameterValue
     public function getValue() {
         return $this->value;
     }
-
 }

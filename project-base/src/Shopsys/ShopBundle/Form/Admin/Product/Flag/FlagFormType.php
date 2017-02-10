@@ -55,5 +55,4 @@ class FlagFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

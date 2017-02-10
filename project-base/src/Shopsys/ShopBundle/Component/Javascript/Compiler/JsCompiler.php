@@ -34,5 +34,4 @@ class JsCompiler
 
         return $node->format();
     }
-
 }

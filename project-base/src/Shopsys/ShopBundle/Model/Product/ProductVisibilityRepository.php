@@ -294,5 +294,4 @@ class ProductVisibilityRepository
             'variantTypeMain' => Product::VARIANT_TYPE_MAIN,
         ]);
     }
-
 }

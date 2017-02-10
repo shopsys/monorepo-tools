@@ -54,5 +54,4 @@ class AdministratorData
         $this->username = $administrator->getUsername();
         $this->superadmin = $administrator->isSuperadmin();
     }
-
 }

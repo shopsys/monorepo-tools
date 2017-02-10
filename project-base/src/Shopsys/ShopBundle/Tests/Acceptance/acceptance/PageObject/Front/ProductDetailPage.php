@@ -23,5 +23,4 @@ class ProductDetailPage extends AbstractPage
         $this->tester->waitForAjax();
         $this->tester->wait(1); // animation of popup window
     }
-
 }

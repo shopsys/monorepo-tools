@@ -148,5 +148,4 @@ class DomainDataCreatorTest extends PHPUnit_Framework_TestCase
 
         $domainDataCreator->createNewDomainsData();
     }
-
 }

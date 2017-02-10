@@ -19,5 +19,4 @@ class FeedCategoryData
      * @var string
      */
     public $fullName;
-
 }

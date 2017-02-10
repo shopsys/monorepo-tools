@@ -146,5 +146,4 @@ class ImageDemoCommand extends ContainerAwareCommand
             }
         }
     }
-
 }

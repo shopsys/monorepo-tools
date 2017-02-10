@@ -62,5 +62,4 @@ class FilepathComparatorTest extends PHPUnit_Framework_TestCase
     private function getResourcePath($relativePath) {
         return __DIR__ . '/Resources/' . $relativePath;
     }
-
 }

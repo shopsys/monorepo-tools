@@ -92,5 +92,4 @@ class OrderProductServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($productStockQuantity, $product->getStockQuantity());
     }
-
 }

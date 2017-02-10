@@ -41,5 +41,4 @@ class ModuleExtension extends Twig_Extension
     public function getName() {
         return 'module';
     }
-
 }

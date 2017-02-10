@@ -50,5 +50,4 @@ class SettingValueTest extends PHPUnit_Framework_TestCase
         $settingValue = new SettingValue('name', $value, 1);
         $this->assertEquals($value, $settingValue->getValue());
     }
-
 }

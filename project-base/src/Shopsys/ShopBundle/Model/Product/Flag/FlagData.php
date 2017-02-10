@@ -44,5 +44,4 @@ class FlagData
         $this->rgbColor = $flag->getRgbColor();
         $this->visible = $flag->isVisible();
     }
-
 }

@@ -83,5 +83,4 @@ class DomainDbFunctionsFacade
 
         return $query->execute();
     }
-
 }

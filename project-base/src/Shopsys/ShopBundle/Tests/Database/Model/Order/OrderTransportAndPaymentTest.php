@@ -347,5 +347,4 @@ class OrderTransportAndPaymentTest extends DatabaseTestCase
 
         $this->assertNotContains($payment, $visiblePayments);
     }
-
 }

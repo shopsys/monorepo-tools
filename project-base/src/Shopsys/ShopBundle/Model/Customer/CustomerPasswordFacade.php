@@ -80,5 +80,4 @@ class CustomerPasswordFacade
 
         return $user;
     }
-
 }

@@ -31,5 +31,4 @@ class CustomerRegistrationCest
         $registrationPage->register('Roman', 'Štěpánek', 'no-reply.16@netdevelo.cz', 'user123', 'missmatchingPassword');
         $registrationPage->seePasswordError('Hesla se neshodují');
     }
-
 }

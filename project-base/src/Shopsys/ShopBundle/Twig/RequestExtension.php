@@ -78,5 +78,4 @@ class RequestExtension extends Twig_Extension
     public function getName() {
         return 'request_extension';
     }
-
 }

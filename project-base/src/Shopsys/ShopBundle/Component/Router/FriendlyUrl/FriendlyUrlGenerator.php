@@ -113,5 +113,4 @@ class FriendlyUrlGenerator extends BaseUrlGenerator
     public function generate($routeName, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
         throw new \Shopsys\ShopBundle\Component\Router\FriendlyUrl\Exception\MethodGenerateIsNotSupportedException();
     }
-
 }

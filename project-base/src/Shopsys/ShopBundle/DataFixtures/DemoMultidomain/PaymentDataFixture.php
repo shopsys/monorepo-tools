@@ -45,5 +45,4 @@ class PaymentDataFixture extends AbstractReferenceFixture
         $paymentEditData->prices[$currencyEur->getId()] = 0;
         $paymentFacade->edit($payment, $paymentEditData);
     }
-
 }

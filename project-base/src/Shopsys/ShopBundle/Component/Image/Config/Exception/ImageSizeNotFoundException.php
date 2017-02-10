@@ -43,5 +43,4 @@ class ImageSizeNotFoundException extends Exception implements ImageConfigExcepti
     public function getSizeName() {
         return $this->sizeName;
     }
-
 }

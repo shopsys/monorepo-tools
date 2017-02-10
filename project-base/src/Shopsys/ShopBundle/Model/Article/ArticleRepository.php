@@ -138,5 +138,4 @@ class ArticleRepository
             'domainId' => $domainId,
         ]);
     }
-
 }

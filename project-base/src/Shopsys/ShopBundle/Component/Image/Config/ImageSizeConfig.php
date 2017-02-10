@@ -62,5 +62,4 @@ class ImageSizeConfig
     public function getCrop() {
         return $this->crop;
     }
-
 }

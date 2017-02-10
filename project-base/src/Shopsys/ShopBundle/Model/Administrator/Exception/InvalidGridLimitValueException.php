@@ -27,5 +27,4 @@ class InvalidGridLimitValueException extends Exception implements AdministratorE
     public function getLimit() {
         return $this->limit;
     }
-
 }

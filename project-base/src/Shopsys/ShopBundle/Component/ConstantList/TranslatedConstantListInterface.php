@@ -20,5 +20,4 @@ interface TranslatedConstantListInterface
      * @return string[string]
      */
     public function getTranslationsIndexedByValue();
-
 }

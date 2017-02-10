@@ -39,5 +39,4 @@ class RegistrationPage extends AbstractPage
         $this->tester->moveMouseOverByCss('.js-validation-error-list-registration_form_password_first');
         $this->tester->see($text);
     }
-
 }

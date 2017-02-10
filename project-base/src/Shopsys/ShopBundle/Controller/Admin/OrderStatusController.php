@@ -129,5 +129,4 @@ class OrderStatusController extends AdminBaseController
             return new Response(t('Selected order status doesn\'t exist.'));
         }
     }
-
 }

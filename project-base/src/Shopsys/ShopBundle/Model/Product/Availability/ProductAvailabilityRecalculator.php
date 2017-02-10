@@ -109,5 +109,4 @@ class ProductAvailabilityRecalculator
             $this->runImmediateRecalculations();
         }
     }
-
 }

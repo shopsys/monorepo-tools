@@ -69,5 +69,4 @@ class LocalizedType extends AbstractType
     public function getName() {
         return 'localized';
     }
-
 }

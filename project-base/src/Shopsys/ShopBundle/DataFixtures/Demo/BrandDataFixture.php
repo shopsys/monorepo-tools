@@ -97,5 +97,4 @@ class BrandDataFixture extends AbstractReferenceFixture implements DependentFixt
             SettingValueDataFixture::class,
         ];
     }
-
 }

@@ -119,5 +119,4 @@ class PaginationResult
     public function getToItem() {
         return $this->toItem;
     }
-
 }

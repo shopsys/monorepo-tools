@@ -196,5 +196,4 @@ class MenuItem
             self::TYPE_SETTINGS,
         ];
     }
-
 }

@@ -13,5 +13,4 @@ class ErrorHandlingCest
         $me->see('Jejda');
         $me->dontSee('Notice');
     }
-
 }

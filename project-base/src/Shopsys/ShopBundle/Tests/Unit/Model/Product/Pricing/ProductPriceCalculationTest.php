@@ -221,5 +221,4 @@ class ProductPriceCalculationTest extends PHPUnit_Framework_TestCase
 
         $productPriceCalculation->calculatePrice($product, $pricingGroup->getDomainId(), $pricingGroup);
     }
-
 }

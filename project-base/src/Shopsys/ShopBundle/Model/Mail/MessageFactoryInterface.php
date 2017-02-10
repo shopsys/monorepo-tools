@@ -11,5 +11,4 @@ interface MessageFactoryInterface
      * @return \Shopsys\ShopBundle\Model\Mail\MessageData
      */
     public function createMessage(MailTemplate $template, $data);
-
 }

@@ -30,5 +30,4 @@ class AdvancedSearchRuleData
         $this->operator = $operator;
         $this->value = $value;
     }
-
 }

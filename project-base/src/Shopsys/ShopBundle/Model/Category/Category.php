@@ -212,5 +212,4 @@ class Category extends AbstractTranslatableEntity
     protected function createTranslation() {
         return new CategoryTranslation();
     }
-
 }

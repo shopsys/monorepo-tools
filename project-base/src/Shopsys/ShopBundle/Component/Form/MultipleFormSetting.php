@@ -30,5 +30,4 @@ class MultipleFormSetting
     public function isCurrentFormMultiple() {
         return $this->isCurrentFormMultiple;
     }
-
 }

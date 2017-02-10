@@ -275,5 +275,4 @@ class ArticleController extends AdminBaseController
 
         return $grid;
     }
-
 }

@@ -208,5 +208,4 @@ class FulltextTriggersDataFixture extends AbstractNativeFixture implements Depen
             DomainDbFunctionsDataFixture::class,
         ];
     }
-
 }

@@ -558,5 +558,4 @@ class ProductVisibilityRepositoryTest extends DatabaseTestCase
         $this->assertFalse($variant3->isVisible());
         $this->assertFalse($mainVariant->isVisible());
     }
-
 }

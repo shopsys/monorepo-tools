@@ -76,5 +76,4 @@ class CountryInlineEdit extends AbstractGridInlineEdit
     protected function getFormType($rowId) {
         return new CountryFormType();
     }
-
 }

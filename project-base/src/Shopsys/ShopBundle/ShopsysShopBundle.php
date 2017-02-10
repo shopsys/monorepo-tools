@@ -31,5 +31,4 @@ class ShopsysShopBundle extends Bundle
         $translator = $autoContainer->get(Translator::class);
         Translator::injectSelf($translator);
     }
-
 }

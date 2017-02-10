@@ -153,5 +153,4 @@ class Advert
     public function getPositionName() {
         return $this->positionName;
     }
-
 }

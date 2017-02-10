@@ -24,5 +24,4 @@ interface UniqueLoginInterface
      * @param bool $multidomainLogin
      */
     public function setMultidomainLogin($multidomainLogin);
-
 }

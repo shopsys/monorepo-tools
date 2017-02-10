@@ -207,5 +207,4 @@ class HeurekaItem implements FeedItemInterface
     public function getGroupId() {
         return $this->groupId;
     }
-
 }

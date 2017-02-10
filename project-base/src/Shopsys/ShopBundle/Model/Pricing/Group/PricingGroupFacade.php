@@ -167,5 +167,4 @@ class PricingGroupFacade
 
         return $pricingGroupsIndexedByDomainId;
     }
-
 }

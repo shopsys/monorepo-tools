@@ -39,5 +39,4 @@ class CategoryRootDataFixture extends AbstractReferenceFixture implements Depend
             SettingValueDataFixture::class,
         ];
     }
-
 }

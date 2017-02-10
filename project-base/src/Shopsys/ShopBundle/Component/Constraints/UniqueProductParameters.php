@@ -11,5 +11,4 @@ class UniqueProductParameters extends Constraint
 {
 
     public $message = 'Product parameters are duplicate.';
-
 }

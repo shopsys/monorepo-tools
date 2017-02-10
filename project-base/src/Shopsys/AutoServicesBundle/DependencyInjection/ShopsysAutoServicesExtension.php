@@ -22,5 +22,4 @@ class ShopsysAutoServicesExtension extends Extension
         $loader = new Loader\YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
     }
-
 }

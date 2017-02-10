@@ -52,5 +52,4 @@ class VatDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $vat);
         }
     }
-
 }

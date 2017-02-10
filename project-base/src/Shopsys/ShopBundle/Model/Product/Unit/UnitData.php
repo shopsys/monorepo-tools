@@ -28,5 +28,4 @@ class UnitData
         }
         $this->name = $names;
     }
-
 }

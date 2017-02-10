@@ -94,5 +94,4 @@ class MessageData
         $this->attachmentsFilepaths = $attachmentsFilepaths;
         $this->replyTo = $replyTo;
     }
-
 }

@@ -65,5 +65,4 @@ class UploadedFileRepository
 
         return $uploadedFile;
     }
-
 }

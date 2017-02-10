@@ -171,5 +171,4 @@ class ProductPriceCalculation
 
         return $currency->getReversedExchangeRate();
     }
-
 }

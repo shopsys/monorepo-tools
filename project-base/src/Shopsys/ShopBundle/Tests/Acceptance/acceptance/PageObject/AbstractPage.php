@@ -22,5 +22,4 @@ abstract class AbstractPage
         $this->webDriver = $strictWebDriver->webDriver;
         $this->tester = $tester;
     }
-
 }

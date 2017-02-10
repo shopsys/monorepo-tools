@@ -354,5 +354,4 @@ class User implements UserInterface, TimelimitLoginInterface, Serializable
     public function getSalt() {
         return null; // bcrypt include salt in password hash
     }
-
 }

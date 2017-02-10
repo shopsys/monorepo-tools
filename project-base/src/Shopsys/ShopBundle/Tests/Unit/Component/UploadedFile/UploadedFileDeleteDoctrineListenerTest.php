@@ -69,5 +69,4 @@ class UploadedFileDeleteDoctrineListenerTest extends PHPUnit_Framework_TestCase
         $doctrineListener = new UploadedFileDeleteDoctrineListener($containerMock, $uploadedFileConfig);
         $doctrineListener->preRemove($args);
     }
-
 }

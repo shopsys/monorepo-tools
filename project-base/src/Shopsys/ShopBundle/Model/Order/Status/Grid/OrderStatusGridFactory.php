@@ -67,5 +67,4 @@ class OrderStatusGridFactory implements GridFactoryInterface
 
         return $grid;
     }
-
 }

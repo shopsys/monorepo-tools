@@ -65,5 +65,4 @@ class OrderPaymentFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

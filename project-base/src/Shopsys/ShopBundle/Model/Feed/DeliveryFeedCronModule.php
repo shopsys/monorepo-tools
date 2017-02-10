@@ -28,5 +28,4 @@ class DeliveryFeedCronModule implements CronModuleInterface
     public function run() {
         $this->feedFacade->generateDeliveryFeeds();
     }
-
 }

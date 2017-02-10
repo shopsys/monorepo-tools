@@ -15,5 +15,4 @@ class UndefinedArrayKeyException extends Exception implements PerformanceExcepti
     public function __construct($key, Exception $previous = null) {
         parent::__construct('Key "' . $key . '" does not exists.', 0, $previous);
     }
-
 }

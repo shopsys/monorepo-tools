@@ -70,5 +70,4 @@ class TopCategoryFacade
         }
         $this->em->flush($topCategories);
     }
-
 }

@@ -39,5 +39,4 @@ class ProductAccessoriesDataFixture extends AbstractReferenceFixture implements 
             ProductDataFixture::class,
         ];
     }
-
 }

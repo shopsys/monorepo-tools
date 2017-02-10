@@ -388,5 +388,4 @@ class StrictWebDriver extends WebDriver
     public function pressKeysByElement(WebDriverElement $element, $keys) {
         $element->sendKeys($keys);
     }
-
 }

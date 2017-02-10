@@ -64,5 +64,4 @@ class IndependentTransportVisibilityCalculation
 
         return false;
     }
-
 }

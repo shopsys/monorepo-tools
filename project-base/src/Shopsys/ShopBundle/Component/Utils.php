@@ -48,5 +48,4 @@ class Utils
 
         return $value;
     }
-
 }

@@ -51,5 +51,4 @@ class TransMethodSpecification
     public function getDomainArgumentIndex() {
         return $this->domainArgumentIndex;
     }
-
 }

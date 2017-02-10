@@ -35,5 +35,4 @@ class ProductAdvancedSearchConfig extends AdvancedSearchConfig
         $this->registerFilter($productAvailabilityFilter);
         $this->registerFilter($productBrandFilter);
     }
-
 }

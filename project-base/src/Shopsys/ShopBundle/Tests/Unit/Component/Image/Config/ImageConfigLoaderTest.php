@@ -261,5 +261,4 @@ class ImageConfigLoaderTest extends PHPUnit_Framework_TestCase
         $this->assertSame(200, $imageSize->getWidth());
         $this->assertTrue($imageSize->getCrop());
     }
-
 }

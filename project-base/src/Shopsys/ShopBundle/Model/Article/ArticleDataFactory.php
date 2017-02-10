@@ -63,5 +63,4 @@ class ArticleDataFactory
 
         return $articleData;
     }
-
 }

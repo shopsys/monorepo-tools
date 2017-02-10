@@ -98,5 +98,4 @@ class LoginAsUserFacade
         $event = new InteractiveLoginEvent($request, $token);
         $this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
     }
-
 }

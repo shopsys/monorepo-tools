@@ -37,5 +37,4 @@ interface DataSourceInterface
      * @return string
      */
     public function getRowIdSourceColumnName();
-
 }

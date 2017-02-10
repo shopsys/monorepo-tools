@@ -149,5 +149,4 @@ class SettingValue
             . ' Supported is \DateTime, string, integer, float, boolean or null.';
         throw new \Shopsys\ShopBundle\Component\Setting\Exception\InvalidArgumentException($message);
     }
-
 }

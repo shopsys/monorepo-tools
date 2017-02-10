@@ -252,5 +252,4 @@ class OrderMailService
     private function getDomainLocaleByOrder($order) {
         return $this->domain->getDomainConfigById($order->getDomainId())->getLocale();
     }
-
 }

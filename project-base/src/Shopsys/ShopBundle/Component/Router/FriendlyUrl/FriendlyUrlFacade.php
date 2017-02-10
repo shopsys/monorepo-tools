@@ -186,5 +186,4 @@ class FriendlyUrlFacade
 
         $this->em->flush($friendlyUrls);
     }
-
 }

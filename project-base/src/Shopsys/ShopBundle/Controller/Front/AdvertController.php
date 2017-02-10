@@ -27,5 +27,4 @@ class AdvertController extends FrontBaseController
             'advert' => $advert,
         ]);
     }
-
 }

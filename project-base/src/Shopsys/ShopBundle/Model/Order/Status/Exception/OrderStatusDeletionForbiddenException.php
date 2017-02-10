@@ -28,5 +28,4 @@ class OrderStatusDeletionForbiddenException extends Exception implements OrderSt
     public function getOrderStatus() {
         return $this->orderStatus;
     }
-
 }

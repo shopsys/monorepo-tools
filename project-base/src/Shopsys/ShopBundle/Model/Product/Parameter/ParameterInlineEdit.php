@@ -72,5 +72,4 @@ class ParameterInlineEdit extends AbstractGridInlineEdit
     protected function getFormType($rowId) {
         return new ParameterFormType();
     }
-
 }

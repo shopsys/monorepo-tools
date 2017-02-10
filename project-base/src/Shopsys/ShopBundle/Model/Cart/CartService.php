@@ -131,5 +131,4 @@ class CartService
 
         return $quantifiedProducts;
     }
-
 }

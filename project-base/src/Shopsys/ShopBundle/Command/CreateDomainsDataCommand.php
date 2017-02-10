@@ -54,5 +54,4 @@ class CreateDomainsDataCommand extends ContainerAwareCommand
             $output->writeln($multidomainEntityName);
         }
     }
-
 }

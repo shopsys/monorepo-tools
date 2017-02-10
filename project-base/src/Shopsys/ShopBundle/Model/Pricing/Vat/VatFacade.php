@@ -179,5 +179,4 @@ class VatFacade
     public function getAllExceptId($vatId) {
         return $this->vatRepository->getAllExceptId($vatId);
     }
-
 }

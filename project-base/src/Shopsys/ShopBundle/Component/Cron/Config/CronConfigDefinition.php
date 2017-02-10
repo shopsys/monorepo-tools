@@ -43,5 +43,4 @@ class CronConfigDefinition implements ConfigurationInterface
                 ->end()
             ->end();
     }
-
 }

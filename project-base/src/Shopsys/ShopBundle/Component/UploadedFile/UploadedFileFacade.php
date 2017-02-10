@@ -172,5 +172,4 @@ class UploadedFileFacade
     public function getUploadedFileUrl(DomainConfig $domainConfig, UploadedFile $uploadedFile) {
         return $this->uploadedFileLocator->getUploadedFileUrl($domainConfig, $uploadedFile);
     }
-
 }

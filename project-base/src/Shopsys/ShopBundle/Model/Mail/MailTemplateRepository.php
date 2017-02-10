@@ -61,5 +61,4 @@ class MailTemplateRepository
         $criteria = ['domainId' => $domainId];
         return $this->getMailTemplateRepository()->findBy($criteria);
     }
-
 }

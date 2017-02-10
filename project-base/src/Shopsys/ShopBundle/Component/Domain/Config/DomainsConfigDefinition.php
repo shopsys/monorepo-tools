@@ -39,5 +39,4 @@ class DomainsConfigDefinition implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
 }

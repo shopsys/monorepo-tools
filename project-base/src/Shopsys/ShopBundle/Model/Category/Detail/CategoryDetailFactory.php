@@ -122,5 +122,4 @@ class CategoryDetailFactory
 
         return $categoriesIndexedByParentId;
     }
-
 }

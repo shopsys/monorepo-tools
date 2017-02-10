@@ -45,5 +45,4 @@ class LocalizedRouterFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($router1, $router2);
         $this->assertNotSame($router1, $router4);
     }
-
 }

@@ -44,5 +44,4 @@ class OrderHashGeneratorRepository
         } while ($order !== null);
         return $hash;
     }
-
 }

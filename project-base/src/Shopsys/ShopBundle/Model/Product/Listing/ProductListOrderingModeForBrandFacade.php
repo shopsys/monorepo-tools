@@ -46,5 +46,4 @@ class ProductListOrderingModeForBrandFacade
             $this->getProductListOrderingConfig()
         );
     }
-
 }

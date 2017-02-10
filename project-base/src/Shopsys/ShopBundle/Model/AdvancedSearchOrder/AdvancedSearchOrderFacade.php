@@ -88,5 +88,4 @@ class AdvancedSearchOrderFacade
 
         return $rulesData !== null;
     }
-
 }

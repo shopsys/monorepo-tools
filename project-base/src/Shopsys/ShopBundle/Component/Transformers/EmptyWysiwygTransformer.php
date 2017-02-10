@@ -27,5 +27,4 @@ class EmptyWysiwygTransformer implements DataTransformerInterface
             return $value;
         }
     }
-
 }

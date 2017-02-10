@@ -44,5 +44,4 @@ class EnabledModuleRepository
 
         return $this->getEnabledModuleRepository()->find($moduleName);
     }
-
 }

@@ -332,5 +332,4 @@ class CartController extends FrontBaseController
 
         return $this->redirectToRoute('front_cart');
     }
-
 }

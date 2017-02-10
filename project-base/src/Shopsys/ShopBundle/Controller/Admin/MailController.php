@@ -235,5 +235,4 @@ class MailController extends AdminBaseController
             'TYPE_NEW' => OrderStatus::TYPE_NEW,
         ];
     }
-
 }

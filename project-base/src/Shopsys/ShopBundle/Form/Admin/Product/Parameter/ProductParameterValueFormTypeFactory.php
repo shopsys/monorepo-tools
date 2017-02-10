@@ -26,5 +26,4 @@ class ProductParameterValueFormTypeFactory
 
         return new ProductParameterValueFormType($parameters);
     }
-
 }

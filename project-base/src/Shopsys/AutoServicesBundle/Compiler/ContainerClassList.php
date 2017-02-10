@@ -121,5 +121,4 @@ class ContainerClassList
     private function classOrInterfaceExists($classOrInterfaceName) {
         return class_exists($classOrInterfaceName) || interface_exists($classOrInterfaceName);
     }
-
 }

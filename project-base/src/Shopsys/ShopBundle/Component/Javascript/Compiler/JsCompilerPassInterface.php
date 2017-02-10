@@ -8,5 +8,4 @@ interface JsCompilerPassInterface
 {
 
     public function process(JProgramNode $node);
-
 }

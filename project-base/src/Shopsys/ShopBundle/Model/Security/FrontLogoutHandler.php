@@ -41,5 +41,4 @@ class FrontLogoutHandler implements LogoutSuccessHandlerInterface
 
         return new RedirectResponse($url);
     }
-
 }

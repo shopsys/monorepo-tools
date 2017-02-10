@@ -63,5 +63,4 @@ class DomainListenerTest extends PHPUnit_Framework_TestCase
         $domainListener = new DomainListener($domainMock);
         $domainListener->onKernelRequest($eventMock);
     }
-
 }

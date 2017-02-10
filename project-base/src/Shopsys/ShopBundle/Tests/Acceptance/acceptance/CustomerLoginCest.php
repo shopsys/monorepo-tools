@@ -48,5 +48,4 @@ class CustomerLoginCest
         $me->see('Přihlásit se');
         $me->seeCurrentPageEquals('/');
     }
-
 }

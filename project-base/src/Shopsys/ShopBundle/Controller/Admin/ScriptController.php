@@ -194,5 +194,4 @@ class ScriptController extends AdminBaseController
             ScriptFacade::VARIABLE_TOTAL_PRICE => t('Total order price including VAT'),
         ];
     }
-
 }

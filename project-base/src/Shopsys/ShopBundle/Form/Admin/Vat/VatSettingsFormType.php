@@ -85,5 +85,4 @@ class VatSettingsFormType extends AbstractType
             PricingSetting::ROUNDING_TYPE_INTEGER => t('To whole numbers'),
         ];
     }
-
 }

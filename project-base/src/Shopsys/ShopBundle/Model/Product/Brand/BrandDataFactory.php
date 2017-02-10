@@ -47,5 +47,4 @@ class BrandDataFactory
 
         return $brandData;
     }
-
 }

@@ -40,5 +40,4 @@ class MultidomainEntityClassFinderTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(['MultidomainClass'], $multidomainEntitiesNames);
     }
-
 }

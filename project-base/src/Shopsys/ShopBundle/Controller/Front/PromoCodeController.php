@@ -61,5 +61,4 @@ class PromoCodeController extends FrontBaseController
 
         return $this->redirectToRoute('front_cart');
     }
-
 }

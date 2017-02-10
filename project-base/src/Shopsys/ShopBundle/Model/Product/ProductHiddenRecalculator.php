@@ -52,5 +52,4 @@ class ProductHiddenRecalculator
 
         $qb->getQuery()->execute();
     }
-
 }

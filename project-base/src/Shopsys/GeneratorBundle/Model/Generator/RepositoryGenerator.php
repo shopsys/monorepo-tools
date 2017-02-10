@@ -49,5 +49,4 @@ class RepositoryGenerator extends AbstractGenerator
     public function getName() {
         return 'repository';
     }
-
 }

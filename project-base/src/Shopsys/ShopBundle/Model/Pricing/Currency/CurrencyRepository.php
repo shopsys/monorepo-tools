@@ -66,5 +66,4 @@ class CurrencyRepository
     public function getAll() {
         return $this->getCurrencyRepository()->findAll();
     }
-
 }

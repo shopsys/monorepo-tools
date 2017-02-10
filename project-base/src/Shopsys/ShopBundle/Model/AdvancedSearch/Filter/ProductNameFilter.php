@@ -69,5 +69,4 @@ class ProductNameFilter implements AdvancedSearchFilterInterface
                 return 'NOT LIKE';
         }
     }
-
 }

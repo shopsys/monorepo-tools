@@ -114,5 +114,4 @@ class OrderStatus extends AbstractTranslatableEntity
     public function edit(OrderStatusData $orderStatusData) {
         $this->setTranslations($orderStatusData);
     }
-
 }

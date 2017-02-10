@@ -83,5 +83,4 @@ class AdministratorFormType extends AbstractType
             ],
         ]);
     }
-
 }

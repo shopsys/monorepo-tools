@@ -56,5 +56,4 @@ class CategoryBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return $breadcrumbItems;
     }
-
 }

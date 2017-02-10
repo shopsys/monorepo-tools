@@ -79,5 +79,4 @@ class OrderPriceCalculation
 
         return new Price($roundingPrice, $roundingPrice);
     }
-
 }

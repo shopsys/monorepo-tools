@@ -17,5 +17,4 @@ class AdvancedSearchProductFilterTranslation extends AdvancedSearchFilterTransla
         $this->addFilterTranslation('productAvailability', t('Availability'));
         $this->addFilterTranslation('productBrand', t('Brand'));
     }
-
 }

@@ -71,5 +71,4 @@ class OrderStatusMailTemplateService
 
         return $orderStatusMailTemplates;
     }
-
 }

@@ -39,5 +39,4 @@ class TopCategoryRepository
     public function getAll($domainId) {
         return $this->getTopCategoryRepository()->findBy(['domainId' => $domainId], ['position' => 'ASC']);
     }
-
 }

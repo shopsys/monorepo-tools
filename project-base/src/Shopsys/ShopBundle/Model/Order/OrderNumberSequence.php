@@ -48,5 +48,4 @@ class OrderNumberSequence
     public function setNumber($number) {
         $this->number = $number;
     }
-
 }

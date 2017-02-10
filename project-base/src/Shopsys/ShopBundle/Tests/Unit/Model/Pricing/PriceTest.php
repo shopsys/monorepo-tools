@@ -47,5 +47,4 @@ class PriceTest extends PHPUnit_Framework_TestCase
         $this->assertSame(3, $price->getPriceWithVat());
         $this->assertSame(1, $price->getVatAmount());
     }
-
 }

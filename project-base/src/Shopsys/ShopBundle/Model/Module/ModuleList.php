@@ -21,5 +21,4 @@ class ModuleList extends AbstractTranslatedConstantList
             self::PRODUCT_STOCK_CALCULATIONS => t('Automatic stock calculation'),
         ];
     }
-
 }

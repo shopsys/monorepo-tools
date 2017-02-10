@@ -39,5 +39,4 @@ class UnitFacadeTest extends DatabaseTestCase
 
         $this->assertEquals($unitToReplaceWith, $product->getUnit());
     }
-
 }

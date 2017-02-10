@@ -53,5 +53,4 @@ class ProductPriceRecalculatorTest extends PHPUnit_Framework_TestCase
 
         $productPriceRecalculator->runImmediateRecalculations();
     }
-
 }

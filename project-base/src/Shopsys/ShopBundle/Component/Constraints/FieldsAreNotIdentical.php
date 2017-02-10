@@ -14,5 +14,4 @@ class FieldsAreNotIdentical extends Constraint
     public $errorPath;
 
     public $message = 'Fields must not be identical';
-
 }

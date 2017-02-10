@@ -53,5 +53,4 @@ class TopCategory
     public function getCategory() {
         return $this->category;
     }
-
 }

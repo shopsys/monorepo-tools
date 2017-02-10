@@ -157,5 +157,4 @@ class DeliveryAddressFormType extends AbstractType
             },
         ]);
     }
-
 }

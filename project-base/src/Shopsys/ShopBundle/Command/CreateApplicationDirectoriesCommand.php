@@ -70,5 +70,4 @@ class CreateApplicationDirectoriesCommand extends ContainerAwareCommand
 
         $output->writeln('<fg=green>Directories for UploadedFile entities were successfully created.</fg=green>');
     }
-
 }

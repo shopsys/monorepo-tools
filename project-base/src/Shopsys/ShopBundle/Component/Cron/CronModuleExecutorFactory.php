@@ -14,5 +14,4 @@ class CronModuleExecutorFactory
     public function create($secondsTimeout) {
         return new CronModuleExecutor($secondsTimeout);
     }
-
 }

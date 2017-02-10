@@ -25,5 +25,4 @@ class NotInArray extends Constraint
             'array',
         ];
     }
-
 }

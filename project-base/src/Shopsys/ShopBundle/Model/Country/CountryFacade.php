@@ -86,5 +86,4 @@ class CountryFacade
     public function getAllOnCurrentDomain() {
         return $this->countryRepository->getAllByDomainId($this->domain->getId());
     }
-
 }

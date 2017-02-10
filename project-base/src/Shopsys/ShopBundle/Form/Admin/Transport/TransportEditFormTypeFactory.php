@@ -31,5 +31,4 @@ class TransportEditFormTypeFactory
 
         return new TransportEditFormType($this->transportFormTypeFactory, $currencies);
     }
-
 }

@@ -50,5 +50,4 @@ class ProductVariantServiceTest extends PHPUnit_Framework_TestCase
         $this->assertNotSame($mainProduct, $mainVariant);
         $this->assertTrue(in_array($mainProduct, $mainVariant->getVariants()));
     }
-
 }

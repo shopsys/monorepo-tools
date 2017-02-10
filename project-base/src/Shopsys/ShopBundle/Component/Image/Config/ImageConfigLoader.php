@@ -164,5 +164,4 @@ class ImageConfigLoader
 
         return $multipleByType;
     }
-
 }

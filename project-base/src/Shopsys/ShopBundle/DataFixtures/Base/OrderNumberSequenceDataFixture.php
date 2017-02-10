@@ -18,5 +18,4 @@ class OrderNumberSequenceDataFixture extends AbstractReferenceFixture
         $manager->persist($orderNumberSequence);
         $manager->flush();
     }
-
 }

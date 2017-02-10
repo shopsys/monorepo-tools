@@ -132,5 +132,4 @@ class FriendlyUrlRouter implements RouterInterface
     public function match($pathinfo) {
         return $this->friendlyUrlMatcher->match($pathinfo, $this->getRouteCollection(), $this->domainConfig);
     }
-
 }

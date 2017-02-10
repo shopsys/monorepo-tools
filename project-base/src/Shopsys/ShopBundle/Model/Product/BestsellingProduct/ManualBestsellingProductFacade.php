@@ -81,5 +81,4 @@ class ManualBestsellingProductFacade
     public function getCountsIndexedByCategoryId($domainId) {
         return $this->manualBestsellingProductRepository->getCountsIndexedByCategoryId($domainId);
     }
-
 }

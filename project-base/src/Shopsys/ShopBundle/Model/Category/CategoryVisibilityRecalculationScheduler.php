@@ -40,5 +40,4 @@ class CategoryVisibilityRecalculationScheduler
     public function isRecalculationScheduled() {
         return $this->recalculate;
     }
-
 }

@@ -103,5 +103,4 @@ class LogErrorReportingFacade
     private function stripFirstLine($string) {
         return substr($string, strpos($string, "\n") + 1);
     }
-
 }

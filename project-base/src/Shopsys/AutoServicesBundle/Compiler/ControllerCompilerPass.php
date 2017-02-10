@@ -79,5 +79,4 @@ class ControllerCompilerPass implements CompilerPassInterface
 
         return array_key_exists(ContainerAwareInterface::class, $interfaces);
     }
-
 }

@@ -75,5 +75,4 @@ class TopCategoriesFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

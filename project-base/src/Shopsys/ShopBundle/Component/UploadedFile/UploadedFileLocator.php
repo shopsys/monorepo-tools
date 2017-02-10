@@ -83,5 +83,4 @@ class UploadedFileLocator
     public function getAbsoluteFilePath($entityName) {
         return $this->uploadedFileDir . $this->getRelativeFilePath($entityName);
     }
-
 }

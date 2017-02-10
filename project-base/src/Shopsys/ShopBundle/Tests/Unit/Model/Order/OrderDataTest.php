@@ -23,5 +23,4 @@ class OrderDataTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame([$newOrderItemData], $newItems);
     }
-
 }

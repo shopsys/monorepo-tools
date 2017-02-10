@@ -23,5 +23,4 @@ class CountryData
     public function setFromEntity(Country $country) {
         $this->name = $country->getName();
     }
-
 }

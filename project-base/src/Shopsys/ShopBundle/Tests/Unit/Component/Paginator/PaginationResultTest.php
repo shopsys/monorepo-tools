@@ -30,5 +30,4 @@ class PaginationResultTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($expectedPageCount, $paginationResult->getPageCount());
     }
-
 }

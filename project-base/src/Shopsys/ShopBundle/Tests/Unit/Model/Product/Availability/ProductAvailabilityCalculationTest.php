@@ -199,5 +199,4 @@ class ProductAvailabilityCalculationTest extends FunctionalTestCase
 
         $this->assertSame($defaultInStockAvailability, $mainVariantCalculatedAvailability);
     }
-
 }

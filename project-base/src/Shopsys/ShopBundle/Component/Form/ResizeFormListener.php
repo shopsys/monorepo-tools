@@ -309,5 +309,4 @@ class ResizeFormListener implements EventSubscriberInterface
 
         return $value;
     }
-
 }

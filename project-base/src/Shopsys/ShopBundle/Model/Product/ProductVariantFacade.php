@@ -102,5 +102,4 @@ class ProductVariantFacade
 
         return $mainVariant;
     }
-
 }

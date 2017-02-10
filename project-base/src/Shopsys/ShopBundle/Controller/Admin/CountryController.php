@@ -40,5 +40,4 @@ class CountryController extends AdminBaseController
             'gridView' => $grid->createView(),
         ]);
     }
-
 }

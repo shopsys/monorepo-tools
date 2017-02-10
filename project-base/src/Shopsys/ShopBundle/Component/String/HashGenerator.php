@@ -75,5 +75,4 @@ class HashGenerator
     private function getBitMask($numberOfOnes) {
         return (1 << $numberOfOnes) - 1;
     }
-
 }

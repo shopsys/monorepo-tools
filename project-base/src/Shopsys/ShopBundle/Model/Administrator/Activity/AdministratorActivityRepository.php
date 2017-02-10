@@ -67,5 +67,4 @@ class AdministratorActivityRepository
 
         return $lastActivitiesQueryBuilder->getQuery()->getResult();
     }
-
 }

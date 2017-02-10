@@ -144,5 +144,4 @@ class FileUploadType extends AbstractType implements DataTransformerInterface
             $event->setData($data);
         }
     }
-
 }

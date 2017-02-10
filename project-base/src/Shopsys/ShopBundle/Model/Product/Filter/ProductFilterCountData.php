@@ -24,5 +24,4 @@ class ProductFilterCountData
      * @var int[parameterId][parameterValueId]
      */
     public $countByParameterIdAndValueId;
-
 }

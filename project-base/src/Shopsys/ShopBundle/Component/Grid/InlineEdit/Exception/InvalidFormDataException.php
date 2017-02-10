@@ -27,5 +27,4 @@ class InvalidFormDataException extends Exception implements InlineEditException
     public function getFormErrors() {
         return $this->formErrors;
     }
-
 }

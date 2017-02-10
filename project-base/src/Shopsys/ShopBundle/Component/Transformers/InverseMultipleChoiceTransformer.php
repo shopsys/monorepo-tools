@@ -57,5 +57,4 @@ class InverseMultipleChoiceTransformer implements DataTransformerInterface
 
         return $outputValues;
     }
-
 }

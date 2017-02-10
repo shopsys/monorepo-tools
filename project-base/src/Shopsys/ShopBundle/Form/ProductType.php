@@ -77,5 +77,4 @@ class ProductType extends AbstractType
             'allow_variants' => true,
         ]);
     }
-
 }

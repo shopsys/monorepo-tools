@@ -22,5 +22,4 @@ class FeedCategoryDataFixture extends AbstractReferenceFixture
             $feedCategoryLoaderFacade->loadFromBackupFile();
         }
     }
-
 }

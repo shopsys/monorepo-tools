@@ -34,5 +34,4 @@ class PoDumperTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($expectedDump, $dump);
     }
-
 }

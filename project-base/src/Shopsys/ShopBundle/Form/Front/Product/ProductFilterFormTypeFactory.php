@@ -87,5 +87,4 @@ class ProductFilterFormTypeFactory
 
         return new ProductFilterFormType($parameterFilterChoices, $flagFilterChoices, $brandFilterChoices, $priceRange);
     }
-
 }

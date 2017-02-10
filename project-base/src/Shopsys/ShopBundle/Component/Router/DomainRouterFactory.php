@@ -131,5 +131,4 @@ class DomainRouterFactory
 
         return $this->friendlyUrlRouterFactory->createRouter($domainConfig, $context);
     }
-
 }

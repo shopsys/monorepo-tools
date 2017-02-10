@@ -279,5 +279,4 @@ class Payment extends AbstractTranslatableEntity implements OrderableEntityInter
     protected function createTranslation() {
         return new PaymentTranslation();
     }
-
 }

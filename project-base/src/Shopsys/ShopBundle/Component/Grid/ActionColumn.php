@@ -170,5 +170,4 @@ class ActionColumn
 
         return $this->router->generate($this->route, $parameters, Router::ABSOLUTE_URL);
     }
-
 }

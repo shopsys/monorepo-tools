@@ -20,5 +20,4 @@ class ShopsysShopExtension extends ConfigurableExtension
         $container->setParameter('shopsys.router.locale_router_filepaths', $config['router']['locale_router_filepaths']);
         $container->setParameter('shopsys.router.friendly_url_router_filepath', $config['router']['friendly_url_router_filepath']);
     }
-
 }

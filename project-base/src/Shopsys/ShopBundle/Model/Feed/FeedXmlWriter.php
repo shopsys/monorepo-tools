@@ -80,5 +80,4 @@ class FeedXmlWriter
 
         throw new \Shopsys\ShopBundle\Model\Feed\Exception\TemplateBlockNotFoundException($name, $twigTemplate->getTemplateName());
     }
-
 }

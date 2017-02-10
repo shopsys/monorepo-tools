@@ -65,5 +65,4 @@ class AdministratorGridLimit
     public function setLimit($limit) {
         $this->limit = $limit;
     }
-
 }

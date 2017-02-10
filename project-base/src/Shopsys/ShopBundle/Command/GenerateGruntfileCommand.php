@@ -43,5 +43,4 @@ class GenerateGruntfileCommand extends ContainerAwareCommand
         file_put_contents($path . '/Gruntfile.js', $gruntfileContents);
         $output->writeln('<fg=green>Gruntfile.js was successfully generated.</fg=green>');
     }
-
 }

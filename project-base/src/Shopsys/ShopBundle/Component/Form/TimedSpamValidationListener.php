@@ -61,5 +61,4 @@ class TimedSpamValidationListener implements EventSubscriberInterface
             FormEvents::PRE_SUBMIT => 'preSubmit',
         ];
     }
-
 }

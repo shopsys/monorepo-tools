@@ -63,5 +63,4 @@ class PoDumper implements DumperInterface
     private function escape($str) {
         return addcslashes($str, "\0..\37\42\134");
     }
-
 }

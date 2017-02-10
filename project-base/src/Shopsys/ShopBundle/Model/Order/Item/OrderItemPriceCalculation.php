@@ -65,5 +65,4 @@ class OrderItemPriceCalculation
 
         return $prices;
     }
-
 }

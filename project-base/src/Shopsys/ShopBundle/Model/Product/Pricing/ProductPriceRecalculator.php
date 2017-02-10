@@ -163,5 +163,4 @@ class ProductPriceRecalculator
             $this->runImmediateRecalculations();
         }
     }
-
 }

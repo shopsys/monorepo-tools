@@ -42,5 +42,4 @@ class CategoryDetail
     public function getChildren() {
         return $this->children;
     }
-
 }

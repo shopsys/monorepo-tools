@@ -49,5 +49,4 @@ class TermsAndConditionsSettingFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

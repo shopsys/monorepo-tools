@@ -70,5 +70,4 @@ class ProductDataFixture extends AbstractReferenceFixture implements DependentFi
     public function getDependencies() {
         return ProductDataFixtureReferenceInjector::getDependenciesForMultidomain();
     }
-
 }

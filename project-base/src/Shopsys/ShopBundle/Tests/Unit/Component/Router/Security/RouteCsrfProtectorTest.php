@@ -131,5 +131,4 @@ class RouteCsrfProtectorTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Symfony\Component\HttpKernel\Exception\BadRequestHttpException::class);
         $routeCsrfProtector->onKernelController($eventMock);
     }
-
 }

@@ -62,5 +62,4 @@ class RecalculationsCommand extends ContainerAwareCommand
         $output->writeln('<fg=green>Products selling denial.</fg=green>');
         $productSellingDeniedRecalculator->calculateSellingDeniedForAll();
     }
-
 }

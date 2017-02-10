@@ -107,5 +107,4 @@ class ParameterFilterRepository
 
         return $valuesExpr;
     }
-
 }

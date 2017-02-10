@@ -27,5 +27,4 @@ class OrderPaymentData extends OrderItemData
             );
         }
     }
-
 }

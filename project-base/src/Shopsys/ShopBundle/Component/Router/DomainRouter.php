@@ -57,5 +57,4 @@ class DomainRouter extends ChainRouter
 
         parent::setContext($context);
     }
-
 }

@@ -15,5 +15,4 @@ class LayoutPage extends AbstractPage
         $this->tester->clickByText('Přihlásit se');
         $this->tester->wait(1); // wait for Shopsys.window to show
     }
-
 }

@@ -61,5 +61,4 @@ class ZboziItemRepository implements FeedItemRepositoryInterface
 
         return $this->zboziItemFactory->createItems($products, $domainConfig);
     }
-
 }

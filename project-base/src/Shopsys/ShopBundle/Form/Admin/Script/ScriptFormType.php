@@ -48,5 +48,4 @@ class ScriptFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

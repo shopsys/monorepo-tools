@@ -60,5 +60,4 @@ class IndexedChoiceList extends ChoiceList
 
         return $this->customValues[$key];
     }
-
 }

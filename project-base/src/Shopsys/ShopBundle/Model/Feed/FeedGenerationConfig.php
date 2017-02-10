@@ -59,5 +59,4 @@ class FeedGenerationConfig
     public function isSameFeedAndDomain(FeedGenerationConfig $feedGenerationConfig) {
         return $this->feedName === $feedGenerationConfig->feedName && $this->domainId === $feedGenerationConfig->domainId;
     }
-
 }

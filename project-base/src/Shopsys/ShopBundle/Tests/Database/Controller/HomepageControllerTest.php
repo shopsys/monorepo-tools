@@ -24,5 +24,4 @@ class HomepageControllerTest extends FunctionalTestCase
 
         $this->assertRegExp('/<\/body>/ui', $content);
     }
-
 }

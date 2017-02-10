@@ -63,5 +63,4 @@ class ParameterController extends AdminBaseController
 
         return $this->redirectToRoute('admin_parameter_list');
     }
-
 }

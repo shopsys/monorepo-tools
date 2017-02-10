@@ -50,5 +50,4 @@ class CurrentCategoryResolver
 
         return null;
     }
-
 }

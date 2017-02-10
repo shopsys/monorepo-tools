@@ -15,5 +15,4 @@ class InvalidCronModuleException extends Exception implements CronException
     public function __construct($moduleId, Exception $previous = null) {
         parent::__construct('Module "' . $moduleId . '" does not have valid interface.', 0, $previous);
     }
-
 }

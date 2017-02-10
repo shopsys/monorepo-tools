@@ -50,5 +50,4 @@ class JsTranslatorCallParserFactory
             $transMethodSpecifications
         );
     }
-
 }

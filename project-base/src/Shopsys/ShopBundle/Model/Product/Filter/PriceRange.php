@@ -37,5 +37,4 @@ class PriceRange
     public function getMaximalPrice() {
         return $this->maximalPrice;
     }
-
 }

@@ -25,5 +25,4 @@ class FeedGenerationConfigTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($expectedResult, $feedGenerationConfig->isSameFeedAndDomain($feedGenerationConfigToComapareWith));
     }
-
 }

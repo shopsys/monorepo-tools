@@ -77,5 +77,4 @@ class TsqueryFactory
             PREG_SPLIT_NO_EMPTY
         );
     }
-
 }

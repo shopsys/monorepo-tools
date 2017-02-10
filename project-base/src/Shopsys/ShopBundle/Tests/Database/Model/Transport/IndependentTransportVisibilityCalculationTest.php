@@ -96,5 +96,4 @@ class IndependentTransportVisibilityCalculationTest extends DatabaseTestCase
 
         $this->assertFalse($independentTransportVisibilityCalculation->isIndependentlyVisible($transport, $domainId));
     }
-
 }

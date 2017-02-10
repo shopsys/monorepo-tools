@@ -26,5 +26,4 @@ class FlagService
 
         return $flag;
     }
-
 }

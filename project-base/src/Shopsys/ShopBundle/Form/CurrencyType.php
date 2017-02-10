@@ -63,5 +63,4 @@ class CurrencyType extends AbstractType
     public function getName() {
         return 'currency';
     }
-
 }

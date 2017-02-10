@@ -34,5 +34,4 @@ class DummyMailType implements MailTypeInterface
     public function getRequiredSubjectVariables() {
         return [];
     }
-
 }

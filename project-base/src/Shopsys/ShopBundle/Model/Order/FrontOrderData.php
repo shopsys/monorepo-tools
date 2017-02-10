@@ -14,5 +14,4 @@ class FrontOrderData extends OrderData
      * @var bool
      */
     public $newsletterSubscription;
-
 }

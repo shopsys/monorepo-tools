@@ -49,5 +49,4 @@ class TopProductDataFixture extends AbstractReferenceFixture implements Dependen
             ProductDataFixture::class,
         ];
     }
-
 }

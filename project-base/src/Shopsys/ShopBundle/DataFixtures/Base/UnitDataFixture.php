@@ -35,5 +35,4 @@ class UnitDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $unit);
         }
     }
-
 }

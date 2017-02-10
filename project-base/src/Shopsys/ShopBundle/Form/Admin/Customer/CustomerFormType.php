@@ -76,5 +76,4 @@ class CustomerFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

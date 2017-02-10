@@ -348,5 +348,4 @@ class Administrator implements UserInterface, Serializable, UniqueLoginInterface
     public function setMultidomainLogin($multidomainLogin) {
         $this->multidomainLogin = $multidomainLogin;
     }
-
 }

@@ -179,5 +179,4 @@ class UserDataFixtureLoader
         $message = 'Country with name "' . $countryName . '" was not found.';
         throw new \Shopsys\ShopBundle\Model\Country\Exception\CountryNotFoundException($message);
     }
-
 }

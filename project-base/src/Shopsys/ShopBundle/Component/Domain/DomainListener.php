@@ -40,5 +40,4 @@ class DomainListener implements EventSubscriberInterface
             KernelEvents::REQUEST => [['onKernelRequest', 100]],
         ];
     }
-
 }

@@ -143,5 +143,4 @@ class RoundingTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(round($outputPrice, 6), round($roundedPrice, 6));
     }
-
 }

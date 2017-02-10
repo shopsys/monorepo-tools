@@ -54,5 +54,4 @@ class TopCategoriesFormTypeFactory
             $this->categoriesIdsToCategoriesTransformer
         );
     }
-
 }

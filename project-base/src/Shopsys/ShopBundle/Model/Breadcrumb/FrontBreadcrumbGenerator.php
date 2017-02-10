@@ -87,5 +87,4 @@ class FrontBreadcrumbGenerator implements BreadcrumbGeneratorInterface
             new BreadcrumbItem($breadcrumbName),
         ];
     }
-
 }

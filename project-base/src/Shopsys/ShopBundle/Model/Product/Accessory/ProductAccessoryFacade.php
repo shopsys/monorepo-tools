@@ -27,5 +27,4 @@ class ProductAccessoryFacade
     public function getTopOfferedAccessories(Product $product, $domainId, PricingGroup $pricingGroup, $limit) {
         return $this->productAccessoryRepository->getTopOfferedAccessories($product, $domainId, $pricingGroup, $limit);
     }
-
 }

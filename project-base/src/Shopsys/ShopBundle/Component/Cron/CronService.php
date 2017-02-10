@@ -19,5 +19,4 @@ class CronService
 
         return $cronModulesConfigs;
     }
-
 }

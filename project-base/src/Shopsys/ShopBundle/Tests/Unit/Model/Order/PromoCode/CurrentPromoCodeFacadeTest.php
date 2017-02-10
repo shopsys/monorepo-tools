@@ -74,5 +74,4 @@ class CurrentPromoCodeFacadeTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Model\Order\PromoCode\Exception\InvalidPromoCodeException::class);
         $currentPromoCodeFacade->setEnteredPromoCode($enteredCode);
     }
-
 }

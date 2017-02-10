@@ -114,5 +114,4 @@ class PerformanceResultsCsvExporterTest extends PHPUnit_Framework_TestCase
     private function createPerformanceResultsCsvExporter() {
         return new PerformanceResultsCsvExporter(new JmeterCsvReporter());
     }
-
 }

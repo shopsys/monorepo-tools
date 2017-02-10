@@ -48,5 +48,4 @@ class FriendlyUrlMatcher
 
         return $matchedParameters;
     }
-
 }

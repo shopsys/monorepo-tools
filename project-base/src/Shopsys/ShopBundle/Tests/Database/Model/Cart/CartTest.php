@@ -50,5 +50,4 @@ class CartTest extends DatabaseTestCase
         $cart->removeItemById($cartItem1->getId());
         $this->assertSame(1, $cart->getItemsCount());
     }
-
 }

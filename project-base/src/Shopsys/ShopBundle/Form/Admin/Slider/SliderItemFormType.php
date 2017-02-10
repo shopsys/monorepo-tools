@@ -89,5 +89,4 @@ class SliderItemFormType extends AbstractType
             'validation_groups' => $validationGroups,
         ]);
     }
-
 }

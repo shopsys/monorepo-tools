@@ -91,5 +91,4 @@ class AllPagesResponseTest extends DatabaseTestCase
             )
         );
     }
-
 }

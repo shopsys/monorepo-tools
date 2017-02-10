@@ -54,5 +54,4 @@ class OrderDataMapper
 
         return $orderData;
     }
-
 }

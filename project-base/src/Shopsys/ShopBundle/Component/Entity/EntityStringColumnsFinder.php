@@ -51,5 +51,4 @@ class EntityStringColumnsFinder
             'string',
         ];
     }
-
 }

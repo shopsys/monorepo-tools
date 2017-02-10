@@ -39,5 +39,4 @@ class VatService
         }
         return $defaultVat;
     }
-
 }

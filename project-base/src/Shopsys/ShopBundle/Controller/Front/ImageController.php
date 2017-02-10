@@ -39,5 +39,4 @@ class ImageController extends FrontBaseController
             throw $this->createNotFoundException($message, $e);
         }
     }
-
 }

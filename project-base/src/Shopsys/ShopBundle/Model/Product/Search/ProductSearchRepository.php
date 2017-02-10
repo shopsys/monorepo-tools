@@ -94,5 +94,4 @@ class ProductSearchRepository
             $this->tsqueryFactory->getTsqueryWithOrConditionsAndPrefixMatchForLastWord($searchText)
         );
     }
-
 }

@@ -27,5 +27,4 @@ class ContainsValidator extends ConstraintValidator
             );
         }
     }
-
 }

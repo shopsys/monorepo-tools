@@ -77,5 +77,4 @@ class DomainUrlService
 
         return 'UPDATE ' . $quotedTableName . ' SET ' . implode(',', $sqlParts);
     }
-
 }

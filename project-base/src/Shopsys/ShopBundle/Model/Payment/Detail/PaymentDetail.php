@@ -39,5 +39,4 @@ class PaymentDetail
     public function getBasePrices() {
         return $this->basePrices;
     }
-
 }

@@ -103,5 +103,4 @@ class PersistentReferenceFacadeTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Component\DataFixture\Exception\EntityNotFoundException::class);
         $persistentReferenceFacade->getReference('referenceName');
     }
-
 }

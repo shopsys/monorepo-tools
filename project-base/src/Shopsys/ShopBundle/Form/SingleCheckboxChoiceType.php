@@ -43,5 +43,4 @@ class SingleCheckboxChoiceType extends AbstractType
             $builder->add($i, FormType::CHECKBOX, $options);
         }
     }
-
 }

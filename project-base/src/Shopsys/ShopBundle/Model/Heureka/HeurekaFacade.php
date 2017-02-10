@@ -103,5 +103,4 @@ class HeurekaFacade
         $message = 'Sending order (ID = "' . $order->getId() . '") to Heureka failed - ' . get_class($ex) . ': ' . $ex->getMessage();
         $this->logger->error($message, ['exceptionFullInfo' => (string)$ex]);
     }
-
 }

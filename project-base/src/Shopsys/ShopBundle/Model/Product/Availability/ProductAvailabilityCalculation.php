@@ -111,5 +111,4 @@ class ProductAvailabilityCalculation
 
         return $this->productRepository->getAtLeastSomewhereSellableVariantsByMainVariant($mainVariant);
     }
-
 }

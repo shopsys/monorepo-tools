@@ -134,5 +134,4 @@ class ImageConfigTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(ImageEntityConfigNotFoundException::class);
         $imageConfig->getImageEntityConfig($this);
     }
-
 }

@@ -103,5 +103,4 @@ class FreeTransportAndPaymentPriceLimitsFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

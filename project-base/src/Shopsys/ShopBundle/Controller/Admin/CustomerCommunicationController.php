@@ -58,5 +58,4 @@ class CustomerCommunicationController extends AdminBaseController
             'VARIABLE_NUMBER' => OrderFacade::VARIABLE_NUMBER,
         ]);
     }
-
 }

@@ -49,5 +49,4 @@ class IndexedObjectChoiceList extends ObjectChoiceList
     protected function createIndex($choice) {
         return $this->propertyAccessor->getValue($choice, $this->indexPath);
     }
-
 }

@@ -134,5 +134,4 @@ class BasePriceCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertSame(round($resultPriceWithoutVat, 6), round($resultPrice->getPriceWithoutVat(), 6));
         $this->assertSame(round($resultVatAmount, 6), round($resultPrice->getVatAmount(), 6));
     }
-
 }

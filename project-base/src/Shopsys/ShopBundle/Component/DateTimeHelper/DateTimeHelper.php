@@ -31,5 +31,4 @@ class DateTimeHelper
 
         return $dateTime;
     }
-
 }

@@ -66,5 +66,4 @@ class ScriptController extends FrontBaseController
             'order' => $order,
         ]);
     }
-
 }

@@ -160,5 +160,4 @@ class Domain
     public function isMultidomain() {
         return count($this->getAll()) > 1;
     }
-
 }

@@ -77,5 +77,4 @@ class FeedCronModule implements IteratedCronModuleInterface
             $this->setting->get(Setting::FEED_ITEM_ID_TO_CONTINUE)
         );
     }
-
 }

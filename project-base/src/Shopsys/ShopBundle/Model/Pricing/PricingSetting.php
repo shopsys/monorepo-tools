@@ -135,5 +135,4 @@ class PricingSetting
             self::ROUNDING_TYPE_INTEGER,
         ];
     }
-
 }

@@ -60,5 +60,4 @@ class AdminNavigationTest extends FunctionalTestCase
 
         return $menuFactory->createMenuWithVisibleItems();
     }
-
 }

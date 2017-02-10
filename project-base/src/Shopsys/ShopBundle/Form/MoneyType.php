@@ -22,5 +22,4 @@ class MoneyType extends AbstractTypeExtension
     public function getExtendedType() {
         return 'money';
     }
-
 }

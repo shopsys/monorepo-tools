@@ -328,5 +328,4 @@ class OrderDataFixture
 
         return $this->persistentReferenceFacade->getReference($randomPaymentReferenceName);
     }
-
 }

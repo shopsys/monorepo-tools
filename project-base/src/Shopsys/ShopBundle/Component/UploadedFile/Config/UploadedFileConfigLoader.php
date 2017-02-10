@@ -94,5 +94,4 @@ class UploadedFileConfigLoader
 
         return new UploadedFileEntityConfig($entityName, $entityClass);
     }
-
 }

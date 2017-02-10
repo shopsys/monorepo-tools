@@ -63,5 +63,4 @@ class CurrencySettingsFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

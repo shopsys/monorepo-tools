@@ -28,5 +28,4 @@ class TranslationController extends AdminBaseController
             'gridView' => $grid->createView(),
         ]);
     }
-
 }

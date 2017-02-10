@@ -120,5 +120,4 @@ class AvailabilityRepository
             ->where('p.calculatedAvailability = :oldAvailability')->setParameter('oldAvailability', $oldAvailability)
             ->getQuery()->execute();
     }
-
 }

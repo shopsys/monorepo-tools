@@ -391,5 +391,4 @@ class ProductController extends AdminBaseController
             'productDetail' => $this->productDetailFactory->getDetailForProduct($product),
         ]);
     }
-
 }

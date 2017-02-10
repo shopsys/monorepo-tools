@@ -34,5 +34,4 @@ class VatServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame('editVatName', $vat->getName());
         $this->assertEquals('21.00', $vat->getPercent());
     }
-
 }

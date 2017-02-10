@@ -15,5 +15,4 @@ class ResponseListener
         $event->getResponse()->headers->set('X-XSS-Protection', '1; mode=block');
         $event->getResponse()->headers->set('X-Content-Type-Options', 'nosniff');
     }
-
 }

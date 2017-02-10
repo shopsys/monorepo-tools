@@ -77,5 +77,4 @@ class MailTemplateData
         $this->sendMail = $mailTemplate->isSendMail();
         $this->attachment = [];
     }
-
 }

@@ -29,5 +29,4 @@ interface GridInlineEditInterface
      * @return bool
      */
     public function canAddNewRow();
-
 }

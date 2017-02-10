@@ -23,5 +23,4 @@ class AdminAccessRightsTest extends FunctionalTestCase
         $client->request('GET', $route);
         $this->assertSame(404, $client->getResponse()->getStatusCode());
     }
-
 }

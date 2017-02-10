@@ -63,5 +63,4 @@ class HeurekaShopCertificationFactory
 
         return $heurekaShopCertification;
     }
-
 }

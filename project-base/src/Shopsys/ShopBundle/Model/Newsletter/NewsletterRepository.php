@@ -44,5 +44,4 @@ class NewsletterRepository
 
         return $query->iterate(null, AbstractQuery::HYDRATE_SCALAR);
     }
-
 }

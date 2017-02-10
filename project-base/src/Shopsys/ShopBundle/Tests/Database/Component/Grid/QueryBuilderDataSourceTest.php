@@ -112,5 +112,4 @@ class QueryBuilderDataSourceTest extends DatabaseTestCase
             }
         }
     }
-
 }

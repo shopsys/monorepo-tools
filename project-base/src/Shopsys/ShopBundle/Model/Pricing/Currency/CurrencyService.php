@@ -58,5 +58,4 @@ class CurrencyService
 
         return array_unique($notAllowedToDeleteCurrencyIds);
     }
-
 }

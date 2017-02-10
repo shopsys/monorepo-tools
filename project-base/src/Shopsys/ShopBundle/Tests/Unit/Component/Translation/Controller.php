@@ -28,5 +28,4 @@ class Controller extends BaseController
         /** @Ignore */
         $translator->trans('ignored');
     }
-
 }

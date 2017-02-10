@@ -50,5 +50,4 @@ class CountryDataFixture extends AbstractReferenceFixture
 
         return $countryFacade->create($countryData, $domainId);
     }
-
 }

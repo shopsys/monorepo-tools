@@ -117,5 +117,4 @@ class SitemapRepository
 
         return $sitemapItems;
     }
-
 }

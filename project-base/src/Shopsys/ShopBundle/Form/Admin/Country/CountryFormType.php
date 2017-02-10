@@ -43,5 +43,4 @@ class CountryFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

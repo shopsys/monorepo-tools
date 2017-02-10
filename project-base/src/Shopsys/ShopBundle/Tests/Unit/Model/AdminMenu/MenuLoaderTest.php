@@ -94,5 +94,4 @@ class MenuLoaderTest extends FunctionalTestCase
 
         return new MenuLoader($this->getContainer()->get('filesystem'), $translatorMock);
     }
-
 }

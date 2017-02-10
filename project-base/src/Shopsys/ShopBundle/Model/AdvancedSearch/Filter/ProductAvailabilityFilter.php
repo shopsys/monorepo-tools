@@ -82,5 +82,4 @@ class ProductAvailabilityFilter implements AdvancedSearchFilterInterface
             $queryBuilder->setParameter('isNotAvailabilities', $isNotAvailabilities);
         }
     }
-
 }

@@ -51,5 +51,4 @@ class OrderTotalPrice
     public function getProductPriceWithVat() {
         return $this->productPriceWithVat;
     }
-
 }

@@ -31,5 +31,4 @@ class CustomerListAdminFacade
             $quickSearchData
         );
     }
-
 }

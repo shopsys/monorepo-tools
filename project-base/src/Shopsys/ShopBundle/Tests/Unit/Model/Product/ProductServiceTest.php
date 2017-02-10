@@ -320,5 +320,4 @@ class ProductServiceTest extends PHPUnit_Framework_TestCase
         $this->assertSame($productMock2, $converselyOrderedProducts[0]);
         $this->assertSame($productMock1, $converselyOrderedProducts[1]);
     }
-
 }

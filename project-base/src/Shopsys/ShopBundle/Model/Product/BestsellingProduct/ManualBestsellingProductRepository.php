@@ -85,5 +85,4 @@ class ManualBestsellingProductRepository
 
         return $countsIndexedByCategoryId;
     }
-
 }

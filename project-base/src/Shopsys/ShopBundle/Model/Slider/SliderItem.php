@@ -125,5 +125,4 @@ class SliderItem implements OrderableEntityInterface
     public function isHidden() {
         return $this->hidden;
     }
-
 }

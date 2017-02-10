@@ -121,5 +121,4 @@ class ErrorReportingFromLastHourCronModule implements CronModuleInterface
         $domainId = 1;
         return $this->setting->getForDomain(Setting::BASE_URL, $domainId);
     }
-
 }

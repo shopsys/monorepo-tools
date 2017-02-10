@@ -27,5 +27,4 @@ class InvalidOrderStatusTypeException extends Exception implements OrderStatusEx
     public function getOrderStatusType() {
         return $this->orderStatusType;
     }
-
 }

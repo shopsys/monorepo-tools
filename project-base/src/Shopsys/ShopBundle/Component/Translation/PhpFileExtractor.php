@@ -253,5 +253,4 @@ class PhpFileExtractor implements FileVisitorInterface, PHPParser_NodeVisitor
     public function visitTwigFile(SplFileInfo $file, MessageCatalogue $catalogue, Twig_Node $ast) {
         return null;
     }
-
 }

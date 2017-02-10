@@ -151,5 +151,4 @@ class ProductEditData
         $this->zboziCpcValues = $zboziCpcValues;
         $this->zboziCpcSearchValues = $zboziCpcSearchValues;
     }
-
 }

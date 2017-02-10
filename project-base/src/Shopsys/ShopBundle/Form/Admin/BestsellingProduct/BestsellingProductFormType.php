@@ -51,5 +51,4 @@ class BestsellingProductFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

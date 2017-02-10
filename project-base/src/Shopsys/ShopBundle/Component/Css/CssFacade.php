@@ -32,5 +32,4 @@ class CssFacade
 
         return file_get_contents($this->cssVersionFilepath);
     }
-
 }

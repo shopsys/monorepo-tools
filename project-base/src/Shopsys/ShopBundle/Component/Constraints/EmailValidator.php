@@ -50,5 +50,4 @@ class EmailValidator extends ConstraintValidator
             \\z)ix", $value);
         // @codingStandardsIgnoreEnd
     }
-
 }

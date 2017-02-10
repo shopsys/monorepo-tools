@@ -186,5 +186,4 @@ class CartFacadeTest extends DatabaseTestCase
 
         return $customerIdentifierFactoryMock;
     }
-
 }

@@ -48,5 +48,4 @@ class HeurekaShopCertificationFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

@@ -39,5 +39,4 @@ class QuantifiedProduct
     public function getQuantity() {
         return $this->quantity;
     }
-
 }

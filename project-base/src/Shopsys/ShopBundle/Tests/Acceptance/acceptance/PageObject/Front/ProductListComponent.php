@@ -49,5 +49,4 @@ class ProductListComponent extends AbstractPage
         $message = 'Unable to find product "' . $productName . '" in product list component.';
         throw new \Facebook\WebDriver\Exception\NoSuchElementException($message);
     }
-
 }

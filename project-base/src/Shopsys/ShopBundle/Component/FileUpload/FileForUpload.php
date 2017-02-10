@@ -79,5 +79,4 @@ class FileForUpload
     public function getNameConventionType() {
         return $this->nameConventionType;
     }
-
 }

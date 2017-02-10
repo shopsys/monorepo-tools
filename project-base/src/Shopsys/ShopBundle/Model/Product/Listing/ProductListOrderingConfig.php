@@ -51,5 +51,4 @@ class ProductListOrderingConfig
     public function getDefaultOrderingMode() {
         return $this->defaultOrderingMode;
     }
-
 }

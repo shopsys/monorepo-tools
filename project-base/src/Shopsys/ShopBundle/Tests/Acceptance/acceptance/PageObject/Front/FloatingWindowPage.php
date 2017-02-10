@@ -11,5 +11,4 @@ class FloatingWindowPage extends AbstractPage
         $this->tester->clickByCss('.js-window-button-close');
         $this->tester->wait(1); // animation of closing sometime hides page content
     }
-
 }

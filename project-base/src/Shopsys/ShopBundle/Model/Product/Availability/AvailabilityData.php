@@ -36,5 +36,4 @@ class AvailabilityData
         }
         $this->name = $names;
     }
-
 }

@@ -65,5 +65,4 @@ class JsStringParser
 
         return '"' . $doubleQuotesEscaped . '"';
     }
-
 }

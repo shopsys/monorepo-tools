@@ -75,5 +75,4 @@ class CronModule
     public function suspend() {
         $this->suspended = true;
     }
-
 }

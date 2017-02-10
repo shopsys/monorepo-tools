@@ -45,5 +45,4 @@ class LocalizationListenerTest extends DatabaseTestCase
             $crawler->filter('html:contains("Catalogue number")')->count()
         );
     }
-
 }

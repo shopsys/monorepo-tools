@@ -43,5 +43,4 @@ class DirectoryStructureCreator
 
         $this->filesysytem->mkdir($directories);
     }
-
 }

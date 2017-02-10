@@ -178,5 +178,4 @@ class CustomerController extends FrontBaseController
 
         return $this->redirectToRoute('front_homepage');
     }
-
 }

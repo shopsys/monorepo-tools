@@ -42,5 +42,4 @@ class AdvertFormTypeFactory
             $this->advertPositionList->getTranslationsIndexedByValue()
         );
     }
-
 }

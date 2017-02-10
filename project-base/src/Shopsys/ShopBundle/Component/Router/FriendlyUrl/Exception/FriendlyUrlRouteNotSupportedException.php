@@ -14,5 +14,4 @@ class FriendlyUrlRouteNotSupportedException extends Exception implements Friendl
     public function __construct($routeName) {
         parent::__construct('Generating friendly URL for route "' . $routeName . '" is not yet supported.');
     }
-
 }

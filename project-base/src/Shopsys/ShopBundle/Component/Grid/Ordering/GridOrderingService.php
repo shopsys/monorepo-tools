@@ -18,5 +18,4 @@ class GridOrderingService
             throw new \Shopsys\ShopBundle\Component\Grid\Ordering\Exception\EntityIsNotOrderableException();
         }
     }
-
 }

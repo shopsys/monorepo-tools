@@ -97,5 +97,4 @@ class TransportAndPaymentFormType extends AbstractType
             $context->addViolation('Please choose a valid combination of transport and payment');
         }
     }
-
 }

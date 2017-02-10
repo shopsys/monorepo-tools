@@ -73,5 +73,4 @@ class TopProductFacade
         }
         $this->em->flush($topProducts);
     }
-
 }

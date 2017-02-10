@@ -31,5 +31,4 @@ class PaymentEditFormTypeFactory
 
         return new PaymentEditFormType($this->paymentFormTypeFactory, $currencies);
     }
-
 }

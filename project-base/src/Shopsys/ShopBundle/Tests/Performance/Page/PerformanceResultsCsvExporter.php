@@ -42,5 +42,4 @@ class PerformanceResultsCsvExporter
 
         fclose($handle);
     }
-
 }

@@ -87,5 +87,4 @@ class FormTimeProvider
     protected function getSessionKey($name) {
         return 'timedSpam-' . $name;
     }
-
 }

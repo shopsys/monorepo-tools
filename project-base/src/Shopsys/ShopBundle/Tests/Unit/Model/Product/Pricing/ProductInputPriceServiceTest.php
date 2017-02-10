@@ -164,5 +164,4 @@ class ProductInputPriceServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('1000', (string)$inputPrice);
     }
-
 }

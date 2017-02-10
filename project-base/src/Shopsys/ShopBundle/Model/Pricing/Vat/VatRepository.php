@@ -195,5 +195,4 @@ class VatRepository
             ->where('t.vat = :oldVat')->setParameter('oldVat', $oldVat)
             ->getQuery()->execute();
     }
-
 }

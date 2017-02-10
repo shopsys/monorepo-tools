@@ -193,5 +193,4 @@ abstract class OrderItem
         $this->unitName = $orderItemData->unitName;
         $this->catnum = $orderItemData->catnum;
     }
-
 }

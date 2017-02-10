@@ -25,5 +25,4 @@ class ExceptionListener
     public function getLastException() {
         return $this->lastException;
     }
-
 }

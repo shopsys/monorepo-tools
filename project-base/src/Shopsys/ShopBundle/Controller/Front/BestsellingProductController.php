@@ -47,5 +47,4 @@ class BestsellingProductController extends FrontBaseController
             'maxShownProducts' => BestsellingProductFacade::MAX_SHOW_RESULTS,
         ]);
     }
-
 }

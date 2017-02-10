@@ -218,5 +218,4 @@ class OrderPreviewCalculation
 
         return $finalPrice;
     }
-
 }

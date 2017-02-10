@@ -106,5 +106,4 @@ class PriceCalculationTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame(round($expectedVatAmount, 6), round($actualVatAmount, 6));
     }
-
 }

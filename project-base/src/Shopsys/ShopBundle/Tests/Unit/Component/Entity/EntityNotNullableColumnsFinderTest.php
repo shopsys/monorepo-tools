@@ -70,5 +70,4 @@ class EntityNotNullableColumnsFinderTest extends PHPUnit_Framework_TestCase
         $entityNotNullableColumnsFinder = new EntityNotNullableColumnsFinder();
         $entityNotNullableColumnsFinder->getAllNotNullableColumnNamesIndexedByTableName([$classMetadataMock]);
     }
-
 }

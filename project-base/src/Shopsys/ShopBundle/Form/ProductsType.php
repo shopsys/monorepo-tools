@@ -73,5 +73,4 @@ class ProductsType extends AbstractType
     public function getName() {
         return 'products';
     }
-
 }

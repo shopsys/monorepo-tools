@@ -37,5 +37,4 @@ class FileExtensionMaxLengthValidator extends ConstraintValidator
             );
         }
     }
-
 }

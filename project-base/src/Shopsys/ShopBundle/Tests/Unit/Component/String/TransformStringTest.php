@@ -91,5 +91,4 @@ class TransformStringTest extends PHPUnit_Framework_TestCase
     public function testStringToFriendlyUrlSlug($actual, $expected) {
         $this->assertSame($expected, TransformString::stringToFriendlyUrlSlug($actual));
     }
-
 }

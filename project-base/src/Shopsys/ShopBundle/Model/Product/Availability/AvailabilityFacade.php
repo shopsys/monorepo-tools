@@ -159,5 +159,4 @@ class AvailabilityFacade
     public function isAvailabilityDefault(Availability $availability) {
         return $this->getDefaultInStockAvailability() === $availability;
     }
-
 }

@@ -158,5 +158,4 @@ class ProductInputPriceFacade
 
         return true;
     }
-
 }

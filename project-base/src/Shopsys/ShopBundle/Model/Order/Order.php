@@ -860,5 +860,4 @@ class Order
     public function getCreatedAsAdministratorName() {
         return $this->createdAsAdministratorName;
     }
-
 }

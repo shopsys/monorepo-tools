@@ -16,5 +16,4 @@ class ProductIsAlreadyMainVariantException extends Exception implements VariantE
         $message = 'Product with ID ' . $productId . ' is already main variant.';
         parent::__construct($message, 0, $previous);
     }
-
 }

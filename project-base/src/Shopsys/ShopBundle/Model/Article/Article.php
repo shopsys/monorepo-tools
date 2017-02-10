@@ -177,5 +177,4 @@ class Article implements OrderableEntityInterface
     public function isHidden() {
         return $this->hidden;
     }
-
 }

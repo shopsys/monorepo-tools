@@ -36,5 +36,4 @@ class ExceptionController extends BaseController
     public function setShowErrorPagePrototype() {
         $this->showErrorPagePrototype = true;
     }
-
 }

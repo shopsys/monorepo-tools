@@ -55,5 +55,4 @@ class OrderFlowFacade
         $this->orderFlow->setFormTypesData($transports, $payments, $countries);
         $this->orderFlow->reset();
     }
-
 }

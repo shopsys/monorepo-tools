@@ -91,5 +91,4 @@ class UploadedFileLocatorTest extends PHPUnit_Framework_TestCase
             $uploadedFileLocator->getUploadedFileUrl($domainConfig, $uploadedFileMock)
         );
     }
-
 }

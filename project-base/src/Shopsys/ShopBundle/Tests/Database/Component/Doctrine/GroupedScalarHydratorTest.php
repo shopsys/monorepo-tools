@@ -33,5 +33,4 @@ class GroupedScalarHydratorTest extends DatabaseTestCase
         $this->assertArrayHasKey('id', $row['o']);
         $this->assertArrayHasKey('id', $row['oi']);
     }
-
 }

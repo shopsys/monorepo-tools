@@ -55,5 +55,4 @@ class AvailabilityFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

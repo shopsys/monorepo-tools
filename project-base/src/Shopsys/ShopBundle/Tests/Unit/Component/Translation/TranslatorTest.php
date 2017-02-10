@@ -453,5 +453,4 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('translated message parameter value', $translatedMessage);
     }
-
 }

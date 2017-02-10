@@ -160,5 +160,4 @@ class TransportVisibilityCalculationTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1, $filteredTransports);
         $this->assertContains($transportVisibleMock, $filteredTransports);
     }
-
 }

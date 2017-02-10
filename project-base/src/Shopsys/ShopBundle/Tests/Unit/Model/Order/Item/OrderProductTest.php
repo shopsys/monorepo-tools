@@ -67,5 +67,4 @@ class OrderProductTest extends PHPUnit_Framework_TestCase
 
         new OrderProduct($orderMock, 'productName', $productPrice, 0, 1, null, 'catnum', $mainVariant);
     }
-
 }

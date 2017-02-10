@@ -26,5 +26,4 @@ class CustomDateTimeFormatterFactory
 
         return $dateTimeFormatter;
     }
-
 }

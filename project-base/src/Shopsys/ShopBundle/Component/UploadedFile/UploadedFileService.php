@@ -37,5 +37,4 @@ class UploadedFileService
             pathinfo($temporaryFilepath, PATHINFO_BASENAME)
         );
     }
-
 }

@@ -43,5 +43,4 @@ class ResetPasswordFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

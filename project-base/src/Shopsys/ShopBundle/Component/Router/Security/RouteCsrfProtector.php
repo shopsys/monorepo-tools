@@ -98,5 +98,4 @@ class RouteCsrfProtector implements EventSubscriberInterface
 
         return $annotation !== null;
     }
-
 }

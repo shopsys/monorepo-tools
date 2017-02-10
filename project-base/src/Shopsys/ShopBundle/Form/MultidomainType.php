@@ -78,5 +78,4 @@ class MultidomainType extends AbstractType
             $child->vars['domainConfig'] = $this->domain->getDomainConfigById($domainId);
         }
     }
-
 }

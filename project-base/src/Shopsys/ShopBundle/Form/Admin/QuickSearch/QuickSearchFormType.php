@@ -37,5 +37,4 @@ class QuickSearchFormType extends AbstractType
             'data_class' => QuickSearchFormData::class,
         ]);
     }
-
 }

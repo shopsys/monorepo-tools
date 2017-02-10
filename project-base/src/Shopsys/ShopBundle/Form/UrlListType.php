@@ -221,5 +221,4 @@ class UrlListType extends AbstractType
 
         return $domainUrlsById;
     }
-
 }

@@ -85,5 +85,4 @@ class ProductBreadcrumbGenerator implements BreadcrumbGeneratorInterface
 
         return $breadcrumbItems;
     }
-
 }

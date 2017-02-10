@@ -54,5 +54,4 @@ class TransactionalMasterRequestService
             $this->inTransaction = false;
         }
     }
-
 }

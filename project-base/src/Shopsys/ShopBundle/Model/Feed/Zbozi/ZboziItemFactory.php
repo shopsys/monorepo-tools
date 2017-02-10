@@ -152,5 +152,4 @@ class ZboziItemFactory implements FeedItemFactoryInterface
             null
         );
     }
-
 }

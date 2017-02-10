@@ -102,5 +102,4 @@ class UnitRepository
             ->where('p.unit = :oldUnit')->setParameter('oldUnit', $oldUnit)
             ->getQuery()->execute();
     }
-
 }

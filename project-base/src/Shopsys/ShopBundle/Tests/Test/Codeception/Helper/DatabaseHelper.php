@@ -51,5 +51,4 @@ class DatabaseHelper extends Module
 
         return 'pgsql:' . http_build_query($dsnParams, '', ';');
     }
-
 }

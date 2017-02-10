@@ -47,5 +47,4 @@ class MailSettingFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

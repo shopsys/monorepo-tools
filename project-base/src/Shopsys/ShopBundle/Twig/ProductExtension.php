@@ -95,5 +95,4 @@ class ProductExtension extends \Twig_Extension
     public function findProductMainCategory(Product $product, $domainId) {
         return $this->categoryFacade->findProductMainCategoryByDomainId($product, $domainId);
     }
-
 }

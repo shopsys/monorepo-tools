@@ -75,5 +75,4 @@ class QueryBuilderWithRowManipulatorDataSourceTest extends DatabaseTestCase
             $this->assertSame('newValue' . $row['p']['id'], $row['newField']);
         }
     }
-
 }

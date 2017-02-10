@@ -69,5 +69,4 @@ class ProductCalculatedPrice
     public function setPriceWithVat($priceWithVat) {
         $this->priceWithVat = $priceWithVat;
     }
-
 }

@@ -25,5 +25,4 @@ class AllMailTemplatesFormTypeFactory
             $this->resetPasswordMail
         );
     }
-
 }

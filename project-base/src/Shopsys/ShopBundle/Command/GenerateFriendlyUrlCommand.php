@@ -26,5 +26,4 @@ class GenerateFriendlyUrlCommand extends ContainerAwareCommand
 
         $output->writeln('<fg=green>Generating complete.</fg=green>');
     }
-
 }

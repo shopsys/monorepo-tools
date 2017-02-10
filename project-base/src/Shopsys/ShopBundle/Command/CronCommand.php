@@ -96,5 +96,4 @@ class CronCommand extends ContainerAwareCommand
 
         return DateTimeImmutable::createFromMutable($time);
     }
-
 }

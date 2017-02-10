@@ -24,5 +24,4 @@ class BrandController extends FrontBaseController
             'brands' => $this->brandFacade->getAll(),
         ]);
     }
-
 }

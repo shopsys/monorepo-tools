@@ -74,5 +74,4 @@ class MenuConfiguration implements ConfigurationInterface
 
         return $definition->getNode(true);
     }
-
 }

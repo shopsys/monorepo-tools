@@ -61,5 +61,4 @@ class AdministratorRepositoryTest extends DatabaseTestCase
 
         $administratorRepository->getByValidMultidomainLoginToken($validMultidomainLoginToken);
     }
-
 }

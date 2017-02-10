@@ -189,5 +189,4 @@ class ProductEditDataFactory
 
         return $nullForAllDomains;
     }
-
 }

@@ -126,5 +126,4 @@ class QuantifiedProductPriceCalculation
 
         return $quantifiedItemsPrices;
     }
-
 }

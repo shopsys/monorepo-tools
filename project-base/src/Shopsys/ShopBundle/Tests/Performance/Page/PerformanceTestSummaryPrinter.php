@@ -119,5 +119,4 @@ class PerformanceTestSummaryPrinter
                 return 'red';
         }
     }
-
 }

@@ -117,5 +117,4 @@ class HeurekaItemFactory implements FeedItemFactoryInterface
             return null;
         }
     }
-
 }

@@ -28,5 +28,4 @@ class AdvancedSearchProductFilterTranslationTest extends FunctionalTestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException::class);
         $advancedSearchTranslator->translateFilterName('nonexistingFilterName');
     }
-
 }

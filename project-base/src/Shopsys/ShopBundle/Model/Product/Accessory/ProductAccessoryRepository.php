@@ -110,5 +110,4 @@ class ProductAccessoryRepository
             'accessory' => $accessory,
         ]);
     }
-
 }

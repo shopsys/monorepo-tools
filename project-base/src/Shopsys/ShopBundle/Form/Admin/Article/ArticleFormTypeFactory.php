@@ -43,5 +43,4 @@ class ArticleFormTypeFactory
             $this->seoSettingFacade->getDescriptionMainPage($domainId)
         );
     }
-
 }

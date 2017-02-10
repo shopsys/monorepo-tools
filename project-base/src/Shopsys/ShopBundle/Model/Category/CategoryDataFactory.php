@@ -55,5 +55,4 @@ class CategoryDataFactory
 
         return $categoryData;
     }
-
 }

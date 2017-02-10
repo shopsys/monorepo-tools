@@ -70,5 +70,4 @@ class Bootstrap
             \Doctrine\Common\Annotations\AnnotationRegistry::registerAutoloadNamespace('Doctrine\ORM', $dirs);
         }
     }
-
 }

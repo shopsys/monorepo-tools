@@ -225,5 +225,4 @@ class AdvertController extends AdminBaseController
 
         return $this->redirectToRoute('admin_advert_list');
     }
-
 }

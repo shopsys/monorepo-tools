@@ -133,5 +133,4 @@ class CachedBestsellingProductFacade
     private function getCacheId($domainId, Category $category, PricingGroup $pricingGroup) {
         return $domainId . '_' . $category->getId() . '_' . $pricingGroup->getId();
     }
-
 }

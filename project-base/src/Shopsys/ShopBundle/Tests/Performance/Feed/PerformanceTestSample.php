@@ -133,5 +133,4 @@ class PerformanceTestSample
     public function isSuccessful() {
         return count($this->failMessages) === 0;
     }
-
 }

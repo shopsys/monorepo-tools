@@ -51,5 +51,4 @@ class TransformString
     private static function toAscii($string) {
         return iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $string);
     }
-
 }

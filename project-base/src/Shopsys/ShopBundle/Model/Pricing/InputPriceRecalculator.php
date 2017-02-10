@@ -190,5 +190,4 @@ class InputPriceRecalculator
 
         $this->em->flush();
     }
-
 }

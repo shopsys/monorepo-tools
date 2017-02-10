@@ -54,5 +54,4 @@ class GeneratorFacade
         }
         return $names;
     }
-
 }

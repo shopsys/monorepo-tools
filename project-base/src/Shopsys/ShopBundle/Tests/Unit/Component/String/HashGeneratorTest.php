@@ -26,5 +26,4 @@ class HashGeneratorTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame($length, strlen($hash));
     }
-
 }

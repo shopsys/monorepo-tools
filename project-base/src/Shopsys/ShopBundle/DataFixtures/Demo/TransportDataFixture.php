@@ -89,5 +89,4 @@ class TransportDataFixture extends AbstractReferenceFixture implements Dependent
             CurrencyDataFixture::class,
         ];
     }
-
 }

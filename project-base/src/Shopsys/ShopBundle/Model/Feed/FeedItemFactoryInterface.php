@@ -13,5 +13,4 @@ interface FeedItemFactoryInterface
      * @return array
      */
     public function createItems(array $products, DomainConfig $domainConfig);
-
 }

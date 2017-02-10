@@ -77,5 +77,4 @@ class TranslationFormType extends AbstractType implements DataTransformerInterfa
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

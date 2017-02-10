@@ -31,5 +31,4 @@ class PhpFileExtractorFactory
 
         return new PhpFileExtractor($this->docParser, $transMethodSpecifications);
     }
-
 }

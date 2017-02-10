@@ -41,5 +41,4 @@ class AdminLogoutHandler implements LogoutSuccessHandlerInterface
 
         return new RedirectResponse($url);
     }
-
 }

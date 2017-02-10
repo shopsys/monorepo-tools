@@ -157,5 +157,4 @@ class OrderFacadeTest extends DatabaseTestCase
 
         $this->assertCount(5, $orderFromDb->getItems());
     }
-
 }

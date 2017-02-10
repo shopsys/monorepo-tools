@@ -61,5 +61,4 @@ class SortableNullsWalkerTest extends FunctionalTestCase
 
         $this->assertSame($queryWithoutWalker->getSQL(), $queryWithWalker->getSQL());
     }
-
 }

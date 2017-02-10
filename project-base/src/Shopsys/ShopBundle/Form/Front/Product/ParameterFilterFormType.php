@@ -110,5 +110,4 @@ class ParameterFilterFormType extends AbstractType implements DataTransformerInt
 
         return $parameterValuesIndexedByParameterId;
     }
-
 }

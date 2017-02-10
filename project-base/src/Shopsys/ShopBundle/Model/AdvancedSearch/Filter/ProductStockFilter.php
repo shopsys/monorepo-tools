@@ -51,5 +51,4 @@ class ProductStockFilter implements AdvancedSearchFilterInterface
                 ->setParameter($parameterName, $usingStock);
         }
     }
-
 }

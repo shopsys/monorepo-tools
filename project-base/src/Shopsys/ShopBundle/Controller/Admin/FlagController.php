@@ -65,5 +65,4 @@ class FlagController extends AdminBaseController
 
         return $this->redirectToRoute('admin_flag_list');
     }
-
 }

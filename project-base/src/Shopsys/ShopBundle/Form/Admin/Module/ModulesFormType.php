@@ -51,5 +51,4 @@ class ModulesFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

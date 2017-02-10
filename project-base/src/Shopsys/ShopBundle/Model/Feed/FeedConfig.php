@@ -83,5 +83,4 @@ class FeedConfig
     public function getFeedItemRepository() {
         return $this->feedItemRepository;
     }
-
 }

@@ -17,5 +17,4 @@ class FlashMessageController extends FrontBaseController
             'successMessages' => $flashMessageBag->getSuccessMessages(),
         ]);
     }
-
 }

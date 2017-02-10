@@ -89,5 +89,4 @@ class SeoSettingFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

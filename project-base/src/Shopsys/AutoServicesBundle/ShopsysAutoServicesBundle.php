@@ -33,5 +33,4 @@ class ShopsysAutoServicesBundle extends Bundle
             PassConfig::TYPE_BEFORE_REMOVING
         );
     }
-
 }

@@ -84,5 +84,4 @@ class CartWatcherService
 
         return $notListableItems;
     }
-
 }

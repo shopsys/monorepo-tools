@@ -79,5 +79,4 @@ class FeedCategory
     public function getFullName() {
         return $this->fullName;
     }
-
 }

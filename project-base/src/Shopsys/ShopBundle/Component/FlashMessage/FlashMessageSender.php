@@ -73,5 +73,4 @@ class FlashMessageSender
     public function addSuccessFlash($message) {
         $this->flashMessageBag->addSuccess($message, true);
     }
-
 }

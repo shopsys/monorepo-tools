@@ -71,5 +71,4 @@ class ProductPriceCalculationForUser
 
         return $this->productPriceCalculation->calculatePrice($product, $domainId, $pricingGroup);
     }
-
 }

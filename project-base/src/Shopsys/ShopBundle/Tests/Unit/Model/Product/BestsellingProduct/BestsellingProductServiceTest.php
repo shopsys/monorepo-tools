@@ -56,5 +56,4 @@ class BestsellingProductServiceTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals($combinedProducts, $combinedProductsExpected);
     }
-
 }

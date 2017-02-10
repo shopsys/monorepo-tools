@@ -28,5 +28,4 @@ class ProductVisibilityMidnightCronModule implements CronModuleInterface
     public function run() {
         $this->productVisibilityFacade->refreshProductsVisibility();
     }
-
 }

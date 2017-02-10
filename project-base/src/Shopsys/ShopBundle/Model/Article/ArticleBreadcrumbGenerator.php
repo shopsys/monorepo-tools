@@ -27,5 +27,4 @@ class ArticleBreadcrumbGenerator implements BreadcrumbGeneratorInterface
             new BreadcrumbItem($article->getName()),
         ];
     }
-
 }

@@ -49,5 +49,4 @@ class FlagDataFixture extends AbstractReferenceFixture
             $this->addReference($referenceName, $flag);
         }
     }
-
 }

@@ -56,5 +56,4 @@ class AllMailTemplatesFormType extends AbstractType
             'data_class' => AllMailTemplatesData::class,
         ]);
     }
-
 }

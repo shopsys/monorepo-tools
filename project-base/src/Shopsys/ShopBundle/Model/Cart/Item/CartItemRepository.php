@@ -42,5 +42,4 @@ class CartItemRepository
 
         return $this->getCartItemRepository()->findBy($criteria, ['id' => 'desc']);
     }
-
 }

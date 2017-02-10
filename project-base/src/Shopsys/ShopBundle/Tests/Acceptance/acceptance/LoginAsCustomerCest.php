@@ -18,5 +18,4 @@ class LoginAsCustomerCest
         $me->see('Pozor! Jste jako administrátor přihlášen za zákazníka.');
         $me->see('Igor Anpilogov');
     }
-
 }

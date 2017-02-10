@@ -103,5 +103,4 @@ class Localization
             return self::DEFAULT_COLLATION;
         }
     }
-
 }

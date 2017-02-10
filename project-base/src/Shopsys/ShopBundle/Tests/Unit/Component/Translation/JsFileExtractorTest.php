@@ -66,5 +66,4 @@ class JsFileExtractorTest extends \PHPUnit_Framework_TestCase
         );
         return new JsFileExtractor($jsTranslatorCallParserFactory->create());
     }
-
 }

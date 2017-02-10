@@ -21,5 +21,4 @@ class ArticlePlacementList extends AbstractTranslatedConstantList
             self::PLACEMENT_NONE => t('without positoning'),
         ];
     }
-
 }

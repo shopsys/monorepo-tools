@@ -53,5 +53,4 @@ class AddProductResult
     public function getAddedQuantity() {
         return $this->addedQuantity;
     }
-
 }

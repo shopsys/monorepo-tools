@@ -23,5 +23,4 @@ class AdvertPositionList extends AbstractTranslatedConstantList
             self::POSITION_LEFT_SIDEBAR => t('in left panel (under category tree)'),
         ];
     }
-
 }

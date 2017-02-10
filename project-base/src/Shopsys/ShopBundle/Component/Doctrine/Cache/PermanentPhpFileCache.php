@@ -45,5 +45,4 @@ class PermanentPhpFileCache extends PhpFileCache
 
         return $this->writeFile($filename, $code);
     }
-
 }

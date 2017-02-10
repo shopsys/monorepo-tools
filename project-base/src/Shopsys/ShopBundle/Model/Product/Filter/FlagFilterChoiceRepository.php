@@ -84,5 +84,4 @@ class FlagFilterChoiceRepository
 
         return $flagsQueryBuilder->getQuery()->execute();
     }
-
 }

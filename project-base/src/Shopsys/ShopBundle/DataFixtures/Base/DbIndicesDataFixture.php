@@ -43,5 +43,4 @@ class DbIndicesDataFixture extends AbstractNativeFixture implements DependentFix
             DbFunctionsDataFixture::class,
         ];
     }
-
 }

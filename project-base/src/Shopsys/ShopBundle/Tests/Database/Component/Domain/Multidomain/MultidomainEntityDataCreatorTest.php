@@ -104,5 +104,4 @@ class MultidomainEntityDataCreatorTest extends DatabaseTestCase
             $this->fail('Exception not expected');
         }
     }
-
 }

@@ -58,5 +58,4 @@ class TopProductRepository
 
         return $queryBuilder->getQuery()->execute();
     }
-
 }

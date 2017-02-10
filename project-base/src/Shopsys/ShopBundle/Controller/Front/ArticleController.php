@@ -44,5 +44,4 @@ class ArticleController extends FrontBaseController
             'articles' => $articles,
         ]);
     }
-
 }

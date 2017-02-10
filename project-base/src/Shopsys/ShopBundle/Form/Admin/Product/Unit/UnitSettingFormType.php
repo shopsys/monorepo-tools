@@ -52,5 +52,4 @@ class UnitSettingFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

@@ -23,5 +23,4 @@ class ProductAdvancedSearchFormFactory extends AbstractAdvancedSearchFormFactory
             $advancedSearchOperatorTranslation
         );
     }
-
 }

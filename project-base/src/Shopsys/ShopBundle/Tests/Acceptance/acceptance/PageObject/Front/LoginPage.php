@@ -17,5 +17,4 @@ class LoginPage extends AbstractPage
         $this->tester->clickByName('front_login_form[login]');
         $this->tester->waitForAjax();
     }
-
 }

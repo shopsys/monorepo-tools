@@ -49,5 +49,4 @@ class SqlLoggerFacade
         $this->sqlLogger = null;
         $this->isLoggerTemporarilyDisabled = false;
     }
-
 }

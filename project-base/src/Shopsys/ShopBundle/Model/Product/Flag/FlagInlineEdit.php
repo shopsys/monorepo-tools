@@ -73,5 +73,4 @@ class FlagInlineEdit extends AbstractGridInlineEdit
     protected function getFormType($rowId) {
         return new FlagFormType();
     }
-
 }

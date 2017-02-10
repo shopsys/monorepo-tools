@@ -62,5 +62,4 @@ class TopCategoryController extends AdminBaseController
             'form' => $form->createView(),
         ]);
     }
-
 }

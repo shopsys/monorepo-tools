@@ -45,5 +45,4 @@ class CategoryService
             $child->setParent($category->getParent());
         }
     }
-
 }

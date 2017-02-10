@@ -50,5 +50,4 @@ class ProductPriceCronModule implements IteratedCronModuleInterface
             return false;
         }
     }
-
 }

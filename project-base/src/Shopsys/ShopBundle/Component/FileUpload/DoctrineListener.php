@@ -60,5 +60,4 @@ class DoctrineListener
             $this->fileUpload->postFlushEntity($entity);
         }
     }
-
 }

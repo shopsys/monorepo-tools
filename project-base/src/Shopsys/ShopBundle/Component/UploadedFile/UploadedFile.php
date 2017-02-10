@@ -144,5 +144,4 @@ class UploadedFile implements EntityFileUploadInterface
     public function getExtension() {
         return $this->extension;
     }
-
 }

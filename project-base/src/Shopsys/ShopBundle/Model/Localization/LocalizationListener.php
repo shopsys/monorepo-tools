@@ -39,5 +39,4 @@ class LocalizationListener implements EventSubscriberInterface
             KernelEvents::REQUEST => [['onKernelRequest', 17]],
         ];
     }
-
 }

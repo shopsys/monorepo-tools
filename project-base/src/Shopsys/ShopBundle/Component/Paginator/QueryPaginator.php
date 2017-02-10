@@ -110,5 +110,4 @@ class QueryPaginator implements PaginatorInterface
         return $em->createNativeQuery($sql, $rsm)
             ->setParameters($flatenedParameters);
     }
-
 }

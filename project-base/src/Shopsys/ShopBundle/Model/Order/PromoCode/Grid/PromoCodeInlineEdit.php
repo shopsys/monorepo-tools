@@ -86,5 +86,4 @@ class PromoCodeInlineEdit extends AbstractGridInlineEdit
 
         return $this->promoCodeFormTypeFactory->create();
     }
-
 }

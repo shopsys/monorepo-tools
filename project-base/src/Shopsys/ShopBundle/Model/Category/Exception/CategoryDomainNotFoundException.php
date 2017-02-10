@@ -21,5 +21,4 @@ class CategoryDomainNotFoundException extends NotFoundHttpException implements C
         );
         parent::__construct($message, $previous, 0);
     }
-
 }

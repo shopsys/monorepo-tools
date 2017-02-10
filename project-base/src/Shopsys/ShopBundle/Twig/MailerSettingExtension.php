@@ -80,5 +80,4 @@ class MailerSettingExtension extends Twig_Extension
     public function getName() {
         return 'shopsys.twig.mailer_setting_extension';
     }
-
 }

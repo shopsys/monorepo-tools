@@ -526,5 +526,4 @@ class TranslationReplaceSourceCommand extends ContainerAwareCommand
         ];
         file_put_contents(self::FILE_NAME_REPLACEMENT_ERRORS, implode("\n", $errorReport) . "\n\n", FILE_APPEND);
     }
-
 }

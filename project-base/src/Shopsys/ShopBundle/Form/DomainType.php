@@ -53,5 +53,4 @@ class DomainType extends AbstractType
     public function getName() {
         return 'domain';
     }
-
 }

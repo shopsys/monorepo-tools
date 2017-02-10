@@ -97,5 +97,4 @@ class ProductAvailabilityRecalculatorTest extends DatabaseTestCase
 
         $this->assertSame($this->getReference(AvailabilityDataFixture::OUT_OF_STOCK), $productFromDb->getCalculatedAvailability());
     }
-
 }

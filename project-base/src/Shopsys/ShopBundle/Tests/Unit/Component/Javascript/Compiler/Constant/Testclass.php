@@ -8,5 +8,4 @@ class Testclass
     const FOO = 'bar';
 
     const FOO2 = 'bar2';
-
 }

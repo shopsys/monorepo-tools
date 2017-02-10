@@ -80,5 +80,4 @@ class PaymentTranslation extends AbstractTranslation
     public function setInstructions($instructions) {
         $this->instructions = $instructions;
     }
-
 }

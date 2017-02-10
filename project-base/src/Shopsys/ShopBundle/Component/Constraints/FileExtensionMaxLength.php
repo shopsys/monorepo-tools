@@ -29,5 +29,4 @@ class FileExtensionMaxLength extends Constraint
     public function getDefaultOption() {
         return 'limit';
     }
-
 }

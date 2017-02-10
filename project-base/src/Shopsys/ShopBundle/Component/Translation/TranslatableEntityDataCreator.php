@@ -94,5 +94,4 @@ class TranslatableEntityDataCreator
             'templateLocale' => $templateLocale,
         ]);
     }
-
 }

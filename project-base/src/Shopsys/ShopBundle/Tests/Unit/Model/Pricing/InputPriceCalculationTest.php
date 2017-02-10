@@ -47,5 +47,4 @@ class InputPriceCalculationTest extends PHPUnit_Framework_TestCase
             ],
         ];
     }
-
 }

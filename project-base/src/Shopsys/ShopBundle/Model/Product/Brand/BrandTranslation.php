@@ -38,5 +38,4 @@ class BrandTranslation extends AbstractTranslation
     public function setDescription($description) {
         $this->description = $description;
     }
-
 }

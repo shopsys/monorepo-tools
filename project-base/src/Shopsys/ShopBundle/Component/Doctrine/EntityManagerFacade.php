@@ -31,5 +31,4 @@ class EntityManagerFacade
         $this->em->clear();
         $this->setting->clearCache();
     }
-
 }

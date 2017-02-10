@@ -42,5 +42,4 @@ class AdvancedSearchOperatorTranslation
         $message = 'Operator "' . $operator . '" translation not found.';
         throw new \Shopsys\ShopBundle\Model\AdvancedSearch\Exception\AdvancedSearchTranslationNotFoundException($message);
     }
-
 }

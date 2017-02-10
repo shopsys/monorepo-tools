@@ -28,5 +28,4 @@ class ParameterFilterData
         $this->parameter = $parameter;
         $this->values = $values;
     }
-
 }

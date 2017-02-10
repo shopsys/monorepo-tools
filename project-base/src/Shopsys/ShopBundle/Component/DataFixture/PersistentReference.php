@@ -75,5 +75,4 @@ class PersistentReference
     public function getEntityId() {
         return $this->entityId;
     }
-
 }

@@ -27,5 +27,4 @@ class RememberGridLimitException extends Exception implements AdministratorExcep
     public function getGridId() {
         return $this->gridId;
     }
-
 }

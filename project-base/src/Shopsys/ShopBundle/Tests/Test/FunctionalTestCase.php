@@ -80,5 +80,4 @@ abstract class FunctionalTestCase extends WebTestCase
 
         return $persistentReferenceFacade->getReference($referenceName);
     }
-
 }

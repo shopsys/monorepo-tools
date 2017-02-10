@@ -270,5 +270,4 @@ class TransportAndPaymentWatcherService
     private function getRememberedPaymentPrices() {
         return $this->getRememberedTransportAndPayment()[self::SESSION_PAYMENT_PRICES];
     }
-
 }

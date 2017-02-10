@@ -91,5 +91,4 @@ class JsTranslatorCompilerPass implements JsCompilerPassInterface
 
         return implode('|', $markedMessages);
     }
-
 }

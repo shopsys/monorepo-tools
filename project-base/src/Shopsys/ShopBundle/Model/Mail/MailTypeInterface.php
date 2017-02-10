@@ -24,5 +24,4 @@ interface MailTypeInterface
      * @return string[]
      */
     public function getRequiredBodyVariables();
-
 }

@@ -17,5 +17,4 @@ class FlashMessageController extends AdminBaseController
             'successMessages' => $flashMessageBag->getSuccessMessages(),
         ]);
     }
-
 }

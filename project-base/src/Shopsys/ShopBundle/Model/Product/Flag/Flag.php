@@ -109,5 +109,4 @@ class Flag extends AbstractTranslatableEntity
         $this->rgbColor = $flagData->rgbColor;
         $this->visible = $flagData->visible;
     }
-
 }

@@ -26,5 +26,4 @@ class AvailabilityService
 
         return $availability;
     }
-
 }

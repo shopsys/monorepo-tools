@@ -32,5 +32,4 @@ class GoogleAnalyticsScriptFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

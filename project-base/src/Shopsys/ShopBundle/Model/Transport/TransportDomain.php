@@ -44,5 +44,4 @@ class TransportDomain
     public function getDomainId() {
         return $this->domainId;
     }
-
 }

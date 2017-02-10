@@ -28,5 +28,4 @@ class DropDatabaseSchemaCommand extends ContainerAwareCommand
         $databaseSchemaFacade->dropSchemaIfExists('public');
         $output->writeln('Database schema dropped successfully!');
     }
-
 }

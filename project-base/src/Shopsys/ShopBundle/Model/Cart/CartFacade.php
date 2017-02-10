@@ -168,5 +168,4 @@ class CartFacade
 
         return $this->cartService->getQuantifiedProducts($cart);
     }
-
 }

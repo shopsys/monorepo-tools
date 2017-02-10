@@ -88,5 +88,4 @@ class DomainConfig
     public function isHttps() {
         return strpos($this->url, 'https://') === 0;
     }
-
 }

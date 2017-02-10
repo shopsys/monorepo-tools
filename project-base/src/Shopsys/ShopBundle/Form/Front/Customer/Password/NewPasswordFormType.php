@@ -48,5 +48,4 @@ class NewPasswordFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

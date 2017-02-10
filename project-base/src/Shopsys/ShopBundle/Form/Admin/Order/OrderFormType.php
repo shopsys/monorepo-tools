@@ -272,5 +272,4 @@ class OrderFormType extends AbstractType
             },
         ]);
     }
-
 }

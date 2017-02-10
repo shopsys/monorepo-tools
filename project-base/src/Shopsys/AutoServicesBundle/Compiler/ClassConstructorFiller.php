@@ -44,5 +44,4 @@ class ClassConstructorFiller
 
         $definition->setArguments($allArguments);
     }
-
 }

@@ -177,5 +177,4 @@ class PaymentController extends AdminBaseController
             'gridView' => $grid->createView(),
         ]);
     }
-
 }

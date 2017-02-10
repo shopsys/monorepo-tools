@@ -33,5 +33,4 @@ EOD;
 
         $this->assertSame($expectedResult, $result);
     }
-
 }

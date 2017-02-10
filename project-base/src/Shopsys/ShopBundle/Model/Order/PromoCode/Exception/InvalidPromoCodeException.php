@@ -15,5 +15,4 @@ class InvalidPromoCodeException extends Exception implements PromoCodeException
     public function __construct($invalidPromoCode, Exception $previous = null) {
         parent::__construct('Promo code "' . $invalidPromoCode . '" is not valid.', 0, $previous);
     }
-
 }

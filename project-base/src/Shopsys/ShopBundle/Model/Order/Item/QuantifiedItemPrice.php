@@ -58,5 +58,4 @@ class QuantifiedItemPrice
     public function getVat() {
         return $this->vat;
     }
-
 }

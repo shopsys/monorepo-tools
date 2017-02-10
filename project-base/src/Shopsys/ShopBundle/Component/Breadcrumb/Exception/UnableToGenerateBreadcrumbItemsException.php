@@ -15,5 +15,4 @@ class UnableToGenerateBreadcrumbItemsException extends Exception implements Brea
     public function __construct($message = '', Exception $previous = null) {
         parent::__construct($message, 0, $previous);
     }
-
 }

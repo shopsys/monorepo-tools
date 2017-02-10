@@ -78,5 +78,4 @@ class BasePriceCalculation
                 throw new \Shopsys\ShopBundle\Model\Pricing\Exception\InvalidInputPriceTypeException();
         }
     }
-
 }

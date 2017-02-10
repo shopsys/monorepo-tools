@@ -79,5 +79,4 @@ class PriceRangeRepository
 
         return new PriceRange($priceRangeDataRow['minimalPrice'], $priceRangeDataRow['maximalPrice']);
     }
-
 }

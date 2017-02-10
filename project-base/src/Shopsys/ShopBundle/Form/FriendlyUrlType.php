@@ -45,5 +45,4 @@ class FriendlyUrlType extends AbstractType
     public function getName() {
         return FormType::FRIENDLY_URL;
     }
-
 }

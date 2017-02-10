@@ -156,5 +156,4 @@ class UserRepository
             ->where('u.pricingGroup = :oldPricingGroup')->setParameter('oldPricingGroup', $oldPricingGroup)
             ->getQuery()->execute();
     }
-
 }

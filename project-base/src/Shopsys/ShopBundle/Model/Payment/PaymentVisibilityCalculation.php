@@ -68,5 +68,4 @@ class PaymentVisibilityCalculation
 
         return false;
     }
-
 }

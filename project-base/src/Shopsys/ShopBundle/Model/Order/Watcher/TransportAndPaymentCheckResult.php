@@ -40,5 +40,4 @@ class TransportAndPaymentCheckResult
     public function isPaymentPriceChanged() {
         return $this->paymentPriceChanged;
     }
-
 }

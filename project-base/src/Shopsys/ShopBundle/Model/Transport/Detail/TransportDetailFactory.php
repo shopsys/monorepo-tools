@@ -72,5 +72,4 @@ class TransportDetailFactory
 
         return $prices;
     }
-
 }

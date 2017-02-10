@@ -42,5 +42,4 @@ class FragmentHandler extends LazyLoadingFragmentHandler
 
         return parent::render($uri, $renderer, $options);
     }
-
 }

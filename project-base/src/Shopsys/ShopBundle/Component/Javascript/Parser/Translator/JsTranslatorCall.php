@@ -87,5 +87,4 @@ class JsTranslatorCall
     public function getFunctionName() {
         return $this->functionName;
     }
-
 }

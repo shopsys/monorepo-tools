@@ -183,5 +183,4 @@ class AutoContainer implements ContainerInterface
     public function getParameterBag() {
         return $this->container->getParameterBag();
     }
-
 }

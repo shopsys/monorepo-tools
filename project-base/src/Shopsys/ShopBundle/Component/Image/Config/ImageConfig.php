@@ -133,5 +133,4 @@ class ImageConfig
 
         throw new \Shopsys\ShopBundle\Component\Image\Config\Exception\ImageEntityConfigNotFoundException($class);
     }
-
 }

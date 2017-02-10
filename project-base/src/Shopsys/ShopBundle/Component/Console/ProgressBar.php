@@ -98,5 +98,4 @@ class ProgressBar extends BaseProgressBar
             floor($timeInSeconds % 60)
         );
     }
-
 }

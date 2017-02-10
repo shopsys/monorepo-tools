@@ -126,5 +126,4 @@ class ProductSellingDeniedRecalculator
         }
         $qb->getQuery()->execute();
     }
-
 }

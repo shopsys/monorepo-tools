@@ -99,5 +99,4 @@ class OrderPage extends AbstractPage
     public function acceptTermsAndConditions() {
         $this->tester->checkOptionByLabel('Souhlasím s obchodními podmínkami');
     }
-
 }

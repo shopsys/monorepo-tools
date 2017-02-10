@@ -77,5 +77,4 @@ class Unit extends AbstractTranslatableEntity
     public function edit(UnitData $unitData) {
         $this->setTranslations($unitData);
     }
-
 }

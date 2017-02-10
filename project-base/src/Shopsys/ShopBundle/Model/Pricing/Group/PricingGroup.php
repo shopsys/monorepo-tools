@@ -86,5 +86,4 @@ class PricingGroup
         $this->name = $pricingGroupData->name;
         $this->coefficient = $pricingGroupData->coefficient;
     }
-
 }

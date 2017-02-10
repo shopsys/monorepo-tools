@@ -42,5 +42,4 @@ class JsConstantCall
     public function getConstantName() {
         return $this->constantName;
     }
-
 }

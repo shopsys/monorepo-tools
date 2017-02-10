@@ -23,5 +23,4 @@ class DomainRouterTest extends PHPUnit_Framework_TestCase
         $this->setExpectedException(\Shopsys\ShopBundle\Component\Router\Exception\NotSupportedException::class);
         $domainRouter->setContext($context);
     }
-
 }

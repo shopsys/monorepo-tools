@@ -205,5 +205,4 @@ class IntlCurrencyRepository extends BaseCurrencyRepository
     public function isSupportedCurrency($currencyCode) {
         return in_array($currencyCode, self::SUPPORTED_CURRENCY_CODES, true);
     }
-
 }

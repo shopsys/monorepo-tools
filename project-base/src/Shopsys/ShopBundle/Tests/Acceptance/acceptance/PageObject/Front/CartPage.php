@@ -118,5 +118,4 @@ class CartPage extends AbstractPage
     private function getTotalProductsPriceCell() {
         return $this->webDriver->findElement(WebDriverBy::cssSelector('.js-cart-total-price'));
     }
-
 }

@@ -39,5 +39,4 @@ class FriendlyUrlUniqueResult
     public function getFriendlyUrlForPersist() {
         return $this->friendlyUrlForPersist;
     }
-
 }

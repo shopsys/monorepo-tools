@@ -39,5 +39,4 @@ class WysiwygType extends AbstractTypeExtension
     public function getExtendedType() {
         return 'ckeditor';
     }
-
 }

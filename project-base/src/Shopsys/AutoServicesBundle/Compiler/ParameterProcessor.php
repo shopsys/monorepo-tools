@@ -143,5 +143,4 @@ class ParameterProcessor
             $this->containerBuilder->addResource(new FileResource($reflectionClass->getFileName()));
         } while ($reflectionClass = $reflectionClass->getParentClass());
     }
-
 }

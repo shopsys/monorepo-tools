@@ -134,5 +134,4 @@ class LoginController extends AdminBaseController
 
         return $this->redirect($redirectTo);
     }
-
 }

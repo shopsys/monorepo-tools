@@ -34,5 +34,4 @@ class ProductMassActionData
      * @var mixed
      */
     public $value;
-
 }

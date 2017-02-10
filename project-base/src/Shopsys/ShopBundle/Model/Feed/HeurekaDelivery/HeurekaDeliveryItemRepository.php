@@ -57,5 +57,4 @@ class HeurekaDeliveryItemRepository implements FeedItemRepositoryInterface
 
         return $this->heurekaDeliveryItemFactory->createItems($products, $domainConfig);
     }
-
 }

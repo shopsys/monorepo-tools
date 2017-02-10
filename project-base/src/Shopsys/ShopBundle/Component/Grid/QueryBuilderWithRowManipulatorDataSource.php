@@ -50,5 +50,4 @@ class QueryBuilderWithRowManipulatorDataSource extends QueryBuilderDataSource
             $results
         );
     }
-
 }

@@ -99,5 +99,4 @@ class BillingAddressData
         $this->postcode = $billingAddress->getPostcode();
         $this->country = $billingAddress->getCountry();
     }
-
 }

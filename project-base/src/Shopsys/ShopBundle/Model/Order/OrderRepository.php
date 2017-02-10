@@ -231,5 +231,4 @@ class OrderRepository
             ->groupBy('c')
             ->getQuery()->execute();
     }
-
 }

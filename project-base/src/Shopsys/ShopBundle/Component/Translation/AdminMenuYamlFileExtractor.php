@@ -84,5 +84,4 @@ class AdminMenuYamlFileExtractor implements FileVisitorInterface
             }
         }
     }
-
 }

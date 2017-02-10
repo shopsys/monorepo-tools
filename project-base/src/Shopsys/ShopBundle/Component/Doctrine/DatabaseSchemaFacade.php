@@ -54,5 +54,4 @@ class DatabaseSchemaFacade
             throw new \Shopsys\ShopBundle\Component\Doctrine\Exception\DefaultSchemaImportException($message);
         }
     }
-
 }

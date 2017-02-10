@@ -170,5 +170,4 @@ class VatController extends AdminBaseController
             'form' => $form->createView(),
         ]);
     }
-
 }

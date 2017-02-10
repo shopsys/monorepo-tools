@@ -101,5 +101,4 @@ class MenuFactory
 
         return true;
     }
-
 }

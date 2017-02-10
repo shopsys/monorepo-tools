@@ -44,5 +44,4 @@ class OrderStatusFormType extends AbstractType
             'attr' => ['novalidate' => 'novalidate'],
         ]);
     }
-
 }

@@ -67,5 +67,4 @@ class DateTimeFormatPattern
     public function getTimeType() {
         return $this->timeType;
     }
-
 }

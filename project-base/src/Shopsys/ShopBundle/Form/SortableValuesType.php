@@ -45,5 +45,4 @@ class SortableValuesType extends AbstractType
         $view->vars['labels_by_value'] = $options['labels_by_value'];
         $view->vars['placeholder'] = $options['placeholder'];
     }
-
 }

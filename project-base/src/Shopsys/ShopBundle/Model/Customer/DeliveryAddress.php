@@ -160,5 +160,4 @@ class DeliveryAddress
     public function getCountry() {
         return $this->country;
     }
-
 }

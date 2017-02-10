@@ -91,5 +91,4 @@ class PricingGroupRepository
             ->setParameter('pricingGroup', $pricingGroup);
         return $query->getOneOrNullResult(AbstractQuery::HYDRATE_SINGLE_SCALAR) > 0;
     }
-
 }

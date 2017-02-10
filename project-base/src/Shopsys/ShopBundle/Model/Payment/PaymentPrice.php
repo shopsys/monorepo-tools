@@ -76,5 +76,4 @@ class PaymentPrice
     public function setPrice($price) {
         $this->price = $price;
     }
-
 }

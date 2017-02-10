@@ -23,5 +23,4 @@ class ProductParameterValueData
         $this->parameterValueData = new ParameterValueData();
         $this->parameterValueData->setFromEntity($productParameterValue->getValue());
     }
-
 }

@@ -133,5 +133,4 @@ class AdministratorFrontSecurityFacade
 
         $token->setUser($freshUser);
     }
-
 }
