@@ -7,37 +7,37 @@ use Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem;
 
 class BrandBreadcrumbGenerator implements BreadcrumbGeneratorInterface {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
-	 */
-	private $brandRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Brand\BrandRepository
+     */
+    private $brandRepository;
 
-	public function __construct(BrandRepository $brandRepository) {
-		$this->brandRepository = $brandRepository;
-	}
+    public function __construct(BrandRepository $brandRepository) {
+        $this->brandRepository = $brandRepository;
+    }
 
-	/**
-	 * @param string $routeName
-	 * @param array $routeParameters
-	 * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
-	 */
-	public function getBreadcrumbItems($routeName, array $routeParameters = []) {
+    /**
+     * @param string $routeName
+     * @param array $routeParameters
+     * @return \Shopsys\ShopBundle\Component\Breadcrumb\BreadcrumbItem[]
+     */
+    public function getBreadcrumbItems($routeName, array $routeParameters = []) {
 
-		$isBrandDetail = $routeName === 'front_brand_detail';
+        $isBrandDetail = $routeName === 'front_brand_detail';
 
-		$breadcrumbItems[] = new BreadcrumbItem(
-			t('Brand overview'),
-			$isBrandDetail ? 'front_brand_list' : null
-		);
+        $breadcrumbItems[] = new BreadcrumbItem(
+            t('Brand overview'),
+            $isBrandDetail ? 'front_brand_list' : null
+        );
 
-		if ($isBrandDetail) {
-			$brand = $this->brandRepository->getById($routeParameters['id']);
-			$breadcrumbItems[] = new BreadcrumbItem(
-				$brand->getName()
-			);
-		}
+        if ($isBrandDetail) {
+            $brand = $this->brandRepository->getById($routeParameters['id']);
+            $breadcrumbItems[] = new BreadcrumbItem(
+                $brand->getName()
+            );
+        }
 
-		return $breadcrumbItems;
-	}
+        return $breadcrumbItems;
+    }
 
 }

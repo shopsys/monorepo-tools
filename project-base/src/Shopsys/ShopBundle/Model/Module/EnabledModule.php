@@ -10,26 +10,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EnabledModule {
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Id
-	 * @ORM\Column(type="string", length=100)
-	 */
-	private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Id
+     * @ORM\Column(type="string", length=100)
+     */
+    private $name;
 
-	/**
-	 * @param string $name
-	 */
-	public function __construct($name) {
-		$this->name = $name;
-	}
+    /**
+     * @param string $name
+     */
+    public function __construct($name) {
+        $this->name = $name;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
 
 }

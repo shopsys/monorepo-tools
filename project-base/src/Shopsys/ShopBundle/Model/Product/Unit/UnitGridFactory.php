@@ -11,54 +11,54 @@ use Shopsys\ShopBundle\Model\Localization\Localization;
 
 class UnitGridFactory implements GridFactoryInterface {
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
-	 */
-	private $gridFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Grid\GridFactory
+     */
+    private $gridFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Localization\Localization
-	 */
-	private $localization;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Localization\Localization
+     */
+    private $localization;
 
-	public function __construct(
-		EntityManager $em,
-		GridFactory $gridFactory,
-		Localization $localization
-	) {
-		$this->em = $em;
-		$this->gridFactory = $gridFactory;
-		$this->localization = $localization;
-	}
+    public function __construct(
+        EntityManager $em,
+        GridFactory $gridFactory,
+        Localization $localization
+    ) {
+        $this->em = $em;
+        $this->gridFactory = $gridFactory;
+        $this->localization = $localization;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Component\Grid\Grid
-	 */
-	public function create() {
-		$queryBuilder = $this->em->createQueryBuilder();
-		$queryBuilder
-			->select('u, ut')
-			->from(Unit::class, 'u')
-			->join('u.translations', 'ut', Join::WITH, 'ut.locale = :locale')
-			->setParameter('locale', $this->localization->getDefaultLocale());
-		$dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
+    /**
+     * @return \Shopsys\ShopBundle\Component\Grid\Grid
+     */
+    public function create() {
+        $queryBuilder = $this->em->createQueryBuilder();
+        $queryBuilder
+            ->select('u, ut')
+            ->from(Unit::class, 'u')
+            ->join('u.translations', 'ut', Join::WITH, 'ut.locale = :locale')
+            ->setParameter('locale', $this->localization->getDefaultLocale());
+        $dataSource = new QueryBuilderDataSource($queryBuilder, 'u.id');
 
-		$grid = $this->gridFactory->create('unitList', $dataSource);
-		$grid->setDefaultOrder('name');
+        $grid = $this->gridFactory->create('unitList', $dataSource);
+        $grid->setDefaultOrder('name');
 
-		$grid->addColumn('name', 'ut.name', t('Name'), true);
+        $grid->addColumn('name', 'ut.name', t('Name'), true);
 
-		$grid->setActionColumnClassAttribute('table-col table-col-10');
-		$grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])
-			->setAjaxConfirm();
+        $grid->setActionColumnClassAttribute('table-col table-col-10');
+        $grid->addDeleteActionColumn('admin_unit_deleteconfirm', ['id' => 'u.id'])
+            ->setAjaxConfirm();
 
-		$grid->setTheme('@ShopsysShop/Admin/Content/Unit/listGrid.html.twig');
+        $grid->setTheme('@ShopsysShop/Admin/Content/Unit/listGrid.html.twig');
 
-		return $grid;
-	}
+        return $grid;
+    }
 }

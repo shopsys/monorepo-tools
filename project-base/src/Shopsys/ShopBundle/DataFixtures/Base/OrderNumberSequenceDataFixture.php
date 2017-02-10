@@ -9,13 +9,13 @@ use Shopsys\ShopBundle\Model\Order\OrderNumberSequenceRepository;
 
 class OrderNumberSequenceDataFixture extends AbstractReferenceFixture {
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$orderNumberSequence = new OrderNumberSequence(OrderNumberSequenceRepository::ID, 0);
-		$manager->persist($orderNumberSequence);
-		$manager->flush();
-	}
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $orderNumberSequence = new OrderNumberSequence(OrderNumberSequenceRepository::ID, 0);
+        $manager->persist($orderNumberSequence);
+        $manager->flush();
+    }
 
 }

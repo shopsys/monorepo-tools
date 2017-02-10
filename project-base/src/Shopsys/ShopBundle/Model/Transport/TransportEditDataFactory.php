@@ -8,48 +8,48 @@ use Shopsys\ShopBundle\Model\Transport\TransportFacade;
 
 class TransportEditDataFactory {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
-	 */
-	private $transportFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Transport\TransportFacade
+     */
+    private $transportFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
-	 */
-	private $vatFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     */
+    private $vatFacade;
 
-	public function __construct(
-		TransportFacade $transportFacade,
-		VatFacade $vatFacade
-	) {
-		$this->transportFacade = $transportFacade;
-		$this->vatFacade = $vatFacade;
-	}
+    public function __construct(
+        TransportFacade $transportFacade,
+        VatFacade $vatFacade
+    ) {
+        $this->transportFacade = $transportFacade;
+        $this->vatFacade = $vatFacade;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
-	 */
-	public function createDefault() {
-		$transportEditData = new TransportEditData();
-		$transportEditData->transportData->vat = $this->vatFacade->getDefaultVat();
+    /**
+     * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
+     */
+    public function createDefault() {
+        $transportEditData = new TransportEditData();
+        $transportEditData->transportData->vat = $this->vatFacade->getDefaultVat();
 
-		return $transportEditData;
-	}
+        return $transportEditData;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
-	 * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
-	 */
-	public function createFromTransport(Transport $transport) {
-		$transportEditData = new TransportEditData();
-		$transportData = new TransportData();
-		$transportData->setFromEntity($transport, $this->transportFacade->getTransportDomainsByTransport($transport));
-		$transportEditData->transportData = $transportData;
+    /**
+     * @param \Shopsys\ShopBundle\Model\Transport\Transport $transport
+     * @return \Shopsys\ShopBundle\Model\Transport\TransportEditData
+     */
+    public function createFromTransport(Transport $transport) {
+        $transportEditData = new TransportEditData();
+        $transportData = new TransportData();
+        $transportData->setFromEntity($transport, $this->transportFacade->getTransportDomainsByTransport($transport));
+        $transportEditData->transportData = $transportData;
 
-		foreach ($transport->getPrices() as $transportPrice) {
-			$transportEditData->prices[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
-		}
+        foreach ($transport->getPrices() as $transportPrice) {
+            $transportEditData->prices[$transportPrice->getCurrency()->getId()] = $transportPrice->getPrice();
+        }
 
-		return $transportEditData;
-	}
+        return $transportEditData;
+    }
 }

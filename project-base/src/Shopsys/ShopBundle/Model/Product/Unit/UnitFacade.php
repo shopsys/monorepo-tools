@@ -11,146 +11,146 @@ use Shopsys\ShopBundle\Model\Product\Unit\UnitService;
 
 class UnitFacade {
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository
-	 */
-	private $unitRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository
+     */
+    private $unitRepository;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitService
-	 */
-	private $unitService;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Unit\UnitService
+     */
+    private $unitService;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Setting\Setting
-	 */
-	private $setting;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Setting\Setting
+     */
+    private $setting;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $em
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitService $unitService
-	 * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
-	 */
-	public function __construct(
-		EntityManager $em,
-		UnitRepository $unitRepository,
-		UnitService $unitService,
-		Setting $setting
-	) {
-		$this->em = $em;
-		$this->unitRepository = $unitRepository;
-		$this->unitService = $unitService;
-		$this->setting = $setting;
-	}
+    /**
+     * @param \Doctrine\ORM\EntityManager $em
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitRepository $unitRepository
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitService $unitService
+     * @param \Shopsys\ShopBundle\Component\Setting\Setting $setting
+     */
+    public function __construct(
+        EntityManager $em,
+        UnitRepository $unitRepository,
+        UnitService $unitService,
+        Setting $setting
+    ) {
+        $this->em = $em;
+        $this->unitRepository = $unitRepository;
+        $this->unitService = $unitService;
+        $this->setting = $setting;
+    }
 
-	/**
-	 * @param int $unitId
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
-	 */
-	public function getById($unitId) {
-		return $this->unitRepository->getById($unitId);
-	}
+    /**
+     * @param int $unitId
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     */
+    public function getById($unitId) {
+        return $this->unitRepository->getById($unitId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
-	 */
-	public function create(UnitData $unitData) {
-		$unit = $this->unitService->create($unitData);
-		$this->em->persist($unit);
-		$this->em->flush();
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     */
+    public function create(UnitData $unitData) {
+        $unit = $this->unitService->create($unitData);
+        $this->em->persist($unit);
+        $this->em->flush();
 
-		return $unit;
-	}
+        return $unit;
+    }
 
-	/**
-	 * @param int $unitId
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
-	 */
-	public function edit($unitId, UnitData $unitData) {
-		$unit = $this->unitRepository->getById($unitId);
-		$this->unitService->edit($unit, $unitData);
-		$this->em->flush();
+    /**
+     * @param int $unitId
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\UnitData $unitData
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     */
+    public function edit($unitId, UnitData $unitData) {
+        $unit = $this->unitRepository->getById($unitId);
+        $this->unitService->edit($unit, $unitData);
+        $this->em->flush();
 
-		return $unit;
-	}
+        return $unit;
+    }
 
-	/**
-	 * @param int $unitId
-	 * @param int|null $newUnitId
-	 */
-	public function deleteById($unitId, $newUnitId = null) {
-		$oldUnit = $this->unitRepository->getById($unitId);
+    /**
+     * @param int $unitId
+     * @param int|null $newUnitId
+     */
+    public function deleteById($unitId, $newUnitId = null) {
+        $oldUnit = $this->unitRepository->getById($unitId);
 
-		if ($newUnitId !== null) {
-			$newUnit = $this->unitRepository->getById($newUnitId);
-			$this->unitRepository->replaceUnit($oldUnit, $newUnit);
-			if ($this->isUnitDefault($oldUnit)) {
-				$this->setDefaultUnit($newUnit);
-			}
-		}
+        if ($newUnitId !== null) {
+            $newUnit = $this->unitRepository->getById($newUnitId);
+            $this->unitRepository->replaceUnit($oldUnit, $newUnit);
+            if ($this->isUnitDefault($oldUnit)) {
+                $this->setDefaultUnit($newUnit);
+            }
+        }
 
-		$this->em->remove($oldUnit);
-		$this->em->flush();
-	}
+        $this->em->remove($oldUnit);
+        $this->em->flush();
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
-	 */
-	public function getAll() {
-		return $this->unitRepository->getAll();
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     */
+    public function getAll() {
+        return $this->unitRepository->getAll();
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
-	 */
-	public function isUnitUsed(Unit $unit) {
-		return $this->unitRepository->existsProductWithUnit($unit);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     */
+    public function isUnitUsed(Unit $unit) {
+        return $this->unitRepository->existsProductWithUnit($unit);
+    }
 
-	/**
-	 * @param int $unitId
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
-	 */
-	public function getAllExceptId($unitId) {
-		return $this->unitRepository->getAllExceptId($unitId);
-	}
+    /**
+     * @param int $unitId
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit[]
+     */
+    public function getAllExceptId($unitId) {
+        return $this->unitRepository->getAllExceptId($unitId);
+    }
 
-	/**
-	 * @return int
-	 */
-	private function getDefaultUnitId() {
-		return $this->setting->get(Setting::DEFAULT_UNIT);
-	}
+    /**
+     * @return int
+     */
+    private function getDefaultUnitId() {
+        return $this->setting->get(Setting::DEFAULT_UNIT);
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
-	 */
-	public function getDefaultUnit() {
-		$defaultUnitId = $this->getDefaultUnitId();
+    /**
+     * @return \Shopsys\ShopBundle\Model\Product\Unit\Unit
+     */
+    public function getDefaultUnit() {
+        $defaultUnitId = $this->getDefaultUnitId();
 
-		return $this->unitRepository->getById($defaultUnitId);
-	}
+        return $this->unitRepository->getById($defaultUnitId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
-	 */
-	public function setDefaultUnit(Unit $unit) {
-		$this->setting->set(Setting::DEFAULT_UNIT, $unit->getId());
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     */
+    public function setDefaultUnit(Unit $unit) {
+        $this->setting->set(Setting::DEFAULT_UNIT, $unit->getId());
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
-	 * @return bool
-	 */
-	public function isUnitDefault(Unit $unit) {
-		return $this->getDefaultUnit() === $unit;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Unit\Unit $unit
+     * @return bool
+     */
+    public function isUnitDefault(Unit $unit) {
+        return $this->getDefaultUnit() === $unit;
+    }
 }

@@ -6,15 +6,15 @@ use Shopsys\ShopBundle\Component\Router\Security\Annotation\CsrfProtection;
 
 class DummyController {
 
-	public function withoutProtectionAction() {
+    public function withoutProtectionAction() {
 
-	}
+    }
 
-	/**
-	 * @CsrfProtection
-	 */
-	public function withProtectionAction() {
+    /**
+     * @CsrfProtection
+     */
+    public function withProtectionAction() {
 
-	}
+    }
 
 }

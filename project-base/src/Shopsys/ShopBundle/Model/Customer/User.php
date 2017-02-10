@@ -26,332 +26,332 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, TimelimitLoginInterface, Serializable {
 
-	/**
-	 * @ORM\Column(type="integer")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 */
-	private $id;
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
-	/**
-	 * @ORM\Column(type="string", length=100)
-	 */
-	private $firstName;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $firstName;
 
-	/**
-	 * @ORM\Column(type="string", length=100)
-	 */
-	private $lastName;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $lastName;
 
-	/**
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $email;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
 
-	/**
-	 * @ORM\Column(type="string", length=100)
-	 */
-	private $password;
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $password;
 
-	/**
-	 * @var DateTime
-	 */
-	private $lastActivity;
+    /**
+     * @var DateTime
+     */
+    private $lastActivity;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\BillingAddress
-	 * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\BillingAddress")
-	 * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
-	 */
-	private $billingAddress;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\BillingAddress
+     * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\BillingAddress")
+     * @ORM\JoinColumn(name="billing_address_id", referencedColumnName="id", nullable=false)
+     */
+    private $billingAddress;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
-	 * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\DeliveryAddress")
-	 * @ORM\JoinColumn(nullable=true)
-	 */
-	private $deliveryAddress;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     * @ORM\OneToOne(targetEntity="Shopsys\ShopBundle\Model\Customer\DeliveryAddress")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $deliveryAddress;
 
-	/**
-	 * @var \DateTime
-	 * @ORM\Column(type="datetime")
-	 */
-	private $createdAt;
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
-	/**
-	 * @var \DateTime|null
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $lastLogin;
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLogin;
 
-	/**
-	 * @var int
-	 * @ORM\Column(type="integer")
-	 */
-	private $domainId;
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    private $domainId;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
-	 * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup")
-	 * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
-	 */
-	private $pricingGroup;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     * @ORM\ManyToOne(targetEntity="Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup")
+     * @ORM\JoinColumn(name="pricing_group_id", referencedColumnName="id", nullable=false)
+     */
+    private $pricingGroup;
 
-	/**
-	 * @var string|null
-	 * @ORM\Column(type="string", length=50, nullable=true)
-	 */
-	private $resetPasswordHash;
+    /**
+     * @var string|null
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $resetPasswordHash;
 
-	/**
-	 * @var \DateTime|null
-	 * @ORM\Column(type="datetime", nullable=true)
-	 */
-	private $resetPasswordHashValidThrough;
+    /**
+     * @var \DateTime|null
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $resetPasswordHashValidThrough;
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-	 * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 */
-	public function __construct(
-		UserData $userData,
-		BillingAddress $billingAddress,
-		DeliveryAddress $deliveryAddress = null
-	) {
-		$this->firstName = $userData->firstName;
-		$this->lastName = $userData->lastName;
-		$this->email = mb_strtolower($userData->email);
-		$this->billingAddress = $billingAddress;
-		$this->deliveryAddress = $deliveryAddress;
-		$this->createdAt = new DateTime();
-		$this->domainId = $userData->domainId;
-		$this->pricingGroup = $userData->pricingGroup;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+     * @param \Shopsys\ShopBundle\Model\Customer\BillingAddress $billingAddress
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     */
+    public function __construct(
+        UserData $userData,
+        BillingAddress $billingAddress,
+        DeliveryAddress $deliveryAddress = null
+    ) {
+        $this->firstName = $userData->firstName;
+        $this->lastName = $userData->lastName;
+        $this->email = mb_strtolower($userData->email);
+        $this->billingAddress = $billingAddress;
+        $this->deliveryAddress = $deliveryAddress;
+        $this->createdAt = new DateTime();
+        $this->domainId = $userData->domainId;
+        $this->pricingGroup = $userData->pricingGroup;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
-	 */
-	public function edit(UserData $userData) {
-		$this->firstName = $userData->firstName;
-		$this->lastName = $userData->lastName;
-		$this->pricingGroup = $userData->pricingGroup;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\UserData $userData
+     */
+    public function edit(UserData $userData) {
+        $this->firstName = $userData->firstName;
+        $this->lastName = $userData->lastName;
+        $this->pricingGroup = $userData->pricingGroup;
+    }
 
-	/**
-	 * @param string $email
-	 */
-	public function changeEmail($email) {
-		$this->email = $email;
-	}
+    /**
+     * @param string $email
+     */
+    public function changeEmail($email) {
+        $this->email = $email;
+    }
 
-	/**
-	 * @param string $password
-	 */
-	public function changePassword($password) {
-		$this->password = $password;
-		$this->resetPasswordHash = null;
-		$this->resetPasswordHashValidThrough = null;
-	}
+    /**
+     * @param string $password
+     */
+    public function changePassword($password) {
+        $this->password = $password;
+        $this->resetPasswordHash = null;
+        $this->resetPasswordHashValidThrough = null;
+    }
 
-	/**
-	 * @param string $hash
-	 */
-	public function setResetPasswordHash($hash) {
-		$this->resetPasswordHash = $hash;
-		$this->resetPasswordHashValidThrough = new DateTime('+48 hours');
-	}
+    /**
+     * @param string $hash
+     */
+    public function setResetPasswordHash($hash) {
+        $this->resetPasswordHash = $hash;
+        $this->resetPasswordHashValidThrough = new DateTime('+48 hours');
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
-	 */
-	public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
-		$this->deliveryAddress = $deliveryAddress;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null $deliveryAddress
+     */
+    public function setDeliveryAddress(DeliveryAddress $deliveryAddress = null) {
+        $this->deliveryAddress = $deliveryAddress;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * @return int
+     */
+    public function getId() {
+        return $this->id;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getFirstName() {
-		return $this->firstName;
-	}
+    /**
+     * @return string
+     */
+    public function getFirstName() {
+        return $this->firstName;
+    }
 
-	/**
-	 * @return DateTime
-	 */
-	public function getLastActivity() {
-		return $this->lastActivity;
-	}
+    /**
+     * @return DateTime
+     */
+    public function getLastActivity() {
+        return $this->lastActivity;
+    }
 
-	/**
-	 * @param DateTime $lastActivity
-	 */
-	public function setLastActivity($lastActivity) {
-		$this->lastActivity = $lastActivity;
-	}
+    /**
+     * @param DateTime $lastActivity
+     */
+    public function setLastActivity($lastActivity) {
+        $this->lastActivity = $lastActivity;
+    }
 
-	public function onLogin() {
-		$this->lastLogin = new DateTime();
-	}
+    public function onLogin() {
+        $this->lastLogin = new DateTime();
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getDomainId() {
-		return $this->domainId;
-	}
+    /**
+     * @return int
+     */
+    public function getDomainId() {
+        return $this->domainId;
+    }
 
-	/**
-	 * @param int $domainId
-	 */
-	public function setDomainId($domainId) {
-		$this->domainId = $domainId;
-	}
+    /**
+     * @param int $domainId
+     */
+    public function setDomainId($domainId) {
+        $this->domainId = $domainId;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getLastName() {
-		return $this->lastName;
-	}
+    /**
+     * @return string
+     */
+    public function getLastName() {
+        return $this->lastName;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getEmail() {
-		return $this->email;
-	}
+    /**
+     * @return string
+     */
+    public function getEmail() {
+        return $this->email;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getUsername() {
-		return $this->email;
-	}
+    /**
+     * @return string
+     */
+    public function getUsername() {
+        return $this->email;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getPassword() {
-		return $this->password;
-	}
+    /**
+     * @return string
+     */
+    public function getPassword() {
+        return $this->password;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getFullName() {
-		if ($this->billingAddress->isCompanyCustomer()) {
-			return $this->billingAddress->getCompanyName();
-		}
+    /**
+     * @return string
+     */
+    public function getFullName() {
+        if ($this->billingAddress->isCompanyCustomer()) {
+            return $this->billingAddress->getCompanyName();
+        }
 
-		return $this->lastName . ' ' . $this->firstName;
-	}
+        return $this->lastName . ' ' . $this->firstName;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
-	 */
-	public function getBillingAddress() {
-		return $this->billingAddress;
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Customer\BillingAddress
+     */
+    public function getBillingAddress() {
+        return $this->billingAddress;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
-	 */
-	public function getDeliveryAddress() {
-		return $this->deliveryAddress;
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Customer\DeliveryAddress|null
+     */
+    public function getDeliveryAddress() {
+        return $this->deliveryAddress;
+    }
 
-	/**
-	 * @return \DateTime
-	 */
-	public function getCreatedAt() {
-		return $this->createdAt;
-	}
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
 
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getLastLogin() {
-		return $this->lastLogin;
-	}
+    /**
+     * @return \DateTime|null
+     */
+    public function getLastLogin() {
+        return $this->lastLogin;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
-	 */
-	public function getPricingGroup() {
-		return $this->pricingGroup;
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup
+     */
+    public function getPricingGroup() {
+        return $this->pricingGroup;
+    }
 
-	/**
-	 * @return string|null
-	 */
-	public function getResetPasswordHash() {
-		return $this->resetPasswordHash;
-	}
+    /**
+     * @return string|null
+     */
+    public function getResetPasswordHash() {
+        return $this->resetPasswordHash;
+    }
 
-	/**
-	 * @return \DateTime|null
-	 */
-	public function getResetPasswordHashValidThrough() {
-		return $this->resetPasswordHashValidThrough;
-	}
+    /**
+     * @return \DateTime|null
+     */
+    public function getResetPasswordHashValidThrough() {
+        return $this->resetPasswordHashValidThrough;
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function serialize() {
-		return serialize([
-			$this->id,
-			$this->email,
-			// When unserialized user has empty password,
-			// then UsernamePasswordToken is reloaded and ROLE_ADMIN_AS_CUSTOMER is lost.
-			$this->password,
-			time(), // lastActivity
-			$this->domainId,
-		]);
-	}
+    /**
+     * @inheritDoc
+     */
+    public function serialize() {
+        return serialize([
+            $this->id,
+            $this->email,
+            // When unserialized user has empty password,
+            // then UsernamePasswordToken is reloaded and ROLE_ADMIN_AS_CUSTOMER is lost.
+            $this->password,
+            time(), // lastActivity
+            $this->domainId,
+        ]);
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function unserialize($serialized) {
-		list(
-			$this->id,
-			$this->email,
-			$this->password,
-			$timestamp,
-			$this->domainId
-		) = unserialize($serialized);
-		$this->lastActivity = new DateTime();
-		$this->lastActivity->setTimestamp($timestamp);
-	}
+    /**
+     * @inheritDoc
+     */
+    public function unserialize($serialized) {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            $timestamp,
+            $this->domainId
+        ) = unserialize($serialized);
+        $this->lastActivity = new DateTime();
+        $this->lastActivity->setTimestamp($timestamp);
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function eraseCredentials() {
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials() {
 
-	}
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getRoles() {
-		return [Roles::ROLE_CUSTOMER];
-	}
+    /**
+     * @inheritDoc
+     */
+    public function getRoles() {
+        return [Roles::ROLE_CUSTOMER];
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getSalt() {
-		return null; // bcrypt include salt in password hash
-	}
+    /**
+     * @inheritDoc
+     */
+    public function getSalt() {
+        return null; // bcrypt include salt in password hash
+    }
 
 }

@@ -12,25 +12,25 @@ use Shopsys\ShopBundle\Model\AdvancedSearchOrder\Filter\OrderStatusFilter;
 
 class OrderAdvancedSearchConfig extends AdvancedSearchConfig {
 
-	public function __construct(
-		OrderNumberFilter $orderNumberFilter,
-		OrderCreateDateFilter $orderCreateDateFilter,
-		OrderPriceFilterWithVatFilter $orderPriceFilterWithVatFilter,
-		OrderDomainFilter $orderDomainFilter,
-		OrderStatusFilter $orderStatusFilter,
-		OrderProductFilter $orderProductFilter,
-		Domain $domain
-	) {
-		parent::__construct();
+    public function __construct(
+        OrderNumberFilter $orderNumberFilter,
+        OrderCreateDateFilter $orderCreateDateFilter,
+        OrderPriceFilterWithVatFilter $orderPriceFilterWithVatFilter,
+        OrderDomainFilter $orderDomainFilter,
+        OrderStatusFilter $orderStatusFilter,
+        OrderProductFilter $orderProductFilter,
+        Domain $domain
+    ) {
+        parent::__construct();
 
-		$this->registerFilter($orderPriceFilterWithVatFilter);
-		$this->registerFilter($orderNumberFilter);
-		$this->registerFilter($orderCreateDateFilter);
-		$this->registerFilter($orderStatusFilter);
-		if ($domain->isMultidomain()) {
-			$this->registerFilter($orderDomainFilter);
-		}
-		$this->registerFilter($orderProductFilter);
-	}
+        $this->registerFilter($orderPriceFilterWithVatFilter);
+        $this->registerFilter($orderNumberFilter);
+        $this->registerFilter($orderCreateDateFilter);
+        $this->registerFilter($orderStatusFilter);
+        if ($domain->isMultidomain()) {
+            $this->registerFilter($orderDomainFilter);
+        }
+        $this->registerFilter($orderProductFilter);
+    }
 
 }

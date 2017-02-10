@@ -10,59 +10,59 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class YesNoType extends AbstractType {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer
-	 */
-	private $noopDataTransformer;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Transformers\NoopDataTransformer
+     */
+    private $noopDataTransformer;
 
-	public function __construct(
-		NoopDataTransformer $noopDataTransformer
-	) {
-		$this->noopDataTransformer = $noopDataTransformer;
-	}
+    public function __construct(
+        NoopDataTransformer $noopDataTransformer
+    ) {
+        $this->noopDataTransformer = $noopDataTransformer;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		parent::buildForm($builder, $options);
+    /**
+     * {@inheritDoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        parent::buildForm($builder, $options);
 
-		// workaround for ChoiceType issue: https://github.com/symfony/symfony/issues/15573
-		$builder->addViewTransformer(new NoopDataTransformer());
-	}
+        // workaround for ChoiceType issue: https://github.com/symfony/symfony/issues/15573
+        $builder->addViewTransformer(new NoopDataTransformer());
+    }
 
-	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'choice_list' => new IndexedChoiceList(
-				[true, false],
-				[
-					t('Yes'),
-					t('No'),
-				],
-				['yes', 'no'],
-				['1', '0']
-			),
-			'multiple' => false,
-			'expanded' => true,
-			'placeholder' => false,
-		]);
-	}
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'choice_list' => new IndexedChoiceList(
+                [true, false],
+                [
+                    t('Yes'),
+                    t('No'),
+                ],
+                ['yes', 'no'],
+                ['1', '0']
+            ),
+            'multiple' => false,
+            'expanded' => true,
+            'placeholder' => false,
+        ]);
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getParent() {
-		return 'choice';
-	}
+    /**
+     * @return string
+     */
+    public function getParent() {
+        return 'choice';
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'yes_no';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'yes_no';
+    }
 
 }

@@ -7,31 +7,31 @@ use PLUG\JavaScript\JTokenizer;
 
 class JsCompiler {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
-	 */
-	private $compilerPasses;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[]
+     */
+    private $compilerPasses;
 
-	/**
-	 * @param \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[] $compilerPasses
-	 */
-	public function __construct(array $compilerPasses) {
-		$this->compilerPasses = $compilerPasses;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Component\Javascript\Compiler\JsCompilerPassInterface[] $compilerPasses
+     */
+    public function __construct(array $compilerPasses) {
+        $this->compilerPasses = $compilerPasses;
+    }
 
-	/**
-	 * @param string $content
-	 * @return string
-	 */
-	public function compile($content) {
-		$node = JParser::parse_string($content, true, JParser::class, JTokenizer::class);
-		/* @var $node \PLUG\JavaScript\JNodes\nonterminal\JProgramNode */
+    /**
+     * @param string $content
+     * @return string
+     */
+    public function compile($content) {
+        $node = JParser::parse_string($content, true, JParser::class, JTokenizer::class);
+        /* @var $node \PLUG\JavaScript\JNodes\nonterminal\JProgramNode */
 
-		foreach ($this->compilerPasses as $compilerPass) {
-			$compilerPass->process($node);
-		}
+        foreach ($this->compilerPasses as $compilerPass) {
+            $compilerPass->process($node);
+        }
 
-		return $node->format();
-	}
+        return $node->format();
+    }
 
 }

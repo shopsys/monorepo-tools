@@ -8,103 +8,103 @@ use Shopsys\ShopBundle\Model\Order\Status\OrderStatus;
 
 class OrderStatusRepository {
 
-	/**
-	 * @var \Doctrine\ORM\EntityRepository
-	 */
-	private $em;
+    /**
+     * @var \Doctrine\ORM\EntityRepository
+     */
+    private $em;
 
-	/**
-	 * @param \Doctrine\ORM\EntityManager $entityManager
-	 */
-	public function __construct(EntityManager $entityManager) {
-		$this->em = $entityManager;
-	}
+    /**
+     * @param \Doctrine\ORM\EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager) {
+        $this->em = $entityManager;
+    }
 
-	/**
-	 * @return \Doctrine\ORM\EntityRepository
-	 */
-	private function getOrderStatusRepository() {
-		return $this->em->getRepository(OrderStatus::class);
-	}
+    /**
+     * @return \Doctrine\ORM\EntityRepository
+     */
+    private function getOrderStatusRepository() {
+        return $this->em->getRepository(OrderStatus::class);
+    }
 
-	/**
-	 * @param int $orderStatusId
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus|null
-	 */
-	public function findById($orderStatusId) {
-		return $this->getOrderStatusRepository()->find($orderStatusId);
-	}
+    /**
+     * @param int $orderStatusId
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus|null
+     */
+    public function findById($orderStatusId) {
+        return $this->getOrderStatusRepository()->find($orderStatusId);
+    }
 
-	/**
-	 * @param int $orderStatusId
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
-	 */
-	public function getById($orderStatusId) {
-		$orderStatus = $this->findById($orderStatusId);
+    /**
+     * @param int $orderStatusId
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     */
+    public function getById($orderStatusId) {
+        $orderStatus = $this->findById($orderStatusId);
 
-		if ($orderStatus === null) {
-			$message = 'Order status with ID ' . $orderStatusId . ' not found.';
-			throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
-		}
+        if ($orderStatus === null) {
+            $message = 'Order status with ID ' . $orderStatusId . ' not found.';
+            throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+        }
 
-		return $orderStatus;
-	}
+        return $orderStatus;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
-	 */
-	public function getDefault() {
-		$orderStatus = $this->getOrderStatusRepository()->findOneBy(['type' => OrderStatus::TYPE_NEW]);
+    /**
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus
+     */
+    public function getDefault() {
+        $orderStatus = $this->getOrderStatusRepository()->findOneBy(['type' => OrderStatus::TYPE_NEW]);
 
-		if ($orderStatus === null) {
-			$message = 'Default order status not found.';
-			throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
-		}
+        if ($orderStatus === null) {
+            $message = 'Default order status not found.';
+            throw new \Shopsys\ShopBundle\Model\Order\Status\Exception\OrderStatusNotFoundException($message);
+        }
 
-		return $orderStatus;
-	}
+        return $orderStatus;
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
-	 */
-	public function getAll() {
-		return $this->getOrderStatusRepository()->findBy([], ['id' => 'asc']);
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     */
+    public function getAll() {
+        return $this->getOrderStatusRepository()->findBy([], ['id' => 'asc']);
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
-	 */
-	public function getAllIndexedById() {
-		$orderStatusesIndexedById = [];
+    /**
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     */
+    public function getAllIndexedById() {
+        $orderStatusesIndexedById = [];
 
-		foreach ($this->getAll() as $orderStatus) {
-			$orderStatusesIndexedById[$orderStatus->getId()] = $orderStatus;
-		}
+        foreach ($this->getAll() as $orderStatus) {
+            $orderStatusesIndexedById[$orderStatus->getId()] = $orderStatus;
+        }
 
-		return $orderStatusesIndexedById;
-	}
+        return $orderStatusesIndexedById;
+    }
 
-	/**
-	 * @param int $orderStatusId
-	 * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
-	 */
-	public function getAllExceptId($orderStatusId) {
-		$qb = $this->getOrderStatusRepository()->createQueryBuilder('os')
-			->where('os.id != :id')
-			->setParameter('id', $orderStatusId);
+    /**
+     * @param int $orderStatusId
+     * @return \Shopsys\ShopBundle\Model\Order\Status\OrderStatus[]
+     */
+    public function getAllExceptId($orderStatusId) {
+        $qb = $this->getOrderStatusRepository()->createQueryBuilder('os')
+            ->where('os.id != :id')
+            ->setParameter('id', $orderStatusId);
 
-		return $qb->getQuery()->getResult();
-	}
+        return $qb->getQuery()->getResult();
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
-	 * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
-	 */
-	public function replaceOrderStatus(OrderStatus $oldOrderStatus, OrderStatus $newOrderStatus) {
-		$this->em->createQueryBuilder()
-			->update(Order::class, 'o')
-			->set('o.status', ':newOrderStatus')->setParameter('newOrderStatus', $newOrderStatus)
-			->where('o.status = :oldOrderStatus')->setParameter('oldOrderStatus', $oldOrderStatus)
-			->getQuery()->execute();
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $oldOrderStatus
+     * @param \Shopsys\ShopBundle\Model\Order\Status\OrderStatus $newOrderStatus
+     */
+    public function replaceOrderStatus(OrderStatus $oldOrderStatus, OrderStatus $newOrderStatus) {
+        $this->em->createQueryBuilder()
+            ->update(Order::class, 'o')
+            ->set('o.status', ':newOrderStatus')->setParameter('newOrderStatus', $newOrderStatus)
+            ->where('o.status = :oldOrderStatus')->setParameter('oldOrderStatus', $oldOrderStatus)
+            ->getQuery()->execute();
+    }
 }

@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueCollection extends Constraint {
 
-	public $message = 'Values are duplicate.';
-	public $fields = null;
-	public $allowEmpty = false;
+    public $message = 'Values are duplicate.';
+    public $fields = null;
+    public $allowEmpty = false;
 
 }

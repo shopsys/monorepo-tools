@@ -7,11 +7,11 @@ use Shopsys\ShopBundle\Component\Controller\AdminBaseController;
 
 class DefaultController extends AdminBaseController {
 
-	/**
-	 * @Route("/dashboard/")
-	 */
-	public function dashboardAction() {
-		return $this->render('@ShopsysShop/Admin/Content/Default/index.html.twig');
-	}
+    /**
+     * @Route("/dashboard/")
+     */
+    public function dashboardAction() {
+        return $this->render('@ShopsysShop/Admin/Content/Default/index.html.twig');
+    }
 
 }

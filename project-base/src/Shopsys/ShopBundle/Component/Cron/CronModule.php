@@ -10,69 +10,69 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CronModule {
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=255)
-	 * @ORM\Id
-	 */
-	private $moduleId;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     * @ORM\Id
+     */
+    private $moduleId;
 
-	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean")
-	 */
-	private $scheduled;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $scheduled;
 
-	/**
-	 * @var bool
-	 *
-	 * @ORM\Column(type="boolean", options={"default"=false})
-	 */
-	private $suspended;
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default"=false})
+     */
+    private $suspended;
 
-	/**
-	 * @param string $moduleId
-	 */
-	public function __construct($moduleId) {
-		$this->moduleId = $moduleId;
-		$this->scheduled = false;
-		$this->suspended = false;
-	}
+    /**
+     * @param string $moduleId
+     */
+    public function __construct($moduleId) {
+        $this->moduleId = $moduleId;
+        $this->scheduled = false;
+        $this->suspended = false;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getModuleId() {
-		return $this->moduleId;
-	}
+    /**
+     * @return string
+     */
+    public function getModuleId() {
+        return $this->moduleId;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isScheduled() {
-		return $this->scheduled;
-	}
+    /**
+     * @return bool
+     */
+    public function isScheduled() {
+        return $this->scheduled;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isSuspended() {
-		return $this->suspended;
-	}
+    /**
+     * @return bool
+     */
+    public function isSuspended() {
+        return $this->suspended;
+    }
 
-	public function schedule() {
-		$this->scheduled = true;
-	}
+    public function schedule() {
+        $this->scheduled = true;
+    }
 
-	public function unschedule() {
-		$this->scheduled = false;
-		$this->suspended = false;
-	}
+    public function unschedule() {
+        $this->scheduled = false;
+        $this->suspended = false;
+    }
 
-	public function suspend() {
-		$this->suspended = true;
-	}
+    public function suspend() {
+        $this->suspended = true;
+    }
 
 }

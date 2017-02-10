@@ -11,35 +11,35 @@ use Shopsys\ShopBundle\Model\Customer\CustomerFacade;
 
 class UserDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$customerFacade = $this->get(CustomerFacade::class);
-		/* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
-		$loaderService = $this->get(UserDataFixtureLoader::class);
-		/* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $customerFacade = $this->get(CustomerFacade::class);
+        /* @var $customerFacade \Shopsys\ShopBundle\Model\Customer\CustomerFacade */
+        $loaderService = $this->get(UserDataFixtureLoader::class);
+        /* @var $loaderService \Shopsys\ShopBundle\DataFixtures\Demo\UserDataFixtureLoader */
 
-		$countries = [
-			$this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2),
-			$this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2),
-		];
-		$loaderService->injectReferences($countries);
+        $countries = [
+            $this->getReference(CountryDataFixture::COUNTRY_CZECH_REPUBLIC_2),
+            $this->getReference(CountryDataFixture::COUNTRY_SLOVAKIA_2),
+        ];
+        $loaderService->injectReferences($countries);
 
-		$customersData = $loaderService->getCustomersDataByDomainId(2);
+        $customersData = $loaderService->getCustomersDataByDomainId(2);
 
-		foreach ($customersData as $customerData) {
-			$customerFacade->create($customerData);
-		}
-	}
+        foreach ($customersData as $customerData) {
+            $customerFacade->create($customerData);
+        }
+    }
 
-	/**
-	 * @inheritDoc
-	 */
-	public function getDependencies() {
-		return [
-			CountryDataFixture::class,
-		];
-	}
+    /**
+     * @inheritDoc
+     */
+    public function getDependencies() {
+        return [
+            CountryDataFixture::class,
+        ];
+    }
 
 }

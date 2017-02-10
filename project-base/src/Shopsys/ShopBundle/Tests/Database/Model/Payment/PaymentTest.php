@@ -13,23 +13,23 @@ use Shopsys\ShopBundle\Tests\Test\DatabaseTestCase;
 
 class PaymentTest extends DatabaseTestCase {
 
-	public function testRemoveTransportFromPaymentAfterDelete() {
-		$em = $this->getEntityManager();
+    public function testRemoveTransportFromPaymentAfterDelete() {
+        $em = $this->getEntityManager();
 
-		$vat = new Vat(new VatData('vat', 21));
-		$transport = new Transport(new TransportData([], $vat, [], [], false));
-		$payment = new Payment(new PaymentData(['cs' => 'name'], $vat, [], [], false));
-		$payment->addTransport($transport);
+        $vat = new Vat(new VatData('vat', 21));
+        $transport = new Transport(new TransportData([], $vat, [], [], false));
+        $payment = new Payment(new PaymentData(['cs' => 'name'], $vat, [], [], false));
+        $payment->addTransport($transport);
 
-		$em->persist($vat);
-		$em->persist($transport);
-		$em->persist($payment);
-		$em->flush();
+        $em->persist($vat);
+        $em->persist($transport);
+        $em->persist($payment);
+        $em->flush();
 
-		$transportFacade = $this->getContainer()->get(TransportFacade::class);
-		/* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
-		$transportFacade->deleteById($transport->getId());
+        $transportFacade = $this->getContainer()->get(TransportFacade::class);
+        /* @var $transportFacade \Shopsys\ShopBundle\Model\Transport\TransportFacade */
+        $transportFacade->deleteById($transport->getId());
 
-		$this->assertFalse($payment->getTransports()->contains($transport));
-	}
+        $this->assertFalse($payment->getTransports()->contains($transport));
+    }
 }

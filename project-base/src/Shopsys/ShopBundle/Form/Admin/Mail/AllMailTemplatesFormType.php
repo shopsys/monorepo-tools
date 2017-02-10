@@ -13,47 +13,47 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AllMailTemplatesFormType extends AbstractType {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
-	 */
-	private $resetPasswordMail;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\Mail\ResetPasswordMail
+     */
+    private $resetPasswordMail;
 
-	public function __construct(
-		ResetPasswordMail $resetPasswordMail
-	) {
-		$this->resetPasswordMail = $resetPasswordMail;
-	}
+    public function __construct(
+        ResetPasswordMail $resetPasswordMail
+    ) {
+        $this->resetPasswordMail = $resetPasswordMail;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'all_mail_templates_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'all_mail_templates_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('registrationTemplate', new MailTemplateFormType(new DummyMailType()))
-			->add('resetPasswordTemplate', new MailTemplateFormType($this->resetPasswordMail))
-			->add('orderStatusTemplates', FormType::COLLECTION, [
-				'type' => new MailTemplateFormType(new DummyMailType()),
-			])
-			->add('domainId', FormType::HIDDEN)
-			->add('save', FormType::SUBMIT);
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('registrationTemplate', new MailTemplateFormType(new DummyMailType()))
+            ->add('resetPasswordTemplate', new MailTemplateFormType($this->resetPasswordMail))
+            ->add('orderStatusTemplates', FormType::COLLECTION, [
+                'type' => new MailTemplateFormType(new DummyMailType()),
+            ])
+            ->add('domainId', FormType::HIDDEN)
+            ->add('save', FormType::SUBMIT);
+    }
 
-	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-			'data_class' => AllMailTemplatesData::class,
-		]);
-	}
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+            'data_class' => AllMailTemplatesData::class,
+        ]);
+    }
 
 }

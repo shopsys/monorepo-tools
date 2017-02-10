@@ -7,37 +7,37 @@ use Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade;
 
 class CategoryVisibilityRecalculationScheduler {
 
-	/**
-	 * @var bool
-	 */
-	private $recalculate = false;
+    /**
+     * @var bool
+     */
+    private $recalculate = false;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
-	 */
-	private $productVisibilityFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\ProductVisibilityFacade
+     */
+    private $productVisibilityFacade;
 
-	public function __construct(ProductVisibilityFacade $productVisibilityFacade) {
-		$this->productVisibilityFacade = $productVisibilityFacade;
-	}
+    public function __construct(ProductVisibilityFacade $productVisibilityFacade) {
+        $this->productVisibilityFacade = $productVisibilityFacade;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 */
-	public function scheduleRecalculation(Category $category) {
-		$this->recalculate = true;
-		$this->productVisibilityFacade->markProductsForRecalculationAffectedByCategory($category);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     */
+    public function scheduleRecalculation(Category $category) {
+        $this->recalculate = true;
+        $this->productVisibilityFacade->markProductsForRecalculationAffectedByCategory($category);
+    }
 
-	public function scheduleRecalculationWithoutDependencies() {
-		$this->recalculate = true;
-	}
+    public function scheduleRecalculationWithoutDependencies() {
+        $this->recalculate = true;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function isRecalculationScheduled() {
-		return $this->recalculate;
-	}
+    /**
+     * @return bool
+     */
+    public function isRecalculationScheduled() {
+        return $this->recalculate;
+    }
 
 }

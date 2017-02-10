@@ -10,19 +10,19 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture {
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
-		/* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
+        /* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
-		$domainId = 2;
-		$manualBestsellingProductFacade->edit(
-			$this->getReference(DemoCategoryDataFixture::PREFIX . DemoCategoryDataFixture::PHOTO),
-			$domainId,
-			[$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
-		);
-	}
+        $domainId = 2;
+        $manualBestsellingProductFacade->edit(
+            $this->getReference(DemoCategoryDataFixture::PREFIX . DemoCategoryDataFixture::PHOTO),
+            $domainId,
+            [$this->getReference(DemoProductDataFixture::PRODUCT_PREFIX . '7')]
+        );
+    }
 
 }

@@ -11,46 +11,46 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository;
 
 class CustomerFormTypeFactory {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
-	 */
-	private $selectedDomain;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\SelectedDomain
+     */
+    private $selectedDomain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
-	 */
-	private $pricingGroupRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupRepository
+     */
+    private $pricingGroupRepository;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
-	 */
-	private $countryFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Country\CountryFacade
+     */
+    private $countryFacade;
 
-	public function __construct(
-		SelectedDomain $selectedDomain,
-		PricingGroupRepository $pricingGroupRepository,
-		CountryFacade $countryFacade
-	) {
-		$this->selectedDomain = $selectedDomain;
-		$this->pricingGroupRepository = $pricingGroupRepository;
-		$this->countryFacade = $countryFacade;
-	}
+    public function __construct(
+        SelectedDomain $selectedDomain,
+        PricingGroupRepository $pricingGroupRepository,
+        CountryFacade $countryFacade
+    ) {
+        $this->selectedDomain = $selectedDomain;
+        $this->pricingGroupRepository = $pricingGroupRepository;
+        $this->countryFacade = $countryFacade;
+    }
 
-	/**
-	 * @param string $scenario
-	 * @param \Shopsys\ShopBundle\Model\Customer\User $user
-	 * @return \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType
-	 */
-	public function create($scenario, User $user = null) {
-		if ($scenario === CustomerFormType::SCENARIO_EDIT) {
-			$allPricingGroups = $this->pricingGroupRepository->getPricingGroupsByDomainId($user->getDomainId());
-		} else {
-			$allPricingGroups = $this->pricingGroupRepository->getAll();
-		}
+    /**
+     * @param string $scenario
+     * @param \Shopsys\ShopBundle\Model\Customer\User $user
+     * @return \Shopsys\ShopBundle\Form\Admin\Customer\CustomerFormType
+     */
+    public function create($scenario, User $user = null) {
+        if ($scenario === CustomerFormType::SCENARIO_EDIT) {
+            $allPricingGroups = $this->pricingGroupRepository->getPricingGroupsByDomainId($user->getDomainId());
+        } else {
+            $allPricingGroups = $this->pricingGroupRepository->getAll();
+        }
 
-		$countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
+        $countries = $this->countryFacade->getAllByDomainId($this->selectedDomain->getId());
 
-		return new CustomerFormType($scenario, $countries, $this->selectedDomain, $allPricingGroups);
-	}
+        return new CustomerFormType($scenario, $countries, $this->selectedDomain, $allPricingGroups);
+    }
 
 }

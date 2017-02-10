@@ -10,45 +10,45 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ModulesFormType extends AbstractType {
 
-	const MODULES_SUBFORM_NAME = 'modules';
+    const MODULES_SUBFORM_NAME = 'modules';
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Module\ModuleList
-	 */
-	private $moduleList;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Module\ModuleList
+     */
+    private $moduleList;
 
-	public function __construct(ModuleList $moduleList) {
-		$this->moduleList = $moduleList;
-	}
+    public function __construct(ModuleList $moduleList) {
+        $this->moduleList = $moduleList;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'modules_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'modules_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add(self::MODULES_SUBFORM_NAME, FormType::FORM)
-			->add('save', FormType::SUBMIT);
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add(self::MODULES_SUBFORM_NAME, FormType::FORM)
+            ->add('save', FormType::SUBMIT);
 
-		foreach ($this->moduleList->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
-			$builder->get(self::MODULES_SUBFORM_NAME)
-				->add($moduleName, FormType::YES_NO, [
-					'label' => $moduleTranslation,
-				]);
-		}
-	}
+        foreach ($this->moduleList->getTranslationsIndexedByValue() as $moduleName => $moduleTranslation) {
+            $builder->get(self::MODULES_SUBFORM_NAME)
+                ->add($moduleName, FormType::YES_NO, [
+                    'label' => $moduleTranslation,
+                ]);
+        }
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 
 }

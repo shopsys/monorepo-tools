@@ -4,5 +4,5 @@ namespace Shopsys\ShopBundle\Form;
 
 class ValidationGroup {
 
-	const VALIDATION_GROUP_DEFAULT = 'Default';
+    const VALIDATION_GROUP_DEFAULT = 'Default';
 }

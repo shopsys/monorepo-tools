@@ -10,104 +10,104 @@ use Shopsys\ShopBundle\Component\Doctrine\SortableNullsWalker;
 
 class QueryPaginator implements PaginatorInterface {
 
-	/**
-	 * @var \Doctrine\ORM\QueryBuilder
-	 */
-	private $queryBuilder;
+    /**
+     * @var \Doctrine\ORM\QueryBuilder
+     */
+    private $queryBuilder;
 
-	/**
-	 * @var string|null
-	 */
-	private $hydrationMode;
+    /**
+     * @var string|null
+     */
+    private $hydrationMode;
 
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @param string|null $hydrationMode
-	 */
-	public function __construct(QueryBuilder $queryBuilder, $hydrationMode = null) {
-		$this->queryBuilder = $queryBuilder;
-		$this->hydrationMode = $hydrationMode;
-	}
+    /**
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @param string|null $hydrationMode
+     */
+    public function __construct(QueryBuilder $queryBuilder, $hydrationMode = null) {
+        $this->queryBuilder = $queryBuilder;
+        $this->hydrationMode = $hydrationMode;
+    }
 
-	/**
-	 * @param int $page
-	 * @param int $pageSize
-	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
-	 */
-	public function getResult($page = 1, $pageSize = null) {
-		$queryBuilder = clone $this->queryBuilder;
+    /**
+     * @param int $page
+     * @param int $pageSize
+     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     */
+    public function getResult($page = 1, $pageSize = null) {
+        $queryBuilder = clone $this->queryBuilder;
 
-		if ($page < 1) {
-			$page = 1;
-		}
+        if ($page < 1) {
+            $page = 1;
+        }
 
-		$totalCount = $this->getTotalCount();
+        $totalCount = $this->getTotalCount();
 
-		if ($pageSize !== null) {
-			$maxPage = (int)ceil($totalCount / $pageSize);
-			if ($maxPage < 1) {
-				$maxPage = 1;
-			}
+        if ($pageSize !== null) {
+            $maxPage = (int)ceil($totalCount / $pageSize);
+            if ($maxPage < 1) {
+                $maxPage = 1;
+            }
 
-			if ($page > $maxPage) {
-				$page = $maxPage;
-			}
+            if ($page > $maxPage) {
+                $page = $maxPage;
+            }
 
-			$queryBuilder
-				->setFirstResult($pageSize * ($page - 1))
-				->setMaxResults($pageSize);
-		}
+            $queryBuilder
+                ->setFirstResult($pageSize * ($page - 1))
+                ->setMaxResults($pageSize);
+        }
 
-		$query = $queryBuilder->getQuery();
-		$query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
+        $query = $queryBuilder->getQuery();
+        $query->setHint(Query::HINT_CUSTOM_OUTPUT_WALKER, SortableNullsWalker::class);
 
-		$results = $query->execute(null, $this->hydrationMode);
+        $results = $query->execute(null, $this->hydrationMode);
 
-		return new PaginationResult($page, $pageSize, $totalCount, $results);
+        return new PaginationResult($page, $pageSize, $totalCount, $results);
 
-	}
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getTotalCount() {
-		$totalNativeQuery = $this->getTotalNativeQuery($this->queryBuilder);
+    /**
+     * @return int
+     */
+    public function getTotalCount() {
+        $totalNativeQuery = $this->getTotalNativeQuery($this->queryBuilder);
 
-		return $totalNativeQuery->getSingleScalarResult();
-	}
+        return $totalNativeQuery->getSingleScalarResult();
+    }
 
-	/**
-	 * @param \Doctrine\ORM\QueryBuilder $queryBuilder
-	 * @return \Doctrine\ORM\NativeQuery
-	 */
-	private function getTotalNativeQuery(QueryBuilder $queryBuilder) {
-		$em = $queryBuilder->getEntityManager();
+    /**
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @return \Doctrine\ORM\NativeQuery
+     */
+    private function getTotalNativeQuery(QueryBuilder $queryBuilder) {
+        $em = $queryBuilder->getEntityManager();
 
-		$totalQueryBuilder = clone $queryBuilder;
-		$totalQueryBuilder
-			->setFirstResult(null)
-			->setMaxResults(null)
-			->resetDQLPart('orderBy');
+        $totalQueryBuilder = clone $queryBuilder;
+        $totalQueryBuilder
+            ->setFirstResult(null)
+            ->setMaxResults(null)
+            ->resetDQLPart('orderBy');
 
-		$query = $totalQueryBuilder->getQuery();
+        $query = $totalQueryBuilder->getQuery();
 
-		$parametersAssoc = [];
-		foreach ($query->getParameters() as $parameter) {
-			$parametersAssoc[$parameter->getName()] = $parameter->getValue();
-		}
+        $parametersAssoc = [];
+        foreach ($query->getParameters() as $parameter) {
+            $parametersAssoc[$parameter->getName()] = $parameter->getValue();
+        }
 
-		list(, $flatenedParameters) = SQLParserUtils::expandListParameters(
-			$query->getDQL(),
-			$parametersAssoc,
-			[]
-		);
+        list(, $flatenedParameters) = SQLParserUtils::expandListParameters(
+            $query->getDQL(),
+            $parametersAssoc,
+            []
+        );
 
-		$sql = 'SELECT COUNT(*)::INTEGER AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
+        $sql = 'SELECT COUNT(*)::INTEGER AS total_count FROM (' . $query->getSQL() . ') ORIGINAL_QUERY';
 
-		$rsm = new ResultSetMapping();
-		$rsm->addScalarResult('total_count', 'totalCount');
-		return $em->createNativeQuery($sql, $rsm)
-			->setParameters($flatenedParameters);
-	}
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('total_count', 'totalCount');
+        return $em->createNativeQuery($sql, $rsm)
+            ->setParameters($flatenedParameters);
+    }
 
 }

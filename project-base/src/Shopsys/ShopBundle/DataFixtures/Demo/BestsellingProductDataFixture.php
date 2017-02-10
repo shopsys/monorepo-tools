@@ -12,31 +12,31 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProduct
 
 class BestsellingProductDataFixture extends AbstractReferenceFixture implements DependentFixtureInterface {
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
-		/* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $manualBestsellingProductFacade = $this->get(ManualBestsellingProductFacade::class);
+        /* @var $manualBestsellingProductFacade \Shopsys\ShopBundle\Model\Product\BestsellingProduct\ManualBestsellingProductFacade */
 
-		$manualBestsellingProductFacade->edit(
-			$this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
-			Domain::FIRST_DOMAIN_ID,
-			[
-				0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
-				2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
-				8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
-			]
-		);
-	}
+        $manualBestsellingProductFacade->edit(
+            $this->getReference(CategoryDataFixture::PREFIX . CategoryDataFixture::PHOTO),
+            Domain::FIRST_DOMAIN_ID,
+            [
+                0 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '7'),
+                2 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '8'),
+                8 => $this->getReference(ProductDataFixture::PRODUCT_PREFIX . '5'),
+            ]
+        );
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getDependencies() {
-		return [
-			ProductDataFixture::class,
-			CategoryDataFixture::class,
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getDependencies() {
+        return [
+            ProductDataFixture::class,
+            CategoryDataFixture::class,
+        ];
+    }
 }

@@ -4,35 +4,35 @@ namespace Shopsys\ShopBundle\Component\Csv;
 
 class CsvReader {
 
-	/**
-	 * @param string $filename
-	 * @return array
-	 */
-	public function getRowsFromCsv($filename, $delimiter = ';') {
-		if (!file_exists($filename) || !is_readable($filename)) {
-			throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException();
-		}
+    /**
+     * @param string $filename
+     * @return array
+     */
+    public function getRowsFromCsv($filename, $delimiter = ';') {
+        if (!file_exists($filename) || !is_readable($filename)) {
+            throw new \Symfony\Component\Filesystem\Exception\FileNotFoundException();
+        }
 
-		$rows = [];
+        $rows = [];
 
-		$handle = fopen($filename, 'r');
-		if ($handle === false) {
-			return $rows;
-		}
+        $handle = fopen($filename, 'r');
+        if ($handle === false) {
+            return $rows;
+        }
 
-		do {
-			$row = fgetcsv($handle, 0, $delimiter);
+        do {
+            $row = fgetcsv($handle, 0, $delimiter);
 
-			if ($row === false) {
-				break;
-			}
+            if ($row === false) {
+                break;
+            }
 
-			$rows[] = $row;
-		} while (true);
+            $rows[] = $row;
+        } while (true);
 
-		fclose($handle);
+        fclose($handle);
 
-		return $rows;
-	}
+        return $rows;
+    }
 
 }

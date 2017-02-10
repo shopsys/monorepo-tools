@@ -12,30 +12,30 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  */
 class ParameterTranslation extends AbstractTranslation {
 
-	/**
-	 * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\Parameter")
-	 */
-	protected $translatable;
+    /**
+     * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Parameter\Parameter")
+     */
+    protected $translatable;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="string", length=100, nullable=true)
-	 */
-	private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $name;
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
 
-	/**
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
+    /**
+     * @param string $name
+     */
+    public function setName($name) {
+        $this->name = $name;
+    }
 
 }

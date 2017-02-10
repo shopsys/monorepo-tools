@@ -18,380 +18,380 @@ use Shopsys\ShopBundle\Model\Product\Product;
 
 class CategoryFacade {
 
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	private $em;
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
-	 */
-	private $categoryRepository;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryRepository
+     */
+    private $categoryRepository;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Category\CategoryService
-	 */
-	private $categoryService;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryService
+     */
+    private $categoryService;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler
-	 */
-	private $categoryVisibilityRecalculationScheduler;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Category\CategoryVisibilityRecalculationScheduler
+     */
+    private $categoryVisibilityRecalculationScheduler;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory
-	 */
-	private $categoryDetailFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetailFactory
+     */
+    private $categoryDetailFactory;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
-	 */
-	private $friendlyUrlFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlFacade
+     */
+    private $friendlyUrlFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
-	 */
-	private $imageFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Image\ImageFacade
+     */
+    private $imageFacade;
 
-	public function __construct(
-		EntityManager $em,
-		CategoryRepository $categoryRepository,
-		CategoryService $categoryService,
-		Domain $domain,
-		CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
-		CategoryDetailFactory $categoryDetailFactory,
-		FriendlyUrlFacade $friendlyUrlFacade,
-		ImageFacade $imageFacade
-	) {
-		$this->em = $em;
-		$this->categoryRepository = $categoryRepository;
-		$this->categoryService = $categoryService;
-		$this->domain = $domain;
-		$this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
-		$this->categoryDetailFactory = $categoryDetailFactory;
-		$this->friendlyUrlFacade = $friendlyUrlFacade;
-		$this->imageFacade = $imageFacade;
-	}
+    public function __construct(
+        EntityManager $em,
+        CategoryRepository $categoryRepository,
+        CategoryService $categoryService,
+        Domain $domain,
+        CategoryVisibilityRecalculationScheduler $categoryVisibilityRecalculationScheduler,
+        CategoryDetailFactory $categoryDetailFactory,
+        FriendlyUrlFacade $friendlyUrlFacade,
+        ImageFacade $imageFacade
+    ) {
+        $this->em = $em;
+        $this->categoryRepository = $categoryRepository;
+        $this->categoryService = $categoryService;
+        $this->domain = $domain;
+        $this->categoryVisibilityRecalculationScheduler = $categoryVisibilityRecalculationScheduler;
+        $this->categoryDetailFactory = $categoryDetailFactory;
+        $this->friendlyUrlFacade = $friendlyUrlFacade;
+        $this->imageFacade = $imageFacade;
+    }
 
-	/**
-	 * @param int $categoryId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function getById($categoryId) {
-		return $this->categoryRepository->getById($categoryId);
-	}
+    /**
+     * @param int $categoryId
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function getById($categoryId) {
+        return $this->categoryRepository->getById($categoryId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function create(CategoryData $categoryData) {
-		$rootCategory = $this->getRootCategory();
-		$category = $this->categoryService->create($categoryData, $rootCategory);
-		$this->em->persist($category);
-		$this->em->flush($category);
-		$this->createCategoryDomains($category, $this->domain->getAll());
-		$this->refreshCategoryDomains($category, $categoryData);
-		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-		$this->imageFacade->uploadImage($category, $categoryData->image, null);
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function create(CategoryData $categoryData) {
+        $rootCategory = $this->getRootCategory();
+        $category = $this->categoryService->create($categoryData, $rootCategory);
+        $this->em->persist($category);
+        $this->em->flush($category);
+        $this->createCategoryDomains($category, $this->domain->getAll());
+        $this->refreshCategoryDomains($category, $categoryData);
+        $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+        $this->imageFacade->uploadImage($category, $categoryData->image, null);
 
-		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculationWithoutDependencies();
+        $this->categoryVisibilityRecalculationScheduler->scheduleRecalculationWithoutDependencies();
 
-		return $category;
-	}
+        return $category;
+    }
 
-	/**
-	 * @param int $categoryId
-	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function edit($categoryId, CategoryData $categoryData) {
-		$rootCategory = $this->getRootCategory();
-		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->edit($category, $categoryData, $rootCategory);
-		$this->em->flush($category);
-		$this->refreshCategoryDomains($category, $categoryData);
-		$this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
-		$this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
-		$this->imageFacade->uploadImage($category, $categoryData->image, null);
+    /**
+     * @param int $categoryId
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function edit($categoryId, CategoryData $categoryData) {
+        $rootCategory = $this->getRootCategory();
+        $category = $this->categoryRepository->getById($categoryId);
+        $this->categoryService->edit($category, $categoryData, $rootCategory);
+        $this->em->flush($category);
+        $this->refreshCategoryDomains($category, $categoryData);
+        $this->friendlyUrlFacade->saveUrlListFormData('front_product_list', $category->getId(), $categoryData->urls);
+        $this->friendlyUrlFacade->createFriendlyUrls('front_product_list', $category->getId(), $category->getNames());
+        $this->imageFacade->uploadImage($category, $categoryData->image, null);
 
-		$this->categoryVisibilityRecalculationScheduler->scheduleRecalculation($category);
+        $this->categoryVisibilityRecalculationScheduler->scheduleRecalculation($category);
 
-		return $category;
-	}
+        return $category;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
-	 */
-	private function createCategoryDomains(Category $category, array $domainConfigs) {
-		$toFlush = [];
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig[] $domainConfigs
+     */
+    private function createCategoryDomains(Category $category, array $domainConfigs) {
+        $toFlush = [];
 
-		foreach ($domainConfigs as $domainConfig) {
-			$domainId = $domainConfig->getId();
-			$categoryDomain = new CategoryDomain($category, $domainId);
+        foreach ($domainConfigs as $domainConfig) {
+            $domainId = $domainConfig->getId();
+            $categoryDomain = new CategoryDomain($category, $domainId);
 
-			$this->em->persist($categoryDomain);
-			$toFlush[] = $categoryDomain;
-		}
+            $this->em->persist($categoryDomain);
+            $toFlush[] = $categoryDomain;
+        }
 
-		$this->em->flush($toFlush);
-	}
+        $this->em->flush($toFlush);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
-	 */
-	private function refreshCategoryDomains(Category $category, CategoryData $categoryData) {
-		$toFlush = [];
-		$categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\ShopBundle\Model\Category\CategoryData $categoryData
+     */
+    private function refreshCategoryDomains(Category $category, CategoryData $categoryData) {
+        $toFlush = [];
+        $categoryDomains = $this->categoryRepository->getCategoryDomainsByCategory($category);
 
-		foreach ($categoryDomains as $categoryDomain) {
-			$domainId = $categoryDomain->getDomainId();
+        foreach ($categoryDomains as $categoryDomain) {
+            $domainId = $categoryDomain->getDomainId();
 
-			$categoryDomain->setSeoTitle(Utils::getArrayValue($categoryData->seoTitles, $domainId));
-			$categoryDomain->setSeoMetaDescription(Utils::getArrayValue($categoryData->seoMetaDescriptions, $domainId));
-			$categoryDomain->setDescription(Utils::getArrayValue($categoryData->descriptions, $domainId));
-			$categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
+            $categoryDomain->setSeoTitle(Utils::getArrayValue($categoryData->seoTitles, $domainId));
+            $categoryDomain->setSeoMetaDescription(Utils::getArrayValue($categoryData->seoMetaDescriptions, $domainId));
+            $categoryDomain->setDescription(Utils::getArrayValue($categoryData->descriptions, $domainId));
+            $categoryDomain->setHidden(in_array($domainId, $categoryData->hiddenOnDomains, true));
 
-			$toFlush[] = $categoryDomain;
-		}
+            $toFlush[] = $categoryDomain;
+        }
 
-		$this->em->flush($toFlush);
-	}
+        $this->em->flush($toFlush);
+    }
 
-	/**
-	 * @param int $categoryId
-	 */
-	public function deleteById($categoryId) {
-		$category = $this->categoryRepository->getById($categoryId);
-		$this->categoryService->setChildrenAsSiblings($category);
-		// Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
-		// We need to update `parent` attribute of children first.
-		$this->em->flush();
+    /**
+     * @param int $categoryId
+     */
+    public function deleteById($categoryId) {
+        $category = $this->categoryRepository->getById($categoryId);
+        $this->categoryService->setChildrenAsSiblings($category);
+        // Normally, UnitOfWork performs UPDATEs on children after DELETE of main entity.
+        // We need to update `parent` attribute of children first.
+        $this->em->flush();
 
-		$this->em->remove($category);
-		$this->em->flush();
-	}
+        $this->em->remove($category);
+        $this->em->flush();
+    }
 
-	/**
-	 * @param int[] $parentIdByCategoryId
-	 */
-	public function editOrdering($parentIdByCategoryId) {
-		// eager-load all categories into identity map
-		$this->categoryRepository->getAll();
+    /**
+     * @param int[] $parentIdByCategoryId
+     */
+    public function editOrdering($parentIdByCategoryId) {
+        // eager-load all categories into identity map
+        $this->categoryRepository->getAll();
 
-		$rootCategory = $this->getRootCategory();
-		foreach ($parentIdByCategoryId as $categoryId => $parentId) {
-			if ($parentId === null) {
-				$parent = $rootCategory;
-			} else {
-				$parent = $this->categoryRepository->getById($parentId);
-			}
+        $rootCategory = $this->getRootCategory();
+        foreach ($parentIdByCategoryId as $categoryId => $parentId) {
+            if ($parentId === null) {
+                $parent = $rootCategory;
+            } else {
+                $parent = $this->categoryRepository->getById($parentId);
+            }
 
-			$category = $this->categoryRepository->getById($categoryId);
-			$category->setParent($parent);
-			// Category must be flushed after parent change before calling moveDown for correct calculation of lft and rgt
-			$this->em->flush($category);
+            $category = $this->categoryRepository->getById($categoryId);
+            $category->setParent($parent);
+            // Category must be flushed after parent change before calling moveDown for correct calculation of lft and rgt
+            $this->em->flush($category);
 
-			$this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
-		}
+            $this->categoryRepository->moveDown($category, CategoryRepository::MOVE_DOWN_TO_BOTTOM);
+        }
 
-		$this->em->flush();
-	}
+        $this->em->flush();
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAll() {
-		return $this->categoryRepository->getAll();
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getAll() {
+        return $this->categoryRepository->getAll();
+    }
 
-	/**
-	 * @param int $domainId
-	 * @param string $locale
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
-	 */
-	public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
-		return $this->categoryRepository->getFullPathsIndexedByIdsForDomain($domainId, $locale);
-	}
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getFullPathsIndexedByIdsForDomain($domainId, $locale) {
+        return $this->categoryRepository->getFullPathsIndexedByIdsForDomain($domainId, $locale);
+    }
 
-	/**
-	 * @param string $locale
-	 * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
-	 */
-	public function getAllCategoryDetails($locale) {
-		$categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
-		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+    /**
+     * @param string $locale
+     * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     */
+    public function getAllCategoryDetails($locale) {
+        $categories = $this->categoryRepository->getPreOrderTreeTraversalForAllCategories($locale);
+        $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
 
-		return $categoryDetails;
-	}
+        return $categoryDetails;
+    }
 
-	/**
-	 * @param int $domainId
-	 * @param string $locale
-	 * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
-	 */
-	public function getVisibleCategoryDetailsForDomain($domainId, $locale) {
-		$categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     */
+    public function getVisibleCategoryDetailsForDomain($domainId, $locale) {
+        $categories = $this->categoryRepository->getPreOrderTreeTraversalForVisibleCategoriesByDomain($domainId, $locale);
 
-		$categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
+        $categoryDetails = $this->categoryDetailFactory->createDetailsHierarchy($categories);
 
-		return $categoryDetails;
-	}
+        return $categoryDetails;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param int $domainId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
-	 */
-	public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
-		return $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain($category, $domainId);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getVisibleCategoriesInPathFromRootOnDomain(Category $category, $domainId) {
+        return $this->categoryRepository->getVisibleCategoriesInPathFromRootOnDomain($category, $domainId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
-	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
-	 */
-	public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
-		$categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $parentCategory
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return \Shopsys\ShopBundle\Model\Category\Detail\LazyLoadedCategoryDetail[]
+     */
+    public function getVisibleLazyLoadedCategoryDetailsForParent(Category $parentCategory, DomainConfig $domainConfig) {
+        $categories = $this->categoryRepository->getTranslatedVisibleSubcategoriesByDomain($parentCategory, $domainConfig);
 
-		$categoryDetails = $this->categoryDetailFactory->createLazyLoadedDetails($categories, $domainConfig);
+        $categoryDetails = $this->categoryDetailFactory->createLazyLoadedDetails($categories, $domainConfig);
 
-		return $categoryDetails;
-	}
+        return $categoryDetails;
+    }
 
-	/**
-	 * @param int $domainId
-	 * @param string $locale
-	 * @param string $searchText
-	 * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
-	 */
-	public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText) {
-		$categories = $this->categoryRepository->getVisibleByDomainIdAndSearchText(
-			$domainId,
-			$locale,
-			$searchText
-		);
+    /**
+     * @param int $domainId
+     * @param string $locale
+     * @param string $searchText
+     * @return \Shopsys\ShopBundle\Model\Category\Detail\CategoryDetail[]
+     */
+    public function getVisibleByDomainAndSearchText($domainId, $locale, $searchText) {
+        $categories = $this->categoryRepository->getVisibleByDomainIdAndSearchText(
+            $domainId,
+            $locale,
+            $searchText
+        );
 
-		return $categories;
-	}
+        return $categories;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param int $domainId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
-		return $this->categoryRepository->getAllVisibleChildrenByCategoryAndDomainId($category, $domainId);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getAllVisibleChildrenByCategoryAndDomainId(Category $category, $domainId) {
+        return $this->categoryRepository->getAllVisibleChildrenByCategoryAndDomainId($category, $domainId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[]
-	 */
-	public function getAllWithoutBranch(Category $category) {
-		return $this->categoryRepository->getAllWithoutBranch($category);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @return \Shopsys\ShopBundle\Model\Category\Category[]
+     */
+    public function getAllWithoutBranch(Category $category) {
+        return $this->categoryRepository->getAllWithoutBranch($category);
+    }
 
-	/**
-	 * @param string|null $searchText
-	 * @param int $limit
-	 * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
-	 */
-	public function getSearchAutocompleteCategories($searchText, $limit) {
-		$page = 1;
+    /**
+     * @param string|null $searchText
+     * @param int $limit
+     * @return \Shopsys\ShopBundle\Component\Paginator\PaginationResult
+     */
+    public function getSearchAutocompleteCategories($searchText, $limit) {
+        $page = 1;
 
-		$paginationResult = $this->categoryRepository->getPaginationResultForSearchVisible(
-			$searchText,
-			$this->domain->getId(),
-			$this->domain->getLocale(),
-			$page,
-			$limit
-		);
+        $paginationResult = $this->categoryRepository->getPaginationResultForSearchVisible(
+            $searchText,
+            $this->domain->getId(),
+            $this->domain->getLocale(),
+            $page,
+            $limit
+        );
 
-		return $paginationResult;
-	}
+        return $paginationResult;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
-	 * @return \Shopsys\ShopBundle\Model\Category\Category[domainId]
-	 */
-	public function getProductMainCategoriesIndexedByDomainId(Product $product) {
-		$mainCategoriesIndexedByDomainId = [];
-		foreach ($this->domain->getAll() as $domainConfig) {
-			$mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository->findProductMainCategoryOnDomain(
-				$product,
-				$domainConfig->getId()
-			);
-		}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @return \Shopsys\ShopBundle\Model\Category\Category[domainId]
+     */
+    public function getProductMainCategoriesIndexedByDomainId(Product $product) {
+        $mainCategoriesIndexedByDomainId = [];
+        foreach ($this->domain->getAll() as $domainConfig) {
+            $mainCategoriesIndexedByDomainId[$domainConfig->getId()] = $this->categoryRepository->findProductMainCategoryOnDomain(
+                $product,
+                $domainConfig->getId()
+            );
+        }
 
-		return $mainCategoriesIndexedByDomainId;
-	}
+        return $mainCategoriesIndexedByDomainId;
+    }
 
-	/**
-	 * @param Product $product
-	 * @param int $domainId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function getProductMainCategoryByDomainId(Product $product, $domainId) {
-		return $this->categoryRepository->getProductMainCategoryOnDomain($product, $domainId);
-	}
+    /**
+     * @param Product $product
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function getProductMainCategoryByDomainId(Product $product, $domainId) {
+        return $this->categoryRepository->getProductMainCategoryOnDomain($product, $domainId);
+    }
 
-	/**
-	 * @param Product $product
-	 * @param int $domainId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category|null
-	 */
-	public function findProductMainCategoryByDomainId(Product $product, $domainId) {
-		return $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainId);
-	}
+    /**
+     * @param Product $product
+     * @param int $domainId
+     * @return \Shopsys\ShopBundle\Model\Category\Category|null
+     */
+    public function findProductMainCategoryByDomainId(Product $product, $domainId) {
+        return $this->categoryRepository->findProductMainCategoryOnDomain($product, $domainId);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Product $product
-	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @return string[]
-	 */
-	public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
-		return $this->categoryRepository->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain($product, $domainConfig);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Product $product
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @return string[]
+     */
+    public function getCategoryNamesInPathFromRootToProductMainCategoryOnDomain(Product $product, DomainConfig $domainConfig) {
+        return $this->categoryRepository->getCategoryNamesInPathFromRootToProductMainCategoryOnDomain($product, $domainConfig);
+    }
 
-	/**
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function getRootCategory() {
-		return $this->categoryRepository->getRootCategory();
-	}
+    /**
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function getRootCategory() {
+        return $this->categoryRepository->getRootCategory();
+    }
 
-	/**
-	 * @param int $domainId
-	 * @param int $categoryId
-	 * @return \Shopsys\ShopBundle\Model\Category\Category
-	 */
-	public function getVisibleOnDomainById($domainId, $categoryId) {
-		$category = $this->getById($categoryId);
-		$categoryDomain = $category->getCategoryDomain($domainId);
-		if (!$categoryDomain->isVisible()) {
-			$message = 'Category ID ' . $categoryId . ' is not visible on domain ID ' . $domainId;
-			throw new \Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException($message);
-		}
+    /**
+     * @param int $domainId
+     * @param int $categoryId
+     * @return \Shopsys\ShopBundle\Model\Category\Category
+     */
+    public function getVisibleOnDomainById($domainId, $categoryId) {
+        $category = $this->getById($categoryId);
+        $categoryDomain = $category->getCategoryDomain($domainId);
+        if (!$categoryDomain->isVisible()) {
+            $message = 'Category ID ' . $categoryId . ' is not visible on domain ID ' . $domainId;
+            throw new \Shopsys\ShopBundle\Model\Category\Exception\CategoryNotFoundException($message);
+        }
 
-		return $category;
-	}
+        return $category;
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Category\Category $category
-	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
-	 * @param int $domainId
-	 */
-	public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
-		return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Category\Category $category
+     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup $pricingGroup
+     * @param int $domainId
+     */
+    public function getListableProductsCountByCategory($category, $pricingGroup, $domainId) {
+        return $this->categoryRepository->getListableProductsCountByCategory($category, $pricingGroup, $domainId);
+    }
 
 }

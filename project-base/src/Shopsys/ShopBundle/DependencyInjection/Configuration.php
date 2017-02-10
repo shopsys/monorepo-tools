@@ -12,28 +12,28 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getConfigTreeBuilder() {
-		$treeBuilder = new TreeBuilder();
-		$rootNode = $treeBuilder->root('shopsys_shop');
+    /**
+     * {@inheritDoc}
+     */
+    public function getConfigTreeBuilder() {
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('shopsys_shop');
 
-		$rootNode
-			->children()
-				->arrayNode('router')
-					->children()
-						->arrayNode('locale_router_filepaths')
-							->defaultValue([])
-							->prototype('scalar')
-						->end()
-					->end()
-					->scalarNode('friendly_url_router_filepath')
-					->end()
-				->end()
-			->end();
+        $rootNode
+            ->children()
+                ->arrayNode('router')
+                    ->children()
+                        ->arrayNode('locale_router_filepaths')
+                            ->defaultValue([])
+                            ->prototype('scalar')
+                        ->end()
+                    ->end()
+                    ->scalarNode('friendly_url_router_filepath')
+                    ->end()
+                ->end()
+            ->end();
 
-		return $treeBuilder;
-	}
+        return $treeBuilder;
+    }
 
 }

@@ -4,19 +4,19 @@ namespace Shopsys\ShopBundle\Model\Feed\Category;
 
 class FeedCategoryData {
 
-	/**
-	 * @var int
-	 */
-	public $extId;
+    /**
+     * @var int
+     */
+    public $extId;
 
-	/**
-	 * @var string
-	 */
-	public $name;
+    /**
+     * @var string
+     */
+    public $name;
 
-	/**
-	 * @var string
-	 */
-	public $fullName;
+    /**
+     * @var string
+     */
+    public $fullName;
 
 }

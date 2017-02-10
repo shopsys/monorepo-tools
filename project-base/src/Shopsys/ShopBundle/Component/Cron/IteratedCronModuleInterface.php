@@ -6,17 +6,17 @@ use Symfony\Bridge\Monolog\Logger;
 
 interface IteratedCronModuleInterface {
 
-	/**
-	 * @param \Symfony\Bridge\Monolog\Logger $logger
-	 */
-	public function setLogger(Logger $logger);
+    /**
+     * @param \Symfony\Bridge\Monolog\Logger $logger
+     */
+    public function setLogger(Logger $logger);
 
-	public function sleep();
+    public function sleep();
 
-	public function wakeUp();
+    public function wakeUp();
 
-	/**
-	 * @return bool
-	 */
-	public function iterate();
+    /**
+     * @return bool
+     */
+    public function iterate();
 }

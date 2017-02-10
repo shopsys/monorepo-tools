@@ -11,66 +11,66 @@ use Symfony\Component\Form\FormFactory;
 
 class AvailabilityInlineEdit extends AbstractGridInlineEdit {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
-	 */
-	private $availabilityFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade
+     */
+    private $availabilityFacade;
 
-	/**
-	 * @param \Symfony\Component\Form\FormFactory $formFactory
-	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
-	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
-	 */
-	public function __construct(
-		FormFactory $formFactory,
-		AvailabilityGridFactory $availabilityGridFactory,
-		AvailabilityFacade $availabilityFacade
-	) {
-		$this->availabilityFacade = $availabilityFacade;
+    /**
+     * @param \Symfony\Component\Form\FormFactory $formFactory
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityGridFactory $availabilityGridFactory
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityFacade $availabilityFacade
+     */
+    public function __construct(
+        FormFactory $formFactory,
+        AvailabilityGridFactory $availabilityGridFactory,
+        AvailabilityFacade $availabilityFacade
+    ) {
+        $this->availabilityFacade = $availabilityFacade;
 
-		parent::__construct($formFactory, $availabilityGridFactory);
-	}
+        parent::__construct($formFactory, $availabilityGridFactory);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-	 * @return int
-	 */
-	protected function createEntityAndGetId($availabilityData) {
-		$availability = $this->availabilityFacade->create($availabilityData);
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     * @return int
+     */
+    protected function createEntityAndGetId($availabilityData) {
+        $availability = $this->availabilityFacade->create($availabilityData);
 
-		return $availability->getId();
-	}
+        return $availability->getId();
+    }
 
-	/**
-	 * @param int $availabilityId
-	 * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
-	 */
-	protected function editEntity($availabilityId, $availabilityData) {
-		$this->availabilityFacade->edit($availabilityId, $availabilityData);
-	}
+    /**
+     * @param int $availabilityId
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData $availabilityData
+     */
+    protected function editEntity($availabilityId, $availabilityData) {
+        $this->availabilityFacade->edit($availabilityId, $availabilityData);
+    }
 
-	/**
-	 * @param int|null $availabilityId
-	 * @return \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData
-	 */
-	protected function getFormDataObject($availabilityId = null) {
-		$availabilityData = new AvailabilityData();
+    /**
+     * @param int|null $availabilityId
+     * @return \Shopsys\ShopBundle\Model\Product\Availability\AvailabilityData
+     */
+    protected function getFormDataObject($availabilityId = null) {
+        $availabilityData = new AvailabilityData();
 
-		if ($availabilityId !== null) {
-			$availabilityId = (int)$availabilityId;
-			$availability = $this->availabilityFacade->getById($availabilityId);
-			$availabilityData->setFromEntity($availability);
-		}
+        if ($availabilityId !== null) {
+            $availabilityId = (int)$availabilityId;
+            $availability = $this->availabilityFacade->getById($availabilityId);
+            $availabilityData->setFromEntity($availability);
+        }
 
-		return $availabilityData;
-	}
+        return $availabilityData;
+    }
 
-	/**
-	 * @param int $rowId
-	 * @return \Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType
-	 */
-	protected function getFormType($rowId) {
-		return new AvailabilityFormType();
-	}
+    /**
+     * @param int $rowId
+     * @return \Shopsys\ShopBundle\Form\Admin\Product\Availability\AvailabilityFormType
+     */
+    protected function getFormType($rowId) {
+        return new AvailabilityFormType();
+    }
 
 }

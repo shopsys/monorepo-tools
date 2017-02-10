@@ -4,19 +4,19 @@ namespace Shopsys\ShopBundle\Component\FileUpload;
 
 interface EntityFileUploadInterface {
 
-	/**
-	 * @return \Shopsys\ShopBundle\Component\FileUpload\FileForUpload[]
-	 */
-	public function getTemporaryFilesForUpload();
+    /**
+     * @return \Shopsys\ShopBundle\Component\FileUpload\FileForUpload[]
+     */
+    public function getTemporaryFilesForUpload();
 
-	/**
-	 * @param string $key
-	 * @param string $originalFilename
-	 */
-	public function setFileAsUploaded($key, $originalFilename);
+    /**
+     * @param string $key
+     * @param string $originalFilename
+     */
+    public function setFileAsUploaded($key, $originalFilename);
 
-	/**
-	 * @return int
-	 */
-	public function getId();
+    /**
+     * @return int
+     */
+    public function getId();
 }

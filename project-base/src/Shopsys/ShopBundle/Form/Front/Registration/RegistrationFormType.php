@@ -14,78 +14,78 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints;
 
 class RegistrationFormType extends AbstractType {
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('firstName', FormType::TEXT, [
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please enter first name']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'First name cannot be longer then {{ limit }} characters']),
-				],
-			])
-			->add('lastName', FormType::TEXT, [
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please enter surname']),
-					new Constraints\Length(['max' => 100, 'maxMessage' => 'Surname cannot be longer than {{ limit }} characters']),
-				],
-			])
-			->add('email', FormType::EMAIL, [
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please enter e-mail']),
-					new Email(['message' => 'Please enter valid e-mail']),
-					new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
-				],
-			])
-			->add('password', FormType::REPEATED, [
-				'type' => FormType::PASSWORD,
-				'options' => [
-					'attr' => ['autocomplete' => 'off'],
-				],
-				'first_options' => [
-					'constraints' => [
-						new Constraints\NotBlank(['message' => 'Please enter password']),
-						new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
-					],
-				],
-				'invalid_message' => 'Passwords do not match',
-			])
-			->add('email2', FormType::HONEY_POT)
-			->add('save', FormType::SUBMIT);
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('firstName', FormType::TEXT, [
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter first name']),
+                    new Constraints\Length(['max' => 100, 'maxMessage' => 'First name cannot be longer then {{ limit }} characters']),
+                ],
+            ])
+            ->add('lastName', FormType::TEXT, [
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter surname']),
+                    new Constraints\Length(['max' => 100, 'maxMessage' => 'Surname cannot be longer than {{ limit }} characters']),
+                ],
+            ])
+            ->add('email', FormType::EMAIL, [
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter e-mail']),
+                    new Email(['message' => 'Please enter valid e-mail']),
+                    new Constraints\Length(['max' => 255, 'maxMessage' => 'Email cannot be longer then {{ limit }} characters']),
+                ],
+            ])
+            ->add('password', FormType::REPEATED, [
+                'type' => FormType::PASSWORD,
+                'options' => [
+                    'attr' => ['autocomplete' => 'off'],
+                ],
+                'first_options' => [
+                    'constraints' => [
+                        new Constraints\NotBlank(['message' => 'Please enter password']),
+                        new Constraints\Length(['min' => 6, 'minMessage' => 'Password cannot be longer then {{ limit }} characters']),
+                    ],
+                ],
+                'invalid_message' => 'Passwords do not match',
+            ])
+            ->add('email2', FormType::HONEY_POT)
+            ->add('save', FormType::SUBMIT);
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'registration_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'registration_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'data_class' => UserData::class,
-			'attr' => ['novalidate' => 'novalidate'],
-			TimedFormTypeExtension::OPTION_ENABLED => true,
-			'constraints' => [
-				new FieldsAreNotIdentical([
-					'field1' => 'email',
-					'field2' => 'password',
-					'errorPath' => 'password',
-					'message' => 'Password cannot be same as e-mail',
-				]),
-				new NotIdenticalToEmailLocalPart([
-					'password' => 'password',
-					'email' => 'email',
-					'errorPath' => 'password',
-					'message' => 'Password cannot be same as part of e-mail before at sign',
-				]),
-			],
-		]);
-	}
+    /**
+     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'data_class' => UserData::class,
+            'attr' => ['novalidate' => 'novalidate'],
+            TimedFormTypeExtension::OPTION_ENABLED => true,
+            'constraints' => [
+                new FieldsAreNotIdentical([
+                    'field1' => 'email',
+                    'field2' => 'password',
+                    'errorPath' => 'password',
+                    'message' => 'Password cannot be same as e-mail',
+                ]),
+                new NotIdenticalToEmailLocalPart([
+                    'password' => 'password',
+                    'email' => 'email',
+                    'errorPath' => 'password',
+                    'message' => 'Password cannot be same as part of e-mail before at sign',
+                ]),
+            ],
+        ]);
+    }
 
 }

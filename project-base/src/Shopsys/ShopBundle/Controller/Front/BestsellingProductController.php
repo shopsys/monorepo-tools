@@ -11,40 +11,40 @@ use Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProduct
 
 class BestsellingProductController extends FrontBaseController {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
-	 */
-	private $cachedBestsellingProductFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\BestsellingProduct\CachedBestsellingProductFacade
+     */
+    private $cachedBestsellingProductFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
-	 */
-	private $currentCustomer;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Customer\CurrentCustomer
+     */
+    private $currentCustomer;
 
-	public function __construct(
-		CachedBestsellingProductFacade $cachedBestsellingProductFacade,
-		Domain $domain,
-		CurrentCustomer $currentCustomer
-	) {
-		$this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
-		$this->domain = $domain;
-		$this->currentCustomer = $currentCustomer;
-	}
+    public function __construct(
+        CachedBestsellingProductFacade $cachedBestsellingProductFacade,
+        Domain $domain,
+        CurrentCustomer $currentCustomer
+    ) {
+        $this->cachedBestsellingProductFacade = $cachedBestsellingProductFacade;
+        $this->domain = $domain;
+        $this->currentCustomer = $currentCustomer;
+    }
 
-	public function listAction(Category $category) {
-		$bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedProductDetails(
-			$this->domain->getId(), $category, $this->currentCustomer->getPricingGroup()
-		);
+    public function listAction(Category $category) {
+        $bestsellingProducts = $this->cachedBestsellingProductFacade->getAllOfferedProductDetails(
+            $this->domain->getId(), $category, $this->currentCustomer->getPricingGroup()
+        );
 
-		return $this->render('@ShopsysShop/Front/Content/Product/bestsellingProductsList.html.twig', [
-			'productDetails' => $bestsellingProducts,
-			'maxShownProducts' => BestsellingProductFacade::MAX_SHOW_RESULTS,
-		]);
-	}
+        return $this->render('@ShopsysShop/Front/Content/Product/bestsellingProductsList.html.twig', [
+            'productDetails' => $bestsellingProducts,
+            'maxShownProducts' => BestsellingProductFacade::MAX_SHOW_RESULTS,
+        ]);
+    }
 
 }

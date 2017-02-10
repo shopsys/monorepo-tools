@@ -25,7 +25,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $serviceId
-	 * @return object
+     * @return object
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Helper\SymfonyHelper::grabServiceFromContainer()
      */
     public function grabServiceFromContainer($serviceId) {
@@ -247,7 +247,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $text
-	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
+     * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::clickByText()
      */
     public function clickByText($text, $contextSelector = null) {
@@ -259,7 +259,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $name
-	 * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
+     * @param \Facebook\WebDriver\WebDriverBy|\Facebook\WebDriver\WebDriverElement|null $contextSelector
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::clickByName()
      */
     public function clickByName($name, $contextSelector = null) {
@@ -282,7 +282,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @return \Facebook\WebDriver\WebDriverElement
+     * @return \Facebook\WebDriver\WebDriverElement
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::clickByElement()
      */
     public function clickByElement($element) {
@@ -305,7 +305,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string $value
+     * @param string $value
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::fillFieldByElement()
      */
     public function fillFieldByElement($element, $value) {
@@ -317,7 +317,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $fieldName
-	 * @param string $value
+     * @param string $value
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::fillFieldByName()
      */
     public function fillFieldByName($fieldName, $value) {
@@ -329,7 +329,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $css
-	 * @param string $value
+     * @param string $value
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::fillFieldByCss()
      */
     public function fillFieldByCss($css, $value) {
@@ -341,7 +341,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $text
-	 * @param string $css
+     * @param string $css
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInCss()
      */
@@ -352,7 +352,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $text
-	 * @param string $css
+     * @param string $css
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInCss()
      */
     public function seeInCss($text, $css) {
@@ -364,7 +364,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $text
-	 * @param \Facebook\WebDriver\WebDriverElement $element
+     * @param \Facebook\WebDriver\WebDriverElement $element
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInElement()
      */
@@ -375,7 +375,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $text
-	 * @param \Facebook\WebDriver\WebDriverElement $element
+     * @param \Facebook\WebDriver\WebDriverElement $element
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInElement()
      */
     public function seeInElement($text, $element) {
@@ -546,7 +546,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $selectCss
-	 * @param string $optionValue
+     * @param string $optionValue
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::selectOptionByCssAndValue()
      */
     public function selectOptionByCssAndValue($selectCss, $optionValue) {
@@ -558,7 +558,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $css
-	 * @return int
+     * @return int
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::countVisibleByCss()
      */
     public function countVisibleByCss($css) {
@@ -591,7 +591,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $value
-	 * @param string $fieldName
+     * @param string $fieldName
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByName()
      */
@@ -602,7 +602,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $value
-	 * @param string $fieldName
+     * @param string $fieldName
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByName()
      */
     public function seeInFieldByName($value, $fieldName) {
@@ -614,7 +614,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $value
-	 * @param \Facebook\WebDriver\WebDriverElement $element
+     * @param \Facebook\WebDriver\WebDriverElement $element
      * Conditional Assertion: Test won't be stopped on fail
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByElement()
      */
@@ -625,7 +625,7 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $value
-	 * @param \Facebook\WebDriver\WebDriverElement $element
+     * @param \Facebook\WebDriver\WebDriverElement $element
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::seeInFieldByElement()
      */
     public function seeInFieldByElement($value, $element) {
@@ -637,8 +637,8 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * @param string $css
-	 * @param null|int $offsetX
-	 * @param null|int $offsetY
+     * @param null|int $offsetX
+     * @param null|int $offsetY
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::moveMouseOverByCss()
      */
     public function moveMouseOverByCss($css, $offsetX = null, $offsetY = null) {
@@ -661,15 +661,15 @@ trait AcceptanceTesterActions
      * [!] Method is generated. Documentation taken from corresponding module.
      *
      * Examples:
-	 * $I->pressKeysByElement($element, 'hello'); // hello
-	 * $I->pressKeysByElement($element, ['n', 'e', 'w']); // new
-	 * $I->pressKeysByElement($element, [[\Facebook\WebDriver\WebDriverKeys, 'day'], 1]); // DAY1
-	 *
-	 * For available keys:
-	 * @see \Facebook\WebDriver\WebDriverKeys
-	 *
-	 * @param \Facebook\WebDriver\WebDriverElement $element
-	 * @param string|string[] $keys
+     * $I->pressKeysByElement($element, 'hello'); // hello
+     * $I->pressKeysByElement($element, ['n', 'e', 'w']); // new
+     * $I->pressKeysByElement($element, [[\Facebook\WebDriver\WebDriverKeys, 'day'], 1]); // DAY1
+     *
+     * For available keys:
+     * @see \Facebook\WebDriver\WebDriverKeys
+     *
+     * @param \Facebook\WebDriver\WebDriverElement $element
+     * @param string|string[] $keys
      * @see \Shopsys\ShopBundle\Tests\Test\Codeception\Module\StrictWebDriver::pressKeysByElement()
      */
     public function pressKeysByElement($element, $keys) {

@@ -11,45 +11,45 @@ use Symfony\Component\Validator\Constraints;
 
 class PricingGroupSettingsFormType extends AbstractType {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
-	 */
-	private $pricingGroups;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[]
+     */
+    private $pricingGroups;
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
-	 */
-	public function __construct(array $pricingGroups) {
-		$this->pricingGroups = $pricingGroups;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroup[] $pricingGroups
+     */
+    public function __construct(array $pricingGroups) {
+        $this->pricingGroups = $pricingGroups;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'pricing_group_settings_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'pricing_group_settings_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('defaultPricingGroup', FormType::CHOICE, [
-				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], null, 'id'),
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please enter default pricing group']),
-				],
-			])
-			->add('save', FormType::SUBMIT);
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('defaultPricingGroup', FormType::CHOICE, [
+                'required' => true,
+                'choice_list' => new ObjectChoiceList($this->pricingGroups, 'name', [], null, 'id'),
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please enter default pricing group']),
+                ],
+            ])
+            ->add('save', FormType::SUBMIT);
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 
 }

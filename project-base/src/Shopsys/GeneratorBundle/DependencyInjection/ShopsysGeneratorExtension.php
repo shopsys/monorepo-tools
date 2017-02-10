@@ -14,12 +14,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class ShopsysGeneratorExtension extends Extension {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function load(array $configs, ContainerBuilder $containerBuilder) {
-		$loader = new Loader\YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
-		$loader->load('services.yml');
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function load(array $configs, ContainerBuilder $containerBuilder) {
+        $loader = new Loader\YamlFileLoader($containerBuilder, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.yml');
+    }
 
 }

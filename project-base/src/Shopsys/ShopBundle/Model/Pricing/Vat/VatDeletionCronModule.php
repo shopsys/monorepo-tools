@@ -9,56 +9,56 @@ use Symfony\Bridge\Monolog\Logger;
 
 class VatDeletionCronModule implements IteratedCronModuleInterface {
 
-	/**
-	 * @var \Symfony\Bridge\Monolog\Logger
-	 */
-	private $logger;
+    /**
+     * @var \Symfony\Bridge\Monolog\Logger
+     */
+    private $logger;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
-	 */
-	private $vatFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Pricing\Vat\VatFacade
+     */
+    private $vatFacade;
 
-	/**
-	 * @var ProductInputPriceFacade
-	 */
-	private $productInputPriceFacade;
+    /**
+     * @var ProductInputPriceFacade
+     */
+    private $productInputPriceFacade;
 
-	public function __construct(VatFacade $vatFacade, ProductInputPriceFacade $productInputPriceFacade) {
-		$this->vatFacade = $vatFacade;
-		$this->productInputPriceFacade = $productInputPriceFacade;
-	}
+    public function __construct(VatFacade $vatFacade, ProductInputPriceFacade $productInputPriceFacade) {
+        $this->vatFacade = $vatFacade;
+        $this->productInputPriceFacade = $productInputPriceFacade;
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function setLogger(Logger $logger) {
-		$this->logger = $logger;
-	}
+    /**
+     * @inheritdoc
+     */
+    public function setLogger(Logger $logger) {
+        $this->logger = $logger;
+    }
 
-	public function sleep() {
-		$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
-		$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
-	}
+    public function sleep() {
+        $deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
+        $this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
+    }
 
-	public function wakeUp() {
+    public function wakeUp() {
 
-	}
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function iterate() {
-		$batchResult = $this->productInputPriceFacade->replaceBatchVatAndRecalculateInputPrices();
+    /**
+     * @inheritdoc
+     */
+    public function iterate() {
+        $batchResult = $this->productInputPriceFacade->replaceBatchVatAndRecalculateInputPrices();
 
-		if ($batchResult) {
-			$this->logger->debug('Batch is done');
-		} else {
-			$deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
-			$this->logger->debug('All vats are replaced');
-			$this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
-		}
+        if ($batchResult) {
+            $this->logger->debug('Batch is done');
+        } else {
+            $deletedVatsCount = $this->vatFacade->deleteAllReplacedVats();
+            $this->logger->debug('All vats are replaced');
+            $this->logger->addInfo('Deleted ' . $deletedVatsCount . ' vats');
+        }
 
-		return $batchResult;
-	}
+        return $batchResult;
+    }
 }

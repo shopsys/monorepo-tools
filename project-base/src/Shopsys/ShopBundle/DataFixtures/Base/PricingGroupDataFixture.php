@@ -11,35 +11,35 @@ use Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade;
 
 class PricingGroupDataFixture extends AbstractReferenceFixture {
 
-	const ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
-	const PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
-	const VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
+    const ORDINARY_DOMAIN_1 = 'pricing_group_ordinary_domain_1';
+    const PARTNER_DOMAIN_1 = 'pricing_group_partner_domain_1';
+    const VIP_DOMAIN_1 = 'pricing_group_vip_domain_1';
 
-	public function load(ObjectManager $manager) {
-		$pricingGroupData = new PricingGroupData();
+    public function load(ObjectManager $manager) {
+        $pricingGroupData = new PricingGroupData();
 
-		$pricingGroupData->name = 'Obyčejný zákazník';
-		$this->createPricingGroup($pricingGroupData, self::ORDINARY_DOMAIN_1);
+        $pricingGroupData->name = 'Obyčejný zákazník';
+        $this->createPricingGroup($pricingGroupData, self::ORDINARY_DOMAIN_1);
 
-		$pricingGroupData->name = 'Partner';
-		$this->createPricingGroup($pricingGroupData, self::PARTNER_DOMAIN_1);
+        $pricingGroupData->name = 'Partner';
+        $this->createPricingGroup($pricingGroupData, self::PARTNER_DOMAIN_1);
 
-		$pricingGroupData->name = 'VIP zákazník';
-		$this->createPricingGroup($pricingGroupData, self::VIP_DOMAIN_1);
-	}
+        $pricingGroupData->name = 'VIP zákazník';
+        $this->createPricingGroup($pricingGroupData, self::VIP_DOMAIN_1);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
-	 * @param string $referenceName
-	 */
-	private function createPricingGroup(
-		PricingGroupData $pricingGroupData,
-		$referenceName
-	) {
-		$pricingGroupFacade = $this->get(PricingGroupFacade::class);
-		/* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
+    /**
+     * @param \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupData $pricingGroupData
+     * @param string $referenceName
+     */
+    private function createPricingGroup(
+        PricingGroupData $pricingGroupData,
+        $referenceName
+    ) {
+        $pricingGroupFacade = $this->get(PricingGroupFacade::class);
+        /* @var $pricingGroupFacade \Shopsys\ShopBundle\Model\Pricing\Group\PricingGroupFacade */
 
-		$pricingGroup = $pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);
-		$this->addReference($referenceName, $pricingGroup);
-	}
+        $pricingGroup = $pricingGroupFacade->create($pricingGroupData, Domain::FIRST_DOMAIN_ID);
+        $this->addReference($referenceName, $pricingGroup);
+    }
 }

@@ -12,30 +12,30 @@ use Prezent\Doctrine\Translatable\Entity\AbstractTranslation;
  */
 class BrandTranslation extends AbstractTranslation {
 
-	/**
-	 * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand")
-	 */
-	protected $translatable;
+    /**
+     * @Prezent\Translatable(targetEntity="Shopsys\ShopBundle\Model\Product\Brand\Brand")
+     */
+    protected $translatable;
 
-	/**
-	 * @var string
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 */
-	private $description;
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
-	/**
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * @return string
+     */
+    public function getDescription() {
+        return $this->description;
+    }
 
-	/**
-	 * @param string $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * @param string $description
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+    }
 
 }

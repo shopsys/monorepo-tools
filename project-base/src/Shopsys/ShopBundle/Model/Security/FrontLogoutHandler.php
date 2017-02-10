@@ -10,35 +10,35 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class FrontLogoutHandler implements LogoutSuccessHandlerInterface {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade
-	 */
-	private $orderFlowFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Order\OrderFlowFacade
+     */
+    private $orderFlowFacade;
 
-	/**
-	 * @var \Symfony\Component\Routing\Router
-	 */
-	private $router;
+    /**
+     * @var \Symfony\Component\Routing\Router
+     */
+    private $router;
 
-	/**
-	 * @param \Symfony\Component\Routing\Router $router
-	 * @param \Shopsys\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
-	 */
-	public function __construct(Router $router, OrderFlowFacade $orderFlowFacade) {
-		$this->router = $router;
-		$this->orderFlowFacade = $orderFlowFacade;
-	}
+    /**
+     * @param \Symfony\Component\Routing\Router $router
+     * @param \Shopsys\ShopBundle\Model\Order\OrderFlowFacade $orderFlowFacade
+     */
+    public function __construct(Router $router, OrderFlowFacade $orderFlowFacade) {
+        $this->router = $router;
+        $this->orderFlowFacade = $orderFlowFacade;
+    }
 
-	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
-	 */
-	public function onLogoutSuccess(Request $request) {
-		$this->orderFlowFacade->resetOrderForm();
-		$url = $this->router->generate('front_homepage');
-		$request->getSession()->migrate();
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function onLogoutSuccess(Request $request) {
+        $this->orderFlowFacade->resetOrderForm();
+        $url = $this->router->generate('front_homepage');
+        $request->getSession()->migrate();
 
-		return new RedirectResponse($url);
-	}
+        return new RedirectResponse($url);
+    }
 
 }

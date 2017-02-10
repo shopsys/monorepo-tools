@@ -6,11 +6,11 @@ use Shopsys\ShopBundle\Tests\Acceptance\acceptance\PageObject\AbstractPage;
 
 class CartBoxPage extends AbstractPage {
 
-	/**
-	 * @param string $text
-	 */
-	public function seeInCartBox($text) {
-		$this->tester->seeInCss($text, '.js-cart-info');
-	}
+    /**
+     * @param string $text
+     */
+    public function seeInCartBox($text) {
+        $this->tester->seeInCss($text, '.js-cart-info');
+    }
 
 }

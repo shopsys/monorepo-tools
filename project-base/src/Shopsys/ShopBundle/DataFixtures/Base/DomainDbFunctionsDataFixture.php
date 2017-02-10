@@ -8,13 +8,13 @@ use Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade;
 
 class DomainDbFunctionsDataFixture extends AbstractNativeFixture {
 
-	/**
-	 * @param \Doctrine\Common\Persistence\ObjectManager $manager
-	 */
-	public function load(ObjectManager $manager) {
-		$domainDbFunctionsFacade = $this->get(DomainDbFunctionsFacade::class);
-		/* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
-		$domainDbFunctionsFacade->createDomainDbFunctions();
-	}
+    /**
+     * @param \Doctrine\Common\Persistence\ObjectManager $manager
+     */
+    public function load(ObjectManager $manager) {
+        $domainDbFunctionsFacade = $this->get(DomainDbFunctionsFacade::class);
+        /* @var $domainDbFunctionsFacade \Shopsys\ShopBundle\Component\Domain\DomainDbFunctionsFacade */
+        $domainDbFunctionsFacade->createDomainDbFunctions();
+    }
 
 }

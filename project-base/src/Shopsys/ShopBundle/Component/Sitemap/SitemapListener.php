@@ -15,102 +15,102 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class SitemapListener implements SitemapListenerInterface {
 
-	const PRIORITY_HOMEPAGE = 1;
-	const PRIORITY_CATEGORIES = 0.8;
-	const PRIORITY_PRODUCTS = 0.7;
-	const PRIORITY_ARTICLES = 0.5;
+    const PRIORITY_HOMEPAGE = 1;
+    const PRIORITY_CATEGORIES = 0.8;
+    const PRIORITY_PRODUCTS = 0.7;
+    const PRIORITY_ARTICLES = 0.5;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
-	 */
-	private $sitemapFacade;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Sitemap\SitemapFacade
+     */
+    private $sitemapFacade;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Domain\Domain
-	 */
-	private $domain;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Domain\Domain
+     */
+    private $domain;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
-	 */
-	private $friendlyUrlService;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Router\FriendlyUrl\FriendlyUrlService
+     */
+    private $friendlyUrlService;
 
-	/**
-	 * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
-	 */
-	private $domainRouterFactory;
+    /**
+     * @var \Shopsys\ShopBundle\Component\Router\DomainRouterFactory
+     */
+    private $domainRouterFactory;
 
-	public function __construct(
-		SitemapFacade $sitemapFacade,
-		Domain $domain,
-		FriendlyUrlService $friendlyUrlService,
-		DomainRouterFactory $domainRouterFactory
-	) {
-		$this->sitemapFacade = $sitemapFacade;
-		$this->domain = $domain;
-		$this->friendlyUrlService = $friendlyUrlService;
-		$this->domainRouterFactory = $domainRouterFactory;
-	}
+    public function __construct(
+        SitemapFacade $sitemapFacade,
+        Domain $domain,
+        FriendlyUrlService $friendlyUrlService,
+        DomainRouterFactory $domainRouterFactory
+    ) {
+        $this->sitemapFacade = $sitemapFacade;
+        $this->domain = $domain;
+        $this->friendlyUrlService = $friendlyUrlService;
+        $this->domainRouterFactory = $domainRouterFactory;
+    }
 
-	/**
-	 * @param \Presta\SitemapBundle\Event\SitemapPopulateEvent $event
-	 */
-	public function populateSitemap(SitemapPopulateEvent $event) {
-		$section = $event->getSection();
-		$domainId = (int)$section;
+    /**
+     * @param \Presta\SitemapBundle\Event\SitemapPopulateEvent $event
+     */
+    public function populateSitemap(SitemapPopulateEvent $event) {
+        $section = $event->getSection();
+        $domainId = (int)$section;
 
-		$generator = $event->getGenerator();
-		$domainConfig = $this->domain->getDomainConfigById($domainId);
+        $generator = $event->getGenerator();
+        $domainConfig = $this->domain->getDomainConfigById($domainId);
 
-		$this->addHomepageUrl($generator, $domainConfig, $section, self::PRIORITY_HOMEPAGE);
+        $this->addHomepageUrl($generator, $domainConfig, $section, self::PRIORITY_HOMEPAGE);
 
-		$productSitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleProducts($domainConfig);
-		$this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_PRODUCTS);
+        $productSitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleProducts($domainConfig);
+        $this->addUrlsBySitemapItems($productSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_PRODUCTS);
 
-		$categorySitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleCategories($domainConfig);
-		$this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, self::PRIORITY_CATEGORIES);
+        $categorySitemapItems = $this->sitemapFacade->getSitemapItemsForVisibleCategories($domainConfig);
+        $this->addUrlsBySitemapItems($categorySitemapItems, $generator, $domainConfig, $section, self::PRIORITY_CATEGORIES);
 
-		$articleSitemapItems = $this->sitemapFacade->getSitemapItemsForArticlesOnDomain($domainConfig);
-		$this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_ARTICLES);
-	}
+        $articleSitemapItems = $this->sitemapFacade->getSitemapItemsForArticlesOnDomain($domainConfig);
+        $this->addUrlsBySitemapItems($articleSitemapItems, $generator, $domainConfig, $section, self::PRIORITY_ARTICLES);
+    }
 
-	/**
-	 * @param \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[] $sitemapItems
-	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param string $section
-	 * @param int $elementPriority
-	 */
-	private function addUrlsBySitemapItems(
-		array $sitemapItems,
-		AbstractGenerator $generator,
-		DomainConfig $domainConfig,
-		$section,
-		$elementPriority
-	) {
-		foreach ($sitemapItems as $sitemapItem) {
-			$absoluteUrl = $this->friendlyUrlService->getAbsoluteUrlByDomainConfigAndSlug($domainConfig, $sitemapItem->slug);
-			$urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
-			$generator->addUrl($urlConcrete, $section);
-		}
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Component\Sitemap\SitemapItem[] $sitemapItems
+     * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param string $section
+     * @param int $elementPriority
+     */
+    private function addUrlsBySitemapItems(
+        array $sitemapItems,
+        AbstractGenerator $generator,
+        DomainConfig $domainConfig,
+        $section,
+        $elementPriority
+    ) {
+        foreach ($sitemapItems as $sitemapItem) {
+            $absoluteUrl = $this->friendlyUrlService->getAbsoluteUrlByDomainConfigAndSlug($domainConfig, $sitemapItem->slug);
+            $urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
+            $generator->addUrl($urlConcrete, $section);
+        }
+    }
 
-	/**
-	 * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
-	 * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
-	 * @param string $section
-	 * @param int $elementPriority
-	 */
-	private function addHomepageUrl(
-		AbstractGenerator $generator,
-		DomainConfig $domainConfig,
-		$section,
-		$elementPriority
-	) {
-		$domainRouter = $this->domainRouterFactory->getRouter($domainConfig->getId());
-		$absoluteUrl = $domainRouter->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
-		$urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
-		$generator->addUrl($urlConcrete, $section);
-	}
+    /**
+     * @param \Presta\SitemapBundle\Service\AbstractGenerator $generator
+     * @param \Shopsys\ShopBundle\Component\Domain\Config\DomainConfig $domainConfig
+     * @param string $section
+     * @param int $elementPriority
+     */
+    private function addHomepageUrl(
+        AbstractGenerator $generator,
+        DomainConfig $domainConfig,
+        $section,
+        $elementPriority
+    ) {
+        $domainRouter = $this->domainRouterFactory->getRouter($domainConfig->getId());
+        $absoluteUrl = $domainRouter->generate('front_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $urlConcrete = new UrlConcrete($absoluteUrl, null, null, $elementPriority);
+        $generator->addUrl($urlConcrete, $section);
+    }
 
 }

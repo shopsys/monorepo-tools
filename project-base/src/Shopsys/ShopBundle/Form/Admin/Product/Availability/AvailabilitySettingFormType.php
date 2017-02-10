@@ -11,45 +11,45 @@ use Symfony\Component\Validator\Constraints;
 
 class AvailabilitySettingFormType extends AbstractType {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
-	 */
-	private $availabilities;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Product\Availability\Availability[]
+     */
+    private $availabilities;
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
-	 */
-	public function __construct(array $availabilities) {
-		$this->availabilities = $availabilities;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Product\Availability\Availability[] $availabilities
+     */
+    public function __construct(array $availabilities) {
+        $this->availabilities = $availabilities;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'availability_setting_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'availability_setting_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('defaultInStockAvailability', FormType::CHOICE, [
-				'required' => true,
-				'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
-				'constraints' => [
-					new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
-				],
-			])
-			->add('save', FormType::SUBMIT);
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('defaultInStockAvailability', FormType::CHOICE, [
+                'required' => true,
+                'choice_list' => new ObjectChoiceList($this->availabilities, 'name', [], null, 'id'),
+                'constraints' => [
+                    new Constraints\NotBlank(['message' => 'Please choose availability for stock products']),
+                ],
+            ])
+            ->add('save', FormType::SUBMIT);
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 
 }

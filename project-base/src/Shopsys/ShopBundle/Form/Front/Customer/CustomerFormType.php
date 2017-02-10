@@ -11,42 +11,42 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CustomerFormType extends AbstractType {
 
-	/**
-	 * @var \Shopsys\ShopBundle\Model\Country\Country[]
-	 */
-	private $countries;
+    /**
+     * @var \Shopsys\ShopBundle\Model\Country\Country[]
+     */
+    private $countries;
 
-	/**
-	 * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
-	 */
-	public function __construct(array $countries) {
-		$this->countries = $countries;
-	}
+    /**
+     * @param \Shopsys\ShopBundle\Model\Country\Country[] $countries
+     */
+    public function __construct(array $countries) {
+        $this->countries = $countries;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getName() {
-		return 'customer_form';
-	}
+    /**
+     * @return string
+     */
+    public function getName() {
+        return 'customer_form';
+    }
 
-	/**
-	 * @param \Symfony\Component\Form\FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options) {
-		$builder
-			->add('userData', new UserFormType())
-			->add('billingAddressData', new BillingAddressFormType($this->countries))
-			->add('deliveryAddressData', new DeliveryAddressFormType($this->countries))
-			->add('save', FormType::SUBMIT);
-	}
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        $builder
+            ->add('userData', new UserFormType())
+            ->add('billingAddressData', new BillingAddressFormType($this->countries))
+            ->add('deliveryAddressData', new DeliveryAddressFormType($this->countries))
+            ->add('save', FormType::SUBMIT);
+    }
 
-	public function setDefaultOptions(OptionsResolverInterface $resolver) {
-		$resolver->setDefaults([
-			'data_class' => CustomerData::class,
-			'attr' => ['novalidate' => 'novalidate'],
-		]);
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver) {
+        $resolver->setDefaults([
+            'data_class' => CustomerData::class,
+            'attr' => ['novalidate' => 'novalidate'],
+        ]);
+    }
 
 }
