@@ -338,11 +338,12 @@
         if (errors.length > 0) {
             $elementsToHighlight.addClass('form-input-error');
             $.each(errors, function (key, message) {
-                $errorListUl
-                    .append($('<li/>')
-                    .addClass('js-validation-errors-message')
-                    .addClass(elementErrorClass)
-                    .text(message));
+                $errorListUl.append(
+                    $('<li/>')
+                        .addClass('js-validation-errors-message')
+                        .addClass(elementErrorClass)
+                        .text(message)
+                );
             });
             $errorList.show();
         } else if ($errorListUl.find('li').length === 0) {
