@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Component;
 
-class Condition {
+class Utils {
 
 	/**
 	 * @param mixed $testVariable
@@ -22,6 +22,16 @@ class Condition {
 		if (!array_key_exists($key, $array)) {
 			$array[$key] = $defaultValue;
 		}
+	}
+
+	/**
+	 * @param array $array
+	 * @param string|int $key
+	 * @param mixed $defaultValue
+	 * @return mixed
+	 */
+	public static function getArrayValue($array, $key, $defaultValue = null) {
+		return array_key_exists($key, $array) ? $array[$key] : $defaultValue;
 	}
 
 	/**

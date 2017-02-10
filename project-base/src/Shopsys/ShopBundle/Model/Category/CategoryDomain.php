@@ -29,6 +29,20 @@ class CategoryDomain {
 	private $domainId;
 
 	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $seoTitle;
+
+	/**
+	 * @var string|null
+	 *
+	 * @ORM\Column(type="text", nullable=true)
+	 */
+	private $seoMetaDescription;
+
+	/**
 	 * @var bool
 	 *
 	 * @ORM\Column(type="boolean")
@@ -68,6 +82,20 @@ class CategoryDomain {
 	}
 
 	/**
+	 * @return null|string
+	 */
+	public function getSeoTitle() {
+		return $this->seoTitle;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getSeoMetaDescription() {
+		return $this->seoMetaDescription;
+	}
+
+	/**
 	 * @return string|null
 	 */
 	public function getDescription() {
@@ -79,6 +107,20 @@ class CategoryDomain {
 	 */
 	public function isHidden() {
 		return $this->hidden;
+	}
+
+	/**
+	 * @param string|null $seoTitle
+	 */
+	public function setSeoTitle($seoTitle) {
+		$this->seoTitle = $seoTitle;
+	}
+
+	/**
+	 * @param string|null $seoMetaDescription
+	 */
+	public function setSeoMetaDescription($seoMetaDescription) {
+		$this->seoMetaDescription = $seoMetaDescription;
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Model\Customer;
 
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Customer\BillingAddress;
 use Shopsys\ShopBundle\Model\Customer\BillingAddressData;
 use Shopsys\ShopBundle\Model\Customer\CustomerData;
@@ -137,8 +137,8 @@ class CustomerService {
 		$customerData = new CustomerData();
 		$customerData->setFromEntity($user);
 
-		$customerData->userData->firstName = Condition::ifNull($user->getFirstName(), $order->getFirstName());
-		$customerData->userData->lastName = Condition::ifNull($user->getLastName(), $order->getLastName());
+		$customerData->userData->firstName = Utils::ifNull($user->getFirstName(), $order->getFirstName());
+		$customerData->userData->lastName = Utils::ifNull($user->getLastName(), $order->getLastName());
 		$customerData->billingAddressData = $this->getAmendedBillingAddressDataByOrder($order, $billingAddress);
 		$customerData->deliveryAddressData = $this->getAmendedDeliveryAddressDataByOrder($order, $deliveryAddress);
 

@@ -3,14 +3,14 @@
 namespace Shopsys\ShopBundle\Tests\Unit\Component;
 
 use PHPUnit_Framework_TestCase;
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 
-class ConditionTest extends PHPUnit_Framework_TestCase {
+class UtilsTest extends PHPUnit_Framework_TestCase {
 
 	public function testIfNull() {
-		$this->assertTrue(Condition::ifNull(null, true));
-		$this->assertFalse(Condition::ifNull(false, true));
-		$this->assertTrue(Condition::ifNull(true, false));
+		$this->assertTrue(Utils::ifNull(null, true));
+		$this->assertFalse(Utils::ifNull(false, true));
+		$this->assertTrue(Utils::ifNull(true, false));
 	}
 
 	public function testSetArrayDefaultValueExists() {
@@ -18,7 +18,7 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 			'key' => 'value',
 		];
 		$expectedArray = $array;
-		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
+		Utils::setArrayDefaultValue($array, 'key', 'defaultValue');
 
 		$this->assertSame($expectedArray, $array);
 	}
@@ -28,7 +28,7 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 			'key' => null,
 		];
 		$expectedArray = $array;
-		Condition::setArrayDefaultValue($array, 'key', 'defaultValue');
+		Utils::setArrayDefaultValue($array, 'key', 'defaultValue');
 
 		$this->assertSame($expectedArray, $array);
 	}
@@ -41,22 +41,22 @@ class ConditionTest extends PHPUnit_Framework_TestCase {
 			'key' => null,
 			0 => 'number',
 		];
-		Condition::setArrayDefaultValue($array, 0, 'number');
+		Utils::setArrayDefaultValue($array, 0, 'number');
 
 		$this->assertSame($expectedArray, $array);
 	}
 
 	public function testMixedToArrayIfNull() {
-		$this->assertSame([], Condition::mixedToArray(null));
+		$this->assertSame([], Utils::mixedToArray(null));
 	}
 
 	public function testMixedToArrayIfNotArray() {
 		$value = 'I am not array';
-		$this->assertSame([$value], Condition::mixedToArray($value));
+		$this->assertSame([$value], Utils::mixedToArray($value));
 	}
 
 	public function testMixedToArrayIfArray() {
 		$value = ['1', 3, []];
-		$this->assertSame($value, Condition::mixedToArray($value));
+		$this->assertSame($value, Utils::mixedToArray($value));
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Form\Locale;
 
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Model\Localization\Localization;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,8 +27,8 @@ class LocalizedType extends AbstractType {
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options) {
-		Condition::setArrayDefaultValue($options['options'], 'required', $options['required']);
-		Condition::setArrayDefaultValue($options['options'], 'constraints', []);
+		Utils::setArrayDefaultValue($options['options'], 'required', $options['required']);
+		Utils::setArrayDefaultValue($options['options'], 'constraints', []);
 
 		$defaultLocaleOptions = $options['options'];
 		$otherLocaleOptions = $options['options'];

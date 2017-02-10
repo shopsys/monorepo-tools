@@ -87,11 +87,7 @@ class ProductEditFormTypeFactory {
 
 		$pricingGroups = $this->pricingGroupFacade->getAll();
 		$domains = $this->domain->getAll();
-		$metaDescriptionsIndexedByDomainId = [];
-		foreach ($domains as $domain) {
-			$domainId = $domain->getId();
-			$metaDescriptionsIndexedByDomainId[$domainId] = $this->seoSettingFacade->getDescriptionMainPage($domainId);
-		}
+		$metaDescriptionsIndexedByDomainId = $this->seoSettingFacade->getDescriptionsMainPageIndexedByDomainIds($domains);
 
 		return new ProductEditFormType(
 			$images,

@@ -2,7 +2,7 @@
 
 namespace Shopsys\ShopBundle\Twig\Javascript;
 
-use Shopsys\ShopBundle\Component\Condition;
+use Shopsys\ShopBundle\Component\Utils;
 use Shopsys\ShopBundle\Twig\Javascript\JavascriptCompilerService;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -32,7 +32,7 @@ class JavascriptExtension extends Twig_Extension {
 	 * @return string
 	 */
 	public function renderJavascripts($javascripts) {
-		$javascriptsArray = Condition::mixedToArray($javascripts);
+		$javascriptsArray = Utils::mixedToArray($javascripts);
 
 		$javascriptLinks = $this->javascriptCompilerService->generateCompiledFiles($javascriptsArray);
 

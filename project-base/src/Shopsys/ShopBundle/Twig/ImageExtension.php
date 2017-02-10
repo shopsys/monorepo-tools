@@ -2,11 +2,11 @@
 
 namespace Shopsys\ShopBundle\Twig;
 
-use Shopsys\ShopBundle\Component\Condition;
 use Shopsys\ShopBundle\Component\Domain\Domain;
 use Shopsys\ShopBundle\Component\Image\Config\ImageConfig;
 use Shopsys\ShopBundle\Component\Image\ImageFacade;
 use Shopsys\ShopBundle\Component\Image\ImageLocator;
+use Shopsys\ShopBundle\Component\Utils;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_Extension;
 use Twig_SimpleFunction;
@@ -198,10 +198,10 @@ class ImageExtension extends Twig_Extension {
 	 * @param array $attributes
 	 */
 	private function preventDefault(array &$attributes) {
-		Condition::setArrayDefaultValue($attributes, 'type');
-		Condition::setArrayDefaultValue($attributes, 'size');
-		Condition::setArrayDefaultValue($attributes, 'alt', '');
-		Condition::setArrayDefaultValue($attributes, 'title', $attributes['alt']);
+		Utils::setArrayDefaultValue($attributes, 'type');
+		Utils::setArrayDefaultValue($attributes, 'size');
+		Utils::setArrayDefaultValue($attributes, 'alt', '');
+		Utils::setArrayDefaultValue($attributes, 'title', $attributes['alt']);
 	}
 
 	/**
